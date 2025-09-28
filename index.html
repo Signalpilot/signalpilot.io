@@ -1,481 +1,461 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Cut through noise and ship clear trading signals with SignalPilot’s Pine Script tools for TradingView." />
-    <title>SignalPilot – Cut through noise. Ship clear signals.</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <style>
-      :root {
-        color-scheme: dark;
-        --bg-body: #070a14;
-        --bg-surface: #0b1020;
-        --bg-hero: radial-gradient(circle at top left, rgba(91, 138, 255, 0.15), transparent 55%), radial-gradient(circle at bottom right, rgba(91, 138, 255, 0.12), transparent 40%), #050812;
-        --bg-footer: rgba(7, 10, 20, 0.85);
-        --text-primary: #eef2ff;
-        --text-secondary: rgba(226, 233, 255, 0.78);
-        --muted: rgba(204, 214, 242, 0.7);
-        --accent: #5b8aff;
-        --accent-soft: rgba(91, 138, 255, 0.18);
-        --accent-strong: rgba(91, 138, 255, 0.25);
-        --accent-gradient: linear-gradient(135deg, rgba(91, 138, 255, 0.9), rgba(127, 170, 255, 0.75));
-        --success: #45d19a;
-        --warning: #ffd166;
-        --radius: 16px;
-        --radius-sm: 12px;
-        --radius-lg: 22px;
-        --shadow-soft: 0 18px 40px rgba(5, 8, 18, 0.35);
-        --max-width: 1200px;
-        --nav-height: 72px;
-        --transition-fast: 150ms ease;
-      }
-
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-
-      html {
-        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background-color: var(--bg-body);
-        color: var(--text-primary);
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        background: var(--bg-body);
-      }
-
-      body.no-scroll {
-        overflow: hidden;
-      }
-
-      main {
-        flex: 1 0 auto;
-      }
-
-      [hidden] {
-        display: none;
-      }
-
-      a {
-        color: inherit;
-      }
-
-      p {
-        margin: 0;
-        line-height: 1.65;
-      }
-
-      h1,
-      h2,
-      h3 {
-        margin: 0 0 0.75rem;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-      }
-
-      h1 {
-        font-size: clamp(2.5rem, 5vw, 3.6rem);
-      }
-
-      h2 {
-        font-size: clamp(2rem, 4vw, 2.6rem);
-      }
-
-      h3 {
-        font-size: clamp(1.35rem, 3vw, 1.7rem);
-      }
-
-      small {
-        color: var(--muted);
-      }
-
-      .text-muted {
-        color: var(--muted);
-      }
-
-      .accent {
-        color: var(--accent);
-      }
-
-      .pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.35rem 0.85rem;
-        border-radius: 999px;
-        background: rgba(91, 138, 255, 0.14);
-        border: 1px solid rgba(91, 138, 255, 0.18);
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: rgba(226, 233, 255, 0.82);
-        letter-spacing: 0.01em;
-      }
-
-      .header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        backdrop-filter: blur(18px);
-        background: rgba(7, 10, 20, 0.78);
-        border-bottom: 1px solid rgba(91, 138, 255, 0.12);
-      }
-
-      .header-inner {
-        height: var(--nav-height);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 0 1rem;
-      }
-
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.75rem;
-        text-decoration: none;
-        color: var(--text-primary);
-        font-weight: 600;
-        letter-spacing: -0.01em;
-      }
-
-      .brand svg {
-        display: block;
-        width: 160px;
-        height: auto;
-      }
-
-      .brand svg path.signal {
-        fill: url(#signalGradient);
-      }
-
-      .brand svg path.pilot {
-        fill: #f5f7ff;
-      }
-
-      .brand svg path.spark {
-        fill: rgba(255, 255, 255, 0.6);
-      }
-
-      .nav-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        border: 1px solid rgba(91, 138, 255, 0.32);
-        background: rgba(12, 16, 27, 0.7);
-        color: var(--text-primary);
-        cursor: pointer;
-        transition: background var(--transition-fast), border-color var(--transition-fast), transform 180ms ease;
-      }
-
-      .nav-toggle:hover {
-        border-color: rgba(91, 138, 255, 0.6);
-        background: rgba(12, 16, 27, 0.85);
-      }
-
-      .nav-toggle:active {
-        transform: scale(0.97);
-      }
-
-      .nav-toggle .icon {
-        width: 20px;
-        height: 20px;
-        position: relative;
-      }
-
-      .nav-toggle .icon::before,
-      .nav-toggle .icon::after,
-      .nav-toggle .icon span {
-        content: "";
-        position: absolute;
-        left: 50%;
-        width: 18px;
-        height: 2px;
-        background: currentColor;
-        transform: translateX(-50%);
-        transition: transform 200ms ease, opacity 200ms ease;
-      }
-
-      .nav-toggle .icon::before {
-        top: 6px;
-      }
-
-      .nav-toggle .icon span {
-        top: 50%;
-        transform: translate(-50%, -50%);
-      }
-
-      .nav-toggle .icon::after {
-        bottom: 6px;
-      }
-
-      .nav-toggle[aria-expanded="true"] .icon::before {
-        transform: translate(-50%, 6px) rotate(45deg);
-      }
-
-      .nav-toggle[aria-expanded="true"] .icon span {
-        opacity: 0;
-      }
-
-      .nav-toggle[aria-expanded="true"] .icon::after {
-        transform: translate(-50%, -6px) rotate(-45deg);
-      }
-
-      .nav-toggle-label {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        border: 0;
-      }
-
-      nav {
-        position: fixed;
-        inset: calc(var(--nav-height) + 12px) 12px auto 12px;
-        display: grid;
-        gap: 0.2rem;
-        padding: 1.1rem;
-        background: rgba(6, 10, 22, 0.98);
-        border: 1px solid rgba(91, 138, 255, 0.22);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow-soft);
-        transform: translateY(-8px);
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: opacity 160ms ease, transform 180ms ease, visibility 0s linear 180ms;
-      }
-
-      nav.open {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transition-delay: 0s;
-      }
-
-      nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        gap: 0.4rem;
-      }
-
-      nav a {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.75rem;
-        padding: 0.85rem 0.95rem;
-        border-radius: var(--radius-sm);
-        font-weight: 500;
-        text-decoration: none;
-        color: rgba(226, 233, 255, 0.82);
-        background: rgba(91, 138, 255, 0.07);
-        border: 1px solid rgba(91, 138, 255, 0.14);
-        transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform 160ms ease;
-      }
-
-      nav a:hover {
-        background: rgba(91, 138, 255, 0.12);
-        border-color: rgba(91, 138, 255, 0.24);
-        color: var(--text-primary);
-        transform: translateX(2px);
-      }
-
-      nav a.is-active {
-        background: rgba(91, 138, 255, 0.2);
-        border-color: rgba(91, 138, 255, 0.45);
-        color: var(--text-primary);
-      }
-
-      nav small {
-        color: rgba(204, 214, 242, 0.62);
-        font-size: 0.85rem;
-        font-weight: 400;
-      }
-
-      nav a svg {
-        width: 16px;
-        height: 16px;
-        color: rgba(204, 214, 242, 0.6);
-      }
-
-      .cta-group {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-top: 1.4rem;
-        flex-wrap: wrap;
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.45rem;
-        padding: 0.85rem 1.25rem;
-        border-radius: 999px;
-        border: 1px solid transparent;
-        font-weight: 600;
-        text-decoration: none;
-        transition: transform 180ms ease, box-shadow 180ms ease, background var(--transition-fast), border-color var(--transition-fast);
-      }
-
-      .btn-primary {
-        background: var(--accent-gradient);
-        box-shadow: 0 10px 30px rgba(91, 138, 255, 0.35);
-        color: #050812;
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 14px 32px rgba(91, 138, 255, 0.45);
-      }
-
-      .btn-secondary {
-        background: rgba(12, 16, 27, 0.8);
-        border-color: rgba(91, 138, 255, 0.32);
-        color: rgba(226, 233, 255, 0.92);
-      }
-
-      .btn-secondary:hover {
-        border-color: rgba(91, 138, 255, 0.55);
-        background: rgba(12, 16, 27, 0.95);
-      }
-
-      .hero {
-        background: var(--bg-hero);
-        position: relative;
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at center, rgba(91, 138, 255, 0.3), transparent 70%);
-        opacity: 0.6;
-        pointer-events: none;
-      }
-
-      .hero-inner {
-        position: relative;
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: clamp(3.5rem, 10vw, 6.5rem) 1.25rem clamp(4rem, 12vw, 7.5rem);
-        display: grid;
-        gap: clamp(2rem, 6vw, 3.5rem);
-      }
-
-      .hero-copy {
-        max-width: 620px;
-      }
-
-      .hero-copy p.lead {
-        font-size: clamp(1.1rem, 3vw, 1.3rem);
-        color: var(--muted);
-      }
-
-      .hero-metrics {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-      }
-
-      .metric {
-        padding: 1rem 1.35rem;
-        background: rgba(12, 16, 27, 0.7);
-        border: 1px solid rgba(91, 138, 255, 0.15);
-        border-radius: var(--radius);
-        min-width: 200px;
-        display: grid;
-        gap: 0.3rem;
-      }
-
-      .metric strong {
-        font-size: 1.8rem;
-        letter-spacing: -0.02em;
-      }
-
-      .content-section {
-        padding: clamp(3.5rem, 9vw, 5rem) 0;
-        border-top: 1px solid rgba(91, 138, 255, 0.08);
-      }
-
-      .section-inner {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 0 1.25rem;
-      }
-
-      .section-lead {
-        max-width: 680px;
-        margin-bottom: clamp(2rem, 6vw, 3rem);
-      }
-
-      .feature-grid {
-        display: grid;
-        gap: 1.6rem;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      }
-
-      .feature-card {
-        background: linear-gradient(160deg, rgba(12, 16, 27, 0.85), rgba(12, 16, 27, 0.55));
-        border-radius: var(--radius);
-        padding: 1.75rem;
-        border: 1px solid rgba(91, 138, 255, 0.14);
-        display: grid;
-        gap: 0.75rem;
-        min-height: 240px;
-      }
-
-      .feature-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        background: rgba(91, 138, 255, 0.16);
-        color: var(--accent);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: inset 0 0 0 1px rgba(91, 138, 255, 0.18);
-      }
-
-      .feature-icon svg {
-        width: 20px;
-        height: 20px;
-      }
-
-      .feature-card ul {
-        list-style: disc;
-        margin: 0;
-        padding-left: 1.1rem;
-        color: var(--muted);
-        display: grid;
-        gap: 0.35rem;
-      }
-
-      .panel {
-        background: rgba(12, 16, 27, 0.75);
-        border: 1px solid rgba(91, 138, 255, 0.15);
-        border-radius: var(--radius);
-        padding: clamp(1.8rem, 3vw, 2.4rem);
-      }
-
-      .pipeline {
-        display: grid;
+<head>
+  <!-- ============================ META / SEO ============================ -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SignalPilot – Cut through noise. Ship clear signals.</title>
+  <meta name="description" content="SignalPilot is a premium TradingView tool that filters noise and delivers clear, actionable signals. Educational use only — not financial advice.">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="SignalPilot – Cut through noise. Ship clear signals.">
+  <meta property="og:description" content="SignalPilot is a premium TradingView tool that filters noise and delivers actionable signals.">
+  <meta property="og:image" content="https://signalpilot.io/preview.png">
+  <meta property="og:url" content="https://signalpilot.io">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SignalPilot – Cut through noise. Ship clear signals.">
+  <meta name="twitter:description" content="SignalPilot is a premium TradingView tool that filters noise and delivers actionable signals.">
+  <meta name="twitter:image" content="https://signalpilot.io/preview.png">
+
+  <!-- Mobile UI bar color -->
+  <meta name="theme-color" content="#0b0d12">
+
+  <!-- Favicon (add favicon.svg to repo root) -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- ============================ INLINE STYLES ============================ -->
+  <style>
+    /* ---------- Design Tokens ---------- */
+    :root{
+      --bg: #0b0d12;        /* page background */
+      --bg-elev: #11141b;   /* elevated panels */
+      --text: #e9edf7;      /* primary text */
+      --muted:#b9c2d6;      /* secondary text */
+      --brand:#5b8aff;      /* accent */
+      --ring: #9bb6ff;      /* focus outline */
+      --border:#1b2230;     /* hairlines */
+      --maxw: 1200px;       /* content width */
+      --radius: 12px;       /* rounded corners */
+      --shadow: 0 12px 30px rgba(0,0,0,.28);
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#ffffff; --bg-elev:#f6f8fc; --text:#0c1323; --muted:#45506a;
+        --border:#e6e8ee; --shadow:0 10px 26px rgba(16,24,40,.08);
+      }
+    }
+
+    /* ---------- Base Reset ---------- */
+    *,*::before,*::after{ box-sizing: border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; color:var(--text); background:var(--bg);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    a{ color:inherit; text-decoration:none }
+    img{ max-width:100%; display:block }
+    .visually-hidden{ position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; white-space:nowrap }
+    .skip-link{
+      position:absolute; left:0; top:0; z-index:1000;
+      transform: translateY(-100%); transition: transform .2s ease;
+      background:var(--brand); color:#fff; padding:.5rem .75rem; border-radius:0 0 8px 0;
+    }
+    .skip-link:focus{ transform: translateY(0) }
+
+    /* ---------- Layout Helpers ---------- */
+    .container{ max-width: var(--maxw); margin: 0 auto; padding: 0 1rem }
+    .spacer{ flex:1 }
+
+    /* ---------- Header / Nav ---------- */
+    .site-header{
+      position: sticky; top: 0; z-index: 999;
+      backdrop-filter: saturate(160%) blur(10px);
+      background: color-mix(in oklab, var(--bg) 86%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-wrap{
+      display:flex; align-items:center; gap:1rem;
+      padding: .7rem 1rem;
+    }
+    .brand{
+      display:flex; align-items:center; gap:.6rem;
+      font-weight: 700; letter-spacing:.2px
+    }
+    .brand svg{ width:26px; height:26px }
+
+    /* desktop nav */
+    .nav{ display:none }
+    .nav > ul{ list-style:none; display:flex; gap:.25rem; padding:0; margin:0; align-items:center }
+    .nav a, .nav button.nav-btn{
+      padding:.55rem .7rem; border-radius:10px; border:1px solid transparent;
+      background: none; color:inherit; font:inherit; cursor:pointer;
+    }
+    .nav a:hover, .nav button.nav-btn:hover{ background:var(--bg-elev) }
+    .nav button.nav-btn[aria-expanded="true"]{
+      outline:2px solid var(--ring);
+      background:color-mix(in oklab, var(--brand) 8%, var(--bg-elev));
+    }
+
+    /* dropdown menus */
+    .menu{
+      position:absolute; left:0; top: calc(100% + 10px);
+      min-width: 260px; background: var(--bg-elev);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding:.6rem; display:none;
+    }
+    .menu.open{ display:block }
+    .menu a{
+      display:block; padding:.6rem .65rem; border-radius:10px;
+    }
+    .menu a:hover{
+      background: color-mix(in oklab, var(--brand) 12%, transparent);
+    }
+    .menu small{ display:block; color:var(--muted); font-size:.85em; margin-top:2px }
+
+    /* CTAs */
+    .cta{ display:none; align-items:center; gap:.5rem }
+    .btn{
+      display:inline-block; padding:.55rem .85rem; border-radius:12px;
+      border:1px solid var(--border); background: var(--bg-elev);
+    }
+    .btn.primary{ background: var(--brand); border-color: transparent; color:#fff }
+    .btn:hover{ filter: brightness(1.05) }
+
+    /* hamburger + mobile panel */
+    .hamburger{
+      border:1px solid var(--border); background:var(--bg-elev);
+      padding:.5rem .7rem; border-radius:12px; cursor:pointer;
+    }
+    .mobile-panel{
+      display:none; position: fixed; inset: 64px 12px auto 12px;
+      background:var(--bg-elev); border:1px solid var(--border); border-radius:16px;
+      box-shadow: var(--shadow); padding:.6rem; z-index:998;
+      max-height: calc(100vh - 88px); overflow:auto;
+    }
+    .mobile-panel section + section{ border-top:1px solid var(--border); margin-top:.5rem; padding-top:.5rem }
+    .mobile-panel details{ border-bottom:1px solid var(--border) }
+    .mobile-panel summary{
+      list-style:none; cursor:pointer; padding:.7rem .55rem; border-radius:10px;
+    }
+    .mobile-panel a{
+      display:block; padding:.55rem .7rem; border-radius:10px;
+    }
+    .mobile-panel a:hover, .mobile-panel summary:hover{
+      background: color-mix(in oklab, var(--brand) 12%, transparent);
+    }
+
+    /* desktop breakpoint */
+    @media (min-width: 980px){
+      .nav{ display:block }
+      .cta{ display:flex }
+      .hamburger, .mobile-panel{ display:none }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero{ padding: 2.4rem 0 1.4rem }
+    .hero h1{ font-size: clamp(2rem, 3vw + 1rem, 3rem); margin:.2rem 0 1rem }
+    .lead{ color:var(--muted); max-width: 720px }
+    .card-grid{
+      display:grid; gap:1rem; margin-top:1.4rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .card{
+      background:var(--bg-elev); border:1px solid var(--border); border-radius:16px;
+      padding:1rem 1rem 1.05rem;
+    }
+    .card h3{ margin:.2rem 0 .2rem }
+    .meta{ color:var(--muted); font-size:.9em }
+
+    /* ---------- Sections (generic) ---------- */
+    .section{ padding: 2rem 0 }
+    .section h2{ font-size: 1.6rem; margin: 0 0 1rem }
+
+    /* ---------- Footer ---------- */
+    footer{ border-top:1px solid var(--border); margin-top: 2.4rem }
+    footer .row{ padding: 1.1rem 1rem; color: var(--muted); font-size: .95rem; display:flex; gap:.6rem; align-items:center; }
+    footer a{ text-decoration: underline; text-underline-offset: 3px }
+
+    /* ---------- Focus / Motion ---------- */
+    :where(a,button,[role="button"]):focus-visible{
+      outline:2px solid var(--ring); outline-offset:2px; border-radius:10px;
+    }
+    @media (prefers-reduced-motion: reduce){
+      *{ transition: none !important; animation: none !important }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="site-header" role="banner">
+    <div class="container nav-wrap">
+      <!-- Brand -->
+      <a class="brand" href="/" aria-label="SignalPilot home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 3v9l6 6"></path>
+        </svg>
+        <span>SignalPilot</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="nav" aria-label="Primary">
+        <ul>
+          <!-- Product dropdown -->
+          <li class="has-submenu" style="position:relative">
+            <button class="nav-btn" aria-haspopup="true" aria-expanded="false" aria-controls="menu-product">Product</button>
+            <div id="menu-product" class="menu" role="menu" aria-label="Product submenu">
+              <a href="/product" role="menuitem"><strong>Overview</strong><small>What SignalPilot does</small></a>
+              <a href="/product/features" role="menuitem"><strong>Features</strong><small>Key capabilities</small></a>
+              <a href="/product/integrations" role="menuitem"><strong>Integrations</strong><small>Connect your stack</small></a>
+              <a href="/product/security" role="menuitem"><strong>Security</strong><small>Trust & compliance</small></a>
+              <a href="/product/compare" role="menuitem"><strong>Compare</strong><small>Alternatives & differences</small></a>
+            </div>
+          </li>
+
+          <!-- Solutions dropdown -->
+          <li class="has-submenu" style="position:relative">
+            <button class="nav-btn" aria-haspopup="true" aria-expanded="false" aria-controls="menu-solutions">Solutions</button>
+            <div id="menu-solutions" class="menu" role="menu" aria-label="Solutions submenu">
+              <a href="/solutions/data-teams" role="menuitem"><strong>Data Teams</strong><small>Monitor, triage, route</small></a>
+              <a href="/solutions/product" role="menuitem"><strong>Product</strong><small>Signals → decisions</small></a>
+              <a href="/solutions/engineering" role="menuitem"><strong>Engineering</strong><small>Incident signals</small></a>
+              <hr style="border:none;border-top:1px solid var(--border); margin:.35rem .25rem">
+              <a href="/solutions/anomaly-detection" role="menuitem"><strong>Anomaly Detection</strong><small>Spot issues early</small></a>
+              <a href="/solutions/alerting" role="menuitem"><strong>Alerting</strong><small>Noise-aware routing</small></a>
+              <a href="/solutions/forecasting" role="menuitem"><strong>Forecasting</strong><small>Predict & plan</small></a>
+            </div>
+          </li>
+
+          <li><a href="/pricing">Pricing</a></li>
+
+          <!-- Docs dropdown -->
+          <li class="has-submenu" style="position:relative">
+            <button class="nav-btn" aria-haspopup="true" aria-expanded="false" aria-controls="menu-docs">Docs</button>
+            <div id="menu-docs" class="menu" role="menu" aria-label="Docs submenu">
+              <a href="/docs/quickstart" role="menuitem"><strong>Quickstart</strong><small>5-minute setup</small></a>
+              <a href="/docs/api" role="menuitem"><strong>API Reference</strong><small>Endpoints & schemas</small></a>
+              <a href="/docs/sdks" role="menuitem"><strong>SDKs</strong><small>JavaScript & Python</small></a>
+              <a href="/docs/webhooks" role="menuitem"><strong>Webhooks</strong><small>Events in your app</small></a>
+              <a href="/docs/examples" role="menuitem"><strong>Examples</strong><small>Copy-paste snippets</small></a>
+              <a href="/docs/changelog" role="menuitem"><strong>Changelog</strong><small>What’s new</small></a>
+            </div>
+          </li>
+
+          <!-- Resources dropdown -->
+          <li class="has-submenu" style="position:relative">
+            <button class="nav-btn" aria-haspopup="true" aria-expanded="false" aria-controls="menu-resources">Resources</button>
+            <div id="menu-resources" class="menu" role="menu" aria-label="Resources submenu">
+              <a href="/blog" role="menuitem"><strong>Blog</strong><small>Product & insights</small></a>
+              <a href="/resources/case-studies" role="menuitem"><strong>Case Studies</strong><small>Signals in the wild</small></a>
+              <a href="/resources/tutorials" role="menuitem"><strong>Tutorials</strong><small>Learn by building</small></a>
+              <a href="/resources/templates" role="menuitem"><strong>Templates</strong><small>Dashboards & alerts</small></a>
+              <a href="/status" role="menuitem"><strong>Status</strong><small>Uptime & incidents</small></a>
+            </div>
+          </li>
+
+          <!-- Company dropdown -->
+          <li class="has-submenu" style="position:relative">
+            <button class="nav-btn" aria-haspopup="true" aria-expanded="false" aria-controls="menu-company">Company</button>
+            <div id="menu-company" class="menu" role="menu" aria-label="Company submenu">
+              <a href="/company/about" role="menuitem"><strong>About</strong><small>Why SignalPilot</small></a>
+              <a href="/company/careers" role="menuitem"><strong>Careers</strong><small>Join the crew</small></a>
+              <a href="/company/press" role="menuitem"><strong>Press</strong><small>Brand & media</small></a>
+              <a href="/company/partners" role="menuitem"><strong>Partners</strong><small>Build together</small></a>
+              <a href="/company/contact" role="menuitem"><strong>Contact</strong><small>Say hello</small></a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- CTAs -->
+      <div class="spacer" aria-hidden="true"></div>
+      <div class="cta">
+        <a class="btn" href="/signin">Sign in</a>
+        <a class="btn primary" href="/signup">Get started</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="hamburger" id="nav-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
+        ☰
+      </button>
+    </div>
+
+    <!-- Mobile Panel -->
+    <div id="mobile-menu" class="mobile-panel" role="dialog" aria-modal="true" aria-label="Main menu">
+      <section class="container" style="padding:.4rem">
+        <details>
+          <summary>Product</summary>
+          <a href="/product">Overview</a>
+          <a href="/product/features">Features</a>
+          <a href="/product/integrations">Integrations</a>
+          <a href="/product/security">Security</a>
+          <a href="/product/compare">Compare</a>
+        </details>
+        <details>
+          <summary>Solutions</summary>
+          <a href="/solutions/data-teams">Data Teams</a>
+          <a href="/solutions/product">Product</a>
+          <a href="/solutions/engineering">Engineering</a>
+          <a href="/solutions/anomaly-detection">Anomaly Detection</a>
+          <a href="/solutions/alerting">Alerting</a>
+          <a href="/solutions/forecasting">Forecasting</a>
+        </details>
+        <a href="/pricing">Pricing</a>
+        <details>
+          <summary>Docs</summary>
+          <a href="/docs/quickstart">Quickstart</a>
+          <a href="/docs/api">API Reference</a>
+          <a href="/docs/sdks">SDKs</a>
+          <a href="/docs/webhooks">Webhooks</a>
+          <a href="/docs/examples">Examples</a>
+          <a href="/docs/changelog">Changelog</a>
+        </details>
+        <details>
+          <summary>Resources</summary>
+          <a href="/blog">Blog</a>
+          <a href="/resources/case-studies">Case Studies</a>
+          <a href="/resources/tutorials">Tutorials</a>
+          <a href="/resources/templates">Templates</a>
+          <a href="/status">Status</a>
+        </details>
+        <details>
+          <summary>Company</summary>
+          <a href="/company/about">About</a>
+          <a href="/company/careers">Careers</a>
+          <a href="/company/press">Press</a>
+          <a href="/company/partners">Partners</a>
+          <a href="/company/contact">Contact</a>
+        </details>
+      </section>
+      <section class="container" style="display:flex; gap:.6rem; padding:.6rem .4rem">
+        <a class="btn" href="/signin" style="flex:1;text-align:center">Sign in</a>
+        <a class="btn primary" href="/signup" style="flex:1;text-align:center">Get started</a>
+      </section>
+    </div>
+  </header>
+
+  <!-- ============================ MAIN / HERO ============================ -->
+  <main id="main" class="container">
+    <section class="hero">
+      <h1>Cut through noise. Ship clear signals.</h1>
+      <p class="lead">
+        SignalPilot detects anomalies, filters alert noise, and routes the right events to the right people — automatically.
+        Educational use only — not financial advice.
+      </p>
+      <p>
+        <a class="btn primary" href="/signup">Start free</a>
+        <a class="btn" href="/docs/quickstart" style="margin-left:.5rem">Read quickstart</a>
+      </p>
+
+      <!-- Value Cards -->
+      <div class="card-grid">
+        <article class="card" aria-label="Noise-aware signals">
+          <h3>Noise-aware signals</h3>
+          <p class="meta">Reduce false positives with rule-based filters and confidence weights.</p>
+        </article>
+        <article class="card" aria-label="Discipline by design">
+          <h3>Discipline by design</h3>
+          <p class="meta">Predefined setups and exits to avoid overtrading and revenge trades.</p>
+        </article>
+        <article class="card" aria-label="Fast onboarding">
+          <h3>Fast onboarding</h3>
+          <p class="meta">Lite indicator (free) and Pro strategy (invite-only) for every level.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Example “How it works” block (keep / edit as needed) -->
+    <section class="section">
+      <h2>How it works</h2>
+      <div class="card-grid">
+        <div class="card"><h3>Connect</h3><p class="meta">Add the Pine v6 script to your TradingView chart.</p></div>
+        <div class="card"><h3>Detect</h3><p class="meta">Signals blend indicators with weights & confidence multipliers.</p></div>
+        <div class="card"><h3>Route</h3><p class="meta">Send alerts where you work: app, email, webhooks (Pro).</p></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer role="contentinfo">
+    <div class="container row">
+      © <span id="y"></span> SignalPilot ·
+      <a href="mailto:hello@signalpilot.io">hello@signalpilot.io</a>
+    </div>
+  </footer>
+
+  <!-- ============================ INLINE SCRIPTS ============================ -->
+  <script>
+    // Year stamp
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const mobilePanel = document.getElementById('mobile-menu');
+    function setMobile(open){
+      navToggle.setAttribute('aria-expanded', String(open));
+      mobilePanel.style.display = open ? 'block' : 'none';
+      if(open){ mobilePanel.focus && mobilePanel.focus(); }
+    }
+    navToggle.addEventListener('click', () => {
+      const open = navToggle.getAttribute('aria-expanded') === 'true';
+      setMobile(!open);
+    });
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape'){ setMobile(false); closeAllMenus(); }
+    });
+    document.addEventListener('click', (e) => {
+      if(!mobilePanel.contains(e.target) && e.target !== navToggle){ setMobile(false); }
+    });
+
+    // Desktop dropdown logic
+    const parents = document.querySelectorAll('.has-submenu');
+    function closeAllMenus(exceptId){
+      parents.forEach(li => {
+        const btn = li.querySelector('button.nav-btn');
+        const menu = li.querySelector('.menu');
+        if(menu && menu.id !== exceptId){
+          btn.setAttribute('aria-expanded', 'false');
+          menu.classList.remove('open');
+        }
+      });
+    }
+    parents.forEach(li => {
+      const btn = li.querySelector('button.nav-btn');
+      const menu = li.querySelector('.menu');
+
+      // Toggle on click
+      btn.addEventListener('click', (e) => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        closeAllMenus(menu.id);
+        btn.setAttribute('aria-expanded', String(!expanded));
+        menu.classList.toggle('open', !expanded);
+      });
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if(!li.contains(e.target)){
+          btn.setAttribute('aria-expanded','false');
+          menu.classList.remove('open');
+        }
+      });
+
+      // Keyboard accessibility
+      btn.addEventListener('keydown', (e) => {
+        if(e.key === 'ArrowDown'){
+          e.preventDefault();
+          btn.click();
+          const first = menu.querySelector('a');
+          first && first.focus();
+        }
+      });
+      menu.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape'){ btn.focus(); btn.click(); }
+      });
+    });
+  </script>
+</body>
+</html>
