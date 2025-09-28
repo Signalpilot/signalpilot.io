@@ -986,52 +986,72 @@
   <script>
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.getElementById('primary-navigation');
-    const desktopMedia = window.matchMedia('(min-width: 861px)');
+    const desktopMedia = typeof window.matchMedia === 'function'
+      ? window.matchMedia('(min-width: 861px)')
+      : null;
+
+    const setToggleExpanded = expanded => {
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', String(expanded));
+      }
+    };
 
     const openNav = () => {
       if (!nav) return;
       nav.classList.add('open');
       nav.removeAttribute('hidden');
-      toggle?.setAttribute('aria-expanded', 'true');
+      setToggleExpanded(true);
     };
 
     const closeNav = () => {
       if (!nav) return;
       nav.classList.remove('open');
-      if (!desktopMedia.matches) {
+      if (!desktopMedia || !desktopMedia.matches) {
         nav.setAttribute('hidden', '');
       }
-      toggle?.setAttribute('aria-expanded', 'false');
+      setToggleExpanded(false);
     };
 
-    toggle?.addEventListener('click', () => {
-      if (nav?.classList.contains('open')) {
-        closeNav();
-      } else {
-        openNav();
-      }
-    });
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        closeNav();
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        if (nav.classList.contains('open')) {
+          closeNav();
+        } else {
+          openNav();
+        }
       });
-    });
+    }
+
+    if (nav) {
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          closeNav();
+        });
+      });
+    }
 
     const handleBreakpoint = event => {
       if (!nav) return;
       if (event.matches) {
         nav.removeAttribute('hidden');
         nav.classList.remove('open');
-        toggle?.setAttribute('aria-expanded', 'false');
+        setToggleExpanded(false);
       } else if (!nav.classList.contains('open')) {
         nav.setAttribute('hidden', '');
-        toggle?.setAttribute('aria-expanded', 'false');
+        setToggleExpanded(false);
       }
     };
 
-    handleBreakpoint(desktopMedia);
-    desktopMedia.addEventListener('change', handleBreakpoint);
+    if (desktopMedia) {
+      handleBreakpoint(desktopMedia);
+      if (typeof desktopMedia.addEventListener === 'function') {
+        desktopMedia.addEventListener('change', handleBreakpoint);
+      } else if (typeof desktopMedia.addListener === 'function') {
+        desktopMedia.addListener(handleBreakpoint);
+      }
+    } else if (nav) {
+      nav.removeAttribute('hidden');
+    }
 
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
