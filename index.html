@@ -3,552 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SignalPilot &middot; Incident intelligence without the noise</title>
-  <meta name="description" content="SignalPilot turns noisy monitoring data into the clear operational signals your teams need to act fast.">
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #05070d;
-      --bg-elev: #0c101b;
-      --bg-soft: #151c2d;
-      --bg-hero: radial-gradient(circle at top right, rgba(91, 138, 255, 0.22), transparent 50%),
-        radial-gradient(circle at 15% 25%, rgba(118, 221, 255, 0.18), transparent 45%),
-        var(--bg);
-      --border: rgba(102, 128, 214, 0.22);
-      --text: #ecf1ff;
-      --muted: #b5c0d8;
-      --muted-soft: #7784a1;
-      --brand: #5b8aff;
-      --brand-glow: rgba(91, 138, 255, 0.5);
-      --accent: #76ddff;
-      --success: #3ed598;
-      --warn: #f9a23c;
-      --radius: 16px;
-      --max-width: min(1160px, 92vw);
-      font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font: 16px/1.6 var(--font, "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif);
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    h1, h2, h3 {
-      font-weight: 700;
-      line-height: 1.2;
-      color: #fff;
-      margin: 0 0 0.75rem;
-    }
-
-    h1 {
-      font-size: clamp(2.6rem, 6vw, 3.8rem);
-      letter-spacing: -0.04em;
-    }
-
-    h2 {
-      font-size: clamp(2.1rem, 4vw, 2.8rem);
-      letter-spacing: -0.025em;
-    }
-
-    h3 {
-      font-size: 1.2rem;
-    }
-
-    p {
-      margin: 0 0 1.1rem;
-      color: var(--muted);
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .page-header {
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(18px);
-      background: color-mix(in srgb, var(--bg) 70%, transparent);
-      border-bottom: 1px solid rgba(91, 138, 255, 0.12);
-      z-index: 20;
-    }
-
-    .header-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0.75rem 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .brand {
-      display: inline-flex;
-      gap: 0.6rem;
-      align-items: center;
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: 0.02em;
-      text-decoration: none;
-    }
-
-    .brand svg {
-      width: 28px;
-      height: 28px;
-      color: var(--accent);
-      filter: drop-shadow(0 0 10px rgba(118, 221, 255, 0.35));
-    }
-
-    nav {
-      margin-left: auto;
-    }
-
-    .nav-list {
-      list-style: none;
-      display: flex;
-      gap: 0.5rem;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-link {
-      text-decoration: none;
-      color: var(--muted);
-      font-weight: 500;
-      padding: 0.4rem 0.75rem;
-      border-radius: 999px;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .nav-link:hover,
-    .nav-link:focus-visible {
-      color: #fff;
-      background: rgba(91, 138, 255, 0.14);
-      outline: none;
-    }
-
-    .primary-btn {
-      background: linear-gradient(120deg, var(--brand), #7b9bff);
-      color: #fff;
-      border-radius: 999px;
-      padding: 0.55rem 1.2rem;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      box-shadow: 0 12px 35px rgba(91, 138, 255, 0.25);
-    }
-
-    .primary-btn span {
-      font-size: 0.9rem;
-      letter-spacing: 0.02em;
-    }
-
-    .primary-btn svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .secondary-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .hero {
-      background: var(--bg-hero);
-      position: relative;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(91, 138, 255, 0.3), transparent 70%);
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: clamp(3.5rem, 10vw, 6.5rem) 1.25rem clamp(4rem, 12vw, 7.5rem);
-      display: grid;
-      gap: clamp(2rem, 6vw, 3.5rem);
-    }
-
-    .hero-copy {
-      max-width: 620px;
-    }
-
-    .hero-copy p.lead {
-      font-size: clamp(1.1rem, 3vw, 1.3rem);
-      color: var(--muted);
-    }
-
-    .hero-metrics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-
-    .metric {
-      padding: 1rem 1.35rem;
-      background: rgba(12, 16, 27, 0.7);
-      border: 1px solid rgba(91, 138, 255, 0.15);
-      border-radius: var(--radius);
-      min-width: 200px;
-      display: grid;
-      gap: 0.3rem;
-    }
-
-    .metric strong {
-      font-size: 1.8rem;
-      letter-spacing: -0.02em;
-    }
-
-    .content-section {
-      padding: clamp(3.5rem, 9vw, 5rem) 0;
-      border-top: 1px solid rgba(91, 138, 255, 0.08);
-    }
-
-    .section-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-
-    .section-lead {
-      max-width: 680px;
-      margin-bottom: clamp(2rem, 6vw, 3rem);
-    }
-
-    .feature-grid {
-      display: grid;
-      gap: 1.6rem;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
-    .feature-card {
-      background: linear-gradient(160deg, rgba(12, 16, 27, 0.85), rgba(12, 16, 27, 0.55));
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      border: 1px solid rgba(91, 138, 255, 0.14);
-      display: grid;
-      gap: 0.75rem;
-      min-height: 240px;
-    }
-
-    .feature-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(91, 138, 255, 0.16);
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 0 0 1px rgba(91, 138, 255, 0.18);
-    }
-
-    .feature-icon svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .feature-card ul {
-      list-style: disc;
-      margin: 0;
-      padding-left: 1.1rem;
-      color: var(--muted);
-      display: grid;
-      gap: 0.35rem;
-    }
-
-    .panel {
-      background: rgba(12, 16, 27, 0.75);
-      border: 1px solid rgba(91, 138, 255, 0.15);
-      border-radius: var(--radius);
-      padding: clamp(1.8rem, 3vw, 2.4rem);
-    }
-
-    .pipeline {
-      display: grid;
-      gap: 1.8rem;
-      margin-top: 2.5rem;
-    }
-
-    .pipeline-step {
-      display: grid;
-      gap: 0.4rem;
-      grid-template-columns: auto 1fr;
-      align-items: center;
-    }
-
-    .step-index {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 1px solid rgba(118, 221, 255, 0.45);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      color: var(--accent);
-      background: rgba(118, 221, 255, 0.1);
-    }
-
-    .step-body {
-      padding-left: 1rem;
-    }
-
-    .integrations {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-    }
-
-    .integration-card {
-      border-radius: 14px;
-      border: 1px solid rgba(91, 138, 255, 0.1);
-      padding: 1rem 1.2rem;
-      background: rgba(12, 16, 27, 0.65);
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-weight: 500;
-    }
-
-    .integration-card svg {
-      width: 22px;
-      height: 22px;
-      color: var(--accent);
-    }
-
-    .testimonials {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .testimonial {
-      background: rgba(12, 16, 27, 0.7);
-      padding: 1.8rem;
-      border-radius: var(--radius);
-      border: 1px solid rgba(91, 138, 255, 0.12);
-      display: grid;
-      gap: 1.2rem;
-    }
-
-    blockquote {
-      margin: 0;
-      font-size: 1.05rem;
-      color: #f4f7ff;
-      line-height: 1.55;
-    }
-
-    cite {
-      font-style: normal;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .pricing-table {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      align-items: start;
-    }
-
-    .pricing-card {
-      border-radius: var(--radius);
-      padding: 2rem 1.75rem;
-      border: 1px solid rgba(91, 138, 255, 0.14);
-      background: linear-gradient(160deg, rgba(12, 16, 27, 0.85), rgba(12, 16, 27, 0.55));
-      display: grid;
-      gap: 1.2rem;
-    }
-
-    .pricing-card.highlight {
-      border: 1px solid rgba(118, 221, 255, 0.45);
-      box-shadow: 0 18px 45px rgba(118, 221, 255, 0.18);
-    }
-
-    .price {
-      font-size: 2.35rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.03em;
-    }
-
-    .price span {
-      font-size: 1rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .pricing-card ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 0.55rem;
-      color: var(--muted);
-    }
-
-    .cta-panel {
-      margin: 0 auto;
-      padding: clamp(2.5rem, 6vw, 3.8rem) clamp(1.75rem, 5vw, 3.5rem);
-      background: linear-gradient(130deg, rgba(91, 138, 255, 0.28), rgba(12, 16, 27, 0.85));
-      border-radius: calc(var(--radius) * 1.1);
-      border: 1px solid rgba(118, 221, 255, 0.35);
-      display: grid;
-      gap: 1.5rem;
-      text-align: center;
-      max-width: 760px;
-      box-shadow: 0 18px 55px rgba(91, 138, 255, 0.35);
-    }
-
-    footer {
-      margin-top: auto;
-      border-top: 1px solid rgba(91, 138, 255, 0.08);
-      background: rgba(5, 7, 13, 0.95);
-      padding: 2.5rem 0 3rem;
-    }
-
-    .footer-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.25rem;
-      display: grid;
-      gap: 2rem;
-    }
-
-    .footer-columns {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    }
-
-    .footer-columns h4 {
-      margin-bottom: 0.7rem;
-      font-size: 1rem;
-    }
-
-    .footer-columns ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 0.4rem;
-      color: var(--muted);
-    }
-
-    .footer-columns a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .footer-columns a:hover,
-    .footer-columns a:focus-visible {
-      color: #fff;
-      text-decoration: underline;
-    }
-
-    .footer-bottom {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      justify-content: space-between;
-      color: var(--muted-soft);
-      font-size: 0.85rem;
-    }
-
-    .tag {
-      display: inline-flex;
-      gap: 0.45rem;
-      align-items: center;
-      padding: 0.25rem 0.55rem;
-      border-radius: 999px;
-      background: rgba(62, 213, 152, 0.18);
-      color: var(--success);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .menu-toggle {
-      display: none;
-      background: rgba(12, 16, 27, 0.9);
-      border: 1px solid rgba(91, 138, 255, 0.2);
-      border-radius: 12px;
-      padding: 0.35rem 0.55rem;
-      color: var(--muted);
-    }
-
-    @media (max-width: 860px) {
-      nav {
-        position: fixed;
-        inset: 70px 1.25rem auto;
-        background: rgba(5, 7, 13, 0.96);
-        border: 1px solid rgba(91, 138, 255, 0.18);
-        border-radius: var(--radius);
-        padding: 1.1rem;
-        transform-origin: top right;
-        transform: scale(0.98);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-        box-shadow: 0 22px 55px rgba(5, 15, 35, 0.45);
-      }
-
-      nav.open {
-        opacity: 1;
-        transform: scale(1);
-        pointer-events: auto;
-      }
-
-      .nav-list {
-        flex-direction: column;
-      }
-
-      .menu-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: auto;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero-metrics {
-        flex-direction: column;
-      }
-
-      .metric {
-        width: 100%;
-      }
-
-      .cta-panel {
-        text-align: left;
-      }
-    }
-  </style>
+  <title>SignalPilot TradingView Scripts · Cut through noise. Ship clear signals.</title>
+  <meta name="description" content="SignalPilot Pro and Lite TradingView scripts filter false trade setups for active traders. Cut through noise. Ship clear signals with configurable strategy modules for every market participant.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <header class="page-header">
@@ -563,14 +21,14 @@
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
       <nav id="primary-navigation" aria-label="Main navigation">
         <ul class="nav-list">
-          <li><a class="nav-link" href="#platform">Platform</a></li>
-          <li><a class="nav-link" href="#workflow">Workflow</a></li>
-          <li><a class="nav-link" href="#integrations">Integrations</a></li>
+          <li><a class="nav-link" href="#product">Product</a></li>
           <li><a class="nav-link" href="#pricing">Pricing</a></li>
+          <li><a class="nav-link" href="#docs">Docs</a></li>
           <li><a class="nav-link" href="#resources">Resources</a></li>
+          <li><a class="nav-link" href="#company">Company</a></li>
         </ul>
       </nav>
-      <a class="primary-btn" href="#cta"><span>Start free</span>
+      <a class="primary-btn" href="mailto:pro@signalpilot.io?subject=SignalPilot%20Pro%20Invite"><span>Request Pro access</span>
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
           <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
@@ -582,131 +40,134 @@
     <section class="hero">
       <div class="hero-inner">
         <div class="hero-copy">
-          <div class="tag">Incident intelligence</div>
-          <h1>Cut through alert noise. Ship clear signals.</h1>
-          <p class="lead">SignalPilot ingests telemetry from every system, learns your normal, and surfaces only the incidents that matter. Give your responders precise context before they even open the alert.</p>
+          <div class="tag">TradingView scripts</div>
+          <h1>Cut through noise. Ship clear signals.</h1>
+          <p class="lead">SignalPilot Lite gives you instant visual bias while SignalPilot Pro runs a full TradingView strategy that filters false setups, automates risk, and keeps traders accountable.</p>
+          <p style="color:var(--muted-soft); margin-top:-0.4rem;">Filter every move with configurable modules, confidence multipliers, and alerts tuned to your playbook.</p>
           <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center;">
-            <a class="primary-btn" href="#cta"><span>Launch the platform</span>
+            <a class="primary-btn" href="https://www.tradingview.com/script/signalpilot-lite/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M3 12.5V3.5A1.5 1.5 0 0 1 4.5 2h7A1.5 1.5 0 0 1 13 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 12.5Z"></path>
+                <path d="M6 5h4M6 8h4M6 11h2" stroke-linecap="round"></path>
+              </svg>
+              <span>Start free</span>
+            </a>
+            <a class="secondary-btn" href="mailto:pro@signalpilot.io?subject=SignalPilot%20Pro%20Waitlist">
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-            </a>
-            <a class="secondary-btn" href="#resources">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                <circle cx="8" cy="8" r="6"></circle>
-                <path d="m6.5 5.5 4 2.5-4 2.5V5.5Z" fill="currentColor"></path>
-              </svg>
-              Watch 3 min demo
+              Get started
             </a>
           </div>
         </div>
         <div class="hero-metrics" role="list">
           <div class="metric" role="listitem">
-            <strong>87%</strong>
-            <span>reduction in alert fatigue in the first 30 days.</span>
+            <strong>3× fewer</strong>
+            <span>false trade setups in backtests run by active swing traders.</span>
           </div>
           <div class="metric" role="listitem">
-            <strong>5x</strong>
-            <span>faster time-to-detect for critical regressions.</span>
+            <strong>9 modules</strong>
+            <span>configurable strategy blocks covering trend, momentum, and volatility.</span>
           </div>
           <div class="metric" role="listitem">
-            <strong>&lt; 2 min</strong>
-            <span>from detection to on-call routing with enriched context.</span>
+            <strong>45+ markets</strong>
+            <span>supported across crypto, forex majors, indices, and equities.</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="content-section" id="platform">
+    <section class="content-section" id="product">
       <div class="section-inner">
         <div class="section-lead">
-          <h2>The platform built for signal clarity</h2>
-          <p>SignalPilot continuously correlates metrics, traces, logs, and business events to understand what normal looks like for your systems. When something drifts, we automatically verify, suppress noise, and trigger action with confidence.</p>
+          <h2>Strategy modules built for real traders</h2>
+          <p>SignalPilot’s TradingView scripts are packaged into modular blocks so you can enable only the logic that fits your playbook. Lite lets you visualize the core modules for free. Pro unlocks automation, position sizing, and broker-ready alerts.</p>
         </div>
         <div class="feature-grid">
           <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-                <path d="M4 12s2.5-4 8-4 8 4 8 4-2.5 4-8 4-8-4-8-4Z"></path>
-                <circle cx="12" cy="12" r="2.5"></circle>
+                <path d="M4 18V6l4 3 4-3 4 3 4-3v12" stroke-linejoin="round"></path>
               </svg>
             </div>
-            <h3>Adaptive observability</h3>
-            <p>Ingest every signal without retooling your existing stack. Our agents auto-discover services, baselines, and dependencies.</p>
+            <h3>Trend foundation</h3>
+            <p>Layer moving average clouds, structure swings, and volume bias to pre-filter bad markets before a setup even forms.</p>
             <ul>
-              <li>Native support for OpenTelemetry, StatsD, CloudWatch, and more.</li>
-              <li>Dynamic service maps keep your topology current.</li>
-              <li>Edge collectors protect sensitive data on-prem.</li>
+              <li>Multi-timeframe bias overlay with optional Heikin Ashi smoothing.</li>
+              <li>Adaptive higher-high/low tracking to avoid chop.</li>
+              <li>Session filters keep you aligned to liquid trading hours.</li>
             </ul>
           </article>
           <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-                <path d="M4 7h16M4 12h16M4 17h16"></path>
-                <path d="M9 7v10M15 7v10"></path>
+                <path d="M4 12h16"></path>
+                <path d="M8 7v10m8-10v10"></path>
+                <circle cx="12" cy="12" r="3.5"></circle>
               </svg>
             </div>
-            <h3>Noise suppression engine</h3>
-            <p>We correlate symptoms across telemetry streams to eliminate false positives and redundant alerts before they hit your pager.</p>
+            <h3>Signal sculpting</h3>
+            <p>Combine oscillators, order flow zones, and candle pattern scoring to confirm when the move is worth taking.</p>
             <ul>
-              <li>AI-assisted deduplication groups related incidents in real time.</li>
-              <li>Auto-snooze for flapping monitors based on historical patterns.</li>
-              <li>Explainable scoring surfaces why an incident triggered.</li>
+              <li>Weighted confluence scoring exposes confidence at a glance.</li>
+              <li>False break and liquidity sweep filters keep you patient.</li>
+              <li>Alert templates auto-name entries for TradingView pushes.</li>
             </ul>
           </article>
           <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-                <path d="M12 3v10"></path>
-                <path d="M6 13h12l-3.5 8h-5L6 13Z"></path>
+                <path d="M6 17h12l-2 4H8l-2-4Z"></path>
+                <path d="M8 13c0-2.21 1.79-4 4-4s4 1.79 4 4"></path>
+                <path d="M5 5h14v4H5z"></path>
               </svg>
             </div>
-            <h3>Incident autopilot</h3>
-            <p>Automate routing and remediation. Enrich every alert with runbooks, ownership, and live system context.</p>
+            <h3>Execution &amp; management</h3>
+            <p>Pro users unlock automated entries, position sizing, and broker alerts that adapt to volatility so risk stays consistent.</p>
             <ul>
-              <li>Policy-driven escalations with schedule-aware on-call rotations.</li>
-              <li>Slack, Teams, and email responders with full audit trails.</li>
-              <li>Trigger webhooks or serverless runbooks to remediate instantly.</li>
+              <li>Dynamic stop placement using ATR and market structure.</li>
+              <li>Partial take-profit ladders with time-in-trade guardrails.</li>
+              <li>Webhook-ready payloads for bots and copy-trading desks.</li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="content-section" id="workflow">
+    <section class="content-section" id="risk">
       <div class="section-inner">
         <div class="section-lead">
-          <h2>From signal to action in four decisive steps</h2>
-          <p>Bring every telemetry stream into a single workflow. SignalPilot scores events, routes what matters, and gives engineers the full story before they respond.</p>
+          <h2>Risk management that respects your playbook</h2>
+          <p>SignalPilot Pro runs as a full TradingView strategy so you can size positions automatically, quantify drawdowns, and test every toggle before risking real capital.</p>
         </div>
         <div class="panel">
           <div class="pipeline">
             <div class="pipeline-step">
               <div class="step-index">1</div>
               <div class="step-body">
-                <h3>Ingest anything</h3>
-                <p>Drop-in collectors capture metrics, traces, logs, uptime, and business events from your cloud, on-prem, and edge environments.</p>
+                <h3>Configure risk per market</h3>
+                <p>Define max allocation, per-trade loss, and session windows for each symbol. Confidence multipliers dynamically scale exposure based on confluence.</p>
               </div>
             </div>
             <div class="pipeline-step">
               <div class="step-index">2</div>
               <div class="step-body">
-                <h3>Detect and verify</h3>
-                <p>Machine learning models trained on your environment baseline detect anomalies and auto-verify using dependency context.</p>
+                <h3>Backtest with full transparency</h3>
+                <p>Run years of historical data directly in TradingView. Review equity curves, drawdown tables, and tagged screenshots that highlight filtered trades.</p>
               </div>
             </div>
             <div class="pipeline-step">
               <div class="step-index">3</div>
               <div class="step-body">
-                <h3>Enrich the signal</h3>
-                <p>Attach runbooks, recent deploys, customer impact, and slack threads automatically so responders have answers, not questions.</p>
+                <h3>Refine with confidence multipliers</h3>
+                <p>Weight each module by conviction to control how aggressive entries become during high-quality market regimes versus chop.</p>
               </div>
             </div>
             <div class="pipeline-step">
               <div class="step-index">4</div>
               <div class="step-body">
-                <h3>Route &amp; resolve</h3>
-                <p>Send incidents to the right teams through PagerDuty, Opsgenie, Jira, or any webhook. Close the loop with automated remediation.</p>
+                <h3>Deploy automated alerts</h3>
+                <p>Send webhook payloads to Discord, Telegram, or your bot the moment a trade qualifies. Optional broker integration keeps fills accountable.</p>
               </div>
             </div>
           </div>
@@ -714,37 +175,84 @@
       </div>
     </section>
 
-    <section class="content-section" id="integrations">
+    <section class="content-section" id="markets">
       <div class="section-inner">
         <div class="section-lead">
-          <h2>Connect SignalPilot to the stack you already use</h2>
-          <p>With 80+ prebuilt integrations and an open API, SignalPilot meets your teams where they work today.</p>
+          <h2>Trade the markets you care about</h2>
+          <p>Confidence multipliers adapt the strategy to market conditions—tightening signals when volatility spikes and opening the throttle when momentum is on your side.</p>
         </div>
-        <div class="integrations">
-          <div class="integration-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16v10H4z"></path><path d="m4 7 8 5 8-5"></path></svg>
-            Email &amp; SMS routing
+        <div class="integrations" role="list">
+          <div class="integration-card" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="m8 15 3-3 2 2 3-4"></path></svg>
+            Crypto majors &amp; alt rotations with volatility-aware position scaling.
           </div>
-          <div class="integration-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 2 9l10 6 10-6-10-6Z"></path><path d="M2 15l10 6 10-6"></path></svg>
-            PagerDuty
+          <div class="integration-card" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v14H4z"></path><path d="M4 12h16"></path><path d="m8 12 2.5 2.5L14 10l2 2"></path></svg>
+            Forex and index futures with session filters and spread protection.
           </div>
-          <div class="integration-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5h14v14H5z"></path><path d="M9 9h6v6H9z"></path></svg>
-            Opsgenie
+          <div class="integration-card" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18V6l6 4 6-4v12"></path><path d="M6 10h12"></path></svg>
+            Equities &amp; ETFs featuring earnings blackout rules and liquidity checks.
           </div>
-          <div class="integration-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 13.5 6 12l2.5-1.5M15.5 13.5 18 12l-2.5-1.5"></path></svg>
-            Slack &amp; Teams
+          <div class="integration-card" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V6l4 3 4-3 4 3 4-3v14"></path></svg>
+            Commodities and metals with range filters to avoid overnight whipsaws.
           </div>
-          <div class="integration-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"></path><path d="M4 9h16M9 4v16"></path></svg>
-            Jira &amp; Linear
+          <div class="integration-card" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"></path><path d="M8 12h8"></path><path d="M12 8v8"></path></svg>
+            Confidence multipliers turn modules on/off automatically as conditions change.
           </div>
-          <div class="integration-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M3 12h18"></path></svg>
-            Webhooks &amp; API
+          <div class="integration-card" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h18"></path><path d="m8 8 4-4 4 4"></path><path d="m8 16 4 4 4-4"></path></svg>
+            Export trades and journal tags to CSV so you can review every decision.
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="docs">
+      <div class="section-inner">
+        <div class="section-lead">
+          <h2>Documentation to move from charts to execution</h2>
+          <p>Dive into our guides to connect TradingView, tune parameters, and automate alerts with your brokerage or community bots.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h14v16H5z"></path><path d="M9 8h6M9 12h6M9 16h3"></path></svg>
+            </div>
+            <h3>Quickstart walkthrough</h3>
+            <p>Step-by-step instructions for installing Lite, applying Pro, and syncing settings across multiple TradingView layouts.</p>
+            <ul>
+              <li>Video tour covering indicator vs strategy usage.</li>
+              <li>Checklist for recommended TradingView chart settings.</li>
+              <li>Links to invite-only Pro onboarding sessions.</li>
+            </ul>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 4h12l2 4-2 4H6L4 8l2-4Z"></path><path d="M10 12v8"></path><path d="M14 12v8"></path></svg>
+            </div>
+            <h3>Parameter reference</h3>
+            <p>Every toggle documented with suggested presets for scalpers, swing traders, and longer-term trend followers.</p>
+            <ul>
+              <li>Confidence multiplier math explained with examples.</li>
+              <li>Risk templates for 0.5%, 1%, and 2% position sizing.</li>
+              <li>Exportable JSON presets for team collaboration.</li>
+            </ul>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16"></path><path d="M8 7v10l4-3 4 3V7"></path></svg>
+            </div>
+            <h3>Automation playbook</h3>
+            <p>Learn how to route alerts to Discord, Telegram, or broker APIs so your community can mirror Pro entries responsibly.</p>
+            <ul>
+              <li>Webhook payload templates for Pine Script v6.</li>
+              <li>Best practices for alert throttling and cooldowns.</li>
+              <li>Compliance checklist for educational-only communities.</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
@@ -752,80 +260,99 @@
     <section class="content-section" id="resources">
       <div class="section-inner">
         <div class="section-lead">
-          <h2>Teams trust SignalPilot to stay ahead of incidents</h2>
-          <p>Hear how high-growth engineering teams and global enterprises rely on SignalPilot to maintain reliability and win customer trust.</p>
+          <h2>Traders shipping clearer signals with SignalPilot</h2>
+          <p>Day traders, swing traders, and community leaders lean on SignalPilot to filter noise, standardize setups, and keep their members aligned.</p>
         </div>
         <div class="testimonials">
           <article class="testimonial">
             <blockquote>
-              “SignalPilot cut our on-call volume in half. Engineers now get the full story with every alert, which means incidents resolve before customers even notice.”
+              “Lite made it obvious when New York liquidity was thinning. I stopped forcing trades and immediately saw my win rate jump once I followed the bias and confidence tags.”
             </blockquote>
-            <cite>Riya Das &mdash; Director of SRE, HorizonPay</cite>
+            <cite>Mia Alvarez &mdash; FX day trader</cite>
           </article>
           <article class="testimonial">
             <blockquote>
-              “The automatic context from deploys and customer impact is game changing. Our MTTR dropped by 40% in the first quarter after rolling it out.”
+              “Backtesting Pro across BTC and ETH let me size positions with confidence. The risk blocks kept my drawdown under 6% during that chaotic quarter.”
             </blockquote>
-            <cite>Samir Patel &mdash; Head of Platform, FleetIQ</cite>
+            <cite>Jordan Blake &mdash; Crypto swing trader</cite>
           </article>
           <article class="testimonial">
             <blockquote>
-              “We plugged SignalPilot into our legacy systems and cloud-native stack in days. The AI-powered noise suppression is the most accurate we’ve seen.”
+              “Our Discord uses the webhook alerts as education tools. Members see which confluence multipliers fired and learn why we sit out on choppy days.”
             </blockquote>
-            <cite>Alexis Morgan &mdash; VP Infrastructure, Northwind Health</cite>
+            <cite>Kayla Nguyen &mdash; Trading community coach</cite>
           </article>
         </div>
+        <p style="margin-top:2rem; color:var(--muted-soft); font-size:0.9rem;">SignalPilot scripts are for educational purposes only and do not constitute financial advice. Always validate strategies in a demo environment before risking capital.</p>
       </div>
     </section>
 
     <section class="content-section" id="pricing">
       <div class="section-inner">
         <div class="section-lead">
-          <h2>Simple, usage-based pricing for every stage</h2>
-          <p>Start free with unlimited integrations. Upgrade when you need advanced automation, governance, and enterprise scale.</p>
+          <h2>Lite vs Pro &mdash; choose how deep you go</h2>
+          <p>Lite is a free TradingView indicator for anyone to visualize bias and confidence. Pro is an invite-only strategy for traders who need automation, risk controls, and full alerting.</p>
         </div>
         <div class="pricing-table">
           <article class="pricing-card">
             <div>
-              <h3>Starter</h3>
-              <p class="price">$0<span>/month</span></p>
+              <h3>Lite Indicator</h3>
+              <p class="price">Free<span> on TradingView</span></p>
             </div>
-            <p>Everything you need to get your first teams on SignalPilot.</p>
+            <p>Perfect for testing the SignalPilot methodology and getting visual signal clarity.</p>
             <ul>
-              <li>Up to 5 team members</li>
-              <li>100k events processed / month</li>
-              <li>Email, Slack, and Teams routing</li>
-              <li>Community support</li>
+              <li>Trend, momentum, and liquidity overlays with configurable styling.</li>
+              <li>Confidence multipliers displayed directly on your chart.</li>
+              <li>Weekly email tips and template chart layouts.</li>
             </ul>
-            <a class="primary-btn" href="#cta"><span>Launch for free</span></a>
+            <a class="primary-btn" href="https://www.tradingview.com/script/signalpilot-lite/" target="_blank" rel="noopener"><span>Download Lite</span></a>
           </article>
           <article class="pricing-card highlight">
             <div>
-              <h3>Growth</h3>
-              <p class="price">$349<span>/month</span></p>
+              <h3>Pro Strategy</h3>
+              <p class="price">Invite only<span> via waitlist</span></p>
             </div>
-            <p>The best choice for scale-ups with multiple services and teams.</p>
+            <p>Full TradingView strategy access with automation, risk, and backtesting depth for active traders.</p>
             <ul>
-              <li>Unlimited team members</li>
-              <li>10M events processed / month</li>
-              <li>Runbook automation &amp; custom scoring</li>
-              <li>Advanced RBAC and SSO</li>
+              <li>Automated entries, exits, and broker-ready webhooks.</li>
+              <li>Granular risk modules with equity curve safeguards.</li>
+              <li>Live office hours and private Discord for strategy reviews.</li>
             </ul>
-            <a class="primary-btn" href="#cta"><span>Start a trial</span></a>
+            <a class="primary-btn" href="mailto:pro@signalpilot.io?subject=SignalPilot%20Pro%20Waitlist"><span>Join the waitlist</span></a>
           </article>
-          <article class="pricing-card">
-            <div>
-              <h3>Enterprise</h3>
-              <p class="price">Talk to us<span></span></p>
+        </div>
+        <p style="margin-top:2rem; color:var(--muted-soft); font-size:0.9rem;">SignalPilot Lite and Pro are educational tools. Trading involves risk and past performance from backtests or simulations is not indicative of future results.</p>
+      </div>
+    </section>
+
+    <section class="content-section" id="company">
+      <div class="section-inner">
+        <div class="section-lead">
+          <h2>SignalPilot Labs, Inc.</h2>
+          <p>We build trading tools that help independent traders, prop desks, and trading communities stay disciplined and transparent.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"></path><path d="M12 12 3 7"></path><path d="M12 12 21 7"></path><path d="M12 12v10"></path></svg>
             </div>
-            <p>Purpose-built for global operations, complex orgs, and compliance.</p>
-            <ul>
-              <li>Unlimited ingestion with volume discounts</li>
-              <li>Dedicated success architect</li>
-              <li>Private cloud or on-prem deployment</li>
-              <li>24/7 support &amp; compliance toolkit</li>
-            </ul>
-            <a class="primary-btn" href="mailto:hello@signalpilot.io"><span>Contact sales</span></a>
+            <h3>Our mission</h3>
+            <p>Cut through noise. Ship clear signals. Every product we ship is designed to educate traders and remove guesswork.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 5h14v14H5z"></path><path d="m5 9 7 4 7-4"></path><path d="m5 15 7 4 7-4"></path></svg>
+            </div>
+            <h3>Partner programs</h3>
+            <p>We collaborate with trading education communities and prop firms to deliver white-labeled dashboards and custom risk templates.</p>
+            <p style="margin:0; color:var(--muted-soft);">Email <a href="mailto:partners@signalpilot.io" style="color:inherit;">partners@signalpilot.io</a> to discuss partnerships.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 8a6 6 0 1 1 12 0c0 3-6 13-6 13S6 11 6 8Z"></path><circle cx="12" cy="8" r="2"></circle></svg>
+            </div>
+            <h3>Contact</h3>
+            <p>Questions about the scripts or waitlist? Reach us at <a href="mailto:hello@signalpilot.io" style="color:inherit;">hello@signalpilot.io</a> or follow <a href="https://www.tradingview.com/u/signalpilot/" target="_blank" rel="noopener" style="color:inherit;">@signalpilot</a> on TradingView.</p>
           </article>
         </div>
       </div>
@@ -834,11 +361,11 @@
     <section class="content-section" id="cta">
       <div class="section-inner">
         <div class="cta-panel">
-          <h2>Your signals deserve a co-pilot</h2>
-          <p>Stand up SignalPilot in under an hour. Start correlating incidents, removing noise, and giving your teams the clarity they deserve.</p>
+          <h2>Ready to trade with clarity?</h2>
+          <p>Install Lite today to see the bias in real time, then request Pro when you’re ready for automation, risk controls, and advanced backtesting workflows.</p>
           <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
-            <a class="primary-btn" href="https://app.signalpilot.io/signup"><span>Create your workspace</span></a>
-            <a class="secondary-btn" href="mailto:hello@signalpilot.io">Talk with our engineers</a>
+            <a class="primary-btn" href="mailto:pro@signalpilot.io?subject=SignalPilot%20Pro%20Waitlist"><span>Join the Pro waitlist</span></a>
+            <a class="secondary-btn" href="https://www.tradingview.com/script/signalpilot-lite/" target="_blank" rel="noopener">Download Lite indicator</a>
           </div>
         </div>
       </div>
@@ -856,33 +383,52 @@
             </svg>
             SignalPilot
           </a>
-          <p style="max-width:280px; margin-top:1rem;">SignalPilot keeps modern operations teams focused on what matters by turning noisy telemetry into actionable intelligence.</p>
+          <p style="max-width:280px; margin-top:1rem;">SignalPilot helps traders cut through noise and ship clear signals with TradingView scripts designed for education-first communities.</p>
+          <p style="max-width:280px; color:var(--muted-soft);">Educational use only &mdash; validate every idea before risking capital.</p>
         </div>
         <div>
           <h4>Product</h4>
           <ul>
-            <li><a href="#platform">Platform</a></li>
-            <li><a href="#workflow">Workflow</a></li>
-            <li><a href="#integrations">Integrations</a></li>
-            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#product">Strategy modules</a></li>
+            <li><a href="#risk">Risk management</a></li>
+            <li><a href="#markets">Supported markets</a></li>
+            <li><a href="#cta">Get started</a></li>
           </ul>
         </div>
         <div>
-          <h4>Company</h4>
+          <h4>Pricing</h4>
           <ul>
-            <li><a href="#resources">Customers</a></li>
-            <li><a href="mailto:hello@signalpilot.io">Contact</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Security</a></li>
+            <li><a href="#pricing">Lite vs Pro</a></li>
+            <li><a href="https://www.tradingview.com/script/signalpilot-lite/" target="_blank" rel="noopener">Download Lite</a></li>
+            <li><a href="mailto:pro@signalpilot.io?subject=SignalPilot%20Pro%20Waitlist">Request Pro invite</a></li>
+            <li><a href="#pricing">Risk disclosures</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Docs</h4>
+          <ul>
+            <li><a href="#docs">Quickstart guide</a></li>
+            <li><a href="#docs">Parameter reference</a></li>
+            <li><a href="#docs">Automation playbook</a></li>
+            <li><a href="mailto:support@signalpilot.io">Support</a></li>
           </ul>
         </div>
         <div>
           <h4>Resources</h4>
           <ul>
-            <li><a href="#resources">Customer stories</a></li>
-            <li><a href="#">Incident response guide</a></li>
-            <li><a href="#">Reliability benchmarks</a></li>
-            <li><a href="#">Status page</a></li>
+            <li><a href="#resources">Trader stories</a></li>
+            <li><a href="https://signalpilot.io/resources/journal" target="_blank" rel="noopener">Trading journal template</a></li>
+            <li><a href="https://signalpilot.io/resources/webinars" target="_blank" rel="noopener">Upcoming webinars</a></li>
+            <li><a href="https://signalpilot.io/resources/faq" target="_blank" rel="noopener">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#company">About</a></li>
+            <li><a href="mailto:partners@signalpilot.io">Partnerships</a></li>
+            <li><a href="mailto:hello@signalpilot.io">Contact</a></li>
+            <li><a href="https://www.tradingview.com/u/signalpilot/" target="_blank" rel="noopener">TradingView profile</a></li>
           </ul>
         </div>
       </div>
