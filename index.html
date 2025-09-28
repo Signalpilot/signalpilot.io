@@ -145,6 +145,12 @@
       outline: none;
     }
 
+    .nav-link.is-active {
+      color: #fff;
+      background: rgba(91, 138, 255, 0.24);
+      box-shadow: 0 0 0 1px rgba(91, 138, 255, 0.28);
+    }
+
     .primary-btn {
       background: linear-gradient(120deg, var(--brand), #7b9bff);
       color: #fff;
@@ -566,7 +572,7 @@
       <a class="brand" href="#" aria-label="SignalPilot home">
         <img src="assets/signalpilot-logo.svg" alt="SignalPilot wordmark" />
       </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-label-default="Menu" data-label-open="Close menu">Menu</button>
       <nav id="primary-navigation" aria-label="Main navigation" hidden>
         <ul class="nav-list">
           <li><a class="nav-link" href="#product">Product</a></li>
@@ -1006,9 +1012,19 @@
       ? window.matchMedia('(min-width: 861px)')
       : null;
 
+    const updateToggleLabel = expanded => {
+      if (!toggle) return;
+      const defaultLabel = toggle.dataset.labelDefault || 'Menu';
+      const openLabel = toggle.dataset.labelOpen || defaultLabel;
+      const label = expanded ? openLabel : defaultLabel;
+      toggle.textContent = label;
+      toggle.setAttribute('aria-label', label);
+    };
+
     const setToggleExpanded = expanded => {
       if (toggle) {
         toggle.setAttribute('aria-expanded', String(expanded));
+        updateToggleLabel(expanded);
       }
     };
 
@@ -1039,9 +1055,71 @@
     }
 
     const navLinks = nav ? Array.from(nav.querySelectorAll('.nav-link')) : [];
+    let activeNavLink = null;
+
+    const setActiveLink = link => {
+      if (activeNavLink === link) return;
+      if (activeNavLink) {
+        activeNavLink.classList.remove('is-active');
+        activeNavLink.removeAttribute('aria-current');
+      }
+      if (link) {
+        link.classList.add('is-active');
+        link.setAttribute('aria-current', 'true');
+      }
+      activeNavLink = link || null;
+    };
+
     navLinks.forEach(link => {
-      link.addEventListener('click', () => hideNav());
+      link.addEventListener('click', () => {
+        setActiveLink(link);
+        hideNav();
+      });
     });
+
+    const linkTargets = navLinks
+      .map(link => {
+        const targetId = link.hash;
+        if (!targetId) return null;
+        try {
+          const section = document.querySelector(targetId);
+          return section ? { link, section } : null;
+        } catch (error) {
+          return null;
+        }
+      })
+      .filter(Boolean);
+
+    if ('IntersectionObserver' in window && linkTargets.length) {
+      const observer = new IntersectionObserver(
+        entries => {
+          const inView = entries
+            .filter(entry => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          if (inView.length) {
+            const topEntry = inView[0];
+            const match = linkTargets.find(item => item.section === topEntry.target);
+            if (match) {
+              setActiveLink(match.link);
+            }
+          }
+        },
+        {
+          rootMargin: '-30% 0px -55% 0px',
+          threshold: [0.15, 0.35, 0.6],
+        }
+      );
+      linkTargets.forEach(item => observer.observe(item.section));
+    } else if (linkTargets.length) {
+      setActiveLink(linkTargets[0].link);
+    }
+
+    if (window.location && window.location.hash) {
+      const hashLink = navLinks.find(link => link.hash === window.location.hash);
+      if (hashLink) {
+        setActiveLink(hashLink);
+      }
+    }
 
     const handleBreakpoint = event => {
       if (!nav) return;
@@ -1065,6 +1143,8 @@
     } else if (nav) {
       nav.hidden = false;
     }
+
+    updateToggleLabel(false);
 
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
