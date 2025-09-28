@@ -111,6 +111,10 @@
       margin-left: auto;
     }
 
+    [hidden] {
+      display: none !important;
+    }
+
     .nav-list {
       list-style: none;
       display: flex;
@@ -558,7 +562,7 @@
         SignalPilot
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">Menu</button>
-      <nav id="primary-navigation" aria-label="Main navigation">
+      <nav id="primary-navigation" aria-label="Main navigation" hidden>
         <ul class="nav-list">
           <li><a class="nav-link" href="#product">Product</a></li>
           <li><a class="nav-link" href="#pricing">Pricing</a></li>
@@ -981,18 +985,53 @@
 
   <script>
     const toggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
+    const nav = document.getElementById('primary-navigation');
+    const desktopMedia = window.matchMedia('(min-width: 861px)');
+
+    const openNav = () => {
+      if (!nav) return;
+      nav.classList.add('open');
+      nav.removeAttribute('hidden');
+      toggle?.setAttribute('aria-expanded', 'true');
+    };
+
+    const closeNav = () => {
+      if (!nav) return;
+      nav.classList.remove('open');
+      if (!desktopMedia.matches) {
+        nav.setAttribute('hidden', '');
+      }
+      toggle?.setAttribute('aria-expanded', 'false');
+    };
+
     toggle?.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', String(isOpen));
+      if (nav?.classList.contains('open')) {
+        closeNav();
+      } else {
+        openNav();
+      }
     });
 
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
-        nav.classList.remove('open');
-        toggle?.setAttribute('aria-expanded', 'false');
+        closeNav();
       });
     });
+
+    const handleBreakpoint = event => {
+      if (!nav) return;
+      if (event.matches) {
+        nav.removeAttribute('hidden');
+        nav.classList.remove('open');
+        toggle?.setAttribute('aria-expanded', 'false');
+      } else if (!nav.classList.contains('open')) {
+        nav.setAttribute('hidden', '');
+        toggle?.setAttribute('aria-expanded', 'false');
+      }
+    };
+
+    handleBreakpoint(desktopMedia);
+    desktopMedia.addEventListener('change', handleBreakpoint);
 
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
