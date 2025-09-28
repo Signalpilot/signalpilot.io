@@ -112,7 +112,13 @@
     }
 
     [hidden] {
-      display: none !important;
+      display: none;
+    }
+
+    @media (min-width: 861px) {
+      #primary-navigation[hidden] {
+        display: block;
+      }
     }
 
     .nav-list {
@@ -981,6 +987,18 @@
     </div>
   </footer>
 
+  <noscript>
+    <style>
+      .menu-toggle {
+        display: none !important;
+      }
+
+      #primary-navigation[hidden] {
+        display: block;
+      }
+    </style>
+  </noscript>
+
   <script>
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.getElementById('primary-navigation');
@@ -994,18 +1012,18 @@
       }
     };
 
-    const openNav = () => {
+    const showNav = () => {
       if (!nav) return;
       nav.classList.add('open');
-      nav.removeAttribute('hidden');
+      nav.hidden = false;
       setToggleExpanded(true);
     };
 
-    const closeNav = () => {
+    const hideNav = () => {
       if (!nav) return;
       nav.classList.remove('open');
       if (!desktopMedia || !desktopMedia.matches) {
-        nav.setAttribute('hidden', '');
+        nav.hidden = true;
       }
       setToggleExpanded(false);
     };
@@ -1013,29 +1031,26 @@
     if (toggle && nav) {
       toggle.addEventListener('click', () => {
         if (nav.classList.contains('open')) {
-          closeNav();
+          hideNav();
         } else {
-          openNav();
+          showNav();
         }
       });
     }
 
-    if (nav) {
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          closeNav();
-        });
-      });
-    }
+    const navLinks = nav ? Array.from(nav.querySelectorAll('.nav-link')) : [];
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => hideNav());
+    });
 
     const handleBreakpoint = event => {
       if (!nav) return;
       if (event.matches) {
-        nav.removeAttribute('hidden');
+        nav.hidden = false;
         nav.classList.remove('open');
         setToggleExpanded(false);
       } else if (!nav.classList.contains('open')) {
-        nav.setAttribute('hidden', '');
+        nav.hidden = true;
         setToggleExpanded(false);
       }
     };
@@ -1048,7 +1063,7 @@
         desktopMedia.addListener(handleBreakpoint);
       }
     } else if (nav) {
-      nav.removeAttribute('hidden');
+      nav.hidden = false;
     }
 
     document.getElementById('year').textContent = new Date().getFullYear();
