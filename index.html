@@ -36,7 +36,7 @@
   {"@context":"https://schema.org","@type":"Product","name":"SignalPilot Pro","description":"TradingView strategy with automation, risk controls, backtesting, and advanced alerts. Access is invite-only but pricing is transparent.","brand":{"@type":"Organization","name":"SignalPilot Labs, Inc.","url":"https://www.signalpilot.io"},"url":"https://www.signalpilot.io/#pricing","sku":"SignalPilotPro","category":"Trading Software","offers":[{"@type":"Offer","name":"Pro — Monthly","url":"https://www.signalpilot.io/#pricing","price":"79","priceCurrency":"USD","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Pro — Quarterly","url":"https://www.signalpilot.io/#pricing","price":"199","priceCurrency":"USD","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Pro — Yearly","url":"https://www.signalpilot.io/#pricing","price":"499","priceCurrency":"USD","availability":"https://schema.org/InStock","priceValidUntil":"2026-12-31"},{"@type":"Offer","name":"Pro — Lifetime (limited)","url":"https://www.signalpilot.io/#pricing","price":"899","priceCurrency":"USD","availability":"https://schema.org/LimitedAvailability"}]}
   </script>
 
-  <!-- Structured data: FAQ (rich results) -->
+  <!-- Structured data: FAQ -->
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Is SignalPilot financial advice?","acceptedAnswer":{"@type":"Answer","text":"No. SignalPilot is for educational purposes only. Validate in demo before risking capital."}},
@@ -56,7 +56,7 @@
       --radius:16px; --maxw:min(1160px,92vw); --focus:#9bb6ff;
       font-family:"Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
     }
-    /* Light theme tokens (soft, readable) */
+    /* Light theme tokens (soft + readable) */
     :root[data-theme="light"]{
       color-scheme:light;
       --bg:#f3f6fb; --bg-elev:#ffffff; --bg-soft:#edf1f9;
@@ -110,25 +110,46 @@
     h3{font-size:1.2rem}
     p{margin:0 0 1.1rem;color:var(--muted)}
 
-    /* Gradient headings */
-    .h-grad{background:linear-gradient(90deg,#76ddff,#5b8aff,#9bb6ff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 14px rgba(118,221,255,.12)}
+    /* Gradient headings + signature underline */
+    .h-grad{background:linear-gradient(90deg,#76ddff,#5b8aff,#9bb6ff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 14px rgba(118,221,255,.12);position:relative;padding-bottom:.2rem}
+    .sig-underline{display:block;height:10px}
+    .sig-underline svg{width:200px;height:10px}
+    .sig-underline path{stroke:rgba(118,221,255,.7);stroke-width:3;fill:none;stroke-linecap:round;stroke-dasharray:180;stroke-dashoffset:180;transition:stroke-dashoffset 1.2s ease}
+    .reveal.in .sig-underline path{stroke-dashoffset:0}
     :root[data-theme="light"] .h-grad{background:linear-gradient(90deg,#375fff,#6a8dff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 10px rgba(55,95,255,.10)}
+    :root[data-theme="light"] .sig-underline path{stroke:#2f5bff}
 
     /* Sections */
-    .content-section{padding:clamp(3.5rem,9vw,5rem) 0;border-top:1px solid rgba(91,138,255,.08)}
+    .content-section{padding:clamp(3.5rem,9vw,5rem) 0;border-top:1px solid rgba(91,138,255,.08);position:relative}
     .section-inner{max-width:var(--maxw);margin:0 auto;padding:0 1.25rem}
     .section-lead{max-width:680px;margin-bottom:clamp(2rem,6vw,3rem)}
 
+    /* Edge parallax lines */
+    .content-section::after{
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.12;
+      background-image:
+        repeating-linear-gradient( to right, rgba(155,182,255,.13) 0 1px, transparent 1px 22px ),
+        repeating-linear-gradient( to bottom, rgba(155,182,255,.10) 0 1px, transparent 1px 22px );
+      transform: translateY(var(--grid-shift,0));
+      transition: transform .1s linear;
+    }
+
     /* Glass cards */
-    .card-glass{backdrop-filter:blur(8px);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(155,182,255,.16);box-shadow:0 8px 30px rgba(0,10,40,.25)}
+    .card-glass{backdrop-filter:blur(8px);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(155,182,255,.16);box-shadow:0 8px 30px rgba(0,0,0,.25)}
     :root[data-theme="light"] .card-glass{background:linear-gradient(180deg, #ffffff 75%, #f5f8ff 25%);border-color:#e6ecf8;box-shadow:0 6px 22px rgba(15,30,60,.08)}
 
-    /* Feature grid */
+    /* Feature grid + micro-animated icons */
     .feature-grid{display:grid;gap:1.6rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
     .feature-card{background:linear-gradient(160deg, rgba(12,16,27,.85), rgba(12,16,27,.55));border-radius:var(--radius);padding:1.75rem;border:1px solid rgba(91,138,255,.14);display:grid;gap:.75rem;min-height:240px}
     :root[data-theme="light"] .feature-card{background:#fff;border-color:#e6ecf7}
-    .feature-icon{width:44px;height:44px;border-radius:12px;background:rgba(91,138,255,.16);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(91,138,255,.18)}
-    .feature-card ul{list-style:disc;margin:0;padding-left:1.1rem;color:var(--muted);display:grid;gap:.35rem}
+    .feature-icon{width:44px;height:44px;border-radius:12px;background:rgba(91,138,255,.16);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(91,138,255,.18);position:relative}
+    .feature-icon svg{width:20px;height:20px;transform-origin:center}
+    .feature-card:nth-child(1) .feature-icon svg{animation:pulseIcon 3s ease-in-out infinite}
+    .feature-card:nth-child(2) .feature-icon svg{animation:tiltIcon 4s ease-in-out infinite}
+    .feature-card:nth-child(3) .feature-icon svg{animation:spinIcon 12s linear infinite}
+    @keyframes pulseIcon{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+    @keyframes tiltIcon{0%,100%{transform:rotate(0deg)}50%{transform:rotate(6deg)}}
+    @keyframes spinIcon{to{transform:rotate(360deg)}}
 
     /* Panel */
     .panel{background:rgba(12,16,27,.75);border:1px solid rgba(91,138,255,.15);border-radius:var(--radius);padding:clamp(1.8rem,3vw,2.4rem)}
@@ -180,7 +201,6 @@
 
     .pricing-card.lifetime{position:relative;overflow:visible;padding-top:2.2rem}
     .pricing-card.lifetime .badge-limited{position:absolute;top:10px;left:10px;background:linear-gradient(120deg,#f9a23c,#ff6b3d);color:#fff;font-size:.7rem;font-weight:800;padding:.32rem .6rem;border-radius:999px;letter-spacing:.05em;box-shadow:0 6px 14px rgba(255,123,61,.35);animation:throb 2.2s ease-in-out infinite}
-
     @keyframes spin{to{transform:rotate(360deg)}}
     @keyframes pulse{0%,100%{opacity:.18;transform:scale(1)}50%{opacity:.32;transform:scale(1.03)}}
     @keyframes sweep{0%{left:-90px;opacity:0}20%{opacity:.5}50%{left:calc(100% - -20px);opacity:.45}80%{opacity:0}100%{left:calc(100% + 90px);opacity:0}}
@@ -192,7 +212,6 @@
     .marquee{overflow:hidden;border:1px solid var(--border);border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.02))}
     .marquee-track{display:flex;align-items:center;gap:2.5rem;padding:1rem 1.25rem;width:max-content;animation:scrollX 24s linear infinite}
     @keyframes scrollX{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-    /* Light-mode marquee: darker glyphs & strip */
     :root[data-theme="light"] .marquee{background:linear-gradient(90deg, rgba(0,0,0,.04), rgba(0,0,0,.02));border-color:#e6ebf7}
     :root[data-theme="light"] .logo-mask{background:#243153;box-shadow:none}
     :root[data-theme="light"] .logo-mask:hover{box-shadow:0 0 12px rgba(46,88,255,.18)}
@@ -236,7 +255,7 @@
     .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
     .reveal.in{opacity:1;transform:translateY(0)}
 
-    /* CTA panel tune (calmer, premium) */
+    /* CTA panel tune (calmer) */
     .cta-panel{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.10));border-color:rgba(155,182,255,.12);box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.03)}
     .cta-panel h2,.cta-panel .h-grad{background:linear-gradient(90deg,#7fb3ff,#5b8aff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 6px rgba(118,221,255,.08)}
     .cta-panel p{color:var(--muted)}
@@ -252,7 +271,7 @@
 <body>
   <a href="#product" class="skip">Skip to product</a>
 
-  <!-- Scroll progress -->
+  <!-- Progress -->
   <div class="progress" id="progress"></div>
 
   <header class="page-header">
@@ -269,30 +288,31 @@
           <li><a class="nav-link" href="#company">Company</a></li>
         </ul>
       </nav>
-      <a class="primary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite">
-        <span>Request Pro access</span>
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite">
+        <span class="magnetic-target">Request Pro access</span>
+        <svg class="magnetic-target" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
   </header>
 
   <main>
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero edge-lines">
       <div class="hero-inner">
-        <div class="hero-copy">
+        <div class="hero-copy reveal">
           <div class="tag">Invite-only · Pro traders</div>
-          <h1>Cut through noise. Ship clear signals.</h1>
+          <h1 class="h-grad">Cut through noise. Ship clear signals.</h1>
+          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p class="lead">SignalPilot Pro is a full TradingView strategy that filters false setups, automates risk, and keeps traders accountable.</p>
           <p style="color:var(--muted-soft);margin-top:-0.4rem">Filter every move with configurable modules, confidence multipliers, and alerts tuned to your playbook.</p>
           <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-            <a class="primary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite" rel="noopener noreferrer">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12.5V3.5A1.5 1.5 0 0 1 4.5 2h7A1.5 1.5 0 0 1 13 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 12.5Z"/><path d="M6 5h4M6 8h4M6 11h2" stroke-linecap="round"/></svg>
-              <span>Request Invite</span>
+            <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite" rel="noopener noreferrer">
+              <svg class="magnetic-target" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 12.5V3.5A1.5 1.5 0 0 1 4.5 2h7A1.5 1.5 0 0 1 13 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 12.5Z"/><path d="M6 5h4M6 8h4M6 11h2" stroke-linecap="round"/></svg>
+              <span class="magnetic-target">Request Invite</span>
             </a>
-            <a class="secondary-btn" href="#product">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Explore product
+            <a class="secondary-btn magnetic" href="#product">
+              <svg class="magnetic-target" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="magnetic-target">Explore product</span>
             </a>
           </div>
         </div>
@@ -307,10 +327,11 @@
     </section>
 
     <!-- PRODUCT -->
-    <section class="content-section" id="product">
+    <section class="content-section edge-lines" id="product">
       <div class="section-inner">
-        <div class="section-lead">
+        <div class="section-lead reveal">
           <h2 class="h-grad">Strategy modules built for real traders</h2>
+          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p>SignalPilot’s TradingView strategy is packaged into modular blocks so you can enable only the logic that fits your playbook: automation, position sizing, and broker-ready alerts.</p>
         </div>
         <div class="feature-grid reveal">
@@ -334,7 +355,20 @@
           </article>
         </div>
 
-        <!-- Gallery (responsive) -->
+        <!-- Scroll-synced Confidence Multiplier demo -->
+        <div id="multWrap" class="panel card-glass reveal" style="margin-top:1.2rem">
+          <h3 style="margin-top:0">Confidence Multiplier (demo)</h3>
+          <p class="muted">Scroll through this block to watch the multiplier respond to “market quality”.</p>
+          <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;margin-top:.6rem">
+            <div style="height:12px;background:rgba(118,221,255,.15);border:1px solid rgba(118,221,255,.35);border-radius:999px;overflow:hidden;position:relative">
+              <div id="multBar" style="height:100%;width:0%;background:linear-gradient(90deg,#76ddff,#5b8aff)"></div>
+            </div>
+            <div style="font-size:1.8rem;font-weight:800"><span id="multVal">0.00</span>x</div>
+          </div>
+          <p style="color:var(--muted);margin-top:.6rem">0.00 → 1.00 as signal quality increases.</p>
+        </div>
+
+        <!-- Gallery -->
         <div class="gallery reveal" style="margin-top:1.2rem">
           <img src="/assets/sp-screen-1-1200.webp" srcset="/assets/sp-screen-1-800.webp 800w, /assets/sp-screen-1-1200.webp 1200w, /assets/sp-screen-1-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 33vw" loading="lazy" alt="Overlays & bias">
           <img src="/assets/sp-screen-2-1200.webp" srcset="/assets/sp-screen-2-800.webp 800w, /assets/sp-screen-2-1200.webp 1200w, /assets/sp-screen-2-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 33vw" loading="lazy" alt="Confidence multipliers">
@@ -346,10 +380,11 @@
     <div class="sep"></div>
 
     <!-- RISK -->
-    <section class="content-section" id="risk">
+    <section class="content-section edge-lines" id="risk">
       <div class="section-inner">
-        <div class="section-lead">
+        <div class="section-lead reveal">
           <h2 class="h-grad">Risk management that respects your playbook</h2>
+          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p>Run years of historical data directly in TradingView. Size positions automatically, quantify drawdowns, and test every toggle before risking capital.</p>
         </div>
         <div class="panel card-glass reveal">
@@ -364,10 +399,11 @@
     </section>
 
     <!-- MARKETS -->
-    <section class="content-section" id="markets">
+    <section class="content-section edge-lines" id="markets">
       <div class="section-inner">
-        <div class="section-lead">
+        <div class="section-lead reveal">
           <h2 class="h-grad">Trade the markets you care about</h2>
+          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p>Multipliers adapt the strategy to market conditions — tightening signals in volatility and opening the throttle when momentum is on your side.</p>
         </div>
         <div class="integrations reveal" role="list">
@@ -379,10 +415,11 @@
     </section>
 
     <!-- MARQUEE -->
-    <section class="content-section">
+    <section class="content-section edge-lines">
       <div class="section-inner">
-        <div class="section-lead">
+        <div class="section-lead reveal">
           <h2 class="h-grad">Works with your tooling</h2>
+          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p>Route alerts where your team already lives.</p>
         </div>
         <div class="marquee reveal">
@@ -407,10 +444,11 @@
     </section>
 
     <!-- DOCS -->
-    <section class="content-section" id="docs">
+    <section class="content-section edge-lines" id="docs">
       <div class="section-inner">
-        <div class="section-lead">
+        <div class="section-lead reveal">
           <h2 class="h-grad">Documentation to move from charts to execution</h2>
+          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p>Connect TradingView, tune parameters, and automate alerts with your brokerage or community bots.</p>
         </div>
         <div class="feature-grid reveal">
@@ -422,13 +460,14 @@
     </section>
 
     <!-- PRICING (with parallax orbs) -->
-    <section class="content-section" id="pricing">
+    <section class="content-section edge-lines" id="pricing">
       <div class="section-inner parallax-wrap">
         <span class="orb" style="top:-60px; left:-60px"></span>
         <span class="orb alt" style="bottom:-40px; right:-40px"></span>
 
-        <div class="section-lead">
+        <div class="section-lead reveal">
           <h2 class="h-grad">SignalPilot Pro — choose your plan</h2>
+          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p>Access is invite-only. Pricing is transparent — request your invite to get started.</p>
         </div>
 
@@ -437,14 +476,14 @@
             <div><h3>Monthly</h3><p class="price">$79 <span>/month</span></p></div>
             <p>Great for active traders who want to try Pro month-to-month.</p>
             <ul><li>All Pro modules & automation</li><li>Advanced alerts & webhooks</li><li>Backtesting & risk controls</li></ul>
-            <a class="primary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Monthly"><span>Request Invite</span></a>
+            <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Monthly"><span class="magnetic-target">Request Invite</span></a>
           </article>
 
           <article class="pricing-card card-glass">
             <div><h3>Quarterly</h3><p class="price">$199 <span>/3 months</span></p></div>
             <p>Better value for traders who commit to a quarter.</p>
             <ul><li>All Pro modules & automation</li><li>Advanced alerts & webhooks</li><li>Backtesting & risk controls</li><li>Save vs monthly</li></ul>
-            <a class="primary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Quarterly"><span>Request Invite</span></a>
+            <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Quarterly"><span class="magnetic-target">Request Invite</span></a>
           </article>
 
           <article class="pricing-card highlight card-glass">
@@ -453,7 +492,7 @@
             <div><h3>Yearly</h3><p class="price">$499 <span>/year</span></p></div>
             <p>Best value for serious traders — one full year of SignalPilot Pro.</p>
             <ul><li>All Pro modules & automation</li><li>Advanced alerts & webhooks</li><li>Backtesting & risk controls</li><li>Priority support</li><li>Save big vs monthly</li></ul>
-            <a class="primary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Yearly"><span>Request Invite</span></a>
+            <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Yearly"><span class="magnetic-target">Request Invite</span></a>
           </article>
 
           <article class="pricing-card lifetime card-glass">
@@ -461,7 +500,7 @@
             <div><h3>Lifetime (limited)</h3><p class="price">$899 <span>one-time</span></p></div>
             <p>Exclusive one-time payment for lifetime access. Limited availability.</p>
             <ul><li>Permanent Pro access</li><li>All future updates included</li><li>Backtesting, risk, automation</li><li>Limited availability</li></ul>
-            <a class="primary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Lifetime"><span>Request Invite</span></a>
+            <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Lifetime"><span class="magnetic-target">Request Invite</span></a>
           </article>
         </div>
 
@@ -491,7 +530,7 @@
             </label>
           </div>
           <input type="hidden" name="_subject" value="SignalPilot Pro – Waitlist">
-          <button class="primary-btn" style="margin-top:.8rem">Join the waitlist</button>
+          <button class="primary-btn magnetic" style="margin-top:.8rem"><span class="magnetic-target">Join the waitlist</span></button>
         </form>
 
         <p style="margin-top:1rem;color:var(--muted-soft);font-size:.9rem">Educational use only. Past performance is not indicative of future results.</p>
@@ -501,10 +540,11 @@
     <div class="sep"></div>
 
     <!-- COMPANY -->
-    <section class="content-section" id="company">
+    <section class="content-section edge-lines" id="company">
       <div class="section-inner">
-        <div class="section-lead">
+        <div class="section-lead reveal">
           <h2 class="h-grad">SignalPilot Labs, Inc.</h2>
+          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p>We build trading tools that help independent traders, prop desks, and communities stay disciplined and transparent.</p>
         </div>
         <div class="feature-grid reveal">
@@ -516,14 +556,14 @@
     </section>
 
     <!-- CTA -->
-    <section class="content-section" id="cta">
+    <section class="content-section edge-lines" id="cta">
       <div class="section-inner">
         <div class="cta-panel card-glass reveal">
           <h2 class="h-grad">Ready to trade with clarity?</h2>
           <p>Request an invite to SignalPilot Pro and bring discipline to your playbook.</p>
           <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem">
-            <a class="primary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite"><span>Request Invite</span></a>
-            <a class="secondary-btn" href="#product">See product details</a>
+            <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite"><span class="magnetic-target">Request Invite</span></a>
+            <a class="secondary-btn magnetic" href="#product"><span class="magnetic-target">See product details</span></a>
           </div>
         </div>
       </div>
@@ -534,7 +574,7 @@
   <div id="stickyCTA" style="position:fixed;left:12px;right:12px;bottom:14px;display:none;z-index:9999">
     <div class="card-glass" style="max-width:1160px;margin:0 auto;padding:.6rem 1rem;border-radius:14px;display:flex;gap:.8rem;align-items:center;justify-content:space-between">
       <span style="color:var(--muted)">Ready to try SignalPilot Pro?</span>
-      <a class="primary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite">Request Invite</a>
+      <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite"><span class="magnetic-target">Request Invite</span></a>
     </div>
   </div>
 
@@ -580,6 +620,23 @@
     const onScroll=()=>{const h=document.documentElement;const p=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;pr.style.width=p+'%';};
     document.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
+    // Magnetic buttons (subtle mouse "pull")
+    const magnets = document.querySelectorAll('.magnetic');
+    magnets.forEach(btn=>{
+      const targets = btn.querySelectorAll('.magnetic-target');
+      btn.addEventListener('pointermove',e=>{
+        const r=btn.getBoundingClientRect();
+        const x=((e.clientX - r.left)/r.width - .5)*10;
+        const y=((e.clientY - r.top)/r.height - .5)*8;
+        btn.style.transform=`translate(${x*.2}px, ${y*.2}px)`;
+        targets.forEach(t=>t.style.transform=`translate(${x}px, ${y}px)`);
+      });
+      btn.addEventListener('pointerleave',()=>{
+        btn.style.transform='translate(0,0)';
+        targets.forEach(t=>t.style.transform='translate(0,0)');
+      });
+    });
+
     // Mobile nav
     const toggle=document.querySelector('.menu-toggle');
     const nav=document.getElementById('primary-navigation');
@@ -600,11 +657,6 @@
     const cIo=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;const to=+el.dataset.countTo||0;let v=0;const step=Math.max(1,Math.ceil(to/60));const tick=()=>{v+=step;if(v>=to){el.textContent=to;return;}el.textContent=v;requestAnimationFrame(tick)};requestAnimationFrame(tick);cIo.unobserve(el);})},{threshold:.6});
     document.querySelectorAll('[data-count-to]').forEach(el=>cIo.observe(el));
 
-    // Back to top
-    const topBtn=document.getElementById('toTop');
-    addEventListener('scroll',()=>{topBtn&&topBtn.classList.toggle('show',window.scrollY>800)},{passive:true});
-    topBtn&&topBtn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
-
     // Sticky CTA
     const scta=document.getElementById('stickyCTA');
     addEventListener('scroll',()=>{ scta.style.display = (scrollY > innerHeight*0.6) ? 'block' : 'none'; }, {passive:true});
@@ -613,8 +665,37 @@
     const wrap=document.querySelector('.parallax-wrap');const orbs=document.querySelectorAll('.parallax-wrap .orb');
     if(wrap&&orbs.length){wrap.addEventListener('pointermove',e=>{const r=wrap.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;orbs.forEach((o,i)=>o.style.transform=`translate(${x*(12+i*6)}px, ${y*(10+i*5)}px)`);});}
 
-    // Footer year
+    // Section edge parallax lines (gentle drift)
+    const sections = document.querySelectorAll('.edge-lines');
+    window.addEventListener('scroll', ()=>{
+      const sc = window.scrollY;
+      sections.forEach(sec=>sec.style.setProperty('--grid-shift', `${(sc - sec.offsetTop)*-0.02}px`));
+    }, {passive:true});
+
+    // Scroll-synced Confidence Multiplier
+    const multWrap = document.getElementById('multWrap');
+    const multBar  = document.getElementById('multBar');
+    const multVal  = document.getElementById('multVal');
+    function updateMultiplier(){
+      if(!multWrap) return;
+      const rect = multWrap.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const visible = Math.max(0, Math.min(rect.bottom, vh) - Math.max(rect.top, 0));
+      const ratio = Math.max(0, Math.min(1, visible / Math.min(vh, rect.height)));
+      const mult  = (ratio).toFixed(2);
+      multBar.style.width = (ratio*100) + '%';
+      multVal.textContent = mult;
+    }
+    document.addEventListener('scroll', updateMultiplier, {passive:true});
+    window.addEventListener('resize', updateMultiplier);
+    updateMultiplier();
+
+    // Back to top + year
+    const topBtn=document.getElementById('toTop');
+    addEventListener('scroll',()=>{topBtn&&topBtn.classList.toggle('show',window.scrollY>800)},{passive:true});
+    topBtn&&topBtn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
     document.getElementById('year').textContent=new Date().getFullYear();
   </script>
 </body>
 </html>
+
