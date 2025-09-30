@@ -54,21 +54,24 @@
       --border:rgba(102,128,214,.22); --text:#ecf1ff; --muted:#b5c0d8; --muted-soft:#7784a1;
       --brand:#5b8aff; --accent:#76ddff; --success:#3ed598; --warn:#f9a23c;
       --radius:16px; --maxw:min(1160px,92vw); --focus:#9bb6ff;
+      --ring: rgba(118,221,255,.6);
+      --aurora1:#5b8aff; --aurora2:#76ddff; --aurora3:#9bb6ff;
       font-family:"Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
     }
-    /* Light theme tokens (soft + readable) */
     :root[data-theme="light"]{
       color-scheme:light;
       --bg:#f3f6fb; --bg-elev:#ffffff; --bg-soft:#edf1f9;
       --text:#0f172a; --muted:#31405f; --muted-soft:#586481;
       --border:#d9e2f3; --brand:#2e58ff; --accent:#2a9cff;
+      --ring: rgba(46,88,255,.35);
+      --aurora1:#2e58ff; --aurora2:#6aa6ff; --aurora3:#b7ccff;
     }
 
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;display:flex;flex-direction:column;min-height:100vh}
     :root[data-theme="light"] body{font-size:17px; line-height:1.68}
 
-    /* Progress bar */
+    /* Progress */
     .progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,#76ddff,#5b8aff);z-index:1000;box-shadow:0 0 12px rgba(118,221,255,.6)}
 
     /* Skip link */
@@ -90,16 +93,26 @@
     .primary-btn svg{width:16px;height:16px}
     .theme-toggle{margin-left:.5rem;border:1px solid var(--border);background:var(--bg-elev);color:var(--text);border-radius:10px;padding:.4rem .6rem;cursor:pointer}
 
-    /* Hero (animated) */
-    .hero{position:relative;overflow:hidden;background:
-      radial-gradient(70% 80% at 80% 0%, rgba(91,138,255,.20), transparent 60%),
-      radial-gradient(60% 70% at 10% 30%, rgba(118,221,255,.14), transparent 60%),
-      var(--bg);}
-    .hero::after{content:"";position:absolute;inset:-25%;background:radial-gradient(50% 50% at 60% 40%, rgba(118,221,255,.25), transparent 60%);filter:blur(32px);animation:heroFloat 18s ease-in-out infinite alternate;opacity:.6;pointer-events:none}
-    .hero::before{content:"";position:absolute;inset:0;opacity:.12;pointer-events:none;background:
-      linear-gradient(transparent 49%, rgba(155,182,255,.35) 50%, transparent 51%) 0 0 / 100% 22px,
-      linear-gradient(90deg, transparent 49%, rgba(155,182,255,.25) 50%, transparent 51%) 0 0 / 22px 100%}
-    @keyframes heroFloat{0%{transform:translate3d(-2%,-1%,0) scale(1)}100%{transform:translate3d(2%,1%,0) scale(1.04)}}
+    /* Hero — Aurora + grid */
+    .hero{position:relative;overflow:hidden;background:var(--bg)}
+    .hero::before{
+      /* aurora sheet */
+      content:""; position:absolute; inset:-30%;
+      background:
+        radial-gradient(50% 60% at 20% 15%, color-mix(in srgb, var(--aurora1) 38%, transparent) 0, transparent 62%),
+        radial-gradient(50% 50% at 85% 15%, color-mix(in srgb, var(--aurora2) 36%, transparent) 0, transparent 58%),
+        radial-gradient(60% 60% at 50% 50%, color-mix(in srgb, var(--aurora3) 28%, transparent) 0, transparent 62%);
+      filter: blur(26px) saturate(120%);
+      animation: aurora 40s linear infinite;
+      opacity:.6; pointer-events:none;
+    }
+    @keyframes aurora{0%{transform:translate3d(-2%,0,0) rotate(0deg) scale(1)}50%{transform:translate3d(2%,2%,0) rotate(180deg) scale(1.05)}100%{transform:translate3d(-2%,0,0) rotate(360deg) scale(1)}}
+    .hero::after{ /* faint grid */
+      content:""; position:absolute; inset:0; opacity:.12; pointer-events:none;
+      background:
+        linear-gradient(transparent 49%, rgba(155,182,255,.35) 50%, transparent 51%) 0 0 / 100% 22px,
+        linear-gradient(90deg, transparent 49%, rgba(155,182,255,.25) 50%, transparent 51%) 0 0 / 22px 100%;
+    }
     .hero-inner{position:relative;max-width:var(--maxw);margin:0 auto;padding:clamp(3.5rem,10vw,6.5rem) 1.25rem clamp(4rem,12vw,7.5rem);display:grid;gap:clamp(2rem,6vw,3.5rem)}
     .hero-copy{max-width:640px}
     .tag{display:inline-flex;gap:.45rem;align-items:center;padding:.25rem .55rem;border-radius:999px;background:rgba(62,213,152,.18);color:#bdf2de;border:1px solid rgba(62,213,152,.35);font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
@@ -111,34 +124,35 @@
     p{margin:0 0 1.1rem;color:var(--muted)}
 
     /* Gradient headings + signature underline */
-    .h-grad{background:linear-gradient(90deg,#76ddff,#5b8aff,#9bb6ff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 14px rgba(118,221,255,.12);position:relative;padding-bottom:.2rem}
+    .h-grad{background:linear-gradient(90deg,#76ddff,#5b8aff,#9bb6ff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 14px rgba(118,221,255,.12);padding-bottom:.2rem}
     .sig-underline{display:block;height:10px}
     .sig-underline svg{width:200px;height:10px}
     .sig-underline path{stroke:rgba(118,221,255,.7);stroke-width:3;fill:none;stroke-linecap:round;stroke-dasharray:180;stroke-dashoffset:180;transition:stroke-dashoffset 1.2s ease}
     .reveal.in .sig-underline path{stroke-dashoffset:0}
-    :root[data-theme="light"] .h-grad{background:linear-gradient(90deg,#375fff,#6a8dff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 10px rgba(55,95,255,.10)}
+    :root[data-theme="light"] .h-grad{background:linear-gradient(90deg,#375fff,#6a8dff);-webkit-background-clip:text;background-clip:text;color:transparent}
     :root[data-theme="light"] .sig-underline path{stroke:#2f5bff}
 
-    /* Sections */
+    /* Sections + subtle parallax lines */
     .content-section{padding:clamp(3.5rem,9vw,5rem) 0;border-top:1px solid rgba(91,138,255,.08);position:relative}
     .section-inner{max-width:var(--maxw);margin:0 auto;padding:0 1.25rem}
     .section-lead{max-width:680px;margin-bottom:clamp(2rem,6vw,3rem)}
-
-    /* Edge parallax lines */
-    .content-section::after{
-      content:""; position:absolute; inset:0; pointer-events:none; opacity:.12;
-      background-image:
-        repeating-linear-gradient( to right, rgba(155,182,255,.13) 0 1px, transparent 1px 22px ),
-        repeating-linear-gradient( to bottom, rgba(155,182,255,.10) 0 1px, transparent 1px 22px );
-      transform: translateY(var(--grid-shift,0));
-      transition: transform .1s linear;
-    }
+    .content-section.edge-lines::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.10;background-image:repeating-linear-gradient(to right, rgba(155,182,255,.13) 0 1px, transparent 1px 22px),repeating-linear-gradient(to bottom, rgba(155,182,255,.10) 0 1px, transparent 1px 22px);transform:translateY(var(--grid-shift,0));transition:transform .1s linear}
 
     /* Glass cards */
     .card-glass{backdrop-filter:blur(8px);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(155,182,255,.16);box-shadow:0 8px 30px rgba(0,0,0,.25)}
-    :root[data-theme="light"] .card-glass{background:linear-gradient(180deg, #ffffff 75%, #f5f8ff 25%);border-color:#e6ecf8;box-shadow:0 6px 22px rgba(15,30,60,.08)}
+    :root[data-theme="light"] .card-glass{background:#fff;border-color:#e6ecf8;box-shadow:0 6px 22px rgba(15,30,60,.08)}
 
-    /* Feature grid + micro-animated icons */
+    /* Ink ripple (on .inkable) */
+    .inkable{position:relative;overflow:hidden;--ix:50%;--iy:50%;--iop:0}
+    .inkable::after{
+      content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+      background:radial-gradient(180px 180px at var(--ix) var(--iy), rgba(118,221,255,.16), transparent 70%);
+      opacity:var(--iop);transition:opacity .35s ease, transform .35s ease;
+      transform:scale(1.0);
+    }
+    .inkable:hover::after{--iop:1;transform:scale(1.02)}
+
+    /* Feature grid + icon micro-motion */
     .feature-grid{display:grid;gap:1.6rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
     .feature-card{background:linear-gradient(160deg, rgba(12,16,27,.85), rgba(12,16,27,.55));border-radius:var(--radius);padding:1.75rem;border:1px solid rgba(91,138,255,.14);display:grid;gap:.75rem;min-height:240px}
     :root[data-theme="light"] .feature-card{background:#fff;border-color:#e6ecf7}
@@ -148,10 +162,10 @@
     .feature-card:nth-child(2) .feature-icon svg{animation:tiltIcon 4s ease-in-out infinite}
     .feature-card:nth-child(3) .feature-icon svg{animation:spinIcon 12s linear infinite}
     @keyframes pulseIcon{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
-    @keyframes tiltIcon{0%,100%{transform:rotate(0deg)}50%{transform:rotate(6deg)}}
+    @keyframes tiltIcon{0%,100%{transform:rotate(0)}50%{transform:rotate(6deg)}}
     @keyframes spinIcon{to{transform:rotate(360deg)}}
 
-    /* Panel */
+    /* Panel & pipeline */
     .panel{background:rgba(12,16,27,.75);border:1px solid rgba(91,138,255,.15);border-radius:var(--radius);padding:clamp(1.8rem,3vw,2.4rem)}
     :root[data-theme="light"] .panel{background:#fff;border-color:#e7ecf7}
     .pipeline{display:grid;gap:1.8rem;margin-top:2.5rem}
@@ -177,10 +191,19 @@
     .counter strong{display:block;font-size:2rem}
     :root[data-theme="light"] .counter{background:#fff;border-color:#e7ecf7}
 
-    /* Gallery */
+    /* Gallery with shimmer skeletons */
     .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
-    .gallery img{width:100%;border-radius:14px;border:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    :root[data-theme="light"] .gallery img{box-shadow:0 8px 24px rgba(10,20,40,.08)}
+    .skeleton{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .skeleton::before{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(90deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.05) 100%);
+      background-size:200% 100%;animation:shimmer 1.6s linear infinite;
+    }
+    :root[data-theme="light"] .skeleton{box-shadow:0 8px 24px rgba(10,20,40,.08)}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .skeleton img{display:block;width:100%;opacity:0;transition:opacity .25s ease}
+    .skeleton.done::before{display:none}
+    .skeleton.done img{opacity:1}
 
     /* Pricing */
     .pricing-table{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;align-items:start}
@@ -198,7 +221,6 @@
     .pricing-card.highlight::before{content:"";position:absolute;height:3px;width:70px;top:10px;left:-80px;background:linear-gradient(90deg,transparent,#fff,transparent);border-radius:999px;opacity:.28;animation:sweep 2.8s ease-in-out infinite;mix-blend-mode:screen;pointer-events:none}
     .ribbon{position:absolute;top:10px;right:10px;z-index:3;pointer-events:none;background:linear-gradient(120deg,#5b8aff,#76ddff);color:#fff;font-size:.72rem;font-weight:800;padding:.38rem .62rem;border-radius:6px;box-shadow:0 6px 14px rgba(91,138,255,.35);text-transform:uppercase;letter-spacing:.06em}
     .pricing-card.highlight>*:not(.fx-border):not(.ribbon){position:relative;z-index:2}
-
     .pricing-card.lifetime{position:relative;overflow:visible;padding-top:2.2rem}
     .pricing-card.lifetime .badge-limited{position:absolute;top:10px;left:10px;background:linear-gradient(120deg,#f9a23c,#ff6b3d);color:#fff;font-size:.7rem;font-weight:800;padding:.32rem .6rem;border-radius:999px;letter-spacing:.05em;box-shadow:0 6px 14px rgba(255,123,61,.35);animation:throb 2.2s ease-in-out infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
@@ -225,8 +247,6 @@
     .footer-inner{max-width:var(--maxw);margin:0 auto;padding:0 1.25rem;display:grid;gap:2rem}
     .footer-columns{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
     .footer-columns ul{list-style:none!important;margin:0!important;padding:0!important}
-    .footer-columns li::marker{content:''!important}
-    .footer-columns li{padding-left:0!important}
     .footer-bottom{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:space-between;color:var(--muted-soft);font-size:.85rem}
 
     /* Back to top + Mobile nav */
@@ -242,8 +262,8 @@
     }
     @media (max-width:640px){.hero-metrics{flex-direction:column}.metric{width:100%}.cta-panel{text-align:left}}
     @media (prefers-reduced-motion:reduce){
-      .hero::after,.hero::before{animation:none}
-      .pricing-card.highlight .fx-border,.pricing-card.highlight::after,.pricing-card.highlight::before,.pricing-card.lifetime .badge-limited{animation:none!important}
+      .hero::before{animation:none}
+      .pricing-card.highlight .fx-border,.pricing-card.highlight::after,.pricing-card.highlight::before,.pricing-card.lifetime .badge-limited,.marquee-track{animation:none!important}
     }
 
     /* Parallax orbs */
@@ -255,17 +275,23 @@
     .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
     .reveal.in{opacity:1;transform:translateY(0)}
 
-    /* CTA panel tune (calmer) */
+    /* CTA panel tune */
     .cta-panel{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.10));border-color:rgba(155,182,255,.12);box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.03)}
     .cta-panel h2,.cta-panel .h-grad{background:linear-gradient(90deg,#7fb3ff,#5b8aff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 6px rgba(118,221,255,.08)}
-    .cta-panel p{color:var(--muted)}
-    .cta-panel .secondary-btn{color:#9bb6ff}
-    .cta-panel .secondary-btn:hover{color:#c7d6ff}
-    .cta-panel .primary-btn{box-shadow:0 10px 22px rgba(91,138,255,.18)}
     :root[data-theme="light"] .cta-panel{background:linear-gradient(180deg, rgba(40,60,100,.06), rgba(40,60,100,.02));border-color:#dfe6f7}
-    :root[data-theme="light"] .cta-panel h2,:root[data-theme="light"] .cta-panel .h-grad{background:linear-gradient(90deg,#2e58ff,#6490ff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
-    :root[data-theme="light"] .cta-panel p{color:#3a4866}
-    :root[data-theme="light"] .cta-panel .secondary-btn{color:#2e58ff}
+    :root[data-theme="light"] .cta-panel h2,:root[data-theme="light"] .cta-panel .h-grad{background:linear-gradient(90deg,#2e58ff,#6490ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+    /* Cursor ring */
+    .cursor-ring{position:fixed;left:0;top:0;width:34px;height:34px;border:2px solid var(--ring);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;mix-blend-mode:screen;z-index:10000;opacity:0;transition:opacity .2s ease, border-color .2s ease}
+    :root[data-theme="light"] .cursor-ring{mix-blend-mode:multiply}
+
+    /* Section TOC */
+    .sectoc{position:fixed;right:16px;top:30%;z-index:30;display:none;flex-direction:column;gap:.4rem}
+    .sectoc a{display:flex;align-items:center;gap:.5rem;padding:.35rem .55rem;border-radius:999px;background:rgba(12,16,27,.65);border:1px solid var(--border);color:var(--muted);font-size:.82rem;text-decoration:none;backdrop-filter:blur(8px)}
+    .sectoc a.active{color:#fff;background:linear-gradient(120deg,var(--brand),#7b9bff)}
+    :root[data-theme="light"] .sectoc a{background:#fff}
+    @media (min-width:1000px){.sectoc{display:flex}}
+
   </style>
 </head>
 <body>
@@ -273,6 +299,20 @@
 
   <!-- Progress -->
   <div class="progress" id="progress"></div>
+
+  <!-- Section TOC -->
+  <nav class="sectoc" id="sectoc" aria-label="On-page navigation">
+    <a href="#product">Product</a>
+    <a href="#risk">Risk</a>
+    <a href="#markets">Markets</a>
+    <a href="#docs">Docs</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#company">Company</a>
+    <a href="#cta">Start</a>
+  </nav>
+
+  <!-- Cursor ring (hero + pricing only) -->
+  <div id="cursorRing" class="cursor-ring" aria-hidden="true"></div>
 
   <header class="page-header">
     <div class="header-inner">
@@ -297,7 +337,7 @@
 
   <main>
     <!-- HERO -->
-    <section class="hero edge-lines">
+    <section class="hero edge-lines" id="hero">
       <div class="hero-inner">
         <div class="hero-copy reveal">
           <div class="tag">Invite-only · Pro traders</div>
@@ -319,9 +359,9 @@
 
         <!-- Counters -->
         <div class="counters reveal">
-          <div class="counter card-glass"><strong data-count-to="9">0</strong><span>Strategy modules</span></div>
-          <div class="counter card-glass"><strong data-count-to="45">0</strong><span>Markets supported</span></div>
-          <div class="counter card-glass"><strong data-count-to="3">0</strong><span>False setups reduced ×</span></div>
+          <div class="counter card-glass inkable"><strong data-count-to="9">0</strong><span>Strategy modules</span></div>
+          <div class="counter card-glass inkable"><strong data-count-to="45">0</strong><span>Markets supported</span></div>
+          <div class="counter card-glass inkable"><strong data-count-to="3">0</strong><span>False setups reduced ×</span></div>
         </div>
       </div>
     </section>
@@ -335,19 +375,19 @@
           <p>SignalPilot’s TradingView strategy is packaged into modular blocks so you can enable only the logic that fits your playbook: automation, position sizing, and broker-ready alerts.</p>
         </div>
         <div class="feature-grid reveal">
-          <article class="feature-card card-glass">
+          <article class="feature-card card-glass inkable">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 18V6l4 3 4-3 4 3 4-3v12" stroke-linejoin="round"/></svg></div>
             <h3>Trend foundation</h3>
             <p>Layer moving average clouds, structure swings, and volume bias to pre-filter bad markets before a setup even forms.</p>
             <ul><li>Multi-timeframe bias overlay with optional Heikin Ashi smoothing.</li><li>Adaptive higher-high/low tracking to avoid chop.</li><li>Session filters keep you aligned to liquid trading hours.</li></ul>
           </article>
-          <article class="feature-card card-glass">
+          <article class="feature-card card-glass inkable">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12h16"/><path d="M8 7v10m8-10v10"/><circle cx="12" cy="12" r="3.5"/></svg></div>
             <h3>Signal sculpting</h3>
             <p>Combine oscillators, order flow zones, and candle pattern scoring to confirm when the move is worth taking.</p>
             <ul><li>Weighted confluence scoring exposes confidence at a glance.</li><li>False break and liquidity sweep filters keep you patient.</li><li>Alert templates auto-name entries for TradingView pushes.</li></ul>
           </article>
-          <article class="feature-card card-glass">
+          <article class="feature-card card-glass inkable">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 17h12l-2 4H8l-2-4Z"/><path d="M8 13c0-2.21 1.79-4 4-4s4 1.79 4 4"/><path d="M5 5h14v4H5z"/></svg></div>
             <h3>Execution &amp; management</h3>
             <p>Automated entries, position sizing, and broker alerts adapt to volatility so risk stays consistent.</p>
@@ -356,7 +396,7 @@
         </div>
 
         <!-- Scroll-synced Confidence Multiplier demo -->
-        <div id="multWrap" class="panel card-glass reveal" style="margin-top:1.2rem">
+        <div id="multWrap" class="panel card-glass inkable reveal" style="margin-top:1.2rem">
           <h3 style="margin-top:0">Confidence Multiplier (demo)</h3>
           <p class="muted">Scroll through this block to watch the multiplier respond to “market quality”.</p>
           <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;margin-top:.6rem">
@@ -368,11 +408,11 @@
           <p style="color:var(--muted);margin-top:.6rem">0.00 → 1.00 as signal quality increases.</p>
         </div>
 
-        <!-- Gallery -->
+        <!-- Gallery with shimmer placeholders -->
         <div class="gallery reveal" style="margin-top:1.2rem">
-          <img src="/assets/sp-screen-1-1200.webp" srcset="/assets/sp-screen-1-800.webp 800w, /assets/sp-screen-1-1200.webp 1200w, /assets/sp-screen-1-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 33vw" loading="lazy" alt="Overlays & bias">
-          <img src="/assets/sp-screen-2-1200.webp" srcset="/assets/sp-screen-2-800.webp 800w, /assets/sp-screen-2-1200.webp 1200w, /assets/sp-screen-2-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 33vw" loading="lazy" alt="Confidence multipliers">
-          <img src="/assets/sp-screen-3-1200.webp" srcset="/assets/sp-screen-3-800.webp 800w, /assets/sp-screen-3-1200.webp 1200w, /assets/sp-screen-3-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 33vw" loading="lazy" alt="Backtesting & risk">
+          <div class="skeleton"><img data-skel src="/assets/sp-screen-1-1200.webp" srcset="/assets/sp-screen-1-800.webp 800w, /assets/sp-screen-1-1200.webp 1200w, /assets/sp-screen-1-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 33vw" loading="lazy" alt="Overlays & bias"></div>
+          <div class="skeleton"><img data-skel src="/assets/sp-screen-2-1200.webp" srcset="/assets/sp-screen-2-800.webp 800w, /assets/sp-screen-2-1200.webp 1200w, /assets/sp-screen-2-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 33vw" loading="lazy" alt="Confidence multipliers"></div>
+          <div class="skeleton"><img data-skel src="/assets/sp-screen-3-1200.webp" srcset="/assets/sp-screen-3-800.webp 800w, /assets/sp-screen-3-1200.webp 1200w, /assets/sp-screen-3-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 33vw" loading="lazy" alt="Backtesting & risk"></div>
         </div>
       </div>
     </section>
@@ -387,7 +427,7 @@
           <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p>Run years of historical data directly in TradingView. Size positions automatically, quantify drawdowns, and test every toggle before risking capital.</p>
         </div>
-        <div class="panel card-glass reveal">
+        <div class="panel card-glass inkable reveal">
           <div class="pipeline">
             <div class="pipeline-step"><div class="step-index">1</div><div class="step-body"><h3>Configure risk per market</h3><p>Define max allocation, per-trade loss, and session windows. Multipliers dynamically scale exposure by confluence.</p></div></div>
             <div class="pipeline-step"><div class="step-index">2</div><div class="step-body"><h3>Backtest with transparency</h3><p>Review equity curves, drawdown tables, and tagged screenshots that highlight filtered trades.</p></div></div>
@@ -407,9 +447,9 @@
           <p>Multipliers adapt the strategy to market conditions — tightening signals in volatility and opening the throttle when momentum is on your side.</p>
         </div>
         <div class="integrations reveal" role="list">
-          <div class="integration-card card-glass" role="listitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="m8 15 3-3 2 2 3-4"/></svg>Crypto majors &amp; alt rotations with volatility-aware scaling.</div>
-          <div class="integration-card card-glass" role="listitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v14H4z"/><path d="M4 12h16"/><path d="m8 12 2.5 2.5L14 10l2 2"/></svg>Forex & indices with session filters and spread protection.</div>
-          <div class="integration-card card-glass" role="listitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18V6l6 4 6-4v12"/><path d="M6 10h12"/></svg>Equities & ETFs with earnings blackout and liquidity checks.</div>
+          <div class="integration-card card-glass inkable" role="listitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="m8 15 3-3 2 2 3-4"/></svg>Crypto majors &amp; alt rotations with volatility-aware scaling.</div>
+          <div class="integration-card card-glass inkable" role="listitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v14H4z"/><path d="M4 12h16"/><path d="m8 12 2.5 2.5L14 10l2 2"/></svg>Forex & indices with session filters and spread protection.</div>
+          <div class="integration-card card-glass inkable" role="listitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18V6l6 4 6-4v12"/><path d="M6 10h12"/></svg>Equities & ETFs with earnings blackout and liquidity checks.</div>
         </div>
       </div>
     </section>
@@ -430,8 +470,7 @@
             <span class="logo-mask" style="--logo: url('/assets/slack-svgrepo-com.svg');" aria-label="Slack"></span>
             <span class="logo-mask" style="--logo: url('/assets/aws-svgrepo-com.svg');" aria-label="AWS"></span>
             <span class="logo-mask" style="--logo: url('/assets/icons8-github.svg');" aria-label="GitHub"></span>
-
-            <!-- repeat -->
+            <!-- repeat for seamless loop -->
             <span class="logo-mask" style="--logo: url('/assets/discord-icon-svgrepo-com.svg');" aria-hidden="true"></span>
             <span class="logo-mask" style="--logo: url('/assets/telegram-svgrepo-com.svg?v=2');" aria-hidden="true"></span>
             <span class="logo-mask" style="--logo: url('/assets/Tradingview--Streamline-Simple-Icons.svg');" aria-hidden="true"></span>
@@ -452,14 +491,14 @@
           <p>Connect TradingView, tune parameters, and automate alerts with your brokerage or community bots.</p>
         </div>
         <div class="feature-grid reveal">
-          <article class="feature-card card-glass"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h14v16H5z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div><h3>Quickstart walkthrough</h3><p>Install, apply, and sync settings across layouts.</p></article>
-          <article class="feature-card card-glass"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 4h12l2 4-2 4H6L4 8l2-4Z"/><path d="M10 12v8"/><path d="M14 12v8"/></svg></div><h3>Parameter reference</h3><p>Suggested presets for scalpers, swing traders, and trend followers.</p></article>
-          <article class="feature-card card-glass"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16"/><path d="M8 7v10l4-3 4 3V7"/></svg></div><h3>Automation playbook</h3><p>Route alerts to Discord, Telegram, or broker APIs.</p></article>
+          <article class="feature-card card-glass inkable"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h14v16H5z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div><h3>Quickstart walkthrough</h3><p>Install, apply, and sync settings across layouts.</p></article>
+          <article class="feature-card card-glass inkable"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 4h12l2 4-2 4H6L4 8l2-4Z"/><path d="M10 12v8"/><path d="M14 12v8"/></svg></div><h3>Parameter reference</h3><p>Suggested presets for scalpers, swing traders, and trend followers.</p></article>
+          <article class="feature-card card-glass inkable"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16"/><path d="M8 7v10l4-3 4 3V7"/></svg></div><h3>Automation playbook</h3><p>Route alerts to Discord, Telegram, or broker APIs.</p></article>
         </div>
       </div>
     </section>
 
-    <!-- PRICING (with parallax orbs) -->
+    <!-- PRICING (parallax + cursor ring zone) -->
     <section class="content-section edge-lines" id="pricing">
       <div class="section-inner parallax-wrap">
         <span class="orb" style="top:-60px; left:-60px"></span>
@@ -472,21 +511,21 @@
         </div>
 
         <div class="pricing-table reveal">
-          <article class="pricing-card card-glass">
+          <article class="pricing-card card-glass inkable">
             <div><h3>Monthly</h3><p class="price">$79 <span>/month</span></p></div>
             <p>Great for active traders who want to try Pro month-to-month.</p>
             <ul><li>All Pro modules & automation</li><li>Advanced alerts & webhooks</li><li>Backtesting & risk controls</li></ul>
             <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Monthly"><span class="magnetic-target">Request Invite</span></a>
           </article>
 
-          <article class="pricing-card card-glass">
+          <article class="pricing-card card-glass inkable">
             <div><h3>Quarterly</h3><p class="price">$199 <span>/3 months</span></p></div>
             <p>Better value for traders who commit to a quarter.</p>
             <ul><li>All Pro modules & automation</li><li>Advanced alerts & webhooks</li><li>Backtesting & risk controls</li><li>Save vs monthly</li></ul>
             <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Quarterly"><span class="magnetic-target">Request Invite</span></a>
           </article>
 
-          <article class="pricing-card highlight card-glass">
+          <article class="pricing-card highlight card-glass inkable">
             <span class="fx-border"></span>
             <div class="ribbon">Best Value</div>
             <div><h3>Yearly</h3><p class="price">$499 <span>/year</span></p></div>
@@ -495,7 +534,7 @@
             <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Yearly"><span class="magnetic-target">Request Invite</span></a>
           </article>
 
-          <article class="pricing-card lifetime card-glass">
+          <article class="pricing-card lifetime card-glass inkable">
             <div class="badge-limited">Limited</div>
             <div><h3>Lifetime (limited)</h3><p class="price">$899 <span>one-time</span></p></div>
             <p>Exclusive one-time payment for lifetime access. Limited availability.</p>
@@ -506,18 +545,18 @@
 
         <!-- Inline FAQ -->
         <div class="reveal" style="margin-top:1.2rem;display:grid;gap:.6rem">
-          <details class="card-glass" style="padding:.8rem 1rem;border-radius:12px">
+          <details class="card-glass inkable" style="padding:.8rem 1rem;border-radius:12px">
             <summary><strong>Is this financial advice?</strong></summary>
             <p style="color:var(--muted);margin-top:.6rem">No. SignalPilot is educational. Validate in demo before risking capital.</p>
           </details>
-          <details class="card-glass" style="padding:.8rem 1rem;border-radius:12px">
+          <details class="card-glass inkable" style="padding:.8rem 1rem;border-radius:12px">
             <summary><strong>How do I get access?</strong></summary>
             <p style="color:var(--muted);margin-top:.6rem">Request an invite via email or the form below. We onboard in cohorts and share setup steps.</p>
           </details>
         </div>
 
         <!-- Waitlist form -->
-        <form action="https://formspree.io/f/REPLACE_ME" method="POST" class="card-glass reveal" style="margin-top:1rem;padding:1rem;border-radius:12px">
+        <form action="https://formspree.io/f/REPLACE_ME" method="POST" class="card-glass inkable reveal" style="margin-top:1rem;padding:1rem;border-radius:12px">
           <div style="display:grid;gap:.6rem;grid-template-columns:1fr 1fr;max-width:720px">
             <label style="grid-column:span 1">Name
               <input name="name" required style="width:100%;padding:.6rem;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
@@ -548,9 +587,9 @@
           <p>We build trading tools that help independent traders, prop desks, and communities stay disciplined and transparent.</p>
         </div>
         <div class="feature-grid reveal">
-          <article class="feature-card card-glass"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="M12 12 3 7"/><path d="M12 12 21 7"/><path d="M12 12v10"/></svg></div><h3>Our mission</h3><p>Cut through noise. Ship clear signals. Every product we ship is designed to educate and remove guesswork.</p></article>
-          <article class="feature-card card-glass"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 5h14v14H5z"/><path d="m5 9 7 4 7-4"/><path d="m5 15 7 4 7-4"/></svg></div><h3>Partner programs</h3><p>We collaborate with education communities and prop firms to deliver white-labeled dashboards and custom risk templates.</p><p style="margin:0;color:var(--muted-soft)">Email <a href="mailto:partners@signalpilot.io" style="color:inherit">partners@signalpilot.io</a> to discuss partnerships.</p></article>
-          <article class="feature-card card-glass"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 8a6 6 0 1 1 12 0c0 3-6 13-6 13S6 11 6 8Z"/><circle cx="12" cy="8" r="2"/></svg></div><h3>Contact</h3><p>Questions about Pro or invites? Reach us at <a href="mailto:support@signalpilot.io" style="color:inherit">support@signalpilot.io</a> or follow <a href="https://www.tradingview.com/u/signalpilot/" target="_blank" rel="noopener noreferrer" style="color:inherit">@signalpilot</a>.</p></article>
+          <article class="feature-card card-glass inkable"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="M12 12 3 7"/><path d="M12 12 21 7"/><path d="M12 12v10"/></svg></div><h3>Our mission</h3><p>Cut through noise. Ship clear signals. Every product we ship is designed to educate and remove guesswork.</p></article>
+          <article class="feature-card card-glass inkable"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 5h14v14H5z"/><path d="m5 9 7 4 7-4"/><path d="m5 15 7 4 7-4"/></svg></div><h3>Partner programs</h3><p>We collaborate with education communities and prop firms to deliver white-labeled dashboards and custom risk templates.</p><p style="margin:0;color:var(--muted-soft)">Email <a href="mailto:partners@signalpilot.io" style="color:inherit">partners@signalpilot.io</a> to discuss partnerships.</p></article>
+          <article class="feature-card card-glass inkable"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 8a6 6 0 1 1 12 0c0 3-6 13-6 13S6 11 6 8Z"/><circle cx="12" cy="8" r="2"/></svg></div><h3>Contact</h3><p>Questions about Pro or invites? Reach us at <a href="mailto:support@signalpilot.io" style="color:inherit">support@signalpilot.io</a> or follow <a href="https://www.tradingview.com/u/signalpilot/" target="_blank" rel="noopener noreferrer" style="color:inherit">@signalpilot</a>.</p></article>
         </div>
       </div>
     </section>
@@ -558,7 +597,7 @@
     <!-- CTA -->
     <section class="content-section edge-lines" id="cta">
       <div class="section-inner">
-        <div class="cta-panel card-glass reveal">
+        <div class="cta-panel card-glass inkable reveal">
           <h2 class="h-grad">Ready to trade with clarity?</h2>
           <p>Request an invite to SignalPilot Pro and bring discipline to your playbook.</p>
           <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem">
@@ -570,11 +609,11 @@
     </section>
   </main>
 
-  <!-- Sticky CTA -->
+  <!-- Sticky CTA (A/B text) -->
   <div id="stickyCTA" style="position:fixed;left:12px;right:12px;bottom:14px;display:none;z-index:9999">
     <div class="card-glass" style="max-width:1160px;margin:0 auto;padding:.6rem 1rem;border-radius:14px;display:flex;gap:.8rem;align-items:center;justify-content:space-between">
-      <span style="color:var(--muted)">Ready to try SignalPilot Pro?</span>
-      <a class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite"><span class="magnetic-target">Request Invite</span></a>
+      <span id="ctaCopy" style="color:var(--muted)">Ready to try SignalPilot Pro?</span>
+      <a id="ctaBtn" class="primary-btn magnetic" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite"><span class="magnetic-target">Request Invite</span></a>
     </div>
   </div>
 
@@ -620,7 +659,7 @@
     const onScroll=()=>{const h=document.documentElement;const p=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;pr.style.width=p+'%';};
     document.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
-    // Magnetic buttons (subtle mouse "pull")
+    // Magnetic buttons (subtle mouse pull)
     const magnets = document.querySelectorAll('.magnetic');
     magnets.forEach(btn=>{
       const targets = btn.querySelectorAll('.magnetic-target');
@@ -634,6 +673,15 @@
       btn.addEventListener('pointerleave',()=>{
         btn.style.transform='translate(0,0)';
         targets.forEach(t=>t.style.transform='translate(0,0)');
+      });
+    });
+
+    // Ink ripple: track mouse coords on inkable cards
+    document.querySelectorAll('.inkable').forEach(el=>{
+      el.addEventListener('pointermove',e=>{
+        const r=el.getBoundingClientRect();
+        el.style.setProperty('--ix', (e.clientX - r.left)+'px');
+        el.style.setProperty('--iy', (e.clientY - r.top)+'px');
       });
     });
 
@@ -657,20 +705,25 @@
     const cIo=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;const to=+el.dataset.countTo||0;let v=0;const step=Math.max(1,Math.ceil(to/60));const tick=()=>{v+=step;if(v>=to){el.textContent=to;return;}el.textContent=v;requestAnimationFrame(tick)};requestAnimationFrame(tick);cIo.unobserve(el);})},{threshold:.6});
     document.querySelectorAll('[data-count-to]').forEach(el=>cIo.observe(el));
 
-    // Sticky CTA
+    // Sticky CTA A/B test
     const scta=document.getElementById('stickyCTA');
-    addEventListener('scroll',()=>{ scta.style.display = (scrollY > innerHeight*0.6) ? 'block' : 'none'; }, {passive:true});
+    const ctaCopy=document.getElementById('ctaCopy');
+    const ctaBtn=document.getElementById('ctaBtn');
+    const variants=['Ready to try SignalPilot Pro?','Trade with clarity — join Pro today'];
+    const chosen = variants[Math.random()<0.5?0:1];
+    ctaCopy.textContent = chosen;
+    document.addEventListener('scroll',()=>{ scta.style.display = (scrollY > innerHeight*0.6) ? 'block' : 'none'; }, {passive:true});
+    // Plausible events
+    try{ window.plausible && window.plausible('CTA Variant Shown',{props:{variant:chosen}}); }catch(e){}
+    ctaBtn.addEventListener('click',()=>{ try{ window.plausible && window.plausible('CTA Click',{props:{variant:chosen}});}catch(e){} });
 
     // Parallax orbs (pricing)
     const wrap=document.querySelector('.parallax-wrap');const orbs=document.querySelectorAll('.parallax-wrap .orb');
     if(wrap&&orbs.length){wrap.addEventListener('pointermove',e=>{const r=wrap.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;orbs.forEach((o,i)=>o.style.transform=`translate(${x*(12+i*6)}px, ${y*(10+i*5)}px)`);});}
 
-    // Section edge parallax lines (gentle drift)
+    // Section edge parallax lines
     const sections = document.querySelectorAll('.edge-lines');
-    window.addEventListener('scroll', ()=>{
-      const sc = window.scrollY;
-      sections.forEach(sec=>sec.style.setProperty('--grid-shift', `${(sc - sec.offsetTop)*-0.02}px`));
-    }, {passive:true});
+    window.addEventListener('scroll', ()=>{ const sc = window.scrollY; sections.forEach(sec=>sec.style.setProperty('--grid-shift', `${(sc - sec.offsetTop)*-0.02}px`)); }, {passive:true});
 
     // Scroll-synced Confidence Multiplier
     const multWrap = document.getElementById('multWrap');
@@ -690,12 +743,47 @@
     window.addEventListener('resize', updateMultiplier);
     updateMultiplier();
 
+    // Gallery shimmer — remove skeleton when image loaded
+    document.querySelectorAll('img[data-skel]').forEach(img=>{
+      if(img.complete){ img.parentElement.classList.add('done'); img.style.opacity=1; return; }
+      img.addEventListener('load',()=>{img.parentElement.classList.add('done'); img.style.opacity=1;},{once:true});
+      img.addEventListener('error',()=>{img.parentElement.classList.add('done');},{once:true});
+    });
+
     // Back to top + year
     const topBtn=document.getElementById('toTop');
     addEventListener('scroll',()=>{topBtn&&topBtn.classList.toggle('show',window.scrollY>800)},{passive:true});
     topBtn&&topBtn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
     document.getElementById('year').textContent=new Date().getFullYear();
+
+    // Cursor ring (hero + pricing zones only)
+    const ring = document.getElementById('cursorRing');
+    const ringZones = [document.getElementById('hero'), document.getElementById('pricing')];
+    let ringActive=false;
+    function moveRing(e){ ring.style.left=e.clientX+'px'; ring.style.top=e.clientY+'px'; }
+    ringZones.forEach(z=>{
+      if(!z) return;
+      z.addEventListener('pointerenter',()=>{ ring.style.opacity=1; ringActive=true; });
+      z.addEventListener('pointermove',moveRing);
+      z.addEventListener('pointerleave',()=>{ ring.style.opacity=0; ringActive=false; });
+    });
+
+    // Section TOC highlight
+    const toc = document.getElementById('sectoc');
+    const tocLinks = toc.querySelectorAll('a');
+    const anchors = Array.from(tocLinks).map(a=>document.querySelector(a.getAttribute('href')));
+    const tocObs = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        const id = '#'+entry.target.id;
+        const link = toc.querySelector(`a[href="${id}"]`);
+        if(entry.isIntersecting){
+          tocLinks.forEach(l=>l.classList.remove('active'));
+          link && link.classList.add('active');
+        }
+      });
+    },{rootMargin:'-40% 0px -55% 0px',threshold:0});
+    anchors.forEach(sec=>sec && tocObs.observe(sec));
+
   </script>
 </body>
 </html>
-
