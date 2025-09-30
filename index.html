@@ -628,32 +628,102 @@
       }
     }
     /* Yearly card — animated gradient frame + glow */
-.pricing-card.highlight { ... }
+.pricing-card.highlight {
+  position: relative;
+  border: 1px solid rgba(118,221,255,.55);
+  box-shadow: 0 0 18px rgba(118,221,255,.25);
+  overflow: hidden;
+}
 
 /* thin animated border layer */
-.pricing-card.highlight .fx-border { ... }
+.pricing-card.highlight .fx-border {
+  pointer-events: none;
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, #76ddff, #5b8aff, #7b9bff, #76ddff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  padding: 2px;
+  animation: spin 6s linear infinite;
+  opacity: .55;
+}
 
 /* subtle pulsing aura */
-.pricing-card.highlight::after { ... }
+.pricing-card.highlight::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(60% 60% at 50% 50%, rgba(118,221,255,.15), transparent 70%);
+  filter: blur(14px);
+  animation: pulse 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
 
-/* small moving sparkle */
-.pricing-card.highlight::before { ... }
+/* small moving sparkle on the top edge */
+.pricing-card.highlight::before {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 70px;
+  top: 10px;
+  left: -80px;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+  border-radius: 999px;
+  opacity: .45;
+  animation: sweep 2.8s ease-in-out infinite;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
 
 /* ribbon */
-.ribbon { ... }
+.ribbon {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background: linear-gradient(120deg, #5b8aff, #76ddff);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.38rem 0.62rem;
+  border-radius: 6px;
+  box-shadow: 0 6px 14px rgba(91,138,255,.35);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
 
-/* Lifetime card — pulsing Limited badge */
-.pricing-card.lifetime { ... }
-.badge-limited { ... }
+/* Lifetime card — pulsing “Limited” badge */
+.pricing-card.lifetime { position: relative; }
+.pricing-card.lifetime .badge-limited {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: linear-gradient(120deg, #f9a23c, #ff6b3d);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 800;
+  padding: .32rem .6rem;
+  border-radius: 999px;
+  letter-spacing: .05em;
+  box-shadow: 0 6px 14px rgba(255,123,61,.35);
+  animation: throb 2.2s ease-in-out infinite;
+}
 
 /* Animations */
-@keyframes spin { ... }
-@keyframes pulse { ... }
-@keyframes sweep { ... }
-@keyframes throb { ... }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 0%,100% { opacity:.18; transform:scale(1);} 50%{opacity:.32; transform:scale(1.03);} }
+@keyframes sweep { 0%{left:-90px; opacity:0;} 20%{opacity:.5;} 50%{left:calc(100% - -20px); opacity:.45;} 80%{opacity:0;} 100%{left:calc(100% + 90px); opacity:0;} }
+@keyframes throb { 0%,100%{ transform:scale(1); box-shadow:0 6px 14px rgba(255,123,61,.35);} 50%{ transform:scale(1.07); box-shadow:0 10px 24px rgba(255,123,61,.45);} }
 
-/* Respect prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) { ... }
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pricing-card.highlight .fx-border,
+  .pricing-card.highlight::after,
+  .pricing-card.highlight::before,
+  .pricing-card.lifetime .badge-limited { animation: none !important; }
+}
+
 
   </style>
 </head>
