@@ -31,13 +31,13 @@
   {"@context":"https://schema.org","@type":"Organization","name":"SignalPilot Labs, Inc.","url":"https://www.signalpilot.io","logo":"https://www.signalpilot.io/assets/signalpilot-logo.svg","sameAs":["https://www.tradingview.com/u/signalpilot/"]}
   </script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Product","name":"SignalPilot Pro","description":"TradingView strategy with automation, risk controls, backtesting, and advanced alerts. Access is invite-only but pricing is transparent.","brand":{"@type":"Organization","name":"SignalPilot Labs, Inc.","url":"https://www.signalpilot.io"},"url":"https://www.signalpilot.io/#pricing","sku":"SignalPilotPro","category":"Trading Software","offers":[{"@type":"Offer","name":"Pro — Monthly","url":"https://www.signalpilot.io/#pricing","price":"79","priceCurrency":"USD","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Pro — Quarterly","url":"https://www.signalpilot.io/#pricing","price":"199","priceCurrency":"USD","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Pro — Yearly","url":"https://www.signalpilot.io/#pricing","price":"499","priceCurrency":"USD","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Pro — Lifetime (limited)","url":"https://www.signalpilot.io/#pricing","price":"899","priceCurrency":"USD","availability":"https://schema.org/LimitedAvailability"}]}
+  {"@context":"https://schema.org","@type":"Product","name":"SignalPilot Pro","description":"TradingView strategy with automation, risk controls, backtesting, and advanced alerts. Access is invite-only but pricing is transparent.","brand":{"@type":"Organization","name":"SignalPilot Labs, Inc.","url":"https://www.signalpilot.io"},"url":"https://www.signalpilot.io/#pricing","sku":"SignalPilotPro","category":"Trading Software","offers":[{"@type":"Offer","name":"Pro — Monthly","url":"https://www.signalpilot.io/#pricing","price":"79","priceCurrency":"USD"},{"@type":"Offer","name":"Pro — Quarterly","url":"https://www.signalpilot.io/#pricing","price":"199","priceCurrency":"USD"},{"@type":"Offer","name":"Pro — Yearly","url":"https://www.signalpilot.io/#pricing","price":"499","priceCurrency":"USD","priceValidUntil":"2026-12-31"},{"@type":"Offer","name":"Pro — Lifetime (limited)","url":"https://www.signalpilot.io/#pricing","price":"899","priceCurrency":"USD","availability":"https://schema.org/LimitedAvailability"}]}
   </script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Is SignalPilot financial advice?","acceptedAnswer":{"@type":"Answer","text":"No. SignalPilot is for educational purposes only. Validate in demo before risking capital."}},
     {"@type":"Question","name":"How do I get access to Pro?","acceptedAnswer":{"@type":"Answer","text":"Request an invite via email or the waitlist form. We onboard in cohorts and share setup steps."}},
-    {"@type":"Question","name":"Which markets are supported?","acceptedAnswer":{"@type":"Answer","text":"Major crypto pairs, forex majors, indices, equities/ETFs, and commodities."}}
+    {"@type":"Question","name":"Do you support crypto payments?","acceptedAnswer":{"@type":"Answer","text":"Yes. BTC and ETH are supported with a 20% discount at checkout. We activate after network confirmation and you can request an invoice via the on‑site form."}}
   ]}
   </script>
 
@@ -49,11 +49,14 @@
       --bg:#05070d; --bg-elev:#0c101b; --bg-soft:#151c2d;
       --border:rgba(102,128,214,.22); --text:#ecf1ff; --muted:#b5c0d8; --muted-soft:#7784a1;
       --brand:#5b8aff; --accent:#76ddff; --success:#3ed598; --warn:#f9a23c;
-      --bitcoin:#f7931a;
       --radius:16px; --maxw:min(1160px,92vw); --focus:#9bb6ff;
       --ring: rgba(118,221,255,.6);
       --aurora1:#5b8aff; --aurora2:#76ddff; --aurora3:#9bb6ff;
-      font-family:"Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+
+      /* payment button palettes */
+      --card-1:#6a5bff; --card-2:#8ea0ff;      /* not ETH-blue */
+      --btc-1:#f7931a; --btc-2:#ffb75e;        /* Bitcoin orange */
+      --eth-1:#627eea; --eth-2:#9aa8ff;        /* optional ETH if you keep it */
     }
     :root[data-theme="light"]{
       color-scheme:light;
@@ -71,7 +74,11 @@
     /* Progress */
     .progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,#76ddff,#5b8aff);z-index:1000;box-shadow:0 0 12px rgba(118,221,255,.6)}
 
-    /* Header / nav */
+    /* Skip link */
+    .skip{position:absolute;left:8px;top:8px;background:var(--brand);color:#fff;padding:.45rem .6rem;border-radius:8px;transform:translateY(-150%);transition:.2s;z-index:1001}
+    .skip:focus{transform:translateY(0)}
+
+    /* Header */
     .page-header{position:sticky;top:0;backdrop-filter:blur(18px);background:color-mix(in srgb,var(--bg) 70%,transparent);border-bottom:1px solid rgba(91,138,255,.12);z-index:20}
     .header-inner{max-width:var(--maxw);margin:0 auto;padding:.75rem 1.25rem;display:flex;align-items:center;gap:1.5rem}
     .brand{display:inline-flex;gap:.6rem;align-items:center;font-weight:700;font-size:1.05rem}
@@ -81,19 +88,10 @@
     .nav-list{list-style:none;margin:0;padding:0;display:flex;gap:.5rem}
     .nav-link{color:var(--muted);font-weight:500;padding:.4rem .75rem;border-radius:999px;transition:background .2s,color .2s}
     .nav-link:hover,.nav-link:focus-visible{color:#fff;background:rgba(91,138,255,.14);outline:none}
+    .primary-btn{background:linear-gradient(120deg,var(--brand),#7b9bff);color:#fff;border-radius:999px;padding:.55rem 1.2rem;font-weight:600;display:inline-flex;gap:.35rem;align-items:center;box-shadow:0 12px 35px rgba(91,138,255,.25)}
+    .secondary-btn{display:inline-flex;gap:.35rem;align-items:center;color:var(--accent);font-weight:500}
+    .primary-btn svg{width:16px;height:16px}
     .theme-toggle{margin-left:.5rem;border:1px solid var(--border);background:var(--bg-elev);color:var(--text);border-radius:10px;padding:.4rem .6rem;cursor:pointer}
-
-    /* Buttons */
-    .btn{display:inline-flex;align-items:center;gap:.35rem;font-weight:600;border-radius:999px;text-decoration:none;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease}
-    .btn:hover{transform:translateY(-1px)}
-    .btn:active{transform:translateY(0)}
-    .btn-lg{padding:.65rem 1.2rem}
-    .btn-sm{padding:.4rem .75rem;font-weight:600}
-    .btn-primary{background:linear-gradient(120deg,var(--brand),#7b9bff);color:#fff;box-shadow:0 12px 35px rgba(91,138,255,.25)}
-    .btn-card{background:linear-gradient(120deg,#39e1a1,#3ed598);color:#0b1a14;box-shadow:0 10px 28px rgba(62,213,152,.25)}
-    .btn-btc{background:rgba(255,255,255,.02);color:var(--bitcoin);border:1px solid color-mix(in srgb,var(--bitcoin) 65%, transparent);box-shadow:none}
-    .btn-btc:hover{background:color-mix(in srgb,var(--bitcoin) 20%, transparent);color:#1b1305}
-    .btn-ghost{background:transparent;color:var(--accent)}
 
     /* Hero — Aurora + grid */
     .hero{position:relative;overflow:hidden;background:var(--bg)}
@@ -103,19 +101,18 @@
         radial-gradient(50% 60% at 20% 15%, color-mix(in srgb, var(--aurora1) 38%, transparent) 0, transparent 62%),
         radial-gradient(50% 50% at 85% 15%, color-mix(in srgb, var(--aurora2) 36%, transparent) 0, transparent 58%),
         radial-gradient(60% 60% at 50% 50%, color-mix(in srgb, var(--aurora3) 28%, transparent) 0, transparent 62%);
-      filter: blur(26px) saturate(120%);
-      animation: aurora 40s linear infinite;
+      filter: blur(26px) saturate(120%); animation: aurora 40s linear infinite;
       opacity:.6; pointer-events:none;
     }
     @keyframes aurora{0%{transform:translate3d(-2%,0,0) rotate(0deg) scale(1)}50%{transform:translate3d(2%,2%,0) rotate(180deg) scale(1.05)}100%{transform:translate3d(-2%,0,0) rotate(360deg) scale(1)}}
-    .hero::after{
-      content:""; position:absolute; inset:0; opacity:.12; pointer-events:none;
+    .hero::after{content:""; position:absolute; inset:0; opacity:.12; pointer-events:none;
       background:
         linear-gradient(transparent 49%, rgba(155,182,255,.35) 50%, transparent 51%) 0 0 / 100% 22px,
         linear-gradient(90deg, transparent 49%, rgba(155,182,255,.25) 50%, transparent 51%) 0 0 / 22px 100%;
     }
     .hero-inner{position:relative;max-width:var(--maxw);margin:0 auto;padding:clamp(3.5rem,10vw,6.5rem) 1.25rem clamp(4rem,12vw,7.5rem);display:grid;gap:clamp(2rem,6vw,3.5rem)}
-    .tag{display:inline-flex;gap:.45rem;align-items:center;padding:.25rem .55rem;border-radius:999px;background:rgba(62,213,152,.18);color:#bdf2de;border:1px solid rgba(62,213,152,.35);font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+    .hero-copy{max-width:640px}
+
     h1,h2,h3{font-weight:700;line-height:1.2;color:#fff;margin:0 0 .75rem}
     :root[data-theme="light"] h1,:root[data-theme="light"] h2,:root[data-theme="light"] h3{color:#0f172a}
     h1{font-size:clamp(2.6rem,6vw,3.8rem);letter-spacing:-.04em}
@@ -123,119 +120,114 @@
     h3{font-size:1.2rem}
     p{margin:0 0 1.1rem;color:var(--muted)}
 
-    /* Gradient headings + signature underline */
-    .h-grad{background:linear-gradient(90deg,#76ddff,#5b8aff,#9bb6ff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 14px rgba(118,221,255,.12);padding-bottom:.2rem}
-    .sig-underline{display:block;height:10px}
-    .sig-underline svg{width:200px;height:10px}
-    .sig-underline path{stroke:rgba(118,221,255,.7);stroke-width:3;fill:none;stroke-linecap:round;stroke-dasharray:180;stroke-dashoffset:180;transition:stroke-dashoffset 1.2s ease}
-    .reveal.in .sig-underline path{stroke-dashoffset:0}
+    /* Gradient heading */
+    .h-grad{background:linear-gradient(90deg,#76ddff,#5b8aff,#9bb6ff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 14px rgba(118,221,255,.12)}
     :root[data-theme="light"] .h-grad{background:linear-gradient(90deg,#375fff,#6a8dff)}
-    :root[data-theme="light"] .sig-underline path{stroke:#2f5bff}
 
-    /* Sections, cards, reveal */
+    /* Sections */
     .content-section{padding:clamp(3.5rem,9vw,5rem) 0;border-top:1px solid rgba(91,138,255,.08);position:relative}
     .section-inner{max-width:var(--maxw);margin:0 auto;padding:0 1.25rem}
     .section-lead{max-width:680px;margin-bottom:clamp(2rem,6vw,3rem)}
-    .content-section.edge-lines::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.10;background-image:repeating-linear-gradient(to right, rgba(155,182,255,.13) 0 1px, transparent 1px 22px),repeating-linear-gradient(to bottom, rgba(155,182,255,.10) 0 1px, transparent 1px 22px);transform:translateY(var(--grid-shift,0));transition:transform .1s linear}
+
+    /* Cards */
     .card-glass{backdrop-filter:blur(8px);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(155,182,255,.16);box-shadow:0 8px 30px rgba(0,0,0,.25)}
     :root[data-theme="light"] .card-glass{background:#fff;border-color:#e6ecf8;box-shadow:0 6px 22px rgba(15,30,60,.08)}
-    .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
-    .reveal.in{opacity:1;transform:translateY(0)}
+
+    /* Ink ripple */
+    .inkable{position:relative;overflow:hidden;--ix:50%;--iy:50%;--iop:0}
+    .inkable::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(180px 180px at var(--ix) var(--iy), rgba(118,221,255,.16), transparent 70%);opacity:var(--iop);transition:opacity .35s ease, transform .35s ease;transform:scale(1.0)}
+    .inkable:hover::after{--iop:1;transform:scale(1.02)}
 
     /* Feature grid */
     .feature-grid{display:grid;gap:1.6rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
     .feature-card{background:linear-gradient(160deg, rgba(12,16,27,.85), rgba(12,16,27,.55));border-radius:var(--radius);padding:1.75rem;border:1px solid rgba(91,138,255,.14);display:grid;gap:.75rem;min-height:240px}
     :root[data-theme="light"] .feature-card{background:#fff;border-color:#e6ecf7}
-    .feature-icon{width:44px;height:44px;border-radius:12px;background:rgba(91,138,255,.16);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(91,138,255,.18)}
-    .feature-icon svg{width:20px;height:20px}
 
-    /* Gallery skeletons */
+    /* Gallery */
     .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
     .skeleton{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    .skeleton::before{
-      content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.05) 100%);background-size:200% 100%;animation:shimmer 1.6s linear infinite}
+    .skeleton::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.05) 100%);background-size:200% 100%;animation:shimmer 1.6s linear infinite}
     :root[data-theme="light"] .skeleton{box-shadow:0 8px 24px rgba(10,20,40,.08)}
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
     .skeleton img{display:block;width:100%;opacity:0;transition:opacity .25s ease}
     .skeleton.done::before{display:none}
     .skeleton.done img{opacity:1}
 
+    /* Counters */
+    .counters{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
+    .counter{border:1px solid rgba(91,138,255,.14);border-radius:14px;padding:1rem 1.2rem;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02))}
+    .counter strong{display:block;font-size:2rem}
+    :root[data-theme="light"] .counter{background:#fff;border-color:#e7ecf7}
+
     /* Pricing */
     .pricing-table{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;align-items:start}
-    .pricing-card{border-radius:var(--radius);padding:2rem 1.75rem;border:1px solid rgba(91,138,255,.14);background:linear-gradient(160deg, rgba(12,16,27,.85), rgba(12,16,27,.55));display:grid;gap:1rem;position:relative;overflow:hidden}
+    .pricing-card{border-radius:var(--radius);padding:2rem 1.75rem;border:1px solid rgba(91,138,255,.14);background:linear-gradient(160deg, rgba(12,16,27,.85), rgba(12,16,27,.55));display:grid;gap:1.2rem;position:relative;overflow:hidden}
     :root[data-theme="light"] .pricing-card{background:#fff;border-color:#e7ecf7}
     .price{font-size:2.35rem;font-weight:700;color:#fff;letter-spacing:-.03em}
     :root[data-theme="light"] .price{color:#0f172a}
     .price span{font-size:1rem;color:var(--muted);font-weight:500}
     .pricing-card ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;color:var(--muted)}
-    .pricing-card .actions{display:flex;flex-wrap:wrap;gap:.6rem}
+    .ribbon{position:absolute;top:10px;right:10px;z-index:3;background:linear-gradient(120deg,#5b8aff,#76ddff);color:#fff;font-size:.72rem;font-weight:800;padding:.38rem .62rem;border-radius:6px;text-transform:uppercase;letter-spacing:.06em}
 
     /* Highlight FX */
     .pricing-card.highlight{border:1px solid rgba(118,221,255,.55);box-shadow:0 0 18px rgba(118,221,255,.25)}
-    .pricing-card.highlight .fx-border{pointer-events:none;position:absolute;inset:-2px;border-radius:inherit;background:conic-gradient(from 0deg,#76ddff,#5b8aff,#7b9bff,#76ddff);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:2px;animation:spin 6s linear infinite;opacity:.55;z-index:1}
-    .pricing-card.highlight::after{content:"";position:absolute;inset:-20%;background:radial-gradient(60% 60% at 50% 50%, rgba(118,221,255,.12), transparent 70%);filter:blur(11px);animation:pulse 3.5s ease-in-out infinite;pointer-events:none}
-    .ribbon{position:absolute;top:10px;right:10px;z-index:3;background:linear-gradient(120deg,#5b8aff,#76ddff);color:#fff;font-size:.72rem;font-weight:800;padding:.38rem .62rem;border-radius:6px;box-shadow:0 6px 14px rgba(91,138,255,.35);text-transform:uppercase;letter-spacing:.06em}
-    .pricing-card.highlight>*:not(.fx-border):not(.ribbon){position:relative;z-index:2}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    @keyframes pulse{0%,100%{opacity:.18;transform:scale(1)}50%{opacity:.32;transform:scale(1.03)}}
+    .pricing-card.lifetime .badge-limited{position:absolute;top:10px;left:10px;background:linear-gradient(120deg,#f9a23c,#ff6b3d);color:#fff;font-size:.7rem;font-weight:800;padding:.32rem .6rem;border-radius:999px;letter-spacing:.05em;box-shadow:0 6px 14px rgba(255,123,61,.35);}
 
-    /* Marquee logos (mask) */
+    /* Buttons (card / BTC / ETH) */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border-radius:999px;padding:.65rem 1.1rem;font-weight:700;text-decoration:none;border:none;cursor:pointer}
+    .btn-card{color:#fff;background:linear-gradient(120deg,var(--card-1),var(--card-2));box-shadow:0 10px 30px rgba(106,91,255,.28)}
+    .btn-btc{color:#1b1917;background:linear-gradient(120deg,var(--btc-1),var(--btc-2));box-shadow:0 10px 30px rgba(247,147,26,.28)}
+    .btn-eth{color:#fff;background:linear-gradient(120deg,var(--eth-1),var(--eth-2));box-shadow:0 10px 30px rgba(98,126,234,.28)}
+    .btn-small{padding:.45rem .75rem;font-weight:600;border-radius:10px}
+
+    /* Marquee (mask-based logos) */
     .logo-mask{display:inline-block;width:48px;height:48px;background:#fff;-webkit-mask:var(--logo) no-repeat center/contain;mask:var(--logo) no-repeat center/contain;transition:transform .25s ease,box-shadow .25s ease;flex:0 0 auto;box-shadow:0 0 12px rgba(118,221,255,.3)}
-    .logo-mask:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 20px rgba(118,221,255,.55),0 0 40px rgba(118,221,255,.35)}
     .marquee{overflow:hidden;border:1px solid var(--border);border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.02))}
     .marquee-track{display:flex;align-items:center;gap:2.5rem;padding:1rem 1.25rem;width:max-content;animation:scrollX 24s linear infinite}
     @keyframes scrollX{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-    :root[data-theme="light"] .marquee{background:linear-gradient(90deg, rgba(0,0,0,.04), rgba(0,0,0,.02));border-color:#e6ebf7}
-    :root[data-theme="light"] .logo-mask{background:#243153;box-shadow:none}
 
-    /* Separators */
-    .sep{height:40px;margin:-20px 0;background:linear-gradient(180deg, rgba(155,182,255,.10), rgba(155,182,255,0) 70%);mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><polygon points="0,10 100,0 100,10"/></svg>') no-repeat 0 0 / 100% 100%;-webkit-mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><polygon points="0,10 100,0 100,10"/></svg>') no-repeat 0 0 / 100% 100%;opacity:.6}
-
-    /* Footer, utilities */
+    /* Footer & utilities */
     footer{margin-top:auto;border-top:1px solid rgba(91,138,255,.08);background:rgba(5,7,13,.95);padding:2.5rem 0 3rem}
     :root[data-theme="light"] footer{background:#f7f9fc;border-color:#e7ecf7}
     .footer-inner{max-width:var(--maxw);margin:0 auto;padding:0 1.25rem;display:grid;gap:2rem}
     .footer-columns{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
-    .footer-columns ul{list-style:none!important;margin:0!important;padding:0!important}
+    .footer-columns ul{list-style:none;margin:0;padding:0}
     .footer-bottom{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:space-between;color:var(--muted-soft);font-size:.85rem}
     .topbtn{position:fixed;right:16px;bottom:22px;z-index:999;display:none;padding:.6rem .8rem;border-radius:999px;background:rgba(91,138,255,.18);color:#fff;border:1px solid rgba(155,182,255,.35);backdrop-filter:blur(8px)}
-    .topbtn.show{display:inline-flex;align-items:center;gap:.4rem}
+    .topbtn.show{display:inline-flex}
 
-    /* Mobile nav */
-    .menu-toggle{display:none;background:var(--bg-elev);border:1px solid var(--border);border-radius:12px;padding:.35rem .55rem;color:var(--muted)}
+    /* Modal (pre-checkout) */
+    dialog.checkout{border:none;border-radius:16px;max-width:560px;width:92vw;padding:1.2rem;background:var(--bg-elev);color:var(--text);box-shadow:0 20px 60px rgba(0,0,0,.45);border:1px solid var(--border)}
+    dialog.checkout::backdrop{background:rgba(0,0,0,.6)}
+    .modal-grid{display:grid;gap:.75rem}
+    .modal-grid label{font-size:.9rem;color:var(--muted)}
+    .modal-grid input{width:100%;padding:.62rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)}
+    .modal-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
+    .pill{display:inline-flex;align-items:center;gap:.35rem;border-radius:999px;padding:.18rem .5rem;font-size:.78rem;border:1px solid var(--border);color:var(--muted)}
+
+    /* Crypto box */
+    .copy-box{display:flex;gap:.5rem;align-items:center;margin:.5rem 0}
+    .copy-box code{background:var(--bg-soft);padding:.45rem .6rem;border-radius:8px;border:1px solid var(--border)}
+    .fine{color:var(--muted);font-size:.9rem}
+    .badge-save{display:inline-flex;align-items:center;gap:.35rem;background:rgba(62,213,152,.14);border:1px solid rgba(62,213,152,.35);color:#bdf2de;border-radius:999px;padding:.18rem .5rem;font-weight:800;font-size:.78rem}
+    .select{width:100%;padding:.62rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)}
+    .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--bg-elev);color:var(--text);border:1px solid var(--border);padding:.5rem .8rem;border-radius:999px;display:none}
+    .sep{height:40px;margin:-20px 0;background:linear-gradient(180deg, rgba(155,182,255,.10), rgba(155,182,255,0) 70%)}
     @media (max-width:860px){
       nav{position:fixed;inset:70px 1.25rem auto;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;transform-origin:top right;transform:scale(.98);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 22px 55px rgba(5,15,35,.45)}
       nav.open{opacity:1;transform:scale(1);pointer-events:auto}
       .nav-list{flex-direction:column}
-      .menu-toggle{display:inline-flex;align-items:center;justify-content:center;margin-left:auto}
+      .menu-toggle{display:inline-flex;align-items:center;justify-content:center;margin-left:auto;background:var(--bg-elev);border:1px solid var(--border);border-radius:12px;padding:.35rem .55rem;color:var(--muted)}
     }
-
-    /* Parallax orbs + TOC and ring */
-    .parallax-wrap{position:relative}
-    .orb{position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(91,138,255,.35), rgba(91,138,255,0) 70%);filter:blur(8px);opacity:.5;pointer-events:none;transition:transform .12s linear}
-    .orb.alt{background:radial-gradient(circle at 30% 30%, rgba(118,221,255,.30), rgba(118,221,255,0) 70%)}
-    .cursor-ring{position:fixed;left:0;top:0;width:34px;height:34px;border:2px solid var(--ring);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;mix-blend-mode:screen;z-index:10000;opacity:0;transition:opacity .2s ease}
-    :root[data-theme="light"] .cursor-ring{mix-blend-mode:multiply}
-    .sectoc{position:fixed;right:16px;top:30%;z-index:30;display:none;flex-direction:column;gap:.4rem}
-    .sectoc a{display:flex;align-items:center;gap:.5rem;padding:.35rem .55rem;border-radius:999px;background:rgba(12,16,27,.65);border:1px solid var(--border);color:var(--muted);font-size:.82rem;text-decoration:none;backdrop-filter:blur(8px)}
-    .sectoc a.active{color:#fff;background:linear-gradient(120deg,var(--brand),#7b9bff)}
-    :root[data-theme="light"] .sectoc a{background:#fff}
-    @media (min-width:1000px){.sectoc{display:flex}}
+    @media (prefers-reduced-motion:reduce){
+      .marquee-track{animation:none}
+    }
   </style>
 </head>
 <body>
-  <!-- progress + section toc + cursor ring -->
+  <a href="#product" class="skip">Skip to product</a>
   <div class="progress" id="progress"></div>
-  <nav class="sectoc" id="sectoc" aria-label="On-page navigation">
-    <a href="#product">Product</a>
-    <a href="#risk">Risk</a>
-    <a href="#markets">Markets</a>
-    <a href="#docs">Docs</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#company">Company</a>
-    <a href="#cta">Start</a>
-  </nav>
-  <div id="cursorRing" class="cursor-ring" aria-hidden="true"></div>
 
   <header class="page-header">
     <div class="header-inner">
@@ -251,8 +243,8 @@
           <li><a class="nav-link" href="#company">Company</a></li>
         </ul>
       </nav>
-      <a class="btn btn-lg btn-primary" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite">
-        Request Pro access
+      <a class="primary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite">
+        <span>Request Pro access</span>
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -260,335 +252,344 @@
 
   <main>
     <!-- HERO -->
-    <section class="hero edge-lines" id="hero">
+    <section class="hero">
       <div class="hero-inner">
-        <div class="reveal">
-          <div class="tag">Invite-only · Pro traders</div>
+        <div class="hero-copy">
+          <div class="badge-save">Invite‑only · Pro traders</div>
           <h1 class="h-grad">Cut through noise. Ship clear signals.</h1>
-          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p class="lead">SignalPilot Pro is a full TradingView strategy that filters false setups, automates risk, and keeps traders accountable.</p>
           <p style="color:var(--muted-soft);margin-top:-0.4rem">Filter every move with configurable modules, confidence multipliers, and alerts tuned to your playbook.</p>
           <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-            <a class="btn btn-lg btn-primary" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite">Request Invite</a>
-            <a class="btn btn-lg btn-ghost" href="#product">Explore product</a>
+            <a class="primary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite" rel="noopener">Request Invite</a>
+            <a class="secondary-btn" href="#product">Explore product</a>
           </div>
         </div>
 
-        <!-- counters -->
-        <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem">
-          <div class="card-glass" style="border-radius:14px;padding:1rem 1.2rem"><strong style="display:block;font-size:2rem" data-count-to="9">0</strong><span>Strategy modules</span></div>
-          <div class="card-glass" style="border-radius:14px;padding:1rem 1.2rem"><strong style="display:block;font-size:2rem" data-count-to="45">0</strong><span>Markets supported</span></div>
-          <div class="card-glass" style="border-radius:14px;padding:1rem 1.2rem"><strong style="display:block;font-size:2rem" data-count-to="3">0</strong><span>False setups reduced ×</span></div>
+        <!-- quick counters -->
+        <div class="counters">
+          <div class="counter card-glass inkable"><strong>9</strong><span>Strategy modules</span></div>
+          <div class="counter card-glass inkable"><strong>45+</strong><span>Markets supported</span></div>
+          <div class="counter card-glass inkable"><strong>3×</strong><span>Fewer false setups</span></div>
         </div>
       </div>
     </section>
 
     <!-- PRODUCT -->
-    <section class="content-section edge-lines" id="product">
+    <section class="content-section" id="product">
       <div class="section-inner">
-        <div class="section-lead reveal">
+        <div class="section-lead">
           <h2 class="h-grad">Strategy modules built for real traders</h2>
-          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
-          <p>SignalPilot’s TradingView strategy is packaged into modular blocks so you can enable only the logic that fits your playbook: automation, position sizing, and broker-ready alerts.</p>
+          <p>SignalPilot’s TradingView strategy is modular so you can enable only the logic that fits your playbook: automation, position sizing, and broker‑ready alerts.</p>
         </div>
 
-        <div class="feature-grid reveal">
-          <article class="feature-card card-glass">
+        <div class="feature-grid">
+          <article class="feature-card card-glass inkable">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 18V6l4 3 4-3 4 3 4-3v12" stroke-linejoin="round"/></svg></div>
             <h3>Trend foundation</h3>
-            <p>Layer moving average clouds, structure swings, and volume bias to pre-filter bad markets before a setup even forms.</p>
-            <ul><li>Multi-timeframe bias overlay with optional Heikin Ashi smoothing.</li><li>Adaptive higher-high/low tracking to avoid chop.</li><li>Session filters keep you aligned to liquid trading hours.</li></ul>
+            <p>Layer moving average clouds, structure swings, and volume bias to pre‑filter bad markets before a setup even forms.</p>
+            <ul><li>Multi‑timeframe bias overlay with optional Heikin Ashi smoothing.</li><li>Adaptive higher‑high/low tracking to avoid chop.</li><li>Session filters keep you aligned to liquid trading hours.</li></ul>
           </article>
 
-          <article class="feature-card card-glass">
+          <article class="feature-card card-glass inkable">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12h16"/><path d="M8 7v10m8-10v10"/><circle cx="12" cy="12" r="3.5"/></svg></div>
             <h3>Signal sculpting</h3>
             <p>Combine oscillators, order flow zones, and candle pattern scoring to confirm when the move is worth taking.</p>
-            <ul><li>Weighted confluence scoring exposes confidence at a glance.</li><li>False break and liquidity sweep filters keep you patient.</li><li>Alert templates auto-name entries for TradingView pushes.</li></ul>
+            <ul><li>Weighted confluence scoring exposes confidence at a glance.</li><li>False break and liquidity sweep filters keep you patient.</li><li>Alert templates auto‑name entries for TradingView pushes.</li></ul>
           </article>
 
-          <article class="feature-card card-glass">
+          <article class="feature-card card-glass inkable">
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 17h12l-2 4H8l-2-4Z"/><path d="M8 13c0-2.21 1.79-4 4-4s4 1.79 4 4"/><path d="M5 5h14v4H5z"/></svg></div>
             <h3>Execution &amp; management</h3>
             <p>Automated entries, position sizing, and broker alerts adapt to volatility so risk stays consistent.</p>
-            <ul><li>Dynamic stop placement using ATR and market structure.</li><li>Partial take-profit ladders with time-in-trade guardrails.</li><li>Webhook-ready payloads for bots and copy-trading desks.</li></ul>
+            <ul><li>Dynamic stop placement using ATR and market structure.</li><li>Partial take‑profit ladders with time‑in‑trade guardrails.</li><li>Webhook‑ready payloads for bots and copy‑trading desks.</li></ul>
           </article>
         </div>
 
-        <!-- gallery -->
-        <div class="gallery reveal" style="margin-top:1.2rem">
-          <div class="skeleton"><img data-skel src="/assets/sp-screen-1-1200.webp" srcset="/assets/sp-screen-1-800.webp 800w, /assets/sp-screen-1-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw" loading="lazy" alt="Overlays & bias"></div>
-          <div class="skeleton"><img data-skel src="/assets/sp-screen-2-1200.webp" srcset="/assets/sp-screen-2-800.webp 800w, /assets/sp-screen-2-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw" loading="lazy" alt="Confidence multipliers"></div>
-          <div class="skeleton"><img data-skel src="/assets/sp-screen-3-1200.webp" srcset="/assets/sp-screen-3-800.webp 800w, /assets/sp-screen-3-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw" loading="lazy" alt="Backtesting & risk"></div>
+        <!-- Screens (lazy) -->
+        <div class="gallery" style="margin-top:1.2rem">
+          <div class="skeleton"><img data-skel src="/assets/sp-screen-1-1200.webp" loading="lazy" alt="Overlays & bias"></div>
+          <div class="skeleton"><img data-skel src="/assets/sp-screen-2-1200.webp" loading="lazy" alt="Confidence multipliers"></div>
+          <div class="skeleton"><img data-skel src="/assets/sp-screen-3-1200.webp" loading="lazy" alt="Backtesting & risk"></div>
         </div>
       </div>
     </section>
 
     <div class="sep"></div>
 
-    <!-- RISK -->
-    <section class="content-section edge-lines" id="risk">
-      <div class="section-inner">
-        <div class="section-lead reveal">
-          <h2 class="h-grad">Risk management that respects your playbook</h2>
-          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
-          <p>Run years of historical data directly in TradingView. Size positions automatically, quantify drawdowns, and test every toggle before risking capital.</p>
-        </div>
-
-        <div class="panel card-glass reveal">
-          <div style="display:grid;gap:1.8rem;margin-top:.8rem">
-            <div style="display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center"><div class="feature-icon" aria-hidden="true">1</div><div><h3 style="margin:.2rem 0">Configure risk per market</h3><p class="muted">Define max allocation, per-trade loss, and session windows. Multipliers dynamically scale exposure by confluence.</p></div></div>
-            <div style="display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center"><div class="feature-icon" aria-hidden="true">2</div><div><h3 style="margin:.2rem 0">Backtest with transparency</h3><p class="muted">Review equity curves, drawdown tables, and tagged screenshots that highlight filtered trades.</p></div></div>
-            <div style="display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center"><div class="feature-icon" aria-hidden="true">3</div><div><h3 style="margin:.2rem 0">Refine with multipliers</h3><p class="muted">Weight each module by conviction to control aggression during different market regimes.</p></div></div>
-            <div style="display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center"><div class="feature-icon" aria-hidden="true">4</div><div><h3 style="margin:.2rem 0">Deploy alerts</h3><p class="muted">Send webhook payloads to Discord, Telegram, or your bot the moment a trade qualifies.</p></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- MARKETS -->
-    <section class="content-section edge-lines" id="markets">
+    <section class="content-section" id="markets">
       <div class="section-inner">
-        <div class="section-lead reveal">
+        <div class="section-lead">
           <h2 class="h-grad">Trade the markets you care about</h2>
-          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p>Multipliers adapt the strategy to market conditions — tightening signals in volatility and opening the throttle when momentum is on your side.</p>
         </div>
-        <div class="feature-grid reveal">
-          <div class="feature-card card-glass"><h3>Crypto</h3><p>Majors &amp; alt rotations with volatility-aware scaling.</p></div>
-          <div class="feature-card card-glass"><h3>Forex &amp; Indices</h3><p>Session filters and spread protection.</p></div>
-          <div class="feature-card card-glass"><h3>Equities &amp; ETFs</h3><p>Earnings blackout and liquidity checks.</p></div>
+        <div class="feature-grid">
+          <div class="feature-card card-glass inkable"><h3>Crypto</h3><p>Majors &amp; alts with volatility‑aware scaling.</p></div>
+          <div class="feature-card card-glass inkable"><h3>FX &amp; Indices</h3><p>Session filters and spread protection for liquid hours.</p></div>
+          <div class="feature-card card-glass inkable"><h3>Equities &amp; ETFs</h3><p>Earnings blackout and liquidity checks baked in.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- MARQUEE -->
-    <section class="content-section edge-lines">
+    <!-- LOGO MARQUEE -->
+    <section class="content-section">
       <div class="section-inner">
-        <div class="section-lead reveal">
+        <div class="section-lead">
           <h2 class="h-grad">Works with your tooling</h2>
-          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p>Route alerts where your team already lives.</p>
         </div>
-        <div class="marquee reveal">
+        <div class="marquee">
           <div class="marquee-track">
-            <span class="logo-mask" style="--logo: url('/assets/discord-icon-svgrepo-com.svg');" aria-label="Discord"></span>
-            <span class="logo-mask" style="--logo: url('/assets/telegram-svgrepo-com.svg?v=2');" aria-label="Telegram"></span>
-            <span class="logo-mask" style="--logo: url('/assets/Tradingview--Streamline-Simple-Icons.svg');" aria-label="TradingView"></span>
-            <span class="logo-mask" style="--logo: url('/assets/slack-svgrepo-com.svg');" aria-label="Slack"></span>
-            <span class="logo-mask" style="--logo: url('/assets/aws-svgrepo-com.svg');" aria-label="AWS"></span>
-            <span class="logo-mask" style="--logo: url('/assets/icons8-github.svg');" aria-label="GitHub"></span>
+            <span class="logo-mask" style="--logo:url('/assets/discord-icon-svgrepo-com.svg')"></span>
+            <span class="logo-mask" style="--logo:url('/assets/telegram-svgrepo-com.svg?v=2')"></span>
+            <span class="logo-mask" style="--logo:url('/assets/Tradingview--Streamline-Simple-Icons.svg')"></span>
+            <span class="logo-mask" style="--logo:url('/assets/slack-svgrepo-com.svg')"></span>
+            <span class="logo-mask" style="--logo:url('/assets/aws-svgrepo-com.svg')"></span>
+            <span class="logo-mask" style="--logo:url('/assets/icons8-github.svg')"></span>
 
-            <!-- seamless loop -->
-            <span class="logo-mask" style="--logo: url('/assets/discord-icon-svgrepo-com.svg');" aria-hidden="true"></span>
-            <span class="logo-mask" style="--logo: url('/assets/telegram-svgrepo-com.svg?v=2');" aria-hidden="true"></span>
-            <span class="logo-mask" style="--logo: url('/assets/Tradingview--Streamline-Simple-Icons.svg');" aria-hidden="true"></span>
-            <span class="logo-mask" style="--logo: url('/assets/slack-svgrepo-com.svg');" aria-hidden="true"></span>
-            <span class="logo-mask" style="--logo: url('/assets/aws-svgrepo-com.svg');" aria-hidden="true"></span>
-            <span class="logo-mask" style="--logo: url('/assets/icons8-github.svg');" aria-hidden="true"></span>
+            <!-- repeat for loop -->
+            <span class="logo-mask" style="--logo:url('/assets/discord-icon-svgrepo-com.svg')"></span>
+            <span class="logo-mask" style="--logo:url('/assets/telegram-svgrepo-com.svg?v=2')"></span>
+            <span class="logo-mask" style="--logo:url('/assets/Tradingview--Streamline-Simple-Icons.svg')"></span>
+            <span class="logo-mask" style="--logo:url('/assets/slack-svgrepo-com.svg')"></span>
+            <span class="logo-mask" style="--logo:url('/assets/aws-svgrepo-com.svg')"></span>
+            <span class="logo-mask" style="--logo:url('/assets/icons8-github.svg')"></span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCS -->
+    <section class="content-section" id="docs">
+      <div class="section-inner">
+        <div class="section-lead">
+          <h2 class="h-grad">Documentation to move from charts to execution</h2>
+          <p>Connect TradingView, tune parameters, and automate alerts with your brokerage or community bots.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card card-glass inkable"><h3>Quickstart</h3><p>Install, apply, and sync settings across layouts.</p></article>
+          <article class="feature-card card-glass inkable"><h3>Parameter reference</h3><p>Suggested presets for scalpers, swing traders, and trend followers.</p></article>
+          <article class="feature-card card-glass inkable"><h3>Automation playbook</h3><p>Route alerts to Discord, Telegram, or broker APIs.</p></article>
         </div>
       </div>
     </section>
 
     <!-- PRICING -->
-    <section class="content-section edge-lines" id="pricing">
-      <div class="section-inner parallax-wrap">
-        <span class="orb" style="top:-60px; left:-60px"></span>
-        <span class="orb alt" style="bottom:-40px; right:-40px"></span>
-
-        <div class="section-lead reveal">
+    <section class="content-section" id="pricing">
+      <div class="section-inner">
+        <div class="section-lead">
           <h2 class="h-grad">SignalPilot Pro — choose your plan</h2>
-          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
-          <p>Access is invite-only. Pricing is transparent — request your invite to get started.</p>
+          <p>Access is invite‑only. Pricing is transparent — request your invite to get started.</p>
         </div>
 
-        <div class="pricing-table reveal">
+        <div class="pricing-table">
           <!-- Monthly -->
-          <article class="pricing-card card-glass">
+          <article class="pricing-card card-glass inkable">
             <div><h3>Monthly</h3><p class="price">$79 <span>/month</span></p></div>
-            <p>Great for active traders who want to try Pro month-to-month.</p>
+            <p>Great for active traders who want to try Pro month‑to‑month.</p>
             <ul><li>All Pro modules & automation</li><li>Advanced alerts & webhooks</li><li>Backtesting & risk controls</li></ul>
-            <div class="actions">
-              <a class="btn btn-sm btn-card" data-checkout="monthly">Pay with card</a>
-              <a class="btn btn-sm btn-btc" data-btc="monthly">Pay with Bitcoin</a>
-              <a class="btn btn-sm btn-primary" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Monthly">Request Invite</a>
+            <div class="modal-actions">
+              <button class="btn btn-card" data-checkout-card data-plan="Monthly" data-price="79"
+                      data-url="REPLACE_STRIPE_LINK_MONTHLY">Pay with card</button>
+              <button class="btn btn-btc" data-open-crypto data-plan="Monthly">Pay with Bitcoin</button>
             </div>
           </article>
 
           <!-- Quarterly -->
-          <article class="pricing-card card-glass">
+          <article class="pricing-card card-glass inkable">
             <div><h3>Quarterly</h3><p class="price">$199 <span>/3 months</span></p></div>
             <p>Better value for traders who commit to a quarter.</p>
             <ul><li>All Pro modules & automation</li><li>Advanced alerts & webhooks</li><li>Backtesting & risk controls</li><li>Save vs monthly</li></ul>
-            <div class="actions">
-              <a class="btn btn-sm btn-card" data-checkout="quarterly">Pay with card</a>
-              <a class="btn btn-sm btn-btc" data-btc="quarterly">Pay with Bitcoin</a>
-              <a class="btn btn-sm btn-primary" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Quarterly">Request Invite</a>
+            <div class="modal-actions">
+              <button class="btn btn-card" data-checkout-card data-plan="Quarterly" data-price="199"
+                      data-url="REPLACE_STRIPE_LINK_QUARTERLY">Pay with card</button>
+              <button class="btn btn-btc" data-open-crypto data-plan="Quarterly">Pay with Bitcoin</button>
             </div>
           </article>
 
-          <!-- Yearly (highlighted) -->
-          <article class="pricing-card highlight card-glass">
-            <span class="fx-border"></span>
+          <!-- Yearly (highlight) -->
+          <article class="pricing-card highlight card-glass inkable">
             <div class="ribbon">Best Value</div>
             <div><h3>Yearly</h3><p class="price">$499 <span>/year</span></p></div>
             <p>Best value for serious traders — one full year of SignalPilot Pro.</p>
             <ul><li>All Pro modules & automation</li><li>Advanced alerts & webhooks</li><li>Backtesting & risk controls</li><li>Priority support</li><li>Save big vs monthly</li></ul>
-            <div class="actions">
-              <a class="btn btn-sm btn-card" data-checkout="yearly">Pay with card</a>
-              <a class="btn btn-sm btn-btc" data-btc="yearly">Pay with Bitcoin</a>
-              <a class="btn btn-sm btn-primary" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Yearly">Request Invite</a>
+            <div class="modal-actions">
+              <button class="btn btn-card" data-checkout-card data-plan="Yearly" data-price="499"
+                      data-url="REPLACE_STRIPE_LINK_YEARLY">Pay with card</button>
+              <button class="btn btn-btc" data-open-crypto data-plan="Yearly">Pay with Bitcoin</button>
             </div>
           </article>
 
           <!-- Lifetime -->
-          <article class="pricing-card card-glass">
-            <div style="position:absolute;top:10px;left:10px;background:linear-gradient(120deg,#f9a23c,#ff6b3d);color:#fff;font-size:.7rem;font-weight:800;padding:.32rem .6rem;border-radius:999px;letter-spacing:.05em">Limited</div>
-            <div><h3>Lifetime (limited)</h3><p class="price">$899 <span>one-time</span></p></div>
-            <p>Exclusive one-time payment for lifetime access. Limited availability.</p>
+          <article class="pricing-card lifetime card-glass inkable">
+            <div class="badge-limited">Limited</div>
+            <div><h3>Lifetime (limited)</h3><p class="price">$899 <span>one‑time</span></p></div>
+            <p>Exclusive one‑time payment for lifetime access. Limited availability.</p>
             <ul><li>Permanent Pro access</li><li>All future updates included</li><li>Backtesting, risk, automation</li><li>Limited availability</li></ul>
-            <div class="actions">
-              <a class="btn btn-sm btn-card" data-checkout="lifetime">Pay with card</a>
-              <a class="btn btn-sm btn-btc" data-btc="lifetime">Pay with Bitcoin</a>
-              <a class="btn btn-sm btn-primary" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Lifetime">Request Invite</a>
+            <div class="modal-actions">
+              <button class="btn btn-card" data-checkout-card data-plan="Lifetime" data-price="899"
+                      data-url="REPLACE_STRIPE_LINK_LIFETIME">Pay with card</button>
+              <button class="btn btn-btc" data-open-crypto data-plan="Lifetime">Pay with Bitcoin</button>
             </div>
           </article>
         </div>
 
-        <!-- Pay with crypto (invoice + direct addresses) -->
-        <details class="card-glass reveal" style="margin-top:1rem;padding:1rem;border-radius:12px">
-          <summary style="cursor:pointer;font-weight:700;display:flex;align-items:center;gap:.5rem">
-            Pay with crypto <span style="font-weight:800;color:#bdf2de;background:rgba(62,213,152,.18);border:1px solid rgba(62,213,152,.35);padding:.12rem .45rem;border-radius:999px">save ~12%</span>
-          </summary>
+        <!-- Crypto checkout (20% off) -->
+        <div class="card-glass inkable" style="margin-top:1.5rem;padding:1rem;border-radius:14px">
+          <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+            <strong>Pay with crypto</strong> <span class="badge-save">save 20%</span>
+          </div>
+          <p class="fine" style="margin:.4rem 0 1rem">Choose a plan & coin, then request a crypto invoice (you’ll receive exact amount & memo). Or send directly to a wallet below and email <a href="mailto:support@signalpilot.io">support@signalpilot.io</a> with your <b>tx id + plan + TradingView username</b> for activation.</p>
 
-          <div style="display:grid;gap:.75rem;margin-top:.8rem">
-            <div style="display:grid;gap:.6rem;grid-template-columns:1fr 1fr">
-              <label>Plan
-                <select id="cryptoPlan" style="width:100%;padding:.6rem;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
-                  <option value="monthly" data-price="79">$79 /mo — crypto ≈ $69.52</option>
-                  <option value="quarterly" data-price="199">$199 /quarter — crypto ≈ $175.12</option>
-                  <option value="yearly" data-price="499" selected>$499 /yr — crypto ≈ $439.12</option>
-                  <option value="lifetime" data-price="899">$899 one‑time — crypto ≈ $791.12</option>
-                </select>
-              </label>
-              <label>Coin
-                <select id="cryptoCoin" style="width:100%;padding:.6rem;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
-                  <option value="BTC" selected>BTC</option>
-                  <option value="ETH">ETH</option>
-                </select>
-              </label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;max-width:880px">
+            <label>Plan
+              <select id="planSel" class="select">
+                <option value="Monthly" data-usd="79">Monthly — $79 → crypto $63.20</option>
+                <option value="Quarterly" data-usd="199">Quarterly — $199 → crypto $159.20</option>
+                <option value="Yearly" data-usd="499" selected>Yearly — $499 → crypto $399.20</option>
+                <option value="Lifetime" data-usd="899">Lifetime — $899 → crypto $719.20</option>
+              </select>
+            </label>
+            <label>Coin
+              <select id="coinSel" class="select">
+                <option>BTC</option>
+                <option>ETH</option>
+              </select>
+            </label>
+
+            <div style="grid-column:1/-1">
+              <form id="cryptoInvoice" class="modal-grid" action="https://formspree.io/f/REPLACE_FORMSPREE" method="POST">
+                <input type="hidden" name="_subject" value="SignalPilot Pro – Crypto invoice request">
+                <input type="hidden" name="plan" id="ciPlan" value="Yearly">
+                <input type="hidden" name="coin" id="ciCoin" value="BTC">
+                <label>TradingView username
+                  <input name="tradingview" id="ciTv" placeholder="@your_tradingview" required>
+                </label>
+                <label>Email
+                  <input type="email" name="email" id="ciEmail" placeholder="you@example.com" required>
+                </label>
+                <button class="btn btn-btc" type="submit" style="width:max-content">Request crypto invoice</button>
+              </form>
             </div>
 
-            <button id="requestInvoice" class="btn btn-lg btn-primary" style="width:max-content">Request crypto invoice</button>
-
-            <div class="card-glass" style="padding:1rem;border-radius:10px;display:grid;gap:.6rem">
-              <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
-                <span style="min-width:44px;opacity:.8">ETH</span>
-                <input id="ethAddr" value="0xcFf999901af3360576BA4Fa9750340C3f26504A5" readonly style="flex:1;padding:.5rem .65rem;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
-                <button class="btn btn-sm btn-card" data-copy="#ethAddr">Copy</button>
+            <div style="grid-column:1/-1;display:grid;gap:.6rem;margin-top:.6rem">
+              <div><strong>Prefer to send directly?</strong></div>
+              <div class="copy-box">
+                <span class="pill">ETH</span>
+                <code id="ethAddr">0xcFf999901af3360576BA4Fa9750340C3f26504A5</code>
+                <button class="btn-small btn-card" type="button" data-copy="#ethAddr">Copy</button>
               </div>
-              <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
-                <span style="min-width:44px;opacity:.8">BTC</span>
-                <input id="btcAddr" value="1DdTKYzeg9iR8GwgMZmoBje5ki5FhHwGVm" readonly style="flex:1;padding:.5rem .65rem;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
-                <button class="btn btn-sm btn-btc" data-copy="#btcAddr">Copy</button>
+              <div class="copy-box">
+                <span class="pill">BTC</span>
+                <code id="btcAddr">1DdTKYzeg9iR8GwgMZmoBje5ki5FhHwGVm</code>
+                <button class="btn-small btn-btc" type="button" data-copy="#btcAddr">Copy</button>
               </div>
-              <p class="muted" style="margin:0">Manual sends are processed after network confirmations. If you’re using a centralized exchange without memos, the email with <em>tx id + plan</em> is required to match payment to your account.</p>
+              <p class="fine">We activate after network confirmations. If you use a centralized exchange that requires memos/notes, wait for our invoice rather than sending directly.</p>
+              <p class="fine"><b>Refunds (trust & safety):</b> first‑time purchases have a 7‑day satisfaction guarantee. Card refunds are handled by Stripe. Crypto refunds are returned in the same asset (minus network fees) to the sending address after you revoke access. Activation SLA: same business day (max 24h).</p>
             </div>
           </div>
-        </details>
-
-        <!-- Quick FAQ -->
-        <div class="reveal" style="margin-top:1.2rem;display:grid;gap:.6rem">
-          <details class="card-glass" style="padding:.8rem 1rem;border-radius:12px">
-            <summary><strong>Is this financial advice?</strong></summary>
-            <p style="color:var(--muted);margin-top:.6rem">No. SignalPilot is educational. Validate in demo before risking capital.</p>
-          </details>
-          <details class="card-glass" style="padding:.8rem 1rem;border-radius:12px">
-            <summary><strong>How do I get access?</strong></summary>
-            <p style="color:var(--muted);margin-top:.6rem">Request an invite via email or the form below. We onboard in cohorts and share setup steps.</p>
-          </details>
         </div>
 
-        <!-- Waitlist form (works with Formspree or falls back to email) -->
-        <form id="waitlistForm" class="card-glass reveal" style="margin-top:1rem;padding:1rem;border-radius:12px">
-          <div style="display:grid;gap:.6rem;grid-template-columns:1fr 1fr;max-width:720px">
+        <!-- Waitlist / contact -->
+        <form action="https://formspree.io/f/REPLACE_FORMSPREE" method="POST" class="card-glass inkable" style="margin-top:1rem;padding:1rem;border-radius:12px;max-width:880px">
+          <div style="display:grid;gap:.6rem;grid-template-columns:1fr 1fr">
             <label>Name
-              <input name="name" required style="width:100%;padding:.6rem;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+              <input name="name" required class="select">
             </label>
             <label>Email
-              <input type="email" name="email" required style="width:100%;padding:.6rem;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+              <input type="email" name="email" required class="select">
             </label>
-            <label style="grid-column:span 2">Trading focus (optional)
-              <input name="focus" placeholder="e.g., BTC, FX NY session, swing" style="width:100%;padding:.6rem;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+            <label style="grid-column:1/-1">Trading focus (optional)
+              <input name="focus" placeholder="e.g., BTC, FX NY session, swing" class="select">
             </label>
-            <input type="text" name="_gotcha" style="display:none">
           </div>
-          <div style="display:flex;align-items:center;gap:.75rem;margin-top:.8rem">
-            <button class="btn btn-lg btn-primary" type="submit">Join the waitlist</button>
-            <span id="formMsg" style="color:var(--muted)"></span>
-          </div>
+          <input type="hidden" name="_subject" value="SignalPilot Pro – Waitlist">
+          <button class="btn btn-card" style="margin-top:.8rem">Join the waitlist</button>
         </form>
 
-        <p style="margin-top:1rem;color:var(--muted-soft);font-size:.9rem">Educational use only. Past performance is not indicative of future results.</p>
+        <p class="fine" style="margin-top:1rem">Educational use only. Past performance is not indicative of future results.</p>
       </div>
     </section>
 
     <div class="sep"></div>
 
     <!-- COMPANY -->
-    <section class="content-section edge-lines" id="company">
+    <section class="content-section" id="company">
       <div class="section-inner">
-        <div class="section-lead reveal">
+        <div class="section-lead">
           <h2 class="h-grad">SignalPilot Labs, Inc.</h2>
-          <span class="sig-underline" aria-hidden="true"><svg><path d="M2 8 C60 2, 140 2, 198 8"/></svg></span>
           <p>We build trading tools that help independent traders, prop desks, and communities stay disciplined and transparent.</p>
         </div>
-
-        <div class="feature-grid reveal">
-          <article class="feature-card card-glass"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="M12 12 3 7"/><path d="M12 12 21 7"/><path d="M12 12v10"/></svg></div><h3>Our mission</h3><p>Cut through noise. Ship clear signals. Every product we ship is designed to educate and remove guesswork.</p></article>
-          <article class="feature-card card-glass"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 5h14v14H5z"/><path d="m5 9 7 4 7-4"/><path d="m5 15 7 4 7-4"/></svg></div><h3>Partner programs</h3><p>We collaborate with education communities and prop firms to deliver white-labeled dashboards and custom risk templates.</p><p style="margin:0;color:var(--muted-soft)">Email <a href="mailto:partners@signalpilot.io" style="color:inherit">partners@signalpilot.io</a> to discuss partnerships.</p></article>
-          <article class="feature-card card-glass"><div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 8a6 6 0 1 1 12 0c0 3-6 13-6 13S6 11 6 8Z"/><circle cx="12" cy="8" r="2"/></svg></div><h3>Contact</h3><p>Questions about Pro or invites? Reach us at <a href="mailto:support@signalpilot.io" style="color:inherit">support@signalpilot.io</a> or follow <a href="https://www.tradingview.com/u/signalpilot/" target="_blank" rel="noopener noreferrer" style="color:inherit">@signalpilot</a>.</p></article>
+        <div class="feature-grid">
+          <article class="feature-card card-glass inkable"><h3>Our mission</h3><p>Cut through noise. Ship clear signals. Every product we ship is designed to educate and remove guesswork.</p></article>
+          <article class="feature-card card-glass inkable"><h3>Partner programs</h3><p>We collaborate with education communities and prop firms to deliver white‑labeled dashboards and custom risk templates. Email <a href="mailto:partners@signalpilot.io">partners@signalpilot.io</a>.</p></article>
+          <article class="feature-card card-glass inkable"><h3>Contact</h3><p>Questions about Pro or invites? <a href="mailto:support@signalpilot.io">support@signalpilot.io</a> • <a href="https://www.tradingview.com/u/signalpilot/" target="_blank" rel="noopener">@signalpilot on TradingView</a></p></article>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
-    <section class="content-section edge-lines" id="cta">
+    <section class="content-section" id="cta">
       <div class="section-inner">
-        <div class="card-glass reveal" style="padding:1.6rem 1.8rem;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.10));border-color:rgba(155,182,255,.12);box-shadow:0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.03)">
+        <div class="card-glass inkable" style="margin:0 auto;max-width:860px;padding:2rem;border-radius:18px;text-align:center">
           <h2 class="h-grad">Ready to trade with clarity?</h2>
           <p>Request an invite to SignalPilot Pro and bring discipline to your playbook.</p>
-          <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem">
-            <a class="btn btn-lg btn-primary" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite">Request Invite</a>
-            <a class="btn btn-lg btn-ghost" href="#product">See product details</a>
+          <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center">
+            <a class="btn btn-card" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite">Request Invite</a>
+            <a class="secondary-btn" href="#pricing">See product details</a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- sticky CTA -->
-  <div id="stickyCTA" style="position:fixed;left:12px;right:12px;bottom:14px;display:none;z-index:9999">
-    <div class="card-glass" style="max-width:1160px;margin:0 auto;padding:.6rem 1rem;border-radius:14px;display:flex;gap:.8rem;align-items:center;justify-content:space-between">
-      <span id="ctaCopy" style="color:var(--muted)">Ready to try SignalPilot Pro?</span>
-      <a id="ctaBtn" class="btn btn-lg btn-primary" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite">Request Invite</a>
-    </div>
-  </div>
+  <!-- Pre‑checkout modal (collect email + TradingView username) -->
+  <dialog id="checkoutModal" class="checkout">
+    <form method="dialog" style="margin:0">
+      <div class="modal-head">
+        <strong id="coPlan">Checkout</strong>
+        <button value="cancel" class="btn-small" style="background:transparent;color:var(--muted);border:1px solid var(--border)">Close</button>
+      </div>
+      <div class="modal-grid">
+        <label>TradingView username
+          <input id="coTv" placeholder="@your_tradingview" required>
+        </label>
+        <label>Email
+          <input id="coEmail" type="email" placeholder="you@example.com" required>
+        </label>
+        <p class="fine">We’ll use this to invite your TradingView account and send your receipt.</p>
+      </div>
+      <div class="modal-actions">
+        <button id="coPayCard" class="btn btn-card" type="button">Proceed — pay with card</button>
+        <button id="coGoCrypto" class="btn btn-btc" type="button">Pay with Bitcoin instead (20% off)</button>
+      </div>
+      <input type="hidden" id="coStripeUrl">
+      <input type="hidden" id="coPlanName">
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast">Copied</div>
 
   <footer>
     <div class="footer-inner">
       <div class="footer-columns">
         <div>
           <a class="brand" href="/" aria-label="SignalPilot home"><img src="assets/signalpilot-logo.svg" alt="SignalPilot"></a>
-          <p style="max-width:280px;margin-top:1rem">SignalPilot helps traders cut through noise and ship clear signals with TradingView strategies designed for education-first communities.</p>
+          <p style="max-width:280px;margin-top:1rem">SignalPilot helps traders cut through noise and ship clear signals with TradingView strategies designed for education‑first communities.</p>
           <p style="max-width:280px;color:var(--muted-soft)">Educational use only — validate ideas before risking capital.</p>
         </div>
-        <div><h4>Product</h4><ul><li><a href="#product">Strategy modules</a></li><li><a href="#risk">Risk management</a></li><li><a href="#markets">Supported markets</a></li><li><a href="#cta">Get started</a></li></ul></div>
-        <div><h4>Pricing</h4><ul><li><a href="#pricing">Plans & prices</a></li><li><a href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite">Request Pro invite</a></li></ul></div>
-        <div><h4>Docs</h4><ul><li><a href="#docs">Quickstart guide</a></li><li><a href="#docs">Parameter reference</a></li><li><a href="#docs">Automation playbook</a></li><li><a href="mailto:support@signalpilot.io">Support</a></li></ul></div>
-        <div><h4>Resources</h4><ul><li><a href="/resources/journal">Trading journal template</a></li><li><a href="/resources/webinars">Upcoming webinars</a></li><li><a href="/resources/faq">FAQ</a></li></ul></div>
-        <div><h4>Company</h4><ul><li><a href="#company">About</a></li><li><a href="mailto:partners@signalpilot.io">Partnerships</a></li><li><a href="mailto:hello@signalpilot.io">Contact</a></li><li><a href="https://www.tradingview.com/u/signalpilot/" target="_blank" rel="noopener noreferrer">TradingView</a></li></ul></div>
+        <div>
+          <h4>Product</h4>
+          <ul><li><a href="#product">Strategy modules</a></li><li><a href="#markets">Supported markets</a></li><li><a href="#docs">Docs</a></li><li><a href="#cta">Get started</a></li></ul>
+        </div>
+        <div>
+          <h4>Pricing</h4>
+          <ul><li><a href="#pricing">Plans & prices</a></li><li><a href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite">Request Pro invite</a></li></ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul><li><a href="#company">About</a></li><li><a href="mailto:partners@signalpilot.io">Partnerships</a></li><li><a href="mailto:hello@signalpilot.io">Contact</a></li><li><a href="https://www.tradingview.com/u/signalpilot/" target="_blank" rel="noopener">TradingView</a></li></ul>
+        </div>
       </div>
       <div class="footer-bottom">
         <div>© <span id="year"></span> SignalPilot Labs, Inc. All rights reserved.</div>
@@ -599,20 +600,8 @@
 
   <button id="toTop" class="topbtn" aria-label="Back to top">▲ Top</button>
 
-  <!-- Scripts -->
   <script>
-    /* ----------------- Config ----------------- */
-    // Stripe Checkout URLs (set these to your live Checkout Session links)
-    const STRIPE = {
-      monthly:   "",   // e.g. "https://checkout.stripe.com/c/pay/cs_test_a1b2..."
-      quarterly: "",
-      yearly:    "",
-      lifetime:  ""
-    };
-    // Formspree endpoint; leave blank to fall back to email compose
-    const FORMSPREE_ENDPOINT = ""; // e.g. "https://formspree.io/f/xxxxxx"
-
-    /* --------------- Theme toggle -------------- */
+    // Theme toggle
     const html = document.documentElement;
     const themeBtn = document.getElementById('themeBtn');
     const saved = localStorage.getItem('theme');
@@ -623,12 +612,12 @@
       localStorage.setItem('theme', next);
     });
 
-    /* -------------- Progress bar --------------- */
+    // Progress bar
     const pr=document.getElementById('progress');
     const onScroll=()=>{const h=document.documentElement;const p=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;pr.style.width=p+'%';};
     document.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
-    /* ---------------- Mobile nav -------------- */
+    // Mobile nav
     const toggle=document.querySelector('.menu-toggle');
     const nav=document.getElementById('primary-navigation');
     const mq=window.matchMedia?window.matchMedia('(min-width: 861px)'):null;
@@ -640,131 +629,110 @@
     const handle=(e)=>{if(!nav)return;e.matches?(nav.removeAttribute('hidden'),nav.classList.remove('open'),setExp(false)):(nav.classList.contains('open')?null:nav.setAttribute('hidden',''),setExp(false));};
     mq&&(handle(mq),mq.addEventListener?mq.addEventListener('change',handle):mq.addListener(handle)); !mq&&nav&&nav.removeAttribute('hidden');
 
-    /* -------------- Reveal on scroll ----------- */
-    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.15});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-    /* -------------- Counters ------------------- */
-    const cIo=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;const to=+el.dataset.countTo||0;let v=0;const step=Math.max(1,Math.ceil(to/60));const tick=()=>{v+=step;if(v>=to){el.textContent=to;return;}el.textContent=v;requestAnimationFrame(tick)};requestAnimationFrame(tick);cIo.unobserve(el);})},{threshold:.6});
-    document.querySelectorAll('[data-count-to]').forEach(el=>cIo.observe(el));
-
-    /* ----------- Sticky CTA A/B text ----------- */
-    const scta=document.getElementById('stickyCTA');
-    const ctaCopy=document.getElementById('ctaCopy');
-    const ctaBtn=document.getElementById('ctaBtn');
-    const variants=['Ready to try SignalPilot Pro?','Trade with clarity — join Pro today'];
-    const chosen = variants[Math.random()<0.5?0:1];
-    ctaCopy.textContent = chosen;
-    document.addEventListener('scroll',()=>{ scta.style.display = (scrollY > innerHeight*0.6) ? 'block' : 'none'; }, {passive:true});
-
-    /* ---------- Parallax orbs (pricing) -------- */
-    const wrap=document.querySelector('.parallax-wrap');const orbs=document.querySelectorAll('.parallax-wrap .orb');
-    if(wrap&&orbs.length){wrap.addEventListener('pointermove',e=>{const r=wrap.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;orbs.forEach((o,i)=>o.style.transform=`translate(${x*(12+i*6)}px, ${y*(10+i*5)}px)`);});}
-
-    /* -------- Section edge parallax lines ------ */
-    const sections = document.querySelectorAll('.edge-lines');
-    window.addEventListener('scroll', ()=>{ const sc = window.scrollY; sections.forEach(sec=>sec.style.setProperty('--grid-shift', `${(sc - sec.offsetTop)*-0.02}px`)); }, {passive:true});
-
-    /* -------------- Gallery skeleton ----------- */
+    // Lazy gallery skeleton
     document.querySelectorAll('img[data-skel]').forEach(img=>{
-      if(img.complete){ img.parentElement.classList.add('done'); img.style.opacity=1; return; }
-      img.addEventListener('load',()=>{img.parentElement.classList.add('done'); img.style.opacity=1;},{once:true});
-      img.addEventListener('error',()=>{img.parentElement.classList.add('done');},{once:true});
+      const done=()=>{img.parentElement.classList.add('done'); img.style.opacity=1;}
+      if(img.complete){ done(); return; }
+      img.addEventListener('load',done,{once:true});
+      img.addEventListener('error',done,{once:true});
     });
 
-    /* -------------- Back to top + year ---------- */
+    // Back to top + year
     const topBtn=document.getElementById('toTop');
     addEventListener('scroll',()=>{topBtn&&topBtn.classList.toggle('show',window.scrollY>800)},{passive:true});
     topBtn&&topBtn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
     document.getElementById('year').textContent=new Date().getFullYear();
 
-    /* -------------- Pricing buttons ------------- */
-    function openCheckout(plan){
-      const url = STRIPE[plan] || "";
-      if(url){
-        window.location.href = url;
-      }else{
-        // fallback to email
-        const sub = encodeURIComponent(`SignalPilot Pro – ${plan} (card)`);
-        window.location.href = `mailto:support@signalpilot.io?subject=${sub}`;
-      }
-    }
-    function emailCrypto(plan){
-      const sub = encodeURIComponent(`SignalPilot Pro – ${plan} (Bitcoin)`);
-      window.location.href = `mailto:support@signalpilot.io?subject=${sub}`;
-    }
-    document.querySelectorAll('[data-checkout]').forEach(b=>b.addEventListener('click',()=>openCheckout(b.dataset.checkout)));
-    document.querySelectorAll('[data-btc]').forEach(b=>b.addEventListener('click',()=>emailCrypto(b.dataset.btc)));
+    // --------- CHECKOUT MODAL (collect TradingView + email) ----------
+    const modal = document.getElementById('checkoutModal');
+    const coPlan = document.getElementById('coPlan');
+    const coPlanName = document.getElementById('coPlanName');
+    const coStripeUrl = document.getElementById('coStripeUrl');
+    const coEmail = document.getElementById('coEmail');
+    const coTv = document.getElementById('coTv');
 
-    /* -------------- Crypto invoice -------------- */
-    const planSel = document.getElementById('cryptoPlan');
-    const coinSel = document.getElementById('cryptoCoin');
-    const reqBtn  = document.getElementById('requestInvoice');
-    function invoiceMail(){
-      const planOpt = planSel.options[planSel.selectedIndex];
-      const plan = planSel.value;
-      const usd = Number(planOpt.dataset.price||0);
-      const discounted = (usd*0.88).toFixed(2); // ~12% off
-      const coin = coinSel.value;
-      const sub = encodeURIComponent(`Crypto invoice request – ${plan.toUpperCase()} (${coin})`);
-      const body = encodeURIComponent(`Plan: ${plan.toUpperCase()} ($${usd})\nCrypto approx (12% off): $${discounted}\nCoin: ${coin}\n\nPlease reply with the exact quote and payment memo.\n\nName:\nEmail:\n`);
-      window.location.href = `mailto:support@signalpilot.io?subject=${sub}&body=${body}`;
-    }
-    reqBtn && reqBtn.addEventListener('click', invoiceMail);
+    document.querySelectorAll('[data-checkout-card]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        coPlan.textContent = `Checkout — ${btn.dataset.plan}`;
+        coPlanName.value = btn.dataset.plan;
+        coStripeUrl.value = btn.dataset.url; // Stripe Payment Link
+        modal.showModal();
+      });
+    });
 
-    // copy buttons for addresses
+    // send to Formspree (backup record) then open Stripe in new tab
+    document.getElementById('coPayCard').addEventListener('click', async ()=>{
+      const email = coEmail.value.trim();
+      const tv = coTv.value.trim();
+      if(!email || !tv){ alert('Please enter email and TradingView username.'); return; }
+
+      // POST to Formspree so you have username+email before payment
+      try{
+        await fetch('https://formspree.io/f/REPLACE_FORMSPREE', {
+          method:'POST',
+          headers:{'Content-Type':'application/json', 'Accept':'application/json'},
+          body: JSON.stringify({ _subject:'SignalPilot Pro — Card checkout intent', email, tradingview: tv, plan: coPlanName.value })
+        });
+      }catch(e){/* ignore */}
+
+      // Open Stripe Payment Link — prefill email if supported
+      const url = new URL(coStripeUrl.value);
+      url.searchParams.set('prefilled_email', email);
+      // NOTE: also add "Custom field: TradingView username" on the Payment Link in Stripe Dashboard
+      window.open(url.toString(), '_blank', 'noopener');
+      modal.close();
+    });
+
+    // Switch to crypto block from modal
+    document.getElementById('coGoCrypto').addEventListener('click', ()=>{
+      document.getElementById('planSel').value = coPlanName.value;
+      document.getElementById('ciTv').value = coTv.value;
+      document.getElementById('ciEmail').value = coEmail.value;
+      modal.close();
+      // scroll to crypto box
+      document.getElementById('planSel').scrollIntoView({behavior:'smooth', block:'center'});
+    });
+
+    // --------- CRYPTO BOX ----------
+    const planSel = document.getElementById('planSel');
+    const coinSel = document.getElementById('coinSel');
+    const ciPlan = document.getElementById('ciPlan');
+    const ciCoin = document.getElementById('ciCoin');
+
+    // open crypto with selected plan
+    document.querySelectorAll('[data-open-crypto]').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        planSel.value = b.dataset.plan;
+        ciPlan.value = b.dataset.plan;
+        document.getElementById('planSel').scrollIntoView({behavior:'smooth', block:'center'});
+      });
+    });
+
+    function updateCryptoHidden(){
+      ciPlan.value = planSel.value;
+      ciCoin.value = coinSel.value;
+    }
+    planSel.addEventListener('change', updateCryptoHidden);
+    coinSel.addEventListener('change', updateCryptoHidden);
+    updateCryptoHidden();
+
+    // Copy wallets
+    const toast = document.getElementById('toast');
+    function showToast(msg){ toast.textContent=msg; toast.style.display='block'; setTimeout(()=>toast.style.display='none',1200); }
     document.querySelectorAll('[data-copy]').forEach(btn=>{
       btn.addEventListener('click', ()=>{
-        const input = document.querySelector(btn.dataset.copy);
-        input.select(); input.setSelectionRange(0, 99999);
-        document.execCommand('copy');
-        const prev = btn.textContent;
-        btn.textContent = 'Copied';
-        setTimeout(()=>btn.textContent=prev, 1200);
+        const sel = document.querySelector(btn.dataset.copy);
+        navigator.clipboard.writeText(sel.textContent.trim()).then(()=>showToast('Copied'));
       });
     });
 
-    /* -------------- Waitlist form --------------- */
-    const form = document.getElementById('waitlistForm');
-    const formMsg = document.getElementById('formMsg');
-    form && form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const fd = new FormData(form);
-      const name = fd.get('name') || '';
-      const email = fd.get('email') || '';
-      const focus = fd.get('focus') || '';
-      formMsg.textContent = 'Sending…';
-
-      if(FORMSPREE_ENDPOINT){
-        try{
-          const res = await fetch(FORMSPREE_ENDPOINT, { method:'POST', headers:{'Accept':'application/json'}, body: fd });
-          if(res.ok){ formMsg.textContent = 'Thanks — we will be in touch shortly.'; form.reset(); }
-          else{ formMsg.textContent = 'Something went wrong. Please email support@signalpilot.io.'; }
-        }catch(err){ formMsg.textContent = 'Network error. Please email support@signalpilot.io.'; }
-      }else{
-        // Fallback to email compose
-        const sub = encodeURIComponent('SignalPilot Pro – Waitlist');
-        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nFocus: ${focus}`);
-        window.location.href = `mailto:support@signalpilot.io?subject=${sub}&body=${body}`;
-        formMsg.textContent = 'Opening your email app…';
-      }
+    // Crypto invoice: include plan/coin in payload automatically
+    const cryptoForm = document.getElementById('cryptoInvoice');
+    cryptoForm.addEventListener('submit', ()=>{
+      ciPlan.value = planSel.value;
+      ciCoin.value = coinSel.value;
     });
-
-    /* -------------- Section TOC highlight ------- */
-    const toc = document.getElementById('sectoc');
-    const tocLinks = toc.querySelectorAll('a');
-    const anchors = Array.from(tocLinks).map(a=>document.querySelector(a.getAttribute('href')));
-    const tocObs = new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        const id = '#'+entry.target.id;
-        const link = toc.querySelector(`a[href="${id}"]`);
-        if(entry.isIntersecting){
-          tocLinks.forEach(l=>l.classList.remove('active'));
-          link && link.classList.add('active');
-        }
-      });
-    },{rootMargin:'-40% 0px -55% 0px',threshold:0});
-    anchors.forEach(sec=>sec && tocObs.observe(sec));
   </script>
 </body>
 </html>
+
