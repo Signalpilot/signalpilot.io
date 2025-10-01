@@ -63,8 +63,8 @@
       --muted-soft:#8190AE;
       --border: rgba(118, 221, 255, 0.18);
 
-      --brand: #6a86ff;          /* primary indigo/blue for brand */
-      --accent: #76DDFF;         /* cyan accent lines/icons */
+      --brand: #6a86ff;          /* primary indigo/blue */
+      --accent: #76DDFF;         /* cyan accent */
       --btc: #F59E0B;            /* orange */
       --eth: #7B61FF;            /* violet */
       --success:#3ED598;
@@ -74,7 +74,12 @@
       --max-width: min(1160px, 92vw);
       --shadow: 0 16px 60px rgba(5,15,35,.45);
       --glow: 0 20px 60px rgba(91,138,255,.25);
-      font-family: "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+
+      /* Gradient palette for WOW text */
+      --g1: #74f2ff;
+      --g2: #5b8aff;
+      --g3: #9b7bff;
+      --g4: #7af0d8;
     }
 
     *{ box-sizing: border-box; }
@@ -83,15 +88,82 @@
       min-height:100vh;
       background: var(--bg);
       color: var(--text);
-      font: 16px/1.6 var(--font,"Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif);
+      font: 16px/1.6 "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
       overflow-x:hidden;
+      position: relative;
     }
 
-    /* Headings */
+    /* Progress bar on top */
+    #progress{
+      position: fixed; inset: 0 auto auto 0; height: 3px; width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--brand), var(--eth));
+      box-shadow: 0 0 18px rgba(118,221,255,.6);
+      z-index: 999;
+      transition: width .08s linear;
+    }
+
+    /* Background floating orbs / lines */
+    .bg-lines{
+      position: fixed; inset: 0; z-index: -2; pointer-events:none;
+      background:
+        radial-gradient(800px 400px at 80% 10%, rgba(91,138,255,.08), transparent 60%),
+        radial-gradient(700px 380px at 10% 80%, rgba(118,221,255,.06), transparent 65%);
+      animation: bgPulse 14s ease-in-out infinite alternate;
+      filter: saturate(1.15);
+    }
+    @keyframes bgPulse{
+      0% { filter: hue-rotate(0deg) saturate(1.1); }
+      100%{ filter: hue-rotate(8deg) saturate(1.25); }
+    }
+    .orb{
+      position: fixed; width: 54vmax; height: 54vmax; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(118,221,255,.08), transparent 60%);
+      z-index: -1; pointer-events:none; filter: blur(24px);
+      transform: translate3d(0,0,0);
+      animation: orbFloat 28s ease-in-out infinite;
+    }
+    .orb.o2{ width: 40vmax; height: 40vmax; left:-10vmax; top:20vmax; animation-duration: 32s; background: radial-gradient(circle at 70% 40%, rgba(125,96,255,.08), transparent 60%); }
+    .orb.o3{ width: 36vmax; height: 36vmax; right:-12vmax; bottom:-8vmax; animation-duration: 36s; background: radial-gradient(circle at 50% 60%, rgba(91,138,255,.07), transparent 60%); }
+    @keyframes orbFloat{
+      0% { transform: translate3d(-2vmax, 0, 0) rotate(0.001deg); }
+      50%{ transform: translate3d(2vmax, -1vmax, 0) rotate(0.001deg); }
+      100%{ transform: translate3d(-2vmax, 0, 0) rotate(0.001deg); }
+    }
+
+    /* Headings + WOW gradient text */
     h1,h2,h3{ margin:0 0 .75rem; line-height:1.15; color:#fff; font-weight: 800; letter-spacing:-.02em; }
     h1{ font-size: clamp(2.6rem, 6vw, 3.8rem); }
     h2{ font-size: clamp(2.1rem, 4vw, 2.6rem); }
     h3{ font-size: 1.1rem; }
+
+    .gradient-text{
+      background: linear-gradient(135deg, var(--g1), var(--g2), var(--g3), var(--g4));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: textGradient 12s ease infinite;
+      text-shadow: 0 0 24px rgba(118,221,255,.12);
+    }
+    @keyframes textGradient {
+      0%{ background-position: 0% 50%; }
+      50%{ background-position: 100% 50%; }
+      100%{ background-position: 0% 50%; }
+    }
+    .shimmer{
+      position: relative;
+    }
+    .shimmer::after{
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.18) 50%, transparent 65%);
+      transform: translateX(-120%);
+      animation: shimmer 6s ease-in-out infinite;
+      mix-blend-mode: screen; pointer-events:none;
+    }
+    @keyframes shimmer{
+      0%{ transform: translateX(-120%); }
+      100%{ transform: translateX(120%); }
+    }
 
     p{ margin:0 0 1.05rem; color:var(--muted); }
     a{ color:inherit; text-decoration:none; }
@@ -117,7 +189,7 @@
 
     /* Hero */
     .hero{ position:relative; background: var(--bg-hero); overflow: hidden; }
-    .hero::after{ /* animated aura */
+    .hero::after{ /* animated aura following mouse (parallax) */
       content:""; position:absolute; inset:-20%;
       background: radial-gradient(500px 300px at var(--mx,70%) var(--my,20%), rgba(118,221,255,.12), transparent 60%),
                   radial-gradient(700px 350px at 20% 80%, rgba(106,134,255,.12), transparent 60%);
@@ -129,7 +201,7 @@
       max-width:var(--max-width); margin:0 auto; padding:clamp(3.2rem, 9vw, 6.2rem) 1.25rem clamp(3.8rem, 10vw, 7rem);
       display:grid; gap:clamp(2rem, 6vw, 3.5rem);
     }
-    .hero-copy{ max-width: 680px; }
+    .hero-copy{ max-width: 720px; }
     .tag{
       display:inline-flex; align-items:center; gap:.45rem;
       padding:.22rem .55rem; border-radius: 999px;
@@ -198,11 +270,11 @@
     .marquee:hover .marquee-track{ animation-play-state: paused; }
     @keyframes marquee{
       from{ transform: translateX(0); }
-      to{ transform: translateX(-50%); } /* since we duplicate icons sequence */
+      to{ transform: translateX(-50%); }
     }
     .logo{ height:30px; width:auto; filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(118,221,255,.18)); opacity:.9; }
     .logo.big{ height:34px; }
-    .logo-keep{ height:30px; width:auto; opacity:.9; } /* for logos that are already light/colored */
+    .logo-keep{ height:30px; width:auto; opacity:.9; }
 
     /* Testimonials */
     .testimonials{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1.2rem; }
@@ -270,6 +342,15 @@
   </style>
 </head>
 <body>
+  <!-- WOW background layers -->
+  <div class="bg-lines"></div>
+  <div class="orb"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+
+  <!-- Scroll progress -->
+  <div id="progress" aria-hidden="true"></div>
+
   <header class="page-header">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="SignalPilot home">
@@ -300,8 +381,8 @@
       <div class="hero-inner">
         <div class="hero-copy reveal">
           <div class="tag">TradingView indicators & docs</div>
-          <h1>Cut through noise. Ship clear insights.</h1>
-          <p class="lead">SignalPilot Pro is **software + education** for active traders: clean overlays, backtesting, and alert templates so your playbook stays consistent. Educational use only—no brokerage or financial advice.</p>
+          <h1 class="shimmer"><span class="gradient-text">Cut through noise. Ship clear insights.</span></h1>
+          <p class="lead">SignalPilot Pro is <strong>software + education</strong> for active traders: clean overlays, backtesting, and alert templates so your playbook stays consistent. Educational use only—no brokerage or financial advice.</p>
           <div class="hero-actions">
             <a class="primary-btn magnetic" href="#pricing"><span class="magnetic-target">See pricing</span></a>
             <a class="btn-btc magnetic" href="#pay-crypto"><span class="magnetic-target">Pay with Bitcoin / ETH (–20%)</span></a>
@@ -329,7 +410,7 @@
     <section class="content-section" id="product">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2>Built for disciplined, transparent trading</h2>
+          <h2><span class="gradient-text">Built for disciplined, transparent trading</span></h2>
           <p>Swap components without rewriting your workflow: trend foundation, signal confirmation, and execution scaffolding—all documented in plain English.</p>
         </div>
 
@@ -380,7 +461,7 @@
     <section class="content-section" id="risk">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2>Risk workflows that respect your playbook</h2>
+          <h2><span class="gradient-text">Risk workflows that respect your playbook</span></h2>
           <p>Quantify drawdowns, test toggles, and keep a clean audit trail of why trades are taken—or skipped—before risking capital.</p>
         </div>
         <div class="panel reveal">
@@ -410,7 +491,7 @@
               <div class="step-index">4</div>
               <div class="step-body">
                 <h3>Template alerts</h3>
-                <p>Publish chart alerts for **paper trading** and community education (no execution).</p>
+                <p>Publish chart alerts for <strong>paper trading</strong> and community education (no execution).</p>
               </div>
             </div>
           </div>
@@ -422,7 +503,7 @@
     <section class="content-section" id="works-with">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2>Works with your tooling</h2>
+          <h2><span class="gradient-text">Works with your tooling</span></h2>
           <p>Route alerts where your team already lives.</p>
         </div>
         <div class="marquee card-glass reveal" aria-label="Integrations marquee">
@@ -449,7 +530,7 @@
     <section class="content-section" id="docs">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2>Documentation that gets you from charts to review</h2>
+          <h2><span class="gradient-text">Documentation that gets you from charts to review</span></h2>
           <p>Install, tune, and review. Copy presets and export outcomes so your learning loop tightens over time.</p>
         </div>
 
@@ -477,7 +558,7 @@
     <section class="content-section" id="resources">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2>What traders use SignalPilot for</h2>
+          <h2><span class="gradient-text">What traders use SignalPilot for</span></h2>
           <p>Clarity, consistency, and clean review loops—without pretending to predict the future.</p>
         </div>
         <div class="testimonials">
@@ -502,8 +583,8 @@
     <section class="content-section" id="pricing">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2>Pro — choose your plan</h2>
-          <p>Access is invite‑only. Pricing is transparent. Pay with BTC/ETH for a 20% discount or join the waitlist for fiat checkout when it opens.</p>
+          <h2><span class="gradient-text">Pro — choose your plan</span></h2>
+          <p>Access is invite‑only. Pricing is transparent. Pay with BTC/ETH for a 20% discount or join the waitlist for card checkout when it opens.</p>
         </div>
 
         <div class="pricing-table">
@@ -583,7 +664,7 @@
     <section class="content-section" id="pay-crypto">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2>Pay with crypto (save 20%)</h2>
+          <h2><span class="gradient-text">Pay with crypto (save 20%)</span></h2>
           <p>Request an invoice with exact quote and memo—or send directly, then share your tx id and TradingView username for activation.</p>
         </div>
 
@@ -618,7 +699,7 @@
             </label>
           </div>
 
-          <!-- Quick-copy wallets (display only) -->
+          <!-- Quick-copy wallets -->
           <div style="display:grid;gap:.6rem;grid-template-columns:1fr 1fr;max-width:860px;margin-top:1rem">
             <div class="card-glass" style="padding:.6rem 1rem;border-radius:10px">
               <div style="display:flex;align-items:center;gap:.6rem;justify-content:space-between">
@@ -651,7 +732,7 @@
     <section class="content-section" id="waitlist">
       <div class="section-inner">
         <div class="cta-panel reveal">
-          <h2>Get notified when card checkout opens</h2>
+          <h2><span class="gradient-text">Get notified when card checkout opens</span></h2>
           <p>We’ll also send docs, presets, and onboarding sessions.</p>
 
           <form id="waitlistForm" action="https://formspree.io/f/mldpnrop" method="POST" class="card-glass" style="padding:1rem;border-radius:var(--radius)">
@@ -681,7 +762,7 @@
     <section class="content-section" id="company">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2>SignalPilot Labs, Inc.</h2>
+          <h2><span class="gradient-text">SignalPilot Labs, Inc.</span></h2>
           <p>We build trading software and documentation for independent traders, prop desks, and communities—education first, always.</p>
         </div>
         <div class="feature-grid">
@@ -709,7 +790,7 @@
     <section class="content-section">
       <div class="section-inner">
         <div class="cta-panel reveal">
-          <h2>Ready to trade with clarity?</h2>
+          <h2><span class="gradient-text">Ready to trade with clarity?</span></h2>
           <p>Install when invited, tune parameters, and review outcomes. Keep your process consistent—no hype, just software and docs.</p>
           <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center">
             <a class="primary-btn magnetic" href="#waitlist"><span class="magnetic-target">Join the waitlist</span></a>
@@ -886,6 +967,17 @@
     }
     wireForm('waitlistForm','waitlistSuccess');
     wireForm('cryptoForm','cryptoSuccess');
+
+    // ===== Scroll progress bar =====
+    const progress = document.getElementById('progress');
+    const onScroll = ()=>{
+      const doc = document.documentElement;
+      const h = doc.scrollHeight - doc.clientHeight;
+      const sc = (doc.scrollTop || document.body.scrollTop);
+      progress.style.width = (h ? (sc / h) * 100 : 0) + '%';
+    };
+    document.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
   </script>
 </body>
 </html>
