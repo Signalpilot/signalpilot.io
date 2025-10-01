@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <title>SignalPilot · TradingView indicators & education for disciplined traders</title>
   <meta name="description" content="SignalPilot Pro is TradingView-compatible software and educational tools: chart overlays, backtesting, alert templates, and documentation for disciplined, transparent trading. Educational use only—no brokerage or financial advice.">
@@ -71,6 +71,7 @@
       --warn:#F9A23C;
 
       --radius: 16px;
+      --radius-sm: 12px;
       --max-width: min(1160px, 92vw);
       --shadow: 0 16px 60px rgba(5,15,35,.45);
       --glow: 0 20px 60px rgba(91,138,255,.25);
@@ -88,8 +89,22 @@
       background: var(--bg);
       color: var(--text);
       font: 16px/1.6 "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       overflow-x:hidden;
-      position: relative;
+    }
+    a{ color:inherit; text-decoration:none; }
+    :focus-visible{ outline:2px solid color-mix(in oklab, var(--accent) 70%, white); outline-offset:2px; }
+    ::selection{ background: rgba(118,221,255,.28); }
+
+    /* Utilities */
+    .container{ max-width: var(--max-width); margin:0 auto; padding-left: max(1.25rem, env(safe-area-inset-left)); padding-right: max(1.25rem, env(safe-area-inset-right)); }
+    .grid-2{ display:grid; gap:.6rem; grid-template-columns: 1fr 1fr; }
+    .grid-2 > .span-2{ grid-column: 1 / -1; }
+    .hide-sm{ display: initial; }
+    @media (max-width: 700px){
+      .grid-2{ grid-template-columns: 1fr; }
+      .hide-sm{ display: none !important; }
     }
 
     /* Progress bar */
@@ -121,9 +136,9 @@
 
     /* Headings + WOW text */
     h1,h2,h3{ margin:0 0 .75rem; line-height:1.15; color:#fff; font-weight: 800; letter-spacing:-.02em; }
-    h1{ font-size: clamp(2.6rem, 6vw, 3.8rem); }
-    h2{ font-size: clamp(2.1rem, 4vw, 2.6rem); }
-    h3{ font-size: 1.1rem; }
+    h1{ font-size: clamp(2.4rem, 6vw, 3.6rem); }
+    h2{ font-size: clamp(1.9rem, 4vw, 2.4rem); }
+    h3{ font-size: 1.04rem; }
 
     .gradient-text{
       background: linear-gradient(135deg, var(--g1), var(--g2), var(--g3), var(--g4));
@@ -142,16 +157,15 @@
     @keyframes shimmer{ 0%{transform:translateX(-120%)} 100%{transform:translateX(120%)} }
 
     p{ margin:0 0 1.05rem; color:var(--muted); }
-    a{ color:inherit; text-decoration:none; }
 
     /* Header */
     .page-header{ position: sticky; top:0; z-index:40; backdrop-filter: blur(18px); background: color-mix(in srgb, var(--bg) 72%, transparent); border-bottom: 1px solid rgba(118,221,255,.12); }
-    .header-inner{ max-width:var(--max-width); margin:0 auto; padding:.75rem 1.25rem; display:flex; align-items:center; gap:1rem; }
+    .header-inner{ max-width: var(--max-width); margin:0 auto; padding: .6rem max(1rem, env(safe-area-inset-right)) .6rem max(1rem, env(safe-area-inset-left)); display:flex; align-items:center; gap:.75rem; }
     .brand{ display:inline-flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.02em; }
-    .brand img{ height:28px; width:auto; filter: drop-shadow(0 0 10px rgba(118,221,255,.35)); }
+    .brand img{ height:26px; width:auto; filter: drop-shadow(0 0 10px rgba(118,221,255,.35)); }
     nav{ margin-left:auto; }
     .nav-list{ list-style:none; display:flex; gap:.5rem; margin:0; padding:0; }
-    .nav-link{ color:var(--muted); font-weight:600; padding:.45rem .8rem; border-radius:999px; }
+    .nav-link{ color:var(--muted); font-weight:600; padding:.45rem .8rem; border-radius:999px; white-space:nowrap; }
     .nav-link:hover,.nav-link:focus-visible{ color:#fff; background:rgba(118,221,255,.12); }
     .menu-toggle{ display:none; margin-left:auto; border-radius:12px; background:rgba(12,16,27,.9); border:1px solid var(--border); color:var(--muted); padding:.35rem .6rem; }
 
@@ -163,74 +177,76 @@
                   radial-gradient(700px 350px at 20% 80%, rgba(106,134,255,.12), transparent 60%);
       filter: blur(30px); pointer-events:none; transition: 120ms ease-out;
     }
-    .hero-inner{ max-width:var(--max-width); margin:0 auto; padding:clamp(3.2rem, 9vw, 6.2rem) 1.25rem clamp(3.8rem, 10vw, 7rem); display:grid; gap:clamp(2rem, 6vw, 3.5rem); }
+    .hero-inner{ max-width:var(--max-width); margin:0 auto; padding:clamp(2.6rem, 8vw, 5.6rem) max(1.25rem, env(safe-area-inset-right)) clamp(3rem, 10vw, 6.2rem) max(1.25rem, env(safe-area-inset-left)); display:grid; gap:clamp(1.6rem, 6vw, 3.2rem); }
     .hero-copy{ max-width: 720px; }
     .tag{ display:inline-flex; align-items:center; gap:.45rem; padding:.22rem .55rem; border-radius: 999px; border:1px solid rgba(118,221,255,.35); color:var(--accent); font-weight:700; font-size:.78rem; letter-spacing:.05em; text-transform:uppercase; background: rgba(12,16,27,.55); }
     .hero-actions{ display:flex; flex-wrap:wrap; gap:1rem; align-items:center; }
+    @media (max-width: 540px){
+      .header-cta{ display:none !important; }
+      .brand img{ height:24px; }
+      .nav-link{ padding:.4rem .7rem; }
+    }
 
     /* Buttons */
-    .primary-btn{ display:inline-flex; align-items:center; gap:.45rem; padding:.6rem 1.15rem; border-radius:999px; font-weight:700; color:#fff; background: linear-gradient(120deg, var(--brand), #8aa0ff); box-shadow: var(--glow); }
+    .primary-btn{ display:inline-flex; align-items:center; gap:.45rem; padding:.6rem 1.05rem; border-radius:999px; font-weight:700; color:#fff; background: linear-gradient(120deg, var(--brand), #8aa0ff); box-shadow: var(--glow); }
     .secondary-btn{ display:inline-flex; align-items:center; gap:.45rem; color:var(--accent); font-weight:600; }
-    .btn-btc{ display:inline-flex; align-items:center; gap:.5rem; padding:.6rem 1.15rem; border-radius:999px; font-weight:800; color:#1a1205; background: var(--btc); box-shadow:0 10px 28px rgba(245,158,11,.25); }
-    .btn-disabled{ opacity:.5; cursor:not-allowed; border:1px dashed rgba(255,255,255,.25); padding:.55rem 1rem; border-radius:999px; }
-
-    /* Metrics */
-    .hero-metrics{ display:flex; flex-wrap:wrap; gap:1rem; }
-    .metric{ min-width:220px; background: rgba(12,16,27,.7); border:1px solid rgba(118,221,255,.15); border-radius: var(--radius); padding:1rem 1.25rem; display:grid; gap:.3rem; box-shadow: var(--shadow); }
-    .metric strong{ font-size:1.6rem; letter-spacing:-.02em; }
+    .btn-btc{ display:inline-flex; align-items:center; gap:.5rem; padding:.6rem 1.05rem; border-radius:999px; font-weight:800; color:#1a1205; background: var(--btc); box-shadow:0 10px 28px rgba(245,158,11,.25); white-space:nowrap; }
+    .btn-disabled{ opacity:.55; cursor:not-allowed; border:1px dashed rgba(255,255,255,.25); padding:.55rem 1rem; border-radius:999px; white-space:nowrap; }
 
     /* Sections */
-    .content-section{ padding: clamp(3.2rem, 8vw, 5rem) 0; border-top:1px solid rgba(118,221,255,.08); }
-    .section-inner{ max-width: var(--max-width); margin:0 auto; padding:0 1.25rem; }
-    .section-lead{ max-width: 740px; margin-bottom: clamp(1.6rem, 5vw, 2.6rem); }
+    .content-section{ padding: clamp(2.6rem, 8vw, 4.8rem) 0; border-top:1px solid rgba(118,221,255,.08); }
+    .section-inner{ max-width: var(--max-width); margin:0 auto; }
+    .section-lead{ max-width: 740px; margin: 0 auto clamp(1.4rem, 5vw, 2.4rem); padding: 0 max(1.25rem, env(safe-area-inset-right)) 0 max(1.25rem, env(safe-area-inset-left)); }
 
     /* Feature grid + tilt */
-    .feature-grid{ display:grid; gap:1.2rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .feature-card{ background: linear-gradient(160deg, rgba(12,16,27,.85), rgba(12,16,27,.55)); border:1px solid rgba(118,221,255,.14); border-radius: var(--radius); padding:1.6rem; display:grid; gap:.75rem; min-height:230px; transform-style: preserve-3d; will-change: transform; }
-    .feature-icon{ width:44px; height:44px; border-radius:12px; background: rgba(118,221,255,.12); display:inline-flex; align-items:center; justify-content:center; color:var(--accent); box-shadow: inset 0 0 0 1px rgba(118,221,255,.18); }
+    .feature-grid{ display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); padding: 0 max(1.25rem, env(safe-area-inset-right)) 0 max(1.25rem, env(safe-area-inset-left)); }
+    .feature-card{ background: linear-gradient(160deg, rgba(12,16,27,.85), rgba(12,16,27,.55)); border:1px solid rgba(118,221,255,.14); border-radius: var(--radius); padding:1.25rem; display:grid; gap:.7rem; min-height:230px; transform-style: preserve-3d; will-change: transform; }
+    .feature-icon{ width:42px; height:42px; border-radius:12px; background: rgba(118,221,255,.12); display:inline-flex; align-items:center; justify-content:center; color:var(--accent); box-shadow: inset 0 0 0 1px rgba(118,221,255,.18); }
     .feature-card ul{ margin:.3rem 0 0; padding-left:1.1rem; color:var(--muted); display:grid; gap:.35rem; }
 
-    .panel{ background: rgba(12,16,27,.75); border:1px solid rgba(118,221,255,.15); border-radius: var(--radius); padding: clamp(1.6rem, 3vw, 2.2rem); }
-    .pipeline{ display:grid; gap:1.6rem; margin-top:1.8rem; }
+    .panel{ background: rgba(12,16,27,.75); border:1px solid rgba(118,221,255,.15); border-radius: var(--radius); padding: clamp(1.4rem, 3vw, 2rem); margin: 0 max(1.25rem, env(safe-area-inset-right)) 0 max(1.25rem, env(safe-area-inset-left)); }
+    .pipeline{ display:grid; gap:1.4rem; margin-top:1.4rem; }
     .pipeline-step{ display:grid; grid-template-columns: auto 1fr; align-items:center; gap:.6rem; }
-    .step-index{ width:32px; height:32px; border-radius:50%; border:1px solid rgba(118,221,255,.45); color:var(--accent); background: rgba(118,221,255,.08); display:inline-flex; align-items:center; justify-content:center; font-weight:800; }
-    .step-body{ padding-left:.6rem; }
+    .step-index{ width:30px; height:30px; border-radius:50%; border:1px solid rgba(118,221,255,.45); color:var(--accent); background: rgba(118,221,255,.08); display:inline-flex; align-items:center; justify-content:center; font-weight:800; }
+    .step-body{ padding-left:.4rem; }
 
     /* Marquee */
-    .marquee{ overflow:hidden; border:1px solid rgba(118,221,255,.12); border-radius: var(--radius); background: rgba(12,16,27,.5); }
-    .marquee-track{ display:flex; align-items:center; gap:3rem; padding:1rem 2rem; width:max-content; animation: marquee 26s linear infinite; }
+    .marquee{ overflow:hidden; border:1px solid rgba(118,221,255,.12); border-radius: var(--radius); background: rgba(12,16,27,.5); margin: 0 max(1.25rem, env(safe-area-inset-right)) 0 max(1.25rem, env(safe-area-inset-left)); }
+    .marquee-track{ display:flex; align-items:center; gap:2.2rem; padding:.8rem 1.2rem; width:max-content; animation: marquee 26s linear infinite; }
     .marquee:hover .marquee-track{ animation-play-state: paused; }
     @keyframes marquee{ from{ transform: translateX(0) } to{ transform: translateX(-50%) } }
-
-    /* Logo sizing (images + inline svg) */
-    .logo, .logo-inline{ height:32px; width:auto; opacity:.9; }
+    .logo, .logo-inline{ height:28px; width:auto; opacity:.9; }
     .logo{ filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(118,221,255,.18)); display:block; }
     .logo-inline{ display:inline-block; color:#fff; filter: drop-shadow(0 0 8px rgba(118,221,255,.18)); }
 
     /* Testimonials */
-    .testimonials{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1.2rem; }
-    .testimonial{ background: rgba(12,16,27,.7); border:1px solid rgba(118,221,255,.12); border-radius: var(--radius); padding:1.5rem; display:grid; gap:1rem; }
+    .testimonials{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; padding: 0 max(1.25rem, env(safe-area-inset-right)) 0 max(1.25rem, env(safe-area-inset-left)); }
+    .testimonial{ background: rgba(12,16,27,.7); border:1px solid rgba(118,221,255,.12); border-radius: var(--radius); padding:1.25rem; display:grid; gap:1rem; }
 
     /* Pricing */
-    .pricing-table{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1.2rem; align-items:start; }
-    .pricing-card{ position:relative; background: linear-gradient(160deg, rgba(12,16,27,.85), rgba(12,16,27,.55)); border:1px solid rgba(118,221,255,.14); border-radius: var(--radius); padding:1.6rem; display:grid; gap:1rem; box-shadow: var(--shadow); }
+    .pricing-table{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; align-items:start; padding: 0 max(1.25rem, env(safe-area-inset-right)) 0 max(1.25rem, env(safe-area-inset-left)); }
+    .pricing-card{ position:relative; background: linear-gradient(160deg, rgba(12,16,27,.85), rgba(12,16,27,.55)); border:1px solid rgba(118,221,255,.14); border-radius: var(--radius); padding:1.25rem; display:grid; gap:.9rem; box-shadow: var(--shadow); }
     .pricing-card.highlight{ border-color: rgba(118,221,255,.45); box-shadow: 0 18px 45px rgba(118,221,255,.18); }
-    .ribbon{ position:absolute; top:12px; right:12px; background: linear-gradient(120deg, #58f, #7cf); color:#081022; font-weight:900; font-size:.72rem; padding:.25rem .6rem; border-radius:999px; }
-    .price{ font-weight:900; color:#fff; letter-spacing:-.03em; font-size:2rem; }
-    .price span{ font-size: .95rem; color: var(--muted); font-weight:600; }
+    .ribbon{ position:absolute; top:10px; right:10px; background: linear-gradient(120deg, #58f, #7cf); color:#081022; font-weight:900; font-size:.72rem; padding:.22rem .5rem; border-radius:999px; }
+    .price{ font-weight:900; color:#fff; letter-spacing:-.03em; font-size:1.9rem; }
+    .price span{ font-size: .92rem; color: var(--muted); font-weight:600; }
 
     /* Glass cards & CTA */
     .card-glass{ background: linear-gradient(160deg, rgba(12,16,27,.82), rgba(12,16,27,.6)); border:1px solid rgba(118,221,255,.16); border-radius: var(--radius); box-shadow: var(--shadow); }
-    .cta-panel{ margin: 0 auto; max-width: 780px; padding: clamp(2rem, 5vw, 3.2rem); background: linear-gradient(130deg, rgba(91,138,255,.28), rgba(12,16,27,.85)); border-radius: calc(var(--radius) * 1.1); border: 1px solid rgba(118,221,255,.35); box-shadow: 0 18px 55px rgba(91,138,255,.35); display:grid; gap:1.2rem; text-align:center; }
+    .cta-panel{ margin: 0 auto; max-width: 780px; padding: clamp(1.6rem, 5vw, 3rem); background: linear-gradient(130deg, rgba(91,138,255,.28), rgba(12,16,27,.85)); border-radius: calc(var(--radius) * 1.1); border: 1px solid rgba(118,221,255,.35); box-shadow: 0 18px 55px rgba(91,138,255,.35); display:grid; gap:1.2rem; text-align:center; }
 
-    /* Footer */
-    footer{ border-top:1px solid rgba(118,221,255,.08); padding:2.2rem 0 3rem; background: rgba(5,7,13,.95); }
-    .footer-inner{ max-width:var(--max-width); margin:0 auto; padding:0 1.25rem; display:grid; gap:2rem; }
-    .footer-columns{ display:grid; gap:1.5rem; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-    .footer-columns h4{ margin-bottom:.65rem; font-size:1rem; }
-    .footer-columns ul{ list-style:none; margin:0; padding:0; display:grid; gap:.4rem; color:var(--muted); }
-    .footer-columns a:hover,.footer-columns a:focus-visible{ color:#fff; text-decoration:underline; }
-    .footer-bottom{ display:flex; flex-wrap:wrap; gap:.75rem; justify-content:space-between; color:var(--muted-soft); font-size:.88rem; }
+    /* Form elements */
+    .field{ width:100%; padding:.6rem .75rem; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text); }
+    .chip{
+      display:flex; align-items:center; gap:.6rem; width:100%;
+      border:1px solid rgba(118,221,255,.16); background: rgba(12,16,27,.6);
+      padding:.55rem .6rem; border-radius: 999px; white-space:nowrap;
+    }
+    .chip strong{ font-size:.86rem; opacity:.9 }
+    .chip code{
+      font-size:.9rem; flex:1 1 auto; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; opacity:.95;
+    }
+    .chip .secondary-btn{ flex: 0 0 auto; }
 
     /* Reveal */
     .reveal{ opacity:0; transform: translateY(22px) scale(.98); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.75,.2,1); }
@@ -240,21 +256,24 @@
     .magnetic{ position:relative; overflow:hidden; transition: transform .1s ease; }
     .magnetic .magnetic-target{ display:inline-block; }
 
-    /* Responsive */
+    /* Responsive nav */
     @media (max-width: 860px){
       .menu-toggle{ display:inline-flex; align-items:center; justify-content:center; }
       nav{
-        position: fixed; inset: 70px 1.25rem auto 1.25rem; background: rgba(5,7,13,.96);
-        border:1px solid rgba(118,221,255,.18); border-radius: var(--radius); padding:1.1rem; box-shadow: var(--shadow);
+        position: fixed; inset: 64px max(1rem, env(safe-area-inset-right)) auto max(1rem, env(safe-area-inset-left));
+        background: rgba(5,7,13,.96);
+        border:1px solid rgba(118,221,255,.18); border-radius: var(--radius-sm); padding:1rem; box-shadow: var(--shadow);
         transform: scale(.98); opacity:0; pointer-events:none; transition: opacity .2s ease, transform .2s ease;
       }
       nav.open{ opacity:1; transform: scale(1); pointer-events:auto; }
       .nav-list{ flex-direction: column; }
     }
+
+    /* Extra mobile tuning */
     @media (max-width: 640px){
-      .hero-metrics{ flex-direction:column; }
-      .metric{ width:100%; }
+      .logo, .logo-inline{ height:26px; }
       .cta-panel{ text-align:left; }
+      .metric{ min-width:unset; }
     }
   </style>
 </head>
@@ -281,9 +300,10 @@
           <li><a class="nav-link" href="#docs">Docs</a></li>
           <li><a class="nav-link" href="#resources">Resources</a></li>
           <li><a class="nav-link" href="#company">Company</a></li>
+          <li class="hide-lg"><a class="nav-link" href="#waitlist">Join waitlist</a></li>
         </ul>
       </nav>
-      <a class="primary-btn magnetic" href="#waitlist">
+      <a class="primary-btn magnetic header-cta" href="#waitlist">
         <span class="magnetic-target">Join waitlist</span>
         <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
           <path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
@@ -296,27 +316,27 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-inner">
-        <div class="hero-copy reveal">
+        <div class="hero-copy reveal container">
           <div class="tag">TradingView indicators & docs</div>
           <h1 class="shimmer"><span class="gradient-text">Cut through noise. Ship clear insights.</span></h1>
           <p class="lead">SignalPilot Pro is <strong>software + education</strong> for active traders: clean overlays, backtesting, and alert templates so your playbook stays consistent. Educational use only—no brokerage or financial advice.</p>
           <div class="hero-actions">
             <a class="primary-btn magnetic" href="#pricing"><span class="magnetic-target">See pricing</span></a>
-            <a class="btn-btc magnetic" href="#pay-crypto"><span class="magnetic-target">Pay with Bitcoin / ETH (–20%)</span></a>
+            <a class="btn-btc magnetic" href="#pay-crypto"><span class="magnetic-target">Pay with BTC/ETH (–20%)</span></a>
           </div>
         </div>
 
-        <div class="hero-metrics reveal" role="list">
-          <div class="metric" role="listitem">
-            <strong>Modular</strong>
+        <div class="hero-metrics reveal container" role="list" style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:.4rem">
+          <div class="panel" role="listitem" style="flex:1 1 260px">
+            <strong style="display:block;font-size:1.2rem;letter-spacing:-.02em;color:#fff">Modular</strong>
             <span>Turn strategy blocks on/off to match your plan.</span>
           </div>
-          <div class="metric" role="listitem">
-            <strong>Backtest‑ready</strong>
+          <div class="panel" role="listitem" style="flex:1 1 260px">
+            <strong style="display:block;font-size:1.2rem;letter-spacing:-.02em;color:#fff">Backtest‑ready</strong>
             <span>Run historical tests and review outcomes log.</span>
           </div>
-          <div class="metric" role="listitem">
-            <strong>Alerts</strong>
+          <div class="panel" role="listitem" style="flex:1 1 260px">
+            <strong style="display:block;font-size:1.2rem;letter-spacing:-.02em;color:#fff">Alerts</strong>
             <span>Template your entries for paper trading & reviews.</span>
           </div>
         </div>
@@ -327,8 +347,8 @@
     <section class="content-section" id="product">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2><span class="gradient-text">Built for disciplined, transparent trading</span></h2>
-          <p>Swap components without rewriting your workflow: trend foundation, signal confirmation, and execution scaffolding—all documented in plain English.</p>
+          <h2 class="container"><span class="gradient-text">Built for disciplined, transparent trading</span></h2>
+          <p class="container">Swap components without rewriting your workflow: trend foundation, signal confirmation, and execution scaffolding—all documented in plain English.</p>
         </div>
 
         <div class="feature-grid">
@@ -378,11 +398,11 @@
     <section class="content-section" id="risk">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2><span class="gradient-text">Risk workflows that respect your playbook</span></h2>
-          <p>Quantify drawdowns, test toggles, and keep a clean audit trail of why trades are taken—or skipped—before risking capital.</p>
+          <h2 class="container"><span class="gradient-text">Risk workflows that respect your playbook</span></h2>
+          <p class="container">Quantify drawdowns, test toggles, and keep a clean audit trail of why trades are taken—or skipped—before risking capital.</p>
         </div>
         <div class="panel reveal">
-          <div class="pipeline">
+          <div class="pipeline container">
             <div class="pipeline-step">
               <div class="step-index">1</div>
               <div class="step-body">
@@ -420,27 +440,21 @@
     <section class="content-section" id="works-with">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2><span class="gradient-text">Works with your tooling</span></h2>
-          <p>Route alerts where your team already lives.</p>
+          <h2 class="container"><span class="gradient-text">Works with your tooling</span></h2>
+          <p class="container">Route alerts where your team already lives.</p>
         </div>
-        <div class="marquee card-glass reveal" aria-label="Integrations marquee">
+        <div class="marquee card-glass reveal">
           <div class="marquee-track">
-            <!-- Discord -->
             <img class="logo" src="/assets/discord-icon-svgrepo-com.svg" alt="Discord">
-            <!-- Telegram (inline, no broken path) -->
+            <!-- Telegram (inline) -->
             <svg class="logo-inline" viewBox="0 0 16 16" role="img" aria-label="Telegram">
               <path fill="currentColor" d="M15.99 3.04a1.6 1.6 0 0 0-.31-.74 1.42 1.42 0 0 0-.99-.55 1.6 1.6 0 0 0-.6.04L1.89 3.47c-.97.26-.97 1.11-.18 1.4l3.1 1.16 1.2 3.84c.09.29.27.55.53.75.25.19.55.31.86.32.32.01.63-.08.89-.26l2.51-1.74 3.03 2.23c.29.21.62.31.97.31.35 0 .69-.12.97-.34.28-.21.49-.51.6-.85l2.64-8.77Z"/>
             </svg>
-            <!-- TradingView -->
             <img class="logo" src="/assets/Tradingview--Streamline-Simple-Icons.svg" alt="TradingView">
-            <!-- Slack -->
             <img class="logo" src="/assets/slack-svgrepo-com.svg" alt="Slack">
-            <!-- AWS -->
             <img class="logo" src="/assets/aws-svgrepo-com.svg" alt="AWS">
-            <!-- GitHub -->
             <img class="logo" src="/assets/icons8-github.svg" alt="GitHub">
-
-            <!-- repeat for seamless loop -->
+            <!-- repeat -->
             <img class="logo" src="/assets/discord-icon-svgrepo-com.svg" alt="Discord">
             <svg class="logo-inline" viewBox="0 0 16 16" role="img" aria-label="Telegram">
               <path fill="currentColor" d="M15.99 3.04a1.6 1.6 0 0 0-.31-.74 1.42 1.42 0 0 0-.99-.55 1.6 1.6 0 0 0-.6.04L1.89 3.47c-.97.26-.97 1.11-.18 1.4l3.1 1.16 1.2 3.84c.09.29.27.55.53.75.25.19.55.31.86.32.32.01.63-.08.89-.26l2.51-1.74 3.03 2.23c.29.21.62.31.97.31.35 0 .69-.12.97-.34.28-.21.49-.51.6-.85l2.64-8.77Z"/>
@@ -458,8 +472,8 @@
     <section class="content-section" id="docs">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2><span class="gradient-text">Documentation that gets you from charts to review</span></h2>
-          <p>Install, tune, and review. Copy presets and export outcomes so your learning loop tightens over time.</p>
+          <h2 class="container"><span class="gradient-text">Documentation that gets you from charts to review</span></h2>
+          <p class="container">Install, tune, and review. Copy presets and export outcomes so your learning loop tightens over time.</p>
         </div>
 
         <div class="feature-grid">
@@ -486,8 +500,8 @@
     <section class="content-section" id="resources">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2><span class="gradient-text">What traders use SignalPilot for</span></h2>
-          <p>Clarity, consistency, and clean review loops—without pretending to predict the future.</p>
+          <h2 class="container"><span class="gradient-text">What traders use SignalPilot for</span></h2>
+          <p class="container">Clarity, consistency, and clean review loops—without pretending to predict the future.</p>
         </div>
         <div class="testimonials">
           <article class="testimonial reveal">
@@ -503,7 +517,7 @@
             <cite>Community coach</cite>
           </article>
         </div>
-        <p style="margin-top:1.6rem;color:var(--muted-soft);font-size:.92rem">SignalPilot is educational software only and does not provide financial advice. Always validate ideas in a demo environment before risking capital.</p>
+        <p style="margin-top:1.2rem;color:var(--muted-soft);font-size:.92rem" class="container">SignalPilot is educational software only and does not provide financial advice. Always validate ideas in a demo environment before risking capital.</p>
       </div>
     </section>
 
@@ -511,8 +525,8 @@
     <section class="content-section" id="pricing">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2><span class="gradient-text">Pro — choose your plan</span></h2>
-          <p>Access is invite‑only. Pricing is transparent. Pay with BTC/ETH for a 20% discount or join the waitlist for card checkout when it opens.</p>
+          <h2 class="container"><span class="gradient-text">Pro — choose your plan</span></h2>
+          <p class="container">Access is invite‑only. Pricing is transparent. Pay with BTC/ETH for a 20% discount or join the waitlist for card checkout when it opens.</p>
         </div>
 
         <div class="pricing-table">
@@ -582,7 +596,7 @@
           </article>
         </div>
 
-        <p style="margin-top:1.4rem;color:var(--muted-soft);font-size:.9rem">
+        <p class="container" style="margin-top:1.2rem;color:var(--muted-soft);font-size:.9rem">
           <strong>Trust & refunds:</strong> First‑time purchases include a 7‑day satisfaction window. Crypto refunds go back to the sending address (minus network fees) if you cancel before or immediately after activation. Invites typically activate within 24 hours after payment confirmation.
         </p>
       </div>
@@ -592,14 +606,14 @@
     <section class="content-section" id="pay-crypto">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2><span class="gradient-text">Pay with crypto (save 20%)</span></h2>
-          <p>Request an invoice with exact quote and memo—or send directly, then share your tx id and TradingView username for activation.</p>
+          <h2 class="container"><span class="gradient-text">Pay with crypto (save 20%)</span></h2>
+          <p class="container">Request an invoice with exact quote and memo—or send directly, then share your tx id and TradingView username for activation.</p>
         </div>
 
-        <form id="cryptoForm" action="https://formspree.io/f/meorkjpn" method="POST" class="card-glass reveal" style="padding:1rem;border-radius:var(--radius)">
-          <div style="display:grid;gap:.6rem;grid-template-columns:1fr 1fr;max-width:860px">
+        <form id="cryptoForm" action="https://formspree.io/f/meorkjpn" method="POST" class="card-glass reveal container" style="padding:1rem;border-radius:var(--radius)">
+          <div class="grid-2">
             <label>Plan
-              <select id="planSelect" name="plan" required style="width:100%;padding:.6rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+              <select id="planSelect" name="plan" required class="field">
                 <option value="Monthly $79 — crypto ≈ $63.20">Monthly $79 — crypto ≈ $63.20</option>
                 <option value="Quarterly $199 — crypto ≈ $159.20">Quarterly $199 — crypto ≈ $159.20</option>
                 <option value="Yearly $499 — crypto ≈ $399.20" selected>Yearly $499 — crypto ≈ $399.20</option>
@@ -608,41 +622,36 @@
             </label>
 
             <label>Coin
-              <select name="coin" required style="width:100%;padding:.6rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+              <select name="coin" required class="field">
                 <option value="BTC">BTC</option>
                 <option value="ETH">ETH</option>
               </select>
             </label>
 
             <label>Email (for invoice & receipt)
-              <input type="email" name="email" required style="width:100%;padding:.6rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+              <input type="email" name="email" required class="field">
             </label>
 
             <label>TradingView username (for invite)
-              <input name="tradingview_username" placeholder="@your-handle" required style="width:100%;padding:.6rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+              <input name="tradingview_username" placeholder="@your-handle" required class="field">
             </label>
 
-            <label style="grid-column:span 2">Notes (optional)
-              <input name="notes" placeholder="Company/VAT, preferred email, memo instructions…" style="width:100%;padding:.6rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+            <label class="span-2">Notes (optional)
+              <input name="notes" placeholder="Company/VAT, preferred email, memo instructions…" class="field">
             </label>
           </div>
 
           <!-- Quick-copy wallets -->
-          <div style="display:grid;gap:.6rem;grid-template-columns:1fr 1fr;max-width:860px;margin-top:1rem">
-            <div class="card-glass" style="padding:.6rem 1rem;border-radius:10px">
-              <div style="display:flex;align-items:center;gap:.6rem;justify-content:space-between">
-                <strong>ETH</strong>
-                <code id="ethAddr" style="font-size:.92rem">0xcFf999901af3360576BA4Fa9750340C3f26504A5</code>
-                <button type="button" class="secondary-btn" onclick="navigator.clipboard.writeText(document.getElementById('ethAddr').textContent)">Copy</button>
-              </div>
+          <div class="grid-2" style="margin-top:.6rem">
+            <div class="chip">
+              <strong>ETH</strong>
+              <code id="ethAddr">0xcFf999901af3360576BA4Fa9750340C3f26504A5</code>
+              <button type="button" class="secondary-btn" onclick="navigator.clipboard.writeText(document.getElementById('ethAddr').textContent)">Copy</button>
             </div>
-
-            <div class="card-glass" style="padding:.6rem 1rem;border-radius:10px">
-              <div style="display:flex;align-items:center;gap:.6rem;justify-content:space-between">
-                <strong>BTC</strong>
-                <code id="btcAddr" style="font-size:.92rem">1DdTKYzeg9iR8GwgMZmoBje5ki5FhHwGVm</code>
-                <button type="button" class="secondary-btn" onclick="navigator.clipboard.writeText(document.getElementById('btcAddr').textContent)">Copy</button>
-              </div>
+            <div class="chip">
+              <strong>BTC</strong>
+              <code id="btcAddr">1DdTKYzeg9iR8GwgMZmoBje5ki5FhHwGVm</code>
+              <button type="button" class="secondary-btn" onclick="navigator.clipboard.writeText(document.getElementById('btcAddr').textContent)">Copy</button>
             </div>
           </div>
 
@@ -650,8 +659,10 @@
           <input type="text" name="_gotcha" style="display:none">
           <div id="cryptoSuccess" hidden style="margin-top:.8rem;color:var(--success)">Thanks—check your email for a quote and instructions. Invites typically activate within 24 hours after payment confirmation.</div>
 
-          <button class="btn-btc magnetic" type="submit" style="margin-top:.8rem"><span class="magnetic-target">Request crypto invoice</span></button>
-          <p style="margin-top:.6rem;color:var(--muted);font-size:.9rem">Prefer paying by card? It’s coming soon via a Merchant‑of‑Record. Join the waitlist below and we’ll notify you the moment it opens.</p>
+          <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:.8rem">
+            <button class="btn-btc magnetic" type="submit"><span class="magnetic-target">Request crypto invoice</span></button>
+            <p style="margin:0;color:var(--muted);font-size:.9rem">Prefer paying by card? It’s coming soon via a Merchant‑of‑Record. Join the waitlist below and we’ll notify you.</p>
+          </div>
         </form>
       </div>
     </section>
@@ -659,20 +670,20 @@
     <!-- WAITLIST -->
     <section class="content-section" id="waitlist">
       <div class="section-inner">
-        <div class="cta-panel reveal">
+        <div class="cta-panel reveal container">
           <h2><span class="gradient-text">Get notified when card checkout opens</span></h2>
           <p>We’ll also send docs, presets, and onboarding sessions.</p>
 
           <form id="waitlistForm" action="https://formspree.io/f/mldpnrop" method="POST" class="card-glass" style="padding:1rem;border-radius:var(--radius)">
-            <div style="display:grid;gap:.6rem;grid-template-columns:1fr 1fr;max-width:760px;margin:0 auto">
+            <div class="grid-2">
               <label>Name
-                <input name="name" required style="width:100%;padding:.6rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+                <input name="name" required class="field">
               </label>
               <label>Email
-                <input type="email" name="email" required style="width:100%;padding:.6rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+                <input type="email" name="email" required class="field">
               </label>
-              <label style="grid-column:span 2">TradingView username
-                <input name="tradingview_username" placeholder="@your-handle" required style="width:100%;padding:.6rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+              <label class="span-2">TradingView username
+                <input name="tradingview_username" placeholder="@your-handle" required class="field">
               </label>
             </div>
             <input type="hidden" name="_subject" value="SignalPilot Pro — Waitlist">
@@ -690,8 +701,8 @@
     <section class="content-section" id="company">
       <div class="section-inner">
         <div class="section-lead reveal">
-          <h2><span class="gradient-text">SignalPilot Labs, Inc.</span></h2>
-          <p>We build trading software and documentation for independent traders, prop desks, and communities—education first, always.</p>
+          <h2 class="container"><span class="gradient-text">SignalPilot Labs, Inc.</span></h2>
+          <p class="container">We build trading software and documentation for independent traders, prop desks, and communities—education first, always.</p>
         </div>
         <div class="feature-grid">
           <article class="feature-card tilt reveal">
@@ -717,7 +728,7 @@
     <!-- CTA -->
     <section class="content-section">
       <div class="section-inner">
-        <div class="cta-panel reveal">
+        <div class="cta-panel reveal container">
           <h2><span class="gradient-text">Ready to trade with clarity?</span></h2>
           <p>Install when invited, tune parameters, and review outcomes. Keep your process consistent—no hype, just software and docs.</p>
           <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center">
@@ -732,7 +743,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-inner">
+    <div class="footer-inner container">
       <div class="footer-columns">
         <div>
           <a class="brand" href="/" aria-label="SignalPilot home">
@@ -778,7 +789,7 @@
         </div>
       </div>
 
-      <div class="footer-bottom">
+      <div class="footer-bottom" style="margin-top:1rem">
         <div>&copy; <span id="year"></span> SignalPilot Labs, Inc. All rights reserved.</div>
         <div style="display:flex;gap:1rem">
           <a href="/privacy.html">Privacy</a>
