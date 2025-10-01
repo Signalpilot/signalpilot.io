@@ -23,7 +23,7 @@
   <meta name="twitter:description" content="SP VIP (Event Candles) + companion modules for bias, sessions, risk and alerts. Educational use only.">
   <meta name="twitter:image" content="https://www.signalpilot.io/preview.png">
 
-  <!-- Plausible (leave as-is or remove) -->
+  <!-- Plausible (keep or remove) -->
   <script defer data-domain="signalpilot.io" src="https://plausible.io/js/script.js"></script>
 
   <!-- Mobile UI color -->
@@ -49,13 +49,17 @@
       --shadow:0 18px 60px rgba(12,16,27,.45);
       --max: min(1160px, 92vw);
 
-      /* gradients */
+      /* gradient palettes */
       --grad: linear-gradient(90deg,#9cc0ff 0%,#86a8ff 35%,#7ccaff 60%,#8ca5ff 85%,#b9d4ff 100%);
       --grad-2: linear-gradient(180deg,rgba(118,221,255,.6),rgba(118,221,255,0));
+      --grad-amber: linear-gradient(90deg,#ffd38a,#ffb347);
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
+    html,body{
+      margin:0;background:var(--bg);color:var(--text);
+      font:16px/1.6 "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif
+    }
 
     /* Background grid + glow */
     body::before{
@@ -84,30 +88,30 @@
     .btn-primary{background:linear-gradient(120deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 16px 40px rgba(91,138,255,.28)}
     .btn-primary:hover{filter:brightness(1.07)}
     .btn-ghost{color:var(--accent)}
-    .btn-crypto{background:linear-gradient(120deg,#ffcc80,#ffb347);color:#2b1e00;box-shadow:0 16px 40px rgba(255,180,70,.25)}
+    .btn-crypto{background:var(--grad-amber);color:#2b1e00;box-shadow:0 16px 40px rgba(255,180,70,.25)}
     .btn-crypto:hover{filter:brightness(1.05)}
     .btn-disabled{background:rgba(255,255,255,.08);color:var(--muted);cursor:not-allowed;border:1px dashed rgba(255,255,255,.16)}
 
-    .badge{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .7rem;border-radius:999px;background:rgba(118,221,255,.12);color:var(--accent);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:.78rem}
+    .badge{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .7rem;border-radius:999px;background:rgba(118,221,255,.12);color:var(--accent);font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:.78rem}
 
-    /* Headline gradient + spotlight */
-    .headline{
-      font-weight:900;letter-spacing:-.02em;line-height:1.06;
-      background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-      filter:drop-shadow(0 8px 30px rgba(91,138,255,.15));
-    }
+    /* Gradient text utilities */
+    .headline{font-weight:900;letter-spacing:-.02em;line-height:1.06;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 8px 30px rgba(91,138,255,.15))}
     .headline.xl{font-size: clamp(2.6rem, 7vw, 4.2rem)}
     .headline.lg{font-size: clamp(2rem, 5vw, 3rem)}
-    .spotlight{
-      position:relative;isolation:isolate;
-    }
+    .gtext{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+    /* Hero shimmer/spotlight */
+    .spotlight{position:relative;isolation:isolate}
     .spotlight::after{
-      content:"";
-      position:absolute;inset:-6px;z-index:-1;border-radius:20px;
-      background: radial-gradient(120px 160px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
-                  linear-gradient(180deg, rgba(255,255,255,.06), transparent 60%);
-      opacity:.7;filter:blur(10px);
-      mask:linear-gradient(#000 0,#0000 50%);
+      content:""; position:absolute; inset:-6px; z-index:-1; border-radius:20px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+      filter: blur(10px); opacity:.65; transform: translateX(-140%);
+      animation: shine 6.5s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes shine { 0%{ transform:translateX(-140%) } 100%{ transform:translateX(140%) } }
+    @media (prefers-reduced-motion: reduce){
+      .spotlight::after{animation:none;opacity:.25}
     }
 
     /* Header */
@@ -136,9 +140,19 @@
     .hero .panel .btn-ghost{background:rgba(255,255,255,.08);border-radius:999px;padding:.6rem 1rem}
     @media (max-width: 900px){.hero-grid{grid-template-columns: 1fr}.hero .panel{min-height:180px}}
 
-    /* Cards / sections */
+    /* Sections / cards */
     .section{padding: clamp(3rem, 9vw, 5rem) 0;border-top:1px solid rgba(255,255,255,.06)}
-    .card{border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border-radius:var(--radius);padding:1.25rem}
+    .card{
+      position:relative; border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+      border-radius:var(--radius); padding:1.25rem;
+    }
+    .card::before{
+      content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none;
+      background: linear-gradient(180deg, rgba(118,221,255,.12), rgba(118,221,255,0));
+      mask: linear-gradient(#000, transparent 60%);
+      opacity:.5;
+    }
     .grid{display:grid;gap:1rem}
     .grid.auto-250{grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))}
 
@@ -146,7 +160,7 @@
     .pricing{display:grid;gap:1.2rem;grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))}
     .price-card{padding:1.5rem;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border-radius:18px;display:grid;gap:1rem;align-content:start;min-height:480px}
     .price{font-size:2.2rem;font-weight:900;letter-spacing:-.02em}
-    .pill{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.08);padding:.25rem .55rem;border-radius:999px;font-weight:700;font-size:.8rem;color:var(--muted)}
+    .pill{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.08);padding:.25rem .55rem;border-radius:999px;font-weight:800;font-size:.8rem;color:var(--muted)}
     .price-actions{margin-top:auto;display:grid;gap:.6rem}
     .note{font-size:.86rem;color:var(--muted-soft)}
 
@@ -177,8 +191,8 @@
 
 <header>
   <div class="container nav">
-    <a href="/" class="brand">
-      <img src="assets/signalpilot-logo.svg" alt="" />
+    <a href="/" class="brand" aria-label="SignalPilot home">
+      <img src="assets/signalpilot-logo.svg" alt="SignalPilot logo" />
       <span>SignalPilot</span>
     </a>
 
@@ -196,7 +210,7 @@
     </nav>
 
     <a class="btn btn-primary" href="#waitlist">Join waitlist</a>
-    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav">⋯</button>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu">⋯</button>
   </div>
 </header>
 
@@ -206,7 +220,7 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="stack reveal">
-        <span class="badge">TRADINGVIEW INDICATORS</span>
+        <span class="badge">TRADINGVIEW INDICATORS &amp; STRATEGY</span>
         <h1 class="headline xl spotlight">Cut through noise. Ship clear signals.</h1>
         <p style="max-width:60ch;color:var(--muted)">
           Our flagship <strong>SignalPilot VIP (SP VIP)</strong> with <strong>Event Candles</strong> highlights high‑quality moves; companion modules handle bias, sessions and risk. Clean overlays, honest logic, automation‑ready alerts. <strong>Educational use only.</strong>
@@ -228,7 +242,7 @@
   <!-- PRODUCT: Works on every market & timeframe  -->
   <section id="product" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal">Trade <em>every</em> market, on <em>any</em> timeframe</h2>
+      <h2 class="headline lg reveal">Trade <span class="gtext">every</span> market, on <span class="gtext">any</span> timeframe</h2>
       <p class="reveal" style="max-width:70ch;color:var(--muted)">
         SP VIP (Event Candles) and its companion modules run on <strong>all TradingView charts</strong>—crypto, FX, indices, equities, futures, ETFs, commodities—and adapt from scalps to swings to position trades.
       </p>
@@ -283,7 +297,7 @@
   <!-- PRICING -->
   <section id="pricing" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal">Plans &amp; pricing — SP VIP included in all tiers</h2>
+      <h2 class="headline lg reveal">Plans &amp; pricing — <span class="gtext">SP VIP included</span> in all tiers</h2>
 
       <div class="pricing reveal">
         <!-- Monthly -->
@@ -321,7 +335,7 @@
 
         <!-- Yearly -->
         <article class="price-card">
-          <div class="pill">Best value</div>
+          <div class="pill" style="background:rgba(123,155,255,.18);color:#d6e1ff">Best value</div>
           <div class="price">$499 <span class="pill">/year</span></div>
           <ul>
             <li>Everything in Quarterly</li>
@@ -407,7 +421,7 @@
         </div>
 
         <div class="card">
-          <p style="color:var(--muted)">Prefer to send directly? Use a wallet below and <strong>email tx id + plan + TradingView username</strong> to <a href="mailto:support@signalpilot.io">support@signalpilot.io</a> for activation. <em>No memo/tag required.</em></p>
+          <p style="color:var(--muted)">Prefer to send directly? Use a wallet below and <strong>email tx id + plan + TradingView username</strong> to <a href="mailto:support@signalpilot.io">support@signalpilot.io</a> for activation. <strong>No memo/tag required.</strong></p>
 
           <div class="stack" style="gap:.5rem">
             <div class="row">
@@ -535,17 +549,21 @@
 </footer>
 
 <script>
-  // mobile menu
+  // mobile menu (close on outside/Escape/scroll)
   const menuBtn = document.getElementById('menuToggle');
   const nav = document.getElementById('mainnav');
+  const closeMenu = () => nav.classList.remove('open');
+
   menuBtn?.addEventListener('click', () => {
     nav.classList.toggle('open');
     menuBtn.setAttribute('aria-expanded', nav.classList.contains('open'));
   });
   document.addEventListener('click', (e) => {
-    if (!nav.contains(e.target) && e.target !== menuBtn) nav.classList.remove('open');
+    if (!nav.contains(e.target) && e.target !== menuBtn) closeMenu();
   });
-  document.querySelectorAll('#mainnav a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMenu(); });
+  window.addEventListener('scroll', closeMenu, {passive:true});
+  document.querySelectorAll('#mainnav a').forEach(a => a.addEventListener('click', closeMenu));
 
   // reveal on scroll
   const io = new IntersectionObserver((entries) => {
@@ -553,16 +571,25 @@
   }, { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // copy buttons
+  // copy buttons with clipboard fallback
+  function copyValueFromSelector(sel){
+    const el = document.querySelector(sel);
+    if(!el) return;
+    const val = el.value || el.textContent || '';
+    if (navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(val).catch(()=>fallback());
+    } else { fallback(); }
+    function fallback(){
+      if (el.select){
+        el.select(); el.setSelectionRange(0, val.length);
+        document.execCommand('copy');
+      }
+    }
+  }
   document.querySelectorAll('[data-copy]').forEach(btn=>{
     btn.addEventListener('click',()=>{
-      const sel = btn.getAttribute('data-copy');
-      const el = document.querySelector(sel);
-      if (!el) return;
-      el.select(); el.setSelectionRange(0, 99999);
-      document.execCommand('copy');
-      btn.textContent = 'Copied';
-      setTimeout(()=>btn.textContent='Copy',1200);
+      copyValueFromSelector(btn.getAttribute('data-copy'));
+      const t = btn.textContent; btn.textContent='Copied'; setTimeout(()=>btn.textContent=t,1200);
     });
   });
 
