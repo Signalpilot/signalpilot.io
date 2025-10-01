@@ -33,7 +33,7 @@
 
   <!-- Structured data: Product (pricing) -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Product","name":"SignalPilot Pro","description":"TradingView strategy with automation, risk controls, backtesting, and advanced alerts. Access is invite-only but pricing is transparent.","brand":{"@type":"Organization","name":"SignalPilot Labs, Inc.","url":"https://www.signalpilot.io"},"url":"https://www.signalpilot.io/#pricing","sku":"SignalPilotPro","category":"Trading Software","offers":[{"@type":"Offer","name":"Pro — Monthly","url":"https://www.signalpilot.io/#pricing","price":"79","priceCurrency":"USD","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Pro — Quarterly","url":"https://www.signalpilot.io/#pricing","price":"199","priceCurrency":"USD","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"Pro — Yearly","url":"https://www.signalpilot.io/#pricing","price":"499","priceCurrency":"USD","availability":"https://schema.org/InStock","priceValidUntil":"2026-12-31"},{"@type":"Offer","name":"Pro — Lifetime (limited)","url":"https://www.signalpilot.io/#pricing","price":"899","priceCurrency":"USD","availability":"https://schema.org/LimitedAvailability"}]}
+  {"@context":"https://schema.org","@type":"Product","name":"SignalPilot Pro","description":"TradingView strategy with automation, risk controls, backtesting, and advanced alerts. Access is invite-only but pricing is transparent.","brand":{"@type":"Organization","name":"SignalPilot Labs, Inc.","url":"https://www.signalpilot.io"},"url":"https://www.signalpilot.io/#pricing","sku":"SignalPilotPro","category":"Trading Software","offers":[{"@type":"Offer","name":"Pro — Monthly","url":"https://www.signalpilot.io/#pricing","price":"79","priceCurrency":"USD","availability":"https://schema.org/InStock","acceptedPaymentMethod":"https://schema.org/CreditCard"},{"@type":"Offer","name":"Pro — Quarterly","url":"https://www.signalpilot.io/#pricing","price":"199","priceCurrency":"USD","availability":"https://schema.org/InStock","acceptedPaymentMethod":"https://schema.org/CreditCard"},{"@type":"Offer","name":"Pro — Yearly","url":"https://www.signalpilot.io/#pricing","price":"499","priceCurrency":"USD","availability":"https://schema.org/InStock","priceValidUntil":"2026-12-31","acceptedPaymentMethod":"https://schema.org/CreditCard"},{"@type":"Offer","name":"Pro — Lifetime (limited)","url":"https://www.signalpilot.io/#pricing","price":"899","priceCurrency":"USD","availability":"https://schema.org/LimitedAvailability","acceptedPaymentMethod":"https://schema.org/CreditCard"}]}
   </script>
 
   <!-- Structured data: FAQ -->
@@ -213,7 +213,6 @@
     :root[data-theme="light"] .price{color:#0f172a}
     .price span{font-size:1rem;color:var(--muted);font-weight:500}
     .pricing-card ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;color:var(--muted)}
-    .pricing-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.2rem}
 
     /* Highlight FX */
     .pricing-card.highlight{border:1px solid rgba(118,221,255,.55);box-shadow:0 0 18px rgba(118,221,255,.25);overflow:hidden}
@@ -293,16 +292,11 @@
     :root[data-theme="light"] .sectoc a{background:#fff}
     @media (min-width:1000px){.sectoc{display:flex}}
 
-    /* ---- BTC modal ---- */
-    .btc-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:2000}
-    .btc-modal.open{display:flex}
-    .btc-sheet{width:min(560px,92vw);border-radius:16px;background:var(--bg-elev);border:1px solid var(--border);box-shadow:0 20px 55px rgba(0,0,0,.5);padding:1.1rem}
-    .btc-sheet h3{margin:.2rem 0 .6rem}
-    .btc-row{display:grid;grid-template-columns:1fr auto;gap:.6rem;align-items:center}
-    .btc-addr{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:.6rem;overflow:auto}
-    .btc-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}
-    .ghost-btn{display:inline-flex;align-items:center;gap:.35rem;border:1px solid var(--border);border-radius:10px;padding:.45rem .7rem;background:var(--bg-elev);color:var(--text);text-decoration:none}
-    .close-x{position:absolute;right:10px;top:10px;border:1px solid var(--border);border-radius:10px;background:var(--bg-elev);color:var(--muted);padding:.3rem .55rem}
+    /* --- Payment helpers --- */
+    .pay-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+    .codebox{display:flex;align-items:center;gap:.6rem;padding:.65rem .75rem;border:1px dashed rgba(155,182,255,.45);border-radius:10px;background:rgba(255,255,255,.03);font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    .copybtn{border:1px solid var(--border);background:var(--bg-elev);color:var(--text);border-radius:8px;padding:.4rem .6rem;cursor:pointer}
+    .chip{display:inline-flex;align-items:center;gap:.4rem;padding:.2rem .5rem;border-radius:999px;border:1px solid rgba(62,213,152,.35);background:rgba(62,213,152,.15);color:#bdf2de;font-size:.78rem;font-weight:700;letter-spacing:.02em}
   </style>
 </head>
 <body>
@@ -522,58 +516,40 @@
         </div>
 
         <div class="pricing-table reveal">
-          <!-- Monthly -->
+          <!-- ✅ STRIPE LINKS: paste your Payment Link URLs -->
           <article class="pricing-card card-glass inkable">
             <div><h3>Monthly</h3><p class="price">$79 <span>/month</span></p></div>
             <p>Great for active traders who want to try Pro month-to-month.</p>
             <ul><li>All Pro modules & automation</li><li>Advanced alerts & webhooks</li><li>Backtesting & risk controls</li></ul>
-            <div class="pricing-actions">
-              <!-- Stripe Payment Link -->
-              <a class="primary-btn" target="_blank" rel="noopener" href="https://buy.stripe.com/REPLACE_MONTHLY_LINK"><span>Pay with card</span></a>
-              <!-- Bitcoin modal trigger -->
-              <button class="ghost-btn btc-open" type="button" data-plan="Monthly" data-usd="79">Pay with Bitcoin</button>
-              <!-- Keep invite path -->
-              <a class="secondary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Monthly">Request Invite</a>
-            </div>
+            <a class="primary-btn magnetic buy-btn" data-plan="monthly" href="https://buy.stripe.com/REPLACE_STRIPE_MONTHLY"><span class="magnetic-target">Pay with card</span></a>
+            <a class="secondary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Monthly">Request Invite</a>
           </article>
 
-          <!-- Quarterly -->
           <article class="pricing-card card-glass inkable">
             <div><h3>Quarterly</h3><p class="price">$199 <span>/3 months</span></p></div>
             <p>Better value for traders who commit to a quarter.</p>
             <ul><li>All Pro modules & automation</li><li>Advanced alerts & webhooks</li><li>Backtesting & risk controls</li><li>Save vs monthly</li></ul>
-            <div class="pricing-actions">
-              <a class="primary-btn" target="_blank" rel="noopener" href="https://buy.stripe.com/REPLACE_QUARTERLY_LINK"><span>Pay with card</span></a>
-              <button class="ghost-btn btc-open" type="button" data-plan="Quarterly" data-usd="199">Pay with Bitcoin</button>
-              <a class="secondary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Quarterly">Request Invite</a>
-            </div>
+            <a class="primary-btn magnetic buy-btn" data-plan="quarterly" href="https://buy.stripe.com/REPLACE_STRIPE_QUARTERLY"><span class="magnetic-target">Pay with card</span></a>
+            <a class="secondary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Quarterly">Request Invite</a>
           </article>
 
-          <!-- Yearly -->
           <article class="pricing-card highlight card-glass inkable">
             <span class="fx-border"></span>
             <div class="ribbon">Best Value</div>
             <div><h3>Yearly</h3><p class="price">$499 <span>/year</span></p></div>
             <p>Best value for serious traders — one full year of SignalPilot Pro.</p>
             <ul><li>All Pro modules & automation</li><li>Advanced alerts & webhooks</li><li>Backtesting & risk controls</li><li>Priority support</li><li>Save big vs monthly</li></ul>
-            <div class="pricing-actions">
-              <a class="primary-btn" target="_blank" rel="noopener" href="https://buy.stripe.com/REPLACE_YEARLY_LINK"><span>Pay with card</span></a>
-              <button class="ghost-btn btc-open" type="button" data-plan="Yearly" data-usd="499">Pay with Bitcoin</button>
-              <a class="secondary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Yearly">Request Invite</a>
-            </div>
+            <a class="primary-btn magnetic buy-btn" data-plan="yearly" href="https://buy.stripe.com/REPLACE_STRIPE_YEARLY"><span class="magnetic-target">Pay with card</span></a>
+            <a class="secondary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Yearly">Request Invite</a>
           </article>
 
-          <!-- Lifetime -->
           <article class="pricing-card lifetime card-glass inkable">
             <div class="badge-limited">Limited</div>
             <div><h3>Lifetime (limited)</h3><p class="price">$899 <span>one-time</span></p></div>
             <p>Exclusive one-time payment for lifetime access. Limited availability.</p>
             <ul><li>Permanent Pro access</li><li>All future updates included</li><li>Backtesting, risk, automation</li><li>Limited availability</li></ul>
-            <div class="pricing-actions">
-              <a class="primary-btn" target="_blank" rel="noopener" href="https://buy.stripe.com/REPLACE_LIFETIME_LINK"><span>Pay with card</span></a>
-              <button class="ghost-btn btc-open" type="button" data-plan="Lifetime" data-usd="899">Pay with Bitcoin</button>
-              <a class="secondary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Lifetime">Request Invite</a>
-            </div>
+            <a class="primary-btn magnetic buy-btn" data-plan="lifetime" href="https://buy.stripe.com/REPLACE_STRIPE_LIFETIME"><span class="magnetic-target">Pay with card</span></a>
+            <a class="secondary-btn" href="mailto:support@signalpilot.io?subject=SignalPilot%20Pro%20Invite%20Lifetime">Request Invite</a>
           </article>
         </div>
 
@@ -588,6 +564,41 @@
             <p style="color:var(--muted);margin-top:.6rem">Request an invite via email or the form below. We onboard in cohorts and share setup steps.</p>
           </details>
         </div>
+
+        <!-- 🔐 Crypto payments (manual invoice + copyable wallets) -->
+        <details class="card-glass inkable reveal" style="margin-top:1rem;padding:1rem;border-radius:12px">
+          <summary><strong>Pay with crypto (save <span class="chip">12% off</span>)</strong></summary>
+          <div style="margin-top:.8rem" class="pay-grid">
+            <div>
+              <p style="margin:.2rem 0 .6rem 0;color:var(--muted)">Choose plan & coin, then request a crypto invoice (you’ll receive the exact amount & memo). Discounts apply automatically. Early launch promos may apply to Lifetime (first buyers).</p>
+              <div style="display:grid;gap:.6rem">
+                <label>Plan
+                  <select id="cryptoPlan" style="width:100%;padding:.6rem;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+                    <option value="Monthly">$79 /mo — crypto ≈ $69.52</option>
+                    <option value="Quarterly">$199 /qtr — crypto ≈ $175.12</option>
+                    <option value="Yearly" selected>$499 /yr — crypto ≈ $439.12</option>
+                    <option value="Lifetime">Lifetime $899 — crypto ≈ $791.12</option>
+                  </select>
+                </label>
+                <label>Coin
+                  <select id="cryptoCoin" style="width:100%;padding:.6rem;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+                    <option value="ETH" selected>ETH</option>
+                    <option value="BTC">BTC</option>
+                  </select>
+                </label>
+                <button id="cryptoInvoice" class="primary-btn magnetic" type="button"><span class="magnetic-target">Request crypto invoice</span></button>
+                <p style="color:var(--muted);margin:.2rem 0 0 0;font-size:.92rem">We’ll reply with a fresh quote using spot rate at the time of your request and instructions to include your email/txid for fast activation.</p>
+              </div>
+            </div>
+
+            <div>
+              <p style="margin:.2rem 0 .6rem 0;color:var(--muted)">Prefer to send directly? Use a wallet below and email <strong>tx id + plan</strong> to <a href="mailto:support@signalpilot.io">support@signalpilot.io</a> for activation.</p>
+              <div class="codebox"><span>ETH</span><code id="ethAddr">0xcFf999901af3360576BA4Fa9750340C3f26504A5</code><button class="copybtn" data-copy="#ethAddr">Copy</button></div>
+              <div class="codebox" style="margin-top:.5rem"><span>BTC</span><code id="btcAddr">1DdTKYzeg9iR8GwgMZmoBje5ki5FhHwGVm</code><button class="copybtn" data-copy="#btcAddr">Copy</button></div>
+              <p style="color:var(--muted);margin:.6rem 0 0 0;font-size:.9rem">Manual sends are processed after network confirmations. If you’re using a centralized exchange without memos, the email with tx id is required to match payment to your account.</p>
+            </div>
+          </div>
+        </details>
 
         <!-- Waitlist form -->
         <form action="https://formspree.io/f/REPLACE_ME" method="POST" class="card-glass inkable reveal" style="margin-top:1rem;padding:1rem;border-radius:12px">
@@ -674,27 +685,6 @@
 
   <!-- Back to top -->
   <button id="toTop" class="topbtn" aria-label="Back to top">▲ Top</button>
-
-  <!-- BTC Modal -->
-  <div class="btc-modal" id="btcModal" aria-hidden="true">
-    <div class="btc-sheet card-glass" role="dialog" aria-modal="true" aria-labelledby="btcTitle">
-      <button class="close-x" id="btcClose" type="button">Close</button>
-      <h3 id="btcTitle">Pay with Bitcoin</h3>
-      <p id="btcPlan" style="color:var(--muted);margin:.2rem 0 .6rem">Plan</p>
-      <div class="btc-row">
-        <div class="btc-addr" id="btcAddress" tabindex="0" aria-label="Bitcoin address"></div>
-        <button class="ghost-btn" id="copyBtc">Copy</button>
-      </div>
-      <div class="btc-actions">
-        <a class="primary-btn" id="openWallet" href="#" target="_blank" rel="noopener">Open in wallet</a>
-        <button class="ghost-btn" id="btcDismiss" type="button">Done</button>
-      </div>
-      <p style="color:var(--muted-soft);margin-top:.6rem;font-size:.9rem">
-        Send the BTC equivalent of <strong id="btcUsd"></strong> to the address above.
-        After the transfer confirms, email <a href="mailto:support@signalpilot.io">support@signalpilot.io</a> with your TXID and TradingView username for activation.
-      </p>
-    </div>
-  </div>
 
   <!-- Scripts -->
   <script>
@@ -837,47 +827,39 @@
     },{rootMargin:'-40% 0px -55% 0px',threshold:0});
     anchors.forEach(sec=>sec && tocObs.observe(sec));
 
-    /* -----------------------
-       Bitcoin modal wiring
-       ----------------------- */
-    const BTC_ADDRESS = 'REPLACE_WITH_YOUR_BTC_ADDRESS'; // e.g., bc1qxxxx...
-
-    const modal   = document.getElementById('btcModal');
-    const closeX  = document.getElementById('btcClose');
-    const dismiss = document.getElementById('btcDismiss');
-    const addr    = document.getElementById('btcAddress');
-    const planEl  = document.getElementById('btcPlan');
-    const usdEl   = document.getElementById('btcUsd');
-    const openW   = document.getElementById('openWallet');
-    const copyBtn = document.getElementById('copyBtc');
-
-    function openBtc(plan, usd){
-      addr.textContent = BTC_ADDRESS || '(set BTC address)';
-      planEl.textContent = `${plan} • USD ${usd}`;
-      usdEl.textContent  = `$${usd}`;
-      openW.href = `bitcoin:${encodeURIComponent(BTC_ADDRESS)}?label=${encodeURIComponent('SignalPilot Pro – ' + plan)}`;
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
-      try{ window.plausible && window.plausible('BTC Modal Open',{props:{plan}});}catch(e){}
-    }
-    function closeBtc(){
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden','true');
-    }
-    document.querySelectorAll('.btc-open').forEach(btn=>{
-      btn.addEventListener('click', ()=> openBtc(btn.dataset.plan, btn.dataset.usd));
+    // Track Stripe buys
+    document.querySelectorAll('.buy-btn').forEach(a=>{
+      a.addEventListener('click', ()=> {
+        try { window.plausible && window.plausible('Stripe Buy', {props:{plan:a.dataset.plan}}); } catch(e){}
+      });
     });
-    [closeX,dismiss].forEach(b=>b.addEventListener('click', closeBtc));
-    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeBtc(); });
 
-    copyBtn.addEventListener('click', async ()=>{
-      try{
-        await navigator.clipboard.writeText(BTC_ADDRESS);
-        copyBtn.textContent = 'Copied';
-        setTimeout(()=>copyBtn.textContent='Copy', 1200);
-        window.plausible && window.plausible('BTC Address Copied');
-      }catch(e){}
+    // Copy wallet address + analytics
+    document.querySelectorAll('.copybtn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const sel = btn.getAttribute('data-copy');
+        const el = document.querySelector(sel);
+        if(!el) return;
+        navigator.clipboard.writeText(el.textContent.trim()).then(()=>{
+          btn.textContent='Copied!';
+          setTimeout(()=>btn.textContent='Copy',1200);
+          try{ window.plausible && window.plausible('Copy Address',{props:{addr:sel.includes('eth')?'ETH':'BTC'}});}catch(e){}
+        });
+      });
     });
+
+    // Crypto invoice mailto builder
+    const cryptoInvoiceBtn = document.getElementById('cryptoInvoice');
+    if(cryptoInvoiceBtn){
+      cryptoInvoiceBtn.addEventListener('click', ()=>{
+        const plan = document.getElementById('cryptoPlan').value;
+        const coin = document.getElementById('cryptoCoin').value;
+        const subject = encodeURIComponent(`SignalPilot Pro – Crypto invoice (${plan}, ${coin})`);
+        const body = encodeURIComponent(`Hi SignalPilot,\n\nPlease send a ${coin} payment request for the ${plan} plan.\n\nMy name: \nEmail (for activation): \n\nThanks!`);
+        location.href = `mailto:support@signalpilot.io?subject=${subject}&body=${body}`;
+        try{ window.plausible && window.plausible('Crypto Invoice',{props:{plan,coin}});}catch(e){}
+      });
+    }
   </script>
 </body>
 </html>
