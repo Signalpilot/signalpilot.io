@@ -29,7 +29,7 @@
   <!-- Mobile UI color -->
   <meta name="theme-color" content="#05070d">
 
-  <!-- Structured data -->
+  <!-- Structured data (Product) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -76,7 +76,7 @@
 
     *{box-sizing:border-box}
     html{-webkit-text-size-adjust:100%}
-    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
+    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;overflow-x:hidden}
     img{max-width:100%;height:auto;display:block}
     a{color:inherit}
 
@@ -132,18 +132,26 @@
 
     /* Header */
     header{position:sticky;top:0;z-index:40;backdrop-filter:blur(16px);background:color-mix(in srgb, var(--bg) 72%, transparent);border-bottom:1px solid rgba(255,255,255,.08)}
-    .nav{display:flex;align-items:center;gap:.8rem;padding:.7rem 0}
-    .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:#fff;font-weight:900;letter-spacing:.02em}
+    .nav{display:flex;align-items:center;gap:.6rem;padding:.7rem 0}
+    .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:#fff;font-weight:900;letter-spacing:.02em;min-width:0}
     .brand img{width:28px;height:28px}
-    .nav-spacer{flex:1}
+    .nav-spacer{flex:1;min-width:0}
     .menu-toggle{display:none;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:#fff;padding:.45rem .6rem}
     nav[aria-label="Main"]{display:flex}
     nav ul{display:flex;gap:.4rem;list-style:none;margin:0;padding:0;align-items:center}
     nav a{display:inline-flex;padding:.48rem .72rem;border-radius:999px;color:var(--muted);text-decoration:none;font-weight:700}
     nav a:hover, nav a:focus-visible{color:#fff;background:rgba(255,255,255,.08);outline:none}
 
+    /* Header CTA adjustments for mobile */
+    .header-cta{margin-left:.2rem}
+    @media (max-width: 640px){
+      .header-cta{padding:.56rem .9rem;font-size:.92rem}
+    }
+    @media (max-width: 420px){
+      .header-cta{display:none}
+    }
     @media (max-width: 860px){
-      .menu-toggle{display:inline-flex;margin-left:.4rem}
+      .menu-toggle{display:inline-flex;margin-left:.2rem}
       nav[aria-label="Main"]{
         position:fixed;right:1rem;top:64px;flex-direction:column;background:rgba(10,12,20,.98);
         border:1px solid rgba(255,255,255,.12);padding:1rem;border-radius:16px;display:none;box-shadow:var(--shadow)
@@ -151,6 +159,7 @@
       nav[aria-label="Main"].open{display:flex}
       nav ul{flex-direction:column;gap:.2rem}
       body.nav-open{overflow:hidden}
+      header .nav{padding:.55rem 0}
     }
 
     /* Hero */
@@ -163,8 +172,9 @@
       background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));
       box-shadow:var(--shadow);display:flex;align-items:flex-end;justify-content:space-between;padding:1rem
     }
-    .panel .soon{font-weight:800;color:var(--muted);display:inline-flex;align-items:center;gap:.5rem}
+    .panel .soon{font-weight:800;color:var(--muted);display:inline-flex;align-items:center;gap:.7rem;flex-wrap:wrap}
     .panel .soon .dot{width:8px;height:8px;border-radius:999px;background:linear-gradient(120deg,#6ef1a7,#33d28c);box-shadow:0 0 16px #33d28c}
+    .countdown{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;font-weight:900;color:#dff6ff;background:rgba(118,221,255,.12);border:1px solid rgba(118,221,255,.35);padding:.35rem .6rem;border-radius:10px}
     .panel .btn-ghost{background:rgba(255,255,255,.08);border-radius:999px;padding:.6rem 1rem}
     @media (max-width: 980px){.hero-grid{grid-template-columns: 1fr}}
 
@@ -184,9 +194,9 @@
     }
     .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0 0;padding:0;list-style:none}
     .tags li{font-size:.72rem;font-weight:800;color:var(--muted);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:.15rem .5rem;background:rgba(255,255,255,.04)}
-    .benefit{color:var(--muted);margin:.35rem 0 .12rem}
+    .benefit{color:#e7eeff;font-weight:800;font-size:1.05rem;margin:.2rem 0 .1rem}
 
-    /* Simple / Pro toggle */
+    /* Simple / Advanced toggle */
     .pro-extra{display:none;color:var(--muted);border-top:1px dashed rgba(255,255,255,.14);margin-top:.6rem;padding-top:.6rem}
     body.pro-on .pro-extra{display:block}
     .toggle{display:inline-flex;align-items:center;gap:.6rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);border-radius:999px;padding:.35rem .6rem}
@@ -215,14 +225,12 @@
     @media (max-width: 720px){.row{grid-template-columns: 1fr}}
     input, select, textarea, .btn{min-height:46px}
 
-    /* Reveal effect (respects reduced motion) */
+    /* Reveal */
     .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;will-change:opacity,transform}
     .reveal.in{opacity:1;transform:translateY(0)}
-    @media (prefers-reduced-motion: reduce){
-      .reveal{opacity:1;transform:none}
-    }
+    @media (prefers-reduced-motion: reduce){ .reveal{opacity:1;transform:none} }
 
-    /* Key points grid */
+    /* Key points */
     .kgrid{display:grid;gap:1rem;grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))}
     .kcard{border:1px dashed rgba(255,255,255,.16);border-radius:14px;padding:1rem;background:rgba(255,255,255,.03)}
     .kcard strong{display:block;margin-bottom:.35rem}
@@ -242,12 +250,6 @@
     .lb-wrap{position:relative}
     .lb-img{max-width:90vw;max-height:80vh;display:block;border-radius:12px}
     .lb-close{position:absolute;top:.6rem;right:.6rem;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:.35rem .6rem;font-weight:800;cursor:pointer}
-
-    /* Tiny tweaks for extra-small devices */
-    @media (max-width: 360px){
-      .headline.xl{font-size:2rem}
-      nav a{padding:.42rem .6rem}
-    }
   </style>
 </head>
 <body>
@@ -273,7 +275,7 @@
       </ul>
     </nav>
 
-    <a class="btn btn-primary" href="#waitlist">Get the Suite</a>
+    <a class="btn btn-primary header-cta" href="#waitlist">Get the Suite</a>
     <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav" aria-label="Toggle menu">⋯</button>
   </div>
 </header>
@@ -284,7 +286,7 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="stack reveal">
-        <span class="badge">TRADINGVIEW INDICATORS & STRATEGY</span>
+        <span class="badge">TRADINGVIEW INDICATORS · ANY MARKET · ANY TIMEFRAME</span>
         <h1 class="headline xl spotlight">SignalPilot — Trading Suite</h1>
         <p>
           Turn <strong>structure</strong>, <strong>volume</strong>, <strong>momentum</strong>, and <strong>regime</strong> into clean, non‑repainting signals you can scan, alert, and trade from <strong>1m to 1W</strong>. Flagship <strong>SP‑EC Pro (Event Candles)</strong> plus 9 companion modules—built to work together.
@@ -297,7 +299,10 @@
       </div>
 
       <div class="panel reveal">
-        <div class="soon"><span class="dot" aria-hidden="true"></span> Launch window: <strong>soon</strong></div>
+        <div class="soon">
+          <span class="dot" aria-hidden="true"></span>
+          Launch in <span id="countdown" class="countdown">14d 00h 00m 00s</span>
+        </div>
         <a class="btn btn-ghost" href="#waitlist">Notify me</a>
       </div>
     </div>
@@ -308,146 +313,166 @@
     <div class="container stack">
       <h2 class="headline lg reveal">Why traders use SignalPilot</h2>
       <div class="kgrid reveal">
-        <div class="kcard">
-          <strong>Clarity</strong>
-          One‑look bias with exclusive prints—no conflicting signal spam.
-        </div>
-        <div class="kcard">
-          <strong>Context</strong>
-          HTF confirmation + supply/demand + anchored levels where it matters.
-        </div>
-        <div class="kcard">
-          <strong>Actionable</strong>
-          Alert‑first design; scan‑ready outputs for on‑chart and global alerts.
-        </div>
-        <div class="kcard">
-          <strong>Robust</strong>
-          Non‑repainting logic with ATR/volatility‑aware filters to avoid chop.
-        </div>
+        <div class="kcard"><strong>Clarity</strong>One‑look bias with exclusive prints—no conflicting signal spam.</div>
+        <div class="kcard"><strong>Context</strong>HTF confirmation + supply/demand + anchored levels where it matters.</div>
+        <div class="kcard"><strong>Actionable</strong>Alert‑first design; scan‑ready outputs for on‑chart and global alerts.</div>
+        <div class="kcard"><strong>Robust</strong>Non‑repainting logic with ATR/volatility‑aware filters to avoid chop.</div>
       </div>
     </div>
   </section>
 
-  <!-- SUITE / PRODUCT GRID with Simple/Pro toggle -->
+  <!-- SUITE -->
   <section id="suite" class="section">
     <div class="container stack">
       <div class="stack reveal" style="gap:.6rem">
         <h2 class="headline lg">What’s inside — Suite V1 (10 indicators)</h2>
         <div class="toggle" id="proToggle">
           <span class="dot" aria-hidden="true"></span>
-          <button type="button" aria-pressed="false"><span>Show pro details</span></button>
-          <small>Keep it simple or expand advanced notes.</small>
+          <button type="button" aria-pressed="false"><span>Show advanced notes</span></button>
+          <small>High‑level overview by default. Open for technical details.</small>
         </div>
       </div>
 
       <div class="grid auto-300 reveal">
-        <!-- EC PRO -->
+        <!-- 1 -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-ec-pro.png" alt="SP‑EC Pro — Event Candles on chart" loading="lazy" decoding="async">
-          <h3 class="headline" style="font-size:1.26rem">SP‑EC Pro — Event‑Candle Confluence</h3>
-          <p class="benefit"><strong>See clean momentum events and bias at a glance.</strong> Only triggers when quality is high, from 1m to 1W. Non‑repainting and alert‑ready.</p>
-          <ul class="tags"><li>Non‑repainting</li><li>Alert‑ready</li><li>TF‑aware</li></ul>
+          <img class="shot" src="assets/shots/sp-ec-pro.jpg" alt="SP‑EC Pro screenshot (placeholder)">
+          <h3>SP‑EC Pro — Event‑Candle Confluence</h3>
+          <p class="benefit">Structure, without the clutter.</p>
+          <ul class="tags"><li>Non‑repainting</li><li>1m–1W</li><li>Alert‑ready</li></ul>
+          <p>Clear event candles mark when the move matters. Bias and trend strength appear at a glance so you can act—not guess.</p>
           <div class="pro-extra">
-            A non‑repainting engine tagging <strong>B/T/R↑/R↓/TR</strong> on any TF; bias via majority‑of‑three (EMA34/55, price vs Pilot Line, slope). <strong>ATR‑normalized dip/rip</strong> logic for buy‑the‑dip / sell‑the‑rip. Pilot ribbon for trend strength; NanoFlow “+” for micro‑momentum. Alert‑ready 1m–1W.
+            <ul>
+              <li>Tags B/T/R↑/R↓/TR; bias from a majority‑of‑three regime.</li>
+              <li>ATR‑normalized dip/rip logic; Pilot Line ribbon; NanoFlow “+”.</li>
+            </ul>
           </div>
         </article>
 
-        <!-- PVA -->
+        <!-- 2 -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-pva-overlay.png" alt="SP‑PVA Volume and Overlay" loading="lazy" decoding="async">
-          <h3 class="headline" style="font-size:1.26rem">SP‑PVA Volume + Overlay</h3>
-          <p class="benefit"><strong>Know when volume truly backs the move.</strong> One decisive print: Bull/Bear or EVR tags—no second‑guessing.</p>
-          <ul class="tags"><li>Participation</li><li>CVD + Divs</li><li>Scan‑friendly</li></ul>
+          <img class="shot" src="assets/shots/sp-pva-overlay.jpg" alt="SP‑PVA Overlay (placeholder)">
+          <h3>SP‑PVA Volume + Overlay</h3>
+          <p class="benefit">Participation that actually means something.</p>
+          <ul class="tags"><li>Normalized</li><li>HTF‑aware</li><li>Scan‑ready</li></ul>
+          <p>PVA gauges real participation and prints a single decisive read: <em>Bull</em>, <em>Bear</em>, or <em>EVR</em> (Climax / Absorption).</p>
           <div class="pro-extra">
-            <strong>PVA Volume</strong>: normalized participation (log Z‑Vol + RVOL), HTF confirm, CVD, divergences, clean spikes. <strong>PVA Overlay</strong>: converts context into one decisive, non‑repainting print — <strong>Bull</strong> or <strong>Bear</strong> (exclusive), plus <strong>EVR: Climax / Absorption</strong>. TF‑aware, alert‑ready, scan‑friendly.
+            <ul>
+              <li>log Z‑Vol + RVOL, HTF confirmation, CVD + divergences, clean spikes.</li>
+              <li>Overlay converts to one non‑repainting price print per bar.</li>
+            </ul>
           </div>
         </article>
 
-        <!-- OBV -->
+        <!-- 3 -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-obv.png" alt="SP‑OBV Money Flow" loading="lazy" decoding="async">
-          <h3 class="headline" style="font-size:1.26rem">SP‑OBV — Money flow made simple</h3>
-          <p class="benefit"><strong>Spot when buying or selling pressure flips.</strong> Clean OBV/basis cross and band pushes show strength without noise.</p>
-          <ul class="tags"><li>OBV</li><li>Divergences</li><li>HTF option</li></ul>
+          <img class="shot" src="assets/shots/sp-obv.jpg" alt="SP‑OBV (placeholder)">
+          <h3>SP‑OBV — Money flow made simple</h3>
+          <p class="benefit">Where the pressure is really building.</p>
+          <ul class="tags"><li>Basis &amp; Bands</li><li>Divergences</li><li>Alerts</li></ul>
+          <p>OBV vs a smoothing basis with a stretch channel. Crosses hint at turns; band pushes flag powerful bursts.</p>
           <div class="pro-extra">
-            OBV (blue) + smoothing basis (yellow) + Bollinger channel. Crosses hint at momentum shifts; band pushes flag unusually strong pressure. Divergences (regular + hidden). Optional HTF compute. Alerts included.
+            <ul>
+              <li>Regular + hidden divergences; optional HTF compute.</li>
+            </ul>
           </div>
         </article>
 
-        <!-- LTF -->
+        <!-- 4 -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-ltf.png" alt="SP‑LTF Rhythm & Fatigue" loading="lazy" decoding="async">
-          <h3 class="headline" style="font-size:1.26rem">SP‑LTF — Rhythm & fatigue</h3>
-          <p class="benefit"><strong>Know when a move is fresh or tired.</strong> Simple heads‑up overlay for counts, squeeze and fatigue markers.</p>
-          <ul class="tags"><li>TD‑style counts</li><li>Squeeze</li><li>Fatigue</li></ul>
+          <img class="shot" src="assets/shots/sp-ltf.jpg" alt="SP‑LTF (placeholder)">
+          <h3>SP‑LTF — Multi‑timeframe rhythm &amp; fatigue</h3>
+          <p class="benefit">Know when the move is getting tired.</p>
+          <ul class="tags"><li>8/9 counts</li><li>Squeeze cloud</li><li>Fatigue X</li></ul>
+          <p>Clean counts, a squeeze cloud for coiled conditions, and gentle warnings when momentum fades.</p>
           <div class="pro-extra">
-            Heads‑up layer: clean <strong>8/9 counts</strong> (TD‑style), Squeeze cloud for coil, and Caution/Danger X when moves get tired (momentum fade, mean‑stretch, squeeze releases).
+            <ul>
+              <li>TD‑style 8/9, squeeze releases, mean‑stretch basics.</li>
+            </ul>
           </div>
         </article>
 
-        <!-- LEVELS -->
+        <!-- 5 -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-levels.png" alt="SP‑Levels anchors" loading="lazy" decoding="async">
-          <h3 class="headline" style="font-size:1.26rem">SP‑Levels — Daily/weekly/monthly reference</h3>
-          <p class="benefit"><strong>Only the levels that matter.</strong> dVWAP/wVWAP/POCs & opens—drawn once per period to keep charts clean.</p>
-          <ul class="tags"><li>d/w/m</li><li>VWAP/POC</li><li>Low‑noise</li></ul>
+          <img class="shot" src="assets/shots/sp-levels.jpg" alt="SP‑Levels (placeholder)">
+          <h3>SP‑Levels — Daily/Weekly/Monthly reference</h3>
+          <p class="benefit">Precise anchors. Zero clutter.</p>
+          <ul class="tags"><li>dVWAP</li><li>wVWAP</li><li>mOpen/mPOC</li></ul>
+          <p>Only the levels that matter, drawn on the opening bar. See the micro map without noise.</p>
           <div class="pro-extra">
-            Uncluttered levels anchored to each period’s open: <strong>dVWAP, wVWAP, dPOC, wOpen, mOpen, mPOC</strong>. Drawn on the opening candle only—actionable with less noise.
+            <ul>
+              <li>dVWAP, wVWAP, dPOC, wOpen, mOpen, mPOC.</li>
+            </ul>
           </div>
         </article>
 
-        <!-- RSI TRIAD -->
+        <!-- 6 -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-rsi-triad.png" alt="SP‑RSI Triad layered RSI" loading="lazy" decoding="async">
-          <h3 class="headline" style="font-size:1.26rem">SP‑RSI Triad — Layered RSI w/ scoring</h3>
-          <p class="benefit"><strong>Catch turns with fewer false starts.</strong> Blended RSIs give early reads; a simple score shows conviction.</p>
-          <ul class="tags"><li>Divs</li><li>Score 0–50</li><li>Filters</li></ul>
+          <img class="shot" src="assets/shots/sp-rsi-triad.jpg" alt="SP‑RSI Triad (placeholder)">
+          <h3>SP‑RSI Triad — Layered RSI with scoring</h3>
+          <p class="benefit">Timing, minus the second‑guessing.</p>
+          <ul class="tags"><li>Divergence score</li><li>Confluence filters</li><li>Guides</li></ul>
+          <p>Fast/base/slow blend reduces false starts and scores divergences from 0–50 for confidence.</p>
           <div class="pro-extra">
-            Fast/base/slow RSI blend. Marks bullish/bearish divergences with a <strong>0–50 strength score</strong>. Filters: OBV trend, Stoch RSI timing, ATR vol, HTF RSI. Visual guides keep it clear.
+            <ul>
+              <li>Filters: OBV trend, Stoch RSI timing, ATR volatility, HTF RSI.</li>
+            </ul>
           </div>
         </article>
 
-        <!-- SRSI+ -->
+        <!-- 7 -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-srsi-plus.png" alt="SP‑SRSI+ context-aware Stoch RSI" loading="lazy" decoding="async">
-          <h3 class="headline" style="font-size:1.26rem">SP‑SRSI+ — Context‑aware Stoch RSI</h3>
-          <p class="benefit"><strong>Timing that respects context.</strong> Bias/volume/SDZ aware, outputs one Confluence Score you can alert/scan.</p>
-          <ul class="tags"><li>Context</li><li>Confluence</li><li>Scan‑ready</li></ul>
+          <img class="shot" src="assets/shots/sp-srsi-plus.jpg" alt="SP‑SRSI+ (placeholder)">
+          <h3>SP‑SRSI+ — Context‑aware Stoch RSI</h3>
+          <p class="benefit">K/D turns that respect context.</p>
+          <ul class="tags"><li>Bias‑aware</li><li>Volume‑aware</li><li>SDZ‑aware</li></ul>
+          <p>Adapts to volatility and higher‑timeframe bias, listens to money flow, and outputs a unified confluence score.</p>
           <div class="pro-extra">
-            Adapts to volatility, respects HTF bias, listens to volume/money flow, stays aware of SDZ, and outputs a <strong>unified Confluence Score</strong> for SP‑Screener scans/alerts.
+            <ul>
+              <li>Route the score through SP‑Screener for scans/alerts.</li>
+            </ul>
           </div>
         </article>
 
-        <!-- MACD+ -->
+        <!-- 8 -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-macd-plus.png" alt="SP‑MACD+ momentum regime" loading="lazy" decoding="async">
-          <h3 class="headline" style="font-size:1.26rem">SP‑MACD+ — Momentum regime</h3>
-          <p class="benefit"><strong>Classic MACD, grown up.</strong> HTF confirm + ATR gating to reduce chop. Pick Raw or stricter Qualified mode.</p>
-          <ul class="tags"><li>HTF confirm</li><li>ATR gate</li><li>Raw/Qualified</li></ul>
+          <img class="shot" src="assets/shots/sp-macd-plus.jpg" alt="SP‑MACD+ (placeholder)">
+          <h3>SP‑MACD+ — Momentum regime with filters</h3>
+          <p class="benefit">Familiar, but disciplined.</p>
+          <ul class="tags"><li>HTF confirm</li><li>ATR gate</li><li>Raw / Qualified</li></ul>
+          <p>Classic visuals, minus the noise. Confirm with HTF, gate by ATR, and choose Raw or stricter Qualified crosses.</p>
           <div class="pro-extra">
-            HTF confirmation, ATR gating, near‑zero noise fade, optional pre‑smooth. Modes: <strong>Raw</strong> or <strong>Qualified</strong>. Presets: Classic Soft / Pro Filtered.
+            <ul>
+              <li>Presets: Classic Soft / Pro Filtered; optional pre‑smooth.</li>
+            </ul>
           </div>
         </article>
 
-        <!-- SDZ -->
+        <!-- 9 -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-sdz.png" alt="SP‑SDZ supply/demand zones" loading="lazy" decoding="async">
-          <h3 class="headline" style="font-size:1.26rem">SP‑SDZ — Supply/Demand awareness</h3>
-          <p class="benefit"><strong>Structure, without the clutter.</strong> Clean boxes from confirmed swings: red supply / green demand.</p>
-          <ul class="tags"><li>Zones</li><li>Forward proj</li><li>Low‑noise</li></ul>
+          <img class="shot" src="assets/shots/sp-sdz.jpg" alt="SP‑SDZ (placeholder)">
+          <h3>SP‑SDZ — Clean supply/demand awareness</h3>
+          <p class="benefit">See where the reaction should happen.</p>
+          <ul class="tags"><li>Confirmed swings</li><li>Boxed zones</li><li>Forward project</li></ul>
+          <p>Locks onto confirmed highs/lows, boxes the true zone (wick + body), and projects forward.</p>
           <div class="pro-extra">
-            Confirms swings, boxes true zone (wick + body) and projects forward — <span style="color:#ffa2a2">red = supply</span>, <span style="color:#a2ffba">green = demand</span>.
+            <ul>
+              <li>Green = demand, red = supply. Minimal visuals, maximal context.</li>
+            </ul>
           </div>
         </article>
 
-        <!-- SCREENER -->
+        <!-- 10 -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-screener.png" alt="SP‑Screener on‑chart & global" loading="lazy" decoding="async">
-          <h3 class="headline" style="font-size:1.26rem">SP‑Screener — On‑chart & global alerts</h3>
-          <p class="benefit"><strong>Find setups fast.</strong> Scan up to 8 symbols × TFs in‑panel and fire watchlist/global alerts for the whole suite.</p>
-          <ul class="tags"><li>On‑chart</li><li>Global alerts</li><li>8× symbols</li></ul>
+          <img class="shot" src="assets/shots/sp-screener.jpg" alt="SP‑Screener (placeholder)">
+          <h3>SP‑Screener — On‑chart &amp; global alerts</h3>
+          <p class="benefit">Find qualified trades fast.</p>
+          <ul class="tags"><li>Mini‑screener</li><li>Watchlist/global</li><li>ATR TP</li></ul>
+          <p>Scan up to 8 symbols × TFs on‑chart or drive watchlist/global alerts for the entire suite.</p>
           <div class="pro-extra">
-            On‑chart mini‑screener shows ticker, last signal (↑/↓), time since, TP1 (ATR), Gauss Ribbon state, and running P&L. Global/watchlist alerts supported.
+            <ul>
+              <li>Shows ticker, signal ↑/↓, time since, ATR‑sized TP1, Gauss ribbon, running P&amp;L.</li>
+            </ul>
           </div>
         </article>
       </div>
@@ -458,42 +483,41 @@
   <section id="flow" class="section">
     <div class="container two-col">
       <div class="stack reveal">
-        <h2 class="headline lg">How it works (5 steps)</h2>
-        <ol style="margin:0;padding-left:1.1rem;color:var(--muted)">
-          <li><strong>Set bias</strong> with SP‑EC Pro and/or SP‑MACD+.</li>
-          <li><strong>Verify participation</strong> via PVA Overlay + OBV/CVD.</li>
-          <li><strong>Map structure</strong> with SDZ and Levels.</li>
-          <li><strong>Time entries</strong> with RSI Triad / SRSI+ and LTF rhythm.</li>
-          <li><strong>Scale & alert</strong> using SP‑Screener (on‑chart or global).</li>
+        <h2 class="headline lg">How it works — from chart to decisions</h2>
+        <ol class="stack" style="margin:0;padding-left:1.05rem">
+          <li><strong>Set bias with SP‑EC Pro.</strong> If event candles align and the Pilot ribbon is supportive, you have a directional edge.</li>
+          <li><strong>Check participation with PVA + OBV.</strong> Look for PVA Bull/Bear or EVR (Climax/Absorption) and supportive money‑flow.</li>
+          <li><strong>Map structure with SDZ + Levels.</strong> Prefer entries near demand in uptrends and supply in downtrends; use d/w VWAP and opens as anchors.</li>
+          <li><strong>Time entries with RSI Triad / SRSI+ / LTF.</strong> Take the turn when your timing layer agrees (divergence score, K/D turn, fatigue release).</li>
+          <li><strong>Alert &amp; manage with Screener.</strong> Route alerts to watchlists or bots; use the on‑chart mini‑screener for quick multi‑symbol checks.</li>
         </ol>
 
-        <h3 class="headline" style="font-size:1.3rem">Built‑in plays</h3>
-        <ul style="margin:0;padding-left:1.1rem;color:var(--muted)">
-          <li><strong>Trend Buy‑the‑Dip</strong> — Bias Up + PVA Bull/Climax → reaction at demand/dVWAP → RSI Triad/SRSI+ timing.</li>
-          <li><strong>Reversal Flip</strong> — Absorption + OBV divergence at supply → EC slope flatten → Pilot reclaim.</li>
-          <li><strong>Breakout Continuation</strong> — Climax through wVWAP/supply → first ATR dip → NanoFlow “+”.</li>
-        </ul>
+        <div class="card">
+          <strong>Three ready‑to‑use playbooks</strong>
+          <ul style="margin:.6rem 0 0">
+            <li><em>Trend Buy‑the‑Dip:</em> Bias Up + PVA Bull/Climax → reaction at demand/dVWAP → RSI Triad/SRSI+ timing.</li>
+            <li><em>Reversal Flip:</em> Absorption + OBV divergence at supply → EC slope flattens → Pilot reclaim.</li>
+            <li><em>Breakout Continuation:</em> Climax through wVWAP/supply → first ATR dip → NanoFlow “+”.</li>
+          </ul>
+        </div>
       </div>
 
       <div class="stack reveal">
-        <h3 class="headline" style="font-size:1.3rem;margin-top:.2rem">Defaults by trading style</h3>
+        <h3 class="headline lg" style="font-size:1.4rem">Defaults by trading style</h3>
         <div class="grid auto-250">
           <div class="card">
             <strong>Scalper (1–5m)</strong>
-            <p style="margin:.3rem 0 0">EC strict; PVA spiky; RSI 3/7/14; SRSI fast; MACD Raw.</p>
+            <ul><li>EC strict</li><li>PVA spiky</li><li>RSI 3/7/14</li><li>SRSI fast</li><li>MACD Raw</li></ul>
           </div>
           <div class="card">
             <strong>Intraday (5–60m)</strong>
-            <p style="margin:.3rem 0 0">EC default; PVA 4× HTF; RSI 5/14/21; MACD Qualified (Classic Soft).</p>
+            <ul><li>EC default</li><li>PVA 4× HTF</li><li>RSI 5/14/21</li><li>MACD Qualified (Classic Soft)</li></ul>
           </div>
           <div class="card">
             <strong>Swing (4H–1D/1W)</strong>
-            <p style="margin:.3rem 0 0">EC long regime; PVA 3–4× HTF; RSI 7/21/42; MACD Qualified (Pro Filtered, pre‑smooth).</p>
+            <ul><li>EC long regime</li><li>PVA 3–4× HTF</li><li>RSI 7/21/42</li><li>MACD Qualified (Pro Filtered, pre‑smooth)</li></ul>
           </div>
         </div>
-
-        <h3 class="headline" style="font-size:1.3rem;margin-top:.6rem">Example alert taxonomy</h3>
-        <pre class="code"><code>[SP][SCREENER] BTCUSDT [15m] Bias=Up; EC=R↑; PVA=Bull; SDZ=NearDemand&lt;=0.25R; RSI_Score&gt;=20</code></pre>
       </div>
     </div>
   </section>
@@ -501,7 +525,7 @@
   <!-- PRICING -->
   <section id="pricing" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal">Plans &amp; pricing — <span class="pill">SP VIP included in all tiers</span></h2>
+      <h2 class="headline lg reveal">Plans &amp; pricing</h2>
 
       <div class="pricing reveal">
         <!-- Monthly -->
@@ -509,11 +533,11 @@
           <div class="pill">Monthly</div>
           <div class="price">$79 <span class="pill">/month</span></div>
           <ul>
-            <li><strong>SP VIP (Event Candles)</strong> — invite‑only seat (1 user)</li>
-            <li>Companion modules (9) for bias/volume/structure/timing</li>
-            <li>On‑chart & global alerts via SP‑Screener</li>
-            <li>Backtesting templates + CSV export</li>
-            <li>Email support</li>
+            <li><strong>SP‑EC Pro (Event Candles)</strong> license for 1 TradingView username</li>
+            <li>All 9 companion indicators</li>
+            <li>On‑chart &amp; watchlist/global alerts</li>
+            <li>Preset pack (scalper / intraday / swing)</li>
+            <li>Standard email support</li>
           </ul>
           <div class="price-actions">
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
@@ -527,8 +551,9 @@
           <div class="price">$199 <span class="pill">/3 months</span></div>
           <ul>
             <li>Everything in Monthly</li>
-            <li>Priority email support + preset pack updates</li>
-            <li>Quarterly tune‑up webinar seat</li>
+            <li>Priority email support</li>
+            <li>Quarterly preset updates</li>
+            <li>Tune‑up webinar seat</li>
             <li>Save vs monthly</li>
           </ul>
           <div class="price-actions">
@@ -539,13 +564,13 @@
 
         <!-- Yearly -->
         <article class="price-card">
-          <div class="pill">Yearly</div>
+          <div class="pill">Best value</div>
           <div class="price">$499 <span class="pill">/year</span></div>
           <ul>
             <li>Everything in Quarterly</li>
             <li>Concierge onboarding (preset review + config help)</li>
             <li>Private office hours &amp; Discord access</li>
-            <li>Early access to new modules & betas</li>
+            <li>Early access to new modules &amp; betas</li>
             <li>Save big vs monthly</li>
           </ul>
           <div class="price-actions">
@@ -556,11 +581,12 @@
 
         <!-- Lifetime -->
         <article class="price-card">
-          <div class="pill">Lifetime (limited)</div>
+          <div class="pill">Limited</div>
           <div class="price">$899 <span class="pill">one‑time</span></div>
           <ul>
-            <li><strong>Permanent SP VIP access</strong> — all future updates included</li>
-            <li>Founding member perks &amp; feature‑request priority</li>
+            <li><strong>Permanent access</strong> for SP‑EC Pro and the full suite</li>
+            <li>All future updates included</li>
+            <li>Founding member perks &amp; feature priority</li>
             <li>Private Discord for life + full preset bundle</li>
           </ul>
           <div class="price-actions">
@@ -570,9 +596,7 @@
         </article>
       </div>
 
-      <p class="note">
-        <strong>Trust &amp; refunds:</strong> First‑time purchases include a 7‑day satisfaction window. Crypto refunds go back to the sending address (minus network fees) if you cancel before or shortly after activation. Invites typically activate within 24 hours after confirmed payment.
-      </p>
+      <p class="note"><strong>Included:</strong> SP‑EC Pro (Event Candles) is included in every plan.</p>
     </div>
   </section>
 
@@ -583,20 +607,20 @@
 
       <div class="grid auto-250 reveal">
         <div class="card">
-          <p style="color:var(--muted)"><strong>Option A — Request invoice:</strong> we’ll email an exact quote and instructions. Provide your TradingView username for invite. No memo/tag required.</p>
+          <p style="color:var(--muted)">Request an invoice with exact quote and memo — or send directly, then share your <strong>tx id</strong> + <strong>TradingView username</strong> for activation.</p>
 
           <form action="https://formspree.io/f/meorkjpn" method="POST">
             <div class="row">
-              <label for="plan">Plan
-                <select id="plan" name="plan" required>
+              <label>Plan
+                <select name="plan" required>
                   <option value="Monthly $79">Monthly $79</option>
                   <option value="Quarterly $199">Quarterly $199</option>
                   <option value="Yearly $499">Yearly $499</option>
                   <option value="Lifetime $899">Lifetime $899</option>
                 </select>
               </label>
-              <label for="coin">Coin
-                <select id="coin" name="coin" required>
+              <label>Coin
+                <select name="coin" required>
                   <option>BTC</option>
                   <option>ETH</option>
                   <option>AVAX (C‑chain)</option>
@@ -608,16 +632,16 @@
             </div>
 
             <div class="row">
-              <label for="email">Email (for invoice &amp; receipt)
-                <input id="email" name="email" type="email" placeholder="you@domain.com" autocomplete="email" required>
+              <label>Email (for invoice &amp; receipt)
+                <input name="email" type="email" placeholder="you@domain.com" required>
               </label>
-              <label for="tvuser">TradingView username (for invite)
-                <input id="tvuser" name="tradingview" type="text" placeholder="@your-handle" autocomplete="nickname" required>
+              <label>TradingView username (for invite)
+                <input name="tradingview" type="text" placeholder="@your-handle" required>
               </label>
             </div>
 
-            <label for="notes">Notes (optional)
-              <textarea id="notes" name="notes" placeholder="Company/VAT, preferred email, any special instructions…"></textarea>
+            <label>Notes (optional)
+              <textarea name="notes" placeholder="Company/VAT, preferred email, memo instructions…"></textarea>
             </label>
 
             <button class="btn btn-crypto" type="submit">Request crypto invoice</button>
@@ -625,44 +649,44 @@
         </div>
 
         <div class="card">
-          <p style="color:var(--muted)"><strong>Option B — Send directly:</strong> send to one of the wallets, then email <em>tx id + plan + TradingView username</em> to <a href="mailto:support@signalpilot.io">support@signalpilot.io</a>. <em>No memo/tag required (memos are for exchanges).</em></p>
+          <p style="color:var(--muted)">Prefer to send directly? Use a wallet below and <strong>email tx id + plan + TradingView username</strong> to <a href="mailto:support@signalpilot.io">support@signalpilot.io</a> for activation. <em>No memo/tag required.</em></p>
 
           <div class="stack" style="gap:.5rem">
             <div class="row">
-              <label for="addr-eth">ETH / MATIC (EVM)
-                <div class="row" style="grid-template-columns:1fr auto">
+              <label>ETH / MATIC (EVM)
+                <div class="row">
                   <input id="addr-eth" value="0xcFf999901af3360576BA4Fa9750340C3f26504A5" readonly>
-                  <button class="btn" data-copy="#addr-eth" type="button" aria-live="polite">Copy</button>
+                  <button class="btn" data-copy="#addr-eth" type="button">Copy</button>
                 </div>
               </label>
-              <label for="addr-btc">BTC
-                <div class="row" style="grid-template-columns:1fr auto">
+              <label>BTC
+                <div class="row">
                   <input id="addr-btc" value="1DdTKYzeg9iR8GwgMZmoBje5ki5FhHwGVm" readonly>
-                  <button class="btn" data-copy="#addr-btc" type="button" aria-live="polite">Copy</button>
+                  <button class="btn" data-copy="#addr-btc" type="button">Copy</button>
                 </div>
               </label>
             </div>
 
             <div class="row">
-              <label for="addr-avax">AVAX (C‑chain)
-                <div class="row" style="grid-template-columns:1fr auto">
+              <label>AVAX (C‑chain)
+                <div class="row">
                   <input id="addr-avax" value="0x62B9c9625Bde847AD4A50Ced3CFd8e24735ffF08" readonly>
-                  <button class="btn" data-copy="#addr-avax" type="button" aria-live="polite">Copy</button>
+                  <button class="btn" data-copy="#addr-avax" type="button">Copy</button>
                 </div>
               </label>
-              <label for="addr-bnb">BNB (BSC)
-                <div class="row" style="grid-template-columns:1fr auto">
+              <label>BNB (BSC)
+                <div class="row">
                   <input id="addr-bnb" value="0x398605F9907eB2C3F8602A13D394Fbb00D53C2df" readonly>
-                  <button class="btn" data-copy="#addr-bnb" type="button" aria-live="polite">Copy</button>
+                  <button class="btn" data-copy="#addr-bnb" type="button">Copy</button>
                 </div>
               </label>
             </div>
 
             <div class="row">
-              <label for="addr-bch">BCH (Bitcoin Cash)
-                <div class="row" style="grid-template-columns:1fr auto">
+              <label>Bitcoin Cash (BCH)
+                <div class="row">
                   <input id="addr-bch" value="qz9gvarfc9rl9zm0me3ghjp83r78nchnrvwkazd4j9" readonly>
-                  <button class="btn" data-copy="#addr-bch" type="button" aria-live="polite">Copy</button>
+                  <button class="btn" data-copy="#addr-bch" type="button">Copy</button>
                 </div>
               </label>
               <div style="display:grid;place-items:center;color:var(--muted)">No memo/tag required</div>
@@ -670,7 +694,7 @@
           </div>
 
           <p class="note" style="margin-top:.8rem">
-            Manual sends are processed after network confirmations. If sending from a centralized exchange, include the tx id—some exchanges mask it. Activation usually within 24 hours.
+            Manual sends are processed after network confirmations. If sending from a centralized exchange, email us the tx id—some exchanges hide memos. Activation usually within 24 hours.
           </p>
         </div>
       </div>
@@ -686,12 +710,12 @@
       <div class="card reveal">
         <form action="https://formspree.io/f/mldpnrop" method="POST">
           <div class="row">
-            <label for="wl-name">Name <input id="wl-name" name="name" autocomplete="name" required></label>
-            <label for="wl-email">Email <input id="wl-email" name="email" type="email" autocomplete="email" required></label>
+            <label>Name <input name="name" required></label>
+            <label>Email <input name="email" type="email" required></label>
           </div>
-          <label for="wl-tv">TradingView username <input id="wl-tv" name="tradingview" placeholder="@your-handle" autocomplete="nickname" required></label>
-          <label for="wl-focus">Trading focus (optional) <input id="wl-focus" name="focus" placeholder="e.g., BTC, FX NY session, swing"></label>
-          <button class="btn btn-primary" type="submit">Join the waitlist</button>
+          <label>TradingView username <input name="tradingview" placeholder="@your-handle" required></label>
+          <label>Trading focus (optional) <input name="focus" placeholder="e.g., BTC, FX NY session, swing"></label>
+          <button class="btn btn-primary" type="submit">Notify me</button>
         </form>
       </div>
     </div>
@@ -709,26 +733,46 @@
   <section id="faq" class="section">
     <div class="container stack">
       <h2 class="headline lg reveal">FAQ</h2>
-      <div class="grid auto-250 reveal">
+      <div class="grid auto-300 reveal">
         <div class="card">
-          <strong>Does it repaint?</strong>
-          <p class="note">No—signals finalize on candle close.</p>
+          <strong>What makes SP‑EC Pro a game changer?</strong>
+          <p class="note">Event candles compress messy confluence into a <em>single, honest print</em>. You see bias, trend strength, and continuation/resumption early—without repainting—so you can stop second‑guessing and start executing.</p>
+        </div>
+        <div class="card">
+          <strong>Does anything repaint?</strong>
+          <p class="note">No. All trade signals finalize on candle close. The suite favors conservative, non‑repainting logic and makes repaint‑prone utilities optional for visual context only.</p>
         </div>
         <div class="card">
           <strong>What timeframes?</strong>
-          <p class="note">1‑minute to 1‑week.</p>
+          <p class="note">From 1‑minute to 1‑week. Presets are included for scalpers, intraday traders, and swing traders.</p>
         </div>
         <div class="card">
-          <strong>Can I scan/alert a watchlist?</strong>
-          <p class="note">Yes—SP‑Screener handles on‑chart scanning and global/watchlist alerts.</p>
+          <strong>Can I scan a watchlist or run global alerts?</strong>
+          <p class="note">Yes. SP‑Screener supports on‑chart mini scans and watchlist/global alerts to Discover qualified setups quickly.</p>
         </div>
         <div class="card">
-          <strong>Do I need all indicators on every chart?</strong>
-          <p class="note">No—use EC Pro/MACD+ for bias, PVA/OBV for participation, SDZ/Levels for structure, RSI Triad/SRSI+/LTF for timing, Screener for discovery.</p>
+          <strong>Do I need all 10 indicators on every chart?</strong>
+          <p class="note">No. Use EC Pro / MACD+ for bias, PVA / OBV for participation, SDZ / Levels for structure, RSI Triad / SRSI+ / LTF for timing. Screener for discovery and routing alerts.</p>
         </div>
         <div class="card">
-          <strong>Compliance</strong>
-          <p class="note">Educational purposes only. Trading involves risk. Past performance does not guarantee future results.</p>
+          <strong>How do invites work?</strong>
+          <p class="note">After purchase, send your TradingView username. You’ll receive an invite‑only access link; activation typically within 24 hours of confirmed payment.</p>
+        </div>
+        <div class="card">
+          <strong>Refunds?</strong>
+          <p class="note">First‑time purchases include a 7‑day satisfaction window. Crypto refunds go back to the sending address (minus network fees) if you cancel before or shortly after activation.</p>
+        </div>
+        <div class="card">
+          <strong>License &amp; seats</strong>
+          <p class="note">Plans include one TradingView username (seat). Need more? Contact support for team options.</p>
+        </div>
+        <div class="card">
+          <strong>Compatibility</strong>
+          <p class="note">TradingView (web/desktop/mobile). Signals route via alerts/webhooks to Discord/Telegram/bots.</p>
+        </div>
+        <div class="card">
+          <strong>Is this financial advice?</strong>
+          <p class="note">No. SignalPilot is an educational toolset. Trading involves risk. Past performance does not guarantee future results.</p>
         </div>
       </div>
     </div>
@@ -741,24 +785,24 @@
   <div class="container stack">
     <div class="social">
       <!-- X / Twitter -->
-      <a href="#" aria-label="X (Twitter)">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 3h3.2l-7 8.3 8.2 9.7H18.6l-5.9-7-6.8 7H2.7l7.5-8-7.9-10H8l5.4 6.9L17.5 3z"/></svg>
+      <a href="#" aria-label="X">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3.2l-7 8.3 8.2 9.7H18.6l-5.9-7-6.8 7H2.7l7.5-8-7.9-10H8l5.4 6.9L17.5 3z"/></svg>
       </a>
       <!-- Instagram -->
       <a href="#" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.8a5.2 5.2 0 1 1 0 10.4 5.2 5.2 0 0 1 0-10.4Zm0 2a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.7-.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.8a5.2 5.2 0 1 1 0 10.4 5.2 5.2 0 0 1 0-10.4Zm0 2a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.7-.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
       </a>
       <!-- YouTube -->
       <a href="#" aria-label="YouTube">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 7.1a3 3 0 0 0-2.1-2.1C18.6 4.5 12 4.5 12 4.5s-6.6 0-8.4.5A3 3 0 0 0 1.5 7.1C1 8.9 1 12 1 12s0 3.1.5 4.9a3 3 0 0 0 2.1 2.1c1.8.5 8.4.5 8.4.5s6.6 0 8.4-.5a3 3 0 0 0 2.1-2.1c.5-1.8.5-4.9.5-4.9s0-3.1-.5-4.9ZM10 15.5V8.5l6 3.5-6 3.5Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.5 7.1a3 3 0 0 0-2.1-2.1C18.6 4.5 12 4.5 12 4.5s-6.6 0-8.4.5A3 3 0 0 0 1.5 7.1C1 8.9 1 12 1 12s0 3.1.5 4.9a3 3 0 0 0 2.1 2.1c1.8.5 8.4.5 8.4.5s6.6 0 8.4-.5a3 3 0 0 0 2.1-2.1c.5-1.8.5-4.9.5-4.9s0-3.1-.5-4.9ZM10 15.5V8.5l6 3.5-6 3.5Z"/></svg>
       </a>
       <!-- Discord -->
       <a href="#" aria-label="Discord">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A17 17 0 0 0 16.2 3l-.3.6a14 14 0 0 1 3.4 1.3 14 14 0 0 0-9 0 14 14 0 0 1 3.4-1.3l-.3-.6a17 17 0 0 0-4.1 1.4C6.2 5.9 4.7 8.6 4.3 11.4c1.2 1.7 2.8 3 4.7 4a13 13 0 0 0 1.1-1.8c-.6-.2-1.1-.5-1.6-.8.1-.1.2-.1.3-.2a9 9 0 0 0 8.4 0l.3.2c-.5.3-1 .6-1.6.8.3.6.7 1.2 1.1 1.8 1.9-1 3.5-2.3 4.7-4-.4-2.8-1.9-5.5-3.9-7Zm-8.9 8c-.7 0-1.3-.7-1.3-1.6s.6-1.6 1.3-1.6 1.3.7 1.3 1.6-.6 1.6-1.3 1.6Zm6.2 0c-.7 0-1.3-.7-1.3-1.6s.6-1.6 1.3-1.6 1.3.7 1.3 1.6-.6 1.6-1.3 1.6Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A17 17 0 0 0 16.2 3l-.3.6a14 14 0 0 1 3.4 1.3 14 14 0 0 0-9 0 14 14 0 0 1 3.4-1.3l-.3-.6a17 17 0 0 0-4.1 1.4C6.2 5.9 4.7 8.6 4.3 11.4c1.2 1.7 2.8 3 4.7 4a13 13 0 0 0 1.1-1.8c-.6-.2-1.1-.5-1.6-.8.1-.1.2-.1.3-.2a9 9 0 0 0 8.4 0l.3.2c-.5.3-1 .6-1.6.8.3.6.7 1.2 1.1 1.8 1.9-1 3.5-2.3 4.7-4-.4-2.8-1.9-5.5-3.9-7Zm-8.9 8c-.7 0-1.3-.7-1.3-1.6s.6-1.6 1.3-1.6 1.3.7 1.3 1.6-.6 1.6-1.3 1.6Zm6.2 0c-.7 0-1.3-.7-1.3-1.6s.6-1.6 1.3-1.6 1.3.7 1.3 1.6-.6 1.6-1.3 1.6Z"/></svg>
       </a>
       <!-- Telegram -->
       <a href="#" aria-label="Telegram">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 16.3 9.3 20c.4 0 .6-.2.8-.4l1.9-1.8 3.9 2.9c.7.4 1.3.2 1.5-.7l2.7-12.7h0c.2-.9-.3-1.2-1-.9l-16 6.2c-.9.3-.9.9-.2 1.1l4.1 1.3 9.5-6c.5-.3.9-.1.5.2l-7.5 6.1Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 16.3 9.3 20c.4 0 .6-.2.8-.4l1.9-1.8 3.9 2.9c.7.4 1.3.2 1.5-.7l2.7-12.7h0c.2-.9-.3-1.2-1-.9l-16 6.2c-.9.3-.9.9-.2 1.1l4.1 1.3 9.5-6c.5-.3.9-.1.5.2l-7.5 6.1Z"/></svg>
       </a>
     </div>
     <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem">
@@ -777,6 +821,12 @@
 </dialog>
 
 <script>
+  // ——— Configurable countdown ———
+  // Option A: set a fixed ISO date (uncomment + edit):
+  // window.SIGNALPILOT_LAUNCH_ISO = '2025-10-17T00:00:00Z';
+  //
+  // Option B (default): 14 days from visitor's first visit (persisted in localStorage).
+
   // mobile menu + scroll lock
   const menuBtn = document.getElementById('menuToggle');
   const nav = document.getElementById('mainnav');
@@ -795,33 +845,28 @@
   });
   document.querySelectorAll('#mainnav a').forEach(a =>
     a.addEventListener('click', () => {
-      nav.classList.remove('open');
-      document.body.classList.remove('nav-open');
+      nav.classList.remove('open'); document.body.classList.remove('nav-open');
       menuBtn.setAttribute('aria-expanded', 'false');
     })
   );
 
   // reveal on scroll (respect reduced motion)
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
   if (!prefersReduced) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); })
     }, { threshold: .12, rootMargin: '60px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    revealEls.forEach(el => io.observe(el));
   } else {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    revealEls.forEach(el => el.classList.add('in'));
   }
 
-  // copy buttons (wallets) with modern API + fallback
+  // copy buttons (wallets)
   async function copyText(str){
     try{
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(str);
-      } else {
-        const ta = document.createElement('textarea');
-        ta.value = str; document.body.appendChild(ta);
-        ta.select(); document.execCommand('copy'); ta.remove();
-      }
+      if (navigator.clipboard?.writeText) { await navigator.clipboard.writeText(str); }
+      else { const ta = document.createElement('textarea'); ta.value = str; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
       return true;
     }catch{ return false; }
   }
@@ -837,16 +882,16 @@
     });
   });
 
-  // Simple / Pro toggle
+  // Simple / Advanced toggle
   const proToggle = document.getElementById('proToggle');
   const proBtn = proToggle?.querySelector('button');
   proBtn?.addEventListener('click', ()=>{
     const on = document.body.classList.toggle('pro-on');
     proBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    proBtn.querySelector('span').textContent = on ? 'Hide pro details' : 'Show pro details';
+    proBtn.querySelector('span').textContent = on ? 'Hide advanced notes' : 'Show advanced notes';
   });
 
-  // Lightbox for screenshots
+  // Lightbox for .shot
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightbox-img');
   const lbClose = lb.querySelector('.lb-close');
@@ -859,6 +904,36 @@
   lbClose.addEventListener('click', ()=> lb.close());
   lb.addEventListener('click', (e)=> { if (e.target === lb) lb.close(); });
   document.addEventListener('keydown', (e)=> { if (e.key === 'Escape' && lb.open) lb.close(); });
+
+  // Countdown (14 days or fixed ISO)
+  (function initCountdown(){
+    const cd = document.getElementById('countdown');
+    if (!cd) return;
+
+    let target;
+    if (window.SIGNALPILOT_LAUNCH_ISO) {
+      target = new Date(window.SIGNALPILOT_LAUNCH_ISO);
+    } else {
+      const key = 'spLaunchTs';
+      const saved = localStorage.getItem(key);
+      if (saved) target = new Date(parseInt(saved, 10));
+      else {
+        target = new Date(Date.now() + 14*24*60*60*1000);
+        localStorage.setItem(key, String(target.getTime()));
+      }
+    }
+
+    function tick(){
+      const now = new Date();
+      let diff = Math.max(0, target - now);
+      const d = Math.floor(diff / (24*60*60*1000)); diff %= 24*60*60*1000;
+      const h = Math.floor(diff / (60*60*1000));    diff %= 60*60*1000;
+      const m = Math.floor(diff / (60*1000));       diff %= 60*1000;
+      const s = Math.floor(diff / 1000);
+      cd.textContent = `${String(d)}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+    }
+    tick(); setInterval(tick, 1000);
+  })();
 
   // year
   document.getElementById('year').textContent = new Date().getFullYear();
