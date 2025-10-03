@@ -23,13 +23,13 @@
   <meta name="twitter:description" content="SP‑EC Pro (Event Candles) + 9 companion indicators. Clean, non‑repainting signals.">
   <meta name="twitter:image" content="https://www.signalpilot.io/preview.png">
 
-  <!-- Plausible (optional analytics) -->
+  <!-- Optional analytics -->
   <script defer data-domain="signalpilot.io" src="https://plausible.io/js/script.js"></script>
 
   <!-- Mobile UI color -->
   <meta name="theme-color" content="#05070d">
 
-  <!-- Structured data: product + plans -->
+  <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -70,11 +70,15 @@
       --max: min(1160px, 92vw);
 
       --grad: linear-gradient(90deg,#9cc0ff 0%,#86a8ff 35%,#7ccaff 60%,#8ca5ff 85%,#b9d4ff 100%);
-      --grad-2: linear-gradient(180deg,rgba(118,221,255,.6),rgba(118,221,255,0));
+      --gridlines-h: linear-gradient(transparent 31px, rgba(255,255,255,.045) 32px, transparent 33px);
+      --gridlines-v: linear-gradient(90deg, transparent 31px, rgba(255,255,255,.035) 32px, transparent 33px);
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
+    html{-webkit-text-size-adjust:100%}
+    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
+    img{max-width:100%;height:auto;display:block}
+    a{color:inherit}
 
     /* Ambient background */
     body::before{
@@ -88,17 +92,15 @@
     body::after{
       content:"";
       position:fixed;inset:0;pointer-events:none;z-index:-3;
-      background-image:
-        linear-gradient(transparent 31px, rgba(255,255,255,.045) 32px, transparent 33px),
-        linear-gradient(90deg, transparent 31px, rgba(255,255,255,.035) 32px, transparent 33px);
+      background-image: var(--gridlines-h), var(--gridlines-v);
       background-size:64px 64px;
       opacity:.16;
     }
 
-    /* Utils */
-    .container{max-width:var(--max);margin:0 auto;padding:0 1.25rem}
-    .stack{display:grid;gap:1.35rem}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;padding:.7rem 1.05rem;font-weight:700;text-decoration:none;cursor:pointer;white-space:nowrap;transition:filter .15s ease}
+    /* Utilities */
+    .container{max-width:var(--max);margin:0 auto;padding:0 clamp(.9rem, 3vw, 1.25rem)}
+    .stack{display:grid;gap:clamp(1rem, 2.6vw, 1.4rem)}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;padding:.78rem 1.1rem;font-weight:700;text-decoration:none;cursor:pointer;white-space:nowrap;transition:filter .15s ease}
     .btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
     .btn-primary{background:linear-gradient(120deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 16px 40px rgba(91,138,255,.28)}
     .btn-primary:hover{filter:brightness(1.07)}
@@ -107,15 +109,15 @@
     .btn-crypto:hover{filter:brightness(1.05)}
     .btn-disabled{background:rgba(255,255,255,.08);color:var(--muted);cursor:not-allowed;border:1px dashed rgba(255,255,255,.16)}
 
-    .badge{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .7rem;border-radius:999px;background:rgba(118,221,255,.12);color:var(--accent);font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:.78rem}
+    .badge{display:inline-flex;align-items:center;gap:.45rem;padding:.34rem .7rem;border-radius:999px;background:rgba(118,221,255,.12);color:var(--accent);font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:.78rem}
 
     .headline{
-      font-weight:900;letter-spacing:-.02em;line-height:1.06;
+      font-weight:900;letter-spacing:-.02em;line-height:1.08;
       background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
       filter:drop-shadow(0 8px 30px rgba(91,138,255,.15));
     }
-    .headline.xl{font-size: clamp(2.6rem, 7vw, 4.2rem)}
-    .headline.lg{font-size: clamp(2rem, 5vw, 3rem)}
+    .headline.xl{font-size: clamp(2.2rem, 6vw, 4.1rem)}
+    .headline.lg{font-size: clamp(1.8rem, 4.8vw, 2.8rem)}
 
     .spotlight{position:relative;isolation:isolate}
     .spotlight::after{
@@ -125,74 +127,102 @@
       opacity:.7;filter:blur(10px);mask:linear-gradient(#000 0,#0000 55%);
     }
 
+    /* Anchor offset for sticky header */
+    [id]{scroll-margin-top:78px}
+
+    /* Header */
     header{position:sticky;top:0;z-index:40;backdrop-filter:blur(16px);background:color-mix(in srgb, var(--bg) 72%, transparent);border-bottom:1px solid rgba(255,255,255,.08)}
-    .nav{display:flex;align-items:center;gap:1.25rem;padding:.7rem 0}
+    .nav{display:flex;align-items:center;gap:.8rem;padding:.7rem 0}
     .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:#fff;font-weight:900;letter-spacing:.02em}
     .brand img{width:28px;height:28px}
     .nav-spacer{flex:1}
     .menu-toggle{display:none;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:#fff;padding:.45rem .6rem}
     nav[aria-label="Main"]{display:flex}
-    nav ul{display:flex;gap:.6rem;list-style:none;margin:0;padding:0}
-    nav a{display:inline-flex;padding:.4rem .7rem;border-radius:999px;color:var(--muted);text-decoration:none;font-weight:700}
+    nav ul{display:flex;gap:.4rem;list-style:none;margin:0;padding:0;align-items:center}
+    nav a{display:inline-flex;padding:.48rem .72rem;border-radius:999px;color:var(--muted);text-decoration:none;font-weight:700}
     nav a:hover, nav a:focus-visible{color:#fff;background:rgba(255,255,255,.08);outline:none}
+
     @media (max-width: 860px){
       .menu-toggle{display:inline-flex;margin-left:.4rem}
-      nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.12);padding:1rem;border-radius:16px;display:none;box-shadow:var(--shadow)}
+      nav[aria-label="Main"]{
+        position:fixed;right:1rem;top:64px;flex-direction:column;background:rgba(10,12,20,.98);
+        border:1px solid rgba(255,255,255,.12);padding:1rem;border-radius:16px;display:none;box-shadow:var(--shadow)
+      }
       nav[aria-label="Main"].open{display:flex}
       nav ul{flex-direction:column;gap:.2rem}
+      body.nav-open{overflow:hidden}
     }
 
-    .hero{padding: clamp(2.6rem, 9vw, 5rem) 0 2rem;background:radial-gradient(1600px 560px at 20% -10%, rgba(118,221,255,.10), transparent 60%), var(--bg)}
-    .hero-grid{display:grid;gap:2rem;grid-template-columns: 1.1fr .9fr}
-    .hero .panel{min-height:260px;border:1px solid rgba(255,255,255,.08);border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));box-shadow:var(--shadow);display:flex;align-items:flex-end;justify-content:space-between;padding:1rem}
+    /* Hero */
+    .hero{padding: clamp(2.2rem, 7.5vw, 5rem) 0 2rem;background:radial-gradient(1600px 560px at 20% -10%, rgba(118,221,255,.10), transparent 60%), var(--bg)}
+    .hero-grid{display:grid;gap:clamp(1.2rem, 3vw, 2rem);grid-template-columns: 1.1fr .9fr}
+    .hero p{max-width:66ch;color:var(--muted)}
+    .hero .panel{
+      min-height: clamp(170px, 28vw, 260px);
+      border:1px solid rgba(255,255,255,.08);border-radius:20px;
+      background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));
+      box-shadow:var(--shadow);display:flex;align-items:flex-end;justify-content:space-between;padding:1rem
+    }
     .panel .soon{font-weight:800;color:var(--muted);display:inline-flex;align-items:center;gap:.5rem}
     .panel .soon .dot{width:8px;height:8px;border-radius:999px;background:linear-gradient(120deg,#6ef1a7,#33d28c);box-shadow:0 0 16px #33d28c}
     .panel .btn-ghost{background:rgba(255,255,255,.08);border-radius:999px;padding:.6rem 1rem}
-    @media (max-width: 900px){.hero-grid{grid-template-columns: 1fr}.hero .panel{min-height:190px}}
+    @media (max-width: 980px){.hero-grid{grid-template-columns: 1fr}}
 
-    .section{padding: clamp(3rem, 9vw, 5rem) 0;border-top:1px solid rgba(255,255,255,.06)}
-    .card{border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border-radius:var(--radius);padding:1.2rem}
-    .grid{display:grid;gap:1rem}
+    /* Sections */
+    .section{padding: clamp(2.4rem, 8vw, 5rem) 0;border-top:1px solid rgba(255,255,255,.06)}
+    .card{border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border-radius:var(--radius);padding:clamp(1rem, 3vw, 1.2rem)}
+    .grid{display:grid;gap:clamp(.8rem, 2.2vw, 1rem)}
     .grid.auto-250{grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))}
     .grid.auto-300{grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))}
-    .two-col{display:grid;gap:1.2rem;grid-template-columns: 1.1fr .9fr}
+    .two-col{display:grid;gap:clamp(1rem, 2.4vw, 1.2rem);grid-template-columns: 1.08fr .92fr}
     @media (max-width: 960px){.two-col{grid-template-columns:1fr}}
 
     /* Indicator visuals */
-    .shot{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0a0e18;cursor:zoom-in}
+    .shot{
+      width:100%; aspect-ratio:16/9; object-fit:cover;
+      border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0a0e18;cursor:zoom-in
+    }
     .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0 0;padding:0;list-style:none}
     .tags li{font-size:.72rem;font-weight:800;color:var(--muted);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:.15rem .5rem;background:rgba(255,255,255,.04)}
+    .benefit{color:var(--muted);margin:.35rem 0 .12rem}
 
-    .benefit{color:var(--muted);margin:.3rem 0 .1rem}
+    /* Simple / Pro toggle */
     .pro-extra{display:none;color:var(--muted);border-top:1px dashed rgba(255,255,255,.14);margin-top:.6rem;padding-top:.6rem}
     body.pro-on .pro-extra{display:block}
-
-    /* Toggle */
     .toggle{display:inline-flex;align-items:center;gap:.6rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);border-radius:999px;padding:.35rem .6rem}
     .toggle button{border:0;background:transparent;color:#fff;font-weight:800;cursor:pointer}
     .toggle small{color:var(--muted)}
     .toggle .dot{width:8px;height:8px;border-radius:50%;background:#6ef1a7;box-shadow:0 0 10px #33d28c}
 
+    /* Pricing */
     .pricing{display:grid;gap:1.2rem;grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))}
-    .price-card{padding:1.5rem;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border-radius:18px;display:grid;gap:1rem;align-content:start;min-height:480px}
-    .price{font-size:2.2rem;font-weight:900;letter-spacing:-.02em}
+    .price-card{padding:1.2rem;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border-radius:18px;display:grid;gap:1rem;align-content:start}
+    .price{font-size:clamp(1.6rem, 4.4vw, 2.2rem);font-weight:900;letter-spacing:-.02em}
     .pill{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.08);padding:.25rem .55rem;border-radius:999px;font-weight:800;font-size:.8rem;color:var(--muted)}
     .price-actions{margin-top:auto;display:grid;gap:.6rem}
-    .note{font-size:.86rem;color:var(--muted-soft)}
+    .note{font-size:.9rem;color:var(--muted-soft)}
 
-    form{display:grid;gap:.7rem}
+    /* Forms */
+    form{display:grid;gap:.8rem}
+    label{display:grid;gap:.35rem;font-weight:700}
     input, select, textarea{
-      width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14);
-      color:#fff; border-radius:12px; padding:.7rem .8rem; outline:none;
+      width:100%; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);
+      color:#fff; border-radius:12px; padding:.78rem .9rem; outline:none;
     }
     input::placeholder, textarea::placeholder{color:rgba(255,255,255,.45)}
-    textarea{min-height:70px;resize:vertical}
-    .row{display:grid;gap:.7rem;grid-template-columns: 1fr 1fr}
+    textarea{min-height:72px;resize:vertical}
+    .row{display:grid;gap:.8rem;grid-template-columns: 1fr 1fr}
     @media (max-width: 720px){.row{grid-template-columns: 1fr}}
+    input, select, textarea, .btn{min-height:46px}
 
-    .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+    /* Reveal effect (respects reduced motion) */
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;will-change:opacity,transform}
     .reveal.in{opacity:1;transform:translateY(0)}
+    @media (prefers-reduced-motion: reduce){
+      .reveal{opacity:1;transform:none}
+    }
 
+    /* Key points grid */
     .kgrid{display:grid;gap:1rem;grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))}
     .kcard{border:1px dashed rgba(255,255,255,.16);border-radius:14px;padding:1rem;background:rgba(255,255,255,.03)}
     .kcard strong{display:block;margin-bottom:.35rem}
@@ -200,8 +230,9 @@
     pre.code{margin:0;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.14);padding:1rem;border-radius:12px;overflow:auto;color:#eaffff}
     code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
 
+    /* Social + footer */
     .social{display:flex;flex-wrap:wrap;gap:.8rem}
-    .social a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#fff;text-decoration:none}
+    .social a{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#fff;text-decoration:none}
     .social svg{width:20px;height:20px}
     footer{border-top:1px solid rgba(255,255,255,.06);padding:2rem 0 3rem;color:var(--muted)}
 
@@ -211,6 +242,12 @@
     .lb-wrap{position:relative}
     .lb-img{max-width:90vw;max-height:80vh;display:block;border-radius:12px}
     .lb-close{position:absolute;top:.6rem;right:.6rem;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:.35rem .6rem;font-weight:800;cursor:pointer}
+
+    /* Tiny tweaks for extra-small devices */
+    @media (max-width: 360px){
+      .headline.xl{font-size:2rem}
+      nav a{padding:.42rem .6rem}
+    }
   </style>
 </head>
 <body>
@@ -218,7 +255,7 @@
 <header>
   <div class="container nav">
     <a href="/" class="brand">
-      <img src="assets/signalpilot-logo.svg" alt="" />
+      <img src="assets/signalpilot-logo.svg" alt="SignalPilot logo" />
       <span>SignalPilot</span>
     </a>
 
@@ -237,7 +274,7 @@
     </nav>
 
     <a class="btn btn-primary" href="#waitlist">Get the Suite</a>
-    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav">⋯</button>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav" aria-label="Toggle menu">⋯</button>
   </div>
 </header>
 
@@ -249,7 +286,7 @@
       <div class="stack reveal">
         <span class="badge">TRADINGVIEW INDICATORS & STRATEGY</span>
         <h1 class="headline xl spotlight">SignalPilot — Trading Suite</h1>
-        <p style="max-width:66ch;color:var(--muted)">
+        <p>
           Turn <strong>structure</strong>, <strong>volume</strong>, <strong>momentum</strong>, and <strong>regime</strong> into clean, non‑repainting signals you can scan, alert, and trade from <strong>1m to 1W</strong>. Flagship <strong>SP‑EC Pro (Event Candles)</strong> plus 9 companion modules—built to work together.
         </p>
         <div class="stack" style="grid-auto-flow:column;grid-auto-columns:max-content;gap:.8rem;align-items:center">
@@ -306,8 +343,8 @@
       <div class="grid auto-300 reveal">
         <!-- EC PRO -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-ec-pro.png" alt="SP‑EC Pro — Event Candles on chart" loading="lazy">
-          <h3 class="headline" style="font-size:1.28rem">SP‑EC Pro — Event‑Candle Confluence</h3>
+          <img class="shot" src="assets/shots/sp-ec-pro.png" alt="SP‑EC Pro — Event Candles on chart" loading="lazy" decoding="async">
+          <h3 class="headline" style="font-size:1.26rem">SP‑EC Pro — Event‑Candle Confluence</h3>
           <p class="benefit"><strong>See clean momentum events and bias at a glance.</strong> Only triggers when quality is high, from 1m to 1W. Non‑repainting and alert‑ready.</p>
           <ul class="tags"><li>Non‑repainting</li><li>Alert‑ready</li><li>TF‑aware</li></ul>
           <div class="pro-extra">
@@ -317,8 +354,8 @@
 
         <!-- PVA -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-pva-overlay.png" alt="SP‑PVA Volume & Overlay example" loading="lazy">
-          <h3 class="headline" style="font-size:1.28rem">SP‑PVA Volume + Overlay</h3>
+          <img class="shot" src="assets/shots/sp-pva-overlay.png" alt="SP‑PVA Volume and Overlay" loading="lazy" decoding="async">
+          <h3 class="headline" style="font-size:1.26rem">SP‑PVA Volume + Overlay</h3>
           <p class="benefit"><strong>Know when volume truly backs the move.</strong> One decisive print: Bull/Bear or EVR tags—no second‑guessing.</p>
           <ul class="tags"><li>Participation</li><li>CVD + Divs</li><li>Scan‑friendly</li></ul>
           <div class="pro-extra">
@@ -328,8 +365,8 @@
 
         <!-- OBV -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-obv.png" alt="SP‑OBV Money Flow" loading="lazy">
-          <h3 class="headline" style="font-size:1.28rem">SP‑OBV — Money flow made simple</h3>
+          <img class="shot" src="assets/shots/sp-obv.png" alt="SP‑OBV Money Flow" loading="lazy" decoding="async">
+          <h3 class="headline" style="font-size:1.26rem">SP‑OBV — Money flow made simple</h3>
           <p class="benefit"><strong>Spot when buying or selling pressure flips.</strong> Clean OBV/basis cross and band pushes show strength without noise.</p>
           <ul class="tags"><li>OBV</li><li>Divergences</li><li>HTF option</li></ul>
           <div class="pro-extra">
@@ -339,8 +376,8 @@
 
         <!-- LTF -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-ltf.png" alt="SP‑LTF Rhythm & Fatigue" loading="lazy">
-          <h3 class="headline" style="font-size:1.28rem">SP‑LTF — Rhythm & fatigue</h3>
+          <img class="shot" src="assets/shots/sp-ltf.png" alt="SP‑LTF Rhythm & Fatigue" loading="lazy" decoding="async">
+          <h3 class="headline" style="font-size:1.26rem">SP‑LTF — Rhythm & fatigue</h3>
           <p class="benefit"><strong>Know when a move is fresh or tired.</strong> Simple heads‑up overlay for counts, squeeze and fatigue markers.</p>
           <ul class="tags"><li>TD‑style counts</li><li>Squeeze</li><li>Fatigue</li></ul>
           <div class="pro-extra">
@@ -350,8 +387,8 @@
 
         <!-- LEVELS -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-levels.png" alt="SP‑Levels anchors" loading="lazy">
-          <h3 class="headline" style="font-size:1.28rem">SP‑Levels — Daily/weekly/monthly reference</h3>
+          <img class="shot" src="assets/shots/sp-levels.png" alt="SP‑Levels anchors" loading="lazy" decoding="async">
+          <h3 class="headline" style="font-size:1.26rem">SP‑Levels — Daily/weekly/monthly reference</h3>
           <p class="benefit"><strong>Only the levels that matter.</strong> dVWAP/wVWAP/POCs & opens—drawn once per period to keep charts clean.</p>
           <ul class="tags"><li>d/w/m</li><li>VWAP/POC</li><li>Low‑noise</li></ul>
           <div class="pro-extra">
@@ -361,8 +398,8 @@
 
         <!-- RSI TRIAD -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-rsi-triad.png" alt="SP‑RSI Triad layered RSI" loading="lazy">
-          <h3 class="headline" style="font-size:1.28rem">SP‑RSI Triad — Layered RSI w/ scoring</h3>
+          <img class="shot" src="assets/shots/sp-rsi-triad.png" alt="SP‑RSI Triad layered RSI" loading="lazy" decoding="async">
+          <h3 class="headline" style="font-size:1.26rem">SP‑RSI Triad — Layered RSI w/ scoring</h3>
           <p class="benefit"><strong>Catch turns with fewer false starts.</strong> Blended RSIs give early reads; a simple score shows conviction.</p>
           <ul class="tags"><li>Divs</li><li>Score 0–50</li><li>Filters</li></ul>
           <div class="pro-extra">
@@ -372,8 +409,8 @@
 
         <!-- SRSI+ -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-srsi-plus.png" alt="SP‑SRSI+ context-aware Stoch RSI" loading="lazy">
-          <h3 class="headline" style="font-size:1.28rem">SP‑SRSI+ — Context‑aware Stoch RSI</h3>
+          <img class="shot" src="assets/shots/sp-srsi-plus.png" alt="SP‑SRSI+ context-aware Stoch RSI" loading="lazy" decoding="async">
+          <h3 class="headline" style="font-size:1.26rem">SP‑SRSI+ — Context‑aware Stoch RSI</h3>
           <p class="benefit"><strong>Timing that respects context.</strong> Bias/volume/SDZ aware, outputs one Confluence Score you can alert/scan.</p>
           <ul class="tags"><li>Context</li><li>Confluence</li><li>Scan‑ready</li></ul>
           <div class="pro-extra">
@@ -383,8 +420,8 @@
 
         <!-- MACD+ -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-macd-plus.png" alt="SP‑MACD+ momentum regime" loading="lazy">
-          <h3 class="headline" style="font-size:1.28rem">SP‑MACD+ — Momentum regime</h3>
+          <img class="shot" src="assets/shots/sp-macd-plus.png" alt="SP‑MACD+ momentum regime" loading="lazy" decoding="async">
+          <h3 class="headline" style="font-size:1.26rem">SP‑MACD+ — Momentum regime</h3>
           <p class="benefit"><strong>Classic MACD, grown up.</strong> HTF confirm + ATR gating to reduce chop. Pick Raw or stricter Qualified mode.</p>
           <ul class="tags"><li>HTF confirm</li><li>ATR gate</li><li>Raw/Qualified</li></ul>
           <div class="pro-extra">
@@ -394,8 +431,8 @@
 
         <!-- SDZ -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-sdz.png" alt="SP‑SDZ supply/demand zones" loading="lazy">
-          <h3 class="headline" style="font-size:1.28rem">SP‑SDZ — Supply/Demand awareness</h3>
+          <img class="shot" src="assets/shots/sp-sdz.png" alt="SP‑SDZ supply/demand zones" loading="lazy" decoding="async">
+          <h3 class="headline" style="font-size:1.26rem">SP‑SDZ — Supply/Demand awareness</h3>
           <p class="benefit"><strong>Structure, without the clutter.</strong> Clean boxes from confirmed swings: red supply / green demand.</p>
           <ul class="tags"><li>Zones</li><li>Forward proj</li><li>Low‑noise</li></ul>
           <div class="pro-extra">
@@ -405,8 +442,8 @@
 
         <!-- SCREENER -->
         <article class="card">
-          <img class="shot" src="assets/shots/sp-screener.png" alt="SP‑Screener on-chart & global" loading="lazy">
-          <h3 class="headline" style="font-size:1.28rem">SP‑Screener — On‑chart & global alerts</h3>
+          <img class="shot" src="assets/shots/sp-screener.png" alt="SP‑Screener on‑chart & global" loading="lazy" decoding="async">
+          <h3 class="headline" style="font-size:1.26rem">SP‑Screener — On‑chart & global alerts</h3>
           <p class="benefit"><strong>Find setups fast.</strong> Scan up to 8 symbols × TFs in‑panel and fire watchlist/global alerts for the whole suite.</p>
           <ul class="tags"><li>On‑chart</li><li>Global alerts</li><li>8× symbols</li></ul>
           <div class="pro-extra">
@@ -430,7 +467,7 @@
           <li><strong>Scale & alert</strong> using SP‑Screener (on‑chart or global).</li>
         </ol>
 
-        <h3 class="headline" style="font-size:1.35rem">Built‑in plays</h3>
+        <h3 class="headline" style="font-size:1.3rem">Built‑in plays</h3>
         <ul style="margin:0;padding-left:1.1rem;color:var(--muted)">
           <li><strong>Trend Buy‑the‑Dip</strong> — Bias Up + PVA Bull/Climax → reaction at demand/dVWAP → RSI Triad/SRSI+ timing.</li>
           <li><strong>Reversal Flip</strong> — Absorption + OBV divergence at supply → EC slope flatten → Pilot reclaim.</li>
@@ -439,7 +476,7 @@
       </div>
 
       <div class="stack reveal">
-        <h3 class="headline" style="font-size:1.35rem">Defaults by trading style</h3>
+        <h3 class="headline" style="font-size:1.3rem;margin-top:.2rem">Defaults by trading style</h3>
         <div class="grid auto-250">
           <div class="card">
             <strong>Scalper (1–5m)</strong>
@@ -455,7 +492,7 @@
           </div>
         </div>
 
-        <h3 class="headline" style="font-size:1.35rem;margin-top:.6rem">Example alert taxonomy</h3>
+        <h3 class="headline" style="font-size:1.3rem;margin-top:.6rem">Example alert taxonomy</h3>
         <pre class="code"><code>[SP][SCREENER] BTCUSDT [15m] Bias=Up; EC=R↑; PVA=Bull; SDZ=NearDemand&lt;=0.25R; RSI_Score&gt;=20</code></pre>
       </div>
     </div>
@@ -550,16 +587,16 @@
 
           <form action="https://formspree.io/f/meorkjpn" method="POST">
             <div class="row">
-              <label>Plan
-                <select name="plan" required>
+              <label for="plan">Plan
+                <select id="plan" name="plan" required>
                   <option value="Monthly $79">Monthly $79</option>
                   <option value="Quarterly $199">Quarterly $199</option>
                   <option value="Yearly $499">Yearly $499</option>
                   <option value="Lifetime $899">Lifetime $899</option>
                 </select>
               </label>
-              <label>Coin
-                <select name="coin" required>
+              <label for="coin">Coin
+                <select id="coin" name="coin" required>
                   <option>BTC</option>
                   <option>ETH</option>
                   <option>AVAX (C‑chain)</option>
@@ -571,16 +608,16 @@
             </div>
 
             <div class="row">
-              <label>Email (for invoice &amp; receipt)
-                <input name="email" type="email" placeholder="you@domain.com" required>
+              <label for="email">Email (for invoice &amp; receipt)
+                <input id="email" name="email" type="email" placeholder="you@domain.com" autocomplete="email" required>
               </label>
-              <label>TradingView username (for invite)
-                <input name="tradingview" type="text" placeholder="@your-handle" required>
+              <label for="tvuser">TradingView username (for invite)
+                <input id="tvuser" name="tradingview" type="text" placeholder="@your-handle" autocomplete="nickname" required>
               </label>
             </div>
 
-            <label>Notes (optional)
-              <textarea name="notes" placeholder="Company/VAT, preferred email, any special instructions…"></textarea>
+            <label for="notes">Notes (optional)
+              <textarea id="notes" name="notes" placeholder="Company/VAT, preferred email, any special instructions…"></textarea>
             </label>
 
             <button class="btn btn-crypto" type="submit">Request crypto invoice</button>
@@ -592,40 +629,40 @@
 
           <div class="stack" style="gap:.5rem">
             <div class="row">
-              <label>ETH / MATIC (EVM)
-                <div class="row">
+              <label for="addr-eth">ETH / MATIC (EVM)
+                <div class="row" style="grid-template-columns:1fr auto">
                   <input id="addr-eth" value="0xcFf999901af3360576BA4Fa9750340C3f26504A5" readonly>
-                  <button class="btn" data-copy="#addr-eth" type="button">Copy</button>
+                  <button class="btn" data-copy="#addr-eth" type="button" aria-live="polite">Copy</button>
                 </div>
               </label>
-              <label>BTC
-                <div class="row">
+              <label for="addr-btc">BTC
+                <div class="row" style="grid-template-columns:1fr auto">
                   <input id="addr-btc" value="1DdTKYzeg9iR8GwgMZmoBje5ki5FhHwGVm" readonly>
-                  <button class="btn" data-copy="#addr-btc" type="button">Copy</button>
+                  <button class="btn" data-copy="#addr-btc" type="button" aria-live="polite">Copy</button>
                 </div>
               </label>
             </div>
 
             <div class="row">
-              <label>AVAX (C‑chain)
-                <div class="row">
+              <label for="addr-avax">AVAX (C‑chain)
+                <div class="row" style="grid-template-columns:1fr auto">
                   <input id="addr-avax" value="0x62B9c9625Bde847AD4A50Ced3CFd8e24735ffF08" readonly>
-                  <button class="btn" data-copy="#addr-avax" type="button">Copy</button>
+                  <button class="btn" data-copy="#addr-avax" type="button" aria-live="polite">Copy</button>
                 </div>
               </label>
-              <label>BNB (BSC)
-                <div class="row">
+              <label for="addr-bnb">BNB (BSC)
+                <div class="row" style="grid-template-columns:1fr auto">
                   <input id="addr-bnb" value="0x398605F9907eB2C3F8602A13D394Fbb00D53C2df" readonly>
-                  <button class="btn" data-copy="#addr-bnb" type="button">Copy</button>
+                  <button class="btn" data-copy="#addr-bnb" type="button" aria-live="polite">Copy</button>
                 </div>
               </label>
             </div>
 
             <div class="row">
-              <label>BCH (Bitcoin Cash)
-                <div class="row">
+              <label for="addr-bch">BCH (Bitcoin Cash)
+                <div class="row" style="grid-template-columns:1fr auto">
                   <input id="addr-bch" value="qz9gvarfc9rl9zm0me3ghjp83r78nchnrvwkazd4j9" readonly>
-                  <button class="btn" data-copy="#addr-bch" type="button">Copy</button>
+                  <button class="btn" data-copy="#addr-bch" type="button" aria-live="polite">Copy</button>
                 </div>
               </label>
               <div style="display:grid;place-items:center;color:var(--muted)">No memo/tag required</div>
@@ -649,11 +686,11 @@
       <div class="card reveal">
         <form action="https://formspree.io/f/mldpnrop" method="POST">
           <div class="row">
-            <label>Name <input name="name" required></label>
-            <label>Email <input name="email" type="email" required></label>
+            <label for="wl-name">Name <input id="wl-name" name="name" autocomplete="name" required></label>
+            <label for="wl-email">Email <input id="wl-email" name="email" type="email" autocomplete="email" required></label>
           </div>
-          <label>TradingView username <input name="tradingview" placeholder="@your-handle" required></label>
-          <label>Trading focus (optional) <input name="focus" placeholder="e.g., BTC, FX NY session, swing"></label>
+          <label for="wl-tv">TradingView username <input id="wl-tv" name="tradingview" placeholder="@your-handle" autocomplete="nickname" required></label>
+          <label for="wl-focus">Trading focus (optional) <input id="wl-focus" name="focus" placeholder="e.g., BTC, FX NY session, swing"></label>
           <button class="btn btn-primary" type="submit">Join the waitlist</button>
         </form>
       </div>
@@ -664,7 +701,7 @@
   <section id="docs" class="section">
     <div class="container stack">
       <h2 class="headline lg reveal">Docs &amp; videos (coming soon)</h2>
-      <p class="reveal" style="max-width:72ch;color:var(--muted)">We’re packaging quickstarts, presets, and short video run‑throughs of SP‑EC Pro, PVA Overlay, SDZ/Levels, and the Screener so you can ship clarity fast.</p>
+      <p class="reveal" style="max-width:72ch;color:var(--muted)">We’re packaging quickstarts, presets, and short video run‑throughs so you can ship clarity fast.</p>
     </div>
   </section>
 
@@ -704,24 +741,24 @@
   <div class="container stack">
     <div class="social">
       <!-- X / Twitter -->
-      <a href="#" aria-label="X">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3.2l-7 8.3 8.2 9.7H18.6l-5.9-7-6.8 7H2.7l7.5-8-7.9-10H8l5.4 6.9L17.5 3z"/></svg>
+      <a href="#" aria-label="X (Twitter)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 3h3.2l-7 8.3 8.2 9.7H18.6l-5.9-7-6.8 7H2.7l7.5-8-7.9-10H8l5.4 6.9L17.5 3z"/></svg>
       </a>
       <!-- Instagram -->
       <a href="#" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.8a5.2 5.2 0 1 1 0 10.4 5.2 5.2 0 0 1 0-10.4Zm0 2a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.7-.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.8a5.2 5.2 0 1 1 0 10.4 5.2 5.2 0 0 1 0-10.4Zm0 2a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.7-.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
       </a>
       <!-- YouTube -->
       <a href="#" aria-label="YouTube">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.5 7.1a3 3 0 0 0-2.1-2.1C18.6 4.5 12 4.5 12 4.5s-6.6 0-8.4.5A3 3 0 0 0 1.5 7.1C1 8.9 1 12 1 12s0 3.1.5 4.9a3 3 0 0 0 2.1 2.1c1.8.5 8.4.5 8.4.5s6.6 0 8.4-.5a3 3 0 0 0 2.1-2.1c.5-1.8.5-4.9.5-4.9s0-3.1-.5-4.9ZM10 15.5V8.5l6 3.5-6 3.5Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 7.1a3 3 0 0 0-2.1-2.1C18.6 4.5 12 4.5 12 4.5s-6.6 0-8.4.5A3 3 0 0 0 1.5 7.1C1 8.9 1 12 1 12s0 3.1.5 4.9a3 3 0 0 0 2.1 2.1c1.8.5 8.4.5 8.4.5s6.6 0 8.4-.5a3 3 0 0 0 2.1-2.1c.5-1.8.5-4.9.5-4.9s0-3.1-.5-4.9ZM10 15.5V8.5l6 3.5-6 3.5Z"/></svg>
       </a>
       <!-- Discord -->
       <a href="#" aria-label="Discord">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A17 17 0 0 0 16.2 3l-.3.6a14 14 0 0 1 3.4 1.3 14 14 0 0 0-9 0 14 14 0 0 1 3.4-1.3l-.3-.6a17 17 0 0 0-4.1 1.4C6.2 5.9 4.7 8.6 4.3 11.4c1.2 1.7 2.8 3 4.7 4a13 13 0 0 0 1.1-1.8c-.6-.2-1.1-.5-1.6-.8.1-.1.2-.1.3-.2a9 9 0 0 0 8.4 0l.3.2c-.5.3-1 .6-1.6.8.3.6.7 1.2 1.1 1.8 1.9-1 3.5-2.3 4.7-4-.4-2.8-1.9-5.5-3.9-7Zm-8.9 8c-.7 0-1.3-.7-1.3-1.6s.6-1.6 1.3-1.6 1.3.7 1.3 1.6-.6 1.6-1.3 1.6Zm6.2 0c-.7 0-1.3-.7-1.3-1.6s.6-1.6 1.3-1.6 1.3.7 1.3 1.6-.6 1.6-1.3 1.6Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A17 17 0 0 0 16.2 3l-.3.6a14 14 0 0 1 3.4 1.3 14 14 0 0 0-9 0 14 14 0 0 1 3.4-1.3l-.3-.6a17 17 0 0 0-4.1 1.4C6.2 5.9 4.7 8.6 4.3 11.4c1.2 1.7 2.8 3 4.7 4a13 13 0 0 0 1.1-1.8c-.6-.2-1.1-.5-1.6-.8.1-.1.2-.1.3-.2a9 9 0 0 0 8.4 0l.3.2c-.5.3-1 .6-1.6.8.3.6.7 1.2 1.1 1.8 1.9-1 3.5-2.3 4.7-4-.4-2.8-1.9-5.5-3.9-7Zm-8.9 8c-.7 0-1.3-.7-1.3-1.6s.6-1.6 1.3-1.6 1.3.7 1.3 1.6-.6 1.6-1.3 1.6Zm6.2 0c-.7 0-1.3-.7-1.3-1.6s.6-1.6 1.3-1.6 1.3.7 1.3 1.6-.6 1.6-1.3 1.6Z"/></svg>
       </a>
       <!-- Telegram -->
       <a href="#" aria-label="Telegram">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 16.3 9.3 20c.4 0 .6-.2.8-.4l1.9-1.8 3.9 2.9c.7.4 1.3.2 1.5-.7l2.7-12.7h0c.2-.9-.3-1.2-1-.9l-16 6.2c-.9.3-.9.9-.2 1.1l4.1 1.3 9.5-6c.5-.3.9-.1.5.2l-7.5 6.1Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 16.3 9.3 20c.4 0 .6-.2.8-.4l1.9-1.8 3.9 2.9c.7.4 1.3.2 1.5-.7l2.7-12.7h0c.2-.9-.3-1.2-1-.9l-16 6.2c-.9.3-.9.9-.2 1.1l4.1 1.3 9.5-6c.5-.3.9-.1.5.2l-7.5 6.1Z"/></svg>
       </a>
     </div>
     <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem">
@@ -732,7 +769,7 @@
 </footer>
 
 <!-- Lightbox -->
-<dialog id="lightbox">
+<dialog id="lightbox" aria-labelledby="lb-title">
   <div class="lb-wrap">
     <button class="lb-close" type="button" aria-label="Close">✕</button>
     <img id="lightbox-img" class="lb-img" alt="Indicator screenshot">
@@ -740,34 +777,63 @@
 </dialog>
 
 <script>
-  // mobile menu
+  // mobile menu + scroll lock
   const menuBtn = document.getElementById('menuToggle');
   const nav = document.getElementById('mainnav');
   menuBtn?.addEventListener('click', () => {
-    nav.classList.toggle('open');
-    menuBtn.setAttribute('aria-expanded', nav.classList.contains('open'));
+    const open = !nav.classList.contains('open');
+    nav.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+    document.body.classList.toggle('nav-open', open);
   });
   document.addEventListener('click', (e) => {
-    if (!nav.contains(e.target) && e.target !== menuBtn) nav.classList.remove('open');
+    if (!nav.contains(e.target) && e.target !== menuBtn) {
+      nav.classList.remove('open');
+      document.body.classList.remove('nav-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
   });
-  document.querySelectorAll('#mainnav a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+  document.querySelectorAll('#mainnav a').forEach(a =>
+    a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      document.body.classList.remove('nav-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    })
+  );
 
-  // reveal on scroll
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); })
-  }, { threshold: .12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  // reveal on scroll (respect reduced motion)
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); })
+    }, { threshold: .12, rootMargin: '60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
 
-  // copy buttons (wallets)
+  // copy buttons (wallets) with modern API + fallback
+  async function copyText(str){
+    try{
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(str);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = str; document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy'); ta.remove();
+      }
+      return true;
+    }catch{ return false; }
+  }
   document.querySelectorAll('[data-copy]').forEach(btn=>{
-    btn.addEventListener('click',()=>{
+    btn.addEventListener('click', async ()=>{
       const sel = btn.getAttribute('data-copy');
       const el = document.querySelector(sel);
       if (!el) return;
-      el.select(); el.setSelectionRange(0, 99999);
-      document.execCommand('copy');
-      btn.textContent = 'Copied';
-      setTimeout(()=>btn.textContent='Copy',1200);
+      const ok = await copyText(el.value);
+      const old = btn.textContent;
+      btn.textContent = ok ? 'Copied' : 'Error';
+      setTimeout(()=>btn.textContent = old, 1200);
     });
   });
 
