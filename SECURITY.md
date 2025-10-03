@@ -7,7 +7,7 @@ However, we still take security concerns seriously.
 ## Reporting a Vulnerability
 If you discover a security vulnerability, please report it responsibly.
 
-- Email: security@signalpilot.io
+- Email: support@signalpilot.io
 - Do not create a public GitHub issue for vulnerabilities.
 
 We will review reports promptly and aim to respond within 7 business days.
