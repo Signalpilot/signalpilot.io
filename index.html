@@ -158,6 +158,21 @@
     .two-col{display:grid;gap:1.2rem;grid-template-columns: 1.1fr .9fr}
     @media (max-width: 960px){.two-col{grid-template-columns:1fr}}
 
+    /* Indicator visuals */
+    .shot{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0a0e18;cursor:zoom-in}
+    .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0 0;padding:0;list-style:none}
+    .tags li{font-size:.72rem;font-weight:800;color:var(--muted);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:.15rem .5rem;background:rgba(255,255,255,.04)}
+
+    .benefit{color:var(--muted);margin:.3rem 0 .1rem}
+    .pro-extra{display:none;color:var(--muted);border-top:1px dashed rgba(255,255,255,.14);margin-top:.6rem;padding-top:.6rem}
+    body.pro-on .pro-extra{display:block}
+
+    /* Toggle */
+    .toggle{display:inline-flex;align-items:center;gap:.6rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);border-radius:999px;padding:.35rem .6rem}
+    .toggle button{border:0;background:transparent;color:#fff;font-weight:800;cursor:pointer}
+    .toggle small{color:var(--muted)}
+    .toggle .dot{width:8px;height:8px;border-radius:50%;background:#6ef1a7;box-shadow:0 0 10px #33d28c}
+
     .pricing{display:grid;gap:1.2rem;grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))}
     .price-card{padding:1.5rem;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border-radius:18px;display:grid;gap:1rem;align-content:start;min-height:480px}
     .price{font-size:2.2rem;font-weight:900;letter-spacing:-.02em}
@@ -189,6 +204,13 @@
     .social a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#fff;text-decoration:none}
     .social svg{width:20px;height:20px}
     footer{border-top:1px solid rgba(255,255,255,.06);padding:2rem 0 3rem;color:var(--muted)}
+
+    /* Lightbox */
+    dialog#lightbox{padding:0;border:0;background:#000000e6;border-radius:12px}
+    dialog#lightbox::backdrop{background:rgba(0,0,0,.55)}
+    .lb-wrap{position:relative}
+    .lb-img{max-width:90vw;max-height:80vh;display:block;border-radius:12px}
+    .lb-close{position:absolute;top:.6rem;right:.6rem;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:.35rem .6rem;font-weight:800;cursor:pointer}
   </style>
 </head>
 <body>
@@ -251,7 +273,7 @@
       <div class="kgrid reveal">
         <div class="kcard">
           <strong>Clarity</strong>
-          One‑look bias with exclusive prints—no conflicting signals spam.
+          One‑look bias with exclusive prints—no conflicting signal spam.
         </div>
         <div class="kcard">
           <strong>Context</strong>
@@ -269,60 +291,127 @@
     </div>
   </section>
 
-  <!-- SUITE / PRODUCT GRID -->
+  <!-- SUITE / PRODUCT GRID with Simple/Pro toggle -->
   <section id="suite" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal">What’s inside — Suite V1 (10 indicators)</h2>
+      <div class="stack reveal" style="gap:.6rem">
+        <h2 class="headline lg">What’s inside — Suite V1 (10 indicators)</h2>
+        <div class="toggle" id="proToggle">
+          <span class="dot" aria-hidden="true"></span>
+          <button type="button" aria-pressed="false"><span>Show pro details</span></button>
+          <small>Keep it simple or expand advanced notes.</small>
+        </div>
+      </div>
 
       <div class="grid auto-300 reveal">
+        <!-- EC PRO -->
         <article class="card">
-          <h3 class="headline" style="font-size:1.35rem">SP‑EC Pro — Event‑Candle Confluence</h3>
-          <p>A non‑repainting engine tagging <strong>B/T/R↑/R↓/TR</strong> on any TF; bias via majority‑of‑three (EMA34/55, price vs Pilot Line, slope). <strong>ATR‑normalized dip/rip</strong> logic for buy‑the‑dip / sell‑the‑rip. <em>Pilot ribbon</em> for trend strength; <em>NanoFlow “+”</em> for micro‑momentum. Alert‑ready 1m–1W.</p>
+          <img class="shot" src="assets/shots/sp-ec-pro.png" alt="SP‑EC Pro — Event Candles on chart" loading="lazy">
+          <h3 class="headline" style="font-size:1.28rem">SP‑EC Pro — Event‑Candle Confluence</h3>
+          <p class="benefit"><strong>See clean momentum events and bias at a glance.</strong> Only triggers when quality is high, from 1m to 1W. Non‑repainting and alert‑ready.</p>
+          <ul class="tags"><li>Non‑repainting</li><li>Alert‑ready</li><li>TF‑aware</li></ul>
+          <div class="pro-extra">
+            A non‑repainting engine tagging <strong>B/T/R↑/R↓/TR</strong> on any TF; bias via majority‑of‑three (EMA34/55, price vs Pilot Line, slope). <strong>ATR‑normalized dip/rip</strong> logic for buy‑the‑dip / sell‑the‑rip. Pilot ribbon for trend strength; NanoFlow “+” for micro‑momentum. Alert‑ready 1m–1W.
+          </div>
         </article>
 
+        <!-- PVA -->
         <article class="card">
-          <h3 class="headline" style="font-size:1.35rem">SP‑PVA Volume + SP‑PVA Overlay</h3>
-          <p><strong>PVA Volume</strong>: normalized participation (log Z‑Vol + RVOL), HTF confirm, CVD, divergences, clean spikes. <strong>PVA Overlay</strong>: converts context into one decisive, non‑repainting print — <strong>Bull</strong> or <strong>Bear</strong> (exclusive), plus <strong>EVR: Climax / Absorption</strong>. TF‑aware, alert‑ready, scan‑friendly.</p>
+          <img class="shot" src="assets/shots/sp-pva-overlay.png" alt="SP‑PVA Volume & Overlay example" loading="lazy">
+          <h3 class="headline" style="font-size:1.28rem">SP‑PVA Volume + Overlay</h3>
+          <p class="benefit"><strong>Know when volume truly backs the move.</strong> One decisive print: Bull/Bear or EVR tags—no second‑guessing.</p>
+          <ul class="tags"><li>Participation</li><li>CVD + Divs</li><li>Scan‑friendly</li></ul>
+          <div class="pro-extra">
+            <strong>PVA Volume</strong>: normalized participation (log Z‑Vol + RVOL), HTF confirm, CVD, divergences, clean spikes. <strong>PVA Overlay</strong>: converts context into one decisive, non‑repainting print — <strong>Bull</strong> or <strong>Bear</strong> (exclusive), plus <strong>EVR: Climax / Absorption</strong>. TF‑aware, alert‑ready, scan‑friendly.
+          </div>
         </article>
 
+        <!-- OBV -->
         <article class="card">
-          <h3 class="headline" style="font-size:1.35rem">SP‑OBV — Money flow made simple</h3>
-          <p>OBV (blue) + smoothing basis (yellow) + Bollinger channel. Crosses hint at momentum shifts; band pushes flag unusually strong pressure. Divergences (regular + hidden). Optional HTF compute. Alerts included.</p>
+          <img class="shot" src="assets/shots/sp-obv.png" alt="SP‑OBV Money Flow" loading="lazy">
+          <h3 class="headline" style="font-size:1.28rem">SP‑OBV — Money flow made simple</h3>
+          <p class="benefit"><strong>Spot when buying or selling pressure flips.</strong> Clean OBV/basis cross and band pushes show strength without noise.</p>
+          <ul class="tags"><li>OBV</li><li>Divergences</li><li>HTF option</li></ul>
+          <div class="pro-extra">
+            OBV (blue) + smoothing basis (yellow) + Bollinger channel. Crosses hint at momentum shifts; band pushes flag unusually strong pressure. Divergences (regular + hidden). Optional HTF compute. Alerts included.
+          </div>
         </article>
 
+        <!-- LTF -->
         <article class="card">
-          <h3 class="headline" style="font-size:1.35rem">SP‑LTF — Multi‑timeframe rhythm & fatigue</h3>
-          <p>Heads‑up layer: clean <strong>8/9 counts</strong> (TD‑style), <strong>Squeeze cloud</strong> for coil, and <strong>Caution/Danger X</strong> when moves get tired (momentum fade, mean‑stretch, squeeze releases).</p>
+          <img class="shot" src="assets/shots/sp-ltf.png" alt="SP‑LTF Rhythm & Fatigue" loading="lazy">
+          <h3 class="headline" style="font-size:1.28rem">SP‑LTF — Rhythm & fatigue</h3>
+          <p class="benefit"><strong>Know when a move is fresh or tired.</strong> Simple heads‑up overlay for counts, squeeze and fatigue markers.</p>
+          <ul class="tags"><li>TD‑style counts</li><li>Squeeze</li><li>Fatigue</li></ul>
+          <div class="pro-extra">
+            Heads‑up layer: clean <strong>8/9 counts</strong> (TD‑style), Squeeze cloud for coil, and Caution/Danger X when moves get tired (momentum fade, mean‑stretch, squeeze releases).
+          </div>
         </article>
 
+        <!-- LEVELS -->
         <article class="card">
-          <h3 class="headline" style="font-size:1.35rem">SP‑Levels — Daily/weekly/monthly micro reference</h3>
-          <p>Uncluttered reference levels anchored to each period’s open: <strong>dVWAP, wVWAP, dPOC, wOpen, mOpen, mPOC</strong>. Drawn on the opening candle only—actionable with less noise.</p>
+          <img class="shot" src="assets/shots/sp-levels.png" alt="SP‑Levels anchors" loading="lazy">
+          <h3 class="headline" style="font-size:1.28rem">SP‑Levels — Daily/weekly/monthly reference</h3>
+          <p class="benefit"><strong>Only the levels that matter.</strong> dVWAP/wVWAP/POCs & opens—drawn once per period to keep charts clean.</p>
+          <ul class="tags"><li>d/w/m</li><li>VWAP/POC</li><li>Low‑noise</li></ul>
+          <div class="pro-extra">
+            Uncluttered levels anchored to each period’s open: <strong>dVWAP, wVWAP, dPOC, wOpen, mOpen, mPOC</strong>. Drawn on the opening candle only—actionable with less noise.
+          </div>
         </article>
 
+        <!-- RSI TRIAD -->
         <article class="card">
-          <h3 class="headline" style="font-size:1.35rem">SP‑RSI Triad — Layered RSI with scoring</h3>
-          <p>Fast/base/slow RSI blend for fewer false starts. Marks bullish/bearish divergences with a <strong>0–50 strength score</strong>. Filters: OBV trend, Stoch RSI timing, ATR vol, HTF RSI. Visual guides keep it clear.</p>
+          <img class="shot" src="assets/shots/sp-rsi-triad.png" alt="SP‑RSI Triad layered RSI" loading="lazy">
+          <h3 class="headline" style="font-size:1.28rem">SP‑RSI Triad — Layered RSI w/ scoring</h3>
+          <p class="benefit"><strong>Catch turns with fewer false starts.</strong> Blended RSIs give early reads; a simple score shows conviction.</p>
+          <ul class="tags"><li>Divs</li><li>Score 0–50</li><li>Filters</li></ul>
+          <div class="pro-extra">
+            Fast/base/slow RSI blend. Marks bullish/bearish divergences with a <strong>0–50 strength score</strong>. Filters: OBV trend, Stoch RSI timing, ATR vol, HTF RSI. Visual guides keep it clear.
+          </div>
         </article>
 
+        <!-- SRSI+ -->
         <article class="card">
-          <h3 class="headline" style="font-size:1.35rem">SP‑SRSI+ — Context‑aware Stoch RSI</h3>
-          <p>Adapts to volatility, respects HTF bias, listens to volume/money flow, stays aware of SDZ, and outputs a <strong>unified Confluence Score</strong> you can route to <em>SP‑Screener</em> for scans/alerts.</p>
+          <img class="shot" src="assets/shots/sp-srsi-plus.png" alt="SP‑SRSI+ context-aware Stoch RSI" loading="lazy">
+          <h3 class="headline" style="font-size:1.28rem">SP‑SRSI+ — Context‑aware Stoch RSI</h3>
+          <p class="benefit"><strong>Timing that respects context.</strong> Bias/volume/SDZ aware, outputs one Confluence Score you can alert/scan.</p>
+          <ul class="tags"><li>Context</li><li>Confluence</li><li>Scan‑ready</li></ul>
+          <div class="pro-extra">
+            Adapts to volatility, respects HTF bias, listens to volume/money flow, stays aware of SDZ, and outputs a <strong>unified Confluence Score</strong> for SP‑Screener scans/alerts.
+          </div>
         </article>
 
+        <!-- MACD+ -->
         <article class="card">
-          <h3 class="headline" style="font-size:1.35rem">SP‑MACD+ — Momentum regime with filters</h3>
-          <p>Familiar visuals with disciplined gating. HTF confirmation, ATR gating, near‑zero noise fade, optional pre‑smooth to reduce chop. Modes: <strong>Raw</strong> or stricter <strong>Qualified</strong>. Presets: Classic Soft / Pro Filtered.</p>
+          <img class="shot" src="assets/shots/sp-macd-plus.png" alt="SP‑MACD+ momentum regime" loading="lazy">
+          <h3 class="headline" style="font-size:1.28rem">SP‑MACD+ — Momentum regime</h3>
+          <p class="benefit"><strong>Classic MACD, grown up.</strong> HTF confirm + ATR gating to reduce chop. Pick Raw or stricter Qualified mode.</p>
+          <ul class="tags"><li>HTF confirm</li><li>ATR gate</li><li>Raw/Qualified</li></ul>
+          <div class="pro-extra">
+            HTF confirmation, ATR gating, near‑zero noise fade, optional pre‑smooth. Modes: <strong>Raw</strong> or <strong>Qualified</strong>. Presets: Classic Soft / Pro Filtered.
+          </div>
         </article>
 
+        <!-- SDZ -->
         <article class="card">
-          <h3 class="headline" style="font-size:1.35rem">SP‑SDZ — Clean supply/demand awareness</h3>
-          <p>Locks onto confirmed swing highs/lows, boxes true zone (wick + body), projects forward—<span style="color:#ffa2a2">red = supply</span>, <span style="color:#a2ffba">green = demand</span>. Minimal visual noise; maximum structure context.</p>
+          <img class="shot" src="assets/shots/sp-sdz.png" alt="SP‑SDZ supply/demand zones" loading="lazy">
+          <h3 class="headline" style="font-size:1.28rem">SP‑SDZ — Supply/Demand awareness</h3>
+          <p class="benefit"><strong>Structure, without the clutter.</strong> Clean boxes from confirmed swings: red supply / green demand.</p>
+          <ul class="tags"><li>Zones</li><li>Forward proj</li><li>Low‑noise</li></ul>
+          <div class="pro-extra">
+            Confirms swings, boxes true zone (wick + body) and projects forward — <span style="color:#ffa2a2">red = supply</span>, <span style="color:#a2ffba">green = demand</span>.
+          </div>
         </article>
 
+        <!-- SCREENER -->
         <article class="card">
-          <h3 class="headline" style="font-size:1.35rem">SP‑Screener — On‑chart & global alerts</h3>
-          <p>On‑chart mini‑screener: scan up to <strong>8 symbols × TFs</strong> in‑panel. Shows ticker, latest trade signal (↑/↓), time since, TP1 (ATR‑sized), Gauss Ribbon state, running P&L. Global/watchlist alerts supported.</p>
+          <img class="shot" src="assets/shots/sp-screener.png" alt="SP‑Screener on-chart & global" loading="lazy">
+          <h3 class="headline" style="font-size:1.28rem">SP‑Screener — On‑chart & global alerts</h3>
+          <p class="benefit"><strong>Find setups fast.</strong> Scan up to 8 symbols × TFs in‑panel and fire watchlist/global alerts for the whole suite.</p>
+          <ul class="tags"><li>On‑chart</li><li>Global alerts</li><li>8× symbols</li></ul>
+          <div class="pro-extra">
+            On‑chart mini‑screener shows ticker, last signal (↑/↓), time since, TP1 (ATR), Gauss Ribbon state, and running P&L. Global/watchlist alerts supported.
+          </div>
         </article>
       </div>
     </div>
@@ -372,7 +461,7 @@
     </div>
   </section>
 
-  <!-- PRICING (SP VIP included) -->
+  <!-- PRICING -->
   <section id="pricing" class="section">
     <div class="container stack">
       <h2 class="headline lg reveal">Plans &amp; pricing — <span class="pill">SP VIP included in all tiers</span></h2>
@@ -642,6 +731,14 @@
   </div>
 </footer>
 
+<!-- Lightbox -->
+<dialog id="lightbox">
+  <div class="lb-wrap">
+    <button class="lb-close" type="button" aria-label="Close">✕</button>
+    <img id="lightbox-img" class="lb-img" alt="Indicator screenshot">
+  </div>
+</dialog>
+
 <script>
   // mobile menu
   const menuBtn = document.getElementById('menuToggle');
@@ -661,7 +758,7 @@
   }, { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // copy buttons
+  // copy buttons (wallets)
   document.querySelectorAll('[data-copy]').forEach(btn=>{
     btn.addEventListener('click',()=>{
       const sel = btn.getAttribute('data-copy');
@@ -673,6 +770,29 @@
       setTimeout(()=>btn.textContent='Copy',1200);
     });
   });
+
+  // Simple / Pro toggle
+  const proToggle = document.getElementById('proToggle');
+  const proBtn = proToggle?.querySelector('button');
+  proBtn?.addEventListener('click', ()=>{
+    const on = document.body.classList.toggle('pro-on');
+    proBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    proBtn.querySelector('span').textContent = on ? 'Hide pro details' : 'Show pro details';
+  });
+
+  // Lightbox for screenshots
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbClose = lb.querySelector('.lb-close');
+  document.querySelectorAll('.shot').forEach(img=>{
+    img.addEventListener('click', ()=>{
+      lbImg.src = img.src;
+      try { lb.showModal(); } catch { lb.setAttribute('open', ''); }
+    });
+  });
+  lbClose.addEventListener('click', ()=> lb.close());
+  lb.addEventListener('click', (e)=> { if (e.target === lb) lb.close(); });
+  document.addEventListener('keydown', (e)=> { if (e.key === 'Escape' && lb.open) lb.close(); });
 
   // year
   document.getElementById('year').textContent = new Date().getFullYear();
