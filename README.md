@@ -1,84 +1,71 @@
-SignalPilot.io
+# SignalPilot — Trading Suite Website
 
-Cut through noise. Ship clear signals.
+**Live:** https://www.signalpilot.io  
+**Repo:** https://github.com/Signalpilot/signalpilot.io
 
-SignalPilot is a premium TradingView product designed to simplify trading decisions by reducing noise and highlighting clear, actionable signals.
+A fast, static website for the SignalPilot Trading Suite. It turns **structure, volume, momentum, and regime** into clean, **non‑repainting** signals you can scan, alert, and trade on **any market & timeframe**. The site highlights the flagship **SP‑EC Pro (Event Candles)** plus 9 companion modules.
 
-SignalPilot Pro → Paid, invite-only Pine Script v6 strategy with full backtesting, alerts, and advanced risk management.
+> **Educational use only.** Nothing here is financial advice. Past performance does not guarantee future results.
 
-SignalPilot Lite → Free/demo Pine Script v6 indicator (visual signals only, no backtesting).
+---
 
-⚠️ Disclaimer: SignalPilot is for educational use only. Nothing here is financial advice.
+## Contents
 
-🌟 Features
+- [What’s on the site](#whats-on-the-site)
+- [Tech stack](#tech-stack)
+- [Quick start (local dev)](#quick-start-local-dev)
+- [Edit guide (where to change copy & settings)](#edit-guide-where-to-change-copy--settings)
+- [SEO & analytics](#seo--analytics)
+- [Deploy](#deploy)
+- [Security / making the repo public](#security--making-the-repo-public)
+- [License](#license)
 
-Clean, modular Pine Script v6 code.
+---
 
-Noise reduction and anomaly detection.
+## What’s on the site
 
-Confidence multipliers and weighted signals.
+- **Hero:** gradient headline, “any market · any timeframe” ribbon, 14‑day launch countdown, quick CTAs.
+- **Why SignalPilot:** 8 clear reasons (clarity, context, actionable, robust, etc.).
+- **What’s inside:** 10 products with tight one‑liners:
+  - **SP‑EC Pro — Event‑Candle Confluence:** *Signals, not guesses — bias in one look.*
+  - **SP‑PVA Volume + Overlay:** *Crown energy, measured — then printed.*
+  - **SP‑OBV:** *Pressure flips, you catch the hint.*
+  - **SP‑LTF:** *Coiled or cooked — at a glance.*
+  - **SP‑Levels:** *Levels that hold the story.*
+  - **SP‑RSI Triad:** *Momentum turns — with receipts.*
+  - **SP‑SRSI+:** *Context first, trigger second.*
+  - **SP‑MACD+:** *Classic MACD, grown up.*
+  - **SP‑SDZ:** *Supply or demand — no ambiguity.*
+  - **SP‑Screener:** *Scan the list, not your patience.*
+- **How it works (checklist):** bias → participation → structure → timing → scale/alerts + built‑in plays.
+- **Pricing:** Monthly / Quarterly / Yearly / Lifetime. **SP‑EC included in all tiers** (visible callout).
+- **Pay with crypto:** Formspree form + direct ETH/BTC/AVAX/MATIC/BNB/BCH addresses (copy buttons).
+- **Waitlist:** Formspree form.
+- **FAQ:** non‑repainting, timeframes, scanning, access speed (1–8h), etc.
+- **Footer:** social icons (X, IG, YouTube, Discord, Telegram, GitHub).
 
-Ready-to-use alerts and risk tools (Pro).
+---
 
-Modern, responsive website for docs and onboarding.
+## Tech stack
 
-🌐 Website
+- Pure **HTML + CSS + vanilla JS** (no build step).
+- **Plausible** analytics (privacy‑friendly).
+- **Formspree** forms (waitlist + crypto invoice).
+- Inline **SVG** icons (crisp on all screens).
+- Deployed on **Vercel** (recommended), Netlify also works.
 
-This repository contains the code for signalpilot.io
-.
-The site is a static HTML/CSS/JS project, deployed via Vercel.
+---
 
-Pages
+## Quick start (local dev)
 
-/ → Homepage
-
-/product → Product overview (Lite vs Pro)
-
-/pricing → Pricing table
-
-/docs → Documentation (Quickstart, Parameters, Alerts)
-
-/resources → Blog & tutorials (coming soon)
-
-/company → About, Partners, Contact
-
-/signup → Signup placeholder
-
-🛠️ Tech Stack
-
-Frontend: HTML, CSS, vanilla JavaScript
-
-Styling: Dark SaaS theme with accent color #5b8aff
-
-Hosting: Vercel
-
-Source Control: GitHub
-
-📂 Repo Structure
-signalpilot.io/
-├── index.html          # Homepage
-├── style.css           # Shared styles
-├── favicon.svg         # Site icon
-├── product/index.html
-├── pricing/index.html
-├── docs/index.html
-├── resources/index.html
-├── company/index.html
-├── signup/index.html
-├── README.md           # This file
-└── AGENTS.md           # AI agent guidance
-
-🚀 Getting Started (for contributors)
-
-Clone the repo:
-
-git clone https://github.com/<USERNAME>/signalpilot.io.git
+```bash
+git clone https://github.com/Signalpilot/signalpilot.io
 cd signalpilot.io
 
+# Option A: open index.html in a browser (works)
+# Option B: run a tiny local server for correct relative paths:
+npx serve .        # or: python3 -m http.server 8080
 
-Open index.html in a browser or editor.
-
-Modify files → commit → push → Vercel auto-deploys.
 
 📄 License
 
