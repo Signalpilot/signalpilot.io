@@ -395,8 +395,12 @@
             <li>Standard email support</li>
           </ul>
           <div class="stack" style="margin-top:1rem">
+            <label>TradingView username (for invite)
+              <input id="tv-monthly" placeholder="@your-handle" required>
+            </label>
+            <!-- PayPal button renders here -->
+            <div id="paypal-button-container-P-6UD12522YR208981MNDQ3QPA"></div>
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
-            <button class="btn btn-disabled" type="button">Pay with card (soon)</button>
           </div>
         </article>
 
@@ -411,8 +415,12 @@
             <li>Save vs monthly</li>
           </ul>
           <div class="stack" style="margin-top:1rem">
+            <label>TradingView username (for invite)
+              <input id="tv-quarterly" placeholder="@your-handle" required>
+            </label>
+            <!-- PayPal button renders here -->
+            <div id="paypal-button-container-P-4VR929208D839202YNDQ3T6Q"></div>
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
-            <button class="btn btn-disabled" type="button">Pay with card (soon)</button>
           </div>
         </article>
 
@@ -428,8 +436,12 @@
             <li>Save big vs monthly</li>
           </ul>
           <div class="stack" style="margin-top:1rem">
+            <label>TradingView username (for invite)
+              <input id="tv-yearly" placeholder="@your-handle" required>
+            </label>
+            <!-- PayPal button renders here -->
+            <div id="paypal-button-container-P-43M86339WD725333MNDQ3VGI"></div>
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
-            <button class="btn btn-disabled" type="button">Pay with card (soon)</button>
           </div>
         </article>
 
@@ -443,8 +455,26 @@
             <li>Private Discord for life + full preset bundle</li>
           </ul>
           <div class="stack" style="margin-top:1rem">
+            <!-- Classic Hosted Button with a true required TV field -->
+            <form id="pp-lifetime" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="display:grid;gap:.6rem">
+              <input type="hidden" name="cmd" value="_s-xclick" />
+              <input type="hidden" name="hosted_button_id" value="N6TJGG9LXSE2L" />
+              <input type="hidden" name="currency_code" value="USD" />
+
+              <!-- Custom field label for the order; buyers also type below -->
+              <input type="hidden" name="on0" value="TradingView username (required for activation)"/>
+              <label>TradingView username (required for activation)
+                <input name="os0" id="tv-lifetime" type="text" placeholder="@yourname" required>
+              </label>
+
+              <!-- Metadata we attach to the transaction -->
+              <input type="hidden" name="custom" id="pp-lifetime-custom" value=""/>
+
+              <!-- Default PayPal Buy Now image (works everywhere) -->
+              <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="Pay with PayPal" alt="Buy Now" />
+            </form>
+
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
-            <button class="btn btn-disabled" type="button">Pay with card (soon)</button>
           </div>
         </article>
       </div>
@@ -618,7 +648,7 @@
       </a>
       <!-- Instagram -->
       <a href="#" aria-label="Instagram" title="Instagram">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.8a5.2 5.2 0 1 1 0 10.4 5.2 5.2 0 0 1 0-10.4Zm5.7-.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 0 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.8a5.2 5.2 0 1 1 0 10.4 5.2 5.2 0 0 1 0-10.4Zm5.7-.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
       </a>
       <!-- YouTube -->
       <a href="#" aria-label="YouTube" title="YouTube">
@@ -644,6 +674,7 @@
   </div>
 </footer>
 
+<!-- ======= Site scripts ======= -->
 <script>
   // ======= mobile menu
   const menuBtn = document.getElementById('menuToggle');
@@ -701,6 +732,56 @@
 
   // year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ======= Lifetime button: attach TV handle into "custom" and block empty submits
+  (function(){
+    const form = document.getElementById('pp-lifetime');
+    if(!form) return;
+    form.addEventListener('submit', function(e){
+      const input = document.getElementById('tv-lifetime');
+      const custom = document.getElementById('pp-lifetime-custom');
+      const tv = (input?.value || '').trim();
+      if(!tv){
+        e.preventDefault();
+        alert('Enter your TradingView username for activation.');
+        input?.focus();
+        return;
+      }
+      if(custom) custom.value = `tv:${tv}|plan:lifetime`;
+    });
+  })();
 </script>
+
+<!-- ======= PayPal Subscriptions (load once) ======= -->
+<script src="https://www.paypal.com/sdk/js?client-id=AT7YkprnIrMlBqYZPRJiuH9poDcKiK0L0bEyBuA4R5InsY6nkTCvhAyKi5eg6F3eTjutd9BVbFzdYAsZ&vault=true&intent=subscription"></script>
+<script>
+  function renderSub(planId, containerId, tvInputId, planKey){
+    if(!window.paypal) return;
+    paypal.Buttons({
+      style: { shape: 'pill', color: 'white', layout: 'vertical', label: 'subscribe', tagline: false },
+      createSubscription: function(data, actions){
+        const tv = (document.getElementById(tvInputId)?.value || '').trim();
+        if(!tv){ alert('Enter your TradingView username for activation.'); return; }
+        return actions.subscription.create({
+          plan_id: planId,
+          custom_id: `tv:${tv}|plan:${planKey}`,
+          application_context: { shipping_preference: 'NO_SHIPPING' }
+        });
+      },
+      onApprove: function(data){
+        alert('✅ Subscription created: ' + (data.subscriptionID || '') + '\nWe’ll activate within ~1–8 hours.');
+      },
+      onError: function(){
+        alert('Payment failed. Please try again or email support@signalpilot.io');
+      }
+    }).render('#' + containerId);
+  }
+
+  // Render all three subs
+  renderSub('P-6UD12522YR208981MNDQ3QPA', 'paypal-button-container-P-6UD12522YR208981MNDQ3QPA', 'tv-monthly', 'monthly');
+  renderSub('P-4VR929208D839202YNDQ3T6Q', 'paypal-button-container-P-4VR929208D839202YNDQ3T6Q', 'tv-quarterly', 'quarterly');
+  renderSub('P-43M86339WD725333MNDQ3VGI', 'paypal-button-container-P-43M86339WD725333MNDQ3VGI', 'tv-yearly', 'yearly');
+</script>
+
 </body>
 </html>
