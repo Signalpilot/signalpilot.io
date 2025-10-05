@@ -83,7 +83,6 @@
     nav ul{list-style:none;margin:0;padding:0;display:flex;gap:.5rem;flex-wrap:wrap}
     nav a{display:inline-flex;padding:.45rem .75rem;border-radius:999px;color:#9fb6e6;font-weight:700;text-decoration:none}
     nav a:hover,nav a:focus-visible{color:#fff;background:rgba(255,255,255,.09)}
-    /* Collapse nav earlier for tablets */
     @media (max-width:1060px){
       .menu-toggle{display:inline-flex}
       nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:1rem}
@@ -126,9 +125,11 @@
     .product p.note,.product .pro.note{color:#ecf1ff}
     .product .pro{border-top:1px solid rgba(255,255,255,.12);padding-top:.55rem;margin-top:.35rem}
 
+    /* ----- Base pricing grid (will be overridden by order rules below) ----- */
     .pricing-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
     @media (max-width:1100px){ .pricing-grid{grid-template-columns:repeat(2,minmax(320px,1fr));justify-items:stretch} }
     @media (max-width:740px){ .pricing-grid{grid-template-columns:1fr} }
+
     .pill{display:inline-flex;gap:.4rem;align-items:center;background:rgba(255,255,255,.08);color:#a5b6db;padding:.28rem .6rem;border-radius:999px;font-size:.82rem;font-weight:800}
     .price{font-size:2.2rem;font-weight:900;letter-spacing:-.02em}
     .plan ul{margin:.2rem 0 0 1rem}.plan li{margin:.35rem 0}
@@ -139,7 +140,7 @@
     .row{display:grid;gap:.8rem;grid-template-columns:1fr 1fr}
     @media (max-width:720px){.row{grid-template-columns:1fr}}
 
-    /* ---------- Fields: scope to textual inputs (fixes checkbox stretch) ---------- */
+    /* ---------- Fields (scope to textual inputs) ---------- */
     input[type="text"],
     input[type="email"],
     input[type="url"],
@@ -161,13 +162,9 @@
     select:focus{border-color:rgba(118,221,255,.5);box-shadow:0 0 0 3px rgba(118,221,255,.15)}
     select option{background-color:#0b1220;color:#ecf1ff}
 
-    /* ---------- Consent checkbox layout ---------- */
+    /* ---------- Consent checkbox ---------- */
     .consent{display:flex;gap:.6rem;align-items:flex-start;line-height:1.35;margin-top:.2rem;color:var(--muted-2)}
-    .tick{
-      width:1.1rem;height:1.1rem;flex:0 0 1.1rem;margin-top:.15rem;
-      accent-color: var(--brand);
-      background:transparent;border:0;padding:0;
-    }
+    .tick{width:1.1rem;height:1.1rem;flex:0 0 1.1rem;margin-top:.15rem;accent-color:var(--brand);background:transparent;border:0;padding:0}
 
     .cta-bar{position:fixed;left:0;right:0;bottom:-120px;transition:bottom .35s ease;z-index:50}
     .cta-bar.show{bottom:0}
@@ -191,6 +188,40 @@
     /* --------- How it works grid (mobile fix) --------- */
     .how-grid { gap: 1rem; grid-template-columns: 1.1fr .9fr; }
     @media (max-width: 900px) { .how-grid { grid-template-columns: 1fr !important; } }
+
+    /* ========= PRICING ORDER (Monthly → Quarterly → Yearly → Lifetime) ========= */
+    #plan-monthly   { grid-area: monthly; }
+    #plan-quarterly { grid-area: quarterly; }
+    #plan-yearly    { grid-area: yearly; }
+    #plan-lifetime  { grid-area: lifetime; }
+
+    /* Desktop ≥1101px: 4 across in exact order */
+    @media (min-width: 1101px) {
+      .pricing-grid{
+        display: grid;
+        grid-template-columns: repeat(4, minmax(260px, 1fr));
+        grid-template-areas: "monthly quarterly yearly lifetime";
+      }
+    }
+    /* Tablets 741–1100px: 2×2 in order */
+    @media (min-width: 741px) and (max-width: 1100px) {
+      .pricing-grid{
+        display: grid;
+        grid-template-columns: repeat(2, minmax(300px, 1fr));
+        grid-template-areas:
+          "monthly quarterly"
+          "yearly   lifetime";
+      }
+    }
+    /* Phones ≤740px: stack in the right order */
+    @media (max-width: 740px) {
+      .pricing-grid { display: flex; flex-direction: column; }
+      #plan-monthly   { order: 1; }
+      #plan-quarterly { order: 2; }
+      #plan-yearly    { order: 3; }
+      #plan-lifetime  { order: 4; }
+    }
+    /* ========================================================================== */
   </style>
 </head>
 <body>
@@ -567,30 +598,6 @@
       </div>
 
       <div class="pricing-grid reveal" id="plans-grid">
-        <!-- YEARLY -->
-        <article class="card plan" id="plan-yearly" data-plan="yearly" style="position:relative">
-          <div class="pill">Best value</div>
-          <div class="price">$499 <span class="pill">/year</span></div>
-          <ul>
-            <li>Everything in Quarterly</li>
-            <li>Ongoing indicator updates included</li>
-            <li>Concierge onboarding, early access, private office hours</li>
-            <li>Save big vs monthly</li>
-          </ul>
-          <div class="stack" style="margin-top:1rem">
-            <label>TradingView username (for invite)
-              <input id="tv-yearly" placeholder="@your.tradingview" required>
-            </label>
-            <label class="consent">
-              <input class="tick" type="checkbox" id="consent-yearly">
-              <span>I understand SignalPilot is educational. No financial advice.</span>
-            </label>
-            <div id="paypal-button-container-P-43M86339WD725333MNDQ3VGI"></div>
-            <button class="btn btn-disabled btn-card-notify" data-plan="Yearly" type="button">Pay by card (coming soon)</button>
-            <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
-          </div>
-        </article>
-
         <!-- MONTHLY -->
         <article class="card plan" id="plan-monthly" data-plan="monthly" style="position:relative">
           <div class="pill">Monthly</div>
@@ -636,6 +643,30 @@
             </label>
             <div id="paypal-button-container-P-4VR929208D839202YNDQ3T6Q"></div>
             <button class="btn btn-disabled btn-card-notify" data-plan="Quarterly" type="button">Pay by card (coming soon)</button>
+            <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
+          </div>
+        </article>
+
+        <!-- YEARLY -->
+        <article class="card plan" id="plan-yearly" data-plan="yearly" style="position:relative">
+          <div class="pill">Best value</div>
+          <div class="price">$499 <span class="pill">/year</span></div>
+          <ul>
+            <li>Everything in Quarterly</li>
+            <li>Ongoing indicator updates included</li>
+            <li>Concierge onboarding, early access, private office hours</li>
+            <li>Save big vs monthly</li>
+          </ul>
+          <div class="stack" style="margin-top:1rem">
+            <label>TradingView username (for invite)
+              <input id="tv-yearly" placeholder="@your.tradingview" required>
+            </label>
+            <label class="consent">
+              <input class="tick" type="checkbox" id="consent-yearly">
+              <span>I understand SignalPilot is educational. No financial advice.</span>
+            </label>
+            <div id="paypal-button-container-P-43M86339WD725333MNDQ3VGI"></div>
+            <button class="btn btn-disabled btn-card-notify" data-plan="Yearly" type="button">Pay by card (coming soon)</button>
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
           </div>
         </article>
@@ -1101,9 +1132,9 @@
       onError: function(){ alert('Payment failed. Please try again or email support@signalpilot.io'); }
     }).render('#'+containerId);
   }
-  renderSub('P-43M86339WD725333MNDQ3VGI','paypal-button-container-P-43M86339WD725333MNDQ3VGI','tv-yearly','yearly','consent-yearly');
   renderSub('P-6UD12522YR208981MNDQ3QPA','paypal-button-container-P-6UD12522YR208981MNDQ3QPA','tv-monthly','monthly','consent-monthly');
   renderSub('P-4VR929208D839202YNDQ3T6Q','paypal-button-container-P-4VR929208D839202YNDQ3T6Q','tv-quarterly','quarterly','consent-quarterly');
+  renderSub('P-43M86339WD725333MNDQ3VGI','paypal-button-container-P-43M86339WD725333MNDQ3VGI','tv-yearly','yearly','consent-yearly');
 
   (function(){
     const form=document.getElementById('pp-lifetime'); if(!form) return;
