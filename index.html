@@ -718,8 +718,8 @@
         <div class="card">
           <strong>Latest changes</strong>
           <ul class="note" style="margin:.4rem 0 0 1.1rem">
-            <li>Ops webhook wired (Google Apps Script) + consent gate.</li>
-            <li>Affiliate/ref + UTM capture passed to webhook.</li>
+            <li>Webhook refactor: secret only added if non‑empty.</li>
+            <li>Affiliate/UTM capture, consent gate, polished UI.</li>
             <li>Plan chooser, sticky CTA, PayPal subs & lifetime flow.</li>
           </ul>
         </div>
@@ -971,7 +971,22 @@
 <script>
   /* ---------- Webhook + affiliate config ---------- */
   const SP_WEBHOOK = 'https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec';
-  const SP_SECRET  = 'REPLACE_WITH_YOUR_APPS_SCRIPT_SECRET'; // keep in sync with Apps Script SECRET
+  const SP_SECRET  = ''; // leave blank to disable; if set, it's added to payloads
+
+  // helper: post to webhook; adds secret only if provided
+  function postWebhook(data){
+    if(!SP_WEBHOOK) return;
+    const payload = Object.assign({}, data);
+    if (SP_SECRET && SP_SECRET.trim() !== '') payload.secret = SP_SECRET;
+    try{
+      fetch(SP_WEBHOOK, {
+        method:'POST',
+        mode:'no-cors',
+        headers:{ 'Content-Type':'text/plain;charset=UTF-8' },
+        body: JSON.stringify(payload)
+      });
+    }catch(_){}
+  }
 
   // Capture ref/UTM once and persist for attribution
   (function(){
@@ -1142,22 +1157,14 @@
 
     const q = new URLSearchParams(location.search);
     if(location.hash==='#thanks' && q.get('paid')==='lifetime'){
-      try{
-        fetch(SP_WEBHOOK, {
-          method:'POST',
-          mode:'no-cors',
-          headers:{'Content-Type':'text/plain;charset=UTF-8'},
-          body: JSON.stringify({
-            secret: SP_SECRET,
-            type:'lifetime',
-            plan:'lifetime',
-            tv: localStorage.getItem('sp_last_tv') || '',
-            txn_id: q.get('tx') || '',
-            ref: getRef(),
-            utm: getUTM()
-          })
-        });
-      }catch(_){}
+      postWebhook({
+        type:'lifetime',
+        plan:'lifetime',
+        tv: localStorage.getItem('sp_last_tv') || '',
+        txn_id: q.get('tx') || '',
+        ref: getRef(),
+        utm: getUTM()
+      });
     }
   })();
 </script>
@@ -1190,22 +1197,14 @@
         });
       },
       onApprove: function(data){
-        try{
-          fetch(SP_WEBHOOK, {
-            method:'POST',
-            mode:'no-cors',
-            headers:{'Content-Type':'text/plain;charset=UTF-8'},
-            body: JSON.stringify({
-              secret: SP_SECRET,
-              type:'subscription',
-              plan: localStorage.getItem('sp_last_plan') || 'unknown',
-              tv:   localStorage.getItem('sp_last_tv')   || '',
-              subscription_id: data.subscriptionID,
-              ref: getRef(),
-              utm: getUTM()
-            })
-          });
-        }catch(_){}
+        postWebhook({
+          type:'subscription',
+          plan: localStorage.getItem('sp_last_plan') || 'unknown',
+          tv:   localStorage.getItem('sp_last_tv')   || '',
+          subscription_id: data.subscriptionID,
+          ref: getRef(),
+          utm: getUTM()
+        });
         location.hash = '#thanks';
       },
       onError: function(){
