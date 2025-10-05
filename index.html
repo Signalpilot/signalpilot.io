@@ -53,7 +53,8 @@
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
+    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Inter","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,sans-serif; -webkit-text-size-adjust:100%}
+    body{scroll-behavior:smooth}
 
     /* background glow + subtle grid */
     body::before{
@@ -82,12 +83,14 @@
     .headline.xl{font-size:clamp(2.4rem,7vw,4.2rem)}
     .headline.lg{font-size:clamp(1.8rem,5vw,2.8rem)}
 
+    a,button{min-height:44px} /* easier thumbs */
     .btn{display:inline-flex;align-items:center;gap:.55rem;padding:.75rem 1.1rem;border-radius:999px;font-weight:700;text-decoration:none;white-space:nowrap;cursor:pointer;transition:filter .15s ease,transform .04s ease}
     .btn:active{transform:translateY(1px)}
     .btn-primary{background:linear-gradient(115deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 14px 40px rgba(91,138,255,.28)}
-    .btn-ghost{color:#9fdcff}
+    .btn-ghost{color:#9fdcff;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04)}
     .btn-crypto{background:linear-gradient(120deg,#ffd493,var(--crypto));color:#231800;box-shadow:0 14px 40px rgba(255,180,70,.28)}
     .btn-disabled{background:rgba(255,255,255,.08);color:var(--muted);border:1px dashed rgba(255,255,255,.16);cursor:not-allowed}
+    .btn-sm{ padding:.5rem .8rem; font-size:.92rem; line-height:1.1; }
 
     .card{border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border-radius:var(--radius);padding:1.2rem}
     .panel{border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));border-radius:20px;box-shadow:var(--shadow)}
@@ -121,12 +124,16 @@
     /* reveal on scroll */
     .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
     .reveal.in{opacity:1;transform:translateY(0)}
+    @media (prefers-reduced-motion: reduce){
+      .reveal{opacity:1 !important; transform:none !important; transition:none !important;}
+    }
 
     /* product grid */
     .product .title{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
     .product .kicker{font-weight:800;color:#bfe7ff;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase}
     .punch{margin:.2rem 0 .3rem;font-weight:800}
     .note{color:var(--muted-2);font-size:.95rem}
+    .product .pro{ border-top:1px solid rgba(255,255,255,.12); padding-top:.6rem; margin-top:.4rem }
 
     /* how it works */
     .check{display:grid;grid-template-columns:26px 1fr;gap:.8rem;align-items:flex-start}
@@ -159,6 +166,12 @@
     .social svg{width:20px;height:20px}
 
     footer{border-top:1px solid rgba(255,255,255,.08);padding:2rem 0 3rem;color:var(--muted)}
+
+    /* Sticky header offset for in-page anchors */
+    section[id]{ scroll-margin-top: 84px; }
+
+    /* Make PayPal buttons fit small screens */
+    .paypal-buttons{ width:100% !important; min-width:0 !important; }
   </style>
 </head>
 <body>
@@ -249,7 +262,7 @@
     </div>
   </section>
 
-  <!-- WHAT'S INSIDE -->
+  <!-- WHAT'S INSIDE (Plain English + Pro toggle) -->
   <section id="inside" class="section">
     <div class="container stack">
       <h2 class="headline lg reveal">What’s inside the Trading Suite</h2>
@@ -258,71 +271,111 @@
         <!-- EC Pro -->
         <article class="card product">
           <div class="title"><h3>SP‑EC Pro — Event‑Candle Confluence</h3><span class="kicker">Flagship</span></div>
-          <div class="punch">Signals, not guesses — bias in one look.</div>
-          <p class="note">Non‑repainting event‑candle engine (B/T/R↑/R↓/TR). Bias via majority‑of‑three (EMA34/55, price vs Pilot Line, slope). ATR‑normalized dip/rip logic; Pilot ribbon for trend strength; NanoFlow “+” for micro‑momentum. Alert‑ready.</p>
+          <div class="punch">Your bias at a glance.</div>
+          <p class="note">Shows when the market likely wants up or down—clean signals that don’t repaint.</p>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-ec" aria-expanded="false" aria-controls="pro-ec">Pro description</button>
+          <div id="pro-ec" class="pro note" hidden>
+            Non‑repainting engine combining consensus from EMA34/55, price vs Pilot Line, and slope. ATR‑normalized dip/rip logic, Pilot ribbon for trend strength, NanoFlow “+” for micro‑momentum. Alert‑ready.
+          </div>
         </article>
 
         <!-- PVA -->
         <article class="card product">
           <div class="title"><h3>SP‑PVA Volume + SP‑PVA Overlay</h3></div>
-          <div class="punch">Crown energy, measured — then printed.</div>
-          <p class="note">Normalized participation (log Z‑Vol + RVOL), HTF confirm, CVD, divergences, clean spikes. Overlay converts context into one decisive, non‑repainting print: Bull / Bear (exclusive), plus EVR: Climax / Absorption. TF‑aware & scan‑friendly.</p>
+          <div class="punch">“Is this move real?”</div>
+          <p class="note">Confirms participation and prints Bull/Bear plus Climax or Absorption spikes.</p>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-pva" aria-expanded="false" aria-controls="pro-pva">Pro description</button>
+          <div id="pro-pva" class="pro note" hidden>
+            Normalized participation (log Z‑Vol + RVOL) with HTF confirm, CVD, divergences, and spike detection. Overlay emits one decisive non‑repainting print: Bull / Bear + EVR (Climax / Absorption). TF‑aware & scan‑friendly.
+          </div>
         </article>
 
         <!-- OBV -->
         <article class="card product">
           <div class="title"><h3>SP‑OBV — Money flow</h3></div>
-          <div class="punch">Pressure flips, you catch the hint.</div>
-          <p class="note">OBV (blue) + smoothing basis (yellow) + Bollinger channel. Crosses hint at momentum shifts; band pushes flag strong pressure. Regular + hidden divergences. Optional HTF compute. Alerts included.</p>
+          <div class="punch">Who’s actually pushing price.</div>
+          <p class="note">Reveals where volume leans; crosses hint when buyers or sellers take control.</p>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-obv" aria-expanded="false" aria-controls="pro-obv">Pro description</button>
+          <div id="pro-obv" class="pro note" hidden>
+            OBV with smoothing basis and Bollinger channel. Crosses/band pushes flag pressure shifts. Regular + hidden divergences; optional HTF compute; alerts included.
+          </div>
         </article>
 
         <!-- LTF -->
         <article class="card product">
           <div class="title"><h3>SP‑LTF — Rhythm & fatigue</h3></div>
-          <div class="punch">Coiled or cooked — at a glance.</div>
-          <p class="note">TD‑style 8/9 counts, Squeeze cloud for coil, and Caution/Danger “X” when moves get tired (fade, mean‑stretch, squeeze releases).</p>
+          <div class="punch">Coiled or cooked?</div>
+          <p class="note">Marks when price is building energy or getting tired so you don’t chase late moves.</p>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-ltf" aria-expanded="false" aria-controls="pro-ltf">Pro description</button>
+          <div id="pro-ltf" class="pro note" hidden>
+            TD‑style 8/9 counts, Squeeze cloud for coil, and Caution/Danger “X” for overextended moves (fade, mean‑stretch, squeeze releases).
+          </div>
         </article>
 
         <!-- Levels -->
         <article class="card product">
           <div class="title"><h3>SP‑Levels — Micro reference</h3></div>
-          <div class="punch">Levels that hold the story.</div>
-          <p class="note">dVWAP, wVWAP, dPOC, wOpen, mOpen, mPOC—drawn on the opening candle only. Precise without clutter.</p>
+          <div class="punch">Levels that matter.</div>
+          <p class="note">Auto‑plots day/week/month anchors price actually respects—without clutter.</p>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-levels" aria-expanded="false" aria-controls="pro-levels">Pro description</button>
+          <div id="pro-levels" class="pro note" hidden>
+            dVWAP, wVWAP, dPOC, wOpen, mOpen, mPOC—drawn on the opening candle only. Sharp references; minimal noise.
+          </div>
         </article>
 
         <!-- RSI Triad -->
         <article class="card product">
           <div class="title"><h3>SP‑RSI Triad — Layered RSI</h3></div>
-          <div class="punch">Momentum turns — with receipts.</div>
-          <p class="note">Fast/base/slow RSI blend; divergence strength score (0–50). Filters: OBV trend, Stoch RSI timing, ATR vol, HTF RSI. Clear visual guides.</p>
+          <div class="punch">Smarter RSI turns.</div>
+          <p class="note">Blends fast/base/slow RSI to spot turns early and scores their strength.</p>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-rsitri" aria-expanded="false" aria-controls="pro-rsitri">Pro description</button>
+          <div id="pro-rsitri" class="pro note" hidden>
+            Multi‑speed RSI with divergence strength score (0–50). Filters: OBV trend, Stoch RSI timing, ATR vol, HTF RSI. Clear visual guides.
+          </div>
         </article>
 
         <!-- SRSI+ -->
         <article class="card product">
           <div class="title"><h3>SP‑SRSI+ — Context‑aware Stoch RSI</h3></div>
-          <div class="punch">Context first, trigger second.</div>
-          <p class="note">Adapts to volatility, respects HTF bias, listens to volume/money flow, stays aware of SDZ; emits a unified Confluence Score for scans/alerts.</p>
+          <div class="punch">Overbought/oversold that actually helps.</div>
+          <p class="note">Adds trend, volume, and volatility context so signals make sense.</p>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-srsi" aria-expanded="false" aria-controls="pro-srsi">Pro description</button>
+          <div id="pro-srsi" class="pro note" hidden>
+            Volatility‑adaptive logic that respects HTF bias, listens to volume/money flow, stays aware of SDZ; emits a unified Confluence Score for scans/alerts.
+          </div>
         </article>
 
         <!-- MACD+ -->
         <article class="card product">
           <div class="title"><h3>SP‑MACD+ — Momentum regime</h3></div>
-          <div class="punch">Classic MACD, grown up.</div>
-          <p class="note">HTF confirmation, ATR gating, near‑zero fade, optional pre‑smooth to reduce chop. Modes: Raw or stricter Qualified. Presets: Classic Soft / Pro Filtered.</p>
+          <div class="punch">Classic MACD, cleaned up.</div>
+          <p class="note">Cuts chop and confirms regime so you ride trends, not noise.</p>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-macd" aria-expanded="false" aria-controls="pro-macd">Pro description</button>
+          <div id="pro-macd" class="pro note" hidden>
+            HTF confirmation, ATR gating, near‑zero fade, optional pre‑smooth to reduce chop. Modes: Raw or stricter Qualified. Presets: Classic Soft / Pro Filtered.
+          </div>
         </article>
 
         <!-- SDZ -->
         <article class="card product">
           <div class="title"><h3>SP‑SDZ — Supply/Demand zones</h3></div>
-          <div class="punch">Supply or demand — no ambiguity.</div>
-          <p class="note">Confirms swing highs/lows, boxes true zone (wick + body), projects forward—red = supply, green = demand. Minimal noise; maximum structure.</p>
+          <div class="punch">Support & resistance made obvious.</div>
+          <p class="note">Boxes true supply (red) and demand (green) so your context is crystal clear.</p>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-sdz" aria-expanded="false" aria-controls="pro-sdz">Pro description</button>
+          <div id="pro-sdz" class="pro note" hidden>
+            Confirms swing highs/lows, boxes the real zone (wick + body), and projects forward—minimal noise; maximum structure.
+          </div>
         </article>
 
         <!-- Screener -->
         <article class="card product">
           <div class="title"><h3>SP‑Screener — On‑chart & global</h3></div>
           <div class="punch">Scan the list, not your patience.</div>
-          <p class="note">On‑chart mini‑screener: up to 8 symbols × TFs; shows ticker, last signal (↑/↓), time since, TP1 (ATR‑sized), Gauss Ribbon state, running P&L. Global/watchlist alerts supported.</p>
+          <p class="note">Check many symbols/timeframes at once and fire alerts automatically.</p>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-screener" aria-expanded="false" aria-controls="pro-screener">Pro description</button>
+          <div id="pro-screener" class="pro note" hidden>
+            On‑chart mini‑screener: up to 8 symbols × TFs; shows ticker, last signal (↑/↓), time since, TP1 (ATR‑sized), Gauss Ribbon state, running P&L. Global/watchlist alerts supported.
+          </div>
         </article>
       </div>
     </div>
@@ -398,7 +451,7 @@
             <label>TradingView username (for invite)
               <input id="tv-monthly" placeholder="@your-handle" required>
             </label>
-            <!-- PayPal button renders here -->
+            <!-- PayPal renders here -->
             <div id="paypal-button-container-P-6UD12522YR208981MNDQ3QPA"></div>
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
           </div>
@@ -418,7 +471,7 @@
             <label>TradingView username (for invite)
               <input id="tv-quarterly" placeholder="@your-handle" required>
             </label>
-            <!-- PayPal button renders here -->
+            <!-- PayPal renders here -->
             <div id="paypal-button-container-P-4VR929208D839202YNDQ3T6Q"></div>
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
           </div>
@@ -439,7 +492,7 @@
             <label>TradingView username (for invite)
               <input id="tv-yearly" placeholder="@your-handle" required>
             </label>
-            <!-- PayPal button renders here -->
+            <!-- PayPal renders here -->
             <div id="paypal-button-container-P-43M86339WD725333MNDQ3VGI"></div>
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
           </div>
@@ -455,22 +508,16 @@
             <li>Private Discord for life + full preset bundle</li>
           </ul>
           <div class="stack" style="margin-top:1rem">
-            <!-- Classic Hosted Button with a true required TV field -->
+            <!-- Classic Hosted Button with a required TV field + custom metadata -->
             <form id="pp-lifetime" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="display:grid;gap:.6rem">
               <input type="hidden" name="cmd" value="_s-xclick" />
               <input type="hidden" name="hosted_button_id" value="N6TJGG9LXSE2L" />
               <input type="hidden" name="currency_code" value="USD" />
-
-              <!-- Custom field label for the order; buyers also type below -->
               <input type="hidden" name="on0" value="TradingView username (required for activation)"/>
               <label>TradingView username (required for activation)
                 <input name="os0" id="tv-lifetime" type="text" placeholder="@yourname" required>
               </label>
-
-              <!-- Metadata we attach to the transaction -->
               <input type="hidden" name="custom" id="pp-lifetime-custom" value=""/>
-
-              <!-- Default PayPal Buy Now image (works everywhere) -->
               <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="Pay with PayPal" alt="Buy Now" />
             </form>
 
@@ -730,6 +777,19 @@
     });
   });
 
+  // ======= Pro description toggles
+  document.querySelectorAll('[data-pro]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const id = btn.getAttribute('data-pro');
+      const panel = document.getElementById(id);
+      if(!panel) return;
+      const willShow = panel.hasAttribute('hidden');
+      if(willShow) panel.removeAttribute('hidden'); else panel.setAttribute('hidden','');
+      btn.setAttribute('aria-expanded', String(willShow));
+      btn.textContent = willShow ? 'Hide pro description' : 'Pro description';
+    });
+  });
+
   // year
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -755,10 +815,13 @@
 <!-- ======= PayPal Subscriptions (load once) ======= -->
 <script src="https://www.paypal.com/sdk/js?client-id=AT7YkprnIrMlBqYZPRJiuH9poDcKiK0L0bEyBuA4R5InsY6nkTCvhAyKi5eg6F3eTjutd9BVbFzdYAsZ&vault=true&intent=subscription"></script>
 <script>
+  // Set PayPal button color here: 'black' or 'blue' (supported by PayPal)
+  const PP_COLOR = 'black';
+
   function renderSub(planId, containerId, tvInputId, planKey){
     if(!window.paypal) return;
     paypal.Buttons({
-      style: { shape: 'pill', color: 'white', layout: 'vertical', label: 'subscribe', tagline: false },
+      style: { shape: 'pill', color: PP_COLOR, layout: 'vertical', label: 'subscribe', tagline: false },
       createSubscription: function(data, actions){
         const tv = (document.getElementById(tvInputId)?.value || '').trim();
         if(!tv){ alert('Enter your TradingView username for activation.'); return; }
