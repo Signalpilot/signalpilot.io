@@ -100,13 +100,23 @@
     .reveal.in{opacity:1;transform:translateY(0)}
     @media (prefers-reduced-motion: reduce){.reveal{opacity:1 !important;transform:none !important;transition:none !important}}
 
+    /* WHY — default grid */
     .why-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .feature{display:grid;grid-template-columns:44px 1fr;gap:.85rem;padding:1rem 1.05rem;border-radius:16px;border:1px solid rgba(255,255,255,.16);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));box-shadow:0 8px 24px rgba(12,16,27,.25)}
     .icon-wrap{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(139,167,255,.25),rgba(124,202,255,.18));border:1px solid rgba(255,255,255,.2)}
     .icon-wrap svg{width:22px;height:22px}
     .feature h3{margin:0;font-weight:800;letter-spacing:.01em;color:#eaf0ff;font-size:1.02rem}
     .feature p{margin:.08rem 0 0;color:var(--muted-2)}
-    @media (max-width:420px){.feature{grid-template-columns:36px 1fr;padding:.9rem;border-radius:12px}.icon-wrap{width:36px;height:36px}.icon-wrap svg{width:18px;height:18px}}
+
+    /* WHY — two-up on phones (380–560px) */
+    @media (max-width:560px) and (min-width:380px){
+      .why-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:.75rem}
+      .feature{padding:.85rem .9rem;border-radius:12px;grid-template-columns:36px 1fr}
+      .icon-wrap{width:36px;height:36px}.icon-wrap svg{width:18px;height:18px}
+      .feature h3{font-size:1rem}.feature p{font-size:.9rem}
+    }
+    /* Ultra-narrow phones: single column */
+    @media (max-width:379px){ .why-grid{grid-template-columns:1fr !important} }
 
     .product .title{display:flex;align-items:center;gap:.6rem}
     .product .title .kicker{margin-left:auto;color:#cfe1ff;font-weight:800;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase}
@@ -290,7 +300,6 @@
       <h2 class="headline lg reveal">What’s inside the Trading Suite</h2>
 
       <div class="grid auto-300 reveal">
-        <!-- (Modules content unchanged for brevity — same as previous message) -->
         <!-- EC Pro -->
         <article class="card product">
           <div class="title mod">
@@ -523,7 +532,6 @@
     <div class="container stack">
       <h2 class="headline lg reveal">How it works — from bias to execution</h2>
 
-      <!-- CHANGED: use .how-grid (responsive) instead of inline two-column style -->
       <div class="grid reveal how-grid">
         <div class="card">
           <div class="stack">
@@ -921,49 +929,90 @@
 </footer>
 
 <script>
+  /* --------- Webhook (Apps Script) --------- */
   const SP_WEBHOOK='https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec';
-  const SP_SECRET='';
-  function postWebhook(d){ if(!SP_WEBHOOK) return; const p={...d}; if(SP_SECRET.trim()) p.secret=SP_SECRET;
-    fetch(SP_WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(p)}).catch(()=>{});}
-  (function(){const q=new URLSearchParams(location.search);const ref=q.get('ref')||q.get('affiliate');
-    const utm=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].reduce((o,k)=>{const v=q.get(k);if(v)o[k]=v;return o;},{}); if(ref)localStorage.setItem('sp_ref',ref);
-    if(Object.keys(utm).length)localStorage.setItem('sp_utm',JSON.stringify(utm));})();
-  function getRef(){return localStorage.getItem('sp_ref')||''} function getUTM(){try{return JSON.parse(localStorage.getItem('sp_utm')||'{}')}catch(_){return{}}}
+  const SP_SECRET=''; // optional; leave blank if not enabled
+  function postWebhook(d){
+    if(!SP_WEBHOOK) return;
+    const p={...d};
+    if(SP_SECRET.trim()) p.secret=SP_SECRET;
+    fetch(SP_WEBHOOK,{method:'POST',mode:'no-cors',
+      headers:{'Content-Type':'text/plain;charset=UTF-8'},
+      body:JSON.stringify(p)}).catch(()=>{});
+  }
 
+  /* --------- Ref / UTM capture --------- */
+  (function(){
+    const q=new URLSearchParams(location.search);
+    const ref=q.get('ref')||q.get('affiliate');
+    const utm=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].reduce((o,k)=>{const v=q.get(k);if(v)o[k]=v;return o;}, {});
+    if(ref) localStorage.setItem('sp_ref', ref);
+    if(Object.keys(utm).length) localStorage.setItem('sp_utm', JSON.stringify(utm));
+  })();
+  function getRef(){return localStorage.getItem('sp_ref')||''}
+  function getUTM(){try{return JSON.parse(localStorage.getItem('sp_utm')||'{}')}catch(_){return{}}}
+
+  /* --------- Nav toggle --------- */
   const menuBtn=document.getElementById('menuToggle'),nav=document.getElementById('mainnav');
   menuBtn?.addEventListener('click',()=>{nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',nav.classList.contains('open'));});
   document.addEventListener('click',e=>{if(!nav.contains(e.target) && e.target!==menuBtn) nav.classList.remove('open');});
   document.querySelectorAll('#mainnav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
 
+  /* --------- Reveal on scroll --------- */
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  (function(){const KEY='sp_launch_target_epoch';let t=parseInt(localStorage.getItem(KEY),10);
+  /* --------- Countdown --------- */
+  (function(){
+    const KEY='sp_launch_target_epoch';
+    let t=parseInt(localStorage.getItem(KEY),10);
     if(!t||isNaN(t)){t=Date.now()+14*24*60*60*1000;localStorage.setItem(KEY,String(t));}
-    const out=document.getElementById('countdown');function tick(){let dff=Math.max(0,t-Date.now());
+    const out=document.getElementById('countdown');
+    function tick(){
+      let dff=Math.max(0,t-Date.now());
       const d=Math.floor(dff/86400000); dff%=86400000; const h=Math.floor(dff/3600000); dff%=3600000; const m=Math.floor(dff/60000); dff%=60000; const s=Math.floor(dff/1000);
-      out.textContent=`${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`; } tick(); setInterval(tick,1000);})();
+      out.textContent=`${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+    }
+    tick(); setInterval(tick,1000);
+  })();
 
+  /* --------- Copy-to-clipboard --------- */
   document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>{
-    const el=document.querySelector(btn.getAttribute('data-copy')); if(!el)return; el.select(); el.setSelectionRange(0,99999); document.execCommand('copy');
-    const old=btn.textContent; btn.textContent='Copied'; setTimeout(()=>btn.textContent=old,1400);} ));
+    const el=document.querySelector(btn.getAttribute('data-copy')); if(!el) return;
+    el.select(); el.setSelectionRange(0,99999); document.execCommand('copy');
+    const old=btn.textContent; btn.textContent='Copied'; setTimeout(()=>btn.textContent=old,1400);
+  }));
 
+  /* --------- Pro description toggles --------- */
   document.querySelectorAll('[data-pro]').forEach(btn=>btn.addEventListener('click',()=>{
-    const p=document.getElementById(btn.getAttribute('data-pro')); if(!p)return; const show=p.hasAttribute('hidden'); if(show)p.removeAttribute('hidden'); else p.setAttribute('hidden','');
+    const p=document.getElementById(btn.getAttribute('data-pro')); if(!p) return;
+    const show=p.hasAttribute('hidden'); if(show) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
     btn.setAttribute('aria-expanded',String(show)); btn.textContent=show?'Hide pro description':'Pro description';
   }));
 
+  /* --------- Plan quiz --------- */
   const quiz=document.getElementById('plan-quiz');
   quiz?.addEventListener('submit',e=>{
     e.preventDefault();
     const sup=document.getElementById('q-support').value, pay=document.getElementById('q-pay').value;
-    let plan='monthly'; if(pay==='once') plan='lifetime'; else if(sup==='concierge'||pay==='best') plan='yearly'; else if(sup==='plus'||pay==='save') plan='quarterly';
-    document.querySelectorAll('.plan').forEach(p=>p.classList.remove('highlight')); const card=document.getElementById('plan-'+plan);
-    if(card){card.classList.add('highlight'); if(!card.querySelector('.ribbon')){const r=document.createElement('div'); r.className='ribbon'; r.textContent='Recommended for you'; card.appendChild(r);} location.hash='#pricing';}
-    const res=document.getElementById('quiz-result'); res.style.display='block'; res.textContent='Recommended: '+plan[0].toUpperCase()+plan.slice(1)+' plan. All tiers include the full suite, support, and ongoing updates.';
+    let plan='monthly';
+    if(pay==='once') plan='lifetime';
+    else if(sup==='concierge'||pay==='best') plan='yearly';
+    else if(sup==='plus'||pay==='save') plan='quarterly';
+    document.querySelectorAll('.plan').forEach(p=>p.classList.remove('highlight'));
+    const card=document.getElementById('plan-'+plan);
+    if(card){
+      card.classList.add('highlight');
+      if(!card.querySelector('.ribbon')){
+        const r=document.createElement('div'); r.className='ribbon'; r.textContent='Recommended for you'; card.appendChild(r);
+      }
+      location.hash='#pricing';
+    }
+    const res=document.getElementById('quiz-result'); res.style.display='block';
+    res.textContent='Recommended: '+plan[0].toUpperCase()+plan.slice(1)+' plan. All tiers include the full suite, support, and ongoing updates.';
   });
 
-  /* Sticky CTA */
+  /* --------- Sticky CTA --------- */
   const ctaBar=document.getElementById('ctaBar'), ctaClose=document.getElementById('ctaClose'); 
   let dismissed=false, suppressed=false, focusing=false;
   function updateCta(){
@@ -975,7 +1024,7 @@
   ctaClose?.addEventListener('click',()=>{dismissed=true;updateCta();});
 
   (function(){
-    const targets=['#pricing','#pay-crypto','#affiliate','#waitlist','#how']; /* include #how too */
+    const targets=['#pricing','#pay-crypto','#affiliate','#waitlist','#how'];
     const io2=new IntersectionObserver(entries=>{
       suppressed = entries.some(e=>e.isIntersecting);
       updateCta();
@@ -985,15 +1034,20 @@
   document.addEventListener('focusin',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=true;updateCta();}});
   document.addEventListener('focusout',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=false;updateCta();}});
 
+  /* --------- Footer year --------- */
   document.getElementById('year').textContent=new Date().getFullYear();
 
-  (function(){function showThanks(){const s=document.getElementById('thanks'); if(location.hash==='#thanks') s.style.display='block';}
+  /* --------- Thanks page + lifetime webhook on return --------- */
+  (function(){
+    function showThanks(){const s=document.getElementById('thanks'); if(location.hash==='#thanks') s.style.display='block';}
     window.addEventListener('hashchange',showThanks); showThanks();
-    const q=new URLSearchParams(location.search); if(location.hash==='#thanks' && q.get('paid')==='lifetime'){
+    const q=new URLSearchParams(location.search);
+    if(location.hash==='#thanks' && q.get('paid')==='lifetime'){
       postWebhook({type:'lifetime', plan:'lifetime', tv: localStorage.getItem('sp_last_tv')||'', txn_id:q.get('tx')||'', ref:getRef(), utm:getUTM()});
     }
   })();
 
+  /* --------- Forms: add ref/utm + webhook on submit --------- */
   (function(){
     const cf=document.getElementById('crypto-form'); if(cf){
       document.getElementById('crypto-ref').value=getRef();
@@ -1006,7 +1060,7 @@
     const au=document.getElementById('aff-utm'); if(au) au.value=JSON.stringify(getUTM());
   })();
 
-  /* Card notify modal handlers */
+  /* --------- Card notify modal --------- */
   (function(){
     const modal=document.getElementById('cardNotify');
     function openModal(plan){
