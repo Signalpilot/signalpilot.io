@@ -117,7 +117,6 @@
     .product .pro{border-top:1px solid rgba(255,255,255,.12);padding-top:.55rem;margin-top:.35rem}
 
     .pricing-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-    /* Tablet-friendly: force 2 columns so cards are comfy */
     @media (max-width:1100px){ .pricing-grid{grid-template-columns:repeat(2,minmax(320px,1fr));justify-items:stretch} }
     @media (max-width:740px){ .pricing-grid{grid-template-columns:1fr} }
     .pill{display:inline-flex;gap:.4rem;align-items:center;background:rgba(255,255,255,.08);color:#a5b6db;padding:.28rem .6rem;border-radius:999px;font-size:.82rem;font-weight:800}
@@ -130,7 +129,7 @@
     .row{display:grid;gap:.8rem;grid-template-columns:1fr 1fr}
     @media (max-width:720px){.row{grid-template-columns:1fr}}
 
-    /* ---------- Fields: scope to textual inputs (fixes checkbox issue) ---------- */
+    /* ---------- Fields: scope to textual inputs (fixes checkbox stretch) ---------- */
     input[type="text"],
     input[type="email"],
     input[type="url"],
@@ -178,6 +177,10 @@
     .modal-card header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
     .modal-card h3{margin:0}
     .modal-close{background:transparent;border:none;color:#a5b6db;cursor:pointer}
+
+    /* --------- How it works grid (mobile fix) --------- */
+    .how-grid { gap: 1rem; grid-template-columns: 1.1fr .9fr; }
+    @media (max-width: 900px) { .how-grid { grid-template-columns: 1fr !important; } }
   </style>
 </head>
 <body>
@@ -287,6 +290,7 @@
       <h2 class="headline lg reveal">What’s inside the Trading Suite</h2>
 
       <div class="grid auto-300 reveal">
+        <!-- (Modules content unchanged for brevity — same as previous message) -->
         <!-- EC Pro -->
         <article class="card product">
           <div class="title mod">
@@ -462,7 +466,7 @@
   <section id="roadmap" class="section">
     <div class="container stack">
       <h2 class="headline lg reveal">Roadmap — building beyond the launch</h2>
-    <p class="note reveal" style="max-width:72ch">We ship in public. Timelines may shift, but the direction is constant: more clarity, less noise.</p>
+      <p class="note reveal" style="max-width:72ch">We ship in public. Timelines may shift, but the direction is constant: more clarity, less noise.</p>
       <div class="grid reveal" style="gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
         <div class="card"><strong>Shipped</strong><ul class="note" style="margin:.5rem 0 0 1rem"><li>Crypto Prepaid Pass + Lifetime (–20%)</li><li>Black PayPal buttons + TV capture</li><li>Pro descriptions, plan quiz, sticky CTA</li></ul></div>
         <div class="card"><strong>In progress</strong><ul class="note" style="margin:.5rem 0 0 1rem"><li>Docs & Playbooks (PDF)</li><li>Preset gallery</li><li>Before/after slider</li></ul></div>
@@ -519,7 +523,8 @@
     <div class="container stack">
       <h2 class="headline lg reveal">How it works — from bias to execution</h2>
 
-      <div class="grid reveal" style="gap:1rem;grid-template-columns:1.1fr .9fr">
+      <!-- CHANGED: use .how-grid (responsive) instead of inline two-column style -->
+      <div class="grid reveal how-grid">
         <div class="card">
           <div class="stack">
             <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>1) Set bias</strong><br><span class="note">Use <strong>EC Pro</strong> and/or <strong>MACD+</strong> to pick a side. Don’t trade against it.</span></div></div>
@@ -958,6 +963,7 @@
     const res=document.getElementById('quiz-result'); res.style.display='block'; res.textContent='Recommended: '+plan[0].toUpperCase()+plan.slice(1)+' plan. All tiers include the full suite, support, and ongoing updates.';
   });
 
+  /* Sticky CTA */
   const ctaBar=document.getElementById('ctaBar'), ctaClose=document.getElementById('ctaClose'); 
   let dismissed=false, suppressed=false, focusing=false;
   function updateCta(){
@@ -969,7 +975,7 @@
   ctaClose?.addEventListener('click',()=>{dismissed=true;updateCta();});
 
   (function(){
-    const targets=['#pricing','#pay-crypto','#affiliate','#waitlist'];
+    const targets=['#pricing','#pay-crypto','#affiliate','#waitlist','#how']; /* include #how too */
     const io2=new IntersectionObserver(entries=>{
       suppressed = entries.some(e=>e.isIntersecting);
       updateCta();
@@ -998,6 +1004,21 @@
     }
     const ar=document.getElementById('aff-ref'); if(ar) ar.value=getRef();
     const au=document.getElementById('aff-utm'); if(au) au.value=JSON.stringify(getUTM());
+  })();
+
+  /* Card notify modal handlers */
+  (function(){
+    const modal=document.getElementById('cardNotify');
+    function openModal(plan){
+      document.getElementById('card-notify-plan').value=plan||'';
+      document.getElementById('card-notify-ref').value=getRef();
+      document.getElementById('card-notify-utm').value=JSON.stringify(getUTM());
+      modal.classList.add('open');
+    }
+    function closeModal(){ modal.classList.remove('open'); }
+    document.querySelectorAll('.btn-card-notify').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.plan)));
+    modal?.addEventListener('click',e=>{ if(e.target===modal || e.target.hasAttribute('data-close')) closeModal(); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
   })();
 </script>
 
