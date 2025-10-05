@@ -83,8 +83,13 @@
     nav ul{list-style:none;margin:0;padding:0;display:flex;gap:.5rem;flex-wrap:wrap}
     nav a{display:inline-flex;padding:.45rem .75rem;border-radius:999px;color:#9fb6e6;font-weight:700;text-decoration:none}
     nav a:hover,nav a:focus-visible{color:#fff;background:rgba(255,255,255,.09)}
-    @media (max-width:860px){.menu-toggle{display:inline-flex}nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:1rem}.open{display:flex}}
-    @media (max-width:420px){ header .btn.btn-primary{display:none} }
+    /* Collapse nav earlier for tablets */
+    @media (max-width:1060px){
+      .menu-toggle{display:inline-flex}
+      nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:1rem}
+      .open{display:flex}
+      header .btn.btn-primary{display:none}
+    }
 
     .hero{padding:clamp(1.6rem,8vw,4.2rem) 0 1.2rem}
     .hero-grid{display:grid;gap:1.5rem;grid-template-columns:1.1fr .9fr}
@@ -112,6 +117,9 @@
     .product .pro{border-top:1px solid rgba(255,255,255,.12);padding-top:.55rem;margin-top:.35rem}
 
     .pricing-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    /* Tablet-friendly: force 2 columns so cards are comfy */
+    @media (max-width:1100px){ .pricing-grid{grid-template-columns:repeat(2,minmax(320px,1fr));justify-items:stretch} }
+    @media (max-width:740px){ .pricing-grid{grid-template-columns:1fr} }
     .pill{display:inline-flex;gap:.4rem;align-items:center;background:rgba(255,255,255,.08);color:#a5b6db;padding:.28rem .6rem;border-radius:999px;font-size:.82rem;font-weight:800}
     .price{font-size:2.2rem;font-weight:900;letter-spacing:-.02em}
     .plan ul{margin:.2rem 0 0 1rem}.plan li{margin:.35rem 0}
@@ -130,8 +138,10 @@
 
     .cta-bar{position:fixed;left:0;right:0;bottom:-120px;transition:bottom .35s ease;z-index:50}
     .cta-bar.show{bottom:0}
+    .cta-bar.hide{bottom:-140px} /* suppressed while forms/pricing are in view */
     .cta-inner{max-width:var(--max);margin:0 auto;padding:.6rem 1.2rem}
-    .cta-inner .bar{display:flex;gap:1rem;align-items:center;background:rgba(10,12,20,.92);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);border-radius:14px;padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom))}
+    .cta-inner .bar{display:flex;gap:.8rem;align-items:center;background:rgba(10,12,20,.92);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);border-radius:14px;padding:.6rem .9rem calc(.6rem + env(safe-area-inset-bottom))}
+    @media (max-width:1100px){ .cta-inner .bar{gap:.6rem;padding:.5rem .8rem calc(.5rem + env(safe-area-inset-bottom))} }
     .cta-close{margin-left:auto;border:none;background:transparent;color:#a5b6db}
 
     section[id]{scroll-margin-top:84px}
@@ -253,6 +263,7 @@
       <h2 class="headline lg reveal">What’s inside the Trading Suite</h2>
 
       <div class="grid auto-300 reveal">
+        <!-- Modules (same as previous full version) -->
         <!-- EC Pro -->
         <article class="card product">
           <div class="title mod">
@@ -270,7 +281,6 @@
             Consensus from EMA34/55, price vs Pilot Line and slope. ATR‑normalized dip/rip logic, Pilot ribbon for trend strength, and NanoFlow “+” for micro‑momentum. Non‑repainting and alert‑ready.
           </div>
         </article>
-
         <!-- PVA -->
         <article class="card product">
           <div class="title mod">
@@ -291,7 +301,6 @@
             Normalized participation (log Z‑Vol + RVOL) with HTF confirm, CVD and divergence checks. Overlay emits one decisive, non‑repainting print: Bull / Bear + EVR (Climax / Absorption). Scan‑friendly.
           </div>
         </article>
-
         <!-- OBV -->
         <article class="card product">
           <div class="title mod">
@@ -307,7 +316,6 @@
             Smoothed OBV with a Bollinger channel. Crosses and band pushes flag shifts in control. Regular + hidden divergences, optional HTF compute, and alert presets.
           </div>
         </article>
-
         <!-- LTF -->
         <article class="card product">
           <div class="title mod">
@@ -323,7 +331,6 @@
             TD‑style 8/9 counts, squeeze cloud for coil, and Caution/Danger marks for stretched moves (fade, mean‑revert, post‑squeeze).
           </div>
         </article>
-
         <!-- Levels -->
         <article class="card product">
           <div class="title mod">
@@ -339,7 +346,6 @@
             dVWAP, wVWAP, dPOC, wOpen, mOpen, mPOC—drawn on the opening candle only. Sharp references; minimal noise.
           </div>
         </article>
-
         <!-- RSI Triad -->
         <article class="card product">
           <div class="title mod">
@@ -355,7 +361,6 @@
             Fast/Base/Slow RSI blend with a 0–50 strength score. Filters: OBV trend, Stoch timing, ATR vol, HTF RSI.
           </div>
         </article>
-
         <!-- SRSI+ -->
         <article class="card product">
           <div class="title mod">
@@ -372,7 +377,6 @@
             Volatility‑adaptive Stoch RSI that respects HTF bias, money‑flow and SDZ; outputs a single Confluence Score for scanning and alerts.
           </div>
         </article>
-
         <!-- MACD+ -->
         <article class="card product">
           <div class="title mod">
@@ -388,7 +392,6 @@
             HTF confirm, ATR gating and near‑zero fade reduce noise. Modes: Raw or Qualified. Presets: Classic Soft / Pro Filtered.
           </div>
         </article>
-
         <!-- SDZ -->
         <article class="card product">
           <div class="title mod">
@@ -404,7 +407,6 @@
             Confirms swing pivots, boxes the real zone (wick + body) and projects forward—minimal noise; maximum structure.
           </div>
         </article>
-
         <!-- Screener -->
         <article class="card product">
           <div class="title mod">
@@ -836,13 +838,13 @@
 
 </main>
 
-<!-- Sticky CTA -->
+<!-- Sticky CTA (smaller buttons on tablets) -->
 <div class="cta-bar" id="ctaBar" aria-hidden="true">
   <div class="cta-inner">
     <div class="bar">
-      <div class="note">See the bias. Trade the plan.</div>
-      <a class="btn btn-primary" href="#pricing">Get the Suite</a>
-      <a class="btn btn-crypto" href="#pay-crypto">Crypto (–20%)</a>
+      <div class="note" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">See the bias. Trade the plan.</div>
+      <a class="btn btn-primary btn-sm" href="#pricing">Get the Suite</a>
+      <a class="btn btn-crypto btn-sm" href="#pay-crypto">Crypto (–20%)</a>
       <button class="cta-close" id="ctaClose" aria-label="Close">✕</button>
     </div>
   </div>
@@ -896,7 +898,7 @@
     if(Object.keys(utm).length)localStorage.setItem('sp_utm',JSON.stringify(utm));})();
   function getRef(){return localStorage.getItem('sp_ref')||''} function getUTM(){try{return JSON.parse(localStorage.getItem('sp_utm')||'{}')}catch(_){return{}}}
 
-  /* Mobile nav */
+  /* Mobile/tablet nav */
   const menuBtn=document.getElementById('menuToggle'),nav=document.getElementById('mainnav');
   menuBtn?.addEventListener('click',()=>{nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',nav.classList.contains('open'));});
   document.addEventListener('click',e=>{if(!nav.contains(e.target) && e.target!==menuBtn) nav.classList.remove('open');});
@@ -935,10 +937,29 @@
     const res=document.getElementById('quiz-result'); res.style.display='block'; res.textContent='Recommended: '+plan[0].toUpperCase()+plan.slice(1)+' plan. All tiers include the full suite, support, and ongoing updates.';
   });
 
-  /* Sticky CTA: show later on small screens */
-  const ctaBar=document.getElementById('ctaBar'), ctaClose=document.getElementById('ctaClose'); let dismissed=false;
-  function toggleCta(){ if(dismissed) return; const y=window.scrollY; const threshold=(window.innerWidth<480)?1200:600; if(y>threshold) ctaBar.classList.add('show'); else ctaBar.classList.remove('show'); }
-  window.addEventListener('scroll',toggleCta,{passive:true}); toggleCta(); ctaClose?.addEventListener('click',()=>{dismissed=true;ctaBar.classList.remove('show');});
+  /* Sticky CTA: show later on phones AND auto-hide near pricing/forms or on input focus (tablet fix) */
+  const ctaBar=document.getElementById('ctaBar'), ctaClose=document.getElementById('ctaClose'); 
+  let dismissed=false, suppressed=false, focusing=false;
+  function updateCta(){
+    if(dismissed || suppressed || focusing){ ctaBar.classList.remove('show'); ctaBar.classList.add('hide'); return; }
+    const y=window.scrollY; const threshold=(window.innerWidth<480)?1200:650;
+    if(y>threshold){ ctaBar.classList.add('show'); ctaBar.classList.remove('hide'); } else { ctaBar.classList.remove('show'); ctaBar.classList.add('hide'); }
+  }
+  window.addEventListener('scroll',updateCta,{passive:true}); updateCta();
+  ctaClose?.addEventListener('click',()=>{dismissed=true;updateCta();});
+
+  /* Suppress CTA when pricing/crypto/affiliate/waitlist are in view (tablet overlap fix) */
+  (function(){
+    const targets=['#pricing','#pay-crypto','#affiliate','#waitlist'];
+    const io2=new IntersectionObserver(entries=>{
+      suppressed = entries.some(e=>e.isIntersecting);
+      updateCta();
+    },{root:null,rootMargin:'0px 0px -55% 0px',threshold:0});
+    targets.forEach(sel=>{const el=document.querySelector(sel); if(el) io2.observe(el);});
+  })();
+  /* Hide CTA while typing in any form on tablets */
+  document.addEventListener('focusin',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=true;updateCta();}});
+  document.addEventListener('focusout',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=false;updateCta();}});
 
   /* Year stamp */
   document.getElementById('year').textContent=new Date().getFullYear();
@@ -963,22 +984,9 @@
     const ar=document.getElementById('aff-ref'); if(ar) ar.value=getRef();
     const au=document.getElementById('aff-utm'); if(au) au.value=JSON.stringify(getUTM());
   })();
-
-  /* Card notify modal */
-  const modal=document.getElementById('cardNotify'), formCN=document.getElementById('card-notify-form');
-  const planInput=document.getElementById('card-notify-plan'), refCN=document.getElementById('card-notify-ref'), utmCN=document.getElementById('card-notify-utm');
-  refCN.value=getRef(); utmCN.value=JSON.stringify(getUTM());
-  document.querySelectorAll('.btn-card-notify').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      planInput.value = btn.getAttribute('data-plan') || '';
-      modal.classList.add('open');
-      setTimeout(()=>formCN.querySelector('input[name="name"]').focus(),50);
-    });
-  });
-  modal.addEventListener('click',e=>{ if(e.target===modal || e.target.hasAttribute('data-close')) modal.classList.remove('open'); });
 </script>
 
-<!-- PayPal SDK (load before calling Buttons) -->
+<!-- PayPal SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=AT7YkprnIrMlBqYZPRJiuH9poDcKiK0L0bEyBuA4R5InsY6nkTCvhAyKi5eg6F3eTjutd9BVbFzdYAsZ&vault=true&intent=subscription&disable-funding=card,credit"></script>
 <script>
   /* PayPal subs */
@@ -1008,7 +1016,7 @@
   renderSub('P-6UD12522YR208981MNDQ3QPA','paypal-button-container-P-6UD12522YR208981MNDQ3QPA','tv-monthly','monthly','consent-monthly');
   renderSub('P-4VR929208D839202YNDQ3T6Q','paypal-button-container-P-4VR929208D839202YNDQ3T6Q','tv-quarterly','quarterly','consent-quarterly');
 
-  /* Lifetime PayPal form limits */
+  /* Lifetime PayPal form guard */
   (function(){
     const form=document.getElementById('pp-lifetime'); if(!form) return;
     form.addEventListener('submit', function(e){
