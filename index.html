@@ -35,13 +35,13 @@
       --brand:#5b8aff; --brand-2:#7b9bff; --accent:#76ddff;
       --crypto:#ffb347; --good:#3ed598; --warn:#f9a23c;
       --radius:16px; --shadow:0 18px 60px rgba(12,16,27,.35);
-      --max:min(1160px,92vw);
+      --max:1160px;
       --grad:linear-gradient(90deg,#9cc0ff 0%,#86a8ff 35%,#7ccaff 60%,#8ca5ff 85%,#b9d4ff 100%);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%}
+    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%;overflow-x:hidden}
     body{scroll-behavior:smooth;padding-bottom:env(safe-area-inset-bottom)}
-    .container{max-width:var(--max);margin:0 auto;padding:0 1.2rem}
+    .container{max-width:var(--max);width:100%;margin:0 auto;padding-left:clamp(14px,4vw,22px);padding-right:clamp(14px,4vw,22px)}
     .stack{display:grid;gap:1.2rem}
     .grid{display:grid;gap:1rem}
     .grid.auto-300{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
@@ -85,7 +85,7 @@
     nav a:hover,nav a:focus-visible{color:#fff;background:rgba(255,255,255,.09)}
     @media (max-width:1060px){
       .menu-toggle{display:inline-flex}
-      nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:1rem}
+      nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:1rem;max-width:min(92vw,420px)}
       .open{display:flex}
       header .btn.btn-primary{display:none}
     }
@@ -125,7 +125,7 @@
     .product p.note,.product .pro.note{color:#ecf1ff}
     .product .pro{border-top:1px solid rgba(255,255,255,.12);padding-top:.55rem;margin-top:.35rem}
 
-    /* ----- Base pricing grid (will be overridden by order rules below) ----- */
+    /* ----- Base pricing grid (order overridden below) ----- */
     .pricing-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
     @media (max-width:1100px){ .pricing-grid{grid-template-columns:repeat(2,minmax(320px,1fr));justify-items:stretch} }
     @media (max-width:740px){ .pricing-grid{grid-template-columns:1fr} }
@@ -140,22 +140,9 @@
     .row{display:grid;gap:.8rem;grid-template-columns:1fr 1fr}
     @media (max-width:720px){.row{grid-template-columns:1fr}}
 
-    /* ---------- Fields (scope to textual inputs) ---------- */
-    input[type="text"],
-    input[type="email"],
-    input[type="url"],
-    input[type="search"],
-    input[type="number"],
-    input[type="password"],
-    input[type="tel"],
-    input[type="date"],
-    textarea,
-    select{
-      width:100%;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.14);
-      color:#fff;border-radius:12px;padding:.7rem .85rem;
-    }
+    /* ---------- Textual fields ---------- */
+    input[type="text"],input[type="email"],input[type="url"],input[type="search"],input[type="number"],input[type="password"],input[type="tel"],input[type="date"],textarea,select{
+      width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:12px;padding:.7rem .85rem}
     input::placeholder,textarea::placeholder{color:rgba(255,255,255,.5)}
     textarea{min-height:76px;resize:vertical}
     select{appearance:none;background-color:var(--bg-soft);color:var(--text)}
@@ -169,7 +156,7 @@
     .cta-bar{position:fixed;left:0;right:0;bottom:-120px;transition:bottom .35s ease;z-index:50}
     .cta-bar.show{bottom:0}
     .cta-bar.hide{bottom:-140px}
-    .cta-inner{max-width:var(--max);margin:0 auto;padding:.6rem 1.2rem}
+    .cta-inner{max-width:var(--max);width:100%;margin:0 auto;padding-left:clamp(14px,4vw,22px);padding-right:clamp(14px,4vw,22px)}
     .cta-inner .bar{display:flex;gap:.8rem;align-items:center;background:rgba(10,12,20,.92);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);border-radius:14px;padding:.6rem .9rem calc(.6rem + env(safe-area-inset-bottom))}
     @media (max-width:1100px){ .cta-inner .bar{gap:.6rem;padding:.5rem .8rem calc(.5rem + env(safe-area-inset-bottom))} }
     .cta-close{margin-left:auto;border:none;background:transparent;color:#a5b6db}
@@ -195,7 +182,6 @@
     #plan-yearly    { grid-area: yearly; }
     #plan-lifetime  { grid-area: lifetime; }
 
-    /* Desktop ≥1101px: 4 across in exact order */
     @media (min-width: 1101px) {
       .pricing-grid{
         display: grid;
@@ -203,7 +189,6 @@
         grid-template-areas: "monthly quarterly yearly lifetime";
       }
     }
-    /* Tablets 741–1100px: 2×2 in order */
     @media (min-width: 741px) and (max-width: 1100px) {
       .pricing-grid{
         display: grid;
@@ -213,7 +198,6 @@
           "yearly   lifetime";
       }
     }
-    /* Phones ≤740px: stack in the right order */
     @media (max-width: 740px) {
       .pricing-grid { display: flex; flex-direction: column; }
       #plan-monthly   { order: 1; }
@@ -331,6 +315,7 @@
       <h2 class="headline lg reveal">What’s inside the Trading Suite</h2>
 
       <div class="grid auto-300 reveal">
+        <!-- (modules unchanged; omitted here for brevity in this comment) -->
         <!-- EC Pro -->
         <article class="card product">
           <div class="title mod">
@@ -563,27 +548,27 @@
     <div class="container stack">
       <h2 class="headline lg reveal">How it works — from bias to execution</h2>
 
-      <div class="grid reveal how-grid">
-        <div class="card">
-          <div class="stack">
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>1) Set bias</strong><br><span class="note">Use <strong>EC Pro</strong> and/or <strong>MACD+</strong> to pick a side. Don’t trade against it.</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>2) Verify participation</strong><br><span class="note"><strong>PVA/OBV</strong> confirm energy. No energy = no trade.</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>3) Map structure</strong><br><span class="note">Respect <strong>SDZ</strong> boxes and <strong>Levels</strong> (d/w/m anchors).</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>4) Time the entry</strong><br><span class="note"><strong>RSI Triad</strong> & <strong>SRSI+</strong> for turns; <strong>LTF</strong> flags coil vs fatigue.</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>5) Automate</strong><br><span class="note"><strong>Screener</strong> routes signals to alerts. Keep risk fixed, not feelings.</span></div></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <strong>Built‑in plays</strong>
-          <ul style="margin:.5rem 0 0 1rem">
-            <li><strong>Trend Buy‑the‑Dip:</strong> Bias Up → PVA Bull/Climax → reaction near demand/VWAP → RSI/SRSI timing.</li>
-            <li><strong>Reversal Flip:</strong> Absorption + OBV div at supply → EC slope flattens → Pilot reclaim.</li>
-            <li><strong>Breakout Continuation:</strong> Climax through wVWAP/supply → first ATR dip → NanoFlow “+”.</li>
-          </ul>
-          <p class="note" style="margin-top:.8rem">Start with EC Pro (bias) + PVA/OBV (participation) + SDZ/Levels (structure). Layer timing & screener as needed. <em>Educational only — not financial advice.</em></p>
+    <div class="grid reveal how-grid">
+      <div class="card">
+        <div class="stack">
+          <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>1) Set bias</strong><br><span class="note">Use <strong>EC Pro</strong> and/or <strong>MACD+</strong> to pick a side. Don’t trade against it.</span></div></div>
+          <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>2) Verify participation</strong><br><span class="note"><strong>PVA/OBV</strong> confirm energy. No energy = no trade.</span></div></div>
+          <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>3) Map structure</strong><br><span class="note">Respect <strong>SDZ</strong> boxes and <strong>Levels</strong> (d/w/m anchors).</span></div></div>
+          <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>4) Time the entry</strong><br><span class="note"><strong>RSI Triad</strong> & <strong>SRSI+</strong> for turns; <strong>LTF</strong> flags coil vs fatigue.</span></div></div>
+          <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>5) Automate</strong><br><span class="note"><strong>Screener</strong> routes signals to alerts. Keep risk fixed, not feelings.</span></div></div>
         </div>
       </div>
+
+      <div class="card">
+        <strong>Built‑in plays</strong>
+        <ul style="margin:.5rem 0 0 1rem">
+          <li><strong>Trend Buy‑the‑Dip:</strong> Bias Up → PVA Bull/Climax → reaction near demand/VWAP → RSI/SRSI timing.</li>
+          <li><strong>Reversal Flip:</strong> Absorption + OBV div at supply → EC slope flattens → Pilot reclaim.</li>
+          <li><strong>Breakout Continuation:</strong> Climax through wVWAP/supply → first ATR dip → NanoFlow “+”.</li>
+        </ul>
+        <p class="note" style="margin-top:.8rem">Start with EC Pro (bias) + PVA/OBV (participation) + SDZ/Levels (structure). Layer timing & screener as needed. <em>Educational only — not financial advice.</em></p>
+      </div>
+    </div>
     </div>
   </section>
 
