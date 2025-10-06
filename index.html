@@ -20,12 +20,14 @@
   <meta property="og:image" content="https://www.signalpilot.io/preview.png">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Perf -->
-  <link rel="preconnect" href="https://www.paypal.com">
-  <link rel="dns-prefetch" href="https://www.paypal.com">
+  <!-- Perf (optional analytics) -->
   <link rel="preconnect" href="https://plausible.io">
   <link rel="dns-prefetch" href="https://plausible.io">
   <script defer data-domain="signalpilot.io" src="https://plausible.io/js/script.js"></script>
+
+  <!-- PayPal -->
+  <link rel="preconnect" href="https://www.paypal.com">
+  <link rel="dns-prefetch" href="https://www.paypal.com">
 
   <style>
     :root{
@@ -39,38 +41,45 @@
       --grad:linear-gradient(90deg,#9cc0ff 0%,#86a8ff 35%,#7ccaff 60%,#8ca5ff 85%,#b9d4ff 100%);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%;overflow-x:hidden}
-    body{scroll-behavior:smooth;padding-bottom:env(safe-area-inset-bottom)}
 
-    /* ===== Visible digital background ===== */
-    .bg-aurora{
-      position:fixed; inset:-12% -20% -12% -20%;
-      z-index:-2; pointer-events:none; filter:blur(90px) saturate(120%);
+    /* ===== Always-visible background (works on iOS Safari) ===== */
+    html,body{
+      margin:0; color:var(--text);
+      font:16px/1.6 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      -webkit-text-size-adjust:100%; overflow-x:hidden;
       background:
-        radial-gradient(42% 32% at 18% 8%,  rgba(124,202,255,.30), transparent 62%),
-        radial-gradient(36% 32% at 82% 26%, rgba(140,167,255,.32), transparent 68%),
-        radial-gradient(48% 36% at 64% 84%, rgba(118,221,255,.26), transparent 72%),
-        radial-gradient(30% 22% at 12% 72%, rgba(151,124,255,.20), transparent 66%),
-        #05070d;
+        radial-gradient(1200px 700px at -6% -8%, rgba(130,185,255,.18), transparent 60%),
+        radial-gradient(1100px 660px at 108% -10%, rgba(155,140,255,.18), transparent 62%),
+        radial-gradient(1200px 700px at 52% 118%, rgba(118,221,255,.12), transparent 64%),
+        var(--bg);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    /* Aurora layer on top */
+    .bg-aurora{
+      position:fixed; inset:0; z-index:-1; pointer-events:none;
+      background:
+        radial-gradient(45% 35% at 12% 12%,  rgba(125,200,255,.40), transparent 62%),
+        radial-gradient(36% 28% at 85% 14%,  rgba(155,140,255,.38), transparent 65%),
+        radial-gradient(48% 36% at 78% 88%,  rgba(118,221,255,.28), transparent 70%),
+        radial-gradient(26% 22% at 8% 72%,   rgba(151,124,255,.22), transparent 66%);
+      filter: blur(70px) saturate(130%) brightness(110%);
+      mix-blend-mode: screen;
+      opacity:.85;
       animation: aurora-pan 36s linear infinite alternate;
+      will-change: transform;
     }
-    @keyframes aurora-pan {
-      from { transform: translate3d(-2%, -1%, 0) scale(1.02); }
-      to   { transform: translate3d( 2%,  1%, 0) scale(1.05); }
-    }
-    /* Tech grid overlay */
+    @keyframes aurora-pan { from{transform:translate3d(-2%,-1%,0) scale(1.02)} to{transform:translate3d(2%,1%,0) scale(1.05)} }
+
+    /* Tech grid overlay (subtle) */
     body::after{
       content:"";
-      position:fixed; inset:0;
-      z-index:-3; opacity:.17;
+      position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.22;
       background-image:
-        linear-gradient(transparent 31px, rgba(255,255,255,.06) 32px, transparent 33px),
-        linear-gradient(90deg, transparent 31px, rgba(255,255,255,.05) 32px, transparent 33px);
+        linear-gradient(transparent 31px, rgba(255,255,255,.10) 32px, transparent 33px),
+        linear-gradient(90deg, transparent 31px, rgba(255,255,255,.08) 32px, transparent 33px);
       background-size:64px 64px;
     }
-    @media (prefers-reduced-motion: reduce){
-      .bg-aurora{ animation:none }
-    }
+    @media (prefers-reduced-motion: reduce){ .bg-aurora{animation:none} }
 
     /* Layout */
     .container{
@@ -124,10 +133,7 @@
     .hero-grid{display:grid;gap:1.5rem;grid-template-columns:1.1fr .9fr}
     .hero-grid>*{min-width:0}
     .hero .panel{min-height:200px;display:flex;align-items:flex-end;justify-content:space-between;padding:1rem}
-    @media (max-width:900px){
-      .hero-grid{grid-template-columns:1fr}
-      .hero .panel{min-height:160px}
-    }
+    @media (max-width:900px){ .hero-grid{grid-template-columns:1fr} .hero .panel{min-height:160px} }
     .hero-ctas{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
 
     .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease, transform .5s ease}
@@ -197,39 +203,34 @@
     .modal-card h3{margin:0}
     .modal-close{background:transparent;border:none;color:#a5b6db;cursor:pointer}
 
-    /* PRICING ORDER */
+    /* PRICING ORDER (desktop: Monthly → Quarterly → Yearly → Lifetime) */
     #plan-monthly   { grid-area: monthly; }
     #plan-quarterly { grid-area: quarterly; }
     #plan-yearly    { grid-area: yearly; }
     #plan-lifetime  { grid-area: lifetime; }
-    @media (min-width: 1101px) {
-      .pricing-grid{
-        display: grid;
+    @media (min-width:1101px){
+      .pricing-grid{ display:grid;
         grid-template-columns: repeat(4, minmax(260px, 1fr));
         grid-template-areas: "monthly quarterly yearly lifetime";
       }
     }
-    @media (min-width: 741px) and (max-width: 1100px) {
-      .pricing-grid{
-        display: grid;
+    @media (min-width:741px) and (max-width:1100px){
+      .pricing-grid{ display:grid;
         grid-template-columns: repeat(2, minmax(300px, 1fr));
         grid-template-areas:
           "monthly quarterly"
           "yearly   lifetime";
       }
     }
-    @media (max-width: 740px) {
-      .pricing-grid { display: flex; flex-direction: column; }
-      #plan-monthly   { order: 1; }
-      #plan-quarterly { order: 2; }
-      #plan-yearly    { order: 3; }
-      #plan-lifetime  { order: 4; }
+    @media (max-width:740px){
+      .pricing-grid{ display:flex; flex-direction:column }
+      #plan-monthly{order:1} #plan-quarterly{order:2} #plan-yearly{order:3} #plan-lifetime{order:4}
     }
   </style>
 </head>
 <body>
 
-<!-- visible aurora layer -->
+<!-- Aurora layer -->
 <div class="bg-aurora" aria-hidden="true"></div>
 
 <header>
@@ -416,7 +417,7 @@
             <h3>SP‑Levels — Micro reference</h3>
           </div>
           <div class="punch">Anchors that actually hold the story.</div>
-          <p class="note">Auto‑plots day/week/month anchors price actually respects—without clutter.</p>
+          <p class="note">Auto‑plots day/week/month anchors price respects—without clutter.</p>
           <button class="btn btn-ghost btn-sm" data-pro="pro-levels" aria-expanded="false" aria-controls="pro-levels">Pro description</button>
           <div id="pro-levels" class="pro note" hidden>
             dVWAP, wVWAP, dPOC, wOpen, mOpen, mPOC—drawn on the opening candle only. Sharp references; minimal noise.
@@ -551,7 +552,6 @@
             <li>Invite automation + site polish + FAQ</li>
           </ul>
         </div>
-
         <div class="card">
           <strong>V1.1 — Onboarding & trust (Weeks 1–4)</strong>
           <ul class="note" style="margin:.5rem 0 0 1rem">
@@ -560,7 +560,6 @@
             <li>Office hours (Discord) + searchable Q&A</li>
           </ul>
         </div>
-
         <div class="card">
           <strong>V1.2 — Proof & workflow (Month 2–3)</strong>
           <ul class="note" style="margin:.5rem 0 0 1rem">
@@ -569,7 +568,6 @@
             <li>Versioned release notes</li>
           </ul>
         </div>
-
         <div class="card">
           <strong>V1.3 — Scale alerts (Month 3–4)</strong>
           <ul class="note" style="margin:.5rem 0 0 1rem">
@@ -578,7 +576,6 @@
             <li>Session Player (preview)</li>
           </ul>
         </div>
-
         <div class="card">
           <strong>V1.4 — Expansion modules (Month 4–6)</strong>
           <ul class="note" style="margin:.5rem 0 0 1rem">
@@ -587,7 +584,6 @@
             <li>Backtest exporter v2 (batch symbol×TF)</li>
           </ul>
         </div>
-
         <div class="card">
           <strong>Community & marketing (starts at V1)</strong>
           <ul class="note" style="margin:.5rem 0 0 1rem">
@@ -920,7 +916,7 @@
         <li>Load the starter preset (sent by email).</li>
         <li>Add two alerts: EC Pro and Screener.</li>
       </ol>
-      <div style="margin-top:.8rem"><a class="btn btn-primary" href="#playbooks">Read the playbooks</a></div>
+      <div style="margin-top:.8rem"><a class="btn btn-primary" href="#how">Read the playbooks</a></div>
     </div></div>
   </section>
 
@@ -972,16 +968,16 @@
 </footer>
 
 <script>
-  /* Apps Script webhook */
+  /* ===== Config & helpers ===== */
   const SP_WEBHOOK='https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec';
-  const SP_SECRET=''; // optional
+  const SP_SECRET=''; // optional; leave blank to skip
   function postWebhook(d){
     if(!SP_WEBHOOK) return;
     const p={...d}; if(SP_SECRET.trim()) p.secret=SP_SECRET;
     fetch(SP_WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(p)}).catch(()=>{});
   }
 
-  /* Ref / UTM capture */
+  // Ref / UTM capture
   (function(){
     const q=new URLSearchParams(location.search);
     const ref=q.get('ref')||q.get('affiliate');
@@ -992,59 +988,48 @@
   function getRef(){return localStorage.getItem('sp_ref')||''}
   function getUTM(){try{return JSON.parse(localStorage.getItem('sp_utm')||'{}')}catch(_){return{}}}
 
-  /* Nav toggle */
+  // Nav toggle
   const menuBtn=document.getElementById('menuToggle'),nav=document.getElementById('mainnav');
   menuBtn?.addEventListener('click',()=>{nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',nav.classList.contains('open'));});
   document.addEventListener('click',e=>{if(!nav.contains(e.target) && e.target!==menuBtn) nav.classList.remove('open');});
   document.querySelectorAll('#mainnav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
 
-  /* Reveal */
+  // Reveal
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  /* Countdown — 14 days FROM YESTERDAY (v2 key so everyone gets the new timer) */
-  const LAUNCH_TARGET_ISO = ""; // keep empty to use the rule below
+  // Countdown — 14 days FROM YESTERDAY (new key v2)
   (function(){
     const KEY='sp_launch_target_epoch_v2';
-    let t = 0;
-
-    if (LAUNCH_TARGET_ISO) {
-      const d = Date.parse(LAUNCH_TARGET_ISO);
-      if (!Number.isNaN(d)) { t = d; localStorage.setItem(KEY,String(t)); }
-    }
-
+    let t=0;
     if(!t){
-      // 14 days from *yesterday* (same time-of-day)
-      const base = new Date();
-      base.setDate(base.getDate() - 1);
-      t = base.getTime() + 14*24*60*60*1000; // => ~now + 13 days
-      localStorage.setItem(KEY, String(t));
+      const base=new Date(); base.setDate(base.getDate()-1); // yesterday, same time-of-day
+      t=base.getTime()+14*24*60*60*1000;
+      localStorage.setItem(KEY,String(t));
     }
-
     const out=document.getElementById('countdown');
-    function tick(){
-      let dff=Math.max(0,t-Date.now());
+    function tick(){let dff=Math.max(0,t-Date.now());
       const d=Math.floor(dff/86400000); dff%=86400000; const h=Math.floor(dff/3600000); dff%=3600000; const m=Math.floor(dff/60000); dff%=60000; const s=Math.floor(dff/1000);
       out.textContent=`${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
     }
     tick(); setInterval(tick,1000);
   })();
 
-  /* Copy-to-clipboard */
+  // Copy to clipboard
   document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>{
     const el=document.querySelector(btn.getAttribute('data-copy')); if(!el) return;
     el.select(); el.setSelectionRange(0,99999); document.execCommand('copy');
     const old=btn.textContent; btn.textContent='Copied'; setTimeout(()=>btn.textContent=old,1400);
   }));
 
-  /* Pro description toggles */
+  // Pro description toggles
   document.querySelectorAll('[data-pro]').forEach(btn=>btn.addEventListener('click',()=>{
     const p=document.getElementById(btn.getAttribute('data-pro')); if(!p) return;
     const show=p.hasAttribute('hidden'); if(show) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
     btn.setAttribute('aria-expanded',String(show)); btn.textContent=show?'Hide pro description':'Pro description';
   }));
 
-  /* Sticky CTA */
+  // Sticky CTA
   const ctaBar=document.getElementById('ctaBar'), ctaClose=document.getElementById('ctaClose'); 
   let dismissed=false, suppressed=false, focusing=false;
   function updateCta(){
@@ -1054,7 +1039,6 @@
   }
   window.addEventListener('scroll',updateCta,{passive:true}); updateCta();
   ctaClose?.addEventListener('click',()=>{dismissed=true;updateCta();});
-
   (function(){
     const targets=['#pricing','#pay-crypto','#affiliate','#waitlist','#how'];
     const io2=new IntersectionObserver(entries=>{
@@ -1066,33 +1050,16 @@
   document.addEventListener('focusin',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=true;updateCta();}});
   document.addEventListener('focusout',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=false;updateCta();}});
 
-  /* Footer year */
+  // Footer year
   document.getElementById('year').textContent=new Date().getFullYear();
 
-  /* Thanks page + lifetime webhook on return */
+  // "Thanks" page after PayPal approval
   (function(){
     function showThanks(){const s=document.getElementById('thanks'); if(location.hash==='#thanks') s.style.display='block';}
     window.addEventListener('hashchange',showThanks); showThanks();
-    const q=new URLSearchParams(location.search);
-    if(location.hash==='#thanks' && q.get('paid')==='lifetime'){
-      postWebhook({type:'lifetime', plan:'lifetime', tv: localStorage.getItem('sp_last_tv')||'', txn_id:q.get('tx')||'', ref:getRef(), utm:getUTM()});
-    }
   })();
 
-  /* Forms: add ref/utm + webhook on submit */
-  (function(){
-    const cf=document.getElementById('crypto-form'); if(cf){
-      document.getElementById('crypto-ref').value=getRef();
-      document.getElementById('crypto-utm').value=JSON.stringify(getUTM());
-      cf.addEventListener('submit',()=>{const fd=new FormData(cf);
-        postWebhook({ type:'crypto_invoice_request', plan: fd.get('plan'), coin: fd.get('coin'), email: fd.get('email'), tv: fd.get('tradingview'), ref: getRef(), utm: getUTM() });
-      });
-    }
-    const ar=document.getElementById('aff-ref'); if(ar) ar.value=getRef();
-    const au=document.getElementById('aff-utm'); if(au) au.value=JSON.stringify(getUTM());
-  })();
-
-  /* Card notify modal */
+  // Card notify modal
   (function(){
     const modal=document.getElementById('cardNotify');
     function openModal(plan){
@@ -1137,6 +1104,7 @@
   renderSub('P-4VR929208D839202YNDQ3T6Q','paypal-button-container-P-4VR929208D839202YNDQ3T6Q','tv-quarterly','quarterly','consent-quarterly');
   renderSub('P-43M86339WD725333MNDQ3VGI','paypal-button-container-P-43M86339WD725333MNDQ3VGI','tv-yearly','yearly','consent-yearly');
 
+  // Lifetime form guards + return URL with thanks hash
   (function(){
     const form=document.getElementById('pp-lifetime'); if(!form) return;
     form.addEventListener('submit', function(e){
