@@ -25,9 +25,44 @@
   <link rel="dns-prefetch" href="https://plausible.io">
   <script defer data-domain="signalpilot.io" src="https://plausible.io/js/script.js"></script>
 
-  <!-- PayPal -->
+  <!-- PayPal + Forms -->
   <link rel="preconnect" href="https://www.paypal.com">
   <link rel="dns-prefetch" href="https://www.paypal.com">
+  <link rel="preconnect" href="https://formspree.io">
+  <link rel="dns-prefetch" href="https://formspree.io">
+
+  <!-- Structured data (Product + FAQ + Org) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Product",
+    "name":"SignalPilot — Trading Suite",
+    "description":"Non‑repainting TradingView indicators for any market & timeframe.",
+    "brand":{"@type":"Brand","name":"SignalPilot"},
+    "image":"https://www.signalpilot.io/preview.png",
+    "offers":[
+      {"@type":"Offer","price":"79","priceCurrency":"USD","category":"subscription","name":"Monthly"},
+      {"@type":"Offer","price":"199","priceCurrency":"USD","category":"subscription","name":"Quarterly"},
+      {"@type":"Offer","price":"499","priceCurrency":"USD","category":"subscription","name":"Yearly"},
+      {"@type":"Offer","price":"899","priceCurrency":"USD","category":"one-time","name":"Lifetime"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Is this financial advice?","acceptedAnswer":{"@type":"Answer","text":"No. SignalPilot is educational only."}},
+      {"@type":"Question","name":"Do the signals repaint?","acceptedAnswer":{"@type":"Answer","text":"No—signals finalize on candle close."}},
+      {"@type":"Question","name":"What markets & timeframes?","acceptedAnswer":{"@type":"Answer","text":"Anything on TradingView—crypto, FX, indices, equities, commodities."}},
+      {"@type":"Question","name":"How fast is access?","acceptedAnswer":{"@type":"Answer","text":"PayPal/Card 1–8h · Crypto 1–3h after confirmations."}}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"SignalPilot Labs, Inc.","url":"https://www.signalpilot.io"}
+  </script>
 
   <style>
     :root{
@@ -39,11 +74,11 @@
       --radius:16px; --shadow:0 18px 60px rgba(12,16,27,.35);
       --max:1160px;
       --grad:linear-gradient(90deg,#9cc0ff 0%,#86a8ff 35%,#7ccaff 60%,#8ca5ff 85%,#b9d4ff 100%);
-      --measure: 68ch; /* reading width */
+      --measure: 68ch;
     }
     *{box-sizing:border-box}
 
-    /* ===== Always-visible background (works on iOS Safari) ===== */
+    /* ===== Always-visible background ===== */
     html,body{
       margin:0; color:var(--text);
       font:16px/1.6 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -55,7 +90,7 @@
         var(--bg);
       padding-bottom: env(safe-area-inset-bottom);
     }
-    /* Typography / readability tweaks */
+    /* Typography / readability */
     body{ font-size:clamp(16px,0.9vw + 12px,18px); line-height:1.7; letter-spacing:.005em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
     .measure{ max-width:var(--measure); }
     h1,h2,h3{ text-wrap:balance; line-height:1.12; }
@@ -65,7 +100,7 @@
     :where(section, .card) :where(ul,ol) :where(li + li){ margin-top:.25rem; }
     :where(a,button,input,select,textarea):focus-visible{ outline:2px solid color-mix(in srgb, var(--brand) 72%, white 8%); outline-offset:3px; border-radius:8px; }
 
-    /* Aurora layer on top */
+    /* Aurora layer */
     .bg-aurora{
       position:fixed; inset:0; z-index:-1; pointer-events:none;
       background:
@@ -81,7 +116,7 @@
     }
     @keyframes aurora-pan { from{transform:translate3d(-2%,-1%,0) scale(1.02)} to{transform:translate3d(2%,1%,0) scale(1.05)} }
 
-    /* Tech grid overlay (subtle) */
+    /* Tech grid overlay */
     body::after{
       content:"";
       position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.22;
@@ -132,12 +167,9 @@
     nav ul{list-style:none;margin:0;padding:0;display:flex;gap:.5rem;flex-wrap:wrap}
     nav a{display:inline-flex;padding:.45rem .75rem;border-radius:999px;color:#9fb6e6;font-weight:700;text-decoration:none}
     nav a:hover,nav a:focus-visible{color:#fff;background:rgba(255,255,255,.12)}
-    @media (max-width:1060px){
-      .menu-toggle{display:inline-flex}
-      nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:1rem;max-width:min(92vw,420px)}
-      .open{display:flex}
-      header .btn.btn-primary{display:none}
-    }
+    /* Sticky price pill */
+    .price-pill{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .6rem;border-radius:999px;font-weight:800;font-size:.85rem;color:#cfe1ff;background:rgba(123,155,255,.15);border:1px solid rgba(123,155,255,.26)}
+    @media (max-width:1060px){ .menu-toggle{display:inline-flex} nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:1rem;max-width:min(92vw,420px)} .open{display:flex} header .btn.btn-primary{display:none} .price-pill{display:none} }
 
     /* HERO */
     .hero{padding:clamp(1.6rem,8vw,4.2rem) 0 1.2rem}
@@ -146,6 +178,8 @@
     .hero .panel{min-height:200px;display:flex;align-items:flex-end;justify-content:space-between;padding:1rem}
     @media (max-width:900px){ .hero-grid{grid-template-columns:1fr} .hero .panel{min-height:160px} }
     .hero-ctas{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
+    .proof-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.2rem}
+    .mini-pill{display:inline-flex;align-items:center;padding:.28rem .55rem;border-radius:999px;font-weight:700;font-size:.78rem;color:#cfe1ff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
 
     .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease, transform .5s ease}
     .reveal.in{opacity:1;transform:translateY(0)}
@@ -174,7 +208,7 @@
     .product p.note,.product .pro.note{color:#ecf1ff}
     .product .pro{border-top:1px solid rgba(255,255,255,.12);padding-top:.55rem;margin-top:.35rem}
 
-    /* PRICING GRID (custom order) */
+    /* PRICING GRID */
     .pricing-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
     @media (max-width:1100px){ .pricing-grid{grid-template-columns:repeat(2,minmax(320px,1fr));justify-items:stretch} }
     @media (max-width:740px){ .pricing-grid{grid-template-columns:1fr} }
@@ -195,20 +229,20 @@
     .consent{display:flex;gap:.6rem;align-items:flex-start;line-height:1.35;margin-top:.2rem;color:var(--muted-2)}
     .tick{width:1.1rem;height:1.1rem;flex:0 0 1.1rem;margin-top:.15rem;accent-color:var(--brand);background:transparent;border:0;padding:0}
 
-    /* --- Form alignment helpers --- */
+    /* Form helpers */
     form label:not(.consent){ display:grid; gap:.35rem; }
     .grid.two-col{ grid-template-columns: repeat(2, minmax(0,1fr)); }
     @media (max-width:560px){ .grid.two-col{ grid-template-columns: 1fr; } }
     .grid-align-left{ align-self:center; justify-self:start; text-align:left; }
 
-    /* --- NEW: Pricing card alignment so actions line up across columns --- */
+    /* NEW: Align pricing card actions across columns */
     .pricing-grid .plan{ display:flex; flex-direction:column; }
-    .plan .actions{ margin-top:auto !important; } /* push actions to the bottom */
+    .plan .actions{ margin-top:auto !important; }
     .plan .actions .btn{ width:100%; justify-content:center; }
-    .pp-slot{ min-height:48px; display:flex; align-items:center; justify-content:center; width:100%; } /* consistent PayPal area height */
-    #pp-lifetime input[type="image"]{ display:block; height:40px; } /* make Buy Now visually consistent */
-    /* --------------------------------------------------------------- */
+    .pp-slot{ min-height:48px; display:flex; align-items:center; justify-content:center; width:100%; }
+    #pp-lifetime input[type="image"]{ display:block; height:40px; }
 
+    /* Sticky CTA bar */
     .cta-bar{position:fixed;left:0;right:0;bottom:-120px;transition:bottom .35s ease;z-index:50}
     .cta-bar.show{bottom:0}
     .cta-bar.hide{bottom:-140px}
@@ -228,7 +262,7 @@
     .modal-card h3{margin:0}
     .modal-close{background:transparent;border:none;color:#a5b6db;cursor:pointer}
 
-    /* PRICING ORDER (desktop: Monthly → Quarterly → Yearly → Lifetime) */
+    /* PRICING ORDER */
     #plan-monthly   { grid-area: monthly; }
     #plan-quarterly { grid-area: quarterly; }
     #plan-yearly    { grid-area: yearly; }
@@ -251,11 +285,14 @@
       .pricing-grid{ display:flex; flex-direction:column }
       #plan-monthly{order:1} #plan-quarterly{order:2} #plan-yearly{order:3} #plan-lifetime{order:4}
     }
+
+    /* Screen-reader only helper */
+    .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
   </style>
 </head>
 <body>
 
-<!-- Aurora layer -->
+<!-- background -->
 <div class="bg-aurora" aria-hidden="true"></div>
 
 <header>
@@ -277,6 +314,7 @@
         <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
+    <span class="price-pill">From <strong>$79/mo</strong></span>
     <a class="btn btn-primary" href="#pricing">Get the Suite</a>
     <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav">⋯</button>
   </div>
@@ -295,6 +333,15 @@
           <strong>non‑repainting</strong> signals you can scan, alert and trade on any market or timeframe. Flagship
           <strong>SP‑EC Pro (Event Candles)</strong> plus focused companion modules—built to work together.
         </p>
+
+        <!-- NEW: Proof bar -->
+        <div class="proof-bar">
+          <span class="mini-pill">Non‑repainting</span>
+          <span class="mini-pill">Alert‑ready</span>
+          <span class="mini-pill">Any market · timeframe</span>
+          <span class="mini-pill">Activation Crypto 1–3h</span>
+        </div>
+
         <p class="note">Every plan includes the full suite, support, ongoing updates—and access to the upcoming indicators.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary" href="#pricing">Get the Suite</a>
@@ -810,13 +857,13 @@
               <label>ETH / MATIC (EVM)
                 <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
                   <input id="addr-eth" value="0xcFf999901af3360576BA4Fa9750340C3f26504A5" readonly>
-                  <button class="btn" data-copy="#addr-eth" type="button">Copy</button>
+                  <button class="btn" data-copy="#addr-eth" type="button" aria-label="Copy ETH/MATIC address">Copy</button>
                 </div>
               </label>
               <label>BTC
                 <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
                   <input id="addr-btc" value="1DdTKYzeg9iR8GwgMZmoBje5ki5FhHwGVm" readonly>
-                  <button class="btn" data-copy="#addr-btc" type="button">Copy</button>
+                  <button class="btn" data-copy="#addr-btc" type="button" aria-label="Copy BTC address">Copy</button>
                 </div>
               </label>
             </div>
@@ -825,13 +872,13 @@
               <label>AVAX (C‑chain)
                 <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
                   <input id="addr-avax" value="0x62B9c9625Bde847AD4A50Ced3CFd8e24735ffF08" readonly>
-                  <button class="btn" data-copy="#addr-avax" type="button">Copy</button>
+                  <button class="btn" data-copy="#addr-avax" type="button" aria-label="Copy AVAX address">Copy</button>
                 </div>
               </label>
               <label>BNB (BSC)
                 <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
                   <input id="addr-bnb" value="0x398605F9907eB2C3F8602A13D394Fbb00D53C2df" readonly>
-                  <button class="btn" data-copy="#addr-bnb" type="button">Copy</button>
+                  <button class="btn" data-copy="#addr-bnb" type="button" aria-label="Copy BNB address">Copy</button>
                 </div>
               </label>
             </div>
@@ -840,7 +887,7 @@
               <label>Bitcoin Cash (BCH)
                 <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
                   <input id="addr-bch" value="qz9gvarfc9rl9zm0me3ghjp83r78nchnrvwkazd4j9" readonly>
-                  <button class="btn" data-copy="#addr-bch" type="button">Copy</button>
+                  <button class="btn" data-copy="#addr-bch" type="button" aria-label="Copy BCH address">Copy</button>
                 </div>
               </label>
               <div class="note grid-align-left">
@@ -869,18 +916,18 @@
           <input type="hidden" name="ref" id="aff-ref" value="">
           <input type="hidden" name="utm" id="aff-utm" value="">
           <div class="grid two-col" style="gap:.8rem">
-            <label>Name<input name="name" required></label>
-            <label>Email<input name="email" type="email" required></label>
+            <label for="aff-name">Name<input id="aff-name" name="name" required></label>
+            <label for="aff-email">Email<input id="aff-email" name="email" type="email" required></label>
           </div>
-          <label>Channels / links (X, YT, TG, site)
-            <textarea name="channels" placeholder="https://twitter.com/..., https://youtube.com/..., https://t.me/..., website…"></textarea>
+          <label for="aff-channels">Channels / links (X, YT, TG, site)
+            <textarea id="aff-channels" name="channels" placeholder="https://twitter.com/..., https://youtube.com/..., https://t.me/..., website…"></textarea>
           </label>
           <div class="grid two-col" style="gap:.8rem">
-            <label>Audience size (optional)<input name="audience" placeholder="e.g., 12k Twitter, 3k Telegram"></label>
-            <label>Focus (optional)<input name="focus" placeholder="e.g., BTC scalps, FX London, swing equities"></label>
+            <label for="aff-aud">Audience size (optional)<input id="aff-aud" name="audience" placeholder="e.g., 12k Twitter, 3k Telegram"></label>
+            <label for="aff-focus">Focus (optional)<input id="aff-focus" name="focus" placeholder="e.g., BTC scalps, FX London, swing equities"></label>
           </div>
-          <label class="measure">Notes (optional)
-            <textarea name="notes" placeholder="Anything else we should know"></textarea>
+          <label class="measure" for="aff-notes">Notes (optional)
+            <textarea id="aff-notes" name="notes" placeholder="Anything else we should know"></textarea>
           </label>
           <label class="consent">
             <input class="tick" type="checkbox" required>
@@ -901,11 +948,11 @@
         <form action="https://formspree.io/f/mldpnrop" method="POST">
           <input type="hidden" name="source" value="top-waitlist-section">
           <div class="grid two-col" style="gap:.8rem">
-            <label>Name<input name="name" required></label>
-            <label>Email<input name="email" type="email" required></label>
+            <label for="wl-name">Name<input id="wl-name" name="name" required></label>
+            <label for="wl-email">Email<input id="wl-email" name="email" type="email" required></label>
           </div>
-          <label>TradingView username<input name="tradingview" placeholder="@your.tradingview" required></label>
-          <label>Trading focus (optional)<input name="focus" placeholder="e.g., BTC, FX NY session, swing"></label>
+          <label for="wl-tv">TradingView username<input id="wl-tv" name="tradingview" placeholder="@your.tradingview" required></label>
+          <label for="wl-focus">Trading focus (optional)<input id="wl-focus" name="focus" placeholder="e.g., BTC, FX NY session, swing"></label>
           <button class="btn btn-primary" type="submit">Join the waitlist</button>
         </form>
       </div>
@@ -961,12 +1008,15 @@
   </div>
 </div>
 
+<!-- Live region for announcements (a11y) -->
+<div id="live" class="sr-only" aria-live="polite"></div>
+
 <!-- Card notify modal -->
-<div class="modal" id="cardNotify">
+<div class="modal" id="cardNotify" role="dialog" aria-modal="true" aria-labelledby="cardNotifyTitle">
   <div class="modal-card">
     <header>
-      <h3>Notify me when card checkout opens</h3>
-      <button class="modal-close" data-close>✕</button>
+      <h3 id="cardNotifyTitle">Notify me when card checkout opens</h3>
+      <button class="modal-close" data-close aria-label="Close">✕</button>
     </header>
     <form id="card-notify-form" action="https://formspree.io/f/mldpnrop" method="POST">
       <input type="hidden" name="source" value="card-notify">
@@ -974,10 +1024,10 @@
       <input type="hidden" name="ref" id="card-notify-ref" value="">
       <input type="hidden" name="utm" id="card-notify-utm" value="">
       <div class="grid two-col" style="gap:.8rem">
-        <label>Name<input name="name" required></label>
-        <label>Email<input name="email" type="email" required></label>
+        <label for="cn-name">Name<input id="cn-name" name="name" required></label>
+        <label for="cn-email">Email<input id="cn-email" name="email" type="email" required></label>
       </div>
-      <label>TradingView username<input name="tradingview" placeholder="@your.tradingview" required></label>
+      <label for="cn-tv">TradingView username<input id="cn-tv" name="tradingview" placeholder="@your.tradingview" required></label>
       <button class="btn btn-primary" type="submit">Notify me</button>
       <a class="btn btn-ghost" href="#waitlist" style="margin-left:.4rem">Go to waitlist</a>
     </form>
@@ -1003,6 +1053,7 @@
     const p={...d}; if(SP_SECRET.trim()) p.secret=SP_SECRET;
     fetch(SP_WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(p)}).catch(()=>{});
   }
+  function live(msg){ const el=document.getElementById('live'); if(!el) return; el.textContent=''; setTimeout(()=>el.textContent=msg,10); }
 
   // Ref / UTM capture
   (function(){
@@ -1042,11 +1093,12 @@
     tick(); setInterval(tick,1000);
   })();
 
-  // Copy to clipboard
+  // Copy to clipboard (+ live announcement)
   document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>{
     const el=document.querySelector(btn.getAttribute('data-copy')); if(!el) return;
     el.select(); el.setSelectionRange(0,99999); document.execCommand('copy');
     const old=btn.textContent; btn.textContent='Copied'; setTimeout(()=>btn.textContent=old,1400);
+    live('Wallet address copied');
   }));
 
   // Pro description toggles
@@ -1086,16 +1138,26 @@
     window.addEventListener('hashchange',showThanks); showThanks();
   })();
 
-  // Card notify modal
+  // Card notify modal (open/close + focus)
   (function(){
     const modal=document.getElementById('cardNotify');
+    const form=document.getElementById('card-notify-form');
+    function focusTrap(e){
+      if(e.key!=="Tab") return;
+      const f=modal.querySelectorAll('a,button,input,textarea,select,[tabindex]:not([tabindex="-1"])');
+      const first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
+      else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
+    }
     function openModal(plan){
       document.getElementById('card-notify-plan').value=plan||'';
       document.getElementById('card-notify-ref').value=getRef();
       document.getElementById('card-notify-utm').value=JSON.stringify(getUTM());
       modal.classList.add('open');
+      modal.addEventListener('keydown',focusTrap);
+      setTimeout(()=>document.getElementById('cn-name')?.focus(), 50);
     }
-    function closeModal(){ modal.classList.remove('open'); }
+    function closeModal(){ modal.classList.remove('open'); modal.removeEventListener('keydown',focusTrap); }
     document.querySelectorAll('.btn-card-notify').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.plan)));
     modal?.addEventListener('click',e=>{ if(e.target===modal || e.target.hasAttribute('data-close')) closeModal(); });
     document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
