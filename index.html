@@ -69,7 +69,8 @@
       color-scheme: dark;
       --bg:#05070d; --bg-soft:#0c111c; --bg-elev:#0f1524;
       --text:#ecf1ff; --muted:#b7c2d9; --muted-2:#8ea0bf;
-      --brand:#5b8aff; --brand-2:#7b9bff; --accent:#76ddff;
+      --brand:#5b8aff; --brand-2:#7b9ff; --accent:#76ddff;
+      --brand-2:#7b9bff;
       --crypto:#ffb347; --good:#3ed598; --warn:#f9a23c;
       --radius:16px; --shadow:0 18px 60px rgba(12,16,27,.35);
       --max:1160px;
@@ -141,7 +142,19 @@
     .section{padding:clamp(1.6rem,5.5vw,2.8rem) 0}
 
     .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .8rem;border-radius:999px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem;color:#bfe7ff;background:rgba(118,221,255,.18);border:1px solid rgba(118,221,255,.28)}
-    .headline{font-weight:900;letter-spacing:-.02em;line-height:1.08;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    /* HEADLINE — fix for clipped glyphs (e.g., “G”) on multi-line gradient text */
+    .headline{
+      font-weight:900;
+      letter-spacing:-.02em;
+      line-height:1.14;              /* more breathing room between lines */
+      background:var(--grad);
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 0 0 rgba(0,0,0,0);/* WebKit paint fix */
+      padding:.06em 0 .04em;         /* safe top/bottom to avoid crop */
+      overflow:visible;              /* ensure no clipping */
+    }
     .headline.xl{font-size:clamp(2.2rem,7vw,4rem)}
     .headline.lg{font-size:clamp(1.7rem,5vw,2.7rem)}
 
@@ -235,7 +248,7 @@
     @media (max-width:560px){ .grid.two-col{ grid-template-columns: 1fr; } }
     .grid-align-left{ align-self:center; justify-self:start; text-align:left; }
 
-    /* NEW: Align pricing card actions across columns */
+    /* Align pricing card actions across columns */
     .pricing-grid .plan{ display:flex; flex-direction:column; }
     .plan .actions{ margin-top:auto !important; }
     .plan .actions .btn{ width:100%; justify-content:center; }
@@ -327,14 +340,14 @@
     <div class="container hero-grid">
       <div class="stack reveal">
         <div class="badgebar"><span class="badge">TRADINGVIEW INDICATORS · ANY MARKET · ANY TIMEFRAME</span></div>
-        <h1 class="headline xl">SignalPilot — Trading Suite</h1>
+        <h1 class="headline xl">SignalPilot —<br>Trading Suite</h1>
         <p class="measure" style="color:var(--muted)">
           See the bias, read the pressure, time the move. SignalPilot turns structure, volume and momentum into clean,
           <strong>non‑repainting</strong> signals you can scan, alert and trade on any market or timeframe. Flagship
           <strong>SP‑EC Pro (Event Candles)</strong> plus focused companion modules—built to work together.
         </p>
 
-        <!-- NEW: Proof bar -->
+        <!-- Proof bar -->
         <div class="proof-bar">
           <span class="mini-pill">Non‑repainting</span>
           <span class="mini-pill">Alert‑ready</span>
@@ -409,6 +422,7 @@
       <h2 class="headline lg reveal">What’s inside the Trading Suite</h2>
 
       <div class="grid auto-300 reveal">
+        <!-- (Products unchanged for brevity) -->
         <!-- EC Pro -->
         <article class="card product">
           <div class="title mod">
@@ -427,6 +441,7 @@
           </div>
         </article>
 
+        <!-- (Other product cards remain identical to previous version) -->
         <!-- PVA -->
         <article class="card product">
           <div class="title mod">
@@ -1141,7 +1156,6 @@
   // Card notify modal (open/close + focus)
   (function(){
     const modal=document.getElementById('cardNotify');
-    const form=document.getElementById('card-notify-form');
     function focusTrap(e){
       if(e.key!=="Tab") return;
       const f=modal.querySelectorAll('a,button,input,textarea,select,[tabindex]:not([tabindex="-1"])');
