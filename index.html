@@ -41,7 +41,14 @@
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%;overflow-x:hidden}
     body{scroll-behavior:smooth;padding-bottom:env(safe-area-inset-bottom)}
-    .container{max-width:var(--max);width:100%;margin:0 auto;padding-left:clamp(14px,4vw,22px);padding-right:clamp(14px,4vw,22px)}
+    /* Safe-area aware container gutters to avoid “empty” right side on iOS */
+    .container{
+      max-width:var(--max);
+      width:100%;
+      margin:0 auto;
+      padding-left:calc(clamp(14px,4vw,22px) + env(safe-area-inset-left));
+      padding-right:calc(clamp(14px,4vw,22px) + env(safe-area-inset-right));
+    }
     .stack{display:grid;gap:1.2rem}
     .grid{display:grid;gap:1rem}
     .grid.auto-300{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
@@ -90,31 +97,35 @@
       header .btn.btn-primary{display:none}
     }
 
+    /* HERO */
     .hero{padding:clamp(1.6rem,8vw,4.2rem) 0 1.2rem}
     .hero-grid{display:grid;gap:1.5rem;grid-template-columns:1.1fr .9fr}
+    .hero-grid>*{min-width:0} /* critical: allow children to shrink on mobile */
     .hero .panel{min-height:200px;display:flex;align-items:flex-end;justify-content:space-between;padding:1rem}
-    @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero .panel{min-height:160px}}
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero .panel{min-height:160px}
+    }
+    /* Wrap the hero CTAs so they never overflow on phones */
+    .hero-ctas{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
 
     .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease, transform .5s ease}
     .reveal.in{opacity:1;transform:translateY(0)}
     @media (prefers-reduced-motion: reduce){.reveal{opacity:1 !important;transform:none !important;transition:none !important}}
 
-    /* WHY — default grid */
+    /* WHY */
     .why-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .feature{display:grid;grid-template-columns:44px 1fr;gap:.85rem;padding:1rem 1.05rem;border-radius:16px;border:1px solid rgba(255,255,255,.16);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));box-shadow:0 8px 24px rgba(12,16,27,.25)}
     .icon-wrap{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(139,167,255,.25),rgba(124,202,255,.18));border:1px solid rgba(255,255,255,.2)}
     .icon-wrap svg{width:22px;height:22px}
     .feature h3{margin:0;font-weight:800;letter-spacing:.01em;color:#eaf0ff;font-size:1.02rem}
     .feature p{margin:.08rem 0 0;color:var(--muted-2)}
-
-    /* WHY — two-up on phones (380–560px) */
     @media (max-width:560px) and (min-width:380px){
       .why-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:.75rem}
       .feature{padding:.85rem .9rem;border-radius:12px;grid-template-columns:36px 1fr}
       .icon-wrap{width:36px;height:36px}.icon-wrap svg{width:18px;height:18px}
       .feature h3{font-size:1rem}.feature p{font-size:.9rem}
     }
-    /* Ultra-narrow phones: single column */
     @media (max-width:379px){ .why-grid{grid-template-columns:1fr !important} }
 
     .product .title{display:flex;align-items:center;gap:.6rem}
@@ -125,7 +136,7 @@
     .product p.note,.product .pro.note{color:#ecf1ff}
     .product .pro{border-top:1px solid rgba(255,255,255,.12);padding-top:.55rem;margin-top:.35rem}
 
-    /* ----- Base pricing grid (order overridden below) ----- */
+    /* PRICING GRID (custom order) */
     .pricing-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
     @media (max-width:1100px){ .pricing-grid{grid-template-columns:repeat(2,minmax(320px,1fr));justify-items:stretch} }
     @media (max-width:740px){ .pricing-grid{grid-template-columns:1fr} }
@@ -140,7 +151,6 @@
     .row{display:grid;gap:.8rem;grid-template-columns:1fr 1fr}
     @media (max-width:720px){.row{grid-template-columns:1fr}}
 
-    /* ---------- Textual fields ---------- */
     input[type="text"],input[type="email"],input[type="url"],input[type="search"],input[type="number"],input[type="password"],input[type="tel"],input[type="date"],textarea,select{
       width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:12px;padding:.7rem .85rem}
     input::placeholder,textarea::placeholder{color:rgba(255,255,255,.5)}
@@ -149,14 +159,13 @@
     select:focus{border-color:rgba(118,221,255,.5);box-shadow:0 0 0 3px rgba(118,221,255,.15)}
     select option{background-color:#0b1220;color:#ecf1ff}
 
-    /* ---------- Consent checkbox ---------- */
     .consent{display:flex;gap:.6rem;align-items:flex-start;line-height:1.35;margin-top:.2rem;color:var(--muted-2)}
     .tick{width:1.1rem;height:1.1rem;flex:0 0 1.1rem;margin-top:.15rem;accent-color:var(--brand);background:transparent;border:0;padding:0}
 
     .cta-bar{position:fixed;left:0;right:0;bottom:-120px;transition:bottom .35s ease;z-index:50}
     .cta-bar.show{bottom:0}
     .cta-bar.hide{bottom:-140px}
-    .cta-inner{max-width:var(--max);width:100%;margin:0 auto;padding-left:clamp(14px,4vw,22px);padding-right:clamp(14px,4vw,22px)}
+    .cta-inner{max-width:var(--max);width:100%;margin:0 auto;padding-left:calc(clamp(14px,4vw,22px) + env(safe-area-inset-left));padding-right:calc(clamp(14px,4vw,22px) + env(safe-area-inset-right))}
     .cta-inner .bar{display:flex;gap:.8rem;align-items:center;background:rgba(10,12,20,.92);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);border-radius:14px;padding:.6rem .9rem calc(.6rem + env(safe-area-inset-bottom))}
     @media (max-width:1100px){ .cta-inner .bar{gap:.6rem;padding:.5rem .8rem calc(.5rem + env(safe-area-inset-bottom))} }
     .cta-close{margin-left:auto;border:none;background:transparent;color:#a5b6db}
@@ -172,16 +181,15 @@
     .modal-card h3{margin:0}
     .modal-close{background:transparent;border:none;color:#a5b6db;cursor:pointer}
 
-    /* --------- How it works grid (mobile fix) --------- */
+    /* HOW grid mobile collapse */
     .how-grid { gap: 1rem; grid-template-columns: 1.1fr .9fr; }
     @media (max-width: 900px) { .how-grid { grid-template-columns: 1fr !important; } }
 
-    /* ========= PRICING ORDER (Monthly → Quarterly → Yearly → Lifetime) ========= */
+    /* PRICING ORDER */
     #plan-monthly   { grid-area: monthly; }
     #plan-quarterly { grid-area: quarterly; }
     #plan-yearly    { grid-area: yearly; }
     #plan-lifetime  { grid-area: lifetime; }
-
     @media (min-width: 1101px) {
       .pricing-grid{
         display: grid;
@@ -205,7 +213,6 @@
       #plan-yearly    { order: 3; }
       #plan-lifetime  { order: 4; }
     }
-    /* ========================================================================== */
   </style>
 </head>
 <body>
@@ -249,7 +256,7 @@
           <strong>SP‑EC Pro (Event Candles)</strong> plus nine focused companions—built to work together.
         </p>
         <p class="note">Every plan includes the full suite, support, and ongoing updates.</p>
-        <div class="stack" style="grid-auto-flow:column;grid-auto-columns:max-content;gap:.9rem;align-items:center">
+        <div class="hero-ctas">
           <a class="btn btn-primary" href="#pricing">Get the Suite</a>
           <a class="btn btn-ghost" href="#docs">View Docs (soon)</a>
           <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
@@ -309,13 +316,12 @@
     </div>
   </section>
 
-  <!-- WHAT'S INSIDE -->
+  <!-- WHAT’S INSIDE -->
   <section id="inside" class="section">
     <div class="container stack">
       <h2 class="headline lg reveal">What’s inside the Trading Suite</h2>
 
       <div class="grid auto-300 reveal">
-        <!-- (modules unchanged; omitted here for brevity in this comment) -->
         <!-- EC Pro -->
         <article class="card product">
           <div class="title mod">
@@ -703,7 +709,7 @@
     </div>
   </section>
 
-  <!-- PAY WITH CRYPTO -->
+  <!-- CRYPTO -->
   <section id="pay-crypto" class="section">
     <div class="container stack">
       <h2 class="headline lg reveal">Pay with crypto <span class="pill" style="background:rgba(255,180,70,.14);color:#ffd699">save 20%</span></h2>
@@ -945,19 +951,16 @@
 </footer>
 
 <script>
-  /* --------- Webhook (Apps Script) --------- */
+  /* Webhook (Apps Script) */
   const SP_WEBHOOK='https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec';
-  const SP_SECRET=''; // optional; leave blank if not enabled
+  const SP_SECRET=''; // optional
   function postWebhook(d){
     if(!SP_WEBHOOK) return;
-    const p={...d};
-    if(SP_SECRET.trim()) p.secret=SP_SECRET;
-    fetch(SP_WEBHOOK,{method:'POST',mode:'no-cors',
-      headers:{'Content-Type':'text/plain;charset=UTF-8'},
-      body:JSON.stringify(p)}).catch(()=>{});
+    const p={...d}; if(SP_SECRET.trim()) p.secret=SP_SECRET;
+    fetch(SP_WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(p)}).catch(()=>{});
   }
 
-  /* --------- Ref / UTM capture --------- */
+  /* Ref / UTM capture */
   (function(){
     const q=new URLSearchParams(location.search);
     const ref=q.get('ref')||q.get('affiliate');
@@ -968,17 +971,17 @@
   function getRef(){return localStorage.getItem('sp_ref')||''}
   function getUTM(){try{return JSON.parse(localStorage.getItem('sp_utm')||'{}')}catch(_){return{}}}
 
-  /* --------- Nav toggle --------- */
+  /* Nav toggle */
   const menuBtn=document.getElementById('menuToggle'),nav=document.getElementById('mainnav');
   menuBtn?.addEventListener('click',()=>{nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',nav.classList.contains('open'));});
   document.addEventListener('click',e=>{if(!nav.contains(e.target) && e.target!==menuBtn) nav.classList.remove('open');});
   document.querySelectorAll('#mainnav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
 
-  /* --------- Reveal on scroll --------- */
+  /* Reveal */
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  /* --------- Countdown --------- */
+  /* Countdown */
   (function(){
     const KEY='sp_launch_target_epoch';
     let t=parseInt(localStorage.getItem(KEY),10);
@@ -992,21 +995,21 @@
     tick(); setInterval(tick,1000);
   })();
 
-  /* --------- Copy-to-clipboard --------- */
+  /* Copy-to-clipboard */
   document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>{
     const el=document.querySelector(btn.getAttribute('data-copy')); if(!el) return;
     el.select(); el.setSelectionRange(0,99999); document.execCommand('copy');
     const old=btn.textContent; btn.textContent='Copied'; setTimeout(()=>btn.textContent=old,1400);
   }));
 
-  /* --------- Pro description toggles --------- */
+  /* Pro description toggles */
   document.querySelectorAll('[data-pro]').forEach(btn=>btn.addEventListener('click',()=>{
     const p=document.getElementById(btn.getAttribute('data-pro')); if(!p) return;
     const show=p.hasAttribute('hidden'); if(show) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
     btn.setAttribute('aria-expanded',String(show)); btn.textContent=show?'Hide pro description':'Pro description';
   }));
 
-  /* --------- Plan quiz --------- */
+  /* Plan quiz */
   const quiz=document.getElementById('plan-quiz');
   quiz?.addEventListener('submit',e=>{
     e.preventDefault();
@@ -1028,7 +1031,7 @@
     res.textContent='Recommended: '+plan[0].toUpperCase()+plan.slice(1)+' plan. All tiers include the full suite, support, and ongoing updates.';
   });
 
-  /* --------- Sticky CTA --------- */
+  /* Sticky CTA */
   const ctaBar=document.getElementById('ctaBar'), ctaClose=document.getElementById('ctaClose'); 
   let dismissed=false, suppressed=false, focusing=false;
   function updateCta(){
@@ -1050,10 +1053,10 @@
   document.addEventListener('focusin',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=true;updateCta();}});
   document.addEventListener('focusout',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=false;updateCta();}});
 
-  /* --------- Footer year --------- */
+  /* Footer year */
   document.getElementById('year').textContent=new Date().getFullYear();
 
-  /* --------- Thanks page + lifetime webhook on return --------- */
+  /* Thanks page + lifetime webhook on return */
   (function(){
     function showThanks(){const s=document.getElementById('thanks'); if(location.hash==='#thanks') s.style.display='block';}
     window.addEventListener('hashchange',showThanks); showThanks();
@@ -1063,7 +1066,7 @@
     }
   })();
 
-  /* --------- Forms: add ref/utm + webhook on submit --------- */
+  /* Forms: add ref/utm + webhook on submit */
   (function(){
     const cf=document.getElementById('crypto-form'); if(cf){
       document.getElementById('crypto-ref').value=getRef();
@@ -1076,7 +1079,7 @@
     const au=document.getElementById('aff-utm'); if(au) au.value=JSON.stringify(getUTM());
   })();
 
-  /* --------- Card notify modal --------- */
+  /* Card notify modal */
   (function(){
     const modal=document.getElementById('cardNotify');
     function openModal(plan){
