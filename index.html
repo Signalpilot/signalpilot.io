@@ -39,8 +39,7 @@
       --radius:16px; --shadow:0 18px 60px rgba(12,16,27,.35);
       --max:1160px;
       --grad:linear-gradient(90deg,#9cc0ff 0%,#86a8ff 35%,#7ccaff 60%,#8ca5ff 85%,#b9d4ff 100%);
-      /* NEW: Typography measure */
-      --measure: 68ch;
+      --measure: 68ch; /* reading width */
     }
     *{box-sizing:border-box}
 
@@ -56,27 +55,15 @@
         var(--bg);
       padding-bottom: env(safe-area-inset-bottom);
     }
-    /* NEW: Typography / readability tweaks (override base) */
-    body{
-      font-size: clamp(16px, 0.9vw + 12px, 18px);
-      line-height: 1.7;
-      letter-spacing: .005em;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-    .measure{ max-width: var(--measure); }
-    h1,h2,h3{ text-wrap: balance; line-height:1.12; }
-    p, li{ text-wrap: pretty; }
+    /* Typography / readability tweaks */
+    body{ font-size:clamp(16px,0.9vw + 12px,18px); line-height:1.7; letter-spacing:.005em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+    .measure{ max-width:var(--measure); }
+    h1,h2,h3{ text-wrap:balance; line-height:1.12; }
+    p, li{ text-wrap:pretty; }
     p + p{ margin-top:.6rem; }
     ul,ol{ padding-left:1.2rem; }
-    /* avoid fighting existing specific list styles in pricing cards */
     :where(section, .card) :where(ul,ol) :where(li + li){ margin-top:.25rem; }
-
-    /* Focus visibility for keyboard users (AA) */
-    :where(a,button,input,select,textarea):focus-visible{
-      outline:2px solid color-mix(in srgb, var(--brand) 72%, white 8%);
-      outline-offset:3px; border-radius:8px;
-    }
+    :where(a,button,input,select,textarea):focus-visible{ outline:2px solid color-mix(in srgb, var(--brand) 72%, white 8%); outline-offset:3px; border-radius:8px; }
 
     /* Aurora layer on top */
     .bg-aurora{
@@ -208,20 +195,18 @@
     .consent{display:flex;gap:.6rem;align-items:flex-start;line-height:1.35;margin-top:.2rem;color:var(--muted-2)}
     .tick{width:1.1rem;height:1.1rem;flex:0 0 1.1rem;margin-top:.15rem;accent-color:var(--brand);background:transparent;border:0;padding:0}
 
-    /* --- NEW: Form alignment helpers (fix input alignment + text blocks) --- */
-    form label:not(.consent){
-      display:grid;
-      gap:.35rem;               /* consistent label→field spacing */
-    }
+    /* --- Form alignment helpers --- */
+    form label:not(.consent){ display:grid; gap:.35rem; }
     .grid.two-col{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-    @media (max-width:560px){
-      .grid.two-col{ grid-template-columns: 1fr; }
-    }
-    .grid-align-left{
-      align-self:center;
-      justify-self:start;
-      text-align:left;
-    }
+    @media (max-width:560px){ .grid.two-col{ grid-template-columns: 1fr; } }
+    .grid-align-left{ align-self:center; justify-self:start; text-align:left; }
+
+    /* --- NEW: Pricing card alignment so actions line up across columns --- */
+    .pricing-grid .plan{ display:flex; flex-direction:column; }
+    .plan .actions{ margin-top:auto !important; } /* push actions to the bottom */
+    .plan .actions .btn{ width:100%; justify-content:center; }
+    .pp-slot{ min-height:48px; display:flex; align-items:center; justify-content:center; width:100%; } /* consistent PayPal area height */
+    #pp-lifetime input[type="image"]{ display:block; height:40px; } /* make Buy Now visually consistent */
     /* --------------------------------------------------------------- */
 
     .cta-bar{position:fixed;left:0;right:0;bottom:-120px;transition:bottom .35s ease;z-index:50}
@@ -657,7 +642,7 @@
             <li>Alerts, presets, backtest templates</li>
             <li>Email support</li>
           </ul>
-          <div class="stack" style="margin-top:1rem">
+          <div class="actions stack">
             <label>TradingView username (for invite)
               <input id="tv-monthly" placeholder="@your.tradingview" required>
             </label>
@@ -665,7 +650,7 @@
               <input class="tick" type="checkbox" id="consent-monthly">
               <span>I understand SignalPilot is educational. No financial advice.</span>
             </label>
-            <div id="paypal-button-container-P-6UD12522YR208981MNDQ3QPA"></div>
+            <div class="pp-slot" id="paypal-button-container-P-6UD12522YR208981MNDQ3QPA"></div>
             <button class="btn btn-disabled btn-card-notify" data-plan="Monthly" type="button">Pay by card (coming soon)</button>
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
           </div>
@@ -681,7 +666,7 @@
             <li>Preset pack updates</li>
             <li>Priority email support</li>
           </ul>
-          <div class="stack" style="margin-top:1rem">
+          <div class="actions stack">
             <label>TradingView username (for invite)
               <input id="tv-quarterly" placeholder="@your.tradingview" required>
             </label>
@@ -689,7 +674,7 @@
               <input class="tick" type="checkbox" id="consent-quarterly">
               <span>I understand SignalPilot is educational. No financial advice.</span>
             </label>
-            <div id="paypal-button-container-P-4VR929208D839202YNDQ3T6Q"></div>
+            <div class="pp-slot" id="paypal-button-container-P-4VR929208D839202YNDQ3T6Q"></div>
             <button class="btn btn-disabled btn-card-notify" data-plan="Quarterly" type="button">Pay by card (coming soon)</button>
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
           </div>
@@ -705,7 +690,7 @@
             <li>Private office hours</li>
             <li><strong>All new indicators included</strong> while active</li>
           </ul>
-          <div class="stack" style="margin-top:1rem">
+          <div class="actions stack">
             <label>TradingView username (for invite)
               <input id="tv-yearly" placeholder="@your.tradingview" required>
             </label>
@@ -713,7 +698,7 @@
               <input class="tick" type="checkbox" id="consent-yearly">
               <span>I understand SignalPilot is educational. No financial advice.</span>
             </label>
-            <div id="paypal-button-container-P-43M86339WD725333MNDQ3VGI"></div>
+            <div class="pp-slot" id="paypal-button-container-P-43M86339WD725333MNDQ3VGI"></div>
             <button class="btn btn-disabled btn-card-notify" data-plan="Yearly" type="button">Pay by card (coming soon)</button>
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
           </div>
@@ -728,7 +713,7 @@
             <li>Founding member perks & feature priority</li>
             <li>Private Discord for life + full preset bundle</li>
           </ul>
-          <div class="stack" style="margin-top:1rem">
+          <div class="actions stack">
             <form id="pp-lifetime" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="display:grid;gap:.6rem">
               <input type="hidden" name="cmd" value="_s-xclick" />
               <input type="hidden" name="hosted_button_id" value="N6TJGG9LXSE2L" />
@@ -744,7 +729,9 @@
               <input type="hidden" name="custom" id="pp-lifetime-custom" value=""/>
               <input type="hidden" name="return" id="pp-lifetime-return" value=""/>
               <input type="hidden" name="cancel_return" id="pp-lifetime-cancel" value=""/>
-              <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="Pay with PayPal" alt="Buy Now" />
+              <div class="pp-slot">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="Pay with PayPal" alt="Buy Now" />
+              </div>
             </form>
             <button class="btn btn-disabled btn-card-notify" data-plan="Lifetime" type="button">Pay by card (coming soon)</button>
             <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
