@@ -69,8 +69,7 @@
       color-scheme: dark;
       --bg:#05070d; --bg-soft:#0c111c; --bg-elev:#0f1524;
       --text:#ecf1ff; --muted:#b7c2d9; --muted-2:#8ea0bf;
-      --brand:#5b8aff; --brand-2:#7b9ff; --accent:#76ddff;
-      --brand-2:#7b9bff;
+      --brand:#5b8aff; --brand-2:#7b9bff; --accent:#76ddff;
       --crypto:#ffb347; --good:#3ed598; --warn:#f9a23c;
       --radius:16px; --shadow:0 18px 60px rgba(12,16,27,.35);
       --max:1160px;
@@ -79,7 +78,7 @@
     }
     *{box-sizing:border-box}
 
-    /* ===== Always-visible background ===== */
+    /* ===== Base background (radials) ===== */
     html,body{
       margin:0; color:var(--text);
       font:16px/1.6 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -91,17 +90,23 @@
         var(--bg);
       padding-bottom: env(safe-area-inset-bottom);
     }
+
     /* Typography / readability */
     body{ font-size:clamp(16px,0.9vw + 12px,18px); line-height:1.7; letter-spacing:.005em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
     .measure{ max-width:var(--measure); }
-    h1,h2,h3{ text-wrap:balance; line-height:1.12; }
+    h1,h2,h3{ text-wrap:balance; }
     p, li{ text-wrap:pretty; }
     p + p{ margin-top:.6rem; }
     ul,ol{ padding-left:1.2rem; }
     :where(section, .card) :where(ul,ol) :where(li + li){ margin-top:.25rem; }
     :where(a,button,input,select,textarea):focus-visible{ outline:2px solid color-mix(in srgb, var(--brand) 72%, white 8%); outline-offset:3px; border-radius:8px; }
 
-    /* Aurora layer */
+    /* ===== Background layers ===== */
+    .bg-net{
+      position:fixed; inset:0;
+      z-index:-2; pointer-events:none;
+      opacity:.55; filter:saturate(115%) brightness(110%);
+    }
     .bg-aurora{
       position:fixed; inset:0; z-index:-1; pointer-events:none;
       background:
@@ -117,16 +122,18 @@
     }
     @keyframes aurora-pan { from{transform:translate3d(-2%,-1%,0) scale(1.02)} to{transform:translate3d(2%,1%,0) scale(1.05)} }
 
-    /* Tech grid overlay */
     body::after{
       content:"";
-      position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.22;
+      position:fixed; inset:0; z-index:-3; pointer-events:none; opacity:.22;
       background-image:
         linear-gradient(transparent 31px, rgba(255,255,255,.10) 32px, transparent 33px),
         linear-gradient(90deg, transparent 31px, rgba(255,255,255,.08) 32px, transparent 33px);
       background-size:64px 64px;
     }
-    @media (prefers-reduced-motion: reduce){ .bg-aurora{animation:none} }
+    @media (prefers-reduced-motion: reduce){
+      .bg-aurora{animation:none}
+      .bg-net{display:none}
+    }
 
     /* Layout */
     .container{
@@ -142,18 +149,16 @@
     .section{padding:clamp(1.6rem,5.5vw,2.8rem) 0}
 
     .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .8rem;border-radius:999px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem;color:#bfe7ff;background:rgba(118,221,255,.18);border:1px solid rgba(118,221,255,.28)}
-    /* HEADLINE — fix for clipped glyphs (e.g., “G”) on multi-line gradient text */
+
+    /* HEADLINE — safe for multi‑line gradient */
     .headline{
-      font-weight:900;
-      letter-spacing:-.02em;
-      line-height:1.14;              /* more breathing room between lines */
+      font-weight:900; letter-spacing:-.02em;
+      line-height:1.14;
       background:var(--grad);
-      -webkit-background-clip:text;
-      background-clip:text;
-      -webkit-text-fill-color:transparent;
-      text-shadow:0 0 0 rgba(0,0,0,0);/* WebKit paint fix */
-      padding:.06em 0 .04em;         /* safe top/bottom to avoid crop */
-      overflow:visible;              /* ensure no clipping */
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      text-shadow:0 0 0 rgba(0,0,0,0);
+      padding:.08em 0 .05em;
+      overflow:visible;
     }
     .headline.xl{font-size:clamp(2.2rem,7vw,4rem)}
     .headline.lg{font-size:clamp(1.7rem,5vw,2.7rem)}
@@ -180,7 +185,6 @@
     nav ul{list-style:none;margin:0;padding:0;display:flex;gap:.5rem;flex-wrap:wrap}
     nav a{display:inline-flex;padding:.45rem .75rem;border-radius:999px;color:#9fb6e6;font-weight:700;text-decoration:none}
     nav a:hover,nav a:focus-visible{color:#fff;background:rgba(255,255,255,.12)}
-    /* Sticky price pill */
     .price-pill{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .6rem;border-radius:999px;font-weight:800;font-size:.85rem;color:#cfe1ff;background:rgba(123,155,255,.15);border:1px solid rgba(123,155,255,.26)}
     @media (max-width:1060px){ .menu-toggle{display:inline-flex} nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:1rem;max-width:min(92vw,420px)} .open{display:flex} header .btn.btn-primary{display:none} .price-pill{display:none} }
 
@@ -305,7 +309,9 @@
 </head>
 <body>
 
-<!-- background -->
+<!-- Particle network background -->
+<canvas id="bg-net" class="bg-net" aria-hidden="true"></canvas>
+<!-- Aurora layer -->
 <div class="bg-aurora" aria-hidden="true"></div>
 
 <header>
@@ -347,7 +353,6 @@
           <strong>SP‑EC Pro (Event Candles)</strong> plus focused companion modules—built to work together.
         </p>
 
-        <!-- Proof bar -->
         <div class="proof-bar">
           <span class="mini-pill">Non‑repainting</span>
           <span class="mini-pill">Alert‑ready</span>
@@ -422,7 +427,6 @@
       <h2 class="headline lg reveal">What’s inside the Trading Suite</h2>
 
       <div class="grid auto-300 reveal">
-        <!-- (Products unchanged for brevity) -->
         <!-- EC Pro -->
         <article class="card product">
           <div class="title mod">
@@ -441,7 +445,6 @@
           </div>
         </article>
 
-        <!-- (Other product cards remain identical to previous version) -->
         <!-- PVA -->
         <article class="card product">
           <div class="title mod">
@@ -560,22 +563,6 @@
           </div>
         </article>
 
-        <!-- SDZ -->
-        <article class="card product">
-          <div class="title mod">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <rect x="4" y="6" width="8" height="5" rx="1"/><rect x="12" y="13" width="8" height="5" rx="1"/><path d="M12 8h3M9 16h3" opacity=".6"/>
-            </svg>
-            <h3>SP‑SDZ — Supply/Demand zones</h3>
-          </div>
-          <div class="punch">Supply or demand—no ambiguity.</div>
-          <p class="note">Boxes true supply (red) and demand (green) so your context is crystal clear.</p>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-sdz" aria-expanded="false" aria-controls="pro-sdz">Pro description</button>
-          <div id="pro-sdz" class="pro note" hidden>
-            Confirms swing pivots, boxes the real zone (wick + body) and projects forward—minimal noise; maximum structure.
-          </div>
-        </article>
-
         <!-- Screener -->
         <article class="card product">
           <div class="title mod">
@@ -624,59 +611,41 @@
     </div>
   </section>
 
-  <!-- ROADMAP -->
+  <!-- ROADMAP (customer‑facing: concise + benefits only) -->
   <section id="roadmap" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal">Roadmap — V1 is just the start</h2>
-      <p class="note reveal measure">We ship in public. Timelines may shift, but the direction is constant: more clarity, less noise.</p>
+      <h2 class="headline lg reveal">Roadmap — what’s next</h2>
+      <p class="note reveal measure">We ship fast. Timelines may shift a little, but the direction is constant: more clarity, less noise.</p>
 
       <div class="grid reveal" style="gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
         <div class="card">
-          <strong>T‑0 → V1 “Launch set”</strong>
+          <strong>Available now</strong>
           <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li>Complete V1 Trading Suite (non‑repaint, presets, alerts)</li>
-            <li>PayPal subs (black), Crypto Prepaid Pass (–20%), Lifetime</li>
-            <li>Invite automation + site polish + FAQ</li>
+            <li><b>Bias:</b> EC Pro + MACD+</li>
+            <li><b>Participation:</b> PVA & OBV</li>
+            <li><b>Structure:</b> SDZ boxes & anchored Levels</li>
+            <li><b>Timing:</b> RSI Triad & SRSI+</li>
+            <li><b>Automation:</b> Screener & alerts</li>
+            <li><b>Fast access:</b> PayPal/Card 1–8h · Crypto 1–3h</li>
           </ul>
         </div>
+
         <div class="card">
-          <strong>V1.1 — Onboarding & trust (Weeks 1–4)</strong>
+          <strong>Rolling out next</strong>
           <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li>Playbooks (PDF) & quick‑start preset</li>
-            <li>3 case studies + before/after slider</li>
-            <li>Office hours (Discord) + searchable Q&A</li>
+            <li>Preset bundle + quick‑start docs</li>
+            <li>Short video tips & mini case studies</li>
+            <li>Watchlist alerts & simple webhooks</li>
           </ul>
         </div>
+
         <div class="card">
-          <strong>V1.2 — Proof & workflow (Month 2–3)</strong>
+          <strong>Later this year</strong>
           <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li>Backtest templates & CSV exporter examples</li>
-            <li>Preset gallery (scalp / intraday / swing)</li>
-            <li>Versioned release notes</li>
-          </ul>
-        </div>
-        <div class="card">
-          <strong>V1.3 — Scale alerts (Month 3–4)</strong>
-          <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li>Screener v2 (watchlist alerts, filters)</li>
-            <li>Webhook helpers (Discord/Telegram/Slack)</li>
-            <li>Session Player (preview)</li>
-          </ul>
-        </div>
-        <div class="card">
-          <strong>V1.4 — Expansion modules (Month 4–6)</strong>
-          <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li>SP‑Range Pro</li>
-            <li>SP‑Liquidity Map</li>
-            <li>Backtest exporter v2 (batch symbol×TF)</li>
-          </ul>
-        </div>
-        <div class="card">
-          <strong>Community & marketing (starts at V1)</strong>
-          <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li>Open socials (X, YT, TG), 2–3 micro‑tutorials/week</li>
-            <li>Monthly “What shipped” video & public roadmap</li>
-            <li>Education‑first affiliate (curated)</li>
+            <li>SP‑Range Pro & SP‑Liquidity Map</li>
+            <li>Preset library + session playback</li>
+            <li>Backtest templates & exporter examples</li>
+            <li>Localization (ES / PT‑BR / DE)</li>
           </ul>
         </div>
       </div>
@@ -978,7 +947,7 @@
   <section id="faq" class="section">
     <div class="container stack">
       <h2 class="headline lg reveal">FAQ</h2>
-      <div class="grid auto-300 reveal">
+    <div class="grid auto-300 reveal">
         <div class="card"><strong>Is this financial advice?</strong><p class="note">No. SignalPilot is an educational toolset. Examples and backtests are for learning only.</p></div>
         <div class="card"><strong>Do the signals repaint?</strong><p class="note">No—signals finalize on candle close. Everything is alert‑ready.</p></div>
         <div class="card"><strong>What markets & timeframes?</strong><p class="note">Anything on TradingView—crypto, FX, indices, equities, commodities. Scalps to swings.</p></div>
@@ -1134,7 +1103,8 @@
   window.addEventListener('scroll',updateCta,{passive:true}); updateCta();
   ctaClose?.addEventListener('click',()=>{dismissed=true;updateCta();});
   (function(){
-    const targets=['#pricing','#pay-crypto','#affiliate','#waitlist','#how'];
+    /* Added '#roadmap' so the sticky bar does NOT cover the roadmap on mobile */
+    const targets=['#pricing','#pay-crypto','#affiliate','#waitlist','#how','#roadmap'];
     const io2=new IntersectionObserver(entries=>{
       suppressed = entries.some(e=>e.isIntersecting);
       updateCta();
@@ -1153,7 +1123,7 @@
     window.addEventListener('hashchange',showThanks); showThanks();
   })();
 
-  // Card notify modal (open/close + focus)
+  // Card notify modal (open/close + focus trap)
   (function(){
     const modal=document.getElementById('cardNotify');
     function focusTrap(e){
@@ -1175,6 +1145,70 @@
     document.querySelectorAll('.btn-card-notify').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.plan)));
     modal?.addEventListener('click',e=>{ if(e.target===modal || e.target.hasAttribute('data-close')) closeModal(); });
     document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+  })();
+
+  /* Particle network background */
+  (function(){
+    const c = document.getElementById('bg-net'); if(!c) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce) return;
+
+    const ctx = c.getContext('2d');
+    let W=0,H=0,DPR=1, N=0, MAX, parts=[], raf;
+
+    function reset(){
+      DPR = Math.min(window.devicePixelRatio||1, 2);
+      c.style.width = window.innerWidth + 'px';
+      c.style.height = window.innerHeight + 'px';
+      W = c.width  = Math.floor(window.innerWidth * DPR);
+      H = c.height = Math.floor(window.innerHeight * DPR);
+
+      N = (window.innerWidth < 560) ? 28 : (window.innerWidth < 1100) ? 44 : 72;
+      MAX = (window.innerWidth < 560 ? 90 : 120) * DPR;
+
+      parts = Array.from({length:N}, ()=>({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        vx: (Math.random()*2-1)*0.08*DPR,
+        vy: (Math.random()*2-1)*0.08*DPR,
+        r:  (Math.random()*1.2+0.4)*DPR
+      }));
+    }
+
+    function draw(){
+      raf = requestAnimationFrame(draw);
+      ctx.clearRect(0,0,W,H);
+      ctx.globalCompositeOperation = 'lighter';
+
+      for(let i=0;i<N;i++){
+        const p=parts[i];
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0||p.x>W) p.vx*=-1;
+        if(p.y<0||p.y>H) p.vy*=-1;
+
+        // node
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(140,198,255,0.55)';
+        ctx.fill();
+
+        // connections
+        for(let j=i+1;j<N;j++){
+          const q=parts[j];
+          const dx=p.x-q.x, dy=p.y-q.y;
+          const d=Math.hypot(dx,dy);
+          if(d<MAX){
+            const a=(1-d/MAX)*0.65;
+            ctx.strokeStyle=`rgba(124,202,255,${a})`;
+            ctx.lineWidth=0.6*DPR;
+            ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+          }
+        }
+      }
+    }
+
+    reset(); draw();
+    window.addEventListener('resize', ()=>{ cancelAnimationFrame(raf); reset(); draw(); }, {passive:true});
   })();
 </script>
 
