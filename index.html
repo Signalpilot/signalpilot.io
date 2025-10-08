@@ -90,6 +90,8 @@
         var(--bg);
       padding-bottom: env(safe-area-inset-bottom);
     }
+    /* RTL flip when Arabic selected */
+    html[dir="rtl"] body{ direction:rtl; }
 
     /* Typography / readability */
     body{ font-size:clamp(16px,0.9vw + 12px,18px); line-height:1.7; letter-spacing:.005em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
@@ -187,6 +189,15 @@
     nav a:hover,nav a:focus-visible{color:#fff;background:rgba(255,255,255,.12)}
     .price-pill{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .6rem;border-radius:999px;font-weight:800;font-size:.85rem;color:#cfe1ff;background:rgba(123,155,255,.15);border:1px solid rgba(123,155,255,.26)}
     @media (max-width:1060px){ .menu-toggle{display:inline-flex} nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:1rem;max-width:min(92vw,420px)} .open{display:flex} header .btn.btn-primary{display:none} .price-pill{display:none} }
+
+    /* Language switcher */
+    #langSelect{
+      background:rgba(255,255,255,.08);
+      color:#cfe1ff;
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:10px;
+      padding:.35rem .5rem;
+    }
 
     /* HERO */
     .hero{padding:clamp(1.6rem,8vw,4.2rem) 0 1.2rem}
@@ -323,18 +334,31 @@
     <div class="nav-spacer"></div>
     <nav id="mainnav" aria-label="Main">
       <ul>
-        <li><a href="#why">Why SignalPilot</a></li>
-        <li><a href="#inside">What’s inside</a></li>
-        <li><a href="#how">How it works</a></li>
-        <li><a href="#roadmap">Roadmap</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#pay-crypto">Pay with crypto</a></li>
-        <li><a href="#affiliate">Affiliate</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a data-i18n="nav.why"     href="#why">Why SignalPilot</a></li>
+        <li><a data-i18n="nav.inside"  href="#inside">What’s inside</a></li>
+        <li><a data-i18n="nav.how"     href="#how">How it works</a></li>
+        <li><a data-i18n="nav.roadmap" href="#roadmap">Roadmap</a></li>
+        <li><a data-i18n="nav.pricing" href="#pricing">Pricing</a></li>
+        <li><a data-i18n="nav.crypto"  href="#pay-crypto">Pay with crypto</a></li>
+        <li><a data-i18n="nav.aff"     href="#affiliate">Affiliate</a></li>
+        <li><a data-i18n="nav.faq"     href="#faq">FAQ</a></li>
       </ul>
     </nav>
+
+    <!-- Language switcher -->
+    <select id="langSelect" aria-label="Language">
+      <option value="en">EN</option>
+      <option value="de">DE</option>
+      <option value="fr">FR</option>
+      <option value="es">ES</option>
+      <option value="it">IT</option>
+      <option value="zh">中文</option>
+      <option value="ar">العربية</option>
+      <option value="ru">RU</option>
+    </select>
+
     <span class="price-pill">From <strong>$79/mo</strong></span>
-    <a class="btn btn-primary" href="#pricing">Get the Suite</a>
+    <a class="btn btn-primary" href="#pricing" data-i18n="hero.ctaGet">Get the Suite</a>
     <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav">⋯</button>
   </div>
 </header>
@@ -345,9 +369,9 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="stack reveal">
-        <div class="badgebar"><span class="badge">TRADINGVIEW INDICATORS · ANY MARKET · ANY TIMEFRAME</span></div>
-        <h1 class="headline xl">SignalPilot —<br>Trading Suite</h1>
-        <p class="measure" style="color:var(--muted)">
+        <div class="badgebar"><span class="badge" data-i18n="hero.badge">TRADINGVIEW INDICATORS · ANY MARKET · ANY TIMEFRAME</span></div>
+        <h1 class="headline xl" data-i18n="hero.title" data-i18n-html="1">SignalPilot —<br>Trading Suite</h1>
+        <p class="measure" style="color:var(--muted)" data-i18n="hero.lead" data-i18n-html="1">
           See the bias, read the pressure, time the move. SignalPilot turns structure, volume and momentum into clean,
           <strong>non‑repainting</strong> signals you can scan, alert and trade on any market or timeframe. Flagship
           <strong>SP‑EC Pro (Event Candles)</strong> plus focused companion modules—built to work together.
@@ -362,9 +386,9 @@
 
         <p class="note">Every plan includes the full suite, support, ongoing updates—and access to the upcoming indicators.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="#pricing">Get the Suite</a>
-          <a class="btn btn-ghost" href="#docs">View Docs (soon)</a>
-          <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
+          <a class="btn btn-primary" href="#pricing" data-i18n="hero.ctaGet">Get the Suite</a>
+          <a class="btn btn-ghost" href="#docs" data-i18n="hero.ctaDocs">View Docs (soon)</a>
+          <a class="btn btn-crypto" href="#pay-crypto" data-i18n="hero.ctaCrypto">Pay with crypto (–20%)</a>
         </div>
       </div>
 
@@ -375,7 +399,7 @@
             <div style="display:flex;align-items:center;gap:.6rem">
               <span style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12)"></span>
               <strong>Launch in</strong>
-              <span id="countdown" class="pill">00d 00h 00m 00s</span>
+              <span id="countdown" class="pill">--d --h --m --s</span>
             </div>
             <div style="display:flex;gap:.6rem;flex-wrap:wrap">
               <a class="btn btn-primary" href="#waitlist">Notify me</a>
@@ -611,7 +635,7 @@
     </div>
   </section>
 
-  <!-- ROADMAP (customer‑facing: concise + benefits only) -->
+  <!-- ROADMAP -->
   <section id="roadmap" class="section">
     <div class="container stack">
       <h2 class="headline lg reveal">Roadmap — what’s next</h2>
@@ -675,7 +699,7 @@
           </ul>
           <div class="actions stack">
             <label>TradingView username (for invite)
-              <input id="tv-monthly" placeholder="@your.tradingview" required>
+              <input id="tv-monthly" placeholder="@your.tradingview" data-i18n="form.tvPlaceholder" data-i18n-attr="placeholder" required>
             </label>
             <label class="consent">
               <input class="tick" type="checkbox" id="consent-monthly">
@@ -699,7 +723,7 @@
           </ul>
           <div class="actions stack">
             <label>TradingView username (for invite)
-              <input id="tv-quarterly" placeholder="@your.tradingview" required>
+              <input id="tv-quarterly" placeholder="@your.tradingview" data-i18n="form.tvPlaceholder" data-i18n-attr="placeholder" required>
             </label>
             <label class="consent">
               <input class="tick" type="checkbox" id="consent-quarterly">
@@ -723,7 +747,7 @@
           </ul>
           <div class="actions stack">
             <label>TradingView username (for invite)
-              <input id="tv-yearly" placeholder="@your.tradingview" required>
+              <input id="tv-yearly" placeholder="@your.tradingview" data-i18n="form.tvPlaceholder" data-i18n-attr="placeholder" required>
             </label>
             <label class="consent">
               <input class="tick" type="checkbox" id="consent-yearly">
@@ -751,7 +775,7 @@
               <input type="hidden" name="currency_code" value="USD" />
               <input type="hidden" name="on0" value="TradingView username (required for activation)"/>
               <label>TradingView username (required for activation)
-                <input name="os0" id="tv-lifetime" type="text" placeholder="@your.tradingview" required>
+                <input name="os0" id="tv-lifetime" type="text" placeholder="@your.tradingview" data-i18n="form.tvPlaceholder" data-i18n-attr="placeholder" required>
               </label>
               <label class="consent">
                 <input class="tick" type="checkbox" id="consent-lifetime">
@@ -821,7 +845,7 @@
                 <input name="email" type="email" placeholder="you@domain.com" required>
               </label>
               <label>TradingView username (for invite)
-                <input name="tradingview" type="text" placeholder="@your.tradingview" required>
+                <input name="tradingview" type="text" placeholder="@your.tradingview" data-i18n="form.tvPlaceholder" data-i18n-attr="placeholder" required>
               </label>
             </div>
 
@@ -935,7 +959,7 @@
             <label for="wl-name">Name<input id="wl-name" name="name" required></label>
             <label for="wl-email">Email<input id="wl-email" name="email" type="email" required></label>
           </div>
-          <label for="wl-tv">TradingView username<input id="wl-tv" name="tradingview" placeholder="@your.tradingview" required></label>
+          <label for="wl-tv">TradingView username<input id="wl-tv" name="tradingview" placeholder="@your.tradingview" data-i18n="form.tvPlaceholder" data-i18n-attr="placeholder" required></label>
           <label for="wl-focus">Trading focus (optional)<input id="wl-focus" name="focus" placeholder="e.g., BTC, FX NY session, swing"></label>
           <button class="btn btn-primary" type="submit">Join the waitlist</button>
         </form>
@@ -985,8 +1009,8 @@
   <div class="cta-inner">
     <div class="bar">
       <div class="note" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">See the bias. Trade the plan.</div>
-      <a class="btn btn-primary btn-sm" href="#pricing">Get the Suite</a>
-      <a class="btn btn-crypto btn-sm" href="#pay-crypto">Crypto (–20%)</a>
+      <a class="btn btn-primary btn-sm" href="#pricing" data-i18n="hero.ctaGet">Get the Suite</a>
+      <a class="btn btn-crypto btn-sm" href="#pay-crypto" data-i18n="hero.ctaCrypto">Crypto (–20%)</a>
       <button class="cta-close" id="ctaClose" aria-label="Close">✕</button>
     </div>
   </div>
@@ -1011,7 +1035,7 @@
         <label for="cn-name">Name<input id="cn-name" name="name" required></label>
         <label for="cn-email">Email<input id="cn-email" name="email" type="email" required></label>
       </div>
-      <label for="cn-tv">TradingView username<input id="cn-tv" name="tradingview" placeholder="@your.tradingview" required></label>
+      <label for="cn-tv">TradingView username<input id="cn-tv" name="tradingview" placeholder="@your.tradingview" data-i18n="form.tvPlaceholder" data-i18n-attr="placeholder" required></label>
       <button class="btn btn-primary" type="submit">Notify me</button>
       <a class="btn btn-ghost" href="#waitlist" style="margin-left:.4rem">Go to waitlist</a>
     </form>
@@ -1027,6 +1051,163 @@
     </div>
   </div>
 </footer>
+
+<!-- ========= Minimal i18n engine (EN, DE, FR, ES, IT, ZH, AR, RU) ========= -->
+<script>
+(function(){
+  const SUP = ['en','de','fr','es','it','zh','ar','ru'];
+  const LANG_TAG = {en:'en', de:'de', fr:'fr', es:'es', it:'it', zh:'zh-Hans', ar:'ar', ru:'ru'};
+  const I18N = {
+    en: {
+      meta: { title: "SignalPilot — Trading Suite", desc: "Structure, volume, momentum, regime — clean, non‑repainting signals." },
+      nav:  { why:"Why SignalPilot", inside:"What’s inside", how:"How it works", roadmap:"Roadmap", pricing:"Pricing", crypto:"Pay with crypto", aff:"Affiliate", faq:"FAQ" },
+      hero: {
+        badge:"TRADINGVIEW INDICATORS · ANY MARKET · ANY TIMEFRAME",
+        title:"SignalPilot —<br>Trading Suite",
+        lead:"See the bias, read the pressure, time the move. SignalPilot turns structure, volume and momentum into clean, <strong>non‑repainting</strong> signals you can scan, alert and trade on any market or timeframe. Flagship <strong>SP‑EC Pro (Event Candles)</strong> plus focused companion modules—built to work together.",
+        ctaGet:"Get the Suite",
+        ctaDocs:"View Docs (soon)",
+        ctaCrypto:"Pay with crypto (–20%)"
+      },
+      form:{ tvPlaceholder:"@your.tradingview" }
+    },
+    de: {
+      meta:{ title:"SignalPilot — Trading Suite", desc:"Struktur, Volumen, Momentum, Regime — klare, nicht neu zeichnende Signale." },
+      nav:{ why:"Warum SignalPilot", inside:"Was ist enthalten", how:"So funktioniert’s", roadmap:"Roadmap", pricing:"Preise", crypto:"Mit Krypto zahlen", aff:"Affiliate", faq:"FAQ" },
+      hero:{
+        badge:"TRADINGVIEW‑INDIKATOREN · JEDER MARKT · JEDER ZEITRAHMEN",
+        title:"SignalPilot —<br>Trading Suite",
+        lead:"Bias erkennen, Druck lesen, Entry timen. SignalPilot verwandelt Struktur, Volumen und Momentum in klare, <strong>nicht neu zeichnende</strong> Signale für jeden Markt und Zeitraum. Flaggschiff <strong>SP‑EC Pro</strong> plus abgestimmte Module.",
+        ctaGet:"Suite holen",
+        ctaDocs:"Dokumentation (bald)",
+        ctaCrypto:"Mit Krypto zahlen (–20%)"
+      },
+      form:{ tvPlaceholder:"@dein.tradingview" }
+    },
+    fr: {
+      meta:{ title:"SignalPilot — Suite de Trading", desc:"Structure, volume, momentum, régime — des signaux clairs et non‑repeints." },
+      nav:{ why:"Pourquoi SignalPilot", inside:"Ce qui est inclus", how:"Comment ça marche", roadmap:"Feuille de route", pricing:"Tarifs", crypto:"Payer en crypto", aff:"Affiliation", faq:"FAQ" },
+      hero:{
+        badge:"INDICATEURS TRADINGVIEW · TOUS MARCHÉS · TOUS HORIZONS",
+        title:"SignalPilot —<br>Suite de Trading",
+        lead:"Voir le biais, lire la pression, chronométrer l’entrée. SignalPilot transforme structure, volume et momentum en signaux <strong>non‑repeints</strong> que vous pouvez scanner, alerter et trader. <strong>SP‑EC Pro</strong> + modules complémentaires.",
+        ctaGet:"Obtenir la Suite",
+        ctaDocs:"Docs (bientôt)",
+        ctaCrypto:"Payer en crypto (–20%)"
+      },
+      form:{ tvPlaceholder:"@votre.tradingview" }
+    },
+    es: {
+      meta:{ title:"SignalPilot — Suite de Trading", desc:"Estructura, volumen, momentum y régimen — señales claras sin repaint." },
+      nav:{ why:"Por qué SignalPilot", inside:"Qué incluye", how:"Cómo funciona", roadmap:"Hoja de ruta", pricing:"Precios", crypto:"Pagar con cripto", aff:"Afiliados", faq:"FAQ" },
+      hero:{
+        badge:"INDICADORES PARA TRADINGVIEW · CUALQUIER MERCADO · CUALQUIER MARCO",
+        title:"SignalPilot —<br>Suite de Trading",
+        lead:"Vea el sesgo, lea la presión, sincronice la entrada. SignalPilot convierte estructura, volumen y momentum en señales <strong>sin repaint</strong> para escanear, alertar y operar en cualquier mercado y marco temporal. <strong>SP‑EC Pro</strong> + módulos.",
+        ctaGet:"Obtener la Suite",
+        ctaDocs:"Docs (pronto)",
+        ctaCrypto:"Pagar con cripto (–20%)"
+      },
+      form:{ tvPlaceholder:"@tu.tradingview" }
+    },
+    it: {
+      meta:{ title:"SignalPilot — Suite di Trading", desc:"Struttura, volume, momentum e regime — segnali chiari e non‑ridisegnati." },
+      nav:{ why:"Perché SignalPilot", inside:"Cosa include", how:"Come funziona", roadmap:"Roadmap", pricing:"Prezzi", crypto:"Paga in crypto", aff:"Affiliazione", faq:"FAQ" },
+      hero:{
+        badge:"INDICATORI TRADINGVIEW · QUALSIASI MERCATO · QUALSIASI TIMEFRAME",
+        title:"SignalPilot —<br>Suite di Trading",
+        lead:"Vedi il bias, leggi la pressione, scegli il timing. SignalPilot trasforma struttura, volume e momentum in segnali <strong>non‑ridisegnati</strong> che puoi scansionare, allertare e tradare su qualsiasi mercato e timeframe. <strong>SP‑EC Pro</strong> più moduli dedicati.",
+        ctaGet:"Ottieni la Suite",
+        ctaDocs:"Documentazione (presto)",
+        ctaCrypto:"Paga in crypto (–20%)"
+      },
+      form:{ tvPlaceholder:"@tuo.tradingview" }
+    },
+    zh: {
+      meta:{ title:"SignalPilot — 交易套件", desc:"结构、成交量、动量与趋势 —— 清晰、非重绘的信号。" },
+      nav:{ why:"为什么选择 SignalPilot", inside:"功能一览", how:"工作原理", roadmap:"路线图", pricing:"价格", crypto:"加密货币支付", aff:"推广合作", faq:"常见问题" },
+      hero:{
+        badge:"TRADINGVIEW 指标 · 适用任何市场与周期",
+        title:"SignalPilot —<br>交易套件",
+        lead:"看清方向，读懂动能，把握入场。SignalPilot 将结构、成交量与动量转化为<strong>非重绘</strong>的清晰信号，支持扫描、告警与交易；旗舰 <strong>SP‑EC Pro</strong> 搭配配套模块协同工作。",
+        ctaGet:"获取套件",
+        ctaDocs:"文档（即将推出）",
+        ctaCrypto:"使用加密货币支付（–20%）"
+      },
+      form:{ tvPlaceholder:"@你的.tradingview" }
+    },
+    ar: {
+      meta:{ title:"SignalPilot — حزمة التداول", desc:"البنية والحجم والزخم والنظام — إشارات واضحة غير معاد رسمها." },
+      nav:{ why:"لماذا SignalPilot", inside:"ماذا تتضمن", how:"كيف تعمل", roadmap:"خارطة الطريق", pricing:"الأسعار", crypto:"الدفع بالعملات المشفرة", aff:"برنامج الشركاء", faq:"الأسئلة الشائعة" },
+      hero:{
+        badge:"مؤشرات TRADINGVIEW · أي سوق · أي إطار زمني",
+        title:"SignalPilot —<br>حزمة التداول",
+        lead:"ارصد الانحياز، واقرأ الضغط، واضبط التوقيت. يحوّل SignalPilot البنية والحجم والزخم إلى إشارات <strong>غير معاد رسمها</strong> يمكن مسحها والتنبّه لها والتداول عليها في أي سوق وإطار زمني. المنتج الرئيسي <strong>SP‑EC Pro</strong> مع وحدات مساعدة.",
+        ctaGet:"احصل على الحزمة",
+        ctaDocs:"الوثائق (قريبًا)",
+        ctaCrypto:"ادفع بالعملات المشفرة (–20%)"
+      },
+      form:{ tvPlaceholder:"@حسابك.tradingview" }
+    },
+    ru: {
+      meta:{ title:"SignalPilot — Набор для трейдинга", desc:"Структура, объём, импульс, режим — чёткие, не перерисовывающиеся сигналы." },
+      nav:{ why:"Почему SignalPilot", inside:"Что внутри", how:"Как это работает", roadmap:"Дорожная карта", pricing:"Цены", crypto:"Оплата криптой", aff:"Партнёрка", faq:"FAQ" },
+      hero:{
+        badge:"ИНДИКАТОРЫ ДЛЯ TRADINGVIEW · ЛЮБОЙ РЫНОК · ЛЮБОЙ ТАЙМФРЕЙМ",
+        title:"SignalPilot —<br>Набор для трейдинга",
+        lead:"Увидьте смещение, прочитайте давление, выберите момент. SignalPilot превращает структуру, объём и импульс в <strong>не перерисовывающиеся</strong> сигналы для сканирования, алертов и торговли. Флагман <strong>SP‑EC Pro</strong> + модульный набор.",
+        ctaGet:"Получить набор",
+        ctaDocs:"Документация (скоро)",
+        ctaCrypto:"Оплатить криптой (–20%)"
+      },
+      form:{ tvPlaceholder:"@ваш.tradingview" }
+    }
+  };
+
+  function lookup(lang, key){
+    const walk = (o,p)=>p.split('.').reduce((a,k)=>a && a[k], o);
+    return walk(I18N[lang]||{}, key) ?? walk(I18N.en, key) ?? '';
+  }
+  function detect(){
+    const qp = new URLSearchParams(location.search).get('lang');
+    if (qp && SUP.includes(qp)) return qp;
+    const saved = localStorage.getItem('sp_lang'); if (saved && SUP.includes(saved)) return saved;
+    const cand = (navigator.languages||[navigator.language]).map(s=>s.toLowerCase());
+    for (const c of cand){ const base=c.split('-')[0]; if (SUP.includes(base)) return base; }
+    return 'en';
+  }
+  function apply(lang){
+    const doc = document.documentElement;
+    doc.setAttribute('lang', LANG_TAG[lang] || 'en');
+    doc.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      const val = lookup(lang, key);
+      if (!val) return;
+      const attr = el.getAttribute('data-i18n-attr');
+      const isHTML = el.hasAttribute('data-i18n-html');
+      if (attr) el.setAttribute(attr, val);
+      else if (isHTML) el.innerHTML = val;
+      else el.textContent = val;
+    });
+    document.title = lookup(lang, 'meta.title') || document.title;
+    const md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', lookup(lang,'meta.desc') || md.getAttribute('content'));
+    localStorage.setItem('sp_lang', lang);
+    const sel=document.getElementById('langSelect'); if(sel) sel.value=lang;
+  }
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const lang = detect();
+    apply(lang);
+    const sel=document.getElementById('langSelect');
+    sel && sel.addEventListener('change', e=>{
+      const v=e.target.value; if(!SUP.includes(v)) return;
+      apply(v);
+      const u=new URL(location.href); u.searchParams.set('lang', v); history.replaceState({}, '', u.toString());
+    });
+  });
+})();
+</script>
 
 <script>
   /* ===== Config & helpers ===== */
@@ -1060,31 +1241,37 @@
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  /* ===== Countdown — persistent until Oct 28, 2025 (local time) =====
-     - Reads existing epoch from localStorage to persist across reloads
-     - If absent, sets to local 2025-10-28 00:00:00
-     - Displays 00d 00h 00m 00s after the deadline
-  */
+  // ==== Countdown — persist to October 28 (rolls annually). Key v3 ====
   (function(){
-    const KEY='sp_launch_target_epoch_2025_10_28';
-    let t = Number(localStorage.getItem(KEY));
-    if (!t || Number.isNaN(t)) {
-      // Months are 0-based: 9 = October
-      const d = new Date(2025, 9, 28, 0, 0, 0); // local time
-      t = d.getTime();
-      localStorage.setItem(KEY, String(t));
+    const KEY='sp_launch_target_epoch_v3';
+    const now=new Date();
+    const thisYear=now.getFullYear();
+    function oct28Epoch(y){ return new Date(y, 9, 28, 0, 0, 0, 0).getTime(); } // Oct=9
+    let t=Number(localStorage.getItem(KEY)||'0');
+    const targetThis = oct28Epoch(thisYear);
+    const targetNext = oct28Epoch(thisYear+1);
+
+    // Initialize or refresh if past
+    if(!t){
+      t = (Date.now() <= targetThis) ? targetThis : targetNext;
+      localStorage.setItem(KEY,String(t));
+    } else if (Date.now() > t) {
+      // if a stale target remains (e.g., user returns after Oct 28), roll to next year
+      t = (Date.now() <= targetNext) ? targetNext : oct28Epoch(thisYear+2);
+      localStorage.setItem(KEY,String(t));
     }
-    const out = document.getElementById('countdown');
+
+    const out=document.getElementById('countdown');
     function tick(){
-      if(!out) return;
-      let diff = Math.max(0, t - Date.now());
-      const d  = Math.floor(diff / 86400000); diff %= 86400000;
-      const h  = Math.floor(diff / 3600000);  diff %= 3600000;
-      const m  = Math.floor(diff / 60000);    diff %= 60000;
-      const s  = Math.floor(diff / 1000);
-      out.textContent = `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+      let dff=t - Date.now();
+      if(dff <= 0){ out.textContent='LIVE'; return; }
+      const d=Math.floor(dff/86400000); dff%=86400000;
+      const h=Math.floor(dff/3600000);  dff%=3600000;
+      const m=Math.floor(dff/60000);    dff%=60000;
+      const s=Math.floor(dff/1000);
+      out.textContent=`${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
     }
-    tick(); setInterval(tick, 1000);
+    tick(); setInterval(tick,1000);
   })();
 
   // Copy to clipboard (+ live announcement)
