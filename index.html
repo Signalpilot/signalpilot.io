@@ -375,7 +375,7 @@
             <div style="display:flex;align-items:center;gap:.6rem">
               <span style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12)"></span>
               <strong>Launch in</strong>
-              <span id="countdown" class="pill">14d 00h 00m 00s</span>
+              <span id="countdown" class="pill">00d 00h 00m 00s</span>
             </div>
             <div style="display:flex;gap:.6rem;flex-wrap:wrap">
               <a class="btn btn-primary" href="#waitlist">Notify me</a>
@@ -1060,21 +1060,31 @@
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // Countdown — 14 days FROM YESTERDAY (new key v2)
+  /* ===== Countdown — persistent until Oct 28, 2025 (local time) =====
+     - Reads existing epoch from localStorage to persist across reloads
+     - If absent, sets to local 2025-10-28 00:00:00
+     - Displays 00d 00h 00m 00s after the deadline
+  */
   (function(){
-    const KEY='sp_launch_target_epoch_v2';
-    let t=0;
-    if(!t){
-      const base=new Date(); base.setDate(base.getDate()-1); // yesterday, same time-of-day
-      t=base.getTime()+14*24*60*60*1000;
-      localStorage.setItem(KEY,String(t));
+    const KEY='sp_launch_target_epoch_2025_10_28';
+    let t = Number(localStorage.getItem(KEY));
+    if (!t || Number.isNaN(t)) {
+      // Months are 0-based: 9 = October
+      const d = new Date(2025, 9, 28, 0, 0, 0); // local time
+      t = d.getTime();
+      localStorage.setItem(KEY, String(t));
     }
-    const out=document.getElementById('countdown');
-    function tick(){let dff=Math.max(0,t-Date.now());
-      const d=Math.floor(dff/86400000); dff%=86400000; const h=Math.floor(dff/3600000); dff%=3600000; const m=Math.floor(dff/60000); dff%=60000; const s=Math.floor(dff/1000);
-      out.textContent=`${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+    const out = document.getElementById('countdown');
+    function tick(){
+      if(!out) return;
+      let diff = Math.max(0, t - Date.now());
+      const d  = Math.floor(diff / 86400000); diff %= 86400000;
+      const h  = Math.floor(diff / 3600000);  diff %= 3600000;
+      const m  = Math.floor(diff / 60000);    diff %= 60000;
+      const s  = Math.floor(diff / 1000);
+      out.textContent = `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
     }
-    tick(); setInterval(tick,1000);
+    tick(); setInterval(tick, 1000);
   })();
 
   // Copy to clipboard (+ live announcement)
