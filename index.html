@@ -20,17 +20,14 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Perf (optional analytics) -->
-  <link rel="preconnect" href="https://plausible.io">
-  <link rel="dns-prefetch" href="https://plausible.io">
+  <link rel="preconnect" href="https://plausible.io"><link rel="dns-prefetch" href="https://plausible.io">
   <script defer data-domain="signalpilot.io" src="https://plausible.io/js/script.js"></script>
 
   <!-- PayPal + Forms -->
-  <link rel="preconnect" href="https://www.paypal.com">
-  <link rel="dns-prefetch" href="https://www.paypal.com">
-  <link rel="preconnect" href="https://formspree.io">
-  <link rel="dns-prefetch" href="https://formspree.io">
+  <link rel="preconnect" href="https://www.paypal.com"><link rel="dns-prefetch" href="https://www.paypal.com">
+  <link rel="preconnect" href="https://formspree.io"><link rel="dns-prefetch" href="https://formspree.io">
 
-  <!-- Structured data (Product + FAQ + Org) -->
+  <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -48,17 +45,12 @@
   }
   </script>
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {"@type":"Question","name":"Is this financial advice?","acceptedAnswer":{"@type":"Answer","text":"No. SignalPilot is educational only."}},
-      {"@type":"Question","name":"Do the signals repaint?","acceptedAnswer":{"@type":"Answer","text":"No—signals finalize on candle close."}},
-      {"@type":"Question","name":"What markets & timeframes?","acceptedAnswer":{"@type":"Answer","text":"Anything on TradingView—crypto, FX, indices, equities, commodities."}},
-      {"@type":"Question","name":"How fast is access?","acceptedAnswer":{"@type":"Answer","text":"PayPal/Card 1–8h · Crypto 1–3h after confirmations."}}
-    ]
-  }
-  </script>
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"Is this financial advice?","acceptedAnswer":{"@type":"Answer","text":"No. SignalPilot is educational only."}},
+    {"@type":"Question","name":"Do the signals repaint?","acceptedAnswer":{"@type":"Answer","text":"No—signals finalize on candle close."}},
+    {"@type":"Question","name":"What markets & timeframes?","acceptedAnswer":{"@type":"Answer","text":"Anything on TradingView—crypto, FX, indices, equities, commodities."}},
+    {"@type":"Question","name":"How fast is access?","acceptedAnswer":{"@type":"Answer","text":"PayPal/Card 1–8h · Crypto 1–3h after confirmations."}}
+  ]}</script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Organization","name":"SignalPilot Labs, Inc.","url":"https://www.signalpilot.io"}
   </script>
@@ -71,14 +63,17 @@
       --brand:#5b8aff; --brand-2:#7b9bff; --accent:#76ddff;
       --crypto:#ffb347; --good:#3ed598; --warn:#f9a23c;
       --radius:16px; --shadow:0 18px 60px rgba(12,16,27,.35);
-      --max:1160px;
+      --max:1160px; --measure:68ch;
       --grad:linear-gradient(90deg,#9cc0ff 0%,#86a8ff 35%,#7ccaff 60%,#8ca5ff 85%,#b9d4ff 100%);
-      --measure: 68ch;
     }
     *{box-sizing:border-box}
     html,body{margin:0}
 
-    /* ===== Base background (radials) ===== */
+    /* ===== Background layers (THIS is the background you like) =====
+       1) Subtle blueprint grid (CSS pseudo element)
+       2) Aurora blur (soft colored blobs)
+       3) Constellation network (animated canvas with dots + lines)
+    */
     body{
       color:var(--text);
       font:16px/1.65 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Noto Sans",sans-serif;
@@ -91,22 +86,13 @@
       padding-bottom: env(safe-area-inset-bottom);
       overflow-x:hidden;
     }
-
-    /* Typography / readability */
-    body{ font-size:clamp(16px,0.9vw + 12px,18.5px); letter-spacing:.004em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
-    .measure{ max-width:var(--measure); }
-    h1,h2,h3{ margin:0 0 .4rem; text-wrap:balance; }
-    p, li{ text-wrap:pretty; }
-    p + p{ margin-top:.6rem; }
-    ul,ol{ padding-left:1.2rem; }
-    :where(section, .card) :where(ul,ol) :where(li + li){ margin-top:.25rem; }
-    :where(a,button,input,select,textarea):focus-visible{ outline:2px solid color-mix(in srgb, var(--brand) 72%, white 8%); outline-offset:3px; border-radius:8px; }
-
-    /* ===== Background layers ===== */
-    .bg-net{
-      position:fixed; inset:0;
-      z-index:-2; pointer-events:none;
-      opacity:.55; filter:saturate(115%) brightness(110%);
+    body::after{
+      /* blueprint grid */
+      content:""; position:fixed; inset:0; z-index:-3; pointer-events:none; opacity:.22;
+      background-image:
+        linear-gradient(transparent 31px, rgba(255,255,255,.10) 32px, transparent 33px),
+        linear-gradient(90deg, transparent 31px, rgba(255,255,255,.08) 32px, transparent 33px);
+      background-size:64px 64px;
     }
     .bg-aurora{
       position:fixed; inset:0; z-index:-1; pointer-events:none;
@@ -116,34 +102,25 @@
         radial-gradient(48% 36% at 78% 88%,  rgba(118,221,255,.28), transparent 70%),
         radial-gradient(26% 22% at 8% 72%,   rgba(151,124,255,.22), transparent 66%);
       filter: blur(70px) saturate(130%) brightness(110%);
-      mix-blend-mode: screen;
-      opacity:.85;
-      animation: aurora-pan 36s linear infinite alternate;
-      will-change: transform;
+      mix-blend-mode: screen; opacity:.85; animation: aurora-pan 36s linear infinite alternate;
     }
+    .bg-net{position:fixed; inset:0; z-index:-2; pointer-events:none; opacity:.55; filter:saturate(115%) brightness(110%);}
     @keyframes aurora-pan { from{transform:translate3d(-2%,-1%,0) scale(1.02)} to{transform:translate3d(2%,1%,0) scale(1.05)} }
+    @media (prefers-reduced-motion: reduce){ .bg-aurora{animation:none} .bg-net{display:none} }
 
-    body::after{
-      content:"";
-      position:fixed; inset:0; z-index:-3; pointer-events:none; opacity:.22;
-      background-image:
-        linear-gradient(transparent 31px, rgba(255,255,255,.10) 32px, transparent 33px),
-        linear-gradient(90deg, transparent 31px, rgba(255,255,255,.08) 32px, transparent 33px);
-      background-size:64px 64px;
-    }
-    @media (prefers-reduced-motion: reduce){
-      .bg-aurora{animation:none}
-      .bg-net{display:none}
-    }
+    /* Typography */
+    body{ font-size:clamp(16px,0.9vw + 12px,18.5px); letter-spacing:.004em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+    .measure{ max-width:var(--measure); }
+    h1,h2,h3{ margin:0 0 .4rem; text-wrap:balance; }
+    p, li{ text-wrap:pretty; }
+    p + p{ margin-top:.6rem; }
+    ul,ol{ padding-left:1.2rem; }
+    :where(section, .card) :where(ul,ol) :where(li + li){ margin-top:.25rem; }
+    :where(a,button,input,select,textarea):focus-visible{ outline:2px solid color-mix(in srgb, var(--brand) 72%, white 8%); outline-offset:3px; border-radius:8px; }
 
-    /* Layout */
-    .container{
-      max-width:var(--max);
-      width:100%;
-      margin:0 auto;
+    .container{ max-width:var(--max); width:100%; margin:0 auto;
       padding-left:calc(clamp(14px,4vw,22px) + env(safe-area-inset-left));
-      padding-right:calc(clamp(14px,4vw,22px) + env(safe-area-inset-right));
-    }
+      padding-right:calc(clamp(14px,4vw,22px) + env(safe-area-inset-right)); }
     .stack{display:grid;gap:1.2rem}
     .grid{display:grid;gap:1rem}
     .grid.auto-300{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
@@ -151,16 +128,8 @@
 
     .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .8rem;border-radius:999px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem;color:#bfe7ff;background:rgba(118,221,255,.18);border:1px solid rgba(118,221,255,.28)}
 
-    /* HEADLINE — safe for multi‑line gradient */
-    .headline{
-      font-weight:900; letter-spacing:-.02em;
-      line-height:1.14;
-      background:var(--grad);
-      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-      text-shadow:0 0 0 rgba(0,0,0,0);
-      padding:.08em 0 .05em;
-      overflow:visible;
-    }
+    .headline{font-weight:900; letter-spacing:-.02em; line-height:1.14; background:var(--grad);
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; padding:.08em 0 .05em; }
     .headline.xl{font-size:clamp(2.1rem,7vw,4rem)}
     .headline.lg{font-size:clamp(1.7rem,5vw,2.7rem)}
 
@@ -187,11 +156,8 @@
     nav a{display:inline-flex;padding:.45rem .75rem;border-radius:999px;color:#9fb6e6;font-weight:700;text-decoration:none}
     nav a:hover,nav a:focus-visible{color:#fff;background:rgba(255,255,255,.12)}
     .price-pill{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .6rem;border-radius:999px;font-weight:800;font-size:.85rem;color:#cfe1ff;background:rgba(123,155,255,.15);border:1px solid rgba(123,155,255,.26)}
-
-    /* language */
     .lang{display:inline-flex;align-items:center;gap:.5rem}
     .lang select{appearance:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#e6eeff;border-radius:999px;padding:.45rem .7rem;min-height:0;line-height:1;font-weight:800}
-
     @media (max-width:1060px){
       .menu-toggle{display:inline-flex}
       nav[aria-label="Main"]{
@@ -201,7 +167,6 @@
       .price-pill{display:none}
     }
 
-    /* HERO */
     .hero{padding:clamp(1.4rem,8vw,4.2rem) 0 1.2rem}
     .hero-grid{display:grid;gap:1.5rem;grid-template-columns:1.1fr .9fr}
     .hero-grid>*{min-width:0}
@@ -213,9 +178,8 @@
 
     .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease, transform .5s ease}
     .reveal.in{opacity:1;transform:translateY(0)}
-    @media (prefers-reduced-motion: reduce){.reveal{opacity:1 !important;transform:none !important;transition:none !important}}
+    @media (prefers-reduced-motion: reduce){.reveal{opacity:1 !important;transform:none !重要;transition:none !important}}
 
-    /* WHY */
     .why-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .feature{display:grid;grid-template-columns:44px 1fr;gap:.85rem;padding:1rem 1.05rem;border-radius:16px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));box-shadow:0 8px 24px rgba(12,16,27,.25)}
     .icon-wrap{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(139,167,255,.32),rgba(124,202,255,.22));border:1px solid rgba(255,255,255,.26)}
@@ -238,16 +202,13 @@
     .product p.note,.product .pro.note{color:#ecf1ff}
     .product .pro{border-top:1px solid rgba(255,255,255,.12);padding-top:.55rem;margin-top:.35rem}
 
-    /* PRICING GRID */
     .pricing-grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
     @media (max-width:1100px){ .pricing-grid{grid-template-columns:repeat(2,minmax(320px,1fr));justify-items:stretch} }
     @media (max-width:740px){ .pricing-grid{grid-template-columns:1fr} }
-
     .pill{display:inline-flex;gap:.4rem;align-items:center;background:rgba(255,255,255,.12);color:#a5b6db;padding:.28rem .6rem;border-radius:999px;font-size:.82rem;font-weight:800}
     .price{font-size:2.2rem;font-weight:900;letter-spacing:-.02em}
     .plan ul{margin:.2rem 0 0 1rem}.plan li{margin:.35rem 0}
     .ribbon{position:absolute;top:12px;right:12px;background:rgba(118,221,255,.2);border:1px solid rgba(118,221,255,.35);color:#ccecff;padding:.28rem .5rem;border-radius:999px;font-size:.8rem;font-weight:800}
-    .highlight{box-shadow:0 0 0 2px rgba(118,221,255,.35) inset, 0 10px 36px rgba(118,221,255,.18)}
 
     input[type="text"],input[type="email"],textarea,select{
       width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:12px;padding:.7rem .85rem}
@@ -259,30 +220,20 @@
     .consent{display:flex;gap:.6rem;align-items:flex-start;line-height:1.35;margin-top:.2rem;color:var(--muted-2)}
     .tick{width:1.1rem;height:1.1rem;flex:0 0 1.1rem;margin-top:.15rem;accent-color:var(--brand);background:transparent;border:0;padding:0}
 
-    /* Form helpers */
-    form label:not(.consent){ display:grid; gap:.35rem; }
-    .grid.two-col{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-    @media (max-width:560px){ .grid.two-col{ grid-template-columns: 1fr; } }
-    .grid-align-left{ align-self:center; justify-self:start; text-align:left; }
-
-    /* Align pricing card actions across columns */
     .pricing-grid .plan{ display:flex; flex-direction:column; }
     .plan .actions{ margin-top:auto !important; }
     .plan .actions .btn{ width:100%; justify-content:center; }
     .pp-slot{ min-height:48px; display:flex; align-items:center; justify-content:center; width:100%; }
     #pp-lifetime input[type="image"]{ display:block; height:40px; }
 
-    /* Sticky CTA bar */
     .cta-bar{position:fixed;left:0;right:0;bottom:-120px;transition:bottom .35s ease;z-index:50}
-    .cta-bar.show{bottom:0}
-    .cta-bar.hide{bottom:-140px}
+    .cta-bar.show{bottom:0} .cta-bar.hide{bottom:-140px}
     .cta-inner{max-width:var(--max);width:100%;margin:0 auto;padding-left:calc(clamp(14px,4vw,22px) + env(safe-area-inset-left));padding-right:calc(clamp(14px,4vw,22px) + env(safe-area-inset-right))}
     .cta-inner .bar{display:flex;gap:.8rem;align-items:center;background:rgba(10,12,20,.92);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);border-radius:14px;padding:.6rem .9rem calc(.6rem + env(safe-area-inset-bottom))}
     @media (max-width:1100px){ .cta-inner .bar{gap:.6rem;padding:.5rem .8rem calc(.5rem + env(safe-area-inset-bottom))} }
     .cta-close{margin-left:auto;border:none;background:transparent;color:#a5b6db}
 
     section[id]{scroll-margin-top:84px}
-    .paypal-buttons{width:100% !important;min-width:0 !important}
     footer{border-top:1px solid rgba(255,255,255,.08);padding:2rem 0 max(3rem,calc(2rem + env(safe-area-inset-bottom)));color:#a5b6db}
 
     .modal{position:fixed;inset:0;display:none;place-items:center;z-index:60;background:rgba(0,0,0,.55);backdrop-filter:blur(3px)}
@@ -292,1155 +243,1126 @@
     .modal-card h3{margin:0}
     .modal-close{background:transparent;border:none;color:#a5b6db;cursor:pointer}
 
-    /* PRICING ORDER */
-    #plan-monthly   { grid-area: monthly; }
-    #plan-quarterly { grid-area: quarterly; }
-    #plan-yearly    { grid-area: yearly; }
-    #plan-lifetime  { grid-area: lifetime; }
-    @media (min-width:1101px){
-      .pricing-grid{ display:grid;
-        grid-template-columns: repeat(4, minmax(260px, 1fr));
-        grid-template-areas: "monthly quarterly yearly lifetime";
-      }
-    }
-    @media (min-width:741px) and (max-width:1100px){
-      .pricing-grid{ display:grid;
-        grid-template-columns: repeat(2, minmax(300px, 1fr));
-        grid-template-areas:
-          "monthly quarterly"
-          "yearly   lifetime";
-      }
-    }
-    @media (max-width:740px){
-      .pricing-grid{ display:flex; flex-direction:column }
-      #plan-monthly{order:1} #plan-quarterly{order:2} #plan-yearly{order:3} #plan-lifetime{order:4}
-    }
-
-    /* Screen-reader only helper */
     .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
   </style>
 </head>
 <body>
+  <!-- Constellation canvas -->
+  <canvas id="bg-net" class="bg-net" aria-hidden="true"></canvas>
+  <!-- Aurora layer -->
+  <div class="bg-aurora" aria-hidden="true"></div>
 
-<!-- Particle network background -->
-<canvas id="bg-net" class="bg-net" aria-hidden="true"></canvas>
-<!-- Aurora layer -->
-<div class="bg-aurora" aria-hidden="true"></div>
+  <header>
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="SignalPilot">
+        <img src="assets/signalpilot-logo.svg" alt="SignalPilot" loading="lazy"/><span>SignalPilot</span>
+      </a>
+      <div class="nav-spacer"></div>
+      <nav id="mainnav" aria-label="Main">
+        <ul>
+          <li><a href="#why" data-i18n="nav.why">Why SignalPilot</a></li>
+          <li><a href="#inside" data-i18n="nav.inside">What’s inside</a></li>
+          <li><a href="#how" data-i18n="nav.how">How it works</a></li>
+          <li><a href="#roadmap" data-i18n="nav.roadmap">Roadmap</a></li>
+          <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
+          <li><a href="#pay-crypto" data-i18n="nav.crypto">Pay with crypto</a></li>
+          <li><a href="#affiliate" data-i18n="nav.aff">Affiliate</a></li>
+          <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <span class="price-pill" data-i18n="hdr.from79">From <strong>$79/mo</strong></span>
 
-<header>
-  <div class="container nav">
-    <a href="/" class="brand" aria-label="SignalPilot">
-      <img src="assets/signalpilot-logo.svg" alt="SignalPilot" loading="lazy"/>
-      <span>SignalPilot</span>
-    </a>
-    <div class="nav-spacer"></div>
-    <nav id="mainnav" aria-label="Main">
-      <ul>
-        <li><a href="#why" data-i18n="nav.why">Why SignalPilot</a></li>
-        <li><a href="#inside" data-i18n="nav.inside">What’s inside</a></li>
-        <li><a href="#how" data-i18n="nav.how">How it works</a></li>
-        <li><a href="#roadmap" data-i18n="nav.roadmap">Roadmap</a></li>
-        <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
-        <li><a href="#pay-crypto" data-i18n="nav.crypto">Pay with crypto</a></li>
-        <li><a href="#affiliate" data-i18n="nav.aff">Affiliate</a></li>
-        <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
-      </ul>
-    </nav>
-    <span class="price-pill" data-i18n="hdr.from79">From <strong>$79/mo</strong></span>
+      <!-- Language -->
+      <div class="lang" title="Language">
+        <label class="sr-only" for="lang">Language</label>
+        <select id="lang" aria-label="Language">
+          <option value="en">Eng</option>
+          <option value="de">Deu</option>
+        </select>
+      </div>
 
-    <!-- Language selector -->
-    <div class="lang" title="Language">
-      <label class="sr-only" for="lang">Language</label>
-      <select id="lang" aria-label="Language">
-        <option value="en">Eng</option>
-        <option value="de">Deu</option>
-        <option value="fr">Fra</option>
-        <option value="es">Esp</option>
-        <option value="it">Ita</option>
-        <option value="zh">中文</option>
-        <option value="ru">Рус</option>
-        <option value="ar">العربية</option>
-      </select>
+      <a class="btn btn-primary" href="#pricing" data-i18n="cta.get">Get the Suite</a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav" aria-label="Menu">⋯</button>
     </div>
+  </header>
 
-    <a class="btn btn-primary" href="#pricing" data-i18n="cta.get">Get the Suite</a>
-    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav" aria-label="Menu">⋯</button>
-  </div>
-</header>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="stack reveal">
+          <div class="badgebar"><span class="badge" data-i18n="hero.badge">TRADINGVIEW INDICATORS · ANY MARKET · ANY TIMEFRAME</span></div>
+          <h1 class="headline xl" data-i18n="hero.title">SignalPilot —<br>Trading Suite</h1>
+          <p class="measure" style="color:var(--muted)" data-i18n="hero.lead">
+            See the bias, read the pressure, time the move. SignalPilot turns structure, volume and momentum into clean,
+            <strong>non‑repainting</strong> signals you can scan, alert and trade on any market or timeframe. Flagship
+            <strong>SP‑EC Pro (Event Candles)</strong> plus focused companion modules—built to work together.
+          </p>
 
-<main>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="stack reveal">
-        <div class="badgebar"><span class="badge" data-i18n="hero.badge">TRADINGVIEW INDICATORS · ANY MARKET · ANY TIMEFRAME</span></div>
-        <h1 class="headline xl" data-i18n="hero.title">SignalPilot —<br>Trading Suite</h1>
-        <p class="measure" style="color:var(--muted)" data-i18n="hero.lead">
-          See the bias, read the pressure, time the move. SignalPilot turns structure, volume and momentum into clean,
-          <strong>non‑repainting</strong> signals you can scan, alert and trade on any market or timeframe. Flagship
-          <strong>SP‑EC Pro (Event Candles)</strong> plus focused companion modules—built to work together.
-        </p>
-
-        <div class="proof-bar">
-          <span class="mini-pill" data-i18n="hero.p1">Non‑repainting</span>
-          <span class="mini-pill" data-i18n="hero.p2">Alert‑ready</span>
-          <span class="mini-pill" data-i18n="hero.p3">Any market · timeframe</span>
-          <span class="mini-pill" data-i18n="hero.p4">Activation Crypto 1–3h</span>
-        </div>
-
-        <p class="note" data-i18n="hero.note">Every plan includes the full suite, support, ongoing updates—and access to the upcoming indicators.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-primary" href="#pricing" data-i18n="cta.get">Get the Suite</a>
-          <a class="btn btn-ghost" href="#docs" data-i18n="cta.docs">View Docs (soon)</a>
-          <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
-        </div>
-      </div>
-
-      <div class="panel reveal">
-        <div class="stack" style="width:100%">
-          <div class="badge" data-i18n="hero.launch.badge">Launch window</div>
-          <div class="stack" style="gap:.6rem">
-            <div style="display:flex;align-items:center;gap:.6rem">
-              <span style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12)"></span>
-              <strong data-i18n="hero.launch.in">Launch in</strong>
-              <span id="countdown" class="pill">14d 00h 00m 00s</span>
-            </div>
-            <div style="display:flex;gap:.6rem;flex-wrap:wrap">
-              <a class="btn btn-primary" href="#waitlist" data-i18n="hero.launch.notify">Notify me</a>
-              <a class="btn btn-ghost" href="https://github.com/Signalpilot/signalpilot.io" target="_blank" rel="noopener" data-i18n="hero.launch.star">Star on GitHub</a>
-            </div>
-            <div class="note measure" data-i18n="hero.launch.note">Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</div>
+          <div class="proof-bar">
+            <span class="mini-pill" data-i18n="hero.p1">Non‑repainting</span>
+            <span class="mini-pill" data-i18n="hero.p2">Alert‑ready</span>
+            <span class="mini-pill" data-i18n="hero.p3">Any market · timeframe</span>
+            <span class="mini-pill" data-i18n="hero.p4">Activation Crypto 1–3h</span>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- WHY -->
-  <section id="why" class="section">
-    <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="why.h">Why traders use SignalPilot</h2>
-      <div class="why-grid reveal">
-        <article class="feature">
-          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.2"/><path d="M12 3v3M21 12h-3M12 21v-3M6 12H3"/></svg></div>
-          <div><h3 data-i18n="why.c1.t">Clarity</h3><p data-i18n="why.c1.d">One‑look bias. No signal spam.</p></div>
-        </article>
-        <article class="feature">
-          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></svg></div>
-          <div><h3 data-i18n="why.c2.t">Context</h3><p data-i18n="why.c2.d">HTF confirmation with supply/demand and anchored levels that matter.</p></div>
-        </article>
-        <article class="feature">
-          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0v5l2 2H4l2-2Z"/><path d="M9 19a3 3 0 0 0 6 0"/></svg></div>
-          <div><h3 data-i18n="why.c3.t">Actionable</h3><p data-i18n="why.c3.d">Designed for alerts and scans—watchlists or global.</p></div>
-        </article>
-        <article class="feature">
-          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 5 6v6c0 5 7 9 7 9s7-4 7-9V6l-7-3Z"/><path d="M9 13l2 2 4-4"/></svg></div>
-          <div><h3 data-i18n="why.c4.t">Robust</h3><p data-i18n="why.c4.d">Non‑repainting logic, volatility‑aware filters and guardrails.</p></div>
-        </article>
-        <article class="feature">
-          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M3 10h14M10 3a13 13 0 0 1 0 14M10 3a13 13 0 0 0 0 14"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1.5 1.5"/></svg></div>
-          <div><h3 data-i18n="why.c5.t">Any market · Any timeframe</h3><p data-i18n="why.c5.d">Crypto, FX, indices, equities, commodities. Scalps to swings.</p></div>
-        </article>
-        <article class="feature">
-          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><path d="m13 11-3 5 1-4H9l3-5-1 4h2Z"/></svg></div>
-          <div><h3 data-i18n="why.c6.t">Fast access</h3><p data-i18n="why.c6.d">Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</p></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHAT’S INSIDE -->
-  <section id="inside" class="section">
-    <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="inside.h">What’s inside the Trading Suite</h2>
-
-      <div class="grid auto-300 reveal">
-        <!-- EC Pro -->
-        <article class="card product">
-          <div class="title mod">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path d="M4 20c4-6 12-6 16-2" opacity=".6"/><path d="M4 15c4-6 12-6 16-2" opacity=".6"/><path d="M8 4v16M16 4v16"/>
-              <rect x="6.5" y="8" width="3" height="4" rx="1"/><rect x="14.5" y="12" width="3" height="4" rx="1"/>
-            </svg>
-            <h3>SP‑EC Pro — <span data-i18n="prod.ec.tag">Event‑Candle Confluence</span></h3>
-            <span class="kicker" data-i18n="prod.flagship">Flagship</span>
-          </div>
-          <div class="punch" data-i18n="prod.ec.punch">Your bias in one glance. Signals, not guesses.</div>
-          <p class="note" data-i18n="prod.ec.note">Shows when the market likely wants up or down—clean signals that don’t repaint.</p>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-ec" aria-expanded="false" aria-controls="pro-ec" data-i18n="prod.probtn">Pro description</button>
-          <div id="pro-ec" class="pro note" hidden data-i18n="prod.ec.pro">
-            Consensus from EMA34/55, price vs Pilot Line and slope. ATR‑normalized dip/rip logic, Pilot ribbon for trend strength, and NanoFlow “+” for micro‑momentum. Non‑repainting and alert‑ready.
-          </div>
-        </article>
-
-        <!-- PVA -->
-        <article class="card product">
-          <div class="title mod">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path d="M3 20h18"/>
-              <rect x="4" y="10" width="2.5" height="7" />
-              <rect x="8" y="7" width="2.5" height="10" />
-              <rect x="12" y="12" width="2.5" height="5" />
-              <rect x="16" y="5" width="2.5" height="12" />
-              <path d="M8 4l3 3 6-6" />
-            </svg>
-            <h3>SP‑PVA Volume + SP‑PVA Overlay</h3>
-          </div>
-          <div class="punch" data-i18n="prod.pva.punch">Crowd energy, measured — then printed.</div>
-          <p class="note" data-i18n="prod.pva.note">Confirms participation and prints Bull/Bear plus Climax or Absorption spikes.</p>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-pva" aria-expanded="false" aria-controls="pro-pva" data-i18n="prod.probtn">Pro description</button>
-          <div id="pro-pva" class="pro note" hidden data-i18n="prod.pva.pro">
-            Normalized participation (log Z‑Vol + RVOL) with HTF confirm, CVD and divergence checks. Overlay emits one decisive, non‑repainting print: Bull / Bear + EVR (Climax / Absorption). Scan‑friendly.
-          </div>
-        </article>
-
-        <!-- OBV -->
-        <article class="card product">
-          <div class="title mod">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path d="M3 17l6-6 4 4 7-7"/><path d="M21 10V4h-6"/>
-            </svg>
-            <h3>SP‑OBV — <span data-i18n="prod.obv.tag">Money flow</span></h3>
-          </div>
-          <div class="punch" data-i18n="prod.obv.punch">When pressure flips, you see it.</div>
-          <p class="note" data-i18n="prod.obv.note">Reveals where volume leans; crosses hint when buyers or sellers take control.</p>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-obv" aria-expanded="false" aria-controls="pro-obv" data-i18n="prod.probtn">Pro description</button>
-          <div id="pro-obv" class="pro note" hidden data-i18n="prod.obv.pro">
-            Smoothed OBV with a Bollinger channel. Crosses and band pushes flag shifts in control. Regular + hidden divergences, optional HTF compute, and alert presets.
-          </div>
-        </article>
-
-        <!-- LTF -->
-        <article class="card product">
-          <div class="title mod">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <circle cx="12" cy="12" r="7"/><path d="M12 9v3l2 2"/><path d="M2 12h4l2 4 2-8 2 6 2-2h6" opacity=".6"/>
-            </svg>
-            <h3>SP‑LTF — <span data-i18n="prod.ltf.tag">Rhythm & fatigue</span></h3>
-          </div>
-          <div class="punch" data-i18n="prod.ltf.punch">Coiled or cooked—know before you chase.</div>
-          <p class="note" data-i18n="prod.ltf.note">Marks when price is building energy or getting tired so you don’t chase late moves.</p>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-ltf" aria-expanded="false" aria-controls="pro-ltf" data-i18n="prod.probtn">Pro description</button>
-          <div id="pro-ltf" class="pro note" hidden data-i18n="prod.ltf.pro">
-            TD‑style 8/9 counts, squeeze cloud for coil, and Caution/Danger marks for stretched moves (fade, mean‑revert, post‑squeeze).
-          </div>
-        </article>
-
-        <!-- Levels -->
-        <article class="card product">
-          <div class="title mod">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path d="M4 7h16M4 12h10M4 17h16"/><circle cx="14" cy="12" r="1.2"/>
-            </svg>
-            <h3>SP‑Levels — <span data-i18n="prod.levels.tag">Micro reference</span></h3>
-          </div>
-          <div class="punch" data-i18n="prod.levels.punch">Anchors that actually hold the story.</div>
-          <p class="note" data-i18n="prod.levels.note">Auto‑plots day/week/month anchors price respects—without clutter.</p>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-levels" aria-expanded="false" aria-controls="pro-levels" data-i18n="prod.probtn">Pro description</button>
-          <div id="pro-levels" class="pro note" hidden data-i18n="prod.levels.pro">
-            dVWAP, wVWAP, dPOC, wOpen, mOpen, mPOC—drawn on the opening candle only. Sharp references; minimal noise.
-          </div>
-        </article>
-
-        <!-- RSI Triad -->
-        <article class="card product">
-          <div class="title mod">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path d="M3 16c3-5 6-5 9 0s6 5 9-2"/><path d="M3 20h18" opacity=".6"/><path d="M3 12c2-3 6-3 9 0s6 3 9-1" opacity=".6"/>
-            </svg>
-            <h3>SP‑RSI Triad — <span data-i18n="prod.rsi.tag">Layered RSI</span></h3>
-          </div>
-          <div class="punch" data-i18n="prod.rsi.punch">Momentum turns—with receipts.</div>
-          <p class="note" data-i18n="prod.rsi.note">Blends fast/base/slow RSI to spot turns early and scores their strength.</p>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-rsitri" aria-expanded="false" aria-controls="pro-rsitri" data-i18n="prod.probtn">Pro description</button>
-          <div id="pro-rsitri" class="pro note" hidden data-i18n="prod.rsi.pro">
-            Fast/Base/Slow RSI blend with a 0–50 strength score. Filters: OBV trend, Stoch timing, ATR vol, HTF RSI.
-          </div>
-        </article>
-
-        <!-- SRSI+ -->
-        <article class="card product">
-          <div class="title mod">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <rect x="3" y="6" width="18" height="12" rx="2"/><path d="M4.5 12c2-3 4-3 6 0s4 3 6 0 4-3 5 0"/>
-              <path d="M3 9h18M3 15h18" opacity=".5"/>
-            </svg>
-            <h3>SP‑SRSI+ — <span data-i18n="prod.srsi.tag">Context‑aware Stoch RSI</span></h3>
-          </div>
-          <div class="punch" data-i18n="prod.srsi.punch">Trigger only when context agrees.</div>
-          <p class="note" data-i18n="prod.srsi.note">Adds trend, volume, and volatility context so signals make sense.</p>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-srsi" aria-expanded="false" aria-controls="pro-srsi" data-i18n="prod.probtn">Pro description</button>
-          <div id="pro-srsi" class="pro note" hidden data-i18n="prod.srsi.pro">
-            Volatility‑adaptive Stoch RSI that respects HTF bias, money‑flow and SDZ; outputs a single Confluence Score for scanning and alerts.
-          </div>
-        </article>
-
-        <!-- MACD+ -->
-        <article class="card product">
-          <div class="title mod">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <path d="M3 13c2-4 6-4 8 0s6 4 10-2"/><circle cx="7" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/>
-            </svg>
-            <h3>SP‑MACD+ — <span data-i18n="prod.macd.tag">Momentum regime</span></h3>
-          </div>
-          <div class="punch" data-i18n="prod.macd.punch">Classic MACD—minus the chop.</div>
-          <p class="note" data-i18n="prod.macd.note">Cuts chop and confirms regime so you ride trends, not noise.</p>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-macd" aria-expanded="false" aria-controls="pro-macd" data-i18n="prod.probtn">Pro description</button>
-          <div id="pro-macd" class="pro note" hidden data-i18n="prod.macd.pro">
-            HTF confirm, ATR gating and near‑zero fade reduce noise. Modes: Raw or Qualified. Presets: Classic Soft / Pro Filtered.
-          </div>
-        </article>
-
-        <!-- Screener -->
-        <article class="card product">
-          <div class="title mod">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <rect x="3" y="4" width="18" height="12" rx="2"/><path d="M6 8h6M6 11h4M12 11h6M6 14h5"/><path d="M8 20h8M12 16v4"/>
-            </svg>
-            <h3>SP‑Screener — <span data-i18n="prod.scr.tag">On‑chart & global</span></h3>
-          </div>
-          <div class="punch" data-i18n="prod.scr.punch">Scan the list, not your patience.</div>
-          <p class="note" data-i18n="prod.scr.note">Check many symbols/timeframes at once and fire alerts automatically.</p>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-screener" aria-expanded="false" aria-controls="pro-screener" data-i18n="prod.probtn">Pro description</button>
-          <div id="pro-screener" class="pro note" hidden data-i18n="prod.scr.pro">
-            On‑chart mini‑screener: up to 8 symbols × TFs; shows ticker, last signal (↑/↓), time since, ATR‑sized TP1, Ribbon state, and running P&L. Global/watchlist alerts supported.
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section id="how" class="section">
-    <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="how.h">How it works — from bias to execution</h2>
-
-      <div class="grid reveal" style="gap:1rem;grid-template-columns:1.1fr .9fr">
-        <div class="card">
-          <div class="stack">
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s1.t">1) Set bias</strong><br><span class="note" data-i18n="how.s1.d">Use <strong>EC Pro</strong> and/or <strong>MACD+</strong> to pick a side. Don’t trade against it.</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s2.t">2) Verify participation</strong><br><span class="note" data-i18n="how.s2.d"><strong>PVA/OBV</strong> confirm energy. No energy = no trade.</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s3.t">3) Map structure</strong><br><span class="note" data-i18n="how.s3.d">Respect <strong>SDZ</strong> boxes and <strong>Levels</strong> (d/w/m anchors).</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s4.t">4) Time the entry</strong><br><span class="note" data-i18n="how.s4.d"><strong>RSI Triad</strong> & <strong>SRSI+</strong> for turns; <strong>LTF</strong> flags coil vs fatigue.</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s5.t">5) Automate</strong><br><span class="note" data-i18n="how.s5.d"><strong>Screener</strong> routes signals to alerts. Keep risk fixed, not feelings.</span></div></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <strong data-i18n="how.play.h">Built‑in plays</strong>
-          <ul class="measure" style="margin:.5rem 0 0 1rem">
-            <li data-i18n="how.play.p1"><strong>Trend Buy‑the‑Dip:</strong> Bias Up → PVA Bull/Climax → reaction near demand/VWAP → RSI/SRSI timing.</li>
-            <li data-i18n="how.play.p2"><strong>Reversal Flip:</strong> Absorption + OBV div at supply → EC slope flattens → Pilot reclaim.</li>
-            <li data-i18n="how.play.p3"><strong>Breakout Continuation:</strong> Climax through wVWAP/supply → first ATR dip → NanoFlow “+”.</li>
-          </ul>
-          <p class="note measure" style="margin-top:.8rem" data-i18n="how.play.note">Start with EC Pro (bias) + PVA/OBV (participation) + SDZ/Levels (structure). Layer timing & screener as needed. <em>Educational only — not financial advice.</em></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROADMAP -->
-  <section id="roadmap" class="section">
-    <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="road.h">Roadmap — what’s next</h2>
-      <p class="note reveal measure" data-i18n="road.note">We ship fast. Timelines may shift a little, but the direction is constant: more clarity, less noise.</p>
-
-      <div class="grid reveal" style="gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-        <div class="card">
-          <strong data-i18n="road.now">Available now</strong>
-          <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li data-i18n="road.now.b1"><b>Bias:</b> EC Pro + MACD+</li>
-            <li data-i18n="road.now.b2"><b>Participation:</b> PVA & OBV</li>
-            <li data-i18n="road.now.b3"><b>Structure:</b> SDZ boxes & anchored Levels</li>
-            <li data-i18n="road.now.b4"><b>Timing:</b> RSI Triad & SRSI+</li>
-            <li data-i18n="road.now.b5"><b>Automation:</b> Screener & alerts</li>
-            <li data-i18n="road.now.b6"><b>Fast access:</b> PayPal/Card 1–8h · Crypto 1–3h</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <strong data-i18n="road.next">Rolling out next</strong>
-          <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li data-i18n="road.next.b1">Preset bundle + quick‑start docs</li>
-            <li data-i18n="road.next.b2">Short video tips & mini case studies</li>
-            <li data-i18n="road.next.b3">Watchlist alerts & simple webhooks</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <strong data-i18n="road.later">Later this year</strong>
-          <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li data-i18n="road.later.b1">SP‑Range Pro & SP‑Liquidity Map</li>
-            <li data-i18n="road.later.b2">Preset library + session playback</li>
-            <li data-i18n="road.later.b3">Backtest templates & exporter examples</li>
-            <li data-i18n="road.later.b4">Localization (ES / PT‑BR / DE)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" class="section">
-    <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="price.h">Plans & pricing</h2>
-
-      <div class="card reveal" style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap">
-        <strong data-i18n="price.blurb1">All plans include the <u>full Trading Suite</u>, support, ongoing updates, and <u>access to upcoming indicators</u>.</strong>
-        <span class="note" data-i18n="price.blurb2">Subscriptions include new modules while active. Lifetime includes all future updates.</span>
-      </div>
-
-      <div class="pricing-grid reveal" id="plans-grid">
-        <!-- MONTHLY -->
-        <article class="card plan" id="plan-monthly" data-plan="monthly" style="position:relative">
-          <div class="pill" data-i18n="plan.monthly">Monthly</div>
-          <div class="price">$79 <span class="pill" data-i18n="plan.permonth">/month</span></div>
-          <ul>
-            <li data-i18n="plan.shared.b1"><strong>Full Trading Suite</strong> — invite‑only license (1 user)</li>
-            <li data-i18n="plan.shared.b2">Ongoing updates + <strong>new indicators as they ship</strong></li>
-            <li data-i18n="plan.shared.b3">Alerts, presets, backtest templates</li>
-            <li data-i18n="plan.shared.b4">Email support</li>
-          </ul>
-          <div class="actions stack">
-            <label data-i18n="form.tv">TradingView username (for invite)
-              <input id="tv-monthly" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv">
-            </label>
-            <label class="consent">
-              <input class="tick" type="checkbox" id="consent-monthly">
-              <span data-i18n="form.consent">I understand SignalPilot is educational. No financial advice.</span>
-            </label>
-            <div class="pp-slot" id="paypal-button-container-P-6UD12522YR208981MNDQ3QPA"></div>
-            <button class="btn btn-disabled btn-card-notify" data-plan="Monthly" type="button" data-i18n="form.cardsoon">Pay by card (coming soon)</button>
+          <p class="note" data-i18n="hero.note">Every plan includes the full suite, support, ongoing updates—and access to the upcoming indicators.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#pricing" data-i18n="cta.get">Get the Suite</a>
+            <a class="btn btn-ghost" href="#docs" data-i18n="cta.docs">View Docs (soon)</a>
             <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
           </div>
-        </article>
+        </div>
 
-        <!-- QUARTERLY -->
-        <article class="card plan" id="plan-quarterly" data-plan="quarterly" style="position:relative">
-          <div class="pill" data-i18n="plan.quarterly">Quarterly</div>
-          <div class="price">$199 <span class="pill" data-i18n="plan.per3m">/3 months</span></div>
-          <ul>
-            <li data-i18n="plan.q.b1">Everything in Monthly</li>
-            <li data-i18n="plan.q.b2"><strong>New indicators</strong> as they roll out</li>
-            <li data-i18n="plan.q.b3">Preset pack updates</li>
-            <li data-i18n="plan.q.b4">Priority email support</li>
-          </ul>
-          <div class="actions stack">
-            <label data-i18n="form.tv">TradingView username (for invite)
-              <input id="tv-quarterly" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv">
-            </label>
-            <label class="consent">
-              <input class="tick" type="checkbox" id="consent-quarterly">
-              <span data-i18n="form.consent">I understand SignalPilot is educational. No financial advice.</span>
-            </label>
-            <div class="pp-slot" id="paypal-button-container-P-4VR929208D839202YNDQ3T6Q"></div>
-            <button class="btn btn-disabled btn-card-notify" data-plan="Quarterly" type="button" data-i18n="form.cardsoon">Pay by card (coming soon)</button>
-            <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
-          </div>
-        </article>
-
-        <!-- YEARLY -->
-        <article class="card plan" id="plan-yearly" data-plan="yearly" style="position:relative">
-          <div class="pill" data-i18n="plan.best">Best value</div>
-          <div class="price">$499 <span class="pill" data-i18n="plan.peryear">/year</span></div>
-          <ul>
-            <li data-i18n="plan.y.b1">Everything in Quarterly</li>
-            <li data-i18n="plan.y.b2">Concierge onboarding + early access</li>
-            <li data-i18n="plan.y.b3">Private office hours</li>
-            <li data-i18n="plan.y.b4"><strong>All new indicators included</strong> while active</li>
-          </ul>
-          <div class="actions stack">
-            <label data-i18n="form.tv">TradingView username (for invite)
-              <input id="tv-yearly" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv">
-            </label>
-            <label class="consent">
-              <input class="tick" type="checkbox" id="consent-yearly">
-              <span data-i18n="form.consent">I understand SignalPilot is educational. No financial advice.</span>
-            </label>
-            <div class="pp-slot" id="paypal-button-container-P-43M86339WD725333MNDQ3VGI"></div>
-            <button class="btn btn-disabled btn-card-notify" data-plan="Yearly" type="button" data-i18n="form.cardsoon">Pay by card (coming soon)</button>
-            <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
-          </div>
-        </article>
-
-        <!-- LIFETIME -->
-        <article class="card plan" id="plan-lifetime" data-plan="lifetime" style="position:relative">
-          <div class="ribbon" id="lt-ribbon">100 total</div>
-          <div class="pill" data-i18n="plan.lifetime">Lifetime (limited)</div>
-          <div class="price">$899 <span class="pill" data-i18n="plan.onetime">one‑time</span></div>
-
-          <!-- cap UI -->
-          <div class="lt-cap" aria-live="polite">
-            <div class="pill"><span data-i18n="plan.cap.limited">Limited — </span><strong id="lt-claimed">0</strong>/<span>100</span> <span data-i18n="plan.cap.claimed">claimed</span></div>
-            <div class="capbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-              <span id="lt-bar"></span>
+        <div class="panel reveal">
+          <div class="stack" style="width:100%">
+            <div class="badge" data-i18n="hero.launch.badge">Launch window</div>
+            <div class="stack" style="gap:.6rem">
+              <div style="display:flex;align-items:center;gap:.6rem">
+                <span style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12)"></span>
+                <strong data-i18n="hero.launch.in">Launch in</strong>
+                <span id="countdown" class="pill">14d 00h 00m 00s</span>
+              </div>
+              <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+                <a class="btn btn-primary" href="#waitlist" data-i18n="hero.launch.notify">Notify me</a>
+                <a class="btn btn-ghost" href="https://github.com/Signalpilot/signalpilot.io" target="_blank" rel="noopener" data-i18n="hero.launch.star">Star on GitHub</a>
+              </div>
+              <div class="note measure" data-i18n="hero.launch.note">Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</div>
             </div>
-            <div class="note"><span id="lt-left">100</span> <span data-i18n="plan.cap.left">left</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section id="why" class="section">
+      <div class="container stack">
+        <h2 class="headline lg reveal" data-i18n="why.h">Why traders use SignalPilot</h2>
+        <div class="why-grid reveal">
+          <article class="feature">
+            <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.2"/><path d="M12 3v3M21 12h-3M12 21v-3M6 12H3"/></svg></div>
+            <div><h3 data-i18n="why.c1.t">Clarity</h3><p data-i18n="why.c1.d">One‑look bias. No signal spam.</p></div>
+          </article>
+          <article class="feature">
+            <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></svg></div>
+            <div><h3 data-i18n="why.c2.t">Context</h3><p data-i18n="why.c2.d">HTF confirmation with supply/demand and anchored levels that matter.</p></div>
+          </article>
+          <article class="feature">
+            <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0v5l2 2H4l2-2Z"/><path d="M9 19a3 3 0 0 0 6 0"/></svg></div>
+            <div><h3 data-i18n="why.c3.t">Actionable</h3><p data-i18n="why.c3.d">Designed for alerts and scans—watchlists or global.</p></div>
+          </article>
+          <article class="feature">
+            <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 5 6v6c0 5 7 9 7 9s7-4 7-9V6l-7-3Z"/><path d="M9 13l2 2 4-4"/></svg></div>
+            <div><h3 data-i18n="why.c4.t">Robust</h3><p data-i18n="why.c4.d">Non‑repainting logic, volatility‑aware filters and guardrails.</p></div>
+          </article>
+          <article class="feature">
+            <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M3 10h14M10 3a13 13 0 0 1 0 14M10 3a13 13 0 0 0 0 14"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1.5 1.5"/></svg></div>
+            <div><h3 data-i18n="why.c5.t">Any market · Any timeframe</h3><p data-i18n="why.c5.d">Crypto, FX, indices, equities, commodities. Scalps to swings.</p></div>
+          </article>
+          <article class="feature">
+            <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><path d="m13 11-3 5 1-4H9l3-5-1 4h2Z"/></svg></div>
+            <div><h3 data-i18n="why.c6.t">Fast access</h3><p data-i18n="why.c6.d">Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT’S INSIDE -->
+    <section id="inside" class="section">
+      <div class="container stack">
+        <h2 class="headline lg reveal" data-i18n="inside.h">What’s inside the Trading Suite</h2>
+
+        <div class="grid auto-300 reveal">
+          <!-- EC Pro -->
+          <article class="card product">
+            <div class="title mod">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M4 20c4-6 12-6 16-2" opacity=".6"/><path d="M4 15c4-6 12-6 16-2" opacity=".6"/><path d="M8 4v16M16 4v16"/>
+                <rect x="6.5" y="8" width="3" height="4" rx="1"/><rect x="14.5" y="12" width="3" height="4" rx="1"/>
+              </svg>
+              <h3>SP‑EC Pro — <span data-i18n="prod.ec.tag">Event‑Candle Confluence</span></h3>
+              <span class="kicker" data-i18n="prod.flagship">Flagship</span>
+            </div>
+            <div class="punch" data-i18n="prod.ec.punch">Your bias in one glance. Signals, not guesses.</div>
+            <p class="note" data-i18n="prod.ec.note">Shows when the market likely wants up or down—clean signals that don’t repaint.</p>
+            <button class="btn btn-ghost btn-sm" data-pro="pro-ec" aria-expanded="false" aria-controls="pro-ec" data-i18n="prod.probtn">Pro description</button>
+            <div id="pro-ec" class="pro note" hidden data-i18n="prod.ec.pro">
+              Consensus from EMA34/55, price vs Pilot Line and slope. ATR‑normalized dip/rip logic, Pilot ribbon for trend strength, and NanoFlow “+” for micro‑momentum. Non‑repainting and alert‑ready.
+            </div>
+          </article>
+
+          <!-- PVA -->
+          <article class="card product">
+            <div class="title mod">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M3 20h18"/><rect x="4" y="10" width="2.5" height="7" />
+                <rect x="8" y="7" width="2.5" height="10" />
+                <rect x="12" y="12" width="2.5" height="5" />
+                <rect x="16" y="5" width="2.5" height="12" />
+                <path d="M8 4l3 3 6-6" />
+              </svg>
+              <h3>SP‑PVA Volume + SP‑PVA Overlay</h3>
+            </div>
+            <div class="punch" data-i18n="prod.pva.punch">Crowd energy, measured — then printed.</div>
+            <p class="note" data-i18n="prod.pva.note">Confirms participation and prints Bull/Bear plus Climax or Absorption spikes.</p>
+            <button class="btn btn-ghost btn-sm" data-pro="pro-pva" aria-expanded="false" aria-controls="pro-pva" data-i18n="prod.probtn">Pro description</button>
+            <div id="pro-pva" class="pro note" hidden data-i18n="prod.pva.pro">
+              Normalized participation (log Z‑Vol + RVOL) with HTF confirm, CVD and divergence checks. Overlay emits one decisive, non‑repainting print: Bull / Bear + EVR (Climax / Absorption). Scan‑friendly.
+            </div>
+          </article>
+
+          <!-- OBV -->
+          <article class="card product">
+            <div class="title mod">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M3 17l6-6 4 4 7-7"/><path d="M21 10V4h-6"/>
+              </svg>
+              <h3>SP‑OBV — <span data-i18n="prod.obv.tag">Money flow</span></h3>
+            </div>
+            <div class="punch" data-i18n="prod.obv.punch">When pressure flips, you see it.</div>
+            <p class="note" data-i18n="prod.obv.note">Reveals where volume leans; crosses hint when buyers or sellers take control.</p>
+            <button class="btn btn-ghost btn-sm" data-pro="pro-obv" aria-expanded="false" aria-controls="pro-obv" data-i18n="prod.probtn">Pro description</button>
+            <div id="pro-obv" class="pro note" hidden data-i18n="prod.obv.pro">
+              Smoothed OBV with a Bollinger channel. Crosses and band pushes flag shifts in control. Regular + hidden divergences, optional HTF compute, and alert presets.
+            </div>
+          </article>
+
+          <!-- LTF -->
+          <article class="card product">
+            <div class="title mod">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="12" cy="12" r="7"/><path d="M12 9v3l2 2"/><path d="M2 12h4l2 4 2-8 2 6 2-2h6" opacity=".6"/>
+              </svg>
+              <h3>SP‑LTF — <span data-i18n="prod.ltf.tag">Rhythm & fatigue</span></h3>
+            </div>
+            <div class="punch" data-i18n="prod.ltf.punch">Coiled or cooked—know before you chase.</div>
+            <p class="note" data-i18n="prod.ltf.note">Marks when price is building energy or getting tired so you don’t chase late moves.</p>
+            <button class="btn btn-ghost btn-sm" data-pro="pro-ltf" aria-expanded="false" aria-controls="pro-ltf" data-i18n="prod.probtn">Pro description</button>
+            <div id="pro-ltf" class="pro note" hidden data-i18n="prod.ltf.pro">
+              TD‑style 8/9 counts, squeeze cloud for coil, and Caution/Danger marks for stretched moves (fade, mean‑revert, post‑squeeze).
+            </div>
+          </article>
+
+          <!-- Levels -->
+          <article class="card product">
+            <div class="title mod">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M4 7h16M4 12h10M4 17h16"/><circle cx="14" cy="12" r="1.2"/>
+              </svg>
+              <h3>SP‑Levels — <span data-i18n="prod.levels.tag">Micro reference</span></h3>
+            </div>
+            <div class="punch" data-i18n="prod.levels.punch">Anchors that actually hold the story.</div>
+            <p class="note" data-i18n="prod.levels.note">Auto‑plots day/week/month anchors price respects—without clutter.</p>
+            <button class="btn btn-ghost btn-sm" data-pro="pro-levels" aria-expanded="false" aria-controls="pro-levels" data-i18n="prod.probtn">Pro description</button>
+            <div id="pro-levels" class="pro note" hidden data-i18n="prod.levels.pro">
+              dVWAP, wVWAP, dPOC, wOpen, mOpen, mPOC—drawn on the opening candle only. Sharp references; minimal noise.
+            </div>
+          </article>
+
+          <!-- RSI Triad -->
+          <article class="card product">
+            <div class="title mod">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M3 16c3-5 6-5 9 0s6 5 9-2"/><path d="M3 20h18" opacity=".6"/><path d="M3 12c2-3 6-3 9 0s6 3 9-1" opacity=".6"/>
+              </svg>
+              <h3>SP‑RSI Triad — <span data-i18n="prod.rsi.tag">Layered RSI</span></h3>
+            </div>
+            <div class="punch" data-i18n="prod.rsi.punch">Momentum turns—with receipts.</div>
+            <p class="note" data-i18n="prod.rsi.note">Blends fast/base/slow RSI to spot turns early and scores their strength.</p>
+            <button class="btn btn-ghost btn-sm" data-pro="pro-rsitri" aria-expanded="false" aria-controls="pro-rsitri" data-i18n="prod.probtn">Pro description</button>
+            <div id="pro-rsitri" class="pro note" hidden data-i18n="prod.rsi.pro">
+              Fast/Base/Slow RSI blend with a 0–50 strength score. Filters: OBV trend, Stoch timing, ATR vol, HTF RSI.
+            </div>
+          </article>
+
+          <!-- SRSI+ -->
+          <article class="card product">
+            <div class="title mod">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <rect x="3" y="6" width="18" height="12" rx="2"/><path d="M4.5 12c2-3 4-3 6 0s4 3 6 0 4-3 5 0"/>
+                <path d="M3 9h18M3 15h18" opacity=".5"/>
+              </svg>
+              <h3>SP‑SRSI+ — <span data-i18n="prod.srsi.tag">Context‑aware Stoch RSI</span></h3>
+            </div>
+            <div class="punch" data-i18n="prod.srsi.punch">Trigger only when context agrees.</div>
+            <p class="note" data-i18n="prod.srsi.note">Adds trend, volume, and volatility context so signals make sense.</p>
+            <button class="btn btn-ghost btn-sm" data-pro="pro-srsi" aria-expanded="false" aria-controls="pro-srsi" data-i18n="prod.probtn">Pro description</button>
+            <div id="pro-srsi" class="pro note" hidden data-i18n="prod.srsi.pro">
+              Volatility‑adaptive Stoch RSI that respects HTF bias, money‑flow and SDZ; outputs a single Confluence Score for scanning and alerts.
+            </div>
+          </article>
+
+          <!-- MACD+ -->
+          <article class="card product">
+            <div class="title mod">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M3 13c2-4 6-4 8 0s6 4 10-2"/><circle cx="7" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/>
+              </svg>
+              <h3>SP‑MACD+ — <span data-i18n="prod.macd.tag">Momentum regime</span></h3>
+            </div>
+            <div class="punch" data-i18n="prod.macd.punch">Classic MACD—minus the chop.</div>
+            <p class="note" data-i18n="prod.macd.note">Cuts chop and confirms regime so you ride trends, not noise.</p>
+            <button class="btn btn-ghost btn-sm" data-pro="pro-macd" aria-expanded="false" aria-controls="pro-macd" data-i18n="prod.probtn">Pro description</button>
+            <div id="pro-macd" class="pro note" hidden data-i18n="prod.macd.pro">
+              HTF confirm, ATR gating and near‑zero fade reduce noise. Modes: Raw or Qualified. Presets: Classic Soft / Pro Filtered.
+            </div>
+          </article>
+
+          <!-- Screener -->
+          <article class="card product">
+            <div class="title mod">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="12" rx="2"/><path d="M6 8h6M6 11h4M12 11h6M6 14h5"/><path d="M8 20h8M12 16v4"/>
+              </svg>
+              <h3>SP‑Screener — <span data-i18n="prod.scr.tag">On‑chart & global</span></h3>
+            </div>
+            <div class="punch" data-i18n="prod.scr.punch">Scan the list, not your patience.</div>
+            <p class="note" data-i18n="prod.scr.note">Check many symbols/timeframes at once and fire alerts automatically.</p>
+            <button class="btn btn-ghost btn-sm" data-pro="pro-screener" aria-expanded="false" aria-controls="pro-screener" data-i18n="prod.probtn">Pro description</button>
+            <div id="pro-screener" class="pro note" hidden data-i18n="prod.scr.pro">
+              On‑chart mini‑screener: up to 8 symbols × TFs; shows ticker, last signal (↑/↓), time since, ATR‑sized TP1, Ribbon state, and running P&L. Global/watchlist alerts supported.
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="section">
+      <div class="container stack">
+        <h2 class="headline lg reveal" data-i18n="how.h">How it works — from bias to execution</h2>
+        <div class="grid reveal" style="gap:1rem;grid-template-columns:1.1fr .9fr">
+          <div class="card">
+            <div class="stack">
+              <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s1.t">1) Set bias</strong><br><span class="note" data-i18n="how.s1.d">Use <strong>EC Pro</strong> and/or <strong>MACD+</strong> to pick a side. Don’t trade against it.</span></div></div>
+              <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s2.t">2) Verify participation</strong><br><span class="note" data-i18n="how.s2.d"><strong>PVA/OBV</strong> confirm energy. No energy = no trade.</span></div></div>
+              <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s3.t">3) Map structure</strong><br><span class="note" data-i18n="how.s3.d">Respect <strong>SDZ</strong> boxes and <strong>Levels</strong> (d/w/m anchors).</span></div></div>
+              <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s4.t">4) Time the entry</strong><br><span class="note" data-i18n="how.s4.d"><strong>RSI Triad</strong> & <strong>SRSI+</strong> for turns; <strong>LTF</strong> flags coil vs fatigue.</span></div></div>
+              <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s5.t">5) Automate</strong><br><span class="note" data-i18n="how.s5.d"><strong>Screener</strong> routes signals to alerts. Keep risk fixed, not feelings.</span></div></div>
+            </div>
           </div>
 
-          <ul>
-            <li data-i18n="plan.l.b1"><strong>Full Trading Suite</strong> — all future updates included</li>
-            <li data-i18n="plan.l.b2">Founding member perks & feature priority</li>
-            <li data-i18n="plan.l.b3">Private Discord for life + full preset bundle</li>
-          </ul>
-          <div class="actions stack">
-            <form id="pp-lifetime" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="display:grid;gap:.6rem">
-              <input type="hidden" name="cmd" value="_s-xclick" />
-              <input type="hidden" name="hosted_button_id" value="N6TJGG9LXSE2L" />
-              <input type="hidden" name="currency_code" value="USD" />
-              <input type="hidden" name="notify_url" id="pp-lifetime-notify" value="" />
-              <input type="hidden" name="on0" value="TradingView username (required for activation)"/>
-              <label data-i18n="form.tv_req">TradingView username (required for activation)
-                <input name="os0" id="tv-lifetime" type="text" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv">
+          <div class="card">
+            <strong data-i18n="how.play.h">Built‑in plays</strong>
+            <ul class="measure" style="margin:.5rem 0 0 1rem">
+              <li data-i18n="how.play.p1"><strong>Trend Buy‑the‑Dip:</strong> Bias Up → PVA Bull/Climax → reaction near demand/VWAP → RSI/SRSI timing.</li>
+              <li data-i18n="how.play.p2"><strong>Reversal Flip:</strong> Absorption + OBV div at supply → EC slope flattens → Pilot reclaim.</li>
+              <li data-i18n="how.play.p3"><strong>Breakout Continuation:</strong> Climax through wVWAP/supply → first ATR dip → NanoFlow “+”.</li>
+            </ul>
+            <p class="note measure" style="margin-top:.8rem" data-i18n="how.play.note">Start with EC Pro (bias) + PVA/OBV (participation) + SDZ/Levels (structure). Layer timing & screener as needed. <em>Educational only — not financial advice.</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap" class="section">
+      <div class="container stack">
+        <h2 class="headline lg reveal" data-i18n="road.h">Roadmap — what’s next</h2>
+        <p class="note reveal measure" data-i18n="road.note">We ship fast. Timelines may shift a little, but the direction is constant: more clarity, less noise.</p>
+
+        <div class="grid reveal" style="gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+          <div class="card">
+            <strong data-i18n="road.now">Available now</strong>
+            <ul class="note" style="margin:.5rem 0 0 1rem">
+              <li data-i18n="road.now.b1"><b>Bias:</b> EC Pro + MACD+</li>
+              <li data-i18n="road.now.b2"><b>Participation:</b> PVA & OBV</li>
+              <li data-i18n="road.now.b3"><b>Structure:</b> SDZ boxes & anchored Levels</li>
+              <li data-i18n="road.now.b4"><b>Timing:</b> RSI Triad & SRSI+</li>
+              <li data-i18n="road.now.b5"><b>Automation:</b> Screener & alerts</li>
+              <li data-i18n="road.now.b6"><b>Fast access:</b> PayPal/Card 1–8h · Crypto 1–3h</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <strong data-i18n="road.next">Rolling out next</strong>
+            <ul class="note" style="margin:.5rem 0 0 1rem">
+              <li data-i18n="road.next.b1">Preset bundle + quick‑start docs</li>
+              <li data-i18n="road.next.b2">Short video tips & mini case studies</li>
+              <li data-i18n="road.next.b3">Watchlist alerts & simple webhooks</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <strong data-i18n="road.later">Later this year</strong>
+            <ul class="note" style="margin:.5rem 0 0 1rem">
+              <li data-i18n="road.later.b1">SP‑Range Pro & SP‑Liquidity Map</li>
+              <li data-i18n="road.later.b2">Preset library + session playback</li>
+              <li data-i18n="road.later.b3">Backtest templates & exporter examples</li>
+              <li data-i18n="road.later.b4">Localization (ES / PT‑BR / DE)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section">
+      <div class="container stack">
+        <h2 class="headline lg reveal" data-i18n="price.h">Plans & pricing</h2>
+
+        <div class="card reveal" style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap">
+          <strong data-i18n="price.blurb1">All plans include the <u>full Trading Suite</u>, support, ongoing updates, and <u>access to upcoming indicators</u>.</strong>
+          <span class="note" data-i18n="price.blurb2">Subscriptions include new modules while active. Lifetime includes all future updates.</span>
+        </div>
+
+        <div class="pricing-grid reveal" id="plans-grid">
+          <!-- MONTHLY -->
+          <article class="card plan" id="plan-monthly" data-plan="monthly" style="position:relative">
+            <div class="pill" data-i18n="plan.monthly">Monthly</div>
+            <div class="price">$79 <span class="pill" data-i18n="plan.permonth">/month</span></div>
+            <ul>
+              <li data-i18n="plan.shared.b1"><strong>Full Trading Suite</strong> — invite‑only license (1 user)</li>
+              <li data-i18n="plan.shared.b2">Ongoing updates + <strong>new indicators as they ship</strong></li>
+              <li data-i18n="plan.shared.b3">Alerts, presets, backtest templates</li>
+              <li data-i18n="plan.shared.b4">Email support</li>
+            </ul>
+            <div class="actions stack">
+              <label data-i18n="form.tv">TradingView username (for invite)
+                <input id="tv-monthly" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv">
               </label>
               <label class="consent">
-                <input class="tick" type="checkbox" id="consent-lifetime">
+                <input class="tick" type="checkbox" id="consent-monthly">
                 <span data-i18n="form.consent">I understand SignalPilot is educational. No financial advice.</span>
               </label>
-              <input type="hidden" name="custom" id="pp-lifetime-custom" value=""/>
-              <input type="hidden" name="return" id="pp-lifetime-return" value=""/>
-              <input type="hidden" name="cancel_return" id="pp-lifetime-cancel" value=""/>
-              <div class="pp-slot">
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="Pay with PayPal" alt="Buy Now" />
-              </div>
-            </form>
-            <button class="btn btn-disabled" id="lt-soldout" type="button" style="display:none" data-i18n="plan.soldout">Sold out — join waitlist below</button>
-            <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="card reveal">
-        <strong data-i18n="qs.h">Quick‑start (5 minutes)</strong>
-        <ol class="measure" style="margin:.5rem 0 0 1.2rem">
-          <li data-i18n="qs.b1">Pick a plan and pay (PayPal auto‑renew or Crypto Prepaid Pass).</li>
-          <li data-i18n="qs.b2">Enter your <strong>TradingView username</strong> for the invite.</li>
-          <li data-i18n="qs.b3">We activate invites: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</li>
-          <li data-i18n="qs.b4">Load the starter preset and add two alerts.</li>
-          <li data-i18n="qs.b5">Follow the Trend Dip / Reversal Flip / Breakout playbooks.</li>
-        </ol>
-        <p class="note measure" style="margin-top:.6rem" data-i18n="qs.note">Crypto is <strong>one‑time</strong> (no auto‑renew). SignalPilot is educational—<em>not financial advice</em>.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CRYPTO -->
-  <section id="pay-crypto" class="section">
-    <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="crypto.h">Pay with crypto <span class="pill" style="background:rgba(255,180,70,.18);color:#ffd699">save 20%</span></h2>
-      <p class="note reveal measure" data-i18n="crypto.p">
-        Crypto payments are <strong>one‑time</strong>. You’ll get a <strong>prepaid access pass</strong> (30 / 90 / 365 days) or <strong>Lifetime</strong>. 
-        <strong>No auto‑renew</strong>. Typical activation is <strong>1–3 hours</strong> after network confirmations.
-      </p>
-
-      <div class="grid auto-300 reveal">
-        <div class="card">
-          <p class="note measure" data-i18n="crypto.form.note">Request an invoice with an exact quote—or send directly and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> for activation. <em>No memo/tag required.</em></p>
-
-          <form id="crypto-form" action="https://formspree.io/f/meorkjpn" method="POST">
-            <input type="hidden" name="ref" id="crypto-ref" value="">
-            <input type="hidden" name="utm" id="crypto-utm" value="">
-            <div class="grid two-col" style="gap:.8rem">
-              <label data-i18n="crypto.form.plan">Plan (Prepaid Pass)
-                <select name="plan" required>
-                  <option value="Monthly Crypto Pass (30 days) – save 20%" data-i18n="crypto.plan.m">Monthly Crypto Pass (30 days) — save 20%</option>
-                  <option value="Quarterly Crypto Pass (90 days) – save 20%" data-i18n="crypto.plan.q">Quarterly Crypto Pass (90 days) — save 20%</option>
-                  <option value="Yearly Crypto Pass (365 days) – save 20%" data-i18n="crypto.plan.y">Yearly Crypto Pass (365 days) — save 20%</option>
-                  <option value="Lifetime (Crypto) – save 20%" data-i18n="crypto.plan.l">Lifetime (Crypto) — save 20%</option>
-                </select>
-              </label>
-              <label data-i18n="crypto.form.coin">Coin
-                <select name="coin" required>
-                  <option>BTC</option><option>ETH</option><option>AVAX (C‑chain)</option><option>MATIC</option><option>BNB</option><option>BCH</option>
-                </select>
-              </label>
+              <div class="pp-slot" id="paypal-button-container-P-6UD12522YR208981MNDQ3QPA"></div>
+              <button class="btn btn-disabled btn-card-notify" data-plan="Monthly" type="button" data-i18n="form.cardsoon">Pay by card (coming soon)</button>
+              <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
             </div>
+          </article>
 
-            <div class="grid two-col" style="gap:.8rem">
-              <label data-i18n="crypto.form.email">Email (for invoice & receipt)
-                <input name="email" type="email" placeholder="you@domain.com" required data-i18n-placeholder="ph.email">
-              </label>
+          <!-- QUARTERLY -->
+          <article class="card plan" id="plan-quarterly" data-plan="quarterly" style="position:relative">
+            <div class="pill" data-i18n="plan.quarterly">Quarterly</div>
+            <div class="price">$199 <span class="pill" data-i18n="plan.per3m">/3 months</span></div>
+            <ul>
+              <li data-i18n="plan.q.b1">Everything in Monthly</li>
+              <li data-i18n="plan.q.b2"><strong>New indicators</strong> as they roll out</li>
+              <li data-i18n="plan.q.b3">Preset pack updates</li>
+              <li data-i18n="plan.q.b4">Priority email support</li>
+            </ul>
+            <div class="actions stack">
               <label data-i18n="form.tv">TradingView username (for invite)
-                <input name="tradingview" type="text" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv">
+                <input id="tv-quarterly" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv">
               </label>
+              <label class="consent">
+                <input class="tick" type="checkbox" id="consent-quarterly">
+                <span data-i18n="form.consent">I understand SignalPilot is educational. No financial advice.</span>
+              </label>
+              <div class="pp-slot" id="paypal-button-container-P-4VR929208D839202YNDQ3T6Q"></div>
+              <button class="btn btn-disabled btn-card-notify" data-plan="Quarterly" type="button" data-i18n="form.cardsoon">Pay by card (coming soon)</button>
+              <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
+            </div>
+          </article>
+
+          <!-- YEARLY -->
+          <article class="card plan" id="plan-yearly" data-plan="yearly" style="position:relative">
+            <div class="pill" data-i18n="plan.best">Best value</div>
+            <div class="price">$499 <span class="pill" data-i18n="plan.peryear">/year</span></div>
+            <ul>
+              <li data-i18n="plan.y.b1">Everything in Quarterly</li>
+              <li data-i18n="plan.y.b2">Concierge onboarding + early access</li>
+              <li data-i18n="plan.y.b3">Private office hours</li>
+              <li data-i18n="plan.y.b4"><strong>All new indicators included</strong> while active</li>
+            </ul>
+            <div class="actions stack">
+              <label data-i18n="form.tv">TradingView username (for invite)
+                <input id="tv-yearly" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv">
+              </label>
+              <label class="consent">
+                <input class="tick" type="checkbox" id="consent-yearly">
+                <span data-i18n="form.consent">I understand SignalPilot is educational. No financial advice.</span>
+              </label>
+              <div class="pp-slot" id="paypal-button-container-P-43M86339WD725333MNDQ3VGI"></div>
+              <button class="btn btn-disabled btn-card-notify" data-plan="Yearly" type="button" data-i18n="form.cardsoon">Pay by card (coming soon)</button>
+              <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
+            </div>
+          </article>
+
+          <!-- LIFETIME -->
+          <article class="card plan" id="plan-lifetime" data-plan="lifetime" style="position:relative">
+            <div class="ribbon" id="lt-ribbon">100 total</div>
+            <div class="pill" data-i18n="plan.lifetime">Lifetime (limited)</div>
+            <div class="price">$899 <span class="pill" data-i18n="plan.onetime">one‑time</span></div>
+            <div class="lt-cap" aria-live="polite">
+              <div class="pill"><span data-i18n="plan.cap.limited">Limited — </span><strong id="lt-claimed">0</strong>/<span>100</span> <span data-i18n="plan.cap.claimed">claimed</span></div>
+              <div class="capbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="lt-bar" style="display:block;height:8px;background:linear-gradient(90deg,var(--brand),var(--accent));width:0;border-radius:999px"></span></div>
+              <div class="note"><span id="lt-left">100</span> <span data-i18n="plan.cap.left">left</span></div>
             </div>
 
-            <label data-i18n="crypto.form.notes">Notes (optional)
-              <textarea name="notes" data-i18n-placeholder="ph.notes" placeholder="Company/VAT, preferred email, any memo instructions…"></textarea>
-            </label>
+            <ul>
+              <li data-i18n="plan.l.b1"><strong>Full Trading Suite</strong> — all future updates included</li>
+              <li data-i18n="plan.l.b2">Founding member perks & feature priority</li>
+              <li data-i18n="plan.l.b3">Private Discord for life + full preset bundle</li>
+            </ul>
+            <div class="actions stack">
+              <form id="pp-lifetime" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="display:grid;gap:.6rem">
+                <input type="hidden" name="cmd" value="_s-xclick" />
+                <input type="hidden" name="hosted_button_id" value="N6TJGG9LXSE2L" />
+                <input type="hidden" name="currency_code" value="USD" />
+                <input type="hidden" name="notify_url" id="pp-lifetime-notify" value="" />
+                <input type="hidden" name="on0" value="TradingView username (required for activation)"/>
+                <label data-i18n="form.tv_req">TradingView username (required for activation)
+                  <input name="os0" id="tv-lifetime" type="text" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv">
+                </label>
+                <label class="consent">
+                  <input class="tick" type="checkbox" id="consent-lifetime">
+                  <span data-i18n="form.consent">I understand SignalPilot is educational. No financial advice.</span>
+                </label>
+                <input type="hidden" name="custom" id="pp-lifetime-custom" value=""/>
+                <input type="hidden" name="return" id="pp-lifetime-return" value=""/>
+                <input type="hidden" name="cancel_return" id="pp-lifetime-cancel" value=""/>
+                <div class="pp-slot">
+                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="Pay with PayPal" alt="Buy Now" />
+                </div>
+              </form>
+              <button class="btn btn-disabled" id="lt-soldout" type="button" style="display:none" data-i18n="plan.soldout">Sold out — join waitlist below</button>
+              <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
+            </div>
+          </article>
+        </div>
 
-            <button class="btn btn-crypto" type="submit" data-i18n="crypto.form.submit">Request crypto invoice</button>
+        <div class="card reveal">
+          <strong data-i18n="qs.h">Quick‑start (5 minutes)</strong>
+          <ol class="measure" style="margin:.5rem 0 0 1.2rem">
+            <li data-i18n="qs.b1">Pick a plan and pay (PayPal auto‑renew or Crypto Prepaid Pass).</li>
+            <li data-i18n="qs.b2">Enter your <strong>TradingView username</strong> for the invite.</li>
+            <li data-i18n="qs.b3">We activate invites: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</li>
+            <li data-i18n="qs.b4">Load the starter preset and add two alerts.</li>
+            <li data-i18n="qs.b5">Follow the Trend Dip / Reversal Flip / Breakout playbooks.</li>
+          </ol>
+          <p class="note measure" style="margin-top:.6rem" data-i18n="qs.note">Crypto is <strong>one‑time</strong> (no auto‑renew). SignalPilot is educational—<em>not financial advice</em>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRYPTO -->
+    <section id="pay-crypto" class="section">
+      <div class="container stack">
+        <h2 class="headline lg reveal" data-i18n="crypto.h">Pay with crypto <span class="pill" style="background:rgba(255,180,70,.18);color:#ffd699">save 20%</span></h2>
+        <p class="note reveal measure" data-i18n="crypto.p">
+          Crypto payments are <strong>one‑time</strong>. You’ll get a <strong>prepaid access pass</strong> (30 / 90 / 365 days) or <strong>Lifetime</strong>. 
+          <strong>No auto‑renew</strong>. Typical activation is <strong>1–3 hours</strong> after network confirmations.
+        </p>
+
+        <div class="grid auto-300 reveal">
+          <div class="card">
+            <p class="note measure" data-i18n="crypto.form.note">Request an invoice with an exact quote—or send directly and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> for activation. <em>No memo/tag required.</em></p>
+
+            <form id="crypto-form" action="https://formspree.io/f/meorkjpn" method="POST">
+              <input type="hidden" name="ref" id="crypto-ref" value="">
+              <input type="hidden" name="utm" id="crypto-utm" value="">
+              <div class="grid two-col" style="gap:.8rem">
+                <label data-i18n="crypto.form.plan">Plan (Prepaid Pass)
+                  <select name="plan" required>
+                    <option value="Monthly Crypto Pass (30 days) – save 20%" data-i18n="crypto.plan.m">Monthly Crypto Pass (30 days) — save 20%</option>
+                    <option value="Quarterly Crypto Pass (90 days) – save 20%" data-i18n="crypto.plan.q">Quarterly Crypto Pass (90 days) — save 20%</option>
+                    <option value="Yearly Crypto Pass (365 days) – save 20%" data-i18n="crypto.plan.y">Yearly Crypto Pass (365 days) — save 20%</option>
+                    <option value="Lifetime (Crypto) – save 20%" data-i18n="crypto.plan.l">Lifetime (Crypto) — save 20%</option>
+                  </select>
+                </label>
+                <label data-i18n="crypto.form.coin">Coin
+                  <select name="coin" required><option>BTC</option><option>ETH</option><option>AVAX (C‑chain)</option><option>MATIC</option><option>BNB</option><option>BCH</option></select>
+                </label>
+              </div>
+
+              <div class="grid two-col" style="gap:.8rem">
+                <label data-i18n="crypto.form.email">Email (for invoice & receipt)
+                  <input name="email" type="email" placeholder="you@domain.com" required data-i18n-placeholder="ph.email">
+                </label>
+                <label data-i18n="form.tv">TradingView username (for invite)
+                  <input name="tradingview" type="text" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv">
+                </label>
+              </div>
+
+              <label data-i18n="crypto.form.notes">Notes (optional)
+                <textarea name="notes" data-i18n-placeholder="ph.notes" placeholder="Company/VAT, preferred email, any memo instructions…"></textarea>
+              </label>
+
+              <button class="btn btn-crypto" type="submit" data-i18n="crypto.form.submit">Request crypto invoice</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <p class="note measure" data-i18n="crypto.direct.note">Prefer to send directly? Copy a wallet below and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> to <a href="mailto:support@signalpilot.io">support@signalpilot.io</a>. <em>No memo/tag required.</em></p>
+
+            <div class="stack" style="gap:.6rem">
+              <div class="grid two-col" style="gap:.8rem">
+                <label>ETH / MATIC (EVM)
+                  <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
+                    <input id="addr-eth" value="0xcFf999901af3360576BA4Fa9750340C3f26504A5" readonly>
+                    <button class="btn" data-copy="#addr-eth" type="button" data-i18n-aria-label="ui.copy" data-i18n="ui.copy">Copy</button>
+                  </div>
+                </label>
+                <label>BTC
+                  <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
+                    <input id="addr-btc" value="1DdTKYzeg9iR8GwgMZmoBje5ki5FhHwGVm" readonly>
+                    <button class="btn" data-copy="#addr-btc" type="button" data-i18n="ui.copy">Copy</button>
+                  </div>
+                </label>
+              </div>
+
+              <div class="grid two-col" style="gap:.8rem">
+                <label>AVAX (C‑chain)
+                  <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
+                    <input id="addr-avax" value="0x62B9c9625Bde847AD4A50Ced3CFd8e24735ffF08" readonly>
+                    <button class="btn" data-copy="#addr-avax" type="button" data-i18n="ui.copy">Copy</button>
+                  </div>
+                </label>
+                <label>BNB (BSC)
+                  <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
+                    <input id="addr-bnb" value="0x398605F9907eB2C3F8602A13D394Fbb00D53C2df" readonly>
+                    <button class="btn" data-copy="#addr-bnb" type="button" data-i18n="ui.copy">Copy</button>
+                  </div>
+                </label>
+              </div>
+
+              <div class="grid two-col" style="gap:.8rem">
+                <label>Bitcoin Cash (BCH)
+                  <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
+                    <input id="addr-bch" value="qz9gvarfc9rl9zm0me3ghjp83r78nchnrvwkazd4j9" readonly>
+                    <button class="btn" data-copy="#addr-bch" type="button" data-i18n="ui.copy">Copy</button>
+                  </div>
+                </label>
+                <div class="note grid-align-left" data-i18n="crypto.direct.tip">
+                  Crypto passes usually activate in <strong>1–3 hours</strong> after confirmations.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AFFILIATE -->
+    <section id="affiliate" class="section">
+      <div class="container stack">
+        <h2 class="headline lg reveal" data-i18n="aff.h">Affiliate program (early access)</h2>
+        <div class="card reveal">
+          <p class="note measure" data-i18n="aff.note">We’re designing a fair, transparent program focused on education, not P&L promises. Please apply below if you agree to:</p>
+          <ul class="note measure" style="margin:.2rem 0 0 1.1rem">
+            <li data-i18n="aff.b1">Share useful content (charts, workflows, tutorials)</li>
+            <li data-i18n="aff.b2">No ROI guarantees or signals‑for‑sale</li>
+            <li data-i18n="aff.b3">Use clear “educational only” language</li>
+          </ul>
+
+          <form id="affiliate-form" action="https://formspree.io/f/xqaylpyq" method="POST" style="margin-top:.8rem">
+            <input type="hidden" name="ref" id="aff-ref" value="">
+            <input type="hidden" name="utm" id="aff-utm" value="">
+            <div class="grid two-col" style="gap:.8rem">
+              <label for="aff-name" data-i18n="aff.name">Name<input id="aff-name" name="name" required></label>
+              <label for="aff-email" data-i18n="aff.email">Email<input id="aff-email" name="email" type="email" required></label>
+            </div>
+            <label for="aff-channels" data-i18n="aff.channels">Channels / links (X, YT, TG, site)
+              <textarea id="aff-channels" name="channels" data-i18n-placeholder="aff.channelsPh" placeholder="https://twitter.com/..., https://youtube.com/..., https://t.me/..., website…"></textarea>
+            </label>
+            <div class="grid two-col" style="gap:.8rem">
+              <label for="aff-aud" data-i18n="aff.aud">Audience size (optional)<input id="aff-aud" name="audience" data-i18n-placeholder="aff.audPh" placeholder="e.g., 12k Twitter, 3k Telegram"></label>
+              <label for="aff-focus" data-i18n="aff.focus">Focus (optional)<input id="aff-focus" name="focus" data-i18n-placeholder="aff.focusPh" placeholder="e.g., BTC scalps, FX London, swing equities"></label>
+            </div>
+            <label class="measure" for="aff-notes" data-i18n="aff.notes">Notes (optional)
+              <textarea id="aff-notes" name="notes" data-i18n-placeholder="ph.notes" placeholder="Anything else we should know"></textarea>
+            </label>
+            <label class="consent">
+              <input class="tick" type="checkbox" required>
+              <span data-i18n="aff.agree">I agree to the guidelines above and will present SignalPilot as educational only.</span>
+            </label>
+            <button class="btn btn-primary" type="submit" data-i18n="aff.submit">Apply to affiliate waitlist</button>
           </form>
         </div>
+      </div>
+    </section>
 
-        <div class="card">
-          <p class="note measure" data-i18n="crypto.direct.note">Prefer to send directly? Copy a wallet below and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> to <a href="mailto:support@signalpilot.io">support@signalpilot.io</a>. <em>No memo/tag required.</em></p>
-
-          <div class="stack" style="gap:.6rem">
+    <!-- WAITLIST -->
+    <section id="waitlist" class="section">
+      <div class="container stack">
+        <h2 class="headline lg reveal" data-i18n="wl.h">Get notified when card checkout opens</h2>
+        <p class="note reveal measure" data-i18n="wl.note">We’ll also send docs, presets, and onboarding tips. No spam.</p>
+        <div class="card reveal">
+          <form action="https://formspree.io/f/mldpnrop" method="POST">
+            <input type="hidden" name="source" value="top-waitlist-section">
             <div class="grid two-col" style="gap:.8rem">
-              <label>ETH / MATIC (EVM)
-                <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
-                  <input id="addr-eth" value="0xcFf999901af3360576BA4Fa9750340C3f26504A5" readonly>
-                  <button class="btn" data-copy="#addr-eth" type="button" data-i18n-aria-label="ui.copy" data-i18n="ui.copy">Copy</button>
-                </div>
-              </label>
-              <label>BTC
-                <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
-                  <input id="addr-btc" value="1DdTKYzeg9iR8GwgMZmoBje5ki5FhHwGVm" readonly>
-                  <button class="btn" data-copy="#addr-btc" type="button" data-i18n-aria-label="ui.copy" data-i18n="ui.copy">Copy</button>
-                </div>
-              </label>
+              <label for="wl-name" data-i18n="aff.name">Name<input id="wl-name" name="name" required></label>
+              <label for="wl-email" data-i18n="aff.email">Email<input id="wl-email" name="email" type="email" required></label>
             </div>
+            <label for="wl-tv" data-i18n="form.tv">TradingView username (for invite)<input id="wl-tv" name="tradingview" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv"></label>
+            <label for="wl-focus" data-i18n="wl.focus">Trading focus (optional)<input id="wl-focus" name="focus" data-i18n-placeholder="wl.focusPh" placeholder="e.g., BTC, FX NY session, swing"></label>
+            <button class="btn btn-primary" type="submit" data-i18n="wl.submit">Join the waitlist</button>
+          </form>
+        </div>
+      </div>
+    </section>
 
-            <div class="grid two-col" style="gap:.8rem">
-              <label>AVAX (C‑chain)
-                <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
-                  <input id="addr-avax" value="0x62B9c9625Bde847AD4A50Ced3CFd8e24735ffF08" readonly>
-                  <button class="btn" data-copy="#addr-avax" type="button" data-i18n="ui.copy">Copy</button>
-                </div>
-              </label>
-              <label>BNB (BSC)
-                <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
-                  <input id="addr-bnb" value="0x398605F9907eB2C3F8602A13D394Fbb00D53C2df" readonly>
-                  <button class="btn" data-copy="#addr-bnb" type="button" data-i18n="ui.copy">Copy</button>
-                </div>
-              </label>
-            </div>
-
-            <div class="grid two-col" style="gap:.8rem">
-              <label>Bitcoin Cash (BCH)
-                <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
-                  <input id="addr-bch" value="qz9gvarfc9rl9zm0me3ghjp83r78nchnrvwkazd4j9" readonly>
-                  <button class="btn" data-copy="#addr-bch" type="button" data-i18n="ui.copy">Copy</button>
-                </div>
-              </label>
-              <div class="note grid-align-left" data-i18n="crypto.direct.tip">
-                Crypto passes usually activate in <strong>1–3 hours</strong> after confirmations.
-              </div>
-            </div>
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="container stack">
+        <h2 class="headline lg reveal" data-i18n="faq.h">FAQ</h2>
+        <div class="grid auto-300 reveal">
+          <div class="card"><strong data-i18n="faq.q1">Is this financial advice?</strong><p class="note" data-i18n="faq.a1">No. SignalPilot is an educational toolset. Examples and backtests are for learning only.</p></div>
+          <div class="card"><strong data-i18n="faq.q2">Do the signals repaint?</strong><p class="note" data-i18n="faq.a2">No—signals finalize on candle close. Everything is alert‑ready.</p></div>
+          <div class="card"><strong data-i18n="faq.q3">What markets & timeframes?</strong><p class="note" data-i18n="faq.a3">Anything on TradingView—crypto, FX, indices, equities, commodities. Scalps to swings.</p></div>
+          <div class="card"><strong data-i18n="faq.q4">How fast is access?</strong><p class="note" data-i18n="faq.a4">After payment: <strong>PayPal/Card 1–8 hours</strong> · <strong>Crypto 1–3 hours</strong>.</p></div>
+          <div class="card" id="faq-indicators">
+            <strong data-i18n="faq.q5">Do I need every indicator?</strong>
+            <p class="note" data-i18n="faq.a5">
+              You get the <strong>entire Trading Suite</strong> with any plan—plus support and ongoing updates.
+              Start simple: <strong>EC Pro</strong> (bias) + <strong>PVA/OBV</strong> (participation) + <strong>SDZ/Levels</strong> (structure).
+              Add <strong>RSI Triad</strong> / <strong>SRSI+</strong> for timing, and <strong>Screener</strong> when ready.
+            </p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- AFFILIATE -->
-  <section id="affiliate" class="section">
-    <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="aff.h">Affiliate program (early access)</h2>
-      <div class="card reveal">
-        <p class="note measure" data-i18n="aff.note">We’re designing a fair, transparent program focused on education, not P&L promises. Please apply below if you agree to:</p>
-        <ul class="note measure" style="margin:.2rem 0 0 1.1rem">
-          <li data-i18n="aff.b1">Share useful content (charts, workflows, tutorials)</li>
-          <li data-i18n="aff.b2">No ROI guarantees or signals‑for‑sale</li>
-          <li data-i18n="aff.b3">Use clear “educational only” language</li>
-        </ul>
+    <!-- THANK YOU -->
+    <section id="thanks" class="section" style="display:none">
+      <div class="container stack"><div class="card">
+        <h2 class="headline lg" data-i18n="thanks.h">Thanks — you’re in!</h2>
+        <p class="note measure" data-i18n="thanks.p">We’ll activate your TradingView invites: <strong>PayPal/Card 1–8 hours</strong>, <strong>Crypto 1–3 hours</strong>. If you don’t see invites after that, email <a href="mailto:support@signalpilot.io">support@signalpilot.io</a> with your PayPal transaction or crypto tx id and TradingView username.</p>
+        <ol class="note measure" style="margin:.3rem 0 0 1.2rem">
+          <li data-i18n="thanks.l1">Watch for TradingView invites under <em>Indicators → Invite‑only scripts</em>.</li>
+          <li data-i18n="thanks.l2">Load the starter preset (sent by email).</li>
+          <li data-i18n="thanks.l3">Add two alerts: EC Pro and Screener.</li>
+        </ol>
+        <div style="margin-top:.8rem"><a class="btn btn-primary" href="#how" data-i18n="thanks.btn">Read the playbooks</a></div>
+      </div></div>
+    </section>
+  </main>
 
-        <form id="affiliate-form" action="https://formspree.io/f/xqaylpyq" method="POST" style="margin-top:.8rem">
-          <input type="hidden" name="ref" id="aff-ref" value="">
-          <input type="hidden" name="utm" id="aff-utm" value="">
-          <div class="grid two-col" style="gap:.8rem">
-            <label for="aff-name" data-i18n="aff.name">Name<input id="aff-name" name="name" required></label>
-            <label for="aff-email" data-i18n="aff.email">Email<input id="aff-email" name="email" type="email" required></label>
-          </div>
-          <label for="aff-channels" data-i18n="aff.channels">Channels / links (X, YT, TG, site)
-            <textarea id="aff-channels" name="channels" data-i18n-placeholder="aff.channelsPh" placeholder="https://twitter.com/..., https://youtube.com/..., https://t.me/..., website…"></textarea>
-          </label>
-          <div class="grid two-col" style="gap:.8rem">
-            <label for="aff-aud" data-i18n="aff.aud">Audience size (optional)<input id="aff-aud" name="audience" data-i18n-placeholder="aff.audPh" placeholder="e.g., 12k Twitter, 3k Telegram"></label>
-            <label for="aff-focus" data-i18n="aff.focus">Focus (optional)<input id="aff-focus" name="focus" data-i18n-placeholder="aff.focusPh" placeholder="e.g., BTC scalps, FX London, swing equities"></label>
-          </div>
-          <label class="measure" for="aff-notes" data-i18n="aff.notes">Notes (optional)
-            <textarea id="aff-notes" name="notes" data-i18n-placeholder="ph.notes" placeholder="Anything else we should know"></textarea>
-          </label>
-          <label class="consent">
-            <input class="tick" type="checkbox" required>
-            <span data-i18n="aff.agree">I agree to the guidelines above and will present SignalPilot as educational only.</span>
-          </label>
-          <button class="btn btn-primary" type="submit" data-i18n="aff.submit">Apply to affiliate waitlist</button>
-        </form>
+  <!-- Sticky CTA -->
+  <div class="cta-bar" id="ctaBar" aria-hidden="true">
+    <div class="cta-inner">
+      <div class="bar">
+        <div class="note" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" data-i18n="ctabar.msg">See the bias. Trade the plan.</div>
+        <a class="btn btn-primary btn-sm" href="#pricing" data-i18n="cta.get">Get the Suite</a>
+        <a class="btn btn-crypto btn-sm" href="#pay-crypto" data-i18n="cta.crypto">Crypto (–20%)</a>
+        <button class="cta-close" id="ctaClose" aria-label="Close">✕</button>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- WAITLIST -->
-  <section id="waitlist" class="section">
-    <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="wl.h">Get notified when card checkout opens</h2>
-      <p class="note reveal measure" data-i18n="wl.note">We’ll also send docs, presets, and onboarding tips. No spam.</p>
-      <div class="card reveal">
-        <form action="https://formspree.io/f/mldpnrop" method="POST">
-          <input type="hidden" name="source" value="top-waitlist-section">
-          <div class="grid two-col" style="gap:.8rem">
-            <label for="wl-name" data-i18n="aff.name">Name<input id="wl-name" name="name" required></label>
-            <label for="wl-email" data-i18n="aff.email">Email<input id="wl-email" name="email" type="email" required></label>
-          </div>
-          <label for="wl-tv" data-i18n="form.tv">TradingView username (for invite)<input id="wl-tv" name="tradingview" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv"></label>
-          <label for="wl-focus" data-i18n="wl.focus">Trading focus (optional)<input id="wl-focus" name="focus" data-i18n-placeholder="wl.focusPh" placeholder="e.g., BTC, FX NY session, swing"></label>
-          <button class="btn btn-primary" type="submit" data-i18n="wl.submit">Join the waitlist</button>
-        </form>
-      </div>
-    </div>
-  </section>
+  <!-- Live region -->
+  <div id="live" class="sr-only" aria-live="polite"></div>
 
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="faq.h">FAQ</h2>
-      <div class="grid auto-300 reveal">
-        <div class="card"><strong data-i18n="faq.q1">Is this financial advice?</strong><p class="note" data-i18n="faq.a1">No. SignalPilot is an educational toolset. Examples and backtests are for learning only.</p></div>
-        <div class="card"><strong data-i18n="faq.q2">Do the signals repaint?</strong><p class="note" data-i18n="faq.a2">No—signals finalize on candle close. Everything is alert‑ready.</p></div>
-        <div class="card"><strong data-i18n="faq.q3">What markets & timeframes?</strong><p class="note" data-i18n="faq.a3">Anything on TradingView—crypto, FX, indices, equities, commodities. Scalps to swings.</p></div>
-        <div class="card"><strong data-i18n="faq.q4">How fast is access?</strong><p class="note" data-i18n="faq.a4">After payment: <strong>PayPal/Card 1–8 hours</strong> · <strong>Crypto 1–3 hours</strong>.</p></div>
-        <div class="card" id="faq-indicators">
-          <strong data-i18n="faq.q5">Do I need every indicator?</strong>
-          <p class="note" data-i18n="faq.a5">
-            You get the <strong>entire Trading Suite</strong> with any plan—plus support and ongoing updates.
-            Start simple: <strong>EC Pro</strong> (bias) + <strong>PVA/OBV</strong> (participation) + <strong>SDZ/Levels</strong> (structure).
-            Add <strong>RSI Triad</strong> / <strong>SRSI+</strong> for timing, and <strong>Screener</strong> when ready.
-          </p>
+  <!-- Card notify modal -->
+  <div class="modal" id="cardNotify" role="dialog" aria-modal="true" aria-labelledby="cardNotifyTitle">
+    <div class="modal-card">
+      <header>
+        <h3 id="cardNotifyTitle" data-i18n="card.h">Notify me when card checkout opens</h3>
+        <button class="modal-close" data-close aria-label="Close">✕</button>
+      </header>
+      <form id="card-notify-form" action="https://formspree.io/f/mldpnrop" method="POST">
+        <input type="hidden" name="source" value="card-notify">
+        <input type="hidden" name="plan" id="card-notify-plan" value="">
+        <input type="hidden" name="ref" id="card-notify-ref" value="">
+        <input type="hidden" name="utm" id="card-notify-utm" value="">
+        <div class="grid two-col" style="gap:.8rem">
+          <label for="cn-name" data-i18n="aff.name">Name<input id="cn-name" name="name" required></label>
+          <label for="cn-email" data-i18n="aff.email">Email<input id="cn-email" name="email" type="email" required></label>
         </div>
+        <label for="cn-tv" data-i18n="form.tv">TradingView username<input id="cn-tv" name="tradingview" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv"></label>
+        <button class="btn btn-primary" type="submit" data-i18n="card.submit">Notify me</button>
+        <a class="btn btn-ghost" href="#waitlist" style="margin-left:.4rem" data-i18n="card.goto">Go to waitlist</a>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container stack">
+      <div class="social" style="display:flex;flex-wrap:wrap;gap:.8rem"></div>
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem">
+        <div>© <span id="year"></span> SignalPilot Labs, Inc. <span data-i18n="ft.all">All rights reserved.</span></div>
+        <div style="display:flex;gap:1rem"><a href="/privacy.html" data-i18n="ft.privacy">Privacy</a><a href="/terms.html" data-i18n="ft.terms">Terms</a></div>
       </div>
     </div>
-  </section>
+  </footer>
 
-  <!-- THANK YOU -->
-  <section id="thanks" class="section" style="display:none">
-    <div class="container stack"><div class="card">
-      <h2 class="headline lg" data-i18n="thanks.h">Thanks — you’re in!</h2>
-      <p class="note measure" data-i18n="thanks.p">We’ll activate your TradingView invites: <strong>PayPal/Card 1–8 hours</strong>, <strong>Crypto 1–3 hours</strong>. If you don’t see invites after that, email <a href="mailto:support@signalpilot.io">support@signalpilot.io</a> with your PayPal transaction or crypto tx id and TradingView username.</p>
-      <ol class="note measure" style="margin:.3rem 0 0 1.2rem">
-        <li data-i18n="thanks.l1">Watch for TradingView invites under <em>Indicators → Invite‑only scripts</em>.</li>
-        <li data-i18n="thanks.l2">Load the starter preset (sent by email).</li>
-        <li data-i18n="thanks.l3">Add two alerts: EC Pro and Screener.</li>
-      </ol>
-      <div style="margin-top:.8rem"><a class="btn btn-primary" href="#how" data-i18n="thanks.btn">Read the playbooks</a></div>
-    </div></div>
-  </section>
+  <!-- Config & helpers -->
+  <script>
+    const SP_WEBHOOK='https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec';
+    const SP_SECRET=''; // optional
+    const LT_CAP = 100;
+    const LT_STATUS_URL = SP_WEBHOOK ? (SP_WEBHOOK + '?fn=lt_status') : '';
 
-</main>
-
-<!-- Sticky CTA -->
-<div class="cta-bar" id="ctaBar" aria-hidden="true">
-  <div class="cta-inner">
-    <div class="bar">
-      <div class="note" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" data-i18n="ctabar.msg">See the bias. Trade the plan.</div>
-      <a class="btn btn-primary btn-sm" href="#pricing" data-i18n="cta.get">Get the Suite</a>
-      <a class="btn btn-crypto btn-sm" href="#pay-crypto" data-i18n="cta.crypto">Crypto (–20%)</a>
-      <button class="cta-close" id="ctaClose" aria-label="Close">✕</button>
-    </div>
-  </div>
-</div>
-
-<!-- Live region for announcements (a11y) -->
-<div id="live" class="sr-only" aria-live="polite"></div>
-
-<!-- Card notify modal -->
-<div class="modal" id="cardNotify" role="dialog" aria-modal="true" aria-labelledby="cardNotifyTitle">
-  <div class="modal-card">
-    <header>
-      <h3 id="cardNotifyTitle" data-i18n="card.h">Notify me when card checkout opens</h3>
-      <button class="modal-close" data-close aria-label="Close">✕</button>
-    </header>
-    <form id="card-notify-form" action="https://formspree.io/f/mldpnrop" method="POST">
-      <input type="hidden" name="source" value="card-notify">
-      <input type="hidden" name="plan" id="card-notify-plan" value="">
-      <input type="hidden" name="ref" id="card-notify-ref" value="">
-      <input type="hidden" name="utm" id="card-notify-utm" value="">
-      <div class="grid two-col" style="gap:.8rem">
-        <label for="cn-name" data-i18n="aff.name">Name<input id="cn-name" name="name" required></label>
-        <label for="cn-email" data-i18n="aff.email">Email<input id="cn-email" name="email" type="email" required></label>
-      </div>
-      <label for="cn-tv" data-i18n="form.tv">TradingView username<input id="cn-tv" name="tradingview" placeholder="@your.tradingview" required data-i18n-placeholder="ph.tv"></label>
-      <button class="btn btn-primary" type="submit" data-i18n="card.submit">Notify me</button>
-      <a class="btn btn-ghost" href="#waitlist" style="margin-left:.4rem" data-i18n="card.goto">Go to waitlist</a>
-    </form>
-  </div>
-</div>
-
-<footer>
-  <div class="container stack">
-    <div class="social" style="display:flex;flex-wrap:wrap;gap:.8rem"></div>
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem">
-      <div>© <span id="year"></span> SignalPilot Labs, Inc. <span data-i18n="ft.all">All rights reserved.</span></div>
-      <div style="display:flex;gap:1rem"><a href="/privacy.html" data-i18n="ft.privacy">Privacy</a><a href="/terms.html" data-i18n="ft.terms">Terms</a></div>
-    </div>
-  </div>
-</footer>
-
-<script>
-  /* ===== Config & helpers ===== */
-  const SP_WEBHOOK='https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec';
-  const SP_SECRET=''; // optional; leave blank to skip
-  const LT_CAP = 100;
-  const LT_STATUS_URL = SP_WEBHOOK ? (SP_WEBHOOK + '?fn=lt_status') : '';
-
-  function postWebhook(d){
-    if(!SP_WEBHOOK) return;
-    const p={...d}; if(SP_SECRET.trim()) p.secret=SP_SECRET;
-    fetch(SP_WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(p)}).catch(()=>{});
-  }
-  function live(msg){ const el=document.getElementById('live'); if(!el) return; el.textContent=''; setTimeout(()=>el.textContent=msg,10); }
-
-  // Ref / UTM capture
-  (function(){
-    const q=new URLSearchParams(location.search);
-    const ref=q.get('ref')||q.get('affiliate');
-    const utm=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].reduce((o,k)=>{const v=q.get(k);if(v)o[k]=v;return o;}, {});
-    if(ref) localStorage.setItem('sp_ref', ref);
-    if(Object.keys(utm).length) localStorage.setItem('sp_utm', JSON.stringify(utm));
-  })();
-  function getRef(){return localStorage.getItem('sp_ref')||''}
-  function getUTM(){try{return JSON.parse(localStorage.getItem('sp_utm')||'{}')}catch(_){return{}}}
-
-  // Nav toggle
-  const menuBtn=document.getElementById('menuToggle'),nav=document.getElementById('mainnav');
-  menuBtn?.addEventListener('click',()=>{nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',nav.classList.contains('open'));});
-  document.addEventListener('click',e=>{if(!nav.contains(e.target) && e.target!==menuBtn) nav.classList.remove('open');});
-  document.querySelectorAll('#mainnav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
-
-  // Reveal
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  /* Countdown — persistent to Oct 28, 2025 (local 00:00) */
-  (function(){
-    const KEY='sp_launch_target_epoch_2025_10_28';
-    let t = Number(localStorage.getItem(KEY));
-    if (!t || Number.isNaN(t)) {
-      const d = new Date(2025, 9, 28, 0, 0, 0); // Oct = 9 (0-indexed)
-      t = d.getTime();
-      localStorage.setItem(KEY, String(t));
+    function postWebhook(d){
+      if(!SP_WEBHOOK) return;
+      const p={...d}; if(SP_SECRET.trim()) p.secret=SP_SECRET;
+      fetch(SP_WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(p)}).catch(()=>{});
     }
-    const out=document.getElementById('countdown');
-    function tick(){
-      if(!out) return;
-      let diff = Math.max(0, t - Date.now());
-      const d  = Math.floor(diff / 86400000); diff %= 86400000;
-      const h  = Math.floor(diff / 3600000);  diff %= 3600000;
-      const m  = Math.floor(diff / 60000);    diff %= 60000;
-      const s  = Math.floor(diff / 1000);
-      out.textContent = `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+    function live(msg){ const el=document.getElementById('live'); if(!el) return; el.textContent=''; setTimeout(()=>el.textContent=msg,10); }
+
+    // ref/utm
+    (function(){
+      const q=new URLSearchParams(location.search);
+      const ref=q.get('ref')||q.get('affiliate');
+      const utm=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].reduce((o,k)=>{const v=q.get(k);if(v)o[k]=v;return o;}, {});
+      if(ref) localStorage.setItem('sp_ref', ref);
+      if(Object.keys(utm).length) localStorage.setItem('sp_utm', JSON.stringify(utm));
+    })();
+    function getRef(){return localStorage.getItem('sp_ref')||''}
+    function getUTM(){try{return JSON.parse(localStorage.getItem('sp_utm')||'{}')}catch(_){return{}}}
+
+    // Nav drawer
+    const menuBtn=document.getElementById('menuToggle'),nav=document.getElementById('mainnav');
+    menuBtn?.addEventListener('click',()=>{nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',nav.classList.contains('open'));});
+    document.addEventListener('click',e=>{if(!nav.contains(e.target) && e.target!==menuBtn) nav.classList.remove('open');});
+    document.querySelectorAll('#mainnav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+    // Reveal on view
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Countdown (to Oct 28, 2025 local 00:00)
+    (function(){
+      const KEY='sp_launch_target_epoch_2025_10_28';
+      let t = Number(localStorage.getItem(KEY));
+      if (!t || Number.isNaN(t)) { const d = new Date(2025, 9, 28, 0, 0, 0); t = d.getTime(); localStorage.setItem(KEY, String(t)); }
+      const out=document.getElementById('countdown');
+      function tick(){
+        if(!out) return;
+        let diff = Math.max(0, t - Date.now());
+        const d  = Math.floor(diff / 86400000); diff %= 86400000;
+        const h  = Math.floor(diff / 3600000);  diff %= 3600000;
+        const m  = Math.floor(diff / 60000);    diff %= 60000;
+        const s  = Math.floor(diff / 1000);
+        out.textContent = `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+      }
+      tick(); setInterval(tick, 1000);
+    })();
+
+    // Copy buttons
+    document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async ()=>{
+      const el=document.querySelector(btn.getAttribute('data-copy')); if(!el) return;
+      const val = el.value;
+      try{
+        if(navigator.clipboard?.writeText) await navigator.clipboard.writeText(val);
+        else { el.select(); document.execCommand('copy'); }
+        const old=btn.textContent; btn.textContent=i18n.t('ui.copied')||'Copied'; setTimeout(()=>btn.textContent=old,1400);
+        live(i18n.t('ui.addrCopied')||'Wallet address copied');
+      }catch(_){}
+    }));
+
+    // Pro toggles
+    document.querySelectorAll('[data-pro]').forEach(btn=>btn.addEventListener('click',()=>{
+      const p=document.getElementById(btn.getAttribute('data-pro')); if(!p) return;
+      const show=p.hasAttribute('hidden'); if(show) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
+      btn.setAttribute('aria-expanded',String(show));
+      btn.textContent = show ? i18n.t('ui.hidepro') : i18n.t('prod.probtn');
+    }));
+
+    // Sticky CTA (hide when forms focus)
+    const ctaBar=document.getElementById('ctaBar'), ctaClose=document.getElementById('ctaClose'); 
+    let dismissed=false, suppressed=false, focusing=false;
+    function updateCta(){
+      if(dismissed || suppressed || focusing){ ctaBar.classList.remove('show'); ctaBar.classList.add('hide'); return; }
+      const y=window.scrollY; const threshold=(window.innerWidth<480)?1200:650;
+      if(y>threshold){ ctaBar.classList.add('show'); ctaBar.classList.remove('hide'); } else { ctaBar.classList.remove('show'); ctaBar.classList.add('hide'); }
     }
-    tick(); setInterval(tick, 1000);
-  })();
+    window.addEventListener('scroll',updateCta,{passive:true}); updateCta();
+    ctaClose?.addEventListener('click',()=>{dismissed=true;updateCta();});
+    (function(){
+      const targets=['#pricing','#pay-crypto','#affiliate','#waitlist','#how','#roadmap'];
+      const io2=new IntersectionObserver(entries=>{
+        suppressed = entries.some(e=>e.isIntersecting); updateCta();
+      },{root:null,rootMargin:'0px 0px -55% 0px',threshold:0});
+      targets.forEach(sel=>{const el=document.querySelector(sel); if(el) io2.observe(el);});
+    })();
+    document.addEventListener('focusin',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=true;updateCta();}});
+    document.addEventListener('focusout',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=false;updateCta();}});
 
-  // Copy to clipboard (+ live announcement)
-  document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async ()=>{
-    const el=document.querySelector(btn.getAttribute('data-copy')); if(!el) return;
-    const val = el.value;
-    try{
-      if(navigator.clipboard?.writeText) await navigator.clipboard.writeText(val);
-      else { el.select(); document.execCommand('copy'); }
-      const old=btn.textContent; btn.textContent=i18n.t('ui.copied')||'Copied'; setTimeout(()=>btn.textContent=old,1400);
-      live(i18n.t('ui.addrCopied')||'Wallet address copied');
-    }catch(_){}
-  }));
+    // Footer year
+    document.getElementById('year').textContent=new Date().getFullYear();
 
-  // Pro description toggles
-  document.querySelectorAll('[data-pro]').forEach(btn=>btn.addEventListener('click',()=>{
-    const p=document.getElementById(btn.getAttribute('data-pro')); if(!p) return;
-    const show=p.hasAttribute('hidden'); if(show) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
-    btn.setAttribute('aria-expanded',String(show));
-    btn.textContent = show ? i18n.t('ui.hidepro') : i18n.t('prod.probtn');
-  }));
+    // Thanks page after PayPal approval
+    (function(){ function showThanks(){const s=document.getElementById('thanks'); if(location.hash==='#thanks') s.style.display='block';} window.addEventListener('hashchange',showThanks); showThanks(); })();
 
-  // Sticky CTA (never show while forms are focused to avoid covering inputs)
-  const ctaBar=document.getElementById('ctaBar'), ctaClose=document.getElementById('ctaClose'); 
-  let dismissed=false, suppressed=false, focusing=false;
-  function updateCta(){
-    if(dismissed || suppressed || focusing){ ctaBar.classList.remove('show'); ctaBar.classList.add('hide'); return; }
-    const y=window.scrollY; const threshold=(window.innerWidth<480)?1200:650;
-    if(y>threshold){ ctaBar.classList.add('show'); ctaBar.classList.remove('hide'); } else { ctaBar.classList.remove('show'); ctaBar.classList.add('hide'); }
-  }
-  window.addEventListener('scroll',updateCta,{passive:true}); updateCta();
-  ctaClose?.addEventListener('click',()=>{dismissed=true;updateCta();});
-  (function(){
-    const targets=['#pricing','#pay-crypto','#affiliate','#waitlist','#how','#roadmap'];
-    const io2=new IntersectionObserver(entries=>{
-      suppressed = entries.some(e=>e.isIntersecting);
-      updateCta();
-    },{root:null,rootMargin:'0px 0px -55% 0px',threshold:0});
-    targets.forEach(sel=>{const el=document.querySelector(sel); if(el) io2.observe(el);});
-  })();
-  document.addEventListener('focusin',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=true;updateCta();}});
-  document.addEventListener('focusout',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=false;updateCta();}});
+    // Card notify modal
+    (function(){
+      const modal=document.getElementById('cardNotify');
+      function trap(e){
+        if(e.key!=="Tab") return;
+        const f=modal.querySelectorAll('a,button,input,textarea,select,[tabindex]:not([tabindex="-1"])');
+        const first=f[0], last=f[f.length-1];
+        if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
+        else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
+      }
+      function openModal(plan){
+        document.getElementById('card-notify-plan').value=plan||'';
+        document.getElementById('card-notify-ref').value=getRef();
+        document.getElementById('card-notify-utm').value=JSON.stringify(getUTM());
+        modal.classList.add('open'); modal.addEventListener('keydown',trap); setTimeout(()=>document.getElementById('cn-name')?.focus(),50);
+      }
+      function close(){ modal.classList.remove('open'); modal.removeEventListener('keydown',trap); }
+      document.querySelectorAll('.btn-card-notify').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.plan)));
+      modal?.addEventListener('click',e=>{ if(e.target===modal || e.target.hasAttribute('data-close')) close(); });
+      document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+    })();
 
-  // Footer year
-  document.getElementById('year').textContent=new Date().getFullYear();
-
-  // "Thanks" page after PayPal approval
-  (function(){
-    function showThanks(){const s=document.getElementById('thanks'); if(location.hash==='#thanks') s.style.display='block';}
-    window.addEventListener('hashchange',showThanks); showThanks();
-  })();
-
-  // Card notify modal (open/close + focus trap)
-  (function(){
-    const modal=document.getElementById('cardNotify');
-    function focusTrap(e){
-      if(e.key!=="Tab") return;
-      const f=modal.querySelectorAll('a,button,input,textarea,select,[tabindex]:not([tabindex="-1"])');
-      const first=f[0], last=f[f.length-1];
-      if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
-      else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
-    }
-    function openModal(plan){
-      document.getElementById('card-notify-plan').value=plan||'';
-      document.getElementById('card-notify-ref').value=getRef();
-      document.getElementById('card-notify-utm').value=JSON.stringify(getUTM());
-      modal.classList.add('open');
-      modal.addEventListener('keydown',focusTrap);
-      setTimeout(()=>document.getElementById('cn-name')?.focus(), 50);
-    }
-    function closeModal(){ modal.classList.remove('open'); modal.removeEventListener('keydown',focusTrap); }
-    document.querySelectorAll('.btn-card-notify').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.plan)));
-    modal?.addEventListener('click',e=>{ if(e.target===modal || e.target.hasAttribute('data-close')) closeModal(); });
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
-  })();
-
-  /* Particle network background (mobile safe, low CPU) */
-  (function(){
-    const c = document.getElementById('bg-net'); if(!c) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduce) return;
-
-    const ctx = c.getContext('2d',{alpha:true});
-    let W=0,H=0,DPR=1, N=0, MAX, parts=[], raf;
-
-    function reset(){
-      DPR = Math.min(window.devicePixelRatio||1, 2);
-      c.style.width = window.innerWidth + 'px';
-      c.style.height = window.innerHeight + 'px';
-      W = c.width  = Math.floor(window.innerWidth * DPR);
-      H = c.height = Math.floor(window.innerHeight * DPR);
-
-      N = (window.innerWidth < 560) ? 28 : (window.innerWidth < 1100) ? 44 : 72;
-      MAX = (window.innerWidth < 560 ? 90 : 120) * DPR;
-
-      parts = Array.from({length:N}, ()=>({
-        x: Math.random()*W,
-        y: Math.random()*H,
-        vx: (Math.random()*2-1)*0.08*DPR,
-        vy: (Math.random()*2-1)*0.08*DPR,
-        r:  (Math.random()*1.2+0.4)*DPR
-      }));
-    }
-
-    function draw(){
-      raf = requestAnimationFrame(draw);
-      ctx.clearRect(0,0,W,H);
-      ctx.globalCompositeOperation = 'lighter';
-
-      for(let i=0;i<N;i++){
-        const p=parts[i];
-        p.x+=p.vx; p.y+=p.vy;
-        if(p.x<0||p.x>W) p.vx*=-1;
-        if(p.y<0||p.y>H) p.vy*=-1;   // fixed y-boundary check
-
-        // node
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle='rgba(140,198,255,0.55)';
-        ctx.fill();
-
-        // connections
-        for(let j=i+1;j<N;j++){
-          const q=parts[j];
-          const dx=p.x-q.x, dy=p.y-q.y;
-          const d=Math.hypot(dx,dy);
-          if(d<MAX){
-            const a=(1-d/MAX)*0.65;
-            ctx.strokeStyle=`rgba(124,202,255,${a})`;
-            ctx.lineWidth=0.6*DPR;
-            ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+    // Constellation network
+    (function(){
+      const c = document.getElementById('bg-net'); if(!c) return;
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const ctx = c.getContext('2d',{alpha:true});
+      let W=0,H=0,DPR=1,N=0,MAX,parts=[],raf;
+      function reset(){
+        DPR = Math.min(window.devicePixelRatio||1, 2);
+        c.style.width = window.innerWidth + 'px';
+        c.style.height = window.innerHeight + 'px';
+        W = c.width  = Math.floor(window.innerWidth * DPR);
+        H = c.height = Math.floor(window.innerHeight * DPR);
+        N = (window.innerWidth < 560) ? 28 : (window.innerWidth < 1100) ? 44 : 72;
+        MAX = (window.innerWidth < 560 ? 90 : 120) * DPR;
+        parts = Array.from({length:N}, () => ({
+          x: Math.random()*W, y: Math.random()*H,
+          vx: (Math.random()*2-1)*0.08*DPR, vy: (Math.random()*2-1)*0.08*DPR,
+          r: (Math.random()*1.2+0.4)*DPR
+        }));
+      }
+      function draw(){
+        raf = requestAnimationFrame(draw);
+        ctx.clearRect(0,0,W,H); ctx.globalCompositeOperation='lighter';
+        for(let i=0;i<N;i++){
+          const p=parts[i]; p.x+=p.vx; p.y+=p.vy;
+          if(p.x<0||p.x>W) p.vx*=-1; if(p.y<0||p.y>H) p.vy*=-1;  // y-boundary fixed
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle='rgba(140,198,255,0.55)'; ctx.fill();
+          for(let j=i+1;j<N;j++){
+            const q=parts[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.hypot(dx,dy);
+            if(d<MAX){ const a=(1-d/MAX)*0.65; ctx.strokeStyle=`rgba(124,202,255,${a})`; ctx.lineWidth=0.6*DPR;
+              ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke(); }
           }
         }
       }
-    }
+      reset(); draw();
+      let t; window.addEventListener('resize',()=>{cancelAnimationFrame(raf); clearTimeout(t); t=setTimeout(()=>{reset(); draw();},120)},{passive:true});
+    })();
 
-    reset(); draw();
-    let rid;
-    window.addEventListener('resize', ()=>{ cancelAnimationFrame(raf); clearTimeout(rid); rid=setTimeout(()=>{reset(); draw();},120); }, {passive:true});
-  })();
-
-  /* ==== Lifetime availability (100 cap) ==== */
-  async function loadLifetimeStatus(){
-    const claimedEl = document.getElementById('lt-claimed');
-    const leftEl    = document.getElementById('lt-left');
-    const barEl     = document.getElementById('lt-bar');
-    const ribbon    = document.getElementById('lt-ribbon');
-    const form      = document.getElementById('pp-lifetime');
-    const soldBtn   = document.getElementById('lt-soldout');
-
-    let claimed = 0;
-    try{
-      if(LT_STATUS_URL){
-        const res = await fetch(LT_STATUS_URL, {method:'GET', mode:'cors', cache:'no-store'});
-        if(res.ok){
-          const j = await res.json();
-          if(typeof j.claimed === 'number') claimed = Math.max(0, Math.min(LT_CAP, j.claimed|0));
-        }
-      }
-    }catch(_){ /* degrade silently */ }
-
-    const left = Math.max(0, LT_CAP - claimed);
-    if (claimedEl) claimedEl.textContent = String(claimed);
-    if (leftEl) leftEl.textContent = String(left);
-    if (barEl)  { barEl.style.width = `${(claimed / LT_CAP) * 100}%`; barEl.parentElement?.setAttribute('aria-valuenow', String(claimed)); }
-    const soldOut = left <= 0;
-    if (ribbon) ribbon.textContent = soldOut ? i18n.t('plan.soldShort') : '100 total';
-
-    if (soldOut){
-      if (form) form.style.display = 'none';
-      if (soldBtn) soldBtn.style.display = 'inline-flex';
-    } else {
-      if (form) form.style.display = 'grid';
-      if (soldBtn) soldBtn.style.display = 'none';
-    }
-  }
-</script>
-
-<!-- PayPal SDK -->
-<script src="https://www.paypal.com/sdk/js?client-id=AT7YkprnIrMlBqYZPRJiuH9poDcKiK0L0bEyBuA4R5InsY6nkTCvhAyKi5eg6F3eTjutd9BVbFzdYAsZ&vault=true&intent=subscription&disable-funding=card,credit"></script>
-<script>
-  const PP_COLOR='black';
-  function renderSub(planId, containerId, tvInputId, planKey, consentId){
-    if(!window.paypal) return;
-    paypal.Buttons({
-      fundingSource: paypal.FUNDING.PAYPAL,
-      style:{shape:'pill', color:PP_COLOR, layout:'vertical', label:'subscribe', tagline:false},
-      createSubscription: function(_, actions){
-        const tv=(document.getElementById(tvInputId)?.value||'').trim();
-        const ok=consentId ? document.getElementById(consentId)?.checked : true;
-        if(!tv){alert(i18n.t('alert.tv')); return;}
-        if(!ok){alert(i18n.t('alert.consent')); return;}
-        const ref=getRef(); const custom=`tv:${tv}|plan:${planKey}${ref?`|ref:${ref}`:''}`;
-        localStorage.setItem('sp_last_tv', tv); localStorage.setItem('sp_last_plan', planKey);
-        return actions.subscription.create({ plan_id:planId, custom_id:custom, application_context:{shipping_preference:'NO_SHIPPING'} });
-      },
-      onApprove: function(data){
-        postWebhook({ type:'subscription', plan: localStorage.getItem('sp_last_plan')||'unknown', tv: localStorage.getItem('sp_last_tv')||'', subscription_id: data.subscriptionID, ref:getRef(), utm:getUTM() });
-        location.hash='#thanks';
-      },
-      onError: function(){ alert('Payment failed. Please try again or email support@signalpilot.io'); }
-    }).render('#'+containerId);
-  }
-  renderSub('P-6UD12522YR208981MNDQ3QPA','paypal-button-container-P-6UD12522YR208981MNDQ3QPA','tv-monthly','monthly','consent-monthly');
-  renderSub('P-4VR929208D839202YNDQ3T6Q','paypal-button-container-P-4VR929208D839202YNDQ3T6Q','tv-quarterly','quarterly','consent-quarterly');
-  renderSub('P-43M86339WD725333MNDQ3VGI','paypal-button-container-P-43M86339WD725333MNDQ3VGI','tv-yearly','yearly','consent-yearly');
-
-  // Lifetime form guards + cap re-check + return URL with thanks hash
-  (function(){
-    const form=document.getElementById('pp-lifetime'); if(!form) return;
-
-    // Wire IPN notify → Apps Script for server-side cap enforcement
-    const ipn = document.getElementById('pp-lifetime-notify');
-    if (ipn && SP_WEBHOOK) ipn.value = SP_WEBHOOK + '?fn=pp_ipn';
-
-    form.addEventListener('submit', async function(e){
-      const tv=(document.getElementById('tv-lifetime')?.value||'').trim();
-      const consentOk=document.getElementById('consent-lifetime')?.checked;
-      if(!tv){ e.preventDefault(); alert(i18n.t('alert.tv')); return; }
-      if(!consentOk){ e.preventDefault(); alert(i18n.t('alert.consent')); return; }
-
-      // Just-in-time availability check
-      let okAvail = true;
+    // Lifetime availability
+    async function loadLifetimeStatus(){
+      const claimedEl = document.getElementById('lt-claimed');
+      const leftEl    = document.getElementById('lt-left');
+      const barEl     = document.getElementById('lt-bar');
+      const ribbon    = document.getElementById('lt-ribbon');
+      const form      = document.getElementById('pp-lifetime');
+      const soldBtn   = document.getElementById('lt-soldout');
+      let claimed = 0;
       try{
         if(LT_STATUS_URL){
           const res = await fetch(LT_STATUS_URL, {method:'GET', mode:'cors', cache:'no-store'});
-          if(res.ok){
-            const j = await res.json();
-            okAvail = Number(j.claimed||0) < LT_CAP;
-          }
+          if(res.ok){ const j = await res.json(); if(typeof j.claimed === 'number') claimed = Math.max(0, Math.min(LT_CAP, j.claimed|0)); }
         }
-      }catch(_){ /* assume available if status is offline */ }
+      }catch(_){}
+      const left = Math.max(0, LT_CAP - claimed);
+      if (claimedEl) claimedEl.textContent = String(claimed);
+      if (leftEl) leftEl.textContent = String(left);
+      if (barEl)  { barEl.style.width = `${(claimed / LT_CAP) * 100}%`; barEl.parentElement?.setAttribute('aria-valuenow', String(claimed)); }
+      const soldOut = left <= 0;
+      if (ribbon) ribbon.textContent = soldOut ? i18n.t('plan.soldShort') : '100 total';
+      if (soldOut){ if (form) form.style.display='none'; if (soldBtn) soldBtn.style.display='inline-flex'; }
+      else { if (form) form.style.display='grid'; if (soldBtn) soldBtn.style.display='none'; }
+    }
+  </script>
 
-      if(!okAvail){
-        e.preventDefault();
-        alert(i18n.t('alert.sold'));
-        await loadLifetimeStatus();
-        return;
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AT7YkprnIrMlBqYZPRJiuH9poDcKiK0L0bEyBuA4R5InsY6nkTCvhAyKi5eg6F3eTjutd9BVbFzdYAsZ&vault=true&intent=subscription&disable-funding=card,credit"></script>
+  <script>
+    const PP_COLOR='black';
+    function renderSub(planId, containerId, tvInputId, planKey, consentId){
+      if(!window.paypal) return;
+      paypal.Buttons({
+        fundingSource: paypal.FUNDING.PAYPAL,
+        style:{shape:'pill', color:PP_COLOR, layout:'vertical', label:'subscribe', tagline:false},
+        createSubscription: function(_, actions){
+          const tv=(document.getElementById(tvInputId)?.value||'').trim();
+          const ok=consentId ? document.getElementById(consentId)?.checked : true;
+          if(!tv){alert(i18n.t('alert.tv')); return;}
+          if(!ok){alert(i18n.t('alert.consent')); return;}
+          const ref=getRef(); const custom=`tv:${tv}|plan:${planKey}${ref?`|ref:${ref}`:''}`;
+          localStorage.setItem('sp_last_tv', tv); localStorage.setItem('sp_last_plan', planKey);
+          return actions.subscription.create({ plan_id:planId, custom_id:custom, application_context:{shipping_preference:'NO_SHIPPING'} });
+        },
+        onApprove: function(data){
+          postWebhook({ type:'subscription', plan: localStorage.getItem('sp_last_plan')||'unknown', tv: localStorage.getItem('sp_last_tv')||'', subscription_id: data.subscriptionID, ref:getRef(), utm:getUTM() });
+          location.hash='#thanks';
+        },
+        onError: function(){ alert('Payment failed. Please try again or email support@signalpilot.io'); }
+      }).render('#'+containerId);
+    }
+    renderSub('P-6UD12522YR208981MNDQ3QPA','paypal-button-container-P-6UD12522YR208981MNDQ3QPA','tv-monthly','monthly','consent-monthly');
+    renderSub('P-4VR929208D839202YNDQ3T6Q','paypal-button-container-P-4VR929208D839202YNDQ3T6Q','tv-quarterly','quarterly','consent-quarterly');
+    renderSub('P-43M86339WD725333MNDQ3VGI','paypal-button-container-P-43M86339WD725333MNDQ3VGI','tv-yearly','yearly','consent-yearly');
+
+    (function(){
+      const form=document.getElementById('pp-lifetime'); if(!form) return;
+      const ipn = document.getElementById('pp-lifetime-notify'); if (ipn && SP_WEBHOOK) ipn.value = SP_WEBHOOK + '?fn=pp_ipn';
+      form.addEventListener('submit', async function(e){
+        const tv=(document.getElementById('tv-lifetime')?.value||'').trim();
+        const consentOk=document.getElementById('consent-lifetime')?.checked;
+        if(!tv){ e.preventDefault(); alert(i18n.t('alert.tv')); return; }
+        if(!consentOk){ e.preventDefault(); alert(i18n.t('alert.consent')); return; }
+        let okAvail = true;
+        try{
+          if(LT_STATUS_URL){
+            const res = await fetch(LT_STATUS_URL, {method:'GET', mode:'cors', cache:'no-store'});
+            if(res.ok){ const j = await res.json(); okAvail = Number(j.claimed||0) < LT_CAP; }
+          }
+        }catch(_){}
+        if(!okAvail){ e.preventDefault(); alert(i18n.t('alert.sold')); await loadLifetimeStatus(); return; }
+        const ref=getRef(); const custom=document.getElementById('pp-lifetime-custom');
+        if(custom) custom.value=`tv:${tv}|plan:lifetime${ref?`|ref:${ref}`:''}`;
+        localStorage.setItem('sp_last_tv', tv); localStorage.setItem('sp_last_plan','lifetime');
+        const base=window.location.origin + '/?paid=lifetime#thanks';
+        document.getElementById('pp-lifetime-return').value=base;
+        document.getElementById('pp-lifetime-cancel').value=window.location.origin + '/#pricing';
+      });
+      loadLifetimeStatus(); setInterval(loadLifetimeStatus, 60000);
+    })();
+  </script>
+
+  <!-- ===== i18n dictionaries ===== -->
+  <script>
+    const I18N = {
+      en:{
+        "meta.title":"SignalPilot — Trading Suite · Cut through noise. Ship clear signals.",
+        "nav.why":"Why SignalPilot","nav.inside":"What’s inside","nav.how":"How it works","nav.roadmap":"Roadmap","nav.pricing":"Pricing","nav.crypto":"Pay with crypto","nav.aff":"Affiliate","nav.faq":"FAQ",
+        "hdr.from79":"From <strong>$79/mo</strong>",
+        "cta.get":"Get the Suite","cta.docs":"View Docs (soon)","cta.crypto":"Pay with crypto (–20%)",
+        "hero.badge":"TRADINGVIEW INDICATORS · ANY MARKET · ANY TIMEFRAME",
+        "hero.title":"SignalPilot —<br>Trading Suite",
+        "hero.lead":"See the bias, read the pressure, time the move. SignalPilot turns structure, volume and momentum into clean, <strong>non‑repainting</strong> signals you can scan, alert and trade on any market or timeframe. Flagship <strong>SP‑EC Pro (Event Candles)</strong> plus focused companion modules—built to work together.",
+        "hero.p1":"Non‑repainting","hero.p2":"Alert‑ready","hero.p3":"Any market · timeframe","hero.p4":"Activation Crypto 1–3h",
+        "hero.note":"Every plan includes the full suite, support, ongoing updates—and access to the upcoming indicators.",
+        "hero.launch.badge":"Launch window","hero.launch.in":"Launch in","hero.launch.notify":"Notify me","hero.launch.star":"Star on GitHub","hero.launch.note":"Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.",
+        "why.h":"Why traders use SignalPilot",
+        "why.c1.t":"Clarity","why.c1.d":"One‑look bias. No signal spam.",
+        "why.c2.t":"Context","why.c2.d":"HTF confirmation with supply/demand and anchored levels that matter.",
+        "why.c3.t":"Actionable","why.c3.d":"Designed for alerts and scans—watchlists or global.",
+        "why.c4.t":"Robust","why.c4.d":"Non‑repainting logic, volatility‑aware filters and guardrails.",
+        "why.c5.t":"Any market · Any timeframe","why.c5.d":"Crypto, FX, indices, equities, commodities. Scalps to swings.",
+        "why.c6.t":"Fast access","why.c6.d":"Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.",
+        "inside.h":"What’s inside the Trading Suite",
+        "prod.flagship":"Flagship","prod.probtn":"Pro description",
+        "prod.ec.tag":"Event‑Candle Confluence","prod.ec.punch":"Your bias in one glance. Signals, not guesses.","prod.ec.note":"Shows when the market likely wants up or down—clean signals that don’t repaint.","prod.ec.pro":"Consensus from EMA34/55, price vs Pilot Line and slope. ATR‑normalized dip/rip logic, Pilot ribbon for trend strength, and NanoFlow “+” for micro‑momentum. Non‑repainting and alert‑ready.",
+        "prod.pva.punch":"Crowd energy, measured — then printed.","prod.pva.note":"Confirms participation and prints Bull/Bear plus Climax or Absorption spikes.","prod.pva.pro":"Normalized participation (log Z‑Vol + RVOL) with HTF confirm, CVD and divergence checks. Overlay emits one decisive, non‑repainting print: Bull / Bear + EVR (Climax / Absorption). Scan‑friendly.",
+        "prod.obv.tag":"Money flow","prod.obv.punch":"When pressure flips, you see it.","prod.obv.note":"Reveals where volume leans; crosses hint when buyers or sellers take control.","prod.obv.pro":"Smoothed OBV with a Bollinger channel. Crosses and band pushes flag shifts in control. Regular + hidden divergences, optional HTF compute, and alert presets.",
+        "prod.ltf.tag":"Rhythm & fatigue","prod.ltf.punch":"Coiled or cooked—know before you chase.","prod.ltf.note":"Marks when price is building energy or getting tired so you don’t chase late moves.","prod.ltf.pro":"TD‑style 8/9 counts, squeeze cloud for coil, and Caution/Danger marks for stretched moves (fade, mean‑revert, post‑squeeze).",
+        "prod.levels.tag":"Micro reference","prod.levels.punch":"Anchors that actually hold the story.","prod.levels.note":"Auto‑plots day/week/month anchors price respects—without clutter.","prod.levels.pro":"dVWAP, wVWAP, dPOC, wOpen, mOpen, mPOC—drawn on the opening candle only. Sharp references; minimal noise.",
+        "prod.rsi.tag":"Layered RSI","prod.rsi.punch":"Momentum turns—with receipts.","prod.rsi.note":"Blends fast/base/slow RSI to spot turns early and scores their strength.","prod.rsi.pro":"Fast/Base/Slow RSI blend with a 0–50 strength score. Filters: OBV trend, Stoch timing, ATR vol, HTF RSI.",
+        "prod.srsi.tag":"Context‑aware Stoch RSI","prod.srsi.punch":"Trigger only when context agrees.","prod.srsi.note":"Adds trend, volume, and volatility context so signals make sense.","prod.srsi.pro":"Volatility‑adaptive Stoch RSI that respects HTF bias, money‑flow and SDZ; outputs a single Confluence Score for scanning and alerts.",
+        "prod.macd.tag":"Momentum regime","prod.macd.punch":"Classic MACD—minus the chop.","prod.macd.note":"Cuts chop and confirms regime so you ride trends, not noise.","prod.macd.pro":"HTF confirm, ATR gating and near‑zero fade reduce noise. Modes: Raw or Qualified. Presets: Classic Soft / Pro Filtered.",
+        "prod.scr.tag":"On‑chart & global","prod.scr.punch":"Scan the list, not your patience.","prod.scr.note":"Check many symbols/timeframes at once and fire alerts automatically.","prod.scr.pro":"On‑chart mini‑screener: up to 8 symbols × TFs; shows ticker, last signal (↑/↓), time since, ATR‑sized TP1, Ribbon state, and running P&L. Global/watchlist alerts supported.",
+        "how.h":"How it works — from bias to execution",
+        "how.s1.t":"1) Set bias","how.s1.d":"Use <strong>EC Pro</strong> and/or <strong>MACD+</strong> to pick a side. Don’t trade against it.",
+        "how.s2.t":"2) Verify participation","how.s2.d":"<strong>PVA/OBV</strong> confirm energy. No energy = no trade.",
+        "how.s3.t":"3) Map structure","how.s3.d":"Respect <strong>SDZ</strong> boxes and <strong>Levels</strong> (d/w/m anchors).",
+        "how.s4.t":"4) Time the entry","how.s4.d":"<strong>RSI Triad</strong> & <strong>SRSI+</strong> for turns; <strong>LTF</strong> flags coil vs fatigue.",
+        "how.s5.t":"5) Automate","how.s5.d":"<strong>Screener</strong> routes signals to alerts. Keep risk fixed, not feelings.",
+        "how.play.h":"Built‑in plays","how.play.p1":"<strong>Trend Buy‑the‑Dip:</strong> Bias Up → PVA Bull/Climax → reaction near demand/VWAP → RSI/SRSI timing.","how.play.p2":"<strong>Reversal Flip:</strong> Absorption + OBV div at supply → EC slope flattens → Pilot reclaim.","how.play.p3":"<strong>Breakout Continuation:</strong> Climax through wVWAP/supply → first ATR dip → NanoFlow “+”.","how.play.note":"Start with EC Pro (bias) + PVA/OBV (participation) + SDZ/Levels (structure). Layer timing & screener as needed. <em>Educational only — not financial advice.</em>",
+        "road.h":"Roadmap — what’s next","road.note":"We ship fast. Timelines may shift a little, but the direction is constant: more clarity, less noise.",
+        "road.now":"Available now","road.now.b1":"<b>Bias:</b> EC Pro + MACD+","road.now.b2":"<b>Participation:</b> PVA & OBV","road.now.b3":"<b>Structure:</b> SDZ boxes & anchored Levels","road.now.b4":"<b>Timing:</b> RSI Triad & SRSI+","road.now.b5":"<b>Automation:</b> Screener & alerts","road.now.b6":"<b>Fast access:</b> PayPal/Card 1–8h · Crypto 1–3h",
+        "road.next":"Rolling out next","road.next.b1":"Preset bundle + quick‑start docs","road.next.b2":"Short video tips & mini case studies","road.next.b3":"Watchlist alerts & simple webhooks",
+        "road.later":"Later this year","road.later.b1":"SP‑Range Pro & SP‑Liquidity Map","road.later.b2":"Preset library + session playback","road.later.b3":"Backtest templates & exporter examples","road.later.b4":"Localization (ES / PT‑BR / DE)",
+        "price.h":"Plans & pricing","price.blurb1":"All plans include the <u>full Trading Suite</u>, support, ongoing updates, and <u>access to upcoming indicators</u>.","price.blurb2":"Subscriptions include new modules while active. Lifetime includes all future updates.",
+        "plan.monthly":"Monthly","plan.permonth":"/month","plan.quarterly":"Quarterly","plan.per3m":"/3 months","plan.best":"Best value","plan.peryear":"/year","plan.lifetime":"Lifetime (limited)","plan.onetime":"one‑time",
+        "plan.cap.limited":"Limited — ","plan.cap.claimed":"claimed","plan.cap.left":"left","plan.l.b1":"<strong>Full Trading Suite</strong> — all future updates included","plan.l.b2":"Founding member perks & feature priority","plan.l.b3":"Private Discord for life + full preset bundle","plan.soldout":"Sold out — join waitlist below","plan.soldShort":"Sold out",
+        "plan.q.b1":"Everything in Monthly","plan.q.b2":"<strong>New indicators</strong> as they roll out","plan.q.b3":"Preset pack updates","plan.q.b4":"Priority email support",
+        "plan.y.b1":"Everything in Quarterly","plan.y.b2":"Concierge onboarding + early access","plan.y.b3":"Private office hours","plan.y.b4":"<strong>All new indicators included</strong> while active",
+        "form.tv":"TradingView username (for invite)","form.tv_req":"TradingView username (required for activation)","form.consent":"I understand SignalPilot is educational. No financial advice.","form.cardsoon":"Pay by card (coming soon)","ph.tv":"@your.tradingview","ph.email":"you@domain.com","ph.notes":"Anything else we should know",
+        "qs.h":"Quick‑start (5 minutes)","qs.b1":"Pick a plan and pay (PayPal auto‑renew or Crypto Prepaid Pass).","qs.b2":"Enter your <strong>TradingView username</strong> for the invite.","qs.b3":"We activate invites: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.","qs.b4":"Load the starter preset and add two alerts.","qs.b5":"Follow the Trend Dip / Reversal Flip / Breakout playbooks.","qs.note":"Crypto is <strong>one‑time</strong> (no auto‑renew). SignalPilot is educational—<em>not financial advice</em>.",
+        "crypto.h":"Pay with crypto <span class='pill' style='background:rgba(255,180,70,.18);color:#ffd699'>save 20%</span>",
+        "crypto.p":"Crypto payments are <strong>one‑time</strong>. You’ll get a <strong>prepaid access pass</strong> (30 / 90 / 365 days) or <strong>Lifetime</strong>. <strong>No auto‑renew</strong>. Typical activation is <strong>1–3 hours</strong> after network confirmations.",
+        "crypto.form.note":"Request an invoice with an exact quote—or send directly and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> for activation. <em>No memo/tag required.</em>",
+        "crypto.form.plan":"Plan (Prepaid Pass)","crypto.form.coin":"Coin","crypto.form.email":"Email (for invoice & receipt)","crypto.form.notes":"Notes (optional)","crypto.form.submit":"Request crypto invoice",
+        "crypto.plan.m":"Monthly Crypto Pass (30 days) — save 20%","crypto.plan.q":"Quarterly Crypto Pass (90 days) — save 20%","crypto.plan.y":"Yearly Crypto Pass (365 days) — save 20%","crypto.plan.l":"Lifetime (Crypto) — save 20%",
+        "crypto.direct.note":"Prefer to send directly? Copy a wallet below and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> to <a href='mailto:support@signalpilot.io'>support@signalpilot.io</a>. <em>No memo/tag required.</em>",
+        "crypto.direct.tip":"Crypto passes usually activate in <strong>1–3 hours</strong> after confirmations.",
+        "aff.h":"Affiliate program (early access)","aff.note":"We’re designing a fair, transparent program focused on education, not P&L promises. Please apply below if you agree to:","aff.b1":"Share useful content (charts, workflows, tutorials)","aff.b2":"No ROI guarantees or signals‑for‑sale","aff.b3":"Use clear “educational only” language","aff.name":"Name","aff.email":"Email","aff.channels":"Channels / links (X, YT, TG, site)","aff.channelsPh":"https://twitter.com/..., https://youtube.com/..., https://t.me/..., website…","aff.aud":"Audience size (optional)","aff.audPh":"e.g., 12k Twitter, 3k Telegram","aff.focus":"Focus (optional)","aff.focusPh":"e.g., BTC scalps, FX London, swing equities","aff.notes":"Notes (optional)","aff.agree":"I agree to the guidelines above and will present SignalPilot as educational only.","aff.submit":"Apply to affiliate waitlist",
+        "wl.h":"Get notified when card checkout opens","wl.note":"We’ll also send docs, presets, and onboarding tips. No spam.","wl.focus":"Trading focus (optional)","wl.focusPh":"e.g., BTC, FX NY session, swing","wl.submit":"Join the waitlist",
+        "faq.h":"FAQ","faq.q1":"Is this financial advice?","faq.a1":"No. SignalPilot is an educational toolset. Examples and backtests are for learning only.","faq.q2":"Do the signals repaint?","faq.a2":"No—signals finalize on candle close. Everything is alert‑ready.","faq.q3":"What markets & timeframes?","faq.a3":"Anything on TradingView—crypto, FX, indices, equities, commodities. Scalps to swings.","faq.q4":"How fast is access?","faq.a4":"After payment: <strong>PayPal/Card 1–8 hours</strong> · <strong>Crypto 1–3 hours</strong>.","faq.q5":"Do I need every indicator?","faq.a5":"You get the <strong>entire Trading Suite</strong> with any plan—plus support and ongoing updates. Start simple: <strong>EC Pro</strong> (bias) + <strong>PVA/OBV</strong> (participation) + <strong>SDZ/Levels</strong> (structure). Add <strong>RSI Triad</strong> / <strong>SRSI+</strong> for timing, and <strong>Screener</strong> when ready.",
+        "thanks.h":"Thanks — you’re in!","thanks.p":"We’ll activate your TradingView invites: <strong>PayPal/Card 1–8 hours</strong>, <strong>Crypto 1–3 hours</strong>. If you don’t see invites after that, email <a href='mailto:support@signalpilot.io'>support@signalpilot.io</a> with your PayPal transaction or crypto tx id and TradingView username.","thanks.l1":"Watch for TradingView invites under <em>Indicators → Invite‑only scripts</em>.","thanks.l2":"Load the starter preset (sent by email).","thanks.l3":"Add two alerts: EC Pro and Screener.","thanks.btn":"Read the playbooks",
+        "ctabar.msg":"See the bias. Trade the plan.",
+        "card.h":"Notify me when card checkout opens","card.submit":"Notify me","card.goto":"Go to waitlist",
+        "ft.all":"All rights reserved.","ft.privacy":"Privacy","ft.terms":"Terms",
+        "ui.copy":"Copy","ui.copied":"Copied","ui.addrCopied":"Wallet address copied","ui.hidepro":"Hide pro description",
+        "alert.tv":"Enter your TradingView username for activation.","alert.consent":"Please confirm the educational-only consent.","alert.sold":"Lifetime is sold out. Please join the waitlist."
+      },
+      de:{
+        "nav.why":"Warum SignalPilot","nav.inside":"Was ist enthalten","nav.how":"So funktioniert’s","nav.roadmap":"Roadmap","nav.pricing":"Preise","nav.crypto":"Mit Krypto zahlen","nav.aff":"Affiliate","nav.faq":"FAQ",
+        "hdr.from79":"Ab <strong>$79/Mon</strong>",
+        "cta.get":"Suite holen","cta.docs":"Doku ansehen (bald)","cta.crypto":"Mit Krypto zahlen (–20%)",
+        "hero.badge":"TRADINGVIEW‑INDIKATOREN · JEDER MARKT · JEDER ZEITRAHMEN",
+        "hero.title":"SignalPilot —<br>Trading Suite",
+        "hero.lead":"Bias sehen, Druck lesen, Entry timen. SignalPilot macht aus Struktur, Volumen und Momentum saubere, <strong>nicht‑repaintende</strong> Signale für jeden Markt und Zeitrahmen. Flaggschiff <strong>SP‑EC Pro (Event Candles)</strong> + fokussierte Module — für Zusammenspiel gebaut.",
+        "hero.p1":"Kein Repaint","hero.p2":"Alert‑fertig","hero.p3":"Jeder Markt · Zeitraum","hero.p4":"Krypto‑Freischaltung 1–3h",
+        "hero.note":"Alle Pläne enthalten die komplette Suite, Support, laufende Updates und Zugang zu kommenden Indikatoren.",
+        "hero.launch.badge":"Launch‑Fenster","hero.launch.in":"Start in","hero.launch.notify":"Benachrichtigen","hero.launch.star":"Bei GitHub ★","hero.launch.note":"Freischaltung nach Zahlung: <strong>PayPal/Karte 1–8h</strong> · <strong>Krypto 1–3h</strong>.",
+        "why.h":"Warum Trader SignalPilot nutzen",
+        "why.c1.t":"Klarheit","why.c1.d":"Bias auf einen Blick. Kein Signal‑Spam.",
+        "why.c2.t":"Kontext","why.c2.d":"HTF‑Bestätigung mit Angebot/Nachfrage & verankerten Levels.",
+        "why.c3.t":"Umsetzbar","why.c3.d":"Für Alerts & Scans entworfen — Watchlist oder global.",
+        "why.c4.t":"Robust","why.c4.d":"Kein Repaint, Volatilitäts‑Filter und Guardrails.",
+        "why.c5.t":"Jeder Markt · Zeitraum","why.c5.d":"Krypto, FX, Indizes, Aktien, Rohstoffe. Scalps bis Swings.",
+        "why.c6.t":"Schneller Zugang","why.c6.d":"Nach Zahlung: <strong>PayPal/Karte 1–8h</strong> · <strong>Krypto 1–3h</strong>.",
+        "inside.h":"Was in der Trading Suite steckt",
+        "prod.flagship":"Flaggschiff","prod.probtn":"Pro‑Beschreibung",
+        "prod.ec.tag":"Event‑Candle‑Konfluenz","prod.ec.punch":"Bias auf einen Blick. Signale statt Raten.","prod.ec.note":"Zeigt, wann der Markt eher rauf oder runter will — sauber & ohne Repaint.",
+        "how.h":"So funktioniert’s — vom Bias zur Ausführung",
+        "price.h":"Pläne & Preise",
+        "plan.monthly":"Monatlich","plan.permonth":"/Monat","plan.quarterly":"Vierteljährlich","plan.per3m":"/3 Monate","plan.best":"Bestes Angebot","plan.peryear":"/Jahr","plan.lifetime":"Lifetime (limitiert)","plan.onetime":"einmalig",
+        "form.tv":"TradingView‑Benutzername (für Invite)","form.tv_req":"TradingView‑Benutzername (erforderlich)","form.consent":"Ich verstehe: Nur Bildung, keine Finanzberatung.","form.cardsoon":"Kartenzahlung (bald)","ph.tv":"@dein.tradingview","ph.email":"du@domain.com","ph.notes":"Alles Weitere hier eintragen",
+        "qs.h":"Schnellstart (5 Min)","qs.b1":"Plan wählen & zahlen (PayPal Abo oder Krypto‑Pass).","qs.b2":"<strong>TradingView‑Benutzername</strong> eingeben.","qs.b3":"Einladungen aktivieren wir: <strong>PayPal/Karte 1–8h</strong> · <strong>Krypto 1–3h</strong>.","qs.b4":"Starter‑Preset laden & 2 Alerts setzen.","qs.b5":"Playbooks folgen: Trend‑Dip / Reversal / Breakout.","qs.note":"Krypto ist <strong>einmalig</strong> (kein Auto‑Renew). Keine Finanzberatung.",
+        "crypto.h":"Mit Krypto zahlen <span class='pill' style='background:rgba(255,180,70,.18);color:#ffd699'>20% sparen</span>",
+        "crypto.form.plan":"Plan (Prepaid Pass)","crypto.form.coin":"Coin","crypto.form.email":"E‑Mail (für Rechnung)","crypto.form.notes":"Notizen (optional)","crypto.form.submit":"Krypto‑Rechnung anfordern",
+        "crypto.plan.m":"Monatspass (30 Tage) — 20% sparen","crypto.plan.q":"Quartalspass (90 Tage) — 20% sparen","crypto.plan.y":"Jahrespass (365 Tage) — 20% sparen","crypto.plan.l":"Lifetime (Krypto) — 20% sparen",
+        "aff.h":"Affiliate‑Programm (Early Access)","aff.name":"Name","aff.email":"E‑Mail","aff.channels":"Kanäle / Links (X, YT, TG, Website)","aff.submit":"Für Affiliate‑Warteliste bewerben",
+        "wl.h":"Benachrichtigt werden, wenn Kartenzahlung live ist","wl.focus":"Trading‑Fokus (optional)","wl.submit":"Warteliste beitreten",
+        "faq.h":"FAQ","faq.q1":"Ist das Finanzberatung?","faq.a1":"Nein. SignalPilot ist ein Lern‑Toolset.","faq.q2":"Repainten die Signale?","faq.a2":"Nein — Signale schließen zur Kerzenschlusszeit.","faq.q3":"Welche Märkte & Zeitrahmen?","faq.a3":"Alles auf TradingView. Scalps bis Swings.","faq.q4":"Wie schnell ist der Zugang?","faq.a4":"Nach Zahlung: PayPal/Karte 1–8h · Krypto 1–3h.",
+        "thanks.h":"Danke — du bist drin!","thanks.btn":"Playbooks lesen",
+        "ctabar.msg":"Bias sehen. Plan handeln.",
+        "card.h":"Melde dich, wenn Kartenzahlung startet","card.submit":"Benachrichtigen","card.goto":"Zur Warteliste",
+        "ft.all":"Alle Rechte vorbehalten.",
+        "ui.copy":"Kopieren","ui.copied":"Kopiert","ui.addrCopied":"Adresse kopiert","ui.hidepro":"Pro‑Beschreibung verbergen",
+        "alert.tv":"Bitte deinen TradingView‑Benutzernamen eingeben.","alert.consent":"Bitte die Einverständnis‑Checkbox bestätigen.","alert.sold":"Lifetime ist ausverkauft. Bitte Warteliste nutzen."
       }
+    };
+  </script>
 
-      const ref=getRef(); const custom=document.getElementById('pp-lifetime-custom');
-      if(custom) custom.value=`tv:${tv}|plan:lifetime${ref?`|ref:${ref}`:''}`;
-      localStorage.setItem('sp_last_tv', tv); localStorage.setItem('sp_last_plan','lifetime');
-      const base=window.location.origin + '/?paid=lifetime#thanks';
-      document.getElementById('pp-lifetime-return').value=base;
-      document.getElementById('pp-lifetime-cancel').value=window.location.origin + '/#pricing';
-    });
-
-    // Initial status + periodic refresh
-    loadLifetimeStatus();
-    setInterval(loadLifetimeStatus, 60000);
-  })();
-</script>
-
-<!-- ===== i18n dictionaries + engine ===== -->
-<script>
-/* ===== FULL LANGUAGE PACKS (EN/DE/FR/ES/IT/ZH/RU/AR) ===== */
-const I18N = { /* -------------- Dictionaries injected -------------- */
-  /* EN base */ /* (See previous message for full keys content) */
-};
-
-/* >>> For brevity in this view, the dictionaries are injected by the next script tag. <<< */
-</script>
-
-<script>
-/* ===== FULL LANGUAGE PACKS (expanded) ===== */
-const I18N_FULL = /* pasted from prior response, trimmed in this block for readability */;
-</script>
-
-<script>
-/* ---- Light i18n engine ---- */
-const I18N_DATA = (typeof I18N_FULL === 'object' && Object.keys(I18N_FULL).length) ? I18N_FULL : I18N;
-const i18n = {
-  lang: (localStorage.getItem('sp_lang') || (navigator.language||'en').slice(0,2)).toLowerCase(),
-  t(k){ const L=I18N_DATA[this.lang]||I18N_DATA.en; return (L?.[k] ?? I18N_DATA.en?.[k] ?? k); },
-  apply(){
-    document.title = this.t('meta.title') || document.title;
-    document.documentElement.lang = this.lang;
-    document.documentElement.dir  = (this.lang === 'ar') ? 'rtl' : 'ltr';
-    document.querySelectorAll('[data-i18n]').forEach(n=>{
-      const v=this.t(n.getAttribute('data-i18n')); if(!v) return;
-      if(v.includes('<')) n.innerHTML=v; else n.textContent=v;
-    });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(n=>{
-      const v=this.t(n.getAttribute('data-i18n-placeholder')); if(v) n.setAttribute('placeholder', v);
-    });
-    document.querySelectorAll('[data-i18n-aria-label]').forEach(n=>{
-      const v=this.t(n.getAttribute('data-i18n-aria-label')); if(v) n.setAttribute('aria-label', v);
-    });
-    // Update dynamic buttons currently toggled
-    document.querySelectorAll('[data-pro]').forEach(btn=>{
-      const target=document.getElementById(btn.getAttribute('data-pro'));
-      const isOpen = target && !target.hasAttribute('hidden');
-      btn.textContent = isOpen ? this.t('ui.hidepro') : this.t('prod.probtn');
-    });
-    // Ribbon if sold out text was set in EN
-    const rb=document.getElementById('lt-ribbon'); if(rb && rb.textContent.trim().toLowerCase()==='sold out') rb.textContent=this.t('plan.soldShort');
-  }
-};
-// init
-(function(){
-  const sel=document.getElementById('lang');
-  const supported=Object.keys(I18N_DATA);
-  if(!supported.includes(i18n.lang)) i18n.lang='en';
-  sel.value=i18n.lang;
-  sel.addEventListener('change', ()=>{ i18n.lang=sel.value; localStorage.setItem('sp_lang', i18n.lang); i18n.apply(); });
-  i18n.apply();
-})();
-</script>
-
-<!-- === Replace the placeholder with the actual full dictionaries from the previous message === -->
-<script>
-/* This tag injects the full dictionary content (EN/DE/FR/ES/IT/zh/ru/ar). 
-   Paste the "I18N" object from the previous assistant message here as:
-   const I18N_FULL = { ...all languages... };
-   Then remove the small placeholder tag above. */
-</script>
-
+  <script>
+    // lightweight i18n
+    const i18n = {
+      lang: (localStorage.getItem('sp_lang') || (navigator.language||'en').slice(0,2)).toLowerCase(),
+      t(k){ const L=I18N[this.lang]||I18N.en; return (L?.[k] ?? I18N.en?.[k] ?? k); },
+      apply(){
+        document.title = this.t('meta.title') || document.title;
+        document.documentElement.lang = this.lang;
+        document.documentElement.dir = (this.lang==='ar'?'rtl':'ltr');
+        document.querySelectorAll('[data-i18n]').forEach(n=>{
+          const v=this.t(n.getAttribute('data-i18n')); if(!v) return;
+          if(v.includes('<')) n.innerHTML=v; else n.textContent=v;
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(n=>{
+          const v=this.t(n.getAttribute('data-i18n-placeholder')); if(v) n.setAttribute('placeholder', v);
+        });
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(n=>{
+          const v=this.t(n.getAttribute('data-i18n-aria-label')); if(v) n.setAttribute('aria-label', v);
+        });
+        // keep pro buttons consistent
+        document.querySelectorAll('[data-pro]').forEach(btn=>{
+          const target=document.getElementById(btn.getAttribute('data-pro'));
+          const isOpen = target && !target.hasAttribute('hidden');
+          btn.textContent = isOpen ? this.t('ui.hidepro') : this.t('prod.probtn');
+        });
+        // ribbon text if previously set
+        const rb=document.getElementById('lt-ribbon'); if(rb && rb.textContent.trim().toLowerCase()==='sold out') rb.textContent=this.t('plan.soldShort');
+      }
+    };
+    (function(){
+      const sel=document.getElementById('lang');
+      if(!I18N[i18n.lang]) i18n.lang='en';
+      sel.value=i18n.lang;
+      sel.addEventListener('change',()=>{ i18n.lang=sel.value; localStorage.setItem('sp_lang', i18n.lang); i18n.apply(); });
+      i18n.apply();
+    })();
+  </script>
 </body>
 </html>
