@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -186,7 +186,15 @@
     nav a{display:inline-flex;padding:.45rem .75rem;border-radius:999px;color:#9fb6e6;font-weight:700;text-decoration:none}
     nav a:hover,nav a:focus-visible{color:#fff;background:rgba(255,255,255,.12)}
     .price-pill{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .6rem;border-radius:999px;font-weight:800;font-size:.85rem;color:#cfe1ff;background:rgba(123,155,255,.15);border:1px solid rgba(123,155,255,.26)}
-    @media (max-width:1060px){ .menu-toggle{display:inline-flex} nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:1rem;max-width:min(92vw,420px)} .open{display:flex} header .btn.btn-primary{display:none} .price-pill{display:none} }
+    .lang-wrap{ margin-right:.5rem }
+    @media (max-width:1060px){
+      .menu-toggle{display:inline-flex}
+      nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:1rem;max-width:min(92vw,420px)}
+      .open{display:flex}
+      header .btn.btn-primary{display:none}
+      .price-pill{display:none}
+      .lang-wrap{ order:2 }
+    }
 
     /* HERO */
     .hero{padding:clamp(1.6rem,8vw,4.2rem) 0 1.2rem}
@@ -338,6 +346,22 @@
         <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
+
+    <!-- Language selector -->
+    <div class="lang-wrap">
+      <label class="sr-only" for="langSel">Language</label>
+      <select id="langSel" aria-label="Language" title="Language">
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="it">Italiano</option>
+        <option value="zh">中文</option>
+        <option value="ru">Русский</option>
+        <option value="ar">العربية</option>
+      </select>
+    </div>
+
     <span class="price-pill">From <strong>$79/mo</strong></span>
     <a class="btn btn-primary" href="#pricing">Get the Suite</a>
     <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav">⋯</button>
@@ -1045,6 +1069,9 @@
   </div>
 </footer>
 
+<!-- Host element for Google Translate (hidden) -->
+<div id="google_translate_container" class="sr-only" aria-hidden="true"></div>
+
 <script>
   /* ===== Config & helpers ===== */
   const SP_WEBHOOK='https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec';
@@ -1258,6 +1285,7 @@
     const left = Math.max(0, LT_CAP - claimed);
     if (claimedEl) claimedEl.textContent = String(claimed);
     if (leftEl) leftEl.textContent = String(left);
+    if (barEl)  { barEl.style.width = ${(claimed / LT_CAP) * 100}% ; } // just to ensure non-empty, real value set below anyway
     if (barEl)  { barEl.style.width = `${(claimed / LT_CAP) * 100}%`; barEl.parentElement?.setAttribute('aria-valuenow', String(claimed)); }
     const soldOut = left <= 0;
     if (ribbon) ribbon.textContent = soldOut ? 'Sold out' : '100 total';
@@ -1271,6 +1299,186 @@
     }
   }
 </script>
+
+<!-- ==== i18n glue: selector + dynamic strings + RTL + persistence ==== -->
+<script>
+/* =========================
+   SP i18n glue (EN/DE/FR/ES/IT/ZH/RU/AR)
+   - Full-page translation via Google Translate Element
+   - Localizes dynamic JS strings set after load
+   - Persists selection; handles RTL for Arabic
+   ========================= */
+(function(){
+  const LANG_KEY = 'sp_lang';
+  const SUP = ['en','de','fr','es','it','zh','ru','ar'];
+  const toCode = (l) => {
+    if(!l) return 'en';
+    l = l.toLowerCase();
+    if (l.startsWith('zh')) return 'zh';
+    return SUP.includes(l.slice(0,2)) ? l.slice(0,2) : 'en';
+  };
+  function getSavedLang(){
+    const saved = localStorage.getItem(LANG_KEY);
+    if (saved && SUP.includes(saved)) return saved;
+    const nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+    return toCode(nav);
+  }
+  function setCookie(name, value, days, domain){
+    let expires = '';
+    if(days){
+      const d = new Date(); d.setTime(d.getTime() + (days*864e5));
+      expires = ';expires=' + d.toUTCString();
+    }
+    const dom = domain ? ';domain=' + domain : '';
+    document.cookie = name + '=' + value + expires + ';path=/' + dom;
+  }
+  function setGoogTrans(lang){
+    const target = (lang === 'zh') ? 'zh-CN' : lang;
+    const val = '/en/' + target;
+    setCookie('googtrans', val, 365);
+    const host = location.hostname.replace(/^www\./,'');
+    setCookie('googtrans', val, 365, '.' + host);
+  }
+  function applyDirLang(lang){
+    document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : lang;
+    document.documentElement.dir  = (lang === 'ar') ? 'rtl' : 'ltr';
+  }
+
+  const STR = {
+    en:{ pro_desc:'Pro description', hide_pro:'Hide pro description', copied:'Copied',
+         enter_tv:'Enter your TradingView username for activation.',
+         consent:'Please confirm the educational-only consent.',
+         payment_failed:'Payment failed. Please try again or email support@signalpilot.io',
+         wallet_copied:'Wallet address copied', lt_sold_out:'Lifetime is sold out. Please join the waitlist.',
+         lt_total_100:'100 total' },
+    de:{ pro_desc:'Pro‑Beschreibung', hide_pro:'Pro‑Beschreibung ausblenden', copied:'Kopiert',
+         enter_tv:'Geben Sie Ihren TradingView‑Benutzernamen für die Aktivierung ein.',
+         consent:'Bitte die Zustimmung „nur zu Bildungszwecken“ bestätigen.',
+         payment_failed:'Zahlung fehlgeschlagen. Bitte erneut versuchen oder support@signalpilot.io kontaktieren.',
+         wallet_copied:'Wallet‑Adresse kopiert', lt_sold_out:'Lifetime ist ausverkauft. Bitte der Warteliste beitreten.',
+         lt_total_100:'Insgesamt 100' },
+    fr:{ pro_desc:'Description pro', hide_pro:'Masquer la description pro', copied:'Copié',
+         enter_tv:'Saisissez votre identifiant TradingView pour l’activation.',
+         consent:'Veuillez confirmer le consentement « à des fins éducatives uniquement ».',
+         payment_failed:'Paiement échoué. Réessayez ou écrivez à support@signalpilot.io',
+         wallet_copied:'Adresse de portefeuille copiée', lt_sold_out:'Lifetime est épuisé. Rejoignez la liste d’attente.',
+         lt_total_100:'100 au total' },
+    es:{ pro_desc:'Descripción pro', hide_pro:'Ocultar descripción pro', copied:'Copiado',
+         enter_tv:'Ingresa tu usuario de TradingView para la activación.',
+         consent:'Confirma el consentimiento “solo educativo”.',
+         payment_failed:'Pago fallido. Intenta de nuevo o escribe a support@signalpilot.io',
+         wallet_copied:'Dirección de wallet copiada', lt_sold_out:'Lifetime agotado. Únete a la lista de espera.',
+         lt_total_100:'100 en total' },
+    it:{ pro_desc:'Descrizione pro', hide_pro:'Nascondi descrizione pro', copied:'Copiato',
+         enter_tv:'Inserisci il tuo username TradingView per l’attivazione.',
+         consent:'Conferma il consenso “solo a scopo educativo”.',
+         payment_failed:'Pagamento non riuscito. Riprova o scrivi a support@signalpilot.io',
+         wallet_copied:'Indirizzo wallet copiato', lt_sold_out:'Lifetime esaurito. Unisciti alla lista d’attesa.',
+         lt_total_100:'100 totali' },
+    zh:{ pro_desc:'专业说明', hide_pro:'隐藏专业说明', copied:'已复制',
+         enter_tv:'请输入用于开通的 TradingView 用户名。',
+         consent:'请勾选“仅用于教育目的”的确认。',
+         payment_failed:'支付失败。请重试或发送邮件至 support@signalpilot.io',
+         wallet_copied:'钱包地址已复制', lt_sold_out:'终身版售罄。请加入候补名单。',
+         lt_total_100:'共 100 个' },
+    ru:{ pro_desc:'Описание Pro', hide_pro:'Скрыть описание Pro', copied:'Скопировано',
+         enter_tv:'Укажите ваш логин TradingView для активации.',
+         consent:'Подтвердите согласие «только в образовательных целях».',
+         payment_failed:'Платёж не прошёл. Попробуйте ещё раз или напишите на support@signalpilot.io',
+         wallet_copied:'Адрес кошелька скопирован', lt_sold_out:'Lifetime распродан. Присоединяйтесь к листу ожидания.',
+         lt_total_100:'Всего 100' },
+    ar:{ pro_desc:'وصف احترافي', hide_pro:'إخفاء الوصف الاحترافي', copied:'تم النسخ',
+         enter_tv:'أدخل اسم مستخدم TradingView للتفعيل.',
+         consent:'يرجى تأكيد الموافقة «لأغراض تعليمية فقط».',
+         payment_failed:'فشلت عملية الدفع. حاول مرة أخرى أو راسل support@signalpilot.io',
+         wallet_copied:'تم نسخ عنوان المحفظة', lt_sold_out:'نفدت باقة مدى الحياة. الرجاء الانضمام إلى قائمة الانتظار.',
+         lt_total_100:'الإجمالي 100' }
+  };
+  function L(){ return STR[getSavedLang()] || STR.en; }
+
+  function initLangUI(){
+    const sel = document.getElementById('langSel');
+    const cur = getSavedLang();
+    if(sel){ sel.value = cur; sel.addEventListener('change', e=>{
+      const val = e.target.value;
+      localStorage.setItem(LANG_KEY, val);
+      setGoogTrans(val);
+      applyDirLang(val);
+      location.reload();
+    });}
+    setGoogTrans(cur);
+    applyDirLang(cur);
+  }
+
+  function patchDynamicStrings(){
+    // Copy buttons → "Copied"
+    document.querySelectorAll('[data-copy]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        setTimeout(()=>{ btn.textContent = L().copied; }, 0);
+      });
+    });
+
+    // Pro description toggles → toggle text localized
+    document.querySelectorAll('[data-pro]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const p = document.getElementById(btn.getAttribute('data-pro')); if(!p) return;
+        const isOpen = !p.hasAttribute('hidden');
+        setTimeout(()=>{ btn.textContent = isOpen ? L().pro_desc : L().hide_pro; }, 0);
+      });
+    });
+
+    // Localize live() message used by copy helper
+    if (typeof window.live === 'function'){
+      const _live = window.live;
+      window.live = function(msg){
+        if (msg && /Wallet address copied/i.test(msg)) { msg = L().wallet_copied; }
+        return _live(msg);
+      };
+    }
+
+    // Localize common alerts (PayPal / lifetime guards)
+    const _alert = window.alert ? window.alert.bind(window) : null;
+    if(_alert){
+      window.alert = function(msg){
+        const T = L();
+        if (/TradingView username/i.test(msg)) msg = T.enter_tv;
+        else if (/educational/i.test(msg))    msg = T.consent;
+        else if (/Payment failed/i.test(msg)) msg = T.payment_failed;
+        else if (/sold out/i.test(msg))       msg = T.lt_sold_out;
+        _alert(msg);
+      };
+    }
+  }
+
+  function patchLifetimeUI(){
+    const ribbon = document.getElementById('lt-ribbon');
+    if(!ribbon) return;
+    const observer = new MutationObserver(()=> {
+      const text = ribbon.textContent.trim().toLowerCase();
+      if (text.includes('sold')) ribbon.textContent = L().lt_sold_out.replace(/\.$/,'');
+      else ribbon.textContent = L().lt_total_100;
+    });
+    observer.observe(ribbon, {childList:true, subtree:true, characterData:true});
+  }
+
+  initLangUI();
+  patchDynamicStrings();
+  patchLifetimeUI();
+})();
+</script>
+
+<!-- Google Translate (reads cookie & applies full‑page translation) -->
+<script>
+  function googleTranslateElementInit(){
+    if(!window.google || !google.translate) return;
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'ar,de,es,fr,it,ru,zh-CN',
+      autoDisplay: false
+    }, 'google_translate_container');
+  }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <!-- PayPal SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=AT7YkprnIrMlBqYZPRJiuH9poDcKiK0L0bEyBuA4R5InsY6nkTCvhAyKi5eg6F3eTjutd9BVbFzdYAsZ&vault=true&intent=subscription&disable-funding=card,credit"></script>
