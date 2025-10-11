@@ -330,6 +330,45 @@ html, body { isolation: isolate; }
 @supports (-webkit-touch-callout: none) {
   .bg-aurora { z-index: 0; transform: translateZ(0); }
 }
+    /* ===== MOBILE AURORA FIX PACK ===== */
+
+/* 0) Give blending a stable base */
+html, body { isolation: isolate; }
+
+/* 1) Move the gradients to a pseudo-element.
+      Parent handles motion only (fixes WebKit transform+blend bug). */
+.bg-aurora{
+  background: none !important; /* hide old background on the wrapper */
+  animation: aurora-pan 36s linear infinite alternate !important;
+  will-change: transform;
+}
+.bg-aurora::before{
+  content:"";
+  position:absolute; inset:-12%;
+  background:
+    radial-gradient(45% 35% at 12% 12%,  rgba(125,200,255,.40), transparent 62%),
+    radial-gradient(36% 28% at 85% 14%,  rgba(155,140,255,.38), transparent 65%),
+    radial-gradient(48% 36% at 78% 88%,  rgba(118,221,255,.28), transparent 70%),
+    radial-gradient(26% 22% at 8% 72%,   rgba(151,124,255,.22), transparent 66%);
+  filter: blur(70px) saturate(130%) brightness(110%);
+  mix-blend-mode: screen;
+  opacity: .92;
+  pointer-events: none;
+}
+
+/* 2) You said “always animate” — ignore Reduce Motion */
+@media (prefers-reduced-motion: reduce){
+  .bg-aurora{ animation: aurora-pan 36s linear infinite alternate !important; }
+  .bg-net   { display:block !important; }
+}
+
+/* 3) WebKit/iOS safety: avoid negative z-index dropouts, soften the blur */
+@supports (-webkit-touch-callout: none) {
+  .bg-aurora{ z-index: 0; transform: translateZ(0); }
+  .bg-aurora::before{ filter: blur(60px) saturate(130%) brightness(112%); }
+  /* If some devices still show nothing, last‑ditch fallback:
+     .bg-aurora::before{ mix-blend-mode: lighten; } */
+}
   </style>
 </head>
 <body>
