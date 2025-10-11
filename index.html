@@ -103,8 +103,7 @@
 
     /* ===== Background layers ===== */
     .bg-net{
-      position:fixed; inset:0;
-      z-index:-2; pointer-events:none;
+      position:fixed; inset:0; z-index:-2; pointer-events:none;
       opacity:.55; filter:saturate(115%) brightness(110%);
     }
     .bg-aurora{
@@ -115,34 +114,33 @@
         radial-gradient(48% 36% at 78% 88%,  rgba(118,221,255,.28), transparent 70%),
         radial-gradient(26% 22% at 8% 72%,   rgba(151,124,255,.22), transparent 66%);
       filter: blur(70px) saturate(130%) brightness(110%);
-      mix-blend-mode: screen;
-      opacity:.85;
-      animation: aurora-pan 36s linear infinite alternate;
-      will-change: transform;
+      mix-blend-mode: screen; opacity:.85;
+      animation: aurora-pan 36s linear infinite alternate; will-change: transform;
     }
     @keyframes aurora-pan { from{transform:translate3d(-2%,-1%,0) scale(1.02)} to{transform:translate3d(2%,1%,0) scale(1.05)} }
 
     body::after{
-      content:"";
-      position:fixed; inset:0; z-index:-3; pointer-events:none; opacity:.22;
+      content:""; position:fixed; inset:0; z-index:-3; pointer-events:none; opacity:.22;
       background-image:
         linear-gradient(transparent 31px, rgba(255,255,255,.10) 32px, transparent 33px),
         linear-gradient(90deg, transparent 31px, rgba(255,255,255,.08) 32px, transparent 33px);
       background-size:64px 64px;
     }
+
+    /* Respect motion/battery + small viewports */
     @media (prefers-reduced-motion: reduce){
       .bg-aurora{animation:none}
       .bg-net{display:none}
     }
+    @media (max-width:640px){
+      .bg-aurora, #bg-net{ display:none !important; }
+      header{ backdrop-filter:none; background:rgba(5,7,13,.92); }
+    }
 
     /* Layout */
-    .container{
-      max-width:var(--max);
-      width:100%;
-      margin:0 auto;
+    .container{ max-width:var(--max); width:100%; margin:0 auto;
       padding-left:calc(clamp(14px,4vw,22px) + env(safe-area-inset-left));
-      padding-right:calc(clamp(14px,4vw,22px) + env(safe-area-inset-right));
-    }
+      padding-right:calc(clamp(14px,4vw,22px) + env(safe-area-inset-right)); }
     .stack{display:grid;gap:1.2rem}
     .grid{display:grid;gap:1rem}
     .grid.auto-300{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
@@ -150,16 +148,8 @@
 
     .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .8rem;border-radius:999px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem;color:#bfe7ff;background:rgba(118,221,255,.18);border:1px solid rgba(118,221,255,.28)}
 
-    /* HEADLINE — safe for multi‑line gradient */
-    .headline{
-      font-weight:900; letter-spacing:-.02em;
-      line-height:1.14;
-      background:var(--grad);
-      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-      text-shadow:0 0 0 rgba(0,0,0,0);
-      padding:.08em 0 .05em;
-      overflow:visible;
-    }
+    .headline{ font-weight:900; letter-spacing:-.02em; line-height:1.14;
+      background:var(--grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; padding:.08em 0 .05em; }
     .headline.xl{font-size:clamp(2.2rem,7vw,4rem)}
     .headline.lg{font-size:clamp(1.7rem,5vw,2.7rem)}
 
@@ -172,8 +162,8 @@
     .btn-disabled{background:rgba(255,255,255,.10);color:var(--muted);border:1px dashed rgba(255,255,255,.20);cursor:pointer}
     .btn-sm{padding:.5rem .8rem;font-size:.92rem;line-height:1.1}
 
-    .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:16px;padding:1.05rem}
-    .panel{border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:20px;box-shadow:var(--shadow)}
+    .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:16px;padding:1.05rem; contain: layout paint style;}
+    .panel{border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:20px;box-shadow:var(--shadow);contain:layout paint style}
 
     header{position:sticky;top:0;z-index:40;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 72%, transparent);border-bottom:1px solid rgba(255,255,255,.08)}
     .nav{display:flex;align-items:center;gap:1rem;padding:.58rem 0}
@@ -457,8 +447,7 @@
       <h2 class="headline lg reveal">What’s inside the Trading Suite</h2>
 
       <div class="grid auto-300 reveal">
-
-        <!-- SP — Momentum Regime (MACD+) -->
+        <!-- MACD+ -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -470,13 +459,9 @@
           <div class="punch">Classic MACD, upgraded for trend — not chop.</div>
           <p class="note">HTF confirm, ATR gating and near‑zero fade reduce noise. Modes: Raw or Qualified.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/spp-macd-plus/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-macdplus" aria-expanded="false" aria-controls="pro-macdplus">Pro description</button>
-          <div id="pro-macdplus" class="pro note" hidden>
-            Qualified crosses, regime confirm & FlipGuard hold with decay; alerts don’t repaint.
-          </div>
         </article>
 
-        <!-- SP — Trend Stack (EMA 50/100/200 Pro) -->
+        <!-- Trend Stack -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -487,13 +472,9 @@
           <div class="punch">EMA stack signals, first pullback, and EMA‑200 events.</div>
           <p class="note">Golden/Death Cross + PB1; EMA‑200 reclaim/reject; stack + ATR guards.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-ema-trio-pro/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-ema-trio" aria-expanded="false" aria-controls="pro-ema-trio">Pro description</button>
-          <div id="pro-ema-trio" class="pro note" hidden>
-            Tracks 50/100/200 alignment, slope quality, PB1 after fresh cross, and EMA‑200 touch/reclaim.
-          </div>
         </article>
 
-        <!-- SP — Momentum Matrix (Panel Pro) -->
+        <!-- Momentum Matrix -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -505,13 +486,9 @@
           <div class="punch">One 0–100 composite with consensus votes.</div>
           <p class="note">RSI/Stoch/OBV/MACD blend + FlipGuard; optional HTF assist; clean bull/bear booleans.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-oscillator-matrix/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-matrix" aria-expanded="false" aria-controls="pro-matrix">Pro description</button>
-          <div id="pro-matrix" class="pro note" hidden>
-            Scores multiple momentum sources, clips noise, and gates flips with dwell/decay.
-          </div>
         </article>
 
-        <!-- SP — Participation (PVA Overlay) -->
+        <!-- Participation -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -527,13 +504,9 @@
           <div class="punch">One decisive BULL/BEAR print when flow agrees.</div>
           <p class="note">Z‑Vol + RVOL + CVD weighting; regime/VWAP gates; EVR Climax/Abs.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-pva-overlay/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-pva-overlay" aria-expanded="false" aria-controls="pro-pva-overlay">Pro description</button>
-          <div id="pro-pva-overlay" class="pro note" hidden>
-            Overlay compresses flow into a single non‑repainting print per bar (Bull/Bear + EVR).
-          </div>
         </article>
 
-        <!-- SP — Volume Pulse (PVA Volume) -->
+        <!-- Volume Pulse -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -546,15 +519,11 @@
             <h3>SP — Volume Pulse (PVA Volume)</h3>
           </div>
           <div class="punch">Z‑normalized volume & CVD with EVR spikes.</div>
-          <p class="note">Spike detection with symbol/TF awareness; CVD with divs; EVR: Climax & Absorption.</p>
+          <p class="note">Spike detection; CVD with divs; EVR: Climax & Absorption.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-pva-volume/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-pva-volume" aria-expanded="false" aria-controls="pro-pva-volume">Pro description</button>
-          <div id="pro-pva-volume" class="pro note" hidden>
-            Log‑Z volume, RVOL baselines, CVD stream, divergence calls & EVR spikes.
-          </div>
         </article>
 
-        <!-- SP — Flow Balance (OBV Pro) -->
+        <!-- Flow Balance -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -565,13 +534,9 @@
           <div class="punch">Spike‑clipped OBV with a clean channel and divs.</div>
           <p class="note">SMA basis ±2σ; FlipGuard; residual Z‑extremes; HTF compute.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-obv-pro/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-obv-pro" aria-expanded="false" aria-controls="pro-obv-pro">Pro description</button>
-          <div id="pro-obv-pro" class="pro note" hidden>
-            Smooth OBV with channel crosses, divergence scoring, and spike clipping.
-          </div>
         </article>
 
-        <!-- SP — Structure Map (SML) -->
+        <!-- Structure Map -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -580,15 +545,11 @@
             <h3>SP — Structure Map (SML)</h3>
           </div>
           <div class="punch">BOS/CHOCH, liquidity sweeps, FVG & OB + Breakers.</div>
-          <p class="note">Close‑confirmed structure with anchored drawings; hidden booleans & alerts.</p>
+          <p class="note">Close‑confirmed structure with anchored drawings; booleans & alerts.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-sml-structure-liquidity/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-sml" aria-expanded="false" aria-controls="pro-sml">Pro description</button>
-          <div id="pro-sml" class="pro note" hidden>
-            Prints BOS/CHOCH on close; tags sweeps/gaps/OB/Breakers; screener‑ready booleans.
-          </div>
         </article>
 
-        <!-- SP — SD Zones (SDZones Pro) -->
+        <!-- SD Zones -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -600,13 +561,9 @@
           <div class="punch">Compact supply/demand with flip & confluence.</div>
           <p class="note">ATR‑scaled, first‑touch/broken alerts; quiet mode; confluence badges.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-sdzones-pro/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-sdz" aria-expanded="false" aria-controls="pro-sdz">Pro description</button>
-          <div id="pro-sdz" class="pro note" hidden>
-            Auto‑boxes demand/supply, compresses to essentials, and flags flips.
-          </div>
         </article>
 
-        <!-- SP — Key Anchors (Key Levels Suite) -->
+        <!-- Key Anchors -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -617,13 +574,9 @@
           <div class="punch">Daily/Weekly/Monthly anchors, sessions & VWAP centers.</div>
           <p class="note">dVWAP / wVWAP + session mids; central VWAP; touch alerts.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-key-levels-suite/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-key-levels" aria-expanded="false" aria-controls="pro-key-levels">Pro description</button>
-          <div id="pro-key-levels" class="pro note" hidden>
-            Drawn on session/opening bars only to prevent wobble; minimal references price respects.
-          </div>
         </article>
 
-        <!-- SP — RSI Triad Confirm (SPRSI-U) -->
+        <!-- RSI Triad -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -634,13 +587,9 @@
           <div class="punch">Base/Fast/Slow RSI with graded divergences.</div>
           <p class="note">Triad Bull/Bear with envelope + slope; divergence score; FlipGuard & gates.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-rsi-triad-confirm/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-rsi-triad" aria-expanded="false" aria-controls="pro-rsi-triad">Pro description</button>
-          <div id="pro-rsi-triad" class="pro note" hidden>
-            Layered RSI with a 0–50 strength score; filters: OBV trend, SRSI timing, ATR/HTF.
-          </div>
         </article>
 
-        <!-- SP — Context Stoch (SRSI+) -->
+        <!-- SRSI+ -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -653,13 +602,9 @@
           <div class="punch">Stoch RSI that only fires when context agrees.</div>
           <p class="note">Volatility‑adaptive %K/%D with confluence score; clean Long/Short alerts.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-contextstoch-rsi/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-srsi-plus" aria-expanded="false" aria-controls="pro-srsi-plus">Pro description</button>
-          <div id="pro-srsi-plus" class="pro note" hidden>
-            Respects HTF bias, money‑flow and SDZ; surfaces a single Confluence Score.
-          </div>
         </article>
 
-        <!-- SP — Leg Timer — TD9 + Clean Squeeze -->
+        <!-- Leg Timer -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -670,13 +615,9 @@
           <div class="punch">TD counts, clean squeeze, and smart warnings.</div>
           <p class="note">TD8/9 + BB‑in‑KC squeeze; lag‑start detector; smart caution/danger.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-ltf/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-ltf" aria-expanded="false" aria-controls="pro-ltf">Pro description</button>
-          <div id="pro-ltf" class="pro note" hidden>
-            Flags coil vs fatigue with TD counts and a de‑noised squeeze; emits context‑aware warnings.
-          </div>
         </article>
 
-        <!-- SP — Reversal Engine (EC Pro) -->
+        <!-- EC Pro -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -686,15 +627,11 @@
             <h3>SP — Reversal Engine (EC Pro)</h3>
           </div>
           <div class="punch">TD / IGN / OUT / CAP with single print per bar.</div>
-          <p class="note">Exclusive priority (WRN &gt; CAP &gt; OUT &gt; IGN &gt; TD); NanoFlow cross; alert‑ready.</p>
+          <p class="note">Exclusive priority (WRN > CAP > OUT > IGN > TD); NanoFlow cross; alert‑ready.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-ec-pro/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-ec-pro" aria-expanded="false" aria-controls="pro-ec-pro">Pro description</button>
-          <div id="pro-ec-pro" class="pro note" hidden>
-            Pilot‑line + slope + EMA34/55 regime votes. ATR‑normalized dip/rip logic and “+” micro‑momentum add‑on.
-          </div>
         </article>
 
-        <!-- SP — Screener (Screener Table) -->
+        <!-- Screener -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -706,13 +643,9 @@
           <div class="punch">On‑chart mini screener for up to 8 rows.</div>
           <p class="note">Last ↑/↓, time since, TP1, live P&L, confluence score & ribbon; alert routing.</p>
           <a class="btn btn-disabled btn-sm" href="#" aria-disabled="true" title="Docs coming soon">Docs (soon)</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-screener" aria-expanded="false" aria-controls="pro-screener">Pro description</button>
-          <div id="pro-screener" class="pro note" hidden>
-            Checks multiple symbols × TFs; watchlist/global alerts supported for automation.
-          </div>
         </article>
 
-        <!-- SP — Reversal Candlestick Structure (SP:RCS) -->
+        <!-- RCS -->
         <article class="card product">
           <div class="title mod">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -724,10 +657,6 @@
           <div class="punch">16 classic patterns scored by context.</div>
           <p class="note">Engulfing, Hammers, Stars, 3‑bar patterns; 0–100 score; FlipGuard; HTF context.</p>
           <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-rcs-reversal-structure/" target="_blank" rel="noopener">Read docs</a>
-          <button class="btn btn-ghost btn-sm" data-pro="pro-rcs" aria-expanded="false" aria-controls="pro-rcs">Pro description</button>
-          <div id="pro-rcs" class="pro note" hidden>
-            Pattern hits filtered by trend/flow/vol so you keep the meaningful signals and ignore the ornamental ones.
-          </div>
         </article>
 
       </div>
@@ -1220,13 +1149,14 @@
   function getRef(){return localStorage.getItem('sp_ref')||''}
   function getUTM(){try{return JSON.parse(localStorage.getItem('sp_utm')||'{}')}catch(_){return{}}}
 
-  // Nav toggle
+  // Nav toggle (+ body scroll lock on mobile)
   const menuBtn=document.getElementById('menuToggle'),nav=document.getElementById('mainnav');
-  menuBtn?.addEventListener('click',()=>{nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',nav.classList.contains('open'));});
-  document.addEventListener('click',e=>{if(!nav.contains(e.target) && e.target!==menuBtn) nav.classList.remove('open');});
-  document.querySelectorAll('#mainnav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+  function lockScroll(lock){ document.documentElement.style.overflow = lock ? 'hidden' : ''; document.body.style.touchAction = lock ? 'none' : ''; }
+  menuBtn?.addEventListener('click',()=>{nav.classList.toggle('open');const o=nav.classList.contains('open');menuBtn.setAttribute('aria-expanded',o);lockScroll(o);});
+  document.addEventListener('click',e=>{if(!nav.contains(e.target) && e.target!==menuBtn){nav.classList.remove('open');lockScroll(false);}});
+  document.querySelectorAll('#mainnav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');lockScroll(false);} ));
 
-  // Reveal
+  // Reveal (cheap)
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
@@ -1260,22 +1190,19 @@
     live('Wallet address copied');
   }));
 
-  // Pro description toggles
-  document.querySelectorAll('[data-pro]').forEach(btn=>btn.addEventListener('click',()=>{
-    const p=document.getElementById(btn.getAttribute('data-pro')); if(!p) return;
-    const show=p.hasAttribute('hidden'); if(show) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
-    btn.setAttribute('aria-expanded',String(show)); btn.textContent=show?'Hide pro description':'Pro description';
-  }));
-
-  // Sticky CTA
+  // Sticky CTA — rAF-throttled
   const ctaBar=document.getElementById('ctaBar'), ctaClose=document.getElementById('ctaClose'); 
-  let dismissed=false, suppressed=false, focusing=false;
+  let dismissed=false, suppressed=false, focusing=false, ticking=false;
   function updateCta(){
-    if(dismissed || suppressed || focusing){ ctaBar.classList.remove('show'); ctaBar.classList.add('hide'); return; }
     const y=window.scrollY; const threshold=(window.innerWidth<480)?1200:650;
-    if(y>threshold){ ctaBar.classList.add('show'); ctaBar.classList.remove('hide'); } else { ctaBar.classList.remove('show'); ctaBar.classList.add('hide'); }
+    if(dismissed || suppressed || focusing || y<=threshold){ ctaBar.classList.remove('show'); ctaBar.classList.add('hide'); }
+    else { ctaBar.classList.add('show'); ctaBar.classList.remove('hide'); }
   }
-  window.addEventListener('scroll',updateCta,{passive:true}); updateCta();
+  function onScroll(){
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(()=>{ updateCta(); ticking=false; });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); updateCta();
   ctaClose?.addEventListener('click',()=>{dismissed=true;updateCta();});
   (function(){
     const targets=['#pricing','#pay-crypto','#affiliate','#waitlist','#how','#roadmap'];
@@ -1297,35 +1224,14 @@
     window.addEventListener('hashchange',showThanks); showThanks();
   })();
 
-  // Card notify modal (open/close + focus trap)
-  (function(){
-    const modal=document.getElementById('cardNotify');
-    function focusTrap(e){
-      if(e.key!=="Tab") return;
-      const f=modal.querySelectorAll('a,button,input,textarea,select,[tabindex]:not([tabindex="-1"])');
-      const first=f[0], last=f[f.length-1];
-      if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
-      else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
-    }
-    function openModal(plan){
-      document.getElementById('card-notify-plan').value=plan||'';
-      document.getElementById('card-notify-ref').value=getRef();
-      document.getElementById('card-notify-utm').value=JSON.stringify(getUTM());
-      modal.classList.add('open');
-      modal.addEventListener('keydown',focusTrap);
-      setTimeout(()=>document.getElementById('cn-name')?.focus(), 50);
-    }
-    function closeModal(){ modal.classList.remove('open'); modal.removeEventListener('keydown',focusTrap); }
-    document.querySelectorAll('.btn-card-notify').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.plan)));
-    modal?.addEventListener('click',e=>{ if(e.target===modal || e.target.hasAttribute('data-close')) closeModal(); });
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
-  })();
-
-  /* Particle network background */
+  /* Particle network background — disabled on small/low-power devices */
   (function(){
     const c = document.getElementById('bg-net'); if(!c) return;
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const lowPower = (window.innerWidth < 640) || (conn && conn.saveData) ||
+      ((window.devicePixelRatio||1) > 2 && (navigator.hardwareConcurrency||4) <= 4);
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduce) return;
+    if(reduce || lowPower) { c.parentNode && c.parentNode.removeChild(c); return; }
 
     const ctx = c.getContext('2d');
     let W=0,H=0,DPR=1, N=0, MAX, parts=[], raf;
@@ -1337,15 +1243,13 @@
       W = c.width  = Math.floor(window.innerWidth * DPR);
       H = c.height = Math.floor(window.innerHeight * DPR);
 
-      N = (window.innerWidth < 560) ? 28 : (window.innerWidth < 1100) ? 44 : 72;
-      MAX = (window.innerWidth < 560 ? 90 : 120) * DPR;
+      N = (window.innerWidth < 900) ? 36 : 72;
+      MAX = (window.innerWidth < 900 ? 100 : 140) * DPR;
 
       parts = Array.from({length:N}, ()=>({
-        x: Math.random()*W,
-        y: Math.random()*H,
-        vx: (Math.random()*2-1)*0.08*DPR,
-        vy: (Math.random()*2-1)*0.08*DPR,
-        r:  (Math.random()*1.2+0.4)*DPR
+        x: Math.random()*W, y: Math.random()*H,
+        vx:(Math.random()*2-1)*0.07*DPR, vy:(Math.random()*2-1)*0.07*DPR,
+        r:(Math.random()*1.2+0.4)*DPR
       }));
     }
 
@@ -1353,28 +1257,19 @@
       raf = requestAnimationFrame(draw);
       ctx.clearRect(0,0,W,H);
       ctx.globalCompositeOperation = 'lighter';
-
       for(let i=0;i<N;i++){
         const p=parts[i];
         p.x+=p.vx; p.y+=p.vy;
         if(p.x<0||p.x>W) p.vx*=-1;
         if(p.y<0||p.y>H) p.vy*=-1;
 
-        // node
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle='rgba(140,198,255,0.55)';
-        ctx.fill();
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(140,198,255,0.55)'; ctx.fill();
 
-        // connections
         for(let j=i+1;j<N;j++){
-          const q=parts[j];
-          const dx=p.x-q.x, dy=p.y-q.y;
-          const d=Math.hypot(dx,dy);
-          if(d<MAX){
-            const a=(1-d/MAX)*0.65;
-            ctx.strokeStyle=`rgba(124,202,255,${a})`;
-            ctx.lineWidth=0.6*DPR;
+          const q=parts[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.hypot(dx,dy);
+          if(d<MAX){ const a=(1-d/MAX)*0.65;
+            ctx.strokeStyle=`rgba(124,202,255,${a})`; ctx.lineWidth=0.6*DPR;
             ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
           }
         }
@@ -1422,14 +1317,8 @@
   }
 </script>
 
-<!-- ==== i18n glue: selector + dynamic strings + RTL + persistence ==== -->
+<!-- ==== i18n glue with on-demand Google Translate ==== -->
 <script>
-/* =========================
-   SP i18n glue (EN/DE/FR/ES/IT/ZH/RU/AR)
-   - Full-page translation via Google Translate Element
-   - Localizes dynamic JS strings set after load
-   - Persists selection; handles RTL for Arabic
-   ========================= */
 (function(){
   const LANG_KEY = 'sp_lang';
   const SUP = ['en','de','fr','es','it','zh','ru','ar'];
@@ -1466,141 +1355,49 @@
     document.documentElement.dir  = (lang === 'ar') ? 'rtl' : 'ltr';
   }
 
-  const STR = {
-    en:{ pro_desc:'Pro description', hide_pro:'Hide pro description', copied:'Copied',
-         enter_tv:'Enter your TradingView username for activation.',
-         consent:'Please confirm the educational-only consent.',
-         payment_failed:'Payment failed. Please try again or email support@signalpilot.io',
-         wallet_copied:'Wallet address copied', lt_sold_out:'Lifetime is sold out. Please join the waitlist.',
-         lt_total_100:'100 total' },
-    de:{ pro_desc:'Pro‑Beschreibung', hide_pro:'Pro‑Beschreibung ausblenden', copied:'Kopiert',
-         enter_tv:'Geben Sie Ihren TradingView‑Benutzernamen für die Aktivierung ein.',
-         consent:'Bitte die Zustimmung „nur zu Bildungszwecken“ bestätigen.',
-         payment_failed:'Zahlung fehlgeschlagen. Bitte erneut versuchen oder support@signalpilot.io kontaktieren.',
-         wallet_copied:'Wallet‑Adresse kopiert', lt_sold_out:'Lifetime ist ausverkauft. Bitte der Warteliste beitreten.',
-         lt_total_100:'Insgesamt 100' },
-    fr:{ pro_desc:'Description pro', hide_pro:'Masquer la description pro', copied:'Copié',
-         enter_tv:'Saisissez votre identifiant TradingView pour l’activation.',
-         consent:'Veuillez confirmer le consentement « à des fins éducatives uniquement ».',
-         payment_failed:'Paiement échoué. Réessayez ou écrivez à support@signalpilot.io',
-         wallet_copied:'Adresse de portefeuille copiée', lt_sold_out:'Lifetime est épuisé. Rejoignez la liste d’attente.',
-         lt_total_100:'100 au total' },
-    es:{ pro_desc:'Descripción pro', hide_pro:'Ocultar descripción pro', copied:'Copiado',
-         enter_tv:'Ingresa tu usuario de TradingView para la activación.',
-         consent:'Confirma el consentimiento “solo educativo”.',
-         payment_failed:'Pago fallido. Intenta de nuevo o escribe a support@signalpilot.io',
-         wallet_copied:'Dirección de wallet copiada', lt_sold_out:'Lifetime agotado. Únete a la lista de espera.',
-         lt_total_100:'100 en total' },
-    it:{ pro_desc:'Descrizione pro', hide_pro:'Nascondi descrizione pro', copied:'Copiato',
-         enter_tv:'Inserisci il tuo username TradingView per l’attivazione.',
-         consent:'Conferma il consenso “solo a scopo educativo”.',
-         payment_failed:'Pagamento non riuscito. Riprova o scrivi a support@signalpilot.io',
-         wallet_copied:'Indirizzo wallet copiato', lt_sold_out:'Lifetime esaurito. Unisciti alla lista d’attesa.',
-         lt_total_100:'100 totali' },
-    zh:{ pro_desc:'专业说明', hide_pro:'隐藏专业说明', copied:'已复制',
-         enter_tv:'请输入用于开通的 TradingView 用户名。',
-         consent:'请勾选“仅用于教育目的”的确认。',
-         payment_failed:'支付失败。请重试或发送邮件至 support@signalpilot.io',
-         wallet_copied:'钱包地址已复制', lt_sold_out:'终身版售罄。请加入候补名单。',
-         lt_total_100:'共 100 个' },
-    ru:{ pro_desc:'Описание Pro', hide_pro:'Скрыть описание Pro', copied:'Скопировано',
-         enter_tv:'Укажите ваш логин TradingView для активации.',
-         consent:'Подтвердите согласие «только в образовательных целях».',
-         payment_failed:'Платёж не прошёл. Попробуйте ещё раз или напишите на support@signalpilot.io',
-         wallet_copied:'Адрес кошелька скопирован', lt_sold_out:'Lifetime распродан. Присоединяйтесь к листу ожидания.',
-         lt_total_100:'Всего 100' },
-    ar:{ pro_desc:'وصف احترافي', hide_pro:'إخفاء الوصف الاحترافي', copied:'تم النسخ',
-         enter_tv:'أدخل اسم مستخدم TradingView للتفعيل.',
-         consent:'يرجى تأكيد الموافقة «لأغراض تعليمية فقط».',
-         payment_failed:'فشلت عملية الدفع. حاول مرة أخرى أو راسل support@signalpilot.io',
-         wallet_copied:'تم نسخ عنوان المحفظة', lt_sold_out:'نفدت باقة مدى الحياة. الرجاء الانضمام إلى قائمة الانتظار.',
-         lt_total_100:'الإجمالي 100' }
-  };
-  function L(){ return STR[getSavedLang()] || STR.en; }
-
-  function initLangUI(){
-    const sel = document.getElementById('langSel');
-    const cur = getSavedLang();
-    if(sel){ sel.value = cur; sel.addEventListener('change', e=>{
-      const val = e.target.value;
-      localStorage.setItem(LANG_KEY, val);
-      setGoogTrans(val);
-      applyDirLang(val);
-      location.reload();
-    });}
-    setGoogTrans(cur);
-    applyDirLang(cur);
-  }
-
-  function patchDynamicStrings(){
-    // Copy buttons → "Copied"
-    document.querySelectorAll('[data-copy]').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        setTimeout(()=>{ btn.textContent = L().copied; }, 0);
-      });
-    });
-
-    // Pro description toggles → toggle text localized (fixed order)
-    document.querySelectorAll('[data-pro]').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const p = document.getElementById(btn.getAttribute('data-pro')); if(!p) return;
-        const isOpen = !p.hasAttribute('hidden');
-        setTimeout(()=>{ btn.textContent = isOpen ? L().hide_pro : L().pro_desc; }, 0);
-      });
-    });
-
-    // Localize live() message used by copy helper
-    if (typeof window.live === 'function'){
-      const _live = window.live;
-      window.live = function(msg){
-        if (msg && /Wallet address copied/i.test(msg)) { msg = L().wallet_copied; }
-        return _live(msg);
-      };
-    }
-
-    // Localize common alerts (PayPal / lifetime guards)
-    const _alert = window.alert ? window.alert.bind(window) : null;
-    if(_alert){
-      window.alert = function(msg){
-        const T = L();
-        if (/TradingView username/i.test(msg)) msg = T.enter_tv;
-        else if (/educational/i.test(msg))    msg = T.consent;
-        else if (/Payment failed/i.test(msg)) msg = T.payment_failed;
-        else if (/sold out/i.test(msg))       msg = T.lt_sold_out;
-        _alert(msg);
-      };
-    }
-  }
-
-  function patchLifetimeUI(){
-    const ribbon = document.getElementById('lt-ribbon');
-    if(!ribbon) return;
-    const observer = new MutationObserver(()=> {
-      const text = ribbon.textContent.trim().toLowerCase();
-      if (text.includes('sold')) ribbon.textContent = L().lt_sold_out.replace(/\.$/,'');
-      else ribbon.textContent = L().lt_total_100;
-    });
-    observer.observe(ribbon, {childList:true, subtree:true, characterData:true});
-  }
-
-  initLangUI();
-  patchDynamicStrings();
-  patchLifetimeUI();
-})();
-</script>
-
-<!-- Google Translate (reads cookie & applies full‑page translation) -->
-<script>
-  function googleTranslateElementInit(){
+  // Google Translate loader (on demand)
+  window.googleTranslateElementInit = function(){
     if(!window.google || !google.translate) return;
     new google.translate.TranslateElement({
       pageLanguage: 'en',
       includedLanguages: 'ar,de,es,fr,it,ru,zh-CN',
       autoDisplay: false
     }, 'google_translate_container');
+  };
+  function loadGTE(){ if(window.__gte_loading || window.google) return;
+    window.__gte_loading = true;
+    const s=document.createElement('script');
+    s.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    s.async=true; document.head.appendChild(s);
   }
+
+  const STR = {
+    en:{ pro_desc:'Pro description', hide_pro:'Hide pro description', copied:'Copied',
+         enter_tv:'Enter your TradingView username for activation.',
+         consent:'Please confirm the educational-only consent.',
+         payment_failed:'Payment failed. Please try again or email support@signalpilot.io',
+         wallet_copied:'Wallet address copied', lt_sold_out:'Lifetime is sold out. Please join the waitlist.',
+         lt_total_100:'100 total' }
+  };
+
+  function initLangUI(){
+    const sel = document.getElementById('langSel');
+    const cur = getSavedLang();
+    if(sel){ sel.value = cur; sel.addEventListener('change', e=>{
+      const val = e.target.value;
+      localStorage.setItem('sp_lang', val);
+      setGoogTrans(val);
+      applyDirLang(val);
+      if (val !== 'en') loadGTE();
+      location.reload();
+    });}
+    setGoogTrans(cur);
+    applyDirLang(cur);
+    if (cur !== 'en') loadGTE();
+  }
+  initLangUI();
+})();
 </script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <!-- PayPal SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=AT7YkprnIrMlBqYZPRJiuH9poDcKiK0L0bEyBuA4R5InsY6nkTCvhAyKi5eg6F3eTjutd9BVbFzdYAsZ&vault=true&intent=subscription&disable-funding=card,credit"></script>
@@ -1616,28 +1413,42 @@
         const ok=consentId ? document.getElementById(consentId)?.checked : true;
         if(!tv){alert('Enter your TradingView username for activation.'); return;}
         if(!ok){alert('Please confirm the educational-only consent.'); return;}
-        const ref=getRef(); const custom=`tv:${tv}|plan:${planKey}${ref?`|ref:${ref}`:''}`;
+        const ref=localStorage.getItem('sp_ref')||''; const custom=`tv:${tv}|plan:${planKey}${ref?`|ref:${ref}`:''}`;
         localStorage.setItem('sp_last_tv', tv); localStorage.setItem('sp_last_plan', planKey);
         return actions.subscription.create({ plan_id:planId, custom_id:custom, application_context:{shipping_preference:'NO_SHIPPING'} });
       },
       onApprove: function(data){
-        postWebhook({ type:'subscription', plan: localStorage.getItem('sp_last_plan')||'unknown', tv: localStorage.getItem('sp_last_tv')||'', subscription_id: data.subscriptionID, ref:getRef(), utm:getUTM() });
+        fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec',
+          {method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({ type:'subscription', plan: localStorage.getItem('sp_last_plan')||'unknown', tv: localStorage.getItem('sp_last_tv')||'', subscription_id: data.subscriptionID, ref: localStorage.getItem('sp_ref')||'', utm: (localStorage.getItem('sp_utm')||'{}') })});
         location.hash='#thanks';
       },
       onError: function(){ alert('Payment failed. Please try again or email support@signalpilot.io'); }
     }).render('#'+containerId);
   }
-  renderSub('P-6UD12522YR208981MNDQ3QPA','paypal-button-container-P-6UD12522YR208981MNDQ3QPA','tv-monthly','monthly','consent-monthly');
-  renderSub('P-4VR929208D839202YNDQ3T6Q','paypal-button-container-P-4VR929208D839202YNDQ3T6Q','tv-quarterly','quarterly','consent-quarterly');
-  renderSub('P-43M86339WD725333MNDQ3VGI','paypal-button-container-P-43M86339WD725333MNDQ3VGI','tv-yearly','yearly','consent-yearly');
+
+  // Lazy render PayPal buttons only when visible
+  function lazyRenderSub(planId, containerId, tvInputId, planKey, consentId){
+    const el = document.getElementById(containerId); if(!el) return;
+    let rendered=false;
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(!rendered && e.isIntersecting){
+          renderSub(planId, containerId, tvInputId, planKey, consentId);
+          rendered=true; obs.disconnect();
+        }
+      });
+    },{root:null, rootMargin:'300px', threshold:0});
+    obs.observe(el);
+  }
+  lazyRenderSub('P-6UD12522YR208981MNDQ3QPA','paypal-button-container-P-6UD12522YR208981MNDQ3QPA','tv-monthly','monthly','consent-monthly');
+  lazyRenderSub('P-4VR929208D839202YNDQ3T6Q','paypal-button-container-P-4VR929208D839202YNDQ3T6Q','tv-quarterly','quarterly','consent-quarterly');
+  lazyRenderSub('P-43M86339WD725333MNDQ3VGI','paypal-button-container-P-43M86339WD725333MNDQ3VGI','tv-yearly','yearly','consent-yearly');
 
   // Lifetime form guards + cap re-check + return URL with thanks hash
   (function(){
     const form=document.getElementById('pp-lifetime'); if(!form) return;
-
-    // Wire IPN notify → Apps Script for server-side cap enforcement
     const ipn = document.getElementById('pp-lifetime-notify');
-    if (ipn && SP_WEBHOOK) ipn.value = SP_WEBHOOK + '?fn=pp_ipn';
+    if (ipn) ipn.value = 'https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec?fn=pp_ipn';
 
     form.addEventListener('submit', async function(e){
       const tv=(document.getElementById('tv-lifetime')?.value||'').trim();
@@ -1645,36 +1456,25 @@
       if(!tv){ e.preventDefault(); alert('Enter your TradingView username for activation.'); return; }
       if(!consentOk){ e.preventDefault(); alert('Please confirm the educational-only consent.'); return; }
 
-      // Just-in-time availability check
       let okAvail = true;
       try{
-        if(LT_STATUS_URL){
-          const res = await fetch(LT_STATUS_URL, {method:'GET', mode:'cors', cache:'no-store'});
-          if(res.ok){
-            const j = await res.json();
-            okAvail = Number(j.claimed||0) < LT_CAP;
-          }
-        }
-      }catch(_){ /* assume available if status is offline */ }
+        const res = await fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec?fn=lt_status', {method:'GET', mode:'cors', cache:'no-store'});
+        if(res.ok){ const j = await res.json(); okAvail = Number(j.claimed||0) < 100; }
+      }catch(_){}
 
       if(!okAvail){
         e.preventDefault();
         alert('Lifetime is sold out. Please join the waitlist.');
-        await loadLifetimeStatus();
         return;
       }
 
-      const ref=getRef(); const custom=document.getElementById('pp-lifetime-custom');
+      const ref=localStorage.getItem('sp_ref')||''; const custom=document.getElementById('pp-lifetime-custom');
       if(custom) custom.value=`tv:${tv}|plan:lifetime${ref?`|ref:${ref}`:''}`;
       localStorage.setItem('sp_last_tv', tv); localStorage.setItem('sp_last_plan','lifetime');
       const base=window.location.origin + '/?paid=lifetime#thanks';
       document.getElementById('pp-lifetime-return').value=base;
       document.getElementById('pp-lifetime-cancel').value=window.location.origin + '/#pricing';
     });
-
-    // Initial status + periodic refresh
-    loadLifetimeStatus();
-    setInterval(loadLifetimeStatus, 60000);
   })();
 </script>
 
