@@ -78,7 +78,7 @@
     }
     *{box-sizing:border-box}
 
-    /* ===== Base background (3 layers) ===== */
+    /* ===== Base background (radials) ===== */
     html,body{
       margin:0; color:var(--text);
       font:16px/1.6 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -130,10 +130,9 @@
         linear-gradient(90deg, transparent 31px, rgba(255,255,255,.08) 32px, transparent 33px);
       background-size:64px 64px;
     }
-    /* Reduce motion: keep the layers but freeze their animation */
     @media (prefers-reduced-motion: reduce){
       .bg-aurora{animation:none}
-      /* Keep constellation visible; draw static frame in JS */
+      .bg-net{display:none}
     }
 
     /* Layout */
@@ -151,6 +150,7 @@
 
     .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .8rem;border-radius:999px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem;color:#bfe7ff;background:rgba(118,221,255,.18);border:1px solid rgba(118,221,255,.28)}
 
+    /* HEADLINE — safe for multi‑line gradient */
     .headline{
       font-weight:900; letter-spacing:-.02em;
       line-height:1.14;
@@ -186,13 +186,14 @@
     nav a{display:inline-flex;padding:.45rem .75rem;border-radius:999px;color:#9fb6e6;font-weight:700;text-decoration:none}
     nav a:hover,nav a:focus-visible{color:#fff;background:rgba(255,255,255,.12)}
     .price-pill{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .6rem;border-radius:999px;font-weight:800;font-size:.85rem;color:#cfe1ff;background:rgba(123,155,255,.15);border:1px solid rgba(123,155,255,.26)}
-    .lang select{appearance:none;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#d8e4ff;padding:.38rem .7rem;font-weight:700}
+    .lang-wrap{ margin-right:.5rem }
     @media (max-width:1060px){
       .menu-toggle{display:inline-flex}
       nav[aria-label="Main"]{position:fixed;right:1rem;top:64px;display:none;flex-direction:column;background:rgba(10,12,20,.98);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:1rem;max-width:min(92vw,420px)}
       .open{display:flex}
       header .btn.btn-primary{display:none}
       .price-pill{display:none}
+      .lang-wrap{ order:2 }
     }
 
     /* HERO */
@@ -286,18 +287,44 @@
     .modal-card h3{margin:0}
     .modal-close{background:transparent;border:none;color:#a5b6db;cursor:pointer}
 
-    /* RTL tweaks (Arabic) */
-    html[dir="rtl"] body{ direction: rtl; }
-    html[dir="rtl"] nav ul{ flex-direction: row-reverse; }
-    html[dir="rtl"] .grid.two-col{ direction: rtl; }
-    html[dir="rtl"] .cta-inner .bar{ flex-direction: row-reverse; }
+    /* PRICING ORDER */
+    #plan-monthly   { grid-area: monthly; }
+    #plan-quarterly { grid-area: quarterly; }
+    #plan-yearly    { grid-area: yearly; }
+    #plan-lifetime  { grid-area: lifetime; }
+    @media (min-width:1101px){
+      .pricing-grid{ display:grid;
+        grid-template-columns: repeat(4, minmax(260px, 1fr));
+        grid-template-areas: "monthly quarterly yearly lifetime";
+      }
+    }
+    @media (min-width:741px) and (max-width:1100px){
+      .pricing-grid{ display:grid;
+        grid-template-columns: repeat(2, minmax(300px, 1fr));
+        grid-template-areas:
+          "monthly quarterly"
+          "yearly   lifetime";
+      }
+    }
+    @media (max-width:740px){
+      .pricing-grid{ display:flex; flex-direction:column }
+      #plan-monthly{order:1} #plan-quarterly{order:2} #plan-yearly{order:3} #plan-lifetime{order:4}
+    }
+
+    /* Screen-reader only helper */
+    .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
+
+    /* === Lifetime cap visuals === */
+    .lt-cap{display:grid;gap:.35rem;margin:.45rem 0 .2rem}
+    .capbar{height:8px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
+    .capbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent))}
   </style>
 </head>
 <body>
 
-<!-- Particle network background (layer 3) -->
+<!-- Particle network background -->
 <canvas id="bg-net" class="bg-net" aria-hidden="true"></canvas>
-<!-- Aurora layer (layer 2) -->
+<!-- Aurora layer -->
 <div class="bg-aurora" aria-hidden="true"></div>
 
 <header>
@@ -309,33 +336,34 @@
     <div class="nav-spacer"></div>
     <nav id="mainnav" aria-label="Main">
       <ul>
-        <li><a href="#why" data-i18n="nav.why">Why SignalPilot</a></li>
-        <li><a href="#inside" data-i18n="nav.inside">What’s inside</a></li>
-        <li><a href="#how" data-i18n="nav.how">How it works</a></li>
-        <li><a href="#roadmap" data-i18n="nav.roadmap">Roadmap</a></li>
-        <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
-        <li><a href="#pay-crypto" data-i18n="nav.crypto">Pay with crypto</a></li>
-        <li><a href="#affiliate" data-i18n="nav.aff">Affiliate</a></li>
-        <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
-        <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener" data-i18n="nav.docs">Docs</a></li>
+        <li><a href="#why">Why SignalPilot</a></li>
+        <li><a href="#inside">What’s inside</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#pay-crypto">Pay with crypto</a></li>
+        <li><a href="#affiliate">Affiliate</a></li>
+        <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
-    <span class="price-pill" data-i18n="hdr.from79">From <strong>$79/mo</strong></span>
-    <div class="lang">
-      <label for="lang" class="sr-only">Language</label>
-      <select id="lang" aria-label="Language">
-        <option value="en">Eng</option>
+
+    <!-- Language selector -->
+    <div class="lang-wrap">
+      <label class="sr-only" for="langSel">Language</label>
+      <select id="langSel" aria-label="Language" title="Language">
+        <option value="en">English</option>
         <option value="de">Deutsch</option>
+        <option value="fr">Français</option>
         <option value="es">Español</option>
-        <option value="fr">Fr</option>
-        <option value="it">Ita</option>
-        <option value="ru">Рус</option>
+        <option value="it">Italiano</option>
         <option value="zh">中文</option>
+        <option value="ru">Русский</option>
         <option value="ar">العربية</option>
-        <option value="pt">PT‑BR</option>
       </select>
     </div>
-    <a class="btn btn-primary" href="#pricing" data-i18n="cta.get">Get the Suite</a>
+
+    <span class="price-pill">From <strong>$79/mo</strong></span>
+    <a class="btn btn-primary" href="#pricing">Get the Suite</a>
     <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav">⋯</button>
   </div>
 </header>
@@ -346,43 +374,43 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="stack reveal">
-        <div class="badgebar"><span class="badge" data-i18n="hero.badge">TRADINGVIEW INDICATORS · ANY MARKET · ANY TIMEFRAME</span></div>
-        <h1 class="headline xl" data-i18n="hero.title">SignalPilot —<br>Trading Suite</h1>
-        <p class="measure" style="color:var(--muted)" data-i18n="hero.lead">
+        <div class="badgebar"><span class="badge">TRADINGVIEW INDICATORS · ANY MARKET · ANY TIMEFRAME</span></div>
+        <h1 class="headline xl">SignalPilot —<br>Trading Suite</h1>
+        <p class="measure" style="color:var(--muted)">
           See the bias, read the pressure, time the move. SignalPilot turns structure, volume and momentum into clean,
           <strong>non‑repainting</strong> signals you can scan, alert and trade on any market or timeframe. Flagship
           <strong>SP‑EC Pro (Event Candles)</strong> plus focused companion modules—built to work together.
         </p>
 
         <div class="proof-bar">
-          <span class="mini-pill" data-i18n="hero.p1">Non‑repainting</span>
-          <span class="mini-pill" data-i18n="hero.p2">Alert‑ready</span>
-          <span class="mini-pill" data-i18n="hero.p3">Any market · timeframe</span>
-          <span class="mini-pill" data-i18n="hero.p4">Activation Crypto 1–3h</span>
+          <span class="mini-pill">Non‑repainting</span>
+          <span class="mini-pill">Alert‑ready</span>
+          <span class="mini-pill">Any market · timeframe</span>
+          <span class="mini-pill">Activation Crypto 1–3h</span>
         </div>
 
-        <p class="note" data-i18n="hero.note">Every plan includes the full suite, support, ongoing updates—and access to the upcoming indicators.</p>
+        <p class="note">Every plan includes the full suite, support, ongoing updates—and access to the upcoming indicators.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="#pricing" data-i18n="cta.get">Get the Suite</a>
-          <a class="btn btn-ghost" href="https://docs.signalpilot.io/" target="_blank" rel="noopener" data-i18n="cta.docs">View Docs</a>
-          <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
+          <a class="btn btn-primary" href="#pricing">Get the Suite</a>
+          <a class="btn btn-ghost" href="#docs">View Docs (soon)</a>
+          <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
         </div>
       </div>
 
       <div class="panel reveal">
         <div class="stack" style="width:100%">
-          <div class="badge" data-i18n="hero.launch.badge">Launch window</div>
+          <div class="badge">Launch window</div>
           <div class="stack" style="gap:.6rem">
             <div style="display:flex;align-items:center;gap:.6rem">
               <span style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12)"></span>
-              <strong data-i18n="hero.launch.in">Launch in</strong>
+              <strong>Launch in</strong>
               <span id="countdown" class="pill">14d 00h 00m 00s</span>
             </div>
             <div style="display:flex;gap:.6rem;flex-wrap:wrap">
-              <a class="btn btn-primary" href="#waitlist" data-i18n="hero.launch.notify">Notify me</a>
-              <a class="btn btn-ghost" href="https://github.com/Signalpilot/signalpilot.io" target="_blank" rel="noopener" data-i18n="hero.launch.star">Star on GitHub</a>
+              <a class="btn btn-primary" href="#waitlist">Notify me</a>
+              <a class="btn btn-ghost" href="https://github.com/Signalpilot/signalpilot.io" target="_blank" rel="noopener">Star on GitHub</a>
             </div>
-            <div class="note measure" data-i18n="hero.launch.note">Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</div>
+            <div class="note measure">Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</div>
           </div>
         </div>
       </div>
@@ -392,342 +420,344 @@
   <!-- WHY -->
   <section id="why" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="why.h">Why traders use SignalPilot</h2>
+      <h2 class="headline lg reveal">Why traders use SignalPilot</h2>
       <div class="why-grid reveal">
         <article class="feature">
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.2"/><path d="M12 3v3M21 12h-3M12 21v-3M6 12H3"/></svg></div>
-          <div><h3 data-i18n="why.c1.t">Clarity</h3><p data-i18n="why.c1.d">One‑look bias. No signal spam.</p></div>
+          <div><h3>Clarity</h3><p>One‑look bias. No signal spam.</p></div>
         </article>
         <article class="feature">
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></svg></div>
-          <div><h3 data-i18n="why.c2.t">Context</h3><p data-i18n="why.c2.d">HTF confirmation with supply/demand and anchored levels that matter.</p></div>
+          <div><h3>Context</h3><p>HTF confirmation with supply/demand and anchored levels that matter.</p></div>
         </article>
         <article class="feature">
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 1 1 12 0v5l2 2H4l2-2Z"/><path d="M9 19a3 3 0 0 0 6 0"/></svg></div>
-          <div><h3 data-i18n="why.c3.t">Actionable</h3><p data-i18n="why.c3.d">Designed for alerts and scans—watchlists or global.</p></div>
+          <div><h3>Actionable</h3><p>Designed for alerts and scans—watchlists or global.</p></div>
         </article>
         <article class="feature">
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v6c0 5 7 9 7 9s7-4 7-9V6l-7-3Z"/><path d="M9 13l2 2 4-4"/></svg></div>
-          <div><h3 data-i18n="why.c4.t">Robust</h3><p data-i18n="why.c4.d">Non‑repainting logic, volatility‑aware filters and guardrails.</p></div>
+          <div><h3>Robust</h3><p>Non‑repainting logic, volatility‑aware filters and guardrails.</p></div>
         </article>
         <article class="feature">
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="7"/><path d="M3 10h14M10 3a13 13 0 0 1 0 14M10 3a13 13 0 0 0 0 14"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1.5 1.5"/></svg></div>
-          <div><h3 data-i18n="why.c5.t">Any market · Any timeframe</h3><p data-i18n="why.c5.d">Crypto, FX, indices, equities, commodities. Scalps to swings.</p></div>
+          <div><h3>Any market · Any timeframe</h3><p>Crypto, FX, indices, equities, commodities. Scalps to swings.</p></div>
         </article>
         <article class="feature">
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><path d="m13 11-3 5 1-4H9l3-5-1 4h2Z"/></svg></div>
-          <div><h3 data-i18n="why.c6.t">Fast access</h3><p data-i18n="why.c6.d">Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</p></div>
+          <div><h3>Fast access</h3><p>Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</p></div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- WHAT’S INSIDE (V1.0) -->
+  <!-- WHAT’S INSIDE -->
   <section id="inside" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="inside.h">What’s inside the Trading Suite</h2>
+      <span id="docs" class="sr-only"></span>
+      <h2 class="headline lg reveal">What’s inside the Trading Suite</h2>
 
       <div class="grid auto-300 reveal">
-  <!-- SP — Momentum Regime (MACD+) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- simple MACD icon -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M3 13c2-4 6-4 8 0s6 4 10-2"/>
-        <circle cx="7" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/>
-      </svg>
-      <h3>SP — Momentum Regime (MACD+)</h3>
-    </div>
-    <div class="punch">Classic MACD, upgraded for trend — not chop.</div>
-    <p class="note">Qualified crosses, regime confirm, ATR gating, FlipGuard; non‑repainting alerts.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-matrix-macd" aria-expanded="false" aria-controls="pro-matrix-macd">Pro description</button>
-    <div id="pro-matrix-macd" class="pro note" hidden>
-      HTF confirm + near‑zero fade + ATR/volatility guards. Modes: Raw or Qualified. Safer turns, fewer whipsaws.
-    </div>
-  </article>
 
-  <!-- SP — Trend Stack (EMA 50/100/200 Pro) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- stacked EMAs -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M4 7h16M4 12h16M4 17h16"/>
-      </svg>
-      <h3>SP — Trend Stack (EMA 50/100/200 Pro)</h3>
-    </div>
-    <div class="punch">EMA stack signals, first pullback, and EMA‑200 events.</div>
-    <p class="note">Golden/Death Cross + PB1; EMA‑200 reclaim/reject; stack + ATR guards.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-trendstack" aria-expanded="false" aria-controls="pro-trendstack">Pro description</button>
-    <div id="pro-trendstack" class="pro note" hidden>
-      Tracks 50/100/200 alignment, slope quality, PB1 after fresh cross, and EMA‑200 touch/reclaim with volatility filters.
-    </div>
-  </article>
+        <!-- SP — Momentum Regime (MACD+) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M3 13c2-4 6-4 8 0s6 4 10-2"/>
+              <circle cx="7" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/>
+            </svg>
+            <h3>SP — Momentum Regime (MACD+)</h3>
+          </div>
+          <div class="punch">Classic MACD, upgraded for trend — not chop.</div>
+          <p class="note">HTF confirm, ATR gating and near‑zero fade reduce noise. Modes: Raw or Qualified.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/spp-macd-plus/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-macdplus" aria-expanded="false" aria-controls="pro-macdplus">Pro description</button>
+          <div id="pro-macdplus" class="pro note" hidden>
+            Qualified crosses, regime confirm & FlipGuard hold with decay; alerts don’t repaint.
+          </div>
+        </article>
 
-  <!-- SP — Momentum Matrix (Panel Pro) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- matrix/grid icon -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <rect x="3" y="4" width="18" height="16" rx="2"/>
-        <path d="M3 10h18M12 4v16" opacity=".6"/>
-      </svg>
-      <h3>SP — Momentum Matrix (Panel Pro)</h3>
-    </div>
-    <div class="punch">One 0–100 composite with consensus votes.</div>
-    <p class="note">RSI/Stoch/OBV/MACD blend with FlipGuard; optional HTF assist; clean bull/bear booleans.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-momentum-matrix" aria-expanded="false" aria-controls="pro-momentum-matrix">Pro description</button>
-    <div id="pro-momentum-matrix" class="pro note" hidden>
-      Scores momentum sources, clips noise, and gates flips with dwell/decay. Designed for scanning and regime context.
-    </div>
-  </article>
+        <!-- SP — Trend Stack (EMA 50/100/200 Pro) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 7h16M4 12h16M4 17h16"/>
+            </svg>
+            <h3>SP — Trend Stack (EMA 50/100/200 Pro)</h3>
+          </div>
+          <div class="punch">EMA stack signals, first pullback, and EMA‑200 events.</div>
+          <p class="note">Golden/Death Cross + PB1; EMA‑200 reclaim/reject; stack + ATR guards.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-ema-trio-pro/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-ema-trio" aria-expanded="false" aria-controls="pro-ema-trio">Pro description</button>
+          <div id="pro-ema-trio" class="pro note" hidden>
+            Tracks 50/100/200 alignment, slope quality, PB1 after fresh cross, and EMA‑200 touch/reclaim.
+          </div>
+        </article>
 
-  <!-- SP — Participation (PVA Overlay) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- overlay bars + tick -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M3 20h18"/>
-        <rect x="4" y="10" width="2.5" height="7"/>
-        <rect x="8" y="7"  width="2.5" height="10"/>
-        <rect x="12" y="12" width="2.5" height="5"/>
-        <rect x="16" y="5"  width="2.5" height="12"/>
-        <path d="M8 4l3 3 6-6"/>
-      </svg>
-      <h3>SP — Participation (PVA Overlay)</h3>
-    </div>
-    <div class="punch">One decisive BULL/BEAR print when flow agrees.</div>
-    <p class="note">Z‑Vol + RVOL + CVD weighting; regime/VWAP gates; EVR Climax/Absorption.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-pva-overlay" aria-expanded="false" aria-controls="pro-pva-overlay">Pro description</button>
-    <div id="pro-pva-overlay" class="pro note" hidden>
-      Overlay compresses flow into a single non‑repainting print per bar (Bull/Bear + EVR). Built to screen and alert.
-    </div>
-  </article>
+        <!-- SP — Momentum Matrix (Panel Pro) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="M3 10h18M12 4v16" opacity=".6"/>
+            </svg>
+            <h3>SP — Momentum Matrix (Panel Pro)</h3>
+          </div>
+          <div class="punch">One 0–100 composite with consensus votes.</div>
+          <p class="note">RSI/Stoch/OBV/MACD blend + FlipGuard; optional HTF assist; clean bull/bear booleans.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-oscillator-matrix/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-matrix" aria-expanded="false" aria-controls="pro-matrix">Pro description</button>
+          <div id="pro-matrix" class="pro note" hidden>
+            Scores multiple momentum sources, clips noise, and gates flips with dwell/decay.
+          </div>
+        </article>
 
-  <!-- SP — Volume Pulse (PVA Volume) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- volume bars -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M3 20h18"/>
-        <rect x="5" y="9" width="2.5" height="9"/>
-        <rect x="9" y="12" width="2.5" height="6"/>
-        <rect x="13" y="6" width="2.5" height="12"/>
-        <rect x="17" y="10" width="2.5" height="8"/>
-      </svg>
-      <h3>SP — Volume Pulse (PVA Volume)</h3>
-    </div>
-    <div class="punch">Z‑normalized volume & CVD with EVR spikes.</div>
-    <p class="note">Spike detection with symbol/TF awareness; CVD with divs; EVR: Climax & Absorption.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-pva-volume" aria-expanded="false" aria-controls="pro-pva-volume">Pro description</button>
-    <div id="pro-pva-volume" class="pro note" hidden>
-      Log‑Z volume, RVOL baselines, CVD stream, and divergence calls. Emits EVR spikes for actionable context.
-    </div>
-  </article>
+        <!-- SP — Participation (PVA Overlay) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M3 20h18"/>
+              <rect x="4" y="10" width="2.5" height="7"/>
+              <rect x="8" y="7"  width="2.5" height="10"/>
+              <rect x="12" y="12" width="2.5" height="5"/>
+              <rect x="16" y="5"  width="2.5" height="12"/>
+              <path d="M8 4l3 3 6-6"/>
+            </svg>
+            <h3>SP — Participation (PVA Overlay)</h3>
+          </div>
+          <div class="punch">One decisive BULL/BEAR print when flow agrees.</div>
+          <p class="note">Z‑Vol + RVOL + CVD weighting; regime/VWAP gates; EVR Climax/Abs.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-pva-overlay/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-pva-overlay" aria-expanded="false" aria-controls="pro-pva-overlay">Pro description</button>
+          <div id="pro-pva-overlay" class="pro note" hidden>
+            Overlay compresses flow into a single non‑repainting print per bar (Bull/Bear + EVR).
+          </div>
+        </article>
 
-  <!-- SP — Flow Balance (OBV Pro) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- OBV line + breakout arrow -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M3 17l6-6 4 4 7-7"/><path d="M21 10V4h-6"/>
-      </svg>
-      <h3>SP — Flow Balance (OBV Pro)</h3>
-    </div>
-    <div class="punch">Spike‑clipped OBV with a clean channel and divs.</div>
-    <p class="note">SMA basis ±2σ; FlipGuard; residual Z‑extremes; HTF compute.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-obv-pro" aria-expanded="false" aria-controls="pro-obv-pro">Pro description</button>
-    <div id="pro-obv-pro" class="pro note" hidden>
-      Smooth OBV with channel crosses, divergence scoring, and spike clipping for fewer false flips.
-    </div>
-  </article>
+        <!-- SP — Volume Pulse (PVA Volume) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M3 20h18"/>
+              <rect x="5" y="9" width="2.5" height="9"/>
+              <rect x="9" y="12" width="2.5" height="6"/>
+              <rect x="13" y="6" width="2.5" height="12"/>
+              <rect x="17" y="10" width="2.5" height="8"/>
+            </svg>
+            <h3>SP — Volume Pulse (PVA Volume)</h3>
+          </div>
+          <div class="punch">Z‑normalized volume & CVD with EVR spikes.</div>
+          <p class="note">Spike detection with symbol/TF awareness; CVD with divs; EVR: Climax & Absorption.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-pva-volume/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-pva-volume" aria-expanded="false" aria-controls="pro-pva-volume">Pro description</button>
+          <div id="pro-pva-volume" class="pro note" hidden>
+            Log‑Z volume, RVOL baselines, CVD stream, divergence calls & EVR spikes.
+          </div>
+        </article>
 
-  <!-- SP — Structure Map (SML) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- structure icon -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M4 16h6v4H4zM14 4h6v6h-6zM14 14h6v6h-6zM4 4h6v6H4z"/>
-      </svg>
-      <h3>SP — Structure Map (SML)</h3>
-    </div>
-    <div class="punch">BOS/CHOCH, liquidity sweeps, FVG & OB + Breakers.</div>
-    <p class="note">Close‑confirmed structure with anchored drawings; hidden booleans & alerts.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-sml" aria-expanded="false" aria-controls="pro-sml">Pro description</button>
-    <div id="pro-sml" class="pro note" hidden>
-      Prints BOS/CHOCH only on close, tags sweeps/gaps/OB/Breakers, and exposes screener‑ready booleans.
-    </div>
-  </article>
+        <!-- SP — Flow Balance (OBV Pro) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M3 17l6-6 4 4 7-7"/><path d="M21 10V4h-6"/>
+            </svg>
+            <h3>SP — Flow Balance (OBV Pro)</h3>
+          </div>
+          <div class="punch">Spike‑clipped OBV with a clean channel and divs.</div>
+          <p class="note">SMA basis ±2σ; FlipGuard; residual Z‑extremes; HTF compute.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-obv-pro/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-obv-pro" aria-expanded="false" aria-controls="pro-obv-pro">Pro description</button>
+          <div id="pro-obv-pro" class="pro note" hidden>
+            Smooth OBV with channel crosses, divergence scoring, and spike clipping.
+          </div>
+        </article>
 
-  <!-- SP — SD Zones (SDZones Pro) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- zones/boxes -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <rect x="3" y="5" width="8" height="6"/><rect x="13" y="13" width="8" height="6"/>
-        <path d="M7 11v8M13 5v8" opacity=".5"/>
-      </svg>
-      <h3>SP — SD Zones (SDZones Pro)</h3>
-    </div>
-    <div class="punch">Compact supply/demand with flip & confluence.</div>
-    <p class="note">ATR‑scaled, first‑touch/broken alerts; quiet mode; confluence badges.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-sdz" aria-expanded="false" aria-controls="pro-sdz">Pro description</button>
-    <div id="pro-sdz" class="pro note" hidden>
-      Auto‑boxes demand/supply, compresses to essentials, and flags flips with optional confluence markers.
-    </div>
-  </article>
+        <!-- SP — Structure Map (SML) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 16h6v4H4zM14 4h6v6h-6zM14 14h6v6h-6zM4 4h6v6H4z"/>
+            </svg>
+            <h3>SP — Structure Map (SML)</h3>
+          </div>
+          <div class="punch">BOS/CHOCH, liquidity sweeps, FVG & OB + Breakers.</div>
+          <p class="note">Close‑confirmed structure with anchored drawings; hidden booleans & alerts.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-sml-structure-liquidity/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-sml" aria-expanded="false" aria-controls="pro-sml">Pro description</button>
+          <div id="pro-sml" class="pro note" hidden>
+            Prints BOS/CHOCH on close; tags sweeps/gaps/OB/Breakers; screener‑ready booleans.
+          </div>
+        </article>
 
-  <!-- SP — Key Anchors (Key Levels Suite) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- list with marker -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M4 7h16M4 12h10M4 17h16"/><circle cx="14" cy="12" r="1.2"/>
-      </svg>
-      <h3>SP — Key Anchors (Key Levels Suite)</h3>
-    </div>
-    <div class="punch">Daily/Weekly/Monthly anchors, sessions & VWAP centers.</div>
-    <p class="note">dVWAP/wVWAP/mOpen/mPOC + session mids; central VWAP; touch alerts.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-levels-suite" aria-expanded="false" aria-controls="pro-levels-suite">Pro description</button>
-    <div id="pro-levels-suite" class="pro note" hidden>
-      Drawn on session/opening bars only to prevent wobble; minimal references that price actually respects.
-    </div>
-  </article>
+        <!-- SP — SD Zones (SDZones Pro) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="5" width="8" height="6"/><rect x="13" y="13" width="8" height="6"/>
+              <path d="M7 11v8M13 5v8" opacity=".5"/>
+            </svg>
+            <h3>SP — SD Zones (SDZones Pro)</h3>
+          </div>
+          <div class="punch">Compact supply/demand with flip & confluence.</div>
+          <p class="note">ATR‑scaled, first‑touch/broken alerts; quiet mode; confluence badges.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-sdzones-pro/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-sdz" aria-expanded="false" aria-controls="pro-sdz">Pro description</button>
+          <div id="pro-sdz" class="pro note" hidden>
+            Auto‑boxes demand/supply, compresses to essentials, and flags flips.
+          </div>
+        </article>
 
-  <!-- SP — RSI Triad Confirm (SPRSI‑U) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- RSI waves -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M3 16c3-5 6-5 9 0s6 5 9-2"/><path d="M3 20h18" opacity=".6"/><path d="M3 12c2-3 6-3 9 0s6 3 9-1" opacity=".6"/>
-      </svg>
-      <h3>SP — RSI Triad Confirm (SPRSI‑U)</h3>
-    </div>
-    <div class="punch">Base/Fast/Slow RSI with graded divergences.</div>
-    <p class="note">Triad Bull/Bear with envelope + slope; divergence score; FlipGuard & gates.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-rsi-triad" aria-expanded="false" aria-controls="pro-rsi-triad">Pro description</button>
-    <div id="pro-rsi-triad" class="pro note" hidden>
-      Layered RSI view with 0–50 strength score, divergence grading, OBV/ATR filters, and HTF timing assist.
-    </div>
-  </article>
+        <!-- SP — Key Anchors (Key Levels Suite) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 7h16M4 12h10M4 17h16"/><circle cx="14" cy="12" r="1.2"/>
+            </svg>
+            <h3>SP — Key Anchors (Key Levels Suite)</h3>
+          </div>
+          <div class="punch">Daily/Weekly/Monthly anchors, sessions & VWAP centers.</div>
+          <p class="note">dVWAP / wVWAP + session mids; central VWAP; touch alerts.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-key-levels-suite/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-key-levels" aria-expanded="false" aria-controls="pro-key-levels">Pro description</button>
+          <div id="pro-key-levels" class="pro note" hidden>
+            Drawn on session/opening bars only to prevent wobble; minimal references price respects.
+          </div>
+        </article>
 
-  <!-- SP — Context Stoch (SRSI+) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- stoch display -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <rect x="3" y="6" width="18" height="12" rx="2"/>
-        <path d="M4.5 12c2-3 4-3 6 0s4 3 6 0 4-3 5 0"/>
-        <path d="M3 9h18M3 15h18" opacity=".5"/>
-      </svg>
-      <h3>SP — Context Stoch (SRSI+)</h3>
-    </div>
-    <div class="punch">Stoch RSI that only fires when context agrees.</div>
-    <p class="note">Volatility‑adaptive %K/%D with confluence score; clean Long/Short alerts.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-srsi-plus" aria-expanded="false" aria-controls="pro-srsi-plus">Pro description</button>
-    <div id="pro-srsi-plus" class="pro note" hidden>
-      Respects HTF bias, money‑flow and SDZ; surfaces a single score for scans and automation.
-    </div>
-  </article>
+        <!-- SP — RSI Triad Confirm (SPRSI-U) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M3 16c3-5 6-5 9 0s6 5 9-2"/><path d="M3 20h18" opacity=".6"/><path d="M3 12c2-3 6-3 9 0s6 3 9-1" opacity=".6"/>
+            </svg>
+            <h3>SP — RSI Triad Confirm (SPRSI‑U)</h3>
+          </div>
+          <div class="punch">Base/Fast/Slow RSI with graded divergences.</div>
+          <p class="note">Triad Bull/Bear with envelope + slope; divergence score; FlipGuard & gates.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-rsi-triad-confirm/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-rsi-triad" aria-expanded="false" aria-controls="pro-rsi-triad">Pro description</button>
+          <div id="pro-rsi-triad" class="pro note" hidden>
+            Layered RSI with a 0–50 strength score; filters: OBV trend, SRSI timing, ATR/HTF.
+          </div>
+        </article>
 
-  <!-- SP — Leg Timer — TD9 + Clean Squeeze -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- clock / timer -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <circle cx="12" cy="12" r="7"/><path d="M12 9v3l2 2"/><path d="M2 12h4l2 4 2-8 2 6 2-2h6" opacity=".6"/>
-      </svg>
-      <h3>SP — Leg Timer — TD9 + Clean Squeeze</h3>
-    </div>
-    <div class="punch">TD counts, clean squeeze, and smart warnings.</div>
-    <p class="note">TD8/9 + BB‑in‑KC squeeze; lag‑start detector; smart caution/danger.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-leg-timer" aria-expanded="false" aria-controls="pro-leg-timer">Pro description</button>
-    <div id="pro-leg-timer" class="pro note" hidden>
-      Flags coil vs fatigue with TD counts and a de‑noised squeeze; emits context‑aware warnings.
-    </div>
-  </article>
+        <!-- SP — Context Stoch (SRSI+) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="6" width="18" height="12" rx="2"/>
+              <path d="M4.5 12c2-3 4-3 6 0s4 3 6 0 4-3 5 0"/>
+              <path d="M3 9h18M3 15h18" opacity=".5"/>
+            </svg>
+            <h3>SP — Context Stoch (SRSI+)</h3>
+          </div>
+          <div class="punch">Stoch RSI that only fires when context agrees.</div>
+          <p class="note">Volatility‑adaptive %K/%D with confluence score; clean Long/Short alerts.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-contextstoch-rsi/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-srsi-plus" aria-expanded="false" aria-controls="pro-srsi-plus">Pro description</button>
+          <div id="pro-srsi-plus" class="pro note" hidden>
+            Respects HTF bias, money‑flow and SDZ; surfaces a single Confluence Score.
+          </div>
+        </article>
 
-  <!-- SP — Reversal Engine (EC Pro) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- event candles icon -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M4 20c4-6 12-6 16-2" opacity=".6"/><path d="M4 15c4-6 12-6 16-2" opacity=".6"/><path d="M8 4v16M16 4v16"/>
-        <rect x="6.5" y="8" width="3" height="4" rx="1"/><rect x="14.5" y="12" width="3" height="4" rx="1"/>
-      </svg>
-      <h3>SP — Reversal Engine (EC Pro)</h3>
-    </div>
-    <div class="punch">TD / IGN / OUT / CAP with single print per bar.</div>
-    <p class="note">Exclusive priority (WRN &gt; CAP &gt; OUT &gt; IGN &gt; TD); NanoFlow cross; alert‑ready.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-ec-pro" aria-expanded="false" aria-controls="pro-ec-pro">Pro description</button>
-    <div id="pro-ec-pro" class="pro note" hidden>
-      Pilot‑line + slope + EMA34/55 regime votes. ATR‑normalized dip/rip logic and “+” micro‑momentum add‑on.
-    </div>
-  </article>
+        <!-- SP — Leg Timer — TD9 + Clean Squeeze -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="7"/><path d="M12 9v3l2 2"/><path d="M2 12h4l2 4 2-8 2 6 2-2h6" opacity=".6"/>
+            </svg>
+            <h3>SP — Leg Timer — TD9 + Clean Squeeze</h3>
+          </div>
+          <div class="punch">TD counts, clean squeeze, and smart warnings.</div>
+          <p class="note">TD8/9 + BB‑in‑KC squeeze; lag‑start detector; smart caution/danger.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-ltf/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-ltf" aria-expanded="false" aria-controls="pro-ltf">Pro description</button>
+          <div id="pro-ltf" class="pro note" hidden>
+            Flags coil vs fatigue with TD counts and a de‑noised squeeze; emits context‑aware warnings.
+          </div>
+        </article>
 
-  <!-- SP — Screener (Screener Table) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- table/screener -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <rect x="3" y="4" width="18" height="12" rx="2"/>
-        <path d="M6 8h6M6 11h4M12 11h6M6 14h5"/><path d="M8 20h8M12 16v4"/>
-      </svg>
-      <h3>SP — Screener (Screener Table)</h3>
-    </div>
-    <div class="punch">On‑chart mini screener for up to 8 rows.</div>
-    <p class="note">Last ↑/↓, time since, TP1, live P&L, confluence score & ribbon; alert routing.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-screener-table" aria-expanded="false" aria-controls="pro-screener-table">Pro description</button>
-    <div id="pro-screener-table" class="pro note" hidden>
-      Checks multiple symbols × TFs at once; watchlist/global alerts supported for automation.
-    </div>
-  </article>
+        <!-- SP — Reversal Engine (EC Pro) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 20c4-6 12-6 16-2" opacity=".6"/><path d="M4 15c4-6 12-6 16-2" opacity=".6"/><path d="M8 4v16M16 4v16"/>
+              <rect x="6.5" y="8" width="3" height="4" rx="1"/><rect x="14.5" y="12" width="3" height="4" rx="1"/>
+            </svg>
+            <h3>SP — Reversal Engine (EC Pro)</h3>
+          </div>
+          <div class="punch">TD / IGN / OUT / CAP with single print per bar.</div>
+          <p class="note">Exclusive priority (WRN &gt; CAP &gt; OUT &gt; IGN &gt; TD); NanoFlow cross; alert‑ready.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-ec-pro/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-ec-pro" aria-expanded="false" aria-controls="pro-ec-pro">Pro description</button>
+          <div id="pro-ec-pro" class="pro note" hidden>
+            Pilot‑line + slope + EMA34/55 regime votes. ATR‑normalized dip/rip logic and “+” micro‑momentum add‑on.
+          </div>
+        </article>
 
-  <!-- SP — Reversal Candlestick Structure (SP:RCS) -->
-  <article class="card product">
-    <div class="title mod">
-      <!-- candle + star -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <rect x="6" y="5" width="4" height="10"/><path d="M8 3v2M8 15v2"/>
-        <path d="M17 6l1.2 2.4L21 9l-2 1.6L19.4 13 17 11.8 14.6 13l.4-2.4L13 9l2.8-.6L17 6z"/>
-      </svg>
-      <h3>SP — Reversal Candlestick Structure (SP:RCS)</h3>
-    </div>
-    <div class="punch">16 classic patterns scored by context.</div>
-    <p class="note">Engulfing, Hammers, Stars, 3‑bar patterns; 0–100 score; FlipGuard; HTF context.</p>
-    <button class="btn btn-ghost btn-sm" data-pro="pro-rcs" aria-expanded="false" aria-controls="pro-rcs">Pro description</button>
-    <div id="pro-rcs" class="pro note" hidden>
-      Pattern hits are filtered by trend/flow/vol so you keep the meaningful signals and ignore the ornamental ones.
-    </div>
-  </article>
-</div>
+        <!-- SP — Screener (Screener Table) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="4" width="18" height="12" rx="2"/>
+              <path d="M6 8h6M6 11h4M12 11h6M6 14h5"/><path d="M8 20h8M12 16v4"/>
+            </svg>
+            <h3>SP — Screener (Screener Table)</h3>
+          </div>
+          <div class="punch">On‑chart mini screener for up to 8 rows.</div>
+          <p class="note">Last ↑/↓, time since, TP1, live P&L, confluence score & ribbon; alert routing.</p>
+          <a class="btn btn-disabled btn-sm" href="#" aria-disabled="true" title="Docs coming soon">Docs (soon)</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-screener" aria-expanded="false" aria-controls="pro-screener">Pro description</button>
+          <div id="pro-screener" class="pro note" hidden>
+            Checks multiple symbols × TFs; watchlist/global alerts supported for automation.
+          </div>
+        </article>
 
+        <!-- SP — Reversal Candlestick Structure (SP:RCS) -->
+        <article class="card product">
+          <div class="title mod">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="6" y="5" width="4" height="10"/><path d="M8 3v2M8 15v2"/>
+              <path d="M17 6l1.2 2.4L21 9l-2 1.6L19.4 13 17 11.8 14.6 13l.4-2.4L13 9l2.8-.6L17 6z"/>
+            </svg>
+            <h3>SP — Reversal Candlestick Structure (SP:RCS)</h3>
+          </div>
+          <div class="punch">16 classic patterns scored by context.</div>
+          <p class="note">Engulfing, Hammers, Stars, 3‑bar patterns; 0–100 score; FlipGuard; HTF context.</p>
+          <a class="btn btn-ghost btn-sm" href="https://docs.signalpilot.io/sp-rcs-reversal-structure/" target="_blank" rel="noopener">Read docs</a>
+          <button class="btn btn-ghost btn-sm" data-pro="pro-rcs" aria-expanded="false" aria-controls="pro-rcs">Pro description</button>
+          <div id="pro-rcs" class="pro note" hidden>
+            Pattern hits filtered by trend/flow/vol so you keep the meaningful signals and ignore the ornamental ones.
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
   <section id="how" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="how.h">How it works — from bias to execution</h2>
+      <h2 class="headline lg reveal">How it works — from bias to execution</h2>
 
       <div class="grid reveal" style="gap:1rem;grid-template-columns:1.1fr .9fr">
         <div class="card">
           <div class="stack">
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s1.t">1) Set bias</strong><br><span class="note" data-i18n="how.s1.d">Use <strong>EC Pro</strong> and/or <strong>MACD+</strong> to pick a side. Don’t trade against it.</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s2.t">2) Verify participation</strong><br><span class="note" data-i18n="how.s2.d"><strong>PVA/OBV</strong> confirm energy. No energy = no trade.</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s3.t">3) Map structure</strong><br><span class="note" data-i18n="how.s3.d">Respect <strong>SDZ</strong> boxes and <strong>Levels</strong> (d/w/m anchors).</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s4.t">4) Time the entry</strong><br><span class="note" data-i18n="how.s4.d"><strong>RSI Triad</strong> & <strong>SRSI+</strong> for turns; <strong>LTF</strong> flags coil vs fatigue.</span></div></div>
-            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong data-i18n="how.s5.t">5) Automate</strong><br><span class="note" data-i18n="how.s5.d"><strong>Screener</strong> routes signals to alerts. Keep risk fixed, not feelings.</span></div></div>
+            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>1) Set bias</strong><br><span class="note">Use <strong>EC Pro</strong> and/or <strong>MACD+</strong> to pick a side. Don’t trade against it.</span></div></div>
+            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>2) Verify participation</strong><br><span class="note"><strong>PVA/OBV</strong> confirm energy. No energy = no trade.</span></div></div>
+            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>3) Map structure</strong><br><span class="note">Respect <strong>SDZ</strong> boxes and <strong>Levels</strong> (d/w/m anchors).</span></div></div>
+            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>4) Time the entry</strong><br><span class="note"><strong>RSI Triad</strong> & <strong>SRSI+</strong> for turns; <strong>LTF</strong> flags coil vs fatigue.</span></div></div>
+            <div style="display:grid;grid-template-columns:26px 1fr;gap:.8rem"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:#3ed598;box-shadow:0 0 0 6px rgba(62,213,152,.12);margin-top:.45rem"></span><div><strong>5) Automate</strong><br><span class="note"><strong>Screener</strong> routes signals to alerts. Keep risk fixed, not feelings.</span></div></div>
           </div>
         </div>
 
         <div class="card">
-          <strong data-i18n="how.play.h">Built‑in plays</strong>
+          <strong>Built‑in plays</strong>
           <ul class="measure" style="margin:.5rem 0 0 1rem">
-            <li data-i18n="how.play.p1"><strong>Trend Buy‑the‑Dip:</strong> Bias Up → PVA Bull/Climax → reaction near demand/VWAP → RSI/SRSI timing.</li>
-            <li data-i18n="how.play.p2"><strong>Reversal Flip:</strong> Absorption + OBV div at supply → EC slope flattens → Pilot reclaim.</li>
-            <li data-i18n="how.play.p3"><strong>Breakout Continuation:</strong> Climax through wVWAP/supply → first ATR dip → NanoFlow “+”.</li>
+            <li><strong>Trend Buy‑the‑Dip:</strong> Bias Up → PVA Bull/Climax → reaction near demand/VWAP → RSI/SRSI timing.</li>
+            <li><strong>Reversal Flip:</strong> Absorption + OBV div at supply → EC slope flattens → Pilot reclaim.</li>
+            <li><strong>Breakout Continuation:</strong> Climax through wVWAP/supply → first ATR dip → NanoFlow “+”.</li>
           </ul>
-          <p class="note measure" style="margin-top:.8rem" data-i18n="how.play.note">Start with EC Pro (bias) + PVA/OBV (participation) + SDZ/Levels (structure). Layer timing & screener as needed. <em>Educational only — not financial advice.</em></p>
+          <p class="note measure" style="margin-top:.8rem">Start with EC Pro (bias) + PVA/OBV (participation) + SDZ/Levels (structure). Layer timing & screener as needed. <em>Educational only — not financial advice.</em></p>
         </div>
       </div>
     </div>
@@ -736,38 +766,38 @@
   <!-- ROADMAP -->
   <section id="roadmap" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="road.h">Roadmap — what’s next</h2>
-      <p class="note reveal measure" data-i18n="road.note">We ship fast. Timelines may shift a little, but the direction is constant: more clarity, less noise.</p>
+      <h2 class="headline lg reveal">Roadmap — what’s next</h2>
+      <p class="note reveal measure">We ship fast. Timelines may shift a little, but the direction is constant: more clarity, less noise.</p>
 
       <div class="grid reveal" style="gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
         <div class="card">
-          <strong data-i18n="road.now">Available now</strong>
+          <strong>Available now</strong>
           <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li data-i18n="road.now.b1"><b>Bias:</b> EC Pro + MACD+</li>
-            <li data-i18n="road.now.b2"><b>Participation:</b> PVA & OBV</li>
-            <li data-i18n="road.now.b3"><b>Structure:</b> SDZ boxes & anchored Levels</li>
-            <li data-i18n="road.now.b4"><b>Timing:</b> RSI Triad & SRSI+</li>
-            <li data-i18n="road.now.b5"><b>Automation:</b> Screener & alerts</li>
-            <li data-i18n="road.now.b6"><b>Fast access:</b> PayPal/Card 1–8h · Crypto 1–3h</li>
+            <li><b>Bias:</b> EC Pro + MACD+</li>
+            <li><b>Participation:</b> PVA & OBV</li>
+            <li><b>Structure:</b> SDZ boxes & anchored Levels</li>
+            <li><b>Timing:</b> RSI Triad & SRSI+</li>
+            <li><b>Automation:</b> Screener & alerts</li>
+            <li><b>Fast access:</b> PayPal/Card 1–8h · Crypto 1–3h</li>
           </ul>
         </div>
 
         <div class="card">
-          <strong data-i18n="road.next">Rolling out next</strong>
+          <strong>Rolling out next</strong>
           <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li data-i18n="road.next.b1">Preset bundle + quick‑start docs</li>
-            <li data-i18n="road.next.b2">Short video tips & mini case studies</li>
-            <li data-i18n="road.next.b3">Watchlist alerts & simple webhooks</li>
+            <li>Preset bundle + quick‑start docs</li>
+            <li>Short video tips & mini case studies</li>
+            <li>Watchlist alerts & simple webhooks</li>
           </ul>
         </div>
 
         <div class="card">
-          <strong data-i18n="road.later">Later this year</strong>
+          <strong>Later this year</strong>
           <ul class="note" style="margin:.5rem 0 0 1rem">
-            <li data-i18n="road.later.b1">SP‑Range Pro & SP‑Liquidity Map</li>
-            <li data-i18n="road.later.b2">Preset library + session playback</li>
-            <li data-i18n="road.later.b3">Backtest templates & exporter examples</li>
-            <li data-i18n="road.later.b4">Localization (ES / PT‑BR / DE)</li>
+            <li>SP‑Range Pro & SP‑Liquidity Map</li>
+            <li>Preset library + session playback</li>
+            <li>Backtest templates & exporter examples</li>
+            <li>Localization (ES / PT‑BR / DE)</li>
           </ul>
         </div>
       </div>
@@ -777,18 +807,18 @@
   <!-- PRICING -->
   <section id="pricing" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="price.h">Plans & pricing</h2>
+      <h2 class="headline lg reveal">Plans & pricing</h2>
 
       <div class="card reveal" style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap">
-        <strong data-i18n="price.blurb1">All plans include the <u>full Trading Suite</u>, support, ongoing updates, and <u>access to upcoming indicators</u>.</strong>
-        <span class="note" data-i18n="price.blurb2">Subscriptions include new modules while active. Lifetime includes all future updates.</span>
+        <strong>All plans include the <u>full Trading Suite</u>, support, ongoing updates, and <u>access to upcoming indicators</u>.</strong>
+        <span class="note">Subscriptions include new modules while active. Lifetime includes all future updates.</span>
       </div>
 
       <div class="pricing-grid reveal" id="plans-grid">
         <!-- MONTHLY -->
         <article class="card plan" id="plan-monthly" data-plan="monthly" style="position:relative">
-          <div class="pill" data-i18n="plan.monthly">Monthly</div>
-          <div class="price">$79 <span class="pill" data-i18n="plan.permonth">/month</span></div>
+          <div class="pill">Monthly</div>
+          <div class="price">$79 <span class="pill">/month</span></div>
           <ul>
             <li><strong>Full Trading Suite</strong> — invite‑only license (1 user)</li>
             <li>Ongoing updates + <strong>new indicators as they ship</strong></li>
@@ -796,79 +826,80 @@
             <li>Email support</li>
           </ul>
           <div class="actions stack">
-            <label data-i18n="form.tv">TradingView username (for invite)
-              <input id="tv-monthly" placeholder="@your.tradingview" data-i18n-ph="ph.tv" required>
+            <label>TradingView username (for invite)
+              <input id="tv-monthly" placeholder="@your.tradingview" required>
             </label>
             <label class="consent">
               <input class="tick" type="checkbox" id="consent-monthly">
-              <span data-i18n="form.consent">I understand SignalPilot is educational. No financial advice.</span>
+              <span>I understand SignalPilot is educational. No financial advice.</span>
             </label>
             <div class="pp-slot" id="paypal-button-container-P-6UD12522YR208981MNDQ3QPA"></div>
-            <button class="btn btn-disabled btn-card-notify" data-plan="Monthly" type="button" data-i18n="form.cardsoon">Pay by card (coming soon)</button>
-            <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
+            <button class="btn btn-disabled btn-card-notify" data-plan="Monthly" type="button">Pay by card (coming soon)</button>
+            <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
           </div>
         </article>
 
         <!-- QUARTERLY -->
         <article class="card plan" id="plan-quarterly" data-plan="quarterly" style="position:relative">
-          <div class="pill" data-i18n="plan.quarterly">Quarterly</div>
-          <div class="price">$199 <span class="pill" data-i18n="plan.per3m">/3 months</span></div>
+          <div class="pill">Quarterly</div>
+          <div class="price">$199 <span class="pill">/3 months</span></div>
           <ul>
-            <li data-i18n="plan.q.b1">Everything in Monthly</li>
-            <li data-i18n="plan.q.b2"><strong>New indicators</strong> as they roll out</li>
-            <li data-i18n="plan.q.b3">Preset pack updates</li>
-            <li data-i18n="plan.q.b4">Priority email support</li>
+            <li>Everything in Monthly</li>
+            <li><strong>New indicators</strong> as they roll out</li>
+            <li>Preset pack updates</li>
+            <li>Priority email support</li>
           </ul>
           <div class="actions stack">
-            <label data-i18n="form.tv">TradingView username (for invite)
-              <input id="tv-quarterly" placeholder="@your.tradingview" data-i18n-ph="ph.tv" required>
+            <label>TradingView username (for invite)
+              <input id="tv-quarterly" placeholder="@your.tradingview" required>
             </label>
             <label class="consent">
               <input class="tick" type="checkbox" id="consent-quarterly">
-              <span data-i18n="form.consent">I understand SignalPilot is educational. No financial advice.</span>
+              <span>I understand SignalPilot is educational. No financial advice.</span>
             </label>
             <div class="pp-slot" id="paypal-button-container-P-4VR929208D839202YNDQ3T6Q"></div>
-            <button class="btn btn-disabled btn-card-notify" data-plan="Quarterly" type="button" data-i18n="form.cardsoon">Pay by card (coming soon)</button>
-            <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
+            <button class="btn btn-disabled btn-card-notify" data-plan="Quarterly" type="button">Pay by card (coming soon)</button>
+            <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
           </div>
         </article>
 
         <!-- YEARLY -->
         <article class="card plan" id="plan-yearly" data-plan="yearly" style="position:relative">
-          <div class="pill" data-i18n="plan.best">Best value</div>
-          <div class="price">$499 <span class="pill" data-i18n="plan.peryear">/year</span></div>
+          <div class="pill">Best value</div>
+          <div class="price">$499 <span class="pill">/year</span></div>
           <ul>
-            <li data-i18n="plan.y.b1">Everything in Quarterly</li>
-            <li data-i18n="plan.y.b2">Concierge onboarding + early access</li>
-            <li data-i18n="plan.y.b3">Private office hours</li>
-            <li data-i18n="plan.y.b4"><strong>All new indicators included</strong> while active</li>
+            <li>Everything in Quarterly</li>
+            <li>Concierge onboarding + early access</li>
+            <li>Private office hours</li>
+            <li><strong>All new indicators included</strong> while active</li>
           </ul>
           <div class="actions stack">
-            <label data-i18n="form.tv">TradingView username (for invite)
-              <input id="tv-yearly" placeholder="@your.tradingview" data-i18n-ph="ph.tv" required>
+            <label>TradingView username (for invite)
+              <input id="tv-yearly" placeholder="@your.tradingview" required>
             </label>
             <label class="consent">
               <input class="tick" type="checkbox" id="consent-yearly">
-              <span data-i18n="form.consent">I understand SignalPilot is educational. No financial advice.</span>
+              <span>I understand SignalPilot is educational. No financial advice.</span>
             </label>
             <div class="pp-slot" id="paypal-button-container-P-43M86339WD725333MNDQ3VGI"></div>
-            <button class="btn btn-disabled btn-card-notify" data-plan="Yearly" type="button" data-i18n="form.cardsoon">Pay by card (coming soon)</button>
-            <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
+            <button class="btn btn-disabled btn-card-notify" data-plan="Yearly" type="button">Pay by card (coming soon)</button>
+            <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
           </div>
         </article>
 
-        <!-- LIFETIME -->
+        <!-- LIFETIME (limited to 100) -->
         <article class="card plan" id="plan-lifetime" data-plan="lifetime" style="position:relative">
           <div class="ribbon" id="lt-ribbon">100 total</div>
-          <div class="pill" data-i18n="plan.lifetime">Lifetime (limited)</div>
-          <div class="price">$899 <span class="pill" data-i18n="plan.onetime">one‑time</span></div>
+          <div class="pill">Lifetime (limited)</div>
+          <div class="price">$899 <span class="pill">one‑time</span></div>
 
+          <!-- cap UI -->
           <div class="lt-cap" aria-live="polite">
-            <div class="pill"><span data-i18n="plan.cap.limited">Limited — </span><strong id="lt-claimed">0</strong>/100 <span data-i18n="plan.cap.claimed">claimed</span></div>
+            <div class="pill">Limited — <strong id="lt-claimed">0</strong>/100 claimed</div>
             <div class="capbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
               <span id="lt-bar"></span>
             </div>
-            <div class="note"><span id="lt-left">100</span> <span data-i18n="plan.cap.left">left</span></div>
+            <div class="note"><span id="lt-left">100</span> left</div>
           </div>
 
           <ul>
@@ -882,13 +913,13 @@
               <input type="hidden" name="hosted_button_id" value="N6TJGG9LXSE2L" />
               <input type="hidden" name="currency_code" value="USD" />
               <input type="hidden" name="notify_url" id="pp-lifetime-notify" value="" />
-              <input type="hidden" name="on0" data-i18n="form.tv_req" value="TradingView username (required for activation)"/>
-              <label data-i18n="form.tv_req">TradingView username (required for activation)
-                <input name="os0" id="tv-lifetime" type="text" placeholder="@your.tradingview" data-i18n-ph="ph.tv" required>
+              <input type="hidden" name="on0" value="TradingView username (required for activation)"/>
+              <label>TradingView username (required for activation)
+                <input name="os0" id="tv-lifetime" type="text" placeholder="@your.tradingview" required>
               </label>
               <label class="consent">
                 <input class="tick" type="checkbox" id="consent-lifetime">
-                <span data-i18n="form.consent">I understand SignalPilot is educational. No financial advice.</span>
+                <span>I understand SignalPilot is educational. No financial advice.</span>
               </label>
               <input type="hidden" name="custom" id="pp-lifetime-custom" value=""/>
               <input type="hidden" name="return" id="pp-lifetime-return" value=""/>
@@ -897,22 +928,22 @@
                 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="Pay with PayPal" alt="Buy Now" />
               </div>
             </form>
-            <button class="btn btn-disabled" id="lt-soldout" type="button" style="display:none" data-i18n="plan.soldout">Sold out — join waitlist below</button>
-            <a class="btn btn-crypto" href="#pay-crypto" data-i18n="cta.crypto">Pay with crypto (–20%)</a>
+            <button class="btn btn-disabled" id="lt-soldout" type="button" style="display:none">Sold out — join waitlist below</button>
+            <a class="btn btn-crypto" href="#pay-crypto">Pay with crypto (–20%)</a>
           </div>
         </article>
       </div>
 
       <div class="card reveal">
-        <strong data-i18n="qs.h">Quick‑start (5 minutes)</strong>
+        <strong>Quick‑start (5 minutes)</strong>
         <ol class="measure" style="margin:.5rem 0 0 1.2rem">
-          <li data-i18n="qs.b1">Pick a plan and pay (PayPal auto‑renew or Crypto Prepaid Pass).</li>
-          <li data-i18n="qs.b2">Enter your <strong>TradingView username</strong> for the invite.</li>
-          <li data-i18n="qs.b3">We activate invites: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</li>
-          <li data-i18n="qs.b4">Load the starter preset and add two alerts.</li>
-          <li data-i18n="qs.b5">Follow the Trend Dip / Reversal Flip / Breakout playbooks.</li>
+          <li>Pick a plan and pay (PayPal auto‑renew or Crypto Prepaid Pass).</li>
+          <li>Enter your <strong>TradingView username</strong> for the invite.</li>
+          <li>We activate invites: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.</li>
+          <li>Load the starter preset and add two alerts.</li>
+          <li>Follow the Trend Dip / Reversal Flip / Breakout playbooks.</li>
         </ol>
-        <p class="note measure" style="margin-top:.6rem" data-i18n="qs.note">Crypto is <strong>one‑time</strong> (no auto‑renew). SignalPilot is educational—<em>not financial advice</em>.</p>
+        <p class="note measure" style="margin-top:.6rem">Crypto is <strong>one‑time</strong> (no auto‑renew). SignalPilot is educational—<em>not financial advice</em>.</p>
       </div>
     </div>
   </section>
@@ -920,29 +951,29 @@
   <!-- CRYPTO -->
   <section id="pay-crypto" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal"><span data-i18n="crypto.h">Pay with crypto</span> <span class="pill" style="background:rgba(255,180,70,.18);color:#ffd699" data-i18n="crypto.save">save 20%</span></h2>
-      <p class="note reveal measure" data-i18n="crypto.blurb">
+      <h2 class="headline lg reveal">Pay with crypto <span class="pill" style="background:rgba(255,180,70,.18);color:#ffd699">save 20%</span></h2>
+      <p class="note reveal measure">
         Crypto payments are <strong>one‑time</strong>. You’ll get a <strong>prepaid access pass</strong> (30 / 90 / 365 days) or <strong>Lifetime</strong>. 
         <strong>No auto‑renew</strong>. Typical activation is <strong>1–3 hours</strong> after network confirmations.
       </p>
 
       <div class="grid auto-300 reveal">
         <div class="card">
-          <p class="note measure" data-i18n="crypto.req">Request an invoice with an exact quote—or send directly and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> for activation. <em>No memo/tag required.</em></p>
+          <p class="note measure">Request an invoice with an exact quote—or send directly and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> for activation. <em>No memo/tag required.</em></p>
 
           <form id="crypto-form" action="https://formspree.io/f/meorkjpn" method="POST">
             <input type="hidden" name="ref" id="crypto-ref" value="">
             <input type="hidden" name="utm" id="crypto-utm" value="">
             <div class="grid two-col" style="gap:.8rem">
-              <label data-i18n="crypto.plan">Plan (Prepaid Pass)
+              <label>Plan (Prepaid Pass)
                 <select name="plan" required>
-                  <option data-i18n="crypto.plan.m">Monthly Crypto Pass (30 days) — save 20%</option>
-                  <option data-i18n="crypto.plan.q">Quarterly Crypto Pass (90 days) — save 20%</option>
-                  <option data-i18n="crypto.plan.y">Yearly Crypto Pass (365 days) — save 20%</option>
-                  <option data-i18n="crypto.plan.l">Lifetime (Crypto) — save 20%</option>
+                  <option value="Monthly Crypto Pass (30 days) – save 20%">Monthly Crypto Pass (30 days) — save 20%</option>
+                  <option value="Quarterly Crypto Pass (90 days) – save 20%">Quarterly Crypto Pass (90 days) — save 20%</option>
+                  <option value="Yearly Crypto Pass (365 days) – save 20%">Yearly Crypto Pass (365 days) — save 20%</option>
+                  <option value="Lifetime (Crypto) – save 20%">Lifetime (Crypto) — save 20%</option>
                 </select>
               </label>
-              <label data-i18n="crypto.coin">Coin
+              <label>Coin
                 <select name="coin" required>
                   <option>BTC</option><option>ETH</option><option>AVAX (C‑chain)</option><option>MATIC</option><option>BNB</option><option>BCH</option>
                 </select>
@@ -950,37 +981,37 @@
             </div>
 
             <div class="grid two-col" style="gap:.8rem">
-              <label data-i18n="crypto.email">Email (for invoice & receipt)
+              <label>Email (for invoice & receipt)
                 <input name="email" type="email" placeholder="you@domain.com" required>
               </label>
-              <label data-i18n="crypto.tv">TradingView username (for invite)
-                <input name="tradingview" type="text" placeholder="@your.tradingview" data-i18n-ph="ph.tv" required>
+              <label>TradingView username (for invite)
+                <input name="tradingview" type="text" placeholder="@your.tradingview" required>
               </label>
             </div>
 
-            <label data-i18n="crypto.notes">Notes (optional)
-              <textarea name="notes" placeholder=""></textarea>
+            <label>Notes (optional)
+              <textarea name="notes" placeholder="Company/VAT, preferred email, any memo instructions…"></textarea>
             </label>
 
-            <button class="btn btn-crypto" type="submit" data-i18n="crypto.submit">Request crypto invoice</button>
+            <button class="btn btn-crypto" type="submit">Request crypto invoice</button>
           </form>
         </div>
 
         <div class="card">
-          <p class="note measure" data-i18n="crypto.direct">Prefer to send directly? Copy a wallet below and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> to <a href="mailto:support@signalpilot.io">support@signalpilot.io</a>. <em>No memo/tag required.</em></p>
+          <p class="note measure">Prefer to send directly? Copy a wallet below and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> to <a href="mailto:support@signalpilot.io">support@signalpilot.io</a>. <em>No memo/tag required.</em></p>
 
           <div class="stack" style="gap:.6rem">
             <div class="grid two-col" style="gap:.8rem">
-              <label data-i18n="crypto.addr.evm">ETH / MATIC (EVM)
+              <label>ETH / MATIC (EVM)
                 <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
                   <input id="addr-eth" value="0xcFf999901af3360576BA4Fa9750340C3f26504A5" readonly>
-                  <button class="btn" data-copy="#addr-eth" type="button" aria-label="Copy ETH/MATIC address" data-i18n="ui.copy">Copy</button>
+                  <button class="btn" data-copy="#addr-eth" type="button" aria-label="Copy ETH/MATIC address">Copy</button>
                 </div>
               </label>
               <label>BTC
                 <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
                   <input id="addr-btc" value="1DdTKYzeg9iR8GwgMZmoBje5ki5FhHwGVm" readonly>
-                  <button class="btn" data-copy="#addr-btc" type="button" aria-label="Copy BTC address" data-i18n="ui.copy">Copy</button>
+                  <button class="btn" data-copy="#addr-btc" type="button" aria-label="Copy BTC address">Copy</button>
                 </div>
               </label>
             </div>
@@ -989,13 +1020,13 @@
               <label>AVAX (C‑chain)
                 <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
                   <input id="addr-avax" value="0x62B9c9625Bde847AD4A50Ced3CFd8e24735ffF08" readonly>
-                  <button class="btn" data-copy="#addr-avax" type="button" aria-label="Copy AVAX address" data-i18n="ui.copy">Copy</button>
+                  <button class="btn" data-copy="#addr-avax" type="button" aria-label="Copy AVAX address">Copy</button>
                 </div>
               </label>
               <label>BNB (BSC)
                 <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
                   <input id="addr-bnb" value="0x398605F9907eB2C3F8602A13D394Fbb00D53C2df" readonly>
-                  <button class="btn" data-copy="#addr-bnb" type="button" aria-label="Copy BNB address" data-i18n="ui.copy">Copy</button>
+                  <button class="btn" data-copy="#addr-bnb" type="button" aria-label="Copy BNB address">Copy</button>
                 </div>
               </label>
             </div>
@@ -1004,10 +1035,10 @@
               <label>Bitcoin Cash (BCH)
                 <div class="grid" style="grid-template-columns:1fr auto; gap:.5rem">
                   <input id="addr-bch" value="qz9gvarfc9rl9zm0me3ghjp83r78nchnrvwkazd4j9" readonly>
-                  <button class="btn" data-copy="#addr-bch" type="button" aria-label="Copy BCH address" data-i18n="ui.copy">Copy</button>
+                  <button class="btn" data-copy="#addr-bch" type="button" aria-label="Copy BCH address">Copy</button>
                 </div>
               </label>
-              <div class="note grid-align-left" data-i18n="crypto.when">
+              <div class="note grid-align-left">
                 Crypto passes usually activate in <strong>1–3 hours</strong> after confirmations.
               </div>
             </div>
@@ -1020,37 +1051,37 @@
   <!-- AFFILIATE -->
   <section id="affiliate" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="aff.h">Affiliate program (early access)</h2>
+      <h2 class="headline lg reveal">Affiliate program (early access)</h2>
       <div class="card reveal">
-        <p class="note measure" data-i18n="aff.p">We’re designing a fair, transparent program focused on education, not P&L promises. Please apply below if you agree to:</p>
+        <p class="note measure">We’re designing a fair, transparent program focused on education, not P&L promises. Please apply below if you agree to:</p>
         <ul class="note measure" style="margin:.2rem 0 0 1.1rem">
-          <li data-i18n="aff.b1">Share useful content (charts, workflows, tutorials)</li>
-          <li data-i18n="aff.b2">No ROI guarantees or signals‑for‑sale</li>
-          <li data-i18n="aff.b3">Use clear “educational only” language</li>
+          <li>Share useful content (charts, workflows, tutorials)</li>
+          <li>No ROI guarantees or signals‑for‑sale</li>
+          <li>Use clear “educational only” language</li>
         </ul>
 
         <form id="affiliate-form" action="https://formspree.io/f/xqaylpyq" method="POST" style="margin-top:.8rem">
           <input type="hidden" name="ref" id="aff-ref" value="">
           <input type="hidden" name="utm" id="aff-utm" value="">
           <div class="grid two-col" style="gap:.8rem">
-            <label for="aff-name" data-i18n="aff.name">Name<input id="aff-name" name="name" required></label>
-            <label for="aff-email" data-i18n="aff.email">Email<input id="aff-email" name="email" type="email" required></label>
+            <label for="aff-name">Name<input id="aff-name" name="name" required></label>
+            <label for="aff-email">Email<input id="aff-email" name="email" type="email" required></label>
           </div>
-          <label for="aff-channels" data-i18n="aff.channels">Channels / links (X, YT, TG, site)
+          <label for="aff-channels">Channels / links (X, YT, TG, site)
             <textarea id="aff-channels" name="channels" placeholder="https://twitter.com/..., https://youtube.com/..., https://t.me/..., website…"></textarea>
           </label>
           <div class="grid two-col" style="gap:.8rem">
-            <label for="aff-aud" data-i18n="aff.aud">Audience size (optional)<input id="aff-aud" name="audience" placeholder="e.g., 12k Twitter, 3k Telegram"></label>
-            <label for="aff-focus" data-i18n="aff.focus">Focus (optional)<input id="aff-focus" name="focus" placeholder="e.g., BTC scalps, FX London, swing equities"></label>
+            <label for="aff-aud">Audience size (optional)<input id="aff-aud" name="audience" placeholder="e.g., 12k Twitter, 3k Telegram"></label>
+            <label for="aff-focus">Focus (optional)<input id="aff-focus" name="focus" placeholder="e.g., BTC scalps, FX London, swing equities"></label>
           </div>
-          <label class="measure" for="aff-notes" data-i18n="aff.notes">Notes (optional)
-            <textarea id="aff-notes" name="notes" placeholder=""></textarea>
+          <label class="measure" for="aff-notes">Notes (optional)
+            <textarea id="aff-notes" name="notes" placeholder="Anything else we should know"></textarea>
           </label>
           <label class="consent">
             <input class="tick" type="checkbox" required>
-            <span data-i18n="aff.ok">I agree to the guidelines above and will present SignalPilot as educational only.</span>
+            <span>I agree to the guidelines above and will present SignalPilot as educational only.</span>
           </label>
-          <button class="btn btn-primary" type="submit" data-i18n="aff.submit">Apply to affiliate waitlist</button>
+          <button class="btn btn-primary" type="submit">Apply to affiliate waitlist</button>
         </form>
       </div>
     </div>
@@ -1059,18 +1090,18 @@
   <!-- WAITLIST -->
   <section id="waitlist" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="wait.h">Get notified when card checkout opens</h2>
-      <p class="note reveal measure" data-i18n="wait.p">We’ll also send docs, presets, and onboarding tips. No spam.</p>
+      <h2 class="headline lg reveal">Get notified when card checkout opens</h2>
+      <p class="note reveal measure">We’ll also send docs, presets, and onboarding tips. No spam.</p>
       <div class="card reveal">
         <form action="https://formspree.io/f/mldpnrop" method="POST">
           <input type="hidden" name="source" value="top-waitlist-section">
           <div class="grid two-col" style="gap:.8rem">
-            <label for="wl-name" data-i18n="wait.name">Name<input id="wl-name" name="name" required></label>
-            <label for="wl-email" data-i18n="wait.email">Email<input id="wl-email" name="email" type="email" required></label>
+            <label for="wl-name">Name<input id="wl-name" name="name" required></label>
+            <label for="wl-email">Email<input id="wl-email" name="email" type="email" required></label>
           </div>
-          <label for="wl-tv" data-i18n="wait.tv">TradingView username<input id="wl-tv" name="tradingview" placeholder="@your.tradingview" data-i18n-ph="ph.tv" required></label>
-          <label for="wl-focus" data-i18n="wait.focus">Trading focus (optional)<input id="wl-focus" name="focus" placeholder="e.g., BTC, FX NY session, swing"></label>
-          <button class="btn btn-primary" type="submit" data-i18n="wait.submit">Join the waitlist</button>
+          <label for="wl-tv">TradingView username<input id="wl-tv" name="tradingview" placeholder="@your.tradingview" required></label>
+          <label for="wl-focus">Trading focus (optional)<input id="wl-focus" name="focus" placeholder="e.g., BTC, FX NY session, swing"></label>
+          <button class="btn btn-primary" type="submit">Join the waitlist</button>
         </form>
       </div>
     </div>
@@ -1079,15 +1110,15 @@
   <!-- FAQ -->
   <section id="faq" class="section">
     <div class="container stack">
-      <h2 class="headline lg reveal" data-i18n="faq.h">FAQ</h2>
+      <h2 class="headline lg reveal">FAQ</h2>
     <div class="grid auto-300 reveal">
-        <div class="card"><strong data-i18n="faq.q1">Is this financial advice?</strong><p class="note" data-i18n="faq.a1">No. SignalPilot is an educational toolset. Examples and backtests are for learning only.</p></div>
-        <div class="card"><strong data-i18n="faq.q2">Do the signals repaint?</strong><p class="note" data-i18n="faq.a2">No—signals finalize on candle close. Everything is alert‑ready.</p></div>
-        <div class="card"><strong data-i18n="faq.q3">What markets & timeframes?</strong><p class="note" data-i18n="faq.a3">Anything on TradingView—crypto, FX, indices, equities, commodities. Scalps to swings.</p></div>
-        <div class="card"><strong data-i18n="faq.q4">How fast is access?</strong><p class="note" data-i18n="faq.a4">After payment: <strong>PayPal/Card 1–8 hours</strong> · <strong>Crypto 1–3 hours</strong>.</p></div>
+        <div class="card"><strong>Is this financial advice?</strong><p class="note">No. SignalPilot is an educational toolset. Examples and backtests are for learning only.</p></div>
+        <div class="card"><strong>Do the signals repaint?</strong><p class="note">No—signals finalize on candle close. Everything is alert‑ready.</p></div>
+        <div class="card"><strong>What markets & timeframes?</strong><p class="note">Anything on TradingView—crypto, FX, indices, equities, commodities. Scalps to swings.</p></div>
+        <div class="card"><strong>How fast is access?</strong><p class="note">After payment: <strong>PayPal/Card 1–8 hours</strong> · <strong>Crypto 1–3 hours</strong>.</p></div>
         <div class="card" id="faq-indicators">
-          <strong data-i18n="faq.q5">Do I need every indicator?</strong>
-          <p class="note" data-i18n="faq.a5">
+          <strong>Do I need every indicator?</strong>
+          <p class="note">
             You get the <strong>entire Trading Suite</strong> with any plan—plus support and ongoing updates.
             Start simple: <strong>EC Pro</strong> (bias) + <strong>PVA/OBV</strong> (participation) + <strong>SDZ/Levels</strong> (structure).
             Add <strong>RSI Triad</strong> / <strong>SRSI+</strong> for timing, and <strong>Screener</strong> when ready.
@@ -1100,14 +1131,14 @@
   <!-- THANK YOU -->
   <section id="thanks" class="section" style="display:none">
     <div class="container stack"><div class="card">
-      <h2 class="headline lg" data-i18n="thanks.h">Thanks — you’re in!</h2>
-      <p class="note measure" data-i18n="thanks.p">We’ll activate your TradingView invites: <strong>PayPal/Card 1–8 hours</strong>, <strong>Crypto 1–3 hours</strong>. If you don’t see invites after that, email <a href="mailto:support@signalpilot.io">support@signalpilot.io</a> with your PayPal transaction or crypto tx id and TradingView username.</p>
+      <h2 class="headline lg">Thanks — you’re in!</h2>
+      <p class="note measure">We’ll activate your TradingView invites: <strong>PayPal/Card 1–8 hours</strong>, <strong>Crypto 1–3 hours</strong>. If you don’t see invites after that, email <a href="mailto:support@signalpilot.io">support@signalpilot.io</a> with your PayPal transaction or crypto tx id and TradingView username.</p>
       <ol class="note measure" style="margin:.3rem 0 0 1.2rem">
-        <li data-i18n="thanks.l1">Watch for TradingView invites under <em>Indicators → Invite‑only scripts</em>.</li>
-        <li data-i18n="thanks.l2">Load the starter preset (sent by email).</li>
-        <li data-i18n="thanks.l3">Add two alerts: EC Pro and Screener.</li>
+        <li>Watch for TradingView invites under <em>Indicators → Invite‑only scripts</em>.</li>
+        <li>Load the starter preset (sent by email).</li>
+        <li>Add two alerts: EC Pro and Screener.</li>
       </ol>
-      <div style="margin-top:.8rem"><a class="btn btn-primary" href="#how" data-i18n="thanks.cta">Read the playbooks</a></div>
+      <div style="margin-top:.8rem"><a class="btn btn-primary" href="#how">Read the playbooks</a></div>
     </div></div>
   </section>
 
@@ -1117,9 +1148,9 @@
 <div class="cta-bar" id="ctaBar" aria-hidden="true">
   <div class="cta-inner">
     <div class="bar">
-      <div class="note" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis" data-i18n="ctabar.msg">See the bias. Trade the plan.</div>
-      <a class="btn btn-primary btn-sm" href="#pricing" data-i18n="cta.get">Get the Suite</a>
-      <a class="btn btn-crypto btn-sm" href="#pay-crypto" data-i18n="cta.crypto">Crypto (–20%)</a>
+      <div class="note" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">See the bias. Trade the plan.</div>
+      <a class="btn btn-primary btn-sm" href="#pricing">Get the Suite</a>
+      <a class="btn btn-crypto btn-sm" href="#pay-crypto">Crypto (–20%)</a>
       <button class="cta-close" id="ctaClose" aria-label="Close">✕</button>
     </div>
   </div>
@@ -1132,7 +1163,7 @@
 <div class="modal" id="cardNotify" role="dialog" aria-modal="true" aria-labelledby="cardNotifyTitle">
   <div class="modal-card">
     <header>
-      <h3 id="cardNotifyTitle" data-i18n="modal.h">Notify me when card checkout opens</h3>
+      <h3 id="cardNotifyTitle">Notify me when card checkout opens</h3>
       <button class="modal-close" data-close aria-label="Close">✕</button>
     </header>
     <form id="card-notify-form" action="https://formspree.io/f/mldpnrop" method="POST">
@@ -1141,12 +1172,12 @@
       <input type="hidden" name="ref" id="card-notify-ref" value="">
       <input type="hidden" name="utm" id="card-notify-utm" value="">
       <div class="grid two-col" style="gap:.8rem">
-        <label for="cn-name" data-i18n="wait.name">Name<input id="cn-name" name="name" required></label>
-        <label for="cn-email" data-i18n="wait.email">Email<input id="cn-email" name="email" type="email" required></label>
+        <label for="cn-name">Name<input id="cn-name" name="name" required></label>
+        <label for="cn-email">Email<input id="cn-email" name="email" type="email" required></label>
       </div>
-      <label for="cn-tv" data-i18n="wait.tv">TradingView username<input id="cn-tv" name="tradingview" placeholder="@your.tradingview" data-i18n-ph="ph.tv" required></label>
-      <button class="btn btn-primary" type="submit" data-i18n="modal.submit">Notify me</button>
-      <a class="btn btn-ghost" href="#waitlist" style="margin-left:.4rem" data-i18n="modal.goto">Go to waitlist</a>
+      <label for="cn-tv">TradingView username<input id="cn-tv" name="tradingview" placeholder="@your.tradingview" required></label>
+      <button class="btn btn-primary" type="submit">Notify me</button>
+      <a class="btn btn-ghost" href="#waitlist" style="margin-left:.4rem">Go to waitlist</a>
     </form>
   </div>
 </div>
@@ -1155,11 +1186,14 @@
   <div class="container stack">
     <div class="social" style="display:flex;flex-wrap:wrap;gap:.8rem"></div>
     <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem">
-      <div>© <span id="year"></span> SignalPilot Labs, Inc. <span data-i18n="ft.all">All rights reserved.</span></div>
-      <div style="display:flex;gap:1rem"><a href="/privacy.html" data-i18n="ft.privacy">Privacy</a><a href="/terms.html" data-i18n="ft.terms">Terms</a></div>
+      <div>© <span id="year"></span> SignalPilot Labs, Inc. All rights reserved.</div>
+      <div style="display:flex;gap:1rem"><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
     </div>
   </div>
 </footer>
+
+<!-- Host element for Google Translate (hidden) -->
+<div id="google_translate_container" class="sr-only" aria-hidden="true"></div>
 
 <script>
   /* ===== Config & helpers ===== */
@@ -1201,7 +1235,7 @@
     const KEY='sp_launch_target_epoch_2025_10_28';
     let t = Number(localStorage.getItem(KEY));
     if (!t || Number.isNaN(t)) {
-      const d = new Date(2025, 9, 28, 0, 0, 0); // Oct = 9
+      const d = new Date(2025, 9, 28, 0, 0, 0); // Oct = 9 (0-indexed)
       t = d.getTime();
       localStorage.setItem(KEY, String(t));
     }
@@ -1222,10 +1256,15 @@
   document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>{
     const el=document.querySelector(btn.getAttribute('data-copy')); if(!el) return;
     el.select(); el.setSelectionRange(0,99999); document.execCommand('copy');
-    const lang=document.documentElement.lang;
-    const copied = (lang==='es')?'Copiado':(lang==='pt')?'Copiado':(lang==='fr')?'Copié':(lang==='it')?'Copiato':(lang==='ru')?'Скопировано':(lang==='zh')?'已复制':(lang==='ar')?'نُسخ':'Copied';
-    const old=btn.textContent; btn.textContent=copied; setTimeout(()=>btn.textContent=t('ui.copy'),1400);
-    live((lang==='ar')?'تم نسخ العنوان':t('ui.addrCopied'));
+    const old=btn.textContent; btn.textContent='Copied'; setTimeout(()=>btn.textContent=old,1400);
+    live('Wallet address copied');
+  }));
+
+  // Pro description toggles
+  document.querySelectorAll('[data-pro]').forEach(btn=>btn.addEventListener('click',()=>{
+    const p=document.getElementById(btn.getAttribute('data-pro')); if(!p) return;
+    const show=p.hasAttribute('hidden'); if(show) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
+    btn.setAttribute('aria-expanded',String(show)); btn.textContent=show?'Hide pro description':'Pro description';
   }));
 
   // Sticky CTA
@@ -1286,6 +1325,8 @@
   (function(){
     const c = document.getElementById('bg-net'); if(!c) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce) return;
+
     const ctx = c.getContext('2d');
     let W=0,H=0,DPR=1, N=0, MAX, parts=[], raf;
 
@@ -1308,20 +1349,24 @@
       }));
     }
 
-    function drawFrame(){
+    function draw(){
+      raf = requestAnimationFrame(draw);
       ctx.clearRect(0,0,W,H);
       ctx.globalCompositeOperation = 'lighter';
+
       for(let i=0;i<N;i++){
         const p=parts[i];
         p.x+=p.vx; p.y+=p.vy;
         if(p.x<0||p.x>W) p.vx*=-1;
         if(p.y<0||p.y>H) p.vy*=-1;
 
+        // node
         ctx.beginPath();
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
         ctx.fillStyle='rgba(140,198,255,0.55)';
         ctx.fill();
 
+        // connections
         for(let j=i+1;j<N;j++){
           const q=parts[j];
           const dx=p.x-q.x, dy=p.y-q.y;
@@ -1336,23 +1381,8 @@
       }
     }
 
-    function animate(){
-      raf = requestAnimationFrame(animate);
-      drawFrame();
-    }
-
-    function boot(){
-      DPR = Math.min(window.devicePixelRatio||1, 2);
-      reset();
-      if(reduce){
-        drawFrame(); // static frame for reduced motion
-      }else{
-        animate();
-      }
-    }
-
-    boot();
-    window.addEventListener('resize', ()=>{ cancelAnimationFrame(raf); boot(); }, {passive:true});
+    reset(); draw();
+    window.addEventListener('resize', ()=>{ cancelAnimationFrame(raf); reset(); draw(); }, {passive:true});
   })();
 
   /* ==== Lifetime availability (100 cap) ==== */
@@ -1373,14 +1403,14 @@
           if(typeof j.claimed === 'number') claimed = Math.max(0, Math.min(LT_CAP, j.claimed|0));
         }
       }
-    }catch(_){}
+    }catch(_){ /* degrade silently */ }
 
     const left = Math.max(0, LT_CAP - claimed);
     if (claimedEl) claimedEl.textContent = String(claimed);
     if (leftEl) leftEl.textContent = String(left);
     if (barEl)  { barEl.style.width = `${(claimed / LT_CAP) * 100}%`; barEl.parentElement?.setAttribute('aria-valuenow', String(claimed)); }
     const soldOut = left <= 0;
-    if (ribbon) ribbon.textContent = soldOut ? document.querySelector('[data-i18n="plan.soldShort"]')?.textContent || 'Sold out' : '100 total';
+    if (ribbon) ribbon.textContent = soldOut ? 'Sold out' : '100 total';
 
     if (soldOut){
       if (form) form.style.display = 'none';
@@ -1391,6 +1421,186 @@
     }
   }
 </script>
+
+<!-- ==== i18n glue: selector + dynamic strings + RTL + persistence ==== -->
+<script>
+/* =========================
+   SP i18n glue (EN/DE/FR/ES/IT/ZH/RU/AR)
+   - Full-page translation via Google Translate Element
+   - Localizes dynamic JS strings set after load
+   - Persists selection; handles RTL for Arabic
+   ========================= */
+(function(){
+  const LANG_KEY = 'sp_lang';
+  const SUP = ['en','de','fr','es','it','zh','ru','ar'];
+  const toCode = (l) => {
+    if(!l) return 'en';
+    l = l.toLowerCase();
+    if (l.startsWith('zh')) return 'zh';
+    return SUP.includes(l.slice(0,2)) ? l.slice(0,2) : 'en';
+  };
+  function getSavedLang(){
+    const saved = localStorage.getItem(LANG_KEY);
+    if (saved && SUP.includes(saved)) return saved;
+    const nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+    return toCode(nav);
+  }
+  function setCookie(name, value, days, domain){
+    let expires = '';
+    if(days){
+      const d = new Date(); d.setTime(d.getTime() + (days*864e5));
+      expires = ';expires=' + d.toUTCString();
+    }
+    const dom = domain ? ';domain=' + domain : '';
+    document.cookie = name + '=' + value + expires + ';path=/' + dom;
+  }
+  function setGoogTrans(lang){
+    const target = (lang === 'zh') ? 'zh-CN' : lang;
+    const val = '/en/' + target;
+    setCookie('googtrans', val, 365);
+    const host = location.hostname.replace(/^www\./,'');
+    setCookie('googtrans', val, 365, '.' + host);
+  }
+  function applyDirLang(lang){
+    document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : lang;
+    document.documentElement.dir  = (lang === 'ar') ? 'rtl' : 'ltr';
+  }
+
+  const STR = {
+    en:{ pro_desc:'Pro description', hide_pro:'Hide pro description', copied:'Copied',
+         enter_tv:'Enter your TradingView username for activation.',
+         consent:'Please confirm the educational-only consent.',
+         payment_failed:'Payment failed. Please try again or email support@signalpilot.io',
+         wallet_copied:'Wallet address copied', lt_sold_out:'Lifetime is sold out. Please join the waitlist.',
+         lt_total_100:'100 total' },
+    de:{ pro_desc:'Pro‑Beschreibung', hide_pro:'Pro‑Beschreibung ausblenden', copied:'Kopiert',
+         enter_tv:'Geben Sie Ihren TradingView‑Benutzernamen für die Aktivierung ein.',
+         consent:'Bitte die Zustimmung „nur zu Bildungszwecken“ bestätigen.',
+         payment_failed:'Zahlung fehlgeschlagen. Bitte erneut versuchen oder support@signalpilot.io kontaktieren.',
+         wallet_copied:'Wallet‑Adresse kopiert', lt_sold_out:'Lifetime ist ausverkauft. Bitte der Warteliste beitreten.',
+         lt_total_100:'Insgesamt 100' },
+    fr:{ pro_desc:'Description pro', hide_pro:'Masquer la description pro', copied:'Copié',
+         enter_tv:'Saisissez votre identifiant TradingView pour l’activation.',
+         consent:'Veuillez confirmer le consentement « à des fins éducatives uniquement ».',
+         payment_failed:'Paiement échoué. Réessayez ou écrivez à support@signalpilot.io',
+         wallet_copied:'Adresse de portefeuille copiée', lt_sold_out:'Lifetime est épuisé. Rejoignez la liste d’attente.',
+         lt_total_100:'100 au total' },
+    es:{ pro_desc:'Descripción pro', hide_pro:'Ocultar descripción pro', copied:'Copiado',
+         enter_tv:'Ingresa tu usuario de TradingView para la activación.',
+         consent:'Confirma el consentimiento “solo educativo”.',
+         payment_failed:'Pago fallido. Intenta de nuevo o escribe a support@signalpilot.io',
+         wallet_copied:'Dirección de wallet copiada', lt_sold_out:'Lifetime agotado. Únete a la lista de espera.',
+         lt_total_100:'100 en total' },
+    it:{ pro_desc:'Descrizione pro', hide_pro:'Nascondi descrizione pro', copied:'Copiato',
+         enter_tv:'Inserisci il tuo username TradingView per l’attivazione.',
+         consent:'Conferma il consenso “solo a scopo educativo”.',
+         payment_failed:'Pagamento non riuscito. Riprova o scrivi a support@signalpilot.io',
+         wallet_copied:'Indirizzo wallet copiato', lt_sold_out:'Lifetime esaurito. Unisciti alla lista d’attesa.',
+         lt_total_100:'100 totali' },
+    zh:{ pro_desc:'专业说明', hide_pro:'隐藏专业说明', copied:'已复制',
+         enter_tv:'请输入用于开通的 TradingView 用户名。',
+         consent:'请勾选“仅用于教育目的”的确认。',
+         payment_failed:'支付失败。请重试或发送邮件至 support@signalpilot.io',
+         wallet_copied:'钱包地址已复制', lt_sold_out:'终身版售罄。请加入候补名单。',
+         lt_total_100:'共 100 个' },
+    ru:{ pro_desc:'Описание Pro', hide_pro:'Скрыть описание Pro', copied:'Скопировано',
+         enter_tv:'Укажите ваш логин TradingView для активации.',
+         consent:'Подтвердите согласие «только в образовательных целях».',
+         payment_failed:'Платёж не прошёл. Попробуйте ещё раз или напишите на support@signalpilot.io',
+         wallet_copied:'Адрес кошелька скопирован', lt_sold_out:'Lifetime распродан. Присоединяйтесь к листу ожидания.',
+         lt_total_100:'Всего 100' },
+    ar:{ pro_desc:'وصف احترافي', hide_pro:'إخفاء الوصف الاحترافي', copied:'تم النسخ',
+         enter_tv:'أدخل اسم مستخدم TradingView للتفعيل.',
+         consent:'يرجى تأكيد الموافقة «لأغراض تعليمية فقط».',
+         payment_failed:'فشلت عملية الدفع. حاول مرة أخرى أو راسل support@signalpilot.io',
+         wallet_copied:'تم نسخ عنوان المحفظة', lt_sold_out:'نفدت باقة مدى الحياة. الرجاء الانضمام إلى قائمة الانتظار.',
+         lt_total_100:'الإجمالي 100' }
+  };
+  function L(){ return STR[getSavedLang()] || STR.en; }
+
+  function initLangUI(){
+    const sel = document.getElementById('langSel');
+    const cur = getSavedLang();
+    if(sel){ sel.value = cur; sel.addEventListener('change', e=>{
+      const val = e.target.value;
+      localStorage.setItem(LANG_KEY, val);
+      setGoogTrans(val);
+      applyDirLang(val);
+      location.reload();
+    });}
+    setGoogTrans(cur);
+    applyDirLang(cur);
+  }
+
+  function patchDynamicStrings(){
+    // Copy buttons → "Copied"
+    document.querySelectorAll('[data-copy]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        setTimeout(()=>{ btn.textContent = L().copied; }, 0);
+      });
+    });
+
+    // Pro description toggles → toggle text localized (fixed order)
+    document.querySelectorAll('[data-pro]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const p = document.getElementById(btn.getAttribute('data-pro')); if(!p) return;
+        const isOpen = !p.hasAttribute('hidden');
+        setTimeout(()=>{ btn.textContent = isOpen ? L().hide_pro : L().pro_desc; }, 0);
+      });
+    });
+
+    // Localize live() message used by copy helper
+    if (typeof window.live === 'function'){
+      const _live = window.live;
+      window.live = function(msg){
+        if (msg && /Wallet address copied/i.test(msg)) { msg = L().wallet_copied; }
+        return _live(msg);
+      };
+    }
+
+    // Localize common alerts (PayPal / lifetime guards)
+    const _alert = window.alert ? window.alert.bind(window) : null;
+    if(_alert){
+      window.alert = function(msg){
+        const T = L();
+        if (/TradingView username/i.test(msg)) msg = T.enter_tv;
+        else if (/educational/i.test(msg))    msg = T.consent;
+        else if (/Payment failed/i.test(msg)) msg = T.payment_failed;
+        else if (/sold out/i.test(msg))       msg = T.lt_sold_out;
+        _alert(msg);
+      };
+    }
+  }
+
+  function patchLifetimeUI(){
+    const ribbon = document.getElementById('lt-ribbon');
+    if(!ribbon) return;
+    const observer = new MutationObserver(()=> {
+      const text = ribbon.textContent.trim().toLowerCase();
+      if (text.includes('sold')) ribbon.textContent = L().lt_sold_out.replace(/\.$/,'');
+      else ribbon.textContent = L().lt_total_100;
+    });
+    observer.observe(ribbon, {childList:true, subtree:true, characterData:true});
+  }
+
+  initLangUI();
+  patchDynamicStrings();
+  patchLifetimeUI();
+})();
+</script>
+
+<!-- Google Translate (reads cookie & applies full‑page translation) -->
+<script>
+  function googleTranslateElementInit(){
+    if(!window.google || !google.translate) return;
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'ar,de,es,fr,it,ru,zh-CN',
+      autoDisplay: false
+    }, 'google_translate_container');
+  }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <!-- PayPal SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=AT7YkprnIrMlBqYZPRJiuH9poDcKiK0L0bEyBuA4R5InsY6nkTCvhAyKi5eg6F3eTjutd9BVbFzdYAsZ&vault=true&intent=subscription&disable-funding=card,credit"></script>
@@ -1404,8 +1614,8 @@
       createSubscription: function(_, actions){
         const tv=(document.getElementById(tvInputId)?.value||'').trim();
         const ok=consentId ? document.getElementById(consentId)?.checked : true;
-        if(!tv){alert(t('alert.tv')); return;}
-        if(!ok){alert(t('alert.consent')); return;}
+        if(!tv){alert('Enter your TradingView username for activation.'); return;}
+        if(!ok){alert('Please confirm the educational-only consent.'); return;}
         const ref=getRef(); const custom=`tv:${tv}|plan:${planKey}${ref?`|ref:${ref}`:''}`;
         localStorage.setItem('sp_last_tv', tv); localStorage.setItem('sp_last_plan', planKey);
         return actions.subscription.create({ plan_id:planId, custom_id:custom, application_context:{shipping_preference:'NO_SHIPPING'} });
@@ -1424,15 +1634,18 @@
   // Lifetime form guards + cap re-check + return URL with thanks hash
   (function(){
     const form=document.getElementById('pp-lifetime'); if(!form) return;
+
+    // Wire IPN notify → Apps Script for server-side cap enforcement
     const ipn = document.getElementById('pp-lifetime-notify');
     if (ipn && SP_WEBHOOK) ipn.value = SP_WEBHOOK + '?fn=pp_ipn';
 
     form.addEventListener('submit', async function(e){
       const tv=(document.getElementById('tv-lifetime')?.value||'').trim();
       const consentOk=document.getElementById('consent-lifetime')?.checked;
-      if(!tv){ e.preventDefault(); alert(t('alert.tv')); return; }
-      if(!consentOk){ e.preventDefault(); alert(t('alert.consent')); return; }
+      if(!tv){ e.preventDefault(); alert('Enter your TradingView username for activation.'); return; }
+      if(!consentOk){ e.preventDefault(); alert('Please confirm the educational-only consent.'); return; }
 
+      // Just-in-time availability check
       let okAvail = true;
       try{
         if(LT_STATUS_URL){
@@ -1442,11 +1655,11 @@
             okAvail = Number(j.claimed||0) < LT_CAP;
           }
         }
-      }catch(_){}
+      }catch(_){ /* assume available if status is offline */ }
 
       if(!okAvail){
         e.preventDefault();
-        alert(t('alert.sold'));
+        alert('Lifetime is sold out. Please join the waitlist.');
         await loadLifetimeStatus();
         return;
       }
@@ -1459,266 +1672,10 @@
       document.getElementById('pp-lifetime-cancel').value=window.location.origin + '/#pricing';
     });
 
+    // Initial status + periodic refresh
     loadLifetimeStatus();
     setInterval(loadLifetimeStatus, 60000);
   })();
-</script>
-
-<!-- ===== I18N (EN base + DE/ES/PT/FR/IT/RU/ZH/AR) ===== -->
-<script>
-  const I18N = {
-    /* ========= English (base / fallback) ========= */
-    en: {
-      "nav.why":"Why SignalPilot","nav.inside":"What’s inside","nav.how":"How it works","nav.roadmap":"Roadmap","nav.pricing":"Pricing","nav.crypto":"Pay with crypto","nav.aff":"Affiliate","nav.faq":"FAQ","nav.docs":"Docs",
-      "hdr.from79":"From <strong>$79/mo</strong>","cta.get":"Get the Suite","cta.docs":"View Docs","cta.crypto":"Pay with crypto (–20%)",
-      "hero.badge":"TRADINGVIEW INDICATORS · ANY MARKET · ANY TIMEFRAME","hero.title":"SignalPilot —<br>Trading Suite",
-      "hero.lead":"See the bias, read the pressure, time the move. SignalPilot turns structure, volume and momentum into clean, <strong>non‑repainting</strong> signals you can scan, alert and trade on any market or timeframe. Flagship <strong>SP‑EC Pro (Event Candles)</strong> plus focused companion modules—built to work together.",
-      "hero.p1":"Non‑repainting","hero.p2":"Alert‑ready","hero.p3":"Any market · timeframe","hero.p4":"Activation Crypto 1–3h",
-      "hero.note":"Every plan includes the full suite, support, ongoing updates—and access to the upcoming indicators.",
-      "hero.launch.badge":"Launch window","hero.launch.in":"Launch in","hero.launch.notify":"Notify me","hero.launch.star":"Star on GitHub","hero.launch.note":"Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.",
-      "why.h":"Why traders use SignalPilot","why.c1.t":"Clarity","why.c1.d":"One‑look bias. No signal spam.","why.c2.t":"Context","why.c2.d":"HTF confirmation with supply/demand and anchored levels that matter.","why.c3.t":"Actionable","why.c3.d":"Designed for alerts and scans—watchlists or global.","why.c4.t":"Robust","why.c4.d":"Non‑repainting logic, volatility‑aware filters and guardrails.","why.c5.t":"Any market · Any timeframe","why.c5.d":"Crypto, FX, indices, equities, commodities. Scalps to swings.","why.c6.t":"Fast access","why.c6.d":"Activation after payment: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.",
-      "inside.h":"What’s inside the Trading Suite",
-      "doc.read":"Read docs",
-      "mod.1.punch":"Classic MACD, upgraded for trend—not chop.","mod.1.note":"Qualified crosses only; regime + HTF confirm; deadband near zero. Flip suite; close‑confirmed alerts; non‑repainting.","mod.1.li1":"Qualified crosses only: regime, HTF confirm, deadband near zero.","mod.1.li2":"Flip suite: Prime, Pullback (PB), Retest with decay & cooldown.","mod.1.li3":"Non‑repainting; alerts fire once per bar close.",
-      "mod.2.punch":"EMA stack signals, first pullback, and EMA‑200 events.","mod.2.note":"Golden/Death Cross + PB1; EMA‑200 reclaim/reject; strict stack + ATR guardrails; close‑confirmed alerts.","mod.2.li1":"Golden/Death Cross + PB1 after cross; EMA‑200 reclaim/reject.","mod.2.li2":"Strict stack & ATR guardrails to reduce fake pulls.","mod.2.li3":"Close‑confirmed alerts; anchored, minimal visuals.",
-      "mod.3.punch":"One 0–100 composite with consensus votes.","mod.3.note":"Blends RSI/Stoch/MFI/CCI/MACD; FlipGuard; 50‑gate; HTF assist optional; alerts + screener booleans.","mod.3.li1":"Blends RSI/Stoch/MFI/CCI/MACD into a single line + EMA.","mod.3.li2":"FlipGuard gating, 50‑gate, OB/OS & signal crosses.","mod.3.li3":"HTF assist optional; bar‑close alerts + screener booleans.",
-      "mod.4.punch":"One decisive BULL/BEAR print when flow agrees.","mod.4.note":"Z‑Vol + RVOL + CVD weighting; regime/VWAP/breakout guards; EVR CLX/ABS; close‑confirmed alerts & booleans.","mod.4.li1":"Z‑Vol + RVOL + CVD weighting for a single yes/no.","mod.4.li2":"Regime/VWAP/breakout guards + FlipGuard; EVR CLX/ABS are exclusive.","mod.4.li3":"Close‑confirmed alerts and hidden scanner booleans.",
-      "mod.5.punch":"Z‑normalized volume & CVD with EVR spikes.","mod.5.note":"Z‑Vol + RVOL spike detection; CVD (z) with divergences; EVR CLX & ABS.","mod.5.li1":"Z‑Vol + RVOL spike detection, symbol/TF aware.","mod.5.li2":"CVD (z) with regular & hidden divergences.","mod.5.li3":"EVR events: CLX (climax) and ABS (absorption).",
-      "mod.6.punch":"Spike‑clipped OBV with a clean channel and divs.","mod.6.note":"SMA basis ±2σ; FlipGuard; residual Z‑extremes; optional HTF compute.","mod.6.li1":"SMA basis ±2σ; basis crosses gated by FlipGuard.","mod.6.li2":"Residual Z‑extremes at ±2σ for exhaustion reads.","mod.6.li3":"Confirmed regular/hidden divergences; optional HTF compute.",
-      "mod.7.punch":"BOS/CHOCH, liquidity sweeps, FVG & OB + Breakers.","mod.7.note":"Close‑confirmed structure with anchored drawings; mitigation & breakers; hidden booleans & alerts.","mod.7.li1":"Close‑confirmed structure with anchored drawings.","mod.7.li2":"Mitigation handling & breakers; optional footprint after fill.","mod.7.li3":"Hidden booleans & alerts for BOS/CHOCH/OB/FVG/Sweeps.",
-      "mod.8.punch":"Compact supply/demand with flip & confluence.","mod.8.note":"ATR‑scaled zones; flip detection; first‑touch/broken alerts; confluence badges.","mod.8.li1":"Confirmed‑pivot zones scaled by ATR; anchored patches.","mod.8.li2":"Flip‑zone detection, first‑touch/broken alerts; declutter + quiet mode.","mod.8.li3":"Confluence badges: VWAP, PDH/PDL, EMAs, round numbers.",
-      "mod.9.punch":"Daily/Weekly/Monthly anchors, sessions & VWAP centers.","mod.9.note":"D/W/M/Q OHLC + Mid; three sessions; central VWAPs; touch alerts.","mod.9.li1":"D/W/M/Q OHLC + Mid with right‑side labels (non‑repainting).","mod.9.li2":"Three sessions with O/H/L/Mid; D/W/M central VWAP.","mod.9.li3":"Touch alerts + hidden booleans for screeners.",
-      "mod.10.punch":"Base/Fast/Slow RSI with graded divergences.","mod.10.note":"Triad Bull/Bear with envelope exit + slope; divergence score; FlipGuard + optional gates.","mod.10.li1":"Triad Bull/Bear when base exits the envelope with slope/spread.","mod.10.li2":"Divergence strength 0–20 with confluence window.","mod.10.li3":"FlipGuard + optional OBV/Stoch/ATR/HTF/Weekly gates.",
-      "mod.11.punch":"Stoch RSI that only fires when context agrees.","mod.11.note":"Volatility‑adaptive %K/%D; confluence score; clean Long/Short alerts; bar‑close only.","mod.11.li1":"%K/%D adaptive with dynamic zones & quality checks.","mod.11.li2":"Confluence score blends HTF bias, participation & structure.","mod.11.li3":"Clean Long/Short alerts, flip cooldown; close‑confirmed only.",
-      "mod.12.punch":"TD counts, clean squeeze, and smart warnings.","mod.12.note":"TD8/9 (perfection) + BB‑in‑KC squeeze; leg‑start detector; smart Caution/Danger warnings.","mod.12.li1":"Close‑confirmed TD8/9 + BB‑in‑KC squeeze.","mod.12.li2":"Leg‑start detector with ADX/HTF/volume filters.","mod.12.li3":"Smart Caution/Danger X for stretch, decel, failure.",
-      "mod.13.punch":"TD / IGN / OUT / CAP with single print per bar.","mod.13.note":"Pilot‑line + regime vote + momentum; exclusive priority; FlipGuard; NanoFlow crosses; close‑confirmed alerts.","mod.13.li1":"Pilot‑line + regime vote + momentum; Volume Assist by default.","mod.13.li2":"Exclusive event priority; FlipGuard and 5m profile tuning.","mod.13.li3":"NanoFlow crosses + breakout arrows; close‑confirmed alerts.",
-      "mod.14.punch":"On‑chart mini screener for up to 8 rows.","mod.14.note":"Last qualified ↑/↓, age, TP1, live P&L; Accuracy+ gates; Confluence Score + ribbon.","mod.14.li1":"Last qualified ↑/↓, age, TP1 and live P&L per row.","mod.14.li2":"Accuracy+ gates (ADX, HTF MACD, OBV slope, hist‑z, distance, RSI).","mod.14.li3":"0–100 Confluence Score + Gauss ribbon state.",
-      "mod.15.punch":"16 classic patterns scored by context.","mod.15.note":"Detects bullish/bearish patterns; scores 0–100 by context; FlipGuard; close‑confirmed alerts.","mod.15.li1":"Detects: Engulfing, Hammers, Stars, 3‑bar patterns & more.","mod.15.li2":"Scores 0–100 by EMA distance, RSI tilt, momentum; thresholded.","mod.15.li3":"FlipGuard (cooldown + decay); close‑confirmed alerts.",
-      "how.h":"How it works — from bias to execution","how.s1.t":"1) Set bias","how.s1.d":"Use <strong>EC Pro</strong> and/or <strong>MACD+</strong> to pick a side. Don’t trade against it.","how.s2.t":"2) Verify participation","how.s2.d":"<strong>PVA/OBV</strong> confirm energy. No energy = no trade.","how.s3.t":"3) Map structure","how.s3.d":"Respect <strong>SDZ</strong> boxes and <strong>Levels</strong> (d/w/m anchors).","how.s4.t":"4) Time the entry","how.s4.d":"<strong>RSI Triad</strong> & <strong>SRSI+</strong> for turns; <strong>LTF</strong> flags coil vs fatigue.","how.s5.t":"5) Automate","how.s5.d":"<strong>Screener</strong> routes signals to alerts. Keep risk fixed, not feelings.","how.play.h":"Built‑in plays","how.play.p1":"<strong>Trend Buy‑the‑Dip:</strong> Bias Up → PVA Bull/Climax → reaction near demand/VWAP → RSI/SRSI timing.","how.play.p2":"<strong>Reversal Flip:</strong> Absorption + OBV div at supply → EC slope flattens → Pilot reclaim.","how.play.p3":"<strong>Breakout Continuation:</strong> Climax through wVWAP/supply → first ATR dip → NanoFlow “+”.","how.play.note":"Start with EC Pro (bias) + PVA/OBV (participation) + SDZ/Levels (structure). Layer timing & screener as needed. <em>Educational only — not financial advice.</em>",
-      "road.h":"Roadmap — what’s next","road.note":"We ship fast. Timelines may shift a little, but the direction is constant: more clarity, less noise.","road.now":"Available now","road.next":"Rolling out next","road.later":"Later this year",
-      "road.now.b1":"<b>Bias:</b> EC Pro + MACD+","road.now.b2":"<b>Participation:</b> PVA & OBV","road.now.b3":"<b>Structure:</b> SDZ boxes & anchored Levels","road.now.b4":"<b>Timing:</b> RSI Triad & SRSI+","road.now.b5":"<b>Automation:</b> Screener & alerts","road.now.b6":"<b>Fast access:</b> PayPal/Card 1–8h · Crypto 1–3h",
-      "road.next.b1":"Preset bundle + quick‑start docs","road.next.b2":"Short video tips & mini case studies","road.next.b3":"Watchlist alerts & simple webhooks",
-      "road.later.b1":"SP‑Range Pro & SP‑Liquidity Map","road.later.b2":"Preset library + session playback","road.later.b3":"Backtest templates & exporter examples","road.later.b4":"Localization (ES / PT‑BR / DE)",
-      "price.h":"Plans & pricing","price.blurb1":"All plans include the <u>full Trading Suite</u>, support, ongoing updates, and <u>access to upcoming indicators</u>.","price.blurb2":"Subscriptions include new modules while active. Lifetime includes all future updates.",
-      "plan.monthly":"Monthly","plan.permonth":"/month","plan.quarterly":"Quarterly","plan.per3m":"/3 months","plan.best":"Best value","plan.peryear":"/year","plan.lifetime":"Lifetime (limited)","plan.onetime":"one‑time","plan.cap.limited":"Limited — ","plan.cap.claimed":"claimed","plan.cap.left":"left","plan.soldout":"Sold out — join waitlist below","plan.soldShort":"Sold out",
-      "form.tv":"TradingView username (for invite)","form.tv_req":"TradingView username (required for activation)","form.consent":"I understand SignalPilot is educational. No financial advice.","form.cardsoon":"Pay by card (coming soon)","ph.tv":"@your.tradingview",
-      "qs.h":"Quick‑start (5 minutes)","qs.b1":"Pick a plan and pay (PayPal auto‑renew or Crypto Prepaid Pass).","qs.b2":"Enter your <strong>TradingView username</strong> for the invite.","qs.b3":"We activate invites: <strong>PayPal/Card 1–8h</strong> · <strong>Crypto 1–3h</strong>.","qs.b4":"Load the starter preset and add two alerts.","qs.b5":"Follow the Trend Dip / Reversal Flip / Breakout playbooks.","qs.note":"Crypto is <strong>one‑time</strong> (no auto‑renew). SignalPilot is educational—<em>not financial advice</em>.",
-      "crypto.h":"Pay with crypto","crypto.save":"save 20%","crypto.blurb":"Crypto payments are <strong>one‑time</strong>. You’ll get a <strong>prepaid access pass</strong> (30 / 90 / 365 days) or <strong>Lifetime</strong>. <strong>No auto‑renew</strong>. Typical activation is <strong>1–3 hours</strong> after network confirmations.","crypto.req":"Request an invoice with an exact quote—or send directly and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> for activation. <em>No memo/tag required.</em>","crypto.plan":"Plan (Prepaid Pass)","crypto.plan.m":"Monthly Crypto Pass (30 days) — save 20%","crypto.plan.q":"Quarterly Crypto Pass (90 days) — save 20%","crypto.plan.y":"Yearly Crypto Pass (365 days) — save 20%","crypto.plan.l":"Lifetime (Crypto) — save 20%","crypto.coin":"Coin","crypto.email":"Email (for invoice & receipt)","crypto.tv":"TradingView username (for invite)","crypto.notes":"Notes (optional)","crypto.submit":"Request crypto invoice","crypto.direct":"Prefer to send directly? Copy a wallet below and email your <strong>tx id</strong> + <strong>plan</strong> + <strong>TradingView username</strong> to <a href='mailto:support@signalpilot.io'>support@signalpilot.io</a>. <em>No memo/tag required.</em>","crypto.addr.evm":"ETH / MATIC (EVM)","crypto.when":"Crypto passes usually activate in <strong>1–3 hours</strong> after confirmations.",
-      "aff.h":"Affiliate program (early access)","aff.p":"We’re designing a fair, transparent program focused on education, not P&L promises. Please apply below if you agree to:","aff.b1":"Share useful content (charts, workflows, tutorials)","aff.b2":"No ROI guarantees or signals‑for‑sale","aff.b3":"Use clear “educational only” language","aff.name":"Name","aff.email":"Email","aff.channels":"Channels / links (X, YT, TG, site)","aff.aud":"Audience size (optional)","aff.focus":"Focus (optional)","aff.notes":"Notes (optional)","aff.ok":"I agree to the guidelines above and will present SignalPilot as educational only.","aff.submit":"Apply to affiliate waitlist",
-      "wait.h":"Get notified when card checkout opens","wait.p":"We’ll also send docs, presets, and onboarding tips. No spam.","wait.name":"Name","wait.email":"Email","wait.tv":"TradingView username","wait.focus":"Trading focus (optional)","wait.submit":"Join the waitlist",
-      "faq.h":"FAQ","faq.q1":"Is this financial advice?","faq.a1":"No. SignalPilot is an educational toolset. Examples and backtests are for learning only.","faq.q2":"Do the signals repaint?","faq.a2":"No—signals finalize on candle close. Everything is alert‑ready.","faq.q3":"What markets & timeframes?","faq.a3":"Anything on TradingView—crypto, FX, indices, equities, commodities. Scalps to swings.","faq.q4":"How fast is access?","faq.a4":"After payment: <strong>PayPal/Card 1–8 hours</strong> · <strong>Crypto 1–3 hours</strong>.","faq.q5":"Do I need every indicator?","faq.a5":"You get the <strong>entire Trading Suite</strong> with any plan—plus support and ongoing updates. Start simple: <strong>EC Pro</strong> (bias) + <strong>PVA/OBV</strong> (participation) + <strong>SDZ/Levels</strong> (structure). Add <strong>RSI Triad</strong> / <strong>SRSI+</strong> for timing, and <strong>Screener</strong> when ready.",
-      "thanks.h":"Thanks — you’re in!","thanks.p":"We’ll activate your TradingView invites: <strong>PayPal/Card 1–8 hours</strong>, <strong>Crypto 1–3 hours</strong>. If you don’t see invites after that, email <a href='mailto:support@signalpilot.io'>support@signalpilot.io</a> with your PayPal transaction or crypto tx id and TradingView username.","thanks.l1":"Watch for TradingView invites under <em>Indicators → Invite‑only scripts</em>.","thanks.l2":"Load the starter preset (sent by email).","thanks.l3":"Add two alerts: EC Pro and Screener.","thanks.cta":"Read the playbooks",
-      "ctabar.msg":"See the bias. Trade the plan.","ft.all":"All rights reserved.","ft.privacy":"Privacy","ft.terms":"Terms",
-      "ui.copy":"Copy","ui.copied":"Copied","ui.addrCopied":"Wallet address copied",
-      "modal.h":"Notify me when card checkout opens","modal.submit":"Notify me","modal.goto":"Go to waitlist",
-      "alert.tv":"Enter your TradingView username for the activation.","alert.consent":"Please confirm the educational-only consent.","alert.sold":"Lifetime is sold out. Please join the waitlist."
-    }
-  };
-</script>
-
-<!-- Language packs: DE, ES, PT-BR, FR, IT, RU, ZH, AR -->
-<script>
-/* ===== Start from EN and override ===== */
-function cloneEn(){ return JSON.parse(JSON.stringify(I18N.en)); }
-
-/* -------- German (DE) -------- */
-I18N.de = cloneEn();
-Object.assign(I18N.de,{
-  "nav.why":"Warum SignalPilot","nav.inside":"Inhalte","nav.how":"Funktionsweise","nav.roadmap":"Roadmap","nav.pricing":"Preise","nav.crypto":"Krypto‑Zahlung","nav.aff":"Partnerprogramm","nav.faq":"FAQ","nav.docs":"Doku",
-  "hdr.from79":"Ab <strong>79 $/Monat</strong>","cta.get":"Suite holen","cta.docs":"Doku ansehen","cta.crypto":"Mit Krypto zahlen (–20%)",
-  "hero.badge":"TRADINGVIEW‑INDIKATOREN · JEDER MARKT · JEDER ZEITRAHMEN",
-  "hero.lead":"Bias sehen, Druck lesen, Timing setzen. SignalPilot macht aus Struktur, Volumen und Momentum saubere, <strong>nicht‑repaintende</strong> Signale für jeden Markt & Zeitrahmen. Flaggschiff <strong>SP‑EC Pro</strong> plus fokussierte Module — abgestimmt miteinander.",
-  "hero.p1":"Kein Repaint","hero.p2":"Alert‑fertig","hero.p3":"Jeder Markt · Zeitrahmen","hero.p4":"Krypto‑Aktivierung 1–3 Std",
-  "hero.note":"Alle Pläne enthalten die komplette Suite, Support, laufende Updates und Zugriff auf kommende Indikatoren.",
-  "hero.launch.badge":"Launch‑Fenster","hero.launch.in":"Start in","hero.launch.notify":"Benachrichtigen","hero.launch.star":"Bei GitHub ⭐","hero.launch.note":"Aktivierung nach Zahlung: <strong>PayPal/Karte 1–8 Std</strong> · <strong>Krypto 1–3 Std</strong>.",
-  "why.h":"Warum Trader SignalPilot nutzen",
-  "why.c1.t":"Klarheit","why.c1.d":"Bias auf einen Blick. Kein Signal‑Spam.",
-  "why.c2.t":"Kontext","why.c2.d":"HTF‑Bestätigung mit Angebot/Nachfrage und relevanten Ankern.",
-  "why.c3.t":"Umsetzbar","why.c3.d":"Für Alerts und Scans gebaut — Watchlists oder global.",
-  "why.c4.t":"Robust","why.c4.d":"Kein Repaint, volatilitätsbewusste Filter & Leitplanken.",
-  "why.c5.t":"Jeder Markt · Jeder Zeitrahmen","why.c5.d":"Krypto, FX, Indizes, Aktien, Rohstoffe. Scalps bis Swings.",
-  "why.c6.t":"Schneller Zugang","why.c6.d":"Aktivierung: <strong>PayPal/Karte 1–8 Std</strong> · <strong>Krypto 1–3 Std</strong>.",
-  "inside.h":"Was die Trading Suite enthält",
-  "doc.read":"Doku lesen",
-  "mod.1.punch":"Klassischer MACD, auf Trend statt Rauschen getrimmt.",
-  "mod.2.punch":"EMA‑Stack‑Signale, erster Pullback und EMA‑200‑Events.",
-  "mod.3.punch":"Ein 0–100‑Komposit mit Konsens‑Votes.",
-  "mod.4.punch":"Ein eindeutiger BULL/BEAR‑Print, wenn der Flow passt.",
-  "mod.5.punch":"Z‑normalisiertes Volumen & CVD mit EVR‑Spikes.",
-  "mod.6.punch":"Gekappter OBV mit sauberem Kanal und Divergenzen.",
-  "mod.7.punch":"BOS/CHOCH, Liquiditätssweeps, FVG & OB + Breaker.",
-  "mod.8.punch":"Kompakte Angebots/Nachfrage‑Zonen mit Flip & Konfluenz.",
-  "mod.9.punch":"Tägliche/Wöchentliche/Monatliche Anker, Sessions & zentrale VWAPs.",
-  "mod.10.punch":"Basis/Schnell/Langsam‑RSI mit abgestuften Divergenzen.",
-  "mod.11.punch":"Stoch RSI nur bei passendem Kontext.",
-  "mod.12.punch":"TD‑Counts, sauberer Squeeze und smarte Warnungen.",
-  "mod.13.punch":"TD / IGN / OUT / CAP — ein Print pro Kerze.",
-  "mod.14.punch":"Mini‑Screener im Chart (bis 8 Zeilen).",
-  "mod.15.punch":"16 klassische Muster, kontextbasiert bewertet.",
-  "how.h":"So funktioniert’s — vom Bias zur Ausführung",
-  "road.h":"Roadmap — wie geht’s weiter",
-  "price.h":"Pläne & Preise",
-  "crypto.h":"Mit Krypto zahlen","crypto.save":"20 % sparen",
-  "aff.h":"Partnerprogramm (Early Access)","wait.h":"Benachrichtige mich bei Kartenzahlung",
-  "faq.h":"FAQ","thanks.h":"Danke — du bist dabei!",
-  "ctabar.msg":"Bias sehen. Plan handeln.",
-  "ft.all":"Alle Rechte vorbehalten.",
-  "modal.h":"Benachrichtige mich bei Kartenzahlung","modal.submit":"Benachrichtigen","modal.goto":"Zur Liste",
-  "alert.tv":"TradingView‑Nutzername eingeben.","alert.consent":"Bitte den „nur Bildung“-Hinweis bestätigen.","alert.sold":"Lifetime ausverkauft. Zur Warteliste anmelden."
-});
-
-/* -------- Spanish (ES) -------- */
-I18N.es = cloneEn();
-Object.assign(I18N.es,{
-  "nav.why":"Por qué SignalPilot","nav.inside":"Qué incluye","nav.how":"Cómo funciona","nav.roadmap":"Hoja de ruta","nav.pricing":"Precios","nav.crypto":"Pagar con cripto","nav.aff":"Afiliados","nav.faq":"Preguntas","nav.docs":"Documentación",
-  "hdr.from79":"Desde <strong>79 $/mes</strong>","cta.get":"Obtener la Suite","cta.docs":"Ver docs","cta.crypto":"Pagar con cripto (–20%)",
-  "hero.badge":"INDICADORES TRADINGVIEW · CUALQUIER MERCADO · CUALQUIER MARCO",
-  "hero.lead":"Vea el sesgo, lea la presión y acierte el timing. SignalPilot convierte estructura, volumen y momentum en señales limpias <strong>sin repaint</strong> para escanear, alertar y operar en cualquier mercado y marco.",
-  "hero.p1":"Sin repaint","hero.p2":"Listo para alertas","hero.p3":"Cualquier mercado · marco","hero.p4":"Activación cripto 1–3 h",
-  "hero.note":"Todos los planes incluyen la suite completa, soporte, actualizaciones continuas y acceso a próximos indicadores.",
-  "hero.launch.badge":"Ventana de lanzamiento","hero.launch.in":"Lanzamiento en","hero.launch.notify":"Avísame","hero.launch.star":"⭐ en GitHub","hero.launch.note":"Activación tras el pago: <strong>PayPal/Tarjeta 1–8 h</strong> · <strong>Cripto 1–3 h</strong>.",
-  "why.h":"Por qué los traders usan SignalPilot",
-  "why.c1.t":"Claridad","why.c1.d":"Sesgo a primera vista. Sin spam.",
-  "why.c2.t":"Contexto","why.c2.d":"Confirmación HTF con oferta/demanda y niveles anclados.",
-  "why.c3.t":"Accionable","why.c3.d":"Diseñado para alertas y escaneos—listas o global.",
-  "why.c4.t":"Robusto","why.c4.d":"Lógica sin repaint y filtros sensibles a la volatilidad.",
-  "why.c5.t":"Cualquier mercado · marco","why.c5.d":"Cripto, FX, índices, acciones, materias primas.",
-  "why.c6.t":"Acceso rápido","why.c6.d":"Activación: <strong>PayPal/Tarjeta 1–8 h</strong> · <strong>Cripto 1–3 h</strong>.",
-  "inside.h":"Qué incluye la Trading Suite",
-  "doc.read":"Leer docs",
-  "mod.1.punch":"MACD clásico, mejorado para tendencia (no chop).",
-  "mod.2.punch":"Señales del stack EMA, primer retroceso y eventos EMA‑200.",
-  "mod.3.punch":"Un compuesto 0–100 con votos de consenso.",
-  "mod.4.punch":"Un único BULL/BEAR cuando el flujo coincide.",
-  "mod.5.punch":"Volumen Z‑normalizado y CVD con picos EVR.",
-  "mod.6.punch":"OBV recortado con canal limpio y divergencias.",
-  "mod.7.punch":"BOS/CHOCH, barridos de liquidez, FVG & OB + Breakers.",
-  "mod.8.punch":"Zonas S/D compactas con flip y confluencia.",
-  "mod.9.punch":"Anclas Diarias/Semanales/Mensuales, sesiones y VWAP centrales.",
-  "mod.10.punch":"RSI Base/Rápido/Lento con divergencias graduadas.",
-  "mod.11.punch":"Stoch RSI que solo dispara con contexto de acuerdo.",
-  "mod.12.punch":"Conteos TD, squeeze limpio y avisos inteligentes.",
-  "mod.13.punch":"TD / IGN / OUT / CAP — un print por vela.",
-  "mod.14.punch":"Mini screener en gráfico (hasta 8 filas).",
-  "mod.15.punch":"16 patrones clásicos con puntuación contextual.",
-  "how.h":"Cómo funciona — del sesgo a la ejecución",
-  "road.h":"Hoja de ruta — lo siguiente",
-  "price.h":"Planes y precios",
-  "crypto.h":"Pagar con cripto","crypto.save":"ahorra 20%",
-  "aff.h":"Programa de afiliados (acceso anticipado)","wait.h":"Avísame cuando habiliten pago con tarjeta",
-  "faq.h":"Preguntas frecuentes","thanks.h":"¡Gracias — estás dentro!",
-  "ctabar.msg":"Ve el sesgo. Opera el plan.",
-  "ft.all":"Todos los derechos reservados.",
-  "modal.h":"Avísame cuando abra el pago con tarjeta","modal.submit":"Avísame","modal.goto":"Ir a la lista",
-  "alert.tv":"Introduce tu usuario de TradingView.","alert.consent":"Confirma el consentimiento «solo educativo».","alert.sold":"Lifetime agotado. Únete a la lista."
-});
-
-/* -------- Portuguese (Brazil) PT-BR -------- */
-I18N.pt = cloneEn();
-Object.assign(I18N.pt,{
-  "nav.why":"Por que SignalPilot","nav.inside":"O que inclui","nav.how":"Como funciona","nav.roadmap":"Roteiro","nav.pricing":"Preços","nav.crypto":"Pagar com cripto","nav.aff":"Afiliados","nav.faq":"Perguntas","nav.docs":"Documentação",
-  "hdr.from79":"A partir de <strong>US$ 79/mês</strong>","cta.get":"Obter a Suite","cta.docs":"Ver docs","cta.crypto":"Pagar com cripto (–20%)",
-  "hero.badge":"INDICADORES TRADINGVIEW · QUALQUER MERCADO · QUALQUER TEMPO",
-  "hero.lead":"Veja o viés, leia a pressão e acerte o timing. O SignalPilot transforma estrutura, volume e momento em sinais limpos <strong>sem repaint</strong> para escanear, alertar e operar em qualquer mercado e timeframe.",
-  "hero.p1":"Sem repaint","hero.p2":"Pronto para alertas","hero.p3":"Qualquer mercado · timeframe","hero.p4":"Ativação cripto 1–3 h",
-  "hero.note":"Todos os planos incluem a suíte completa, suporte, atualizações contínuas e acesso aos próximos indicadores.",
-  "hero.launch.badge":"Janela de lançamento","hero.launch.in":"Lançamento em","hero.launch.notify":"Avise‑me","hero.launch.star":"⭐ no GitHub","hero.launch.note":"Ativação após pagamento: <strong>PayPal/Cartão 1–8 h</strong> · <strong>Cripto 1–3 h</strong>.",
-  "why.h":"Por que traders usam SignalPilot",
-  "why.c1.t":"Clareza","why.c1.d":"Viés em um olhar. Sem spam de sinais.",
-  "why.c2.t":"Contexto","why.c2.d":"Confirmação HTF com oferta/demanda e níveis ancorados.",
-  "why.c3.t":"Acionável","why.c3.d":"Feito para alertas e scanners — listas ou global.",
-  "why.c4.t":"Robusto","why.c4.d":"Sem repaint, filtros sensíveis à volatilidade.",
-  "why.c5.t":"Qualquer mercado · timeframe","why.c5.d":"Cripto, FX, índices, ações, commodities.",
-  "why.c6.t":"Acesso rápido","why.c6.d":"Ativação: <strong>PayPal/Cartão 1–8 h</strong> · <strong>Cripto 1–3 h</strong>.",
-  "inside.h":"O que está na Trading Suite",
-  "doc.read":"Ler docs",
-  "mod.1.punch":"MACD clássico, ajustado para tendência (não ruído).",
-  "mod.2.punch":"Sinais do stack EMA, primeiro pullback e eventos EMA‑200.",
-  "mod.3.punch":"Composto 0–100 com votos de consenso.",
-  "mod.4.punch":"Um único BULL/BEAR quando o fluxo concorda.",
-  "mod.5.punch":"Volume Z‑normalizado e CVD com picos EVR.",
-  "mod.6.punch":"OBV com corte de picos, canal limpo e divergências.",
-  "mod.7.punch":"BOS/CHOCH, varredura de liquidez, FVG & OB + Breakers.",
-  "mod.8.punch":"Zonas de oferta/demanda compactas com flip & confluência.",
-  "mod.9.punch":"Âncoras Diárias/Semanais/Mensais, sessões & VWAP central.",
-  "mod.10.punch":"RSI Base/Rápido/Lento com divergências graduadas.",
-  "mod.11.punch":"Stoch RSI só dispara quando o contexto concorda.",
-  "mod.12.punch":"Contagens TD, squeeze limpo e alertas inteligentes.",
-  "mod.13.punch":"TD / IGN / OUT / CAP — um print por candle.",
-  "mod.14.punch":"Mini screener no gráfico (até 8 linhas).",
-  "mod.15.punch":"16 padrões clássicos pontuados por contexto.",
-  "how.h":"Como funciona — do viés à execução",
-  "road.h":"Roteiro — próximos passos",
-  "price.h":"Planos e preços",
-  "crypto.h":"Pagar com cripto","crypto.save":"economize 20%",
-  "aff.h":"Programa de afiliados (acesso antecipado)","wait.h":"Avise‑me quando abrir cartão",
-  "faq.h":"Perguntas frequentes","thanks.h":"Obrigado — você entrou!",
-  "ctabar.msg":"Veja o viés. Execute o plano.",
-  "ft.all":"Todos os direitos reservados.",
-  "modal.h":"Avise‑me quando o pagamento com cartão abrir","modal.submit":"Avise‑me","modal.goto":"Ir para a lista",
-  "alert.tv":"Informe seu usuário do TradingView.","alert.consent":"Confirme o consentimento “apenas educativo”.","alert.sold":"Lifetime esgotado. Entre na lista."
-});
-
-/* -------- French / Italian / Russian / Chinese / Arabic from previous build -------- */
-I18N.fr = cloneEn(); Object.assign(I18N.fr,{ /* …shortened for brevity, same as prior reply… */ 
-  "nav.why":"Pourquoi SignalPilot","nav.inside":"Ce qui est inclus","nav.how":"Comment ça marche","nav.roadmap":"Feuille de route","nav.pricing":"Tarifs","nav.crypto":"Payer en crypto","nav.aff":"Affiliation","nav.faq":"FAQ","nav.docs":"Documentation",
-  "hdr.from79":"Dès <strong>79 $/mois</strong>","cta.get":"Obtenir la Suite","cta.docs":"Voir la doc","cta.crypto":"Payer en crypto (–20%)",
-  "hero.badge":"INDICATEURS TRADINGVIEW · TOUS MARCHÉS · TOUS HORIZONS",
-  "hero.lead":"Voyez le biais, lisez la pression, chronométrez le mouvement. SignalPilot transforme structure, volume et momentum en signaux propres <strong>sans repaint</strong>…",
-  "ctabar.msg":"Voyez le biais. Exécutez le plan." });
-
-I18N.it = cloneEn(); Object.assign(I18N.it,{ 
-  "nav.why":"Perché SignalPilot","nav.inside":"Cosa include","nav.how":"Come funziona","nav.roadmap":"Roadmap","nav.pricing":"Prezzi","nav.crypto":"Paga in cripto","nav.aff":"Affiliazione","nav.faq":"FAQ","nav.docs":"Documentazione",
-  "hdr.from79":"Da <strong>$79/mese</strong>","cta.get":"Ottieni la Suite","cta.docs":"Vedi documentazione","cta.crypto":"Paga in cripto (–20%)",
-  "ctabar.msg":"Vedi il bias. Segui il piano." });
-
-I18N.ru = cloneEn(); Object.assign(I18N.ru,{ 
-  "nav.why":"Почему SignalPilot","nav.inside":"Что внутри","nav.how":"Как это работает","nav.roadmap":"Дорожная карта","nav.pricing":"Цены","nav.crypto":"Оплата криптой","nav.aff":"Партнёрство","nav.faq":"FAQ","nav.docs":"Документация",
-  "hdr.from79":"От <strong>$79/мес</strong>","cta.get":"Получить Suite","cta.docs":"Документация","cta.crypto":"Оплатить криптой (–20%)",
-  "ctabar.msg":"Видьте биас. Торгуйте по плану." });
-
-I18N.zh = cloneEn(); Object.assign(I18N.zh,{
-  "nav.why":"为什么选择 SignalPilot","nav.inside":"套件内容","nav.how":"工作原理","nav.roadmap":"路线图","nav.pricing":"价格","nav.crypto":"加密支付","nav.aff":"联盟计划","nav.faq":"常见问题","nav.docs":"文档",
-  "hdr.from79":"低至 <strong>$79/月</strong>","cta.get":"获取套件","cta.docs":"查看文档","cta.crypto":"加密支付 (–20%)",
-  "ctabar.msg":"看清方向，按计划交易。" });
-
-I18N.ar = cloneEn(); Object.assign(I18N.ar,{
-  "nav.why":"لماذا SignalPilot","nav.inside":"ماذا تتضمن","nav.how":"كيفية العمل","nav.roadmap":"خارطة الطريق","nav.pricing":"الأسعار","nav.crypto":"الدفع بالعملات","nav.aff":"الشراكة","nav.faq":"الأسئلة","nav.docs":"الوثائق",
-  "hdr.from79":"ابتداءً من <strong>79$ شهريًا</strong>","cta.get":"احصل على الحزمة","cta.docs":"عرض المستندات","cta.crypto":"ادفع بالعملات المشفرة (–20%)",
-  "ctabar.msg":"اعرف الانحياز. اتبع الخطة." });
-
-/* ====== i18n engine ====== */
-const SUPPORTED = ['en','de','es','fr','it','ru','zh','ar','pt'];
-function normLang(s){ s=(s||'').toLowerCase(); if(s.startsWith('zh')) return 'zh'; if(s.startsWith('pt')) return 'pt'; if(s.startsWith('en')) return 'en'; if(s.startsWith('de')) return 'de'; if(s.startsWith('fr')) return 'fr'; if(s.startsWith('it')) return 'it'; if(s.startsWith('ru')) return 'ru'; if(s.startsWith('es')) return 'es'; if(s.startsWith('ar')) return 'ar'; return 'en'; }
-function getLang(){
-  const q=new URLSearchParams(location.search).get('lang'); if(q) return normLang(q);
-  const ls=localStorage.getItem('sp_lang'); if(ls) return normLang(ls);
-  return normLang(navigator.language||'en');
-}
-function setLang(lang){ localStorage.setItem('sp_lang', lang); applyI18N(lang); }
-function t(key){
-  const lang=document.documentElement.lang || 'en';
-  return (I18N[lang] && I18N[lang][key]) || I18N.en[key] || key;
-}
-function stripHTML(s){ const tmp=document.createElement('div'); tmp.innerHTML=s; return tmp.textContent||tmp.innerText||''; }
-
-function applyI18N(lang){
-  if(!SUPPORTED.includes(lang)) lang='en';
-  document.documentElement.lang = lang;
-  document.documentElement.dir  = (lang==='ar') ? 'rtl' : 'ltr';
-  // Text nodes
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const k=el.getAttribute('data-i18n'); const val=t(k); if(val!=null) el.innerHTML = val;
-  });
-  // Placeholders
-  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
-    const k=el.getAttribute('data-i18n-ph'); const val=t(k); if(val!=null) el.setAttribute('placeholder', stripHTML(val));
-  });
-  // Selector
-  const sel=document.getElementById('lang'); if(sel){ sel.value=lang; }
-}
-document.getElementById('lang')?.addEventListener('change', (e)=> setLang(e.target.value) );
-applyI18N(getLang());
 </script>
 
 </body>
