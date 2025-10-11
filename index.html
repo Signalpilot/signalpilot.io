@@ -308,6 +308,28 @@
     .lt-cap{display:grid;gap:.35rem;margin:.45rem 0 .2rem}
     .capbar{height:8px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
     .capbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent))}
+
+    /* === FORCE AURORA + NET EVERYWHERE === */
+
+/* 1) Create an isolated stacking context so mix-blend-mode blits correctly */
+html, body { isolation: isolate; }
+
+/* 2) Strengthen visibility a touch (tweak to taste) */
+.bg-aurora {
+  opacity: .95;
+  filter: blur(72px) saturate(135%) brightness(112%);
+}
+
+/* 3) Ignore Reduce Motion (you asked for it) */
+@media (prefers-reduced-motion: reduce) {
+  .bg-aurora { animation: aurora-pan 36s linear infinite alternate !important; }
+  .bg-net    { display: block !important; }
+}
+
+/* 4) iOS/WebKit paint guard — some builds drop blended, negative z-index layers */
+@supports (-webkit-touch-callout: none) {
+  .bg-aurora { z-index: 0; transform: translateZ(0); }
+}
   </style>
 </head>
 <body>
