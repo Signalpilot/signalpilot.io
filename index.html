@@ -89,6 +89,7 @@
         radial-gradient(1200px 700px at 52% 118%, rgba(118,221,255,.12), transparent 64%),
         var(--bg);
       padding-bottom: env(safe-area-inset-bottom);
+      isolation:isolate; /* stable blend base for the aurora/video */
     }
 
     /* Typography / readability */
@@ -106,6 +107,8 @@
       position:fixed; inset:0; z-index:-2; pointer-events:none;
       opacity:.55; filter:saturate(115%) brightness(110%);
     }
+
+    /* Fallback gradient aurora (will be hidden when video starts) */
     .bg-aurora{
       position:fixed; inset:0; z-index:-1; pointer-events:none;
       background:
@@ -113,10 +116,19 @@
         radial-gradient(36% 28% at 85% 14%,  rgba(155,140,255,.38), transparent 65%),
         radial-gradient(48% 36% at 78% 88%,  rgba(118,221,255,.28), transparent 70%),
         radial-gradient(26% 22% at 8% 72%,   rgba(151,124,255,.22), transparent 66%);
-      filter: blur(70px) saturate(130%) brightness(110%);
+      filter: blur(60px) saturate(130%) brightness(110%);
       mix-blend-mode: screen; opacity:.85;
       animation: aurora-pan 36s linear infinite alternate; will-change: transform;
     }
+
+    /* Hardware-decoded aurora video (Solution C) */
+    .bg-aurora-video{
+      position:fixed; inset:0; z-index:-1; width:100%; height:100%;
+      object-fit:cover; pointer-events:none; opacity:.82; mix-blend-mode:screen;
+    }
+    /* When video is ready, hide the gradient fallback to save GPU */
+    body.has-aurora-video .bg-aurora{ display:none !important; }
+
     @keyframes aurora-pan { from{transform:translate3d(-2%,-1%,0) scale(1.02)} to{transform:translate3d(2%,1%,0) scale(1.05)} }
 
     body::after{
@@ -298,74 +310,20 @@
     .lt-cap{display:grid;gap:.35rem;margin:.45rem 0 .2rem}
     .capbar{height:8px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
     .capbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent))}
-
-    /* === FORCE AURORA + NET EVERYWHERE === */
-
-/* 1) Create an isolated stacking context so mix-blend-mode blits correctly */
-html, body { isolation: isolate; }
-
-/* 2) Strengthen visibility a touch (tweak to taste) */
-.bg-aurora {
-  opacity: .95;
-  filter: blur(72px) saturate(135%) brightness(112%);
-}
-
-/* 3) Ignore Reduce Motion (you asked for it) */
-@media (prefers-reduced-motion: reduce) {
-  .bg-aurora { animation: aurora-pan 36s linear infinite alternate !important; }
-  .bg-net    { display: block !important; }
-}
-
-/* 4) iOS/WebKit paint guard — some builds drop blended, negative z-index layers */
-@supports (-webkit-touch-callout: none) {
-  .bg-aurora { z-index: 0; transform: translateZ(0); }
-}
-    /* ===== MOBILE AURORA FIX PACK ===== */
-
-/* 0) Give blending a stable base */
-html, body { isolation: isolate; }
-
-/* 1) Move the gradients to a pseudo-element.
-      Parent handles motion only (fixes WebKit transform+blend bug). */
-.bg-aurora{
-  background: none !important; /* hide old background on the wrapper */
-  animation: aurora-pan 36s linear infinite alternate !important;
-  will-change: transform;
-}
-.bg-aurora::before{
-  content:"";
-  position:absolute; inset:-12%;
-  background:
-    radial-gradient(45% 35% at 12% 12%,  rgba(125,200,255,.40), transparent 62%),
-    radial-gradient(36% 28% at 85% 14%,  rgba(155,140,255,.38), transparent 65%),
-    radial-gradient(48% 36% at 78% 88%,  rgba(118,221,255,.28), transparent 70%),
-    radial-gradient(26% 22% at 8% 72%,   rgba(151,124,255,.22), transparent 66%);
-  filter: blur(70px) saturate(130%) brightness(110%);
-  mix-blend-mode: screen;
-  opacity: .92;
-  pointer-events: none;
-}
-
-/* 2) You said “always animate” — ignore Reduce Motion */
-@media (prefers-reduced-motion: reduce){
-  .bg-aurora{ animation: aurora-pan 36s linear infinite alternate !important; }
-  .bg-net   { display:block !important; }
-}
-
-/* 3) WebKit/iOS safety: avoid negative z-index dropouts, soften the blur */
-@supports (-webkit-touch-callout: none) {
-  .bg-aurora{ z-index: 0; transform: translateZ(0); }
-  .bg-aurora::before{ filter: blur(60px) saturate(130%) brightness(112%); }
-  /* If some devices still show nothing, last‑ditch fallback:
-     .bg-aurora::before{ mix-blend-mode: lighten; } */
-}
   </style>
 </head>
 <body>
 
 <!-- Particle network background -->
 <canvas id="bg-net" class="bg-net" aria-hidden="true"></canvas>
-<!-- Aurora layer -->
+
+<!-- Aurora VIDEO (Solution C) -->
+<video id="bg-aurora-video" class="bg-aurora-video" autoplay muted playsinline loop preload="auto" poster="assets/aurora.webp" aria-hidden="true">
+  <source src="assets/aurora-720p.webm" type="video/webm">
+  <source src="assets/aurora-720p.mp4"  type="video/mp4">
+</video>
+
+<!-- Gradient aurora FALLBACK (hidden once video starts) -->
 <div class="bg-aurora" aria-hidden="true"></div>
 
 <header>
@@ -474,10 +432,6 @@ html, body { isolation: isolate; }
         <article class="feature">
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 1 1 12 0v5l2 2H4l2-2Z"/><path d="M9 19a3 3 0 0 0 6 0"/></svg></div>
           <div><h3>Actionable</h3><p>Designed for alerts and scans—watchlists or global.</p></div>
-        </article>
-        <article class="feature">
-          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v6c0 5 7 9 7 9s7-4 7-9V6l-7-3Z"/><path d="M9 13l2 2 4-4"/></svg></div>
-          <div><h3>Robust</h3><p>Non‑repainting logic, volatility‑aware filters and guardrails.</p></div>
         </article>
         <article class="feature">
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="7"/><path d="M3 10h14M10 3a13 13 0 0 1 0 14M10 3a13 13 0 0 0 0 14"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1.5 1.5"/></svg></div>
@@ -1205,7 +1159,7 @@ html, body { isolation: isolate; }
   function lockScroll(lock){ document.documentElement.style.overflow = lock ? 'hidden' : ''; document.body.style.touchAction = lock ? 'none' : ''; }
   menuBtn?.addEventListener('click',()=>{nav.classList.toggle('open');const o=nav.classList.contains('open');menuBtn.setAttribute('aria-expanded',o);lockScroll(o);});
   document.addEventListener('click',e=>{if(!nav.contains(e.target) && e.target!==menuBtn){nav.classList.remove('open');lockScroll(false);}});
-  document.querySelectorAll('#mainnav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');lockScroll(false);} ));
+  document.querySelectorAll('#mainnav a').forEach(a=>addEventListener('click',()=>{nav.classList.remove('open');lockScroll(false);} ));
 
   // Reveal (cheap)
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
@@ -1275,58 +1229,89 @@ html, body { isolation: isolate; }
     window.addEventListener('hashchange',showThanks); showThanks();
   })();
 
-  /* Particle network background — disabled on small/low-power devices */
+  /* === Hardware video: mark as ready and hide gradient === */
+  (function(){
+    const v = document.getElementById('bg-aurora-video');
+    if(!v) return;
+    function ready(){ document.body.classList.add('has-aurora-video'); }
+    v.addEventListener('canplay', ready, { once:true });
+    // Kick playback on Safari if it stalls
+    v.play().catch(()=>{ /* ignore */ });
+  })();
+
+  /* Particle network background — mobile‑throttled */
   (function(){
     const c = document.getElementById('bg-net'); if(!c) return;
-    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    const lowPower = (window.innerWidth < 640) || (conn && conn.saveData) ||
-      ((window.devicePixelRatio||1) > 2 && (navigator.hardwareConcurrency||4) <= 4);
-  
+
     const ctx = c.getContext('2d');
-    let W=0,H=0,DPR=1, N=0, MAX, parts=[], raf;
+    let W=0,H=0,DPR=1, N=0, MAX=0, parts=[], raf, last=0;
+    const isMobile = /iPhone|iPad|iPod|Android|Mobile|Windows Phone/i.test(navigator.userAgent);
 
     function reset(){
-      DPR = Math.min(window.devicePixelRatio||1, 2);
-      c.style.width = window.innerWidth + 'px';
-      c.style.height = window.innerHeight + 'px';
-      W = c.width  = Math.floor(window.innerWidth * DPR);
-      H = c.height = Math.floor(window.innerHeight * DPR);
+      // DPR & canvas size
+      DPR = isMobile ? 1 : Math.min(window.devicePixelRatio||1, 2);
+      c.style.width  = innerWidth + 'px';
+      c.style.height = innerHeight + 'px';
+      W = c.width  = Math.floor(innerWidth * DPR);
+      H = c.height = Math.floor(innerHeight * DPR);
 
-      N = (window.innerWidth < 900) ? 36 : 72;
-      MAX = (window.innerWidth < 900 ? 100 : 140) * DPR;
+      // Density & link radius
+      N   = isMobile ? 16 : (innerWidth < 560 ? 28 : (innerWidth < 1100 ? 44 : 72));
+      MAX = (isMobile ? 70 : (innerWidth < 560 ? 90 : 120)) * DPR;
 
+      // Particles
       parts = Array.from({length:N}, ()=>({
         x: Math.random()*W, y: Math.random()*H,
-        vx:(Math.random()*2-1)*0.07*DPR, vy:(Math.random()*2-1)*0.07*DPR,
+        vx:(Math.random()*2-1)*0.08*DPR, vy:(Math.random()*2-1)*0.08*DPR,
         r:(Math.random()*1.2+0.4)*DPR
       }));
     }
 
-    function draw(){
+    function draw(t){
       raf = requestAnimationFrame(draw);
+
+      // ~30fps on mobile
+      if(isMobile && t - last < 33) return;
+      last = t;
+
       ctx.clearRect(0,0,W,H);
       ctx.globalCompositeOperation = 'lighter';
+
       for(let i=0;i<N;i++){
         const p=parts[i];
         p.x+=p.vx; p.y+=p.vy;
         if(p.x<0||p.x>W) p.vx*=-1;
         if(p.y<0||p.y>H) p.vy*=-1;
 
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle='rgba(140,198,255,0.55)'; ctx.fill();
+        // node
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(140,198,255,0.55)';
+        ctx.fill();
 
-        for(let j=i+1;j<N;j++){
+        // connections — cap fan‑out per node
+        let links=0;
+        for(let j=i+1;j<N && links<6;j++){
           const q=parts[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.hypot(dx,dy);
-          if(d<MAX){ const a=(1-d/MAX)*0.65;
-            ctx.strokeStyle=`rgba(124,202,255,${a})`; ctx.lineWidth=0.6*DPR;
+          if(d<MAX){
+            links++;
+            const a=(1-d/MAX)*0.65;
+            ctx.strokeStyle=`rgba(124,202,255,${a})`;
+            ctx.lineWidth=0.6*DPR;
             ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
           }
         }
       }
     }
 
-    reset(); draw();
-    window.addEventListener('resize', ()=>{ cancelAnimationFrame(raf); reset(); draw(); }, {passive:true});
+    // Pause when tab hidden (battery win)
+    document.addEventListener('visibilitychange', ()=>{
+      if(document.hidden){ cancelAnimationFrame(raf); }
+      else { last=0; raf=requestAnimationFrame(draw); }
+    });
+
+    reset(); raf=requestAnimationFrame(draw);
+    window.addEventListener('resize', ()=>{ cancelAnimationFrame(raf); reset(); last=0; raf=requestAnimationFrame(draw); }, {passive:true});
   })();
 
   /* ==== Lifetime availability (100 cap) ==== */
