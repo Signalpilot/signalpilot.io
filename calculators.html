@@ -1,1 +1,196 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Trading Calculators | SignalPilot</title>
+  <meta name="description" content="Risk/Reward, Position Size, Pip Value, Lot Size, Margin & Leverage, CAGR/Compounding, Bitcoin retirement.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="/calculators.html">
+  <style>
+    :root{ --max:1160px; font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif }
+    body{ margin:0; background:var(--bg,#fff); color:var(--text,#0f1524) }
+    .wrap{ max-width:var(--max); margin:0 auto; padding: clamp(14px,4vw,22px) }
+    header{ border-bottom:1px solid rgba(10,20,40,.08); background:color-mix(in srgb, var(--bg,#fff) 92%, transparent) }
+    h1{ font-weight:900; letter-spacing:-.02em; font-size:clamp(2rem,5vw,3rem); margin:.2rem 0 .4rem }
+    .grid{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)) }
+    .card{ border:1px solid rgba(10,20,40,.12); border-radius:16px; padding:1rem; background:linear-gradient(180deg,rgba(10,20,40,.03),rgba(10,20,40,.01)) }
+    label{ display:grid; gap:.3rem; margin:.35rem 0 }
+    input, select{ padding:.6rem .7rem; border:1px solid rgba(10,20,40,.18); border-radius:10px; background:var(--bg-elev,#fff); color:inherit }
+    .btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.6rem 1rem; border-radius:999px; font-weight:800; text-decoration:none; border:1px solid rgba(10,20,40,.16); background:rgba(10,20,40,.04) }
+    .out{ margin-top:.6rem; padding:.6rem .8rem; border-radius:10px; background:rgba(10,20,40,.05); border:1px solid rgba(10,20,40,.12) }
+    .muted{ color:#51607a }
+    .pill{ display:inline-flex; align-items:center; gap:.35rem; padding:.28rem .6rem; border-radius:999px; font-weight:800; font-size:.82rem; background:rgba(20,40,90,.06); color:#2f4378 }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap" style="display:flex; gap:1rem; align-items:center">
+      <a href="/" style="text-decoration:none;font-weight:900;color:inherit">SignalPilot</a>
+      <span style="flex:1"></span>
+      <a href="/education.html" class="pill">Education</a>
+      <button id="themeToggle" class="pill" type="button" aria-label="Toggle theme">Light/Black</button>
+    </div>
+  </header>
 
+  <main class="wrap">
+    <h1>Trading Calculators</h1>
+    <p class="muted">Fast, transparent math—so you can keep risk fixed, not feelings.</p>
+
+    <section class="grid" aria-label="Calculators">
+      <article class="card">
+        <h2>Risk‑to‑Reward Ratio</h2>
+        <div class="muted">R:R = |Target − Entry| / |Entry − Stop|</div>
+        <label>Side
+          <select id="rrSide"><option>Long</option><option>Short</option></select>
+        </label>
+        <label>Entry <input id="rrEntry" type="number" step="any" value="100"></label>
+        <label>Stop  <input id="rrStop"  type="number" step="any" value="95"></label>
+        <label>Target<input id="rrTarget"type="number" step="any" value="112"></label>
+        <button class="btn" onclick="calcRR()">Calculate</button>
+        <div id="rrOut" class="out" aria-live="polite"></div>
+      </article>
+
+      <article class="card">
+        <h2>Position Size</h2>
+        <div class="muted">Units = (Account × Risk%) / RiskPerUnit</div>
+        <label>Account size <input id="psAcct" type="number" step="any" value="10000"></label>
+        <label>Risk per trade (%) <input id="psRiskPct" type="number" step="any" value="1"></label>
+        <label>Side
+          <select id="psSide"><option>Long</option><option>Short</option></select>
+        </label>
+        <label>Entry <input id="psEntry" type="number" step="any" value="100"></label>
+        <label>Stop  <input id="psStop"  type="number" step="any" value="95"></label>
+        <label>Contract multiplier (optional) <input id="psMult" type="number" step="any" value="1"></label>
+        <button class="btn" onclick="calcPS()">Calculate</button>
+        <div id="psOut" class="out" aria-live="polite"></div>
+      </article>
+
+      <article class="card">
+        <h2>Pip Value (FX)</h2>
+        <div class="muted">PipValue = (PipSize / Price) × LotSize</div>
+        <label>Pair price <input id="pipPrice" type="number" step="any" value="1.0950"></label>
+        <label>Is JPY pair? 
+          <select id="pipJPY"><option>No</option><option>Yes</option></select>
+        </label>
+        <label>Lot size
+          <select id="pipLot">
+            <option value="100000">Standard (100k)</option>
+            <option value="10000">Mini (10k)</option>
+            <option value="1000">Micro (1k)</option>
+          </select>
+        </label>
+        <button class="btn" onclick="calcPip()">Calculate</button>
+        <div id="pipOut" class="out" aria-live="polite"></div>
+      </article>
+
+      <article class="card">
+        <h2>Lot Size (FX)</h2>
+        <label>Units <input id="lotUnits" type="number" step="1" value="25000"></label>
+        <button class="btn" onclick="calcLot()">Calculate</button>
+        <div id="lotOut" class="out" aria-live="polite"></div>
+      </article>
+
+      <article class="card">
+        <h2>Margin &amp; Leverage</h2>
+        <div class="muted">RequiredMargin = PositionValue / Leverage</div>
+        <label>Entry price <input id="mlPrice" type="number" step="any" value="100"></label>
+        <label>Units <input id="mlUnits" type="number" step="any" value="100"></label>
+        <label>Leverage (×) <input id="mlLev" type="number" step="any" value="5"></label>
+        <button class="btn" onclick="calcML()">Calculate</button>
+        <div id="mlOut" class="out" aria-live="polite"></div>
+      </article>
+
+      <article class="card">
+        <h2>CAGR &amp; Compounding</h2>
+        <label>Start balance <input id="cgStart" type="number" step="any" value="10000"></label>
+        <label>End balance   <input id="cgEnd"   type="number" step="any" value="13500"></label>
+        <label>Years         <input id="cgYears" type="number" step="any" value="2"></label>
+        <button class="btn" onclick="calcCAGR()">Calculate</button>
+        <div id="cgOut" class="out" aria-live="polite"></div>
+        <hr style="margin:1rem 0; opacity:.4">
+        <h3>Compounding plan</h3>
+        <label>Monthly contribution <input id="cpM" type="number" step="any" value="200"></label>
+        <label>Annual return (%)    <input id="cpR" type="number" step="any" value="8"></label>
+        <label>Years                <input id="cpY" type="number" step="any" value="10"></label>
+        <button class="btn" onclick="calcComp()">Calculate</button>
+        <div id="cpOut" class="out" aria-live="polite"></div>
+      </article>
+
+      <article class="card">
+        <h2>Bitcoin Retirement (toy)</h2>
+        <div class="muted">FV = P × [((1+r/12)^(12y) − 1) / (r/12)] (+ optional lump sum)</div>
+        <label>Initial BTC (USD) <input id="brInit" type="number" step="any" value="0"></label>
+        <label>Monthly contribution (USD) <input id="brM" type="number" step="any" value="300"></label>
+        <label>Expected annual return (%) <input id="brR" type="number" step="any" value="12"></label>
+        <label>Years <input id="brY" type="number" step="any" value="15"></label>
+        <button class="btn" onclick="calcBTC()">Calculate</button>
+        <div id="brOut" class="out" aria-live="polite"></div>
+      </article>
+
+    </section>
+  </main>
+
+  <footer class="wrap" style="border-top:1px solid rgba(10,20,40,.08);margin-top:2rem;color:#51607a">
+    © <span id="year"></span> SignalPilot Labs, Inc. Educational only—not financial advice.
+  </footer>
+
+  <script>
+    (function(){ const b=document.getElementById('themeToggle'); const saved=localStorage.getItem('sp_theme')||'light';
+    document.documentElement.setAttribute('data-theme',saved);
+    b?.addEventListener('click',()=>{ const t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+      document.documentElement.setAttribute('data-theme',t); localStorage.setItem('sp_theme',t); });
+    document.getElementById('year').textContent=new Date().getFullYear(); })();
+
+    function num(v){ const n=parseFloat(v); return isFinite(n)?n:0; }
+    function calcRR(){
+      const side = document.getElementById('rrSide').value;
+      const e=num(rrEntry.value), s=num(rrStop.value), t=num(rrTarget.value);
+      const risk = Math.abs(e - s);
+      const reward = Math.abs((side==='Long'? t - e : e - t));
+      const rr = reward / (risk || 1e-9);
+      rrOut.textContent = `Risk per unit: ${risk.toFixed(6)} · Reward per unit: ${reward.toFixed(6)} → R:R = ${rr.toFixed(2)}:1`;
+    }
+    function calcPS(){
+      const acct=num(psAcct.value), rp=num(psRiskPct.value)/100;
+      const e=num(psEntry.value), s=num(psStop.value), mult=Math.max(1, num(psMult.value)||1);
+      const riskPerUnit = Math.abs(e - s) * mult;
+      const riskAmt = acct * rp;
+      const units = riskPerUnit>0 ? riskAmt / riskPerUnit : 0;
+      psOut.textContent = `Risk $: ${riskAmt.toFixed(2)} · Risk/unit: ${riskPerUnit.toFixed(6)} → Units ≈ ${Math.floor(units).toLocaleString()}`;
+    }
+    function calcPip(){
+      const price=num(pipPrice.value);
+      const pipSize = (pipJPY.value==='Yes') ? 0.01 : 0.0001;
+      const lot = parseInt(pipLot.value,10);
+      const val = (pipSize/price) * lot;
+      pipOut.textContent = `Pip size: ${pipSize} → Pip value ≈ ${val.toFixed(4)} (in quote currency per lot).`;
+    }
+    function calcLot(){
+      const u=Math.max(0,num(lotUnits.value));
+      let tier='Micro (1k)'; if(u>=100000) tier='Standard (100k)'; else if(u>=10000) tier='Mini (10k)';
+      lotOut.textContent = `${u.toLocaleString()} units → ${tier}`;
+    }
+    function calcML(){
+      const px=num(mlPrice.value), units=num(mlUnits.value), lev=Math.max(1,num(mlLev.value));
+      const pos = px*units, req = pos/lev;
+      mlOut.textContent = `Position value ≈ ${pos.toFixed(2)} · Required margin (×${lev}) ≈ ${req.toFixed(2)}`;
+    }
+    function calcCAGR(){
+      const s=num(cgStart.value), e=num(cgEnd.value), y=Math.max(0.0001,num(cgYears.value));
+      const cagr = Math.pow(e/(s||1e-9), 1/y) - 1;
+      cgOut.textContent = `CAGR ≈ ${(cagr*100).toFixed(2)}% per year`;
+    }
+    function calcComp(){
+      const m=num(cpM.value), r=num(cpR.value)/100, y=num(cpY.value), n=12;
+      const fv = m * ((Math.pow(1 + r/n, n*y) - 1) / (r/n || 1e-9));
+      cpOut.textContent = `Future value ≈ ${fv.toFixed(2)} after ${y} years with monthly $${m}`;
+    }
+    function calcBTC(){
+      const init=num(brInit.value), m=num(brM.value), r=num(brR.value)/100, y=num(brY.value);
+      const n=12, fv = init*Math.pow(1+r,n*y) + m*((Math.pow(1+r/n,n*y)-1)/(r/n || 1e-9));
+      brOut.textContent = `Projected value ≈ ${fv.toFixed(2)} after ${y} years (assumes constant return—purely illustrative).`;
+    }
+  </script>
+</body>
+</html>
