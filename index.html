@@ -51,7 +51,7 @@
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&family=Gugi&display=swap" rel="stylesheet">
 
 
 
@@ -61,14 +61,6 @@
 
   <style>
 
-    /* Gugi Font */
-    @font-face {
-      font-family: 'Gugi';
-      src: url('assets/fonts/Gugi-Regular.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
 
     :root{
 
@@ -362,7 +354,7 @@
 
       text-wrap:balance;
 
-      letter-spacing:-.02em;
+      letter-spacing:.02em;
 
     }
 
@@ -502,7 +494,7 @@
 
     .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .8rem;border-radius:999px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:.78rem;color:#bfe7ff;background:rgba(118,221,255,.18);border:1px solid rgba(118,221,255,.28)}
 
-    .headline{font-family:'Gugi',system-ui,-apple-system,sans-serif;font-weight:900;letter-spacing:-.02em;line-height:1.12;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .headline{font-family:'Gugi',system-ui,-apple-system,sans-serif;font-weight:900;letter-spacing:.02em;line-height:1.12;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
     .headline.xl{font-size:clamp(2.2rem,7vw,4rem)}
 
@@ -568,7 +560,7 @@
 
     @media (max-width:740px){ .pricing-grid{grid-template-columns:1fr} }
 
-    .price{font-size:2.2rem;font-weight:900;letter-spacing:-.02em}
+    .price{font-size:2.2rem;font-weight:900;letter-spacing:.02em}
 
     .pill{display:inline-flex;gap:.4rem;align-items:center;background:rgba(255,255,255,.12);color:#a5b6db;padding:.28rem .6rem;border-radius:999px;font-size:.82rem;font-weight:800}
 
@@ -692,8 +684,6 @@
 
 
       <a href="/" class="brand">
-
-        <img src="assets/signalpilot-logo.svg" alt="Signal Pilot" />
 
         <span>Signal Pilot</span>
 
@@ -1558,6 +1548,10 @@
 
             <div class="actions stack">
 
+              <!-- PRE-LAUNCH: PayPal disabled -->
+              <button class="btn btn-disabled" type="button">PayPal coming soon</button>
+
+              <!-- LIVE VERSION: Uncomment when launching
               <form id="pp-lifetime" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="display:grid;gap:.6rem">
 
                 <input type="hidden" name="cmd" value="_s-xclick" />
@@ -1587,6 +1581,7 @@
                 <div class="pp-slot"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="Pay with PayPal" alt="Buy Now" /></div>
 
               </form>
+              -->
 
               <button class="btn btn-disabled" id="lt-soldout" type="button" style="display:none">Sold out — join waitlist below</button>
 
@@ -2482,11 +2477,24 @@
 
 
 
-    lazyRenderSub('P-6UD12522YR208981MNDQ3QPA','paypal-button-container-P-6UD12522YR208981MNDQ3QPA','tv-monthly','monthly','consent-monthly');
+    // ===== PRE-LAUNCH: PAYPAL DISABLED =====
+    const PAYPAL_LIVE = false; // Set to true when launching
 
-    lazyRenderSub('P-4VR929208D839202YNDQ3T6Q','paypal-button-container-P-4VR929208D839202YNDQ3T6Q','tv-quarterly','quarterly','consent-quarterly');
+    if (PAYPAL_LIVE) {
+      lazyRenderSub('P-6UD12522YR208981MNDQ3QPA','paypal-button-container-P-6UD12522YR208981MNDQ3QPA','tv-monthly','monthly','consent-monthly');
 
-    lazyRenderSub('P-43M86339WD725333MNDQ3VGI','paypal-button-container-P-43M86339WD725333MNDQ3VGI','tv-yearly','yearly','consent-yearly');
+      lazyRenderSub('P-4VR929208D839202YNDQ3T6Q','paypal-button-container-P-4VR929208D839202YNDQ3T6Q','tv-quarterly','quarterly','consent-quarterly');
+
+      lazyRenderSub('P-43M86339WD725333MNDQ3VGI','paypal-button-container-P-43M86339WD725333MNDQ3VGI','tv-yearly','yearly','consent-yearly');
+    } else {
+      // Show "coming soon" message in PayPal containers
+      ['paypal-button-container-P-6UD12522YR208981MNDQ3QPA',
+       'paypal-button-container-P-4VR929208D839202YNDQ3T6Q',
+       'paypal-button-container-P-43M86339WD725333MNDQ3VGI'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--muted);font-size:.9rem">PayPal coming soon</div>';
+      });
+    }
 
 
 
