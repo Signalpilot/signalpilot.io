@@ -1853,7 +1853,7 @@
 
               <label class="consent"><input class="tick" type="checkbox" id="consent-monthly"><span>I understand Signal Pilot is educational. No financial advice.</span></label>
 
-              <div class="pp-slot" id="paypal-button-container-P-1S895034P48824141ND52VBA"></div>
+              <div class="pp-slot" id="paypal-button-container-P-1WW85539FH424981JND52S7A"></div>
 
               <button class="btn btn-disabled btn-card-notify" data-plan="Monthly" type="button">Pay by card (coming soon)</button>
 
@@ -1937,7 +1937,7 @@
 
               <label class="consent"><input class="tick" type="checkbox" id="consent-yearly"><span>I understand Signal Pilot is educational. No financial advice.</span></label>
 
-              <div class="pp-slot" id="paypal-button-container-P-1WW85539FH424981JND52S7A"></div>
+              <div class="pp-slot" id="paypal-button-container-P-1S895034P48824141ND52VBA"></div>
 
               <button class="btn btn-disabled btn-card-notify" data-plan="Yearly" type="button">Pay by card (coming soon)</button>
 
@@ -1993,8 +1993,13 @@
 
               <label class="consent"><input class="tick" type="checkbox" id="consent-lifetime"><span>I understand Signal Pilot is educational. No financial advice.</span></label>
 
-              <!-- PayPal Lifetime Hosted Button -->
-              <div class="pp-slot" id="paypal-container-436WMS3WRY2ZL"></div>
+              <!-- Simple PayPal Buy Now Form -->
+              <form id="lifetime-form" action="https://www.paypal.com/ncp/payment/436WMS3WRY2ZL" method="post" target="_blank" class="pp-slot" style="display:grid;gap:0.5rem;">
+                <input type="hidden" name="business" value="support@signalpilot.io">
+                <input type="submit" value="Buy Now - $1,799" class="btn" style="background:#FFD140;color:#000;font-weight:bold;cursor:pointer;">
+                <img src="https://www.paypalobjects.com/images/Debit_Credit.svg" alt="cards" style="margin:0 auto;height:24px;" />
+                <div style="font-size:0.75rem;text-align:center;opacity:0.7;">Powered by PayPal</div>
+              </form>
 
               <button class="btn btn-disabled" id="lt-soldout" type="button" style="display:none">Sold out — join waitlist below</button>
 
@@ -2802,11 +2807,8 @@
 
 
 
-  <!-- PayPal SDK #1 - For Subscriptions (Monthly/Yearly) -->
+  <!-- PayPal SDK - For Subscriptions -->
   <script src="https://www.paypal.com/sdk/js?client-id=AdNRKUpEsMiKJgMEmeD08QEwN_3MK4o5y_fABsd6z4TYA4rsN7TDgiI-FH5jc8rjSxVpxCrBzhzdHM6L&vault=true&intent=subscription&currency=USD&disable-funding=venmo"></script>
-
-  <!-- PayPal SDK #2 - For Hosted Buttons (Lifetime one-time payment) -->
-  <script src="https://www.paypal.com/sdk/js?client-id=BAAl7Er3nDgGGjXS4xsHBI0hUwfD0ZfXoD2V6HxqcFTtFoTgNbffO0&components=hosted-buttons&disable-funding=venmo&currency=USD" data-namespace="paypalHosted"></script>
 
   <script>
 
@@ -2876,155 +2878,91 @@
 
 
 
-    // ===== LIFETIME BUTTON FUNCTIONS (must be defined before use) =====
+    // ===== LIFETIME FORM VALIDATION =====
     
-    // Lifetime Hosted Button rendering with validation
-    function renderLifetimeButton(){
-      if(!window.paypalHosted) return;
-      
+    (function(){
+      const form = document.getElementById('lifetime-form');
       const tvInput = document.getElementById('tv-lifetime');
       const consentCheck = document.getElementById('consent-lifetime');
-      const container = document.getElementById('paypal-container-436WMS3WRY2ZL');
       
-      if(!container) return;
-
-      paypalHosted.HostedButtons({
-        hostedButtonId: "436WMS3WRY2ZL",
+      if(!form) return;
+      
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
         
-        // Override button click to validate first
-        onInit: function(data, actions) {
-          // Disable button initially
-          actions.disable();
-          
-          // Enable when both fields are valid
-          function checkValidity() {
-            const tvValid = tvInput && tvInput.value.trim().length > 0;
-            const consentValid = consentCheck && consentCheck.checked;
-            
-            if(tvValid && consentValid) {
-              actions.enable();
-            } else {
-              actions.disable();
-            }
-          }
-          
-          if(tvInput) tvInput.addEventListener('input', checkValidity);
-          if(consentCheck) consentCheck.addEventListener('change', checkValidity);
-          
-          checkValidity();
-        },
+        const tv = (tvInput?.value || '').trim();
+        const consentOk = consentCheck?.checked;
         
-        onClick: async function(data, actions) {
-          const tv = (tvInput?.value || '').trim();
-          const consentOk = consentCheck?.checked;
-          
-          if(!tv) {
-            alert('Enter your TradingView username for activation.');
-            return actions.reject();
-          }
-          
-          if(!consentOk) {
-            alert('Please confirm the educational-only consent.');
-            return actions.reject();
-          }
-          
-          // Check availability
-          let okAvail = true;
-          try {
-            const res = await fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec?fn=lt_status', {
-              method: 'GET',
-              mode: 'cors',
-              cache: 'no-store'
-            });
-            
-            if(res.ok) {
-              const j = await res.json();
-              okAvail = Number(j.claimed || 0) < 100;
-            }
-          } catch(_) {}
-          
-          if(!okAvail) {
-            alert('Lifetime is sold out. Please join the waitlist.');
-            return actions.reject();
-          }
-          
-          // Store for tracking
-          const ref = localStorage.getItem('sp_ref') || '';
-          localStorage.setItem('sp_last_tv', tv);
-          localStorage.setItem('sp_last_plan', 'lifetime');
-          localStorage.setItem('sp_lifetime_ref', ref);
-          
-          return actions.resolve();
-        },
-        
-        onApprove: function(data) {
-          const tv = localStorage.getItem('sp_last_tv') || '';
-          const ref = localStorage.getItem('sp_lifetime_ref') || '';
-          
-          // Log purchase
-          fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec', {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {'Content-Type': 'text/plain'},
-            body: JSON.stringify({
-              type: 'lifetime',
-              plan: 'lifetime',
-              tv: tv,
-              order_id: data.orderID,
-              ref: ref,
-              utm: (localStorage.getItem('sp_utm') || '{}')
-            })
-          });
-          
-          location.hash = '#thanks';
-        },
-        
-        onError: function(err) {
-          console.error('Payment error:', err);
-          alert('Payment failed. Please try again or email support@signalpilot.io');
+        // Validate TradingView username
+        if(!tv) {
+          alert('Enter your TradingView username for activation.');
+          return;
         }
         
-      }).render('#paypal-container-436WMS3WRY2ZL');
-    }
-
-    function lazyRenderLifetime() {
-      const container = document.getElementById('paypal-container-436WMS3WRY2ZL');
-      if(!container) return;
-      
-      let rendered = false;
-      
-      // Feature detection - render immediately if IntersectionObserver not supported
-      if(!('IntersectionObserver' in window)) {
-        renderLifetimeButton();
-        return;
-      }
-      
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if(!rendered && e.isIntersecting) {
-            renderLifetimeButton();
-            rendered = true;
-            obs.disconnect();
+        // Validate consent
+        if(!consentOk) {
+          alert('Please confirm the educational-only consent.');
+          return;
+        }
+        
+        // Check availability
+        let okAvail = true;
+        try {
+          const res = await fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec?fn=lt_status', {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-store'
+          });
+          
+          if(res.ok) {
+            const j = await res.json();
+            okAvail = Number(j.claimed || 0) < 100;
           }
+        } catch(_) {}
+        
+        if(!okAvail) {
+          alert('Lifetime is sold out. Please join the waitlist.');
+          return;
+        }
+        
+        // Store for tracking
+        const ref = localStorage.getItem('sp_ref') || '';
+        localStorage.setItem('sp_last_tv', tv);
+        localStorage.setItem('sp_last_plan', 'lifetime');
+        
+        // Log the attempt
+        fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {'Content-Type': 'text/plain'},
+          body: JSON.stringify({
+            type: 'lifetime_start',
+            plan: 'lifetime',
+            tv: tv,
+            ref: ref,
+            utm: (localStorage.getItem('sp_utm') || '{}')
+          })
         });
-      }, {root: null, rootMargin: '300px', threshold: 0});
-      
-      obs.observe(container);
-    }
+        
+        // All validation passed - submit to PayPal
+        form.submit();
+      });
+    })();
 
 
     // ===== PAYPAL LIVE =====
     const PAYPAL_LIVE = true;
 
     if (PAYPAL_LIVE) {
-      lazyRenderSub('P-1S895034P48824141ND52VBA','paypal-button-container-P-1S895034P48824141ND52VBA','tv-monthly','monthly','consent-monthly');
+      // MONTHLY = $99 = P-1WW85539FH424981JND52S7A
+      lazyRenderSub('P-1WW85539FH424981JND52S7A','paypal-button-container-P-1WW85539FH424981JND52S7A','tv-monthly','monthly','consent-monthly');
 
       // Quarterly removed
 
-      lazyRenderSub('P-1WW85539FH424981JND52S7A','paypal-button-container-P-1WW85539FH424981JND52S7A','tv-yearly','yearly','consent-yearly');
+      // YEARLY = $699 = P-1S895034P48824141ND52VBA
+      lazyRenderSub('P-1S895034P48824141ND52VBA','paypal-button-container-P-1S895034P48824141ND52VBA','tv-yearly','yearly','consent-yearly');
       
-      // Lifetime button rendering
-      lazyRenderLifetime();
+      // Lifetime button - using simple form (no SDK conflict)
     }
 
 
