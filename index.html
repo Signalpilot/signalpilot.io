@@ -897,6 +897,8 @@
     /* Target PayPal's wrapper divs specifically */
     .pp-slot > div,
     .pp-slot > div > div,
+    .pp-slot > div > div > div,
+    .pp-slot > div > div > div > div,
     .pp-slot div[class*="paypal"],
     .pp-slot div[id*="paypal"],
     .pp-slot div[class*="zoid"],
@@ -907,10 +909,24 @@
     /* ULTRA SPECIFIC - Kill PayPal subscription button wrappers */
     #paypal-button-container-P-1WW85539FH424981JND52S7A,
     #paypal-button-container-P-1WW85539FH424981JND52S7A *,
+    #paypal-button-container-P-1WW85539FH424981JND52S7A div,
     #paypal-button-container-P-1WW85539FH424981JND52S7A > div,
+    #paypal-button-container-P-1WW85539FH424981JND52S7A > div > div,
     #paypal-button-container-P-1S895034P48824141ND52VBA,
     #paypal-button-container-P-1S895034P48824141ND52VBA *,
-    #paypal-button-container-P-1S895034P48824141ND52VBA > div {
+    #paypal-button-container-P-1S895034P48824141ND52VBA div,
+    #paypal-button-container-P-1S895034P48824141ND52VBA > div,
+    #paypal-button-container-P-1S895034P48824141ND52VBA > div > div {
+      background:transparent !important;
+      background-color:transparent !important;
+      border:none !important;
+      box-shadow:none !important;
+    }
+    /* Kill the "Powered by PayPal" white section */
+    .pp-slot section,
+    .pp-slot footer,
+    .pp-slot [style*="background"],
+    .pp-slot [style*="background-color"] {
       background:transparent !important;
       background-color:transparent !important;
     }
@@ -2991,7 +3007,7 @@
 
     /* ======================== Force PayPal buttons BLACK ======================== */
     (function(){
-      // ULTRA AGGRESSIVE - Kill subscription button white backgrounds ONLY
+      // NUCLEAR OPTION - Kill subscription button white backgrounds recursively
       function forceBlackPayPal(){
         // Target ONLY subscription button containers (not lifetime form)
         const subContainers = [
@@ -3005,12 +3021,33 @@
           // Make container transparent
           container.style.setProperty('background', 'transparent', 'important');
           container.style.setProperty('background-color', 'transparent', 'important');
+          container.style.setProperty('border', 'none', 'important');
+          container.style.setProperty('box-shadow', 'none', 'important');
           
-          // Target ALL descendants
+          // Target ALL descendants recursively - go 10 levels deep
+          function makeTransparent(element, depth = 0) {
+            if(depth > 10) return;
+            
+            element.style.setProperty('background', 'transparent', 'important');
+            element.style.setProperty('background-color', 'transparent', 'important');
+            element.style.setProperty('border', 'none', 'important');
+            element.style.setProperty('box-shadow', 'none', 'important');
+            
+            // Recurse to children
+            Array.from(element.children).forEach(child => {
+              makeTransparent(child, depth + 1);
+            });
+          }
+          
+          makeTransparent(container);
+          
+          // Also use querySelectorAll for safety
           const allElements = container.querySelectorAll('*');
           allElements.forEach(el => {
             el.style.setProperty('background', 'transparent', 'important');
             el.style.setProperty('background-color', 'transparent', 'important');
+            el.style.setProperty('border', 'none', 'important');
+            el.style.setProperty('box-shadow', 'none', 'important');
           });
           
           // Target iframes
@@ -3026,8 +3063,10 @@
       setTimeout(forceBlackPayPal, 10);
       setTimeout(forceBlackPayPal, 50);
       setTimeout(forceBlackPayPal, 100);
+      setTimeout(forceBlackPayPal, 200);
       setTimeout(forceBlackPayPal, 300);
       setTimeout(forceBlackPayPal, 500);
+      setTimeout(forceBlackPayPal, 800);
       setTimeout(forceBlackPayPal, 1000);
       setTimeout(forceBlackPayPal, 1500);
       setTimeout(forceBlackPayPal, 2000);
