@@ -875,9 +875,9 @@
 
     .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
 
-    /* Force PayPal buttons to be completely black - ULTRA AGGRESSIVE */
+    /* Force PayPal buttons to blend with dark background - TRANSPARENT */
     .pp-slot{
-      background:#000000 !important;
+      background:transparent !important;
       padding:0 !important;
       border-radius:8px;
       overflow:hidden;
@@ -885,14 +885,14 @@
       justify-content:center;
       align-items:center;
     }
-    /* Target everything inside */
+    /* Target everything inside - make transparent */
     .pp-slot *,
     .pp-slot > *,
     .pp-slot div,
     .pp-slot > div,
     .pp-slot iframe{
-      background:#000000 !important;
-      background-color:#000000 !important;
+      background:transparent !important;
+      background-color:transparent !important;
     }
     /* Target PayPal's wrapper divs specifically */
     .pp-slot > div,
@@ -901,8 +901,8 @@
     .pp-slot div[id*="paypal"],
     .pp-slot div[class*="zoid"],
     .pp-slot div[data-paypal-button]{
-      background:#000000 !important;
-      background-color:#000000 !important;
+      background:transparent !important;
+      background-color:transparent !important;
     }
     .pp-slot iframe[title*="PayPal"]{
       max-height:120px;
@@ -2976,38 +2976,64 @@
 
     /* ======================== Force PayPal buttons BLACK ======================== */
     (function(){
-      // Less aggressive approach for mobile compatibility
+      // ULTRA AGGRESSIVE - Kill all white backgrounds
       function forceBlackPayPal(){
         document.querySelectorAll('.pp-slot').forEach(slot => {
-          slot.style.setProperty('background', '#000000', 'important');
-          slot.style.setProperty('background-color', '#000000', 'important');
+          // Force slot itself
+          slot.style.setProperty('background', 'transparent', 'important');
+          slot.style.setProperty('background-color', 'transparent', 'important');
           
-          // Only target direct children and iframes, not ALL descendants
+          // Target ALL descendants - divs, spans, everything
+          const allElements = slot.querySelectorAll('*');
+          allElements.forEach(el => {
+            // Skip buttons and inputs
+            if(!['BUTTON', 'INPUT', 'A'].includes(el.tagName)) {
+              el.style.setProperty('background', 'transparent', 'important');
+              el.style.setProperty('background-color', 'transparent', 'important');
+            }
+          });
+          
+          // Target iframes specifically
           const iframes = slot.querySelectorAll('iframe');
           iframes.forEach(iframe => {
-            iframe.style.setProperty('background', '#000000', 'important');
-            iframe.style.setProperty('background-color', '#000000', 'important');
-            iframe.style.maxHeight = '120px';
-            iframe.style.overflow = 'hidden';
+            iframe.style.setProperty('background', 'transparent', 'important');
+            iframe.style.setProperty('background-color', 'transparent', 'important');
+            
+            // Try to access iframe content (if same-origin)
+            try {
+              if(iframe.contentDocument) {
+                iframe.contentDocument.body.style.setProperty('background', 'transparent', 'important');
+                iframe.contentDocument.body.style.setProperty('background-color', 'transparent', 'important');
+              }
+            } catch(e) {
+              // Cross-origin iframe, can't access
+            }
           });
         });
       }
       
-      // Run with delays to avoid timing conflicts on mobile
+      // Run MANY times to catch all rendering stages
+      setTimeout(forceBlackPayPal, 10);
+      setTimeout(forceBlackPayPal, 50);
       setTimeout(forceBlackPayPal, 100);
+      setTimeout(forceBlackPayPal, 300);
       setTimeout(forceBlackPayPal, 500);
+      setTimeout(forceBlackPayPal, 1000);
       setTimeout(forceBlackPayPal, 1500);
+      setTimeout(forceBlackPayPal, 2000);
       
-      // Light mutation observer - only watch for new iframes
-      const observer = new MutationObserver((mutations) => {
-        const hasNewIframes = mutations.some(m => 
-          Array.from(m.addedNodes).some(n => n.tagName === 'IFRAME')
-        );
-        if(hasNewIframes) forceBlackPayPal();
+      // Aggressive mutation observer - watch for ANY changes
+      const observer = new MutationObserver(() => {
+        forceBlackPayPal();
       });
       
       document.querySelectorAll('.pp-slot').forEach(slot => {
-        observer.observe(slot, { childList: true, subtree: true });
+        observer.observe(slot, { 
+          childList: true, 
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['style', 'class']
+        });
       });
     })();
 
