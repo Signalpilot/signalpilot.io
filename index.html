@@ -620,7 +620,7 @@
 
     .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
 
-    /* Force PayPal buttons to be completely black - AGGRESSIVE */
+    /* Force PayPal buttons to be completely black - ULTRA AGGRESSIVE */
     .pp-slot{
       background:#000000 !important;
       padding:0 !important;
@@ -630,19 +630,25 @@
       justify-content:center;
       align-items:center;
     }
-    .pp-slot *{
-      background:#000000 !important;
-    }
+    /* Target everything inside */
+    .pp-slot *,
+    .pp-slot > *,
+    .pp-slot div,
+    .pp-slot > div,
     .pp-slot iframe{
       background:#000000 !important;
+      background-color:#000000 !important;
     }
-    /* Target PayPal's nested divs */
+    /* Target PayPal's wrapper divs specifically */
     .pp-slot > div,
+    .pp-slot > div > div,
     .pp-slot div[class*="paypal"],
-    .pp-slot div[id*="paypal"]{
+    .pp-slot div[id*="paypal"],
+    .pp-slot div[class*="zoid"],
+    .pp-slot div[data-paypal-button]{
       background:#000000 !important;
+      background-color:#000000 !important;
     }
-    /* HIDE the "Powered by PayPal" white section completely */
     .pp-slot iframe[title*="PayPal"]{
       max-height:120px;
       overflow:hidden;
@@ -2432,7 +2438,7 @@
 
       paypal.Buttons({
 
-        style:{shape:'pill', color:'black', layout:'vertical', label:'subscribe', tagline:false},
+        style:{shape:'pill', color:'black', layout:'vertical', label:'subscribe', tagline:false, height:40},
 
         createSubscription: function(_, actions){
 
@@ -2533,17 +2539,28 @@
 
     /* ======================== Force PayPal buttons BLACK ======================== */
     (function(){
-      // Aggressively enforce black backgrounds on PayPal buttons after they render
+      // ULTRA aggressively enforce black backgrounds on EVERYTHING in PayPal slots
       function forceBlackPayPal(){
-        document.querySelectorAll('.pp-slot, .pp-slot *, .pp-slot iframe').forEach(el => {
-          el.style.setProperty('background', '#000000', 'important');
-          el.style.setProperty('background-color', '#000000', 'important');
-        });
-        
-        // Crop PayPal iframes to hide "Powered by PayPal" white section
-        document.querySelectorAll('.pp-slot iframe').forEach(iframe => {
-          iframe.style.maxHeight = '120px';
-          iframe.style.overflow = 'hidden';
+        // Target every single element inside pp-slot
+        document.querySelectorAll('.pp-slot').forEach(slot => {
+          slot.style.setProperty('background', '#000000', 'important');
+          slot.style.setProperty('background-color', '#000000', 'important');
+          
+          // Target ALL descendants
+          const allElements = slot.querySelectorAll('*');
+          allElements.forEach(el => {
+            el.style.setProperty('background', '#000000', 'important');
+            el.style.setProperty('background-color', '#000000', 'important');
+          });
+          
+          // Specifically target iframes
+          const iframes = slot.querySelectorAll('iframe');
+          iframes.forEach(iframe => {
+            iframe.style.setProperty('background', '#000000', 'important');
+            iframe.style.setProperty('background-color', '#000000', 'important');
+            iframe.style.maxHeight = '120px';
+            iframe.style.overflow = 'hidden';
+          });
         });
       }
       
@@ -2554,12 +2571,12 @@
         observer.observe(slot, { childList: true, subtree: true, attributes: true });
       });
       
-      // Also run periodically for 5 seconds after page load to catch late renders
+      // Also run periodically for 10 seconds after page load to catch late renders
       let count = 0;
       const interval = setInterval(() => {
         forceBlackPayPal();
         count++;
-        if(count > 20) clearInterval(interval); // Stop after 20 attempts (5 seconds)
+        if(count > 40) clearInterval(interval); // Stop after 40 attempts (10 seconds)
       }, 250);
     })();
 
