@@ -594,7 +594,7 @@
 
     section[id]{scroll-margin-top:84px}
 
-    footer{border-top:1px solid rgba(255,255,255,.08);padding:2rem 0 max(20rem,calc(20rem + env(safe-area-inset-bottom)));color:#a5b6db}
+    footer{border-top:1px solid rgba(255,255,255,.08);padding:2rem 0 max(35rem,calc(35rem + env(safe-area-inset-bottom)));color:#a5b6db}
 
     html[data-theme="light"] footer{color:#3a4866; border-top-color:#d7def0}
 
@@ -620,18 +620,32 @@
 
     .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
 
-    /* Force PayPal buttons to be completely black */
+    /* Force PayPal buttons to be completely black - AGGRESSIVE */
     .pp-slot{
       background:#000000 !important;
       padding:0 !important;
       border-radius:8px;
       overflow:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
     }
     .pp-slot *{
       background:#000000 !important;
     }
     .pp-slot iframe{
       background:#000000 !important;
+    }
+    /* Target PayPal's nested divs */
+    .pp-slot > div,
+    .pp-slot div[class*="paypal"],
+    .pp-slot div[id*="paypal"]{
+      background:#000000 !important;
+    }
+    /* Center the Buy Now button image */
+    .pp-slot input[type="image"]{
+      display:block;
+      margin:0 auto;
     }
 
 /* Stars + constellations (shared) */
@@ -2504,6 +2518,32 @@
 
       });
 
+    })();
+
+    /* ======================== Force PayPal buttons BLACK ======================== */
+    (function(){
+      // Aggressively enforce black backgrounds on PayPal buttons after they render
+      function forceBlackPayPal(){
+        document.querySelectorAll('.pp-slot, .pp-slot *, .pp-slot iframe').forEach(el => {
+          el.style.setProperty('background', '#000000', 'important');
+          el.style.setProperty('background-color', '#000000', 'important');
+        });
+      }
+      
+      // Run immediately and on a loop to catch dynamically loaded content
+      forceBlackPayPal();
+      const observer = new MutationObserver(forceBlackPayPal);
+      document.querySelectorAll('.pp-slot').forEach(slot => {
+        observer.observe(slot, { childList: true, subtree: true, attributes: true });
+      });
+      
+      // Also run periodically for 5 seconds after page load to catch late renders
+      let count = 0;
+      const interval = setInterval(() => {
+        forceBlackPayPal();
+        count++;
+        if(count > 20) clearInterval(interval); // Stop after 20 attempts (5 seconds)
+      }, 250);
     })();
 
   </script>
