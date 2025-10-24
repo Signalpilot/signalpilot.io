@@ -126,6 +126,10 @@
 
       --grid-line:rgba(255,255,255,.08);
 
+      /* Border (was missing in dark mode) */
+
+      --border:rgba(255,255,255,.12);
+
     }
 
 
@@ -382,6 +386,24 @@
 
     }
 
+    /* Disable video and reduce blend complexity on mobile to prevent GPU issues */
+
+    @media (max-width: 768px) {
+
+      .bg-aurora-video{display:none !important}
+
+      .bg-aurora{
+
+        mix-blend-mode:normal;
+
+        opacity:.5;
+
+        filter:blur(50px) saturate(110%) brightness(105%);
+
+      }
+
+    }
+
 
 
     /* Typography */
@@ -458,6 +480,10 @@
       z-index:40;
 
       backdrop-filter:blur(14px);
+
+      /* Fallback for browsers that don't support color-mix() */
+
+      background:rgba(5,7,13,.72);
 
       background:color-mix(in srgb,var(--bg) 72%, transparent);
 
@@ -2622,7 +2648,13 @@
 
       const backdrop=document.getElementById('navBackdrop');
 
-      function lockScroll(lock){ document.documentElement.style.overflow = lock ? 'hidden' : ''; document.body.style.touchAction = lock ? 'none' : ''; }
+      function lockScroll(lock){ 
+        // Use body overflow only - less aggressive on iOS Safari
+        document.body.style.overflow = lock ? 'hidden' : ''; 
+        // Only disable touch-action on the nav element, not entire body
+        const nav = document.getElementById('mobile-menu');
+        if(nav) nav.style.touchAction = lock ? 'none' : '';
+      }
 
       function open(){ nav.classList.add('open'); backdrop.classList.add('show'); menuBtn.setAttribute('aria-expanded','true'); lockScroll(true); }
 
@@ -2690,9 +2722,17 @@
 
       (function(){const targets=['#pricing','#pay-crypto','#waitlist','#how'];
 
-        const io2=new IntersectionObserver(entries=>{suppressed=entries.some(e=>e.isIntersecting);update();},{root:null,rootMargin:'0px 0px -55% 0px',threshold:0});
+        // Feature detection for IntersectionObserver (older mobile browsers)
 
-        targets.forEach(sel=>{const el=document.querySelector(sel); if(el) io2.observe(el);});})();
+        if('IntersectionObserver' in window){
+
+          const io2=new IntersectionObserver(entries=>{suppressed=entries.some(e=>e.isIntersecting);update();},{root:null,rootMargin:'0px 0px -55% 0px',threshold:0});
+
+          targets.forEach(sel=>{const el=document.querySelector(sel); if(el) io2.observe(el);});
+
+        }
+
+      })();
 
       document.addEventListener('focusin',e=>{ if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)){focusing=true;update();}});
 
@@ -2820,6 +2860,16 @@
 
       const el=document.getElementById(containerId); if(!el) return; let rendered=false;
 
+      // Feature detection - render immediately if IntersectionObserver not supported (older mobile browsers)
+
+      if(!('IntersectionObserver' in window)){
+
+        renderSub(planId,containerId,tvInputId,planKey,consentId);
+
+        return;
+
+      }
+
       const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!rendered&&e.isIntersecting){renderSub(planId,containerId,tvInputId,planKey,consentId); rendered=true; obs.disconnect();}})},{root:null, rootMargin:'300px', threshold:0});
 
       obs.observe(el);
@@ -2879,21 +2929,13 @@
 
     /* ======================== Force PayPal buttons BLACK ======================== */
     (function(){
-      // ULTRA aggressively enforce black backgrounds on EVERYTHING in PayPal slots
+      // Less aggressive approach for mobile compatibility
       function forceBlackPayPal(){
-        // Target every single element inside pp-slot
         document.querySelectorAll('.pp-slot').forEach(slot => {
           slot.style.setProperty('background', '#000000', 'important');
           slot.style.setProperty('background-color', '#000000', 'important');
           
-          // Target ALL descendants
-          const allElements = slot.querySelectorAll('*');
-          allElements.forEach(el => {
-            el.style.setProperty('background', '#000000', 'important');
-            el.style.setProperty('background-color', '#000000', 'important');
-          });
-          
-          // Specifically target iframes
+          // Only target direct children and iframes, not ALL descendants
           const iframes = slot.querySelectorAll('iframe');
           iframes.forEach(iframe => {
             iframe.style.setProperty('background', '#000000', 'important');
@@ -2904,20 +2946,22 @@
         });
       }
       
-      // Run immediately and on a loop to catch dynamically loaded content
-      forceBlackPayPal();
-      const observer = new MutationObserver(forceBlackPayPal);
-      document.querySelectorAll('.pp-slot').forEach(slot => {
-        observer.observe(slot, { childList: true, subtree: true, attributes: true });
+      // Run with delays to avoid timing conflicts on mobile
+      setTimeout(forceBlackPayPal, 100);
+      setTimeout(forceBlackPayPal, 500);
+      setTimeout(forceBlackPayPal, 1500);
+      
+      // Light mutation observer - only watch for new iframes
+      const observer = new MutationObserver((mutations) => {
+        const hasNewIframes = mutations.some(m => 
+          Array.from(m.addedNodes).some(n => n.tagName === 'IFRAME')
+        );
+        if(hasNewIframes) forceBlackPayPal();
       });
       
-      // Also run periodically for 10 seconds after page load to catch late renders
-      let count = 0;
-      const interval = setInterval(() => {
-        forceBlackPayPal();
-        count++;
-        if(count > 40) clearInterval(interval); // Stop after 40 attempts (10 seconds)
-      }, 250);
+      document.querySelectorAll('.pp-slot').forEach(slot => {
+        observer.observe(slot, { childList: true, subtree: true });
+      });
     })();
 
   </script>
