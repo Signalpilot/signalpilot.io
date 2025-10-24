@@ -875,74 +875,34 @@
 
     .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
 
-    /* Force PayPal buttons to blend with dark background - TRANSPARENT */
+    /* Force PayPal buttons transparent (lightweight for mobile) */
     .pp-slot{
       background:transparent !important;
       padding:0 !important;
       border-radius:8px;
       overflow:hidden;
-      display:flex;
-      justify-content:center;
-      align-items:center;
     }
-    /* Target everything inside - make transparent */
     .pp-slot *,
-    .pp-slot > *,
     .pp-slot div,
-    .pp-slot > div,
     .pp-slot iframe{
       background:transparent !important;
       background-color:transparent !important;
     }
-    /* Target PayPal's wrapper divs specifically */
-    .pp-slot > div,
-    .pp-slot > div > div,
-    .pp-slot > div > div > div,
-    .pp-slot > div > div > div > div,
-    .pp-slot div[class*="paypal"],
-    .pp-slot div[id*="paypal"],
-    .pp-slot div[class*="zoid"],
-    .pp-slot div[data-paypal-button]{
-      background:transparent !important;
-      background-color:transparent !important;
-    }
-    /* ULTRA SPECIFIC - Kill PayPal subscription button wrappers */
+    /* Target subscription containers specifically */
     #paypal-button-container-P-1WW85539FH424981JND52S7A,
     #paypal-button-container-P-1WW85539FH424981JND52S7A *,
-    #paypal-button-container-P-1WW85539FH424981JND52S7A div,
-    #paypal-button-container-P-1WW85539FH424981JND52S7A > div,
-    #paypal-button-container-P-1WW85539FH424981JND52S7A > div > div,
     #paypal-button-container-P-1S895034P48824141ND52VBA,
-    #paypal-button-container-P-1S895034P48824141ND52VBA *,
-    #paypal-button-container-P-1S895034P48824141ND52VBA div,
-    #paypal-button-container-P-1S895034P48824141ND52VBA > div,
-    #paypal-button-container-P-1S895034P48824141ND52VBA > div > div {
-      background:transparent !important;
-      background-color:transparent !important;
-      border:none !important;
-      box-shadow:none !important;
-    }
-    /* Kill the "Powered by PayPal" white section */
-    .pp-slot section,
-    .pp-slot footer,
-    .pp-slot [style*="background"],
-    .pp-slot [style*="background-color"] {
+    #paypal-button-container-P-1S895034P48824141ND52VBA * {
       background:transparent !important;
       background-color:transparent !important;
     }
     .pp-slot iframe[title*="PayPal"]{
       max-height:120px;
-      overflow:hidden;
     }
-    /* Center the Buy Now button image */
-    .pp-slot input[type="image"]{
-      display:block;
-      margin:0 auto;
-    }
-    /* Keep Buy Now form button BLACK - don't make it transparent! */
-    #lifetime-form,
+    /* Keep Buy Now form button BLACK */
     #lifetime-form input[type="submit"] {
-      background:revert !important;
+      background:#000000 !important;
+      color:#FFFFFF !important;
     }
     
     /* Push copyright WAY up from bottom */
@@ -3007,88 +2967,33 @@
 
     /* ======================== Force PayPal buttons BLACK ======================== */
     (function(){
-      // NUCLEAR OPTION - Kill subscription button white backgrounds recursively
+      // LIGHTWEIGHT - Simple transparent background fix (mobile-friendly)
       function forceBlackPayPal(){
-        // Target ONLY subscription button containers (not lifetime form)
-        const subContainers = [
-          document.getElementById('paypal-button-container-P-1WW85539FH424981JND52S7A'),
-          document.getElementById('paypal-button-container-P-1S895034P48824141ND52VBA')
-        ];
+        // Target subscription button containers only
+        const containers = document.querySelectorAll(
+          '#paypal-button-container-P-1WW85539FH424981JND52S7A, ' +
+          '#paypal-button-container-P-1S895034P48824141ND52VBA'
+        );
         
-        subContainers.forEach(container => {
+        containers.forEach(container => {
           if(!container) return;
           
-          // Make container transparent
-          container.style.setProperty('background', 'transparent', 'important');
-          container.style.setProperty('background-color', 'transparent', 'important');
-          container.style.setProperty('border', 'none', 'important');
-          container.style.setProperty('box-shadow', 'none', 'important');
+          // Simple: just set the container and all children transparent
+          container.style.background = 'transparent';
+          container.style.backgroundColor = 'transparent';
           
-          // Target ALL descendants recursively - go 10 levels deep
-          function makeTransparent(element, depth = 0) {
-            if(depth > 10) return;
-            
-            element.style.setProperty('background', 'transparent', 'important');
-            element.style.setProperty('background-color', 'transparent', 'important');
-            element.style.setProperty('border', 'none', 'important');
-            element.style.setProperty('box-shadow', 'none', 'important');
-            
-            // Recurse to children
-            Array.from(element.children).forEach(child => {
-              makeTransparent(child, depth + 1);
-            });
-          }
-          
-          makeTransparent(container);
-          
-          // Also use querySelectorAll for safety
           const allElements = container.querySelectorAll('*');
           allElements.forEach(el => {
-            el.style.setProperty('background', 'transparent', 'important');
-            el.style.setProperty('background-color', 'transparent', 'important');
-            el.style.setProperty('border', 'none', 'important');
-            el.style.setProperty('box-shadow', 'none', 'important');
-          });
-          
-          // Target iframes
-          const iframes = container.querySelectorAll('iframe');
-          iframes.forEach(iframe => {
-            iframe.style.setProperty('background', 'transparent', 'important');
-            iframe.style.setProperty('background-color', 'transparent', 'important');
+            el.style.background = 'transparent';
+            el.style.backgroundColor = 'transparent';
           });
         });
       }
       
-      // Run MANY times to catch all rendering stages
-      setTimeout(forceBlackPayPal, 10);
-      setTimeout(forceBlackPayPal, 50);
-      setTimeout(forceBlackPayPal, 100);
-      setTimeout(forceBlackPayPal, 200);
-      setTimeout(forceBlackPayPal, 300);
+      // Run only 3 times (mobile-friendly)
       setTimeout(forceBlackPayPal, 500);
-      setTimeout(forceBlackPayPal, 800);
-      setTimeout(forceBlackPayPal, 1000);
       setTimeout(forceBlackPayPal, 1500);
-      setTimeout(forceBlackPayPal, 2000);
       setTimeout(forceBlackPayPal, 3000);
-      
-      // Watch for changes to subscription containers only
-      const observer = new MutationObserver(() => {
-        forceBlackPayPal();
-      });
-      
-      // Observe subscription containers
-      ['paypal-button-container-P-1WW85539FH424981JND52S7A', 
-       'paypal-button-container-P-1S895034P48824141ND52VBA'].forEach(id => {
-        const el = document.getElementById(id);
-        if(el) {
-          observer.observe(el, { 
-            childList: true, 
-            subtree: true,
-            attributes: true
-          });
-        }
-      });
     })();
 
   </script>
