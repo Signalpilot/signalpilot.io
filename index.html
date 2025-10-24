@@ -904,6 +904,16 @@
       background:transparent !important;
       background-color:transparent !important;
     }
+    /* ULTRA SPECIFIC - Kill PayPal subscription button wrappers */
+    #paypal-button-container-P-1WW85539FH424981JND52S7A,
+    #paypal-button-container-P-1WW85539FH424981JND52S7A *,
+    #paypal-button-container-P-1WW85539FH424981JND52S7A > div,
+    #paypal-button-container-P-1S895034P48824141ND52VBA,
+    #paypal-button-container-P-1S895034P48824141ND52VBA *,
+    #paypal-button-container-P-1S895034P48824141ND52VBA > div {
+      background:transparent !important;
+      background-color:transparent !important;
+    }
     .pp-slot iframe[title*="PayPal"]{
       max-height:120px;
       overflow:hidden;
@@ -912,6 +922,11 @@
     .pp-slot input[type="image"]{
       display:block;
       margin:0 auto;
+    }
+    /* Keep Buy Now form button BLACK - don't make it transparent! */
+    #lifetime-form,
+    #lifetime-form input[type="submit"] {
+      background:revert !important;
     }
     
     /* Push copyright WAY up from bottom */
@@ -2976,38 +2991,33 @@
 
     /* ======================== Force PayPal buttons BLACK ======================== */
     (function(){
-      // ULTRA AGGRESSIVE - Kill all white backgrounds
+      // ULTRA AGGRESSIVE - Kill subscription button white backgrounds ONLY
       function forceBlackPayPal(){
-        document.querySelectorAll('.pp-slot').forEach(slot => {
-          // Force slot itself
-          slot.style.setProperty('background', 'transparent', 'important');
-          slot.style.setProperty('background-color', 'transparent', 'important');
+        // Target ONLY subscription button containers (not lifetime form)
+        const subContainers = [
+          document.getElementById('paypal-button-container-P-1WW85539FH424981JND52S7A'),
+          document.getElementById('paypal-button-container-P-1S895034P48824141ND52VBA')
+        ];
+        
+        subContainers.forEach(container => {
+          if(!container) return;
           
-          // Target ALL descendants - divs, spans, everything
-          const allElements = slot.querySelectorAll('*');
+          // Make container transparent
+          container.style.setProperty('background', 'transparent', 'important');
+          container.style.setProperty('background-color', 'transparent', 'important');
+          
+          // Target ALL descendants
+          const allElements = container.querySelectorAll('*');
           allElements.forEach(el => {
-            // Skip buttons and inputs
-            if(!['BUTTON', 'INPUT', 'A'].includes(el.tagName)) {
-              el.style.setProperty('background', 'transparent', 'important');
-              el.style.setProperty('background-color', 'transparent', 'important');
-            }
+            el.style.setProperty('background', 'transparent', 'important');
+            el.style.setProperty('background-color', 'transparent', 'important');
           });
           
-          // Target iframes specifically
-          const iframes = slot.querySelectorAll('iframe');
+          // Target iframes
+          const iframes = container.querySelectorAll('iframe');
           iframes.forEach(iframe => {
             iframe.style.setProperty('background', 'transparent', 'important');
             iframe.style.setProperty('background-color', 'transparent', 'important');
-            
-            // Try to access iframe content (if same-origin)
-            try {
-              if(iframe.contentDocument) {
-                iframe.contentDocument.body.style.setProperty('background', 'transparent', 'important');
-                iframe.contentDocument.body.style.setProperty('background-color', 'transparent', 'important');
-              }
-            } catch(e) {
-              // Cross-origin iframe, can't access
-            }
           });
         });
       }
@@ -3021,19 +3031,24 @@
       setTimeout(forceBlackPayPal, 1000);
       setTimeout(forceBlackPayPal, 1500);
       setTimeout(forceBlackPayPal, 2000);
+      setTimeout(forceBlackPayPal, 3000);
       
-      // Aggressive mutation observer - watch for ANY changes
+      // Watch for changes to subscription containers only
       const observer = new MutationObserver(() => {
         forceBlackPayPal();
       });
       
-      document.querySelectorAll('.pp-slot').forEach(slot => {
-        observer.observe(slot, { 
-          childList: true, 
-          subtree: true,
-          attributes: true,
-          attributeFilter: ['style', 'class']
-        });
+      // Observe subscription containers
+      ['paypal-button-container-P-1WW85539FH424981JND52S7A', 
+       'paypal-button-container-P-1S895034P48824141ND52VBA'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) {
+          observer.observe(el, { 
+            childList: true, 
+            subtree: true,
+            attributes: true
+          });
+        }
       });
     })();
 
