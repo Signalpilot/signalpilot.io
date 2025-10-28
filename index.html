@@ -733,23 +733,38 @@
       .proof-bar{justify-content:center}
       .section{padding:clamp(2rem,6vw,3rem) 0}
 
-      /* Mobile video fixes */
+      /* Mobile video fixes - AGGRESSIVE */
       #heroVideo{
         min-height:250px !important;
-        max-height:400px;
-        object-fit:contain;
+        max-height:400px !important;
+        height:auto !important;
+        width:100% !important;
+        object-fit:contain !important;
         display:block !important;
+        visibility:visible !important;
+        opacity:1 !important;
       }
 
-      /* Video container mobile */
+      /* Video container mobile - force visibility */
       .hero video{
         min-height:250px !important;
+        display:block !important;
+        visibility:visible !important;
       }
 
-      /* Ensure video container is visible */
+      /* Ensure video container is visible and has proper aspect ratio */
       .hero > div > div:nth-child(2) > div{
         min-height:250px !important;
         display:block !important;
+        visibility:visible !important;
+        aspect-ratio:16/9;
+      }
+
+      /* Force container parent to be visible */
+      .hero > div > div:nth-child(2){
+        display:block !important;
+        visibility:visible !important;
+        min-height:250px !important;
       }
 
       /* Video caption mobile optimization */
@@ -1233,6 +1248,20 @@
     .pp-slot *{
       background:transparent !important;
     }
+    /* Target PayPal iframes and containers aggressively */
+    .pp-slot iframe,
+    .pp-slot div[id*="paypal"],
+    .pp-slot > div,
+    div[id*="paypal-button-container"] {
+      background:transparent !important;
+    }
+    /* Force PayPal button containers to have no white background */
+    div[id^="paypal-button-container-"] {
+      background:transparent !important;
+    }
+    div[id^="paypal-button-container-"] * {
+      background:transparent !important;
+    }
     /* Keep Buy Now button BLACK */
     #lifetime-form input[type="submit"] {
       background:#000000 !important;
@@ -1658,7 +1687,7 @@
                 playsinline
                 preload="metadata"
                 poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%230a0e18' width='1200' height='600'/%3E%3C/svg%3E"
-                style="width:100%;height:auto;display:block;object-fit:contain;min-height:300px;background:#0a0e18"
+                style="width:100%;height:auto;display:block;object-fit:contain;min-height:300px;background:#0a0e18;aspect-ratio:16/9"
                 onloadedmetadata="this.play()"
               >
                 <source src="assets/videos/hero-demo.mp4" type="video/mp4">
@@ -1682,26 +1711,66 @@
               </div>
             </div>
             
-            <!-- Video Force Play Script -->
+            <!-- Video Force Play Script + Mobile Fix -->
             <script>
               (function() {
                 const video = document.getElementById('heroVideo');
-                if (video) {
-                  // Force play on load
-                  video.play().catch(e => console.log('Autoplay blocked:', e));
-                  
-                  // Retry play on user interaction
-                  document.addEventListener('click', function playOnce() {
-                    video.play();
-                    document.removeEventListener('click', playOnce);
-                  }, { once: true });
-                  
-                  // Ensure loop
-                  video.addEventListener('ended', function() {
-                    video.currentTime = 0;
-                    video.play();
-                  });
+                if (!video) return;
+
+                // MOBILE FIX: Force dimensions and visibility
+                function forceMobileVideo() {
+                  const isMobile = window.innerWidth <= 768;
+                  if (isMobile) {
+                    // Force video container styles
+                    const container = video.parentElement;
+                    if (container) {
+                      container.style.minHeight = '250px';
+                      container.style.display = 'block';
+                      container.style.visibility = 'visible';
+                    }
+
+                    // Force video element styles
+                    video.style.display = 'block';
+                    video.style.visibility = 'visible';
+                    video.style.opacity = '1';
+                    video.style.minHeight = '250px';
+                    video.style.maxHeight = '400px';
+                    video.style.width = '100%';
+                    video.style.height = 'auto';
+                    video.style.objectFit = 'contain';
+                  }
                 }
+
+                // Run on load
+                forceMobileVideo();
+
+                // Run after a short delay to override any other scripts
+                setTimeout(forceMobileVideo, 100);
+                setTimeout(forceMobileVideo, 500);
+
+                // Re-run on resize
+                window.addEventListener('resize', forceMobileVideo);
+
+                // Force play on load
+                video.play().catch(e => console.log('Autoplay blocked:', e));
+
+                // Retry play on user interaction
+                document.addEventListener('click', function playOnce() {
+                  video.play();
+                  document.removeEventListener('click', playOnce);
+                }, { once: true });
+
+                // Also try to play on touch (mobile)
+                document.addEventListener('touchstart', function playOnce() {
+                  video.play();
+                  document.removeEventListener('touchstart', playOnce);
+                }, { once: true });
+
+                // Ensure loop
+                video.addEventListener('ended', function() {
+                  video.currentTime = 0;
+                  video.play();
+                });
               })();
             </script>
 
