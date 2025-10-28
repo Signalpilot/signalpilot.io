@@ -4589,6 +4589,171 @@ if ('serviceWorker' in navigator) {
   });
 </script>
 
+<!-- Google Analytics 4 - Custom Event Tracking -->
+<script>
+(function() {
+  // Wait for GA to be ready
+  function trackEvent(eventName, eventParams) {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, eventParams);
+      console.log('GA4 Event:', eventName, eventParams);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // 1. TRACK CTA BUTTON CLICKS
+    // "Try Risk-Free" buttons
+    document.querySelectorAll('a[href="#pricing"], .cta-header').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        trackEvent('cta_click', {
+          button_text: this.textContent.trim(),
+          button_location: this.classList.contains('cta-header') ? 'header' : 'page',
+          link_url: this.href
+        });
+      });
+    });
+
+    // 2. TRACK PRICING PLAN SELECTIONS
+    // PayPal forms
+    document.querySelectorAll('form[action*="paypal"]').forEach(function(form) {
+      form.addEventListener('submit', function() {
+        const planName = this.querySelector('input[type="submit"]')?.value || 'Unknown Plan';
+        trackEvent('select_plan', {
+          plan_name: planName,
+          payment_method: 'paypal'
+        });
+      });
+    });
+
+    // Lemon Squeezy / Card payment links
+    document.querySelectorAll('a[href*="lemonsqueezy"], .btn-primary[href*="pricing"]').forEach(function(link) {
+      link.addEventListener('click', function() {
+        trackEvent('select_plan', {
+          plan_name: this.textContent.trim(),
+          payment_method: 'card'
+        });
+      });
+    });
+
+    // 3. TRACK FAQ INTERACTIONS
+    document.querySelectorAll('#faq .card').forEach(function(card, index) {
+      card.addEventListener('click', function() {
+        const question = this.querySelector('strong')?.textContent || 'FAQ ' + (index + 1);
+        trackEvent('faq_interaction', {
+          question_number: index + 1,
+          question_text: question.substring(0, 100) // Limit to 100 chars
+        });
+      });
+    });
+
+    // 4. TRACK SCROLL DEPTH
+    let scrollDepths = { 25: false, 50: false, 75: false, 100: false };
+
+    window.addEventListener('scroll', function() {
+      const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+
+      Object.keys(scrollDepths).forEach(function(depth) {
+        if (scrollPercent >= depth && !scrollDepths[depth]) {
+          scrollDepths[depth] = true;
+          trackEvent('scroll_depth', {
+            percent: depth + '%'
+          });
+        }
+      });
+    });
+
+    // 5. TRACK NAVIGATION DROPDOWN INTERACTIONS
+    const resourcesDropdown = document.querySelector('.nav-dropdown-toggle');
+    if (resourcesDropdown) {
+      resourcesDropdown.addEventListener('click', function() {
+        trackEvent('dropdown_open', {
+          dropdown_name: 'resources'
+        });
+      });
+    }
+
+    // Track dropdown link clicks
+    document.querySelectorAll('.nav-dropdown-menu a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        trackEvent('navigation_click', {
+          link_text: this.textContent.trim(),
+          link_url: this.href,
+          dropdown: 'resources'
+        });
+      });
+    });
+
+    // 6. TRACK LANGUAGE SELECTOR
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', function() {
+        trackEvent('language_selector_open', {});
+      });
+    }
+
+    document.querySelectorAll('.lang-dropdown-menu button').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        trackEvent('language_change', {
+          language: this.getAttribute('data-lang'),
+          language_name: this.textContent.trim()
+        });
+      });
+    });
+
+    // 7. TRACK THEME TOGGLE
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        trackEvent('theme_toggle', {
+          from_theme: currentTheme,
+          to_theme: newTheme
+        });
+      });
+    }
+
+    // 8. TRACK VIDEO PLAYS
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo) {
+      let videoPlayed = false;
+      heroVideo.addEventListener('play', function() {
+        if (!videoPlayed) {
+          videoPlayed = true;
+          trackEvent('video_play', {
+            video_id: 'hero_video',
+            video_location: 'hero_section'
+          });
+        }
+      });
+    }
+
+    // 9. TRACK EXTERNAL LINKS
+    document.querySelectorAll('a[target="_blank"]').forEach(function(link) {
+      link.addEventListener('click', function() {
+        trackEvent('outbound_link', {
+          link_text: this.textContent.trim(),
+          link_url: this.href,
+          link_domain: new URL(this.href).hostname
+        });
+      });
+    });
+
+    // 10. TRACK EMAIL/SUPPORT LINKS
+    document.querySelectorAll('a[href^="mailto:"]').forEach(function(link) {
+      link.addEventListener('click', function() {
+        trackEvent('email_click', {
+          email_address: this.href.replace('mailto:', '')
+        });
+      });
+    });
+
+    console.log('✅ GA4 Custom Event Tracking Initialized');
+  });
+})();
+</script>
+
 </body>
 
 </html>
