@@ -489,6 +489,36 @@
 
     }
 
+    /* CAPABILITY-BASED DISPLAY: Hide effects on devices that can't handle them */
+    html[data-aurora="false"] .bg-aurora{
+      display:none !important;
+      visibility:hidden !important;
+    }
+
+    html[data-video="false"] .bg-aurora-video{
+      display:none !important;
+      visibility:hidden !important;
+    }
+
+    html[data-particles="false"] #constellations,
+    html[data-particles="false"] .sp-constellations{
+      display:none !important;
+      visibility:hidden !important;
+    }
+
+    html[data-blendmodes="false"] .bg-aurora{
+      mix-blend-mode:normal !important;
+    }
+
+    html[data-performance="low"] .bg-aurora{
+      animation:none !important;
+      opacity:.2 !important;
+    }
+
+    html[data-performance="medium"] .bg-aurora{
+      animation-duration:60s !important;
+    }
+
     /* MOBILE FIX: Disable video and reduce blend complexity to prevent GPU crash */
 
     @media (max-width: 1024px) {
@@ -4029,10 +4059,12 @@
     document.body.appendChild(s);
   }
 
-  // Load in sequence: themes -> particles -> theme-switcher
-  loadScript('assets/themes.js', function() {
-    loadScript('assets/particles.js', function() {
-      loadScript('assets/theme-switcher.js');
+  // Load in sequence: device-capability -> themes -> particles -> theme-switcher
+  loadScript('assets/device-capability.js', function() {
+    loadScript('assets/themes.js', function() {
+      loadScript('assets/particles.js', function() {
+        loadScript('assets/theme-switcher.js');
+      });
     });
   });
 })();
