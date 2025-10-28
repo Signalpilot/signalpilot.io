@@ -1,84 +1,123 @@
 // Service Worker for Signal Pilot PWA
-const CACHE_NAME = 'signal-pilot-v1';
+// Updated cache strategy: Network first for HTML, cache for assets
+const CACHE_VERSION = '2025-10-28-v2';
+const CACHE_NAME = `signal-pilot-${CACHE_VERSION}`;
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
   '/manifest.json',
   '/favicon.ico',
   '/monogram-square-favicon_192x192.png',
-  '/monogram-square-favicon_512x512.png',
-  '/apple-touch-icon.png'
+  '/monogram-square-favicon_512x512.png'
 ];
 
-// Install event - cache assets
+// Install event - cache static assets only
 self.addEventListener('install', (event) => {
+  console.log('[SW] Installing service worker version:', CACHE_VERSION);
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('Caching assets');
+        console.log('[SW] Caching static assets');
         return cache.addAll(ASSETS_TO_CACHE);
       })
       .catch((err) => {
-        console.log('Cache failed:', err);
+        console.log('[SW] Cache failed:', err);
       })
   );
+  // Force the waiting service worker to become the active service worker
   self.skipWaiting();
 });
 
-// Activate event - clean old caches
+// Activate event - clean ALL old caches
 self.addEventListener('activate', (event) => {
+  console.log('[SW] Activating service worker version:', CACHE_VERSION);
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cache) => {
           if (cache !== CACHE_NAME) {
-            console.log('Deleting old cache:', cache);
+            console.log('[SW] Deleting old cache:', cache);
             return caches.delete(cache);
           }
         })
       );
     })
   );
+  // Take control of all clients immediately
   self.clients.claim();
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - NETWORK FIRST for HTML, cache for other assets
 self.addEventListener('fetch', (event) => {
+  const { request } = event;
+
   // Skip cross-origin requests
-  if (!event.request.url.startsWith(self.location.origin)) {
+  if (!request.url.startsWith(self.location.origin)) {
     return;
   }
 
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Cache hit - return response
-        if (response) {
+  // Skip chrome-extension and other protocols
+  if (!request.url.startsWith('http')) {
+    return;
+  }
+
+  // NETWORK FIRST for HTML pages (always get fresh content)
+  if (request.headers.get('accept').includes('text/html')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          // Clone and cache the response
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(request, responseClone);
+          });
           return response;
+        })
+        .catch(() => {
+          // Network failed, try cache
+          return caches.match(request).then((cachedResponse) => {
+            return cachedResponse || caches.match('/index.html');
+          });
+        })
+    );
+    return;
+  }
+
+  // CACHE FIRST for other assets (CSS, JS, images)
+  event.respondWith(
+    caches.match(request)
+      .then((cachedResponse) => {
+        if (cachedResponse) {
+          // Return cached version but fetch in background to update cache
+          fetch(request).then((response) => {
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, response);
+            });
+          }).catch(() => {});
+          return cachedResponse;
         }
 
-        // Clone the request
-        const fetchRequest = event.request.clone();
-
-        return fetch(fetchRequest).then((response) => {
+        // Not in cache, fetch from network
+        return fetch(request).then((response) => {
           // Check if valid response
           if (!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
 
-          // Clone the response
+          // Clone and cache the response
           const responseToCache = response.clone();
-
-          caches.open(CACHE_NAME)
-            .then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(request, responseToCache);
+          });
 
           return response;
-        }).catch(() => {
-          // Offline fallback
-          return caches.match('/');
         });
       })
   );
+});
+
+// Listen for messages from the client
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    console.log('[SW] Received SKIP_WAITING message');
+    self.skipWaiting();
+  }
 });

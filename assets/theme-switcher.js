@@ -40,11 +40,22 @@
 
     @media (max-width: 768px) {
       .sp-theme-toggle {
-        bottom: 1.5rem;
+        bottom: max(1.5rem, calc(1rem + env(safe-area-inset-bottom)));
         right: 1.5rem;
         width: 52px;
         height: 52px;
         font-size: 1.3rem;
+      }
+    }
+
+    /* Ultra-small screens */
+    @media (max-width: 380px) {
+      .sp-theme-toggle {
+        bottom: max(1.2rem, calc(0.8rem + env(safe-area-inset-bottom)));
+        right: 1.2rem;
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
       }
     }
 
