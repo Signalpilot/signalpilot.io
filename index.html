@@ -902,7 +902,71 @@
     }
 
 
-    #themeToggle{flex-shrink:0;position:relative;z-index:50;padding:.4rem .6rem !important;font-size:1.15rem !important;min-width:44px}
+    /* Language Dropdown */
+    .lang-dropdown{
+      position:relative;
+      flex-shrink:0;
+    }
+
+    .lang-dropdown-menu{
+      position:absolute;
+      top:100%;
+      right:0;
+      margin-top:.5rem;
+      background:rgba(10,12,20,.98);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:12px;
+      padding:.5rem;
+      min-width:180px;
+      max-height:400px;
+      overflow-y:auto;
+      box-shadow:0 8px 24px rgba(0,0,0,.4);
+      display:none;
+      flex-direction:column;
+      gap:.25rem;
+      z-index:1000;
+      backdrop-filter:blur(12px);
+    }
+
+    html[data-theme="light"] .lang-dropdown-menu{
+      background:rgba(255,255,255,.98);
+      border-color:rgba(30,41,59,.2);
+      box-shadow:0 8px 24px rgba(0,0,0,.15);
+    }
+
+    .lang-dropdown-menu.show{display:flex}
+
+    .lang-dropdown-menu button{
+      padding:.6rem .9rem;
+      background:transparent;
+      border:none;
+      border-radius:8px;
+      color:#b7c2d9;
+      text-align:left;
+      cursor:pointer;
+      transition:all .2s ease;
+      font-size:.9rem;
+      font-family:'Space Grotesk',system-ui,sans-serif;
+      font-weight:500;
+    }
+
+    .lang-dropdown-menu button:hover{
+      background:rgba(91,138,255,.15);
+      color:#fff;
+    }
+
+    html[data-theme="light"] .lang-dropdown-menu button{
+      color:#475569;
+    }
+
+    html[data-theme="light"] .lang-dropdown-menu button:hover{
+      background:rgba(59,130,246,.12);
+      color:#0f172a;
+    }
+
+
+    #themeToggle,
+    #langToggle{flex-shrink:0;position:relative;z-index:50;padding:.4rem .6rem !important;font-size:1.15rem !important;min-width:44px}
 
 
 
@@ -937,7 +1001,8 @@
     }
 
 
-    /* CRITICAL FIX: Ensure theme button stays visible and on top */
+    /* CRITICAL FIX: Ensure language/theme buttons stay visible and on top */
+    .lang-dropdown,
     #themeToggle,
     .menu-toggle{
       position:relative;
@@ -946,7 +1011,7 @@
     }
 
     /* Mobile hamburger menu appears at ≤1250px, so no nav width constraints needed */
-    /* Nav items go into hamburger menu to prevent overlap with theme button */
+    /* Nav items go into hamburger menu to prevent overlap with language/theme buttons */
 
     @media (max-width:1250px){
       /* Ensure header buttons have adequate space */
@@ -1110,6 +1175,13 @@
       }
 
       .cta-header{display:none}
+
+      /* Mobile language dropdown - adjust positioning */
+      .lang-dropdown-menu{
+        right:auto;
+        left:0;
+        min-width:160px;
+      }
 
       .nav-backdrop{
         position:fixed;
@@ -2264,6 +2336,30 @@
       </nav>
 
 
+
+      <div class="lang-dropdown">
+        <button id="langToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Select language" aria-expanded="false" aria-haspopup="true" style="font-size:1.3rem;padding:.5rem .7rem">
+          <span>🌐</span>
+        </button>
+        <div class="lang-dropdown-menu">
+          <button data-lang="en">English</button>
+          <button data-lang="de">Deutsch</button>
+          <button data-lang="fr">Français</button>
+          <button data-lang="es">Español</button>
+          <button data-lang="it">Italiano</button>
+          <button data-lang="zh">中文</button>
+          <button data-lang="ru">Русский</button>
+          <button data-lang="ar">العربية</button>
+          <button data-lang="pt">Português</button>
+          <button data-lang="tr">Türkçe</button>
+          <button data-lang="ja">日本語</button>
+          <button data-lang="ko">한국어</button>
+          <button data-lang="vi">Tiếng Việt</button>
+          <button data-lang="th">ไทย</button>
+          <button data-lang="hi">हिन्दी</button>
+          <button data-lang="id">Bahasa Indonesia</button>
+        </div>
+      </div>
 
       <button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Toggle theme" style="font-size:1.3rem;padding:.5rem .7rem">
         <span id="theme-icon">🌙</span>
@@ -3557,28 +3653,6 @@
 
       <div style="text-align:center;padding-top:2rem;border-top:1px solid var(--border)">
 
-        <div style="margin-bottom:1.5rem">
-          <label for="langSel" style="color:var(--muted);font-size:.85rem;margin-right:.5rem">🌐 Language:</label>
-          <select id="langSel" aria-label="Language" title="Language" style="background:var(--bg-soft);border:1px solid var(--border);border-radius:8px;padding:.4rem .6rem;color:var(--text);font-size:.85rem;cursor:pointer">
-            <option value="en">English</option>
-            <option value="de">Deutsch</option>
-            <option value="fr">Français</option>
-            <option value="es">Español</option>
-            <option value="it">Italiano</option>
-            <option value="zh">中文</option>
-            <option value="ru">Русский</option>
-            <option value="ar">العربية</option>
-            <option value="pt">Português</option>
-            <option value="tr">Türkçe</option>
-            <option value="ja">日本語</option>
-            <option value="ko">한국어</option>
-            <option value="vi">Tiếng Việt</option>
-            <option value="th">ไทย</option>
-            <option value="hi">हिन्दी</option>
-            <option value="id">Bahasa Indonesia</option>
-          </select>
-        </div>
-
         <p style="color:var(--muted-2);font-size:.85rem;margin:0">
 
           © 2025 Signal Pilot Labs. All rights reserved. Educational tools only—not financial advice.
@@ -3833,6 +3907,66 @@
       // Close when clicking a dropdown link
       dropdownMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', closeDropdown);
+      });
+    })();
+
+
+    /* ======================== Language Dropdown ======================== */
+
+    (function(){
+      const langToggle = document.getElementById('langToggle');
+      const langMenu = document.querySelector('.lang-dropdown-menu');
+      const langDropdown = document.querySelector('.lang-dropdown');
+
+      if (!langToggle || !langMenu) return;
+
+      function openLang() {
+        langMenu.classList.add('show');
+        langToggle.setAttribute('aria-expanded', 'true');
+      }
+
+      function closeLang() {
+        langMenu.classList.remove('show');
+        langToggle.setAttribute('aria-expanded', 'false');
+      }
+
+      // Toggle on click
+      langToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const isOpen = langMenu.classList.contains('show');
+        if (isOpen) closeLang();
+        else openLang();
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!langDropdown.contains(e.target)) {
+          closeLang();
+        }
+      });
+
+      // Close on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && langMenu.classList.contains('show')) {
+          closeLang();
+        }
+      });
+
+      // Handle language selection
+      langMenu.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const lang = btn.getAttribute('data-lang');
+
+          // Use Google Translate
+          const googleTranslateCombo = document.querySelector('.goog-te-combo');
+          if (googleTranslateCombo) {
+            googleTranslateCombo.value = lang;
+            googleTranslateCombo.dispatchEvent(new Event('change'));
+          }
+
+          closeLang();
+        });
       });
     })();
 
