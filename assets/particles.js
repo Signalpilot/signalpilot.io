@@ -19,8 +19,14 @@
     document.body.prepend(canvas);
   }
 
-  const ctx = canvas.getContext('2d', { alpha: true });
-  let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  const ctx = canvas.getContext('2d', { alpha: true, willReadFrequently: false });
+
+  // Safari iOS detection
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  // Use lower DPR for Safari iOS to improve performance and compatibility
+  let dpr = (isSafari || isIOS) ? 1 : Math.max(1, Math.min(2, window.devicePixelRatio || 1));
   let W = 0, H = 0, RAF = 0, particles = [];
   let currentConfig = {
     type: 'stars',
@@ -244,23 +250,34 @@
   function resize() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
 
+    // Update DPR for Safari iOS
+    dpr = (isSafari || isIOS) ? 1 : Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+
+    // Set canvas dimensions
     canvas.width = Math.floor(vw * dpr);
     canvas.height = Math.floor(vh * dpr);
     canvas.style.width = vw + 'px';
     canvas.style.height = vh + 'px';
 
-    W = canvas.width;
-    H = canvas.height;
-    ctx.scale(dpr, dpr);
+    W = vw;  // Use actual viewport dimensions for calculations
+    H = vh;
+
+    // Scale context for high DPR displays (but not on Safari iOS)
+    if (dpr !== 1) {
+      ctx.scale(dpr, dpr);
+    }
 
     // Recalculate particle count
     const area = vw * vh;
     let targetCount;
 
     if (currentConfig.count === 'auto') {
-      targetCount = Math.min(120, Math.max(50, Math.floor(area / 12000)));
+      // Reduce particle count on iOS Safari for better performance
+      const maxParticles = (isIOS || isSafari) ? 80 : 120;
+      const minParticles = (isIOS || isSafari) ? 40 : 50;
+      const divisor = (isIOS || isSafari) ? 15000 : 12000;
+      targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
     } else {
       targetCount = currentConfig.count;
     }
@@ -278,7 +295,7 @@
 
   // Animation step
   function step() {
-    ctx.clearRect(0, 0, W / dpr, H / dpr);
+    ctx.clearRect(0, 0, W, H);
 
     // Update and draw particles
     for (const p of particles) {
@@ -287,7 +304,7 @@
     }
 
     // Draw connections between nearby particles
-    const linkDist = Math.min(W, H) / dpr * 0.12;
+    const linkDist = Math.min(W, H) * 0.12;
     ctx.lineWidth = 1;
 
     for (let i = 0; i < particles.length; i++) {
@@ -333,8 +350,22 @@
   }
 
   // Initialize
-  resize();
-  start();
+  try {
+    resize();
+    start();
+    // Debug log for Safari
+    if (isIOS || isSafari) {
+      console.log('SignalPilot Particles: Initialized for Safari/iOS', {
+        canvas: canvas.id,
+        width: canvas.width,
+        height: canvas.height,
+        particles: particles.length,
+        dpr: dpr
+      });
+    }
+  } catch (err) {
+    console.error('SignalPilot Particles: Initialization failed', err);
+  }
 
   // Event listeners
   window.addEventListener('resize', () => {
