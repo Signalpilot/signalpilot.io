@@ -542,6 +542,8 @@
 
     nav ul{list-style:none;margin:0;padding:0;display:flex;gap:.8rem}
 
+    .mobile-nav-header{display:none}
+
     nav a{display:inline-flex;padding:.5rem .9rem;border-radius:999px;color:#b7c2d9;font-weight:600;font-family:'Space Grotesk',system-ui,sans-serif;text-decoration:none;transition:all .2s ease;font-size:.95rem;white-space:nowrap}
 
     nav a:hover,nav a:focus-visible{color:#fff;background:rgba(91,138,255,.15);transform:translateY(-1px)}
@@ -586,7 +588,7 @@
       .menu-toggle{display:inline-flex}
 
       nav[aria-label="Main"]{
-        display:none;
+        display:flex;
         position:fixed;
         right:0;
         top:0;
@@ -602,14 +604,50 @@
         transform:translateX(100%);
         transition:transform .3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow:-4px 0 20px rgba(0,0,0,.5);
+        overflow-y:auto;
       }
 
       nav[aria-label="Main"].open{
-        display:flex;
         transform:translateX(0);
       }
 
       nav ul{flex-direction:column;gap:.2rem}
+
+      .mobile-nav-header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:1rem;
+        padding-bottom:1rem;
+        border-bottom:1px solid rgba(255,255,255,.15);
+      }
+
+      .mobile-nav-title{
+        font-size:1.2rem;
+        font-weight:700;
+        color:#fff;
+      }
+
+      .mobile-nav-close{
+        background:rgba(255,255,255,.1);
+        border:1px solid rgba(255,255,255,.2);
+        border-radius:8px;
+        width:36px;
+        height:36px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;
+        color:#fff;
+        font-size:1.5rem;
+        line-height:1;
+        transition:all 0.2s ease;
+      }
+
+      .mobile-nav-close:hover{
+        background:rgba(255,255,255,.15);
+        transform:rotate(90deg);
+      }
 
       nav a{
         padding:.7rem 1rem;
@@ -1631,11 +1669,16 @@
 
       <nav id="mainnav" aria-label="Main">
 
+        <div class="mobile-nav-header">
+          <span class="mobile-nav-title">Menu</span>
+          <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">×</button>
+        </div>
+
         <ul>
 
           <li><a href="#why">Why Signal Pilot?</a></li>
 
-          <li><a href="#inside">What’s inside</a></li>
+          <li><a href="#inside">What's inside</a></li>
 
           <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Documentation</a></li>
 
@@ -2893,23 +2936,47 @@
 
       const backdrop=document.getElementById('navBackdrop');
 
-      function lockScroll(lock){ 
+      const closeBtn=document.getElementById('mobileNavClose');
+
+      if (!menuBtn || !nav || !backdrop) {
+        console.warn('Mobile menu elements not found');
+        return;
+      }
+
+      function lockScroll(lock){
         // Use body overflow only - less aggressive on iOS Safari
-        document.body.style.overflow = lock ? 'hidden' : ''; 
+        document.body.style.overflow = lock ? 'hidden' : '';
         // Only disable touch-action on the nav element, not entire body
-        const nav = document.getElementById('mobile-menu');
         if(nav) nav.style.touchAction = lock ? 'none' : '';
       }
 
-      function open(){ nav.classList.add('open'); backdrop.classList.add('show'); menuBtn.setAttribute('aria-expanded','true'); lockScroll(true); }
+      function open(){
+        nav.classList.add('open');
+        backdrop.classList.add('show');
+        menuBtn.setAttribute('aria-expanded','true');
+        lockScroll(true);
+      }
 
-      function close(){ nav.classList.remove('open'); backdrop.classList.remove('show'); menuBtn.setAttribute('aria-expanded','false'); lockScroll(false); }
+      function close(){
+        nav.classList.remove('open');
+        backdrop.classList.remove('show');
+        menuBtn.setAttribute('aria-expanded','false');
+        lockScroll(false);
+      }
 
-      menuBtn?.addEventListener('click',()=>{ (nav.classList.contains('open')?close:open)(); });
+      menuBtn.addEventListener('click',()=>{
+        (nav.classList.contains('open') ? close : open)();
+      });
 
-      backdrop?.addEventListener('click', close);
+      backdrop.addEventListener('click', close);
 
-      document.addEventListener('keydown', e=>{ if(e.key==='Escape') close(); });
+      if (closeBtn) {
+        closeBtn.addEventListener('click', close);
+      }
+
+      document.addEventListener('keydown', e=>{
+        if(e.key==='Escape' && nav.classList.contains('open')) close();
+      });
 
       document.querySelectorAll('#mainnav a').forEach(a=>a.addEventListener('click', close));
 
