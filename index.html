@@ -767,22 +767,23 @@
         min-height:250px !important;
       }
 
-      /* Video caption mobile optimization */
+      /* Video caption mobile optimization - MUCH SMALLER */
       .hero video ~ div p{
-        font-size:.78rem !important;
-        padding:1rem .5rem .5rem !important;
+        font-size:.65rem !important;
+        padding:.8rem .5rem .5rem !important;
+        line-height:1.4 !important;
       }
 
       .hero video ~ div p span{
-        font-size:.7rem !important;
+        font-size:.58rem !important;
       }
 
-      /* Overlay badge mobile */
+      /* Overlay badge mobile - smaller */
       .hero video ~ div[style*="position:absolute"][style*="top"]{
         top:.5rem !important;
         right:.5rem !important;
-        padding:.35rem .6rem !important;
-        font-size:.7rem !important;
+        padding:.3rem .5rem !important;
+        font-size:.65rem !important;
       }
     }
 
@@ -1685,7 +1686,7 @@
                 loop
                 muted
                 playsinline
-                preload="metadata"
+                preload="auto"
                 poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%230a0e18' width='1200' height='600'/%3E%3C/svg%3E"
                 style="width:100%;height:auto;display:block;object-fit:contain;min-height:300px;background:#0a0e18;aspect-ratio:16/9"
                 onloadedmetadata="this.play()"
@@ -1715,11 +1716,20 @@
             <script>
               (function() {
                 const video = document.getElementById('heroVideo');
-                if (!video) return;
+                if (!video) {
+                  console.error('Hero video element not found!');
+                  return;
+                }
+
+                console.log('Video element found, initializing...');
+                console.log('Video src:', video.src);
+                console.log('Video readyState:', video.readyState);
 
                 // MOBILE FIX: Force dimensions and visibility
                 function forceMobileVideo() {
                   const isMobile = window.innerWidth <= 768;
+                  console.log('forceMobileVideo - isMobile:', isMobile, 'width:', window.innerWidth);
+
                   if (isMobile) {
                     // Force video container styles
                     const container = video.parentElement;
@@ -1738,39 +1748,80 @@
                     video.style.width = '100%';
                     video.style.height = 'auto';
                     video.style.objectFit = 'contain';
+
+                    console.log('Mobile styles applied. Video dimensions:', video.offsetWidth, 'x', video.offsetHeight);
                   }
                 }
 
                 // Run on load
                 forceMobileVideo();
 
-                // Run after a short delay to override any other scripts
+                // Run after delays to override other scripts
                 setTimeout(forceMobileVideo, 100);
                 setTimeout(forceMobileVideo, 500);
+                setTimeout(forceMobileVideo, 1000);
 
                 // Re-run on resize
                 window.addEventListener('resize', forceMobileVideo);
 
-                // Force play on load
-                video.play().catch(e => console.log('Autoplay blocked:', e));
+                // Aggressive play attempts
+                function tryPlay(source) {
+                  console.log('Attempting to play video from:', source);
+                  video.play().then(() => {
+                    console.log('Video playing successfully from:', source);
+                  }).catch(e => {
+                    console.warn('Autoplay blocked or failed from ' + source + ':', e.message);
+                  });
+                }
+
+                // Try to play immediately
+                tryPlay('initial');
+
+                // Wait for loadeddata event
+                video.addEventListener('loadeddata', function() {
+                  console.log('Video loadeddata event fired');
+                  tryPlay('loadeddata');
+                }, { once: true });
+
+                // Wait for canplay event
+                video.addEventListener('canplay', function() {
+                  console.log('Video canplay event fired');
+                  tryPlay('canplay');
+                }, { once: true });
 
                 // Retry play on user interaction
-                document.addEventListener('click', function playOnce() {
-                  video.play();
-                  document.removeEventListener('click', playOnce);
-                }, { once: true });
+                let played = false;
+                document.addEventListener('click', function() {
+                  if (!played && video.paused) {
+                    console.log('User clicked - attempting play');
+                    tryPlay('click');
+                    played = true;
+                  }
+                });
 
                 // Also try to play on touch (mobile)
-                document.addEventListener('touchstart', function playOnce() {
-                  video.play();
-                  document.removeEventListener('touchstart', playOnce);
-                }, { once: true });
+                document.addEventListener('touchstart', function() {
+                  if (!played && video.paused) {
+                    console.log('User touched - attempting play');
+                    tryPlay('touch');
+                    played = true;
+                  }
+                });
 
                 // Ensure loop
                 video.addEventListener('ended', function() {
+                  console.log('Video ended, restarting...');
                   video.currentTime = 0;
                   video.play();
                 });
+
+                // Check if video is actually playing
+                setTimeout(() => {
+                  console.log('Video status check - paused:', video.paused, 'currentTime:', video.currentTime, 'readyState:', video.readyState);
+                  if (video.paused) {
+                    console.warn('Video is still paused after 2 seconds. Requires user interaction.');
+                  }
+                }, 2000);
               })();
             </script>
 
