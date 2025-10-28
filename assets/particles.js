@@ -378,14 +378,28 @@
     document.hidden ? stop() : start();
   });
 
-  // Expose update function
+  // Expose API functions
   window.updateParticles = updateConfig;
+  window.stopParticles = stop;
+  window.startParticles = start;
 
   // Listen for theme changes
   window.addEventListener('themechange', (e) => {
     const theme = e.detail.config;
     if (theme && theme.particles) {
       updateConfig(theme.particles);
+    }
+  });
+
+  // Listen for capability changes
+  window.addEventListener('capabilitiesdetected', (e) => {
+    const caps = e.detail;
+    if (!caps.canHandleParticles) {
+      console.log('🚫 Device cannot handle particles, stopping');
+      stop();
+      if (canvas) {
+        canvas.style.display = 'none';
+      }
     }
   });
 })();
