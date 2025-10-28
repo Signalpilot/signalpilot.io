@@ -1323,28 +1323,46 @@
 
     .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
 
-    /* PayPal buttons - minimal transparent styling for mobile performance */
+    /* PayPal buttons - AGGRESSIVE dark theme styling */
     .pp-slot{
       background:transparent !important;
       padding:0;
+      border-radius:12px;
+      overflow:hidden;
     }
-    .pp-slot *{
-      background:transparent !important;
-    }
-    /* Target PayPal iframes and containers aggressively */
+
+    /* Force all PayPal elements to have dark/transparent background */
+    .pp-slot,
+    .pp-slot *,
     .pp-slot iframe,
-    .pp-slot div[id*="paypal"],
+    .pp-slot div,
     .pp-slot > div,
-    div[id*="paypal-button-container"] {
+    div[id*="paypal"],
+    div[id*="paypal"] *,
+    div[id^="paypal-button-container-"],
+    div[id^="paypal-button-container-"] *,
+    div[id^="paypal-button-container-"] > div,
+    div[id^="paypal-button-container-"] iframe {
+      background:transparent !important;
+      background-color:transparent !important;
+    }
+
+    /* Ensure PayPal button wrapper has no white space */
+    .pp-slot > div {
+      margin:0 !important;
+      padding:0 !important;
+    }
+
+    /* Target PayPal's inner button wrappers */
+    div[data-funding-source] {
       background:transparent !important;
     }
-    /* Force PayPal button containers to have no white background */
-    div[id^="paypal-button-container-"] {
+
+    /* Hide PayPal's white background containers */
+    .pp-slot [style*="background"] {
       background:transparent !important;
     }
-    div[id^="paypal-button-container-"] * {
-      background:transparent !important;
-    }
+
     /* Keep Buy Now button BLACK */
     #lifetime-form input[type="submit"] {
       background:#000000 !important;
@@ -3161,7 +3179,44 @@
 
         onError: function(){ alert('Payment failed. Please try again or email support@signalpilot.io'); }
 
-      }).render('#'+containerId);
+      }).render('#'+containerId).then(function(){
+
+        // AGGRESSIVE: Remove all white backgrounds from PayPal button after render
+        function forceTransparentBg(){
+          const container = document.getElementById(containerId);
+          if (container) {
+            // Force transparent background on all descendants
+            container.querySelectorAll('*').forEach(function(el){
+              el.style.setProperty('background', 'transparent', 'important');
+              el.style.setProperty('background-color', 'transparent', 'important');
+            });
+            // Force on container itself
+            container.style.setProperty('background', 'transparent', 'important');
+            container.style.setProperty('background-color', 'transparent', 'important');
+          }
+        }
+
+        // Run multiple times to catch async PayPal updates
+        setTimeout(forceTransparentBg, 50);
+        setTimeout(forceTransparentBg, 150);
+        setTimeout(forceTransparentBg, 500);
+        setTimeout(forceTransparentBg, 1000);
+
+        // Watch for PayPal injecting white backgrounds dynamically
+        const container = document.getElementById(containerId);
+        if (container && window.MutationObserver) {
+          const observer = new MutationObserver(forceTransparentBg);
+          observer.observe(container, {
+            attributes: true,
+            childList: true,
+            subtree: true,
+            attributeFilter: ['style', 'class']
+          });
+        }
+
+      }).catch(function(err){
+        console.warn('PayPal button render issue:', err);
+      });
 
     }
 
