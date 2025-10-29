@@ -4581,7 +4581,9 @@
 <script>
 // Load SignalPilot Theme System with cache busting
 (function() {
-  var VERSION = '20251028v2'; // Update this when themes change
+  // IMPORTANT: Update VERSION on each deployment (format: YYYYMMDDHHmm)
+  // This ensures users get fresh JS/CSS after updates
+  var VERSION = '202510292049'; // Last updated: 2025-10-29 20:49 UTC
 
   function loadScript(src, callback) {
     var s = document.createElement('script');
@@ -4604,16 +4606,54 @@
 </script>
 
 <script>
-// PWA Service Worker Registration
+// PWA Service Worker Registration with Aggressive Update Checking
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/service-worker.js')
       .then(function(registration) {
         console.log('ServiceWorker registration successful');
+
+        // Check for updates immediately
+        registration.update();
+
+        // Check for updates every 60 seconds
+        setInterval(function() {
+          registration.update();
+        }, 60000);
+
+        // Handle service worker updates
+        registration.addEventListener('updatefound', function() {
+          const newWorker = registration.installing;
+          console.log('New ServiceWorker found, installing...');
+
+          newWorker.addEventListener('statechange', function() {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              // New service worker is ready, skip waiting and reload
+              console.log('New ServiceWorker installed, activating...');
+              newWorker.postMessage({ type: 'SKIP_WAITING' });
+
+              // Optional: Show user notification (uncomment if desired)
+              // if (confirm('New version available! Reload to update?')) {
+              //   window.location.reload();
+              // }
+
+              // Auto-reload after 2 seconds
+              setTimeout(function() {
+                window.location.reload();
+              }, 2000);
+            }
+          });
+        });
       })
       .catch(function(err) {
         console.log('ServiceWorker registration failed: ', err);
       });
+
+    // Handle controller change (new SW activated)
+    navigator.serviceWorker.addEventListener('controllerchange', function() {
+      console.log('ServiceWorker controller changed, reloading...');
+      window.location.reload();
+    });
   });
 }
 </script>
