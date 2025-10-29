@@ -98,18 +98,30 @@
         };
 
       case 'matrix-rain':
-        // Matrix rain columns - fall from top
+        // Matrix rain columns - CONSISTENT and EVENLY DISTRIBUTED
+        // Use particle count to evenly space columns
+        if (!createParticle.matrixIndex) createParticle.matrixIndex = 0;
+
+        const columnSpacing = W / 75; // Divide screen width by column count
+        const xPosition = (createParticle.matrixIndex % 75) * columnSpacing + (columnSpacing / 2);
+
+        // Stagger Y positions evenly across the drop zone
+        const dropZone = H * 0.8; // Spread initial positions across 80% of screen height
+        const yOffset = (createParticle.matrixIndex % 20) * (dropZone / 20);
+
+        createParticle.matrixIndex++;
+
         return {
-          x: Math.random() * W,
-          y: Math.random() * -H, // Start above screen
+          x: xPosition,
+          y: -yOffset - 100, // Start just above screen, staggered
           vx: 0,
-          vy: Math.random() * 4 + 3, // Fall speed (slightly faster)
-          size: 20, // Font size - BIGGER for visibility
+          vy: 5, // CONSISTENT fall speed (was 3-7, now constant 5)
+          size: 20, // Font size
           chars: [], // Array of characters in this column
-          trailLength: Math.floor(Math.random() * 12) + 10, // 10-21 chars (longer trails)
-          speed: Math.random() * 0.3 + 0.2, // Character change speed
+          trailLength: Math.floor(Math.random() * 4) + 15, // 15-18 chars (tighter range)
+          speed: 0.3, // CONSISTENT character change speed (was 0.2-0.5)
           frame: 0,
-          alpha: 1.0 // Full opacity
+          alpha: 1.0
         };
 
       default: // stars
