@@ -103,13 +103,13 @@
           x: Math.random() * W,
           y: Math.random() * -H, // Start above screen
           vx: 0,
-          vy: Math.random() * 4 + 2, // Fall speed
-          size: 14, // Font size
+          vy: Math.random() * 4 + 3, // Fall speed (slightly faster)
+          size: 20, // Font size - BIGGER for visibility
           chars: [], // Array of characters in this column
-          trailLength: Math.floor(Math.random() * 15) + 8, // 8-22 chars
+          trailLength: Math.floor(Math.random() * 12) + 10, // 10-21 chars (longer trails)
           speed: Math.random() * 0.3 + 0.2, // Character change speed
           frame: 0,
-          alpha: 0.9
+          alpha: 1.0 // Full opacity
         };
 
       default: // stars
@@ -234,7 +234,7 @@
 
       case 'matrix-rain':
         // Falling Matrix rain column
-        ctx.font = `${p.size}px monospace`;
+        ctx.font = `bold ${p.size}px monospace`;  // BOLD for visibility
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
 
@@ -257,18 +257,27 @@
         for (let i = 0; i < p.trailLength; i++) {
           const charY = p.y + (i * p.size);
 
-          // Fade older characters
-          let alpha;
           if (i === 0) {
-            // Head character - bright white
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            // Head character - BRIGHT WHITE with glow
+            ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+            ctx.shadowBlur = 8;
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(p.chars[i], p.x, charY);
+            ctx.shadowBlur = 0;
+          } else if (i < 4) {
+            // Near-head characters - bright green with glow
+            const alpha = 0.95 - (i * 0.15);
+            ctx.shadowColor = `rgba(0, 255, 65, ${alpha * 0.6})`;
+            ctx.shadowBlur = 6;
+            ctx.fillStyle = `rgba(0, 255, 65, ${alpha})`;
+            ctx.fillText(p.chars[i], p.x, charY);
+            ctx.shadowBlur = 0;
           } else {
-            // Trail - fading green
-            alpha = (1 - i / p.trailLength) * p.alpha;
-            ctx.fillStyle = config.color.replace(/[\d.]+\)/, `${alpha})`);
+            // Trail - fading green (brighter than before)
+            const alpha = Math.max(0.3, (1 - i / p.trailLength) * p.alpha);
+            ctx.fillStyle = `rgba(0, 255, 65, ${alpha})`;
+            ctx.fillText(p.chars[i], p.x, charY);
           }
-
-          ctx.fillText(p.chars[i], p.x, charY);
         }
         break;
 

@@ -272,7 +272,7 @@
         type: 'matrix-rain',
         color: 'rgba(0, 255, 65, 0.85)',
         lineColor: 'rgba(0, 255, 65, 0.25)',
-        count: 35  // Fewer columns for authentic Matrix look
+        count: 75  // Heavy rain downpour
       },
       aurora: {
         colors: [
