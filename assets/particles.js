@@ -97,6 +97,21 @@
           pulseSpeed: Math.random() * 0.1 + 0.05
         };
 
+      case 'matrix-rain':
+        // Matrix rain columns - fall from top
+        return {
+          x: Math.random() * W,
+          y: Math.random() * -H, // Start above screen
+          vx: 0,
+          vy: Math.random() * 4 + 2, // Fall speed
+          size: 14, // Font size
+          chars: [], // Array of characters in this column
+          trailLength: Math.floor(Math.random() * 15) + 8, // 8-22 chars
+          speed: Math.random() * 0.3 + 0.2, // Character change speed
+          frame: 0,
+          alpha: 0.9
+        };
+
       default: // stars
         return {
           ...base,
@@ -105,6 +120,13 @@
           twinkleSpeed: Math.random() * 0.04 + 0.02
         };
     }
+  }
+
+  // Matrix characters (katakana, numbers, symbols)
+  const MATRIX_CHARS = 'ｦｱｳｴｵｶｷｹｺｻｼｽｾｿﾀﾂﾃﾅﾆﾇﾈﾊﾋﾎﾏﾐﾑﾒﾓﾔﾕﾗﾘﾜ0123456789ABCDEFZ:・."=*+-<>¦｜';
+
+  function getRandomMatrixChar() {
+    return MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)];
   }
 
   // Draw particle based on type
@@ -210,6 +232,46 @@
         ctx.fill();
         break;
 
+      case 'matrix-rain':
+        // Falling Matrix rain column
+        ctx.font = `${p.size}px monospace`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+
+        // Initialize chars array if empty
+        if (p.chars.length === 0) {
+          for (let i = 0; i < p.trailLength; i++) {
+            p.chars.push(getRandomMatrixChar());
+          }
+        }
+
+        // Randomly change characters
+        p.frame += p.speed;
+        if (p.frame > 1) {
+          p.frame = 0;
+          const idx = Math.floor(Math.random() * p.chars.length);
+          p.chars[idx] = getRandomMatrixChar();
+        }
+
+        // Draw trail of characters
+        for (let i = 0; i < p.trailLength; i++) {
+          const charY = p.y + (i * p.size);
+
+          // Fade older characters
+          let alpha;
+          if (i === 0) {
+            // Head character - bright white
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+          } else {
+            // Trail - fading green
+            alpha = (1 - i / p.trailLength) * p.alpha;
+            ctx.fillStyle = config.color.replace(/[\d.]+\)/, `${alpha})`);
+          }
+
+          ctx.fillText(p.chars[i], p.x, charY);
+        }
+        break;
+
       default: // stars
         // Twinkling star
         p.twinkle += p.twinkleSpeed;
@@ -237,7 +299,18 @@
     p.x += p.vx;
     p.y += p.vy;
 
-    // Wrap around edges
+    // Special handling for matrix-rain
+    if (config.type === 'matrix-rain') {
+      // When column falls off bottom, reset to top with new x position
+      if (p.y > H + (p.trailLength * p.size)) {
+        p.y = -p.size * p.trailLength;
+        p.x = Math.random() * W;
+        p.chars = []; // Reset characters
+      }
+      return;
+    }
+
+    // Wrap around edges for other particle types
     const margin = 20;
     if (p.x < -margin) p.x = W + margin;
     else if (p.x > W + margin) p.x = -margin;
