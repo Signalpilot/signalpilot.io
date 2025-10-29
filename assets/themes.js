@@ -253,7 +253,7 @@
     matrix: {
       name: 'Matrix',
       icon: '💚',
-      description: 'Digital rain aesthetic',
+      description: 'Digital rain - The Matrix',
       colors: {
         bg: '#000000',
         bgElev: '#001a00',
@@ -269,10 +269,10 @@
         border: 'rgba(0, 255, 65, 0.3)'
       },
       particles: {
-        type: 'stars',
+        type: 'matrix-rain',
         color: 'rgba(0, 255, 65, 0.85)',
         lineColor: 'rgba(0, 255, 65, 0.25)',
-        count: 90
+        count: 35  // Fewer columns for authentic Matrix look
       },
       aurora: {
         colors: [

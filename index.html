@@ -892,9 +892,9 @@
 
 
 
-    nav[aria-label="Main"]{display:flex;min-width:0;flex-shrink:10;overflow:hidden}
+    nav[aria-label="Main"]{display:flex;min-width:0;flex-shrink:10;overflow:visible}
 
-    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:.8rem;min-width:0;flex-shrink:10;overflow:hidden}
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:.8rem;min-width:0;flex-shrink:10;overflow:visible}
 
     .mobile-nav-header{display:none}
 
@@ -4052,75 +4052,58 @@
 
     /* ======================== Resources Dropdown ======================== */
 
-    function initResourcesDropdown() {
-      const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
-      const dropdownMenu = document.querySelector('.nav-dropdown-menu');
-      const dropdown = document.querySelector('.nav-dropdown');
+    // Use event delegation for Google Translate compatibility
+    (function() {
+      let dropdownOpen = false;
 
-      if (!dropdownToggle || !dropdownMenu || !dropdown) {
-        console.log('Resources dropdown elements not found');
-        return;
-      }
+      // Toggle dropdown on button click using event delegation
+      document.addEventListener('click', function(e) {
+        const toggle = e.target.closest('.nav-dropdown-toggle');
 
-      // Remove any existing listeners by cloning and replacing
-      const newToggle = dropdownToggle.cloneNode(true);
-      dropdownToggle.parentNode.replaceChild(newToggle, dropdownToggle);
+        if (toggle) {
+          e.preventDefault();
+          e.stopPropagation();
 
-      function openDropdown() {
-        dropdownMenu.classList.add('show');
-        newToggle.setAttribute('aria-expanded', 'true');
-      }
+          const dropdown = toggle.closest('.nav-dropdown');
+          const menu = dropdown ? dropdown.querySelector('.nav-dropdown-menu') : null;
 
-      function closeDropdown() {
-        dropdownMenu.classList.remove('show');
-        newToggle.setAttribute('aria-expanded', 'false');
-      }
+          if (menu) {
+            dropdownOpen = !dropdownOpen;
 
-      // Toggle on click
-      newToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const isOpen = dropdownMenu.classList.contains('show');
-        if (isOpen) closeDropdown();
-        else openDropdown();
-      });
+            if (dropdownOpen) {
+              menu.classList.add('show');
+              toggle.setAttribute('aria-expanded', 'true');
+            } else {
+              menu.classList.remove('show');
+              toggle.setAttribute('aria-expanded', 'false');
+            }
+          }
+          return;
+        }
 
-      // Close when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!dropdown.contains(e.target)) {
-          closeDropdown();
+        // Close dropdown when clicking outside
+        if (dropdownOpen && !e.target.closest('.nav-dropdown')) {
+          const menu = document.querySelector('.nav-dropdown-menu');
+          const toggle = document.querySelector('.nav-dropdown-toggle');
+
+          if (menu) menu.classList.remove('show');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          dropdownOpen = false;
         }
       });
 
       // Close on escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && dropdownMenu.classList.contains('show')) {
-          closeDropdown();
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && dropdownOpen) {
+          const menu = document.querySelector('.nav-dropdown-menu');
+          const toggle = document.querySelector('.nav-dropdown-toggle');
+
+          if (menu) menu.classList.remove('show');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          dropdownOpen = false;
         }
       });
-
-      // Close when clicking a dropdown link
-      dropdownMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', closeDropdown);
-      });
-
-      console.log('Resources dropdown initialized successfully');
-    }
-
-    // Initialize on DOMContentLoaded
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initResourcesDropdown);
-    } else {
-      initResourcesDropdown();
-    }
-
-    // Re-initialize after Google Translate loads (after 1 second delay)
-    setTimeout(initResourcesDropdown, 1000);
-
-    // Also re-initialize when Google Translate changes language
-    window.addEventListener('load', function() {
-      setTimeout(initResourcesDropdown, 2000);
-    });
+    })();
 
 
     /* ======================== Language Dropdown ======================== */
@@ -4623,7 +4606,7 @@
 (function() {
   // IMPORTANT: Update VERSION on each deployment (format: YYYYMMDDHHmm)
   // This ensures users get fresh JS/CSS after updates
-  var VERSION = '202510292125'; // Last updated: 2025-10-29 21:25 UTC
+  var VERSION = '202510292143'; // Last updated: 2025-10-29 21:43 UTC
 
   function loadScript(src, callback) {
     var s = document.createElement('script');
