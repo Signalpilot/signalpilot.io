@@ -248,6 +248,278 @@
           'rgba(20, 184, 166, 0.20)'
         ]
       }
+    },
+
+    matrix: {
+      name: 'Matrix',
+      icon: '💚',
+      description: 'Digital rain aesthetic',
+      colors: {
+        bg: '#000000',
+        bgElev: '#001a00',
+        bgSoft: '#003300',
+        text: '#00ff41',
+        muted: '#39ff14',
+        mutedSoft: '#00cc33',
+        brand: '#00ff41',
+        brandGlow: 'rgba(0, 255, 65, 0.7)',
+        accent: '#39ff14',
+        success: '#00cc33',
+        warn: '#ffff00',
+        border: 'rgba(0, 255, 65, 0.3)'
+      },
+      particles: {
+        type: 'stars',
+        color: 'rgba(0, 255, 65, 0.85)',
+        lineColor: 'rgba(0, 255, 65, 0.25)',
+        count: 90
+      },
+      aurora: {
+        colors: [
+          'rgba(0, 255, 65, 0.35)',
+          'rgba(57, 255, 20, 0.30)',
+          'rgba(0, 204, 51, 0.25)',
+          'rgba(0, 255, 65, 0.20)'
+        ]
+      }
+    },
+
+    midnight: {
+      name: 'Midnight',
+      icon: '🌙',
+      description: 'Deep night vibes',
+      colors: {
+        bg: '#0f0620',
+        bgElev: '#1a0d33',
+        bgSoft: '#2a1547',
+        text: '#e9d5ff',
+        muted: '#c4b5fd',
+        mutedSoft: '#a78bfa',
+        brand: '#7c3aed',
+        brandGlow: 'rgba(124, 58, 237, 0.6)',
+        accent: '#a78bfa',
+        success: '#34d399',
+        warn: '#fbbf24',
+        border: 'rgba(124, 58, 237, 0.25)'
+      },
+      particles: {
+        type: 'stars',
+        color: 'rgba(196, 181, 253, 0.9)',
+        lineColor: 'rgba(167, 139, 250, 0.3)',
+        count: 75
+      },
+      aurora: {
+        colors: [
+          'rgba(124, 58, 237, 0.40)',
+          'rgba(167, 139, 250, 0.35)',
+          'rgba(233, 213, 255, 0.25)',
+          'rgba(196, 181, 253, 0.30)'
+        ]
+      }
+    },
+
+    sakura: {
+      name: 'Sakura',
+      icon: '🌸',
+      description: 'Cherry blossom spring',
+      colors: {
+        bg: '#1a0511',
+        bgElev: '#2d0f1f',
+        bgSoft: '#3d1a2d',
+        text: '#fce7f3',
+        muted: '#fbcfe8',
+        mutedSoft: '#f9a8d4',
+        brand: '#ec4899',
+        brandGlow: 'rgba(236, 72, 153, 0.6)',
+        accent: '#f472b6',
+        success: '#86efac',
+        warn: '#fcd34d',
+        border: 'rgba(236, 72, 153, 0.22)'
+      },
+      particles: {
+        type: 'sparkles',
+        color: 'rgba(249, 168, 212, 0.85)',
+        lineColor: 'rgba(244, 114, 182, 0.3)',
+        count: 70
+      },
+      aurora: {
+        colors: [
+          'rgba(236, 72, 153, 0.40)',
+          'rgba(244, 114, 182, 0.35)',
+          'rgba(251, 207, 232, 0.25)',
+          'rgba(249, 168, 212, 0.30)'
+        ]
+      }
+    },
+
+    lava: {
+      name: 'Lava',
+      icon: '🌋',
+      description: 'Volcanic intensity',
+      colors: {
+        bg: '#1a0500',
+        bgElev: '#2d0f05',
+        bgSoft: '#3d1a0f',
+        text: '#fff1f2',
+        muted: '#fca5a5',
+        mutedSoft: '#f87171',
+        brand: '#dc2626',
+        brandGlow: 'rgba(220, 38, 38, 0.7)',
+        accent: '#fb923c',
+        success: '#84cc16',
+        warn: '#facc15',
+        border: 'rgba(220, 38, 38, 0.3)'
+      },
+      particles: {
+        type: 'fireflies',
+        color: 'rgba(251, 146, 60, 0.9)',
+        lineColor: 'rgba(220, 38, 38, 0.4)',
+        count: 60
+      },
+      aurora: {
+        colors: [
+          'rgba(220, 38, 38, 0.45)',
+          'rgba(251, 146, 60, 0.40)',
+          'rgba(248, 113, 113, 0.35)',
+          'rgba(252, 165, 165, 0.25)'
+        ]
+      }
+    },
+
+    crypto: {
+      name: 'Crypto',
+      icon: '₿',
+      description: 'Digital gold rush',
+      colors: {
+        bg: '#0a0800',
+        bgElev: '#1a1400',
+        bgSoft: '#2a2410',
+        text: '#fef9c3',
+        muted: '#fde047',
+        mutedSoft: '#facc15',
+        brand: '#f59e0b',
+        brandGlow: 'rgba(245, 158, 11, 0.7)',
+        accent: '#fb923c',
+        success: '#84cc16',
+        warn: '#ef4444',
+        border: 'rgba(245, 158, 11, 0.28)'
+      },
+      particles: {
+        type: 'sparkles',
+        color: 'rgba(253, 224, 71, 0.9)',
+        lineColor: 'rgba(245, 158, 11, 0.4)',
+        count: 65
+      },
+      aurora: {
+        colors: [
+          'rgba(245, 158, 11, 0.45)',
+          'rgba(251, 146, 60, 0.40)',
+          'rgba(253, 224, 71, 0.35)',
+          'rgba(234, 179, 8, 0.30)'
+        ]
+      }
+    },
+
+    nebula: {
+      name: 'Nebula',
+      icon: '🌌',
+      description: 'Cosmic wonder',
+      colors: {
+        bg: '#0a0015',
+        bgElev: '#150028',
+        bgSoft: '#25103d',
+        text: '#faf5ff',
+        muted: '#e9d5ff',
+        mutedSoft: '#d8b4fe',
+        brand: '#a855f7',
+        brandGlow: 'rgba(168, 85, 247, 0.7)',
+        accent: '#ec4899',
+        success: '#22d3ee',
+        warn: '#fb923c',
+        border: 'rgba(168, 85, 247, 0.25)'
+      },
+      particles: {
+        type: 'stars',
+        color: 'rgba(233, 213, 255, 0.9)',
+        lineColor: 'rgba(168, 85, 247, 0.35)',
+        count: 85
+      },
+      aurora: {
+        colors: [
+          'rgba(168, 85, 247, 0.45)',
+          'rgba(236, 72, 153, 0.40)',
+          'rgba(34, 211, 238, 0.35)',
+          'rgba(217, 70, 239, 0.30)'
+        ]
+      }
+    },
+
+    mint: {
+      name: 'Mint',
+      icon: '🍃',
+      description: 'Fresh and clean',
+      colors: {
+        bg: '#041711',
+        bgElev: '#0f2922',
+        bgSoft: '#1a3d33',
+        text: '#ecfdf5',
+        muted: '#99f6e4',
+        mutedSoft: '#5eead4',
+        brand: '#14b8a6',
+        brandGlow: 'rgba(20, 184, 166, 0.6)',
+        accent: '#2dd4bf',
+        success: '#10b981',
+        warn: '#f59e0b',
+        border: 'rgba(20, 184, 166, 0.25)'
+      },
+      particles: {
+        type: 'bubbles',
+        color: 'rgba(45, 212, 191, 0.8)',
+        lineColor: 'rgba(20, 184, 166, 0.3)',
+        count: 60
+      },
+      aurora: {
+        colors: [
+          'rgba(20, 184, 166, 0.40)',
+          'rgba(45, 212, 191, 0.35)',
+          'rgba(153, 246, 228, 0.25)',
+          'rgba(94, 234, 212, 0.30)'
+        ]
+      }
+    },
+
+    desert: {
+      name: 'Desert',
+      icon: '🏜️',
+      description: 'Warm sand dunes',
+      colors: {
+        bg: '#1a1000',
+        bgElev: '#2d1f05',
+        bgSoft: '#3d2f14',
+        text: '#fef3c7',
+        muted: '#fde68a',
+        mutedSoft: '#fcd34d',
+        brand: '#d97706',
+        brandGlow: 'rgba(217, 119, 6, 0.6)',
+        accent: '#f59e0b',
+        success: '#84cc16',
+        warn: '#ef4444',
+        border: 'rgba(217, 119, 6, 0.25)'
+      },
+      particles: {
+        type: 'sparkles',
+        color: 'rgba(252, 211, 77, 0.8)',
+        lineColor: 'rgba(217, 119, 6, 0.3)',
+        count: 50
+      },
+      aurora: {
+        colors: [
+          'rgba(217, 119, 6, 0.40)',
+          'rgba(245, 158, 11, 0.35)',
+          'rgba(252, 211, 77, 0.30)',
+          'rgba(253, 230, 138, 0.25)'
+        ]
+      }
     }
   };
 
