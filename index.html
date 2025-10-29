@@ -844,7 +844,18 @@
       flex-wrap:nowrap;
       width:100%;
       min-width:0;
-      overflow-x:clip;
+      position:relative;
+    }
+
+    /* Allow horizontal scroll as fallback if translation overflow occurs */
+    @media (min-width:1401px){
+      .nav{
+        overflow-x:auto;
+        scrollbar-width:none;
+      }
+      .nav::-webkit-scrollbar{
+        display:none;
+      }
     }
 
 
@@ -864,6 +875,19 @@
       white-space:nowrap;
     }
 
+    /* Allow brand to shrink slightly on very constrained screens with translations */
+    @media (max-width:1500px){
+      .brand{
+        font-size:1.3rem;
+      }
+    }
+
+    @media (max-width:1400px){
+      .brand{
+        font-size:1.25rem;
+      }
+    }
+
     html[data-theme="light"] .brand{
       color:#0f172a;
     }
@@ -876,9 +900,9 @@
 
 
 
-    nav[aria-label="Main"]{display:flex;min-width:0;flex-shrink:1}
+    nav[aria-label="Main"]{display:flex;min-width:0;flex-shrink:10;overflow:hidden}
 
-    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:.8rem;min-width:0;flex-shrink:1}
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:.8rem;min-width:0;flex-shrink:10;overflow:hidden}
 
     .mobile-nav-header{display:none}
 
@@ -1100,19 +1124,34 @@
 
     .cta-header{margin-left:.25rem;flex-shrink:0;padding:.5rem .9rem !important;font-size:.88rem !important}
 
-    /* Adjust for longer translations - compact nav items */
-    @media (max-width:1450px){
+    /* Adjust for longer translations - start compacting nav items earlier */
+    @media (max-width:1600px){
+      nav a{padding:.5rem .75rem;font-size:.92rem}
+      .nav-dropdown-toggle{padding:.5rem .75rem;font-size:.92rem}
+      nav ul{gap:.6rem}
+    }
+
+    /* Hide CTA earlier to prevent overlap with language/theme buttons during translation */
+    @media (max-width:1500px){
+      .cta-header{display:none !important}
       nav a{padding:.5rem .7rem;font-size:.9rem}
       .nav-dropdown-toggle{padding:.5rem .7rem;font-size:.9rem}
       nav ul{gap:.5rem}
     }
 
-    /* Hide CTA earlier on smaller screens to prevent overlap with theme button */
-    @media (max-width:1350px){
-      .cta-header{display:none !important}
-      nav a{padding:.5rem .6rem;font-size:.88rem}
-      .nav-dropdown-toggle{padding:.5rem .6rem;font-size:.88rem}
-      nav ul{gap:.4rem}
+    /* More compact for medium screens */
+    @media (max-width:1450px){
+      nav a{padding:.5rem .65rem;font-size:.88rem}
+      .nav-dropdown-toggle{padding:.5rem .65rem;font-size:.88rem}
+      nav ul{gap:.45rem}
+    }
+
+    /* Even more compact before hamburger menu appears */
+    @media (max-width:1400px){
+      nav a{padding:.5rem .6rem;font-size:.86rem}
+      .nav-dropdown-toggle{padding:.5rem .6rem;font-size:.86rem}
+      nav ul{gap:.35rem}
+      .nav{gap:.4rem}
     }
 
 
@@ -1125,11 +1164,11 @@
       flex-shrink:0 !important;
     }
 
-    /* Mobile hamburger menu appears at ≤1300px, so no nav width constraints needed */
+    /* Mobile hamburger menu appears at ≤1400px (increased from 1300px) */
     /* Nav items go into hamburger menu to prevent overlap with language/theme buttons */
     /* Activates earlier to accommodate longer text in translated languages */
 
-    @media (max-width:1300px){
+    @media (max-width:1400px){
       /* Ensure header buttons have adequate space */
       .nav{padding:.7rem 0}
 
