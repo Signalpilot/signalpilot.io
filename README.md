@@ -3,7 +3,7 @@
 **Live:** https://www.signalpilot.io
 **Repo:** https://github.com/Signalpilot/signalpilot.io
 
-A fast, static marketing website for Signal Pilot — 7 non-repainting TradingView indicators that map complete market cycles. The flagship **Pentarch™** system tracks 5-phase reversal sequences (TD→IGN→WRN→CAP→OUT), replacing basic "overbought/oversold" signals with precise cycle positioning.
+A fast, static marketing website for Signal Pilot — 7 non-repainting TradingView indicators that map complete market cycles. The flagship **Pentarch™** system tracks 5-phase reversal sequences (TD→IGN→WRN→CAP→BDN), replacing basic "overbought/oversold" signals with precise cycle positioning.
 
 > **Educational use only.** Nothing here is financial advice. Past performance does not guarantee future results.
 
@@ -37,7 +37,7 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
 
 ### The Elite Seven Indicators
 1. **SP — Pentarch** (★ FLAGSHIP)
-   *Complete trend regime detection system. Maps 5-phase market reversal sequences (TD→IGN→WRN→CAP→OUT).*
+   *Complete trend regime detection system. Maps 5-phase market reversal sequences (TD→IGN→WRN→CAP→BDN).*
 
 2. **SP — Omnideck** (ALL-IN-ONE)
    *Comprehensive overlay unifying 10 premium systems: TD Sequential, Squeeze Cloud, SuperTrend Ensemble, Supply/Demand Zones, Candlestick Patterns, and more.*
