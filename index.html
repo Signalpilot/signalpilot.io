@@ -2717,7 +2717,7 @@
 
 
       <div class="lang-dropdown">
-        <button id="langToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Select language" aria-expanded="false" aria-haspopup="true" style="font-size:1.3rem;padding:.5rem .7rem">
+        <button id="langToggle" onclick="toggleLang()" class="btn btn-ghost btn-sm" type="button" aria-label="Select language" aria-expanded="false" aria-haspopup="true" style="font-size:1.3rem;padding:.5rem .7rem">
           <span>🌐</span>
         </button>
         <div class="lang-dropdown-menu">
@@ -2774,7 +2774,7 @@
 
 
 
-      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav">Menu ☰</button>
+      <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" aria-expanded="false" aria-controls="mainnav">Menu ☰</button>
 
     </div>
 
@@ -4699,104 +4699,38 @@
 
 
 
-    /* ======================== Mobile menu ======================== */
+    /* ======================== Mobile menu - ULTRA SIMPLE ======================== */
 
-    // Use event delegation for Google Translate compatibility
-    (function(){
+    function toggleMenu() {
+      var nav = document.getElementById('mainnav');
+      var backdrop = document.getElementById('navBackdrop');
 
-      let isMenuOpen = false;
-      console.log('Mobile menu script loading...');
-
-      function lockScroll(lock){
-        document.body.style.overflow = lock ? 'hidden' : '';
-        const nav = document.getElementById('mainnav');
-        if(nav) nav.style.touchAction = lock ? 'none' : '';
+      if (!nav) {
+        alert('Menu element not found!');
+        return;
       }
 
-      function openMenu(){
-        console.log('Opening mobile menu');
-        const nav = document.getElementById('mainnav');
-        const backdrop = document.getElementById('navBackdrop');
-        const menuBtn = document.getElementById('menuToggle');
+      var isOpen = nav.style.display === 'flex';
 
-        if (!nav || !backdrop || !menuBtn) {
-          console.error('Cannot open menu - elements not found');
-          return;
-        }
-
-        nav.classList.add('open');
-        backdrop.classList.add('show');
-        menuBtn.setAttribute('aria-expanded','true');
-        lockScroll(true);
-        isMenuOpen = true;
+      if (isOpen) {
+        nav.style.display = 'none';
+        if (backdrop) backdrop.style.display = 'none';
+        document.body.style.overflow = '';
+      } else {
+        nav.style.display = 'flex';
+        if (backdrop) backdrop.style.display = 'block';
+        document.body.style.overflow = 'hidden';
       }
 
-      function closeMenu(){
-        console.log('Closing mobile menu');
-        const nav = document.getElementById('mainnav');
-        const backdrop = document.getElementById('navBackdrop');
-        const menuBtn = document.getElementById('menuToggle');
+      console.log('Menu toggled - now ' + (isOpen ? 'closed' : 'open'));
+    }
 
-        if (!nav || !backdrop || !menuBtn) {
-          console.error('Cannot close menu - elements not found');
-          return;
-        }
-
-        nav.classList.remove('open');
-        backdrop.classList.remove('show');
-        menuBtn.setAttribute('aria-expanded','false');
-        lockScroll(false);
-        isMenuOpen = false;
+    // Close menu when clicking backdrop
+    document.addEventListener('click', function(e) {
+      if (e.target.id === 'navBackdrop') {
+        toggleMenu();
       }
-
-      // Use event delegation on document to handle Google Translate DOM changes
-      document.addEventListener('click', function(e) {
-        // Check if click is on menu toggle button
-        if (e.target.closest('#menuToggle') || e.target.closest('.menu-toggle')) {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log('Menu button clicked via delegation, current state:', isMenuOpen ? 'open' : 'closed');
-          if (isMenuOpen) {
-            closeMenu();
-          } else {
-            openMenu();
-          }
-          return;
-        }
-
-        // Check if click is on backdrop
-        if (e.target.closest('#navBackdrop') || e.target.closest('.nav-backdrop')) {
-          console.log('Backdrop clicked');
-          closeMenu();
-          return;
-        }
-
-        // Check if click is on close button
-        if (e.target.closest('#mobileNavClose') || e.target.closest('.mobile-nav-close')) {
-          console.log('Close button clicked');
-          closeMenu();
-          return;
-        }
-
-        // Check if click is on a menu link
-        if (e.target.closest('#mainnav a')) {
-          console.log('Menu link clicked, closing menu');
-          closeMenu();
-          return;
-        }
-      });
-
-      // Escape key handler
-      document.addEventListener('keydown', function(e) {
-        if(e.key === 'Escape' && isMenuOpen) {
-          console.log('Escape pressed, closing menu');
-          closeMenu();
-        }
-      });
-
-      console.log('Mobile menu initialized with event delegation');
-
-    })();
+    });
 
 
     /* ======================== Resources Dropdown ======================== */
@@ -4855,85 +4789,59 @@
     })();
 
 
-    /* ======================== Language Dropdown ======================== */
+    /* ======================== Language Dropdown - ULTRA SIMPLE ======================== */
 
-    // Use event delegation for Google Translate compatibility
-    (function(){
-      let isLangOpen = false;
-      console.log('Language dropdown script loading...');
+    function toggleLang() {
+      var langMenu = document.querySelector('.lang-dropdown-menu');
 
-      function openLang() {
-        console.log('Opening language dropdown');
-        const langMenu = document.querySelector('.lang-dropdown-menu');
-        const langToggle = document.getElementById('langToggle');
-        if (!langMenu || !langToggle) {
-          console.error('Cannot open lang menu - elements not found');
-          return;
-        }
-        langMenu.classList.add('show');
-        langToggle.setAttribute('aria-expanded', 'true');
-        isLangOpen = true;
+      if (!langMenu) {
+        alert('Language menu not found!');
+        return;
       }
 
-      function closeLang() {
-        console.log('Closing language dropdown');
-        const langMenu = document.querySelector('.lang-dropdown-menu');
-        const langToggle = document.getElementById('langToggle');
-        if (!langMenu || !langToggle) return;
-        langMenu.classList.remove('show');
-        langToggle.setAttribute('aria-expanded', 'false');
-        isLangOpen = false;
+      var isOpen = langMenu.style.display === 'flex';
+
+      if (isOpen) {
+        langMenu.style.display = 'none';
+      } else {
+        langMenu.style.display = 'flex';
       }
 
-      // Use event delegation on document
-      document.addEventListener('click', function(e) {
-        // Check if click is on language toggle button
-        if (e.target.closest('#langToggle')) {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log('Lang button clicked via delegation, current state:', isLangOpen ? 'open' : 'closed');
-          if (isLangOpen) {
-            closeLang();
-          } else {
-            openLang();
-          }
-          return;
+      console.log('Language menu toggled - now ' + (isOpen ? 'closed' : 'open'));
+    }
+
+    // Close language dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      var langMenu = document.querySelector('.lang-dropdown-menu');
+      var langBtn = document.getElementById('langToggle');
+
+      if (langMenu && langBtn && langMenu.style.display === 'flex') {
+        if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
+          langMenu.style.display = 'none';
+        }
+      }
+    });
+
+    // Handle language selection
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('.lang-dropdown-menu button')) {
+        var btn = e.target.closest('.lang-dropdown-menu button');
+        var lang = btn.getAttribute('data-lang');
+
+        console.log('Language selected:', lang);
+
+        // Update hidden select and trigger Google Translate
+        var hiddenSelect = document.getElementById('langSel');
+        if (hiddenSelect) {
+          hiddenSelect.value = lang;
+          hiddenSelect.dispatchEvent(new Event('change'));
         }
 
-        // Check if click is on a language button
-        const langBtn = e.target.closest('.lang-dropdown-menu button');
-        if (langBtn) {
-          const lang = langBtn.getAttribute('data-lang');
-          console.log('Language selected:', lang);
-
-          // Update hidden select and trigger Google Translate
-          const hiddenSelect = document.getElementById('langSel');
-          if (hiddenSelect) {
-            hiddenSelect.value = lang;
-            hiddenSelect.dispatchEvent(new Event('change'));
-          }
-
-          closeLang();
-          return;
-        }
-
-        // Close when clicking outside dropdown
-        if (isLangOpen && !e.target.closest('.lang-dropdown')) {
-          console.log('Clicked outside lang dropdown, closing');
-          closeLang();
-        }
-      });
-
-      // Close on escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && isLangOpen) {
-          console.log('Escape pressed, closing lang dropdown');
-          closeLang();
-        }
-      });
-
-      console.log('Language dropdown initialized with event delegation');
-    })();
+        // Close dropdown
+        var langMenu = document.querySelector('.lang-dropdown-menu');
+        if (langMenu) langMenu.style.display = 'none';
+      }
+    });
 
 
 
