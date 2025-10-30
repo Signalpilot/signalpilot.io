@@ -4018,6 +4018,8 @@
         <p style="color:var(--muted-2);font-size:.85rem;margin:0">
 
           © 2025 Signal Pilot Labs. All rights reserved. Educational tools only—not financial advice.
+          <br><span style="color:var(--muted-2);font-size:.75rem;opacity:.6">v202510300050</span>
+
 
         </p>
 
@@ -4780,7 +4782,7 @@
 (function() {
   // IMPORTANT: Update VERSION on each deployment (format: YYYYMMDDHHmm)
   // This ensures users get fresh JS/CSS after updates
-  var VERSION = '202510300045'; // Last updated: 2025-10-30 00:45 UTC
+  var VERSION = '202510300050'; // Last updated: 2025-10-30 00:50 UTC
 
   function loadScript(src, callback) {
     var s = document.createElement('script');
@@ -4803,41 +4805,49 @@
 </script>
 
 <script>
-// PWA Service Worker Registration with Aggressive Update Checking
+// PWA Service Worker Registration with MAXIMUM AGGRESSIVE Update Checking
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/service-worker.js')
       .then(function(registration) {
         console.log('ServiceWorker registration successful');
 
-        // Check for updates immediately
+        // Check for updates IMMEDIATELY on load
         registration.update();
 
-        // Check for updates every 60 seconds
+        // Check for updates every 10 seconds (much more aggressive)
         setInterval(function() {
           registration.update();
-        }, 60000);
+        }, 10000);
+
+        // Check for updates on page visibility change (when user returns to tab)
+        document.addEventListener('visibilitychange', function() {
+          if (!document.hidden) {
+            registration.update();
+          }
+        });
+
+        // Check for updates on window focus
+        window.addEventListener('focus', function() {
+          registration.update();
+        });
 
         // Handle service worker updates
         registration.addEventListener('updatefound', function() {
           const newWorker = registration.installing;
           console.log('New ServiceWorker found, installing...');
 
+          // Show update notification banner
+          showUpdateBanner();
+
           newWorker.addEventListener('statechange', function() {
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              // New service worker is ready, skip waiting and reload
-              console.log('New ServiceWorker installed, activating...');
+              // New service worker is ready, skip waiting and reload IMMEDIATELY
+              console.log('New ServiceWorker installed, activating NOW...');
               newWorker.postMessage({ type: 'SKIP_WAITING' });
 
-              // Optional: Show user notification (uncomment if desired)
-              // if (confirm('New version available! Reload to update?')) {
-              //   window.location.reload();
-              // }
-
-              // Auto-reload after 2 seconds
-              setTimeout(function() {
-                window.location.reload();
-              }, 2000);
+              // INSTANT reload - no delay
+              window.location.reload();
             }
           });
         });
@@ -4853,7 +4863,19 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-</script>
+
+// Show update notification banner
+function showUpdateBanner() {
+  var banner = document.createElement('div');
+  banner.id = 'update-banner';
+  banner.innerHTML = '<div style="background:linear-gradient(135deg,#5b8aff,#76ddff);color:#fff;padding:.75rem 1.5rem;text-align:center;font-weight:600;font-size:.95rem;box-shadow:0 4px 12px rgba(0,0,0,.3);position:fixed;top:0;left:0;right:0;z-index:99999;animation:slideDown 0.3s ease">⚡ Update available! Refreshing...</div>';
+  document.body.appendChild(banner);
+}
+
+// Add animation for update banner
+var updateStyle = document.createElement('style');
+updateStyle.textContent = '@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}';
+document.head.appendChild(updateStyle);
 
 <script>
 // Force scroll to top on page load/refresh (Mobile fix)
