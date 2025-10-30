@@ -1099,9 +1099,8 @@
 
     .lang-dropdown-menu{
       position:fixed !important;
-      top:auto !important;
+      top:70px !important;
       right:20px !important;
-      margin-top:.5rem;
       background:rgba(10,12,20,1) !important;
       border:2px solid rgba(255,255,255,.4) !important;
       border-radius:12px;
@@ -1121,6 +1120,8 @@
 
     .lang-dropdown-menu.show{
       display:flex !important;
+      visibility:visible !important;
+      opacity:1 !important;
     }
 
     .lang-dropdown-menu::-webkit-scrollbar{
@@ -4702,32 +4703,59 @@
     /* ======================== Mobile menu - ULTRA SIMPLE ======================== */
 
     function toggleMenu() {
+      console.log('=== toggleMenu called ===');
+
       var nav = document.getElementById('mainnav');
       var backdrop = document.getElementById('navBackdrop');
 
       if (!nav) {
         alert('Menu element not found!');
+        console.error('mainnav element not found');
         return;
       }
 
-      var isOpen = nav.style.display === 'flex';
+      // Check current state by looking at the actual style
+      var isOpen = (nav.style.display === 'flex');
+      console.log('Current state:', isOpen ? 'OPEN' : 'CLOSED');
+      console.log('Current nav.style.display:', nav.style.display);
 
       if (isOpen) {
+        // Close menu
         nav.style.display = 'none';
         if (backdrop) backdrop.style.display = 'none';
         document.body.style.overflow = '';
+        console.log('>>> Menu CLOSED <<<');
       } else {
+        // Open menu - set ALL positioning and display properties via inline styles
         nav.style.display = 'flex';
+        nav.style.position = 'fixed';
+        nav.style.top = '70px';
+        nav.style.right = '20px';
+        nav.style.width = '280px';
+        nav.style.maxWidth = '90vw';
+        nav.style.background = '#1a1d2e';
+        nav.style.border = '2px solid rgba(255,255,255,0.4)';
+        nav.style.borderRadius = '12px';
+        nav.style.padding = '1rem';
+        nav.style.flexDirection = 'column';
+        nav.style.gap = '0.3rem';
+        nav.style.zIndex = '999998';
+        nav.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
+        nav.style.maxHeight = '80vh';
+        nav.style.overflowY = 'auto';
+        nav.style.visibility = 'visible';
+        nav.style.opacity = '1';
+
         if (backdrop) backdrop.style.display = 'block';
         document.body.style.overflow = 'hidden';
+        console.log('>>> Menu OPENED <<<');
       }
-
-      console.log('Menu toggled - now ' + (isOpen ? 'closed' : 'open'));
     }
 
     // Close menu when clicking backdrop
     document.addEventListener('click', function(e) {
       if (e.target.id === 'navBackdrop') {
+        console.log('Backdrop clicked');
         toggleMenu();
       }
     });
@@ -4792,22 +4820,48 @@
     /* ======================== Language Dropdown - ULTRA SIMPLE ======================== */
 
     function toggleLang() {
+      console.log('=== toggleLang called ===');
+
       var langMenu = document.querySelector('.lang-dropdown-menu');
 
       if (!langMenu) {
         alert('Language menu not found!');
+        console.error('.lang-dropdown-menu not found');
         return;
       }
 
-      var isOpen = langMenu.style.display === 'flex';
+      // Check current state by looking at the actual style
+      var isOpen = (langMenu.style.display === 'flex');
+      console.log('Current state:', isOpen ? 'OPEN' : 'CLOSED');
+      console.log('Current langMenu.style.display:', langMenu.style.display);
 
       if (isOpen) {
+        // Close dropdown
         langMenu.style.display = 'none';
+        console.log('>>> Lang dropdown CLOSED <<<');
       } else {
+        // Open dropdown - set ALL positioning and display properties via inline styles
         langMenu.style.display = 'flex';
-      }
+        langMenu.style.position = 'fixed';
+        langMenu.style.top = '70px';
+        langMenu.style.right = '20px';
+        langMenu.style.background = 'rgba(10,12,20,1)';
+        langMenu.style.border = '2px solid rgba(255,255,255,0.4)';
+        langMenu.style.borderRadius = '12px';
+        langMenu.style.padding = '0.5rem';
+        langMenu.style.minWidth = '180px';
+        langMenu.style.maxHeight = '500px';
+        langMenu.style.overflowY = 'auto';
+        langMenu.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
+        langMenu.style.flexDirection = 'column';
+        langMenu.style.gap = '0.25rem';
+        langMenu.style.zIndex = '9999998';
+        langMenu.style.backdropFilter = 'blur(12px)';
+        langMenu.style.visibility = 'visible';
+        langMenu.style.opacity = '1';
 
-      console.log('Language menu toggled - now ' + (isOpen ? 'closed' : 'open'));
+        console.log('>>> Lang dropdown OPENED <<<');
+      }
     }
 
     // Close language dropdown when clicking outside
@@ -4818,6 +4872,7 @@
       if (langMenu && langBtn && langMenu.style.display === 'flex') {
         if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
           langMenu.style.display = 'none';
+          console.log('Lang dropdown closed (clicked outside)');
         }
       }
     });
@@ -4839,7 +4894,10 @@
 
         // Close dropdown
         var langMenu = document.querySelector('.lang-dropdown-menu');
-        if (langMenu) langMenu.style.display = 'none';
+        if (langMenu) {
+          langMenu.classList.remove('show');
+          console.log('Lang dropdown closed (language selected)');
+        }
       }
     });
 
