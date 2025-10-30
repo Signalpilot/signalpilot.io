@@ -1,7 +1,7 @@
 // Service Worker for Signal Pilot PWA
-// Updated cache strategy: Network first for HTML, cache for assets
+// AGGRESSIVE UPDATE STRATEGY: Network-only for HTML, check for updates every 10 seconds
 // IMPORTANT: Update CACHE_VERSION on each deployment to match index.html VERSION
-const CACHE_VERSION = '202510301905'; // Last updated: 2025-10-30 19:05 UTC
+const CACHE_VERSION = '202510301909'; // Last updated: 2025-10-30 19:09 UTC
 const CACHE_NAME = `signal-pilot-${CACHE_VERSION}`;
 const ASSETS_TO_CACHE = [
   '/manifest.json',
@@ -9,6 +9,9 @@ const ASSETS_TO_CACHE = [
   '/monogram-square-favicon_192x192.png',
   '/monogram-square-favicon_512x512.png'
 ];
+
+// Check for updates every 10 seconds
+const UPDATE_CHECK_INTERVAL = 10000;
 
 // Install event - cache static assets only
 self.addEventListener('install', (event) => {
@@ -60,20 +63,22 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // NETWORK FIRST for HTML pages (always get fresh content)
+  // NETWORK ONLY for HTML pages (NO CACHING - always fresh)
   if (request.headers.get('accept').includes('text/html')) {
     event.respondWith(
-      fetch(request)
+      fetch(request, {
+        cache: 'no-cache',  // Force fresh fetch from server
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache'
+        }
+      })
         .then((response) => {
-          // Clone and cache the response
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseClone);
-          });
+          // DO NOT CACHE HTML - return fresh response immediately
           return response;
         })
         .catch(() => {
-          // Network failed, try cache
+          // Only use cache as absolute fallback (offline mode)
           return caches.match(request).then((cachedResponse) => {
             return cachedResponse || caches.match('/index.html');
           });
@@ -121,4 +126,30 @@ self.addEventListener('message', (event) => {
     console.log('[SW] Received SKIP_WAITING message');
     self.skipWaiting();
   }
+
+  if (event.data && event.data.type === 'CHECK_UPDATE') {
+    console.log('[SW] Checking for updates...');
+    self.registration.update();
+  }
+});
+
+// Periodic update check - check for new service worker every 10 seconds
+setInterval(() => {
+  console.log('[SW] Periodic update check');
+  self.registration.update().catch((err) => {
+    console.log('[SW] Update check failed:', err);
+  });
+}, UPDATE_CHECK_INTERVAL);
+
+// Notify clients when new version is available
+self.addEventListener('controllerchange', () => {
+  console.log('[SW] Controller changed - new version available');
+  self.clients.matchAll().then((clients) => {
+    clients.forEach((client) => {
+      client.postMessage({
+        type: 'NEW_VERSION_AVAILABLE',
+        version: CACHE_VERSION
+      });
+    });
+  });
 });
