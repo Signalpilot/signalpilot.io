@@ -995,6 +995,7 @@
     .lang-dropdown{
       position:relative;
       flex-shrink:0;
+      z-index:100001 !important;
     }
 
     .lang-dropdown-menu{
@@ -1013,7 +1014,7 @@
       display:none;
       flex-direction:column;
       gap:.25rem;
-      z-index:10000;
+      z-index:100000 !important;
       backdrop-filter:blur(12px);
       scrollbar-width:thin;
       scrollbar-color:rgba(91,138,255,.5) rgba(255,255,255,.1);
@@ -1196,7 +1197,7 @@
         padding:1.5rem 1rem;
         flex-direction:column;
         gap:.4rem;
-        z-index:9999;
+        z-index:99999 !important;
         transform:translateX(100%);
         transition:transform .3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow:-4px 0 20px rgba(0,0,0,.5);
@@ -1352,7 +1353,7 @@
         inset:0;
         background:rgba(0,0,0,.75);
         backdrop-filter:blur(4px);
-        z-index:9998;
+        z-index:99998 !important;
         display:none;
         opacity:0;
         transition:opacity .3s ease;
@@ -2579,7 +2580,7 @@
 
   <!-- MOVING BACKGROUND (video + css fallback) -->
 
-  <video id="bg-aurora-video" class="bg-aurora-video" autoplay muted playsinline loop preload="metadata" poster="assets/aurora.webp" aria-hidden="true" loading="lazy">
+  <video id="bg-aurora-video" class="bg-aurora-video" autoplay muted playsinline webkit-playsinline loop preload="auto" poster="assets/aurora.webp" aria-hidden="true">
 
     <source src="assets/aurora-720p.webm" type="video/webm" />
 
@@ -4898,15 +4899,52 @@
 
       if(!v) return;
 
-      function tryPlay(){ v.play().catch(()=>{}); }
+      // Remove if user prefers reduced motion
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        v.remove();
+        return;
+      }
 
-      v.addEventListener('canplay', tryPlay, {once:true});
+      console.log('Aurora video initializing...');
 
-      document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) tryPlay(); });
+      // Aggressive play function for iOS Safari compatibility
+      function tryPlay(source){
+        console.log('Attempting aurora video play from:', source);
+        v.play().then(() => {
+          console.log('Aurora video playing successfully');
+        }).catch(e => {
+          console.warn('Aurora autoplay blocked:', e.message);
+        });
+      }
 
-      // if user prefers reduced motion, pause
+      // Try immediately
+      tryPlay('immediate');
 
-      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.remove(); }
+      // Try on canplay
+      v.addEventListener('canplay', () => tryPlay('canplay'), {once:true});
+
+      // Try on loadeddata
+      v.addEventListener('loadeddata', () => tryPlay('loadeddata'), {once:true});
+
+      // Try on visibility change
+      document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) tryPlay('visibility'); });
+
+      // Try on user interaction (critical for iOS)
+      let interacted = false;
+      function playOnInteraction() {
+        if (!interacted && v.paused) {
+          interacted = true;
+          tryPlay('interaction');
+        }
+      }
+      document.addEventListener('click', playOnInteraction, {once:true});
+      document.addEventListener('touchstart', playOnInteraction, {once:true});
+
+      // Ensure loop
+      v.addEventListener('ended', () => {
+        v.currentTime = 0;
+        v.play();
+      });
 
     })();
 
