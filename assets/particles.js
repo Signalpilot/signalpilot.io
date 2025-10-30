@@ -102,8 +102,8 @@
         // Use particle count to evenly space columns
         if (!createParticle.matrixIndex) createParticle.matrixIndex = 0;
 
-        const columnSpacing = W / 75; // Divide screen width by column count
-        const xPosition = (createParticle.matrixIndex % 75) * columnSpacing + (columnSpacing / 2);
+        const columnSpacing = W / 60; // Divide screen width by column count (reduced from 75)
+        const xPosition = (createParticle.matrixIndex % 60) * columnSpacing + (columnSpacing / 2);
 
         // Stagger Y positions evenly across the drop zone
         const dropZone = H * 0.8; // Spread initial positions across 80% of screen height
@@ -115,13 +115,53 @@
           x: xPosition,
           y: -yOffset - 100, // Start just above screen, staggered
           vx: 0,
-          vy: 5, // CONSISTENT fall speed (was 3-7, now constant 5)
+          vy: 2.5, // SLOWER, SMOOTHER fall speed (reduced from 5)
           size: 20, // Font size
           chars: [], // Array of characters in this column
           trailLength: Math.floor(Math.random() * 4) + 15, // 15-18 chars (tighter range)
-          speed: 0.3, // CONSISTENT character change speed (was 0.2-0.5)
+          speed: 0.15, // SLOWER character change for less flicker (reduced from 0.3)
           frame: 0,
           alpha: 1.0
+        };
+
+      case 'bitcoin-rain':
+        // Falling Bitcoin symbols - golden rain
+        if (!createParticle.bitcoinIndex) createParticle.bitcoinIndex = 0;
+
+        const btcSpacing = W / 50; // 50 columns of falling bitcoins
+        const btcX = (createParticle.bitcoinIndex % 50) * btcSpacing + (btcSpacing / 2);
+        const btcDropZone = H * 0.8;
+        const btcYOffset = (createParticle.bitcoinIndex % 15) * (btcDropZone / 15);
+
+        createParticle.bitcoinIndex++;
+
+        return {
+          x: btcX,
+          y: -btcYOffset - 100,
+          vx: (Math.random() * 2 - 1) * 0.3, // Slight horizontal drift
+          vy: Math.random() * 1.5 + 1.5, // Fall speed 1.5-3
+          size: Math.random() * 10 + 20, // Size variation 20-30px
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() * 2 - 1) * 0.05, // Spinning
+          alpha: 0.7 + Math.random() * 0.3,
+          glow: Math.random() * Math.PI * 2,
+          glowSpeed: Math.random() * 0.06 + 0.03
+        };
+
+      case 'sakura-petals':
+        // Falling cherry blossom petals
+        return {
+          x: Math.random() * W,
+          y: -20 - Math.random() * H * 0.3, // Stagger initial positions
+          vx: (Math.random() * 2 - 1) * 0.4, // Gentle drift
+          vy: Math.random() * 0.8 + 0.5, // Slow fall 0.5-1.3
+          size: Math.random() * 6 + 4, // Size 4-10px
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() * 2 - 1) * 0.08, // Flutter
+          sway: Math.random() * Math.PI * 2,
+          swaySpeed: Math.random() * 0.04 + 0.02,
+          swayAmount: Math.random() * 1.5 + 1, // Side-to-side movement
+          alpha: 0.6 + Math.random() * 0.4
         };
 
       default: // stars
@@ -293,6 +333,65 @@
         }
         break;
 
+      case 'bitcoin-rain':
+        // Falling Bitcoin symbol with rotation and glow
+        p.rotation += p.rotationSpeed;
+        p.glow += p.glowSpeed;
+        const btcGlowIntensity = (Math.sin(p.glow) + 1) / 2; // 0 to 1
+
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+
+        // Glow effect
+        ctx.shadowColor = config.color.replace(/[\d.]+\)/, '0.8)');
+        ctx.shadowBlur = 15 * btcGlowIntensity;
+
+        // Draw Bitcoin symbol
+        ctx.globalAlpha = p.alpha;
+        ctx.font = `bold ${p.size}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = config.color;
+        ctx.fillText('₿', 0, 0);
+
+        ctx.shadowBlur = 0;
+        break;
+
+      case 'sakura-petals':
+        // Falling cherry blossom petal with sway
+        p.rotation += p.rotationSpeed;
+        p.sway += p.swaySpeed;
+        const swayOffset = Math.sin(p.sway) * p.swayAmount;
+
+        ctx.translate(p.x + swayOffset, p.y);
+        ctx.rotate(p.rotation);
+        ctx.globalAlpha = p.alpha;
+
+        // Draw petal shape (simplified 5-petal design)
+        ctx.fillStyle = config.color;
+
+        // Center
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 5 petals around center
+        for (let i = 0; i < 5; i++) {
+          const angle = (i * Math.PI * 2) / 5 - Math.PI / 2;
+          ctx.beginPath();
+          ctx.ellipse(
+            Math.cos(angle) * p.size * 0.4,
+            Math.sin(angle) * p.size * 0.4,
+            p.size * 0.5,
+            p.size * 0.3,
+            angle,
+            0,
+            Math.PI * 2
+          );
+          ctx.fill();
+        }
+        break;
+
       default: // stars
         // Twinkling star
         p.twinkle += p.twinkleSpeed;
@@ -327,6 +426,27 @@
         p.y = -p.size * p.trailLength;
         p.x = Math.random() * W;
         p.chars = []; // Reset characters
+      }
+      return;
+    }
+
+    // Special handling for bitcoin-rain - reset to top when falling off bottom
+    if (config.type === 'bitcoin-rain') {
+      if (p.y > H + 50) {
+        p.y = -50;
+        p.x = Math.random() * W;
+        p.rotation = Math.random() * Math.PI * 2;
+      }
+      return;
+    }
+
+    // Special handling for sakura-petals - reset to top when falling off bottom
+    if (config.type === 'sakura-petals') {
+      if (p.y > H + 30) {
+        p.y = -30;
+        p.x = Math.random() * W;
+        p.rotation = Math.random() * Math.PI * 2;
+        p.sway = Math.random() * Math.PI * 2;
       }
       return;
     }
