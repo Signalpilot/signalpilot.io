@@ -5164,7 +5164,7 @@
 (function() {
   // IMPORTANT: Update VERSION on each deployment (format: YYYYMMDDHHmm)
   // This ensures users get fresh JS/CSS after updates
-  var VERSION = '202510301909'; // Last updated: 2025-10-30 19:09 UTC
+  var VERSION = '202510301912'; // Last updated: 2025-10-30 19:12 UTC
 
   function loadScript(src, callback) {
     var s = document.createElement('script');
@@ -5187,82 +5187,35 @@
 </script>
 
 <script>
-// PWA Service Worker Registration with MAXIMUM AGGRESSIVE Update Checking
+// UNREGISTER SERVICE WORKER - Permanently remove PWA caching
+// Service worker was causing constant cache issues. Landing pages don't need offline mode.
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/service-worker.js', {
-      // CRITICAL: Don't cache the service worker file itself
-      updateViaCache: 'none',
-      // Force browser to check for SW updates on every page load
-      scope: '/'
-    })
-      .then(function(registration) {
-        console.log('ServiceWorker registration successful');
-
-        // Check for updates IMMEDIATELY on load
-        registration.update();
-
-        // Check for updates every 10 seconds (much more aggressive)
-        setInterval(function() {
-          registration.update();
-        }, 10000);
-
-        // Check for updates on page visibility change (when user returns to tab)
-        document.addEventListener('visibilitychange', function() {
-          if (!document.hidden) {
-            registration.update();
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      for (let registration of registrations) {
+        registration.unregister().then(function(success) {
+          if (success) {
+            console.log('Service Worker unregistered successfully');
           }
         });
-
-        // Check for updates on window focus
-        window.addEventListener('focus', function() {
-          registration.update();
-        });
-
-        // Handle service worker updates
-        registration.addEventListener('updatefound', function() {
-          const newWorker = registration.installing;
-          console.log('New ServiceWorker found, installing...');
-
-          // Show update notification banner
-          showUpdateBanner();
-
-          newWorker.addEventListener('statechange', function() {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              // New service worker is ready, skip waiting and reload IMMEDIATELY
-              console.log('New ServiceWorker installed, activating NOW...');
-              newWorker.postMessage({ type: 'SKIP_WAITING' });
-
-              // INSTANT reload - no delay
-              window.location.reload();
-            }
-          });
-        });
-      })
-      .catch(function(err) {
-        console.log('ServiceWorker registration failed: ', err);
-      });
-
-    // Handle controller change (new SW activated)
-    navigator.serviceWorker.addEventListener('controllerchange', function() {
-      console.log('ServiceWorker controller changed, reloading...');
-      window.location.reload();
+      }
     });
+
+    // Clear all caches
+    if ('caches' in window) {
+      caches.keys().then(function(cacheNames) {
+        return Promise.all(
+          cacheNames.map(function(cacheName) {
+            console.log('Deleting cache:', cacheName);
+            return caches.delete(cacheName);
+          })
+        );
+      }).then(function() {
+        console.log('All caches cleared');
+      });
+    }
   });
 }
-
-// Show update notification banner
-function showUpdateBanner() {
-  var banner = document.createElement('div');
-  banner.id = 'update-banner';
-  banner.innerHTML = '<div style="background:linear-gradient(135deg,#5b8aff,#76ddff);color:#fff;padding:.75rem 1.5rem;text-align:center;font-weight:600;font-size:.95rem;box-shadow:0 4px 12px rgba(0,0,0,.3);position:fixed;top:0;left:0;right:0;z-index:99999;animation:slideDown 0.3s ease">⚡ Update available! Refreshing...</div>';
-  document.body.appendChild(banner);
-}
-
-// Add animation for update banner
-var updateStyle = document.createElement('style');
-updateStyle.textContent = '@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}';
-document.head.appendChild(updateStyle);
 
 <script>
 // Force scroll to top on page load/refresh (Mobile fix)
