@@ -280,8 +280,8 @@
     const button = document.createElement('button');
     button.className = 'sp-theme-toggle';
     button.innerHTML = '🎨';
-    button.setAttribute('aria-label', 'Change theme');
-    button.setAttribute('title', 'Change theme');
+    button.setAttribute('aria-label', 'Theme selection');
+    button.setAttribute('title', 'Theme selection');
     button.onclick = () => openThemeModal();
     document.body.appendChild(button);
     return button;
@@ -302,8 +302,8 @@
     const header = document.createElement('div');
     header.className = 'sp-theme-modal-header';
     header.innerHTML = `
-      <h2 class="sp-theme-modal-title">Choose Your Theme</h2>
-      <button class="sp-theme-modal-close" aria-label="Close">×</button>
+      <h2 class="sp-theme-modal-title">Theme Selection</h2>
+      <button class="sp-theme-modal-close" aria-label="Close modal">×</button>
     `;
     header.querySelector('.sp-theme-modal-close').onclick = closeThemeModal;
 
