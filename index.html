@@ -678,27 +678,30 @@
       animation-duration:60s !important;
     }
 
-    /* MOBILE FIX: Disable video and reduce blend complexity to prevent GPU crash */
+    /* MOBILE OPTIMIZATION: Reduce video quality and blend complexity for older devices */
+    /* Modern iOS devices can handle the video, so we only disable on very small screens */
 
-    @media (max-width: 1024px) {
-
+    @media (max-width: 480px) {
+      /* Only disable video on very small mobile screens to save bandwidth */
       .bg-aurora-video{
         display:none !important;
         visibility:hidden !important;
       }
+    }
 
+    @media (max-width: 1024px) {
+      /* Optimize animations for mobile but keep video on tablets and modern phones */
       .bg-aurora{
-
         mix-blend-mode:normal !important;
-
         opacity:.35 !important;
-
         filter:blur(40px) saturate(100%) brightness(100%) !important;
-
         animation:none !important;
-
       }
 
+      /* Reduce video opacity on mobile for better performance */
+      .bg-aurora-video{
+        opacity:.4 !important;
+      }
     }
 
     /* Light mode background adjustments */
@@ -3805,12 +3808,8 @@
 
           if (progress < 1 && !hasInteracted) {
             requestAnimationFrame(animate);
-          } else {
-            // Return to center
-            setTimeout(() => {
-              if (!hasInteracted) setSliderPosition(50, true);
-            }, 500);
           }
+          // Animation completes at 100% and stays there to show the final "with Signal Pilot" result
         }
 
         animate();
@@ -4641,9 +4640,15 @@
       const closeBtn=document.getElementById('mobileNavClose');
 
       if (!menuBtn || !nav || !backdrop) {
-        console.warn('Mobile menu elements not found');
+        console.error('Mobile menu elements not found:', {
+          menuBtn: !!menuBtn,
+          nav: !!nav,
+          backdrop: !!backdrop
+        });
         return;
       }
+
+      console.log('Mobile menu initialized successfully');
 
       function lockScroll(lock){
         // Use body overflow only - less aggressive on iOS Safari
@@ -4653,6 +4658,7 @@
       }
 
       function open(){
+        console.log('Opening mobile menu');
         nav.classList.add('open');
         backdrop.classList.add('show');
         menuBtn.setAttribute('aria-expanded','true');
@@ -4660,13 +4666,17 @@
       }
 
       function close(){
+        console.log('Closing mobile menu');
         nav.classList.remove('open');
         backdrop.classList.remove('show');
         menuBtn.setAttribute('aria-expanded','false');
         lockScroll(false);
       }
 
-      menuBtn.addEventListener('click',()=>{
+      menuBtn.addEventListener('click',(e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Menu button clicked, current state:', nav.classList.contains('open') ? 'open' : 'closed');
         (nav.classList.contains('open') ? close : open)();
       });
 
