@@ -287,7 +287,7 @@
     midnight: {
       name: 'Midnight',
       icon: '🌙',
-      description: 'Deep night vibes',
+      description: 'Moonlit clouds and stars',
       colors: {
         bg: '#0f0620',
         bgElev: '#1a0d33',
@@ -303,10 +303,10 @@
         border: 'rgba(124, 58, 237, 0.25)'
       },
       particles: {
-        type: 'stars',
-        color: 'rgba(196, 181, 253, 0.9)',
+        type: 'moon-clouds',
+        color: 'rgba(196, 181, 253, 0.25)',
         lineColor: 'rgba(167, 139, 250, 0.3)',
-        count: 75
+        count: 70
       },
       aurora: {
         colors: [
@@ -355,7 +355,7 @@
     lava: {
       name: 'Lava',
       icon: '🌋',
-      description: 'Volcanic intensity',
+      description: 'Flames, embers, and volcanic heat',
       colors: {
         bg: '#1a0500',
         bgElev: '#2d0f05',
@@ -371,10 +371,10 @@
         border: 'rgba(220, 38, 38, 0.3)'
       },
       particles: {
-        type: 'fireflies',
+        type: 'lava-embers',
         color: 'rgba(251, 146, 60, 0.9)',
         lineColor: 'rgba(220, 38, 38, 0.4)',
-        count: 60
+        count: 75
       },
       aurora: {
         colors: [
@@ -386,10 +386,10 @@
       }
     },
 
-    crypto: {
-      name: 'Crypto',
+    digitalization: {
+      name: 'Digitalization',
       icon: '₿',
-      description: 'Bitcoin rain - to the moon',
+      description: 'Digital currency rain',
       colors: {
         bg: '#0a0800',
         bgElev: '#1a1400',
@@ -416,108 +416,6 @@
           'rgba(251, 146, 60, 0.40)',
           'rgba(253, 224, 71, 0.35)',
           'rgba(234, 179, 8, 0.30)'
-        ]
-      }
-    },
-
-    nebula: {
-      name: 'Nebula',
-      icon: '🌌',
-      description: 'Cosmic wonder',
-      colors: {
-        bg: '#0a0015',
-        bgElev: '#150028',
-        bgSoft: '#25103d',
-        text: '#faf5ff',
-        muted: '#e9d5ff',
-        mutedSoft: '#d8b4fe',
-        brand: '#a855f7',
-        brandGlow: 'rgba(168, 85, 247, 0.7)',
-        accent: '#ec4899',
-        success: '#22d3ee',
-        warn: '#fb923c',
-        border: 'rgba(168, 85, 247, 0.25)'
-      },
-      particles: {
-        type: 'stars',
-        color: 'rgba(233, 213, 255, 0.9)',
-        lineColor: 'rgba(168, 85, 247, 0.35)',
-        count: 85
-      },
-      aurora: {
-        colors: [
-          'rgba(168, 85, 247, 0.45)',
-          'rgba(236, 72, 153, 0.40)',
-          'rgba(34, 211, 238, 0.35)',
-          'rgba(217, 70, 239, 0.30)'
-        ]
-      }
-    },
-
-    mint: {
-      name: 'Mint',
-      icon: '🍃',
-      description: 'Fresh and clean',
-      colors: {
-        bg: '#041711',
-        bgElev: '#0f2922',
-        bgSoft: '#1a3d33',
-        text: '#ecfdf5',
-        muted: '#99f6e4',
-        mutedSoft: '#5eead4',
-        brand: '#14b8a6',
-        brandGlow: 'rgba(20, 184, 166, 0.6)',
-        accent: '#2dd4bf',
-        success: '#10b981',
-        warn: '#f59e0b',
-        border: 'rgba(20, 184, 166, 0.25)'
-      },
-      particles: {
-        type: 'bubbles',
-        color: 'rgba(45, 212, 191, 0.8)',
-        lineColor: 'rgba(20, 184, 166, 0.3)',
-        count: 60
-      },
-      aurora: {
-        colors: [
-          'rgba(20, 184, 166, 0.40)',
-          'rgba(45, 212, 191, 0.35)',
-          'rgba(153, 246, 228, 0.25)',
-          'rgba(94, 234, 212, 0.30)'
-        ]
-      }
-    },
-
-    desert: {
-      name: 'Desert',
-      icon: '🏜️',
-      description: 'Warm sand dunes',
-      colors: {
-        bg: '#1a1000',
-        bgElev: '#2d1f05',
-        bgSoft: '#3d2f14',
-        text: '#fef3c7',
-        muted: '#fde68a',
-        mutedSoft: '#fcd34d',
-        brand: '#d97706',
-        brandGlow: 'rgba(217, 119, 6, 0.6)',
-        accent: '#f59e0b',
-        success: '#84cc16',
-        warn: '#ef4444',
-        border: 'rgba(217, 119, 6, 0.25)'
-      },
-      particles: {
-        type: 'sparkles',
-        color: 'rgba(252, 211, 77, 0.8)',
-        lineColor: 'rgba(217, 119, 6, 0.3)',
-        count: 50
-      },
-      aurora: {
-        colors: [
-          'rgba(217, 119, 6, 0.40)',
-          'rgba(245, 158, 11, 0.35)',
-          'rgba(252, 211, 77, 0.30)',
-          'rgba(253, 230, 138, 0.25)'
         ]
       }
     }

@@ -164,6 +164,82 @@
           alpha: 0.6 + Math.random() * 0.4
         };
 
+      case 'lava-embers':
+        // Rising embers, flames, and smoke particles
+        const emberType = Math.random();
+        if (emberType < 0.5) {
+          // Hot ember
+          return {
+            x: Math.random() * W,
+            y: H + 20, // Start at bottom
+            vx: (Math.random() * 2 - 1) * 0.3,
+            vy: -(Math.random() * 1.5 + 1.2), // Rise up 1.2-2.7
+            size: Math.random() * 4 + 2, // 2-6px
+            type: 'ember',
+            glow: Math.random() * Math.PI * 2,
+            glowSpeed: Math.random() * 0.15 + 0.1,
+            heat: 1.0, // Starts hot
+            alpha: 0.9
+          };
+        } else if (emberType < 0.75) {
+          // Smoke particle
+          return {
+            x: Math.random() * W,
+            y: H + 10,
+            vx: (Math.random() * 2 - 1) * 0.5,
+            vy: -(Math.random() * 0.8 + 0.6), // Slower rise 0.6-1.4
+            size: Math.random() * 15 + 10, // 10-25px
+            type: 'smoke',
+            expansion: 1.0,
+            expansionSpeed: 0.02,
+            alpha: 0.4
+          };
+        } else {
+          // Flame particle
+          return {
+            x: Math.random() * W,
+            y: H + 15,
+            vx: (Math.random() * 2 - 1) * 0.2,
+            vy: -(Math.random() * 2 + 1.5), // Fast rise 1.5-3.5
+            size: Math.random() * 8 + 6, // 6-14px
+            type: 'flame',
+            flicker: Math.random() * Math.PI * 2,
+            flickerSpeed: Math.random() * 0.2 + 0.15,
+            alpha: 0.8
+          };
+        }
+
+      case 'moon-clouds':
+        // Drifting clouds and stars for midnight theme
+        const cloudType = Math.random();
+        if (cloudType < 0.7) {
+          // Cloud
+          return {
+            x: Math.random() * W,
+            y: Math.random() * H * 0.6, // Upper 60% of screen
+            vx: Math.random() * 0.3 + 0.1, // Drift right 0.1-0.4
+            vy: (Math.random() * 2 - 1) * 0.05, // Gentle vertical drift
+            size: Math.random() * 40 + 30, // 30-70px
+            type: 'cloud',
+            puff: Math.random() * Math.PI * 2,
+            puffSpeed: Math.random() * 0.02 + 0.01,
+            alpha: 0.15 + Math.random() * 0.15 // 0.15-0.3
+          };
+        } else {
+          // Twinkling star
+          return {
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: 0,
+            vy: 0,
+            size: Math.random() * 1.5 + 0.5,
+            type: 'star',
+            twinkle: Math.random() * Math.PI * 2,
+            twinkleSpeed: Math.random() * 0.04 + 0.02,
+            alpha: 0.6 + Math.random() * 0.4
+          };
+        }
+
       default: // stars
         return {
           ...base,
@@ -388,6 +464,130 @@
             0,
             Math.PI * 2
           );
+          ctx.fill();
+        }
+        break;
+
+      case 'lava-embers':
+        // Render embers, flames, and smoke
+        if (p.type === 'ember') {
+          // Hot glowing ember
+          p.glow += p.glowSpeed;
+          p.heat = Math.max(0, p.heat - 0.003); // Cool down over time
+
+          const emberGlow = (Math.sin(p.glow) + 1) / 2; // 0 to 1
+          const heatIntensity = p.heat * emberGlow;
+
+          // Outer glow (orange/red)
+          const emberGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 4);
+          emberGrad.addColorStop(0, `rgba(255, 100, 20, ${p.alpha * heatIntensity})`);
+          emberGrad.addColorStop(0.3, `rgba(255, 80, 0, ${p.alpha * heatIntensity * 0.6})`);
+          emberGrad.addColorStop(0.6, `rgba(220, 40, 0, ${p.alpha * heatIntensity * 0.3})`);
+          emberGrad.addColorStop(1, 'transparent');
+
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = emberGrad;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 4, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Hot core (white/yellow)
+          ctx.fillStyle = `rgba(255, 255, 180, ${heatIntensity})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2);
+          ctx.fill();
+
+        } else if (p.type === 'smoke') {
+          // Rising smoke
+          p.expansion += p.expansionSpeed;
+          const smokeSize = p.size * p.expansion;
+          p.alpha = Math.max(0, p.alpha - 0.002); // Fade out
+
+          // Dark smoke gradient
+          const smokeGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, smokeSize);
+          smokeGrad.addColorStop(0, `rgba(60, 30, 20, ${p.alpha * 0.6})`);
+          smokeGrad.addColorStop(0.4, `rgba(40, 20, 15, ${p.alpha * 0.4})`);
+          smokeGrad.addColorStop(0.7, `rgba(30, 15, 10, ${p.alpha * 0.2})`);
+          smokeGrad.addColorStop(1, 'transparent');
+
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = smokeGrad;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, smokeSize, 0, Math.PI * 2);
+          ctx.fill();
+
+        } else if (p.type === 'flame') {
+          // Animated flame
+          p.flicker += p.flickerSpeed;
+          const flickerIntensity = (Math.sin(p.flicker) + 1) / 2; // 0 to 1
+          const flameSize = p.size * (0.8 + flickerIntensity * 0.4);
+
+          // Flame gradient (yellow to red to transparent)
+          const flameGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y - flameSize, flameSize * 2);
+          flameGrad.addColorStop(0, `rgba(255, 255, 100, ${p.alpha})`);
+          flameGrad.addColorStop(0.2, `rgba(255, 180, 50, ${p.alpha * 0.9})`);
+          flameGrad.addColorStop(0.4, `rgba(255, 100, 20, ${p.alpha * 0.7})`);
+          flameGrad.addColorStop(0.6, `rgba(220, 50, 20, ${p.alpha * 0.4})`);
+          flameGrad.addColorStop(1, 'transparent');
+
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = flameGrad;
+
+          // Draw flame shape (elongated upward)
+          ctx.beginPath();
+          ctx.ellipse(p.x, p.y, flameSize * 0.6, flameSize * 1.5, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Bright core
+          ctx.fillStyle = `rgba(255, 255, 200, ${p.alpha * flickerIntensity})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, flameSize * 0.3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        break;
+
+      case 'moon-clouds':
+        // Render clouds and stars
+        if (p.type === 'cloud') {
+          // Drifting cloud
+          p.puff += p.puffSpeed;
+          const puffSize = 1 + Math.sin(p.puff) * 0.1; // Slight breathing effect
+
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = config.color;
+
+          // Draw cloud as multiple overlapping circles
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 0.5 * puffSize, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(p.x - p.size * 0.3, p.y + p.size * 0.2, p.size * 0.4 * puffSize, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(p.x + p.size * 0.3, p.y + p.size * 0.1, p.size * 0.45 * puffSize, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(p.x + p.size * 0.1, p.y - p.size * 0.2, p.size * 0.35 * puffSize, 0, Math.PI * 2);
+          ctx.fill();
+
+        } else if (p.type === 'star') {
+          // Twinkling star
+          p.twinkle += p.twinkleSpeed;
+          const starAlpha = p.alpha * (0.6 + Math.sin(p.twinkle) * 0.4);
+
+          ctx.globalAlpha = starAlpha;
+          ctx.fillStyle = config.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Star glow
+          ctx.globalAlpha = starAlpha * 0.4;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
           ctx.fill();
         }
         break;
