@@ -272,7 +272,7 @@
         type: 'matrix-rain',
         color: 'rgba(0, 255, 65, 0.85)',
         lineColor: 'rgba(0, 255, 65, 0.25)',
-        count: 75  // Heavy rain downpour
+        count: 60  // Smooth rain - slower, less dense
       },
       aurora: {
         colors: [
@@ -321,7 +321,7 @@
     sakura: {
       name: 'Sakura',
       icon: '🌸',
-      description: 'Cherry blossom spring',
+      description: 'Falling cherry blossoms',
       colors: {
         bg: '#1a0511',
         bgElev: '#2d0f1f',
@@ -337,7 +337,7 @@
         border: 'rgba(236, 72, 153, 0.22)'
       },
       particles: {
-        type: 'sparkles',
+        type: 'sakura-petals',
         color: 'rgba(249, 168, 212, 0.85)',
         lineColor: 'rgba(244, 114, 182, 0.3)',
         count: 70
@@ -389,7 +389,7 @@
     crypto: {
       name: 'Crypto',
       icon: '₿',
-      description: 'Digital gold rush',
+      description: 'Bitcoin rain - to the moon',
       colors: {
         bg: '#0a0800',
         bgElev: '#1a1400',
@@ -405,7 +405,7 @@
         border: 'rgba(245, 158, 11, 0.28)'
       },
       particles: {
-        type: 'sparkles',
+        type: 'bitcoin-rain',
         color: 'rgba(253, 224, 71, 0.9)',
         lineColor: 'rgba(245, 158, 11, 0.4)',
         count: 65
