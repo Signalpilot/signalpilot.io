@@ -2074,19 +2074,76 @@
       min-height:44px;
     }
 
-    /* MOBILE SAFETY: Simplify everything on small screens */
+    /* MOBILE PERFORMANCE: Aggressive optimization for smooth scrolling */
     @media (max-width: 1024px) {
-      /* Disable problematic properties */
-      *[style*="mix-blend-mode"] {
-        mix-blend-mode: normal !important;
-      }
-      /* Simplify animations */
-      .bg-aurora {
-        animation: none !important;
-      }
-      /* Ensure video is hidden */
-      video {
+      /* Completely disable background effects on mobile */
+      .bg-aurora,
+      .bg-aurora-video,
+      #bg-aurora-video,
+      .bg-stars,
+      #constellations,
+      .sp-constellations {
         display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+      }
+
+      /* Remove all expensive filters and blend modes */
+      * {
+        mix-blend-mode: normal !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        will-change: auto !important;
+      }
+
+      /* Keep hero video visible but optimize it */
+      #heroVideo,
+      video[id="heroVideo"] {
+        display: block !important;
+        visibility: visible !important;
+        transform: none !important;
+        filter: none !important;
+      }
+
+      /* Disable all animations on mobile */
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      /* Simplify gradients to solid colors */
+      .card,
+      .testimonial-card {
+        background: var(--bg-soft) !important;
+      }
+
+      /* Force content to stay visible during scroll (fix disappearing content) */
+      main,
+      section,
+      .container,
+      .hero,
+      .card,
+      article,
+      p,
+      h1, h2, h3, h4, h5, h6 {
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        -webkit-transform: none !important;
+      }
+
+      /* Disable smooth scrolling on mobile (causes jank) */
+      html {
+        scroll-behavior: auto !important;
+      }
+
+      /* Prevent paint ordering issues */
+      body {
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
       }
     }
     
