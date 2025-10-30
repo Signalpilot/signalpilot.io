@@ -2592,11 +2592,6 @@
 
       <nav id="mainnav" aria-label="Main">
 
-        <div class="mobile-nav-header">
-          <span class="mobile-nav-title">Menu</span>
-          <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">×</button>
-        </div>
-
         <ul>
 
           <li><a href="#why">Why Us?</a></li>
@@ -4579,11 +4574,45 @@
         btn.addEventListener('click', function() {
           console.log('Language selected:', lang.code);
 
-          // Update hidden select and trigger Google Translate
+          // Save language preference
+          localStorage.setItem('sp_lang', lang.code);
+
+          // Set Google Translate cookie
+          const target = (lang.code === 'zh') ? 'zh-CN' : lang.code;
+          const value = '/en/' + target;
+          document.cookie = 'googtrans=' + value + '; path=/; max-age=31536000';
+
+          // Update HTML attributes
+          document.documentElement.lang = target;
+          document.documentElement.dir = (lang.code === 'ar') ? 'rtl' : 'ltr';
+
+          // Update hidden select
           const hiddenSelect = document.getElementById('langSel');
           if (hiddenSelect) {
             hiddenSelect.value = lang.code;
-            hiddenSelect.dispatchEvent(new Event('change'));
+          }
+
+          // Load Google Translate if not already loaded and not English
+          if (lang.code !== 'en' && !window.google) {
+            if (!window.__gte_loading) {
+              window.__gte_loading = true;
+              const script = document.createElement('script');
+              script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+              script.async = true;
+              script.onload = function() {
+                // Reload page to apply translation
+                setTimeout(() => window.location.reload(), 100);
+              };
+              document.head.appendChild(script);
+            }
+          } else if (lang.code === 'en') {
+            // Clear Google Translate cookie for English
+            document.cookie = 'googtrans=; path=/; max-age=0';
+            // Reload page to remove translation
+            window.location.reload();
+          } else {
+            // Google Translate already loaded, just reload
+            window.location.reload();
           }
 
           // Track event if analytics available
