@@ -210,7 +210,30 @@
         }
 
       case 'moon-clouds':
-        // Drifting clouds and stars for midnight theme
+        // Drifting clouds, stars, and a moon for midnight theme
+
+        // First particle is always the moon (only create once)
+        if (!createParticle.moonCreated) {
+          createParticle.moonCreated = true;
+          return {
+            x: W * 0.85, // Upper right area (85% across)
+            y: H * 0.15, // 15% down from top
+            vx: 0,
+            vy: 0,
+            size: 60, // Large moon
+            type: 'moon',
+            glow: 0,
+            glowSpeed: 0.01,
+            alpha: 0.9,
+            craters: [ // Random crater positions for detail
+              {x: 0.2, y: 0.3, size: 0.15},
+              {x: -0.3, y: 0.1, size: 0.2},
+              {x: 0.1, y: -0.2, size: 0.12},
+              {x: -0.1, y: -0.3, size: 0.18}
+            ]
+          };
+        }
+
         const cloudType = Math.random();
         if (cloudType < 0.7) {
           // Cloud
@@ -547,8 +570,62 @@
         break;
 
       case 'moon-clouds':
-        // Render clouds and stars
-        if (p.type === 'cloud') {
+        // Render moon, clouds, and stars
+        if (p.type === 'moon') {
+          // Draw beautiful moon with glow and craters
+          p.glow += p.glowSpeed;
+          const glowIntensity = (Math.sin(p.glow) * 0.15 + 0.85); // Gentle pulsing 0.7-1.0
+
+          // Outer glow halo
+          const haloGrad = ctx.createRadialGradient(p.x, p.y, p.size * 0.5, p.x, p.y, p.size * 2.5);
+          haloGrad.addColorStop(0, 'rgba(196, 181, 253, 0.3)');
+          haloGrad.addColorStop(0.4, 'rgba(196, 181, 253, 0.15)');
+          haloGrad.addColorStop(1, 'transparent');
+
+          ctx.globalAlpha = p.alpha * glowIntensity;
+          ctx.fillStyle = haloGrad;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Main moon body with gradient
+          const moonGrad = ctx.createRadialGradient(
+            p.x - p.size * 0.3, p.y - p.size * 0.3, 0,
+            p.x, p.y, p.size
+          );
+          moonGrad.addColorStop(0, 'rgba(245, 240, 255, 0.95)');
+          moonGrad.addColorStop(0.6, 'rgba(220, 210, 245, 0.9)');
+          moonGrad.addColorStop(1, 'rgba(196, 181, 253, 0.8)');
+
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = moonGrad;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Draw craters for detail
+          ctx.globalAlpha = p.alpha * 0.2;
+          ctx.fillStyle = 'rgba(150, 130, 200, 0.3)';
+          p.craters.forEach(crater => {
+            ctx.beginPath();
+            ctx.arc(
+              p.x + crater.x * p.size,
+              p.y + crater.y * p.size,
+              crater.size * p.size,
+              0,
+              Math.PI * 2
+            );
+            ctx.fill();
+          });
+
+          // Bright highlight spot
+          ctx.globalAlpha = p.alpha * 0.6;
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+          ctx.beginPath();
+          ctx.arc(p.x - p.size * 0.25, p.y - p.size * 0.25, p.size * 0.2, 0, Math.PI * 2);
+          ctx.fill();
+
+        } else if (p.type === 'cloud') {
           // Drifting cloud
           p.puff += p.puffSpeed;
           const puffSize = 1 + Math.sin(p.puff) * 0.1; // Slight breathing effect
@@ -648,6 +725,26 @@
         p.rotation = Math.random() * Math.PI * 2;
         p.sway = Math.random() * Math.PI * 2;
       }
+      return;
+    }
+
+    // Special handling for moon-clouds
+    if (config.type === 'moon-clouds') {
+      // Moon stays fixed
+      if (p.type === 'moon') {
+        p.x = W * 0.85; // Keep moon in upper right
+        p.y = H * 0.15;
+        return;
+      }
+
+      // Clouds wrap around horizontally, reset vertically
+      if (p.type === 'cloud') {
+        if (p.x > W + p.size) p.x = -p.size;
+        if (p.y < -p.size || p.y > H * 0.7) p.y = Math.random() * H * 0.5;
+        return;
+      }
+
+      // Stars don't move (vx and vy are 0)
       return;
     }
 
