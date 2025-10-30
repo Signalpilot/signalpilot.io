@@ -3787,6 +3787,9 @@
 
       // Feature 1: Auto-animation on page load
       function autoSweep() {
+        // Start at 0% (full "without" mode)
+        setSliderPosition(0, false);
+
         let progress = 0;
         const duration = 3000; // 3 seconds
         const startTime = Date.now();
@@ -3805,12 +3808,8 @@
 
           if (progress < 1 && !hasInteracted) {
             requestAnimationFrame(animate);
-          } else {
-            // Return to center
-            setTimeout(() => {
-              if (!hasInteracted) setSliderPosition(50, true);
-            }, 500);
           }
+          // End at 100% (full "with" mode) - no return to center
         }
 
         animate();
@@ -3866,7 +3865,7 @@
       // Initialize
       function initSlider() {
         updateOverlayImageWidth();
-        setSliderPosition(50, false);
+        setSliderPosition(0, false);
       }
 
       // Feature 8: Keyboard navigation
@@ -3877,7 +3876,7 @@
         const isInView = rect.top < window.innerHeight && rect.bottom > 0;
 
         if (isInView) {
-          let currentPercentage = parseFloat(handle.style.left) || 50;
+          let currentPercentage = parseFloat(handle.style.left) || 0;
 
           if (e.key === 'ArrowLeft') {
             e.preventDefault();
