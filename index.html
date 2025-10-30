@@ -2126,9 +2126,10 @@
       }
 
       /* Force content to stay visible during scroll (fix disappearing content) */
-      main,
-      section,
-      .container,
+      /* BUT exclude UI elements that need to be hidden (mobile nav, dropdowns) */
+      main:not(.mobile-nav):not(.lang-dropdown-menu),
+      section:not(.mobile-nav):not(.lang-dropdown-menu),
+      .container:not(.mobile-nav):not(.lang-dropdown-menu),
       .hero,
       .card,
       article,
@@ -2138,6 +2139,13 @@
         opacity: 1 !important;
         visibility: visible !important;
         -webkit-transform: none !important;
+      }
+
+      /* Ensure UI overlays stay hidden when they should be */
+      .mobile-nav:not(.active),
+      .lang-dropdown-menu:not(.active) {
+        opacity: 0 !important;
+        visibility: hidden !important;
       }
 
       /* Disable smooth scrolling on mobile (causes jank) */
@@ -2676,13 +2684,6 @@
 
 
   <main id="main">
-
-    <!-- DEPLOYMENT TEST BANNER - Remove after confirming deployment works -->
-    <div style="position:fixed;top:0;left:0;right:0;background:linear-gradient(135deg,#f9a23c,#ff6b9d);color:#fff;padding:0.75rem;text-align:center;font-weight:700;z-index:999999;box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-      ✅ SITE UPDATED - VERSION 202510301807 - If you see this, deployment works! (Language dropdown & mobile nav fixed)
-    </div>
-    <div style="height:52px;"></div>
-    <!-- END TEST BANNER -->
 
     <!-- HERO -->
 
@@ -4666,7 +4667,6 @@
       // Event listeners
       langBtn.addEventListener('click', function(e) {
         console.log('🌐 Language button clicked!');
-        alert('Language button clicked! Menu should toggle now.');
         toggle();
       });
 
@@ -5160,7 +5160,7 @@
 (function() {
   // IMPORTANT: Update VERSION on each deployment (format: YYYYMMDDHHmm)
   // This ensures users get fresh JS/CSS after updates
-  var VERSION = '202510301807'; // Last updated: 2025-10-30 18:07 UTC
+  var VERSION = '202510301830'; // Last updated: 2025-10-30 18:30 UTC
 
   function loadScript(src, callback) {
     var s = document.createElement('script');
