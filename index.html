@@ -1292,123 +1292,81 @@
         z-index:999999 !important;
       }
 
-      /* Simple dropdown menu instead of slide-in panel */
+      /* Hide original desktop nav on mobile */
       nav[aria-label="Main"]{
         display:none !important;
-        position:fixed !important;
-        top:70px !important;
-        right:20px !important;
-        width:280px !important;
-        max-width:90vw !important;
-        background:#1a1d2e !important;
-        border:2px solid rgba(255,255,255,.4) !important;
-        border-radius:12px !important;
-        padding:1rem !important;
-        flex-direction:column !important;
-        gap:.3rem !important;
-        z-index:999998 !important;
-        box-shadow:0 8px 32px rgba(0,0,0,.8) !important;
-        max-height:80vh !important;
-        overflow-y:auto !important;
       }
 
-      nav[aria-label="Main"].open{
-        display:flex !important;
+      /* Mobile nav backdrop */
+      .mobile-nav-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 9998;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+      .mobile-nav-backdrop.active {
+        opacity: 1;
+        visibility: visible;
       }
 
-      nav ul{
-        flex-direction:column;
-        gap:.2rem;
-        display:flex !important;
-        visibility:visible !important;
-        opacity:1 !important;
-        list-style:none !important;
-        margin:0 !important;
-        padding:0 !important;
+      /* Mobile menu panel - slides in from right */
+      .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(85vw, 380px);
+        background: #0a0c14;
+        z-index: 9999;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        box-shadow: -8px 0 32px rgba(0, 0, 0, 0.8);
+      }
+      .mobile-nav.active {
+        transform: translateX(0);
       }
 
-      nav li{
-        display:block !important;
-        visibility:visible !important;
-        opacity:1 !important;
-        list-style:none !important;
+      /* Menu content styling */
+      .mobile-nav-header {
+        padding: 1.5rem 1.25rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
 
-      /* Hide mobile nav header for simple dropdown */
-      .mobile-nav-header{
-        display:none !important;
+      .mobile-nav-close {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
       }
 
-      .mobile-nav-title{
-        display:none !important;
+      .mobile-nav-links {
+        padding: 1rem 0;
       }
 
-      .mobile-nav-close{
-        display:none !important;
+      .mobile-nav-links a {
+        display: block;
+        padding: 1rem 1.25rem;
+        color: #b7c2d9;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.05rem;
+        transition: all 0.2s ease;
+        border-left: 3px solid transparent;
       }
 
-      nav a{
-        padding:.7rem 1rem;
-        font-size:1.05rem;
-        color:#ffffff !important;
-        font-weight:600;
-        display:block !important;
-        visibility:visible !important;
-        opacity:1 !important;
-        background:transparent !important;
-        text-align:left;
-        width:100%;
-        text-decoration:none !important;
-        border-radius:8px;
-        transition:background 0.2s ease;
-        font-family:'Space Grotesk',system-ui,sans-serif !important;
-        line-height:1.4 !important;
-        letter-spacing:0 !important;
-      }
-
-      nav a:hover, nav a:focus{
-        background:rgba(91,138,255,.2) !important;
-        color:#ffffff !important;
-      }
-
-      /* Mobile dropdown styles */
-      .nav-dropdown-toggle{
-        padding:.7rem 1rem;
-        font-size:1.05rem;
-        color:#ffffff !important;
-        font-weight:600;
-        display:block !important;
-        width:100%;
-        text-align:left;
-        border-radius:8px;
-        background:transparent !important;
-      }
-
-      .nav-dropdown-toggle:hover,
-      .nav-dropdown-toggle:focus{
-        background:rgba(91,138,255,.2) !important;
-        color:#ffffff !important;
-      }
-
-      .nav-dropdown-menu{
-        position:static;
-        margin-top:.25rem;
-        margin-left:1rem;
-        background:transparent;
-        border:none;
-        box-shadow:none;
-        padding:0;
-        backdrop-filter:none;
-      }
-
-      .nav-dropdown-menu li{
-        margin-bottom:.25rem;
-      }
-
-      .nav-dropdown-menu a{
-        padding:.6rem 1rem;
-        font-size:.95rem;
-        opacity:.9;
+      .mobile-nav-links a:active {
+        background: rgba(91, 138, 255, 0.15);
+        border-left-color: #5b8aff;
+        color: #fff;
       }
 
       .cta-header{display:none}
@@ -1418,23 +1376,6 @@
         right:auto;
         left:0;
         min-width:160px;
-      }
-
-      .nav-backdrop{
-        position:fixed;
-        inset:0;
-        background:rgba(0,0,0,.3);
-        backdrop-filter:blur(2px);
-        z-index:999997 !important;
-        display:none;
-        opacity:0;
-        transition:opacity .2s ease;
-      }
-
-      .nav-backdrop.show{
-        display:block !important;
-        opacity:1 !important;
-        visibility:visible !important;
       }
 
     }
@@ -2775,7 +2716,7 @@
 
 
 
-      <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" aria-expanded="false" aria-controls="mainnav">Menu ☰</button>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav">Menu ☰</button>
 
     </div>
 
@@ -4700,65 +4641,80 @@
 
 
 
-    /* ======================== Mobile menu - ULTRA SIMPLE ======================== */
+    /* ======================== Mobile menu - Direct child of body ======================== */
 
-    function toggleMenu() {
-      console.log('=== toggleMenu called ===');
+    // Mobile menu - create as direct child of body to escape stacking context
+    (function() {
+      const menuBtn = document.getElementById('menuToggle');
+      if (!menuBtn) return;
 
-      var nav = document.getElementById('mainnav');
-      var backdrop = document.getElementById('navBackdrop');
+      // Create backdrop
+      const backdrop = document.createElement('div');
+      backdrop.className = 'mobile-nav-backdrop';
 
-      if (!nav) {
-        alert('Menu element not found!');
-        console.error('mainnav element not found');
-        return;
-      }
+      // Create mobile nav container
+      const mobileNav = document.createElement('div');
+      mobileNav.className = 'mobile-nav';
 
-      // Check current state by looking at the actual style
-      var isOpen = (nav.style.display === 'flex');
-      console.log('Current state:', isOpen ? 'OPEN' : 'CLOSED');
-      console.log('Current nav.style.display:', nav.style.display);
+      // Create header with close button
+      const header = document.createElement('div');
+      header.className = 'mobile-nav-header';
+      header.innerHTML = `
+        <span style="color:#fff;font-weight:700;font-size:1.1rem">Menu</span>
+        <button class="mobile-nav-close">&times;</button>
+      `;
 
-      if (isOpen) {
-        // Close menu
-        nav.style.display = 'none';
-        if (backdrop) backdrop.style.display = 'none';
-        document.body.style.overflow = '';
-        console.log('>>> Menu CLOSED <<<');
-      } else {
-        // Open menu - set ALL positioning and display properties via inline styles
-        nav.style.display = 'flex';
-        nav.style.position = 'fixed';
-        nav.style.top = '70px';
-        nav.style.right = '20px';
-        nav.style.width = '280px';
-        nav.style.maxWidth = '90vw';
-        nav.style.background = '#1a1d2e';
-        nav.style.border = '2px solid rgba(255,255,255,0.4)';
-        nav.style.borderRadius = '12px';
-        nav.style.padding = '1rem';
-        nav.style.flexDirection = 'column';
-        nav.style.gap = '0.3rem';
-        nav.style.zIndex = '999998';
-        nav.style.boxShadow = '0 8px 32px rgba(0,0,0,0.8)';
-        nav.style.maxHeight = '80vh';
-        nav.style.overflowY = 'auto';
-        nav.style.visibility = 'visible';
-        nav.style.opacity = '1';
+      // Create links container
+      const links = document.createElement('div');
+      links.className = 'mobile-nav-links';
+      links.innerHTML = `
+        <a href="#why">Why Us?</a>
+        <a href="#inside">What's inside</a>
+        <a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">📚 Documentation</a>
+        <a href="https://education.signalpilot.io/" target="_blank" rel="noopener">🎓 Education Hub</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      `;
 
-        if (backdrop) backdrop.style.display = 'block';
+      // Assemble menu
+      mobileNav.appendChild(header);
+      mobileNav.appendChild(links);
+
+      // CRITICAL: Append directly to body (escapes header's stacking context)
+      document.body.appendChild(backdrop);
+      document.body.appendChild(mobileNav);
+
+      const closeBtn = header.querySelector('.mobile-nav-close');
+
+      // Open/close functions
+      function open() {
+        console.log('Opening mobile menu');
+        backdrop.classList.add('active');
+        mobileNav.classList.add('active');
+        menuBtn.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
-        console.log('>>> Menu OPENED <<<');
       }
-    }
 
-    // Close menu when clicking backdrop
-    document.addEventListener('click', function(e) {
-      if (e.target.id === 'navBackdrop') {
-        console.log('Backdrop clicked');
-        toggleMenu();
+      function close() {
+        console.log('Closing mobile menu');
+        backdrop.classList.remove('active');
+        mobileNav.classList.remove('active');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
       }
-    });
+
+      // Event listeners
+      menuBtn.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      backdrop.addEventListener('click', close);
+
+      // Close menu when clicking any link
+      links.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', close);
+      });
+
+      console.log('Mobile menu initialized as direct child of body');
+    })();
 
 
     /* ======================== Resources Dropdown ======================== */
