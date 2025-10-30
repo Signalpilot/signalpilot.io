@@ -1,7 +1,7 @@
 // Service Worker for Signal Pilot PWA
 // Updated cache strategy: Network first for HTML, cache for assets
 // IMPORTANT: Update CACHE_VERSION on each deployment to match index.html VERSION
-const CACHE_VERSION = '202510300023'; // Last updated: 2025-10-30 00:23 UTC
+const CACHE_VERSION = '202510300029'; // Last updated: 2025-10-30 00:29 UTC
 const CACHE_NAME = `signal-pilot-${CACHE_VERSION}`;
 const ASSETS_TO_CACHE = [
   '/manifest.json',
