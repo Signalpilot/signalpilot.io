@@ -5164,7 +5164,7 @@
 (function() {
   // IMPORTANT: Update VERSION on each deployment (format: YYYYMMDDHHmm)
   // This ensures users get fresh JS/CSS after updates
-  var VERSION = '202510301905'; // Last updated: 2025-10-30 19:05 UTC
+  var VERSION = '202510301909'; // Last updated: 2025-10-30 19:09 UTC
 
   function loadScript(src, callback) {
     var s = document.createElement('script');
@@ -5190,7 +5190,12 @@
 // PWA Service Worker Registration with MAXIMUM AGGRESSIVE Update Checking
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/service-worker.js')
+    navigator.serviceWorker.register('/service-worker.js', {
+      // CRITICAL: Don't cache the service worker file itself
+      updateViaCache: 'none',
+      // Force browser to check for SW updates on every page load
+      scope: '/'
+    })
       .then(function(registration) {
         console.log('ServiceWorker registration successful');
 
