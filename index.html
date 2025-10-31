@@ -2024,12 +2024,14 @@
 
     .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;padding:0}
 
-    /* PayPal buttons - AGGRESSIVE dark theme styling */
+    /* PayPal buttons - AGGRESSIVE dark theme styling with blend mode trick */
     .pp-slot{
       background:transparent !important;
       padding:0;
       border-radius:12px;
       overflow:hidden;
+      position:relative;
+      isolation:isolate; /* Create new stacking context for blend modes */
     }
 
     /* Force all PayPal elements to have dark/transparent background */
@@ -2052,6 +2054,19 @@
     .pp-slot > div {
       margin:0 !important;
       padding:0 !important;
+    }
+
+    /* NUCLEAR OPTION: Use blend mode to eliminate white backgrounds from iframe */
+    .pp-slot iframe {
+      mix-blend-mode:multiply !important;
+      filter:contrast(1.1) !important;
+    }
+
+    /* Alternative: Darken mode can also work */
+    @supports (mix-blend-mode:darken) {
+      .pp-slot iframe {
+        mix-blend-mode:darken !important;
+      }
     }
 
     /* Target PayPal's inner button wrappers */
