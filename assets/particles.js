@@ -814,24 +814,28 @@
       drawParticle(p, currentConfig);
     }
 
-    // Draw connections between nearby particles
-    const linkDist = Math.min(W, H) * 0.12;
-    ctx.lineWidth = 1;
+    // Draw connections between nearby particles (skip for matrix-rain and falling effects)
+    const skipConnections = ['matrix-rain', 'bitcoin-rain', 'sakura-petals', 'snowflakes', 'lava-embers'].includes(currentConfig.type);
 
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.hypot(dx, dy);
+    if (!skipConnections) {
+      const linkDist = Math.min(W, H) * 0.12;
+      ctx.lineWidth = 1;
 
-        if (dist < linkDist) {
-          const alpha = (1 - dist / linkDist) * 0.35;
-          ctx.globalAlpha = alpha;
-          ctx.strokeStyle = currentConfig.lineColor;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < linkDist) {
+            const alpha = (1 - dist / linkDist) * 0.35;
+            ctx.globalAlpha = alpha;
+            ctx.strokeStyle = currentConfig.lineColor;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
         }
       }
     }
