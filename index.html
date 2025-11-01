@@ -5609,6 +5609,45 @@
 </script>
 
 <script>
+// Universal Anchor Link Handler - Fixes #pricing and all other # links
+(function() {
+  // Handle ALL internal anchor links (not just .jump-link)
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+
+    const targetId = href.substring(1);
+    const targetSection = document.getElementById(targetId);
+
+    if (targetSection) {
+      e.preventDefault();
+
+      // Calculate offset for sticky header
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.offsetHeight : 80;
+      const offset = headerHeight + 20; // Add 20px extra padding
+
+      const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - offset;
+
+      // Smooth scroll (works on mobile too since we're using JS)
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+
+      // Update URL hash without jumping
+      if (history.pushState) {
+        history.pushState(null, null, href);
+      }
+    }
+  });
+})();
+</script>
+
+<script>
 // Load SignalPilot Theme System with cache busting
 (function() {
   // IMPORTANT: Update VERSION on each deployment (format: YYYYMMDDHHmm)
