@@ -5611,20 +5611,13 @@
 <script>
 // Universal Anchor Link Handler - Fixes #pricing and all other # links
 (function() {
-  // Handle ALL internal anchor links (not just .jump-link)
-  document.addEventListener('click', function(e) {
-    const link = e.target.closest('a[href^="#"]');
-    if (!link) return;
+  function scrollToHash(hash, smooth) {
+    if (!hash) return;
 
-    const href = link.getAttribute('href');
-    if (!href || href === '#') return;
-
-    const targetId = href.substring(1);
+    const targetId = hash.startsWith('#') ? hash.substring(1) : hash;
     const targetSection = document.getElementById(targetId);
 
     if (targetSection) {
-      e.preventDefault();
-
       // Calculate offset for sticky header
       const header = document.querySelector('header');
       const headerHeight = header ? header.offsetHeight : 80;
@@ -5632,11 +5625,27 @@
 
       const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - offset;
 
-      // Smooth scroll (works on mobile too since we're using JS)
+      // Scroll
       window.scrollTo({
         top: targetPosition,
-        behavior: 'smooth'
+        behavior: smooth ? 'smooth' : 'auto'
       });
+
+      return true;
+    }
+    return false;
+  }
+
+  // Handle clicks on anchor links
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+
+    if (scrollToHash(href, true)) {
+      e.preventDefault();
 
       // Update URL hash without jumping
       if (history.pushState) {
@@ -5644,6 +5653,34 @@
       }
     }
   });
+
+  // Handle page load with hash in URL (e.g., signalpilot.io/#pricing)
+  function handleInitialHash() {
+    const hash = window.location.hash;
+    if (hash) {
+      // Prevent default browser jump
+      if (history.replaceState) {
+        history.replaceState(null, null, ' ');
+      }
+
+      // Wait a bit for content to load, then scroll
+      setTimeout(function() {
+        if (scrollToHash(hash, true)) {
+          // Restore hash to URL after scrolling
+          if (history.replaceState) {
+            history.replaceState(null, null, hash);
+          }
+        }
+      }, 100);
+    }
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handleInitialHash);
+  } else {
+    handleInitialHash();
+  }
 })();
 </script>
 
