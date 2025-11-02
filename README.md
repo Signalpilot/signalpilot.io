@@ -40,7 +40,7 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
    *Complete trend regime detection system. Maps 5-phase market reversal sequences (TD→IGN→WRN→CAP→BDN).*
 
 2. **SP — Omnideck** (ALL-IN-ONE)
-   *Comprehensive overlay unifying 10 premium systems: TD Sequential, Squeeze Cloud, SuperTrend Ensemble, Supply/Demand Zones, Candlestick Patterns, and more.*
+   *Comprehensive overlay unifying 10 premium systems: TD Sequential, Squeeze Cloud, SuperTrend Ensemble, Supply/Demand Zones, Liquidity Sweeps, Candlestick Patterns, and more.*
 
 3. **SP — Volume Oracle** (INSTITUTIONAL)
    *Accumulation/distribution detector showing when smart money is moving — before retail notices.*
