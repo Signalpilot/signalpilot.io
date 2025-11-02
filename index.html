@@ -4270,9 +4270,53 @@
 
           <article class="card plan" id="plan-lifetime" data-plan="lifetime" style="position:relative">
 
+            <!-- FOUNDING MEMBER PRICING NOTICE -->
+            <div style="background:linear-gradient(135deg,rgba(249,162,60,.15),rgba(249,162,60,.05));border:2px solid rgba(249,162,60,.3);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem">
+
+              <!-- Badge -->
+              <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:1rem">
+                <span style="font-size:1.5rem">⚡</span>
+                <span style="font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:#f9a23c">Founding Member Pricing</span>
+              </div>
+
+              <!-- Price Ladder -->
+              <div style="margin-bottom:1rem">
+                <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;font-size:1.1rem;font-weight:700;margin-bottom:.75rem">
+                  <span style="color:var(--muted-2);text-decoration:line-through">$1,799</span>
+                  <span style="color:#fff">→</span>
+                  <span style="color:#f9a23c">$2,499</span>
+                  <span style="color:#fff">→</span>
+                  <span style="color:var(--muted)">$3,499</span>
+                </div>
+                <p style="font-size:.85rem;color:var(--muted);text-align:center;margin:0">
+                  Price increases at customer milestones. Lock in today's rate before next tier.
+                </p>
+              </div>
+
+              <!-- Progress Bar -->
+              <div style="margin-bottom:.75rem">
+                <div style="background:rgba(0,0,0,.3);height:8px;border-radius:999px;overflow:hidden;margin-bottom:.5rem">
+                  <div id="lifetime-progress-fill" style="height:100%;background:linear-gradient(90deg,#f9a23c,#ff8c42);width:29%;transition:width 0.5s ease;border-radius:999px"></div>
+                </div>
+                <p id="lifetime-progress-text" style="font-size:.85rem;color:var(--muted);text-align:center;margin:0">
+                  <strong style="color:#fff">87 of 350</strong> founding member slots claimed
+                </p>
+              </div>
+
+              <!-- Current Tier Notice -->
+              <div style="background:rgba(249,162,60,.1);border:1px solid rgba(249,162,60,.4);border-radius:8px;padding:.75rem;text-align:center">
+                <div style="font-size:.8rem;color:var(--muted);margin-bottom:.25rem">CURRENT TIER 2 PRICE</div>
+                <div style="font-size:1.3rem;font-weight:800;color:#f9a23c;margin-bottom:.25rem" id="lifetime-current-price">$2,499</div>
+                <div style="font-size:.75rem;color:var(--muted-2)">
+                  Price increases to <strong style="color:#fff" id="lifetime-next-price">$3,499</strong> in <strong style="color:#f9a23c" id="lifetime-slots-remaining">63</strong> sales
+                </div>
+              </div>
+
+            </div>
+
             <div class="pill">Lifetime Access</div>
 
-            <div class="price">$1,799 <span class="pill">one‑time</span></div>
+            <div class="price"><span id="lifetime-display-price">$2,499</span> <span class="pill">one‑time</span></div>
 
             <p style="font-size:.9rem;color:var(--muted);margin:.5rem 0 1rem 0;text-align:center">
               <strong style="color:#fff">One payment, lifetime access</strong><br>
@@ -4311,7 +4355,7 @@
               <!-- Step 3: Buy Now -->
               <form id="lifetime-form" action="https://www.paypal.com/ncp/payment/436WMS3WRY2ZL" method="post" target="_blank" class="pp-slot" style="display:grid;gap:0.5rem;">
                 <input type="hidden" name="business" value="support@signalpilot.io">
-                <input type="submit" value="Buy Now - $1,799" style="background:#000000;color:#FFFFFF;font-weight:700;cursor:pointer;border:none;border-radius:8px;padding:12px 24px;font-size:16px;font-family:inherit;width:100%;height:auto;min-height:44px;">
+                <input type="submit" id="lifetime-buy-button" value="Buy Now - $2,499" style="background:#000000;color:#FFFFFF;font-weight:700;cursor:pointer;border:none;border-radius:8px;padding:12px 24px;font-size:16px;font-family:inherit;width:100%;height:auto;min-height:44px;">
                 <img src="https://www.paypalobjects.com/images/Debit_Credit.svg" alt="PayPal accepted cards" style="margin:0 auto;height:24px;" loading="lazy" width="120" height="24" />
                 <div style="font-size:0.75rem;text-align:center;opacity:0.7;">Powered by PayPal</div>
               </form>
@@ -5787,6 +5831,151 @@ if ('serviceWorker' in navigator) {
 
     console.log('✅ GA4 Custom Event Tracking Initialized');
   });
+})();
+</script>
+
+<!-- Dynamic Lifetime Pricing System -->
+<script>
+(function() {
+  'use strict';
+
+  // Configuration: Define pricing tiers
+  const PRICING_TIERS = [
+    { min: 0, max: 50, price: 1799, name: 'Tier 1' },
+    { min: 51, max: 150, price: 2499, name: 'Tier 2' },
+    { min: 151, max: 350, price: 3499, name: 'Tier 3' },
+    { min: 351, max: Infinity, price: null, name: 'Removed' }
+  ];
+
+  const TOTAL_SLOTS = 350;
+
+  // Manual update: Change this number when you make a sale
+  let currentSalesCount = 87; // UPDATE THIS MANUALLY FOR NOW
+
+  // DOM Elements
+  const elements = {
+    progressFill: document.getElementById('lifetime-progress-fill'),
+    progressText: document.getElementById('lifetime-progress-text'),
+    currentPrice: document.getElementById('lifetime-current-price'),
+    nextPrice: document.getElementById('lifetime-next-price'),
+    slotsRemaining: document.getElementById('lifetime-slots-remaining'),
+    displayPrice: document.getElementById('lifetime-display-price'),
+    buyButton: document.getElementById('lifetime-buy-button')
+  };
+
+  // Get current tier based on sales count
+  function getCurrentTier(salesCount) {
+    return PRICING_TIERS.find(tier => salesCount >= tier.min && salesCount <= tier.max);
+  }
+
+  // Get next tier
+  function getNextTier(currentTier) {
+    const currentIndex = PRICING_TIERS.indexOf(currentTier);
+    return PRICING_TIERS[currentIndex + 1] || null;
+  }
+
+  // Update UI with current pricing data
+  function updatePricingUI(salesCount) {
+    const currentTier = getCurrentTier(salesCount);
+    const nextTier = getNextTier(currentTier);
+
+    if (!currentTier) return;
+
+    // Calculate progress percentage
+    const progressPercent = Math.min((salesCount / TOTAL_SLOTS) * 100, 100);
+
+    // Calculate slots remaining in current tier
+    const slotsRemainingInTier = currentTier.max - salesCount;
+
+    // Update UI elements
+    if (elements.progressFill) {
+      elements.progressFill.style.width = progressPercent + '%';
+    }
+
+    if (elements.progressText) {
+      elements.progressText.innerHTML = `<strong style="color:#fff">${salesCount} of ${TOTAL_SLOTS}</strong> founding member slots claimed`;
+    }
+
+    if (elements.currentPrice && currentTier.price) {
+      elements.currentPrice.textContent = `$${currentTier.price.toLocaleString()}`;
+    }
+
+    if (elements.displayPrice && currentTier.price) {
+      elements.displayPrice.textContent = `$${currentTier.price.toLocaleString()}`;
+    }
+
+    if (elements.buyButton && currentTier.price) {
+      elements.buyButton.value = `Buy Now - $${currentTier.price.toLocaleString()}`;
+    }
+
+    if (nextTier && nextTier.price) {
+      if (elements.nextPrice) {
+        elements.nextPrice.textContent = `$${nextTier.price.toLocaleString()}`;
+      }
+      if (elements.slotsRemaining) {
+        elements.slotsRemaining.textContent = slotsRemainingInTier;
+      }
+    } else {
+      // Last tier or removed
+      if (elements.nextPrice) {
+        elements.nextPrice.textContent = 'REMOVED';
+      }
+      if (elements.slotsRemaining) {
+        elements.slotsRemaining.textContent = slotsRemainingInTier;
+      }
+    }
+
+    console.log('✅ Dynamic Lifetime Pricing Updated:', {
+      salesCount,
+      tier: currentTier.name,
+      price: currentTier.price,
+      slotsRemaining: slotsRemainingInTier,
+      progress: progressPercent.toFixed(1) + '%'
+    });
+  }
+
+  // Optional: Fetch from API (implement this later)
+  async function fetchLifetimeSalesCount() {
+    try {
+      // Replace with your actual API endpoint
+      const response = await fetch('/api/lifetime-slots-remaining');
+      const data = await response.json();
+      return data.sales_count || currentSalesCount;
+    } catch (error) {
+      console.warn('⚠️ API not available, using manual count:', currentSalesCount);
+      return currentSalesCount;
+    }
+  }
+
+  // Initialize pricing on page load
+  async function init() {
+    // Try to fetch from API, fallback to manual count
+    const salesCount = await fetchLifetimeSalesCount();
+    updatePricingUI(salesCount);
+
+    // Optional: Auto-refresh every 60 seconds
+    // setInterval(async () => {
+    //   const updatedCount = await fetchLifetimeSalesCount();
+    //   updatePricingUI(updatedCount);
+    // }, 60000);
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Export function for manual updates (from browser console)
+  window.updateLifetimePricing = function(newSalesCount) {
+    currentSalesCount = newSalesCount;
+    updatePricingUI(newSalesCount);
+    console.log('✅ Manually updated lifetime pricing to', newSalesCount, 'sales');
+  };
+
+  console.log('✅ Dynamic Lifetime Pricing System Initialized');
+  console.log('💡 To manually update: window.updateLifetimePricing(87)');
 })();
 </script>
 
