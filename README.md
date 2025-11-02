@@ -24,10 +24,10 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
 ## What's on the site
 
 ### Hero Section
-- **Headline:** "See The Complete Market Cycle. Not Just 'Overbought'."
-- **Trust badges:** 4.9/5 · 47 reviews | 100% Non-Repainting (Audited) | 7-Day Money-Back Guarantee
+- **Headline:** "The edge isn't seeing more. It's seeing what matters."
+- **Trust badges:** 100% Non-Repainting (Audited) | 7-Day Money-Back Guarantee
 - **Hero video:** Live chart demo showcasing Pentarch cycle detection
-- **CTA:** Try Risk-Free button linking to pricing
+- **CTA:** Get Started button linking to pricing
 
 ### Core Sections
 - **Why Signal Pilot vs Everything Else:** Comparison highlighting unique advantages
@@ -181,8 +181,8 @@ Since this is a single-file site, all edits are in `/index.html`.
 ## SEO & analytics
 
 ### Meta tags
-- **Title:** "Signal Pilot — Non-Repainting TradingView Indicators | $100 Guarantee"
-- **Description:** 160-char pitch with $100 guarantee, Pentarch™, 500+ traders
+- **Title:** "Signal Pilot — Non-Repainting TradingView Indicators"
+- **Description:** Professional cycle detection for TradingView. Pentarch™ maps complete market cycles. Zero repaint, audited.
 - **Keywords:** TradingView indicators, non-repainting, Pentarch, TD Sequential, crypto/stock indicators
 - **OpenGraph/Twitter Cards:** Lines 62-87 (social sharing with preview.png)
 
