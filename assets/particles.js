@@ -97,28 +97,6 @@
           pulseSpeed: Math.random() * 0.1 + 0.05
         };
 
-      case 'sun-rays':
-        // Sun rays emanating from center-left of screen
-        if (!createParticle.rayIndex) createParticle.rayIndex = 0;
-        const rayAngle = (createParticle.rayIndex / 40) * Math.PI * 2; // Evenly distributed rays
-        createParticle.rayIndex++;
-
-        return {
-          x: W * 0.15, // Sun position X (left side)
-          y: H * 0.3, // Sun position Y (upper area)
-          vx: 0,
-          vy: 0,
-          angle: rayAngle,
-          baseAngle: rayAngle, // Store original angle
-          length: Math.random() * 150 + 100, // Ray length 100-250
-          opacity: Math.random() * 0.4 + 0.3, // 0.3-0.7 opacity
-          rotationSpeed: 0.001, // Slow rotation
-          pulse: Math.random() * Math.PI * 2,
-          pulseSpeed: Math.random() * 0.02 + 0.01,
-          alpha: 1.0,
-          size: Math.random() * 3 + 2 // Width of ray
-        };
-
       case 'matrix-rain':
         // Matrix rain columns - CONSISTENT and EVENLY DISTRIBUTED
         // Start with particles already on screen for smooth immediate effect
@@ -403,54 +381,6 @@
         ctx.beginPath();
         ctx.arc(p.x, p.y, pulseSize * 0.5, 0, Math.PI * 2);
         ctx.fill();
-        break;
-
-      case 'sun-rays':
-        // Animated sun rays - dramatic and visible
-        p.pulse += p.pulseSpeed;
-        p.angle += p.rotationSpeed;
-
-        const rayLength = p.length * (1 + Math.sin(p.pulse) * 0.2); // More pulsing
-        const rayOpacity = p.opacity * p.alpha * 1.2; // Brighter
-
-        // Calculate ray end point
-        const endX = p.x + Math.cos(p.angle) * rayLength;
-        const endY = p.y + Math.sin(p.angle) * rayLength;
-
-        // Draw thicker ray with glow
-        ctx.globalAlpha = 1;
-        ctx.shadowColor = config.color.replace(/[\d.]+\)/, '0.6)');
-        ctx.shadowBlur = 15;
-
-        // Main ray - gradient from bright orange to transparent
-        const rayGrad = ctx.createLinearGradient(p.x, p.y, endX, endY);
-        rayGrad.addColorStop(0, `rgba(251, 146, 60, ${rayOpacity})`); // Bright orange
-        rayGrad.addColorStop(0.3, `rgba(249, 115, 22, ${rayOpacity * 0.8})`); // Mid orange
-        rayGrad.addColorStop(0.7, `rgba(251, 191, 36, ${rayOpacity * 0.5})`); // Golden
-        rayGrad.addColorStop(1, 'transparent');
-
-        ctx.strokeStyle = rayGrad;
-        ctx.lineWidth = p.size * 1.5; // Thicker rays
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(endX, endY);
-        ctx.stroke();
-
-        ctx.shadowBlur = 0;
-
-        // Draw a glowing sun at the center every frame
-        if (p.baseAngle === 0) { // Only first particle draws the sun
-          const sunGlow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 60);
-          sunGlow.addColorStop(0, 'rgba(251, 191, 36, 0.8)'); // Bright golden center
-          sunGlow.addColorStop(0.3, 'rgba(249, 115, 22, 0.6)'); // Orange
-          sunGlow.addColorStop(0.6, 'rgba(251, 146, 60, 0.3)'); // Soft orange
-          sunGlow.addColorStop(1, 'transparent');
-          ctx.fillStyle = sunGlow;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 60, 0, Math.PI * 2);
-          ctx.fill();
-        }
         break;
 
       case 'matrix-rain':

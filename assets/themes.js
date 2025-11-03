@@ -181,40 +181,6 @@
       }
     },
 
-    sunset: {
-      name: 'Sunset',
-      icon: '🌅',
-      description: 'Golden hour warmth',
-      colors: {
-        bg: '#1a0a05',
-        bgElev: '#2d1410',
-        bgSoft: '#3d241d',
-        text: '#fff7ed',
-        muted: '#fdba74',
-        mutedSoft: '#fb923c',
-        brand: '#f97316',
-        brandGlow: 'rgba(249, 115, 22, 0.6)',
-        accent: '#f472b6',
-        success: '#84cc16',
-        warn: '#eab308',
-        border: 'rgba(249, 115, 22, 0.25)'
-      },
-      particles: {
-        type: 'sun-rays',
-        color: 'rgba(251, 146, 60, 0.85)',
-        lineColor: 'rgba(249, 115, 22, 0.4)',
-        count: 40
-      },
-      aurora: {
-        colors: [
-          'rgba(249, 115, 22, 0.40)',
-          'rgba(244, 114, 182, 0.35)',
-          'rgba(139, 92, 246, 0.30)',
-          'rgba(251, 191, 36, 0.25)'
-        ]
-      }
-    },
-
     forest: {
       name: 'Forest',
       icon: '🌲',
