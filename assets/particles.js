@@ -406,47 +406,56 @@
         break;
 
       case 'sun-rays':
-        // Animated sun rays
+        // Animated sun rays - dramatic and visible
         p.pulse += p.pulseSpeed;
         p.angle += p.rotationSpeed;
 
-        const rayLength = p.length * (1 + Math.sin(p.pulse) * 0.15); // Pulsing length
-        const rayOpacity = p.opacity * p.alpha;
+        const rayLength = p.length * (1 + Math.sin(p.pulse) * 0.2); // More pulsing
+        const rayOpacity = p.opacity * p.alpha * 1.2; // Brighter
 
         // Calculate ray end point
         const endX = p.x + Math.cos(p.angle) * rayLength;
         const endY = p.y + Math.sin(p.angle) * rayLength;
 
-        // Create gradient along the ray
+        // Draw thicker ray with glow
+        ctx.globalAlpha = 1;
+        ctx.shadowColor = config.color.replace(/[\d.]+\)/, '0.6)');
+        ctx.shadowBlur = 15;
+
+        // Main ray - gradient from bright orange to transparent
         const rayGrad = ctx.createLinearGradient(p.x, p.y, endX, endY);
-        rayGrad.addColorStop(0, config.lineColor.replace(/[\d.]+\)/, `${rayOpacity})`));
-        rayGrad.addColorStop(0.5, config.color.replace(/[\d.]+\)/, `${rayOpacity * 0.6})`));
+        rayGrad.addColorStop(0, `rgba(251, 146, 60, ${rayOpacity})`); // Bright orange
+        rayGrad.addColorStop(0.3, `rgba(249, 115, 22, ${rayOpacity * 0.8})`); // Mid orange
+        rayGrad.addColorStop(0.7, `rgba(251, 191, 36, ${rayOpacity * 0.5})`); // Golden
         rayGrad.addColorStop(1, 'transparent');
 
-        ctx.globalAlpha = 1;
         ctx.strokeStyle = rayGrad;
-        ctx.lineWidth = p.size;
+        ctx.lineWidth = p.size * 1.5; // Thicker rays
         ctx.lineCap = 'round';
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(endX, endY);
         ctx.stroke();
 
-        // Add glow at the center
-        if (Math.random() < 0.05) { // Occasional extra glow
-          const glowGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 30);
-          glowGrad.addColorStop(0, config.color.replace(/[\d.]+\)/, '0.4)'));
-          glowGrad.addColorStop(1, 'transparent');
-          ctx.fillStyle = glowGrad;
+        ctx.shadowBlur = 0;
+
+        // Draw a glowing sun at the center every frame
+        if (p.baseAngle === 0) { // Only first particle draws the sun
+          const sunGlow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 60);
+          sunGlow.addColorStop(0, 'rgba(251, 191, 36, 0.8)'); // Bright golden center
+          sunGlow.addColorStop(0.3, 'rgba(249, 115, 22, 0.6)'); // Orange
+          sunGlow.addColorStop(0.6, 'rgba(251, 146, 60, 0.3)'); // Soft orange
+          sunGlow.addColorStop(1, 'transparent');
+          ctx.fillStyle = sunGlow;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, 30, 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, 60, 0, Math.PI * 2);
           ctx.fill();
         }
         break;
 
       case 'matrix-rain':
-        // Falling Matrix rain column
-        ctx.font = `bold ${p.size}px monospace`;  // BOLD for visibility
+        // Falling Matrix rain column - subtle background effect
+        ctx.font = `${p.size}px monospace`; // Regular weight for less distraction
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
 
@@ -465,28 +474,22 @@
           p.chars[idx] = getRandomMatrixChar();
         }
 
-        // Draw trail of characters - smooth, minimal glow
+        // Draw trail of characters - very subtle, no glow
         for (let i = 0; i < p.trailLength; i++) {
           const charY = p.y + (i * p.size);
 
           if (i === 0) {
-            // Head character - subtle white glow
-            ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
-            ctx.shadowBlur = 3;
-            ctx.fillStyle = '#e0ffe0';
+            // Head character - very subtle, no glow
+            ctx.fillStyle = 'rgba(180, 255, 180, 0.5)'; // Dimmer pale green
             ctx.fillText(p.chars[i], p.x, charY);
-            ctx.shadowBlur = 0;
           } else if (i < 3) {
-            // Near-head characters - bright green, minimal glow
-            const alpha = 0.9 - (i * 0.12);
-            ctx.shadowColor = `rgba(0, 255, 65, ${alpha * 0.3})`;
-            ctx.shadowBlur = 2;
+            // Near-head characters - dim green, no glow
+            const alpha = 0.45 - (i * 0.08); // Much lower opacity
             ctx.fillStyle = `rgba(0, 255, 65, ${alpha})`;
             ctx.fillText(p.chars[i], p.x, charY);
-            ctx.shadowBlur = 0;
           } else {
-            // Trail - smooth fading green, no glow
-            const alpha = Math.max(0.25, (1 - i / p.trailLength) * p.alpha * 0.85);
+            // Trail - very faded green, background effect
+            const alpha = Math.max(0.12, (1 - i / p.trailLength) * p.alpha * 0.4); // Much dimmer
             ctx.fillStyle = `rgba(0, 255, 65, ${alpha})`;
             ctx.fillText(p.chars[i], p.x, charY);
           }
