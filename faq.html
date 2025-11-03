@@ -56,6 +56,88 @@
       color: var(--text);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background Aurora */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(1200px 700px at 20% 30%, rgba(91,138,255,.15), transparent 60%),
+        radial-gradient(1000px 600px at 80% 70%, rgba(118,221,255,.12), transparent 62%),
+        radial-gradient(1100px 650px at 50% 50%, rgba(123,155,255,.10), transparent 64%),
+        radial-gradient(900px 550px at 10% 80%, rgba(91,138,255,.08), transparent 65%);
+      animation: aurora 40s ease-in-out infinite alternate;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    @keyframes aurora {
+      0% {
+        transform: translate3d(-5%, -5%, 0) scale(1) rotate(0deg);
+        opacity: 0.6;
+      }
+      33% {
+        transform: translate3d(5%, -3%, 0) scale(1.05) rotate(1deg);
+        opacity: 0.7;
+      }
+      66% {
+        transform: translate3d(-3%, 5%, 0) scale(1.03) rotate(-1deg);
+        opacity: 0.65;
+      }
+      100% {
+        transform: translate3d(5%, 3%, 0) scale(1.02) rotate(0.5deg);
+        opacity: 0.6;
+      }
+    }
+
+    html[data-theme="light"] body::before {
+      background:
+        radial-gradient(1200px 700px at 20% 30%, rgba(59,130,246,.08), transparent 60%),
+        radial-gradient(1000px 600px at 80% 70%, rgba(14,165,233,.06), transparent 62%),
+        radial-gradient(1100px 650px at 50% 50%, rgba(96,165,250,.05), transparent 64%),
+        radial-gradient(900px 550px at 10% 80%, rgba(59,130,246,.04), transparent 65%);
+      opacity: 0.4;
+    }
+
+    /* Grid Overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        linear-gradient(transparent 31px, rgba(91,138,255,.04) 32px, transparent 33px),
+        linear-gradient(90deg, transparent 31px, rgba(91,138,255,.04) 32px, transparent 33px);
+      background-size: 32px 32px;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    html[data-theme="light"] body::after {
+      background-image:
+        linear-gradient(transparent 31px, rgba(59,130,246,.06) 32px, transparent 33px),
+        linear-gradient(90deg, transparent 31px, rgba(59,130,246,.06) 32px, transparent 33px);
+    }
+
+    /* Ensure content is above background */
+    header,
+    section,
+    footer {
+      position: relative;
+      z-index: 1;
     }
 
     /* Google Translate fixes */
@@ -132,7 +214,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
+    }
+
+    header .container > .lang-dropdown,
+    header .container > #themeToggle {
+      flex-shrink: 0;
+    }
+
+    header .container > .lang-dropdown + #themeToggle {
+      margin-left: -0.8rem;
     }
 
     .logo {
