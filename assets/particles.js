@@ -1024,13 +1024,13 @@
       case 'neural-nodes':
         // Neural network nodes with connections
         p.pulse += p.pulseSpeed;
-        const pulseSize = p.size * (1 + Math.sin(p.pulse) * 0.2);
+        const nodePulseSize = p.size * (1 + Math.sin(p.pulse) * 0.2);
 
         // Draw node
         ctx.globalAlpha = p.alpha;
         ctx.fillStyle = config.color;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, pulseSize, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, nodePulseSize, 0, Math.PI * 2);
         ctx.fill();
 
         // Draw connections to nearby particles (simple version - just draw to nearest)
@@ -1228,7 +1228,19 @@
     }
 
     // Draw connections between nearby particles (skip for matrix-rain and falling effects)
-    const skipConnections = ['matrix-rain', 'bitcoin-rain', 'sakura-petals', 'snowflakes', 'lava-embers'].includes(currentConfig.type);
+    const skipConnections = [
+      'matrix-rain',
+      'bitcoin-rain',
+      'sakura-petals',
+      'snowflakes',
+      'lava-embers',
+      'lightning',
+      'fireworks',
+      'vaporwave-grid',
+      'warp-stars',
+      'light-trails',
+      'holo-glyphs'
+    ].includes(currentConfig.type);
 
     if (!skipConnections) {
       const linkDist = Math.min(W, H) * 0.12;
