@@ -58,6 +58,58 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* Google Translate fixes */
+    body > .skiptranslate {
+      display: none !important;
+    }
+
+    .goog-te-banner-frame {
+      display: none !important;
+    }
+
+    .goog-te-gadget {
+      color: inherit !important;
+    }
+
+    /* Prevent Google Translate from blocking clicks */
+    nav font,
+    nav span:not(.dropdown-arrow),
+    .lang-dropdown font,
+    .lang-dropdown span,
+    button font,
+    button span:not(#theme-icon):not(.dropdown-arrow) {
+      pointer-events: none !important;
+      color: inherit !important;
+      background: transparent !important;
+      font-family: inherit !important;
+      font-size: inherit !important;
+      font-weight: inherit !important;
+      line-height: inherit !important;
+      display: inline !important;
+    }
+
+    /* Ensure buttons always work */
+    nav a,
+    nav button,
+    #langToggle,
+    #themeToggle {
+      pointer-events: auto !important;
+      cursor: pointer !important;
+    }
+
+    /* Screen reader only utility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -98,6 +150,21 @@
       align-items: center;
     }
 
+    nav {
+      position: relative;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    nav li {
+      position: relative;
+    }
+
     nav a {
       color: var(--muted);
       text-decoration: none;
@@ -105,33 +172,199 @@
       font-size: 0.95rem;
       transition: all 0.2s;
       white-space: nowrap;
+      display: block;
     }
 
     nav a:hover {
       color: var(--text);
     }
 
-    .theme-toggle {
+    /* Resources Dropdown */
+    .nav-dropdown {
+      position: relative;
+      z-index: 65;
+    }
+
+    .nav-dropdown-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      padding: 0;
+    }
+
+    .nav-dropdown-toggle:hover {
+      color: var(--text);
+    }
+
+    .dropdown-arrow {
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-dropdown-toggle[aria-expanded="true"] .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 0.5rem;
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem;
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s;
+      z-index: 100;
+      list-style: none;
+    }
+
+    .nav-dropdown-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-dropdown-menu li {
+      margin: 0;
+    }
+
+    .nav-dropdown-menu a {
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .nav-dropdown-menu a:hover {
+      background: rgba(91, 138, 255, 0.15);
+      color: var(--text);
+    }
+
+    /* Language Dropdown */
+    .lang-dropdown {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .lang-dropdown-menu {
+      position: fixed;
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem;
+      min-width: 160px;
+      max-height: 400px;
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s;
+      z-index: 9999;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .lang-dropdown-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .lang-dropdown-menu button {
+      display: block;
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border: none;
+      background: transparent;
+      border-radius: 6px;
+      color: var(--muted);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-weight: 500;
+    }
+
+    .lang-dropdown-menu button:hover {
+      background: rgba(91, 138, 255, 0.15);
+      color: var(--text);
+    }
+
+    .btn {
       background: var(--bg-soft);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.8rem;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 1.15rem;
       transition: all 0.2s;
       white-space: nowrap;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .theme-toggle:hover {
+    .btn:hover {
       background: var(--bg-elev);
       transform: translateY(-1px);
     }
 
-    /* Hero */
+    /* Hero - Animated Background */
     .hero {
       padding: 4rem 0 3rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      background:
+        radial-gradient(1200px 700px at 50% 20%, rgba(91,138,255,.15), transparent 60%),
+        radial-gradient(1000px 600px at 80% 50%, rgba(118,221,255,.12), transparent 62%),
+        radial-gradient(1100px 650px at 20% 80%, rgba(123,155,255,.10), transparent 64%);
+      animation: heroGlow 20s ease-in-out infinite alternate;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes heroGlow {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translate3d(2%, -2%, 0) scale(1.05);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate3d(-2%, 2%, 0) scale(1.02);
+        opacity: 0.6;
+      }
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
@@ -140,9 +373,16 @@
       line-height: 1.1;
       margin-bottom: 1rem;
       background: linear-gradient(90deg, #9cc0ff 0%, #86a8ff 35%, #7ccaff 60%, #8ca5ff 85%, #b9d4ff 100%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: gradientShift 8s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 100% center; }
     }
 
     .subtitle {
@@ -150,6 +390,7 @@
       color: var(--muted);
       max-width: 600px;
       margin: 0 auto 1rem;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
     .note {
@@ -157,6 +398,18 @@
       color: var(--muted-2);
       max-width: 550px;
       margin: 0 auto;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Sticky Nav */
@@ -461,8 +714,29 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      nav {
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
         display: none;
+      }
+
+      header .container {
+        gap: 0.8rem;
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        font-size: 1.2rem;
+      }
+
+      .btn {
+        padding: 0.4rem 0.6rem;
+        font-size: 1rem;
+      }
+
+      .nav-dropdown-menu {
+        left: auto;
+        right: 0;
       }
 
       .sticky-nav {
@@ -479,8 +753,36 @@
         font-size: 1.5rem;
       }
 
-      header .container {
-        gap: 1rem;
+      .hero {
+        padding: 3rem 0 2rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .note {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .phase-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .feature-item {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .commitment {
+        padding: 2rem 1.5rem;
       }
     }
   </style>
@@ -492,14 +794,57 @@
     <div class="container">
       <a href="/" class="logo">Signal Pilot</a>
       <nav>
-        <a href="/#why">Why Us?</a>
-        <a href="/#inside">What's inside</a>
-        <a href="/roadmap.html">Roadmap</a>
-        <a href="/#pricing">Pricing</a>
+        <ul>
+          <li><a href="/#why">Why Us?</a></li>
+          <li><a href="/#inside">What's inside</a></li>
+          <li><a href="/roadmap.html">Roadmap</a></li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+              Resources <span class="dropdown-arrow">▼</span>
+            </button>
+            <ul class="nav-dropdown-menu">
+              <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">📚 Documentation</a></li>
+              <li><a href="https://education.signalpilot.io/" target="_blank" rel="noopener">🎓 Education Hub</a></li>
+            </ul>
+          </li>
+          <li><a href="/#pricing">Pricing</a></li>
+        </ul>
       </nav>
-      <button id="themeToggle" class="theme-toggle">Theme</button>
+
+      <div class="lang-dropdown">
+        <button id="langToggle" class="btn" type="button" aria-label="Language selection" aria-expanded="false" aria-haspopup="true">
+          <span>🌐</span>
+        </button>
+      </div>
+
+      <button id="themeToggle" class="btn" type="button" aria-label="Theme selection">
+        <span id="theme-icon">🌙</span>
+      </button>
     </div>
   </header>
+
+  <!-- Hidden Google Translate container -->
+  <div id="google_translate_container" style="position:absolute;left:-9999px;" aria-hidden="true"></div>
+
+  <!-- Hidden select for Google Translate compatibility -->
+  <select id="langSel" style="display:none;" aria-hidden="true">
+    <option value="en">English</option>
+    <option value="de">Deutsch</option>
+    <option value="fr">Français</option>
+    <option value="es">Español</option>
+    <option value="it">Italiano</option>
+    <option value="zh">中文</option>
+    <option value="ru">Русский</option>
+    <option value="ar">العربية</option>
+    <option value="pt">Português</option>
+    <option value="tr">Türkçe</option>
+    <option value="ja">日本語</option>
+    <option value="ko">한국어</option>
+    <option value="vi">Tiếng Việt</option>
+    <option value="th">ไทย</option>
+    <option value="hi">हिन्दी</option>
+    <option value="id">Bahasa Indonesia</option>
+  </select>
 
   <!-- Hero -->
   <section class="hero">
@@ -662,23 +1007,197 @@
     </div>
   </footer>
 
-  <!-- Theme Toggle Script -->
+  <!-- Scripts -->
   <script>
+    // Theme Toggle
     const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('theme-icon');
     const html = document.documentElement;
 
     // Load saved theme
     const savedTheme = localStorage.getItem('theme') || 'dark';
     html.setAttribute('data-theme', savedTheme);
-    themeToggle.textContent = savedTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
     themeToggle.addEventListener('click', () => {
       const currentTheme = html.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
-      themeToggle.textContent = newTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
+      themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
     });
+
+    // Resources Dropdown
+    (function() {
+      let dropdownOpen = false;
+
+      document.addEventListener('click', function(e) {
+        const toggle = e.target.closest('.nav-dropdown-toggle');
+        if (toggle) {
+          e.preventDefault();
+          e.stopPropagation();
+          dropdownOpen = !dropdownOpen;
+          const menu = document.querySelector('.nav-dropdown-menu');
+          if (menu) {
+            menu.classList.toggle('show', dropdownOpen);
+            toggle.setAttribute('aria-expanded', dropdownOpen);
+          }
+          return;
+        }
+
+        // Close dropdown if clicking outside
+        if (dropdownOpen && !e.target.closest('.nav-dropdown')) {
+          const menu = document.querySelector('.nav-dropdown-menu');
+          const toggle = document.querySelector('.nav-dropdown-toggle');
+          if (menu) menu.classList.remove('show');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          dropdownOpen = false;
+        }
+      });
+    })();
+
+    // Language Dropdown
+    (function() {
+      const langBtn = document.getElementById('langToggle');
+      if (!langBtn) return;
+
+      // Create language dropdown menu
+      const langMenu = document.createElement('div');
+      langMenu.className = 'lang-dropdown-menu';
+
+      // Create language buttons
+      const languages = [
+        { code: 'en', name: 'English' },
+        { code: 'de', name: 'Deutsch' },
+        { code: 'fr', name: 'Français' },
+        { code: 'es', name: 'Español' },
+        { code: 'it', name: 'Italiano' },
+        { code: 'zh', name: '中文' },
+        { code: 'ru', name: 'Русский' },
+        { code: 'ar', name: 'العربية' },
+        { code: 'pt', name: 'Português' },
+        { code: 'tr', name: 'Türkçe' },
+        { code: 'ja', name: '日本語' },
+        { code: 'ko', name: '한국어' },
+        { code: 'vi', name: 'Tiếng Việt' },
+        { code: 'th', name: 'ไทย' },
+        { code: 'hi', name: 'हिन्दी' },
+        { code: 'id', name: 'Bahasa Indonesia' }
+      ];
+
+      languages.forEach(lang => {
+        const btn = document.createElement('button');
+        btn.textContent = lang.name;
+        btn.onclick = () => selectLanguage(lang);
+        langMenu.appendChild(btn);
+      });
+
+      document.body.appendChild(langMenu);
+
+      let menuOpen = false;
+
+      langBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menuOpen = !menuOpen;
+        langMenu.classList.toggle('show', menuOpen);
+        langBtn.setAttribute('aria-expanded', menuOpen);
+
+        if (menuOpen) {
+          const rect = langBtn.getBoundingClientRect();
+          langMenu.style.top = (rect.bottom + 8) + 'px';
+          langMenu.style.left = (rect.left - langMenu.offsetWidth + rect.width) + 'px';
+        }
+      });
+
+      document.addEventListener('click', function(e) {
+        if (menuOpen && !langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+          menuOpen = false;
+          langMenu.classList.remove('show');
+          langBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      function selectLanguage(lang) {
+        console.log('Language selected:', lang.code);
+        localStorage.setItem('sp_lang', lang.code);
+
+        // Set Google Translate cookie
+        const target = (lang.code === 'zh') ? 'zh-CN' : lang.code;
+        const value = '/en/' + target;
+        document.cookie = 'googtrans=' + value + '; path=/; max-age=31536000';
+
+        // Update HTML attributes
+        document.documentElement.lang = (lang.code === 'zh') ? 'zh-CN' : lang.code;
+        document.documentElement.dir = (lang.code === 'ar') ? 'rtl' : 'ltr';
+
+        // Update hidden select
+        const hiddenSelect = document.getElementById('langSel');
+        if (hiddenSelect) {
+          hiddenSelect.value = lang.code;
+        }
+
+        // Load Google Translate if not already loaded and not English
+        if (lang.code !== 'en' && !window.google) {
+          if (!window.__gte_loading) {
+            window.__gte_loading = true;
+            const script = document.createElement('script');
+            script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+            script.async = true;
+            script.onload = function() {
+              setTimeout(() => window.location.reload(), 100);
+            };
+            document.head.appendChild(script);
+          }
+        } else if (lang.code === 'en') {
+          // Clear Google Translate cookie for English
+          document.cookie = 'googtrans=; path=/; max-age=0';
+          window.location.reload();
+        } else {
+          window.location.reload();
+        }
+
+        menuOpen = false;
+        langMenu.classList.remove('show');
+        langBtn.setAttribute('aria-expanded', 'false');
+      }
+    })();
+
+    // Google Translate Initialization
+    window.googleTranslateElementInit = function() {
+      if (!window.google || !google.translate) return;
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'ar,de,es,fr,it,ru,zh-CN,pt,tr,ja,ko,vi,th,hi,id',
+        autoDisplay: false
+      }, 'google_translate_container');
+    };
+
+    // Load saved language on page load
+    (function() {
+      const saved = localStorage.getItem('sp_lang') || 'en';
+      const code = saved.toLowerCase().startsWith('zh') ? 'zh' : saved.slice(0, 2);
+
+      const sel = document.getElementById('langSel');
+      if (sel) sel.value = code;
+
+      // Set Google Translate cookie
+      const target = (code === 'zh') ? 'zh-CN' : code;
+      const value = '/en/' + target;
+      document.cookie = 'googtrans=' + value + '; path=/; max-age=31536000';
+
+      // Apply language attributes
+      document.documentElement.lang = (code === 'zh') ? 'zh-CN' : code;
+      document.documentElement.dir = (code === 'ar') ? 'rtl' : 'ltr';
+
+      // Load Google Translate if not English
+      if (code !== 'en' && !window.google && !window.__gte_loading) {
+        window.__gte_loading = true;
+        const script = document.createElement('script');
+        script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        script.async = true;
+        document.head.appendChild(script);
+      }
+    })();
 
     // Smooth scroll for nav links with offset
     document.querySelectorAll('.sticky-nav a').forEach(link => {
@@ -687,7 +1206,7 @@
         const targetId = link.getAttribute('href');
         const target = document.querySelector(targetId);
         if (target) {
-          const offset = 200; // Offset for sticky header + nav
+          const offset = 200;
           const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
           window.scrollTo({
             top: targetPosition,
