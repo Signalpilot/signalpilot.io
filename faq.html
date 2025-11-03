@@ -1439,41 +1439,59 @@
       });
 
       function selectLanguage(lang) {
+        console.log('Language selected:', lang.code);
+
+        // Helper functions from page load script
+        function baseDomain(host) {
+          const p = host.split('.');
+          return p.length > 2 ? p.slice(-2).join('.') : host;
+        }
+
+        function setCookie(name, value, days, domain) {
+          let expires = '';
+          if (days) {
+            const d = new Date();
+            d.setTime(d.getTime() + days * 864e5);
+            expires = '; expires=' + d.toUTCString();
+          }
+          const dom = domain ? '; domain=' + domain : '';
+          document.cookie = name + '=' + value + expires + '; path=/' + dom;
+        }
+
+        function setGoogTrans(langCode) {
+          const target = (langCode === 'zh') ? 'zh-CN' : langCode;
+          const val = '/en/' + target;
+          setCookie('googtrans', val, 365);
+          const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
+          setCookie('googtrans', val, 365, root);
+        }
+
+        function applyDirLang(langCode) {
+          document.documentElement.lang = (langCode === 'zh') ? 'zh-CN' : langCode;
+          document.documentElement.dir = (langCode === 'ar') ? 'rtl' : 'ltr';
+        }
+
+        function loadGTE() {
+          if (window.__gte_loading || window.google) return;
+          window.__gte_loading = true;
+          const s = document.createElement('script');
+          s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          s.async = true;
+          document.head.appendChild(s);
+        }
+
+        // Save to localStorage
         localStorage.setItem('sp_lang', lang.code);
 
-        const target = (lang.code === 'zh') ? 'zh-CN' : lang.code;
-        const value = '/en/' + target;
-        document.cookie = 'googtrans=' + value + '; path=/; max-age=31536000';
+        // Set cookies and attributes
+        setGoogTrans(lang.code);
+        applyDirLang(lang.code);
 
-        document.documentElement.lang = (lang.code === 'zh') ? 'zh-CN' : lang.code;
-        document.documentElement.dir = (lang.code === 'ar') ? 'rtl' : 'ltr';
+        // Load translate script if not English
+        if (lang.code !== 'en') loadGTE();
 
-        const hiddenSelect = document.getElementById('langSel');
-        if (hiddenSelect) {
-          hiddenSelect.value = lang.code;
-        }
-
-        if (lang.code !== 'en' && !window.google) {
-          if (!window.__gte_loading) {
-            window.__gte_loading = true;
-            const script = document.createElement('script');
-            script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-            script.async = true;
-            script.onload = function() {
-              setTimeout(() => window.location.reload(), 100);
-            };
-            document.head.appendChild(script);
-          }
-        } else if (lang.code === 'en') {
-          document.cookie = 'googtrans=; path=/; max-age=0';
-          window.location.reload();
-        } else {
-          window.location.reload();
-        }
-
-        menuOpen = false;
-        langMenu.classList.remove('show');
-        langBtn.setAttribute('aria-expanded', 'false');
+        // Reload page to apply translation
+        location.reload();
       }
     })();
 
@@ -1489,40 +1507,54 @@
 
     // Load saved language on page load
     (function() {
-      const saved = localStorage.getItem('sp_lang') || 'en';
-      const code = saved.toLowerCase().startsWith('zh') ? 'zh' : saved.slice(0, 2);
+      const LANG_KEY = 'sp_lang';
+
+      function baseDomain(host) {
+        const p = host.split('.');
+        return p.length > 2 ? p.slice(-2).join('.') : host;
+      }
+
+      function setCookie(name, value, days, domain) {
+        let expires = '';
+        if (days) {
+          const d = new Date();
+          d.setTime(d.getTime() + days * 864e5);
+          expires = '; expires=' + d.toUTCString();
+        }
+        const dom = domain ? '; domain=' + domain : '';
+        document.cookie = name + '=' + value + expires + '; path=/' + dom;
+      }
+
+      function setGoogTrans(lang) {
+        const target = (lang === 'zh') ? 'zh-CN' : lang;
+        const val = '/en/' + target;
+        setCookie('googtrans', val, 365);
+        const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
+        setCookie('googtrans', val, 365, root);
+      }
+
+      function applyDirLang(lang) {
+        document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : lang;
+        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
+
+      function loadGTE() {
+        if (window.__gte_loading || window.google) return;
+        window.__gte_loading = true;
+        const s = document.createElement('script');
+        s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        s.async = true;
+        document.head.appendChild(s);
+      }
 
       const sel = document.getElementById('langSel');
+      const saved = localStorage.getItem(LANG_KEY) || 'en';
+      const code = saved.toLowerCase().startsWith('zh') ? 'zh' : saved.slice(0, 2);
+
       if (sel) sel.value = code;
-
-      const target = (code === 'zh') ? 'zh-CN' : code;
-      const value = '/en/' + target;
-      document.cookie = 'googtrans=' + value + '; path=/; max-age=31536000';
-
-      document.documentElement.lang = (code === 'zh') ? 'zh-CN' : code;
-      document.documentElement.dir = (code === 'ar') ? 'rtl' : 'ltr';
-
-      if (code !== 'en' && !window.google && !window.__gte_loading) {
-        // Check if we need to reload for translation to apply
-        const currentCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-        const isTranslated = window.location.href.includes('#googtrans');
-
-        if (!isTranslated && currentCookie) {
-          // Cookie is set but page isn't translated - reload to apply
-          window.location.reload();
-        } else {
-          // Load the script for first time
-          window.__gte_loading = true;
-          const script = document.createElement('script');
-          script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-          script.async = true;
-          script.onload = function() {
-            // Reload page after script loads to apply translation
-            setTimeout(() => window.location.reload(), 100);
-          };
-          document.head.appendChild(script);
-        }
-      }
+      setGoogTrans(code);
+      applyDirLang(code);
+      if (code !== 'en') loadGTE();
     })();
 
     // FAQ Search Functionality
