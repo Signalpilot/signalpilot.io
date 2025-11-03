@@ -488,40 +488,6 @@
       }
     },
 
-    cyberpunk: {
-      name: 'Cyberpunk',
-      icon: '🌃',
-      description: 'Neon dystopia',
-      colors: {
-        bg: '#0a0014',
-        bgElev: '#1a0028',
-        bgSoft: '#2a0f3d',
-        text: '#fdf4ff',
-        muted: '#f0abfc',
-        mutedSoft: '#c084fc',
-        brand: '#ec4899',
-        brandGlow: 'rgba(236, 72, 153, 0.7)',
-        accent: '#06b6d4',
-        success: '#10b981',
-        warn: '#f59e0b',
-        border: 'rgba(236, 72, 153, 0.28)'
-      },
-      particles: {
-        type: 'holo-glyphs',
-        color: 'rgba(236, 72, 153, 0.8)',
-        lineColor: 'rgba(6, 182, 212, 0.6)',
-        count: 40
-      },
-      aurora: {
-        colors: [
-          'rgba(236, 72, 153, 0.45)',
-          'rgba(6, 182, 212, 0.40)',
-          'rgba(168, 85, 247, 0.35)',
-          'rgba(236, 72, 153, 0.30)'
-        ]
-      }
-    },
-
     quantum: {
       name: 'Quantum',
       icon: '⚛️',
