@@ -1228,7 +1228,19 @@
     }
 
     // Draw connections between nearby particles (skip for matrix-rain and falling effects)
-    const skipConnections = ['matrix-rain', 'bitcoin-rain', 'sakura-petals', 'snowflakes', 'lava-embers'].includes(currentConfig.type);
+    const skipConnections = [
+      'matrix-rain',
+      'bitcoin-rain',
+      'sakura-petals',
+      'snowflakes',
+      'lava-embers',
+      'lightning',
+      'fireworks',
+      'vaporwave-grid',
+      'warp-stars',
+      'light-trails',
+      'holo-glyphs'
+    ].includes(currentConfig.type);
 
     if (!skipConnections) {
       const linkDist = Math.min(W, H) * 0.12;
