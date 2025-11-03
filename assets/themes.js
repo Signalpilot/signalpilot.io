@@ -486,6 +486,176 @@
           'rgba(236, 72, 153, 0.30)'
         ]
       }
+    },
+
+    cyberpunk: {
+      name: 'Cyberpunk',
+      icon: '🌃',
+      description: 'Neon dystopia',
+      colors: {
+        bg: '#0a0014',
+        bgElev: '#1a0028',
+        bgSoft: '#2a0f3d',
+        text: '#fdf4ff',
+        muted: '#f0abfc',
+        mutedSoft: '#c084fc',
+        brand: '#ec4899',
+        brandGlow: 'rgba(236, 72, 153, 0.7)',
+        accent: '#06b6d4',
+        success: '#10b981',
+        warn: '#f59e0b',
+        border: 'rgba(236, 72, 153, 0.28)'
+      },
+      particles: {
+        type: 'holo-glyphs',
+        color: 'rgba(236, 72, 153, 0.8)',
+        lineColor: 'rgba(6, 182, 212, 0.6)',
+        count: 40
+      },
+      aurora: {
+        colors: [
+          'rgba(236, 72, 153, 0.45)',
+          'rgba(6, 182, 212, 0.40)',
+          'rgba(168, 85, 247, 0.35)',
+          'rgba(236, 72, 153, 0.30)'
+        ]
+      }
+    },
+
+    quantum: {
+      name: 'Quantum',
+      icon: '⚛️',
+      description: 'Particle physics',
+      colors: {
+        bg: '#000508',
+        bgElev: '#0a1018',
+        bgSoft: '#0f1a28',
+        text: '#dbeafe',
+        muted: '#93c5fd',
+        mutedSoft: '#60a5fa',
+        brand: '#3b82f6',
+        brandGlow: 'rgba(59, 130, 246, 0.6)',
+        accent: '#8b5cf6',
+        success: '#10b981',
+        warn: '#f59e0b',
+        border: 'rgba(59, 130, 246, 0.22)'
+      },
+      particles: {
+        type: 'quantum-dots',
+        color: 'rgba(139, 92, 246, 0.85)',
+        lineColor: 'rgba(59, 130, 246, 0.5)',
+        count: 45
+      },
+      aurora: {
+        colors: [
+          'rgba(59, 130, 246, 0.45)',
+          'rgba(139, 92, 246, 0.40)',
+          'rgba(167, 139, 250, 0.35)',
+          'rgba(96, 165, 250, 0.30)'
+        ]
+      }
+    },
+
+    spacewarp: {
+      name: 'Space Warp',
+      icon: '🌠',
+      description: 'Hyperspace jump',
+      colors: {
+        bg: '#000000',
+        bgElev: '#050510',
+        bgSoft: '#0a0a1a',
+        text: '#ffffff',
+        muted: '#e0e7ff',
+        mutedSoft: '#c7d2fe',
+        brand: '#6366f1',
+        brandGlow: 'rgba(99, 102, 241, 0.7)',
+        accent: '#a78bfa',
+        success: '#10b981',
+        warn: '#f59e0b',
+        border: 'rgba(99, 102, 241, 0.25)'
+      },
+      particles: {
+        type: 'warp-stars',
+        color: 'rgba(255, 255, 255, 0.9)',
+        lineColor: 'rgba(165, 180, 252, 0.6)',
+        count: 60
+      },
+      aurora: {
+        colors: [
+          'rgba(99, 102, 241, 0.40)',
+          'rgba(167, 139, 250, 0.35)',
+          'rgba(129, 140, 248, 0.30)',
+          'rgba(165, 180, 252, 0.25)'
+        ]
+      }
+    },
+
+    neural: {
+      name: 'Neural Net',
+      icon: '🧠',
+      description: 'AI consciousness',
+      colors: {
+        bg: '#050a0a',
+        bgElev: '#0a1414',
+        bgSoft: '#0f1f1f',
+        text: '#d1fae5',
+        muted: '#6ee7b7',
+        mutedSoft: '#34d399',
+        brand: '#10b981',
+        brandGlow: 'rgba(16, 185, 129, 0.6)',
+        accent: '#06b6d4',
+        success: '#22c55e',
+        warn: '#f59e0b',
+        border: 'rgba(16, 185, 129, 0.22)'
+      },
+      particles: {
+        type: 'neural-nodes',
+        color: 'rgba(16, 185, 129, 0.8)',
+        lineColor: 'rgba(6, 182, 212, 0.5)',
+        count: 35
+      },
+      aurora: {
+        colors: [
+          'rgba(16, 185, 129, 0.35)',
+          'rgba(6, 182, 212, 0.30)',
+          'rgba(20, 184, 166, 0.25)',
+          'rgba(52, 211, 153, 0.20)'
+        ]
+      }
+    },
+
+    tron: {
+      name: 'Tron',
+      icon: '💿',
+      description: 'Digital frontier',
+      colors: {
+        bg: '#000000',
+        bgElev: '#001a1a',
+        bgSoft: '#002a2a',
+        text: '#e0f2fe',
+        muted: '#67e8f9',
+        mutedSoft: '#22d3ee',
+        brand: '#06b6d4',
+        brandGlow: 'rgba(6, 182, 212, 0.7)',
+        accent: '#0ea5e9',
+        success: '#10b981',
+        warn: '#f59e0b',
+        border: 'rgba(6, 182, 212, 0.28)'
+      },
+      particles: {
+        type: 'light-trails',
+        color: 'rgba(6, 182, 212, 0.9)',
+        lineColor: 'rgba(34, 211, 238, 0.6)',
+        count: 50
+      },
+      aurora: {
+        colors: [
+          'rgba(6, 182, 212, 0.45)',
+          'rgba(34, 211, 238, 0.40)',
+          'rgba(14, 165, 233, 0.35)',
+          'rgba(103, 232, 249, 0.30)'
+        ]
+      }
     }
   };
 
