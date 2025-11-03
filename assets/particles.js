@@ -280,21 +280,35 @@
         };
 
       case 'lightning':
-        // Epic lightning bolt
+        // Simple corner-to-corner lightning
+        const corner = Math.floor(Math.random() * 4); // 0=TL, 1=TR, 2=BL, 3=BR
+        let startX, startY, endX, endY;
+
+        if (corner === 0) { // Top-left to bottom-right
+          startX = 0; startY = 0;
+          endX = W; endY = H;
+        } else if (corner === 1) { // Top-right to bottom-left
+          startX = W; startY = 0;
+          endX = 0; endY = H;
+        } else if (corner === 2) { // Bottom-left to top-right
+          startX = 0; startY = H;
+          endX = W; endY = 0;
+        } else { // Bottom-right to top-left
+          startX = W; startY = H;
+          endX = 0; endY = 0;
+        }
+
         return {
-          x: Math.random() * W * 0.8 + W * 0.1, // Start in middle 80% of screen
-          y: 0,
+          x: startX,
+          y: startY,
+          endX: endX,
+          endY: endY,
           vx: 0,
           vy: 0,
-          targetX: Math.random() * W, // Where it ends
-          size: Math.random() * 4 + 3, // Thickness 3-7
+          size: Math.random() * 2 + 2, // Thickness 2-4
           life: 0,
-          maxLife: 12 + Math.floor(Math.random() * 8), // Flash duration 12-20 frames
-          alpha: 1.0,
-          segments: [], // Will hold lightning path segments
-          branches: Math.floor(Math.random() * 3) + 2, // 2-4 branch points
-          intensity: Math.random() * 0.3 + 0.7, // Brightness variation 0.7-1.0
-          respawnTime: Math.floor(Math.random() * 60) + 120 // Respawn after 120-180 frames
+          maxLife: 10, // Quick flash
+          alpha: 1.0
         };
 
       case 'vaporwave-grid':
@@ -336,6 +350,76 @@
             alpha: 0.4 + Math.random() * 0.3
           };
         }
+
+      case 'holo-glyphs':
+        // Cyberpunk holographic glyphs
+        return {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() * 2 - 1) * 0.5,
+          vy: -(Math.random() * 0.5 + 0.3), // Drift up slowly
+          size: Math.random() * 20 + 15,
+          glyph: ['ﾊ', 'ﾐ', 'ﾋ', 'ｰ', '|', '・', 'ｷ'][Math.floor(Math.random() * 7)],
+          glitch: Math.random() * Math.PI * 2,
+          glitchSpeed: Math.random() * 0.1 + 0.05,
+          alpha: Math.random() * 0.4 + 0.3
+        };
+
+      case 'quantum-dots':
+        // Quantum particles that phase in/out
+        return {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() * 2 - 1) * 0.3,
+          vy: (Math.random() * 2 - 1) * 0.3,
+          size: Math.random() * 3 + 2,
+          phase: Math.random() * Math.PI * 2,
+          phaseSpeed: Math.random() * 0.08 + 0.04,
+          entangled: null, // Will connect to another particle
+          alpha: 1.0
+        };
+
+      case 'warp-stars':
+        // Stars streaking past like hyperspace
+        return {
+          x: W / 2 + (Math.random() * 200 - 100), // Start near center
+          y: H / 2 + (Math.random() * 200 - 100),
+          vx: 0,
+          vy: 0,
+          angle: Math.random() * Math.PI * 2,
+          speed: Math.random() * 2 + 1,
+          acceleration: 0.1,
+          length: 0, // Trail length grows
+          size: Math.random() * 2 + 1,
+          alpha: 1.0
+        };
+
+      case 'neural-nodes':
+        // Neural network nodes
+        return {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: 0,
+          vy: 0,
+          size: Math.random() * 4 + 3,
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: Math.random() * 0.05 + 0.02,
+          connections: [], // Will connect to nearby nodes
+          alpha: 0.7 + Math.random() * 0.3
+        };
+
+      case 'light-trails':
+        // Tron light cycle trails
+        return {
+          x: Math.random() < 0.5 ? 0 : W, // Start from sides
+          y: Math.random() * H,
+          vx: Math.random() < 0.5 ? 2 : -2, // Move across screen
+          vy: 0,
+          size: Math.random() * 3 + 2,
+          trail: [], // Store trail positions
+          maxTrail: Math.floor(Math.random() * 50) + 100, // Long trails
+          alpha: 0.8 + Math.random() * 0.2
+        };
 
       default: // stars
         return {
@@ -800,74 +884,22 @@
         break;
 
       case 'lightning':
-        // Epic lightning bolt effect
+        // Simple corner-to-corner lightning
         p.life++;
 
-        // Generate lightning path on first frame
-        if (p.segments.length === 0) {
-          let currentX = p.x;
-          let currentY = 0;
-          const segments = Math.floor(Math.random() * 8) + 12; // 12-20 segments
-
-          for (let i = 0; i < segments; i++) {
-            const nextX = currentX + (Math.random() * 80 - 40);
-            const nextY = currentY + (H / segments);
-            p.segments.push({ x: currentX, y: currentY, endX: nextX, endY: nextY });
-
-            // Add random branches
-            if (Math.random() < 0.3 && p.segments.length < 30) {
-              const branchSegments = Math.floor(Math.random() * 3) + 2;
-              let branchX = currentX;
-              let branchY = currentY;
-
-              for (let j = 0; j < branchSegments; j++) {
-                const bNextX = branchX + (Math.random() * 60 - 30) * (Math.random() < 0.5 ? 1 : -1);
-                const bNextY = branchY + (H / segments) * 0.8;
-                p.segments.push({ x: branchX, y: branchY, endX: bNextX, endY: bNextY });
-                branchX = bNextX;
-                branchY = bNextY;
-              }
-            }
-
-            currentX = nextX;
-            currentY = nextY;
-          }
-        }
-
-        // Fade out effect
         const lifeRatio = 1 - (p.life / p.maxLife);
-        const flashAlpha = p.intensity * lifeRatio;
 
-        // Draw dramatic lightning
-        ctx.globalAlpha = flashAlpha;
-        ctx.shadowColor = config.lineColor;
-        ctx.shadowBlur = 25;
-
-        // Main lightning bolt - thick white core
+        // Draw simple lightning line
+        ctx.globalAlpha = lifeRatio;
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = p.size;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'miter';
+        ctx.shadowColor = config.lineColor;
+        ctx.shadowBlur = 15;
 
-        p.segments.forEach(seg => {
-          ctx.beginPath();
-          ctx.moveTo(seg.x, seg.y);
-          ctx.lineTo(seg.endX, seg.endY);
-          ctx.stroke();
-        });
-
-        // Outer glow - purple/blue aura
-        ctx.globalAlpha = flashAlpha * 0.6;
-        ctx.strokeStyle = config.lineColor;
-        ctx.lineWidth = p.size * 2.5;
-        ctx.shadowBlur = 40;
-
-        p.segments.forEach(seg => {
-          ctx.beginPath();
-          ctx.moveTo(seg.x, seg.y);
-          ctx.lineTo(seg.endX, seg.endY);
-          ctx.stroke();
-        });
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.endX, p.endY);
+        ctx.stroke();
 
         ctx.shadowBlur = 0;
 
@@ -925,6 +957,128 @@
             ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
             ctx.stroke();
           }
+        }
+        break;
+
+      case 'holo-glyphs':
+        // Cyberpunk holographic glyphs
+        p.glitch += p.glitchSpeed;
+        const glitchOffset = Math.sin(p.glitch) * 3;
+
+        ctx.globalAlpha = p.alpha;
+        ctx.font = `bold ${p.size}px monospace`;
+        ctx.fillStyle = config.color;
+        ctx.textAlign = 'center';
+        ctx.shadowColor = config.color;
+        ctx.shadowBlur = 8;
+
+        ctx.fillText(p.glyph, p.x + glitchOffset, p.y);
+        ctx.shadowBlur = 0;
+        break;
+
+      case 'quantum-dots':
+        // Quantum particles with entanglement lines
+        p.phase += p.phaseSpeed;
+        const phaseAlpha = p.alpha * ((Math.sin(p.phase) + 1) / 2);
+
+        // Draw particle
+        ctx.globalAlpha = phaseAlpha;
+        const quantumGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 2);
+        quantumGrad.addColorStop(0, config.color);
+        quantumGrad.addColorStop(0.7, config.color.replace(/[\d.]+\)/, '0.3)'));
+        quantumGrad.addColorStop(1, 'transparent');
+
+        ctx.fillStyle = quantumGrad;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
+        ctx.fill();
+        break;
+
+      case 'warp-stars':
+        // Stars streaking - hyperspace effect
+        p.speed += p.acceleration;
+        p.length = Math.min(p.speed * 15, 150); // Max trail length
+
+        const dx = Math.cos(p.angle) * p.speed;
+        const dy = Math.sin(p.angle) * p.speed;
+        p.vx = dx;
+        p.vy = dy;
+
+        ctx.globalAlpha = p.alpha;
+        ctx.strokeStyle = config.color;
+        ctx.lineWidth = p.size;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x - dx * (p.length / p.speed), p.y - dy * (p.length / p.speed));
+        ctx.stroke();
+
+        // Reset if off screen
+        if (p.x < -50 || p.x > W + 50 || p.y < -50 || p.y > H + 50) {
+          p.x = W / 2 + (Math.random() * 200 - 100);
+          p.y = H / 2 + (Math.random() * 200 - 100);
+          p.speed = Math.random() * 2 + 1;
+          p.length = 0;
+        }
+        break;
+
+      case 'neural-nodes':
+        // Neural network nodes with connections
+        p.pulse += p.pulseSpeed;
+        const pulseSize = p.size * (1 + Math.sin(p.pulse) * 0.2);
+
+        // Draw node
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = config.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, pulseSize, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Draw connections to nearby particles (simple version - just draw to nearest)
+        ctx.globalAlpha = p.alpha * 0.3;
+        ctx.strokeStyle = config.lineColor;
+        ctx.lineWidth = 1;
+
+        particles.forEach(other => {
+          if (other !== p && other.x && other.y) {
+            const dist = Math.hypot(p.x - other.x, p.y - other.y);
+            if (dist < 150) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(other.x, other.y);
+              ctx.stroke();
+            }
+          }
+        });
+        break;
+
+      case 'light-trails':
+        // Tron light cycle trails
+        p.trail.push({ x: p.x, y: p.y });
+        if (p.trail.length > p.maxTrail) p.trail.shift();
+
+        // Draw trail
+        if (p.trail.length > 1) {
+          ctx.globalAlpha = p.alpha;
+          ctx.strokeStyle = config.color;
+          ctx.lineWidth = p.size;
+          ctx.shadowColor = config.color;
+          ctx.shadowBlur = 10;
+
+          ctx.beginPath();
+          ctx.moveTo(p.trail[0].x, p.trail[0].y);
+          for (let i = 1; i < p.trail.length; i++) {
+            ctx.lineTo(p.trail[i].x, p.trail[i].y);
+          }
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+        }
+
+        // Reset if off screen
+        if (p.x < -50 || p.x > W + 50) {
+          p.x = Math.random() < 0.5 ? 0 : W;
+          p.y = Math.random() * H;
+          p.vx = Math.random() < 0.5 ? 2 : -2;
+          p.trail = [];
         }
         break;
 
