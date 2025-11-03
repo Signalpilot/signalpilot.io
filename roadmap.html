@@ -1283,11 +1283,25 @@
 
       // Load Google Translate if not English
       if (code !== 'en' && !window.google && !window.__gte_loading) {
-        window.__gte_loading = true;
-        const script = document.createElement('script');
-        script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-        script.async = true;
-        document.head.appendChild(script);
+        // Check if we need to reload for translation to apply
+        const currentCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+        const isTranslated = window.location.href.includes('#googtrans');
+
+        if (!isTranslated && currentCookie) {
+          // Cookie is set but page isn't translated - reload to apply
+          window.location.reload();
+        } else {
+          // Load the script for first time
+          window.__gte_loading = true;
+          const script = document.createElement('script');
+          script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          script.async = true;
+          script.onload = function() {
+            // Reload page after script loads to apply translation
+            setTimeout(() => window.location.reload(), 100);
+          };
+          document.head.appendChild(script);
+        }
       }
     })();
 
