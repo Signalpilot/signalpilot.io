@@ -97,28 +97,6 @@
           pulseSpeed: Math.random() * 0.1 + 0.05
         };
 
-      case 'sun-rays':
-        // Sun rays emanating from center-left of screen
-        if (!createParticle.rayIndex) createParticle.rayIndex = 0;
-        const rayAngle = (createParticle.rayIndex / 40) * Math.PI * 2; // Evenly distributed rays
-        createParticle.rayIndex++;
-
-        return {
-          x: W * 0.15, // Sun position X (left side)
-          y: H * 0.3, // Sun position Y (upper area)
-          vx: 0,
-          vy: 0,
-          angle: rayAngle,
-          baseAngle: rayAngle, // Store original angle
-          length: Math.random() * 150 + 100, // Ray length 100-250
-          opacity: Math.random() * 0.4 + 0.3, // 0.3-0.7 opacity
-          rotationSpeed: 0.001, // Slow rotation
-          pulse: Math.random() * Math.PI * 2,
-          pulseSpeed: Math.random() * 0.02 + 0.01,
-          alpha: 1.0,
-          size: Math.random() * 3 + 2 // Width of ray
-        };
-
       case 'matrix-rain':
         // Matrix rain columns - CONSISTENT and EVENLY DISTRIBUTED
         // Start with particles already on screen for smooth immediate effect
@@ -285,6 +263,186 @@
           };
         }
 
+      case 'presents':
+        // Falling Christmas presents
+        return {
+          x: Math.random() * W,
+          y: -20 - Math.random() * H * 0.3,
+          vx: (Math.random() * 2 - 1) * 0.3,
+          vy: Math.random() * 1.2 + 0.8, // 0.8-2.0
+          size: Math.random() * 12 + 8, // 8-20px
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() * 2 - 1) * 0.06,
+          color: Math.random() < 0.5 ? 'red' : 'green', // Red or green presents
+          alpha: 0.8 + Math.random() * 0.2
+        };
+
+      case 'fireworks':
+        // Fireworks that explode
+        return {
+          x: Math.random() * W,
+          y: H + 20,
+          vx: (Math.random() * 2 - 1) * 2,
+          vy: -(Math.random() * 3 + 4), // Shoot up 4-7
+          size: Math.random() * 3 + 2,
+          exploded: false,
+          explodeTime: Math.random() * 60 + 40, // Explode after 40-100 frames
+          life: 0,
+          particles: [], // Will hold explosion particles
+          color: ['#fde047', '#fb923c', '#ec4899', '#a78bfa', '#22c55e'][Math.floor(Math.random() * 5)],
+          alpha: 1.0
+        };
+
+      case 'hearts':
+        // Floating hearts
+        return {
+          x: Math.random() * W,
+          y: H + 20,
+          vx: (Math.random() * 2 - 1) * 0.4,
+          vy: -(Math.random() * 0.8 + 0.6), // Float up 0.6-1.4
+          size: Math.random() * 8 + 6, // 6-14px
+          rotation: Math.random() * Math.PI * 0.4 - 0.2, // Slight tilt
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: Math.random() * 0.08 + 0.04,
+          sway: Math.random() * Math.PI * 2,
+          swaySpeed: Math.random() * 0.05 + 0.02,
+          alpha: 0.7 + Math.random() * 0.3
+        };
+
+      case 'aurora-stars':
+        // Twinkling stars for aurora theme
+        return {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: 0,
+          vy: 0,
+          size: Math.random() * 2.5 + 0.8,
+          twinkle: Math.random() * Math.PI * 2,
+          twinkleSpeed: Math.random() * 0.06 + 0.03,
+          brightness: Math.random(),
+          alpha: 0.5 + Math.random() * 0.5
+        };
+
+      case 'sand-shimmer':
+        // Heat shimmer particles
+        return {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: 0,
+          vy: -(Math.random() * 0.3 + 0.1), // Slow rise 0.1-0.4
+          size: Math.random() * 30 + 20, // 20-50px blur
+          wave: Math.random() * Math.PI * 2,
+          waveSpeed: Math.random() * 0.06 + 0.04,
+          waveAmount: Math.random() * 2 + 1,
+          alpha: 0.15 + Math.random() * 0.15 // Very subtle 0.15-0.3
+        };
+
+      case 'lightning-rain':
+        // Rain with occasional lightning
+        if (Math.random() < 0.05) {
+          // Lightning bolt
+          return {
+            x: Math.random() * W,
+            y: 0,
+            vx: 0,
+            vy: 0,
+            size: Math.random() * 3 + 2,
+            type: 'lightning',
+            life: 0,
+            maxLife: 8, // Short flash
+            alpha: 1.0,
+            branches: Math.floor(Math.random() * 3) + 2 // 2-4 branches
+          };
+        } else {
+          // Regular rain drop
+          return {
+            x: Math.random() * W,
+            y: -10,
+            vx: (Math.random() * 2 - 1) * 0.5,
+            vy: Math.random() * 3 + 4, // Fast rain 4-7
+            size: Math.random() * 2 + 1,
+            type: 'raindrop',
+            alpha: 0.5 + Math.random() * 0.3
+          };
+        }
+
+      case 'pixel-sprites':
+        // 8-bit retro sprites
+        return {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() * 2 - 1) * 0.8,
+          vy: (Math.random() * 2 - 1) * 0.8,
+          size: Math.random() * 8 + 6, // 6-14px
+          sprite: Math.floor(Math.random() * 4), // 4 sprite types
+          blink: Math.random() * Math.PI * 2,
+          blinkSpeed: Math.random() * 0.1 + 0.05,
+          alpha: 0.8 + Math.random() * 0.2
+        };
+
+      case 'vaporwave-grid':
+        // Vaporwave aesthetic with grid and shapes
+        const shapeType = Math.random();
+        if (shapeType < 0.3) {
+          // Grid line (horizontal)
+          return {
+            x: 0,
+            y: Math.random() * H,
+            vx: 0,
+            vy: Math.random() * 0.5 + 0.2, // Slow drift 0.2-0.7
+            size: 2, // Line thickness
+            type: 'grid-h',
+            alpha: 0.3 + Math.random() * 0.2
+          };
+        } else if (shapeType < 0.6) {
+          // Grid line (vertical)
+          return {
+            x: Math.random() * W,
+            y: 0,
+            vx: Math.random() * 0.5 + 0.2,
+            vy: 0,
+            size: 2,
+            type: 'grid-v',
+            alpha: 0.3 + Math.random() * 0.2
+          };
+        } else {
+          // Geometric shape
+          return {
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() * 2 - 1) * 0.6,
+            vy: (Math.random() * 2 - 1) * 0.6,
+            size: Math.random() * 20 + 15, // 15-35px
+            type: ['triangle', 'square', 'circle'][Math.floor(Math.random() * 3)],
+            rotation: Math.random() * Math.PI * 2,
+            rotationSpeed: (Math.random() * 2 - 1) * 0.04,
+            alpha: 0.4 + Math.random() * 0.3
+          };
+        }
+
+      case 'binary-rain':
+        // Binary code rain (lighter matrix)
+        if (!createParticle.binaryIndex) createParticle.binaryIndex = 0;
+
+        const binColumnSpacing = W / 55;
+        const binX = (createParticle.binaryIndex % 55) * binColumnSpacing + (binColumnSpacing / 2);
+        const binY = Math.random() * H - 150;
+
+        createParticle.binaryIndex++;
+
+        return {
+          x: binX,
+          y: binY,
+          vx: 0,
+          vy: 1.8, // Slower than matrix
+          size: 16,
+          chars: [], // Will hold 0s and 1s
+          trailLength: Math.floor(Math.random() * 3) + 10, // 10-12 chars
+          speed: 0.1,
+          frame: 0,
+          alpha: 1.0
+        };
+
       default: // stars
         return {
           ...base,
@@ -403,54 +561,6 @@
         ctx.beginPath();
         ctx.arc(p.x, p.y, pulseSize * 0.5, 0, Math.PI * 2);
         ctx.fill();
-        break;
-
-      case 'sun-rays':
-        // Animated sun rays - dramatic and visible
-        p.pulse += p.pulseSpeed;
-        p.angle += p.rotationSpeed;
-
-        const rayLength = p.length * (1 + Math.sin(p.pulse) * 0.2); // More pulsing
-        const rayOpacity = p.opacity * p.alpha * 1.2; // Brighter
-
-        // Calculate ray end point
-        const endX = p.x + Math.cos(p.angle) * rayLength;
-        const endY = p.y + Math.sin(p.angle) * rayLength;
-
-        // Draw thicker ray with glow
-        ctx.globalAlpha = 1;
-        ctx.shadowColor = config.color.replace(/[\d.]+\)/, '0.6)');
-        ctx.shadowBlur = 15;
-
-        // Main ray - gradient from bright orange to transparent
-        const rayGrad = ctx.createLinearGradient(p.x, p.y, endX, endY);
-        rayGrad.addColorStop(0, `rgba(251, 146, 60, ${rayOpacity})`); // Bright orange
-        rayGrad.addColorStop(0.3, `rgba(249, 115, 22, ${rayOpacity * 0.8})`); // Mid orange
-        rayGrad.addColorStop(0.7, `rgba(251, 191, 36, ${rayOpacity * 0.5})`); // Golden
-        rayGrad.addColorStop(1, 'transparent');
-
-        ctx.strokeStyle = rayGrad;
-        ctx.lineWidth = p.size * 1.5; // Thicker rays
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(endX, endY);
-        ctx.stroke();
-
-        ctx.shadowBlur = 0;
-
-        // Draw a glowing sun at the center every frame
-        if (p.baseAngle === 0) { // Only first particle draws the sun
-          const sunGlow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 60);
-          sunGlow.addColorStop(0, 'rgba(251, 191, 36, 0.8)'); // Bright golden center
-          sunGlow.addColorStop(0.3, 'rgba(249, 115, 22, 0.6)'); // Orange
-          sunGlow.addColorStop(0.6, 'rgba(251, 146, 60, 0.3)'); // Soft orange
-          sunGlow.addColorStop(1, 'transparent');
-          ctx.fillStyle = sunGlow;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 60, 0, Math.PI * 2);
-          ctx.fill();
-        }
         break;
 
       case 'matrix-rain':
@@ -730,6 +840,345 @@
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
           ctx.fill();
+        }
+        break;
+
+      case 'presents':
+        // Christmas present falling
+        p.rotation += p.rotationSpeed;
+
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+
+        ctx.globalAlpha = p.alpha;
+
+        // Present box
+        const boxColor = p.color === 'red' ? '#dc2626' : '#22c55e';
+        ctx.fillStyle = boxColor;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+
+        // Ribbon
+        const ribbonColor = p.color === 'red' ? '#fbbf24' : '#dc2626';
+        ctx.fillStyle = ribbonColor;
+        ctx.fillRect(-p.size / 2, -p.size * 0.1, p.size, p.size * 0.2);
+        ctx.fillRect(-p.size * 0.1, -p.size / 2, p.size * 0.2, p.size);
+
+        // Bow on top
+        ctx.beginPath();
+        ctx.arc(-p.size * 0.15, -p.size / 2, p.size * 0.15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(p.size * 0.15, -p.size / 2, p.size * 0.15, 0, Math.PI * 2);
+        ctx.fill();
+        break;
+
+      case 'fireworks':
+        // Fireworks animation
+        p.life++;
+
+        if (!p.exploded) {
+          // Rising rocket
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Trail
+          ctx.globalAlpha = p.alpha * 0.5;
+          ctx.fillStyle = p.color;
+          for (let i = 1; i <= 3; i++) {
+            ctx.beginPath();
+            ctx.arc(p.x - p.vx * i * 2, p.y - p.vy * i * 2, p.size * (1 - i * 0.2), 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          if (p.life > p.explodeTime) {
+            p.exploded = true;
+            p.vx = 0;
+            p.vy = 0;
+            // Create explosion particles
+            for (let i = 0; i < 30; i++) {
+              const angle = (i / 30) * Math.PI * 2;
+              const speed = Math.random() * 3 + 2;
+              p.particles.push({
+                x: 0,
+                y: 0,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                life: 0,
+                maxLife: 40 + Math.random() * 20
+              });
+            }
+          }
+        } else {
+          // Exploded - draw particles
+          p.particles.forEach(particle => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.vy += 0.08; // Gravity
+            particle.life++;
+
+            const lifeRatio = 1 - (particle.life / particle.maxLife);
+            ctx.globalAlpha = p.alpha * lifeRatio;
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x + particle.x, p.y + particle.y, 2, 0, Math.PI * 2);
+            ctx.fill();
+          });
+
+          // Remove if done
+          if (p.particles.length > 0 && p.particles[0].life > p.particles[0].maxLife) {
+            p.alpha = 0; // Mark for removal
+          }
+        }
+        break;
+
+      case 'hearts':
+        // Floating heart
+        p.pulse += p.pulseSpeed;
+        p.sway += p.swaySpeed;
+
+        const heartSize = p.size * (1 + Math.sin(p.pulse) * 0.15);
+        const swayX = Math.sin(p.sway) * 10;
+
+        ctx.translate(p.x + swayX, p.y);
+        ctx.rotate(p.rotation);
+
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = config.color;
+
+        // Draw heart shape
+        ctx.beginPath();
+        ctx.moveTo(0, heartSize * 0.3);
+        // Left curve
+        ctx.bezierCurveTo(-heartSize * 0.5, -heartSize * 0.2, -heartSize * 0.5, heartSize * 0.3, 0, heartSize * 0.7);
+        // Right curve
+        ctx.bezierCurveTo(heartSize * 0.5, heartSize * 0.3, heartSize * 0.5, -heartSize * 0.2, 0, heartSize * 0.3);
+        ctx.fill();
+
+        // Glow
+        ctx.globalAlpha = p.alpha * 0.3;
+        ctx.beginPath();
+        ctx.moveTo(0, heartSize * 0.35);
+        ctx.bezierCurveTo(-heartSize * 0.6, -heartSize * 0.25, -heartSize * 0.6, heartSize * 0.35, 0, heartSize * 0.8);
+        ctx.bezierCurveTo(heartSize * 0.6, heartSize * 0.35, heartSize * 0.6, -heartSize * 0.25, 0, heartSize * 0.35);
+        ctx.fill();
+        break;
+
+      case 'aurora-stars':
+        // Bright twinkling stars
+        p.twinkle += p.twinkleSpeed;
+        p.brightness = (Math.sin(p.twinkle) + 1) / 2;
+
+        const auroraAlpha = p.alpha * (0.5 + p.brightness * 0.5);
+
+        // Outer glow
+        const auroraGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
+        auroraGrad.addColorStop(0, config.color.replace(/[\d.]+\)/, `${auroraAlpha})`));
+        auroraGrad.addColorStop(0.5, config.color.replace(/[\d.]+\)/, `${auroraAlpha * 0.3})`));
+        auroraGrad.addColorStop(1, 'transparent');
+
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = auroraGrad;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Core star
+        ctx.fillStyle = '#ffffff';
+        ctx.globalAlpha = auroraAlpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2);
+        ctx.fill();
+        break;
+
+      case 'sand-shimmer':
+        // Heat shimmer effect
+        p.wave += p.waveSpeed;
+        const shimmerX = Math.sin(p.wave) * p.waveAmount;
+
+        ctx.globalAlpha = p.alpha;
+        const shimmerGrad = ctx.createRadialGradient(p.x + shimmerX, p.y, 0, p.x + shimmerX, p.y, p.size);
+        shimmerGrad.addColorStop(0, config.color.replace(/[\d.]+\)/, `${p.alpha * 0.8})`));
+        shimmerGrad.addColorStop(0.5, config.color.replace(/[\d.]+\)/, `${p.alpha * 0.4})`));
+        shimmerGrad.addColorStop(1, 'transparent');
+
+        ctx.fillStyle = shimmerGrad;
+        ctx.beginPath();
+        ctx.ellipse(p.x + shimmerX, p.y, p.size * 1.5, p.size * 0.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        break;
+
+      case 'lightning-rain':
+        // Lightning and rain
+        if (p.type === 'lightning') {
+          p.life++;
+          if (p.life > p.maxLife) {
+            p.alpha = 0; // Remove
+            break;
+          }
+
+          // Flash effect
+          const flashAlpha = 1 - (p.life / p.maxLife);
+          ctx.globalAlpha = flashAlpha;
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 3;
+          ctx.shadowColor = '#a5b4fc';
+          ctx.shadowBlur = 10;
+
+          // Draw jagged lightning bolt
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          let currentX = p.x;
+          let currentY = p.y;
+          for (let i = 0; i < p.branches; i++) {
+            currentX += (Math.random() * 40 - 20);
+            currentY += H / (p.branches * 1.5);
+            ctx.lineTo(currentX, currentY);
+          }
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+
+        } else {
+          // Raindrop
+          ctx.globalAlpha = p.alpha;
+          ctx.strokeStyle = config.color;
+          ctx.lineWidth = p.size;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.x, p.y + 10);
+          ctx.stroke();
+        }
+        break;
+
+      case 'pixel-sprites':
+        // 8-bit retro sprites
+        p.blink += p.blinkSpeed;
+        const blinkAlpha = p.alpha * (0.7 + Math.sin(p.blink) * 0.3);
+
+        ctx.globalAlpha = blinkAlpha;
+
+        // Draw pixelated sprite based on type
+        const pixelSize = p.size / 6;
+        const sprites = [
+          // Space invader
+          [[0,1,0,0,0,1,0],[0,0,1,1,1,0,0],[0,1,1,1,1,1,0],[1,1,0,1,0,1,1],[1,1,1,1,1,1,1],[0,0,1,0,1,0,0]],
+          // Pacman
+          [[0,1,1,1,1,0,0],[1,1,1,1,0,0,0],[1,1,1,0,0,0,0],[1,1,1,1,0,0,0],[0,1,1,1,1,0,0]],
+          // Ghost
+          [[0,1,1,1,1,1,0],[1,1,1,1,1,1,1],[1,0,1,1,0,1,1],[1,1,1,1,1,1,1],[1,1,1,1,1,1,1],[1,0,1,1,1,0,1]],
+          // Diamond
+          [[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[0,1,1,1,0],[0,0,1,0,0]]
+        ];
+
+        ctx.fillStyle = config.color;
+        const sprite = sprites[p.sprite];
+        sprite.forEach((row, y) => {
+          row.forEach((pixel, x) => {
+            if (pixel) {
+              ctx.fillRect(
+                p.x - (row.length * pixelSize) / 2 + x * pixelSize,
+                p.y - (sprite.length * pixelSize) / 2 + y * pixelSize,
+                pixelSize,
+                pixelSize
+              );
+            }
+          });
+        });
+        break;
+
+      case 'vaporwave-grid':
+        // Vaporwave aesthetic
+        ctx.globalAlpha = p.alpha;
+
+        if (p.type === 'grid-h') {
+          // Horizontal grid line
+          ctx.strokeStyle = config.lineColor;
+          ctx.lineWidth = p.size;
+          ctx.beginPath();
+          ctx.moveTo(0, p.y);
+          ctx.lineTo(W, p.y);
+          ctx.stroke();
+
+        } else if (p.type === 'grid-v') {
+          // Vertical grid line
+          ctx.strokeStyle = config.lineColor;
+          ctx.lineWidth = p.size;
+          ctx.beginPath();
+          ctx.moveTo(p.x, 0);
+          ctx.lineTo(p.x, H);
+          ctx.stroke();
+
+        } else {
+          // Geometric shape
+          p.rotation += p.rotationSpeed;
+
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rotation);
+
+          ctx.strokeStyle = config.color;
+          ctx.lineWidth = 2;
+
+          if (p.type === 'triangle') {
+            ctx.beginPath();
+            ctx.moveTo(0, -p.size / 2);
+            ctx.lineTo(p.size / 2, p.size / 2);
+            ctx.lineTo(-p.size / 2, p.size / 2);
+            ctx.closePath();
+            ctx.stroke();
+
+          } else if (p.type === 'square') {
+            ctx.strokeRect(-p.size / 2, -p.size / 2, p.size, p.size);
+
+          } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+        }
+        break;
+
+      case 'binary-rain':
+        // Binary code rain (0s and 1s)
+        ctx.font = `${p.size}px monospace`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+
+        // Initialize chars array if empty
+        if (p.chars.length === 0) {
+          for (let i = 0; i < p.trailLength; i++) {
+            p.chars.push(Math.random() < 0.5 ? '0' : '1');
+          }
+        }
+
+        // Randomly change characters
+        p.frame += p.speed;
+        if (p.frame > 1) {
+          p.frame = 0;
+          const idx = Math.floor(Math.random() * p.chars.length);
+          p.chars[idx] = Math.random() < 0.5 ? '0' : '1';
+        }
+
+        // Draw trail of binary digits - very subtle
+        for (let i = 0; i < p.trailLength; i++) {
+          const charY = p.y + (i * p.size);
+
+          if (i === 0) {
+            // Head character - subtle
+            ctx.fillStyle = 'rgba(134, 239, 172, 0.6)';
+            ctx.fillText(p.chars[i], p.x, charY);
+          } else if (i < 3) {
+            // Near-head characters
+            const alpha = 0.5 - (i * 0.1);
+            ctx.fillStyle = `rgba(34, 197, 94, ${alpha})`;
+            ctx.fillText(p.chars[i], p.x, charY);
+          } else {
+            // Trail - very subtle
+            const alpha = Math.max(0.15, (1 - i / p.trailLength) * p.alpha * 0.45);
+            ctx.fillStyle = `rgba(34, 197, 94, ${alpha})`;
+            ctx.fillText(p.chars[i], p.x, charY);
+          }
         }
         break;
 
