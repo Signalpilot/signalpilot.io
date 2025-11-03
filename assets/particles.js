@@ -97,29 +97,51 @@
           pulseSpeed: Math.random() * 0.1 + 0.05
         };
 
+      case 'sun-rays':
+        // Sun rays emanating from center-left of screen
+        if (!createParticle.rayIndex) createParticle.rayIndex = 0;
+        const rayAngle = (createParticle.rayIndex / 40) * Math.PI * 2; // Evenly distributed rays
+        createParticle.rayIndex++;
+
+        return {
+          x: W * 0.15, // Sun position X (left side)
+          y: H * 0.3, // Sun position Y (upper area)
+          vx: 0,
+          vy: 0,
+          angle: rayAngle,
+          baseAngle: rayAngle, // Store original angle
+          length: Math.random() * 150 + 100, // Ray length 100-250
+          opacity: Math.random() * 0.4 + 0.3, // 0.3-0.7 opacity
+          rotationSpeed: 0.001, // Slow rotation
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: Math.random() * 0.02 + 0.01,
+          alpha: 1.0,
+          size: Math.random() * 3 + 2 // Width of ray
+        };
+
       case 'matrix-rain':
         // Matrix rain columns - CONSISTENT and EVENLY DISTRIBUTED
-        // Use particle count to evenly space columns
+        // Start with particles already on screen for smooth immediate effect
         if (!createParticle.matrixIndex) createParticle.matrixIndex = 0;
 
-        const columnSpacing = W / 60; // Divide screen width by column count (reduced from 75)
+        const columnSpacing = W / 60; // Divide screen width by column count
         const xPosition = (createParticle.matrixIndex % 60) * columnSpacing + (columnSpacing / 2);
 
-        // Stagger Y positions evenly across the drop zone
-        const dropZone = H * 0.8; // Spread initial positions across 80% of screen height
-        const yOffset = (createParticle.matrixIndex % 20) * (dropZone / 20);
+        // Start particles at random Y positions across entire screen height
+        // This creates immediate full-screen rain effect without initialization cascade
+        const yPosition = Math.random() * H - 200; // Random position, some above screen
 
         createParticle.matrixIndex++;
 
         return {
           x: xPosition,
-          y: -yOffset - 100, // Start just above screen, staggered
+          y: yPosition, // Random Y position for immediate rain effect
           vx: 0,
-          vy: 2.5, // SLOWER, SMOOTHER fall speed (reduced from 5)
-          size: 20, // Font size
+          vy: 2.0, // Smooth fall speed
+          size: 18, // Slightly smaller font for smoother look
           chars: [], // Array of characters in this column
-          trailLength: Math.floor(Math.random() * 4) + 15, // 15-18 chars (tighter range)
-          speed: 0.15, // SLOWER character change for less flicker (reduced from 0.3)
+          trailLength: Math.floor(Math.random() * 3) + 14, // 14-16 chars (shorter trails)
+          speed: 0.12, // Slower character change for smoothness
           frame: 0,
           alpha: 1.0
         };
@@ -383,6 +405,45 @@
         ctx.fill();
         break;
 
+      case 'sun-rays':
+        // Animated sun rays
+        p.pulse += p.pulseSpeed;
+        p.angle += p.rotationSpeed;
+
+        const rayLength = p.length * (1 + Math.sin(p.pulse) * 0.15); // Pulsing length
+        const rayOpacity = p.opacity * p.alpha;
+
+        // Calculate ray end point
+        const endX = p.x + Math.cos(p.angle) * rayLength;
+        const endY = p.y + Math.sin(p.angle) * rayLength;
+
+        // Create gradient along the ray
+        const rayGrad = ctx.createLinearGradient(p.x, p.y, endX, endY);
+        rayGrad.addColorStop(0, config.lineColor.replace(/[\d.]+\)/, `${rayOpacity})`));
+        rayGrad.addColorStop(0.5, config.color.replace(/[\d.]+\)/, `${rayOpacity * 0.6})`));
+        rayGrad.addColorStop(1, 'transparent');
+
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = rayGrad;
+        ctx.lineWidth = p.size;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+
+        // Add glow at the center
+        if (Math.random() < 0.05) { // Occasional extra glow
+          const glowGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 30);
+          glowGrad.addColorStop(0, config.color.replace(/[\d.]+\)/, '0.4)'));
+          glowGrad.addColorStop(1, 'transparent');
+          ctx.fillStyle = glowGrad;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 30, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        break;
+
       case 'matrix-rain':
         // Falling Matrix rain column
         ctx.font = `bold ${p.size}px monospace`;  // BOLD for visibility
@@ -404,28 +465,28 @@
           p.chars[idx] = getRandomMatrixChar();
         }
 
-        // Draw trail of characters
+        // Draw trail of characters - smooth, minimal glow
         for (let i = 0; i < p.trailLength; i++) {
           const charY = p.y + (i * p.size);
 
           if (i === 0) {
-            // Head character - BRIGHT WHITE with glow
-            ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
-            ctx.shadowBlur = 8;
-            ctx.fillStyle = '#ffffff';
+            // Head character - subtle white glow
+            ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+            ctx.shadowBlur = 3;
+            ctx.fillStyle = '#e0ffe0';
             ctx.fillText(p.chars[i], p.x, charY);
             ctx.shadowBlur = 0;
-          } else if (i < 4) {
-            // Near-head characters - bright green with glow
-            const alpha = 0.95 - (i * 0.15);
-            ctx.shadowColor = `rgba(0, 255, 65, ${alpha * 0.6})`;
-            ctx.shadowBlur = 6;
+          } else if (i < 3) {
+            // Near-head characters - bright green, minimal glow
+            const alpha = 0.9 - (i * 0.12);
+            ctx.shadowColor = `rgba(0, 255, 65, ${alpha * 0.3})`;
+            ctx.shadowBlur = 2;
             ctx.fillStyle = `rgba(0, 255, 65, ${alpha})`;
             ctx.fillText(p.chars[i], p.x, charY);
             ctx.shadowBlur = 0;
           } else {
-            // Trail - fading green (brighter than before)
-            const alpha = Math.max(0.3, (1 - i / p.trailLength) * p.alpha);
+            // Trail - smooth fading green, no glow
+            const alpha = Math.max(0.25, (1 - i / p.trailLength) * p.alpha * 0.85);
             ctx.fillStyle = `rgba(0, 255, 65, ${alpha})`;
             ctx.fillText(p.chars[i], p.x, charY);
           }
