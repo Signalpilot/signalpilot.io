@@ -200,10 +200,10 @@
         border: 'rgba(249, 115, 22, 0.25)'
       },
       particles: {
-        type: 'sparkles',
+        type: 'sun-rays',
         color: 'rgba(251, 146, 60, 0.85)',
-        lineColor: 'rgba(244, 114, 182, 0.3)',
-        count: 65
+        lineColor: 'rgba(249, 115, 22, 0.4)',
+        count: 40
       },
       aurora: {
         colors: [
