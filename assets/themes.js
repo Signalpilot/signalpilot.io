@@ -386,40 +386,6 @@
       }
     },
 
-    christmas: {
-      name: 'Christmas',
-      icon: '🎅',
-      description: 'Santa is coming to town',
-      colors: {
-        bg: '#0a1a0a',
-        bgElev: '#14291a',
-        bgSoft: '#1f3b2b',
-        text: '#fef2f2',
-        muted: '#fca5a5',
-        mutedSoft: '#f87171',
-        brand: '#dc2626',
-        brandGlow: 'rgba(220, 38, 38, 0.6)',
-        accent: '#22c55e',
-        success: '#10b981',
-        warn: '#fbbf24',
-        border: 'rgba(34, 197, 94, 0.25)'
-      },
-      particles: {
-        type: 'presents',
-        color: 'rgba(220, 38, 38, 0.85)',
-        lineColor: 'rgba(34, 197, 94, 0.4)',
-        count: 50
-      },
-      aurora: {
-        colors: [
-          'rgba(220, 38, 38, 0.40)',
-          'rgba(34, 197, 94, 0.35)',
-          'rgba(251, 191, 36, 0.30)',
-          'rgba(239, 68, 68, 0.25)'
-        ]
-      }
-    },
-
     newyear: {
       name: 'New Year',
       icon: '🎆',
@@ -454,116 +420,14 @@
       }
     },
 
-    valentine: {
-      name: 'Valentine',
-      icon: '💝',
-      description: 'Love is in the air',
-      colors: {
-        bg: '#1a0510',
-        bgElev: '#2d0f1f',
-        bgSoft: '#3d1a2d',
-        text: '#fdf2f8',
-        muted: '#f9a8d4',
-        mutedSoft: '#f472b6',
-        brand: '#ec4899',
-        brandGlow: 'rgba(236, 72, 153, 0.7)',
-        accent: '#f43f5e',
-        success: '#10b981',
-        warn: '#f59e0b',
-        border: 'rgba(236, 72, 153, 0.28)'
-      },
-      particles: {
-        type: 'hearts',
-        color: 'rgba(244, 63, 94, 0.8)',
-        lineColor: 'rgba(236, 72, 153, 0.4)',
-        count: 55
-      },
-      aurora: {
-        colors: [
-          'rgba(236, 72, 153, 0.45)',
-          'rgba(244, 63, 94, 0.40)',
-          'rgba(249, 168, 212, 0.30)',
-          'rgba(251, 207, 232, 0.25)'
-        ]
-      }
-    },
-
-    aurora: {
-      name: 'Aurora',
-      icon: '🌌',
-      description: 'Northern lights spectacular',
-      colors: {
-        bg: '#020818',
-        bgElev: '#0a1428',
-        bgSoft: '#142038',
-        text: '#dbeafe',
-        muted: '#93c5fd',
-        mutedSoft: '#60a5fa',
-        brand: '#3b82f6',
-        brandGlow: 'rgba(59, 130, 246, 0.6)',
-        accent: '#06b6d4',
-        success: '#10b981',
-        warn: '#f59e0b',
-        border: 'rgba(59, 130, 246, 0.22)'
-      },
-      particles: {
-        type: 'aurora-stars',
-        color: 'rgba(147, 197, 253, 0.85)',
-        lineColor: 'rgba(96, 165, 250, 0.4)',
-        count: 80
-      },
-      aurora: {
-        colors: [
-          'rgba(59, 130, 246, 0.50)',
-          'rgba(139, 92, 246, 0.45)',
-          'rgba(34, 211, 238, 0.40)',
-          'rgba(16, 185, 129, 0.35)'
-        ]
-      }
-    },
-
-    desert: {
-      name: 'Desert',
-      icon: '🏜️',
-      description: 'Sandy heat waves',
-      colors: {
-        bg: '#1a1008',
-        bgElev: '#2d1f14',
-        bgSoft: '#3d2f24',
-        text: '#fef3c7',
-        muted: '#fcd34d',
-        mutedSoft: '#fbbf24',
-        brand: '#f59e0b',
-        brandGlow: 'rgba(245, 158, 11, 0.6)',
-        accent: '#fb923c',
-        success: '#84cc16',
-        warn: '#ef4444',
-        border: 'rgba(245, 158, 11, 0.22)'
-      },
-      particles: {
-        type: 'sand-shimmer',
-        color: 'rgba(251, 191, 36, 0.6)',
-        lineColor: 'rgba(245, 158, 11, 0.3)',
-        count: 60
-      },
-      aurora: {
-        colors: [
-          'rgba(245, 158, 11, 0.35)',
-          'rgba(251, 146, 60, 0.30)',
-          'rgba(251, 191, 36, 0.25)',
-          'rgba(253, 224, 71, 0.20)'
-        ]
-      }
-    },
-
     storm: {
       name: 'Storm',
       icon: '⚡',
-      description: 'Thunder and lightning',
+      description: 'Epic lightning strikes',
       colors: {
-        bg: '#0a0a14',
-        bgElev: '#141428',
-        bgSoft: '#1f1f3d',
+        bg: '#05050a',
+        bgElev: '#0a0a14',
+        bgSoft: '#0f0f1f',
         text: '#e0e7ff',
         muted: '#a5b4fc',
         mutedSoft: '#818cf8',
@@ -575,10 +439,10 @@
         border: 'rgba(99, 102, 241, 0.25)'
       },
       particles: {
-        type: 'lightning-rain',
-        color: 'rgba(165, 180, 252, 0.7)',
-        lineColor: 'rgba(129, 140, 248, 0.4)',
-        count: 70
+        type: 'lightning',
+        color: 'rgba(255, 255, 255, 1.0)',
+        lineColor: 'rgba(165, 180, 252, 0.8)',
+        count: 8  // Few, dramatic lightning strikes
       },
       aurora: {
         colors: [
@@ -586,40 +450,6 @@
           'rgba(139, 92, 246, 0.35)',
           'rgba(165, 180, 252, 0.30)',
           'rgba(129, 140, 248, 0.25)'
-        ]
-      }
-    },
-
-    arcade: {
-      name: 'Arcade',
-      icon: '👾',
-      description: 'Retro 8-bit vibes',
-      colors: {
-        bg: '#0a0014',
-        bgElev: '#1a0028',
-        bgSoft: '#2a0f3d',
-        text: '#fdf4ff',
-        muted: '#f0abfc',
-        mutedSoft: '#e879f9',
-        brand: '#d946ef',
-        brandGlow: 'rgba(217, 70, 239, 0.7)',
-        accent: '#06b6d4',
-        success: '#22c55e',
-        warn: '#eab308',
-        border: 'rgba(217, 70, 239, 0.28)'
-      },
-      particles: {
-        type: 'pixel-sprites',
-        color: 'rgba(217, 70, 239, 0.9)',
-        lineColor: 'rgba(6, 182, 212, 0.5)',
-        count: 45
-      },
-      aurora: {
-        colors: [
-          'rgba(217, 70, 239, 0.45)',
-          'rgba(6, 182, 212, 0.40)',
-          'rgba(251, 191, 36, 0.35)',
-          'rgba(34, 197, 94, 0.30)'
         ]
       }
     },
@@ -654,40 +484,6 @@
           'rgba(6, 182, 212, 0.40)',
           'rgba(251, 146, 60, 0.35)',
           'rgba(236, 72, 153, 0.30)'
-        ]
-      }
-    },
-
-    terminal: {
-      name: 'Terminal',
-      icon: '💻',
-      description: 'Hacker vibes',
-      colors: {
-        bg: '#0a0f0a',
-        bgElev: '#141f14',
-        bgSoft: '#1f2e1f',
-        text: '#d1fae5',
-        muted: '#86efac',
-        mutedSoft: '#4ade80',
-        brand: '#22c55e',
-        brandGlow: 'rgba(34, 197, 94, 0.6)',
-        accent: '#10b981',
-        success: '#16a34a',
-        warn: '#f59e0b',
-        border: 'rgba(34, 197, 94, 0.22)'
-      },
-      particles: {
-        type: 'binary-rain',
-        color: 'rgba(34, 197, 94, 0.7)',
-        lineColor: 'rgba(16, 185, 129, 0.3)',
-        count: 55
-      },
-      aurora: {
-        colors: [
-          'rgba(34, 197, 94, 0.35)',
-          'rgba(16, 185, 129, 0.30)',
-          'rgba(20, 184, 166, 0.25)',
-          'rgba(52, 211, 153, 0.20)'
         ]
       }
     }
