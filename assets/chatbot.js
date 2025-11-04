@@ -13,10 +13,13 @@
 
   const config = {
     name: 'Signal Pilot Assistant',
-    version: '1.0.0',
-    maxHistory: 20,
-    maxBookmarks: 20,
-    typingDelay: 800
+    version: '2.0.0',
+    maxHistory: 100,
+    maxBookmarks: 50,
+    typingDelay: 800,
+    smartSuggestions: true,
+    contextAwareness: true,
+    autoSave: true
   };
 
   const knowledgeBase = {
@@ -189,6 +192,50 @@
       }
     },
 
+    // Plutus Flow
+    {
+      regex: /(plutus flow|plutus|money flow)/i,
+      response: () => {
+        const p = knowledgeBase.products["plutus-flow"];
+        return `**${p.name}** - ${p.description}\n\n✨ Features:\n${p.features.map(f => `• ${f}`).join('\n')}\n\n[Learn more](#inside)`;
+      }
+    },
+
+    // Janus Atlas
+    {
+      regex: /(janus atlas|janus|multi.?timeframe)/i,
+      response: () => {
+        const p = knowledgeBase.products["janus-atlas"];
+        return `**${p.name}** - ${p.description}\n\n✨ Features:\n${p.features.map(f => `• ${f}`).join('\n')}\n\n[Learn more](#inside)`;
+      }
+    },
+
+    // Augury Grid
+    {
+      regex: /(augury grid|augury|support.*resistance)/i,
+      response: () => {
+        const p = knowledgeBase.products["augury-grid"];
+        return `**${p.name}** - ${p.description}\n\n✨ Features:\n${p.features.map(f => `• ${f}`).join('\n')}\n\n[Learn more](#inside)`;
+      }
+    },
+
+    // Harmonic Oscillator
+    {
+      regex: /(harmonic oscillator|harmonic|oscillator|momentum)/i,
+      response: () => {
+        const p = knowledgeBase.products["harmonic-oscillator"];
+        return `**${p.name}** - ${p.description}\n\n✨ Features:\n${p.features.map(f => `• ${f}`).join('\n')}\n\n[Learn more](#inside)`;
+      }
+    },
+
+    // All indicators
+    {
+      regex: /(all.*indicators|what.*included|7.*indicators|seven.*indicators)/i,
+      response: () => {
+        return `**All 7 Elite Indicators:**\n\n1. **SP Pentarch** - 5-phase cycle detection\n2. **SP OmniDeck** - 10-in-1 dashboard\n3. **SP Volume Oracle** - Volume analysis\n4. **SP Plutus Flow** - Money flow tracking\n5. **SP Janus Atlas** - Multi-timeframe\n6. **SP Augury Grid** - Support/resistance\n7. **SP Harmonic Oscillator** - Momentum signals\n\nEvery plan includes all 7 indicators!\n\n[See them in action](#inside) | [Get started](#pricing)`;
+      }
+    },
+
     // Repainting
     {
       regex: /(repaint|repainting|does it repaint|lookahead)/i,
@@ -332,12 +379,137 @@
     return JSON.parse(localStorage.getItem('sp_chatbot_bookmarks') || '[]');
   }
 
+  function exportConversation(format = 'txt') {
+    const history = loadHistory();
+    if (history.length === 0) {
+      return "No conversation to export yet.";
+    }
+
+    if (format === 'json') {
+      const data = JSON.stringify(history, null, 2);
+      downloadFile(data, 'signal-pilot-chat.json', 'application/json');
+      return "Conversation exported as JSON!";
+    } else {
+      const text = history.map(m => {
+        const time = new Date(m.timestamp).toLocaleString();
+        return `[${time}] ${m.role.toUpperCase()}: ${m.content}`;
+      }).join('\n\n');
+      downloadFile(text, 'signal-pilot-chat.txt', 'text/plain');
+      return "Conversation exported as text!";
+    }
+  }
+
+  function downloadFile(content, filename, type) {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function clearHistory() {
+    localStorage.removeItem('sp_chatbot_history');
+    return "Conversation history cleared! 🗑️";
+  }
+
+  function searchHistory(query) {
+    const history = loadHistory();
+    const results = history.filter(m =>
+      m.content.toLowerCase().includes(query.toLowerCase())
+    );
+
+    if (results.length === 0) {
+      return `No messages found matching "${query}".`;
+    }
+
+    return `**Found ${results.length} message(s) matching "${query}":**\n\n` +
+      results.slice(0, 5).map((m, i) =>
+        `${i + 1}. ${m.role === 'user' ? '👤' : '🤖'} ${m.content.substring(0, 100)}...`
+      ).join('\n\n');
+  }
+
+  function getSmartSuggestions(conversationContext) {
+    const history = loadHistory();
+    const lastMessages = history.slice(-3);
+
+    // Analyze recent conversation
+    const hasAskedAboutPricing = lastMessages.some(m =>
+      /price|cost|plan/.test(m.content.toLowerCase())
+    );
+    const hasAskedAboutFeatures = lastMessages.some(m =>
+      /feature|indicator|what|how/.test(m.content.toLowerCase())
+    );
+    const hasAskedAboutDemo = lastMessages.some(m =>
+      /demo|try|test/.test(m.content.toLowerCase())
+    );
+
+    // Return contextual suggestions
+    if (hasAskedAboutPricing && !hasAskedAboutDemo) {
+      return ["Try the demo", "Money-back guarantee?", "What's included?"];
+    } else if (hasAskedAboutFeatures && !hasAskedAboutPricing) {
+      return ["How much does it cost?", "Compare plans", "Get started"];
+    } else if (hasAskedAboutDemo) {
+      return ["See pricing", "How do I subscribe?", "What if I don't like it?"];
+    }
+
+    // Default suggestions
+    return [
+      "How much does it cost?",
+      "What is Pentarch?",
+      "Does it repaint?",
+      "Show me pricing"
+    ];
+  }
+
+  function getUserIntent(message) {
+    const msg = message.toLowerCase();
+
+    if (/export|download|save.*conversation/.test(msg)) return 'export';
+    if (/clear|delete|reset.*history/.test(msg)) return 'clear';
+    if (/search|find/.test(msg)) return 'search';
+    if (/help|what.*can.*you/.test(msg)) return 'help';
+
+    return 'query';
+  }
+
+  function getCopyButton(content) {
+    return `<button class="chatbot-copy-btn" data-content="${content.replace(/"/g, '&quot;')}" title="Copy response">📋</button>`;
+  }
+
   // ========================================
   // MESSAGE PROCESSING
   // ========================================
 
   function processMessage(userInput) {
     const input = userInput.trim().toLowerCase();
+    const intent = getUserIntent(input);
+
+    // Handle special commands
+    if (intent === 'export') {
+      const format = /json/.test(input) ? 'json' : 'txt';
+      return exportConversation(format);
+    }
+
+    if (intent === 'clear') {
+      return clearHistory();
+    }
+
+    if (intent === 'search') {
+      const searchMatch = input.match(/search|find/i);
+      if (searchMatch) {
+        const query = userInput.substring(searchMatch.index + searchMatch[0].length).trim();
+        if (query) {
+          return searchHistory(query);
+        }
+      }
+      return "What would you like to search for? Try 'search [your query]'";
+    }
+
+    if (intent === 'help') {
+      return `**I can help you with:**\n\n• Pricing & plans\n• Product information (all 7 indicators)\n• How to get started\n• TradingView compatibility\n• Refund policy\n• Technical support\n\n**Special commands:**\n• "export conversation" - Download chat\n• "search [query]" - Search history\n• "clear history" - Clear chat\n• "show bookmarks" - View saved responses\n\n**Keyboard shortcuts:**\n• Ctrl+K: Open/close chat\n• Escape: Close chat\n\nWhat would you like to know?`;
+    }
 
     // Check for bookmark request
     if (input.includes('show bookmarks') || input.includes('my bookmarks')) {
@@ -388,15 +560,27 @@
           </div>
           <div>
             <div class="chatbot-title">Signal Pilot Assistant</div>
-            <div class="chatbot-status">Online • Typically replies instantly</div>
+            <div class="chatbot-status">Online • AI-powered • v2.0</div>
           </div>
         </div>
-        <button class="chatbot-close" aria-label="Close chatbot">✕</button>
+        <div class="chatbot-header-actions">
+          <button class="chatbot-action-btn" id="chatbot-export" title="Export conversation" aria-label="Export conversation">💾</button>
+          <button class="chatbot-action-btn" id="chatbot-search" title="Search history" aria-label="Search history">🔍</button>
+          <button class="chatbot-action-btn" id="chatbot-info" title="Help & commands" aria-label="Help & commands">ℹ️</button>
+          <button class="chatbot-close" aria-label="Close chatbot">✕</button>
+        </div>
       </div>
 
       <div class="chatbot-messages" id="chatbot-messages"></div>
 
       <div class="chatbot-suggestions" id="chatbot-suggestions"></div>
+
+      <div class="chatbot-quick-actions" id="chatbot-quick-actions">
+        <button class="chatbot-quick-action" data-action="pricing">💰 Pricing</button>
+        <button class="chatbot-quick-action" data-action="demo">🎮 Demo</button>
+        <button class="chatbot-quick-action" data-action="features">✨ Features</button>
+        <button class="chatbot-quick-action" data-action="start">🚀 Get Started</button>
+      </div>
 
       <div class="chatbot-input-area">
         <input
@@ -440,10 +624,14 @@
       ? `<button class="chatbot-bookmark" aria-label="Bookmark this response" title="Save this response">🔖</button>`
       : '';
 
+    const copyBtn = role === 'assistant'
+      ? `<button class="chatbot-copy-btn" aria-label="Copy response" title="Copy response">📋</button>`
+      : '';
+
     messageDiv.innerHTML = `
       <div class="chatbot-avatar">${avatar}</div>
       <div class="chatbot-bubble">${formatMessage(content)}</div>
-      ${bookmarkBtn}
+      <div class="chatbot-message-actions">${bookmarkBtn}${copyBtn}</div>
     `;
 
     if (bookmarkBtn) {
@@ -457,6 +645,21 @@
             btn.textContent = '🔖';
             btn.style.opacity = '1';
           }, 1500);
+        });
+      }, 0);
+    }
+
+    if (copyBtn) {
+      setTimeout(() => {
+        const btn = messageDiv.querySelector('.chatbot-copy-btn');
+        btn.addEventListener('click', () => {
+          const textToCopy = content.replace(/\*\*/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            btn.textContent = '✓';
+            setTimeout(() => {
+              btn.textContent = '📋';
+            }, 1500);
+          });
         });
       }, 0);
     }
@@ -500,7 +703,7 @@
 
   function createSuggestions() {
     const suggestionsContainer = document.getElementById('chatbot-suggestions');
-    const suggestions = [
+    const suggestions = config.smartSuggestions ? getSmartSuggestions() : [
       "How much does it cost?",
       "What is Pentarch?",
       "Does it repaint?",
@@ -510,11 +713,13 @@
     suggestionsContainer.innerHTML = suggestions.map(s =>
       `<button class="chatbot-suggestion">${s}</button>`
     ).join('');
+    suggestionsContainer.style.display = 'flex';
 
     suggestionsContainer.querySelectorAll('.chatbot-suggestion').forEach(btn => {
       btn.addEventListener('click', () => {
         handleUserMessage(btn.textContent);
-        suggestionsContainer.style.display = 'none';
+        // Update suggestions after user interaction
+        setTimeout(() => createSuggestions(), 100);
       });
     });
   }
@@ -528,6 +733,9 @@
     // Add user message
     addMessage(message, 'user', false);
 
+    // Track analytics
+    trackChatbotEvent('message_sent', { message_length: message.length, intent: getUserIntent(message) });
+
     // Show typing indicator
     const typingIndicator = showTypingIndicator();
 
@@ -536,7 +744,34 @@
       typingIndicator.remove();
       const response = processMessage(message);
       addMessage(response);
+
+      // Update smart suggestions based on conversation
+      if (config.smartSuggestions) {
+        createSuggestions();
+      }
     }, config.typingDelay);
+  }
+
+  function trackChatbotEvent(eventName, eventData = {}) {
+    // Track with analytics if available
+    if (typeof trackEvent === 'function') {
+      trackEvent(`chatbot_${eventName}`, eventData);
+    }
+
+    // Also log to local analytics storage
+    const analytics = JSON.parse(localStorage.getItem('sp_chatbot_analytics') || '[]');
+    analytics.push({
+      event: eventName,
+      data: eventData,
+      timestamp: Date.now()
+    });
+
+    // Keep last 1000 events
+    if (analytics.length > 1000) {
+      analytics.shift();
+    }
+
+    localStorage.setItem('sp_chatbot_analytics', JSON.stringify(analytics));
   }
 
   // ========================================
@@ -572,6 +807,25 @@
       container.classList.remove('active');
     });
 
+    // Header action buttons
+    document.getElementById('chatbot-export')?.addEventListener('click', () => {
+      const response = exportConversation('txt');
+      addMessage(response);
+    });
+
+    document.getElementById('chatbot-search')?.addEventListener('click', () => {
+      const query = prompt('Search your conversation history:');
+      if (query) {
+        const response = searchHistory(query);
+        addMessage(response);
+      }
+    });
+
+    document.getElementById('chatbot-info')?.addEventListener('click', () => {
+      const response = processMessage('help');
+      addMessage(response);
+    });
+
     // Send button
     const sendBtn = document.getElementById('chatbot-send');
     const input = document.getElementById('chatbot-input');
@@ -582,6 +836,20 @@
       if (e.key === 'Enter') {
         handleUserMessage(input.value);
       }
+    });
+
+    // Quick action buttons
+    document.querySelectorAll('.chatbot-quick-action').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.getAttribute('data-action');
+        const queries = {
+          pricing: 'How much does it cost?',
+          demo: 'Show me the demo',
+          features: 'What features are included?',
+          start: 'How do I get started?'
+        };
+        handleUserMessage(queries[action] || queries.pricing);
+      });
     });
 
     // Keyboard shortcuts
