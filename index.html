@@ -3176,11 +3176,15 @@
               box-shadow: 0 6px 20px rgba(91,138,255,0.4);
             }
 
-            /* Mobile: Hide arrows, show swipe hint */
+            /* Mobile: Hide arrows, reduce gap */
             @media (max-width: 768px) {
               #carousel-prev,
               #carousel-next {
                 display: none;
+              }
+
+              #pentarch-carousel {
+                gap: 0.5rem;
               }
             }
           </style>
@@ -3202,7 +3206,8 @@
                 currentIndex = index;
 
                 const itemWidth = items[0].offsetWidth;
-                const gap = 24; // 1.5rem gap
+                // 1.5rem on desktop, 0.5rem on mobile
+                const gap = window.innerWidth <= 768 ? 8 : 24;
                 carousel.scrollLeft = (itemWidth + gap) * currentIndex;
               }
 
@@ -3217,11 +3222,11 @@
                 resetAutoScroll();
               });
 
-              // Auto-scroll every 5 seconds
+              // Auto-scroll every 10 seconds
               function startAutoScroll() {
                 autoScrollInterval = setInterval(() => {
                   scrollToIndex(currentIndex + 1);
-                }, 5000);
+                }, 10000);
               }
 
               function resetAutoScroll() {
@@ -3248,7 +3253,8 @@
                 scrollTimeout = setTimeout(() => {
                   const scrollLeft = carousel.scrollLeft;
                   const itemWidth = items[0].offsetWidth;
-                  const gap = 24;
+                  // 1.5rem on desktop, 0.5rem on mobile
+                  const gap = window.innerWidth <= 768 ? 8 : 24;
                   currentIndex = Math.round(scrollLeft / (itemWidth + gap));
                   updateDots();
                 }, 100);
