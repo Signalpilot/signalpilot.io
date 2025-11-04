@@ -200,20 +200,39 @@
 
     /* Header */
     header {
-      padding: 1.5rem 0;
-      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      background: rgba(5, 7, 13, 0.95);
-      z-index: 100;
-      backdrop-filter: blur(12px);
+      z-index: 40;
+      backdrop-filter: blur(14px);
+      /* Fallback for browsers that don't support color-mix() */
+      background: rgba(5,7,13,.72);
+      background: color-mix(in srgb, var(--bg) 72%, transparent);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      overflow: visible;
+      /* CRITICAL: Fixed height to prevent vertical shifting */
+      height: 64px;
+      /* PWA mode: Add safe area padding for device notch/status bar */
+      padding-top: env(safe-area-inset-top, 0px);
+    }
+
+    html[data-theme="light"] header {
+      border-bottom-color: #cbd5e1;
+      background: rgba(255,255,255,.9);
     }
 
     header .container {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 1.5rem;
+      gap: .6rem;
+      padding: .5rem 0;
+      flex-wrap: nowrap !important;
+      width: 100%;
+      min-width: 0;
+      position: relative;
+      overflow: visible;
+      /* CRITICAL: Prevent vertical expansion */
+      height: 100% !important;
+      max-height: 64px !important;
     }
 
     header .container > .lang-dropdown,
@@ -225,31 +244,47 @@
       margin-left: -0.8rem;
     }
 
-    .logo {
-      font-family: 'Gugi', cursive;
-      font-size: 1.5rem;
-      color: var(--text);
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      color: #fff;
       text-decoration: none;
-      letter-spacing: -0.02em;
+      font-weight: 400;
+      font-family: 'Gugi', system-ui, -apple-system, sans-serif;
       text-transform: uppercase;
-      white-space: nowrap;
+      letter-spacing: .1em;
+      font-size: 1.4rem;
+      flex-shrink: 0 !important;
+      min-width: auto !important;
+      white-space: nowrap !important;
+    }
+
+    html[data-theme="light"] .brand {
+      color: #0f172a;
+    }
+
+    .nav-spacer {
+      flex: 1;
     }
 
     nav {
       display: flex;
-      gap: 1.5rem;
-      align-items: center;
-    }
-
-    nav {
+      min-width: 0;
+      flex-shrink: 10;
+      overflow: visible;
       position: relative;
     }
 
     nav ul {
       list-style: none;
+      margin: 0;
+      padding: 0;
       display: flex;
-      gap: 1.5rem;
-      align-items: center;
+      gap: .8rem;
+      min-width: 0;
+      flex-shrink: 10;
+      overflow: visible;
     }
 
     nav li {
@@ -257,17 +292,35 @@
     }
 
     nav a {
-      color: var(--muted);
-      text-decoration: none;
+      display: inline-flex;
+      padding: .5rem .9rem;
+      border-radius: 999px;
+      color: #b7c2d9;
       font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.2s;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      text-decoration: none;
+      transition: all .2s ease;
+      font-size: .95rem;
       white-space: nowrap;
-      display: block;
+      min-width: 0;
+      flex-shrink: 1;
     }
 
-    nav a:hover {
-      color: var(--text);
+    nav a:hover,
+    nav a:focus-visible {
+      color: #fff;
+      background: rgba(91,138,255,.15);
+      transform: translateY(-1px);
+    }
+
+    html[data-theme="light"] nav a {
+      color: #475569;
+    }
+
+    html[data-theme="light"] nav a:hover,
+    html[data-theme="light"] nav a:focus-visible {
+      color: #0f172a;
+      background: rgba(59,130,246,.12);
     }
 
     /* Resources Dropdown */
@@ -279,20 +332,33 @@
     .nav-dropdown-toggle {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: .3rem;
+      padding: .5rem .9rem;
+      border-radius: 999px;
       background: none;
       border: none;
-      color: var(--muted);
+      color: #b7c2d9;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: .95rem;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all .2s ease;
       font-family: 'Space Grotesk', system-ui, sans-serif;
-      padding: 0;
+      white-space: nowrap;
     }
 
     .nav-dropdown-toggle:hover {
-      color: var(--text);
+      color: #fff;
+      background: rgba(91,138,255,.15);
+      transform: translateY(-1px);
+    }
+
+    html[data-theme="light"] .nav-dropdown-toggle {
+      color: #475569;
+    }
+
+    html[data-theme="light"] .nav-dropdown-toggle:hover {
+      color: #0f172a;
+      background: rgba(59,130,246,.12);
     }
 
     .dropdown-arrow {
@@ -803,7 +869,41 @@
       text-decoration: underline;
     }
 
-    /* Responsive */
+    /* Responsive - progressive compacting to match main site */
+    @media (max-width: 1500px) {
+      .brand {
+        font-size: 1.3rem;
+      }
+      nav a {
+        padding: .5rem .75rem;
+        font-size: .92rem;
+      }
+      .nav-dropdown-toggle {
+        padding: .5rem .75rem;
+        font-size: .92rem;
+      }
+      nav ul {
+        gap: .6rem;
+      }
+    }
+
+    @media (max-width: 1400px) {
+      .brand {
+        font-size: 1.25rem;
+      }
+      nav a {
+        padding: .5rem .6rem;
+        font-size: .86rem;
+      }
+      .nav-dropdown-toggle {
+        padding: .5rem .6rem;
+        font-size: .86rem;
+      }
+      nav ul {
+        gap: .35rem;
+      }
+    }
+
     @media (max-width: 768px) {
       nav ul {
         flex-direction: column;
@@ -816,7 +916,7 @@
         flex-wrap: wrap;
       }
 
-      .logo {
+      .brand {
         font-size: 1.2rem;
       }
 
@@ -876,6 +976,22 @@
         padding: 2rem 1.5rem;
       }
     }
+
+    /* MOBILE PERFORMANCE: Optimize for smooth scrolling */
+    @media (max-width: 1024px) {
+      /* Remove expensive filters and blend modes on mobile */
+      * {
+        mix-blend-mode: normal !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+
+      /* Preserve header blur for visual depth */
+      header {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -883,7 +999,10 @@
   <!-- Header -->
   <header>
     <div class="container">
-      <a href="/" class="logo">Signal Pilot</a>
+      <a href="/" class="brand">Signal Pilot</a>
+
+      <div class="nav-spacer"></div>
+
       <nav>
         <ul>
           <li><a href="/#why">Why Us?</a></li>
