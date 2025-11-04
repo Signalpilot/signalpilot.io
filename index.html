@@ -3187,6 +3187,127 @@
                 gap: 0.5rem;
               }
             }
+
+            /* Lightbox styles */
+            #carousel-lightbox {
+              display: none;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: 9999;
+            }
+
+            #carousel-lightbox.active {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+
+            .lightbox-overlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(5, 7, 13, 0.95);
+              backdrop-filter: blur(10px);
+            }
+
+            .lightbox-content {
+              position: relative;
+              z-index: 10000;
+              max-width: 95vw;
+              max-height: 95vh;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              animation: lightboxZoom 0.3s ease-out;
+            }
+
+            @keyframes lightboxZoom {
+              from {
+                transform: scale(0.8);
+                opacity: 0;
+              }
+              to {
+                transform: scale(1);
+                opacity: 1;
+              }
+            }
+
+            .lightbox-image {
+              max-width: 100%;
+              max-height: 85vh;
+              width: auto;
+              height: auto;
+              border-radius: 12px;
+              box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+              border: 2px solid rgba(91, 138, 255, 0.3);
+            }
+
+            .lightbox-close {
+              position: absolute;
+              top: -50px;
+              right: 0;
+              background: rgba(255, 255, 255, 0.1);
+              border: 2px solid rgba(255, 255, 255, 0.3);
+              color: white;
+              font-size: 2rem;
+              width: 45px;
+              height: 45px;
+              border-radius: 50%;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: all 0.3s ease;
+              line-height: 1;
+            }
+
+            .lightbox-close:hover {
+              background: var(--brand);
+              border-color: var(--brand);
+              transform: rotate(90deg) scale(1.1);
+            }
+
+            .lightbox-caption {
+              margin-top: 1rem;
+              color: var(--brand);
+              font-size: 1.2rem;
+              font-weight: 700;
+              text-align: center;
+              padding: 0.5rem 1rem;
+              background: rgba(91, 138, 255, 0.1);
+              border-radius: 8px;
+              border: 1px solid rgba(91, 138, 255, 0.3);
+            }
+
+            /* Mobile lightbox adjustments */
+            @media (max-width: 768px) {
+              .lightbox-content {
+                max-width: 98vw;
+                max-height: 98vh;
+              }
+
+              .lightbox-image {
+                max-height: 80vh;
+              }
+
+              .lightbox-close {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+              }
+
+              .lightbox-caption {
+                font-size: 1rem;
+                margin-top: 0.5rem;
+              }
+            }
           </style>
 
           <!-- Carousel Navigation Script -->
@@ -3196,6 +3317,7 @@
               const prevBtn = document.getElementById('carousel-prev');
               const nextBtn = document.getElementById('carousel-next');
               const items = carousel.querySelectorAll('.carousel-item');
+              const carouselImages = carousel.querySelectorAll('.carousel-item img');
               let currentIndex = 0;
               let autoScrollInterval;
 
@@ -3301,6 +3423,68 @@
 
               // Initialize dots
               updateDots();
+
+              // Image click handlers - stop auto-scroll and open lightbox
+              carouselImages.forEach((img, index) => {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  clearInterval(autoScrollInterval);
+                  openLightbox(img.src, img.alt, index);
+                });
+              });
+
+              // Lightbox functionality
+              function openLightbox(imageSrc, imageAlt, imageIndex) {
+                // Create lightbox if it doesn't exist
+                let lightbox = document.getElementById('carousel-lightbox');
+                if (!lightbox) {
+                  lightbox = document.createElement('div');
+                  lightbox.id = 'carousel-lightbox';
+                  lightbox.innerHTML = `
+                    <div class="lightbox-overlay"></div>
+                    <div class="lightbox-content">
+                      <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+                      <img class="lightbox-image" src="" alt="">
+                      <div class="lightbox-caption"></div>
+                    </div>
+                  `;
+                  document.body.appendChild(lightbox);
+
+                  // Close handlers
+                  const closeBtn = lightbox.querySelector('.lightbox-close');
+                  const overlay = lightbox.querySelector('.lightbox-overlay');
+
+                  const closeLightbox = () => {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                    startAutoScroll();
+                  };
+
+                  closeBtn.addEventListener('click', closeLightbox);
+                  overlay.addEventListener('click', closeLightbox);
+
+                  // Keyboard close (ESC)
+                  document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                      closeLightbox();
+                    }
+                  });
+                }
+
+                // Set image and caption
+                const lightboxImg = lightbox.querySelector('.lightbox-image');
+                const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+                const caption = document.getElementById(`caption-${imageIndex + 1}`);
+
+                lightboxImg.src = imageSrc;
+                lightboxImg.alt = imageAlt;
+                lightboxCaption.textContent = caption ? caption.textContent : imageAlt;
+
+                // Show lightbox
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+              }
             })();
           </script>
 
