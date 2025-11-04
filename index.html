@@ -2331,25 +2331,6 @@
         font-size:.8rem !important;
       }
 
-      /* Interactive demo - mobile optimization */
-      #toggle-before,
-      #toggle-after,
-      #autoplay-toggle{
-        min-width:100px !important;
-        font-size:.85rem !important;
-        padding:.6rem .8rem !important;
-      }
-
-      #scrubber-track{
-        height:40px !important;
-        font-size:.7rem !important;
-      }
-
-      #scrubber-thumb{
-        width:16px !important;
-        height:16px !important;
-      }
-
       #comparison-stats{
         gap:1rem !important;
         margin-top:1rem !important;
@@ -2661,7 +2642,7 @@
           <!-- Hero CTAs -->
           <div class="hero-ctas" style="margin-top:2rem;margin-bottom:3rem;justify-content:center">
             <a href="#pricing" class="btn btn-primary" style="padding:1rem 2rem;font-size:1.05rem">Get Started</a>
-            <a href="#" onclick="document.getElementById('toggle-before').scrollIntoView({behavior:'smooth',block:'center'});return false;" class="btn btn-ghost" style="padding:1rem 2rem;font-size:1.05rem">Try Interactive Demo</a>
+            <a href="#" onclick="document.getElementById('comparison-slider').scrollIntoView({behavior:'smooth',block:'center'});return false;" class="btn btn-ghost" style="padding:1rem 2rem;font-size:1.05rem">Try Interactive Demo</a>
           </div>
 
         </div>
@@ -4056,21 +4037,8 @@
           <span class="badge" style="margin-bottom:1rem">INTERACTIVE DEMO</span>
           <h2 class="headline lg">The Difference</h2>
           <p style="color:var(--muted);font-size:1.1rem;line-height:1.6;margin-top:1rem">
-            <strong style="color:var(--brand)">👆 Drag, click, or use arrow keys</strong> to compare trading with and without <span style="font-family:'Gugi',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.1em;font-weight:400">Signal Pilot</span>. Same chart. Same timeframe. Completely different clarity.
+            <strong style="color:var(--brand)">👆 Drag the slider</strong> to compare trading with and without <span style="font-family:'Gugi',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.1em;font-weight:400">Signal Pilot</span>. Same chart. Same timeframe. Completely different clarity.
           </p>
-        </div>
-
-        <!-- Demo Controls -->
-        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem">
-          <button id="toggle-before" class="btn btn-ghost btn-sm" style="min-width:120px">
-            <span>Before Signal Pilot</span>
-          </button>
-          <button id="toggle-after" class="btn btn-ghost btn-sm" style="min-width:120px">
-            <span>After Signal Pilot</span>
-          </button>
-          <button id="autoplay-toggle" class="btn btn-ghost btn-sm" style="min-width:140px">
-            <span>▶ Auto-Play</span>
-          </button>
         </div>
 
         <!-- Interactive Slider Container -->
@@ -4118,25 +4086,6 @@
 
         </div>
 
-        <!-- Scrubber Timeline -->
-        <div style="max-width:1400px;margin:1.5rem auto 0;padding:0 1rem">
-          <div style="position:relative;height:48px;background:rgba(255,255,255,.05);border-radius:24px;border:1px solid rgba(255,255,255,.1);overflow:hidden;cursor:pointer" id="scrubber-track">
-            <!-- Progress fill -->
-            <div id="scrubber-fill" style="position:absolute;left:0;top:0;height:100%;width:50%;background:linear-gradient(90deg,rgba(255,255,255,.1),rgba(255,255,255,.05));transition:width 0.3s ease;pointer-events:none"></div>
-            <!-- Position markers -->
-            <div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:2px;background:rgba(255,255,255,.1);pointer-events:none">
-              <div style="position:absolute;left:25%;top:50%;transform:translate(-50%,-50%);width:2px;height:12px;background:rgba(255,255,255,.2)"></div>
-              <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:2px;height:16px;background:rgba(255,255,255,.3)"></div>
-              <div style="position:absolute;left:75%;top:50%;transform:translate(-50%,-50%);width:2px;height:12px;background:rgba(255,255,255,.2)"></div>
-            </div>
-            <!-- Scrubber thumb -->
-            <div id="scrubber-thumb" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:20px;height:20px;background:#fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.3);transition:transform 0.2s ease;pointer-events:none"></div>
-            <!-- Labels -->
-            <div style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:.8rem;color:rgba(255,107,157,.8);font-weight:600;pointer-events:none">Without</div>
-            <div style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:.8rem;color:rgba(62,213,152,.8);font-weight:600;pointer-events:none">With</div>
-          </div>
-        </div>
-
       </div>
 
     </section>
@@ -4152,31 +4101,20 @@
 
       /* Smooth transition for non-dragging movements */
       .smooth-transition { transition: left 0.3s ease, width 0.3s ease !important; }
-
-      /* Hover effect on scrubber thumb */
-      #scrubber-thumb:hover { transform: translate(-50%,-50%) scale(1.2) !important; }
     </style>
 
     <script>
-    // Enhanced Interactive Before/After Slider with All Features
+    // Interactive Before/After Slider
     (function() {
       const slider = document.getElementById('comparison-slider');
       const handle = document.getElementById('slider-handle');
       const handleCircle = document.getElementById('handle-circle');
       const overlay = document.getElementById('slider-overlay');
       const overlayImage = document.getElementById('overlay-image');
-      const scrubberTrack = document.getElementById('scrubber-track');
-      const scrubberThumb = document.getElementById('scrubber-thumb');
-      const scrubberFill = document.getElementById('scrubber-fill');
-      const toggleBefore = document.getElementById('toggle-before');
-      const toggleAfter = document.getElementById('toggle-after');
-      const autoplayToggle = document.getElementById('autoplay-toggle');
 
       if (!slider || !handle || !overlay) return;
 
       let isDragging = false;
-      let isAutoPlaying = false;
-      let autoPlayInterval = null;
       let hasInteracted = false;
       let lastTapTime = 0;
 
@@ -4225,10 +4163,6 @@
 
         handle.style.left = percentage + '%';
         overlay.style.width = percentage + '%';
-
-        // Update scrubber
-        scrubberThumb.style.left = percentage + '%';
-        scrubberFill.style.width = percentage + '%';
       }
 
       // Update overlay image width to match slider container
@@ -4334,74 +4268,6 @@
           markInteraction();
           updateSliderFromPosition(e.clientX, true);
         }
-      });
-
-      // Feature 12: Scrubber timeline
-      scrubberTrack.addEventListener('click', (e) => {
-        markInteraction();
-        const rect = scrubberTrack.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const percentage = (x / rect.width) * 100;
-        setSliderPosition(percentage, true);
-      });
-
-      // Feature 10: Quick toggle buttons
-      toggleBefore.addEventListener('click', () => {
-        markInteraction();
-        setSliderPosition(0, true);
-      });
-
-      toggleAfter.addEventListener('click', () => {
-        markInteraction();
-        setSliderPosition(100, true);
-      });
-
-      // Feature 11: Auto-play mode
-      function startAutoPlay() {
-        if (isAutoPlaying) return;
-        isAutoPlaying = true;
-        autoplayToggle.innerHTML = '<span>⏸ Pause</span>';
-
-        let direction = 1;
-        let currentPos = parseFloat(handle.style.left) || 50;
-
-        autoPlayInterval = setInterval(() => {
-          currentPos += direction * 0.5;
-
-          if (currentPos >= 100) {
-            currentPos = 100;
-            direction = -1;
-          } else if (currentPos <= 0) {
-            currentPos = 0;
-            direction = 1;
-          }
-
-          setSliderPosition(currentPos, false);
-        }, 16); // ~60fps
-      }
-
-      function stopAutoPlay() {
-        isAutoPlaying = false;
-        autoplayToggle.innerHTML = '<span>▶ Auto-Play</span>';
-        if (autoPlayInterval) {
-          clearInterval(autoPlayInterval);
-          autoPlayInterval = null;
-        }
-      }
-
-      autoplayToggle.addEventListener('click', () => {
-        markInteraction();
-        if (isAutoPlaying) {
-          stopAutoPlay();
-        } else {
-          startAutoPlay();
-        }
-      });
-
-      // Stop auto-play on manual interaction
-      [slider, handle, scrubberTrack].forEach(el => {
-        el.addEventListener('mousedown', stopAutoPlay);
-        el.addEventListener('touchstart', stopAutoPlay);
       });
 
       // Initialize and start auto-sweep
