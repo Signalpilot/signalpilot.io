@@ -1162,6 +1162,12 @@
     #themeToggle,
     #langToggle{flex-shrink:0;position:relative;z-index:68 !important;padding:.4rem .6rem !important;font-size:1.15rem !important;min-width:44px}
 
+    /* Make theme and language buttons smaller on mobile */
+    @media (max-width:768px){
+      #themeToggle,
+      #langToggle{padding:.25rem .4rem !important;font-size:0.95rem !important;min-width:36px}
+    }
+
 
 
     .menu-toggle{
@@ -3502,6 +3508,41 @@
 
               // Initialize dots
               updateDots();
+
+              // Aggressive image preloading to fix lazy loading issues on fast scroll
+              // Remove lazy loading attribute and force immediate load
+              if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries) => {
+                  entries.forEach(entry => {
+                    const img = entry.target;
+                    // Preload images when they're within 800px of viewport
+                    if (entry.isIntersecting || entry.intersectionRatio > 0) {
+                      // Force load by removing lazy attribute
+                      img.removeAttribute('loading');
+                      // Ensure src is set (in case it was data-src)
+                      if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                      }
+                      imageObserver.unobserve(img);
+                    }
+                  });
+                }, {
+                  root: null,
+                  rootMargin: '800px', // Large margin to preload before visible
+                  threshold: 0
+                });
+
+                // Observe all carousel images
+                carouselImages.forEach(img => {
+                  imageObserver.observe(img);
+                });
+              } else {
+                // Fallback: immediately load all images if IntersectionObserver not supported
+                carouselImages.forEach(img => {
+                  img.removeAttribute('loading');
+                });
+              }
 
               // Carousel item click handlers - stop auto-scroll and open lightbox
               console.log('Setting up click handlers for', items.length, 'carousel items');
@@ -6541,6 +6582,54 @@ if ('serviceWorker' in navigator) {
 
   console.log('✅ Dynamic Lifetime Pricing System Initialized');
   console.log('💡 To manually update: window.updateLifetimePricing(87)');
+})();
+</script>
+
+<!-- Global Lazy Loading Fix - Preload images aggressively -->
+<script>
+(function() {
+  'use strict';
+
+  // Fix lazy loading issues when scrolling fast
+  if ('IntersectionObserver' in window) {
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+    // Create observer with large margin to preload before visible
+    const globalImageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting || entry.intersectionRatio > 0) {
+          const img = entry.target;
+
+          // Remove lazy loading to force immediate load
+          img.removeAttribute('loading');
+
+          // If using data-src pattern, load it
+          if (img.dataset.src && !img.src) {
+            img.src = img.dataset.src;
+          }
+
+          // Stop observing once loaded
+          globalImageObserver.unobserve(img);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '1000px', // Very large margin - preload well before visible
+      threshold: 0
+    });
+
+    // Observe all lazy images
+    lazyImages.forEach(img => {
+      globalImageObserver.observe(img);
+    });
+
+    console.log(`🖼️ Enhanced lazy loading for ${lazyImages.length} images`);
+  } else {
+    // Fallback: remove lazy loading from all images
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+      img.removeAttribute('loading');
+    });
+  }
 })();
 </script>
 
