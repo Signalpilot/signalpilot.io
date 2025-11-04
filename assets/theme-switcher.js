@@ -10,7 +10,7 @@
   const styles = `
     .sp-theme-toggle {
       position: fixed;
-      bottom: 2rem;
+      bottom: 6.5rem;
       right: 2rem;
       width: 56px;
       height: 56px;
@@ -20,7 +20,7 @@
       color: white;
       font-size: 1.5rem;
       cursor: pointer;
-      z-index: 1000;
+      z-index: 1001;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -40,7 +40,7 @@
 
     @media (max-width: 768px) {
       .sp-theme-toggle {
-        bottom: max(1.5rem, calc(1rem + env(safe-area-inset-bottom)));
+        bottom: max(6rem, calc(5.5rem + env(safe-area-inset-bottom)));
         right: 1.5rem;
         width: 52px;
         height: 52px;
@@ -51,7 +51,7 @@
     /* Ultra-small screens */
     @media (max-width: 380px) {
       .sp-theme-toggle {
-        bottom: max(1.2rem, calc(0.8rem + env(safe-area-inset-bottom)));
+        bottom: max(5.7rem, calc(5.3rem + env(safe-area-inset-bottom)));
         right: 1.2rem;
         width: 48px;
         height: 48px;
@@ -280,8 +280,8 @@
     const button = document.createElement('button');
     button.className = 'sp-theme-toggle';
     button.innerHTML = '🎨';
-    button.setAttribute('aria-label', 'Theme selection');
-    button.setAttribute('title', 'Theme selection');
+    button.setAttribute('aria-label', 'Theme selection (Ctrl+T)');
+    button.setAttribute('title', 'Theme selection (Ctrl+T)');
     button.onclick = () => openThemeModal();
     document.body.appendChild(button);
     return button;
@@ -414,8 +414,8 @@
         closeThemeModal();
       }
 
-      // Ctrl/Cmd + K to open theme switcher
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      // Ctrl/Cmd + T to open theme switcher
+      if ((e.ctrlKey || e.metaKey) && e.key === 't') {
         e.preventDefault();
         if (modalInstance?.classList.contains('active')) {
           closeThemeModal();
