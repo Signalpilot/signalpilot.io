@@ -736,6 +736,12 @@
     // Track analytics
     trackChatbotEvent('message_sent', { message_length: message.length, intent: getUserIntent(message) });
 
+    // Hide suggestions on mobile after first message to save space
+    const suggestionsContainer = document.getElementById('chatbot-suggestions');
+    if (window.innerWidth <= 768 && suggestionsContainer) {
+      suggestionsContainer.style.display = 'none';
+    }
+
     // Show typing indicator
     const typingIndicator = showTypingIndicator();
 
@@ -745,8 +751,8 @@
       const response = processMessage(message);
       addMessage(response);
 
-      // Update smart suggestions based on conversation
-      if (config.smartSuggestions) {
+      // Update smart suggestions based on conversation (desktop only)
+      if (config.smartSuggestions && window.innerWidth > 768) {
         createSuggestions();
       }
     }, config.typingDelay);
