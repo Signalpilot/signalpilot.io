@@ -3176,6 +3176,12 @@
               box-shadow: 0 6px 20px rgba(91,138,255,0.4);
             }
 
+            .carousel-item:hover {
+              border-color: var(--brand);
+              box-shadow: 0 8px 32px rgba(91,138,255,0.3);
+              transition: all 0.3s ease;
+            }
+
             /* Mobile: Hide arrows, reduce gap */
             @media (max-width: 768px) {
               #carousel-prev,
@@ -3424,13 +3430,20 @@
               // Initialize dots
               updateDots();
 
-              // Image click handlers - stop auto-scroll and open lightbox
-              carouselImages.forEach((img, index) => {
-                img.style.cursor = 'zoom-in';
-                img.addEventListener('click', (e) => {
+              // Carousel item click handlers - stop auto-scroll and open lightbox
+              items.forEach((item, index) => {
+                item.style.cursor = 'zoom-in';
+                item.addEventListener('click', (e) => {
+                  // Don't trigger if clicking on navigation buttons
+                  if (e.target.closest('#carousel-prev') || e.target.closest('#carousel-next')) {
+                    return;
+                  }
                   e.stopPropagation();
                   clearInterval(autoScrollInterval);
-                  openLightbox(img.src, img.alt, index);
+                  const img = item.querySelector('img');
+                  if (img) {
+                    openLightbox(img.src, img.alt, index);
+                  }
                 });
               });
 
