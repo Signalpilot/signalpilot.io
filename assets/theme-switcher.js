@@ -12,13 +12,13 @@
       position: fixed;
       bottom: 6.5rem;
       right: 2rem;
-      width: 56px;
-      height: 56px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--brand), var(--accent));
       border: 2px solid rgba(255, 255, 255, 0.2);
       color: white;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       cursor: pointer;
       z-index: 1001;
       display: flex;
@@ -38,24 +38,54 @@
       transform: scale(0.95);
     }
 
+    /* Pulse animation for mobile prominence */
+    @keyframes sp-theme-pulse {
+      0%, 100% {
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4), 0 0 16px var(--brand-glow);
+      }
+      50% {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 24px var(--brand-glow);
+      }
+    }
+
+    /* Tablet and Mobile - make prominent like chatbot */
     @media (max-width: 768px) {
       .sp-theme-toggle {
-        bottom: max(6rem, calc(5.5rem + env(safe-area-inset-bottom)));
-        right: 1.5rem;
-        width: 52px;
-        height: 52px;
-        font-size: 1.3rem;
+        bottom: max(5.75rem, calc(5.5rem + env(safe-area-inset-bottom)));
+        right: 1.25rem;
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4), 0 0 16px var(--brand-glow);
+        animation: sp-theme-pulse 3s ease-in-out infinite;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .sp-theme-toggle:hover,
+      .sp-theme-toggle:active {
+        animation: none;
+      }
+    }
+
+    /* Small mobile screens */
+    @media (max-width: 480px) {
+      .sp-theme-toggle {
+        bottom: max(5.5rem, calc(5.25rem + env(safe-area-inset-bottom)));
+        right: 1.25rem;
+        width: 56px;
+        height: 56px;
+        font-size: 1.4rem;
       }
     }
 
     /* Ultra-small screens */
     @media (max-width: 380px) {
       .sp-theme-toggle {
-        bottom: max(5.7rem, calc(5.3rem + env(safe-area-inset-bottom)));
-        right: 1.2rem;
-        width: 48px;
-        height: 48px;
-        font-size: 1.2rem;
+        bottom: max(5.25rem, calc(5rem + env(safe-area-inset-bottom)));
+        right: 1rem;
+        width: 52px;
+        height: 52px;
+        font-size: 1.3rem;
       }
     }
 
@@ -127,6 +157,8 @@
       border-radius: 50%;
       width: 36px;
       height: 36px;
+      min-width: 36px;
+      min-height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -134,12 +166,23 @@
       color: var(--muted);
       font-size: 1.5rem;
       transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .sp-theme-modal-close:hover {
       background: rgba(255, 255, 255, 0.15);
       color: var(--text);
       transform: rotate(90deg);
+    }
+
+    @media (max-width: 768px) {
+      .sp-theme-modal-close {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 1.75rem;
+      }
     }
 
     .sp-theme-grid {
@@ -164,6 +207,9 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .sp-theme-card::before {
@@ -259,13 +305,49 @@
     }
 
     @media (max-width: 768px) {
+      .sp-theme-modal {
+        padding: 0.5rem;
+      }
+
       .sp-theme-modal-content {
         padding: 1.5rem;
         border-radius: 20px;
+        max-height: 85vh;
       }
 
       .sp-theme-modal-title {
         font-size: 1.5rem;
+      }
+
+      .sp-theme-grid {
+        gap: 1rem;
+      }
+
+      .sp-theme-card {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .sp-theme-modal-content {
+        padding: 1.25rem;
+        border-radius: 16px;
+      }
+
+      .sp-theme-modal-title {
+        font-size: 1.35rem;
+      }
+
+      .sp-theme-card {
+        padding: 0.875rem;
+      }
+
+      .sp-theme-icon {
+        font-size: 2.25rem;
+      }
+
+      .sp-theme-name {
+        font-size: 1rem;
       }
     }
   `;
