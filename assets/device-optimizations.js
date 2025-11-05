@@ -78,7 +78,8 @@
     }
 
     // Touch detection
-    deviceInfo.touchEnabled = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    deviceInfo.touchEnabled = 'ontouchstart' in window ||
+                              (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
 
     console.log('📱 Device:', deviceInfo.type, `(${deviceInfo.os})`, deviceInfo.browser);
   }
@@ -189,6 +190,22 @@
     // Add responsive loading for images
     const images = document.querySelectorAll('img[data-src]');
 
+    // Check if IntersectionObserver is supported
+    if (!('IntersectionObserver' in window)) {
+      console.log('⚠️  IntersectionObserver not supported - loading images immediately');
+      // Fallback: load all images immediately
+      images.forEach(img => {
+        if (img.dataset.srcset) {
+          img.srcset = img.dataset.srcset;
+        }
+        if (img.dataset.src) {
+          img.src = img.dataset.src;
+        }
+        img.classList.add('loaded');
+      });
+      return;
+    }
+
     const imageObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -234,8 +251,20 @@
       el.removeAttribute('title');
     });
 
+    // Detect passive event listener support
+    let supportsPassive = false;
+    try {
+      const opts = Object.defineProperty({}, 'passive', {
+        get: function() {
+          supportsPassive = true;
+        }
+      });
+      window.addEventListener('testPassive', null, opts);
+      window.removeEventListener('testPassive', null, opts);
+    } catch (e) {}
+
     // Faster tap response (remove 300ms delay on old mobile browsers)
-    document.addEventListener('touchstart', function() {}, { passive: true });
+    document.addEventListener('touchstart', function() {}, supportsPassive ? { passive: true } : false);
 
     // Prevent double-tap zoom on buttons
     let lastTouchEnd = 0;
@@ -254,6 +283,12 @@
 
   function handleOrientation() {
     function updateOrientation() {
+      // Check if matchMedia is supported
+      if (!window.matchMedia) {
+        console.log('ℹ️  matchMedia not supported');
+        return;
+      }
+
       const orientation = window.matchMedia('(orientation: portrait)').matches
         ? 'portrait'
         : 'landscape';
@@ -267,7 +302,11 @@
 
     // Listen for orientation changes
     window.addEventListener('orientationchange', updateOrientation);
-    window.matchMedia('(orientation: portrait)').addEventListener('change', updateOrientation);
+
+    // Add matchMedia listener only if supported
+    if (window.matchMedia) {
+      window.matchMedia('(orientation: portrait)').addEventListener('change', updateOrientation);
+    }
   }
 
   // ========================================
