@@ -1,12 +1,45 @@
 /**
  * Device Optimization System
- * Detects device capabilities and network conditions, then optimizes accordingly
+ * Handles RESPONSIVE DESIGN and BROWSER COMPATIBILITY optimizations
+ *
+ * PURPOSE: Manages responsive behavior, network adaptation, touch optimization
+ * COMPLEMENTARY TO: device-capability.js (handles visual effects performance)
+ *
+ * Features:
+ * - Device type detection (mobile/tablet/desktop)
+ * - Network condition monitoring (4G/3G/2G, Save Data mode)
+ * - Touch optimization (passive listeners, 300ms delay removal)
+ * - Orientation handling (portrait/landscape)
+ * - Battery status monitoring
+ * - Browser API fallbacks (IE11, older browsers)
+ * - Responsive image lazy loading
+ *
+ * Data Attributes Set:
+ * - data-device-type: mobile|tablet|desktop
+ * - data-os: ios|android|windows|macos|linux
+ * - data-browser: chrome|safari|firefox|edge
+ * - data-connection: 4g|3g|2g|slow-2g|wifi
+ * - data-orientation: portrait|landscape
+ * - data-touch: true (if touch enabled)
+ * - data-retina: true (if high DPI)
+ * - data-screen: small|medium|large|xlarge
+ * - data-capability: low (only set on low battery or low FPS)
+ * - data-save-data: true (if user requested)
+ * - data-battery: low (if < 20% and not charging)
  */
 
 (function() {
   'use strict';
 
-  console.log('🔧 Device Optimization System initializing...');
+  // Debug mode - set to false for production
+  const DEBUG = false;
+
+  // Console logging wrapper
+  const log = DEBUG ? console.log.bind(console) : function() {};
+  const warn = DEBUG ? console.warn.bind(console) : function() {};
+  const error = console.error.bind(console); // Always show errors
+
+  log('🔧 Device Optimization System initializing...');
 
   // Store device info
   const deviceInfo = {
@@ -81,7 +114,7 @@
     deviceInfo.touchEnabled = 'ontouchstart' in window ||
                               (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
 
-    console.log('📱 Device:', deviceInfo.type, `(${deviceInfo.os})`, deviceInfo.browser);
+    log('📱 Device:', deviceInfo.type, `(${deviceInfo.os})`, deviceInfo.browser);
   }
 
   // ========================================
@@ -92,17 +125,17 @@
     // Memory
     if (navigator.deviceMemory) {
       deviceInfo.memory = navigator.deviceMemory;
-      console.log('💾 Memory:', deviceInfo.memory, 'GB');
+      log('💾 Memory:', deviceInfo.memory, 'GB');
     }
 
     // CPU cores
     if (navigator.hardwareConcurrency) {
       deviceInfo.cores = navigator.hardwareConcurrency;
-      console.log('⚙️  CPU Cores:', deviceInfo.cores);
+      log('⚙️  CPU Cores:', deviceInfo.cores);
     }
 
     // Screen info
-    console.log('🖥️  Screen:', `${deviceInfo.screenSize.width}x${deviceInfo.screenSize.height}`,
+    log('🖥️  Screen:', `${deviceInfo.screenSize.width}x${deviceInfo.screenSize.height}`,
                 `@ ${deviceInfo.pixelRatio}x DPR`);
   }
 
@@ -118,7 +151,7 @@
       deviceInfo.connection = conn.effectiveType || 'unknown';
       deviceInfo.saveData = conn.saveData || false;
 
-      console.log('🌐 Connection:', deviceInfo.connection,
+      log('🌐 Connection:', deviceInfo.connection,
                   deviceInfo.saveData ? '(Save Data ON)' : '');
 
       // Set data attribute for CSS
@@ -132,7 +165,7 @@
       conn.addEventListener('change', () => {
         deviceInfo.connection = conn.effectiveType;
         document.documentElement.setAttribute('data-connection', deviceInfo.connection);
-        console.log('🔄 Connection changed:', deviceInfo.connection);
+        log('🔄 Connection changed:', deviceInfo.connection);
         adaptToNetwork();
       });
     }
@@ -147,7 +180,7 @@
 
     // Slow connection - disable non-essential features
     if (conn === 'slow-2g' || conn === '2g') {
-      console.log('🐌 Slow connection - minimal mode activated');
+      log('🐌 Slow connection - minimal mode activated');
 
       // Hide videos
       document.querySelectorAll('video[autoplay]').forEach(video => {
@@ -169,7 +202,7 @@
 
     // Save Data mode
     if (deviceInfo.saveData) {
-      console.log('💾 Save Data mode - ultra minimal activated');
+      log('💾 Save Data mode - ultra minimal activated');
 
       // Remove all non-critical images
       document.querySelectorAll('img[data-optional]').forEach(img => {
@@ -192,7 +225,7 @@
 
     // Check if IntersectionObserver is supported
     if (!('IntersectionObserver' in window)) {
-      console.log('⚠️  IntersectionObserver not supported - loading images immediately');
+      log('⚠️  IntersectionObserver not supported - loading images immediately');
       // Fallback: load all images immediately
       images.forEach(img => {
         if (img.dataset.srcset) {
@@ -230,7 +263,7 @@
 
     images.forEach(img => imageObserver.observe(img));
 
-    console.log('🖼️  Responsive image system active:', images.length, 'images');
+    log('🖼️  Responsive image system active:', images.length, 'images');
   }
 
   // ========================================
@@ -240,7 +273,7 @@
   function optimizeForTouch() {
     if (!deviceInfo.touchEnabled) return;
 
-    console.log('👆 Touch device detected - optimizing');
+    log('👆 Touch device detected - optimizing');
 
     // Add touch class
     document.documentElement.classList.add('touch-device');
@@ -285,7 +318,7 @@
     function updateOrientation() {
       // Check if matchMedia is supported
       if (!window.matchMedia) {
-        console.log('ℹ️  matchMedia not supported');
+        log('ℹ️  matchMedia not supported');
         return;
       }
 
@@ -295,7 +328,7 @@
 
       document.documentElement.setAttribute('data-orientation', orientation);
 
-      console.log('📐 Orientation:', orientation);
+      log('📐 Orientation:', orientation);
     }
 
     updateOrientation();
@@ -322,11 +355,11 @@
           const level = Math.round(battery.level * 100);
           const charging = battery.charging;
 
-          console.log('🔋 Battery:', `${level}%`, charging ? '(charging)' : '');
+          log('🔋 Battery:', `${level}%`, charging ? '(charging)' : '');
 
           // Low battery mode
           if (!charging && level < 20) {
-            console.log('⚠️  Low battery - enabling power save mode');
+            log('⚠️  Low battery - enabling power save mode');
             document.documentElement.setAttribute('data-battery', 'low');
             document.documentElement.setAttribute('data-capability', 'low');
           } else {
@@ -338,7 +371,7 @@
         battery.addEventListener('levelchange', updateBatteryStatus);
         battery.addEventListener('chargingchange', updateBatteryStatus);
       } catch (err) {
-        console.log('ℹ️  Battery API not available');
+        log('ℹ️  Battery API not available');
       }
     }
   }
@@ -361,7 +394,7 @@
         // Re-detect device type on resize (for responsive testing)
         detectDeviceType();
 
-        console.log('📏 Viewport resized:',
+        log('📏 Viewport resized:',
           `${deviceInfo.screenSize.width}x${deviceInfo.screenSize.height}`);
       }, 250);
     });
@@ -406,7 +439,7 @@
   function monitorPerformance() {
     // Use existing capability detection if available
     if (window.SP_CAPABILITIES) {
-      console.log('✅ Using existing capability detection');
+      log('✅ Using existing capability detection');
       return;
     }
 
@@ -425,7 +458,7 @@
 
         // If FPS is low, reduce effects
         if (fps < 30) {
-          console.log('⚠️  Low FPS detected:', fps, '- reducing effects');
+          log('⚠️  Low FPS detected:', fps, '- reducing effects');
           document.documentElement.setAttribute('data-capability', 'low');
         }
       }
@@ -477,8 +510,8 @@
     // Monitor performance after 2 seconds
     setTimeout(monitorPerformance, 2000);
 
-    console.log('✅ Device Optimization System ready');
-    console.log('📊 Device Info:', deviceInfo);
+    log('✅ Device Optimization System ready');
+    log('📊 Device Info:', deviceInfo);
 
     // Dispatch event
     window.dispatchEvent(new CustomEvent('deviceoptimization:ready', {
