@@ -273,7 +273,30 @@ After 7 days, you can cancel anytime—no penalty.
 • Card customers: Self-service portal
 • PayPal customers: Manage via PayPal settings
 
-[Full policy →](/refund.html)`
+[Full policy →](/refund.html)`,
+
+      manage: `📋 **Manage your subscription:**
+
+• **Card customers:** Use our [self-service portal](/manage-subscription.html) to pause, cancel, or update payment methods
+• **PayPal customers:** Manage via PayPal subscription settings
+
+You can cancel anytime—no penalty. You keep access until the end of your current billing period.
+
+[Manage subscription →](/manage-subscription.html)`,
+
+      allfaqs: `📚 **View complete FAQ**
+
+I can answer quick questions, but for detailed information check our comprehensive FAQ page with 40+ questions covering:
+
+• Getting Started
+• All 7 Indicators (detailed)
+• Platform & Technical
+• Trading & Strategy
+• Education & Learning
+• Pricing & Plans
+• Support & Account
+
+[View full FAQ →](/faq.html)`
     },
 
     features: `**Every plan includes:**
@@ -296,7 +319,10 @@ After 7 days, you can cancel anytime—no penalty.
       inside: "#inside",
       docs: "https://docs.signalpilot.io/",
       education: "https://education.signalpilot.io/",
-      roadmap: "/roadmap.html"
+      roadmap: "/roadmap.html",
+      allfaqs: "/faq.html",
+      manage: "/manage-subscription.html",
+      refund: "/refund.html"
     }
   };
 
@@ -334,7 +360,9 @@ After 7 days, you can cancel anytime—no penalty.
     { regex: /(update|future|new indicators)/i, key: 'faqs.updates' },
     { regex: /(support|help|contact)/i, key: 'faqs.support' },
     { regex: /(financial advice|guarantee|profits|returns)/i, key: 'faqs.educational' },
-    { regex: /(refund|money.?back|cancel|return)/i, key: 'faqs.refund' },
+    { regex: /(manage.*subscription|pause.*subscription|cancel|unsubscribe|stop.*billing)/i, key: 'faqs.manage' },
+    { regex: /(refund|money.?back|return)/i, key: 'faqs.refund' },
+    { regex: /(more (info|faq|questions)|all.*faq|detailed|complete.*faq|full.*faq)/i, key: 'faqs.allfaqs' },
 
     // Features
     { regex: /(features|what.*included|what.*get)/i, key: 'features' },
@@ -416,7 +444,9 @@ After 7 days, you can cancel anytime—no penalty.
 • **Refund policy**
 • **TradingView compatibility**
 
-Or email us: support@signalpilot.io`;
+Or check our [comprehensive FAQ →](/faq.html) with 40+ detailed questions.
+
+Email: support@signalpilot.io`;
   }
 
   // ========================================
