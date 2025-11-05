@@ -1,0 +1,595 @@
+/**
+ * Device-Specific Optimizations
+ * Optimizes the site for all devices: mobile, tablet, desktop, touch, etc.
+ */
+
+/* =============================================================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================================================= */
+
+/* Larger tap targets for touch devices (minimum 44x44px per WCAG) */
+@media (hover: none) and (pointer: coarse) {
+  /* Mobile touch devices */
+
+  button,
+  a,
+  .btn,
+  .cookie-consent-btn,
+  .nav-dropdown-toggle,
+  .menu-toggle,
+  #langToggle,
+  #themeToggle {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+  }
+
+  /* Remove hover effects on touch (they stick) */
+  *:hover {
+    transition: none;
+  }
+
+  /* Better tap highlight */
+  * {
+    -webkit-tap-highlight-color: rgba(91, 138, 255, 0.2);
+    tap-highlight-color: rgba(91, 138, 255, 0.2);
+  }
+
+  /* Prevent zoom on input focus (iOS) */
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+
+  /* Smoother scrolling on touch */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Disable text selection on UI elements */
+  button,
+  .btn,
+  nav a {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* =============================================================================
+   MOBILE DEVICE OPTIMIZATIONS (< 768px)
+   ============================================================================= */
+
+@media (max-width: 767px) {
+  /* Reduce animations for better performance */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.2s !important;
+  }
+
+  /* Full-width sections */
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  /* Readable line lengths */
+  p,
+  li {
+    max-width: 100%;
+  }
+
+  /* Larger fonts for readability */
+  body {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  /* Stack elements vertically */
+  .flex-row {
+    flex-direction: column;
+  }
+
+  /* Full-width images */
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Optimize video for mobile */
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* =============================================================================
+   TABLET OPTIMIZATIONS (768px - 1024px)
+   ============================================================================= */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Balanced spacing */
+  .section {
+    padding: 4rem 2rem;
+  }
+
+  /* Comfortable reading width */
+  p,
+  li {
+    max-width: 70ch;
+  }
+
+  /* Two-column layouts where appropriate */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  /* Touch-friendly but not oversized */
+  button,
+  a.btn {
+    min-height: 40px;
+    padding: 10px 20px;
+  }
+}
+
+/* =============================================================================
+   LARGE DESKTOP OPTIMIZATIONS (> 1920px)
+   ============================================================================= */
+
+@media (min-width: 1921px) {
+  /* Limit content width for readability */
+  .section .container {
+    max-width: 1600px;
+  }
+
+  /* Larger base font */
+  body {
+    font-size: 18px;
+  }
+
+  /* More generous spacing */
+  .section {
+    padding: 6rem 3rem;
+  }
+}
+
+/* =============================================================================
+   ORIENTATION-SPECIFIC OPTIMIZATIONS
+   ============================================================================= */
+
+/* Landscape mobile (often used for gaming/video) */
+@media (max-width: 896px) and (orientation: landscape) {
+  /* Reduce vertical padding */
+  .section {
+    padding: 2rem 1rem;
+  }
+
+  /* Horizontal layouts */
+  .hero {
+    min-height: auto;
+    padding: 2rem 1rem;
+  }
+
+  /* Compact navigation */
+  header {
+    padding: 0.75rem 0;
+  }
+
+  /* Side-by-side content */
+  .content-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Portrait tablet */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  /* Vertical emphasis */
+  .section {
+    padding: 5rem 2rem;
+  }
+
+  /* Comfortable single-column reading */
+  .container {
+    max-width: 600px;
+  }
+}
+
+/* =============================================================================
+   HIGH-DPI / RETINA DISPLAYS
+   ============================================================================= */
+
+@media (-webkit-min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi) {
+  /* Sharper borders */
+  * {
+    border-width: 0.5px;
+  }
+
+  /* Crisp shadows */
+  .card,
+  .btn {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Use higher quality images (handled by srcset in HTML) */
+}
+
+/* =============================================================================
+   REDUCED MOTION (Accessibility + Battery Saving)
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable parallax */
+  [data-parallax] {
+    transform: none !important;
+  }
+
+  /* Disable particle effects */
+  #particles-canvas {
+    display: none;
+  }
+}
+
+/* =============================================================================
+   LOW POWER MODE (Battery Saving)
+   ============================================================================= */
+
+/* When device is in power-saving mode */
+html[data-capability="low"] {
+  /* Disable heavy animations */
+  #particles-canvas,
+  .aurora-background,
+  .animated-gradient {
+    display: none !important;
+  }
+
+  /* Simpler transitions */
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Static backgrounds */
+  body::before {
+    animation: none !important;
+  }
+}
+
+/* =============================================================================
+   SLOW NETWORK (2G/3G)
+   ============================================================================= */
+
+/* Applied via JS when slow connection detected */
+html[data-connection="slow"] {
+  /* Defer non-critical images */
+  img[loading="lazy"] {
+    background: var(--bg-soft);
+  }
+
+  /* Hide autoplay videos */
+  video[autoplay] {
+    display: none;
+  }
+
+  /* Show simpler loading states */
+  .loading-skeleton {
+    display: block;
+  }
+}
+
+/* =============================================================================
+   PRINT OPTIMIZATION
+   ============================================================================= */
+
+@media print {
+  /* Remove non-essential elements */
+  header,
+  footer,
+  nav,
+  .cookie-consent-banner,
+  .sp-chatbot-toggle,
+  #particles-canvas,
+  .aurora-background,
+  button,
+  video {
+    display: none !important;
+  }
+
+  /* Black text on white background */
+  * {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Expand sections */
+  .section {
+    padding: 1rem 0;
+  }
+
+  /* Show link URLs */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* Page breaks */
+  .section {
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+}
+
+/* =============================================================================
+   DARK MODE PREFERENCES (System-level)
+   ============================================================================= */
+
+@media (prefers-color-scheme: dark) {
+  /* Already handled by data-theme="dark", but ensure defaults are dark */
+  :root {
+    color-scheme: dark;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  /* Light mode users get light by default */
+  html:not([data-theme]) {
+    color-scheme: light;
+  }
+}
+
+/* =============================================================================
+   HIGH CONTRAST MODE (Accessibility)
+   ============================================================================= */
+
+@media (prefers-contrast: high) {
+  /* Stronger borders */
+  *,
+  *::before,
+  *::after {
+    border-width: 2px !important;
+  }
+
+  /* Higher contrast text */
+  body {
+    color: #000 !important;
+  }
+
+  html[data-theme="dark"] body {
+    color: #fff !important;
+  }
+
+  /* No transparent backgrounds */
+  * {
+    background-color: var(--bg) !important;
+  }
+
+  /* Visible focus indicators */
+  *:focus {
+    outline: 3px solid currentColor !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* =============================================================================
+   FOLDABLE/DUAL-SCREEN DEVICES
+   ============================================================================= */
+
+@media (horizontal-viewport-segments: 2) {
+  /* Dual-screen optimization */
+  .container {
+    display: grid;
+    grid-template-columns: env(viewport-segment-width 0 0) env(viewport-segment-width 1 0);
+    gap: env(viewport-segment-left 1 0);
+  }
+}
+
+/* =============================================================================
+   SMART TV / LARGE SCREENS (> 2560px)
+   ============================================================================= */
+
+@media (min-width: 2560px) {
+  /* Even larger base font */
+  body {
+    font-size: 20px;
+  }
+
+  /* Maximum readable width */
+  .container {
+    max-width: 1800px;
+  }
+
+  /* Generous spacing */
+  .section {
+    padding: 8rem 4rem;
+  }
+
+  /* Larger interactive elements */
+  button,
+  .btn {
+    min-height: 56px;
+    padding: 16px 32px;
+    font-size: 1.1em;
+  }
+}
+
+/* =============================================================================
+   INPUT METHOD DETECTION
+   ============================================================================= */
+
+/* Mouse/trackpad users get hover effects */
+@media (hover: hover) and (pointer: fine) {
+  a:hover,
+  button:hover,
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Touch + stylus users (Surface, iPad Pro with Apple Pencil) */
+@media (hover: none) and (pointer: fine) {
+  /* Precise pointer, no hover */
+  .interactive-element {
+    cursor: pointer;
+  }
+}
+
+/* Coarse pointer (finger) - need bigger targets */
+@media (pointer: coarse) {
+  button,
+  a,
+  .clickable {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* =============================================================================
+   DEVICE-SPECIFIC FIXES
+   ============================================================================= */
+
+/* iOS Safari specific */
+@supports (-webkit-touch-callout: none) {
+  /* Fix iOS scrolling */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Fix iOS input zoom */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Fix iOS safe area */
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Android Chrome specific */
+@supports (-webkit-appearance: none) {
+  /* Fix Android Chrome address bar height changes */
+  .hero {
+    min-height: calc(100vh - 56px); /* Chrome address bar height */
+  }
+}
+
+/* =============================================================================
+   PERFORMANCE TIER OPTIMIZATIONS (Applied via JS)
+   ============================================================================= */
+
+/* High-end devices */
+html[data-capability="high"] {
+  /* All effects enabled */
+  --animation-speed: 1s;
+  --transition-speed: 0.3s;
+}
+
+/* Medium devices */
+html[data-capability="medium"] {
+  /* Reduced effects */
+  --animation-speed: 0.5s;
+  --transition-speed: 0.2s;
+
+  video {
+    display: none; /* Save resources */
+  }
+}
+
+/* Low-end devices */
+html[data-capability="low"] {
+  /* Minimal effects */
+  --animation-speed: 0.1s;
+  --transition-speed: 0.1s;
+
+  #particles-canvas,
+  .aurora-background,
+  video,
+  .animated-gradient {
+    display: none !important;
+  }
+}
+
+/* =============================================================================
+   NETWORK-AWARE LOADING
+   ============================================================================= */
+
+/* Fast connection (4G, WiFi) */
+html[data-connection="4g"],
+html[data-connection="wifi"] {
+  /* Preload all resources */
+  img[loading="lazy"] {
+    loading: eager;
+  }
+}
+
+/* Slow connection (2G, 3G, slow-2g) */
+html[data-connection="2g"],
+html[data-connection="3g"],
+html[data-connection="slow-2g"] {
+  /* Aggressive lazy loading */
+  img:not([loading]) {
+    loading: lazy;
+  }
+
+  /* Hide autoplay videos */
+  video[autoplay] {
+    display: none;
+  }
+
+  /* Simpler backgrounds */
+  body::before,
+  .aurora-background {
+    display: none;
+  }
+}
+
+/* Save Data mode requested */
+html[data-save-data="true"] {
+  /* Minimal resources */
+  video,
+  #particles-canvas,
+  .aurora-background {
+    display: none !important;
+  }
+
+  /* No background images */
+  * {
+    background-image: none !important;
+  }
+}
