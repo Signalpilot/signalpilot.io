@@ -2053,47 +2053,62 @@
                 console.log('Video src:', video.src);
                 console.log('Video readyState:', video.readyState);
 
-                // MOBILE FIX: Force dimensions and visibility - SUPER VISIBLE
-                function forceMobileVideo() {
-                  const isMobile = window.innerWidth <= 768;
-                  console.log('forceMobileVideo - isMobile:', isMobile, 'width:', window.innerWidth);
+                // ALL DEVICES: Force dimensions and visibility - SUPER VISIBLE
+                function forceVideoVisible() {
+                  const width = window.innerWidth;
+                  const isMobile = width <= 768;
+                  const isTablet = width > 768 && width <= 1024;
+                  const isDesktop = width > 1024;
 
-                  if (isMobile) {
-                    // Force video container styles
-                    const container = video.parentElement;
-                    if (container) {
+                  console.log('forceVideoVisible - width:', width, 'isMobile:', isMobile, 'isTablet:', isTablet, 'isDesktop:', isDesktop);
+
+                  // Force video container styles FOR ALL DEVICES
+                  const container = video.parentElement;
+                  if (container) {
+                    container.style.display = 'block';
+                    container.style.visibility = 'visible';
+                    container.style.background = '#0a0e18';
+
+                    if (isMobile) {
                       container.style.minHeight = '300px';
-                      container.style.display = 'block';
-                      container.style.visibility = 'visible';
-                      container.style.background = '#0a0e18';
                     }
+                  }
 
-                    // Force video element styles - SUPER VISIBLE on mobile
-                    video.style.display = 'block';
-                    video.style.visibility = 'visible';
-                    video.style.opacity = '1';
+                  // Force video element styles - VISIBLE ON ALL DEVICES
+                  video.style.display = 'block';
+                  video.style.visibility = 'visible';
+                  video.style.opacity = '1';
+                  video.style.width = '100%';
+                  video.style.objectFit = 'contain';
+                  video.style.background = '#0a0e18';
+
+                  // Device-specific sizing
+                  if (isMobile) {
                     video.style.minHeight = '300px';
                     video.style.maxHeight = '550px';
-                    video.style.width = '100%';
                     video.style.height = 'auto';
-                    video.style.objectFit = 'contain';
-                    video.style.background = '#0a0e18';
                     video.style.borderRadius = '12px';
-
-                    console.log('Mobile styles applied. Video dimensions:', video.offsetWidth, 'x', video.offsetHeight);
+                  } else if (isTablet) {
+                    video.style.height = '100%';
+                    video.style.maxHeight = '600px';
+                  } else {
+                    // Desktop
+                    video.style.height = '100%';
                   }
+
+                  console.log('Video styles applied. Dimensions:', video.offsetWidth, 'x', video.offsetHeight, 'Display:', video.style.display);
                 }
 
                 // Run on load
-                forceMobileVideo();
+                forceVideoVisible();
 
                 // Run after delays to override other scripts
-                setTimeout(forceMobileVideo, 100);
-                setTimeout(forceMobileVideo, 500);
-                setTimeout(forceMobileVideo, 1000);
+                setTimeout(forceVideoVisible, 100);
+                setTimeout(forceVideoVisible, 500);
+                setTimeout(forceVideoVisible, 1000);
 
                 // Re-run on resize
-                window.addEventListener('resize', forceMobileVideo);
+                window.addEventListener('resize', forceVideoVisible);
 
                 // Aggressive play attempts
                 function tryPlay(source) {
