@@ -1,111 +1,292 @@
 /**
- * Signal Pilot AI Chatbot
- * Custom chatbot for signalpilot.io
- * Helps users with pricing, products, FAQs, and navigation
+ * Signal Pilot Chatbot - Enhanced Version
+ * Based on the superior docs chatbot design
+ * Features: Auto-resize textarea, typing indicator, quick actions, markdown support
  */
 
 (function() {
   'use strict';
 
   // ========================================
-  // CONFIGURATION & KNOWLEDGE BASE
+  // CONFIGURATION
   // ========================================
 
   const config = {
     name: 'Signal Pilot Assistant',
-    version: '2.0.0',
-    maxHistory: 100,
-    maxBookmarks: 50,
+    version: '3.0.0',
     typingDelay: 800,
-    smartSuggestions: true,
-    contextAwareness: true,
-    autoSave: true
+    maxHistory: 100
   };
+
+  // ========================================
+  // KNOWLEDGE BASE
+  // ========================================
 
   const knowledgeBase = {
     greetings: [
-      "Hey! I'm here to help you understand Signal Pilot. What would you like to know?",
+      "Hey! 👋 I'm here to help you understand Signal Pilot. What would you like to know?",
       "Hi there! Ask me about pricing, our indicators, or how to get started.",
       "Hello! I can help you with product info, pricing, or answer any questions."
     ],
 
     pricing: {
-      monthly: {
-        price: "$99/month",
-        description: "Flexible month-to-month billing. Cancel anytime. Includes all 7 elite indicators, email support (48h response), and all future updates.",
-        link: "#pricing"
-      },
-      yearly: {
-        price: "$699/year",
-        description: "Save $489 vs monthly (best value). Priority email support (24h response), all 7 indicators, and lifetime updates.",
-        link: "#pricing"
-      },
-      lifetime: {
-        price: "$1,799-$3,499",
-        description: "One-time payment for lifetime access. Includes private Discord community, founding member badge, feature voting rights, and everything in other plans forever.",
-        link: "#pricing"
-      },
-      comparison: "All plans include the exact same 7 indicators. The only difference is billing frequency and support level. Monthly offers flexibility, Yearly saves you money (save $489/year), and Lifetime gives unlimited access forever with exclusive perks."
+      overview: `We have 3 plans:
+
+💳 **Monthly** - $99/month
+📅 **Yearly** - $699/year (save $489)
+♾️ **Lifetime** - $1,799-$3,499
+
+All plans include the same 7 indicators. The only difference is billing frequency and support level.
+
+[View pricing →](#pricing)`,
+
+      monthly: `**Monthly Plan - $99/month**
+
+Flexible month-to-month billing. Cancel anytime.
+
+**Includes:**
+• All 7 elite indicators
+• Email support (48h response)
+• All future updates
+
+[Get started →](#pricing)`,
+
+      yearly: `**Yearly Plan - $699/year**
+
+Save $489 vs monthly (41% off) ⭐ **Most Popular**
+
+**Includes:**
+• All 7 elite indicators
+• Priority email support (24h response)
+• All future updates
+• Advanced training resources
+• Beta access
+
+[Get started →](#pricing)`,
+
+      lifetime: `**Lifetime Plan - $1,799-$3,499**
+
+One-time payment for lifetime access 🏆
+
+**Includes everything, forever:**
+• All 7 indicators + all future releases
+• Private Discord community
+• Founding member badge
+• Feature voting rights
+• 200+ preset configurations
+• Priority support
+
+Dynamic pricing: price increases as we sell slots (only 350 total).
+
+[Get started →](#pricing)`
     },
 
     products: {
-      pentarch: {
-        name: "SP Pentarch",
-        description: "Our flagship 5-phase cycle detection system. Maps complete market cycles: TD (Touchdown) → IGN (Ignition) → WRN (Warning) → CAP (Climax) → BDN (Breakdown). Works on any market, any timeframe.",
-        features: ["5 event signals", "Regime bar colors", "Pilot line direction", "NanoFlow crosses"]
-      },
-      omnideck: {
-        name: "SP OmniDeck",
-        description: "Dashboard combining 10 systems into one overlay. Includes Bull Market Support Band, Running P&L tracker, and all components are independently toggleable.",
-        features: ["10 systems combined", "Real-time P&L", "Dynamic support/resistance", "Customizable display"]
-      },
-      "volume-oracle": {
-        name: "SP Volume Oracle",
-        description: "Advanced volume analysis detecting divergences and buyer/seller pressure. Green ribbon shows accumulation, helps confirm price-volume relationships.",
-        features: ["Volume divergence detection", "Buyer/seller pressure", "Price-volume confirmation"]
-      },
-      "plutus-flow": {
-        name: "SP Plutus Flow",
-        description: "Money flow analysis tracking smart money movements. Helps identify institutional buying and selling pressure.",
-        features: ["Smart money tracking", "Flow analysis", "Institutional signals"]
-      },
-      "janus-atlas": {
-        name: "SP Janus Atlas",
-        description: "Multi-timeframe confirmation system showing convergence and divergence across timeframes. Increases signal confidence.",
-        features: ["Multi-timeframe analysis", "Convergence signals", "Divergence detection"]
-      },
-      "augury-grid": {
-        name: "SP Augury Grid",
-        description: "Support and resistance detection with target price calculations. Helps identify key levels and price targets.",
-        features: ["Dynamic S/R levels", "Target calculations", "Level strength scoring"]
-      },
-      "harmonic-oscillator": {
-        name: "SP Harmonic Oscillator",
-        description: "Composite momentum indicator combining 4 readings into a single line. Provides clear momentum signals.",
-        features: ["4-in-1 momentum", "Composite signals", "Clear trend identification"]
-      }
+      all: `**All 7 Elite Indicators:**
+
+1. **SP Pentarch** ⭐ - 5-phase cycle detection
+2. **SP OmniDeck** - 10-in-1 dashboard
+3. **SP Volume Oracle** - Institutional flow tracking
+4. **SP Plutus Flow** - Money flow analysis
+5. **SP Janus Atlas** - Multi-timeframe key levels
+6. **SP Augury Grid** - Support/resistance matrix
+7. **SP Harmonic Oscillator** - Momentum signals
+
+Every plan includes all 7 indicators!
+
+[See them in action →](#inside)`,
+
+      pentarch: `**SP Pentarch** ⭐ *FLAGSHIP*
+
+Our flagship 5-phase cycle detection system. Maps complete market cycles: **TD → IGN → WRN → CAP → BDN**
+
+**Features:**
+• 5 event signals
+• Regime bar colors
+• Pilot line direction
+• NanoFlow crosses
+
+Works on any market, any timeframe.
+
+[Learn more →](#inside)`,
+
+      omnideck: `**SP OmniDeck** - *ALL-IN-ONE*
+
+Dashboard combining 10 systems into one overlay.
+
+**Features:**
+• 10 systems combined
+• Real-time P&L tracker
+• Dynamic support/resistance
+• Customizable display
+• Bull Market Support Band
+
+All components independently toggleable.
+
+[Learn more →](#inside)`,
+
+      volumeoracle: `**SP Volume Oracle** - *INSTITUTIONAL*
+
+Advanced volume analysis detecting institutional activity.
+
+**Features:**
+• Volume divergence detection
+• Buyer/seller pressure analysis
+• Accumulation/distribution tracking
+• Price-volume confirmation
+
+Green ribbon shows accumulation before retail notices.
+
+[Learn more →](#inside)`,
+
+      plutusflow: `**SP Plutus Flow** - *ACCUMULATION*
+
+Money flow analysis tracking smart money movements.
+
+**Features:**
+• Smart money tracking
+• Cumulative delta analysis
+• Institutional signals
+• Flow divergence detection
+
+Reveals hidden buying/selling pressure.
+
+[Learn more →](#inside)`,
+
+      janusatlas: `**SP Janus Atlas** - *KEY LEVELS*
+
+Auto-plots HTF levels, pivots, VWAP anchors, and volume profile zones.
+
+**Features:**
+• Multi-timeframe levels (D/W/M)
+• VWAP anchors
+• Volume profile (POC, VAH, VAL)
+• Session markers
+
+All key zones in one view.
+
+[Learn more →](#inside)`,
+
+      augurygrid: `**SP Augury Grid** - *S/R MATRIX*
+
+Multi-symbol watchlist tracking 8 tickers simultaneously.
+
+**Features:**
+• 8 symbols at once
+• Quality scores (0-100)
+• Real-time P&L tracking
+• Target price calculations
+• Signal direction & timing
+
+Your entire watchlist, ranked by quality.
+
+[Learn more →](#inside)`,
+
+      harmonicoscillator: `**SP Harmonic Oscillator** - *TIMING*
+
+4-oscillator voting system with confidence ratings.
+
+**Features:**
+• 4-in-1 momentum
+• Star rating (★ to ★★★★)
+• Composite signals
+• Clear trend identification
+
+4/4 agreement = max confidence.
+
+[Learn more →](#inside)`
     },
 
     faqs: {
-      repaint: "Zero repainting. Guaranteed. All signals finalize on candle close only. We audit every indicator for lookahead bias. If you can prove any repaint, we pay you $100 USD.",
-      trial: "We offer a 7-day money-back guarantee, no questions asked. Full refund within 7 days of your first payment.",
-      activation: "Access is typically granted within 1-8 hours after payment (usually under 2 hours). You'll receive a TradingView invite via email.",
-      markets: "Works on ANY market and ANY timeframe on TradingView: stocks, forex, crypto, commodities, bonds, indices. From 1-minute to yearly charts.",
-      tradingview: "Yes! You just need enough indicator slots. Free accounts get 3 slots (enough for Pentarch + 1-2 filters). Pro/Premium accounts get more slots and unlimited alerts.",
-      updates: "All plans include every future indicator we launch, automatically and forever. You're buying into the entire Signal Pilot ecosystem.",
-      support: "Monthly: Email support (48h response). Yearly: Priority email (24h response). Lifetime: Private Discord + priority support.",
-      educational: "Signal Pilot is educational only. We provide technical analysis tools—not investment advice, trade recommendations, or guaranteed returns. You are solely responsible for your trading decisions.",
-      refund: "Full refund within 7 days of your first payment, no questions asked. After 7 days, you can cancel anytime—no penalty. Card customers use self-service portal, PayPal customers manage via PayPal settings."
+      repaint: `🚫 **Zero repainting. Guaranteed.**
+
+All signals finalize on candle close only. We audit every indicator for lookahead bias.
+
+**$100 USD bounty** if you can prove any repaint.
+
+What you see in history is exactly what you would have seen live.`,
+
+      trial: `We don't have a traditional free trial, but we offer something better:
+
+**7-day money-back guarantee** ✅
+
+Full refund within 7 days of your first payment, no questions asked.
+
+You can test everything risk-free for a full week!
+
+[Try the demo →](#comparison-slider)`,
+
+      activation: `⚡ **Access: 1-8 hours** (usually under 2 hours)
+
+You'll receive a TradingView invite-only link via email. Check your email and TradingView notifications.
+
+[Get started →](#pricing)`,
+
+      markets: `📊 **Works on ANY market, ANY timeframe**
+
+• Stocks, indices, forex, crypto, commodities, bonds
+• 1-minute to yearly charts
+• Pentarch auto-adapts to your timeframe
+
+If it has OHLC + volume data, our indicators work.
+
+[See examples →](#inside)`,
+
+      tradingview: `**Works with free TradingView!** ✅
+
+You just need enough indicator slots:
+• Free accounts: 3 slots (Pentarch + 1-2 filters)
+• Pro/Premium: More slots + unlimited alerts
+
+[See pricing →](#pricing)`,
+
+      updates: `🎁 **All future indicators included**
+
+Every plan includes every future indicator we launch, automatically and forever.
+
+Buy once, benefit forever. No surprise charges.
+
+[See roadmap →](/roadmap.html)`,
+
+      support: `**Support by plan:**
+
+• **Monthly:** Email (48h response)
+• **Yearly:** Priority email (24h response)
+• **Lifetime:** Private Discord + priority support
+
+Email: support@signalpilot.io`,
+
+      educational: `⚠️ **Educational use only**
+
+Signal Pilot provides technical analysis tools—not investment advice, trade recommendations, or guaranteed returns.
+
+Trading involves substantial risk of loss. You are solely responsible for your trading decisions.
+
+[Read full disclaimer →](#faq)`,
+
+      refund: `💰 **7-day money-back guarantee**
+
+Full refund within 7 days of your first payment, no questions asked.
+
+After 7 days, you can cancel anytime—no penalty.
+
+• Card customers: Self-service portal
+• PayPal customers: Manage via PayPal settings
+
+[Full policy →](/refund.html)`
     },
 
-    features: {
-      nonrepainting: "100% non-repainting, audited signals that finalize on candle close only.",
-      alerts: "Customizable alerts via TradingView: email, SMS, push notifications.",
-      backtesting: "Full TradingView strategy tester compatibility for historical validation.",
-      presets: "200+ preset configurations for different trading strategies.",
-      documentation: "Comprehensive docs at docs.signalpilot.io with setup guides and examples.",
-      education: "82 interactive lessons (250,000+ words) at education.signalpilot.io"
-    },
+    features: `**Every plan includes:**
+
+✅ All 7 elite indicators
+✅ 100% non-repainting (audited)
+✅ Customizable TradingView alerts
+✅ Full backtesting compatibility
+✅ 200+ preset configurations
+✅ Comprehensive documentation
+✅ All future updates
+
+[See details →](#pricing)`,
 
     links: {
       pricing: "#pricing",
@@ -115,236 +296,77 @@
       inside: "#inside",
       docs: "https://docs.signalpilot.io/",
       education: "https://education.signalpilot.io/",
-      roadmap: "/roadmap.html",
-      refund: "/refund.html",
-      privacy: "/privacy.html",
-      terms: "/terms.html"
+      roadmap: "/roadmap.html"
     }
   };
 
   // ========================================
-  // PATTERN MATCHING & RESPONSES
+  // PATTERN MATCHING
   // ========================================
 
   const patterns = [
     // Greetings
-    {
-      regex: /^(hi|hello|hey|sup|yo|greetings)/i,
-      response: () => knowledgeBase.greetings[Math.floor(Math.random() * knowledgeBase.greetings.length)]
-    },
+    { regex: /^(hi|hello|hey|sup|yo|greetings)/i, key: 'greetings' },
 
-    // Pricing queries
-    {
-      regex: /(how much|price|cost|pricing|plans|subscription)/i,
-      response: () => {
-        return `We have 3 plans:\n\n💳 **Monthly** - ${knowledgeBase.pricing.monthly.price}\n📅 **Yearly** - ${knowledgeBase.pricing.yearly.price} (save $489)\n♾️ **Lifetime** - ${knowledgeBase.pricing.lifetime.price}\n\n${knowledgeBase.pricing.comparison}\n\n[View pricing details](#pricing)`;
-      }
-    },
+    // Pricing
+    { regex: /(how much|price|cost|pricing|plans|subscription)/i, key: 'pricing.overview' },
+    { regex: /(monthly|per month|month to month)/i, key: 'pricing.monthly' },
+    { regex: /(yearly|annual|per year)/i, key: 'pricing.yearly' },
+    { regex: /(lifetime|one.?time|forever)/i, key: 'pricing.lifetime' },
+    { regex: /(difference|compare|which plan)/i, key: 'pricing.overview' },
 
-    // Monthly plan
-    {
-      regex: /(monthly|per month|month to month)/i,
-      response: () => `**Monthly Plan**: ${knowledgeBase.pricing.monthly.price}\n\n${knowledgeBase.pricing.monthly.description}\n\n[See pricing](#pricing)`
-    },
+    // Products
+    { regex: /(all.*indicators|what.*included|7.*indicators|seven)/i, key: 'products.all' },
+    { regex: /(pentarch|what is pentarch)/i, key: 'products.pentarch' },
+    { regex: /(omnideck|omni deck)/i, key: 'products.omnideck' },
+    { regex: /(volume oracle|volume)/i, key: 'products.volumeoracle' },
+    { regex: /(plutus flow|plutus|money flow)/i, key: 'products.plutusflow' },
+    { regex: /(janus atlas|janus|multi.?timeframe)/i, key: 'products.janusatlas' },
+    { regex: /(augury grid|augury|support.*resistance)/i, key: 'products.augurygrid' },
+    { regex: /(harmonic oscillator|harmonic|oscillator|momentum)/i, key: 'products.harmonicoscillator' },
 
-    // Yearly plan
-    {
-      regex: /(yearly|annual|per year)/i,
-      response: () => `**Yearly Plan**: ${knowledgeBase.pricing.yearly.price}\n\n${knowledgeBase.pricing.yearly.description}\n\nYou save $489 compared to paying monthly!\n\n[See pricing](#pricing)`
-    },
-
-    // Lifetime plan
-    {
-      regex: /(lifetime|one.?time|forever)/i,
-      response: () => `**Lifetime Plan**: ${knowledgeBase.pricing.lifetime.price}\n\n${knowledgeBase.pricing.lifetime.description}\n\nDynamic pricing: price increases as we sell more slots (only 350 total).\n\n[See pricing](#pricing)`
-    },
-
-    // Plan comparison
-    {
-      regex: /(difference|compare|which plan|what.*plan)/i,
-      response: () => `${knowledgeBase.pricing.comparison}\n\n**Support levels:**\n- Monthly: Email (48h)\n- Yearly: Priority email (24h)\n- Lifetime: Discord + priority\n\n[Compare plans](#pricing)`
-    },
-
-    // Pentarch
-    {
-      regex: /(pentarch|what is pentarch)/i,
-      response: () => {
-        const p = knowledgeBase.products.pentarch;
-        return `**${p.name}** - ${p.description}\n\n✨ Features:\n${p.features.map(f => `• ${f}`).join('\n')}\n\n[See it in action](#inside)`;
-      }
-    },
-
-    // OmniDeck
-    {
-      regex: /(omnideck|omni deck)/i,
-      response: () => {
-        const p = knowledgeBase.products.omnideck;
-        return `**${p.name}** - ${p.description}\n\n✨ Features:\n${p.features.map(f => `• ${f}`).join('\n')}\n\n[Learn more](#inside)`;
-      }
-    },
-
-    // Volume Oracle
-    {
-      regex: /(volume oracle|volume)/i,
-      response: () => {
-        const p = knowledgeBase.products["volume-oracle"];
-        return `**${p.name}** - ${p.description}\n\n✨ Features:\n${p.features.map(f => `• ${f}`).join('\n')}\n\n[Learn more](#inside)`;
-      }
-    },
-
-    // Plutus Flow
-    {
-      regex: /(plutus flow|plutus|money flow)/i,
-      response: () => {
-        const p = knowledgeBase.products["plutus-flow"];
-        return `**${p.name}** - ${p.description}\n\n✨ Features:\n${p.features.map(f => `• ${f}`).join('\n')}\n\n[Learn more](#inside)`;
-      }
-    },
-
-    // Janus Atlas
-    {
-      regex: /(janus atlas|janus|multi.?timeframe)/i,
-      response: () => {
-        const p = knowledgeBase.products["janus-atlas"];
-        return `**${p.name}** - ${p.description}\n\n✨ Features:\n${p.features.map(f => `• ${f}`).join('\n')}\n\n[Learn more](#inside)`;
-      }
-    },
-
-    // Augury Grid
-    {
-      regex: /(augury grid|augury|support.*resistance)/i,
-      response: () => {
-        const p = knowledgeBase.products["augury-grid"];
-        return `**${p.name}** - ${p.description}\n\n✨ Features:\n${p.features.map(f => `• ${f}`).join('\n')}\n\n[Learn more](#inside)`;
-      }
-    },
-
-    // Harmonic Oscillator
-    {
-      regex: /(harmonic oscillator|harmonic|oscillator|momentum)/i,
-      response: () => {
-        const p = knowledgeBase.products["harmonic-oscillator"];
-        return `**${p.name}** - ${p.description}\n\n✨ Features:\n${p.features.map(f => `• ${f}`).join('\n')}\n\n[Learn more](#inside)`;
-      }
-    },
-
-    // All indicators
-    {
-      regex: /(all.*indicators|what.*included|7.*indicators|seven.*indicators)/i,
-      response: () => {
-        return `**All 7 Elite Indicators:**\n\n1. **SP Pentarch** - 5-phase cycle detection\n2. **SP OmniDeck** - 10-in-1 dashboard\n3. **SP Volume Oracle** - Volume analysis\n4. **SP Plutus Flow** - Money flow tracking\n5. **SP Janus Atlas** - Multi-timeframe\n6. **SP Augury Grid** - Support/resistance\n7. **SP Harmonic Oscillator** - Momentum signals\n\nEvery plan includes all 7 indicators!\n\n[See them in action](#inside) | [Get started](#pricing)`;
-      }
-    },
-
-    // Repainting
-    {
-      regex: /(repaint|repainting|does it repaint|lookahead)/i,
-      response: () => `🚫 **${knowledgeBase.faqs.repaint}**\n\nWhat you see in history is exactly what you would have seen live.\n\n[Read our guarantee](#faq)`
-    },
-
-    // Free trial
-    {
-      regex: /(free trial|trial|demo|test|try)/i,
-      response: () => `We don't have a traditional free trial, but we offer something better:\n\n**${knowledgeBase.faqs.trial}**\n\nYou can test everything risk-free for a full week!\n\n[Try the interactive demo](#comparison-slider) or [see pricing](#pricing)`
-    },
-
-    // Activation time
-    {
-      regex: /(how (fast|quick|long)|activation|access|when.*get)/i,
-      response: () => `⚡ **${knowledgeBase.faqs.activation}**\n\nWe'll send you a TradingView invite-only link. Check your email and TradingView notifications.\n\n[Get started](#pricing)`
-    },
-
-    // Markets & timeframes
-    {
-      regex: /(markets?|timeframes?|what.*work|forex|stocks|crypto)/i,
-      response: () => `📊 **${knowledgeBase.faqs.markets}**\n\nPentarch auto-adapts its 5-phase cycle detection to any timeframe.\n\n[See examples](#inside)`
-    },
-
-    // TradingView compatibility
-    {
-      regex: /(tradingview|free account|indicator slots)/i,
-      response: () => `${knowledgeBase.faqs.tradingview}\n\n[See what's included](#pricing)`
-    },
-
-    // Updates
-    {
-      regex: /(update|future|new indicators)/i,
-      response: () => `🎁 **${knowledgeBase.faqs.updates}**\n\nBuy once, benefit forever. No surprise charges.\n\n[See our roadmap](/roadmap.html)`
-    },
-
-    // Support
-    {
-      regex: /(support|help|contact)/i,
-      response: () => `**Support by plan:**\n\n${knowledgeBase.faqs.support}\n\nEmail: [support@signalpilot.io](mailto:support@signalpilot.io)\n\n[Contact us](#faq)`
-    },
-
-    // Educational disclaimer
-    {
-      regex: /(financial advice|guarantee|profits|returns)/i,
-      response: () => `⚠️ **${knowledgeBase.faqs.educational}**\n\nTrading involves substantial risk of loss. We provide tools for analysis, not financial advice.\n\n[Read full disclaimer](#faq)`
-    },
-
-    // Refund policy
-    {
-      regex: /(refund|money.?back|cancel|return)/i,
-      response: () => `💰 **${knowledgeBase.faqs.refund}**\n\n[Full refund policy](/refund.html) | [See pricing](#pricing)`
-    },
+    // FAQs
+    { regex: /(repaint|repainting|does it repaint|lookahead)/i, key: 'faqs.repaint' },
+    { regex: /(free trial|trial|demo|test|try)/i, key: 'faqs.trial' },
+    { regex: /(how (fast|quick|long)|activation|access|when.*get)/i, key: 'faqs.activation' },
+    { regex: /(markets?|timeframes?|what.*work|forex|stocks|crypto)/i, key: 'faqs.markets' },
+    { regex: /(tradingview|free account|indicator slots)/i, key: 'faqs.tradingview' },
+    { regex: /(update|future|new indicators)/i, key: 'faqs.updates' },
+    { regex: /(support|help|contact)/i, key: 'faqs.support' },
+    { regex: /(financial advice|guarantee|profits|returns)/i, key: 'faqs.educational' },
+    { regex: /(refund|money.?back|cancel|return)/i, key: 'faqs.refund' },
 
     // Features
-    {
-      regex: /(features|what.*included|what.*get)/i,
-      response: () => `**Every plan includes:**\n\n✅ All 7 elite indicators\n✅ ${knowledgeBase.features.nonrepainting}\n✅ ${knowledgeBase.features.alerts}\n✅ ${knowledgeBase.features.backtesting}\n✅ ${knowledgeBase.features.presets}\n✅ Documentation & tutorials\n✅ All future updates\n\n[See details](#pricing)`
-    },
+    { regex: /(features|what.*included|what.*get)/i, key: 'features' },
 
-    // Documentation
-    {
-      regex: /(docs|documentation|guide|tutorial)/i,
-      response: () => `📚 **Documentation & Learning:**\n\n• [Setup Guides](${knowledgeBase.links.docs})\n• [Education Hub](${knowledgeBase.links.education}) - 82 lessons\n• [Video Tutorials](${knowledgeBase.links.docs})\n\nEverything you need to master the indicators!`
-    },
+    // Navigation
+    { regex: /(show.*pricing|take.*pricing|go.*pricing)/i, action: 'scrollTo', target: 'pricing' },
+    { regex: /(show.*demo|try.*demo|demo|comparison|before.*after)/i, action: 'scrollTo', target: 'comparison-slider' },
+    { regex: /(faq|questions|show.*faq)/i, action: 'scrollTo', target: 'faq' },
 
-    // Get started / Buy
-    {
-      regex: /(get started|buy|purchase|sign up|subscribe)/i,
-      response: () => `🚀 **Ready to get started?**\n\n1. [Choose your plan](#pricing)\n2. Enter your TradingView username\n3. Complete payment (PayPal or card)\n4. Get access in 1-8 hours!\n\n7-day money-back guarantee on all plans.\n\n[View pricing](#pricing)`
-    },
-
-    // Navigation - Pricing
-    {
-      regex: /(show.*pricing|take.*pricing|go.*pricing|pricing page)/i,
-      response: () => {
-        scrollToSection('pricing');
-        return "Taking you to pricing... 📊";
-      }
-    },
-
-    // Navigation - Demo
-    {
-      regex: /(show.*demo|try.*demo|demo|comparison|before.*after)/i,
-      response: () => {
-        scrollToSection('comparison-slider');
-        return "Here's our interactive demo! Drag the slider to compare. 👆";
-      }
-    },
-
-    // Navigation - FAQ
-    {
-      regex: /(faq|questions|show.*faq)/i,
-      response: () => {
-        scrollToSection('faq');
-        return "Taking you to FAQ... 💬";
-      }
-    },
-
-    // Default fallback
-    {
-      regex: /.*/,
-      response: () => `I'm not sure about that. Try asking about:\n\n• Pricing & plans\n• Our 7 indicators\n• How to get started\n• Refund policy\n• TradingView compatibility\n\nOr email us: [support@signalpilot.io](mailto:support@signalpilot.io)`
-    }
+    // Get started
+    { regex: /(get started|buy|purchase|sign up|subscribe)/i, key: 'getstarted' }
   ];
+
+  // Special responses
+  knowledgeBase.getstarted = `🚀 **Ready to get started?**
+
+1. [Choose your plan →](#pricing)
+2. Enter your TradingView username
+3. Complete payment (PayPal or card)
+4. Get access in 1-8 hours!
+
+**7-day money-back guarantee** on all plans.
+
+[View pricing →](#pricing)`;
 
   // ========================================
   // HELPER FUNCTIONS
   // ========================================
+
+  function getNestedValue(obj, path) {
+    return path.split('.').reduce((current, prop) => current?.[prop], obj);
+  }
 
   function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
@@ -353,182 +375,48 @@
     }
   }
 
-  function saveToHistory(role, content) {
-    const history = JSON.parse(localStorage.getItem('sp_chatbot_history') || '[]');
-    history.push({ role, content, timestamp: Date.now() });
-    if (history.length > config.maxHistory) {
-      history.shift();
-    }
-    localStorage.setItem('sp_chatbot_history', JSON.stringify(history));
+  function parseMarkdown(text) {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/`(.*?)`/g, '<code>$1</code>')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+      .replace(/\n/g, '<br>');
   }
 
-  function loadHistory() {
-    return JSON.parse(localStorage.getItem('sp_chatbot_history') || '[]');
-  }
+  function processMessage(input) {
+    const text = input.trim();
 
-  function saveBookmark(content) {
-    const bookmarks = JSON.parse(localStorage.getItem('sp_chatbot_bookmarks') || '[]');
-    bookmarks.unshift({ content, timestamp: Date.now() });
-    if (bookmarks.length > config.maxBookmarks) {
-      bookmarks.pop();
-    }
-    localStorage.setItem('sp_chatbot_bookmarks', JSON.stringify(bookmarks));
-  }
-
-  function getBookmarks() {
-    return JSON.parse(localStorage.getItem('sp_chatbot_bookmarks') || '[]');
-  }
-
-  function exportConversation(format = 'txt') {
-    const history = loadHistory();
-    if (history.length === 0) {
-      return "No conversation to export yet.";
-    }
-
-    if (format === 'json') {
-      const data = JSON.stringify(history, null, 2);
-      downloadFile(data, 'signal-pilot-chat.json', 'application/json');
-      return "Conversation exported as JSON!";
-    } else {
-      const text = history.map(m => {
-        const time = new Date(m.timestamp).toLocaleString();
-        return `[${time}] ${m.role.toUpperCase()}: ${m.content}`;
-      }).join('\n\n');
-      downloadFile(text, 'signal-pilot-chat.txt', 'text/plain');
-      return "Conversation exported as text!";
-    }
-  }
-
-  function downloadFile(content, filename, type) {
-    const blob = new Blob([content], { type });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  function clearHistory() {
-    localStorage.removeItem('sp_chatbot_history');
-    return "Conversation history cleared! 🗑️";
-  }
-
-  function searchHistory(query) {
-    const history = loadHistory();
-    const results = history.filter(m =>
-      m.content.toLowerCase().includes(query.toLowerCase())
-    );
-
-    if (results.length === 0) {
-      return `No messages found matching "${query}".`;
-    }
-
-    return `**Found ${results.length} message(s) matching "${query}":**\n\n` +
-      results.slice(0, 5).map((m, i) =>
-        `${i + 1}. ${m.role === 'user' ? '👤' : '🤖'} ${m.content.substring(0, 100)}...`
-      ).join('\n\n');
-  }
-
-  function getSmartSuggestions(conversationContext) {
-    const history = loadHistory();
-    const lastMessages = history.slice(-3);
-
-    // Analyze recent conversation
-    const hasAskedAboutPricing = lastMessages.some(m =>
-      /price|cost|plan/.test(m.content.toLowerCase())
-    );
-    const hasAskedAboutFeatures = lastMessages.some(m =>
-      /feature|indicator|what|how/.test(m.content.toLowerCase())
-    );
-    const hasAskedAboutDemo = lastMessages.some(m =>
-      /demo|try|test/.test(m.content.toLowerCase())
-    );
-
-    // Return contextual suggestions
-    if (hasAskedAboutPricing && !hasAskedAboutDemo) {
-      return ["Try the demo", "Money-back guarantee?", "What's included?"];
-    } else if (hasAskedAboutFeatures && !hasAskedAboutPricing) {
-      return ["How much does it cost?", "Compare plans", "Get started"];
-    } else if (hasAskedAboutDemo) {
-      return ["See pricing", "How do I subscribe?", "What if I don't like it?"];
-    }
-
-    // Default suggestions
-    return [
-      "How much does it cost?",
-      "What is Pentarch?",
-      "Does it repaint?",
-      "Show me pricing"
-    ];
-  }
-
-  function getUserIntent(message) {
-    const msg = message.toLowerCase();
-
-    if (/export|download|save.*conversation/.test(msg)) return 'export';
-    if (/clear|delete|reset.*history/.test(msg)) return 'clear';
-    if (/search|find/.test(msg)) return 'search';
-    if (/help|what.*can.*you/.test(msg)) return 'help';
-
-    return 'query';
-  }
-
-  function getCopyButton(content) {
-    return `<button class="chatbot-copy-btn" data-content="${content.replace(/"/g, '&quot;')}" title="Copy response">📋</button>`;
-  }
-
-  // ========================================
-  // MESSAGE PROCESSING
-  // ========================================
-
-  function processMessage(userInput) {
-    const input = userInput.trim().toLowerCase();
-    const intent = getUserIntent(input);
-
-    // Handle special commands
-    if (intent === 'export') {
-      const format = /json/.test(input) ? 'json' : 'txt';
-      return exportConversation(format);
-    }
-
-    if (intent === 'clear') {
-      return clearHistory();
-    }
-
-    if (intent === 'search') {
-      const searchMatch = input.match(/search|find/i);
-      if (searchMatch) {
-        const query = userInput.substring(searchMatch.index + searchMatch[0].length).trim();
-        if (query) {
-          return searchHistory(query);
+    // Check for patterns
+    for (const pattern of patterns) {
+      if (pattern.regex.test(text)) {
+        if (pattern.action === 'scrollTo') {
+          scrollToSection(pattern.target);
+          return `Taking you to ${pattern.target.replace('-', ' ')}... 👆`;
+        }
+        if (pattern.key) {
+          const value = getNestedValue(knowledgeBase, pattern.key);
+          if (Array.isArray(value)) {
+            return value[Math.floor(Math.random() * value.length)];
+          }
+          return value || getFallbackResponse();
         }
       }
-      return "What would you like to search for? Try 'search [your query]'";
     }
 
-    if (intent === 'help') {
-      return `**I can help you with:**\n\n• Pricing & plans\n• Product information (all 7 indicators)\n• How to get started\n• TradingView compatibility\n• Refund policy\n• Technical support\n\n**Special commands:**\n• "export conversation" - Download chat\n• "search [query]" - Search history\n• "clear history" - Clear chat\n• "show bookmarks" - View saved responses\n\n**Keyboard shortcuts:**\n• Ctrl+K: Open/close chat\n• Escape: Close chat\n\nWhat would you like to know?`;
-    }
+    return getFallbackResponse();
+  }
 
-    // Check for bookmark request
-    if (input.includes('show bookmarks') || input.includes('my bookmarks')) {
-      const bookmarks = getBookmarks();
-      if (bookmarks.length === 0) {
-        return "You haven't bookmarked any responses yet. Click the bookmark icon (🔖) on any message to save it!";
-      }
-      return `**Your Bookmarks:**\n\n${bookmarks.slice(0, 5).map((b, i) => `${i + 1}. ${b.content.substring(0, 100)}...`).join('\n\n')}`;
-    }
+  function getFallbackResponse() {
+    return `I'm not sure about that. Try asking about:
 
-    // Find matching pattern
-    for (const pattern of patterns) {
-      if (pattern.regex.test(userInput)) {
-        return pattern.response();
-      }
-    }
+• **Pricing & plans**
+• **Our 7 indicators**
+• **How to get started**
+• **Refund policy**
+• **TradingView compatibility**
 
-    // Fallback
-    return patterns[patterns.length - 1].response();
+Or email us: support@signalpilot.io`;
   }
 
   // ========================================
@@ -536,62 +424,54 @@
   // ========================================
 
   function createChatbot() {
-    // Create button
-    const button = document.createElement('button');
-    button.className = 'chatbot-button';
-    button.setAttribute('aria-label', 'Open chatbot');
-    button.innerHTML = `
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+    // Create toggle button
+    const toggle = document.createElement('button');
+    toggle.className = 'sp-chatbot-toggle';
+    toggle.setAttribute('aria-label', 'Open chatbot');
+    toggle.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
       </svg>
     `;
 
-    // Create container
-    const container = document.createElement('div');
-    container.className = 'chatbot-container';
-    container.innerHTML = `
-      <div class="chatbot-header">
-        <div class="chatbot-header-info">
-          <div class="chatbot-avatar">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    // Create window
+    const window = document.createElement('div');
+    window.className = 'sp-chatbot-window';
+    window.innerHTML = `
+      <div class="sp-chatbot-header">
+        <div class="sp-chatbot-header-info">
+          <div class="sp-chatbot-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 2L2 7l10 5 10-5-10-5z"/>
               <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
             </svg>
           </div>
           <div>
-            <div class="chatbot-title">Signal Pilot Assistant</div>
-            <div class="chatbot-status">Online • AI-powered • v2.0</div>
+            <div class="sp-chatbot-title">Signal Pilot Assistant</div>
+            <div class="sp-chatbot-status">Online • AI-powered</div>
           </div>
         </div>
-        <div class="chatbot-header-actions">
-          <button class="chatbot-action-btn" id="chatbot-export" title="Export conversation" aria-label="Export conversation">💾</button>
-          <button class="chatbot-action-btn" id="chatbot-search" title="Search history" aria-label="Search history">🔍</button>
-          <button class="chatbot-action-btn" id="chatbot-info" title="Help & commands" aria-label="Help & commands">ℹ️</button>
-          <button class="chatbot-close" aria-label="Close chatbot">✕</button>
-        </div>
+        <button class="sp-chatbot-close" aria-label="Close chatbot">×</button>
       </div>
 
-      <div class="chatbot-messages" id="chatbot-messages"></div>
+      <div class="sp-chatbot-messages" id="sp-chatbot-messages"></div>
 
-      <div class="chatbot-suggestions" id="chatbot-suggestions"></div>
-
-      <div class="chatbot-quick-actions" id="chatbot-quick-actions">
-        <button class="chatbot-quick-action" data-action="pricing">💰 Pricing</button>
-        <button class="chatbot-quick-action" data-action="demo">🎮 Demo</button>
-        <button class="chatbot-quick-action" data-action="features">✨ Features</button>
-        <button class="chatbot-quick-action" data-action="start">🚀 Get Started</button>
+      <div class="sp-chatbot-quick-actions" id="sp-chatbot-quick-actions">
+        <button class="sp-chatbot-quick-btn" data-query="How much does it cost?">💰 Pricing</button>
+        <button class="sp-chatbot-quick-btn" data-query="Show me the demo">🎮 Demo</button>
+        <button class="sp-chatbot-quick-btn" data-query="What is Pentarch?">⭐ Pentarch</button>
+        <button class="sp-chatbot-quick-btn" data-query="Does it repaint?">🚫 Non-Repainting</button>
       </div>
 
-      <div class="chatbot-input-area">
-        <input
-          type="text"
-          class="chatbot-input"
-          id="chatbot-input"
+      <div class="sp-chatbot-input-area">
+        <textarea
+          class="sp-chatbot-input"
+          id="sp-chatbot-input"
           placeholder="Ask about pricing, products, or anything..."
-          autocomplete="off"
-        >
-        <button class="chatbot-send" id="chatbot-send" aria-label="Send message">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          rows="1"
+        ></textarea>
+        <button class="sp-chatbot-send" id="sp-chatbot-send" aria-label="Send message">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="22" y1="2" x2="11" y2="13"/>
             <polygon points="22 2 15 22 11 13 2 9 22 2"/>
           </svg>
@@ -599,185 +479,89 @@
       </div>
     `;
 
-    document.body.appendChild(button);
-    document.body.appendChild(container);
+    document.body.appendChild(toggle);
+    document.body.appendChild(window);
 
-    return { button, container };
+    return { toggle, window };
   }
 
-  function addMessage(content, role = 'assistant', showBookmark = true) {
-    const messagesContainer = document.getElementById('chatbot-messages');
+  function addMessage(content, isUser = false) {
+    const container = document.getElementById('sp-chatbot-messages');
     const messageDiv = document.createElement('div');
-    messageDiv.className = `chatbot-message ${role}`;
+    messageDiv.className = `sp-chatbot-message ${isUser ? 'sp-chatbot-user-message' : 'sp-chatbot-bot-message'}`;
 
-    const avatar = role === 'assistant'
-      ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-           <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-           <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
-         </svg>`
-      : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    const avatarSVG = isUser
+      ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
            <circle cx="12" cy="7" r="4"/>
+         </svg>`
+      : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+           <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+           <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
          </svg>`;
 
-    const bookmarkBtn = showBookmark && role === 'assistant'
-      ? `<button class="chatbot-bookmark" aria-label="Bookmark this response" title="Save this response">🔖</button>`
-      : '';
-
-    const copyBtn = role === 'assistant'
-      ? `<button class="chatbot-copy-btn" aria-label="Copy response" title="Copy response">📋</button>`
-      : '';
-
     messageDiv.innerHTML = `
-      <div class="chatbot-avatar">${avatar}</div>
-      <div class="chatbot-bubble">${formatMessage(content)}</div>
-      <div class="chatbot-message-actions">${bookmarkBtn}${copyBtn}</div>
+      <div class="sp-chatbot-avatar">${avatarSVG}</div>
+      <div class="sp-chatbot-bubble">${parseMarkdown(content)}</div>
     `;
 
-    if (bookmarkBtn) {
-      setTimeout(() => {
-        const btn = messageDiv.querySelector('.chatbot-bookmark');
-        btn.addEventListener('click', () => {
-          saveBookmark(content);
-          btn.textContent = '✓';
-          btn.style.opacity = '0.5';
-          setTimeout(() => {
-            btn.textContent = '🔖';
-            btn.style.opacity = '1';
-          }, 1500);
-        });
-      }, 0);
-    }
-
-    if (copyBtn) {
-      setTimeout(() => {
-        const btn = messageDiv.querySelector('.chatbot-copy-btn');
-        btn.addEventListener('click', () => {
-          const textToCopy = content.replace(/\*\*/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
-          navigator.clipboard.writeText(textToCopy).then(() => {
-            btn.textContent = '✓';
-            setTimeout(() => {
-              btn.textContent = '📋';
-            }, 1500);
-          });
-        });
-      }, 0);
-    }
-
-    messagesContainer.appendChild(messageDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-    // Save to history
-    saveToHistory(role, content);
-  }
-
-  function formatMessage(content) {
-    // Convert markdown-style formatting to HTML
-    return content
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>')
-      .replace(/\n/g, '<br>');
+    container.appendChild(messageDiv);
+    container.scrollTop = container.scrollHeight;
   }
 
   function showTypingIndicator() {
-    const messagesContainer = document.getElementById('chatbot-messages');
+    const container = document.getElementById('sp-chatbot-messages');
     const typingDiv = document.createElement('div');
-    typingDiv.className = 'chatbot-message assistant chatbot-typing';
+    typingDiv.className = 'sp-chatbot-message sp-chatbot-bot-message sp-chatbot-typing';
     typingDiv.innerHTML = `
-      <div class="chatbot-avatar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <div class="sp-chatbot-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 2L2 7l10 5 10-5-10-5z"/>
           <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
         </svg>
       </div>
-      <div class="chatbot-bubble">
-        <div class="chatbot-typing-dots">
+      <div class="sp-chatbot-bubble">
+        <div class="sp-chatbot-typing-indicator">
           <span></span><span></span><span></span>
         </div>
       </div>
     `;
-    messagesContainer.appendChild(typingDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    container.appendChild(typingDiv);
+    container.scrollTop = container.scrollHeight;
     return typingDiv;
   }
 
-  function createSuggestions() {
-    const suggestionsContainer = document.getElementById('chatbot-suggestions');
-    const suggestions = config.smartSuggestions ? getSmartSuggestions() : [
-      "How much does it cost?",
-      "What is Pentarch?",
-      "Does it repaint?",
-      "Show me pricing"
-    ];
-
-    suggestionsContainer.innerHTML = suggestions.map(s =>
-      `<button class="chatbot-suggestion">${s}</button>`
-    ).join('');
-    suggestionsContainer.style.display = 'flex';
-
-    suggestionsContainer.querySelectorAll('.chatbot-suggestion').forEach(btn => {
-      btn.addEventListener('click', () => {
-        handleUserMessage(btn.textContent);
-        // Update suggestions after user interaction
-        setTimeout(() => createSuggestions(), 100);
-      });
-    });
+  function autoResizeTextarea(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
   }
 
-  function handleUserMessage(message) {
-    if (!message || !message.trim()) return;
+  function handleSend() {
+    const input = document.getElementById('sp-chatbot-input');
+    const message = input.value.trim();
 
-    const input = document.getElementById('chatbot-input');
-    input.value = '';
+    if (!message) return;
 
-    // Add user message
-    addMessage(message, 'user', false);
-
-    // Track analytics
-    trackChatbotEvent('message_sent', { message_length: message.length, intent: getUserIntent(message) });
-
-    // Hide suggestions on mobile after first message to save space
-    const suggestionsContainer = document.getElementById('chatbot-suggestions');
-    if (window.innerWidth <= 768 && suggestionsContainer) {
-      suggestionsContainer.style.display = 'none';
+    // Hide quick actions after first message
+    const quickActions = document.getElementById('sp-chatbot-quick-actions');
+    if (quickActions) {
+      quickActions.style.display = 'none';
     }
 
+    // Add user message
+    addMessage(message, true);
+    input.value = '';
+    autoResizeTextarea(input);
+
     // Show typing indicator
-    const typingIndicator = showTypingIndicator();
+    const typing = showTypingIndicator();
 
     // Process and respond
     setTimeout(() => {
-      typingIndicator.remove();
+      typing.remove();
       const response = processMessage(message);
       addMessage(response);
-
-      // Update smart suggestions based on conversation (desktop only)
-      if (config.smartSuggestions && window.innerWidth > 768) {
-        createSuggestions();
-      }
     }, config.typingDelay);
-  }
-
-  function trackChatbotEvent(eventName, eventData = {}) {
-    // Track with analytics if available
-    if (typeof trackEvent === 'function') {
-      trackEvent(`chatbot_${eventName}`, eventData);
-    }
-
-    // Also log to local analytics storage
-    const analytics = JSON.parse(localStorage.getItem('sp_chatbot_analytics') || '[]');
-    analytics.push({
-      event: eventName,
-      data: eventData,
-      timestamp: Date.now()
-    });
-
-    // Keep last 1000 events
-    if (analytics.length > 1000) {
-      analytics.shift();
-    }
-
-    localStorage.setItem('sp_chatbot_analytics', JSON.stringify(analytics));
   }
 
   // ========================================
@@ -785,76 +569,50 @@
   // ========================================
 
   function init() {
-    const { button, container } = createChatbot();
+    const { toggle, window } = createChatbot();
 
-    // Button click to toggle
-    button.addEventListener('click', () => {
-      const isActive = container.classList.toggle('active');
+    // Toggle button click
+    toggle.addEventListener('click', () => {
+      const isActive = window.classList.toggle('active');
       if (isActive) {
-        // Track chatbot opened (if analytics function exists)
-        if (typeof trackEvent === 'function') {
-          trackEvent('chatbot_opened', {});
-        }
-
-        // Show welcome message
-        const messagesContainer = document.getElementById('chatbot-messages');
-        if (messagesContainer.children.length === 0) {
+        const messages = document.getElementById('sp-chatbot-messages');
+        if (messages.children.length === 0) {
           addMessage(knowledgeBase.greetings[0]);
-          createSuggestions();
         }
-
-        // Focus input
-        document.getElementById('chatbot-input').focus();
+        document.getElementById('sp-chatbot-input').focus();
       }
     });
 
     // Close button
-    container.querySelector('.chatbot-close').addEventListener('click', () => {
-      container.classList.remove('active');
-    });
-
-    // Header action buttons
-    document.getElementById('chatbot-export')?.addEventListener('click', () => {
-      const response = exportConversation('txt');
-      addMessage(response);
-    });
-
-    document.getElementById('chatbot-search')?.addEventListener('click', () => {
-      const query = prompt('Search your conversation history:');
-      if (query) {
-        const response = searchHistory(query);
-        addMessage(response);
-      }
-    });
-
-    document.getElementById('chatbot-info')?.addEventListener('click', () => {
-      const response = processMessage('help');
-      addMessage(response);
+    window.querySelector('.sp-chatbot-close').addEventListener('click', () => {
+      window.classList.remove('active');
     });
 
     // Send button
-    const sendBtn = document.getElementById('chatbot-send');
-    const input = document.getElementById('chatbot-input');
+    document.getElementById('sp-chatbot-send').addEventListener('click', handleSend);
 
-    sendBtn.addEventListener('click', () => handleUserMessage(input.value));
-
+    // Input handling
+    const input = document.getElementById('sp-chatbot-input');
+    input.addEventListener('input', (e) => autoResizeTextarea(e.target));
     input.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        handleUserMessage(input.value);
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSend();
       }
     });
 
     // Quick action buttons
-    document.querySelectorAll('.chatbot-quick-action').forEach(btn => {
+    document.querySelectorAll('.sp-chatbot-quick-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const action = btn.getAttribute('data-action');
-        const queries = {
-          pricing: 'How much does it cost?',
-          demo: 'Show me the demo',
-          features: 'What features are included?',
-          start: 'How do I get started?'
-        };
-        handleUserMessage(queries[action] || queries.pricing);
+        const query = btn.getAttribute('data-query');
+        addMessage(query, true);
+        const quickActions = document.getElementById('sp-chatbot-quick-actions');
+        quickActions.style.display = 'none';
+        const typing = showTypingIndicator();
+        setTimeout(() => {
+          typing.remove();
+          addMessage(processMessage(query));
+        }, config.typingDelay);
       });
     });
 
@@ -863,12 +621,11 @@
       // Ctrl+K or Cmd+K to open
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
-        button.click();
+        toggle.click();
       }
-
       // Escape to close
-      if (e.key === 'Escape' && container.classList.contains('active')) {
-        container.classList.remove('active');
+      if (e.key === 'Escape' && window.classList.contains('active')) {
+        window.classList.remove('active');
       }
     });
   }
