@@ -1,6 +1,9 @@
 /**
  * SignalPilot Device Capability Detection
- * Intelligently detects if device can handle high-performance animations
+ * Intelligently detects if device can handle high-performance VISUAL EFFECTS
+ *
+ * PURPOSE: Determines capability for DECORATIVE EFFECTS (aurora, particles, videos)
+ * COMPLEMENTARY TO: device-optimizations.js (handles responsive design & browser compat)
  *
  * How it works:
  * 1. Scores device based on: memory, CPU cores, GPU, connection, battery
@@ -13,6 +16,10 @@
  * - HIGH (score 80+): All effects enabled (aurora, particles, video, blend modes)
  * - MEDIUM (score 50-79): Aurora + particles only, no video
  * - LOW (score <50): No effects, just static background
+ *
+ * Data Attributes Set:
+ * - data-performance: high|medium|low (used by inline CSS)
+ * - data-aurora, data-particles, data-video, data-blendmodes: true|false
  *
  * Manual Override:
  * - In console: SP_CAPABILITIES.override('low|medium|high')
