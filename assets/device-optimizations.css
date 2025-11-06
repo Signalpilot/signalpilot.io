@@ -1,6 +1,7 @@
 /**
  * Device-Specific Optimizations
  * Optimizes the site for all devices: mobile, tablet, desktop, touch, etc.
+ * FIXED: Removed redundancies, conflicts, and performance issues
  */
 
 /* =============================================================================
@@ -26,8 +27,6 @@
   /* Navigation links - adequate touch targets */
   nav a {
     min-height: 44px;
-    display: flex;
-    align-items: center;
     padding: 10px 12px;
   }
 
@@ -50,6 +49,7 @@
   .form-control {
     min-height: 48px;
     padding: 12px 16px;
+    font-size: 16px; /* Prevent iOS zoom */
   }
 
   /* Checkbox and radio - larger click area */
@@ -73,9 +73,9 @@
     padding: 14px 20px;
   }
 
-  /* Footer links */
+  /* Footer links - WCAG compliant */
   footer a {
-    min-height: 40px;
+    min-height: 44px;
     display: inline-block;
     padding: 8px 4px;
   }
@@ -113,25 +113,29 @@
   }
 
   /* Remove hover effects on touch (they stick) */
-  *:hover {
+  a:hover,
+  button:hover,
+  .btn:hover {
     transition: none;
   }
 
-  /* Better tap highlight */
-  * {
+  /* Better tap highlight - specific elements only */
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  .card[role="button"] {
     -webkit-tap-highlight-color: rgba(91, 138, 255, 0.2);
     tap-highlight-color: rgba(91, 138, 255, 0.2);
   }
 
-  /* Prevent zoom on input focus (iOS) */
-  input,
-  textarea,
-  select {
-    font-size: 16px !important;
-  }
-
-  /* Smoother scrolling on touch */
-  * {
+  /* Smoother scrolling on touch - scrollable containers */
+  .section,
+  main,
+  .modal,
+  [id*="carousel"],
+  .image-gallery {
     -webkit-overflow-scrolling: touch;
   }
 
@@ -156,8 +160,9 @@
     margin: 4px 0;
   }
 
-  /* Better spacing for inline links */
-  a:not(.btn) {
+  /* Better spacing for styled navigation links only */
+  .card a:not(.btn),
+  .feature-link {
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 2px;
@@ -169,12 +174,14 @@
    ============================================================================= */
 
 @media (max-width: 767px) {
-  /* Reduce animations for better performance */
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.3s !important;
-    transition-duration: 0.2s !important;
+  /* Reduce animations for better performance - specific elements */
+  .card,
+  .btn,
+  .modal,
+  .hero,
+  section {
+    animation-duration: 0.3s;
+    transition-duration: 0.2s;
   }
 
   /* Full-width sections */
@@ -211,16 +218,20 @@
     flex-direction: column;
   }
 
-  /* Full-width images */
+  /* RESPONSIVE IMAGES & MEDIA - CONSOLIDATED */
   img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
+    display: block;
   }
 
-  /* Optimize video for mobile */
   video {
     max-width: 100%;
     height: auto;
+  }
+
+  iframe {
+    max-width: 100%;
   }
 
   /* HEADER & NAVIGATION */
@@ -233,7 +244,7 @@
   }
 
   .brand {
-    font-size: 1.25rem !important;
+    font-size: 1.25rem;
   }
 
   /* Mobile menu button spacing */
@@ -243,8 +254,8 @@
 
   /* HERO SECTION */
   .hero {
-    padding: 2rem 1rem 3rem !important;
-    min-height: auto !important;
+    padding: 2rem 1rem 3rem;
+    min-height: auto;
   }
 
   .hero .container {
@@ -253,47 +264,47 @@
 
   /* Hero badges - stack on very small screens */
   .badgebar {
-    margin-bottom: 1rem !important;
+    margin-bottom: 1rem;
   }
 
   .badge {
-    font-size: 0.7rem !important;
-    padding: 0.4rem 0.8rem !important;
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
   }
 
   /* Trust badges/pills - improve wrapping */
   .mini-pill {
-    font-size: 0.75rem !important;
-    padding: 0.5rem 0.8rem !important;
-    white-space: normal !important;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.8rem;
+    white-space: normal;
     text-align: center;
   }
 
   /* Hero headline */
   .headline.xl {
-    font-size: clamp(1.75rem, 8vw, 2.25rem) !important;
-    line-height: 1.2 !important;
-    margin-bottom: 1rem !important;
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
   }
 
-  /* Hero CTAs - stack vertically on very small screens */
+  /* Hero CTAs - stack vertically */
   .hero-ctas {
-    flex-direction: column !important;
+    flex-direction: column;
     width: 100%;
-    gap: 0.75rem !important;
+    gap: 0.75rem;
   }
 
   .hero-ctas .btn {
     width: 100%;
     text-align: center;
-    padding: 0.875rem 1.5rem !important;
-    font-size: 1rem !important;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
   }
 
   /* Hero grid - ensure single column */
   .hero-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   /* PRICING SECTION */
@@ -302,155 +313,289 @@
   }
 
   /* Trust badges in pricing - stack better */
-  #pricing > .container > div[style*="display:flex"] {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 0.75rem !important;
+  #pricing .container > div:first-of-type {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
   }
 
-  #pricing > .container > div[style*="display:flex"] > div {
-    justify-content: center !important;
-    padding: 0.75rem 1rem !important;
+  #pricing .container > div:first-of-type > div {
+    justify-content: center;
+    padding: 0.75rem 1rem;
   }
 
-  /* Payment methods - stack on mobile */
-  #pricing div[style*="Accepted Payments"] {
-    flex-direction: column !important;
-    gap: 0.75rem !important;
-  }
-
-  /* Pricing cards grid */
+  /* Pricing cards grid - consolidated with features */
   .pricing-grid,
-  .grid.three-col {
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
+  .grid.two-col,
+  .grid.three-col,
+  .grid.auto-300 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  /* Pricing card styling */
+  /* Pricing card styling - CONSOLIDATED */
   .card {
-    padding: 1.5rem !important;
+    padding: 1.5rem;
   }
 
   .card .btn {
     width: 100%;
-    font-size: 1rem !important;
+    font-size: 1rem;
   }
 
   /* FAQ SECTION */
-  #faq .grid.auto-300 {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
-  }
-
   #faq .card {
-    padding: 1.25rem !important;
+    padding: 1.25rem;
   }
 
   /* FOOTER */
   footer {
-    padding: 2rem 0 1.5rem !important;
-    margin-top: 4rem !important;
+    padding: 2rem 0 1.5rem;
+    margin-top: 4rem;
   }
 
   footer .container {
     padding: 0 1rem;
   }
 
-  footer > .container > div[style*="grid-template-columns"] {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-
-  /* FEATURES & CONTENT SECTIONS */
-  .grid.two-col,
-  .grid.three-col,
-  .grid.auto-300,
-  [style*="grid-template-columns: 1fr 1fr"] {
-    grid-template-columns: 1fr !important;
+  footer .container > div:first-child {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   /* Comparison slider and interactive elements */
   #comparison-slider {
-    margin: 0 -1rem !important;
-    width: calc(100% + 2rem) !important;
+    margin: 0 -1rem;
+    width: calc(100% + 2rem);
   }
 
   /* Signal legend - stack items */
   .signal-legend {
-    grid-template-columns: 1fr !important;
-    gap: 0.75rem !important;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
   .signal-item {
-    padding: 0.75rem !important;
-    font-size: 0.85rem !important;
+    padding: 0.75rem;
+    font-size: 0.85rem;
   }
 
   /* Carousel controls - position inside on mobile */
   [id*="carousel-prev"],
   [id*="carousel-next"] {
-    position: relative !important;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    transform: none !important;
-    margin: 0.5rem !important;
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin: 0.5rem;
   }
 
   /* Carousel wrapper for mobile controls */
   [id*="carousel"] {
-    margin: 0 !important;
-    padding: 0.5rem 0 !important;
+    margin: 0;
+    padding: 0.5rem 0;
   }
 
-  /* Container max-width adjustments */
+  /* Container adjustments - no !important */
   .container {
-    max-width: 100% !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  /* Reduce large gaps */
-  [style*="gap:3rem"],
-  [style*="gap: 3rem"] {
-    gap: 1.5rem !important;
-  }
-
-  [style*="gap:2rem"],
-  [style*="gap: 2rem"] {
-    gap: 1rem !important;
-  }
-
-  /* Adjust large margins */
-  [style*="margin:3rem"],
-  [style*="margin: 3rem"] {
-    margin: 1.5rem !important;
+  /* Reduce large spacing - specific elements only */
+  .hero,
+  .section,
+  .pricing-grid,
+  .grid {
+    gap: 1rem;
   }
 
   /* Modal improvements */
   .modal-content {
-    width: 95% !important;
-    max-width: 95% !important;
-    margin: 1rem !important;
-    padding: 1.5rem !important;
+    width: 95%;
+    max-width: 95%;
+    margin: 1rem;
+    padding: 1.5rem;
   }
 
-  /* Form inputs full width */
-  input,
-  select,
-  textarea {
-    width: 100% !important;
+  /* FORM OPTIMIZATIONS - CONSOLIDATED */
+  /* Stack form fields vertically */
+  form .grid,
+  form .flex-row {
+    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
+  /* Full width form elements */
+  form input,
+  form select,
+  form textarea,
+  form button {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Better form spacing */
+  form label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  form input,
+  form select,
+  form textarea {
+    margin-bottom: 1rem;
+  }
+
+  /* Form buttons */
+  form .btn,
+  form button[type="submit"] {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  /* Inline form buttons - stack */
+  form .btn + .btn {
+    margin-left: 0;
+    margin-top: 0.75rem;
   }
 
   /* Button groups - stack vertically */
   .btn-group {
-    flex-direction: column !important;
+    flex-direction: column;
     width: 100%;
   }
 
   .btn-group .btn {
-    width: 100% !important;
-    margin-bottom: 0.5rem !important;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  /* HORIZONTAL SCROLL PREVENTION - SAFE APPROACH */
+  body,
+  html {
+    overflow-x: hidden;
+  }
+
+  /* Fix tables on mobile */
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Fix pre/code blocks */
+  pre,
+  code {
+    max-width: 100%;
+    overflow-x: auto;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+
+  /* Fix long URLs and text - specific elements */
+  p,
+  span,
+  div,
+  li {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Aspect ratio containers for videos */
+  .video-container,
+  .embed-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+  }
+
+  .video-container iframe,
+  .video-container video,
+  .embed-container iframe,
+  .embed-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Image galleries - horizontal scroll */
+  .image-gallery,
+  [id*="carousel"] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  /* Styled scrollbar for galleries */
+  .image-gallery::-webkit-scrollbar,
+  [id*="carousel"]::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .image-gallery::-webkit-scrollbar-track,
+  [id*="carousel"]::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .image-gallery::-webkit-scrollbar-thumb,
+  [id*="carousel"]::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+  }
+
+  /* TYPOGRAPHY IMPROVEMENTS */
+  p,
+  li,
+  td {
+    line-height: 1.7;
+  }
+
+  p + p {
+    margin-top: 1rem;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  h1:first-child,
+  h2:first-child,
+  h3:first-child {
+    margin-top: 0;
+  }
+
+  a {
+    word-break: break-word;
+  }
+
+  strong,
+  b {
+    font-weight: 600;
+  }
+
+  blockquote {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border-left: 4px solid var(--brand);
+    font-style: italic;
   }
 }
 
@@ -461,80 +606,80 @@
 @media (max-width: 479px) {
   /* Even more compact spacing */
   .section {
-    padding: 2rem 0.75rem !important;
+    padding: 2rem 0.75rem;
   }
 
   .hero {
-    padding: 1.5rem 0.75rem 2.5rem !important;
+    padding: 1.5rem 0.75rem 2.5rem;
   }
 
   /* Smaller headlines on tiny screens */
   .headline.xl {
-    font-size: clamp(1.5rem, 7vw, 2rem) !important;
+    font-size: clamp(1.5rem, 7vw, 2rem);
   }
 
   .headline.lg {
-    font-size: 1.35rem !important;
+    font-size: 1.35rem;
   }
 
   /* Compact badges */
   .badge {
-    font-size: 0.65rem !important;
-    padding: 0.35rem 0.7rem !important;
+    font-size: 0.65rem;
+    padding: 0.35rem 0.7rem;
   }
 
   .mini-pill {
-    font-size: 0.7rem !important;
-    padding: 0.4rem 0.7rem !important;
+    font-size: 0.7rem;
+    padding: 0.4rem 0.7rem;
   }
 
-  /* Reduce button padding but maintain touch targets */
+  /* Buttons maintain WCAG 44px minimum */
   .btn {
-    padding: 0.75rem 1.25rem !important;
-    font-size: 0.95rem !important;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
     min-height: 44px;
   }
 
   /* Tighter card padding */
   .card {
-    padding: 1rem !important;
+    padding: 1rem;
   }
 
   /* Smaller modal */
   .modal-content {
-    width: 98% !important;
-    margin: 0.5rem !important;
-    padding: 1rem !important;
+    width: 98%;
+    margin: 0.5rem;
+    padding: 1rem;
   }
 
   /* Reduce header size */
   .brand {
-    font-size: 1.1rem !important;
+    font-size: 1.1rem;
   }
 
-  /* Header buttons - ensure touch targets */
+  /* Header buttons - MAINTAIN WCAG 44px */
   header button,
   .menu-toggle,
   #themeToggle,
   #langToggle {
-    min-width: 40px;
-    min-height: 40px;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   /* Compact footer */
   footer {
-    padding: 1.5rem 0 1rem !important;
+    padding: 1.5rem 0 1rem;
   }
 
   footer .container > div {
-    gap: 1.5rem !important;
+    gap: 1.5rem;
   }
 
-  /* Footer links - larger touch targets */
+  /* Footer links - MAINTAIN WCAG 44px */
   footer a {
     display: inline-block;
-    padding: 0.3rem 0;
-    min-height: 36px;
+    padding: 0.5rem 0;
+    min-height: 44px;
     line-height: 1.5;
   }
 }
@@ -544,38 +689,34 @@
    ============================================================================= */
 
 @media (min-width: 480px) and (max-width: 767px) {
-  /* Slightly more generous spacing than tiny screens */
+  /* Override some very-small-mobile rules for better spacing */
   .hero {
-    padding: 2.5rem 1rem 3rem !important;
+    padding: 2.5rem 1rem 3rem;
   }
 
-  /* Better sized headlines */
   .headline.xl {
-    font-size: clamp(1.85rem, 7vw, 2.25rem) !important;
+    font-size: clamp(1.85rem, 7vw, 2.25rem);
   }
 
-  /* Card padding */
   .card {
-    padding: 1.35rem !important;
+    padding: 1.35rem;
   }
 
-  /* Button sizing */
   .btn {
-    padding: 0.825rem 1.5rem !important;
-    font-size: 0.975rem !important;
+    padding: 0.825rem 1.5rem;
+    font-size: 0.975rem;
     min-height: 44px;
   }
 
-  /* Modal */
   .modal-content {
     width: 90%;
     max-width: 450px;
-    padding: 1.5rem !important;
+    padding: 1.5rem;
   }
 
   /* Hero CTAs - can be side by side if space */
   .hero-ctas {
-    flex-direction: row !important;
+    flex-direction: row;
     flex-wrap: wrap;
   }
 
@@ -608,11 +749,11 @@
     gap: 2rem;
   }
 
-  /* Touch-friendly but not oversized */
+  /* Touch-friendly sizing - WCAG compliant 44px */
   button,
   a.btn {
-    min-height: 40px;
-    padding: 10px 20px;
+    min-height: 44px;
+    padding: 12px 20px;
   }
 
   /* Header improvements */
@@ -643,29 +784,67 @@
 
   /* Pricing section - 2 columns on tablet */
   .pricing-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
 
   /* FAQ - 2 columns on tablet */
   #faq .grid.auto-300 {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   /* Features grid - 2 columns */
   .grid.three-col {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   /* Footer - 2 columns */
-  footer > .container > div[style*="grid-template-columns"] {
-    grid-template-columns: repeat(2, 1fr) !important;
+  footer .container > div:first-child {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   /* Container padding */
   .container {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+}
+
+/* =============================================================================
+   LANDSCAPE MOBILE (Phones in landscape < 896px)
+   ============================================================================= */
+
+@media (max-width: 896px) and (max-height: 500px) and (orientation: landscape) {
+  /* Reduce vertical padding for landscape phones only */
+  .section {
+    padding: 2rem 1rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 1.5rem 1rem;
+  }
+
+  header {
+    padding: 0.75rem 0;
+  }
+
+  /* Side-by-side content for landscape */
+  .content-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* =============================================================================
+   PORTRAIT TABLET (iPad, etc.)
+   ============================================================================= */
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  /* Vertical emphasis - don't fight with standard tablet rules */
+  .section {
+    padding: 5rem 2rem;
   }
 }
 
@@ -679,57 +858,37 @@
     max-width: 1600px;
   }
 
-  /* Larger base font */
   body {
     font-size: 18px;
   }
 
-  /* More generous spacing */
   .section {
     padding: 6rem 3rem;
   }
 }
 
 /* =============================================================================
-   ORIENTATION-SPECIFIC OPTIMIZATIONS
+   SMART TV / LARGE SCREENS (> 2560px)
    ============================================================================= */
 
-/* Landscape mobile (often used for gaming/video) */
-@media (max-width: 896px) and (orientation: landscape) {
-  /* Reduce vertical padding */
-  .section {
-    padding: 2rem 1rem;
+@media (min-width: 2560px) {
+  body {
+    font-size: 20px;
   }
 
-  /* Horizontal layouts */
-  .hero {
-    min-height: auto;
-    padding: 2rem 1rem;
-  }
-
-  /* Compact navigation */
-  header {
-    padding: 0.75rem 0;
-  }
-
-  /* Side-by-side content */
-  .content-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-}
-
-/* Portrait tablet */
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-  /* Vertical emphasis */
-  .section {
-    padding: 5rem 2rem;
-  }
-
-  /* Comfortable single-column reading */
   .container {
-    max-width: 600px;
+    max-width: 1800px;
+  }
+
+  .section {
+    padding: 8rem 4rem;
+  }
+
+  button,
+  .btn {
+    min-height: 56px;
+    padding: 16px 32px;
+    font-size: 1.1em;
   }
 }
 
@@ -739,18 +898,20 @@
 
 @media (-webkit-min-device-pixel-ratio: 2),
        (min-resolution: 192dpi) {
-  /* Sharper borders */
-  * {
-    border-width: 0.5px;
-  }
-
-  /* Crisp shadows */
+  /* Crisp shadows - specific elements only */
   .card,
   .btn {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  /* Use higher quality images (handled by srcset in HTML) */
+  /* Sharper borders on specific UI elements */
+  .card,
+  .btn,
+  input,
+  select,
+  textarea {
+    border-width: 0.5px;
+  }
 }
 
 /* =============================================================================
@@ -767,12 +928,10 @@
     scroll-behavior: auto !important;
   }
 
-  /* Disable parallax */
   [data-parallax] {
     transform: none !important;
   }
 
-  /* Disable particle effects */
   #particles-canvas {
     display: none;
   }
@@ -782,22 +941,21 @@
    LOW POWER MODE (Battery Saving)
    ============================================================================= */
 
-/* When device is in power-saving mode */
 html[data-capability="low"] {
-  /* Disable heavy animations */
   #particles-canvas,
   .aurora-background,
   .animated-gradient {
     display: none !important;
   }
 
-  /* Simpler transitions */
-  * {
+  /* Simpler transitions - specific animated elements */
+  .card,
+  .btn,
+  .modal {
     transition: none !important;
     animation: none !important;
   }
 
-  /* Static backgrounds */
   body::before {
     animation: none !important;
   }
@@ -807,19 +965,15 @@ html[data-capability="low"] {
    SLOW NETWORK (2G/3G)
    ============================================================================= */
 
-/* Applied via JS when slow connection detected */
 html[data-connection="slow"] {
-  /* Defer non-critical images */
   img[loading="lazy"] {
     background: var(--bg-soft);
   }
 
-  /* Hide autoplay videos EXCEPT hero video */
   video[autoplay]:not(#heroVideo) {
     display: none;
   }
 
-  /* Show simpler loading states */
   .loading-skeleton {
     display: block;
   }
@@ -830,7 +984,6 @@ html[data-connection="slow"] {
    ============================================================================= */
 
 @media print {
-  /* Remove non-essential elements */
   header,
   footer,
   nav,
@@ -843,27 +996,20 @@ html[data-connection="slow"] {
     display: none !important;
   }
 
-  /* Black text on white background */
   * {
     background: white !important;
     color: black !important;
   }
 
-  /* Expand sections */
   .section {
     padding: 1rem 0;
+    page-break-inside: avoid;
   }
 
-  /* Show link URLs */
   a[href]::after {
     content: " (" attr(href) ")";
     font-size: 0.8em;
     color: #666;
-  }
-
-  /* Page breaks */
-  .section {
-    page-break-inside: avoid;
   }
 
   h1, h2, h3 {
@@ -876,14 +1022,12 @@ html[data-connection="slow"] {
    ============================================================================= */
 
 @media (prefers-color-scheme: dark) {
-  /* Already handled by data-theme="dark", but ensure defaults are dark */
   :root {
     color-scheme: dark;
   }
 }
 
 @media (prefers-color-scheme: light) {
-  /* Light mode users get light by default */
   html:not([data-theme]) {
     color-scheme: light;
   }
@@ -894,25 +1038,22 @@ html[data-connection="slow"] {
    ============================================================================= */
 
 @media (prefers-contrast: high) {
-  /* Stronger borders */
-  *,
-  *::before,
-  *::after {
+  /* Stronger borders - specific elements */
+  button,
+  input,
+  select,
+  textarea,
+  .card,
+  .btn {
     border-width: 2px !important;
   }
 
-  /* Higher contrast text */
   body {
     color: #000 !important;
   }
 
   html[data-theme="dark"] body {
     color: #fff !important;
-  }
-
-  /* No transparent backgrounds */
-  * {
-    background-color: var(--bg) !important;
   }
 
   /* Visible focus indicators */
@@ -927,40 +1068,10 @@ html[data-connection="slow"] {
    ============================================================================= */
 
 @media (horizontal-viewport-segments: 2) {
-  /* Dual-screen optimization */
   .container {
     display: grid;
     grid-template-columns: env(viewport-segment-width 0 0) env(viewport-segment-width 1 0);
     gap: env(viewport-segment-left 1 0);
-  }
-}
-
-/* =============================================================================
-   SMART TV / LARGE SCREENS (> 2560px)
-   ============================================================================= */
-
-@media (min-width: 2560px) {
-  /* Even larger base font */
-  body {
-    font-size: 20px;
-  }
-
-  /* Maximum readable width */
-  .container {
-    max-width: 1800px;
-  }
-
-  /* Generous spacing */
-  .section {
-    padding: 8rem 4rem;
-  }
-
-  /* Larger interactive elements */
-  button,
-  .btn {
-    min-height: 56px;
-    padding: 16px 32px;
-    font-size: 1.1em;
   }
 }
 
@@ -980,7 +1091,6 @@ html[data-connection="slow"] {
 
 /* Touch + stylus users (Surface, iPad Pro with Apple Pencil) */
 @media (hover: none) and (pointer: fine) {
-  /* Precise pointer, no hover */
   .interactive-element {
     cursor: pointer;
   }
@@ -989,7 +1099,7 @@ html[data-connection="slow"] {
 /* Coarse pointer (finger) - need bigger targets */
 @media (pointer: coarse) {
   button,
-  a,
+  a.btn,
   .clickable {
     min-width: 44px;
     min-height: 44px;
@@ -1002,292 +1112,38 @@ html[data-connection="slow"] {
 
 /* iOS Safari specific */
 @supports (-webkit-touch-callout: none) {
-  /* Fix iOS scrolling */
-  body {
+  /* Smooth scrolling containers */
+  body,
+  .section,
+  main {
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Fix iOS input zoom */
-  input,
-  select,
-  textarea {
-    font-size: 16px !important;
-  }
+  /* Fix iOS input zoom - handled in touch query above */
 
-  /* Fix iOS safe area */
+  /* Fix iOS safe area - body only, header uses padding not safe-area */
   body {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
 
-  /* Fix iOS header with safe area */
+  /* Footer safe area */
+  footer {
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+  }
+
+  /* Header uses regular padding to avoid double-up */
   header {
-    padding-top: max(1rem, env(safe-area-inset-top));
     padding-left: max(0.5rem, env(safe-area-inset-left));
     padding-right: max(0.5rem, env(safe-area-inset-right));
-  }
-
-  /* Fix iOS footer with safe area */
-  footer {
-    padding-bottom: max(2rem, env(safe-area-inset-bottom));
-  }
-
-  /* Fix sticky positioning with notch */
-  .sticky-header,
-  header.sticky {
-    top: env(safe-area-inset-top);
   }
 }
 
 /* Android Chrome specific */
-@supports (-webkit-appearance: none) {
+@supports (-webkit-appearance: none) and (not (-webkit-touch-callout: none)) {
   /* Fix Android Chrome address bar height changes */
   .hero {
-    min-height: calc(100vh - 56px); /* Chrome address bar height */
-  }
-}
-
-/* =============================================================================
-   HORIZONTAL SCROLL PREVENTION & OVERFLOW FIXES
-   ============================================================================= */
-
-@media (max-width: 767px) {
-  /* Prevent any horizontal overflow */
-  body,
-  html {
-    overflow-x: hidden;
-    max-width: 100vw;
-  }
-
-  /* Prevent wide elements from causing horizontal scroll */
-  * {
-    max-width: 100%;
-  }
-
-  /* Allow specific elements to be wider if needed */
-  svg,
-  video,
-  canvas {
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Fix tables on mobile */
-  table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* Fix pre/code blocks */
-  pre,
-  code {
-    max-width: 100%;
-    overflow-x: auto;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-  }
-
-  /* Fix long URLs and text */
-  a,
-  p,
-  span,
-  div {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-
-  /* Prevent wide inline elements */
-  [style*="width"] {
-    max-width: 100% !important;
-  }
-
-  /* Fix absolute positioned elements */
-  [style*="position: absolute"],
-  [style*="position:absolute"] {
-    max-width: 100%;
-    right: auto;
-  }
-}
-
-/* =============================================================================
-   FORM OPTIMIZATIONS FOR MOBILE
-   ============================================================================= */
-
-@media (max-width: 767px) {
-  /* Stack form fields vertically */
-  form .grid,
-  form .flex-row,
-  form [style*="display: flex"],
-  form [style*="display:flex"] {
-    flex-direction: column !important;
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Full width form elements */
-  form input,
-  form select,
-  form textarea,
-  form button {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
-  }
-
-  /* Better form spacing */
-  form label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  form input,
-  form select,
-  form textarea {
-    margin-bottom: 1rem;
-  }
-
-  /* Form buttons */
-  form .btn,
-  form button[type="submit"] {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  /* Inline form buttons - stack */
-  form .btn + .btn {
-    margin-left: 0 !important;
-    margin-top: 0.75rem;
-  }
-}
-
-/* =============================================================================
-   IMAGE & VIDEO OPTIMIZATIONS
-   ============================================================================= */
-
-@media (max-width: 767px) {
-  /* Responsive images */
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* Video containers */
-  video,
-  iframe {
-    max-width: 100%;
-    width: 100% !important;
-    height: auto;
-  }
-
-  /* Aspect ratio containers */
-  .video-container,
-  .embed-container {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    height: 0;
-    overflow: hidden;
-  }
-
-  .video-container iframe,
-  .video-container video,
-  .embed-container iframe,
-  .embed-container video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Image galleries - horizontal scroll */
-  .image-gallery,
-  [id*="carousel"] {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-  }
-
-  /* Hide scrollbar but keep functionality */
-  .image-gallery::-webkit-scrollbar,
-  [id*="carousel"]::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  .image-gallery::-webkit-scrollbar-track,
-  [id*="carousel"]::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .image-gallery::-webkit-scrollbar-thumb,
-  [id*="carousel"]::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-  }
-}
-
-/* =============================================================================
-   TYPOGRAPHY IMPROVEMENTS FOR MOBILE
-   ============================================================================= */
-
-@media (max-width: 767px) {
-  /* Better line height for readability */
-  p,
-  li,
-  td,
-  .text-content {
-    line-height: 1.7;
-  }
-
-  /* Better spacing between paragraphs */
-  p + p {
-    margin-top: 1rem;
-  }
-
-  /* List spacing */
-  ul,
-  ol {
-    padding-left: 1.5rem;
-  }
-
-  li {
-    margin-bottom: 0.5rem;
-  }
-
-  /* Better heading spacing */
-  h1, h2, h3, h4, h5, h6 {
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-    line-height: 1.3;
-  }
-
-  /* First heading no top margin */
-  h1:first-child,
-  h2:first-child,
-  h3:first-child {
-    margin-top: 0;
-  }
-
-  /* Better link readability */
-  a {
-    word-break: break-word;
-  }
-
-  /* Strong/bold text */
-  strong,
-  b {
-    font-weight: 600;
-  }
-
-  /* Better blockquote styling */
-  blockquote {
-    margin: 1.5rem 0;
-    padding: 1rem;
-    border-left: 4px solid var(--brand);
-    font-style: italic;
+    min-height: calc(100vh - 56px);
   }
 }
 
@@ -1295,28 +1151,21 @@ html[data-connection="slow"] {
    PERFORMANCE TIER OPTIMIZATIONS (Applied via JS)
    ============================================================================= */
 
-/* High-end devices */
 html[data-capability="high"] {
-  /* All effects enabled */
   --animation-speed: 1s;
   --transition-speed: 0.3s;
 }
 
-/* Medium devices */
 html[data-capability="medium"] {
-  /* Reduced effects */
   --animation-speed: 0.5s;
   --transition-speed: 0.2s;
 
-  /* Hide only background/decorative videos, NOT hero video */
   video:not(#heroVideo) {
-    display: none; /* Save resources */
+    display: none;
   }
 }
 
-/* Low-end devices */
 html[data-capability="low"] {
-  /* Minimal effects */
   --animation-speed: 0.1s;
   --transition-speed: 0.1s;
 
@@ -1332,41 +1181,29 @@ html[data-capability="low"] {
    NETWORK-AWARE LOADING
    ============================================================================= */
 
-/* Fast connection (4G, WiFi) */
-html[data-connection="4g"],
-html[data-connection="wifi"] {
-  /* Images load eagerly (handled by JS) */
-}
-
-/* Slow connection (2G, 3G, slow-2g) */
 html[data-connection="2g"],
 html[data-connection="3g"],
 html[data-connection="slow-2g"] {
-  /* Aggressive lazy loading (handled by JS) */
-
-  /* Hide autoplay videos EXCEPT hero video */
   video[autoplay]:not(#heroVideo) {
     display: none;
   }
 
-  /* Simpler backgrounds */
   body::before,
   .aurora-background {
     display: none;
   }
 }
 
-/* Save Data mode requested */
 html[data-save-data="true"] {
-  /* Minimal resources - hide decorative videos, keep hero video */
   video:not(#heroVideo),
   #particles-canvas,
   .aurora-background {
     display: none !important;
   }
 
-  /* No background images */
-  * {
+  /* No background images on decorative elements */
+  .hero::before,
+  .section::before {
     background-image: none !important;
   }
 }
