@@ -12,13 +12,13 @@
       position: fixed;
       bottom: 6.5rem;
       right: 2rem;
-      width: 52px;
-      height: 52px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--brand), var(--accent));
       border: 2px solid rgba(255, 255, 255, 0.2);
       color: white;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       cursor: pointer;
       z-index: 1001;
       display: flex;
@@ -53,9 +53,9 @@
       .sp-theme-toggle {
         bottom: max(5.5rem, calc(5.25rem + env(safe-area-inset-bottom)));
         right: 1rem;
-        width: 52px;
-        height: 52px;
-        font-size: 1.4rem;
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
         box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4), 0 0 16px var(--brand-glow);
         -webkit-tap-highlight-color: transparent;
         position: fixed; /* Ensure sticky on mobile */
