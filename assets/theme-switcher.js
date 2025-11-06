@@ -48,44 +48,41 @@
       }
     }
 
-    /* Tablet and Mobile - make prominent like chatbot */
+    /* Tablet - align with chatbot */
     @media (max-width: 768px) {
       .sp-theme-toggle {
-        bottom: max(5.75rem, calc(5.5rem + env(safe-area-inset-bottom)));
-        right: 1.25rem;
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
+        bottom: max(5.5rem, calc(5.25rem + env(safe-area-inset-bottom)));
+        right: 1rem;
+        width: 52px;
+        height: 52px;
+        font-size: 1.4rem;
         box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4), 0 0 16px var(--brand-glow);
-        animation: sp-theme-pulse 3s ease-in-out infinite;
         -webkit-tap-highlight-color: transparent;
-      }
-
-      .sp-theme-toggle:hover,
-      .sp-theme-toggle:active {
-        animation: none;
+        position: fixed; /* Ensure sticky on mobile */
       }
     }
 
-    /* Small mobile screens */
+    /* Small mobile screens - make smaller to save space */
     @media (max-width: 480px) {
       .sp-theme-toggle {
         bottom: max(5.5rem, calc(5.25rem + env(safe-area-inset-bottom)));
-        right: 1.25rem;
-        width: 56px;
-        height: 56px;
-        font-size: 1.4rem;
+        right: 1rem;
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+        position: fixed; /* Ensure sticky on mobile */
       }
     }
 
-    /* Ultra-small screens */
+    /* Ultra-small screens - even smaller */
     @media (max-width: 380px) {
       .sp-theme-toggle {
         bottom: max(5.25rem, calc(5rem + env(safe-area-inset-bottom)));
         right: 1rem;
-        width: 52px;
-        height: 52px;
-        font-size: 1.3rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+        position: fixed; /* Ensure sticky on mobile */
       }
     }
 
