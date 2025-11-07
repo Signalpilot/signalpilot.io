@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Social Preview - SignalPilot</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #1a1a1a;
+      font-family: system-ui, -apple-system, sans-serif;
+      color: white;
+    }
+    .instructions {
+      max-width: 800px;
+      margin: 0 auto 30px;
+      padding: 20px;
+      background: #2a2a2a;
+      border-radius: 8px;
+    }
+    .instructions h1 {
+      margin-top: 0;
+      color: #76ddff;
+    }
+    .instructions ol {
+      line-height: 1.8;
+    }
+    .instructions code {
+      background: #1a1a1a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #3ed598;
+    }
+    .preview-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border: 4px solid #76ddff;
+      box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+    }
+    #preview {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .buttons {
+      text-align: center;
+      margin: 20px 0;
+    }
+    button {
+      background: linear-gradient(135deg, #76ddff, #5b8aff);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="instructions">
+    <h1>📸 Generate Your Social Preview Image</h1>
+    <p><strong>This is your social sharing preview (1200×630px)</strong></p>
+
+    <h3>Option 1: Screenshot Method (Easiest)</h3>
+    <ol>
+      <li>Click the <strong>"Download as PNG"</strong> button below (requires Chrome/Edge)</li>
+      <li>Save as <code>preview.png</code></li>
+      <li>Move it to your root directory: <code>/home/user/signalpilot.io/preview.png</code></li>
+      <li>Commit and push</li>
+    </ol>
+
+    <h3>Option 2: Online Converter</h3>
+    <ol>
+      <li>Right-click the preview below → "Save image as" → Save as SVG</li>
+      <li>Go to <strong>https://cloudconvert.com/svg-to-png</strong></li>
+      <li>Upload the SVG, set dimensions to <strong>1200×630</strong></li>
+      <li>Download as <code>preview.png</code></li>
+      <li>Move to root directory and commit</li>
+    </ol>
+
+    <h3>Option 3: macOS Screenshot</h3>
+    <ol>
+      <li>Press <code>Cmd + Shift + 4</code> then <code>Space</code></li>
+      <li>Click the preview window below</li>
+      <li>Rename screenshot to <code>preview.png</code></li>
+    </ol>
+  </div>
+
+  <div class="buttons">
+    <button onclick="downloadPNG()">📥 Download as PNG</button>
+    <button onclick="copySVG()">📋 Copy SVG Code</button>
+  </div>
+
+  <div class="preview-container">
+    <img id="preview" src="preview-template.svg" alt="Social Preview">
+  </div>
+
+  <script>
+    async function downloadPNG() {
+      try {
+        // Create canvas
+        const img = document.getElementById('preview');
+        const canvas = document.createElement('canvas');
+        canvas.width = 1200;
+        canvas.height = 630;
+        const ctx = canvas.getContext('2d');
+
+        // Load SVG
+        const response = await fetch('preview-template.svg');
+        const svgText = await response.text();
+        const blob = new Blob([svgText], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+
+        // Draw to canvas
+        const tempImg = new Image();
+        tempImg.onload = function() {
+          ctx.drawImage(tempImg, 0, 0, 1200, 630);
+
+          // Download
+          canvas.toBlob(function(blob) {
+            const link = document.createElement('a');
+            link.download = 'preview.png';
+            link.href = URL.createObjectURL(blob);
+            link.click();
+            URL.revokeObjectURL(url);
+          }, 'image/png');
+        };
+        tempImg.src = url;
+      } catch (error) {
+        alert('Download failed. Please use Option 2 (Online Converter) instead.\n\nError: ' + error.message);
+      }
+    }
+
+    async function copySVG() {
+      try {
+        const response = await fetch('preview-template.svg');
+        const svgText = await response.text();
+        await navigator.clipboard.writeText(svgText);
+        alert('✅ SVG code copied to clipboard!\n\nYou can paste it into an online SVG editor or converter.');
+      } catch (error) {
+        alert('Failed to copy. Please use right-click → View Source instead.');
+      }
+    }
+  </script>
+</body>
+</html>
