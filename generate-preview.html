@@ -69,34 +69,29 @@
     <h1>📸 Generate Your Social Preview Image</h1>
     <p><strong>This is your social sharing preview (1200×630px)</strong></p>
 
-    <h3>Option 1: Screenshot Method (Easiest)</h3>
+    <h3>✅ EASIEST: Use Online Converter (Recommended)</h3>
     <ol>
-      <li>Click the <strong>"Download as PNG"</strong> button below (requires Chrome/Edge)</li>
-      <li>Save as <code>preview.png</code></li>
-      <li>Move it to your root directory: <code>/home/user/signalpilot.io/preview.png</code></li>
-      <li>Commit and push</li>
-    </ol>
-
-    <h3>Option 2: Online Converter</h3>
-    <ol>
-      <li>Right-click the preview below → "Save image as" → Save as SVG</li>
+      <li><strong>Click "Download SVG"</strong> button below to download the template</li>
       <li>Go to <strong>https://cloudconvert.com/svg-to-png</strong></li>
-      <li>Upload the SVG, set dimensions to <strong>1200×630</strong></li>
-      <li>Download as <code>preview.png</code></li>
-      <li>Move to root directory and commit</li>
+      <li>Upload the SVG file you just downloaded</li>
+      <li>Set width to <strong>1200</strong> and height to <strong>630</strong></li>
+      <li>Click "Convert" then download as <code>preview.png</code></li>
+      <li>Move <code>preview.png</code> to your root directory</li>
+      <li>Commit and push: <code>git add preview.png && git commit -m "Add social preview" && git push</code></li>
     </ol>
 
-    <h3>Option 3: macOS Screenshot</h3>
+    <h3>Alternative: Screenshot Method</h3>
     <ol>
-      <li>Press <code>Cmd + Shift + 4</code> then <code>Space</code></li>
-      <li>Click the preview window below</li>
-      <li>Rename screenshot to <code>preview.png</code></li>
+      <li>Right-click the preview below → <strong>"Open image in new tab"</strong></li>
+      <li>Take a full-page screenshot at exactly 1200×630</li>
+      <li>Or use browser dev tools to set viewport to 1200×630 and screenshot</li>
     </ol>
   </div>
 
   <div class="buttons">
-    <button onclick="downloadPNG()">📥 Download as PNG</button>
-    <button onclick="copySVG()">📋 Copy SVG Code</button>
+    <button onclick="downloadSVG()">📥 Download SVG</button>
+    <button onclick="downloadPNG()">📥 Try PNG Download</button>
+    <button onclick="openConverter()">🔗 Open CloudConvert</button>
   </div>
 
   <div class="preview-container">
@@ -104,49 +99,83 @@
   </div>
 
   <script>
-    async function downloadPNG() {
-      try {
-        // Create canvas
-        const img = document.getElementById('preview');
-        const canvas = document.createElement('canvas');
-        canvas.width = 1200;
-        canvas.height = 630;
-        const ctx = canvas.getContext('2d');
-
-        // Load SVG
-        const response = await fetch('preview-template.svg');
-        const svgText = await response.text();
-        const blob = new Blob([svgText], { type: 'image/svg+xml' });
-        const url = URL.createObjectURL(blob);
-
-        // Draw to canvas
-        const tempImg = new Image();
-        tempImg.onload = function() {
-          ctx.drawImage(tempImg, 0, 0, 1200, 630);
-
-          // Download
-          canvas.toBlob(function(blob) {
-            const link = document.createElement('a');
-            link.download = 'preview.png';
-            link.href = URL.createObjectURL(blob);
-            link.click();
-            URL.revokeObjectURL(url);
-          }, 'image/png');
-        };
-        tempImg.src = url;
-      } catch (error) {
-        alert('Download failed. Please use Option 2 (Online Converter) instead.\n\nError: ' + error.message);
-      }
+    function downloadSVG() {
+      // Simple SVG download
+      fetch('preview-template.svg')
+        .then(response => response.text())
+        .then(svgText => {
+          const blob = new Blob([svgText], { type: 'image/svg+xml' });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.download = 'signalpilot-preview.svg';
+          link.href = url;
+          link.click();
+          URL.revokeObjectURL(url);
+          alert('✅ SVG downloaded! Now upload it to CloudConvert to convert to PNG.');
+        })
+        .catch(error => {
+          alert('Download failed: ' + error.message);
+        });
     }
 
-    async function copySVG() {
+    function openConverter() {
+      window.open('https://cloudconvert.com/svg-to-png', '_blank');
+    }
+
+    async function downloadPNG() {
       try {
         const response = await fetch('preview-template.svg');
         const svgText = await response.text();
-        await navigator.clipboard.writeText(svgText);
-        alert('✅ SVG code copied to clipboard!\n\nYou can paste it into an online SVG editor or converter.');
+
+        // Create blob from SVG
+        const blob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+
+        // Create image element
+        const img = new Image();
+        img.onload = function() {
+          try {
+            // Create canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200;
+            canvas.height = 630;
+            const ctx = canvas.getContext('2d');
+
+            // Fill background
+            ctx.fillStyle = '#05070d';
+            ctx.fillRect(0, 0, 1200, 630);
+
+            // Draw image
+            ctx.drawImage(img, 0, 0, 1200, 630);
+
+            // Convert to PNG and download
+            canvas.toBlob(function(pngBlob) {
+              const pngUrl = URL.createObjectURL(pngBlob);
+              const link = document.createElement('a');
+              link.download = 'preview.png';
+              link.href = pngUrl;
+              link.click();
+
+              // Cleanup
+              URL.revokeObjectURL(url);
+              URL.revokeObjectURL(pngUrl);
+
+              alert('✅ PNG downloaded successfully!');
+            }, 'image/png', 1.0);
+          } catch (canvasError) {
+            alert('Canvas rendering failed: ' + canvasError.message + '\n\nPlease use the "Download SVG" button and convert it online instead.');
+          }
+        };
+
+        img.onerror = function() {
+          alert('⚠️ PNG download failed.\n\nPlease use "Download SVG" button instead, then convert it to PNG at cloudconvert.com');
+          URL.revokeObjectURL(url);
+        };
+
+        img.src = url;
+
       } catch (error) {
-        alert('Failed to copy. Please use right-click → View Source instead.');
+        alert('Download failed: ' + error.message + '\n\nPlease use "Download SVG" button instead.');
       }
     }
   </script>
