@@ -303,6 +303,29 @@
       font-size: 0.9rem;
     }
 
+    .sp-theme-close-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 0.75rem 2rem;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .sp-theme-close-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .sp-theme-close-btn:active {
+      transform: translateY(0);
+    }
+
     @media (max-width: 768px) {
       .sp-theme-modal {
         padding: 0.5rem;
@@ -400,10 +423,14 @@
       grid.appendChild(card);
     });
 
-    // Footer
+    // Footer with close button
     const footer = document.createElement('div');
     footer.className = 'sp-theme-footer';
-    footer.textContent = 'Your theme preference is saved automatically';
+    footer.innerHTML = `
+      <p style="margin: 0 0 1rem 0; color: var(--muted); font-size: 0.9rem;">Your theme preference is saved automatically</p>
+      <button class="sp-theme-close-btn">Close</button>
+    `;
+    footer.querySelector('.sp-theme-close-btn').onclick = closeThemeModal;
 
     content.appendChild(header);
     content.appendChild(grid);
