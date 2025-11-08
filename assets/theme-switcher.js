@@ -15,37 +15,40 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--brand), var(--accent));
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      color: white;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      color: #9fdcff;
       font-size: 1.5rem;
       cursor: pointer;
-      z-index: 1001;
+      z-index: 10000;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px var(--brand-glow);
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0,0,0,.3);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .sp-theme-toggle:hover {
-      transform: scale(1.1) rotate(15deg);
-      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 0 30px var(--brand-glow);
+      transform: scale(1.1);
+      background: rgba(255,255,255,.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,.4);
     }
 
     .sp-theme-toggle:active {
       transform: scale(0.95);
     }
 
-    /* Pulse animation for mobile prominence */
-    @keyframes sp-theme-pulse {
-      0%, 100% {
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4), 0 0 16px var(--brand-glow);
-      }
-      50% {
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 24px var(--brand-glow);
-      }
+    /* Light mode support */
+    html[data-theme="light"] .sp-theme-toggle {
+      background: #f6f8fc;
+      border-color: #d7def0;
+      color: #0f1524;
+      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    }
+
+    html[data-theme="light"] .sp-theme-toggle:hover {
+      background: #eef1f9;
+      box-shadow: 0 6px 20px rgba(0,0,0,.15);
     }
 
     /* Tablet - align with chatbot */
@@ -53,10 +56,9 @@
       .sp-theme-toggle {
         bottom: max(5.5rem, calc(5.25rem + env(safe-area-inset-bottom)));
         right: 1rem;
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4), 0 0 16px var(--brand-glow);
+        width: 48px;
+        height: 48px;
+        font-size: 1.3rem;
         -webkit-tap-highlight-color: transparent;
         position: fixed; /* Ensure sticky on mobile */
       }
