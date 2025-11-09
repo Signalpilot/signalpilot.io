@@ -1237,7 +1237,22 @@
 
     @media (max-width:1400px){
       /* Ensure header buttons have adequate space */
-      .nav{padding:.7rem 0}
+      .nav{
+        padding:.7rem 0;
+        gap:.5rem; /* Better spacing between header buttons */
+      }
+
+      /* Better mobile header button sizing */
+      .lang-dropdown,
+      #themeToggle {
+        flex-shrink: 0;
+      }
+
+      #themeToggle,
+      #langToggle {
+        min-width: 44px; /* iOS minimum tap target */
+        min-height: 44px;
+      }
 
       .menu-toggle{
         display:inline-flex;
@@ -1278,6 +1293,8 @@
         transition: transform 0.3s ease;
         overflow-y: auto;
         box-shadow: -8px 0 32px rgba(0, 0, 0, 0.8);
+        /* Add safe area for notched phones */
+        padding-top: env(safe-area-inset-top);
       }
       .mobile-nav.active {
         transform: translateX(0);
@@ -1286,19 +1303,34 @@
       /* Menu content styling */
       .mobile-nav-header {
         padding: 1.5rem 1.25rem;
+        padding-top: max(1.5rem, calc(1rem + env(safe-area-inset-top)));
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         display: flex;
         align-items: center;
         justify-content: space-between;
+        min-height: 60px; /* Ensure enough space for close button */
       }
 
       .mobile-nav-close {
-        background: none;
+        background: rgba(255, 255, 255, 0.1);
         border: none;
         color: #fff;
-        font-size: 1.5rem;
+        font-size: 2rem;
         cursor: pointer;
-        padding: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        line-height: 1;
+        border-radius: 8px;
+        min-width: 44px; /* iOS minimum tap target */
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s ease;
+      }
+
+      .mobile-nav-close:hover,
+      .mobile-nav-close:active {
+        background: rgba(255, 255, 255, 0.2);
       }
 
       .mobile-nav-links {
@@ -4721,8 +4753,17 @@
         document.body.style.overflow = '';
       }
 
+      function toggle() {
+        const isOpen = mobileNav.classList.contains('active');
+        if (isOpen) {
+          close();
+        } else {
+          open();
+        }
+      }
+
       // Event listeners
-      menuBtn.addEventListener('click', open);
+      menuBtn.addEventListener('click', toggle); // Changed from open to toggle
       closeBtn.addEventListener('click', close);
       backdrop.addEventListener('click', close);
 
