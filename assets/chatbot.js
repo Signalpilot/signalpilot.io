@@ -609,7 +609,10 @@ Email: support@signalpilot.io`;
         if (messages.children.length === 0) {
           addMessage(knowledgeBase.greetings[0]);
         }
-        document.getElementById('sp-chatbot-input').focus();
+        // Only auto-focus on desktop to avoid triggering mobile keyboard
+        if (window.innerWidth > 768) {
+          document.getElementById('sp-chatbot-input').focus();
+        }
       }
     });
 
