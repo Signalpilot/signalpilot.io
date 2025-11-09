@@ -506,15 +506,15 @@
         visibility: visible !important;
       }
 
-      /* Ensure content has proper z-index */
-      header, section, main, footer {
-        position: relative;
-        z-index: 1;
-      }
-
       /* Background elements should be behind content */
       .bg-stars, .sp-constellations, .bg-aurora {
         z-index: 0 !important;
+      }
+
+      /* Only header needs special positioning */
+      header {
+        position: relative;
+        z-index: 100;
       }
     }
 
@@ -2155,7 +2155,6 @@
                 preload="auto"
                 poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%230a0e18' width='1200' height='600'/%3E%3C/svg%3E"
                 style="width:100%;height:100%;display:block;object-fit:contain;object-position:center;background:#0a0e18;pointer-events:none;position:absolute;top:0;left:0"
-                onloadedmetadata="this.play()"
                 width="1200"
                 height="600"
               >
@@ -2241,12 +2240,26 @@
                   });
                 }
 
+                // IMMEDIATE play attempt - before anything else
+                video.play().catch(() => {});
+
                 // Try to play immediately
                 tryPlay('initial');
+
+                // Force play after short delay
+                setTimeout(() => {
+                  video.play().catch(() => {});
+                }, 100);
+
+                setTimeout(() => {
+                  video.play().catch(() => {});
+                }, 300);
 
                 // Wait for loadeddata event
                 video.addEventListener('loadeddata', function() {
                   tryPlay('loadeddata');
+                  // Extra play attempt
+                  setTimeout(() => video.play().catch(() => {}), 50);
                 }, { once: true });
 
                 // Wait for canplay event
