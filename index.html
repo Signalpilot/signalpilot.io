@@ -493,6 +493,31 @@
       transition:background-color 0.3s ease, color 0.3s ease;
     }
 
+    /* MOBILE FIX: Ensure all content is visible and properly layered */
+    @media (max-width: 768px) {
+      body, html {
+        background: var(--bg) !important;
+        min-height: 100vh;
+      }
+
+      /* Ensure all main sections are visible */
+      section, main, header, footer {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      /* Ensure content has proper z-index */
+      header, section, main, footer {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Background elements should be behind content */
+      .bg-stars, .sp-constellations, .bg-aurora {
+        z-index: 0 !important;
+      }
+    }
+
     img, video, iframe{
       max-width:100%;
       height:auto;
@@ -2040,7 +2065,7 @@
                 muted
                 playsinline
                 webkit-playsinline
-                preload="metadata"
+                preload="auto"
                 poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%230a0e18' width='1200' height='600'/%3E%3C/svg%3E"
                 style="width:100%;height:100%;display:block;object-fit:contain;object-position:center;background:#0a0e18;pointer-events:none;position:absolute;top:0;left:0"
                 onloadedmetadata="this.play()"
@@ -2140,6 +2165,11 @@
                 // Wait for canplay event
                 video.addEventListener('canplay', function() {
                   tryPlay('canplay');
+                }, { once: true });
+
+                // Wait for canplaythrough event (fully loaded)
+                video.addEventListener('canplaythrough', function() {
+                  tryPlay('canplaythrough');
                 }, { once: true });
 
                 // Retry play on user interaction
