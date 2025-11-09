@@ -5838,15 +5838,20 @@ if ('serviceWorker' in navigator) {
   const lazyLoadSections = ['why', 'inside', 'pricing', 'faq'];
 
   // On mobile: Load all sections immediately, no lazy loading
-  // EMERGENCY FIX: Force all sections visible on mobile
+  // EMERGENCY FIX: Force all sections visible on mobile - remove ALL hiding mechanisms
   if (isMobile) {
     lazyLoadSections.forEach(id => {
       const section = document.getElementById(id);
       if (section) {
+        // Remove lazy-section class entirely
+        section.classList.remove('lazy-section');
         section.classList.add('loaded');
+        // Force visibility with inline styles (highest priority)
         section.style.opacity = '1';
         section.style.visibility = 'visible';
         section.style.display = 'block';
+        section.style.transform = 'none';
+        section.style.transition = 'none';
       }
     });
     return;
@@ -5878,6 +5883,24 @@ if ('serviceWorker' in navigator) {
     }
   });
 })();
+
+// EMERGENCY BACKUP: Run again after full page load to catch any issues
+window.addEventListener('load', function() {
+  const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768 || 'ontouchstart' in window;
+  if (isMobile) {
+    const sections = ['why', 'inside', 'pricing', 'faq'];
+    sections.forEach(id => {
+      const section = document.getElementById(id);
+      if (section) {
+        section.classList.remove('lazy-section');
+        section.style.opacity = '1';
+        section.style.visibility = 'visible';
+        section.style.display = 'block';
+        section.style.transform = 'none';
+      }
+    });
+  }
+});
 </script>
 
 <!-- Cookie Consent Banner -->
