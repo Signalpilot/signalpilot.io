@@ -493,6 +493,20 @@
       transition:background-color 0.3s ease, color 0.3s ease;
     }
 
+    /* Emergency mobile fix: Ensure all sections are visible */
+    @media (max-width: 768px) {
+      section, main, .container, .card, article {
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+      }
+
+      .section {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+    }
+
     img, video, iframe{
       max-width:100%;
       height:auto;
@@ -5820,15 +5834,19 @@ if ('serviceWorker' in navigator) {
 (function() {
   'use strict';
 
-  const isMobile = window.innerWidth <= 768;
+  const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768 || 'ontouchstart' in window;
   const lazyLoadSections = ['why', 'inside', 'pricing', 'faq'];
 
   // On mobile: Load all sections immediately, no lazy loading
+  // EMERGENCY FIX: Force all sections visible on mobile
   if (isMobile) {
     lazyLoadSections.forEach(id => {
       const section = document.getElementById(id);
       if (section) {
         section.classList.add('loaded');
+        section.style.opacity = '1';
+        section.style.visibility = 'visible';
+        section.style.display = 'block';
       }
     });
     return;
