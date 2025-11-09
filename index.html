@@ -1869,36 +1869,71 @@
   }
   </script>
 
+  <!-- CRITICAL MOBILE FIX: Override ALL animations and ensure visibility -->
+  <style id="mobile-emergency-override">
+    @media (max-width: 768px) {
+      /* Kill ALL animations and transitions for reliability */
+      *, *::before, *::after {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+      }
+
+      /* Force ALL content visible immediately */
+      body, html, section, main, article, header, footer, nav, div, aside {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+      }
+
+      /* Override any lazy loading or reveal classes */
+      .lazy-section, .reveal, [class*="fade"], [class*="slide"], [class*="animate"] {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+      }
+
+      /* Ensure proper stacking - content above background */
+      .bg-stars, .sp-constellations, .bg-aurora {
+        z-index: 0 !important;
+      }
+
+      header, main, section, footer {
+        position: relative !important;
+        z-index: 1 !important;
+      }
+    }
+  </style>
+
 </head>
 
 <body>
 
-<!-- CRITICAL: Force elements visible on mobile IMMEDIATELY -->
+<!-- MOBILE: Disable ALL animations and force content visible -->
 <script>
 (function(){
-  if(window.innerWidth <= 768 || window.innerHeight <= 1024){
-    // Add style tag to force all reveals visible
+  if(window.innerWidth <= 768){
+    // CRITICAL: Add comprehensive mobile override styles IMMEDIATELY
     var style = document.createElement('style');
-    style.textContent = '.reveal{opacity:1!important;transform:translateY(0)!important;transition:none!important}';
+    style.textContent = `
+      /* MOBILE OVERRIDE: Force everything visible and remove all animations */
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+      body, html, section, main, header, footer, div, article, aside {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+      }
+      .reveal, .lazy-section, [class*="fade"], [class*="slide"] {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+      }
+    `;
     document.head.appendChild(style);
-    
-    // Also force via JavaScript when DOM loads
-    if(document.readyState === 'loading'){
-      document.addEventListener('DOMContentLoaded', function(){
-        document.querySelectorAll('.reveal').forEach(function(el){
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-          el.classList.add('in');
-        });
-      });
-    } else {
-      // DOM already loaded, force immediately
-      document.querySelectorAll('.reveal').forEach(function(el){
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-        el.classList.add('in');
-      });
-    }
   }
 })();
 </script>
