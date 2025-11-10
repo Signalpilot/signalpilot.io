@@ -4580,7 +4580,7 @@
 
       setTheme(localStorage.getItem(KEY) || system);
 
-      btn?.addEventListener('click',()=>{ const cur=document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'; setTheme(cur==='light'?'dark':'light'); });
+      if (btn) btn.addEventListener('click',()=>{ const cur=document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'; setTheme(cur==='light'?'dark':'light'); });
 
       function setTheme(t){
 
@@ -4926,7 +4926,7 @@
 
       window.addEventListener('scroll',onScroll,{passive:true}); update();
 
-      ctaClose?.addEventListener('click',()=>{dismissed=true;update();});
+      if (ctaClose) ctaClose.addEventListener('click',()=>{dismissed=true;update();});
 
       (function(){const targets=['#pricing','#waitlist'];
 
@@ -5014,9 +5014,11 @@
 
         createSubscription: function(_, actions){
 
-          const tv=(document.getElementById(tvInputId)?.value||'').trim();
+          const tvEl=document.getElementById(tvInputId);
+          const tv=(tvEl && tvEl.value||'').trim();
 
-          const ok=consentId ? document.getElementById(consentId)?.checked : true;
+          const consentEl=consentId ? document.getElementById(consentId) : null;
+          const ok=consentEl ? consentEl.checked : true;
 
           // Clear previous errors
           const errorTvId = 'error-' + tvInputId;
@@ -5131,8 +5133,8 @@
       form.addEventListener('submit', async function(e){
         e.preventDefault();
 
-        const tv = (tvInput?.value || '').trim();
-        const consentOk = consentCheck?.checked;
+        const tv = (tvInput && tvInput.value || '').trim();
+        const consentOk = consentCheck && consentCheck.checked;
 
         // Clear previous errors
         document.getElementById('error-tv-lifetime').style.display = 'none';
@@ -5534,7 +5536,8 @@ if ('serviceWorker' in navigator) {
     // PayPal forms
     document.querySelectorAll('form[action*="paypal"]').forEach(function(form) {
       form.addEventListener('submit', function() {
-        const planName = this.querySelector('input[type="submit"]')?.value || 'Unknown Plan';
+        const submitBtn = this.querySelector('input[type="submit"]');
+        const planName = submitBtn && submitBtn.value || 'Unknown Plan';
         trackEvent('select_plan', {
           plan_name: planName,
           payment_method: 'paypal'
@@ -5568,7 +5571,8 @@ if ('serviceWorker' in navigator) {
         // Update ARIA attribute for accessibility
         card.setAttribute('aria-expanded', isExpanded);
 
-        const question = card.querySelector('strong')?.textContent || 'FAQ ' + (index + 1);
+        const strongEl = card.querySelector('strong');
+        const question = strongEl && strongEl.textContent || 'FAQ ' + (index + 1);
 
         trackEvent('faq_interaction', {
           question_number: index + 1,
