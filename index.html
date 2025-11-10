@@ -4215,11 +4215,6 @@
 
     </section>
 
-    <!-- DEBUG MARKER: If you can see FAQ but not this, content is being hidden -->
-    <div style="background:lime;color:black;padding:50px;text-align:center;font-size:30px;font-weight:bold;position:relative;z-index:99999;">
-      🟢 DEBUG: Content after pricing IS loading. If you see this, the page works!
-    </div>
-
     <!-- FAQ -->
 
     <section id="faq" class="section" role="region" aria-labelledby="faq-heading">
@@ -5242,15 +5237,19 @@
   function updateJumpNavVisibility() {
     if (!ticking) {
       window.requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        const heroHeight = 600; // approximate hero height
-        
-        if (scrollY > heroHeight) {
-          jumpNav.classList.add('visible');
-        } else {
-          jumpNav.classList.remove('visible');
+        try {
+          const scrollY = window.scrollY;
+          const heroHeight = 600; // approximate hero height
+
+          if (scrollY > heroHeight) {
+            jumpNav.classList.add('visible');
+          } else {
+            jumpNav.classList.remove('visible');
+          }
+        } catch(e) {
+          // Silently fail - don't break page on scroll
         }
-        
+
         ticking = false;
       });
       ticking = true;
@@ -5259,25 +5258,31 @@
 
   // Update active link based on scroll position
   function updateActiveLink() {
-    const scrollY = window.scrollY + 150; // offset for sticky nav
-    
-    let currentSection = '';
-    
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      
-      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-        currentSection = section.getAttribute('id');
-      }
-    });
-    
-    jumpLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${currentSection}`) {
-        link.classList.add('active');
-      }
-    });
+    try {
+      const scrollY = window.scrollY + 150; // offset for sticky nav
+
+      let currentSection = '';
+
+      sections.forEach(section => {
+        if (!section) return;
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+
+      jumpLinks.forEach(link => {
+        if (!link) return;
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active');
+        }
+      });
+    } catch(e) {
+      // Silently fail - don't break page on scroll
+    }
   }
 
   // Smooth scroll to sections
@@ -5299,10 +5304,15 @@
     });
   });
 
-  // Listen for scroll events
+  // Listen for scroll events with error handling
   window.addEventListener('scroll', () => {
-    updateJumpNavVisibility();
-    updateActiveLink();
+    try {
+      updateJumpNavVisibility();
+      updateActiveLink();
+    } catch(e) {
+      // Prevent scroll errors from breaking the page
+      console.error('Scroll handler error:', e);
+    }
   }, { passive: true });
 
   // Initial check
@@ -5596,16 +5606,20 @@ if ('serviceWorker' in navigator) {
     let scrollDepths = { 25: false, 50: false, 75: false, 100: false };
 
     window.addEventListener('scroll', function() {
-      const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+      try {
+        const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
 
-      Object.keys(scrollDepths).forEach(function(depth) {
-        if (scrollPercent >= depth && !scrollDepths[depth]) {
-          scrollDepths[depth] = true;
-          trackEvent('scroll_depth', {
-            percent: depth + '%'
-          });
-        }
-      });
+        Object.keys(scrollDepths).forEach(function(depth) {
+          if (scrollPercent >= depth && !scrollDepths[depth]) {
+            scrollDepths[depth] = true;
+            trackEvent('scroll_depth', {
+              percent: depth + '%'
+            });
+          }
+        });
+      } catch(e) {
+        // Silently fail
+      }
     });
 
     // 5. TRACK NAVIGATION DROPDOWN INTERACTIONS
