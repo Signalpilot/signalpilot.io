@@ -2729,16 +2729,24 @@
               // Update index on manual scroll (mobile swipe)
               let scrollTimeout;
               carousel.addEventListener('scroll', () => {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                  const scrollLeft = carousel.scrollLeft;
-                  const itemWidth = items[0].offsetWidth;
-                  // 1.5rem on desktop, 0.5rem on mobile
-                  const gap = window.innerWidth <= 768 ? 8 : 24;
-                  currentIndex = Math.round(scrollLeft / (itemWidth + gap));
-                  updateDots();
-                }, 100);
-              });
+                try {
+                  clearTimeout(scrollTimeout);
+                  scrollTimeout = setTimeout(() => {
+                    try {
+                      const scrollLeft = carousel.scrollLeft;
+                      const itemWidth = items[0].offsetWidth;
+                      // 1.5rem on desktop, 0.5rem on mobile
+                      const gap = window.innerWidth <= 768 ? 8 : 24;
+                      currentIndex = Math.round(scrollLeft / (itemWidth + gap));
+                      updateDots();
+                    } catch(e) {
+                      // Silently handle carousel scroll errors
+                    }
+                  }, 100);
+                } catch(e) {
+                  // Silently handle scroll event errors
+                }
+              }, { passive: true });
 
               // Keyboard navigation (left/right arrows)
               document.addEventListener('keydown', (e) => {
@@ -2786,20 +2794,24 @@
               // Remove lazy loading attribute and force immediate load
               if ('IntersectionObserver' in window) {
                 const imageObserver = new IntersectionObserver((entries) => {
-                  entries.forEach(entry => {
-                    const img = entry.target;
-                    // Preload images when they're within 800px of viewport
-                    if (entry.isIntersecting || entry.intersectionRatio > 0) {
-                      // Force load by removing lazy attribute
-                      img.removeAttribute('loading');
-                      // Ensure src is set (in case it was data-src)
-                      if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
+                  try {
+                    entries.forEach(entry => {
+                      const img = entry.target;
+                      // Preload images when they're within 800px of viewport
+                      if (entry.isIntersecting || entry.intersectionRatio > 0) {
+                        // Force load by removing lazy attribute
+                        img.removeAttribute('loading');
+                        // Ensure src is set (in case it was data-src)
+                        if (img.dataset.src) {
+                          img.src = img.dataset.src;
+                          img.removeAttribute('data-src');
+                        }
+                        imageObserver.unobserve(img);
                       }
-                      imageObserver.unobserve(img);
-                    }
-                  });
+                    });
+                  } catch(e) {
+                    // Silently handle image loading errors
+                  }
                 }, {
                   root: null,
                   rootMargin: '800px', // Large margin to preload before visible
@@ -3906,13 +3918,17 @@
       // Intersection Observer for auto-sweep when section comes into view
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting && !hasInteracted) {
-              setTimeout(() => {
-                if (!hasInteracted) autoSweep();
-              }, 300);
-            }
-          });
+          try {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && !hasInteracted) {
+                setTimeout(() => {
+                  if (!hasInteracted) autoSweep();
+                }, 300);
+              }
+            });
+          } catch(e) {
+            // Silently handle observer errors
+          }
         }, { threshold: 0.5 });
 
         observer.observe(slider);
@@ -4929,7 +4945,14 @@
 
         if('IntersectionObserver' in window){
 
-          const io2=new IntersectionObserver(entries=>{suppressed=entries.some(e=>e.isIntersecting);update();},{root:null,rootMargin:'0px 0px -55% 0px',threshold:0});
+          const io2=new IntersectionObserver(entries=>{
+            try {
+              suppressed=entries.some(e=>e.isIntersecting);
+              update();
+            } catch(e) {
+              // Silently handle observer errors
+            }
+          },{root:null,rootMargin:'0px 0px -55% 0px',threshold:0});
 
           targets.forEach(sel=>{const el=document.querySelector(sel); if(el) io2.observe(el);});
 
@@ -5108,7 +5131,13 @@
 
       }
 
-      const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!rendered&&e.isIntersecting){renderSub(planId,containerId,tvInputId,planKey,consentId); rendered=true; obs.disconnect();}})},{root:null, rootMargin:'300px', threshold:0});
+      const obs=new IntersectionObserver(entries=>{
+        try {
+          entries.forEach(e=>{if(!rendered&&e.isIntersecting){renderSub(planId,containerId,tvInputId,planKey,consentId); rendered=true; obs.disconnect();}});
+        } catch(err) {
+          // Silently handle observer errors
+        }
+      },{root:null, rootMargin:'300px', threshold:0});
 
       obs.observe(el);
 
@@ -5620,7 +5649,7 @@ if ('serviceWorker' in navigator) {
       } catch(e) {
         // Silently fail
       }
-    });
+    }, { passive: true });
 
     // 5. TRACK NAVIGATION DROPDOWN INTERACTIONS
     const resourcesDropdown = document.querySelector('.nav-dropdown-toggle');
@@ -5848,22 +5877,26 @@ if ('serviceWorker' in navigator) {
 
     // Create observer with large margin to preload before visible
     const globalImageObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting || entry.intersectionRatio > 0) {
-          const img = entry.target;
+      try {
+        entries.forEach(entry => {
+          if (entry.isIntersecting || entry.intersectionRatio > 0) {
+            const img = entry.target;
 
-          // Remove lazy loading to force immediate load
-          img.removeAttribute('loading');
+            // Remove lazy loading to force immediate load
+            img.removeAttribute('loading');
 
-          // If using data-src pattern, load it
-          if (img.dataset.src && !img.src) {
-            img.src = img.dataset.src;
+            // If using data-src pattern, load it
+            if (img.dataset.src && !img.src) {
+              img.src = img.dataset.src;
+            }
+
+            // Stop observing once loaded
+            globalImageObserver.unobserve(img);
           }
-
-          // Stop observing once loaded
-          globalImageObserver.unobserve(img);
-        }
-      });
+        });
+      } catch(e) {
+        // Silently handle image loading errors
+      }
     }, {
       root: null,
       rootMargin: '1000px', // Very large margin - preload well before visible
