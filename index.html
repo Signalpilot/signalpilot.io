@@ -4204,12 +4204,11 @@
               <div id="error-consent-lifetime" style="display:none;color:#ff6b6b;font-size:.85rem;margin-bottom:1rem;font-weight:500">⚠️ Educational-only consent confirmation is required.</div>
 
               <!-- Step 3: Buy Now -->
-              <form id="lifetime-form" action="https://www.paypal.com/ncp/payment/436WMS3WRY2ZL" method="post" target="_blank" class="pp-slot" style="display:grid;gap:0.5rem;">
-                <input type="hidden" name="business" value="support@signalpilot.io">
-                <input type="submit" id="lifetime-buy-button" value="Buy Now - $1,799" style="background:#000000;color:#FFFFFF;font-weight:700;cursor:pointer;border:none;border-radius:8px;padding:12px 24px;font-size:16px;font-family:inherit;width:100%;height:auto;min-height:44px;">
-                <img src="https://www.paypalobjects.com/images/Debit_Credit.svg" alt="PayPal accepted cards" style="margin:0 auto;height:24px;" loading="lazy" width="120" height="24" />
-                <div style="font-size:0.75rem;text-align:center;opacity:0.7;">Powered by PayPal</div>
-              </form>
+              <button type="button" id="btn-lifetime-paypal" class="btn btn-primary" style="width:100%;padding:1rem;font-size:1.05rem;font-weight:700">
+                💳 Buy Now with PayPal - $1,799
+              </button>
+              <img src="https://www.paypalobjects.com/images/Debit_Credit.svg" alt="PayPal accepted cards" style="margin:0 auto;height:24px;" loading="lazy" width="120" height="24" />
+              <div style="font-size:0.75rem;text-align:center;opacity:0.7;">Powered by PayPal</div>
 
               <div style="text-align:center;margin-top:1rem">
                 <a href="https://signalpilotlabs.lemonsqueezy.com/buy/81822d54-6e08-4c26-b2f0-d5d5e3cdd25e" class="btn btn-secondary" style="width:100%;display:block" target="_blank" rel="noopener">💳 Pay with Card</a>
@@ -5150,18 +5149,16 @@
 
 
 
-    // ===== LIFETIME FORM VALIDATION =====
-    
+    // ===== LIFETIME BUTTON VALIDATION =====
+
     (function(){
-      const form = document.getElementById('lifetime-form');
+      const lifetimeBtn = document.getElementById('btn-lifetime-paypal');
       const tvInput = document.getElementById('tv-lifetime');
       const consentCheck = document.getElementById('consent-lifetime');
-      
-      if(!form) return;
-      
-      form.addEventListener('submit', async function(e){
-        e.preventDefault();
 
+      if(!lifetimeBtn) return;
+
+      lifetimeBtn.addEventListener('click', async function(){
         const tv = (tvInput && tvInput.value || '').trim();
         const consentOk = consentCheck && consentCheck.checked;
 
@@ -5201,12 +5198,12 @@
           document.getElementById('error-soldout-lifetime').style.display = 'block';
           return;
         }
-        
+
         // Store for tracking
         const ref = localStorage.getItem('sp_ref') || '';
         localStorage.setItem('sp_last_tv', tv);
         localStorage.setItem('sp_last_plan', 'lifetime');
-        
+
         // Log the attempt
         fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec', {
           method: 'POST',
@@ -5220,9 +5217,9 @@
             utm: (localStorage.getItem('sp_utm') || '{}')
           })
         });
-        
-        // All validation passed - submit to PayPal
-        form.submit();
+
+        // All validation passed - redirect to PayPal
+        window.open('https://www.paypal.com/ncp/payment/436WMS3WRY2ZL', '_blank');
       });
     })();
 
