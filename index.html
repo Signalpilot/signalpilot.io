@@ -4064,7 +4064,9 @@
               <div id="error-consent-monthly" style="display:none;color:#ff6b6b;font-size:.85rem;margin-bottom:1rem;font-weight:500">⚠️ Educational-only consent confirmation is required.</div>
 
               <!-- Step 3: Subscribe -->
-              <div class="pp-slot" id="paypal-button-container-P-1WW85539FH424981JND52S7A"></div>
+              <button type="button" id="btn-monthly-paypal" class="btn btn-primary" style="width:100%;padding:1rem;font-size:1.05rem;font-weight:700">
+                💳 Subscribe with PayPal ($99/month)
+              </button>
 
               <div style="text-align:center;margin-top:1rem">
                 <a href="https://signalpilotlabs.lemonsqueezy.com/buy/272cee92-d8d5-4259-866b-e7cf95f5d7ee" class="btn btn-secondary" style="width:100%;display:block" target="_blank" rel="noopener">💳 Pay with Card</a>
@@ -4132,7 +4134,9 @@
               <div id="error-consent-yearly" style="display:none;color:#ff6b6b;font-size:.85rem;margin-bottom:1rem;font-weight:500">⚠️ Educational-only consent confirmation is required.</div>
 
               <!-- Step 3: Subscribe -->
-              <div class="pp-slot" id="paypal-button-container-P-1S895034P48824141ND52VBA"></div>
+              <button type="button" id="btn-yearly-paypal" class="btn btn-primary" style="width:100%;padding:1rem;font-size:1.05rem;font-weight:700">
+                💳 Subscribe with PayPal ($699/year)
+              </button>
 
               <div style="text-align:center;margin-top:1rem">
                 <a href="https://signalpilotlabs.lemonsqueezy.com/buy/bb59d34b-20bb-478d-9db3-533b7e84930b" class="btn btn-secondary" style="width:100%;display:block" target="_blank" rel="noopener">💳 Pay with Card</a>
@@ -5267,7 +5271,75 @@
 
     // Lifetime form guard removed - now using Hosted Button
 
+    // ===== LIGHTWEIGHT MONTHLY/YEARLY SUBSCRIPTION BUTTONS =====
+    // Simple click handlers - NO DOM manipulation, NO MutationObserver, NO performance issues
 
+    (function() {
+      const monthlyBtn = document.getElementById('btn-monthly-paypal');
+      const yearlyBtn = document.getElementById('btn-yearly-paypal');
+
+      if (monthlyBtn) {
+        monthlyBtn.addEventListener('click', function() {
+          const tvInput = document.getElementById('tv-monthly');
+          const consentCheck = document.getElementById('consent-monthly');
+          const tv = (tvInput && tvInput.value || '').trim();
+          const consentOk = consentCheck && consentCheck.checked;
+
+          // Clear errors
+          document.getElementById('error-tv-monthly').style.display = 'none';
+          document.getElementById('error-consent-monthly').style.display = 'none';
+
+          // Validate
+          if (!tv) {
+            document.getElementById('error-tv-monthly').style.display = 'block';
+            return;
+          }
+          if (!consentOk) {
+            document.getElementById('error-consent-monthly').style.display = 'block';
+            return;
+          }
+
+          // Save for tracking
+          localStorage.setItem('sp_last_tv', tv);
+          localStorage.setItem('sp_last_plan', 'monthly');
+
+          // Redirect to PayPal subscription page
+          // Plan ID: P-1WW85539FH424981JND52S7A
+          window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-1WW85539FH424981JND52S7A', '_blank');
+        });
+      }
+
+      if (yearlyBtn) {
+        yearlyBtn.addEventListener('click', function() {
+          const tvInput = document.getElementById('tv-yearly');
+          const consentCheck = document.getElementById('consent-yearly');
+          const tv = (tvInput && tvInput.value || '').trim();
+          const consentOk = consentCheck && consentCheck.checked;
+
+          // Clear errors
+          document.getElementById('error-tv-yearly').style.display = 'none';
+          document.getElementById('error-consent-yearly').style.display = 'none';
+
+          // Validate
+          if (!tv) {
+            document.getElementById('error-tv-yearly').style.display = 'block';
+            return;
+          }
+          if (!consentOk) {
+            document.getElementById('error-consent-yearly').style.display = 'block';
+            return;
+          }
+
+          // Save for tracking
+          localStorage.setItem('sp_last_tv', tv);
+          localStorage.setItem('sp_last_plan', 'yearly');
+
+          // Redirect to PayPal subscription page
+          // Plan ID: P-1S895034P48824141ND52VBA
+          window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-1S895034P48824141ND52VBA', '_blank');
+        });
+      }
+    })();
 
     /* ======================== MOBILE-FRIENDLY: Simple PayPal styling ======================== */
     /* No JavaScript manipulation - pure CSS only for mobile performance */
