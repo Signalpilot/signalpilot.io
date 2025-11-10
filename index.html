@@ -4809,8 +4809,7 @@
         { code: 'id', name: 'Bahasa Indonesia' }
       ];
 
-      /* TEMPORARY TEST: Disable Google Translate language dropdown to diagnose mobile scroll crash */
-      /*languages.forEach(lang => {
+      languages.forEach(lang => {
         const btn = document.createElement('button');
         btn.setAttribute('data-lang', lang.code);
         btn.textContent = lang.name;
@@ -4868,8 +4867,7 @@
           close();
         });
         langMenu.appendChild(btn);
-      });*/
-      /* END TEMPORARY TEST */
+      });
 
       // CRITICAL: Append directly to body (escapes header's stacking context)
       document.body.appendChild(langMenu);
@@ -4995,8 +4993,7 @@
 
       function applyDirLang(lang){ document.documentElement.lang=(lang==='zh')?'zh-CN':lang; document.documentElement.dir=(lang==='ar')?'rtl':'ltr'; }
 
-      /* TEMPORARY TEST: Disable Google Translate initialization to diagnose mobile scroll crash */
-      /*window.googleTranslateElementInit=function(){ if(!window.google||!google.translate)return; new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'ar,de,es,fr,it,ru,zh-CN,pt,tr,ja,ko,vi,th,hi,id',autoDisplay:false},'google_translate_container'); };
+      window.googleTranslateElementInit=function(){ if(!window.google||!google.translate)return; new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'ar,de,es,fr,it,ru,zh-CN,pt,tr,ja,ko,vi,th,hi,id',autoDisplay:false},'google_translate_container'); };
 
       function loadGTE(){ if(window.__gte_loading || window.google) return; window.__gte_loading=true; const s=document.createElement('script'); s.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'; s.async=true; document.head.appendChild(s); }
 
@@ -5004,8 +5001,7 @@
 
       sel.value=code; setGoogTrans(code); applyDirLang(code); if(code!=='en') loadGTE();
 
-      sel.addEventListener('change',e=>{ const v=e.target.value; localStorage.setItem(LANG_KEY,v); setGoogTrans(v); applyDirLang(v); if(v!=='en') loadGTE(); location.reload(); });*/
-      /* END TEMPORARY TEST */
+      sel.addEventListener('change',e=>{ const v=e.target.value; localStorage.setItem(LANG_KEY,v); setGoogTrans(v); applyDirLang(v); if(v!=='en') loadGTE(); location.reload(); });
 
     })();
 
@@ -5230,7 +5226,28 @@
     // ===== PAYPAL LIVE =====
     const PAYPAL_LIVE = true;
 
-    // TEMPORARY TEST: Disable PayPal button lazy rendering to diagnose mobile scroll crash
+    /*
+     * TODO: FIX PAYPAL BUTTON RENDERING - CURRENTLY DISABLED DUE TO MOBILE CRASH
+     *
+     * ROOT CAUSE: The renderSub() function causes mobile browsers to crash when scrolling
+     * past the pricing section due to extremely aggressive DOM manipulation:
+     *
+     * 1. querySelectorAll('*') - Selects EVERY element in button container (very expensive)
+     * 2. MutationObserver watching entire subtree - Fires on every style/class change
+     * 3. forceTransparentBg() runs 4 times via setTimeout (50ms, 150ms, 500ms, 1000ms)
+     * 4. Each run manipulates styles on EVERY descendant element
+     * 5. This happens when IntersectionObserver fires (300px before pricing section visible)
+     *
+     * RECOMMENDED FIX OPTIONS:
+     * A) Remove aggressive style manipulation entirely (accept PayPal's white background)
+     * B) Use more specific selectors instead of querySelectorAll('*')
+     * C) Remove MutationObserver, run forceTransparentBg() only once after render
+     * D) Delay PayPal rendering until user actually clicks/interacts with form
+     * E) Use PayPal's hosted buttons instead of SDK (like lifetime plan)
+     *
+     * Until fixed, monthly/yearly PayPal buttons are disabled.
+     * Users can still purchase via lifetime plan form or contact support.
+     */
     /*if (PAYPAL_LIVE) {
       // MONTHLY = $99 = P-1WW85539FH424981JND52S7A
       lazyRenderSub('P-1WW85539FH424981JND52S7A','paypal-button-container-P-1WW85539FH424981JND52S7A','tv-monthly','monthly','consent-monthly');
@@ -5242,7 +5259,6 @@
 
       // Lifetime button - using simple form (no SDK conflict)
     }*/
-    // END TEMPORARY TEST
 
 
 
@@ -5450,13 +5466,11 @@
   }
 
   // Load in sequence: device-capability -> themes -> particles -> theme-switcher
-  // TEMPORARY TEST: Skip particles.js to diagnose mobile scroll crash
   loadScript('assets/device-capability.js', function() {
     loadScript('assets/themes.js', function() {
-      // Skip particles.js for testing
-      // loadScript('assets/particles.js', function() {
+      loadScript('assets/particles.js', function() {
         loadScript('assets/theme-switcher.js');
-      // });
+      });
     });
   });
 })();
@@ -5925,13 +5939,11 @@ if ('serviceWorker' in navigator) {
 })();
 </script>
 
-<!-- TEMPORARY TEST: Cookie Consent System disabled for mobile scroll debugging -->
-<!--<script src="/assets/cookie-consent.js"></script>-->
+<!-- Cookie Consent System - Re-enabled after finding real issue (PayPal rendering) -->
+<script src="/assets/cookie-consent.js"></script>
 
-<!-- TEMPORARY TEST: Disable chatbot to diagnose mobile scroll crash -->
-<!-- AI Chatbot -->
-<!--<script src="/assets/chatbot.js" defer></script>-->
-<!-- END TEMPORARY TEST -->
+<!-- AI Chatbot - Re-enabled after finding real issue (PayPal rendering) -->
+<script src="/assets/chatbot.js" defer></script>
 
 <!-- Device Optimization System DISABLED - FPS detection was breaking mobile rendering -->
 <!-- TODO: Re-implement without FPS detection that sets data-capability="low" -->
