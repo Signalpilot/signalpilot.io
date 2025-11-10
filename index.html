@@ -5156,11 +5156,21 @@
       const tvInput = document.getElementById('tv-lifetime');
       const consentCheck = document.getElementById('consent-lifetime');
 
-      if(!lifetimeBtn) return;
+      if(!lifetimeBtn) {
+        console.error('Lifetime button not found!');
+        return;
+      }
 
-      lifetimeBtn.addEventListener('click', async function(){
+      console.log('✅ Lifetime button handler attached');
+
+      lifetimeBtn.addEventListener('click', async function(e){
+        console.log('🔵 Lifetime button clicked');
+        e.preventDefault(); // Prevent any default behavior
+
         const tv = (tvInput && tvInput.value || '').trim();
         const consentOk = consentCheck && consentCheck.checked;
+
+        console.log('Username:', tv, 'Consent:', consentOk);
 
         // Clear previous errors
         document.getElementById('error-tv-lifetime').style.display = 'none';
@@ -5169,17 +5179,20 @@
 
         // Validate TradingView username
         if(!tv) {
+          console.log('❌ Missing username');
           document.getElementById('error-tv-lifetime').style.display = 'block';
           return;
         }
 
         // Validate consent
         if(!consentOk) {
+          console.log('❌ Missing consent');
           document.getElementById('error-consent-lifetime').style.display = 'block';
           return;
         }
 
         // Check availability
+        console.log('🔄 Checking availability...');
         let okAvail = true;
         try {
           const res = await fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec?fn=lt_status', {
@@ -5190,11 +5203,15 @@
 
           if(res.ok) {
             const j = await res.json();
-            okAvail = Number(j.claimed || 0) < 100;
+            okAvail = Number(j.claimed || 0) < 350; // Fixed: should be 350 not 100
+            console.log('✅ Availability check:', okAvail, 'Claimed:', j.claimed);
           }
-        } catch(_) {}
+        } catch(err) {
+          console.warn('⚠️ Availability check failed, allowing purchase:', err);
+        }
 
         if(!okAvail) {
+          console.log('❌ Sold out');
           document.getElementById('error-soldout-lifetime').style.display = 'block';
           return;
         }
@@ -5203,22 +5220,29 @@
         const ref = localStorage.getItem('sp_ref') || '';
         localStorage.setItem('sp_last_tv', tv);
         localStorage.setItem('sp_last_plan', 'lifetime');
+        console.log('💾 Saved to localStorage');
 
         // Log the attempt
-        fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec', {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {'Content-Type': 'text/plain'},
-          body: JSON.stringify({
-            type: 'lifetime_start',
-            plan: 'lifetime',
-            tv: tv,
-            ref: ref,
-            utm: (localStorage.getItem('sp_utm') || '{}')
-          })
-        });
+        try {
+          fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {'Content-Type': 'text/plain'},
+            body: JSON.stringify({
+              type: 'lifetime_start',
+              plan: 'lifetime',
+              tv: tv,
+              ref: ref,
+              utm: (localStorage.getItem('sp_utm') || '{}')
+            })
+          });
+          console.log('📊 Tracking logged');
+        } catch(err) {
+          console.warn('⚠️ Tracking failed:', err);
+        }
 
         // All validation passed - redirect to PayPal
+        console.log('✅ Opening PayPal...');
         window.open('https://www.paypal.com/ncp/payment/436WMS3WRY2ZL', '_blank');
       });
     })();
@@ -6031,8 +6055,8 @@ if ('serviceWorker' in navigator) {
 </script>
 -->
 
-<!-- TEMPORARY TEST: Cookie Consent Banner disabled for mobile scroll debugging -->
-<!--<div id="cookie-consent-banner">
+<!-- Cookie Consent Banner - Re-enabled after fixing scroll issue -->
+<div id="cookie-consent-banner">
   <div class="cookie-consent-container">
     <div class="cookie-consent-text">
       <h3>🍪 Cookies</h3>
@@ -6092,8 +6116,7 @@ if ('serviceWorker' in navigator) {
       <button id="cookie-save-preferences" class="cookie-consent-btn cookie-consent-btn-accept">Save Preferences</button>
     </div>
   </div>
-</div>-->
-<!-- END TEMPORARY TEST: Cookie banner and modal commented out -->
+</div>
 
 </body>
 
