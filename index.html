@@ -4809,61 +4809,13 @@
         { code: 'id', name: 'Bahasa Indonesia' }
       ];
 
+      /* TEMPORARY TEST: Disable language dropdown Google Translate loading */
       languages.forEach(lang => {
         const btn = document.createElement('button');
         btn.setAttribute('data-lang', lang.code);
         btn.textContent = lang.name;
         btn.addEventListener('click', function() {
-          // Save language preference
-          localStorage.setItem('sp_lang', lang.code);
-
-          // Set Google Translate cookie
-          const target = (lang.code === 'zh') ? 'zh-CN' : lang.code;
-          const value = '/en/' + target;
-          document.cookie = 'googtrans=' + value + '; path=/; max-age=31536000';
-
-          // Update HTML attributes
-          document.documentElement.lang = target;
-          document.documentElement.dir = (lang.code === 'ar') ? 'rtl' : 'ltr';
-
-          // Update hidden select
-          const hiddenSelect = document.getElementById('langSel');
-          if (hiddenSelect) {
-            hiddenSelect.value = lang.code;
-          }
-
-          // Load Google Translate if not already loaded and not English
-          if (lang.code !== 'en' && !window.google) {
-            if (!window.__gte_loading) {
-              window.__gte_loading = true;
-              const script = document.createElement('script');
-              script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-              script.async = true;
-              script.onload = function() {
-                // Reload page to apply translation
-                setTimeout(() => window.location.reload(), 100);
-              };
-              document.head.appendChild(script);
-            }
-          } else if (lang.code === 'en') {
-            // Clear Google Translate cookie for English
-            document.cookie = 'googtrans=; path=/; max-age=0';
-            // Reload page to remove translation
-            window.location.reload();
-          } else {
-            // Google Translate already loaded, just reload
-            window.location.reload();
-          }
-
-          // Track event if analytics available
-          if (typeof trackEvent === 'function') {
-            trackEvent('language_change', {
-              language: lang.code,
-              language_name: lang.name
-            });
-          }
-
-          // Close dropdown
+          // DISABLED FOR TESTING - just close dropdown
           close();
         });
         langMenu.appendChild(btn);
@@ -4993,7 +4945,8 @@
 
       function applyDirLang(lang){ document.documentElement.lang=(lang==='zh')?'zh-CN':lang; document.documentElement.dir=(lang==='ar')?'rtl':'ltr'; }
 
-      window.googleTranslateElementInit=function(){ if(!window.google||!google.translate)return; new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'ar,de,es,fr,it,ru,zh-CN,pt,tr,ja,ko,vi,th,hi,id',autoDisplay:false},'google_translate_container'); };
+      /* TEMPORARY TEST: Disable Google Translate to diagnose mobile scroll crash */
+      /*window.googleTranslateElementInit=function(){ if(!window.google||!google.translate)return; new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'ar,de,es,fr,it,ru,zh-CN,pt,tr,ja,ko,vi,th,hi,id',autoDisplay:false},'google_translate_container'); };
 
       function loadGTE(){ if(window.__gte_loading || window.google) return; window.__gte_loading=true; const s=document.createElement('script'); s.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'; s.async=true; document.head.appendChild(s); }
 
@@ -5001,7 +4954,8 @@
 
       sel.value=code; setGoogTrans(code); applyDirLang(code); if(code!=='en') loadGTE();
 
-      sel.addEventListener('change',e=>{ const v=e.target.value; localStorage.setItem(LANG_KEY,v); setGoogTrans(v); applyDirLang(v); if(v!=='en') loadGTE(); location.reload(); });
+      sel.addEventListener('change',e=>{ const v=e.target.value; localStorage.setItem(LANG_KEY,v); setGoogTrans(v); applyDirLang(v); if(v!=='en') loadGTE(); location.reload(); });*/
+      /* END TEMPORARY TEST */
 
     })();
 
