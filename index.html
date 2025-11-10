@@ -5242,15 +5242,19 @@
   function updateJumpNavVisibility() {
     if (!ticking) {
       window.requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        const heroHeight = 600; // approximate hero height
-        
-        if (scrollY > heroHeight) {
-          jumpNav.classList.add('visible');
-        } else {
-          jumpNav.classList.remove('visible');
+        try {
+          const scrollY = window.scrollY;
+          const heroHeight = 600; // approximate hero height
+
+          if (scrollY > heroHeight) {
+            jumpNav.classList.add('visible');
+          } else {
+            jumpNav.classList.remove('visible');
+          }
+        } catch(e) {
+          // Silently fail - don't break page on scroll
         }
-        
+
         ticking = false;
       });
       ticking = true;
@@ -5259,25 +5263,31 @@
 
   // Update active link based on scroll position
   function updateActiveLink() {
-    const scrollY = window.scrollY + 150; // offset for sticky nav
-    
-    let currentSection = '';
-    
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      
-      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-        currentSection = section.getAttribute('id');
-      }
-    });
-    
-    jumpLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${currentSection}`) {
-        link.classList.add('active');
-      }
-    });
+    try {
+      const scrollY = window.scrollY + 150; // offset for sticky nav
+
+      let currentSection = '';
+
+      sections.forEach(section => {
+        if (!section) return;
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+
+      jumpLinks.forEach(link => {
+        if (!link) return;
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active');
+        }
+      });
+    } catch(e) {
+      // Silently fail - don't break page on scroll
+    }
   }
 
   // Smooth scroll to sections
@@ -5299,10 +5309,15 @@
     });
   });
 
-  // Listen for scroll events
+  // Listen for scroll events with error handling
   window.addEventListener('scroll', () => {
-    updateJumpNavVisibility();
-    updateActiveLink();
+    try {
+      updateJumpNavVisibility();
+      updateActiveLink();
+    } catch(e) {
+      // Prevent scroll errors from breaking the page
+      console.error('Scroll handler error:', e);
+    }
   }, { passive: true });
 
   // Initial check
