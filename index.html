@@ -1800,9 +1800,9 @@
   <link rel="stylesheet" href="/assets/performance.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/assets/performance.css"></noscript>
 
-  <!--TEMPORARY TEST: Cookie Consent disabled for mobile scroll debugging -->
-  <!--<link rel="stylesheet" href="/assets/cookie-consent.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/assets/cookie-consent.css"></noscript>-->
+  <!-- Cookie Consent CSS - Re-enabled after fixing scroll issue -->
+  <link rel="stylesheet" href="/assets/cookie-consent.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/cookie-consent.css"></noscript>
 
   <!-- AI Chatbot (async) -->
   <link rel="stylesheet" href="/assets/chatbot.css" media="print" onload="this.media='all'">
@@ -5150,6 +5150,7 @@
 
 
     // ===== LIFETIME BUTTON VALIDATION =====
+    // Safari-compatible: No async/await before window.open() to avoid popup blocker
 
     (function(){
       const lifetimeBtn = document.getElementById('btn-lifetime-paypal');
@@ -5163,9 +5164,9 @@
 
       console.log('✅ Lifetime button handler attached');
 
-      lifetimeBtn.addEventListener('click', async function(e){
+      lifetimeBtn.addEventListener('click', function(e){
         console.log('🔵 Lifetime button clicked');
-        e.preventDefault(); // Prevent any default behavior
+        e.preventDefault();
 
         const tv = (tvInput && tvInput.value || '').trim();
         const consentOk = consentCheck && consentCheck.checked;
@@ -5191,59 +5192,59 @@
           return;
         }
 
-        // Check availability
-        console.log('🔄 Checking availability...');
-        let okAvail = true;
-        try {
-          const res = await fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec?fn=lt_status', {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-store'
-          });
-
-          if(res.ok) {
-            const j = await res.json();
-            okAvail = Number(j.claimed || 0) < 350; // Fixed: should be 350 not 100
-            console.log('✅ Availability check:', okAvail, 'Claimed:', j.claimed);
-          }
-        } catch(err) {
-          console.warn('⚠️ Availability check failed, allowing purchase:', err);
-        }
-
-        if(!okAvail) {
-          console.log('❌ Sold out');
-          document.getElementById('error-soldout-lifetime').style.display = 'block';
-          return;
-        }
-
-        // Store for tracking
+        // Store for tracking BEFORE opening PayPal (synchronous)
         const ref = localStorage.getItem('sp_ref') || '';
         localStorage.setItem('sp_last_tv', tv);
         localStorage.setItem('sp_last_plan', 'lifetime');
         console.log('💾 Saved to localStorage');
 
-        // Log the attempt
-        try {
-          fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec', {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {'Content-Type': 'text/plain'},
-            body: JSON.stringify({
-              type: 'lifetime_start',
-              plan: 'lifetime',
-              tv: tv,
-              ref: ref,
-              utm: (localStorage.getItem('sp_utm') || '{}')
-            })
-          });
-          console.log('📊 Tracking logged');
-        } catch(err) {
-          console.warn('⚠️ Tracking failed:', err);
+        // CRITICAL FOR SAFARI: Open PayPal IMMEDIATELY (synchronous)
+        // Safari blocks window.open() after async operations
+        console.log('✅ Opening PayPal...');
+        const paypalWindow = window.open('https://www.paypal.com/ncp/payment/436WMS3WRY2ZL', '_blank');
+
+        if (!paypalWindow) {
+          console.error('❌ Popup blocked! Please allow popups for this site.');
+          alert('Popup was blocked. Please allow popups and try again.');
+          return;
         }
 
-        // All validation passed - redirect to PayPal
-        console.log('✅ Opening PayPal...');
-        window.open('https://www.paypal.com/ncp/payment/436WMS3WRY2ZL', '_blank');
+        // Check availability and log tracking AFTER window opens (non-blocking)
+        // This won't affect the PayPal window that's already open
+        fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec?fn=lt_status', {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'no-store'
+        }).then(function(res){
+          if(res.ok) {
+            return res.json();
+          }
+        }).then(function(j){
+          if(j) {
+            const claimed = Number(j.claimed || 0);
+            console.log('📊 Availability: ' + claimed + '/350 claimed');
+          }
+        }).catch(function(err){
+          console.warn('⚠️ Availability check failed:', err);
+        });
+
+        // Log tracking (non-blocking)
+        fetch('https://script.google.com/macros/s/AKfycbyrv-tCAhfPbr1qRvMYqu55Iqlof9kgsvN_QjjWrQ7SHxl5suoSRMew7vAZ7rR05coasg/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {'Content-Type': 'text/plain'},
+          body: JSON.stringify({
+            type: 'lifetime_start',
+            plan: 'lifetime',
+            tv: tv,
+            ref: ref,
+            utm: (localStorage.getItem('sp_utm') || '{}')
+          })
+        }).then(function(){
+          console.log('📊 Tracking logged');
+        }).catch(function(err){
+          console.warn('⚠️ Tracking failed:', err);
+        });
       });
     })();
 
