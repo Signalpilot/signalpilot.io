@@ -2828,10 +2828,20 @@
               box-shadow: 0 6px 20px rgba(91,138,255,0.4);
             }
 
+            .carousel-item {
+              cursor: zoom-in !important;
+            }
+
             .carousel-item:hover {
               border-color: var(--brand);
               box-shadow: 0 8px 32px rgba(91,138,255,0.3);
               transition: all 0.3s ease;
+              transform: scale(1.02);
+            }
+
+            .carousel-item img {
+              cursor: zoom-in !important;
+              pointer-events: auto !important;
             }
 
             /* Mobile: Hide arrows, optimize gap for touch */
@@ -2854,7 +2864,7 @@
               left: 0;
               width: 100%;
               height: 100%;
-              z-index: 9999;
+              z-index: 99999;
             }
 
             #carousel-lightbox.active {
@@ -2875,7 +2885,7 @@
 
             .lightbox-content {
               position: relative;
-              z-index: 10000;
+              z-index: 100000;
               max-width: 95vw;
               max-height: 95vh;
               display: flex;
@@ -3132,18 +3142,33 @@
               // Carousel item click handlers - stop auto-scroll and open lightbox
               items.forEach((item, index) => {
                 item.style.cursor = 'zoom-in';
-                item.addEventListener('click', (e) => {
+
+                // Add click handler to both item and image
+                const clickHandler = (e) => {
                   // Don't trigger if clicking on navigation buttons
                   if (e.target.closest('#carousel-prev') || e.target.closest('#carousel-next')) {
                     return;
                   }
+                  e.preventDefault();
                   e.stopPropagation();
                   clearInterval(autoScrollInterval);
+
                   const img = item.querySelector('img');
-                  if (img) {
+                  if (img && img.src) {
+                    console.log('Opening lightbox for image:', img.alt);
                     openLightbox(img.src, img.alt, index);
                   }
-                });
+                };
+
+                item.addEventListener('click', clickHandler);
+
+                // Also add to the image directly
+                const img = item.querySelector('img');
+                if (img) {
+                  img.style.cursor = 'zoom-in';
+                  img.style.pointerEvents = 'auto';
+                  img.addEventListener('click', clickHandler);
+                }
               });
 
               // Lightbox functionality
