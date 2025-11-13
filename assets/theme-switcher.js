@@ -9,9 +9,9 @@
   // Create theme switcher styles
   const styles = `
     .sp-theme-toggle {
-      position: fixed;
-      bottom: 6.5rem;
-      right: 2rem;
+      position: fixed !important;
+      bottom: 6.5rem !important;
+      right: 2rem !important;
       width: 60px;
       height: 60px;
       border-radius: 50%;
@@ -26,6 +26,9 @@
       justify-content: center;
       box-shadow: 0 4px 12px rgba(0,0,0,.3);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
     }
 
     .sp-theme-toggle:hover {
@@ -54,37 +57,46 @@
     /* Tablet - align with chatbot */
     @media (max-width: 768px) {
       .sp-theme-toggle {
-        bottom: max(5.5rem, calc(5.25rem + env(safe-area-inset-bottom)));
-        right: 1rem;
-        width: 48px;
-        height: 48px;
-        font-size: 1.3rem;
+        bottom: max(5.5rem, calc(5.25rem + env(safe-area-inset-bottom))) !important;
+        right: 1rem !important;
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 1.3rem !important;
         -webkit-tap-highlight-color: transparent;
-        position: fixed; /* Ensure sticky on mobile */
+        position: fixed !important; /* Ensure sticky on mobile */
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
       }
     }
 
     /* Small mobile screens - make smaller to save space */
     @media (max-width: 480px) {
       .sp-theme-toggle {
-        bottom: max(5.5rem, calc(5.25rem + env(safe-area-inset-bottom)));
-        right: 1rem;
-        width: 48px;
-        height: 48px;
-        font-size: 1.2rem;
-        position: fixed; /* Ensure sticky on mobile */
+        bottom: max(5.5rem, calc(5.25rem + env(safe-area-inset-bottom))) !important;
+        right: 1rem !important;
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 1.2rem !important;
+        position: fixed !important; /* Ensure sticky on mobile */
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
       }
     }
 
     /* Ultra-small screens - even smaller */
     @media (max-width: 380px) {
       .sp-theme-toggle {
-        bottom: max(5.25rem, calc(5rem + env(safe-area-inset-bottom)));
-        right: 1rem;
-        width: 44px;
-        height: 44px;
-        font-size: 1.1rem;
-        position: fixed; /* Ensure sticky on mobile */
+        bottom: max(5.25rem, calc(5rem + env(safe-area-inset-bottom))) !important;
+        right: 1rem !important;
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 1.1rem !important;
+        position: fixed !important; /* Ensure sticky on mobile */
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
       }
     }
 
