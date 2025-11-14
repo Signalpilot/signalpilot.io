@@ -2506,6 +2506,9 @@
 
           <form id="trialForm" style="max-width:500px;margin:0 auto">
 
+            <!-- Honeypot field - hidden from humans, catches bots -->
+            <input type="text" name="website" id="website" style="position:absolute;left:-5000px" tabindex="-1" autocomplete="off">
+
             <div style="margin-bottom:1.5rem">
               <label for="trialEmail" style="display:block;font-weight:600;margin-bottom:0.5rem;color:var(--text)">
                 Email Address
@@ -6328,6 +6331,7 @@ if ('serviceWorker' in navigator) {
 
   const trialForm = document.getElementById('trialForm');
   const trialSuccess = document.getElementById('trialSuccess');
+  const formLoadTime = Date.now();
 
   if (trialForm) {
     trialForm.addEventListener('submit', async function(e) {
@@ -6338,9 +6342,43 @@ if ('serviceWorker' in navigator) {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Processing...';
 
+      // Anti-spam: Check honeypot field
+      const honeypot = document.getElementById('website');
+      if (honeypot && honeypot.value !== '') {
+        console.log('Spam detected: honeypot filled');
+        return; // Silent fail for bots
+      }
+
+      // Anti-spam: Check submission time (bots submit too fast)
+      const timeSinceLoad = Date.now() - formLoadTime;
+      if (timeSinceLoad < 2000) {
+        console.log('Spam detected: too fast');
+        return; // Silent fail for bots
+      }
+
+      const email = document.getElementById('trialEmail').value.trim();
+      const tvUsername = document.getElementById('trialTvUsername').value.trim();
+
+      // Validate required fields
+      if (!email || !tvUsername) {
+        alert('Please fill in all required fields');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
+
       const formData = {
-        email: document.getElementById('trialEmail').value,
-        tradingview_username: document.getElementById('trialTvUsername').value,
+        email: email,
+        tradingview_username: tvUsername,
         consent: document.getElementById('trialConsent').checked,
         timestamp: new Date().toISOString(),
         source: 'website_trial_form'
