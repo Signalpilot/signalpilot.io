@@ -159,11 +159,28 @@
       background: linear-gradient(135deg, var(--brand), var(--brand-2));
       color: #fff;
       box-shadow: 0 4px 20px rgba(91,138,255,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(91,138,255,0.4);
+      box-shadow: 0 8px 30px rgba(91,138,255,0.5);
     }
 
     .btn-ghost {
@@ -201,17 +218,36 @@
 
     /* Cards */
     .card {
-      background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 2rem;
-      transition: all 0.3s;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
     }
 
     .card:hover {
-      border-color: var(--brand);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
+      border-color: rgba(91,138,255,0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(91,138,255,0.2);
+      background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
     }
 
     /* Grid */
@@ -254,6 +290,26 @@
     .hero {
       padding: 6rem 0 4rem;
       text-align: center;
+      position: relative;
+      background: radial-gradient(ellipse at top, rgba(91,138,255,0.15) 0%, transparent 60%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(91,138,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-subtitle {
@@ -283,22 +339,41 @@
 
     .stat {
       text-align: center;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(135deg, rgba(91,138,255,0.08), rgba(91,138,255,0.02));
+      border: 1px solid rgba(91,138,255,0.2);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-4px);
+      border-color: rgba(91,138,255,0.4);
+      box-shadow: 0 12px 40px rgba(91,138,255,0.2);
     }
 
     .stat-value {
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: 700;
-      background: var(--grad);
+      background: linear-gradient(135deg, #5b8aff, #76ddff, #5b8aff);
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease infinite;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       line-height: 1;
     }
 
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
     .stat-label {
       font-size: 1rem;
       color: var(--muted);
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
+      font-weight: 500;
     }
 
     /* FAQ */
@@ -482,8 +557,8 @@
       </div>
 
       <div style="max-width:800px;margin:0 auto">
-        <div class="card" style="padding:2.5rem;text-align:center;background:linear-gradient(135deg, rgba(91,138,255,0.08), rgba(123,155,255,0.04))">
-          <div class="badge" style="margin-bottom:1.5rem">💸 RECURRING INCOME</div>
+        <div class="card" style="padding:2.5rem;text-align:center;background:linear-gradient(135deg, rgba(91,138,255,0.12), rgba(123,155,255,0.06));border:2px solid rgba(91,138,255,0.3);box-shadow:0 20px 60px rgba(91,138,255,0.25)">
+          <div class="badge" style="margin-bottom:1.5rem;background:rgba(62,213,152,0.2);color:var(--good);font-weight:600;font-size:0.9rem;padding:0.6rem 1.2rem">💸 RECURRING INCOME</div>
           <h3 class="headline md" style="margin-bottom:1.5rem">30% Commission on Every Payment</h3>
           <p style="color:var(--muted);font-size:1.1rem;line-height:1.8;margin-bottom:2rem">
             When someone signs up with your link, you earn <strong style="color:var(--brand)">30% of every subscription payment</strong> they make —
@@ -491,14 +566,14 @@
           </p>
 
           <div class="grid grid-2" style="gap:1.5rem;margin-top:2rem">
-            <div style="background:var(--bg-soft);padding:1.5rem;border-radius:12px;border:1px solid var(--border)">
-              <div style="font-size:2rem;font-weight:700;color:var(--good);margin-bottom:0.5rem">$30/mo</div>
-              <div style="color:var(--muted)">Per Monthly Subscriber</div>
+            <div style="background:linear-gradient(135deg, rgba(62,213,152,0.15), rgba(62,213,152,0.05));padding:1.5rem;border-radius:12px;border:2px solid rgba(62,213,152,0.3);transition:all 0.3s ease">
+              <div style="font-size:2.5rem;font-weight:700;background:linear-gradient(135deg,#3ed598,#2ec98a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem">$30/mo</div>
+              <div style="color:var(--muted);font-weight:500">Per Monthly Subscriber</div>
             </div>
 
-            <div style="background:var(--bg-soft);padding:1.5rem;border-radius:12px;border:1px solid var(--border)">
-              <div style="font-size:2rem;font-weight:700;color:var(--good);margin-bottom:0.5rem">$300/yr</div>
-              <div style="color:var(--muted)">Per Annual Subscriber</div>
+            <div style="background:linear-gradient(135deg, rgba(62,213,152,0.15), rgba(62,213,152,0.05));padding:1.5rem;border-radius:12px;border:2px solid rgba(62,213,152,0.3);transition:all 0.3s ease">
+              <div style="font-size:2.5rem;font-weight:700;background:linear-gradient(135deg,#3ed598,#2ec98a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem">$300/yr</div>
+              <div style="color:var(--muted);font-weight:500">Per Annual Subscriber</div>
             </div>
           </div>
 
@@ -584,7 +659,8 @@
 
       <div class="grid grid-2">
         <div class="card">
-          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">🔗 Unique Tracking Link</h3>
+          <div style="font-size:2.5rem;margin-bottom:1rem">🔗</div>
+          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">Unique Tracking Link</h3>
           <p style="color:var(--muted);line-height:1.7">
             Your personalized affiliate link with <strong style="color:var(--text)">90-day cookie tracking.</strong>
             Anyone who clicks gets attributed to you for 3 months.
@@ -593,7 +669,8 @@
         </div>
 
         <div class="card">
-          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">📈 Real-Time Dashboard</h3>
+          <div style="font-size:2.5rem;margin-bottom:1rem">📈</div>
+          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">Real-Time Dashboard</h3>
           <p style="color:var(--muted);line-height:1.7">
             Track clicks, conversions, earnings, and payouts in real-time. Full analytics and performance metrics.
             <span style="display:block;margin-top:0.5rem;font-size:0.9rem;color:var(--muted-2)">Access via LemonSqueezy affiliate portal</span>
@@ -601,7 +678,8 @@
         </div>
 
         <div class="card">
-          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">🎨 Marketing Assets</h3>
+          <div style="font-size:2.5rem;margin-bottom:1rem">🎨</div>
+          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">Marketing Assets</h3>
           <p style="color:var(--muted);line-height:1.7">
             Banners, graphics, copy templates, and demo videos to help you promote effectively.
             <span style="display:block;margin-top:0.5rem;font-size:0.9rem;color:var(--muted-2)">Provided by Signal Pilot team upon approval</span>
@@ -609,7 +687,8 @@
         </div>
 
         <div class="card">
-          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">💳 Automated Payouts</h3>
+          <div style="font-size:2.5rem;margin-bottom:1rem">💳</div>
+          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">Automated Payouts</h3>
           <p style="color:var(--muted);line-height:1.7">
             Monthly automatic payouts via PayPal or bank transfer. No minimum threshold.
             <span style="display:block;margin-top:0.5rem;font-size:0.9rem;color:var(--muted-2)">Processed automatically by LemonSqueezy</span>
@@ -617,14 +696,16 @@
         </div>
 
         <div class="card">
-          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">📚 Free Access to Platform</h3>
+          <div style="font-size:2.5rem;margin-bottom:1rem">📚</div>
+          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">Free Access to Platform</h3>
           <p style="color:var(--muted);line-height:1.7">
             <strong style="color:var(--good)">Complimentary Signal Pilot license</strong> so you can truly know what you're promoting.
           </p>
         </div>
 
         <div class="card">
-          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">🤝 Dedicated Support</h3>
+          <div style="font-size:2.5rem;margin-bottom:1rem">🤝</div>
+          <h3 style="font-size:1.25rem;margin-bottom:1rem;color:var(--text)">Dedicated Support</h3>
           <p style="color:var(--muted);line-height:1.7">
             Direct line to our team. We help you succeed because your success is ours.
           </p>
@@ -706,9 +787,10 @@
   </section>
 
   <!-- FINAL CTA -->
-  <section id="apply" class="section" style="padding:6rem 0">
-    <div class="container" style="max-width:700px;text-align:center">
-      <div class="badge brand" style="margin-bottom:1.5rem">🚀 READY TO START?</div>
+  <section id="apply" class="section" style="padding:6rem 0;background:radial-gradient(ellipse at center, rgba(91,138,255,0.12) 0%, transparent 70%);position:relative">
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle, rgba(118,221,255,0.08) 0%, transparent 70%);pointer-events:none"></div>
+    <div class="container" style="max-width:700px;text-align:center;position:relative;z-index:1">
+      <div class="badge brand" style="margin-bottom:1.5rem;background:rgba(91,138,255,0.25);font-weight:600;font-size:0.95rem;padding:0.6rem 1.2rem">🚀 READY TO START?</div>
       <h2 class="headline lg" style="margin-bottom:1.5rem">
         Apply to Become an Affiliate
       </h2>
@@ -717,7 +799,7 @@
         We'll review your application within <strong style="color:var(--text)">48 hours</strong> and send you an invite to the LemonSqueezy affiliate portal where you can access your tracking link, dashboard, and marketing materials.
       </p>
 
-      <div style="background:var(--bg-soft);padding:2.5rem;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:2rem">
+      <div style="background:linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));padding:2.5rem;border-radius:var(--radius);border:1px solid rgba(91,138,255,0.3);margin-bottom:2rem;box-shadow:0 12px 40px rgba(0,0,0,0.3)">
         <p style="color:var(--muted);margin-bottom:1.5rem;line-height:1.7">
           <strong style="color:var(--text)">To apply:</strong> Email us at
           <a href="mailto:support@signalpilot.io" style="color:var(--brand);text-decoration:none;font-weight:500">
