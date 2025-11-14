@@ -966,10 +966,28 @@
 
     html[data-theme="light"] .card:hover{border-color:rgba(91,138,255,0.3);box-shadow:0 20px 60px rgba(91,138,255,0.15);background:linear-gradient(180deg,rgba(10,20,40,.05),rgba(10,20,40,.02))}
 
-    /* Indicator card zoom effect */
-    .card.product img{transition:transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)}
+    /* Indicator card clickable cursor */
+    .card.product img{cursor:pointer;transition:opacity 0.3s ease}
 
-    .card.product:hover img{transform:scale(1.1)}
+    .card.product img:hover{opacity:0.8}
+
+    /* Lightbox modal */
+    .lightbox-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+
+    .lightbox-overlay.active{opacity:1;pointer-events:all}
+
+    .lightbox-content{max-width:90vw;max-height:90vh;position:relative;animation:lightboxZoomIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)}
+
+    .lightbox-content img{width:100%;height:100%;object-fit:contain;border-radius:12px;box-shadow:0 40px 120px rgba(0,0,0,0.6)}
+
+    .lightbox-close{position:absolute;top:-50px;right:0;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.2);color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.5rem;font-weight:300;transition:all 0.2s ease;backdrop-filter:blur(10px)}
+
+    .lightbox-close:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);transform:scale(1.1)}
+
+    @keyframes lightboxZoomIn{
+      from{transform:scale(0.8);opacity:0}
+      to{transform:scale(1);opacity:1}
+    }
 
 
 
@@ -6484,10 +6502,59 @@ if ('serviceWorker' in navigator) {
     document.addEventListener('DOMContentLoaded', () => {
       initScrollAnimations();
       initStatsCounter();
+      initLightbox();
     });
   } else {
     initScrollAnimations();
     initStatsCounter();
+    initLightbox();
+  }
+
+  // Lightbox for indicator images
+  function initLightbox() {
+    // Create lightbox container
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox-overlay';
+    lightbox.innerHTML = `
+      <div class="lightbox-content">
+        <button class="lightbox-close" aria-label="Close lightbox">×</button>
+        <img src="" alt="">
+      </div>
+    `;
+    document.body.appendChild(lightbox);
+
+    const lightboxImg = lightbox.querySelector('img');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+
+    // Make all indicator images clickable
+    const indicatorImages = document.querySelectorAll('.card.product img');
+    indicatorImages.forEach(img => {
+      // Only if image has actual src (not placeholder)
+      if (img.src && !img.src.includes('data:image')) {
+        img.addEventListener('click', () => {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt || 'Indicator preview';
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+    });
+
+    // Close lightbox on click outside, close button, or ESC key
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
   }
 })();
 </script>
