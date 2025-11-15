@@ -490,7 +490,27 @@
       overflow-x:hidden;
       position:relative;
       /* Smooth theme transitions */
-      transition:background-color 0.3s ease, color 0.3s ease;
+      transition:background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Smooth transitions for all theme-dependent elements */
+    header,
+    .card,
+    .btn,
+    nav a{
+      transition:all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Scroll progress indicator */
+    .scroll-progress{
+      position:fixed;
+      top:0;
+      left:0;
+      width:0%;
+      height:3px;
+      background:linear-gradient(90deg,var(--brand),var(--accent));
+      z-index:10000;
+      transition:width 0.1s ease-out;
     }
 
     /* MOBILE: Simple, clean mobile setup - NO forced positioning */
@@ -740,11 +760,45 @@
       50%{transform:translate(-40px,-20px) scale(1.15)}
     }
 
+    @keyframes blink{
+      0%,49%{opacity:1}
+      50%,100%{opacity:0}
+    }
+
+    @keyframes drawCheck{
+      to{stroke-dashoffset:0}
+    }
+
+    @keyframes drawX{
+      to{stroke-dashoffset:0}
+    }
+
+    .animated-check.visible path{animation:drawCheck 0.5s ease-out forwards}
+    .animated-x.visible path{animation:drawX 0.5s ease-out forwards}
+
+    /* Micro-interactions: Loading spinner */
+    @keyframes spin{
+      to{transform:rotate(360deg)}
+    }
+
+    .spinner{display:inline-block;width:20px;height:20px;border:3px solid rgba(255,255,255,0.3);border-top-color:var(--brand);border-radius:50%;animation:spin 0.8s linear infinite}
+
+    /* Micro-interactions: Success checkmark pop */
+    @keyframes checkPop{
+      0%{transform:scale(0);opacity:0}
+      50%{transform:scale(1.2)}
+      100%{transform:scale(1);opacity:1}
+    }
+
+    .success-check{animation:checkPop 0.4s cubic-bezier(0.4, 0, 0.2, 1)}
+
 
 
     @media (prefers-reduced-motion: reduce){
 
       .bg-aurora{animation:none}
+
+      #typing-cursor{animation:none;opacity:1}
 
     }
 
@@ -922,7 +976,7 @@
       font-weight:800;
       text-decoration:none;
       cursor:pointer;
-      transition:filter .15s ease, transform .04s ease;
+      transition:all .15s cubic-bezier(0.4, 0, 0.2, 1);
       /* Ensure proper touch targets */
       min-height:44px;
       touch-action:manipulation;
@@ -930,9 +984,10 @@
       /* Performance */
       will-change:transform;
       backface-visibility:hidden;
+      position:relative;
     }
 
-    .btn:active{transform:translateY(1px)}
+    .btn:active{transform:translateY(3px) scale(0.98);box-shadow:0 1px 4px rgba(0,0,0,0.3) !important}
 
     .btn-primary{background:linear-gradient(115deg,var(--brand),var(--brand-2));color:#fff;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(91,138,255,0.3)}
 
@@ -966,10 +1021,28 @@
 
     html[data-theme="light"] .card:hover{border-color:rgba(91,138,255,0.3);box-shadow:0 20px 60px rgba(91,138,255,0.15);background:linear-gradient(180deg,rgba(10,20,40,.05),rgba(10,20,40,.02))}
 
-    /* Indicator card zoom effect */
-    .card.product img{transition:transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)}
+    /* Indicator card clickable cursor */
+    .card.product img{cursor:pointer;transition:opacity 0.3s ease}
 
-    .card.product:hover img{transform:scale(1.1)}
+    .card.product img:hover{opacity:0.8}
+
+    /* Lightbox modal */
+    .lightbox-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+
+    .lightbox-overlay.active{opacity:1;pointer-events:all}
+
+    .lightbox-content{max-width:90vw;max-height:90vh;position:relative;animation:lightboxZoomIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)}
+
+    .lightbox-content img{width:100%;height:100%;object-fit:contain;border-radius:12px;box-shadow:0 40px 120px rgba(0,0,0,0.6)}
+
+    .lightbox-close{position:absolute;top:-50px;right:0;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.2);color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.5rem;font-weight:300;transition:all 0.2s ease;backdrop-filter:blur(10px)}
+
+    .lightbox-close:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);transform:scale(1.1)}
+
+    @keyframes lightboxZoomIn{
+      from{transform:scale(0.8);opacity:0}
+      to{transform:scale(1);opacity:1}
+    }
 
 
 
@@ -2099,6 +2172,9 @@
 
 <body>
 
+<!-- Scroll progress indicator -->
+<div class="scroll-progress" aria-hidden="true"></div>
+
 <div class="bg-stars" aria-hidden="true"></div>
 <canvas id="constellations" class="sp-constellations" aria-hidden="true"></canvas>
 
@@ -2213,9 +2289,9 @@
 
     <section id="main-content" class="hero" style="position:relative;overflow:hidden">
 
-      <!-- Animated gradient orbs -->
-      <div style="position:absolute;top:10%;left:10%;width:500px;height:500px;background:radial-gradient(circle,rgba(91,138,255,0.15) 0%,transparent 70%);pointer-events:none;filter:blur(60px);animation:floatOrb1 20s ease-in-out infinite"></div>
-      <div style="position:absolute;bottom:20%;right:15%;width:400px;height:400px;background:radial-gradient(circle,rgba(118,221,255,0.12) 0%,transparent 70%);pointer-events:none;filter:blur(50px);animation:floatOrb2 15s ease-in-out infinite"></div>
+      <!-- Animated gradient orbs with parallax -->
+      <div id="parallax-orb-1" style="position:absolute;top:10%;left:10%;width:500px;height:500px;background:radial-gradient(circle,rgba(91,138,255,0.15) 0%,transparent 70%);pointer-events:none;filter:blur(60px);animation:floatOrb1 20s ease-in-out infinite;will-change:transform"></div>
+      <div id="parallax-orb-2" style="position:absolute;bottom:20%;right:15%;width:400px;height:400px;background:radial-gradient(circle,rgba(118,221,255,0.12) 0%,transparent 70%);pointer-events:none;filter:blur(50px);animation:floatOrb2 15s ease-in-out infinite;will-change:transform"></div>
 
       <div class="container" style="position:relative;z-index:1">
 
@@ -2228,7 +2304,7 @@
           </h1>
 
           <p style="color:var(--muted);font-size:1.15rem;line-height:1.6;max-width:700px;margin:1.5rem auto 0">
-            Non-repainting cycle detection • 7 premium indicators for serious traders
+            Non-repainting cycle detection • 7 premium indicators for <span id="typed-text" style="color:var(--brand);font-weight:600">serious traders</span><span id="typing-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
           </p>
 
           <!-- Hero CTAs -->
@@ -4054,6 +4130,99 @@
       }
     })();
     </script>
+
+
+    <!-- COMPARISON TABLE -->
+
+    <section class="section" style="background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 50%,var(--bg) 100%)">
+
+      <div class="container stack">
+
+        <h2 class="headline lg" style="text-align:center;margin-bottom:1rem">How We Compare</h2>
+
+        <p class="note" style="text-align:center;max-width:68ch;margin:0 auto 3rem;font-size:1.1rem">
+          Not all TradingView indicators are created equal. Here's what sets Signal Pilot apart.
+        </p>
+
+        <div style="max-width:900px;margin:0 auto;overflow-x:auto">
+          <table class="comparison-table" style="width:100%;border-collapse:separate;border-spacing:0">
+            <thead>
+              <tr>
+                <th style="text-align:left;padding:1.5rem 1rem;font-size:1.1rem;color:var(--text);border-bottom:2px solid var(--border)">Feature</th>
+                <th style="text-align:center;padding:1.5rem 1rem;font-size:1.1rem;background:linear-gradient(135deg,rgba(91,138,255,.15),rgba(91,138,255,.08));border-bottom:2px solid var(--brand);position:relative">
+                  <div style="font-weight:800;color:var(--brand);text-transform:uppercase;letter-spacing:.05em">Signal Pilot</div>
+                  <div style="position:absolute;top:-8px;right:1rem;background:linear-gradient(135deg,#3ed598,#2ec98a);color:#fff;padding:.3rem .8rem;border-radius:999px;font-size:.7rem;font-weight:800;box-shadow:0 4px 12px rgba(62,213,152,.4)">BEST</div>
+                </th>
+                <th style="text-align:center;padding:1.5rem 1rem;font-size:1.1rem;color:var(--muted);border-bottom:2px solid var(--border)">Others</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">Non-Repainting Signals</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">$100 Repaint Challenge</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">7-Day Money-Back Guarantee</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">Free Education Hub (82 Lessons)</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">Lifetime Access Option</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">All-in-One Indicators (OmniDeck)</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="text-align:center;margin-top:2.5rem;font-size:1rem;color:var(--muted-2)">
+          <strong style="color:var(--brand)">No lookahead bias. No repainting. No BS.</strong><br>
+          Just professional tools that work exactly as advertised.
+        </p>
+
+      </div>
+
+    </section>
 
 
     <!-- PRICING -->
@@ -6484,10 +6653,214 @@ if ('serviceWorker' in navigator) {
     document.addEventListener('DOMContentLoaded', () => {
       initScrollAnimations();
       initStatsCounter();
+      initLightbox();
+      initParallax();
+      initTypingEffect();
+      initComparisonTable();
+      initScrollProgress();
     });
   } else {
     initScrollAnimations();
     initStatsCounter();
+    initLightbox();
+    initParallax();
+    initTypingEffect();
+    initComparisonTable();
+    initScrollProgress();
+  }
+
+  // Scroll progress indicator
+  function initScrollProgress() {
+    const progressBar = document.querySelector('.scroll-progress');
+    if (!progressBar) return;
+
+    let ticking = false;
+
+    function updateProgress() {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      // Calculate scroll percentage
+      const scrollable = documentHeight - windowHeight;
+      const scrolled = (scrollTop / scrollable) * 100;
+
+      progressBar.style.width = Math.min(scrolled, 100) + '%';
+
+      ticking = false;
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', requestTick, { passive: true });
+    window.addEventListener('resize', requestTick, { passive: true });
+
+    // Initial update
+    updateProgress();
+  }
+
+  // Comparison table animation on scroll
+  function initComparisonTable() {
+    const checks = document.querySelectorAll('.animated-check');
+    const xmarks = document.querySelectorAll('.animated-x');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
+          // Stagger animations slightly for each row
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    checks.forEach(check => observer.observe(check));
+    xmarks.forEach(x => observer.observe(x));
+  }
+
+  // Typing animation for hero headline
+  function initTypingEffect() {
+    const textElement = document.getElementById('typed-text');
+    if (!textElement) return;
+
+    const words = [
+      'serious traders',
+      'day traders',
+      'swing traders',
+      'scalpers',
+      'position traders',
+      'all traders'
+    ];
+
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+
+    function type() {
+      const currentWord = words[wordIndex];
+
+      if (isDeleting) {
+        // Delete character
+        textElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+      } else {
+        // Add character
+        textElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100;
+      }
+
+      // If word is complete
+      if (!isDeleting && charIndex === currentWord.length) {
+        // Pause at end of word
+        typingSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        // Move to next word
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typingSpeed = 500;
+      }
+
+      setTimeout(type, typingSpeed);
+    }
+
+    // Start typing after a brief delay
+    setTimeout(type, 1000);
+  }
+
+  // Parallax scroll effect for gradient orbs
+  function initParallax() {
+    const orb1 = document.getElementById('parallax-orb-1');
+    const orb2 = document.getElementById('parallax-orb-2');
+
+    if (!orb1 || !orb2) return;
+
+    let ticking = false;
+
+    function updateParallax() {
+      const scrolled = window.pageYOffset;
+
+      // Move orb1 at 0.3x speed downward
+      const orb1Offset = scrolled * 0.3;
+      orb1.style.transform = `translateY(${orb1Offset}px)`;
+
+      // Move orb2 at 0.5x speed downward (different speed for depth)
+      const orb2Offset = scrolled * 0.5;
+      orb2.style.transform = `translateY(${orb2Offset}px)`;
+
+      ticking = false;
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }
+
+    // Listen to scroll with requestAnimationFrame for performance
+    window.addEventListener('scroll', requestTick, { passive: true });
+
+    // Initial position
+    updateParallax();
+  }
+
+  // Lightbox for indicator images
+  function initLightbox() {
+    // Create lightbox container
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox-overlay';
+    lightbox.innerHTML = `
+      <div class="lightbox-content">
+        <button class="lightbox-close" aria-label="Close lightbox">×</button>
+        <img src="" alt="">
+      </div>
+    `;
+    document.body.appendChild(lightbox);
+
+    const lightboxImg = lightbox.querySelector('img');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+
+    // Make all indicator images clickable
+    const indicatorImages = document.querySelectorAll('.card.product img');
+    indicatorImages.forEach(img => {
+      // Only if image has actual src (not placeholder)
+      if (img.src && !img.src.includes('data:image')) {
+        img.addEventListener('click', () => {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt || 'Indicator preview';
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+    });
+
+    // Close lightbox on click outside, close button, or ESC key
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
   }
 })();
 </script>
