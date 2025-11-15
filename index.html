@@ -878,6 +878,11 @@
       50%{box-shadow:0 0 60px rgba(91,138,255,.4),0 0 120px rgba(91,138,255,.2)}
     }
 
+    @keyframes badgePulse{
+      0%,100%{transform:translateX(-50%) scale(1);box-shadow:0 4px 16px rgba(249,162,60,.5)}
+      50%{transform:translateX(-50%) scale(1.05);box-shadow:0 6px 24px rgba(249,162,60,.7)}
+    }
+
     @keyframes floatOrb1{
       0%,100%{transform:translate(0,0) scale(1)}
       33%{transform:translate(30px,-30px) scale(1.1)}
@@ -1162,7 +1167,7 @@
 
     .btn-primary:hover::before{left:100%}
 
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(91,138,255,0.5)}
+    .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 30px rgba(91,138,255,0.5)}
 
     .btn-ghost{color:#9fdcff;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
 
@@ -1174,7 +1179,61 @@
 
     .btn-sm{padding:.5rem .8rem; font-size:.92rem; line-height:1.1}
 
+    /* Form validation checkmarks */
+    .input-wrapper{position:relative}
 
+    .input-wrapper input.valid{
+      border-color:#3ed598 !important;
+      background:rgba(62,213,152,.05) !important;
+    }
+
+    .input-wrapper input.valid ~ .checkmark{
+      opacity:1;
+      transform:scale(1);
+    }
+
+    .checkmark{
+      position:absolute;
+      right:12px;
+      top:50%;
+      transform:translateY(-50%) scale(0);
+      width:20px;
+      height:20px;
+      opacity:0;
+      transition:all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      pointer-events:none;
+    }
+
+    .checkmark svg{
+      width:100%;
+      height:100%;
+    }
+
+    /* Loading state for buttons */
+    .btn-loading{
+      position:relative;
+      pointer-events:none;
+      opacity:0.7;
+    }
+
+    .btn-loading::after{
+      content:'';
+      position:absolute;
+      width:16px;
+      height:16px;
+      top:50%;
+      left:50%;
+      margin-left:-8px;
+      margin-top:-8px;
+      border:2px solid #ffffff;
+      border-radius:50%;
+      border-top-color:transparent;
+      animation:spin 0.6s linear infinite;
+    }
+
+    @keyframes spin{
+      to{transform:rotate(360deg)}
+    }
 
     .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:16px;padding:1.05rem;box-shadow:var(--shadow);min-width:0;position:relative;overflow:hidden;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
 
@@ -2750,7 +2809,7 @@
             <div style="text-align:center;position:relative">
               <div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;background:linear-gradient(135deg,#5b8aff,#76ddff);border-radius:50%;font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:1rem">2</div>
               <div style="font-weight:700;color:var(--text);margin-bottom:0.5rem;font-size:1.05rem">Get Access (Within 24 hours)</div>
-              <div style="font-size:0.9rem;color:var(--muted);line-height:1.5">Receive TradingView invite with all 7 indicators activated.</div>
+              <div style="font-size:0.9rem;color:var(--muted);line-height:1.5">Receive TradingView invite with all <span data-count="7">7</span> indicators activated.</div>
             </div>
 
             <div style="text-align:center;position:relative">
@@ -3494,7 +3553,7 @@
 
       <div class="container stack">
 
-        <h2 class="headline lg" style="text-align:center;max-width:20ch;margin-left:auto;margin-right:auto;margin-top:3rem">The Elite Seven</h2>
+        <h2 class="headline lg" style="text-align:center;max-width:20ch;margin-left:auto;margin-right:auto;margin-top:3rem">The Elite <span data-count="7">7</span></h2>
 
         <p class="note" style="text-align:center;max-width:68ch;margin:0 auto 1.5rem">
           Four-layer cycle detection (Pentarch™) plus six specialized analysis tools. Professional-grade market structure analysis.
@@ -3554,10 +3613,10 @@
             <div class="title mod">
               <h3 style="white-space:nowrap">SP — Omnideck</h3>
             </div>
-            <div class="punch">Ten systems combined into one overlay indicator.</div>
+            <div class="punch"><span data-count="10">10</span> systems combined into one overlay indicator.</div>
             <button class="btn btn-ghost btn-sm toggle-details" data-target="omnideck-details" style="margin-top:.5rem">Details ▼</button>
             <div id="omnideck-details" class="indicator-details" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
-              <p style="font-size:.95rem;line-height:1.7;color:var(--muted);margin-bottom:1rem"><strong>10 powerful tools in one clean overlay.</strong> Instead of cluttering your chart, get everything you need in a single indicator:</p>
+              <p style="font-size:.95rem;line-height:1.7;color:var(--muted);margin-bottom:1rem"><strong><span data-count="10">10</span> powerful tools in one clean overlay.</strong> Instead of cluttering your chart, get everything you need in a single indicator:</p>
               <ul style="font-size:.9rem;line-height:1.9;color:var(--muted-2);list-style:none;padding:0">
                 <li>• <strong>TD Sequential</strong> (exhaustion signals) • <strong>Squeeze Cloud</strong> (breakout detection)</li>
                 <li>• <strong>SuperTrend Ensemble</strong> (trend confirmation) • <strong>Bull Market Support Band</strong></li>
@@ -3716,7 +3775,7 @@
             <div class="punch">Four oscillators vote on every bar. Multi-confirmation timing system.</div>
             <button class="btn btn-ghost btn-sm toggle-details" data-target="harmonic-details" style="margin-top:.5rem">Details ▼</button>
             <div id="harmonic-details" class="indicator-details" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
-              <p style="font-size:.95rem;line-height:1.7;color:var(--muted);margin-bottom:1rem"><strong>4 oscillators vote.</strong> Signals only appear when multiple momentum indicators agree:</p>
+              <p style="font-size:.95rem;line-height:1.7;color:var(--muted);margin-bottom:1rem"><strong><span data-count="4">4</span> oscillators vote.</strong> Signals only appear when multiple momentum indicators agree:</p>
               <ul style="font-size:.9rem;line-height:1.9;color:var(--muted-2);list-style:none;padding:0">
                 <li>• Live vote count shows real-time breakdown (e.g., "3 Bulls, 1 Neutral")</li>
                 <li>• Star rating (★ to ★★★★) — more stars = more agreement</li>
@@ -3789,7 +3848,7 @@
                 </li>
                 <li class="comparison-item comparison-item-positive">
                   <span class="comparison-bullet comparison-bullet-positive">•</span>
-                  <span><strong>82 lessons + 50+ page docs</strong> — master your journey</span>
+                  <span><strong><span data-count="82">82</span> lessons + 50+ page docs</strong> — master your journey</span>
                 </li>
               </ul>
             </div>
@@ -4371,9 +4430,13 @@
 
           <!-- MONTHLY -->
 
-          <article class="card plan" id="plan-monthly" data-plan="monthly" role="group" aria-labelledby="plan-monthly-title" style="position:relative">
+          <article class="card plan" id="plan-monthly" data-plan="monthly" role="group" aria-labelledby="plan-monthly-title" style="position:relative;border:2px solid rgba(118,221,255,0.4);box-shadow:0 0 30px rgba(118,221,255,.15)">
 
-            <div class="pill" id="plan-monthly-title">Monthly</div>
+            <div style="position:absolute;top:-12px;left:1rem;background:linear-gradient(135deg,#76ddff,#5bc0de);color:#fff;padding:.4rem .9rem;border-radius:999px;font-weight:800;font-size:.75rem;box-shadow:0 4px 12px rgba(118,221,255,.4);white-space:nowrap">
+              🌊 FLEXIBLE
+            </div>
+
+            <div class="pill" id="plan-monthly-title" style="background:rgba(118,221,255,0.15);color:#76ddff;font-weight:700">Monthly</div>
 
             <div class="price">$99 <span class="pill">/month</span></div>
 
@@ -4393,7 +4456,14 @@
                 <label style="font-weight:600;color:var(--brand);font-size:.9rem;margin-bottom:.5rem;display:block">
                   TradingView Username
                 </label>
-                <input id="tv-monthly" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                <div class="input-wrapper">
+                  <input id="tv-monthly" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;padding-right:3rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                  <div class="checkmark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                </div>
                 <div id="error-tv-monthly" style="display:none;color:#ff6b6b;font-size:.85rem;margin-top:.5rem;font-weight:500">⚠️ TradingView username required</div>
               </div>
 
@@ -4425,13 +4495,13 @@
 
           <!-- YEARLY -->
 
-          <article class="card plan" id="plan-yearly" data-plan="yearly" role="group" aria-labelledby="plan-yearly-title" style="position:relative;border:2px solid var(--brand);box-shadow:0 0 40px rgba(91,138,255,.2);animation:pricingGlow 3s ease-in-out infinite">
+          <article class="card plan" id="plan-yearly" data-plan="yearly" role="group" aria-labelledby="plan-yearly-title" style="position:relative;border:3px solid var(--brand);box-shadow:0 0 60px rgba(91,138,255,.35);animation:pricingGlow 3s ease-in-out infinite;transform:scale(1.05);z-index:2">
 
             <div style="position:absolute;top:-12px;right:1rem;background:linear-gradient(135deg,#3ed598,#2ec98a);color:#fff;padding:.4rem .9rem;border-radius:999px;font-weight:800;font-size:.8rem;box-shadow:0 4px 12px rgba(62,213,152,.4);white-space:nowrap">
-              SAVE $489
+              SAVE <span data-count="489" data-prefix="$">489</span>
             </div>
 
-            <div class="pill" id="plan-yearly-title" style="background:var(--brand);color:#fff">⭐ Most Popular</div>
+            <div class="pill" id="plan-yearly-title" style="background:linear-gradient(135deg,#5b8aff,#764ba2);color:#fff;font-size:.95rem;padding:.7rem 1.2rem">💎 BEST VALUE</div>
 
             <div class="price">
               $699 <span class="pill">/year</span>
@@ -4439,7 +4509,7 @@
 
             <div style="text-align:center;margin:1.5rem 0;padding:1.25rem;background:rgba(62,213,152,.08);border:1px solid rgba(62,213,152,.25);border-radius:8px">
               <p style="font-size:1.1rem;margin:0 0 .5rem 0;font-weight:700">
-                <span style="background:linear-gradient(135deg,#3ed598,#2ec98a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Save $489/year</span>
+                <span style="background:linear-gradient(135deg,#3ed598,#2ec98a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Save <span data-count="489" data-prefix="$">489</span>/year</span>
               </p>
               <p style="font-size:.9rem;color:var(--text);margin:0 0 .25rem 0">
                 Just $58/month equivalent
@@ -4456,7 +4526,14 @@
                 <label style="font-weight:600;color:var(--brand);font-size:.9rem;margin-bottom:.5rem;display:block">
                   TradingView Username
                 </label>
-                <input id="tv-yearly" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                <div class="input-wrapper">
+                  <input id="tv-yearly" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;padding-right:3rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                  <div class="checkmark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                </div>
                 <div id="error-tv-yearly" style="display:none;color:#ff6b6b;font-size:.85rem;margin-top:.5rem;font-weight:500">⚠️ TradingView username required</div>
               </div>
 
@@ -4487,13 +4564,13 @@
 
           <!-- LIFETIME -->
 
-          <article class="card plan" id="plan-lifetime" data-plan="lifetime" role="group" aria-labelledby="plan-lifetime-title" style="position:relative">
+          <article class="card plan" id="plan-lifetime" data-plan="lifetime" role="group" aria-labelledby="plan-lifetime-title" style="position:relative;border:2px solid rgba(249,162,60,0.3)">
 
-            <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#f9a23c,#ff8c42);color:#fff;padding:.4rem .9rem;border-radius:999px;font-weight:800;font-size:.75rem;box-shadow:0 4px 12px rgba(249,162,60,.4);white-space:nowrap;max-width:90%">
-              ⚡ TIER 1 • 150 left
+            <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#f9a23c,#ff8c42);color:#fff;padding:.5rem 1.1rem;border-radius:999px;font-weight:800;font-size:.82rem;box-shadow:0 4px 16px rgba(249,162,60,.5);white-space:nowrap;max-width:90%;animation:badgePulse 2s ease-in-out infinite">
+              ⚡ LIMITED • <span data-count="150">150</span> SLOTS LEFT
             </div>
 
-            <div class="pill" id="plan-lifetime-title">Lifetime Access</div>
+            <div class="pill" id="plan-lifetime-title" style="background:rgba(249,162,60,0.15);color:var(--warn);font-weight:700">Lifetime Access</div>
 
             <div class="price" style="white-space:nowrap"><span id="lifetime-display-price">$1,799</span> <span class="pill">one‑time</span></div>
 
@@ -4518,7 +4595,14 @@
                 <label style="font-weight:600;color:var(--brand);font-size:.9rem;margin-bottom:.5rem;display:block">
                   TradingView Username
                 </label>
-                <input id="tv-lifetime" type="text" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                <div class="input-wrapper">
+                  <input id="tv-lifetime" type="text" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;padding-right:3rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                  <div class="checkmark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                </div>
                 <div id="error-tv-lifetime" style="display:none;color:#ff6b6b;font-size:.85rem;margin-top:.5rem;font-weight:500">⚠️ TradingView username required</div>
               </div>
 
@@ -7015,6 +7099,126 @@ if ('serviceWorker' in navigator) {
     }
 
     type();
+  })();
+
+  // Form field validation with success checkmarks
+  (function() {
+    const inputs = ['tv-monthly', 'tv-yearly', 'tv-lifetime'];
+
+    inputs.forEach(id => {
+      const input = document.getElementById(id);
+      if (!input) return;
+
+      input.addEventListener('input', function() {
+        const value = this.value.trim();
+        // Valid if at least 3 characters
+        if (value.length >= 3) {
+          this.classList.add('valid');
+        } else {
+          this.classList.remove('valid');
+        }
+      });
+
+      // Also check on blur
+      input.addEventListener('blur', function() {
+        const value = this.value.trim();
+        if (value.length >= 3) {
+          this.classList.add('valid');
+        }
+      });
+    });
+  })();
+
+  // Loading states for payment buttons
+  (function() {
+    const paymentButtons = [
+      'btn-monthly-paypal',
+      'btn-yearly-paypal',
+      'btn-lifetime-paypal'
+    ];
+
+    paymentButtons.forEach(id => {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+
+      btn.addEventListener('click', function() {
+        // Add loading state
+        this.classList.add('btn-loading');
+        const originalText = this.innerHTML;
+        this.innerHTML = '⏳ Processing...';
+
+        // Remove loading state after 5 seconds (fallback)
+        setTimeout(() => {
+          this.classList.remove('btn-loading');
+          this.innerHTML = originalText;
+        }, 5000);
+      });
+    });
+  })();
+
+  // Animated number count-ups on scroll into view
+  (function() {
+    function animateNumber(element, start, end, duration) {
+      const range = end - start;
+      const increment = range / (duration / 16); // 60fps
+      let current = start;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= end) {
+          element.textContent = end;
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current);
+        }
+      }, 16);
+    }
+
+    // Intersection Observer to trigger animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+          entry.target.classList.add('animated');
+          const targetNumber = parseInt(entry.target.getAttribute('data-count'));
+          const prefix = entry.target.getAttribute('data-prefix') || '';
+          const suffix = entry.target.getAttribute('data-suffix') || '';
+
+          // Animate with prefix/suffix support
+          const tempContent = entry.target.textContent;
+          const range = targetNumber;
+          const increment = range / 90; // 1.5 seconds at 60fps
+          let current = 0;
+
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= targetNumber) {
+              entry.target.textContent = prefix + targetNumber + suffix;
+              clearInterval(timer);
+            } else {
+              entry.target.textContent = prefix + Math.floor(current) + suffix;
+            }
+          }, 16);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    // Auto-detect and animate numbers on page load
+    setTimeout(() => {
+      // Find all text containing common numbers and wrap them
+      const numbersToAnimate = [
+        { text: '82', selector: 'contains "82"' },
+        { text: '7', selector: 'contains " 7 "' },
+        { text: '489', selector: 'contains "489"' },
+        { text: '350', selector: 'contains "350"' },
+        { text: '10', selector: 'contains " 10 "' },
+        { text: '4', selector: 'contains " 4 "' }
+      ];
+
+      // Manually observe specific elements we know exist
+      document.querySelectorAll('[data-count]').forEach(el => {
+        observer.observe(el);
+      });
+    }, 100);
   })();
 </script>
 
