@@ -1167,7 +1167,7 @@
 
     .btn-primary:hover::before{left:100%}
 
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(91,138,255,0.5)}
+    .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 30px rgba(91,138,255,0.5)}
 
     .btn-ghost{color:#9fdcff;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06)}
 
@@ -1179,7 +1179,35 @@
 
     .btn-sm{padding:.5rem .8rem; font-size:.92rem; line-height:1.1}
 
+    /* Form validation checkmarks */
+    .input-wrapper{position:relative}
 
+    .input-wrapper input.valid{
+      border-color:#3ed598 !important;
+      background:rgba(62,213,152,.05) !important;
+    }
+
+    .input-wrapper input.valid ~ .checkmark{
+      opacity:1;
+      transform:scale(1);
+    }
+
+    .checkmark{
+      position:absolute;
+      right:12px;
+      top:50%;
+      transform:translateY(-50%) scale(0);
+      width:20px;
+      height:20px;
+      opacity:0;
+      transition:all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      pointer-events:none;
+    }
+
+    .checkmark svg{
+      width:100%;
+      height:100%;
+    }
 
     .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:16px;padding:1.05rem;box-shadow:var(--shadow);min-width:0;position:relative;overflow:hidden;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
 
@@ -4402,7 +4430,14 @@
                 <label style="font-weight:600;color:var(--brand);font-size:.9rem;margin-bottom:.5rem;display:block">
                   TradingView Username
                 </label>
-                <input id="tv-monthly" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                <div class="input-wrapper">
+                  <input id="tv-monthly" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;padding-right:3rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                  <div class="checkmark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                </div>
                 <div id="error-tv-monthly" style="display:none;color:#ff6b6b;font-size:.85rem;margin-top:.5rem;font-weight:500">⚠️ TradingView username required</div>
               </div>
 
@@ -4465,7 +4500,14 @@
                 <label style="font-weight:600;color:var(--brand);font-size:.9rem;margin-bottom:.5rem;display:block">
                   TradingView Username
                 </label>
-                <input id="tv-yearly" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                <div class="input-wrapper">
+                  <input id="tv-yearly" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;padding-right:3rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                  <div class="checkmark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                </div>
                 <div id="error-tv-yearly" style="display:none;color:#ff6b6b;font-size:.85rem;margin-top:.5rem;font-weight:500">⚠️ TradingView username required</div>
               </div>
 
@@ -4527,7 +4569,14 @@
                 <label style="font-weight:600;color:var(--brand);font-size:.9rem;margin-bottom:.5rem;display:block">
                   TradingView Username
                 </label>
-                <input id="tv-lifetime" type="text" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                <div class="input-wrapper">
+                  <input id="tv-lifetime" type="text" placeholder="@your.tradingview" required style="width:100%;padding:.75rem;padding-right:3rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#fff;font-size:1rem">
+                  <div class="checkmark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                </div>
                 <div id="error-tv-lifetime" style="display:none;color:#ff6b6b;font-size:.85rem;margin-top:.5rem;font-weight:500">⚠️ TradingView username required</div>
               </div>
 
@@ -7024,6 +7073,34 @@ if ('serviceWorker' in navigator) {
     }
 
     type();
+  })();
+
+  // Form field validation with success checkmarks
+  (function() {
+    const inputs = ['tv-monthly', 'tv-yearly', 'tv-lifetime'];
+
+    inputs.forEach(id => {
+      const input = document.getElementById(id);
+      if (!input) return;
+
+      input.addEventListener('input', function() {
+        const value = this.value.trim();
+        // Valid if at least 3 characters
+        if (value.length >= 3) {
+          this.classList.add('valid');
+        } else {
+          this.classList.remove('valid');
+        }
+      });
+
+      // Also check on blur
+      input.addEventListener('blur', function() {
+        const value = this.value.trim();
+        if (value.length >= 3) {
+          this.classList.add('valid');
+        }
+      });
+    });
   })();
 </script>
 
