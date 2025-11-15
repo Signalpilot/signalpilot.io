@@ -740,11 +740,18 @@
       50%{transform:translate(-40px,-20px) scale(1.15)}
     }
 
+    @keyframes blink{
+      0%,49%{opacity:1}
+      50%,100%{opacity:0}
+    }
+
 
 
     @media (prefers-reduced-motion: reduce){
 
       .bg-aurora{animation:none}
+
+      #typing-cursor{animation:none;opacity:1}
 
     }
 
@@ -2231,9 +2238,9 @@
 
     <section id="main-content" class="hero" style="position:relative;overflow:hidden">
 
-      <!-- Animated gradient orbs -->
-      <div style="position:absolute;top:10%;left:10%;width:500px;height:500px;background:radial-gradient(circle,rgba(91,138,255,0.15) 0%,transparent 70%);pointer-events:none;filter:blur(60px);animation:floatOrb1 20s ease-in-out infinite"></div>
-      <div style="position:absolute;bottom:20%;right:15%;width:400px;height:400px;background:radial-gradient(circle,rgba(118,221,255,0.12) 0%,transparent 70%);pointer-events:none;filter:blur(50px);animation:floatOrb2 15s ease-in-out infinite"></div>
+      <!-- Animated gradient orbs with parallax -->
+      <div id="parallax-orb-1" style="position:absolute;top:10%;left:10%;width:500px;height:500px;background:radial-gradient(circle,rgba(91,138,255,0.15) 0%,transparent 70%);pointer-events:none;filter:blur(60px);animation:floatOrb1 20s ease-in-out infinite;will-change:transform"></div>
+      <div id="parallax-orb-2" style="position:absolute;bottom:20%;right:15%;width:400px;height:400px;background:radial-gradient(circle,rgba(118,221,255,0.12) 0%,transparent 70%);pointer-events:none;filter:blur(50px);animation:floatOrb2 15s ease-in-out infinite;will-change:transform"></div>
 
       <div class="container" style="position:relative;z-index:1">
 
@@ -2246,7 +2253,7 @@
           </h1>
 
           <p style="color:var(--muted);font-size:1.15rem;line-height:1.6;max-width:700px;margin:1.5rem auto 0">
-            Non-repainting cycle detection • 7 premium indicators for serious traders
+            Non-repainting cycle detection • 7 premium indicators for <span id="typed-text" style="color:var(--brand);font-weight:600">serious traders</span><span id="typing-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
           </p>
 
           <!-- Hero CTAs -->
@@ -6503,11 +6510,105 @@ if ('serviceWorker' in navigator) {
       initScrollAnimations();
       initStatsCounter();
       initLightbox();
+      initParallax();
+      initTypingEffect();
     });
   } else {
     initScrollAnimations();
     initStatsCounter();
     initLightbox();
+    initParallax();
+    initTypingEffect();
+  }
+
+  // Typing animation for hero headline
+  function initTypingEffect() {
+    const textElement = document.getElementById('typed-text');
+    if (!textElement) return;
+
+    const words = [
+      'serious traders',
+      'day traders',
+      'swing traders',
+      'scalpers',
+      'position traders',
+      'all traders'
+    ];
+
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+
+    function type() {
+      const currentWord = words[wordIndex];
+
+      if (isDeleting) {
+        // Delete character
+        textElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+      } else {
+        // Add character
+        textElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100;
+      }
+
+      // If word is complete
+      if (!isDeleting && charIndex === currentWord.length) {
+        // Pause at end of word
+        typingSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        // Move to next word
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typingSpeed = 500;
+      }
+
+      setTimeout(type, typingSpeed);
+    }
+
+    // Start typing after a brief delay
+    setTimeout(type, 1000);
+  }
+
+  // Parallax scroll effect for gradient orbs
+  function initParallax() {
+    const orb1 = document.getElementById('parallax-orb-1');
+    const orb2 = document.getElementById('parallax-orb-2');
+
+    if (!orb1 || !orb2) return;
+
+    let ticking = false;
+
+    function updateParallax() {
+      const scrolled = window.pageYOffset;
+
+      // Move orb1 at 0.3x speed downward
+      const orb1Offset = scrolled * 0.3;
+      orb1.style.transform = `translateY(${orb1Offset}px)`;
+
+      // Move orb2 at 0.5x speed downward (different speed for depth)
+      const orb2Offset = scrolled * 0.5;
+      orb2.style.transform = `translateY(${orb2Offset}px)`;
+
+      ticking = false;
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }
+
+    // Listen to scroll with requestAnimationFrame for performance
+    window.addEventListener('scroll', requestTick, { passive: true });
+
+    // Initial position
+    updateParallax();
   }
 
   // Lightbox for indicator images
