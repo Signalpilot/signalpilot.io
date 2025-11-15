@@ -1070,7 +1070,9 @@
     .pricing-grid .card.plan {
       display:grid;
       grid-template-rows:auto auto 1fr auto; /* header | price | value-box | actions */
-      min-height:800px; /* Reduced from 1200px since we removed feature lists */
+      min-height:850px; /* Increased to accommodate all content */
+      height:100%; /* Ensure all cards stretch to same height */
+      padding-top:1.5rem; /* Extra padding for absolute positioned badges */
     }
 
     /* Pill - force consistent height */
@@ -1128,6 +1130,44 @@
         display:flex;
         flex-direction:column;
         height:auto;
+        min-height:auto;
+        overflow:visible;
+        padding-top:1.5rem;
+      }
+
+      /* Ensure all cards on mobile have proper overflow handling */
+      .card {
+        overflow:visible;
+        margin-bottom:2rem; /* Extra space for badges */
+      }
+
+      /* Ensure content inside cards wraps properly */
+      .card * {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+
+      /* Prevent all sections from overflowing on mobile */
+      .section, .container, .stack, .grid {
+        overflow-x: hidden;
+        max-width: 100%;
+      }
+
+      /* Ensure comparison section doesn't overflow */
+      #comparison-grid, .comparison-container {
+        overflow: visible;
+        max-width: 100%;
+      }
+
+      /* Fix interactive demo on mobile */
+      #comparison-slider {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .comparison-image {
+        overflow: hidden;
       }
     }
 
@@ -1235,13 +1275,16 @@
       to{transform:rotate(360deg)}
     }
 
-    .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:16px;padding:1.05rem;box-shadow:var(--shadow);min-width:0;position:relative;overflow:hidden;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
+    .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:16px;padding:1.05rem;box-shadow:var(--shadow);min-width:0;position:relative;overflow:visible;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
 
-    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--accent));transform:scaleX(0);transition:transform 0.3s ease}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--accent));transform:scaleX(0);transition:transform 0.3s ease;overflow:hidden}
 
     .card:hover::before{transform:scaleX(1)}
 
     .card:hover{border-color:rgba(91,138,255,0.4);transform:translateY(-6px);box-shadow:0 20px 60px rgba(91,138,255,0.2);background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.04))}
+
+    /* Keep overflow:hidden for specific elements that need it */
+    .card img, .card video, #comparison-slider {overflow:hidden}
 
     html[data-theme="light"] .card{border-color:rgba(10,20,40,.10);background:linear-gradient(180deg,rgba(10,20,40,.03),rgba(10,20,40,.01))}
 
@@ -3553,7 +3596,7 @@
 
       <div class="container stack">
 
-        <h2 class="headline lg" style="text-align:center;max-width:20ch;margin-left:auto;margin-right:auto;margin-top:3rem">The Elite <span data-count="7">7</span></h2>
+        <h2 class="headline lg" style="text-align:center;max-width:20ch;margin-left:auto;margin-right:auto;margin-top:3rem">The Elite 7</h2>
 
         <p class="note" style="text-align:center;max-width:68ch;margin:0 auto 1.5rem">
           Four-layer cycle detection (Pentarch™) plus six specialized analysis tools. Professional-grade market structure analysis.
@@ -4110,7 +4153,7 @@
               src="assets/showcase/chart-without.jpg"
               alt="Chart without Signal Pilot"
               loading="eager"
-              style="width:100%;height:100%;object-fit:cover;display:block"
+              style="width:100%;height:100%;object-fit:contain;display:block"
               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:rgba(10,12,20,1);color:rgba(255,255,255,.5);flex-direction:column;gap:1rem\'><svg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><path d=\'M3 9h18\'/><path d=\'M9 21V9\'/></svg><span style=\'font-size:1.1rem;font-weight:600\'>WITHOUT Signal Pilot</span><span style=\'font-size:.9rem;opacity:.7\'>Add your chart image to:<br/>assets/showcase/chart-without.jpg</span></div>'"
             />
           </div>
@@ -4122,7 +4165,7 @@
               src="assets/showcase/chart-with.jpg"
               alt="Chart with Signal Pilot"
               loading="eager"
-              style="position:absolute;top:0;left:0;height:100%;max-width:none;object-fit:cover;display:block;pointer-events:none"
+              style="position:absolute;top:0;left:0;height:100%;max-width:none;object-fit:contain;display:block;pointer-events:none"
               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:rgba(10,30,20,1);color:rgba(255,255,255,.5);flex-direction:column;gap:1rem\'><svg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><polyline points=\'20 6 9 17 4 12\'/></svg><span style=\'font-size:1.1rem;font-weight:600;color:#3ed598\'>WITH Signal Pilot</span><span style=\'font-size:.9rem;opacity:.7\'>Add your chart image to:<br/>assets/showcase/chart-with.jpg</span></div>'"
             />
           </div>
