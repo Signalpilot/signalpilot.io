@@ -376,6 +376,11 @@
     button.setAttribute('aria-label', 'Theme selection (Ctrl+T)');
     button.setAttribute('title', 'Theme selection (Ctrl+T)');
     button.onclick = () => openThemeModal();
+    // Force sticky positioning with inline styles
+    button.style.position = 'fixed';
+    button.style.bottom = '90px';
+    button.style.right = '20px';
+    button.style.zIndex = '9999';
     document.body.appendChild(button);
     return button;
   }

@@ -509,6 +509,12 @@ Email: support@signalpilot.io`;
       </div>
     `;
 
+    // Force sticky positioning with inline styles
+    toggle.style.position = 'fixed';
+    toggle.style.bottom = '20px';
+    toggle.style.right = '20px';
+    toggle.style.zIndex = '10000';
+
     document.body.appendChild(toggle);
     document.body.appendChild(window);
 
