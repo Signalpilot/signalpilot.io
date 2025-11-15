@@ -57,8 +57,8 @@
     /* Tablet - align with chatbot */
     @media (max-width: 768px) {
       .sp-theme-toggle {
-        bottom: max(5.5rem, calc(5.25rem + env(safe-area-inset-bottom))) !important;
-        right: 1rem !important;
+        bottom: 90px !important;
+        right: 20px !important;
         width: 48px !important;
         height: 48px !important;
         font-size: 1.3rem !important;
@@ -73,8 +73,8 @@
     /* Small mobile screens - make smaller to save space */
     @media (max-width: 480px) {
       .sp-theme-toggle {
-        bottom: max(5.5rem, calc(5.25rem + env(safe-area-inset-bottom))) !important;
-        right: 1rem !important;
+        bottom: 90px !important;
+        right: 20px !important;
         width: 48px !important;
         height: 48px !important;
         font-size: 1.2rem !important;
@@ -88,8 +88,8 @@
     /* Ultra-small screens - even smaller */
     @media (max-width: 380px) {
       .sp-theme-toggle {
-        bottom: max(5.25rem, calc(5rem + env(safe-area-inset-bottom))) !important;
-        right: 1rem !important;
+        bottom: 90px !important;
+        right: 20px !important;
         width: 44px !important;
         height: 44px !important;
         font-size: 1.1rem !important;
