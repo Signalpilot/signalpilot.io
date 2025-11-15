@@ -1287,6 +1287,48 @@
         font-size: 0.8rem !important;
         word-wrap: break-word !important;
       }
+
+      /* Footer: Three horizontal cards on mobile */
+      footer > .container > div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0.5rem !important;
+        margin-bottom: 1.5rem !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+
+      /* Hide the first column (Signal Pilot brand) on mobile */
+      footer > .container > div[style*="grid-template-columns"] > div:first-child {
+        display: none !important;
+      }
+
+      /* Style each footer card */
+      footer > .container > div[style*="grid-template-columns"] > div {
+        flex: 1 1 auto !important;
+        min-width: 110px !important;
+        max-width: 150px !important;
+        background: rgba(255,255,255,.04) !important;
+        border: 1px solid rgba(255,255,255,.1) !important;
+        border-radius: 8px !important;
+        padding: 1rem 0.75rem !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Footer card headings */
+      footer > .container > div[style*="grid-template-columns"] > div h4 {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.6rem !important;
+      }
+
+      /* Footer card links */
+      footer > .container > div[style*="grid-template-columns"] > div ul li {
+        margin-bottom: 0.3rem !important;
+      }
+
+      footer > .container > div[style*="grid-template-columns"] > div ul li a {
+        font-size: 0.75rem !important;
+      }
     }
 
     .measure{max-width:var(--measure)}
@@ -4254,12 +4296,25 @@
 
       <div class="container stack">
 
-        <div style="text-align:center;max-width:800px;margin:0 auto 2rem">
+        <div style="text-align:center;max-width:800px;margin:0 auto 1.5rem">
           <span class="badge" style="margin-bottom:1rem">INTERACTIVE DEMO</span>
           <h2 class="headline lg">The Difference</h2>
           <p style="color:var(--muted);font-size:1.1rem;line-height:1.6;margin-top:1rem">
             <strong style="color:var(--brand)">👆 Drag the slider</strong> to compare trading with and without <span style="font-family:'Gugi',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.1em;font-weight:400">Signal Pilot</span>. Same chart. Same timeframe. Completely different clarity.
           </p>
+        </div>
+
+        <!-- Slider Controls -->
+        <div style="display:flex;justify-content:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap">
+          <button id="btn-before" class="btn btn-secondary" style="padding:0.6rem 1.2rem;font-size:0.9rem;min-height:auto">
+            ← Before
+          </button>
+          <button id="btn-autoplay" class="btn btn-primary" style="padding:0.6rem 1.5rem;font-size:0.9rem;min-height:auto">
+            ▶ Auto Play
+          </button>
+          <button id="btn-after" class="btn btn-secondary" style="padding:0.6rem 1.2rem;font-size:0.9rem;min-height:auto">
+            After →
+          </button>
         </div>
 
         <!-- Interactive Slider Container -->
@@ -4524,6 +4579,87 @@
 
         observer.observe(slider);
       }
+
+      // Button Controls
+      const btnBefore = document.getElementById('btn-before');
+      const btnAutoplay = document.getElementById('btn-autoplay');
+      const btnAfter = document.getElementById('btn-after');
+
+      let autoplayInterval = null;
+      let isAutoPlaying = false;
+
+      // Before button - snap to 0%
+      if (btnBefore) {
+        btnBefore.addEventListener('click', () => {
+          stopAutoPlay();
+          markInteraction();
+          setSliderPosition(0, true);
+        });
+      }
+
+      // After button - snap to 100%
+      if (btnAfter) {
+        btnAfter.addEventListener('click', () => {
+          stopAutoPlay();
+          markInteraction();
+          setSliderPosition(100, true);
+        });
+      }
+
+      // Auto Play button - toggle continuous animation
+      if (btnAutoplay) {
+        btnAutoplay.addEventListener('click', () => {
+          if (isAutoPlaying) {
+            stopAutoPlay();
+          } else {
+            startAutoPlay();
+          }
+        });
+      }
+
+      function startAutoPlay() {
+        stopAutoPlay(); // Clear any existing interval
+        isAutoPlaying = true;
+        markInteraction();
+        btnAutoplay.innerHTML = '⏸ Pause';
+        btnAutoplay.classList.remove('btn-primary');
+        btnAutoplay.classList.add('btn-ghost');
+
+        let direction = 1; // 1 = forward, -1 = backward
+        let currentPos = 50;
+
+        autoplayInterval = setInterval(() => {
+          currentPos += (direction * 2); // Move 2% per frame
+
+          if (currentPos >= 100) {
+            currentPos = 100;
+            direction = -1; // Reverse direction
+          } else if (currentPos <= 0) {
+            currentPos = 0;
+            direction = 1; // Reverse direction
+          }
+
+          setSliderPosition(currentPos, false);
+        }, 30); // Update every 30ms for smooth animation
+      }
+
+      function stopAutoPlay() {
+        if (autoplayInterval) {
+          clearInterval(autoplayInterval);
+          autoplayInterval = null;
+        }
+        isAutoPlaying = false;
+        btnAutoplay.innerHTML = '▶ Auto Play';
+        btnAutoplay.classList.remove('btn-ghost');
+        btnAutoplay.classList.add('btn-primary');
+      }
+
+      // Stop auto play if user manually interacts
+      const originalMarkInteraction = markInteraction;
+      markInteraction = function() {
+        stopAutoPlay();
+        originalMarkInteraction();
+      };
     })();
     </script>
 
