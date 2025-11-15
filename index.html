@@ -7298,14 +7298,22 @@ if ('serviceWorker' in navigator) {
             const sequence = qualityProgressions[qualityType];
             let currentIndex = 0;
 
-            const timer = setInterval(() => {
-              if (currentIndex >= sequence.length) {
-                clearInterval(timer);
-              } else {
+            const animateSequence = () => {
+              if (currentIndex < sequence.length) {
                 entry.target.textContent = sequence[currentIndex];
+
+                // Faster progression through early stages, stop at final word
+                const isLastItem = currentIndex === sequence.length - 1;
+                const delay = isLastItem ? 0 : 180; // 180ms for each step, stop at last
+
                 currentIndex++;
+                if (!isLastItem) {
+                  setTimeout(animateSequence, delay);
+                }
               }
-            }, 300); // Change every 300ms
+            };
+
+            animateSequence();
             return;
           }
 
