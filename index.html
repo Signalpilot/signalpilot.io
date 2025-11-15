@@ -4318,7 +4318,7 @@
         </div>
 
         <!-- Interactive Slider Container -->
-        <div id="comparison-slider" role="region" aria-label="Before and after comparison slider" style="position:relative;max-width:1400px;width:100%;margin:0 auto;border-radius:16px;overflow:hidden;border:3px solid rgba(91,138,255,.4);box-shadow:0 30px 80px rgba(0,0,0,.6)">
+        <div id="comparison-slider" role="region" aria-label="Before and after comparison slider" style="position:relative;max-width:1400px;width:100%;margin:0 auto;border-radius:16px;overflow:hidden;border:3px solid rgba(91,138,255,.4);box-shadow:0 30px 80px rgba(0,0,0,.6);touch-action:pan-x">
 
           <!-- Without Signal Pilot (Background) -->
           <div class="comparison-image" style="position:relative;width:100%;min-height:600px;aspect-ratio:16/9;background:#0a0e18">
@@ -4344,7 +4344,7 @@
           </div>
 
           <!-- Slider Handle with Pulse Animation -->
-          <div id="slider-handle" role="slider" aria-label="Comparison slider position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0" style="position:absolute;top:0;left:50%;width:48px;height:100%;transform:translateX(-50%);z-index:100;cursor:ew-resize">
+          <div id="slider-handle" role="slider" aria-label="Comparison slider position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0" style="position:absolute;top:0;left:50%;width:48px;height:100%;transform:translateX(-50%);z-index:100;cursor:ew-resize;touch-action:pan-x">
             <!-- Hit area (wider for easier grabbing) -->
             <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:100%;cursor:ew-resize"></div>
             <!-- Visual line -->
@@ -4515,12 +4515,12 @@
 
       // Touch support with Feature 13: Double-tap to center
       handle.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Prevent scrolling immediately
         const currentTime = Date.now();
         const tapGap = currentTime - lastTapTime;
 
         if (tapGap < 300 && tapGap > 0) {
           // Double tap detected
-          e.preventDefault();
           setSliderPosition(50, true);
         } else {
           isDragging = true;
@@ -4528,14 +4528,24 @@
         }
 
         lastTapTime = currentTime;
-      });
+      }, { passive: false });
+
+      // Also add touch support directly on slider for easier mobile interaction
+      slider.addEventListener('touchstart', (e) => {
+        if (!handle.contains(e.target)) {
+          e.preventDefault(); // Prevent scrolling
+          isDragging = true;
+          markInteraction();
+          updateSliderFromPosition(e.touches[0].clientX, false);
+        }
+      }, { passive: false });
 
       document.addEventListener('touchmove', (e) => {
         if (isDragging) {
+          e.preventDefault(); // Critical: prevent page scroll while dragging
           updateSliderFromPosition(e.touches[0].clientX, false);
-          e.preventDefault();
         }
-      });
+      }, { passive: false });
 
       document.addEventListener('touchend', () => {
         isDragging = false;
