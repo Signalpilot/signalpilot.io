@@ -1209,6 +1209,32 @@
       height:100%;
     }
 
+    /* Loading state for buttons */
+    .btn-loading{
+      position:relative;
+      pointer-events:none;
+      opacity:0.7;
+    }
+
+    .btn-loading::after{
+      content:'';
+      position:absolute;
+      width:16px;
+      height:16px;
+      top:50%;
+      left:50%;
+      margin-left:-8px;
+      margin-top:-8px;
+      border:2px solid #ffffff;
+      border-radius:50%;
+      border-top-color:transparent;
+      animation:spin 0.6s linear infinite;
+    }
+
+    @keyframes spin{
+      to{transform:rotate(360deg)}
+    }
+
     .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:16px;padding:1.05rem;box-shadow:var(--shadow);min-width:0;position:relative;overflow:hidden;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
 
     .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--accent));transform:scaleX(0);transition:transform 0.3s ease}
@@ -7099,6 +7125,33 @@ if ('serviceWorker' in navigator) {
         if (value.length >= 3) {
           this.classList.add('valid');
         }
+      });
+    });
+  })();
+
+  // Loading states for payment buttons
+  (function() {
+    const paymentButtons = [
+      'btn-monthly-paypal',
+      'btn-yearly-paypal',
+      'btn-lifetime-paypal'
+    ];
+
+    paymentButtons.forEach(id => {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+
+      btn.addEventListener('click', function() {
+        // Add loading state
+        this.classList.add('btn-loading');
+        const originalText = this.innerHTML;
+        this.innerHTML = '⏳ Processing...';
+
+        // Remove loading state after 5 seconds (fallback)
+        setTimeout(() => {
+          this.classList.remove('btn-loading');
+          this.innerHTML = originalText;
+        }, 5000);
       });
     });
   })();
