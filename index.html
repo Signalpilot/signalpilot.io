@@ -1168,6 +1168,62 @@
       .comparison-image {
         overflow: hidden;
       }
+
+      /* Fix pricing section overflow on mobile */
+      .pricing-grid {
+        gap: 1rem;
+        padding: 0 1rem;
+      }
+
+      .pricing-grid .card.plan {
+        margin-left: 0;
+        margin-right: 0;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* Fix absolute positioned badges overflow */
+      .pricing-grid .card.plan > div[style*="position:absolute"] {
+        max-width: calc(100% - 2rem);
+        font-size: 0.7rem !important;
+        padding: 0.3rem 0.7rem !important;
+      }
+
+      /* Responsive padding for sections on mobile */
+      section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+    }
+
+    /* Additional mobile fixes for specific sections */
+    @media (max-width:768px){
+      /* Fix 7-day money back guarantee overflow */
+      section > .container > div[style*="max-width:900px"] {
+        max-width: calc(100% - 2rem) !important;
+        padding: 1.5rem 1rem !important;
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+        box-sizing: border-box;
+      }
+
+      section > .container > div[style*="max-width:900px"] h3 {
+        font-size: 1.2rem !important;
+      }
+
+      section > .container > div[style*="max-width:900px"] p {
+        font-size: 0.95rem !important;
+      }
+
+      section > .container > div[style*="display:flex"][style*="gap:2rem"] {
+        gap: 0.75rem !important;
+      }
     }
 
     .measure{max-width:var(--measure)}
@@ -3598,7 +3654,7 @@
         <h2 class="headline lg" style="text-align:center;max-width:20ch;margin-left:auto;margin-right:auto;margin-top:3rem">The Elite <span data-count="7" data-text-mode>7</span></h2>
 
         <p class="note" style="text-align:center;max-width:68ch;margin:0 auto 1.5rem">
-          Four-layer cycle detection (Pentarch™) plus six specialized analysis tools. Professional-grade market structure analysis.
+          Four-layer cycle detection (Pentarch™) plus six specialized analysis tools. <span data-quality="elite">Elite</span> market structure analysis.
         </p>
 
 
@@ -3655,10 +3711,10 @@
             <div class="title mod">
               <h3 style="white-space:nowrap">SP — Omnideck</h3>
             </div>
-            <div class="punch"><span data-count="10">10</span> systems combined into one overlay indicator.</div>
+            <div class="punch"><span data-count="10" data-text-mode>10</span> systems combined into one overlay indicator.</div>
             <button class="btn btn-ghost btn-sm toggle-details" data-target="omnideck-details" style="margin-top:.5rem">Details ▼</button>
             <div id="omnideck-details" class="indicator-details" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
-              <p style="font-size:.95rem;line-height:1.7;color:var(--muted);margin-bottom:1rem"><strong><span data-count="10">10</span> powerful tools in one clean overlay.</strong> Instead of cluttering your chart, get everything you need in a single indicator:</p>
+              <p style="font-size:.95rem;line-height:1.7;color:var(--muted);margin-bottom:1rem"><strong><span data-count="10" data-text-mode>10</span> powerful tools in one clean overlay.</strong> Instead of cluttering your chart, get everything you need in a single indicator:</p>
               <ul style="font-size:.9rem;line-height:1.9;color:var(--muted-2);list-style:none;padding:0">
                 <li>• <strong>TD Sequential</strong> (exhaustion signals) • <strong>Squeeze Cloud</strong> (breakout detection)</li>
                 <li>• <strong>SuperTrend Ensemble</strong> (trend confirmation) • <strong>Bull Market Support Band</strong></li>
@@ -3817,7 +3873,7 @@
             <div class="punch">Four oscillators vote on every bar. Multi-confirmation timing system.</div>
             <button class="btn btn-ghost btn-sm toggle-details" data-target="harmonic-details" style="margin-top:.5rem">Details ▼</button>
             <div id="harmonic-details" class="indicator-details" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
-              <p style="font-size:.95rem;line-height:1.7;color:var(--muted);margin-bottom:1rem"><strong><span data-count="4">4</span> oscillators vote.</strong> Signals only appear when multiple momentum indicators agree:</p>
+              <p style="font-size:.95rem;line-height:1.7;color:var(--muted);margin-bottom:1rem"><strong><span data-count="4" data-text-mode>4</span> oscillators vote.</strong> Signals only appear when multiple momentum indicators agree:</p>
               <ul style="font-size:.9rem;line-height:1.9;color:var(--muted-2);list-style:none;padding:0">
                 <li>• Live vote count shows real-time breakdown (e.g., "3 Bulls, 1 Neutral")</li>
                 <li>• Star rating (★ to ★★★★) — more stars = more agreement</li>
@@ -7203,6 +7259,13 @@ if ('serviceWorker' in navigator) {
     // Text numbers for word-based counting
     const textNumbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 
+    // Quality progression sequences
+    const qualityProgressions = {
+      'elite': ['basic', 'good', 'great', 'premium', 'elite'],
+      'professional': ['beginner', 'intermediate', 'advanced', 'professional'],
+      'premium': ['standard', 'enhanced', 'superior', 'premium']
+    };
+
     function animateNumber(element, start, end, duration) {
       const range = end - start;
       const increment = range / (duration / 16); // 60fps
@@ -7228,6 +7291,23 @@ if ('serviceWorker' in navigator) {
           const prefix = entry.target.getAttribute('data-prefix') || '';
           const suffix = entry.target.getAttribute('data-suffix') || '';
           const useTextMode = entry.target.hasAttribute('data-text-mode');
+          const qualityType = entry.target.getAttribute('data-quality');
+
+          // Quality progression animation
+          if (qualityType && qualityProgressions[qualityType]) {
+            const sequence = qualityProgressions[qualityType];
+            let currentIndex = 0;
+
+            const timer = setInterval(() => {
+              if (currentIndex >= sequence.length) {
+                clearInterval(timer);
+              } else {
+                entry.target.textContent = sequence[currentIndex];
+                currentIndex++;
+              }
+            }, 300); // Change every 300ms
+            return;
+          }
 
           // Animate with prefix/suffix support
           const tempContent = entry.target.textContent;
@@ -7267,6 +7347,11 @@ if ('serviceWorker' in navigator) {
 
       // Manually observe specific elements we know exist
       document.querySelectorAll('[data-count]').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Observe quality progression elements
+      document.querySelectorAll('[data-quality]').forEach(el => {
         observer.observe(el);
       });
     }, 100);
