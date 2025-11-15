@@ -765,17 +765,6 @@
       50%,100%{opacity:0}
     }
 
-    @keyframes drawCheck{
-      to{stroke-dashoffset:0}
-    }
-
-    @keyframes drawX{
-      to{stroke-dashoffset:0}
-    }
-
-    .animated-check.visible path{animation:drawCheck 0.5s ease-out forwards}
-    .animated-x.visible path{animation:drawX 0.5s ease-out forwards}
-
     /* Micro-interactions: Loading spinner */
     @keyframes spin{
       to{transform:rotate(360deg)}
@@ -792,6 +781,41 @@
 
     .success-check{animation:checkPop 0.4s cubic-bezier(0.4, 0, 0.2, 1)}
 
+    /* Tablet optimizations */
+    @media (max-width:1024px){
+      /* Reduce parallax intensity on tablets */
+      #parallax-orb-1,#parallax-orb-2{opacity:0.7}
+    }
+
+    @media (max-width:768px){
+      /* Reduce typing text on mobile */
+      #typed-text{font-size:0.95rem !important}
+
+      /* Smaller progress bar on mobile */
+      .scroll-progress{height:2px}
+
+      /* Optimize button press for touch */
+      .btn:active{transform:translateY(2px) scale(0.99)}
+
+      /* Disable orb animations on mobile for battery */
+      #parallax-orb-1,#parallax-orb-2{animation:none !important}
+
+      /* Ensure typing text doesn't overflow */
+      .hero p{word-wrap:break-word;overflow-wrap:break-word}
+
+      /* Reduce hero heading size on mobile */
+      .headline.xl{font-size:2rem !important}
+
+      /* Better spacing for gradient orbs on mobile */
+      #parallax-orb-1{width:350px;height:350px;filter:blur(50px) !important}
+      #parallax-orb-2{width:300px;height:300px;filter:blur(40px) !important}
+    }
+
+    @media (max-width:480px){
+      /* Extra small screens - thinner progress bar */
+      .scroll-progress{height:1.5px}
+    }
+
 
 
     @media (prefers-reduced-motion: reduce){
@@ -800,6 +824,20 @@
 
       #typing-cursor{animation:none;opacity:1}
 
+      /* Disable all animations for users who prefer reduced motion */
+      .success-check,.spinner{animation:none !important}
+
+      .btn:active{transform:none !important}
+
+      #parallax-orb-1,#parallax-orb-2{animation:none !important}
+
+    }
+
+    /* Performance: Disable heavy effects on low-end devices */
+    @media (prefers-reduced-data: reduce){
+      .bg-aurora,.bg-stars,.sp-constellations{display:none !important}
+
+      #parallax-orb-1,#parallax-orb-2{display:none !important}
     }
 
     /* CAPABILITY-BASED DISPLAY: Hide effects on devices that can't handle them */
@@ -1035,9 +1073,18 @@
 
     .lightbox-content img{width:100%;height:100%;object-fit:contain;border-radius:12px;box-shadow:0 40px 120px rgba(0,0,0,0.6)}
 
-    .lightbox-close{position:absolute;top:-50px;right:0;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.2);color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.5rem;font-weight:300;transition:all 0.2s ease;backdrop-filter:blur(10px)}
+    .lightbox-close{position:absolute;top:-50px;right:0;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.2);color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.5rem;font-weight:300;transition:all 0.2s ease;backdrop-filter:blur(10px);min-width:44px;min-height:44px}
 
     .lightbox-close:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);transform:scale(1.1)}
+
+    /* Mobile lightbox optimizations */
+    @media (max-width:768px){
+      .lightbox-overlay{padding:1rem;backdrop-filter:blur(10px)}
+
+      .lightbox-content{max-width:95vw;max-height:85vh}
+
+      .lightbox-close{top:-15px;right:-15px;width:44px;height:44px;font-size:1.8rem}
+    }
 
     @keyframes lightboxZoomIn{
       from{transform:scale(0.8);opacity:0}
@@ -4132,99 +4179,6 @@
     </script>
 
 
-    <!-- COMPARISON TABLE -->
-
-    <section class="section" style="background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 50%,var(--bg) 100%)">
-
-      <div class="container stack">
-
-        <h2 class="headline lg" style="text-align:center;margin-bottom:1rem">How We Compare</h2>
-
-        <p class="note" style="text-align:center;max-width:68ch;margin:0 auto 3rem;font-size:1.1rem">
-          Not all TradingView indicators are created equal. Here's what sets Signal Pilot apart.
-        </p>
-
-        <div style="max-width:900px;margin:0 auto;overflow-x:auto">
-          <table class="comparison-table" style="width:100%;border-collapse:separate;border-spacing:0">
-            <thead>
-              <tr>
-                <th style="text-align:left;padding:1.5rem 1rem;font-size:1.1rem;color:var(--text);border-bottom:2px solid var(--border)">Feature</th>
-                <th style="text-align:center;padding:1.5rem 1rem;font-size:1.1rem;background:linear-gradient(135deg,rgba(91,138,255,.15),rgba(91,138,255,.08));border-bottom:2px solid var(--brand);position:relative">
-                  <div style="font-weight:800;color:var(--brand);text-transform:uppercase;letter-spacing:.05em">Signal Pilot</div>
-                  <div style="position:absolute;top:-8px;right:1rem;background:linear-gradient(135deg,#3ed598,#2ec98a);color:#fff;padding:.3rem .8rem;border-radius:999px;font-size:.7rem;font-weight:800;box-shadow:0 4px 12px rgba(62,213,152,.4)">BEST</div>
-                </th>
-                <th style="text-align:center;padding:1.5rem 1rem;font-size:1.1rem;color:var(--muted);border-bottom:2px solid var(--border)">Others</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="comparison-row">
-                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">Non-Repainting Signals</td>
-                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
-                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
-                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-              </tr>
-              <tr class="comparison-row">
-                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">$100 Repaint Challenge</td>
-                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
-                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
-                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-              </tr>
-              <tr class="comparison-row">
-                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">7-Day Money-Back Guarantee</td>
-                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
-                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
-                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-              </tr>
-              <tr class="comparison-row">
-                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">Free Education Hub (82 Lessons)</td>
-                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
-                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
-                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-              </tr>
-              <tr class="comparison-row">
-                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">Lifetime Access Option</td>
-                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
-                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
-                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-              </tr>
-              <tr class="comparison-row">
-                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">All-in-One Indicators (OmniDeck)</td>
-                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
-                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
-                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p style="text-align:center;margin-top:2.5rem;font-size:1rem;color:var(--muted-2)">
-          <strong style="color:var(--brand)">No lookahead bias. No repainting. No BS.</strong><br>
-          Just professional tools that work exactly as advertised.
-        </p>
-
-      </div>
-
-    </section>
-
-
     <!-- PRICING -->
 
     <section id="pricing" class="section">
@@ -4341,8 +4295,8 @@
 
           <article class="card plan" id="plan-yearly" data-plan="yearly" role="group" aria-labelledby="plan-yearly-title" style="position:relative;border:2px solid var(--brand);box-shadow:0 0 40px rgba(91,138,255,.2);animation:pricingGlow 3s ease-in-out infinite">
 
-            <div style="position:absolute;top:-12px;right:1rem;background:linear-gradient(135deg,#3ed598,#2ec98a);color:#fff;padding:.4rem 1rem;border-radius:999px;font-weight:800;font-size:.85rem;box-shadow:0 4px 12px rgba(62,213,152,.4)">
-              SAVE $489/YEAR
+            <div style="position:absolute;top:-12px;right:1rem;background:linear-gradient(135deg,#3ed598,#2ec98a);color:#fff;padding:.4rem .9rem;border-radius:999px;font-weight:800;font-size:.8rem;box-shadow:0 4px 12px rgba(62,213,152,.4);white-space:nowrap">
+              SAVE $489
             </div>
 
             <div class="pill" id="plan-yearly-title" style="background:var(--brand);color:#fff">⭐ Most Popular</div>
@@ -4403,13 +4357,13 @@
 
           <article class="card plan" id="plan-lifetime" data-plan="lifetime" role="group" aria-labelledby="plan-lifetime-title" style="position:relative">
 
-            <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#f9a23c,#ff8c42);color:#fff;padding:.4rem 1rem;border-radius:999px;font-weight:800;font-size:.75rem;box-shadow:0 4px 12px rgba(249,162,60,.4);white-space:nowrap">
-              ⚡ TIER 1: $1,799 → $2,499 in 150 sales
+            <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#f9a23c,#ff8c42);color:#fff;padding:.4rem .9rem;border-radius:999px;font-weight:800;font-size:.75rem;box-shadow:0 4px 12px rgba(249,162,60,.4);white-space:nowrap;max-width:90%">
+              ⚡ TIER 1 • 150 left
             </div>
 
             <div class="pill" id="plan-lifetime-title">Lifetime Access</div>
 
-            <div class="price"><span id="lifetime-display-price">$1,799</span> <span class="pill">one‑time</span></div>
+            <div class="price" style="white-space:nowrap"><span id="lifetime-display-price">$1,799</span> <span class="pill">one‑time</span></div>
 
             <div style="text-align:center;margin:1.5rem 0;padding:1.25rem;background:rgba(249,162,60,.08);border:1px solid rgba(249,162,60,.25);border-radius:8px">
               <p style="font-size:1rem;color:var(--text);margin:0 0 .5rem 0;font-weight:600">
@@ -4470,7 +4424,7 @@
 
 
         <!-- MONEY-BACK GUARANTEE (after pricing cards for maximum conversion impact) -->
-        <div style="max-width:900px;margin:3rem auto 2rem;padding:2rem 2.5rem;background:linear-gradient(135deg,rgba(62,213,152,.15),rgba(62,213,152,.08));border:2px solid rgba(62,213,152,.4);border-radius:12px;text-align:center">
+        <div style="max-width:900px;margin:3rem auto 1rem;padding:2rem 2.5rem;background:linear-gradient(135deg,rgba(62,213,152,.15),rgba(62,213,152,.08));border:2px solid rgba(62,213,152,.4);border-radius:12px;text-align:center">
           <div style="display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="2.5">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -6533,12 +6487,17 @@ if ('serviceWorker' in navigator) {
 
   // Add scroll animation classes to key sections
   function initScrollAnimations() {
+    // Detect mobile for performance optimizations
+    const isMobile = window.innerWidth <= 768;
+
     // Add CSS for scroll animations
     const style = document.createElement('style');
+    // Reduce animation distance on mobile
+    const distance = isMobile ? '20px' : '30px';
     style.textContent = `
       .scroll-fade-in {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(${distance});
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
       .scroll-fade-in.visible {
@@ -6547,7 +6506,7 @@ if ('serviceWorker' in navigator) {
       }
       .scroll-fade-in-left {
         opacity: 0;
-        transform: translateX(-30px);
+        transform: translateX(-${distance});
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
       .scroll-fade-in-left.visible {
@@ -6556,7 +6515,7 @@ if ('serviceWorker' in navigator) {
       }
       .scroll-fade-in-right {
         opacity: 0;
-        transform: translateX(30px);
+        transform: translateX(${distance});
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
       .scroll-fade-in-right.visible {
@@ -6579,6 +6538,7 @@ if ('serviceWorker' in navigator) {
     indicatorCards.forEach(card => card.classList.add('scroll-fade-in'));
 
     // Intersection Observer for scroll animations
+    // Use lower threshold on mobile for better performance
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -6590,8 +6550,8 @@ if ('serviceWorker' in navigator) {
         }
       });
     }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: isMobile ? 0.05 : 0.1,
+      rootMargin: isMobile ? '0px 0px -20px 0px' : '0px 0px -50px 0px'
     });
 
     // Observe all animated elements
@@ -6656,7 +6616,6 @@ if ('serviceWorker' in navigator) {
       initLightbox();
       initParallax();
       initTypingEffect();
-      initComparisonTable();
       initScrollProgress();
     });
   } else {
@@ -6665,7 +6624,6 @@ if ('serviceWorker' in navigator) {
     initLightbox();
     initParallax();
     initTypingEffect();
-    initComparisonTable();
     initScrollProgress();
   }
 
@@ -6702,28 +6660,6 @@ if ('serviceWorker' in navigator) {
 
     // Initial update
     updateProgress();
-  }
-
-  // Comparison table animation on scroll
-  function initComparisonTable() {
-    const checks = document.querySelectorAll('.animated-check');
-    const xmarks = document.querySelectorAll('.animated-x');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
-          // Stagger animations slightly for each row
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, index * 100);
-        }
-      });
-    }, {
-      threshold: 0.5
-    });
-
-    checks.forEach(check => observer.observe(check));
-    xmarks.forEach(x => observer.observe(x));
   }
 
   // Typing animation for hero headline
@@ -6785,6 +6721,10 @@ if ('serviceWorker' in navigator) {
     const orb2 = document.getElementById('parallax-orb-2');
 
     if (!orb1 || !orb2) return;
+
+    // Disable parallax on mobile for performance
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) return;
 
     let ticking = false;
 
