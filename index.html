@@ -792,6 +792,82 @@
 
     .success-check{animation:checkPop 0.4s cubic-bezier(0.4, 0, 0.2, 1)}
 
+    /* Comparison table responsive styles */
+    .comparison-table{min-width:600px}
+
+    /* Tablet optimizations */
+    @media (max-width:1024px){
+      /* Reduce parallax intensity on tablets */
+      #parallax-orb-1,#parallax-orb-2{opacity:0.7}
+
+      /* Slightly smaller animations */
+      .animated-check,.animated-x{width:28px;height:28px}
+    }
+
+    @media (max-width:768px){
+      /* Enable smooth horizontal scroll on mobile */
+      .comparison-table{min-width:550px;font-size:0.9rem}
+
+      .comparison-table th,
+      .comparison-table td{padding:1rem 0.75rem !important}
+
+      .comparison-table th{font-size:1rem !important}
+
+      /* Add scroll hint shadow */
+      .comparison-table + *::before{
+        content:'';
+        position:absolute;
+        right:0;
+        top:0;
+        bottom:0;
+        width:20px;
+        background:linear-gradient(90deg,transparent,rgba(0,0,0,0.1));
+        pointer-events:none;
+      }
+
+      /* Reduce typing text on mobile */
+      #typed-text{font-size:0.95rem !important}
+
+      /* Smaller progress bar on mobile */
+      .scroll-progress{height:2px}
+
+      /* Optimize button press for touch */
+      .btn:active{transform:translateY(2px) scale(0.99)}
+
+      /* Disable orb animations on mobile for battery */
+      #parallax-orb-1,#parallax-orb-2{animation:none !important}
+
+      /* Smaller checkmarks/x-marks on mobile */
+      .animated-check,.animated-x{width:24px;height:24px}
+
+      /* Reduce animation stagger on mobile */
+      .comparison-row{transition-delay:50ms !important}
+
+      /* Ensure typing text doesn't overflow */
+      .hero p{word-wrap:break-word;overflow-wrap:break-word}
+
+      /* Reduce hero heading size on mobile */
+      .headline.xl{font-size:2rem !important}
+
+      /* Better spacing for gradient orbs on mobile */
+      #parallax-orb-1{width:350px;height:350px;filter:blur(50px) !important}
+      #parallax-orb-2{width:300px;height:300px;filter:blur(40px) !important}
+    }
+
+    @media (max-width:480px){
+      /* Extra small screens */
+      .comparison-table{min-width:500px;font-size:0.85rem}
+
+      .comparison-table th,
+      .comparison-table td{padding:0.75rem 0.5rem !important;font-size:0.85rem !important}
+
+      /* Even smaller icons */
+      .animated-check,.animated-x{width:20px;height:20px}
+
+      /* Thinner progress bar */
+      .scroll-progress{height:1.5px}
+    }
+
 
 
     @media (prefers-reduced-motion: reduce){
@@ -800,6 +876,20 @@
 
       #typing-cursor{animation:none;opacity:1}
 
+      /* Disable all animations for users who prefer reduced motion */
+      .animated-check,.animated-x,.success-check,.spinner{animation:none !important}
+
+      .btn:active{transform:none !important}
+
+      #parallax-orb-1,#parallax-orb-2{animation:none !important}
+
+    }
+
+    /* Performance: Disable heavy effects on low-end devices */
+    @media (prefers-reduced-data: reduce){
+      .bg-aurora,.bg-stars,.sp-constellations{display:none !important}
+
+      #parallax-orb-1,#parallax-orb-2{display:none !important}
     }
 
     /* CAPABILITY-BASED DISPLAY: Hide effects on devices that can't handle them */
@@ -1035,9 +1125,18 @@
 
     .lightbox-content img{width:100%;height:100%;object-fit:contain;border-radius:12px;box-shadow:0 40px 120px rgba(0,0,0,0.6)}
 
-    .lightbox-close{position:absolute;top:-50px;right:0;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.2);color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.5rem;font-weight:300;transition:all 0.2s ease;backdrop-filter:blur(10px)}
+    .lightbox-close{position:absolute;top:-50px;right:0;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.2);color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.5rem;font-weight:300;transition:all 0.2s ease;backdrop-filter:blur(10px);min-width:44px;min-height:44px}
 
     .lightbox-close:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);transform:scale(1.1)}
+
+    /* Mobile lightbox optimizations */
+    @media (max-width:768px){
+      .lightbox-overlay{padding:1rem;backdrop-filter:blur(10px)}
+
+      .lightbox-content{max-width:95vw;max-height:85vh}
+
+      .lightbox-close{top:-15px;right:-15px;width:44px;height:44px;font-size:1.8rem}
+    }
 
     @keyframes lightboxZoomIn{
       from{transform:scale(0.8);opacity:0}
@@ -4144,7 +4243,7 @@
           Not all TradingView indicators are created equal. Here's what sets Signal Pilot apart.
         </p>
 
-        <div style="max-width:900px;margin:0 auto;overflow-x:auto">
+        <div style="max-width:900px;margin:0 auto;overflow-x:auto;-webkit-overflow-scrolling:touch;position:relative">
           <table class="comparison-table" style="width:100%;border-collapse:separate;border-spacing:0">
             <thead>
               <tr>
@@ -6533,12 +6632,17 @@ if ('serviceWorker' in navigator) {
 
   // Add scroll animation classes to key sections
   function initScrollAnimations() {
+    // Detect mobile for performance optimizations
+    const isMobile = window.innerWidth <= 768;
+
     // Add CSS for scroll animations
     const style = document.createElement('style');
+    // Reduce animation distance on mobile
+    const distance = isMobile ? '20px' : '30px';
     style.textContent = `
       .scroll-fade-in {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(${distance});
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
       .scroll-fade-in.visible {
@@ -6547,7 +6651,7 @@ if ('serviceWorker' in navigator) {
       }
       .scroll-fade-in-left {
         opacity: 0;
-        transform: translateX(-30px);
+        transform: translateX(-${distance});
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
       .scroll-fade-in-left.visible {
@@ -6556,7 +6660,7 @@ if ('serviceWorker' in navigator) {
       }
       .scroll-fade-in-right {
         opacity: 0;
-        transform: translateX(30px);
+        transform: translateX(${distance});
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
       .scroll-fade-in-right.visible {
@@ -6579,6 +6683,7 @@ if ('serviceWorker' in navigator) {
     indicatorCards.forEach(card => card.classList.add('scroll-fade-in'));
 
     // Intersection Observer for scroll animations
+    // Use lower threshold on mobile for better performance
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -6590,8 +6695,8 @@ if ('serviceWorker' in navigator) {
         }
       });
     }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: isMobile ? 0.05 : 0.1,
+      rootMargin: isMobile ? '0px 0px -20px 0px' : '0px 0px -50px 0px'
     });
 
     // Observe all animated elements
@@ -6709,17 +6814,22 @@ if ('serviceWorker' in navigator) {
     const checks = document.querySelectorAll('.animated-check');
     const xmarks = document.querySelectorAll('.animated-x');
 
+    // Lower threshold on mobile for better triggering
+    const isMobile = window.innerWidth <= 768;
+    const threshold = isMobile ? 0.2 : 0.5;
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
-          // Stagger animations slightly for each row
+          // Stagger animations slightly for each row (less on mobile)
+          const stagger = isMobile ? 50 : 100;
           setTimeout(() => {
             entry.target.classList.add('visible');
-          }, index * 100);
+          }, index * stagger);
         }
       });
     }, {
-      threshold: 0.5
+      threshold: threshold
     });
 
     checks.forEach(check => observer.observe(check));
@@ -6785,6 +6895,10 @@ if ('serviceWorker' in navigator) {
     const orb2 = document.getElementById('parallax-orb-2');
 
     if (!orb1 || !orb2) return;
+
+    // Disable parallax on mobile for performance
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) return;
 
     let ticking = false;
 
