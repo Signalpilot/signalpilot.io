@@ -490,7 +490,27 @@
       overflow-x:hidden;
       position:relative;
       /* Smooth theme transitions */
-      transition:background-color 0.3s ease, color 0.3s ease;
+      transition:background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Smooth transitions for all theme-dependent elements */
+    header,
+    .card,
+    .btn,
+    nav a{
+      transition:all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Scroll progress indicator */
+    .scroll-progress{
+      position:fixed;
+      top:0;
+      left:0;
+      width:0%;
+      height:3px;
+      background:linear-gradient(90deg,var(--brand),var(--accent));
+      z-index:10000;
+      transition:width 0.1s ease-out;
     }
 
     /* MOBILE: Simple, clean mobile setup - NO forced positioning */
@@ -745,6 +765,33 @@
       50%,100%{opacity:0}
     }
 
+    @keyframes drawCheck{
+      to{stroke-dashoffset:0}
+    }
+
+    @keyframes drawX{
+      to{stroke-dashoffset:0}
+    }
+
+    .animated-check.visible path{animation:drawCheck 0.5s ease-out forwards}
+    .animated-x.visible path{animation:drawX 0.5s ease-out forwards}
+
+    /* Micro-interactions: Loading spinner */
+    @keyframes spin{
+      to{transform:rotate(360deg)}
+    }
+
+    .spinner{display:inline-block;width:20px;height:20px;border:3px solid rgba(255,255,255,0.3);border-top-color:var(--brand);border-radius:50%;animation:spin 0.8s linear infinite}
+
+    /* Micro-interactions: Success checkmark pop */
+    @keyframes checkPop{
+      0%{transform:scale(0);opacity:0}
+      50%{transform:scale(1.2)}
+      100%{transform:scale(1);opacity:1}
+    }
+
+    .success-check{animation:checkPop 0.4s cubic-bezier(0.4, 0, 0.2, 1)}
+
 
 
     @media (prefers-reduced-motion: reduce){
@@ -929,7 +976,7 @@
       font-weight:800;
       text-decoration:none;
       cursor:pointer;
-      transition:filter .15s ease, transform .04s ease;
+      transition:all .15s cubic-bezier(0.4, 0, 0.2, 1);
       /* Ensure proper touch targets */
       min-height:44px;
       touch-action:manipulation;
@@ -937,9 +984,10 @@
       /* Performance */
       will-change:transform;
       backface-visibility:hidden;
+      position:relative;
     }
 
-    .btn:active{transform:translateY(1px)}
+    .btn:active{transform:translateY(3px) scale(0.98);box-shadow:0 1px 4px rgba(0,0,0,0.3) !important}
 
     .btn-primary{background:linear-gradient(115deg,var(--brand),var(--brand-2));color:#fff;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(91,138,255,0.3)}
 
@@ -2123,6 +2171,9 @@
 </head>
 
 <body>
+
+<!-- Scroll progress indicator -->
+<div class="scroll-progress" aria-hidden="true"></div>
 
 <div class="bg-stars" aria-hidden="true"></div>
 <canvas id="constellations" class="sp-constellations" aria-hidden="true"></canvas>
@@ -4079,6 +4130,99 @@
       }
     })();
     </script>
+
+
+    <!-- COMPARISON TABLE -->
+
+    <section class="section" style="background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 50%,var(--bg) 100%)">
+
+      <div class="container stack">
+
+        <h2 class="headline lg" style="text-align:center;margin-bottom:1rem">How We Compare</h2>
+
+        <p class="note" style="text-align:center;max-width:68ch;margin:0 auto 3rem;font-size:1.1rem">
+          Not all TradingView indicators are created equal. Here's what sets Signal Pilot apart.
+        </p>
+
+        <div style="max-width:900px;margin:0 auto;overflow-x:auto">
+          <table class="comparison-table" style="width:100%;border-collapse:separate;border-spacing:0">
+            <thead>
+              <tr>
+                <th style="text-align:left;padding:1.5rem 1rem;font-size:1.1rem;color:var(--text);border-bottom:2px solid var(--border)">Feature</th>
+                <th style="text-align:center;padding:1.5rem 1rem;font-size:1.1rem;background:linear-gradient(135deg,rgba(91,138,255,.15),rgba(91,138,255,.08));border-bottom:2px solid var(--brand);position:relative">
+                  <div style="font-weight:800;color:var(--brand);text-transform:uppercase;letter-spacing:.05em">Signal Pilot</div>
+                  <div style="position:absolute;top:-8px;right:1rem;background:linear-gradient(135deg,#3ed598,#2ec98a);color:#fff;padding:.3rem .8rem;border-radius:999px;font-size:.7rem;font-weight:800;box-shadow:0 4px 12px rgba(62,213,152,.4)">BEST</div>
+                </th>
+                <th style="text-align:center;padding:1.5rem 1rem;font-size:1.1rem;color:var(--muted);border-bottom:2px solid var(--border)">Others</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">Non-Repainting Signals</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">$100 Repaint Challenge</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">7-Day Money-Back Guarantee</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">Free Education Hub (82 Lessons)</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">Lifetime Access Option</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+              <tr class="comparison-row">
+                <td style="padding:1.25rem 1rem;border-bottom:1px solid var(--border);font-weight:600">All-in-One Indicators (OmniDeck)</td>
+                <td class="check-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border);background:rgba(91,138,255,.05)">
+                  <svg class="animated-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3ed598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+                <td class="x-cell" style="text-align:center;padding:1.25rem 1rem;border-bottom:1px solid var(--border)">
+                  <svg class="animated-x" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff4560" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" stroke-dasharray="24" stroke-dashoffset="24"/></svg>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="text-align:center;margin-top:2.5rem;font-size:1rem;color:var(--muted-2)">
+          <strong style="color:var(--brand)">No lookahead bias. No repainting. No BS.</strong><br>
+          Just professional tools that work exactly as advertised.
+        </p>
+
+      </div>
+
+    </section>
 
 
     <!-- PRICING -->
@@ -6512,6 +6656,8 @@ if ('serviceWorker' in navigator) {
       initLightbox();
       initParallax();
       initTypingEffect();
+      initComparisonTable();
+      initScrollProgress();
     });
   } else {
     initScrollAnimations();
@@ -6519,6 +6665,65 @@ if ('serviceWorker' in navigator) {
     initLightbox();
     initParallax();
     initTypingEffect();
+    initComparisonTable();
+    initScrollProgress();
+  }
+
+  // Scroll progress indicator
+  function initScrollProgress() {
+    const progressBar = document.querySelector('.scroll-progress');
+    if (!progressBar) return;
+
+    let ticking = false;
+
+    function updateProgress() {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      // Calculate scroll percentage
+      const scrollable = documentHeight - windowHeight;
+      const scrolled = (scrollTop / scrollable) * 100;
+
+      progressBar.style.width = Math.min(scrolled, 100) + '%';
+
+      ticking = false;
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', requestTick, { passive: true });
+    window.addEventListener('resize', requestTick, { passive: true });
+
+    // Initial update
+    updateProgress();
+  }
+
+  // Comparison table animation on scroll
+  function initComparisonTable() {
+    const checks = document.querySelectorAll('.animated-check');
+    const xmarks = document.querySelectorAll('.animated-x');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
+          // Stagger animations slightly for each row
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    checks.forEach(check => observer.observe(check));
+    xmarks.forEach(x => observer.observe(x));
   }
 
   // Typing animation for hero headline
