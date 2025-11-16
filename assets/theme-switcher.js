@@ -41,6 +41,12 @@
       transform: scale(0.95);
     }
 
+    .sp-theme-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+    }
+
     /* Light mode support */
     html[data-theme="light"] .sp-theme-toggle {
       background: #f6f8fc;
@@ -372,7 +378,16 @@
   function createToggleButton() {
     const button = document.createElement('button');
     button.className = 'sp-theme-toggle';
-    button.innerHTML = '🎨';
+    button.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+        <circle cx="12" cy="12" r="1"/>
+        <circle cx="8" cy="10" r="1"/>
+        <circle cx="16" cy="10" r="1"/>
+        <circle cx="10" cy="14" r="1"/>
+        <circle cx="14" cy="14" r="1"/>
+      </svg>
+    `;
     button.setAttribute('aria-label', 'Theme selection (Ctrl+T)');
     button.setAttribute('title', 'Theme selection (Ctrl+T)');
     button.onclick = () => openThemeModal();
