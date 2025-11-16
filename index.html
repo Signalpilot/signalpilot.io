@@ -1549,22 +1549,15 @@
     .btn-sm{padding:.5rem .8rem; font-size:.92rem; line-height:1.1}
 
     /* Product card button container - ensure equal height alignment */
-    .card.product > div[style*="display:flex"][style*="gap"] {
-      display: flex !important;
-      gap: .5rem !important;
-      margin-top: .5rem !important;
-      align-items: stretch !important;
-    }
-
-    .card.product > div[style*="display:flex"][style*="gap"] > .btn,
-    .card.product > div[style*="display:flex"][style*="gap"] > button {
-      flex: 1 1 0;
-      min-width: 0;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
+    .card.product .toggle-details,
+    .card.product .toggle-details + a.btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       white-space: nowrap;
+      min-height: 38px;
     }
 
     /* Form validation checkmarks */
@@ -5911,85 +5904,75 @@
 
     /* ======================== Google Translate (on demand) ======================== */
 
-    (function(){
+    // Google Translate Initialization
+    window.googleTranslateElementInit = function() {
+      if (!window.google || !google.translate) return;
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'ar,de,es,fr,it,ru,zh-CN,pt,tr,ja,ko,vi,th,hi,id',
+        autoDisplay: false
+      }, 'google_translate_container');
+    };
 
-      const LANG_KEY='sp_lang';
+    // Load saved language on page load
+    (function() {
+      const LANG_KEY = 'sp_lang';
 
-      const SUP=['en','de','fr','es','it','zh','ru','ar','pt','tr','ja','ko','vi','th','hi','id'];
+      function baseDomain(host) {
+        const p = host.split('.');
+        return p.length > 2 ? p.slice(-2).join('.') : host;
+      }
 
-      function baseDomain(host){ const p=host.split('.'); return p.length>2 ? p.slice(-2).join('.') : host; }
-
-      function setCookie(name,value,days,domain){ let e=''; if(days){const d=new Date(); d.setTime(d.getTime()+days*864e5); e=';expires='+d.toUTCString();} const dom=domain?';domain='+domain:''; document.cookie=name+'='+value+e+';path=/'+dom; }
-
-      function setGoogTrans(lang){ const target=(lang==='zh')?'zh-CN':lang; const val='/en/'+target; setCookie('googtrans',val,365); const root='.'+baseDomain(location.hostname.replace(/^www\./,'')); setCookie('googtrans',val,365,root); }
-
-      function applyDirLang(lang){ document.documentElement.lang=(lang==='zh')?'zh-CN':lang; document.documentElement.dir=(lang==='ar')?'rtl':'ltr'; }
-
-      // Global initialization function for Google Translate
-      window.googleTranslateElementInit=function(){
-        if(!window.google||!google.translate){
-          // Retry up to 10 times if Google hasn't loaded yet
-          if(!window.__gte_retry_count) window.__gte_retry_count = 0;
-          if(window.__gte_retry_count < 10) {
-            window.__gte_retry_count++;
-            setTimeout(googleTranslateElementInit, 200);
-            return;
-          }
-          console.error('Google Translate failed to load after multiple retries');
-          return;
+      function setCookie(name, value, days, domain) {
+        let expires = '';
+        if (days) {
+          const d = new Date();
+          d.setTime(d.getTime() + days * 864e5);
+          expires = '; expires=' + d.toUTCString();
         }
-        try {
-          new google.translate.TranslateElement({
-            pageLanguage:'en',
-            includedLanguages:'ar,de,es,fr,it,ru,zh-CN,pt,tr,ja,ko,vi,th,hi,id',
-            autoDisplay:false,
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-          },'google_translate_container');
-          window.__gte_initialized = true;
-        } catch(e) {
-          console.error('Google Translate init error:', e);
-        }
-      };
+        const dom = domain ? '; domain=' + domain : '';
+        document.cookie = name + '=' + value + expires + '; path=/' + dom;
+      }
 
-      function loadGTE(){
-        if(window.__gte_loading) return;
-        if(window.google && window.google.translate && window.__gte_initialized) {
-          // Already loaded and initialized
-          return;
-        }
-        if(window.google && window.google.translate) {
-          // Loaded but not initialized
-          googleTranslateElementInit();
-          return;
-        }
-        window.__gte_loading=true;
-        window.__gte_retry_count = 0;
-        const s=document.createElement('script');
-        s.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-        s.async=true;
-        s.onerror = function() {
-          window.__gte_loading = false;
-          console.error('Failed to load Google Translate script');
-        };
-        s.onload = function() {
-          window.__gte_loading = false;
-        };
+      function setGoogTrans(lang) {
+        const target = (lang === 'zh') ? 'zh-CN' : lang;
+        const val = '/en/' + target;
+        setCookie('googtrans', val, 365);
+        const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
+        setCookie('googtrans', val, 365, root);
+      }
+
+      function applyDirLang(lang) {
+        document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : lang;
+        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
+
+      function loadGTE() {
+        if (window.__gte_loading || window.google) return;
+        window.__gte_loading = true;
+        const s = document.createElement('script');
+        s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        s.async = true;
         document.head.appendChild(s);
       }
 
-      const sel=document.getElementById('langSel');
-      const saved=localStorage.getItem(LANG_KEY) || (navigator.languages&&navigator.languages[0]||navigator.language||'en');
-      const code=saved.toLowerCase().startsWith('zh')?'zh':saved.slice(0,2);
+      const sel = document.getElementById('langSel');
+      const saved = localStorage.getItem(LANG_KEY) || 'en';
+      const code = saved.toLowerCase().startsWith('zh') ? 'zh' : saved.slice(0, 2);
 
-      sel.value=code; setGoogTrans(code); applyDirLang(code);
+      if (sel) sel.value = code;
+      setGoogTrans(code);
+      applyDirLang(code);
+      if (code !== 'en') loadGTE();
 
-      // Load Google Translate on page load if non-English language is selected
-      if(code!=='en') {
-        setTimeout(() => loadGTE(), 500);
-      }
-
-      sel.addEventListener('change',e=>{ const v=e.target.value; localStorage.setItem(LANG_KEY,v); setGoogTrans(v); applyDirLang(v); if(v!=='en') loadGTE(); location.reload(); });
-
+      sel.addEventListener('change', e => {
+        const v = e.target.value;
+        localStorage.setItem(LANG_KEY, v);
+        setGoogTrans(v);
+        applyDirLang(v);
+        if (v !== 'en') loadGTE();
+        location.reload();
+      });
     })();
 
 
