@@ -478,7 +478,7 @@ Email: support@signalpilot.io`;
           </div>
           <div>
             <div class="sp-chatbot-title">Signal Pilot Assistant</div>
-            <div class="sp-chatbot-status">Online • AI-powered</div>
+            <div class="sp-chatbot-status">AI Assistant • Automated responses</div>
           </div>
         </div>
         <button class="sp-chatbot-close" aria-label="Close chatbot">×</button>
