@@ -380,9 +380,11 @@
     button.className = 'sp-theme-toggle';
     button.innerHTML = `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15.5 2.5l6 6-4 4-6-6 4-4z"/>
-        <path d="M7.5 10.5l-6 6c-1 1-1 2.5 0 3.5l2.5 2.5c1 1 2.5 1 3.5 0l6-6"/>
-        <path d="M15.5 8.5l-8 8"/>
+        <path d="M15 4l-4 4m0 0l-4 4m4-4v12"/>
+        <circle cx="18" cy="5" r="1.5" fill="currentColor"/>
+        <circle cx="6" cy="9" r="1" fill="currentColor"/>
+        <circle cx="12" cy="3" r="1" fill="currentColor"/>
+        <circle cx="20" cy="9" r="1" fill="currentColor"/>
       </svg>
     `;
     button.setAttribute('aria-label', 'Theme selection (Ctrl+T)');
