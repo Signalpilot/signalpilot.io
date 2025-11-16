@@ -379,13 +379,10 @@
     const button = document.createElement('button');
     button.className = 'sp-theme-toggle';
     button.innerHTML = `
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
-        <circle cx="12" cy="12" r="1"/>
-        <circle cx="8" cy="10" r="1"/>
-        <circle cx="16" cy="10" r="1"/>
-        <circle cx="10" cy="14" r="1"/>
-        <circle cx="14" cy="14" r="1"/>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15.5 2.5l6 6-4 4-6-6 4-4z"/>
+        <path d="M7.5 10.5l-6 6c-1 1-1 2.5 0 3.5l2.5 2.5c1 1 2.5 1 3.5 0l6-6"/>
+        <path d="M15.5 8.5l-8 8"/>
       </svg>
     `;
     button.setAttribute('aria-label', 'Theme selection (Ctrl+T)');
