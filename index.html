@@ -641,6 +641,43 @@
       header {
         position: relative;
         z-index: 100;
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+      }
+
+      /* Prevent header content from overflowing on mobile with translated text */
+      header .container.nav {
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Ensure header buttons adapt to smaller text when necessary */
+      header .btn,
+      header #langToggle,
+      header #themeToggle {
+        font-size: .8rem !important;
+        padding: .4rem .6rem !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        flex-shrink: 1 !important;
+      }
+
+      /* Language button - allow slight shrinking if needed */
+      header #langToggle span {
+        max-width: 30px !important;
+        overflow: hidden !important;
+        text-overflow: clip !important;
+      }
+
+      /* CTA button - ensure it doesn't overflow */
+      header .cta-header {
+        max-width: 140px !important;
+        font-size: .75rem !important;
+        padding: .5rem .7rem !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
       }
 
       /* Reduce animations for performance - but don't kill them entirely */
@@ -2443,6 +2480,25 @@
       .price{font-size:1.8rem}
       .cta-inner .bar .note{display:none}
 
+      /* Extra small screens - further reduce header button sizes for translated text */
+      header .btn,
+      header #langToggle,
+      header #themeToggle {
+        font-size: .75rem !important;
+        padding: .35rem .5rem !important;
+      }
+
+      header .cta-header {
+        max-width: 120px !important;
+        font-size: .7rem !important;
+        padding: .45rem .6rem !important;
+      }
+
+      /* Brand can shrink more on very small screens */
+      .brand {
+        font-size: 1.1rem !important;
+      }
+
       /* Product card button container - ensure buttons are touch-friendly */
       .card.product > div[style*="display:flex"] {
         gap: .4rem !important;
@@ -2946,7 +3002,11 @@
       </select>
 
       <button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Theme selection" style="padding:.5rem .7rem;color:var(--text)">
-        <span id="theme-icon" style="font-size:1.1rem;display:inline-block">🌙</span>
+        <span id="theme-icon" style="display:inline-block;width:18px;height:18px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </span>
       </button>
 
 
@@ -5548,7 +5608,12 @@
         // Update theme icon
         const icon = document.getElementById('theme-icon');
         if(icon) {
-          icon.textContent = t === 'light' ? '☀️' : '🌙';
+          // Sun icon for light mode, Moon icon for dark mode
+          if(t === 'light') {
+            icon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+          } else {
+            icon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+          }
         }
 
         let m=document.querySelector('meta[name="theme-color"]');
