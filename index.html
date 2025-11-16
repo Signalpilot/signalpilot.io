@@ -1548,6 +1548,25 @@
 
     .btn-sm{padding:.5rem .8rem; font-size:.92rem; line-height:1.1}
 
+    /* Product card button container - ensure equal height alignment */
+    .card.product > div[style*="display:flex"][style*="gap"] {
+      display: flex !important;
+      gap: .5rem !important;
+      margin-top: .5rem !important;
+      align-items: stretch !important;
+    }
+
+    .card.product > div[style*="display:flex"][style*="gap"] > .btn,
+    .card.product > div[style*="display:flex"][style*="gap"] > button {
+      flex: 1 1 0;
+      min-width: 0;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      white-space: nowrap;
+    }
+
     /* Form validation checkmarks */
     .input-wrapper{position:relative}
 
@@ -5760,37 +5779,12 @@
           // Save language preference
           localStorage.setItem('sp_lang', lang.code);
 
-          // Set Google Translate cookie
-          const target = (lang.code === 'zh') ? 'zh-CN' : lang.code;
-          const value = '/en/' + target;
-          document.cookie = 'googtrans=' + value + '; path=/; max-age=31536000';
-
-          // Update HTML attributes
-          document.documentElement.lang = target;
-          document.documentElement.dir = (lang.code === 'ar') ? 'rtl' : 'ltr';
-
           // Update hidden select
           const hiddenSelect = document.getElementById('langSel');
           if (hiddenSelect) {
             hiddenSelect.value = lang.code;
-          }
-
-          // Load Google Translate if not already loaded and not English
-          if (lang.code !== 'en') {
-            // Trigger Google Translate load if needed, then reload
-            if (!window.google || !window.google.translate) {
-              // Set flag to load and reload
-              sessionStorage.setItem('sp_reload_after_translate', 'true');
-              // This will be handled by the main Google Translate init below
-            }
-            // Reload to apply translation
-            setTimeout(() => window.location.reload(), 100);
-          } else {
-            // Clear Google Translate cookie for English
-            document.cookie = 'googtrans=; path=/; max-age=0';
-            document.cookie = 'googtrans=; path=/; domain=.' + window.location.hostname.replace(/^www\./, '') + '; max-age=0';
-            // Reload page to remove translation
-            window.location.reload();
+            // Trigger change event to use the main Google Translate handler
+            hiddenSelect.dispatchEvent(new Event('change'));
           }
 
           // Track event if analytics available
