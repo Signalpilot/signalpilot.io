@@ -2908,7 +2908,7 @@
 
 
       <div class="lang-dropdown">
-        <button id="langToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Language selection" aria-expanded="false" aria-haspopup="true" style="font-size:.85rem;padding:.5rem .7rem">
+        <button id="langToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Language selection" aria-expanded="false" aria-haspopup="true" style="font-size:.85rem;padding:.5rem .7rem;color:var(--text)">
           <span>EN</span>
         </button>
       </div>
@@ -2933,8 +2933,8 @@
         <option value="id">Bahasa Indonesia</option>
       </select>
 
-      <button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Theme selection" style="font-size:1.3rem;padding:.5rem .7rem">
-        <span id="theme-icon">🌙</span>
+      <button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Theme selection" style="padding:.5rem .7rem;color:var(--text)">
+        <span id="theme-icon" style="font-size:1.1rem;display:inline-block">●</span>
       </button>
 
 
@@ -3800,28 +3800,32 @@
               const dotsContainer = document.getElementById('carousel-dots');
               const dots = [];
 
-              // Create dots
-              for (let i = 0; i < items.length; i++) {
-                const dot = document.createElement('button');
-                dot.className = 'carousel-dot';
-                dot.setAttribute('aria-label', `Go to chart ${i + 1}`);
-                dot.addEventListener('click', () => {
-                  scrollToIndex(i);
-                  resetAutoScroll();
-                });
-                dots.push(dot);
-                dotsContainer.appendChild(dot);
+              // Create dots only if container exists
+              if (dotsContainer) {
+                for (let i = 0; i < items.length; i++) {
+                  const dot = document.createElement('button');
+                  dot.className = 'carousel-dot';
+                  dot.setAttribute('aria-label', `Go to chart ${i + 1}`);
+                  dot.addEventListener('click', () => {
+                    scrollToIndex(i);
+                    resetAutoScroll();
+                  });
+                  dots.push(dot);
+                  dotsContainer.appendChild(dot);
+                }
               }
 
               // Update active dot
               function updateDots() {
-                dots.forEach((dot, i) => {
-                  if (i === currentIndex) {
-                    dot.classList.add('active');
-                  } else {
-                    dot.classList.remove('active');
-                  }
-                });
+                if (dotsContainer && dots.length > 0) {
+                  dots.forEach((dot, i) => {
+                    if (i === currentIndex) {
+                      dot.classList.add('active');
+                    } else {
+                      dot.classList.remove('active');
+                    }
+                  });
+                }
               }
 
               // Initialize dots
@@ -4030,7 +4034,11 @@
 
             <!-- Screenshot Box - READY FOR YOUR IMAGE -->
             <div style="position:relative;width:100%;max-width:280px;margin:0 auto 1.5rem;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:2px dashed rgba(91,138,255,.4);box-shadow:0 4px 16px rgba(91,138,255,.2);background:linear-gradient(135deg,rgba(91,138,255,.12),rgba(118,221,255,.06))">
-              <img src="assets/screenshots/pentarch-screenshot.jpg" alt="Pentarch cycle detection on BTC chart" style="width:100%;height:100%;object-fit:cover;display:none" loading="eager" class="indicator-screenshot">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04));display:none" class="indicator-screenshot">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(91,138,255,.3)" stroke-width="1.5">
+                  <path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/>
+                </svg>
+              </div>
               <!-- Placeholder overlay (remove 'display:flex' when you add real image, or delete this div entirely) -->
               <div class="screenshot-placeholder" style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(10,14,24,.85);backdrop-filter:blur(4px)">
                 <div style="text-align:center;padding:1rem">
@@ -4066,7 +4074,11 @@
 
             <!-- Screenshot Box -->
             <div style="position:relative;width:100%;max-width:280px;margin:0 auto 1.5rem;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 4px 16px rgba(91,138,255,.2);background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
-              <img src="assets/screenshots/omnideck-screenshot.jpg" alt="Omnideck all-in-one indicator" style="width:100%;height:100%;object-fit:cover" loading="eager">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(91,138,255,.3)" stroke-width="1.5">
+                  <path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/>
+                </svg>
+              </div>
               <div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(10,14,24,.8);backdrop-filter:blur(4px)">
                 <div style="text-align:center;padding:1rem">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;margin:0 auto .5rem;opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
@@ -4100,7 +4112,11 @@
 
             <!-- Screenshot Box -->
             <div style="position:relative;width:100%;max-width:280px;margin:0 auto 1.5rem;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 4px 16px rgba(91,138,255,.2);background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
-              <img src="assets/screenshots/volume-oracle-screenshot.jpg" alt="Volume Oracle institutional flow tracking" style="width:100%;height:100%;object-fit:cover" loading="eager">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(91,138,255,.3)" stroke-width="1.5">
+                  <path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/>
+                </svg>
+              </div>
               <div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(10,14,24,.8);backdrop-filter:blur(4px)">
                 <div style="text-align:center;padding:1rem">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;margin:0 auto .5rem;opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
@@ -4134,7 +4150,11 @@
 
             <!-- Screenshot Box -->
             <div style="position:relative;width:100%;max-width:280px;margin:0 auto 1.5rem;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 4px 16px rgba(91,138,255,.2);background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
-              <img src="assets/screenshots/plutus-flow-screenshot.jpg" alt="Plutus Flow cumulative delta tracking" style="width:100%;height:100%;object-fit:cover" loading="eager">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(91,138,255,.3)" stroke-width="1.5">
+                  <path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/>
+                </svg>
+              </div>
               <div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(10,14,24,.8);backdrop-filter:blur(4px)">
                 <div style="text-align:center;padding:1rem">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;margin:0 auto .5rem;opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
@@ -4168,7 +4188,11 @@
 
             <!-- Screenshot Box -->
             <div style="position:relative;width:100%;max-width:280px;margin:0 auto 1.5rem;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 4px 16px rgba(91,138,255,.2);background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
-              <img src="assets/screenshots/janus-atlas-screenshot.jpg" alt="Janus Atlas multi-timeframe key levels" style="width:100%;height:100%;object-fit:cover" loading="eager">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(91,138,255,.3)" stroke-width="1.5">
+                  <path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/>
+                </svg>
+              </div>
               <div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(10,14,24,.8);backdrop-filter:blur(4px)">
                 <div style="text-align:center;padding:1rem">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;margin:0 auto .5rem;opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
@@ -4202,7 +4226,11 @@
 
             <!-- Screenshot Box -->
             <div style="position:relative;width:100%;max-width:280px;margin:0 auto 1.5rem;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 4px 16px rgba(91,138,255,.2);background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
-              <img src="assets/screenshots/augury-grid-screenshot.jpg" alt="Augury Grid multi-symbol tracking table" style="width:100%;height:100%;object-fit:cover" loading="eager">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(91,138,255,.3)" stroke-width="1.5">
+                  <path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/>
+                </svg>
+              </div>
               <div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(10,14,24,.8);backdrop-filter:blur(4px)">
                 <div style="text-align:center;padding:1rem">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;margin:0 auto .5rem;opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
@@ -4235,7 +4263,11 @@
 
             <!-- Screenshot Box -->
             <div style="position:relative;width:100%;max-width:280px;margin:0 auto 1.5rem;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 4px 16px rgba(91,138,255,.2);background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
-              <img src="assets/screenshots/harmonic-oscillator-screenshot.jpg" alt="Harmonic Oscillator multi-confirmation timing" style="width:100%;height:100%;object-fit:cover" loading="eager">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.04))">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(91,138,255,.3)" stroke-width="1.5">
+                  <path d="M3 3h18v18H3z"/><path d="M3 9h18"/><path d="M9 21V9"/>
+                </svg>
+              </div>
               <div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(10,14,24,.8);backdrop-filter:blur(4px)">
                 <div style="text-align:center;padding:1rem">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;margin:0 auto .5rem;opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
@@ -4579,14 +4611,14 @@
         </div>
 
         <!-- Slider Controls -->
-        <div style="display:flex;justify-content:center;gap:0.8rem;margin-bottom:1.5rem;flex-wrap:nowrap;align-items:stretch">
-          <button id="btn-before" class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.85rem;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center">
+        <div style="display:flex;justify-content:center;gap:0.8rem;margin-bottom:1.5rem;flex-wrap:nowrap;align-items:center">
+          <button id="btn-before" class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.85rem;min-height:38px;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1">
             ← Before
           </button>
-          <button id="btn-autoplay" class="btn btn-primary" style="padding:0.5rem 1rem;font-size:0.85rem;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center">
+          <button id="btn-autoplay" class="btn btn-primary" style="padding:0.5rem 1rem;font-size:0.85rem;min-height:38px;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1">
             ▶ Auto Play
           </button>
-          <button id="btn-after" class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.85rem;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center">
+          <button id="btn-after" class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.85rem;min-height:38px;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1">
             After →
           </button>
         </div>
@@ -4745,6 +4777,17 @@
       function initSlider() {
         updateOverlayImageWidth();
         setSliderPosition(50, false);
+      }
+
+      // Update overlay width when images load
+      const backgroundImage = slider.querySelector('img[alt="Chart without Signal Pilot"]');
+      const foregroundImage = overlayImage;
+
+      if (backgroundImage) {
+        backgroundImage.addEventListener('load', updateOverlayImageWidth);
+      }
+      if (foregroundImage) {
+        foregroundImage.addEventListener('load', updateOverlayImageWidth);
       }
 
       // Feature 8: Keyboard navigation
@@ -5274,13 +5317,13 @@
       </div>
 
       <div class="card" role="button" aria-expanded="true" tabindex="0" aria-controls="faq-answer-2">
-        <strong id="faq-question-2">💼 Is this financial advice?</strong>
+        <strong id="faq-question-2">Is this financial advice?</strong>
         <p id="faq-answer-2" class="note"><strong>No.</strong> <span style="font-family:'Gugi',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.1em;font-weight:400">Signal Pilot</span> is an <strong>educational toolset only</strong>. We provide technical analysis tools—not investment advice, trade recommendations, or guaranteed returns. You are solely responsible for your trading decisions.</p>
       </div>
 
       <!-- TECHNICAL -->
       <div class="card" role="button" aria-expanded="false" tabindex="0" aria-controls="faq-answer-3">
-        <strong id="faq-question-3">💻 Does it work on free TradingView?</strong>
+        <strong id="faq-question-3">Does it work on free TradingView?</strong>
         <p id="faq-answer-3" class="note"><strong>Yes!</strong> You just need enough indicator slots for your setup. <strong>Free accounts get 3 slots</strong>, which is enough for Pentarch + 1-2 filters. Pro/Premium accounts get more slots and unlimited alerts.</p>
       </div>
 
@@ -5302,7 +5345,7 @@
 
       <!-- PAYMENT -->
       <div class="card" role="button" aria-expanded="false" tabindex="0" aria-controls="faq-answer-7">
-        <strong id="faq-question-7">💳 Cancellation & Refunds</strong>
+        <strong id="faq-question-7">Cancellation & Refunds</strong>
         <p id="faq-answer-7" class="note"><strong>7-day money-back guarantee:</strong> Full refund within 7 days of your first payment, no questions asked. After 7 days, you can cancel anytime—no penalty, no partial refunds. You keep access until the end of your current billing period.<br><br><strong>Card customers:</strong> Manage via <a href="manage-subscription.html">self-service portal</a> (pause, cancel, update payment). <strong>PayPal customers:</strong> Manage via PayPal settings. See <a href="refund.html">full refund policy</a>.</p>
       </div>
 
@@ -5324,7 +5367,7 @@
       </div>
 
       <div class="card" role="button" aria-expanded="false" tabindex="0" aria-controls="faq-answer-11">
-        <strong id="faq-question-11">💬 What support channels exist?</strong>
+        <strong id="faq-question-11">What support channels exist?</strong>
         <p id="faq-answer-11" class="note"><strong>Monthly:</strong> Email support (48h response). <strong>Yearly+:</strong> Priority email (24h response). <strong>Lifetime:</strong> Private Discord community + priority support. All plans include access to 50+ pages of documentation and video tutorials.</p>
       </div>
 
@@ -5557,7 +5600,7 @@
         // Update theme icon
         const icon = document.getElementById('theme-icon');
         if(icon) {
-          icon.textContent = t === 'light' ? '🌙' : '☀️';
+          icon.textContent = t === 'light' ? '●' : '○';
         }
 
         let m=document.querySelector('meta[name="theme-color"]');
@@ -5876,7 +5919,9 @@
 
     (function(){
 
-      const ctaBar=document.getElementById('ctaBar'), ctaClose=document.getElementById('ctaClose'); 
+      const ctaBar=document.getElementById('ctaBar'), ctaClose=document.getElementById('ctaClose');
+
+      if (!ctaBar) return;
 
       let dismissed=false, suppressed=false, focusing=false, ticking=false;
 
