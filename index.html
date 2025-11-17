@@ -6149,31 +6149,43 @@
 
           // Set cookies and attributes
           if (lang.code === 'en') {
-            // Clear translation for English
+            // For English: aggressively clear and reset everything
             clearGoogTrans();
+
+            // Force set to English explicitly
+            const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
+            document.cookie = 'googtrans=/en/en; path=/; max-age=0';
+            document.cookie = 'googtrans=/en/en; path=/; domain=' + root + '; max-age=0';
+
             applyDirLang('en');
+
+            // Track event if analytics available
+            if (typeof trackEvent === 'function') {
+              trackEvent('language_change', {
+                language: 'en',
+                language_name: lang.name
+              });
+            }
+
+            console.log('[GT] Switching to English - forcing hard reload');
+
+            // Use location.replace for a true hard reload without history
+            setTimeout(() => {
+              location.replace(location.pathname + '?lang=en&t=' + Date.now());
+            }, 50);
           } else {
             setGoogTrans(lang.code);
             applyDirLang(lang.code);
-          }
 
-          // Track event if analytics available
-          if (typeof trackEvent === 'function') {
-            trackEvent('language_change', {
-              language: lang.code,
-              language_name: lang.name
-            });
-          }
+            // Track event if analytics available
+            if (typeof trackEvent === 'function') {
+              trackEvent('language_change', {
+                language: lang.code,
+                language_name: lang.name
+              });
+            }
 
-          console.log('[GT] Language changed to:', lang.code);
-
-          // Reload page to apply translation (page load script will handle GT init)
-          // For English, use a hard reload to ensure Google Translate is fully cleared
-          if (lang.code === 'en') {
-            setTimeout(() => {
-              window.location.href = window.location.pathname + window.location.search;
-            }, 100);
-          } else {
+            console.log('[GT] Language changed to:', lang.code);
             location.reload();
           }
         });
@@ -6348,21 +6360,34 @@
       }
 
       function clearGoogTrans() {
-        // Clear all Google Translate cookies thoroughly
+        // Clear all Google Translate cookies thoroughly and aggressively
         const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-        const cookieNames = ['googtrans', 'googtrans(2)'];
-        const domains = ['', '; domain=' + root, '; domain=' + location.hostname];
+        const cookieNames = ['googtrans', 'googtrans(2)', 'googtrans(0)', 'googtrans(1)'];
+        const domains = ['', '; domain=' + root, '; domain=' + location.hostname, '; domain=.signalpilot.io'];
+        const paths = ['/', '/en', '/en/'];
 
+        // Nuclear option: clear every possible cookie variation
         cookieNames.forEach(name => {
           domains.forEach(domain => {
-            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/' + domain;
-            document.cookie = name + '=/en/en; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/' + domain;
+            paths.forEach(path => {
+              // Try deleting with empty value
+              document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=' + path + domain;
+              // Try setting to /en/en and deleting
+              document.cookie = name + '=/en/en; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=' + path + domain;
+              // Try with max-age
+              document.cookie = name + '=; max-age=0; path=' + path + domain;
+            });
           });
         });
 
-        // Also clear localStorage if it exists
+        // Also clear localStorage and sessionStorage
         if (window.localStorage) {
           localStorage.removeItem('googtrans');
+          localStorage.removeItem('googtrans(2)');
+        }
+        if (window.sessionStorage) {
+          sessionStorage.removeItem('googtrans');
+          sessionStorage.removeItem('googtrans(2)');
         }
 
         // Remove any Google Translate elements from DOM
@@ -6371,11 +6396,15 @@
           '.goog-te-banner-frame',
           '#goog-gt-tt',
           '.goog-te-balloon-frame',
-          'iframe[src*="translate.google.com"]'
+          'iframe[src*="translate.google.com"]',
+          'iframe.goog-te-menu-frame',
+          '.goog-te-menu2'
         ];
         gtElements.forEach(selector => {
           document.querySelectorAll(selector).forEach(el => el.remove());
         });
+
+        console.log('[GT] Cleared all Google Translate cookies and elements');
       }
 
       function applyDirLang(lang) {
@@ -6429,7 +6458,20 @@
       }
 
       const sel = document.getElementById('langSel');
-      const saved = localStorage.getItem(LANG_KEY) || 'en';
+
+      // Check URL parameter for forced language
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+
+      let saved = localStorage.getItem(LANG_KEY) || 'en';
+
+      // If URL says lang=en, force English and clear localStorage
+      if (urlLang === 'en') {
+        saved = 'en';
+        localStorage.setItem(LANG_KEY, 'en');
+        console.log('[GT] URL forced English language');
+      }
+
       const code = saved.toLowerCase().startsWith('zh') ? 'zh' : saved.slice(0, 2);
 
       console.log('[GT] Saved language:', code);
@@ -6455,6 +6497,14 @@
             parent.removeChild(font);
           });
         }, 100);
+
+        // Clean URL after processing
+        if (urlLang === 'en') {
+          setTimeout(() => {
+            const cleanUrl = window.location.pathname;
+            window.history.replaceState({}, '', cleanUrl);
+          }, 200);
+        }
       }
 
       // Update language button text to show current language
