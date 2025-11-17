@@ -6168,7 +6168,14 @@
           console.log('[GT] Language changed to:', lang.code);
 
           // Reload page to apply translation (page load script will handle GT init)
-          location.reload();
+          // For English, use a hard reload to ensure Google Translate is fully cleared
+          if (lang.code === 'en') {
+            setTimeout(() => {
+              window.location.href = window.location.pathname + window.location.search;
+            }, 100);
+          } else {
+            location.reload();
+          }
         });
         langMenu.appendChild(btn);
       });
@@ -6341,10 +6348,34 @@
       }
 
       function clearGoogTrans() {
-        // Clear the googtrans cookie by setting it to expire immediately
-        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        // Clear all Google Translate cookies thoroughly
         const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + root;
+        const cookieNames = ['googtrans', 'googtrans(2)'];
+        const domains = ['', '; domain=' + root, '; domain=' + location.hostname];
+
+        cookieNames.forEach(name => {
+          domains.forEach(domain => {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/' + domain;
+            document.cookie = name + '=/en/en; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/' + domain;
+          });
+        });
+
+        // Also clear localStorage if it exists
+        if (window.localStorage) {
+          localStorage.removeItem('googtrans');
+        }
+
+        // Remove any Google Translate elements from DOM
+        const gtElements = [
+          '.skiptranslate',
+          '.goog-te-banner-frame',
+          '#goog-gt-tt',
+          '.goog-te-balloon-frame',
+          'iframe[src*="translate.google.com"]'
+        ];
+        gtElements.forEach(selector => {
+          document.querySelectorAll(selector).forEach(el => el.remove());
+        });
       }
 
       function applyDirLang(lang) {
@@ -6413,6 +6444,17 @@
         // Clear translation cookies for English
         clearGoogTrans();
         applyDirLang('en');
+
+        // Remove Google Translate font wrappers that might be lingering in the DOM
+        setTimeout(() => {
+          document.querySelectorAll('font').forEach(font => {
+            const parent = font.parentNode;
+            while (font.firstChild) {
+              parent.insertBefore(font.firstChild, font);
+            }
+            parent.removeChild(font);
+          });
+        }, 100);
       }
 
       // Update language button text to show current language
