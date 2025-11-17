@@ -812,76 +812,6 @@
 
     *{box-sizing:border-box}
 
-    /* Google Translate fixes - prevent layout breaking */
-    body > .skiptranslate {
-      display: none !important;
-    }
-
-    body {
-      top: 0 !important;
-      position: relative !important;
-    }
-
-    .goog-te-banner-frame {
-      display: none !important;
-    }
-
-    .goog-te-menu-value span {
-      color: inherit !important;
-    }
-
-    .goog-te-gadget {
-      color: inherit !important;
-    }
-
-    /* Make Google Translate text smaller and more proportional */
-    font {
-      font-size: 0.85em !important;
-      line-height: inherit !important;
-    }
-
-    /* Specific adjustments for different text sizes */
-    h1 font, h2 font, h3 font, .headline font {
-      font-size: 0.88em !important;
-    }
-
-    p font, li font, div font {
-      font-size: 0.85em !important;
-    }
-
-    .btn font, button font, a font {
-      font-size: 0.86em !important;
-    }
-
-    /* CRITICAL: Force Google Translate font/span wrappers to not block clicks */
-    nav[aria-label="Main"] font,
-    nav[aria-label="Main"] span:not(.mobile-nav-title),
-    .lang-dropdown font,
-    .lang-dropdown span,
-    .lang-dropdown-menu font,
-    .lang-dropdown-menu span,
-    .menu-toggle font,
-    .menu-toggle span,
-    #langToggle font,
-    #langToggle span,
-    .nav-dropdown font,
-    .nav-dropdown span,
-    button font,
-    button span,
-    .btn font,
-    .btn span {
-      pointer-events: none !important;
-      color: inherit !important;
-      background: transparent !important;
-      font-family: inherit !important;
-      font-size: inherit !important;
-      font-weight: inherit !important;
-      line-height: inherit !important;
-      display: inline !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-    }
-
     /* Force mobile menu text to be white and ALWAYS visible */
     @media (max-width:1400px){
       /* Dark mode mobile menu (default) */
@@ -966,24 +896,6 @@
     .mobile-nav-close {
       pointer-events: auto !important;
       cursor: pointer !important;
-    }
-
-    /* Fix header squeezing when Google Translate is active */
-    header .container,
-    header .nav {
-      min-width: 0 !important;
-      flex-shrink: 0 !important;
-    }
-
-    header .brand {
-      flex-shrink: 0 !important;
-      min-width: auto !important;
-      white-space:nowrap !important;
-    }
-
-    header nav[aria-label="Main"] {
-      flex-shrink: 1 !important;
-      min-width: 0 !important;
     }
 
     /* Prevent all header buttons and text from wrapping */
@@ -3380,26 +3292,6 @@
           <span>🌐 EN</span>
         </a>
       </div>
-
-      <!-- Hidden select for Google Translate compatibility -->
-      <select id="langSel" style="display:none;" aria-hidden="true">
-        <option value="en">English</option>
-        <option value="de">Deutsch</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
-        <option value="it">Italiano</option>
-        <option value="zh">中文</option>
-        <option value="ru">Русский</option>
-        <option value="ar">العربية</option>
-        <option value="pt">Português</option>
-        <option value="tr">Türkçe</option>
-        <option value="ja">日本語</option>
-        <option value="ko">한국어</option>
-        <option value="vi">Tiếng Việt</option>
-        <option value="th">ไทย</option>
-        <option value="hi">हिन्दी</option>
-        <option value="id">Bahasa Indonesia</option>
-      </select>
 
       <button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Theme selection" style="padding:.5rem .7rem;color:var(--text)">
         <span id="theme-icon">
@@ -6148,11 +6040,6 @@
 
 
 
-  <!-- Hidden Google Translate container -->
-  <div id="google_translate_container" style="position:absolute;left:-9999px;" aria-hidden="true"></div>
-
-
-
   <!-- =======================================================================
        SCRIPT: CONFIG + UTILITIES
        ======================================================================= -->
@@ -6351,7 +6238,6 @@
 
     /* ======================== Resources Dropdown ======================== */
 
-    // Use event delegation for Google Translate compatibility
     (function() {
       let dropdownOpen = false;
 
@@ -6601,155 +6487,6 @@
     (function(){function show(){const s=document.getElementById('thanks'); if(location.hash==='#thanks') s.style.display='block';}
 
       window.addEventListener('hashchange',show); show();})();
-
-
-
-    /* ======================== Google Translate (on demand) ======================== */
-
-    // Google Translate Initialization with robust error handling
-    window.googleTranslateElementInit = function() {
-      console.log('[GT] Init called');
-      if (!window.google || !google.translate || !google.translate.TranslateElement) {
-        console.warn('[GT] Google Translate API not ready');
-        return;
-      }
-
-      const container = document.getElementById('google_translate_container');
-      if (!container) {
-        console.error('[GT] Container not found');
-        return;
-      }
-
-      try {
-        new google.translate.TranslateElement({
-          pageLanguage: 'es',
-          includedLanguages: 'ar,de,en,fr,it,ru,zh-CN,pt,tr,ja,ko,vi,th,hi,id',
-          autoDisplay: false
-        }, 'google_translate_container');
-        console.log('[GT] Widget created successfully');
-        window.__gte_initialized = true;
-      } catch (error) {
-        console.error('[GT] Failed to create widget:', error);
-      }
-    };
-
-    // Load saved language on page load with robust polling
-    (function() {
-      const LANG_KEY = 'sp_lang';
-
-      function baseDomain(host) {
-        const p = host.split('.');
-        return p.length > 2 ? p.slice(-2).join('.') : host;
-      }
-
-      function setCookie(name, value, days, domain) {
-        let expires = '';
-        if (days) {
-          const d = new Date();
-          d.setTime(d.getTime() + days * 864e5);
-          expires = '; expires=' + d.toUTCString();
-        }
-        const dom = domain ? '; domain=' + domain : '';
-        document.cookie = name + '=' + value + expires + '; path=/' + dom;
-      }
-
-      function setGoogTrans(lang) {
-        const target = (lang === 'zh') ? 'zh-CN' : lang;
-        const val = '/en/' + target;
-        setCookie('googtrans', val, 365);
-        const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-        setCookie('googtrans', val, 365, root);
-      }
-
-      function applyDirLang(lang) {
-        document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : lang;
-        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-      }
-
-      function loadGTE() {
-        if (window.__gte_loading) {
-          console.log('[GT] Already loading');
-          return;
-        }
-        if (window.google && window.google.translate) {
-          console.log('[GT] Already loaded');
-          googleTranslateElementInit();
-          return;
-        }
-
-        console.log('[GT] Loading script...');
-        window.__gte_loading = true;
-
-        const s = document.createElement('script');
-        s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-        s.async = true;
-        s.onerror = function() {
-          console.error('[GT] Script failed to load');
-          window.__gte_loading = false;
-          // Retry after 2 seconds
-          setTimeout(function() {
-            if (!window.google) {
-              console.log('[GT] Retrying...');
-              loadGTE();
-            }
-          }, 2000);
-        };
-        s.onload = function() {
-          console.log('[GT] Script loaded');
-          // Poll for initialization
-          let attempts = 0;
-          const checkInit = setInterval(function() {
-            attempts++;
-            if (window.__gte_initialized || attempts > 50) {
-              clearInterval(checkInit);
-              if (!window.__gte_initialized) {
-                console.warn('[GT] Init timeout after ' + attempts + ' attempts');
-              }
-            }
-          }, 100);
-        };
-        document.head.appendChild(s);
-      }
-
-      const sel = document.getElementById('langSel');
-      const saved = localStorage.getItem(LANG_KEY) || 'en';
-      const code = saved.toLowerCase().startsWith('zh') ? 'zh' : saved.slice(0, 2);
-
-      console.log('[GT] Saved language:', code);
-
-      if (sel) sel.value = code;
-      setGoogTrans(code);
-      applyDirLang(code);
-
-      // Update language button text to show current language
-      const langBtn = document.getElementById('langToggle');
-      if (langBtn) {
-        const langText = langBtn.querySelector('span');
-        if (langText) {
-          langText.textContent = code.toUpperCase();
-        }
-      }
-
-      // Load on DOMContentLoaded to ensure page is ready
-      if (code !== 'en') {
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(loadGTE, 500); // Small delay to let page settle
-          });
-        } else {
-          setTimeout(loadGTE, 500);
-        }
-      }
-
-      sel.addEventListener('change', e => {
-        const v = e.target.value;
-        localStorage.setItem(LANG_KEY, v);
-        setGoogTrans(v);
-        applyDirLang(v);
-        if (v !== 'en') loadGTE();
-        location.reload();
-      });
-    })();
 
 
 
