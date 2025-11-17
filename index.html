@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 
-  <!-- CRITICAL: Clear Google Translate cookies IMMEDIATELY if English is selected -->
+  <!-- CRITICAL: Set Google Translate to English IMMEDIATELY if English is selected -->
   <script>
     (function() {
       try {
@@ -14,35 +14,28 @@
         // Check localStorage
         var savedLang = localStorage.getItem('sp_lang') || 'en';
 
-        // If URL says English or localStorage says English, nuke Google Translate cookies NOW
+        // If URL says English or localStorage says English, set googtrans to /en/en
         if (urlLang === 'en' || savedLang === 'en') {
-          console.log('[GT-EARLY] Clearing Google Translate cookies for English');
+          console.log('[GT-EARLY] Setting Google Translate to English (/en/en)');
 
           // Get root domain
           var hostname = location.hostname.replace(/^www\./, '');
           var parts = hostname.split('.');
           var rootDomain = parts.length > 2 ? parts.slice(-2).join('.') : hostname;
 
-          // Nuclear cookie clearing - all variations
-          var cookieNames = ['googtrans', 'googtrans(2)', 'googtrans(0)', 'googtrans(1)'];
-          var domains = ['', '; domain=.' + rootDomain, '; domain=' + hostname];
-          var paths = ['/', '/en'];
+          // Set long expiration for the /en/en cookie
+          var expires = new Date(Date.now() + 365 * 864e5).toUTCString();
 
-          cookieNames.forEach(function(name) {
-            domains.forEach(function(domain) {
-              paths.forEach(function(path) {
-                document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=' + path + domain;
-                document.cookie = name + '=/en/en; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=' + path + domain;
-                document.cookie = name + '=; max-age=0; path=' + path + domain;
-              });
-            });
-          });
+          // Set googtrans to /en/en on all domains
+          // This tells Google Translate: "English to English" = no translation
+          document.cookie = 'googtrans=/en/en; expires=' + expires + '; path=/';
+          document.cookie = 'googtrans=/en/en; expires=' + expires + '; path=/; domain=.' + rootDomain;
 
           // Force English on HTML element
           document.documentElement.lang = 'en';
           document.documentElement.dir = 'ltr';
 
-          console.log('[GT-EARLY] Cookies cleared, language set to English');
+          console.log('[GT-EARLY] Cookie set to /en/en, language set to English');
         }
       } catch(e) {
         console.error('[GT-EARLY] Error:', e);
@@ -6196,13 +6189,13 @@
 
           // Set cookies and attributes
           if (lang.code === 'en') {
-            // For English: aggressively clear and reset everything
-            clearGoogTrans();
-
-            // Force set to English explicitly
+            // For English: Set googtrans to /en/en (English to English = no translation)
             const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-            document.cookie = 'googtrans=/en/en; path=/; max-age=0';
-            document.cookie = 'googtrans=/en/en; path=/; domain=' + root + '; max-age=0';
+            const expires = new Date(Date.now() + 365 * 864e5).toUTCString();
+
+            // Set to /en/en which tells Google Translate "English to English" (no translation)
+            document.cookie = 'googtrans=/en/en; expires=' + expires + '; path=/';
+            document.cookie = 'googtrans=/en/en; expires=' + expires + '; path=/; domain=' + root;
 
             applyDirLang('en');
 
@@ -6214,7 +6207,7 @@
               });
             }
 
-            console.log('[GT] Switching to English - forcing hard reload');
+            console.log('[GT] Switching to English - setting googtrans=/en/en');
 
             // Use location.replace for a true hard reload without history
             setTimeout(() => {
@@ -6530,8 +6523,8 @@
         setGoogTrans(code);
         applyDirLang(code);
       } else {
-        // Clear translation cookies for English
-        clearGoogTrans();
+        // For English: cookie already set to /en/en by early script
+        // Just ensure HTML attributes are correct
         applyDirLang('en');
 
         // Remove Google Translate font wrappers that might be lingering in the DOM
