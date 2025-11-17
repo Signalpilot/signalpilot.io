@@ -3,6 +3,53 @@
 <head>
   <meta charset="utf-8" />
 
+  <!-- CRITICAL: Clear Google Translate cookies IMMEDIATELY if English is selected -->
+  <script>
+    (function() {
+      try {
+        // Check URL parameter first
+        var urlParams = new URLSearchParams(window.location.search);
+        var urlLang = urlParams.get('lang');
+
+        // Check localStorage
+        var savedLang = localStorage.getItem('sp_lang') || 'en';
+
+        // If URL says English or localStorage says English, nuke Google Translate cookies NOW
+        if (urlLang === 'en' || savedLang === 'en') {
+          console.log('[GT-EARLY] Clearing Google Translate cookies for English');
+
+          // Get root domain
+          var hostname = location.hostname.replace(/^www\./, '');
+          var parts = hostname.split('.');
+          var rootDomain = parts.length > 2 ? parts.slice(-2).join('.') : hostname;
+
+          // Nuclear cookie clearing - all variations
+          var cookieNames = ['googtrans', 'googtrans(2)', 'googtrans(0)', 'googtrans(1)'];
+          var domains = ['', '; domain=.' + rootDomain, '; domain=' + hostname];
+          var paths = ['/', '/en'];
+
+          cookieNames.forEach(function(name) {
+            domains.forEach(function(domain) {
+              paths.forEach(function(path) {
+                document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=' + path + domain;
+                document.cookie = name + '=/en/en; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=' + path + domain;
+                document.cookie = name + '=; max-age=0; path=' + path + domain;
+              });
+            });
+          });
+
+          // Force English on HTML element
+          document.documentElement.lang = 'en';
+          document.documentElement.dir = 'ltr';
+
+          console.log('[GT-EARLY] Cookies cleared, language set to English');
+        }
+      } catch(e) {
+        console.error('[GT-EARLY] Error:', e);
+      }
+    })();
+  </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <!-- Prevent aggressive caching on mobile browsers -->
