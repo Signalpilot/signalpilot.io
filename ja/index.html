@@ -5075,9 +5075,12 @@
       // Update overlay image width to match slider container
       function updateOverlayImageWidth() {
         if (overlayImage && slider) {
-          const rect = slider.getBoundingClientRect();
-          if (rect.width > 0) {
-            overlayImage.style.width = rect.width + 'px';
+          const width = slider.clientWidth;
+          if (width > 0) {
+            overlayImage.style.width = width + 'px';
+          } else {
+            // Retry if width is 0 (layout not ready yet)
+            setTimeout(() => updateOverlayImageWidth(), 100);
           }
         }
       }
