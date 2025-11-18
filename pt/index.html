@@ -5378,6 +5378,9 @@
           const rect = slider.getBoundingClientRect();
           if (rect.width > 0) {
             overlayImage.style.width = rect.width + 'px';
+          } else {
+            // Retry if width is 0 (layout not ready yet)
+            setTimeout(() => updateOverlayImageWidth(), 100);
           }
         }
       }
@@ -5397,8 +5400,13 @@
 
       // Initialize
       function initSlider() {
-        updateOverlayImageWidth();
-        setSliderPosition(50, false);
+        // Use requestAnimationFrame to ensure layout is complete before measuring
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            updateOverlayImageWidth();
+            setSliderPosition(50, false);
+          });
+        });
       }
 
       // Update overlay width when images load
@@ -5406,10 +5414,14 @@
       const foregroundImage = overlayImage;
 
       if (backgroundImage) {
-        backgroundImage.addEventListener('load', updateOverlayImageWidth);
+        backgroundImage.addEventListener('load', () => {
+          requestAnimationFrame(() => updateOverlayImageWidth());
+        });
       }
       if (foregroundImage) {
-        foregroundImage.addEventListener('load', updateOverlayImageWidth);
+        foregroundImage.addEventListener('load', () => {
+          requestAnimationFrame(() => updateOverlayImageWidth());
+        });
       }
 
       // Feature 8: Keyboard navigation
