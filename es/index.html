@@ -5128,10 +5128,13 @@
       // Update overlay image width to match slider container
       function updateOverlayImageWidth() {
         if (overlayImage && slider) {
-          const rect = slider.getBoundingClientRect();
-          if (rect.width > 0) {
-            overlayImage.style.width = rect.width + 'px';
-          }
+          // Use requestAnimationFrame to ensure layout is complete
+          requestAnimationFrame(() => {
+            const rect = slider.getBoundingClientRect();
+            if (rect.width > 0) {
+              overlayImage.style.width = rect.width + 'px';
+            }
+          });
         }
       }
 
@@ -5261,7 +5264,17 @@
       });
 
       window.addEventListener('resize', initSlider);
-      initSlider();
+
+      // Initial call with delay to ensure layout is ready on mobile
+      if (window.innerWidth <= 768) {
+        // On mobile, wait for layout to be ready
+        setTimeout(() => {
+          initSlider();
+        }, 100);
+      } else {
+        // On desktop, init immediately
+        initSlider();
+      }
 
       // Intersection Observer for auto-sweep when section comes into view
       if ('IntersectionObserver' in window) {
