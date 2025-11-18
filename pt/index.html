@@ -784,7 +784,6 @@
 
       /* Ensure header buttons adapt to smaller text when necessary */
       header .btn,
-      header #langToggle,
       header #themeToggle {
         font-size: .8rem !important;
         padding: .4rem .6rem !important;
@@ -792,13 +791,6 @@
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         flex-shrink: 1 !important;
-      }
-
-      /* Language button - allow slight shrinking if needed */
-      header #langToggle span {
-        max-width: 30px !important;
-        overflow: hidden !important;
-        text-overflow: clip !important;
       }
 
       /* CTA button - ensure it doesn't overflow */
@@ -2149,61 +2141,7 @@
     }
 
 
-    /* Language Dropdown - container only (menu created as body child in JavaScript) */
-    .lang-dropdown{
-      position:relative;
-      flex-shrink:0;
-      z-index:67 !important;
-    }
-
-    /* Language dropdown menu - created as direct child of body, needs to work on ALL screen sizes */
-    .lang-dropdown-menu {
-      position: fixed !important;
-      top: 70px;
-      right: 20px;
-      background: rgba(10, 12, 20, 0.98);
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      border-radius: 12px;
-      padding: 0.5rem;
-      min-width: 180px;
-      max-height: 500px;
-      overflow-y: auto;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
-      z-index: 76 !important;
-      opacity: 0 !important;
-      visibility: hidden !important;
-      transform: translateY(-10px);
-      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-      display: flex !important;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    .lang-dropdown-menu.active {
-      opacity: 1 !important;
-      visibility: visible !important;
-      transform: translateY(0) !important;
-    }
-    .lang-dropdown-menu button {
-      padding: 0.6rem 0.9rem;
-      background: transparent;
-      border: none;
-      border-radius: 8px;
-      color: #b7c2d9;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 0.9rem;
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-weight: 500;
-    }
-    .lang-dropdown-menu button:hover {
-      background: rgba(91, 138, 255, 0.15);
-      color: #fff;
-    }
-
-
-    #themeToggle,
-    #langToggle{flex-shrink:0;position:relative;z-index:68 !important;padding:.4rem .6rem !important;font-size:0.85rem !important;min-width:44px;display:inline-flex !important;align-items:center !important;justify-content:center !important}
+    #themeToggle{flex-shrink:0;position:relative;z-index:68 !important;padding:.4rem .6rem !important;font-size:0.85rem !important;min-width:44px;display:inline-flex !important;align-items:center !important;justify-content:center !important}
 
     /* Make theme and language buttons smaller on mobile */
     
@@ -2234,8 +2172,7 @@
       }
 
     @media (max-width:768px){
-      #themeToggle,
-      #langToggle{
+      #themeToggle{
         padding:.3rem !important;
         font-size:0.8rem !important;
         min-width:40px;
@@ -2245,18 +2182,10 @@
         justify-content:center !important;
       }
 
-      #themeToggle span,
-      #langToggle span{
+      #themeToggle span{
         display:flex !important;
         align-items:center !important;
         justify-content:center !important;
-      }
-
-      /* Fix language dropdown menu on mobile */
-      .lang-dropdown-menu {
-        right: 10px;
-        min-width: 160px;
-        max-width: calc(100vw - 20px);
       }
 
       /* Ensure header doesn't exceed viewport width and allows natural height */
@@ -2347,8 +2276,7 @@
     }
 
 
-    /* CRITICAL FIX: Ensure language/theme buttons stay visible */
-    .lang-dropdown,
+    /* CRITICAL FIX: Ensure theme button stays visible */
     #themeToggle,
     .menu-toggle{
       position:relative;
@@ -2392,13 +2320,8 @@
       }
 
       /* Better mobile header button sizing */
-      .lang-dropdown,
       #themeToggle {
         flex-shrink: 0;
-      }
-
-      #themeToggle,
-      #langToggle {
         min-width: 44px; /* iOS minimum tap target */
         min-height: 44px;
       }
@@ -2909,9 +2832,8 @@
       .price{font-size:1.8rem}
       .cta-inner .bar .note{display:none}
 
-      /* Extra small screens - further reduce header button sizes for translated text */
+      /* Extra small screens - further reduce header button sizes */
       header .btn,
-      header #langToggle,
       header #themeToggle {
         font-size: .75rem !important;
         padding: .35rem .5rem !important;
@@ -3430,12 +3352,6 @@
       </nav>
 
 
-
-      <div class="lang-dropdown">
-        <button id="langToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Seleção de idioma" style="font-size:.85rem;padding:.5rem .7rem;color:var(--text)">
-          <span>🇧🇷 PT</span>
-        </button>
-      </div>
 
       <button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Seleção de tema" style="padding:.5rem .7rem;color:var(--text)">
         <span id="theme-icon">
@@ -6128,108 +6044,6 @@
     })();
 
 
-    /* ======================== Language Dropdown - Direct child of body ======================== */
-
-    // Language dropdown - create as direct child of body to escape stacking context
-    (function() {
-      const langBtn = document.getElementById('langToggle');
-      if (!langBtn) return;
-
-      // Create language dropdown menu
-      const langMenu = document.createElement('div');
-      langMenu.className = 'lang-dropdown-menu';
-
-      // Create language buttons
-      const languages = [
-        { code: 'en', name: 'English', flag: '🇺🇸' },
-        { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-        { code: 'fr', name: 'Français', flag: '🇫🇷' },
-        { code: 'es', name: 'Español', flag: '🇪🇸' },
-        { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-        { code: 'zh', name: '中文', flag: '🇨🇳' },
-        { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-        { code: 'ar', name: 'العربية', flag: '🇸🇦' },
-        { code: 'pt', name: 'Português', flag: '🇵🇹' },
-        { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
-        { code: 'ja', name: '日本語', flag: '🇯🇵' },
-        { code: 'ko', name: '한국어', flag: '🇰🇷' },
-        { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
-        { code: 'th', name: 'ไทย', flag: '🇹🇭' },
-        { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
-        { code: 'id', name: 'Bahasa Indonesia', flag: '🇮🇩' }
-      ];
-
-      languages.forEach(lang => {
-        const btn = document.createElement('button');
-        btn.setAttribute('data-lang', lang.code);
-        btn.textContent = lang.flag + ' ' + lang.name;
-        btn.addEventListener('click', function() {
-          function applyDirLang(langCode) {
-            document.documentElement.lang = (langCode === 'zh') ? 'zh-CN' : langCode;
-            document.documentElement.dir = (langCode === 'ar') ? 'rtl' : 'ltr';
-          }
-
-          // Save to localStorage
-          localStorage.setItem('sp_lang', lang.code);
-
-          // Set document language attributes
-          applyDirLang(lang.code);
-
-          // Track event if analytics available
-          if (typeof trackEvent === 'function') {
-            trackEvent('language_change', {
-              language: lang.code,
-              language_name: lang.name
-            });
-          }
-
-          console.log('Language changed to:', lang.code);
-
-          // Reload page
-          location.reload();
-        });
-        langMenu.appendChild(btn);
-      });
-
-      // CRITICAL: Append directly to body (escapes header's stacking context)
-      document.body.appendChild(langMenu);
-
-      // Open/close functions
-      function open() {
-        langMenu.classList.add('active');
-        langBtn.setAttribute('aria-expanded', 'true');
-      }
-
-      function close() {
-        langMenu.classList.remove('active');
-        langBtn.setAttribute('aria-expanded', 'false');
-      }
-
-      function toggle() {
-        if (langMenu.classList.contains('active')) {
-          close();
-        } else {
-          open();
-        }
-      }
-
-      // Event listeners
-      langBtn.addEventListener('click', function(e) {
-        toggle();
-      });
-
-      // Close when clicking outside
-      document.addEventListener('click', function(e) {
-        if (langMenu.classList.contains('active')) {
-          if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
-            close();
-          }
-        }
-      });
-    })();
-
-
-
     /* ======================== Copy to clipboard (wallets) ======================== */
 
     document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>{
@@ -7080,17 +6894,7 @@ if ('serviceWorker' in navigator) {
       });
     });
 
-    // 6. TRACK LANGUAGE SELECTOR
-    const langToggle = document.getElementById('langToggle');
-    if (langToggle) {
-      langToggle.addEventListener('click', function() {
-        trackEvent('language_selector_open', {});
-      });
-    }
-
-    // Language dropdown analytics now integrated into the language dropdown JavaScript above
-
-    // 7. TRACK THEME TOGGLE
+    // 6. TRACK THEME TOGGLE
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
       themeToggle.addEventListener('click', function() {
