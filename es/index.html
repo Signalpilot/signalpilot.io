@@ -5006,7 +5006,7 @@
               src="assets/showcase/chart-with.jpg"
               alt="Gráfico con Signal Pilot"
               loading="eager"
-              style="position:absolute;top:0;left:0;height:100%;max-width:none;object-fit:contain;display:block;pointer-events:none"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;max-width:none;object-fit:contain;display:block;pointer-events:none"
               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:rgba(10,30,20,1);color:rgba(255,255,255,.5);flex-direction:column;gap:1rem\'><svg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><polyline points=\'20 6 9 17 4 12\'/></svg><span style=\'font-size:1.1rem;font-weight:600;color:#3ed598\'>WITH Signal Pilot</span><span style=\'font-size:.9rem;opacity:.7\'>Add your chart image to:<br/>assets/showcase/chart-with.jpg</span></div>'"
             />
           </div>
@@ -5115,13 +5115,13 @@
       // Update overlay image width to match slider container
       function updateOverlayImageWidth() {
         if (overlayImage && slider) {
-          // Use requestAnimationFrame to ensure layout is complete
-          requestAnimationFrame(() => {
-            const rect = slider.getBoundingClientRect();
-            if (rect.width > 0) {
-              overlayImage.style.width = rect.width + 'px';
-            }
-          });
+          const width = slider.clientWidth;
+          if (width > 0) {
+            overlayImage.style.width = width + 'px';
+          } else {
+            // Retry if width is 0 (layout not ready yet)
+            setTimeout(() => updateOverlayImageWidth(), 100);
+          }
         }
       }
 
