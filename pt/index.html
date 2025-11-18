@@ -5228,21 +5228,8 @@
           <span class="badge" style="margin-bottom:1rem">DEMO INTERATIVA</span>
           <h2 class="headline lg">A Diferença</h2>
           <p style="color:var(--muted);font-size:1.1rem;line-height:1.6;margin-top:1rem">
-            <strong style="color:var(--brand)">👆 Arraste o controle</strong> para comparar negociação com e sem <span style="font-family:'Gugi',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.1em;font-weight:400">Signal Pilot</span>. Mesmo gráfico. Mesmo período. Clareza completamente diferente.
+            <strong style="color:var(--brand)">👆 Arraste o controle ou clique</strong> para comparar negociação com e sem <span style="font-family:'Gugi',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.1em;font-weight:400">Signal Pilot</span>. Mesmo gráfico. Mesmo período. Clareza completamente diferente.
           </p>
-        </div>
-
-        <!-- Slider Controls -->
-        <div style="display:flex;justify-content:center;gap:0.8rem;margin-bottom:1.5rem;flex-wrap:nowrap;align-items:center">
-          <button id="btn-before" class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.85rem;min-height:38px;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1">
-            ← Antes
-          </button>
-          <button id="btn-autoplay" class="btn btn-primary" style="padding:0.5rem 1rem;font-size:0.85rem;min-height:38px;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1">
-            ▶ Reprodução Automática
-          </button>
-          <button id="btn-after" class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.85rem;min-height:38px;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1">
-            Depois →
-          </button>
         </div>
 
         <!-- Interactive Slider Container -->
@@ -5541,86 +5528,6 @@
         observer.observe(slider);
       }
 
-      // Button Controls
-      const btnBefore = document.getElementById('btn-before');
-      const btnAutoplay = document.getElementById('btn-autoplay');
-      const btnAfter = document.getElementById('btn-after');
-
-      let autoplayInterval = null;
-      let isAutoPlaying = false;
-
-      // Before button - snap to 0%
-      if (btnBefore) {
-        btnBefore.addEventListener('click', () => {
-          stopAutoPlay();
-          markInteraction();
-          setSliderPosition(0, true);
-        });
-      }
-
-      // After button - snap to 100%
-      if (btnAfter) {
-        btnAfter.addEventListener('click', () => {
-          stopAutoPlay();
-          markInteraction();
-          setSliderPosition(100, true);
-        });
-      }
-
-      // Auto Play button - toggle continuous animation
-      if (btnAutoplay) {
-        btnAutoplay.addEventListener('click', () => {
-          if (isAutoPlaying) {
-            stopAutoPlay();
-          } else {
-            startAutoPlay();
-          }
-        });
-      }
-
-      function startAutoPlay() {
-        stopAutoPlay(); // Clear any existing interval
-        isAutoPlaying = true;
-        markInteraction();
-        btnAutoplay.innerHTML = '⏸ Pause';
-        btnAutoplay.classList.remove('btn-primary');
-        btnAutoplay.classList.add('btn-ghost');
-
-        let direction = 1; // 1 = forward, -1 = backward
-        let currentPos = 50;
-
-        autoplayInterval = setInterval(() => {
-          currentPos += (direction * 2); // Move 2% per frame
-
-          if (currentPos >= 100) {
-            currentPos = 100;
-            direction = -1; // Reverse direction
-          } else if (currentPos <= 0) {
-            currentPos = 0;
-            direction = 1; // Reverse direction
-          }
-
-          setSliderPosition(currentPos, false);
-        }, 30); // Update every 30ms for smooth animation
-      }
-
-      function stopAutoPlay() {
-        if (autoplayInterval) {
-          clearInterval(autoplayInterval);
-          autoplayInterval = null;
-        }
-        isAutoPlaying = false;
-        btnAutoplay.innerHTML = '▶ Reprodução Automática';
-        btnAutoplay.classList.remove('btn-ghost');
-        btnAutoplay.classList.add('btn-primary');
-      }
-
-      // Stop auto play if user manually interacts
-      const originalMarkInteraction = markInteraction;
-      markInteraction = function() {
-        stopAutoPlay();
-        originalMarkInteraction();
-      };
     })();
     </script>
 
