@@ -1105,20 +1105,20 @@
         p.glow += p.glowSpeed;
         p.rotation += p.rotationSpeed;
 
-        const pulseSize = p.size * (1 + Math.sin(p.pulse) * 0.4);
-        const glowIntensity = (Math.sin(p.glow) + 1) / 2; // 0 to 1
+        const sunPulseSize = p.size * (1 + Math.sin(p.pulse) * 0.4);
+        const sunGlowIntensity = (Math.sin(p.glow) + 1) / 2; // 0 to 1
 
         // Draw warm golden glow
-        const sunGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, pulseSize * 4);
+        const sunGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, sunPulseSize * 4);
         sunGrad.addColorStop(0, config.color);
         sunGrad.addColorStop(0.3, config.color.replace(/[\d.]+\)/, '0.5)'));
         sunGrad.addColorStop(0.6, config.lineColor);
         sunGrad.addColorStop(1, 'transparent');
 
-        ctx.globalAlpha = p.alpha * (0.7 + glowIntensity * 0.3);
+        ctx.globalAlpha = p.alpha * (0.7 + sunGlowIntensity * 0.3);
         ctx.fillStyle = sunGrad;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, pulseSize * 4, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, sunPulseSize * 4, 0, Math.PI * 2);
         ctx.fill();
 
         // Draw sparkle/star shape
@@ -1131,8 +1131,8 @@
         for (let i = 0; i < 4; i++) {
           ctx.beginPath();
           ctx.moveTo(0, 0);
-          ctx.lineTo(0, -pulseSize * 2);
-          ctx.lineTo(pulseSize * 0.3, -pulseSize * 0.6);
+          ctx.lineTo(0, -sunPulseSize * 2);
+          ctx.lineTo(sunPulseSize * 0.3, -sunPulseSize * 0.6);
           ctx.closePath();
           ctx.fill();
           ctx.rotate(Math.PI / 2);
@@ -1141,7 +1141,7 @@
         // Bright center
         ctx.fillStyle = 'rgba(255, 255, 240, 0.9)';
         ctx.beginPath();
-        ctx.arc(0, 0, pulseSize * 0.6, 0, Math.PI * 2);
+        ctx.arc(0, 0, sunPulseSize * 0.6, 0, Math.PI * 2);
         ctx.fill();
         break;
 
