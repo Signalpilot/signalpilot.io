@@ -173,7 +173,6 @@
     /* Ensure buttons always work */
     nav a,
     nav button,
-    #langToggle,
     #themeToggle {
       pointer-events: auto !important;
       cursor: pointer !important;
@@ -1024,7 +1023,7 @@
 
       <nav>
         <ul>
-          <li><a href="/es/#why">¿Por Qué Nosotros?</a></li>
+          <li><a href="/es/#inside">¿Por Qué Nosotros?</a></li>
           <li><a href="/es/#inside">Qué Incluye</a></li>
           <li><a href="/es/roadmap.html">Hoja de Ruta</a></li>
           <li class="nav-dropdown">
@@ -1041,40 +1040,11 @@
         </ul>
       </nav>
 
-      <div class="lang-dropdown">
-        <button id="langToggle" class="btn" type="button" aria-label="Selección de idioma" aria-expanded="false" aria-haspopup="true">
-          <span>🌐</span>
-        </button>
-      </div>
-
       <button id="themeToggle" class="btn" type="button" aria-label="Selección de tema">
         <span id="theme-icon">🌙</span>
       </button>
     </div>
   </header>
-
-  <!-- Hidden Google Translate container -->
-  <div id="google_translate_container" style="position:absolute;left:-9999px;" aria-hidden="true"></div>
-
-  <!-- Hidden select for Google Translate compatibility -->
-  <select id="langSel" style="display:none;" aria-hidden="true">
-    <option value="en">English</option>
-    <option value="de">Deutsch</option>
-    <option value="fr">Français</option>
-    <option value="es">Español</option>
-    <option value="it">Italiano</option>
-    <option value="zh">中文</option>
-    <option value="ru">Русский</option>
-    <option value="ar">العربية</option>
-    <option value="pt">Português</option>
-    <option value="tr">Türkçe</option>
-    <option value="ja">日本語</option>
-    <option value="ko">한국어</option>
-    <option value="vi">Tiếng Việt</option>
-    <option value="th">ไทย</option>
-    <option value="hi">हिन्दी</option>
-    <option value="id">Bahasa Indonesia</option>
-  </select>
 
   <!-- Hero -->
   <section class="hero">
@@ -1288,186 +1258,6 @@
           dropdownOpen = false;
         }
       });
-    })();
-
-    // Language Dropdown
-    (function() {
-      const langBtn = document.getElementById('langToggle');
-      if (!langBtn) return;
-
-      // Create language dropdown menu
-      const langMenu = document.createElement('div');
-      langMenu.className = 'lang-dropdown-menu';
-
-      // Create language buttons
-      const languages = [
-        { code: 'en', name: 'English' },
-        { code: 'de', name: 'Deutsch' },
-        { code: 'fr', name: 'Français' },
-        { code: 'es', name: 'Español' },
-        { code: 'it', name: 'Italiano' },
-        { code: 'zh', name: '中文' },
-        { code: 'ru', name: 'Русский' },
-        { code: 'ar', name: 'العربية' },
-        { code: 'pt', name: 'Português' },
-        { code: 'tr', name: 'Türkçe' },
-        { code: 'ja', name: '日本語' },
-        { code: 'ko', name: '한국어' },
-        { code: 'vi', name: 'Tiếng Việt' },
-        { code: 'th', name: 'ไทย' },
-        { code: 'hi', name: 'हिन्दी' },
-        { code: 'id', name: 'Bahasa Indonesia' }
-      ];
-
-      languages.forEach(lang => {
-        const btn = document.createElement('button');
-        btn.textContent = lang.name;
-        btn.onclick = () => selectLanguage(lang);
-        langMenu.appendChild(btn);
-      });
-
-      document.body.appendChild(langMenu);
-
-      let menuOpen = false;
-
-      langBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        menuOpen = !menuOpen;
-        langMenu.classList.toggle('show', menuOpen);
-        langBtn.setAttribute('aria-expanded', menuOpen);
-
-        if (menuOpen) {
-          const rect = langBtn.getBoundingClientRect();
-          langMenu.style.top = (rect.bottom + 8) + 'px';
-          langMenu.style.left = (rect.left - langMenu.offsetWidth + rect.width) + 'px';
-        }
-      });
-
-      document.addEventListener('click', function(e) {
-        if (menuOpen && !langBtn.contains(e.target) && !langMenu.contains(e.target)) {
-          menuOpen = false;
-          langMenu.classList.remove('show');
-          langBtn.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      function selectLanguage(lang) {
-        console.log('Language selected:', lang.code);
-
-        // Helper functions from page load script
-        function baseDomain(host) {
-          const p = host.split('.');
-          return p.length > 2 ? p.slice(-2).join('.') : host;
-        }
-
-        function setCookie(name, value, days, domain) {
-          let expires = '';
-          if (days) {
-            const d = new Date();
-            d.setTime(d.getTime() + days * 864e5);
-            expires = '; expires=' + d.toUTCString();
-          }
-          const dom = domain ? '; domain=' + domain : '';
-          document.cookie = name + '=' + value + expires + '; path=/' + dom;
-        }
-
-        function setGoogTrans(langCode) {
-          const target = (langCode === 'zh') ? 'zh-CN' : langCode;
-          const val = '/en/' + target;
-          setCookie('googtrans', val, 365);
-          const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-          setCookie('googtrans', val, 365, root);
-        }
-
-        function applyDirLang(langCode) {
-          document.documentElement.lang = (langCode === 'zh') ? 'zh-CN' : langCode;
-          document.documentElement.dir = (langCode === 'ar') ? 'rtl' : 'ltr';
-        }
-
-        function loadGTE() {
-          if (window.__gte_loading || window.google) return;
-          window.__gte_loading = true;
-          const s = document.createElement('script');
-          s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-          s.async = true;
-          document.head.appendChild(s);
-        }
-
-        // Save to localStorage
-        localStorage.setItem('sp_lang', lang.code);
-
-        // Set cookies and attributes
-        setGoogTrans(lang.code);
-        applyDirLang(lang.code);
-
-        // Load translate script if not English
-        if (lang.code !== 'en') loadGTE();
-
-        // Reload page to apply translation
-        location.reload();
-      }
-    })();
-
-    // Google Translate Initialization
-    window.googleTranslateElementInit = function() {
-      if (!window.google || !google.translate) return;
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'ar,de,es,fr,it,ru,zh-CN,pt,tr,ja,ko,vi,th,hi,id',
-        autoDisplay: false
-      }, 'google_translate_container');
-    };
-
-    // Load saved language on page load
-    (function() {
-      const LANG_KEY = 'sp_lang';
-
-      function baseDomain(host) {
-        const p = host.split('.');
-        return p.length > 2 ? p.slice(-2).join('.') : host;
-      }
-
-      function setCookie(name, value, days, domain) {
-        let expires = '';
-        if (days) {
-          const d = new Date();
-          d.setTime(d.getTime() + days * 864e5);
-          expires = '; expires=' + d.toUTCString();
-        }
-        const dom = domain ? '; domain=' + domain : '';
-        document.cookie = name + '=' + value + expires + '; path=/' + dom;
-      }
-
-      function setGoogTrans(lang) {
-        const target = (lang === 'zh') ? 'zh-CN' : lang;
-        const val = '/en/' + target;
-        setCookie('googtrans', val, 365);
-        const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-        setCookie('googtrans', val, 365, root);
-      }
-
-      function applyDirLang(lang) {
-        document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : lang;
-        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-      }
-
-      function loadGTE() {
-        if (window.__gte_loading || window.google) return;
-        window.__gte_loading = true;
-        const s = document.createElement('script');
-        s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-        s.async = true;
-        document.head.appendChild(s);
-      }
-
-      const sel = document.getElementById('langSel');
-      const saved = localStorage.getItem(LANG_KEY) || 'en';
-      const code = saved.toLowerCase().startsWith('zh') ? 'zh' : saved.slice(0, 2);
-
-      if (sel) sel.value = code;
-      setGoogTrans(code);
-      applyDirLang(code);
-      if (code !== 'en') loadGTE();
     })();
 
     // Smooth scroll for nav links with offset
