@@ -348,6 +348,41 @@
           'rgba(236, 72, 153, 0.30)'
         ]
       }
+    },
+
+    sunny: {
+      name: 'Sunny',
+      icon: '☀️',
+      description: 'Bright sunshine and warm rays',
+      colors: {
+        bg: '#0d0a05',
+        bgElev: '#1a140a',
+        bgSoft: '#2d2415',
+        text: '#fffbf0',
+        muted: '#fef3c7',
+        mutedSoft: '#fde68a',
+        brand: '#fbbf24',
+        brandGlow: 'rgba(251, 191, 36, 0.7)',
+        accent: '#38bdf8',
+        success: '#84cc16',
+        warn: '#f97316',
+        border: 'rgba(251, 191, 36, 0.28)'
+      },
+      particles: {
+        type: 'sun-rays',
+        color: 'rgba(251, 191, 36, 0.85)',
+        lineColor: 'rgba(56, 189, 248, 0.35)',
+        count: 60,
+        emoji: '✨'
+      },
+      aurora: {
+        colors: [
+          'rgba(251, 191, 36, 0.45)',
+          'rgba(56, 189, 248, 0.40)',
+          'rgba(251, 146, 60, 0.35)',
+          'rgba(254, 243, 199, 0.25)'
+        ]
+      }
     }
   };
 
