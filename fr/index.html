@@ -6066,140 +6066,6 @@
     })();
 
 
-    /* ======================== Language Dropdown - Direct child of body ======================== */
-
-    // Language dropdown - create as direct child of body to escape stacking context
-    (function() {
-      const langBtn = document.getElementById('langToggle');
-      if (!langBtn) return;
-
-      // Create language dropdown menu
-      const langMenu = document.createElement('div');
-
-      // Create language buttons
-      const languages = [
-        { code: 'en', name: 'English', flag: '🇺🇸' },
-        { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-        { code: 'fr', name: 'Français', flag: '🇫🇷' },
-        { code: 'es', name: 'Español', flag: '🇪🇸' },
-        { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-        { code: 'zh', name: '中文', flag: '🇨🇳' },
-        { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-        { code: 'ar', name: 'العربية', flag: '🇸🇦' },
-        { code: 'pt', name: 'Português', flag: '🇵🇹' },
-        { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
-        { code: 'ja', name: '日本語', flag: '🇯🇵' },
-        { code: 'ko', name: '한국어', flag: '🇰🇷' },
-        { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
-        { code: 'th', name: 'ไทย', flag: '🇹🇭' },
-        { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
-        { code: 'id', name: 'Bahasa Indonesia', flag: '🇮🇩' }
-      ];
-
-      languages.forEach(lang => {
-        const btn = document.createElement('button');
-        btn.setAttribute('data-lang', lang.code);
-        btn.textContent = lang.flag + ' ' + lang.name;
-        btn.addEventListener('click', function() {
-          // Helper functions
-          function baseDomain(host) {
-            const p = host.split('.');
-            return p.length > 2 ? p.slice(-2).join('.') : host;
-          }
-
-          function setCookie(name, value, days, domain) {
-            let expires = '';
-            if (days) {
-              const d = new Date();
-              d.setTime(d.getTime() + days * 864e5);
-              expires = '; expires=' + d.toUTCString();
-            }
-            const dom = domain ? '; domain=' + domain : '';
-            document.cookie = name + '=' + value + expires + '; path=/' + dom;
-          }
-
-          function applyDirLang(langCode) {
-            document.documentElement.lang = (langCode === 'zh') ? 'zh-CN' : langCode;
-            document.documentElement.dir = (langCode === 'ar') ? 'rtl' : 'ltr';
-          }
-
-          // Save to localStorage
-          localStorage.setItem('sp_lang', lang.code);
-
-          // Set language attributes
-          if (lang.code === 'en') {
-            applyDirLang('en');
-
-            // Track event if analytics available
-            if (typeof trackEvent === 'function') {
-              trackEvent('language_change', {
-                language: 'en',
-                language_name: lang.name
-              });
-            }
-
-            console.log('Switching to English');
-
-            // Use location.replace for a true hard reload without history
-            setTimeout(() => {
-              location.replace(location.pathname + '?lang=en&t=' + Date.now());
-            }, 50);
-          } else {
-            applyDirLang(lang.code);
-
-            // Track event if analytics available
-            if (typeof trackEvent === 'function') {
-              trackEvent('language_change', {
-                language: lang.code,
-                language_name: lang.name
-              });
-            }
-
-            console.log('Language changed to:', lang.code);
-            location.reload();
-          }
-        });
-        langMenu.appendChild(btn);
-      });
-
-      // CRITICAL: Append directly to body (escapes header's stacking context)
-      document.body.appendChild(langMenu);
-
-      // Open/close functions
-      function open() {
-        langMenu.classList.add('active');
-        langBtn.setAttribute('aria-expanded', 'true');
-      }
-
-      function close() {
-        langMenu.classList.remove('active');
-        langBtn.setAttribute('aria-expanded', 'false');
-      }
-
-      function toggle() {
-        if (langMenu.classList.contains('active')) {
-          close();
-        } else {
-          open();
-        }
-      }
-
-      // Event listeners
-      langBtn.addEventListener('click', function(e) {
-        toggle();
-      });
-
-      // Close when clicking outside
-      document.addEventListener('click', function(e) {
-        if (langMenu.classList.contains('active')) {
-          if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
-            close();
-          }
-        }
-      });
-    })();
-
-
 
     /* ======================== Copy to clipboard (wallets) ======================== */
 
@@ -7051,17 +6917,7 @@ if ('serviceWorker' in navigator) {
       });
     });
 
-    // 6. TRACK LANGUAGE SELECTOR
-    const langToggle = document.getElementById('langToggle');
-    if (langToggle) {
-      langToggle.addEventListener('click', function() {
-        trackEvent('language_selector_open', {});
-      });
-    }
-
-    // Language dropdown analytics now integrated into the language dropdown JavaScript above
-
-    // 7. TRACK THEME TOGGLE
+    // 6. TRACK THEME TOGGLE
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
       themeToggle.addEventListener('click', function() {
@@ -7171,7 +7027,7 @@ if ('serviceWorker' in navigator) {
     }
 
     if (elements.progressText) {
-      elements.progressText.innerHTML = `<strong style="color:#fff">${salesCount} of ${TOTAL_SLOTS}</strong> founding member slots claimed`;
+      elements.progressText.innerHTML = `<strong style="color:#fff">${salesCount} sur ${TOTAL_SLOTS}</strong> places de membre fondateur réclamées`;
     }
 
     if (elements.currentPrice && currentTier.price) {
@@ -7183,7 +7039,7 @@ if ('serviceWorker' in navigator) {
     }
 
     if (elements.buyButton && currentTier.price) {
-      elements.buyButton.value = `Buy Now - $${currentTier.price.toLocaleString()}`;
+      elements.buyButton.value = `Acheter Maintenant - $${currentTier.price.toLocaleString()}`;
     }
 
     if (nextTier && nextTier.price) {
