@@ -5838,7 +5838,7 @@
 
     /* ======================== Resources Dropdown ======================== */
 
-    // Use event delegation for Google Translate compatibility
+    // Use event delegation
     (function() {
       let dropdownOpen = false;
 
@@ -5929,78 +5929,24 @@
         btn.textContent = lang.flag + ' ' + lang.name;
         btn.addEventListener('click', function() {
           // Helper functions
-          function baseDomain(host) {
-            const p = host.split('.');
-            return p.length > 2 ? p.slice(-2).join('.') : host;
-          }
-
-          function setCookie(name, value, days, domain) {
-            let expires = '';
-            if (days) {
-              const d = new Date();
-              d.setTime(d.getTime() + days * 864e5);
-              expires = '; expires=' + d.toUTCString();
-            }
-            const dom = domain ? '; domain=' + domain : '';
-            document.cookie = name + '=' + value + expires + '; path=/' + dom;
-          }
-
-          function setGoogTrans(langCode) {
-            const target = (langCode === 'zh') ? 'zh-CN' : langCode;
-            const val = '/en/' + target;
-            setCookie('googtrans', val, 365);
-            const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-            setCookie('googtrans', val, 365, root);
-          }
-
-          function applyDirLang(langCode) {
-            document.documentElement.lang = (langCode === 'zh') ? 'zh-CN' : langCode;
-            document.documentElement.dir = (langCode === 'ar') ? 'rtl' : 'ltr';
-          }
-
           // Save to localStorage
           localStorage.setItem('sp_lang', lang.code);
 
-          // Set cookies and attributes
+          // Track event if analytics available
+          if (typeof trackEvent === 'function') {
+            trackEvent('language_change', {
+              language: lang.code,
+              language_name: lang.name
+            });
+          }
+
+          // Redirect to appropriate language directory
           if (lang.code === 'en') {
-            // For English: Set googtrans to /en/en (English to English = no translation)
-            const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-            const expires = new Date(Date.now() + 365 * 864e5).toUTCString();
-
-            // Set to /en/en which tells Google Translate "English to English" (no translation)
-            document.cookie = 'googtrans=/en/en; expires=' + expires + '; path=/';
-            document.cookie = 'googtrans=/en/en; expires=' + expires + '; path=/; domain=' + root;
-
-            applyDirLang('en');
-
-            // Track event if analytics available
-            if (typeof trackEvent === 'function') {
-              trackEvent('language_change', {
-                language: 'en',
-                language_name: lang.name
-              });
-            }
-
-            console.log('[GT] Switching to English - setting googtrans=/en/en');
-
-            // Use location.replace for a true hard reload without history
-            setTimeout(() => {
-              location.replace(location.pathname + '?lang=en&t=' + Date.now());
-            }, 50);
+            // Redirect to root for English
+            location.href = '/';
           } else {
-            setGoogTrans(lang.code);
-            applyDirLang(lang.code);
-
-            // Track event if analytics available
-            if (typeof trackEvent === 'function') {
-              trackEvent('language_change', {
-                language: lang.code,
-                language_name: lang.name
-              });
-            }
-
-            console.log('[GT] Language changed to:', lang.code);
-            location.reload();
+            // Redirect to language-specific directory
+            location.href = '/' + lang.code + '/';
           }
         });
         langMenu.appendChild(btn);
