@@ -813,10 +813,7 @@
     /* Ensure clickable elements always work */
     nav[aria-label="Main"] a,
     nav[aria-label="Main"] button,
-    .lang-dropdown button,
-    .lang-dropdown-menu button,
     .menu-toggle,
-    #langToggle,
     #menuToggle,
     .mobile-nav-close {
       pointer-events: auto !important;
@@ -844,7 +841,6 @@
     header button,
     header a,
     .menu-toggle,
-    #langToggle,
     #themeToggle,
     .btn {
       white-space:nowrap !important;
@@ -904,7 +900,6 @@
 
       /* Ensure header buttons adapt to smaller text when necessary */
       header .btn,
-      header #langToggle,
       header #themeToggle {
         font-size: .8rem !important;
         padding: .4rem .6rem !important;
@@ -912,13 +907,6 @@
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         flex-shrink: 1 !important;
-      }
-
-      /* Language button - allow slight shrinking if needed */
-      header #langToggle span {
-        max-width: 30px !important;
-        overflow: hidden !important;
-        text-overflow: clip !important;
       }
 
       /* CTA button - ensure it doesn't overflow */
@@ -2161,66 +2149,11 @@
     }
 
 
-    /* Language Dropdown - container only (menu created as body child in JavaScript) */
-    .lang-dropdown{
-      position:relative;
-      flex-shrink:0;
-      z-index:67 !important;
-    }
+    #themeToggle{flex-shrink:0;position:relative;z-index:68 !important;padding:.4rem .6rem !important;font-size:0.85rem !important;min-width:44px;display:inline-flex !important;align-items:center !important;justify-content:center !important}
 
-    /* Language dropdown menu - created as direct child of body, needs to work on ALL screen sizes */
-    .lang-dropdown-menu {
-      position: fixed !important;
-      top: 70px;
-      right: 20px;
-      background: rgba(10, 12, 20, 0.98);
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      border-radius: 12px;
-      padding: 0.5rem;
-      min-width: 180px;
-      max-height: 500px;
-      overflow-y: auto;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
-      z-index: 76 !important;
-      opacity: 0 !important;
-      visibility: hidden !important;
-      transform: translateY(-10px);
-      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-      display: flex !important;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    .lang-dropdown-menu.active {
-      opacity: 1 !important;
-      visibility: visible !important;
-      transform: translateY(0) !important;
-    }
-    .lang-dropdown-menu button {
-      padding: 0.6rem 0.9rem;
-      background: transparent;
-      border: none;
-      border-radius: 8px;
-      color: #b7c2d9;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 0.9rem;
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-weight: 500;
-    }
-    .lang-dropdown-menu button:hover {
-      background: rgba(91, 138, 255, 0.15);
-      color: #fff;
-    }
-
-
-    #themeToggle,
-    #langToggle{flex-shrink:0;position:relative;z-index:68 !important;padding:.4rem .6rem !important;font-size:0.85rem !important;min-width:44px;display:inline-flex !important;align-items:center !important;justify-content:center !important}
-
-    /* Make theme and language buttons smaller on mobile */
+    /* Make theme button smaller on mobile */
     @media (max-width:768px){
-      #themeToggle,
-      #langToggle{
+      #themeToggle{
         padding:.3rem !important;
         font-size:0.8rem !important;
         min-width:40px;
@@ -2230,18 +2163,10 @@
         justify-content:center !important;
       }
 
-      #themeToggle span,
-      #langToggle span{
+      #themeToggle span{
         display:flex !important;
         align-items:center !important;
         justify-content:center !important;
-      }
-
-      /* Fix language dropdown menu on mobile */
-      .lang-dropdown-menu {
-        right: 10px;
-        min-width: 160px;
-        max-width: calc(100vw - 20px);
       }
 
       /* Ensure header doesn't exceed viewport width and allows natural height */
@@ -2332,8 +2257,7 @@
     }
 
 
-    /* CRITICAL FIX: Ensure language/theme buttons stay visible */
-    .lang-dropdown,
+    /* CRITICAL FIX: Ensure theme/menu buttons stay visible */
     #themeToggle,
     .menu-toggle{
       position:relative;
@@ -2377,13 +2301,8 @@
       }
 
       /* Better mobile header button sizing */
-      .lang-dropdown,
       #themeToggle {
         flex-shrink: 0;
-      }
-
-      #themeToggle,
-      #langToggle {
         min-width: 44px; /* iOS minimum tap target */
         min-height: 44px;
       }
@@ -2731,9 +2650,8 @@
       .price{font-size:1.8rem}
       .cta-inner .bar .note{display:none}
 
-      /* Extra small screens - further reduce header button sizes for translated text */
+      /* Extra small screens - further reduce header button sizes */
       header .btn,
-      header #langToggle,
       header #themeToggle {
         font-size: .75rem !important;
         padding: .35rem .5rem !important;
@@ -6848,17 +6766,7 @@ if ('serviceWorker' in navigator) {
       });
     });
 
-    // 6. TRACK LANGUAGE SELECTOR
-    const langToggle = document.getElementById('langToggle');
-    if (langToggle) {
-      langToggle.addEventListener('click', function() {
-        trackEvent('language_selector_open', {});
-      });
-    }
-
-    // Language dropdown analytics now integrated into the language dropdown JavaScript above
-
-    // 7. TRACK THEME TOGGLE
+    // 6. TRACK THEME TOGGLE
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
       themeToggle.addEventListener('click', function() {
