@@ -3307,12 +3307,6 @@ html[lang="ar"] [style*="text-align:center"] {
 
 
 
-      <div class="lang-dropdown">
-        <button id="langToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Language selection" style="font-size:.85rem;padding:.5rem .7rem;color:var(--text)">
-          <span>🇺🇸</span>
-        </button>
-      </div>
-
       <button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Theme selection" style="padding:.5rem .7rem;color:var(--text)">
         <span id="theme-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;vertical-align:middle;opacity:0.7">
@@ -6091,117 +6085,6 @@ html[lang="ar"] [style*="text-align:center"] {
     })();
 
 
-    /* ======================== Language Dropdown - Direct child of body ======================== */
-
-    // Language dropdown - create as direct child of body to escape stacking context
-    (function() {
-      const langBtn = document.getElementById('langToggle');
-      if (!langBtn) return;
-
-      // Create language dropdown menu
-      const langMenu = document.createElement('div');
-      langMenu.className = 'lang-dropdown-menu';
-
-      // Create language buttons
-      const languages = [
-        { code: 'en', name: 'English', flag: '🇺🇸' },
-        { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-        { code: 'fr', name: 'Français', flag: '🇫🇷' },
-        { code: 'es', name: 'Español', flag: '🇪🇸' },
-        { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-        { code: 'zh', name: '中文', flag: '🇨🇳' },
-        { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-        { code: 'ar', name: 'العربية', flag: '🇸🇦' },
-        { code: 'pt', name: 'Português', flag: '🇵🇹' },
-        { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
-        { code: 'ja', name: '日本語', flag: '🇯🇵' },
-        { code: 'ko', name: '한국어', flag: '🇰🇷' },
-        { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
-        { code: 'th', name: 'ไทย', flag: '🇹🇭' },
-        { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
-        { code: 'id', name: 'Bahasa Indonesia', flag: '🇮🇩' }
-      ];
-
-      languages.forEach(lang => {
-        const btn = document.createElement('button');
-        btn.setAttribute('data-lang', lang.code);
-        btn.textContent = lang.flag + ' ' + lang.name;
-        btn.addEventListener('click', function() {
-          // Save to localStorage
-          localStorage.setItem('sp_lang', lang.code);
-
-          // Track event if analytics available
-          if (typeof trackEvent === 'function') {
-            trackEvent('language_change', {
-              language: lang.code,
-              language_name: lang.name
-            });
-          }
-
-          // Redirect to the appropriate language page
-          if (lang.code === 'en') {
-            window.location.href = '/index.html';
-          } else if (lang.code === 'ar') {
-            window.location.href = '/ar/index.html';
-          } else if (lang.code === 'de') {
-            window.location.href = '/de/index.html';
-          } else if (lang.code === 'es') {
-            window.location.href = '/es/index.html';
-          } else if (lang.code === 'fr') {
-            window.location.href = '/fr/index.html';
-          } else if (lang.code === 'it') {
-            window.location.href = '/it/index.html';
-          } else if (lang.code === 'ru') {
-            window.location.href = '/ru/index.html';
-          } else if (lang.code === 'tr') {
-            window.location.href = '/tr/index.html';
-          } else if (lang.code === 'nl') {
-            window.location.href = '/nl/index.html';
-          } else if (lang.code === 'hu') {
-            window.location.href = '/hu/index.html';
-          }
-        });
-        langMenu.appendChild(btn);
-      });
-
-      // CRITICAL: Append directly to body (escapes header's stacking context)
-      document.body.appendChild(langMenu);
-
-      // Open/close functions
-      function open() {
-        langMenu.classList.add('active');
-        langBtn.setAttribute('aria-expanded', 'true');
-      }
-
-      function close() {
-        langMenu.classList.remove('active');
-        langBtn.setAttribute('aria-expanded', 'false');
-      }
-
-      function toggle() {
-        if (langMenu.classList.contains('active')) {
-          close();
-        } else {
-          open();
-        }
-      }
-
-      // Event listeners
-      langBtn.addEventListener('click', function(e) {
-        toggle();
-      });
-
-      // Close when clicking outside
-      document.addEventListener('click', function(e) {
-        if (langMenu.classList.contains('active')) {
-          if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
-            close();
-          }
-        }
-      });
-    })();
-
-
 
     /* ======================== Copy to clipboard (wallets) ======================== */
 
@@ -7053,16 +6936,6 @@ if ('serviceWorker' in navigator) {
         });
       });
     });
-
-    // 6. TRACK LANGUAGE SELECTOR
-    const langToggle = document.getElementById('langToggle');
-    if (langToggle) {
-      langToggle.addEventListener('click', function() {
-        trackEvent('language_selector_open', {});
-      });
-    }
-
-    // Language dropdown analytics now integrated into the language dropdown JavaScript above
 
     // 7. TRACK THEME TOGGLE
     const themeToggle = document.getElementById('themeToggle');
