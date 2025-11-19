@@ -2,47 +2,6 @@
 <html lang="nl" dir="ltr" data-theme="dark">
 <head>
   <meta charset="utf-8" />
-
-  <!-- CRITICAL: Set Google Translate to English IMMEDIATELY if English is selected -->
-  <script>
-    (function() {
-      try {
-        // Check URL parameter first
-        var urlParams = new URLSearchParams(window.location.search);
-        var urlLang = urlParams.get('lang');
-
-        // Check localStorage
-        var savedLang = localStorage.getItem('sp_lang') || 'en';
-
-        // If URL says Dutch or localStorage says Dutch, set googtrans to /nl/nl
-        if (urlLang === 'nl' || savedLang === 'nl') {
-          console.log('[GT-EARLY] Setting Google Translate to Dutch (/nl/nl)');
-
-          // Get root domain
-          var hostname = location.hostname.replace(/^www\./, '');
-          var parts = hostname.split('.');
-          var rootDomain = parts.length > 2 ? parts.slice(-2).join('.') : hostname;
-
-          // Set long expiration for the /nl/nl cookie
-          var expires = new Date(Date.now() + 365 * 864e5).toUTCString();
-
-          // Set googtrans to /nl/nl on all domains
-          // This tells Google Translate: "Dutch to Dutch" = no translation
-          document.cookie = 'googtrans=/nl/nl; expires=' + expires + '; path=/';
-          document.cookie = 'googtrans=/nl/nl; expires=' + expires + '; path=/; domain=.' + rootDomain;
-
-          // Force Dutch on HTML element
-          document.documentElement.lang = 'nl';
-          document.documentElement.dir = 'ltr';
-
-          console.log('[GT-EARLY] Cookie set to /nl/nl, language set to Dutch');
-        }
-      } catch(e) {
-        console.error('[GT-EARLY] Error:', e);
-      }
-    })();
-  </script>
-
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <!-- Prevent aggressive caching on mobile browsers -->
@@ -69,7 +28,6 @@
 
   <link rel="canonical" href="https://www.signalpilot.io/">
 
-  <!-- Hreflang tags for language versions -->
   <link rel="alternate" hreflang="en" href="https://www.signalpilot.io/">
   <link rel="alternate" hreflang="es" href="https://www.signalpilot.io/es/">
   <link rel="alternate" hreflang="pt-BR" href="https://www.signalpilot.io/pt/">
@@ -773,76 +731,6 @@
 
     *{box-sizing:border-box}
 
-    /* Google Translate fixes - prevent layout breaking */
-    body > .skiptranslate {
-      display: none !important;
-    }
-
-    body {
-      top: 0 !important;
-      position: relative !important;
-    }
-
-    .goog-te-banner-frame {
-      display: none !important;
-    }
-
-    .goog-te-menu-value span {
-      color: inherit !important;
-    }
-
-    .goog-te-gadget {
-      color: inherit !important;
-    }
-
-    /* Make Google Translate font wrappers inherit original text size */
-    font {
-      font-size: inherit !important;
-      line-height: inherit !important;
-    }
-
-    /* Specific adjustments for different text sizes */
-    h1 font, h2 font, h3 font, .headline font {
-      font-size: inherit !important;
-    }
-
-    p font, li font, div font {
-      font-size: inherit !important;
-    }
-
-    .btn font, button font, a font {
-      font-size: inherit !important;
-    }
-
-    /* CRITICAL: Force Google Translate font/span wrappers to not block clicks */
-    nav[aria-label="Main"] font,
-    nav[aria-label="Main"] span:not(.mobile-nav-title),
-    .lang-dropdown font,
-    .lang-dropdown span,
-    .lang-dropdown-menu font,
-    .lang-dropdown-menu span,
-    .menu-toggle font,
-    .menu-toggle span,
-    #langToggle font,
-    #langToggle span,
-    .nav-dropdown font,
-    .nav-dropdown span,
-    button font,
-    button span,
-    .btn font,
-    .btn span {
-      pointer-events: none !important;
-      color: inherit !important;
-      background: transparent !important;
-      font-family: inherit !important;
-      font-size: inherit !important;
-      font-weight: inherit !important;
-      line-height: inherit !important;
-      display: inline !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-    }
-
     /* Force mobile menu text to be white and ALWAYS visible */
     @media (max-width:1400px){
       /* Dark mode mobile menu (default) */
@@ -919,17 +807,12 @@
     /* Ensure clickable elements always work */
     nav[aria-label="Main"] a,
     nav[aria-label="Main"] button,
-    .lang-dropdown button,
-    .lang-dropdown-menu button,
     .menu-toggle,
-    #langToggle,
     #menuToggle,
     .mobile-nav-close {
       pointer-events: auto !important;
       cursor: pointer !important;
     }
-
-    /* Fix header squeezing when Google Translate is active */
     header .container,
     header .nav {
       min-width: 0 !important;
@@ -951,7 +834,6 @@
     header button,
     header a,
     .menu-toggle,
-    #langToggle,
     #themeToggle,
     .btn {
       white-space:nowrap !important;
@@ -1011,7 +893,6 @@
 
       /* Ensure header buttons adapt to smaller text when necessary */
       header .btn,
-      header #langToggle,
       header #themeToggle {
         font-size: .8rem !important;
         padding: .4rem .6rem !important;
@@ -1019,13 +900,6 @@
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         flex-shrink: 1 !important;
-      }
-
-      /* Language button - allow slight shrinking if needed */
-      header #langToggle span {
-        max-width: 30px !important;
-        overflow: hidden !important;
-        text-overflow: clip !important;
       }
 
       /* CTA button - ensure it doesn't overflow */
@@ -2268,66 +2142,11 @@
     }
 
 
-    /* Language Dropdown - container only (menu created as body child in JavaScript) */
-    .lang-dropdown{
-      position:relative;
-      flex-shrink:0;
-      z-index:67 !important;
-    }
+    #themeToggle{flex-shrink:0;position:relative;z-index:68 !important;padding:.4rem .6rem !important;font-size:0.85rem !important;min-width:44px;display:inline-flex !important;align-items:center !important;justify-content:center !important}
 
-    /* Language dropdown menu - created as direct child of body, needs to work on ALL screen sizes */
-    .lang-dropdown-menu {
-      position: fixed !important;
-      top: 70px;
-      right: 20px;
-      background: rgba(10, 12, 20, 0.98);
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      border-radius: 12px;
-      padding: 0.5rem;
-      min-width: 180px;
-      max-height: 500px;
-      overflow-y: auto;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
-      z-index: 76 !important;
-      opacity: 0 !important;
-      visibility: hidden !important;
-      transform: translateY(-10px);
-      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-      display: flex !important;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    .lang-dropdown-menu.active {
-      opacity: 1 !important;
-      visibility: visible !important;
-      transform: translateY(0) !important;
-    }
-    .lang-dropdown-menu button {
-      padding: 0.6rem 0.9rem;
-      background: transparent;
-      border: none;
-      border-radius: 8px;
-      color: #b7c2d9;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 0.9rem;
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-weight: 500;
-    }
-    .lang-dropdown-menu button:hover {
-      background: rgba(91, 138, 255, 0.15);
-      color: #fff;
-    }
-
-
-    #themeToggle,
-    #langToggle{flex-shrink:0;position:relative;z-index:68 !important;padding:.4rem .6rem !important;font-size:0.85rem !important;min-width:44px;display:inline-flex !important;align-items:center !important;justify-content:center !important}
-
-    /* Make theme and language buttons smaller on mobile */
+    /* Make theme button smaller on mobile */
     @media (max-width:768px){
-      #themeToggle,
-      #langToggle{
+      #themeToggle{
         padding:.3rem !important;
         font-size:0.8rem !important;
         min-width:40px;
@@ -2337,18 +2156,10 @@
         justify-content:center !important;
       }
 
-      #themeToggle span,
-      #langToggle span{
+      #themeToggle span{
         display:flex !important;
         align-items:center !important;
         justify-content:center !important;
-      }
-
-      /* Fix language dropdown menu on mobile */
-      .lang-dropdown-menu {
-        right: 10px;
-        min-width: 160px;
-        max-width: calc(100vw - 20px);
       }
 
       /* Ensure header doesn't exceed viewport width and allows natural height */
@@ -2439,8 +2250,7 @@
     }
 
 
-    /* CRITICAL FIX: Ensure language/theme buttons stay visible */
-    .lang-dropdown,
+    /* CRITICAL FIX: Ensure theme button stays visible */
     #themeToggle,
     .menu-toggle{
       position:relative;
@@ -2473,8 +2283,7 @@
     }
 
     /* Mobile hamburger menu appears at ≤1400px (increased from 1300px) */
-    /* Nav items go into hamburger menu to prevent overlap with language/theme buttons */
-    /* Activates earlier to accommodate longer text in translated languages */
+    /* Nav items go into hamburger menu to prevent overlap with theme button */
 
     @media (max-width:1400px){
       /* Ensure header buttons have adequate space */
@@ -2484,13 +2293,8 @@
       }
 
       /* Better mobile header button sizing */
-      .lang-dropdown,
       #themeToggle {
         flex-shrink: 0;
-      }
-
-      #themeToggle,
-      #langToggle {
         min-width: 44px; /* iOS minimum tap target */
         min-height: 44px;
       }
@@ -2838,9 +2642,8 @@
       .price{font-size:1.8rem}
       .cta-inner .bar .note{display:none}
 
-      /* Extra small screens - further reduce header button sizes for translated text */
+      /* Extra small screens - further reduce header button sizes */
       header .btn,
-      header #langToggle,
       header #themeToggle {
         font-size: .75rem !important;
         padding: .35rem .5rem !important;
@@ -3209,8 +3012,7 @@
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "Klantenondersteuning",
-          "email": "support@signalpilot.io",
-          "availableLanguage": ["English", "Nederlands"]
+          "email": "support@signalpilot.io"
         }
       },
       {
@@ -3319,25 +3121,17 @@
             <ul class="nav-dropdown-menu">
               <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Documentatie</a></li>
               <li><a href="https://education.signalpilot.io/" target="_blank" rel="noopener">Educatie Hub</a></li>
-              <li><a href="/faq.html">FAQ Centrum</a></li>
+              <li><a href="/nl/faq.html">FAQ Centrum</a></li>
             </ul>
           </li>
 
           <li><a href="#pricing">Prijzen</a></li>
 
-          <li><a href="/affiliates.html">Partners</a></li>
+          <li><a href="/nl/affiliates.html">Partners</a></li>
 
         </ul>
 
       </nav>
-
-
-
-      <div class="lang-dropdown">
-        <button id="langToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Taal selectie" style="font-size:.85rem;padding:.5rem .7rem;color:var(--text)">
-          <span>🇺🇸</span>
-        </button>
-      </div>
 
       <button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Thema selectie" style="padding:.5rem .7rem;color:var(--text)">
         <span id="theme-icon">
@@ -3680,7 +3474,7 @@
               <input type="checkbox" id="trialConsent" required>
               <span>
                 Ik begrijp dat <span style="font-family:'Gugi',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.1em;font-weight:400">Signal Pilot</span> alleen educatief is. Geen financieel advies.
-                <a href="/terms.html" style="color:var(--brand)">Voorwaarden</a>
+                <a href="/nl/terms.html" style="color:var(--brand)">Voorwaarden</a>
               </span>
             </label>
 
@@ -5718,7 +5512,7 @@
 
     <!-- View All FAQs Link -->
     <div style="text-align:center;margin-top:2.5rem">
-      <a href="/faq.html" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:.5rem">
+      <a href="/nl/faq.html" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:.5rem">
         Bekijk Volledige FAQ (30+ Vragen) →
       </a>
       <p style="color:var(--muted-2);font-size:.85rem;margin-top:.8rem">Setup handleidingen, strategieën en technische details</p>
@@ -5801,8 +5595,8 @@
           <ul style="list-style:none;padding:0;margin:0">
             <li style="margin-bottom:.4rem"><a href="https://github.com/Signalpilot/signalpilot.io" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s">GitHub</a></li>
             <li style="margin-bottom:.4rem"><a href="mailto:support@signalpilot.io" style="color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s">support@signalpilot.io</a></li>
-            <li style="margin-bottom:.4rem"><a href="/roadmap.html" style="color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s">Routekaart</a></li>
-            <li style="margin-bottom:.4rem"><a href="/affiliates.html" style="color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s">Partnerprogramma</a></li>
+            <li style="margin-bottom:.4rem"><a href="/nl/roadmap.html" style="color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s">Routekaart</a></li>
+            <li style="margin-bottom:.4rem"><a href="/nl/affiliates.html" style="color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s">Partnerprogramma</a></li>
           </ul>
         </div>
 
@@ -5869,13 +5663,6 @@
     </div>
 
   </div>
-
-
-
-  <!-- Hidden Google Translate container -->
-  <div id="google_translate_container" style="position:absolute;left:-9999px;" aria-hidden="true"></div>
-
-
 
   <!-- =======================================================================
        SCRIPT: CONFIG + UTILITIES
@@ -6015,9 +5802,9 @@
         <a href="#inside">Wat zit erin</a>
         <a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Documentatie</a>
         <a href="https://education.signalpilot.io/" target="_blank" rel="noopener">Educatie Hub</a>
-        <a href="/faq.html">FAQ Centrum</a>
+        <a href="/nl/faq.html">FAQ Centrum</a>
         <a href="#pricing">Prijzen</a>
-        <a href="/affiliates.html">Partners</a>
+        <a href="/nl/affiliates.html">Partners</a>
       `;
 
       // Assemble menu
@@ -6068,7 +5855,6 @@
 
     /* ======================== Resources Dropdown ======================== */
 
-    // Use event delegation for Google Translate compatibility
     (function() {
       let dropdownOpen = false;
 
@@ -6120,160 +5906,6 @@
         }
       });
     })();
-
-
-    /* ======================== Language Dropdown - Direct child of body ======================== */
-
-    // Language dropdown - create as direct child of body to escape stacking context
-    (function() {
-      const langBtn = document.getElementById('langToggle');
-      if (!langBtn) return;
-
-      // Create language dropdown menu
-      const langMenu = document.createElement('div');
-      langMenu.className = 'lang-dropdown-menu';
-
-      // Create language buttons
-      const languages = [
-        { code: 'en', name: 'English', flag: '🇺🇸' },
-        { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-        { code: 'fr', name: 'Français', flag: '🇫🇷' },
-        { code: 'es', name: 'Español', flag: '🇪🇸' },
-        { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-        { code: 'zh', name: '中文', flag: '🇨🇳' },
-        { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-        { code: 'ar', name: 'العربية', flag: '🇸🇦' },
-        { code: 'pt', name: 'Português', flag: '🇵🇹' },
-        { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
-        { code: 'ja', name: '日本語', flag: '🇯🇵' },
-        { code: 'ko', name: '한국어', flag: '🇰🇷' },
-        { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
-        { code: 'th', name: 'ไทย', flag: '🇹🇭' },
-        { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
-        { code: 'id', name: 'Bahasa Indonesia', flag: '🇮🇩' }
-      ];
-
-      languages.forEach(lang => {
-        const btn = document.createElement('button');
-        btn.setAttribute('data-lang', lang.code);
-        btn.textContent = lang.flag + ' ' + lang.name;
-        btn.addEventListener('click', function() {
-          // Helper functions
-          function baseDomain(host) {
-            const p = host.split('.');
-            return p.length > 2 ? p.slice(-2).join('.') : host;
-          }
-
-          function setCookie(name, value, days, domain) {
-            let expires = '';
-            if (days) {
-              const d = new Date();
-              d.setTime(d.getTime() + days * 864e5);
-              expires = '; expires=' + d.toUTCString();
-            }
-            const dom = domain ? '; domain=' + domain : '';
-            document.cookie = name + '=' + value + expires + '; path=/' + dom;
-          }
-
-          function setGoogTrans(langCode) {
-            const target = (langCode === 'zh') ? 'zh-CN' : langCode;
-            const val = '/en/' + target;
-            setCookie('googtrans', val, 365);
-            const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-            setCookie('googtrans', val, 365, root);
-          }
-
-          function applyDirLang(langCode) {
-            document.documentElement.lang = (langCode === 'zh') ? 'zh-CN' : langCode;
-            document.documentElement.dir = (langCode === 'ar') ? 'rtl' : 'ltr';
-          }
-
-          // Save to localStorage
-          localStorage.setItem('sp_lang', lang.code);
-
-          // Set cookies and attributes
-          if (lang.code === 'en') {
-            // For English: Set googtrans to /en/en (English to English = no translation)
-            const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-            const expires = new Date(Date.now() + 365 * 864e5).toUTCString();
-
-            // Set to /en/en which tells Google Translate "English to English" (no translation)
-            document.cookie = 'googtrans=/en/en; expires=' + expires + '; path=/';
-            document.cookie = 'googtrans=/en/en; expires=' + expires + '; path=/; domain=' + root;
-
-            applyDirLang('en');
-
-            // Track event if analytics available
-            if (typeof trackEvent === 'function') {
-              trackEvent('language_change', {
-                language: 'en',
-                language_name: lang.name
-              });
-            }
-
-            console.log('[GT] Switching to English - setting googtrans=/en/en');
-
-            // Use location.replace for a true hard reload without history
-            setTimeout(() => {
-              location.replace(location.pathname + '?lang=en&t=' + Date.now());
-            }, 50);
-          } else {
-            setGoogTrans(lang.code);
-            applyDirLang(lang.code);
-
-            // Track event if analytics available
-            if (typeof trackEvent === 'function') {
-              trackEvent('language_change', {
-                language: lang.code,
-                language_name: lang.name
-              });
-            }
-
-            console.log('[GT] Language changed to:', lang.code);
-            location.reload();
-          }
-        });
-        langMenu.appendChild(btn);
-      });
-
-      // CRITICAL: Append directly to body (escapes header's stacking context)
-      document.body.appendChild(langMenu);
-
-      // Open/close functions
-      function open() {
-        langMenu.classList.add('active');
-        langBtn.setAttribute('aria-expanded', 'true');
-      }
-
-      function close() {
-        langMenu.classList.remove('active');
-        langBtn.setAttribute('aria-expanded', 'false');
-      }
-
-      function toggle() {
-        if (langMenu.classList.contains('active')) {
-          close();
-        } else {
-          open();
-        }
-      }
-
-      // Event listeners
-      langBtn.addEventListener('click', function(e) {
-        toggle();
-      });
-
-      // Close when clicking outside
-      document.addEventListener('click', function(e) {
-        if (langMenu.classList.contains('active')) {
-          if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
-            close();
-          }
-        }
-      });
-    })();
-
-
 
     /* ======================== Copy to clipboard (wallets) ======================== */
 
@@ -6345,247 +5977,6 @@
       window.addEventListener('hashchange',show); show();})();
 
 
-
-    /* ======================== Google Translate (on demand) ======================== */
-
-    // Google Translate Initialization with robust error handling
-    window.googleTranslateElementInit = function() {
-      console.log('[GT] Init called');
-      if (!window.google || !google.translate || !google.translate.TranslateElement) {
-        console.warn('[GT] Google Translate API not ready');
-        return;
-      }
-
-      const container = document.getElementById('google_translate_container');
-      if (!container) {
-        console.error('[GT] Container not found');
-        return;
-      }
-
-      try {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'ar,de,es,fr,it,ru,zh-CN,pt,tr,ja,ko,vi,th,hi,id',
-          autoDisplay: false
-        }, 'google_translate_container');
-        console.log('[GT] Widget created successfully');
-        window.__gte_initialized = true;
-      } catch (error) {
-        console.error('[GT] Failed to create widget:', error);
-      }
-    };
-
-    // Load saved language on page load with robust polling
-    (function() {
-      const LANG_KEY = 'sp_lang';
-
-      function baseDomain(host) {
-        const p = host.split('.');
-        return p.length > 2 ? p.slice(-2).join('.') : host;
-      }
-
-      function setCookie(name, value, days, domain) {
-        let expires = '';
-        if (days) {
-          const d = new Date();
-          d.setTime(d.getTime() + days * 864e5);
-          expires = '; expires=' + d.toUTCString();
-        }
-        const dom = domain ? '; domain=' + domain : '';
-        document.cookie = name + '=' + value + expires + '; path=/' + dom;
-      }
-
-      function setGoogTrans(lang) {
-        const target = (lang === 'zh') ? 'zh-CN' : lang;
-        const val = '/en/' + target;
-        setCookie('googtrans', val, 365);
-        const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-        setCookie('googtrans', val, 365, root);
-      }
-
-      function clearGoogTrans() {
-        // Clear all Google Translate cookies thoroughly and aggressively
-        const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-        const cookieNames = ['googtrans', 'googtrans(2)', 'googtrans(0)', 'googtrans(1)'];
-        const domains = ['', '; domain=' + root, '; domain=' + location.hostname, '; domain=.signalpilot.io'];
-        const paths = ['/', '/en', '/en/'];
-
-        // Nuclear option: clear every possible cookie variation
-        cookieNames.forEach(name => {
-          domains.forEach(domain => {
-            paths.forEach(path => {
-              // Try deleting with empty value
-              document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=' + path + domain;
-              // Try setting to /en/en and deleting
-              document.cookie = name + '=/en/en; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=' + path + domain;
-              // Try with max-age
-              document.cookie = name + '=; max-age=0; path=' + path + domain;
-            });
-          });
-        });
-
-        // Also clear localStorage and sessionStorage
-        if (window.localStorage) {
-          localStorage.removeItem('googtrans');
-          localStorage.removeItem('googtrans(2)');
-        }
-        if (window.sessionStorage) {
-          sessionStorage.removeItem('googtrans');
-          sessionStorage.removeItem('googtrans(2)');
-        }
-
-        // Remove any Google Translate elements from DOM
-        const gtElements = [
-          '.skiptranslate',
-          '.goog-te-banner-frame',
-          '#goog-gt-tt',
-          '.goog-te-balloon-frame',
-          'iframe[src*="translate.google.com"]',
-          'iframe.goog-te-menu-frame',
-          '.goog-te-menu2'
-        ];
-        gtElements.forEach(selector => {
-          document.querySelectorAll(selector).forEach(el => el.remove());
-        });
-
-        console.log('[GT] Cleared all Google Translate cookies and elements');
-      }
-
-      function applyDirLang(lang) {
-        document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : lang;
-        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-      }
-
-      function loadGTE() {
-        if (window.__gte_loading) {
-          console.log('[GT] Already loading');
-          return;
-        }
-        if (window.google && window.google.translate) {
-          console.log('[GT] Already loaded');
-          googleTranslateElementInit();
-          return;
-        }
-
-        console.log('[GT] Loading script...');
-        window.__gte_loading = true;
-
-        const s = document.createElement('script');
-        s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-        s.async = true;
-        s.onerror = function() {
-          console.error('[GT] Script failed to load');
-          window.__gte_loading = false;
-          // Retry after 2 seconds
-          setTimeout(function() {
-            if (!window.google) {
-              console.log('[GT] Retrying...');
-              loadGTE();
-            }
-          }, 2000);
-        };
-        s.onload = function() {
-          console.log('[GT] Script loaded');
-          // Poll for initialization
-          let attempts = 0;
-          const checkInit = setInterval(function() {
-            attempts++;
-            if (window.__gte_initialized || attempts > 50) {
-              clearInterval(checkInit);
-              if (!window.__gte_initialized) {
-                console.warn('[GT] Init timeout after ' + attempts + ' attempts');
-              }
-            }
-          }, 100);
-        };
-        document.head.appendChild(s);
-      }
-
-      const sel = document.getElementById('langSel');
-
-      // Check URL parameter for forced language
-      const urlParams = new URLSearchParams(window.location.search);
-      const urlLang = urlParams.get('lang');
-
-      let saved = localStorage.getItem(LANG_KEY) || 'en';
-
-      // If URL says lang=en, force English and clear localStorage
-      if (urlLang === 'en') {
-        saved = 'en';
-        localStorage.setItem(LANG_KEY, 'en');
-        console.log('[GT] URL forced English language');
-      }
-
-      const code = saved.toLowerCase().startsWith('zh') ? 'zh' : saved.slice(0, 2);
-
-      console.log('[GT] Saved language:', code);
-
-      if (sel) sel.value = code;
-
-      // Only set translation cookies for non-English languages
-      if (code !== 'en') {
-        setGoogTrans(code);
-        applyDirLang(code);
-      } else {
-        // For English: cookie already set to /en/en by early script
-        // Just ensure HTML attributes are correct
-        applyDirLang('en');
-
-        // Remove Google Translate font wrappers that might be lingering in the DOM
-        setTimeout(() => {
-          document.querySelectorAll('font').forEach(font => {
-            const parent = font.parentNode;
-            while (font.firstChild) {
-              parent.insertBefore(font.firstChild, font);
-            }
-            parent.removeChild(font);
-          });
-        }, 100);
-
-        // Clean URL after processing
-        if (urlLang === 'en') {
-          setTimeout(() => {
-            const cleanUrl = window.location.pathname;
-            window.history.replaceState({}, '', cleanUrl);
-          }, 200);
-        }
-      }
-
-      // Update language button text to show current language
-      const langBtn = document.getElementById('langToggle');
-      if (langBtn) {
-        const langText = langBtn.querySelector('span');
-        if (langText) {
-          const flagMap = {
-            'en': '🇺🇸', 'de': '🇩🇪', 'fr': '🇫🇷', 'es': '🇪🇸',
-            'it': '🇮🇹', 'zh': '🇨🇳', 'ru': '🇷🇺', 'ar': '🇸🇦',
-            'pt': '🇵🇹', 'tr': '🇹🇷', 'ja': '🇯🇵', 'ko': '🇰🇷',
-            'vi': '🇻🇳', 'th': '🇹🇭', 'hi': '🇮🇳', 'id': '🇮🇩'
-          };
-          langText.textContent = flagMap[code] || '🌐';
-        }
-      }
-
-      // Load on DOMContentLoaded to ensure page is ready
-      if (code !== 'en') {
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(loadGTE, 500); // Small delay to let page settle
-          });
-        } else {
-          setTimeout(loadGTE, 500);
-        }
-      }
-
-      sel.addEventListener('change', e => {
-        const v = e.target.value;
-        localStorage.setItem(LANG_KEY, v);
-        setGoogTrans(v);
-        applyDirLang(v);
-        if (v !== 'en') loadGTE();
-        location.reload();
-      });
-    })();
 
 
 
@@ -7368,17 +6759,7 @@ if ('serviceWorker' in navigator) {
       });
     });
 
-    // 6. TRACK LANGUAGE SELECTOR
-    const langToggle = document.getElementById('langToggle');
-    if (langToggle) {
-      langToggle.addEventListener('click', function() {
-        trackEvent('language_selector_open', {});
-      });
-    }
-
-    // Language dropdown analytics now integrated into the language dropdown JavaScript above
-
-    // 7. TRACK THEME TOGGLE
+    // 6. TRACK THEME TOGGLE
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
       themeToggle.addEventListener('click', function() {
@@ -7641,7 +7022,7 @@ if ('serviceWorker' in navigator) {
     <div class="cookie-consent-text">
       <h3>🍪 Cookies</h3>
       <p>
-        We gebruiken analyse cookies (Clarity & GA4) om uw ervaring te verbeteren. <a href="/privacy.html">Privacybeleid</a>
+        We gebruiken analyse cookies (Clarity & GA4) om uw ervaring te verbeteren. <a href="/nl/privacy.html">Privacybeleid</a>
       </p>
     </div>
     <div class="cookie-consent-actions">
