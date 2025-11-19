@@ -421,6 +421,23 @@
           alpha: 0.8 + Math.random() * 0.2
         };
 
+      case 'sun-rays':
+        // Floating light sparkles and sun rays
+        return {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() * 2 - 1) * 0.2, // Gentle drift
+          vy: -(Math.random() * 0.15 + 0.05), // Slow rise like warm air
+          size: Math.random() * 3 + 1.5,
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: Math.random() * 0.08 + 0.04,
+          glow: Math.random() * Math.PI * 2,
+          glowSpeed: Math.random() * 0.06 + 0.03,
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() * 2 - 1) * 0.03,
+          alpha: 0.6 + Math.random() * 0.4
+        };
+
       default: // stars
         return {
           ...base,
@@ -1080,6 +1097,52 @@
           p.vx = Math.random() < 0.5 ? 2 : -2;
           p.trail = [];
         }
+        break;
+
+      case 'sun-rays':
+        // Floating light sparkles with golden glow
+        p.pulse += p.pulseSpeed;
+        p.glow += p.glowSpeed;
+        p.rotation += p.rotationSpeed;
+
+        const pulseSize = p.size * (1 + Math.sin(p.pulse) * 0.4);
+        const glowIntensity = (Math.sin(p.glow) + 1) / 2; // 0 to 1
+
+        // Draw warm golden glow
+        const sunGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, pulseSize * 4);
+        sunGrad.addColorStop(0, config.color);
+        sunGrad.addColorStop(0.3, config.color.replace(/[\d.]+\)/, '0.5)'));
+        sunGrad.addColorStop(0.6, config.lineColor);
+        sunGrad.addColorStop(1, 'transparent');
+
+        ctx.globalAlpha = p.alpha * (0.7 + glowIntensity * 0.3);
+        ctx.fillStyle = sunGrad;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, pulseSize * 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Draw sparkle/star shape
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.globalAlpha = p.alpha;
+
+        // Draw 4-pointed star
+        ctx.fillStyle = config.color;
+        for (let i = 0; i < 4; i++) {
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, -pulseSize * 2);
+          ctx.lineTo(pulseSize * 0.3, -pulseSize * 0.6);
+          ctx.closePath();
+          ctx.fill();
+          ctx.rotate(Math.PI / 2);
+        }
+
+        // Bright center
+        ctx.fillStyle = 'rgba(255, 255, 240, 0.9)';
+        ctx.beginPath();
+        ctx.arc(0, 0, pulseSize * 0.6, 0, Math.PI * 2);
+        ctx.fill();
         break;
 
       default: // stars
