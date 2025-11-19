@@ -196,13 +196,8 @@
       max-height: 64px !important;
     }
 
-    header .container > .lang-dropdown,
     header .container > #themeToggle {
       flex-shrink: 0;
-    }
-
-    header .container > .lang-dropdown + #themeToggle {
-      margin-left: -0.8rem;
     }
 
     .brand {
@@ -384,56 +379,6 @@
     html[data-theme="light"] .nav-dropdown-menu a:hover {
       background: rgba(59,130,246,.12);
       color: #0f172a;
-    }
-
-    /* Language Dropdown */
-    .lang-dropdown {
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .lang-dropdown-menu {
-      position: fixed;
-      background: var(--bg-elev);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 0.75rem;
-      min-width: 160px;
-      max-height: 400px;
-      overflow-y: auto;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s;
-      z-index: 9999;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    }
-
-    .lang-dropdown-menu.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .lang-dropdown-menu button {
-      display: block;
-      width: 100%;
-      padding: 0.6rem 0.8rem;
-      border: none;
-      background: transparent;
-      border-radius: 6px;
-      color: var(--muted);
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 0.9rem;
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      font-weight: 500;
-    }
-
-    .lang-dropdown-menu button:hover {
-      background: rgba(91, 138, 255, 0.15);
-      color: var(--text);
     }
 
     .btn {
@@ -1002,12 +947,6 @@
         </ul>
       </nav>
 
-      <div class="lang-dropdown">
-        <button id="langToggle" class="btn" type="button" aria-label="Language selection" aria-expanded="false" aria-haspopup="true">
-          <span>🌐</span>
-        </button>
-      </div>
-
       <button id="themeToggle" class="btn" type="button" aria-label="Theme selection">
         <span id="theme-icon">🌙</span>
       </button>
@@ -1226,86 +1165,6 @@
           dropdownOpen = false;
         }
       });
-    })();
-
-    // Language Dropdown
-    (function() {
-      const langBtn = document.getElementById('langToggle');
-      if (!langBtn) return;
-
-      // Create language dropdown menu
-      const langMenu = document.createElement('div');
-      langMenu.className = 'lang-dropdown-menu';
-
-      // Create language buttons
-      const languages = [
-        { code: 'en', name: 'English' },
-        { code: 'de', name: 'Deutsch' },
-        { code: 'fr', name: 'Français' },
-        { code: 'es', name: 'Español' },
-        { code: 'it', name: 'Italiano' },
-        { code: 'zh', name: '中文' },
-        { code: 'ru', name: 'Русский' },
-        { code: 'ar', name: 'العربية' },
-        { code: 'pt', name: 'Português' },
-        { code: 'tr', name: 'Türkçe' },
-        { code: 'ja', name: '日本語' },
-        { code: 'ko', name: '한국어' },
-        { code: 'vi', name: 'Tiếng Việt' },
-        { code: 'th', name: 'ไทย' },
-        { code: 'hi', name: 'हिन्दी' },
-        { code: 'id', name: 'Bahasa Indonesia' }
-      ];
-
-      languages.forEach(lang => {
-        const btn = document.createElement('button');
-        btn.textContent = lang.name;
-        btn.onclick = () => selectLanguage(lang);
-        langMenu.appendChild(btn);
-      });
-
-      document.body.appendChild(langMenu);
-
-      let menuOpen = false;
-
-      langBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        menuOpen = !menuOpen;
-        langMenu.classList.toggle('show', menuOpen);
-        langBtn.setAttribute('aria-expanded', menuOpen);
-
-        if (menuOpen) {
-          const rect = langBtn.getBoundingClientRect();
-          langMenu.style.top = (rect.bottom + 8) + 'px';
-          langMenu.style.left = (rect.left - langMenu.offsetWidth + rect.width) + 'px';
-        }
-      });
-
-      document.addEventListener('click', function(e) {
-        if (menuOpen && !langBtn.contains(e.target) && !langMenu.contains(e.target)) {
-          menuOpen = false;
-          langMenu.classList.remove('show');
-          langBtn.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      function selectLanguage(lang) {
-        const supportedLangs = {
-          'en': '/roadmap.html',
-          'de': '/de/roadmap.html',
-          'fr': '/fr/roadmap.html',
-          'es': '/es/roadmap.html',
-          'ja': '/ja/roadmap.html',
-          'pt': '/pt/roadmap.html',
-          'hu': '/hu/roadmap.html'
-        };
-
-        if (supportedLangs[lang.code]) {
-          window.location.href = supportedLangs[lang.code];
-        } else {
-          console.log('Language not yet supported:', lang.code);
-        }
-      }
     })();
 
     // Smooth scroll for nav links with offset
