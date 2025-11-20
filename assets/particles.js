@@ -1241,7 +1241,7 @@
   // Resize canvas
   function resize() {
     const vw = window.innerWidth;
-    const vh = window.innerHeight;
+    const vh = Math.max(window.innerHeight, document.documentElement.scrollHeight);
 
     // Use full DPR on all devices for crisp constellation rendering
     dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
