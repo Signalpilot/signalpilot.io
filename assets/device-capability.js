@@ -194,14 +194,15 @@
 
         console.log('📊 Average FPS:', avgFps);
 
-        // If FPS is too low, downgrade capabilities
+        // If FPS is too low, downgrade heavy effects but keep lightweight particles
         if (avgFps < 30) {
-          console.warn('⚠️ Low FPS detected, reducing effects');
+          console.warn('⚠️ Low FPS detected, reducing heavy effects (keeping particles for beauty)');
           capabilities.performanceLevel = 'low';
           capabilities.canHandleAurora = false;
-          capabilities.canHandleParticles = false;
           capabilities.canHandleVideo = false;
           capabilities.canHandleBlendModes = false;
+          // Keep particles enabled - they're lightweight and essential for the experience!
+          // capabilities.canHandleParticles stays true
         } else if (avgFps < 50) {
           if (capabilities.performanceLevel === 'high') {
             console.warn('⚠️ Medium FPS detected, adjusting to medium');
