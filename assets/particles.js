@@ -1200,9 +1200,9 @@
 
   // Update particle position
   function updateParticle(p, config) {
-    // Mobile gets faster movement for more dynamic effect (balanced for smooth scrolling)
+    // Mobile gets slightly faster movement without compromising scroll performance
     const isMobile = window.innerWidth <= 768;
-    const speedBoost = isMobile ? 1.8 : 1;
+    const speedBoost = isMobile ? 1.3 : 1;
 
     p.x += p.vx * speedBoost;
     p.y += p.vy * speedBoost;
