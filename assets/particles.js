@@ -1294,10 +1294,11 @@
     let targetCount;
 
     if (currentConfig.count === 'auto') {
-      // Consistent particle count - no mobile/desktop difference to avoid flickering
-      const maxParticles = 120;
-      const minParticles = 60;
-      const divisor = 12000;
+      // Desktop gets more particles for richer sky, mobile stays conservative
+      const isMobile = vw <= 768;
+      const maxParticles = isMobile ? 100 : 160;
+      const minParticles = isMobile ? 60 : 90;
+      const divisor = isMobile ? 12000 : 10000;
       targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
     } else {
       targetCount = currentConfig.count;
