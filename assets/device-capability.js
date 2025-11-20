@@ -161,7 +161,7 @@
       capabilities.canHandleBlendModes = true;
     } else {
       capabilities.performanceLevel = 'low';
-      capabilities.canHandleAurora = false; // Disable aurora on very low-end devices
+      capabilities.canHandleAurora = true; // Keep aurora - it's CSS-only gradients, very lightweight!
       capabilities.canHandleParticles = true; // Still show constellations! They're lightweight
       capabilities.canHandleVideo = false;
       capabilities.canHandleBlendModes = false;
@@ -194,14 +194,15 @@
 
         console.log('📊 Average FPS:', avgFps);
 
-        // If FPS is too low, downgrade heavy effects but keep lightweight particles
+        // If FPS is too low, downgrade heavy effects but keep lightweight visual effects
         if (avgFps < 30) {
-          console.warn('⚠️ Low FPS detected, reducing heavy effects (keeping particles for beauty)');
+          console.warn('⚠️ Low FPS detected, reducing heavy effects (keeping aurora & particles for beauty)');
           capabilities.performanceLevel = 'low';
-          capabilities.canHandleAurora = false;
           capabilities.canHandleVideo = false;
           capabilities.canHandleBlendModes = false;
-          // Keep particles enabled - they're lightweight and essential for the experience!
+          // Keep aurora & particles enabled - they're lightweight and essential for the experience!
+          // Aurora is just CSS gradients, particles are optimized canvas
+          // capabilities.canHandleAurora stays true
           // capabilities.canHandleParticles stays true
         } else if (avgFps < 50) {
           if (capabilities.performanceLevel === 'high') {
@@ -324,7 +325,7 @@
       console.log('🔧 Performance override:', override);
       capabilities.performanceLevel = override;
       if (override === 'low') {
-        capabilities.canHandleAurora = false;
+        capabilities.canHandleAurora = true; // Keep aurora - CSS gradients are lightweight!
         capabilities.canHandleParticles = true; // Keep particles - they're lightweight!
         capabilities.canHandleVideo = false;
         capabilities.canHandleBlendModes = false;
