@@ -1178,9 +1178,9 @@
 
   // Update particle position
   function updateParticle(p, config) {
-    // Mobile gets 2.5x faster movement for more dynamic effect
+    // Mobile gets faster movement for more dynamic effect (balanced for smooth scrolling)
     const isMobile = window.innerWidth <= 768;
-    const speedBoost = isMobile ? 2.5 : 1;
+    const speedBoost = isMobile ? 1.8 : 1;
 
     p.x += p.vx * speedBoost;
     p.y += p.vy * speedBoost;
@@ -1273,11 +1273,11 @@
     let targetCount;
 
     if (currentConfig.count === 'auto') {
-      // More particles on mobile for richer constellation experience
+      // More particles on mobile for richer constellation experience (balanced for performance)
       const isMobile = vw <= 768;
-      const maxParticles = isMobile ? 200 : 120;
-      const minParticles = isMobile ? 100 : 50;
-      const divisor = isMobile ? 8000 : 12000;
+      const maxParticles = isMobile ? 150 : 120;
+      const minParticles = isMobile ? 80 : 50;
+      const divisor = isMobile ? 10000 : 12000;
       targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
     } else {
       targetCount = currentConfig.count;
