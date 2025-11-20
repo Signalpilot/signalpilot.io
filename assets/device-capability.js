@@ -146,14 +146,14 @@
       });
     }
 
-    // Calculate performance level
-    if (score >= 80) {
+    // Calculate performance level - optimized for beautiful mobile constellation experience
+    if (score >= 70) {
       capabilities.performanceLevel = 'high';
       capabilities.canHandleAurora = true;
       capabilities.canHandleParticles = true;
       capabilities.canHandleVideo = true;
       capabilities.canHandleBlendModes = true;
-    } else if (score >= 50) {
+    } else if (score >= 35) {
       capabilities.performanceLevel = 'medium';
       capabilities.canHandleAurora = true;
       capabilities.canHandleParticles = true;
@@ -161,8 +161,8 @@
       capabilities.canHandleBlendModes = true;
     } else {
       capabilities.performanceLevel = 'low';
-      capabilities.canHandleAurora = false; // Disable aurora
-      capabilities.canHandleParticles = false; // Disable particles
+      capabilities.canHandleAurora = false; // Disable aurora on very low-end devices
+      capabilities.canHandleParticles = true; // Still show constellations! They're lightweight
       capabilities.canHandleVideo = false;
       capabilities.canHandleBlendModes = false;
     }
