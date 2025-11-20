@@ -1238,8 +1238,8 @@
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
-    // Update DPR for Safari iOS
-    dpr = (isSafari || isIOS) ? 1 : Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    // Use full DPR on all devices for crisp constellation rendering
+    dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
 
     // Set canvas dimensions
     canvas.width = Math.floor(vw * dpr);
@@ -1260,10 +1260,10 @@
     let targetCount;
 
     if (currentConfig.count === 'auto') {
-      // Reduce particle count on iOS Safari for better performance
-      const maxParticles = (isIOS || isSafari) ? 80 : 120;
-      const minParticles = (isIOS || isSafari) ? 40 : 50;
-      const divisor = (isIOS || isSafari) ? 15000 : 12000;
+      // Full particle count on all devices for beautiful constellation experience
+      const maxParticles = 120;
+      const minParticles = 50;
+      const divisor = 12000;
       targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
     } else {
       targetCount = currentConfig.count;
