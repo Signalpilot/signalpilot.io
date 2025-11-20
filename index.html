@@ -763,9 +763,14 @@
     /* MOBILE: Simple, clean mobile setup - NO forced positioning */
     @media (max-width: 768px) {
       /* Background layers BEHIND everything */
-      .bg-stars, .sp-constellations, .bg-aurora {
+      .bg-stars, .sp-constellations {
         z-index: -1 !important;
         position: fixed !important;
+      }
+
+      /* Hide aurora completely - not needed, only using constellations */
+      .bg-aurora {
+        display: none !important;
       }
 
       /* Header needs high z-index for dropdown menus */
@@ -882,6 +887,47 @@
       #trial[style*="background"],
       section[style*="background"] {
         background: transparent !important;
+      }
+
+      /* NUCLEAR OPTION: Force ALL containers/divs in sections transparent */
+      section > *,
+      section .container,
+      section .container > *,
+      .section > *,
+      .section .container,
+      .section .container > *,
+      main > *:not(.bg-stars):not(.sp-constellations):not(header):not(.scroll-progress) {
+        background: transparent !important;
+      }
+
+      /* Make sure constellations canvas is always visible and covers full screen */
+      .sp-constellations,
+      #constellations {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 1 !important; /* Above body background but still below content */
+        pointer-events: none !important;
+        display: block !important;
+        visibility: visible !important;
+      /* Force aurora visible on mobile - higher specificity to override data-aurora="false" */
+      html .bg-aurora,
+      html[data-aurora="false"] .bg-aurora,
+      html[data-aurora="true"] .bg-aurora {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 0.25 !important; /* Subtle for performance */
+        z-index: -1 !important;
+        filter: blur(40px) !important; /* Lighter blur for performance */
+        animation: none !important; /* Disable animation on mobile for smooth scrolling */
+        will-change: auto !important; /* Remove will-change to reduce compositor load */
+      }
+
+      /* Cards and interactive elements need solid backgrounds */
+      .card:not(.plan) {
+        background: linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02)), var(--bg) !important;
       }
     }
     
@@ -1013,35 +1059,11 @@
 
 
 
-    /* CSS aurora background animation */
+    /* AURORA DISABLED - Only using constellations/particles for background effects */
 
     .bg-aurora{
 
-      position:fixed;
-
-      inset:0;
-
-      z-index:-1;
-
-      pointer-events:none;
-
-      background:
-
-        radial-gradient(45% 35% at 12% 12%,rgba(125,200,255,.40),transparent 62%),
-
-        radial-gradient(36% 28% at 85% 14%,rgba(155,140,255,.38),transparent 65%),
-
-        radial-gradient(48% 36% at 78% 88%,rgba(118,221,255,.28),transparent 70%),
-
-        radial-gradient(26% 22% at 8% 72%,rgba(151,124,255,.22),transparent 66%);
-
-      filter:blur(60px) saturate(130%) brightness(110%);
-
-      mix-blend-mode:screen;
-
-      animation:aurora 36s linear infinite alternate;
-
-      opacity:.85;
+      display: none !important;
 
       /* Performance optimization */
       will-change:transform;
@@ -1211,15 +1233,8 @@
 
     /* MOBILE OPTIMIZATION: Simplify animations for older devices */
 
-    @media (max-width: 1024px) {
-      /* Optimize animations for mobile devices */
-      .bg-aurora{
-        mix-blend-mode:normal !important;
-        opacity:.35 !important;
-        filter:blur(40px) saturate(100%) brightness(100%) !important;
-        animation:none !important;
-      }
-    }
+    /* REMOVED: This was making aurora invisible on mobile with opacity:.35 !important */
+    /* Aurora opacity is now controlled by the mobile media query at line 898-904 */
 
     /* Light mode background adjustments */
     html[data-theme="light"] .bg-aurora{
