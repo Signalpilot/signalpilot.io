@@ -147,22 +147,23 @@
     }
 
     // Calculate performance level - optimized for beautiful mobile constellation experience
+    // PARTICLES ARE ALWAYS ENABLED - they're the signature visual identity of SignalPilot!
     if (score >= 70) {
       capabilities.performanceLevel = 'high';
       capabilities.canHandleAurora = true;
-      capabilities.canHandleParticles = true;
+      capabilities.canHandleParticles = true; // Always true!
       capabilities.canHandleVideo = true;
       capabilities.canHandleBlendModes = true;
     } else if (score >= 35) {
       capabilities.performanceLevel = 'medium';
       capabilities.canHandleAurora = true;
-      capabilities.canHandleParticles = true;
+      capabilities.canHandleParticles = true; // Always true!
       capabilities.canHandleVideo = false; // No video on medium
       capabilities.canHandleBlendModes = true;
     } else {
       capabilities.performanceLevel = 'low';
       capabilities.canHandleAurora = true; // Keep aurora - it's CSS-only gradients, very lightweight!
-      capabilities.canHandleParticles = true; // Still show constellations! They're lightweight
+      capabilities.canHandleParticles = true; // ALWAYS TRUE - constellations are essential!
       capabilities.canHandleVideo = false;
       capabilities.canHandleBlendModes = false;
     }
