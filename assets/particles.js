@@ -450,7 +450,7 @@
       default: // stars
         return {
           ...base,
-          size: Math.random() * 2 + 0.8,
+          size: Math.random() * 1.2 + 0.5,
           twinkle: Math.random() * Math.PI * 2,
           twinkleSpeed: Math.random() * 0.04 + 0.02
         };
@@ -1169,9 +1169,9 @@
         ctx.fill();
 
         // Draw 4 star rays (cross pattern)
-        const rayLength = p.size * 3 * pulse;
+        const rayLength = p.size * 2.2 * pulse;
         ctx.strokeStyle = config.color;
-        ctx.lineWidth = p.size * 0.5;
+        ctx.lineWidth = p.size * 0.4;
         ctx.lineCap = 'round';
 
         // Vertical ray
@@ -1187,9 +1187,9 @@
         ctx.stroke();
 
         // Soft glow
-        ctx.globalAlpha = starAlpha * 0.25;
+        ctx.globalAlpha = starAlpha * 0.2;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
         ctx.fill();
         break;
     }
