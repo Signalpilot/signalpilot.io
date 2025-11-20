@@ -1361,17 +1361,42 @@
   try {
     resize();
     start();
-    // Debug log for all devices to verify initialization
-    console.log('✨ SignalPilot Particles: Initialized successfully!', {
-      canvas: canvas.id,
-      width: canvas.width,
-      height: canvas.height,
-      particles: particles.length,
-      dpr: dpr,
-      isMobile: isIOS || isSafari,
-      display: canvas.style.display || 'default',
-      visibility: canvas.style.visibility || 'default'
-    });
+
+    // Debug log for all devices to verify initialization and visibility
+    setTimeout(() => {
+      const computedStyle = window.getComputedStyle(canvas);
+      const htmlDataParticles = document.documentElement.getAttribute('data-particles');
+
+      console.log('✨ SignalPilot Particles: Initialized successfully!', {
+        canvas: canvas.id,
+        canvasWidth: canvas.width,
+        canvasHeight: canvas.height,
+        particles: particles.length,
+        dpr: dpr,
+        isMobile: isIOS || isSafari,
+        // Inline styles
+        inlineDisplay: canvas.style.display || 'none set',
+        inlineVisibility: canvas.style.visibility || 'none set',
+        // Computed styles (actual applied CSS)
+        computedDisplay: computedStyle.display,
+        computedVisibility: computedStyle.visibility,
+        computedOpacity: computedStyle.opacity,
+        computedZIndex: computedStyle.zIndex,
+        computedPosition: computedStyle.position,
+        // Data attribute that controls CSS hiding
+        htmlDataParticles: htmlDataParticles
+      });
+
+      if (computedStyle.display === 'none') {
+        console.error('🚫 CANVAS IS HIDDEN! display: none detected');
+      }
+      if (computedStyle.visibility === 'hidden') {
+        console.error('🚫 CANVAS IS HIDDEN! visibility: hidden detected');
+      }
+      if (htmlDataParticles === 'false') {
+        console.error('🚫 data-particles="false" is BLOCKING particles!');
+      }
+    }, 100);
   } catch (err) {
     console.error('❌ SignalPilot Particles: Initialization failed', err);
   }
