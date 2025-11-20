@@ -6,8 +6,13 @@
 (function() {
   'use strict';
 
+  console.log('✨ Particles.js loading...');
+
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) return;
+  if (reduce) {
+    console.log('♿ Reduced motion preferred, particles disabled');
+    return;
+  }
 
   const CANVAS_ID = 'constellations';
   let canvas = document.getElementById(CANVAS_ID);
@@ -1356,18 +1361,19 @@
   try {
     resize();
     start();
-    // Debug log for Safari
-    if (isIOS || isSafari) {
-      console.log('SignalPilot Particles: Initialized for Safari/iOS', {
-        canvas: canvas.id,
-        width: canvas.width,
-        height: canvas.height,
-        particles: particles.length,
-        dpr: dpr
-      });
-    }
+    // Debug log for all devices to verify initialization
+    console.log('✨ SignalPilot Particles: Initialized successfully!', {
+      canvas: canvas.id,
+      width: canvas.width,
+      height: canvas.height,
+      particles: particles.length,
+      dpr: dpr,
+      isMobile: isIOS || isSafari,
+      display: canvas.style.display || 'default',
+      visibility: canvas.style.visibility || 'default'
+    });
   } catch (err) {
-    console.error('SignalPilot Particles: Initialization failed', err);
+    console.error('❌ SignalPilot Particles: Initialization failed', err);
   }
 
   // Event listeners
@@ -1394,15 +1400,10 @@
     }
   });
 
-  // Listen for capability changes
+  // Particles are now always enabled for beautiful mobile experience!
+  // Removed capability-based hiding - particles are lightweight and essential
   window.addEventListener('capabilitiesdetected', (e) => {
-    const caps = e.detail;
-    if (!caps.canHandleParticles) {
-      console.log('🚫 Device cannot handle particles, stopping');
-      stop();
-      if (canvas) {
-        canvas.style.display = 'none';
-      }
-    }
+    console.log('✨ Particles enabled regardless of device capabilities');
+    // Particles always run - they're the core visual identity!
   });
 })();
