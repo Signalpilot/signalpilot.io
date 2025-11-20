@@ -33,6 +33,7 @@
   // Use full DPR on all devices for beautiful crisp rendering
   let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
   let W = 0, H = 0, RAF = 0, particles = [];
+  let targetParticleCount = null; // Lock particle count after first calculation
   let currentConfig = {
     type: 'stars',
     color: 'rgba(180, 200, 255, 0.85)',
@@ -1289,29 +1290,33 @@
       ctx.scale(dpr, dpr);
     }
 
-    // Recalculate particle count
-    const area = vw * vh;
-    let targetCount;
+    // Calculate particle count ONCE on first resize, then lock it to prevent flickering
+    if (targetParticleCount === null) {
+      const area = vw * vh;
+      let targetCount;
 
-    if (currentConfig.count === 'auto') {
-      // Desktop gets more particles for richer sky, mobile stays conservative
-      const isMobile = vw <= 768;
-      const maxParticles = isMobile ? 100 : 160;
-      const minParticles = isMobile ? 60 : 90;
-      const divisor = isMobile ? 12000 : 10000;
-      targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
-    } else {
-      targetCount = currentConfig.count;
-    }
-
-    // Adjust particles array
-    if (particles.length < targetCount) {
-      const needed = targetCount - particles.length;
-      for (let i = 0; i < needed; i++) {
-        particles.push(createParticle(currentConfig.type));
+      if (currentConfig.count === 'auto') {
+        // Desktop gets more particles for richer sky, mobile stays conservative
+        const isMobile = vw <= 768;
+        const maxParticles = isMobile ? 100 : 160;
+        const minParticles = isMobile ? 60 : 90;
+        const divisor = isMobile ? 12000 : 10000;
+        targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
+      } else {
+        targetCount = currentConfig.count;
       }
-    } else if (particles.length > targetCount) {
-      particles = particles.slice(0, targetCount);
+
+      targetParticleCount = targetCount; // Lock this value permanently
+
+      // Adjust particles array
+      if (particles.length < targetParticleCount) {
+        const needed = targetParticleCount - particles.length;
+        for (let i = 0; i < needed; i++) {
+          particles.push(createParticle(currentConfig.type));
+        }
+      } else if (particles.length > targetParticleCount) {
+        particles = particles.slice(0, targetParticleCount);
+      }
     }
   }
 
