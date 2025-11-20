@@ -1294,11 +1294,10 @@
     let targetCount;
 
     if (currentConfig.count === 'auto') {
-      // More particles on mobile for richer constellation experience (balanced for performance)
-      const isMobile = vw <= 768;
-      const maxParticles = isMobile ? 150 : 120;
-      const minParticles = isMobile ? 80 : 50;
-      const divisor = isMobile ? 10000 : 12000;
+      // Consistent particle count - no mobile/desktop difference to avoid flickering
+      const maxParticles = 120;
+      const minParticles = 60;
+      const divisor = 12000;
       targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
     } else {
       targetCount = currentConfig.count;
