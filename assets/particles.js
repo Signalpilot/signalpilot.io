@@ -8,11 +8,22 @@
 
   console.log('✨ Particles.js loading...');
 
+  // MOBILE DEBUG: Show on-screen notification that script is loading
+  const loadingDiv = document.createElement('div');
+  loadingDiv.style.cssText = 'position:fixed;top:10px;right:10px;background:rgba(0,0,255,0.8);color:#fff;padding:8px;z-index:9999;font-size:11px;font-family:monospace;';
+  loadingDiv.textContent = '🔄 Particles.js loading...';
+  document.body.appendChild(loadingDiv);
+
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) {
     console.log('♿ Reduced motion preferred, particles disabled');
+    loadingDiv.style.background = 'rgba(255,0,0,0.8)';
+    loadingDiv.innerHTML = '⚠️ REDUCE MOTION ON<br>Particles disabled<br>Turn off in Settings → Accessibility';
+    setTimeout(() => loadingDiv.remove(), 8000);
     return;
   }
+
+  loadingDiv.remove(); // Remove loading indicator if continuing
 
   const CANVAS_ID = 'constellations';
   let canvas = document.getElementById(CANVAS_ID);
