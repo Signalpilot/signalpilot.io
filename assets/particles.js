@@ -1155,20 +1155,41 @@
         break;
 
       default: // stars
-        // Twinkling star
+        // Twinkling star with cross rays
         p.twinkle += p.twinkleSpeed;
         const starAlpha = p.alpha * (0.7 + Math.sin(p.twinkle) * 0.3);
+        const pulse = 1 + Math.sin(p.twinkle) * 0.2;
 
         ctx.globalAlpha = starAlpha;
         ctx.fillStyle = config.color;
+
+        // Draw bright center
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
         ctx.fill();
 
-        // Glow
-        ctx.globalAlpha = starAlpha * 0.3;
+        // Draw 4 star rays (cross pattern)
+        const rayLength = p.size * 3 * pulse;
+        ctx.strokeStyle = config.color;
+        ctx.lineWidth = p.size * 0.5;
+        ctx.lineCap = 'round';
+
+        // Vertical ray
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
+        ctx.moveTo(p.x, p.y - rayLength);
+        ctx.lineTo(p.x, p.y + rayLength);
+        ctx.stroke();
+
+        // Horizontal ray
+        ctx.beginPath();
+        ctx.moveTo(p.x - rayLength, p.y);
+        ctx.lineTo(p.x + rayLength, p.y);
+        ctx.stroke();
+
+        // Soft glow
+        ctx.globalAlpha = starAlpha * 0.25;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
         ctx.fill();
         break;
     }
