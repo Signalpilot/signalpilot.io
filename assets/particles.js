@@ -25,8 +25,8 @@
   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-  // Use lower DPR for Safari iOS to improve performance and compatibility
-  let dpr = (isSafari || isIOS) ? 1 : Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  // Use full DPR on all devices for beautiful crisp rendering
+  let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
   let W = 0, H = 0, RAF = 0, particles = [];
   let currentConfig = {
     type: 'stars',
