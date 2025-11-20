@@ -1296,10 +1296,10 @@
       let targetCount;
 
       if (currentConfig.count === 'auto') {
-        // Desktop gets more particles for richer sky, mobile stays conservative
+        // Desktop gets more particles for richer sky, mobile increased with slower speed
         const isMobile = vw <= 768;
-        const maxParticles = isMobile ? 100 : 160;
-        const minParticles = isMobile ? 60 : 90;
+        const maxParticles = isMobile ? 120 : 160;
+        const minParticles = isMobile ? 80 : 90;
         const divisor = isMobile ? 12000 : 10000;
         targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
       } else {
