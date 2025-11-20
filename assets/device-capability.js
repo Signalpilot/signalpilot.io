@@ -13,9 +13,9 @@
  * 5. Dispatches 'capabilitiesdetected' event for scripts to react
  *
  * Performance Levels:
- * - HIGH (score 80+): All effects enabled (aurora, particles, video, blend modes)
- * - MEDIUM (score 50-79): Aurora + particles only, no video
- * - LOW (score <50): No effects, just static background
+ * - HIGH (score 70+): All effects enabled (aurora, particles, video, blend modes)
+ * - MEDIUM (score 35-69): Aurora + particles only, no video
+ * - LOW (score <35): Particles only (aurora/video disabled for performance)
  *
  * Data Attributes Set:
  * - data-performance: high|medium|low (used by inline CSS)
@@ -260,17 +260,9 @@
       });
     }
 
-    if (!capabilities.canHandleParticles) {
-      const canvas = document.getElementById('constellations');
-      if (canvas) {
-        canvas.style.display = 'none';
-        canvas.style.visibility = 'hidden';
-      }
-      // Stop particle system if it's running
-      if (window.stopParticles) {
-        window.stopParticles();
-      }
-    }
+    // Particles are now always enabled for beautiful mobile experience!
+    // Let CSS handle visibility via data-particles attribute if needed
+    // Canvas is managed by particles.js itself
 
     if (!capabilities.canHandleBlendModes) {
       root.classList.add('no-blend-modes');
@@ -333,7 +325,7 @@
       capabilities.performanceLevel = override;
       if (override === 'low') {
         capabilities.canHandleAurora = false;
-        capabilities.canHandleParticles = false;
+        capabilities.canHandleParticles = true; // Keep particles - they're lightweight!
         capabilities.canHandleVideo = false;
         capabilities.canHandleBlendModes = false;
       } else if (override === 'medium') {
