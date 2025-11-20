@@ -1362,6 +1362,12 @@
     resize();
     start();
 
+    // FORCE canvas to be visible - override any CSS hiding it!
+    canvas.style.display = 'block';
+    canvas.style.visibility = 'visible';
+    canvas.style.opacity = '1';
+    console.log('🎨 Forced canvas visibility!');
+
     // Debug log for all devices to verify initialization and visibility
     setTimeout(() => {
       const computedStyle = window.getComputedStyle(canvas);
