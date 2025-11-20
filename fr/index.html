@@ -1317,7 +1317,8 @@
 
     /* Performance: Disable heavy effects on low-end devices */
     @media (prefers-reduced-data: reduce){
-      .bg-aurora,.bg-stars,.sp-constellations{display:none !important}
+      /* Aurora, stars, and particles are all beautiful and lightweight - show them on mobile! */
+      /* Only hide truly heavy effects like parallax orbs */
 
       #parallax-orb-1,#parallax-orb-2{display:none !important}
     }
@@ -6748,10 +6749,11 @@
   }
 
   // Load in sequence: device-capability -> themes -> particles -> theme-switcher
-  loadScript('assets/device-capability.js', function() {
-    loadScript('assets/themes.js', function() {
-      loadScript('assets/particles.js', function() {
-        loadScript('assets/theme-switcher.js');
+  const cacheBust = '?v=' + Date.now();
+  loadScript('assets/device-capability.js' + cacheBust, function() {
+    loadScript('assets/themes.js' + cacheBust, function() {
+      loadScript('assets/particles.js' + cacheBust, function() {
+        loadScript('assets/theme-switcher.js' + cacheBust);
       });
     });
   });
