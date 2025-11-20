@@ -244,6 +244,13 @@
     root.setAttribute('data-video', capabilities.canHandleVideo);
     root.setAttribute('data-blendmodes', capabilities.canHandleBlendModes);
 
+    // Debug logging for aurora and particles
+    console.log('🎨 Capabilities Applied:', {
+      aurora: capabilities.canHandleAurora,
+      particles: capabilities.canHandleParticles,
+      performance: capabilities.performanceLevel
+    });
+
     // Hide/show elements based on capabilities
     if (!capabilities.canHandleVideo) {
       const videos = document.querySelectorAll('.bg-aurora-video');
@@ -253,13 +260,9 @@
       });
     }
 
-    if (!capabilities.canHandleAurora) {
-      const auroras = document.querySelectorAll('.bg-aurora');
-      auroras.forEach(a => {
-        a.style.display = 'none';
-        a.style.visibility = 'hidden';
-      });
-    }
+    // Aurora now always enabled for beautiful mobile experience!
+    // Let CSS handle visibility via data-aurora attribute if needed
+    // Aurora is managed by CSS only (no JavaScript hiding!)
 
     // Particles are now always enabled for beautiful mobile experience!
     // Let CSS handle visibility via data-particles attribute if needed
