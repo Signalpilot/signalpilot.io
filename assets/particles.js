@@ -43,11 +43,15 @@
 
   // Particle creation based on type
   function createParticle(type) {
+    // Faster movement on mobile for more dynamic effect
+    const isMobile = window.innerWidth <= 768;
+    const speedMultiplier = isMobile ? 0.4 : 0.15;
+
     const base = {
       x: Math.random() * W,
       y: Math.random() * H,
-      vx: (Math.random() * 2 - 1) * 0.15,
-      vy: (Math.random() * 2 - 1) * 0.15,
+      vx: (Math.random() * 2 - 1) * speedMultiplier,
+      vy: (Math.random() * 2 - 1) * speedMultiplier,
       alpha: 0.6 + Math.random() * 0.4
     };
 
@@ -1265,10 +1269,11 @@
     let targetCount;
 
     if (currentConfig.count === 'auto') {
-      // Full particle count on all devices for beautiful constellation experience
-      const maxParticles = 120;
-      const minParticles = 50;
-      const divisor = 12000;
+      // More particles on mobile for richer constellation experience
+      const isMobile = vw <= 768;
+      const maxParticles = isMobile ? 200 : 120;
+      const minParticles = isMobile ? 100 : 50;
+      const divisor = isMobile ? 8000 : 12000;
       targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
     } else {
       targetCount = currentConfig.count;
