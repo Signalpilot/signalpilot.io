@@ -1178,8 +1178,12 @@
 
   // Update particle position
   function updateParticle(p, config) {
-    p.x += p.vx;
-    p.y += p.vy;
+    // Mobile gets 2.5x faster movement for more dynamic effect
+    const isMobile = window.innerWidth <= 768;
+    const speedBoost = isMobile ? 2.5 : 1;
+
+    p.x += p.vx * speedBoost;
+    p.y += p.vy * speedBoost;
 
     // Special handling for matrix-rain
     if (config.type === 'matrix-rain') {
