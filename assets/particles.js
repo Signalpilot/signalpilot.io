@@ -1160,6 +1160,13 @@
         const starAlpha = p.alpha * (0.7 + Math.sin(p.twinkle) * 0.3);
         const pulse = 1 + Math.sin(p.twinkle) * 0.2;
 
+        // Desktop gets more prominent rays, mobile stays subtle
+        const isMobile = W <= 768;
+        const rayMultiplier = isMobile ? 2.2 : 2.8;
+        const rayThickness = isMobile ? 0.4 : 0.5;
+        const glowSize = isMobile ? 2.5 : 3.2;
+        const glowAlpha = isMobile ? 0.2 : 0.25;
+
         ctx.globalAlpha = starAlpha;
         ctx.fillStyle = config.color;
 
@@ -1169,9 +1176,9 @@
         ctx.fill();
 
         // Draw 4 star rays (cross pattern)
-        const rayLength = p.size * 2.2 * pulse;
+        const rayLength = p.size * rayMultiplier * pulse;
         ctx.strokeStyle = config.color;
-        ctx.lineWidth = p.size * 0.4;
+        ctx.lineWidth = p.size * rayThickness;
         ctx.lineCap = 'round';
 
         // Vertical ray
@@ -1187,9 +1194,9 @@
         ctx.stroke();
 
         // Soft glow
-        ctx.globalAlpha = starAlpha * 0.2;
+        ctx.globalAlpha = starAlpha * glowAlpha;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.size * glowSize, 0, Math.PI * 2);
         ctx.fill();
         break;
     }
