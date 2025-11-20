@@ -8,22 +8,11 @@
 
   console.log('✨ Particles.js loading...');
 
-  // MOBILE DEBUG: Show on-screen notification that script is loading
-  const loadingDiv = document.createElement('div');
-  loadingDiv.style.cssText = 'position:fixed;top:10px;right:10px;background:rgba(0,0,255,0.8);color:#fff;padding:8px;z-index:9999;font-size:11px;font-family:monospace;';
-  loadingDiv.textContent = '🔄 Particles.js loading...';
-  document.body.appendChild(loadingDiv);
-
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) {
     console.log('♿ Reduced motion preferred, particles disabled');
-    loadingDiv.style.background = 'rgba(255,0,0,0.8)';
-    loadingDiv.innerHTML = '⚠️ REDUCE MOTION ON<br>Particles disabled<br>Turn off in Settings → Accessibility';
-    setTimeout(() => loadingDiv.remove(), 8000);
     return;
   }
-
-  loadingDiv.remove(); // Remove loading indicator if continuing
 
   const CANVAS_ID = 'constellations';
   let canvas = document.getElementById(CANVAS_ID);
@@ -1378,24 +1367,6 @@
     canvas.style.setProperty('visibility', 'visible', 'important');
     canvas.style.setProperty('opacity', '1', 'important');
     console.log('💪 Forced canvas visibility with !important!');
-
-    // ADD VISIBLE DEBUG INFO ON SCREEN FOR MOBILE DEBUGGING
-    const debugDiv = document.createElement('div');
-    debugDiv.id = 'particle-debug';
-    debugDiv.style.cssText = 'position:fixed;top:10px;left:10px;background:rgba(0,0,0,0.8);color:#0f0;padding:10px;z-index:9999;font-size:12px;font-family:monospace;max-width:90vw;word-wrap:break-word;';
-    debugDiv.innerHTML = `
-      ✅ Particles.js loaded!<br>
-      Canvas: ${canvas.id}<br>
-      Size: ${canvas.width}x${canvas.height}<br>
-      Particles: ${particles.length}<br>
-      Display: ${canvas.style.display}<br>
-      Visibility: ${canvas.style.visibility}<br>
-      Position: ${window.getComputedStyle(canvas).position}<br>
-      Z-Index: ${window.getComputedStyle(canvas).zIndex}
-    `;
-    document.body.appendChild(debugDiv);
-    // Remove debug after 5 seconds
-    setTimeout(() => debugDiv.remove(), 5000);
 
     // Debug log for all devices to verify initialization and visibility
     setTimeout(() => {
