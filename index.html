@@ -912,6 +912,17 @@
         pointer-events: none !important;
         display: block !important;
         visibility: visible !important;
+      /* Force aurora visible on mobile - higher specificity to override data-aurora="false" */
+      html .bg-aurora,
+      html[data-aurora="false"] .bg-aurora,
+      html[data-aurora="true"] .bg-aurora {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 0.25 !important; /* Subtle for performance */
+        z-index: -1 !important;
+        filter: blur(40px) !important; /* Lighter blur for performance */
+        animation: none !important; /* Disable animation on mobile for smooth scrolling */
+        will-change: auto !important; /* Remove will-change to reduce compositor load */
       }
 
       /* Cards and interactive elements need solid backgrounds */
@@ -1222,15 +1233,8 @@
 
     /* MOBILE OPTIMIZATION: Simplify animations for older devices */
 
-    @media (max-width: 1024px) {
-      /* Optimize animations for mobile devices */
-      .bg-aurora{
-        mix-blend-mode:normal !important;
-        opacity:.35 !important;
-        filter:blur(40px) saturate(100%) brightness(100%) !important;
-        animation:none !important;
-      }
-    }
+    /* REMOVED: This was making aurora invisible on mobile with opacity:.35 !important */
+    /* Aurora opacity is now controlled by the mobile media query at line 898-904 */
 
     /* Light mode background adjustments */
     html[data-theme="light"] .bg-aurora{
