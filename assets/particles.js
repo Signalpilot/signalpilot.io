@@ -1155,21 +1155,56 @@
         break;
 
       default: // stars
-        // Twinkling star
+        // Twinkling star with 4-pointed shape
         p.twinkle += p.twinkleSpeed;
         const starAlpha = p.alpha * (0.7 + Math.sin(p.twinkle) * 0.3);
+        const twinklePulse = 1 + Math.sin(p.twinkle) * 0.15; // Size pulsing
 
         ctx.globalAlpha = starAlpha;
         ctx.fillStyle = config.color;
+
+        // Draw 4-pointed star shape
+        ctx.translate(p.x, p.y);
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+
+        // Create star with 4 points (cross pattern)
+        const starSize = p.size * twinklePulse;
+        const outerRadius = starSize * 2.5;
+        const innerRadius = starSize * 0.4;
+
+        // Top point
+        ctx.moveTo(0, -outerRadius);
+        ctx.lineTo(-innerRadius, -innerRadius);
+        // Right point
+        ctx.lineTo(outerRadius, 0);
+        ctx.lineTo(innerRadius, innerRadius);
+        // Bottom point
+        ctx.lineTo(0, outerRadius);
+        ctx.lineTo(-innerRadius, innerRadius);
+        // Left point
+        ctx.lineTo(-outerRadius, 0);
+        ctx.lineTo(-innerRadius, -innerRadius);
+
+        ctx.closePath();
         ctx.fill();
 
-        // Glow
-        ctx.globalAlpha = starAlpha * 0.3;
+        // Bright center core
+        ctx.globalAlpha = starAlpha;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
+        ctx.arc(0, 0, starSize * 0.6, 0, Math.PI * 2);
         ctx.fill();
+
+        // Soft outer glow
+        ctx.globalAlpha = starAlpha * 0.2;
+        const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, starSize * 4);
+        gradient.addColorStop(0, config.color);
+        gradient.addColorStop(1, 'rgba(180, 200, 255, 0)');
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(0, 0, starSize * 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.translate(-p.x, -p.y);
         break;
     }
 
