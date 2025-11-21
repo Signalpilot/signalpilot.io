@@ -44,7 +44,12 @@
     .sp-theme-toggle svg {
       width: 24px;
       height: 24px;
-      stroke: currentColor;
+      stroke: #9fdcff;
+      fill: none;
+    }
+
+    html[data-theme="light"] .sp-theme-toggle svg {
+      stroke: #0f1524;
     }
 
     /* Light mode support */
