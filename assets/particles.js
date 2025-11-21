@@ -1296,11 +1296,10 @@
       let targetCount;
 
       if (currentConfig.count === 'auto') {
-        // Aggressive reduction for smooth 60fps on all devices
-        const isMobile = vw <= 768;
-        const maxParticles = isMobile ? 50 : 60;  // Much lower caps
-        const minParticles = isMobile ? 30 : 40;
-        const divisor = 25000; // Fewer particles
+        // Original working values - don't change without testing!
+        const maxParticles = 120;
+        const minParticles = 60;
+        const divisor = 12000;
         targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
       } else {
         targetCount = currentConfig.count;
@@ -1346,29 +1345,23 @@
     ].includes(currentConfig.type);
 
     if (!skipConnections) {
-      const linkDist = 100; // Fixed 100px max distance
-      const linkDistSq = 10000; // 100^2
+      const linkDist = Math.min(W, H) * 0.12;
       ctx.lineWidth = 1;
-      ctx.strokeStyle = currentConfig.lineColor;
 
-      // Only check nearby particles, max 2 connections each
       for (let i = 0; i < particles.length; i++) {
-        let connections = 0;
-        for (let j = i + 1; j < particles.length && connections < 2; j++) {
+        for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
-          if (dx > 100 || dx < -100) continue; // Quick reject
           const dy = particles[i].y - particles[j].y;
-          if (dy > 100 || dy < -100) continue; // Quick reject
-          const distSq = dx * dx + dy * dy;
+          const dist = Math.hypot(dx, dy);
 
-          if (distSq < linkDistSq) {
-            const alpha = (1 - Math.sqrt(distSq) / linkDist) * 0.3;
+          if (dist < linkDist) {
+            const alpha = (1 - dist / linkDist) * 0.35;
             ctx.globalAlpha = alpha;
+            ctx.strokeStyle = currentConfig.lineColor;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
-            connections++;
           }
         }
       }
