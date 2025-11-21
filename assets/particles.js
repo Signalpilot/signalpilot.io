@@ -1271,7 +1271,12 @@
   // Resize canvas
   function resize() {
     const vw = window.innerWidth;
-    const vh = Math.max(window.innerHeight, document.documentElement.scrollHeight);
+    const isMobile = vw <= 768;
+    // Desktop: viewport height only (full page canvas too expensive to clear every frame)
+    // Mobile: full page height (was working fine)
+    const vh = isMobile
+      ? Math.max(window.innerHeight, document.documentElement.scrollHeight)
+      : window.innerHeight;
 
     // Use full DPR on all devices for crisp constellation rendering
     dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
