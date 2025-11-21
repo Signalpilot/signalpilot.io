@@ -458,10 +458,10 @@ Email: support@signalpilot.io`;
     const toggle = document.createElement('button');
     toggle.className = 'sp-chatbot-toggle';
     toggle.setAttribute('aria-label', 'Open chatbot');
-    // Windows needs explicit colors, Mac works with currentColor
+    // Windows needs img tag, Mac works with inline SVG
     const isWindows = navigator.platform.indexOf('Win') > -1;
     if (isWindows) {
-      toggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#9fdcff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>`;
+      toggle.innerHTML = `<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239fdcff' stroke-width='2'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/%3E%3C/svg%3E" width="28" height="28" alt="Chat">`;
     } else {
       toggle.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`;
     }
