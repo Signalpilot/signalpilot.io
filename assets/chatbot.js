@@ -458,7 +458,11 @@ Email: support@signalpilot.io`;
     const toggle = document.createElement('button');
     toggle.className = 'sp-chatbot-toggle';
     toggle.setAttribute('aria-label', 'Open chatbot');
-    toggle.innerHTML = `<span style="font-size:20px;font-weight:bold;color:#9fdcff">?</span>`;
+    toggle.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    `;
 
     // Create window
     const window = document.createElement('div');
