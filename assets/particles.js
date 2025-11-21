@@ -1292,7 +1292,8 @@
 
     // Calculate particle count ONCE on first resize, then lock it to prevent flickering
     if (targetParticleCount === null) {
-      const area = vw * vh;
+      // Use VIEWPORT area for particle count, not full page (which can be 5000px+ tall)
+      const viewportArea = vw * window.innerHeight;
       let targetCount;
 
       if (currentConfig.count === 'auto') {
@@ -1300,7 +1301,7 @@
         const maxParticles = 120;
         const minParticles = 60;
         const divisor = 12000;
-        targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
+        targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(viewportArea / divisor)));
       } else {
         targetCount = currentConfig.count;
       }
