@@ -456,7 +456,7 @@ Email: support@signalpilot.io`;
   function createChatbot() {
     // Create toggle button
     const toggle = document.createElement('button');
-    toggle.className = 'sp-assist-btn';
+    toggle.className = 'sp-chatbot-toggle';
     toggle.setAttribute('aria-label', 'Open chatbot');
     // Windows needs explicit text, Mac works with inline SVG
     const isWindows = navigator.platform.indexOf('Win') > -1;
