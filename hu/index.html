@@ -8401,14 +8401,18 @@ if ('serviceWorker' in navigator) {
 
     function updateProgress() {
       const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      // Use Math.max for better mobile compatibility
+      const documentHeight = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight
+      );
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
       // Calculate scroll percentage
       const scrollable = documentHeight - windowHeight;
-      const scrolled = (scrollTop / scrollable) * 100;
+      const scrolled = scrollable > 0 ? (scrollTop / scrollable) * 100 : 0;
 
-      progressBar.style.width = Math.min(scrolled, 100) + '%';
+      progressBar.style.width = Math.min(Math.max(scrolled, 0), 100) + '%';
 
       ticking = false;
     }
