@@ -8580,16 +8580,23 @@ if ('serviceWorker' in navigator) {
     const progressBar = document.querySelector('.scroll-progress');
     if (!progressBar) return;
 
+    // Force visibility
+    progressBar.style.display = 'block';
+    progressBar.style.position = 'fixed';
+    progressBar.style.top = '0';
+    progressBar.style.left = '0';
+    progressBar.style.zIndex = '10000';
+
     let ticking = false;
 
     function updateProgress() {
-      const windowHeight = window.innerHeight;
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
       // Use Math.max for better mobile compatibility
       const documentHeight = Math.max(
         document.documentElement.scrollHeight,
         document.body.scrollHeight
       );
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      const scrollTop = window.pageYOffset || window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
       // Calculate scroll percentage
       const scrollable = documentHeight - windowHeight;
@@ -8609,9 +8616,12 @@ if ('serviceWorker' in navigator) {
 
     window.addEventListener('scroll', requestTick, { passive: true });
     window.addEventListener('resize', requestTick, { passive: true });
+    // For iOS Safari elastic scrolling
+    window.addEventListener('touchmove', requestTick, { passive: true });
 
-    // Initial update
+    // Initial update with delay for mobile
     updateProgress();
+    setTimeout(updateProgress, 100);
   }
 
   // Typing animation for hero headline
