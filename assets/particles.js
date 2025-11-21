@@ -1296,12 +1296,11 @@
       let targetCount;
 
       if (currentConfig.count === 'auto') {
-        // Balance particle count for smooth performance on all devices
-        // O(n²) connection algorithm means fewer particles = much better performance
+        // Aggressive reduction for smooth 60fps on all devices
         const isMobile = vw <= 768;
-        const maxParticles = isMobile ? 80 : 90;  // Reduced from 110/160 for better perf
-        const minParticles = isMobile ? 50 : 60;  // Reduced from 70/90
-        const divisor = isMobile ? 15000 : 18000; // Higher = fewer particles
+        const maxParticles = isMobile ? 50 : 60;  // Much lower caps
+        const minParticles = isMobile ? 30 : 40;
+        const divisor = 25000; // Fewer particles
         targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
       } else {
         targetCount = currentConfig.count;
@@ -1347,24 +1346,23 @@
     ].includes(currentConfig.type);
 
     if (!skipConnections) {
-      const linkDist = Math.min(W, H) * 0.08; // Reduced from 0.12 for perf
-      const linkDistSq = linkDist * linkDist; // Use squared distance to avoid sqrt
+      const linkDist = 100; // Fixed 100px max distance
+      const linkDistSq = 10000; // 100^2
       ctx.lineWidth = 1;
       ctx.strokeStyle = currentConfig.lineColor;
 
-      // Limit connections per particle for O(n) instead of O(n²) behavior
-      const maxConnectionsPerParticle = 3;
-
+      // Only check nearby particles, max 2 connections each
       for (let i = 0; i < particles.length; i++) {
         let connections = 0;
-        for (let j = i + 1; j < particles.length && connections < maxConnectionsPerParticle; j++) {
+        for (let j = i + 1; j < particles.length && connections < 2; j++) {
           const dx = particles[i].x - particles[j].x;
+          if (dx > 100 || dx < -100) continue; // Quick reject
           const dy = particles[i].y - particles[j].y;
-          const distSq = dx * dx + dy * dy; // Avoid sqrt
+          if (dy > 100 || dy < -100) continue; // Quick reject
+          const distSq = dx * dx + dy * dy;
 
           if (distSq < linkDistSq) {
-            const dist = Math.sqrt(distSq);
-            const alpha = (1 - dist / linkDist) * 0.35;
+            const alpha = (1 - Math.sqrt(distSq) / linkDist) * 0.3;
             ctx.globalAlpha = alpha;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
