@@ -458,10 +458,10 @@ Email: support@signalpilot.io`;
     const toggle = document.createElement('button');
     toggle.className = 'sp-chatbot-toggle';
     toggle.setAttribute('aria-label', 'Open chatbot');
-    // Windows needs external file, Mac works with inline SVG
+    // Windows needs emoji (same pattern as theme toggle), Mac uses inline SVG
     const isWindows = navigator.platform.indexOf('Win') > -1;
     if (isWindows) {
-      toggle.innerHTML = `<img src="/assets/chat-icon.svg" width="28" height="28" alt="" style="pointer-events:none">`;
+      toggle.innerHTML = `<span style="font-size:24px;line-height:1">❓</span>`;
     } else {
       toggle.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`;
     }
