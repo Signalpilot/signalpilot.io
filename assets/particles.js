@@ -1296,11 +1296,12 @@
       let targetCount;
 
       if (currentConfig.count === 'auto') {
-        // Desktop gets more particles for richer sky, mobile balanced for smooth scrolling
+        // Balance particle count for smooth performance on all devices
+        // O(n²) connection algorithm means fewer particles = much better performance
         const isMobile = vw <= 768;
-        const maxParticles = isMobile ? 110 : 160;
-        const minParticles = isMobile ? 70 : 90;
-        const divisor = isMobile ? 12000 : 10000;
+        const maxParticles = isMobile ? 80 : 90;  // Reduced from 110/160 for better perf
+        const minParticles = isMobile ? 50 : 60;  // Reduced from 70/90
+        const divisor = isMobile ? 15000 : 18000; // Higher = fewer particles
         targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(area / divisor)));
       } else {
         targetCount = currentConfig.count;
@@ -1346,23 +1347,30 @@
     ].includes(currentConfig.type);
 
     if (!skipConnections) {
-      const linkDist = Math.min(W, H) * 0.12;
+      const linkDist = Math.min(W, H) * 0.08; // Reduced from 0.12 for perf
+      const linkDistSq = linkDist * linkDist; // Use squared distance to avoid sqrt
       ctx.lineWidth = 1;
+      ctx.strokeStyle = currentConfig.lineColor;
+
+      // Limit connections per particle for O(n) instead of O(n²) behavior
+      const maxConnectionsPerParticle = 3;
 
       for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
+        let connections = 0;
+        for (let j = i + 1; j < particles.length && connections < maxConnectionsPerParticle; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
-          const dist = Math.hypot(dx, dy);
+          const distSq = dx * dx + dy * dy; // Avoid sqrt
 
-          if (dist < linkDist) {
+          if (distSq < linkDistSq) {
+            const dist = Math.sqrt(distSq);
             const alpha = (1 - dist / linkDist) * 0.35;
             ctx.globalAlpha = alpha;
-            ctx.strokeStyle = currentConfig.lineColor;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
+            connections++;
           }
         }
       }
