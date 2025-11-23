@@ -1450,28 +1450,6 @@
   }
 
   // Event listeners
-  let scrollTimeout;
-  let isScrolling = false;
-  const isMobile = () => window.innerWidth <= 768;
-
-  // Pause particles during scroll on mobile for better performance
-  function handleScroll() {
-    if (!isMobile()) return; // Only pause on mobile
-
-    if (!isScrolling) {
-      isScrolling = true;
-      stop(); // Pause animation during scroll
-    }
-
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      isScrolling = false;
-      start(); // Resume animation after scrolling stops
-    }, 150); // Resume 150ms after scroll ends
-  }
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-
   window.addEventListener('resize', () => {
     stop();
     resize();
