@@ -1306,7 +1306,7 @@
       if (currentConfig.count === 'auto') {
         // Original working values - don't change without testing!
         const maxParticles = 120;
-        const minParticles = 60;
+        const minParticles = 65;
         const divisor = 12000;
         targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(calcArea / divisor)));
       } else {
