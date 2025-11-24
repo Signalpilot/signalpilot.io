@@ -1,0 +1,86 @@
+/**
+ * CHARACTER SHUFFLE EFFECT
+ * Matrix-style decoding animation for text reveals
+ */
+
+/* Container for shuffling text */
+.char-shuffle {
+  display: inline-block;
+  position: relative;
+}
+
+/* Individual character during shuffle */
+.char-shuffle .char {
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+/* Character visible state */
+.char-shuffle .char.settled {
+  opacity: 1;
+}
+
+/* Preserve spaces */
+.char-shuffle .char.space {
+  width: 0.25em;
+}
+
+/* Shuffle animation glow effect (optional) */
+.char-shuffle.shuffling .char:not(.settled) {
+  animation: shuffle-glow 0.15s ease-in-out infinite;
+  color: var(--brand);
+  text-shadow: 0 0 8px rgba(91, 138, 255, 0.6);
+}
+
+@keyframes shuffle-glow {
+  0%, 100% {
+    opacity: 0.4;
+    text-shadow: 0 0 8px rgba(91, 138, 255, 0.4);
+  }
+  50% {
+    opacity: 0.8;
+    text-shadow: 0 0 12px rgba(91, 138, 255, 0.8);
+  }
+}
+
+/* Shimmer effect when character settles */
+.char-shuffle .char.just-settled {
+  animation: settle-shimmer 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes settle-shimmer {
+  0% {
+    color: var(--brand);
+    text-shadow: 0 0 12px rgba(91, 138, 255, 0.9);
+    transform: scale(1.1);
+  }
+  100% {
+    color: inherit;
+    text-shadow: none;
+    transform: scale(1);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .char-shuffle .char,
+  .char-shuffle.shuffling .char {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+    text-shadow: none !important;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Faster, less intensive on mobile */
+  .char-shuffle.shuffling .char:not(.settled) {
+    animation-duration: 0.2s;
+  }
+
+  .char-shuffle .char.just-settled {
+    animation-duration: 0.3s;
+  }
+}
