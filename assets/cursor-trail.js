@@ -8,21 +8,18 @@
 
   // Configuration
   const CONFIG = {
-    trailInterval: 16, // milliseconds between trail particles (60fps)
-    particleLifetime: 2000, // milliseconds
-    maxParticles: 150,
-    explosionParticles: 25,
-    baseSize: 3,
-    glowIntensity: 15,
+    trailInterval: 32, // milliseconds between trail particles (slower)
+    particleLifetime: 800, // milliseconds (shorter lifetime)
+    maxParticles: 40, // fewer particles
+    explosionParticles: 12, // fewer explosion particles
+    baseSize: 8, // larger but more subtle
+    glowIntensity: 3, // much less glow
     attractDistance: 100, // pixels
     repelDistance: 50, // pixels
-    forceMultiplier: 0.3,
-    friction: 0.95,
+    forceMultiplier: 0.15, // gentler movement
+    friction: 0.97, // more friction
     colors: [
-      { r: 139, g: 92, b: 246 }, // Purple
-      { r: 59, g: 130, b: 246 }, // Blue
-      { r: 236, g: 72, b: 153 }, // Pink
-      { r: 251, g: 146, b: 60 }, // Orange
+      { r: 255, g: 255, b: 255 }, // Transparent white only
     ]
   };
 
@@ -84,24 +81,20 @@
     draw(ctx) {
       if (this.life <= 0) return;
 
-      const alpha = this.life * 0.8;
-      const size = this.size * (this.isExplosion ? this.life * 1.5 : 1);
+      // Very subtle transparent effect
+      const alpha = this.life * 0.12; // Much more transparent
+      const size = this.size * (1 + (1 - this.life) * 2); // Expand outward like ripple
 
-      // Draw glow
-      const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, size * CONFIG.glowIntensity);
-      gradient.addColorStop(0, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha * 0.8})`);
-      gradient.addColorStop(0.3, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha * 0.4})`);
-      gradient.addColorStop(1, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0)`);
+      // Draw subtle transparent ripple
+      const gradient = ctx.createRadialGradient(this.x, this.y, size * 0.3, this.x, this.y, size * CONFIG.glowIntensity);
+      gradient.addColorStop(0, `rgba(255, 255, 255, 0)`); // transparent center
+      gradient.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.3})`); // subtle ring
+      gradient.addColorStop(0.8, `rgba(255, 255, 255, ${alpha * 0.15})`); // fade out
+      gradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
 
       ctx.fillStyle = gradient;
       ctx.beginPath();
       ctx.arc(this.x, this.y, size * CONFIG.glowIntensity, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Draw core
-      ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
       ctx.fill();
     }
   }
@@ -185,10 +178,7 @@
         }
       });
 
-      // Click - create explosion
-      document.addEventListener('click', (e) => {
-        this.createExplosion(e.clientX, e.clientY);
-      });
+      // Click explosion removed - too much visual noise
 
       // Window resize
       window.addEventListener('resize', () => {
