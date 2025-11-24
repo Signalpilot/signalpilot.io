@@ -73,8 +73,8 @@
     // Split text into character spans
     element.innerHTML = splitText(originalText);
 
-    // Add classes for initial state
-    element.classList.add('char-shuffle', 'pre-shuffle');
+    // Add classes for initial state - NO PRE-SHUFFLE HIDING
+    element.classList.add('char-shuffle');
 
     // Mark as initialized
     element.dataset.shuffleInit = 'true';
@@ -82,6 +82,13 @@
     // Get all character spans
     const chars = Array.from(element.querySelectorAll('.char:not(.space)'));
     const totalChars = chars.length;
+
+    // Force all characters visible from the start
+    element.style.opacity = '1';
+    chars.forEach(char => {
+      char.style.opacity = '1';
+      char.style.visibility = 'visible';
+    });
 
     // Shuffle state for each character
     const charStates = chars.map((char, index) => ({
@@ -94,8 +101,6 @@
 
     // Start shuffling after delay
     setTimeout(() => {
-      // Remove pre-shuffle class to make characters visible
-      element.classList.remove('pre-shuffle');
       element.classList.add('shuffling');
 
       console.log('[CharShuffle] Starting animation on', totalChars, 'characters, speed:', speed, 'ms');
@@ -260,7 +265,7 @@
 
       // Reset initialization flag and classes
       element.dataset.shuffleInit = 'false';
-      element.classList.remove('char-shuffle', 'shuffling', 'pre-shuffle');
+      element.classList.remove('char-shuffle', 'shuffling');
 
       shuffleElement(element);
     }
