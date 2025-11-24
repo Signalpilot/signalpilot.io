@@ -98,6 +98,8 @@
       element.classList.remove('pre-shuffle');
       element.classList.add('shuffling');
 
+      console.log('[CharShuffle] Starting animation on', totalChars, 'characters, speed:', speed, 'ms');
+
       let elapsed = 0;
       const startTime = Date.now();
 
@@ -113,25 +115,19 @@
           if (elapsed >= state.settleAt) {
             // Settle the character
             state.element.textContent = state.original;
-
-            // CRITICAL: Stop shuffle-glow animation immediately
-            state.element.style.animation = 'none';
-            state.element.style.opacity = '1';
-
-            // Add settled classes
             state.element.classList.add('settled', 'just-settled');
             state.settled = true;
 
-            // Now allow settle-shimmer animation
-            requestAnimationFrame(() => {
-              state.element.style.animation = '';
-            });
+            // Force visibility immediately - CSS classes alone aren't working
+            state.element.style.opacity = '1';
+            state.element.style.visibility = 'visible';
 
             // Remove just-settled class after shimmer completes
             setTimeout(() => {
               state.element.classList.remove('just-settled');
-              // Lock in final visible state
+              // Ensure visibility persists
               state.element.style.opacity = '1';
+              state.element.style.visibility = 'visible';
             }, 450);
           } else {
             // Keep shuffling

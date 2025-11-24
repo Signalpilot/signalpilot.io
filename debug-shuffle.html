@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Shuffle Debug</title>
+  <link rel="stylesheet" href="assets/character-shuffle.css">
+  <style>
+    body {
+      background: #0a0e18;
+      color: white;
+      font-family: sans-serif;
+      padding: 50px;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+    .debug-info {
+      margin-top: 50px;
+      padding: 20px;
+      background: #1a1e28;
+      border: 1px solid #333;
+      font-family: monospace;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    <span id="test-text" data-char-shuffle data-shuffle-speed="40" data-shuffle-delay="100" data-shuffle-trigger="load">
+      The edge isn't seeing more. It's seeing what matters.
+    </span>
+  </h1>
+
+  <div class="debug-info">
+    <h3>Debug Info:</h3>
+    <div id="debug-output"></div>
+  </div>
+
+  <script src="assets/character-shuffle.js"></script>
+  <script>
+    // Debug monitoring
+    const debugOutput = document.getElementById('debug-output');
+    const testEl = document.getElementById('test-text');
+
+    function log(msg) {
+      console.log(msg);
+      const p = document.createElement('p');
+      p.textContent = new Date().toISOString().substr(11, 12) + ' - ' + msg;
+      debugOutput.appendChild(p);
+    }
+
+    log('Page loaded');
+
+    // Check state every 500ms
+    setInterval(() => {
+      if (!testEl) return;
+
+      const classes = testEl.className;
+      const dataInit = testEl.dataset.shuffleInit;
+      const dataComplete = testEl.dataset.shuffleComplete;
+      const chars = testEl.querySelectorAll('.char');
+      const visibleChars = Array.from(chars).filter(c => {
+        const computed = window.getComputedStyle(c);
+        return computed.opacity !== '0' && computed.visibility !== 'hidden';
+      }).length;
+
+      log(`Classes: ${classes || 'none'} | Init: ${dataInit} | Complete: ${dataComplete} | Visible: ${visibleChars}/${chars.length}`);
+
+      // Show first char details
+      if (chars.length > 0) {
+        const first = chars[0];
+        const computed = window.getComputedStyle(first);
+        log(`  First char - inline opacity: ${first.style.opacity} | computed opacity: ${computed.opacity} | visibility: ${computed.visibility}`);
+      }
+    }, 500);
+  </script>
+</body>
+</html>
