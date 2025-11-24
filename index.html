@@ -1177,21 +1177,37 @@
 
     /* Shimmering gradient for hero heading */
     .shimmer-text {
+      /* Create proper rendering context for Safari */
+      position: relative;
+      display: inline-block;
+
       background: linear-gradient(
         90deg,
         #9cc0ff 0%,
         #86a8ff 20%,
         #7ccaff 40%,
-        #ffffff 50%,
+        #c5dbff 50%,
         #7ccaff 60%,
         #86a8ff 80%,
         #9cc0ff 100%
       );
       background-size: 200% auto;
+
+      /* Safari-specific text rendering */
       -webkit-background-clip: text;
-      background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
+
+      /* Font smoothing for webkit */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
       animation: shimmerGradient 15s linear infinite;
+    }
+
+    /* Fix for block-level headings with shimmer */
+    h1.shimmer-text, h2.shimmer-text, h3.shimmer-text {
+      display: block;
     }
 
     /* Light mode shimmer */
@@ -1208,20 +1224,29 @@
       );
       background-size: 200% auto;
       -webkit-background-clip: text;
-      background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
       animation: shimmerGradient 15s linear infinite;
     }
 
-    /* Mobile - disable shimmer completely due to Safari rendering issues */
+    /* Mobile Safari optimizations */
     @media (max-width:768px) {
       .shimmer-text {
-        animation: none !important;
-        background: none !important;
-        -webkit-background-clip: unset !important;
-        background-clip: unset !important;
-        -webkit-text-fill-color: inherit !important;
-        color: var(--fg) !important;
+        /* Force GPU acceleration to prevent flickering */
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+
+        /* Isolate stacking context */
+        isolation: isolate;
+
+        /* Hint browser about what will change */
+        will-change: background-position;
+
+        /* Slower animation on mobile for smoother performance */
+        animation-duration: 20s;
+
+        /* Ensure proper layering */
+        z-index: 1;
       }
     }
 
