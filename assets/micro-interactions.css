@@ -1,0 +1,243 @@
+/**
+ * Micro-Interactions CSS
+ * Styles for stunning visual effects
+ */
+
+/* ============================================
+   RIPPLE EFFECT
+   ============================================ */
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(118, 221, 255, 0.4) 30%,
+    rgba(91, 138, 255, 0.2) 60%,
+    transparent 100%
+  );
+  transform: scale(0);
+  animation: ripple-animation 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+
+@keyframes ripple-animation {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* Ensure buttons can contain ripples */
+.btn {
+  overflow: hidden;
+}
+
+/* ============================================
+   MAGNETIC CARDS
+   ============================================ */
+.card.product,
+.card.plan,
+.feature {
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0); /* Force GPU acceleration */
+}
+
+/* Smooth hover state */
+.card.product:hover,
+.card.plan:hover,
+.feature:hover {
+  cursor: pointer;
+}
+
+/* ============================================
+   VIEW TRANSITIONS API
+   ============================================ */
+
+/* Define transition animations */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.4s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Smooth fade for page transitions */
+  ::view-transition-old(root) {
+    animation-name: fade-out;
+  }
+
+  ::view-transition-new(root) {
+    animation-name: fade-in;
+  }
+
+  /* Section morphing */
+  ::view-transition-old(section-*),
+  ::view-transition-new(section-*) {
+    animation-duration: 0.5s;
+  }
+
+  ::view-transition-group(section-*) {
+    animation-duration: 0.5s;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   ENHANCED BUTTON EFFECTS
+   ============================================ */
+.btn-primary,
+.btn-cta {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glow on hover */
+.btn-primary:hover,
+.btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 30px rgba(91, 138, 255, 0.3),
+    0 0 20px rgba(118, 221, 255, 0.2);
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* Disable effects on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .ripple-effect,
+  .card.product:hover,
+  .card.plan:hover,
+  .feature:hover {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Reduce complexity on mobile */
+  .card.product,
+  .card.plan,
+  .feature {
+    transform: none;
+    will-change: auto;
+  }
+
+  /* Keep ripple effect (lightweight) */
+  .ripple-effect {
+    animation-duration: 0.4s;
+  }
+}
+
+/* ============================================
+   SUBTLE ANIMATIONS
+   ============================================ */
+
+/* Breathing effect for CTA buttons */
+@keyframes subtle-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(91, 138, 255, 0.2),
+      0 0 40px rgba(91, 138, 255, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(91, 138, 255, 0.3),
+      0 0 60px rgba(91, 138, 255, 0.15);
+  }
+}
+
+.btn-primary.pulse {
+  animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+/* Shimmer effect for special elements */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(118, 221, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* ============================================
+   STAGGER ANIMATIONS
+   ============================================ */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-item {
+  animation: fade-in-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.05s; }
+.stagger-item:nth-child(2) { animation-delay: 0.1s; }
+.stagger-item:nth-child(3) { animation-delay: 0.15s; }
+.stagger-item:nth-child(4) { animation-delay: 0.2s; }
+.stagger-item:nth-child(5) { animation-delay: 0.25s; }
+.stagger-item:nth-child(6) { animation-delay: 0.3s; }
+
+/* ============================================
+   GPU ACCELERATION HINTS
+   ============================================ */
+.card.product,
+.card.plan,
+.feature,
+.btn {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
