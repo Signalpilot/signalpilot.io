@@ -131,7 +131,12 @@
         if (allSettled) {
           clearInterval(shuffleTimer);
           element.classList.remove('shuffling');
-          // Characters remain visible due to .char { opacity: 1 !important }
+
+          // NUCLEAR OPTION: Force opacity inline to override any CSS
+          chars.forEach(char => {
+            char.style.opacity = '1';
+            char.style.animation = 'none';
+          });
         }
       }, CONFIG.shuffleInterval);
 
