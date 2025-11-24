@@ -1168,16 +1168,16 @@
 
     @keyframes wordShimmer {
       0%, 20% {
-        opacity: 0.4;
-        filter: brightness(0.7);
+        opacity: 1;
+        filter: brightness(1) drop-shadow(0 0 0 transparent);
       }
       50% {
         opacity: 1;
-        filter: brightness(1.5);
+        filter: brightness(2.2) drop-shadow(0 0 12px rgba(124, 202, 255, 0.8));
       }
       80%, 100% {
-        opacity: 0.4;
-        filter: brightness(0.7);
+        opacity: 1;
+        filter: brightness(1) drop-shadow(0 0 0 transparent);
       }
     }
 
@@ -1194,9 +1194,9 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      opacity: 0.4;
-      filter: brightness(0.7);
-      animation: wordShimmer 1.2s ease-in-out forwards;
+      opacity: 1;
+      filter: brightness(1);
+      animation: wordShimmer 0.8s ease-in-out forwards;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -1209,10 +1209,69 @@
       background-clip: text;
     }
 
-    /* Mobile optimizations */
+    @keyframes wordShimmerLight {
+      0%, 20% {
+        opacity: 1;
+        filter: brightness(1) drop-shadow(0 0 0 transparent);
+      }
+      50% {
+        opacity: 1;
+        filter: brightness(2.2) drop-shadow(0 0 12px rgba(59, 130, 246, 0.8));
+      }
+      80%, 100% {
+        opacity: 1;
+        filter: brightness(1) drop-shadow(0 0 0 transparent);
+      }
+    }
+
+    html[data-theme="light"] .shimmer-text-words .shimmer-word {
+      animation-name: wordShimmerLight;
+    }
+
+    /* Mobile: revert to continuous gradient shimmer (both lines lit) */
     @media (max-width:768px) {
+      /* Disable word-by-word animation on mobile */
       .shimmer-text-words .shimmer-word {
-        animation-duration: 1s;
+        display: inline;
+        opacity: 1 !important;
+        filter: none !important;
+        animation: none !important;
+        background: none !important;
+        -webkit-background-clip: unset !important;
+        -webkit-text-fill-color: unset !important;
+        background-clip: unset !important;
+      }
+
+      /* Apply continuous gradient shimmer to the container instead */
+      .shimmer-text-words {
+        background: linear-gradient(90deg, #86a8ff 0%, #7ccaff 45%, #c5dbff 50%, #7ccaff 55%, #86a8ff 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmerGradientMobile 30s linear infinite;
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+        isolation: isolate;
+        will-change: background-position;
+      }
+
+      html[data-theme="light"] .shimmer-text-words {
+        background: linear-gradient(90deg, #3b82f6 0%, #0ea5e9 45%, #0c4a6e 50%, #0ea5e9 55%, #3b82f6 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmerGradientMobile 30s linear infinite;
+      }
+
+      @keyframes shimmerGradientMobile {
+        0% {
+          background-position: 200% 50%;
+        }
+        100% {
+          background-position: -200% 50%;
+        }
       }
     }
 
@@ -7303,10 +7362,9 @@ if ('serviceWorker' in navigator) {
       span.className = 'shimmer-word';
       span.textContent = word;
 
-      // Stagger the animation - each word starts 0.8s after the previous
-      // Desktop: 0.8s delay per word, mobile: 0.6s delay per word
-      const isMobile = window.innerWidth <= 768;
-      const delayPerWord = isMobile ? 0.6 : 0.8;
+      // Stagger the animation - faster timing now
+      // Desktop: 0.5s delay per word
+      const delayPerWord = 0.5;
       span.style.animationDelay = `${index * delayPerWord}s`;
 
       element.appendChild(span);
@@ -7318,7 +7376,7 @@ if ('serviceWorker' in navigator) {
     });
 
     // Loop the animation - restart after all words have shimmered
-    const totalDuration = words.length * (window.innerWidth <= 768 ? 0.6 : 0.8) + 1.2;
+    const totalDuration = words.length * 0.5 + 0.8; // 0.5s per word + 0.8s animation duration
     setInterval(() => {
       // Re-trigger animations by cloning and replacing
       const parent = element.parentNode;
@@ -7328,12 +7386,16 @@ if ('serviceWorker' in navigator) {
   }
 
   function initWordShimmer() {
+    // Skip word-by-word processing on mobile - use continuous shimmer instead
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) return;
+
     // Find all elements with shimmer-text-words class
     const shimmerElements = document.querySelectorAll('.shimmer-text-words');
 
     if (shimmerElements.length === 0) return;
 
-    // Process each shimmer element
+    // Process each shimmer element (desktop only)
     shimmerElements.forEach(element => {
       processShimmerElement(element);
     });
