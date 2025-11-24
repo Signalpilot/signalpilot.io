@@ -72,7 +72,9 @@
 
     // Split text into character spans
     element.innerHTML = splitText(originalText);
-    element.classList.add('char-shuffle');
+
+    // Add classes for initial state
+    element.classList.add('char-shuffle', 'pre-shuffle');
 
     // Mark as initialized
     element.dataset.shuffleInit = 'true';
@@ -92,6 +94,8 @@
 
     // Start shuffling after delay
     setTimeout(() => {
+      // Remove pre-shuffle class to make characters visible
+      element.classList.remove('pre-shuffle');
       element.classList.add('shuffling');
 
       let elapsed = 0;
@@ -127,6 +131,7 @@
         if (allSettled) {
           clearInterval(shuffleTimer);
           element.classList.remove('shuffling');
+          // Characters remain visible due to .char { opacity: 1 !important }
         }
       }, CONFIG.shuffleInterval);
 
@@ -215,9 +220,9 @@
         return;
       }
 
-      // Reset initialization flag
+      // Reset initialization flag and classes
       element.dataset.shuffleInit = 'false';
-      element.classList.remove('char-shuffle', 'shuffling');
+      element.classList.remove('char-shuffle', 'shuffling', 'pre-shuffle');
 
       shuffleElement(element);
     }
