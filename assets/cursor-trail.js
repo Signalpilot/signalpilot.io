@@ -20,9 +20,7 @@
     gravity: 0.15, // water droplets fall
     mergeDistance: 15, // droplets merge when close
     colors: [
-      { r: 100, g: 200, b: 255 }, // Cyan/water blue
-      { r: 80, g: 180, b: 240 },  // Deeper blue
-      { r: 120, g: 220, b: 255 }, // Light cyan
+      { r: 255, g: 255, b: 255 }, // Clear/transparent
     ]
   };
 
@@ -105,21 +103,21 @@
     draw(ctx) {
       if (this.life <= 0) return;
 
-      // Water droplet opacity - more visible, fades near end
-      const alpha = Math.min(this.life * 0.7, 0.6); // More opaque than vapor
+      // Transparent water droplet - subtle but visible
+      const alpha = Math.min(this.life * 0.4, 0.35); // Transparent
       const size = this.size * (0.8 + this.life * 0.2); // Slight shrink as it evaporates
 
-      // Main droplet body with blue tint
+      // Main droplet body - very transparent with slight white
       const dropletGradient = ctx.createRadialGradient(
-        this.x - size * 0.2, this.y - size * 0.2, 0,
+        this.x - size * 0.3, this.y - size * 0.3, 0,
         this.x, this.y, size
       );
 
-      // Highlight for glossy water effect
-      dropletGradient.addColorStop(0, `rgba(${this.color.r + 100}, ${this.color.g + 50}, ${this.color.b}, ${alpha * 0.9})`);
-      dropletGradient.addColorStop(0.3, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha})`);
-      dropletGradient.addColorStop(0.7, `rgba(${this.color.r * 0.7}, ${this.color.g * 0.7}, ${this.color.b * 0.9}, ${alpha * 0.9})`);
-      dropletGradient.addColorStop(1, `rgba(${this.color.r * 0.5}, ${this.color.g * 0.5}, ${this.color.b * 0.8}, ${alpha * 0.3})`);
+      // Clear water effect with bright highlight
+      dropletGradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 1.2})`); // Bright highlight
+      dropletGradient.addColorStop(0.3, `rgba(255, 255, 255, ${alpha * 0.6})`); // Transparent body
+      dropletGradient.addColorStop(0.7, `rgba(255, 255, 255, ${alpha * 0.3})`); // Edge
+      dropletGradient.addColorStop(1, `rgba(255, 255, 255, 0)`); // Fade out
 
       // Draw main droplet
       ctx.fillStyle = dropletGradient;
@@ -127,18 +125,12 @@
       ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
       ctx.fill();
 
-      // Add subtle glow for depth (not as much as vapor)
-      if (CONFIG.glowIntensity > 1) {
-        const glowGradient = ctx.createRadialGradient(this.x, this.y, size * 0.5, this.x, this.y, size * CONFIG.glowIntensity);
-        glowGradient.addColorStop(0, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha * 0.15})`);
-        glowGradient.addColorStop(0.6, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha * 0.05})`);
-        glowGradient.addColorStop(1, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0)`);
-
-        ctx.fillStyle = glowGradient;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, size * CONFIG.glowIntensity, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      // Add subtle edge for glass-like refraction
+      ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.5})`;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, size * 0.8, 0, Math.PI * 2);
+      ctx.stroke();
     }
   }
 
