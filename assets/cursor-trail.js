@@ -8,17 +8,16 @@
 
   // Configuration
   const CONFIG = {
-    trailInterval: 25, // milliseconds between droplets
-    particleLifetime: 1200, // milliseconds - droplets last longer
-    maxParticles: 60, // more droplets for fluid effect
-    baseSize: 5, // smaller, defined droplets
-    glowIntensity: 1.2, // minimal glow - just for depth
-    attractDistance: 80, // pixels
-    repelDistance: 30, // pixels
-    forceMultiplier: 0.08, // subtle interaction
-    friction: 0.985, // less friction - water flows smoothly
-    gravity: 0.15, // water droplets fall
-    mergeDistance: 15, // droplets merge when close
+    trailInterval: 30, // milliseconds between particles
+    particleLifetime: 1000, // milliseconds
+    maxParticles: 50,
+    baseSize: 6,
+    glowIntensity: 1.5,
+    attractDistance: 100, // pixels
+    repelDistance: 40, // pixels
+    forceMultiplier: 0.12,
+    friction: 0.96,
+    mergeDistance: 20, // particles flow together when close
     colors: [
       { r: 255, g: 255, b: 255 }, // Clear/transparent
     ]
@@ -45,9 +44,6 @@
 
       if (this.life <= 0) return false;
 
-      // Apply gravity - water droplets fall
-      this.vy += CONFIG.gravity;
-
       // Apply velocity
       this.x += this.vx;
       this.y += this.vy;
@@ -56,7 +52,7 @@
       this.vx *= CONFIG.friction;
       this.vy *= CONFIG.friction;
 
-      // Attract/repel based on mouse proximity (cursor disturbs water)
+      // Attract/repel based on mouse proximity
       if (!this.isExplosion || age > 200) {
         const dx = mouseX - this.x;
         const dy = mouseY - this.y;
@@ -65,11 +61,11 @@
         if (distance < CONFIG.attractDistance && distance > 0) {
           let force;
           if (distance < CONFIG.repelDistance) {
-            // Repel when very close - cursor pushes water away
+            // Repel when very close
             force = -CONFIG.forceMultiplier * (1 - distance / CONFIG.repelDistance);
           } else {
-            // Slight attraction creates wake effect
-            force = CONFIG.forceMultiplier * (1 - distance / CONFIG.attractDistance) * 0.2;
+            // Attract when in range
+            force = CONFIG.forceMultiplier * (1 - distance / CONFIG.attractDistance) * 0.3;
           }
 
           const nx = dx / distance;
@@ -79,7 +75,7 @@
         }
       }
 
-      // Check for merging with nearby droplets (surface tension)
+      // Particles flow together when close
       cursorTrail.particles.forEach(other => {
         if (other === this) return;
 
@@ -88,8 +84,8 @@
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < CONFIG.mergeDistance && distance > 0) {
-          // Droplets attract each other slightly (cohesion)
-          const force = 0.02;
+          // Gentle cohesion
+          const force = 0.015;
           const nx = dx / distance;
           const ny = dy / distance;
           this.vx += nx * force;
@@ -103,34 +99,25 @@
     draw(ctx) {
       if (this.life <= 0) return;
 
-      // Transparent water droplet - subtle but visible
-      const alpha = Math.min(this.life * 0.4, 0.35); // Transparent
-      const size = this.size * (0.8 + this.life * 0.2); // Slight shrink as it evaporates
+      // Soft transparent glow
+      const alpha = Math.min(this.life * 0.5, 0.4);
+      const size = this.size * (0.9 + this.life * 0.1);
 
-      // Main droplet body - very transparent with slight white
-      const dropletGradient = ctx.createRadialGradient(
-        this.x - size * 0.3, this.y - size * 0.3, 0,
-        this.x, this.y, size
+      // Soft radial gradient
+      const gradient = ctx.createRadialGradient(
+        this.x, this.y, 0,
+        this.x, this.y, size * CONFIG.glowIntensity
       );
 
-      // Clear water effect with bright highlight
-      dropletGradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 1.2})`); // Bright highlight
-      dropletGradient.addColorStop(0.3, `rgba(255, 255, 255, ${alpha * 0.6})`); // Transparent body
-      dropletGradient.addColorStop(0.7, `rgba(255, 255, 255, ${alpha * 0.3})`); // Edge
-      dropletGradient.addColorStop(1, `rgba(255, 255, 255, 0)`); // Fade out
+      gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.8})`);
+      gradient.addColorStop(0.4, `rgba(255, 255, 255, ${alpha * 0.4})`);
+      gradient.addColorStop(0.7, `rgba(255, 255, 255, ${alpha * 0.15})`);
+      gradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
 
-      // Draw main droplet
-      ctx.fillStyle = dropletGradient;
+      ctx.fillStyle = gradient;
       ctx.beginPath();
-      ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
+      ctx.arc(this.x, this.y, size * CONFIG.glowIntensity, 0, Math.PI * 2);
       ctx.fill();
-
-      // Add subtle edge for glass-like refraction
-      ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.5})`;
-      ctx.lineWidth = 0.5;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, size * 0.8, 0, Math.PI * 2);
-      ctx.stroke();
     }
   }
 
