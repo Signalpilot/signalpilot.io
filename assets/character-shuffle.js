@@ -59,12 +59,15 @@
   function shuffleElement(element) {
     // Skip if already initialized
     if (element.dataset.shuffleInit === 'true') {
+      console.log('[CharShuffle] Element already initialized, skipping');
       return;
     }
 
     // Get configuration
     const speed = parseInt(element.dataset.shuffleSpeed || CONFIG.defaultSpeed, 10);
     const delay = parseInt(element.dataset.shuffleDelay || CONFIG.defaultDelay, 10);
+
+    console.log('[CharShuffle] shuffleElement() called with speed:', speed, 'delay:', delay);
 
     // Store original text for accessibility
     const originalText = element.textContent;
