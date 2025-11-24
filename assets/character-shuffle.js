@@ -113,13 +113,26 @@
           if (elapsed >= state.settleAt) {
             // Settle the character
             state.element.textContent = state.original;
+
+            // CRITICAL: Stop shuffle-glow animation immediately
+            state.element.style.animation = 'none';
+            state.element.style.opacity = '1';
+
+            // Add settled classes
             state.element.classList.add('settled', 'just-settled');
             state.settled = true;
 
-            // Remove just-settled class after animation
+            // Now allow settle-shimmer animation
+            requestAnimationFrame(() => {
+              state.element.style.animation = '';
+            });
+
+            // Remove just-settled class after shimmer completes
             setTimeout(() => {
               state.element.classList.remove('just-settled');
-            }, 400);
+              // Lock in final visible state
+              state.element.style.opacity = '1';
+            }, 450);
           } else {
             // Keep shuffling
             state.element.textContent = getRandomChar();
@@ -131,12 +144,36 @@
         if (allSettled) {
           clearInterval(shuffleTimer);
           element.classList.remove('shuffling');
+          element.setAttribute('data-shuffle-complete', 'true');
 
-          // NUCLEAR OPTION: Force opacity inline to override any CSS
-          // Don't touch animation - let settle-shimmer complete naturally
+          console.log('[CharShuffle] Animation complete. Locking visibility on', chars.length, 'characters');
+
+          // FINAL SAFETY NET: Force parent and all children visible
+          element.style.opacity = '1';
+          element.style.visibility = 'visible';
+
           chars.forEach(char => {
             char.style.opacity = '1';
+            char.style.visibility = 'visible';
+            char.style.display = 'inline-block';
           });
+
+          // Double-check after a delay in case something overrides
+          setTimeout(() => {
+            let fixed = 0;
+            chars.forEach(char => {
+              if (char.style.opacity !== '1') {
+                console.warn('[CharShuffle] Character lost opacity, reapplying');
+                char.style.opacity = '1';
+                fixed++;
+              }
+            });
+            if (fixed > 0) {
+              console.log('[CharShuffle] Fixed', fixed, 'characters');
+            } else {
+              console.log('[CharShuffle] All characters still visible ✓');
+            }
+          }, 100);
         }
       }, CONFIG.shuffleInterval);
 
