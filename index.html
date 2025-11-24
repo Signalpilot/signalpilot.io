@@ -8086,74 +8086,92 @@ if ('serviceWorker' in navigator) {
 <script>
 // Apple-style stagger text animation
 (function() {
-  // Find all elements with data-text-stagger attribute
-  const staggerElements = document.querySelectorAll('[data-text-stagger]');
+  document.addEventListener('DOMContentLoaded', function() {
+    // Find all elements with data-text-stagger attribute
+    const staggerElements = document.querySelectorAll('[data-text-stagger]');
 
-  // Function to split text into words and wrap each in a span
-  function prepareStaggerText(element) {
-    const text = element.textContent;
-    const variant = element.getAttribute('data-stagger-variant') || 'slide-up';
-    const delay = parseInt(element.getAttribute('data-stagger-delay') || '50');
+    if (staggerElements.length === 0) return;
 
-    // Split text into words
-    const words = text.trim().split(/\s+/);
+    // Function to animate a word span
+    function animateWordSpans(wordSpans) {
+      wordSpans.forEach(span => {
+        span.style.opacity = '1';
+        span.style.transform = 'translateY(0) scale(1)';
+      });
+    }
 
-    // Clear element and add wrapped words
-    element.innerHTML = '';
-    element.style.display = 'inline-block';
+    // Function to split text into words and wrap each in a span
+    function prepareStaggerText(element) {
+      const text = element.textContent;
+      const variant = element.getAttribute('data-stagger-variant') || 'slide-up';
+      const delay = parseInt(element.getAttribute('data-stagger-delay') || '50');
 
-    words.forEach((word, index) => {
-      const wordSpan = document.createElement('span');
-      wordSpan.style.display = 'inline-block';
-      wordSpan.style.opacity = '0';
-      wordSpan.style.transform = variant === 'slide-up' ? 'translateY(20px)' : 'scale(0.8)';
-      wordSpan.style.transition = `opacity 0.6s ease-out ${index * delay}ms, transform 0.6s ease-out ${index * delay}ms`;
-      wordSpan.textContent = word;
+      // Split text into words
+      const words = text.trim().split(/\s+/);
 
-      // Add space after word (except last word)
-      element.appendChild(wordSpan);
-      if (index < words.length - 1) {
-        element.appendChild(document.createTextNode(' '));
-      }
-    });
+      // Clear element and add wrapped words
+      element.innerHTML = '';
+      element.style.display = 'inline-block';
 
-    return element.querySelectorAll('span');
-  }
+      words.forEach((word, index) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.style.display = 'inline-block';
+        wordSpan.style.opacity = '0';
+        wordSpan.style.transform = variant === 'slide-up' ? 'translateY(20px)' : 'scale(0.8)';
+        wordSpan.style.transition = `opacity 0.6s ease-out ${index * delay}ms, transform 0.6s ease-out ${index * delay}ms`;
+        wordSpan.textContent = word;
 
-  // Prepare all stagger elements
-  const preparedElements = new Map();
-  staggerElements.forEach(element => {
-    const wordSpans = prepareStaggerText(element);
-    preparedElements.set(element, wordSpans);
-  });
-
-  // Create Intersection Observer to trigger animations on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const wordSpans = preparedElements.get(entry.target);
-        if (wordSpans) {
-          // Trigger animation by setting opacity and transform
-          setTimeout(() => {
-            wordSpans.forEach(span => {
-              span.style.opacity = '1';
-              span.style.transform = 'translateY(0) scale(1)';
-            });
-          }, 50);
-
-          // Stop observing after animation triggers
-          observer.unobserve(entry.target);
+        // Add space after word (except last word)
+        element.appendChild(wordSpan);
+        if (index < words.length - 1) {
+          element.appendChild(document.createTextNode(' '));
         }
+      });
+
+      return element.querySelectorAll('span');
+    }
+
+    // Prepare all stagger elements
+    const preparedElements = new Map();
+    staggerElements.forEach(element => {
+      const wordSpans = prepareStaggerText(element);
+      preparedElements.set(element, wordSpans);
+    });
+
+    // Create Intersection Observer to trigger animations on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const wordSpans = preparedElements.get(entry.target);
+          if (wordSpans) {
+            // Trigger animation immediately
+            animateWordSpans(wordSpans);
+            // Stop observing after animation triggers
+            observer.unobserve(entry.target);
+          }
+        }
+      });
+    }, {
+      threshold: 0.2, // Trigger when 20% visible (more sensitive)
+      rootMargin: '0px 0px -50px 0px' // Trigger earlier
+    });
+
+    // Observe all stagger elements and check if already visible
+    staggerElements.forEach(element => {
+      const rect = element.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+      // If element is already visible, animate immediately
+      if (isVisible) {
+        const wordSpans = preparedElements.get(element);
+        if (wordSpans) {
+          setTimeout(() => animateWordSpans(wordSpans), 100);
+        }
+      } else {
+        // Otherwise, observe for when it comes into view
+        observer.observe(element);
       }
     });
-  }, {
-    threshold: 0.5, // Trigger when 50% visible
-    rootMargin: '0px 0px -100px 0px' // Trigger slightly before element is fully in view
-  });
-
-  // Observe all stagger elements
-  staggerElements.forEach(element => {
-    observer.observe(element);
   });
 })();
 </script>
