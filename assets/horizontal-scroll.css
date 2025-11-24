@@ -1,0 +1,323 @@
+/**
+ * Apple-Style Horizontal Scroll
+ * Stunning horizontal scroll for Elite Seven indicators
+ */
+
+/* ============================================
+   HORIZONTAL SCROLL CONTAINER
+   ============================================ */
+
+.horizontal-scroll-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 2rem 0 3rem;
+  margin: 2rem 0;
+}
+
+.horizontal-scroll-track {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+
+  /* Padding for first/last card centering */
+  padding: 0 max(2rem, calc((100vw - 350px) / 2));
+}
+
+.horizontal-scroll-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Product cards in horizontal scroll */
+.horizontal-scroll-track .card.product {
+  flex: 0 0 350px;
+  min-width: 350px;
+  max-width: 350px;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+
+  /* Smooth transitions for scale effects */
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Slightly dimmed by default */
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+
+/* Active/centered card */
+.horizontal-scroll-track .card.product.active {
+  opacity: 1;
+  transform: scale(1);
+  box-shadow:
+    0 20px 60px rgba(91, 138, 255, 0.25),
+    0 0 0 2px rgba(91, 138, 255, 0.1);
+}
+
+/* ============================================
+   NAVIGATION CONTROLS
+   ============================================ */
+
+.horizontal-scroll-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem 0 1rem;
+}
+
+/* Arrow buttons */
+.scroll-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(91, 138, 255, 0.3);
+  background: rgba(91, 138, 255, 0.05);
+  color: var(--brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.scroll-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.scroll-arrow:hover:not(:disabled) {
+  background: rgba(91, 138, 255, 0.15);
+  border-color: rgba(91, 138, 255, 0.6);
+  transform: scale(1.1);
+}
+
+.scroll-arrow:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.scroll-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Scroll dots indicator */
+.scroll-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scroll-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(91, 138, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
+}
+
+.scroll-dot:hover {
+  background: rgba(91, 138, 255, 0.4);
+  transform: scale(1.2);
+}
+
+.scroll-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  border-color: rgba(91, 138, 255, 0.3);
+}
+
+/* ============================================
+   PROGRESS BAR (Optional)
+   ============================================ */
+
+.scroll-progress {
+  position: relative;
+  width: 200px;
+  height: 3px;
+  background: rgba(91, 138, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+}
+
+.scroll-progress-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  border-radius: 2px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   PARALLAX EFFECT
+   ============================================ */
+
+@media (min-width: 769px) {
+  .horizontal-scroll-track .card.product {
+    /* Slight parallax on non-active cards */
+    transform-origin: center center;
+  }
+
+  /* Cards to the left/right get subtle depth effect */
+  .horizontal-scroll-track .card.product.parallax-left {
+    transform: scale(0.9) translateX(-10px) rotateY(5deg);
+    opacity: 0.4;
+  }
+
+  .horizontal-scroll-track .card.product.parallax-right {
+    transform: scale(0.9) translateX(10px) rotateY(-5deg);
+    opacity: 0.4;
+  }
+}
+
+/* ============================================
+   ENTRANCE ANIMATIONS
+   ============================================ */
+
+@keyframes slide-in-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(100px) scale(0.9);
+  }
+  to {
+    opacity: 0.6;
+    transform: translateX(0) scale(0.95);
+  }
+}
+
+.horizontal-scroll-track .card.product {
+  animation: slide-in-from-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* Stagger animation delay */
+.horizontal-scroll-track .card.product:nth-child(1) { animation-delay: 0.05s; }
+.horizontal-scroll-track .card.product:nth-child(2) { animation-delay: 0.1s; }
+.horizontal-scroll-track .card.product:nth-child(3) { animation-delay: 0.15s; }
+.horizontal-scroll-track .card.product:nth-child(4) { animation-delay: 0.2s; }
+.horizontal-scroll-track .card.product:nth-child(5) { animation-delay: 0.25s; }
+.horizontal-scroll-track .card.product:nth-child(6) { animation-delay: 0.3s; }
+.horizontal-scroll-track .card.product:nth-child(7) { animation-delay: 0.35s; }
+
+/* ============================================
+   TOUCH HINTS
+   ============================================ */
+
+.scroll-hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  opacity: 0.7;
+  animation: fade-pulse 2s ease-in-out infinite;
+}
+
+@keyframes fade-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .horizontal-scroll-track {
+    padding: 0 1rem;
+    gap: 1.5rem;
+  }
+
+  .horizontal-scroll-track .card.product {
+    flex: 0 0 min(320px, 85vw);
+    min-width: min(320px, 85vw);
+    max-width: min(320px, 85vw);
+  }
+
+  /* Simplify on mobile - no parallax */
+  .horizontal-scroll-track .card.product.parallax-left,
+  .horizontal-scroll-track .card.product.parallax-right {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+
+  /* Hide arrows on mobile, show dots only */
+  .scroll-arrow {
+    display: none;
+  }
+
+  .horizontal-scroll-nav {
+    margin: 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .horizontal-scroll-track .card.product {
+    flex: 0 0 min(280px, 90vw);
+    min-width: min(280px, 90vw);
+    max-width: min(280px, 90vw);
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .horizontal-scroll-track {
+    scroll-behavior: auto;
+  }
+
+  .horizontal-scroll-track .card.product,
+  .scroll-arrow,
+  .scroll-dot {
+    animation: none !important;
+    transition: opacity 0.2s ease;
+  }
+
+  .horizontal-scroll-track .card.product.parallax-left,
+  .horizontal-scroll-track .card.product.parallax-right {
+    transform: none;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+.scroll-arrow:focus-visible,
+.scroll-dot:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+.horizontal-scroll-track,
+.horizontal-scroll-track .card.product {
+  will-change: transform, opacity;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove will-change after interaction */
+.horizontal-scroll-track.settled,
+.horizontal-scroll-track.settled .card.product {
+  will-change: auto;
+}
