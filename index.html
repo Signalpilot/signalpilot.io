@@ -1164,114 +1164,89 @@
       -webkit-backdrop-filter: blur(12px) saturate(180%);
     }
 
-    /* ==================== WORD-BY-WORD SHIMMER ANIMATION ==================== */
+    /* ==================== SHIMMERING GRADIENT ANIMATION ==================== */
 
-    @keyframes wordShimmer {
-      0%, 20% {
-        opacity: 1;
-        filter: brightness(1) drop-shadow(0 0 0 transparent);
+    @keyframes shimmerGradient {
+      0% {
+        background-position: -200% 50%;
       }
-      50% {
-        opacity: 1;
-        filter: brightness(2.2) drop-shadow(0 0 12px rgba(124, 202, 255, 0.8));
-      }
-      80%, 100% {
-        opacity: 1;
-        filter: brightness(1) drop-shadow(0 0 0 transparent);
+      100% {
+        background-position: 200% 50%;
       }
     }
 
-    /* Container for word-by-word shimmer text */
-    .shimmer-text-words {
+    /* Shimmering gradient for hero heading */
+    .shimmer-text {
+      /* Create proper rendering context for Safari */
       position: relative;
       display: inline-block;
-    }
 
-    /* Individual word styling */
-    .shimmer-text-words .shimmer-word {
-      display: inline-block;
-      background: linear-gradient(135deg, #86a8ff, #7ccaff, #c5dbff);
+      background: linear-gradient(
+        90deg,
+        #9cc0ff 0%,
+        #86a8ff 20%,
+        #7ccaff 40%,
+        #c5dbff 50%,
+        #7ccaff 60%,
+        #86a8ff 80%,
+        #9cc0ff 100%
+      );
+      background-size: 200% auto;
+
+      /* Safari-specific text rendering */
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      opacity: 1;
-      filter: brightness(1);
-      animation: wordShimmer 0.8s ease-in-out forwards;
+
+      /* Font smoothing for webkit */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+
+      animation: shimmerGradient 8s linear infinite;
     }
 
-    /* Light mode word shimmer */
-    html[data-theme="light"] .shimmer-text-words .shimmer-word {
-      background: linear-gradient(135deg, #3b82f6, #0ea5e9, #0c4a6e);
+    /* Fix for block-level headings with shimmer */
+    h1.shimmer-text, h2.shimmer-text, h3.shimmer-text {
+      display: block;
+    }
+
+    /* Light mode shimmer */
+    html[data-theme="light"] .shimmer-text {
+      background: linear-gradient(
+        90deg,
+        #1e40af 0%,
+        #3b82f6 20%,
+        #0ea5e9 40%,
+        #0c4a6e 50%,
+        #0ea5e9 60%,
+        #3b82f6 80%,
+        #1e40af 100%
+      );
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: shimmerGradient 8s linear infinite;
     }
 
-    @keyframes wordShimmerLight {
-      0%, 20% {
-        opacity: 1;
-        filter: brightness(1) drop-shadow(0 0 0 transparent);
-      }
-      50% {
-        opacity: 1;
-        filter: brightness(2.2) drop-shadow(0 0 12px rgba(59, 130, 246, 0.8));
-      }
-      80%, 100% {
-        opacity: 1;
-        filter: brightness(1) drop-shadow(0 0 0 transparent);
-      }
-    }
-
-    html[data-theme="light"] .shimmer-text-words .shimmer-word {
-      animation-name: wordShimmerLight;
-    }
-
-    /* Mobile: revert to continuous gradient shimmer (both lines lit) */
+    /* Mobile Safari optimizations */
     @media (max-width:768px) {
-      /* Disable word-by-word animation on mobile */
-      .shimmer-text-words .shimmer-word {
-        display: inline;
-        opacity: 1 !important;
-        filter: none !important;
-        animation: none !important;
-        background: none !important;
-        -webkit-background-clip: unset !important;
-        -webkit-text-fill-color: unset !important;
-        background-clip: unset !important;
-      }
-
-      /* Apply continuous gradient shimmer to the container instead */
-      .shimmer-text-words {
-        background: linear-gradient(90deg, #86a8ff 0%, #7ccaff 45%, #c5dbff 50%, #7ccaff 55%, #86a8ff 100%);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: shimmerGradientMobile 30s linear infinite;
+      .shimmer-text {
+        /* Force GPU acceleration to prevent flickering */
         transform: translate3d(0, 0, 0);
         -webkit-transform: translate3d(0, 0, 0);
+
+        /* Isolate stacking context */
         isolation: isolate;
+
+        /* Hint browser about what will change */
         will-change: background-position;
-      }
 
-      html[data-theme="light"] .shimmer-text-words {
-        background: linear-gradient(90deg, #3b82f6 0%, #0ea5e9 45%, #0c4a6e 50%, #0ea5e9 55%, #3b82f6 100%);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: shimmerGradientMobile 30s linear infinite;
-      }
+        /* Much slower animation on mobile - subtle and smooth */
+        animation-duration: 30s !important;
 
-      @keyframes shimmerGradientMobile {
-        0% {
-          background-position: 200% 50%;
-        }
-        100% {
-          background-position: -200% 50%;
-        }
+        /* Ensure proper layering */
+        z-index: 1;
       }
     }
 
@@ -3377,7 +3352,7 @@
 
           <h1 class="headline xl">
             <span style="font-size:0.5em;display:block;margin-bottom:0.5rem;color:#9ca3af !important;-webkit-text-fill-color:#9ca3af !important;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">Professional TradingView Indicators</span>
-            <span class="shimmer-text-words">The edge isn't seeing more. It's seeing what matters.</span>
+            <span class="shimmer-text">The edge isn't seeing more. It's seeing what matters.</span>
           </h1>
 
           <p id="hero-description" style="color:var(--muted);font-size:1.15rem;line-height:1.6;max-width:700px;margin:1.5rem auto 0;white-space:nowrap">
@@ -3618,7 +3593,7 @@
 
         <div style="text-align:center;margin-bottom:3rem">
           <h2 class="headline lg" style="margin-bottom:1rem">
-            <span class="shimmer-text-words">Try All 7 Indicators Free for 7 Days</span>
+            <span class="shimmer-text">Try All 7 Indicators Free for 7 Days</span>
           </h2>
 
           <p style="color:var(--muted);font-size:1.15rem;line-height:1.6;max-width:600px;margin:0 auto">
@@ -4667,7 +4642,7 @@
 
         <div style="max-width:900px;margin:0 auto">
 
-          <h2 class="headline lg" style="text-align:center;margin-bottom:1rem"><span class="shimmer-text-words">Why Traders Switch (And Don't Look Back)</span></h2>
+          <h2 class="headline lg" style="text-align:center;margin-bottom:1rem"><span class="shimmer-text">Why Traders Switch (And Don't Look Back)</span></h2>
 
           <p style="text-align:center;color:var(--muted);font-size:1.05rem;margin-bottom:3rem">
             The complete system vs buying indicators one at a time.
@@ -7340,75 +7315,6 @@ if ('serviceWorker' in navigator) {
 
 <!-- Text Stagger Animation - Character-by-character reveal -->
 <script src="/assets/text-stagger.js" defer></script>
-
-<!-- Word-by-Word Shimmer Animation -->
-<script>
-(function() {
-  'use strict';
-
-  function processShimmerElement(element) {
-    // Get the original text
-    const text = element.textContent;
-
-    // Split into words
-    const words = text.split(' ');
-
-    // Clear the element
-    element.innerHTML = '';
-
-    // Wrap each word in a span with staggered animation delay
-    words.forEach((word, index) => {
-      const span = document.createElement('span');
-      span.className = 'shimmer-word';
-      span.textContent = word;
-
-      // Stagger the animation - faster timing now
-      // Desktop: 0.5s delay per word
-      const delayPerWord = 0.5;
-      span.style.animationDelay = `${index * delayPerWord}s`;
-
-      element.appendChild(span);
-
-      // Add space after each word (except the last one)
-      if (index < words.length - 1) {
-        element.appendChild(document.createTextNode(' '));
-      }
-    });
-
-    // Loop the animation - restart after all words have shimmered
-    const totalDuration = words.length * 0.5 + 0.8; // 0.5s per word + 0.8s animation duration
-    setInterval(() => {
-      // Re-trigger animations by cloning and replacing
-      const parent = element.parentNode;
-      const clone = element.cloneNode(true);
-      parent.replaceChild(clone, element);
-    }, totalDuration * 1000 + 2000); // Add 2s pause before looping
-  }
-
-  function initWordShimmer() {
-    // Skip word-by-word processing on mobile - use continuous shimmer instead
-    const isMobile = window.innerWidth <= 768;
-    if (isMobile) return;
-
-    // Find all elements with shimmer-text-words class
-    const shimmerElements = document.querySelectorAll('.shimmer-text-words');
-
-    if (shimmerElements.length === 0) return;
-
-    // Process each shimmer element (desktop only)
-    shimmerElements.forEach(element => {
-      processShimmerElement(element);
-    });
-  }
-
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initWordShimmer);
-  } else {
-    initWordShimmer();
-  }
-})();
-</script>
 
 <!-- Device Optimization System DISABLED - FPS detection was breaking mobile rendering -->
 <!-- TODO: Re-implement without FPS detection that sets data-capability="low" -->
