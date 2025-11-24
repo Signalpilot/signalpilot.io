@@ -1,0 +1,165 @@
+/* ============================================================================
+   TEXT STAGGER ANIMATION
+   Apple-style character-by-character reveal animation
+   ========================================================================= */
+
+/* Container for animated text */
+.text-stagger {
+  display: inline-block;
+  position: relative;
+}
+
+/* Individual character wrapper */
+.text-stagger .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Preserve spaces */
+.text-stagger .char.space {
+  width: 0.25em;
+}
+
+/* Animation variants */
+
+/* Variant 1: Slide Up (Default) */
+.text-stagger.slide-up .char {
+  animation: slideUpChar 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpChar {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Variant 2: Fade In */
+.text-stagger.fade .char {
+  transform: none;
+  animation: fadeInChar 0.6s ease-out forwards;
+}
+
+@keyframes fadeInChar {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Variant 3: Scale Pop */
+.text-stagger.pop .char {
+  transform: translateY(20px) scale(0.8);
+  animation: popChar 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes popChar {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Variant 4: Blur In */
+.text-stagger.blur .char {
+  filter: blur(10px);
+  animation: blurInChar 0.8s ease-out forwards;
+}
+
+@keyframes blurInChar {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Variant 5: Clip Reveal (vertical wipe) */
+.text-stagger.clip .char {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(100% 0 0 0);
+  animation: clipRevealChar 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes clipRevealChar {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Variant 6: Rotate In */
+.text-stagger.rotate .char {
+  transform: translateY(30px) rotateX(90deg);
+  transform-origin: center bottom;
+  animation: rotateInChar 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes rotateInChar {
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+/* Speed variations */
+.text-stagger.speed-slow .char {
+  animation-duration: 1s;
+}
+
+.text-stagger.speed-fast .char {
+  animation-duration: 0.4s;
+}
+
+/* Word-level animation (keeps words together) */
+.text-stagger .word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.text-stagger.by-word .word {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUpChar 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .text-stagger .char,
+  .text-stagger .word {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    clip-path: none !important;
+    filter: none !important;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Faster animations on mobile */
+  .text-stagger .char {
+    animation-duration: 0.5s !important;
+  }
+
+  /* Reduce transform distance */
+  .text-stagger.slide-up .char,
+  .text-stagger.pop .char,
+  .text-stagger.rotate .char {
+    transform: translateY(15px);
+  }
+}
+
+/* Performance optimizations */
+.text-stagger {
+  /* Create new stacking context for better performance */
+  isolation: isolate;
+}
+
+/* Ensure smooth rendering */
+.text-stagger .char {
+  text-rendering: optimizeSpeed;
+}
