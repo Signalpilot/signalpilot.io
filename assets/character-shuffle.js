@@ -133,9 +133,9 @@
           element.classList.remove('shuffling');
 
           // NUCLEAR OPTION: Force opacity inline to override any CSS
+          // Don't touch animation - let settle-shimmer complete naturally
           chars.forEach(char => {
             char.style.opacity = '1';
-            char.style.animation = 'none';
           });
         }
       }, CONFIG.shuffleInterval);
