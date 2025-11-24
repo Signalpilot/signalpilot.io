@@ -1216,39 +1216,6 @@
       }
     }
 
-    /* ==================== SIMPLE CONTINUOUS SHIMMER (for non-hero text) ==================== */
-
-    @keyframes shimmerGradient {
-      0% {
-        background-position: 200% 50%;
-      }
-      100% {
-        background-position: -200% 50%;
-      }
-    }
-
-    .shimmer-text {
-      position: relative;
-      display: inline-block;
-      background: linear-gradient(90deg, #86a8ff 0%, #7ccaff 45%, #c5dbff 50%, #7ccaff 55%, #86a8ff 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      animation: shimmerGradient 6s linear infinite;
-    }
-
-    html[data-theme="light"] .shimmer-text {
-      background: linear-gradient(90deg, #3b82f6 0%, #0ea5e9 45%, #0c4a6e 50%, #0ea5e9 55%, #3b82f6 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmerGradient 6s linear infinite;
-    }
-
     /* Tablet optimizations */
     @media (max-width:1024px){
       /* Reduce parallax intensity on tablets */
@@ -3351,7 +3318,7 @@
 
           <h1 class="headline xl">
             <span style="font-size:0.5em;display:block;margin-bottom:0.5rem;color:#9ca3af !important;-webkit-text-fill-color:#9ca3af !important;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">Professional TradingView Indicators</span>
-            <span id="hero-shimmer" class="shimmer-text-words">The edge isn't seeing more. It's seeing what matters.</span>
+            <span class="shimmer-text-words">The edge isn't seeing more. It's seeing what matters.</span>
           </h1>
 
           <p id="hero-description" style="color:var(--muted);font-size:1.15rem;line-height:1.6;max-width:700px;margin:1.5rem auto 0;white-space:nowrap">
@@ -3592,7 +3559,7 @@
 
         <div style="text-align:center;margin-bottom:3rem">
           <h2 class="headline lg" style="margin-bottom:1rem">
-            <span class="shimmer-text">Try All 7 Indicators Free for 7 Days</span>
+            <span class="shimmer-text-words">Try All 7 Indicators Free for 7 Days</span>
           </h2>
 
           <p style="color:var(--muted);font-size:1.15rem;line-height:1.6;max-width:600px;margin:0 auto">
@@ -4641,7 +4608,7 @@
 
         <div style="max-width:900px;margin:0 auto">
 
-          <h2 class="headline lg" style="text-align:center;margin-bottom:1rem"><span class="shimmer-text">Why Traders Switch (And Don't Look Back)</span></h2>
+          <h2 class="headline lg" style="text-align:center;margin-bottom:1rem"><span class="shimmer-text-words">Why Traders Switch (And Don't Look Back)</span></h2>
 
           <p style="text-align:center;color:var(--muted);font-size:1.05rem;margin-bottom:3rem">
             The complete system vs buying indicators one at a time.
@@ -7315,23 +7282,20 @@ if ('serviceWorker' in navigator) {
 <!-- Text Stagger Animation - Character-by-character reveal -->
 <script src="/assets/text-stagger.js" defer></script>
 
-<!-- Word-by-Word Shimmer Animation for Hero -->
+<!-- Word-by-Word Shimmer Animation -->
 <script>
 (function() {
   'use strict';
 
-  function initWordShimmer() {
-    const heroShimmer = document.getElementById('hero-shimmer');
-    if (!heroShimmer) return;
-
+  function processShimmerElement(element) {
     // Get the original text
-    const text = heroShimmer.textContent;
+    const text = element.textContent;
 
     // Split into words
     const words = text.split(' ');
 
     // Clear the element
-    heroShimmer.innerHTML = '';
+    element.innerHTML = '';
 
     // Wrap each word in a span with staggered animation delay
     words.forEach((word, index) => {
@@ -7345,11 +7309,11 @@ if ('serviceWorker' in navigator) {
       const delayPerWord = isMobile ? 0.6 : 0.8;
       span.style.animationDelay = `${index * delayPerWord}s`;
 
-      heroShimmer.appendChild(span);
+      element.appendChild(span);
 
       // Add space after each word (except the last one)
       if (index < words.length - 1) {
-        heroShimmer.appendChild(document.createTextNode(' '));
+        element.appendChild(document.createTextNode(' '));
       }
     });
 
@@ -7357,10 +7321,22 @@ if ('serviceWorker' in navigator) {
     const totalDuration = words.length * (window.innerWidth <= 768 ? 0.6 : 0.8) + 1.2;
     setInterval(() => {
       // Re-trigger animations by cloning and replacing
-      const parent = heroShimmer.parentNode;
-      const clone = heroShimmer.cloneNode(true);
-      parent.replaceChild(clone, heroShimmer);
+      const parent = element.parentNode;
+      const clone = element.cloneNode(true);
+      parent.replaceChild(clone, element);
     }, totalDuration * 1000 + 2000); // Add 2s pause before looping
+  }
+
+  function initWordShimmer() {
+    // Find all elements with shimmer-text-words class
+    const shimmerElements = document.querySelectorAll('.shimmer-text-words');
+
+    if (shimmerElements.length === 0) return;
+
+    // Process each shimmer element
+    shimmerElements.forEach(element => {
+      processShimmerElement(element);
+    });
   }
 
   // Initialize when DOM is ready
