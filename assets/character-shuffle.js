@@ -207,6 +207,13 @@
 
     elements.forEach(element => {
       try {
+        // FORCE RESET - Clear any stale initialization flags
+        if (element.dataset.shuffleInit === 'true') {
+          console.log('[CharShuffle] Clearing stale init flag on element');
+          element.dataset.shuffleInit = 'false';
+          element.classList.remove('char-shuffle', 'shuffling');
+        }
+
         // Check if trigger is on load or scroll
         const trigger = element.dataset.shuffleTrigger || 'load';
 
