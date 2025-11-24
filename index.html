@@ -3472,7 +3472,7 @@
       <div class="container" style="max-width:800px">
 
         <div style="text-align:center;margin-bottom:3rem">
-          <h2 class="headline lg" style="margin-bottom:1rem">
+          <h2 class="headline lg" style="margin-bottom:1rem" data-text-stagger data-stagger-variant="slide-up" data-stagger-delay="50">
             Try All 7 Indicators Free for 7 Days
           </h2>
 
@@ -3598,7 +3598,7 @@
 
         <!-- Section Header -->
         <div style="text-align:center;margin-bottom:3rem">
-          <h2 class="headline lg" style="margin-bottom:1rem">See It In Action</h2>
+          <h2 class="headline lg" style="margin-bottom:1rem" data-text-stagger data-stagger-variant="slide-up" data-stagger-delay="50">See It In Action</h2>
           <p class="note" style="max-width:55ch;margin:0 auto;color:var(--muted)">
             The edge, visualized.
           </p>
@@ -4522,7 +4522,7 @@
 
         <div style="max-width:900px;margin:0 auto">
 
-          <h2 class="headline lg" style="text-align:center;margin-bottom:1rem">Why Traders Switch (And Don't Look Back)</h2>
+          <h2 class="headline lg" style="text-align:center;margin-bottom:1rem" data-text-stagger data-stagger-variant="slide-up" data-stagger-delay="50">Why Traders Switch (And Don't Look Back)</h2>
 
           <p style="text-align:center;color:var(--muted);font-size:1.05rem;margin-bottom:3rem">
             The complete system vs buying indicators one at a time.
@@ -8081,6 +8081,81 @@ if ('serviceWorker' in navigator) {
       });
     });
   })();
+</script>
+
+<script>
+// Apple-style stagger text animation
+(function() {
+  // Find all elements with data-text-stagger attribute
+  const staggerElements = document.querySelectorAll('[data-text-stagger]');
+
+  // Function to split text into words and wrap each in a span
+  function prepareStaggerText(element) {
+    const text = element.textContent;
+    const variant = element.getAttribute('data-stagger-variant') || 'slide-up';
+    const delay = parseInt(element.getAttribute('data-stagger-delay') || '50');
+
+    // Split text into words
+    const words = text.trim().split(/\s+/);
+
+    // Clear element and add wrapped words
+    element.innerHTML = '';
+    element.style.display = 'inline-block';
+
+    words.forEach((word, index) => {
+      const wordSpan = document.createElement('span');
+      wordSpan.style.display = 'inline-block';
+      wordSpan.style.opacity = '0';
+      wordSpan.style.transform = variant === 'slide-up' ? 'translateY(20px)' : 'scale(0.8)';
+      wordSpan.style.transition = `opacity 0.6s ease-out ${index * delay}ms, transform 0.6s ease-out ${index * delay}ms`;
+      wordSpan.textContent = word;
+
+      // Add space after word (except last word)
+      element.appendChild(wordSpan);
+      if (index < words.length - 1) {
+        element.appendChild(document.createTextNode(' '));
+      }
+    });
+
+    return element.querySelectorAll('span');
+  }
+
+  // Prepare all stagger elements
+  const preparedElements = new Map();
+  staggerElements.forEach(element => {
+    const wordSpans = prepareStaggerText(element);
+    preparedElements.set(element, wordSpans);
+  });
+
+  // Create Intersection Observer to trigger animations on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const wordSpans = preparedElements.get(entry.target);
+        if (wordSpans) {
+          // Trigger animation by setting opacity and transform
+          setTimeout(() => {
+            wordSpans.forEach(span => {
+              span.style.opacity = '1';
+              span.style.transform = 'translateY(0) scale(1)';
+            });
+          }, 50);
+
+          // Stop observing after animation triggers
+          observer.unobserve(entry.target);
+        }
+      }
+    });
+  }, {
+    threshold: 0.5, // Trigger when 50% visible
+    rootMargin: '0px 0px -100px 0px' // Trigger slightly before element is fully in view
+  });
+
+  // Observe all stagger elements
+  staggerElements.forEach(element => {
+    observer.observe(element);
+  });
+})();
 </script>
 
 </body>
