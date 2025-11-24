@@ -8,18 +8,21 @@
 
   // Configuration
   const CONFIG = {
-    trailInterval: 32, // milliseconds between trail particles (slower)
-    particleLifetime: 800, // milliseconds (shorter lifetime)
-    maxParticles: 40, // fewer particles
-    explosionParticles: 12, // fewer explosion particles
-    baseSize: 8, // larger but more subtle
-    glowIntensity: 3, // much less glow
-    attractDistance: 100, // pixels
-    repelDistance: 50, // pixels
-    forceMultiplier: 0.15, // gentler movement
-    friction: 0.97, // more friction
+    trailInterval: 25, // milliseconds between droplets
+    particleLifetime: 1200, // milliseconds - droplets last longer
+    maxParticles: 60, // more droplets for fluid effect
+    baseSize: 5, // smaller, defined droplets
+    glowIntensity: 1.2, // minimal glow - just for depth
+    attractDistance: 80, // pixels
+    repelDistance: 30, // pixels
+    forceMultiplier: 0.08, // subtle interaction
+    friction: 0.985, // less friction - water flows smoothly
+    gravity: 0.15, // water droplets fall
+    mergeDistance: 15, // droplets merge when close
     colors: [
-      { r: 255, g: 255, b: 255 }, // Transparent white only
+      { r: 100, g: 200, b: 255 }, // Cyan/water blue
+      { r: 80, g: 180, b: 240 },  // Deeper blue
+      { r: 120, g: 220, b: 255 }, // Light cyan
     ]
   };
 
@@ -44,6 +47,9 @@
 
       if (this.life <= 0) return false;
 
+      // Apply gravity - water droplets fall
+      this.vy += CONFIG.gravity;
+
       // Apply velocity
       this.x += this.vx;
       this.y += this.vy;
@@ -52,8 +58,8 @@
       this.vx *= CONFIG.friction;
       this.vy *= CONFIG.friction;
 
-      // Attract/repel based on mouse proximity
-      if (!this.isExplosion || age > 200) { // Explosion particles ignore mouse for first 200ms
+      // Attract/repel based on mouse proximity (cursor disturbs water)
+      if (!this.isExplosion || age > 200) {
         const dx = mouseX - this.x;
         const dy = mouseY - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -61,11 +67,11 @@
         if (distance < CONFIG.attractDistance && distance > 0) {
           let force;
           if (distance < CONFIG.repelDistance) {
-            // Repel when very close
+            // Repel when very close - cursor pushes water away
             force = -CONFIG.forceMultiplier * (1 - distance / CONFIG.repelDistance);
           } else {
-            // Attract when within range but not too close
-            force = CONFIG.forceMultiplier * (1 - distance / CONFIG.attractDistance) * 0.3;
+            // Slight attraction creates wake effect
+            force = CONFIG.forceMultiplier * (1 - distance / CONFIG.attractDistance) * 0.2;
           }
 
           const nx = dx / distance;
@@ -75,27 +81,64 @@
         }
       }
 
+      // Check for merging with nearby droplets (surface tension)
+      cursorTrail.particles.forEach(other => {
+        if (other === this) return;
+
+        const dx = other.x - this.x;
+        const dy = other.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < CONFIG.mergeDistance && distance > 0) {
+          // Droplets attract each other slightly (cohesion)
+          const force = 0.02;
+          const nx = dx / distance;
+          const ny = dy / distance;
+          this.vx += nx * force;
+          this.vy += ny * force;
+        }
+      });
+
       return true;
     }
 
     draw(ctx) {
       if (this.life <= 0) return;
 
-      // Very subtle transparent effect
-      const alpha = this.life * 0.12; // Much more transparent
-      const size = this.size * (1 + (1 - this.life) * 2); // Expand outward like ripple
+      // Water droplet opacity - more visible, fades near end
+      const alpha = Math.min(this.life * 0.7, 0.6); // More opaque than vapor
+      const size = this.size * (0.8 + this.life * 0.2); // Slight shrink as it evaporates
 
-      // Draw subtle transparent ripple
-      const gradient = ctx.createRadialGradient(this.x, this.y, size * 0.3, this.x, this.y, size * CONFIG.glowIntensity);
-      gradient.addColorStop(0, `rgba(255, 255, 255, 0)`); // transparent center
-      gradient.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.3})`); // subtle ring
-      gradient.addColorStop(0.8, `rgba(255, 255, 255, ${alpha * 0.15})`); // fade out
-      gradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
+      // Main droplet body with blue tint
+      const dropletGradient = ctx.createRadialGradient(
+        this.x - size * 0.2, this.y - size * 0.2, 0,
+        this.x, this.y, size
+      );
 
-      ctx.fillStyle = gradient;
+      // Highlight for glossy water effect
+      dropletGradient.addColorStop(0, `rgba(${this.color.r + 100}, ${this.color.g + 50}, ${this.color.b}, ${alpha * 0.9})`);
+      dropletGradient.addColorStop(0.3, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha})`);
+      dropletGradient.addColorStop(0.7, `rgba(${this.color.r * 0.7}, ${this.color.g * 0.7}, ${this.color.b * 0.9}, ${alpha * 0.9})`);
+      dropletGradient.addColorStop(1, `rgba(${this.color.r * 0.5}, ${this.color.g * 0.5}, ${this.color.b * 0.8}, ${alpha * 0.3})`);
+
+      // Draw main droplet
+      ctx.fillStyle = dropletGradient;
       ctx.beginPath();
-      ctx.arc(this.x, this.y, size * CONFIG.glowIntensity, 0, Math.PI * 2);
+      ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
       ctx.fill();
+
+      // Add subtle glow for depth (not as much as vapor)
+      if (CONFIG.glowIntensity > 1) {
+        const glowGradient = ctx.createRadialGradient(this.x, this.y, size * 0.5, this.x, this.y, size * CONFIG.glowIntensity);
+        glowGradient.addColorStop(0, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha * 0.15})`);
+        glowGradient.addColorStop(0.6, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha * 0.05})`);
+        glowGradient.addColorStop(1, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0)`);
+
+        ctx.fillStyle = glowGradient;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, size * CONFIG.glowIntensity, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
   }
 
