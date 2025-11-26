@@ -7850,18 +7850,27 @@ if ('serviceWorker' in navigator) {
 
 <script>
 // Force scroll to top on page load/refresh (Mobile fix)
+// But respect URL hash anchors for direct linking (e.g., /#faq)
 (function() {
-  // Immediately scroll to top
+  var hasHash = window.location.hash && window.location.hash.length > 1;
+
   if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
+    // Only disable scroll restoration if no hash anchor
+    history.scrollRestoration = hasHash ? 'auto' : 'manual';
   }
-  window.scrollTo(0, 0);
-  
-  // Also on page load
-  window.addEventListener('load', function() {
+
+  // Only scroll to top if no hash anchor
+  if (!hasHash) {
     window.scrollTo(0, 0);
+  }
+
+  // Also on page load (but respect hash)
+  window.addEventListener('load', function() {
+    if (!window.location.hash || window.location.hash.length <= 1) {
+      window.scrollTo(0, 0);
+    }
   });
-  
+
   // And on beforeunload (catches refresh)
   window.addEventListener('beforeunload', function() {
     window.scrollTo(0, 0);
