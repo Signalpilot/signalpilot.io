@@ -1328,7 +1328,18 @@
   }
 
   // Animation step
-  function step() {
+  let lastFrameTime = 0;
+  function step(timestamp) {
+    // Cap at 30fps on mobile (33.33ms per frame) to save battery/reduce heat
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      if (timestamp - lastFrameTime < 33) {
+        RAF = requestAnimationFrame(step);
+        return;
+      }
+      lastFrameTime = timestamp;
+    }
+
     ctx.clearRect(0, 0, W, H);
 
     // Update and draw particles
