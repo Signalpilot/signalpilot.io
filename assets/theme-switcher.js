@@ -10,25 +10,29 @@
   const styles = `
     .sp-theme-toggle {
       position: fixed !important;
-      bottom: 6.5rem !important;
-      right: 2rem !important;
-      width: 60px;
-      height: 60px;
+      bottom: 5rem !important;
+      right: 1rem !important;
+      width: 48px !important;
+      height: 48px !important;
       border-radius: 50%;
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.14);
       color: #9fdcff;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       cursor: pointer;
-      z-index: 10000;
-      display: flex;
+      z-index: 10000 !important;
+      display: flex !important;
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 12px rgba(0,0,0,.3);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
       top: auto !important;
       left: auto !important;
       transform: none !important;
+      -webkit-transform: none !important;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .sp-theme-toggle:hover {
@@ -65,49 +69,21 @@
       box-shadow: 0 6px 20px rgba(0,0,0,.15);
     }
 
-    /* Tablet - align with chatbot */
+    /* Mobile: Position above chatbot button with safe area support */
     @media (max-width: 768px) {
       .sp-theme-toggle {
-        bottom: 90px !important;
-        right: 20px !important;
+        position: fixed !important;
+        bottom: max(5rem, calc(5rem + env(safe-area-inset-bottom))) !important;
+        right: 1rem !important;
         width: 48px !important;
         height: 48px !important;
         font-size: 1.3rem !important;
+        z-index: 10000 !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        -webkit-transform: none !important;
         -webkit-tap-highlight-color: transparent;
-        position: fixed !important; /* Ensure sticky on mobile */
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
-      }
-    }
-
-    /* Small mobile screens - make smaller to save space */
-    @media (max-width: 480px) {
-      .sp-theme-toggle {
-        bottom: 90px !important;
-        right: 20px !important;
-        width: 48px !important;
-        height: 48px !important;
-        font-size: 1.2rem !important;
-        position: fixed !important; /* Ensure sticky on mobile */
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
-      }
-    }
-
-    /* Ultra-small screens - even smaller */
-    @media (max-width: 380px) {
-      .sp-theme-toggle {
-        bottom: 90px !important;
-        right: 20px !important;
-        width: 44px !important;
-        height: 44px !important;
-        font-size: 1.1rem !important;
-        position: fixed !important; /* Ensure sticky on mobile */
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
       }
     }
 
@@ -116,7 +92,7 @@
       inset: 0;
       background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(12px);
-      z-index: 2000;
+      z-index: 10001;
       display: none;
       align-items: center;
       justify-content: center;
@@ -154,6 +130,32 @@
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    /* Mobile: Bottom sheet style for theme modal */
+    @media (max-width: 768px) {
+      .sp-theme-modal {
+        align-items: flex-end;
+        justify-content: center;
+        padding: 0;
+      }
+
+      .sp-theme-modal-content {
+        border-radius: 24px 24px 0 0;
+        max-height: 85vh;
+        animation: sp-slideUpMobile 0.3s ease;
+      }
+
+      @keyframes sp-slideUpMobile {
+        from {
+          opacity: 0;
+          transform: translateY(100%);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
     }
 
@@ -327,14 +329,8 @@
     }
 
     @media (max-width: 768px) {
-      .sp-theme-modal {
-        padding: 0.5rem;
-      }
-
       .sp-theme-modal-content {
         padding: 1.5rem;
-        border-radius: 20px;
-        max-height: 85vh;
       }
 
       .sp-theme-modal-title {
@@ -353,7 +349,7 @@
     @media (max-width: 480px) {
       .sp-theme-modal-content {
         padding: 1.25rem;
-        border-radius: 16px;
+        border-radius: 20px 20px 0 0;
       }
 
       .sp-theme-modal-title {
@@ -393,11 +389,7 @@
     button.setAttribute('aria-label', 'Theme selection (Ctrl+T)');
     button.setAttribute('title', 'Theme selection (Ctrl+T)');
     button.onclick = () => openThemeModal();
-    // Force sticky positioning with inline styles
-    button.style.position = 'fixed';
-    button.style.bottom = '90px';
-    button.style.right = '20px';
-    button.style.zIndex = '9999';
+    // CSS handles all positioning - no inline overrides needed
     document.body.appendChild(button);
     return button;
   }

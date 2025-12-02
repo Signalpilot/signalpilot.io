@@ -455,12 +455,12 @@
     const savedTheme = localStorage.getItem('sp-theme') || 'default';
     applyTheme(savedTheme);
 
-    // Auto-suggest seasonal themes
-    const now = new Date();
-    const month = now.getMonth();
-    if ((month === 11 || month === 0) && savedTheme === 'default') { // Dec/Jan
-      showSeasonalSuggestion('winter', 'Switch to Winter theme for a frosty feel! ❄️');
-    }
+    // Seasonal theme auto-suggestion disabled - users can discover themes via the theme selector
+    // const now = new Date();
+    // const month = now.getMonth();
+    // if ((month === 11 || month === 0) && savedTheme === 'default') { // Dec/Jan
+    //   showSeasonalSuggestion('winter', 'Switch to Winter theme for a frosty feel! ❄️');
+    // }
   }
 
   // Show seasonal suggestion
