@@ -454,26 +454,6 @@
     // Load saved theme or default
     const savedTheme = localStorage.getItem('sp-theme') || 'default';
     applyTheme(savedTheme);
-
-    // Auto-suggest seasonal themes
-    const now = new Date();
-    const month = now.getMonth();
-    if ((month === 11 || month === 0) && savedTheme === 'default') { // Dec/Jan
-      showSeasonalSuggestion('winter', 'Switch to Winter theme for a frosty feel! ❄️');
-    }
-  }
-
-  // Show seasonal suggestion
-  function showSeasonalSuggestion(themeId, message) {
-    // Only show once per session
-    if (sessionStorage.getItem('seasonal-suggested')) return;
-    sessionStorage.setItem('seasonal-suggested', 'true');
-
-    setTimeout(() => {
-      if (confirm(message)) {
-        applyTheme(themeId);
-      }
-    }, 3000);
   }
 
   // Expose API

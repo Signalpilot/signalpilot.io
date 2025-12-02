@@ -81,7 +81,8 @@
   function showBanner() {
     const banner = document.getElementById('cookie-consent-banner');
     if (banner) {
-      banner.style.display = 'block';
+      // Force fixed positioning with inline styles for iOS Safari compatibility
+      banner.style.cssText = 'display:block !important; position:fixed !important; bottom:0 !important; left:0 !important; right:0 !important; z-index:10001 !important;';
     }
   }
 
