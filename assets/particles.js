@@ -1304,13 +1304,15 @@
       let targetCount;
 
       if (currentConfig.count === 'auto') {
-        // Original working values - don't change without testing!
-        const maxParticles = 120;
-        const minParticles = 65;
-        const divisor = 12000;
+        // Mobile: slightly fewer particles for balanced performance
+        // Desktop: original values
+        const maxParticles = isMobile ? 100 : 120;
+        const minParticles = isMobile ? 50 : 65;
+        const divisor = isMobile ? 15000 : 12000;
         targetCount = Math.min(maxParticles, Math.max(minParticles, Math.floor(calcArea / divisor)));
       } else {
-        targetCount = currentConfig.count;
+        // For explicit counts, reduce by 50% on mobile
+        targetCount = isMobile ? Math.floor(currentConfig.count * 0.5) : currentConfig.count;
       }
 
       targetParticleCount = targetCount; // Lock this value permanently
@@ -1353,8 +1355,10 @@
     ].includes(currentConfig.type);
 
     if (!skipConnections) {
-      const linkDist = Math.min(W, H) * 0.12;
-      ctx.lineWidth = 1;
+      // Shorter connection distance on mobile for cleaner look
+      const isMobile = W <= 768;
+      const linkDist = Math.min(W, H) * (isMobile ? 0.08 : 0.12);
+      ctx.lineWidth = isMobile ? 0.5 : 1;
 
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
