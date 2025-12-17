@@ -36,11 +36,11 @@
 ### Tagline
 > "The edge isn't seeing more. It's seeing what matters."
 
-### Core Message
-> "See exhaustion yourself. See climax yourself. Trust what you see."
+### Mission
+> We build tools that cut through market noise, helping traders focus on what matters most.
 
-### Product Tagline
-> "Professional cycle detection for TradingView"
+### Product Description
+> Market analytics tools for TradingView
 
 ### Brand Values
 - Clarity over complexity
@@ -72,7 +72,7 @@
 All 7 indicators included in every plan. Non-repainting. All markets. All timeframes.
 
 ### 1. SP - Pentarch (Flagship)
-5-phase market reversal cycle detection:
+5-phase market cycle detection:
 - **TD** (Touchdown) → **IGN** (Ignition) → **WRN** (Warning) → **CAP** (Climax) → **BDN** (Breakdown)
 - 4 integrated layers: Regime bars, Pilot Line, NanoFlow Crosses, Event Signals
 
