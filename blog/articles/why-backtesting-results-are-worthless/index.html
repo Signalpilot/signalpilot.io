@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Backtesting Results Are Worthless (And What to Do Instead) - Signal Pilot Blog</title>
+  <meta name="description" content="You found an indicator with a 78% win rate. Then you start trading it live and everything falls apart. Here's why.">
+  <meta name="theme-color" content="#05070d">
+  <link rel="icon" href="https://signalpilot.io/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/blog.css">
+</head>
+<body>
+  <div class="bg-aurora"></div>
+  <div class="reading-progress" id="progress"></div>
+
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="https://signalpilot.io" class="logo">
+          <svg width="140" height="32" viewBox="0 0 196 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#76ddff"/><stop offset="100%" stop-color="#5b8aff"/></linearGradient></defs>
+            <circle cx="20" cy="20" r="16" stroke="url(#logoGrad)" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="6" fill="url(#logoGrad)"/>
+            <line x1="20" y1="4" x2="20" y2="10" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="20" y1="30" x2="20" y2="36" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="20" x2="10" y2="20" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="30" y1="20" x2="36" y2="20" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+            <text x="48" y="27" fill="#ecf1ff" font-family="Space Grotesk, sans-serif" font-size="20" font-weight="700">Signal Pilot</text>
+          </svg>
+        </a>
+        <nav class="nav">
+          <a href="https://signalpilot.io">Home</a>
+          <a href="https://docs.signalpilot.io">Docs</a>
+          <a href="https://education.signalpilot.io">Education</a>
+          <a href="/" class="active">Blog</a>
+        </nav>
+        <div class="header-controls">
+          <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </button>
+          <a href="https://signalpilot.io/#trial" class="btn btn-primary">Try Free</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <header class="article-header">
+        <div class="container-narrow">
+          <span class="article-category">Indicators</span>
+          <h1 class="article-title">Why Backtesting Results Are Worthless (And What to Do Instead)</h1>
+          <div class="article-meta">
+            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 8 min read</span>
+            <span>Signal Pilot Team</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <div class="container-narrow">
+          <p>You found an indicator with a 78% win rate. Backtested over two years. Exposed to 500 trades. The equity curve goes up and to the right like a dream.</p>
+          <p>You start trading it live. Within two weeks, you've given back a month of gains.</p>
+          <p>What happened?</p>
+          <p>The backtest lied. Not because the numbers were fake - but because backtesting itself is fundamentally broken in ways most traders never consider.</p>
+
+          <hr>
+
+          <h2>The Core Problem With Backtesting</h2>
+          <p>Backtesting answers the question: "How would this strategy have performed on historical data?"</p>
+          <p>But that's not the question you need answered. The real question is: "How will this strategy perform on data it's never seen?"</p>
+          <p>These are completely different questions. And the gap between them is where traders lose money.</p>
+
+          <hr>
+
+          <h2>Problem 1: Curve Fitting</h2>
+          <p>Every market has patterns. Some are real and persistent. Most are random noise that happened to look like patterns.</p>
+          <p>When you build or optimize a strategy on historical data, you're fitting it to both - the real patterns and the noise. The more you optimize, the more perfectly your strategy captures the noise. It becomes a perfect map of randomness that happened in the past.</p>
+          <p>Then the future arrives with different randomness. Your perfectly optimized strategy, tuned to capture patterns that were never real, falls apart.</p>
+          <p><strong>How to spot curve fitting:</strong></p>
+          <ul>
+            <li>Strategy has many specific parameters (RSI must be exactly 67, not 65 or 70)</li>
+            <li>Performance degrades significantly with small parameter changes</li>
+            <li>Strategy works amazingly on one asset but fails on similar assets</li>
+            <li>Too many rules and conditions</li>
+          </ul>
+          <p>The more specific the rules, the more likely they're capturing noise rather than signal.</p>
+
+          <hr>
+
+          <h2>Problem 2: Look-Ahead Bias</h2>
+          <p>This one is subtle and devastating.</p>
+          <p>Look-ahead bias occurs when your backtest uses information that wouldn't have been available at the time of the trade. The most common source? Repainting indicators.</p>
+          <p>But it goes deeper than that. Consider:</p>
+          <ul>
+            <li>Using end-of-day data for strategies that would execute intraday</li>
+            <li>Indicators that use future candles in their calculations</li>
+            <li>Strategy rules that were created after seeing the results</li>
+            <li>"Avoiding" certain periods because you know what happened</li>
+          </ul>
+          <p>Even honest backtests can have look-ahead bias baked in. The developer knows that 2020 had a crash, so the strategy has a rule that "happens" to reduce exposure in early 2020. Looks like genius risk management. Actually just hindsight masquerading as foresight.</p>
+
+          <hr>
+
+          <h2>Problem 3: Survivorship Bias</h2>
+          <p>Your backtest includes the assets that exist today. It doesn't include the ones that went bankrupt, got delisted, or collapsed to zero.</p>
+          <p>This matters more than you think.</p>
+          <p>If you're backtesting a momentum strategy that buys strength, your historical test is only buying the strength that survived. The stocks that showed the same strength patterns but then collapsed aren't in your dataset.</p>
+          <p>Your backtest looks better than reality because it's only trading the winners - after the fact.</p>
+
+          <hr>
+
+          <h2>Problem 4: Market Regime Changes</h2>
+          <p>Markets in 2010 aren't markets in 2020. Algorithms that barely existed are now 70% of volume. Retail traders have different tools and behaviors. Monetary policy has shifted dramatically.</p>
+          <p>A strategy backtested from 2015-2020 was operating in a historically unusual period of low volatility and consistent central bank support. Then 2022 arrived with inflation, rate hikes, and a different regime entirely.</p>
+          <p>The strategy didn't "stop working." It was never tested on the type of market it would actually face.</p>
+
+          <hr>
+
+          <h2>Problem 5: Execution Reality</h2>
+          <p>Backtests assume:</p>
+          <ul>
+            <li>You got the exact price you wanted</li>
+            <li>There was no slippage</li>
+            <li>Your order didn't move the market</li>
+            <li>You could always enter and exit when the signal fired</li>
+            <li>Spreads were constant</li>
+          </ul>
+          <p>None of this is true in live trading.</p>
+          <p>That scalping strategy with 55% win rate and 1:1 risk-reward? After realistic slippage and spread costs, it's a loser. The backtest never knew.</p>
+
+          <hr>
+
+          <h2>What Actually Works Instead</h2>
+          <p>If backtesting is broken, what do you do?</p>
+          <p><strong>1. Forward Testing (Paper Trading with Discipline)</strong></p>
+          <p>Trade the strategy in real-time with fake money. Record everything. No cheating - if you would have missed the entry live, mark it as missed.</p>
+          <p>This is slower than backtesting. It's also more honest. You're seeing exactly how the strategy performs on data it's never seen, with execution you'd actually achieve.</p>
+          <p>Minimum viable test: 30-50 trades across different market conditions.</p>
+          <p><strong>2. Out-of-Sample Testing</strong></p>
+          <p>If you must backtest, do this:</p>
+          <ul>
+            <li>Develop the strategy on data from 2018-2020 only</li>
+            <li>Never look at 2021-2023 during development</li>
+            <li>Once the strategy is finalized, test it on 2021-2023</li>
+            <li>No modifications allowed after seeing out-of-sample results</li>
+          </ul>
+          <p>If it holds up on data it was never fitted to, you have something. If it falls apart, you have a curve-fit system.</p>
+          <p><strong>3. Robustness Testing</strong></p>
+          <p>Instead of asking "does this work?", ask "under what conditions does this break?"</p>
+          <ul>
+            <li>Test on multiple assets, not just one</li>
+            <li>Test across different volatility regimes</li>
+            <li>Change parameters slightly - does performance collapse or degrade gracefully?</li>
+            <li>Remove some rules - is the core logic still profitable?</li>
+          </ul>
+          <p>Robust strategies degrade slowly. Curve-fit strategies collapse catastrophically.</p>
+          <p><strong>4. Focus on Logic, Not Results</strong></p>
+          <p>The best filter for a strategy is asking: "Why should this work?"</p>
+          <p>If you can't articulate a logical reason - based on market structure, human psychology, or institutional behavior - the strategy probably doesn't work. Any historical "edge" is likely curve-fitting.</p>
+
+          <hr>
+
+          <h2>The Bottom Line</h2>
+          <p>Stop trusting backtests. Start questioning them.</p>
+          <p>When someone shows you amazing historical results, ask:</p>
+          <ul>
+            <li>Was this tested out-of-sample?</li>
+            <li>What's the logical basis for this edge?</li>
+            <li>How does it perform with different parameters?</li>
+            <li>Does it work on multiple assets?</li>
+            <li>Is the indicator repainting?</li>
+          </ul>
+          <p>If they can't answer these questions, the backtest is worthless - no matter how good the equity curve looks.</p>
+
+          <hr>
+
+          <div class="cta-box">
+            <p>Signal Pilot's Pentarch is built on cycle logic that repeats across all markets - not optimized patterns that only work in hindsight. Non-repainting signals mean what you test is what you trade.</p>
+            <a href="https://signalpilot.io/#trial" class="btn btn-primary">See for yourself →</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/">← Back to Blog</a>
+        <a href="https://signalpilot.io">Home</a>
+        <a href="https://docs.signalpilot.io">Documentation</a>
+        <a href="https://education.signalpilot.io">Education Hub</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 Signal Pilot. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / docHeight) * 100;
+      document.getElementById('progress').style.width = progress + '%';
+      const btn = document.getElementById('backToTop');
+      if (window.scrollY > 500) btn.classList.add('visible');
+      else btn.classList.remove('visible');
+    });
+
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

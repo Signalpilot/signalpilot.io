@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Repainting Problem: How Most TradingView Indicators Cheat - Signal Pilot Blog</title>
+  <meta name="description" content="That indicator with the perfect backtest? It's lying to you. Learn how repainting works and how to protect yourself.">
+  <meta name="theme-color" content="#05070d">
+  <link rel="icon" href="https://signalpilot.io/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/blog.css">
+</head>
+<body>
+  <div class="bg-aurora"></div>
+  <div class="reading-progress" id="progress"></div>
+
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="https://signalpilot.io" class="logo">
+          <svg width="140" height="32" viewBox="0 0 196 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#76ddff"/><stop offset="100%" stop-color="#5b8aff"/></linearGradient></defs>
+            <circle cx="20" cy="20" r="16" stroke="url(#logoGrad)" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="6" fill="url(#logoGrad)"/>
+            <line x1="20" y1="4" x2="20" y2="10" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="20" y1="30" x2="20" y2="36" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="4" y1="20" x2="10" y2="20" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="30" y1="20" x2="36" y2="20" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+            <text x="48" y="27" fill="#ecf1ff" font-family="Space Grotesk, sans-serif" font-size="20" font-weight="700">Signal Pilot</text>
+          </svg>
+        </a>
+        <nav class="nav">
+          <a href="https://signalpilot.io">Home</a>
+          <a href="https://docs.signalpilot.io">Docs</a>
+          <a href="https://education.signalpilot.io">Education</a>
+          <a href="/" class="active">Blog</a>
+        </nav>
+        <div class="header-controls">
+          <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </button>
+          <a href="https://signalpilot.io/#trial" class="btn btn-primary">Try Free</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <header class="article-header">
+        <div class="container-narrow">
+          <span class="article-category">Indicators</span>
+          <h1 class="article-title">The Repainting Problem: How Most TradingView Indicators Cheat</h1>
+          <div class="article-meta">
+            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 7 min read</span>
+            <span>Signal Pilot Team</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <div class="container-narrow">
+          <p>That indicator with the perfect backtest? The one that nails every top and bottom with surgical precision?</p>
+          <p>It's lying to you.</p>
+          <p>Not maybe. Not sometimes. If the historical signals look too good to be true, the indicator is almost certainly repainting - and you're about to learn an expensive lesson the moment you trade it live.</p>
+
+          <hr>
+
+          <h2>What Repainting Actually Means</h2>
+          <p>Repainting is when an indicator changes its past signals after the fact. The buy arrow that appears at the exact bottom? It wasn't there when the candle was forming. The indicator waited to see what happened, then painted the signal retroactively.</p>
+          <p>Think of it like a weather forecaster who "predicts" yesterday's weather. Easy to be right when you already know the outcome.</p>
+          <p>Here's what it looks like in practice:</p>
+          <p><strong>During the candle:</strong> No signal appears. Price is bouncing around. You're watching, waiting.</p>
+          <p><strong>After the candle closes (price went up):</strong> Suddenly a buy signal appears on that candle. The indicator "knew" all along.</p>
+          <p><strong>After the candle closes (price went down):</strong> No signal. The indicator stays quiet, as if it never considered buying.</p>
+          <p>The indicator isn't predicting anything. It's rewriting history to look smart.</p>
+
+          <hr>
+
+          <h2>Why Repainting Indicators Exist</h2>
+          <p>Two reasons: ignorance and deception.</p>
+          <p><strong>Ignorance:</strong> Some developers genuinely don't understand the problem. They build an indicator, see great historical results, and assume it works. They're not trying to scam anyone - they just don't know better.</p>
+          <p><strong>Deception:</strong> Others know exactly what they're doing. Repainting indicators are easy to market. The backtest looks incredible. Screenshots show perfect entries. Testimonials pour in from people who haven't traded it live yet.</p>
+          <p>By the time users figure it out, the developer has moved on to the next "revolutionary" system.</p>
+
+          <hr>
+
+          <h2>The Three Types of Repainting</h2>
+          <p>Not all repainting is equal. Understanding the types helps you identify the problem:</p>
+          <p><strong>Type 1: Signal Relocation</strong></p>
+          <p>The signal appears on one candle, then jumps to a different candle after more data comes in. That "perfect" entry you saw yesterday has now moved three candles earlier. History has been rewritten.</p>
+          <p><strong>Type 2: Signal Disappearance</strong></p>
+          <p>Signals that appeared during live trading simply vanish from the chart. The indicator gave you a buy signal, you took the trade, it failed - and now the signal isn't even there anymore. Good luck explaining that to anyone reviewing your trades.</p>
+          <p><strong>Type 3: Value Recalculation</strong></p>
+          <p>The indicator's values themselves change retroactively. The oscillator that showed overbought conditions now shows neutral. Support levels that were there yesterday have shifted. The entire historical record is unreliable.</p>
+
+          <hr>
+
+          <h2>How to Test Any Indicator for Repainting</h2>
+          <p>Don't trust marketing. Don't trust screenshots. Don't trust backtests. Test it yourself.</p>
+          <p><strong>The Screenshot Method:</strong></p>
+          <ol>
+            <li>Add the indicator to a live chart</li>
+            <li>Take a screenshot showing the last 10-20 candles with any signals</li>
+            <li>Wait for 10-20 new candles to form</li>
+            <li>Take another screenshot of the same historical area</li>
+            <li>Compare the two images</li>
+          </ol>
+          <p>If anything moved, disappeared, or changed - it repaints. Period.</p>
+          <p><strong>The Live Watch Method:</strong></p>
+          <ol>
+            <li>Open a chart on a lower timeframe (5-minute works well)</li>
+            <li>Watch the indicator in real-time for an hour</li>
+            <li>Note every signal that appears during candle formation</li>
+            <li>After each candle closes, check if the signal is still there</li>
+            <li>After the session, scroll back and verify all signals match what you recorded</li>
+          </ol>
+          <p>This takes time. It's worth it. One hour of testing can save you months of frustration and thousands in losses.</p>
+          <p><strong>The Question Method:</strong></p>
+          <p>Ask the developer directly: "Does this indicator repaint?"</p>
+          <p>Watch the answer carefully:</p>
+          <ul>
+            <li>"No" → Good start, but verify anyway</li>
+            <li>"Only on the current candle" → That's still repainting. The current candle is the only one that matters.</li>
+            <li>"It recalculates for accuracy" → Repaints. That's what recalculation means.</li>
+            <li>No response / vague answer → Repaints. They're hiding it.</li>
+          </ul>
+
+          <hr>
+
+          <h2>Why "Current Candle Repainting" Still Destroys You</h2>
+          <p>Some developers claim their indicator "only repaints on the current candle" as if that's acceptable. It's not.</p>
+          <p>Here's why:</p>
+          <p>You're watching the chart. A buy signal appears. You enter the trade. The candle closes - and the signal disappears. The indicator decided, after seeing the close, that it wasn't actually a buy.</p>
+          <p>But you're already in the trade.</p>
+          <p>This isn't a minor inconvenience. It's the entire indicator being useless for live trading. The only signals that matter are the ones you can act on. If those signals might vanish, you can't trust any of them.</p>
+
+          <hr>
+
+          <h2>What Non-Repainting Actually Looks Like</h2>
+          <p>A properly built indicator works like this:</p>
+          <ol>
+            <li>Signal conditions are evaluated on candle close</li>
+            <li>Once a signal prints, it stays forever</li>
+            <li>Historical signals match exactly what appeared live</li>
+            <li>No recalculation, no relocation, no disappearing acts</li>
+          </ol>
+          <p>The signal either appears or it doesn't. Once it's there, it's permanent. What you see in the history is exactly what you would have seen trading live.</p>
+          <p>This is the minimum standard. Not a feature - a requirement.</p>
+
+          <hr>
+
+          <h2>The Cost of Ignoring This</h2>
+          <p>Traders who use repainting indicators without knowing it experience:</p>
+          <p><strong>False confidence:</strong> The backtest looks profitable, so they size up. Then reality hits.</p>
+          <p><strong>Phantom setups:</strong> They remember seeing signals that no longer exist on the chart. Self-doubt creeps in. "Did I imagine that?"</p>
+          <p><strong>System-hopping:</strong> The indicator "stops working" (it never worked), so they move to the next one. The cycle repeats.</p>
+          <p><strong>Account damage:</strong> Real money lost on signals that were never really there.</p>
+          <p>The psychological damage might be worse than the financial damage. Traders who've been burned by repainting indicators often struggle to trust any tool again - even legitimate ones.</p>
+
+          <hr>
+
+          <h2>The Bottom Line</h2>
+          <p>Before you use any indicator for real trading, test it for repainting. Before you buy any indicator, demand proof it doesn't repaint. Before you trust any backtest, verify that the signals existed in real-time.</p>
+          <p>This isn't optional. It's not paranoid. It's the baseline requirement for any tool you're going to risk money on.</p>
+          <p>The ten minutes you spend testing could save you months of losses and a complete crisis of confidence in your trading.</p>
+
+          <hr>
+
+          <div class="cta-box">
+            <p>Want an indicator built from the ground up to never repaint? Pentarch finalizes all signals on candle close - what you see in history is exactly what appeared live.</p>
+            <a href="https://signalpilot.io/#trial" class="btn btn-primary">Verify it yourself with a free trial →</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/">← Back to Blog</a>
+        <a href="https://signalpilot.io">Home</a>
+        <a href="https://docs.signalpilot.io">Documentation</a>
+        <a href="https://education.signalpilot.io">Education Hub</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 Signal Pilot. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / docHeight) * 100;
+      document.getElementById('progress').style.width = progress + '%';
+      const btn = document.getElementById('backToTop');
+      if (window.scrollY > 500) btn.classList.add('visible');
+      else btn.classList.remove('visible');
+    });
+
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
