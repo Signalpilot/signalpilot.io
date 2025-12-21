@@ -3284,7 +3284,7 @@
 
 <body>
 
-<!-- Starfield video background - dual videos offset by 2.5s for seamless loop -->
+<!-- Starfield video background - dual videos with loop fade masking -->
 <div id="starfield-container" style="
   position: fixed;
   top: 0;
@@ -3312,10 +3312,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.35;
+      opacity: 0.5;
     "
   >
-    <source src="assets/videos/starfield-bg.mp4?v=10" type="video/mp4">
+    <source src="assets/videos/starfield-bg.mp4?v=11" type="video/mp4">
   </video>
   <video
     id="starfield-bg-b"
@@ -3332,22 +3332,49 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.35;
+      opacity: 0;
     "
   >
-    <source src="assets/videos/starfield-bg.mp4?v=10" type="video/mp4">
+    <source src="assets/videos/starfield-bg.mp4?v=11" type="video/mp4">
   </video>
 </div>
 <script>
-// Dual starfield - offset by half duration for seamless loop masking
+// Starfield: Two videos that alternate - when one loops, the other takes over
 (function() {
   const videoA = document.getElementById('starfield-bg-a');
   const videoB = document.getElementById('starfield-bg-b');
-  const OFFSET = 2.5; // Half of 5-second video duration
+  const OFFSET = 2.5;
+  let lastTimeA = 0;
+  let lastTimeB = 0;
+  let activeVideo = 'A'; // Track which video is currently visible
 
-  // Start video B offset by 2.5 seconds when video A is ready
+  // Start video B offset
   videoA.addEventListener('loadedmetadata', function() {
     videoB.currentTime = OFFSET;
+  });
+
+  // Detect loop by time jumping backwards
+  videoA.addEventListener('timeupdate', function() {
+    const currentTime = videoA.currentTime;
+    // If time jumped back more than 1 second, video looped
+    if (lastTimeA - currentTime > 1 && activeVideo === 'A') {
+      // Switch to video B
+      videoB.style.opacity = '0.5';
+      videoA.style.opacity = '0';
+      activeVideo = 'B';
+    }
+    lastTimeA = currentTime;
+  });
+
+  videoB.addEventListener('timeupdate', function() {
+    const currentTime = videoB.currentTime;
+    if (lastTimeB - currentTime > 1 && activeVideo === 'B') {
+      // Switch to video A
+      videoA.style.opacity = '0.5';
+      videoB.style.opacity = '0';
+      activeVideo = 'A';
+    }
+    lastTimeB = currentTime;
   });
 
   // Pause/play on visibility change
@@ -3462,9 +3489,9 @@
       <!-- EPIC Energy Beam v2 -->
       <div id="energy-beam-container" style="position:absolute;top:-70px;left:0;width:100%;height:calc(100% + 70px);pointer-events:none;z-index:0;overflow:visible;display:none"></div>
 
-      <!-- Energy Beam Video - single video, no cross-fade for performance -->
+      <!-- Energy Beam Videos - dual videos with loop switching -->
       <video
-        id="energy-beam-video"
+        id="energy-beam-video-1"
         autoplay
         loop
         muted
@@ -3493,8 +3520,85 @@
           mask-composite: intersect;
         "
       >
-        <source src="assets/videos/signal-conduit-4k.mp4?v=6" type="video/mp4">
+        <source src="assets/videos/signal-conduit-4k.mp4?v=7" type="video/mp4">
       </video>
+      <video
+        id="energy-beam-video-2"
+        autoplay
+        loop
+        muted
+        playsinline
+        disablepictureinpicture
+        preload="auto"
+        style="
+          position: absolute;
+          top: -70px;
+          left: 0;
+          height: calc(100% + 140px);
+          width: auto;
+          pointer-events: none;
+          z-index: 0;
+          object-fit: cover;
+          object-position: left 30%;
+          opacity: 0;
+          transform: translateZ(0) scaleX(-1);
+          -webkit-mask-image:
+            radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
+            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+          -webkit-mask-composite: source-in;
+          mask-image:
+            radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
+            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+          mask-composite: intersect;
+        "
+      >
+        <source src="assets/videos/signal-conduit-4k.mp4?v=7" type="video/mp4">
+      </video>
+      <script>
+      // Energy beam: Two videos that alternate on loop
+      (function() {
+        const video1 = document.getElementById('energy-beam-video-1');
+        const video2 = document.getElementById('energy-beam-video-2');
+        const OFFSET = 2.5;
+        let lastTime1 = 0;
+        let lastTime2 = 0;
+        let activeVideo = '1';
+
+        video1.addEventListener('loadedmetadata', function() {
+          video2.currentTime = OFFSET;
+        });
+
+        video1.addEventListener('timeupdate', function() {
+          const currentTime = video1.currentTime;
+          if (lastTime1 - currentTime > 1 && activeVideo === '1') {
+            video2.style.opacity = '0.6';
+            video1.style.opacity = '0';
+            activeVideo = '2';
+          }
+          lastTime1 = currentTime;
+        });
+
+        video2.addEventListener('timeupdate', function() {
+          const currentTime = video2.currentTime;
+          if (lastTime2 - currentTime > 1 && activeVideo === '2') {
+            video1.style.opacity = '0.6';
+            video2.style.opacity = '0';
+            activeVideo = '1';
+          }
+          lastTime2 = currentTime;
+        });
+
+        document.addEventListener('visibilitychange', function() {
+          if (document.hidden) {
+            video1.pause();
+            video2.pause();
+          } else {
+            video1.play();
+            video2.play();
+          }
+        });
+      })();
+      </script>
 
       <!-- Animated gradient orbs with parallax -->
       <!-- Parallax orbs removed for performance -->
