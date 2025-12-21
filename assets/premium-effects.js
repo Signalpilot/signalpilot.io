@@ -418,7 +418,8 @@
 
     new ParallaxController();
     new ScrollLinkedAnimations();
-    new FloatingShapes();
+    // FloatingShapes disabled - was too prominent/ugly
+    // new FloatingShapes();
 
     if (isDesktop) {
       new MouseGlow();
