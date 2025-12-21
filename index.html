@@ -3339,52 +3339,52 @@
   </video>
 </div>
 <script>
-// Starfield: Two videos that alternate - when one loops, the other takes over
+// Starfield: Pre-emptive switch BEFORE loop happens using requestAnimationFrame
 (function() {
   const videoA = document.getElementById('starfield-bg-a');
   const videoB = document.getElementById('starfield-bg-b');
+  const DURATION = 5; // Video duration in seconds
+  const SWITCH_BEFORE = 0.15; // Switch 150ms before end
   const OFFSET = 2.5;
-  let lastTimeA = 0;
-  let lastTimeB = 0;
-  let activeVideo = 'A'; // Track which video is currently visible
+  let activeVideo = 'A';
+  let running = true;
 
   // Start video B offset
   videoA.addEventListener('loadedmetadata', function() {
     videoB.currentTime = OFFSET;
   });
 
-  // Detect loop by time jumping backwards
-  videoA.addEventListener('timeupdate', function() {
-    const currentTime = videoA.currentTime;
-    // If time jumped back more than 1 second, video looped
-    if (lastTimeA - currentTime > 1 && activeVideo === 'A') {
-      // Switch to video B
+  function checkLoop() {
+    if (!running) return;
+
+    if (activeVideo === 'A' && videoA.currentTime > DURATION - SWITCH_BEFORE) {
+      // Switch to B before A loops
       videoB.style.opacity = '0.5';
       videoA.style.opacity = '0';
       activeVideo = 'B';
-    }
-    lastTimeA = currentTime;
-  });
-
-  videoB.addEventListener('timeupdate', function() {
-    const currentTime = videoB.currentTime;
-    if (lastTimeB - currentTime > 1 && activeVideo === 'B') {
-      // Switch to video A
+    } else if (activeVideo === 'B' && videoB.currentTime > DURATION - SWITCH_BEFORE) {
+      // Switch to A before B loops
       videoA.style.opacity = '0.5';
       videoB.style.opacity = '0';
       activeVideo = 'A';
     }
-    lastTimeB = currentTime;
-  });
+
+    requestAnimationFrame(checkLoop);
+  }
+
+  requestAnimationFrame(checkLoop);
 
   // Pause/play on visibility change
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
       videoA.pause();
       videoB.pause();
+      running = false;
     } else {
       videoA.play();
       videoB.play();
+      running = true;
+      requestAnimationFrame(checkLoop);
     }
   });
 })();
@@ -3555,46 +3555,48 @@
         <source src="assets/videos/signal-conduit-4k.mp4?v=7" type="video/mp4">
       </video>
       <script>
-      // Energy beam: Two videos that alternate on loop
+      // Energy beam: Pre-emptive switch BEFORE loop using requestAnimationFrame
       (function() {
         const video1 = document.getElementById('energy-beam-video-1');
         const video2 = document.getElementById('energy-beam-video-2');
+        const DURATION = 5;
+        const SWITCH_BEFORE = 0.15;
         const OFFSET = 2.5;
-        let lastTime1 = 0;
-        let lastTime2 = 0;
         let activeVideo = '1';
+        let running = true;
 
         video1.addEventListener('loadedmetadata', function() {
           video2.currentTime = OFFSET;
         });
 
-        video1.addEventListener('timeupdate', function() {
-          const currentTime = video1.currentTime;
-          if (lastTime1 - currentTime > 1 && activeVideo === '1') {
+        function checkLoop() {
+          if (!running) return;
+
+          if (activeVideo === '1' && video1.currentTime > DURATION - SWITCH_BEFORE) {
             video2.style.opacity = '0.6';
             video1.style.opacity = '0';
             activeVideo = '2';
-          }
-          lastTime1 = currentTime;
-        });
-
-        video2.addEventListener('timeupdate', function() {
-          const currentTime = video2.currentTime;
-          if (lastTime2 - currentTime > 1 && activeVideo === '2') {
+          } else if (activeVideo === '2' && video2.currentTime > DURATION - SWITCH_BEFORE) {
             video1.style.opacity = '0.6';
             video2.style.opacity = '0';
             activeVideo = '1';
           }
-          lastTime2 = currentTime;
-        });
+
+          requestAnimationFrame(checkLoop);
+        }
+
+        requestAnimationFrame(checkLoop);
 
         document.addEventListener('visibilitychange', function() {
           if (document.hidden) {
             video1.pause();
             video2.pause();
+            running = false;
           } else {
             video1.play();
             video2.play();
+            running = true;
+            requestAnimationFrame(checkLoop);
           }
         });
       })();
