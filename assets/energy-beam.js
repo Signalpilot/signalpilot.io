@@ -1,6 +1,7 @@
 /**
- * EPIC ENERGY BEAM v3
- * Beam connects to hero video and dissipates into it
+ * ENERGY BEAM v4 - Elegant & Refined
+ * Clean, graceful beam that connects to hero video
+ * Inspired by Huly.io's subtle elegance
  */
 
 (function() {
@@ -22,7 +23,7 @@
     const width = container.offsetWidth || window.innerWidth;
     const height = container.offsetHeight || window.innerHeight;
 
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
     camera.position.z = 5;
 
     const renderer = new THREE.WebGLRenderer({
@@ -35,14 +36,15 @@
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    // Main group - centered, beam goes from top to middle (where video is)
+    // Main group
     const beamGroup = new THREE.Group();
-    beamGroup.position.set(0, 2, 0); // Centered, starts from top
+    beamGroup.position.set(0, 3.5, 0); // Higher start point
     scene.add(beamGroup);
 
-    // === 1. MAIN BEAM - From top, fading as it reaches the "video" area ===
-    const beamHeight = 8;
-    const coreGeo = new THREE.PlaneGeometry(0.04, beamHeight);
+    const beamHeight = 7;
+
+    // === 1. CORE BEAM - Ultra thin, bright white center ===
+    const coreGeo = new THREE.PlaneGeometry(0.015, beamHeight);
     const coreMat = new THREE.ShaderMaterial({
       uniforms: { time: { value: 0 } },
       vertexShader: `
@@ -56,17 +58,17 @@
         uniform float time;
         varying vec2 vUv;
         void main() {
-          // Horizontal intensity - bright center
-          float hIntensity = 1.0 - pow(abs(vUv.x - 0.5) * 2.0, 0.3);
+          // Vertical fade - strong at top, dissipates at bottom
+          float vFade = pow(vUv.y, 0.4);
 
-          // Vertical fade - strong at top (vUv.y=1), dissipates at bottom (vUv.y=0)
-          float vFade = pow(vUv.y, 0.3);
+          // Subtle energy pulse traveling down
+          float pulse = sin(vUv.y * 30.0 - time * 6.0) * 0.1 + 0.9;
 
-          // Energy flow animation - pulses traveling down
-          float flow = sin(vUv.y * 20.0 - time * 8.0) * 0.15 + 0.85;
+          // Occasional bright flash
+          float flash = smoothstep(0.98, 1.0, sin(time * 2.0 + vUv.y * 5.0)) * 0.5;
 
-          float flicker = 0.95 + 0.05 * sin(time * 15.0);
-          gl_FragColor = vec4(1.0, 1.0, 1.0, hIntensity * vFade * flow * flicker);
+          float intensity = vFade * pulse + flash;
+          gl_FragColor = vec4(1.0, 1.0, 1.0, intensity * 0.95);
         }
       `,
       transparent: true,
@@ -77,8 +79,8 @@
     core.position.y = -beamHeight / 2;
     beamGroup.add(core);
 
-    // === 2. INNER GLOW ===
-    const innerGeo = new THREE.PlaneGeometry(0.2, beamHeight);
+    // === 2. INNER GLOW - Soft blue aura ===
+    const innerGeo = new THREE.PlaneGeometry(0.12, beamHeight);
     const innerMat = new THREE.ShaderMaterial({
       uniforms: { time: { value: 0 } },
       vertexShader: `
@@ -93,11 +95,14 @@
         varying vec2 vUv;
         void main() {
           float dist = abs(vUv.x - 0.5) * 2.0;
-          float glow = exp(-dist * 4.0);
-          float vFade = pow(vUv.y, 0.5);
-          float pulse = 0.9 + 0.1 * sin(time * 3.0 - vUv.y * 10.0);
-          vec3 color = vec3(0.4, 0.6, 1.0);
-          gl_FragColor = vec4(color, glow * 0.7 * vFade * pulse);
+          float glow = exp(-dist * 5.0);
+          float vFade = pow(vUv.y, 0.6);
+
+          // Gentle breathing
+          float breath = 0.85 + 0.15 * sin(time * 1.5);
+
+          vec3 color = vec3(0.45, 0.65, 1.0);
+          gl_FragColor = vec4(color, glow * 0.5 * vFade * breath);
         }
       `,
       transparent: true,
@@ -109,8 +114,8 @@
     inner.position.z = -0.001;
     beamGroup.add(inner);
 
-    // === 3. OUTER GLOW ===
-    const outerGeo = new THREE.PlaneGeometry(0.8, beamHeight);
+    // === 3. OUTER GLOW - Very subtle wide aura ===
+    const outerGeo = new THREE.PlaneGeometry(0.5, beamHeight);
     const outerMat = new THREE.ShaderMaterial({
       uniforms: { time: { value: 0 } },
       vertexShader: `
@@ -125,11 +130,11 @@
         varying vec2 vUv;
         void main() {
           float dist = abs(vUv.x - 0.5) * 2.0;
-          float glow = exp(-dist * 2.5);
-          float vFade = pow(vUv.y, 0.7);
-          float wave = sin(vUv.y * 15.0 - time * 3.0) * 0.1 + 0.9;
-          vec3 color = vec3(0.2, 0.4, 1.0);
-          gl_FragColor = vec4(color, glow * 0.25 * vFade * wave);
+          float glow = exp(-dist * 3.0);
+          float vFade = pow(vUv.y, 0.8);
+
+          vec3 color = vec3(0.3, 0.5, 1.0);
+          gl_FragColor = vec4(color, glow * 0.15 * vFade);
         }
       `,
       transparent: true,
@@ -141,9 +146,8 @@
     outer.position.z = -0.002;
     beamGroup.add(outer);
 
-    // === 4. IMPACT POINT - Where beam hits the "video" border ===
-    // This creates the absorption/dissipation effect
-    const impactGeo = new THREE.PlaneGeometry(3, 0.8);
+    // === 4. IMPACT GLOW - Where beam meets content ===
+    const impactGeo = new THREE.PlaneGeometry(2.5, 0.4);
     const impactMat = new THREE.ShaderMaterial({
       uniforms: { time: { value: 0 } },
       vertexShader: `
@@ -157,21 +161,17 @@
         uniform float time;
         varying vec2 vUv;
         void main() {
-          // Distance from center
           float distX = abs(vUv.x - 0.5) * 2.0;
           float distY = abs(vUv.y - 0.5) * 2.0;
 
-          // Glow spreading horizontally from impact point
-          float spread = exp(-distX * 3.0) * exp(-distY * 4.0);
+          // Concentrated glow at impact point
+          float impact = exp(-distX * 4.0) * exp(-distY * 3.0);
 
-          // Ripple effect
-          float ripple = sin(distX * 20.0 - time * 5.0) * 0.3 + 0.7;
+          // Subtle pulse
+          float pulse = 0.8 + 0.2 * sin(time * 3.0);
 
-          // Pulse
-          float pulse = 0.8 + 0.2 * sin(time * 4.0);
-
-          vec3 color = vec3(0.3, 0.5, 1.0);
-          gl_FragColor = vec4(color, spread * ripple * pulse * 0.6);
+          vec3 color = vec3(0.4, 0.6, 1.0);
+          gl_FragColor = vec4(color, impact * pulse * 0.5);
         }
       `,
       transparent: true,
@@ -179,13 +179,13 @@
       depthWrite: false
     });
     const impact = new THREE.Mesh(impactGeo, impactMat);
-    impact.position.y = -beamHeight - 0.2;
+    impact.position.y = -beamHeight - 0.1;
     impact.position.z = -0.003;
     beamGroup.add(impact);
 
-    // === 5. HORIZONTAL GLOW LINE - Along the "border" ===
-    const borderGlowGeo = new THREE.PlaneGeometry(5, 0.1);
-    const borderGlowMat = new THREE.ShaderMaterial({
+    // === 5. BORDER GLOW LINE - Horizontal spread ===
+    const borderGeo = new THREE.PlaneGeometry(4, 0.06);
+    const borderMat = new THREE.ShaderMaterial({
       uniforms: { time: { value: 0 } },
       vertexShader: `
         varying vec2 vUv;
@@ -198,33 +198,32 @@
         uniform float time;
         varying vec2 vUv;
         void main() {
-          // Fade from center outward
           float distX = abs(vUv.x - 0.5) * 2.0;
-          float fade = exp(-distX * 2.0);
+          float fade = exp(-distX * 2.5);
 
-          // Traveling light effect
-          float travel = sin((vUv.x - 0.5) * 30.0 - time * 4.0) * 0.5 + 0.5;
-          float travel2 = sin((vUv.x - 0.5) * 30.0 + time * 4.0) * 0.5 + 0.5;
-          float combined = max(travel, travel2);
+          // Traveling light waves (both directions)
+          float wave1 = sin((vUv.x - 0.5) * 25.0 - time * 3.0) * 0.5 + 0.5;
+          float wave2 = sin((vUv.x - 0.5) * 25.0 + time * 3.0) * 0.5 + 0.5;
+          float waves = max(wave1, wave2) * 0.4 + 0.6;
 
-          // Vertical fade
-          float vFade = 1.0 - pow(abs(vUv.y - 0.5) * 2.0, 2.0);
+          // Vertical softness
+          float vSoft = 1.0 - pow(abs(vUv.y - 0.5) * 2.0, 1.5);
 
-          vec3 color = vec3(0.4, 0.6, 1.0);
-          gl_FragColor = vec4(color, fade * combined * vFade * 0.5);
+          vec3 color = vec3(0.45, 0.65, 1.0);
+          gl_FragColor = vec4(color, fade * waves * vSoft * 0.4);
         }
       `,
       transparent: true,
       blending: THREE.AdditiveBlending,
       depthWrite: false
     });
-    const borderGlow = new THREE.Mesh(borderGlowGeo, borderGlowMat);
-    borderGlow.position.y = -beamHeight - 0.4;
-    borderGlow.position.z = -0.004;
-    beamGroup.add(borderGlow);
+    const border = new THREE.Mesh(borderGeo, borderMat);
+    border.position.y = -beamHeight - 0.25;
+    border.position.z = -0.004;
+    beamGroup.add(border);
 
-    // === 6. ENERGY PARTICLES - Flowing down into the impact ===
-    const particleCount = 150;
+    // === 6. ELEGANT PARTICLES - Few, refined, flowing down ===
+    const particleCount = 60;
     const particleGeo = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const speeds = new Float32Array(particleCount);
@@ -232,11 +231,11 @@
     const offsets = new Float32Array(particleCount);
 
     for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 0.3;
+      positions[i * 3] = (Math.random() - 0.5) * 0.15;
       positions[i * 3 + 1] = Math.random() * beamHeight;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 0.2;
-      speeds[i] = 2 + Math.random() * 4;
-      sizes[i] = 1 + Math.random() * 2;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 0.1;
+      speeds[i] = 1.5 + Math.random() * 2;
+      sizes[i] = 0.8 + Math.random() * 1.2;
       offsets[i] = Math.random() * 100;
     }
 
@@ -260,82 +259,19 @@
         void main() {
           vec3 pos = position;
 
-          // Flow downward (negative Y)
+          // Flow downward
           pos.y = beamHeight - mod(time * speed + offset, beamHeight);
 
-          // Slight horizontal drift
-          pos.x += sin(time * 2.0 + offset) * 0.03;
+          // Very subtle drift
+          pos.x += sin(time * 1.5 + offset) * 0.015;
 
-          // Fade out as approaching impact point
+          // Fade near bottom
           float distFromBottom = pos.y;
-          vAlpha = smoothstep(0.0, 2.0, distFromBottom) * 0.8;
+          vAlpha = smoothstep(0.0, 1.5, distFromBottom) * 0.7;
 
-          // Also fade based on distance from center
+          // Fade near edges
           float distFromCenter = length(pos.xz);
-          vAlpha *= exp(-distFromCenter * 3.0);
-
-          vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = size * (80.0 / -mvPos.z);
-          gl_Position = projectionMatrix * mvPos;
-        }
-      `,
-      fragmentShader: `
-        varying float vAlpha;
-        void main() {
-          float d = length(gl_PointCoord - 0.5);
-          if (d > 0.5) discard;
-          float a = (1.0 - d * 2.0) * vAlpha;
-          gl_FragColor = vec4(0.7, 0.85, 1.0, a);
-        }
-      `,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-
-    const particles = new THREE.Points(particleGeo, particleMat);
-    particles.position.y = -beamHeight;
-    beamGroup.add(particles);
-
-    // === 7. ABSORPTION SPARKS - Particles that shoot along the border ===
-    const sparkCount = 40;
-    const sparkGeo = new THREE.BufferGeometry();
-    const sparkPositions = new Float32Array(sparkCount * 3);
-    const sparkSpeeds = new Float32Array(sparkCount);
-    const sparkSizes = new Float32Array(sparkCount);
-    const sparkDirections = new Float32Array(sparkCount);
-
-    for (let i = 0; i < sparkCount; i++) {
-      sparkPositions[i * 3] = 0;
-      sparkPositions[i * 3 + 1] = 0;
-      sparkPositions[i * 3 + 2] = 0;
-      sparkSpeeds[i] = 3 + Math.random() * 5;
-      sparkSizes[i] = 1 + Math.random() * 2;
-      sparkDirections[i] = Math.random() > 0.5 ? 1 : -1;
-    }
-
-    sparkGeo.setAttribute('position', new THREE.BufferAttribute(sparkPositions, 3));
-    sparkGeo.setAttribute('speed', new THREE.BufferAttribute(sparkSpeeds, 1));
-    sparkGeo.setAttribute('size', new THREE.BufferAttribute(sparkSizes, 1));
-    sparkGeo.setAttribute('direction', new THREE.BufferAttribute(sparkDirections, 1));
-
-    const sparkMat = new THREE.ShaderMaterial({
-      uniforms: { time: { value: 0 } },
-      vertexShader: `
-        attribute float speed;
-        attribute float size;
-        attribute float direction;
-        uniform float time;
-        varying float vAlpha;
-        void main() {
-          vec3 pos = position;
-
-          // Move along X axis (the border)
-          float progress = mod(time * speed, 8.0);
-          pos.x = direction * progress - direction * 4.0;
-
-          // Fade out as moving away from center
-          vAlpha = exp(-abs(pos.x) * 0.5) * 0.6;
+          vAlpha *= exp(-distFromCenter * 6.0);
 
           vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);
           gl_PointSize = size * (60.0 / -mvPos.z);
@@ -348,7 +284,7 @@
           float d = length(gl_PointCoord - 0.5);
           if (d > 0.5) discard;
           float a = (1.0 - d * 2.0) * vAlpha;
-          gl_FragColor = vec4(0.5, 0.7, 1.0, a);
+          gl_FragColor = vec4(0.75, 0.88, 1.0, a);
         }
       `,
       transparent: true,
@@ -356,9 +292,46 @@
       depthWrite: false
     });
 
-    const sparks = new THREE.Points(sparkGeo, sparkMat);
-    sparks.position.y = -beamHeight - 0.4;
-    beamGroup.add(sparks);
+    const particles = new THREE.Points(particleGeo, particleMat);
+    particles.position.y = -beamHeight;
+    beamGroup.add(particles);
+
+    // === 7. SUBTLE AMBIENT GLOW - Very faint atmospheric effect ===
+    const ambientGeo = new THREE.PlaneGeometry(3, beamHeight * 0.6);
+    const ambientMat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float time;
+        varying vec2 vUv;
+        void main() {
+          float distX = abs(vUv.x - 0.5) * 2.0;
+          float distY = abs(vUv.y - 0.5) * 2.0;
+
+          // Very soft radial gradient
+          float glow = exp(-distX * 1.5) * exp(-distY * 1.5);
+
+          // Extremely subtle shimmer
+          float shimmer = 0.95 + 0.05 * sin(time * 0.8 + vUv.x * 3.0);
+
+          vec3 color = vec3(0.3, 0.45, 0.9);
+          gl_FragColor = vec4(color, glow * shimmer * 0.06);
+        }
+      `,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+    const ambient = new THREE.Mesh(ambientGeo, ambientMat);
+    ambient.position.y = -beamHeight * 0.3;
+    ambient.position.z = -0.01;
+    beamGroup.add(ambient);
 
     // === ANIMATION LOOP ===
     let time = 0;
@@ -367,17 +340,17 @@
       requestAnimationFrame(animate);
       time += 0.016;
 
-      // Update shaders
+      // Update all shader uniforms
       coreMat.uniforms.time.value = time;
       innerMat.uniforms.time.value = time;
       outerMat.uniforms.time.value = time;
       impactMat.uniforms.time.value = time;
-      borderGlowMat.uniforms.time.value = time;
+      borderMat.uniforms.time.value = time;
       particleMat.uniforms.time.value = time;
-      sparkMat.uniforms.time.value = time;
+      ambientMat.uniforms.time.value = time;
 
-      // Very subtle sway
-      beamGroup.rotation.z = Math.sin(time * 0.3) * 0.005;
+      // Very subtle, elegant sway
+      beamGroup.rotation.z = Math.sin(time * 0.2) * 0.003;
 
       renderer.render(scene, camera);
     }
