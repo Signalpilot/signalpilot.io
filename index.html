@@ -3313,7 +3313,7 @@
 
 <body>
 
-<!-- Starfield video background - dual layer for seamless loop -->
+<!-- Starfield video background - cross-fade dual layer -->
 <video
   id="starfield-bg-1"
   autoplay
@@ -3330,10 +3330,11 @@
     object-fit: cover;
     z-index: -3;
     pointer-events: none;
-    opacity: 0.5;
+    opacity: 0.7;
+    transition: opacity 0.8s ease;
   "
 >
-  <source src="assets/videos/starfield-bg.mp4?v=4" type="video/mp4">
+  <source src="assets/videos/starfield-bg.mp4?v=5" type="video/mp4">
 </video>
 <video
   id="starfield-bg-2"
@@ -3351,14 +3352,38 @@
     object-fit: cover;
     z-index: -2;
     pointer-events: none;
-    opacity: 0.5;
+    opacity: 0.7;
+    transition: opacity 0.8s ease;
   "
 >
-  <source src="assets/videos/starfield-bg.mp4?v=4" type="video/mp4">
+  <source src="assets/videos/starfield-bg.mp4?v=5" type="video/mp4">
 </video>
 <script>
-// Offset second video by 2.5s to mask loop restarts
-document.getElementById('starfield-bg-2').currentTime = 2.5;
+// Cross-fade: fade out before loop, fade in after restart
+(function() {
+  const v1 = document.getElementById('starfield-bg-1');
+  const v2 = document.getElementById('starfield-bg-2');
+
+  // Offset video 2 by half duration
+  v2.addEventListener('loadedmetadata', function() {
+    v2.currentTime = v2.duration / 2;
+  });
+
+  // Fade out near end, fade in after restart
+  function setupCrossfade(video) {
+    video.addEventListener('timeupdate', function() {
+      const timeLeft = video.duration - video.currentTime;
+      if (timeLeft < 0.8) {
+        video.style.opacity = '0';
+      } else if (video.currentTime < 0.5) {
+        video.style.opacity = '0.7';
+      }
+    });
+  }
+
+  setupCrossfade(v1);
+  setupCrossfade(v2);
+})();
 </script>
 
 <!-- Scroll progress indicator -->
