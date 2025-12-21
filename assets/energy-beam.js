@@ -87,9 +87,9 @@
           // Bright energy source at center
           float centerSource = exp(-distFromCenter * 4.0) * (0.8 + 0.2 * sin(time * 5.0));
 
-          vec3 coreColor = vec3(0.95, 0.98, 1.0);
-          vec3 innerColor = vec3(0.5, 0.75, 1.0);
-          vec3 outerColor = vec3(0.2, 0.4, 0.9);
+          vec3 coreColor = vec3(0.4, 0.7, 1.0);
+          vec3 innerColor = vec3(0.2, 0.5, 1.0);
+          vec3 outerColor = vec3(0.1, 0.3, 0.8);
 
           vec3 color = outerColor * outer + innerColor * inner + coreColor * core;
           float alpha = (core + inner * 0.4 + outer * 0.15) * pulse + centerSource;
@@ -148,9 +148,9 @@
           // Fade at bottom
           float bottomFade = smoothstep(0.0, 0.25, vUv.y);
 
-          vec3 coreColor = vec3(0.95, 0.98, 1.0);
-          vec3 innerColor = vec3(0.5, 0.75, 1.0);
-          vec3 outerColor = vec3(0.2, 0.4, 0.9);
+          vec3 coreColor = vec3(0.4, 0.7, 1.0);
+          vec3 innerColor = vec3(0.2, 0.5, 1.0);
+          vec3 outerColor = vec3(0.1, 0.3, 0.8);
 
           vec3 color = outerColor * outer + innerColor * inner + coreColor * core;
           float alpha = (core + inner * 0.4 + outer * 0.15) * pulse * bottomFade;
@@ -203,9 +203,9 @@
 
           float bottomFade = smoothstep(0.0, 0.25, vUv.y);
 
-          vec3 coreColor = vec3(0.95, 0.98, 1.0);
-          vec3 innerColor = vec3(0.5, 0.75, 1.0);
-          vec3 outerColor = vec3(0.2, 0.4, 0.9);
+          vec3 coreColor = vec3(0.4, 0.7, 1.0);
+          vec3 innerColor = vec3(0.2, 0.5, 1.0);
+          vec3 outerColor = vec3(0.1, 0.3, 0.8);
 
           vec3 color = outerColor * outer + innerColor * inner + coreColor * core;
           float alpha = (core + inner * 0.4 + outer * 0.15) * pulse * bottomFade;
@@ -301,7 +301,7 @@
           float d = length(gl_PointCoord - 0.5);
           if (d > 0.5) discard;
           float a = (1.0 - d * 2.0) * vAlpha;
-          gl_FragColor = vec4(0.75, 0.9, 1.0, a);
+          gl_FragColor = vec4(0.3, 0.6, 1.0, a);
         }
       `,
       transparent: true,
@@ -311,41 +311,6 @@
 
     const particles = new THREE.Points(particleGeo, particleMat);
     frameGroup.add(particles);
-
-    // === CENTER SOURCE GLOW ===
-    const sourceMat = new THREE.ShaderMaterial({
-      uniforms: { time: timeUniform },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform float time;
-        varying vec2 vUv;
-        void main() {
-          float dist = length(vUv - 0.5) * 2.0;
-          float glow = exp(-dist * 2.0);
-          float pulse = 0.85 + 0.15 * sin(time * 4.0);
-          float burst = pow(sin(time * 2.0) * 0.5 + 0.5, 4.0) * 0.3;
-
-          vec3 color = vec3(0.6, 0.85, 1.0);
-          gl_FragColor = vec4(color, (glow * pulse + burst) * 0.5);
-        }
-      `,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-
-    const source = new THREE.Mesh(
-      new THREE.PlaneGeometry(1.2, 0.8),
-      sourceMat
-    );
-    source.position.set(0, halfH, 0.01);
-    frameGroup.add(source);
 
     function animate() {
       requestAnimationFrame(animate);
