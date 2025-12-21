@@ -3313,53 +3313,70 @@
 
 <body>
 
-<!-- Starfield video background - cross-fade dual layer -->
-<video
-  id="starfield-bg-1"
-  autoplay
-  loop
-  muted
-  playsinline
-  disablepictureinpicture
-  style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -3;
-    pointer-events: none;
-    opacity: 0.6;
-    transition: opacity 1.5s ease-in-out;
-  "
->
-  <source src="assets/videos/starfield-bg.mp4?v=6" type="video/mp4">
-</video>
-<video
-  id="starfield-bg-2"
-  autoplay
-  loop
-  muted
-  playsinline
-  disablepictureinpicture
-  style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -2;
-    pointer-events: none;
-    opacity: 0.6;
-    transition: opacity 1.5s ease-in-out;
-  "
->
-  <source src="assets/videos/starfield-bg.mp4?v=6" type="video/mp4">
-</video>
+<!-- Starfield video background - wrapped in fixed container for mobile Safari -->
+<div id="starfield-container" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+">
+  <video
+    id="starfield-bg-1"
+    autoplay
+    loop
+    muted
+    playsinline
+    disablepictureinpicture
+    preload="auto"
+    style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+      transition: opacity 1.5s ease-in-out;
+      will-change: opacity;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    "
+  >
+    <source src="assets/videos/starfield-bg.mp4?v=9" type="video/mp4">
+  </video>
+  <video
+    id="starfield-bg-2"
+    autoplay
+    loop
+    muted
+    playsinline
+    disablepictureinpicture
+    preload="auto"
+    style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+      transition: opacity 1.5s ease-in-out;
+      will-change: opacity;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    "
+  >
+    <source src="assets/videos/starfield-bg.mp4?v=9" type="video/mp4">
+  </video>
+</div>
 <script>
-// Cross-fade: gradual fade out before loop, gradual fade in after
+// Performance-optimized starfield cross-fade
 (function() {
   const v1 = document.getElementById('starfield-bg-1');
   const v2 = document.getElementById('starfield-bg-2');
@@ -3369,18 +3386,18 @@
     v2.currentTime = v2.duration / 2;
   });
 
-  // Smooth cross-fade with gradual opacity changes
+  // Throttled cross-fade (checks every 500ms, not every frame)
+  let lastCheck = 0;
   function setupCrossfade(video) {
     video.addEventListener('timeupdate', function() {
-      const timeLeft = video.duration - video.currentTime;
-      const t = video.currentTime;
+      const now = Date.now();
+      if (now - lastCheck < 500) return;
+      lastCheck = now;
 
-      // Fade out starting 1.8s before end
+      const timeLeft = video.duration - video.currentTime;
       if (timeLeft < 1.8) {
         video.style.opacity = '0';
-      }
-      // Fade back in after restart (first 1.2s)
-      else if (t < 1.2) {
+      } else if (video.currentTime < 1.2) {
         video.style.opacity = '0.6';
       }
     });
@@ -3388,6 +3405,17 @@
 
   setupCrossfade(v1);
   setupCrossfade(v2);
+
+  // Pause when tab hidden (save CPU/GPU)
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      v1.pause();
+      v2.pause();
+    } else {
+      v1.play();
+      v2.play();
+    }
+  });
 })();
 </script>
 
@@ -3513,6 +3541,8 @@
           will-change: transform;
           transform: translateZ(0) scaleX(-1);
           backface-visibility: hidden;
+          -webkit-mask-image: radial-gradient(ellipse 80% 70% at 30% 50%, black 40%, transparent 100%);
+          mask-image: radial-gradient(ellipse 80% 70% at 30% 50%, black 40%, transparent 100%);
         "
       >
         <source src="assets/videos/signal-conduit-4k.mp4?v=3" type="video/mp4">
