@@ -2923,7 +2923,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.15;
+      opacity: 0.25;
     "
   >
     <source src="assets/videos/starfield-bg.mp4?v=14" type="video/mp4">
@@ -2943,35 +2943,63 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.15;
+      opacity: 0.25;
+    "
+  >
+    <source src="assets/videos/starfield-bg.mp4?v=14" type="video/mp4">
+  </video>
+  <video
+    id="starfield-bg-c"
+    autoplay
+    loop
+    muted
+    playsinline
+    disablepictureinpicture
+    preload="auto"
+    style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
     "
   >
     <source src="assets/videos/starfield-bg.mp4?v=14" type="video/mp4">
   </video>
 </div>
 <script>
-// Starfield: Pure constant overlap - no animations
+// Starfield: Triple overlap - 1/3 offset each
+// When one loops, two others are playing smoothly
 (function() {
   const videoA = document.getElementById('starfield-bg-a');
   const videoB = document.getElementById('starfield-bg-b');
+  const videoC = document.getElementById('starfield-bg-c');
 
-  // Both at constant opacity, offset by half duration
-  videoA.style.opacity = '0.35';
-  videoB.style.opacity = '0.35';
+  // All three at constant opacity
+  videoA.style.opacity = '0.25';
+  videoB.style.opacity = '0.25';
+  videoC.style.opacity = '0.25';
 
   videoA.addEventListener('loadedmetadata', function() {
-    // Offset B by half duration so loops never align
-    videoB.currentTime = videoA.duration / 2;
+    const duration = videoA.duration;
+    // Offset each by 1/3 of duration
+    videoB.currentTime = duration / 3;
+    videoC.currentTime = (duration * 2) / 3;
     videoB.play();
+    videoC.play();
   });
 
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
       videoA.pause();
       videoB.pause();
+      videoC.pause();
     } else {
       videoA.play();
       videoB.play();
+      videoC.play();
     }
   });
 })();
