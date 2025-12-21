@@ -3312,10 +3312,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.5;
+      opacity: 0.3;
     "
   >
-    <source src="assets/videos/starfield-bg.mp4?v=11" type="video/mp4">
+    <source src="assets/videos/starfield-bg.mp4?v=12" type="video/mp4">
   </video>
   <video
     id="starfield-bg-b"
@@ -3332,59 +3332,31 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0;
+      opacity: 0.3;
     "
   >
-    <source src="assets/videos/starfield-bg.mp4?v=11" type="video/mp4">
+    <source src="assets/videos/starfield-bg.mp4?v=12" type="video/mp4">
   </video>
 </div>
 <script>
-// Starfield: Pre-emptive switch BEFORE loop happens using requestAnimationFrame
+// Starfield: Both videos always visible at 0.3 opacity, offset by half duration
+// Pure overlap - when one loops, the other covers. No switching needed.
 (function() {
   const videoA = document.getElementById('starfield-bg-a');
   const videoB = document.getElementById('starfield-bg-b');
-  const DURATION = 5; // Video duration in seconds
-  const SWITCH_BEFORE = 0.15; // Switch 150ms before end
-  const OFFSET = 2.5;
-  let activeVideo = 'A';
-  let running = true;
 
-  // Start video B offset
   videoA.addEventListener('loadedmetadata', function() {
-    videoB.currentTime = OFFSET;
+    // Offset B by exactly half the duration
+    videoB.currentTime = videoA.duration / 2;
   });
 
-  function checkLoop() {
-    if (!running) return;
-
-    if (activeVideo === 'A' && videoA.currentTime > DURATION - SWITCH_BEFORE) {
-      // Switch to B before A loops
-      videoB.style.opacity = '0.5';
-      videoA.style.opacity = '0';
-      activeVideo = 'B';
-    } else if (activeVideo === 'B' && videoB.currentTime > DURATION - SWITCH_BEFORE) {
-      // Switch to A before B loops
-      videoA.style.opacity = '0.5';
-      videoB.style.opacity = '0';
-      activeVideo = 'A';
-    }
-
-    requestAnimationFrame(checkLoop);
-  }
-
-  requestAnimationFrame(checkLoop);
-
-  // Pause/play on visibility change
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
       videoA.pause();
       videoB.pause();
-      running = false;
     } else {
       videoA.play();
       videoB.play();
-      running = true;
-      requestAnimationFrame(checkLoop);
     }
   });
 })();
@@ -3489,7 +3461,7 @@
       <!-- EPIC Energy Beam v2 -->
       <div id="energy-beam-container" style="position:absolute;top:-70px;left:0;width:100%;height:calc(100% + 70px);pointer-events:none;z-index:0;overflow:visible;display:none"></div>
 
-      <!-- Energy Beam Videos - dual videos with loop switching -->
+      <!-- Energy Beam Videos - dual videos with pure overlap -->
       <video
         id="energy-beam-video-1"
         autoplay
@@ -3508,7 +3480,7 @@
           z-index: 0;
           object-fit: cover;
           object-position: left 30%;
-          opacity: 0.6;
+          opacity: 0.35;
           transform: translateZ(0) scaleX(-1);
           -webkit-mask-image:
             radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
@@ -3520,7 +3492,7 @@
           mask-composite: intersect;
         "
       >
-        <source src="assets/videos/signal-conduit-4k.mp4?v=7" type="video/mp4">
+        <source src="assets/videos/signal-conduit-4k.mp4?v=8" type="video/mp4">
       </video>
       <video
         id="energy-beam-video-2"
@@ -3540,7 +3512,7 @@
           z-index: 0;
           object-fit: cover;
           object-position: left 30%;
-          opacity: 0;
+          opacity: 0.35;
           transform: translateZ(0) scaleX(-1);
           -webkit-mask-image:
             radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
@@ -3552,51 +3524,25 @@
           mask-composite: intersect;
         "
       >
-        <source src="assets/videos/signal-conduit-4k.mp4?v=7" type="video/mp4">
+        <source src="assets/videos/signal-conduit-4k.mp4?v=8" type="video/mp4">
       </video>
       <script>
-      // Energy beam: Pre-emptive switch BEFORE loop using requestAnimationFrame
+      // Energy beam: Both videos always visible, offset by half duration
       (function() {
         const video1 = document.getElementById('energy-beam-video-1');
         const video2 = document.getElementById('energy-beam-video-2');
-        const DURATION = 5;
-        const SWITCH_BEFORE = 0.15;
-        const OFFSET = 2.5;
-        let activeVideo = '1';
-        let running = true;
 
         video1.addEventListener('loadedmetadata', function() {
-          video2.currentTime = OFFSET;
+          video2.currentTime = video1.duration / 2;
         });
-
-        function checkLoop() {
-          if (!running) return;
-
-          if (activeVideo === '1' && video1.currentTime > DURATION - SWITCH_BEFORE) {
-            video2.style.opacity = '0.6';
-            video1.style.opacity = '0';
-            activeVideo = '2';
-          } else if (activeVideo === '2' && video2.currentTime > DURATION - SWITCH_BEFORE) {
-            video1.style.opacity = '0.6';
-            video2.style.opacity = '0';
-            activeVideo = '1';
-          }
-
-          requestAnimationFrame(checkLoop);
-        }
-
-        requestAnimationFrame(checkLoop);
 
         document.addEventListener('visibilitychange', function() {
           if (document.hidden) {
             video1.pause();
             video2.pause();
-            running = false;
           } else {
             video1.play();
             video2.play();
-            running = true;
-            requestAnimationFrame(checkLoop);
           }
         });
       })();
