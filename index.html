@@ -2922,13 +2922,14 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.5;
+      opacity: 0.15;
     "
   >
     <source src="assets/videos/starfield-bg.mp4?v=14" type="video/mp4">
   </video>
   <video
     id="starfield-bg-b"
+    autoplay
     muted
     playsinline
     disablepictureinpicture
@@ -2940,59 +2941,59 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0;
+      opacity: 0.15;
     "
   >
     <source src="assets/videos/starfield-bg.mp4?v=14" type="video/mp4">
   </video>
 </div>
 <script>
-// Starfield: Manual loop control - restart happens while video is hidden
+// Starfield: Continuous dual-layer with smooth sine-wave opacity blending
+// Both videos always visible, opacity oscillates so loop points are always masked
 (function() {
   const videoA = document.getElementById('starfield-bg-a');
   const videoB = document.getElementById('starfield-bg-b');
-  let activeVideo = 'A';
   let duration = 5;
-  let switchPoint = 4.9;
+  const BASE_OPACITY = 0.15;  // Minimum opacity (always somewhat visible)
+  const MAX_OPACITY = 0.45;   // Maximum opacity
 
-  // Wait for video A to load, then properly offset video B
+  // Both videos play continuously, offset by half duration
   videoA.addEventListener('loadedmetadata', function() {
     duration = videoA.duration;
-    switchPoint = duration - 0.1;
-    // Set B to midpoint BEFORE playing
+    // Start B at halfway point
     videoB.currentTime = duration / 2;
     videoB.play();
-    console.log('Starfield: duration=' + duration + ', switchPoint=' + switchPoint);
   });
 
-  // Quick cross-fade (100ms) to blur the transition
-  function crossFade(fadeIn, fadeOut) {
-    fadeIn.style.transition = 'opacity 0.1s ease';
-    fadeOut.style.transition = 'opacity 0.1s ease';
-    fadeIn.style.opacity = '0.5';
-    fadeOut.style.opacity = '0';
+  // Continuous opacity animation based on video time
+  // Uses sine wave so transitions are smooth at both ends
+  function updateOpacity() {
+    const timeA = videoA.currentTime;
+    const timeB = videoB.currentTime;
 
-    // Remove transition after fade completes, restart hidden video
-    setTimeout(function() {
-      fadeIn.style.transition = '';
-      fadeOut.style.transition = '';
-      fadeOut.currentTime = 0;
-      fadeOut.play();
-    }, 100);
+    // Calculate position in cycle (0 to 1)
+    const posA = timeA / duration;
+    const posB = timeB / duration;
+
+    // Sine wave: peaks at middle of video, troughs at loop points
+    // This means when either video is near loop point, its opacity is lowest
+    const sinA = Math.sin(posA * Math.PI);
+    const sinB = Math.sin(posB * Math.PI);
+
+    // Map sine (0-1) to opacity range
+    const opacityA = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * sinA;
+    const opacityB = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * sinB;
+
+    videoA.style.opacity = opacityA;
+    videoB.style.opacity = opacityB;
+
+    requestAnimationFrame(updateOpacity);
   }
 
-  function checkAndSwitch() {
-    if (activeVideo === 'A' && videoA.currentTime >= switchPoint) {
-      activeVideo = 'B';
-      crossFade(videoB, videoA);
-    } else if (activeVideo === 'B' && videoB.currentTime >= switchPoint) {
-      activeVideo = 'A';
-      crossFade(videoA, videoB);
-    }
-    requestAnimationFrame(checkAndSwitch);
-  }
-
-  requestAnimationFrame(checkAndSwitch);
+  // Start the opacity animation after videos are ready
+  videoA.addEventListener('canplay', function() {
+    requestAnimationFrame(updateOpacity);
+  }, { once: true });
 
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
@@ -3113,7 +3114,7 @@
           z-index: 0;
           object-fit: cover;
           object-position: left 30%;
-          opacity: 0.6;
+          opacity: 0.2;
           transform: translateZ(0) scaleX(-1);
           -webkit-mask-image:
             radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
@@ -3144,7 +3145,7 @@
           z-index: 0;
           object-fit: cover;
           object-position: left 30%;
-          opacity: 0;
+          opacity: 0.2;
           transform: translateZ(0) scaleX(-1);
           -webkit-mask-image:
             radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
@@ -3159,47 +3160,52 @@
         <source src="assets/videos/signal-conduit-4k.mp4?v=9" type="video/mp4">
       </video>
       <script>
-      // Energy beam: Manual loop control - restart happens while hidden
+      // Energy beam: Continuous dual-layer with smooth sine-wave opacity blending
+      // Both videos always visible, opacity oscillates so loop points are always masked
       (function() {
         const video1 = document.getElementById('energy-beam-video-1');
         const video2 = document.getElementById('energy-beam-video-2');
-        let activeVideo = '1';
         let duration = 5;
-        let switchPoint = 4.9;
+        const BASE_OPACITY = 0.2;   // Minimum opacity (always somewhat visible)
+        const MAX_OPACITY = 0.55;   // Maximum opacity
 
+        // Both videos play continuously, offset by half duration
         video1.addEventListener('loadedmetadata', function() {
           duration = video1.duration;
-          switchPoint = duration - 0.1;
+          // Start video2 at halfway point
           video2.currentTime = duration / 2;
+          video2.play();
         });
 
-        // Quick cross-fade (100ms) to blur the transition
-        function crossFade(fadeIn, fadeOut) {
-          fadeIn.style.transition = 'opacity 0.1s ease';
-          fadeOut.style.transition = 'opacity 0.1s ease';
-          fadeIn.style.opacity = '0.6';
-          fadeOut.style.opacity = '0';
+        // Continuous opacity animation based on video time
+        // Uses sine wave so transitions are smooth at both ends
+        function updateOpacity() {
+          const time1 = video1.currentTime;
+          const time2 = video2.currentTime;
 
-          setTimeout(function() {
-            fadeIn.style.transition = '';
-            fadeOut.style.transition = '';
-            fadeOut.currentTime = 0;
-            fadeOut.play();
-          }, 100);
+          // Calculate position in cycle (0 to 1)
+          const pos1 = time1 / duration;
+          const pos2 = time2 / duration;
+
+          // Sine wave: peaks at middle of video, troughs at loop points
+          // This means when either video is near loop point, its opacity is lowest
+          const sin1 = Math.sin(pos1 * Math.PI);
+          const sin2 = Math.sin(pos2 * Math.PI);
+
+          // Map sine (0-1) to opacity range
+          const opacity1 = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * sin1;
+          const opacity2 = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * sin2;
+
+          video1.style.opacity = opacity1;
+          video2.style.opacity = opacity2;
+
+          requestAnimationFrame(updateOpacity);
         }
 
-        function checkAndSwitch() {
-          if (activeVideo === '1' && video1.currentTime >= switchPoint) {
-            activeVideo = '2';
-            crossFade(video2, video1);
-          } else if (activeVideo === '2' && video2.currentTime >= switchPoint) {
-            activeVideo = '1';
-            crossFade(video1, video2);
-          }
-          requestAnimationFrame(checkAndSwitch);
-        }
-
-        requestAnimationFrame(checkAndSwitch);
+        // Start the opacity animation after videos are ready
+        video1.addEventListener('canplay', function() {
+          requestAnimationFrame(updateOpacity);
+        }, { once: true });
 
         document.addEventListener('visibilitychange', function() {
           if (document.hidden) {
