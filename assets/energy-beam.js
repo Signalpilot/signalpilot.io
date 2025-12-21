@@ -70,31 +70,21 @@
         void main() {
           float yDist = abs(vUv.y - 0.5) * 2.0;
 
-          // Glow layers
-          float core = exp(-yDist * 10.0);
-          float inner = exp(-yDist * 4.0);
-          float outer = exp(-yDist * 1.5);
+          // Glow - single layer for cleaner look
+          float glow = exp(-yDist * 6.0);
 
-          // Distance from center (0 at center, 1 at edges)
+          // Distance from center
           float distFromCenter = abs(vUv.x - 0.5) * 2.0;
 
           // Energy pulses traveling FROM CENTER OUTWARD
-          // Multiple waves at different speeds
-          float wave1 = sin((distFromCenter * 8.0 - time * 3.0) * 3.14159) * 0.5 + 0.5;
-          float wave2 = sin((distFromCenter * 12.0 - time * 4.5) * 3.14159) * 0.3 + 0.7;
-          float pulse = wave1 * 0.7 + wave2 * 0.3;
+          float wave = sin((distFromCenter * 10.0 - time * 3.5) * 3.14159) * 0.4 + 0.6;
 
-          // Bright energy source at center
-          float centerSource = exp(-distFromCenter * 4.0) * (0.8 + 0.2 * sin(time * 5.0));
+          // Consistent blue color
+          vec3 color = vec3(0.2, 0.5, 1.0);
 
-          vec3 coreColor = vec3(0.4, 0.7, 1.0);
-          vec3 innerColor = vec3(0.2, 0.5, 1.0);
-          vec3 outerColor = vec3(0.1, 0.3, 0.8);
+          float alpha = glow * wave * 0.9;
 
-          vec3 color = outerColor * outer + innerColor * inner + coreColor * core;
-          float alpha = (core + inner * 0.4 + outer * 0.15) * pulse + centerSource;
-
-          gl_FragColor = vec4(color, alpha * 0.85);
+          gl_FragColor = vec4(color, alpha);
         }
       `,
       transparent: true,
@@ -130,32 +120,25 @@
         void main() {
           float xDist = abs(vUv.x - 0.5) * 2.0;
 
-          // Glow layers
-          float core = exp(-xDist * 10.0);
-          float inner = exp(-xDist * 4.0);
-          float outer = exp(-xDist * 1.5);
+          // Glow
+          float glow = exp(-xDist * 6.0);
 
           // Progress down the beam (0 at top, 1 at bottom)
           float downProgress = 1.0 - vUv.y;
 
-          // Energy continues from where top beam left off
-          // Wave synced with top beam's edge timing
+          // Energy wave synced with top beam
           float pathProgress = topHalfLen + downProgress * ${frameHeight.toFixed(1)};
-          float wave1 = sin((pathProgress - time * 3.0) * 1.5) * 0.5 + 0.5;
-          float wave2 = sin((pathProgress - time * 4.5) * 2.0) * 0.3 + 0.7;
-          float pulse = wave1 * 0.7 + wave2 * 0.3;
+          float wave = sin((pathProgress - time * 3.5) * 2.0) * 0.4 + 0.6;
 
           // Fade at bottom
-          float bottomFade = smoothstep(0.0, 0.25, vUv.y);
+          float bottomFade = smoothstep(0.0, 0.3, vUv.y);
 
-          vec3 coreColor = vec3(0.4, 0.7, 1.0);
-          vec3 innerColor = vec3(0.2, 0.5, 1.0);
-          vec3 outerColor = vec3(0.1, 0.3, 0.8);
+          // Consistent blue color
+          vec3 color = vec3(0.2, 0.5, 1.0);
 
-          vec3 color = outerColor * outer + innerColor * inner + coreColor * core;
-          float alpha = (core + inner * 0.4 + outer * 0.15) * pulse * bottomFade;
+          float alpha = glow * wave * bottomFade * 0.9;
 
-          gl_FragColor = vec4(color, alpha * 0.85);
+          gl_FragColor = vec4(color, alpha);
         }
       `,
       transparent: true,
@@ -170,53 +153,9 @@
     leftBeam.position.set(-halfW, 0, 0);
     frameGroup.add(leftBeam);
 
-    // RIGHT SIDE - Mirror of left
-    const rightMat = new THREE.ShaderMaterial({
-      uniforms: {
-        time: timeUniform,
-        topHalfLen: { value: topHalfLen }
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform float time;
-        uniform float topHalfLen;
-        varying vec2 vUv;
-
-        void main() {
-          float xDist = abs(vUv.x - 0.5) * 2.0;
-
-          float core = exp(-xDist * 10.0);
-          float inner = exp(-xDist * 4.0);
-          float outer = exp(-xDist * 1.5);
-
-          float downProgress = 1.0 - vUv.y;
-          float pathProgress = topHalfLen + downProgress * ${frameHeight.toFixed(1)};
-          float wave1 = sin((pathProgress - time * 3.0) * 1.5) * 0.5 + 0.5;
-          float wave2 = sin((pathProgress - time * 4.5) * 2.0) * 0.3 + 0.7;
-          float pulse = wave1 * 0.7 + wave2 * 0.3;
-
-          float bottomFade = smoothstep(0.0, 0.25, vUv.y);
-
-          vec3 coreColor = vec3(0.4, 0.7, 1.0);
-          vec3 innerColor = vec3(0.2, 0.5, 1.0);
-          vec3 outerColor = vec3(0.1, 0.3, 0.8);
-
-          vec3 color = outerColor * outer + innerColor * inner + coreColor * core;
-          float alpha = (core + inner * 0.4 + outer * 0.15) * pulse * bottomFade;
-
-          gl_FragColor = vec4(color, alpha * 0.85);
-        }
-      `,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
+    // RIGHT SIDE - same as left
+    const rightMat = leftMat.clone();
+    rightMat.uniforms = { time: timeUniform, topHalfLen: { value: topHalfLen } };
 
     const rightBeam = new THREE.Mesh(
       new THREE.PlaneGeometry(0.5, frameHeight),
