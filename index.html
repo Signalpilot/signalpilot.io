@@ -3343,17 +3343,32 @@
       height: 100%;
       object-fit: cover;
       opacity: 0.5;
+      transition: opacity 0.3s ease-out;
     "
   >
     <source src="assets/videos/starfield-bg.mp4?v=10" type="video/mp4">
   </video>
 </div>
 <script>
-// Simple starfield - just pause when tab hidden
+// Starfield with quick fade at loop point
 (function() {
   const video = document.getElementById('starfield-bg');
+  let lastTime = 0;
 
-  // Pause when tab hidden (save CPU/GPU)
+  // Detect loop restart (time jumps from end back to start)
+  video.addEventListener('timeupdate', function() {
+    const currentTime = video.currentTime;
+
+    // If time jumped backward significantly, the video looped
+    if (lastTime > 4 && currentTime < 1) {
+      // Quick fade out/in at loop point
+      video.style.opacity = '0';
+      setTimeout(() => { video.style.opacity = '0.5'; }, 50);
+    }
+    lastTime = currentTime;
+  });
+
+  // Pause when tab hidden
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
       video.pause();
