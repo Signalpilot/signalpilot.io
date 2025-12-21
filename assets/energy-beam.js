@@ -1,6 +1,5 @@
 /**
- * ENERGY BEAM v6 - Side positioned, simple vertical
- * Clean beam on the side, not blocking content
+ * ENERGY BEAM v7 - Side positioned with WORKING horizontal dissipation
  */
 
 (function() {
@@ -35,15 +34,15 @@
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    // Main group - POSITIONED TO THE LEFT SIDE
+    // Main group - LEFT SIDE
     const beamGroup = new THREE.Group();
-    beamGroup.position.set(-3.5, 3, 0); // Left side of screen
+    beamGroup.position.set(-3.2, 3.5, 0);
     scene.add(beamGroup);
 
-    const beamHeight = 8;
+    const beamHeight = 5;
 
-    // === 1. CORE BEAM - Thin, bright white center ===
-    const coreGeo = new THREE.PlaneGeometry(0.02, beamHeight);
+    // === 1. CORE BEAM ===
+    const coreGeo = new THREE.PlaneGeometry(0.025, beamHeight);
     const coreMat = new THREE.ShaderMaterial({
       uniforms: { time: { value: 0 } },
       vertexShader: `
@@ -57,14 +56,14 @@
         uniform float time;
         varying vec2 vUv;
         void main() {
-          // Fade at top and bottom edges
-          float edgeFade = smoothstep(0.0, 0.1, vUv.y) * smoothstep(1.0, 0.9, vUv.y);
+          // Fade at very bottom where it dissipates
+          float bottomFade = smoothstep(0.0, 0.08, vUv.y);
+          float topFade = smoothstep(1.0, 0.95, vUv.y);
 
-          // Subtle energy pulse traveling down
-          float pulse = sin(vUv.y * 25.0 - time * 4.0) * 0.15 + 0.85;
+          float pulse = sin(vUv.y * 20.0 - time * 5.0) * 0.12 + 0.88;
 
-          float intensity = edgeFade * pulse;
-          gl_FragColor = vec4(1.0, 1.0, 1.0, intensity * 0.85);
+          float intensity = bottomFade * topFade * pulse;
+          gl_FragColor = vec4(1.0, 1.0, 1.0, intensity * 0.9);
         }
       `,
       transparent: true,
@@ -75,8 +74,8 @@
     core.position.y = -beamHeight / 2;
     beamGroup.add(core);
 
-    // === 2. INNER GLOW - Soft blue aura ===
-    const innerGeo = new THREE.PlaneGeometry(0.15, beamHeight);
+    // === 2. INNER GLOW ===
+    const innerGeo = new THREE.PlaneGeometry(0.18, beamHeight);
     const innerMat = new THREE.ShaderMaterial({
       uniforms: { time: { value: 0 } },
       vertexShader: `
@@ -91,13 +90,14 @@
         varying vec2 vUv;
         void main() {
           float dist = abs(vUv.x - 0.5) * 2.0;
-          float glow = exp(-dist * 4.0);
-          float edgeFade = smoothstep(0.0, 0.1, vUv.y) * smoothstep(1.0, 0.9, vUv.y);
+          float glow = exp(-dist * 4.5);
+          float bottomFade = smoothstep(0.0, 0.1, vUv.y);
+          float topFade = smoothstep(1.0, 0.92, vUv.y);
 
-          float breath = 0.85 + 0.15 * sin(time * 1.2);
+          float breath = 0.85 + 0.15 * sin(time * 1.3);
 
           vec3 color = vec3(0.45, 0.65, 1.0);
-          gl_FragColor = vec4(color, glow * 0.45 * edgeFade * breath);
+          gl_FragColor = vec4(color, glow * 0.5 * bottomFade * topFade * breath);
         }
       `,
       transparent: true,
@@ -109,8 +109,8 @@
     inner.position.z = -0.001;
     beamGroup.add(inner);
 
-    // === 3. OUTER GLOW - Subtle wide aura ===
-    const outerGeo = new THREE.PlaneGeometry(0.5, beamHeight);
+    // === 3. OUTER GLOW ===
+    const outerGeo = new THREE.PlaneGeometry(0.6, beamHeight);
     const outerMat = new THREE.ShaderMaterial({
       uniforms: { time: { value: 0 } },
       vertexShader: `
@@ -126,10 +126,11 @@
         void main() {
           float dist = abs(vUv.x - 0.5) * 2.0;
           float glow = exp(-dist * 2.5);
-          float edgeFade = smoothstep(0.0, 0.15, vUv.y) * smoothstep(1.0, 0.85, vUv.y);
+          float bottomFade = smoothstep(0.0, 0.15, vUv.y);
+          float topFade = smoothstep(1.0, 0.88, vUv.y);
 
           vec3 color = vec3(0.3, 0.5, 1.0);
-          gl_FragColor = vec4(color, glow * 0.15 * edgeFade);
+          gl_FragColor = vec4(color, glow * 0.18 * bottomFade * topFade);
         }
       `,
       transparent: true,
@@ -141,27 +142,137 @@
     outer.position.z = -0.002;
     beamGroup.add(outer);
 
-    // === 4. PARTICLES - Flow along the beam ===
-    const particleCount = 35;
+    // === 4. IMPACT POINT - Bright glow where beam meets horizontal ===
+    const impactGeo = new THREE.PlaneGeometry(0.4, 0.4);
+    const impactMat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float time;
+        varying vec2 vUv;
+        void main() {
+          float dist = length(vUv - 0.5) * 2.0;
+          float glow = exp(-dist * 3.0);
+
+          float pulse = 0.8 + 0.2 * sin(time * 3.0);
+
+          vec3 color = vec3(0.5, 0.7, 1.0);
+          gl_FragColor = vec4(color, glow * pulse * 0.7);
+        }
+      `,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+    const impact = new THREE.Mesh(impactGeo, impactMat);
+    impact.position.y = -beamHeight;
+    impact.position.z = 0.001;
+    beamGroup.add(impact);
+
+    // === 5. HORIZONTAL DISSIPATION LINE - Traveling energy to the right ===
+    const horizGeo = new THREE.PlaneGeometry(5, 0.08);
+    const horizMat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float time;
+        varying vec2 vUv;
+        void main() {
+          // Fade from left (bright) to right (dark)
+          float hFade = exp(-vUv.x * 2.0);
+
+          // Vertical softness
+          float vSoft = 1.0 - pow(abs(vUv.y - 0.5) * 2.0, 2.0);
+
+          // Traveling energy pulses moving to the right
+          float wave1 = smoothstep(0.3, 0.0, abs(fract(vUv.x * 3.0 - time * 0.8) - 0.5));
+          float wave2 = smoothstep(0.25, 0.0, abs(fract(vUv.x * 3.0 - time * 0.8 + 0.33) - 0.5));
+          float wave3 = smoothstep(0.2, 0.0, abs(fract(vUv.x * 3.0 - time * 0.8 + 0.66) - 0.5));
+          float waves = (wave1 + wave2 * 0.7 + wave3 * 0.5) * 0.5;
+
+          // Combine base glow with waves
+          float intensity = hFade * vSoft * (0.4 + waves);
+
+          vec3 color = vec3(0.4, 0.6, 1.0);
+          gl_FragColor = vec4(color, intensity * 0.6);
+        }
+      `,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+    const horiz = new THREE.Mesh(horizGeo, horizMat);
+    horiz.position.x = 2.5; // Offset to the right of beam
+    horiz.position.y = -beamHeight;
+    horiz.position.z = -0.001;
+    beamGroup.add(horiz);
+
+    // === 6. SECONDARY HORIZONTAL LINE - Subtle trailing glow ===
+    const horiz2Geo = new THREE.PlaneGeometry(4, 0.2);
+    const horiz2Mat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float time;
+        varying vec2 vUv;
+        void main() {
+          float hFade = exp(-vUv.x * 1.8);
+          float vSoft = exp(-pow(abs(vUv.y - 0.5) * 2.0, 2.0) * 3.0);
+
+          vec3 color = vec3(0.3, 0.5, 1.0);
+          gl_FragColor = vec4(color, hFade * vSoft * 0.2);
+        }
+      `,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+    const horiz2 = new THREE.Mesh(horiz2Geo, horiz2Mat);
+    horiz2.position.x = 2.0;
+    horiz2.position.y = -beamHeight;
+    horiz2.position.z = -0.003;
+    beamGroup.add(horiz2);
+
+    // === 7. PARTICLES - Flowing down and then sideways ===
+    const particleCount = 50;
     const particleGeo = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
-    const speeds = new Float32Array(particleCount);
+    const velocities = new Float32Array(particleCount * 2); // vx, vy
     const sizes = new Float32Array(particleCount);
-    const offsets = new Float32Array(particleCount);
+    const phases = new Float32Array(particleCount);
 
     for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 0.1;
+      positions[i * 3] = (Math.random() - 0.5) * 0.15;
       positions[i * 3 + 1] = Math.random() * beamHeight;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 0.05;
-      speeds[i] = 1.0 + Math.random() * 1.5;
-      sizes[i] = 0.5 + Math.random() * 0.8;
-      offsets[i] = Math.random() * 100;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 0.1;
+      velocities[i * 2] = 0.5 + Math.random() * 1.5; // Horizontal speed after impact
+      velocities[i * 2 + 1] = 1.2 + Math.random() * 1.5; // Vertical fall speed
+      sizes[i] = 0.5 + Math.random() * 1.0;
+      phases[i] = Math.random() * 100;
     }
 
     particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particleGeo.setAttribute('speed', new THREE.BufferAttribute(speeds, 1));
+    particleGeo.setAttribute('velocity', new THREE.BufferAttribute(velocities, 2));
     particleGeo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-    particleGeo.setAttribute('offset', new THREE.BufferAttribute(offsets, 1));
+    particleGeo.setAttribute('phase', new THREE.BufferAttribute(phases, 1));
 
     const particleMat = new THREE.ShaderMaterial({
       uniforms: {
@@ -169,24 +280,32 @@
         beamHeight: { value: beamHeight }
       },
       vertexShader: `
-        attribute float speed;
+        attribute vec2 velocity;
         attribute float size;
-        attribute float offset;
+        attribute float phase;
         uniform float time;
         uniform float beamHeight;
         varying float vAlpha;
+
         void main() {
           vec3 pos = position;
+          float t = mod(time * velocity.y + phase, beamHeight + 3.0);
 
-          // Flow downward
-          pos.y = beamHeight - mod(time * speed + offset, beamHeight);
-
-          // Fade near edges
-          float edgeFade = smoothstep(0.0, 1.0, pos.y) * smoothstep(beamHeight, beamHeight - 1.0, pos.y);
-          vAlpha = edgeFade * 0.6;
+          if (t < beamHeight) {
+            // Falling down the beam
+            pos.y = beamHeight - t;
+            pos.x += sin(time * 0.8 + phase) * 0.02;
+            vAlpha = smoothstep(0.0, 1.0, pos.y) * smoothstep(beamHeight, beamHeight - 0.5, pos.y) * 0.7;
+          } else {
+            // Moving horizontally after hitting bottom
+            float horizT = t - beamHeight;
+            pos.y = 0.0 + sin(horizT * 2.0) * 0.05; // Slight wave
+            pos.x = horizT * velocity.x; // Move right
+            vAlpha = (1.0 - horizT / 3.0) * 0.6; // Fade out
+          }
 
           vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = size * (45.0 / -mvPos.z);
+          gl_PointSize = size * (50.0 / -mvPos.z);
           gl_Position = projectionMatrix * mvPos;
         }
       `,
@@ -195,7 +314,7 @@
         void main() {
           float d = length(gl_PointCoord - 0.5);
           if (d > 0.5) discard;
-          float a = (1.0 - d * 2.0) * vAlpha;
+          float a = (1.0 - d * 2.0) * max(vAlpha, 0.0);
           gl_FragColor = vec4(0.7, 0.85, 1.0, a);
         }
       `,
@@ -218,10 +337,13 @@
       coreMat.uniforms.time.value = time;
       innerMat.uniforms.time.value = time;
       outerMat.uniforms.time.value = time;
+      impactMat.uniforms.time.value = time;
+      horizMat.uniforms.time.value = time;
+      horiz2Mat.uniforms.time.value = time;
       particleMat.uniforms.time.value = time;
 
-      // Very subtle sway
-      beamGroup.rotation.z = Math.sin(time * 0.15) * 0.003;
+      // Subtle sway
+      beamGroup.rotation.z = Math.sin(time * 0.15) * 0.002;
 
       renderer.render(scene, camera);
     }
