@@ -139,36 +139,22 @@
           // === ULTRA-FINE DUST - subtle tiny specks only ===
           float dust = fineDust(uv, time, distFromBeam);
 
-          // === FALLING ENERGY SOURCE at top - infinite energy pouring in ===
-          float topZone = smoothstep(0.7, 1.0, uv.y); // Only at top 30%
-          float fallingParticles = 0.0;
+          // === CONTINUOUS ENERGY SOURCE at top - smooth flowing stream ===
+          float topZone = smoothstep(0.6, 1.0, uv.y); // Top 40%
 
-          // Multiple streams of falling energy particles
-          for (float i = 0.0; i < 8.0; i++) {
-            // Particle X position - clustered around beam
-            float particleX = beamX + (hash(vec2(i * 17.0, 1.0)) - 0.5) * 0.08;
-            float xDist = abs((uv.x - particleX) * aspect);
-            float xFade = exp(-xDist * 30.0); // Sharp horizontal falloff
+          // Continuous flowing energy - overlapping waves traveling down
+          float topFlow1 = sin(uv.y * 25.0 - time * 6.0) * 0.5 + 0.5;
+          float topFlow2 = sin(uv.y * 40.0 - time * 8.0) * 0.5 + 0.5;
+          float topFlow3 = sin(uv.y * 18.0 - time * 5.0) * 0.5 + 0.5;
 
-            // Falling Y position - each particle falls at different speed/offset
-            float fallSpeed = 1.5 + hash(vec2(i * 31.0, 2.0)) * 1.0;
-            float fallOffset = hash(vec2(i * 47.0, 3.0));
-            float particleY = fract(fallOffset - time * fallSpeed * 0.2);
+          // Smooth continuous pulsing - not fragmented
+          float continuousFlow = (topFlow1 + topFlow2 + topFlow3) / 3.0;
+          continuousFlow = 0.7 + continuousFlow * 0.3; // Keep it mostly bright with subtle variation
 
-            // Distance to particle Y
-            float yDist = abs(uv.y - (0.7 + particleY * 0.3)); // Map to top zone
-            float yFade = exp(-yDist * 50.0); // Sharp vertical falloff
+          // Only near the beam center
+          float topBeamFade = exp(-distFromBeam * 20.0);
 
-            // Combine for point-like falling particle
-            float particle = xFade * yFade;
-
-            // Brightness variation
-            float brightness = 0.6 + 0.4 * hash(vec2(i * 89.0, 4.0));
-
-            fallingParticles += particle * brightness;
-          }
-
-          fallingParticles *= topZone * 0.8; // Only visible in top zone
+          float fallingParticles = continuousFlow * topBeamFade * topZone * 0.5;
 
           // === VERTICAL INTENSITY ===
           // Brighter at top, gradual fade
@@ -203,13 +189,13 @@
           // === GROUND GLOW with energy flow ===
           float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.4 * horizFlow;
 
-          // === COLORS - DEEP DARK blue to purple gradient ===
-          vec3 coreColor = vec3(0.35, 0.5, 0.95);      // Deep blue core (less white)
-          vec3 innerColor = vec3(0.2, 0.32, 0.85);     // Darker blue
-          vec3 outerColor = vec3(0.15, 0.22, 0.7);     // Even darker saturated blue
-          vec3 purpleGlow = vec3(0.35, 0.15, 0.7);     // Darker purple
-          vec3 atmosColor = vec3(0.1, 0.06, 0.4);      // Deep dark purple-blue atmosphere
-          vec3 splashColor = vec3(0.3, 0.25, 0.8);     // Darker purple-tinted splash
+          // === COLORS - DEEP DARK blue with purple/violet ===
+          vec3 coreColor = vec3(0.3, 0.4, 0.9);        // Deep blue core
+          vec3 innerColor = vec3(0.2, 0.25, 0.75);     // Dark blue-violet
+          vec3 outerColor = vec3(0.18, 0.15, 0.6);     // Dark violet-blue
+          vec3 purpleGlow = vec3(0.4, 0.12, 0.65);     // Rich violet
+          vec3 atmosColor = vec3(0.12, 0.05, 0.35);    // Deep dark violet atmosphere
+          vec3 splashColor = vec3(0.35, 0.2, 0.7);     // Violet-purple splash
 
           // === COMBINE - SOLID POWERFUL CONTINUOUS BEAM ===
           float topSharpness = uv.y;
