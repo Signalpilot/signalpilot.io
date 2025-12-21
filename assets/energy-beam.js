@@ -85,11 +85,10 @@
           float beamX = 0.12;
           float distFromBeam = abs(uv.x - beamX) * aspect;
 
-          // === BEAM STAYS THIN - only spreads at very bottom ===
-          // Thin beam until ~15% from bottom, then spreads
+          // === BEAM - slightly thicker, spreads at very bottom ===
           float spreadStart = 0.15;
           float spreadAmount = smoothstep(spreadStart, 0.0, uv.y);
-          float beamWidth = 0.006 + spreadAmount * spreadAmount * 0.12;
+          float beamWidth = 0.012 + spreadAmount * spreadAmount * 0.12;
           float normalizedDist = distFromBeam / beamWidth;
 
           // === ULTRA-SMOOTH CORE ===
@@ -110,11 +109,11 @@
           float atmosDist = distFromBeam / atmosWidth;
           float atmosphere = exp(-atmosDist * atmosDist * 0.3);
 
-          // === ENERGY FLOW - flowing DOWN from top to bottom ===
-          // + time makes waves travel downward (decreasing Y)
-          float flow1 = sin(uv.y * 12.0 + time * 2.5) * 0.5 + 0.5;
-          float flow2 = sin(uv.y * 20.0 + time * 4.0) * 0.3 + 0.7;
-          float energyFlow = mix(0.75, 1.0, flow1 * flow2);
+          // === ENERGY FLOW - visible pulses flowing DOWN ===
+          // Distinct bright bands traveling down the beam
+          float flow1 = sin(uv.y * 8.0 + time * 3.0) * 0.5 + 0.5;
+          float flow2 = sin(uv.y * 15.0 + time * 4.5) * 0.5 + 0.5;
+          float energyFlow = 0.5 + 0.5 * flow1 * flow2;
 
           // === SUBTLE DUST PARTICLES ===
           float dust = particles(uv, time) * innerGlow;
@@ -123,32 +122,37 @@
           // Brighter at top, gradual fade
           float vertIntensity = 0.6 + 0.4 * uv.y;
 
-          // === HORIZONTAL SPREAD - same beam flowing right ===
-          float spreadY = smoothstep(0.15, 0.0, uv.y); // Only at very bottom
+          // === HORIZONTAL SPREAD - beam continues flowing right ===
+          float spreadY = smoothstep(0.18, 0.0, uv.y); // Spread zone at bottom
 
           // Distance to the right of beam
           float distRight = max(0.0, (uv.x - beamX)) * aspect;
 
-          // The beam itself continues horizontally - same energy, just turned
-          // Use the same energyFlow that flows down the vertical beam
-          float horizBeamWidth = 0.03; // Thin horizontal beam
-          float horizDist = abs(uv.y - 0.05); // Distance from horizontal beam line
+          // Horizontal beam - thicker and goes further
+          float horizBeamWidth = 0.04;
+          float horizDist = abs(uv.y - 0.06); // Horizontal beam line position
 
-          // Horizontal beam core (continuation of vertical)
-          float horizCore = exp(-horizDist * horizDist / (horizBeamWidth * horizBeamWidth)) * spreadY;
+          // Core of horizontal beam
+          float horizCore = exp(-horizDist * horizDist / (horizBeamWidth * horizBeamWidth));
 
-          // Fade as it travels right
-          float horizFade = exp(-distRight * 2.0);
+          // Slower fade - beam travels further right
+          float horizFade = exp(-distRight * 0.8);
 
-          // Apply the same energy flow to horizontal (continuous from vertical)
-          float horizSpread = horizCore * horizFade * energyFlow;
+          // Energy flow continues into horizontal (same flow animation)
+          // Flow travels rightward: use distRight instead of uv.y
+          float horizFlow = sin(distRight * 6.0 - time * 3.0) * 0.5 + 0.5;
+          float horizFlow2 = sin(distRight * 10.0 - time * 4.0) * 0.4 + 0.6;
+          float flowRight = 0.5 + 0.5 * horizFlow * horizFlow2;
 
-          // Small glow around horizontal spread
-          float horizGlow = exp(-horizDist * 15.0) * exp(-distRight * 1.5) * spreadY * 0.4;
-          horizSpread += horizGlow;
+          // Combine: core * fade * flow * spread zone
+          float horizSpread = horizCore * horizFade * flowRight * spreadY;
+
+          // Wider glow around horizontal
+          float horizGlow = exp(-horizDist * 8.0) * exp(-distRight * 0.6) * spreadY * 0.5;
+          horizSpread += horizGlow * flowRight;
 
           // === GROUND GLOW ===
-          float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 1.0) * spreadY * 0.3;
+          float groundGlow = exp(-uv.y * 8.0) * exp(-distRight * 0.5) * spreadY * 0.4 * flowRight;
 
           // === COLORS - Smooth blue gradient ===
           vec3 coreColor = vec3(0.85, 0.92, 1.0);     // Bright white-blue core
