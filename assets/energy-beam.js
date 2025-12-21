@@ -1,13 +1,11 @@
 /**
- * ENERGY BEAM EFFECT
- * Huly.io inspired vertical light beam with atmospheric glow
- * Uses Three.js for WebGL rendering
+ * EPIC ENERGY BEAM EFFECT v2
+ * Going all out - multiple layers, particles, volumetric light
  */
 
 (function() {
   'use strict';
 
-  // Wait for Three.js to load
   function init() {
     if (typeof THREE === 'undefined') {
       setTimeout(init, 100);
@@ -17,25 +15,16 @@
     const container = document.getElementById('energy-beam-container');
     if (!container) return;
 
-    // Check for reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      createStaticFallback(container);
-      return;
-    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    // Scene setup
+    // === SCENE SETUP ===
     const scene = new THREE.Scene();
-
-    // Get container dimensions
     const width = container.offsetWidth || window.innerWidth;
     const height = container.offsetHeight || window.innerHeight;
 
-    // Camera
-    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.z = 5;
-    camera.position.y = 0;
 
-    // Renderer
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true,
@@ -46,20 +35,15 @@
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    // Position beam on the right side
+    // Main group positioned to the right
     const beamGroup = new THREE.Group();
-    beamGroup.position.x = 2.5; // Right side
-    beamGroup.position.y = -3; // Start from bottom
+    beamGroup.position.set(3, 0, 0);
     scene.add(beamGroup);
 
-    // === MAIN BEAM CORE ===
-    const beamGeometry = new THREE.PlaneGeometry(0.08, 15);
-    const beamMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        time: { value: 0 },
-        color1: { value: new THREE.Color(0xffffff) },
-        color2: { value: new THREE.Color(0x5b8aff) }
-      },
+    // === 1. BEAM CORE - Ultra bright center line ===
+    const coreGeo = new THREE.PlaneGeometry(0.03, 20);
+    const coreMat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
       vertexShader: `
         varying vec2 vUv;
         void main() {
@@ -69,37 +53,24 @@
       `,
       fragmentShader: `
         uniform float time;
-        uniform vec3 color1;
-        uniform vec3 color2;
         varying vec2 vUv;
-
         void main() {
-          float intensity = 1.0 - abs(vUv.x - 0.5) * 2.0;
-          intensity = pow(intensity, 0.5);
-          float pulse = 0.9 + 0.1 * sin(time * 2.0);
-          float verticalFade = 1.0 - pow(vUv.y, 2.0) * 0.3;
-          vec3 color = mix(color2, color1, intensity);
-          float alpha = intensity * pulse * verticalFade;
-          gl_FragColor = vec4(color, alpha);
+          float intensity = 1.0 - pow(abs(vUv.x - 0.5) * 2.0, 0.3);
+          float flicker = 0.95 + 0.05 * sin(time * 10.0 + vUv.y * 50.0);
+          gl_FragColor = vec4(1.0, 1.0, 1.0, intensity * flicker);
         }
       `,
       transparent: true,
       blending: THREE.AdditiveBlending,
-      side: THREE.DoubleSide,
       depthWrite: false
     });
+    const core = new THREE.Mesh(coreGeo, coreMat);
+    beamGroup.add(core);
 
-    const beam = new THREE.Mesh(beamGeometry, beamMaterial);
-    beam.position.y = 4;
-    beamGroup.add(beam);
-
-    // === INNER GLOW ===
-    const innerGlowGeometry = new THREE.PlaneGeometry(0.4, 15);
-    const innerGlowMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        time: { value: 0 },
-        color: { value: new THREE.Color(0x5b8aff) }
-      },
+    // === 2. INNER GLOW - Bright blue halo ===
+    const innerGeo = new THREE.PlaneGeometry(0.15, 20);
+    const innerMat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
       vertexShader: `
         varying vec2 vUv;
         void main() {
@@ -109,36 +80,27 @@
       `,
       fragmentShader: `
         uniform float time;
-        uniform vec3 color;
         varying vec2 vUv;
-
         void main() {
           float dist = abs(vUv.x - 0.5) * 2.0;
-          float intensity = exp(-dist * 3.0);
-          float pulse = 0.85 + 0.15 * sin(time * 1.5 + vUv.y * 5.0);
-          float verticalFade = 1.0 - pow(vUv.y, 1.5) * 0.4;
-          float alpha = intensity * 0.6 * pulse * verticalFade;
-          gl_FragColor = vec4(color, alpha);
+          float glow = exp(-dist * 5.0);
+          float pulse = 0.9 + 0.1 * sin(time * 3.0);
+          vec3 color = vec3(0.4, 0.6, 1.0);
+          gl_FragColor = vec4(color, glow * 0.8 * pulse);
         }
       `,
       transparent: true,
       blending: THREE.AdditiveBlending,
-      side: THREE.DoubleSide,
       depthWrite: false
     });
+    const inner = new THREE.Mesh(innerGeo, innerMat);
+    inner.position.z = -0.001;
+    beamGroup.add(inner);
 
-    const innerGlow = new THREE.Mesh(innerGlowGeometry, innerGlowMaterial);
-    innerGlow.position.y = 4;
-    innerGlow.position.z = -0.01;
-    beamGroup.add(innerGlow);
-
-    // === OUTER GLOW / ATMOSPHERE ===
-    const outerGlowGeometry = new THREE.PlaneGeometry(3, 15);
-    const outerGlowMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        time: { value: 0 },
-        color: { value: new THREE.Color(0x3366ff) }
-      },
+    // === 3. OUTER GLOW - Wider atmospheric glow ===
+    const outerGeo = new THREE.PlaneGeometry(0.6, 20);
+    const outerMat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
       vertexShader: `
         varying vec2 vUv;
         void main() {
@@ -148,48 +110,32 @@
       `,
       fragmentShader: `
         uniform float time;
-        uniform vec3 color;
         varying vec2 vUv;
-
         void main() {
           float dist = abs(vUv.x - 0.5) * 2.0;
-          float intensity = exp(-dist * 2.0);
-          float noise = sin(vUv.y * 20.0 + time) * 0.05 +
-                       sin(vUv.y * 35.0 - time * 0.7) * 0.03;
-          float verticalFade = 1.0 - pow(vUv.y, 1.2) * 0.5;
-          float alpha = intensity * 0.15 * verticalFade * (1.0 + noise);
-          gl_FragColor = vec4(color, alpha);
+          float glow = exp(-dist * 3.0);
+          float wave = sin(vUv.y * 30.0 + time * 2.0) * 0.1 + 0.9;
+          vec3 color = vec3(0.2, 0.4, 1.0);
+          gl_FragColor = vec4(color, glow * 0.3 * wave);
         }
       `,
       transparent: true,
       blending: THREE.AdditiveBlending,
-      side: THREE.DoubleSide,
       depthWrite: false
     });
+    const outer = new THREE.Mesh(outerGeo, outerMat);
+    outer.position.z = -0.002;
+    beamGroup.add(outer);
 
-    const outerGlow = new THREE.Mesh(outerGlowGeometry, outerGlowMaterial);
-    outerGlow.position.y = 4;
-    outerGlow.position.z = -0.02;
-    beamGroup.add(outerGlow);
-
-    // === ATMOSPHERIC CLOUDS ===
-    // These are the clouds that light up randomly near the beam
-    const cloudCount = 12;
-    const clouds = [];
-
-    for (let i = 0; i < cloudCount; i++) {
-      const cloudGeometry = new THREE.PlaneGeometry(
-        1.5 + Math.random() * 2,  // width varies
-        1 + Math.random() * 1.5   // height varies
-      );
-
-      const cloudMaterial = new THREE.ShaderMaterial({
+    // === 4. VOLUMETRIC RAYS - Light rays emanating outward ===
+    const rayCount = 12;
+    const rays = [];
+    for (let i = 0; i < rayCount; i++) {
+      const rayGeo = new THREE.PlaneGeometry(0.02, 3 + Math.random() * 4);
+      const rayMat = new THREE.ShaderMaterial({
         uniforms: {
           time: { value: 0 },
-          brightness: { value: 0 },
-          targetBrightness: { value: 0 },
-          color: { value: new THREE.Color(0x4488ff) },
-          seed: { value: Math.random() * 100 }
+          offset: { value: Math.random() * 100 }
         },
         vertexShader: `
           varying vec2 vUv;
@@ -200,97 +146,91 @@
         `,
         fragmentShader: `
           uniform float time;
-          uniform float brightness;
-          uniform vec3 color;
-          uniform float seed;
+          uniform float offset;
           varying vec2 vUv;
-
-          // Simple noise function
-          float hash(vec2 p) {
-            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
-          }
-
-          float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-            f = f * f * (3.0 - 2.0 * f);
-            float a = hash(i);
-            float b = hash(i + vec2(1.0, 0.0));
-            float c = hash(i + vec2(0.0, 1.0));
-            float d = hash(i + vec2(1.0, 1.0));
-            return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
-          }
-
-          float fbm(vec2 p) {
-            float value = 0.0;
-            float amplitude = 0.5;
-            for (int i = 0; i < 4; i++) {
-              value += amplitude * noise(p);
-              p *= 2.0;
-              amplitude *= 0.5;
-            }
-            return value;
-          }
-
           void main() {
-            // Create cloud shape with noise
-            vec2 uv = vUv;
-            float n = fbm(uv * 3.0 + seed + time * 0.1);
-
-            // Soft edge falloff
-            float edgeX = 1.0 - pow(abs(uv.x - 0.5) * 2.0, 2.0);
-            float edgeY = 1.0 - pow(abs(uv.y - 0.5) * 2.0, 2.0);
-            float edge = edgeX * edgeY;
-
-            // Cloud density
-            float density = n * edge;
-            density = smoothstep(0.2, 0.6, density);
-
-            // Apply brightness (this is what creates the "lighting up" effect)
-            float alpha = density * brightness * 0.7;
-
-            // Slight color variation based on brightness
-            vec3 finalColor = mix(color * 0.5, color, brightness);
-
-            gl_FragColor = vec4(finalColor, alpha);
+            float fade = 1.0 - vUv.y;
+            float flicker = 0.5 + 0.5 * sin(time * 5.0 + offset);
+            vec3 color = vec3(0.3, 0.5, 1.0);
+            gl_FragColor = vec4(color, fade * flicker * 0.15);
           }
         `,
         transparent: true,
         blending: THREE.AdditiveBlending,
-        side: THREE.DoubleSide,
         depthWrite: false
       });
-
-      const cloud = new THREE.Mesh(cloudGeometry, cloudMaterial);
-
-      // Position clouds around the beam
-      const side = Math.random() > 0.5 ? 1 : -1;
-      cloud.position.x = side * (0.5 + Math.random() * 2);
-      cloud.position.y = Math.random() * 10 - 1;
-      cloud.position.z = -0.05 - Math.random() * 0.1;
-
-      // Slight rotation for variety
-      cloud.rotation.z = (Math.random() - 0.5) * 0.3;
-
-      beamGroup.add(cloud);
-      clouds.push({
-        mesh: cloud,
-        material: cloudMaterial,
-        brightness: 0,
-        targetBrightness: 0,
-        nextFlashTime: Math.random() * 3,
-        flashDuration: 0,
-        baseY: cloud.position.y
-      });
+      const ray = new THREE.Mesh(rayGeo, rayMat);
+      const angle = (i / rayCount) * Math.PI * 2;
+      ray.position.set(Math.cos(angle) * 0.1, -8 + Math.random() * 16, -0.003);
+      ray.rotation.z = angle + Math.PI / 2;
+      beamGroup.add(ray);
+      rays.push({ mesh: ray, mat: rayMat, baseAngle: angle, speed: 0.5 + Math.random() });
     }
 
-    // === GROUND GLOW / REFLECTION ===
-    const groundGlowGeometry = new THREE.PlaneGeometry(6, 4);
-    const groundGlowMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        time: { value: 0 },
-        color: { value: new THREE.Color(0x4477ff) }
-      },
+    // === 5. ENERGY PARTICLES - Rising sparks ===
+    const particleCount = 200;
+    const particleGeo = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const speeds = new Float32Array(particleCount);
+    const sizes = new Float32Array(particleCount);
+    const offsets = new Float32Array(particleCount);
+
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 0.5;
+      positions[i * 3 + 1] = Math.random() * 20 - 10;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 0.3;
+      speeds[i] = 1 + Math.random() * 3;
+      sizes[i] = 1 + Math.random() * 3;
+      offsets[i] = Math.random() * 100;
+    }
+
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    particleGeo.setAttribute('speed', new THREE.BufferAttribute(speeds, 1));
+    particleGeo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+    particleGeo.setAttribute('offset', new THREE.BufferAttribute(offsets, 1));
+
+    const particleMat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
+      vertexShader: `
+        attribute float speed;
+        attribute float size;
+        attribute float offset;
+        uniform float time;
+        varying float vAlpha;
+        void main() {
+          vec3 pos = position;
+          pos.y = mod(pos.y + time * speed, 20.0) - 10.0;
+          pos.x += sin(time * 2.0 + offset) * 0.05;
+
+          float distFromCenter = length(pos.xz);
+          vAlpha = exp(-distFromCenter * 4.0) * (0.5 + 0.5 * sin(time * 10.0 + offset));
+
+          vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = size * (100.0 / -mvPos.z);
+          gl_Position = projectionMatrix * mvPos;
+        }
+      `,
+      fragmentShader: `
+        varying float vAlpha;
+        void main() {
+          float d = length(gl_PointCoord - 0.5);
+          if (d > 0.5) discard;
+          float a = (1.0 - d * 2.0) * vAlpha;
+          gl_FragColor = vec4(0.6, 0.8, 1.0, a);
+        }
+      `,
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+
+    const particles = new THREE.Points(particleGeo, particleMat);
+    beamGroup.add(particles);
+
+    // === 6. BASE PORTAL EFFECT ===
+    const portalGeo = new THREE.RingGeometry(0.1, 0.8, 64);
+    const portalMat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
       vertexShader: `
         varying vec2 vUv;
         void main() {
@@ -300,88 +240,44 @@
       `,
       fragmentShader: `
         uniform float time;
-        uniform vec3 color;
         varying vec2 vUv;
-
         void main() {
-          vec2 center = vec2(0.5, 1.0);
-          float dist = distance(vUv, center);
-          float intensity = exp(-dist * 2.5);
-          float pulse = 0.9 + 0.1 * sin(time * 2.0);
-          float alpha = intensity * 0.4 * pulse;
-          gl_FragColor = vec4(color, alpha);
+          float ring = sin(vUv.x * 6.28318 * 3.0 + time * 5.0) * 0.5 + 0.5;
+          float fade = 1.0 - abs(vUv.y - 0.5) * 2.0;
+          vec3 color = mix(vec3(0.2, 0.4, 1.0), vec3(0.6, 0.8, 1.0), ring);
+          gl_FragColor = vec4(color, ring * fade * 0.5);
         }
       `,
       transparent: true,
       blending: THREE.AdditiveBlending,
-      side: THREE.DoubleSide,
-      depthWrite: false
+      depthWrite: false,
+      side: THREE.DoubleSide
     });
+    const portal = new THREE.Mesh(portalGeo, portalMat);
+    portal.rotation.x = -Math.PI / 2;
+    portal.position.y = -9;
+    beamGroup.add(portal);
 
-    const groundGlow = new THREE.Mesh(groundGlowGeometry, groundGlowMaterial);
-    groundGlow.position.y = -2.5;
-    groundGlow.position.z = -0.03;
-    groundGlow.rotation.x = -Math.PI * 0.3;
-    beamGroup.add(groundGlow);
-
-    // === FLOATING PARTICLES ===
-    const particleCount = 100;
-    const particleGeometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const velocities = new Float32Array(particleCount);
-    const sizes = new Float32Array(particleCount);
-
-    for (let i = 0; i < particleCount; i++) {
-      const spreadX = (Math.random() - 0.5) * 3;
-      const spreadY = Math.random() * 12 - 2;
-      const spreadZ = (Math.random() - 0.5) * 2;
-
-      positions[i * 3] = spreadX;
-      positions[i * 3 + 1] = spreadY;
-      positions[i * 3 + 2] = spreadZ;
-
-      velocities[i] = 0.5 + Math.random() * 1.5;
-      sizes[i] = 2 + Math.random() * 4;
-    }
-
-    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particleGeometry.setAttribute('velocity', new THREE.BufferAttribute(velocities, 1));
-    particleGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-
-    const particleMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        time: { value: 0 },
-        color: { value: new THREE.Color(0x88aaff) }
-      },
+    // === 7. LENS FLARE / HOT SPOTS ===
+    const flareGeo = new THREE.PlaneGeometry(0.5, 0.5);
+    const flareMat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
       vertexShader: `
-        attribute float velocity;
-        attribute float size;
-        uniform float time;
-        varying float vAlpha;
-
+        varying vec2 vUv;
         void main() {
-          vec3 pos = position;
-          pos.y = mod(pos.y + time * velocity * 0.3, 14.0) - 2.0;
-          pos.x += sin(time * 0.5 + position.y * 0.5) * 0.2;
-
-          float distFromCenter = abs(pos.x);
-          vAlpha = exp(-distFromCenter * 0.8) * 0.6;
-          vAlpha *= 1.0 - smoothstep(8.0, 12.0, pos.y);
-
-          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = size * (300.0 / -mvPosition.z);
-          gl_Position = projectionMatrix * mvPosition;
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragmentShader: `
-        uniform vec3 color;
-        varying float vAlpha;
-
+        uniform float time;
+        varying vec2 vUv;
         void main() {
-          float dist = length(gl_PointCoord - vec2(0.5));
-          if (dist > 0.5) discard;
-          float alpha = (1.0 - dist * 2.0) * vAlpha;
-          gl_FragColor = vec4(color, alpha);
+          vec2 center = vUv - 0.5;
+          float dist = length(center);
+          float flare = exp(-dist * 8.0);
+          float pulse = 0.7 + 0.3 * sin(time * 4.0);
+          gl_FragColor = vec4(0.8, 0.9, 1.0, flare * pulse * 0.6);
         }
       `,
       transparent: true,
@@ -389,131 +285,123 @@
       depthWrite: false
     });
 
-    const particles = new THREE.Points(particleGeometry, particleMaterial);
-    beamGroup.add(particles);
+    const flares = [];
+    const flarePositions = [0, 3, -3, 6, -6];
+    flarePositions.forEach((y, i) => {
+      const flare = new THREE.Mesh(flareGeo, flareMat.clone());
+      flare.position.set(0, y, 0.01);
+      flare.scale.setScalar(0.3 + Math.random() * 0.4);
+      beamGroup.add(flare);
+      flares.push({ mesh: flare, baseY: y, phase: Math.random() * Math.PI * 2 });
+    });
 
-    // === ANIMATION ===
+    // === 8. ELECTRICITY / LIGHTNING TENDRILS ===
+    const lightningCount = 6;
+    const lightnings = [];
+
+    for (let i = 0; i < lightningCount; i++) {
+      const points = [];
+      const segments = 20;
+      for (let j = 0; j <= segments; j++) {
+        points.push(new THREE.Vector3(0, j * 0.8 - 8, 0));
+      }
+
+      const lightningGeo = new THREE.BufferGeometry().setFromPoints(points);
+      const lightningMat = new THREE.LineBasicMaterial({
+        color: 0x88aaff,
+        transparent: true,
+        opacity: 0,
+        blending: THREE.AdditiveBlending
+      });
+
+      const lightning = new THREE.Line(lightningGeo, lightningMat);
+      beamGroup.add(lightning);
+      lightnings.push({
+        line: lightning,
+        geo: lightningGeo,
+        mat: lightningMat,
+        nextFlash: Math.random() * 2,
+        segments: segments
+      });
+    }
+
+    // === ANIMATION LOOP ===
     let time = 0;
-    let animationId;
 
     function animate() {
-      animationId = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
       time += 0.016;
 
-      // Update all shader uniforms
-      beamMaterial.uniforms.time.value = time;
-      innerGlowMaterial.uniforms.time.value = time;
-      outerGlowMaterial.uniforms.time.value = time;
-      groundGlowMaterial.uniforms.time.value = time;
-      particleMaterial.uniforms.time.value = time;
+      // Update shaders
+      coreMat.uniforms.time.value = time;
+      innerMat.uniforms.time.value = time;
+      outerMat.uniforms.time.value = time;
+      particleMat.uniforms.time.value = time;
+      portalMat.uniforms.time.value = time;
 
-      // === CLOUD LIGHTING ANIMATION ===
-      clouds.forEach(cloud => {
-        cloud.material.uniforms.time.value = time;
+      // Animate rays
+      rays.forEach(r => {
+        r.mat.uniforms.time.value = time;
+        r.mesh.rotation.z = r.baseAngle + Math.sin(time * r.speed) * 0.1;
+      });
 
-        // Check if it's time for a new flash
-        if (time > cloud.nextFlashTime && cloud.targetBrightness === 0) {
-          // Start a flash
-          cloud.targetBrightness = 0.4 + Math.random() * 0.6; // Random intensity
-          cloud.flashDuration = 0.5 + Math.random() * 1.5; // How long to stay lit
-          cloud.nextFlashTime = time + cloud.flashDuration + 1 + Math.random() * 4; // Next flash
+      // Animate flares
+      flares.forEach(f => {
+        f.mesh.material.uniforms.time.value = time;
+        f.mesh.position.y = f.baseY + Math.sin(time * 2 + f.phase) * 0.3;
+        const scale = 0.3 + Math.sin(time * 3 + f.phase) * 0.1;
+        f.mesh.scale.setScalar(scale);
+      });
+
+      // Animate lightning
+      lightnings.forEach(l => {
+        if (time > l.nextFlash) {
+          // Flash on
+          l.mat.opacity = 0.6 + Math.random() * 0.4;
+
+          // Randomize lightning path
+          const positions = l.geo.attributes.position.array;
+          for (let i = 0; i <= l.segments; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 0.3 * Math.sin(i / l.segments * Math.PI);
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 0.2;
+          }
+          l.geo.attributes.position.needsUpdate = true;
+
+          l.nextFlash = time + 0.05 + Math.random() * 0.1;
+
+          // Schedule fade out
+          setTimeout(() => {
+            l.mat.opacity *= 0.5;
+            setTimeout(() => {
+              l.mat.opacity = 0;
+              l.nextFlash = time + 1 + Math.random() * 3;
+            }, 50);
+          }, 30);
         }
-
-        // Fade brightness toward target
-        if (cloud.brightness < cloud.targetBrightness) {
-          cloud.brightness += 0.03; // Fade in speed
-        } else if (time > cloud.nextFlashTime - 1 - Math.random() * 2) {
-          // Start fading out before next flash time
-          cloud.targetBrightness = 0;
-          cloud.brightness -= 0.015; // Fade out speed (slower)
-          cloud.brightness = Math.max(0, cloud.brightness);
-        }
-
-        cloud.material.uniforms.brightness.value = cloud.brightness;
-
-        // Subtle drift movement
-        cloud.mesh.position.y = cloud.baseY + Math.sin(time * 0.3 + cloud.baseY) * 0.2;
-        cloud.mesh.position.x += Math.sin(time * 0.2) * 0.001;
       });
 
       // Subtle beam sway
-      beamGroup.rotation.z = Math.sin(time * 0.3) * 0.02;
+      beamGroup.rotation.z = Math.sin(time * 0.5) * 0.01;
+      beamGroup.position.x = 3 + Math.sin(time * 0.3) * 0.05;
 
       renderer.render(scene, camera);
     }
 
     animate();
 
-    // === RESIZE HANDLING ===
-    function handleResize() {
-      const newWidth = container.offsetWidth || window.innerWidth;
-      const newHeight = container.offsetHeight || window.innerHeight;
-
-      camera.aspect = newWidth / newHeight;
+    // Resize handler
+    window.addEventListener('resize', () => {
+      const w = container.offsetWidth || window.innerWidth;
+      const h = container.offsetHeight || window.innerHeight;
+      camera.aspect = w / h;
       camera.updateProjectionMatrix();
-      renderer.setSize(newWidth, newHeight);
-
-      // Adjust beam position based on screen size
-      if (newWidth < 768) {
-        beamGroup.position.x = 1.5;
-        beamGroup.scale.set(0.7, 0.7, 0.7);
-      } else if (newWidth < 1200) {
-        beamGroup.position.x = 2;
-        beamGroup.scale.set(0.85, 0.85, 0.85);
-      } else {
-        beamGroup.position.x = 2.5;
-        beamGroup.scale.set(1, 1, 1);
-      }
-    }
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    // === CLEANUP ===
-    window.addEventListener('beforeunload', () => {
-      cancelAnimationFrame(animationId);
-      renderer.dispose();
-    });
-
-    // Visibility API - pause when tab not visible
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        cancelAnimationFrame(animationId);
-      } else {
-        animate();
-      }
+      renderer.setSize(w, h);
     });
   }
 
-  // Static fallback for reduced motion
-  function createStaticFallback(container) {
-    const fallback = document.createElement('div');
-    fallback.style.cssText = `
-      position: absolute;
-      top: 0;
-      right: 20%;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(to top,
-        rgba(91, 138, 255, 0.8) 0%,
-        rgba(255, 255, 255, 0.9) 30%,
-        rgba(91, 138, 255, 0.4) 70%,
-        transparent 100%
-      );
-      box-shadow:
-        0 0 20px rgba(91, 138, 255, 0.5),
-        0 0 40px rgba(91, 138, 255, 0.3),
-        0 0 80px rgba(91, 138, 255, 0.2);
-      filter: blur(1px);
-    `;
-    container.appendChild(fallback);
-  }
-
-  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
-
 })();
