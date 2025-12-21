@@ -81,57 +81,49 @@
           vec2 uv = vUv;
           float aspect = resolution.x / resolution.y;
 
-          // === L-SHAPE PATH: down left, across bottom, up right ===
-          float leftX = 0.09;   // Left beam position
-          float rightX = 0.92;  // Right beam position
-          float bottomY = 0.08; // Bottom horizontal position
+          // === OVERFLOW SHAPE: down left, across bottom, DOWN on right (overflow) ===
+          float leftX = 0.09;      // Left beam position
+          float rightX = 0.92;     // Right beam position
+          float horizY = 0.35;     // Horizontal beam Y position (where left turns right)
           float beamThickness = 0.012;
 
-          // Distance to left vertical beam (from top to bottom)
+          // Distance to left vertical beam (from top down to horizY)
           float distLeft = abs(uv.x - leftX) * aspect;
-          float onLeftBeam = step(uv.y, 0.95) * step(bottomY, uv.y); // Only in valid Y range
 
-          // Distance to bottom horizontal beam
-          float distBottom = abs(uv.y - bottomY);
-          float onBottomBeam = step(leftX, uv.x) * step(uv.x, rightX); // Only between left and right
+          // Distance to horizontal beam (from leftX to rightX at horizY)
+          float distHoriz = abs(uv.y - horizY);
 
-          // Distance to right vertical beam (from bottom going up)
+          // Distance to right vertical beam (from horizY going DOWN to bottom)
           float distRight = abs(uv.x - rightX) * aspect;
-          float onRightBeam = step(uv.y, 0.5) * step(bottomY, uv.y); // Only up to halfway
 
-          // Combined distance to nearest beam segment
-          float distToPath = min(
-            distLeft * (1.0 - onLeftBeam * 0.0 + (1.0 - onLeftBeam) * 100.0),
-            min(
-              distBottom * (1.0 - onBottomBeam * 0.0 + (1.0 - onBottomBeam) * 100.0),
-              distRight * (1.0 - onRightBeam * 0.0 + (1.0 - onRightBeam) * 100.0)
-            )
-          );
+          // Calculate which segment each pixel is closest to
+          float dLeft = (uv.y >= horizY) ? distLeft : 100.0;  // Left beam: from top to horizY
+          float dHoriz = (uv.x >= leftX && uv.x <= rightX) ? distHoriz : 100.0;  // Horizontal beam
+          float dRight = (uv.y <= horizY) ? distRight : 100.0; // Right beam: from horizY DOWN to bottom
 
-          // Simpler approach: calculate distance to each segment and take minimum
-          float dLeft = (uv.y >= bottomY) ? distLeft : 100.0;
-          float dBottom = (uv.x >= leftX && uv.x <= rightX) ? distBottom : 100.0;
-          float dRight = (uv.y >= bottomY && uv.y <= 0.5) ? distRight : 100.0;
-          distToPath = min(dLeft, min(dBottom, dRight));
+          float distToPath = min(dLeft, min(dHoriz, dRight));
 
           // === PATH PARAMETER (0 to 1 along entire path) ===
-          // Used for flowing energy animation
-          float pathLength = (1.0 - bottomY) + (rightX - leftX) * aspect + (0.5 - bottomY); // Total path length
+          // Path: top-left -> bottom-left corner -> right along horizontal -> down right side
+          float leftLen = 1.0 - horizY;  // Length of left segment
+          float horizLen = (rightX - leftX) * aspect;  // Length of horizontal
+          float rightLen = horizY;  // Length of right segment (goes down to 0)
+          float pathLength = leftLen + horizLen + rightLen;
           float pathPos = 0.0;
 
-          // Determine which segment we're closest to and calculate path position
-          if (dLeft <= dBottom && dLeft <= dRight) {
-            // On left beam - path goes from top (0) to bottom
+          // Determine which segment and calculate path position
+          if (dLeft <= dHoriz && dLeft <= dRight) {
+            // On left beam - flows DOWN from top
             pathPos = (1.0 - uv.y) / pathLength;
-          } else if (dBottom <= dLeft && dBottom <= dRight) {
-            // On bottom beam - continues from left to right
-            float leftPathLen = (1.0 - bottomY) / pathLength;
+          } else if (dHoriz <= dLeft && dHoriz <= dRight) {
+            // On horizontal beam - flows RIGHT
+            float leftPathLen = leftLen / pathLength;
             pathPos = leftPathLen + ((uv.x - leftX) * aspect) / pathLength;
           } else {
-            // On right beam - continues upward
-            float leftPathLen = (1.0 - bottomY) / pathLength;
-            float bottomPathLen = ((rightX - leftX) * aspect) / pathLength;
-            pathPos = leftPathLen + bottomPathLen + (uv.y - bottomY) / pathLength;
+            // On right beam - flows DOWN (overflow)
+            float leftPathLen = leftLen / pathLength;
+            float horizPathLen = horizLen / pathLength;
+            pathPos = leftPathLen + horizPathLen + (horizY - uv.y) / pathLength;
           }
 
           // === BEAM CORE AND GLOW ===
