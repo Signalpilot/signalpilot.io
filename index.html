@@ -3386,18 +3386,27 @@
     v2.currentTime = v2.duration / 2;
   });
 
-  // Throttled cross-fade (checks every 500ms, not every frame)
-  let lastCheck = 0;
+  // Cross-fade: each video fades independently
   function setupCrossfade(video) {
+    let lastCheck = 0; // Each video has its own throttle
     video.addEventListener('timeupdate', function() {
       const now = Date.now();
-      if (now - lastCheck < 500) return;
+      if (now - lastCheck < 300) return;
       lastCheck = now;
 
       const timeLeft = video.duration - video.currentTime;
+      const t = video.currentTime;
+
+      // Fade out 1.8s before end
       if (timeLeft < 1.8) {
         video.style.opacity = '0';
-      } else if (video.currentTime < 1.2) {
+      }
+      // Fade in during first 1.2s after restart
+      else if (t < 1.2) {
+        video.style.opacity = '0.6';
+      }
+      // Full opacity in the middle (always visible)
+      else {
         video.style.opacity = '0.6';
       }
     });
@@ -3541,8 +3550,8 @@
           will-change: transform;
           transform: translateZ(0) scaleX(-1);
           backface-visibility: hidden;
-          -webkit-mask-image: radial-gradient(ellipse 80% 70% at 30% 50%, black 40%, transparent 100%);
-          mask-image: radial-gradient(ellipse 80% 70% at 30% 50%, black 40%, transparent 100%);
+          -webkit-mask-image: radial-gradient(ellipse 90% 85% at 25% 50%, black 70%, transparent 95%);
+          mask-image: radial-gradient(ellipse 90% 85% at 25% 50%, black 70%, transparent 95%);
         "
       >
         <source src="assets/videos/signal-conduit-4k.mp4?v=3" type="video/mp4">
