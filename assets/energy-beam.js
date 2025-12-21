@@ -121,15 +121,30 @@
           // Brighter at top, gradual fade
           float vertIntensity = 0.6 + 0.4 * uv.y;
 
-          // === HORIZONTAL SPREAD AT BOTTOM ===
-          // Wide horizontal fan-out - energy spreads when it hits bottom
+          // === HORIZONTAL SPREAD AT BOTTOM - flows RIGHT ===
           float spreadY = smoothstep(0.4, 0.0, uv.y); // Starts spreading from 40% up
-          float spreadPulse = 0.8 + 0.2 * sin(time * 2.0); // Subtle pulse in spread
-          float horizSpread = exp(-distFromBeam * distFromBeam / (0.6 * spreadY + 0.001)) * spreadY * spreadPulse;
 
-          // === GROUND GLOW - wide horizontal swoosh ===
-          float groundPulse = 0.7 + 0.3 * sin(time * 1.5 + distFromBeam * 3.0); // Ripple outward
-          float groundGlow = exp(-uv.y * 6.0) * exp(-distFromBeam * 0.3) * 0.7 * groundPulse;
+          // Distance to the RIGHT of beam (not symmetric)
+          float distRight = max(0.0, (uv.x - beamX)) * aspect;
+          float distLeft = max(0.0, (beamX - uv.x)) * aspect;
+
+          // Animated expanding wave - grows wider over time
+          float waveSpeed = 0.8;
+          float wavePhase = mod(time * waveSpeed, 3.0); // Repeats every ~3.75 seconds
+          float expandingEdge = wavePhase * 0.8; // How far the wave has traveled
+
+          // Right-side spread (main direction)
+          float rightWave = smoothstep(expandingEdge + 0.1, expandingEdge - 0.05, distRight) *
+                           smoothstep(0.0, 0.02, distRight) * spreadY;
+
+          // Small left spread (less intense)
+          float leftWave = exp(-distLeft * 8.0) * spreadY * 0.4;
+
+          float horizSpread = rightWave + leftWave;
+
+          // === GROUND GLOW - expanding rightward ===
+          float groundWave = smoothstep(expandingEdge + 0.2, expandingEdge - 0.1, distRight);
+          float groundGlow = exp(-uv.y * 5.0) * groundWave * spreadY * 0.8;
 
           // === COLORS - Smooth blue gradient ===
           vec3 coreColor = vec3(0.85, 0.92, 1.0);     // Bright white-blue core
