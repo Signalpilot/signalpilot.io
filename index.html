@@ -3314,7 +3314,7 @@
 
 <body>
 
-<!-- Starfield video background - wrapped in fixed container for mobile Safari -->
+<!-- Starfield video background - simple single video, no cross-fade -->
 <div id="starfield-container" style="
   position: fixed;
   top: 0;
@@ -3328,7 +3328,7 @@
   transform: translateZ(0);
 ">
   <video
-    id="starfield-bg-1"
+    id="starfield-bg"
     autoplay
     loop
     muted
@@ -3342,86 +3342,23 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.6;
-      transition: opacity 1.5s ease-in-out;
-      will-change: opacity;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
+      opacity: 0.5;
     "
   >
-    <source src="assets/videos/starfield-bg.mp4?v=9" type="video/mp4">
-  </video>
-  <video
-    id="starfield-bg-2"
-    autoplay
-    loop
-    muted
-    playsinline
-    disablepictureinpicture
-    preload="auto"
-    style="
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.6;
-      transition: opacity 1.5s ease-in-out;
-      will-change: opacity;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-    "
-  >
-    <source src="assets/videos/starfield-bg.mp4?v=9" type="video/mp4">
+    <source src="assets/videos/starfield-bg.mp4?v=10" type="video/mp4">
   </video>
 </div>
 <script>
-// Performance-optimized starfield cross-fade
+// Simple starfield - just pause when tab hidden
 (function() {
-  const v1 = document.getElementById('starfield-bg-1');
-  const v2 = document.getElementById('starfield-bg-2');
-
-  // Offset video 2 by half duration
-  v2.addEventListener('loadedmetadata', function() {
-    v2.currentTime = v2.duration / 2;
-  });
-
-  // Cross-fade: each video fades independently (optimized - only changes when needed)
-  function setupCrossfade(video) {
-    let lastCheck = 0;
-    let currentState = 'visible'; // Track state to avoid redundant style changes
-
-    video.addEventListener('timeupdate', function() {
-      const now = Date.now();
-      if (now - lastCheck < 400) return; // Throttle to 400ms
-      lastCheck = now;
-
-      const timeLeft = video.duration - video.currentTime;
-      const t = video.currentTime;
-
-      // Only change opacity when state changes
-      if (timeLeft < 1.8 && currentState !== 'hidden') {
-        video.style.opacity = '0';
-        currentState = 'hidden';
-      } else if (t >= 1.2 && timeLeft >= 1.8 && currentState !== 'visible') {
-        video.style.opacity = '0.6';
-        currentState = 'visible';
-      }
-    });
-  }
-
-  setupCrossfade(v1);
-  setupCrossfade(v2);
+  const video = document.getElementById('starfield-bg');
 
   // Pause when tab hidden (save CPU/GPU)
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
-      v1.pause();
-      v2.pause();
+      video.pause();
     } else {
-      v1.play();
-      v2.play();
+      video.play();
     }
   });
 })();
