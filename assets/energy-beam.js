@@ -110,11 +110,23 @@
           float atmosDist = distFromBeam / atmosWidth;
           float atmosphere = exp(-atmosDist * atmosDist * 0.3);
 
-          // === ENERGY FLOW - visible pulses flowing DOWN ===
-          // Distinct bright bands traveling down the beam
-          float flow1 = sin(uv.y * 8.0 + time * 3.0) * 0.5 + 0.5;
-          float flow2 = sin(uv.y * 15.0 + time * 4.5) * 0.5 + 0.5;
-          float energyFlow = 0.5 + 0.5 * flow1 * flow2;
+          // === ENERGY - subtle shimmer, not bands flying through ===
+          // Very subtle variation - beam stays SOLID and POWERFUL
+          float shimmer = 0.95 + 0.05 * sin(uv.y * 30.0 + time * 2.0);
+          float shimmer2 = 0.97 + 0.03 * sin(uv.y * 50.0 + time * 3.0);
+          float subtleFlow = shimmer * shimmer2;
+
+          // === SPARKS - floating particles in the glow ===
+          float sparks = 0.0;
+          for (float i = 0.0; i < 5.0; i++) {
+            vec2 sparkPos = uv * (15.0 + i * 8.0);
+            sparkPos.y += time * (0.3 + i * 0.15);
+            float spark = noise(sparkPos);
+            spark = smoothstep(0.75, 0.95, spark);
+            // Only show sparks near the beam
+            spark *= exp(-distFromBeam * 15.0);
+            sparks += spark * 0.12;
+          }
 
           // === SUBTLE DUST PARTICLES ===
           float dust = particles(uv, time) * innerGlow;
@@ -136,10 +148,8 @@
           // Smooth curved glow spreading right
           float curveGlow = exp(-curvedRight * curvedRight * 0.8) * spreadY;
 
-          // Energy flow travels RIGHT along the spread
-          float spreadFlow = sin(distRight * 6.0 - time * 2.5) * 0.4 + 0.6;
-          float spreadFlow2 = sin(distRight * 10.0 - time * 3.5) * 0.3 + 0.7;
-          float flowRight = spreadFlow * spreadFlow2;
+          // Subtle continuous flow along spread (not bands)
+          float flowRight = 0.9 + 0.1 * sin(distRight * 4.0 - time * 1.5);
 
           // Combine curved spread with flow
           float horizSpread = curveGlow * flowRight;
@@ -158,37 +168,39 @@
           vec3 atmosColor = vec3(0.08, 0.2, 0.7);     // Deep blue atmosphere
           vec3 splashColor = vec3(0.5, 0.7, 1.0);     // Bright splash
 
-          // === COMBINE WITH POSITION-BASED BLENDING ===
-          // Top = sharp defined core, Bottom = glow dominates
-          float topSharpness = uv.y; // 1 at top, 0 at bottom
-          float bottomGlow = 1.0 - uv.y; // 0 at top, 1 at bottom
+          // === COMBINE - SOLID POWERFUL CONTINUOUS BEAM ===
+          float topSharpness = uv.y;
+          float bottomGlow = 1.0 - uv.y;
 
           vec3 color = vec3(0.0);
 
-          // Atmosphere - more visible toward bottom
-          color += atmosColor * atmosphere * (0.15 + bottomGlow * 0.2);
+          // Atmosphere - constant, powerful, voluminous
+          color += atmosColor * atmosphere * (0.2 + bottomGlow * 0.25);
 
-          // Outer glow - increases toward bottom
-          color += outerColor * outerGlow * (0.3 + bottomGlow * 0.3);
+          // Outer glow - constant and strong
+          color += outerColor * outerGlow * (0.4 + bottomGlow * 0.3);
 
-          // Inner glow with energy flow
-          color += innerColor * innerGlow * 0.5 * energyFlow;
+          // Inner glow - subtle shimmer only
+          color += innerColor * innerGlow * 0.6 * subtleFlow;
 
-          // Core - sharper at top, blends into glow at bottom
-          color += coreColor * core * energyFlow * (0.6 + topSharpness * 0.4);
+          // Core - SOLID, minimal modulation
+          color += coreColor * core * (0.9 + 0.1 * subtleFlow);
+
+          // Sparks floating in the glow
+          color += coreColor * sparks;
 
           // Horizontal spread at bottom
           color += innerColor * horizSpread * 0.9;
           color += splashColor * groundGlow;
 
           // Subtle dust
-          color += innerColor * dust * 0.4;
+          color += innerColor * dust * 0.3;
 
           // Apply vertical intensity
           color *= vertIntensity;
 
           // === ALPHA ===
-          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.2 + atmosphere * 0.08 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.3;
+          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.3 + sparks * 0.8;
           alpha *= vertIntensity;
           alpha = clamp(alpha, 0.0, 1.0);
 
