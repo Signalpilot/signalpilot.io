@@ -81,49 +81,70 @@
           vec2 uv = vUv;
           float aspect = resolution.x / resolution.y;
 
-          // === OVERFLOW SHAPE: down left, across bottom, DOWN on right (overflow) ===
-          float leftX = 0.09;      // Left beam position
-          float rightX = 0.92;     // Right beam position
-          float horizY = 0.35;     // Horizontal beam Y position (where left turns right)
+          // === SERPENTINE PATTERN down the entire site ===
+          float leftX = 0.08;
+          float rightX = 0.92;
           float beamThickness = 0.012;
 
-          // Distance to left vertical beam (from top down to horizY)
-          float distLeft = abs(uv.x - leftX) * aspect;
+          // Horizontal turn points (from top to bottom)
+          float h1 = 0.75;  // First turn (left to right)
+          float h2 = 0.50;  // Second turn (right to left)
+          float h3 = 0.25;  // Third turn (left to right)
 
-          // Distance to horizontal beam (from leftX to rightX at horizY)
-          float distHoriz = abs(uv.y - horizY);
-
-          // Distance to right vertical beam (from horizY going DOWN to bottom)
-          float distRight = abs(uv.x - rightX) * aspect;
-
-          // Calculate which segment each pixel is closest to
-          float dLeft = (uv.y >= horizY) ? distLeft : 100.0;  // Left beam: from top to horizY
-          float dHoriz = (uv.x >= leftX && uv.x <= rightX) ? distHoriz : 100.0;  // Horizontal beam
-          float dRight = (uv.y <= horizY) ? distRight : 100.0; // Right beam: from horizY DOWN to bottom
-
-          float distToPath = min(dLeft, min(dHoriz, dRight));
-
-          // === PATH PARAMETER (0 to 1 along entire path) ===
-          // Path: top-left -> bottom-left corner -> right along horizontal -> down right side
-          float leftLen = 1.0 - horizY;  // Length of left segment
-          float horizLen = (rightX - leftX) * aspect;  // Length of horizontal
-          float rightLen = horizY;  // Length of right segment (goes down to 0)
-          float pathLength = leftLen + horizLen + rightLen;
+          // Calculate distance to each segment
+          float distToPath = 100.0;
           float pathPos = 0.0;
 
-          // Determine which segment and calculate path position
-          if (dLeft <= dHoriz && dLeft <= dRight) {
-            // On left beam - flows DOWN from top
-            pathPos = (1.0 - uv.y) / pathLength;
-          } else if (dHoriz <= dLeft && dHoriz <= dRight) {
-            // On horizontal beam - flows RIGHT
-            float leftPathLen = leftLen / pathLength;
-            pathPos = leftPathLen + ((uv.x - leftX) * aspect) / pathLength;
+          // Segment 1: Top-left vertical (1.0 down to h1)
+          float dSeg1 = (uv.y >= h1 && uv.y <= 1.0) ? abs(uv.x - leftX) * aspect : 100.0;
+
+          // Segment 2: First horizontal (left to right at h1)
+          float dSeg2 = (uv.x >= leftX && uv.x <= rightX && abs(uv.y - h1) < 0.08) ? abs(uv.y - h1) : 100.0;
+
+          // Segment 3: Right vertical (h1 down to h2)
+          float dSeg3 = (uv.y >= h2 && uv.y <= h1) ? abs(uv.x - rightX) * aspect : 100.0;
+
+          // Segment 4: Second horizontal (right to left at h2)
+          float dSeg4 = (uv.x >= leftX && uv.x <= rightX && abs(uv.y - h2) < 0.08) ? abs(uv.y - h2) : 100.0;
+
+          // Segment 5: Left vertical (h2 down to h3)
+          float dSeg5 = (uv.y >= h3 && uv.y <= h2) ? abs(uv.x - leftX) * aspect : 100.0;
+
+          // Segment 6: Third horizontal (left to right at h3)
+          float dSeg6 = (uv.x >= leftX && uv.x <= rightX && abs(uv.y - h3) < 0.08) ? abs(uv.y - h3) : 100.0;
+
+          // Segment 7: Right vertical (h3 down to 0)
+          float dSeg7 = (uv.y >= 0.0 && uv.y <= h3) ? abs(uv.x - rightX) * aspect : 100.0;
+
+          // Find minimum distance
+          distToPath = min(dSeg1, min(dSeg2, min(dSeg3, min(dSeg4, min(dSeg5, min(dSeg6, dSeg7))))));
+
+          // === PATH POSITION for flowing energy ===
+          float horizLen = (rightX - leftX) * aspect;
+          float seg1Len = 1.0 - h1;
+          float seg2Len = horizLen;
+          float seg3Len = h1 - h2;
+          float seg4Len = horizLen;
+          float seg5Len = h2 - h3;
+          float seg6Len = horizLen;
+          float seg7Len = h3;
+          float totalLen = seg1Len + seg2Len + seg3Len + seg4Len + seg5Len + seg6Len + seg7Len;
+
+          // Calculate path position based on which segment
+          if (dSeg1 <= distToPath + 0.001) {
+            pathPos = (1.0 - uv.y) / totalLen;
+          } else if (dSeg2 <= distToPath + 0.001) {
+            pathPos = (seg1Len + (uv.x - leftX) * aspect) / totalLen;
+          } else if (dSeg3 <= distToPath + 0.001) {
+            pathPos = (seg1Len + seg2Len + (h1 - uv.y)) / totalLen;
+          } else if (dSeg4 <= distToPath + 0.001) {
+            pathPos = (seg1Len + seg2Len + seg3Len + (rightX - uv.x) * aspect) / totalLen;
+          } else if (dSeg5 <= distToPath + 0.001) {
+            pathPos = (seg1Len + seg2Len + seg3Len + seg4Len + (h2 - uv.y)) / totalLen;
+          } else if (dSeg6 <= distToPath + 0.001) {
+            pathPos = (seg1Len + seg2Len + seg3Len + seg4Len + seg5Len + (uv.x - leftX) * aspect) / totalLen;
           } else {
-            // On right beam - flows DOWN (overflow)
-            float leftPathLen = leftLen / pathLength;
-            float horizPathLen = horizLen / pathLength;
-            pathPos = leftPathLen + horizPathLen + (horizY - uv.y) / pathLength;
+            pathPos = (seg1Len + seg2Len + seg3Len + seg4Len + seg5Len + seg6Len + (h3 - uv.y)) / totalLen;
           }
 
           // === BEAM CORE AND GLOW ===
