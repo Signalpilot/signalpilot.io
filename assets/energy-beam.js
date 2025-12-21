@@ -155,23 +155,57 @@
           float beamWidth = 0.008 + gradualWiden + bottomSpread * bottomSpread * 0.15;
           float normalizedDist = distFromBeam / beamWidth;
 
-          // === ULTRA-SMOOTH CORE ===
-          float core = exp(-normalizedDist * normalizedDist * 8.0);
+          // === ENERGY TEXTURE - breaks up smooth spotlight look ===
+          // High-frequency noise for plasma/electrical effect
+          float energyNoise1 = noise(vec2(uv.x * 80.0, uv.y * 40.0 - time * 8.0));
+          float energyNoise2 = noise(vec2(uv.x * 120.0 + time * 2.0, uv.y * 60.0 - time * 12.0));
+          float energyNoise3 = noise(vec2(uv.x * 200.0, uv.y * 100.0 - time * 15.0));
 
-          // === SMOOTH INNER GLOW ===
+          // Combine for plasma-like texture (subtle, keeps dark colors)
+          float plasmaTexture = energyNoise1 * 0.5 + energyNoise2 * 0.3 + energyNoise3 * 0.2;
+          plasmaTexture = plasmaTexture * 0.3 + 0.7; // Range 0.7-1.0 for subtle variation
+
+          // Flickering edge effect - chaotic boundary
+          float edgeFlicker = noise(vec2(distFromBeam * 300.0, uv.y * 50.0 - time * 10.0));
+          edgeFlicker = pow(edgeFlicker, 2.0) * 0.25;
+
+          // === TEXTURED CORE - not smooth ===
+          float coreBase = exp(-normalizedDist * normalizedDist * 8.0);
+          float core = coreBase * plasmaTexture;
+
+          // Add electrical flickers to core edges (subtle)
+          float coreEdge = smoothstep(0.3, 0.7, coreBase) * (1.0 - coreBase);
+          core += coreEdge * edgeFlicker * 1.5;
+
+          // === INNER GLOW with energy ripples ===
           float innerWidth = beamWidth * 3.0;
           float innerDist = distFromBeam / innerWidth;
-          float innerGlow = exp(-innerDist * innerDist * 2.0);
+          float innerBase = exp(-innerDist * innerDist * 2.0);
 
-          // === WIDE OUTER GLOW ===
+          // Add rippling energy waves (subtle)
+          float ripple = sin(distFromBeam * 150.0 - time * 6.0) * 0.5 + 0.5;
+          ripple *= sin(uv.y * 30.0 - time * 4.0) * 0.5 + 0.5;
+          float innerGlow = innerBase * (0.85 + ripple * 0.15);
+
+          // === OUTER GLOW with crackling edges ===
           float outerWidth = beamWidth * 8.0;
           float outerDist = distFromBeam / outerWidth;
-          float outerGlow = exp(-outerDist * outerDist * 0.8);
+          float outerBase = exp(-outerDist * outerDist * 0.8);
 
-          // === ATMOSPHERIC SPREAD ===
+          // Crackling effect at outer boundary (subtle)
+          float crackle = noise(vec2(distFromBeam * 100.0 + time * 3.0, uv.y * 80.0 - time * 5.0));
+          crackle = pow(crackle, 3.0);
+          float outerGlow = outerBase + crackle * outerBase * 0.25;
+
+          // === ATMOSPHERIC SPREAD with energy tendrils ===
           float atmosWidth = beamWidth * 20.0;
           float atmosDist = distFromBeam / atmosWidth;
-          float atmosphere = exp(-atmosDist * atmosDist * 0.3);
+          float atmosBase = exp(-atmosDist * atmosDist * 0.3);
+
+          // Tendril-like extensions (subtle)
+          float tendril = noise(vec2(uv.x * 30.0, uv.y * 20.0 - time * 2.0));
+          tendril = smoothstep(0.6, 0.9, tendril);
+          float atmosphere = atmosBase + tendril * atmosBase * 0.2;
 
           // === CONSTANT POWER FLOW - no breathing, solid beam ===
           // Very subtle variation only - beam stays constant
