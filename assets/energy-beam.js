@@ -121,32 +121,47 @@
           // Brighter at top, gradual fade
           float vertIntensity = 0.6 + 0.4 * uv.y;
 
-          // === HORIZONTAL SPREAD AT BOTTOM - continuous rightward flow ===
+          // === HORIZONTAL SPREAD AT BOTTOM - visible energy bands flowing RIGHT ===
           float spreadY = smoothstep(0.35, 0.0, uv.y);
 
           // Distance to the right of beam
           float distRight = max(0.0, (uv.x - beamX)) * aspect;
 
-          // Smooth curved base shape (contained, not too wide)
-          float maxSpread = 0.5;
-          float baseShape = exp(-distRight * distRight / (maxSpread * maxSpread * spreadY + 0.01));
+          // Base ambient glow (always visible, contained)
+          float maxSpread = 0.55;
+          float baseGlow = exp(-distRight * 3.0) * spreadY * 0.4;
 
-          // Continuous flowing energy waves (like a river flowing right)
-          // Multiple overlapping waves for smooth continuous flow
-          float wave1 = sin(distRight * 8.0 - time * 2.0) * 0.5 + 0.5;
-          float wave2 = sin(distRight * 12.0 - time * 3.0) * 0.3 + 0.7;
-          float wave3 = sin(distRight * 5.0 - time * 1.5) * 0.4 + 0.6;
-          float flowingEnergy = wave1 * wave2 * wave3;
+          // === DISTINCT ENERGY BANDS traveling right ===
+          // Create sharp bright bands that visibly move
+          float bandSpeed = 1.2;
+          float bandSpacing = 0.15;
 
-          // Combine base shape with flowing energy
-          float horizSpread = baseShape * spreadY * (0.6 + 0.4 * flowingEnergy);
+          // Multiple energy bands at different phases
+          float band1Pos = mod(time * bandSpeed, 1.5);
+          float band2Pos = mod(time * bandSpeed + 0.5, 1.5);
+          float band3Pos = mod(time * bandSpeed + 1.0, 1.5);
+
+          // Each band is a bright streak traveling right
+          float band1 = exp(-pow((distRight - band1Pos) * 8.0, 2.0)) * smoothstep(0.0, 0.05, distRight);
+          float band2 = exp(-pow((distRight - band2Pos) * 8.0, 2.0)) * smoothstep(0.0, 0.05, distRight);
+          float band3 = exp(-pow((distRight - band3Pos) * 8.0, 2.0)) * smoothstep(0.0, 0.05, distRight);
+
+          // Fade bands as they travel further
+          band1 *= exp(-band1Pos * 1.5);
+          band2 *= exp(-band2Pos * 1.5);
+          band3 *= exp(-band3Pos * 1.5);
+
+          float energyBands = (band1 + band2 + band3) * spreadY;
+
+          // Combine base glow with traveling bands
+          float horizSpread = baseGlow + energyBands * 0.8;
 
           // Small left glow
           float distLeft = max(0.0, (beamX - uv.x)) * aspect;
-          horizSpread += exp(-distLeft * 12.0) * spreadY * 0.25;
+          horizSpread += exp(-distLeft * 12.0) * spreadY * 0.2;
 
-          // === GROUND GLOW - flows with the energy ===
-          float groundGlow = exp(-uv.y * 7.0) * baseShape * spreadY * (0.5 + 0.3 * flowingEnergy);
+          // === GROUND GLOW ===
+          float groundGlow = exp(-uv.y * 7.0) * (baseGlow + energyBands * 0.5);
 
           // === COLORS - Smooth blue gradient ===
           vec3 coreColor = vec3(0.85, 0.92, 1.0);     // Bright white-blue core
