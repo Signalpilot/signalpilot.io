@@ -65,6 +65,34 @@
           return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
         }
 
+        // Mysterious fog/smoke - layered drifting clouds
+        float fog(vec2 uv, float t, float beamDist) {
+          float fogVal = 0.0;
+
+          // Multiple layers of drifting fog
+          for (float i = 0.0; i < 4.0; i++) {
+            float scale = 2.0 + i * 1.5;
+            vec2 p = uv * scale;
+
+            // Slow drift movement
+            p.x += t * (0.02 + i * 0.01);
+            p.y += t * (0.015 + i * 0.008) + sin(t * 0.3 + i) * 0.1;
+
+            // Layered noise
+            float n = noise(p);
+            n += noise(p * 2.0 + t * 0.05) * 0.5;
+            n += noise(p * 4.0 - t * 0.03) * 0.25;
+            n /= 1.75;
+
+            // Fade based on distance from beam - fog concentrated near beam
+            float fade = exp(-beamDist * (3.0 + i * 0.5));
+
+            fogVal += n * fade * (0.15 - i * 0.02);
+          }
+
+          return fogVal;
+        }
+
         // Ultra-fine dust - subtle specks, no chunky squares
         float fineDust(vec2 uv, float t, float beamDist) {
           float dust = 0.0;
@@ -137,6 +165,9 @@
 
           // === ULTRA-FINE DUST - subtle tiny specks only ===
           float dust = fineDust(uv, time, distFromBeam);
+
+          // === MYSTERIOUS FOG/SMOKE ===
+          float mysteriousFog = fog(uv, time, distFromBeam);
 
           // === CONTINUOUS ENERGY SOURCE at top - smooth flowing stream ===
           float topZone = smoothstep(0.6, 1.0, uv.y); // Top 40%
@@ -227,6 +258,10 @@
           // Fine dust particles floating in the glow
           color += coreColor * dust;
 
+          // Mysterious fog/smoke - subtle violet tint
+          vec3 fogColor = vec3(0.15, 0.1, 0.35); // Dark violet fog
+          color += fogColor * mysteriousFog;
+
           // Horizontal spread at bottom - purple tinted
           vec3 spreadColor = mix(innerColor, splashColor, 0.4);
           color += spreadColor * horizSpread * 0.9;
@@ -239,7 +274,7 @@
           color *= vertIntensity;
 
           // === ALPHA ===
-          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.6 + fallingParticles * 0.8;
+          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.6 + fallingParticles * 0.8 + mysteriousFog * 0.4;
           alpha *= vertIntensity;
           alpha = clamp(alpha, 0.0, 1.0);
 
