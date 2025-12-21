@@ -3337,9 +3337,8 @@
     transform: translateZ(0);
   "
 >
-  <source src="assets/videos/starfield-bg.mp4?v=7" type="video/mp4">
+  <source src="assets/videos/starfield-bg.mp4?v=8" type="video/mp4">
 </video>
-<!-- Second video only on desktop for cross-fade (hidden on mobile via CSS) -->
 <video
   id="starfield-bg-2"
   autoplay
@@ -3363,36 +3362,20 @@
     transform: translateZ(0);
   "
 >
-  <source src="assets/videos/starfield-bg.mp4?v=7" type="video/mp4">
+  <source src="assets/videos/starfield-bg.mp4?v=8" type="video/mp4">
 </video>
-<style>
-  /* Mobile: single video only, no cross-fade needed */
-  @media (max-width: 768px) {
-    #starfield-bg-2 { display: none !important; }
-    #starfield-bg-1 { opacity: 0.5 !important; transition: none !important; }
-  }
-</style>
 <script>
-// Performance-optimized starfield with cross-fade (desktop only)
+// Performance-optimized starfield cross-fade
 (function() {
   const v1 = document.getElementById('starfield-bg-1');
   const v2 = document.getElementById('starfield-bg-2');
-  const isMobile = window.innerWidth <= 768;
 
-  // Skip cross-fade logic on mobile
-  if (isMobile) {
-    v2.pause();
-    v2.removeAttribute('src');
-    v2.load(); // Release memory
-    return;
-  }
-
-  // Desktop: offset video 2 and setup cross-fade
+  // Offset video 2 by half duration
   v2.addEventListener('loadedmetadata', function() {
     v2.currentTime = v2.duration / 2;
   });
 
-  // Throttled cross-fade (runs every 500ms, not every frame)
+  // Throttled cross-fade (checks every 500ms, not every frame)
   let lastCheck = 0;
   function setupCrossfade(video) {
     video.addEventListener('timeupdate', function() {
@@ -3412,7 +3395,7 @@
   setupCrossfade(v1);
   setupCrossfade(v2);
 
-  // Pause when tab hidden (save battery)
+  // Pause when tab hidden (save CPU/GPU)
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
       v1.pause();
