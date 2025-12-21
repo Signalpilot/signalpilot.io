@@ -81,8 +81,8 @@
           vec2 uv = vUv;
           float aspect = resolution.x / resolution.y;
 
-          // Center the beam
-          float beamX = 0.5;
+          // Position beam on the left side (near logo)
+          float beamX = 0.12;
           float distFromBeam = abs(uv.x - beamX) * aspect;
 
           // === BEAM WIDENING AT BOTTOM ===
