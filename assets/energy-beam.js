@@ -249,7 +249,7 @@
           // Brighter at top, gradual fade
           float vertIntensity = 0.6 + 0.4 * uv.y;
 
-          // === HORIZONTAL SPREAD - curves RIGHT with flowing energy ===
+          // === HORIZONTAL SPREAD - energy CHANNELS RIGHT at bottom ===
           float spreadY = smoothstep(0.25, 0.0, uv.y); // Spread zone at bottom
 
           // Distance to the right of beam
@@ -262,22 +262,42 @@
           // Base curved glow
           float curveGlow = exp(-curvedRight * curvedRight * 0.8) * spreadY;
 
+          // === VISIBLE RIGHTWARD ENERGY FLOW ===
+          // Energy streams channeling to the right
+          float rightFlow1 = sin((distRight * 15.0 - time * 5.0) + uv.y * 10.0) * 0.5 + 0.5;
+          float rightFlow2 = sin((distRight * 22.0 - time * 7.0) + uv.y * 8.0) * 0.5 + 0.5;
+          float rightFlow3 = sin((distRight * 30.0 - time * 9.0) + uv.y * 6.0) * 0.5 + 0.5;
+
+          // Combine for visible streaming effect
+          float streamingRight = (rightFlow1 * 0.4 + rightFlow2 * 0.35 + rightFlow3 * 0.25);
+          streamingRight = 0.6 + streamingRight * 0.4; // Range 0.6-1.0
+
+          // Energy pulses traveling right (more visible bursts)
+          float pulse1 = smoothstep(0.4, 0.6, sin(distRight * 8.0 - time * 4.0));
+          float pulse2 = smoothstep(0.4, 0.6, sin(distRight * 12.0 - time * 5.5 + 1.0));
+          float pulseRight = (pulse1 + pulse2) * 0.3;
+
+          // Plasma texture in horizontal spread
+          float horizPlasma = noise(vec2(distRight * 20.0 - time * 4.0, uv.y * 30.0));
+          horizPlasma = horizPlasma * 0.3 + 0.7;
+
           // === ENERGY FLOW at transition point (where beam widens) ===
-          // Visible waves flowing outward at the spread zone
-          float transitionZone = smoothstep(0.35, 0.15, uv.y) * smoothstep(0.0, 0.1, uv.y); // Sweet spot
+          float transitionZone = smoothstep(0.35, 0.15, uv.y) * smoothstep(0.0, 0.1, uv.y);
           float waveFlow1 = sin(distRight * 8.0 - time * 3.5) * 0.5 + 0.5;
           float waveFlow2 = sin(distRight * 12.0 - time * 4.5) * 0.5 + 0.5;
-          float transitionFlow = 0.7 + (waveFlow1 + waveFlow2) * 0.15; // Visible flow
+          float transitionFlow = 0.7 + (waveFlow1 + waveFlow2) * 0.15;
 
-          // Base horizontal spread - constant
-          float horizFlow = 0.9;
+          // Combine all horizontal effects
+          float horizFlow = streamingRight * horizPlasma;
+          horizFlow += pulseRight * spreadY; // Add visible pulses
 
-          // Combine curve glow with energy flow at transition
+          // Combine curve glow with energy flow
           float horizSpread = curveGlow * horizFlow;
-          horizSpread += curveGlow * transitionFlow * transitionZone * 0.4; // Extra glow at transition
+          horizSpread += curveGlow * transitionFlow * transitionZone * 0.5;
 
-          // Edge glow at very bottom - constant
+          // Edge glow at very bottom with rightward flow
           float edgeGlow = exp(-uv.y * 15.0) * exp(-distRight * 1.0) * 0.5;
+          edgeGlow *= (0.8 + rightFlow1 * 0.2); // Add flow to edge
           horizSpread += edgeGlow * spreadY;
 
           // === GROUND GLOW - constant overflow ===
