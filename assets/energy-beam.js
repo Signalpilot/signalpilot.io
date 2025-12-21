@@ -1,5 +1,5 @@
 /**
- * ENERGY BEAM v13 - Ultra-smooth Huly-style beam
+ * ENERGY BEAM v14 - STRAIGHT VERTICAL ONLY
  * Smooth gradients, subtle animation, dramatic bottom splash
  */
 
