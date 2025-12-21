@@ -139,6 +139,37 @@
           // === ULTRA-FINE DUST - subtle tiny specks only ===
           float dust = fineDust(uv, time, distFromBeam);
 
+          // === FALLING ENERGY SOURCE at top - infinite energy pouring in ===
+          float topZone = smoothstep(0.7, 1.0, uv.y); // Only at top 30%
+          float fallingParticles = 0.0;
+
+          // Multiple streams of falling energy particles
+          for (float i = 0.0; i < 8.0; i++) {
+            // Particle X position - clustered around beam
+            float particleX = beamX + (hash(i * 17.0) - 0.5) * 0.08;
+            float xDist = abs((uv.x - particleX) * aspect);
+            float xFade = exp(-xDist * 30.0); // Sharp horizontal falloff
+
+            // Falling Y position - each particle falls at different speed/offset
+            float fallSpeed = 1.5 + hash(i * 31.0) * 1.0;
+            float fallOffset = hash(i * 47.0);
+            float particleY = fract(fallOffset - time * fallSpeed * 0.2);
+
+            // Distance to particle Y
+            float yDist = abs(uv.y - (0.7 + particleY * 0.3)); // Map to top zone
+            float yFade = exp(-yDist * 50.0); // Sharp vertical falloff
+
+            // Combine for point-like falling particle
+            float particle = xFade * yFade;
+
+            // Brightness variation
+            float brightness = 0.6 + 0.4 * hash(i * 89.0);
+
+            fallingParticles += particle * brightness;
+          }
+
+          fallingParticles *= topZone * 0.8; // Only visible in top zone
+
           // === VERTICAL INTENSITY ===
           // Brighter at top, gradual fade
           float vertIntensity = 0.6 + 0.4 * uv.y;
@@ -211,11 +242,14 @@
           color += spreadColor * horizSpread * 0.9;
           color += splashColor * groundGlow;
 
+          // Falling energy particles at top - infinite source effect
+          color += coreColor * fallingParticles;
+
           // Apply vertical intensity
           color *= vertIntensity;
 
           // === ALPHA ===
-          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.6;
+          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.6 + fallingParticles * 0.8;
           alpha *= vertIntensity;
           alpha = clamp(alpha, 0.0, 1.0);
 
