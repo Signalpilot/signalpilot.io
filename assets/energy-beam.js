@@ -65,32 +65,50 @@
           return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
         }
 
-        // Mysterious fog/smoke - layered drifting clouds
+        // Volumetric fog/smoke - realistic layered clouds
         float fog(vec2 uv, float t, float beamDist) {
           float fogVal = 0.0;
 
-          // Multiple layers of drifting fog
-          for (float i = 0.0; i < 4.0; i++) {
-            float scale = 2.0 + i * 1.5;
-            vec2 p = uv * scale;
+          // Large billowing clouds - main volume
+          vec2 p1 = uv * 1.2;
+          p1.x += t * 0.03;
+          p1.y += t * 0.02 + sin(t * 0.2) * 0.15;
+          float cloud1 = noise(p1) * 0.5 + noise(p1 * 2.0 + t * 0.02) * 0.3 + noise(p1 * 4.0) * 0.2;
+          cloud1 = smoothstep(0.3, 0.7, cloud1); // Sharper cloud edges
 
-            // Slow drift movement
-            p.x += t * (0.02 + i * 0.01);
-            p.y += t * (0.015 + i * 0.008) + sin(t * 0.3 + i) * 0.1;
+          // Medium wisps
+          vec2 p2 = uv * 2.5;
+          p2.x -= t * 0.04;
+          p2.y += t * 0.025 + cos(t * 0.15) * 0.1;
+          float cloud2 = noise(p2) * 0.5 + noise(p2 * 2.0 - t * 0.03) * 0.35 + noise(p2 * 3.5) * 0.15;
+          cloud2 = smoothstep(0.35, 0.65, cloud2);
 
-            // Layered noise
-            float n = noise(p);
-            n += noise(p * 2.0 + t * 0.05) * 0.5;
-            n += noise(p * 4.0 - t * 0.03) * 0.25;
-            n /= 1.75;
+          // Fine detail layer
+          vec2 p3 = uv * 4.0;
+          p3.x += t * 0.05 + sin(t * 0.3) * 0.08;
+          p3.y -= t * 0.03;
+          float cloud3 = noise(p3) * 0.6 + noise(p3 * 1.8 + t * 0.04) * 0.4;
+          cloud3 = smoothstep(0.4, 0.6, cloud3);
 
-            // Fade based on distance from beam - fog concentrated near beam
-            float fade = exp(-beamDist * (3.0 + i * 0.5));
+          // Swirling detail
+          vec2 p4 = uv * 6.0;
+          float angle = t * 0.1;
+          p4 = vec2(p4.x * cos(angle) - p4.y * sin(angle), p4.x * sin(angle) + p4.y * cos(angle));
+          float cloud4 = noise(p4) * 0.7 + noise(p4 * 1.5) * 0.3;
+          cloud4 = smoothstep(0.45, 0.55, cloud4);
 
-            fogVal += n * fade * (0.15 - i * 0.02);
-          }
+          // Combine layers with depth
+          fogVal = cloud1 * 0.5 + cloud2 * 0.3 + cloud3 * 0.15 + cloud4 * 0.05;
 
-          return fogVal;
+          // Spread fog more to the right of beam (where it widens)
+          float rightBias = smoothstep(0.0, 0.3, (uv.x - 0.09)); // Fog spreads right
+          float beamFade = exp(-beamDist * 2.0) + rightBias * 0.5;
+          beamFade = min(beamFade, 1.0);
+
+          // Vertical distribution - more fog at bottom/middle
+          float vertFog = smoothstep(0.0, 0.4, uv.y) * smoothstep(1.0, 0.5, uv.y);
+
+          return fogVal * beamFade * vertFog * 0.8;
         }
 
         // Ultra-fine dust - subtle specks, no chunky squares
@@ -258,9 +276,15 @@
           // Fine dust particles floating in the glow
           color += coreColor * dust;
 
-          // Mysterious fog/smoke - subtle violet tint
-          vec3 fogColor = vec3(0.15, 0.1, 0.35); // Dark violet fog
-          color += fogColor * mysteriousFog;
+          // Volumetric fog/smoke - layered colors for depth
+          vec3 fogColorDark = vec3(0.08, 0.06, 0.18);   // Deep dark base
+          vec3 fogColorMid = vec3(0.15, 0.12, 0.35);    // Mid violet
+          vec3 fogColorLight = vec3(0.25, 0.2, 0.5);    // Lighter highlights
+
+          // Mix fog colors based on intensity for depth
+          vec3 fogFinal = mix(fogColorDark, fogColorMid, mysteriousFog);
+          fogFinal = mix(fogFinal, fogColorLight, mysteriousFog * mysteriousFog);
+          color += fogFinal * mysteriousFog * 1.5;
 
           // Horizontal spread at bottom - purple tinted
           vec3 spreadColor = mix(innerColor, splashColor, 0.4);
@@ -274,7 +298,7 @@
           color *= vertIntensity;
 
           // === ALPHA ===
-          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.6 + fallingParticles * 0.8 + mysteriousFog * 0.4;
+          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.6 + fallingParticles * 0.8 + mysteriousFog * 0.7;
           alpha *= vertIntensity;
           alpha = clamp(alpha, 0.0, 1.0);
 
