@@ -1,6 +1,6 @@
 /**
- * ENERGY BEAM v12 - Huly-style dramatic vertical beam
- * Single beam from sky with atmospheric glow
+ * ENERGY BEAM v13 - Ultra-smooth Huly-style beam
+ * Smooth gradients, subtle animation, dramatic bottom splash
  */
 
 (function() {
@@ -49,7 +49,7 @@
         uniform vec2 resolution;
         varying vec2 vUv;
 
-        // Noise function for atmospheric effect
+        // Smooth noise for subtle dust particles
         float hash(vec2 p) {
           return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
         }
@@ -57,7 +57,7 @@
         float noise(vec2 p) {
           vec2 i = floor(p);
           vec2 f = fract(p);
-          f = f * f * (3.0 - 2.0 * f);
+          f = f * f * f * (f * (f * 6.0 - 15.0) + 10.0); // Smoother interpolation
           float a = hash(i);
           float b = hash(i + vec2(1.0, 0.0));
           float c = hash(i + vec2(0.0, 1.0));
@@ -65,96 +65,97 @@
           return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
         }
 
-        float fbm(vec2 p) {
-          float v = 0.0;
-          float a = 0.5;
-          for (int i = 0; i < 4; i++) {
-            v += a * noise(p);
-            p *= 2.0;
-            a *= 0.5;
+        // Subtle dust particles
+        float particles(vec2 uv, float t) {
+          float p = 0.0;
+          for (float i = 0.0; i < 3.0; i++) {
+            vec2 pos = uv * (8.0 + i * 4.0);
+            pos.y -= t * (0.1 + i * 0.05);
+            float n = noise(pos);
+            p += smoothstep(0.7, 0.9, n) * 0.15;
           }
-          return v;
+          return p;
         }
 
         void main() {
           vec2 uv = vUv;
           float aspect = resolution.x / resolution.y;
 
-          // Center the beam horizontally
+          // Center the beam
           float beamX = 0.5;
           float distFromBeam = abs(uv.x - beamX) * aspect;
 
-          // === CORE BEAM - very thin, bright ===
-          float core = exp(-distFromBeam * 80.0);
+          // === BEAM WIDENING AT BOTTOM ===
+          // Beam gets wider as it goes down, creating splash effect
+          float beamWidth = 0.008 + (1.0 - uv.y) * (1.0 - uv.y) * 0.15;
+          float normalizedDist = distFromBeam / beamWidth;
 
-          // === INNER GLOW ===
-          float innerGlow = exp(-distFromBeam * 20.0);
+          // === ULTRA-SMOOTH CORE ===
+          float core = exp(-normalizedDist * normalizedDist * 8.0);
 
-          // === OUTER GLOW - wide atmospheric ===
-          float outerGlow = exp(-distFromBeam * 5.0);
+          // === SMOOTH INNER GLOW ===
+          float innerWidth = beamWidth * 3.0;
+          float innerDist = distFromBeam / innerWidth;
+          float innerGlow = exp(-innerDist * innerDist * 2.0);
 
-          // === ATMOSPHERIC GLOW - very wide ===
-          float atmosphere = exp(-distFromBeam * 1.5);
+          // === WIDE OUTER GLOW ===
+          float outerWidth = beamWidth * 8.0;
+          float outerDist = distFromBeam / outerWidth;
+          float outerGlow = exp(-outerDist * outerDist * 0.8);
 
-          // === ENERGY FLOW - pulses moving down ===
-          float flow1 = sin(uv.y * 20.0 - time * 4.0) * 0.5 + 0.5;
-          float flow2 = sin(uv.y * 35.0 - time * 6.0) * 0.3 + 0.7;
-          float flow = flow1 * flow2;
+          // === ATMOSPHERIC SPREAD ===
+          float atmosWidth = beamWidth * 20.0;
+          float atmosDist = distFromBeam / atmosWidth;
+          float atmosphere = exp(-atmosDist * atmosDist * 0.3);
 
-          // === FLICKERING ===
-          float flicker = 0.9 + 0.1 * sin(time * 15.0 + uv.y * 10.0);
+          // === VERY SUBTLE ENERGY PULSE ===
+          // Much slower and smoother than before
+          float pulse = 0.95 + 0.05 * sin(uv.y * 8.0 - time * 1.5);
 
-          // === ATMOSPHERIC NOISE ===
-          vec2 noiseCoord = vec2(uv.x * 3.0, uv.y * 2.0 - time * 0.3);
-          float atmosphereNoise = fbm(noiseCoord * 4.0);
-          float cloudEffect = atmosphereNoise * atmosphere * 0.4;
+          // === SUBTLE DUST PARTICLES ===
+          float dust = particles(uv, time) * innerGlow;
 
-          // === VERTICAL FADE ===
-          // Beam comes from top, fades slightly at bottom
-          float vertFade = smoothstep(0.0, 0.2, uv.y) * (0.7 + 0.3 * uv.y);
+          // === VERTICAL INTENSITY ===
+          // Brighter at top, gradual fade
+          float vertIntensity = 0.6 + 0.4 * uv.y;
 
-          // === IMPACT GLOW at bottom ===
-          float impactY = 0.15;
-          float impactDist = length(vec2(distFromBeam * 0.5, (uv.y - impactY) * 2.0));
-          float impact = exp(-impactDist * 8.0) * smoothstep(0.3, 0.0, uv.y);
+          // === BOTTOM SPLASH/IMPACT ===
+          float splashY = 0.1;
+          float splashDist = length(vec2(distFromBeam * 0.3, (uv.y - splashY)));
+          float splash = exp(-splashDist * splashDist * 15.0) * smoothstep(0.3, 0.0, uv.y);
 
-          // === SPREAD at bottom ===
-          float spreadWidth = (1.0 - uv.y) * 0.3;
-          float spread = exp(-distFromBeam / max(spreadWidth, 0.01) * 3.0) * smoothstep(0.25, 0.0, uv.y);
+          // === COLORS - Smooth blue gradient ===
+          vec3 coreColor = vec3(0.85, 0.92, 1.0);     // Bright white-blue core
+          vec3 innerColor = vec3(0.4, 0.6, 1.0);      // Soft blue
+          vec3 outerColor = vec3(0.2, 0.4, 0.95);     // Medium blue
+          vec3 atmosColor = vec3(0.08, 0.2, 0.7);     // Deep blue atmosphere
+          vec3 splashColor = vec3(0.5, 0.7, 1.0);     // Bright splash
 
-          // === COMBINE LAYERS ===
-          // Core: bright white-blue
-          vec3 coreColor = vec3(0.7, 0.85, 1.0);
-          // Inner: blue
-          vec3 innerColor = vec3(0.3, 0.5, 1.0);
-          // Outer: deeper blue
-          vec3 outerColor = vec3(0.1, 0.3, 0.9);
-          // Atmosphere: very deep blue
-          vec3 atmosColor = vec3(0.05, 0.15, 0.6);
-
+          // === COMBINE WITH SMOOTH BLENDING ===
           vec3 color = vec3(0.0);
 
-          // Add atmosphere
-          color += atmosColor * atmosphere * 0.3;
-          color += atmosColor * cloudEffect;
+          // Layer from back to front
+          color += atmosColor * atmosphere * 0.25;
+          color += outerColor * outerGlow * 0.4;
+          color += innerColor * innerGlow * 0.6 * pulse;
+          color += coreColor * core * pulse;
 
-          // Add glows
-          color += outerColor * outerGlow * 0.5 * flow;
-          color += innerColor * innerGlow * 0.7 * flow * flicker;
-          color += coreColor * core * flow * flicker;
+          // Add splash
+          color += splashColor * splash * 1.2;
 
-          // Add impact and spread
-          color += innerColor * impact * 1.5;
-          color += outerColor * spread * 0.8;
+          // Add subtle dust
+          color += innerColor * dust * 0.5;
 
-          // Apply vertical fade
-          color *= vertFade;
+          // Apply vertical intensity
+          color *= vertIntensity;
 
-          // Calculate alpha
-          float alpha = (core * 0.9 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + cloudEffect + impact + spread * 0.5) * vertFade;
-
-          // Clamp and output
+          // === ALPHA ===
+          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.2 + atmosphere * 0.08 + splash * 0.6 + dust * 0.3;
+          alpha *= vertIntensity;
           alpha = clamp(alpha, 0.0, 1.0);
+
+          // Smooth alpha falloff at edges
+          alpha *= smoothstep(0.0, 0.05, uv.y);
 
           gl_FragColor = vec4(color, alpha);
         }
