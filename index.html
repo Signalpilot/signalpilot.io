@@ -1118,17 +1118,6 @@
       50%{transform:translateX(-50%) scale(1.05);box-shadow:0 6px 24px rgba(249,162,60,.7)}
     }
 
-    @keyframes floatOrb1{
-      0%,100%{transform:translate(0,0) scale(1)}
-      33%{transform:translate(30px,-30px) scale(1.1)}
-      66%{transform:translate(-20px,20px) scale(0.9)}
-    }
-
-    @keyframes floatOrb2{
-      0%,100%{transform:translate(0,0) scale(1)}
-      50%{transform:translate(-40px,-20px) scale(1.15)}
-    }
-
     @keyframes blink{
       0%,49%{opacity:1}
       50%,100%{opacity:0}
@@ -1272,8 +1261,6 @@
 
     /* Tablet optimizations */
     @media (max-width:1024px){
-      /* Reduce parallax intensity on tablets */
-      #parallax-orb-1,#parallax-orb-2{opacity:0.7}
     }
 
     @media (max-width:768px){
@@ -1309,18 +1296,11 @@
       /* Optimize button press for touch */
       .btn:active{transform:translateY(2px) scale(0.99)}
 
-      /* Disable orb animations on mobile for battery */
-      #parallax-orb-1,#parallax-orb-2{animation:none !important}
-
       /* Ensure typing text doesn't overflow */
       .hero p{word-wrap:break-word;overflow-wrap:break-word}
 
       /* Reduce hero heading size on mobile */
       .headline.xl{font-size:2rem !important}
-
-      /* Better spacing for gradient orbs on mobile */
-      #parallax-orb-1{width:350px;height:350px;filter:blur(50px) !important}
-      #parallax-orb-2{width:300px;height:300px;filter:blur(40px) !important}
     }
 
     @media (max-width:480px){
@@ -1343,16 +1323,6 @@
       .success-check,.spinner{animation:none !important}
 
       .btn:active{transform:none !important}
-
-      #parallax-orb-1,#parallax-orb-2{animation:none !important}
-
-    }
-
-    /* Performance: Disable heavy effects on low-end devices */
-    @media (prefers-reduced-data: reduce){
-      /* Aurora, stars, and particles are all beautiful and lightweight - show them on mobile! */
-      /* Only hide truly heavy effects like parallax orbs */
-      #parallax-orb-1,#parallax-orb-2{display:none !important}
     }
 
     /* CAPABILITY-BASED DISPLAY: Hide effects on devices that can't handle them */
@@ -3314,7 +3284,7 @@
 
 <body>
 
-<!-- Starfield video background - simple single video, no cross-fade -->
+<!-- Starfield video background - dual videos offset by 2.5s for seamless loop -->
 <div id="starfield-container" style="
   position: fixed;
   top: 0;
@@ -3328,7 +3298,7 @@
   transform: translateZ(0);
 ">
   <video
-    id="starfield-bg"
+    id="starfield-bg-a"
     autoplay
     loop
     muted
@@ -3342,38 +3312,52 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.5;
-      transition: opacity 0.3s ease-out;
+      opacity: 0.35;
+    "
+  >
+    <source src="assets/videos/starfield-bg.mp4?v=10" type="video/mp4">
+  </video>
+  <video
+    id="starfield-bg-b"
+    autoplay
+    loop
+    muted
+    playsinline
+    disablepictureinpicture
+    preload="auto"
+    style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
     "
   >
     <source src="assets/videos/starfield-bg.mp4?v=10" type="video/mp4">
   </video>
 </div>
 <script>
-// Starfield with quick fade at loop point
+// Dual starfield - offset by half duration for seamless loop masking
 (function() {
-  const video = document.getElementById('starfield-bg');
-  let lastTime = 0;
+  const videoA = document.getElementById('starfield-bg-a');
+  const videoB = document.getElementById('starfield-bg-b');
+  const OFFSET = 2.5; // Half of 5-second video duration
 
-  // Detect loop restart (time jumps from end back to start)
-  video.addEventListener('timeupdate', function() {
-    const currentTime = video.currentTime;
-
-    // If time jumped backward significantly, the video looped
-    if (lastTime > 4 && currentTime < 1) {
-      // Quick fade out/in at loop point
-      video.style.opacity = '0';
-      setTimeout(() => { video.style.opacity = '0.5'; }, 50);
-    }
-    lastTime = currentTime;
+  // Start video B offset by 2.5 seconds when video A is ready
+  videoA.addEventListener('loadedmetadata', function() {
+    videoB.currentTime = OFFSET;
   });
 
-  // Pause when tab hidden
+  // Pause/play on visibility change
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
-      video.pause();
+      videoA.pause();
+      videoB.pause();
     } else {
-      video.play();
+      videoA.play();
+      videoB.play();
     }
   });
 })();
@@ -3478,9 +3462,9 @@
       <!-- EPIC Energy Beam v2 -->
       <div id="energy-beam-container" style="position:absolute;top:-70px;left:0;width:100%;height:calc(100% + 70px);pointer-events:none;z-index:0;overflow:visible;display:none"></div>
 
-      <!-- Energy Beam Videos - dual layer cross-fade for seamless loop -->
+      <!-- Energy Beam Video - single video, no cross-fade for performance -->
       <video
-        id="energy-beam-video-1"
+        id="energy-beam-video"
         autoplay
         loop
         muted
@@ -3498,10 +3482,7 @@
           object-fit: cover;
           object-position: left 30%;
           opacity: 0.6;
-          will-change: opacity;
           transform: translateZ(0) scaleX(-1);
-          -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
           -webkit-mask-image:
             radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
             linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
@@ -3510,89 +3491,13 @@
             radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
             linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
           mask-composite: intersect;
-          transition: opacity 1.2s ease-in-out;
         "
       >
-        <source src="assets/videos/signal-conduit-4k.mp4?v=5" type="video/mp4">
+        <source src="assets/videos/signal-conduit-4k.mp4?v=6" type="video/mp4">
       </video>
-      <video
-        id="energy-beam-video-2"
-        autoplay
-        loop
-        muted
-        playsinline
-        disablepictureinpicture
-        preload="auto"
-        style="
-          position: absolute;
-          top: -70px;
-          left: 0;
-          height: calc(100% + 140px);
-          width: auto;
-          pointer-events: none;
-          z-index: 0;
-          object-fit: cover;
-          object-position: left 30%;
-          opacity: 0.6;
-          will-change: opacity;
-          transform: translateZ(0) scaleX(-1);
-          -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-          -webkit-mask-image:
-            radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
-            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
-          -webkit-mask-composite: source-in;
-          mask-image:
-            radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
-            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
-          mask-composite: intersect;
-          transition: opacity 1.2s ease-in-out;
-        "
-      >
-        <source src="assets/videos/signal-conduit-4k.mp4?v=5" type="video/mp4">
-      </video>
-      <script>
-      // Energy beam cross-fade for seamless loop
-      (function() {
-        const b1 = document.getElementById('energy-beam-video-1');
-        const b2 = document.getElementById('energy-beam-video-2');
-
-        // Offset video 2 by half duration
-        b2.addEventListener('loadedmetadata', function() {
-          b2.currentTime = b2.duration / 2;
-        });
-
-        // Cross-fade each video independently (optimized - only changes when needed)
-        function setupBeamCrossfade(video) {
-          let lastCheck = 0;
-          let currentState = 'visible';
-
-          video.addEventListener('timeupdate', function() {
-            const now = Date.now();
-            if (now - lastCheck < 400) return;
-            lastCheck = now;
-
-            const timeLeft = video.duration - video.currentTime;
-            const t = video.currentTime;
-
-            if (timeLeft < 1.5 && currentState !== 'hidden') {
-              video.style.opacity = '0';
-              currentState = 'hidden';
-            } else if (t >= 1.0 && timeLeft >= 1.5 && currentState !== 'visible') {
-              video.style.opacity = '0.6';
-              currentState = 'visible';
-            }
-          });
-        }
-
-        setupBeamCrossfade(b1);
-        setupBeamCrossfade(b2);
-      })();
-      </script>
 
       <!-- Animated gradient orbs with parallax -->
-      <div id="parallax-orb-1" style="position:absolute;top:10%;left:10%;width:500px;height:500px;background:radial-gradient(circle,rgba(91,138,255,0.15) 0%,transparent 70%);pointer-events:none;filter:blur(60px);animation:floatOrb1 20s ease-in-out infinite;will-change:transform"></div>
-      <div id="parallax-orb-2" style="position:absolute;bottom:20%;right:15%;width:400px;height:400px;background:radial-gradient(circle,rgba(118,221,255,0.12) 0%,transparent 70%);pointer-events:none;filter:blur(50px);animation:floatOrb2 15s ease-in-out infinite;will-change:transform"></div>
+      <!-- Parallax orbs removed for performance -->
 
 
       <div class="container" style="position:relative;z-index:1">
@@ -8045,7 +7950,6 @@ if ('serviceWorker' in navigator) {
       initScrollAnimations();
       initStatsCounter();
       initLightbox();
-      initParallax();
       initTypingEffect();
       initScrollProgress();
     });
@@ -8053,7 +7957,6 @@ if ('serviceWorker' in navigator) {
     initScrollAnimations();
     initStatsCounter();
     initLightbox();
-    initParallax();
     initTypingEffect();
     initScrollProgress();
   }
@@ -8158,47 +8061,6 @@ if ('serviceWorker' in navigator) {
 
     // Start typing after a brief delay
     setTimeout(type, 1000);
-  }
-
-  // Parallax scroll effect for gradient orbs
-  function initParallax() {
-    const orb1 = document.getElementById('parallax-orb-1');
-    const orb2 = document.getElementById('parallax-orb-2');
-
-    if (!orb1 || !orb2) return;
-
-    // Disable parallax on mobile for performance
-    const isMobile = window.innerWidth <= 768;
-    if (isMobile) return;
-
-    let ticking = false;
-
-    function updateParallax() {
-      const scrolled = window.pageYOffset;
-
-      // Move orb1 at 0.3x speed downward
-      const orb1Offset = scrolled * 0.3;
-      orb1.style.transform = `translateY(${orb1Offset}px)`;
-
-      // Move orb2 at 0.5x speed downward (different speed for depth)
-      const orb2Offset = scrolled * 0.5;
-      orb2.style.transform = `translateY(${orb2Offset}px)`;
-
-      ticking = false;
-    }
-
-    function requestTick() {
-      if (!ticking) {
-        requestAnimationFrame(updateParallax);
-        ticking = true;
-      }
-    }
-
-    // Listen to scroll with requestAnimationFrame for performance
-    window.addEventListener('scroll', requestTick, { passive: true });
-
-    // Initial position
-    updateParallax();
   }
 
   // Lightbox for indicator images
