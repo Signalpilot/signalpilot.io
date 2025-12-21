@@ -165,51 +165,6 @@
     rightBeam.position.set(frameWidth / 2, 0, 0);
     frameGroup.add(rightBeam);
 
-    // === TOP CORNER GLOWS - where beams meet ===
-    const cornerMat = new THREE.ShaderMaterial({
-      uniforms: { time: timeUniform },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform float time;
-        varying vec2 vUv;
-        void main() {
-          float dist = length(vUv - 0.5) * 2.0;
-          float glow = exp(-dist * 2.5);
-          float pulse = 0.8 + 0.2 * sin(time * 3.0);
-          float flash = pow(sin(time * 5.0) * 0.5 + 0.5, 6.0) * 0.3;
-
-          vec3 color = vec3(0.6, 0.8, 1.0);
-          gl_FragColor = vec4(color, (glow * pulse + flash) * 0.7);
-        }
-      `,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-
-    // Top-left corner
-    const tlCorner = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.8, 0.8),
-      cornerMat
-    );
-    tlCorner.position.set(-frameWidth / 2, frameHeight / 2, 0.01);
-    frameGroup.add(tlCorner);
-
-    // Top-right corner
-    const trCorner = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.8, 0.8),
-      cornerMat.clone()
-    );
-    trCorner.material.uniforms.time = timeUniform;
-    trCorner.position.set(frameWidth / 2, frameHeight / 2, 0.01);
-    frameGroup.add(trCorner);
-
     // === EPIC PARTICLES - Flow from top down the sides ===
     const particleCount = 80;
     const particleGeo = new THREE.BufferGeometry();
