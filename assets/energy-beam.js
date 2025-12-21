@@ -81,131 +81,123 @@
           vec2 uv = vUv;
           float aspect = resolution.x / resolution.y;
 
-          // Position beam on the left side (before logo)
-          float beamX = 0.09;
-          float distFromBeam = abs(uv.x - beamX) * aspect;
+          // === SERPENTINE PATTERN down the entire site ===
+          float leftX = 0.08;
+          float rightX = 0.92;
+          float beamThickness = 0.012;
 
-          // === BEAM - gradually widens from top to bottom ===
-          // Thin at top, progressively wider, then spreads at bottom
-          float gradualWiden = (1.0 - uv.y) * 0.015; // Gradual widening
-          float bottomSpread = smoothstep(0.2, 0.0, uv.y); // Extra spread at bottom
-          float beamWidth = 0.008 + gradualWiden + bottomSpread * bottomSpread * 0.15;
-          float normalizedDist = distFromBeam / beamWidth;
+          // Horizontal turn points (from top to bottom)
+          float h1 = 0.75;  // First turn (left to right)
+          float h2 = 0.50;  // Second turn (right to left)
+          float h3 = 0.25;  // Third turn (left to right)
 
-          // === ULTRA-SMOOTH CORE ===
-          float core = exp(-normalizedDist * normalizedDist * 8.0);
+          // Calculate distance to each segment
+          float distToPath = 100.0;
+          float pathPos = 0.0;
 
-          // === SMOOTH INNER GLOW ===
-          float innerWidth = beamWidth * 3.0;
-          float innerDist = distFromBeam / innerWidth;
-          float innerGlow = exp(-innerDist * innerDist * 2.0);
+          // Segment 1: Top-left vertical (1.0 down to h1)
+          float dSeg1 = (uv.y >= h1 && uv.y <= 1.0) ? abs(uv.x - leftX) * aspect : 100.0;
 
-          // === WIDE OUTER GLOW ===
-          float outerWidth = beamWidth * 8.0;
-          float outerDist = distFromBeam / outerWidth;
-          float outerGlow = exp(-outerDist * outerDist * 0.8);
+          // Segment 2: First horizontal (left to right at h1)
+          float dSeg2 = (uv.x >= leftX && uv.x <= rightX && abs(uv.y - h1) < 0.08) ? abs(uv.y - h1) : 100.0;
 
-          // === ATMOSPHERIC SPREAD ===
-          float atmosWidth = beamWidth * 20.0;
-          float atmosDist = distFromBeam / atmosWidth;
-          float atmosphere = exp(-atmosDist * atmosDist * 0.3);
+          // Segment 3: Right vertical (h1 down to h2)
+          float dSeg3 = (uv.y >= h2 && uv.y <= h1) ? abs(uv.x - rightX) * aspect : 100.0;
 
-          // === ENERGY - subtle shimmer, not bands flying through ===
-          // Very subtle variation - beam stays SOLID and POWERFUL
-          float shimmer = 0.95 + 0.05 * sin(uv.y * 30.0 + time * 2.0);
-          float shimmer2 = 0.97 + 0.03 * sin(uv.y * 50.0 + time * 3.0);
-          float subtleFlow = shimmer * shimmer2;
+          // Segment 4: Second horizontal (right to left at h2)
+          float dSeg4 = (uv.x >= leftX && uv.x <= rightX && abs(uv.y - h2) < 0.08) ? abs(uv.y - h2) : 100.0;
 
-          // === SPARKS - floating particles in the glow ===
-          float sparks = 0.0;
-          for (float i = 0.0; i < 5.0; i++) {
-            vec2 sparkPos = uv * (15.0 + i * 8.0);
-            sparkPos.y += time * (0.3 + i * 0.15);
-            float spark = noise(sparkPos);
-            spark = smoothstep(0.75, 0.95, spark);
-            // Only show sparks near the beam
-            spark *= exp(-distFromBeam * 15.0);
-            sparks += spark * 0.12;
+          // Segment 5: Left vertical (h2 down to h3)
+          float dSeg5 = (uv.y >= h3 && uv.y <= h2) ? abs(uv.x - leftX) * aspect : 100.0;
+
+          // Segment 6: Third horizontal (left to right at h3)
+          float dSeg6 = (uv.x >= leftX && uv.x <= rightX && abs(uv.y - h3) < 0.08) ? abs(uv.y - h3) : 100.0;
+
+          // Segment 7: Right vertical (h3 down to 0)
+          float dSeg7 = (uv.y >= 0.0 && uv.y <= h3) ? abs(uv.x - rightX) * aspect : 100.0;
+
+          // Find minimum distance
+          distToPath = min(dSeg1, min(dSeg2, min(dSeg3, min(dSeg4, min(dSeg5, min(dSeg6, dSeg7))))));
+
+          // === PATH POSITION for flowing energy ===
+          float horizLen = (rightX - leftX) * aspect;
+          float seg1Len = 1.0 - h1;
+          float seg2Len = horizLen;
+          float seg3Len = h1 - h2;
+          float seg4Len = horizLen;
+          float seg5Len = h2 - h3;
+          float seg6Len = horizLen;
+          float seg7Len = h3;
+          float totalLen = seg1Len + seg2Len + seg3Len + seg4Len + seg5Len + seg6Len + seg7Len;
+
+          // Calculate path position based on which segment
+          if (dSeg1 <= distToPath + 0.001) {
+            pathPos = (1.0 - uv.y) / totalLen;
+          } else if (dSeg2 <= distToPath + 0.001) {
+            pathPos = (seg1Len + (uv.x - leftX) * aspect) / totalLen;
+          } else if (dSeg3 <= distToPath + 0.001) {
+            pathPos = (seg1Len + seg2Len + (h1 - uv.y)) / totalLen;
+          } else if (dSeg4 <= distToPath + 0.001) {
+            pathPos = (seg1Len + seg2Len + seg3Len + (rightX - uv.x) * aspect) / totalLen;
+          } else if (dSeg5 <= distToPath + 0.001) {
+            pathPos = (seg1Len + seg2Len + seg3Len + seg4Len + (h2 - uv.y)) / totalLen;
+          } else if (dSeg6 <= distToPath + 0.001) {
+            pathPos = (seg1Len + seg2Len + seg3Len + seg4Len + seg5Len + (uv.x - leftX) * aspect) / totalLen;
+          } else {
+            pathPos = (seg1Len + seg2Len + seg3Len + seg4Len + seg5Len + seg6Len + (h3 - uv.y)) / totalLen;
           }
 
-          // === SUBTLE DUST PARTICLES ===
-          float dust = particles(uv, time) * innerGlow;
+          // === BEAM CORE AND GLOW ===
+          float normalizedDist = distToPath / beamThickness;
+          float core = exp(-normalizedDist * normalizedDist * 6.0);
 
-          // === VERTICAL INTENSITY ===
-          // Brighter at top, gradual fade
-          float vertIntensity = 0.6 + 0.4 * uv.y;
+          float innerGlow = exp(-distToPath * distToPath / (beamThickness * beamThickness * 9.0));
+          float outerGlow = exp(-distToPath * distToPath / (beamThickness * beamThickness * 50.0));
+          float atmosphere = exp(-distToPath * distToPath / (beamThickness * beamThickness * 200.0));
 
-          // === HORIZONTAL SPREAD - curves RIGHT only (beam is on left) ===
-          float spreadY = smoothstep(0.25, 0.0, uv.y); // Spread zone at bottom
+          // === FLOWING ENERGY along the path ===
+          float flowSpeed = 1.5;
+          float energyPos = fract(pathPos * 3.0 - time * flowSpeed); // 3 energy pulses
+          float energy1 = exp(-pow((energyPos - 0.5) * 4.0, 2.0));
+          float energyPos2 = fract(pathPos * 3.0 - time * flowSpeed + 0.33);
+          float energy2 = exp(-pow((energyPos2 - 0.5) * 4.0, 2.0));
+          float energyPos3 = fract(pathPos * 3.0 - time * flowSpeed + 0.66);
+          float energy3 = exp(-pow((energyPos3 - 0.5) * 4.0, 2.0));
+          float flowingEnergy = max(energy1, max(energy2, energy3));
 
-          // Distance to the right of beam
-          float distRight = max(0.0, (uv.x - beamX)) * aspect;
+          // Subtle shimmer
+          float shimmer = 0.92 + 0.08 * flowingEnergy;
 
-          // Curved spread - the lower, the further right it reaches
-          float curveReach = spreadY * spreadY * 0.6; // How far the curve extends
-          float curvedRight = distRight / (curveReach + 0.01);
+          // === SPARKS ===
+          float sparks = 0.0;
+          for (float i = 0.0; i < 4.0; i++) {
+            vec2 sparkPos = uv * (12.0 + i * 6.0);
+            sparkPos.y += time * (0.2 + i * 0.1);
+            float spark = noise(sparkPos);
+            spark = smoothstep(0.78, 0.95, spark);
+            spark *= exp(-distToPath * 20.0);
+            sparks += spark * 0.1;
+          }
 
-          // Smooth curved glow spreading right
-          float curveGlow = exp(-curvedRight * curvedRight * 0.8) * spreadY;
+          // === COLORS ===
+          vec3 coreColor = vec3(0.9, 0.95, 1.0);
+          vec3 innerColor = vec3(0.4, 0.6, 1.0);
+          vec3 outerColor = vec3(0.2, 0.4, 0.95);
+          vec3 atmosColor = vec3(0.1, 0.25, 0.7);
 
-          // Subtle continuous flow along spread (not bands)
-          float flowRight = 0.9 + 0.1 * sin(distRight * 4.0 - time * 1.5);
-
-          // Combine curved spread with flow
-          float horizSpread = curveGlow * flowRight;
-
-          // Edge glow at very bottom
-          float edgeGlow = exp(-uv.y * 15.0) * exp(-distRight * 1.0) * 0.5;
-          horizSpread += edgeGlow * flowRight * spreadY;
-
-          // === GROUND GLOW ===
-          float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.4 * flowRight;
-
-          // === COLORS - Smooth blue gradient ===
-          vec3 coreColor = vec3(0.85, 0.92, 1.0);     // Bright white-blue core
-          vec3 innerColor = vec3(0.4, 0.6, 1.0);      // Soft blue
-          vec3 outerColor = vec3(0.2, 0.4, 0.95);     // Medium blue
-          vec3 atmosColor = vec3(0.08, 0.2, 0.7);     // Deep blue atmosphere
-          vec3 splashColor = vec3(0.5, 0.7, 1.0);     // Bright splash
-
-          // === COMBINE - SOLID POWERFUL CONTINUOUS BEAM ===
-          float topSharpness = uv.y;
-          float bottomGlow = 1.0 - uv.y;
-
+          // === COMBINE ===
           vec3 color = vec3(0.0);
-
-          // Atmosphere - constant, powerful, voluminous
-          color += atmosColor * atmosphere * (0.2 + bottomGlow * 0.25);
-
-          // Outer glow - constant and strong
-          color += outerColor * outerGlow * (0.4 + bottomGlow * 0.3);
-
-          // Inner glow - subtle shimmer only
-          color += innerColor * innerGlow * 0.6 * subtleFlow;
-
-          // Core - SOLID, minimal modulation
-          color += coreColor * core * (0.9 + 0.1 * subtleFlow);
-
-          // Sparks floating in the glow
+          color += atmosColor * atmosphere * 0.3;
+          color += outerColor * outerGlow * 0.5;
+          color += innerColor * innerGlow * 0.6 * shimmer;
+          color += coreColor * core * shimmer;
           color += coreColor * sparks;
 
-          // Horizontal spread at bottom
-          color += innerColor * horizSpread * 0.9;
-          color += splashColor * groundGlow;
+          // Boost where energy is flowing
+          color += innerColor * core * flowingEnergy * 0.4;
 
-          // Subtle dust
-          color += innerColor * dust * 0.3;
-
-          // Apply vertical intensity
-          color *= vertIntensity;
-
-          // === ALPHA ===
-          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.3 + sparks * 0.8;
-          alpha *= vertIntensity;
+          float alpha = core * 0.9 + innerGlow * 0.5 + outerGlow * 0.3 + atmosphere * 0.15 + sparks * 0.7;
           alpha = clamp(alpha, 0.0, 1.0);
-
-          // Smooth alpha falloff at edges
-          alpha *= smoothstep(0.0, 0.05, uv.y);
 
           gl_FragColor = vec4(color, alpha);
         }
