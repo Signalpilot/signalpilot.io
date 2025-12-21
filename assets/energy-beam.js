@@ -82,7 +82,7 @@
           float aspect = resolution.x / resolution.y;
 
           // Position beam on the left side (before logo)
-          float beamX = 0.06;
+          float beamX = 0.09;
           float distFromBeam = abs(uv.x - beamX) * aspect;
 
           // === BEAM - gradually widens from top to bottom ===
