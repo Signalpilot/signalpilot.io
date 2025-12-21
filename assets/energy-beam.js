@@ -81,8 +81,8 @@
           vec2 uv = vUv;
           float aspect = resolution.x / resolution.y;
 
-          // Center the beam
-          float beamX = 0.5;
+          // Position beam on the left side (near logo)
+          float beamX = 0.12;
           float distFromBeam = abs(uv.x - beamX) * aspect;
 
           // === BEAM WIDENING AT BOTTOM ===
@@ -108,10 +108,11 @@
           float atmosDist = distFromBeam / atmosWidth;
           float atmosphere = exp(-atmosDist * atmosDist * 0.3);
 
-          // === ENERGY FLOW - visible downward motion ===
-          float flow1 = sin(uv.y * 15.0 - time * 3.0) * 0.5 + 0.5;
-          float flow2 = sin(uv.y * 25.0 - time * 4.5) * 0.3 + 0.7;
-          float energyFlow = mix(0.7, 1.0, flow1 * flow2);
+          // === ENERGY FLOW - flowing DOWN from top to bottom ===
+          // + time makes waves travel downward (decreasing Y)
+          float flow1 = sin(uv.y * 12.0 + time * 2.5) * 0.5 + 0.5;
+          float flow2 = sin(uv.y * 20.0 + time * 4.0) * 0.3 + 0.7;
+          float energyFlow = mix(0.75, 1.0, flow1 * flow2);
 
           // === SUBTLE DUST PARTICLES ===
           float dust = particles(uv, time) * innerGlow;
@@ -121,12 +122,14 @@
           float vertIntensity = 0.6 + 0.4 * uv.y;
 
           // === HORIZONTAL SPREAD AT BOTTOM ===
-          // Wide horizontal fan-out like Huly
-          float spreadY = smoothstep(0.35, 0.0, uv.y); // Starts spreading from 35% up
-          float horizSpread = exp(-distFromBeam * distFromBeam / (0.5 * spreadY + 0.001)) * spreadY;
+          // Wide horizontal fan-out - energy spreads when it hits bottom
+          float spreadY = smoothstep(0.4, 0.0, uv.y); // Starts spreading from 40% up
+          float spreadPulse = 0.8 + 0.2 * sin(time * 2.0); // Subtle pulse in spread
+          float horizSpread = exp(-distFromBeam * distFromBeam / (0.6 * spreadY + 0.001)) * spreadY * spreadPulse;
 
-          // === GROUND GLOW - wide horizontal ===
-          float groundGlow = exp(-uv.y * 8.0) * exp(-distFromBeam * 0.5) * 0.6;
+          // === GROUND GLOW - wide horizontal swoosh ===
+          float groundPulse = 0.7 + 0.3 * sin(time * 1.5 + distFromBeam * 3.0); // Ripple outward
+          float groundGlow = exp(-uv.y * 6.0) * exp(-distFromBeam * 0.3) * 0.7 * groundPulse;
 
           // === COLORS - Smooth blue gradient ===
           vec3 coreColor = vec3(0.85, 0.92, 1.0);     // Bright white-blue core
