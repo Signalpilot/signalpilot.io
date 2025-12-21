@@ -121,30 +121,32 @@
           // Brighter at top, gradual fade
           float vertIntensity = 0.6 + 0.4 * uv.y;
 
-          // === HORIZONTAL SPREAD AT BOTTOM - flows RIGHT ===
-          float spreadY = smoothstep(0.4, 0.0, uv.y); // Starts spreading from 40% up
+          // === HORIZONTAL SPREAD AT BOTTOM - continuous rightward flow ===
+          float spreadY = smoothstep(0.35, 0.0, uv.y);
 
-          // Distance to the RIGHT of beam (not symmetric)
+          // Distance to the right of beam
           float distRight = max(0.0, (uv.x - beamX)) * aspect;
+
+          // Smooth curved base shape (contained, not too wide)
+          float maxSpread = 0.5;
+          float baseShape = exp(-distRight * distRight / (maxSpread * maxSpread * spreadY + 0.01));
+
+          // Continuous flowing energy waves (like a river flowing right)
+          // Multiple overlapping waves for smooth continuous flow
+          float wave1 = sin(distRight * 8.0 - time * 2.0) * 0.5 + 0.5;
+          float wave2 = sin(distRight * 12.0 - time * 3.0) * 0.3 + 0.7;
+          float wave3 = sin(distRight * 5.0 - time * 1.5) * 0.4 + 0.6;
+          float flowingEnergy = wave1 * wave2 * wave3;
+
+          // Combine base shape with flowing energy
+          float horizSpread = baseShape * spreadY * (0.6 + 0.4 * flowingEnergy);
+
+          // Small left glow
           float distLeft = max(0.0, (beamX - uv.x)) * aspect;
+          horizSpread += exp(-distLeft * 12.0) * spreadY * 0.25;
 
-          // Animated expanding wave - grows wider over time
-          float waveSpeed = 0.8;
-          float wavePhase = mod(time * waveSpeed, 3.0); // Repeats every ~3.75 seconds
-          float expandingEdge = wavePhase * 0.8; // How far the wave has traveled
-
-          // Right-side spread (main direction)
-          float rightWave = smoothstep(expandingEdge + 0.1, expandingEdge - 0.05, distRight) *
-                           smoothstep(0.0, 0.02, distRight) * spreadY;
-
-          // Small left spread (less intense)
-          float leftWave = exp(-distLeft * 8.0) * spreadY * 0.4;
-
-          float horizSpread = rightWave + leftWave;
-
-          // === GROUND GLOW - expanding rightward ===
-          float groundWave = smoothstep(expandingEdge + 0.2, expandingEdge - 0.1, distRight);
-          float groundGlow = exp(-uv.y * 5.0) * groundWave * spreadY * 0.8;
+          // === GROUND GLOW - flows with the energy ===
+          float groundGlow = exp(-uv.y * 7.0) * baseShape * spreadY * (0.5 + 0.3 * flowingEnergy);
 
           // === COLORS - Smooth blue gradient ===
           vec3 coreColor = vec3(0.85, 0.92, 1.0);     // Bright white-blue core
