@@ -65,16 +65,33 @@
           return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
         }
 
-        // Subtle dust particles
-        float particles(vec2 uv, float t) {
-          float p = 0.0;
-          for (float i = 0.0; i < 3.0; i++) {
-            vec2 pos = uv * (8.0 + i * 4.0);
-            pos.y -= t * (0.1 + i * 0.05);
-            float n = noise(pos);
-            p += smoothstep(0.7, 0.9, n) * 0.15;
+        // Fine dust particles - like light through fog
+        float fineDust(vec2 uv, float t, float beamDist) {
+          float dust = 0.0;
+
+          // Multiple layers of fine particles at different scales
+          for (float i = 0.0; i < 8.0; i++) {
+            float scale = 80.0 + i * 40.0; // High frequency for tiny dots
+            float speed = 0.02 + i * 0.01;
+
+            vec2 pos = uv * scale;
+            pos.y += t * speed * (mod(i, 2.0) == 0.0 ? 1.0 : -1.0); // Alternate drift direction
+            pos.x += sin(t * 0.5 + i) * 0.3; // Gentle horizontal sway
+
+            // Sharp threshold for tiny dot particles
+            float h = hash(floor(pos));
+            float particle = smoothstep(0.97, 0.99, h); // Very sparse, tiny dots
+
+            // Fade with distance from beam - concentrated near beam
+            float beamFade = exp(-beamDist * (8.0 + i * 2.0));
+
+            // Twinkle effect
+            float twinkle = 0.5 + 0.5 * sin(t * (3.0 + i) + h * 6.28);
+
+            dust += particle * beamFade * twinkle * 0.15;
           }
-          return p;
+
+          return dust;
         }
 
         void main() {
@@ -116,50 +133,48 @@
           float shimmer2 = 0.97 + 0.03 * sin(uv.y * 50.0 + time * 3.0);
           float subtleFlow = shimmer * shimmer2;
 
-          // === SPARKS - floating particles in the glow ===
-          float sparks = 0.0;
-          for (float i = 0.0; i < 5.0; i++) {
-            vec2 sparkPos = uv * (15.0 + i * 8.0);
-            sparkPos.y += time * (0.3 + i * 0.15);
-            float spark = noise(sparkPos);
-            spark = smoothstep(0.75, 0.95, spark);
-            // Only show sparks near the beam
-            spark *= exp(-distFromBeam * 15.0);
-            sparks += spark * 0.12;
-          }
-
-          // === SUBTLE DUST PARTICLES ===
-          float dust = particles(uv, time) * innerGlow;
+          // === FINE DUST PARTICLES - like Huly ===
+          float dust = fineDust(uv, time, distFromBeam);
 
           // === VERTICAL INTENSITY ===
           // Brighter at top, gradual fade
           float vertIntensity = 0.6 + 0.4 * uv.y;
 
-          // === HORIZONTAL SPREAD - curves RIGHT only (beam is on left) ===
+          // === HORIZONTAL SPREAD - curves RIGHT with flowing energy ===
           float spreadY = smoothstep(0.25, 0.0, uv.y); // Spread zone at bottom
 
           // Distance to the right of beam
           float distRight = max(0.0, (uv.x - beamX)) * aspect;
 
           // Curved spread - the lower, the further right it reaches
-          float curveReach = spreadY * spreadY * 0.6; // How far the curve extends
+          float curveReach = spreadY * spreadY * 0.6;
           float curvedRight = distRight / (curveReach + 0.01);
 
-          // Smooth curved glow spreading right
+          // Base curved glow
           float curveGlow = exp(-curvedRight * curvedRight * 0.8) * spreadY;
 
-          // Subtle continuous flow along spread (not bands)
-          float flowRight = 0.9 + 0.1 * sin(distRight * 4.0 - time * 1.5);
+          // === FLOWING ENERGY along the curve ===
+          // Energy pulses that travel along the curved path
+          float pathPos = distRight / (curveReach + 0.01); // Position along curve
+          float flowSpeed = 2.0;
+          float numPulses = 3.0;
 
-          // Combine curved spread with flow
-          float horizSpread = curveGlow * flowRight;
+          float energyFlow = 0.0;
+          for (float i = 0.0; i < 3.0; i++) {
+            float pulsePos = fract(pathPos * 0.3 - time * flowSpeed * 0.1 + i / numPulses);
+            float pulse = exp(-pow((pulsePos - 0.5) * 4.0, 2.0)); // Gaussian pulse
+            energyFlow += pulse * 0.3;
+          }
 
-          // Edge glow at very bottom
+          // Combine curve glow with flowing energy
+          float horizSpread = curveGlow * (0.7 + energyFlow);
+
+          // Edge glow at very bottom with flow
           float edgeGlow = exp(-uv.y * 15.0) * exp(-distRight * 1.0) * 0.5;
-          horizSpread += edgeGlow * flowRight * spreadY;
+          horizSpread += edgeGlow * (0.8 + energyFlow * 0.4) * spreadY;
 
-          // === GROUND GLOW ===
-          float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.4 * flowRight;
+          // === GROUND GLOW with energy ripples ===
+          float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.4 * (0.8 + energyFlow * 0.3);
 
           // === COLORS - Smooth blue gradient ===
           vec3 coreColor = vec3(0.85, 0.92, 1.0);     // Bright white-blue core
@@ -186,21 +201,18 @@
           // Core - SOLID, minimal modulation
           color += coreColor * core * (0.9 + 0.1 * subtleFlow);
 
-          // Sparks floating in the glow
-          color += coreColor * sparks;
+          // Fine dust particles floating in the glow
+          color += coreColor * dust;
 
           // Horizontal spread at bottom
           color += innerColor * horizSpread * 0.9;
           color += splashColor * groundGlow;
 
-          // Subtle dust
-          color += innerColor * dust * 0.3;
-
           // Apply vertical intensity
           color *= vertIntensity;
 
           // === ALPHA ===
-          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.3 + sparks * 0.8;
+          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.6;
           alpha *= vertIntensity;
           alpha = clamp(alpha, 0.0, 1.0);
 
