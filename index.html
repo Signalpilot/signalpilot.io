@@ -895,8 +895,9 @@
         background:transparent !important; /* Let particles show through on mobile! */
       }
 
-      /* Energy beam video - show beam on mobile */
-      #energy-beam-video {
+      /* Energy beam videos - show beam on mobile */
+      #energy-beam-video-1,
+      #energy-beam-video-2 {
         left: 50% !important;
         transform: translateX(-50%) !important;
         width: 100vw !important;
@@ -3527,9 +3528,9 @@
       <!-- EPIC Energy Beam v2 -->
       <div id="energy-beam-container" style="position:absolute;top:-70px;left:0;width:100%;height:calc(100% + 70px);pointer-events:none;z-index:0;overflow:visible;display:none"></div>
 
-      <!-- Energy Beam Video - signal-conduit-4k -->
+      <!-- Energy Beam Videos - dual layer cross-fade for seamless loop -->
       <video
-        id="energy-beam-video"
+        id="energy-beam-video-1"
         autoplay
         loop
         muted
@@ -3547,15 +3548,81 @@
           object-fit: cover;
           object-position: left 30%;
           opacity: 0.6;
-          will-change: transform;
+          will-change: opacity, transform;
           transform: translateZ(0) scaleX(-1);
           backface-visibility: hidden;
           -webkit-mask-image: radial-gradient(ellipse 90% 85% at 25% 50%, black 70%, transparent 95%);
           mask-image: radial-gradient(ellipse 90% 85% at 25% 50%, black 70%, transparent 95%);
+          transition: opacity 1.2s ease-in-out;
         "
       >
-        <source src="assets/videos/signal-conduit-4k.mp4?v=3" type="video/mp4">
+        <source src="assets/videos/signal-conduit-4k.mp4?v=4" type="video/mp4">
       </video>
+      <video
+        id="energy-beam-video-2"
+        autoplay
+        loop
+        muted
+        playsinline
+        disablepictureinpicture
+        preload="auto"
+        style="
+          position: absolute;
+          top: -70px;
+          left: 0;
+          height: calc(100% + 70px);
+          width: auto;
+          pointer-events: none;
+          z-index: 0;
+          object-fit: cover;
+          object-position: left 30%;
+          opacity: 0.6;
+          will-change: opacity, transform;
+          transform: translateZ(0) scaleX(-1);
+          backface-visibility: hidden;
+          -webkit-mask-image: radial-gradient(ellipse 90% 85% at 25% 50%, black 70%, transparent 95%);
+          mask-image: radial-gradient(ellipse 90% 85% at 25% 50%, black 70%, transparent 95%);
+          transition: opacity 1.2s ease-in-out;
+        "
+      >
+        <source src="assets/videos/signal-conduit-4k.mp4?v=4" type="video/mp4">
+      </video>
+      <script>
+      // Energy beam cross-fade for seamless loop
+      (function() {
+        const b1 = document.getElementById('energy-beam-video-1');
+        const b2 = document.getElementById('energy-beam-video-2');
+
+        // Offset video 2 by half duration
+        b2.addEventListener('loadedmetadata', function() {
+          b2.currentTime = b2.duration / 2;
+        });
+
+        // Cross-fade each video independently
+        function setupBeamCrossfade(video) {
+          let lastCheck = 0;
+          video.addEventListener('timeupdate', function() {
+            const now = Date.now();
+            if (now - lastCheck < 300) return;
+            lastCheck = now;
+
+            const timeLeft = video.duration - video.currentTime;
+            const t = video.currentTime;
+
+            if (timeLeft < 1.5) {
+              video.style.opacity = '0';
+            } else if (t < 1.0) {
+              video.style.opacity = '0.6';
+            } else {
+              video.style.opacity = '0.6';
+            }
+          });
+        }
+
+        setupBeamCrossfade(b1);
+        setupBeamCrossfade(b2);
+      })();
+      </script>
 
       <!-- Animated gradient orbs with parallax -->
       <div id="parallax-orb-1" style="position:absolute;top:10%;left:10%;width:500px;height:500px;background:radial-gradient(circle,rgba(91,138,255,0.15) 0%,transparent 70%);pointer-events:none;filter:blur(60px);animation:floatOrb1 20s ease-in-out infinite;will-change:transform"></div>
