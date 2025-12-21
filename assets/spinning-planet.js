@@ -1,6 +1,6 @@
 /**
- * Spinning Planet Animation v5
- * More realistic with proper lighting, atmosphere, and depth
+ * Spinning Planet Animation v6 - EXTREME
+ * Heavy bloom, neon glow, dramatic effects
  */
 
 (function() {
@@ -17,134 +17,91 @@
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const scene = new THREE.Scene();
     const width = container.clientWidth;
     const height = container.clientHeight;
 
-    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
-    camera.position.set(0, 0.1, 3.8);
+    // Scene
+    const scene = new THREE.Scene();
 
+    // Camera
+    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+    camera.position.set(0, 0, 3.2);
+
+    // Renderer
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: true
+      antialias: true,
+      powerPreference: 'high-performance'
     });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.5;
     container.appendChild(renderer.domElement);
 
+    // Add CSS glow filter to canvas for extra bloom
+    renderer.domElement.style.filter = 'contrast(1.1) saturate(1.2)';
+
     const planetGroup = new THREE.Group();
-    planetGroup.rotation.x = 0.15;
-    planetGroup.rotation.z = -0.1;
+    planetGroup.rotation.x = 0.2;
     scene.add(planetGroup);
 
-    // Light direction (simulated sun from top-right)
-    const lightDir = new THREE.Vector3(1.0, 0.5, 0.8).normalize();
-
     // ============================================
-    // REALISTIC PLANET with lighting
+    // GLOWING PLANET CORE
     // ============================================
-    const planetGeo = new THREE.SphereGeometry(1, 96, 96);
+    const planetGeo = new THREE.SphereGeometry(1, 128, 128);
 
     const planetMat = new THREE.ShaderMaterial({
       uniforms: {
-        lightDirection: { value: lightDir },
         time: { value: 0 }
       },
       vertexShader: `
         varying vec3 vNormal;
         varying vec3 vPosition;
         varying vec2 vUv;
-        varying vec3 vWorldNormal;
 
         void main() {
           vNormal = normalize(normalMatrix * normal);
-          vWorldNormal = normalize((modelMatrix * vec4(normal, 0.0)).xyz);
           vPosition = position;
           vUv = uv;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragmentShader: `
-        uniform vec3 lightDirection;
         uniform float time;
-
         varying vec3 vNormal;
         varying vec3 vPosition;
         varying vec2 vUv;
-        varying vec3 vWorldNormal;
-
-        // Simple noise function
-        float hash(vec2 p) {
-          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
-        }
-
-        float noise(vec2 p) {
-          vec2 i = floor(p);
-          vec2 f = fract(p);
-          f = f * f * (3.0 - 2.0 * f);
-          float a = hash(i);
-          float b = hash(i + vec2(1.0, 0.0));
-          float c = hash(i + vec2(0.0, 1.0));
-          float d = hash(i + vec2(1.0, 1.0));
-          return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
-        }
 
         void main() {
-          // Lighting - day/night
-          float NdotL = dot(vWorldNormal, lightDirection);
-          float lightIntensity = smoothstep(-0.2, 0.6, NdotL);
+          // Deep dark core
+          vec3 core = vec3(0.008, 0.015, 0.04);
 
-          // Base colors - deep ocean blues
-          vec3 nightColor = vec3(0.01, 0.02, 0.05);
-          vec3 dayColorDeep = vec3(0.02, 0.06, 0.15);
-          vec3 dayColorMid = vec3(0.04, 0.10, 0.22);
+          // Pulsing energy lines
+          float latLines = 10.0;
+          float lonLines = 20.0;
 
-          // Noise for surface variation
-          float n = noise(vUv * 30.0) * 0.5 + noise(vUv * 60.0) * 0.25 + noise(vUv * 120.0) * 0.125;
+          float lat = abs(fract(vUv.y * latLines + time * 0.02) - 0.5) * 2.0;
+          float latLine = pow(1.0 - lat, 20.0);
 
-          // Mix day colors with noise
-          vec3 dayColor = mix(dayColorDeep, dayColorMid, n);
+          float lon = abs(fract(vUv.x * lonLines - time * 0.01) - 0.5) * 2.0;
+          float lonLine = pow(1.0 - lon, 25.0);
 
-          // Apply lighting
-          vec3 baseColor = mix(nightColor, dayColor, lightIntensity);
+          float grid = (latLine + lonLine) * 0.8;
 
-          // Subtle grid lines (only visible on lit side)
-          float latLines = 12.0;
-          float lonLines = 24.0;
-
-          float lat = abs(fract(vUv.y * latLines) - 0.5) * 2.0;
-          float latLine = smoothstep(0.03, 0.0, lat);
-
-          float lon = abs(fract(vUv.x * lonLines) - 0.5) * 2.0;
-          float lonLine = smoothstep(0.02, 0.0, lon);
-
-          float grid = max(latLine, lonLine) * 0.15 * lightIntensity;
-
-          // Grid color - subtle blue glow
-          vec3 gridColor = vec3(0.1, 0.3, 0.6);
-
-          // Fresnel for edge highlight (atmosphere effect)
+          // Fresnel glow
           vec3 viewDir = normalize(cameraPosition - vPosition);
-          float fresnel = pow(1.0 - max(dot(vNormal, viewDir), 0.0), 4.0);
+          float fresnel = pow(1.0 - max(dot(vNormal, viewDir), 0.0), 3.0);
 
-          // Atmospheric scattering color
-          vec3 atmosColor = vec3(0.15, 0.4, 0.8);
+          // Colors
+          vec3 gridColor = vec3(0.0, 0.6, 1.0);
+          vec3 edgeColor = vec3(0.2, 0.5, 1.0);
 
-          // Terminator glow (edge between day/night)
-          float terminator = 1.0 - abs(NdotL);
-          terminator = pow(terminator, 3.0) * 0.3;
-          vec3 terminatorColor = vec3(0.1, 0.2, 0.4);
+          vec3 final = core;
+          final += gridColor * grid * 0.6;
+          final += edgeColor * fresnel * 0.8;
 
-          // Compose
-          vec3 final = baseColor;
-          final += gridColor * grid;
-          final += terminatorColor * terminator * (1.0 - fresnel);
-          final = mix(final, atmosColor, fresnel * 0.5);
-
-          // Slight ambient to prevent pure black
-          final += vec3(0.005, 0.01, 0.02);
-
-          gl_FragColor = vec4(final, 0.95);
+          gl_FragColor = vec4(final, 0.9 + fresnel * 0.1);
         }
       `,
       transparent: true
@@ -154,35 +111,25 @@
     planetGroup.add(planet);
 
     // ============================================
-    // MULTI-LAYER ATMOSPHERE
+    // INTENSE ATMOSPHERE LAYERS
     // ============================================
 
-    // Inner atmosphere (sharp edge glow)
-    const atmos1Geo = new THREE.SphereGeometry(1.02, 64, 64);
-    const atmos1Mat = new THREE.ShaderMaterial({
-      uniforms: {
-        lightDirection: { value: lightDir }
-      },
+    // Inner glow
+    const innerGlowGeo = new THREE.SphereGeometry(1.01, 64, 64);
+    const innerGlowMat = new THREE.ShaderMaterial({
       vertexShader: `
         varying vec3 vNormal;
-        varying vec3 vWorldNormal;
         void main() {
           vNormal = normalize(normalMatrix * normal);
-          vWorldNormal = normalize((modelMatrix * vec4(normal, 0.0)).xyz);
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragmentShader: `
-        uniform vec3 lightDirection;
         varying vec3 vNormal;
-        varying vec3 vWorldNormal;
         void main() {
-          float NdotL = dot(vWorldNormal, lightDirection);
-          float litSide = smoothstep(-0.1, 0.3, NdotL);
-
-          float intensity = pow(0.7 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 3.0);
-          vec3 color = vec3(0.2, 0.5, 1.0) * litSide + vec3(0.05, 0.1, 0.2) * (1.0 - litSide);
-          gl_FragColor = vec4(color * intensity, intensity * 0.6);
+          float intensity = pow(0.75 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.0);
+          vec3 color = vec3(0.0, 0.7, 1.0);
+          gl_FragColor = vec4(color * 2.0, intensity);
         }
       `,
       side: THREE.BackSide,
@@ -190,34 +137,24 @@
       transparent: true,
       depthWrite: false
     });
-    planetGroup.add(new THREE.Mesh(atmos1Geo, atmos1Mat));
+    planetGroup.add(new THREE.Mesh(innerGlowGeo, innerGlowMat));
 
-    // Outer atmosphere (soft haze)
-    const atmos2Geo = new THREE.SphereGeometry(1.08, 32, 32);
-    const atmos2Mat = new THREE.ShaderMaterial({
-      uniforms: {
-        lightDirection: { value: lightDir }
-      },
+    // Outer glow
+    const outerGlowGeo = new THREE.SphereGeometry(1.15, 32, 32);
+    const outerGlowMat = new THREE.ShaderMaterial({
       vertexShader: `
         varying vec3 vNormal;
-        varying vec3 vWorldNormal;
         void main() {
           vNormal = normalize(normalMatrix * normal);
-          vWorldNormal = normalize((modelMatrix * vec4(normal, 0.0)).xyz);
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragmentShader: `
-        uniform vec3 lightDirection;
         varying vec3 vNormal;
-        varying vec3 vWorldNormal;
         void main() {
-          float NdotL = dot(vWorldNormal, lightDirection);
-          float litSide = smoothstep(-0.3, 0.5, NdotL);
-
-          float intensity = pow(0.6 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.0);
-          vec3 color = vec3(0.1, 0.3, 0.7) * litSide;
-          gl_FragColor = vec4(color * intensity, intensity * 0.25);
+          float intensity = pow(0.6 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 1.5);
+          vec3 color = vec3(0.1, 0.4, 0.9);
+          gl_FragColor = vec4(color, intensity * 0.5);
         }
       `,
       side: THREE.BackSide,
@@ -225,67 +162,55 @@
       transparent: true,
       depthWrite: false
     });
-    planetGroup.add(new THREE.Mesh(atmos2Geo, atmos2Mat));
+    planetGroup.add(new THREE.Mesh(outerGlowGeo, outerGlowMat));
 
     // ============================================
-    // SMALL DATA DOTS on surface
+    // NEON RING SYSTEM - EXTREME GLOW
     // ============================================
-    const dotsGroup = new THREE.Group();
-    const numDots = 50;
-    const colors = [0x00ddff, 0xff4477, 0x44ff88];
-
-    for (let i = 0; i < numDots; i++) {
-      const phi = Math.acos(1 - 2 * (i + 0.5) / numDots);
-      const theta = Math.PI * (1 + Math.sqrt(5)) * i;
-
-      if (Math.random() > 0.4) continue;
-
-      const x = Math.sin(phi) * Math.cos(theta);
-      const y = Math.sin(phi) * Math.sin(theta);
-      const z = Math.cos(phi);
-
-      const size = 0.006 + Math.random() * 0.008;
-      const dotGeo = new THREE.SphereGeometry(size, 6, 6);
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      const dotMat = new THREE.MeshBasicMaterial({
-        color: color,
-        transparent: true,
-        opacity: 0.6 + Math.random() * 0.4
-      });
-
-      const dot = new THREE.Mesh(dotGeo, dotMat);
-      dot.position.set(x * 1.003, y * 1.003, z * 1.003);
-      dot.userData.baseOpacity = dotMat.opacity;
-      dot.userData.pulseOffset = Math.random() * Math.PI * 2;
-      dotsGroup.add(dot);
-    }
-    planetGroup.add(dotsGroup);
-
-    // ============================================
-    // REFINED ORBITAL RINGS
-    // ============================================
-    function createRing(radius, tiltX, tiltZ, color, opacity) {
+    function createNeonRing(radius, tiltX, tiltZ, color, intensity) {
       const ringGroup = new THREE.Group();
 
-      // Main ring - thinner
-      const geo = new THREE.TorusGeometry(radius, 0.004, 16, 150);
-      const mat = new THREE.MeshBasicMaterial({
+      // Core ring - bright
+      const coreGeo = new THREE.TorusGeometry(radius, 0.015, 16, 200);
+      const coreMat = new THREE.MeshBasicMaterial({
         color: color,
         transparent: true,
-        opacity: opacity
+        opacity: 1.0
       });
-      ringGroup.add(new THREE.Mesh(geo, mat));
+      ringGroup.add(new THREE.Mesh(coreGeo, coreMat));
 
-      // Soft glow
-      const glowGeo = new THREE.TorusGeometry(radius, 0.018, 16, 100);
-      const glowMat = new THREE.MeshBasicMaterial({
+      // Glow layer 1
+      const glow1Geo = new THREE.TorusGeometry(radius, 0.04, 16, 150);
+      const glow1Mat = new THREE.MeshBasicMaterial({
         color: color,
         transparent: true,
-        opacity: opacity * 0.2,
+        opacity: 0.5 * intensity,
         blending: THREE.AdditiveBlending,
         depthWrite: false
       });
-      ringGroup.add(new THREE.Mesh(glowGeo, glowMat));
+      ringGroup.add(new THREE.Mesh(glow1Geo, glow1Mat));
+
+      // Glow layer 2
+      const glow2Geo = new THREE.TorusGeometry(radius, 0.08, 16, 100);
+      const glow2Mat = new THREE.MeshBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 0.25 * intensity,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      ringGroup.add(new THREE.Mesh(glow2Geo, glow2Mat));
+
+      // Glow layer 3 - wide bloom
+      const glow3Geo = new THREE.TorusGeometry(radius, 0.15, 16, 80);
+      const glow3Mat = new THREE.MeshBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 0.1 * intensity,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      ringGroup.add(new THREE.Mesh(glow3Geo, glow3Mat));
 
       ringGroup.rotation.x = tiltX;
       ringGroup.rotation.z = tiltZ;
@@ -293,83 +218,162 @@
       return ringGroup;
     }
 
-    const ring1 = createRing(1.4, Math.PI / 2.2, 0.18, 0x00ccff, 0.6);
+    // CYAN RING - main
+    const ring1 = createNeonRing(1.35, Math.PI / 2.1, 0.25, 0x00ffff, 1.2);
     scene.add(ring1);
 
-    const ring2 = createRing(1.6, Math.PI / 2.4, -0.12, 0xff3366, 0.4);
+    // MAGENTA RING
+    const ring2 = createNeonRing(1.55, Math.PI / 2.3, -0.2, 0xff0080, 1.0);
     scene.add(ring2);
 
-    // ============================================
-    // TRAVELING PARTICLES
-    // ============================================
-    const particles = [];
+    // PURPLE RING - outer
+    const ring3 = createNeonRing(1.75, Math.PI / 2.5, 0.1, 0x8844ff, 0.7);
+    scene.add(ring3);
 
-    function createParticle(ring, color) {
-      const geo = new THREE.SphereGeometry(0.012, 8, 8);
-      const mat = new THREE.MeshBasicMaterial({
+    // ============================================
+    // BRIGHT DATA POINTS
+    // ============================================
+    const dotsGroup = new THREE.Group();
+    const dotColors = [0x00ffff, 0xff0080, 0x00ff66, 0xffaa00];
+
+    for (let i = 0; i < 40; i++) {
+      const phi = Math.acos(1 - 2 * (i + 0.5) / 40);
+      const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+
+      if (Math.random() > 0.5) continue;
+
+      const x = Math.sin(phi) * Math.cos(theta);
+      const y = Math.sin(phi) * Math.sin(theta);
+      const z = Math.cos(phi);
+
+      const color = dotColors[Math.floor(Math.random() * dotColors.length)];
+
+      // Bright core
+      const dotGeo = new THREE.SphereGeometry(0.015, 8, 8);
+      const dotMat = new THREE.MeshBasicMaterial({
         color: color,
         transparent: true,
-        opacity: 0.85
+        opacity: 1
       });
-      const particle = new THREE.Mesh(geo, mat);
+      const dot = new THREE.Mesh(dotGeo, dotMat);
+      dot.position.set(x * 1.01, y * 1.01, z * 1.01);
 
-      const glowGeo = new THREE.SphereGeometry(0.028, 6, 6);
+      // Glow
+      const glowGeo = new THREE.SphereGeometry(0.04, 6, 6);
       const glowMat = new THREE.MeshBasicMaterial({
         color: color,
         transparent: true,
-        opacity: 0.25,
+        opacity: 0.4,
         blending: THREE.AdditiveBlending
       });
-      particle.add(new THREE.Mesh(glowGeo, glowMat));
+      const glow = new THREE.Mesh(glowGeo, glowMat);
+      dot.add(glow);
 
-      particle.userData = {
+      dot.userData.pulseOffset = Math.random() * Math.PI * 2;
+      dot.userData.baseScale = 0.8 + Math.random() * 0.4;
+      dotsGroup.add(dot);
+    }
+    planetGroup.add(dotsGroup);
+
+    // ============================================
+    // FAST TRAVELING PARTICLES
+    // ============================================
+    const particles = [];
+
+    function createBrightParticle(radius, tiltX, tiltZ, color) {
+      const group = new THREE.Group();
+
+      // Bright core
+      const coreGeo = new THREE.SphereGeometry(0.03, 12, 12);
+      const coreMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      group.add(new THREE.Mesh(coreGeo, coreMat));
+
+      // Color glow
+      const glow1Geo = new THREE.SphereGeometry(0.06, 8, 8);
+      const glow1Mat = new THREE.MeshBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending
+      });
+      group.add(new THREE.Mesh(glow1Geo, glow1Mat));
+
+      // Outer glow
+      const glow2Geo = new THREE.SphereGeometry(0.12, 6, 6);
+      const glow2Mat = new THREE.MeshBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending
+      });
+      group.add(new THREE.Mesh(glow2Geo, glow2Mat));
+
+      group.userData = {
         angle: Math.random() * Math.PI * 2,
-        speed: 0.15 + Math.random() * 0.1,
-        ring: ring
+        speed: 0.4 + Math.random() * 0.3,
+        radius: radius,
+        tiltX: tiltX,
+        tiltZ: tiltZ
       };
 
-      return particle;
+      return group;
     }
 
+    // Cyan particles
+    for (let i = 0; i < 3; i++) {
+      const p = createBrightParticle(1.35, Math.PI / 2.1, 0.25, 0x00ffff);
+      p.userData.angle = i * (Math.PI * 2 / 3);
+      scene.add(p);
+      particles.push(p);
+    }
+
+    // Magenta particles
     for (let i = 0; i < 2; i++) {
-      const p = createParticle(ring1, 0x00ffff);
+      const p = createBrightParticle(1.55, Math.PI / 2.3, -0.2, 0xff0080);
       p.userData.angle = i * Math.PI;
       scene.add(p);
       particles.push(p);
     }
 
-    const p2 = createParticle(ring2, 0xff4477);
-    scene.add(p2);
-    particles.push(p2);
-
     // ============================================
-    // BACKGROUND STARS with size variation
+    // SPARKLE STARS
     // ============================================
     const starsGeo = new THREE.BufferGeometry();
-    const positions = [];
-    const sizes = [];
+    const starPositions = [];
+    const starColors = [];
 
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < 200; i++) {
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
-      const dist = 6 + Math.random() * 15;
+      const dist = 4 + Math.random() * 10;
 
-      positions.push(
+      starPositions.push(
         dist * Math.sin(phi) * Math.cos(theta),
         dist * Math.sin(phi) * Math.sin(theta),
         dist * Math.cos(phi)
       );
-      sizes.push(0.5 + Math.random() * 1.5);
+
+      // Random colors - some white, some colored
+      const colorChoice = Math.random();
+      if (colorChoice > 0.7) {
+        starColors.push(0.5, 1.0, 1.0); // Cyan tint
+      } else if (colorChoice > 0.5) {
+        starColors.push(1.0, 0.5, 0.8); // Pink tint
+      } else {
+        const b = 0.7 + Math.random() * 0.3;
+        starColors.push(b, b, b); // White
+      }
     }
 
-    starsGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-    starsGeo.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+    starsGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+    starsGeo.setAttribute('color', new THREE.Float32BufferAttribute(starColors, 3));
 
     const starsMat = new THREE.PointsMaterial({
-      size: 0.025,
-      color: 0xffffff,
+      size: 0.04,
+      vertexColors: true,
       transparent: true,
-      opacity: 0.7,
+      opacity: 0.9,
+      blending: THREE.AdditiveBlending,
       sizeAttenuation: true
     });
     scene.add(new THREE.Points(starsGeo, starsMat));
@@ -385,35 +389,47 @@
       const t = clock.getElapsedTime();
 
       if (!prefersReducedMotion) {
-        // Planet rotation
-        planetGroup.rotation.y = t * 0.3;
+        // Fast planet spin
+        planetGroup.rotation.y = t * 0.4;
 
-        // Update shader time
+        // Update shader
         planetMat.uniforms.time.value = t;
 
         // Ring rotation
-        ring1.rotation.z = 0.18 + t * 0.012;
-        ring2.rotation.z = -0.12 - t * 0.008;
+        ring1.rotation.z = 0.25 + t * 0.03;
+        ring2.rotation.z = -0.2 - t * 0.02;
+        ring3.rotation.z = 0.1 + t * 0.015;
 
-        // Particles
+        // Particles - fast movement
         particles.forEach(p => {
-          p.userData.angle += p.userData.speed * 0.01;
+          p.userData.angle += p.userData.speed * 0.02;
           const a = p.userData.angle;
-          const ring = p.userData.ring;
-          const radius = ring.children[0].geometry.parameters.radius;
+          const r = p.userData.radius;
 
-          const x = Math.cos(a) * radius;
-          const z = Math.sin(a) * radius;
+          // Calculate position
+          let x = Math.cos(a) * r;
+          let y = 0;
+          let z = Math.sin(a) * r;
 
-          const pos = new THREE.Vector3(x, 0, z);
-          pos.applyEuler(ring.rotation);
-          p.position.copy(pos);
+          // Apply tilts
+          const cosX = Math.cos(p.userData.tiltX);
+          const sinX = Math.sin(p.userData.tiltX);
+          const cosZ = Math.cos(p.userData.tiltZ);
+          const sinZ = Math.sin(p.userData.tiltZ);
+
+          const y1 = y * cosX - z * sinX;
+          const z1 = y * sinX + z * cosX;
+          const x2 = x * cosZ - y1 * sinZ;
+          const y2 = x * sinZ + y1 * cosZ;
+
+          p.position.set(x2, y2, z1);
         });
 
-        // Dot pulsing
-        dotsGroup.children.forEach(dot => {
-          const pulse = Math.sin(t * 1.2 + dot.userData.pulseOffset) * 0.5 + 0.5;
-          dot.material.opacity = dot.userData.baseOpacity * (0.4 + pulse * 0.6);
+        // Pulse dots
+        dotsGroup.children.forEach((dot, i) => {
+          const pulse = Math.sin(t * 3 + dot.userData.pulseOffset);
+          const scale = dot.userData.baseScale * (0.8 + pulse * 0.4);
+          dot.scale.setScalar(scale);
         });
       }
 
@@ -422,6 +438,7 @@
 
     animate();
 
+    // Resize
     function onResize() {
       const w = container.clientWidth;
       const h = container.clientHeight;
