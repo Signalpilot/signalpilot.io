@@ -127,11 +127,14 @@
           float atmosDist = distFromBeam / atmosWidth;
           float atmosphere = exp(-atmosDist * atmosDist * 0.3);
 
-          // === ENERGY - subtle shimmer, not bands flying through ===
-          // Very subtle variation - beam stays SOLID and POWERFUL
-          float shimmer = 0.95 + 0.05 * sin(uv.y * 30.0 + time * 2.0);
-          float shimmer2 = 0.97 + 0.03 * sin(uv.y * 50.0 + time * 3.0);
-          float subtleFlow = shimmer * shimmer2;
+          // === ENERGY FLOW - POWERFUL pulses traveling DOWN the beam ===
+          // Bright energy pulses moving downward
+          float pulse1 = pow(0.5 + 0.5 * sin(uv.y * 8.0 - time * 4.0), 3.0);
+          float pulse2 = pow(0.5 + 0.5 * sin(uv.y * 12.0 - time * 5.0), 2.0);
+          float pulse3 = pow(0.5 + 0.5 * sin(uv.y * 6.0 - time * 3.0), 4.0);
+
+          // Combine pulses - ranges from ~0.3 to ~1.5 for dramatic variation
+          float subtleFlow = 0.5 + pulse1 * 0.4 + pulse2 * 0.3 + pulse3 * 0.3;
 
           // === ULTRA-FINE DUST - subtle tiny specks only ===
           float dust = fineDust(uv, time, distFromBeam);
@@ -140,53 +143,34 @@
           // Brighter at top, gradual fade
           float vertIntensity = 0.6 + 0.4 * uv.y;
 
-          // === HORIZONTAL SPREAD - dramatic flow to the right ===
-          float spreadY = smoothstep(0.35, 0.0, uv.y); // Larger spread zone at bottom
+          // === HORIZONTAL SPREAD - curves RIGHT with flowing energy ===
+          float spreadY = smoothstep(0.25, 0.0, uv.y); // Spread zone at bottom
 
           // Distance to the right of beam
           float distRight = max(0.0, (uv.x - beamX)) * aspect;
 
-          // Curved spread - extends much further to the right at bottom
-          float curveReach = spreadY * spreadY * 1.2; // Increased reach
+          // Curved spread - the lower, the further right it reaches
+          float curveReach = spreadY * spreadY * 0.6;
           float curvedRight = distRight / (curveReach + 0.01);
 
-          // Base curved glow - wider spread
-          float curveGlow = exp(-curvedRight * curvedRight * 0.5) * spreadY;
+          // Base curved glow
+          float curveGlow = exp(-curvedRight * curvedRight * 0.8) * spreadY;
 
-          // === FLOWING ENERGY WAVES - visible movement to the right ===
-          float flowSpeed = 1.5;
-
-          // Multiple energy waves flowing outward
-          float energyFlow = 0.0;
-          for (float i = 0.0; i < 5.0; i++) {
-            // Waves that travel from beam center outward to the right
-            float wavePhase = fract(distRight * 0.8 - time * flowSpeed * 0.15 + i * 0.2);
-            float wave = exp(-pow((wavePhase - 0.3) * 3.0, 2.0)); // Sharp wave front
-            // Fade out as it travels further
-            float waveFade = exp(-distRight * 0.8);
-            energyFlow += wave * waveFade * 0.4;
-          }
-
-          // Add streaking energy lines
-          float streaks = 0.0;
-          for (float i = 0.0; i < 4.0; i++) {
-            float streakY = beamX + spreadY * 0.3 * (0.2 + i * 0.25);
-            float streakDist = abs(uv.y - (0.1 + i * 0.05) * spreadY);
-            float streak = exp(-streakDist * 50.0) * spreadY;
-            // Animate streak intensity
-            float streakPulse = 0.5 + 0.5 * sin(time * 2.0 + i * 1.5 + distRight * 3.0);
-            streaks += streak * streakPulse * exp(-distRight * 1.5) * 0.3;
-          }
+          // === ENERGY FLOW along the horizontal spread ===
+          // Powerful pulses flowing outward to the right
+          float hPulse1 = pow(0.5 + 0.5 * sin(distRight * 6.0 - time * 4.0), 3.0);
+          float hPulse2 = pow(0.5 + 0.5 * sin(distRight * 10.0 - time * 5.0), 2.0);
+          float horizFlow = 0.5 + hPulse1 * 0.4 + hPulse2 * 0.4;
 
           // Combine curve glow with flowing energy
-          float horizSpread = curveGlow * (0.6 + energyFlow * 1.5) + streaks;
+          float horizSpread = curveGlow * horizFlow;
 
-          // Edge glow at very bottom - extends far right
-          float edgeGlow = exp(-uv.y * 12.0) * exp(-distRight * 0.6) * 0.6;
-          horizSpread += edgeGlow * (0.7 + energyFlow * 0.6) * spreadY;
+          // Edge glow at very bottom with flow
+          float edgeGlow = exp(-uv.y * 15.0) * exp(-distRight * 1.0) * 0.5;
+          horizSpread += edgeGlow * horizFlow * spreadY;
 
-          // === GROUND GLOW with energy ripples ===
-          float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.4 * (0.8 + energyFlow * 0.3);
+          // === GROUND GLOW with energy flow ===
+          float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.4 * horizFlow;
 
           // === COLORS - Deep blue to purple gradient ===
           vec3 coreColor = vec3(0.55, 0.65, 1.0);     // Deep blue-white core
