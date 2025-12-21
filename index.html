@@ -2950,51 +2950,51 @@
   </video>
 </div>
 <script>
-// Starfield: Continuous dual-layer with smooth sine-wave opacity blending
-// Both videos always visible, opacity oscillates so loop points are always masked
+// Starfield: Dual-layer with opacity + blur to mask loop points
 (function() {
   const videoA = document.getElementById('starfield-bg-a');
   const videoB = document.getElementById('starfield-bg-b');
   let duration = 5;
-  const BASE_OPACITY = 0.27;  // High minimum - strong overlap at loop points
-  const MAX_OPACITY = 0.35;   // Narrow range - minimal visible change
+  const MIN_OPACITY = 0.08;   // Very dim at loop point
+  const MAX_OPACITY = 0.42;   // Bright in middle
+  const MAX_BLUR = 4;         // Blur pixels at loop point
 
-  // Both videos play continuously, offset by half duration
   videoA.addEventListener('loadedmetadata', function() {
     duration = videoA.duration;
-    // Start B at halfway point
     videoB.currentTime = duration / 2;
     videoB.play();
   });
 
-  // Continuous opacity animation based on video time
-  // Uses sine wave so transitions are smooth at both ends
-  function updateOpacity() {
+  function updateEffects() {
     const timeA = videoA.currentTime;
     const timeB = videoB.currentTime;
 
-    // Calculate position in cycle (0 to 1)
+    // Position in cycle (0 to 1)
     const posA = timeA / duration;
     const posB = timeB / duration;
 
-    // Sine wave: peaks at middle of video, troughs at loop points
-    // This means when either video is near loop point, its opacity is lowest
+    // Sine wave: 1 at middle, 0 at loop points (start/end)
     const sinA = Math.sin(posA * Math.PI);
     const sinB = Math.sin(posB * Math.PI);
 
-    // Map sine (0-1) to opacity range
-    const opacityA = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * sinA;
-    const opacityB = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * sinB;
+    // Opacity: low at loop point, high in middle
+    const opacityA = MIN_OPACITY + (MAX_OPACITY - MIN_OPACITY) * sinA;
+    const opacityB = MIN_OPACITY + (MAX_OPACITY - MIN_OPACITY) * sinB;
+
+    // Blur: high at loop point, zero in middle (inverse of sine)
+    const blurA = MAX_BLUR * (1 - sinA);
+    const blurB = MAX_BLUR * (1 - sinB);
 
     videoA.style.opacity = opacityA;
     videoB.style.opacity = opacityB;
+    videoA.style.filter = blurA > 0.1 ? `blur(${blurA}px)` : 'none';
+    videoB.style.filter = blurB > 0.1 ? `blur(${blurB}px)` : 'none';
 
-    requestAnimationFrame(updateOpacity);
+    requestAnimationFrame(updateEffects);
   }
 
-  // Start the opacity animation after videos are ready
   videoA.addEventListener('canplay', function() {
-    requestAnimationFrame(updateOpacity);
+    requestAnimationFrame(updateEffects);
   }, { once: true });
 
   document.addEventListener('visibilitychange', function() {
