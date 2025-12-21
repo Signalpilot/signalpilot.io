@@ -81,8 +81,8 @@
           vec2 uv = vUv;
           float aspect = resolution.x / resolution.y;
 
-          // Position beam on the left side (near logo)
-          float beamX = 0.12;
+          // Position beam on the left side (before logo)
+          float beamX = 0.06;
           float distFromBeam = abs(uv.x - beamX) * aspect;
 
           // === BEAM - gradually widens from top to bottom ===
