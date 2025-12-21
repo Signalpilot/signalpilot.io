@@ -34,10 +34,10 @@
     container.appendChild(renderer.domElement);
 
     const frameWidth = 5.5;
-    const frameHeight = 4;
+    const frameHeight = 3.5;
 
     const frameGroup = new THREE.Group();
-    frameGroup.position.set(0, 1.2, 0); // Move up since top-focused
+    frameGroup.position.set(0, -0.8, 0); // Position so top beam is above video
     scene.add(frameGroup);
 
     const timeUniform = { value: 0 };
