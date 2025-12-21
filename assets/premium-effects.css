@@ -1,0 +1,432 @@
+/* ============================================
+   PREMIUM EFFECTS
+   High-end website animations and effects
+   ============================================ */
+
+/* ============================================
+   1. ANIMATED GLOWING BORDERS
+   Flowing gradient borders like Huly.io
+   ============================================ */
+
+/* Base glow border container */
+.glow-border {
+  position: relative;
+  background: var(--bg-card, rgba(10, 14, 24, 0.9));
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(
+    var(--glow-angle, 0deg),
+    transparent 0%,
+    transparent 30%,
+    rgba(91, 138, 255, 0.8) 45%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(91, 138, 255, 0.8) 55%,
+    transparent 70%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: glow-rotate 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+/* Always visible glow border */
+.glow-border-active::before {
+  opacity: 1;
+}
+
+@keyframes glow-rotate {
+  0% { --glow-angle: 0deg; }
+  100% { --glow-angle: 360deg; }
+}
+
+/* Register custom property for animation */
+@property --glow-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Button specific glow */
+.btn-glow {
+  position: relative;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    transparent 0%,
+    rgba(255, 100, 50, 0.9) 10%,
+    rgba(255, 200, 100, 1) 15%,
+    rgba(255, 100, 50, 0.9) 20%,
+    transparent 30%,
+    transparent 100%
+  );
+  animation: glow-rotate 3s linear infinite;
+  z-index: -1;
+  filter: blur(4px);
+  opacity: 0.8;
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  z-index: -1;
+}
+
+/* Intense glow for primary CTA */
+.btn-glow-intense::before {
+  filter: blur(8px);
+  opacity: 1;
+  inset: -4px;
+}
+
+/* Blue variant */
+.btn-glow-blue::before {
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    transparent 0%,
+    rgba(91, 138, 255, 0.9) 10%,
+    rgba(255, 255, 255, 1) 15%,
+    rgba(91, 138, 255, 0.9) 20%,
+    transparent 30%,
+    transparent 100%
+  );
+}
+
+/* Card with animated border */
+.card-glow {
+  position: relative;
+  background: var(--bg-card, rgba(10, 14, 24, 0.95));
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    rgba(91, 138, 255, 0.1) 0%,
+    rgba(91, 138, 255, 0.6) 25%,
+    rgba(118, 221, 255, 0.8) 30%,
+    rgba(91, 138, 255, 0.6) 35%,
+    rgba(91, 138, 255, 0.1) 50%,
+    rgba(91, 138, 255, 0.1) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: glow-rotate 6s linear infinite;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.card-glow:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   2. PARALLAX ELEMENTS
+   Multi-layer depth effects
+   ============================================ */
+
+[data-parallax-speed] {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* Parallax layers */
+.parallax-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.parallax-layer-deep {
+  --parallax-speed: 0.3;
+}
+
+.parallax-layer-mid {
+  --parallax-speed: 0.5;
+}
+
+.parallax-layer-near {
+  --parallax-speed: 0.8;
+}
+
+/* ============================================
+   3. SCROLL-LINKED TRANSFORMS
+   Elements that transform based on scroll
+   ============================================ */
+
+[data-scroll-scale] {
+  will-change: transform;
+}
+
+[data-scroll-rotate] {
+  will-change: transform;
+}
+
+[data-scroll-fade] {
+  will-change: opacity;
+}
+
+/* Progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand, #5b8aff), var(--brand-2, #76ddff));
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* Section progress indicator */
+.section-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 0%;
+  background: linear-gradient(180deg, var(--brand, #5b8aff), transparent);
+  border-radius: 2px;
+  transition: height 0.1s linear;
+}
+
+/* ============================================
+   4. 3D FLOATING SHAPES
+   Decorative 3D elements
+   ============================================ */
+
+.floating-shape {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Glowing orb */
+.shape-orb {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(91, 138, 255, 0.4),
+    rgba(91, 138, 255, 0.1) 50%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  animation: float-3d 8s ease-in-out infinite;
+}
+
+/* Gradient ring */
+.shape-ring {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient(var(--bg, #0a0e18), var(--bg, #0a0e18)) padding-box,
+              linear-gradient(135deg, rgba(91, 138, 255, 0.5), rgba(118, 221, 255, 0.3), transparent) border-box;
+  animation: float-3d 10s ease-in-out infinite reverse;
+  opacity: 0.6;
+}
+
+/* Mesh gradient blob */
+.shape-blob {
+  width: 400px;
+  height: 400px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(91, 138, 255, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(118, 221, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.15) 0%, transparent 60%);
+  filter: blur(60px);
+  animation: morph-blob 15s ease-in-out infinite;
+}
+
+/* Diamond shape */
+.shape-diamond {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, rgba(91, 138, 255, 0.3), rgba(118, 221, 255, 0.1));
+  transform: rotate(45deg);
+  animation: float-3d 6s ease-in-out infinite;
+  border: 1px solid rgba(91, 138, 255, 0.3);
+}
+
+/* Line accent */
+.shape-line {
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(180deg, transparent, rgba(91, 138, 255, 0.6), transparent);
+  animation: pulse-line 3s ease-in-out infinite;
+}
+
+@keyframes float-3d {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) rotateX(5deg) rotateY(5deg);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-5px) rotateX(-3deg) rotateY(-5deg);
+  }
+  75% {
+    transform: translateY(-25px) translateX(-10px) rotateX(3deg) rotateY(3deg);
+  }
+}
+
+@keyframes morph-blob {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%;
+    transform: rotate(180deg) scale(1.1);
+  }
+  75% {
+    border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
+  }
+}
+
+@keyframes pulse-line {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scaleY(1.2);
+  }
+}
+
+/* ============================================
+   5. GLASS MORPHISM ENHANCEMENTS
+   ============================================ */
+
+.glass {
+  background: rgba(10, 14, 24, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(10, 14, 24, 0.8);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+}
+
+/* ============================================
+   6. HOVER LIFT EFFECTS
+   ============================================ */
+
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(91, 138, 255, 0.1);
+}
+
+/* ============================================
+   7. TEXT GRADIENT ANIMATIONS
+   ============================================ */
+
+.text-gradient-animate {
+  background: linear-gradient(
+    90deg,
+    var(--brand, #5b8aff) 0%,
+    var(--brand-2, #76ddff) 25%,
+    #fff 50%,
+    var(--brand-2, #76ddff) 75%,
+    var(--brand, #5b8aff) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 3s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ============================================
+   8. NOISE TEXTURE OVERLAY
+   ============================================ */
+
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ============================================
+   9. REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-border::before,
+  .btn-glow::before,
+  .card-glow::before,
+  .floating-shape,
+  .shape-orb,
+  .shape-ring,
+  .shape-blob,
+  .shape-diamond,
+  .shape-line,
+  .text-gradient-animate {
+    animation: none !important;
+  }
+
+  .hover-lift:hover {
+    transform: none;
+  }
+
+  [data-parallax-speed] {
+    transform: none !important;
+  }
+}
