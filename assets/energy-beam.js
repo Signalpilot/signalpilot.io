@@ -172,14 +172,19 @@
           // Base curved glow
           float curveGlow = exp(-curvedRight * curvedRight * 0.8) * spreadY;
 
-          // === CONSTANT ENERGY OVERFLOW - smooth continuous spread ===
-          // Subtle flowing movement, not pulsating
-          float hFlow1 = sin(distRight * 4.0 - time * 2.5) * 0.5 + 0.5;
-          float hFlow2 = sin(distRight * 7.0 - time * 3.0) * 0.5 + 0.5;
-          float horizFlow = 0.85 + (hFlow1 + hFlow2) * 0.075; // Mostly constant with subtle variation
+          // === ENERGY FLOW at transition point (where beam widens) ===
+          // Visible waves flowing outward at the spread zone
+          float transitionZone = smoothstep(0.35, 0.15, uv.y) * smoothstep(0.0, 0.1, uv.y); // Sweet spot
+          float waveFlow1 = sin(distRight * 8.0 - time * 3.5) * 0.5 + 0.5;
+          float waveFlow2 = sin(distRight * 12.0 - time * 4.5) * 0.5 + 0.5;
+          float transitionFlow = 0.7 + (waveFlow1 + waveFlow2) * 0.15; // Visible flow
 
-          // Combine curve glow with smooth energy
+          // Base horizontal spread - constant
+          float horizFlow = 0.9;
+
+          // Combine curve glow with energy flow at transition
           float horizSpread = curveGlow * horizFlow;
+          horizSpread += curveGlow * transitionFlow * transitionZone * 0.4; // Extra glow at transition
 
           // Edge glow at very bottom - constant
           float edgeGlow = exp(-uv.y * 15.0) * exp(-distRight * 1.0) * 0.5;
@@ -188,13 +193,13 @@
           // === GROUND GLOW - constant overflow ===
           float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.5;
 
-          // === COLORS - VERY DARK blue-violet, near black ===
-          vec3 coreColor = vec3(0.22, 0.32, 0.8);      // Dark blue core
-          vec3 innerColor = vec3(0.15, 0.18, 0.6);     // Very dark blue-violet
-          vec3 outerColor = vec3(0.12, 0.1, 0.45);     // Near-black violet-blue
-          vec3 purpleGlow = vec3(0.3, 0.08, 0.5);      // Dark violet
-          vec3 atmosColor = vec3(0.08, 0.04, 0.25);    // Very deep dark violet
-          vec3 splashColor = vec3(0.25, 0.15, 0.55);   // Dark violet splash
+          // === COLORS - DARKER blue-violet ===
+          vec3 coreColor = vec3(0.18, 0.28, 0.7);      // Darker blue core
+          vec3 innerColor = vec3(0.12, 0.15, 0.5);     // Darker blue-violet
+          vec3 outerColor = vec3(0.1, 0.08, 0.38);     // Near-black violet-blue
+          vec3 purpleGlow = vec3(0.25, 0.06, 0.42);    // Darker violet
+          vec3 atmosColor = vec3(0.06, 0.03, 0.2);     // Very deep dark violet
+          vec3 splashColor = vec3(0.2, 0.12, 0.45);    // Darker violet splash
 
           // === COMBINE - SOLID POWERFUL CONTINUOUS BEAM ===
           float topSharpness = uv.y;
