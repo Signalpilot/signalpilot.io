@@ -3387,28 +3387,26 @@
     v2.currentTime = v2.duration / 2;
   });
 
-  // Cross-fade: each video fades independently
+  // Cross-fade: each video fades independently (optimized - only changes when needed)
   function setupCrossfade(video) {
-    let lastCheck = 0; // Each video has its own throttle
+    let lastCheck = 0;
+    let currentState = 'visible'; // Track state to avoid redundant style changes
+
     video.addEventListener('timeupdate', function() {
       const now = Date.now();
-      if (now - lastCheck < 300) return;
+      if (now - lastCheck < 400) return; // Throttle to 400ms
       lastCheck = now;
 
       const timeLeft = video.duration - video.currentTime;
       const t = video.currentTime;
 
-      // Fade out 1.8s before end
-      if (timeLeft < 1.8) {
+      // Only change opacity when state changes
+      if (timeLeft < 1.8 && currentState !== 'hidden') {
         video.style.opacity = '0';
-      }
-      // Fade in during first 1.2s after restart
-      else if (t < 1.2) {
+        currentState = 'hidden';
+      } else if (t >= 1.2 && timeLeft >= 1.8 && currentState !== 'visible') {
         video.style.opacity = '0.6';
-      }
-      // Full opacity in the middle (always visible)
-      else {
-        video.style.opacity = '0.6';
+        currentState = 'visible';
       }
     });
   }
@@ -3612,23 +3610,25 @@
           b2.currentTime = b2.duration / 2;
         });
 
-        // Cross-fade each video independently
+        // Cross-fade each video independently (optimized - only changes when needed)
         function setupBeamCrossfade(video) {
           let lastCheck = 0;
+          let currentState = 'visible';
+
           video.addEventListener('timeupdate', function() {
             const now = Date.now();
-            if (now - lastCheck < 300) return;
+            if (now - lastCheck < 400) return;
             lastCheck = now;
 
             const timeLeft = video.duration - video.currentTime;
             const t = video.currentTime;
 
-            if (timeLeft < 1.5) {
+            if (timeLeft < 1.5 && currentState !== 'hidden') {
               video.style.opacity = '0';
-            } else if (t < 1.0) {
+              currentState = 'hidden';
+            } else if (t >= 1.0 && timeLeft >= 1.5 && currentState !== 'visible') {
               video.style.opacity = '0.6';
-            } else {
-              video.style.opacity = '0.6';
+              currentState = 'visible';
             }
           });
         }
