@@ -108,9 +108,10 @@
           float atmosDist = distFromBeam / atmosWidth;
           float atmosphere = exp(-atmosDist * atmosDist * 0.3);
 
-          // === VERY SUBTLE ENERGY PULSE ===
-          // Much slower and smoother than before
-          float pulse = 0.95 + 0.05 * sin(uv.y * 8.0 - time * 1.5);
+          // === ENERGY FLOW - visible downward motion ===
+          float flow1 = sin(uv.y * 15.0 - time * 3.0) * 0.5 + 0.5;
+          float flow2 = sin(uv.y * 25.0 - time * 4.5) * 0.3 + 0.7;
+          float energyFlow = mix(0.7, 1.0, flow1 * flow2);
 
           // === SUBTLE DUST PARTICLES ===
           float dust = particles(uv, time) * innerGlow;
@@ -119,10 +120,13 @@
           // Brighter at top, gradual fade
           float vertIntensity = 0.6 + 0.4 * uv.y;
 
-          // === BOTTOM SPLASH/IMPACT ===
-          float splashY = 0.1;
-          float splashDist = length(vec2(distFromBeam * 0.3, (uv.y - splashY)));
-          float splash = exp(-splashDist * splashDist * 15.0) * smoothstep(0.3, 0.0, uv.y);
+          // === HORIZONTAL SPREAD AT BOTTOM ===
+          // Wide horizontal fan-out like Huly
+          float spreadY = smoothstep(0.35, 0.0, uv.y); // Starts spreading from 35% up
+          float horizSpread = exp(-distFromBeam * distFromBeam / (0.5 * spreadY + 0.001)) * spreadY;
+
+          // === GROUND GLOW - wide horizontal ===
+          float groundGlow = exp(-uv.y * 8.0) * exp(-distFromBeam * 0.5) * 0.6;
 
           // === COLORS - Smooth blue gradient ===
           vec3 coreColor = vec3(0.85, 0.92, 1.0);     // Bright white-blue core
@@ -137,11 +141,12 @@
           // Layer from back to front
           color += atmosColor * atmosphere * 0.25;
           color += outerColor * outerGlow * 0.4;
-          color += innerColor * innerGlow * 0.6 * pulse;
-          color += coreColor * core * pulse;
+          color += innerColor * innerGlow * 0.6 * energyFlow;
+          color += coreColor * core * energyFlow;
 
-          // Add splash
-          color += splashColor * splash * 1.2;
+          // Add horizontal spread at bottom
+          color += innerColor * horizSpread * 0.8;
+          color += outerColor * groundGlow;
 
           // Add subtle dust
           color += innerColor * dust * 0.5;
@@ -150,7 +155,7 @@
           color *= vertIntensity;
 
           // === ALPHA ===
-          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.2 + atmosphere * 0.08 + splash * 0.6 + dust * 0.3;
+          float alpha = core * 0.95 + innerGlow * 0.5 + outerGlow * 0.2 + atmosphere * 0.08 + horizSpread * 0.7 + groundGlow * 0.5 + dust * 0.3;
           alpha *= vertIntensity;
           alpha = clamp(alpha, 0.0, 1.0);
 
