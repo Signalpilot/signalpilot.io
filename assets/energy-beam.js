@@ -1,6 +1,6 @@
 /**
- * ENERGY BEAM v11 - ONE continuous energy flow around frame
- * Energy spawns at top center, flows outward, then down the sides
+ * ENERGY BEAM v12 - Huly-style dramatic vertical beam
+ * Single beam from sky with atmospheric glow
  */
 
 (function() {
@@ -21,8 +21,7 @@
     const width = container.offsetWidth || window.innerWidth;
     const height = container.offsetHeight || window.innerHeight;
 
-    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-    camera.position.z = 5;
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
@@ -30,217 +29,134 @@
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    const frameWidth = 5.5;
-    const frameHeight = 3.5;
-    const halfW = frameWidth / 2;
-    const halfH = frameHeight / 2;
+    // Full-screen quad with shader
+    const geometry = new THREE.PlaneGeometry(2, 2);
 
-    // Total path length for unified animation
-    const topHalfLen = halfW;
-    const sideLen = frameHeight;
-    const totalPathLen = topHalfLen + sideLen; // center to corner + down side
-
-    const frameGroup = new THREE.Group();
-    frameGroup.position.set(0, -0.8, 0);
-    scene.add(frameGroup);
-
-    const timeUniform = { value: 0 };
-
-    // === UNIFIED BEAM - One continuous path ===
-    // We'll draw it as one long line that wraps around
-
-    // TOP BEAM - Energy flows FROM CENTER OUTWARD
-    const topMat = new THREE.ShaderMaterial({
+    const material = new THREE.ShaderMaterial({
       uniforms: {
-        time: timeUniform,
-        pathLen: { value: totalPathLen }
+        time: { value: 0 },
+        resolution: { value: new THREE.Vector2(width, height) }
       },
       vertexShader: `
         varying vec2 vUv;
         void main() {
           vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          gl_Position = vec4(position, 1.0);
         }
       `,
       fragmentShader: `
         uniform float time;
-        uniform float pathLen;
+        uniform vec2 resolution;
         varying vec2 vUv;
 
-        void main() {
-          float yDist = abs(vUv.y - 0.5) * 2.0;
-
-          // Glow - single layer for cleaner look
-          float glow = exp(-yDist * 6.0);
-
-          // Distance from center
-          float distFromCenter = abs(vUv.x - 0.5) * 2.0;
-
-          // Energy pulses traveling FROM CENTER OUTWARD
-          float wave = sin((distFromCenter * 10.0 - time * 3.5) * 3.14159) * 0.4 + 0.6;
-
-          // Consistent blue color
-          vec3 color = vec3(0.2, 0.5, 1.0);
-
-          float alpha = glow * wave * 0.9;
-
-          gl_FragColor = vec4(color, alpha);
+        // Noise function for atmospheric effect
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
         }
-      `,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
 
-    const topBeam = new THREE.Mesh(
-      new THREE.PlaneGeometry(frameWidth, 0.5),
-      topMat
-    );
-    topBeam.position.set(0, halfH, 0);
-    frameGroup.add(topBeam);
-
-    // LEFT SIDE - Energy flows DOWN (continues from top-left corner)
-    const leftMat = new THREE.ShaderMaterial({
-      uniforms: {
-        time: timeUniform,
-        topHalfLen: { value: topHalfLen }
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          f = f * f * (3.0 - 2.0 * f);
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+          return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
         }
-      `,
-      fragmentShader: `
-        uniform float time;
-        uniform float topHalfLen;
-        varying vec2 vUv;
 
-        void main() {
-          float xDist = abs(vUv.x - 0.5) * 2.0;
-
-          // Glow
-          float glow = exp(-xDist * 6.0);
-
-          // Progress down the beam (0 at top, 1 at bottom)
-          float downProgress = 1.0 - vUv.y;
-
-          // Energy wave synced with top beam
-          float pathProgress = topHalfLen + downProgress * ${frameHeight.toFixed(1)};
-          float wave = sin((pathProgress - time * 3.5) * 2.0) * 0.4 + 0.6;
-
-          // Fade at bottom
-          float bottomFade = smoothstep(0.0, 0.3, vUv.y);
-
-          // Consistent blue color
-          vec3 color = vec3(0.2, 0.5, 1.0);
-
-          float alpha = glow * wave * bottomFade * 0.9;
-
-          gl_FragColor = vec4(color, alpha);
-        }
-      `,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-
-    const leftBeam = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.5, frameHeight),
-      leftMat
-    );
-    leftBeam.position.set(-halfW, 0, 0);
-    frameGroup.add(leftBeam);
-
-    // RIGHT SIDE - same as left
-    const rightMat = leftMat.clone();
-    rightMat.uniforms = { time: timeUniform, topHalfLen: { value: topHalfLen } };
-
-    const rightBeam = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.5, frameHeight),
-      rightMat
-    );
-    rightBeam.position.set(halfW, 0, 0);
-    frameGroup.add(rightBeam);
-
-    // === PARTICLES - Flow along the unified path ===
-    const particleCount = 100;
-    const particleGeo = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const speeds = new Float32Array(particleCount);
-    const offsets = new Float32Array(particleCount);
-    const sizes = new Float32Array(particleCount);
-    const sides = new Float32Array(particleCount);
-
-    for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = 0;
-      positions[i * 3 + 1] = 0;
-      positions[i * 3 + 2] = 0.02;
-      speeds[i] = 0.8 + Math.random() * 0.6;
-      offsets[i] = Math.random() * 12;
-      sizes[i] = 0.4 + Math.random() * 0.8;
-      sides[i] = Math.random() > 0.5 ? 1.0 : 0.0;
-    }
-
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particleGeo.setAttribute('speed', new THREE.BufferAttribute(speeds, 1));
-    particleGeo.setAttribute('offset', new THREE.BufferAttribute(offsets, 1));
-    particleGeo.setAttribute('psize', new THREE.BufferAttribute(sizes, 1));
-    particleGeo.setAttribute('side', new THREE.BufferAttribute(sides, 1));
-
-    const particleMat = new THREE.ShaderMaterial({
-      uniforms: {
-        time: timeUniform,
-        hw: { value: halfW },
-        hh: { value: halfH },
-        fh: { value: frameHeight }
-      },
-      vertexShader: `
-        attribute float speed;
-        attribute float offset;
-        attribute float psize;
-        attribute float side;
-        uniform float time;
-        uniform float hw;
-        uniform float hh;
-        uniform float fh;
-        varying float vAlpha;
-
-        void main() {
-          float topLen = hw;
-          float sideLen = fh;
-          float totalLen = topLen + sideLen;
-
-          float t = mod(time * speed + offset, totalLen);
-          vec3 pos = vec3(0.0, 0.0, 0.02);
-
-          if (t < topLen) {
-            // On top beam, moving outward from center
-            float x = t;
-            pos.x = side < 0.5 ? -x : x;
-            pos.y = hh;
-            vAlpha = 0.9;
-          } else {
-            // On side beam, moving down
-            float sideT = t - topLen;
-            pos.x = side < 0.5 ? -hw : hw;
-            pos.y = hh - sideT;
-            vAlpha = 0.8 * (1.0 - sideT / sideLen * 0.5);
+        float fbm(vec2 p) {
+          float v = 0.0;
+          float a = 0.5;
+          for (int i = 0; i < 4; i++) {
+            v += a * noise(p);
+            p *= 2.0;
+            a *= 0.5;
           }
-
-          vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = psize * (55.0 / -mvPos.z);
-          gl_Position = projectionMatrix * mvPos;
+          return v;
         }
-      `,
-      fragmentShader: `
-        varying float vAlpha;
+
         void main() {
-          float d = length(gl_PointCoord - 0.5);
-          if (d > 0.5) discard;
-          float a = (1.0 - d * 2.0) * vAlpha;
-          gl_FragColor = vec4(0.3, 0.6, 1.0, a);
+          vec2 uv = vUv;
+          float aspect = resolution.x / resolution.y;
+
+          // Center the beam horizontally
+          float beamX = 0.5;
+          float distFromBeam = abs(uv.x - beamX) * aspect;
+
+          // === CORE BEAM - very thin, bright ===
+          float core = exp(-distFromBeam * 80.0);
+
+          // === INNER GLOW ===
+          float innerGlow = exp(-distFromBeam * 20.0);
+
+          // === OUTER GLOW - wide atmospheric ===
+          float outerGlow = exp(-distFromBeam * 5.0);
+
+          // === ATMOSPHERIC GLOW - very wide ===
+          float atmosphere = exp(-distFromBeam * 1.5);
+
+          // === ENERGY FLOW - pulses moving down ===
+          float flow1 = sin(uv.y * 20.0 - time * 4.0) * 0.5 + 0.5;
+          float flow2 = sin(uv.y * 35.0 - time * 6.0) * 0.3 + 0.7;
+          float flow = flow1 * flow2;
+
+          // === FLICKERING ===
+          float flicker = 0.9 + 0.1 * sin(time * 15.0 + uv.y * 10.0);
+
+          // === ATMOSPHERIC NOISE ===
+          vec2 noiseCoord = vec2(uv.x * 3.0, uv.y * 2.0 - time * 0.3);
+          float atmosphereNoise = fbm(noiseCoord * 4.0);
+          float cloudEffect = atmosphereNoise * atmosphere * 0.4;
+
+          // === VERTICAL FADE ===
+          // Beam comes from top, fades slightly at bottom
+          float vertFade = smoothstep(0.0, 0.2, uv.y) * (0.7 + 0.3 * uv.y);
+
+          // === IMPACT GLOW at bottom ===
+          float impactY = 0.15;
+          float impactDist = length(vec2(distFromBeam * 0.5, (uv.y - impactY) * 2.0));
+          float impact = exp(-impactDist * 8.0) * smoothstep(0.3, 0.0, uv.y);
+
+          // === SPREAD at bottom ===
+          float spreadWidth = (1.0 - uv.y) * 0.3;
+          float spread = exp(-distFromBeam / max(spreadWidth, 0.01) * 3.0) * smoothstep(0.25, 0.0, uv.y);
+
+          // === COMBINE LAYERS ===
+          // Core: bright white-blue
+          vec3 coreColor = vec3(0.7, 0.85, 1.0);
+          // Inner: blue
+          vec3 innerColor = vec3(0.3, 0.5, 1.0);
+          // Outer: deeper blue
+          vec3 outerColor = vec3(0.1, 0.3, 0.9);
+          // Atmosphere: very deep blue
+          vec3 atmosColor = vec3(0.05, 0.15, 0.6);
+
+          vec3 color = vec3(0.0);
+
+          // Add atmosphere
+          color += atmosColor * atmosphere * 0.3;
+          color += atmosColor * cloudEffect;
+
+          // Add glows
+          color += outerColor * outerGlow * 0.5 * flow;
+          color += innerColor * innerGlow * 0.7 * flow * flicker;
+          color += coreColor * core * flow * flicker;
+
+          // Add impact and spread
+          color += innerColor * impact * 1.5;
+          color += outerColor * spread * 0.8;
+
+          // Apply vertical fade
+          color *= vertFade;
+
+          // Calculate alpha
+          float alpha = (core * 0.9 + innerGlow * 0.5 + outerGlow * 0.25 + atmosphere * 0.1 + cloudEffect + impact + spread * 0.5) * vertFade;
+
+          // Clamp and output
+          alpha = clamp(alpha, 0.0, 1.0);
+
+          gl_FragColor = vec4(color, alpha);
         }
       `,
       transparent: true,
@@ -248,12 +164,12 @@
       depthWrite: false
     });
 
-    const particles = new THREE.Points(particleGeo, particleMat);
-    frameGroup.add(particles);
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
 
     function animate() {
       requestAnimationFrame(animate);
-      timeUniform.value += 0.016;
+      material.uniforms.time.value += 0.016;
       renderer.render(scene, camera);
     }
     animate();
@@ -261,9 +177,8 @@
     window.addEventListener('resize', () => {
       const w = container.offsetWidth || window.innerWidth;
       const h = container.offsetHeight || window.innerHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
       renderer.setSize(w, h);
+      material.uniforms.resolution.value.set(w, h);
     });
   }
 
