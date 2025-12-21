@@ -1,7 +1,6 @@
 /**
- * Spinning Planet Animation v2
- * TradingView-inspired 3D globe with glowing orbital rings and candlesticks
- * Much improved version with better glow, grid, and visual effects
+ * Spinning Planet Animation v3
+ * Complete rebuild with sweeping light trails, proper bloom, and cinematic feel
  */
 
 (function() {
@@ -21,15 +20,14 @@
     // Scene
     const scene = new THREE.Scene();
 
-    // Dimensions
     const width = container.clientWidth;
     const height = container.clientHeight;
 
-    // Camera - closer for more drama
-    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
-    camera.position.set(0, 0.3, 3.2);
+    // Camera
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    camera.position.set(0, 0.2, 3.5);
 
-    // Renderer with better settings
+    // Renderer
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true,
@@ -37,206 +35,251 @@
     });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
     container.appendChild(renderer.domElement);
 
     // Planet group
     const planetGroup = new THREE.Group();
-    planetGroup.rotation.x = 0.15; // Slight tilt
-    planetGroup.rotation.z = -0.1;
+    planetGroup.rotation.x = 0.2;
+    planetGroup.rotation.z = -0.15;
     scene.add(planetGroup);
 
     // ============================================
-    // PLANET SPHERE with visible grid
+    // DARK PLANET with subtle dot grid
     // ============================================
-    const planetGeometry = new THREE.SphereGeometry(1, 64, 64);
+    const planetGeo = new THREE.SphereGeometry(1, 64, 64);
 
-    const planetMaterial = new THREE.ShaderMaterial({
+    const planetMat = new THREE.ShaderMaterial({
       uniforms: {
-        time: { value: 0 },
-        baseColor1: { value: new THREE.Color(0x0a1a2e) },
-        baseColor2: { value: new THREE.Color(0x1a3a5c) },
-        gridColor: { value: new THREE.Color(0x4a9eff) },
-        glowColor: { value: new THREE.Color(0x00d4ff) }
+        time: { value: 0 }
       },
       vertexShader: `
         varying vec3 vNormal;
         varying vec3 vPosition;
         varying vec2 vUv;
-        varying vec3 vWorldPosition;
 
         void main() {
           vNormal = normalize(normalMatrix * normal);
           vPosition = position;
           vUv = uv;
-          vec4 worldPos = modelMatrix * vec4(position, 1.0);
-          vWorldPosition = worldPos.xyz;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragmentShader: `
-        uniform float time;
-        uniform vec3 baseColor1;
-        uniform vec3 baseColor2;
-        uniform vec3 gridColor;
-        uniform vec3 glowColor;
-
         varying vec3 vNormal;
         varying vec3 vPosition;
         varying vec2 vUv;
-        varying vec3 vWorldPosition;
 
         void main() {
-          // Base gradient
+          // Very dark base
+          vec3 darkBlue = vec3(0.02, 0.04, 0.08);
+          vec3 midBlue = vec3(0.05, 0.1, 0.18);
+
+          // Gradient from bottom to top
           float gradient = smoothstep(-1.0, 1.0, vPosition.y);
-          vec3 baseColor = mix(baseColor1, baseColor2, gradient * 0.7 + 0.15);
+          vec3 baseColor = mix(darkBlue, midBlue, gradient * 0.5);
 
-          // VISIBLE GRID LINES - latitude and longitude
-          float latLines = 12.0;
-          float lonLines = 24.0;
+          // Subtle dot grid pattern
+          float latDots = 16.0;
+          float lonDots = 32.0;
 
-          // Latitude lines (horizontal)
-          float lat = abs(fract(vUv.y * latLines) - 0.5) * 2.0;
-          float latLine = 1.0 - smoothstep(0.0, 0.08, lat);
+          vec2 gridUv = vec2(vUv.x * lonDots, vUv.y * latDots);
+          vec2 gridFract = fract(gridUv);
+          float dot = length(gridFract - 0.5);
+          float dotPattern = 1.0 - smoothstep(0.0, 0.15, dot);
 
-          // Longitude lines (vertical)
-          float lon = abs(fract(vUv.x * lonLines) - 0.5) * 2.0;
-          float lonLine = 1.0 - smoothstep(0.0, 0.06, lon);
+          // Faint grid lines
+          float latLine = 1.0 - smoothstep(0.0, 0.03, abs(fract(vUv.y * 8.0) - 0.5) * 2.0);
+          float lonLine = 1.0 - smoothstep(0.0, 0.02, abs(fract(vUv.x * 16.0) - 0.5) * 2.0);
+          float gridLine = max(latLine, lonLine) * 0.15;
 
-          // Combine grid
-          float grid = max(latLine, lonLine) * 0.6;
+          // Edge fresnel
+          vec3 viewDir = normalize(cameraPosition - vPosition);
+          float fresnel = pow(1.0 - max(dot(vNormal, viewDir), 0.0), 3.0);
 
-          // Fresnel edge glow
-          vec3 viewDir = normalize(cameraPosition - vWorldPosition);
-          float fresnel = pow(1.0 - max(dot(vNormal, viewDir), 0.0), 2.5);
+          // Combine
+          vec3 gridColor = vec3(0.2, 0.5, 0.8);
+          vec3 edgeColor = vec3(0.0, 0.8, 1.0);
 
-          // Compose final color
           vec3 finalColor = baseColor;
-          finalColor += gridColor * grid * 0.5;
-          finalColor = mix(finalColor, glowColor, fresnel * 0.7);
+          finalColor += gridColor * dotPattern * 0.08;
+          finalColor += gridColor * gridLine;
+          finalColor = mix(finalColor, edgeColor, fresnel * 0.4);
 
-          // Atmosphere fade at edges
-          float alpha = 0.85 + fresnel * 0.15;
-
-          gl_FragColor = vec4(finalColor, alpha);
+          gl_FragColor = vec4(finalColor, 0.95 - fresnel * 0.1);
         }
       `,
       transparent: true,
-      side: THREE.FrontSide
+      depthWrite: true
     });
 
-    const planet = new THREE.Mesh(planetGeometry, planetMaterial);
+    const planet = new THREE.Mesh(planetGeo, planetMat);
     planetGroup.add(planet);
 
     // ============================================
-    // GLOWING ATMOSPHERE - multiple layers
+    // ATMOSPHERE GLOW
     // ============================================
-    function createAtmosphere(size, color, intensity) {
-      const geo = new THREE.SphereGeometry(size, 32, 32);
-      const mat = new THREE.ShaderMaterial({
+    const atmosGeo = new THREE.SphereGeometry(1.08, 32, 32);
+    const atmosMat = new THREE.ShaderMaterial({
+      uniforms: {
+        glowColor: { value: new THREE.Color(0x00aaff) }
+      },
+      vertexShader: `
+        varying vec3 vNormal;
+        void main() {
+          vNormal = normalize(normalMatrix * normal);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 glowColor;
+        varying vec3 vNormal;
+        void main() {
+          float intensity = pow(0.7 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.5);
+          gl_FragColor = vec4(glowColor, intensity * 0.6);
+        }
+      `,
+      side: THREE.BackSide,
+      blending: THREE.AdditiveBlending,
+      transparent: true,
+      depthWrite: false
+    });
+    const atmosphere = new THREE.Mesh(atmosGeo, atmosMat);
+    planetGroup.add(atmosphere);
+
+    // ============================================
+    // SWEEPING LIGHT TRAIL RINGS
+    // ============================================
+    function createSweepingRing(radius, tiltX, tiltY, color, arcLength, thickness, segments) {
+      const ringGroup = new THREE.Group();
+
+      // Create arc path
+      const curve = new THREE.EllipseCurve(
+        0, 0,
+        radius, radius,
+        0, Math.PI * arcLength,
+        false,
+        0
+      );
+
+      const points = curve.getPoints(segments);
+      const points3D = points.map(p => new THREE.Vector3(p.x, 0, p.y));
+
+      // Create tube along the arc with tapering
+      const path = new THREE.CatmullRomCurve3(points3D);
+
+      // Main bright core
+      const tubeGeo = new THREE.TubeGeometry(path, segments, thickness, 8, false);
+      const tubeMat = new THREE.ShaderMaterial({
         uniforms: {
-          glowColor: { value: new THREE.Color(color) },
-          intensity: { value: intensity }
+          color: { value: new THREE.Color(color) },
+          time: { value: 0 }
         },
         vertexShader: `
-          varying vec3 vNormal;
-          varying vec3 vPositionNormal;
+          attribute float tubeT;
+          varying float vT;
+          varying vec3 vPosition;
           void main() {
-            vNormal = normalize(normalMatrix * normal);
-            vPositionNormal = normalize((modelViewMatrix * vec4(position, 1.0)).xyz);
+            vPosition = position;
             gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
           }
         `,
         fragmentShader: `
-          uniform vec3 glowColor;
-          uniform float intensity;
-          varying vec3 vNormal;
-          varying vec3 vPositionNormal;
+          uniform vec3 color;
+          varying vec3 vPosition;
           void main() {
-            float strength = pow(0.65 - dot(vNormal, vPositionNormal), 2.0);
-            vec3 glow = glowColor * strength * intensity;
-            gl_FragColor = vec4(glow, strength * 0.8);
+            gl_FragColor = vec4(color, 1.0);
           }
         `,
-        side: THREE.BackSide,
-        blending: THREE.AdditiveBlending,
         transparent: true,
+        blending: THREE.AdditiveBlending,
         depthWrite: false
       });
-      return new THREE.Mesh(geo, mat);
-    }
+      const tube = new THREE.Mesh(tubeGeo, tubeMat);
+      ringGroup.add(tube);
 
-    // Inner glow (cyan)
-    const atmosphere1 = createAtmosphere(1.12, 0x00d4ff, 1.5);
-    planetGroup.add(atmosphere1);
-
-    // Outer glow (blue)
-    const atmosphere2 = createAtmosphere(1.25, 0x4a9eff, 0.8);
-    planetGroup.add(atmosphere2);
-
-    // ============================================
-    // SURFACE DOTS - scattered data points
-    // ============================================
-    const dotsGroup = new THREE.Group();
-    const dotColors = [0x00ffff, 0xff4976, 0x3ed598, 0x4a9eff, 0xff6b9d];
-
-    for (let i = 0; i < 120; i++) {
-      // Random position on sphere using fibonacci
-      const phi = Math.acos(1 - 2 * (i + 0.5) / 120);
-      const theta = Math.PI * (1 + Math.sqrt(5)) * i;
-
-      const x = Math.sin(phi) * Math.cos(theta);
-      const y = Math.sin(phi) * Math.sin(theta);
-      const z = Math.cos(phi);
-
-      // Randomly skip some dots
-      if (Math.random() > 0.5) continue;
-
-      const dotSize = 0.012 + Math.random() * 0.015;
-      const dotGeo = new THREE.SphereGeometry(dotSize, 6, 6);
-      const dotColor = dotColors[Math.floor(Math.random() * dotColors.length)];
-      const dotMat = new THREE.MeshBasicMaterial({
-        color: dotColor,
+      // Glow layer 1
+      const glow1Geo = new THREE.TubeGeometry(path, segments, thickness * 3, 8, false);
+      const glow1Mat = new THREE.MeshBasicMaterial({
+        color: color,
         transparent: true,
-        opacity: 0.7 + Math.random() * 0.3
+        opacity: 0.4,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
       });
-      const dot = new THREE.Mesh(dotGeo, dotMat);
-      dot.position.set(x * 1.01, y * 1.01, z * 1.01);
-      dot.userData.baseOpacity = dot.material.opacity;
-      dot.userData.pulseOffset = Math.random() * Math.PI * 2;
-      dotsGroup.add(dot);
+      const glow1 = new THREE.Mesh(glow1Geo, glow1Mat);
+      ringGroup.add(glow1);
+
+      // Glow layer 2 (wider)
+      const glow2Geo = new THREE.TubeGeometry(path, segments, thickness * 8, 8, false);
+      const glow2Mat = new THREE.MeshBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 0.15,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      const glow2 = new THREE.Mesh(glow2Geo, glow2Mat);
+      ringGroup.add(glow2);
+
+      // Glow layer 3 (widest - bloom simulation)
+      const glow3Geo = new THREE.TubeGeometry(path, segments, thickness * 15, 8, false);
+      const glow3Mat = new THREE.MeshBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 0.06,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      const glow3 = new THREE.Mesh(glow3Geo, glow3Mat);
+      ringGroup.add(glow3);
+
+      ringGroup.rotation.x = tiltX;
+      ringGroup.rotation.y = tiltY;
+
+      return ringGroup;
     }
-    planetGroup.add(dotsGroup);
+
+    // Main cyan ring (front arc)
+    const ring1 = createSweepingRing(1.5, Math.PI * 0.55, 0.3, 0x00ffff, 1.3, 0.012, 80);
+    scene.add(ring1);
+
+    // Second cyan ring (back arc)
+    const ring2 = createSweepingRing(1.55, Math.PI * 0.52, Math.PI + 0.2, 0x00ddff, 1.1, 0.01, 70);
+    scene.add(ring2);
+
+    // Magenta/pink ring
+    const ring3 = createSweepingRing(1.75, Math.PI * 0.48, 0.8, 0xff0066, 1.4, 0.008, 80);
+    scene.add(ring3);
+
+    // Second magenta arc
+    const ring4 = createSweepingRing(1.8, Math.PI * 0.5, Math.PI + 1.0, 0xff3388, 0.9, 0.007, 60);
+    scene.add(ring4);
+
+    // Subtle blue outer ring
+    const ring5 = createSweepingRing(2.0, Math.PI * 0.58, 1.5, 0x4488ff, 1.6, 0.006, 90);
+    scene.add(ring5);
 
     // ============================================
-    // CANDLESTICKS - trading bars on surface
+    // CANDLESTICKS on planet surface
     // ============================================
-    const candlesGroup = new THREE.Group();
+    const candleGroup = new THREE.Group();
 
-    // More candlesticks in visible clusters
     const candleData = [
-      // Front-facing cluster
-      { lat: 15, lon: 20, h: 0.18, c: 0xff4976 },
-      { lat: 20, lon: 28, h: 0.28, c: 0x3ed598 },
-      { lat: 25, lon: 35, h: 0.15, c: 0xff4976 },
-      { lat: 18, lon: 42, h: 0.35, c: 0x3ed598 },
-      { lat: 22, lon: 50, h: 0.22, c: 0x3ed598 },
-      { lat: 28, lon: 55, h: 0.12, c: 0xff4976 },
-      // Upper cluster
-      { lat: 45, lon: -30, h: 0.25, c: 0x3ed598 },
-      { lat: 50, lon: -22, h: 0.18, c: 0xff4976 },
-      { lat: 42, lon: -15, h: 0.32, c: 0x3ed598 },
-      { lat: 48, lon: -8, h: 0.14, c: 0xff4976 },
-      // Right side cluster
-      { lat: -5, lon: 80, h: 0.2, c: 0x3ed598 },
-      { lat: -10, lon: 88, h: 0.28, c: 0xff4976 },
-      { lat: -2, lon: 95, h: 0.16, c: 0x3ed598 },
-      { lat: -15, lon: 100, h: 0.24, c: 0x3ed598 },
-      // Lower cluster
-      { lat: -35, lon: 45, h: 0.22, c: 0xff4976 },
-      { lat: -40, lon: 52, h: 0.3, c: 0x3ed598 },
-      { lat: -32, lon: 60, h: 0.18, c: 0x3ed598 },
+      // Visible front cluster
+      { lat: 20, lon: 35, h: 0.12, c: 0xff3366 },
+      { lat: 25, lon: 45, h: 0.18, c: 0x00ff88 },
+      { lat: 18, lon: 55, h: 0.10, c: 0xff3366 },
+      { lat: 28, lon: 60, h: 0.22, c: 0x00ff88 },
+      { lat: 22, lon: 70, h: 0.15, c: 0x00ff88 },
+      { lat: 30, lon: 42, h: 0.08, c: 0xff3366 },
+      // Right side
+      { lat: 5, lon: 85, h: 0.14, c: 0x00ff88 },
+      { lat: -5, lon: 95, h: 0.20, c: 0xff3366 },
+      { lat: 10, lon: 100, h: 0.11, c: 0x00ff88 },
+      // Upper area
+      { lat: 45, lon: 20, h: 0.16, c: 0x00ff88 },
+      { lat: 50, lon: 30, h: 0.12, c: 0xff3366 },
+      { lat: 42, lon: -10, h: 0.19, c: 0x00ff88 },
     ];
 
     candleData.forEach(c => {
@@ -248,105 +291,107 @@
       const z = Math.cos(latRad) * Math.sin(lonRad);
 
       // Candle body
-      const bodyGeo = new THREE.BoxGeometry(0.025, c.h, 0.025);
+      const bodyGeo = new THREE.BoxGeometry(0.018, c.h, 0.018);
       const bodyMat = new THREE.MeshBasicMaterial({
         color: c.c,
         transparent: true,
-        opacity: 0.95
+        opacity: 0.9
       });
       const body = new THREE.Mesh(bodyGeo, bodyMat);
 
-      // Position and orient
       body.position.set(x * 1.01, y * 1.01, z * 1.01);
       body.lookAt(0, 0, 0);
       body.rotateX(Math.PI / 2);
       body.translateY(c.h / 2);
 
-      // Add wick
-      const wickGeo = new THREE.BoxGeometry(0.006, c.h * 0.4, 0.006);
-      const wickMat = new THREE.MeshBasicMaterial({ color: c.c, opacity: 0.7, transparent: true });
-      const wick = new THREE.Mesh(wickGeo, wickMat);
-      wick.position.y = c.h / 2 + c.h * 0.2;
-      body.add(wick);
-
-      // Glow effect for candle
-      const glowGeo = new THREE.BoxGeometry(0.05, c.h * 1.2, 0.05);
+      // Glow
+      const glowGeo = new THREE.BoxGeometry(0.04, c.h * 1.2, 0.04);
       const glowMat = new THREE.MeshBasicMaterial({
         color: c.c,
         transparent: true,
-        opacity: 0.2,
+        opacity: 0.25,
         blending: THREE.AdditiveBlending
       });
       const glow = new THREE.Mesh(glowGeo, glowMat);
       body.add(glow);
 
-      candlesGroup.add(body);
+      candleGroup.add(body);
     });
-    planetGroup.add(candlesGroup);
+    planetGroup.add(candleGroup);
 
     // ============================================
-    // ORBITAL RINGS - with glow effect
+    // SURFACE DATA DOTS
     // ============================================
-    function createGlowingRing(radius, tiltX, tiltZ, color, thickness, glowIntensity) {
-      const ringGroup = new THREE.Group();
+    const dotsGroup = new THREE.Group();
+    const dotColors = [0x00ffff, 0xff0066, 0x00ff88, 0x4488ff];
 
-      // Core ring
-      const coreGeo = new THREE.TorusGeometry(radius, thickness, 16, 150);
-      const coreMat = new THREE.MeshBasicMaterial({
-        color: color,
+    for (let i = 0; i < 80; i++) {
+      const phi = Math.acos(1 - 2 * (i + 0.5) / 80);
+      const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+
+      if (Math.random() > 0.4) continue;
+
+      const x = Math.sin(phi) * Math.cos(theta);
+      const y = Math.sin(phi) * Math.sin(theta);
+      const z = Math.cos(phi);
+
+      const dotGeo = new THREE.SphereGeometry(0.015 + Math.random() * 0.01, 6, 6);
+      const dotColor = dotColors[Math.floor(Math.random() * dotColors.length)];
+      const dotMat = new THREE.MeshBasicMaterial({
+        color: dotColor,
         transparent: true,
-        opacity: 0.9
+        opacity: 0.6 + Math.random() * 0.4
       });
-      const core = new THREE.Mesh(coreGeo, coreMat);
-      ringGroup.add(core);
+      const dot = new THREE.Mesh(dotGeo, dotMat);
+      dot.position.set(x * 1.01, y * 1.01, z * 1.01);
+      dot.userData.pulseOffset = Math.random() * Math.PI * 2;
+      dot.userData.baseOpacity = dot.material.opacity;
+      dotsGroup.add(dot);
+    }
+    planetGroup.add(dotsGroup);
 
-      // Inner glow
-      const glow1Geo = new THREE.TorusGeometry(radius, thickness * 3, 16, 100);
-      const glow1Mat = new THREE.MeshBasicMaterial({
-        color: color,
-        transparent: true,
-        opacity: 0.3 * glowIntensity,
-        blending: THREE.AdditiveBlending
-      });
-      const glow1 = new THREE.Mesh(glow1Geo, glow1Mat);
-      ringGroup.add(glow1);
+    // ============================================
+    // BACKGROUND STARS
+    // ============================================
+    const starsGeo = new THREE.BufferGeometry();
+    const starPositions = [];
+    const starColors = [];
 
-      // Outer glow
-      const glow2Geo = new THREE.TorusGeometry(radius, thickness * 8, 16, 100);
-      const glow2Mat = new THREE.MeshBasicMaterial({
-        color: color,
-        transparent: true,
-        opacity: 0.12 * glowIntensity,
-        blending: THREE.AdditiveBlending
-      });
-      const glow2 = new THREE.Mesh(glow2Geo, glow2Mat);
-      ringGroup.add(glow2);
+    for (let i = 0; i < 300; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const dist = 6 + Math.random() * 10;
 
-      ringGroup.rotation.x = tiltX;
-      ringGroup.rotation.z = tiltZ;
+      starPositions.push(
+        dist * Math.sin(phi) * Math.cos(theta),
+        dist * Math.sin(phi) * Math.sin(theta),
+        dist * Math.cos(phi)
+      );
 
-      return ringGroup;
+      const brightness = 0.5 + Math.random() * 0.5;
+      starColors.push(brightness, brightness, brightness * 1.1);
     }
 
-    // Main cyan ring
-    const ring1 = createGlowingRing(1.6, Math.PI / 2.3, 0.25, 0x00ffff, 0.008, 1.2);
-    scene.add(ring1);
+    starsGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+    starsGeo.setAttribute('color', new THREE.Float32BufferAttribute(starColors, 3));
 
-    // Magenta/pink ring
-    const ring2 = createGlowingRing(1.85, Math.PI / 2.1, -0.2, 0xff4976, 0.006, 1.0);
-    scene.add(ring2);
-
-    // Subtle blue outer ring
-    const ring3 = createGlowingRing(2.1, Math.PI / 2.5, 0.1, 0x4a9eff, 0.005, 0.6);
-    scene.add(ring3);
+    const starsMat = new THREE.PointsMaterial({
+      size: 0.03,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8,
+      sizeAttenuation: true
+    });
+    const stars = new THREE.Points(starsGeo, starsMat);
+    scene.add(stars);
 
     // ============================================
-    // RING PARTICLES - traveling lights
+    // TRAVELING PARTICLES on rings
     // ============================================
-    const ringParticles = [];
+    const particles = [];
 
-    function createRingParticle(radius, tiltX, tiltZ, color, startAngle, speed) {
-      const particleGeo = new THREE.SphereGeometry(0.025, 8, 8);
+    function createParticle(radius, tiltX, tiltY, color, speed) {
+      const particleGeo = new THREE.SphereGeometry(0.03, 8, 8);
       const particleMat = new THREE.MeshBasicMaterial({
         color: color,
         transparent: true,
@@ -354,88 +399,43 @@
       });
       const particle = new THREE.Mesh(particleGeo, particleMat);
 
-      // Glow around particle
-      const glowGeo = new THREE.SphereGeometry(0.06, 8, 8);
+      // Glow
+      const glowGeo = new THREE.SphereGeometry(0.08, 8, 8);
       const glowMat = new THREE.MeshBasicMaterial({
         color: color,
         transparent: true,
-        opacity: 0.4,
+        opacity: 0.5,
         blending: THREE.AdditiveBlending
       });
-      const glow = new THREE.Mesh(glowGeo, glowMat);
-      particle.add(glow);
+      particle.add(new THREE.Mesh(glowGeo, glowMat));
 
       particle.userData = {
-        angle: startAngle,
-        speed: speed,
+        angle: Math.random() * Math.PI * 2,
         radius: radius,
         tiltX: tiltX,
-        tiltZ: tiltZ
+        tiltY: tiltY,
+        speed: speed
       };
+
       return particle;
     }
 
-    // Particles on cyan ring
-    for (let i = 0; i < 4; i++) {
-      const p = createRingParticle(1.6, Math.PI / 2.3, 0.25, 0x00ffff, i * Math.PI / 2, 0.4);
-      scene.add(p);
-      ringParticles.push(p);
-    }
-
-    // Particles on magenta ring
+    // Cyan particles
     for (let i = 0; i < 3; i++) {
-      const p = createRingParticle(1.85, Math.PI / 2.1, -0.2, 0xff4976, i * Math.PI * 2 / 3, 0.3);
+      const p = createParticle(1.52, Math.PI * 0.55, 0.3, 0x00ffff, 0.3 + Math.random() * 0.2);
       scene.add(p);
-      ringParticles.push(p);
+      particles.push(p);
+    }
+
+    // Magenta particles
+    for (let i = 0; i < 2; i++) {
+      const p = createParticle(1.77, Math.PI * 0.48, 0.8, 0xff0066, 0.25 + Math.random() * 0.15);
+      scene.add(p);
+      particles.push(p);
     }
 
     // ============================================
-    // BACKGROUND STARS
-    // ============================================
-    const starsGroup = new THREE.Group();
-    for (let i = 0; i < 200; i++) {
-      const starGeo = new THREE.SphereGeometry(0.008 + Math.random() * 0.012, 4, 4);
-      const brightness = 0.3 + Math.random() * 0.7;
-      const starMat = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(brightness, brightness, brightness * 1.1),
-        transparent: true,
-        opacity: 0.4 + Math.random() * 0.6
-      });
-      const star = new THREE.Mesh(starGeo, starMat);
-
-      // Random position in a sphere around the scene
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-      const dist = 5 + Math.random() * 8;
-
-      star.position.x = dist * Math.sin(phi) * Math.cos(theta);
-      star.position.y = dist * Math.sin(phi) * Math.sin(theta);
-      star.position.z = dist * Math.cos(phi);
-
-      star.userData.twinkleOffset = Math.random() * Math.PI * 2;
-      star.userData.twinkleSpeed = 1 + Math.random() * 2;
-      star.userData.baseOpacity = star.material.opacity;
-
-      starsGroup.add(star);
-    }
-    scene.add(starsGroup);
-
-    // ============================================
-    // LIGHTING
-    // ============================================
-    const ambientLight = new THREE.AmbientLight(0x404060, 0.5);
-    scene.add(ambientLight);
-
-    const pointLight1 = new THREE.PointLight(0x00d4ff, 1.5, 20);
-    pointLight1.position.set(3, 2, 3);
-    scene.add(pointLight1);
-
-    const pointLight2 = new THREE.PointLight(0xff4976, 0.5, 15);
-    pointLight2.position.set(-3, -1, 2);
-    scene.add(pointLight2);
-
-    // ============================================
-    // ANIMATION LOOP
+    // ANIMATION
     // ============================================
     let animationId;
     const clock = new THREE.Clock();
@@ -445,59 +445,58 @@
       const elapsed = clock.getElapsedTime();
 
       if (!prefersReducedMotion) {
-        // Rotate planet slowly
-        planetGroup.rotation.y = elapsed * 0.08;
+        // Rotate planet
+        planetGroup.rotation.y = elapsed * 0.06;
 
-        // Subtle bobbing
-        planetGroup.position.y = Math.sin(elapsed * 0.5) * 0.02;
+        // Subtle float
+        planetGroup.position.y = Math.sin(elapsed * 0.4) * 0.015;
 
-        // Rotate rings at different speeds
-        ring1.rotation.z = 0.25 + elapsed * 0.04;
-        ring2.rotation.z = -0.2 - elapsed * 0.025;
-        ring3.rotation.z = 0.1 + elapsed * 0.015;
+        // Rotate ring groups slowly
+        ring1.rotation.z = elapsed * 0.02;
+        ring2.rotation.z = -elapsed * 0.015;
+        ring3.rotation.z = elapsed * 0.018;
+        ring4.rotation.z = -elapsed * 0.012;
+        ring5.rotation.z = elapsed * 0.01;
 
-        // Animate ring particles
-        ringParticles.forEach(p => {
-          p.userData.angle += p.userData.speed * 0.015;
+        // Animate particles
+        particles.forEach(p => {
+          p.userData.angle += p.userData.speed * 0.02;
           const a = p.userData.angle;
           const r = p.userData.radius;
 
-          // Position on tilted ring
-          const x = Math.cos(a) * r;
-          const y = Math.sin(a) * r;
+          // Position on ring
+          let x = Math.cos(a) * r;
+          let y = 0;
+          let z = Math.sin(a) * r;
 
-          // Apply tilt transformations
+          // Apply tilt
           const cosX = Math.cos(p.userData.tiltX);
           const sinX = Math.sin(p.userData.tiltX);
-          const cosZ = Math.cos(p.userData.tiltZ);
-          const sinZ = Math.sin(p.userData.tiltZ);
+          const cosY = Math.cos(p.userData.tiltY);
+          const sinY = Math.sin(p.userData.tiltY);
 
-          // Transform position
-          const y2 = y * cosX;
-          const z2 = y * sinX;
+          // Rotate around X
+          const y1 = y * cosX - z * sinX;
+          const z1 = y * sinX + z * cosX;
 
-          p.position.x = x * cosZ - y2 * sinZ;
-          p.position.y = x * sinZ + y2 * cosZ;
-          p.position.z = z2;
+          // Rotate around Y
+          const x2 = x * cosY + z1 * sinY;
+          const z2 = -x * sinY + z1 * cosY;
 
-          // Pulse effect
-          p.material.opacity = 0.6 + Math.sin(elapsed * 4 + p.userData.angle) * 0.4;
+          p.position.set(x2, y1, z2);
+
+          // Pulse
+          p.material.opacity = 0.7 + Math.sin(elapsed * 4 + p.userData.angle) * 0.3;
         });
 
-        // Twinkle stars
-        starsGroup.children.forEach(star => {
-          const twinkle = Math.sin(elapsed * star.userData.twinkleSpeed + star.userData.twinkleOffset);
-          star.material.opacity = star.userData.baseOpacity * (0.5 + twinkle * 0.5);
-        });
-
-        // Pulse surface dots
+        // Pulse dots
         dotsGroup.children.forEach(dot => {
           const pulse = Math.sin(elapsed * 2 + dot.userData.pulseOffset);
-          dot.material.opacity = dot.userData.baseOpacity * (0.7 + pulse * 0.3);
+          dot.material.opacity = dot.userData.baseOpacity * (0.6 + pulse * 0.4);
         });
 
         // Update planet shader
-        planetMaterial.uniforms.time.value = elapsed;
+        planetMat.uniforms.time.value = elapsed;
       }
 
       renderer.render(scene, camera);
@@ -505,9 +504,7 @@
 
     animate();
 
-    // ============================================
-    // RESIZE HANDLER
-    // ============================================
+    // Resize
     function onResize() {
       const w = container.clientWidth;
       const h = container.clientHeight;
@@ -518,7 +515,6 @@
 
     window.addEventListener('resize', onResize);
 
-    // Cleanup
     window.cleanupPlanet = function() {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', onResize);
@@ -529,7 +525,6 @@
     };
   }
 
-  // Init
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initPlanet);
   } else {
