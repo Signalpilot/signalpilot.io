@@ -3335,23 +3335,29 @@
     console.log('Starfield: duration=' + duration + ', switchPoint=' + switchPoint);
   });
 
+  // Quick cross-fade (100ms) to blur the transition
+  function crossFade(fadeIn, fadeOut) {
+    fadeIn.style.transition = 'opacity 0.1s ease';
+    fadeOut.style.transition = 'opacity 0.1s ease';
+    fadeIn.style.opacity = '0.5';
+    fadeOut.style.opacity = '0';
+
+    // Remove transition after fade completes, restart hidden video
+    setTimeout(function() {
+      fadeIn.style.transition = '';
+      fadeOut.style.transition = '';
+      fadeOut.currentTime = 0;
+      fadeOut.play();
+    }, 100);
+  }
+
   function checkAndSwitch() {
     if (activeVideo === 'A' && videoA.currentTime >= switchPoint) {
-      // Switch to B, restart A while hidden
-      videoB.style.opacity = '0.5';
-      videoA.style.opacity = '0';
       activeVideo = 'B';
-      // Restart A from beginning (it's hidden now)
-      videoA.currentTime = 0;
-      videoA.play();
+      crossFade(videoB, videoA);
     } else if (activeVideo === 'B' && videoB.currentTime >= switchPoint) {
-      // Switch to A, restart B while hidden
-      videoA.style.opacity = '0.5';
-      videoB.style.opacity = '0';
       activeVideo = 'A';
-      // Restart B from beginning (it's hidden now)
-      videoB.currentTime = 0;
-      videoB.play();
+      crossFade(videoA, videoB);
     }
     requestAnimationFrame(checkAndSwitch);
   }
@@ -3547,19 +3553,28 @@
           video2.currentTime = duration / 2;
         });
 
+        // Quick cross-fade (100ms) to blur the transition
+        function crossFade(fadeIn, fadeOut) {
+          fadeIn.style.transition = 'opacity 0.1s ease';
+          fadeOut.style.transition = 'opacity 0.1s ease';
+          fadeIn.style.opacity = '0.6';
+          fadeOut.style.opacity = '0';
+
+          setTimeout(function() {
+            fadeIn.style.transition = '';
+            fadeOut.style.transition = '';
+            fadeOut.currentTime = 0;
+            fadeOut.play();
+          }, 100);
+        }
+
         function checkAndSwitch() {
           if (activeVideo === '1' && video1.currentTime >= switchPoint) {
-            video2.style.opacity = '0.6';
-            video1.style.opacity = '0';
             activeVideo = '2';
-            video1.currentTime = 0;
-            video1.play();
+            crossFade(video2, video1);
           } else if (activeVideo === '2' && video2.currentTime >= switchPoint) {
-            video1.style.opacity = '0.6';
-            video2.style.opacity = '0';
             activeVideo = '1';
-            video2.currentTime = 0;
-            video2.play();
+            crossFade(video1, video2);
           }
           requestAnimationFrame(checkAndSwitch);
         }
