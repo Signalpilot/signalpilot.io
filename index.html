@@ -2950,52 +2950,20 @@
   </video>
 </div>
 <script>
-// Starfield: Dual-layer with opacity + blur to mask loop points
+// Starfield: Pure constant overlap - no animations
 (function() {
   const videoA = document.getElementById('starfield-bg-a');
   const videoB = document.getElementById('starfield-bg-b');
-  let duration = 5;
-  const MIN_OPACITY = 0.08;   // Very dim at loop point
-  const MAX_OPACITY = 0.42;   // Bright in middle
-  const MAX_BLUR = 4;         // Blur pixels at loop point
+
+  // Both at constant opacity, offset by half duration
+  videoA.style.opacity = '0.35';
+  videoB.style.opacity = '0.35';
 
   videoA.addEventListener('loadedmetadata', function() {
-    duration = videoA.duration;
-    videoB.currentTime = duration / 2;
+    // Offset B by half duration so loops never align
+    videoB.currentTime = videoA.duration / 2;
     videoB.play();
   });
-
-  function updateEffects() {
-    const timeA = videoA.currentTime;
-    const timeB = videoB.currentTime;
-
-    // Position in cycle (0 to 1)
-    const posA = timeA / duration;
-    const posB = timeB / duration;
-
-    // Sine wave: 1 at middle, 0 at loop points (start/end)
-    const sinA = Math.sin(posA * Math.PI);
-    const sinB = Math.sin(posB * Math.PI);
-
-    // Opacity: low at loop point, high in middle
-    const opacityA = MIN_OPACITY + (MAX_OPACITY - MIN_OPACITY) * sinA;
-    const opacityB = MIN_OPACITY + (MAX_OPACITY - MIN_OPACITY) * sinB;
-
-    // Blur: high at loop point, zero in middle (inverse of sine)
-    const blurA = MAX_BLUR * (1 - sinA);
-    const blurB = MAX_BLUR * (1 - sinB);
-
-    videoA.style.opacity = opacityA;
-    videoB.style.opacity = opacityB;
-    videoA.style.filter = blurA > 0.1 ? `blur(${blurA}px)` : 'none';
-    videoB.style.filter = blurB > 0.1 ? `blur(${blurB}px)` : 'none';
-
-    requestAnimationFrame(updateEffects);
-  }
-
-  videoA.addEventListener('canplay', function() {
-    requestAnimationFrame(updateEffects);
-  }, { once: true });
 
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
