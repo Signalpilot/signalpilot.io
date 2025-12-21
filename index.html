@@ -3317,7 +3317,6 @@
 <video
   id="starfield-bg"
   autoplay
-  loop
   muted
   playsinline
   disablepictureinpicture
@@ -3333,8 +3332,32 @@
     opacity: 0.7;
   "
 >
-  <source src="assets/videos/starfield-bg.mp4?v=2" type="video/mp4">
+  <source src="assets/videos/starfield-bg.mp4?v=3" type="video/mp4">
 </video>
+<script>
+// Ping-pong loop: forward → reverse → forward (5s + 5s = 10s seamless)
+(function() {
+  const video = document.getElementById('starfield-bg');
+  let forward = true;
+
+  video.addEventListener('ended', function() {
+    // At end, reverse direction
+    video.playbackRate = -1;
+    video.play();
+    forward = false;
+  });
+
+  video.addEventListener('timeupdate', function() {
+    // When playing backward and reaches start, go forward again
+    if (!forward && video.currentTime <= 0.1) {
+      video.playbackRate = 1;
+      video.currentTime = 0;
+      video.play();
+      forward = true;
+    }
+  });
+})();
+</script>
 
 <!-- Scroll progress indicator -->
 <div class="scroll-progress" aria-hidden="true"></div>
