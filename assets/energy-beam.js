@@ -176,36 +176,43 @@
           // === GROUND GLOW with energy ripples ===
           float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.4 * (0.8 + energyFlow * 0.3);
 
-          // === COLORS - Smooth blue gradient ===
-          vec3 coreColor = vec3(0.85, 0.92, 1.0);     // Bright white-blue core
-          vec3 innerColor = vec3(0.4, 0.6, 1.0);      // Soft blue
-          vec3 outerColor = vec3(0.2, 0.4, 0.95);     // Medium blue
-          vec3 atmosColor = vec3(0.08, 0.2, 0.7);     // Deep blue atmosphere
-          vec3 splashColor = vec3(0.5, 0.7, 1.0);     // Bright splash
+          // === COLORS - Blue to purple gradient like Huly ===
+          vec3 coreColor = vec3(0.9, 0.95, 1.0);      // Bright white core
+          vec3 innerColor = vec3(0.5, 0.6, 1.0);      // Soft blue-white
+          vec3 outerColor = vec3(0.35, 0.4, 0.95);    // Blue with hint of purple
+          vec3 purpleGlow = vec3(0.4, 0.2, 0.8);      // Purple for outer atmosphere
+          vec3 atmosColor = vec3(0.15, 0.1, 0.5);     // Deep purple-blue atmosphere
+          vec3 splashColor = vec3(0.6, 0.5, 1.0);     // Purple-tinted splash
 
           // === COMBINE - SOLID POWERFUL CONTINUOUS BEAM ===
           float topSharpness = uv.y;
           float bottomGlow = 1.0 - uv.y;
 
+          // Purple shift increases with distance from beam and toward bottom
+          float purpleShift = smoothstep(0.0, 0.15, distFromBeam) * (0.5 + bottomGlow * 0.5);
+
           vec3 color = vec3(0.0);
 
-          // Atmosphere - constant, powerful, voluminous
-          color += atmosColor * atmosphere * (0.2 + bottomGlow * 0.25);
+          // Atmosphere - purple-shifted at edges
+          vec3 atmosMix = mix(vec3(0.1, 0.2, 0.6), atmosColor, purpleShift);
+          color += atmosMix * atmosphere * (0.25 + bottomGlow * 0.3);
 
-          // Outer glow - constant and strong
-          color += outerColor * outerGlow * (0.4 + bottomGlow * 0.3);
+          // Outer glow - blue to purple gradient
+          vec3 outerMix = mix(outerColor, purpleGlow, purpleShift * 0.6);
+          color += outerMix * outerGlow * (0.45 + bottomGlow * 0.35);
 
           // Inner glow - subtle shimmer only
           color += innerColor * innerGlow * 0.6 * subtleFlow;
 
-          // Core - SOLID, minimal modulation
+          // Core - SOLID white-blue, minimal modulation
           color += coreColor * core * (0.9 + 0.1 * subtleFlow);
 
           // Fine dust particles floating in the glow
           color += coreColor * dust;
 
-          // Horizontal spread at bottom
-          color += innerColor * horizSpread * 0.9;
+          // Horizontal spread at bottom - purple tinted
+          vec3 spreadColor = mix(innerColor, splashColor, 0.4);
+          color += spreadColor * horizSpread * 0.9;
           color += splashColor * groundGlow;
 
           // Apply vertical intensity
