@@ -173,21 +173,21 @@
           // Base curved glow
           float curveGlow = exp(-curvedRight * curvedRight * 0.8) * spreadY;
 
-          // === ENERGY FLOW along the horizontal spread ===
-          // Powerful pulses flowing outward to the right
-          float hPulse1 = pow(0.5 + 0.5 * sin(distRight * 6.0 - time * 4.0), 3.0);
-          float hPulse2 = pow(0.5 + 0.5 * sin(distRight * 10.0 - time * 5.0), 2.0);
-          float horizFlow = 0.5 + hPulse1 * 0.4 + hPulse2 * 0.4;
+          // === CONSTANT ENERGY OVERFLOW - smooth continuous spread ===
+          // Subtle flowing movement, not pulsating
+          float hFlow1 = sin(distRight * 4.0 - time * 2.5) * 0.5 + 0.5;
+          float hFlow2 = sin(distRight * 7.0 - time * 3.0) * 0.5 + 0.5;
+          float horizFlow = 0.85 + (hFlow1 + hFlow2) * 0.075; // Mostly constant with subtle variation
 
-          // Combine curve glow with flowing energy
+          // Combine curve glow with smooth energy
           float horizSpread = curveGlow * horizFlow;
 
-          // Edge glow at very bottom with flow
+          // Edge glow at very bottom - constant
           float edgeGlow = exp(-uv.y * 15.0) * exp(-distRight * 1.0) * 0.5;
-          horizSpread += edgeGlow * horizFlow * spreadY;
+          horizSpread += edgeGlow * spreadY;
 
-          // === GROUND GLOW with energy flow ===
-          float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.4 * horizFlow;
+          // === GROUND GLOW - constant overflow ===
+          float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.5;
 
           // === COLORS - DEEP DARK blue with purple/violet ===
           vec3 coreColor = vec3(0.3, 0.4, 0.9);        // Deep blue core
