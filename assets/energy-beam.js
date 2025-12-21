@@ -65,61 +65,33 @@
           return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
         }
 
-        // Fractal brownian motion for organic fog
-        float fbm(vec2 p, float t) {
-          float f = 0.0;
-          float w = 0.5;
-          for (float i = 0.0; i < 5.0; i++) {
-            f += w * noise(p);
-            p *= 2.0;
-            p.y -= t * 0.1 * (i + 1.0);
-            w *= 0.5;
-          }
-          return f;
-        }
+        // Ultra-fine dust - subtle specks, no chunky squares
+        float fineDust(vec2 uv, float t, float beamDist) {
+          float dust = 0.0;
 
-        // Premium dust particles - volumetric fog + fine specks
-        float premiumDust(vec2 uv, float t, float beamDist) {
-          float result = 0.0;
+          // Only very fine point-like specks
+          for (float i = 0.0; i < 6.0; i++) {
+            float scale = 200.0 + i * 100.0; // Very high frequency = tiny
+            vec2 p = uv * scale;
+            p.y += t * (0.05 + i * 0.02);
+            p.x += sin(t * 0.3 + i) * 0.5;
 
-          // Layer 1: Soft volumetric fog (like light scattering)
-          vec2 fogUV = uv * 8.0;
-          fogUV.y += t * 0.15;
-          fogUV.x += sin(t * 0.3) * 0.5;
-          float fog = fbm(fogUV, t) * 0.4;
-          fog *= exp(-beamDist * 6.0); // Concentrated near beam
-          result += fog * 0.5;
+            // Point hash - no interpolation = sharp tiny dots
+            float h = hash(floor(p) + i * 73.0);
 
-          // Layer 2: Medium dust motes (organic movement)
-          for (float i = 0.0; i < 4.0; i++) {
-            vec2 dustUV = uv * (30.0 + i * 20.0);
-            dustUV.y += t * (0.08 + i * 0.03);
-            dustUV.x += sin(t * 0.4 + i * 1.5) * 0.8;
-            dustUV += vec2(cos(t * 0.2 + i), sin(t * 0.3 + i)) * 0.5;
+            // Very sparse - only brightest points show
+            float speck = pow(h, 40.0 + i * 10.0);
 
-            float n = noise(dustUV);
-            float mote = smoothstep(0.75, 0.85, n) * smoothstep(0.95, 0.85, n); // Soft spots
+            // Fade near beam
+            float fade = exp(-beamDist * (10.0 + i * 3.0));
 
-            float fade = exp(-beamDist * (5.0 + i * 3.0));
-            float twinkle = 0.6 + 0.4 * sin(t * 2.0 + n * 10.0);
-            result += mote * fade * twinkle * 0.3;
+            // Gentle twinkle
+            float twinkle = 0.5 + 0.5 * sin(t * 3.0 + h * 20.0);
+
+            dust += speck * fade * twinkle * 0.08;
           }
 
-          // Layer 3: Fine sparkle specks (very subtle)
-          for (float i = 0.0; i < 3.0; i++) {
-            vec2 sparkUV = uv * (150.0 + i * 80.0);
-            sparkUV.y += t * (0.03 + i * 0.02);
-            sparkUV.x += sin(t * 0.2 + i * 2.0) * 0.3;
-
-            float h = hash(floor(sparkUV) + i * 100.0);
-            float spark = pow(h, 20.0); // Very sparse bright specks
-            float fade = exp(-beamDist * (4.0 + i * 2.0));
-            float flicker = 0.3 + 0.7 * sin(t * 5.0 + h * 20.0);
-
-            result += spark * fade * flicker * 0.4;
-          }
-
-          return result;
+          return dust;
         }
 
         void main() {
@@ -161,8 +133,8 @@
           float shimmer2 = 0.97 + 0.03 * sin(uv.y * 50.0 + time * 3.0);
           float subtleFlow = shimmer * shimmer2;
 
-          // === PREMIUM DUST - volumetric fog + organic motes + fine specks ===
-          float dust = premiumDust(uv, time, distFromBeam);
+          // === ULTRA-FINE DUST - subtle tiny specks only ===
+          float dust = fineDust(uv, time, distFromBeam);
 
           // === VERTICAL INTENSITY ===
           // Brighter at top, gradual fade
