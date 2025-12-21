@@ -3313,7 +3313,7 @@
 
 <body>
 
-<!-- Starfield video background - cross-fade dual layer -->
+<!-- Starfield video background - performance optimized -->
 <video
   id="starfield-bg-1"
   autoplay
@@ -3321,6 +3321,7 @@
   muted
   playsinline
   disablepictureinpicture
+  preload="auto"
   style="
     position: fixed;
     top: 0;
@@ -3332,10 +3333,13 @@
     pointer-events: none;
     opacity: 0.6;
     transition: opacity 1.5s ease-in-out;
+    will-change: opacity;
+    transform: translateZ(0);
   "
 >
-  <source src="assets/videos/starfield-bg.mp4?v=6" type="video/mp4">
+  <source src="assets/videos/starfield-bg.mp4?v=7" type="video/mp4">
 </video>
+<!-- Second video only on desktop for cross-fade (hidden on mobile via CSS) -->
 <video
   id="starfield-bg-2"
   autoplay
@@ -3343,6 +3347,7 @@
   muted
   playsinline
   disablepictureinpicture
+  preload="auto"
   style="
     position: fixed;
     top: 0;
@@ -3354,33 +3359,51 @@
     pointer-events: none;
     opacity: 0.6;
     transition: opacity 1.5s ease-in-out;
+    will-change: opacity;
+    transform: translateZ(0);
   "
 >
-  <source src="assets/videos/starfield-bg.mp4?v=6" type="video/mp4">
+  <source src="assets/videos/starfield-bg.mp4?v=7" type="video/mp4">
 </video>
+<style>
+  /* Mobile: single video only, no cross-fade needed */
+  @media (max-width: 768px) {
+    #starfield-bg-2 { display: none !important; }
+    #starfield-bg-1 { opacity: 0.5 !important; transition: none !important; }
+  }
+</style>
 <script>
-// Cross-fade: gradual fade out before loop, gradual fade in after
+// Performance-optimized starfield with cross-fade (desktop only)
 (function() {
   const v1 = document.getElementById('starfield-bg-1');
   const v2 = document.getElementById('starfield-bg-2');
+  const isMobile = window.innerWidth <= 768;
 
-  // Offset video 2 by half duration
+  // Skip cross-fade logic on mobile
+  if (isMobile) {
+    v2.pause();
+    v2.removeAttribute('src');
+    v2.load(); // Release memory
+    return;
+  }
+
+  // Desktop: offset video 2 and setup cross-fade
   v2.addEventListener('loadedmetadata', function() {
     v2.currentTime = v2.duration / 2;
   });
 
-  // Smooth cross-fade with gradual opacity changes
+  // Throttled cross-fade (runs every 500ms, not every frame)
+  let lastCheck = 0;
   function setupCrossfade(video) {
     video.addEventListener('timeupdate', function() {
-      const timeLeft = video.duration - video.currentTime;
-      const t = video.currentTime;
+      const now = Date.now();
+      if (now - lastCheck < 500) return;
+      lastCheck = now;
 
-      // Fade out starting 1.8s before end
+      const timeLeft = video.duration - video.currentTime;
       if (timeLeft < 1.8) {
         video.style.opacity = '0';
-      }
-      // Fade back in after restart (first 1.2s)
-      else if (t < 1.2) {
+      } else if (video.currentTime < 1.2) {
         video.style.opacity = '0.6';
       }
     });
@@ -3388,6 +3411,17 @@
 
   setupCrossfade(v1);
   setupCrossfade(v2);
+
+  // Pause when tab hidden (save battery)
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      v1.pause();
+      v2.pause();
+    } else {
+      v1.play();
+      v2.play();
+    }
+  });
 })();
 </script>
 
