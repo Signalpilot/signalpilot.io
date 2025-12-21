@@ -176,13 +176,13 @@
           // === GROUND GLOW with energy ripples ===
           float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.4 * (0.8 + energyFlow * 0.3);
 
-          // === COLORS - Blue to purple gradient like Huly ===
-          vec3 coreColor = vec3(0.9, 0.95, 1.0);      // Bright white core
-          vec3 innerColor = vec3(0.5, 0.6, 1.0);      // Soft blue-white
-          vec3 outerColor = vec3(0.35, 0.4, 0.95);    // Blue with hint of purple
+          // === COLORS - Deep blue to purple gradient ===
+          vec3 coreColor = vec3(0.55, 0.65, 1.0);     // Deep blue-white core
+          vec3 innerColor = vec3(0.3, 0.4, 0.9);      // Deep blue
+          vec3 outerColor = vec3(0.2, 0.28, 0.8);     // Darker saturated blue
           vec3 purpleGlow = vec3(0.4, 0.2, 0.8);      // Purple for outer atmosphere
-          vec3 atmosColor = vec3(0.15, 0.1, 0.5);     // Deep purple-blue atmosphere
-          vec3 splashColor = vec3(0.6, 0.5, 1.0);     // Purple-tinted splash
+          vec3 atmosColor = vec3(0.12, 0.08, 0.45);   // Deeper purple-blue atmosphere
+          vec3 splashColor = vec3(0.4, 0.32, 0.9);    // Darker purple-tinted splash
 
           // === COMBINE - SOLID POWERFUL CONTINUOUS BEAM ===
           float topSharpness = uv.y;
@@ -194,7 +194,7 @@
           vec3 color = vec3(0.0);
 
           // Atmosphere - purple-shifted at edges
-          vec3 atmosMix = mix(vec3(0.1, 0.2, 0.6), atmosColor, purpleShift);
+          vec3 atmosMix = mix(vec3(0.08, 0.12, 0.45), atmosColor, purpleShift);
           color += atmosMix * atmosphere * (0.25 + bottomGlow * 0.3);
 
           // Outer glow - blue to purple gradient
