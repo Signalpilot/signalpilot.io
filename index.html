@@ -3330,11 +3330,11 @@
     object-fit: cover;
     z-index: -3;
     pointer-events: none;
-    opacity: 0.7;
-    transition: opacity 0.8s ease;
+    opacity: 0.6;
+    transition: opacity 1.5s ease-in-out;
   "
 >
-  <source src="assets/videos/starfield-bg.mp4?v=5" type="video/mp4">
+  <source src="assets/videos/starfield-bg.mp4?v=6" type="video/mp4">
 </video>
 <video
   id="starfield-bg-2"
@@ -3352,14 +3352,14 @@
     object-fit: cover;
     z-index: -2;
     pointer-events: none;
-    opacity: 0.7;
-    transition: opacity 0.8s ease;
+    opacity: 0.6;
+    transition: opacity 1.5s ease-in-out;
   "
 >
-  <source src="assets/videos/starfield-bg.mp4?v=5" type="video/mp4">
+  <source src="assets/videos/starfield-bg.mp4?v=6" type="video/mp4">
 </video>
 <script>
-// Cross-fade: fade out before loop, fade in after restart
+// Cross-fade: gradual fade out before loop, gradual fade in after
 (function() {
   const v1 = document.getElementById('starfield-bg-1');
   const v2 = document.getElementById('starfield-bg-2');
@@ -3369,14 +3369,19 @@
     v2.currentTime = v2.duration / 2;
   });
 
-  // Fade out near end, fade in after restart
+  // Smooth cross-fade with gradual opacity changes
   function setupCrossfade(video) {
     video.addEventListener('timeupdate', function() {
       const timeLeft = video.duration - video.currentTime;
-      if (timeLeft < 0.8) {
+      const t = video.currentTime;
+
+      // Fade out starting 1.8s before end
+      if (timeLeft < 1.8) {
         video.style.opacity = '0';
-      } else if (video.currentTime < 0.5) {
-        video.style.opacity = '0.7';
+      }
+      // Fade back in after restart (first 1.2s)
+      else if (t < 1.2) {
+        video.style.opacity = '0.6';
       }
     });
   }
