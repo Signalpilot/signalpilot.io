@@ -3313,10 +3313,32 @@
 
 <body>
 
-<!-- Starfield video background - replaces particles.js -->
+<!-- Starfield video background - dual layer for seamless loop -->
 <video
-  id="starfield-bg"
+  id="starfield-bg-1"
   autoplay
+  loop
+  muted
+  playsinline
+  disablepictureinpicture
+  style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -3;
+    pointer-events: none;
+    opacity: 0.5;
+  "
+>
+  <source src="assets/videos/starfield-bg.mp4?v=4" type="video/mp4">
+</video>
+<video
+  id="starfield-bg-2"
+  autoplay
+  loop
   muted
   playsinline
   disablepictureinpicture
@@ -3329,34 +3351,14 @@
     object-fit: cover;
     z-index: -2;
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 0.5;
   "
 >
-  <source src="assets/videos/starfield-bg.mp4?v=3" type="video/mp4">
+  <source src="assets/videos/starfield-bg.mp4?v=4" type="video/mp4">
 </video>
 <script>
-// Ping-pong loop: forward → reverse → forward (5s + 5s = 10s seamless)
-(function() {
-  const video = document.getElementById('starfield-bg');
-  let forward = true;
-
-  video.addEventListener('ended', function() {
-    // At end, reverse direction
-    video.playbackRate = -1;
-    video.play();
-    forward = false;
-  });
-
-  video.addEventListener('timeupdate', function() {
-    // When playing backward and reaches start, go forward again
-    if (!forward && video.currentTime <= 0.1) {
-      video.playbackRate = 1;
-      video.currentTime = 0;
-      video.play();
-      forward = true;
-    }
-  });
-})();
+// Offset second video by 2.5s to mask loop restarts
+document.getElementById('starfield-bg-2').currentTime = 2.5;
 </script>
 
 <!-- Scroll progress indicator -->
