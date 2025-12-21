@@ -32,12 +32,12 @@
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    // Frame dimensions - sized to wrap around hero content
-    const frameWidth = 6.5;
-    const frameHeight = 4;
+    // Frame dimensions - narrower to fit viewport
+    const frameWidth = 5;
+    const frameHeight = 3.5;
 
     const frameGroup = new THREE.Group();
-    frameGroup.position.set(0, -0.5, 0);
+    frameGroup.position.set(0, -0.3, 0);
     scene.add(frameGroup);
 
     const timeUniform = { value: 0 };
