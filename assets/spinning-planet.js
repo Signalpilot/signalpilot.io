@@ -285,8 +285,8 @@
       const t = clock.getElapsedTime();
 
       if (!prefersReducedMotion) {
-        // Slow planet rotation
-        planetGroup.rotation.y = t * 0.05;
+        // Fast planet rotation (like TradingView)
+        planetGroup.rotation.y = t * 0.3;
 
         // Ring rotation
         ring1.rotation.z = 0.2 + t * 0.015;
