@@ -127,11 +127,14 @@
           float atmosDist = distFromBeam / atmosWidth;
           float atmosphere = exp(-atmosDist * atmosDist * 0.3);
 
-          // === ENERGY FLOW - visible movement DOWN the beam ===
-          // Energy travels down (negative time = downward movement)
-          float flow1 = 0.85 + 0.15 * sin(uv.y * 15.0 - time * 3.0);
-          float flow2 = 0.9 + 0.1 * sin(uv.y * 25.0 - time * 4.0);
-          float subtleFlow = flow1 * flow2;
+          // === ENERGY FLOW - POWERFUL pulses traveling DOWN the beam ===
+          // Bright energy pulses moving downward
+          float pulse1 = pow(0.5 + 0.5 * sin(uv.y * 8.0 - time * 4.0), 3.0);
+          float pulse2 = pow(0.5 + 0.5 * sin(uv.y * 12.0 - time * 5.0), 2.0);
+          float pulse3 = pow(0.5 + 0.5 * sin(uv.y * 6.0 - time * 3.0), 4.0);
+
+          // Combine pulses - ranges from ~0.3 to ~1.5 for dramatic variation
+          float subtleFlow = 0.5 + pulse1 * 0.4 + pulse2 * 0.3 + pulse3 * 0.3;
 
           // === ULTRA-FINE DUST - subtle tiny specks only ===
           float dust = fineDust(uv, time, distFromBeam);
@@ -154,8 +157,10 @@
           float curveGlow = exp(-curvedRight * curvedRight * 0.8) * spreadY;
 
           // === ENERGY FLOW along the horizontal spread ===
-          // Same beam, energy flows outward to the right
-          float horizFlow = 0.85 + 0.15 * sin(distRight * 8.0 - time * 3.0);
+          // Powerful pulses flowing outward to the right
+          float hPulse1 = pow(0.5 + 0.5 * sin(distRight * 6.0 - time * 4.0), 3.0);
+          float hPulse2 = pow(0.5 + 0.5 * sin(distRight * 10.0 - time * 5.0), 2.0);
+          float horizFlow = 0.5 + hPulse1 * 0.4 + hPulse2 * 0.4;
 
           // Combine curve glow with flowing energy
           float horizSpread = curveGlow * horizFlow;
