@@ -3387,28 +3387,26 @@
     v2.currentTime = v2.duration / 2;
   });
 
-  // Cross-fade: each video fades independently
+  // Cross-fade: each video fades independently (optimized - only changes when needed)
   function setupCrossfade(video) {
-    let lastCheck = 0; // Each video has its own throttle
+    let lastCheck = 0;
+    let currentState = 'visible'; // Track state to avoid redundant style changes
+
     video.addEventListener('timeupdate', function() {
       const now = Date.now();
-      if (now - lastCheck < 300) return;
+      if (now - lastCheck < 400) return; // Throttle to 400ms
       lastCheck = now;
 
       const timeLeft = video.duration - video.currentTime;
       const t = video.currentTime;
 
-      // Fade out 1.8s before end
-      if (timeLeft < 1.8) {
+      // Only change opacity when state changes
+      if (timeLeft < 1.8 && currentState !== 'hidden') {
         video.style.opacity = '0';
-      }
-      // Fade in during first 1.2s after restart
-      else if (t < 1.2) {
+        currentState = 'hidden';
+      } else if (t >= 1.2 && timeLeft >= 1.8 && currentState !== 'visible') {
         video.style.opacity = '0.6';
-      }
-      // Full opacity in the middle (always visible)
-      else {
-        video.style.opacity = '0.6';
+        currentState = 'visible';
       }
     });
   }
@@ -3541,22 +3539,29 @@
           position: absolute;
           top: -70px;
           left: 0;
-          height: calc(100% + 70px);
+          height: calc(100% + 140px);
           width: auto;
           pointer-events: none;
           z-index: 0;
           object-fit: cover;
           object-position: left 30%;
           opacity: 0.6;
-          will-change: opacity, transform;
+          will-change: opacity;
           transform: translateZ(0) scaleX(-1);
+          -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-          -webkit-mask-image: radial-gradient(ellipse 90% 85% at 25% 50%, black 70%, transparent 95%);
-          mask-image: radial-gradient(ellipse 90% 85% at 25% 50%, black 70%, transparent 95%);
+          -webkit-mask-image:
+            radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
+            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+          -webkit-mask-composite: source-in;
+          mask-image:
+            radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
+            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+          mask-composite: intersect;
           transition: opacity 1.2s ease-in-out;
         "
       >
-        <source src="assets/videos/signal-conduit-4k.mp4?v=4" type="video/mp4">
+        <source src="assets/videos/signal-conduit-4k.mp4?v=5" type="video/mp4">
       </video>
       <video
         id="energy-beam-video-2"
@@ -3570,22 +3575,29 @@
           position: absolute;
           top: -70px;
           left: 0;
-          height: calc(100% + 70px);
+          height: calc(100% + 140px);
           width: auto;
           pointer-events: none;
           z-index: 0;
           object-fit: cover;
           object-position: left 30%;
           opacity: 0.6;
-          will-change: opacity, transform;
+          will-change: opacity;
           transform: translateZ(0) scaleX(-1);
+          -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-          -webkit-mask-image: radial-gradient(ellipse 90% 85% at 25% 50%, black 70%, transparent 95%);
-          mask-image: radial-gradient(ellipse 90% 85% at 25% 50%, black 70%, transparent 95%);
+          -webkit-mask-image:
+            radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
+            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+          -webkit-mask-composite: source-in;
+          mask-image:
+            radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
+            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+          mask-composite: intersect;
           transition: opacity 1.2s ease-in-out;
         "
       >
-        <source src="assets/videos/signal-conduit-4k.mp4?v=4" type="video/mp4">
+        <source src="assets/videos/signal-conduit-4k.mp4?v=5" type="video/mp4">
       </video>
       <script>
       // Energy beam cross-fade for seamless loop
@@ -3598,23 +3610,25 @@
           b2.currentTime = b2.duration / 2;
         });
 
-        // Cross-fade each video independently
+        // Cross-fade each video independently (optimized - only changes when needed)
         function setupBeamCrossfade(video) {
           let lastCheck = 0;
+          let currentState = 'visible';
+
           video.addEventListener('timeupdate', function() {
             const now = Date.now();
-            if (now - lastCheck < 300) return;
+            if (now - lastCheck < 400) return;
             lastCheck = now;
 
             const timeLeft = video.duration - video.currentTime;
             const t = video.currentTime;
 
-            if (timeLeft < 1.5) {
+            if (timeLeft < 1.5 && currentState !== 'hidden') {
               video.style.opacity = '0';
-            } else if (t < 1.0) {
+              currentState = 'hidden';
+            } else if (t >= 1.0 && timeLeft >= 1.5 && currentState !== 'visible') {
               video.style.opacity = '0.6';
-            } else {
-              video.style.opacity = '0.6';
+              currentState = 'visible';
             }
           });
         }
