@@ -85,10 +85,11 @@
           float beamX = 0.12;
           float distFromBeam = abs(uv.x - beamX) * aspect;
 
-          // === BEAM - slightly thicker, spreads at very bottom ===
-          float spreadStart = 0.15;
-          float spreadAmount = smoothstep(spreadStart, 0.0, uv.y);
-          float beamWidth = 0.012 + spreadAmount * spreadAmount * 0.12;
+          // === BEAM - gradually widens from top to bottom ===
+          // Thin at top, progressively wider, then spreads at bottom
+          float gradualWiden = (1.0 - uv.y) * 0.015; // Gradual widening
+          float bottomSpread = smoothstep(0.2, 0.0, uv.y); // Extra spread at bottom
+          float beamWidth = 0.008 + gradualWiden + bottomSpread * bottomSpread * 0.15;
           float normalizedDist = distFromBeam / beamWidth;
 
           // === ULTRA-SMOOTH CORE ===
@@ -122,37 +123,33 @@
           // Brighter at top, gradual fade
           float vertIntensity = 0.6 + 0.4 * uv.y;
 
-          // === HORIZONTAL SPREAD - beam continues flowing right ===
-          float spreadY = smoothstep(0.18, 0.0, uv.y); // Spread zone at bottom
+          // === HORIZONTAL SPREAD - curves RIGHT only (beam is on left) ===
+          float spreadY = smoothstep(0.25, 0.0, uv.y); // Spread zone at bottom
 
           // Distance to the right of beam
           float distRight = max(0.0, (uv.x - beamX)) * aspect;
 
-          // Horizontal beam - thicker and goes further
-          float horizBeamWidth = 0.04;
-          float horizDist = abs(uv.y - 0.06); // Horizontal beam line position
+          // Curved spread - the lower, the further right it reaches
+          float curveReach = spreadY * spreadY * 0.6; // How far the curve extends
+          float curvedRight = distRight / (curveReach + 0.01);
 
-          // Core of horizontal beam
-          float horizCore = exp(-horizDist * horizDist / (horizBeamWidth * horizBeamWidth));
+          // Smooth curved glow spreading right
+          float curveGlow = exp(-curvedRight * curvedRight * 0.8) * spreadY;
 
-          // Slower fade - beam travels further right
-          float horizFade = exp(-distRight * 0.8);
+          // Energy flow travels RIGHT along the spread
+          float spreadFlow = sin(distRight * 6.0 - time * 2.5) * 0.4 + 0.6;
+          float spreadFlow2 = sin(distRight * 10.0 - time * 3.5) * 0.3 + 0.7;
+          float flowRight = spreadFlow * spreadFlow2;
 
-          // Energy flow continues into horizontal (same flow animation)
-          // Flow travels rightward: use distRight instead of uv.y
-          float horizFlow = sin(distRight * 6.0 - time * 3.0) * 0.5 + 0.5;
-          float horizFlow2 = sin(distRight * 10.0 - time * 4.0) * 0.4 + 0.6;
-          float flowRight = 0.5 + 0.5 * horizFlow * horizFlow2;
+          // Combine curved spread with flow
+          float horizSpread = curveGlow * flowRight;
 
-          // Combine: core * fade * flow * spread zone
-          float horizSpread = horizCore * horizFade * flowRight * spreadY;
-
-          // Wider glow around horizontal
-          float horizGlow = exp(-horizDist * 8.0) * exp(-distRight * 0.6) * spreadY * 0.5;
-          horizSpread += horizGlow * flowRight;
+          // Edge glow at very bottom
+          float edgeGlow = exp(-uv.y * 15.0) * exp(-distRight * 1.0) * 0.5;
+          horizSpread += edgeGlow * flowRight * spreadY;
 
           // === GROUND GLOW ===
-          float groundGlow = exp(-uv.y * 8.0) * exp(-distRight * 0.5) * spreadY * 0.4 * flowRight;
+          float groundGlow = exp(-uv.y * 10.0) * exp(-distRight * 0.8) * spreadY * 0.4 * flowRight;
 
           // === COLORS - Smooth blue gradient ===
           vec3 coreColor = vec3(0.85, 0.92, 1.0);     // Bright white-blue core
@@ -161,21 +158,31 @@
           vec3 atmosColor = vec3(0.08, 0.2, 0.7);     // Deep blue atmosphere
           vec3 splashColor = vec3(0.5, 0.7, 1.0);     // Bright splash
 
-          // === COMBINE WITH SMOOTH BLENDING ===
+          // === COMBINE WITH POSITION-BASED BLENDING ===
+          // Top = sharp defined core, Bottom = glow dominates
+          float topSharpness = uv.y; // 1 at top, 0 at bottom
+          float bottomGlow = 1.0 - uv.y; // 0 at top, 1 at bottom
+
           vec3 color = vec3(0.0);
 
-          // Layer from back to front
-          color += atmosColor * atmosphere * 0.25;
-          color += outerColor * outerGlow * 0.4;
-          color += innerColor * innerGlow * 0.6 * energyFlow;
-          color += coreColor * core * energyFlow;
+          // Atmosphere - more visible toward bottom
+          color += atmosColor * atmosphere * (0.15 + bottomGlow * 0.2);
 
-          // Add horizontal spread at bottom
-          color += innerColor * horizSpread * 0.8;
-          color += outerColor * groundGlow;
+          // Outer glow - increases toward bottom
+          color += outerColor * outerGlow * (0.3 + bottomGlow * 0.3);
 
-          // Add subtle dust
-          color += innerColor * dust * 0.5;
+          // Inner glow with energy flow
+          color += innerColor * innerGlow * 0.5 * energyFlow;
+
+          // Core - sharper at top, blends into glow at bottom
+          color += coreColor * core * energyFlow * (0.6 + topSharpness * 0.4);
+
+          // Horizontal spread at bottom
+          color += innerColor * horizSpread * 0.9;
+          color += splashColor * groundGlow;
+
+          // Subtle dust
+          color += innerColor * dust * 0.4;
 
           // Apply vertical intensity
           color *= vertIntensity;
