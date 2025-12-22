@@ -32,76 +32,360 @@ Seven"    Hub post    Education    Open        Authority
 
 ---
 
-# VISUAL CONTENT MASTER LIST
+# VISUAL CONTENT MASTER LIST (DETAILED)
 
-> **Quick reference:** Every visual asset you need to create, organized by date. Check off as you complete them.
-
----
-
-## PRE-LAUNCH VISUALS (Dec 22-29)
-
-| Date | Platform | Type | What to Create | Size | Status |
-|------|----------|------|----------------|------|--------|
-| **Dec 22** | IG | Carousel | 5 slides: Education Hub promo | 1080x1350 | [ ] |
-| **Dec 24** | IG | Carousel | 8 slides: 5 Market Phases | 1080x1350 | [ ] |
-| **Dec 26** | IG | Reel | 15sec: Pentarch signals on chart | 1080x1920 | [ ] |
-| **Dec 27** | IG | Static | Quote card: "The edge isn't seeing more..." | 1080x1350 | [ ] |
-| **Dec 28** | IG | Carousel | 9 slides: Elite Seven preview (1 per indicator) | 1080x1350 | [ ] |
-| **Dec 29** | IG | Reel | 15-30sec: Final countdown hype, quick cuts | 1080x1920 | [ ] |
+> **How to use:** Each visual has a RECIPE CARD with exact specs, content, and step-by-step creation instructions. Use Canva (free) for graphics. Use CapCut (free) for video editing.
 
 ---
 
-## LAUNCH DAY VISUALS (Dec 30)
+## TOOLS NEEDED
 
-| Time | Platform | Type | What to Create | Size | Status |
-|------|----------|------|----------------|------|--------|
-| **9 AM** | IG | Static | Launch graphic: "The Elite Seven — Now Live" | 1080x1350 | [ ] |
-| **9 AM** | IG | Story x5 | 5-part indicator walkthrough | 1080x1920 | [ ] |
-| **3 PM** | IG | Reel | 30sec: Pentarch product demo | 1080x1920 | [ ] |
-| **9 PM** | IG | Story | Day 1 wrap-up, share comments/DMs | 1080x1920 | [ ] |
-
----
-
-## POST-LAUNCH VISUALS (Dec 31 - Jan 22)
-
-| Date | Platform | Type | What to Create | Size | Status |
-|------|----------|------|----------------|------|--------|
-| **Dec 31** | IG | Static | Quote card: "Your 2025 resolution..." | 1080x1350 | [ ] |
-| **Jan 2** | IG | Carousel | 7 slides: How to Read Pentarch | 1080x1350 | [ ] |
-| **Jan 3** | IG | Reel | 15-30sec: Volume Oracle "87% accumulation" demo | 1080x1920 | [ ] |
-| **Jan 4** | IG | Static | Before/After: Cluttered vs clean chart | 1080x1350 | [ ] |
-| **Jan 4** | IG | Story | Poll: "How many indicators on your chart?" | 1080x1920 | [ ] |
-| **Jan 5** | IG | Carousel | 7 slides: Accumulation vs Distribution | 1080x1350 | [ ] |
-| **Jan 7** | IG | Carousel | 7 slides: Janus Atlas feature breakdown | 1080x1350 | [ ] |
-| **Jan 8** | IG | Static | Quote card | 1080x1350 | [ ] |
-| **Jan 8** | IG | Story | Question sticker + slider | 1080x1920 | [ ] |
-| **Jan 9** | IG | Reel | 15-30sec: Janus Atlas auto-plotting levels | 1080x1920 | [ ] |
-| **Jan 11** | IG | Static | Testimonial quote card (or fallback quote) | 1080x1350 | [ ] |
-| **Jan 12** | IG | Carousel | 7 slides: Augury Grid feature breakdown | 1080x1350 | [ ] |
-| **Jan 14** | IG | Carousel | 6 slides: Education Hub curriculum | 1080x1350 | [ ] |
-| **Jan 15** | IG | Carousel | 5 slides: TradingView Setup Guide | 1080x1350 | [ ] |
-| **Jan 15** | IG | Story | TradingView screenshot + link sticker | 1080x1920 | [ ] |
-| **Jan 16** | IG | Reel | 15-30sec: First trade with Pentarch walkthrough | 1080x1920 | [ ] |
-| **Jan 18** | IG | Static | "2 weeks live" recap graphic | 1080x1350 | [ ] |
-| **Jan 19** | IG | Carousel | 7 slides: Plutus Flow feature breakdown | 1080x1350 | [ ] |
-| **Jan 21** | IG | Carousel | 6 slides: Multi-Timeframe Confirmation | 1080x1350 | [ ] |
-| **Jan 22** | IG | Carousel | 5 slides: 3-Week Milestone recap | 1080x1350 | [ ] |
-| **Jan 22** | IG | Story | Question sticker + Add Yours sticker | 1080x1920 | [ ] |
+| Tool | Use For | Cost |
+|------|---------|------|
+| **Canva** | All static graphics + carousel slides | Free |
+| **CapCut** | All video editing (reels) | Free |
+| **OBS Studio** or **Loom** | Screen recording TradingView | Free |
+| **TradingView** | Recording indicator demos | Your account |
 
 ---
 
-## VISUAL ASSET COUNTS
+## DESIGN SPECS (USE FOR ALL GRAPHICS)
 
-| Type | Count | Notes |
-|------|-------|-------|
-| **Carousels** | 12 | Each needs 5-9 slides |
-| **Static Posts** | 6 | Single images |
-| **Reels** | 6 | Screen recordings + editing |
-| **Stories** | 10+ | Quick content, daily during pre-launch |
+```
+BACKGROUND: Black (#000000) or dark navy (#0a1628)
+TEXT COLOR: White (#FFFFFF)
+FONT: Bold sans-serif (Montserrat, Inter, or similar)
+HEADLINE SIZE: 48-72pt
+BODY TEXT: 24-36pt
+LOGO: Bottom right corner, small
+```
 
-**Total slides to create:** ~80 slides
-**Total reels to record/edit:** 6 videos
-**Total static graphics:** 6 images
+---
+
+# PRE-LAUNCH VISUALS (Dec 22-29)
+
+---
+
+## [ ] DEC 22 — EDUCATION HUB CAROUSEL
+
+**Type:** Carousel (5 slides)
+**Size:** 1080x1350px per slide
+**Post time:** 11 AM - 1 PM
+
+### Slide-by-Slide Instructions:
+
+| Slide | Text Content | Visual Elements |
+|-------|--------------|-----------------|
+| 1 | "82 FREE TRADING LESSONS" + "No purchase required." | Dark bg, large centered text |
+| 2 | "WHAT YOU'LL LEARN:" + 4 bullet points (see below) | Left-aligned bullet list |
+| 3 | "BEGINNER → PROFESSIONAL" + "20 + 27 + 27 + 8 lessons" | Progress arrow or step graphic |
+| 4 | Screenshot of education.signalpilot.io | Actual screenshot, cropped clean |
+| 5 | "Start free → education.signalpilot.io" + @signalpilot.io | CTA text + logo |
+
+**Slide 2 bullets:**
+```
+• Market cycles & structure
+• Volume analysis & order flow
+• Risk management & position sizing
+• Institutional trading concepts
+```
+
+**How to create:**
+1. Open Canva → Create custom size 1080x1350
+2. Set background to black
+3. Add text for slide 1, duplicate for other slides
+4. For slide 4, screenshot education.signalpilot.io
+5. Export all as PNG
+
+---
+
+## [ ] DEC 24 — 5 MARKET PHASES CAROUSEL
+
+**Type:** Carousel (8 slides)
+**Size:** 1080x1350px per slide
+**Post time:** 11 AM - 1 PM
+
+### Slide-by-Slide Instructions:
+
+| Slide | Headline | Body Text |
+|-------|----------|-----------|
+| 1 | "THE 5 MARKET PHASES" | "Every trader must know this." |
+| 2 | "PHASE 1: ACCUMULATION (TD)" | "Smart money builds positions quietly. Price looks 'boring.' Retail ignores it." |
+| 3 | "PHASE 2: MARKUP (IGN)" | "Demand overwhelms supply. Trend begins. Retail starts noticing." |
+| 4 | "PHASE 3: CLIMAX (CAP)" | "Buying frenzy peaks. Headlines everywhere. Retail goes all in. ← THE TRAP" |
+| 5 | "PHASE 4: DISTRIBUTION (WRN)" | "Smart money sells to retail. Price stalls but doesn't crash yet." |
+| 6 | "PHASE 5: DECLINE (BDN)" | "Supply overwhelms demand. Retail panics and sells at the bottom." |
+| 7 | "THE INSIGHT" | "Retail enters at climax (feels safe). Smart money enters at accumulation (feels scary)." |
+| 8 | "Save this post." | "More coming Dec 30. @signalpilot.io" |
+
+**How to create:**
+1. Create 8 slides in Canva, same template
+2. Phase name LARGE at top
+3. Description smaller below
+4. Keep consistent layout across all
+
+---
+
+## [ ] DEC 26 — PENTARCH TEASER REEL
+
+**Type:** Reel (15 seconds)
+**Size:** 1080x1920px (9:16)
+**Post time:** 12 PM or 6 PM
+
+### Step-by-Step Recording:
+
+**1. PREPARE YOUR CHART:**
+- Open TradingView
+- Find a chart with clear TD → IGN → CAP signal sequence
+- Make sure Pentarch is the only indicator visible
+- Clean up the chart (remove toolbars if possible)
+
+**2. RECORD:**
+- Open OBS or Loom
+- Set recording to 1080x1920 or 1920x1080 (you'll crop later)
+- Record 20-30 seconds of the chart showing signals
+- Slowly scroll through the signals or let them appear
+
+**3. EDIT IN CAPCUT:**
+- Import footage
+- Trim to best 15 seconds
+- Add text overlay at start: "See the cycle before it completes."
+- Add text overlay at end: "Dec 30. Link in bio."
+- Add trending audio from CapCut library
+- Export at 1080x1920
+
+---
+
+## [ ] DEC 27 — QUOTE CARD
+
+**Type:** Static (1 image)
+**Size:** 1080x1350px
+**Post time:** 11 AM - 1 PM
+
+### Exact Content:
+
+```
+"The edge isn't seeing more.
+It's seeing what matters."
+
+— Signal Pilot
+```
+
+**How to create:**
+1. Canva → 1080x1350
+2. Black background
+3. Quote text centered, large white font
+4. "— Signal Pilot" smaller, below quote
+5. Logo in bottom right corner
+6. Export as PNG
+
+---
+
+## [ ] DEC 28 — ELITE SEVEN PREVIEW CAROUSEL
+
+**Type:** Carousel (9 slides)
+**Size:** 1080x1350px per slide
+**Post time:** 11 AM - 1 PM
+
+### Slide-by-Slide Instructions:
+
+| Slide | Content |
+|-------|---------|
+| 1 | "THE ELITE SEVEN" + "7 indicators. 1 system. Zero repaint." + "Dec 30." |
+| 2 | "01 — PENTARCH" + "5-phase cycle detection." |
+| 3 | "02 — OMNIDECK" + "10-in-1 overlay." |
+| 4 | "03 — VOLUME ORACLE" + "Institutional flow detection." |
+| 5 | "04 — PLUTUS FLOW" + "Hidden pressure revealed." |
+| 6 | "05 — JANUS ATLAS" + "Auto-plotted key levels." |
+| 7 | "06 — AUGURY GRID" + "Multi-symbol scanner." |
+| 8 | "07 — HARMONIC OSCILLATOR" + "4-system momentum voting." |
+| 9 | "THE ELITE SEVEN" + "Dec 30. Link in bio." + "@signalpilot.io" |
+
+**Design notes:**
+- Number (01, 02, etc.) very large
+- Indicator name bold
+- Tagline smaller below
+- Same exact layout for slides 2-8
+
+---
+
+## [ ] DEC 29 — FINAL HYPE REEL
+
+**Type:** Reel (15-30 seconds)
+**Size:** 1080x1920px (9:16)
+**Post time:** 12 PM or 6 PM
+
+### Step-by-Step:
+
+**1. RECORD 7 CLIPS** (5-10 sec each):
+- Pentarch with signals visible
+- OmniDeck overlay on chart
+- Volume Oracle panel
+- Plutus Flow ribbon
+- Janus Atlas with levels
+- Augury Grid scanner view
+- Harmonic Oscillator
+
+**2. EDIT IN CAPCUT:**
+- Cut each clip to 0.5-1 second (fast cuts)
+- Between clips, add text flashes:
+  - "7 INDICATORS"
+  - "1 SYSTEM"
+  - "ZERO REPAINT"
+- Hold on "THE ELITE SEVEN" for 2 sec
+- End with "TOMORROW" for 2 sec
+- Add dramatic/building audio
+- Export at 1080x1920
+
+---
+
+# LAUNCH DAY VISUALS (Dec 30)
+
+---
+
+## [ ] DEC 30 @ 9 AM — LAUNCH GRAPHIC
+
+**Type:** Static (1 image)
+**Size:** 1080x1350px
+**Post time:** 9 AM
+
+### Exact Content:
+
+```
+THE ELITE SEVEN
+
+Now Live
+```
+
+**How to create:**
+1. Canva → 1080x1350
+2. Black background
+3. "THE ELITE SEVEN" large, centered
+4. "Now Live" smaller below
+5. Optional: Add subtle glow/gradient effect
+6. Logo in corner
+7. Export as PNG
+
+---
+
+## [ ] DEC 30 @ 9 AM — STORY WALKTHROUGH (5 PARTS)
+
+**Type:** Stories (5 separate images)
+**Size:** 1080x1920px each
+**Post time:** 9 AM (post all 5 in sequence)
+
+| Story | Content | Elements |
+|-------|---------|----------|
+| 1 | "It's live." | Launch graphic + link sticker to signalpilot.io |
+| 2 | "PENTARCH — See the cycle before it completes" | Pentarch screenshot |
+| 3 | "VOLUME ORACLE — Track smart money flow" | Volume Oracle screenshot |
+| 4 | "JANUS ATLAS — All key levels, auto-plotted" | Janus Atlas screenshot |
+| 5 | "82 free lessons included" | Education hub screenshot + link sticker |
+
+**How to create:**
+1. Take screenshots of each indicator in TradingView
+2. In Canva (1080x1920), add screenshot as background
+3. Add text overlay at top or bottom
+4. Export each as separate PNG
+5. Post to Stories with link stickers
+
+---
+
+## [ ] DEC 30 @ 3 PM — PRODUCT DEMO REEL
+
+**Type:** Reel (30 seconds)
+**Size:** 1080x1920px (9:16)
+**Post time:** 3 PM
+
+### What to Show:
+
+1. Chart with Pentarch loaded
+2. TD signal appears at a swing low
+3. Price starts moving up
+4. IGN signal fires
+5. Volume Oracle shows "ACCUMULATION 84%"
+6. Janus Atlas shows key levels being tested
+7. Price reaches resistance
+8. CAP signal appears
+
+**Text overlays:**
+- "TD = Exhaustion. Watch for accumulation."
+- "IGN = Ignition. Trend starting."
+- "See the cycle. Not the noise."
+- End: "The Elite Seven — signalpilot.io"
+
+**Audio:** Professional/ambient, not distracting
+
+---
+
+# POST-LAUNCH VISUALS (Selected Key Assets)
+
+---
+
+## [ ] JAN 4 — BEFORE/AFTER COMPARISON
+
+**Type:** Static (1 image)
+**Size:** 1080x1350px
+
+### How to create:
+
+**Step 1 — Create "Before" screenshot:**
+- Open TradingView
+- Add 6+ random indicators (RSI, MACD, Stochastic, BB, etc.)
+- Make it look cluttered and confusing
+- Screenshot
+
+**Step 2 — Create "After" screenshot:**
+- Same chart
+- Remove all indicators except Pentarch
+- Clean, minimal view
+- Screenshot
+
+**Step 3 — Combine in Canva:**
+- Put them side-by-side (or top/bottom)
+- Add label: "Before: 6 indicators saying different things"
+- Add label: "After: One unified system showing the cycle"
+- Optional: "Which would you rather trade?"
+
+---
+
+## [ ] ALL QUOTE CARDS (Dec 27, Dec 31, Jan 8, Jan 11)
+
+**Template to reuse:**
+
+```
+Size: 1080x1350px
+Background: Black
+Text: White, centered
+Quote: Large (48-60pt)
+Attribution: "— Signal Pilot" smaller below
+Logo: Bottom right
+```
+
+**Quote options:**
+- "The edge isn't seeing more. It's seeing what matters."
+- "Trust what you see. Not what you hope."
+- "Your 2025 trading resolution: Stop chasing signals. Start reading cycles."
+- "The best indicator is the one you understand."
+
+---
+
+## VISUAL ASSET SUMMARY
+
+| Type | Count | Total Slides/Items |
+|------|-------|--------------------|
+| **Carousels** | 12 | ~80 slides |
+| **Static Posts** | 6 | 6 images |
+| **Reels** | 6 | 6 videos |
+| **Stories** | 10+ | ~15 story frames |
+
+**PRODUCTION TIME ESTIMATE:**
+- Carousel slides: 10-15 min each = ~15 hours
+- Static graphics: 5-10 min each = ~1 hour
+- Reels: 30-60 min each = ~4 hours
+- Stories: 5 min each = ~1 hour
+
+**Total estimated production time:** ~20 hours
 
 ---
 
