@@ -30,10 +30,15 @@
   // Track revealed elements for "once" mode
   const revealedElements = new WeakSet();
 
+  // Prevent double initialization
+  let initialized = false;
+
   /**
    * Initialize scroll reveal for all elements with data-reveal
    */
   function initScrollReveal() {
+    if (initialized) return;
+    initialized = true;
     // Skip if reduced motion is preferred and we're respecting it
     if (config.respectReducedMotion && prefersReducedMotion) {
       // Just show all elements immediately
@@ -246,9 +251,6 @@
   } else {
     initScrollReveal();
   }
-
-  // Also initialize after a short delay to catch any late-loaded content
-  setTimeout(initScrollReveal, 500);
 
   // Expose utility functions globally
   window.ScrollReveal = {
