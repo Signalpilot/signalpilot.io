@@ -3194,6 +3194,20 @@
                     // Video requires user interaction
                   }
                 }, 2000);
+
+                // Pause when scrolled out of view to save GPU
+                video.isInView = true;
+                const observer = new IntersectionObserver((entries) => {
+                  entries.forEach(entry => {
+                    video.isInView = entry.isIntersecting;
+                    if (entry.isIntersecting && !document.hidden) {
+                      video.play().catch(() => {});
+                    } else {
+                      video.pause();
+                    }
+                  });
+                }, { threshold: 0, rootMargin: '100px' });
+                observer.observe(video);
               })();
             </script>
 
