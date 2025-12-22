@@ -627,3 +627,2072 @@ After each boosted post, record:
 ---
 
 *Document version 2.1 — December 22, 2024 (Added Paid Promotion Strategy)*
+
+---
+
+# Part 6: READY-TO-POST COPY
+
+> **How to use this section:** Copy the text exactly as written. Each post is formatted for its specific platform. Visual notes tell you what image/video to pair with the copy.
+
+---
+
+## DEC 22 (TODAY) — PROFILE FOUNDATION
+
+### X/Twitter — Thread
+
+```
+🧵 Thread:
+
+82 free trading lessons.
+
+No purchase required. No email gate. No catch.
+
+We spent 2 years building the trading education we wish existed when we started.
+
+Here's what's inside: ↓
+
+1/ BEGINNER (20 lessons)
+• Liquidity fundamentals
+• Volume analysis basics
+• Trading psychology
+• Risk management & position sizing
+• Market structure foundations
+
+2/ INTERMEDIATE (27 lessons)
+• Market microstructure
+• Dark pools & order flow
+• Backtesting frameworks
+• Multi-timeframe analysis
+• Trade journaling systems
+
+3/ ADVANCED (27 lessons)
+• Institutional order flow
+• Statistical edge development
+• Portfolio construction
+• Algorithmic concepts
+• Professional infrastructure
+
+4/ PROFESSIONAL (8 lessons)
+• Live case studies
+• Personal edge development
+• Career pathways
+• Capstone project
+
+Whether you ever use our tools or not—this will make you a better trader.
+
+Start here → education.signalpilot.io
+```
+
+**Visual:** Screenshot of education hub homepage or lesson list
+
+---
+
+### Instagram — Carousel
+
+**Caption:**
+```
+82 free trading lessons. No purchase required.
+
+We built the education we wish we had when we started.
+
+From liquidity basics to institutional order flow — everything you need to understand how markets actually work.
+
+Swipe through to see what's inside →
+
+Whether you use our indicators or not, this will make you a better trader.
+
+Start learning free → link in bio
+
+#tradingview #tradereducation #technicalanalysis #tradingstrategy #priceaction #volumeanalysis #tradingpsychology #marketstructure
+```
+
+**Slides:**
+```
+Slide 1:
+82 FREE TRADING LESSONS
+No purchase required.
+
+Slide 2:
+WHAT YOU'LL LEARN:
+• Market cycles & structure
+• Volume analysis & order flow
+• Risk management & position sizing
+• Institutional trading concepts
+
+Slide 3:
+BEGINNER → PROFESSIONAL
+20 + 27 + 27 + 8 lessons
+Progressive skill building
+
+Slide 4:
+[Screenshot of education hub interface]
+"From liquidity basics to institutional strategies"
+
+Slide 5:
+We built the education
+we wish we had.
+
+Start free → education.signalpilot.io
+```
+
+---
+
+## DEC 23 (MONDAY) — PRE-LAUNCH DAY 1
+
+### X/Twitter — Thread
+
+```
+Most traders buy tops and sell bottoms.
+
+Not because they're dumb. Because they're reading the market wrong.
+
+Here's the framework that changed everything for me: ↓
+
+Markets don't move randomly. They cycle through 5 phases:
+
+1. ACCUMULATION (TD)
+Smart money quietly builds positions. Price looks "boring." Retail ignores it.
+
+2. MARKUP (IGN)
+Demand overwhelms supply. Trend begins. Retail starts noticing.
+
+3. CLIMAX (CAP)
+Buying frenzy peaks. Headlines scream. Retail finally goes all-in.
+
+4. DISTRIBUTION (WRN)
+Smart money exits into retail buying. Price holds up but momentum dies.
+
+5. DECLINE (BDN)
+Supply overwhelms demand. Retail panics. Smart money waits for step 1.
+
+The trap?
+
+Retail enters at step 3 (climax) — when it "feels" safest.
+Smart money entered at step 1 — when it "felt" scariest.
+
+Once you see the cycle, you can't unsee it.
+
+Something's coming that makes this visible on any chart.
+
+Stay tuned.
+```
+
+**Visual:** None needed (text-only thread)
+
+---
+
+### Instagram — Story
+
+**Story 1:**
+```
+[Behind-the-scenes screenshot of TradingView or code]
+Text overlay: "Final polish on indicator #4..."
+```
+
+**Story 2:**
+```
+[Poll sticker]
+"Ready for Dec 30?"
+○ YES
+○ Been ready
+```
+
+---
+
+## DEC 24 (TUESDAY) — PRE-LAUNCH DAY 2
+
+### X/Twitter — Single Post
+
+```
+The repainting problem cost me months of false confidence.
+
+I'd backtest an indicator. Perfect signals. Every top, every bottom.
+
+Then I'd trade it live. Signals would appear... then vanish. Or move to different candles.
+
+The "perfect" backtest was a lie.
+
+The indicator was rewriting history after each new candle.
+
+Most traders never realize this is happening to them.
+
+Here's how to test any indicator in 60 seconds:
+
+1. Screenshot your chart right now
+2. Wait 10-20 candles
+3. Compare the screenshots
+
+If signals moved, disappeared, or changed — it repaints.
+
+Don't trade indicators that lie to you.
+
+More on this Dec 30.
+```
+
+**Visual:** Optional — before/after screenshot showing repainted signals
+
+---
+
+### Instagram — Carousel (5 PHASES)
+
+**Caption:**
+```
+The 5 market phases every trader needs to understand.
+
+This is how professional traders read the market — not with lagging indicators, but with cycle awareness.
+
+Once you see this pattern, you'll spot it everywhere: stocks, crypto, forex, any timeframe.
+
+Save this. Study it. It will change how you trade.
+
+#tradingview #technicalanalysis #marketcycles #priceaction #tradingstrategy #swingtrading #daytrading #volumeanalysis
+```
+
+**Slides:**
+```
+Slide 1:
+THE 5 MARKET PHASES
+Every trader must know this.
+
+Slide 2:
+PHASE 1: ACCUMULATION (TD)
+━━━━━━━━━━━━━━━━━━━━━
+Smart money builds positions quietly.
+Price looks "boring" or "dead."
+Retail: "Nothing's happening here."
+
+Slide 3:
+PHASE 2: MARKUP (IGN)
+━━━━━━━━━━━━━━━━━━━━━
+Demand overwhelms supply.
+Trend begins.
+Retail: "Maybe I should watch this."
+
+Slide 4:
+PHASE 3: CLIMAX (CAP)
+━━━━━━━━━━━━━━━━━━━━━
+Buying frenzy peaks.
+Headlines everywhere.
+Retail: "I'm going all in!"
+← THIS IS THE TRAP
+
+Slide 5:
+PHASE 4: DISTRIBUTION (WRN)
+━━━━━━━━━━━━━━━━━━━━━
+Smart money sells to retail.
+Price stalls but doesn't crash yet.
+Retail: "Just a pullback, I'll hold."
+
+Slide 6:
+PHASE 5: DECLINE (BDN)
+━━━━━━━━━━━━━━━━━━━━━
+Supply overwhelms demand.
+Price falls.
+Retail: "Why is this happening to me?"
+
+Slide 7:
+THE INSIGHT:
+━━━━━━━━━━━━━━━━━━━━━
+Retail enters at climax (feels safe).
+Smart money enters at accumulation (feels scary).
+
+Same chart. Opposite timing.
+
+Slide 8:
+Save this post.
+Study the pattern.
+More coming Dec 30.
+
+@signalpilot.io
+```
+
+---
+
+## DEC 25 (WEDNESDAY) — HOLIDAY
+
+### X/Twitter — Single Post
+
+```
+Happy holidays.
+
+Markets are closed. Your family isn't.
+
+Be present today. The charts will be there Monday.
+
+Your edge doesn't build itself — but it can wait one day.
+
+See you in 5 days.
+```
+
+**Visual:** None needed
+
+---
+
+### Instagram — Story
+
+**Story 1:**
+```
+[Warm holiday image or simple graphic]
+Text overlay: "Happy holidays from Signal Pilot"
+```
+
+**Story 2:**
+```
+[Countdown sticker to Dec 30]
+Text overlay: "5 days until launch"
+```
+
+---
+
+## DEC 26 (THURSDAY) — PRE-LAUNCH DAY 4
+
+### X/Twitter — Thread
+
+```
+Your 6 indicators aren't confirming each other.
+
+They're wearing different outfits.
+
+Here's the problem nobody talks about: ↓
+
+Most popular indicators are calculated from the same inputs: price and volume.
+
+RSI? Derived from price.
+MACD? Derived from price.
+Stochastic? Derived from price.
+Moving averages? Price.
+
+When they "confirm" each other, it's not independent validation.
+
+It's the same data dressed up differently.
+
+You're not getting 6 opinions. You're getting 1 opinion repeated 6 ways.
+
+This is why traders stack indicators and still lose.
+
+More indicators ≠ more confidence.
+Different data sources = actual confirmation.
+
+The fix:
+• Use ONE indicator per category
+• Make sure they measure different things
+• Combine cycle, volume, and structure — not 3 momentum tools
+
+We built something that solves this.
+
+7 indicators. Each measuring something different. Working together.
+
+Dec 30.
+```
+
+**Visual:** None needed (text thread)
+
+---
+
+### Instagram — Reel (15 seconds)
+
+**Visual concept:**
+```
+[Screen recording of TradingView chart]
+- Chart loads with Pentarch indicator
+- TD signal appears at a swing low
+- IGN signal fires as price moves up
+- CAP signal appears at the top
+- Text overlay appears: "See the cycle. Not the noise."
+- End card: "Dec 30. Link in bio."
+```
+
+**Caption:**
+```
+See the cycle before it completes.
+
+Dec 30. Link in bio.
+
+#tradingview #technicalanalysis #tradingstrategy #priceaction #swingtrading
+```
+
+**Audio:** Trending sound or subtle electronic/ambient
+
+---
+
+## DEC 27 (FRIDAY) — PRE-LAUNCH DAY 5
+
+### X/Twitter — Thread
+
+```
+How smart money actually moves (and how to see it).
+
+Institutions can't buy or sell in one click like you can. Their size is their constraint.
+
+This creates footprints. Here's what to look for: ↓
+
+The problem for institutions:
+
+If a hedge fund wants to buy $50M of stock, they can't market buy.
+
+One large order would spike the price against them.
+
+So they accumulate slowly. Quietly. Over days or weeks.
+
+This leaves patterns in the data.
+
+ACCUMULATION FOOTPRINTS:
+• Higher volume on up moves
+• Lower volume on down moves
+• Volume spikes at lows without price dropping
+• Price holds above key levels despite "bad news"
+
+DISTRIBUTION FOOTPRINTS:
+• Higher volume on down moves
+• Lower volume on up moves
+• Volume spikes at highs without price rising
+• Price stalls despite "good news"
+
+The trap that catches retail every time:
+
+Price breaks below support. Stops trigger. Panic selling.
+
+Volume spikes. And then... price reverses.
+
+That wasn't a breakdown. It was a shakeout.
+
+Smart money just bought everyone's panic.
+
+You can see this. You just need the right tools.
+
+We built them.
+
+3 days.
+```
+
+**Visual:** None needed (text thread)
+
+---
+
+### Instagram — Static
+
+**Visual:** Quote card with brand styling
+
+**Text on image:**
+```
+"The edge isn't seeing more.
+It's seeing what matters."
+
+— Signal Pilot
+```
+
+**Caption:**
+```
+3 days.
+
+#tradingview #tradingstrategy #technicalanalysis #priceaction
+```
+
+---
+
+## DEC 28 (SATURDAY) — PRE-LAUNCH DAY 6
+
+### X/Twitter — Single Post
+
+```
+48 hours.
+
+7 indicators.
+Zero repaint.
+One unified system.
+
+The Elite Seven.
+
+Dec 30.
+
+Follow so you don't miss it.
+```
+
+**Visual:** Teaser graphic if available, or text-only
+
+---
+
+### Instagram — Carousel (ELITE SEVEN PREVIEW)
+
+**Caption:**
+```
+The Elite Seven.
+
+7 indicators. 1 unified system. Zero repaint.
+
+Each one solves a specific problem. Together, they give you complete market clarity.
+
+Swipe to meet them →
+
+Dec 30. Link in bio.
+
+#tradingview #technicalanalysis #tradingstrategy #tradingindicators #priceaction #volumeanalysis #swingtrading #daytrading
+```
+
+**Slides:**
+```
+Slide 1:
+THE ELITE SEVEN
+7 indicators. 1 system. Zero repaint.
+Dec 30.
+
+Slide 2:
+01 — PENTARCH
+━━━━━━━━━━━━━━━━━━━━━
+5-phase cycle detection.
+See exactly where you are in the market cycle.
+
+Slide 3:
+02 — OMNIDECK
+━━━━━━━━━━━━━━━━━━━━━
+10-in-1 overlay.
+One indicator. Multiple confirmations. Zero clutter.
+
+Slide 4:
+03 — VOLUME ORACLE
+━━━━━━━━━━━━━━━━━━━━━
+Institutional flow detection.
+See accumulation and distribution before price moves.
+
+Slide 5:
+04 — PLUTUS FLOW
+━━━━━━━━━━━━━━━━━━━━━
+Hidden pressure revealed.
+See buying/selling pressure before it shows on price.
+
+Slide 6:
+05 — JANUS ATLAS
+━━━━━━━━━━━━━━━━━━━━━
+Auto-plotted key levels.
+Stop drawing 200 lines manually.
+
+Slide 7:
+06 — AUGURY GRID
+━━━━━━━━━━━━━━━━━━━━━
+Multi-symbol scanner.
+Find your best setups at a glance.
+
+Slide 8:
+07 — HARMONIC OSCILLATOR
+━━━━━━━━━━━━━━━━━━━━━
+4-system momentum voting.
+Entry timing confirmed by consensus.
+
+Slide 9:
+THE ELITE SEVEN
+Dec 30. Link in bio.
+
+@signalpilot.io
+```
+
+---
+
+## DEC 29 (SUNDAY) — PRE-LAUNCH DAY 7
+
+### X/Twitter — Thread
+
+```
+The Repainting Problem: How most TradingView indicators lie to you.
+
+That indicator with the perfect backtest? The one that nails every top and bottom?
+
+It's lying. Here's how: ↓
+
+What is repainting?
+
+An indicator "repaints" when it changes past signals after new data arrives.
+
+Yesterday's "perfect buy signal" at the exact bottom?
+
+It wasn't there yesterday. The indicator moved it after the fact.
+
+Three types of repainting:
+
+1. SIGNAL RELOCATION
+The signal shifts from one candle to another after new candles form.
+
+2. SIGNAL DISAPPEARANCE
+A signal appears, you act on it, then it vanishes completely.
+
+3. VALUE RECALCULATION
+The indicator's numerical values change retroactively.
+
+Why developers do this:
+
+Some don't know better. They use future data in calculations accidentally.
+
+Others know exactly what they're doing. Perfect backtests sell indicators.
+
+How to test any indicator:
+
+1. Screenshot your chart with the indicator
+2. Note exactly where signals appear
+3. Wait 10-20 candles
+4. Screenshot again
+5. Compare
+
+If anything moved, disappeared, or changed — it repaints. Don't trade it.
+
+Our policy:
+
+Every Signal Pilot indicator is audited for repainting.
+
+$100 bounty if you find one that repaints.
+
+Zero takers so far.
+
+Tomorrow, everything goes live.
+
+signalpilot.io
+```
+
+**Visual:** None needed (text thread)
+
+---
+
+### Instagram — Reel (15-30 seconds)
+
+**Visual concept:**
+```
+[Hype video with quick cuts]
+- Flash of Pentarch on chart (0.5 sec)
+- Flash of Volume Oracle (0.5 sec)
+- Flash of Janus Atlas with levels (0.5 sec)
+- Flash of OmniDeck overlay (0.5 sec)
+- Text: "7 INDICATORS" (1 sec)
+- Text: "1 SYSTEM" (1 sec)
+- Text: "ZERO REPAINT" (1 sec)
+- Logo reveal: "THE ELITE SEVEN" (2 sec)
+- End card: "TOMORROW" (2 sec)
+```
+
+**Caption:**
+```
+Tomorrow.
+
+The Elite Seven.
+7 indicators. 1 system. Zero repaint.
+
+Link in bio.
+
+#tradingview #technicalanalysis #tradingstrategy #tradingindicators #priceaction
+```
+
+**Audio:** Building, dramatic sound — trending audio if appropriate
+
+---
+
+## DEC 30 (MONDAY) — LAUNCH DAY
+
+### X/Twitter — Pinned Launch Thread (9 AM)
+
+```
+The Elite Seven is live.
+
+7 indicators. 1 unified system. Zero repaint.
+
+After 2 years of development, professional cycle detection for TradingView is here.
+
+Here's everything you get: ↓
+
+🔷 PENTARCH — Flagship cycle detection
+See the 5-phase market cycle in real-time: TD → IGN → WRN → CAP → BDN
+Know exactly where you are before the move completes.
+
+🔷 OMNIDECK — 10-in-1 overlay
+TD Sequential, Squeeze Cloud, SuperTrend, Support/Demand zones, and more.
+One indicator. Zero clutter.
+
+🔷 VOLUME ORACLE — Institutional flow
+Track accumulation and distribution phases.
+See what smart money is doing before price reacts.
+
+🔷 PLUTUS FLOW — Hidden pressure
+Cumulative delta with divergence detection.
+See buying/selling pressure before it shows on the chart.
+
+🔷 JANUS ATLAS — Auto-plotted levels
+HTF pivots, VWAP, volume profile, session markers.
+Stop drawing 200 lines manually.
+
+🔷 AUGURY GRID — Multi-symbol scanner
+Track 8+ markets at once.
+Find your best setups at a glance.
+
+🔷 HARMONIC OSCILLATOR — Entry timing
+4 momentum systems voting together.
+★★★★ = high confidence consensus.
+
+Every indicator:
+✓ 100% non-repainting (audited)
+✓ Works on all markets (stocks, crypto, forex, indices)
+✓ All timeframes (1min to monthly)
+✓ Real-time alerts included
+
+Plus:
+✓ 82 free lessons at education.signalpilot.io
+✓ Full documentation at docs.signalpilot.io
+✓ 7-day free trial — no credit card required
+
+$100 bounty if you find a single repaint.
+
+Zero takers so far.
+
+Try free for 7 days → signalpilot.io
+```
+
+**Pin this thread.**
+
+---
+
+### X/Twitter — Quote RT (12 PM)
+
+```
+Forgot to mention:
+
+82 free trading lessons included with every plan.
+
+Actually, they're free even without a plan.
+
+From beginner basics to institutional order flow — we built the education we wish existed.
+
+No purchase required → education.signalpilot.io
+```
+
+**Action:** Quote retweet your launch thread with this
+
+---
+
+### X/Twitter — Social Proof Update (6 PM)
+
+```
+First [X] sign-ups are in.
+
+Welcome to Signal Pilot.
+
+If you just got access:
+1. Start with Pentarch — it's the foundation
+2. Check docs.signalpilot.io for setup guides
+3. The 82 free lessons at education.signalpilot.io will accelerate everything
+
+Questions? Reply here.
+```
+
+**Note:** Replace [X] with actual number
+
+---
+
+### Instagram — Feed Post (9 AM)
+
+**Visual:** Launch announcement graphic — dark theme, "The Elite Seven — Now Live"
+
+**Caption:**
+```
+The Elite Seven is live.
+
+7 indicators. 1 unified system. Zero repaint.
+
+After 2 years of development, professional cycle detection for TradingView is here.
+
+What's included:
+→ Pentarch: 5-phase cycle detection
+→ OmniDeck: 10-in-1 overlay
+→ Volume Oracle: Institutional flow tracking
+→ Plutus Flow: Hidden pressure detection
+→ Janus Atlas: Auto-plotted key levels
+→ Augury Grid: Multi-symbol scanner
+→ Harmonic Oscillator: Entry timing consensus
+
+Every indicator:
+✓ 100% non-repainting (audited)
+✓ All markets, all timeframes
+✓ Real-time alerts included
+
+Plus 82 free lessons. No purchase required.
+
+Try free for 7 days → link in bio
+
+#tradingview #technicalanalysis #tradingstrategy #tradingindicators #priceaction #volumeanalysis #swingtrading #daytrading #forex #crypto
+```
+
+---
+
+### Instagram — Stories (9 AM) — 5-Part Walkthrough
+
+**Story 1:**
+```
+[Launch graphic]
+Text: "It's live."
+Link sticker: signalpilot.io
+```
+
+**Story 2:**
+```
+[Pentarch screenshot]
+Text: "PENTARCH — See the cycle before it completes"
+```
+
+**Story 3:**
+```
+[Volume Oracle screenshot]
+Text: "VOLUME ORACLE — Track smart money flow"
+```
+
+**Story 4:**
+```
+[Janus Atlas screenshot]
+Text: "JANUS ATLAS — All key levels, auto-plotted"
+```
+
+**Story 5:**
+```
+[Education hub screenshot]
+Text: "82 free lessons included"
+Link sticker: education.signalpilot.io
+```
+
+---
+
+### Instagram — Reel (3 PM)
+
+**Visual concept:**
+```
+[30-second product demo]
+- Open TradingView with Pentarch loaded
+- Show TD signal appearing at a low
+- Price moves up, IGN fires
+- Show Volume Oracle reading "ACCUMULATION 84%"
+- Show Janus Atlas with key levels
+- CAP signal appears at the top
+- Text overlay: "See the cycle. Not the noise."
+- End card: "The Elite Seven — signalpilot.io"
+```
+
+**Caption:**
+```
+This is Pentarch.
+
+5-phase cycle detection. Zero repaint.
+
+TD at exhaustion. IGN at ignition. CAP at climax.
+
+See exactly where you are in the market cycle — before it completes.
+
+The Elite Seven is live. Link in bio.
+
+#tradingview #technicalanalysis #tradingstrategy #priceaction #swingtrading #daytrading
+```
+
+---
+
+### Instagram — Story (9 PM)
+
+```
+[Screenshot of DMs, comments, or sign-up notification]
+Text: "Day 1 complete. Thank you."
+
+[Add question sticker]
+"What should I cover first?"
+```
+
+---
+
+## DEC 31 (TUESDAY) — NEW YEAR'S EVE
+
+### X/Twitter — Thread
+
+```
+2024: Built in silence.
+2025: Trade with clarity.
+
+Yesterday we launched The Elite Seven.
+
+Here's why it matters for your trading year: ↓
+
+The problem we spent 2 years solving:
+
+Most traders are drowning in indicators that:
+• Repaint (lie about past signals)
+• Measure the same thing differently
+• Add clutter without adding clarity
+
+The result?
+Conflicting signals. Second-guessing. Chasing.
+
+What we built instead:
+
+7 indicators. Each measuring something different.
+
+Cycle position (Pentarch)
+Institutional flow (Volume Oracle)
+Hidden pressure (Plutus Flow)
+Key levels (Janus Atlas)
+Multi-market scanning (Augury Grid)
+Entry timing (Harmonic Oscillator)
+Everything overlay (OmniDeck)
+
+They work together. Or standalone. Your choice.
+
+Every signal confirmed on candle close. Zero repaint. $100 bounty if you prove otherwise.
+
+For 2025:
+
+Stop stacking indicators that say the same thing.
+Stop trading signals that disappear.
+Stop waiting for someone else to tell you what to see.
+
+Start reading the cycle yourself.
+
+The Elite Seven is live → signalpilot.io
+
+Happy New Year.
+```
+
+---
+
+### Instagram — Static
+
+**Visual:** Quote card with brand styling
+
+**Text on image:**
+```
+Your 2025 trading resolution:
+
+Stop chasing signals.
+Start reading cycles.
+```
+
+**Caption:**
+```
+The Elite Seven is live.
+
+2025 is the year you stop guessing and start seeing.
+
+Link in bio → signalpilot.io
+
+Happy New Year.
+
+#tradingview #newyear #tradingstrategy #technicalanalysis #2025goals
+```
+
+---
+
+### Instagram — Story
+
+**Story 1:**
+```
+[Poll sticker]
+"Your biggest trading goal for 2025?"
+○ Consistency
+○ Bigger wins
+○ Less stress
+○ Full-time trading
+```
+
+**Story 2:**
+```
+[Countdown sticker to midnight]
+Text: "See you in 2025"
+```
+
+---
+
+## JAN 1 (WEDNESDAY) — NEW YEAR
+
+### X/Twitter — Single Post
+
+```
+2025 starts now.
+
+Your indicators shouldn't repaint.
+Your strategy shouldn't either.
+
+New year. Same cycles. Better tools.
+
+The Elite Seven → signalpilot.io
+```
+
+---
+
+### Instagram — Story
+
+```
+[Simple graphic or photo]
+Text: "Happy New Year. Markets open tomorrow. Your edge is ready."
+```
+
+---
+
+## JAN 2 (THURSDAY) — POST-LAUNCH DAY 3
+
+### X/Twitter — Thread (Pentarch Deep Dive)
+
+```
+Pentarch: The traffic light for your chart.
+
+It's the flagship indicator in The Elite Seven — and it changes how you see markets.
+
+Here's the complete breakdown: ↓
+
+What Pentarch does:
+
+It maps the 5-phase market cycle in real-time:
+
+TD (Touchdown) → Accumulation / exhaustion
+IGN (Ignition) → Markup beginning
+WRN (Warning) → Distribution starting
+CAP (Climax) → Exhaustion at highs
+BDN (Breakdown) → Decline beginning
+
+Each signal tells you WHERE you are in the cycle.
+
+Not "overbought." Not "oversold."
+
+Exactly where you are.
+
+How to read it:
+
+🟢 GREEN ZONE (TD + IGN)
+Downtrend exhausting. Accumulation happening.
+Smart money building. Upside potential.
+
+🟡 YELLOW ZONE (WRN)
+Price still rising. But momentum weakening.
+Caution. Distribution may be starting.
+
+🔴 RED ZONE (CAP + BDN)
+Uptrend exhausting. Distribution happening.
+Smart money exiting. Downside potential.
+
+The components:
+
+• Cycle signals (TD/IGN/WRN/CAP/BDN labels)
+• Pilot Line (color-coded trend direction)
+• NanoFlow crosses (momentum strength)
+• Color-coded candles (market structure)
+
+All confirmed on candle close. Zero repaint.
+
+Why it works:
+
+Most indicators tell you what already happened.
+
+Pentarch tells you where you ARE in the cycle that's still unfolding.
+
+Big difference.
+
+Full documentation → docs.signalpilot.io
+
+Try free → signalpilot.io
+```
+
+---
+
+### Instagram — Carousel (Pentarch Education)
+
+**Caption:**
+```
+How to read Pentarch — the flagship indicator in The Elite Seven.
+
+It maps the 5-phase market cycle in real-time. No lagging signals. No repaint.
+
+Swipe to learn the system →
+
+Save this for reference.
+
+#tradingview #technicalanalysis #tradingstrategy #priceaction #swingtrading #marketcycles
+```
+
+**Slides:**
+```
+Slide 1:
+HOW TO READ PENTARCH
+The traffic light for your chart.
+
+Slide 2:
+THE 5 SIGNALS:
+━━━━━━━━━━━━━━━━━━━━━
+TD — Accumulation / Exhaustion at lows
+IGN — Markup / Rally beginning
+WRN — Warning / Distribution starting
+CAP — Climax / Exhaustion at highs
+BDN — Breakdown / Decline beginning
+
+Slide 3:
+🟢 GREEN ZONE
+TD + IGN
+━━━━━━━━━━━━━━━━━━━━━
+Downtrend exhausting.
+Accumulation in progress.
+Upside potential building.
+
+Slide 4:
+🟡 YELLOW ZONE
+WRN
+━━━━━━━━━━━━━━━━━━━━━
+Price rising, momentum weakening.
+Distribution may be starting.
+Time for caution.
+
+Slide 5:
+🔴 RED ZONE
+CAP + BDN
+━━━━━━━━━━━━━━━━━━━━━
+Uptrend exhausting.
+Distribution in progress.
+Downside potential building.
+
+Slide 6:
+[Screenshot of Pentarch on chart]
+"Every signal confirmed on candle close.
+Zero repaint."
+
+Slide 7:
+Try Pentarch free → signalpilot.io
+Full docs → docs.signalpilot.io
+
+@signalpilot.io
+```
+
+---
+
+## JAN 3 (FRIDAY) — POST-LAUNCH DAY 4
+
+### X/Twitter — Thread (FAQ)
+
+```
+Day 4 since launch.
+
+Here's what traders are asking: ↓
+
+Q: "Does it work on crypto?"
+
+A: Yes. All markets. Stocks, crypto, forex, indices, commodities. The cycle framework is universal.
+
+Q: "What timeframe is best?"
+
+A: All of them. Most popular: 15m-1H for day trading, 4H-Daily for swing trading. Pentarch adapts automatically.
+
+Q: "Do I need TradingView Premium?"
+
+A: No. Free TradingView accounts work. You get 3 indicator slots — enough for Pentarch + 1-2 filters.
+
+Q: "How is this different from TD Sequential?"
+
+A: Pentarch is inspired by TD Sequential but rebuilt from scratch. Cleaner signals, additional confirmation layers, and part of a unified 7-indicator system.
+
+Q: "Does it repaint?"
+
+A: No. Every signal is confirmed on candle close. $100 bounty if you find a repaint. Zero takers.
+
+Q: "Is there a free trial?"
+
+A: Yes. 7 days free. No credit card required.
+
+What else do you want to know? Reply below.
+
+signalpilot.io
+```
+
+---
+
+### Instagram — Reel (Volume Oracle Demo)
+
+**Visual concept:**
+```
+[Screen recording]
+- Show Volume Oracle panel on chart
+- Reading shows "ACCUMULATION 87%"
+- Arrow pointing to the percentage
+- Price is in a range / consolidation
+- Cut to: Price breaks out upward
+- Text overlay: "They were buying the whole time."
+- End card: "Volume Oracle — The Elite Seven"
+```
+
+**Caption:**
+```
+"ACCUMULATION 87%"
+
+While price looked dead, smart money was building.
+
+Volume Oracle shows you what retail misses.
+
+The Elite Seven → link in bio.
+
+#tradingview #technicalanalysis #volumeanalysis #smartmoney #tradingstrategy
+```
+
+---
+
+## JAN 4 (SATURDAY)
+
+### Instagram — Static (Before/After)
+
+**Visual:** Split image — cluttered chart vs clean Signal Pilot setup
+
+**Caption:**
+```
+Left: 6 indicators saying different things.
+Right: One unified system showing the cycle.
+
+Which would you rather trade?
+
+The Elite Seven → link in bio.
+
+#tradingview #technicalanalysis #tradingstrategy #priceaction #chartsetup
+```
+
+---
+
+## JAN 5 (SUNDAY)
+
+### Instagram — Carousel (Accumulation vs Distribution)
+
+**Caption:**
+```
+Accumulation vs Distribution — same chart, opposite outcomes.
+
+This is the difference between entering with smart money and being exit liquidity.
+
+Swipe to learn the tells →
+
+#tradingview #technicalanalysis #volumeanalysis #smartmoney #priceaction #tradingstrategy #swingtrading
+```
+
+**Slides:**
+```
+Slide 1:
+ACCUMULATION vs DISTRIBUTION
+Same chart. Opposite outcomes.
+
+Slide 2:
+THE PROBLEM:
+━━━━━━━━━━━━━━━━━━━━━
+Price consolidates in a range.
+Looks identical on the chart.
+But one leads to breakout UP.
+The other leads to breakdown DOWN.
+
+Slide 3:
+ACCUMULATION (before rally):
+━━━━━━━━━━━━━━━━━━━━━
+• Higher volume on up bars
+• Lower volume on down bars
+• Volume spikes at lows
+• Price holds support despite "bad news"
+• Smart money is BUYING
+
+Slide 4:
+DISTRIBUTION (before drop):
+━━━━━━━━━━━━━━━━━━━━━
+• Higher volume on down bars
+• Lower volume on up bars
+• Volume spikes at highs
+• Price stalls despite "good news"
+• Smart money is SELLING
+
+Slide 5:
+THE WYCKOFF TELLS:
+━━━━━━━━━━━━━━━━━━━━━
+SPRING = Price breaks below support, instantly reverses
+(Smart money bought the panic)
+
+UPTHRUST = Price breaks above resistance, instantly reverses
+(Smart money sold the FOMO)
+
+Slide 6:
+Volume Oracle tracks this automatically.
+
+See accumulation and distribution phases
+before price confirms.
+
+Slide 7:
+The Elite Seven → signalpilot.io
+
+@signalpilot.io
+```
+
+---
+
+## JAN 6 (MONDAY)
+
+### X/Twitter — Thread (OmniDeck)
+
+```
+OmniDeck: 10 indicators in 1 overlay.
+
+It's the "everything indicator" in The Elite Seven.
+
+Here's what it replaces: ↓
+
+OmniDeck combines:
+
+1. TD Sequential — cycle counting
+2. Squeeze Cloud — volatility compression
+3. SuperTrend Ensemble — trend direction
+4. Bull Market Support Band — macro trend
+5. Supply/Demand Zones — key levels
+6. Candlestick Patterns — reversal signals
+7. Liquidity Sweeps — trap detection
+8. Regime System — market state
+9. EMA Events — dynamic support/resistance
+10. Caution Warnings — risk alerts
+
+All in one clean overlay.
+
+Why this matters:
+
+Most traders stack 6-10 separate indicators.
+
+Different colors. Different scales. Different logic.
+
+Result: Clutter. Confusion. Conflicting signals.
+
+OmniDeck unifies everything.
+
+Same visual language. Same chart. Same logic.
+
+One indicator. Multiple confirmations. Zero clutter.
+
+When to use OmniDeck:
+
+• You want everything in one view
+• You're tired of indicator soup
+• You need quick multi-factor confirmation
+• You trade multiple timeframes
+
+OmniDeck can replace your entire current setup.
+
+Or use it alongside Pentarch for cycle + context.
+
+Try it → signalpilot.io
+```
+
+---
+
+## JAN 7 (TUESDAY)
+
+### Instagram — Carousel (Janus Atlas)
+
+**Caption:**
+```
+Janus Atlas: Stop drawing 200 lines manually.
+
+It auto-plots every key level that matters — HTF pivots, VWAP, volume profile zones, session markers.
+
+Swipe to see what it includes →
+
+#tradingview #technicalanalysis #supportandresistance #priceaction #tradingstrategy #swingtrading #daytrading
+```
+
+**Slides:**
+```
+Slide 1:
+JANUS ATLAS
+Stop drawing 200 lines.
+
+Slide 2:
+WHAT IT AUTO-PLOTS:
+━━━━━━━━━━━━━━━━━━━━━
+• Higher timeframe pivots (daily, weekly, monthly, quarterly)
+• Previous session data (yesterday's high/low)
+• VWAP anchors (fair value zones)
+• Volume Profile zones (POC, VAH, VAL)
+• Session markers (Asia, London, NYC opens)
+• Structure labels (BOS, CHoCH)
+
+Slide 3:
+WHY IT MATTERS:
+━━━━━━━━━━━━━━━━━━━━━
+Key levels are where traders react.
+
+Miss them = get stopped out
+See them = trade with structure
+
+Slide 4:
+[Screenshot of Janus Atlas on chart]
+"Every important level. One indicator."
+
+Slide 5:
+No more manual drawing.
+No more forgetting levels.
+No more wondering "what's here?"
+
+Janus Atlas shows you the roadmap.
+
+Slide 6:
+The Elite Seven → signalpilot.io
+
+@signalpilot.io
+```
+
+---
+
+## JAN 8 (WEDNESDAY)
+
+### X/Twitter — Single Post (Engagement)
+
+```
+Question:
+
+What's the ONE indicator category you struggle with most?
+
+A) Trend direction
+B) Entry timing
+C) Key levels
+D) Volume analysis
+
+Reply below. Building something based on the answers.
+```
+
+---
+
+## JAN 9 (THURSDAY)
+
+### Instagram — Reel (Janus Atlas Demo)
+
+**Visual concept:**
+```
+[Screen recording]
+- Open blank chart
+- Add Janus Atlas indicator
+- Watch as levels auto-populate
+- Daily pivot appears
+- Weekly pivot appears
+- VWAP anchors appear
+- Session markers appear
+- Text overlay: "2 seconds. Every level that matters."
+- End card: "Janus Atlas — The Elite Seven"
+```
+
+**Caption:**
+```
+2 seconds to plot every key level.
+
+Daily pivots. Weekly pivots. VWAP. Volume profile. Session opens.
+
+Stop drawing. Start trading.
+
+Janus Atlas → link in bio.
+
+#tradingview #technicalanalysis #supportandresistance #priceaction #tradingstrategy
+```
+
+---
+
+## JAN 10 (FRIDAY)
+
+### X/Twitter — Thread (Harmonic Oscillator)
+
+```
+Harmonic Oscillator: 4 momentum systems voting on your entry.
+
+It's the timing tool in The Elite Seven.
+
+Here's how it works: ↓
+
+The problem with single oscillators:
+
+RSI says oversold. MACD says bearish. Stochastic says neutral.
+
+Which one do you trust?
+
+Usually, the one that confirms your bias. (This is how you lose money.)
+
+Harmonic Oscillator's solution:
+
+It combines 4 momentum systems into one voting mechanism:
+
+When they agree: ★★★★ (high confidence)
+When they split: ★★ (low confidence)
+
+Simple visual. No interpretation needed.
+
+What you see:
+
+• Live vote count: "3 Bulls, 1 Neutral"
+• Star rating: ★ to ★★★★
+• Composite line: All 4 oscillators unified
+
+How to use it:
+
+★★★★ = All 4 agree. High confidence entry.
+★★★ = Strong agreement. Good entry.
+★★ = Mixed signals. Wait or reduce size.
+★ = Disagreement. Stay out.
+
+The edge:
+
+You're not guessing which oscillator to trust.
+
+You're seeing consensus.
+
+4 opinions > 1 opinion.
+
+Try it → signalpilot.io
+```
+
+---
+
+## JAN 11 (SATURDAY)
+
+### Instagram — Static (Quote Card or Testimonial)
+
+**Option A — If you have a testimonial:**
+```
+[Quote card with testimonial]
+"[User quote about Signal Pilot]"
+— @username
+```
+
+**Option B — If no testimonials yet:**
+```
+[Quote card]
+"Trust what you see.
+Not what you hope."
+
+— Signal Pilot
+```
+
+**Caption:**
+```
+Build conviction in your own read.
+
+The Elite Seven → link in bio.
+
+#tradingview #tradingstrategy #technicalanalysis #priceaction
+```
+
+---
+
+## JAN 12 (SUNDAY)
+
+### Instagram — Carousel (Augury Grid)
+
+**Caption:**
+```
+Augury Grid: Your ranked watchlist at a glance.
+
+Stop flipping through 20 charts. Find your best setups in one view.
+
+Swipe to see how it works →
+
+#tradingview #technicalanalysis #tradingstrategy #swingtrading #daytrading #stockmarket #forex #crypto
+```
+
+**Slides:**
+```
+Slide 1:
+AUGURY GRID
+Your ranked watchlist.
+
+Slide 2:
+THE PROBLEM:
+━━━━━━━━━━━━━━━━━━━━━
+You're watching 15 symbols.
+Flipping through charts takes forever.
+You miss setups while checking others.
+
+Slide 3:
+THE SOLUTION:
+━━━━━━━━━━━━━━━━━━━━━
+Augury Grid shows 8+ markets at once:
+
+• Signal direction (↑ ↓ —)
+• Quality score (0-100)
+• Target prices
+• Running P&L
+
+All in one panel.
+
+Slide 4:
+QUALITY SCORE:
+━━━━━━━━━━━━━━━━━━━━━
+Higher score = more indicators aligned
+
+Score 85+ = Strong setup
+Score 50-70 = Watch but wait
+Score <50 = Skip
+
+Slide 5:
+[Screenshot of Augury Grid panel]
+"8 markets. One glance. Best setups ranked."
+
+Slide 6:
+Stop chart-hopping.
+Start setup-hunting.
+
+The Elite Seven → signalpilot.io
+
+@signalpilot.io
+```
+
+---
+
+## JAN 13 (MONDAY)
+
+### X/Twitter — Thread ($100 Bounty)
+
+```
+$100 bounty: Find a repaint, keep the money.
+
+We've been live for 2 weeks.
+
+Zero takers. Here's why: ↓
+
+What repainting is:
+
+An indicator "repaints" when it changes past signals after new candles form.
+
+That "perfect" backtest? It was rewritten after the fact.
+
+How we prevent it:
+
+Every Signal Pilot indicator:
+• Confirms signals on candle CLOSE
+• Uses no future data in calculations
+• Is manually audited for lookahead bias
+
+Our guarantee:
+
+If you can prove any Elite Seven indicator repaints, you get $100 USD.
+
+Screenshot before. Screenshot after. Show the difference.
+
+We'll pay.
+
+Why we're confident:
+
+Because we built these for ourselves first.
+
+We trade with them. We can't afford them to lie.
+
+2 weeks live. Thousands of signals. Zero repaints found.
+
+The bounty stands.
+
+Try risk-free → signalpilot.io
+```
+
+---
+
+## JAN 14 (TUESDAY)
+
+### Instagram — Carousel (Education Hub Promo)
+
+**Caption:**
+```
+82 free trading lessons. No purchase required.
+
+From beginner basics to institutional strategies — we built the education we wish existed.
+
+Swipe to see the curriculum →
+
+Start free → education.signalpilot.io
+
+#tradingview #tradereducation #technicalanalysis #tradingpsychology #volumeanalysis #priceaction
+```
+
+**Slides:**
+```
+Slide 1:
+82 FREE TRADING LESSONS
+No purchase required.
+
+Slide 2:
+BEGINNER (20 lessons)
+━━━━━━━━━━━━━━━━━━━━━
+• Liquidity fundamentals
+• Volume analysis basics
+• Trading psychology
+• Risk management
+• Market structure
+
+Slide 3:
+INTERMEDIATE (27 lessons)
+━━━━━━━━━━━━━━━━━━━━━
+• Market microstructure
+• Dark pools & order flow
+• Backtesting frameworks
+• Multi-timeframe analysis
+• Trade journaling
+
+Slide 4:
+ADVANCED (27 lessons)
+━━━━━━━━━━━━━━━━━━━━━
+• Institutional order flow
+• Statistical edge development
+• Portfolio construction
+• Algorithmic concepts
+
+Slide 5:
+PROFESSIONAL (8 lessons)
+━━━━━━━━━━━━━━━━━━━━━
+• Live case studies
+• Personal edge development
+• Career pathways
+• Capstone project
+
+Slide 6:
+Whether you use our indicators or not —
+this will make you a better trader.
+
+Start free → education.signalpilot.io
+
+@signalpilot.io
+```
+
+---
+
+## JAN 15 (WEDNESDAY)
+
+### X/Twitter — Single Post
+
+```
+"Do I need TradingView Premium?"
+
+No.
+
+Free TradingView accounts work fine.
+
+You get 3 indicator slots.
+
+Pentarch + 1-2 filters = complete setup.
+
+Pro/Premium gives you more slots and unlimited alerts. Nice to have, not required.
+
+Setup guide → docs.signalpilot.io
+```
+
+---
+
+## JAN 16 (THURSDAY)
+
+### Instagram — Reel (First Trade Walkthrough)
+
+**Visual concept:**
+```
+[Screen recording — educational walkthrough]
+- "Your first trade with Pentarch"
+- Show chart with Pentarch loaded
+- TD signal appears
+- "TD = Accumulation. Downtrend may be exhausting."
+- IGN signal fires
+- "IGN = Ignition. Momentum shifting up."
+- "Entry zone: After IGN confirms"
+- Show where stop would go
+- "Stop below TD low"
+- Show target zone
+- "Target: Next resistance or WRN signal"
+- End card: "Full guide → docs.signalpilot.io"
+```
+
+**Caption:**
+```
+Your first trade with Pentarch.
+
+TD = Exhaustion. Watch for accumulation.
+IGN = Ignition. Momentum shifting.
+Entry after IGN. Stop below TD.
+
+Full walkthrough → link in bio.
+
+#tradingview #technicalanalysis #tradingstrategy #priceaction #swingtrading
+```
+
+---
+
+## JAN 17 (FRIDAY)
+
+### X/Twitter — Thread (Smart Money)
+
+```
+Why retail loses: They buy when institutions distribute.
+
+Here's the tell most traders miss: ↓
+
+The setup:
+
+Stock rallies 40% in 3 weeks.
+
+Headlines: "Breakout! New highs!"
+
+Retail: "Finally time to buy!"
+
+What's actually happening:
+
+While price rises on lower volume...
+
+Institutional selling is absorbing retail buying.
+
+Every retail buy = an institution exiting.
+
+This is distribution.
+
+The tells:
+
+• Price rising, volume falling
+• Big volume spikes on red days (selling)
+• Price can't hold above resistance
+• "Good news" doesn't push price higher
+
+What happens next:
+
+Institutions finish selling.
+
+No more buying pressure to absorb.
+
+Price falls. Retail holds. Then panics. Then sells at the bottom.
+
+The cycle repeats.
+
+How to avoid it:
+
+Track the flow. Not the price.
+
+Volume Oracle shows accumulation/distribution phases in real-time.
+
+Don't be the exit liquidity.
+
+Full article → blog.signalpilot.io
+
+Try the tools → signalpilot.io
+```
+
+---
+
+## JAN 18 (SATURDAY)
+
+### Instagram — Static
+
+**Visual:** Simple text graphic or photo
+
+**Caption:**
+```
+2 weeks live.
+
+Here's what we've learned from early users:
+
+→ Most start with Pentarch alone. It's enough.
+→ Volume Oracle is the "aha moment" for many
+→ The education hub gets used more than we expected
+→ "Why didn't I find this sooner" is the most common DM
+
+Thank you to everyone who's joined so far.
+
+The Elite Seven → link in bio.
+```
+
+---
+
+## JAN 19 (SUNDAY)
+
+### Instagram — Carousel (Plutus Flow)
+
+**Caption:**
+```
+Plutus Flow: See hidden buying/selling pressure before it shows on price.
+
+Most traders only see price. Plutus Flow shows what's driving it.
+
+Swipe to learn how →
+
+#tradingview #technicalanalysis #volumeanalysis #orderflow #priceaction #tradingstrategy
+```
+
+**Slides:**
+```
+Slide 1:
+PLUTUS FLOW
+Hidden pressure revealed.
+
+Slide 2:
+WHAT IT SHOWS:
+━━━━━━━━━━━━━━━━━━━━━
+Cumulative delta = Buying pressure minus selling pressure
+
+Price can stay flat while pressure builds underneath.
+
+Plutus Flow reveals it.
+
+Slide 3:
+HOW TO READ IT:
+━━━━━━━━━━━━━━━━━━━━━
+🟢 Green ribbon = Demand winning
+🔴 Red ribbon = Supply winning
+⚪ White dots = Extreme pressure
+⬆️ Centerline cross up = Momentum shifting bullish
+⬇️ Centerline cross down = Momentum shifting bearish
+
+Slide 4:
+DIVERGENCE DETECTION:
+━━━━━━━━━━━━━━━━━━━━━
+Price makes new high.
+Plutus Flow doesn't.
+
+= Bearish divergence. Weakness under the surface.
+
+(Works in reverse for bullish divergence)
+
+Slide 5:
+[Screenshot of Plutus Flow]
+"See pressure before price reacts."
+
+Slide 6:
+The Elite Seven → signalpilot.io
+
+@signalpilot.io
+```
+
+---
+
+## JAN 20 (MONDAY)
+
+### X/Twitter — Thread (Kelly Criterion)
+
+```
+Kelly Criterion: The math behind position sizing that pros use.
+
+Most traders size positions by "feel."
+
+Here's the framework that actually works: ↓
+
+What is Kelly Criterion?
+
+A formula that tells you exactly how much to risk based on your edge.
+
+Too much = unnecessary risk, potential ruin
+Too little = leaving money on the table
+
+Kelly finds the sweet spot.
+
+The formula:
+
+Kelly % = W - [(1-W) / R]
+
+W = Win rate (% of trades that win)
+R = Win/Loss ratio (avg win ÷ avg loss)
+
+Example:
+
+Win rate: 55%
+Avg win: $200
+Avg loss: $100
+R = 2.0
+
+Kelly % = 0.55 - [(1-0.55) / 2.0]
+Kelly % = 0.55 - 0.225
+Kelly % = 0.325 = 32.5%
+
+Meaning: Risk 32.5% of bankroll on each trade.
+
+The catch:
+
+Full Kelly is aggressive. Most pros use "Half Kelly" or "Quarter Kelly" for smoother equity curves.
+
+Half Kelly = 16.25% in this example
+Quarter Kelly = 8.125%
+
+Why this matters:
+
+Without a sizing framework, you're guessing.
+
+Guessing leads to:
+• Over-betting after wins (overconfidence)
+• Under-betting after losses (fear)
+• Inconsistent results
+
+Kelly removes emotion from sizing.
+
+Full lesson free → education.signalpilot.io
+```
+
+---
+
+## JAN 21 (TUESDAY)
+
+### Instagram — Carousel (Multi-Timeframe)
+
+**Caption:**
+```
+Multi-Timeframe Confirmation: Why your daily setup needs weekly context.
+
+The #1 mistake traders make is ignoring higher timeframes.
+
+Swipe to learn the framework →
+
+#tradingview #technicalanalysis #multitimeframe #priceaction #tradingstrategy #swingtrading
+```
+
+**Slides:**
+```
+Slide 1:
+MULTI-TIMEFRAME CONFIRMATION
+Your daily setup needs weekly context.
+
+Slide 2:
+THE MISTAKE:
+━━━━━━━━━━━━━━━━━━━━━
+You see a perfect setup on the daily.
+
+You enter.
+
+Price immediately reverses.
+
+Why? Weekly trend was against you.
+
+Slide 3:
+THE FRAMEWORK:
+━━━━━━━━━━━━━━━━━━━━━
+WEEKLY = Trend direction
+DAILY = Setup identification
+4H/1H = Entry timing
+
+Higher timeframe trumps lower timeframe.
+
+Slide 4:
+THE RULE:
+━━━━━━━━━━━━━━━━━━━━━
+Only trade daily setups that ALIGN with weekly direction.
+
+Long setups? Weekly must be bullish.
+Short setups? Weekly must be bearish.
+
+Slide 5:
+WITH PENTARCH:
+━━━━━━━━━━━━━━━━━━━━━
+Weekly showing IGN (bullish cycle)?
+→ Look for TD signals on daily for entries
+
+Weekly showing CAP (bearish cycle)?
+→ Look for WRN signals on daily for exits
+
+Slide 6:
+Alignment = higher probability.
+Fighting the trend = expensive lessons.
+
+Full article → blog.signalpilot.io
+
+@signalpilot.io
+```
+
+---
+
+## JAN 22 (WEDNESDAY)
+
+### X/Twitter — Single Post (Engagement)
+
+```
+3 weeks since launch.
+
+What's ONE trading concept you want us to break down next?
+
+Reply below.
+
+We read everything.
+```
+
+---
+
+*Document version 3.0 — December 22, 2024 (Complete Ready-to-Post Copy)*
