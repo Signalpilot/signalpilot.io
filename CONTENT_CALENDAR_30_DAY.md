@@ -10,13 +10,15 @@
 ## LAUNCH TIMELINE OVERVIEW
 
 ```
-Dec 17 ──────── Dec 23-29 ──────── Dec 30/31 ──────── Jan 1-22
-   │                │                   │                  │
-   ▼                ▼                   ▼                  ▼
-TEASER          PRE-LAUNCH          LAUNCH DAY        POST-LAUNCH
-"Elite Seven"   Hype & Education    Official Open     Momentum &
-Posted          Build anticipation  Sales live        Authority
+Dec 17 ─── Dec 22 ─── Dec 23-29 ─── Dec 30/31 ─── Jan 1-22
+   │          │           │             │             │
+   ▼          ▼           ▼             ▼             ▼
+TEASER    FOUNDATION  PRE-LAUNCH    LAUNCH DAY   POST-LAUNCH
+"Elite    Education   Hype &        Official     Momentum &
+Seven"    Hub post    Education     Open         Authority
 ```
+
+**Today's Priority (Dec 22):** Post Education Hub content to give profile substance before boosting teaser.
 
 ---
 
@@ -156,6 +158,59 @@ TIER 3: ADDRESS OBJECTIONS & CONVERT (10% of content)
 **Posting Frequency:**
 - **Pre-Launch:** Daily on both platforms (high intensity)
 - **Post-Launch:** 5x/week sustainable pace
+
+---
+
+## PROFILE FOUNDATION (Dec 22 — TODAY)
+
+### Goal: Give your profile substance before boosting the teaser
+
+When people click through from your boosted Dec 17 teaser, they need to see more than one post. Post this TODAY to establish credibility.
+
+| Date | Platform | Type | Content | CTA |
+|------|----------|------|---------|-----|
+| Dec 22 | IG | Carousel or Static | **Education Hub Promo** (see copy below) | "Start free → link in bio" |
+| Dec 22 | X | Thread | Same content adapted for Twitter | education.signalpilot.io |
+
+### Recommended Post Copy (Education Hub)
+
+**Option A — Carousel (3-5 slides):**
+```
+Slide 1: "82 free trading lessons. No purchase required."
+
+Slide 2: "What you'll learn:"
+• Market cycles & structure
+• Volume analysis & order flow
+• Risk management & position sizing
+• Institutional trading concepts
+
+Slide 3: "From beginner basics to institutional strategies"
+[Screenshot of education hub interface]
+
+Slide 4: "We built the education we wish we had."
+
+Slide 5: "Start learning free → education.signalpilot.io"
+```
+
+**Option B — Single Static Post:**
+```
+82 free trading lessons.
+No purchase required.
+
+From liquidity basics to institutional order flow —
+we built the education we wish we had.
+
+Whether you use our indicators or not,
+this will make you a better trader.
+
+Start learning → education.signalpilot.io
+```
+
+**Why this works:**
+- Shows you're educators, not just sellers
+- Gives immediate value (free)
+- People who engage are qualified leads
+- Makes your profile look established
 
 ---
 
@@ -424,6 +479,14 @@ Each blog article should be promoted 2-3x across the 30 days:
 ---
 
 ## Quick Reference: Launch Week
+
+### TODAY (Dec 22) — Do This First
+
+| Platform | Action | Asset Needed |
+|----------|--------|--------------|
+| IG | Post Education Hub carousel/static | Education hub screenshot |
+| X | Post Education Hub thread | Same content |
+| IG | Start boosting Dec 17 teaser | $30-40 budget |
 
 ### Pre-Launch Countdown (Dec 23-29)
 
