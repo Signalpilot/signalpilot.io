@@ -3763,6 +3763,8 @@
               const carouselImages = carousel.querySelectorAll('.carousel-item img');
               let currentIndex = 0;
               let autoScrollInterval;
+              let isCarouselVisible = true;
+              let isHovering = false;
 
               // Scroll to specific index
               function scrollToIndex(index) {
@@ -3787,27 +3789,62 @@
                 resetAutoScroll();
               });
 
-              // Auto-scroll every 10 seconds
+              // Auto-scroll every 10 seconds (only when visible)
               function startAutoScroll() {
+                if (!isCarouselVisible || isHovering || document.hidden) return;
+                clearInterval(autoScrollInterval);
                 autoScrollInterval = setInterval(() => {
-                  scrollToIndex(currentIndex + 1);
+                  if (isCarouselVisible && !isHovering && !document.hidden) {
+                    scrollToIndex(currentIndex + 1);
+                  }
                 }, 10000);
               }
 
-              function resetAutoScroll() {
+              function stopAutoScroll() {
                 clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+              }
+
+              function resetAutoScroll() {
+                stopAutoScroll();
                 startAutoScroll();
               }
 
-              // Start auto-scroll
+              // Pause when not in viewport
+              if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                  entries.forEach(entry => {
+                    isCarouselVisible = entry.isIntersecting;
+                    if (isCarouselVisible) {
+                      startAutoScroll();
+                    } else {
+                      stopAutoScroll();
+                    }
+                  });
+                }, { threshold: 0 });
+                observer.observe(carousel);
+              }
+
+              // Pause when tab hidden
+              document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                  stopAutoScroll();
+                } else if (isCarouselVisible && !isHovering) {
+                  startAutoScroll();
+                }
+              });
+
+              // Start auto-scroll (if visible)
               startAutoScroll();
 
               // Pause on hover
               carousel.addEventListener('mouseenter', () => {
-                clearInterval(autoScrollInterval);
+                isHovering = true;
+                stopAutoScroll();
               });
 
               carousel.addEventListener('mouseleave', () => {
+                isHovering = false;
                 startAutoScroll();
               });
 
@@ -6505,15 +6542,20 @@
     });
   });
 
-  // Listen for scroll events with error handling
+  // Listen for scroll events with throttling via rAF
+  let jumpNavScrollTicking = false;
   window.addEventListener('scroll', () => {
-    try {
-      updateJumpNavVisibility();
-      updateActiveLink();
-    } catch(e) {
-      // Prevent scroll errors from breaking the page
-      console.error('Scroll handler error:', e);
-    }
+    if (jumpNavScrollTicking) return;
+    jumpNavScrollTicking = true;
+    requestAnimationFrame(() => {
+      try {
+        updateJumpNavVisibility();
+        updateActiveLink();
+      } catch(e) {
+        // Prevent scroll errors from breaking the page
+      }
+      jumpNavScrollTicking = false;
+    });
   }, { passive: true });
 
   // Initial check
@@ -6812,24 +6854,30 @@ if ('serviceWorker' in navigator) {
       });
     });
 
-    // 4. TRACK SCROLL DEPTH
+    // 4. TRACK SCROLL DEPTH (throttled)
     let scrollDepths = { 25: false, 50: false, 75: false, 100: false };
+    let scrollDepthTicking = false;
 
     window.addEventListener('scroll', function() {
-      try {
-        const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+      if (scrollDepthTicking) return;
+      scrollDepthTicking = true;
+      requestAnimationFrame(function() {
+        try {
+          const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
 
-        Object.keys(scrollDepths).forEach(function(depth) {
-          if (scrollPercent >= depth && !scrollDepths[depth]) {
-            scrollDepths[depth] = true;
-            trackEvent('scroll_depth', {
-              percent: depth + '%'
-            });
-          }
-        });
-      } catch(e) {
-        // Silently fail
-      }
+          Object.keys(scrollDepths).forEach(function(depth) {
+            if (scrollPercent >= depth && !scrollDepths[depth]) {
+              scrollDepths[depth] = true;
+              trackEvent('scroll_depth', {
+                percent: depth + '%'
+              });
+            }
+          });
+        } catch(e) {
+          // Silently fail
+        }
+        scrollDepthTicking = false;
+      });
     }, { passive: true });
 
     // 5. TRACK NAVIGATION DROPDOWN INTERACTIONS
@@ -7882,14 +7930,20 @@ if ('serviceWorker' in navigator) {
     backToTopBtn.style.right = '20px';
     backToTopBtn.style.zIndex = '998';
 
-    // Show button when user scrolls down 400px
+    // Show button when user scrolls down 400px (throttled)
+    let backToTopTicking = false;
     window.addEventListener('scroll', function() {
-      if (window.pageYOffset > 400) {
-        backToTopBtn.classList.add('show');
-      } else {
-        backToTopBtn.classList.remove('show');
-      }
-    });
+      if (backToTopTicking) return;
+      backToTopTicking = true;
+      requestAnimationFrame(function() {
+        if (window.pageYOffset > 400) {
+          backToTopBtn.classList.add('show');
+        } else {
+          backToTopBtn.classList.remove('show');
+        }
+        backToTopTicking = false;
+      });
+    }, { passive: true });
 
     // Scroll to top when clicked
     backToTopBtn.addEventListener('click', function() {
@@ -7900,10 +7954,6 @@ if ('serviceWorker' in navigator) {
     });
   })();
 </script>
-
-<!-- Three.js + EPIC Energy Beam v2 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-<script src="assets/energy-beam.js" defer></script>
 
 </body>
 
