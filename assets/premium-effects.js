@@ -235,7 +235,8 @@
     }
 
     init() {
-      document.querySelectorAll('.card-tilt, .plan').forEach(card => {
+      // Removed .plan - was causing weird movement on pricing cards
+      document.querySelectorAll('.card-tilt').forEach(card => {
         let rect = null;
         let rafId = null;
         let targetRotateX = 0;
