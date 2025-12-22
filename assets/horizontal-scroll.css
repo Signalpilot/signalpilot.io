@@ -44,22 +44,16 @@
   scroll-snap-align: center;
   scroll-snap-stop: always;
 
-  /* Smooth transitions for scale effects */
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Simple opacity transition only */
+  transition: opacity 0.25s ease-out;
 
   /* Slightly dimmed by default */
-  opacity: 0.6;
-  transform: scale(0.95);
+  opacity: 0.7;
 }
 
 /* Active/centered card */
 .horizontal-scroll-track .card.product.active {
   opacity: 1;
-  transform: scale(1);
-  box-shadow:
-    0 20px 60px rgba(91, 138, 255, 0.25),
-    0 0 0 2px rgba(91, 138, 255, 0.1);
 }
 
 /* ============================================
@@ -80,15 +74,13 @@
   height: 44px;
   border-radius: 50%;
   border: 2px solid rgba(91, 138, 255, 0.3);
-  background: rgba(91, 138, 255, 0.05);
+  background: rgba(15, 20, 35, 0.9);
   color: var(--brand);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .scroll-arrow svg {
@@ -97,13 +89,12 @@
 }
 
 .scroll-arrow:hover:not(:disabled) {
-  background: rgba(91, 138, 255, 0.15);
+  background: rgba(91, 138, 255, 0.2);
   border-color: rgba(91, 138, 255, 0.6);
-  transform: scale(1.1);
 }
 
 .scroll-arrow:active:not(:disabled) {
-  transform: scale(0.95);
+  background: rgba(91, 138, 255, 0.3);
 }
 
 .scroll-arrow:disabled {
@@ -165,26 +156,9 @@
 }
 
 /* ============================================
-   PARALLAX EFFECT
+   PARALLAX EFFECT - REMOVED FOR PERFORMANCE
+   Using simple opacity/scale instead of 3D transforms
    ============================================ */
-
-@media (min-width: 769px) {
-  .horizontal-scroll-track .card.product {
-    /* Slight parallax on non-active cards */
-    transform-origin: center center;
-  }
-
-  /* Cards to the left/right get subtle depth effect */
-  .horizontal-scroll-track .card.product.parallax-left {
-    transform: scale(0.9) translateX(-10px) rotateY(5deg);
-    opacity: 0.4;
-  }
-
-  .horizontal-scroll-track .card.product.parallax-right {
-    transform: scale(0.9) translateX(10px) rotateY(-5deg);
-    opacity: 0.4;
-  }
-}
 
 /* ============================================
    ENTRANCE ANIMATIONS
@@ -307,17 +281,11 @@
    PERFORMANCE OPTIMIZATIONS
    ============================================ */
 
-.horizontal-scroll-track,
-.horizontal-scroll-track .card.product {
-  will-change: transform, opacity;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.horizontal-scroll-track {
+  -webkit-overflow-scrolling: touch;
+  contain: layout style;
 }
 
-/* Remove will-change after interaction */
-.horizontal-scroll-track.settled,
-.horizontal-scroll-track.settled .card.product {
-  will-change: auto;
+.horizontal-scroll-track .card.product {
+  contain: layout style paint;
 }

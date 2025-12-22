@@ -1,6 +1,7 @@
 /**
  * Apple-Style Horizontal Scroll
  * Interactive horizontal scroll for Elite Seven indicators
+ * OPTIMIZED for performance
  */
 
 (function() {
@@ -17,9 +18,6 @@
     leftArrow: '.scroll-arrow-left',
     rightArrow: '.scroll-arrow-right',
     activeClass: 'active',
-    parallaxLeftClass: 'parallax-left',
-    parallaxRightClass: 'parallax-right',
-    scrollThreshold: 0.3, // 30% scroll to snap to next card
   };
 
   // ============================================
@@ -34,42 +32,26 @@
   let currentIndex = 0;
   let isScrolling = false;
   let scrollTimeout = null;
+  let ticking = false; // RAF throttle flag
 
   // ============================================
   // INITIALIZATION
   // ============================================
 
   function init() {
-    // Get elements
     track = document.querySelector(CONFIG.trackSelector);
-    if (!track) {
-      console.warn('Horizontal scroll track not found');
-      return;
-    }
+    if (!track) return;
 
     cards = Array.from(track.querySelectorAll(CONFIG.cardSelector));
     dotsContainer = document.querySelector(CONFIG.dotsContainer);
     leftArrow = document.querySelector(CONFIG.leftArrow);
     rightArrow = document.querySelector(CONFIG.rightArrow);
 
-    if (cards.length === 0) {
-      console.warn('No product cards found in horizontal scroll');
-      return;
-    }
+    if (cards.length === 0) return;
 
-    // Create navigation dots
     createDots();
-
-    // Set up event listeners
     setupEventListeners();
-
-    // Initialize first card as active
     updateActiveCard(0);
-
-    // Observe scroll
-    observeScroll();
-
-    console.log('🎯 Horizontal scroll initialized with', cards.length, 'cards');
   }
 
   // ============================================
@@ -100,7 +82,6 @@
   // ============================================
 
   function setupEventListeners() {
-    // Arrow navigation
     if (leftArrow) {
       leftArrow.addEventListener('click', () => scrollToCard(currentIndex - 1));
     }
@@ -109,21 +90,18 @@
       rightArrow.addEventListener('click', () => scrollToCard(currentIndex + 1));
     }
 
-    // Track scroll event
+    // Throttled scroll handler
     track.addEventListener('scroll', handleScroll, { passive: true });
 
     // Keyboard navigation
     track.addEventListener('keydown', handleKeyboard);
 
-    // Touch/mouse drag enhancement
+    // Drag scroll
     setupDragScroll();
-
-    // Update on window resize
-    window.addEventListener('resize', debounce(handleResize, 250));
   }
 
   // ============================================
-  // SCROLL HANDLING
+  // SCROLL HANDLING - OPTIMIZED
   // ============================================
 
   function handleScroll() {
@@ -132,45 +110,37 @@
     // Clear previous timeout
     clearTimeout(scrollTimeout);
 
-    // Update active card based on scroll position
-    updateActiveCardByScroll();
+    // Throttle with RAF - only update once per frame
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateActiveCardByScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
 
-    // Set timeout to mark scrolling as complete
+    // Only snap after scrolling stops (debounced)
     scrollTimeout = setTimeout(() => {
       isScrolling = false;
-      track.classList.add('settled');
-
-      // Final position snap
-      snapToNearestCard();
+      // Don't auto-snap - let CSS scroll-snap handle it
     }, 150);
   }
 
   function updateActiveCardByScroll() {
-    const trackRect = track.getBoundingClientRect();
-    const trackCenter = trackRect.left + trackRect.width / 2;
+    // Use scroll position math instead of getBoundingClientRect for each card
+    const scrollLeft = track.scrollLeft;
+    const trackWidth = track.offsetWidth;
+    const cardWidth = cards[0]?.offsetWidth || 350;
+    const gap = 32; // 2rem gap
 
-    let closestIndex = 0;
-    let closestDistance = Infinity;
+    // Calculate which card is centered
+    const centerOffset = scrollLeft + (trackWidth / 2);
+    const estimatedIndex = Math.round((centerOffset - cardWidth / 2) / (cardWidth + gap));
+    const newIndex = Math.max(0, Math.min(cards.length - 1, estimatedIndex));
 
-    cards.forEach((card, index) => {
-      const cardRect = card.getBoundingClientRect();
-      const cardCenter = cardRect.left + cardRect.width / 2;
-      const distance = Math.abs(cardCenter - trackCenter);
-
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = index;
-      }
-    });
-
-    if (closestIndex !== currentIndex) {
-      updateActiveCard(closestIndex);
+    if (newIndex !== currentIndex) {
+      updateActiveCard(newIndex);
     }
-  }
-
-  function snapToNearestCard() {
-    // Ensure we're snapped to the current active card
-    scrollToCard(currentIndex, 'smooth');
   }
 
   // ============================================
@@ -178,28 +148,20 @@
   // ============================================
 
   function updateActiveCard(index) {
-    // Bounds check
     if (index < 0 || index >= cards.length) return;
 
     currentIndex = index;
 
-    // Update cards
+    // Simple class toggle - no parallax classes
     cards.forEach((card, i) => {
-      card.classList.remove(CONFIG.activeClass, CONFIG.parallaxLeftClass, CONFIG.parallaxRightClass);
-
       if (i === index) {
         card.classList.add(CONFIG.activeClass);
-      } else if (i < index) {
-        card.classList.add(CONFIG.parallaxLeftClass);
       } else {
-        card.classList.add(CONFIG.parallaxRightClass);
+        card.classList.remove(CONFIG.activeClass);
       }
     });
 
-    // Update dots
     updateDots(index);
-
-    // Update arrows
     updateArrows(index);
   }
 
@@ -208,11 +170,7 @@
 
     const dots = dotsContainer.querySelectorAll('.scroll-dot');
     dots.forEach((dot, i) => {
-      if (i === index) {
-        dot.classList.add(CONFIG.activeClass);
-      } else {
-        dot.classList.remove(CONFIG.activeClass);
-      }
+      dot.classList.toggle(CONFIG.activeClass, i === index);
     });
   }
 
@@ -230,29 +188,19 @@
   // SCROLL TO CARD
   // ============================================
 
-  function scrollToCard(index, behavior = 'smooth') {
-    // Bounds check
+  function scrollToCard(index) {
     if (index < 0 || index >= cards.length) return;
 
     const card = cards[index];
     if (!card) return;
 
-    // Calculate scroll position to center the card
-    const trackRect = track.getBoundingClientRect();
-    const cardRect = card.getBoundingClientRect();
-
-    const trackCenter = trackRect.width / 2;
-    const cardCenter = cardRect.width / 2;
-    const cardLeft = cardRect.left - trackRect.left;
-
-    const scrollLeft = track.scrollLeft + cardLeft - trackCenter + cardCenter;
-
-    track.scrollTo({
-      left: scrollLeft,
-      behavior: behavior,
+    // Use scrollIntoView - simpler and browser-optimized
+    card.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center'
     });
 
-    // Update active card immediately
     updateActiveCard(index);
   }
 
@@ -282,7 +230,7 @@
   }
 
   // ============================================
-  // DRAG SCROLL (Enhanced Touch/Mouse)
+  // DRAG SCROLL
   // ============================================
 
   function setupDragScroll() {
@@ -291,87 +239,30 @@
     let scrollLeft;
 
     track.addEventListener('mousedown', (e) => {
-      // Only for mouse drag, not touch
-      if (e.touches) return;
-
+      if (e.button !== 0) return; // Only left click
       isDown = true;
-      track.classList.add('dragging');
+      track.style.cursor = 'grabbing';
       startX = e.pageX - track.offsetLeft;
       scrollLeft = track.scrollLeft;
-      track.style.cursor = 'grabbing';
     });
 
     track.addEventListener('mouseleave', () => {
       isDown = false;
-      track.classList.remove('dragging');
       track.style.cursor = '';
     });
 
     track.addEventListener('mouseup', () => {
       isDown = false;
-      track.classList.remove('dragging');
       track.style.cursor = '';
     });
 
     track.addEventListener('mousemove', (e) => {
       if (!isDown) return;
       e.preventDefault();
-
       const x = e.pageX - track.offsetLeft;
-      const walk = (x - startX) * 2; // Multiply for faster scroll
+      const walk = (x - startX) * 1.5;
       track.scrollLeft = scrollLeft - walk;
     });
-  }
-
-  // ============================================
-  // INTERSECTION OBSERVER (Lazy Load)
-  // ============================================
-
-  function observeScroll() {
-    if (!('IntersectionObserver' in window)) return;
-
-    const options = {
-      root: track,
-      rootMargin: '0px',
-      threshold: 0.5,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-        }
-      });
-    }, options);
-
-    cards.forEach((card) => {
-      observer.observe(card);
-    });
-  }
-
-  // ============================================
-  // RESIZE HANDLER
-  // ============================================
-
-  function handleResize() {
-    // Re-center current card on resize
-    scrollToCard(currentIndex, 'auto');
-  }
-
-  // ============================================
-  // UTILITIES
-  // ============================================
-
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
   }
 
   // ============================================
