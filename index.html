@@ -2839,7 +2839,7 @@
       opacity: 0.5;
     "
   >
-    <source src="assets/videos/starfield-bg.mp4?v=15" type="video/mp4">
+    <source src="assets/videos/starfield-bg.mp4?v=16" type="video/mp4">
   </video>
 </div>
 <script>
@@ -2979,16 +2979,30 @@
         <source src="assets/videos/signal-conduit-4k.mp4?v=10" type="video/mp4">
       </video>
       <script>
-      // Energy beam: Simple single video (seamless ping-pong loop)
+      // Energy beam: Pause when out of view to save GPU resources
       (function() {
         const video = document.getElementById('energy-beam-video');
+        if (!video) return;
+
+        // Pause when tab hidden
         document.addEventListener('visibilitychange', function() {
-          if (document.hidden) {
-            video.pause();
-          } else {
-            video.play();
-          }
+          if (document.hidden) video.pause();
+          else if (video.isInView) video.play();
         });
+
+        // Pause when scrolled out of view (saves GPU on 4K video)
+        video.isInView = true;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            video.isInView = entry.isIntersecting;
+            if (entry.isIntersecting && !document.hidden) {
+              video.play();
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0, rootMargin: '100px' });
+        observer.observe(video);
       })();
       </script>
 
@@ -3180,6 +3194,20 @@
                     // Video requires user interaction
                   }
                 }, 2000);
+
+                // Pause when scrolled out of view to save GPU
+                video.isInView = true;
+                const observer = new IntersectionObserver((entries) => {
+                  entries.forEach(entry => {
+                    video.isInView = entry.isIntersecting;
+                    if (entry.isIntersecting && !document.hidden) {
+                      video.play().catch(() => {});
+                    } else {
+                      video.pause();
+                    }
+                  });
+                }, { threshold: 0, rootMargin: '100px' });
+                observer.observe(video);
               })();
             </script>
 
