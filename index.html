@@ -523,32 +523,36 @@
 
     /* MOBILE: Simple, clean mobile setup - NO forced positioning */
     @media (max-width: 768px) {
-      /* Starfield video - ensure it covers full screen on mobile */
-      #starfield-container {
+      /* Starfield video - lowest layer at z-index 0 */
+      #starfield-bg {
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         width: 100vw !important;
         height: 100vh !important;
-        z-index: 0 !important;  /* Changed from -2 to 0 */
-      }
-      #starfield-bg {
-        width: 100% !important;
-        height: 100% !important;
+        height: 100dvh !important;
         object-fit: cover !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+        opacity: 0.5 !important;
       }
 
-      /* Make body transparent and remove isolation */
-      body {
-        background: transparent !important;
-        isolation: auto !important;  /* Remove isolation which breaks z-index stacking */
+      /* Energy beam above starfield */
+      #energy-beam-video {
+        z-index: 1 !important;
       }
 
-      /* Main content above starfield */
+      /* Main content above both videos */
       main {
         position: relative !important;
-        z-index: 1 !important;
+        z-index: 2 !important;
         background: transparent !important;
+      }
+
+      /* ALL sections must be transparent to see starfield through */
+      section, .section, .container, .stack {
+        background: transparent !important;
+        background-color: transparent !important;
       }
 
       /* Background layers BEHIND everything */
@@ -562,7 +566,7 @@
         position: fixed !important;
       }
 
-      /* Header needs high z-index for dropdown menus */
+      /* Header needs high z-index for dropdown menus but transparent bg */
       header {
         position: relative;
         z-index: 100;
@@ -706,9 +710,21 @@
         animation: none !important;
       }
 
-      /* Force all sections transparent on mobile so particles show through */
-      section, .section {
-        background:transparent !important;
+      /* Force all sections transparent on mobile so starfield shows through */
+      html, body, main, section, .section, .container, .stack, #main-content {
+        background: transparent !important;
+        background-color: transparent !important;
+      }
+
+      /* Override ANY inline background styles */
+      [style*="background"] {
+        background: transparent !important;
+        background-color: transparent !important;
+      }
+
+      /* Exception: cards need their background */
+      .card, .card.plan, .card.product {
+        background: rgba(10, 14, 24, 0.95) !important;
       }
 
       /* Stop pricing card glow animation on mobile - causes flickering with aurora */
@@ -717,16 +733,6 @@
         box-shadow: 0 4px 12px rgba(91,138,255,.15) !important; /* Remove heavy glow, use subtle shadow */
       }
 
-      /* Make pricing cards solid on mobile - no backdrop-filter */
-      .card.plan {
-        background: linear-gradient(180deg,rgba(5,7,13,.97),rgba(5,7,13,.95)) !important;
-      }
-
-      /* Override inline background styles on specific sections - they block particles! */
-      #trial[style*="background"],
-      section[style*="background"] {
-        background: transparent !important;
-      }
     }
     
     /* Removed reveal animations - not needed */
@@ -2845,40 +2851,29 @@
 
 <body>
 
-<!-- Starfield video background - dual videos with loop fade masking -->
-<div id="starfield-container" style="
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -2;
-  pointer-events: none;
-  overflow: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-">
-  <video
-    id="starfield-bg"
-    autoplay
-    loop
-    muted
-    playsinline
-    disablepictureinpicture
-    preload="auto"
-    style="
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.5;
-    "
-  >
-    <source src="assets/videos/starfield-bg.mp4?v=17" type="video/mp4">
-  </video>
-</div>
+<!-- Starfield video background - video directly fixed, no container -->
+<video
+  id="starfield-bg"
+  autoplay
+  loop
+  muted
+  playsinline
+  disablepictureinpicture
+  preload="auto"
+  style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    opacity: 0.5;
+    z-index: -1;
+    pointer-events: none;
+  "
+>
+  <source src="assets/videos/starfield-bg.mp4?v=17" type="video/mp4">
+</video>
 <script>
 // Starfield: Simple single video (seamless ping-pong loop)
 (function() {
