@@ -322,14 +322,14 @@
   function initPremiumEffects() {
     const isDesktop = window.innerWidth > 768;
 
-    new ParallaxController();
-    // ScrollLinkedAnimations removed - progress bar not needed
-
+    // Only run effects on desktop - mobile needs to be butter smooth
     if (isDesktop) {
+      new ParallaxController();
       new MouseGlow();
       new TiltEffect();
       new MagneticButtons();
     }
+    // ScrollLinkedAnimations removed - progress bar not needed
   }
 
   if (document.readyState === 'loading') {
