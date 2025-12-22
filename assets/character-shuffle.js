@@ -108,12 +108,21 @@
 
       console.log('[CharShuffle] Starting animation on', totalChars, 'characters, speed:', speed, 'ms');
 
-      let elapsed = 0;
-      const startTime = Date.now();
+      const startTime = performance.now();
+      let lastShuffleTime = startTime;
 
-      // Shuffle interval
-      const shuffleTimer = setInterval(() => {
-        elapsed = Date.now() - startTime;
+      // Use requestAnimationFrame instead of setInterval for better performance
+      function animateFrame(currentTime) {
+        const elapsed = currentTime - startTime;
+        const timeSinceLastShuffle = currentTime - lastShuffleTime;
+
+        // Only update every ~40ms (CONFIG.shuffleInterval)
+        if (timeSinceLastShuffle < CONFIG.shuffleInterval) {
+          requestAnimationFrame(animateFrame);
+          return;
+        }
+        lastShuffleTime = currentTime;
+
         let allSettled = true;
 
         charStates.forEach(state => {
@@ -144,9 +153,11 @@
           }
         });
 
-        // Stop when all characters have settled
-        if (allSettled) {
-          clearInterval(shuffleTimer);
+        // Continue animation or finish
+        if (!allSettled) {
+          requestAnimationFrame(animateFrame);
+        } else {
+          // Animation complete
           element.classList.remove('shuffling');
           element.setAttribute('data-shuffle-complete', 'true');
 
@@ -179,7 +190,10 @@
             }
           }, 100);
         }
-      }, CONFIG.shuffleInterval);
+      }
+
+      // Start the animation loop
+      requestAnimationFrame(animateFrame);
 
     }, delay);
   }
