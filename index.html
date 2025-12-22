@@ -517,18 +517,6 @@
       transition:all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Scroll progress indicator */
-    .scroll-progress{
-      position:fixed;
-      top:0;
-      left:0;
-      width:0%;
-      height:3px;
-      background:linear-gradient(90deg,var(--brand),var(--accent));
-      z-index:10000;
-      transition:width 0.1s ease-out;
-    }
-
     /* MOBILE: Simple, clean mobile setup - NO forced positioning */
     @media (max-width: 768px) {
       /* Background layers BEHIND everything */
@@ -932,9 +920,6 @@
       /* Reduce typing text on mobile */
       #typed-text{font-size:0.95rem !important}
 
-      /* Smaller progress bar on mobile */
-      .scroll-progress{height:2px}
-
       /* Optimize button press for touch */
       .btn:active{transform:translateY(2px) scale(0.99)}
 
@@ -948,9 +933,6 @@
     @media (max-width:480px){
       /* Extra small screens - smaller text */
       #hero-description{font-size:0.85rem !important;padding:0 0.5rem;line-height:1.5 !important}
-
-      /* Extra small screens - thinner progress bar */
-      .scroll-progress{height:1.5px}
     }
 
 
@@ -2855,9 +2837,6 @@
   });
 })();
 </script>
-
-<!-- Scroll progress indicator -->
-<div class="scroll-progress" aria-hidden="true"></div>
 
 <!-- DISABLED: Replaced by starfield video -->
 <!-- <div class="bg-stars" aria-hidden="true"></div> -->
@@ -7479,63 +7458,12 @@ if ('serviceWorker' in navigator) {
       initStatsCounter();
       initLightbox();
       initTypingEffect();
-      initScrollProgress();
     });
   } else {
     initScrollAnimations();
     initStatsCounter();
     initLightbox();
     initTypingEffect();
-    initScrollProgress();
-  }
-
-  // Scroll progress indicator
-  function initScrollProgress() {
-    const progressBar = document.querySelector('.scroll-progress');
-    if (!progressBar) return;
-
-    // Force visibility
-    progressBar.style.display = 'block';
-    progressBar.style.position = 'fixed';
-    progressBar.style.top = '0';
-    progressBar.style.left = '0';
-    progressBar.style.zIndex = '10000';
-
-    let ticking = false;
-
-    function updateProgress() {
-      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-      // Use Math.max for better mobile compatibility
-      const documentHeight = Math.max(
-        document.documentElement.scrollHeight,
-        document.body.scrollHeight
-      );
-      const scrollTop = window.pageYOffset || window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-
-      // Calculate scroll percentage
-      const scrollable = documentHeight - windowHeight;
-      const scrolled = scrollable > 0 ? (scrollTop / scrollable) * 100 : 0;
-
-      progressBar.style.width = Math.min(Math.max(scrolled, 0), 100) + '%';
-
-      ticking = false;
-    }
-
-    function requestTick() {
-      if (!ticking) {
-        requestAnimationFrame(updateProgress);
-        ticking = true;
-      }
-    }
-
-    window.addEventListener('scroll', requestTick, { passive: true });
-    window.addEventListener('resize', requestTick, { passive: true });
-    // For iOS Safari elastic scrolling
-    window.addEventListener('touchmove', requestTick, { passive: true });
-
-    // Initial update with delay for mobile
-    updateProgress();
-    setTimeout(updateProgress, 100);
   }
 
   // Typing animation for hero headline
