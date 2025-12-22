@@ -458,4 +458,109 @@ Each blog article should be promoted 2-3x across the 30 days:
 
 ---
 
-*Document version 2.0 — December 22, 2024 (Launch-Focused Revision)*
+---
+
+## Part 5: Paid Promotion Strategy (Instagram)
+
+### 5.1 Boost Priority Order
+
+| Priority | Post | When to Boost | Budget | Goal |
+|----------|------|---------------|--------|------|
+| **#1** | Dec 17 "Elite Seven" teaser (already posted) | Now → Dec 29 | $30-40 | Followers |
+| **#2** | Dec 24 Carousel "5 Market Phases" | Dec 24-28 | $25-35 | Saves + Followers |
+| **#3** | Dec 28 Carousel "What's in Elite Seven" | Dec 28-29 | $20-30 | Pre-launch hype |
+| **#4** | **Dec 30 Launch Post** | Dec 30 → Jan 2 | $60-80 | **Conversions** |
+| #5 | Jan 2 Carousel "How to Read Pentarch" | Jan 2-5 | $25 | Retarget |
+
+---
+
+### 5.2 Targeting Setup
+
+```
+INTERESTS (pick 3-5):
+├── TradingView
+├── Technical analysis
+├── Day trading
+├── Stock trading
+├── Forex trading
+└── Cryptocurrency trading
+
+DEMOGRAPHICS:
+├── Age: 25-44
+├── Gender: All
+└── Locations: US, UK, Canada, Australia
+
+ADVANCED (if available):
+├── Behaviors: Engaged shoppers
+└── Exclude: Existing followers (for reach campaigns)
+```
+
+---
+
+### 5.3 Budget Allocation
+
+**If total budget is ~$150:**
+
+| Phase | Post(s) | Spend | Dates |
+|-------|---------|-------|-------|
+| Pre-Launch | Dec 17 teaser | $35 | Dec 22-29 |
+| Pre-Launch | Dec 24 carousel | $25 | Dec 24-28 |
+| **Launch** | **Dec 30 post** | **$70** | Dec 30 - Jan 2 |
+| Post-Launch | Jan 2 carousel | $20 | Jan 2-5 |
+
+**If total budget is ~$75:**
+
+| Phase | Post(s) | Spend | Dates |
+|-------|---------|-------|-------|
+| Pre-Launch | Dec 17 teaser | $20 | Dec 22-29 |
+| **Launch** | **Dec 30 post** | **$55** | Dec 30 - Jan 2 |
+
+---
+
+### 5.4 Campaign Objectives by Post
+
+| Post | Objective | Why |
+|------|-----------|-----|
+| Dec 17 teaser | Profile Visits / Engagement | Build follower base before launch |
+| Dec 24 carousel | Engagement | Educational = high saves, algorithm loves it |
+| Dec 28 carousel | Reach | Maximum eyeballs before launch |
+| **Dec 30 launch** | **Website Clicks / Conversions** | Direct to signalpilot.io |
+| Jan 2 carousel | Engagement | Warm audience education |
+
+---
+
+### 5.5 Pro Tips
+
+**Before boosting the launch post (Dec 30):**
+- [ ] Let it run organically for 2-3 hours first
+- [ ] Wait until it has some likes/comments
+- [ ] Then boost — Instagram favors posts with existing traction
+
+**Retargeting (if Meta Ads Manager):**
+- Create Custom Audience: "Engaged with profile last 30 days"
+- Use this for Dec 30 launch post
+- These people saw your teasers — they're warm
+
+**Don't boost:**
+- Stories (low ROI for follower growth)
+- Posts with no clear CTA
+- Anything that looks like an ad already
+
+---
+
+### 5.6 Tracking Checklist
+
+After each boosted post, record:
+
+| Metric | Dec 17 | Dec 24 | Dec 30 | Jan 2 |
+|--------|--------|--------|--------|-------|
+| Spend | $ | $ | $ | $ |
+| Reach | | | | |
+| Profile Visits | | | | |
+| Follows gained | | | | |
+| Link clicks | | | | |
+| Cost per follow | $ | $ | $ | $ |
+
+---
+
+*Document version 2.1 — December 22, 2024 (Added Paid Promotion Strategy)*
