@@ -2,7 +2,7 @@
 
 **Prepared:** December 22, 2024
 **First Post Published:** "The Elite Seven" teaser (Instagram, Dec 17)
-**Launch Target:** Before December 31, 2024
+**Launch Date:** December 30, 2024
 **Calendar Start Date:** December 23, 2024
 
 ---
@@ -10,15 +10,25 @@
 ## LAUNCH TIMELINE OVERVIEW
 
 ```
-Dec 17 ─── Dec 22 ─── Dec 23-29 ─── Dec 30/31 ─── Jan 1-22
-   │          │           │             │             │
-   ▼          ▼           ▼             ▼             ▼
-TEASER    FOUNDATION  PRE-LAUNCH    LAUNCH DAY   POST-LAUNCH
-"Elite    Education   Hype &        Official     Momentum &
-Seven"    Hub post    Education     Open         Authority
+Dec 17 ─── Dec 22 ─── Dec 23-29 ─── Dec 30 ─── Jan 1-22
+   │          │           │            │           │
+   ▼          ▼           ▼            ▼           ▼
+TEASER    FOUNDATION  PRE-LAUNCH   LAUNCH DAY  POST-LAUNCH
+"Elite    Education   Hype &       Official    Momentum &
+Seven"    Hub post    Education    Open        Authority
 ```
 
 **Today's Priority (Dec 22):** Post Education Hub content to give profile substance before boosting teaser.
+
+---
+
+## POSTING SCHEDULE
+
+**Default Posting Times (adjust to your timezone):**
+- **X/Twitter:** 8-9 AM and 12-1 PM (threads morning, singles midday)
+- **Instagram Feed:** 11 AM - 1 PM (highest engagement window)
+- **Instagram Stories:** Throughout day, minimum 2x daily during pre-launch
+- **Instagram Reels:** 12 PM or 6 PM (peak discovery times)
 
 ---
 
@@ -152,7 +162,7 @@ TIER 3: ADDRESS OBJECTIONS & CONVERT (10% of content)
 ### Strategy Overview
 
 **Pre-Launch (Dec 23-29):** Build anticipation, educate, tease product
-**Launch Day (Dec 30 or 31):** Official announcement, doors open
+**Launch Day (Dec 30):** Official announcement, doors open
 **Post-Launch (Jan 1-22):** Momentum, social proof, authority building
 
 **Posting Frequency:**
@@ -418,7 +428,7 @@ Only use: #TradingView #Trading when relevant
 
 ---
 
-## Part 5: Content Templates
+## Part 5: Content Templates & Formats
 
 ### Thread Template (Twitter/X)
 
@@ -523,9 +533,9 @@ Each blog article should be promoted 2-3x across the 30 days:
 
 ---
 
-## Part 5: Paid Promotion Strategy (Instagram)
+## Part 6: Paid Promotion Strategy (Instagram)
 
-### 5.1 Boost Priority Order
+### 6.1 Boost Priority Order
 
 | Priority | Post | When to Boost | Budget | Goal |
 |----------|------|---------------|--------|------|
@@ -537,7 +547,7 @@ Each blog article should be promoted 2-3x across the 30 days:
 
 ---
 
-### 5.2 Targeting Setup
+### 6.2 Targeting Setup
 
 ```
 INTERESTS (pick 3-5):
@@ -560,7 +570,7 @@ ADVANCED (if available):
 
 ---
 
-### 5.3 Budget Allocation
+### 6.3 Budget Allocation
 
 **If total budget is ~$150:**
 
@@ -580,7 +590,7 @@ ADVANCED (if available):
 
 ---
 
-### 5.4 Campaign Objectives by Post
+### 6.4 Campaign Objectives by Post
 
 | Post | Objective | Why |
 |------|-----------|-----|
@@ -592,7 +602,7 @@ ADVANCED (if available):
 
 ---
 
-### 5.5 Pro Tips
+### 6.5 Pro Tips
 
 **Before boosting the launch post (Dec 30):**
 - [ ] Let it run organically for 2-3 hours first
@@ -611,7 +621,7 @@ ADVANCED (if available):
 
 ---
 
-### 5.6 Tracking Checklist
+### 6.6 Tracking Checklist
 
 After each boosted post, record:
 
@@ -630,7 +640,7 @@ After each boosted post, record:
 
 ---
 
-# Part 6: READY-TO-POST COPY
+# Part 7: READY-TO-POST COPY
 
 > **How to use this section:** Copy the text exactly as written. Each post is formatted for its specific platform. Visual notes tell you what image/video to pair with the copy.
 
@@ -641,8 +651,6 @@ After each boosted post, record:
 ### X/Twitter — Thread
 
 ```
-🧵 Thread:
-
 82 free trading lessons.
 
 No purchase required. No email gate. No catch.
@@ -701,7 +709,7 @@ Swipe through to see what's inside →
 
 Whether you use our indicators or not, this will make you a better trader.
 
-Start learning free → link in bio
+Start learning free — link in bio
 
 #tradingview #tradereducation #technicalanalysis #tradingstrategy #priceaction #volumeanalysis #tradingpsychology #marketstructure
 ```
@@ -1295,44 +1303,44 @@ After 2 years of development, professional cycle detection for TradingView is he
 
 Here's everything you get: ↓
 
-🔷 PENTARCH — Flagship cycle detection
-See the 5-phase market cycle in real-time: TD → IGN → WRN → CAP → BDN
+PENTARCH — Flagship cycle detection
+See the 5-phase market cycle in real-time: TD, IGN, WRN, CAP, BDN
 Know exactly where you are before the move completes.
 
-🔷 OMNIDECK — 10-in-1 overlay
+OMNIDECK — 10-in-1 overlay
 TD Sequential, Squeeze Cloud, SuperTrend, Support/Demand zones, and more.
 One indicator. Zero clutter.
 
-🔷 VOLUME ORACLE — Institutional flow
+VOLUME ORACLE — Institutional flow
 Track accumulation and distribution phases.
 See what smart money is doing before price reacts.
 
-🔷 PLUTUS FLOW — Hidden pressure
+PLUTUS FLOW — Hidden pressure
 Cumulative delta with divergence detection.
 See buying/selling pressure before it shows on the chart.
 
-🔷 JANUS ATLAS — Auto-plotted levels
+JANUS ATLAS — Auto-plotted levels
 HTF pivots, VWAP, volume profile, session markers.
 Stop drawing 200 lines manually.
 
-🔷 AUGURY GRID — Multi-symbol scanner
+AUGURY GRID — Multi-symbol scanner
 Track 8+ markets at once.
 Find your best setups at a glance.
 
-🔷 HARMONIC OSCILLATOR — Entry timing
+HARMONIC OSCILLATOR — Entry timing
 4 momentum systems voting together.
-★★★★ = high confidence consensus.
+4/4 agreement = high confidence consensus.
 
 Every indicator:
-✓ 100% non-repainting (audited)
-✓ Works on all markets (stocks, crypto, forex, indices)
-✓ All timeframes (1min to monthly)
-✓ Real-time alerts included
+- Verified non-repainting (audited)
+- Works on all markets (stocks, crypto, forex, indices)
+- All timeframes (1min to monthly)
+- Real-time alerts included
 
 Plus:
-✓ 82 free lessons at education.signalpilot.io
-✓ Full documentation at docs.signalpilot.io
-✓ 7-day free trial — no credit card required
+- 82 free lessons at education.signalpilot.io
+- Full documentation at docs.signalpilot.io
+- 7-day free trial, no credit card required
 
 $100 bounty if you find a single repaint.
 
@@ -1404,9 +1412,9 @@ What's included:
 → Harmonic Oscillator: Entry timing consensus
 
 Every indicator:
-✓ 100% non-repainting (audited)
-✓ All markets, all timeframes
-✓ Real-time alerts included
+- Verified non-repainting (audited)
+- All markets, all timeframes
+- Real-time alerts included
 
 Plus 82 free lessons. No purchase required.
 
@@ -1568,7 +1576,7 @@ The Elite Seven is live.
 
 2025 is the year you stop guessing and start seeing.
 
-Link in bio → signalpilot.io
+Link in bio
 
 Happy New Year.
 
@@ -1827,6 +1835,22 @@ The Elite Seven → link in bio.
 
 ## JAN 4 (SATURDAY)
 
+### X/Twitter — Single Post
+
+```
+The difference between confidence and confusion:
+
+Left side: 6 indicators. 6 opinions. 6 reasons to second-guess.
+
+Right side: One system. One read. One decision.
+
+Simplify your chart. Clarify your edge.
+
+signalpilot.io
+```
+
+---
+
 ### Instagram — Static (Before/After)
 
 **Visual:** Split image — cluttered chart vs clean Signal Pilot setup
@@ -1838,14 +1862,65 @@ Right: One unified system showing the cycle.
 
 Which would you rather trade?
 
-The Elite Seven → link in bio.
+The Elite Seven — link in bio
 
-#tradingview #technicalanalysis #tradingstrategy #priceaction #chartsetup
+#tradingview #technicalanalysis #tradingstrategy #priceaction #chartsetup #tradingindicators
+```
+
+---
+
+### Instagram — Story
+
+```
+[Poll sticker]
+"How many indicators on your chart right now?"
+○ 1-3
+○ 4-6
+○ 7+
+○ Too many to count
 ```
 
 ---
 
 ## JAN 5 (SUNDAY)
+
+### X/Twitter — Thread (Accumulation vs Distribution)
+
+```
+Accumulation vs Distribution: Same chart. Opposite outcomes.
+
+Most traders can't tell the difference until it's too late.
+
+Here's how to read them in real-time:
+
+ACCUMULATION (before rally):
+- Higher volume on up moves
+- Lower volume on pullbacks
+- Volume spikes at lows (smart money buying)
+- Price holds support despite "bad news"
+
+DISTRIBUTION (before drop):
+- Higher volume on down moves
+- Lower volume on bounces
+- Volume spikes at highs (smart money selling)
+- Price stalls despite "good news"
+
+The trap:
+
+SPRING = Price breaks below support, then instantly reverses.
+That wasn't a breakdown. Smart money just bought everyone's panic.
+
+UPTHRUST = Price breaks above resistance, then instantly reverses.
+That wasn't a breakout. Smart money just sold to FOMO buyers.
+
+Volume Oracle shows you which phase you're in before price confirms.
+
+Stop being the exit liquidity.
+
+signalpilot.io
+```
+
+---
 
 ### Instagram — Carousel (Accumulation vs Distribution)
 
@@ -2048,6 +2123,42 @@ Reply below. Building something based on the answers.
 
 ---
 
+### Instagram — Story (Engagement)
+
+**Story 1:**
+```
+[Question sticker]
+"What's your biggest indicator struggle?"
+```
+
+**Story 2:**
+```
+[Slider sticker with fire emoji removed - use text only]
+"How confident are you in your current setup?"
+Not at all ————————— Very
+```
+
+---
+
+### Instagram — Static
+
+**Visual:** Clean quote card
+
+**Caption:**
+```
+"The best indicator is the one you actually understand."
+
+Most traders stack tools they can't explain.
+
+Fewer indicators. Deeper understanding. Better results.
+
+What's on your chart right now? Drop it in the comments.
+
+#tradingview #technicalanalysis #tradingstrategy #priceaction #tradingtips #tradereducation
+```
+
+---
+
 ## JAN 9 (THURSDAY)
 
 ### Instagram — Reel (Janus Atlas Demo)
@@ -2104,23 +2215,23 @@ Harmonic Oscillator's solution:
 
 It combines 4 momentum systems into one voting mechanism:
 
-When they agree: ★★★★ (high confidence)
-When they split: ★★ (low confidence)
+When they agree: 4/4 (high confidence)
+When they split: 2/4 (low confidence)
 
 Simple visual. No interpretation needed.
 
 What you see:
 
-• Live vote count: "3 Bulls, 1 Neutral"
-• Star rating: ★ to ★★★★
-• Composite line: All 4 oscillators unified
+- Live vote count: "3 Bulls, 1 Neutral"
+- Confidence rating: 1/4 to 4/4
+- Composite line: All 4 oscillators unified
 
 How to use it:
 
-★★★★ = All 4 agree. High confidence entry.
-★★★ = Strong agreement. Good entry.
-★★ = Mixed signals. Wait or reduce size.
-★ = Disagreement. Stay out.
+4/4 = All 4 agree. High confidence entry.
+3/4 = Strong agreement. Good entry.
+2/4 = Mixed signals. Wait or reduce size.
+1/4 = Disagreement. Stay out.
 
 The edge:
 
@@ -2136,6 +2247,22 @@ Try it → signalpilot.io
 ---
 
 ## JAN 11 (SATURDAY)
+
+### X/Twitter — Single Post
+
+```
+Week 2 with The Elite Seven.
+
+Most common feedback so far:
+
+"I'm only using Pentarch and it's already changed how I see the chart."
+
+Start simple. One indicator. One framework. Master it before adding more.
+
+Try it yourself: signalpilot.io
+```
+
+---
 
 ### Instagram — Static (Quote Card or Testimonial)
 
@@ -2367,6 +2494,70 @@ Setup guide → docs.signalpilot.io
 
 ---
 
+### Instagram — Carousel (TradingView Setup)
+
+**Caption:**
+```
+"Do I need TradingView Premium?"
+
+No. Here's exactly what you need to get started.
+
+Swipe for the complete setup guide.
+
+#tradingview #technicalanalysis #tradingstrategy #tradingtips #tradereducation #priceaction
+```
+
+**Slides:**
+```
+Slide 1:
+TRADINGVIEW SETUP GUIDE
+What you actually need.
+
+Slide 2:
+FREE ACCOUNT WORKS
+━━━━━━━━━━━━━━━━━━━━━
+You get 3 indicator slots.
+That's enough for:
+Pentarch + 1-2 filters
+
+Slide 3:
+RECOMMENDED SETUP:
+━━━━━━━━━━━━━━━━━━━━━
+Slot 1: Pentarch (cycle detection)
+Slot 2: Volume Oracle OR Janus Atlas
+Slot 3: Your choice
+
+Slide 4:
+WHEN TO UPGRADE:
+━━━━━━━━━━━━━━━━━━━━━
+Pro/Premium gives you:
+- More indicator slots
+- Unlimited alerts
+- More chart layouts
+
+Nice to have. Not required.
+
+Slide 5:
+Full setup guide at docs.signalpilot.io
+
+Link in bio
+
+@signalpilot.io
+```
+
+---
+
+### Instagram — Story
+
+```
+[Screenshot of TradingView with Pentarch]
+Text: "Free TradingView account. Full functionality."
+
+[Link sticker: docs.signalpilot.io]
+```
+
+---
+
 ## JAN 16 (THURSDAY)
 
 ### Instagram — Reel (First Trade Walkthrough)
@@ -2464,6 +2655,37 @@ Try the tools → signalpilot.io
 
 ## JAN 18 (SATURDAY)
 
+### X/Twitter — Thread (2-Week Recap)
+
+```
+2 weeks since launch.
+
+Here's what we've learned from early Signal Pilot users:
+
+1. Most start with just Pentarch.
+One indicator. One framework. They master the cycle signals before adding anything else.
+
+2. Volume Oracle creates "aha moments."
+Seeing accumulation/distribution in real-time changes how people read charts forever.
+
+3. The education hub gets used more than expected.
+82 free lessons. People are working through them alongside the indicators.
+
+4. Most common feedback:
+"I wish I found this earlier."
+
+5. The $100 repaint bounty still stands.
+Zero takers. Zero repaints found. 2 weeks of signals verified.
+
+Thank you to everyone who joined early.
+
+If you're still on the fence: 7-day free trial. No credit card.
+
+signalpilot.io
+```
+
+---
+
 ### Instagram — Static
 
 **Visual:** Simple text graphic or photo
@@ -2474,14 +2696,16 @@ Try the tools → signalpilot.io
 
 Here's what we've learned from early users:
 
-→ Most start with Pentarch alone. It's enough.
-→ Volume Oracle is the "aha moment" for many
-→ The education hub gets used more than we expected
-→ "Why didn't I find this sooner" is the most common DM
+- Most start with Pentarch alone. It's enough.
+- Volume Oracle is the "aha moment" for many
+- The education hub gets used more than we expected
+- "Why didn't I find this sooner" is the most common DM
 
 Thank you to everyone who's joined so far.
 
-The Elite Seven → link in bio.
+The Elite Seven — link in bio
+
+#tradingview #technicalanalysis #tradingstrategy #priceaction #tradingindicators #tradereducation
 ```
 
 ---
@@ -2695,4 +2919,483 @@ We read everything.
 
 ---
 
-*Document version 3.0 — December 22, 2024 (Complete Ready-to-Post Copy)*
+### Instagram — Carousel (3-Week Milestone)
+
+**Caption:**
+```
+3 weeks of The Elite Seven.
+
+Here's what's happened since Dec 30:
+
+Swipe for the recap and what's coming next.
+
+#tradingview #technicalanalysis #tradingstrategy #priceaction #tradingindicators #tradereducation
+```
+
+**Slides:**
+```
+Slide 1:
+3 WEEKS LIVE
+The Elite Seven recap.
+
+Slide 2:
+WHAT WE'VE SHIPPED:
+━━━━━━━━━━━━━━━━━━━━━
+- 7 indicators live on TradingView
+- 82 free lessons in the education hub
+- Full documentation at docs.signalpilot.io
+- $100 repaint bounty (still unclaimed)
+
+Slide 3:
+WHAT USERS ARE SAYING:
+━━━━━━━━━━━━━━━━━━━━━
+"Pentarch alone changed how I see charts."
+"Volume Oracle was the aha moment."
+"The education is better than paid courses I've taken."
+
+Slide 4:
+WHAT'S NEXT:
+━━━━━━━━━━━━━━━━━━━━━
+- More educational content
+- Community features
+- Advanced strategy guides
+- Your feedback shapes the roadmap
+
+Slide 5:
+Haven't tried it yet?
+
+7-day free trial. No credit card.
+
+Link in bio
+
+@signalpilot.io
+```
+
+---
+
+### Instagram — Story
+
+```
+[Question sticker]
+"What trading concept should we cover next?"
+
+[Add "Add Yours" sticker]
+"Share your current chart setup"
+```
+
+---
+
+# Part 8: ENGAGEMENT TEMPLATES
+
+> **How to use this section:** Copy and adapt these templates for common situations. Maintain the brand voice: professional, direct, helpful, no hype.
+
+---
+
+## 8.1 Comment Reply Templates
+
+### Positive Comments
+
+**When someone says "This looks great" / "Interesting":**
+```
+Thanks — let us know if you have any questions about getting started.
+```
+
+**When someone says "Just signed up":**
+```
+Welcome. Start with Pentarch — it's the foundation. Docs are at docs.signalpilot.io if you need setup help.
+```
+
+**When someone shares a win:**
+```
+Good read. What timeframe were you on?
+```
+
+### Questions
+
+**"Does this work on [asset/market]?":**
+```
+Yes — works on stocks, crypto, forex, indices. Any market on TradingView.
+```
+
+**"What timeframe is best?":**
+```
+All timeframes work. Most popular: 15m-1H for day trading, 4H-Daily for swing trading. Pentarch adapts automatically.
+```
+
+**"Is there a free trial?":**
+```
+Yes — 7 days free, no credit card required. signalpilot.io
+```
+
+**"Does it repaint?":**
+```
+No. Every signal confirms on candle close. $100 bounty if you find a repaint — zero takers so far.
+```
+
+**"How is this different from [other indicator]?":**
+```
+Can't speak to other tools. Ours: verified non-repainting, unified 7-indicator system, 82 free lessons included. Best way to compare is the 7-day trial.
+```
+
+### Skeptical/Neutral
+
+**"Looks like every other indicator":**
+```
+Understandable skepticism. The difference is in the verification — $100 bounty for finding a repaint, 82 free lessons regardless of purchase, and a unified system instead of disconnected tools. Trial is free if you want to test it.
+```
+
+**"I'll stick with my current setup":**
+```
+Fair enough. The 82 free lessons at education.signalpilot.io might still be useful — no purchase required.
+```
+
+---
+
+## 8.2 DM Response Templates
+
+**General inquiry:**
+```
+Thanks for reaching out. Happy to help — what questions do you have?
+```
+
+**Pricing question:**
+```
+Full pricing is at signalpilot.io. There's a 7-day free trial with no credit card required so you can test everything first.
+```
+
+**Technical support:**
+```
+For setup help, check docs.signalpilot.io first — most common questions are answered there. If you're still stuck, let me know the specific issue and I'll help.
+```
+
+**Partnership/collab request:**
+```
+Thanks for the interest. Best way to discuss is email — you can reach us through the contact form at signalpilot.io.
+```
+
+---
+
+## 8.3 Negative Response Protocol
+
+### Criticism Handling
+
+**"This is a scam" / "Another garbage indicator":**
+```
+Understand the skepticism — the indicator space has a lot of problems. Our approach: $100 bounty if you find a repaint (zero takers), 82 free lessons without purchase, 7-day trial without credit card. We're not asking you to trust — we're asking you to test.
+```
+
+**"Your indicators don't work":**
+```
+Sorry to hear that. What specifically isn't working? Happy to help troubleshoot if you share more details.
+```
+
+**"I lost money using this":**
+```
+No indicator predicts markets. Ours show cycle position and flow — entries and risk management are still your responsibility. The 82 free lessons at education.signalpilot.io cover position sizing and risk if that would help.
+```
+
+### Repaint Accusations
+
+**"I found a repaint":**
+```
+If you can document it (before/after screenshots, same chart, same timeframe), send it to us. $100 bounty is real. We've had zero verified claims in [X] weeks of live trading.
+```
+
+### Trolls/Bad Faith
+
+**Obvious trolling:**
+Do not engage. Hide comment if platform allows. Do not delete unless it violates platform rules.
+
+**Repeated harassment:**
+Block after one warning. Document for records.
+
+---
+
+# Part 9: TESTIMONIAL COLLECTION STRATEGY
+
+---
+
+## 9.1 When to Ask
+
+**Best times to request testimonials:**
+- 7 days after sign-up (initial impressions)
+- After a user shares a positive comment or DM
+- After a user completes the education hub
+- At 30-day mark (experienced users)
+
+---
+
+## 9.2 How to Ask
+
+**DM Template (after positive interaction):**
+```
+Glad it's clicking for you. Would you mind if we shared your feedback? A quick quote about your experience would help others understand what to expect. Totally optional — and you can stay anonymous if you prefer.
+```
+
+**Follow-up if they agree:**
+```
+Appreciate it. A 1-2 sentence quote works perfectly. Something like what you told me, or whatever feels natural. Would you like to be credited as @username or stay anonymous?
+```
+
+---
+
+## 9.3 Testimonial Format
+
+**What to collect:**
+- Quote (1-3 sentences)
+- Attribution preference (username, first name only, or anonymous)
+- Permission confirmation (screenshot the DM for records)
+- Optional: their trading focus (day trading, swing, crypto, etc.)
+
+**Storage:**
+Keep a running document of testimonials with:
+- Date received
+- Quote text
+- Attribution
+- Permission confirmation
+- Used in (which post/platform)
+
+---
+
+# Part 10: AFFILIATE PROGRAM CONTENT
+
+> **Note:** Deploy these posts once the affiliate program is ready. Swap in actual details (commission %, link, etc.) when available.
+
+---
+
+## Week 3-4: Affiliate Announcement (X/Twitter)
+
+```
+Signal Pilot affiliate program is now open.
+
+If you're a:
+- Trading educator
+- Content creator
+- Community leader
+- Or just someone who uses the tools and wants to share them
+
+You can earn [X]% on referrals.
+
+Details and signup → [affiliate link]
+
+No pressure tactics. No fake urgency. Just share what works.
+```
+
+---
+
+## Week 3-4: Affiliate Announcement (Instagram)
+
+**Caption:**
+```
+Affiliate program is live.
+
+If you use The Elite Seven and want to share it with your audience — you can now earn on referrals.
+
+Open to:
+- Trading educators
+- Content creators
+- Community leaders
+- Anyone who uses the tools
+
+Details at [link] or DM us.
+
+#tradingview #affiliateprogram #tradereducation #technicalanalysis
+```
+
+---
+
+# Part 11: VISUAL PRODUCTION CHECKLIST
+
+> **Use this to track all visual assets needed.** Check off as completed.
+
+---
+
+## Pre-Launch Assets (Due: Dec 29)
+
+| Asset | Format | Status | Notes |
+|-------|--------|--------|-------|
+| Launch announcement graphic | 1080x1350 (IG) | [ ] | Dark theme, "The Elite Seven — Now Live" |
+| Elite Seven preview carousel | 9 slides, 1080x1350 | [ ] | 1 slide per indicator + intro/outro |
+| Pentarch teaser reel | 15 sec, 1080x1920 | [ ] | Signals appearing on chart |
+| Final countdown hype reel | 15-30 sec, 1080x1920 | [ ] | Quick cuts of all 7 indicators |
+| Quote card template (3-5) | 1080x1350 | [ ] | Brand colors, minimal design |
+| 5-phase cycle diagram | 1080x1350 | [ ] | TD/IGN/WRN/CAP/BDN visual |
+| "Something's coming" teaser | 1080x1350 | [ ] | Minimal, mysterious |
+| Behind-the-scenes screenshot | 1080x1920 (Story) | [ ] | TradingView or code screenshot |
+
+---
+
+## Launch Day Assets (Due: Dec 30)
+
+| Asset | Format | Status | Notes |
+|-------|--------|--------|-------|
+| Product demo reel | 30 sec, 1080x1920 | [ ] | Pentarch in action on real chart |
+| Story walkthrough (5 parts) | 1080x1920 each | [ ] | One per indicator highlight |
+| Launch day story graphics | 1080x1920 | [ ] | "It's live" + countdown complete |
+
+---
+
+## Post-Launch Assets (Rolling)
+
+| Asset | Format | Status | Notes |
+|-------|--------|--------|-------|
+| Volume Oracle demo reel | 15-30 sec | [ ] | "87% accumulation" reading |
+| Janus Atlas demo reel | 15-30 sec | [ ] | Auto-plotting levels |
+| Before/after chart comparison | 1080x1350 | [ ] | Cluttered vs clean |
+| Accumulation vs distribution | 1080x1350 carousel | [ ] | Chart annotations |
+| First trade walkthrough reel | 15-30 sec | [ ] | TD → IGN entry flow |
+| Testimonial quote cards | 1080x1350 | [ ] | Template ready, add quotes |
+| Education hub screenshot | 1080x1350 | [ ] | Lesson list or interface |
+
+---
+
+## Asset Specifications
+
+**Instagram Feed:**
+- Square: 1080x1080px
+- Portrait: 1080x1350px (recommended for carousels)
+
+**Instagram Stories/Reels:**
+- 1080x1920px (9:16)
+
+**X/Twitter:**
+- Images: 1200x675px or 1200x1200px
+- Video: 1280x720px minimum
+
+**File Formats:**
+- Images: PNG or JPG (PNG for text-heavy graphics)
+- Video: MP4, H.264 codec
+
+**Reel Audio Guidance:**
+- Upbeat electronic, no lyrics
+- Cinematic/building tension for hype content
+- Subtle ambient for educational content
+- Check licensing before using any music
+
+---
+
+# Part 12: ORGANIC TRACKING TEMPLATE
+
+> **Track all organic post performance weekly.** Copy this template.
+
+---
+
+## Weekly Organic Performance Log
+
+**Week of: ____________**
+
+### X/Twitter
+
+| Date | Post Type | Topic | Impressions | Engagements | Link Clicks | Follows | Notes |
+|------|-----------|-------|-------------|-------------|-------------|---------|-------|
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
+
+**Top performer:**
+**Worst performer:**
+**Insights:**
+
+---
+
+### Instagram
+
+| Date | Post Type | Topic | Reach | Likes | Comments | Saves | Shares | Profile Visits | Follows | Notes |
+|------|-----------|-------|-------|-------|----------|-------|--------|----------------|---------|-------|
+| | | | | | | | | | | |
+| | | | | | | | | | | |
+| | | | | | | | | | | |
+| | | | | | | | | | | |
+| | | | | | | | | | | |
+| | | | | | | | | | | |
+| | | | | | | | | | | |
+
+**Top performer:**
+**Worst performer:**
+**Insights:**
+
+---
+
+### Stories
+
+| Date | Views | Replies | Link Clicks | Notes |
+|------|-------|---------|-------------|-------|
+| | | | | |
+| | | | | |
+| | | | | |
+
+---
+
+### Weekly Summary
+
+- Total new followers (X):
+- Total new followers (IG):
+- Best performing content type:
+- Topics that resonated:
+- Topics that underperformed:
+- Adjustments for next week:
+
+---
+
+# Part 13: CONTENT RECYCLING GUIDE
+
+> **After Week 4, recycle top-performing content.** Here's the rotation strategy.
+
+---
+
+## Evergreen Content (Repost Monthly)
+
+| Original Post | Best Time to Repost | Variation Notes |
+|---------------|---------------------|-----------------|
+| 5 Market Phases carousel | Monthly | Update examples, same framework |
+| Accumulation vs Distribution | Monthly | Fresh chart examples |
+| Repainting Problem thread | Monthly | Same content, still relevant |
+| Education Hub promo | Bi-weekly | Rotate which lessons to highlight |
+| TradingView Setup Guide | Monthly | Update if new features |
+
+---
+
+## Indicator Spotlights (Rotate Weekly)
+
+After Jan 22, rotate through indicator deep-dives:
+- Week 5: Pentarch refresh
+- Week 6: Volume Oracle refresh
+- Week 7: Janus Atlas refresh
+- Week 8: Plutus Flow refresh
+- Week 9: OmniDeck refresh
+- Week 10: Augury Grid refresh
+- Week 11: Harmonic Oscillator refresh
+- Week 12: Return to Pentarch
+
+---
+
+## Engagement Posts (Weekly)
+
+Rotate these question formats:
+- "What's your biggest trading struggle?"
+- "How many indicators on your chart?"
+- "What concept should we cover next?"
+- "What's your trading goal for [month]?"
+- "Share your chart setup"
+
+---
+
+## Quote Cards (2-3x per week)
+
+Build a library of 20+ quotes. Rotate through:
+- "The edge isn't seeing more. It's seeing what matters."
+- "Trust what you see. Not what you hope."
+- "Fewer indicators. Deeper understanding."
+- "The best indicator is the one you understand."
+- "Stop chasing signals. Start reading cycles."
+- "Same chart. Different timing. Opposite outcomes."
+- "More indicators ≠ more confidence."
+- "Don't be the exit liquidity."
+
+---
+
+*Document version 4.0 — December 22, 2024 (Complete with all fixes and additions)*
