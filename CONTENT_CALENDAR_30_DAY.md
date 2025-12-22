@@ -2,7 +2,21 @@
 
 **Prepared:** December 22, 2024
 **First Post Published:** "The Elite Seven" teaser (Instagram, Dec 17)
+**Launch Target:** Before December 31, 2024
 **Calendar Start Date:** December 23, 2024
+
+---
+
+## LAUNCH TIMELINE OVERVIEW
+
+```
+Dec 17 ──────── Dec 23-29 ──────── Dec 30/31 ──────── Jan 1-22
+   │                │                   │                  │
+   ▼                ▼                   ▼                  ▼
+TEASER          PRE-LAUNCH          LAUNCH DAY        POST-LAUNCH
+"Elite Seven"   Hype & Education    Official Open     Momentum &
+Posted          Build anticipation  Sales live        Authority
+```
 
 ---
 
@@ -131,125 +145,172 @@ TIER 3: ADDRESS OBJECTIONS & CONVERT (10% of content)
 
 ---
 
-## Part 3: 30-Day Content Calendar
+## Part 3: 30-Day Content Calendar (Launch-Focused)
 
-### Posting Strategy
+### Strategy Overview
 
-**Frequency:** 5 posts/week (skip rather than post filler)
-- **Instagram:** 4x/week (Tue, Thu, Sat, Sun)
-- **Twitter/X:** 5x/week (Mon-Fri threads + daily engagement)
+**Pre-Launch (Dec 23-29):** Build anticipation, educate, tease product
+**Launch Day (Dec 30 or 31):** Official announcement, doors open
+**Post-Launch (Jan 1-22):** Momentum, social proof, authority building
 
-**Content Mix:**
-- 3 educational posts per week
-- 1 product showcase per week
-- 1 engagement/community post per week
-
----
-
-### Week 1: Foundation & Cycle Introduction (Dec 23-29)
-
-| Date | Day | Platform | Type | Topic/Hook | CTA | Tier |
-|------|-----|----------|------|------------|-----|------|
-| Dec 23 | Mon | X | Thread | "Most traders buy tops and sell bottoms. Here's why—and how to flip it." (5-phase intro) | Follow for more | T1 |
-| Dec 24 | Tue | IG | Carousel | "The 5 Market Phases Every Trader Must Know" (TD→IGN→WRN→CAP→BDN visual) | Save this post | T1 |
-| Dec 25 | Wed | X | Single | Holiday: "Trading break. Markets will be here Monday. Your edge won't build itself." | — | T1 |
-| Dec 26 | Thu | IG | Reel | "What your indicator ISN'T telling you" (repainting teaser - 15 sec) | Link in bio | T1 |
-| Dec 27 | Fri | X | Thread | "Your 6 indicators aren't confirming each other—they're wearing different outfits" | Read full article | T1 |
-| Dec 28 | Sat | IG | Static | Pentarch chart screenshot: "Green = exhaustion. Red = climax. Questions?" | Comment below | T2 |
-| Dec 29 | Sun | IG | Carousel | "The Repainting Problem Explained" (3-slide breakdown from blog) | Full article → link | T1 |
+**Posting Frequency:**
+- **Pre-Launch:** Daily on both platforms (high intensity)
+- **Post-Launch:** 5x/week sustainable pace
 
 ---
 
-### Week 2: Smart Money & Volume (Dec 30 - Jan 5)
+## PRE-LAUNCH PHASE (Dec 23-29)
 
-| Date | Day | Platform | Type | Topic/Hook | CTA | Tier |
-|------|-----|----------|------|------------|-----|------|
-| Dec 30 | Mon | X | Thread | "Institutions can't hide. Here's where to look." (smart money footprints) | Follow for edge | T1 |
-| Dec 31 | Tue | IG | Static | "2024's biggest trading lesson: ___" (engagement post) | Drop yours below | T1 |
-| Jan 1 | Wed | X | Single | New Year: "2025 resolution: Stop chasing signals. Start reading cycles." | — | T1 |
-| Jan 2 | Thu | IG | Carousel | "Accumulation vs Distribution: Same chart, opposite outcomes" | Save for later | T1 |
-| Jan 3 | Fri | X | Thread | "Why retail loses: They buy when institutions distribute. Here's the tell." | Link to blog | T1 |
-| Jan 4 | Sat | IG | Reel | Volume Oracle demo: "87% accumulation. What happens next?" (15-30 sec) | Learn more → bio | T2 |
-| Jan 5 | Sun | IG | Static | Quote card: "The edge isn't seeing more. It's seeing what matters." | Share if agree | T1 |
+### Goal: Build anticipation without revealing everything
+
+| Date | Day | Platform | Type | Topic/Hook | CTA | Phase |
+|------|-----|----------|------|------------|-----|-------|
+| Dec 23 | Mon | X | Thread | "Most traders buy tops and sell bottoms. Here's why—and how to flip it." (5-phase intro) | "Something's coming..." | Hype |
+| Dec 23 | Mon | IG | Story | Behind-the-scenes: "Final polish on indicator #4..." | Poll: "Ready?" | Hype |
+| Dec 24 | Tue | X | Single | "The repainting problem cost me $X before I understood it. Here's the fix." | Follow for reveal | Educate |
+| Dec 24 | Tue | IG | Carousel | "The 5 Market Phases Every Trader Must Know" (TD→IGN→WRN→CAP→BDN) | Save this | Educate |
+| Dec 25 | Wed | X | Single | "Happy holidays. Markets rest. Your edge doesn't. See you in 5 days." | — | Light |
+| Dec 25 | Wed | IG | Story | Holiday greeting + countdown: "5 days until launch" | Countdown sticker | Hype |
+| Dec 26 | Thu | X | Thread | "Your 6 indicators aren't confirming—they're wearing different outfits" | "We fixed this." | Educate |
+| Dec 26 | Thu | IG | Reel | 15-sec teaser: Pentarch signals appearing on chart (no full reveal) | "Dec 30. Link in bio." | Hype |
+| Dec 27 | Fri | X | Thread | "How smart money actually moves—and leaves footprints" (institutional angle) | "We built tools to see them." | Educate |
+| Dec 27 | Fri | IG | Static | Quote card: "The edge isn't seeing more. It's seeing what matters." | "3 days." | Hype |
+| Dec 28 | Sat | X | Single | Countdown: "48 hours. 7 indicators. Zero repaint. The Elite Seven." | Follow for launch | Hype |
+| Dec 28 | Sat | IG | Carousel | "What's in The Elite Seven?" (7 slides, 1 per indicator - name + one-liner only) | "Dec 30" | Reveal |
+| Dec 29 | Sun | X | Thread | "The Repainting Problem: How most indicators lie to you" (blog teaser) | "Tomorrow changes everything." | Educate |
+| Dec 29 | Sun | IG | Reel | Final countdown hype video: Quick cuts of all 7 indicators | "Tomorrow. Link in bio." | Hype |
 
 ---
 
-### Week 3: Indicator Deep Dives (Jan 6-12)
+## LAUNCH DAY (Dec 30)
+
+### Goal: Clear announcement, drive to site, capture early adopters
+
+| Time | Platform | Type | Content | CTA |
+|------|----------|------|---------|-----|
+| 9 AM | X | Pinned Thread | "The Elite Seven is live. 7 indicators. 1 system. Zero repaint. After 2 years of development, professional cycle detection is here. [Full breakdown of what's included]" | "Try free for 7 days →" |
+| 9 AM | IG | Feed Post | Launch graphic: "The Elite Seven — Now Live" | "Link in bio" |
+| 9 AM | IG | Stories | 5-part story walkthrough of each indicator | Swipe up / Link |
+| 12 PM | X | Quote RT | Quote own launch thread with: "82 free lessons included. No purchase required to start learning." | Education hub link |
+| 3 PM | IG | Reel | 30-sec product demo: Pentarch in action on a real chart | "signalpilot.io" |
+| 6 PM | X | Single | "First 10 sign-ups are in. Welcome to the pilot program." | Social proof |
+| 9 PM | IG | Story | "Day 1 complete. Thank you." + share any early comments/DMs | Engagement |
+
+---
+
+## NEW YEAR'S EVE (Dec 31)
+
+| Platform | Type | Content | CTA |
+|----------|------|---------|-----|
+| X | Thread | "2024: Built in silence. 2025: Trade with clarity. Here's what we launched yesterday and why it matters for your trading year." | Link to site |
+| IG | Static | "Your 2025 trading resolution: Stop chasing signals. Start reading cycles." | "Elite Seven → bio" |
+| IG | Story | Poll: "Your biggest trading goal for 2025?" + countdown to midnight | Engagement |
+
+---
+
+## POST-LAUNCH PHASE (Jan 1-22)
+
+### Week 1 Post-Launch: Momentum & Education (Jan 1-5)
 
 | Date | Day | Platform | Type | Topic/Hook | CTA | Tier |
 |------|-----|----------|------|------------|-----|------|
-| Jan 6 | Mon | X | Thread | "Pentarch Breakdown: The traffic light for your chart" (5 phases detailed) | Try free → link | T2 |
-| Jan 7 | Tue | IG | Carousel | "OmniDeck: 10 indicators in 1 overlay" (feature breakdown) | Save this | T2 |
-| Jan 8 | Wed | X | Single | "Question: What's the ONE indicator category you struggle with most?" (engagement) | Reply below | T1 |
-| Jan 9 | Thu | IG | Reel | Janus Atlas demo: "Stop drawing 200 lines. Let the chart do it." (15-30 sec) | Link in bio | T2 |
+| Jan 1 | Wed | X | Single | "2025 starts now. Your indicators shouldn't repaint. Your strategy shouldn't either." | Link | T2 |
+| Jan 1 | Wed | IG | Story | "Happy New Year. Markets open tomorrow. Your edge is ready." | — | T1 |
+| Jan 2 | Thu | X | Thread | "Pentarch Deep Dive: The traffic light for your chart" (full 5-phase breakdown) | Docs link | T2 |
+| Jan 2 | Thu | IG | Carousel | "How to read Pentarch signals" (educational breakdown) | Save this | T2 |
+| Jan 3 | Fri | X | Thread | "Day 4 since launch. Here's what traders are asking:" (FAQ thread) | Reply with Qs | T2 |
+| Jan 3 | Fri | IG | Reel | Volume Oracle demo: "87% accumulation. What happens next?" | Link in bio | T2 |
+| Jan 4 | Sat | IG | Static | Before/After: Cluttered chart vs Signal Pilot clean setup | "Which trades better?" | T2 |
+| Jan 5 | Sun | IG | Carousel | "Accumulation vs Distribution: Same chart, opposite outcomes" | Save | T1 |
+
+---
+
+### Week 2 Post-Launch: Indicator Showcases (Jan 6-12)
+
+| Date | Day | Platform | Type | Topic/Hook | CTA | Tier |
+|------|-----|----------|------|------------|-----|------|
+| Jan 6 | Mon | X | Thread | "OmniDeck: 10 indicators in 1 overlay. Here's everything it replaces." | Try free | T2 |
+| Jan 7 | Tue | IG | Carousel | "Janus Atlas: Stop drawing 200 lines" (feature breakdown) | Save | T2 |
+| Jan 8 | Wed | X | Single | "Question: What's the ONE indicator category you struggle with most?" | Reply | T1 |
+| Jan 9 | Thu | IG | Reel | Janus Atlas auto-plotting levels in real-time (15-30 sec) | Link in bio | T2 |
 | Jan 10 | Fri | X | Thread | "Harmonic Oscillator: 4 momentum systems voting on your entry" | Docs link | T2 |
-| Jan 11 | Sat | IG | Static | Before/After chart comparison: cluttered vs Signal Pilot clean | "Which would you trade?" | T2 |
-| Jan 12 | Sun | IG | Carousel | "Augury Grid: Your ranked watchlist at a glance" (feature breakdown) | Start free trial | T2 |
+| Jan 11 | Sat | IG | Static | Review/testimonial highlight (if available) OR quote card | Share | T3 |
+| Jan 12 | Sun | IG | Carousel | "Augury Grid: Your ranked watchlist at a glance" | Start trial | T2 |
 
 ---
 
-### Week 4: Objection Handling & Social Proof (Jan 13-19)
+### Week 3 Post-Launch: Authority & Trust (Jan 13-19)
 
 | Date | Day | Platform | Type | Topic/Hook | CTA | Tier |
 |------|-----|----------|------|------------|-----|------|
-| Jan 13 | Mon | X | Thread | "$100 bounty: Find a repaint, keep the money. 419+ reviews later—no takers." | Try risk-free | T3 |
-| Jan 14 | Tue | IG | Static | Review highlight: "Finally stopped chasing signals and started reading cycles" | Join 419+ traders | T3 |
-| Jan 15 | Wed | X | Single | "Free TradingView account works. Here's the setup." (accessibility angle) | Setup guide link | T2 |
-| Jan 16 | Thu | IG | Carousel | "82 free lessons. No purchase required. Here's what you'll learn:" | Start learning → link | T1 |
-| Jan 17 | Fri | X | Thread | "Indicators that repaint are lying to you. Here's how to test ANY tool in 60 seconds." | Full method → blog | T1 |
-| Jan 18 | Sat | IG | Reel | "Your first trade with Pentarch" walkthrough teaser (15-30 sec) | Full guide → bio | T2 |
-| Jan 19 | Sun | IG | Static | "7 indicators. 1 system. Zero repaint. The Elite Seven." (product summary) | 7-day free trial | T3 |
+| Jan 13 | Mon | X | Thread | "$100 bounty: Find a repaint, keep the money. Zero takers so far." | Try risk-free | T3 |
+| Jan 14 | Tue | IG | Carousel | "82 free lessons. No purchase required. Here's what you'll learn:" | Education link | T1 |
+| Jan 15 | Wed | X | Single | "Free TradingView account works. Here's the exact setup." | Setup guide | T2 |
+| Jan 16 | Thu | IG | Reel | "Your first trade with Pentarch" walkthrough (15-30 sec) | Full guide → bio | T2 |
+| Jan 17 | Fri | X | Thread | "Why retail loses: They buy when institutions distribute. Here's the tell." | Blog link | T1 |
+| Jan 18 | Sat | IG | Static | "2 weeks live. Here's what we've learned from early users." | — | T3 |
+| Jan 19 | Sun | IG | Carousel | "Plutus Flow: See hidden buying pressure before price moves" | Try free | T2 |
 
 ---
 
-### Week 5: Authority Building & Engagement (Jan 20-22)
+### Week 4 Post-Launch: Sustained Growth (Jan 20-22)
 
 | Date | Day | Platform | Type | Topic/Hook | CTA | Tier |
 |------|-----|----------|------|------------|-----|------|
-| Jan 20 | Mon | X | Thread | "Kelly Criterion: The math behind position sizing that pros use" (education hub teaser) | Full lesson free | T1 |
-| Jan 21 | Tue | IG | Carousel | "Multi-Timeframe Confirmation: Why your daily setup needs weekly context" | Read full article | T2 |
-| Jan 22 | Wed | X | Single | "What's ONE trading concept you wish you understood earlier?" (engagement) | Share below | T1 |
+| Jan 20 | Mon | X | Thread | "Kelly Criterion: The math behind position sizing pros use" (education teaser) | Free lesson | T1 |
+| Jan 21 | Tue | IG | Carousel | "Multi-Timeframe Confirmation: Why daily needs weekly context" | Blog link | T2 |
+| Jan 22 | Wed | X | Single | "3 weeks since launch. What's ONE concept you want us to cover next?" | Reply | T1 |
 
 ---
 
 ## Part 4: Notes & Recommendations
 
-### 4.1 Visual Asset Priorities
+### 4.1 Visual Asset Priorities (Launch-Critical)
 
-**Immediate Creation (Week 1):**
-1. ✅ Pentarch 5-phase cycle diagram (carousel-ready)
-2. ✅ Repainting explanation graphic (before/after)
-3. ✅ Quote cards with brand styling (3-5 templates)
-4. ✅ Before/after chart comparison (cluttered vs clean)
+**MUST HAVE BY DEC 29 (Launch Assets):**
+1. Launch announcement graphic (IG feed post)
+2. Elite Seven preview carousel (7 slides - indicator names + one-liners)
+3. Pentarch teaser reel (15 sec - signals appearing on chart)
+4. Final countdown hype reel (15-30 sec - quick cuts all 7 indicators)
+5. Product demo reel (30 sec - Pentarch in action)
+6. Quote card templates (3-5 with brand styling)
 
-**Short-Term (Weeks 2-3):**
+**PRE-LAUNCH CONTENT (Dec 23-29):**
+1. 5-phase cycle diagram (TD/IGN/WRN/CAP/BDN carousel)
+2. "Something's coming" teaser graphics
+3. Behind-the-scenes content (can be casual)
+
+**POST-LAUNCH (Jan 1+):**
 1. Volume Oracle demo recording (15-30 sec)
 2. Janus Atlas auto-levels demo (15-30 sec)
-3. Accumulation vs distribution chart annotation
-4. Smart money footprint visual guide
+3. Before/after chart comparison (cluttered vs clean)
+4. Accumulation vs distribution chart annotation
+5. Weekly chart screenshot library
+6. Review/testimonial highlight templates
 
-**Ongoing:**
-1. Weekly chart screenshot library (real examples)
-2. Review/testimonial highlight templates
-3. Blog article carousel templates
-
-### 4.2 Sequencing Logic
+### 4.2 Launch Sequencing Logic
 
 ```
-PHASE 1: AUTHORITY (Weeks 1-2)
-└── Heavy education, no selling
-└── Establish cycle framework understanding
-└── Build "they know what they're talking about" trust
+PRE-LAUNCH (Dec 23-29)
+├── Hype + Education alternating
+├── Countdown builds urgency naturally
+├── Tease indicators without full reveal
+├── "Something's coming" energy
+└── Goal: Followers ready to act on Dec 30
 
-PHASE 2: PRODUCT CONTEXT (Weeks 3-4)
-└── Introduce indicators as solutions
-└── Connect education to tools
-└── Address objections preemptively
+LAUNCH DAY (Dec 30)
+├── Morning: Clear announcement
+├── Midday: Education angle (82 free lessons)
+├── Afternoon: Product demo content
+├── Evening: Social proof sharing
+└── Goal: Maximum day-one conversions
 
-PHASE 3: CONVERSION (Week 4+)
-└── Social proof deployment
-└── Free trial emphasis
-└── Testimonials and reviews
+POST-LAUNCH (Jan 1+)
+├── Week 1: Answer questions, show product depth
+├── Week 2: Indicator spotlight series
+├── Week 3: Trust building, testimonials
+├── Week 4: Sustainable content rhythm
+└── Goal: Convert fence-sitters, build authority
 ```
 
 ### 4.3 Compliance Checklist
@@ -362,18 +423,39 @@ Each blog article should be promoted 2-3x across the 30 days:
 
 ---
 
-## Quick Reference: First 7 Days
+## Quick Reference: Launch Week
 
-| Day | Quick Summary |
-|-----|---------------|
-| Mon Dec 23 | X thread: 5-phase cycle intro |
-| Tue Dec 24 | IG carousel: Market phases visual |
-| Wed Dec 25 | X single: Holiday message |
-| Thu Dec 26 | IG reel: Repainting teaser |
-| Fri Dec 27 | X thread: Indicator outfit analogy |
-| Sat Dec 28 | IG static: Pentarch chart example |
-| Sun Dec 29 | IG carousel: Repainting problem |
+### Pre-Launch Countdown (Dec 23-29)
+
+| Day | X (Twitter) | Instagram |
+|-----|-------------|-----------|
+| Mon 23 | Thread: 5-phase intro + "something's coming" | Story: Behind-the-scenes |
+| Tue 24 | Single: Repainting problem teaser | Carousel: 5 Market Phases |
+| Wed 25 | Single: Holiday message | Story: Countdown (5 days) |
+| Thu 26 | Thread: Indicators wearing outfits | Reel: Pentarch teaser |
+| Fri 27 | Thread: Smart money footprints | Static: Quote card + "3 days" |
+| Sat 28 | Single: 48-hour countdown | Carousel: Elite Seven preview |
+| Sun 29 | Thread: Repainting Problem | Reel: Final hype video |
+
+### Launch Day (Dec 30)
+
+| Time | Action |
+|------|--------|
+| 9 AM | X: Pinned launch thread / IG: Feed post + Stories |
+| 12 PM | X: Quote RT with education angle |
+| 3 PM | IG: Product demo reel |
+| 6 PM | X: Social proof update |
+| 9 PM | IG: Story wrap-up |
+
+### Critical Assets Needed by Dec 29
+
+- [ ] Launch announcement graphic (IG feed)
+- [ ] Elite Seven preview carousel (7 slides)
+- [ ] Pentarch teaser reel (15 sec)
+- [ ] Final countdown hype reel (15-30 sec)
+- [ ] Quote card templates (3-5)
+- [ ] Product demo reel (30 sec)
 
 ---
 
-*Document version 1.0 — December 22, 2024*
+*Document version 2.0 — December 22, 2024 (Launch-Focused Revision)*
