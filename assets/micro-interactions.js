@@ -22,8 +22,8 @@ function throttle(fn, wait) {
 // 1. MAGNETIC CURSOR EFFECT - OPTIMIZED
 // ============================================
 function initMagneticCards() {
-  // Removed .card.plan - was causing weird movement on pricing cards
-  const cards = document.querySelectorAll('.card.product, .feature');
+  // Removed .card.plan and .card.product - 3D effect was causing issues on cards
+  const cards = document.querySelectorAll('.feature');
 
   cards.forEach(card => {
     let isHovering = false;
