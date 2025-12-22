@@ -5009,6 +5009,34 @@
 
       let autoplayInterval = null;
       let isAutoPlaying = false;
+      let isSliderVisible = true;
+      let autoplayDirection = 1;
+      let autoplayPos = 50;
+
+      // Visibility tracking for autoplay
+      if ('IntersectionObserver' in window) {
+        const visObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            isSliderVisible = entry.isIntersecting;
+            // Auto-pause when scrolled away, auto-resume when back
+            if (!isSliderVisible && isAutoPlaying) {
+              pauseAutoPlay();
+            } else if (isSliderVisible && isAutoPlaying && !autoplayInterval) {
+              resumeAutoPlay();
+            }
+          });
+        }, { threshold: 0 });
+        visObserver.observe(slider);
+      }
+
+      // Pause when tab hidden
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden && isAutoPlaying) {
+          pauseAutoPlay();
+        } else if (!document.hidden && isAutoPlaying && isSliderVisible && !autoplayInterval) {
+          resumeAutoPlay();
+        }
+      });
 
       // Before button - snap to 0%
       if (btnBefore) {
@@ -5042,33 +5070,40 @@
       function startAutoPlay() {
         stopAutoPlay(); // Clear any existing interval
         isAutoPlaying = true;
+        autoplayDirection = 1;
+        autoplayPos = 50;
         btnAutoplay.innerHTML = '⏸ Pause';
         btnAutoplay.classList.remove('btn-primary');
         btnAutoplay.classList.add('btn-ghost');
-
-        let direction = 1; // 1 = forward, -1 = backward
-        let currentPos = 50;
-
-        autoplayInterval = setInterval(() => {
-          currentPos += (direction * 2); // Move 2% per frame
-
-          if (currentPos >= 100) {
-            currentPos = 100;
-            direction = -1; // Reverse direction
-          } else if (currentPos <= 0) {
-            currentPos = 0;
-            direction = 1; // Reverse direction
-          }
-
-          setSliderPosition(currentPos, false);
-        }, 30); // Update every 30ms for smooth animation
+        if (isSliderVisible && !document.hidden) {
+          resumeAutoPlay();
+        }
       }
 
-      function stopAutoPlay() {
+      function resumeAutoPlay() {
+        if (autoplayInterval) return;
+        autoplayInterval = setInterval(() => {
+          autoplayPos += (autoplayDirection * 2);
+          if (autoplayPos >= 100) {
+            autoplayPos = 100;
+            autoplayDirection = -1;
+          } else if (autoplayPos <= 0) {
+            autoplayPos = 0;
+            autoplayDirection = 1;
+          }
+          setSliderPosition(autoplayPos, false);
+        }, 30);
+      }
+
+      function pauseAutoPlay() {
         if (autoplayInterval) {
           clearInterval(autoplayInterval);
           autoplayInterval = null;
         }
+      }
+
+      function stopAutoPlay() {
+        pauseAutoPlay();
         isAutoPlaying = false;
         btnAutoplay.innerHTML = '▶ Auto Play';
         btnAutoplay.classList.remove('btn-ghost');
