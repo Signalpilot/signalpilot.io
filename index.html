@@ -3051,7 +3051,7 @@
           z-index: 0;
           object-fit: cover;
           object-position: left 30%;
-          opacity: 0.2;
+          opacity: 0.35;
           transform: translateZ(0) scaleX(-1);
           -webkit-mask-image:
             radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
@@ -3083,7 +3083,7 @@
           z-index: 0;
           object-fit: cover;
           object-position: left 30%;
-          opacity: 0.2;
+          opacity: 0.35;
           transform: translateZ(0) scaleX(-1);
           -webkit-mask-image:
             radial-gradient(ellipse 90% 80% at 25% 40%, black 60%, transparent 90%),
@@ -3098,52 +3098,16 @@
         <source src="assets/videos/signal-conduit-4k.mp4?v=9" type="video/mp4">
       </video>
       <script>
-      // Energy beam: Continuous dual-layer with smooth sine-wave opacity blending
-      // Both videos always visible, opacity oscillates so loop points are always masked
+      // Energy beam: Simple dual overlap with constant opacity (no animation loop)
       (function() {
         const video1 = document.getElementById('energy-beam-video-1');
         const video2 = document.getElementById('energy-beam-video-2');
-        let duration = 5;
-        const BASE_OPACITY = 0.28;  // Higher minimum - more overlap during transitions
-        const MAX_OPACITY = 0.48;   // Lower maximum - smoother blending
 
-        // Both videos play continuously, offset by half duration
+        // Offset video2 by half duration
         video1.addEventListener('loadedmetadata', function() {
-          duration = video1.duration;
-          // Start video2 at halfway point
-          video2.currentTime = duration / 2;
+          video2.currentTime = video1.duration / 2;
           video2.play();
         });
-
-        // Continuous opacity animation based on video time
-        // Uses sine wave so transitions are smooth at both ends
-        function updateOpacity() {
-          const time1 = video1.currentTime;
-          const time2 = video2.currentTime;
-
-          // Calculate position in cycle (0 to 1)
-          const pos1 = time1 / duration;
-          const pos2 = time2 / duration;
-
-          // Sine wave: peaks at middle of video, troughs at loop points
-          // This means when either video is near loop point, its opacity is lowest
-          const sin1 = Math.sin(pos1 * Math.PI);
-          const sin2 = Math.sin(pos2 * Math.PI);
-
-          // Map sine (0-1) to opacity range
-          const opacity1 = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * sin1;
-          const opacity2 = BASE_OPACITY + (MAX_OPACITY - BASE_OPACITY) * sin2;
-
-          video1.style.opacity = opacity1;
-          video2.style.opacity = opacity2;
-
-          requestAnimationFrame(updateOpacity);
-        }
-
-        // Start the opacity animation after videos are ready
-        video1.addEventListener('canplay', function() {
-          requestAnimationFrame(updateOpacity);
-        }, { once: true });
 
         document.addEventListener('visibilitychange', function() {
           if (document.hidden) {
