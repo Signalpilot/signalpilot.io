@@ -195,16 +195,16 @@ function initMicroInteractions() {
   if (prefersReducedMotion) return;
 
   const isLowEndDevice = window.deviceCapability?.tier === 'low';
+  const isMobile = window.innerWidth <= 768;
 
+  // Only ripple on mobile - everything else is desktop only for performance
   initButtonRipple();
 
-  if (!isLowEndDevice) {
+  if (!isLowEndDevice && !isMobile) {
     initMagneticCards();
     initEnhancedHovers();
     initSmoothTransitions();
-    if (window.innerWidth > 768) {
-      initParallaxMicroShifts();
-    }
+    initParallaxMicroShifts();
   }
 }
 

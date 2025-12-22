@@ -519,6 +519,26 @@
 
     /* MOBILE: Simple, clean mobile setup - NO forced positioning */
     @media (max-width: 768px) {
+      /* Starfield video - ensure it covers full screen on mobile */
+      #starfield-container {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: -2 !important;
+      }
+      #starfield-bg {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+      }
+
+      /* Make body transparent so starfield shows through */
+      body {
+        background: transparent !important;
+      }
+
       /* Background layers BEHIND everything */
       .bg-stars {
         z-index: -3 !important;
@@ -637,17 +657,40 @@
         background:transparent !important; /* Let particles show through on mobile! */
       }
 
-      /* Energy beam video - show beam on mobile */
+      /* Energy beam video - show beam on mobile with SIMPLIFIED mask */
       #energy-beam-video {
         display: block !important;
         visibility: visible !important;
-        opacity: 0.5 !important;
+        opacity: 0.4 !important;
         left: 50% !important;
         transform: translateX(-50%) scaleX(-1) !important;
         width: 100vw !important;
         height: 100% !important;
         object-fit: cover !important;
         object-position: center 50% !important;
+        /* Remove complex mask on mobile - too expensive */
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+        -webkit-mask-composite: unset !important;
+        mask-composite: unset !important;
+      }
+
+      /* Disable shimmer animation on mobile - saves GPU */
+      .shimmer-text {
+        animation: none !important;
+        background: linear-gradient(90deg, #9cc0ff, #86a8ff) !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+      }
+
+      /* Kill heavy transitions on mobile */
+      *, *::before, *::after {
+        transition-duration: 0.1s !important;
+      }
+
+      /* Disable all non-essential animations */
+      .card, .btn, article {
+        animation: none !important;
       }
 
       /* Force all sections transparent on mobile so particles show through */
