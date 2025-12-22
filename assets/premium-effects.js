@@ -323,7 +323,7 @@
     const isDesktop = window.innerWidth > 768;
 
     new ParallaxController();
-    new ScrollLinkedAnimations();
+    // ScrollLinkedAnimations removed - progress bar not needed
 
     if (isDesktop) {
       new MouseGlow();
