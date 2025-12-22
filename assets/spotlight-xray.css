@@ -27,6 +27,11 @@
 
   /* NO background - fully see-through */
   background: transparent;
+
+  /* GPU acceleration */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style paint;
 }
 
 /* Active state when hovering hero */
@@ -71,12 +76,20 @@
   display: flex;
   flex-direction: column;
   animation: scrollCodeUp var(--scroll-duration, 30s) linear infinite;
+  animation-play-state: paused; /* PAUSED by default - only run when hovering */
   font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
   font-size: 9px;
   line-height: 1.5;
   color: rgba(0, 212, 255, 0.18);
   white-space: pre;
   text-shadow: 0 0 8px rgba(0, 212, 255, 0.1);
+  will-change: transform;
+  contain: layout style;
+}
+
+/* Only animate when spotlight is active */
+.xray-layer.active .xray-code-column {
+  animation-play-state: running;
 }
 
 .xray-code-column:nth-child(2) {
@@ -167,7 +180,12 @@
     transparent
   );
   animation: scanDown 6s linear infinite;
+  animation-play-state: paused; /* Paused by default */
   pointer-events: none;
+}
+
+.xray-layer.active .xray-scanline {
+  animation-play-state: running;
 }
 
 @keyframes scanDown {
