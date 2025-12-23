@@ -521,19 +521,24 @@
       transition:all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* MOBILE: Starfield behind content (like desktop) */
+    /* MOBILE: Starfield on top with blend mode */
     @media (max-width: 768px) {
-      /* Starfield - BEHIND content, no blend mode (desktop approach) */
+      /* Remove isolation on body so blend mode works across entire page */
+      body {
+        isolation: auto !important;
+      }
+
+      /* Starfield - ON TOP, blends with content below */
       #starfield-container {
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         width: 100vw !important;
         height: 100vh !important;
-        z-index: -1 !important;
+        z-index: 9999 !important;
         pointer-events: none !important;
         overflow: hidden !important;
-        /* NO mix-blend-mode - content is transparent, stars show through */
+        mix-blend-mode: screen !important;
       }
 
       #starfield-bg {
@@ -543,7 +548,7 @@
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
-        opacity: 0.5 !important;
+        opacity: 0.6 !important;
       }
 
       /* Energy beam hidden on mobile for performance */
@@ -551,11 +556,10 @@
         display: none !important;
       }
 
-      /* Main content - must be ABOVE starfield but transparent */
+      /* Main content */
       main {
         position: relative !important;
         z-index: 1 !important;
-        background: transparent !important;
       }
 
       /* Background layers BEHIND everything */
