@@ -2938,9 +2938,20 @@
   </video>
 </div>
 <script>
-// Starfield: Simple single video (seamless ping-pong loop)
+// Starfield: Load appropriate video for device + handle visibility
 (function() {
   const video = document.getElementById('starfield-bg');
+  const source = video.querySelector('source');
+  const isMobile = window.innerWidth <= 768;
+
+  // Load mobile or desktop video
+  source.src = isMobile
+    ? 'assets/videos/starfield-bg-mobile.mp4?v=1'
+    : 'assets/videos/starfield-bg.mp4?v=17';
+  video.load();
+  video.play();
+
+  // Pause when tab hidden, resume when visible
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
       video.pause();
