@@ -523,28 +523,33 @@
 
     /* MOBILE: Simple, clean mobile setup */
     @media (max-width: 768px) {
-      /* Starfield video - ON TOP as overlay with low opacity */
-      /* Content shows through it instead of other way around */
-      #starfield-bg {
+      /* Starfield container - force GPU layer for iOS */
+      #starfield-container {
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        height: 100dvh !important;
-        object-fit: cover !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
         z-index: 9998 !important;
         pointer-events: none !important;
-        opacity: 0.4 !important;
-        mix-blend-mode: screen !important;
+        -webkit-transform: translate3d(0,0,0) !important;
+        transform: translate3d(0,0,0) !important;
+        -webkit-backface-visibility: hidden !important;
+        backface-visibility: hidden !important;
       }
 
-      /* Energy beam stays where it is */
+      #starfield-bg {
+        opacity: 0.5 !important;
+      }
+
+      /* Energy beam hidden on mobile for performance */
       #energy-beam-video {
-        z-index: 1 !important;
+        display: none !important;
       }
 
-      /* Main content normal */
+      /* Main content */
       main {
         position: relative !important;
         z-index: 1 !important;
@@ -554,7 +559,7 @@
       .bg-stars {
         z-index: -3 !important;
         position: fixed !important;
-        filter: none !important; /* Remove expensive drop-shadow on mobile for better scroll performance */
+        filter: none !important;
       }
       .sp-constellations {
         z-index: 1 !important;
@@ -659,8 +664,8 @@
     main{
       position:relative;
       min-height:100vh;
-      z-index:1;
       background:transparent !important; /* Let constellations show through! */
+      /* Note: z-index removed to allow mix-blend-mode to work with starfield */
     }
 
     /* Make all sections transparent so constellations are visible throughout entire site */
@@ -724,7 +729,7 @@
 
       /* Force all sections transparent on mobile so starfield shows through */
       html, body, main, header, section, .section, .container, .stack, #main-content, .nav-backdrop,
-      .hero, article, footer, aside, div:not(.card):not(.card *):not(.btn):not(.modal-card) {
+      .hero, article, footer, aside, div:not(.card):not(.card *):not(.btn):not(.modal-card):not(.mobile-nav):not(.mobile-nav *) {
         background: transparent !important;
         background-color: transparent !important;
       }
@@ -752,7 +757,7 @@
       }
 
       /* NUCLEAR: Force starfield visible across ENTIRE page */
-      body > *:not(#starfield-bg):not(script):not(style),
+      body > *:not(#starfield-bg):not(#starfield-container):not(script):not(style):not(.mobile-nav):not(.mobile-nav-backdrop),
       main,
       main > *,
       main section,
@@ -2078,7 +2083,8 @@
         right: 0;
         bottom: 0;
         width: min(85vw, 380px);
-        background: #0a0c14;
+        background: #0a0c14 !important;
+        background-color: #0a0c14 !important;
         z-index: 99999;
         transform: translateX(100%);
         transition: transform 0.3s ease;
@@ -2889,29 +2895,38 @@
 
 <body>
 
-<!-- Starfield video background - video directly fixed, no container -->
-<video
-  id="starfield-bg"
-  autoplay
-  loop
-  muted
-  playsinline
-  disablepictureinpicture
-  preload="auto"
-  style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    opacity: 0.5;
-    z-index: -1;
-    pointer-events: none;
-  "
->
-  <source src="assets/videos/starfield-bg.mp4?v=17" type="video/mp4">
-</video>
+<!-- Starfield video background - wrapped in fixed container for iOS compatibility -->
+<div id="starfield-container" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+">
+  <video
+    id="starfield-bg"
+    autoplay
+    loop
+    muted
+    playsinline
+    disablepictureinpicture
+    preload="auto"
+    style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+    "
+  >
+    <source src="assets/videos/starfield-bg.mp4?v=17" type="video/mp4">
+  </video>
+</div>
 <script>
 // Starfield: Simple single video (seamless ping-pong loop)
 (function() {
@@ -3007,7 +3022,7 @@
 
     <!-- HERO -->
 
-    <section id="main-content" class="hero" style="position:relative;overflow:visible;z-index:1">
+    <section id="main-content" class="hero" style="position:relative;overflow:visible">
 
       <!-- EPIC Energy Beam v2 -->
       <div id="energy-beam-container" style="position:absolute;top:-70px;left:0;width:100%;height:calc(100% + 70px);pointer-events:none;z-index:0;overflow:visible;display:none"></div>
@@ -3033,14 +3048,9 @@
           object-position: left 30%;
           opacity: 1;
           transform: translateZ(0) scaleX(-1);
-          -webkit-mask-image:
-            radial-gradient(ellipse 100% 85% at 30% 40%, black 55%, transparent 85%),
-            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
-          -webkit-mask-composite: source-in;
-          mask-image:
-            radial-gradient(ellipse 100% 85% at 30% 40%, black 55%, transparent 85%),
-            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
-          mask-composite: intersect;
+          mix-blend-mode: screen;
+          -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
         "
       >
         <source src="assets/videos/signal-conduit-4k.mp4?v=14" type="video/mp4">
