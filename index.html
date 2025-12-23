@@ -2943,14 +2943,11 @@
   const video = document.getElementById('starfield-bg');
   const source = video.querySelector('source');
 
-  // Default is mobile video (set in HTML). Only switch to desktop if:
-  // 1. No touch support (real desktop) AND
-  // 2. Wide viewport
-  const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  const isWideScreen = window.matchMedia('(min-width: 769px)').matches;
-  const isDesktop = !hasTouch && isWideScreen;
+  // Default is mobile video (set in HTML). Only switch to desktop if NOT a mobile device.
+  // Check user agent - DevTools properly changes this when emulating mobile
+  const isMobileDevice = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-  if (isDesktop) {
+  if (!isMobileDevice) {
     source.src = 'assets/videos/starfield-bg.mp4?v=17';
     video.load();
   }
