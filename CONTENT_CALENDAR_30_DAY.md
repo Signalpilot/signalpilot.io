@@ -112,8 +112,8 @@ LOGO: Bottom right corner, small
 | 1 | "THE 5 MARKET PHASES" | "Every trader must know this." |
 | 2 | "PHASE 1: ACCUMULATION (TD)" | "Smart money builds positions quietly. Price looks 'boring.' Retail ignores it." |
 | 3 | "PHASE 2: MARKUP (IGN)" | "Demand overwhelms supply. Trend begins. Retail starts noticing." |
-| 4 | "PHASE 3: CLIMAX (CAP)" | "Buying frenzy peaks. Headlines everywhere. Retail goes all in. ← THE TRAP" |
-| 5 | "PHASE 4: DISTRIBUTION (WRN)" | "Smart money sells to retail. Price stalls but doesn't crash yet." |
+| 4 | "PHASE 3: WARNING (WRN)" | "Price rising but showing weakness. Smart money starts exiting quietly." |
+| 5 | "PHASE 4: CLIMAX (CAP)" | "Buying frenzy peaks. Headlines everywhere. Retail goes all in. ← THE TRAP" |
 | 6 | "PHASE 5: DECLINE (BDN)" | "Supply overwhelms demand. Late entries get trapped. Cycle resets." |
 | 7 | "THE INSIGHT" | "Retail enters at climax (feels safe). Smart money enters at accumulation (feels scary)." |
 | 8 | "Save this post." | "More coming Dec 30. @signalpilot.io" |
@@ -589,7 +589,7 @@ Start learning → education.signalpilot.io
 |------|-----|----------|------|------------|-----|-------|
 | Dec 23 | Mon | X | Thread | "Most traders enter late and exit early. Here's why—and how to flip it." (5-phase intro) | "Something's coming..." | Hype |
 | Dec 23 | Mon | IG | Story | Behind-the-scenes: "Final polish on indicator #4..." | Poll: "Ready?" | Hype |
-| Dec 24 | Tue | X | Single | "The repainting problem cost me $X before I understood it. Here's the fix." | Follow for reveal | Educate |
+| Dec 24 | Tue | X | Single | "The repainting problem cost me months of false confidence. Here's the fix." | Follow for reveal | Educate |
 | Dec 24 | Tue | IG | Carousel | "The 5 Market Phases Every Trader Must Know" (TD→IGN→WRN→CAP→BDN) | Save this | Educate |
 | Dec 25 | Wed | X | Single | "Happy holidays. Markets rest. Your edge doesn't. See you in 5 days." | — | Light |
 | Dec 25 | Wed | IG | Story | Holiday greeting + countdown: "5 days until launch" | Countdown sticker | Hype |
@@ -1117,18 +1117,18 @@ Smart money quietly builds positions. Price looks "boring." Retail ignores it.
 2. MARKUP (IGN)
 Demand overwhelms supply. Trend begins. Retail starts noticing.
 
-3. CLIMAX (CAP)
-Buying frenzy peaks. Headlines scream. Retail finally goes all-in.
+3. WARNING (WRN)
+Price rising but showing weakness. Smart money starts exiting quietly.
 
-4. DISTRIBUTION (WRN)
-Smart money exits into retail buying. Price holds up but momentum dies.
+4. CLIMAX (CAP)
+Buying frenzy peaks. Headlines scream. Late entries go all-in.
 
 5. DECLINE (BDN)
 Supply overwhelms demand. Late entries exit at a loss. Smart money waits for step 1.
 
 The trap?
 
-Retail enters at step 3 (climax) — when it "feels" safest.
+Late entries happen at step 4 (climax) — when it "feels" safest.
 Smart money entered at step 1 — when it "felt" scariest.
 
 Once you see the cycle, you can't unsee it.
@@ -1230,19 +1230,19 @@ Trend begins.
 Common perception: "Maybe I should watch this."
 
 Slide 4:
-PHASE 3: CLIMAX (CAP)
+PHASE 3: WARNING (WRN)
+━━━━━━━━━━━━━━━━━━━━━
+Price rising but showing weakness.
+Smart money starts exiting quietly.
+Common perception: "Still going up."
+
+Slide 5:
+PHASE 4: CLIMAX (CAP)
 ━━━━━━━━━━━━━━━━━━━━━
 Buying frenzy peaks.
 Headlines everywhere.
 Common perception: "Time to go all in."
 ← THE TRAP
-
-Slide 5:
-PHASE 4: DISTRIBUTION (WRN)
-━━━━━━━━━━━━━━━━━━━━━
-Smart money exits into strength.
-Price stalls but doesn't crash yet.
-Common perception: "Just a pullback."
 
 Slide 6:
 PHASE 5: DECLINE (BDN)
@@ -1727,7 +1727,7 @@ No purchase required → education.signalpilot.io
 ### X/Twitter — Social Proof Update (6 PM)
 
 ```
-First [X] sign-ups are in.
+First sign-ups are in.
 
 Welcome to Signal Pilot.
 
@@ -1738,8 +1738,6 @@ If you just got access:
 
 Questions? Reply here.
 ```
-
-**Note:** Replace [X] with actual number
 
 ---
 
@@ -3451,7 +3449,7 @@ No indicator predicts markets. Ours show cycle position and flow — entries and
 
 **"I found a repaint":**
 ```
-If you can document it (before/after screenshots, same chart, same timeframe), send it to us. $100 bounty is real. We've had zero verified claims in [X] weeks of live trading.
+If you can document it (before/after screenshots, same chart, same timeframe), send it to us. $100 bounty is real. Zero verified claims so far.
 ```
 
 ### Trolls/Bad Faith
@@ -3527,9 +3525,9 @@ If you're a:
 - Community leader
 - Or just someone who uses the tools and wants to share them
 
-You can earn [X]% on referrals.
+You can earn 30% on referrals.
 
-Details and signup → [affiliate link]
+Details and signup → signalpilot.io/affiliates
 
 No pressure tactics. No fake urgency. Just share what works.
 ```
@@ -3550,9 +3548,9 @@ Open to:
 - Community leaders
 - Anyone who uses the tools
 
-Details at [link] or DM us.
+Details at signalpilot.io/affiliates or DM us.
 
-#tradingview #affiliateprogram #tradereducation #technicalanalysis
+#tradingview #affiliateprogram #tradereducation #technicalanalysis #tradingstrategy #priceaction
 ```
 
 ---
@@ -3800,7 +3798,7 @@ Build a library of 20+ quotes. Rotate through:
 | Slide | What to create | How to make it |
 |-------|----------------|----------------|
 | 1 | "THE 5 MARKET PHASES / Every trader must know this." | Canva: Bold headline, dark background |
-| 2-6 | One phase per slide: TD, IGN, CAP, WRN, BDN | Canva: Phase name large, description below, maybe a simple icon |
+| 2-6 | One phase per slide: TD, IGN, WRN, CAP, BDN | Canva: Phase name large, description below, maybe a simple icon |
 | 7 | "THE INSIGHT" — Retail vs Smart money timing | Canva: Comparison layout |
 | 8 | "Save this. More coming Dec 30." + @signalpilot.io | Canva: CTA slide |
 
