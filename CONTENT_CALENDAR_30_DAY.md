@@ -115,7 +115,7 @@ LOGO: Bottom right corner, small
 | 4 | "PHASE 3: WARNING (WRN)" | "Price rising but showing weakness. Smart money starts exiting quietly." |
 | 5 | "PHASE 4: CLIMAX (CAP)" | "Buying frenzy peaks. Headlines everywhere. Retail goes all in. ← THE TRAP" |
 | 6 | "PHASE 5: DECLINE (BDN)" | "Supply overwhelms demand. Late entries get trapped. Cycle resets." |
-| 7 | "THE INSIGHT" | "Retail enters at climax (feels safe). Smart money enters at accumulation (feels scary)." |
+| 7 | "THE INSIGHT" | "Late entries happen at climax (feels safe). Early entries happen at accumulation (feels scary)." |
 | 8 | "Save this post." | "More coming Dec 30. @signalpilot.io" |
 
 **How to create:**
