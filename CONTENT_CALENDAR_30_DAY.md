@@ -114,7 +114,7 @@ LOGO: Bottom right corner, small
 | 3 | "PHASE 2: MARKUP (IGN)" | "Demand overwhelms supply. Trend begins. Retail starts noticing." |
 | 4 | "PHASE 3: CLIMAX (CAP)" | "Buying frenzy peaks. Headlines everywhere. Retail goes all in. ← THE TRAP" |
 | 5 | "PHASE 4: DISTRIBUTION (WRN)" | "Smart money sells to retail. Price stalls but doesn't crash yet." |
-| 6 | "PHASE 5: DECLINE (BDN)" | "Supply overwhelms demand. Retail panics and sells at the bottom." |
+| 6 | "PHASE 5: DECLINE (BDN)" | "Supply overwhelms demand. Late entries get trapped. Cycle resets." |
 | 7 | "THE INSIGHT" | "Retail enters at climax (feels safe). Smart money enters at accumulation (feels scary)." |
 | 8 | "Save this post." | "More coming Dec 30. @signalpilot.io" |
 
@@ -587,7 +587,7 @@ Start learning → education.signalpilot.io
 
 | Date | Day | Platform | Type | Topic/Hook | CTA | Phase |
 |------|-----|----------|------|------------|-----|-------|
-| Dec 23 | Mon | X | Thread | "Most traders buy tops and sell bottoms. Here's why—and how to flip it." (5-phase intro) | "Something's coming..." | Hype |
+| Dec 23 | Mon | X | Thread | "Most traders enter late and exit early. Here's why—and how to flip it." (5-phase intro) | "Something's coming..." | Hype |
 | Dec 23 | Mon | IG | Story | Behind-the-scenes: "Final polish on indicator #4..." | Poll: "Ready?" | Hype |
 | Dec 24 | Tue | X | Single | "The repainting problem cost me $X before I understood it. Here's the fix." | Follow for reveal | Educate |
 | Dec 24 | Tue | IG | Carousel | "The 5 Market Phases Every Trader Must Know" (TD→IGN→WRN→CAP→BDN) | Save this | Educate |
@@ -669,7 +669,7 @@ Start learning → education.signalpilot.io
 | Jan 14 | Tue | IG | Carousel | "82 free lessons. No purchase required. Here's what you'll learn:" | Education link | T1 |
 | Jan 15 | Wed | X | Single | "Free TradingView account works. Here's the exact setup." | Setup guide | T2 |
 | Jan 16 | Thu | IG | Reel | "Your first trade with Pentarch" walkthrough (15-30 sec) | Full guide → bio | T2 |
-| Jan 17 | Fri | X | Thread | "Why retail loses: They buy when institutions distribute. Here's the tell." | Blog link | T1 |
+| Jan 17 | Fri | X | Thread | "The distribution trap: Buying when institutions are selling. Here's the tell." | Blog link | T1 |
 | Jan 18 | Sat | IG | Static | "2 weeks live. Here's what we've learned from early users." | — | T3 |
 | Jan 19 | Sun | IG | Carousel | "Plutus Flow: See hidden buying pressure before price moves" | Try free | T2 |
 
@@ -1103,9 +1103,9 @@ Start free → education.signalpilot.io
 ### X/Twitter — Thread
 
 ```
-Most traders buy tops and sell bottoms.
+Most traders enter late and exit early.
 
-Not because they're dumb. Because they're reading the market wrong.
+Not a discipline problem. A visibility problem.
 
 Here's the framework that changed everything for me: ↓
 
@@ -1124,7 +1124,7 @@ Buying frenzy peaks. Headlines scream. Retail finally goes all-in.
 Smart money exits into retail buying. Price holds up but momentum dies.
 
 5. DECLINE (BDN)
-Supply overwhelms demand. Retail panics. Smart money waits for step 1.
+Supply overwhelms demand. Late entries exit at a loss. Smart money waits for step 1.
 
 The trap?
 
@@ -1167,7 +1167,7 @@ Text overlay: "Final polish on indicator #4..."
 ```
 The repainting problem cost me months of false confidence.
 
-I'd backtest an indicator. Perfect signals. Every top, every bottom.
+I'd backtest an indicator. Perfect signals. Every reversal, every move.
 
 Then I'd trade it live. Signals would appear... then vanish. Or move to different candles.
 
@@ -1220,42 +1220,42 @@ PHASE 1: ACCUMULATION (TD)
 ━━━━━━━━━━━━━━━━━━━━━
 Smart money builds positions quietly.
 Price looks "boring" or "dead."
-Retail: "Nothing's happening here."
+Common perception: "Nothing's happening here."
 
 Slide 3:
 PHASE 2: MARKUP (IGN)
 ━━━━━━━━━━━━━━━━━━━━━
 Demand overwhelms supply.
 Trend begins.
-Retail: "Maybe I should watch this."
+Common perception: "Maybe I should watch this."
 
 Slide 4:
 PHASE 3: CLIMAX (CAP)
 ━━━━━━━━━━━━━━━━━━━━━
 Buying frenzy peaks.
 Headlines everywhere.
-Retail: "I'm going all in!"
-← THIS IS THE TRAP
+Common perception: "Time to go all in."
+← THE TRAP
 
 Slide 5:
 PHASE 4: DISTRIBUTION (WRN)
 ━━━━━━━━━━━━━━━━━━━━━
-Smart money sells to retail.
+Smart money exits into strength.
 Price stalls but doesn't crash yet.
-Retail: "Just a pullback, I'll hold."
+Common perception: "Just a pullback."
 
 Slide 6:
 PHASE 5: DECLINE (BDN)
 ━━━━━━━━━━━━━━━━━━━━━
 Supply overwhelms demand.
 Price falls.
-Retail: "Why is this happening to me?"
+Late entries exit at a loss.
 
 Slide 7:
 THE INSIGHT:
 ━━━━━━━━━━━━━━━━━━━━━
-Retail enters at climax (feels safe).
-Smart money enters at accumulation (feels scary).
+Late entries happen at climax (feels safe).
+Early entries happen at accumulation (feels scary).
 
 Same chart. Opposite timing.
 
@@ -1555,7 +1555,7 @@ Dec 30. Link in bio.
 ```
 The Repainting Problem: How most TradingView indicators lie to you.
 
-That indicator with the perfect backtest? The one that nails every top and bottom?
+That indicator with the perfect backtest? The one that catches every reversal?
 
 It's lying. Here's how: ↓
 
@@ -1563,7 +1563,7 @@ What is repainting?
 
 An indicator "repaints" when it changes past signals after new data arrives.
 
-Yesterday's "perfect buy signal" at the exact bottom?
+Yesterday's "perfect buy signal" at the exact low?
 
 It wasn't there yesterday. The indicator moved it after the fact.
 
@@ -2952,7 +2952,7 @@ Full walkthrough → link in bio.
 ### X/Twitter — Thread (Smart Money)
 
 ```
-Why retail loses: They buy when institutions distribute.
+The distribution trap: Buying when institutions are selling.
 
 Here's the tell most traders miss: ↓
 
@@ -2962,7 +2962,7 @@ Stock rallies 40% in 3 weeks.
 
 Headlines: "Breakout! New highs!"
 
-Retail: "Finally time to buy!"
+Common reaction: "Finally time to buy."
 
 What's actually happening:
 
@@ -2987,7 +2987,7 @@ Institutions finish selling.
 
 No more buying pressure to absorb.
 
-Price falls. Retail holds. Then panics. Then sells at the bottom.
+Price falls. Late entries get trapped. The cycle resets.
 
 The cycle repeats.
 
