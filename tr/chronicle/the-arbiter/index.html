@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="tr" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Hakem: Harmonic Oscillator — Signal Pilot</title>
+  <meta name="description" content="Harmonic Oscillator dört osilatörü tek bir karara birleştirir, ne zaman vuracağınızı onaylar. Elit Yedili'nin yedincisi ve sonuncusu.">
+  <link rel="canonical" href="https://www.signalpilot.io/tr/chronicle/the-arbiter">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#05070d">
+  <meta property="og:site_name" content="Signal Pilot">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Hakem: Harmonic Oscillator">
+  <meta property="og:description" content="Dört ses. Tek karar. Tetiğin ne zaman çekileceğine ben karar veririm.">
+  <meta property="og:url" content="https://www.signalpilot.io/tr/chronicle/the-arbiter">
+  <meta property="og:image" content="https://www.signalpilot.io/preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Gugi&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <style>
+    :root{color-scheme:dark;--bg:#05070d;--bg-soft:#0c111c;--bg-elev:#101626;--text:#ecf1ff;--text-body:#d0d8eb;--muted:#b7c2d9;--muted-2:#8ea0bf;--brand:#5b8aff;--brand-2:#7b9bff;--accent:#76ddff;--gold:#f4d03f;--good:#3ed598;--warn:#f9a23c;--bad:#ff6b6b;--border:rgba(255,255,255,.12);--radius:16px}
+    html[data-theme="light"]{color-scheme:light;--bg:#ffffff;--bg-soft:#f8fafc;--bg-elev:#f1f5f9;--text:#0f172a;--text-body:#334155;--muted:#475569;--muted-2:#64748b;--brand:#3b82f6;--brand-2:#2563eb;--accent:#0284c7;--gold:#d97706;--good:#10b981;--warn:#f97316;--bad:#ef4444;--border:rgba(30,41,59,.15)}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--text-body);line-height:1.75;font-size:1.1rem;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+    body::before{content:'';position:fixed;top:-50%;left:-50%;right:-50%;bottom:-50%;width:200%;height:200%;background:radial-gradient(1200px 700px at 20% 30%,rgba(91,138,255,.08),transparent 60%),radial-gradient(1000px 600px at 80% 70%,rgba(118,221,255,.06),transparent 62%);animation:aurora 40s ease-in-out infinite alternate;z-index:0;pointer-events:none;opacity:0.5}
+    @keyframes aurora{0%{transform:translate3d(-5%,-5%,0) scale(1)}100%{transform:translate3d(5%,3%,0) scale(1.02)}}
+    header,article,footer{position:relative;z-index:1}
+    header{position:sticky;top:0;z-index:100;backdrop-filter:blur(14px);background:rgba(5,7,13,0.85);border-bottom:1px solid rgba(255,255,255,0.08);height:64px}
+    header .container{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;height:100%}
+    .brand{color:var(--text);text-decoration:none;font-family:'Gugi',system-ui,sans-serif;text-transform:uppercase;letter-spacing:0.1em;font-size:1.3rem}
+    .header-nav{display:flex;align-items:center;gap:1.5rem}
+    .header-nav a{font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted);text-decoration:none;font-size:0.95rem;font-weight:500;transition:color 0.2s}
+    .header-nav a:hover{color:var(--text)}
+    .btn{background:var(--bg-soft);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.7rem;border-radius:6px;cursor:pointer;font-size:1rem;transition:all 0.2s}
+    .btn:hover{background:var(--bg-elev)}
+    .progress-bar{position:fixed;top:64px;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--gold),var(--warn));z-index:99;transition:width 0.1s}
+    .article-header{max-width:720px;margin:0 auto;padding:4rem 1.5rem 3rem;text-align:center}
+    .back-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;color:var(--muted);text-decoration:none;margin-bottom:2rem;transition:color 0.2s}
+    .back-link:hover{color:var(--accent)}
+    .article-category{display:inline-block;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.15em;color:var(--gold);margin-bottom:1rem}
+    h1{font-family:'EB Garamond',Georgia,serif;font-size:clamp(2.5rem,5vw,3.5rem);font-weight:500;font-style:italic;line-height:1.15;color:var(--text);margin-bottom:1.5rem}
+    .article-subtitle{font-size:1.35rem;color:var(--muted);font-style:italic;line-height:1.5;max-width:600px;margin:0 auto 2rem}
+    .article-meta{display:flex;align-items:center;justify-content:center;gap:1.5rem;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;color:var(--muted-2)}
+    .article-content{max-width:720px;margin:0 auto;padding:0 1.5rem 4rem}
+    .article-content p{margin-bottom:1.75rem}
+    .article-content h2{font-family:'EB Garamond',Georgia,serif;font-size:1.75rem;font-weight:600;color:var(--text);margin:3rem 0 1.5rem;line-height:1.3}
+    .drop-cap::first-letter{float:left;font-size:4.5rem;line-height:0.8;padding-right:0.15em;padding-top:0.1em;color:var(--gold);font-weight:500}
+    .divider{text-align:center;margin:3rem 0;color:var(--muted-2);font-size:1.5rem;letter-spacing:0.5em}
+    .verdict-demo{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin:2rem 0;text-align:center}
+    .verdict-demo h4{font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:1.5rem}
+    .stars-row{display:flex;justify-content:center;gap:1rem;margin-bottom:1rem}
+    .star{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+    .star.bull{background:rgba(62,213,152,.2);border:2px solid var(--good)}
+    .star.bear{background:rgba(255,107,107,.2);border:2px solid var(--bad)}
+    .star.neutral{background:rgba(255,255,255,.1);border:2px solid var(--muted)}
+    .verdict-label{font-family:'Space Grotesk',system-ui,sans-serif;font-size:1.1rem;font-weight:600;margin-top:1rem}
+    .verdict-label.strong{color:var(--good)}
+    .verdict-label.weak{color:var(--warn)}
+    .verdict-label.wait{color:var(--muted)}
+    .pull-quote{margin:3rem 0;padding:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
+    .pull-quote p{font-family:'EB Garamond',Georgia,serif;font-size:1.5rem;font-style:italic;color:var(--text);line-height:1.5;margin-bottom:0}
+    .concept-card{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 2rem;margin:1.5rem 0}
+    .concept-card h4{font-family:'Space Grotesk',system-ui,sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.5rem}
+    .concept-card p{margin-bottom:0;font-size:1.1rem}
+    strong{color:var(--text);font-weight:600}
+    em{font-style:italic}
+    .article-hero{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
+    .article-hero-image{width:100%;aspect-ratio:16/9;border-radius:var(--radius);background:linear-gradient(135deg,rgba(148,103,255,.1),rgba(244,208,63,.08));border:2px dashed rgba(148,103,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;text-align:center;gap:0.5rem}
+    .article-hero-image .icon{font-size:3rem;opacity:0.6}
+    .hierarchy-visual{background:linear-gradient(135deg,rgba(244,208,63,.05),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin:2rem 0;text-align:center;font-family:'Space Grotesk',system-ui,sans-serif}
+    .hierarchy-visual .level{padding:0.75rem;margin:0.5rem 0;border-radius:8px}
+    .hierarchy-visual .level.arbiter{background:rgba(244,208,63,.15);border:1px solid var(--gold);color:var(--gold);font-weight:700}
+    .hierarchy-visual .level.other{background:rgba(255,255,255,.03);color:var(--muted)}
+    .hierarchy-visual .arrow{color:var(--muted-2);font-size:1.5rem}
+    .share-section{max-width:720px;margin:0 auto;padding:2rem 1.5rem 4rem;border-top:1px solid var(--border)}
+    .share-section h4{font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:1rem}
+    .share-buttons{display:flex;gap:1rem}
+    .share-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border:1px solid var(--border);border-radius:8px;background:var(--bg-soft);color:var(--muted);text-decoration:none;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;font-weight:500;transition:all 0.2s;cursor:pointer}
+    .share-btn:hover{background:var(--bg-elev);color:var(--text);border-color:var(--brand)}
+    .related-section{background:var(--bg-soft);border-top:1px solid var(--border);padding:4rem 1.5rem}
+    .related-section .container{max-width:1000px;margin:0 auto}
+    .related-section h3{font-family:'Space Grotesk',system-ui,sans-serif;font-size:1rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:2rem;text-align:center}
+    .related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+    .related-card{background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-decoration:none;transition:all 0.3s}
+    .related-card:hover{transform:translateY(-4px);border-color:var(--brand)}
+    .related-card h4{font-family:'EB Garamond',Georgia,serif;font-size:1.25rem;font-weight:500;color:var(--text);margin-bottom:0.5rem}
+    .related-card p{font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;color:var(--muted);line-height:1.5}
+    footer{padding:3rem 0;border-top:1px solid var(--border);text-align:center;font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted-2);font-size:0.9rem}
+    footer a{color:var(--brand);text-decoration:none}
+    footer a:hover{text-decoration:underline}
+    @media(max-width:768px){body{font-size:1.125rem}h1{font-size:2rem}.article-header{padding:3rem 1.25rem 2rem}.article-content{padding:0 1.25rem 3rem}.drop-cap::first-letter{font-size:3.5rem}.header-nav{display:none}.star{width:32px;height:32px;font-size:1rem}}
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+  <header>
+    <div class="container">
+      <a href="/tr/" class="brand">Signal Pilot</a>
+      <div class="header-nav">
+        <a href="/tr/chronicle/">← Tüm Kronikler</a>
+        <a href="/tr/#pricing">Erişim Al</a>
+      </div>
+      <button id="themeToggle" class="btn" type="button" aria-label="Temayı değiştir">
+        <span id="theme-icon">☀️</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="article-header">
+    <a href="/tr/chronicle/" class="back-link">← Kroniklere Dön</a>
+    <span class="article-category">Yedinin Yedincisi</span>
+    <h1>Hakem: Harmonic Oscillator</h1>
+    <p class="article-subtitle">"Dört ses. Tek karar. Tetiğin ne zaman çekileceğine ben karar veririm."</p>
+    <div class="article-meta">
+      <span>Signal Pilot Labs</span>
+      <span>·</span>
+      <span>24 Aralık 2025</span>
+      <span>·</span>
+      <span>8 dk okuma</span>
+    </div>
+  </div>
+
+  <div class="article-hero">
+    <div class="article-hero-image">
+      <span class="icon">★</span>
+      <span>Hero görsel: Hakem</span>
+      <span style="font-size:0.75rem;opacity:0.7">arbiter-harmonic-oscillator.png</span>
+    </div>
+  </div>
+
+  <article class="article-content">
+    <p class="drop-cap">Her gösterge bir sinyal üretebilir. Ama uzlaşı olmayan sinyaller gürültüdür—bin kesikle hesapları boşaltan sahte girişler. Hakem, sahte sinyallerin tiranlığını sona erdirmek için yaratıldı.</p>
+
+    <p>İşlem dünyasında, en tehlikeli an yanıldığınız zaman değildir. Yön hakkında haklı ama zamanlama hakkında yanlış olduğunuz zamandır. Kurulumu görürsünüz, işlemi alırsınız ve piyasa sizi durduracak kadar size karşı hareket eder—tam olarak gideceğini düşündüğünüz yere devam etmeden önce.</p>
+
+    <p>Hakem bu kaderi önlemek için var.</p>
+
+    <div class="divider">✧ ✧ ✧</div>
+
+    <h2>Dört Ses, Tek Konsey</h2>
+
+    <p>Harmonic Oscillator içinde, dört kadim osilatör sürekli müzakerede toplanır. Her biri momentumu farklı bir lens üzerinden ölçer. Her biri oy kullanır:</p>
+
+    <div class="concept-card">
+      <h4>Boğa Oyu</h4>
+      <p>Momentum uzunları destekliyor. Osilatör yukarı yönlü baskı, yükseliş sapması veya dönmeye hazır aşırı satım koşulları görüyor. Daha yüksek fiyatlar için bir oy.</p>
+    </div>
+
+    <div class="concept-card">
+      <h4>Ayı Oyu</h4>
+      <p>Momentum kısaları destekliyor. Osilatör aşağı yönlü baskı, düşüş sapması veya dönmeye hazır aşırı alım koşulları görüyor. Daha düşük fiyatlar için bir oy.</p>
+    </div>
+
+    <div class="concept-card">
+      <h4>Nötr Oy</h4>
+      <p>Çekimserlik. Koşullar belirsiz—osilatör ne yükseliş ne de düşüş önyargısını onaylıyor. Şüphe durumunda, Hakem sabır öğütler.</p>
+    </div>
+
+    <p>Güç kombinasyondan gelir. Herhangi bir osilatör yanlış sinyaller verebilir. Ama dört bağımsız momentum hesaplaması hemfikir olduğunda? Bu uzlaşı. Bu kararlılık. Bu Hakem'in konuştuğu an.</p>
+
+    <div class="verdict-demo">
+      <h4>Kararı Okuma</h4>
+      <div class="stars-row">
+        <div class="star bull">★</div>
+        <div class="star bull">★</div>
+        <div class="star bull">★</div>
+        <div class="star bull">★</div>
+      </div>
+      <div class="verdict-label strong">DÖRT YILDIZ BOĞA — Maksimum Kararlılık</div>
+
+      <div class="stars-row" style="margin-top:2rem">
+        <div class="star bull">★</div>
+        <div class="star bull">★</div>
+        <div class="star bear">★</div>
+        <div class="star neutral">★</div>
+      </div>
+      <div class="verdict-label wait">BÖLÜNMÜŞ KARAR — Kenarda Dur</div>
+    </div>
+
+    <h2>Yıldız Sistemi</h2>
+
+    <p>Hakem yıldızlarla iletişim kurar—karmaşıklığı kesen basit bir görsel dil:</p>
+
+    <p><strong>Dört Yıldız (Aynı Yön):</strong> Maksimum kararlılık. Dört osilatör hemfikir. Bu, Hakem'in verebileceği en temiz sinyal. Şimdi vur.</p>
+
+    <p><strong>Üç Yıldız:</strong> Güçlü kararlılık. Üç osilatör hemfikir, biri çekimser veya karşı. Hala geçerli bir sinyal, ama biraz azaltılmış kararlılık.</p>
+
+    <p><strong>İki Yıldız veya Bölünmüş:</strong> Zayıf veya çelişkili. Konsey bölünmüş. İki boğa, iki ayı? Kenarda dur. Başkaları tahmin etsin. Hakem itidal öğütler.</p>
+
+    <p>Bu basitlik kasıtlıdır. Piyasa aksiyonunun sıcaklığında, dört ayrı osilatörü analiz etmeye zamanınız yok. Hakem analizi yapar ve anında harekete geçebileceğiniz bir karar sunar.</p>
+
+    <div class="pull-quote">
+      <p>"Sabırlı pilot hayatta kalır. Dürtüsel pilot bağış yapar."</p>
+    </div>
+
+    <h2>Son Kontrol Noktası</h2>
+
+    <p>Elit Yedili hiyerarşisinde, Hakem en son konuşur. Bu pozisyon zayıflık değil—güçtür.</p>
+
+    <div class="hierarchy-visual">
+      <div class="level other">PENTARCH → VOLUME ORACLE / JANUS ATLAS</div>
+      <div class="arrow">↓</div>
+      <div class="level other">PLUTUS FLOW → OMNIDECK</div>
+      <div class="arrow">↓</div>
+      <div class="level other">AUGURY GRID</div>
+      <div class="arrow">↓</div>
+      <div class="level arbiter">HARMONIC OSCILLATOR — Son Onay</div>
+    </div>
+
+    <p>Hükümdar döngüyü okur. Peygamber kurumsal niyeti duyar. Kartograf araziyi haritalandırır. Terazi baskıyı tartar. Komutan sistemleri birleştirir. Nöbetçi fırsatları belirler.</p>
+
+    <p>Ama sermaye dağıtılmadan önce, Hakem konuşur. Momentum uyumlu mu? Zamanlama optimal mi? Bu vurmak için doğru an mı?</p>
+
+    <p>Bir kurulum her diğer seviyede mükemmel olabilir ve yine de momentum uyumlu değilse başarısız olabilir. Hakem sizi bu kaderden korur—zamanlama dışında her şey hakkında haklı olmanın hayal kırıklığından.</p>
+
+    <h2>Neden Dört Osilatör?</h2>
+
+    <p>Tek osilatör güvenilmez. Fiyat trend yapmaya devam ederken aşırı alım veya aşırı satım bölgesinde uzun süre kalabilir. Konsolidasyon sırasında zikzak çizebilir. Yanlış dönüş sinyalleri verebilir.</p>
+
+    <p>İki osilatör daha iyi, ama anlaşmazlık ikili—ya hemfikir ya da değiller.</p>
+
+    <p>Üç osilatör çoğunluk yaratır, ama 2-1 bölünmeler yaygın ve yorumlaması zor.</p>
+
+    <p>Dört osilatör mükemmel konseyi yaratır. Tam anlaşma (4-0) nadir ve güçlü. Güçlü uzlaşı (3-1) aksiyona geçirilebilir. Bundan azı beklemek için net bir sinyal.</p>
+
+    <p>Belirli osilatörler tamamlayıcı özellikleri için seçildi. Her biri momentumu farklı ölçer. Dördü de aynı şeyi gördüğünde, tesadüf değil—gerçek.</p>
+
+    <h2>Kısıtlama Sanatı</h2>
+
+    <p>Çoğu işlem eğitimi ne zaman gireceğinize odaklanır. Hakem daha zor bir şey öğretir: ne zaman girmeyeceğinizi.</p>
+
+    <p>Bölünmüş karar—iki boğa, iki ayı—Hakem'in en önemli sinyalidir. Diyor ki: "Kurulum iyi görünebilir. Diğer Elit Yedili uyumlu olabilir. Ama momentum belirsiz. Bekle."</p>
+
+    <p>Bu kısıtlama rahatsız edici. İşlemi görüyorsunuz. Almak istiyorsunuz. Ama Hakem sabır öğütlüyor ve sabır sermayeyi koruyor.</p>
+
+    <p>Almadığınız işlemler, aldıklarınız kadar önemli. Kaçınılan her sahte sinyal, gerçek fırsatlar için korunan sermaye.</p>
+
+    <h2>Yedinci Ders</h2>
+
+    <p>Elit Yedili'nin her biri bir ders taşır. Hakem'in dersi sistemin son bilgeliğidir:</p>
+
+    <div class="pull-quote">
+      <p>"Sabırlı pilot hayatta kalır. Dürtüsel pilot bağış yapar."</p>
+    </div>
+
+    <p>Piyasalar sabrı ödüllendirir. Dürtüselliği cezalandırırlar. Bileşik kazanacak kadar uzun süre hayatta kalan traderlar, yüksek kararlılıkta kurulumları bekleyen ve şüpheli olanları geçiren traderlar.</p>
+
+    <p>Hakem bu disiplini uygular. Sadece iyi işlemleri onaylamaz—kötüleri engeller. Harekete geçme dürtünüzü kalite için filtreleyen bir sisteme dönüştürür.</p>
+
+    <p>Hakem dört yıldız uyumlu gösterdiğinde, güvenle işlem yapın. Karar bölündüğünde, başka bir şey yapın. Okuyun. Yürüyün. Bekleyin. Bir sonraki dört yıldız kurulumu gelecek.</p>
+
+    <p>Ve geldiğinde, onu almak için sermayeniz olacak—çünkü Hakem sizi tuzakların dışında tuttu.</p>
+
+    <p><em>Dört ses. Tek karar. Son onay.</em></p>
+  </article>
+
+  <div class="share-section">
+    <h4>Bu Makaleyi Paylaş</h4>
+    <div class="share-buttons">
+      <a href="https://twitter.com/intent/tweet?text=Hakem%3A%20Harmonic%20Oscillator&url=https://signalpilot.io/tr/chronicle/the-arbiter" target="_blank" rel="noopener" class="share-btn">𝕏 Post</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://signalpilot.io/tr/chronicle/the-arbiter" target="_blank" rel="noopener" class="share-btn">LinkedIn</a>
+      <button onclick="navigator.clipboard.writeText('https://signalpilot.io/tr/chronicle/the-arbiter')" class="share-btn">Bağlantıyı Kopyala</button>
+    </div>
+  </div>
+
+  <section class="related-section">
+    <div class="container">
+      <h3>Okumaya Devam Et</h3>
+      <div class="related-grid">
+        <a href="/tr/chronicle/the-watchman" class="related-card">
+          <h4>Nöbetçi: Augury Grid</h4>
+          <p>Siz bir grafiği izlerken, ben hepsini izliyorum.</p>
+        </a>
+        <a href="/tr/chronicle/the-hierarchy-of-signals" class="related-card">
+          <h4>Sinyallerin Hiyerarşisi</h4>
+          <p>Elit Yedili birleşik bir sistem olarak nasıl çalışır.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Signal Pilot Labs. Tüm hakları saklıdır. | <a href="/tr/">Ana Sayfa</a> · <a href="/tr/chronicle/">Tüm Kronikler</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle=document.getElementById('themeToggle'),themeIcon=document.getElementById('theme-icon'),html=document.documentElement,savedTheme=localStorage.getItem('theme')||'dark';html.setAttribute('data-theme',savedTheme);themeIcon.textContent=savedTheme==='dark'?'☀️':'🌙';themeToggle.addEventListener('click',()=>{const currentTheme=html.getAttribute('data-theme'),newTheme=currentTheme==='dark'?'light':'dark';html.setAttribute('data-theme',newTheme);localStorage.setItem('theme',newTheme);themeIcon.textContent=newTheme==='dark'?'☀️':'🌙'});const progressBar=document.getElementById('progressBar');window.addEventListener('scroll',()=>{const scrollTop=window.scrollY,docHeight=document.documentElement.scrollHeight-window.innerHeight,progress=(scrollTop/docHeight)*100;progressBar.style.width=progress+'%'});
+  </script>
+</body>
+</html>
