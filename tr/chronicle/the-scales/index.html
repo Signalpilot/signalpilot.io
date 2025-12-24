@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="tr" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Terazi: Plutus Flow — Signal Pilot</title>
+  <meta name="description" content="Plutus Flow, fiyatın altındaki gerçeği ortaya çıkarmak için alım baskısını satış baskısına karşı tartar. Kümülatif delta ve sapma sinyallerini anlama.">
+  <link rel="canonical" href="https://www.signalpilot.io/tr/chronicle/the-scales">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#05070d">
+  <meta property="og:site_name" content="Signal Pilot">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Terazi: Plutus Flow">
+  <meta property="og:description" content="Görünmezi tartıyorum. Baskı yalan söylemez.">
+  <meta property="og:url" content="https://www.signalpilot.io/tr/chronicle/the-scales">
+  <meta property="og:image" content="https://www.signalpilot.io/preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Gugi&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <style>
+    :root{color-scheme:dark;--bg:#05070d;--bg-soft:#0c111c;--bg-elev:#101626;--text:#ecf1ff;--text-body:#d0d8eb;--muted:#b7c2d9;--muted-2:#8ea0bf;--brand:#5b8aff;--brand-2:#7b9bff;--accent:#76ddff;--gold:#f4d03f;--good:#3ed598;--warn:#f9a23c;--bad:#ff6b6b;--border:rgba(255,255,255,.12);--radius:16px}
+    html[data-theme="light"]{color-scheme:light;--bg:#ffffff;--bg-soft:#f8fafc;--bg-elev:#f1f5f9;--text:#0f172a;--text-body:#334155;--muted:#475569;--muted-2:#64748b;--brand:#3b82f6;--brand-2:#2563eb;--accent:#0284c7;--gold:#d97706;--good:#10b981;--warn:#f97316;--bad:#ef4444;--border:rgba(30,41,59,.15)}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--text-body);line-height:1.75;font-size:1.1rem;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+    body::before{content:'';position:fixed;top:-50%;left:-50%;right:-50%;bottom:-50%;width:200%;height:200%;background:radial-gradient(1200px 700px at 20% 30%,rgba(91,138,255,.08),transparent 60%),radial-gradient(1000px 600px at 80% 70%,rgba(118,221,255,.06),transparent 62%);animation:aurora 40s ease-in-out infinite alternate;z-index:0;pointer-events:none;opacity:0.5}
+    @keyframes aurora{0%{transform:translate3d(-5%,-5%,0) scale(1)}100%{transform:translate3d(5%,3%,0) scale(1.02)}}
+    header,article,footer{position:relative;z-index:1}
+    header{position:sticky;top:0;z-index:100;backdrop-filter:blur(14px);background:rgba(5,7,13,0.85);border-bottom:1px solid rgba(255,255,255,0.08);height:64px}
+    header .container{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;height:100%}
+    .brand{color:var(--text);text-decoration:none;font-family:'Gugi',system-ui,sans-serif;text-transform:uppercase;letter-spacing:0.1em;font-size:1.3rem}
+    .header-nav{display:flex;align-items:center;gap:1.5rem}
+    .header-nav a{font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted);text-decoration:none;font-size:0.95rem;font-weight:500;transition:color 0.2s}
+    .header-nav a:hover{color:var(--text)}
+    .btn{background:var(--bg-soft);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.7rem;border-radius:6px;cursor:pointer;font-size:1rem;transition:all 0.2s}
+    .btn:hover{background:var(--bg-elev)}
+    .progress-bar{position:fixed;top:64px;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--good),var(--bad));z-index:99;transition:width 0.1s}
+    .article-header{max-width:720px;margin:0 auto;padding:4rem 1.5rem 3rem;text-align:center}
+    .back-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;color:var(--muted);text-decoration:none;margin-bottom:2rem;transition:color 0.2s}
+    .back-link:hover{color:var(--accent)}
+    .article-category{display:inline-block;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.15em;color:var(--good);margin-bottom:1rem}
+    h1{font-family:'EB Garamond',Georgia,serif;font-size:clamp(2.5rem,5vw,3.5rem);font-weight:500;font-style:italic;line-height:1.15;color:var(--text);margin-bottom:1.5rem}
+    .article-subtitle{font-size:1.35rem;color:var(--muted);font-style:italic;line-height:1.5;max-width:600px;margin:0 auto 2rem}
+    .article-meta{display:flex;align-items:center;justify-content:center;gap:1.5rem;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;color:var(--muted-2)}
+    .article-content{max-width:720px;margin:0 auto;padding:0 1.5rem 4rem}
+    .article-content p{margin-bottom:1.75rem}
+    .article-content h2{font-family:'EB Garamond',Georgia,serif;font-size:1.75rem;font-weight:600;color:var(--text);margin:3rem 0 1.5rem;line-height:1.3}
+    .drop-cap::first-letter{float:left;font-size:4.5rem;line-height:0.8;padding-right:0.15em;padding-top:0.1em;color:var(--good);font-weight:500}
+    .divider{text-align:center;margin:3rem 0;color:var(--muted-2);font-size:1.5rem;letter-spacing:0.5em}
+    .ribbon-demo{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin:2rem 0;text-align:center}
+    .ribbon-demo h4{font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:1.5rem}
+    .ribbon{height:12px;border-radius:6px;margin:1rem 0;position:relative}
+    .ribbon.green{background:linear-gradient(90deg,var(--good),rgba(62,213,152,.6))}
+    .ribbon.red{background:linear-gradient(90deg,rgba(255,107,107,.6),var(--bad))}
+    .ribbon .dot{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:8px;height:8px;background:#fff;border-radius:50%}
+    .ribbon-label{font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;color:var(--muted);margin-top:0.5rem}
+    .pull-quote{margin:3rem 0;padding:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
+    .pull-quote p{font-family:'EB Garamond',Georgia,serif;font-size:1.5rem;font-style:italic;color:var(--text);line-height:1.5;margin-bottom:0}
+    .concept-card{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 2rem;margin:1.5rem 0}
+    .concept-card h4{font-family:'Space Grotesk',system-ui,sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.5rem}
+    .concept-card p{margin-bottom:0;font-size:1.1rem}
+    strong{color:var(--text);font-weight:600}
+    em{font-style:italic}
+    .article-hero{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
+    .article-hero-image{width:100%;aspect-ratio:16/9;border-radius:var(--radius);background:linear-gradient(135deg,rgba(148,103,255,.1),rgba(244,208,63,.08));border:2px dashed rgba(148,103,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;text-align:center;gap:0.5rem}
+    .article-hero-image .icon{font-size:3rem;opacity:0.6}
+    .share-section{max-width:720px;margin:0 auto;padding:2rem 1.5rem 4rem;border-top:1px solid var(--border)}
+    .share-section h4{font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:1rem}
+    .share-buttons{display:flex;gap:1rem}
+    .share-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border:1px solid var(--border);border-radius:8px;background:var(--bg-soft);color:var(--muted);text-decoration:none;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;font-weight:500;transition:all 0.2s;cursor:pointer}
+    .share-btn:hover{background:var(--bg-elev);color:var(--text);border-color:var(--brand)}
+    .related-section{background:var(--bg-soft);border-top:1px solid var(--border);padding:4rem 1.5rem}
+    .related-section .container{max-width:1000px;margin:0 auto}
+    .related-section h3{font-family:'Space Grotesk',system-ui,sans-serif;font-size:1rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:2rem;text-align:center}
+    .related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+    .related-card{background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-decoration:none;transition:all 0.3s}
+    .related-card:hover{transform:translateY(-4px);border-color:var(--brand)}
+    .related-card h4{font-family:'EB Garamond',Georgia,serif;font-size:1.25rem;font-weight:500;color:var(--text);margin-bottom:0.5rem}
+    .related-card p{font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;color:var(--muted);line-height:1.5}
+    footer{padding:3rem 0;border-top:1px solid var(--border);text-align:center;font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted-2);font-size:0.9rem}
+    footer a{color:var(--brand);text-decoration:none}
+    footer a:hover{text-decoration:underline}
+    @media(max-width:768px){body{font-size:1.125rem}h1{font-size:2rem}.article-header{padding:3rem 1.25rem 2rem}.article-content{padding:0 1.25rem 3rem}.drop-cap::first-letter{font-size:3.5rem}.header-nav{display:none}}
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+  <header>
+    <div class="container">
+      <a href="/tr/" class="brand">Signal Pilot</a>
+      <div class="header-nav">
+        <a href="/tr/chronicle/">← Tüm Kronikler</a>
+        <a href="/tr/#pricing">Erişim Al</a>
+      </div>
+      <button id="themeToggle" class="btn" type="button" aria-label="Temayı değiştir">
+        <span id="theme-icon">☀️</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="article-header">
+    <a href="/tr/chronicle/" class="back-link">← Kroniklere Dön</a>
+    <span class="article-category">Yedinin Dördüncüsü</span>
+    <h1>Terazi: Plutus Flow</h1>
+    <p class="article-subtitle">"Görünmezi tartıyorum. Baskı yalan söylemez."</p>
+    <div class="article-meta">
+      <span>Signal Pilot Labs</span>
+      <span>·</span>
+      <span>24 Aralık 2025</span>
+      <span>·</span>
+      <span>7 dk okuma</span>
+    </div>
+  </div>
+
+  <div class="article-hero">
+    <div class="article-hero-image">
+      <span class="icon">⚖️</span>
+      <span>Hero görsel: Terazi</span>
+      <span style="font-size:0.75rem;opacity:0.7">scales-plutus-flow.png</span>
+    </div>
+  </div>
+
+  <article class="article-content">
+    <p class="drop-cap">Antik zenginlik tanrısının adını taşıyan Plutus Flow, tek başına fiyatın cevaplayamadığı soruyu yanıtlamak için var: <em>Bu hareket gerçek mi?</em></p>
+
+    <p>Fiyat hava üzerinde yükselebilir. Fiyat fısıltılarla düşebilir. Ama baskı—kümülatif, inkar edilemez alım ve satım gücü—yüzeyin altındaki gerçeği ortaya çıkarır.</p>
+
+    <p>Fiyat yeni zirveler yaparken Plutus Flow onaylamayı reddederse, Terazi konuşmuştur: <em>Bu taht kum üzerine kurulu.</em></p>
+
+    <div class="divider">✧ ✧ ✧</div>
+
+    <h2>Gerçeğin Şeridi</h2>
+
+    <p>Plutus Flow bir şerit olarak kendini gösterir—zaman içinde kümülatif alım ve satım baskısının görsel bir temsili. Renk hikayeyi anlatır:</p>
+
+    <div class="ribbon-demo">
+      <h4>Şeridi Okuma</h4>
+      <div class="ribbon green"><span class="dot"></span></div>
+      <div class="ribbon-label">YEŞİL — Talep arzı fethetir. Alıcılar savaş alanını kontrol ediyor.</div>
+      <div class="ribbon red"><span class="dot"></span></div>
+      <div class="ribbon-label">KIRMIZI — Arz talebi bastırır. Satıcılar hakimiyet kuruyor.</div>
+      <div class="ribbon green"><span class="dot"></span></div>
+      <div class="ribbon-label">BEYAZ NOKTA — Aşırı baskıya ulaşıldı. Dönüm noktası yaklaşıyor.</div>
+    </div>
+
+    <p>Merkez çizgi denge noktasıdır—alım ve satım baskısının dengelendiği nokta. Bu çizginin üstüne veya altına geçişler rejim değişikliklerini işaret eder. Şeridin kalınlığı ve yoğunluğu kararlılığı ortaya koyar.</p>
+
+    <h2>Baskı Neden Önemli</h2>
+
+    <p>Fiyatın %5 yükseldiği iki senaryo düşünün:</p>
+
+    <p><strong>Senaryo A:</strong> Fiyat yoğun alım baskısı altında yükselir. Plutus Flow şeridi koyu yeşil, fiyatla birlikte yukarı hareket ediyor. Alıcılar agresif. Her düşüş satın alınıyor. Bu gerçek talep.</p>
+
+    <p><strong>Senaryo B:</strong> Fiyat zayıf veya negatif baskı altında yükselir. Şerit ince, soluyor veya kırmızı. Fiyat tırmanıyor, ama arkasında kararlılık yok. Satıcılar sadece yok, yenilmedi. Bir katalizör ve tüm bu hareket tersine döner.</p>
+
+    <p>Fiyat tek başına her iki senaryoyu da "%5 yukarı" olarak gösterir. Plutus Flow size hangisinin gerçek, hangisinin tuzak olduğunu gösterir.</p>
+
+    <div class="pull-quote">
+      <p>"Fiyat aldatabilir. Baskı aldatamaz."</p>
+    </div>
+
+    <h2>Sapmanın Gücü</h2>
+
+    <p>Terazi'nin gerçek gücü <em>sapma</em>dadır—fiyat bir yöne hareket ederken baskının başka bir yöne hareket etmesi.</p>
+
+    <div class="concept-card">
+      <h4>Düşüş Sapması</h4>
+      <p>Fiyat yeni zirveler yapar, ama Plutus Flow daha düşük zirveler yapar. Piyasa güçlü görünür, ama alım baskısı zayıflıyor. Bu genellikle tepelerden önce gelir. Hareketin yakıtı bitiyor.</p>
+    </div>
+
+    <div class="concept-card">
+      <h4>Yükseliş Sapması</h4>
+      <p>Fiyat yeni dipler yapar, ama Plutus Flow daha yüksek dipler yapar. Piyasa zayıf görünür, ama satış baskısı tükeniyor. Bu genellikle diplerden önce gelir. Alıcılar sessizce biriktiriyor.</p>
+    </div>
+
+    <p>Sapmalar uyarılardır. Anında dönüşleri garanti etmezler—fiyat uzun süreler boyunca sapma gösterebilir. Ama size iç yapının değiştiğini söylerler. Görünür hareket görünmez baskı tarafından desteklenmiyor.</p>
+
+    <h2>Beyaz Noktalar: Aşırılar</h2>
+
+    <p>Plutus Flow şeridinde beyaz noktalar gördüğünüzde, dikkat edin. Bunlar aşırı baskı seviyelerini işaretler—alım veya satım gücünün sürdürülemez yoğunluğa ulaştığı anlar.</p>
+
+    <p>Aşırı alım baskısı genellikle kısa vadeli geri çekilmelerden önce gelir (alıcılar tükendi). Aşırı satış baskısı genellikle sıçramalardan önce gelir (satıcılar tükendi). Noktalar dönüşleri garanti etmez, ama bir tarafın elindeki her şeyi verdiği anları işaretler.</p>
+
+    <h2>Hiyerarşide Terazi</h2>
+
+    <p>Elit Yedili takımyıldızında, Plutus Flow 3. Seviye'de yer alır—Hükümdar (Pentarch) ve danışmanların (Volume Oracle ve Janus Atlas) altında, ama uygulama katmanlarının üstünde.</p>
+
+    <p>Rolü doğrulamadır. Pentarch bir döngü fazı işaret ettiğinde ve danışmanlar bağlam sağladığında, Terazi hareketin gerçek olup olmadığını tartar. Onaylayıcı yükseliş baskısıyla bir TD sinyali yüksek kararlılıktır. Sapma gösteren baskıyla bir TD sinyali şüphelidir.</p>
+
+    <p>Terazi yukarıdaki sinyalleri geçersiz kılabilir. Fiyat ve baskı anlaşmadığında, baskı kazanır. Bu hiyerarşi sizi sahte sinyallerden korur.</p>
+
+    <h2>Dördüncü Ders</h2>
+
+    <p>Elit Yedili'nin her biri bir ders taşır. Terazi'nin dersi piyasa aldatmacasının kalbine iner:</p>
+
+    <div class="pull-quote">
+      <p>"Fiyat aldatabilir. Baskı aldatamaz."</p>
+    </div>
+
+    <p>Piyasalar sahte hareketlerle dolu. Başarısız kırılmalar. Tersine dönen çöküşler. Güçlü görünen ama uyarı olmadan çöken trendler. Bunlar rastgele değil—baskı desteği olmayan hareketler.</p>
+
+    <p>Terazi size yüzeyin altına bakmayı öğretir. Fiyatın söylediklerini sorgulamayı. Sermaye taahhüt etmeden önce kararlılığı doğrulamayı.</p>
+
+    <p>Plutus Flow onayladığında, güvenle işlem yapın. Plutus Flow sapma gösterdiğinde, dikkatli işlem yapın—ya da hiç işlem yapmayın.</p>
+
+    <p><em>Baskı yalan söylemez.</em></p>
+  </article>
+
+  <div class="share-section">
+    <h4>Bu Makaleyi Paylaş</h4>
+    <div class="share-buttons">
+      <a href="https://twitter.com/intent/tweet?text=Terazi%3A%20Plutus%20Flow&url=https://signalpilot.io/tr/chronicle/the-scales" target="_blank" rel="noopener" class="share-btn">𝕏 Post</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://signalpilot.io/tr/chronicle/the-scales" target="_blank" rel="noopener" class="share-btn">LinkedIn</a>
+      <button onclick="navigator.clipboard.writeText('https://signalpilot.io/tr/chronicle/the-scales')" class="share-btn">Bağlantıyı Kopyala</button>
+    </div>
+  </div>
+
+  <section class="related-section">
+    <div class="container">
+      <h3>Okumaya Devam Et</h3>
+      <div class="related-grid">
+        <a href="/tr/chronicle/the-cartographer" class="related-card">
+          <h4>Kartograf: Janus Atlas</h4>
+          <p>Her savaş alanının bir arazisi var. Savaşların nerede yapılacağını haritalandırıyorum.</p>
+        </a>
+        <a href="/tr/chronicle/the-commander" class="related-card">
+          <h4>Komutan: OmniDeck</h4>
+          <p>On sistem. Tek vizyon. Tam netlik.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Signal Pilot Labs. Tüm hakları saklıdır. | <a href="/tr/">Ana Sayfa</a> · <a href="/tr/chronicle/">Tüm Kronikler</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle=document.getElementById('themeToggle'),themeIcon=document.getElementById('theme-icon'),html=document.documentElement,savedTheme=localStorage.getItem('theme')||'dark';html.setAttribute('data-theme',savedTheme);themeIcon.textContent=savedTheme==='dark'?'☀️':'🌙';themeToggle.addEventListener('click',()=>{const currentTheme=html.getAttribute('data-theme'),newTheme=currentTheme==='dark'?'light':'dark';html.setAttribute('data-theme',newTheme);localStorage.setItem('theme',newTheme);themeIcon.textContent=newTheme==='dark'?'☀️':'🌙'});const progressBar=document.getElementById('progressBar');window.addEventListener('scroll',()=>{const scrollTop=window.scrollY,docHeight=document.documentElement.scrollHeight-window.innerHeight,progress=(scrollTop/docHeight)*100;progressBar.style.width=progress+'%'});
+  </script>
+</body>
+</html>
