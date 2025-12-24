@@ -3,8 +3,10 @@
 ## Campaign Overview
 
 **Goal:** Build intrigue and brand identity before December 30 launch
-**Duration:** 10 posts over 10-14 days
+**Duration:** 10 posts over 5 days (2 posts per day)
 **Platforms:** Twitter/X, Instagram, TikTok
+**Start Date:** December 25, 2024
+**Launch Date:** December 30, 2024
 
 ---
 
@@ -763,9 +765,7 @@ Speaks last. Confirms the moment to strike, or counsels restraint.
 
 Together, they transform the void into a navigable cosmos.
 
-Tomorrow: The Pilot's Oath.
-
-December 30: The revelation.
+December 30: The Pilot's Oath. The revelation.
 
 —
 #trading #forex #crypto #stockmarket #technicalanalysis #tradingsystem #tradingview #hierarchy #signalpilot #eliteseven
@@ -807,6 +807,28 @@ Together, they transform chaos into clarity.
 
 ## Twitter/X
 
+**Option A: Single Tweet (shortened)**
+```
+THE PILOT'S OATH
+
+I will not chase.
+I will not guess.
+I will not hope.
+
+I will read the cycle.
+I will follow the institutions.
+I will wait for consensus.
+
+I am not a gambler. I am a Pilot.
+And The Seven are my stars.
+
+The Elite Seven are live.
+signalpilot.io
+```
+
+**Option B: Thread (full oath - RECOMMENDED)**
+
+**Tweet 1:**
 ```
 THE PILOT'S OATH
 
@@ -822,13 +844,18 @@ I will unify my systems.
 I will scan the horizon.
 I will wait for consensus.
 
+🧵
+```
+
+**Tweet 2 (reply):**
+```
 I am not a gambler. I am a Pilot.
 And The Seven are my stars.
 
-signalpilot.io — Live now.
-```
+The Elite Seven are live.
 
-**Characters:** 280
+signalpilot.io
+```
 
 ---
 
@@ -908,20 +935,20 @@ The Elite Seven are live. Link in bio.
 
 ---
 
-# POSTING SCHEDULE
+# POSTING SCHEDULE (2 Posts Per Day)
 
-| Day | Date | Content | Image |
-|-----|------|---------|-------|
-| 1 | Dec 20 | The Teaser | `elite-seven-council.png` |
-| 2 | Dec 21 | Pentarch | `sovereign-pentarch.png` |
-| 3 | Dec 22 | Volume Oracle | `prophet-volume-oracle.png` |
-| 4 | Dec 23 | Janus Atlas | `cartographer-janus-atlas.png` |
-| 5 | Dec 24 | Plutus Flow | `scales-plutus-flow.png` |
-| 6 | Dec 25 | OmniDeck | `commander-omnideck.png` |
-| 7 | Dec 26 | Augury Grid | `watchman-augury-grid.png` |
-| 8 | Dec 27 | Harmonic Oscillator | `arbiter-harmonic-oscillator.png` |
-| 9 | Dec 28 | The Hierarchy | `hierarchy-of-signals.png` |
-| 10 | Dec 30 | Launch / Pilot's Oath | `pilots-oath.png` |
+| Day | Date | Morning Post | Evening Post |
+|-----|------|--------------|--------------|
+| 1 | Dec 25 | **The Teaser** (`elite-seven-council.png`) | **Pentarch** (`sovereign-pentarch.png`) |
+| 2 | Dec 26 | **Volume Oracle** (`prophet-volume-oracle.png`) | **Janus Atlas** (`cartographer-janus-atlas.png`) |
+| 3 | Dec 27 | **Plutus Flow** (`scales-plutus-flow.png`) | **OmniDeck** (`commander-omnideck.png`) |
+| 4 | Dec 28 | **Augury Grid** (`watchman-augury-grid.png`) | **Harmonic Oscillator** (`arbiter-harmonic-oscillator.png`) |
+| 5 | Dec 29 | **The Hierarchy** (`hierarchy-of-signals.png`) | *(rest or bonus content)* |
+| **LAUNCH** | Dec 30 | **Pilot's Oath** (`pilots-oath.png`) | |
+
+**Suggested Times:**
+- Morning: 9:00 AM - 10:00 AM (your audience's timezone)
+- Evening: 6:00 PM - 8:00 PM (your audience's timezone)
 
 ---
 
@@ -968,6 +995,52 @@ The Elite Seven are live. Link in bio.
 ```
 #fyp #foryou #foryoupage #viral #tradertok #cryptotok #forextok
 ```
+
+---
+
+# BONUS CONTENT (Optional Posts)
+
+You have 2 additional images that could be used:
+
+## Bonus 1: Council Assembles
+**Image:** `chronicle/council-assembles.png`
+
+**Twitter/X:**
+```
+The Council assembles.
+
+Seven signals. Seven masters. One system.
+
+Each alone is powerful. Together, they are inevitable.
+
+December 30, the void ends.
+
+#SignalPilot #EliteSeven
+```
+
+**Use:** Alternative teaser, or post on Dec 29 evening.
+
+---
+
+## Bonus 2: Non-Repainting Matters
+**Image:** `chronicle/non-repainting-matters.png`
+
+**Twitter/X:**
+```
+"Why do my signals disappear after the candle closes?"
+
+Because most indicators repaint. They lie to you about the past.
+
+The Elite Seven do not repaint.
+
+What you see is what happened. What you see is what you trade.
+
+No deception. No revision. No excuses.
+
+signalpilot.io
+```
+
+**Use:** Technical credibility post. Good for after launch (Dec 31+) to address skeptics.
 
 ---
 
