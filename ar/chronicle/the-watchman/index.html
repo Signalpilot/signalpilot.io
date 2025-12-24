@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>الحارس: Augury Grid — Signal Pilot</title>
+  <meta name="description" content="Augury Grid يفحص ثمانية أسواق في وقت واحد، يرتب الفرص حسب القناعة ويفلتر الضوضاء من الإشارة. السادس من النخبة السبعة.">
+  <link rel="canonical" href="https://www.signalpilot.io/ar/chronicle/the-watchman">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#05070d">
+
+  <!-- OpenGraph -->
+  <meta property="og:site_name" content="Signal Pilot">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="الحارس: Augury Grid">
+  <meta property="og:description" content="بينما تراقب رسماً بيانياً واحداً، أنا أراقبها كلها.">
+  <meta property="og:url" content="https://www.signalpilot.io/ar/chronicle/the-watchman">
+  <meta property="og:image" content="https://www.signalpilot.io/preview.png">
+  <meta property="article:published_time" content="2024-12-24">
+  <meta property="article:author" content="Signal Pilot Labs">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="الحارس: Augury Grid">
+  <meta name="twitter:description" content="بينما تراقب رسماً بيانياً واحداً، أنا أراقبها كلها.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Gugi&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/monogram-square-favicon_32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/monogram-square-favicon_180x180.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "الحارس: Augury Grid",
+    "description": "Augury Grid يفحص ثمانية أسواق في وقت واحد، يرتب الفرص حسب القناعة ويفلتر الضوضاء من الإشارة.",
+    "image": "https://www.signalpilot.io/preview.png",
+    "author": {
+      "@type": "Organization",
+      "name": "Signal Pilot Labs"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Signal Pilot",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.signalpilot.io/monogram-square-favicon_512x512.png"
+      }
+    },
+    "datePublished": "2024-12-24",
+    "dateModified": "2024-12-24"
+  }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05070d;
+      --bg-soft: #0c111c;
+      --bg-elev: #101626;
+      --text: #ecf1ff;
+      --text-body: #d0d8eb;
+      --muted: #b7c2d9;
+      --muted-2: #8ea0bf;
+      --brand: #5b8aff;
+      --brand-2: #7b9bff;
+      --accent: #76ddff;
+      --gold: #f4d03f;
+      --good: #3ed598;
+      --warn: #f9a23c;
+      --bad: #ff6b6b;
+      --border: rgba(255,255,255,.12);
+      --radius: 16px;
+    }
+
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #ffffff;
+      --bg-soft: #f8fafc;
+      --bg-elev: #f1f5f9;
+      --text: #0f172a;
+      --text-body: #334155;
+      --muted: #475569;
+      --muted-2: #64748b;
+      --brand: #3b82f6;
+      --brand-2: #2563eb;
+      --accent: #0284c7;
+      --gold: #d97706;
+      --good: #10b981;
+      --warn: #f97316;
+      --bad: #ef4444;
+      --border: rgba(30,41,59,.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-body);
+      line-height: 1.75;
+      font-size: 1.1rem;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(1200px 700px at 20% 30%, rgba(91,138,255,.08), transparent 60%),
+        radial-gradient(1000px 600px at 80% 70%, rgba(118,221,255,.06), transparent 62%);
+      animation: aurora 40s ease-in-out infinite alternate;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    @keyframes aurora {
+      0% { transform: translate3d(-5%, -5%, 0) scale(1); }
+      100% { transform: translate3d(5%, 3%, 0) scale(1.02); }
+    }
+
+    header, article, footer { position: relative; z-index: 1; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 7, 13, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      height: 64px;
+    }
+
+    header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Gugi', system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 1.3rem;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .header-nav a {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .header-nav a:hover { color: var(--text); }
+
+    .btn {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .btn:hover { background: var(--bg-elev); }
+
+    .progress-bar {
+      position: fixed;
+      top: 64px;
+      right: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--brand));
+      z-index: 99;
+      transition: width 0.1s;
+    }
+
+    .article-header {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .article-category {
+      display: inline-block;
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .article-subtitle {
+      font-size: 1.35rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted-2);
+    }
+
+    .article-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .article-content p {
+      margin-bottom: 1.75rem;
+    }
+
+    .article-content h2 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 3rem 0 1.5rem;
+      line-height: 1.3;
+    }
+
+    .drop-cap::first-letter {
+      float: right;
+      font-size: 4.5rem;
+      line-height: 0.8;
+      padding-left: 0.15em;
+      padding-top: 0.1em;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 3rem 0;
+      color: var(--muted-2);
+      font-size: 1.5rem;
+      letter-spacing: 0.5em;
+    }
+
+    .grid-demo {
+      background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      overflow-x: auto;
+    }
+
+    .grid-demo h4 {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .scanner-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .scanner-table th {
+      text-align: right;
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.8rem;
+    }
+
+    .scanner-table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .scanner-table .symbol { color: var(--text); font-weight: 600; }
+    .scanner-table .up { color: var(--good); }
+    .scanner-table .down { color: var(--bad); }
+    .scanner-table .neutral { color: var(--muted); }
+
+    .quality-bar {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--bg-soft);
+    }
+
+    .quality-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+
+    .quality-fill.high { background: var(--good); }
+    .quality-fill.medium { background: var(--warn); }
+    .quality-fill.low { background: var(--bad); }
+
+    .pull-quote {
+      margin: 3rem 0;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .pull-quote p {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    .concept-card {
+      background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .concept-card h4 {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .concept-card p {
+      margin-bottom: 0;
+      font-size: 1.1rem;
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+    em { font-style: italic; }
+
+    .article-hero {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      padding: 0 1.5rem;
+    }
+
+    .article-hero-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(148,103,255,.1), rgba(244,208,63,.08));
+      border: 2px dashed rgba(148,103,255,.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      text-align: center;
+      gap: 0.5rem;
+    }
+
+    .article-hero-image .icon { font-size: 3rem; opacity: 0.6; }
+
+    .share-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .share-section h4 {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-soft);
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .share-btn:hover {
+      background: var(--bg-elev);
+      color: var(--text);
+      border-color: var(--brand);
+    }
+
+    .related-section {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      padding: 4rem 1.5rem;
+    }
+
+    .related-section .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .related-section h3 {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .related-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .related-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--brand);
+    }
+
+    .related-card h4 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .related-card p {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      color: var(--muted-2);
+      font-size: 0.9rem;
+    }
+
+    footer a { color: var(--brand); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      body { font-size: 1.125rem; }
+      h1 { font-size: 2rem; }
+      .article-header { padding: 3rem 1.25rem 2rem; }
+      .article-content { padding: 0 1.25rem 3rem; }
+      .drop-cap::first-letter { font-size: 3.5rem; }
+      .header-nav { display: none; }
+      .scanner-table { font-size: 0.8rem; }
+      .scanner-table th, .scanner-table td { padding: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar"></div>
+
+  <header>
+    <div class="container">
+      <a href="/ar/" class="brand">Signal Pilot</a>
+      <div class="header-nav">
+        <a href="/ar/chronicle/">جميع السجلات ←</a>
+        <a href="/ar/#pricing">احصل على الوصول</a>
+      </div>
+      <button id="themeToggle" class="btn" type="button" aria-label="تبديل السمة">
+        <span id="theme-icon">☀️</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="article-header">
+    <a href="/ar/chronicle/" class="back-link">العودة إلى السجل ←</a>
+    <span class="article-category">السادس من سبعة</span>
+    <h1>الحارس: Augury Grid</h1>
+    <p class="article-subtitle">"بينما تراقب رسماً بيانياً واحداً، أنا أراقبها كلها."</p>
+    <div class="article-meta">
+      <span>Signal Pilot Labs</span>
+      <span>·</span>
+      <span>٢٤ ديسمبر ٢٠٢٤</span>
+      <span>·</span>
+      <span>٧ دقائق قراءة</span>
+    </div>
+  </div>
+
+  <div class="article-hero">
+    <div class="article-hero-image">
+      <span class="icon">👁️</span>
+      <span>صورة البطل: الحارس</span>
+      <span style="font-size:0.75rem;opacity:0.7">watchman-augury-grid.png</span>
+    </div>
+  </div>
+
+  <article class="article-content">
+    <p class="drop-cap">السوق ليس ساحة معركة واحدة. إنه آلاف—يعمل في وقت واحد عبر كل أصل، كل إطار زمني، كل بورصة على الأرض. لا يستطيع أي إنسان مراقبتها كلها. لكن الحارس لا ينام أبداً.</p>
+
+    <p>بينما تحلل رسماً بيانياً واحداً، تتشكل الفرص وتتلاشى على عشرات غيره. بينما تنتظر تأكيداً على البيتكوين، تحرك الإيثيريوم بالفعل. بينما تدرس S&P، بدأ الذهب اختراقه. السوق لا ينتظر أحداً.</p>
+
+    <p>لهذا خُلق Augury Grid: لتوسيع الرؤية البشرية إلى ما وراء حدودها الطبيعية.</p>
+
+    <div class="divider">✧ ✧ ✧</div>
+
+    <h2>الماسح الذي يرى كل شيء</h2>
+
+    <p>Augury Grid يفحص ثمانية أسواق في نفس واحد. لا يراقب السعر فحسب—يحلل كوكبة النخبة السبعة الكاملة على كل أصل، يحسب درجة جودة تمثل مدى توافق الإشارات.</p>
+
+    <div class="grid-demo" dir="ltr">
+      <h4>Augury Grid Scanner</h4>
+      <table class="scanner-table">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Direction</th>
+            <th>Quality</th>
+            <th>Time Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="symbol">BTCUSDT</td>
+            <td class="up">↑ LONG</td>
+            <td><div class="quality-bar"><div class="quality-fill high" style="width:94%"></div></div></td>
+            <td>2h 15m</td>
+          </tr>
+          <tr>
+            <td class="symbol">AAPL</td>
+            <td class="down">↓ SHORT</td>
+            <td><div class="quality-bar"><div class="quality-fill high" style="width:87%"></div></div></td>
+            <td>45m</td>
+          </tr>
+          <tr>
+            <td class="symbol">EURUSD</td>
+            <td class="neutral">— WAIT</td>
+            <td><div class="quality-bar"><div class="quality-fill low" style="width:52%"></div></div></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td class="symbol">GOLD</td>
+            <td class="up">↑ LONG</td>
+            <td><div class="quality-bar"><div class="quality-fill medium" style="width:78%"></div></div></td>
+            <td>1h 30m</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>كل صف يروي قصة. الاتجاه يُظهر التحيز الحالي. درجة الجودة تكشف التقاء—كم من النخبة السبعة يتفقون على الاتجاه. الوقت النشط يُظهر منذ متى كان الإعداد صالحاً.</p>
+
+    <h2>درجات الجودة: لغة التقاء</h2>
+
+    <p>درجة الجودة هي قلب Augury Grid. ليست توقعاً—إنها قياس للإجماع بين السبعة.</p>
+
+    <div class="concept-card">
+      <h4>جودة عالية (٨٠٪+)</h4>
+      <p>أنظمة متعددة متوافقة. Pentarch يؤكد مرحلة الدورة. Volume Oracle يُظهر تموضع المؤسسات. Plutus Flow يؤكد الضغط. أنظمة القائد متفقة. هذا إعداد عالي القناعة.</p>
+    </div>
+
+    <div class="concept-card">
+      <h4>جودة متوسطة (٦٠-٧٩٪)</h4>
+      <p>بعض الأنظمة متفقة، أخرى محايدة أو متعارضة. الإعداد له ميزة لكنه يفتقر للتقاء كامل. تداول بحجم مخفض أو انتظر التحسن.</p>
+    </div>
+
+    <div class="concept-card">
+      <h4>جودة منخفضة (تحت ٦٠٪)</h4>
+      <p>الإشارات متعارضة. الأنظمة تشير لاتجاهات مختلفة أو لا تُظهر تحيزاً واضحاً. حكم الحارس: ابتعد. دع الآخرين يقامرون في ظروف غير واضحة.</p>
+    </div>
+
+    <p>درجات الجودة تتغير في الوقت الفعلي مع تطور الظروف. إعداد يبدأ عند ٧٠٪ قد يصل لـ٩٠٪ مع توافق المزيد من الإشارات—أو يتراجع لـ٥٠٪ مع فوات الفرصة.</p>
+
+    <div class="pull-quote">
+      <p>"الطيار الذي يرى كل شيء لا يرى شيئاً. الطيار الذي يرى ما يهم، يفوز."</p>
+    </div>
+
+    <h2>من التنقل بين الرسوم إلى استقبال الفرص</h2>
+
+    <p>قبل Augury Grid، كان للمتداولين خياران: التركيز على سوق واحد وفقدان الفرص في مكان آخر، أو التنقل باستمرار بين الرسوم البيانية وفقدان الإعدادات في كل مكان.</p>
+
+    <p>الحارس يغير هذا النموذج. بدلاً من البحث عن الإعدادات، تتلقاها. بدلاً من السؤال "هل هناك فرصة هنا؟"، يُخبرك أي الفرص تستحق انتباهك.</p>
+
+    <p>هذا ليس كسلاً—إنه كفاءة. الانتباه البشري محدود. المتداولون الذين يتفوقون لا يعملون بجهد أكبر؛ يركزون بشكل أفضل. Augury Grid يضمن أن تركيزك يقع على أعلى احتمالية للإعدادات عبر جميع الأسواق.</p>
+
+    <h2>الوقت النشط: عامل الطراوة</h2>
+
+    <p>ليست كل الإعدادات متساوية، حتى مع نفس درجة الجودة. إعداد تشكل للتو مختلف عن واحد يعمل منذ ساعات.</p>
+
+    <p>عمود "الوقت النشط" يخبرك منذ متى كانت الإشارة الحالية صالحة. الإعدادات الجديدة (تحت ٣٠ دقيقة) تقدم دخولاً مبكراً لكن تأكيداً أقل. الإعدادات الناضجة (أكثر من ساعتين) أثبتت نفسها لكنها قد تقترب من الاستنفاد.</p>
+
+    <p>استخدم الوقت النشط لمعايرة نهجك. جديد وعالي الجودة؟ فكر في دخول عدواني. ناضج لكن لا يزال عالي الجودة؟ الحركة حقيقية—لكن احسب ما إذا كانت المخاطرة/العائد لا تزال منطقية.</p>
+
+    <h2>الحارس في التسلسل الهرمي</h2>
+
+    <p>في كوكبة النخبة السبعة، يقف Augury Grid في المستوى ٥—تحت الطبقات التحليلية لكن فوق التأكيد النهائي. دوره هو الفرز.</p>
+
+    <p>الحاكم يقرأ الدورة. النبي ورسام الخرائط يقدمان الاستخبارات. الميزان يتحقق. القائد يوحد. لكن عبر آلاف الأسواق، أيها يستحق الانتباه؟</p>
+
+    <p>الحارس يجيب على هذا السؤال. يفلتر الضوضاء، يرتب الفرص، ويقدم فقط المستحق لطياره. بدون الحارس، ستغرق في البيانات. معه، تتلقى الوضوح.</p>
+
+    <h2>التخصيص: قائمتك، قواعدك</h2>
+
+    <p>Augury Grid يراقب ما تخبره أن يراقبه. هيّئ أسواقك المفضلة—كريبتو، فوركس، أسهم، سلع—ودع الحارس يراقبها كلها.</p>
+
+    <p>بعض الطيارين يركزون على فئة أصول واحدة. آخرون ينوعون عبر الأسواق. Augury Grid يتكيف مع استراتيجيتك، يطبق نفس التحليل الدقيق بغض النظر عن الأصل الأساسي.</p>
+
+    <h2>الدرس السادس</h2>
+
+    <p>كل واحد من النخبة السبعة يحمل درساً. درس الحارس يتعلق بحدود الانتباه البشري:</p>
+
+    <div class="pull-quote">
+      <p>"الطيار الذي يرى كل شيء لا يرى شيئاً. الطيار الذي يرى ما يهم، يفوز."</p>
+    </div>
+
+    <p>الأسواق تكافئ التركيز، وليس النشاط المحموم. أفضل المتداولين ليسوا من يراقبون أكثر الرسوم—هم من يراقبون الرسوم الصحيحة في الوقت الصحيح.</p>
+
+    <p>Augury Grid يجعل هذا ممكناً. يوسع رؤيتك دون تشتيت انتباهك. يفحص الأفق حتى تتمكن من التركيز على التنفيذ.</p>
+
+    <p>توقف عن التنقل بين الرسوم. دع الحارس يجلب الفرص إليك.</p>
+
+    <p><em>الحارس لا ينام أبداً.</em></p>
+  </article>
+
+  <div class="share-section">
+    <h4>شارك هذا المقال</h4>
+    <div class="share-buttons">
+      <a href="https://twitter.com/intent/tweet?text=%D8%A7%D9%84%D8%AD%D8%A7%D8%B1%D8%B3%3A%20Augury%20Grid&url=https://signalpilot.io/ar/chronicle/the-watchman" target="_blank" rel="noopener" class="share-btn">
+        𝕏 نشر
+      </a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://signalpilot.io/ar/chronicle/the-watchman" target="_blank" rel="noopener" class="share-btn">
+        LinkedIn
+      </a>
+      <button onclick="navigator.clipboard.writeText('https://signalpilot.io/ar/chronicle/the-watchman')" class="share-btn">
+        نسخ الرابط
+      </button>
+    </div>
+  </div>
+
+  <section class="related-section">
+    <div class="container">
+      <h3>تابع القراءة</h3>
+      <div class="related-grid">
+        <a href="/ar/chronicle/the-commander" class="related-card">
+          <h4>القائد: OmniDeck</h4>
+          <p>عشرة أنظمة. رؤية واحدة. وضوح تام.</p>
+        </a>
+        <a href="/ar/chronicle/the-arbiter" class="related-card">
+          <h4>الحَكَم: Harmonic Oscillator</h4>
+          <p>أربعة أصوات. حكم واحد. أنا أقرر متى يُضغط الزناد.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Signal Pilot Labs. جميع الحقوق محفوظة. | <a href="/ar/">الرئيسية</a> · <a href="/ar/chronicle/">جميع السجلات</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
+
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      progressBar.style.width = progress + '%';
+    });
+  </script>
+
+</body>
+</html>
