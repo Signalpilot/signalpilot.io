@@ -127,14 +127,14 @@ THE SOVEREIGN — One of Seven
 
 Where others see chaos, Pentarch sees choreography.
 
-Touchdown. Ignition. Warning. Climax. Breakdown.
+TD. IGN. WRN. CAP. BDN.
 
-The cycle exists whether you see it or not. Pentarch simply illuminates what was always there.
+The cycle exists whether you see it or not.
 
 Those who follow do not chase. They arrive early.
 ```
 
-**Characters:** 280
+**Characters:** 241
 
 ---
 
@@ -205,9 +205,9 @@ Those who follow The Sovereign do not chase. They arrive early.
 ```
 THE PROPHET — Two of Seven
 
-"I hear what retail cannot. I see the giants move in darkness."
+"I hear what retail cannot."
 
-While the masses watch price, Volume Oracle listens deeper — the footsteps of institutions.
+While the masses watch price, Volume Oracle hears the footsteps of institutions.
 
 Accumulation before the charts confess.
 Distribution before the candles bleed.
@@ -215,7 +215,7 @@ Distribution before the candles bleed.
 Follow the smart money, or become their exit liquidity.
 ```
 
-**Characters:** 280
+**Characters:** 278
 
 ---
 
@@ -291,16 +291,16 @@ Follow the smart money, or become their exit liquidity.
 ```
 THE CARTOGRAPHER — Three of Seven
 
-"Every battlefield has its terrain. I map where the wars will be fought."
+"I map where the wars will be fought."
 
-Where do algorithms trigger? Where do stop-losses cluster like sheep before the slaughter?
+Where do algorithms trigger? Where do stop-losses cluster?
 
 Janus Atlas knows.
 
-While amateurs draw hundreds of lines hoping one holds, The Cartographer reveals only the lines that matter.
+While amateurs draw hundreds of lines, The Cartographer reveals only the lines that matter.
 ```
 
-**Characters:** 279
+**Characters:** 249
 
 ---
 
@@ -371,18 +371,18 @@ The map exists before the journey begins. Those without it wander.
 ```
 THE SCALES — Four of Seven
 
-"I weigh the invisible. Pressure does not lie."
+"Pressure does not lie."
 
 Price can rise on air. Price can fall on whispers.
 
-But pressure — cumulative buying vs selling force — reveals the truth beneath the surface.
+But pressure reveals the truth beneath the surface.
 
 When price makes new highs but The Scales refuse to confirm:
 
 "This throne is built on sand."
 ```
 
-**Characters:** 278
+**Characters:** 255
 
 ---
 
@@ -459,14 +459,14 @@ THE COMMANDER — Five of Seven
 
 "Ten systems. One vision. Total clarity."
 
-In the age of indicator overload, charts became battlefields of confusion — signals contradicting each other, analysis paralysis claiming more accounts than any crash.
+In the age of indicator overload, charts became chaos.
 
-OmniDeck was forged to end the chaos.
+OmniDeck unified ten systems into one breathing overlay.
 
-Where others see ten indicators fighting, The Commander sees one unified consciousness.
+Where others see noise, The Commander sees formation.
 ```
 
-**Characters:** 280
+**Characters:** 244
 
 ---
 
@@ -546,16 +546,14 @@ THE WATCHMAN — Six of Seven
 
 "While you watch one chart, I watch them all."
 
-The market is not one battlefield. It is thousands — running simultaneously across every asset, every timeframe.
+The market is thousands of battlefields running simultaneously.
 
-No human can watch them all.
+No human can watch them all. But The Watchman never sleeps.
 
-But The Watchman never sleeps.
-
-Stop flipping through charts. Let The Watchman bring the opportunities to you.
+Let The Watchman bring the opportunities to you.
 ```
 
-**Characters:** 279
+**Characters:** 254
 
 ---
 
@@ -629,17 +627,17 @@ Stop flipping through charts. Let the opportunities come to you.
 ```
 THE ARBITER — Seven of Seven
 
-"Four voices. One verdict. I decide when the trigger is pulled."
+"Four voices. One verdict."
 
-Every indicator can generate a signal. But signals without consensus are noise.
+Signals without consensus are noise.
 
 When all four align: "Strike now."
-When the vote splits: "Stand aside. Let others guess."
+When the vote splits: "Stand aside."
 
 The patient pilot survives. The impulsive pilot donates.
 ```
 
-**Characters:** 280
+**Characters:** 229
 
 ---
 
@@ -717,20 +715,22 @@ The patient pilot survives. The impulsive pilot donates.
 ```
 THE HIERARCHY
 
-The Seven do not exist in isolation. They form a constellation.
+The Seven form a constellation:
 
-★ The Sovereign rules the cycle
-↓ The Prophet hears institutional intent
-↓ The Cartographer maps the terrain
-↓ The Scales weigh the pressure
-↓ The Commander unifies force
-↓ The Watchman scans the horizon
-↓ The Arbiter confirms the strike
+★ Sovereign — cycle
+↓ Prophet — intent
+↓ Cartographer — terrain
+↓ Scales — pressure
+↓ Commander — unity
+↓ Watchman — horizon
+↓ Arbiter — strike
 
-Together, they transform the void into a navigable cosmos.
+Together, void becomes navigable cosmos.
+
+December 30.
 ```
 
-**Characters:** 280
+**Characters:** 276
 
 ---
 
@@ -805,28 +805,7 @@ Together, they transform chaos into clarity.
 
 ---
 
-## Twitter/X
-
-**Option A: Single Tweet (shortened)**
-```
-THE PILOT'S OATH
-
-I will not chase.
-I will not guess.
-I will not hope.
-
-I will read the cycle.
-I will follow the institutions.
-I will wait for consensus.
-
-I am not a gambler. I am a Pilot.
-And The Seven are my stars.
-
-The Elite Seven are live.
-signalpilot.io
-```
-
-**Option B: Thread (full oath - RECOMMENDED)**
+## Twitter/X (Thread)
 
 **Tweet 1:**
 ```
