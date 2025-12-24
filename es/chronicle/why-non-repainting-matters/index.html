@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="es" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Por Qué Importa el No-Repintado — Signal Pilot</title>
+  <meta name="description" content="La mayoría de los indicadores te mienten cambiando sus señales históricas. Aquí está por qué el no-repintado es innegociable, y cómo lo garantizamos.">
+  <link rel="canonical" href="https://www.signalpilot.io/es/chronicle/why-non-repainting-matters">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#05070d">
+
+  <!-- OpenGraph -->
+  <meta property="og:site_name" content="Signal Pilot">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Por Qué Importa el No-Repintado">
+  <meta property="og:description" content="La mayoría de los indicadores te mienten cambiando sus señales históricas. Aquí está por qué el no-repintado es innegociable.">
+  <meta property="og:url" content="https://www.signalpilot.io/es/chronicle/why-non-repainting-matters">
+  <meta property="og:image" content="https://www.signalpilot.io/preview.png">
+  <meta property="article:published_time" content="2025-12-24">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Gugi&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/monogram-square-favicon_32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/monogram-square-favicon_180x180.png">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05070d;
+      --bg-soft: #0c111c;
+      --bg-elev: #101626;
+      --text: #ecf1ff;
+      --text-body: #d0d8eb;
+      --muted: #b7c2d9;
+      --muted-2: #8ea0bf;
+      --brand: #5b8aff;
+      --brand-2: #7b9bff;
+      --accent: #76ddff;
+      --gold: #f4d03f;
+      --good: #3ed598;
+      --warn: #f9a23c;
+      --bad: #ff6b6b;
+      --border: rgba(255,255,255,.12);
+      --radius: 16px;
+    }
+
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #ffffff;
+      --bg-soft: #f8fafc;
+      --bg-elev: #f1f5f9;
+      --text: #0f172a;
+      --text-body: #334155;
+      --muted: #475569;
+      --muted-2: #64748b;
+      --brand: #3b82f6;
+      --brand-2: #2563eb;
+      --accent: #0284c7;
+      --gold: #d97706;
+      --good: #10b981;
+      --warn: #f97316;
+      --bad: #ef4444;
+      --border: rgba(30,41,59,.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-body);
+      line-height: 1.75;
+      font-size: 1.1rem;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(1200px 700px at 20% 30%, rgba(91,138,255,.08), transparent 60%),
+        radial-gradient(1000px 600px at 80% 70%, rgba(118,221,255,.06), transparent 62%);
+      animation: aurora 40s ease-in-out infinite alternate;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    @keyframes aurora {
+      0% { transform: translate3d(-5%, -5%, 0) scale(1); }
+      100% { transform: translate3d(5%, 3%, 0) scale(1.02); }
+    }
+
+    html[data-theme="light"] body::before {
+      background:
+        radial-gradient(1200px 700px at 20% 30%, rgba(59,130,246,.05), transparent 60%),
+        radial-gradient(1000px 600px at 80% 70%, rgba(14,165,233,.04), transparent 62%);
+      opacity: 0.4;
+    }
+
+    header, article, footer { position: relative; z-index: 1; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 7, 13, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      height: 64px;
+    }
+
+    html[data-theme="light"] header {
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom-color: #e2e8f0;
+    }
+
+    header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Gugi', system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 1.3rem;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .header-nav a {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .header-nav a:hover { color: var(--text); }
+
+    .btn {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .btn:hover { background: var(--bg-elev); }
+
+    .progress-bar {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--good), var(--accent));
+      z-index: 99;
+      transition: width 0.1s;
+    }
+
+    .article-header {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .article-category {
+      display: inline-block;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--good);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .article-subtitle {
+      font-size: 1.35rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted-2);
+    }
+
+    .article-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .article-content p {
+      margin-bottom: 1.75rem;
+    }
+
+    .article-content h2 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 3rem 0 1.5rem;
+      line-height: 1.3;
+    }
+
+    .drop-cap::first-letter {
+      float: left;
+      font-size: 4.5rem;
+      line-height: 0.8;
+      padding-right: 0.15em;
+      padding-top: 0.1em;
+      color: var(--good);
+      font-weight: 500;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 3rem 0;
+      color: var(--muted-2);
+      font-size: 1.5rem;
+      letter-spacing: 0.5em;
+    }
+
+    /* Comparison Boxes */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+
+    .comparison-box {
+      background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    html[data-theme="light"] .comparison-box {
+      background: linear-gradient(135deg, rgba(10,20,40,.03), rgba(10,20,40,.01));
+    }
+
+    .comparison-box.bad {
+      border-color: rgba(255,107,107,.3);
+      background: linear-gradient(135deg, rgba(255,107,107,.08), rgba(255,107,107,.02));
+    }
+
+    .comparison-box.good {
+      border-color: rgba(62,213,152,.3);
+      background: linear-gradient(135deg, rgba(62,213,152,.08), rgba(62,213,152,.02));
+    }
+
+    .comparison-box h4 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-box.bad h4 { color: var(--bad); }
+    .comparison-box.good h4 { color: var(--good); }
+
+    .comparison-box ul {
+      list-style: none;
+      font-size: 1rem;
+    }
+
+    .comparison-box li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .comparison-box.bad li::before {
+      content: '✗';
+      position: absolute;
+      left: 0;
+      color: var(--bad);
+      font-weight: bold;
+    }
+
+    .comparison-box.good li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--good);
+      font-weight: bold;
+    }
+
+    /* Bounty Box */
+    .bounty-box {
+      background: linear-gradient(135deg, rgba(244,208,63,.1), rgba(244,208,63,.03));
+      border: 2px solid rgba(244,208,63,.3);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+
+    .bounty-box h3 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .bounty-box .amount {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 1rem 0;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+    }
+
+    .bounty-box p {
+      margin-bottom: 0;
+      font-size: 1.1rem;
+    }
+
+    /* Pull Quote */
+    .pull-quote {
+      margin: 3rem 0;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .pull-quote p {
+      font-size: 1.6rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    /* Checklist */
+    .checklist {
+      background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    html[data-theme="light"] .checklist {
+      background: linear-gradient(135deg, rgba(10,20,40,.03), rgba(10,20,40,.01));
+    }
+
+    .checklist h4 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .checklist ul {
+      list-style: none;
+    }
+
+    .checklist li {
+      margin-bottom: 0.75rem;
+      padding-left: 2rem;
+      position: relative;
+      font-size: 1.05rem;
+    }
+
+    .checklist li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+    em { font-style: italic; }
+
+    .share-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .share-section h4 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-soft);
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .share-btn:hover {
+      background: var(--bg-elev);
+      color: var(--text);
+      border-color: var(--brand);
+    }
+
+    .related-section {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      padding: 4rem 1.5rem;
+    }
+
+    .related-section .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .related-section h3 {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .related-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .related-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--brand);
+    }
+
+    .related-card h4 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .related-card p {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      color: var(--muted-2);
+      font-size: 0.9rem;
+    }
+
+    footer a { color: var(--brand); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      body { font-size: 1.125rem; }
+      h1 { font-size: 2rem; }
+      .article-header { padding: 3rem 1.25rem 2rem; }
+      .article-content { padding: 0 1.25rem 3rem; }
+      .drop-cap::first-letter { font-size: 3.5rem; }
+      .bounty-box .amount { font-size: 2.5rem; }
+      .header-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar"></div>
+
+  <header>
+    <div class="container">
+      <a href="/es/" class="brand">Signal Pilot</a>
+      <div class="header-nav">
+        <a href="/es/chronicle/">← Toda la Crónica</a>
+        <a href="/es/#pricing">Obtener Acceso</a>
+      </div>
+      <button id="themeToggle" class="btn" type="button" aria-label="Cambiar tema">
+        <span id="theme-icon">☀️</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="article-header">
+    <a href="/es/chronicle/" class="back-link">← Volver a la Crónica</a>
+    <span class="article-category">Confianza y Verificación</span>
+    <h1>Por Qué Importa el No-Repintado</h1>
+    <p class="article-subtitle">La mayoría de los indicadores te mienten cambiando sus señales históricas. Aquí está por qué eso es inaceptable.</p>
+    <div class="article-meta">
+      <span>Signal Pilot Labs</span>
+      <span>·</span>
+      <span>24 de diciembre de 2025</span>
+      <span>·</span>
+      <span>7 min de lectura</span>
+    </div>
+  </div>
+
+  <article class="article-content">
+
+    <p class="drop-cap">Hay un secreto sucio en la industria de indicadores de trading: la mayoría de los indicadores repintan. Cambian sus señales históricas después del hecho, mostrándote entradas "perfectas" que nunca existieron realmente cuando la vela estaba en vivo.</p>
+
+    <p>Esto no es un error. Es una característica—diseñada para hacer que los backtests se vean increíbles y vender más suscripciones. Pero destruye a los traders que confían en esas señales en tiempo real.</p>
+
+    <p>Signal Pilot es diferente. Cada indicador en Los Siete de Élite es 100% no-repintado. Auditado. Verificado. Y estamos tan seguros de esto que apostamos dinero por ello.</p>
+
+    <div class="divider">✧ ✧ ✧</div>
+
+    <h2>¿Qué Es el Repintado?</h2>
+
+    <p>El repintado ocurre cuando un indicador cambia sus valores o señales históricas basándose en datos de precios futuros. Esto es lo que significa en la práctica:</p>
+
+    <p>Imagina que estás viendo un gráfico en vivo. El indicador no muestra señal. La vela cierra. Todavía sin señal. Luego el precio se mueve significativamente durante las siguientes velas—y de repente, esa vela antigua ahora muestra una señal de "compra" que no estaba ahí antes.</p>
+
+    <p>El indicador <em>repintó</em> su historia para coincidir con lo que pasó después.</p>
+
+    <p>Cuando miras el gráfico histórico de un indicador que repinta, ves señales perfectas en cada giro. Pero esas señales no eran visibles cuando habrían importado. Aparecieron después, usando información que no estaba disponible en ese momento.</p>
+
+    <div class="comparison-grid">
+      <div class="comparison-box bad">
+        <h4>Indicadores que Repintan</h4>
+        <ul>
+          <li>Las señales cambian después del cierre de la vela</li>
+          <li>La historia se ve "perfecta"</li>
+          <li>Usa datos futuros (sesgo de anticipación)</li>
+          <li>Los backtests no tienen sentido</li>
+          <li>Trading en vivo = pérdidas constantes</li>
+        </ul>
+      </div>
+      <div class="comparison-box good">
+        <h4>Indicadores No-Repintado</h4>
+        <ul>
+          <li>Las señales se bloquean al cierre de la vela</li>
+          <li>La historia muestra rendimiento real</li>
+          <li>Sin acceso a datos futuros</li>
+          <li>Los backtests son confiables</li>
+          <li>El trading en vivo coincide con la historia</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Por Qué los Vendedores Hacen Esto</h2>
+
+    <p>La razón es simple: los indicadores que repintan venden mejor.</p>
+
+    <p>Cuando un cliente potencial mira un gráfico con señales de entrada perfectas en cada mínimo y señales de salida en cada máximo, piensan, "Si tuviera este indicador, habría capturado cada movimiento." No se dan cuenta de que esas señales solo aparecieron <em>después</em> de que los movimientos se completaran.</p>
+
+    <p>Es retrospectiva haciéndose pasar por previsión. Y funciona—hasta que las personas empiezan a operar con dinero real.</p>
+
+    <div class="pull-quote">
+      <p>"Lo que ves en la historia es exactamente lo que habrías visto en vivo. Sin trucos. Sin sesgo de anticipación. Solo señales honestas."</p>
+    </div>
+
+    <h2>La Garantía de Signal Pilot</h2>
+
+    <p>Cada indicador en Los Siete de Élite finaliza sus señales al cierre de la vela. Una vez que una vela está completa, la señal está bloqueada. Nunca cambiará, sin importar lo que haga el precio después.</p>
+
+    <p>Esto se verifica a través de auditoría de código rigurosa. Verificamos:</p>
+
+    <div class="checklist">
+      <h4>Nuestro Proceso de Auditoría</h4>
+      <ul>
+        <li><strong>Sin referencias futuras</strong> — El código no puede acceder a barras que no han cerrado</li>
+        <li><strong>Sin recálculo en barras históricas</strong> — Una vez computados, los valores son finales</li>
+        <li><strong>Confirmación de señal solo al cierre</strong> — Las señales aparecen cuando la vela cierra, no antes</li>
+        <li><strong>Comportamiento consistente en vivo vs. histórico</strong> — Lo que ves en replay coincide con tiempo real</li>
+      </ul>
+    </div>
+
+    <p>Estamos tan seguros de nuestra garantía de no-repintado que hemos puesto una recompensa por ello:</p>
+
+    <div class="bounty-box">
+      <h3>Recompensa No-Repintado</h3>
+      <div class="amount">$100 USD</div>
+      <p>Si puedes probar que cualquier indicador de Signal Pilot repinta, te pagamos $100. Se requiere prueba documentada. Nadie lo ha reclamado nunca.</p>
+    </div>
+
+    <h2>Cómo Probar el Repintado</h2>
+
+    <p>¿Quieres verificar un indicador tú mismo? Así es cómo:</p>
+
+    <p><strong>Método 1: Replay de Barras</strong></p>
+    <p>Usa la función de replay de barras de TradingView. Avanza por las velas históricas una por una. Observa si las señales aparecen, desaparecen o cambian de posición mientras avanzas. Si lo hacen, repinta.</p>
+
+    <p><strong>Método 2: Comparación de Capturas de Pantalla</strong></p>
+    <p>Toma una captura de pantalla del gráfico actual. Espera una hora. Toma otra captura de pantalla. Compara las señales históricas. Si algo cambió, repinta.</p>
+
+    <p><strong>Método 3: Observación en Tiempo Real</strong></p>
+    <p>Observa una señal formarse en tiempo real. Anota su posición y valor exactos. Después de que cierren las velas siguientes, verifica si sigue igual. Los indicadores que repintan cambiarán las señales para verse mejor después del hecho.</p>
+
+    <h2>Por Qué Esto Importa Para Tu Trading</h2>
+
+    <p>Si haces backtest de un indicador que repinta, obtendrás resultados asombrosos. La tasa de aciertos se ve increíble. Los drawdowns se ven mínimos. Pensarás que encontraste el santo grial.</p>
+
+    <p>Luego lo operas en vivo, y nada funciona. Las señales que ves en tiempo real no coinciden con las señales históricas "perfectas". Tomas operaciones que inmediatamente van en tu contra. Tu cuenta se desangra.</p>
+
+    <p>Esto no es mala suerte. Es el resultado predecible de confiar en un sistema que nunca fue honesto sobre su rendimiento.</p>
+
+    <p>Los indicadores no-repintado te muestran la verdad. El gráfico histórico refleja exactamente lo que habría pasado si hubieras operado esas señales en vivo. Si el backtest muestra 60% de tasa de aciertos, puedes esperar aproximadamente 60% en trading en vivo. Las señales que ves formándose en tiempo real se verán justo como las señales históricas una vez que se completen.</p>
+
+    <div class="pull-quote">
+      <p>"La cuarta lección del vacío: El precio puede engañar. La presión no puede."</p>
+    </div>
+
+    <h2>La Confianza Es Todo</h2>
+
+    <p>El trading ya es suficientemente difícil sin que tus herramientas te mientan.</p>
+
+    <p>Cuando usas indicadores de Signal Pilot, puedes confiar en lo que ves. El rendimiento histórico es real. Las señales son honestas. El backtest refleja expectativas realistas.</p>
+
+    <p>Esto no significa que cada operación ganará—ningún indicador puede prometer eso. Pero significa que estás tomando decisiones basadas en información precisa, no en gráficos de fantasía diseñados para quitarte tu dinero.</p>
+
+    <p>El no-repintado no es una característica. Es el mínimo. Es lo básico para cualquier indicador que respete a sus usuarios.</p>
+
+    <p>En Signal Pilot, es innegociable.</p>
+
+    <p><em>Navega el ruido—con señales en las que puedes confiar.</em></p>
+
+  </article>
+
+  <div class="share-section">
+    <h4>Comparte este artículo</h4>
+    <div class="share-buttons">
+      <a href="https://twitter.com/intent/tweet?text=Por%20Qu%C3%A9%20Importa%20el%20No-Repintado&url=https://signalpilot.io/es/chronicle/why-non-repainting-matters" target="_blank" rel="noopener" class="share-btn">
+        𝕏 Publicar
+      </a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://signalpilot.io/es/chronicle/why-non-repainting-matters" target="_blank" rel="noopener" class="share-btn">
+        LinkedIn
+      </a>
+      <button onclick="navigator.clipboard.writeText('https://signalpilot.io/es/chronicle/why-non-repainting-matters')" class="share-btn">
+        Copiar Enlace
+      </button>
+    </div>
+  </div>
+
+  <section class="related-section">
+    <div class="container">
+      <h3>Continuar Leyendo</h3>
+      <div class="related-grid">
+        <a href="/es/chronicle/meet-the-sovereign" class="related-card">
+          <h4>Conoce al Soberano: Pentarch Explicado</h4>
+          <p>Una inmersión profunda en el indicador insignia que mapea las cinco fases de los ciclos de mercado.</p>
+        </a>
+        <a href="/es/chronicle/the-pilots-oath" class="related-card">
+          <h4>El Juramento del Piloto</h4>
+          <p>Tú que empuñas a Los Siete de Élite no eres un trader. Eres un Piloto. Este es el juramento.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Signal Pilot Labs. Todos los derechos reservados. | <a href="/es/">Inicio</a> · <a href="/es/chronicle/">Toda la Crónica</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
+
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      progressBar.style.width = progress + '%';
+    });
+  </script>
+
+</body>
+</html>
