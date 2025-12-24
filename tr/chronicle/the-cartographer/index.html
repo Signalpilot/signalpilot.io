@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="tr" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kartograf: Janus Atlas — Signal Pilot</title>
+  <meta name="description" content="Janus Atlas, piyasa savaşlarının yapıldığı araziyi haritalandırır. Önemli seviyeleri, VWAP çapalarını ve kurumsal referans noktalarını anlama.">
+  <link rel="canonical" href="https://www.signalpilot.io/tr/chronicle/the-cartographer">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#05070d">
+  <meta property="og:site_name" content="Signal Pilot">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Kartograf: Janus Atlas">
+  <meta property="og:description" content="Her savaş alanının bir arazisi var. Savaşların nerede yapılacağını haritalandırıyorum.">
+  <meta property="og:url" content="https://www.signalpilot.io/tr/chronicle/the-cartographer">
+  <meta property="og:image" content="https://www.signalpilot.io/preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Gugi&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <style>
+    :root{color-scheme:dark;--bg:#05070d;--bg-soft:#0c111c;--bg-elev:#101626;--text:#ecf1ff;--text-body:#d0d8eb;--muted:#b7c2d9;--muted-2:#8ea0bf;--brand:#5b8aff;--brand-2:#7b9bff;--accent:#76ddff;--gold:#f4d03f;--good:#3ed598;--warn:#f9a23c;--bad:#ff6b6b;--border:rgba(255,255,255,.12);--radius:16px}
+    html[data-theme="light"]{color-scheme:light;--bg:#ffffff;--bg-soft:#f8fafc;--bg-elev:#f1f5f9;--text:#0f172a;--text-body:#334155;--muted:#475569;--muted-2:#64748b;--brand:#3b82f6;--brand-2:#2563eb;--accent:#0284c7;--gold:#d97706;--good:#10b981;--warn:#f97316;--bad:#ef4444;--border:rgba(30,41,59,.15)}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--text-body);line-height:1.75;font-size:1.1rem;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+    body::before{content:'';position:fixed;top:-50%;left:-50%;right:-50%;bottom:-50%;width:200%;height:200%;background:radial-gradient(1200px 700px at 20% 30%,rgba(91,138,255,.08),transparent 60%),radial-gradient(1000px 600px at 80% 70%,rgba(118,221,255,.06),transparent 62%);animation:aurora 40s ease-in-out infinite alternate;z-index:0;pointer-events:none;opacity:0.5}
+    @keyframes aurora{0%{transform:translate3d(-5%,-5%,0) scale(1)}100%{transform:translate3d(5%,3%,0) scale(1.02)}}
+    header,article,footer{position:relative;z-index:1}
+    header{position:sticky;top:0;z-index:100;backdrop-filter:blur(14px);background:rgba(5,7,13,0.85);border-bottom:1px solid rgba(255,255,255,0.08);height:64px}
+    header .container{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;height:100%}
+    .brand{color:var(--text);text-decoration:none;font-family:'Gugi',system-ui,sans-serif;text-transform:uppercase;letter-spacing:0.1em;font-size:1.3rem}
+    .header-nav{display:flex;align-items:center;gap:1.5rem}
+    .header-nav a{font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted);text-decoration:none;font-size:0.95rem;font-weight:500;transition:color 0.2s}
+    .header-nav a:hover{color:var(--text)}
+    .btn{background:var(--bg-soft);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.7rem;border-radius:6px;cursor:pointer;font-size:1rem;transition:all 0.2s}
+    .btn:hover{background:var(--bg-elev)}
+    .progress-bar{position:fixed;top:64px;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--warn),var(--gold));z-index:99;transition:width 0.1s}
+    .article-header{max-width:720px;margin:0 auto;padding:4rem 1.5rem 3rem;text-align:center}
+    .back-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;color:var(--muted);text-decoration:none;margin-bottom:2rem;transition:color 0.2s}
+    .back-link:hover{color:var(--accent)}
+    .article-category{display:inline-block;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.15em;color:var(--warn);margin-bottom:1rem}
+    h1{font-family:'EB Garamond',Georgia,serif;font-size:clamp(2.5rem,5vw,3.5rem);font-weight:500;font-style:italic;line-height:1.15;color:var(--text);margin-bottom:1.5rem}
+    .article-subtitle{font-size:1.35rem;color:var(--muted);font-style:italic;line-height:1.5;max-width:600px;margin:0 auto 2rem}
+    .article-meta{display:flex;align-items:center;justify-content:center;gap:1.5rem;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;color:var(--muted-2)}
+    .article-content{max-width:720px;margin:0 auto;padding:0 1.5rem 4rem}
+    .article-content p{margin-bottom:1.75rem}
+    .article-content h2{font-family:'EB Garamond',Georgia,serif;font-size:1.75rem;font-weight:600;color:var(--text);margin:3rem 0 1.5rem;line-height:1.3}
+    .drop-cap::first-letter{float:left;font-size:4.5rem;line-height:0.8;padding-right:0.15em;padding-top:0.1em;color:var(--warn);font-weight:500}
+    .divider{text-align:center;margin:3rem 0;color:var(--muted-2);font-size:1.5rem;letter-spacing:0.5em}
+    .level-card{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 2rem;margin:1.5rem 0;border-left:4px solid var(--warn)}
+    .level-card h4{font-family:'Space Grotesk',system-ui,sans-serif;font-size:1rem;font-weight:700;color:var(--warn);margin-bottom:0.5rem}
+    .level-card p{margin-bottom:0;font-size:1.1rem}
+    .pull-quote{margin:3rem 0;padding:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
+    .pull-quote p{font-family:'EB Garamond',Georgia,serif;font-size:1.5rem;font-style:italic;color:var(--text);line-height:1.5;margin-bottom:0}
+    strong{color:var(--text);font-weight:600}
+    em{font-style:italic}
+    .article-hero{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
+    .article-hero-image{width:100%;aspect-ratio:16/9;border-radius:var(--radius);background:linear-gradient(135deg,rgba(148,103,255,.1),rgba(244,208,63,.08));border:2px dashed rgba(148,103,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;text-align:center;gap:0.5rem}
+    .article-hero-image .icon{font-size:3rem;opacity:0.6}
+    .share-section{max-width:720px;margin:0 auto;padding:2rem 1.5rem 4rem;border-top:1px solid var(--border)}
+    .share-section h4{font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:1rem}
+    .share-buttons{display:flex;gap:1rem}
+    .share-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border:1px solid var(--border);border-radius:8px;background:var(--bg-soft);color:var(--muted);text-decoration:none;font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;font-weight:500;transition:all 0.2s;cursor:pointer}
+    .share-btn:hover{background:var(--bg-elev);color:var(--text);border-color:var(--brand)}
+    .related-section{background:var(--bg-soft);border-top:1px solid var(--border);padding:4rem 1.5rem}
+    .related-section .container{max-width:1000px;margin:0 auto}
+    .related-section h3{font-family:'Space Grotesk',system-ui,sans-serif;font-size:1rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:2rem;text-align:center}
+    .related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+    .related-card{background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-decoration:none;transition:all 0.3s}
+    .related-card:hover{transform:translateY(-4px);border-color:var(--brand)}
+    .related-card h4{font-family:'EB Garamond',Georgia,serif;font-size:1.25rem;font-weight:500;color:var(--text);margin-bottom:0.5rem}
+    .related-card p{font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;color:var(--muted);line-height:1.5}
+    footer{padding:3rem 0;border-top:1px solid var(--border);text-align:center;font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted-2);font-size:0.9rem}
+    footer a{color:var(--brand);text-decoration:none}
+    footer a:hover{text-decoration:underline}
+    @media(max-width:768px){body{font-size:1.125rem}h1{font-size:2rem}.article-header{padding:3rem 1.25rem 2rem}.article-content{padding:0 1.25rem 3rem}.drop-cap::first-letter{font-size:3.5rem}.header-nav{display:none}}
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+  <header>
+    <div class="container">
+      <a href="/tr/" class="brand">Signal Pilot</a>
+      <div class="header-nav">
+        <a href="/tr/chronicle/">← Tüm Kronikler</a>
+        <a href="/tr/#pricing">Erişim Al</a>
+      </div>
+      <button id="themeToggle" class="btn" type="button" aria-label="Temayı değiştir">
+        <span id="theme-icon">☀️</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="article-header">
+    <a href="/tr/chronicle/" class="back-link">← Kroniklere Dön</a>
+    <span class="article-category">Yedinin Üçüncüsü</span>
+    <h1>Kartograf: Janus Atlas</h1>
+    <p class="article-subtitle">"Her savaş alanının bir arazisi var. Savaşların nerede yapılacağını haritalandırıyorum."</p>
+    <div class="article-meta">
+      <span>Signal Pilot Labs</span>
+      <span>·</span>
+      <span>24 Aralık 2025</span>
+      <span>·</span>
+      <span>7 dk okuma</span>
+    </div>
+  </div>
+
+  <div class="article-hero">
+    <div class="article-hero-image">
+      <span class="icon">🗺️</span>
+      <span>Hero görsel: Kartograf</span>
+      <span style="font-size:0.75rem;opacity:0.7">cartographer-janus-atlas.png</span>
+    </div>
+  </div>
+
+  <article class="article-content">
+    <p class="drop-cap">Geçmişi ve geleceği aynı anda gören iki yüzlü tanrının adını taşıyan Janus Atlas, kurumsal hafızanın potasında şekillendirildi. Traderlar nerede tepki verir? Algoritmalar nerede tetiklenir? Stop-loss'lar kasaba koyunları gibi nerede kümelenir? Janus Atlas bilir.</p>
+
+    <p>Her pivotu, her seans sınırını, fiyatın görünmez duvarlara saygı gösterdiği her VWAP çapasını haritalandırdı.</p>
+
+    <p>Amatörler yüzlerce çizgi çizip birinin tutmasını umarken, Janus Atlas sadece önemli olan çizgileri ortaya koyar—kurumların sistemlerine nesiller önce programladıkları çizgileri.</p>
+
+    <div class="divider">✧ ✧ ✧</div>
+
+    <h2>Seviyeler Neden Önemli</h2>
+
+    <p>Piyasaların hafızası vardır. Geçmişte önemli işlemlerin gerçekleştiği fiyatlar gelecekte de önemli olma eğilimindedir. Neden? Çünkü traderlar hatırlar.</p>
+
+    <p>Daha önemlisi, <em>algoritmalar</em> hatırlar. Kurumsal işlem sistemleri referans noktalarıyla programlanmıştır: önceki günün yüksek/düşük değerleri, haftalık pivotlar, aylık açılışlar, VWAP bantları. Fiyat bu seviyelere yaklaştığında otomatik emirler tetiklenir. Milyarlarca dolarlık likidite bu görünmez çizgilerin etrafında kümelenir.</p>
+
+    <p>Bu seviyelerin nerede olduğunu bilmiyorsanız, kör işlem yapıyorsunuz. Pozisyonlarınızı doğrudan bir direnç duvarına açarsınız. Stoplarınızı tam avlanacakları yere koyarsınız. Fiyatın en çok dönme olasılığı olan seviyeleri kaçırırsınız.</p>
+
+    <h2>Janus'un Haritaladığı Arazi</h2>
+
+    <div class="level-card">
+      <h4>HTF Seviyeleri (Yüksek Zaman Dilimi)</h4>
+      <p>Günlük, haftalık, aylık ve çeyreklik yüksek/düşükler. Bunlar ana sınırlar—piyasa yapısının kale duvarlarıdır. Aylık yüksek üzerindeki kırılma, saatlik yüksek üzerindeki kırılmadan farklı bir olaydır.</p>
+    </div>
+
+    <div class="level-card">
+      <h4>Önceki Seans Verileri</h4>
+      <p>Dünün yükseği, düşüğü ve kapanışı. Önceki seansın değer alanı. Bunlar taze savaş alanları—bugünün savaşının dünün sonuçlarına referans vereceği yerler.</p>
+    </div>
+
+    <div class="level-card">
+      <h4>VWAP Çapaları</h4>
+      <p>Anahtar çapalardan Hacim Ağırlıklı Ortalama Fiyat: günlük, haftalık, aylık, çeyreklik. VWAP, kurumsal algoritmaların işlemlerini karşılaştırdığı yerdir. VWAP üzerinde fiyat = alıcılar kazanıyor. Altında = satıcılar kazanıyor.</p>
+    </div>
+
+    <div class="level-card">
+      <h4>Hacim Profili Bölgeleri</h4>
+      <p>Kontrol Noktası (POC)—en çok hacmin işlem gördüğü yer. Değer Alanı Yükseği (VAH) ve Değer Alanı Düşüğü (VAL)—hacmin %70'inin gerçekleştiği sınırlar. Bunlar kabul ve ret bölgeleridir.</p>
+    </div>
+
+    <div class="level-card">
+      <h4>Seans İşaretleri</h4>
+      <p>Asya, Londra, New York seans sınırları. Farklı katılımcılar, farklı likidite, farklı davranış. Londra açılışı genellikle Asya seansını tersine çevirir. New York açılışı genellikle günün yönünü belirler.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>"Harita yolculuk başlamadan önce vardır. Haritası olmayanlar başıboş dolaşır. Haritası olanlar yol alır."</p>
+    </div>
+
+    <h2>Manuel Seviyelerin Sorunu</h2>
+
+    <p>Her perakende trader destek ve direnç çizgileri çizer. Çoğu çok fazla çizer. Her yerde desenler görürler—ama sistematik bir çerçeve olmadan, sadece görmek istediklerini görüyorlar.</p>
+
+    <p>Sonuç: çizgilerle kaplı grafikler, çoğu anlamsız. 50 seviyeniz olduğunda, hiçbiri önemli değildir. Her şey potansiyel bir dönüş noktası gibi göründüğü için karar veremezsiniz.</p>
+
+    <p>Janus Atlas bunu sistematik olarak çözer. Pivot gibi görünen şeylere dayalı öznel çizgiler çizmez. Kurumsal referans noktalarına dayalı <em>objektif</em> seviyeler çizer—banka algoritmaları ve hedge fon sistemlerinin kullandığı aynı seviyeler.</p>
+
+    <p>Daha az çizgi. Daha fazla önem. Gerçek avantaj.</p>
+
+    <h2>Haritayı Nasıl Kullanmalı</h2>
+
+    <p><strong>Girişler İçin:</strong> Janus Atlas seviyelerinde birleşim arayın. Pentarch bir döngü sinyali gösterdiğinde (TD, IGN, vb.) ve bu Janus Atlas'tan önemli bir seviyedeyse, o sinyalin çalışma olasılığı önemli ölçüde artar.</p>
+
+    <p><strong>Stoplar İçin:</strong> Stopları rastgele mesafelerde değil, ilgili seviyenin ötesine koyun. Günlük VWAP'ta uzun pozisyondaysanız, stopunuz bir sonraki desteğin altına gider—belki önceki günün düşüğü. Bu mantıklı yerleşimdir, rastgele risk değil.</p>
+
+    <p><strong>Hedefler İçin:</strong> Yukarıdaki bir sonraki seviye (uzunlar için) veya aşağıdaki (kısalar için) doğal hedefiniz olur. Fiyat seviyeden seviyeye hareket etme eğilimindedir, devam etmeden veya dönmeden önce her birinde dinlenir.</p>
+
+    <p><strong>Bağlam İçin:</strong> Fiyat değer alanının içinde mi dışında mı? Günlük VWAP'ın üstünde mi altında mı? Haftanın yüksekinde mi yoksa düşüğüne yakın mı? Bu bağlam, diğer sinyalleri nasıl yorumlayacağınızla ilgili her şeyi şekillendirir.</p>
+
+    <h2>Üçüncü Ders</h2>
+
+    <p>Janus Atlas temel bir gerçeği öğretir:</p>
+
+    <div class="pull-quote">
+      <p>"Harita yolculuk başlamadan önce vardır. Haritası olmayanlar başıboş dolaşır. Haritası olanlar yol alır."</p>
+    </div>
+
+    <p>Seviyeler görseniz de görmeseniz de vardır. Kurumlar, bilseniz de bilmeseniz de onlarla işlem yapıyor. Seçiminiz basit: arazi özelliklerinin nerede olduğunu öğrenin ya da neden sürekli pusuya düşürüldüğünüzü merak ederek savaş alanında tökezleyin.</p>
+
+    <p>Kartograf elle hiç çizgi çizmez. Çizgileri <em>bilir</em>. Ve şimdi siz de bileceksiniz.</p>
+
+    <p><em>Her savaş alanının bir arazisi var. Sizinkini bilin.</em></p>
+  </article>
+
+  <div class="share-section">
+    <h4>Bu Makaleyi Paylaş</h4>
+    <div class="share-buttons">
+      <a href="https://twitter.com/intent/tweet?text=Kartograf%3A%20Janus%20Atlas&url=https://signalpilot.io/tr/chronicle/the-cartographer" target="_blank" rel="noopener" class="share-btn">𝕏 Post</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://signalpilot.io/tr/chronicle/the-cartographer" target="_blank" rel="noopener" class="share-btn">LinkedIn</a>
+      <button onclick="navigator.clipboard.writeText('https://signalpilot.io/tr/chronicle/the-cartographer')" class="share-btn">Bağlantıyı Kopyala</button>
+    </div>
+  </div>
+
+  <section class="related-section">
+    <div class="container">
+      <h3>Okumaya Devam Et</h3>
+      <div class="related-grid">
+        <a href="/tr/chronicle/the-prophet" class="related-card">
+          <h4>Peygamber: Volume Oracle</h4>
+          <p>Perakende'nin duyamadığını duyuyorum. Devlerin karanlıkta hareket ettiğini görüyorum.</p>
+        </a>
+        <a href="/tr/chronicle/the-scales" class="related-card">
+          <h4>Terazi: Plutus Flow</h4>
+          <p>Görünmezi tartıyorum. Baskı yalan söylemez.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Signal Pilot Labs. Tüm hakları saklıdır. | <a href="/tr/">Ana Sayfa</a> · <a href="/tr/chronicle/">Tüm Kronikler</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle=document.getElementById('themeToggle'),themeIcon=document.getElementById('theme-icon'),html=document.documentElement,savedTheme=localStorage.getItem('theme')||'dark';html.setAttribute('data-theme',savedTheme);themeIcon.textContent=savedTheme==='dark'?'☀️':'🌙';themeToggle.addEventListener('click',()=>{const currentTheme=html.getAttribute('data-theme'),newTheme=currentTheme==='dark'?'light':'dark';html.setAttribute('data-theme',newTheme);localStorage.setItem('theme',newTheme);themeIcon.textContent=newTheme==='dark'?'☀️':'🌙'});const progressBar=document.getElementById('progressBar');window.addEventListener('scroll',()=>{const scrollTop=window.scrollY,docHeight=document.documentElement.scrollHeight-window.innerHeight,progress=(scrollTop/docHeight)*100;progressBar.style.width=progress+'%'});
+  </script>
+</body>
+</html>
