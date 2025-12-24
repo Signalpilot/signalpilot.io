@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>لماذا عدم إعادة الرسم مهم — Signal Pilot</title>
+  <meta name="description" content="معظم المؤشرات تكذب عليك بتغيير إشاراتها التاريخية. إليك لماذا عدم إعادة الرسم غير قابل للتفاوض، وكيف نضمنه.">
+  <link rel="canonical" href="https://www.signalpilot.io/ar/chronicle/why-non-repainting-matters">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#05070d">
+
+  <!-- OpenGraph -->
+  <meta property="og:site_name" content="Signal Pilot">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="لماذا عدم إعادة الرسم مهم">
+  <meta property="og:description" content="معظم المؤشرات تكذب عليك بتغيير إشاراتها التاريخية. إليك لماذا عدم إعادة الرسم غير قابل للتفاوض.">
+  <meta property="og:url" content="https://www.signalpilot.io/ar/chronicle/why-non-repainting-matters">
+  <meta property="og:image" content="https://www.signalpilot.io/preview.png">
+  <meta property="article:published_time" content="2024-12-24">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Gugi&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/monogram-square-favicon_32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/monogram-square-favicon_180x180.png">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05070d;
+      --bg-soft: #0c111c;
+      --bg-elev: #101626;
+      --text: #ecf1ff;
+      --text-body: #d0d8eb;
+      --muted: #b7c2d9;
+      --muted-2: #8ea0bf;
+      --brand: #5b8aff;
+      --brand-2: #7b9bff;
+      --accent: #76ddff;
+      --gold: #f4d03f;
+      --good: #3ed598;
+      --warn: #f9a23c;
+      --bad: #ff6b6b;
+      --border: rgba(255,255,255,.12);
+      --radius: 16px;
+    }
+
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #ffffff;
+      --bg-soft: #f8fafc;
+      --bg-elev: #f1f5f9;
+      --text: #0f172a;
+      --text-body: #334155;
+      --muted: #475569;
+      --muted-2: #64748b;
+      --brand: #3b82f6;
+      --brand-2: #2563eb;
+      --accent: #0284c7;
+      --gold: #d97706;
+      --good: #10b981;
+      --warn: #f97316;
+      --bad: #ef4444;
+      --border: rgba(30,41,59,.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-body);
+      line-height: 1.75;
+      font-size: 1.1rem;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(1200px 700px at 20% 30%, rgba(91,138,255,.08), transparent 60%),
+        radial-gradient(1000px 600px at 80% 70%, rgba(118,221,255,.06), transparent 62%);
+      animation: aurora 40s ease-in-out infinite alternate;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    @keyframes aurora {
+      0% { transform: translate3d(-5%, -5%, 0) scale(1); }
+      100% { transform: translate3d(5%, 3%, 0) scale(1.02); }
+    }
+
+    html[data-theme="light"] body::before {
+      background:
+        radial-gradient(1200px 700px at 20% 30%, rgba(59,130,246,.05), transparent 60%),
+        radial-gradient(1000px 600px at 80% 70%, rgba(14,165,233,.04), transparent 62%);
+      opacity: 0.4;
+    }
+
+    header, article, footer { position: relative; z-index: 1; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 7, 13, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      height: 64px;
+    }
+
+    html[data-theme="light"] header {
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom-color: #e2e8f0;
+    }
+
+    header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Gugi', system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 1.3rem;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .header-nav a {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .header-nav a:hover { color: var(--text); }
+
+    .btn {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .btn:hover { background: var(--bg-elev); }
+
+    .progress-bar {
+      position: fixed;
+      top: 64px;
+      right: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--good), var(--accent));
+      z-index: 99;
+      transition: width 0.1s;
+    }
+
+    .article-header {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    .article-category {
+      display: inline-block;
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--good);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .article-subtitle {
+      font-size: 1.35rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted-2);
+    }
+
+    .article-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .article-content p {
+      margin-bottom: 1.75rem;
+    }
+
+    .article-content h2 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 3rem 0 1.5rem;
+      line-height: 1.3;
+    }
+
+    .drop-cap::first-letter {
+      float: right;
+      font-size: 4.5rem;
+      line-height: 0.8;
+      padding-left: 0.15em;
+      padding-top: 0.1em;
+      color: var(--good);
+      font-weight: 500;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 3rem 0;
+      color: var(--muted-2);
+      font-size: 1.5rem;
+      letter-spacing: 0.5em;
+    }
+
+    /* Comparison Boxes */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+
+    .comparison-box {
+      background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    html[data-theme="light"] .comparison-box {
+      background: linear-gradient(135deg, rgba(10,20,40,.03), rgba(10,20,40,.01));
+    }
+
+    .comparison-box.bad {
+      border-color: rgba(255,107,107,.3);
+      background: linear-gradient(135deg, rgba(255,107,107,.08), rgba(255,107,107,.02));
+    }
+
+    .comparison-box.good {
+      border-color: rgba(62,213,152,.3);
+      background: linear-gradient(135deg, rgba(62,213,152,.08), rgba(62,213,152,.02));
+    }
+
+    .comparison-box h4 {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-box.bad h4 { color: var(--bad); }
+    .comparison-box.good h4 { color: var(--good); }
+
+    .comparison-box ul {
+      list-style: none;
+      font-size: 1rem;
+    }
+
+    .comparison-box li {
+      margin-bottom: 0.5rem;
+      padding-right: 1.5rem;
+      position: relative;
+    }
+
+    .comparison-box.bad li::before {
+      content: '✗';
+      position: absolute;
+      right: 0;
+      color: var(--bad);
+      font-weight: bold;
+    }
+
+    .comparison-box.good li::before {
+      content: '✓';
+      position: absolute;
+      right: 0;
+      color: var(--good);
+      font-weight: bold;
+    }
+
+    /* Bounty Box */
+    .bounty-box {
+      background: linear-gradient(135deg, rgba(244,208,63,.1), rgba(244,208,63,.03));
+      border: 2px solid rgba(244,208,63,.3);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+
+    .bounty-box h3 {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .bounty-box .amount {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 1rem 0;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+    }
+
+    .bounty-box p {
+      margin-bottom: 0;
+      font-size: 1.1rem;
+    }
+
+    /* Pull Quote */
+    .pull-quote {
+      margin: 3rem 0;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .pull-quote p {
+      font-size: 1.6rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    /* Checklist */
+    .checklist {
+      background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    html[data-theme="light"] .checklist {
+      background: linear-gradient(135deg, rgba(10,20,40,.03), rgba(10,20,40,.01));
+    }
+
+    .checklist h4 {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .checklist ul {
+      list-style: none;
+    }
+
+    .checklist li {
+      margin-bottom: 0.75rem;
+      padding-right: 2rem;
+      position: relative;
+      font-size: 1.05rem;
+    }
+
+    .checklist li::before {
+      content: '←';
+      position: absolute;
+      right: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+    em { font-style: italic; }
+
+    .share-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .share-section h4 {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-soft);
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .share-btn:hover {
+      background: var(--bg-elev);
+      color: var(--text);
+      border-color: var(--brand);
+    }
+
+    .related-section {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      padding: 4rem 1.5rem;
+    }
+
+    .related-section .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .related-section h3 {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .related-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .related-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--brand);
+    }
+
+    .related-card h4 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .related-card p {
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-family: 'Noto Sans Arabic', 'Space Grotesk', system-ui, sans-serif;
+      color: var(--muted-2);
+      font-size: 0.9rem;
+    }
+
+    footer a { color: var(--brand); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      body { font-size: 1.125rem; }
+      h1 { font-size: 2rem; }
+      .article-header { padding: 3rem 1.25rem 2rem; }
+      .article-content { padding: 0 1.25rem 3rem; }
+      .drop-cap::first-letter { font-size: 3.5rem; }
+      .bounty-box .amount { font-size: 2.5rem; }
+      .header-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar"></div>
+
+  <header>
+    <div class="container">
+      <a href="/ar/" class="brand">Signal Pilot</a>
+      <div class="header-nav">
+        <a href="/ar/chronicle/">جميع السجلات ←</a>
+        <a href="/ar/#pricing">احصل على الوصول</a>
+      </div>
+      <button id="themeToggle" class="btn" type="button" aria-label="تبديل السمة">
+        <span id="theme-icon">☀️</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="article-header">
+    <a href="/ar/chronicle/" class="back-link">العودة إلى السجل ←</a>
+    <span class="article-category">الثقة والتحقق</span>
+    <h1>لماذا عدم إعادة الرسم مهم</h1>
+    <p class="article-subtitle">معظم المؤشرات تكذب عليك بتغيير إشاراتها التاريخية. إليك لماذا هذا غير مقبول.</p>
+    <div class="article-meta">
+      <span>Signal Pilot Labs</span>
+      <span>·</span>
+      <span>٢٤ ديسمبر ٢٠٢٤</span>
+      <span>·</span>
+      <span>٧ دقائق قراءة</span>
+    </div>
+  </div>
+
+  <article class="article-content">
+
+    <p class="drop-cap">هناك سر قذر في صناعة مؤشرات التداول: معظم المؤشرات تعيد الرسم. تغير إشاراتها التاريخية بعد الحقيقة، تُريك دخولات "مثالية" لم تكن موجودة أبداً عندما كانت الشمعة حية.</p>
+
+    <p>هذا ليس خطأ برمجي. إنه ميزة—مصممة لجعل الاختبارات الخلفية تبدو مذهلة وبيع المزيد من الاشتراكات. لكنها تدمر المتداولين الذين يثقون بتلك الإشارات في الوقت الفعلي.</p>
+
+    <p>Signal Pilot مختلف. كل مؤشر في النخبة السبعة لا يعيد الرسم بنسبة ١٠٠٪. مُدقق. موثق. ونحن واثقون جداً من هذا لدرجة أننا نراهن بأموالنا عليه.</p>
+
+    <div class="divider">✧ ✧ ✧</div>
+
+    <h2>ما هي إعادة الرسم؟</h2>
+
+    <p>تحدث إعادة الرسم عندما يغير المؤشر قيمه أو إشاراته التاريخية بناءً على بيانات أسعار مستقبلية. إليك ما يعنيه ذلك عملياً:</p>
+
+    <p>تخيل أنك تشاهد رسماً بيانياً مباشرة. المؤشر لا يُظهر إشارة. الشمعة تُغلق. لا تزال لا إشارة. ثم يتحرك السعر بشكل كبير خلال الشموع القليلة التالية—وفجأة، تلك الشمعة القديمة الآن تُظهر إشارة "شراء" لم تكن موجودة من قبل.</p>
+
+    <p>المؤشر <em>أعاد رسم</em> تاريخه ليتطابق مع ما حدث بعد ذلك.</p>
+
+    <p>عندما تنظر إلى الرسم البياني التاريخي لمؤشر يعيد الرسم، ترى إشارات مثالية عند كل منعطف. لكن تلك الإشارات لم تكن مرئية عندما كانت مهمة. ظهرت بعد ذلك، باستخدام معلومات لم تكن متاحة في ذلك الوقت.</p>
+
+    <div class="comparison-grid">
+      <div class="comparison-box bad">
+        <h4>المؤشرات التي تعيد الرسم</h4>
+        <ul>
+          <li>الإشارات تتغير بعد إغلاق الشمعة</li>
+          <li>التاريخ يبدو "مثالياً"</li>
+          <li>تستخدم بيانات مستقبلية (تحيز التطلع للأمام)</li>
+          <li>الاختبارات الخلفية لا معنى لها</li>
+          <li>التداول المباشر = خسائر مستمرة</li>
+        </ul>
+      </div>
+      <div class="comparison-box good">
+        <h4>المؤشرات التي لا تعيد الرسم</h4>
+        <ul>
+          <li>الإشارات تُقفل عند إغلاق الشمعة</li>
+          <li>التاريخ يُظهر الأداء الحقيقي</li>
+          <li>لا وصول لبيانات مستقبلية</li>
+          <li>الاختبارات الخلفية موثوقة</li>
+          <li>التداول المباشر يتطابق مع التاريخ</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>لماذا يفعل البائعون هذا</h2>
+
+    <p>السبب بسيط: المؤشرات التي تعيد الرسم تُباع بشكل أفضل.</p>
+
+    <p>عندما ينظر عميل محتمل إلى رسم بياني مع إشارات دخول مثالية عند كل قاع وإشارات خروج عند كل قمة، يفكر: "لو كان عندي هذا المؤشر، لكنت اصطدت كل حركة." لا يدركون أن تلك الإشارات ظهرت فقط <em>بعد</em> اكتمال الحركات.</p>
+
+    <p>إنه استدراك يتنكر في زي استبصار. وينجح—حتى يبدأ الناس التداول بأموال حقيقية.</p>
+
+    <div class="pull-quote">
+      <p>"ما تراه في التاريخ هو بالضبط ما كنت ستراه مباشرة. لا حيل. لا تحيز تطلع للأمام. فقط إشارات صادقة."</p>
+    </div>
+
+    <h2>ضمان Signal Pilot</h2>
+
+    <p>كل مؤشر في النخبة السبعة يُنهي إشاراته عند إغلاق الشمعة. بمجرد اكتمال الشمعة، الإشارة تُقفل. لن تتغير أبداً، بغض النظر عما يفعله السعر بعد ذلك.</p>
+
+    <p>هذا موثق من خلال تدقيق صارم للكود. نتحقق من:</p>
+
+    <div class="checklist">
+      <h4>عملية التدقيق لدينا</h4>
+      <ul>
+        <li><strong>لا مراجع مستقبلية</strong> — الكود لا يمكنه الوصول إلى الشموع التي لم تُغلق</li>
+        <li><strong>لا إعادة حساب على الشموع التاريخية</strong> — بمجرد الحساب، القيم نهائية</li>
+        <li><strong>تأكيد الإشارة عند الإغلاق فقط</strong> — الإشارات تظهر عند إغلاق الشمعة، ليس قبلها</li>
+        <li><strong>سلوك متسق مباشر مقابل تاريخي</strong> — ما تراه في الإعادة يتطابق مع الوقت الفعلي</li>
+      </ul>
+    </div>
+
+    <p>نحن واثقون جداً من ضمان عدم إعادة الرسم لدرجة أننا وضعنا مكافأة عليه:</p>
+
+    <div class="bounty-box">
+      <h3>مكافأة عدم إعادة الرسم</h3>
+      <div class="amount">$100 USD</div>
+      <p>إذا استطعت إثبات أن أي مؤشر Signal Pilot يعيد الرسم، ندفع لك ١٠٠ دولار. مطلوب دليل موثق. لم يطالب بها أحد أبداً.</p>
+    </div>
+
+    <h2>كيف تختبر إعادة الرسم</h2>
+
+    <p>تريد التحقق من مؤشر بنفسك؟ إليك الطريقة:</p>
+
+    <p><strong>الطريقة ١: إعادة تشغيل الشمعة</strong></p>
+    <p>استخدم ميزة إعادة تشغيل الشمعة في TradingView. تقدم عبر الشموع التاريخية واحدة تلو الأخرى. راقب إذا ظهرت الإشارات، اختفت، أو غيرت موقعها أثناء التقدم. إذا فعلت، فإنها تعيد الرسم.</p>
+
+    <p><strong>الطريقة ٢: مقارنة لقطات الشاشة</strong></p>
+    <p>التقط لقطة شاشة للرسم البياني الحالي. انتظر ساعة. التقط لقطة أخرى. قارن الإشارات التاريخية. إذا تغير أي شيء، فإنها تعيد الرسم.</p>
+
+    <p><strong>الطريقة ٣: المراقبة في الوقت الفعلي</strong></p>
+    <p>راقب إشارة تتشكل في الوقت الفعلي. سجل موقعها وقيمتها بالضبط. بعد إغلاق الشموع اللاحقة، تحقق إذا كانت لا تزال نفسها. المؤشرات التي تعيد الرسم ستحرك الإشارات لتبدو أفضل بعد الحقيقة.</p>
+
+    <h2>لماذا هذا مهم لتداولك</h2>
+
+    <p>إذا أجريت اختباراً خلفياً لمؤشر يعيد الرسم، ستحصل على نتائج مذهلة. معدل الربح يبدو مذهلاً. التراجعات تبدو ضئيلة. ستظن أنك وجدت الكأس المقدسة.</p>
+
+    <p>ثم تتداول به مباشرة، ولا شيء يعمل. الإشارات التي تراها في الوقت الفعلي لا تتطابق مع الإشارات التاريخية "المثالية". تأخذ صفقات تذهب ضدك فوراً. حسابك ينزف.</p>
+
+    <p>هذا ليس سوء حظ. إنه النتيجة المتوقعة من الوثوق بنظام لم يكن صادقاً أبداً بشأن أدائه.</p>
+
+    <p>المؤشرات التي لا تعيد الرسم تُريك الحقيقة. الرسم البياني التاريخي يعكس بالضبط ما كان سيحدث لو تداولت تلك الإشارات مباشرة. إذا أظهر الاختبار الخلفي معدل ربح ٦٠٪، يمكنك توقع حوالي ٦٠٪ في التداول المباشر. الإشارات التي تراها تتشكل في الوقت الفعلي ستبدو تماماً مثل الإشارات التاريخية بمجرد اكتمالها.</p>
+
+    <div class="pull-quote">
+      <p>"الدرس الرابع للفراغ: السعر يمكن أن يخدع. الضغط لا يمكنه ذلك."</p>
+    </div>
+
+    <h2>الثقة هي كل شيء</h2>
+
+    <p>التداول صعب بما فيه الكفاية دون أن تكذب عليك أدواتك.</p>
+
+    <p>عندما تستخدم مؤشرات Signal Pilot، يمكنك الوثوق بما تراه. الأداء التاريخي حقيقي. الإشارات صادقة. الاختبار الخلفي يعكس توقعات واقعية.</p>
+
+    <p>هذا لا يعني أن كل صفقة ستربح—لا مؤشر يمكنه أن يعد بذلك. لكنه يعني أنك تتخذ قرارات بناءً على معلومات دقيقة، وليس رسوم بيانية خيالية مصممة لأخذ أموالك.</p>
+
+    <p>عدم إعادة الرسم ليس ميزة. إنه الحد الأدنى. إنه الرهانات الأساسية لأي مؤشر يحترم مستخدميه.</p>
+
+    <p>في Signal Pilot، إنه غير قابل للتفاوض.</p>
+
+    <p><em>أبحر عبر الضوضاء—بإشارات يمكنك الوثوق بها.</em></p>
+
+  </article>
+
+  <div class="share-section">
+    <h4>شارك هذا المقال</h4>
+    <div class="share-buttons">
+      <a href="https://twitter.com/intent/tweet?text=%D9%84%D9%85%D8%A7%D8%B0%D8%A7%20%D8%B9%D8%AF%D9%85%20%D8%A5%D8%B9%D8%A7%D8%AF%D8%A9%20%D8%A7%D9%84%D8%B1%D8%B3%D9%85%20%D9%85%D9%87%D9%85&url=https://signalpilot.io/ar/chronicle/why-non-repainting-matters" target="_blank" rel="noopener" class="share-btn">
+        𝕏 نشر
+      </a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://signalpilot.io/ar/chronicle/why-non-repainting-matters" target="_blank" rel="noopener" class="share-btn">
+        LinkedIn
+      </a>
+      <button onclick="navigator.clipboard.writeText('https://signalpilot.io/ar/chronicle/why-non-repainting-matters')" class="share-btn">
+        نسخ الرابط
+      </button>
+    </div>
+  </div>
+
+  <section class="related-section">
+    <div class="container">
+      <h3>تابع القراءة</h3>
+      <div class="related-grid">
+        <a href="/ar/chronicle/meet-the-sovereign" class="related-card">
+          <h4>تعرف على الحاكم: شرح Pentarch</h4>
+          <p>نظرة عميقة في المؤشر الرئيسي الذي يرسم المراحل الخمس لدورات السوق.</p>
+        </a>
+        <a href="/ar/chronicle/the-pilots-oath" class="related-card">
+          <h4>قسم الطيار</h4>
+          <p>أنت الذي تمتلك النخبة السبعة لست متداولاً. أنت طيار. هذا هو القسم.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Signal Pilot Labs. جميع الحقوق محفوظة. | <a href="/ar/">الرئيسية</a> · <a href="/ar/chronicle/">جميع السجلات</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
+
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      progressBar.style.width = progress + '%';
+    });
+  </script>
+
+</body>
+</html>
