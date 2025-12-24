@@ -521,58 +521,76 @@
       transition:all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* MOBILE: Simple, clean mobile setup - NO forced positioning */
+    /* MOBILE: Simple, clean mobile setup */
     @media (max-width: 768px) {
-      /* Starfield video - lowest layer at z-index 0 */
-      #starfield-bg {
+      /* Starfield container - ON TOP, blends with everything below */
+      #starfield-container {
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         width: 100vw !important;
         height: 100vh !important;
-        height: 100dvh !important;
-        object-fit: cover !important;
-        z-index: 0 !important;
+        z-index: 9999 !important;
         pointer-events: none !important;
-        opacity: 0.5 !important;
+        overflow: visible !important;
+        mix-blend-mode: screen !important;
       }
 
-      /* Energy beam above starfield */
+      #starfield-bg {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        opacity: 0.6 !important;
+      }
+
+      /* Energy beam hidden on mobile for performance */
       #energy-beam-video {
-        z-index: 1 !important;
+        display: none !important;
       }
 
-      /* Main content above both videos */
+      /* Main content */
       main {
         position: relative !important;
-        z-index: 2 !important;
-        background: transparent !important;
-      }
-
-      /* ALL sections must be transparent to see starfield through */
-      section, .section, .container, .stack {
-        background: transparent !important;
-        background-color: transparent !important;
+        z-index: 1 !important;
       }
 
       /* Background layers BEHIND everything */
       .bg-stars {
         z-index: -3 !important;
         position: fixed !important;
-        filter: none !important; /* Remove expensive drop-shadow on mobile for better scroll performance */
+        filter: none !important;
       }
       .sp-constellations {
         z-index: 1 !important;
         position: fixed !important;
       }
 
-      /* Header needs high z-index for dropdown menus but transparent bg */
+      /* Header needs high z-index for dropdown menus but FULLY transparent bg */
+      header,
+      header *,
+      header .container,
+      header .container.nav,
+      header .nav-backdrop,
+      header .brand,
+      header nav,
+      header .nav-spacer,
+      header .menu-toggle,
+      header .lang-dropdown,
+      header .btn {
+        background: none !important;
+        background-color: transparent !important;
+        background-image: none !important;
+      }
+
       header {
         position: relative;
         z-index: 100;
         overflow-x: hidden !important;
         max-width: 100vw !important;
-        background: transparent !important;
+        border-bottom: none !important;
       }
 
       /* Prevent header content from overflowing on mobile with translated text */
@@ -648,8 +666,8 @@
     main{
       position:relative;
       min-height:100vh;
-      z-index:1;
       background:transparent !important; /* Let constellations show through! */
+      /* Note: z-index removed to allow mix-blend-mode to work with starfield */
     }
 
     /* Make all sections transparent so constellations are visible throughout entire site */
@@ -674,15 +692,16 @@
         background:transparent !important; /* Let particles show through on mobile! */
       }
 
-      /* Energy beam video - show beam on mobile with SIMPLIFIED mask */
+      /* Energy beam video - show and blend with starfield */
       #energy-beam-video {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
         left: 50% !important;
+        top: -80px !important; /* Extend into header area */
         transform: translateX(-50%) scaleX(-1) !important;
         width: 100vw !important;
-        height: 100% !important;
+        height: calc(100% + 80px) !important; /* Compensate for negative top */
         object-fit: cover !important;
         object-position: center 50% !important;
         /* Remove complex mask on mobile - too expensive */
@@ -711,15 +730,21 @@
       }
 
       /* Force all sections transparent on mobile so starfield shows through */
-      html, body, main, section, .section, .container, .stack, #main-content {
+      html, body, main, header, section, .section, .container, .stack, #main-content, .nav-backdrop,
+      .hero, article, footer, aside, div:not(.card):not(.card *):not(.btn):not(.modal-card):not(.mobile-nav):not(.mobile-nav *) {
         background: transparent !important;
         background-color: transparent !important;
       }
 
-      /* Override ANY inline background styles */
-      [style*="background"] {
+      /* Override ANY inline background styles - be aggressive */
+      [style*="background"]:not(.card):not(.card *):not(.btn):not(.carousel-item):not(.modal-card) {
         background: transparent !important;
         background-color: transparent !important;
+      }
+
+      /* Specific overrides for sections with var() backgrounds */
+      section[style*="background"] {
+        background: transparent !important;
       }
 
       /* Exception: cards need their background */
@@ -731,6 +756,26 @@
       #plan-yearly {
         animation: none !important;
         box-shadow: 0 4px 12px rgba(91,138,255,.15) !important; /* Remove heavy glow, use subtle shadow */
+      }
+
+      /* NUCLEAR: Force starfield visible across ENTIRE page */
+      body > *:not(#starfield-bg):not(#starfield-container):not(script):not(style):not(.mobile-nav):not(.mobile-nav-backdrop),
+      main,
+      main > *,
+      main section,
+      main .section,
+      #main,
+      #main > *,
+      .hero,
+      section.section,
+      section#trial,
+      section#inside,
+      section#pricing,
+      section#faq,
+      section#thanks {
+        background: transparent !important;
+        background-color: transparent !important;
+        background-image: none !important;
       }
 
     }
@@ -2023,7 +2068,7 @@
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.7);
-        z-index: 74;
+        z-index: 99998;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -2040,8 +2085,9 @@
         right: 0;
         bottom: 0;
         width: min(85vw, 380px);
-        background: #0a0c14;
-        z-index: 75;
+        background: #0a0c14 !important;
+        background-color: #0a0c14 !important;
+        z-index: 99999;
         transform: translateX(100%);
         transition: transform 0.3s ease;
         overflow-y: auto;
@@ -2137,7 +2183,7 @@
       }
       
       .nav-backdrop{
-        background:rgba(0,0,0,.85);
+        background:transparent !important;
       }
       
       .brand{
@@ -2851,33 +2897,55 @@
 
 <body>
 
-<!-- Starfield video background - video directly fixed, no container -->
-<video
-  id="starfield-bg"
-  autoplay
-  loop
-  muted
-  playsinline
-  disablepictureinpicture
-  preload="auto"
-  style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    opacity: 0.5;
-    z-index: -1;
-    pointer-events: none;
-  "
->
-  <source src="assets/videos/starfield-bg.mp4?v=17" type="video/mp4">
-</video>
+<!-- Starfield video background - wrapped in fixed container for iOS compatibility -->
+<div id="starfield-container" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+">
+  <video
+    id="starfield-bg"
+    autoplay
+    loop
+    muted
+    playsinline
+    disablepictureinpicture
+    preload="auto"
+    style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+    "
+  >
+    <source src="assets/videos/starfield-bg-mobile.mp4?v=23" type="video/mp4">
+  </video>
+</div>
 <script>
-// Starfield: Simple single video (seamless ping-pong loop)
+// Starfield: Load appropriate video for device + handle visibility
 (function() {
   const video = document.getElementById('starfield-bg');
+  const source = video.querySelector('source');
+
+  // Default is mobile video (set in HTML). Only switch to desktop if NOT a mobile device.
+  // Check user agent - DevTools properly changes this when emulating mobile
+  const isMobileDevice = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  if (!isMobileDevice) {
+    source.src = 'assets/videos/starfield-bg.mp4?v=17';
+    video.load();
+  }
+  video.play();
+
+  // Pause when tab hidden, resume when visible
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
       video.pause();
@@ -2926,6 +2994,7 @@
               Resources <span class="dropdown-arrow">▼</span>
             </button>
             <ul class="nav-dropdown-menu">
+              <li><a href="/chronicle/">Chronicle</a></li>
               <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Documentation</a></li>
               <li><a href="https://blog.signalpilot.io/" target="_blank" rel="noopener">Blog</a></li>
               <li><a href="https://education.signalpilot.io/calculators.html" target="_blank" rel="noopener">Calculators</a></li>
@@ -2969,7 +3038,7 @@
 
     <!-- HERO -->
 
-    <section id="main-content" class="hero" style="position:relative;overflow:visible;z-index:1">
+    <section id="main-content" class="hero" style="position:relative;overflow:visible">
 
       <!-- EPIC Energy Beam v2 -->
       <div id="energy-beam-container" style="position:absolute;top:-70px;left:0;width:100%;height:calc(100% + 70px);pointer-events:none;z-index:0;overflow:visible;display:none"></div>
@@ -2995,14 +3064,9 @@
           object-position: left 30%;
           opacity: 1;
           transform: translateZ(0) scaleX(-1);
-          -webkit-mask-image:
-            radial-gradient(ellipse 100% 85% at 30% 40%, black 55%, transparent 85%),
-            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
-          -webkit-mask-composite: source-in;
-          mask-image:
-            radial-gradient(ellipse 100% 85% at 30% 40%, black 55%, transparent 85%),
-            linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
-          mask-composite: intersect;
+          mix-blend-mode: screen;
+          -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
         "
       >
         <source src="assets/videos/signal-conduit-4k.mp4?v=14" type="video/mp4">
