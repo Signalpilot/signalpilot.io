@@ -7,15 +7,15 @@
 
 ## The Elite Seven
 
-| # | Indicator | Title | Tagline |
-|---|-----------|-------|---------|
-| 1 | **Pentarch** | The Sovereign | "I am the cycle. The cycle is me." |
-| 2 | **Volume Oracle** | The Prophet | "Price is the last to know. Volume knows first." |
-| 3 | **Janus Atlas** | The Cartographer | "The map exists before the journey begins." |
-| 4 | **Plutus Flow** | The Scales | "Price can deceive. Pressure cannot." |
-| 5 | **OmniDeck** | The Commander | "Complexity without unity is chaos." |
-| 6 | **Augury Grid** | The Watchman | "The pilot who sees everything sees nothing." |
-| 7 | **Harmonic Oscillator** | The Arbiter | "The patient pilot survives." |
+| # | Indicator | Title | Tagline | Lesson |
+|---|-----------|-------|---------|--------|
+| 1 | **Pentarch** | The Sovereign | "I am the cycle. The cycle is me." | The cycle is eternal. Learn to read it. |
+| 2 | **Volume Oracle** | The Prophet | "I hear what retail cannot." | Price is the last to know. Volume knows first. |
+| 3 | **Janus Atlas** | The Cartographer | "I map where wars will be fought." | The map exists before the journey begins. |
+| 4 | **Plutus Flow** | The Scales | "Pressure does not lie." | Price can deceive. Pressure cannot. |
+| 5 | **OmniDeck** | The Commander | "Ten systems. One vision." | Complexity without unity is chaos. |
+| 6 | **Augury Grid** | The Watchman | "I watch them all." | The pilot who sees everything sees nothing. |
+| 7 | **Harmonic Oscillator** | The Arbiter | "Four voices. One verdict." | The patient pilot survives. |
 
 ## Core Messaging
 - **Brand Promise:** Navigate the noise
@@ -180,7 +180,7 @@ signalpilot.io
 
 ## Philosophy Posts
 
-### The Oath
+### The Oath (Short)
 ```
 THE PILOT'S OATH
 
@@ -194,6 +194,47 @@ I will wait for consensus.
 
 I am not a gambler.
 I am a Pilot.
+```
+
+### The Oath (Full Version)
+```
+THE PILOT'S OATH
+
+I will not chase.
+I will not guess.
+I will not hope.
+
+I will read the cycle.
+I will follow the institutions.
+I will respect the levels.
+I will weigh the pressure.
+I will unify my systems.
+I will scan the horizon.
+I will wait for consensus.
+
+I am not a gambler.
+I am a Pilot.
+
+The Elite Seven are my stars.
+Navigate the noise.
+```
+
+### Trust Post (Non-Repainting)
+```
+"If you can prove any of our indicators repaint, we'll pay you $100."
+
+We've made this offer for years.
+No one has ever claimed it.
+
+Every signal locks on candle close.
+What you see in history is what you would have seen live.
+
+No tricks. No lookahead bias.
+Just honest signals.
+
+100% non-repainting. Audited.
+
+signalpilot.io
 ```
 
 ### The Transformation
@@ -739,38 +780,47 @@ Navigate the noise.
 
 # SECTION 5: POSTING SCHEDULE
 
-| Date | Platform | Content | Image |
-|------|----------|---------|-------|
-| Dec 23 | X + IG Feed | "Seven were chosen" teaser | Council image |
-| Dec 24 | X + IG Story | Pentarch reveal | pentarch-preview.jpg |
-| Dec 25 | X + IG Story | Volume Oracle reveal | prophet-preview.jpg |
-| Dec 26 | X + IG Story | Janus Atlas reveal | cartographer-preview.jpg |
-| Dec 26 | IG Feed | "Philosophy" post | Cosmic/stars image |
-| Dec 27 | X + IG Story | Plutus Flow reveal | scales-preview.jpg |
-| Dec 27 | IG Feed | "Five Phases" carousel | Custom slides |
-| Dec 28 | X + IG Story | OmniDeck reveal | commander-preview.jpg |
-| Dec 28 | IG Feed | "Meet The Seven" carousel | Custom slides |
-| Dec 29 | X + IG Story | Augury Grid reveal | watchman-preview.jpg |
-| Dec 29 | X + IG Story | Harmonic Oscillator reveal | arbiter-preview.jpg |
-| Dec 29 | IG Feed | "Pilot's Oath" carousel | Custom slides |
-| Dec 30 | X + IG Feed | LAUNCH | All visuals |
+**Adjust dates based on your start date. This is a 7-day countdown to Dec 30 launch.**
+
+| Day | Platform | Content | Image File |
+|-----|----------|---------|------------|
+| Day 1 (Dec 24) | X + IG Feed | "Seven were chosen" teaser | `elite-seven-council-preview.jpg` |
+| Day 2 (Dec 25) | X + IG Story | Pentarch reveal | `sovereign-pentarch-preview.jpg` |
+| Day 2 (Dec 25) | IG Feed | "Philosophy" post | `pilots-oath-preview.jpg` |
+| Day 3 (Dec 26) | X + IG Story | Volume Oracle reveal | `prophet-volume-oracle-preview.jpg` |
+| Day 3 (Dec 26) | X + IG Story | Janus Atlas reveal | `cartographer-janus-atlas-preview.jpg` |
+| Day 4 (Dec 27) | X + IG Story | Plutus Flow reveal | `scales-plutus-flow-preview.jpg` |
+| Day 4 (Dec 27) | IG Feed | "Five Phases" carousel | Custom slides |
+| Day 5 (Dec 28) | X + IG Story | OmniDeck reveal | `commander-omnideck-preview.jpg` |
+| Day 5 (Dec 28) | IG Feed | "Meet The Seven" carousel | Custom slides |
+| Day 6 (Dec 29) | X + IG Story | Augury Grid reveal | `watchman-augury-grid-preview.jpg` |
+| Day 6 (Dec 29) | X + IG Story | Harmonic Oscillator reveal | `arbiter-harmonic-oscillator-preview.jpg` |
+| Day 6 (Dec 29) | IG Feed | "Pilot's Oath" carousel | Custom slides |
+| Day 7 (Dec 30) | X + IG Feed | LAUNCH | `council-assembles-preview.jpg` |
 
 ---
 
 # SECTION 6: IMAGE ASSETS
 
-Located in `/chronicle/`:
-- `elite-seven-council-preview.jpg` — Council gathering (main launch)
-- `pilots-oath-preview.jpg` — Philosophy/oath posts
-- `sovereign-pentarch-preview.jpg` — Pentarch posts
-- `prophet-volume-oracle-preview.jpg` — Volume Oracle posts
-- `cartographer-janus-atlas-preview.jpg` — Janus Atlas posts
-- `scales-plutus-flow-preview.jpg` — Plutus Flow posts
-- `commander-omnideck-preview.jpg` — OmniDeck posts
-- `watchman-augury-grid-preview.jpg` — Augury Grid posts (if exists)
-- `arbiter-harmonic-oscillator-preview.jpg` — Harmonic Oscillator posts
-- `council-assembles-preview.jpg` — Finale/launch posts
-- `hierarchy-of-signals-preview.jpg` — System overview posts
+**All files located in `/chronicle/`**
+
+| File | Use For |
+|------|---------|
+| `elite-seven-council-preview.jpg` | Main launch teaser, "Seven were chosen" |
+| `sovereign-pentarch-preview.jpg` | Pentarch/Sovereign posts |
+| `prophet-volume-oracle-preview.jpg` | Volume Oracle/Prophet posts |
+| `cartographer-janus-atlas-preview.jpg` | Janus Atlas/Cartographer posts |
+| `scales-plutus-flow-preview.jpg` | Plutus Flow/Scales posts |
+| `commander-omnideck-preview.jpg` | OmniDeck/Commander posts |
+| `watchman-augury-grid-preview.jpg` | Augury Grid/Watchman posts |
+| `arbiter-harmonic-oscillator-preview.jpg` | Harmonic Oscillator/Arbiter posts |
+| `pilots-oath-preview.jpg` | Philosophy/Oath posts |
+| `council-assembles-preview.jpg` | Finale/Launch day |
+| `hierarchy-of-signals-preview.jpg` | System overview, how they work together |
+| `non-repainting-matters-preview.jpg` | Trust/credibility posts |
+
+**Audio Assets** (for Reels/Stories with voiceover):
+- Located in `/chronicle/audio/` — Deep wizard voice narrations for each article
 
 ---
 
