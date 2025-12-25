@@ -28,6 +28,8 @@
   <style>
     :root{color-scheme:dark;--bg:#05070d;--bg-soft:#0c111c;--bg-elev:#101626;--text:#ecf1ff;--muted:#b7c2d9;--muted-2:#8ea0bf;--brand:#5b8aff;--brand-2:#7b9bff;--accent:#76ddff;--good:#3ed598;--warn:#f9a23c;--border:rgba(255,255,255,.12);--radius:16px}
     html[data-theme="light"]{color-scheme:light;--bg:#ffffff;--bg-soft:#f8fafc;--bg-elev:#f1f5f9;--text:#0f172a;--muted:#475569;--muted-2:#334155;--brand:#3b82f6;--brand-2:#2563eb;--accent:#0ea5e9;--good:#10b981;--warn:#f97316;--border:rgba(30,41,59,.2)}
+    .cat-origin{--cat-color:#f59e0b}.cat-philosophy{--cat-color:#a855f7}.cat-system{--cat-color:#3b82f6}.cat-one{--cat-color:#ef4444}.cat-two{--cat-color:#f97316}.cat-three{--cat-color:#eab308}.cat-four{--cat-color:#22c55e}.cat-five{--cat-color:#14b8a6}.cat-six{--cat-color:#6366f1}.cat-seven{--cat-color:#8b5cf6}.cat-finale{--cat-color:linear-gradient(90deg,#f59e0b,#fbbf24)}.cat-trust{--cat-color:#10b981}
+    *,*::before,*::after{transition:background-color 0.3s ease,border-color 0.3s ease,color 0.3s ease}
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
     body::before{content:'';position:fixed;top:-50%;left:-50%;right:-50%;bottom:-50%;width:200%;height:200%;background:radial-gradient(1200px 700px at 20% 30%,rgba(91,138,255,.15),transparent 60%),radial-gradient(1000px 600px at 80% 70%,rgba(118,221,255,.12),transparent 62%),radial-gradient(1100px 650px at 50% 50%,rgba(123,155,255,.10),transparent 64%);animation:aurora 40s ease-in-out infinite alternate;z-index:0;pointer-events:none;opacity:0.6}
@@ -47,31 +49,44 @@
     .btn:hover{background:var(--bg-elev);transform:translateY(-1px)}
     .hero{padding:5rem 0 3rem;text-align:center}
     .hero-label{display:inline-block;font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.15em;color:var(--accent);margin-bottom:1rem;padding:0.4rem 1rem;border:1px solid rgba(118,221,255,0.3);border-radius:999px;background:rgba(118,221,255,0.1)}
-    h1{font-family:'EB Garamond',Georgia,serif;font-size:clamp(3rem,6vw,4.5rem);font-weight:500;font-style:italic;line-height:1.1;margin-bottom:1rem;color:var(--text)}
+    h1{font-family:'EB Garamond',Georgia,serif;font-size:clamp(3rem,6vw,4.5rem);font-weight:500;font-style:italic;line-height:1.1;margin-bottom:1rem;background:linear-gradient(135deg,var(--text) 0%,var(--brand) 50%,var(--accent) 100%);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradient-shift 8s ease infinite}
+    @keyframes gradient-shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
     .subtitle{font-size:1.25rem;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.6}
+    .hero-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:2rem}
+    .hero-divider::before,.hero-divider::after{content:'';width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+    .hero-divider span{color:var(--muted-2);font-size:1.2rem}
     .articles-section{padding:2rem 0 6rem}
     .articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:2rem}
     .article-card{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all 0.3s ease;text-decoration:none;color:inherit;display:flex;flex-direction:column}
     html[data-theme="light"] .article-card{background:linear-gradient(135deg,rgba(10,20,40,.03),rgba(10,20,40,.01))}
-    .article-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.3);border-color:var(--brand)}
-    .article-image{width:100%;height:200px;background:linear-gradient(135deg,var(--bg-elev),var(--bg-soft));display:flex;align-items:center;justify-content:center;font-size:4rem;border-bottom:1px solid var(--border);position:relative;background-size:cover;background-position:center}
-    .article-image.has-bg{background-blend-mode:normal}
-    .article-image.has-bg::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,7,13,0.3),rgba(5,7,13,0.7));z-index:1}
-    .article-image.has-bg span{position:relative;z-index:2;opacity:0;transition:opacity 0.3s}
-    .article-card:hover .article-image.has-bg span{opacity:1}
+    .article-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.3),0 0 0 1px var(--cat-color,var(--brand));border-color:var(--cat-color,var(--brand))}
+    .article-image{width:100%;height:200px;background:linear-gradient(135deg,var(--bg-elev),var(--bg-soft));display:flex;align-items:center;justify-content:center;font-size:4rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+    .article-image-inner{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 0.5s ease,filter 0.5s ease}
+    .article-card:hover .article-image-inner{transform:scale(1.08)}
+    .article-image::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,7,13,0) 0%,rgba(5,7,13,0.1) 60%,rgba(5,7,13,0.4) 100%);z-index:2;pointer-events:none}
+    html[data-theme="light"] .article-image::before{background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,0.1) 60%,rgba(255,255,255,0.3) 100%)}
+    .article-image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--cat-color,var(--accent));z-index:3;transform:scaleX(0);transition:transform 0.3s ease}
+    .article-card:hover .article-image::after{transform:scaleX(1)}
     .article-content{padding:1.5rem;flex:1;display:flex;flex-direction:column}
     .article-meta{display:flex;align-items:center;gap:1rem;margin-bottom:0.75rem;font-size:0.85rem;color:var(--muted-2)}
-    .article-category{color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+    .article-category{color:var(--cat-color,var(--accent));font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+    .article-card[class*="cat-"] .article-category{background:color-mix(in srgb,var(--cat-color) 15%,transparent);padding:0.2rem 0.5rem;border-radius:4px;border:1px solid color-mix(in srgb,var(--cat-color) 30%,transparent)}
     .article-title{font-family:'EB Garamond',Georgia,serif;font-size:1.5rem;font-weight:500;line-height:1.3;margin-bottom:0.75rem;color:var(--text)}
     .article-excerpt{color:var(--muted);font-size:0.95rem;line-height:1.6;flex:1}
     .article-footer{display:flex;align-items:center;justify-content:space-between;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
     .article-author{display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;color:var(--muted)}
     .read-time{font-size:0.85rem;color:var(--muted-2)}
-    .featured-article{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0}
+    .featured-article{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative;background:linear-gradient(135deg,rgba(91,138,255,.08),rgba(118,221,255,.05))}
+    .featured-article::before{content:'';position:absolute;inset:-2px;background:linear-gradient(135deg,var(--brand),var(--accent),var(--brand-2));border-radius:calc(var(--radius) + 2px);z-index:-1;opacity:0.6;animation:featured-glow 4s ease-in-out infinite alternate}
+    .featured-article::after{content:'';position:absolute;inset:0;background:var(--bg-soft);border-radius:var(--radius);z-index:-1}
+    @keyframes featured-glow{0%{opacity:0.4;filter:blur(8px)}100%{opacity:0.7;filter:blur(12px)}}
+    .featured-article:hover::before{opacity:0.9}
     .featured-article .article-image{height:100%;min-height:300px}
     .featured-article .article-content{padding:2.5rem}
     .featured-article .article-title{font-size:2rem}
-    .featured-badge{display:inline-block;background:linear-gradient(115deg,var(--brand),var(--accent));color:#fff;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.3rem 0.6rem;border-radius:4px;margin-bottom:1rem}
+    .featured-badge{display:inline-flex;align-items:center;gap:0.4rem;background:linear-gradient(115deg,var(--brand),var(--accent));color:#fff;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.3rem 0.6rem;border-radius:4px;margin-bottom:1rem;animation:badge-pulse 2s ease-in-out infinite}
+    .featured-badge::before{content:'★';font-size:0.8rem}
+    @keyframes badge-pulse{0%,100%{box-shadow:0 0 0 0 rgba(91,138,255,0.4)}50%{box-shadow:0 0 0 6px rgba(91,138,255,0)}}
     footer{padding:3rem 0;border-top:1px solid var(--border);text-align:center;color:var(--muted-2);font-size:0.9rem}
     footer a{color:var(--brand);text-decoration:none;font-weight:600}
     footer a:hover{text-decoration:underline}
@@ -102,6 +117,9 @@
       <span class="hero-label">La Cronaca di SignalPilot</span>
       <h1>Cronaca</h1>
       <p class="subtitle">Approfondimenti sui cicli di mercato, filosofia di trading e la storia dietro gli Elite Sette.</p>
+      <div class="hero-divider">
+        <span>◆</span>
+      </div>
     </div>
   </section>
 
@@ -109,8 +127,10 @@
     <div class="container">
       <div class="articles-grid">
 
-        <a href="/it/chronicle/birth-of-the-elite-seven/" class="article-card featured-article">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/elite-seven-council.png')"><span>★</span></div>
+        <a href="/it/chronicle/birth-of-the-elite-seven/" class="article-card featured-article cat-origin">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/elite-seven-council.png')"></div>
+          </div>
           <div class="article-content">
             <span class="featured-badge">In evidenza</span>
             <div class="article-meta">
@@ -126,8 +146,10 @@
           </div>
         </a>
 
-        <a href="/it/chronicle/the-pilots-oath/" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/pilots-oath.png')"><span>⚔</span></div>
+        <a href="/it/chronicle/the-pilots-oath/" class="article-card cat-philosophy">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/pilots-oath.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">Filosofia</span>
@@ -142,8 +164,10 @@
           </div>
         </a>
 
-        <a href="/it/chronicle/the-hierarchy-of-signals/" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/hierarchy-of-signals.png')"><span>◇</span></div>
+        <a href="/it/chronicle/the-hierarchy-of-signals/" class="article-card cat-system">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/hierarchy-of-signals.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">Sistema</span>
@@ -158,8 +182,10 @@
           </div>
         </a>
 
-        <a href="/it/chronicle/meet-the-sovereign/" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/sovereign-pentarch.png')"><span>♔</span></div>
+        <a href="/it/chronicle/meet-the-sovereign/" class="article-card cat-one">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/sovereign-pentarch.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">Uno di Sette</span>
@@ -174,24 +200,10 @@
           </div>
         </a>
 
-        <a href="/it/chronicle/why-non-repainting-matters/" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/non-repainting-matters.png')"><span>◈</span></div>
-          <div class="article-content">
-            <div class="article-meta">
-              <span class="article-category">Fiducia</span>
-              <span>24 dicembre 2025</span>
-            </div>
-            <h2 class="article-title">Perché il Non-Repainting è Importante</h2>
-            <p class="article-excerpt">La differenza tra indicatori di cui puoi fidarti e quelli che ti tradiscono. Tutti gli indicatori Elite Sette sono certificati Non-Repainting.</p>
-            <div class="article-footer">
-              <span class="article-author">Signal Pilot Labs</span>
-              <span class="read-time">6 min di lettura</span>
-            </div>
+        <a href="/it/chronicle/the-prophet/" class="article-card cat-two">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/prophet-volume-oracle.png')"></div>
           </div>
-        </a>
-
-        <a href="/it/chronicle/the-prophet/" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/prophet-volume-oracle.png')"><span>◎</span></div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">Due di Sette</span>
@@ -206,8 +218,10 @@
           </div>
         </a>
 
-        <a href="/it/chronicle/the-cartographer/" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/cartographer-janus-atlas.png')"><span>◫</span></div>
+        <a href="/it/chronicle/the-cartographer/" class="article-card cat-three">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/cartographer-janus-atlas.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">Tre di Sette</span>
@@ -222,8 +236,10 @@
           </div>
         </a>
 
-        <a href="/it/chronicle/the-scales/" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/scales-plutus-flow.png')"><span>⚖</span></div>
+        <a href="/it/chronicle/the-scales/" class="article-card cat-four">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/scales-plutus-flow.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">Quattro di Sette</span>
@@ -238,8 +254,10 @@
           </div>
         </a>
 
-        <a href="/it/chronicle/the-commander/" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/commander-omnideck.png')"><span>⌘</span></div>
+        <a href="/it/chronicle/the-commander/" class="article-card cat-five">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/commander-omnideck.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">Cinque di Sette</span>
@@ -254,8 +272,10 @@
           </div>
         </a>
 
-        <a href="/it/chronicle/the-watchman/" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/watchman-augury-grid.png')"><span>◉</span></div>
+        <a href="/it/chronicle/the-watchman/" class="article-card cat-six">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/watchman-augury-grid.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">Sei di Sette</span>
@@ -270,8 +290,10 @@
           </div>
         </a>
 
-        <a href="/it/chronicle/the-arbiter/" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/arbiter-harmonic-oscillator.png')"><span>⬡</span></div>
+        <a href="/it/chronicle/the-arbiter/" class="article-card cat-seven">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/arbiter-harmonic-oscillator.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">Sette di Sette</span>
@@ -286,8 +308,10 @@
           </div>
         </a>
 
-        <a href="/it/chronicle/the-council-assembles/" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/council-assembles.png')"><span>⚡</span></div>
+        <a href="/it/chronicle/the-council-assembles/" class="article-card cat-finale">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/council-assembles.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">Finale</span>
@@ -295,6 +319,24 @@
             </div>
             <h2 class="article-title">Il Consiglio si Riunisce</h2>
             <p class="article-excerpt">«Hai conosciuto ogni membro. Ora guardali lavorare come uno solo.» Quando gli Elite Sette si uniscono, il caos diventa chiarezza e il rumore diventa segnale.</p>
+            <div class="article-footer">
+              <span class="article-author">Signal Pilot Labs</span>
+              <span class="read-time">6 min di lettura</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="/it/chronicle/why-non-repainting-matters/" class="article-card cat-trust">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/non-repainting-matters.png')"></div>
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="article-category">Fiducia</span>
+              <span>24 dicembre 2025</span>
+            </div>
+            <h2 class="article-title">Perché il Non-Repainting è Importante</h2>
+            <p class="article-excerpt">La differenza tra indicatori di cui puoi fidarti e quelli che ti tradiscono. Tutti gli indicatori Elite Sette sono certificati Non-Repainting.</p>
             <div class="article-footer">
               <span class="article-author">Signal Pilot Labs</span>
               <span class="read-time">6 min di lettura</span>
