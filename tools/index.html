@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Trading Tools | Position Size & Risk Calculator</title>
-  <meta name="description" content="Free trading calculators for position sizing, risk/reward analysis, and compound growth projections. No signup required.">
+  <title>Free Trading Tools | Position Size, Risk & Kelly Calculator</title>
+  <meta name="description" content="Free trading calculators: position sizing, risk/reward, drawdown recovery, Kelly criterion, and more. No signup required.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://signalpilot.io/tools/">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Free Trading Tools | Position Size Calculator">
-  <meta property="og:description" content="Calculate position size, risk/reward ratios, and compound growth. Free, no signup required.">
+  <meta property="og:title" content="Free Trading Tools | 7 Essential Calculators">
+  <meta property="og:description" content="Position size, risk/reward, drawdown recovery, Kelly criterion & more. Free, no signup.">
   <meta property="og:url" content="https://signalpilot.io/tools/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://signalpilot.io/assets/og-tools.png">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Free Trading Tools | Position Size Calculator">
-  <meta name="twitter:description" content="Calculate position size, risk/reward ratios, and compound growth. Free, no signup.">
+  <meta name="twitter:title" content="Free Trading Tools | 7 Essential Calculators">
+  <meta name="twitter:description" content="Position size, risk/reward, drawdown recovery, Kelly criterion & more. Free, no signup.">
   <meta name="twitter:image" content="https://signalpilot.io/assets/og-tools.png">
 
   <link rel="icon" href="/assets/favicon.ico">
@@ -34,6 +34,15 @@
       --accent-hover: #818cf8;
       --success: #22c55e;
       --warning: #eab308;
+      --danger: #ef4444;
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --muted: #64748b;
     }
 
     * {
@@ -48,10 +57,11 @@
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 2rem 1.5rem;
     }
@@ -59,8 +69,33 @@
     /* Header */
     .header {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
       padding-top: 1rem;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--text);
     }
 
     .header h1 {
@@ -76,6 +111,17 @@
     .header p {
       color: var(--muted);
       font-size: 1.1rem;
+    }
+
+    .tool-count {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
     }
 
     /* Share Bar */
@@ -125,10 +171,15 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .tool-card:hover {
+      border-color: var(--accent);
     }
 
     .tool-card h2 {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
       display: flex;
@@ -137,12 +188,12 @@
     }
 
     .tool-card h2 span {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
     }
 
     .tool-card .description {
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       margin-bottom: 1.25rem;
     }
 
@@ -158,18 +209,18 @@
       margin-bottom: 0.35rem;
     }
 
-    .form-group input {
+    .form-group input, .form-group select {
       width: 100%;
-      padding: 0.65rem 0.85rem;
+      padding: 0.6rem 0.75rem;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 6px;
       color: var(--text);
-      font-size: 1rem;
+      font-size: 0.95rem;
       transition: border-color 0.2s;
     }
 
-    .form-group input:focus {
+    .form-group input:focus, .form-group select:focus {
       outline: none;
       border-color: var(--accent);
     }
@@ -185,22 +236,50 @@
       gap: 0.75rem;
     }
 
+    .btn-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
     .calc-btn {
-      width: 100%;
-      padding: 0.75rem;
+      flex: 1;
+      padding: 0.7rem;
       background: var(--accent);
       border: none;
       border-radius: 6px;
       color: white;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
       transition: background 0.2s;
-      margin-top: 0.5rem;
     }
 
     .calc-btn:hover {
       background: var(--accent-hover);
+    }
+
+    .share-result-btn {
+      padding: 0.7rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: none;
+    }
+
+    .share-result-btn.show {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .share-result-btn:hover {
+      border-color: var(--accent);
+      color: var(--text);
     }
 
     /* Results */
@@ -219,7 +298,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.5rem 0;
+      padding: 0.45rem 0;
     }
 
     .result-row:not(:last-child) {
@@ -228,17 +307,17 @@
 
     .result-label {
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .result-value {
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
     .result-value.highlight {
       color: var(--accent);
-      font-size: 1.15rem;
+      font-size: 1.1rem;
     }
 
     .result-value.success {
@@ -247,6 +326,25 @@
 
     .result-value.warning {
       color: var(--warning);
+    }
+
+    .result-value.danger {
+      color: var(--danger);
+    }
+
+    /* Insight box */
+    .insight {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: var(--bg);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-left: 3px solid var(--accent);
+    }
+
+    .insight strong {
+      color: var(--text);
     }
 
     /* Hint Text */
@@ -274,7 +372,7 @@
       color: var(--accent);
     }
 
-    /* Copy Toast */
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 2rem;
@@ -308,21 +406,42 @@
       .form-row {
         grid-template-columns: 1fr;
       }
+
+      .header-top {
+        justify-content: center;
+      }
+    }
+
+    /* Section dividers */
+    .section-title {
+      text-align: center;
+      margin: 2rem 0 1.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header class="header">
-      <h1>Free Trading Tools</h1>
-      <p>Position sizing, risk analysis & growth projections — no signup required</p>
+      <div class="header-top">
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+          <span id="theme-icon">🌙</span>
+          <span id="theme-text">Dark</span>
+        </button>
+      </div>
+
+      <h1>Free Trading Tools <span class="tool-count">7 Tools</span></h1>
+      <p>Position sizing, risk analysis, Kelly criterion & more — no signup required</p>
 
       <div class="share-bar">
-        <a href="https://twitter.com/intent/tweet?text=Free%20trading%20calculators%20for%20position%20sizing%20and%20risk%20management&url=https://signalpilot.io/tools/" target="_blank" rel="noopener" class="share-btn">
+        <a href="https://twitter.com/intent/tweet?text=Free%20trading%20calculators%20for%20position%20sizing%2C%20risk%20management%20%26%20Kelly%20criterion&url=https://signalpilot.io/tools/" target="_blank" rel="noopener" class="share-btn">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           Share on X
         </a>
-        <a href="https://reddit.com/submit?url=https://signalpilot.io/tools/&title=Free%20Trading%20Tools%20-%20Position%20Size%20%26%20Risk%20Calculator" target="_blank" rel="noopener" class="share-btn">
+        <a href="https://reddit.com/submit?url=https://signalpilot.io/tools/&title=Free%20Trading%20Tools%20-%207%20Essential%20Calculators" target="_blank" rel="noopener" class="share-btn">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
           Reddit
         </a>
@@ -335,7 +454,7 @@
 
     <div class="tools-grid">
       <!-- Position Size Calculator -->
-      <div class="tool-card">
+      <div class="tool-card" id="position-size">
         <h2><span>📐</span> Position Size Calculator</h2>
         <p class="description">Calculate optimal position size based on your risk tolerance</p>
 
@@ -361,7 +480,10 @@
           </div>
         </div>
 
-        <button class="calc-btn" onclick="calcPositionSize()">Calculate</button>
+        <div class="btn-row">
+          <button class="calc-btn" onclick="calcPositionSize()">Calculate</button>
+          <button class="share-result-btn" id="ps-share" onclick="shareResult('position-size')">📋 Share</button>
+        </div>
 
         <div class="results" id="ps-results">
           <div class="result-row">
@@ -384,7 +506,7 @@
       </div>
 
       <!-- Risk/Reward Calculator -->
-      <div class="tool-card">
+      <div class="tool-card" id="risk-reward">
         <h2><span>⚖️</span> Risk/Reward Calculator</h2>
         <p class="description">Analyze trade quality with R:R ratio and win rate requirements</p>
 
@@ -404,7 +526,10 @@
           </div>
         </div>
 
-        <button class="calc-btn" onclick="calcRiskReward()">Calculate</button>
+        <div class="btn-row">
+          <button class="calc-btn" onclick="calcRiskReward()">Calculate</button>
+          <button class="share-result-btn" id="rr-share" onclick="shareResult('risk-reward')">📋 Share</button>
+        </div>
 
         <div class="results" id="rr-results">
           <div class="result-row">
@@ -426,10 +551,97 @@
         </div>
       </div>
 
+      <!-- Profit/Loss Calculator -->
+      <div class="tool-card" id="profit-loss">
+        <h2><span>💰</span> Profit/Loss Calculator</h2>
+        <p class="description">Calculate P&L for long or short positions</p>
+
+        <div class="form-group">
+          <label>Position Type</label>
+          <select id="pl-type">
+            <option value="long">Long (Buy)</option>
+            <option value="short">Short (Sell)</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Entry Price ($)</label>
+            <input type="number" id="pl-entry" placeholder="100.00" step="any">
+          </div>
+          <div class="form-group">
+            <label>Exit Price ($)</label>
+            <input type="number" id="pl-exit" placeholder="110.00" step="any">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Number of Shares</label>
+          <input type="number" id="pl-shares" placeholder="100" step="1">
+        </div>
+
+        <div class="btn-row">
+          <button class="calc-btn" onclick="calcProfitLoss()">Calculate</button>
+          <button class="share-result-btn" id="pl-share" onclick="shareResult('profit-loss')">📋 Share</button>
+        </div>
+
+        <div class="results" id="pl-results">
+          <div class="result-row">
+            <span class="result-label">Profit/Loss</span>
+            <span class="result-value highlight" id="pl-amount">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Return %</span>
+            <span class="result-value" id="pl-percent">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Entry Value</span>
+            <span class="result-value" id="pl-entry-val">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Exit Value</span>
+            <span class="result-value" id="pl-exit-val">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawdown Recovery Calculator -->
+      <div class="tool-card" id="drawdown">
+        <h2><span>📉</span> Drawdown Recovery Calculator</h2>
+        <p class="description">See how much you need to recover from a loss</p>
+
+        <div class="form-group">
+          <label>Drawdown / Loss (%)</label>
+          <input type="number" id="dd-loss" placeholder="25" step="any">
+          <p class="hint">How much your account has dropped</p>
+        </div>
+
+        <div class="btn-row">
+          <button class="calc-btn" onclick="calcDrawdown()">Calculate</button>
+          <button class="share-result-btn" id="dd-share" onclick="shareResult('drawdown')">📋 Share</button>
+        </div>
+
+        <div class="results" id="dd-results">
+          <div class="result-row">
+            <span class="result-label">Recovery Needed</span>
+            <span class="result-value highlight" id="dd-recovery">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">If you had $10,000</span>
+            <span class="result-value" id="dd-example-after">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Need to get back to</span>
+            <span class="result-value" id="dd-example-target">—</span>
+          </div>
+          <div class="insight" id="dd-insight"></div>
+        </div>
+      </div>
+
       <!-- Compound Growth Calculator -->
-      <div class="tool-card">
+      <div class="tool-card" id="compound">
         <h2><span>📈</span> Compound Growth Calculator</h2>
-        <p class="description">Project account growth with consistent returns over time</p>
+        <p class="description">Project account growth with consistent returns</p>
 
         <div class="form-row">
           <div class="form-group">
@@ -453,7 +665,10 @@
           </div>
         </div>
 
-        <button class="calc-btn" onclick="calcCompound()">Calculate</button>
+        <div class="btn-row">
+          <button class="calc-btn" onclick="calcCompound()">Calculate</button>
+          <button class="share-result-btn" id="cg-share" onclick="shareResult('compound')">📋 Share</button>
+        </div>
 
         <div class="results" id="cg-results">
           <div class="result-row">
@@ -474,9 +689,99 @@
           </div>
         </div>
       </div>
+
+      <!-- Kelly Criterion Calculator -->
+      <div class="tool-card" id="kelly">
+        <h2><span>🎯</span> Kelly Criterion Calculator</h2>
+        <p class="description">Optimal position sizing based on your edge</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Win Rate (%)</label>
+            <input type="number" id="kelly-winrate" placeholder="55" step="any">
+            <p class="hint">Your historical win percentage</p>
+          </div>
+          <div class="form-group">
+            <label>Win/Loss Ratio</label>
+            <input type="number" id="kelly-ratio" placeholder="1.5" step="any">
+            <p class="hint">Avg win $ / Avg loss $</p>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="calc-btn" onclick="calcKelly()">Calculate</button>
+          <button class="share-result-btn" id="kelly-share" onclick="shareResult('kelly')">📋 Share</button>
+        </div>
+
+        <div class="results" id="kelly-results">
+          <div class="result-row">
+            <span class="result-label">Full Kelly %</span>
+            <span class="result-value highlight" id="kelly-full">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Half Kelly (Recommended)</span>
+            <span class="result-value success" id="kelly-half">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Quarter Kelly (Conservative)</span>
+            <span class="result-value" id="kelly-quarter">—</span>
+          </div>
+          <div class="insight" id="kelly-insight"></div>
+        </div>
+      </div>
+
+      <!-- Expectancy Calculator -->
+      <div class="tool-card" id="expectancy">
+        <h2><span>🧮</span> Expectancy Calculator</h2>
+        <p class="description">Measure your trading edge per trade</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Win Rate (%)</label>
+            <input type="number" id="exp-winrate" placeholder="55" step="any">
+          </div>
+          <div class="form-group">
+            <label>Average Win ($)</label>
+            <input type="number" id="exp-avgwin" placeholder="150" step="any">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Loss Rate (%)</label>
+            <input type="number" id="exp-lossrate" placeholder="45" step="any" readonly>
+          </div>
+          <div class="form-group">
+            <label>Average Loss ($)</label>
+            <input type="number" id="exp-avgloss" placeholder="100" step="any">
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="calc-btn" onclick="calcExpectancy()">Calculate</button>
+          <button class="share-result-btn" id="exp-share" onclick="shareResult('expectancy')">📋 Share</button>
+        </div>
+
+        <div class="results" id="exp-results">
+          <div class="result-row">
+            <span class="result-label">Expectancy per Trade</span>
+            <span class="result-value highlight" id="exp-value">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Expected per 100 Trades</span>
+            <span class="result-value" id="exp-100">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Profit Factor</span>
+            <span class="result-value" id="exp-pf">—</span>
+          </div>
+          <div class="insight" id="exp-insight"></div>
+        </div>
+      </div>
     </div>
 
     <footer class="footer">
+      <p style="margin-bottom: 0.5rem;"><a href="https://education.signalpilot.io/calculators.html" target="_blank" rel="noopener" style="color: var(--accent);">See all 14 calculators →</a></p>
       <p>Built by <a href="https://signalpilot.io" target="_blank">Signal Pilot</a> — Professional trading indicators for TradingView</p>
     </footer>
   </div>
@@ -484,6 +789,94 @@
   <div class="toast" id="toast">Link copied to clipboard!</div>
 
   <script>
+    // Theme Toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateThemeUI(next);
+    }
+
+    function updateThemeUI(theme) {
+      document.getElementById('theme-icon').textContent = theme === 'light' ? '☀️' : '🌙';
+      document.getElementById('theme-text').textContent = theme === 'light' ? 'Light' : 'Dark';
+    }
+
+    // Load saved theme
+    (function() {
+      const saved = localStorage.getItem('theme') || 'dark';
+      if (saved === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+      updateThemeUI(saved);
+    })();
+
+    // URL Parameters - load values from URL
+    function loadFromURL() {
+      const params = new URLSearchParams(window.location.search);
+
+      // Position Size
+      if (params.get('ps_bal')) document.getElementById('ps-balance').value = params.get('ps_bal');
+      if (params.get('ps_risk')) document.getElementById('ps-risk').value = params.get('ps_risk');
+      if (params.get('ps_entry')) document.getElementById('ps-entry').value = params.get('ps_entry');
+      if (params.get('ps_stop')) document.getElementById('ps-stop').value = params.get('ps_stop');
+      if (params.get('ps_bal')) calcPositionSize();
+
+      // Risk/Reward
+      if (params.get('rr_entry')) document.getElementById('rr-entry').value = params.get('rr_entry');
+      if (params.get('rr_stop')) document.getElementById('rr-stop').value = params.get('rr_stop');
+      if (params.get('rr_target')) document.getElementById('rr-target').value = params.get('rr_target');
+      if (params.get('rr_entry')) calcRiskReward();
+
+      // Drawdown
+      if (params.get('dd_loss')) {
+        document.getElementById('dd-loss').value = params.get('dd_loss');
+        calcDrawdown();
+      }
+
+      // Kelly
+      if (params.get('k_wr')) document.getElementById('kelly-winrate').value = params.get('k_wr');
+      if (params.get('k_ratio')) document.getElementById('kelly-ratio').value = params.get('k_ratio');
+      if (params.get('k_wr')) calcKelly();
+    }
+
+    // Generate shareable URL for a specific calculator
+    function getShareURL(calcType) {
+      const base = 'https://signalpilot.io/tools/?';
+      let params = [];
+
+      switch(calcType) {
+        case 'position-size':
+          params.push('ps_bal=' + document.getElementById('ps-balance').value);
+          params.push('ps_risk=' + document.getElementById('ps-risk').value);
+          params.push('ps_entry=' + document.getElementById('ps-entry').value);
+          params.push('ps_stop=' + document.getElementById('ps-stop').value);
+          break;
+        case 'risk-reward':
+          params.push('rr_entry=' + document.getElementById('rr-entry').value);
+          params.push('rr_stop=' + document.getElementById('rr-stop').value);
+          params.push('rr_target=' + document.getElementById('rr-target').value);
+          break;
+        case 'drawdown':
+          params.push('dd_loss=' + document.getElementById('dd-loss').value);
+          break;
+        case 'kelly':
+          params.push('k_wr=' + document.getElementById('kelly-winrate').value);
+          params.push('k_ratio=' + document.getElementById('kelly-ratio').value);
+          break;
+      }
+
+      return base + params.join('&');
+    }
+
+    function shareResult(calcType) {
+      const url = getShareURL(calcType);
+      navigator.clipboard.writeText(url);
+      showToast('Shareable link copied!');
+    }
+
     // Position Size Calculator
     function calcPositionSize() {
       const balance = parseFloat(document.getElementById('ps-balance').value);
@@ -503,6 +896,7 @@
       document.getElementById('ps-risk-share').textContent = '$' + riskPerShare.toFixed(2);
       document.getElementById('ps-value').textContent = '$' + totalValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
       document.getElementById('ps-results').classList.add('show');
+      document.getElementById('ps-share').classList.add('show');
     }
 
     // Risk/Reward Calculator
@@ -530,6 +924,77 @@
       winRateEl.className = 'result-value' + (minWinRate <= 40 ? ' success' : minWinRate <= 50 ? '' : ' warning');
 
       document.getElementById('rr-results').classList.add('show');
+      document.getElementById('rr-share').classList.add('show');
+    }
+
+    // Profit/Loss Calculator
+    function calcProfitLoss() {
+      const type = document.getElementById('pl-type').value;
+      const entry = parseFloat(document.getElementById('pl-entry').value);
+      const exit = parseFloat(document.getElementById('pl-exit').value);
+      const shares = parseFloat(document.getElementById('pl-shares').value);
+
+      if (!entry || !exit || !shares) return;
+
+      const entryValue = entry * shares;
+      const exitValue = exit * shares;
+      let pl, plPct;
+
+      if (type === 'long') {
+        pl = exitValue - entryValue;
+        plPct = ((exit - entry) / entry) * 100;
+      } else {
+        pl = entryValue - exitValue;
+        plPct = ((entry - exit) / entry) * 100;
+      }
+
+      const plEl = document.getElementById('pl-amount');
+      plEl.textContent = (pl >= 0 ? '+$' : '-$') + Math.abs(pl).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      plEl.className = 'result-value highlight ' + (pl >= 0 ? 'success' : 'danger');
+
+      const pctEl = document.getElementById('pl-percent');
+      pctEl.textContent = (plPct >= 0 ? '+' : '') + plPct.toFixed(2) + '%';
+      pctEl.className = 'result-value ' + (plPct >= 0 ? 'success' : 'danger');
+
+      document.getElementById('pl-entry-val').textContent = '$' + entryValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('pl-exit-val').textContent = '$' + exitValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+      document.getElementById('pl-results').classList.add('show');
+      document.getElementById('pl-share').classList.add('show');
+    }
+
+    // Drawdown Recovery Calculator
+    function calcDrawdown() {
+      const loss = parseFloat(document.getElementById('dd-loss').value);
+
+      if (!loss || loss <= 0 || loss >= 100) return;
+
+      const recovery = (loss / (100 - loss)) * 100;
+      const exampleStart = 10000;
+      const exampleAfter = exampleStart * (1 - loss / 100);
+
+      const recoveryEl = document.getElementById('dd-recovery');
+      recoveryEl.textContent = '+' + recovery.toFixed(1) + '%';
+      recoveryEl.className = 'result-value highlight ' + (recovery > 100 ? 'danger' : recovery > 50 ? 'warning' : 'success');
+
+      document.getElementById('dd-example-after').textContent = '$' + exampleAfter.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('dd-example-target').textContent = '$10,000.00';
+
+      // Insight message
+      let insight = '';
+      if (loss <= 10) {
+        insight = '<strong>Minor setback.</strong> A ' + loss + '% loss requires ' + recovery.toFixed(1) + '% to recover. Stay disciplined.';
+      } else if (loss <= 25) {
+        insight = '<strong>Moderate drawdown.</strong> Recovery is still manageable, but consider reducing position sizes.';
+      } else if (loss <= 50) {
+        insight = '<strong>Significant damage.</strong> You need to make ' + recovery.toFixed(0) + '% just to break even. Time to reassess your strategy.';
+      } else {
+        insight = '<strong>Critical territory.</strong> Losses this large are extremely difficult to recover from. Capital preservation is paramount.';
+      }
+      document.getElementById('dd-insight').innerHTML = insight;
+
+      document.getElementById('dd-results').classList.add('show');
+      document.getElementById('dd-share').classList.add('show');
     }
 
     // Compound Growth Calculator
@@ -555,24 +1020,123 @@
       document.getElementById('cg-added').textContent = '$' + totalAdded.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
       document.getElementById('cg-return-pct').textContent = '+' + totalReturnPct.toFixed(1) + '%';
       document.getElementById('cg-results').classList.add('show');
+      document.getElementById('cg-share').classList.add('show');
+    }
+
+    // Kelly Criterion Calculator
+    function calcKelly() {
+      const winRate = parseFloat(document.getElementById('kelly-winrate').value) / 100;
+      const ratio = parseFloat(document.getElementById('kelly-ratio').value);
+
+      if (!winRate || !ratio || winRate <= 0 || winRate >= 1) return;
+
+      // Kelly formula: K = W - [(1-W) / R]
+      // W = win probability, R = win/loss ratio
+      const kelly = (winRate - ((1 - winRate) / ratio)) * 100;
+      const halfKelly = kelly / 2;
+      const quarterKelly = kelly / 4;
+
+      const fullEl = document.getElementById('kelly-full');
+      fullEl.textContent = kelly.toFixed(1) + '%';
+      fullEl.className = 'result-value highlight ' + (kelly <= 0 ? 'danger' : kelly > 25 ? 'warning' : 'success');
+
+      document.getElementById('kelly-half').textContent = Math.max(0, halfKelly).toFixed(1) + '%';
+      document.getElementById('kelly-quarter').textContent = Math.max(0, quarterKelly).toFixed(1) + '%';
+
+      // Insight
+      let insight = '';
+      if (kelly <= 0) {
+        insight = '<strong>No edge detected.</strong> Kelly suggests you shouldn\'t take this bet. Your win rate and/or reward ratio is too low.';
+      } else if (kelly > 25) {
+        insight = '<strong>High Kelly detected.</strong> Full Kelly is aggressive. Most professionals use Half Kelly (' + halfKelly.toFixed(1) + '%) to reduce volatility.';
+      } else {
+        insight = '<strong>Positive edge.</strong> Half Kelly (' + halfKelly.toFixed(1) + '%) is recommended for smoother equity curve.';
+      }
+      document.getElementById('kelly-insight').innerHTML = insight;
+
+      document.getElementById('kelly-results').classList.add('show');
+      document.getElementById('kelly-share').classList.add('show');
+    }
+
+    // Expectancy Calculator
+    function calcExpectancy() {
+      const winRate = parseFloat(document.getElementById('exp-winrate').value) / 100;
+      const avgWin = parseFloat(document.getElementById('exp-avgwin').value);
+      const avgLoss = parseFloat(document.getElementById('exp-avgloss').value);
+
+      if (!winRate || !avgWin || !avgLoss) return;
+
+      const lossRate = 1 - winRate;
+      document.getElementById('exp-lossrate').value = (lossRate * 100).toFixed(1);
+
+      // Expectancy = (Win% × Avg Win) - (Loss% × Avg Loss)
+      const expectancy = (winRate * avgWin) - (lossRate * avgLoss);
+      const per100 = expectancy * 100;
+      const profitFactor = (winRate * avgWin) / (lossRate * avgLoss);
+
+      const expEl = document.getElementById('exp-value');
+      expEl.textContent = (expectancy >= 0 ? '+$' : '-$') + Math.abs(expectancy).toFixed(2);
+      expEl.className = 'result-value highlight ' + (expectancy >= 0 ? 'success' : 'danger');
+
+      const per100El = document.getElementById('exp-100');
+      per100El.textContent = (per100 >= 0 ? '+$' : '-$') + Math.abs(per100).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      per100El.className = 'result-value ' + (per100 >= 0 ? 'success' : 'danger');
+
+      const pfEl = document.getElementById('exp-pf');
+      pfEl.textContent = profitFactor.toFixed(2);
+      pfEl.className = 'result-value ' + (profitFactor >= 1.5 ? 'success' : profitFactor >= 1 ? '' : 'danger');
+
+      // Insight
+      let insight = '';
+      if (expectancy < 0) {
+        insight = '<strong>Negative expectancy.</strong> This strategy loses money over time. You need to improve win rate or reward ratio.';
+      } else if (profitFactor < 1.2) {
+        insight = '<strong>Marginal edge.</strong> Your system is barely profitable. Fees and slippage may eat into returns.';
+      } else if (profitFactor >= 2) {
+        insight = '<strong>Strong edge.</strong> Profit factor of ' + profitFactor.toFixed(2) + ' indicates a robust trading system.';
+      } else {
+        insight = '<strong>Positive expectancy.</strong> You make $' + expectancy.toFixed(2) + ' on average per trade. Consistency is key.';
+      }
+      document.getElementById('exp-insight').innerHTML = insight;
+
+      document.getElementById('exp-results').classList.add('show');
+      document.getElementById('exp-share').classList.add('show');
+    }
+
+    // Auto-update loss rate when win rate changes
+    document.getElementById('exp-winrate').addEventListener('input', function() {
+      const wr = parseFloat(this.value);
+      if (wr >= 0 && wr <= 100) {
+        document.getElementById('exp-lossrate').value = (100 - wr).toFixed(1);
+      }
+    });
+
+    // Toast notification
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
     }
 
     // Copy Link
     function copyLink() {
       navigator.clipboard.writeText('https://signalpilot.io/tools/');
-      const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2000);
+      showToast('Link copied to clipboard!');
     }
 
     // Enter key triggers calculation
     document.querySelectorAll('input').forEach(input => {
       input.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-          this.closest('.tool-card').querySelector('.calc-btn').click();
+          const btn = this.closest('.tool-card').querySelector('.calc-btn');
+          if (btn) btn.click();
         }
       });
     });
+
+    // Load from URL on page load
+    loadFromURL();
   </script>
 </body>
 </html>
