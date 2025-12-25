@@ -809,16 +809,138 @@ The cycle is eternal. Learn to read it, or be consumed by it.
 
 ---
 
-# SECTION 8: SUGGESTED SCHEDULE (Dec 26-30)
+# SECTION 8: 30-DAY CONTENT CALENDAR
 
-| Date | IG Feed | IG Stories | X/Twitter | TikTok |
-|------|---------|------------|-----------|--------|
-| **Dec 26** | Janus Atlas | Janus Atlas sequence | Pentarch + Volume Oracle | Pentarch |
-| **Dec 26** | Plutus Flow | Plutus Flow sequence | Janus Atlas | Volume Oracle |
-| **Dec 27** | OmniDeck | OmniDeck sequence | Plutus Flow + OmniDeck | Janus Atlas + Plutus Flow |
-| **Dec 28** | Augury Grid | Augury Grid + countdown | Augury Grid | OmniDeck + Augury Grid |
-| **Dec 29** | Harmonic Oscillator | "Council Complete" | Harmonic Oscillator + Oath | Harmonic Oscillator |
-| **Dec 30** | LAUNCH | Launch celebration | LAUNCH | LAUNCH |
+## At-A-Glance Schedule
+
+| Day | Date | Theme | IG Feed | X/Twitter | TikTok |
+|-----|------|-------|---------|-----------|--------|
+| 1 | Dec 25 | Christmas | — | Light post | — |
+| 2 | Dec 26 | Janus + Plutus | 2 posts | 2 posts | 1 video |
+| 3 | Dec 27 | OmniDeck | 1 post | 1 post | 1 video |
+| 4 | Dec 28 | Augury Grid | 1 post | 1 post | 1 video |
+| 5 | Dec 29 | Harmonic (FINAL) | 1 post | Thread | 1 video |
+| 6 | **Dec 30** | **LAUNCH** | 1 post | Multiple | 1 video |
+| 7 | Dec 31 | New Year | Stories | 1 post | — |
+| 8 | Jan 1 | Rest | Stories | — | — |
+| 9 | Jan 2 | Pentarch Education | 1 post | Thread | — |
+| 10 | Jan 3 | Non-Repainting Trust | 1 post | Thread | — |
+| 11 | Jan 4 | Education Hub | Carousel | Thread | — |
+| 12 | Jan 5 | Pilot's Oath Deep | Stories | Thread | — |
+| 13 | Jan 6 | Volume Oracle Deep | 1 post | Thread | — |
+| 14 | Jan 7 | Janus Atlas Deep | 1 post | Thread | — |
+| 15 | Jan 8 | Plutus Flow Deep | 1 post | Thread | — |
+| 16 | Jan 9 | OmniDeck Deep | 1 post | Thread | — |
+| 17 | Jan 10 | Augury Grid Deep | 1 post | Thread | — |
+| 18 | Jan 11 | Harmonic Deep | 1 post | Thread | — |
+| 19 | Jan 12 | Hierarchy of Signals | Carousel | Thread | — |
+| 20 | Jan 13 | Psychology: Patience | 1 post | 1 post | — |
+| 21 | Jan 14 | Position Sizing | Carousel | Thread | — |
+| 22 | Jan 15 | Smart Money | 1 post | Thread | — |
+| 23 | Jan 16 | Backtesting | Carousel | Thread | — |
+| 24 | Jan 17 | Philosophy: Unity | 1 post | 1 post | — |
+| 25 | Jan 18 | Weekend Engagement | Poll | Poll | — |
+| 26 | Jan 19 | Weekly Wrap-up | Stories | 1 post | — |
+| 27 | Jan 20 | Social Proof | 1 post | 1 post | — |
+| 28 | Jan 21 | Feature Requests | Poll | Poll | — |
+| 29 | Jan 22 | Behind-the-Scenes | Stories | 1 post | — |
+| 30 | Jan 23 | 30-Day Celebration | 1 post | Thread | 1 video |
+
+---
+
+## Pre-Launch Daily Breakdown (Dec 25-29)
+
+### Dec 25 (Christmas)
+**X/Twitter only:**
+```
+Markets are closed. Perfect time to prepare.
+5 days until The Elite Seven go live.
+signalpilot.io/chronicle
+```
+
+### Dec 26
+- **IG 10 AM:** Janus Atlas reveal
+- **IG 4 PM:** Plutus Flow reveal
+- **Stories:** Both sequences
+- **X:** Pentarch + Volume Oracle + Janus Atlas
+- **TikTok:** Pentarch + Volume Oracle
+
+### Dec 27
+- **IG 12 PM:** OmniDeck reveal
+- **Stories:** OmniDeck sequence
+- **X:** Plutus Flow + OmniDeck
+- **TikTok:** Janus Atlas + Plutus Flow
+
+### Dec 28
+- **IG 12 PM:** Augury Grid reveal
+- **Stories:** Countdown sequence
+- **X:** Augury Grid
+- **TikTok:** OmniDeck + Augury Grid
+
+### Dec 29
+- **IG 12 PM:** Harmonic Oscillator (FINAL)
+- **Stories:** "Council Complete" hype
+- **X:** Full recap thread
+- **TikTok:** Harmonic Oscillator
+
+---
+
+## Launch Day (Dec 30)
+
+| Time | Platform | Content |
+|------|----------|---------|
+| 9 AM | IG + X + TikTok | Launch announcement |
+| 12 PM | X | Features breakdown |
+| 3 PM | IG Stories | Feature highlight |
+| 6 PM | X | Thank you post |
+| 9 PM | IG Stories | Day 1 wrap-up |
+
+---
+
+## Post-Launch Weeks 2-4 Content Ideas
+
+### Week 2: Indicator Deep-Dives (Jan 6-12)
+One indicator per day with educational focus.
+
+### Week 3: Psychology & Education (Jan 13-19)
+- "The patient pilot survives"
+- Position sizing (Kelly Criterion)
+- Backtesting framework
+
+### Week 4: Community (Jan 20-23)
+- Social proof / user stories
+- Feature requests poll
+- Behind-the-scenes
+- 30-day celebration
+
+---
+
+## AI Image Prompts (for Nano Banana Pro)
+
+**1. Market Cycle Visualization:**
+```
+Epic digital art, cosmic space background with purple nebula, five glowing orbs in cycle formation: green accumulation, yellow ignition, orange warning, red climax, purple breakdown, connected by golden streams, 4K
+```
+
+**2. "Follow the Smart Money":**
+```
+Dark atmospheric scene, hooded figure on mountain of gold coins watching smaller figures below, ethereal blue fog, dramatic lighting, mystical fantasy art, 4K
+```
+
+**3. "The Patient Pilot":**
+```
+Pilot in futuristic spacecraft cockpit, serene expression, holographic star charts showing market patterns, cosmic nebula visible, calm blue lighting, 4K cinematic
+```
+
+**4. "Pressure Does Not Lie":**
+```
+Two massive ethereal hands (green and red) on ancient golden scales, pressure waves emanating, cosmic background, dramatic lighting, 4K fantasy art
+```
+
+**5. "Four Voices One Verdict":**
+```
+Four robed council members in circular chamber, each holding colored orb, all orbs glowing same color for consensus, light beam shooting upward, cosmic courtroom, 4K epic fantasy
+```
 
 ---
 
