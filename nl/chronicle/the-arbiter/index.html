@@ -33,6 +33,32 @@
     .header-nav{display:flex;align-items:center;gap:1.5rem}
     .header-nav a{font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted);text-decoration:none;font-size:0.95rem;font-weight:500;transition:color 0.2s}
     .header-nav a:hover{color:var(--text)}
+    nav ul{list-style:none;display:flex;align-items:center;gap:2rem}
+    nav a{font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted);text-decoration:none;font-size:0.95rem;font-weight:500;transition:color 0.2s}
+    nav a:hover{color:var(--text)}
+    .nav-dropdown{position:relative}
+    .nav-dropdown-toggle{background:none;border:none;font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted);font-size:0.95rem;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:0.3rem;transition:color 0.2s;padding:0}
+    .nav-dropdown-toggle:hover{color:var(--text)}
+    .dropdown-arrow{font-size:0.7rem;transition:transform 0.2s}
+    .nav-dropdown-toggle[aria-expanded="true"] .dropdown-arrow{transform:rotate(180deg)}
+    .nav-dropdown-menu{position:absolute;top:calc(100% + 1rem);left:50%;transform:translateX(-50%);background:var(--bg-elev);border:1px solid var(--border);border-radius:12px;padding:0.5rem;min-width:200px;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s,transform 0.2s;z-index:1000;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+    .nav-dropdown-menu.active{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+    .nav-dropdown-menu li{list-style:none}
+    .nav-dropdown-menu a{display:block;padding:0.6rem 1rem;border-radius:8px;transition:background 0.2s}
+    .nav-dropdown-menu a:hover{background:var(--bg-soft)}
+    .mobile-menu-btn{display:none;background:var(--bg-soft);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.7rem;border-radius:6px;cursor:pointer;font-size:1.2rem;transition:all 0.2s}
+    .mobile-menu-btn:hover{background:var(--bg-elev)}
+    .mobile-nav{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:var(--bg);z-index:99;overflow-y:auto;padding:2rem 1.5rem;opacity:0;visibility:hidden;transition:opacity 0.3s,visibility 0.3s}
+    .mobile-nav.active{opacity:1;visibility:visible}
+    .mobile-nav ul{list-style:none}
+    .mobile-nav > ul > li{border-bottom:1px solid var(--border)}
+    .mobile-nav a{display:block;padding:1rem 0;font-family:'Space Grotesk',system-ui,sans-serif;color:var(--text);text-decoration:none;font-size:1.1rem;font-weight:500}
+    .mobile-nav-dropdown-toggle{width:100%;background:none;border:none;font-family:'Space Grotesk',system-ui,sans-serif;color:var(--text);font-size:1.1rem;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:1rem 0;text-align:left}
+    .mobile-dropdown-arrow{transition:transform 0.2s}
+    .mobile-nav-dropdown-toggle[aria-expanded="true"] .mobile-dropdown-arrow{transform:rotate(180deg)}
+    .mobile-nav-submenu{max-height:0;overflow:hidden;transition:max-height 0.3s;padding-left:1rem}
+    .mobile-nav-submenu.active{max-height:500px}
+    .mobile-nav-submenu a{padding:0.75rem 0;font-size:1rem;color:var(--muted)}
     .btn{background:var(--bg-soft);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.7rem;border-radius:6px;cursor:pointer;font-size:1rem;transition:all 0.2s}
     .btn:hover{background:var(--bg-elev)}
     .progress-bar{position:fixed;top:64px;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--gold),var(--warn));z-index:99;transition:width 0.1s}
@@ -72,7 +98,7 @@
     footer{padding:3rem 0;border-top:1px solid var(--border);text-align:center;font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted-2);font-size:0.9rem}
     footer a{color:var(--brand);text-decoration:none}
     footer a:hover{text-decoration:underline}
-    @media(max-width:768px){body{font-size:1.125rem}h1{font-size:2rem}.article-header{padding:3rem 1.25rem 2rem}.article-content{padding:0 1.25rem 3rem}.drop-cap::first-letter{font-size:3.5rem}.header-nav{display:none}}
+    @media(max-width:768px){body{font-size:1.125rem}h1{font-size:2rem}.article-header{padding:3rem 1.25rem 2rem}.article-content{padding:0 1.25rem 3rem}.drop-cap::first-letter{font-size:3.5rem}.header-nav{display:none}nav{display:none}.mobile-menu-btn{display:block}.mobile-nav{display:block}}
     /* Audio Player */
 .audio-player{max-width:720px;margin:1.5rem auto 2rem;padding:0 1.5rem}
 .audio-player-inner{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:12px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem}
@@ -91,16 +117,59 @@
   <div class="progress-bar" id="progressBar"></div>
   <header>
     <div class="container">
-      <a href="/nl/" class="brand">Signal Pilot</a>
-      <div class="header-nav">
-        <a href="/nl/chronicle/">← Alle Kroniek</a>
-        <a href="/nl/#pricing">Toegang Krijgen</a>
+      <a href="/nl/" class="brand"><span>Signal Pilot</span></a>
+      <nav>
+        <ul>
+          <li><a href="/nl/#inside">Inhoud</a></li>
+          <li><a href="https://education.signalpilot.io/" target="_blank" rel="noopener">Educatie</a></li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+              Bronnen <span class="dropdown-arrow">▼</span>
+            </button>
+            <ul class="nav-dropdown-menu">
+              <li><a href="/nl/chronicle/" style="color: var(--accent);">Kroniek</a></li>
+              <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Documentatie</a></li>
+              <li><a href="https://blog.signalpilot.io/" target="_blank" rel="noopener">Blog</a></li>
+              <li><a href="https://education.signalpilot.io/calculators.html" target="_blank" rel="noopener">Rekenmachines</a></li>
+              <li><a href="/nl/faq.html">FAQ Centrum</a></li>
+            </ul>
+          </li>
+          <li><a href="/nl/#pricing">Prijzen</a></li>
+          <li><a href="/nl/affiliates.html">Partners</a></li>
+        </ul>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button id="themeToggle" class="btn" type="button" aria-label="Thema wisselen">
+          <span id="theme-icon">☀️</span>
+        </button>
+        <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="Menu openen">
+          <span id="menu-icon">☰</span>
+        </button>
       </div>
-      <button id="themeToggle" class="btn" type="button" aria-label="Thema wisselen">
-        <span id="theme-icon">☀️</span>
-      </button>
     </div>
   </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="/nl/#inside">Inhoud</a></li>
+      <li><a href="https://education.signalpilot.io/" target="_blank" rel="noopener">Educatie</a></li>
+      <li>
+        <button class="mobile-nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+          Bronnen <span class="mobile-dropdown-arrow">▼</span>
+        </button>
+        <ul class="mobile-nav-submenu">
+          <li><a href="/nl/chronicle/" style="color: var(--accent);">Kroniek</a></li>
+          <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Documentatie</a></li>
+          <li><a href="https://blog.signalpilot.io/" target="_blank" rel="noopener">Blog</a></li>
+          <li><a href="https://education.signalpilot.io/calculators.html" target="_blank" rel="noopener">Rekenmachines</a></li>
+          <li><a href="/nl/faq.html">FAQ Centrum</a></li>
+        </ul>
+      </li>
+      <li><a href="/nl/#pricing">Prijzen</a></li>
+      <li><a href="/nl/affiliates.html">Partners</a></li>
+    </ul>
+  </div>
 
   <div class="article-header">
     <a href="/nl/chronicle/" class="back-link">← Terug naar Kroniek</a>
@@ -200,9 +269,18 @@
   </footer>
 
   <script>
-    const themeToggle=document.getElementById('themeToggle'),themeIcon=document.getElementById('theme-icon'),html=document.documentElement,savedTheme=localStorage.getItem('theme')||'dark';html.setAttribute('data-theme',savedTheme);themeIcon.textContent=savedTheme==='dark'?'☀️':'🌙';themeToggle.addEventListener('click',()=>{const currentTheme=html.getAttribute('data-theme'),newTheme=currentTheme==='dark'?'light':'dark';html.setAttribute('data-theme',newTheme);localStorage.setItem('theme',newTheme);themeIcon.textContent=newTheme==='dark'?'☀️':'🌙'});const progressBar=document.getElementById('progressBar');window.addEventListener('scroll',()=>{const scrollTop=window.scrollY,docHeight=document.documentElement.scrollHeight-window.innerHeight,progress=(scrollTop/docHeight)*100;progressBar.style.width=progress+'%'});
+    // Theme Toggle
+    const themeToggle=document.getElementById('themeToggle'),themeIcon=document.getElementById('theme-icon'),html=document.documentElement,savedTheme=localStorage.getItem('theme')||'dark';html.setAttribute('data-theme',savedTheme);themeIcon.textContent=savedTheme==='dark'?'☀️':'🌙';themeToggle.addEventListener('click',()=>{const currentTheme=html.getAttribute('data-theme'),newTheme=currentTheme==='dark'?'light':'dark';html.setAttribute('data-theme',newTheme);localStorage.setItem('theme',newTheme);themeIcon.textContent=newTheme==='dark'?'☀️':'🌙'});
+    // Reading Progress Bar
+    const progressBar=document.getElementById('progressBar');window.addEventListener('scroll',()=>{const scrollTop=window.scrollY,docHeight=document.documentElement.scrollHeight-window.innerHeight,progress=(scrollTop/docHeight)*100;progressBar.style.width=progress+'%'});
     // Audio Player
-const audio=document.getElementById('articleAudio'),playBtn=document.getElementById('audioPlayBtn'),playIcon=document.getElementById('playIcon'),pauseIcon=document.getElementById('pauseIcon'),audioBar=document.getElementById('audioBar'),audioBarFill=document.getElementById('audioBarFill'),audioTime=document.getElementById('audioTime');function formatTime(s){const m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}playBtn.addEventListener('click',()=>{if(audio.paused){audio.play();playIcon.style.display='none';pauseIcon.style.display='block';}else{audio.pause();playIcon.style.display='block';pauseIcon.style.display='none';}});audio.addEventListener('timeupdate',()=>{const pct=(audio.currentTime/audio.duration)*100;audioBarFill.style.width=pct+'%';audioTime.textContent=formatTime(audio.currentTime)+' / '+formatTime(audio.duration||0);});audio.addEventListener('ended',()=>{playIcon.style.display='block';pauseIcon.style.display='none';audioBarFill.style.width='0%';});audioBar.addEventListener('click',(e)=>{const rect=audioBar.getBoundingClientRect(),pct=(e.clientX-rect.left)/rect.width;audio.currentTime=pct*audio.duration;});
+    const audio=document.getElementById('articleAudio'),playBtn=document.getElementById('audioPlayBtn'),playIcon=document.getElementById('playIcon'),pauseIcon=document.getElementById('pauseIcon'),audioBar=document.getElementById('audioBar'),audioBarFill=document.getElementById('audioBarFill'),audioTime=document.getElementById('audioTime');function formatTime(s){const m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}playBtn.addEventListener('click',()=>{if(audio.paused){audio.play();playIcon.style.display='none';pauseIcon.style.display='block';}else{audio.pause();playIcon.style.display='block';pauseIcon.style.display='none';}});audio.addEventListener('timeupdate',()=>{const pct=(audio.currentTime/audio.duration)*100;audioBarFill.style.width=pct+'%';audioTime.textContent=formatTime(audio.currentTime)+' / '+formatTime(audio.duration||0);});audio.addEventListener('ended',()=>{playIcon.style.display='block';pauseIcon.style.display='none';audioBarFill.style.width='0%';});audioBar.addEventListener('click',(e)=>{const rect=audioBar.getBoundingClientRect(),pct=(e.clientX-rect.left)/rect.width;audio.currentTime=pct*audio.duration;});
+    // Mobile Menu Toggle
+    const mobileMenuBtn=document.getElementById('mobileMenuBtn'),mobileNav=document.getElementById('mobileNav'),menuIcon=document.getElementById('menu-icon');mobileMenuBtn.addEventListener('click',()=>{const isActive=mobileNav.classList.toggle('active');menuIcon.textContent=isActive?'✕':'☰';});
+    // Desktop Dropdown Toggle
+    const dropdownToggle=document.querySelector('.nav-dropdown-toggle'),dropdownMenu=document.querySelector('.nav-dropdown-menu');if(dropdownToggle&&dropdownMenu){dropdownToggle.addEventListener('click',(e)=>{e.stopPropagation();const isExpanded=dropdownToggle.getAttribute('aria-expanded')==='true';dropdownToggle.setAttribute('aria-expanded',!isExpanded);dropdownMenu.classList.toggle('active');});document.addEventListener('click',(e)=>{if(!dropdownToggle.contains(e.target)&&!dropdownMenu.contains(e.target)){dropdownToggle.setAttribute('aria-expanded','false');dropdownMenu.classList.remove('active');}});}
+    // Mobile Submenu Toggle
+    const mobileDropdownToggle=document.querySelector('.mobile-nav-dropdown-toggle'),mobileSubmenu=document.querySelector('.mobile-nav-submenu');if(mobileDropdownToggle&&mobileSubmenu){mobileDropdownToggle.addEventListener('click',()=>{const isExpanded=mobileDropdownToggle.getAttribute('aria-expanded')==='true';mobileDropdownToggle.setAttribute('aria-expanded',!isExpanded);mobileSubmenu.classList.toggle('active');});}
   </script>
 </body>
 </html>
