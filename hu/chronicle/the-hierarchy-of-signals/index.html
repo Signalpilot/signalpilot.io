@@ -53,6 +53,13 @@
     "datePublished": "2025-12-24",
     "dateModified": "2025-12-24"
   }
+    // Mobile Menu Toggle
+    const mobileMenuBtn=document.getElementById('mobileMenuBtn'),mobileNav=document.getElementById('mobileNav'),menuIcon=document.getElementById('menu-icon');mobileMenuBtn.addEventListener('click',()=>{const isActive=mobileNav.classList.toggle('active');menuIcon.textContent=isActive?'✕':'☰';});
+    // Desktop Dropdown Toggle
+    const dropdownToggle=document.querySelector('.nav-dropdown-toggle'),dropdownMenu=document.querySelector('.nav-dropdown-menu');if(dropdownToggle&&dropdownMenu){dropdownToggle.addEventListener('click',(e)=>{e.stopPropagation();const isExpanded=dropdownToggle.getAttribute('aria-expanded')==='true';dropdownToggle.setAttribute('aria-expanded',!isExpanded);dropdownMenu.classList.toggle('active');});document.addEventListener('click',(e)=>{if(!dropdownToggle.contains(e.target)&&!dropdownMenu.contains(e.target)){dropdownToggle.setAttribute('aria-expanded','false');dropdownMenu.classList.remove('active');}});}
+    // Mobile Submenu Toggle
+    const mobileDropdownToggle=document.querySelector('.mobile-nav-dropdown-toggle'),mobileSubmenu=document.querySelector('.mobile-nav-submenu');if(mobileDropdownToggle&&mobileSubmenu){mobileDropdownToggle.addEventListener('click',()=>{const isExpanded=mobileDropdownToggle.getAttribute('aria-expanded')==='true';mobileDropdownToggle.setAttribute('aria-expanded',!isExpanded);mobileSubmenu.classList.toggle('active');});}
+
   </script>
 
   <style>
@@ -595,6 +602,7 @@
       .hierarchy-visual { padding: 2rem 1rem; }
       .hierarchy-visual pre { font-size: 0.7rem; }
       .header-nav { display: none; }
+      nav{display:none}.mobile-menu-btn{display:block}.mobile-nav{display:block}
     }
     /* Audio Player */
     .audio-player{max-width:720px;margin:1.5rem auto 2rem;padding:0 1.5rem}
@@ -619,15 +627,57 @@
   <header>
     <div class="container">
       <a href="/hu/" class="brand">Signal Pilot</a>
-      <div class="header-nav">
-        <a href="/hu/chronicle/">← Összes Krónika</a>
-        <a href="/hu/#pricing">Hozzáférés</a>
+      <nav>
+        <ul>
+          <li><a href="/hu/#inside">Tartalom</a></li>
+          <li><a href="https://education.signalpilot.io/" target="_blank" rel="noopener">Oktatás</a></li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+              Források <span class="dropdown-arrow">▼</span>
+            </button>
+            <ul class="nav-dropdown-menu">
+              <li><a href="/hu/chronicle/" style="color: var(--accent);">Krónika</a></li>
+              <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Dokumentáció</a></li>
+              <li><a href="https://blog.signalpilot.io/" target="_blank" rel="noopener">Blog</a></li>
+              <li><a href="https://education.signalpilot.io/calculators.html" target="_blank" rel="noopener">Számológépek</a></li>
+              <li><a href="/hu/faq.html">GYIK Központ</a></li>
+            </ul>
+          </li>
+          <li><a href="/hu/#pricing">Árak</a></li>
+          <li><a href="/hu/affiliates.html">Partnerek</a></li>
+        </ul>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button id="themeToggle" class="btn" type="button" aria-label="Téma váltása">
+          <span id="theme-icon">☀️</span>
+        </button>
+        <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="Menü váltása">
+          <span id="menu-icon">☰</span>
+        </button>
       </div>
-      <button id="themeToggle" class="btn" type="button" aria-label="Téma váltása">
-        <span id="theme-icon">☀️</span>
-      </button>
     </div>
   </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="/hu/#inside">Tartalom</a></li>
+      <li><a href="https://education.signalpilot.io/" target="_blank" rel="noopener">Oktatás</a></li>
+      <li>
+        <button class="mobile-nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+          Források <span class="mobile-dropdown-arrow">▼</span>
+        </button>
+        <ul class="mobile-nav-submenu">
+          <li><a href="/hu/chronicle/" style="color: var(--accent);">Krónika</a></li>
+          <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Dokumentáció</a></li>
+          <li><a href="https://blog.signalpilot.io/" target="_blank" rel="noopener">Blog</a></li>
+          <li><a href="https://education.signalpilot.io/calculators.html" target="_blank" rel="noopener">Számológépek</a></li>
+          <li><a href="/hu/faq.html">GYIK Központ</a></li>
+        </ul>
+      </li>
+      <li><a href="/hu/#pricing">Árak</a></li>
+      <li><a href="/hu/affiliates.html">Partnerek</a></li>
+    </ul>
+  </div>
 
   <div class="article-header">
     <a href="/hu/chronicle/" class="back-link">← Vissza a Krónikához</a>
@@ -905,6 +955,13 @@
     });
     // Audio Player
     const audio=document.getElementById('articleAudio'),playBtn=document.getElementById('audioPlayBtn'),playIcon=document.getElementById('playIcon'),pauseIcon=document.getElementById('pauseIcon'),audioBar=document.getElementById('audioBar'),audioBarFill=document.getElementById('audioBarFill'),audioTime=document.getElementById('audioTime');function formatTime(s){const m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}playBtn.addEventListener('click',()=>{if(audio.paused){audio.play();playIcon.style.display='none';pauseIcon.style.display='block';}else{audio.pause();playIcon.style.display='block';pauseIcon.style.display='none';}});audio.addEventListener('timeupdate',()=>{const pct=(audio.currentTime/audio.duration)*100;audioBarFill.style.width=pct+'%';audioTime.textContent=formatTime(audio.currentTime)+' / '+formatTime(audio.duration||0);});audio.addEventListener('ended',()=>{playIcon.style.display='block';pauseIcon.style.display='none';audioBarFill.style.width='0%';});audioBar.addEventListener('click',(e)=>{const rect=audioBar.getBoundingClientRect(),pct=(e.clientX-rect.left)/rect.width;audio.currentTime=pct*audio.duration;});
+    // Mobile Menu Toggle
+    const mobileMenuBtn=document.getElementById('mobileMenuBtn'),mobileNav=document.getElementById('mobileNav'),menuIcon=document.getElementById('menu-icon');mobileMenuBtn.addEventListener('click',()=>{const isActive=mobileNav.classList.toggle('active');menuIcon.textContent=isActive?'✕':'☰';});
+    // Desktop Dropdown Toggle
+    const dropdownToggle=document.querySelector('.nav-dropdown-toggle'),dropdownMenu=document.querySelector('.nav-dropdown-menu');if(dropdownToggle&&dropdownMenu){dropdownToggle.addEventListener('click',(e)=>{e.stopPropagation();const isExpanded=dropdownToggle.getAttribute('aria-expanded')==='true';dropdownToggle.setAttribute('aria-expanded',!isExpanded);dropdownMenu.classList.toggle('active');});document.addEventListener('click',(e)=>{if(!dropdownToggle.contains(e.target)&&!dropdownMenu.contains(e.target)){dropdownToggle.setAttribute('aria-expanded','false');dropdownMenu.classList.remove('active');}});}
+    // Mobile Submenu Toggle
+    const mobileDropdownToggle=document.querySelector('.mobile-nav-dropdown-toggle'),mobileSubmenu=document.querySelector('.mobile-nav-submenu');if(mobileDropdownToggle&&mobileSubmenu){mobileDropdownToggle.addEventListener('click',()=>{const isExpanded=mobileDropdownToggle.getAttribute('aria-expanded')==='true';mobileDropdownToggle.setAttribute('aria-expanded',!isExpanded);mobileSubmenu.classList.toggle('active');});}
+
   </script>
 
 </body>
