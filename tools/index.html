@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Trading Tools | Position Size & Risk Calculator</title>
+  <meta name="description" content="Free trading calculators for position sizing, risk/reward analysis, and compound growth projections. No signup required.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://signalpilot.io/tools/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Free Trading Tools | Position Size Calculator">
+  <meta property="og:description" content="Calculate position size, risk/reward ratios, and compound growth. Free, no signup required.">
+  <meta property="og:url" content="https://signalpilot.io/tools/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://signalpilot.io/assets/og-tools.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Trading Tools | Position Size Calculator">
+  <meta name="twitter:description" content="Calculate position size, risk/reward ratios, and compound growth. Free, no signup.">
+  <meta name="twitter:image" content="https://signalpilot.io/assets/og-tools.png">
+
+  <link rel="icon" href="/assets/favicon.ico">
+
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #1e1e2a;
+      --text: #e4e4e7;
+      --muted: #71717a;
+      --accent: #6366f1;
+      --accent-hover: #818cf8;
+      --success: #22c55e;
+      --warning: #eab308;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-top: 1rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    /* Share Bar */
+    .share-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .share-btn:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .share-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Tools Grid */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .tool-card h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tool-card h2 span {
+      font-size: 1.25rem;
+    }
+
+    .tool-card .description {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .form-group input::placeholder {
+      color: var(--muted);
+      opacity: 0.5;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .calc-btn {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .calc-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    /* Results */
+    .results {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      display: none;
+    }
+
+    .results.show {
+      display: block;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+
+    .result-row:not(:last-child) {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .result-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .result-value {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .result-value.highlight {
+      color: var(--accent);
+      font-size: 1.15rem;
+    }
+
+    .result-value.success {
+      color: var(--success);
+    }
+
+    .result-value.warning {
+      color: var(--warning);
+    }
+
+    /* Hint Text */
+    .hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .footer a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: var(--accent);
+    }
+
+    /* Copy Toast */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.75rem;
+      }
+
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Free Trading Tools</h1>
+      <p>Position sizing, risk analysis & growth projections — no signup required</p>
+
+      <div class="share-bar">
+        <a href="https://twitter.com/intent/tweet?text=Free%20trading%20calculators%20for%20position%20sizing%20and%20risk%20management&url=https://signalpilot.io/tools/" target="_blank" rel="noopener" class="share-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Share on X
+        </a>
+        <a href="https://reddit.com/submit?url=https://signalpilot.io/tools/&title=Free%20Trading%20Tools%20-%20Position%20Size%20%26%20Risk%20Calculator" target="_blank" rel="noopener" class="share-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+          Reddit
+        </a>
+        <button class="share-btn" onclick="copyLink()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Copy Link
+        </button>
+      </div>
+    </header>
+
+    <div class="tools-grid">
+      <!-- Position Size Calculator -->
+      <div class="tool-card">
+        <h2><span>📐</span> Position Size Calculator</h2>
+        <p class="description">Calculate optimal position size based on your risk tolerance</p>
+
+        <div class="form-group">
+          <label>Account Balance ($)</label>
+          <input type="number" id="ps-balance" placeholder="10000" step="any">
+        </div>
+
+        <div class="form-group">
+          <label>Risk Per Trade (%)</label>
+          <input type="number" id="ps-risk" placeholder="1" step="any">
+          <p class="hint">Recommended: 0.5% - 2%</p>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Entry Price ($)</label>
+            <input type="number" id="ps-entry" placeholder="150.00" step="any">
+          </div>
+          <div class="form-group">
+            <label>Stop Loss ($)</label>
+            <input type="number" id="ps-stop" placeholder="145.00" step="any">
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calcPositionSize()">Calculate</button>
+
+        <div class="results" id="ps-results">
+          <div class="result-row">
+            <span class="result-label">Position Size</span>
+            <span class="result-value highlight" id="ps-size">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Dollar Risk</span>
+            <span class="result-value" id="ps-dollar-risk">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Risk Per Share</span>
+            <span class="result-value" id="ps-risk-share">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Total Position Value</span>
+            <span class="result-value" id="ps-value">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Risk/Reward Calculator -->
+      <div class="tool-card">
+        <h2><span>⚖️</span> Risk/Reward Calculator</h2>
+        <p class="description">Analyze trade quality with R:R ratio and win rate requirements</p>
+
+        <div class="form-group">
+          <label>Entry Price ($)</label>
+          <input type="number" id="rr-entry" placeholder="100.00" step="any">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Stop Loss ($)</label>
+            <input type="number" id="rr-stop" placeholder="95.00" step="any">
+          </div>
+          <div class="form-group">
+            <label>Take Profit ($)</label>
+            <input type="number" id="rr-target" placeholder="115.00" step="any">
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calcRiskReward()">Calculate</button>
+
+        <div class="results" id="rr-results">
+          <div class="result-row">
+            <span class="result-label">Risk/Reward Ratio</span>
+            <span class="result-value highlight" id="rr-ratio">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Risk Per Share</span>
+            <span class="result-value" id="rr-risk">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Reward Per Share</span>
+            <span class="result-value" id="rr-reward">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Min Win Rate Needed</span>
+            <span class="result-value" id="rr-winrate">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compound Growth Calculator -->
+      <div class="tool-card">
+        <h2><span>📈</span> Compound Growth Calculator</h2>
+        <p class="description">Project account growth with consistent returns over time</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Starting Balance ($)</label>
+            <input type="number" id="cg-start" placeholder="10000" step="any">
+          </div>
+          <div class="form-group">
+            <label>Monthly Return (%)</label>
+            <input type="number" id="cg-return" placeholder="5" step="any">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Number of Months</label>
+            <input type="number" id="cg-months" placeholder="12" step="1">
+          </div>
+          <div class="form-group">
+            <label>Monthly Addition ($)</label>
+            <input type="number" id="cg-add" placeholder="500" step="any">
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calcCompound()">Calculate</button>
+
+        <div class="results" id="cg-results">
+          <div class="result-row">
+            <span class="result-label">Final Balance</span>
+            <span class="result-value highlight" id="cg-final">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Total Gain</span>
+            <span class="result-value success" id="cg-gain">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Total Added</span>
+            <span class="result-value" id="cg-added">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Total Return</span>
+            <span class="result-value" id="cg-return-pct">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Built by <a href="https://signalpilot.io" target="_blank">Signal Pilot</a> — Professional trading indicators for TradingView</p>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast">Link copied to clipboard!</div>
+
+  <script>
+    // Position Size Calculator
+    function calcPositionSize() {
+      const balance = parseFloat(document.getElementById('ps-balance').value);
+      const riskPct = parseFloat(document.getElementById('ps-risk').value);
+      const entry = parseFloat(document.getElementById('ps-entry').value);
+      const stop = parseFloat(document.getElementById('ps-stop').value);
+
+      if (!balance || !riskPct || !entry || !stop) return;
+
+      const dollarRisk = balance * (riskPct / 100);
+      const riskPerShare = Math.abs(entry - stop);
+      const positionSize = Math.floor(dollarRisk / riskPerShare);
+      const totalValue = positionSize * entry;
+
+      document.getElementById('ps-size').textContent = positionSize.toLocaleString() + ' shares';
+      document.getElementById('ps-dollar-risk').textContent = '$' + dollarRisk.toFixed(2);
+      document.getElementById('ps-risk-share').textContent = '$' + riskPerShare.toFixed(2);
+      document.getElementById('ps-value').textContent = '$' + totalValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('ps-results').classList.add('show');
+    }
+
+    // Risk/Reward Calculator
+    function calcRiskReward() {
+      const entry = parseFloat(document.getElementById('rr-entry').value);
+      const stop = parseFloat(document.getElementById('rr-stop').value);
+      const target = parseFloat(document.getElementById('rr-target').value);
+
+      if (!entry || !stop || !target) return;
+
+      const risk = Math.abs(entry - stop);
+      const reward = Math.abs(target - entry);
+      const ratio = reward / risk;
+      const minWinRate = (1 / (1 + ratio)) * 100;
+
+      const ratioEl = document.getElementById('rr-ratio');
+      ratioEl.textContent = '1:' + ratio.toFixed(2);
+      ratioEl.className = 'result-value highlight' + (ratio >= 2 ? ' success' : ratio >= 1 ? '' : ' warning');
+
+      document.getElementById('rr-risk').textContent = '$' + risk.toFixed(2);
+      document.getElementById('rr-reward').textContent = '$' + reward.toFixed(2);
+
+      const winRateEl = document.getElementById('rr-winrate');
+      winRateEl.textContent = minWinRate.toFixed(1) + '%';
+      winRateEl.className = 'result-value' + (minWinRate <= 40 ? ' success' : minWinRate <= 50 ? '' : ' warning');
+
+      document.getElementById('rr-results').classList.add('show');
+    }
+
+    // Compound Growth Calculator
+    function calcCompound() {
+      const start = parseFloat(document.getElementById('cg-start').value);
+      const monthlyReturn = parseFloat(document.getElementById('cg-return').value) / 100;
+      const months = parseInt(document.getElementById('cg-months').value);
+      const monthlyAdd = parseFloat(document.getElementById('cg-add').value) || 0;
+
+      if (!start || !monthlyReturn || !months) return;
+
+      let balance = start;
+      for (let i = 0; i < months; i++) {
+        balance = balance * (1 + monthlyReturn) + monthlyAdd;
+      }
+
+      const totalAdded = monthlyAdd * months;
+      const totalGain = balance - start - totalAdded;
+      const totalReturnPct = ((balance - start) / start) * 100;
+
+      document.getElementById('cg-final').textContent = '$' + balance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('cg-gain').textContent = '+$' + totalGain.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('cg-added').textContent = '$' + totalAdded.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('cg-return-pct').textContent = '+' + totalReturnPct.toFixed(1) + '%';
+      document.getElementById('cg-results').classList.add('show');
+    }
+
+    // Copy Link
+    function copyLink() {
+      navigator.clipboard.writeText('https://signalpilot.io/tools/');
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    // Enter key triggers calculation
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          this.closest('.tool-card').querySelector('.calc-btn').click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
