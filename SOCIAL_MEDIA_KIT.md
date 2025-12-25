@@ -43,127 +43,78 @@ The Elite Seven. Dec 30.
 signalpilot.io
 ```
 
-### Day 2 — Origin
+### Day 2 — Origin + Pentarch
 ```
 Before the markets had names, there was only noise.
 
-Traders wandered the charts like ships without stars.
-Guessing. Hoping. Losing.
-
 Then came The Seven.
 
-signalpilot.io/chronicle
-```
-
-### Day 3 — Pentarch
-```
-ONE OF SEVEN
-
-PENTARCH — The Sovereign
+ONE OF SEVEN: PENTARCH — The Sovereign
 
 "I am the cycle. The cycle is me."
 
 TD → IGN → WRN → CAP → BDN
 
-The cycle is eternal.
-Learn to read it, or be consumed by it.
+signalpilot.io/chronicle
+```
+
+### Day 3 — Volume Oracle + Janus Atlas
+```
+TWO OF SEVEN: VOLUME ORACLE — The Prophet
+
+"Price is the last to know. Volume knows first."
+
+THREE OF SEVEN: JANUS ATLAS — The Cartographer
+
+"I map where the wars will be fought."
 
 signalpilot.io
 ```
 
-### Day 4 — Volume Oracle
+### Day 4 — Plutus Flow + OmniDeck
 ```
-TWO OF SEVEN
+FOUR OF SEVEN: PLUTUS FLOW — The Scales
 
-VOLUME ORACLE — The Prophet
+"Pressure does not lie."
 
-"I hear what retail cannot. I see the giants move in darkness."
-
-Price is the last to know.
-Volume knows first.
-
-Follow the smart money, or become their exit liquidity.
-
-signalpilot.io
-```
-
-### Day 5 — Janus Atlas
-```
-THREE OF SEVEN
-
-JANUS ATLAS — The Cartographer
-
-"Every battlefield has its terrain. I map where the wars will be fought."
-
-60+ institutional levels. Auto-updated.
-Stop drawing lines. Start navigating.
-
-signalpilot.io
-```
-
-### Day 6 — Plutus Flow
-```
-FOUR OF SEVEN
-
-PLUTUS FLOW — The Scales
-
-"I weigh the invisible. Pressure does not lie."
-
-Price can rise on air.
-Price can fall on whispers.
-Pressure reveals what price conceals.
-
-signalpilot.io
-```
-
-### Day 7 — OmniDeck
-```
-FIVE OF SEVEN
-
-OMNIDECK — The Commander
+FIVE OF SEVEN: OMNIDECK — The Commander
 
 "Ten systems. One vision. Total clarity."
 
-TD Sequential. Squeeze Cloud. SuperTrend.
-Supply/Demand. Liquidity Sweeps. And five more.
-
-One overlay. Zero clutter.
-
 signalpilot.io
 ```
 
-### Day 8 — Augury Grid
+### Day 5 — Augury Grid + Harmonic Oscillator
 ```
-SIX OF SEVEN
-
-AUGURY GRID — The Watchman
+SIX OF SEVEN: AUGURY GRID — The Watchman
 
 "While you watch one chart, I watch them all."
 
-8 markets. Ranked by opportunity.
-Stop hunting setups. Let them come to you.
-
-signalpilot.io
-```
-
-### Day 9 — Harmonic Oscillator
-```
-SEVEN OF SEVEN
-
-HARMONIC OSCILLATOR — The Arbiter
+SEVEN OF SEVEN: HARMONIC OSCILLATOR — The Arbiter
 
 "Four voices. One verdict."
 
-MACD. RSI. StochRSI. Unified.
-4 stars aligned = Strike.
-Split vote = Stand aside.
+signalpilot.io
+```
 
-The patient pilot survives.
+### Day 6 — Philosophy
+```
+THE PILOT'S OATH
+
+I will not chase.
+I will not guess.
+I will not hope.
+
+I will read the cycle.
+I will follow the institutions.
+I will wait for consensus.
+
+I am not a gambler. I am a Pilot.
 
 signalpilot.io
 ```
 
-### Launch Day
+### Day 7 — Launch Day
 ```
 The Council has assembled.
 
@@ -349,6 +300,8 @@ I will read the cycle.
 I will follow the institutions.
 I will respect the levels.
 I will weigh the pressure.
+I will unify my systems.
+I will scan the horizon.
 I will wait for consensus.
 
 I am not a gambler.
@@ -639,6 +592,8 @@ I will read the cycle.
 I will follow the institutions.
 I will respect the levels.
 I will weigh the pressure.
+I will unify my systems.
+I will scan the horizon.
 I will wait for consensus.
 ```
 
