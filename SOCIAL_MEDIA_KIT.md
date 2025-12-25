@@ -1,5 +1,13 @@
 # SIGNALPILOT SOCIAL MEDIA KIT
-## Ready-to-Post Content for Elite Seven Launch (Dec 30)
+## Elite Seven Launch — Dec 30, 2025
+
+---
+
+# STATUS OVERVIEW
+
+**Today:** December 25, 2025
+**Launch:** December 30, 2025
+**Days Remaining:** 5
 
 ---
 
@@ -7,147 +15,102 @@
 
 ## The Elite Seven
 
-| # | Indicator | Title | Tagline | Lesson |
-|---|-----------|-------|---------|--------|
-| 1 | **Pentarch** | The Sovereign | "I am the cycle. The cycle is me." | The cycle is eternal. Learn to read it. |
-| 2 | **Volume Oracle** | The Prophet | "I hear what retail cannot." | Price is the last to know. Volume knows first. |
-| 3 | **Janus Atlas** | The Cartographer | "I map where wars will be fought." | The map exists before the journey begins. |
-| 4 | **Plutus Flow** | The Scales | "Pressure does not lie." | Price can deceive. Pressure cannot. |
-| 5 | **OmniDeck** | The Commander | "Ten systems. One vision." | Complexity without unity is chaos. |
-| 6 | **Augury Grid** | The Watchman | "I watch them all." | The pilot who sees everything sees nothing. |
-| 7 | **Harmonic Oscillator** | The Arbiter | "Four voices. One verdict." | The patient pilot survives. |
+| # | Indicator | Title | Tagline | IG | X | TikTok |
+|---|-----------|-------|---------|-----|-----|--------|
+| 1 | **Pentarch** | The Sovereign | "I am the cycle." | ✅ | 🔜 | 🔜 |
+| 2 | **Volume Oracle** | The Prophet | "Volume knows first." | ✅ | 🔜 | 🔜 |
+| 3 | **Janus Atlas** | The Cartographer | "I map the terrain." | 🔜 | 🔜 | 🔜 |
+| 4 | **Plutus Flow** | The Scales | "Pressure cannot lie." | 🔜 | 🔜 | 🔜 |
+| 5 | **OmniDeck** | The Commander | "Ten systems. One vision." | 🔜 | 🔜 | 🔜 |
+| 6 | **Augury Grid** | The Watchman | "I watch them all." | 🔜 | 🔜 | 🔜 |
+| 7 | **Harmonic Oscillator** | The Arbiter | "Four voices. One verdict." | 🔜 | 🔜 | 🔜 |
 
-## Core Messaging
-- **Brand Promise:** Navigate the noise
-- **Transformation:** Trader → Pilot
-- **Philosophy:** Read cycles, follow institutions, wait for consensus
-- **Trust:** 100% non-repainting, audited, $100 bounty
+## Other Content Status
+
+| Content | IG | X | TikTok |
+|---------|-----|-----|--------|
+| Origin Video | ✅ | ✅ | ✅ |
+| Education (82 lessons) | ✅ | 🔜 | 🔜 |
+| "Seven Were Chosen" Teaser | ✅ | 🔜 | 🔜 |
+| The Pilot's Oath | ✅ | 🔜 | 🔜 |
+| Trust/Non-Repainting | 🔜 | 🔜 | 🔜 |
+| Launch Announcement | 🔜 | 🔜 | 🔜 |
 
 ---
 
-# SECTION 1: X/TWITTER POSTS
+# SECTION 1: INSTAGRAM (6 POSTED)
 
-## Launch Sequence (Copy & Paste Ready)
+## IG Post 1 — Origin Video ✅ POSTED
+**Posted:** ~1 day ago
+**Also on:** X, TikTok
+**Type:** Video/Reel
+**Content:** "Before the markets had names... Then The Seven emerged"
 
-### Day 1 — Teaser
+---
+
+## IG Post 2 — Education Carousel ✅ POSTED
+**Posted:** ~1 day ago (boosted)
+**Type:** Carousel
+**Content:** "82 trading lessons. Yours to access."
+
+---
+
+## IG Post 3 — Seven Were Chosen ✅ POSTED
+**Posted:** ~21 hours ago (boosted)
+**Type:** Image
+**Image:** Council image with 7 hooded figures
+**Caption theme:** "Seven were chosen"
+
+---
+
+## IG Post 4 — Pentarch Reveal ✅ POSTED
+**Posted:** ~21 hours ago (boosted)
+**Type:** Image
+**Caption:**
 ```
-Seven were chosen.
+One of Seven.
 
-Each masters a domain no other can see.
+PENTARCH — The Sovereign.
 
-Alone, they are powerful.
-Together, they are inevitable.
+The market moves in cycles. Always has. Always will.
+TD. IGN. WRN. CAP. BDN.
 
-The Elite Seven. Dec 30.
+Pentarch doesn't predict the cycle.
+It reveals what was always there.
 
-signalpilot.io
-```
+The first of The Elite Seven. Dec 30.
 
-### Day 2 — Origin + Pentarch
-```
-Before the markets had names, there was only noise.
-
-Then came The Seven.
-
-ONE OF SEVEN: PENTARCH — The Sovereign
-
-"I am the cycle. The cycle is me."
-
-TD → IGN → WRN → CAP → BDN
-
-signalpilot.io/chronicle
-```
-
-### Day 3 — Volume Oracle + Janus Atlas
-```
-TWO OF SEVEN: VOLUME ORACLE — The Prophet
-
-"Price is the last to know. Volume knows first."
-
-THREE OF SEVEN: JANUS ATLAS — The Cartographer
-
-"I map where the wars will be fought."
-
-signalpilot.io
-```
-
-### Day 4 — Plutus Flow + OmniDeck
-```
-FOUR OF SEVEN: PLUTUS FLOW — The Scales
-
-"Pressure does not lie."
-
-FIVE OF SEVEN: OMNIDECK — The Commander
-
-"Ten systems. One vision. Total clarity."
-
-signalpilot.io
-```
-
-### Day 5 — Augury Grid + Harmonic Oscillator
-```
-SIX OF SEVEN: AUGURY GRID — The Watchman
-
-"While you watch one chart, I watch them all."
-
-SEVEN OF SEVEN: HARMONIC OSCILLATOR — The Arbiter
-
-"Four voices. One verdict."
-
-signalpilot.io
-```
-
-### Day 6 — Philosophy
-```
-THE PILOT'S OATH
-
-I will not chase.
-I will not guess.
-I will not hope.
-
-I will read the cycle.
-I will follow the institutions.
-I will wait for consensus.
-
-I am not a gambler. I am a Pilot.
-
-signalpilot.io
-```
-
-### Day 7 — Launch Day
-```
-The Council has assembled.
-
-Seven indicators.
-One unified system.
-Zero repainting.
-
-The Elite Seven are live.
-
-signalpilot.io
+#tradingview #marketcycles #technicalanalysis #tradingstrategy #indicators #priceaction #cryptotrading #bitcoin
 ```
 
 ---
 
-## Philosophy Posts
-
-### The Oath (Short)
+## IG Post 5 — Volume Oracle Reveal ✅ POSTED
+**Posted:** ~2 hours ago
+**Type:** Image
+**Caption:**
 ```
-THE PILOT'S OATH
+Two of Seven.
 
-I will not chase.
-I will not guess.
-I will not hope.
+VOLUME ORACLE — The Prophet.
 
-I will read the cycle.
-I will follow the institutions.
-I will wait for consensus.
+While retail watches price, The Prophet hears institutional footsteps.
 
-I am not a gambler.
-I am a Pilot.
+Accumulation — before the charts confess it.
+Distribution — before the candles bleed.
+
+Follow the smart money.
+Or become their exit liquidity.
+
+#tradingview #volumeanalysis #institutionaltrading #smartmoney #technicalanalysis #tradingstrategy #crypto #forex
 ```
 
-### The Oath (Full Version)
+---
+
+## IG Post 6 — The Pilot's Oath ✅ POSTED
+**Posted:** ~2 hours ago (edited)
+**Type:** Image
+**Caption:**
 ```
 THE PILOT'S OATH
 
@@ -166,11 +129,608 @@ I will wait for consensus.
 I am not a gambler.
 I am a Pilot.
 
-The Elite Seven are my stars.
-Navigate the noise.
+Read the full lore at signalpilot.io/chronicle
+
+#tradingmindset #tradingpsychology #discipline #technicalanalysis #tradingstrategy #tradingview #priceaction #riskmanagement
 ```
 
-### Trust Post (Non-Repainting)
+---
+
+# SECTION 2: INSTAGRAM REMAINING (5 Indicator Reveals + Launch)
+
+## IG — Janus Atlas Reveal
+**Suggested Date:** Dec 26
+**Image:** `chronicle/cartographer-janus-atlas-preview.jpg`
+
+**Caption:**
+```
+Three of Seven.
+
+JANUS ATLAS — The Cartographer.
+
+"I map where the wars will be fought."
+
+60+ levels drawn automatically.
+Pivots. Sessions. VWAP. Structure.
+
+The map exists before the journey begins.
+
+The Elite Seven. Dec 30.
+
+#tradingview #supportandresistance #technicalanalysis #priceaction #tradingstrategy #cryptotrading #forex #levels
+```
+
+---
+
+## IG — Plutus Flow Reveal
+**Suggested Date:** Dec 26 or 27
+**Image:** `chronicle/scales-plutus-flow-preview.jpg`
+
+**Caption:**
+```
+Four of Seven.
+
+PLUTUS FLOW — The Scales.
+
+"Pressure does not lie."
+
+Price can deceive.
+Pressure cannot.
+
+See the true force behind every move.
+Spot divergences before reversals.
+
+The Elite Seven. Dec 30.
+
+#tradingview #volumeanalysis #technicalanalysis #divergence #priceaction #tradingstrategy #cryptotrading #forex
+```
+
+---
+
+## IG — OmniDeck Reveal
+**Suggested Date:** Dec 27
+**Image:** `chronicle/commander-omnideck-preview.jpg`
+
+**Caption:**
+```
+Five of Seven.
+
+OMNIDECK — The Commander.
+
+"Ten systems. One vision. Total clarity."
+
+TD Sequential. Squeeze Cloud. SuperTrend.
+Supply/Demand. And six more.
+
+All unified. All non-repainting.
+Complexity without unity is chaos.
+
+The Elite Seven. Dec 30.
+
+#tradingview #technicalanalysis #tradingstrategy #indicators #priceaction #cryptotrading #allinone #tradingsystem
+```
+
+---
+
+## IG — Augury Grid Reveal
+**Suggested Date:** Dec 28
+**Image:** `chronicle/watchman-augury-grid-preview.jpg`
+
+**Caption:**
+```
+Six of Seven.
+
+AUGURY GRID — The Watchman.
+
+"While you watch one chart, I watch them all."
+
+8 markets. Simultaneously.
+Ranked by opportunity score.
+
+Stop hunting. Start receiving.
+
+The Elite Seven. Dec 30.
+
+#tradingview #marketscanner #technicalanalysis #tradingstrategy #cryptotrading #forex #stockmarket #opportunities
+```
+
+---
+
+## IG — Harmonic Oscillator Reveal
+**Suggested Date:** Dec 29
+**Image:** `chronicle/arbiter-harmonic-oscillator-preview.jpg`
+
+**Caption:**
+```
+Seven of Seven.
+
+HARMONIC OSCILLATOR — The Arbiter.
+
+"Four voices. One verdict."
+
+MACD. RSI. StochRSI. Williams %R.
+Unified into a single consensus system.
+
+4 stars = Strike.
+Split vote = Stand aside.
+
+The patient pilot survives.
+
+The Elite Seven. Dec 30.
+
+#tradingview #oscillators #technicalanalysis #macd #rsi #tradingstrategy #cryptotrading #consensus
+```
+
+---
+
+## IG — Launch Day (Dec 30)
+**Image:** `chronicle/council-assembles-preview.jpg`
+
+**Caption:**
+```
+The Council has assembled.
+
+Seven indicators.
+One unified system.
+Zero repainting.
+
+THE ELITE SEVEN ARE LIVE.
+
+signalpilot.io
+
+#tradingview #technicalanalysis #tradingstrategy #indicators #priceaction #cryptotrading #forex #stockmarket #launch
+```
+
+---
+
+# SECTION 3: X/TWITTER
+
+## X — Origin Video ✅ POSTED
+**Posted:** With IG Post 1
+**Content:** Epic origin video with wizard voiceover
+
+---
+
+## X — Remaining Posts
+
+### X — Pentarch
+```
+ONE OF SEVEN: PENTARCH — The Sovereign
+
+"I am the cycle. The cycle is me."
+
+TD → IGN → WRN → CAP → BDN
+
+The market moves in cycles. Always has. Always will.
+Pentarch reveals what was always there.
+
+The Elite Seven. Dec 30.
+
+signalpilot.io
+```
+
+### X — Volume Oracle
+```
+TWO OF SEVEN: VOLUME ORACLE — The Prophet
+
+"Price is the last to know. Volume knows first."
+
+While retail watches price, The Prophet hears institutional footsteps.
+
+Follow the smart money, or become their exit liquidity.
+
+signalpilot.io
+```
+
+### X — Janus Atlas
+```
+THREE OF SEVEN: JANUS ATLAS — The Cartographer
+
+"I map where the wars will be fought."
+
+60+ levels drawn automatically.
+Pivots. Sessions. VWAP. Structure.
+
+The map exists before the journey begins.
+
+signalpilot.io
+```
+
+### X — Plutus Flow
+```
+FOUR OF SEVEN: PLUTUS FLOW — The Scales
+
+"Pressure does not lie."
+
+Price can deceive. Pressure cannot.
+
+See what price hides.
+
+signalpilot.io
+```
+
+### X — OmniDeck
+```
+FIVE OF SEVEN: OMNIDECK — The Commander
+
+"Ten systems. One vision. Total clarity."
+
+TD Sequential + Squeeze Cloud + SuperTrend + Supply/Demand + 6 more.
+
+Complexity without unity is chaos.
+
+signalpilot.io
+```
+
+### X — Augury Grid
+```
+SIX OF SEVEN: AUGURY GRID — The Watchman
+
+"While you watch one chart, I watch them all."
+
+8 markets. Ranked by opportunity score.
+
+Stop hunting. Start receiving.
+
+signalpilot.io
+```
+
+### X — Harmonic Oscillator
+```
+SEVEN OF SEVEN: HARMONIC OSCILLATOR — The Arbiter
+
+"Four voices. One verdict."
+
+MACD + RSI + StochRSI + Williams %R unified.
+
+4 stars = Strike.
+Split vote = Stand aside.
+
+The patient pilot survives.
+
+signalpilot.io
+```
+
+### X — The Pilot's Oath
+```
+THE PILOT'S OATH
+
+I will not chase.
+I will not guess.
+I will not hope.
+
+I will read the cycle.
+I will follow the institutions.
+I will wait for consensus.
+
+I am not a gambler.
+I am a Pilot.
+
+signalpilot.io/chronicle
+```
+
+### X — Launch Day
+```
+The Council has assembled.
+
+Seven indicators.
+One unified system.
+Zero repainting.
+
+The Elite Seven are live.
+
+signalpilot.io
+```
+
+---
+
+# SECTION 4: TIKTOK
+
+## TikTok — Origin Video ✅ POSTED
+**Posted:** With IG Post 1
+**Content:** Epic origin video with wizard voiceover
+
+---
+
+## TikTok — Remaining Content
+
+### TikTok — Individual Indicator Reveals
+Use the same preview images with text overlays. Add trending sounds or the wizard voiceover.
+
+**Format for each:**
+- Hook (first 1-2 sec): "One of Seven..." or indicator name
+- Visual: Preview image with subtle animation/zoom
+- Text overlay: Indicator name + tagline
+- CTA: "Dec 30 — Link in bio"
+
+### TikTok — Pentarch
+```
+PENTARCH — The Sovereign
+
+"I am the cycle. The cycle is me."
+
+The market moves in cycles.
+TD → IGN → WRN → CAP → BDN
+
+Always has. Always will.
+
+Dec 30.
+```
+
+### TikTok — Volume Oracle
+```
+VOLUME ORACLE — The Prophet
+
+"Price is the last to know. Volume knows first."
+
+Follow the smart money.
+Or become their exit liquidity.
+
+Dec 30.
+```
+
+### TikTok — Janus Atlas
+```
+JANUS ATLAS — The Cartographer
+
+"I map where the wars will be fought."
+
+60+ levels. Auto-plotted.
+Stop drawing. Start navigating.
+
+Dec 30.
+```
+
+### TikTok — Plutus Flow
+```
+PLUTUS FLOW — The Scales
+
+"Pressure does not lie."
+
+Price can deceive.
+Pressure cannot.
+
+Dec 30.
+```
+
+### TikTok — OmniDeck
+```
+OMNIDECK — The Commander
+
+"Ten systems. One vision."
+
+All unified. All non-repainting.
+
+Dec 30.
+```
+
+### TikTok — Augury Grid
+```
+AUGURY GRID — The Watchman
+
+"I watch them all."
+
+8 markets. Simultaneously.
+Ranked by opportunity.
+
+Dec 30.
+```
+
+### TikTok — Harmonic Oscillator
+```
+HARMONIC OSCILLATOR — The Arbiter
+
+"Four voices. One verdict."
+
+4 stars = Strike.
+Split vote = Stand aside.
+
+Dec 30.
+```
+
+### TikTok — The Pilot's Oath
+```
+THE PILOT'S OATH
+
+I will not chase.
+I will not guess.
+I will not hope.
+
+I am not a gambler.
+I am a Pilot.
+
+signalpilot.io/chronicle
+```
+
+### TikTok — Launch Day
+```
+The Council has assembled.
+
+Seven indicators.
+One unified system.
+Zero repainting.
+
+THE ELITE SEVEN ARE LIVE.
+
+Link in bio.
+```
+
+---
+
+# SECTION 5: INSTAGRAM STORIES
+
+## Stories — Already Posted Content
+- Pentarch reveal story sequence ✅
+- Volume Oracle reveal story sequence ✅
+
+## Stories — Remaining (Dec 26-30)
+
+### Dec 26 — Janus Atlas
+- Frame 1: "THREE OF SEVEN"
+- Frame 2: "JANUS ATLAS — The Cartographer"
+- Frame 3: "I map where the wars will be fought."
+- Frame 4: Preview image
+- Frame 5: "4 days until launch" + Link sticker
+
+### Dec 26 — Plutus Flow
+- Frame 1: "FOUR OF SEVEN"
+- Frame 2: "PLUTUS FLOW — The Scales"
+- Frame 3: "Pressure cannot lie."
+- Frame 4: Preview image + Link sticker
+
+### Dec 27 — OmniDeck
+- Frame 1: "FIVE OF SEVEN"
+- Frame 2: "OMNIDECK — The Commander"
+- Frame 3: "Ten systems. One vision."
+- Frame 4: Preview image
+- Frame 5: "3 days until launch" + Link sticker
+
+### Dec 28 — Augury Grid
+- Frame 1: "SIX OF SEVEN"
+- Frame 2: "AUGURY GRID — The Watchman"
+- Frame 3: "I watch them all."
+- Frame 4: Preview image
+- Frame 5: "2 days until launch" + Link sticker
+
+### Dec 29 — Harmonic Oscillator
+- Frame 1: "SEVEN OF SEVEN"
+- Frame 2: "HARMONIC OSCILLATOR — The Arbiter"
+- Frame 3: "Four voices. One verdict."
+- Frame 4: Preview image
+- Frame 5: "THE COUNCIL IS COMPLETE"
+- Frame 6: "Tomorrow." + Link sticker
+
+### Dec 30 — Launch Day
+- Frame 1: "THE WAIT IS OVER"
+- Frame 2: "The Elite Seven are LIVE"
+- Frame 3: Council image
+- Frame 4: "signalpilot.io" + Link sticker
+- Frame 5: Celebration/behind-the-scenes
+
+---
+
+# SECTION 6: CAROUSELS (Ready to Post)
+
+## Carousel: Meet The Elite Seven
+9 slides introducing all 7 indicators.
+
+**Slide 1 (Cover):**
+```
+THE ELITE SEVEN
+Meet Your Navigators
+```
+
+**Slide 2 — Pentarch:**
+```
+PENTARCH — The Sovereign
+
+"I am the cycle."
+
+Maps 5-phase market cycles:
+TD → IGN → WRN → CAP → BDN
+```
+
+**Slide 3 — Volume Oracle:**
+```
+VOLUME ORACLE — The Prophet
+
+"Volume knows first."
+
+Detects institutional accumulation
+before price moves.
+```
+
+**Slide 4 — Janus Atlas:**
+```
+JANUS ATLAS — The Cartographer
+
+"I map the terrain."
+
+60+ auto-plotted levels.
+Stop drawing. Start navigating.
+```
+
+**Slide 5 — Plutus Flow:**
+```
+PLUTUS FLOW — The Scales
+
+"Pressure cannot lie."
+
+Reveals true buying vs selling force.
+```
+
+**Slide 6 — OmniDeck:**
+```
+OMNIDECK — The Commander
+
+"Ten systems. One vision."
+
+All major systems unified.
+One overlay. Total clarity.
+```
+
+**Slide 7 — Augury Grid:**
+```
+AUGURY GRID — The Watchman
+
+"I watch them all."
+
+Scans 8 markets simultaneously.
+```
+
+**Slide 8 — Harmonic Oscillator:**
+```
+HARMONIC OSCILLATOR — The Arbiter
+
+"Four voices. One verdict."
+
+4 stars = Strike.
+Split = Stand aside.
+```
+
+**Slide 9 (CTA):**
+```
+Seven indicators.
+One unified system.
+Zero repainting.
+
+THE ELITE SEVEN
+Link in bio
+```
+
+**Caption:**
+```
+The Elite Seven. Each masters a domain no other can see.
+
+Swipe to meet them all.
+
+Link in bio.
+
+#tradingview #technicalanalysis #tradingstrategy #indicators #priceaction #cryptotrading #forex #stockmarket
+```
+
+---
+
+## Carousel: The Five Phases
+
+**Slide 1:** THE FIVE PHASES — How Markets Actually Move
+**Slide 2:** TD (Touchdown) — ACCUMULATION. Smart money buys the fear.
+**Slide 3:** IGN (Ignition) — MARKUP. Uptrend begins.
+**Slide 4:** WRN (Warning) — DISTRIBUTION. Smart money exits.
+**Slide 5:** CAP (Climax) — EXHAUSTION. The top is in.
+**Slide 6:** BDN (Breakdown) — DECLINE. Gravity reclaims price.
+**Slide 7:** THE CYCLE REPEATS. Will you see it before or after?
+**Slide 8:** Pentarch reads the cycle so you arrive early. Link in bio.
+
+---
+
+# SECTION 7: SPECIAL CONTENT
+
+## Trust/Non-Repainting Post
+**Use for:** Credibility building (any platform)
+**Image:** `chronicle/non-repainting-matters-preview.jpg`
+
+**Caption:**
 ```
 "If you can prove any of our indicators repaint, we'll pay you $100."
 
@@ -186,7 +746,13 @@ Just honest signals.
 100% non-repainting. Audited.
 
 signalpilot.io
+
+#tradingview #technicalanalysis #indicators #nonrepainting #tradingstrategy #trustworthy
 ```
+
+---
+
+## Philosophy Posts
 
 ### The Transformation
 ```
@@ -233,10 +799,6 @@ Complexity without unity is chaos. Unity creates command.
 ```
 
 ```
-The pilot who sees everything sees nothing. The pilot who sees what matters, wins.
-```
-
-```
 Four stars. Strike now.
 Split vote. Stand aside.
 ```
@@ -247,558 +809,67 @@ The cycle is eternal. Learn to read it, or be consumed by it.
 
 ---
 
-# SECTION 2: INSTAGRAM
+# SECTION 8: SUGGESTED SCHEDULE (Dec 26-30)
 
-## Feed Posts
-
-### Post 1 — Main Launch
-**Image:** Elite Seven council image (hooded figures with lightning)
-
-**Caption:**
-```
-Seven were chosen.
-
-Each masters a domain no other can see.
-Alone, they are powerful.
-Together, they are inevitable.
-
-The Elite Seven. Dec 30.
-Link in bio.
-
-#tradingview #technicalanalysis #tradingstrategy #indicators #priceaction #cryptotrading #forex #stockmarket #marketstructure #smartmoney
-```
-
-### Post 2 — Philosophy
-**Image:** Cosmic/stars image or pilots-oath-preview.jpg
-
-**Caption:**
-```
-Before the markets had names, there was only noise.
-
-Traders wandered the charts like ships without stars.
-Guessing. Hoping. Losing.
-
-The Elite Seven are your stars.
-
-Navigate the noise.
-
-#tradingview #technicalanalysis #tradingstrategy #marketstructure #priceaction #indicators #crypto #forex #stocks #tradingmindset
-```
-
-### Post 3 — The Oath
-**Image:** Dark mystical background with text overlay
-
-**Caption:**
-```
-THE PILOT'S OATH
-
-I will not chase.
-I will not guess.
-I will not hope.
-
-I will read the cycle.
-I will follow the institutions.
-I will respect the levels.
-I will weigh the pressure.
-I will unify my systems.
-I will scan the horizon.
-I will wait for consensus.
-
-I am not a gambler.
-I am a Pilot.
-
-#tradingmindset #tradingpsychology #discipline #technicalanalysis #tradingstrategy #tradingview #priceaction #riskmanagement
-```
-
-### Post 4 — Smart Money
-**Image:** Volume Oracle preview or institutional-themed visual
-
-**Caption:**
-```
-For years, retail asked the wrong question:
-"Where is price going?"
-
-The Prophet asks the only question that matters:
-"Where are institutions already positioned?"
-
-Follow the smart money.
-Or become their exit liquidity.
-
-#tradingview #volumeanalysis #institutionaltrading #smartmoney #technicalanalysis #tradingstrategy #crypto #forex #priceaction
-```
+| Date | IG Feed | IG Stories | X/Twitter | TikTok |
+|------|---------|------------|-----------|--------|
+| **Dec 26** | Janus Atlas | Janus Atlas sequence | Pentarch + Volume Oracle | Pentarch |
+| **Dec 26** | Plutus Flow | Plutus Flow sequence | Janus Atlas | Volume Oracle |
+| **Dec 27** | OmniDeck | OmniDeck sequence | Plutus Flow + OmniDeck | Janus Atlas + Plutus Flow |
+| **Dec 28** | Augury Grid | Augury Grid + countdown | Augury Grid | OmniDeck + Augury Grid |
+| **Dec 29** | Harmonic Oscillator | "Council Complete" | Harmonic Oscillator + Oath | Harmonic Oscillator |
+| **Dec 30** | LAUNCH | Launch celebration | LAUNCH | LAUNCH |
 
 ---
 
-## Carousel 1: Meet The Elite Seven
+# SECTION 9: IMAGE ASSETS
 
-**Slide 1 (Cover):**
-```
-THE ELITE SEVEN
-Meet Your Navigators
-```
+**Location:** `/chronicle/`
 
-**Slide 2 — Pentarch:**
-```
-PENTARCH
-The Sovereign
+| File | Status | Used For |
+|------|--------|----------|
+| `elite-seven-council-preview.jpg` | ✅ USED | IG Post 3 |
+| `sovereign-pentarch-preview.jpg` | ✅ USED | IG Post 4 |
+| `prophet-volume-oracle-preview.jpg` | ✅ USED | IG Post 5 |
+| `pilots-oath-preview.jpg` | ✅ USED | IG Post 6 |
+| `cartographer-janus-atlas-preview.jpg` | 🔜 | Janus Atlas posts |
+| `scales-plutus-flow-preview.jpg` | 🔜 | Plutus Flow posts |
+| `commander-omnideck-preview.jpg` | 🔜 | OmniDeck posts |
+| `watchman-augury-grid-preview.jpg` | 🔜 | Augury Grid posts |
+| `arbiter-harmonic-oscillator-preview.jpg` | 🔜 | Harmonic Oscillator posts |
+| `council-assembles-preview.jpg` | 🔜 | Launch day finale |
+| `hierarchy-of-signals-preview.jpg` | 🔜 | System overview |
+| `non-repainting-matters-preview.jpg` | 🔜 | Trust/credibility posts |
 
-"I am the cycle."
-
-Maps 5-phase market cycles:
-TD → IGN → WRN → CAP → BDN
-
-Know where you are in the cycle.
-```
-
-**Slide 3 — Volume Oracle:**
-```
-VOLUME ORACLE
-The Prophet
-
-"Volume knows first."
-
-Detects institutional accumulation
-and distribution before price moves.
-
-Follow the smart money.
-```
-
-**Slide 4 — Janus Atlas:**
-```
-JANUS ATLAS
-The Cartographer
-
-"I map the terrain."
-
-60+ auto-plotted levels:
-Pivots. Sessions. VWAP. Structure.
-
-Stop drawing. Start navigating.
-```
-
-**Slide 5 — Plutus Flow:**
-```
-PLUTUS FLOW
-The Scales
-
-"Pressure cannot lie."
-
-Reveals true buying vs selling force.
-Spots divergences before reversals.
-
-See what price hides.
-```
-
-**Slide 6 — OmniDeck:**
-```
-OMNIDECK
-The Commander
-
-"Ten systems. One vision."
-
-TD Sequential + Squeeze Cloud +
-SuperTrend + Supply/Demand +
-6 more systems unified.
-
-One overlay. Total clarity.
-```
-
-**Slide 7 — Augury Grid:**
-```
-AUGURY GRID
-The Watchman
-
-"I watch them all."
-
-Scans 8 markets simultaneously.
-Ranks by opportunity score.
-
-Stop hunting. Start receiving.
-```
-
-**Slide 8 — Harmonic Oscillator:**
-```
-HARMONIC OSCILLATOR
-The Arbiter
-
-"Four voices. One verdict."
-
-MACD + RSI + StochRSI unified.
-4 stars = Strike. Split = Stand aside.
-
-The patient pilot survives.
-```
-
-**Slide 9 (CTA):**
-```
-Seven indicators.
-One unified system.
-Zero repainting.
-
-THE ELITE SEVEN
-Link in bio
-```
-
-**Caption:**
-```
-The Elite Seven. Each masters a domain no other can see.
-
-Swipe to meet them all.
-
-Link in bio.
-
-#tradingview #technicalanalysis #tradingstrategy #indicators #priceaction #cryptotrading #forex #stockmarket
-```
+**Audio:** `/chronicle/audio/` — Wizard voice narrations for each indicator
 
 ---
 
-## Carousel 2: The Five Phases
+# SECTION 10: HASHTAG SETS
 
-**Slide 1 (Cover):**
-```
-THE FIVE PHASES
-How Markets Actually Move
-```
-
-**Slide 2:**
-```
-PHASE 1: TD (Touchdown)
-ACCUMULATION
-
-Selling exhaustion.
-Smart money buys the fear.
-Retail is panicking.
-```
-
-**Slide 3:**
-```
-PHASE 2: IGN (Ignition)
-MARKUP
-
-Uptrend begins.
-Momentum shifts upward.
-Early longs get rewarded.
-```
-
-**Slide 4:**
-```
-PHASE 3: WRN (Warning)
-DISTRIBUTION
-
-Price rising, weakness building.
-Smart money exits into strength.
-Retail is euphoric.
-```
-
-**Slide 5:**
-```
-PHASE 4: CAP (Climax)
-EXHAUSTION
-
-Buying exhaustion.
-The top is in.
-Euphoria peaks.
-```
-
-**Slide 6:**
-```
-PHASE 5: BDN (Breakdown)
-DECLINE
-
-Downtrend begins.
-Gravity reclaims price.
-Late buyers become bagholders.
-```
-
-**Slide 7:**
-```
-THE CYCLE REPEATS.
-
-Always has.
-Always will.
-
-The question:
-Will you see it BEFORE or AFTER?
-```
-
-**Slide 8 (CTA):**
-```
-Pentarch reads the cycle
-so you arrive early.
-
-THE ELITE SEVEN
-Link in bio
-```
-
-**Caption:**
-```
-Markets move in cycles. Always have. Always will.
-
-TD → IGN → WRN → CAP → BDN
-
-The question: Will you see it before or after?
-
-Pentarch ensures you see it before.
-
-Link in bio.
-
-#tradingview #marketcycles #technicalanalysis #priceaction #tradingstrategy #cryptotrading #forex #stockmarket
-```
-
----
-
-## Carousel 3: The Pilot's Oath
-
-**Slide 1 (Cover):**
-```
-THE PILOT'S OATH
-A SignalPilot Manifesto
-```
-
-**Slide 2:**
-```
-You are not a trader.
-
-You are a PILOT.
-```
-
-**Slide 3:**
-```
-You navigate the void
-between fear and greed.
-
-Between accumulation
-and distribution.
-```
-
-**Slide 4:**
-```
-I will not chase.
-```
-
-**Slide 5:**
-```
-I will not guess.
-```
-
-**Slide 6:**
-```
-I will not hope.
-```
-
-**Slide 7:**
-```
-I will read the cycle.
-I will follow the institutions.
-I will respect the levels.
-I will weigh the pressure.
-I will unify my systems.
-I will scan the horizon.
-I will wait for consensus.
-```
-
-**Slide 8:**
-```
-I am not a gambler.
-
-I am a Pilot.
-
-The Elite Seven are my stars.
-```
-
-**Slide 9 (CTA):**
-```
-Navigate the noise.
-
-SIGNALPILOT
-Link in bio
-```
-
-**Caption:**
-```
-This is not trading. This is navigation.
-
-The Pilot's Oath — the mindset behind SignalPilot.
-
-Link in bio.
-
-#tradingmindset #tradingpsychology #discipline #technicalanalysis #tradingstrategy #tradingview #priceaction #riskmanagement
-```
-
----
-
-# SECTION 3: STORIES (7-Day Rollout)
-
-## Day 1 — Pentarch
-- Frame 1: "ONE OF SEVEN"
-- Frame 2: "PENTARCH"
-- Frame 3: "The Sovereign"
-- Frame 4: "I am the cycle. The cycle is me."
-- Frame 5: [Pentarch preview image]
-- Frame 6: "Dec 30" + Link sticker
-
-## Day 2 — Volume Oracle
-- Frame 1: "TWO OF SEVEN"
-- Frame 2: "VOLUME ORACLE"
-- Frame 3: "The Prophet"
-- Frame 4: "Price is the last to know."
-- Frame 5: [Volume Oracle preview image]
-- Frame 6: "Dec 30" + Link sticker
-
-## Day 3 — Janus Atlas
-- Frame 1: "THREE OF SEVEN"
-- Frame 2: "JANUS ATLAS"
-- Frame 3: "The Cartographer"
-- Frame 4: "I map where wars will be fought."
-- Frame 5: [Janus Atlas preview image]
-- Frame 6: "Dec 30" + Link sticker
-
-## Day 4 — Plutus Flow
-- Frame 1: "FOUR OF SEVEN"
-- Frame 2: "PLUTUS FLOW"
-- Frame 3: "The Scales"
-- Frame 4: "Pressure does not lie."
-- Frame 5: [Plutus Flow preview image]
-- Frame 6: "Dec 30" + Link sticker
-
-## Day 5 — OmniDeck
-- Frame 1: "FIVE OF SEVEN"
-- Frame 2: "OMNIDECK"
-- Frame 3: "The Commander"
-- Frame 4: "Ten systems. One vision."
-- Frame 5: [OmniDeck preview image]
-- Frame 6: "Dec 30" + Link sticker
-
-## Day 6 — Augury Grid
-- Frame 1: "SIX OF SEVEN"
-- Frame 2: "AUGURY GRID"
-- Frame 3: "The Watchman"
-- Frame 4: "I watch them all."
-- Frame 5: [Augury Grid preview image]
-- Frame 6: "Dec 30" + Link sticker
-
-## Day 7 — Harmonic Oscillator
-- Frame 1: "SEVEN OF SEVEN"
-- Frame 2: "HARMONIC OSCILLATOR"
-- Frame 3: "The Arbiter"
-- Frame 4: "Four voices. One verdict."
-- Frame 5: [Harmonic Oscillator preview image]
-- Frame 6: "THE COUNCIL IS COMPLETE" + Link sticker
-
----
-
-# SECTION 4: VIDEO SCRIPT (60 seconds)
-
-```
-[0:00 - Dark space, silence]
-
-NARRATOR (deep, wise voice):
-Before the markets had names, there was only noise.
-
-[0:05 - Chaotic chart movements]
-
-Traders wandered like ships without stars.
-Guessing. Hoping. Losing.
-
-[0:12 - Seven stars ignite, one by one]
-
-But the ancients spoke of something else.
-Seven celestial signals.
-Not indicators. Navigators.
-
-[0:22 - Each name appears]
-
-The Sovereign — who reads the cycle.
-The Prophet — who hears the institutions.
-The Cartographer — who maps the terrain.
-The Scales — who weigh the pressure.
-The Commander — who unifies the force.
-The Watchman — who scans the horizon.
-The Arbiter — who decides when to strike.
-
-[0:45 - All seven form constellation]
-
-Seven were chosen.
-Together, they are inevitable.
-
-[0:52 - Logo + Date]
-
-The Elite Seven.
-December 30.
-
-Navigate the noise.
-
-[0:60 - End]
-```
-
----
-
-# SECTION 5: POSTING SCHEDULE
-
-**Adjust dates based on your start date. This is a 7-day countdown to Dec 30 launch.**
-
-| Day | Platform | Content | Image File |
-|-----|----------|---------|------------|
-| Day 1 (Dec 24) | X + IG Feed | "Seven were chosen" teaser | `elite-seven-council-preview.jpg` |
-| Day 2 (Dec 25) | X + IG Story | Pentarch reveal | `sovereign-pentarch-preview.jpg` |
-| Day 2 (Dec 25) | IG Feed | "Philosophy" post | `pilots-oath-preview.jpg` |
-| Day 3 (Dec 26) | X + IG Story | Volume Oracle reveal | `prophet-volume-oracle-preview.jpg` |
-| Day 3 (Dec 26) | X + IG Story | Janus Atlas reveal | `cartographer-janus-atlas-preview.jpg` |
-| Day 4 (Dec 27) | X + IG Story | Plutus Flow reveal | `scales-plutus-flow-preview.jpg` |
-| Day 4 (Dec 27) | IG Feed | "Five Phases" carousel | Custom slides |
-| Day 5 (Dec 28) | X + IG Story | OmniDeck reveal | `commander-omnideck-preview.jpg` |
-| Day 5 (Dec 28) | IG Feed | "Meet The Seven" carousel | Custom slides |
-| Day 6 (Dec 29) | X + IG Story | Augury Grid reveal | `watchman-augury-grid-preview.jpg` |
-| Day 6 (Dec 29) | X + IG Story | Harmonic Oscillator reveal | `arbiter-harmonic-oscillator-preview.jpg` |
-| Day 6 (Dec 29) | IG Feed | "Pilot's Oath" carousel | Custom slides |
-| Day 7 (Dec 30) | X + IG Feed | LAUNCH | `council-assembles-preview.jpg` |
-
----
-
-# SECTION 6: IMAGE ASSETS
-
-**All files located in `/chronicle/`**
-
-| File | Use For |
-|------|---------|
-| `elite-seven-council-preview.jpg` | Main launch teaser, "Seven were chosen" |
-| `sovereign-pentarch-preview.jpg` | Pentarch/Sovereign posts |
-| `prophet-volume-oracle-preview.jpg` | Volume Oracle/Prophet posts |
-| `cartographer-janus-atlas-preview.jpg` | Janus Atlas/Cartographer posts |
-| `scales-plutus-flow-preview.jpg` | Plutus Flow/Scales posts |
-| `commander-omnideck-preview.jpg` | OmniDeck/Commander posts |
-| `watchman-augury-grid-preview.jpg` | Augury Grid/Watchman posts |
-| `arbiter-harmonic-oscillator-preview.jpg` | Harmonic Oscillator/Arbiter posts |
-| `pilots-oath-preview.jpg` | Philosophy/Oath posts |
-| `council-assembles-preview.jpg` | Finale/Launch day |
-| `hierarchy-of-signals-preview.jpg` | System overview, how they work together |
-| `non-repainting-matters-preview.jpg` | Trust/credibility posts |
-
-**Audio Assets** (for Reels/Stories with voiceover):
-- Located in `/chronicle/audio/` — Deep wizard voice narrations for each article
-
----
-
-# SECTION 7: HASHTAG SETS
-
-## Primary (use on all posts)
+## Primary (all posts)
 ```
 #tradingview #technicalanalysis #tradingstrategy #indicators #priceaction
 ```
 
-## Extended (rotate these)
+## Extended (rotate)
 ```
-#cryptotrading #forex #stockmarket #marketstructure #smartmoney #volumeanalysis #tradingmindset #tradingpsychology #riskmanagement #daytrading #swingtrading #bitcoin #cryptocurrency
+#cryptotrading #forex #stockmarket #smartmoney #volumeanalysis #tradingmindset #bitcoin #cryptocurrency
 ```
 
-## Niche (use selectively)
+## Niche
 ```
-#institutionaltrading #marketcycles #tdsequential #divergence #supportandresistance
+#institutionaltrading #marketcycles #divergence #supportandresistance
+```
+
+## TikTok-specific
+```
+#tradingtok #stocktok #cryptotok #forextok #daytrader #swingtrader
 ```
 
 ---
 
-# SECTION 8: LINKS
+# SECTION 11: LINKS
 
 - **Main Site:** signalpilot.io
 - **Chronicle (Lore):** signalpilot.io/chronicle
