@@ -577,6 +577,18 @@
       .bounty-box .amount { font-size: 2.5rem; }
       .header-nav { display: none; }
     }
+    /* Audio Player */
+.audio-player{max-width:720px;margin:1.5rem auto 2rem;padding:0 1.5rem}
+.audio-player-inner{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:12px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem}
+.audio-play-btn{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--accent));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.2s,box-shadow 0.2s}
+.audio-play-btn:hover{transform:scale(1.05);box-shadow:0 4px 20px rgba(91,138,255,.3)}
+.audio-play-btn svg{width:20px;height:20px;fill:#fff}
+.audio-info{flex:1;min-width:0}
+.audio-title{font-family:'Noto Sans Arabic','Space Grotesk',system-ui,sans-serif;font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:0.25rem}
+.audio-progress{display:flex;align-items:center;gap:0.75rem}
+.audio-bar{flex:1;height:4px;background:var(--bg-elev);border-radius:2px;cursor:pointer;overflow:hidden}
+.audio-bar-fill{height:100%;background:linear-gradient(90deg,var(--brand),var(--accent));width:0%;transition:width 0.1s}
+.audio-time{font-family:'Space Grotesk',monospace;font-size:0.8rem;color:var(--muted);min-width:80px;text-align:left}
   </style>
 </head>
 <body>
@@ -609,6 +621,24 @@
       <span>٧ دقائق قراءة</span>
     </div>
   </div>
+
+  <!-- Audio Player -->
+<div class="audio-player">
+  <div class="audio-player-inner">
+    <button class="audio-play-btn" id="audioPlayBtn" aria-label="تشغيل الصوت">
+      <svg viewBox="0 0 24 24" id="playIcon"><polygon points="5,3 19,12 5,21"/></svg>
+      <svg viewBox="0 0 24 24" id="pauseIcon" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+    <div class="audio-info">
+      <div class="audio-title">استمع للمقال</div>
+      <div class="audio-progress">
+        <div class="audio-bar" id="audioBar"><div class="audio-bar-fill" id="audioBarFill"></div></div>
+        <span class="audio-time" id="audioTime">0:00 / 0:00</span>
+      </div>
+    </div>
+  </div>
+  <audio id="articleAudio" src="/chronicle/audio/why-non-repainting-matters.mp3" preload="metadata"></audio>
+</div>
 
   <article class="article-content">
 
@@ -793,6 +823,8 @@
       const progress = (scrollTop / docHeight) * 100;
       progressBar.style.width = progress + '%';
     });
+    // Audio Player
+const audio=document.getElementById('articleAudio'),playBtn=document.getElementById('audioPlayBtn'),playIcon=document.getElementById('playIcon'),pauseIcon=document.getElementById('pauseIcon'),audioBar=document.getElementById('audioBar'),audioBarFill=document.getElementById('audioBarFill'),audioTime=document.getElementById('audioTime');function formatTime(s){const m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}playBtn.addEventListener('click',()=>{if(audio.paused){audio.play();playIcon.style.display='none';pauseIcon.style.display='block';}else{audio.pause();playIcon.style.display='block';pauseIcon.style.display='none';}});audio.addEventListener('timeupdate',()=>{const pct=(audio.currentTime/audio.duration)*100;audioBarFill.style.width=pct+'%';audioTime.textContent=formatTime(audio.currentTime)+' / '+formatTime(audio.duration||0);});audio.addEventListener('ended',()=>{playIcon.style.display='block';pauseIcon.style.display='none';audioBarFill.style.width='0%';});audioBar.addEventListener('click',(e)=>{const rect=audioBar.getBoundingClientRect(),pct=(e.clientX-rect.left)/rect.width;audio.currentTime=pct*audio.duration;});
   </script>
 
 </body>
