@@ -602,15 +602,54 @@
   <header>
     <div class="container">
       <a href="/de/" class="brand">Signal Pilot</a>
-      <div class="header-nav">
-        <a href="/de/chronicle/">← Alle Chronicle</a>
-        <a href="/de/#pricing">Zugang erhalten</a>
+      <nav class="header-nav">
+        <a href="/de/#inside">Was ist drin</a>
+        <a href="https://education.signalpilot.io/" target="_blank" rel="noopener">Bildung</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Ressourcen <span class="dropdown-arrow">▼</span>
+          </button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="/de/chronicle/">Chronik</a></li>
+            <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Dokumentation</a></li>
+            <li><a href="https://blog.signalpilot.io/" target="_blank" rel="noopener">Blog</a></li>
+            <li><a href="https://education.signalpilot.io/calculators.html" target="_blank" rel="noopener">Rechner</a></li>
+            <li><a href="/de/faq.html">FAQ-Bereich</a></li>
+          </ul>
+        </div>
+        <a href="/de/#pricing">Preise</a>
+        <a href="/de/affiliates.html">Partner</a>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button id="themeToggle" class="btn" type="button" aria-label="Thema wechseln">
+          <span id="theme-icon">☀️</span>
+        </button>
+        <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="Menü umschalten">
+          <span id="menu-icon">☰</span>
+        </button>
       </div>
-      <button id="themeToggle" class="btn" type="button" aria-label="Design wechseln">
-        <span id="theme-icon">☀️</span>
-      </button>
     </div>
   </header>
+
+  <!-- Mobile Navigation -->
+  <nav id="mobileNav" class="mobile-nav">
+    <ul>
+      <li><a href="/de/#inside">Was ist drin</a></li>
+      <li><a href="https://education.signalpilot.io/" target="_blank" rel="noopener">Bildung</a></li>
+      <li class="mobile-submenu">
+        <button class="mobile-submenu-toggle" aria-expanded="false">Ressourcen <span class="dropdown-arrow">▼</span></button>
+        <ul class="mobile-submenu-items">
+          <li><a href="/de/chronicle/">Chronik</a></li>
+          <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Dokumentation</a></li>
+          <li><a href="https://blog.signalpilot.io/" target="_blank" rel="noopener">Blog</a></li>
+          <li><a href="https://education.signalpilot.io/calculators.html" target="_blank" rel="noopener">Rechner</a></li>
+          <li><a href="/de/faq.html">FAQ-Bereich</a></li>
+        </ul>
+      </li>
+      <li><a href="/de/#pricing">Preise</a></li>
+      <li><a href="/de/affiliates.html">Partner</a></li>
+    </ul>
+  </nav>
 
   <div class="article-header">
     <a href="/de/chronicle/" class="back-link">← Zurück zur Chronicle</a>
@@ -833,6 +872,18 @@
       const progress = (scrollTop / docHeight) * 100;
       progressBar.style.width = progress + '%';
     });
+    // Mobile Menu
+    const mobileMenuBtn=document.getElementById('mobileMenuBtn'),mobileNav=document.getElementById('mobileNav'),menuIcon=document.getElementById('menu-icon');mobileMenuBtn.addEventListener('click',()=>{const isOpen=mobileNav.classList.toggle('open');menuIcon.textContent=isOpen?'✕':'☰';});document.addEventListener('click',(e)=>{if(!mobileNav.contains(e.target)&&!mobileMenuBtn.contains(e.target)){mobileNav.classList.remove('open');menuIcon.textContent='☰';}});mobileNav.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{mobileNav.classList.remove('open');menuIcon.textContent='☰';});});
+    // Dropdown
+    (function(){let dropdownOpen=false;document.addEventListener('click',function(e){const toggle=e.target.closest('.nav-dropdown-toggle');if(toggle){e.preventDefault();e.stopPropagation();const dropdown=toggle.closest('.nav-dropdown'),menu=dropdown?dropdown.querySelector('.nav-dropdown-menu'):null;if(menu){dropdownOpen=!dropdownOpen;if(dropdownOpen){menu.classList.add('show');toggle.setAttribute('aria-expanded','true');}else{menu.classList.remove('show');toggle.setAttribute('aria-expanded','false');}}return;}if(dropdownOpen&&!e.target.closest('.nav-dropdown')){const menu=document.querySelector('.nav-dropdown-menu'),toggle=document.querySelector('.nav-dropdown-toggle');if(menu)menu.classList.remove('show');if(toggle)toggle.setAttribute('aria-expanded','false');dropdownOpen=false;}});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dropdownOpen){const menu=document.querySelector('.nav-dropdown-menu'),toggle=document.querySelector('.nav-dropdown-toggle');if(menu)menu.classList.remove('show');if(toggle)toggle.setAttribute('aria-expanded','false');dropdownOpen=false;}});})();
+    // Mobile Submenu
+    document.querySelectorAll('.mobile-submenu-toggle').forEach(function(toggle){toggle.addEventListener('click',function(){const submenu=this.nextElementSibling,isOpen=submenu.classList.toggle('open');this.setAttribute('aria-expanded',isOpen);});});
+    // Mobile Menu
+    const mobileMenuBtn=document.getElementById('mobileMenuBtn'),mobileNav=document.getElementById('mobileNav'),menuIcon=document.getElementById('menu-icon');mobileMenuBtn.addEventListener('click',()=>{const isOpen=mobileNav.classList.toggle('open');menuIcon.textContent=isOpen?'✕':'☰';});document.addEventListener('click',(e)=>{if(!mobileNav.contains(e.target)&&!mobileMenuBtn.contains(e.target)){mobileNav.classList.remove('open');menuIcon.textContent='☰';}});mobileNav.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{mobileNav.classList.remove('open');menuIcon.textContent='☰';});});
+    // Dropdown
+    (function(){let dropdownOpen=false;document.addEventListener('click',function(e){const toggle=e.target.closest('.nav-dropdown-toggle');if(toggle){e.preventDefault();e.stopPropagation();const dropdown=toggle.closest('.nav-dropdown'),menu=dropdown?dropdown.querySelector('.nav-dropdown-menu'):null;if(menu){dropdownOpen=!dropdownOpen;if(dropdownOpen){menu.classList.add('show');toggle.setAttribute('aria-expanded','true');}else{menu.classList.remove('show');toggle.setAttribute('aria-expanded','false');}}return;}if(dropdownOpen&&!e.target.closest('.nav-dropdown')){const menu=document.querySelector('.nav-dropdown-menu'),toggle=document.querySelector('.nav-dropdown-toggle');if(menu)menu.classList.remove('show');if(toggle)toggle.setAttribute('aria-expanded','false');dropdownOpen=false;}});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dropdownOpen){const menu=document.querySelector('.nav-dropdown-menu'),toggle=document.querySelector('.nav-dropdown-toggle');if(menu)menu.classList.remove('show');if(toggle)toggle.setAttribute('aria-expanded','false');dropdownOpen=false;}});})();
+    // Mobile Submenu
+    document.querySelectorAll('.mobile-submenu-toggle').forEach(function(toggle){toggle.addEventListener('click',function(){const submenu=this.nextElementSibling,isOpen=submenu.classList.toggle('open');this.setAttribute('aria-expanded',isOpen);});});
     // Audio Player
     const audio=document.getElementById('articleAudio'),playBtn=document.getElementById('audioPlayBtn'),playIcon=document.getElementById('playIcon'),pauseIcon=document.getElementById('pauseIcon'),audioBar=document.getElementById('audioBar'),audioBarFill=document.getElementById('audioBarFill'),audioTime=document.getElementById('audioTime');function formatTime(s){const m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}playBtn.addEventListener('click',()=>{if(audio.paused){audio.play();playIcon.style.display='none';pauseIcon.style.display='block';}else{audio.pause();playIcon.style.display='block';pauseIcon.style.display='none';}});audio.addEventListener('timeupdate',()=>{const pct=(audio.currentTime/audio.duration)*100;audioBarFill.style.width=pct+'%';audioTime.textContent=formatTime(audio.currentTime)+' / '+formatTime(audio.duration||0);});audio.addEventListener('ended',()=>{playIcon.style.display='block';pauseIcon.style.display='none';audioBarFill.style.width='0%';});audioBar.addEventListener('click',(e)=>{const rect=audioBar.getBoundingClientRect(),pct=(e.clientX-rect.left)/rect.width;audio.currentTime=pct*audio.duration;});
   </script>
