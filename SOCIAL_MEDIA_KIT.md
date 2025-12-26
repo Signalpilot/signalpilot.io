@@ -52,7 +52,7 @@ Each day has:
 | 5 | Dec 29 | Harmonic Oscillator (FINAL) + Council Complete |
 | 6 | **Dec 30** | **🚀 LAUNCH DAY** |
 | 7 | Dec 31 | New Year's Eve — Reflection |
-| 8 | Jan 1 | New Year — Rest day |
+| 8 | Jan 1 | New Year — Reflection & fresh starts |
 | 9 | Jan 2 | Education Hub: Cycle Detection lesson |
 | 10 | Jan 3 | Trust Building: Non-Repainting $100 Bounty |
 | 11 | Jan 4 | Education Hub: Volume Analysis lesson |
@@ -84,7 +84,7 @@ Each day has:
 
 ## DAY 1 — DECEMBER 25 (CHRISTMAS)
 
-#### 📌 Theme
+### 📌 Theme
 Light engagement. Markets closed. Plant seeds for the launch.
 
 ---
