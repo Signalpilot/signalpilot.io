@@ -992,9 +992,11 @@ signalpilot.io
 # DAY 9 — JANUARY 2
 
 ## 📌 Theme
-Education Hub spotlight: Cycle Detection lesson
+Education Hub spotlight: **Lesson 01 — The Liquidity Lie**
 
-**Strategy:** Drive traffic to education.signalpilot.io. Show the VALUE of the free lessons.
+**Strategy:** Feature the ACTUAL first lesson. Show specific teachable content. Case study: One trader improved win rate from 34% → 68% by changing entry timing.
+
+**Lesson Source:** `education.signalpilot.io` → Beginner Tier → Lesson 01
 
 ---
 
@@ -1218,8 +1220,9 @@ Link in bio — free education.
 ---
 
 ## 🔗 LINKS FOR DAY 9
-- education.signalpilot.io
-- signalpilot.io/chronicle/the-sovereign
+- education.signalpilot.io (Lesson 01)
+- blog.signalpilot.io/articles/how-to-trade-cycles-with-pentarch (Blog article on cycles)
+- signalpilot.io/chronicle/the-sovereign (Chronicle lore)
 
 ---
 
@@ -1362,9 +1365,17 @@ Link in bio.
 # DAY 11 — JANUARY 4
 
 ## 📌 Theme
-Education Hub spotlight: Volume Analysis lesson
+Education Hub spotlight: **Lesson 02 — Volume Doesn't Lie, But You're Reading It Wrong**
 
-**Strategy:** Teach the "Price is the last to know" concept.
+**Strategy:** Feature the ACTUAL volume lesson. Case study: One trader lost $93K ignoring delta, then recovered with proper volume analysis.
+
+**Lesson Source:** `education.signalpilot.io` → Beginner Tier → Lesson 02
+
+**Key Teaching Points from Lesson:**
+- Delta analysis reveals buying vs. selling pressure (not just volume bars)
+- Absorption (high volume, price barely moves) = STRENGTH
+- Exhaustion (high volume, price rejects) = WEAKNESS
+- Cumulative Volume Delta (CVD) tracks net buying/selling
 
 ---
 
@@ -2636,27 +2647,39 @@ Thread on the consensus system and star ratings.
 # DAY 20 — JANUARY 13
 
 ## 📌 Theme
-Education Hub spotlight: Position Sizing
+Education Hub spotlight: **Lesson 09 — Position Sizing: The Only Edge That Actually Matters**
+
+**Strategy:** Feature the ACTUAL position sizing lesson with the real formula and case study.
+
+**Lesson Source:** `education.signalpilot.io` → Beginner Tier → Lesson 09
+
+**Key Stats from Lesson:**
+- 70% win rate with -$50 expectancy = LOSES MONEY
+- 40% win rate with +$140 expectancy = MAKES MONEY
+- Case study: Overleveraging took one trader from $45K → $8K in 6 weeks
 
 ---
 
 ## 📸 INSTAGRAM — CAROUSEL
 
-**Slide 1:** THE 1% RULE — Why Most Traders Blow Up
+**Slide 1:** THE POSITION SIZING FORMULA — Why Win Rate Lies
 
 **Slide 2:** The #1 account killer: Position size too large
 
-**Slide 3:** The 1% Rule: Never risk more than 1% per trade
+**Slide 3:** THE FORMULA:
+(Account Size × Risk %) / (Entry - Stop Loss) = Position Size
 
-**Slide 4:** Example: $10,000 account = $100 max risk per trade
+**Slide 4:** Example: $10,000 × 1% = $100 risk per trade
 
-**Slide 5:** 10 consecutive losses = 10% drawdown (survivable)
+**Slide 5:**
+70% win rate + bad R:R = LOSES MONEY (-$50/trade)
+40% win rate + good R:R = MAKES MONEY (+$140/trade)
 
-**Slide 6:** Without the 1% rule: 3-4 losses = blown account
+**Slide 6:** Real case: $45K → $8K in 6 weeks from overleveraging
 
-**Slide 7:** This isn't about winning. It's about surviving long enough TO win.
+**Slide 7:** Portfolio heat rule: Never exceed 6% total risk across all positions
 
-**Slide 8 (CTA):** Learn position sizing in our free education hub → education.signalpilot.io
+**Slide 8 (CTA):** Full position sizing lesson FREE → education.signalpilot.io
 
 **Caption:**
 ```
@@ -2707,7 +2730,17 @@ Thread on position sizing with examples.
 # DAY 21 — JANUARY 14
 
 ## 📌 Theme
-Psychology: "The Patient Pilot Survives"
+Education Hub spotlight: **Lesson 07 — Revenge Trading: Understanding the Neuroscience**
+
+**Strategy:** Feature the ACTUAL psychology lesson. This has a powerful case study.
+
+**Lesson Source:** `education.signalpilot.io` → Beginner Tier → Lesson 07
+
+**Key Stats from Lesson:**
+- Losses feel 2.5x worse than equivalent gains (loss aversion is hardwired)
+- Case study: $340 loss spiraled to $23,400 in just 4 revenge trades
+- Three tilt types: revenge tilt, winner's tilt, boredom tilt
+- Automated circuit breakers work better than willpower
 
 ---
 
@@ -2715,30 +2748,38 @@ Psychology: "The Patient Pilot Survives"
 
 **Caption:**
 ```
-"The patient pilot survives.
-The impulsive pilot donates."
+$340 → $23,400
 
-Every impulse trade you've taken:
-→ FOMO entries
-→ Revenge trades
-→ "I just have a feeling"
+That's how much one trader lost.
 
-How many worked?
+Not from bad analysis.
+From revenge trading.
 
-The Arbiter forces patience.
-4 stars = strike.
-Split vote = stand aside.
+Here's what happened:
 
-There's no gray area.
-There's no "maybe."
-There's discipline.
+→ Small $340 loss
+→ "I'll make it back quick"
+→ Doubled position size
+→ Another loss
+→ Tripled position
+→ Spiral
 
-Impulse is the enemy.
-Patience is the weapon.
+4 trades. $23,400 gone.
 
-signalpilot.io
+The science:
+Your brain treats losses 2.5x worse than gains.
+That's not weak mindset — it's neurobiology.
 
-#tradingpsychology #patience #discipline #tradingmindset
+The fix:
+Automated circuit breakers.
+Daily loss limits that FORCE you to stop.
+
+Willpower fails. Systems don't.
+
+Full lesson (free):
+education.signalpilot.io
+
+#tradingpsychology #revengetrading #discipline #tradingmindset #riskmanagement
 ```
 
 ---
@@ -3368,15 +3409,46 @@ Ten glowing symbols arranged in formation converging into single bright light at
 | Augury Grid | docs.signalpilot.io/augury-grid-v10 |
 | Harmonic Oscillator | docs.signalpilot.io/harmonic-oscillator-v10 |
 
-## Blog Articles
+## Blog Articles (Educational — blog.signalpilot.io)
 | Article | URL |
 |---------|-----|
-| How to Trade Cycles | blog.signalpilot.io/articles/how-to-trade-cycles-with-pentarch |
+| How to Trade Cycles with Pentarch | blog.signalpilot.io/articles/how-to-trade-cycles-with-pentarch |
 | Accumulation vs Distribution | blog.signalpilot.io/articles/accumulation-vs-distribution |
 | How Smart Money Moves | blog.signalpilot.io/articles/how-smart-money-moves |
 | The Repainting Problem | blog.signalpilot.io/articles/the-repainting-problem |
 | The 1% Rule | blog.signalpilot.io/articles/the-1-percent-rule |
 | Building Your First System | blog.signalpilot.io/articles/building-your-first-system |
+| TradingView Setup Guide | blog.signalpilot.io/articles/tradingview-setup-guide |
+| Inside Signal Pilot | blog.signalpilot.io/articles/inside-signal-pilot |
+| Multi-Timeframe Confirmation | blog.signalpilot.io/articles/multi-timeframe-confirmation |
+| When to Ignore Divergence | blog.signalpilot.io/articles/when-to-ignore-divergence |
+| Why Your Indicators Keep Failing | blog.signalpilot.io/articles/why-your-indicators-keep-failing |
+| Free vs Professional Tools | blog.signalpilot.io/articles/free-indicators-vs-professional-tools |
+| Your First Trade | blog.signalpilot.io/articles/your-first-trade |
+
+---
+
+# APPENDIX E: COMPLIANCE NOTES
+
+## Language Guidelines
+
+**Avoid directive language.** All content should use "potential" qualifiers.
+
+| ❌ Don't Say | ✅ Say Instead |
+|-------------|----------------|
+| "Buy when IGN fires" | "IGN may indicate potential upward momentum" |
+| "This is a buy signal" | "This signal suggests potential opportunity" |
+| "You should enter here" | "Some traders consider entries at this level" |
+| "Always use stops" | "Many traders prefer to use stops" |
+| "This will happen" | "This may occur" |
+| "Guaranteed returns" | NEVER use |
+| "80% win rate" | "Historically showed ~80% win rate in backtests" |
+
+**Required Disclaimers:**
+- Trading involves risk of loss
+- Past performance doesn't guarantee future results
+- This is educational content, not financial advice
+- All signals represent potential, not certainty
 
 ---
 
