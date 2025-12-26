@@ -102,7 +102,29 @@ The Sovereign awaits.
 
 ## 🎬 TIKTOK
 
-**Skip today.** Save energy for reveal days.
+**Hook:** "Something's coming..."
+
+**Script:**
+```
+December 30th.
+
+Seven indicators.
+One system.
+Years in development.
+
+The Elite Seven are almost here.
+
+Pentarch. Volume Oracle. Janus Atlas.
+Plutus Flow. OmniDeck. Augury Grid.
+Harmonic Oscillator.
+
+Non-repainting. Education included.
+82 free lessons.
+
+The wait is almost over.
+
+Link in bio — countdown.
+```
 
 ---
 
@@ -947,7 +969,34 @@ Happy New Year 🎆
 
 ## 🎬 TIKTOK
 
-**Skip today.** New Year content rarely performs. Save energy.
+**Hook:** "2026 trading resolution"
+
+**Script:**
+```
+2026.
+
+One resolution that actually matters:
+
+Stop guessing.
+Start reading.
+
+The market moves in cycles.
+TD. IGN. WRN. CAP. BDN.
+
+It's not random.
+It's not luck.
+It's structure.
+
+This year, learn to see it.
+
+82 free lessons.
+7 non-repainting indicators.
+No more hoping.
+
+Happy New Year.
+
+Link in bio.
+```
 
 ---
 
@@ -985,7 +1034,33 @@ signalpilot.io
 
 ## 🎬 TIKTOK
 
-**Skip today.**
+**Hook:** "The market doesn't know it's 2026"
+
+**Script:**
+```
+Happy New Year!
+
+Quick reminder:
+
+The market doesn't know what year it is.
+
+It doesn't care about your resolutions.
+It doesn't care about fresh starts.
+
+It just moves in cycles.
+
+TD. IGN. WRN. CAP. BDN.
+
+Same structure. Every year. Every asset.
+
+2026 won't be different.
+But YOU can be.
+
+Learn to read the cycles.
+Stop hoping. Start seeing.
+
+Link in bio.
+```
 
 ---
 
@@ -4253,7 +4328,30 @@ Reply below 👇
 
 ## 🎬 TIKTOK
 
-**Skip today.** Weekend rest.
+**Hook:** "Quick poll for traders"
+
+**Script:**
+```
+Quick poll.
+
+What's the hardest part of trading for you?
+
+Entries? Finding setups that actually work?
+
+Exits? Knowing when to get out?
+
+Psychology? Managing emotions after a loss?
+
+Or analysis paralysis? Too many indicators, too much noise?
+
+Drop your answer in the comments.
+
+We built The Elite Seven to solve all four.
+
+But I want to know what YOU struggle with most.
+
+Link in bio.
+```
 
 ---
 
