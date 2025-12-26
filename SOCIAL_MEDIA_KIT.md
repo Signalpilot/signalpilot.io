@@ -17,6 +17,137 @@ Each day has:
 
 ---
 
+# OPTIMAL POSTING TIMES
+
+| Platform | Best Times (EST) | Notes |
+|----------|------------------|-------|
+| Instagram Feed | 11 AM, 2 PM, 7 PM | Tues-Thurs perform best |
+| Instagram Reels | 9 AM, 12 PM, 7 PM | Weekends get more views |
+| Instagram Stories | 7-9 AM, 12 PM, 7-9 PM | Spread throughout day |
+| Twitter/X | 8-10 AM, 12-1 PM, 5-6 PM | Weekdays only |
+| TikTok | 7 AM, 10 AM, 7 PM, 10 PM | Thurs-Sat perform best |
+
+**Consistency > Perfect timing.** Pick times you can maintain.
+
+---
+
+# ENGAGEMENT TACTICS
+
+## Carousel Posts
+- Always add "Swipe →" or "👉" in first slide or caption
+- End with "Save this for later 🔖"
+- Ask a question in caption: "Which slide hit hardest?"
+
+## Comments Strategy
+- Reply to EVERY comment in first hour
+- Pin best comment or your own follow-up
+- Ask follow-up questions to keep threads going
+
+## Stories Strategy
+- Use polls, questions, sliders daily
+- Share user DMs (with permission) as social proof
+- "Add yours" stickers for engagement
+
+## Twitter/X Strategy
+- Quote tweet your own threads 24h later
+- Reply to big trading accounts with value (not promo)
+- Use Twitter polls for engagement
+
+## TikTok Strategy
+- First 1-2 seconds = HOOK (keep them watching)
+- Ideal length: 15-45 seconds for educational
+- Reply to comments with new videos
+
+---
+
+# VIRAL CONTENT FORMATS
+
+Use these proven formats to boost reach:
+
+## "Myth Busting" Posts
+```
+❌ MYTH: "High volume = price going up"
+✅ TRUTH: Volume = activity. Delta = direction.
+
+Stop falling for this...
+```
+
+## "Before/After" Posts
+```
+6 months ago: Chasing every signal, blowing accounts
+Today: Reading cycles, waiting for consensus
+
+The difference? [education/indicators]
+```
+
+## "Unpopular Opinion" Posts
+```
+Unpopular opinion: Win rate doesn't matter.
+
+A 40% win rate with good R:R beats 70% with bad R:R.
+
+Here's the math... 🧵
+```
+
+## "Save This" Carousels
+```
+SAVE THIS → The complete position sizing formula
+
+[Carousel content]
+
+Caption: Save this. You'll need it. 🔖
+```
+
+## "Reply with X" Engagement
+```
+Reply with your biggest trading mistake.
+
+I'll tell you which lesson in our free education hub fixes it.
+```
+
+## "POV" TikToks
+```
+POV: You finally stopped guessing and started reading the cycle
+
+[Show transformation, relief, confidence]
+```
+
+---
+
+# LINK-IN-BIO STRATEGY
+
+**Recommended Tool:** Linktree, Beacons, or Stan Store
+
+**Link Order (top to bottom):**
+1. 🚀 Start Free Trial → signalpilot.io
+2. 📚 Free Education (82 Lessons) → education.signalpilot.io
+3. 📖 The Chronicle (Lore) → signalpilot.io/chronicle
+4. 📄 Documentation → docs.signalpilot.io
+5. 📝 Blog → blog.signalpilot.io
+
+**Update weekly** with current campaign focus at top.
+
+---
+
+# CONTENT REPURPOSING
+
+Every piece of content can become 5+:
+
+| Original | Repurpose To |
+|----------|--------------|
+| Twitter thread | Instagram carousel |
+| Carousel | TikTok slideshow |
+| TikTok script | Twitter thread |
+| Long caption | Multiple story frames |
+| Case study | Before/after post |
+| Lesson content | "Did you know?" posts |
+| Lore quotes | Quote graphics |
+| User feedback | Social proof posts |
+
+**1 core idea = 1 week of content across platforms**
+
+---
+
 # QUICK STATUS
 
 ## Already Posted (as of Dec 25)
@@ -1003,7 +1134,7 @@ Link in bio.
 # DAY 8 — JANUARY 1 (NEW YEAR)
 
 ## 📌 Theme
-Rest day. Minimal posting.
+New Year reflection — Light but meaningful content.
 
 ---
 
@@ -4749,6 +4880,49 @@ Behind-the-scenes / Team story
 
 ---
 
+## 📸 INSTAGRAM — FEED POST
+
+**Image:** Team/founder image or "Origin Story" graphic
+
+**Caption:**
+```
+HOW SIGNALPILOT STARTED:
+
+Years ago, we got burned.
+
+Bought an indicator. Perfect backtest.
+80% win rate in history.
+
+Live trading?
+Signals kept disappearing.
+"Perfect" setups that weren't there when the candle was forming.
+
+That's called repainting.
+And most indicators do it.
+
+We spent years searching for honest tools.
+Couldn't find them.
+
+So we built them.
+
+THE RESULT:
+→ 7 non-repainting indicators
+→ 82 free educational lessons
+→ $100 bounty (still unclaimed)
+→ Years of development
+→ Thousands of hours of testing
+
+This is for traders who refuse to guess anymore.
+
+Thank you for believing in the vision.
+
+signalpilot.io
+
+#tradingview #technicalanalysis #indicators #origin #tradingstory
+```
+
+---
+
 ## 📸 INSTAGRAM STORIES
 
 - Frame 1: "How SignalPilot started..."
@@ -5012,6 +5186,69 @@ Link in bio.
 
 ---
 
+# APPENDIX F: COMPETITOR DIFFERENTIATION
+
+Use these angles to stand out from other indicator providers:
+
+## Pain Points to Address
+
+| Competitor Problem | Our Solution |
+|-------------------|--------------|
+| Repainting indicators | 100% non-repainting, $100 bounty |
+| No education included | 82 free lessons, complete curriculum |
+| Single-purpose indicators | 7 integrated indicators, unified system |
+| No philosophy/methodology | The Pilot's Oath, complete trading framework |
+| Indicator overload | OmniDeck unifies 10 systems in one |
+| Manual chart scanning | Augury Grid scans 8 markets automatically |
+| Signals without context | Harmonic Oscillator requires consensus |
+| No transparency | Full documentation, open about methodology |
+
+## Hooks That Differentiate
+
+```
+"Most indicators repaint. Ours don't. $100 if you prove otherwise."
+
+"Other products sell you signals. We teach you to read the market."
+
+"Free indicators give you noise. We give you a system."
+
+"82 lessons included. Not upsold. Just included."
+
+"7 indicators that work together, not 7 indicators that fight each other."
+```
+
+---
+
+# APPENDIX G: BONUS CONTENT IDEAS
+
+For days when you need extra content or want to test new formats:
+
+## Quick Wins (Low effort, high engagement)
+- Poll: "What's harder — entries or exits?"
+- Quote graphic with lore lines
+- "Throwback" to earlier post with new insight
+- Screenshot of positive DM/feedback
+
+## Medium Effort
+- "3 mistakes I made this week" vulnerability post
+- Live chart markup with current signals
+- "How I use [indicator] in my daily routine"
+- Q&A response video/carousel
+
+## High Effort (Save for key moments)
+- Full case study with entry/exit breakdown
+- Live trading session recap
+- User transformation story
+- "Day in the life" behind-the-scenes
+
+## Evergreen (Repost monthly)
+- The Pilot's Oath
+- 5-Phase Cycle explanation
+- Non-repainting explainer
+- Position sizing formula
+
+---
+
 # APPENDIX A: AI IMAGE PROMPTS
 
 For new images via Nano Banana Pro or similar:
@@ -5074,6 +5311,42 @@ Ten glowing symbols arranged in formation converging into single bright light at
 ```
 #tradingtok #stocktok #cryptotok #forextok #daytrader #swingtrader
 ```
+
+## TikTok Trending (check weekly, add relevant ones)
+```
+#fintok #moneytok #learnontiktok #edutok #investing101 #tradingforbeginners
+```
+
+## Instagram Reels
+```
+#reelsinstagram #explorepage #viralreels #tradingcommunity #tradingtips
+```
+
+---
+
+# GROWTH HACKING TACTICS
+
+## Week 1-2: Foundation
+- Post consistently (1x/day minimum per platform)
+- Engage with 20+ accounts daily in trading niche
+- Respond to ALL comments within 1 hour
+
+## Week 3-4: Collaboration
+- DM 5 mid-size trading accounts for collaboration
+- Offer value first (free access, shoutout, etc.)
+- Guest content swaps
+
+## Ongoing: Engagement Loops
+- Reply to comments with questions to keep threads going
+- Create "series" content people follow (Day 1/30, etc.)
+- Pin comments that spark discussion
+
+## Viral Triggers
+- Controversy: "Unpopular opinion: RSI is useless alone"
+- Relatability: "POV: You at 2 AM"
+- Transformation: Before/After trading journey
+- FOMO: "Most traders don't know this..."
+- Authority: Stats, data, case studies
 
 ---
 
