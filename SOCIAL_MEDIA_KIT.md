@@ -12,8 +12,18 @@
 |---------|---------|------------------|
 | **Part 1** | [Quick Start](#part-1-quick-start) | How to use this file, status check, 30-day overview |
 | **Part 2** | [Daily Calendar](#part-2-the-daily-calendar) | Day-by-day content (your main work) |
-| **Part 3** | [Strategy Guide](#part-3-strategy-guide) | Posting times, engagement tactics, growth hacks |
+| **Part 3** | [Strategy Guide](#part-3-strategy-guide) | Posting times, engagement, viral formats, growth hacks |
 | **Part 4** | [Appendices](#part-4-appendices) | Links, hashtags, images, compliance |
+
+### Part 3 Includes:
+- Posting Times & Engagement Tactics
+- Viral Content Formats & Link-in-Bio Strategy
+- **NEW:** Metrics & KPIs (with targets)
+- **NEW:** Paid Amplification Plan ($350 budget)
+- **NEW:** Influencer Outreach (templates included)
+- **NEW:** UGC Strategy (#SignalPilotWins)
+- **NEW:** Email List Integration
+- **NEW:** Crisis Management (response templates)
 
 ---
 
@@ -56,20 +66,20 @@ Each day has:
 | 9 | Jan 2 | Education Hub: Cycle Detection lesson |
 | 10 | Jan 3 | Trust Building: Non-Repainting $100 Bounty |
 | 11 | Jan 4 | Education Hub: Volume Analysis lesson |
-| 12 | Jan 5 | Philosophy: The Pilot's Oath deep dive |
+| 12 | Jan 5 | 🗳️ Community Poll — Engage early |
 | 13 | Jan 6 | Pentarch Deep Dive — 5-Phase Cycle |
-| 14 | Jan 7 | Volume Oracle Deep Dive — Smart Money |
+| 14 | Jan 7 | 📊 Chart Breakdown: Smart Money in Action |
 | 15 | Jan 8 | Janus Atlas Deep Dive — Key Levels |
-| 16 | Jan 9 | Plutus Flow Deep Dive — Pressure |
+| 16 | Jan 9 | 📊 Chart Breakdown: Pressure Divergence |
 | 17 | Jan 10 | OmniDeck Deep Dive — 10 Systems |
-| 18 | Jan 11 | Augury Grid Deep Dive — 8 Markets |
+| 18 | Jan 11 | 📊 Chart Breakdown: Multi-Market Scan |
 | 19 | Jan 12 | Harmonic Oscillator Deep Dive — Consensus |
 | 20 | Jan 13 | Education Hub: Position Sizing lesson |
-| 21 | Jan 14 | Psychology: "The Patient Pilot Survives" |
+| 21 | Jan 14 | 🏆 UGC Spotlight — Feature user wins |
 | 22 | Jan 15 | Blog Feature: Smart Money Moves |
 | 23 | Jan 16 | Education Hub: Backtesting lesson |
 | 24 | Jan 17 | The Hierarchy of Signals explained |
-| 25 | Jan 18 | Weekend engagement — Community poll |
+| 25 | Jan 18 | Philosophy: The Pilot's Oath deep dive |
 | 26 | Jan 19 | User testimonials / Social proof |
 | 27 | Jan 20 | Education Hub: Risk Management lesson |
 | 28 | Jan 21 | Behind-the-scenes / Team story |
@@ -79,6 +89,18 @@ Each day has:
 ---
 
 # PART 2: THE DAILY CALENDAR
+
+## EMAIL CTA GUIDE (Add to Captions)
+
+| Days | CTA to Add |
+|------|------------|
+| 1-5 | "📩 Join the launch waitlist — link in bio" |
+| 6-8 | "🚀 Launch pricing available now — link in bio" |
+| 9, 11, 20, 23, 27 (Education) | "📚 Get this lesson free — education.signalpilot.io" |
+| 14, 16, 18 (Chart Breakdowns) | "📊 More proof in your inbox — DM 'PROOF'" |
+| 21, 26 (UGC/Social Proof) | "🏆 Get featured — use #SignalPilotWins" |
+
+**Bio should always link to:** signalpilot.io (or Linktree with all destinations)
 
 ---
 
@@ -1469,9 +1491,30 @@ Link in bio.
 
 ---
 
+### 📸 INSTAGRAM STORY — UGC LAUNCH
+
+**Story 1:** "We're launching something new today..."
+**Story 2:** "#SignalPilotWins"
+**Story 3:**
+```
+Using SignalPilot? Share your wins.
+
+Post your chart with #SignalPilotWins
+Tag us @signalpilot
+
+Best submissions get:
+→ Featured on our page
+→ Free extended access
+```
+**Story 4:** "First 10 posts get featured. GO."
+
+---
+
 ### 🔗 LINKS FOR DAY 10
 - signalpilot.io
 - blog.signalpilot.io/articles/the-repainting-problem
+
+**UGC NOTE:** This day launches #SignalPilotWins. Monitor the hashtag daily from here on.
 
 ---
 
@@ -1766,157 +1809,90 @@ Link in bio.
 ## DAY 12 — JANUARY 5
 
 ### 📌 Theme
-Philosophy: The Pilot's Oath deep dive
+🗳️ Community Poll — Engage before deep dive week
 
-**Strategy:** Reinforce identity transformation (trader → pilot).
-
----
-
-### 📸 INSTAGRAM
-
-**Image:** `chronicle/pilots-oath-preview.jpg`
-
-**Caption:**
-```
-THE PILOT'S OATH
-
-I will not chase.
-I will not guess.
-I will not hope.
-
-I will read the cycle.
-I will follow the institutions.
-I will respect the levels.
-I will weigh the pressure.
-I will unify my systems.
-I will scan the horizon.
-I will wait for consensus.
-
-I am not a gambler.
-I am a Pilot.
-
-And The Elite Seven are my stars.
-
-—
-
-This isn't just a trading system.
-It's a way of operating.
-
-Traders react.
-Pilots navigate.
-
-Which are you?
-
-Full Chronicle:
-signalpilot.io/chronicle/the-pilots-oath
-
-#tradingmindset #tradingpsychology #discipline #tradingstrategy #technicalanalysis
-```
+**Strategy:** Build relationship before 7 days of product content. Get audience talking.
 
 ---
 
-### 𝕏 TWITTER/X — THREAD
+### 📸 INSTAGRAM STORIES
 
-**Post 1:**
+**Poll 1:**
+"Which indicator are you most excited about?"
+- Pentarch (cycles)
+- Volume Oracle (smart money)
+- OmniDeck (all-in-one)
+- Harmonic Oscillator (consensus)
+
+**Poll 2:**
+"What content do you want more of?"
+- Indicator tutorials
+- Market psychology
+- Live trade examples
+- Behind-the-scenes
+
+**Poll 3:**
+"What's your biggest trading struggle?"
+- Finding entries
+- Managing exits
+- Controlling emotions
+- Analysis paralysis
+
+**Story 4:** Share results in real-time with commentary
+
+---
+
+### 𝕏 TWITTER/X
+
 ```
-THE PILOT'S OATH
+Quick poll for the trading community:
 
-"I will not chase.
-I will not guess.
-I will not hope."
+What's the hardest part of trading for you?
 
-Three things that destroy accounts.
-Three things pilots reject.
+🔄 Entries (finding good setups)
+📉 Exits (knowing when to get out)
+🧠 Psychology (managing emotions)
+📊 Analysis paralysis (too many indicators)
 
-🧵 What does each line mean?
-```
-
-**Post 2:**
-```
-"I will not chase."
-
-Missed entry? Let it go.
-The market will cycle again.
-There is ALWAYS another setup.
-
-Chasing = emotional trading = losses.
-
-Pilots wait at the turn before it completes.
-```
-
-**Post 3:**
-```
-"I will not guess."
-
-No random entries.
-No "I have a feeling."
-No "it looks like it might..."
-
-You have systems. You have signals.
-Either they confirm, or you stand aside.
-```
-
-**Post 4:**
-```
-"I will not hope."
-
-Once you're in a trade, hope is worthless.
-Either you have a plan, or you're gambling.
-
-Set your levels. Manage your risk.
-Hope has no place in the cockpit.
+Reply below — I read every answer 👇
 ```
 
-**Post 5:**
+**Follow-up tweet (2 hours later):**
 ```
-"I will read the cycle."
-"I will follow the institutions."
-"I will respect the levels."
-"I will weigh the pressure."
-"I will unify my systems."
-"I will scan the horizon."
-"I will wait for consensus."
+Loving these responses.
 
-Seven commitments. One for each indicator.
-```
+Most common answer so far: [insert based on replies]
 
-**Post 6:**
-```
-"I am not a gambler. I am a Pilot."
+This is exactly why we built The Elite Seven the way we did.
 
-Traders react.
-Pilots navigate.
-
-The difference isn't knowledge.
-It's identity.
-
-signalpilot.io/chronicle/the-pilots-oath
+More on this tomorrow.
 ```
 
 ---
 
 ### 🎬 TIKTOK
 
-**Hook:** "Three things that destroy accounts"
+**Hook:** "Quick question for traders"
 
 **Script:**
 ```
-Chasing. Guessing. Hoping.
+Quick question.
 
-Three things that destroy accounts.
-Three things pilots reject.
+What's the hardest part of trading for you?
 
-"I will not chase."
-Missed it? Let it go. There's always another.
+Is it entries? Finding setups that actually work?
 
-"I will not guess."
-No random entries. Either it confirms or you stand aside.
+Exits? Knowing when to get out before it reverses?
 
-"I will not hope."
-Once you're in, hope is worthless. Have a plan.
+Psychology? Managing emotions after a loss?
 
-I am not a gambler.
-I am a Pilot.
+Or analysis paralysis? Too many indicators, too much noise?
+
+Drop your answer in the comments.
+
+I read every single one.
+
+And I'll tell you which of our 82 free lessons addresses YOUR specific struggle.
 
 Link in bio.
 ```
@@ -1924,8 +1900,8 @@ Link in bio.
 ---
 
 ### 🔗 LINKS FOR DAY 12
-- signalpilot.io/chronicle/the-pilots-oath
-- signalpilot.io/chronicle
+- education.signalpilot.io
+- signalpilot.io
 
 ---
 
@@ -2108,48 +2084,64 @@ Link in bio.
 ## DAY 14 — JANUARY 7
 
 ### 📌 Theme
-Volume Oracle Deep Dive — Smart Money Detection
+📊 Chart Breakdown: Smart Money in Action
+
+**Strategy:** SHOW, don't tell. Real chart, real signals, real outcome. This is PROOF content.
 
 ---
 
-### 📸 INSTAGRAM
+### 📸 INSTAGRAM — CAROUSEL (5-7 slides)
 
-**Image:** `chronicle/prophet-volume-oracle-preview.jpg`
+**Image:** Actual chart screenshot with Volume Oracle signals marked
+
+**Slide 1:** Chart showing "ACCUMULATION 84%" signal with price flat
+**Slide 2:** Same chart 3 days later — price exploded +12%
+**Slide 3:** Zoom in on the Volume Oracle reading at signal time
+**Slide 4:** "Retail saw: boring sideways price action"
+**Slide 5:** "Volume Oracle saw: Smart money loading"
+**Slide 6:** "Result: +12% move within 72 hours"
+**Slide 7:** "The Prophet sees what retail can't"
 
 **Caption:**
 ```
-VOLUME ORACLE — The Prophet
+CHART BREAKDOWN: Smart Money in Action
 
-Deep Dive: Smart Money Detection
+📅 Signal: January 4th
+📊 Volume Oracle: "ACCUMULATION 84%"
+📈 Result: +12% in 72 hours
 
-For years, retail asked the wrong question:
-"Where is price going?"
+Here's exactly what happened:
 
-The Prophet asks the only question that matters:
-"Where are institutions already positioned?"
-
-📊 ACCUMULATION (82%)
-The giants are building. The move is coming.
-Charts may look dead. Volume says otherwise.
-
-📊 DISTRIBUTION (67%)
-The giants are exiting. The top is near.
-Price may still rise. But smart money is leaving.
+Slide 1 → Price looked dead. Retail was bored.
+Slide 2 → Volume Oracle flashed ACCUMULATION 84%
+Slide 3 → Smart money was quietly loading
+Slide 4 → 72 hours later: price exploded
 
 The second lesson:
 "Price is the last to know. Volume knows first."
 
-Detect accumulation before the charts confess it.
-Detect distribution before the candles bleed.
+This isn't theory. This is the actual chart.
 
-Follow the smart money.
-Or become their exit liquidity.
+Want to see more breakdowns like this? Save this post and follow for daily proof.
 
 Full documentation:
 docs.signalpilot.io/volume-oracle-v10
 
-#tradingview #volumeoracle #smartmoney #institutionaltrading #technicalanalysis
+#tradingview #volumeoracle #smartmoney #institutionaltrading #technicalanalysis #tradingproof #chartanalysis
 ```
+
+**IMPORTANT:** Use REAL charts with REAL signals. No hypotheticals.
+
+---
+
+### 📸 INSTAGRAM STORIES
+
+**Story 1:** Post the chart screenshot
+**Story 2:** Circle the Volume Oracle reading
+**Story 3:** "What retail saw: nothing happening"
+**Story 4:** "What smart money saw: accumulation"
+**Story 5:** Show the result
+**Story 6:** Poll: "Have you ever missed a move like this?"
 
 ---
 
@@ -2157,68 +2149,73 @@ docs.signalpilot.io/volume-oracle-v10
 
 **Post 1:**
 ```
-VOLUME ORACLE DEEP DIVE — The Prophet
+CHART BREAKDOWN: Smart Money Caught Live
 
-"I hear what retail cannot. I see the giants move in darkness."
+📅 January 4th
+📊 Volume Oracle: ACCUMULATION 84%
+📈 Result: +12% in 72 hours
 
-Retail watches price.
-Institutions move volume.
+I'm going to show you exactly what happened.
 
-By the time price confirms, they're already positioned.
-
-Here's how The Prophet sees what you can't.
+Real chart. Real signal. Real outcome.
 
 🧵
 ```
 
 **Post 2:**
 ```
-HOW ACCUMULATION WORKS:
+Here's the setup:
 
-1. Price "looks dead" — retail is bored
-2. Volume shows quiet buying pressure
-3. Institutions building positions slowly
-4. Retail doesn't notice
+Price looked dead.
+Retail was bored.
+Nothing happening, right?
 
-Volume Oracle: "ACCUMULATION 82%"
+Wrong.
 
-Then price explodes. "Where did THAT come from?"
+Volume Oracle flashed: "ACCUMULATION 84%"
+
+Smart money was quietly loading while everyone else was asleep.
+
+[Screenshot of chart with signal]
 ```
 
 **Post 3:**
 ```
-HOW DISTRIBUTION WORKS:
+What happened next:
 
-1. Price making new highs — retail euphoric
-2. Volume shows selling INTO strength
-3. Institutions exiting into YOUR greed
-4. Retail FOMOs in at the top
+72 hours later → +12% explosion
 
-Volume Oracle: "DISTRIBUTION 67%"
+"Where did THAT come from?!"
 
-Then price collapses. "Why is it dumping?!"
+It came from institutions building positions while retail wasn't paying attention.
+
+Volume Oracle saw it.
+Price confirmed it 3 days later.
 ```
 
 **Post 4:**
 ```
-THE CONVICTION PERCENTAGE:
+This is why I say:
 
-→ Higher % = higher confidence
-→ 80%+ = strong signal
-→ 50-70% = developing
-→ <50% = unclear
+"Price is the last to know. Volume knows first."
 
-When Volume Oracle shows 85% accumulation...
-Smart money is screaming at you.
+→ Retail watches candles
+→ Smart money moves volume
+→ Volume Oracle detects the imbalance
+→ You get positioned BEFORE the move
 
-Are you listening?
+Not after.
 ```
 
 **Post 5:**
 ```
-"Follow the smart money, or become their exit liquidity."
+Want proof like this daily?
 
-There's no third option.
+Follow + turn on notifications.
+
+I post chart breakdowns showing real signals, real outcomes.
+
+No theory. No hypotheticals. Just receipts.
 
 docs.signalpilot.io/volume-oracle-v10
 ```
@@ -2227,28 +2224,37 @@ docs.signalpilot.io/volume-oracle-v10
 
 ### 🎬 TIKTOK
 
-**Hook:** "They bought before you even knew"
+**Hook:** "I caught smart money loading. Here's the proof."
 
 **Script:**
 ```
-Price looks dead. You're bored.
+I caught smart money loading.
 
-Meanwhile... ACCUMULATION 82%.
+Here's the proof.
 
-Smart money building positions.
-Quietly. In the dark.
+January 4th. Price looks dead.
+Volume Oracle: ACCUMULATION 84%.
 
-Then price EXPLODES.
+What does that mean?
+Institutions quietly buying while retail sleeps.
+
+72 hours later?
+Plus 12%.
 
 "Why didn't I see that coming?"
 
 Because you were watching price.
-They were watching volume.
+Smart money was moving volume.
 
 Price is the last to know.
 
-Link in bio.
+This isn't theory.
+This is the actual chart.
+
+More proof in bio.
 ```
+
+**IMPORTANT:** Screen record scrolling through the actual chart for authenticity.
 
 ---
 
@@ -2398,50 +2404,67 @@ Link in bio.
 ## DAY 16 — JANUARY 9
 
 ### 📌 Theme
-Plutus Flow Deep Dive — Pressure Analysis
+📊 Chart Breakdown: Pressure Divergence
+
+**Strategy:** SHOW a real divergence that called a reversal. Proof that pressure analysis works.
 
 ---
 
-### 📸 INSTAGRAM
+### 📸 INSTAGRAM — CAROUSEL (6 slides)
 
-**Image:** `chronicle/scales-plutus-flow-preview.jpg`
+**Image:** Actual chart screenshot with Plutus Flow divergence marked
+
+**Slide 1:** "This chart made new highs. Then it crashed. Here's what I saw coming."
+**Slide 2:** Chart showing price making new high with Plutus Flow diverging
+**Slide 3:** Zoom on Plutus Flow: "Pressure declining while price rising"
+**Slide 4:** Arrow pointing: "DIVERGENCE = Reversal warning"
+**Slide 5:** Same chart 48 hours later — price collapsed -8%
+**Slide 6:** "Price lies. Pressure doesn't."
 
 **Caption:**
 ```
-PLUTUS FLOW — The Scales
+CHART BREAKDOWN: Divergence Called This Crash
 
-Deep Dive: Cumulative Pressure Analysis
+📅 Signal: January 6th
+📊 Plutus Flow: Bearish divergence (pressure declining)
+📉 Result: -8% in 48 hours
 
-Price can rise on air.
-Price can fall on whispers.
+Here's what happened:
 
-But pressure — cumulative buying vs selling force — reveals the truth beneath the surface.
+Price made new highs. Retail was euphoric.
+But Plutus Flow told a different story.
 
-🟢 GREEN RIBBON
-Demand conquers supply. Buyers control the field.
+Pressure was DECLINING while price was RISING.
 
-🔴 RED RIBBON
-Supply overwhelms demand. Sellers hold dominion.
-
-⚪ WHITE DOTS
-Extreme pressure reached. Tipping point approaches.
-
-THE DIVERGENCE SIGNAL:
-When price makes new highs but Plutus Flow refuses to confirm...
+That's a divergence.
 
 "This throne is built on sand."
 
-Hidden strength. Hidden weakness.
-The lie the candles tell, exposed.
+48 hours later? Collapsed -8%.
 
 The fourth lesson:
 "Price can deceive. Pressure cannot."
 
-Full documentation:
+This isn't theory. This is the actual chart.
+
+Save this. You'll need it.
+
 docs.signalpilot.io/plutus-flow-v10
 
-#tradingview #plutusflow #divergence #volumeanalysis #technicalanalysis
+#tradingview #plutusflow #divergence #technicalanalysis #tradingproof #reversaltrading
 ```
+
+**IMPORTANT:** Use REAL divergence from actual chart. Document before the move happens.
+
+---
+
+### 📸 INSTAGRAM STORIES
+
+**Story 1:** "I caught this reversal before it happened"
+**Story 2:** Post the divergence chart
+**Story 3:** Circle the divergence point
+**Story 4:** "48 hours later..." show result
+**Story 5:** Poll: "Do you trade divergences?"
 
 ---
 
@@ -2449,60 +2472,72 @@ docs.signalpilot.io/plutus-flow-v10
 
 **Post 1:**
 ```
-PLUTUS FLOW DEEP DIVE — The Scales
+CHART BREAKDOWN: I called this crash 48 hours early
 
-"Pressure does not lie."
+📅 January 6th
+📊 Plutus Flow: Bearish divergence
+📉 Result: -8% collapse
 
-Price makes new highs.
-Retail celebrates.
-But The Scales see something else...
+Real chart. Real signal. Here's what I saw.
 
-🧵 Why divergences are the most reliable reversal signal
+🧵
 ```
 
 **Post 2:**
 ```
-WHAT PLUTUS FLOW MEASURES:
+The setup:
 
-Cumulative buying pressure vs selling pressure.
+Price making new highs.
+Retail celebrating.
+"We're going to the moon!"
 
-Not just volume — DIRECTIONAL pressure.
+But I checked Plutus Flow.
 
-→ Green = buyers winning
-→ Red = sellers winning
-→ White dots = extreme pressure
+Pressure was DECLINING.
+
+Price up. Pressure down.
+
+That's a divergence.
+
+[Screenshot with divergence marked]
 ```
 
 **Post 3:**
 ```
-THE DIVERGENCE SETUP:
-
-Price: New high! 🎉
-Plutus Flow: Pressure declining...
-
-This is a divergence.
+What a divergence means:
 
 Price is lying.
 Pressure is telling the truth.
+
+Buyers aren't as strong as price suggests.
+The highs aren't supported by real demand.
 
 "This throne is built on sand."
 ```
 
 **Post 4:**
 ```
-WHAT HAPPENS NEXT:
+48 hours later:
 
-Price inevitably follows pressure.
+-8% crash.
 
-If pressure isn't confirming highs → reversal incoming.
-If pressure isn't confirming lows → bounce incoming.
+Everyone: "What happened?! It was just at highs!"
 
-This is how you catch reversals BEFORE they happen.
+Plutus Flow saw it coming.
+
+Pressure doesn't lie.
+Price catches up eventually.
 ```
 
 **Post 5:**
 ```
+This is why I say:
+
 "Price can deceive. Pressure cannot."
+
+Want to catch reversals before they happen?
+
+Follow for more chart breakdowns with real signals.
 
 docs.signalpilot.io/plutus-flow-v10
 ```
@@ -2511,36 +2546,45 @@ docs.signalpilot.io/plutus-flow-v10
 
 ### 🎬 TIKTOK
 
-**Hook:** "Price is lying to you right now"
+**Hook:** "I caught this crash 48 hours early. Here's the proof."
 
 **Script:**
 ```
-New high! Let's go! 🎉
+I caught this crash 48 hours early.
 
-Wait. Check the pressure.
+Here's the proof.
 
-Declining...
+January 6th. Price at new highs.
+Everyone celebrating.
+
+But I checked Plutus Flow.
+Pressure was declining.
+
+Price up. Pressure down.
 
 That's a divergence.
-Price is lying. Pressure tells the truth.
 
 "This throne is built on sand."
 
-Reversal incoming.
+48 hours later?
+Minus 8%.
 
-How did I know?
-Plutus Flow — The Scales.
+"How did you know?!"
 
-Pressure cannot lie.
+Because price lies.
+Pressure doesn't.
 
-Link in bio.
+More proof in bio.
 ```
+
+**IMPORTANT:** Screen record the actual chart showing signal date and result.
 
 ---
 
 ### 🔗 LINKS FOR DAY 16
 - docs.signalpilot.io/plutus-flow-v10
 - signalpilot.io/chronicle/the-scales
+- blog.signalpilot.io/articles/when-to-ignore-divergence
 
 ---
 
@@ -2780,49 +2824,71 @@ Link in bio.
 ## DAY 18 — JANUARY 11
 
 ### 📌 Theme
-Augury Grid Deep Dive — Multi-Market Scanning
+📊 Chart Breakdown: Multi-Market Scan in Action
+
+**Strategy:** SHOW Augury Grid finding a real opportunity across markets. Proof that scanning works.
 
 ---
 
-### 📸 INSTAGRAM
+### 📸 INSTAGRAM — CAROUSEL (6 slides)
 
-**Image:** `chronicle/watchman-augury-grid-preview.jpg`
+**Image:** Screenshot of Augury Grid panel + resulting trade
+
+**Slide 1:** "I found this setup in 30 seconds. Without scanning a single chart."
+**Slide 2:** Screenshot of Augury Grid showing "BTCUSDT ↑ 92%"
+**Slide 3:** Actual BTCUSDT chart at the signal time
+**Slide 4:** Arrow: "Augury Grid flagged this. 92% conviction."
+**Slide 5:** Same chart 24 hours later — +6.5% move
+**Slide 6:** "Stop hunting. Start receiving."
 
 **Caption:**
 ```
-AUGURY GRID — The Watchman
+CHART BREAKDOWN: Found in 30 Seconds
 
-Deep Dive: 8-Market Scanning
+📅 Signal: January 8th
+📊 Augury Grid: BTCUSDT ↑ 92%
+📈 Result: +6.5% in 24 hours
 
-The market is not one battlefield.
-It is thousands — running simultaneously.
+Here's what happened:
 
-No human can watch them all.
-But The Watchman never sleeps.
+I wasn't even looking at BTC.
+I was checking something else.
 
-HOW IT WORKS:
+Augury Grid flagged: "BTCUSDT ↑ 92%"
 
-📊 Scans 8 markets at once
-📊 Ranks by opportunity quality (0-100%)
-📊 Shows direction, conviction, time active
-📊 When systems agree → high score
-📊 When systems conflict → "Wait for clarity"
+92% = multiple systems aligned.
+High conviction. Worth attention.
 
-EXAMPLE OUTPUT:
-BTCUSDT ↑ 94%
-AAPL ↓ 87%
-EURUSD — 52%
+I clicked. Checked the chart. Entered.
 
-Stop flipping through 50 charts.
-Let The Watchman bring opportunities to you.
+24 hours later: +6.5%
+
+I didn't hunt for this setup.
+I didn't flip through 50 charts.
+The Watchman brought it to me.
 
 "The pilot who sees everything sees nothing.
 The pilot who sees what matters, wins."
 
+This isn't theory. This is the actual grid + chart.
+
 docs.signalpilot.io/augury-grid-v10
 
-#tradingview #augurygrid #marketscanner #opportunities #technicalanalysis
+#tradingview #augurygrid #marketscanner #technicalanalysis #tradingproof #opportunities
 ```
+
+**IMPORTANT:** Screenshot REAL Augury Grid output with timestamp. Show the actual resulting chart.
+
+---
+
+### 📸 INSTAGRAM STORIES
+
+**Story 1:** "Found this in 30 seconds flat"
+**Story 2:** Screenshot of Augury Grid panel
+**Story 3:** Circle the high-conviction signal
+**Story 4:** Show the chart + result
+**Story 5:** "How long do YOU spend scanning charts?"
+**Story 6:** Poll: "Want to see more scans?"
 
 ---
 
@@ -2830,72 +2896,66 @@ docs.signalpilot.io/augury-grid-v10
 
 **Post 1:**
 ```
-AUGURY GRID DEEP DIVE — The Watchman
+CHART BREAKDOWN: How I found +6.5% in 30 seconds
 
-"While you watch one chart, I watch them all."
+📅 January 8th
+📊 Augury Grid: BTCUSDT ↑ 92%
+📈 Result: +6.5% in 24 hours
 
-You: Flipping through 50 charts at 2 AM
-The Watchman: Scanning 8 markets simultaneously
+I wasn't even looking for BTC.
+The Watchman found it for me.
 
-Here's how multi-market scanning works:
-
-🧵 Thread:
+🧵
 ```
 
 **Post 2:**
 ```
-THE PROBLEM:
+The setup:
 
-→ Thousands of assets to watch
-→ Every timeframe matters
-→ Opportunities appear and vanish
-→ No human can track it all
+Augury Grid running in the corner.
+I'm looking at something else.
 
-You're either missing opportunities...
-Or burning out trying to find them.
+Notification: "BTCUSDT ↑ 92%"
+
+92% conviction = multiple systems aligned.
+High agreement. Worth attention.
+
+[Screenshot of Augury Grid panel]
 ```
 
 **Post 3:**
 ```
-THE SOLUTION:
+I clicked through.
 
-Augury Grid scans 8 markets at once.
+Checked the chart.
+Pentarch: Bullish phase
+Volume Oracle: Accumulation
+Plutus Flow: Pressure rising
 
-For each market it shows:
-→ Direction (bullish/bearish/neutral)
-→ Conviction score (0-100%)
-→ Time active
-→ System agreement level
+Everything aligned.
+
+Entered.
 ```
 
 **Post 4:**
 ```
-THE SCORING SYSTEM:
+24 hours later:
 
-90%+ = Multiple systems agree. High conviction.
-70-89% = Strong agreement. Worth attention.
-50-69% = Mixed signals. Proceed with caution.
-<50% = Conflict. "Wait for clarity."
++6.5%
 
-Quality scores align the constellations.
+I spent 30 seconds finding this.
+
+How long do you spend flipping through charts hoping to find something?
 ```
 
 **Post 5:**
 ```
-EXAMPLE OUTPUT:
-
-BTCUSDT ↑ 94% (12h active)
-AAPL ↓ 87% (4h active)
-EURUSD — 52% (unclear)
-SPY ↑ 78% (6h active)
-
-Now you know WHERE to focus.
-```
-
-**Post 6:**
-```
 "The pilot who sees everything sees nothing.
 The pilot who sees what matters, wins."
+
+Augury Grid watches 8 markets.
+Scores them by conviction.
+Brings opportunities TO you.
 
 Stop hunting. Start receiving.
 
@@ -2906,39 +2966,42 @@ docs.signalpilot.io/augury-grid-v10
 
 ### 🎬 TIKTOK
 
-**Hook:** "I scan 8 markets while you flip through charts"
+**Hook:** "Found this trade in 30 seconds. Here's the proof."
 
 **Script:**
 ```
-POV: You at 2 AM.
+Found this trade in 30 seconds.
 
-BTC? Meh.
-ETH? Nothing.
-AAPL? Maybe.
-EUR/USD? Let me check...
+Here's the proof.
 
-50 charts. Nothing found.
+I wasn't even looking for BTC.
+Augury Grid was running in the corner.
 
-Meanwhile, Augury Grid:
+BTCUSDT ↑ 92%.
 
-BTCUSDT ↑ 94%
-AAPL ↓ 87%
-SPY ↑ 78%
+92% means high conviction.
+Multiple systems aligned.
+
+I clicked. Checked the chart. Entered.
+
+24 hours later?
+Plus 6.5%.
+
+"How do you find setups so fast?"
+
+I don't find them.
+The Watchman brings them to me.
 
 8 markets. Scanned simultaneously.
 Ranked by opportunity score.
 
-90%+ = high conviction
-Below 50% = wait for clarity
+Stop hunting.
+Start receiving.
 
-Stop hunting through charts.
-Let The Watchman bring opportunities TO you.
-
-"The pilot who sees everything sees nothing.
-The pilot who sees what matters, wins."
-
-Link in bio.
+More scans in bio.
 ```
+
+**IMPORTANT:** Show screen recording of the actual Augury Grid panel.
 
 ---
 
@@ -3443,146 +3506,97 @@ Link in bio.
 ## DAY 21 — JANUARY 14
 
 ### 📌 Theme
-Education Hub spotlight: **Lesson 07 — Revenge Trading: Understanding the Neuroscience**
+🏆 UGC Spotlight — Feature User Wins
 
-**Strategy:** Feature the ACTUAL psychology lesson. This has a powerful case study.
+**Strategy:** Showcase real users, real charts, real wins. Social proof day. Make the community feel seen.
 
-**Lesson Source:** `education.signalpilot.io` → Beginner Tier → Lesson 07
-
-**Key Stats from Lesson:**
-- Losses feel 2.5x worse than equivalent gains (loss aversion is hardwired)
-- Case study: $340 loss spiraled to $23,400 in just 4 revenge trades
-- Three tilt types: revenge tilt, winner's tilt, boredom tilt
-- Automated circuit breakers work better than willpower
+**Preparation:** By now, #SignalPilotWins should have submissions from Day 10 launch. Collect best 3-5.
 
 ---
 
-### 📸 INSTAGRAM — CAROUSEL
+### 📸 INSTAGRAM — CAROUSEL (User Features)
 
 **Slide 1 (Cover):**
 ```
-REVENGE TRADING
-The Neuroscience of Self-Destruction
+YOUR WINS. YOUR CHARTS.
+#SignalPilotWins Spotlight
 ```
 
-**Slide 2:**
-```
-THE CASE STUDY:
+**Slide 2:** User submission 1 (with permission)
+- Their chart screenshot
+- Overlay: "@username caught this with [indicator]"
 
-Starting loss: $340
-"I'll make it back quick..."
+**Slide 3:** User submission 2
+- Their chart screenshot
+- Overlay: "@username — Volume Oracle signal"
 
-Trade 2: Doubled size. Lost.
-Trade 3: Tripled size. Lost.
-Trade 4: "All-in." Lost.
-
-Total damage: $23,400
-
-4 trades. 69x the original loss.
-```
-
-**Slide 3:**
-```
-THE NEUROSCIENCE:
-
-Losses feel 2.5x WORSE than equivalent gains.
-
-$100 win = normal happy
-$100 loss = PAIN × 2.5
-
-This is hardwired. It's called loss aversion.
-
-Your brain DEMANDS you fix it. NOW.
-```
-
-**Slide 4:**
-```
-THE THREE TILTS:
-
-1. REVENGE TILT
-After a loss. "I need to make it back."
-Doubled size. Abandoned rules.
-
-2. WINNER'S TILT
-After a win streak. "I can't lose."
-Overconfidence. Ignored risk.
-
-3. BOREDOM TILT
-No setups. "I need to do SOMETHING."
-Forced trades. No edge.
-```
+**Slide 4:** User submission 3
+- Their chart screenshot
+- Overlay: "@username — Pentarch cycle call"
 
 **Slide 5:**
 ```
-WHY WILLPOWER FAILS:
+These aren't our charts.
+These are YOURS.
 
-When tilted, your prefrontal cortex (logic) shuts down.
-Your amygdala (emotion) takes over.
+Real traders. Real signals. Real wins.
 
-You can't think your way out.
-You're literally not capable of rational thought.
+#SignalPilotWins
 ```
 
 **Slide 6:**
 ```
-THE SOLUTION: CIRCUIT BREAKERS
+Want to be featured?
 
-Automated rules that FORCE you to stop:
+Post your chart with #SignalPilotWins
+Tag @signalpilot
 
-→ Daily loss limit: 2% max
-→ After 2 losses: mandatory break
-→ Platform locks if limit hit
-→ Walk away. No exceptions.
-
-Systems beat willpower.
-```
-
-**Slide 7 (CTA):**
-```
-Lesson 07: Revenge Trading
-
-Full neuroscience breakdown.
-Practical circuit breakers.
-
-FREE at education.signalpilot.io
+Best submissions = featured + free extended access
 ```
 
 **Caption:**
 ```
-$340 → $23,400
+YOUR WINS. YOUR CHARTS.
 
-One trader's revenge trading spiral.
+This week's #SignalPilotWins spotlight 🏆
 
-4 trades. 69x the original loss.
+@user1 — Caught smart money loading with Volume Oracle
+@user2 — Nailed the cycle turn with Pentarch
+@user3 — Found the level with Janus Atlas
 
-Why does this happen?
+These aren't our charts.
+These are YOURS.
 
-THE SCIENCE:
-Your brain treats losses 2.5x worse than gains.
-When you lose, your logical brain shuts down.
-Emotion takes over.
+Real traders using real signals to make real decisions.
 
-THE THREE TILTS:
-1. Revenge tilt (after loss)
-2. Winner's tilt (overconfidence)
-3. Boredom tilt (forcing trades)
+That's what this community is about.
 
-THE FIX:
-Automated circuit breakers.
-Daily loss limits that FORCE you to stop.
-Walk away. No exceptions.
+Want to be featured next week?
 
-Willpower fails when you're tilted.
-That's biology, not weakness.
+1. Take a screenshot of your SignalPilot chart
+2. Post it with #SignalPilotWins
+3. Tag us @signalpilot
 
-Systems don't fail.
+Best submissions get featured + free extended access.
 
-Lesson 07 in our FREE education hub.
+Let's see what you've got 📈
 
-education.signalpilot.io
-
-#tradingpsychology #revengetrading #discipline #tradingmindset #riskmanagement
+#tradingcommunity #tradingwins #technicalanalysis #socialproof #signalpilot
 ```
+
+**IMPORTANT:** Get permission before featuring. Tag users. Make them feel celebrated.
+
+---
+
+### 📸 INSTAGRAM STORIES — UGC Celebration
+
+**Story 1:** "Time for this week's #SignalPilotWins spotlight 🏆"
+**Story 2:** Feature user 1's chart (tag them)
+**Story 3:** Feature user 2's chart (tag them)
+**Story 4:** Feature user 3's chart (tag them)
+**Story 5:** "These aren't our charts. They're YOURS."
+**Story 6:** "Want to be featured? Here's how:" + instructions
+**Story 7:** Poll: "Whose chart was your favorite?"
 
 ---
 
@@ -3590,125 +3604,103 @@ education.signalpilot.io
 
 **Post 1:**
 ```
-$340 → $23,400
+#SignalPilotWins Spotlight 🏆
 
-One trader's revenge trading spiral.
+This week's community features:
 
-4 trades. 69x the original loss.
+Real traders. Real charts. Real wins.
 
-Here's the neuroscience of why this happens to EVERYONE:
+Let's celebrate 👇
 
-🧵 Thread:
+🧵
 ```
 
 **Post 2:**
 ```
-THE SCIENCE:
+First up: @user1
 
-Losses feel 2.5x WORSE than equivalent gains.
+Caught smart money accumulating with Volume Oracle.
+82% reading. Entered. Held.
+Result: Rode the wave.
 
-$100 win = normal dopamine hit
-$100 loss = cortisol + adrenaline × 2.5
-
-Your brain SCREAMS: "Fix this. NOW."
-
-This is loss aversion. It's hardwired.
+[Retweet their original post or screenshot]
 ```
 
 **Post 3:**
 ```
-WHAT HAPPENS IN YOUR BRAIN:
+Next: @user2
 
-When tilted:
-→ Prefrontal cortex (logic) shuts down
-→ Amygdala (emotion) takes over
-→ Fight-or-flight activates
+Pentarch showed IGN phase.
+Waited for confirmation.
+Entered at the turn.
 
-You're literally incapable of rational thought.
+This is what "read the cycle" looks like in practice.
 
-Willpower can't save you.
+[Screenshot of their chart]
 ```
 
 **Post 4:**
 ```
-THE THREE TILTS:
+And: @user3
 
-1. REVENGE TILT
-After a loss. "I'll make it back."
-Result: Bigger losses.
+Janus Atlas levels held perfectly.
+Bounced right off the zone.
 
-2. WINNER'S TILT
-After wins. "I can't lose."
-Result: Overconfidence → blowup.
+"The map exists before the journey begins."
 
-3. BOREDOM TILT
-No setups. "I need action."
-Result: Forced trades with no edge.
+[Screenshot of their chart]
 ```
 
 **Post 5:**
 ```
-THE FIX: CIRCUIT BREAKERS
+These aren't our charts.
+These are YOURS.
 
-Automated rules that FORCE you to stop:
+Real traders. Real signals. Real wins.
 
-→ Daily loss limit: 2% max
-→ After 2 consecutive losses: 1 hour break
-→ Platform locks if limit hit
-→ Physical removal from setup
+Want to be featured?
 
-Systems beat willpower.
-```
+Post your chart with #SignalPilotWins
+Tag @signalpilot
 
-**Post 6:**
-```
-Lesson 07: Revenge Trading
+Best submissions get featured + free extended access.
 
-The full neuroscience breakdown.
-Practical circuit breaker systems.
-
-FREE at education.signalpilot.io
-
-"The patient pilot survives.
-The impulsive pilot donates."
+Show us what you've got.
 ```
 
 ---
 
 ### 🎬 TIKTOK
 
-**Hook:** "$340 became $23,400 in 4 trades..."
+**Hook:** "These aren't my charts. They're yours."
 
 **Script:**
 ```
-$340 loss.
-"I'll make it back quick."
+These aren't my charts.
 
-Trade 2: Doubled size. Lost.
-Trade 3: Tripled. Lost.
-Trade 4: All in. Lost.
+They're yours.
 
-$23,400 gone.
+@user1 caught smart money loading.
+Volume Oracle: Accumulation 82%.
 
-That's revenge trading.
+@user2 nailed the cycle turn.
+Pentarch: IGN phase confirmed.
 
-Here's the science:
+@user3 found the level.
+Janus Atlas: Bounced perfectly.
 
-Losses feel 2.5x worse than wins.
-When you're tilted, your logical brain shuts OFF.
-Emotion takes over.
+Real traders. Real signals. Real wins.
 
-You CAN'T think clearly.
+#SignalPilotWins
 
-The fix?
+Want to be featured?
 
-Automated circuit breakers.
-Daily loss limit: 2%.
-After 2 losses: walk away.
+Post your chart with the hashtag.
+Tag us.
 
-Not willpower. SYSTEMS.
+Best submissions get featured plus free extended access.
 
-Lesson 07. Free.
+Show me what you've got.
 
 Link in bio.
 ```
@@ -3716,8 +3708,10 @@ Link in bio.
 ---
 
 ### 🔗 LINKS FOR DAY 21
+- signalpilot.io
 - education.signalpilot.io
-- signalpilot.io/chronicle/the-arbiter
+
+**UGC NOTE:** This is the first major UGC showcase. Make it celebratory. Tag everyone. Reply to their posts. Make users feel like stars.
 
 ---
 
@@ -4304,71 +4298,168 @@ signalpilot.io/chronicle/the-hierarchy-of-signals
 ## DAY 25 — JANUARY 18 (WEEKEND)
 
 ### 📌 Theme
-Community engagement — Poll
+Philosophy: The Pilot's Oath deep dive
+
+**Strategy:** Reinforce identity transformation (trader → pilot). Weekend = time for deeper content.
 
 ---
 
-### 📸 INSTAGRAM STORIES
+### 📸 INSTAGRAM
 
-**Poll 1:**
-"Which indicator is your favorite so far?"
-- Pentarch
-- Volume Oracle
-- OmniDeck
-- Harmonic Oscillator
+**Image:** `chronicle/pilots-oath-preview.jpg`
 
-**Poll 2:**
-"What content do you want more of?"
-- Indicator tutorials
-- Market psychology
-- Live trade examples
-- Behind-the-scenes
-
----
-
-### 𝕏 TWITTER/X
-
+**Caption:**
 ```
-Quick poll:
+THE PILOT'S OATH
 
-What's the hardest part of trading for you?
+I will not chase.
+I will not guess.
+I will not hope.
 
-🔄 Entries (finding good setups)
-📉 Exits (knowing when to get out)
-🧠 Psychology (managing emotions)
-📊 Analysis paralysis (too many indicators)
+I will read the cycle.
+I will follow the institutions.
+I will respect the levels.
+I will weigh the pressure.
+I will unify my systems.
+I will scan the horizon.
+I will wait for consensus.
 
-Reply below 👇
+I am not a gambler.
+I am a Pilot.
+
+And The Elite Seven are my stars.
+
+—
+
+This isn't just a trading system.
+It's a way of operating.
+
+Traders react.
+Pilots navigate.
+
+Which are you?
+
+Full Chronicle:
+signalpilot.io/chronicle/the-pilots-oath
+
+📩 Get the Pilot's Oath wallpaper — link in bio
+
+#tradingmindset #tradingpsychology #discipline #tradingstrategy #technicalanalysis
+```
+
+---
+
+### 𝕏 TWITTER/X — THREAD
+
+**Post 1:**
+```
+THE PILOT'S OATH
+
+"I will not chase.
+I will not guess.
+I will not hope."
+
+Three things that destroy accounts.
+Three things pilots reject.
+
+🧵 What does each line mean?
+```
+
+**Post 2:**
+```
+"I will not chase."
+
+Missed entry? Let it go.
+The market will cycle again.
+There is ALWAYS another setup.
+
+Chasing = emotional trading = losses.
+
+Pilots wait at the turn before it completes.
+```
+
+**Post 3:**
+```
+"I will not guess."
+
+No random entries.
+No "I have a feeling."
+No "it looks like it might..."
+
+You have systems. You have signals.
+Either they confirm, or you stand aside.
+```
+
+**Post 4:**
+```
+"I will not hope."
+
+Once you're in a trade, hope is worthless.
+Either you have a plan, or you're gambling.
+
+Set your levels. Manage your risk.
+Hope has no place in the cockpit.
+```
+
+**Post 5:**
+```
+"I will read the cycle."
+"I will follow the institutions."
+"I will respect the levels."
+"I will weigh the pressure."
+"I will unify my systems."
+"I will scan the horizon."
+"I will wait for consensus."
+
+Seven commitments. One for each indicator.
+```
+
+**Post 6:**
+```
+"I am not a gambler. I am a Pilot."
+
+Traders react.
+Pilots navigate.
+
+The difference isn't knowledge.
+It's identity.
+
+signalpilot.io/chronicle/the-pilots-oath
 ```
 
 ---
 
 ### 🎬 TIKTOK
 
-**Hook:** "Quick poll for traders"
+**Hook:** "Three things that destroy accounts"
 
 **Script:**
 ```
-Quick poll.
+Chasing. Guessing. Hoping.
 
-What's the hardest part of trading for you?
+Three things that destroy accounts.
+Three things pilots reject.
 
-Entries? Finding setups that actually work?
+"I will not chase."
+Missed it? Let it go. There's always another.
 
-Exits? Knowing when to get out?
+"I will not guess."
+No random entries. Either it confirms or you stand aside.
 
-Psychology? Managing emotions after a loss?
+"I will not hope."
+Once you're in, hope is worthless. Have a plan.
 
-Or analysis paralysis? Too many indicators, too much noise?
+I am not a gambler.
+I am a Pilot.
 
-Drop your answer in the comments.
-
-We built The Elite Seven to solve all four.
-
-But I want to know what YOU struggle with most.
-
-Link in bio.
+Full oath in bio.
 ```
+
+---
+
+### 🔗 LINKS FOR DAY 25
+- signalpilot.io/chronicle/the-pilots-oath
+- signalpilot.io/chronicle
 
 ---
 
@@ -5293,6 +5384,318 @@ For days when you need extra content or want to test new formats:
 - Transformation: Before/After trading journey
 - FOMO: "Most traders don't know this..."
 - Authority: Stats, data, case studies
+
+---
+
+## METRICS & KPIs
+
+Track these weekly to measure success:
+
+### Follower Growth Targets
+
+| Platform | Day 15 Target | Day 30 Target |
+|----------|---------------|---------------|
+| Instagram | 500 | 1,500 |
+| Twitter/X | 300 | 1,000 |
+| TikTok | 1,000 | 3,000 |
+
+### Engagement Benchmarks
+
+| Metric | Target | Red Flag |
+|--------|--------|----------|
+| Instagram engagement rate | 5-8% | Below 3% |
+| Twitter impressions/post | 1,000+ | Below 200 |
+| TikTok views/video | 500+ | Below 100 |
+| Story completion rate | 70%+ | Below 40% |
+| Comment response time | < 1 hour | > 4 hours |
+
+### Conversion Metrics
+
+| Metric | How to Track |
+|--------|--------------|
+| Link clicks | Linktree/Beacons analytics |
+| Education signups | education.signalpilot.io analytics |
+| Trial starts | signalpilot.io dashboard |
+| Email list growth | Email provider dashboard |
+
+### Weekly Review Checklist
+- [ ] Screenshot follower counts every Sunday
+- [ ] Export engagement data from each platform
+- [ ] Note top 3 performing posts and why
+- [ ] Identify bottom 3 posts and adjust strategy
+- [ ] Track competitor follower growth for context
+
+---
+
+## PAID AMPLIFICATION PLAN
+
+Organic alone won't maximize launch impact. Strategic boosting multiplies reach.
+
+### Budget Allocation
+
+| Phase | Days | Budget | Purpose |
+|-------|------|--------|---------|
+| Pre-Launch | 1-5 | $50 | Build anticipation, grow audience |
+| Launch | 6-8 | $150 | Maximum visibility for launch |
+| Education Push | 9-12 | $75 | Drive education hub signups |
+| Social Proof | 20-26 | $75 | Boost testimonials & results |
+| **Total** | — | **$350** | — |
+
+### Which Posts to Boost
+
+| Priority | Content Type | Why It Works |
+|----------|--------------|--------------|
+| 1 | Chart Breakdown posts | Proof converts skeptics |
+| 2 | $100 Bounty post (Day 10) | Controversial, shareable |
+| 3 | Testimonials (Day 26) | Social proof drives trust |
+| 4 | Launch Day (Day 6) | Maximum FOMO |
+| 5 | Education posts | Lead generation |
+
+### Targeting Strategy
+
+**Instagram/Facebook:**
+- Interests: TradingView, Technical Analysis, Forex, Crypto Trading
+- Behaviors: Engaged shoppers, Technology early adopters
+- Lookalike: Based on email list (if available)
+- Age: 25-45
+- Exclude: Existing followers (reach new people)
+
+**Twitter/X:**
+- Follower lookalikes: @tradingview, @CryptoCred, @trader_dante
+- Keywords: "trading indicators", "technical analysis", "non-repainting"
+- Exclude: Bot-heavy accounts
+
+**TikTok:**
+- Interests: Investing, Stock Market, Cryptocurrency
+- Spark Ads: Boost organic posts that perform well
+- Age: 18-35
+
+### Boosting Rules
+1. Only boost posts that already perform well organically (2x average engagement)
+2. Start with $10/day, scale winners to $25/day
+3. Kill underperformers after 24 hours
+4. Retarget website visitors with follow-up ads
+
+---
+
+## INFLUENCER OUTREACH
+
+Collaborations accelerate growth faster than organic alone.
+
+### Target Tiers
+
+| Tier | Follower Count | Approach | Offer |
+|------|----------------|----------|-------|
+| Micro | 5K-25K | DM directly | Free lifetime access + affiliate |
+| Mid | 25K-100K | DM or email | Free access + revenue share |
+| Macro | 100K+ | Formal pitch | Paid partnership negotiation |
+
+### Target Accounts (Research These)
+
+**Twitter/X Trading Accounts:**
+- Technical analysis educators with engaged audiences
+- Traders who critique bad indicators (they'll appreciate non-repainting)
+- TradingView script reviewers
+
+**TikTok Creators:**
+- #TradingTok educators
+- "Day in my life as a trader" creators
+- Financial literacy accounts
+
+**Instagram:**
+- Trading journey accounts
+- Chart analysis pages
+- Trading lifestyle content
+
+### Outreach Template
+
+```
+Hey [Name],
+
+Been following your content on [specific topic they cover] — really solid stuff.
+
+We just launched SignalPilot, a suite of 7 non-repainting indicators with 82 free lessons included. We're so confident they don't repaint, we're offering a $100 bounty to anyone who proves otherwise.
+
+Would love to give you free lifetime access to check it out. No strings — if you hate it, no worries. If you love it, maybe we can collaborate.
+
+Let me know if you're interested.
+
+[Name]
+signalpilot.io
+```
+
+### Collaboration Types
+
+| Type | Effort | Impact |
+|------|--------|--------|
+| Shoutout swap | Low | Medium |
+| Guest post/thread | Medium | High |
+| Joint live stream | High | Very High |
+| Affiliate partnership | Low | Ongoing |
+| Co-created content | High | Very High |
+
+### Timeline
+- **Week 1:** Identify 20 target accounts, research their content
+- **Week 2:** Send 10 outreach DMs (start with micro-influencers)
+- **Week 3:** Follow up, negotiate with responders
+- **Week 4:** Execute first collaborations, document results
+
+---
+
+## UGC STRATEGY (USER-GENERATED CONTENT)
+
+User content is more trusted than brand content. Build a system to generate and reshare it.
+
+### #SignalPilotWins Campaign
+
+**Launch:** Day 10 (alongside $100 Bounty post)
+
+**The Ask:**
+```
+Using SignalPilot? Share your wins.
+
+Post your chart with #SignalPilotWins and tag us.
+
+Best submissions get featured + free extended access.
+```
+
+### UGC Collection System
+
+| Source | How to Collect |
+|--------|----------------|
+| Hashtag | Monitor #SignalPilotWins daily |
+| DMs | Screenshot and save (ask permission to share) |
+| Emails | Forward customer success stories to social folder |
+| Discord/Community | Pin wins channel, export weekly |
+| Reviews | Screenshot TradingView reviews |
+
+### Reshare Schedule
+
+| Day | UGC Action |
+|-----|------------|
+| Day 10 | Launch #SignalPilotWins |
+| Day 15 | First UGC reshare (Story) |
+| Day 18 | UGC in TikTok (react to user chart) |
+| Day 21 | Full UGC Spotlight Day |
+| Day 26 | Testimonial compilation |
+| Ongoing | 2-3 UGC Stories per week |
+
+### Permission Template
+
+```
+Hey! Love this post — would you mind if we reshared it on our page? We'll tag you and link your profile. 🙏
+```
+
+### UGC Incentives
+
+| Incentive | For What |
+|-----------|----------|
+| Feature on main feed | Best chart breakdown |
+| 1 month free extension | Detailed testimonial |
+| SignalPilot merch | Most creative content |
+| Lifetime access | Viral post (10K+ views) |
+
+---
+
+## EMAIL LIST INTEGRATION
+
+Social media rents attention. Email owns it. Build the list from Day 1.
+
+### Lead Magnets
+
+| Lead Magnet | Where to Promote | CTA |
+|-------------|------------------|-----|
+| "5 Signals That Actually Work" PDF | Days 1-5 bio | "Free guide — link in bio" |
+| Free lesson preview (Lesson 01) | Education days | "Get the full lesson free" |
+| Position sizing calculator | Day 20 | "DM 'CALC' for free tool" |
+| Indicator cheat sheet | Deep dive days | "Save this + get the PDF" |
+
+### Email CTAs by Phase
+
+| Phase | Days | CTA Focus |
+|-------|------|-----------|
+| Pre-launch | 1-5 | "Join the waitlist for early access" |
+| Launch | 6-8 | "Launch pricing ends soon — get on the list" |
+| Education | 9-12 | "Free lessons in your inbox" |
+| Mid-campaign | 13-20 | "Get the PDF version" of carousel content |
+| Late campaign | 21-30 | "Join the insider community" |
+
+### Caption Addition Template
+
+Add to end of captions:
+```
+📩 Want more like this? Free guide in bio.
+```
+
+Or for DM automation:
+```
+💬 DM "GUIDE" and I'll send you the free PDF.
+```
+
+### Email Sequence Tie-In
+
+| Trigger | Email Sequence |
+|---------|----------------|
+| Waitlist signup | 3-email launch countdown |
+| Education signup | 5-email lesson drip |
+| PDF download | 3-email value + soft pitch |
+| Trial start | 7-email onboarding |
+
+---
+
+## CRISIS MANAGEMENT
+
+Plan for negativity before it happens.
+
+### Common Attacks & Responses
+
+| Attack | Response Template |
+|--------|-------------------|
+| "It's just another scam indicator" | "Totally fair skepticism — that's why we offer $100 to anyone who proves it repaints. No other indicator does that. Here's why we're different: [link to non-repainting blog]" |
+| "Too expensive" | "We include 82 lessons free that others charge $500+ for separately. The education alone covers the cost. But if budget's tight, start with the free lessons: education.signalpilot.io" |
+| "Show me proof it works" | "Great question — check our Chart Breakdown posts [link]. We show real signals, real charts, real outcomes. What specifically would you like to see?" |
+| "Indicators don't work" | "Most don't — we agree. That's why we built a system, not just signals. The Harmonic Oscillator requires 4 indicators to agree before confirming. It's about confluence, not magic." |
+| "I lost money using this" | "DM us — we want to understand what happened. Trading involves risk and no indicator guarantees profits. Let's look at your setup together." |
+
+### Response Rules
+
+1. **Respond within 2 hours** — silence looks guilty
+2. **Never delete negative comments** — it backfires
+3. **Acknowledge, don't dismiss** — "Fair point" beats "You're wrong"
+4. **Take it to DMs** — "Let's discuss in DMs so I can help properly"
+5. **Screenshot everything** — document trolls for potential blocking
+
+### Escalation Levels
+
+| Level | Example | Action |
+|-------|---------|--------|
+| Skepticism | "Does this really work?" | Engage with proof |
+| Criticism | "This is overpriced" | Acknowledge + explain value |
+| Attack | "This is a scam" | Respond once, don't engage further |
+| Harassment | Personal attacks, threats | Block + document |
+| Coordinated | Multiple accounts, same message | Document, report, potentially pause ads |
+
+### Pre-Written Crisis Posts
+
+**If accused of repainting:**
+```
+Someone claimed our indicators repaint.
+
+We investigated immediately. Here's what we found: [explanation]
+
+Our $100 bounty stands. If you can prove repainting with timestamps, you get paid.
+
+Transparency matters. Questions? Ask below.
+```
+
+**If a user shares a loss:**
+```
+Trading involves risk. We've always said that.
+
+Our indicators show potential — not guarantees. The education teaches risk management for this reason.
+
+If you're struggling, DM us. We'll review your approach together.
+```
 
 ---
 
