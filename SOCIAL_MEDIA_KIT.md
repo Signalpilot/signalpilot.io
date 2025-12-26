@@ -2577,9 +2577,67 @@ docs.signalpilot.io/omnideck-v10
 
 ---
 
-## 𝕏 TWITTER/X
+## 𝕏 TWITTER/X — THREAD
 
-Post the same 10-system breakdown as a thread.
+**Post 1:**
+```
+OMNIDECK DEEP DIVE — The Commander
+
+"Ten systems. One vision. Total clarity."
+
+Your chart used to look like chaos.
+15 indicators fighting each other.
+
+The Commander unified them.
+
+Here's what's inside:
+
+🧵 Thread:
+```
+
+**Post 2:**
+```
+THE FIRST 5 SYSTEMS:
+
+1. TD Sequential → exhaustion detection
+2. Squeeze Cloud → breakout preparation
+3. SuperTrend Ensemble → direction confirmation
+4. Bull Market Support Band → structure ID
+5. Supply & Demand Zones → institutional footprints
+```
+
+**Post 3:**
+```
+THE NEXT 5 SYSTEMS:
+
+6. Candlestick Patterns → price action signals
+7. Liquidity Sweeps → trap detection
+8. Regime Classification → market state (bullish/bearish/choppy)
+9. EMA Events → momentum shifts
+10. Caution Warnings → danger ahead
+```
+
+**Post 4:**
+```
+HOW TO USE IT:
+
+→ Toggle ON what you need
+→ Toggle OFF what you don't
+→ No clutter, no noise
+→ Everything unified, nothing fighting
+
+One overlay. Total command.
+```
+
+**Post 5:**
+```
+"Complexity without unity is chaos.
+Unity creates command."
+
+All 10 systems. Non-repainting.
+
+docs.signalpilot.io/omnideck-v10
+```
 
 ---
 
@@ -2587,7 +2645,37 @@ Post the same 10-system breakdown as a thread.
 
 **Hook:** "One indicator. Ten systems."
 
-Show quick flashes of each system with text overlays.
+**Script:**
+```
+Your chart looks like this?
+
+15 indicators. All fighting each other.
+Red here. Green there. Signals contradicting.
+
+That's chaos.
+
+OMNIDECK — The Commander.
+
+Ten systems. ONE overlay.
+
+TD Sequential — exhaustion
+Squeeze Cloud — breakouts
+SuperTrend — direction
+Supply zones — institutions
+Liquidity sweeps — traps
+
+And 5 more.
+
+All unified. Nothing fighting.
+
+Toggle what you need.
+Silence what you don't.
+
+"Complexity without unity is chaos.
+Unity creates command."
+
+Link in bio.
+```
 
 ---
 
@@ -2646,15 +2734,119 @@ docs.signalpilot.io/augury-grid-v10
 
 ---
 
-## 𝕏 TWITTER/X
+## 𝕏 TWITTER/X — THREAD
 
-Standard thread format with the scanning explanation.
+**Post 1:**
+```
+AUGURY GRID DEEP DIVE — The Watchman
+
+"While you watch one chart, I watch them all."
+
+You: Flipping through 50 charts at 2 AM
+The Watchman: Scanning 8 markets simultaneously
+
+Here's how multi-market scanning works:
+
+🧵 Thread:
+```
+
+**Post 2:**
+```
+THE PROBLEM:
+
+→ Thousands of assets to watch
+→ Every timeframe matters
+→ Opportunities appear and vanish
+→ No human can track it all
+
+You're either missing opportunities...
+Or burning out trying to find them.
+```
+
+**Post 3:**
+```
+THE SOLUTION:
+
+Augury Grid scans 8 markets at once.
+
+For each market it shows:
+→ Direction (bullish/bearish/neutral)
+→ Conviction score (0-100%)
+→ Time active
+→ System agreement level
+```
+
+**Post 4:**
+```
+THE SCORING SYSTEM:
+
+90%+ = Multiple systems agree. High conviction.
+70-89% = Strong agreement. Worth attention.
+50-69% = Mixed signals. Proceed with caution.
+<50% = Conflict. "Wait for clarity."
+
+Quality scores align the constellations.
+```
+
+**Post 5:**
+```
+EXAMPLE OUTPUT:
+
+BTCUSDT ↑ 94% (12h active)
+AAPL ↓ 87% (4h active)
+EURUSD — 52% (unclear)
+SPY ↑ 78% (6h active)
+
+Now you know WHERE to focus.
+```
+
+**Post 6:**
+```
+"The pilot who sees everything sees nothing.
+The pilot who sees what matters, wins."
+
+Stop hunting. Start receiving.
+
+docs.signalpilot.io/augury-grid-v10
+```
 
 ---
 
 ## 🎬 TIKTOK
 
 **Hook:** "I scan 8 markets while you flip through charts"
+
+**Script:**
+```
+POV: You at 2 AM.
+
+BTC? Meh.
+ETH? Nothing.
+AAPL? Maybe.
+EUR/USD? Let me check...
+
+50 charts. Nothing found.
+
+Meanwhile, Augury Grid:
+
+BTCUSDT ↑ 94%
+AAPL ↓ 87%
+SPY ↑ 78%
+
+8 markets. Scanned simultaneously.
+Ranked by opportunity score.
+
+90%+ = high conviction
+Below 50% = wait for clarity
+
+Stop hunting through charts.
+Let The Watchman bring opportunities TO you.
+
+"The pilot who sees everything sees nothing.
+The pilot who sees what matters, wins."
+
+Link in bio.
+```
 
 ---
 
@@ -2718,15 +2910,142 @@ docs.signalpilot.io/harmonic-oscillator-v10
 
 ---
 
-## 𝕏 TWITTER/X
+## 𝕏 TWITTER/X — THREAD
 
-Thread on the consensus system and star ratings.
+**Post 1:**
+```
+HARMONIC OSCILLATOR DEEP DIVE — The Arbiter
+
+"Four voices. One verdict."
+
+You've seen the setup.
+Cycle looks good.
+Volume confirms.
+Level is right.
+
+But WHEN do you pull the trigger?
+
+The Arbiter decides.
+
+🧵 Thread:
+```
+
+**Post 2:**
+```
+THE FOUR VOICES:
+
+1. MACD — momentum direction
+2. RSI — overbought/oversold
+3. StochRSI — momentum within momentum
+4. Williams %R — price position in range
+
+Each votes: Bull | Bear | Neutral
+
+The Arbiter tallies the council.
+```
+
+**Post 3:**
+```
+THE STAR SYSTEM:
+
+★★★★ = All four agree
+MAXIMUM CONVICTION. Strike.
+
+★★★☆ = Three agree
+HIGH CONVICTION. Strong signal.
+
+★★☆☆ = Split vote
+UNCLEAR. Stand aside.
+
+★☆☆☆ = Minimal consensus
+WAIT. Let others guess.
+```
+
+**Post 4:**
+```
+WHY THIS MATTERS:
+
+Most traders:
+→ See one indicator confirm
+→ Enter immediately
+→ Get stopped out
+→ "Why didn't it work?"
+
+Pilots:
+→ Wait for consensus
+→ 4 systems agreeing
+→ Enter with conviction
+→ Higher probability
+```
+
+**Post 5:**
+```
+THE FINAL CONFIRMATION:
+
+The Arbiter is NOT your first signal.
+It's your LAST checkpoint.
+
+1. Pentarch reads cycle ✓
+2. Volume Oracle confirms ✓
+3. Janus Atlas shows level ✓
+4. Plutus Flow confirms pressure ✓
+5. Arbiter says... ★★★★
+
+NOW you strike.
+```
+
+**Post 6:**
+```
+"The patient pilot survives.
+The impulsive pilot donates."
+
+Signals without consensus are noise.
+Consensus creates conviction.
+
+docs.signalpilot.io/harmonic-oscillator-v10
+```
 
 ---
 
 ## 🎬 TIKTOK
 
 **Hook:** "Should you take this trade? Let's ask the council."
+
+**Script:**
+```
+Should you take this trade?
+
+Let's ask the council.
+
+MACD says... bullish.
+RSI says... bullish.
+StochRSI says... bullish.
+Williams %R says... bullish.
+
+★★★★ Four stars. Maximum conviction.
+
+STRIKE.
+
+But what if:
+
+MACD says bullish.
+RSI says bearish.
+StochRSI says neutral.
+Williams says bullish.
+
+★★☆☆ Split vote.
+
+STAND ASIDE. Let others guess.
+
+The Arbiter tallies the council.
+It's not your first signal.
+It's your FINAL confirmation.
+
+"The patient pilot survives.
+The impulsive pilot donates."
+
+Link in bio.
+```
 
 ---
 
