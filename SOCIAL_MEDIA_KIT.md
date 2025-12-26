@@ -576,7 +576,7 @@ Four oscillators convene:
 
 Each votes: Bull. Bear. Neutral.
 
-★★★★ Four stars = Maximum conviction. Strike now.
+★★★★ Four stars = Maximum conviction. Strike.
 ★★☆☆ Split vote = Unclear. Stand aside. Let others guess.
 
 Signals without consensus are noise.
@@ -1004,104 +1004,112 @@ Education Hub spotlight: **Lesson 01 — The Liquidity Lie**
 
 **Slide 1 (Cover):**
 ```
-THE 5-PHASE MARKET CYCLE
-How Markets Actually Move
+THE LIQUIDITY LIE
+Why Support & Resistance Is a Trap
 ```
 
 **Slide 2:**
 ```
-PHASE 1: TD (Touchdown)
+THE LIE YOU'VE BEEN TOLD:
 
-ACCUMULATION
+"Price bounces at support."
+"Price rejects at resistance."
 
-Selling is exhausted.
-Smart money starts buying.
-Charts look "dead."
-But giants are building.
+The truth?
+Your support level is a liquidity trap.
 ```
 
 **Slide 3:**
 ```
-PHASE 2: IGN (Ignition)
+WHAT ACTUALLY HAPPENS:
 
-MARKUP BEGINS
-
-The uptrend starts.
-Momentum shifts upward.
-Retail finally notices.
-But smart money got in earlier.
+Institutions SEE your obvious levels.
+They KNOW where stops cluster.
+They PUSH price INTO those stops.
+They COLLECT your liquidity.
+THEN price reverses.
 ```
 
 **Slide 4:**
 ```
-PHASE 3: WRN (Warning)
+THE SWEEP PATTERN:
 
-DISTRIBUTION
+1. Price approaches "support"
+2. Breaks through (stops triggered)
+3. Volume spikes 50%+
+4. Price reverses sharply
+5. Real move begins
 
-Hidden weakness appears.
-Smart money exits into strength.
-Price may still rise...
-But the foundation is cracking.
+This is a liquidity sweep.
 ```
 
 **Slide 5:**
 ```
-PHASE 4: CAP (Climax)
+THE PROBLEM:
 
-EXHAUSTION
+Most traders enter AT support.
+Their stops get hit.
+They're out before the real move.
 
-Buying is exhausted.
-The top is in.
-Euphoria peaks.
-"It can only go up" — right before it doesn't.
+Win rate: ~34%
 ```
 
 **Slide 6:**
 ```
-PHASE 5: BDN (Breakdown)
+THE SOLUTION:
 
-DECLINE
+Wait for the SWEEP to complete.
+Wait for VOLUME confirmation (50%+ spike).
+Enter AFTER the trap is sprung.
 
-Gravity reclaims price.
-The downtrend begins.
-Panic selling.
-And then... back to TD.
+Win rate: ~68%
 ```
 
 **Slide 7:**
 ```
-THE CYCLE REPEATS.
+ENTRY TIMING > DIRECTION
 
-Always has. Always will.
+Same trade idea.
+Different entry timing.
+Completely different results.
 
-Will you see it before or after?
+The difference is waiting for the sweep.
 ```
 
 **Slide 8 (CTA):**
 ```
-Learn cycle detection in our FREE education hub.
+Full lesson in our FREE education hub.
 
-82 lessons. 250,000+ words.
-No purchase required.
+Lesson 01: The Liquidity Lie
 
 education.signalpilot.io
 ```
 
 **Caption:**
 ```
-The 5-phase market cycle.
+THE LIQUIDITY LIE
 
-TD → IGN → WRN → CAP → BDN
+"Price bounces at support."
 
-This repeats on every asset. Every timeframe.
+No. Your support level is a liquidity trap.
 
-Most traders see it after the fact.
-Pentarch shows it in real-time.
+Institutions see your obvious levels.
+They know where stops cluster.
+They push price INTO those stops.
+They collect your liquidity.
+THEN price reverses.
 
-Learn cycle detection for free:
+Most traders enter AT support → 34% win rate.
+Traders who wait for the SWEEP → 68% win rate.
+
+Same trade idea. Different entry timing.
+Completely different results.
+
+This is Lesson 01 in our FREE education hub.
+
 education.signalpilot.io
 
-#tradingview #marketcycles #technicalanalysis #tradingstrategy #priceaction #education
+#tradingview #liquiditysweep #supportresistance #technicalanalysis #priceaction #smartmoney
 ```
 
 ---
@@ -1110,84 +1118,87 @@ education.signalpilot.io
 
 **Post 1:**
 ```
-Markets move in cycles. Always have. Always will.
+"Support bounced!"
 
-Here's the 5-phase structure most traders never learn:
+No it didn't.
 
-TD → IGN → WRN → CAP → BDN
+You just got trapped in a liquidity sweep.
+
+Here's what ACTUALLY happens at "support":
 
 🧵 Thread:
 ```
 
 **Post 2:**
 ```
-TD (Touchdown) — ACCUMULATION
+THE LIE:
 
-Selling exhaustion.
-Smart money enters.
-Charts look "dead" to retail.
-Giants are building positions.
+"Price bounces at support."
+"Price rejects at resistance."
 
-This is where generational entries happen.
+What you've been taught your whole trading life.
+
+And it's why you keep losing.
 ```
 
 **Post 3:**
 ```
-IGN (Ignition) — MARKUP
+THE TRUTH:
 
-Uptrend begins.
-Momentum shifts up.
-Retail finally notices.
-But smart money already positioned.
+Institutions SEE your obvious levels.
+They KNOW where stops cluster.
+They PUSH price INTO those stops.
+They COLLECT your liquidity.
 
-"Why didn't I buy earlier?"
+THEN price reverses.
+
+You're not unlucky. You're predictable.
 ```
 
 **Post 4:**
 ```
-WRN (Warning) — DISTRIBUTION
+THE SWEEP PATTERN:
 
-Hidden weakness.
-Smart money exits into YOUR greed.
-Price may still rise...
-Foundation cracking beneath.
+1. Price approaches "support"
+2. Breaks through (your stop triggers)
+3. Volume spikes 50%+
+4. Price reverses sharply
+5. Real move begins
 
-This is where bag holders are born.
+You're already out. Smart money is in.
 ```
 
 **Post 5:**
 ```
-CAP (Climax) — EXHAUSTION
+THE NUMBERS:
 
-Buying exhausted.
-The top is in.
-Maximum euphoria.
-"It can only go up!"
+Enter AT support → ~34% win rate
+Enter AFTER the sweep → ~68% win rate
 
-Right before it doesn't.
+Same trade idea.
+Different entry timing.
+Completely different results.
 ```
 
 **Post 6:**
 ```
-BDN (Breakdown) — DECLINE
+THE SOLUTION:
 
-Gravity reclaims price.
-Panic selling.
-"Why didn't I sell earlier?"
+Wait for the sweep to COMPLETE.
+Wait for volume confirmation (50%+ spike).
+Enter AFTER the trap is sprung.
 
-And then... back to TD.
-
-The cycle repeats.
+Patience isn't optional.
+Patience is the edge.
 ```
 
 **Post 7:**
 ```
-Pentarch reads this cycle in real-time.
+This is Lesson 01 in our FREE education hub:
 
-But the EDUCATION is free.
+"The Liquidity Lie"
 
-82 lessons. 250,000+ words.
-No purchase required.
+82 lessons. No purchase required.
 
 education.signalpilot.io
 ```
@@ -1196,25 +1207,35 @@ education.signalpilot.io
 
 ## 🎬 TIKTOK
 
-**Hook:** "Why you always buy the top"
+**Hook:** "Support just broke... again."
 
 **Script:**
 ```
-You buy here *points to CAP*
-You sell here *points to BDN*
-You're confused here *points to TD*
-You FOMO here *points to IGN*
+"I bought at support."
+"It broke."
+"I got stopped out."
+"Then it reversed."
 
-That's the cycle.
+Sound familiar?
 
-TD. IGN. WRN. CAP. BDN.
+That wasn't bad luck.
+That was a LIQUIDITY SWEEP.
 
-Markets repeat this forever.
+Institutions see your obvious levels.
+They hunt your stops.
+They take your liquidity.
+THEN they reverse.
 
-Learn to read it.
-Or keep being exit liquidity.
+The fix?
 
-Link in bio — free education.
+Don't enter AT support.
+Enter AFTER the sweep.
+
+34% win rate → 68% win rate.
+
+Same trade. Different timing.
+
+Link in bio — free lesson.
 ```
 
 ---
@@ -1367,7 +1388,7 @@ Link in bio.
 ## 📌 Theme
 Education Hub spotlight: **Lesson 02 — Volume Doesn't Lie, But You're Reading It Wrong**
 
-**Strategy:** Feature the ACTUAL volume lesson. Case study: One trader lost $93K ignoring delta, then recovered with proper volume analysis.
+**Strategy:** Feature the ACTUAL volume lesson with delta analysis, absorption, and exhaustion concepts. Case study: One trader lost $93K ignoring delta, then recovered with proper volume analysis.
 
 **Lesson Source:** `education.signalpilot.io` → Beginner Tier → Lesson 02
 
@@ -1383,99 +1404,124 @@ Education Hub spotlight: **Lesson 02 — Volume Doesn't Lie, But You're Reading 
 
 **Slide 1 (Cover):**
 ```
-PRICE IS THE LAST TO KNOW
-Why Volume Matters More Than Candles
+VOLUME DOESN'T LIE
+But You're Reading It Wrong
 ```
 
 **Slide 2:**
 ```
-The question retail asks:
+THE MISTAKE:
 
-"Where is price going?"
+You see a big green volume bar.
+"Lots of buying!"
 
-This is the wrong question.
+You see a big red volume bar.
+"Lots of selling!"
+
+This is NOT what volume tells you.
 ```
 
 **Slide 3:**
 ```
-The question smart money asks:
+WHAT VOLUME ACTUALLY IS:
 
-"Where are institutions already positioned?"
+Volume = transactions.
+A buyer AND seller match.
 
-This is the only question that matters.
+High volume means ACTIVITY.
+Not direction.
+
+The direction comes from DELTA.
 ```
 
 **Slide 4:**
 ```
-Price moves AFTER institutions position.
+DELTA ANALYSIS:
 
-Smart money doesn't chase.
-They accumulate quietly.
-Then price follows.
+Delta = Buy volume - Sell volume
 
-By the time retail sees the move...
-Smart money is already in.
+Positive delta = net buying pressure
+Negative delta = net selling pressure
+
+THIS tells you who's winning.
+Not raw volume bars.
 ```
 
 **Slide 5:**
 ```
-ACCUMULATION:
+ABSORPTION:
 
-Institutions buying before anyone notices.
-Charts look "dead."
-Volume tells a different story.
+High volume. Price barely moves.
 
-This is where the move starts.
+What it means:
+Someone is ABSORBING the pressure.
+Large orders eating opposing flow.
+
+Absorption at support = STRENGTH
+Absorption at resistance = WEAKNESS
 ```
 
 **Slide 6:**
 ```
-DISTRIBUTION:
+EXHAUSTION:
 
-Institutions selling into YOUR greed.
-Price may still rise.
-But smart money is exiting.
+High volume. Price rejects sharply.
 
-Volume shows the truth.
-Price lies.
+What it means:
+One side tried hard and FAILED.
+The exhausted side is about to lose.
+
+Exhaustion after rally = TOP forming
+Exhaustion after selloff = BOTTOM forming
 ```
 
 **Slide 7:**
 ```
-THE SECOND LESSON:
+REAL CASE STUDY:
 
-"Price is the last to know.
-Volume knows first."
+One trader ignored delta analysis.
+Lost $93K fighting obvious absorption.
 
-Stop watching price.
-Start following the giants.
+After learning to read delta properly:
+Recovered by trading WITH the absorbing side.
+
+Same market. Different interpretation.
 ```
 
 **Slide 8 (CTA):**
 ```
-Learn volume analysis in our FREE education hub.
+Lesson 02: "Volume Doesn't Lie"
 
-82 lessons. No purchase required.
+Learn delta, absorption, and exhaustion.
 
-education.signalpilot.io
+FREE at education.signalpilot.io
 ```
 
 **Caption:**
 ```
-"Price is the last to know. Volume knows first."
+VOLUME DOESN'T LIE — BUT YOU'RE READING IT WRONG
 
-Retail asks: Where is price going?
-Smart money asks: Where are institutions already positioned?
+A big green bar doesn't mean "buying."
+A big red bar doesn't mean "selling."
 
-One creates gamblers.
-One creates pilots.
+Volume = transactions. Both sides.
 
-Which are you asking?
+What ACTUALLY matters:
 
-Free education:
+→ DELTA: Net buying vs. selling pressure
+→ ABSORPTION: High volume, price doesn't move
+→ EXHAUSTION: High volume, price rejects
+
+Case study: One trader lost $93K ignoring delta.
+Then recovered by reading it properly.
+
+Same market. Different interpretation.
+
+This is Lesson 02 in our FREE education hub.
+
 education.signalpilot.io
 
-#tradingview #volumeanalysis #smartmoney #institutionaltrading #technicalanalysis #tradingstrategy
+#tradingview #volumeanalysis #deltaanalysis #smartmoney #technicalanalysis #tradingstrategy
 ```
 
 ---
@@ -1484,63 +1530,96 @@ education.signalpilot.io
 
 **Post 1:**
 ```
-Retail asks: "Where is price going?"
-Smart money asks: "Where are institutions already positioned?"
+"Big green bar = bullish!"
 
-One question creates gamblers.
-One question creates pilots.
+No. That's not what volume means.
 
-🧵 Thread: Why price is the last to know
+You've been reading it wrong your whole trading life.
+
+Here's what volume ACTUALLY tells you:
+
+🧵 Thread:
 ```
 
 **Post 2:**
 ```
-How institutions operate:
+THE MISTAKE:
 
-1. They can't buy/sell in one order (too big)
-2. They accumulate/distribute over time
-3. They don't chase — they position
-4. By the time price moves, they're already in
+Volume = transactions.
+Every trade has a BUYER and SELLER.
 
-You're seeing the effect. They caused it.
+High volume means ACTIVITY.
+Not direction.
+
+A green bar just means price closed higher.
+It doesn't tell you who's winning.
 ```
 
 **Post 3:**
 ```
-Accumulation:
+WHAT MATTERS: DELTA
 
-→ Price looks "dead"
-→ Retail is bored or scared
-→ Volume shows quiet buying
-→ Smart money positioning
+Delta = Buy volume - Sell volume
 
-Then suddenly: "Why is it pumping?!"
+Positive delta → net buying pressure
+Negative delta → net selling pressure
 
-They knew. You didn't.
+THIS is what shows you the truth.
+Not the bar color.
 ```
 
 **Post 4:**
 ```
-Distribution:
+ABSORPTION (the hidden signal):
 
-→ Price making new highs
-→ Retail euphoric
-→ Volume shows selling INTO strength
-→ Smart money exiting
+→ High volume
+→ Price barely moves
 
-Then suddenly: "Why is it dumping?!"
+What's happening:
+Large orders are ABSORBING the opposing pressure.
 
-They knew. You became their exit liquidity.
+Absorption at support = buyers defending
+Absorption at resistance = sellers defending
+
+The absorbing side usually wins.
 ```
 
 **Post 5:**
 ```
-The second lesson:
+EXHAUSTION (the reversal signal):
 
-"Price is the last to know. Volume knows first."
+→ High volume
+→ Price rejects sharply
 
-Follow the smart money.
-Or become their exit liquidity.
+What's happening:
+One side pushed hard and FAILED.
+
+Exhaustion after rally = top forming
+Exhaustion after selloff = bottom forming
+
+The exhausted side is about to lose.
+```
+
+**Post 6:**
+```
+REAL CASE:
+
+One trader ignored delta analysis.
+Lost $93K fighting obvious absorption.
+
+After learning to read delta:
+Recovered by trading WITH the absorbing side.
+
+Same market. Different interpretation.
+```
+
+**Post 7:**
+```
+This is Lesson 02 in our FREE education hub:
+
+"Volume Doesn't Lie, But You're Reading It Wrong"
+
+Learn delta, absorption, and exhaustion patterns.
 
 education.signalpilot.io
 ```
@@ -1549,23 +1628,36 @@ education.signalpilot.io
 
 ## 🎬 TIKTOK
 
-**Hook:** "You're asking the wrong question."
+**Hook:** "Big green bar = bullish... right?"
 
 **Script:**
 ```
-Where is price going?
+"Look at that volume! Bullish!"
 
-WRONG.
+No.
 
-Where are institutions ALREADY positioned?
+Volume means transactions.
+Every trade has a buyer AND seller.
 
-They accumulate before you see the move.
-They distribute before you see the top.
+What actually matters: DELTA.
 
-Price is the last to know.
-Volume knows first.
+Buy volume minus sell volume.
 
-Stop being exit liquidity.
+And watch for these:
+
+ABSORPTION:
+High volume. Price doesn't move.
+Someone's eating all the pressure.
+
+EXHAUSTION:
+High volume. Price rejects.
+One side just failed.
+
+One trader lost $93K ignoring this.
+
+Then recovered by reading delta properly.
+
+Lesson 02. Free.
 
 Link in bio.
 ```
@@ -2600,7 +2692,7 @@ Each votes: Bull | Bear | Neutral
 THE STAR SYSTEM:
 
 ★★★★ = All four agree
-MAXIMUM CONVICTION. Strike now.
+MAXIMUM CONVICTION. Strike.
 
 ★★★☆ = Three agree
 HIGH CONVICTION. Strong signal.
@@ -2662,46 +2754,135 @@ Education Hub spotlight: **Lesson 09 — Position Sizing: The Only Edge That Act
 
 ## 📸 INSTAGRAM — CAROUSEL
 
-**Slide 1:** THE POSITION SIZING FORMULA — Why Win Rate Lies
+**Slide 1 (Cover):**
+```
+POSITION SIZING
+The Only Edge That Actually Matters
+```
 
-**Slide 2:** The #1 account killer: Position size too large
+**Slide 2:**
+```
+THE PARADOX:
 
-**Slide 3:** THE FORMULA:
-(Account Size × Risk %) / (Entry - Stop Loss) = Position Size
+70% win rate can LOSE money.
+40% win rate can MAKE money.
 
-**Slide 4:** Example: $10,000 × 1% = $100 risk per trade
+How?
+
+Win rate is NOT your edge.
+Position sizing is.
+```
+
+**Slide 3:**
+```
+WHY WIN RATE LIES:
+
+70% win rate:
+Win $50 seven times = +$350
+Lose $200 three times = -$600
+NET: -$250 per 10 trades
+
+You're "winning" and going broke.
+```
+
+**Slide 4:**
+```
+THE MATH THAT WORKS:
+
+40% win rate:
+Win $350 four times = +$1,400
+Lose $100 six times = -$600
+NET: +$800 per 10 trades
+
+"Losing" more often. Making money.
+```
 
 **Slide 5:**
-70% win rate + bad R:R = LOSES MONEY (-$50/trade)
-40% win rate + good R:R = MAKES MONEY (+$140/trade)
+```
+THE FORMULA:
 
-**Slide 6:** Real case: $45K → $8K in 6 weeks from overleveraging
+Position Size =
+(Account × Risk %) ÷ (Entry - Stop)
 
-**Slide 7:** Portfolio heat rule: Never exceed 6% total risk across all positions
+$10,000 account
+1% risk = $100
+Stop 5% away
+= 20 shares max
+```
 
-**Slide 8 (CTA):** Full position sizing lesson FREE → education.signalpilot.io
+**Slide 6:**
+```
+THE 1% RULE:
+
+Never risk more than 1% per trade.
+
+10 losses in a row = 10% drawdown.
+Painful but survivable.
+
+Without the rule?
+3-4 losses = account destroyed.
+```
+
+**Slide 7:**
+```
+REAL CASE STUDY:
+
+One trader overleveraged.
+$45K account.
+Risking 10-15% per trade.
+
+6 weeks later: $8K.
+
+Same trades with 1% risk?
+Would have preserved $38K+.
+```
+
+**Slide 8:**
+```
+PORTFOLIO HEAT RULE:
+
+Never exceed 6% TOTAL risk.
+
+3 open trades × 2% each = 6% heat.
+Adding more? Close something first.
+
+Survival > Opportunity.
+```
+
+**Slide 9 (CTA):**
+```
+Lesson 09: Position Sizing
+
+Full formula + more case studies.
+
+FREE at education.signalpilot.io
+```
 
 **Caption:**
 ```
-THE 1% RULE
+POSITION SIZING: THE ONLY EDGE THAT MATTERS
 
-Most traders don't blow up from bad entries.
-They blow up from bad position sizing.
+70% win rate + bad sizing = LOSES money.
+40% win rate + good sizing = MAKES money.
 
-Risk 1% per trade. Maximum.
+The formula:
+Position Size = (Account × Risk %) ÷ (Entry - Stop)
 
-$10,000 account = $100 max risk
-$50,000 account = $500 max risk
+The rule:
+Never risk more than 1% per trade.
 
-10 consecutive losses = 10% drawdown.
-You survive. You learn. You continue.
+Case study:
+One trader risked 10-15% per trade.
+$45K → $8K in 6 weeks.
 
-Without the rule? 3-4 losses = done.
+Same trades at 1% risk?
+Would have preserved $38K+.
 
-This isn't about winning.
+This isn't about winning more.
 It's about surviving long enough to win.
 
-Full lesson (free):
+Lesson 09 in our FREE education hub.
+
 education.signalpilot.io
 
 #tradingpsychology #riskmanagement #positionsizing #tradingstrategy #discipline
@@ -2709,15 +2890,136 @@ education.signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X
+## 𝕏 TWITTER/X — THREAD
 
-Thread on position sizing with examples.
+**Post 1:**
+```
+"I have a 70% win rate!"
+
+You could still be losing money.
+
+Win rate is NOT your edge.
+
+Position sizing is.
+
+🧵 Here's why:
+```
+
+**Post 2:**
+```
+THE PARADOX:
+
+70% win rate:
+→ Win $50 seven times = +$350
+→ Lose $200 three times = -$600
+→ NET: -$250 per 10 trades
+
+You're "winning" and going broke.
+```
+
+**Post 3:**
+```
+40% win rate:
+→ Win $350 four times = +$1,400
+→ Lose $100 six times = -$600
+→ NET: +$800 per 10 trades
+
+"Losing" more often.
+Making money.
+
+The difference? Position sizing and R:R.
+```
+
+**Post 4:**
+```
+THE FORMULA:
+
+Position Size = (Account × Risk %) ÷ (Entry - Stop)
+
+Example:
+$10,000 account
+1% risk = $100 max loss
+Stop 5% below entry
+= Position size capped at 20 shares
+
+This is how you survive.
+```
+
+**Post 5:**
+```
+THE 1% RULE:
+
+Never risk more than 1% per trade.
+
+10 losses in a row = 10% drawdown.
+Painful. Survivable.
+
+Without the rule?
+3-4 bad trades = account destroyed.
+```
+
+**Post 6:**
+```
+REAL CASE:
+
+One trader risked 10-15% per trade.
+Started: $45K
+6 weeks later: $8K
+
+Same trades with 1% risk?
+Would have preserved $38K+.
+
+The trades weren't the problem.
+The sizing was.
+```
+
+**Post 7:**
+```
+Lesson 09: Position Sizing
+
+The full formula.
+Portfolio heat rules.
+More case studies.
+
+FREE at education.signalpilot.io
+```
 
 ---
 
 ## 🎬 TIKTOK
 
-**Hook:** "Why you keep blowing accounts"
+**Hook:** "70% win rate but still losing money?"
+
+**Script:**
+```
+"I have a 70% win rate!"
+
+Cool. You could still be broke.
+
+70% wins at $50 = +$350
+30% losses at $200 = -$600
+Net: LOSING.
+
+40% wins at $350 = +$1,400
+60% losses at $100 = -$600
+Net: WINNING.
+
+Win rate doesn't matter.
+POSITION SIZING matters.
+
+The formula:
+Position = (Account × 1%) ÷ Stop Distance
+
+One trader ignored this.
+$45K → $8K in 6 weeks.
+
+Same trades at 1% risk?
+$38K preserved.
+
+Lesson 09. Free.
+
+Link in bio.
+```
 
 ---
 
@@ -2744,39 +3046,128 @@ Education Hub spotlight: **Lesson 07 — Revenge Trading: Understanding the Neur
 
 ---
 
-## 📸 INSTAGRAM
+## 📸 INSTAGRAM — CAROUSEL
+
+**Slide 1 (Cover):**
+```
+REVENGE TRADING
+The Neuroscience of Self-Destruction
+```
+
+**Slide 2:**
+```
+THE CASE STUDY:
+
+Starting loss: $340
+"I'll make it back quick..."
+
+Trade 2: Doubled size. Lost.
+Trade 3: Tripled size. Lost.
+Trade 4: "All-in." Lost.
+
+Total damage: $23,400
+
+4 trades. 69x the original loss.
+```
+
+**Slide 3:**
+```
+THE NEUROSCIENCE:
+
+Losses feel 2.5x WORSE than equivalent gains.
+
+$100 win = normal happy
+$100 loss = PAIN × 2.5
+
+This is hardwired. It's called loss aversion.
+
+Your brain DEMANDS you fix it. NOW.
+```
+
+**Slide 4:**
+```
+THE THREE TILTS:
+
+1. REVENGE TILT
+After a loss. "I need to make it back."
+Doubled size. Abandoned rules.
+
+2. WINNER'S TILT
+After a win streak. "I can't lose."
+Overconfidence. Ignored risk.
+
+3. BOREDOM TILT
+No setups. "I need to do SOMETHING."
+Forced trades. No edge.
+```
+
+**Slide 5:**
+```
+WHY WILLPOWER FAILS:
+
+When tilted, your prefrontal cortex (logic) shuts down.
+Your amygdala (emotion) takes over.
+
+You can't think your way out.
+You're literally not capable of rational thought.
+```
+
+**Slide 6:**
+```
+THE SOLUTION: CIRCUIT BREAKERS
+
+Automated rules that FORCE you to stop:
+
+→ Daily loss limit: 2% max
+→ After 2 losses: mandatory break
+→ Platform locks if limit hit
+→ Walk away. No exceptions.
+
+Systems beat willpower.
+```
+
+**Slide 7 (CTA):**
+```
+Lesson 07: Revenge Trading
+
+Full neuroscience breakdown.
+Practical circuit breakers.
+
+FREE at education.signalpilot.io
+```
 
 **Caption:**
 ```
 $340 → $23,400
 
-That's how much one trader lost.
+One trader's revenge trading spiral.
 
-Not from bad analysis.
-From revenge trading.
+4 trades. 69x the original loss.
 
-Here's what happened:
+Why does this happen?
 
-→ Small $340 loss
-→ "I'll make it back quick"
-→ Doubled position size
-→ Another loss
-→ Tripled position
-→ Spiral
-
-4 trades. $23,400 gone.
-
-The science:
+THE SCIENCE:
 Your brain treats losses 2.5x worse than gains.
-That's not weak mindset — it's neurobiology.
+When you lose, your logical brain shuts down.
+Emotion takes over.
 
-The fix:
+THE THREE TILTS:
+1. Revenge tilt (after loss)
+2. Winner's tilt (overconfidence)
+3. Boredom tilt (forcing trades)
+
+THE FIX:
 Automated circuit breakers.
 Daily loss limits that FORCE you to stop.
+Walk away. No exceptions.
 
-Willpower fails. Systems don't.
+Willpower fails when you're tilted.
+That's biology, not weakness.
 
-Full lesson (free):
+Systems don't fail.
+
+Lesson 07 in our FREE education hub.
+
 education.signalpilot.io
 
 #tradingpsychology #revengetrading #discipline #tradingmindset #riskmanagement
@@ -2784,33 +3175,138 @@ education.signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X
+## 𝕏 TWITTER/X — THREAD
 
+**Post 1:**
 ```
-"The patient pilot survives. The impulsive pilot donates."
+$340 → $23,400
 
-Every account you've blown had the same cause:
-Impulse.
+One trader's revenge trading spiral.
 
-FOMO. Revenge. "I just had a feeling."
+4 trades. 69x the original loss.
 
-The fix isn't more indicators.
-It's discipline.
+Here's the neuroscience of why this happens to EVERYONE:
 
-Wait for consensus. Or stand aside.
+🧵 Thread:
+```
+
+**Post 2:**
+```
+THE SCIENCE:
+
+Losses feel 2.5x WORSE than equivalent gains.
+
+$100 win = normal dopamine hit
+$100 loss = cortisol + adrenaline × 2.5
+
+Your brain SCREAMS: "Fix this. NOW."
+
+This is loss aversion. It's hardwired.
+```
+
+**Post 3:**
+```
+WHAT HAPPENS IN YOUR BRAIN:
+
+When tilted:
+→ Prefrontal cortex (logic) shuts down
+→ Amygdala (emotion) takes over
+→ Fight-or-flight activates
+
+You're literally incapable of rational thought.
+
+Willpower can't save you.
+```
+
+**Post 4:**
+```
+THE THREE TILTS:
+
+1. REVENGE TILT
+After a loss. "I'll make it back."
+Result: Bigger losses.
+
+2. WINNER'S TILT
+After wins. "I can't lose."
+Result: Overconfidence → blowup.
+
+3. BOREDOM TILT
+No setups. "I need action."
+Result: Forced trades with no edge.
+```
+
+**Post 5:**
+```
+THE FIX: CIRCUIT BREAKERS
+
+Automated rules that FORCE you to stop:
+
+→ Daily loss limit: 2% max
+→ After 2 consecutive losses: 1 hour break
+→ Platform locks if limit hit
+→ Physical removal from setup
+
+Systems beat willpower.
+```
+
+**Post 6:**
+```
+Lesson 07: Revenge Trading
+
+The full neuroscience breakdown.
+Practical circuit breaker systems.
+
+FREE at education.signalpilot.io
+
+"The patient pilot survives.
+The impulsive pilot donates."
 ```
 
 ---
 
 ## 🎬 TIKTOK
 
-**Hook:** "The #1 reason you lose money"
+**Hook:** "$340 became $23,400 in 4 trades..."
+
+**Script:**
+```
+$340 loss.
+"I'll make it back quick."
+
+Trade 2: Doubled size. Lost.
+Trade 3: Tripled. Lost.
+Trade 4: All in. Lost.
+
+$23,400 gone.
+
+That's revenge trading.
+
+Here's the science:
+
+Losses feel 2.5x worse than wins.
+When you're tilted, your logical brain shuts OFF.
+Emotion takes over.
+
+You CAN'T think clearly.
+
+The fix?
+
+Automated circuit breakers.
+Daily loss limit: 2%.
+After 2 losses: walk away.
+
+Not willpower. SYSTEMS.
+
+Lesson 07. Free.
+
+Link in bio.
+```
 
 ---
 
 ## 🔗 LINKS FOR DAY 21
+- education.signalpilot.io
 - signalpilot.io/chronicle/the-arbiter
-- signalpilot.io
 
 ---
 
