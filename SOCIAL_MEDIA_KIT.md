@@ -3340,15 +3340,123 @@ blog.signalpilot.io/articles/how-smart-money-moves
 
 ---
 
-## 𝕏 TWITTER/X
+## 𝕏 TWITTER/X — THREAD
 
-Thread summarizing the blog post.
+**Post 1:**
+```
+"Why do institutions always seem to buy the bottom and sell the top?"
+
+They're not smarter than you.
+
+They're POSITIONED before you.
+
+Here's how smart money actually moves:
+
+🧵 Thread:
+```
+
+**Post 2:**
+```
+THE SIZE PROBLEM:
+
+Institutions can't buy/sell in one order.
+
+Imagine trying to buy $500M of Bitcoin.
+One market order? Price explodes before you're filled.
+
+So they ACCUMULATE slowly.
+Over days. Weeks. Sometimes months.
+```
+
+**Post 3:**
+```
+ACCUMULATION:
+
+→ Price looks "dead"
+→ Volume shows quiet buying
+→ Retail is bored or scared
+→ Institutions building positions
+
+Then price explodes.
+"Where did that come from?!"
+
+They were positioning while you were sleeping.
+```
+
+**Post 4:**
+```
+DISTRIBUTION:
+
+→ Price making new highs
+→ Retail euphoric, buying the top
+→ Volume shows selling INTO strength
+→ Institutions exiting into YOUR greed
+
+Then price collapses.
+"Why is it dumping?!"
+
+They sold into your FOMO.
+```
+
+**Post 5:**
+```
+THE PATTERN:
+
+1. They position BEFORE the move
+2. They don't chase — they wait
+3. They sell into YOUR greed
+4. They buy into YOUR fear
+5. By the time you see it, they caused it
+```
+
+**Post 6:**
+```
+How do you track this?
+
+Volume analysis.
+Accumulation/distribution detection.
+Following the money, not the price.
+
+Full breakdown:
+blog.signalpilot.io/articles/how-smart-money-moves
+```
 
 ---
 
 ## 🎬 TIKTOK
 
 **Hook:** "They're not smarter. They're positioned."
+
+**Script:**
+```
+"How do institutions always buy the bottom?"
+
+They don't.
+
+They buy BEFORE the bottom.
+
+Here's the difference:
+
+You see price crash, you panic sell.
+They see YOUR panic as their opportunity.
+
+You see price pump, you FOMO buy.
+They see YOUR greed as their exit.
+
+They're not smarter.
+They're positioned BEFORE you.
+
+Accumulation → before the pump
+Distribution → before the dump
+
+By the time you see the move...
+They caused it.
+
+Follow the money.
+Not the price.
+
+Link in bio.
+```
 
 ---
 
@@ -3360,60 +3468,338 @@ Thread summarizing the blog post.
 # DAY 23 — JANUARY 16
 
 ## 📌 Theme
-Education Hub spotlight: Backtesting
+Education Hub spotlight: Backtesting — How to Actually Validate Your Strategy
+
+**Strategy:** Feature the ACTUAL backtesting lesson with methodology, common mistakes, and the expectancy formula.
+
+**Lesson Source:** `education.signalpilot.io` → Intermediate Tier
+
+**Key Teaching Points:**
+- Minimum 100 trades for statistical significance
+- Expectancy formula: (Win% × AvgWin) - (Loss% × AvgLoss)
+- Common mistake: Confirmation bias (cherry-picking winners)
+- Why repainting indicators destroy backtests
 
 ---
 
 ## 📸 INSTAGRAM — CAROUSEL
 
-**Slide 1:** HOW TO BACKTEST PROPERLY
+**Slide 1 (Cover):**
+```
+HOW TO BACKTEST PROPERLY
+Most Traders Skip This (That's Why They Fail)
+```
 
-**Slide 2:** Step 1: Define your exact rules (entry, exit, stop)
+**Slide 2:**
+```
+WHY BACKTEST?
 
-**Slide 3:** Step 2: Go back 100+ trades on historical data
+"I have a strategy."
 
-**Slide 4:** Step 3: Record every trade honestly (no cherry-picking)
+Cool. Does it actually work?
 
-**Slide 5:** Step 4: Calculate win rate + average R
+Not "did it work once."
+Does it work STATISTICALLY?
 
-**Slide 6:** Step 5: Only trade live if the math works
+Without backtesting, you're gambling.
+With backtesting, you're operating.
+```
 
-**Slide 7:** If you can't backtest it, you can't trust it.
+**Slide 3:**
+```
+STEP 1: DEFINE EXACT RULES
 
-**Slide 8 (CTA):** Full backtesting framework in our free education hub → education.signalpilot.io
+Before you start:
+→ What triggers entry? (Specific)
+→ Where is your stop? (Exact level)
+→ Where is your target? (Exact level)
+→ What confirms the setup? (Checklist)
+
+If it's not written, it's not a system.
+```
+
+**Slide 4:**
+```
+STEP 2: MINIMUM 100 TRADES
+
+Why 100?
+Statistical significance.
+
+10 trades = could be luck
+30 trades = still too small
+100+ trades = pattern emerges
+
+Less than 100? You don't know anything yet.
+```
+
+**Slide 5:**
+```
+STEP 3: RECORD HONESTLY
+
+The hardest step.
+
+→ NO cherry-picking winners
+→ NO "I would have skipped that one"
+→ NO hindsight adjustments
+
+If you'd have taken it live = you log it.
+Period.
+```
+
+**Slide 6:**
+```
+STEP 4: CALCULATE EXPECTANCY
+
+THE FORMULA:
+(Win% × Avg Win) - (Loss% × Avg Loss) = Expectancy
+
+Example:
+(50% × $200) - (50% × $100) = +$50
+
+Positive = edge exists
+Negative = losing system
+Zero = breakeven (not worth trading)
+```
+
+**Slide 7:**
+```
+THE REPAINTING TRAP:
+
+Most indicators repaint.
+They show "perfect" signals in history...
+That weren't there when it mattered.
+
+Your backtest looks amazing.
+Your live results = garbage.
+
+Non-repainting = what you test is what you get.
+```
+
+**Slide 8:**
+```
+STEP 5: TRADE LIVE ONLY IF:
+
+→ 100+ trades logged
+→ Positive expectancy
+→ Drawdowns acceptable
+→ Non-repainting confirmed
+
+Otherwise? Keep testing.
+```
+
+**Slide 9 (CTA):**
+```
+Full backtesting framework.
+Expectancy calculator.
+Template spreadsheet.
+
+FREE at education.signalpilot.io
+```
 
 **Caption:**
 ```
-HOW TO BACKTEST PROPERLY:
+HOW TO BACKTEST PROPERLY
 
-1. Define exact rules (entry, exit, stop)
+Most traders skip this step.
+That's why most traders fail.
+
+THE PROCESS:
+1. Define exact rules (entry, stop, target)
 2. Go back 100+ trades minimum
-3. Record honestly (no cherry-picking)
-4. Calculate win rate + average R
+3. Record HONESTLY (no cherry-picking)
+4. Calculate expectancy
 5. Only trade live if math works
 
-If you can't backtest it, you can't trust it.
+THE FORMULA:
+(Win% × AvgWin) - (Loss% × AvgLoss) = Expectancy
 
-Why The Elite Seven matter:
-100% non-repainting = what you backtest is what you get.
+Positive = you have an edge
+Negative = losing system
+
+WHY IT MATTERS:
+The Elite Seven are 100% non-repainting.
+What you backtest is what you get live.
+
+$100 bounty if you can prove otherwise.
 
 Full framework (free):
 education.signalpilot.io
 
-#backtesting #tradingstrategy #tradingsystem #technicalanalysis
+#backtesting #tradingstrategy #tradingsystem #technicalanalysis #edge
 ```
 
 ---
 
-## 𝕏 TWITTER/X
+## 𝕏 TWITTER/X — THREAD
 
-Thread on backtesting methodology.
+**Post 1:**
+```
+"I have a strategy!"
+
+Does it actually work?
+
+Not "did it work once."
+Does it work STATISTICALLY over 100+ trades?
+
+Most traders never backtest.
+That's why most traders fail.
+
+Here's how to backtest properly:
+
+🧵 Thread:
+```
+
+**Post 2:**
+```
+STEP 1: DEFINE EXACT RULES
+
+Before backtesting, write down:
+
+→ What triggers entry? (Specific signal)
+→ Where is your stop? (Exact level/ATR)
+→ Where is your target? (Exact R multiple)
+→ What confirms? (Checklist)
+
+If it's not written, it's not a system.
+```
+
+**Post 3:**
+```
+STEP 2: 100+ TRADES MINIMUM
+
+Why 100?
+
+10 trades = could be luck
+30 trades = sample too small
+100+ trades = statistical significance
+
+Anything less? You don't actually know if it works.
+
+Yes, this takes time. That's the point.
+```
+
+**Post 4:**
+```
+STEP 3: RECORD HONESTLY
+
+This is where most fail.
+
+→ NO cherry-picking winners
+→ NO "I would have skipped that"
+→ NO hindsight adjustments
+
+If your rules say entry = you log it.
+Even if it lost.
+Especially if it lost.
+```
+
+**Post 5:**
+```
+STEP 4: CALCULATE EXPECTANCY
+
+THE FORMULA:
+(Win% × AvgWin) - (Loss% × AvgLoss)
+
+Example:
+(50% × $200) - (50% × $100) = +$50 per trade
+
+Positive = edge exists
+Negative = losing system
+Zero = breakeven (not worth trading)
+```
+
+**Post 6:**
+```
+THE REPAINTING TRAP:
+
+Most indicators repaint.
+
+They show perfect signals in history...
+That weren't actually there live.
+
+Your backtest: 80% win rate
+Your live results: 40% win rate
+
+Why? The signals changed after the fact.
+```
+
+**Post 7:**
+```
+This is why The Elite Seven are 100% non-repainting.
+
+What you see in history = what you would have seen live.
+
+Your backtest = your reality.
+
+$100 bounty if you can prove otherwise.
+No one ever has.
+```
+
+**Post 8:**
+```
+STEP 5: ONLY GO LIVE IF:
+
+✓ 100+ trades logged
+✓ Positive expectancy
+✓ Drawdowns acceptable (can you handle 10 losses in a row?)
+✓ Non-repainting confirmed
+
+Otherwise? Keep testing.
+
+Patience now = profits later.
+
+education.signalpilot.io
+```
 
 ---
 
 ## 🎬 TIKTOK
 
-**Hook:** "If you can't test it, you can't trust it"
+**Hook:** "I have a strategy!" — but does it actually work?
+
+**Script:**
+```
+"I have a strategy!"
+
+Cool. Does it work?
+
+Not "did it work once."
+Does it work over 100+ trades?
+
+Here's the formula:
+
+(Win% × Avg Win) - (Loss% × Avg Loss)
+
+Example:
+50% × $200 = $100
+50% × $100 = $50
+$100 - $50 = +$50 per trade
+
+That's your EDGE.
+
+Positive = profitable system
+Negative = losing system
+
+But here's the trap:
+
+Most indicators REPAINT.
+They show perfect signals in history...
+That weren't there when you needed them.
+
+Your backtest: 80% win rate
+Live: 40%
+
+Why? Signals changed after the fact.
+
+The Elite Seven? Non-repainting.
+What you test is what you get.
+
+100 trades minimum.
+No cherry-picking.
+Calculate your edge.
+
+Link in bio.
+```
 
 ---
 
@@ -3587,36 +3973,349 @@ signalpilot.io
 
 ## 𝕏 TWITTER/X
 
-Share user testimonials or positive feedback.
+```
+What traders are saying about The Elite Seven:
+
+"The cycle phases are actually accurate"
+"Volume Oracle called the accumulation perfectly"
+"No more indicator overload with OmniDeck"
+"The non-repainting is real — tested it myself"
+
+Thank you for navigating with us.
+
+This is just the beginning.
+
+signalpilot.io
+```
+
+---
+
+## 🎬 TIKTOK
+
+**Hook:** "What they're saying about The Elite Seven..."
+
+**Script:**
+```
+Since launch, here's what we're hearing:
+
+"The cycle detection actually works."
+"Volume Oracle caught the accumulation before the move."
+"OmniDeck cleaned up my chart — finally."
+"Non-repainting is real. I tested it myself."
+
+Thank you to everyone navigating with The Seven.
+
+More updates coming.
+More education content.
+More improvements.
+
+This is just the beginning.
+
+Link in bio.
+```
 
 ---
 
 # DAY 27 — JANUARY 20
 
 ## 📌 Theme
-Education Hub spotlight: Risk Management
+Education Hub spotlight: Risk Management — The Complete Framework
+
+**Strategy:** Feature the ACTUAL risk management curriculum with specific rules, not generic advice.
+
+**Lesson Source:** `education.signalpilot.io` → Multiple lessons across tiers
+
+**Key Teaching Points:**
+- The 1% rule and WHY it works mathematically
+- Pre-trade stop requirement (no stop = no trade)
+- Risk:Reward minimums based on win rate
+- Correlation risk across positions
+- The 3-strike rule for losing days
 
 ---
 
-## 📸 INSTAGRAM
+## 📸 INSTAGRAM — CAROUSEL
+
+**Slide 1 (Cover):**
+```
+THE COMPLETE RISK MANAGEMENT FRAMEWORK
+7 Rules That Keep You Alive
+```
+
+**Slide 2:**
+```
+RULE 1: THE 1% RULE
+
+Never risk more than 1% per trade.
+
+$10,000 account = $100 max risk
+$50,000 account = $500 max risk
+
+Why? 10 losses in a row = 10% drawdown.
+Painful but survivable.
+
+Without it? 3-4 losses = blown account.
+```
+
+**Slide 3:**
+```
+RULE 2: STOP BEFORE ENTRY
+
+Know your stop BEFORE you enter.
+Not after. Not "somewhere around here."
+
+EXACT level.
+
+No stop = no trade.
+Period.
+```
+
+**Slide 4:**
+```
+RULE 3: RISK:REWARD MINIMUM
+
+If your win rate is 50%:
+Minimum 1:2 R:R to be profitable
+
+If your win rate is 40%:
+Minimum 1:3 R:R to be profitable
+
+The math must work BEFORE you trade.
+```
+
+**Slide 5:**
+```
+RULE 4: CORRELATION RISK
+
+3 crypto longs = NOT 3% risk
+3 crypto longs = 1 bet × 3
+
+Correlated assets move together.
+Your "diversified" positions aren't.
+
+Cap at 2 correlated positions max.
+```
+
+**Slide 6:**
+```
+RULE 5: THE 3-STRIKE RULE
+
+3 losses in a day = DONE for the day.
+
+Not "one more to make it back."
+Not "the setup is perfect this time."
+
+Walk away. Come back tomorrow.
+
+The market will be there.
+```
+
+**Slide 7:**
+```
+RULE 6: MAX DAILY DRAWDOWN
+
+Set a daily loss limit: 2-3% max.
+
+Hit it? Stop trading.
+No exceptions.
+
+This prevents the spiral.
+```
+
+**Slide 8:**
+```
+RULE 7: ACCEPT LOSSES
+
+Losses are not failures.
+Losses are operating costs.
+
+A 50% win rate loses half the time.
+That's EXPECTED.
+
+The goal isn't no losses.
+The goal is controlled losses.
+```
+
+**Slide 9 (CTA):**
+```
+Full risk management curriculum.
+Position sizing calculators.
+Trade journal templates.
+
+FREE at education.signalpilot.io
+```
 
 **Caption:**
 ```
-RISK MANAGEMENT BASICS:
+THE 7 RULES THAT KEEP YOU ALIVE
 
 1. Never risk more than 1% per trade
-2. Always have a stop-loss BEFORE entering
-3. Calculate position size based on stop distance
-4. Risk:reward minimum 1:2
-5. Accept that losses are part of the game
+2. Know your stop BEFORE entry
+3. Minimum R:R based on your win rate
+4. Cap correlated positions at 2
+5. 3 losses = done for the day
+6. Max daily drawdown: 2-3%
+7. Accept that losses are operating costs
 
 Most traders focus on entries.
 Winners focus on survival.
 
-Full risk management curriculum (free):
+You can have a mediocre strategy with great risk management and survive.
+
+You can have a great strategy with bad risk management and blow up.
+
+The math is clear.
+
+Full curriculum (free):
 education.signalpilot.io
 
-#riskmanagement #tradingpsychology #discipline
+#riskmanagement #tradingpsychology #discipline #tradingstrategy #survival
+```
+
+---
+
+## 𝕏 TWITTER/X — THREAD
+
+**Post 1:**
+```
+You can have mediocre entries with great risk management and survive.
+
+You can have perfect entries with bad risk management and blow up.
+
+Here are the 7 rules that keep you in the game:
+
+🧵 Thread:
+```
+
+**Post 2:**
+```
+RULE 1: THE 1% RULE
+
+Never risk more than 1% per trade.
+
+$10K account = $100 max risk
+
+Why? 10 consecutive losses = 10% drawdown.
+Painful. Survivable.
+
+Without it? 3-4 losses = account destroyed.
+```
+
+**Post 3:**
+```
+RULE 2: STOP BEFORE ENTRY
+
+Know your EXACT stop before you enter.
+Not after. Not "somewhere around here."
+
+If you don't know your stop = you don't know your risk.
+If you don't know your risk = you can't size properly.
+
+No stop = no trade.
+```
+
+**Post 4:**
+```
+RULE 3: RISK:REWARD MINIMUM
+
+Win rate 50% → minimum 1:2 R:R
+Win rate 40% → minimum 1:3 R:R
+Win rate 30% → minimum 1:4 R:R
+
+The math must work BEFORE you enter.
+
+If R:R doesn't meet your minimum? Skip it.
+```
+
+**Post 5:**
+```
+RULE 4: CORRELATION RISK
+
+3 crypto longs ≠ 3% risk
+3 crypto longs = 1 bet at 3x
+
+Correlated assets move together.
+Your "diversified" positions aren't.
+
+Max 2 correlated positions.
+```
+
+**Post 6:**
+```
+RULE 5: THE 3-STRIKE RULE
+
+3 losses in a day = done for the day.
+
+Not "one more to make it back."
+Not "this setup is perfect."
+
+Walk away.
+The market will be there tomorrow.
+```
+
+**Post 7:**
+```
+RULE 6: MAX DAILY DRAWDOWN
+
+Daily loss limit: 2-3% max.
+
+Hit it? Stop trading. No exceptions.
+
+This prevents the revenge spiral.
+This saves accounts.
+```
+
+**Post 8:**
+```
+RULE 7: ACCEPT LOSSES
+
+Losses aren't failures.
+Losses are operating costs.
+
+50% win rate = loses half the time.
+That's EXPECTED, not a problem.
+
+Goal isn't no losses.
+Goal is controlled losses.
+
+education.signalpilot.io
+```
+
+---
+
+## 🎬 TIKTOK
+
+**Hook:** "7 rules that keep traders alive"
+
+**Script:**
+```
+7 rules that keep you in the game:
+
+1. Never risk more than 1% per trade.
+10 losses in a row = 10% down. Survivable.
+
+2. Know your stop BEFORE entry.
+No stop = no trade.
+
+3. Minimum R:R based on win rate.
+50% win rate = minimum 1:2
+
+4. Cap correlated positions.
+3 crypto longs = 1 bet, not 3.
+
+5. 3 losses = done for the day.
+Walk away.
+
+6. Max daily drawdown: 2-3%.
+Hit it? Stop trading.
+
+7. Accept that losses are operating costs.
+50% win rate loses half the time. That's EXPECTED.
+
+The goal isn't no losses.
+The goal is controlled losses.
+
+Link in bio.
 ```
 
 ---
@@ -3665,6 +4364,38 @@ This is for traders who refuse to guess anymore.
 
 ---
 
+## 🎬 TIKTOK
+
+**Hook:** "Why we built this..."
+
+**Script:**
+```
+Years ago, we got burned.
+
+Bought an indicator.
+Perfect backtest. 80% win rate.
+
+Live trading?
+Signals kept disappearing.
+What looked perfect in history wasn't there when it mattered.
+
+That's called repainting.
+And most indicators do it.
+
+We decided: If no one would build honest tools, we would.
+
+The Elite Seven don't repaint.
+$100 bounty if you can prove otherwise.
+
+No one ever has.
+
+This is for traders who refuse to guess anymore.
+
+Link in bio.
+```
+
+---
+
 # DAY 29 — JANUARY 22
 
 ## 📌 Theme
@@ -3700,6 +4431,31 @@ What would make SignalPilot better for you?
 → Alert configurations?
 
 Reply below. We actually read these.
+```
+
+---
+
+## 🎬 TIKTOK
+
+**Hook:** "What should we build next?"
+
+**Script:**
+```
+We're always improving.
+
+What would make SignalPilot better for YOU?
+
+New indicator ideas?
+More education content?
+Different documentation?
+Better alert configs?
+
+Drop a comment.
+We actually read these.
+
+Your feedback = our roadmap.
+
+Link in bio.
 ```
 
 ---
@@ -3795,7 +4551,40 @@ signalpilot.io
 
 **Hook:** "30 days. 7 indicators. One system."
 
-Quick montage of all the reveals with the Pilot's Oath voiceover.
+**Script:**
+```
+30 days ago, we launched The Elite Seven.
+
+7 indicators:
+Pentarch — reads cycles
+Volume Oracle — hears institutions
+Janus Atlas — maps levels
+Plutus Flow — weighs pressure
+OmniDeck — unifies systems
+Augury Grid — scans markets
+Harmonic Oscillator — confirms strikes
+
+The Pilot's Oath:
+
+"I will not chase.
+I will not guess.
+I will not hope.
+
+I am not a gambler.
+I am a Pilot."
+
+82 free lessons.
+7 non-repainting indicators.
+$100 bounty still unclaimed.
+
+This was just the beginning.
+
+Thank you for navigating with us.
+
+Link in bio.
+```
+
+**Visual:** Quick montage of all indicator reveals, ending on Council Assembles image with Pilot's Oath overlay.
 
 ---
 
