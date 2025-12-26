@@ -6,7 +6,20 @@
 
 ---
 
-# HOW TO USE THIS FILE
+# NAVIGATION
+
+| Section | Jump To | What You'll Find |
+|---------|---------|------------------|
+| **Part 1** | [Quick Start](#part-1-quick-start) | How to use this file, status check, 30-day overview |
+| **Part 2** | [Daily Calendar](#part-2-the-daily-calendar) | Day-by-day content (your main work) |
+| **Part 3** | [Strategy Guide](#part-3-strategy-guide) | Posting times, engagement tactics, growth hacks |
+| **Part 4** | [Appendices](#part-4-appendices) | Links, hashtags, images, compliance |
+
+---
+
+# PART 1: QUICK START
+
+## HOW TO USE THIS FILE
 
 Each day has:
 - **📌 Theme** — What we're focusing on
@@ -17,140 +30,9 @@ Each day has:
 
 ---
 
-# OPTIMAL POSTING TIMES
+## QUICK STATUS
 
-| Platform | Best Times (EST) | Notes |
-|----------|------------------|-------|
-| Instagram Feed | 11 AM, 2 PM, 7 PM | Tues-Thurs perform best |
-| Instagram Reels | 9 AM, 12 PM, 7 PM | Weekends get more views |
-| Instagram Stories | 7-9 AM, 12 PM, 7-9 PM | Spread throughout day |
-| Twitter/X | 8-10 AM, 12-1 PM, 5-6 PM | Weekdays only |
-| TikTok | 7 AM, 10 AM, 7 PM, 10 PM | Thurs-Sat perform best |
-
-**Consistency > Perfect timing.** Pick times you can maintain.
-
----
-
-# ENGAGEMENT TACTICS
-
-## Carousel Posts
-- Always add "Swipe →" or "👉" in first slide or caption
-- End with "Save this for later 🔖"
-- Ask a question in caption: "Which slide hit hardest?"
-
-## Comments Strategy
-- Reply to EVERY comment in first hour
-- Pin best comment or your own follow-up
-- Ask follow-up questions to keep threads going
-
-## Stories Strategy
-- Use polls, questions, sliders daily
-- Share user DMs (with permission) as social proof
-- "Add yours" stickers for engagement
-
-## Twitter/X Strategy
-- Quote tweet your own threads 24h later
-- Reply to big trading accounts with value (not promo)
-- Use Twitter polls for engagement
-
-## TikTok Strategy
-- First 1-2 seconds = HOOK (keep them watching)
-- Ideal length: 15-45 seconds for educational
-- Reply to comments with new videos
-
----
-
-# VIRAL CONTENT FORMATS
-
-Use these proven formats to boost reach:
-
-## "Myth Busting" Posts
-```
-❌ MYTH: "High volume = price going up"
-✅ TRUTH: Volume = activity. Delta = direction.
-
-Stop falling for this...
-```
-
-## "Before/After" Posts
-```
-6 months ago: Chasing every signal, blowing accounts
-Today: Reading cycles, waiting for consensus
-
-The difference? [education/indicators]
-```
-
-## "Unpopular Opinion" Posts
-```
-Unpopular opinion: Win rate doesn't matter.
-
-A 40% win rate with good R:R beats 70% with bad R:R.
-
-Here's the math... 🧵
-```
-
-## "Save This" Carousels
-```
-SAVE THIS → The complete position sizing formula
-
-[Carousel content]
-
-Caption: Save this. You'll need it. 🔖
-```
-
-## "Reply with X" Engagement
-```
-Reply with your biggest trading mistake.
-
-I'll tell you which lesson in our free education hub fixes it.
-```
-
-## "POV" TikToks
-```
-POV: You finally stopped guessing and started reading the cycle
-
-[Show transformation, relief, confidence]
-```
-
----
-
-# LINK-IN-BIO STRATEGY
-
-**Recommended Tool:** Linktree, Beacons, or Stan Store
-
-**Link Order (top to bottom):**
-1. 🚀 Start Free Trial → signalpilot.io
-2. 📚 Free Education (82 Lessons) → education.signalpilot.io
-3. 📖 The Chronicle (Lore) → signalpilot.io/chronicle
-4. 📄 Documentation → docs.signalpilot.io
-5. 📝 Blog → blog.signalpilot.io
-
-**Update weekly** with current campaign focus at top.
-
----
-
-# CONTENT REPURPOSING
-
-Every piece of content can become 5+:
-
-| Original | Repurpose To |
-|----------|--------------|
-| Twitter thread | Instagram carousel |
-| Carousel | TikTok slideshow |
-| TikTok script | Twitter thread |
-| Long caption | Multiple story frames |
-| Case study | Before/after post |
-| Lesson content | "Did you know?" posts |
-| Lore quotes | Quote graphics |
-| User feedback | Social proof posts |
-
-**1 core idea = 1 week of content across platforms**
-
----
-
-# QUICK STATUS
-
-## Already Posted (as of Dec 25)
+### Already Posted (as of Dec 25)
 | Platform | Posts |
 |----------|-------|
 | Instagram | 6 posts (Origin, Education, Council, Pentarch, Volume Oracle, Pilot's Oath) |
@@ -159,7 +41,7 @@ Every piece of content can become 5+:
 
 ---
 
-# THE 30 DAYS AT A GLANCE
+## THE 30 DAYS AT A GLANCE
 
 | Day | Date | Theme |
 |-----|------|-------|
@@ -170,7 +52,7 @@ Every piece of content can become 5+:
 | 5 | Dec 29 | Harmonic Oscillator (FINAL) + Council Complete |
 | 6 | **Dec 30** | **🚀 LAUNCH DAY** |
 | 7 | Dec 31 | New Year's Eve — Reflection |
-| 8 | Jan 1 | New Year — Rest day |
+| 8 | Jan 1 | New Year — Reflection & fresh starts |
 | 9 | Jan 2 | Education Hub: Cycle Detection lesson |
 | 10 | Jan 3 | Trust Building: Non-Repainting $100 Bounty |
 | 11 | Jan 4 | Education Hub: Volume Analysis lesson |
@@ -196,14 +78,18 @@ Every piece of content can become 5+:
 
 ---
 
-# DAY 1 — DECEMBER 25 (CHRISTMAS)
+# PART 2: THE DAILY CALENDAR
 
-## 📌 Theme
+---
+
+## DAY 1 — DECEMBER 25 (CHRISTMAS)
+
+### 📌 Theme
 Light engagement. Markets closed. Plant seeds for the launch.
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Skip feed post.** Use Stories only.
 
@@ -214,7 +100,7 @@ Light engagement. Markets closed. Plant seeds for the launch.
 
 ---
 
-## 𝕏 TWITTER/X
+### 𝕏 TWITTER/X
 
 ```
 Markets are closed. Perfect time to prepare.
@@ -231,7 +117,7 @@ The Sovereign awaits.
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Something's coming..."
 
@@ -259,14 +145,14 @@ Link in bio — countdown.
 
 ---
 
-# DAY 2 — DECEMBER 26
+## DAY 2 — DECEMBER 26
 
-## 📌 Theme
+### 📌 Theme
 Double reveal: Janus Atlas (The Cartographer) + Plutus Flow (The Scales)
 
 ---
 
-## 📸 INSTAGRAM — POST 1 (10:00 AM)
+### 📸 INSTAGRAM — POST 1 (10:00 AM)
 
 **Image:** `chronicle/cartographer-janus-atlas-preview.jpg`
 
@@ -296,7 +182,7 @@ Full lore: signalpilot.io/chronicle/the-cartographer
 
 ---
 
-## 📸 INSTAGRAM — POST 2 (4:00 PM)
+### 📸 INSTAGRAM — POST 2 (4:00 PM)
 
 **Image:** `chronicle/scales-plutus-flow-preview.jpg`
 
@@ -327,7 +213,7 @@ Full lore: signalpilot.io/chronicle/the-scales
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -386,7 +272,7 @@ signalpilot.io/chronicle/the-scales
 
 ---
 
-## 🎬 TIKTOK — VIDEO 1
+### 🎬 TIKTOK — VIDEO 1
 
 **Hook (first 2 sec):** "Three of Seven..."
 
@@ -411,7 +297,7 @@ Link in bio.
 
 ---
 
-## 🎬 TIKTOK — VIDEO 2
+### 🎬 TIKTOK — VIDEO 2
 
 **Hook:** "Price lies. This doesn't."
 
@@ -435,20 +321,20 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 2
+### 🔗 LINKS FOR DAY 2
 - signalpilot.io/chronicle/the-cartographer
 - signalpilot.io/chronicle/the-scales
 
 ---
 
-# DAY 3 — DECEMBER 27
+## DAY 3 — DECEMBER 27
 
-## 📌 Theme
+### 📌 Theme
 OmniDeck reveal — The Commander (10 systems unified)
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Image:** `chronicle/commander-omnideck-preview.jpg`
 
@@ -490,7 +376,7 @@ Full lore: signalpilot.io/chronicle/the-commander
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -544,7 +430,7 @@ signalpilot.io/chronicle/the-commander
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Your chart looks like this? 😵"
 
@@ -574,20 +460,20 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 3
+### 🔗 LINKS FOR DAY 3
 - signalpilot.io/chronicle/the-commander
 - docs.signalpilot.io/omnideck-v10
 
 ---
 
-# DAY 4 — DECEMBER 28
+## DAY 4 — DECEMBER 28
 
-## 📌 Theme
+### 📌 Theme
 Augury Grid reveal — The Watchman (multi-market scanner)
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Image:** `chronicle/watchman-augury-grid-preview.jpg`
 
@@ -624,7 +510,7 @@ Full lore: signalpilot.io/chronicle/the-watchman
 
 ---
 
-## 𝕏 TWITTER/X
+### 𝕏 TWITTER/X
 
 **Post 1:**
 ```
@@ -665,7 +551,7 @@ signalpilot.io/chronicle/the-watchman
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "POV: You at 2 AM flipping through 50 charts"
 
@@ -694,20 +580,20 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 4
+### 🔗 LINKS FOR DAY 4
 - signalpilot.io/chronicle/the-watchman
 - docs.signalpilot.io/augury-grid-v10
 
 ---
 
-# DAY 5 — DECEMBER 29
+## DAY 5 — DECEMBER 29
 
-## 📌 Theme
+### 📌 Theme
 Harmonic Oscillator reveal — The Arbiter (FINAL indicator) + "Council Complete" hype
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Image:** `chronicle/arbiter-harmonic-oscillator-preview.jpg`
 
@@ -748,7 +634,7 @@ Full lore: signalpilot.io/chronicle/the-arbiter
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -808,7 +694,7 @@ signalpilot.io
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "The final piece..."
 
@@ -838,7 +724,7 @@ Link in bio.
 
 ---
 
-## 📸 INSTAGRAM STORIES — "COUNCIL COMPLETE" HYPE
+### 📸 INSTAGRAM STORIES — "COUNCIL COMPLETE" HYPE
 
 - Frame 1: "Seven indicators revealed."
 - Frame 2: "The Council is complete."
@@ -848,21 +734,21 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 5
+### 🔗 LINKS FOR DAY 5
 - signalpilot.io/chronicle/the-arbiter
 - signalpilot.io/chronicle (main hub)
 - signalpilot.io
 
 ---
 
-# DAY 6 — DECEMBER 30 🚀 LAUNCH DAY
+## DAY 6 — DECEMBER 30 🚀 LAUNCH DAY
 
-## 📌 Theme
+### 📌 Theme
 THE ELITE SEVEN ARE LIVE. Multiple posts throughout the day.
 
 ---
 
-## 📸 INSTAGRAM — MAIN LAUNCH POST (9:00 AM)
+### 📸 INSTAGRAM — MAIN LAUNCH POST (9:00 AM)
 
 **Image:** `chronicle/council-assembles-preview.jpg`
 
@@ -897,7 +783,7 @@ signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X — LAUNCH THREAD (9:00 AM)
+### 𝕏 TWITTER/X — LAUNCH THREAD (9:00 AM)
 
 **Post 1:**
 ```
@@ -971,7 +857,7 @@ signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X — FEATURES POST (12:00 PM)
+### 𝕏 TWITTER/X — FEATURES POST (12:00 PM)
 
 ```
 Quick breakdown of The Elite Seven:
@@ -989,7 +875,7 @@ signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X — THANK YOU POST (6:00 PM)
+### 𝕏 TWITTER/X — THANK YOU POST (6:00 PM)
 
 ```
 Day 1 is live.
@@ -1007,7 +893,7 @@ signalpilot.io
 
 ---
 
-## 🎬 TIKTOK — LAUNCH VIDEO
+### 🎬 TIKTOK — LAUNCH VIDEO
 
 **Hook:** "It's live."
 
@@ -1036,7 +922,7 @@ Navigate the noise.
 
 ---
 
-## 📸 INSTAGRAM STORIES — LAUNCH DAY SEQUENCE
+### 📸 INSTAGRAM STORIES — LAUNCH DAY SEQUENCE
 
 - **9 AM:** "IT'S LIVE 🚀"
 - **10 AM:** Feature highlight (Pentarch)
@@ -1048,21 +934,21 @@ Navigate the noise.
 
 ---
 
-## 🔗 LINKS FOR DAY 6
+### 🔗 LINKS FOR DAY 6
 - signalpilot.io (main)
 - education.signalpilot.io
 - docs.signalpilot.io
 
 ---
 
-# DAY 7 — DECEMBER 31 (NEW YEAR'S EVE)
+## DAY 7 — DECEMBER 31 (NEW YEAR'S EVE)
 
-## 📌 Theme
+### 📌 Theme
 Reflection. Light engagement. Set up for new year content.
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Stories only:**
 - Frame 1: "2025 is almost over."
@@ -1073,7 +959,7 @@ Reflection. Light engagement. Set up for new year content.
 
 ---
 
-## 𝕏 TWITTER/X
+### 𝕏 TWITTER/X
 
 ```
 Last day of 2025.
@@ -1098,7 +984,7 @@ Happy New Year 🎆
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "2026 trading resolution"
 
@@ -1131,14 +1017,14 @@ Link in bio.
 
 ---
 
-# DAY 8 — JANUARY 1 (NEW YEAR)
+## DAY 8 — JANUARY 1 (NEW YEAR)
 
-## 📌 Theme
+### 📌 Theme
 New Year reflection — Light but meaningful content.
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Story only:**
 - "Happy New Year 🎆"
@@ -1146,7 +1032,7 @@ New Year reflection — Light but meaningful content.
 
 ---
 
-## 𝕏 TWITTER/X
+### 𝕏 TWITTER/X
 
 ```
 2026.
@@ -1163,7 +1049,7 @@ signalpilot.io
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "The market doesn't know it's 2026"
 
@@ -1195,9 +1081,9 @@ Link in bio.
 
 ---
 
-# DAY 9 — JANUARY 2
+## DAY 9 — JANUARY 2
 
-## 📌 Theme
+### 📌 Theme
 Education Hub spotlight: **Lesson 01 — The Liquidity Lie**
 
 **Strategy:** Feature the ACTUAL first lesson. Show specific teachable content. Case study: One trader improved win rate from 34% → 68% by changing entry timing.
@@ -1206,7 +1092,7 @@ Education Hub spotlight: **Lesson 01 — The Liquidity Lie**
 
 ---
 
-## 📸 INSTAGRAM — CAROUSEL
+### 📸 INSTAGRAM — CAROUSEL
 
 **Slide 1 (Cover):**
 ```
@@ -1320,7 +1206,7 @@ education.signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -1411,7 +1297,7 @@ education.signalpilot.io
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Support just broke... again."
 
@@ -1446,23 +1332,23 @@ Link in bio — free lesson.
 
 ---
 
-## 🔗 LINKS FOR DAY 9
+### 🔗 LINKS FOR DAY 9
 - education.signalpilot.io (Lesson 01)
 - blog.signalpilot.io/articles/how-to-trade-cycles-with-pentarch (Blog article on cycles)
 - signalpilot.io/chronicle/the-sovereign (Chronicle lore)
 
 ---
 
-# DAY 10 — JANUARY 3
+## DAY 10 — JANUARY 3
 
-## 📌 Theme
+### 📌 Theme
 Trust building: Non-Repainting $100 Bounty
 
 **Strategy:** Address the #1 objection (repainting indicators) head-on.
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Image:** `chronicle/non-repainting-matters-preview.jpg`
 
@@ -1498,7 +1384,7 @@ signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -1555,7 +1441,7 @@ signalpilot.io
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Your indicator is lying to you."
 
@@ -1583,15 +1469,15 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 10
+### 🔗 LINKS FOR DAY 10
 - signalpilot.io
 - blog.signalpilot.io/articles/the-repainting-problem
 
 ---
 
-# DAY 11 — JANUARY 4
+## DAY 11 — JANUARY 4
 
-## 📌 Theme
+### 📌 Theme
 Education Hub spotlight: **Lesson 02 — Volume Doesn't Lie, But You're Reading It Wrong**
 
 **Strategy:** Feature the ACTUAL volume lesson with delta analysis, absorption, and exhaustion concepts. Case study: One trader lost $93K ignoring delta, then recovered with proper volume analysis.
@@ -1606,7 +1492,7 @@ Education Hub spotlight: **Lesson 02 — Volume Doesn't Lie, But You're Reading 
 
 ---
 
-## 📸 INSTAGRAM — CAROUSEL
+### 📸 INSTAGRAM — CAROUSEL
 
 **Slide 1 (Cover):**
 ```
@@ -1732,7 +1618,7 @@ education.signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -1832,7 +1718,7 @@ education.signalpilot.io
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Big green bar = bullish... right?"
 
@@ -1870,23 +1756,23 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 11
+### 🔗 LINKS FOR DAY 11
 - education.signalpilot.io
 - signalpilot.io/chronicle/the-prophet
 - blog.signalpilot.io/articles/accumulation-vs-distribution
 
 ---
 
-# DAY 12 — JANUARY 5
+## DAY 12 — JANUARY 5
 
-## 📌 Theme
+### 📌 Theme
 Philosophy: The Pilot's Oath deep dive
 
 **Strategy:** Reinforce identity transformation (trader → pilot).
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Image:** `chronicle/pilots-oath-preview.jpg`
 
@@ -1929,7 +1815,7 @@ signalpilot.io/chronicle/the-pilots-oath
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -2009,7 +1895,7 @@ signalpilot.io/chronicle/the-pilots-oath
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Three things that destroy accounts"
 
@@ -2037,22 +1923,22 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 12
+### 🔗 LINKS FOR DAY 12
 - signalpilot.io/chronicle/the-pilots-oath
 - signalpilot.io/chronicle
 
 ---
 
-# DAY 13 — JANUARY 6
+## DAY 13 — JANUARY 6
 
-## 📌 Theme
+### 📌 Theme
 Pentarch Deep Dive — The 5-Phase Cycle
 
 **Strategy:** Educational deep-dive on flagship indicator.
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Image:** `chronicle/sovereign-pentarch-preview.jpg`
 
@@ -2098,7 +1984,7 @@ docs.signalpilot.io/pentarch-v10
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -2186,7 +2072,7 @@ docs.signalpilot.io/pentarch-v10
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Where are you in the cycle?"
 
@@ -2212,21 +2098,21 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 13
+### 🔗 LINKS FOR DAY 13
 - docs.signalpilot.io/pentarch-v10
 - signalpilot.io/chronicle/the-sovereign
 - blog.signalpilot.io/articles/how-to-trade-cycles-with-pentarch
 
 ---
 
-# DAY 14 — JANUARY 7
+## DAY 14 — JANUARY 7
 
-## 📌 Theme
+### 📌 Theme
 Volume Oracle Deep Dive — Smart Money Detection
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Image:** `chronicle/prophet-volume-oracle-preview.jpg`
 
@@ -2267,7 +2153,7 @@ docs.signalpilot.io/volume-oracle-v10
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -2339,7 +2225,7 @@ docs.signalpilot.io/volume-oracle-v10
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "They bought before you even knew"
 
@@ -2366,21 +2252,21 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 14
+### 🔗 LINKS FOR DAY 14
 - docs.signalpilot.io/volume-oracle-v10
 - signalpilot.io/chronicle/the-prophet
 - blog.signalpilot.io/articles/how-smart-money-moves
 
 ---
 
-# DAY 15 — JANUARY 8
+## DAY 15 — JANUARY 8
 
-## 📌 Theme
+### 📌 Theme
 Janus Atlas Deep Dive — Key Level Mapping
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Image:** `chronicle/cartographer-janus-atlas-preview.jpg`
 
@@ -2420,7 +2306,7 @@ docs.signalpilot.io/janus-atlas-v10
 
 ---
 
-## 𝕏 TWITTER/X
+### 𝕏 TWITTER/X
 
 **Post 1:**
 ```
@@ -2478,7 +2364,7 @@ docs.signalpilot.io/janus-atlas-v10
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Stop drawing random lines."
 
@@ -2503,20 +2389,20 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 15
+### 🔗 LINKS FOR DAY 15
 - docs.signalpilot.io/janus-atlas-v10
 - signalpilot.io/chronicle/the-cartographer
 
 ---
 
-# DAY 16 — JANUARY 9
+## DAY 16 — JANUARY 9
 
-## 📌 Theme
+### 📌 Theme
 Plutus Flow Deep Dive — Pressure Analysis
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Image:** `chronicle/scales-plutus-flow-preview.jpg`
 
@@ -2559,7 +2445,7 @@ docs.signalpilot.io/plutus-flow-v10
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -2623,7 +2509,7 @@ docs.signalpilot.io/plutus-flow-v10
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Price is lying to you right now"
 
@@ -2652,20 +2538,20 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 16
+### 🔗 LINKS FOR DAY 16
 - docs.signalpilot.io/plutus-flow-v10
 - signalpilot.io/chronicle/the-scales
 
 ---
 
-# DAY 17 — JANUARY 10
+## DAY 17 — JANUARY 10
 
-## 📌 Theme
+### 📌 Theme
 OmniDeck Deep Dive — The 10 Unified Systems
 
 ---
 
-## 📸 INSTAGRAM — CAROUSEL
+### 📸 INSTAGRAM — CAROUSEL
 
 **Slide 1 (Cover):**
 ```
@@ -2783,7 +2669,7 @@ docs.signalpilot.io/omnideck-v10
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -2847,7 +2733,7 @@ docs.signalpilot.io/omnideck-v10
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "One indicator. Ten systems."
 
@@ -2885,20 +2771,20 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 17
+### 🔗 LINKS FOR DAY 17
 - docs.signalpilot.io/omnideck-v10
 - signalpilot.io/chronicle/the-commander
 
 ---
 
-# DAY 18 — JANUARY 11
+## DAY 18 — JANUARY 11
 
-## 📌 Theme
+### 📌 Theme
 Augury Grid Deep Dive — Multi-Market Scanning
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Image:** `chronicle/watchman-augury-grid-preview.jpg`
 
@@ -2940,7 +2826,7 @@ docs.signalpilot.io/augury-grid-v10
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -3018,7 +2904,7 @@ docs.signalpilot.io/augury-grid-v10
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "I scan 8 markets while you flip through charts"
 
@@ -3056,20 +2942,20 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 18
+### 🔗 LINKS FOR DAY 18
 - docs.signalpilot.io/augury-grid-v10
 - signalpilot.io/chronicle/the-watchman
 
 ---
 
-# DAY 19 — JANUARY 12
+## DAY 19 — JANUARY 12
 
-## 📌 Theme
+### 📌 Theme
 Harmonic Oscillator Deep Dive — The Consensus System
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Image:** `chronicle/arbiter-harmonic-oscillator-preview.jpg`
 
@@ -3116,7 +3002,7 @@ docs.signalpilot.io/harmonic-oscillator-v10
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -3213,7 +3099,7 @@ docs.signalpilot.io/harmonic-oscillator-v10
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Should you take this trade? Let's ask the council."
 
@@ -3255,15 +3141,15 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 19
+### 🔗 LINKS FOR DAY 19
 - docs.signalpilot.io/harmonic-oscillator-v10
 - signalpilot.io/chronicle/the-arbiter
 
 ---
 
-# DAY 20 — JANUARY 13
+## DAY 20 — JANUARY 13
 
-## 📌 Theme
+### 📌 Theme
 Education Hub spotlight: **Lesson 09 — Position Sizing: The Only Edge That Actually Matters**
 
 **Strategy:** Feature the ACTUAL position sizing lesson with the real formula and case study.
@@ -3277,7 +3163,7 @@ Education Hub spotlight: **Lesson 09 — Position Sizing: The Only Edge That Act
 
 ---
 
-## 📸 INSTAGRAM — CAROUSEL
+### 📸 INSTAGRAM — CAROUSEL
 
 **Slide 1 (Cover):**
 ```
@@ -3415,7 +3301,7 @@ education.signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -3511,7 +3397,7 @@ FREE at education.signalpilot.io
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "70% win rate but still losing money?"
 
@@ -3548,15 +3434,15 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 20
+### 🔗 LINKS FOR DAY 20
 - education.signalpilot.io
 - blog.signalpilot.io/articles/the-1-percent-rule
 
 ---
 
-# DAY 21 — JANUARY 14
+## DAY 21 — JANUARY 14
 
-## 📌 Theme
+### 📌 Theme
 Education Hub spotlight: **Lesson 07 — Revenge Trading: Understanding the Neuroscience**
 
 **Strategy:** Feature the ACTUAL psychology lesson. This has a powerful case study.
@@ -3571,7 +3457,7 @@ Education Hub spotlight: **Lesson 07 — Revenge Trading: Understanding the Neur
 
 ---
 
-## 📸 INSTAGRAM — CAROUSEL
+### 📸 INSTAGRAM — CAROUSEL
 
 **Slide 1 (Cover):**
 ```
@@ -3700,7 +3586,7 @@ education.signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -3789,7 +3675,7 @@ The impulsive pilot donates."
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "$340 became $23,400 in 4 trades..."
 
@@ -3829,20 +3715,20 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 21
+### 🔗 LINKS FOR DAY 21
 - education.signalpilot.io
 - signalpilot.io/chronicle/the-arbiter
 
 ---
 
-# DAY 22 — JANUARY 15
+## DAY 22 — JANUARY 15
 
-## 📌 Theme
+### 📌 Theme
 Blog Feature: How Smart Money Moves
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Caption:**
 ```
@@ -3865,7 +3751,7 @@ blog.signalpilot.io/articles/how-smart-money-moves
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -3948,7 +3834,7 @@ blog.signalpilot.io/articles/how-smart-money-moves
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "They're not smarter. They're positioned."
 
@@ -3985,14 +3871,14 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 22
+### 🔗 LINKS FOR DAY 22
 - blog.signalpilot.io/articles/how-smart-money-moves
 
 ---
 
-# DAY 23 — JANUARY 16
+## DAY 23 — JANUARY 16
 
-## 📌 Theme
+### 📌 Theme
 Education Hub spotlight: Backtesting — How to Actually Validate Your Strategy
 
 **Strategy:** Feature the ACTUAL backtesting lesson with methodology, common mistakes, and the expectancy formula.
@@ -4007,7 +3893,7 @@ Education Hub spotlight: Backtesting — How to Actually Validate Your Strategy
 
 ---
 
-## 📸 INSTAGRAM — CAROUSEL
+### 📸 INSTAGRAM — CAROUSEL
 
 **Slide 1 (Cover):**
 ```
@@ -4155,7 +4041,7 @@ education.signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -4278,7 +4164,7 @@ education.signalpilot.io
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "I have a strategy!" — but does it actually work?
 
@@ -4328,20 +4214,20 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 23
+### 🔗 LINKS FOR DAY 23
 - education.signalpilot.io
 - blog.signalpilot.io/articles/building-your-first-system
 
 ---
 
-# DAY 24 — JANUARY 17
+## DAY 24 — JANUARY 17
 
-## 📌 Theme
+### 📌 Theme
 The Hierarchy of Signals explained
 
 ---
 
-## 📸 INSTAGRAM — CAROUSEL
+### 📸 INSTAGRAM — CAROUSEL
 
 **Slide 1:** THE HIERARCHY OF SIGNALS
 
@@ -4410,19 +4296,19 @@ signalpilot.io/chronicle/the-hierarchy-of-signals
 
 ---
 
-## 🔗 LINKS FOR DAY 24
+### 🔗 LINKS FOR DAY 24
 - signalpilot.io/chronicle/the-hierarchy-of-signals
 
 ---
 
-# DAY 25 — JANUARY 18 (WEEKEND)
+## DAY 25 — JANUARY 18 (WEEKEND)
 
-## 📌 Theme
+### 📌 Theme
 Community engagement — Poll
 
 ---
 
-## 📸 INSTAGRAM STORIES
+### 📸 INSTAGRAM STORIES
 
 **Poll 1:**
 "Which indicator is your favorite so far?"
@@ -4440,7 +4326,7 @@ Community engagement — Poll
 
 ---
 
-## 𝕏 TWITTER/X
+### 𝕏 TWITTER/X
 
 ```
 Quick poll:
@@ -4457,7 +4343,7 @@ Reply below 👇
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Quick poll for traders"
 
@@ -4486,14 +4372,14 @@ Link in bio.
 
 ---
 
-# DAY 26 — JANUARY 19
+## DAY 26 — JANUARY 19
 
-## 📌 Theme
+### 📌 Theme
 Social proof / User feedback
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Caption:**
 ```
@@ -4519,7 +4405,7 @@ signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X
+### 𝕏 TWITTER/X
 
 ```
 What traders are saying about The Elite Seven:
@@ -4538,7 +4424,7 @@ signalpilot.io
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "What they're saying about The Elite Seven..."
 
@@ -4564,9 +4450,9 @@ Link in bio.
 
 ---
 
-# DAY 27 — JANUARY 20
+## DAY 27 — JANUARY 20
 
-## 📌 Theme
+### 📌 Theme
 Education Hub spotlight: Risk Management — The Complete Framework
 
 **Strategy:** Feature the ACTUAL risk management curriculum with specific rules, not generic advice.
@@ -4582,7 +4468,7 @@ Education Hub spotlight: Risk Management — The Complete Framework
 
 ---
 
-## 📸 INSTAGRAM — CAROUSEL
+### 📸 INSTAGRAM — CAROUSEL
 
 **Slide 1 (Cover):**
 ```
@@ -4722,7 +4608,7 @@ education.signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -4831,7 +4717,7 @@ education.signalpilot.io
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "7 rules that keep traders alive"
 
@@ -4868,19 +4754,19 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 27
+### 🔗 LINKS FOR DAY 27
 - education.signalpilot.io
 
 ---
 
-# DAY 28 — JANUARY 21
+## DAY 28 — JANUARY 21
 
-## 📌 Theme
+### 📌 Theme
 Behind-the-scenes / Team story
 
 ---
 
-## 📸 INSTAGRAM — FEED POST
+### 📸 INSTAGRAM — FEED POST
 
 **Image:** Team/founder image or "Origin Story" graphic
 
@@ -4923,7 +4809,7 @@ signalpilot.io
 
 ---
 
-## 📸 INSTAGRAM STORIES
+### 📸 INSTAGRAM STORIES
 
 - Frame 1: "How SignalPilot started..."
 - Frame 2: "Years of frustration with repainting indicators"
@@ -4934,7 +4820,7 @@ signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X
+### 𝕏 TWITTER/X
 
 ```
 Why we built SignalPilot:
@@ -4955,7 +4841,7 @@ This is for traders who refuse to guess anymore.
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "Why we built this..."
 
@@ -4987,14 +4873,14 @@ Link in bio.
 
 ---
 
-# DAY 29 — JANUARY 22
+## DAY 29 — JANUARY 22
 
-## 📌 Theme
+### 📌 Theme
 Feature requests / Community input
 
 ---
 
-## 📸 INSTAGRAM STORIES
+### 📸 INSTAGRAM STORIES
 
 **Poll/Question sticker:**
 "What feature would you want next?"
@@ -5009,7 +4895,7 @@ Feature requests / Community input
 
 ---
 
-## 𝕏 TWITTER/X
+### 𝕏 TWITTER/X
 
 ```
 We're always improving.
@@ -5026,7 +4912,7 @@ Reply below. We actually read these.
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "What should we build next?"
 
@@ -5051,14 +4937,14 @@ Link in bio.
 
 ---
 
-# DAY 30 — JANUARY 23 🎉
+## DAY 30 — JANUARY 23 🎉
 
-## 📌 Theme
+### 📌 Theme
 30-Day Celebration
 
 ---
 
-## 📸 INSTAGRAM
+### 📸 INSTAGRAM
 
 **Caption:**
 ```
@@ -5091,7 +4977,7 @@ signalpilot.io
 
 ---
 
-## 𝕏 TWITTER/X — THREAD
+### 𝕏 TWITTER/X — THREAD
 
 **Post 1:**
 ```
@@ -5138,7 +5024,7 @@ signalpilot.io
 
 ---
 
-## 🎬 TIKTOK
+### 🎬 TIKTOK
 
 **Hook:** "30 days. 7 indicators. One system."
 
@@ -5179,18 +5065,153 @@ Link in bio.
 
 ---
 
-## 🔗 LINKS FOR DAY 30
+### 🔗 LINKS FOR DAY 30
 - signalpilot.io
 - signalpilot.io/chronicle
 - education.signalpilot.io
 
 ---
 
-# APPENDIX F: COMPETITOR DIFFERENTIATION
+# PART 3: STRATEGY GUIDE
+
+---
+
+## OPTIMAL POSTING TIMES
+
+| Platform | Best Times (EST) | Notes |
+|----------|------------------|-------|
+| Instagram Feed | 11 AM, 2 PM, 7 PM | Tues-Thurs perform best |
+| Instagram Reels | 9 AM, 12 PM, 7 PM | Weekends get more views |
+| Instagram Stories | 7-9 AM, 12 PM, 7-9 PM | Spread throughout day |
+| Twitter/X | 8-10 AM, 12-1 PM, 5-6 PM | Weekdays only |
+| TikTok | 7 AM, 10 AM, 7 PM, 10 PM | Thurs-Sat perform best |
+
+**Consistency > Perfect timing.** Pick times you can maintain.
+
+---
+
+## ENGAGEMENT TACTICS
+
+### Carousel Posts
+- Always add "Swipe →" or "👉" in first slide or caption
+- End with "Save this for later 🔖"
+- Ask a question in caption: "Which slide hit hardest?"
+
+### Comments Strategy
+- Reply to EVERY comment in first hour
+- Pin best comment or your own follow-up
+- Ask follow-up questions to keep threads going
+
+### Stories Strategy
+- Use polls, questions, sliders daily
+- Share user DMs (with permission) as social proof
+- "Add yours" stickers for engagement
+
+### Twitter/X Strategy
+- Quote tweet your own threads 24h later
+- Reply to big trading accounts with value (not promo)
+- Use Twitter polls for engagement
+
+### TikTok Strategy
+- First 1-2 seconds = HOOK (keep them watching)
+- Ideal length: 15-45 seconds for educational
+- Reply to comments with new videos
+
+---
+
+## VIRAL CONTENT FORMATS
+
+Use these proven formats to boost reach:
+
+### "Myth Busting" Posts
+```
+❌ MYTH: "High volume = price going up"
+✅ TRUTH: Volume = activity. Delta = direction.
+
+Stop falling for this...
+```
+
+### "Before/After" Posts
+```
+6 months ago: Chasing every signal, blowing accounts
+Today: Reading cycles, waiting for consensus
+
+The difference? [education/indicators]
+```
+
+### "Unpopular Opinion" Posts
+```
+Unpopular opinion: Win rate doesn't matter.
+
+A 40% win rate with good R:R beats 70% with bad R:R.
+
+Here's the math... 🧵
+```
+
+### "Save This" Carousels
+```
+SAVE THIS → The complete position sizing formula
+
+[Carousel content]
+
+Caption: Save this. You'll need it. 🔖
+```
+
+### "Reply with X" Engagement
+```
+Reply with your biggest trading mistake.
+
+I'll tell you which lesson in our free education hub fixes it.
+```
+
+### "POV" TikToks
+```
+POV: You finally stopped guessing and started reading the cycle
+
+[Show transformation, relief, confidence]
+```
+
+---
+
+## LINK-IN-BIO STRATEGY
+
+**Recommended Tool:** Linktree, Beacons, or Stan Store
+
+**Link Order (top to bottom):**
+1. 🚀 Start Free Trial → signalpilot.io
+2. 📚 Free Education (82 Lessons) → education.signalpilot.io
+3. 📖 The Chronicle (Lore) → signalpilot.io/chronicle
+4. 📄 Documentation → docs.signalpilot.io
+5. 📝 Blog → blog.signalpilot.io
+
+**Update weekly** with current campaign focus at top.
+
+---
+
+## CONTENT REPURPOSING
+
+Every piece of content can become 5+:
+
+| Original | Repurpose To |
+|----------|--------------|
+| Twitter thread | Instagram carousel |
+| Carousel | TikTok slideshow |
+| TikTok script | Twitter thread |
+| Long caption | Multiple story frames |
+| Case study | Before/after post |
+| Lesson content | "Did you know?" posts |
+| Lore quotes | Quote graphics |
+| User feedback | Social proof posts |
+
+**1 core idea = 1 week of content across platforms**
+
+---
+
+## COMPETITOR DIFFERENTIATION
 
 Use these angles to stand out from other indicator providers:
 
-## Pain Points to Address
+### Pain Points to Address
 
 | Competitor Problem | Our Solution |
 |-------------------|--------------|
@@ -5203,7 +5224,7 @@ Use these angles to stand out from other indicator providers:
 | Signals without context | Harmonic Oscillator requires consensus |
 | No transparency | Full documentation, open about methodology |
 
-## Hooks That Differentiate
+### Hooks That Differentiate
 
 ```
 "Most indicators repaint. Ours don't. $100 if you prove otherwise."
@@ -5219,29 +5240,29 @@ Use these angles to stand out from other indicator providers:
 
 ---
 
-# APPENDIX G: BONUS CONTENT IDEAS
+## BONUS CONTENT IDEAS
 
 For days when you need extra content or want to test new formats:
 
-## Quick Wins (Low effort, high engagement)
+### Quick Wins (Low effort, high engagement)
 - Poll: "What's harder — entries or exits?"
 - Quote graphic with lore lines
 - "Throwback" to earlier post with new insight
 - Screenshot of positive DM/feedback
 
-## Medium Effort
+### Medium Effort
 - "3 mistakes I made this week" vulnerability post
 - Live chart markup with current signals
 - "How I use [indicator] in my daily routine"
 - Q&A response video/carousel
 
-## High Effort (Save for key moments)
+### High Effort (Save for key moments)
 - Full case study with entry/exit breakdown
 - Live trading session recap
 - User transformation story
 - "Day in the life" behind-the-scenes
 
-## Evergreen (Repost monthly)
+### Evergreen (Repost monthly)
 - The Pilot's Oath
 - 5-Phase Cycle explanation
 - Non-repainting explainer
@@ -5249,7 +5270,37 @@ For days when you need extra content or want to test new formats:
 
 ---
 
-# APPENDIX A: AI IMAGE PROMPTS
+## GROWTH HACKING TACTICS
+
+### Week 1-2: Foundation
+- Post consistently (1x/day minimum per platform)
+- Engage with 20+ accounts daily in trading niche
+- Respond to ALL comments within 1 hour
+
+### Week 3-4: Collaboration
+- DM 5 mid-size trading accounts for collaboration
+- Offer value first (free access, shoutout, etc.)
+- Guest content swaps
+
+### Ongoing: Engagement Loops
+- Reply to comments with questions to keep threads going
+- Create "series" content people follow (Day 1/30, etc.)
+- Pin comments that spark discussion
+
+### Viral Triggers
+- Controversy: "Unpopular opinion: RSI is useless alone"
+- Relatability: "POV: You at 2 AM"
+- Transformation: Before/After trading journey
+- FOMO: "Most traders don't know this..."
+- Authority: Stats, data, case studies
+
+---
+
+# PART 4: APPENDICES
+
+---
+
+## APPENDIX A: AI IMAGE PROMPTS
 
 For new images via Nano Banana Pro or similar:
 
@@ -5290,67 +5341,41 @@ Ten glowing symbols arranged in formation converging into single bright light at
 
 ---
 
-# APPENDIX B: HASHTAG SETS
+## APPENDIX B: HASHTAG SETS
 
-## Primary (use on all posts)
+### Primary (use on all posts)
 ```
 #tradingview #technicalanalysis #tradingstrategy #indicators #priceaction
 ```
 
-## Extended (rotate)
+### Extended (rotate)
 ```
 #cryptotrading #forex #stockmarket #smartmoney #volumeanalysis #tradingmindset #bitcoin #cryptocurrency
 ```
 
-## Niche
+### Niche
 ```
 #institutionaltrading #marketcycles #divergence #supportandresistance #nonrepainting
 ```
 
-## TikTok-specific
+### TikTok-specific
 ```
 #tradingtok #stocktok #cryptotok #forextok #daytrader #swingtrader
 ```
 
-## TikTok Trending (check weekly, add relevant ones)
+### TikTok Trending (check weekly, add relevant ones)
 ```
 #fintok #moneytok #learnontiktok #edutok #investing101 #tradingforbeginners
 ```
 
-## Instagram Reels
+### Instagram Reels
 ```
 #reelsinstagram #explorepage #viralreels #tradingcommunity #tradingtips
 ```
 
 ---
 
-# GROWTH HACKING TACTICS
-
-## Week 1-2: Foundation
-- Post consistently (1x/day minimum per platform)
-- Engage with 20+ accounts daily in trading niche
-- Respond to ALL comments within 1 hour
-
-## Week 3-4: Collaboration
-- DM 5 mid-size trading accounts for collaboration
-- Offer value first (free access, shoutout, etc.)
-- Guest content swaps
-
-## Ongoing: Engagement Loops
-- Reply to comments with questions to keep threads going
-- Create "series" content people follow (Day 1/30, etc.)
-- Pin comments that spark discussion
-
-## Viral Triggers
-- Controversy: "Unpopular opinion: RSI is useless alone"
-- Relatability: "POV: You at 2 AM"
-- Transformation: Before/After trading journey
-- FOMO: "Most traders don't know this..."
-- Authority: Stats, data, case studies
-
----
-
-# APPENDIX C: ALL LINKS
+## APPENDIX C: ALL LINKS
 
 | Destination | URL |
 |-------------|-----|
@@ -5360,7 +5385,7 @@ Ten glowing symbols arranged in formation converging into single bright light at
 | Documentation | docs.signalpilot.io |
 | Blog | blog.signalpilot.io |
 
-## Chronicle Articles
+### Chronicle Articles
 | Article | URL |
 |---------|-----|
 | The Sovereign (Pentarch) | signalpilot.io/chronicle/the-sovereign |
@@ -5373,7 +5398,7 @@ Ten glowing symbols arranged in formation converging into single bright light at
 | The Pilot's Oath | signalpilot.io/chronicle/the-pilots-oath |
 | The Hierarchy of Signals | signalpilot.io/chronicle/the-hierarchy-of-signals |
 
-## Documentation
+### Documentation
 | Indicator | URL |
 |-----------|-----|
 | Pentarch | docs.signalpilot.io/pentarch-v10 |
@@ -5384,7 +5409,7 @@ Ten glowing symbols arranged in formation converging into single bright light at
 | Augury Grid | docs.signalpilot.io/augury-grid-v10 |
 | Harmonic Oscillator | docs.signalpilot.io/harmonic-oscillator-v10 |
 
-## Blog Articles (Educational — blog.signalpilot.io)
+### Blog Articles (Educational — blog.signalpilot.io)
 | Article | URL |
 |---------|-----|
 | How to Trade Cycles with Pentarch | blog.signalpilot.io/articles/how-to-trade-cycles-with-pentarch |
@@ -5403,9 +5428,9 @@ Ten glowing symbols arranged in formation converging into single bright light at
 
 ---
 
-# APPENDIX E: COMPLIANCE NOTES
+## APPENDIX D: COMPLIANCE NOTES
 
-## Language Guidelines
+### Language Guidelines
 
 **Avoid directive language.** All content should use "potential" qualifiers.
 
@@ -5427,7 +5452,7 @@ Ten glowing symbols arranged in formation converging into single bright light at
 
 ---
 
-# APPENDIX D: IMAGE ASSETS
+## APPENDIX E: IMAGE ASSETS
 
 **Location:** `/chronicle/`
 
