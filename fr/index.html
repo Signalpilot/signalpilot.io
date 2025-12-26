@@ -6453,6 +6453,17 @@
         opacity: 0.8;
       }
 
+      /* Base chronicle image styles - ensures images always display */
+      .chronicle-img {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+      }
+
       /* Mobile responsive */
       @media (max-width: 768px) {
         .chronicle-grid {
@@ -6463,31 +6474,68 @@
           grid-template-rows: 180px auto !important;
           display: grid !important;
         }
+        /* Target the image container (2nd child, after the absolute glow div) */
         .chronicle-card.featured > div:nth-child(2) {
           min-height: unset !important;
           height: 180px !important;
           max-height: 180px !important;
           grid-row: 1 !important;
+          position: relative !important;
+          overflow: hidden !important;
         }
-        .chronicle-card.featured > div:nth-child(2) > div:last-child {
-          background: linear-gradient(to bottom, transparent 40%, rgba(5,7,13,0.9) 100%) !important;
-        }
-        .chronicle-card.featured > div:nth-child(3) {
-          padding: 1.5rem !important;
-          grid-row: 2 !important;
-        }        /* Ensure regular chronicle card images display properly */
-        .chronicle-card:not(.featured) > div:first-child {
-          height: 180px !important;
-          min-height: 180px !important;
-        }
-        .chronicle-card:not(.featured) > div:first-child > div[style*="background-image"] {
+        /* Featured card image */
+        .chronicle-card.featured > div:nth-child(2) > .chronicle-img {
           position: absolute !important;
           top: 0 !important;
           left: 0 !important;
           right: 0 !important;
           bottom: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          display: block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          z-index: 1 !important;
           background-size: cover !important;
           background-position: center !important;
+        }
+        /* Change gradient from horizontal to vertical on mobile */
+        .chronicle-card.featured > div:nth-child(2) > div:last-child {
+          background: linear-gradient(to bottom, transparent 40%, rgba(5,7,13,0.9) 100%) !important;
+          z-index: 2 !important;
+        }
+        /* Gradient overlay on regular cards */
+        .chronicle-card:not(.featured) > div:first-child > div:not(.chronicle-img) {
+          z-index: 2 !important;
+        }
+        /* Content area */
+        .chronicle-card.featured > div:nth-child(3) {
+          padding: 1.5rem !important;
+          grid-row: 2 !important;
+        }
+        /* Ensure regular chronicle card images display properly */
+        .chronicle-card:not(.featured) > div:first-child {
+          height: 180px !important;
+          min-height: 180px !important;
+          position: relative !important;
+          overflow: hidden !important;
+        }
+        .chronicle-card:not(.featured) > div:first-child > div[style*="background-image"],
+        .chronicle-img {
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          display: block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          z-index: 1 !important;
+          background-size: cover !important;
+          background-position: center !important;
+          -webkit-background-size: cover !important;
         }
 
         .chronicle-card:hover {
