@@ -891,7 +891,7 @@
         </button>
         <button class="share-btn" onclick="showEmailModal()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Get Tips
+          Get Weekly Insights
         </button>
       </div>
     </header>
@@ -905,8 +905,15 @@
       <!-- Position Size Calculator -->
       <div class="tool-card">
         <h3>📐 Position Size Calculator</h3>
-        <p class="description">Calculate exactly how many shares to buy based on your account size and risk tolerance.</p>
+        <p class="description">Calculate exactly how many shares/units to buy based on your account size and risk tolerance.</p>
         <div class="form-area">
+          <div class="form-group">
+            <label>Asset Type</label>
+            <select id="ps-asset-type">
+              <option value="shares">Stocks (shares)</option>
+              <option value="units">Crypto / Forex (units)</option>
+            </select>
+          </div>
           <div class="form-group">
             <label>Account Balance ($)</label>
             <input type="number" id="ps-balance" placeholder="10000">
@@ -1379,16 +1386,16 @@
   <!-- Email Modal -->
   <div class="modal-overlay" id="email-modal">
     <div class="modal">
-      <h3>Save Your Results</h3>
-      <p>Get a PDF with all your calculations and personalized trading tips.</p>
+      <h3>Get Weekly Insights</h3>
+      <p>Join traders getting actionable tips on risk management, position sizing, and market analysis.</p>
       <input type="email" id="email-input" placeholder="your@email.com">
       <label class="checkbox-row">
         <input type="checkbox" id="subscribe-check" checked>
-        Send me weekly trading insights
+        I agree to receive weekly trading insights
       </label>
       <div class="modal-actions">
         <button class="modal-btn cancel" onclick="hideEmailModal()">Cancel</button>
-        <button class="modal-btn submit" onclick="submitEmail()">Send PDF</button>
+        <button class="modal-btn submit" onclick="submitEmail()">Subscribe</button>
       </div>
     </div>
   </div>
@@ -1488,9 +1495,6 @@
     // Current share data
     let currentShareData = { result: '', label: '', verdict: '', verdictClass: 'good' };
 
-    // Last calculation data for PDF
-    let lastCalculation = null;
-
     function shareCalc(prefix) {
       // Get calculator-specific data
       if (prefix === 'rr') {
@@ -1531,14 +1535,11 @@
       }
       const subscribe = document.getElementById('subscribe-check').checked;
 
-      // Build payload with calculator data if available
+      // Simple payload - no calculator data for privacy
       const payload = {
         email: email,
         subscribe: subscribe ? 'Yes' : 'No',
-        source: lastCalculation ? lastCalculation.calculator : 'tools-page',
-        calculator: lastCalculation ? lastCalculation.calculator : '',
-        inputs: lastCalculation ? lastCalculation.inputs : '',
-        result: lastCalculation ? lastCalculation.result : ''
+        source: 'tools-page'
       };
 
       // Send to Make.com webhook
@@ -1606,26 +1607,37 @@
       const riskPct = parseFloat(document.getElementById('ps-risk').value);
       const entry = parseFloat(document.getElementById('ps-entry').value);
       const stop = parseFloat(document.getElementById('ps-stop').value);
+      const assetType = document.getElementById('ps-asset-type').value;
       if (!balance || !riskPct || !entry || !stop) return;
 
       const dollarRisk = balance * (riskPct / 100);
-      const riskPerShare = Math.abs(entry - stop);
-      const size = Math.floor(dollarRisk / riskPerShare);
+      const riskPerUnit = Math.abs(entry - stop);
+      const unitLabel = assetType === 'shares' ? 'shares' : 'units';
+      const riskLabel = assetType === 'shares' ? 'Risk Per Share' : 'Risk Per Unit';
+
+      // For stocks, round down to whole shares. For crypto, allow decimals
+      let size;
+      if (assetType === 'shares') {
+        size = Math.floor(dollarRisk / riskPerUnit);
+      } else {
+        size = dollarRisk / riskPerUnit;
+      }
       const value = size * entry;
 
-      document.getElementById('ps-size').textContent = size.toLocaleString() + ' shares';
+      // Format size based on asset type
+      const sizeDisplay = assetType === 'shares'
+        ? size.toLocaleString() + ' ' + unitLabel
+        : size.toFixed(6).replace(/\.?0+$/, '') + ' ' + unitLabel;
+
+      document.getElementById('ps-size').textContent = sizeDisplay;
       document.getElementById('ps-dollar-risk').textContent = '$' + fmt(dollarRisk);
-      document.getElementById('ps-risk-share').textContent = '$' + fmt(riskPerShare);
+      document.getElementById('ps-risk-share').textContent = '$' + fmt(riskPerUnit);
       document.getElementById('ps-value').textContent = '$' + fmt(value);
       document.getElementById('ps-results').classList.add('show');
       document.getElementById('ps-share').classList.add('show');
 
-      // Store for PDF
-      lastCalculation = {
-        calculator: 'Position Size',
-        inputs: `Balance: $${fmt(balance)}, Risk: ${riskPct}%, Entry: $${fmt(entry)}, Stop: $${fmt(stop)}`,
-        result: `${size.toLocaleString()} shares ($${fmt(value)} position, $${fmt(dollarRisk)} at risk)`
-      };
+      // Update the label dynamically
+      document.querySelector('#ps-results .result-row:nth-child(3) .result-label').textContent = riskLabel;
     }
 
     // Risk/Reward
@@ -1662,14 +1674,6 @@
 
       document.getElementById('rr-results').classList.add('show');
       document.getElementById('rr-share').classList.add('show');
-
-      // Store for PDF
-      const verdict = ratio >= 2 ? 'Excellent' : ratio >= 1 ? 'Acceptable' : 'Poor';
-      lastCalculation = {
-        calculator: 'Risk/Reward',
-        inputs: `Entry: $${fmt(entry)}, Stop: $${fmt(stop)}, Target: $${fmt(target)}`,
-        result: `1:${ratio.toFixed(2)} ratio (${verdict}) - Need ${minWR.toFixed(1)}% win rate`
-      };
     }
 
     // Profit/Loss
@@ -1696,13 +1700,6 @@
       document.getElementById('pl-entry-val').textContent = '$' + fmt(entryVal);
       document.getElementById('pl-exit-val').textContent = '$' + fmt(exitVal);
       document.getElementById('pl-results').classList.add('show');
-
-      // Store for PDF
-      lastCalculation = {
-        calculator: 'Profit/Loss',
-        inputs: `${type.toUpperCase()}: Entry $${fmt(entry)}, Exit $${fmt(exit)}, ${shares} shares`,
-        result: `${pl >= 0 ? '+' : ''}$${fmt(pl)} (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)`
-      };
     }
 
     // Drawdown
@@ -1727,13 +1724,6 @@
 
       document.getElementById('dd-insight').innerHTML = insight;
       document.getElementById('dd-results').classList.add('show');
-
-      // Store for PDF
-      lastCalculation = {
-        calculator: 'Drawdown Recovery',
-        inputs: `Drawdown: ${loss}%`,
-        result: `Need +${recovery.toFixed(1)}% to recover ($10k → $${fmt(after)})`
-      };
     }
 
     // Kelly
@@ -1760,13 +1750,6 @@
 
       document.getElementById('kelly-insight').innerHTML = insight;
       document.getElementById('kelly-results').classList.add('show');
-
-      // Store for PDF
-      lastCalculation = {
-        calculator: 'Kelly Criterion',
-        inputs: `Win Rate: ${(wr*100).toFixed(0)}%, Win/Loss Ratio: ${ratio}`,
-        result: `Full Kelly: ${kelly.toFixed(1)}%, Half Kelly: ${half.toFixed(1)}% (recommended)`
-      };
     }
 
     // Expectancy
@@ -1801,13 +1784,6 @@
 
       document.getElementById('exp-insight').innerHTML = insight;
       document.getElementById('exp-results').classList.add('show');
-
-      // Store for PDF
-      lastCalculation = {
-        calculator: 'Expectancy',
-        inputs: `Win Rate: ${(wr*100).toFixed(0)}%, Avg Win: $${fmt(avgWin)}, Avg Loss: $${fmt(avgLoss)}`,
-        result: `$${fmt(exp)}/trade, Profit Factor: ${pf.toFixed(2)}`
-      };
     }
 
     // Portfolio Heat
@@ -1834,14 +1810,6 @@
 
       document.getElementById('heat-insight').innerHTML = insight;
       document.getElementById('heat-results').classList.add('show');
-
-      // Store for PDF
-      const heatVerdict = heat <= 6 ? 'Safe' : heat <= 10 ? 'Elevated' : 'Dangerous';
-      lastCalculation = {
-        calculator: 'Portfolio Heat',
-        inputs: `Balance: $${fmt(balance)}, Total Risk: $${fmt(risk)}`,
-        result: `${heat.toFixed(1)}% heat (${heatVerdict})`
-      };
     }
 
     // Compound Growth
@@ -1864,13 +1832,6 @@
       document.getElementById('cg-added').textContent = '$' + fmt(totalAdded);
       document.getElementById('cg-return-pct').textContent = '+' + retPct.toFixed(1) + '%';
       document.getElementById('cg-results').classList.add('show');
-
-      // Store for PDF
-      lastCalculation = {
-        calculator: 'Compound Growth',
-        inputs: `Start: $${fmt(start)}, ${(ret*100).toFixed(0)}%/month, ${months} months, +$${fmt(add)}/mo`,
-        result: `$${fmt(bal)} final (+${retPct.toFixed(1)}% total)`
-      };
     }
 
     // Break-Even
@@ -1889,13 +1850,6 @@
       document.getElementById('be-move').textContent = '+$' + fmt(moveNeeded, 4) + ' (' + ((moveNeeded / entry) * 100).toFixed(3) + '%)';
       document.getElementById('be-costs').textContent = '-$' + fmt(totalCosts);
       document.getElementById('be-results').classList.add('show');
-
-      // Store for PDF
-      lastCalculation = {
-        calculator: 'Break-Even',
-        inputs: `Entry: $${fmt(entry)}, ${shares} shares, Comm: $${fmt(comm)}, Spread: $${fmt(spread)}`,
-        result: `Break-even at $${fmt(bePrice, 4)} (costs: $${fmt(totalCosts)})`
-      };
     }
 
     // R-Multiple
@@ -1918,14 +1872,6 @@
       else verdictEl.innerHTML = '<span class="verdict bad">Exceeded Risk</span>';
 
       document.getElementById('rm-results').classList.add('show');
-
-      // Store for PDF
-      const rmVerdict = r >= 3 ? 'Home Run' : r >= 2 ? 'Solid Win' : r >= 0 ? 'Small Win' : r >= -1 ? 'Controlled Loss' : 'Exceeded Risk';
-      lastCalculation = {
-        calculator: 'R-Multiple',
-        inputs: `Initial Risk: $${fmt(risk)}, P&L: $${fmt(pnl)}`,
-        result: `${r >= 0 ? '+' : ''}${r.toFixed(2)}R (${rmVerdict})`
-      };
     }
 
     // Enter key triggers calc
