@@ -889,6 +889,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
           Copy Link
         </button>
+        <button class="share-btn" onclick="showEmailModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Get Tips
+        </button>
       </div>
     </header>
 
@@ -1484,6 +1488,9 @@
     // Current share data
     let currentShareData = { result: '', label: '', verdict: '', verdictClass: 'good' };
 
+    // Last calculation data for PDF
+    let lastCalculation = null;
+
     function shareCalc(prefix) {
       // Get calculator-specific data
       if (prefix === 'rr') {
@@ -1524,15 +1531,21 @@
       }
       const subscribe = document.getElementById('subscribe-check').checked;
 
+      // Build payload with calculator data if available
+      const payload = {
+        email: email,
+        subscribe: subscribe ? 'Yes' : 'No',
+        source: lastCalculation ? lastCalculation.calculator : 'tools-page',
+        calculator: lastCalculation ? lastCalculation.calculator : '',
+        inputs: lastCalculation ? lastCalculation.inputs : '',
+        result: lastCalculation ? lastCalculation.result : ''
+      };
+
       // Send to Make.com webhook
       fetch('https://hook.eu1.make.com/gkq7a53rcd51ok5ufsb9lgo3fo05f4i4', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          subscribe: subscribe ? 'Yes' : 'No',
-          source: 'tools-page'
-        })
+        body: JSON.stringify(payload)
       }).catch(err => console.log('Webhook error:', err));
 
       hideEmailModal();
@@ -1606,6 +1619,13 @@
       document.getElementById('ps-value').textContent = '$' + fmt(value);
       document.getElementById('ps-results').classList.add('show');
       document.getElementById('ps-share').classList.add('show');
+
+      // Store for PDF
+      lastCalculation = {
+        calculator: 'Position Size',
+        inputs: `Balance: $${fmt(balance)}, Risk: ${riskPct}%, Entry: $${fmt(entry)}, Stop: $${fmt(stop)}`,
+        result: `${size.toLocaleString()} shares ($${fmt(value)} position, $${fmt(dollarRisk)} at risk)`
+      };
     }
 
     // Risk/Reward
@@ -1642,6 +1662,14 @@
 
       document.getElementById('rr-results').classList.add('show');
       document.getElementById('rr-share').classList.add('show');
+
+      // Store for PDF
+      const verdict = ratio >= 2 ? 'Excellent' : ratio >= 1 ? 'Acceptable' : 'Poor';
+      lastCalculation = {
+        calculator: 'Risk/Reward',
+        inputs: `Entry: $${fmt(entry)}, Stop: $${fmt(stop)}, Target: $${fmt(target)}`,
+        result: `1:${ratio.toFixed(2)} ratio (${verdict}) - Need ${minWR.toFixed(1)}% win rate`
+      };
     }
 
     // Profit/Loss
@@ -1668,6 +1696,13 @@
       document.getElementById('pl-entry-val').textContent = '$' + fmt(entryVal);
       document.getElementById('pl-exit-val').textContent = '$' + fmt(exitVal);
       document.getElementById('pl-results').classList.add('show');
+
+      // Store for PDF
+      lastCalculation = {
+        calculator: 'Profit/Loss',
+        inputs: `${type.toUpperCase()}: Entry $${fmt(entry)}, Exit $${fmt(exit)}, ${shares} shares`,
+        result: `${pl >= 0 ? '+' : ''}$${fmt(pl)} (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)`
+      };
     }
 
     // Drawdown
@@ -1692,6 +1727,13 @@
 
       document.getElementById('dd-insight').innerHTML = insight;
       document.getElementById('dd-results').classList.add('show');
+
+      // Store for PDF
+      lastCalculation = {
+        calculator: 'Drawdown Recovery',
+        inputs: `Drawdown: ${loss}%`,
+        result: `Need +${recovery.toFixed(1)}% to recover ($10k → $${fmt(after)})`
+      };
     }
 
     // Kelly
@@ -1718,6 +1760,13 @@
 
       document.getElementById('kelly-insight').innerHTML = insight;
       document.getElementById('kelly-results').classList.add('show');
+
+      // Store for PDF
+      lastCalculation = {
+        calculator: 'Kelly Criterion',
+        inputs: `Win Rate: ${(wr*100).toFixed(0)}%, Win/Loss Ratio: ${ratio}`,
+        result: `Full Kelly: ${kelly.toFixed(1)}%, Half Kelly: ${half.toFixed(1)}% (recommended)`
+      };
     }
 
     // Expectancy
@@ -1752,6 +1801,13 @@
 
       document.getElementById('exp-insight').innerHTML = insight;
       document.getElementById('exp-results').classList.add('show');
+
+      // Store for PDF
+      lastCalculation = {
+        calculator: 'Expectancy',
+        inputs: `Win Rate: ${(wr*100).toFixed(0)}%, Avg Win: $${fmt(avgWin)}, Avg Loss: $${fmt(avgLoss)}`,
+        result: `$${fmt(exp)}/trade, Profit Factor: ${pf.toFixed(2)}`
+      };
     }
 
     // Portfolio Heat
@@ -1778,6 +1834,14 @@
 
       document.getElementById('heat-insight').innerHTML = insight;
       document.getElementById('heat-results').classList.add('show');
+
+      // Store for PDF
+      const heatVerdict = heat <= 6 ? 'Safe' : heat <= 10 ? 'Elevated' : 'Dangerous';
+      lastCalculation = {
+        calculator: 'Portfolio Heat',
+        inputs: `Balance: $${fmt(balance)}, Total Risk: $${fmt(risk)}`,
+        result: `${heat.toFixed(1)}% heat (${heatVerdict})`
+      };
     }
 
     // Compound Growth
@@ -1800,6 +1864,13 @@
       document.getElementById('cg-added').textContent = '$' + fmt(totalAdded);
       document.getElementById('cg-return-pct').textContent = '+' + retPct.toFixed(1) + '%';
       document.getElementById('cg-results').classList.add('show');
+
+      // Store for PDF
+      lastCalculation = {
+        calculator: 'Compound Growth',
+        inputs: `Start: $${fmt(start)}, ${(ret*100).toFixed(0)}%/month, ${months} months, +$${fmt(add)}/mo`,
+        result: `$${fmt(bal)} final (+${retPct.toFixed(1)}% total)`
+      };
     }
 
     // Break-Even
@@ -1818,6 +1889,13 @@
       document.getElementById('be-move').textContent = '+$' + fmt(moveNeeded, 4) + ' (' + ((moveNeeded / entry) * 100).toFixed(3) + '%)';
       document.getElementById('be-costs').textContent = '-$' + fmt(totalCosts);
       document.getElementById('be-results').classList.add('show');
+
+      // Store for PDF
+      lastCalculation = {
+        calculator: 'Break-Even',
+        inputs: `Entry: $${fmt(entry)}, ${shares} shares, Comm: $${fmt(comm)}, Spread: $${fmt(spread)}`,
+        result: `Break-even at $${fmt(bePrice, 4)} (costs: $${fmt(totalCosts)})`
+      };
     }
 
     // R-Multiple
@@ -1840,6 +1918,14 @@
       else verdictEl.innerHTML = '<span class="verdict bad">Exceeded Risk</span>';
 
       document.getElementById('rm-results').classList.add('show');
+
+      // Store for PDF
+      const rmVerdict = r >= 3 ? 'Home Run' : r >= 2 ? 'Solid Win' : r >= 0 ? 'Small Win' : r >= -1 ? 'Controlled Loss' : 'Exceeded Risk';
+      lastCalculation = {
+        calculator: 'R-Multiple',
+        inputs: `Initial Risk: $${fmt(risk)}, P&L: $${fmt(pnl)}`,
+        result: `${r >= 0 ? '+' : ''}${r.toFixed(2)}R (${rmVerdict})`
+      };
     }
 
     // Enter key triggers calc
