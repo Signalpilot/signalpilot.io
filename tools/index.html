@@ -1523,10 +1523,20 @@
         return;
       }
       const subscribe = document.getElementById('subscribe-check').checked;
-      // In production: send to email service (ConvertKit, Mailchimp, etc.)
-      console.log('Email:', email, 'Subscribe:', subscribe);
+
+      // Send to Make.com webhook
+      fetch('https://hook.eu1.make.com/gkq7a53rcd51ok5ufsb9lgo3fo05f4i4', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          subscribe: subscribe ? 'Yes' : 'No',
+          source: 'tools-page'
+        })
+      }).catch(err => console.log('Webhook error:', err));
+
       hideEmailModal();
-      showToast('PDF sent! Check your inbox.');
+      showToast('Thanks! Check your inbox.');
     }
 
     // Close modal on overlay click
