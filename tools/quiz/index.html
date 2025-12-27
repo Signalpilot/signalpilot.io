@@ -910,10 +910,18 @@
         showToast('Please enter a valid email');
         return;
       }
+      const subscribe = document.getElementById('subscribe-check').checked;
 
-      // In production, this would send to your email service
-      console.log('Email submitted:', email);
-      console.log('Subscribe:', document.getElementById('subscribe-check').checked);
+      // Send to Make.com webhook
+      fetch('https://hook.eu1.make.com/gkq7a53rcd51ok5ufsb9lgo3fo05f4i4', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          subscribe: subscribe ? 'Yes' : 'No',
+          source: 'quiz-' + resultType
+        })
+      }).catch(err => console.log('Webhook error:', err));
 
       hideEmailModal();
       showToast('PDF sent! Check your inbox.');
