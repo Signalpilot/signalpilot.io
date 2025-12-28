@@ -1683,7 +1683,31 @@
       font-size:1.4rem;
       flex-shrink:0;
       white-space:nowrap;
+      transition:transform 0.3s ease, filter 0.3s ease;
+      position:relative;
     }
+    .brand:hover{
+      transform:scale(1.02);
+      filter:drop-shadow(0 0 12px rgba(91,138,255,0.6)) drop-shadow(0 0 24px rgba(91,138,255,0.3));
+    }
+
+    /* ===== Nav Entrance Animations ===== */
+    @keyframes slideInLeft{
+      from{opacity:0;transform:translateX(-20px)}
+      to{opacity:1;transform:translateX(0)}
+    }
+    @keyframes fadeInUp{
+      from{opacity:0;transform:translateY(10px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .brand{animation:slideInLeft 0.5s ease forwards}
+    nav[aria-label="Main"] ul li:nth-child(1){animation:fadeInUp 0.4s ease 0.1s forwards;opacity:0}
+    nav[aria-label="Main"] ul li:nth-child(2){animation:fadeInUp 0.4s ease 0.2s forwards;opacity:0}
+    nav[aria-label="Main"] ul li:nth-child(3){animation:fadeInUp 0.4s ease 0.3s forwards;opacity:0}
+    nav[aria-label="Main"] ul li:nth-child(4){animation:fadeInUp 0.4s ease 0.4s forwards;opacity:0}
+    nav[aria-label="Main"] ul li:nth-child(5){animation:fadeInUp 0.4s ease 0.45s forwards;opacity:0}
+    .lang-dropdown,.cta-header{animation:fadeInUp 0.4s ease 0.5s forwards;opacity:0}
+    .menu-toggle{animation:fadeInUp 0.4s ease 0.5s forwards;opacity:0}
 
     /* Allow brand to shrink slightly on very constrained screens with translations */
     @media (max-width:1500px){
@@ -1716,6 +1740,23 @@
 
     nav a{display:inline-flex;padding:.5rem .9rem;border-radius:999px;color:#b7c2d9;font-weight:600;font-family:'Space Grotesk',system-ui,sans-serif;text-decoration:none;font-size:1.05rem;white-space:nowrap;min-width:0;flex-shrink:1}
 
+    nav a{position:relative;overflow:hidden}
+    nav a::after{
+      content:'';
+      position:absolute;
+      bottom:6px;
+      left:50%;
+      width:0;
+      height:2px;
+      background:linear-gradient(90deg, #5b8aff, #a855f7, #5b8aff);
+      background-size:200% 100%;
+      transition:width 0.3s ease, left 0.3s ease;
+      border-radius:2px;
+    }
+    nav a:hover::after,nav a:focus-visible::after{
+      width:calc(100% - 1.2rem);
+      left:0.6rem;
+    }
     nav a:hover,nav a:focus-visible{color:#fff;background:rgba(91,138,255,.15)}
 
     /* Resources Dropdown */
@@ -1864,7 +1905,10 @@
 
 
     #themeToggle,
-    #langToggle{flex-shrink:0;position:relative;z-index:68 !important;padding:.4rem .6rem !important;font-size:0.85rem !important;min-width:44px;display:inline-flex !important;align-items:center !important;justify-content:center !important}
+    #langToggle{flex-shrink:0;position:relative;z-index:68 !important;padding:.4rem .6rem !important;font-size:0.85rem !important;min-width:44px;display:inline-flex !important;align-items:center !important;justify-content:center !important;transition:transform 0.2s ease}
+    #themeToggle:hover,#langToggle:hover{transform:scale(1.1)}
+    @keyframes spinToggle{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    #themeToggle.spinning{animation:spinToggle 0.4s ease-out}
 
     /* Make theme and language buttons smaller on mobile */
     @media (max-width:768px){
@@ -1940,6 +1984,26 @@
       padding:.5rem .9rem !important;
       font-size:.88rem !important;
       white-space:nowrap;
+      position:relative;
+      overflow:hidden;
+      transition:box-shadow 0.3s ease;
+    }
+    .cta-header::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition:none;
+    }
+    .cta-header:hover::before{
+      left:100%;
+      transition:left 0.5s ease;
+    }
+    .cta-header:hover{
+      box-shadow:0 0 20px rgba(91,138,255,0.5), 0 0 40px rgba(91,138,255,0.3);
     }
 
     /* Adjust for longer translations - start compacting nav items earlier */
@@ -2133,6 +2197,30 @@
         font-size: 1.05rem;
         transition: all 0.2s ease;
         border-left: 3px solid transparent;
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      .mobile-nav.active .mobile-nav-links a {
+        animation: mobileSlideUp 0.3s ease forwards;
+      }
+      .mobile-nav.active .mobile-nav-links a:nth-child(1){animation-delay:0.05s}
+      .mobile-nav.active .mobile-nav-links a:nth-child(2){animation-delay:0.1s}
+      .mobile-nav.active .mobile-nav-links a:nth-child(3){animation-delay:0.15s}
+      .mobile-nav.active .mobile-nav-links a:nth-child(4){animation-delay:0.2s}
+      .mobile-nav.active .mobile-nav-links a:nth-child(5){animation-delay:0.25s}
+      .mobile-nav.active .mobile-nav-section:nth-of-type(1) a:nth-child(1){animation-delay:0.1s}
+      .mobile-nav.active .mobile-nav-section:nth-of-type(1) a:nth-child(2){animation-delay:0.15s}
+      .mobile-nav.active .mobile-nav-section:nth-of-type(1) a:nth-child(3){animation-delay:0.2s}
+      .mobile-nav.active .mobile-nav-section:nth-of-type(1) a:nth-child(4){animation-delay:0.25s}
+      .mobile-nav.active .mobile-nav-section:nth-of-type(2) a:nth-child(1){animation-delay:0.3s}
+      .mobile-nav.active .mobile-nav-section:nth-of-type(2) a:nth-child(2){animation-delay:0.35s}
+      .mobile-nav.active .mobile-nav-section:nth-of-type(2) a:nth-child(3){animation-delay:0.4s}
+      .mobile-nav.active .mobile-nav-section:nth-of-type(2) a:nth-child(4){animation-delay:0.45s}
+      .mobile-nav.active .mobile-nav-section:nth-of-type(3) a{animation-delay:0.5s}
+      @keyframes mobileSlideUp{
+        from{opacity:0;transform:translateY(15px)}
+        to{opacity:1;transform:translateY(0)}
       }
 
       .mobile-nav-links a:active {
