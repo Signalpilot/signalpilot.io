@@ -218,7 +218,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1rem;
       padding: 0.5rem 0;
       height: 100%;
       max-height: 64px;
@@ -229,8 +229,9 @@
       flex-shrink: 0;
     }
 
-    header .container > .lang-dropdown + #themeToggle {
-      margin-left: -0.8rem;
+    /* Tighten spacing between lang and theme toggles */
+    .lang-dropdown + #themeToggle {
+      margin-left: -0.5rem;
     }
 
     .brand {
@@ -325,41 +326,77 @@
 
     .nav-dropdown-menu {
       position: absolute;
-      top: 100%;
+      top: calc(100% - 4px);
       left: 0;
-      margin-top: 0.5rem;
-      background: var(--bg-elev);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      padding-top: 8px;
+      background: rgba(10, 12, 20, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
       padding: 0.5rem;
+      padding-top: calc(0.5rem + 8px);
+      margin-top: 4px;
       min-width: 200px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.2s;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
       z-index: 100;
+      backdrop-filter: blur(4px);
       list-style: none;
     }
 
+    /* Invisible hover bridge */
+    .nav-dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+
     .nav-dropdown-menu.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
+      display: flex;
+    }
+
+    /* Open dropdown on hover (desktop only) */
+    @media (min-width: 769px) {
+      .nav-dropdown:hover .nav-dropdown-menu {
+        display: flex;
+      }
+      .nav-dropdown:hover .nav-dropdown-toggle {
+        color: var(--text);
+        background: rgba(91, 138, 255, 0.15);
+      }
+      .nav-dropdown:hover .dropdown-arrow {
+        transform: rotate(180deg);
+      }
     }
 
     .nav-dropdown-menu li {
+      display: block;
       margin: 0;
     }
 
     .nav-dropdown-menu a {
-      padding: 0.6rem 1rem;
-      border-radius: 6px;
+      position: relative;
+      padding: 0.6rem 0.9rem;
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
       transition: all 0.2s;
+      white-space: nowrap;
     }
 
     .nav-dropdown-menu a:hover {
       background: rgba(91, 138, 255, 0.15);
       color: var(--text);
+    }
+
+    html[data-theme="light"] .nav-dropdown-menu {
+      background: rgba(255, 255, 255, 0.98);
+      border-color: rgba(0, 0, 0, 0.1);
     }
 
     .lang-dropdown {
@@ -720,32 +757,6 @@
       text-decoration: underline;
     }
 
-    /* Breadcrumb */
-    .breadcrumb {
-      padding: 1rem 0;
-      font-size: 0.85rem;
-      color: var(--muted-2);
-    }
-
-    .breadcrumb a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .breadcrumb a:hover {
-      color: var(--brand);
-    }
-
-    .breadcrumb span {
-      margin: 0 0.5rem;
-      opacity: 0.5;
-    }
-
-    .breadcrumb .current {
-      color: var(--text);
-    }
-
     /* Mobile Menu Toggle */
     .mobile-menu-toggle {
       display: none;
@@ -954,10 +965,6 @@
         font-size: 1rem;
       }
 
-      .breadcrumb {
-        font-size: 0.75rem;
-      }
-
       .category-nav-wrapper {
         top: 64px;
         padding: 0.75rem 0;
@@ -1139,7 +1146,7 @@
 
       <div class="lang-dropdown">
         <button id="langToggle" class="btn" type="button" aria-label="Language selection" aria-expanded="false" aria-haspopup="true">
-          <span>EN</span>
+          <img src="https://flagcdn.com/w20/us.png" width="20" height="15" alt="English" style="vertical-align:middle;border-radius:2px">
         </button>
       </div>
 
@@ -1208,17 +1215,6 @@
     <option value="hi">हिन्दी</option>
     <option value="id">Bahasa Indonesia</option>
   </select>
-
-  <!-- Breadcrumb -->
-  <div class="breadcrumb">
-    <div class="container">
-      <a href="/">Home</a>
-      <span>/</span>
-      <a href="/#resources">Resources</a>
-      <span>/</span>
-      <span class="current">FAQ Center</span>
-    </div>
-  </div>
 
   <!-- Hero -->
   <section class="hero">
@@ -1875,7 +1871,7 @@
       });
     })();
 
-    // Language Dropdown (same as roadmap.html)
+    // Language Dropdown with flags
     (function() {
       const langBtn = document.getElementById('langToggle');
       if (!langBtn) return;
@@ -1884,27 +1880,27 @@
       langMenu.className = 'lang-dropdown-menu';
 
       const languages = [
-        { code: 'en', name: 'English' },
-        { code: 'de', name: 'Deutsch' },
-        { code: 'fr', name: 'Français' },
-        { code: 'es', name: 'Español' },
-        { code: 'it', name: 'Italiano' },
-        { code: 'zh', name: '中文' },
-        { code: 'ru', name: 'Русский' },
-        { code: 'ar', name: 'العربية' },
-        { code: 'pt', name: 'Português' },
-        { code: 'tr', name: 'Türkçe' },
-        { code: 'ja', name: '日本語' },
-        { code: 'ko', name: '한국어' },
-        { code: 'vi', name: 'Tiếng Việt' },
-        { code: 'th', name: 'ไทย' },
-        { code: 'hi', name: 'हिन्दी' },
-        { code: 'id', name: 'Bahasa Indonesia' }
+        { code: 'en', name: 'English', flag: 'us' },
+        { code: 'de', name: 'Deutsch', flag: 'de' },
+        { code: 'fr', name: 'Français', flag: 'fr' },
+        { code: 'es', name: 'Español', flag: 'es' },
+        { code: 'it', name: 'Italiano', flag: 'it' },
+        { code: 'zh', name: '中文', flag: 'cn' },
+        { code: 'ru', name: 'Русский', flag: 'ru' },
+        { code: 'ar', name: 'العربية', flag: 'sa' },
+        { code: 'pt', name: 'Português', flag: 'br' },
+        { code: 'tr', name: 'Türkçe', flag: 'tr' },
+        { code: 'ja', name: '日本語', flag: 'jp' },
+        { code: 'ko', name: '한국어', flag: 'kr' },
+        { code: 'vi', name: 'Tiếng Việt', flag: 'vn' },
+        { code: 'th', name: 'ไทย', flag: 'th' },
+        { code: 'hi', name: 'हिन्दी', flag: 'in' },
+        { code: 'id', name: 'Bahasa Indonesia', flag: 'id' }
       ];
 
       languages.forEach(lang => {
         const btn = document.createElement('button');
-        btn.textContent = lang.name;
+        btn.innerHTML = '<img src="https://flagcdn.com/w20/' + lang.flag + '.png" width="20" height="15" alt="" style="vertical-align:middle;border-radius:2px;margin-right:8px">' + lang.name;
         btn.onclick = () => selectLanguage(lang);
         langMenu.appendChild(btn);
       });
