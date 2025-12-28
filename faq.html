@@ -240,6 +240,12 @@
       font-size: 1.4rem;
       flex-shrink: 0;
       white-space: nowrap;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      position: relative;
+    }
+    .brand:hover {
+      transform: scale(1.02);
+      filter: drop-shadow(0 0 12px rgba(91,138,255,0.6)) drop-shadow(0 0 24px rgba(91,138,255,0.3));
     }
 
     html[data-theme="light"] .brand {
@@ -278,8 +284,30 @@
       color: var(--text);
     }
 
-    nav a.active {
-      color: var(--brand);
+    /* Nav link underline animation */
+    nav a {
+      position: relative;
+      overflow: hidden;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #5b8aff, #a855f7, #5b8aff);
+      background-size: 200% 100%;
+      transition: width 0.3s ease, left 0.3s ease;
+      border-radius: 2px;
+    }
+    nav a:hover::after, nav a:focus-visible::after {
+      width: calc(100% - 1.2rem);
+      left: 0.6rem;
+    }
+    nav a:hover, nav a:focus-visible {
+      color: #fff;
+      background: rgba(91, 138, 255, 0.15);
     }
 
     .nav-dropdown {
@@ -991,12 +1019,32 @@
       }
     }
 
-    @media (max-width: 480px) {
-      .category-nav button {
-        padding: 0.4rem 0.6rem;
-        font-size: 0.75rem;
-      }
+    /* ===== Nav Entrance Animations ===== */
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .brand { animation: slideInLeft 0.5s ease forwards; }
+    nav ul li:nth-child(1) { animation: fadeInUp 0.4s ease 0.1s forwards; opacity: 0; }
+    nav ul li:nth-child(2) { animation: fadeInUp 0.4s ease 0.2s forwards; opacity: 0; }
+    nav ul li:nth-child(3) { animation: fadeInUp 0.4s ease 0.3s forwards; opacity: 0; }
+    nav ul li:nth-child(4) { animation: fadeInUp 0.4s ease 0.4s forwards; opacity: 0; }
+    nav ul li:nth-child(5) { animation: fadeInUp 0.4s ease 0.45s forwards; opacity: 0; }
+    .lang-dropdown { animation: fadeInUp 0.4s ease 0.5s forwards; opacity: 0; }
+    #themeToggle { animation: fadeInUp 0.4s ease 0.55s forwards; opacity: 0; }
+
+    /* Theme toggle spin animation */
+    @keyframes spinToggle {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    #themeToggle.spinning { animation: spinToggle 0.4s ease-out; }
+    #themeToggle { transition: transform 0.2s ease; }
+    #themeToggle:hover { transform: scale(1.1); }
   </style>
 
   <!-- Structured Data (Schema.org) for FAQ Rich Snippets -->
@@ -1751,71 +1799,24 @@
 
   <!-- Scripts -->
   <script>
-    // Mobile Menu
-    (function() {
-      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const mobileMenuClose = document.getElementById('mobileMenuClose');
-      const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const html = document.documentElement;
 
-      function openMobileMenu() {
-        mobileMenu.classList.add('show');
-        mobileMenuOverlay.classList.add('show');
-        mobileMenuToggle.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden';
-      }
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
-      function closeMobileMenu() {
-        mobileMenu.classList.remove('show');
-        mobileMenuOverlay.classList.remove('show');
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
-
-      if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', openMobileMenu);
-      }
-
-      if (mobileMenuClose) {
-        mobileMenuClose.addEventListener('click', closeMobileMenu);
-      }
-
-      if (mobileMenuOverlay) {
-        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-      }
-
-      // Close menu when clicking a link
-      mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
-      });
-
-      // Close on escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && mobileMenu.classList.contains('show')) {
-          closeMobileMenu();
-        }
-      });
-    })();
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-
-        const target = document.querySelector(targetId);
-        if (target) {
-          e.preventDefault();
-          const headerOffset = 140; // Account for sticky header + category nav
-          const elementPosition = target.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      });
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+      // Add spin animation
+      themeToggle.classList.add('spinning');
+      setTimeout(() => themeToggle.classList.remove('spinning'), 400);
     });
 
     // Resources Dropdown
