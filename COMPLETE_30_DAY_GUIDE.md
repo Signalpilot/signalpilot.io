@@ -521,20 +521,22 @@ Seven of Seven.
 
 HARMONIC OSCILLATOR — The Arbiter.
 
-"Four voices. One verdict. I decide when the trigger is pulled."
+"Five voices. One verdict. I decide when the trigger is pulled."
 
 The council is complete.
 
-Four oscillators convene:
-• MACD
-• RSI
-• StochRSI
-• Williams %R
+Five oscillators convene:
+• MACD — trend direction
+• RSI Triple Envelope — trend-following momentum
+• Stochastic RSI — extreme zone reversals
+• Volume Delta — buying vs selling pressure
+• Divergence Detection — price/oscillator misalignments
 
-Each votes: Bull. Bear. Neutral.
+Each votes: Bull. Bear. Neutral. Results show as X/5.
 
-★★★★ Four stars = Maximum conviction. Strike.
-★★☆☆ Split vote = Unclear. Stand aside. Let others guess.
+5/5 or 4/5 = STRONG signal. Maximum conviction. Strike.
+3/5 = Bull/Bear signal. Solid consensus.
+2/5 or less = NEUT. Stand aside. Let others guess.
 
 Signals without consensus are noise.
 False entries drain accounts through a thousand cuts.
@@ -558,11 +560,11 @@ Full lore: signalpilot.io/chronicle/the-arbiter
 ```
 SEVEN OF SEVEN: HARMONIC OSCILLATOR — The Arbiter
 
-"Four voices. One verdict."
+"Five voices. One verdict."
 
 This is the final piece.
 
-MACD + RSI + StochRSI + Williams %R convene as a council.
+MACD + RSI Triple Envelope + Stochastic RSI + Volume Delta + Divergence Detection convene as a council.
 
 Each votes: Bull | Bear | Neutral
 
@@ -571,12 +573,11 @@ The verdict determines when you pull the trigger. 🧵
 
 **Post 2:**
 ```
-The star system:
+The voting system:
 
-★★★★ = All four agree. Maximum conviction. STRIKE.
-★★★☆ = Three agree. High conviction.
-★★☆☆ = Split vote. STAND ASIDE. Let others guess.
-★☆☆☆ = Minimal consensus. Wait.
+5/5 or 4/5 = STRONG signal. Maximum conviction. STRIKE.
+3/5 = Bull/Bear signal. Solid consensus.
+2/5 or less = NEUT signal. STAND ASIDE. Let others guess.
 
 This is how you stop taking bad entries.
 ```
@@ -622,12 +623,12 @@ Seven of Seven.
 
 HARMONIC OSCILLATOR — The Arbiter.
 
-Four oscillators. One verdict.
+Five oscillators. One verdict.
 
-MACD. RSI. StochRSI. Williams %R.
+MACD. RSI Triple Envelope. Stochastic RSI. Volume Delta. Divergence Detection.
 
-All four agree? ★★★★ STRIKE.
-Split vote? ★★☆☆ Stand aside.
+5/5 agreement? STRONG signal. STRIKE.
+2/5 or less? NEUT. Stand aside.
 
 "The patient pilot survives. The impulsive pilot donates."
 
@@ -639,7 +640,7 @@ Tomorrow, they go live.
 
 Link in bio.
 
-#tradingview #oscillators #macd #rsi #technicalanalysis #tradingstrategy #consensus
+#tradingview #oscillators #technicalanalysis #tradingstrategy #consensus #harmonic
 ```
 
 ---
@@ -727,7 +728,7 @@ THE SEVEN:
 ```
 5️⃣ OMNIDECK — 10 legendary systems unified
 6️⃣ AUGURY GRID — 8-market scanner with quality scores
-7️⃣ HARMONIC OSCILLATOR — 4-oscillator consensus
+7️⃣ HARMONIC OSCILLATOR — 5-oscillator consensus
 
 All non-repainting. All audited.
 
@@ -2723,29 +2724,27 @@ More scans in bio.
 ```
 HARMONIC OSCILLATOR — The Arbiter
 
-Deep Dive: 4-Voice Consensus
+Deep Dive: 5-Voice Consensus
 
-Four oscillators convene:
-• MACD
-• RSI
-• StochRSI
-• Williams %R
+Five oscillators convene:
+• MACD — trend direction
+• RSI Triple Envelope — trend-following momentum (7/14/28 periods)
+• Stochastic RSI — extreme zone reversals
+• Volume Delta — buying vs selling pressure
+• Divergence Detection — price/oscillator misalignments
 
-Each votes: Bull | Bear | Neutral
+Each votes: Bull | Bear | Neutral. Results show as X/5.
 
-THE STAR SYSTEM:
+THE VOTING SYSTEM:
 
-★★★★ = All four agree
+5/5 or 4/5 = STRONG signal
 MAXIMUM CONVICTION. Strike.
 
-★★★☆ = Three agree
-HIGH CONVICTION. Strong signal.
+3/5 = Bull/Bear signal
+SOLID CONSENSUS. Worth attention.
 
-★★☆☆ = Split vote
+2/5 or less = NEUT signal
 UNCLEAR. Stand aside. Let others guess.
-
-★☆☆☆ = Minimal consensus
-WAIT. Patience is a weapon.
 
 The Arbiter is not your first signal.
 It is your FINAL confirmation.
@@ -2768,7 +2767,7 @@ docs.signalpilot.io/harmonic-oscillator-v10
 ```
 HARMONIC OSCILLATOR DEEP DIVE — The Arbiter
 
-"Four voices. One verdict."
+"Five voices. One verdict."
 
 You've seen the setup.
 Cycle looks good.
@@ -2784,33 +2783,31 @@ The Arbiter decides.
 
 **Post 2:**
 ```
-THE FOUR VOICES:
+THE FIVE VOICES:
 
-1. MACD — momentum direction
-2. RSI — overbought/oversold
-3. StochRSI — momentum within momentum
-4. Williams %R — price position in range
+1. MACD — trend direction via crossovers
+2. RSI Triple Envelope — trend momentum (7/14/28 periods)
+3. Stochastic RSI — extreme zone reversals
+4. Volume Delta — buying vs selling pressure
+5. Divergence Detection — price/oscillator misalignments
 
 Each votes: Bull | Bear | Neutral
 
-The Arbiter tallies the council.
+The Arbiter tallies the council. Shows X/5.
 ```
 
 **Post 3:**
 ```
-THE STAR SYSTEM:
+THE VOTING SYSTEM:
 
-★★★★ = All four agree
+5/5 or 4/5 = STRONG signal
 MAXIMUM CONVICTION. Strike.
 
-★★★☆ = Three agree
-HIGH CONVICTION. Strong signal.
+3/5 = Bull/Bear signal
+SOLID CONSENSUS. Worth attention.
 
-★★☆☆ = Split vote
-UNCLEAR. Stand aside.
-
-★☆☆☆ = Minimal consensus
-WAIT. Let others guess.
+2/5 or less = NEUT signal
+UNCLEAR. Stand aside. Let others guess.
 ```
 
 **Post 4:**
@@ -2825,8 +2822,8 @@ Most traders:
 
 Pilots:
 → Wait for consensus
-→ 4 systems agreeing
-→ Enter with conviction
+→ 5 systems voting
+→ Enter with conviction on STRONG
 → Higher probability
 ```
 
@@ -2841,7 +2838,7 @@ It's your LAST checkpoint.
 2. Volume Oracle confirms ✓
 3. Janus Atlas shows level ✓
 4. Plutus Flow confirms pressure ✓
-5. Arbiter says... ★★★★
+5. Arbiter says... 5/5 STRONG
 
 NOW you strike.
 ```
@@ -2870,11 +2867,12 @@ Should you take this trade?
 Let's ask the council.
 
 MACD says... bullish.
-RSI says... bullish.
-StochRSI says... bullish.
-Williams %R says... bullish.
+RSI Triple Envelope says... bullish.
+Stochastic RSI says... bullish.
+Volume Delta says... bullish.
+Divergence says... bullish.
 
-★★★★ Four stars. Maximum conviction.
+5/5. STRONG signal. Maximum conviction.
 
 STRIKE.
 
@@ -2883,13 +2881,14 @@ But what if:
 MACD says bullish.
 RSI says bearish.
 StochRSI says neutral.
-Williams says bullish.
+Volume Delta says bullish.
+Divergence says neutral.
 
-★★☆☆ Split vote.
+2/5. NEUT signal.
 
 STAND ASIDE. Let others guess.
 
-The Arbiter tallies the council.
+The Arbiter tallies the five voices.
 It's not your first signal.
 It's your FINAL confirmation.
 
@@ -2898,7 +2897,7 @@ The impulsive pilot donates."
 
 Link in bio.
 
-#tradingview #oscillators #consensus #macd #rsi #technicalanalysis #tradingstrategy
+#tradingview #oscillators #consensus #technicalanalysis #tradingstrategy #harmonic
 ```
 
 ---
