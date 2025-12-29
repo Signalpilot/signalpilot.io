@@ -502,38 +502,29 @@
       transition:all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Mobile starfield - hidden on desktop */
-    #starfield-mobile {
-      display: none;
-    }
-
     /* MOBILE: Simple, clean mobile setup */
     @media (max-width: 768px) {
-      /* Hide video on mobile - use static image instead */
+      /* Starfield container - ON TOP, blends with everything below */
       #starfield-container {
-        display: none !important;
-      }
-
-      /* Mobile starfield image - much better performance */
-      #starfield-mobile {
-        display: block !important;
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         width: 100vw !important;
         height: 100vh !important;
-        z-index: -1 !important;
+        z-index: 9999 !important;
         pointer-events: none !important;
-        background: url('assets/images/starfield-mobile.png') center/cover no-repeat !important;
-        background-color: #000 !important;
-        opacity: 0.7 !important;
+        overflow: visible !important;
+        mix-blend-mode: screen !important;
       }
 
-      @keyframes starfield-twinkle {
-        0%, 100% { opacity: 0.55; filter: brightness(1); }
-        25% { opacity: 0.6; filter: brightness(1.05); }
-        50% { opacity: 0.65; filter: brightness(1.1); }
-        75% { opacity: 0.58; filter: brightness(1.02); }
+      #starfield-bg {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        opacity: 0.6 !important;
       }
 
       /* Energy beam hidden on mobile for performance */
@@ -682,12 +673,23 @@
         background:transparent !important; /* Let particles show through on mobile! */
       }
 
-      /* Energy beam video - blend with starfield */
+      /* Energy beam video - show and blend with starfield */
       #energy-beam-video {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
-        mix-blend-mode: screen !important;
+        left: 50% !important;
+        top: -80px !important; /* Extend into header area */
+        transform: translateX(-50%) scaleX(-1) !important;
+        width: 100vw !important;
+        height: calc(100% + 80px) !important; /* Compensate for negative top */
+        object-fit: cover !important;
+        object-position: center 50% !important;
+        /* Remove complex mask on mobile - too expensive */
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+        -webkit-mask-composite: unset !important;
+        mask-composite: unset !important;
       }
 
       /* Disable shimmer animation on mobile - saves GPU */
@@ -3072,9 +3074,6 @@
   });
 })();
 </script>
-
-<!-- Mobile starfield image - shown only on mobile via CSS -->
-<div id="starfield-mobile" aria-hidden="true"></div>
 
 <!-- DISABLED: Replaced by starfield video -->
 <!-- <div class="bg-stars" aria-hidden="true"></div> -->
