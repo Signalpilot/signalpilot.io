@@ -62,6 +62,25 @@
       --border: rgba(30,41,59,.2);
     }
 
+    /* Category-specific colors */
+    .cat-origin { --cat-color: #f59e0b; }
+    .cat-philosophy { --cat-color: #a855f7; }
+    .cat-system { --cat-color: #3b82f6; }
+    .cat-one { --cat-color: #ef4444; }
+    .cat-two { --cat-color: #f97316; }
+    .cat-three { --cat-color: #eab308; }
+    .cat-four { --cat-color: #22c55e; }
+    .cat-five { --cat-color: #14b8a6; }
+    .cat-six { --cat-color: #6366f1; }
+    .cat-seven { --cat-color: #8b5cf6; }
+    .cat-finale { --cat-color: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .cat-trust { --cat-color: #10b981; }
+
+    /* Smooth theme transitions */
+    *, *::before, *::after {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -182,6 +201,106 @@
 
     nav a:hover { color: var(--text); }
 
+    /* Resources Dropdown */
+    .nav-dropdown { position: relative; z-index: 65; }
+
+    .nav-dropdown-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      color: var(--muted);
+      font-weight: 600;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .nav-dropdown-toggle:hover,
+    .nav-dropdown-toggle:focus-visible {
+      color: var(--text);
+      background: rgba(91, 138, 255, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .dropdown-arrow {
+      font-size: 0.7em;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-dropdown-toggle[aria-expanded="true"] .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% - 4px);
+      left: 0;
+      padding-top: 8px;
+      background: rgba(10, 12, 20, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 0.5rem;
+      padding-top: calc(0.5rem + 8px);
+      margin-top: 4px;
+      min-width: 200px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
+      z-index: 66;
+      backdrop-filter: blur(4px);
+    }
+
+    html[data-theme="light"] .nav-dropdown-menu {
+      background: rgba(255, 255, 255, 0.98);
+      border-color: rgba(30, 41, 59, 0.2);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Invisible hover bridge */
+    .nav-dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+
+    .nav-dropdown-menu.show { display: flex; }
+
+    /* Open dropdown on hover (desktop only) */
+    @media (min-width: 769px) {
+      .nav-dropdown:hover .nav-dropdown-menu { display: flex; }
+      .nav-dropdown:hover .nav-dropdown-toggle { color: var(--text); background: rgba(91, 138, 255, 0.15); }
+      .nav-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+    }
+
+    .nav-dropdown-menu li { display: block; }
+
+    .nav-dropdown-menu a {
+      position: relative;
+      padding: 0.6rem 0.9rem;
+      display: flex !important;
+      align-items: center;
+      justify-content: flex-start !important;
+      gap: 0.5rem;
+      border-radius: 8px;
+      width: 100%;
+      text-align: left !important;
+    }
+
+    .nav-dropdown-menu a:hover {
+      background: rgba(91, 138, 255, 0.15);
+    }
+
     .btn {
       background: var(--bg-soft);
       border: 1px solid var(--border);
@@ -225,7 +344,17 @@
       font-style: italic;
       line-height: 1.1;
       margin-bottom: 1rem;
-      color: var(--text);
+      background: linear-gradient(135deg, var(--text) 0%, var(--brand) 50%, var(--accent) 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient-shift 8s ease infinite;
+    }
+
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .subtitle {
@@ -234,6 +363,27 @@
       max-width: 600px;
       margin: 0 auto;
       line-height: 1.6;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .hero-divider::before,
+    .hero-divider::after {
+      content: '';
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    .hero-divider span {
+      color: var(--muted-2);
+      font-size: 1.2rem;
     }
 
     /* Articles Grid */
@@ -265,8 +415,10 @@
 
     .article-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      border-color: var(--brand);
+      box-shadow:
+        0 20px 40px rgba(0,0,0,0.3),
+        0 0 0 1px var(--cat-color, var(--brand));
+      border-color: var(--cat-color, var(--brand));
     }
 
     .article-image {
@@ -279,31 +431,60 @@
       font-size: 4rem;
       border-bottom: 1px solid var(--border);
       position: relative;
+      overflow: hidden;
+    }
+
+    .article-image-inner {
+      position: absolute;
+      inset: 0;
       background-size: cover;
       background-position: center;
+      transition: transform 0.5s ease, filter 0.5s ease;
     }
 
-    .article-image.has-bg {
-      background-blend-mode: normal;
+    .article-card:hover .article-image-inner {
+      transform: scale(1.08);
     }
 
-    .article-image.has-bg::before {
+    .article-image::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(5,7,13,0.3), rgba(5,7,13,0.7));
-      z-index: 1;
-    }
-
-    .article-image.has-bg span {
-      position: relative;
+      background: linear-gradient(
+        to bottom,
+        rgba(5,7,13,0) 0%,
+        rgba(5,7,13,0.1) 60%,
+        rgba(5,7,13,0.4) 100%
+      );
       z-index: 2;
-      opacity: 0;
-      transition: opacity 0.3s;
+      pointer-events: none;
     }
 
-    .article-card:hover .article-image.has-bg span {
-      opacity: 1;
+    html[data-theme="light"] .article-image::before {
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.1) 60%,
+        rgba(255,255,255,0.3) 100%
+      );
+    }
+
+    /* Category color accent on image */
+    .article-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--cat-color, var(--accent));
+      z-index: 3;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .article-card:hover .article-image::after {
+      transform: scaleX(1);
     }
 
     .article-content {
@@ -323,10 +504,18 @@
     }
 
     .article-category {
-      color: var(--accent);
+      color: var(--cat-color, var(--accent));
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+    }
+
+    /* Category pill styling */
+    .article-card[class*="cat-"] .article-category {
+      background: color-mix(in srgb, var(--cat-color) 15%, transparent);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid color-mix(in srgb, var(--cat-color) 30%, transparent);
     }
 
     .article-title {
@@ -373,6 +562,37 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
+      position: relative;
+      background: linear-gradient(135deg, rgba(91,138,255,.08), rgba(118,221,255,.05));
+    }
+
+    .featured-article::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, var(--brand), var(--accent), var(--brand-2));
+      border-radius: calc(var(--radius) + 2px);
+      z-index: -1;
+      opacity: 0.6;
+      animation: featured-glow 4s ease-in-out infinite alternate;
+    }
+
+    .featured-article::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      z-index: -1;
+    }
+
+    @keyframes featured-glow {
+      0% { opacity: 0.4; filter: blur(8px); }
+      100% { opacity: 0.7; filter: blur(12px); }
+    }
+
+    .featured-article:hover::before {
+      opacity: 0.9;
     }
 
     .featured-article .article-image {
@@ -389,7 +609,9 @@
     }
 
     .featured-badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       background: linear-gradient(115deg, var(--brand), var(--accent));
       color: #fff;
       font-size: 0.7rem;
@@ -399,6 +621,17 @@
       padding: 0.3rem 0.6rem;
       border-radius: 4px;
       margin-bottom: 1rem;
+      animation: badge-pulse 2s ease-in-out infinite;
+    }
+
+    .featured-badge::before {
+      content: '★';
+      font-size: 0.8rem;
+    }
+
+    @keyframes badge-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(91,138,255,0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(91,138,255,0); }
     }
 
     /* Footer */
@@ -418,6 +651,113 @@
 
     footer a:hover { text-decoration: underline; }
 
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 101;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--bg-soft);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem;
+      z-index: 99;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .mobile-nav.open {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mobile-nav > ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .mobile-nav a:hover {
+      background: var(--bg-elev);
+    }
+
+    .mobile-nav a.active {
+      color: var(--accent);
+      background: rgba(118, 221, 255, 0.1);
+    }
+
+    /* Mobile submenu */
+    .mobile-submenu { position: relative; }
+
+    .mobile-submenu-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      font-weight: 500;
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .mobile-submenu-toggle:hover {
+      background: var(--bg-elev);
+    }
+
+    .mobile-submenu-toggle .dropdown-arrow {
+      font-size: 0.7em;
+      transition: transform 0.2s ease;
+    }
+
+    .mobile-submenu-toggle[aria-expanded="true"] .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .mobile-submenu-items {
+      display: none;
+      list-style: none;
+      padding-left: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    .mobile-submenu-items.open {
+      display: block;
+    }
+
+    .mobile-submenu-items a {
+      padding: 0.6rem 1rem;
+      font-size: 0.95rem;
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
       .featured-article {
@@ -430,6 +770,8 @@
 
     @media (max-width: 768px) {
       nav ul { display: none; }
+      .mobile-menu-btn { display: block; }
+      .mobile-nav { display: block; }
       .brand { font-size: 1.2rem; }
       .hero { padding: 3rem 0 2rem; }
       h1 { font-size: 2.5rem; }
@@ -446,17 +788,54 @@
       <a href="/ja/" class="brand"><span>Signal Pilot</span></a>
       <nav>
         <ul>
-          <li><a href="/ja/#why">なぜ私たち？</a></li>
-          <li><a href="/ja/#inside">内容紹介</a></li>
-          <li><a href="/ja/chronicle/" style="color: var(--accent);">クロニクル</a></li>
-          <li><a href="/ja/#pricing">価格</a></li>
+          <li><a href="/ja/#inside">内容</a></li>
+          <li><a href="https://education.signalpilot.io/" target="_blank" rel="noopener">教育</a></li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+              リソース <span class="dropdown-arrow">▼</span>
+            </button>
+            <ul class="nav-dropdown-menu">
+              <li><a href="/ja/chronicle/" style="color: var(--accent);">クロニクル</a></li>
+              <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">ドキュメント</a></li>
+              <li><a href="https://blog.signalpilot.io/" target="_blank" rel="noopener">ブログ</a></li>
+              <li><a href="/tools/">ツール</a></li>
+              <li><a href="/ja/faq.html">FAQセンター</a></li>
+            </ul>
+          </li>
+          <li><a href="/ja/#pricing">料金</a></li>
+          <li><a href="/ja/affiliates.html">アフィリエイト</a></li>
         </ul>
       </nav>
-      <button id="themeToggle" class="btn" type="button" aria-label="テーマ切替">
-        <span id="theme-icon">☀️</span>
-      </button>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button id="themeToggle" class="btn" type="button" aria-label="テーマ切替">
+          <span id="theme-icon">☀️</span>
+        </button>
+        <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="メニューを開く">
+          <span id="menu-icon">☰</span>
+        </button>
+      </div>
     </div>
   </header>
+
+  <!-- Mobile Navigation -->
+  <nav id="mobileNav" class="mobile-nav">
+    <ul>
+      <li><a href="/ja/#inside">内容</a></li>
+      <li><a href="https://education.signalpilot.io/" target="_blank" rel="noopener">教育</a></li>
+      <li class="mobile-submenu">
+        <button class="mobile-submenu-toggle" aria-expanded="false">リソース <span class="dropdown-arrow">▼</span></button>
+        <ul class="mobile-submenu-items">
+          <li><a href="/ja/chronicle/" class="active">クロニクル</a></li>
+          <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">ドキュメント</a></li>
+          <li><a href="https://blog.signalpilot.io/" target="_blank" rel="noopener">ブログ</a></li>
+          <li><a href="/tools/">ツール</a></li>
+          <li><a href="/ja/faq.html">FAQセンター</a></li>
+        </ul>
+      </li>
+      <li><a href="/ja/#pricing">料金</a></li>
+      <li><a href="/ja/affiliates.html">アフィリエイト</a></li>
+    </ul>
+  </nav>
 
   <!-- Hero -->
   <section class="hero">
@@ -464,6 +843,9 @@
       <span class="hero-label">SignalPilotクロニクル</span>
       <h1>クロニクル</h1>
       <p class="subtitle">市場サイクル、トレード哲学、Elite Sevenインジケーターの物語に関する詳細な洞察。</p>
+      <div class="hero-divider">
+        <span>◆</span>
+      </div>
     </div>
   </section>
 
@@ -473,8 +855,10 @@
       <div class="articles-grid">
 
         <!-- Featured Article -->
-        <a href="/chronicle/birth-of-the-elite-seven" class="article-card featured-article">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/elite-seven-council.png')"><span>★</span></div>
+        <a href="/ja/chronicle/birth-of-the-elite-seven/" class="article-card featured-article cat-origin">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/elite-seven-council.png')"></div>
+          </div>
           <div class="article-content">
             <span class="featured-badge">注目記事</span>
             <div class="article-meta">
@@ -491,8 +875,10 @@
         </a>
 
         <!-- Article 2 -->
-        <a href="/chronicle/the-pilots-oath" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/pilots-oath.png')"><span>⚔</span></div>
+        <a href="/ja/chronicle/the-pilots-oath/" class="article-card cat-philosophy">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/pilots-oath.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">哲学</span>
@@ -508,8 +894,10 @@
         </a>
 
         <!-- Article 3 -->
-        <a href="/chronicle/the-hierarchy-of-signals" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/hierarchy-of-signals.png')"><span>◇</span></div>
+        <a href="/ja/chronicle/the-hierarchy-of-signals/" class="article-card cat-system">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/hierarchy-of-signals.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">システム</span>
@@ -525,8 +913,10 @@
         </a>
 
         <!-- Article 4: Meet The Sovereign -->
-        <a href="/chronicle/meet-the-sovereign" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/sovereign-pentarch.png')"><span>♔</span></div>
+        <a href="/ja/chronicle/meet-the-sovereign/" class="article-card cat-one">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/sovereign-pentarch.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">7つの1番目</span>
@@ -541,26 +931,11 @@
           </div>
         </a>
 
-        <!-- Article 5: Why Non-Repainting Matters -->
-        <a href="/chronicle/why-non-repainting-matters" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/non-repainting-matters.png')"><span>◈</span></div>
-          <div class="article-content">
-            <div class="article-meta">
-              <span class="article-category">信頼</span>
-              <span>2025年12月24日</span>
-            </div>
-            <h2 class="article-title">非リペイントが重要な理由</h2>
-            <p class="article-excerpt">信頼できるインジケーターと裏切るインジケーターの違い。すべてのElite Sevenインジケーターは非リペイント認証済み。</p>
-            <div class="article-footer">
-              <span class="article-author">Signal Pilot Labs</span>
-              <span class="read-time">6分で読める</span>
-            </div>
+        <!-- Article 5: The Prophet -->
+        <a href="/ja/chronicle/the-prophet/" class="article-card cat-two">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/prophet-volume-oracle.png')"></div>
           </div>
-        </a>
-
-        <!-- Article 6: The Prophet -->
-        <a href="/chronicle/the-prophet" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/prophet-volume-oracle.png')"><span>◎</span></div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">7つの2番目</span>
@@ -575,9 +950,11 @@
           </div>
         </a>
 
-        <!-- Article 7: The Cartographer -->
-        <a href="/chronicle/the-cartographer" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/cartographer-janus-atlas.png')"><span>◫</span></div>
+        <!-- Article 6: The Cartographer -->
+        <a href="/ja/chronicle/the-cartographer/" class="article-card cat-three">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/cartographer-janus-atlas.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">7つの3番目</span>
@@ -592,9 +969,11 @@
           </div>
         </a>
 
-        <!-- Article 8: The Scales -->
-        <a href="/chronicle/the-scales" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/scales-plutus-flow.png')"><span>⚖</span></div>
+        <!-- Article 7: The Scales -->
+        <a href="/ja/chronicle/the-scales/" class="article-card cat-four">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/scales-plutus-flow.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">7つの4番目</span>
@@ -609,9 +988,11 @@
           </div>
         </a>
 
-        <!-- Article 9: The Commander -->
-        <a href="/chronicle/the-commander" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/commander-omnideck.png')"><span>⌘</span></div>
+        <!-- Article 8: The Commander -->
+        <a href="/ja/chronicle/the-commander/" class="article-card cat-five">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/commander-omnideck.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">7つの5番目</span>
@@ -626,9 +1007,11 @@
           </div>
         </a>
 
-        <!-- Article 10: The Watchman -->
-        <a href="/chronicle/the-watchman" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/watchman-augury-grid.png')"><span>◉</span></div>
+        <!-- Article 9: The Watchman -->
+        <a href="/ja/chronicle/the-watchman/" class="article-card cat-six">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/watchman-augury-grid.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">7つの6番目</span>
@@ -643,9 +1026,11 @@
           </div>
         </a>
 
-        <!-- Article 11: The Arbiter -->
-        <a href="/chronicle/the-arbiter" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/arbiter-harmonic-oscillator.png')"><span>⬡</span></div>
+        <!-- Article 10: The Arbiter -->
+        <a href="/ja/chronicle/the-arbiter/" class="article-card cat-seven">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/arbiter-harmonic-oscillator.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">7つの7番目</span>
@@ -660,9 +1045,11 @@
           </div>
         </a>
 
-        <!-- Article 12: The Council Assembles -->
-        <a href="/chronicle/the-council-assembles" class="article-card">
-          <div class="article-image has-bg" style="background-image:url('/chronicle/council-assembles.png')"><span>⚡</span></div>
+        <!-- Article 11: The Council Assembles -->
+        <a href="/ja/chronicle/the-council-assembles/" class="article-card cat-finale">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/council-assembles.png')"></div>
+          </div>
           <div class="article-content">
             <div class="article-meta">
               <span class="article-category">フィナーレ</span>
@@ -670,6 +1057,25 @@
             </div>
             <h2 class="article-title">評議会が集結する</h2>
             <p class="article-excerpt">「各メンバーに会った。今度は彼らが一つとして働くのを見よ。」Elite Sevenが団結する時、混沌は明晰さになり、ノイズはシグナルになる。</p>
+            <div class="article-footer">
+              <span class="article-author">Signal Pilot Labs</span>
+              <span class="read-time">6分で読める</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Article 12: Why Non-Repainting Matters -->
+        <a href="/ja/chronicle/why-non-repainting-matters/" class="article-card cat-trust">
+          <div class="article-image">
+            <div class="article-image-inner" style="background-image:url('/chronicle/non-repainting-matters.png')"></div>
+          </div>
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="article-category">信頼</span>
+              <span>2025年12月24日</span>
+            </div>
+            <h2 class="article-title">非リペイントが重要な理由</h2>
+            <p class="article-excerpt">信頼できるインジケーターと裏切るインジケーターの違い。すべてのElite Sevenインジケーターは非リペイント認証済み。</p>
             <div class="article-footer">
               <span class="article-author">Signal Pilot Labs</span>
               <span class="read-time">6分で読める</span>
@@ -705,6 +1111,93 @@
       html.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
       themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const menuIcon = document.getElementById('menu-icon');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      menuIcon.textContent = isOpen ? '✕' : '☰';
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        mobileNav.classList.remove('open');
+        menuIcon.textContent = '☰';
+      }
+    });
+
+    // Close mobile menu on link click
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        menuIcon.textContent = '☰';
+      });
+    });
+
+    // Desktop Resources Dropdown
+    (function() {
+      let dropdownOpen = false;
+
+      document.addEventListener('click', function(e) {
+        const toggle = e.target.closest('.nav-dropdown-toggle');
+
+        if (toggle) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const dropdown = toggle.closest('.nav-dropdown');
+          const menu = dropdown ? dropdown.querySelector('.nav-dropdown-menu') : null;
+
+          if (menu) {
+            dropdownOpen = !dropdownOpen;
+
+            if (dropdownOpen) {
+              menu.classList.add('show');
+              toggle.setAttribute('aria-expanded', 'true');
+            } else {
+              menu.classList.remove('show');
+              toggle.setAttribute('aria-expanded', 'false');
+            }
+          }
+          return;
+        }
+
+        // Close dropdown when clicking outside
+        if (dropdownOpen && !e.target.closest('.nav-dropdown')) {
+          const menu = document.querySelector('.nav-dropdown-menu');
+          const toggle = document.querySelector('.nav-dropdown-toggle');
+
+          if (menu) menu.classList.remove('show');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          dropdownOpen = false;
+        }
+      });
+
+      // Close on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && dropdownOpen) {
+          const menu = document.querySelector('.nav-dropdown-menu');
+          const toggle = document.querySelector('.nav-dropdown-toggle');
+
+          if (menu) menu.classList.remove('show');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          dropdownOpen = false;
+        }
+      });
+    })();
+
+    // Mobile Submenu Toggle
+    document.querySelectorAll('.mobile-submenu-toggle').forEach(function(toggle) {
+      toggle.addEventListener('click', function() {
+        const submenu = this.nextElementSibling;
+        const isOpen = submenu.classList.toggle('open');
+        this.setAttribute('aria-expanded', isOpen);
+      });
     });
   </script>
 

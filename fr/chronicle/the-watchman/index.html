@@ -13,8 +13,11 @@
   <meta property="og:title" content="Le Vigilant : Augury Grid">
   <meta property="og:description" content="Pendant que vous regardez un graphique, je les regarde tous.">
   <meta property="og:url" content="https://www.signalpilot.io/fr/chronicle/the-watchman">
-  <meta property="og:image" content="https://www.signalpilot.io/preview.png">
+  <meta property="og:image" content="https://www.signalpilot.io/chronicle/watchman-augury-grid-preview.jpg">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Le Vigilant : Augury Grid">
+  <meta name="twitter:description" content="Pendant que vous regardez un graphique, je les regarde tous.">
+  <meta name="twitter:image" content="https://www.signalpilot.io/chronicle/watchman-augury-grid-preview.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Gugi&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -33,6 +36,19 @@
     .header-nav{display:flex;align-items:center;gap:1.5rem}
     .header-nav a{font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted);text-decoration:none;font-size:0.95rem;font-weight:500;transition:color 0.2s}
     .header-nav a:hover{color:var(--text)}
+    /* Resources Dropdown */
+    .nav-dropdown{position:relative;z-index:65}
+    .nav-dropdown-toggle{display:inline-flex;align-items:center;gap:0.3rem;padding:0.5rem 0.9rem;border-radius:999px;color:var(--muted);font-weight:600;font-family:'Space Grotesk',system-ui,sans-serif;background:transparent;border:none;cursor:pointer;transition:all 0.2s ease;font-size:0.95rem;white-space:nowrap}
+    .nav-dropdown-toggle:hover,.nav-dropdown-toggle:focus-visible{color:var(--text);background:rgba(91,138,255,0.15);transform:translateY(-1px)}
+    .dropdown-arrow{font-size:0.7em;transition:transform 0.2s ease}
+    .nav-dropdown-toggle[aria-expanded="true"] .dropdown-arrow{transform:rotate(180deg)}
+    .nav-dropdown-menu{position:absolute;top:calc(100% - 4px);left:0;padding-top:8px;background:rgba(10,12,20,0.98);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:0.5rem;padding-top:calc(0.5rem + 8px);margin-top:4px;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,0.4);display:none;flex-direction:column;align-items:stretch;gap:0.25rem;z-index:66;backdrop-filter:blur(4px)}
+    .nav-dropdown-menu::before{content:'';position:absolute;top:-12px;left:0;right:0;height:16px}
+    .nav-dropdown-menu.show{display:flex}
+    @media(min-width:769px){.nav-dropdown:hover .nav-dropdown-menu{display:flex}.nav-dropdown:hover .nav-dropdown-toggle{color:var(--text);background:rgba(91,138,255,0.15)}.nav-dropdown:hover .dropdown-arrow{transform:rotate(180deg)}}
+    .nav-dropdown-menu li{display:block}
+    .nav-dropdown-menu a{position:relative;padding:0.6rem 0.9rem;display:flex !important;align-items:center;justify-content:flex-start !important;gap:0.5rem;border-radius:8px;width:100%;text-align:left !important}
+    .nav-dropdown-menu a:hover{background:rgba(91,138,255,0.15)}
     .btn{background:var(--bg-soft);border:1px solid var(--border);color:var(--text);padding:0.4rem 0.7rem;border-radius:6px;cursor:pointer;font-size:1rem;transition:all 0.2s}
     .btn:hover{background:var(--bg-elev)}
     .progress-bar{position:fixed;top:64px;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--accent),var(--brand));z-index:99;transition:width 0.1s}
@@ -70,8 +86,8 @@
     strong{color:var(--text);font-weight:600}
     em{font-style:italic}
     .article-hero{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem}
-    .article-hero-image{width:100%;aspect-ratio:16/9;border-radius:var(--radius);background:linear-gradient(135deg,rgba(148,103,255,.1),rgba(244,208,63,.08));border:2px dashed rgba(148,103,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;text-align:center;gap:0.5rem}
-    .article-hero-image .icon{font-size:3rem;opacity:0.6}
+    .article-hero-image{width:100%;max-height:500px;border-radius:var(--radius);overflow:hidden}
+    .article-hero-image img{width:100%;height:100%;max-height:500px;object-fit:cover;object-position:center top}
     .share-section{max-width:720px;margin:0 auto;padding:2rem 1.5rem 4rem;border-top:1px solid var(--border)}
     .share-section h4{font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.9rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:1rem}
     .share-buttons{display:flex;gap:1rem}
@@ -88,7 +104,35 @@
     footer{padding:3rem 0;border-top:1px solid var(--border);text-align:center;font-family:'Space Grotesk',system-ui,sans-serif;color:var(--muted-2);font-size:0.9rem}
     footer a{color:var(--brand);text-decoration:none}
     footer a:hover{text-decoration:underline}
-    @media(max-width:768px){body{font-size:1.125rem}h1{font-size:2rem}.article-header{padding:3rem 1.25rem 2rem}.article-content{padding:0 1.25rem 3rem}.drop-cap::first-letter{font-size:3.5rem}.header-nav{display:none}.scanner-table{font-size:0.8rem}.scanner-table th,.scanner-table td{padding:0.5rem}}
+    /* Mobile Menu */
+    .mobile-menu-btn{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer;padding:0.5rem;z-index:101}
+    .mobile-nav{display:none;position:fixed;top:64px;left:0;right:0;background:var(--bg-soft);border-bottom:1px solid var(--border);padding:1rem;z-index:99;transform:translateY(-100%);opacity:0;transition:transform 0.3s ease,opacity 0.3s ease}
+    .mobile-nav.open{transform:translateY(0);opacity:1}
+    .mobile-nav > ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+    .mobile-nav a{display:block;padding:0.75rem 1rem;color:var(--text);text-decoration:none;font-weight:500;border-radius:8px;transition:background 0.2s}
+    .mobile-nav a:hover{background:var(--bg-elev)}
+    .mobile-nav a.active{color:var(--accent);background:rgba(118,221,255,0.1)}
+    .mobile-submenu{position:relative}
+    .mobile-submenu-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;padding:0.75rem 1rem;color:var(--text);background:transparent;border:none;font-weight:500;font-size:1rem;font-family:inherit;cursor:pointer;border-radius:8px;transition:background 0.2s}
+    .mobile-submenu-toggle:hover{background:var(--bg-elev)}
+    .mobile-submenu-toggle .dropdown-arrow{font-size:0.7em;transition:transform 0.2s ease}
+    .mobile-submenu-toggle[aria-expanded="true"] .dropdown-arrow{transform:rotate(180deg)}
+    .mobile-submenu-items{display:none;list-style:none;padding-left:1rem;margin-top:0.25rem}
+    .mobile-submenu-items.open{display:block}
+    .mobile-submenu-items a{padding:0.6rem 1rem;font-size:0.95rem}
+{body{font-size:1.125rem}h1{font-size:2rem}.article-header{padding:3rem 1.25rem 2rem}.article-content{padding:0 1.25rem 3rem}.drop-cap::first-letter{font-size:3.5rem}.header-nav{display:none}.scanner-table{font-size:0.8rem}.scanner-table th,.scanner-table td{padding:0.5rem}}
+    /* Audio Player */
+    .audio-player{max-width:720px;margin:1.5rem auto 2rem;padding:0 1.5rem}
+    .audio-player-inner{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:12px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem}
+    .audio-play-btn{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--accent));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.2s,box-shadow 0.2s}
+    .audio-play-btn:hover{transform:scale(1.05);box-shadow:0 4px 20px rgba(91,138,255,.3)}
+    .audio-play-btn svg{width:20px;height:20px;fill:#fff}
+    .audio-info{flex:1;min-width:0}
+    .audio-title{font-family:'Space Grotesk',system-ui,sans-serif;font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:0.25rem}
+    .audio-progress{display:flex;align-items:center;gap:0.75rem}
+    .audio-bar{flex:1;height:4px;background:var(--bg-elev);border-radius:2px;cursor:pointer;overflow:hidden}
+    .audio-bar-fill{height:100%;background:linear-gradient(90deg,var(--brand),var(--accent));width:0%;transition:width 0.1s}
+    .audio-time{font-family:'Space Grotesk',monospace;font-size:0.8rem;color:var(--muted);min-width:80px;text-align:right}
   </style>
 </head>
 <body>
@@ -96,15 +140,54 @@
   <header>
     <div class="container">
       <a href="/fr/" class="brand">Signal Pilot</a>
-      <div class="header-nav">
-        <a href="/fr/chronicle/">← Toutes les Chroniques</a>
-        <a href="/fr/#pricing">Obtenir l'Accès</a>
+      <nav class="header-nav">
+        <a href="/fr/#inside">Contenu</a>
+        <a href="https://education.signalpilot.io/" target="_blank" rel="noopener">Éducation</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Ressources <span class="dropdown-arrow">▼</span>
+          </button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="/fr/chronicle/" style="color:var(--accent);">Chronique</a></li>
+            <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Documentation</a></li>
+            <li><a href="https://blog.signalpilot.io/" target="_blank" rel="noopener">Blog</a></li>
+            <li><a href="/tools/">Outils</a></li>
+            <li><a href="/fr/faq.html">Centre FAQ</a></li>
+          </ul>
+        </div>
+        <a href="/fr/#pricing">Tarifs</a>
+        <a href="/fr/affiliates.html">Affiliés</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <button id="themeToggle" class="btn" type="button" aria-label="Changer le thème">
+          <span id="theme-icon">☀️</span>
+        </button>
+        <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="Basculer le menu">
+          <span id="menu-icon">☰</span>
+        </button>
       </div>
-      <button id="themeToggle" class="btn" type="button" aria-label="Changer de thème">
-        <span id="theme-icon">☀️</span>
-      </button>
     </div>
   </header>
+
+  <!-- Mobile Navigation -->
+  <nav id="mobileNav" class="mobile-nav">
+    <ul>
+      <li><a href="/fr/#inside">Contenu</a></li>
+      <li><a href="https://education.signalpilot.io/" target="_blank" rel="noopener">Éducation</a></li>
+      <li class="mobile-submenu">
+        <button class="mobile-submenu-toggle" aria-expanded="false">Ressources <span class="dropdown-arrow">▼</span></button>
+        <ul class="mobile-submenu-items">
+          <li><a href="/fr/chronicle/" class="active">Chronique</a></li>
+          <li><a href="https://docs.signalpilot.io/" target="_blank" rel="noopener">Documentation</a></li>
+          <li><a href="https://blog.signalpilot.io/" target="_blank" rel="noopener">Blog</a></li>
+          <li><a href="/tools/">Outils</a></li>
+          <li><a href="/fr/faq.html">Centre FAQ</a></li>
+        </ul>
+      </li>
+      <li><a href="/fr/#pricing">Tarifs</a></li>
+      <li><a href="/fr/affiliates.html">Affiliés</a></li>
+    </ul>
+  </nav>
 
   <div class="article-header">
     <a href="/fr/chronicle/" class="back-link">← Retour aux Chroniques</a>
@@ -120,11 +203,27 @@
     </div>
   </div>
 
+  <!-- Audio Player -->
+  <div class="audio-player">
+    <div class="audio-player-inner">
+      <button class="audio-play-btn" id="audioPlayBtn" aria-label="Lire l'audio">
+        <svg viewBox="0 0 24 24" id="playIcon"><polygon points="5,3 19,12 5,21"/></svg>
+        <svg viewBox="0 0 24 24" id="pauseIcon" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      </button>
+      <div class="audio-info">
+        <div class="audio-title">Écouter l'article</div>
+        <div class="audio-progress">
+          <div class="audio-bar" id="audioBar"><div class="audio-bar-fill" id="audioBarFill"></div></div>
+          <span class="audio-time" id="audioTime">0:00 / 0:00</span>
+        </div>
+      </div>
+    </div>
+    <audio id="articleAudio" src="/chronicle/audio/the-watchman.mp3" preload="metadata"></audio>
+  </div>
+
   <div class="article-hero">
     <div class="article-hero-image">
-      <span class="icon">👁️</span>
-      <span>Image héros : Le Vigilant</span>
-      <span style="font-size:0.75rem;opacity:0.7">watchman-augury-grid.png</span>
+      <img src="/chronicle/watchman-augury-grid.png" alt="Le Vigilant : Augury Grid" loading="lazy">
     </div>
   </div>
 
@@ -288,6 +387,14 @@
 
   <script>
     const themeToggle=document.getElementById('themeToggle'),themeIcon=document.getElementById('theme-icon'),html=document.documentElement,savedTheme=localStorage.getItem('theme')||'dark';html.setAttribute('data-theme',savedTheme);themeIcon.textContent=savedTheme==='dark'?'☀️':'🌙';themeToggle.addEventListener('click',()=>{const currentTheme=html.getAttribute('data-theme'),newTheme=currentTheme==='dark'?'light':'dark';html.setAttribute('data-theme',newTheme);localStorage.setItem('theme',newTheme);themeIcon.textContent=newTheme==='dark'?'☀️':'🌙'});const progressBar=document.getElementById('progressBar');window.addEventListener('scroll',()=>{const scrollTop=window.scrollY,docHeight=document.documentElement.scrollHeight-window.innerHeight,progress=(scrollTop/docHeight)*100;progressBar.style.width=progress+'%'});
+    // Mobile Menu Toggle
+    const mobileMenuBtn=document.getElementById('mobileMenuBtn'),mobileNav=document.getElementById('mobileNav'),menuIcon=document.getElementById('menu-icon');mobileMenuBtn.addEventListener('click',()=>{const isOpen=mobileNav.classList.toggle('open');menuIcon.textContent=isOpen?'✕':'☰';});document.addEventListener('click',(e)=>{if(!mobileNav.contains(e.target)&&!mobileMenuBtn.contains(e.target)){mobileNav.classList.remove('open');menuIcon.textContent='☰';}});mobileNav.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{mobileNav.classList.remove('open');menuIcon.textContent='☰';});});
+    // Desktop Resources Dropdown
+    (function(){let dropdownOpen=false;document.addEventListener('click',function(e){const toggle=e.target.closest('.nav-dropdown-toggle');if(toggle){e.preventDefault();e.stopPropagation();const dropdown=toggle.closest('.nav-dropdown');const menu=dropdown?dropdown.querySelector('.nav-dropdown-menu'):null;if(menu){dropdownOpen=!dropdownOpen;if(dropdownOpen){menu.classList.add('show');toggle.setAttribute('aria-expanded','true');}else{menu.classList.remove('show');toggle.setAttribute('aria-expanded','false');}}return;}if(dropdownOpen&&!e.target.closest('.nav-dropdown')){const menu=document.querySelector('.nav-dropdown-menu');const toggle=document.querySelector('.nav-dropdown-toggle');if(menu)menu.classList.remove('show');if(toggle)toggle.setAttribute('aria-expanded','false');dropdownOpen=false;}});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dropdownOpen){const menu=document.querySelector('.nav-dropdown-menu');const toggle=document.querySelector('.nav-dropdown-toggle');if(menu)menu.classList.remove('show');if(toggle)toggle.setAttribute('aria-expanded','false');dropdownOpen=false;}});})();
+    // Mobile Submenu Toggle
+    document.querySelectorAll('.mobile-submenu-toggle').forEach(function(toggle){toggle.addEventListener('click',function(){const submenu=this.nextElementSibling;const isOpen=submenu.classList.toggle('open');this.setAttribute('aria-expanded',isOpen);});});
+    // Audio Player
+    const audio=document.getElementById('articleAudio'),playBtn=document.getElementById('audioPlayBtn'),playIcon=document.getElementById('playIcon'),pauseIcon=document.getElementById('pauseIcon'),audioBar=document.getElementById('audioBar'),audioBarFill=document.getElementById('audioBarFill'),audioTime=document.getElementById('audioTime');function formatTime(s){const m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}playBtn.addEventListener('click',()=>{if(audio.paused){audio.play();playIcon.style.display='none';pauseIcon.style.display='block';}else{audio.pause();playIcon.style.display='block';pauseIcon.style.display='none';}});audio.addEventListener('timeupdate',()=>{const pct=(audio.currentTime/audio.duration)*100;audioBarFill.style.width=pct+'%';audioTime.textContent=formatTime(audio.currentTime)+' / '+formatTime(audio.duration||0);});audio.addEventListener('ended',()=>{playIcon.style.display='block';pauseIcon.style.display='none';audioBarFill.style.width='0%';});audioBar.addEventListener('click',(e)=>{const rect=audioBar.getBoundingClientRect(),pct=(e.clientX-rect.left)/rect.width;audio.currentTime=pct*audio.duration;});
   </script>
 </body>
 </html>
