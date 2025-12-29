@@ -171,25 +171,25 @@ Stop flipping through charts. Let The Watchman bring the opportunities to you.
 
 **HARMONIC OSCILLATOR — Seven of Seven**
 
-*"Four voices. One verdict. I decide when the trigger is pulled."*
+*"Five voices. One verdict. I decide when the trigger is pulled."*
 
 Every indicator can generate a signal. But signals without consensus are noise — false entries that drain accounts through a thousand cuts.
 
 The Arbiter was created to end the tyranny of false signals.
 
-Within Harmonic Oscillator, four ancient oscillators convene in constant deliberation. Each casts a vote:
+Within Harmonic Oscillator, five ancient oscillators convene in constant deliberation. Each casts a vote:
 
 - **Bull** — Momentum favors the longs.
 - **Bear** — Momentum favors the shorts.
 - **Neutral** — Abstention. Unclear conditions.
 
-When all four align, The Arbiter speaks with maximum conviction:
+When all five align, The Arbiter speaks with maximum conviction:
 
-*Four stars. Strike now.*
+*5/5 STRONG. Strike now.*
 
 When the vote splits, The Arbiter counsels patience:
 
-*Two bulls, two bears. Stand aside. Let others guess.*
+*2/5. NEUT. Stand aside. Let others guess.*
 
 The Arbiter is not the first signal. It is the *final confirmation* — the last checkpoint before capital is deployed.
 
