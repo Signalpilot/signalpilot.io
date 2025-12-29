@@ -1532,34 +1532,60 @@
 
     // Category Filter Functionality
     const categoryBtns = document.querySelectorAll('.category-btn');
+    const faqCategories = document.querySelectorAll('.faq-category');
 
-    categoryBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        const category = this.getAttribute('data-category');
+    function filterByCategory(category) {
+      // Update active button
+      categoryBtns.forEach(b => b.classList.remove('active'));
+      const activeBtn = document.querySelector(`.category-btn[data-category="${category}"]`);
+      if (activeBtn) activeBtn.classList.add('active');
 
-        // Update active button
-        categoryBtns.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-
-        // Filter items
-        if (category === 'all') {
-          faqItems.forEach(item => item.classList.remove('hidden'));
-          document.querySelectorAll('.faq-category').forEach(cat => cat.style.display = 'block');
-        } else {
-          document.querySelectorAll('.faq-category').forEach(cat => {
-            if (cat.getAttribute('data-category') === category) {
-              cat.style.display = 'block';
-            } else {
-              cat.style.display = 'none';
-            }
-          });
+      // Filter categories
+      if (category === 'all') {
+        faqItems.forEach(item => item.classList.remove('hidden'));
+        faqCategories.forEach(cat => cat.style.display = 'block');
+        // Scroll to first category
+        const firstCategory = faqCategories[0];
+        if (firstCategory) {
+          const headerOffset = 140;
+          const elementPosition = firstCategory.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
+      } else {
+        faqCategories.forEach(cat => {
+          if (cat.getAttribute('data-category') === category) {
+            cat.style.display = 'block';
+          } else {
+            cat.style.display = 'none';
+          }
+        });
+        // Scroll to the selected category
+        const targetCategory = document.getElementById(category === 'pricing' ? 'pricing-section' : category);
+        if (targetCategory) {
+          const headerOffset = 140;
+          const elementPosition = targetCategory.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }
 
-        // Clear search
-        searchInput.value = '';
+      // Clear search
+      if (searchInput) searchInput.value = '';
+    }
+
+    // Attach click handlers to all category buttons
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const category = this.getAttribute('data-category');
+        filterByCategory(category);
       });
     });
   </script>
+
+  <!-- Scroll Reveal Animations -->
+  <script src="/assets/scroll-reveal.js" defer></script>
 
 </body>
 </html>
