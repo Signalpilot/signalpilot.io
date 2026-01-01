@@ -2478,9 +2478,9 @@
     html[data-theme="light"] .card:hover{border-color:rgba(91,138,255,0.3);box-shadow:0 20px 60px rgba(91,138,255,0.15);background:linear-gradient(180deg,rgba(10,20,40,.05),rgba(10,20,40,.02))}
 
     /* Indicator card clickable cursor */
-    .card.product img{cursor:pointer;transition:opacity 0.3s ease}
+    .card.product img.indicator-screenshot{cursor:pointer;transition:transform 0.3s ease, box-shadow 0.3s ease}
 
-    .card.product img:hover{opacity:0.8}
+    .card.product img.indicator-screenshot:hover{transform:scale(1.02);box-shadow:0 8px 32px rgba(91,138,255,0.4)}
 
     /* Lightbox modal */
     .lightbox-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
@@ -2503,6 +2503,15 @@
 
       .lightbox-close{top:-15px;right:-15px;width:44px;height:44px;font-size:1.8rem}
     }
+
+    /* Larger screenshot boxes on mobile */
+    .card.product > div:first-child{max-width:100%!important;margin-bottom:1rem!important}
+    }
+
+    /* Tablet screenshot sizing */
+    @media (max-width:1024px) and (min-width:769px){
+      .card.product > div:first-child{max-width:320px!important}
+    
 
     @keyframes lightboxZoomIn{
       from{transform:scale(0.8);opacity:0}
@@ -9125,10 +9134,11 @@ if ('serviceWorker' in navigator) {
     const closeBtn = lightbox.querySelector('.lightbox-close');
 
     // Make all indicator images clickable
-    const indicatorImages = document.querySelectorAll('.card.product img');
+    const indicatorImages = document.querySelectorAll('.indicator-screenshot');
     indicatorImages.forEach(img => {
       // Only if image has actual src (not placeholder)
-      if (img.src && !img.src.includes('data:image')) {
+      if (img.src && !img.src.includes('data:image') && img.offsetParent !== null) {
+        img.style.cursor = 'pointer';
         img.addEventListener('click', () => {
           lightboxImg.src = img.src;
           lightboxImg.alt = img.alt || 'Indicator preview';
