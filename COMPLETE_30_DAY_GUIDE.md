@@ -521,22 +521,24 @@ Seven of Seven.
 
 HARMONIC OSCILLATOR — The Arbiter.
 
-"Five voices. One verdict. I decide when the trigger is pulled."
+"Seven voices. One verdict. I decide when the trigger is pulled."
 
 The council is complete.
 
-Five oscillators convene:
-• MACD — trend direction
-• RSI Triple Envelope — trend-following momentum
-• Stochastic RSI — extreme zone reversals
-• Volume Delta — buying vs selling pressure
-• Divergence Detection — price/oscillator misalignments
+Seven components convene:
+• RSI
+• Stochastic RSI
+• MACD
+• EMA Trend
+• Momentum
+• Volume
+• Divergence Zone
 
-Each votes: Bull. Bear. Neutral. Results show as X/5.
+Each votes: Bull. Bear. Neutral. Results show as X/7.
 
-5/5 or 4/5 = STRONG signal. Maximum conviction. Strike.
-3/5 = Bull/Bear signal. Solid consensus.
-2/5 or less = NEUT. Stand aside. Let others guess.
+7/7 or 6/7 = STRONG signal. Maximum conviction. Strike.
+5/7 or 4/7 = Bull/Bear signal. Solid consensus.
+3/7 or less = NEUT. Stand aside. Let others guess.
 
 Signals without consensus are noise.
 False entries drain accounts through a thousand cuts.
@@ -560,11 +562,11 @@ Full lore: signalpilot.io/chronicle/the-arbiter
 ```
 SEVEN OF SEVEN: HARMONIC OSCILLATOR — The Arbiter
 
-"Five voices. One verdict."
+"Seven voices. One verdict."
 
 This is the final piece.
 
-MACD + RSI Triple Envelope + Stochastic RSI + Volume Delta + Divergence Detection convene as a council.
+Seven components convene as a council.
 
 Each votes: Bull | Bear | Neutral
 
@@ -575,9 +577,9 @@ The verdict determines when you pull the trigger. 🧵
 ```
 The voting system:
 
-5/5 or 4/5 = STRONG signal. Maximum conviction. STRIKE.
-3/5 = Bull/Bear signal. Solid consensus.
-2/5 or less = NEUT signal. STAND ASIDE. Let others guess.
+7/7 or 6/7 = STRONG signal. Maximum conviction. STRIKE.
+5/7 or 4/7 = Bull/Bear signal. Solid consensus.
+3/7 or less = NEUT signal. STAND ASIDE. Let others guess.
 
 This is how you stop taking bad entries.
 ```
@@ -623,12 +625,12 @@ Seven of Seven.
 
 HARMONIC OSCILLATOR — The Arbiter.
 
-Five oscillators. One verdict.
+Seven components. One verdict.
 
-MACD. RSI Triple Envelope. Stochastic RSI. Volume Delta. Divergence Detection.
+RSI. Stochastic RSI. MACD. EMA Trend. Momentum. Volume. Divergence Zone.
 
-5/5 agreement? STRONG signal. STRIKE.
-2/5 or less? NEUT. Stand aside.
+7/7 agreement? STRONG signal. STRIKE.
+3/7 or less? NEUT. Stand aside.
 
 "The patient pilot survives. The impulsive pilot donates."
 
@@ -2724,26 +2726,28 @@ More scans in bio.
 ```
 HARMONIC OSCILLATOR — The Arbiter
 
-Deep Dive: 5-Voice Consensus
+Deep Dive: 7-Component Consensus
 
-Five oscillators convene:
-• MACD — trend direction
-• RSI Triple Envelope — trend-following momentum (7/14/28 periods)
-• Stochastic RSI — extreme zone reversals
-• Volume Delta — buying vs selling pressure
-• Divergence Detection — price/oscillator misalignments
+Seven components convene:
+• RSI
+• Stochastic RSI
+• MACD
+• EMA Trend
+• Momentum
+• Volume
+• Divergence Zone
 
-Each votes: Bull | Bear | Neutral. Results show as X/5.
+Each votes: Bull | Bear | Neutral. Results show as X/7.
 
 THE VOTING SYSTEM:
 
-5/5 or 4/5 = STRONG signal
+7/7 or 6/7 = STRONG signal
 MAXIMUM CONVICTION. Strike.
 
-3/5 = Bull/Bear signal
+5/7 or 4/7 = Bull/Bear signal
 SOLID CONSENSUS. Worth attention.
 
-2/5 or less = NEUT signal
+3/7 or less = NEUT signal
 UNCLEAR. Stand aside. Let others guess.
 
 The Arbiter is not your first signal.
@@ -2767,7 +2771,7 @@ docs.signalpilot.io/harmonic-oscillator-v10
 ```
 HARMONIC OSCILLATOR DEEP DIVE — The Arbiter
 
-"Five voices. One verdict."
+"Seven voices. One verdict."
 
 You've seen the setup.
 Cycle looks good.
@@ -2783,30 +2787,26 @@ The Arbiter decides.
 
 **Post 2:**
 ```
-THE FIVE VOICES:
+THE SEVEN COMPONENTS:
 
-1. MACD — trend direction via crossovers
-2. RSI Triple Envelope — trend momentum (7/14/28 periods)
-3. Stochastic RSI — extreme zone reversals
-4. Volume Delta — buying vs selling pressure
-5. Divergence Detection — price/oscillator misalignments
+RSI | Stochastic RSI | MACD | EMA Trend | Momentum | Volume | Divergence Zone
 
 Each votes: Bull | Bear | Neutral
 
-The Arbiter tallies the council. Shows X/5.
+The Arbiter tallies the council. Shows X/7.
 ```
 
 **Post 3:**
 ```
 THE VOTING SYSTEM:
 
-5/5 or 4/5 = STRONG signal
+7/7 or 6/7 = STRONG signal
 MAXIMUM CONVICTION. Strike.
 
-3/5 = Bull/Bear signal
+5/7 or 4/7 = Bull/Bear signal
 SOLID CONSENSUS. Worth attention.
 
-2/5 or less = NEUT signal
+3/7 or less = NEUT signal
 UNCLEAR. Stand aside. Let others guess.
 ```
 
@@ -2822,7 +2822,7 @@ Most traders:
 
 Pilots:
 → Wait for consensus
-→ 5 systems voting
+→ 7 components voting
 → Enter with conviction on STRONG
 → Higher probability
 ```
@@ -2838,7 +2838,7 @@ It's your LAST checkpoint.
 2. Volume Oracle confirms ✓
 3. Janus Atlas shows level ✓
 4. Plutus Flow confirms pressure ✓
-5. Arbiter says... 5/5 STRONG
+5. Arbiter says... 7/7 STRONG
 
 NOW you strike.
 ```
@@ -2866,29 +2866,33 @@ Should you take this trade?
 
 Let's ask the council.
 
-MACD says... bullish.
-RSI Triple Envelope says... bullish.
+RSI says... bullish.
 Stochastic RSI says... bullish.
-Volume Delta says... bullish.
-Divergence says... bullish.
+MACD says... bullish.
+EMA Trend says... bullish.
+Momentum says... bullish.
+Volume says... bullish.
+Divergence Zone says... bullish.
 
-5/5. STRONG signal. Maximum conviction.
+7/7. STRONG signal. Maximum conviction.
 
 STRIKE.
 
 But what if:
 
-MACD says bullish.
-RSI says bearish.
-StochRSI says neutral.
-Volume Delta says bullish.
-Divergence says neutral.
+RSI says bullish.
+Stochastic RSI says bearish.
+MACD says neutral.
+EMA Trend says bullish.
+Momentum says neutral.
+Volume says neutral.
+Divergence Zone says neutral.
 
-2/5. NEUT signal.
+3/7. NEUT signal.
 
 STAND ASIDE. Let others guess.
 
-The Arbiter tallies the five voices.
+The Arbiter tallies the seven voices.
 It's not your first signal.
 It's your FINAL confirmation.
 

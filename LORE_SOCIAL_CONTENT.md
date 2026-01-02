@@ -163,10 +163,10 @@ Seven of Seven.
 
 HARMONIC OSCILLATOR — The Arbiter.
 
-"Five voices. One verdict. I decide when the trigger is pulled."
+"Seven voices. One verdict. I decide when the trigger is pulled."
 
-Five oscillators deliberate.
-When all five align: 5/5 STRONG. Strike now.
+Seven components deliberate.
+When all seven align: 7/7 STRONG. Strike now.
 When they split: NEUT. Stand aside.
 
 The seventh lesson: The patient pilot survives.
