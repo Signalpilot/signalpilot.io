@@ -88,7 +88,7 @@ VOLUME ORACLE — The Prophet.
 
 "I hear what retail cannot. I see the giants move in darkness."
 
-While the masses watch price, The Prophet listens to institutional footsteps.
+While the masses watch price, The Prophet listens to volume footsteps.
 Accumulation before the charts confess it.
 Distribution before the candles bleed.
 
@@ -178,9 +178,9 @@ The seventh lesson: The patient pilot survives.
 
 ### Post 12 — The Cycle
 ```
-TD — Selling exhaustion. Smart money buys the fear.
+TD — Selling exhaustion. volume flow buys the fear.
 IGN — Uptrend begins. Momentum shifts.
-WRN — Hidden weakness. Smart money exits.
+WRN — Hidden weakness. volume flow exits.
 CAP — Buying exhaustion. The top is in.
 BDN — Downtrend begins. Gravity wins.
 
@@ -215,7 +215,7 @@ For years, retail asked the wrong question:
 The Prophet asks the only question that matters:
 "Where are institutions already positioned?"
 
-Follow the smart money.
+Follow the volume flow.
 Or become their exit liquidity.
 ```
 
@@ -274,15 +274,15 @@ Two of Seven.
 
 VOLUME ORACLE — The Prophet.
 
-While retail watches price, The Prophet hears institutional footsteps.
+While retail watches price, The Prophet hears volume footsteps.
 
 Accumulation — before the charts confess it.
 Distribution — before the candles bleed.
 
-Follow the smart money.
+Follow the volume flow.
 Or become their exit liquidity.
 
-#tradingview #volumeanalysis #institutionaltrading #smartmoney #technicalanalysis #tradingstrategy #crypto #forex
+#tradingview #volumeanalysis #volumetrading #smartmoney #technicalanalysis #tradingstrategy #crypto #forex
 ```
 
 ### IG Post 4 — The Oath
@@ -348,7 +348,7 @@ Two of Seven — The Prophet
 
 "I hear what retail cannot."
 
-Detects institutional accumulation
+Detects volume accumulation
 and distribution before price moves.
 ```
 
@@ -442,7 +442,7 @@ PHASE 1: ACCUMULATION
 Signal: TD (Touchdown)
 
 Selling exhaustion.
-Smart money buys the fear.
+volume flow buys the fear.
 Retail is panicking.
 ```
 
@@ -462,7 +462,7 @@ PHASE 3: DISTRIBUTION
 Signal: WRN (Warning)
 
 Price rising, but weakness builds.
-Smart money exits into strength.
+volume flow exits into strength.
 Retail is euphoric.
 ```
 
