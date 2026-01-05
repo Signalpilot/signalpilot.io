@@ -403,7 +403,7 @@ Seven of Seven — The Arbiter
 
 "I decide when to strike."
 
-4 oscillators vote.
+7 oscillators vote.
 Consensus = confirmation.
 ```
 
