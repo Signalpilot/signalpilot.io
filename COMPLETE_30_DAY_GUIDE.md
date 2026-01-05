@@ -223,7 +223,7 @@ While you're drawing hundreds of support lines hoping one holds...
 
 The Cartographer reveals only the lines that matter.
 
-60+ institutional levels. Auto-plotted.
+60+ volume levels. Auto-plotted.
 
 Stop drawing. Start navigating.
 
@@ -289,7 +289,7 @@ The Commander unified ten legendary systems:
 2. Squeeze Cloud — breakouts
 3. SuperTrend Ensemble — direction
 4. Bull Market Support Band — structure
-5. Supply & Demand Zones — institutional footprints
+5. Supply & Demand Zones — volume footprints
 6. Candlestick Patterns — price action truth
 7. Liquidity Sweeps — trap detection
 8. Regime Classification — market state
@@ -677,7 +677,7 @@ Zero repainting.
 THE ELITE SEVEN ARE LIVE.
 
 🔥 Pentarch — The Sovereign (cycle detection)
-🔥 Volume Oracle — The Prophet (institutional flow)
+🔥 Volume Oracle — The Prophet (volume flow)
 🔥 Janus Atlas — The Cartographer (key levels)
 🔥 Plutus Flow — The Scales (pressure analysis)
 🔥 OmniDeck — The Commander (10 systems unified)
@@ -721,7 +721,7 @@ signalpilot.io
 THE SEVEN:
 
 1️⃣ PENTARCH — Cycle detection (TD→IGN→WRN→CAP→BDN)
-2️⃣ VOLUME ORACLE — Institutional flow detection
+2️⃣ VOLUME ORACLE — volume flow detection
 3️⃣ JANUS ATLAS — 60+ auto-plotted key levels
 4️⃣ PLUTUS FLOW — Cumulative pressure analysis
 ```
@@ -818,7 +818,7 @@ The Elite Seven are LIVE.
 Seven indicators. One unified system.
 
 Pentarch — reads market cycles
-Volume Oracle — hears smart money
+Volume Oracle — hears volume flow
 Janus Atlas — maps key levels
 Plutus Flow — reveals true pressure
 OmniDeck — unifies 10 systems
@@ -1168,7 +1168,7 @@ THE SWEEP PATTERN:
 4. Price reverses sharply
 5. Real move begins
 
-You're already out. Smart money is in.
+You're already out. volume flow is in.
 ```
 
 **Post 5:**
@@ -1681,7 +1681,7 @@ Link in bio.
 **Poll 1:**
 "Which indicator are you most excited about?"
 - Pentarch (cycles)
-- Volume Oracle (smart money)
+- Volume Oracle (volume flow)
 - OmniDeck (all-in-one)
 - Harmonic Oscillator (consensus)
 
@@ -1781,7 +1781,7 @@ Every market. Every asset. Every timeframe.
 The same 5 phases repeat:
 
 📍 TD (Touchdown)
-Selling exhaustion. Smart money enters.
+Selling exhaustion. volume flow enters.
 The bottom is forming.
 
 📍 IGN (Ignition)
@@ -1790,7 +1790,7 @@ The uptrend has started.
 
 📍 WRN (Warning)
 Hidden weakness. Distribution begins.
-Smart money exits into strength.
+volume flow exits into strength.
 
 📍 CAP (Climax)
 Buying exhaustion. Euphoria peaks.
@@ -1837,7 +1837,7 @@ What it looks like: "Dead" price action, low volatility
 What to do: Watch for reversal confirmation
 What NOT to do: Short into exhaustion
 
-This is where smart money buys fear.
+This is where volume flow buys fear.
 ```
 
 **Post 3:**
@@ -1861,7 +1861,7 @@ What it looks like: Price may still rise, but strength is fading
 What to do: Tighten stops, reduce size, take profits
 What NOT to do: Add to positions aggressively
 
-Hidden weakness. Smart money exiting.
+Hidden weakness. volume flow exiting.
 ```
 
 **Post 5:**
@@ -1931,7 +1931,7 @@ Link in bio.
 
 # DAY 14 — JAN 7
 
-## Theme: Chart Breakdown — Smart Money in Action
+## Theme: Chart Breakdown — volume flow in Action
 
 ### IMAGE: Actual chart screenshot with Volume Oracle signals marked
 **BUILD:** Take real chart, mark the ACCUMULATION signal, show the result
@@ -1944,13 +1944,13 @@ Link in bio.
 **Slide 2:** Same chart 3 days later — price exploded +12%
 **Slide 3:** Zoom in on the Volume Oracle reading at signal time
 **Slide 4:** "Retail saw: boring sideways price action"
-**Slide 5:** "Volume Oracle saw: Smart money loading"
+**Slide 5:** "Volume Oracle saw: volume flow loading"
 **Slide 6:** "Result: +12% move within 72 hours"
 **Slide 7:** "The Prophet sees what retail can't"
 
 **Caption:**
 ```
-CHART BREAKDOWN: Smart Money in Action
+CHART BREAKDOWN: volume flow in Action
 
 📅 Signal: January 4th
 📊 Volume Oracle: "ACCUMULATION 84%"
@@ -1960,7 +1960,7 @@ Here's exactly what happened:
 
 Slide 1 → Price looked dead. Retail was bored.
 Slide 2 → Volume Oracle flashed ACCUMULATION 84%
-Slide 3 → Smart money was quietly loading
+Slide 3 → volume flow was quietly loading
 Slide 4 → 72 hours later: price exploded
 
 The second lesson:
@@ -1973,7 +1973,7 @@ Want to see more breakdowns like this? Save this post and follow for daily proof
 Full documentation:
 docs.signalpilot.io/volume-oracle-v10
 
-#tradingview #volumeoracle #smartmoney #institutionaltrading #technicalanalysis #tradingproof #chartanalysis
+#tradingview #volumeoracle #smartmoney #volumetrading #technicalanalysis #tradingproof #chartanalysis
 ```
 
 ---
@@ -1982,7 +1982,7 @@ docs.signalpilot.io/volume-oracle-v10
 
 **Post 1:**
 ```
-CHART BREAKDOWN: Smart Money Caught Live
+CHART BREAKDOWN: volume flow Caught Live
 
 📅 January 4th
 📊 Volume Oracle: ACCUMULATION 84%
@@ -2007,7 +2007,7 @@ Wrong.
 
 Volume Oracle flashed: "ACCUMULATION 84%"
 
-Smart money was quietly loading while everyone else was asleep.
+volume flow was quietly loading while everyone else was asleep.
 
 [Screenshot of chart with signal]
 ```
@@ -2033,7 +2033,7 @@ This is why I say:
 "Price is the last to know. Volume knows first."
 
 → Retail watches candles
-→ Smart money moves volume
+→ volume flow moves volume
 → Volume Oracle detects the imbalance
 → You get positioned BEFORE the move
 
@@ -2058,10 +2058,10 @@ docs.signalpilot.io/volume-oracle-v10
 ### TIKTOK
 
 **IMAGE:** Screen recording of actual chart with Volume Oracle
-**Hook:** "I caught smart money loading. Here's the proof."
+**Hook:** "I caught volume flow loading. Here's the proof."
 
 ```
-I caught smart money loading.
+I caught volume flow loading.
 
 Here's the proof.
 
@@ -2077,7 +2077,7 @@ Plus 12%.
 "Why didn't I see that coming?"
 
 Because you were watching price.
-Smart money was moving volume.
+volume flow was moving volume.
 
 Price is the last to know.
 
@@ -2104,7 +2104,7 @@ More proof in bio.
 ```
 JANUS ATLAS — The Cartographer
 
-Deep Dive: Institutional Level Mapping
+Deep Dive: volume Level Mapping
 
 Named after the two-faced god who sees past and future.
 
@@ -2403,7 +2403,7 @@ More proof in bio.
 **Slide 3:** 2. SQUEEZE CLOUD — Breakout preparation
 **Slide 4:** 3. SUPERTREND ENSEMBLE — Direction confirmation
 **Slide 5:** 4. BULL MARKET SUPPORT BAND — Structure identification
-**Slide 6:** 5. SUPPLY & DEMAND ZONES — Institutional footprints
+**Slide 6:** 5. SUPPLY & DEMAND ZONES — volume footprints
 **Slide 7:** 6. CANDLESTICK PATTERNS — Price action truth
 **Slide 8:** 7. LIQUIDITY SWEEPS — Trap detection
 **Slide 9:** 8. REGIME CLASSIFICATION — Market state
@@ -2466,7 +2466,7 @@ THE FIRST 5 SYSTEMS:
 2. Squeeze Cloud → breakout preparation
 3. SuperTrend Ensemble → direction confirmation
 4. Bull Market Support Band → structure ID
-5. Supply & Demand Zones → institutional footprints
+5. Supply & Demand Zones → volume footprints
 ```
 
 **Post 3:**
@@ -3118,7 +3118,7 @@ YOUR WINS. YOUR CHARTS.
 
 This week's #SignalPilotWins spotlight 🏆
 
-@user1 — Caught smart money loading with Volume Oracle
+@user1 — Caught volume flow loading with Volume Oracle
 @user2 — Nailed the cycle turn with Pentarch
 @user3 — Found the level with Janus Atlas
 
@@ -3163,7 +3163,7 @@ Let's celebrate 👇
 ```
 First up: @user1
 
-Caught smart money accumulating with Volume Oracle.
+Caught volume flow accumulating with Volume Oracle.
 82% reading. Entered. Held.
 Result: Rode the wave.
 
@@ -3224,7 +3224,7 @@ These aren't my charts.
 
 They're yours.
 
-@user1 caught smart money loading.
+@user1 caught volume flow loading.
 Volume Oracle: Accumulation 82%.
 
 @user2 nailed the cycle turn.
@@ -3255,9 +3255,9 @@ Link in bio.
 
 # DAY 22 — JAN 15
 
-## Theme: Blog Feature — How Smart Money Moves
+## Theme: Blog Feature — How volume flow Moves
 
-### IMAGE: Volume Oracle image or smart money infographic
+### IMAGE: Volume Oracle image or volume flow infographic
 **BUILD:** Create visual showing accumulation → markup → distribution cycle
 
 ---
@@ -3265,7 +3265,7 @@ Link in bio.
 ### INSTAGRAM
 
 ```
-HOW SMART MONEY MOVES:
+HOW volume flow MOVES:
 
 1. They can't buy/sell in one order (too big)
 2. They accumulate/distribute over TIME
@@ -3279,7 +3279,7 @@ They caused it.
 Read the full breakdown:
 blog.signalpilot.io/articles/how-smart-money-moves
 
-#smartmoney #institutionaltrading #volumeanalysis #tradingstrategy
+#smartmoney #volumetrading #volumeanalysis #tradingstrategy
 ```
 
 ---
@@ -3294,7 +3294,7 @@ They're not smarter than you.
 
 They're POSITIONED before you.
 
-Here's how smart money actually moves:
+Here's how volume flow actually moves:
 
 🧵 Thread:
 ```
@@ -3369,7 +3369,7 @@ blog.signalpilot.io/articles/how-smart-money-moves
 
 ### TIKTOK
 
-**IMAGE:** Volume Oracle or smart money diagram
+**IMAGE:** Volume Oracle or volume flow diagram
 **Hook:** "They're not smarter. They're positioned."
 
 ```
@@ -3401,7 +3401,7 @@ Not the price.
 
 Link in bio.
 
-#tradingview #smartmoney #institutionaltrading #volumeanalysis #technicalanalysis
+#tradingview #smartmoney #volumetrading #volumeanalysis #technicalanalysis
 ```
 
 ---
@@ -3715,7 +3715,7 @@ The Elite Seven aren't random.
 They work in order.
 
 Pentarch — where are we in the cycle?
-Volume Oracle — what's smart money doing?
+Volume Oracle — what's volume flow doing?
 Janus Atlas — where will price react?
 Plutus Flow — is the move real?
 OmniDeck — what's the full picture?
