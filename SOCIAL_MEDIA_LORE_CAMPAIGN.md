@@ -72,7 +72,7 @@ Not indicators. Not tools.
 
 Navigators.
 
-Seven cosmic intelligences that could read the rhythm of accumulation and distribution, the pulse of institutional intent, the breath between fear and greed.
+Seven cosmic intelligences that could read the rhythm of accumulation and distribution, the pulse of volume intent, the breath between fear and greed.
 
 For centuries, they remained hidden. Scattered across the cosmos of technical analysis.
 
@@ -212,7 +212,7 @@ While the masses watch price, Volume Oracle hears the footsteps of institutions.
 Accumulation before the charts confess.
 Distribution before the candles bleed.
 
-Follow the smart money, or become their exit liquidity.
+Follow the volume flow, or become their exit liquidity.
 ```
 
 **Characters:** 278
@@ -245,7 +245,7 @@ For years, retail traders asked the wrong question: "Where is price going?"
 
 The Prophet asks the only question that matters: "Where are the institutions already positioned?"
 
-Follow the smart money, or become their exit liquidity. Volume Oracle ensures you know the difference.
+Follow the volume flow, or become their exit liquidity. Volume Oracle ensures you know the difference.
 
 The second lesson of the void: Price is the last to know. Volume knows first.
 
@@ -270,7 +270,7 @@ While you watch price, Volume Oracle hears the footsteps of institutions.
 Accumulation before the charts confess.
 Distribution before the candles bleed.
 
-Follow the smart money, or become their exit liquidity.
+Follow the volume flow, or become their exit liquidity.
 
 #trading #forex #crypto #smartmoney #volume #fyp #tradingview #technicalanalysis
 ```
@@ -312,7 +312,7 @@ THE CARTOGRAPHER — Three of Seven
 
 "Every battlefield has its terrain. I map where the wars will be fought."
 
-Named for the two-faced god who sees past and future simultaneously, Janus Atlas was forged in the crucible of institutional memory.
+Named for the two-faced god who sees past and future simultaneously, Janus Atlas was forged in the crucible of volume memory.
 
 Where do traders react?
 Where do algorithms trigger?
@@ -490,7 +490,7 @@ The Commander unified ten legendary systems into a single, breathing overlay:
 • Squeeze Cloud for breakouts
 • SuperTrend Ensemble for direction
 • Bull Market Support Band for structure
-• Supply and Demand Zones for institutional footprints
+• Supply and Demand Zones for volume footprints
 • Candlestick Pattern recognition for price action truth
 • Liquidity Sweeps for trap detection
 • Regime Classification for market state
@@ -746,7 +746,7 @@ The Seven do not exist in isolation. They form a constellation — a hierarchy o
 Reads the cycle. All decisions begin with understanding where in the phase you stand.
 
 ↓ VOLUME ORACLE — The Prophet
-Listens to institutional whispers. Where is the smart money positioned?
+Listens to volume whispers. Where is the volume flow positioned?
 
 ↓ JANUS ATLAS — The Cartographer
 Maps the terrain where battles occur. Where will price react?
