@@ -730,7 +730,7 @@ THE SEVEN:
 ```
 5️⃣ OMNIDECK — 10 legendary systems unified
 6️⃣ AUGURY GRID — 8-market scanner with quality scores
-7️⃣ HARMONIC OSCILLATOR — 5-oscillator consensus
+7️⃣ HARMONIC OSCILLATOR — 7-oscillator consensus
 
 All non-repainting. All audited.
 
