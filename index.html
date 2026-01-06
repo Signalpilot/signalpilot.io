@@ -6295,7 +6295,7 @@
         <div>
           <h4 style="margin:0 0 .8rem 0;font-size:1.1rem;font-weight:700"><span style="font-family:'Gugi',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.1em;background:linear-gradient(135deg,#5b8aff,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Signal Pilot</span></h4>
           <p style="color:var(--muted);font-size:.85rem;line-height:1.6;margin:0 0 1rem 0">
-            Built for <span class="typewriter-footer" style="color:var(--brand);font-weight:600"></span>
+            Built for <span id="footer-decode" class="signal-decode" style="color:var(--brand);font-weight:600">traders</span>
           </p>
           <p style="color:var(--muted);font-size:.85rem;line-height:1.6;margin:0 0 1rem 0">
             82 free lessons + 7 premium TradingView indicators.
@@ -8571,42 +8571,93 @@ if ('serviceWorker' in navigator) {
     type();
   })();
 
-  // Typewriter animation for footer
+  // Signal Decode animation for footer
   (function() {
+    const footerEl = document.getElementById('footer-decode');
+    if (!footerEl) return;
+
     const words = ['traders', 'investors', 'professionals', 'you'];
     let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typewriterElement = document.querySelector('.typewriter-footer');
 
-    if (!typewriterElement) return;
+    // Reuse SignalDecode class (defined in hero script)
+    const chars = '!<>-_\\/[]{}—=+*^?#_______';
 
-    function type() {
-      const currentWord = words[wordIndex];
-
-      if (isDeleting) {
-        typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
+    class FooterDecode {
+      constructor(el) {
+        this.el = el;
+        this.chars = chars;
+        this.queue = [];
+        this.frame = 0;
+        this.frameRequest = null;
+        this.resolve = null;
       }
 
-      let typeSpeed = isDeleting ? 50 : 100;
+      setText(newText) {
+        const oldText = this.el.textContent;
+        const length = Math.max(oldText.length, newText.length);
+        this.queue = [];
 
-      if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 2000; // Pause at end
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typeSpeed = 500; // Pause before next word
+        for (let i = 0; i < length; i++) {
+          const from = oldText[i] || '';
+          const to = newText[i] || '';
+          const start = Math.floor(Math.random() * 20);
+          const end = start + Math.floor(Math.random() * 20);
+          this.queue.push({ from, to, start, end });
+        }
+
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+
+        return new Promise(resolve => {
+          this.resolve = resolve;
+          this.update();
+        });
       }
 
-      setTimeout(type, typeSpeed);
+      update() {
+        let output = '';
+        let complete = 0;
+
+        for (let i = 0; i < this.queue.length; i++) {
+          let { from, to, start, end, char } = this.queue[i];
+
+          if (this.frame >= end) {
+            complete++;
+            output += to;
+          } else if (this.frame >= start) {
+            if (!char || Math.random() < 0.28) {
+              char = this.chars[Math.floor(Math.random() * this.chars.length)];
+              this.queue[i].char = char;
+            }
+            output += '<span style="color:var(--accent)">' + char + '</span>';
+          } else {
+            output += from;
+          }
+        }
+
+        this.el.innerHTML = output;
+
+        if (complete === this.queue.length) {
+          this.resolve();
+        } else {
+          this.frameRequest = requestAnimationFrame(() => this.update());
+          this.frame++;
+        }
+      }
     }
 
-    type();
+    const decoder = new FooterDecode(footerEl);
+
+    async function cycle() {
+      await decoder.setText(words[wordIndex]);
+      await new Promise(r => setTimeout(r, 2500));
+      wordIndex = (wordIndex + 1) % words.length;
+      await decoder.setText('');
+      await new Promise(r => setTimeout(r, 300));
+      cycle();
+    }
+
+    setTimeout(cycle, 1500);
   })();
 
   // Form field validation with success checkmarks
