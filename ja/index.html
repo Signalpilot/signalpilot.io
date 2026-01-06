@@ -2805,6 +2805,108 @@
       to{transform:scale(1);opacity:1}
     }
 
+    /* Spotlight border effect for Elite 7 cards */
+    .card.product{
+      --mouse-x:50%;
+      --mouse-y:50%;
+      --spotlight-opacity:0;
+      position:relative;
+      transition:transform 0.3s ease,box-shadow 0.3s ease;
+    }
+    .card.product::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      background:radial-gradient(600px circle at var(--mouse-x) var(--mouse-y),rgba(118,221,255,0.15),transparent 40%);
+      opacity:var(--spotlight-opacity);
+      transition:opacity 0.3s ease;
+      pointer-events:none;
+      z-index:1;
+    }
+    .card.product::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:1px;
+      background:radial-gradient(400px circle at var(--mouse-x) var(--mouse-y),rgba(118,221,255,0.4),transparent 40%);
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      opacity:var(--spotlight-opacity);
+      transition:opacity 0.3s ease;
+      pointer-events:none;
+      z-index:2;
+    }
+    .card.product>*{position:relative;z-index:3}
+
+    /* Indicator title glitch effect */
+    .indicator-title{position:relative;display:inline-block;cursor:default}
+    .indicator-title::before,
+    .indicator-title::after{
+      content:attr(data-text);
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      opacity:0;
+    }
+    .indicator-title::before{color:#0ff;z-index:-1}
+    .indicator-title::after{color:#f0f;z-index:-2}
+    .indicator-title:hover::before{animation:glitch-1 0.4s cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .indicator-title:hover::after{animation:glitch-2 0.4s cubic-bezier(0.25,0.46,0.45,0.94) reverse both}
+
+    /* Magnetic button */
+    .btn-magnetic{
+      transition:transform 0.2s cubic-bezier(0.33,1,0.68,1);
+      will-change:transform;
+    }
+
+    /* Glitch keyframes */
+    @keyframes glitch-1{
+      0%{opacity:0;transform:translate(0)}
+      20%{opacity:0.8;transform:translate(-2px,-1px)}
+      40%{opacity:0.8;transform:translate(2px,1px)}
+      60%{opacity:0.8;transform:translate(-1px,2px)}
+      80%{opacity:0.8;transform:translate(1px,-2px)}
+      100%{opacity:0;transform:translate(0)}
+    }
+    @keyframes glitch-2{
+      0%{opacity:0;transform:translate(0)}
+      20%{opacity:0.6;transform:translate(2px,1px)}
+      40%{opacity:0.6;transform:translate(-2px,-1px)}
+      60%{opacity:0.6;transform:translate(1px,-2px)}
+      80%{opacity:0.6;transform:translate(-1px,2px)}
+      100%{opacity:0;transform:translate(0)}
+    }
+    @keyframes glitch-skew{
+      0%{transform:skew(0deg)}
+      20%{transform:skew(2deg)}
+      40%{transform:skew(-2deg)}
+      60%{transform:skew(1deg)}
+      80%{transform:skew(-1deg)}
+      100%{transform:skew(0deg)}
+    }
+
+    /* Brand glitch effect */
+    .brand span{position:relative;display:inline-block}
+    .brand span::before,
+    .brand span::after{
+      content:attr(data-text);
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      opacity:0;
+    }
+    .brand span::before{color:#0ff;z-index:-1}
+    .brand span::after{color:#f0f;z-index:-2}
+    .brand:hover span::before{animation:glitch-1 0.3s cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .brand:hover span::after{animation:glitch-2 0.3s cubic-bezier(0.25,0.46,0.45,0.94) reverse both}
+    .brand:hover span{animation:glitch-skew 0.3s cubic-bezier(0.25,0.46,0.45,0.94) both}
 
 
     /* Header */
@@ -4492,7 +4594,7 @@
 
       <a href="/ja/" class="brand">
 
-        <span>Signal Pilot</span>
+        <span data-text="Signal Pilot">Signal Pilot</span>
 
       </a>
 
@@ -4534,7 +4636,7 @@
 
 
 
-      <a class="btn btn-primary cta-header" href="#trial">7日間無料トライアル →</a>
+      <a class="btn btn-primary cta-header btn-magnetic" href="#trial">7日間無料トライアル →</a>
 
 
 
@@ -4630,7 +4732,7 @@
           </h1>
 
           <p id="hero-description" style="color:var(--muted);font-size:1.15rem;line-height:1.6;max-width:700px;margin:1.5rem auto 0;white-space:nowrap">
-            ノンリペイント・サイクル検出 • プレミアム7種類のインジケーター <span id="typed-text" style="color:var(--brand);font-weight:600">本格的なトレーダー向け</span><span id="typing-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
+            ノンリペイント・サイクル検出 • プレミアム7種類のインジケーター <span id="typed-text" class="signal-decode" style="color:var(--brand);font-weight:600">本格的なトレーダー向け</span><span id="typing-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
           </p>
 
           <!-- TradingView Badge -->
@@ -5803,7 +5905,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Pentarch: Cycle Phase Detection</h3>
+              <h3 class="indicator-title" data-text="Pentarch: Cycle Phase Detection">Pentarch: Cycle Phase Detection</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="pentarch-details">詳細 ▼</button>
@@ -5838,7 +5940,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>OmniDeck: Unified Chart Overlay</h3>
+              <h3 class="indicator-title" data-text="OmniDeck: Unified Chart Overlay">OmniDeck: Unified Chart Overlay</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="omnideck-details">詳細 ▼</button>
@@ -5874,7 +5976,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Volume Oracle: Regime Detection</h3>
+              <h3 class="indicator-title" data-text="Volume Oracle: Regime Detection">Volume Oracle: Regime Detection</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="oracle-details">詳細 ▼</button>
@@ -5910,7 +6012,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Plutus Flow: Statistical OBV Analysis</h3>
+              <h3 class="indicator-title" data-text="Plutus Flow: Statistical OBV Analysis">Plutus Flow: Statistical OBV Analysis</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="plutus-details">詳細 ▼</button>
@@ -5946,7 +6048,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Janus Atlas: Multi-Timeframe Auto-Levels</h3>
+              <h3 class="indicator-title" data-text="Janus Atlas: Multi-Timeframe Auto-Levels">Janus Atlas: Multi-Timeframe Auto-Levels</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="janus-details">詳細 ▼</button>
@@ -5982,7 +6084,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Augury Grid: Multi-Timeframe Scanner</h3>
+              <h3 class="indicator-title" data-text="Augury Grid: Multi-Timeframe Scanner">Augury Grid: Multi-Timeframe Scanner</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="augury-details">詳細 ▼</button>
@@ -6017,7 +6119,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Harmonic Oscillator: Multi-Component Momentum</h3>
+              <h3 class="indicator-title" data-text="Harmonic Oscillator: Multi-Component Momentum">Harmonic Oscillator: Multi-Component Momentum</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="harmonic-details">詳細 ▼</button>
@@ -7362,7 +7464,7 @@
         <div>
           <h4 style="margin:0 0 .8rem 0;font-size:1.1rem;font-weight:700"><span style="font-family:'Gugi',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.1em;background:linear-gradient(135deg,#5b8aff,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Signal Pilot</span></h4>
           <p style="color:var(--muted);font-size:.85rem;line-height:1.6;margin:0 0 1rem 0">
-            対象： <span class="typewriter-footer" style="color:var(--brand);font-weight:600"></span>
+            対象： <span id="footer-decode" class="signal-decode" style="color:var(--brand);font-weight:600">トレーダー</span>
           </p>
           <p style="color:var(--muted);font-size:.85rem;line-height:1.6;margin:0 0 1rem 0">
             82の無料レッスン + 7つのプレミアムTradingViewインジケーター
@@ -9364,55 +9466,72 @@ if ('serviceWorker' in navigator) {
 
   // Typing animation for hero headline
   function initTypingEffect() {
-    const textElement = document.getElementById('typed-text');
-    if (!textElement) return;
-
-    const words = [
-      '本格的なトレーダー向け',
-      'デイトレーダー向け',
-      'スイングトレーダー向け',
-      'スキャルパー向け',
-      'ポジショントレーダー向け',
-      'すべてのトレーダー向け'
-    ];
-
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
-
-    function type() {
-      const currentWord = words[wordIndex];
-
-      if (isDeleting) {
-        // Delete character
-        textElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-        typingSpeed = 50;
-      } else {
-        // Add character
-        textElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
-        typingSpeed = 100;
+    const el = document.getElementById('typed-text');
+    if (!el) return;
+    const words = ['本格的なトレーダー向け','デイトレーダー向け','スイングトレーダー向け','スキャルパー向け','ポジショントレーダー向け','すべてのトレーダー向け'];
+    let idx = 0;
+    const chars = '!<>-_\\/[]{}—=+*^?#_______';
+    class SignalDecode {
+      constructor(el) {
+        this.el = el;
+        this.chars = chars;
+        this.queue = [];
+        this.frame = 0;
+        this.frameRequest = null;
+        this.resolve = null;
       }
-
-      // If word is complete
-      if (!isDeleting && charIndex === currentWord.length) {
-        // Pause at end of word
-        typingSpeed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        // Move to next word
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typingSpeed = 500;
+      setText(newText) {
+        const oldText = this.el.textContent;
+        const length = Math.max(oldText.length, newText.length);
+        this.queue = [];
+        for (let i = 0; i < length; i++) {
+          const from = oldText[i] || '';
+          const to = newText[i] || '';
+          const start = Math.floor(Math.random() * 40);
+          const end = start + Math.floor(Math.random() * 40);
+          this.queue.push({ from, to, start, end });
+        }
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        return new Promise(resolve => {
+          this.resolve = resolve;
+          this.update();
+        });
       }
-
-      setTimeout(type, typingSpeed);
+      update() {
+        let output = '', complete = 0;
+        for (let i = 0; i < this.queue.length; i++) {
+          let { from, to, start, end, char } = this.queue[i];
+          if (this.frame >= end) {
+            complete++;
+            output += to;
+          } else if (this.frame >= start) {
+            if (!char || Math.random() < 0.28) {
+              char = this.chars[Math.floor(Math.random() * this.chars.length)];
+              this.queue[i].char = char;
+            }
+            output += `<span style="color:var(--muted)">${char}</span>`;
+          } else {
+            output += from;
+          }
+        }
+        this.el.innerHTML = output;
+        if (complete === this.queue.length) {
+          this.resolve();
+        } else {
+          this.frameRequest = requestAnimationFrame(() => this.update());
+          this.frame++;
+        }
+      }
     }
-
-    // Start typing after a brief delay
-    setTimeout(type, 1000);
+    const decoder = new SignalDecode(el);
+    async function cycle() {
+      await decoder.setText(words[idx]);
+      await new Promise(r => setTimeout(r, 2500));
+      idx = (idx + 1) % words.length;
+      cycle();
+    }
+    setTimeout(cycle, 1500);
   }
 
   // Parallax scroll effect for gradient orbs
@@ -9503,6 +9622,50 @@ if ('serviceWorker' in navigator) {
       document.body.style.overflow = '';
     }
   }
+
+  // Spotlight border effect for Elite 7 cards
+  function initSpotlight() {
+    const cards = document.querySelectorAll('.card.product');
+    if (!cards.length) return;
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', x + 'px');
+        card.style.setProperty('--mouse-y', y + 'px');
+        card.style.setProperty('--spotlight-opacity', '1');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--spotlight-opacity', '0');
+      });
+    });
+  }
+  initSpotlight();
+})();
+</script>
+
+<!-- Magnetic button effect -->
+<script>
+(function(){
+  const btn = document.querySelector('.btn-magnetic');
+  if (!btn) return;
+  const lerp = (a, b, n) => (1 - n) * a + n * b;
+  let rect, x = 0, y = 0, mx = 0, my = 0;
+  const update = () => { rect = btn.getBoundingClientRect(); };
+  update(); window.addEventListener('resize', update);
+  btn.addEventListener('mouseenter', update);
+  btn.addEventListener('mousemove', e => {
+    mx = e.clientX - rect.left - rect.width / 2;
+    my = e.clientY - rect.top - rect.height / 2;
+  });
+  btn.addEventListener('mouseleave', () => { mx = 0; my = 0; });
+  (function animate() {
+    x = lerp(x, mx * 0.3, 0.1);
+    y = lerp(y, my * 0.3, 0.1);
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+    requestAnimationFrame(animate);
+  })();
 })();
 </script>
 
@@ -9545,42 +9708,61 @@ if ('serviceWorker' in navigator) {
     type();
   })();
 
-  // Typewriter animation for footer
+  // Signal Decode animation for footer
   (function() {
+    const footerEl = document.getElementById('footer-decode');
+    if (!footerEl) return;
     const words = ['トレーダー', '投資家', 'プロフェッショナル', 'あなた'];
     let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typewriterElement = document.querySelector('.typewriter-footer');
-
-    if (!typewriterElement) return;
-
-    function type() {
-      const currentWord = words[wordIndex];
-
-      if (isDeleting) {
-        typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
+    const chars = '!<>-_\\/[]{}—=+*^?#_______';
+    class FooterDecode {
+      constructor(el) {
+        this.el = el; this.chars = chars; this.queue = [];
+        this.frame = 0; this.frameRequest = null; this.resolve = null;
       }
-
-      let typeSpeed = isDeleting ? 50 : 100;
-
-      if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 2000; // Pause at end
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typeSpeed = 500; // Pause before next word
+      setText(newText) {
+        const oldText = this.el.textContent;
+        const length = Math.max(oldText.length, newText.length);
+        this.queue = [];
+        for (let i = 0; i < length; i++) {
+          const from = oldText[i] || '';
+          const to = newText[i] || '';
+          const start = Math.floor(Math.random() * 40);
+          const end = start + Math.floor(Math.random() * 40);
+          this.queue.push({ from, to, start, end });
+        }
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        return new Promise(resolve => { this.resolve = resolve; this.update(); });
       }
-
-      setTimeout(type, typeSpeed);
+      update() {
+        let output = '', complete = 0;
+        for (let i = 0; i < this.queue.length; i++) {
+          let { from, to, start, end, char } = this.queue[i];
+          if (this.frame >= end) { complete++; output += to; }
+          else if (this.frame >= start) {
+            if (!char || Math.random() < 0.28) {
+              char = this.chars[Math.floor(Math.random() * this.chars.length)];
+              this.queue[i].char = char;
+            }
+            output += `<span style="color:var(--muted)">${char}</span>`;
+          } else { output += from; }
+        }
+        this.el.innerHTML = output;
+        if (complete === this.queue.length) { this.resolve(); }
+        else { this.frameRequest = requestAnimationFrame(() => this.update()); this.frame++; }
+      }
     }
-
-    type();
+    const decoder = new FooterDecode(footerEl);
+    async function cycle() {
+      await decoder.setText(words[wordIndex]);
+      await new Promise(r => setTimeout(r, 2500));
+      wordIndex = (wordIndex + 1) % words.length;
+      await decoder.setText('');
+      await new Promise(r => setTimeout(r, 300));
+      cycle();
+    }
+    setTimeout(cycle, 1500);
   })();
 
   // Form field validation with success checkmarks

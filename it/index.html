@@ -2531,6 +2531,108 @@
       to{transform:scale(1);opacity:1}
     }
 
+    /* Spotlight border effect for Elite 7 cards */
+    .card.product{
+      --mouse-x:50%;
+      --mouse-y:50%;
+      --spotlight-opacity:0;
+      position:relative;
+      transition:transform 0.3s ease,box-shadow 0.3s ease;
+    }
+    .card.product::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      background:radial-gradient(600px circle at var(--mouse-x) var(--mouse-y),rgba(118,221,255,0.15),transparent 40%);
+      opacity:var(--spotlight-opacity);
+      transition:opacity 0.3s ease;
+      pointer-events:none;
+      z-index:1;
+    }
+    .card.product::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:1px;
+      background:radial-gradient(400px circle at var(--mouse-x) var(--mouse-y),rgba(118,221,255,0.4),transparent 40%);
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      opacity:var(--spotlight-opacity);
+      transition:opacity 0.3s ease;
+      pointer-events:none;
+      z-index:2;
+    }
+    .card.product>*{position:relative;z-index:3}
+
+    /* Indicator title glitch effect */
+    .indicator-title{position:relative;display:inline-block;cursor:default}
+    .indicator-title::before,
+    .indicator-title::after{
+      content:attr(data-text);
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      opacity:0;
+    }
+    .indicator-title::before{color:#0ff;z-index:-1}
+    .indicator-title::after{color:#f0f;z-index:-2}
+    .indicator-title:hover::before{animation:glitch-1 0.4s cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .indicator-title:hover::after{animation:glitch-2 0.4s cubic-bezier(0.25,0.46,0.45,0.94) reverse both}
+
+    /* Magnetic button */
+    .btn-magnetic{
+      transition:transform 0.2s cubic-bezier(0.33,1,0.68,1);
+      will-change:transform;
+    }
+
+    /* Glitch keyframes */
+    @keyframes glitch-1{
+      0%{opacity:0;transform:translate(0)}
+      20%{opacity:0.8;transform:translate(-2px,-1px)}
+      40%{opacity:0.8;transform:translate(2px,1px)}
+      60%{opacity:0.8;transform:translate(-1px,2px)}
+      80%{opacity:0.8;transform:translate(1px,-2px)}
+      100%{opacity:0;transform:translate(0)}
+    }
+    @keyframes glitch-2{
+      0%{opacity:0;transform:translate(0)}
+      20%{opacity:0.6;transform:translate(2px,1px)}
+      40%{opacity:0.6;transform:translate(-2px,-1px)}
+      60%{opacity:0.6;transform:translate(1px,-2px)}
+      80%{opacity:0.6;transform:translate(-1px,2px)}
+      100%{opacity:0;transform:translate(0)}
+    }
+    @keyframes glitch-skew{
+      0%{transform:skew(0deg)}
+      20%{transform:skew(2deg)}
+      40%{transform:skew(-2deg)}
+      60%{transform:skew(1deg)}
+      80%{transform:skew(-1deg)}
+      100%{transform:skew(0deg)}
+    }
+
+    /* Brand glitch effect */
+    .brand span{position:relative;display:inline-block}
+    .brand span::before,
+    .brand span::after{
+      content:attr(data-text);
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      opacity:0;
+    }
+    .brand span::before{color:#0ff;z-index:-1}
+    .brand span::after{color:#f0f;z-index:-2}
+    .brand:hover span::before{animation:glitch-1 0.3s cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .brand:hover span::after{animation:glitch-2 0.3s cubic-bezier(0.25,0.46,0.45,0.94) reverse both}
+    .brand:hover span{animation:glitch-skew 0.3s cubic-bezier(0.25,0.46,0.45,0.94) both}
 
 
     /* Header */
@@ -4149,7 +4251,7 @@
 
       <a href="/it/" class="brand">
 
-        <span>Signal Pilot</span>
+        <span data-text="Signal Pilot">Signal Pilot</span>
 
       </a>
 
@@ -4189,7 +4291,7 @@
 
 
 
-      <a class="btn btn-primary cta-header" href="#trial">Prova Gratis 7 Giorni →</a>
+      <a class="btn btn-primary cta-header btn-magnetic" href="#trial">Prova Gratis 7 Giorni →</a>
 
 
 
@@ -4285,7 +4387,7 @@
           </h1>
 
           <p id="hero-description" style="color:var(--muted);font-size:1.15rem;line-height:1.6;max-width:700px;margin:1.5rem auto 0;white-space:nowrap">
-            Rilevamento cicli senza ridipintura • 7 indicatori premium per <span id="typed-text" style="color:var(--brand);font-weight:600">trader professionisti</span><span id="typing-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
+            Rilevamento cicli senza ridipintura • 7 indicatori premium per <span id="typed-text" class="signal-decode" style="color:var(--brand);font-weight:600">trader professionisti</span><span id="typing-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
           </p>
 
           <!-- TradingView Badge -->
@@ -5458,7 +5560,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Pentarch: Cycle Phase Detection</h3>
+              <h3 class="indicator-title" data-text="Pentarch: Cycle Phase Detection">Pentarch: Cycle Phase Detection</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="pentarch-details">Dettagli ▼</button>
@@ -5493,7 +5595,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>OmniDeck: Unified Chart Overlay</h3>
+              <h3 class="indicator-title" data-text="OmniDeck: Unified Chart Overlay">OmniDeck: Unified Chart Overlay</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="omnideck-details">Dettagli ▼</button>
@@ -5529,7 +5631,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Volume Oracle: Regime Detection</h3>
+              <h3 class="indicator-title" data-text="Volume Oracle: Regime Detection">Volume Oracle: Regime Detection</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="oracle-details">Dettagli ▼</button>
@@ -5565,7 +5667,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Plutus Flow: Statistical OBV Analysis</h3>
+              <h3 class="indicator-title" data-text="Plutus Flow: Statistical OBV Analysis">Plutus Flow: Statistical OBV Analysis</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="plutus-details">Dettagli ▼</button>
@@ -5601,7 +5703,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Janus Atlas: Multi-Timeframe Auto-Levels</h3>
+              <h3 class="indicator-title" data-text="Janus Atlas: Multi-Timeframe Auto-Levels">Janus Atlas: Multi-Timeframe Auto-Levels</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="janus-details">Dettagli ▼</button>
@@ -5637,7 +5739,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Augury Grid: Multi-Timeframe Scanner</h3>
+              <h3 class="indicator-title" data-text="Augury Grid: Multi-Timeframe Scanner">Augury Grid: Multi-Timeframe Scanner</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="augury-details">Dettagli ▼</button>
@@ -5672,7 +5774,7 @@
             </div>
 
             <div class="title mod" style="justify-content:center">
-              <h3>Harmonic Oscillator: Multi-Component Momentum</h3>
+              <h3 class="indicator-title" data-text="Harmonic Oscillator: Multi-Component Momentum">Harmonic Oscillator: Multi-Component Momentum</h3>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost btn-sm toggle-details" data-target="harmonic-details">Dettagli ▼</button>
@@ -7017,7 +7119,7 @@
         <div>
           <h4 style="margin:0 0 .8rem 0;font-size:1.1rem;font-weight:700"><span style="font-family:'Gugi',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.1em;background:linear-gradient(135deg,#5b8aff,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Signal Pilot</span></h4>
           <p style="color:var(--muted);font-size:.85rem;line-height:1.6;margin:0 0 1rem 0">
-            Built for <span class="typewriter-footer" style="color:var(--brand);font-weight:600"></span>
+            Built for <span id="footer-decode" class="signal-decode" style="color:var(--brand);font-weight:600">traders</span>
           </p>
           <p style="color:var(--muted);font-size:.85rem;line-height:1.6;margin:0 0 1rem 0">
             82 lezioni gratuite + 7 indicatori TradingView premium.
@@ -9012,57 +9114,99 @@ if ('serviceWorker' in navigator) {
     setTimeout(updateProgress, 100);
   }
 
-  // Typing animation for hero headline
+  // Signal Decode animation for hero headline
   function initTypingEffect() {
     const textElement = document.getElementById('typed-text');
     if (!textElement) return;
 
     const words = [
-      'serious traders',
-      'day traders',
-      'swing traders',
-      'scalpers',
-      'position traders',
-      'all traders'
+      'trader professionisti',
+      'day trader',
+      'swing trader',
+      'scalper',
+      'trader di posizione',
+      'tutti i trader'
     ];
-
     let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
 
-    function type() {
-      const currentWord = words[wordIndex];
+    const chars = '!<>-_\\/[]{}—=+*^?#_______';
 
-      if (isDeleting) {
-        // Delete character
-        textElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-        typingSpeed = 50;
-      } else {
-        // Add character
-        textElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
-        typingSpeed = 100;
+    class SignalDecode {
+      constructor(el) {
+        this.el = el;
+        this.chars = chars;
+        this.queue = [];
+        this.frame = 0;
+        this.frameRequest = null;
+        this.resolve = null;
       }
 
-      // If word is complete
-      if (!isDeleting && charIndex === currentWord.length) {
-        // Pause at end of word
-        typingSpeed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        // Move to next word
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typingSpeed = 500;
+      setText(newText) {
+        const oldText = this.el.textContent;
+        const length = Math.max(oldText.length, newText.length);
+        this.queue = [];
+
+        for (let i = 0; i < length; i++) {
+          const from = oldText[i] || '';
+          const to = newText[i] || '';
+          const start = Math.floor(Math.random() * 20);
+          const end = start + Math.floor(Math.random() * 20);
+          this.queue.push({ from, to, start, end });
+        }
+
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+
+        return new Promise(resolve => {
+          this.resolve = resolve;
+          this.update();
+        });
       }
 
-      setTimeout(type, typingSpeed);
+      update() {
+        let output = '';
+        let complete = 0;
+
+        for (let i = 0; i < this.queue.length; i++) {
+          let { from, to, start, end, char } = this.queue[i];
+
+          if (this.frame >= end) {
+            complete++;
+            output += to;
+          } else if (this.frame >= start) {
+            if (!char || Math.random() < 0.28) {
+              char = this.chars[Math.floor(Math.random() * this.chars.length)];
+              this.queue[i].char = char;
+            }
+            output += '<span style="color:var(--accent)">' + char + '</span>';
+          } else {
+            output += from;
+          }
+        }
+
+        this.el.innerHTML = output;
+
+        if (complete === this.queue.length) {
+          this.resolve();
+        } else {
+          this.frameRequest = requestAnimationFrame(() => this.update());
+          this.frame++;
+        }
+      }
     }
 
-    // Start typing after a brief delay
-    setTimeout(type, 1000);
+    const decoder = new SignalDecode(textElement);
+
+    async function cycle() {
+      await decoder.setText(words[wordIndex]);
+      await new Promise(r => setTimeout(r, 2500));
+      wordIndex = (wordIndex + 1) % words.length;
+      await decoder.setText('');
+      await new Promise(r => setTimeout(r, 300));
+      cycle();
+    }
+
+    setTimeout(cycle, 1000);
   }
 
   // Parallax scroll effect for gradient orbs
@@ -9153,13 +9297,96 @@ if ('serviceWorker' in navigator) {
       document.body.style.overflow = '';
     }
   }
+
+  // Spotlight border effect for Elite 7 cards
+  function initSpotlight() {
+    const cards = document.querySelectorAll('.card.product');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', x + '%');
+        card.style.setProperty('--mouse-y', y + '%');
+        card.style.setProperty('--spotlight-opacity', '1');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--spotlight-opacity', '0');
+      });
+    });
+  }
+  initSpotlight();
 })();
+</script>
+
+<script>
+  // Magnetic button effect
+  (function() {
+    const magneticBtns = document.querySelectorAll('.btn-magnetic');
+    if (!magneticBtns.length) return;
+
+    const strength = 0.35;
+
+    magneticBtns.forEach(btn => {
+      let isHovering = false;
+      let animationId = null;
+      let targetX = 0, targetY = 0;
+      let currentX = 0, currentY = 0;
+
+      function lerp(start, end, factor) {
+        return start + (end - start) * factor;
+      }
+
+      function animate() {
+        if (!isHovering && Math.abs(currentX) < 0.1 && Math.abs(currentY) < 0.1) {
+          btn.style.transform = '';
+          animationId = null;
+          return;
+        }
+
+        currentX = lerp(currentX, targetX, 0.15);
+        currentY = lerp(currentY, targetY, 0.15);
+
+        btn.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        animationId = requestAnimationFrame(animate);
+      }
+
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const deltaX = e.clientX - centerX;
+        const deltaY = e.clientY - centerY;
+
+        targetX = deltaX * strength;
+        targetY = deltaY * strength;
+
+        if (!animationId) {
+          animationId = requestAnimationFrame(animate);
+        }
+      });
+
+      btn.addEventListener('mouseenter', () => {
+        isHovering = true;
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        isHovering = false;
+        targetX = 0;
+        targetY = 0;
+        if (!animationId) {
+          animationId = requestAnimationFrame(animate);
+        }
+      });
+    });
+  })();
 </script>
 
 <script>
   // Typewriter animation for pricing subheading
   (function() {
-    const words = ['traders worldwide', 'serious investors', 'professionals', 'traders like you'];
+    const words = ['trader in tutto il mondo', 'investitori seri', 'professionisti', 'trader come te'];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -9195,42 +9422,92 @@ if ('serviceWorker' in navigator) {
     type();
   })();
 
-  // Typewriter animation for footer
+  // Signal Decode animation for footer
   (function() {
-    const words = ['traders', 'investors', 'professionals', 'you'];
+    const footerEl = document.getElementById('footer-decode');
+    if (!footerEl) return;
+
+    const words = ['trader', 'investitori', 'professionisti', 'te'];
     let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typewriterElement = document.querySelector('.typewriter-footer');
 
-    if (!typewriterElement) return;
+    const chars = '!<>-_\\/[]{}—=+*^?#_______';
 
-    function type() {
-      const currentWord = words[wordIndex];
-
-      if (isDeleting) {
-        typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
+    class FooterDecode {
+      constructor(el) {
+        this.el = el;
+        this.chars = chars;
+        this.queue = [];
+        this.frame = 0;
+        this.frameRequest = null;
+        this.resolve = null;
       }
 
-      let typeSpeed = isDeleting ? 50 : 100;
+      setText(newText) {
+        const oldText = this.el.textContent;
+        const length = Math.max(oldText.length, newText.length);
+        this.queue = [];
 
-      if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 2000; // Pause at end
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typeSpeed = 500; // Pause before next word
+        for (let i = 0; i < length; i++) {
+          const from = oldText[i] || '';
+          const to = newText[i] || '';
+          const start = Math.floor(Math.random() * 20);
+          const end = start + Math.floor(Math.random() * 20);
+          this.queue.push({ from, to, start, end });
+        }
+
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+
+        return new Promise(resolve => {
+          this.resolve = resolve;
+          this.update();
+        });
       }
 
-      setTimeout(type, typeSpeed);
+      update() {
+        let output = '';
+        let complete = 0;
+
+        for (let i = 0; i < this.queue.length; i++) {
+          let { from, to, start, end, char } = this.queue[i];
+
+          if (this.frame >= end) {
+            complete++;
+            output += to;
+          } else if (this.frame >= start) {
+            if (!char || Math.random() < 0.28) {
+              char = this.chars[Math.floor(Math.random() * this.chars.length)];
+              this.queue[i].char = char;
+            }
+            output += '<span style="color:var(--accent)">' + char + '</span>';
+          } else {
+            output += from;
+          }
+        }
+
+        this.el.innerHTML = output;
+
+        if (complete === this.queue.length) {
+          this.resolve();
+        } else {
+          this.frameRequest = requestAnimationFrame(() => this.update());
+          this.frame++;
+        }
+      }
     }
 
-    type();
+    const decoder = new FooterDecode(footerEl);
+
+    async function cycle() {
+      await decoder.setText(words[wordIndex]);
+      await new Promise(r => setTimeout(r, 2500));
+      wordIndex = (wordIndex + 1) % words.length;
+      await decoder.setText('');
+      await new Promise(r => setTimeout(r, 300));
+      cycle();
+    }
+
+    setTimeout(cycle, 1500);
   })();
 
   // Form field validation with success checkmarks
