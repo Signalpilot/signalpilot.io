@@ -1627,25 +1627,20 @@
     }
     @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
     .shiny-cta span{position:relative;z-index:2;display:inline-block}
+    .shiny-cta>span{position:relative;z-index:1}
 
-    /* Slow down shiny animations on mobile */
+    /* Use fallback animation on mobile */
     @media (max-width: 768px) {
       .shiny-cta {
-        animation-duration: 4s;
+        animation: shiny-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        -webkit-animation: shiny-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        background: linear-gradient(#0a0a0f, #0a0a0f) padding-box, linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e3a8a 100%) border-box;
       }
-      .shiny-cta::after {
-        animation-duration: 6s;
-      }
+      .shiny-cta::before, .shiny-cta::after { display: none; }
+      @-webkit-keyframes shiny-pulse { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25), inset 0 0 0 1px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 25px rgba(59,130,246,0.4), inset 0 0 0 1px rgba(255,255,255,0.15); } }
+      @keyframes shiny-pulse { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25), inset 0 0 0 1px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 25px rgba(59,130,246,0.4), inset 0 0 0 1px rgba(255,255,255,0.15); } }
     }
-
-    /* Respect reduced motion preference */
-    @media (prefers-reduced-motion: reduce) {
-      .shiny-cta,
-      .shiny-cta::before,
-      .shiny-cta::after {
-        animation: none;
-      }
-    }
+    @media (prefers-reduced-motion: reduce) { .shiny-cta { animation: none; } }
 
     .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02)),var(--bg);border-radius:16px;padding:1.05rem;box-shadow:var(--shadow);min-width:0;position:relative;overflow:visible}
 
@@ -4263,6 +4258,62 @@
         @media (max-width: 480px) {
           .elite-panel-card {
             aspect-ratio: 2 / 1;
+          }
+        }
+
+        /* Fix mobile tap highlight and hover states */
+        .elite-chart-card,
+        .elite-panel-card {
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          touch-action: manipulation;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+        .elite-chart-card img,
+        .elite-panel-card img {
+          position: relative;
+          z-index: 1;
+          opacity: 1 !important;
+          visibility: visible !important;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+          pointer-events: none;
+          -webkit-user-drag: none;
+          user-drag: none;
+        }
+        /* Disable ALL effects on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+          .elite-chart-card,
+          .elite-panel-card {
+            transform: none !important;
+            transition: none !important;
+          }
+          .elite-chart-card::before,
+          .elite-chart-card::after,
+          .elite-panel-card::before,
+          .elite-panel-card::after {
+            display: none !important;
+          }
+          .elite-chart-card:hover,
+          .elite-chart-card:active,
+          .elite-chart-card:focus,
+          .elite-panel-card:hover,
+          .elite-panel-card:active,
+          .elite-panel-card:focus {
+            transform: none !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+          }
+          .elite-chart-card img,
+          .elite-panel-card img {
+            opacity: 1 !important;
+            filter: none !important;
+            transform: none !important;
+            position: static !important;
+          }
+          .elite-chart-overlay,
+          .elite-panel-overlay {
+            display: none !important;
           }
         }
       </style>
@@ -8440,42 +8491,69 @@ if ('serviceWorker' in navigator) {
 </script>
 
 <script>
-  // Typewriter animation for pricing subheading
+  // Signal Decode animation for pricing subheading
   (function() {
     const words = ['traders worldwide', 'serious investors', 'professionals', 'traders like you'];
     let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typewriterElement = document.querySelector('.typewriter-pricing');
+    const el = document.querySelector('.typewriter-pricing');
+    if (!el) return;
 
-    if (!typewriterElement) return;
+    const chars = '!<>-_\\/[]{}—=+*^?#@$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let queue = [];
+    let frame = 0;
+    let frameRequest = null;
 
-    function type() {
-      const currentWord = words[wordIndex];
-
-      if (isDeleting) {
-        typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
+    function setText(newText) {
+      const oldText = el.textContent;
+      const length = Math.max(oldText.length, newText.length);
+      queue = [];
+      for (let i = 0; i < length; i++) {
+        const from = oldText[i] || '';
+        const to = newText[i] || '';
+        const start = Math.floor(Math.random() * 15);
+        const end = start + Math.floor(Math.random() * 15) + 8;
+        queue.push({ from, to, start, end, char: null });
       }
-
-      let typeSpeed = isDeleting ? 50 : 100;
-
-      if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 2000; // Pause at end
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typeSpeed = 500; // Pause before next word
-      }
-
-      setTimeout(type, typeSpeed);
+      cancelAnimationFrame(frameRequest);
+      frame = 0;
+      update();
     }
 
-    type();
+    function update() {
+      let output = '';
+      let complete = 0;
+      for (let i = 0; i < queue.length; i++) {
+        let { from, to, start, end, char } = queue[i];
+        if (frame >= end) {
+          complete++;
+          output += to;
+        } else if (frame >= start) {
+          if (!char || Math.random() < 0.28) {
+            char = chars[Math.floor(Math.random() * chars.length)];
+            queue[i].char = char;
+          }
+          output += '<span style="color:var(--brand-2)">' + char + '</span>';
+        } else {
+          output += from;
+        }
+      }
+      el.innerHTML = output;
+      if (complete === queue.length) {
+        setTimeout(() => {
+          wordIndex = (wordIndex + 1) % words.length;
+          setText(words[wordIndex]);
+        }, 2500);
+      } else {
+        frameRequest = requestAnimationFrame(update);
+        frame++;
+      }
+    }
+
+    el.textContent = words[0];
+    setTimeout(() => {
+      wordIndex = 1;
+      setText(words[wordIndex]);
+    }, 2500);
   })();
 
   // Signal Decode animation for footer
