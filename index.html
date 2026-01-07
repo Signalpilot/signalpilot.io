@@ -1627,20 +1627,25 @@
     }
     @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
     .shiny-cta span{position:relative;z-index:2;display:inline-block}
-    .shiny-cta>span{position:relative;z-index:1}
 
-    /* Use fallback animation on mobile */
+    /* Slow down shiny animations on mobile */
     @media (max-width: 768px) {
       .shiny-cta {
-        animation: shiny-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        -webkit-animation: shiny-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        background: linear-gradient(#0a0a0f, #0a0a0f) padding-box, linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e3a8a 100%) border-box;
+        animation-duration: 4s;
       }
-      .shiny-cta::before, .shiny-cta::after { display: none; }
-      @-webkit-keyframes shiny-pulse { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25), inset 0 0 0 1px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 25px rgba(59,130,246,0.4), inset 0 0 0 1px rgba(255,255,255,0.15); } }
-      @keyframes shiny-pulse { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25), inset 0 0 0 1px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 25px rgba(59,130,246,0.4), inset 0 0 0 1px rgba(255,255,255,0.15); } }
+      .shiny-cta::after {
+        animation-duration: 6s;
+      }
     }
-    @media (prefers-reduced-motion: reduce) { .shiny-cta { animation: none; } }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .shiny-cta,
+      .shiny-cta::before,
+      .shiny-cta::after {
+        animation: none;
+      }
+    }
 
     .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02)),var(--bg);border-radius:16px;padding:1.05rem;box-shadow:var(--shadow);min-width:0;position:relative;overflow:visible}
 
@@ -1906,8 +1911,7 @@
     nav[aria-label="Main"] ul li:nth-child(3){animation:fadeInUp 0.4s ease 0.3s forwards;opacity:0}
     nav[aria-label="Main"] ul li:nth-child(4){animation:fadeInUp 0.4s ease 0.4s forwards;opacity:0}
     nav[aria-label="Main"] ul li:nth-child(5){animation:fadeInUp 0.4s ease 0.45s forwards;opacity:0}
-    .lang-dropdown,.cta-header:not(.shiny-cta){animation:fadeInUp 0.4s ease 0.5s forwards;opacity:0}
-    .cta-header.shiny-cta{opacity:1}
+    .lang-dropdown,.cta-header{animation:fadeInUp 0.4s ease 0.5s forwards;opacity:0}
     .menu-toggle{animation:fadeInUp 0.4s ease 0.5s forwards;opacity:0}
 
     /* Allow brand to shrink slightly on very constrained screens with translations */
@@ -2197,12 +2201,6 @@
       position:relative;
       overflow:hidden;
       transition:box-shadow 0.3s ease;
-      max-width:140px;
-    }
-    .cta-header .cta-short{display:none}
-    @media (max-width:1350px){
-      .cta-header .cta-full{display:none}
-      .cta-header .cta-short{display:inline}
     }
     .cta-header::before{
       content:'';
@@ -3369,10 +3367,9 @@
         </button>
       </div>
 
-      <a href="#pricing" class="shiny-cta cta-header" style="margin-left:.75rem;padding:.55rem 1.1rem;font-size:.9rem;white-space:nowrap">
-        <span class="cta-full">Try Free</span>
-        <span class="cta-short">Try</span>
-      </a>
+      <a class="shiny-cta cta-header" href="#trial" style="display:inline-flex;width:auto;padding:0.75rem 1.5rem;height:auto;white-space:nowrap"><span>Try Free 7 Days →</span></a>
+
+
 
       <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainnav">Menu ☰</button>
 
@@ -3945,6 +3942,685 @@
       </div>
     </section>
 
+    <!-- PENTARCH IN ACTION - PROOF GALLERY -->
+    <section class="section" style="padding:4rem 0;overflow:visible">
+
+      <div class="container">
+
+        <!-- Section Header -->
+        <div style="text-align:center;margin-bottom:3rem">
+          <h2 class="headline lg" style="margin-bottom:1rem"><span class="shimmer-text">See It In Action</span></h2>
+          <p class="note" style="max-width:55ch;margin:0 auto;color:var(--muted)">
+            The edge, visualized.
+          </p>
+        </div>
+
+        <!-- Carousel Container -->
+        <div style="position:relative;max-width:1200px;margin:0 auto">
+
+          <!-- Navigation Arrows -->
+          <button id="carousel-prev" aria-label="Previous chart" style="position:absolute;left:-60px;top:50%;transform:translateY(-50%);z-index:10;background:var(--bg-elev);border:2px solid var(--brand);border-radius:50%;width:48px;height:48px;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;color:var(--brand);font-size:1.5rem;box-shadow:0 4px 12px rgba(0,0,0,0.3)">
+            ‹
+          </button>
+
+          <button id="carousel-next" aria-label="Next chart" style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);z-index:10;background:var(--bg-elev);border:2px solid var(--brand);border-radius:50%;width:48px;height:48px;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;color:var(--brand);font-size:1.5rem;box-shadow:0 4px 12px rgba(0,0,0,0.3)">
+            ›
+          </button>
+
+          <!-- Scrollable Gallery -->
+          <div id="pentarch-carousel" role="region" aria-label="Chart examples carousel" aria-live="polite" style="display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:1rem 0;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none">
+
+            <!-- Chart 1 -->
+            <div class="carousel-item" style="flex:0 0 100%;scroll-snap-align:center;position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 8px 32px rgba(0,0,0,0.3);background:var(--bg-soft)">
+              <img src="/assets/images/pentarch/1.webp" alt="Pentarch indicator on Apple stock 12-hour chart showing multi-timeframe cycle analysis with TD touchdown signals and phase markers" loading="lazy" width="2770" height="1516" style="width:100%;height:100%;display:block;object-fit:cover">
+              <!-- Caption Overlay -->
+              <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,7,13,0.95),transparent);padding:2rem 1.5rem 1.5rem;color:var(--text);pointer-events:none">
+                <p style="margin:0;font-size:1.1rem;font-weight:700;color:var(--brand)" id="caption-1">
+                  Apple: Multi-timeframe precision
+                </p>
+                <p style="margin:0.25rem 0 0 0;font-size:0.85rem;color:rgba(255,255,255,0.7)">
+                  12h
+                </p>
+              </div>
+            </div>
+
+            <!-- Chart 2 -->
+            <div class="carousel-item" style="flex:0 0 100%;scroll-snap-align:center;position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 8px 32px rgba(0,0,0,0.3);background:var(--bg-soft)">
+              <img src="/assets/images/pentarch/2.webp" alt="Pentarch indicator on Bitcoin weekly chart displaying long-term trend detection with 5-phase cycle analysis and momentum tracking" loading="lazy" width="2770" height="1516" style="width:100%;height:100%;display:block;object-fit:cover">
+              <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,7,13,0.95),transparent);padding:2rem 1.5rem 1.5rem;color:var(--text);pointer-events:none">
+                <p style="margin:0;font-size:1.1rem;font-weight:700;color:var(--brand)" id="caption-2">
+                  Bitcoin: Long-term trend mastery
+                </p>
+                <p style="margin:0.25rem 0 0 0;font-size:0.85rem;color:rgba(255,255,255,0.7)">
+                  1W
+                </p>
+              </div>
+            </div>
+
+            <!-- Chart 3 -->
+            <div class="carousel-item" style="flex:0 0 100%;scroll-snap-align:center;position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 8px 32px rgba(0,0,0,0.3);background:var(--bg-soft)">
+              <img src="/assets/images/pentarch/3.webp" alt="Pentarch indicator on Dollar Index weekly chart showing currency trend signals with cycle phase detection and strength indicators" loading="lazy" width="2770" height="1516" style="width:100%;height:100%;display:block;object-fit:cover">
+              <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,7,13,0.95),transparent);padding:2rem 1.5rem 1.5rem;color:var(--text);pointer-events:none">
+                <p style="margin:0;font-size:1.1rem;font-weight:700;color:var(--brand)" id="caption-3">
+                  Dollar Index: Currency signals
+                </p>
+                <p style="margin:0.25rem 0 0 0;font-size:0.85rem;color:rgba(255,255,255,0.7)">
+                  1W
+                </p>
+              </div>
+            </div>
+
+            <!-- Chart 4 -->
+            <div class="carousel-item" style="flex:0 0 100%;scroll-snap-align:center;position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 8px 32px rgba(0,0,0,0.3);background:var(--bg-soft)">
+              <img src="/assets/images/pentarch/4.webp" alt="Pentarch indicator on Ethereum daily chart displaying crypto momentum alerts with phase transition markers and TD signals" loading="lazy" width="2770" height="1516" style="width:100%;height:100%;display:block;object-fit:cover">
+              <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,7,13,0.95),transparent);padding:2rem 1.5rem 1.5rem;color:var(--text);pointer-events:none">
+                <p style="margin:0;font-size:1.1rem;font-weight:700;color:var(--brand)" id="caption-4">
+                  Ethereum: Crypto momentum alerts
+                </p>
+                <p style="margin:0.25rem 0 0 0;font-size:0.85rem;color:rgba(255,255,255,0.7)">
+                  1D
+                </p>
+              </div>
+            </div>
+
+            <!-- Chart 5 -->
+            <div class="carousel-item" style="flex:0 0 100%;scroll-snap-align:center;position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 8px 32px rgba(0,0,0,0.3);background:var(--bg-soft)">
+              <img src="/assets/images/pentarch/5.webp" alt="Pentarch indicator on EUR/USD monthly chart showing forex trend detection with long-term cycle analysis and reversal signals" loading="lazy" width="2770" height="1516" style="width:100%;height:100%;display:block;object-fit:cover">
+              <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,7,13,0.95),transparent);padding:2rem 1.5rem 1.5rem;color:var(--text);pointer-events:none">
+                <p style="margin:0;font-size:1.1rem;font-weight:700;color:var(--brand)" id="caption-5">
+                  EUR/USD: Forex trend detection
+                </p>
+                <p style="margin:0.25rem 0 0 0;font-size:0.85rem;color:rgba(255,255,255,0.7)">
+                  1M
+                </p>
+              </div>
+            </div>
+
+            <!-- Chart 6 -->
+            <div class="carousel-item" style="flex:0 0 100%;scroll-snap-align:center;position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 8px 32px rgba(0,0,0,0.3);background:var(--bg-soft)">
+              <img src="/assets/images/pentarch/6.webp" alt="Pentarch indicator on MicroStrategy 3-day chart tracking volatility with cycle phases and momentum strength indicators" loading="lazy" width="2770" height="1516" style="width:100%;height:100%;display:block;object-fit:cover">
+              <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,7,13,0.95),transparent);padding:2rem 1.5rem 1.5rem;color:var(--text);pointer-events:none">
+                <p style="margin:0;font-size:1.1rem;font-weight:700;color:var(--brand)" id="caption-6">
+                  MicroStrategy: Volatility tracking
+                </p>
+                <p style="margin:0.25rem 0 0 0;font-size:0.85rem;color:rgba(255,255,255,0.7)">
+                  3D
+                </p>
+              </div>
+            </div>
+
+            <!-- Chart 7 -->
+            <div class="carousel-item" style="flex:0 0 100%;scroll-snap-align:center;position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 8px 32px rgba(0,0,0,0.3);background:var(--bg-soft)">
+              <img src="/assets/images/pentarch/7.webp" alt="Pentarch indicator on S&P 500 2-day chart providing index intelligence with phase-based analysis and trend confirmation" loading="lazy" width="2770" height="1516" style="width:100%;height:100%;display:block;object-fit:cover">
+              <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,7,13,0.95),transparent);padding:2rem 1.5rem 1.5rem;color:var(--text);pointer-events:none">
+                <p style="margin:0;font-size:1.1rem;font-weight:700;color:var(--brand)" id="caption-7">
+                  S&P 500: Index intelligence
+                </p>
+                <p style="margin:0.25rem 0 0 0;font-size:0.85rem;color:rgba(255,255,255,0.7)">
+                  2D
+                </p>
+              </div>
+            </div>
+
+            <!-- Chart 8 -->
+            <div class="carousel-item" style="flex:0 0 100%;scroll-snap-align:center;position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 8px 32px rgba(0,0,0,0.3);background:var(--bg-soft)">
+              <img src="/assets/images/pentarch/8.webp" alt="Pentarch indicator on Tesla weekly chart identifying swing trade signals with cycle timing and TD touchdown confirmations" loading="lazy" width="2770" height="1516" style="width:100%;height:100%;display:block;object-fit:cover">
+              <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,7,13,0.95),transparent);padding:2rem 1.5rem 1.5rem;color:var(--text);pointer-events:none">
+                <p style="margin:0;font-size:1.1rem;font-weight:700;color:var(--brand)" id="caption-8">
+                  Tesla: Swing trade signals
+                </p>
+                <p style="margin:0.25rem 0 0 0;font-size:0.85rem;color:rgba(255,255,255,0.7)">
+                  1W
+                </p>
+              </div>
+            </div>
+
+            <!-- Chart 9 -->
+            <div class="carousel-item" style="flex:0 0 100%;scroll-snap-align:center;position:relative;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 8px 32px rgba(0,0,0,0.3);background:var(--bg-soft)">
+              <img src="/assets/images/pentarch/9.webp" alt="Pentarch indicator on Gold daily chart showing safe haven timing with precise cycle phases and reversal detection" loading="lazy" width="2770" height="1516" style="width:100%;height:100%;display:block;object-fit:cover">
+              <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(5,7,13,0.95),transparent);padding:2rem 1.5rem 1.5rem;color:var(--text);pointer-events:none">
+                <p style="margin:0;font-size:1.1rem;font-weight:700;color:var(--brand)" id="caption-9">
+                  Gold: Safe haven timing
+                </p>
+                <p style="margin:0.25rem 0 0 0;font-size:0.85rem;color:rgba(255,255,255,0.7)">
+                  1D
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Hide scrollbar -->
+          <style>
+            #pentarch-carousel::-webkit-scrollbar {
+              display: none;
+            }
+
+            #carousel-prev:hover,
+            #carousel-next:hover {
+              background: var(--brand);
+              color: var(--bg);
+              transform: translateY(-50%) scale(1.1);
+              box-shadow: 0 6px 20px rgba(91,138,255,0.4);
+            }
+
+            .carousel-item {
+              cursor: zoom-in !important;
+            }
+
+            .carousel-item:hover {
+              border-color: var(--brand);
+              box-shadow: 0 8px 32px rgba(91,138,255,0.3);
+              transition: all 0.3s ease;
+              transform: scale(1.02);
+            }
+
+            .carousel-item img {
+              cursor: zoom-in !important;
+              pointer-events: auto !important;
+            }
+
+            /* Mobile: Hide arrows, optimize gap for touch */
+            @media (max-width: 768px) {
+              #carousel-prev,
+              #carousel-next {
+                display: none;
+              }
+
+              #pentarch-carousel {
+                gap: 0.75rem; /* Increased for better visual separation on mobile */
+              }
+
+              /* Ensure carousel items maintain proper aspect ratio on mobile */
+              .carousel-item {
+                min-height: 200px;
+              }
+
+              .carousel-item img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+            /* Tablet optimization */
+            @media (min-width: 769px) and (max-width: 1024px) {
+              #carousel-prev {
+                left: -50px;
+              }
+
+              #carousel-next {
+                right: -50px;
+              }
+            }
+
+            /* Lightbox styles */
+            #carousel-lightbox {
+              display: none;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: 99999;
+            }
+
+            #carousel-lightbox.active {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+
+            .lightbox-overlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(5, 7, 13, 0.95);
+              backdrop-filter: blur(4px);
+            }
+
+            .lightbox-content {
+              position: relative;
+              z-index: 100000;
+              max-width: 95vw;
+              max-height: 95vh;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              animation: lightboxZoom 0.3s ease-out;
+            }
+
+            @keyframes lightboxZoom {
+              from {
+                transform: scale(0.8);
+                opacity: 0;
+              }
+              to {
+                transform: scale(1);
+                opacity: 1;
+              }
+            }
+
+            .lightbox-image {
+              max-width: 100%;
+              max-height: 85vh;
+              width: auto;
+              height: auto;
+              border-radius: 12px;
+              box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+              border: 2px solid rgba(91, 138, 255, 0.3);
+            }
+
+            .lightbox-close {
+              position: absolute;
+              top: -50px;
+              right: 0;
+              background: rgba(255, 255, 255, 0.1);
+              border: 2px solid rgba(255, 255, 255, 0.3);
+              color: white;
+              font-size: 2rem;
+              width: 45px;
+              height: 45px;
+              border-radius: 50%;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: all 0.3s ease;
+              line-height: 1;
+            }
+
+            .lightbox-close:hover {
+              background: var(--brand);
+              border-color: var(--brand);
+              transform: rotate(90deg) scale(1.1);
+            }
+
+            .lightbox-caption {
+              margin-top: 1rem;
+              color: var(--brand);
+              font-size: 1.2rem;
+              font-weight: 700;
+              text-align: center;
+              padding: 0.5rem 1rem;
+              background: rgba(91, 138, 255, 0.1);
+              border-radius: 8px;
+              border: 1px solid rgba(91, 138, 255, 0.3);
+            }
+
+            /* Mobile lightbox adjustments */
+            @media (max-width: 768px) {
+              .lightbox-content {
+                max-width: 98vw;
+                max-height: 98vh;
+              }
+
+              .lightbox-image {
+                max-height: 80vh;
+              }
+
+              .lightbox-close {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+              }
+
+              .lightbox-caption {
+                font-size: 1rem;
+                margin-top: 0.5rem;
+              }
+            }
+          </style>
+
+          <!-- Carousel Navigation Script -->
+          <script>
+            (function() {
+              const carousel = document.getElementById('pentarch-carousel');
+              const prevBtn = document.getElementById('carousel-prev');
+              const nextBtn = document.getElementById('carousel-next');
+              const items = carousel.querySelectorAll('.carousel-item');
+              const carouselImages = carousel.querySelectorAll('.carousel-item img');
+              let currentIndex = 0;
+              let autoScrollInterval;
+              let isCarouselVisible = true;
+              let isHovering = false;
+
+              // Scroll to specific index
+              function scrollToIndex(index) {
+                if (index < 0) index = items.length - 1;
+                if (index >= items.length) index = 0;
+                currentIndex = index;
+
+                const itemWidth = items[0].offsetWidth;
+                // 1.5rem on desktop, 0.5rem on mobile
+                const gap = window.innerWidth <= 768 ? 8 : 24;
+                carousel.scrollLeft = (itemWidth + gap) * currentIndex;
+              }
+
+              // Navigation
+              prevBtn.addEventListener('click', () => {
+                scrollToIndex(currentIndex - 1);
+                resetAutoScroll();
+              });
+
+              nextBtn.addEventListener('click', () => {
+                scrollToIndex(currentIndex + 1);
+                resetAutoScroll();
+              });
+
+              // Auto-scroll every 10 seconds (only when visible)
+              function startAutoScroll() {
+                if (!isCarouselVisible || isHovering || document.hidden) return;
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = setInterval(() => {
+                  if (isCarouselVisible && !isHovering && !document.hidden) {
+                    scrollToIndex(currentIndex + 1);
+                  }
+                }, 10000);
+              }
+
+              function stopAutoScroll() {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+              }
+
+              function resetAutoScroll() {
+                stopAutoScroll();
+                startAutoScroll();
+              }
+
+              // Pause when not in viewport
+              if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                  entries.forEach(entry => {
+                    isCarouselVisible = entry.isIntersecting;
+                    if (isCarouselVisible) {
+                      startAutoScroll();
+                    } else {
+                      stopAutoScroll();
+                    }
+                  });
+                }, { threshold: 0 });
+                observer.observe(carousel);
+              }
+
+              // Pause when tab hidden
+              document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                  stopAutoScroll();
+                } else if (isCarouselVisible && !isHovering) {
+                  startAutoScroll();
+                }
+              });
+
+              // Start auto-scroll (if visible)
+              startAutoScroll();
+
+              // Pause on hover
+              carousel.addEventListener('mouseenter', () => {
+                isHovering = true;
+                stopAutoScroll();
+              });
+
+              carousel.addEventListener('mouseleave', () => {
+                isHovering = false;
+                startAutoScroll();
+              });
+
+              // Update index on manual scroll (mobile swipe)
+              let scrollTimeout;
+              carousel.addEventListener('scroll', () => {
+                try {
+                  clearTimeout(scrollTimeout);
+                  scrollTimeout = setTimeout(() => {
+                    try {
+                      const scrollLeft = carousel.scrollLeft;
+                      const itemWidth = items[0].offsetWidth;
+                      // 1.5rem on desktop, 0.5rem on mobile
+                      const gap = window.innerWidth <= 768 ? 8 : 24;
+                      currentIndex = Math.round(scrollLeft / (itemWidth + gap));
+                      updateDots();
+                    } catch(e) {
+                      // Silently handle carousel scroll errors
+                    }
+                  }, 100);
+                } catch(e) {
+                  // Silently handle scroll event errors
+                }
+              }, { passive: true });
+
+              // Keyboard navigation (left/right arrows)
+              document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                  scrollToIndex(currentIndex - 1);
+                  resetAutoScroll();
+                } else if (e.key === 'ArrowRight') {
+                  scrollToIndex(currentIndex + 1);
+                  resetAutoScroll();
+                }
+              });
+
+              // Pagination dots
+              const dotsContainer = document.getElementById('carousel-dots');
+              const dots = [];
+
+              // Create dots only if container exists
+              if (dotsContainer) {
+                for (let i = 0; i < items.length; i++) {
+                  const dot = document.createElement('button');
+                  dot.className = 'carousel-dot';
+                  dot.setAttribute('aria-label', `Go to chart ${i + 1}`);
+                  dot.addEventListener('click', () => {
+                    scrollToIndex(i);
+                    resetAutoScroll();
+                  });
+                  dots.push(dot);
+                  dotsContainer.appendChild(dot);
+                }
+              }
+
+              // Update active dot
+              function updateDots() {
+                if (dotsContainer && dots.length > 0) {
+                  dots.forEach((dot, i) => {
+                    if (i === currentIndex) {
+                      dot.classList.add('active');
+                    } else {
+                      dot.classList.remove('active');
+                    }
+                  });
+                }
+              }
+
+              // Initialize dots
+              updateDots();
+
+              // Aggressive image preloading to fix lazy loading issues on fast scroll
+              // Remove lazy loading attribute and force immediate load
+              if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries) => {
+                  try {
+                    entries.forEach(entry => {
+                      const img = entry.target;
+                      // Preload images when they're within 800px of viewport
+                      if (entry.isIntersecting || entry.intersectionRatio > 0) {
+                        // Force load by removing lazy attribute
+                        img.removeAttribute('loading');
+                        // Ensure src is set (in case it was data-src)
+                        if (img.dataset.src) {
+                          img.src = img.dataset.src;
+                          img.removeAttribute('data-src');
+                        }
+                        imageObserver.unobserve(img);
+                      }
+                    });
+                  } catch(e) {
+                    // Silently handle image loading errors
+                  }
+                }, {
+                  root: null,
+                  rootMargin: '800px', // Large margin to preload before visible
+                  threshold: 0
+                });
+
+                // Observe all carousel images
+                carouselImages.forEach(img => {
+                  imageObserver.observe(img);
+                });
+              } else {
+                // Fallback: immediately load all images if IntersectionObserver not supported
+                carouselImages.forEach(img => {
+                  img.removeAttribute('loading');
+                });
+              }
+
+              // Carousel item click handlers - stop auto-scroll and open lightbox
+              items.forEach((item, index) => {
+                item.style.cursor = 'zoom-in';
+
+                // Add click handler to both item and image
+                const clickHandler = (e) => {
+                  // Don't trigger if clicking on navigation buttons
+                  if (e.target.closest('#carousel-prev') || e.target.closest('#carousel-next')) {
+                    return;
+                  }
+                  e.preventDefault();
+                  e.stopPropagation();
+                  clearInterval(autoScrollInterval);
+
+                  const img = item.querySelector('img');
+                  if (img && img.src) {
+                    openLightbox(img.src, img.alt, index);
+                  }
+                };
+
+                item.addEventListener('click', clickHandler);
+
+                // Also add to the image directly
+                const img = item.querySelector('img');
+                if (img) {
+                  img.style.cursor = 'zoom-in';
+                  img.style.pointerEvents = 'auto';
+                  img.addEventListener('click', clickHandler);
+                }
+              });
+
+              // Lightbox functionality
+              function openLightbox(imageSrc, imageAlt, imageIndex) {
+                // Create lightbox if it doesn't exist
+                let lightbox = document.getElementById('carousel-lightbox');
+                if (!lightbox) {
+                  lightbox = document.createElement('div');
+                  lightbox.id = 'carousel-lightbox';
+                  lightbox.innerHTML = `
+                    <div class="lightbox-overlay"></div>
+                    <div class="lightbox-content">
+                      <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+                      <img class="lightbox-image" src="" alt="">
+                      <div class="lightbox-caption"></div>
+                    </div>
+                  `;
+                  document.body.appendChild(lightbox);
+
+                  // Close handlers
+                  const closeBtn = lightbox.querySelector('.lightbox-close');
+                  const overlay = lightbox.querySelector('.lightbox-overlay');
+
+                  const closeLightbox = () => {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                    startAutoScroll();
+                  };
+
+                  closeBtn.addEventListener('click', closeLightbox);
+                  overlay.addEventListener('click', closeLightbox);
+
+                  // Keyboard close (ESC)
+                  document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                      closeLightbox();
+                    }
+                  });
+                }
+
+                // Set image and caption
+                const lightboxImg = lightbox.querySelector('.lightbox-image');
+                const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+                const caption = document.getElementById(`caption-${imageIndex + 1}`);
+
+                lightboxImg.src = imageSrc;
+                lightboxImg.alt = imageAlt;
+                lightboxCaption.textContent = caption ? caption.textContent : imageAlt;
+
+                // Show lightbox
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+              }
+            })();
+          </script>
+
+        </div>
+
+        <!-- Pagination Dots -->
+        <div id="carousel-dots" style="display:flex;justify-content:center;align-items:center;gap:0.5rem;margin-top:1.5rem"></div>
+
+        <style>
+          .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--muted-soft);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.4;
+            padding: 0;
+          }
+
+          .carousel-dot:hover {
+            opacity: 0.7;
+            transform: scale(1.2);
+          }
+
+          .carousel-dot.active {
+            background: var(--brand);
+            opacity: 1;
+            width: 24px;
+            border-radius: 5px;
+          }
+
+          @media (max-width: 768px) {
+            .carousel-dot {
+              width: 8px;
+              height: 8px;
+            }
+
+            .carousel-dot.active {
+              width: 20px;
+            }
+          }
+        </style>
+
+        <!-- Swipe hint for mobile -->
+        <p style="text-align:center;margin-top:1.5rem;color:var(--muted-soft);font-size:0.9rem">
+          <span style="display:none" id="swipe-hint">← Swipe to see more →</span>
+        </p>
+
+        <script>
+          // Show swipe hint on mobile
+          if (window.innerWidth <= 768) {
+            document.getElementById('swipe-hint').style.display = 'inline';
+          }
+        </script>
+
+      </div>
+
+    </section>
+
     <!-- WHAT'S INSIDE: THE ELITE 7 -->
 
     <section id="inside" class="section" style="padding:4rem 1rem 5rem">
@@ -3957,9 +4633,6 @@
         </h2>
         <p style="margin-top:1rem;font-size:1rem;color:var(--muted);max-width:42ch;margin-left:auto;margin-right:auto">
           Seven precision tools. Zero repaint. One unified system for reading complete market cycles.
-        </p>
-        <p style="margin-top:.5rem;font-size:.85rem;color:var(--muted-soft);max-width:50ch;margin-left:auto;margin-right:auto">
-          Works on stocks, crypto, forex, commodities - any market, any timeframe.
         </p>
         <div style="margin-top:1.5rem">
           <a href="#pricing" class="shiny-cta" style="width:auto;padding:.75rem 1.5rem;height:auto">
@@ -3979,40 +4652,44 @@
 
         <!-- 2x2 Grid: On-Chart Indicators (16:9) -->
         <div class="elite-chart-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem">
-          <div class="elite-chart-card featured">
-            <img src="assets/images/elite7/pentarch.png" alt="Pentarch">
+          <div class="elite-chart-card featured" data-docs="https://docs.signalpilot.io/pentarch-v10/">
+            <img src="assets/images/elite7/pentarch.png" alt="Pentarch" class="elite-card-img">
             <div class="elite-chart-overlay"></div>
             <span class="elite-card-badge flagship">★ Flagship</span>
             <div class="elite-card-content">
               <p class="elite-card-title">Pentarch</p>
-              <p class="elite-card-subtitle">Cycle Phase Detection</p>
+              <p class="elite-card-subtitle">Cycle phase detection</p>
+              <a href="https://docs.signalpilot.io/pentarch-v10/" target="_blank" rel="noopener" class="elite-card-link">Read Docs →</a>
             </div>
           </div>
-          <div class="elite-chart-card">
-            <img src="assets/images/elite7/omnideck.png" alt="OmniDeck">
+          <div class="elite-chart-card" data-docs="https://docs.signalpilot.io/omnideck-v10/">
+            <img src="assets/images/elite7/omnideck.png" alt="OmniDeck" class="elite-card-img">
             <div class="elite-chart-overlay"></div>
             <span class="elite-card-badge">Overlay</span>
             <div class="elite-card-content">
               <p class="elite-card-title">OmniDeck</p>
-              <p class="elite-card-subtitle">Unified Chart Overlay</p>
+              <p class="elite-card-subtitle">10 systems unified</p>
+              <a href="https://docs.signalpilot.io/omnideck-v10/" target="_blank" rel="noopener" class="elite-card-link">Read Docs →</a>
             </div>
           </div>
-          <div class="elite-chart-card">
-            <img src="assets/images/elite7/janus-atlas.png" alt="Janus Atlas">
+          <div class="elite-chart-card" data-docs="https://docs.signalpilot.io/janus-atlas-v10/">
+            <img src="assets/images/elite7/janus-atlas.png" alt="Janus Atlas" class="elite-card-img">
             <div class="elite-chart-overlay"></div>
             <span class="elite-card-badge">Levels</span>
             <div class="elite-card-content">
               <p class="elite-card-title">Janus Atlas</p>
-              <p class="elite-card-subtitle">Multi-Timeframe Auto-Levels</p>
+              <p class="elite-card-subtitle">60+ auto-levels</p>
+              <a href="https://docs.signalpilot.io/janus-atlas-v10/" target="_blank" rel="noopener" class="elite-card-link">Read Docs →</a>
             </div>
           </div>
-          <div class="elite-chart-card">
-            <img src="assets/images/elite7/augury-grid.png" alt="Augury Grid">
+          <div class="elite-chart-card" data-docs="https://docs.signalpilot.io/augury-grid-v10/">
+            <img src="assets/images/elite7/augury-grid.png" alt="Augury Grid" class="elite-card-img">
             <div class="elite-chart-overlay"></div>
             <span class="elite-card-badge">Scanner</span>
             <div class="elite-card-content">
               <p class="elite-card-title">Augury Grid</p>
-              <p class="elite-card-subtitle">Multi-Timeframe Scanner</p>
+              <p class="elite-card-subtitle">Multi-symbol scanner</p>
+              <a href="https://docs.signalpilot.io/augury-grid-v10/" target="_blank" rel="noopener" class="elite-card-link">Read Docs →</a>
             </div>
           </div>
         </div>
@@ -4025,31 +4702,34 @@
 
         <!-- Stacked Horizontal Strips: Panel Indicators (ultra-wide) -->
         <div class="elite-panel-stack" style="display:flex;flex-direction:column;gap:.75rem">
-          <div class="elite-panel-card">
-            <img src="assets/images/elite7/plutus-flow.png" alt="Plutus Flow">
+          <div class="elite-panel-card" data-docs="https://docs.signalpilot.io/plutus-flow-v10/">
+            <img src="assets/images/elite7/plutus-flow.png" alt="Plutus Flow" class="elite-card-img">
             <div class="elite-panel-overlay"></div>
             <span class="elite-card-badge">Flow</span>
             <div class="elite-card-content">
               <p class="elite-card-title">Plutus Flow</p>
-              <p class="elite-card-subtitle">Statistical OBV Analysis</p>
+              <p class="elite-card-subtitle">Statistical OBV</p>
+              <a href="https://docs.signalpilot.io/plutus-flow-v10/" target="_blank" rel="noopener" class="elite-card-link">Read Docs →</a>
             </div>
           </div>
-          <div class="elite-panel-card">
-            <img src="assets/images/elite7/harmonic-oscillator.png" alt="Harmonic Oscillator">
+          <div class="elite-panel-card" data-docs="https://docs.signalpilot.io/harmonic-oscillator-v10/">
+            <img src="assets/images/elite7/harmonic-oscillator.png" alt="Harmonic Oscillator" class="elite-card-img">
             <div class="elite-panel-overlay"></div>
             <span class="elite-card-badge">Momentum</span>
             <div class="elite-card-content">
               <p class="elite-card-title">Harmonic Oscillator</p>
-              <p class="elite-card-subtitle">Multi-Component Momentum</p>
+              <p class="elite-card-subtitle">7-component consensus</p>
+              <a href="https://docs.signalpilot.io/harmonic-oscillator-v10/" target="_blank" rel="noopener" class="elite-card-link">Read Docs →</a>
             </div>
           </div>
-          <div class="elite-panel-card">
-            <img src="assets/images/elite7/volume-oracle.png" alt="Volume Oracle">
+          <div class="elite-panel-card" data-docs="https://docs.signalpilot.io/volume-oracle-v10/">
+            <img src="assets/images/elite7/volume-oracle.png" alt="Volume Oracle" class="elite-card-img">
             <div class="elite-panel-overlay"></div>
             <span class="elite-card-badge">Volume</span>
             <div class="elite-card-content">
               <p class="elite-card-title">Volume Oracle</p>
-              <p class="elite-card-subtitle">Regime Detection</p>
+              <p class="elite-card-subtitle">Regime detection</p>
+              <a href="https://docs.signalpilot.io/volume-oracle-v10/" target="_blank" rel="noopener" class="elite-card-link">Read Docs →</a>
             </div>
           </div>
         </div>
@@ -4066,6 +4746,28 @@
           background: linear-gradient(145deg, rgba(20,25,40,1) 0%, rgba(10,14,24,1) 100%);
           transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
           box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+          cursor: pointer;
+        }
+        .elite-card-img {
+          cursor: zoom-in;
+        }
+        .elite-card-link {
+          display: inline-block;
+          margin-top: 0.5rem;
+          padding: 0.35rem 0.75rem;
+          font-size: 0.7rem;
+          font-weight: 600;
+          color: var(--brand);
+          background: rgba(91,138,255,0.1);
+          border: 1px solid rgba(91,138,255,0.3);
+          border-radius: 6px;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+        .elite-card-link:hover {
+          background: rgba(91,138,255,0.2);
+          border-color: var(--brand);
+          color: #fff;
         }
         /* Gradient border effect */
         .elite-chart-card::before {
@@ -4137,6 +4839,7 @@
           background: linear-gradient(145deg, rgba(20,25,40,1) 0%, rgba(10,14,24,1) 100%);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
           box-shadow: 0 2px 15px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+          cursor: pointer;
         }
         .elite-panel-card::before {
           content: '';
@@ -4154,25 +4857,6 @@
         .elite-panel-card:hover {
           transform: translateY(-4px);
           box-shadow: 0 12px 35px rgba(91,138,255,0.2), 0 0 25px rgba(91,138,255,0.08);
-        }
-        /* Click to expand indicator */
-        .elite-chart-card::after,
-        .elite-panel-card::after {
-          content: '🔍';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%) scale(0);
-          font-size: 2rem;
-          opacity: 0;
-          transition: all 0.3s ease;
-          z-index: 10;
-          filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
-        }
-        .elite-chart-card:hover::after,
-        .elite-panel-card:hover::after {
-          transform: translate(-50%, -50%) scale(1);
-          opacity: 0.9;
         }
         .elite-panel-card:hover::before {
           background: linear-gradient(90deg, rgba(91,138,255,0.5), rgba(168,85,247,0.2) 30%, rgba(168,85,247,0.2) 70%, rgba(91,138,255,0.5));
@@ -4218,18 +4902,16 @@
         }
         .elite-card-title {
           color: #fff;
-          font-size: 1.35rem;
+          font-size: 1.15rem;
           font-weight: 700;
-          margin: 0 0 .35rem 0;
-          text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 0 20px rgba(91,138,255,0.3);
-          letter-spacing: 0.02em;
+          margin: 0 0 .25rem 0;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         .elite-card-subtitle {
-          color: rgba(255,255,255,0.85);
-          font-size: .85rem;
+          color: rgba(255,255,255,0.7);
+          font-size: .8rem;
           margin: 0;
           font-weight: 500;
-          text-shadow: 0 1px 8px rgba(0,0,0,0.5);
         }
 
         /* Panel card - position content at bottom */
@@ -4238,7 +4920,7 @@
           transform: none;
         }
         .elite-panel-card .elite-card-title {
-          font-size: 1.3rem;
+          font-size: 1.15rem;
         }
 
         @media (max-width: 768px) {
@@ -4249,16 +4931,10 @@
             aspect-ratio: 2 / 1;
           }
           .elite-card-title {
-            font-size: 1.15rem;
+            font-size: 1rem;
           }
           .elite-card-subtitle {
-            font-size: .8rem;
-          }
-          /* Disable tap/click on cards - view only */
-          .elite-chart-card,
-          .elite-panel-card {
-            pointer-events: none;
-            -webkit-tap-highlight-color: transparent;
+            font-size: .75rem;
           }
         }
         @media (max-width: 480px) {
@@ -4267,6 +4943,58 @@
           }
         }
       </style>
+
+      <script>
+        // Elite Seven card interactions
+        (function() {
+          const isMobile = window.matchMedia('(max-width: 768px)').matches;
+          const cards = document.querySelectorAll('.elite-chart-card, .elite-panel-card');
+
+          cards.forEach(card => {
+            const img = card.querySelector('.elite-card-img');
+            const docsUrl = card.dataset.docs;
+
+            if (isMobile) {
+              // Mobile: tap card → go to docs
+              card.addEventListener('click', (e) => {
+                if (e.target.classList.contains('elite-card-link')) return; // Let link work normally
+                window.open(docsUrl, '_blank');
+              });
+            } else {
+              // Desktop: click image → lightbox
+              if (img) {
+                img.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  openEliteLightbox(img.src, img.alt);
+                });
+              }
+            }
+          });
+
+          // Simple lightbox for desktop
+          function openEliteLightbox(src, alt) {
+            let lightbox = document.getElementById('elite-lightbox');
+            if (!lightbox) {
+              lightbox = document.createElement('div');
+              lightbox.id = 'elite-lightbox';
+              lightbox.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;opacity:0;transition:opacity 0.3s ease;';
+              lightbox.innerHTML = '<img style="max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5);" />';
+              document.body.appendChild(lightbox);
+              lightbox.addEventListener('click', () => {
+                lightbox.style.opacity = '0';
+                setTimeout(() => lightbox.style.display = 'none', 300);
+                document.body.style.overflow = '';
+              });
+            }
+            const lbImg = lightbox.querySelector('img');
+            lbImg.src = src;
+            lbImg.alt = alt;
+            lightbox.style.display = 'flex';
+            requestAnimationFrame(() => lightbox.style.opacity = '1');
+            document.body.style.overflow = 'hidden';
+          }
+        })();
+      </script>
 
     </section>
 
@@ -5844,7 +6572,7 @@
         <div class="partners-marquee" data-reveal="fade-up" data-reveal-delay="100">
           <div class="partners-track">
             <a href="https://www.tradingview.com/" target="_blank" rel="noopener" class="partner-logo" title="TradingView">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M15.8654 8.2789c0 1.3541-1.0978 2.4519-2.452 2.4519-1.354 0-2.4519-1.0978-2.4519-2.452 0-1.354 1.0978-2.4518 2.452-2.4518 1.3541 0 2.4519 1.0977 2.4519 2.4519zM9.75 6H0v4.9038h4.8462v7.2692H9.75Zm8.5962 0H24l-5.1058 12.173h-5.6538z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="currentColor"><rect x="4" y="12" width="5" height="16" rx="1"/><rect x="13" y="6" width="5" height="22" rx="1"/><rect x="22" y="2" width="5" height="26" rx="1"/></svg>
               <span>TradingView</span>
             </a>
             <a href="https://github.com/" target="_blank" rel="noopener" class="partner-logo" title="GitHub">
@@ -5864,28 +6592,28 @@
               <span>Stripe</span>
             </a>
             <a href="https://www.anthropic.com/" target="_blank" rel="noopener" class="partner-logo" title="Claude AI">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24"/><path d="M10.5363 3.5409L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 46 32" fill="currentColor"><path d="M32.73 0l-9.13 32h-7.24L7.27 0h7.27l6 22.57L26.46 0h6.27zm8.02 0l-4.71 13.43h5.06L46 0h-5.25z"/></svg>
               <span>Claude</span>
             </a>
             <a href="https://runwayml.com/" target="_blank" rel="noopener" class="partner-logo" title="Runway">
-              <svg width="28" height="28" viewBox="0 0 512 512" fill="currentColor"><path d="M392.51 511.69c-62.032 5.67-113.901-67.019-153.657-103.887C218.749 552.665-.15 538.933 0 391.985c.072-61.724 0-212.549 0-272.331C0 98.16 5.899 76.515 16.965 58.16c21-35.599 61.58-58.584 102.906-58.14c62.254.079 212.177-.071 272.639 0c147.084 0 161.053 218.821 15.696 238.523l68.977 68.884c75.785 71.27 18.906 207.396-84.673 204.263zm-33.407-86.199c42.745 44.035 110.984-24.182 66.963-66.869L306.489 239.217h-66.891v66.862l103.365 103.222l16.14 16.19zM72.417 392.056c-.974 61.201 95.66 61.423 94.693 0V119.654c.817-30.525-31.464-54.778-60.613-45.375c-1.268.373-2.465.746-3.59 1.197c-18.306 6.787-31.013 25.522-30.49 45.074v271.506zM392.51 166.893c61.429.975 61.358-95.524 0-94.556H230.109c12.335 25.974 9.196 66.425 9.418 94.556H392.51z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="5" width="20" height="3" rx="1.5"/><rect x="2" y="11" width="16" height="3" rx="1.5"/><rect x="2" y="17" width="12" height="3" rx="1.5"/></svg>
               <span>Runway</span>
             </a>
             <a href="https://www.godaddy.com/" target="_blank" rel="noopener" class="partner-logo" title="GoDaddy">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20.702 2.29c-2.494-1.554-5.778-1.187-8.706.654C9.076 1.104 5.79.736 3.3 2.29c-3.941 2.463-4.42 8.806-1.07 14.167 2.47 3.954 6.333 6.269 9.77 6.226 3.439.043 7.301-2.273 9.771-6.226 3.347-5.361 2.872-11.704-1.069-14.167zM4.042 15.328a12.838 12.838 0 01-1.546-3.541 10.12 10.12 0 01-.336-3.338c.15-1.98.956-3.524 2.27-4.345 1.315-.822 3.052-.87 4.903-.137.281.113.556.24.825.382A15.11 15.11 0 007.5 7.54c-2.035 3.255-2.655 6.878-1.945 9.765a13.247 13.247 0 01-1.514-1.98zm17.465-3.541a12.866 12.866 0 01-1.547 3.54 13.25 13.25 0 01-1.513 1.984c.635-2.589.203-5.76-1.353-8.734a.39.39 0 00-.563-.153l-4.852 3.032a.397.397 0 00-.126.546l.712 1.139a.395.395 0 00.547.126l3.145-1.965c.101.306.203.606.28.916.296 1.086.41 2.214.335 3.337-.15 1.982-.956 3.525-2.27 4.347a4.437 4.437 0 01-2.25.65h-.101a4.432 4.432 0 01-2.25-.65c-1.314-.822-2.121-2.365-2.27-4.347-.074-1.123.039-2.251.335-3.337a13.212 13.212 0 014.05-6.482 10.148 10.148 0 012.849-1.765c1.845-.733 3.586-.685 4.9.137 1.316.822 2.122 2.365 2.271 4.345a10.146 10.146 0 01-.33 3.334z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               <span>GoDaddy</span>
             </a>
             <a href="https://www.tradingview.com/pine-script-docs/" target="_blank" rel="noopener" class="partner-logo" title="Pine Script">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3H8zm8 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L6 10h3l-3 6h3l-4 6h14l-4-6h3l-3-6h3L12 2z"/><rect x="10" y="20" width="4" height="2"/></svg>
               <span>Pine Script</span>
             </a>
             <a href="https://unicorn.studio/" target="_blank" rel="noopener" class="partner-logo" title="Unicorn Studio">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 1z"/></svg>
               <span>Unicorn</span>
             </a>
             <!-- Duplicate set for seamless loop -->
             <a href="https://www.tradingview.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M15.8654 8.2789c0 1.3541-1.0978 2.4519-2.452 2.4519-1.354 0-2.4519-1.0978-2.4519-2.452 0-1.354 1.0978-2.4518 2.452-2.4518 1.3541 0 2.4519 1.0977 2.4519 2.4519zM9.75 6H0v4.9038h4.8462v7.2692H9.75Zm8.5962 0H24l-5.1058 12.173h-5.6538z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="currentColor"><rect x="4" y="12" width="5" height="16" rx="1"/><rect x="13" y="6" width="5" height="22" rx="1"/><rect x="22" y="2" width="5" height="26" rx="1"/></svg>
               <span>TradingView</span>
             </a>
             <a href="https://github.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
@@ -5905,23 +6633,23 @@
               <span>Stripe</span>
             </a>
             <a href="https://www.anthropic.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24"/><path d="M10.5363 3.5409L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 46 32" fill="currentColor"><path d="M32.73 0l-9.13 32h-7.24L7.27 0h7.27l6 22.57L26.46 0h6.27zm8.02 0l-4.71 13.43h5.06L46 0h-5.25z"/></svg>
               <span>Claude</span>
             </a>
             <a href="https://runwayml.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 512 512" fill="currentColor"><path d="M392.51 511.69c-62.032 5.67-113.901-67.019-153.657-103.887C218.749 552.665-.15 538.933 0 391.985c.072-61.724 0-212.549 0-272.331C0 98.16 5.899 76.515 16.965 58.16c21-35.599 61.58-58.584 102.906-58.14c62.254.079 212.177-.071 272.639 0c147.084 0 161.053 218.821 15.696 238.523l68.977 68.884c75.785 71.27 18.906 207.396-84.673 204.263zm-33.407-86.199c42.745 44.035 110.984-24.182 66.963-66.869L306.489 239.217h-66.891v66.862l103.365 103.222l16.14 16.19zM72.417 392.056c-.974 61.201 95.66 61.423 94.693 0V119.654c.817-30.525-31.464-54.778-60.613-45.375c-1.268.373-2.465.746-3.59 1.197c-18.306 6.787-31.013 25.522-30.49 45.074v271.506zM392.51 166.893c61.429.975 61.358-95.524 0-94.556H230.109c12.335 25.974 9.196 66.425 9.418 94.556H392.51z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="5" width="20" height="3" rx="1.5"/><rect x="2" y="11" width="16" height="3" rx="1.5"/><rect x="2" y="17" width="12" height="3" rx="1.5"/></svg>
               <span>Runway</span>
             </a>
             <a href="https://www.godaddy.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20.702 2.29c-2.494-1.554-5.778-1.187-8.706.654C9.076 1.104 5.79.736 3.3 2.29c-3.941 2.463-4.42 8.806-1.07 14.167 2.47 3.954 6.333 6.269 9.77 6.226 3.439.043 7.301-2.273 9.771-6.226 3.347-5.361 2.872-11.704-1.069-14.167zM4.042 15.328a12.838 12.838 0 01-1.546-3.541 10.12 10.12 0 01-.336-3.338c.15-1.98.956-3.524 2.27-4.345 1.315-.822 3.052-.87 4.903-.137.281.113.556.24.825.382A15.11 15.11 0 007.5 7.54c-2.035 3.255-2.655 6.878-1.945 9.765a13.247 13.247 0 01-1.514-1.98zm17.465-3.541a12.866 12.866 0 01-1.547 3.54 13.25 13.25 0 01-1.513 1.984c.635-2.589.203-5.76-1.353-8.734a.39.39 0 00-.563-.153l-4.852 3.032a.397.397 0 00-.126.546l.712 1.139a.395.395 0 00.547.126l3.145-1.965c.101.306.203.606.28.916.296 1.086.41 2.214.335 3.337-.15 1.982-.956 3.525-2.27 4.347a4.437 4.437 0 01-2.25.65h-.101a4.432 4.432 0 01-2.25-.65c-1.314-.822-2.121-2.365-2.27-4.347-.074-1.123.039-2.251.335-3.337a13.212 13.212 0 014.05-6.482 10.148 10.148 0 012.849-1.765c1.845-.733 3.586-.685 4.9.137 1.316.822 2.122 2.365 2.271 4.345a10.146 10.146 0 01-.33 3.334z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               <span>GoDaddy</span>
             </a>
             <a href="https://www.tradingview.com/pine-script-docs/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3H8zm8 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L6 10h3l-3 6h3l-4 6h14l-4-6h3l-3-6h3L12 2z"/><rect x="10" y="20" width="4" height="2"/></svg>
               <span>Pine Script</span>
             </a>
             <a href="https://unicorn.studio/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 1z"/></svg>
               <span>Unicorn</span>
             </a>
           </div>
@@ -8329,30 +9057,18 @@ if ('serviceWorker' in navigator) {
     const lightboxImg = lightbox.querySelector('img');
     const closeBtn = lightbox.querySelector('.lightbox-close');
 
-    // Make all indicator screenshots and Elite Seven cards clickable
-    const indicatorImages = document.querySelectorAll('.indicator-screenshot, .elite-chart-card img, .elite-panel-card img');
+    // Make all indicator screenshots clickable
+    const indicatorImages = document.querySelectorAll('.indicator-screenshot');
     indicatorImages.forEach(img => {
       // Only if image has actual src and is visible
-      if (img.src && !img.src.includes('data:image')) {
+      if (img.src && !img.src.includes('data:image') && img.offsetParent !== null) {
         img.style.cursor = 'pointer';
-        // For Elite Seven cards, make the whole card clickable
-        const card = img.closest('.elite-chart-card, .elite-panel-card');
-        if (card) {
-          card.style.cursor = 'pointer';
-          card.addEventListener('click', () => {
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt || 'Indicator preview';
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-          });
-        } else {
-          img.addEventListener('click', () => {
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt || 'Indicator preview';
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-          });
-        }
+        img.addEventListener('click', () => {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt || 'Indicator preview';
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
       }
     });
 
