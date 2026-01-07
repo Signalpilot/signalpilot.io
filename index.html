@@ -4836,6 +4836,25 @@
           transform: translateY(-4px);
           box-shadow: 0 12px 35px rgba(91,138,255,0.2), 0 0 25px rgba(91,138,255,0.08);
         }
+        /* Click to expand indicator */
+        .elite-chart-card::after,
+        .elite-panel-card::after {
+          content: '🔍';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) scale(0);
+          font-size: 2rem;
+          opacity: 0;
+          transition: all 0.3s ease;
+          z-index: 10;
+          filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+        }
+        .elite-chart-card:hover::after,
+        .elite-panel-card:hover::after {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 0.9;
+        }
         .elite-panel-card:hover::before {
           background: linear-gradient(90deg, rgba(91,138,255,0.5), rgba(168,85,247,0.2) 30%, rgba(168,85,247,0.2) 70%, rgba(91,138,255,0.5));
         }
@@ -8985,18 +9004,30 @@ if ('serviceWorker' in navigator) {
     const lightboxImg = lightbox.querySelector('img');
     const closeBtn = lightbox.querySelector('.lightbox-close');
 
-    // Make all indicator screenshots clickable
-    const indicatorImages = document.querySelectorAll('.indicator-screenshot');
+    // Make all indicator screenshots and Elite Seven cards clickable
+    const indicatorImages = document.querySelectorAll('.indicator-screenshot, .elite-chart-card img, .elite-panel-card img');
     indicatorImages.forEach(img => {
       // Only if image has actual src and is visible
-      if (img.src && !img.src.includes('data:image') && img.offsetParent !== null) {
+      if (img.src && !img.src.includes('data:image')) {
         img.style.cursor = 'pointer';
-        img.addEventListener('click', () => {
-          lightboxImg.src = img.src;
-          lightboxImg.alt = img.alt || 'Indicator preview';
-          lightbox.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        });
+        // For Elite Seven cards, make the whole card clickable
+        const card = img.closest('.elite-chart-card, .elite-panel-card');
+        if (card) {
+          card.style.cursor = 'pointer';
+          card.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt || 'Indicator preview';
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+        } else {
+          img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt || 'Indicator preview';
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+        }
       }
     });
 
