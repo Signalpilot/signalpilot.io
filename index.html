@@ -1628,13 +1628,20 @@
     @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
     .shiny-cta span{position:relative;z-index:2;display:inline-block}
 
-    /* Slow down shiny animations on mobile */
+    /* Use fallback animation on mobile that doesn't rely on @property */
     @media (max-width: 768px) {
       .shiny-cta {
-        animation-duration: 4s;
+        animation: shiny-pulse 3s ease-in-out infinite;
+        background: linear-gradient(#0a0a0f, #0a0a0f) padding-box,
+                    linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e3a8a 100%) border-box;
       }
+      .shiny-cta::before,
       .shiny-cta::after {
-        animation-duration: 6s;
+        display: none;
+      }
+      @keyframes shiny-pulse {
+        0%, 100% { box-shadow: 0 0 15px rgba(59,130,246,0.3), inset 0 0 0 1px rgba(255,255,255,0.1); }
+        50% { box-shadow: 0 0 30px rgba(59,130,246,0.5), inset 0 0 0 1px rgba(255,255,255,0.2); }
       }
     }
 
@@ -2202,7 +2209,13 @@
       overflow:hidden;
       transition:box-shadow 0.3s ease;
     }
-    .cta-header::before{
+    .cta-header .cta-short{display:none}
+    @media (max-width:1350px){
+      .cta-header .cta-full{display:none}
+      .cta-header .cta-short{display:inline}
+    }
+    /* Old sweep effect disabled - using shiny-cta animation instead */
+    .cta-header:not(.shiny-cta)::before{
       content:'';
       position:absolute;
       top:0;
@@ -2212,7 +2225,7 @@
       background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
       transition:none;
     }
-    .cta-header:hover::before{
+    .cta-header:not(.shiny-cta):hover::before{
       left:100%;
       transition:left 0.5s ease;
     }
@@ -3367,7 +3380,7 @@
         </button>
       </div>
 
-      <a class="shiny-cta cta-header" href="#trial" style="display:inline-flex;width:auto;padding:0.75rem 1.5rem;height:auto;white-space:nowrap"><span>Try Free 7 Days →</span></a>
+      <a class="shiny-cta cta-header" href="#trial" style="display:inline-flex;width:auto;padding:0.75rem 1.5rem;height:auto;white-space:nowrap"><span class="cta-full">Try Free 7 Days →</span><span class="cta-short">Try Free →</span></a>
 
 
 
