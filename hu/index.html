@@ -9567,42 +9567,69 @@ if ('serviceWorker' in navigator) {
 </script>
 
 <script>
-  // Typewriter animation for pricing subheading
+  // Signal Decode animation for pricing subheading
   (function() {
-    const words = ['kereskedők világszerte', 'komoly befektetők', 'szakemberek', 'kereskedők, mint te'];
+    const words = ['kereskedők világszerte', 'komoly befektetők', 'profik', 'hozzád hasonló kereskedők'];
     let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typewriterElement = document.querySelector('.typewriter-pricing');
+    const el = document.querySelector('.typewriter-pricing');
+    if (!el) return;
 
-    if (!typewriterElement) return;
+    const chars = '!<>-_\/[]{}—=+*^?#@$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let queue = [];
+    let frame = 0;
+    let frameRequest = null;
 
-    function type() {
-      const currentWord = words[wordIndex];
-
-      if (isDeleting) {
-        typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
+    function setText(newText) {
+      const oldText = el.textContent;
+      const length = Math.max(oldText.length, newText.length);
+      queue = [];
+      for (let i = 0; i < length; i++) {
+        const from = oldText[i] || '';
+        const to = newText[i] || '';
+        const start = Math.floor(Math.random() * 15);
+        const end = start + Math.floor(Math.random() * 15) + 8;
+        queue.push({ from, to, start, end, char: null });
       }
-
-      let typeSpeed = isDeleting ? 50 : 100;
-
-      if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 2000; // Pause at end
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typeSpeed = 500; // Pause before next word
-      }
-
-      setTimeout(type, typeSpeed);
+      cancelAnimationFrame(frameRequest);
+      frame = 0;
+      update();
     }
 
-    type();
+    function update() {
+      let output = '';
+      let complete = 0;
+      for (let i = 0; i < queue.length; i++) {
+        let { from, to, start, end, char } = queue[i];
+        if (frame >= end) {
+          complete++;
+          output += to;
+        } else if (frame >= start) {
+          if (!char || Math.random() < 0.28) {
+            char = chars[Math.floor(Math.random() * chars.length)];
+            queue[i].char = char;
+          }
+          output += '<span style="color:var(--brand-2)">' + char + '</span>';
+        } else {
+          output += from;
+        }
+      }
+      el.innerHTML = output;
+      if (complete === queue.length) {
+        setTimeout(() => {
+          wordIndex = (wordIndex + 1) % words.length;
+          setText(words[wordIndex]);
+        }, 2500);
+      } else {
+        frameRequest = requestAnimationFrame(update);
+        frame++;
+      }
+    }
+
+    el.textContent = words[0];
+    setTimeout(() => {
+      wordIndex = 1;
+      setText(words[wordIndex]);
+    }, 2500);
   })();
 
   // Signal Decode animation for footer
