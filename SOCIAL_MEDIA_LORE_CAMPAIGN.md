@@ -72,7 +72,7 @@ Not indicators. Not tools.
 
 Navigators.
 
-Seven cosmic intelligences that could read the rhythm of accumulation and distribution, the pulse of institutional intent, the breath between fear and greed.
+Seven cosmic intelligences that could read the rhythm of accumulation and distribution, the pulse of volume intent, the breath between fear and greed.
 
 For centuries, they remained hidden. Scattered across the cosmos of technical analysis.
 
@@ -212,7 +212,7 @@ While the masses watch price, Volume Oracle hears the footsteps of institutions.
 Accumulation before the charts confess.
 Distribution before the candles bleed.
 
-Follow the smart money, or become their exit liquidity.
+Follow the volume flow, or become their exit liquidity.
 ```
 
 **Characters:** 278
@@ -245,7 +245,7 @@ For years, retail traders asked the wrong question: "Where is price going?"
 
 The Prophet asks the only question that matters: "Where are the institutions already positioned?"
 
-Follow the smart money, or become their exit liquidity. Volume Oracle ensures you know the difference.
+Follow the volume flow, or become their exit liquidity. Volume Oracle ensures you know the difference.
 
 The second lesson of the void: Price is the last to know. Volume knows first.
 
@@ -270,7 +270,7 @@ While you watch price, Volume Oracle hears the footsteps of institutions.
 Accumulation before the charts confess.
 Distribution before the candles bleed.
 
-Follow the smart money, or become their exit liquidity.
+Follow the volume flow, or become their exit liquidity.
 
 #trading #forex #crypto #smartmoney #volume #fyp #tradingview #technicalanalysis
 ```
@@ -312,7 +312,7 @@ THE CARTOGRAPHER — Three of Seven
 
 "Every battlefield has its terrain. I map where the wars will be fought."
 
-Named for the two-faced god who sees past and future simultaneously, Janus Atlas was forged in the crucible of institutional memory.
+Named for the two-faced god who sees past and future simultaneously, Janus Atlas was forged in the crucible of volume memory.
 
 Where do traders react?
 Where do algorithms trigger?
@@ -490,7 +490,7 @@ The Commander unified ten legendary systems into a single, breathing overlay:
 • Squeeze Cloud for breakouts
 • SuperTrend Ensemble for direction
 • Bull Market Support Band for structure
-• Supply and Demand Zones for institutional footprints
+• Supply and Demand Zones for volume footprints
 • Candlestick Pattern recognition for price action truth
 • Liquidity Sweeps for trap detection
 • Regime Classification for market state
@@ -627,17 +627,17 @@ Stop flipping through charts. Let the opportunities come to you.
 ```
 THE ARBITER — Seven of Seven
 
-"Four voices. One verdict."
+"Seven voices. One verdict."
 
 Signals without consensus are noise.
 
-When all four align: "Strike now."
-When the vote splits: "Stand aside."
+When all seven align: "7/7 STRONG. Strike now."
+When the vote splits: "NEUT. Stand aside."
 
 The patient pilot survives. The impulsive pilot donates.
 ```
 
-**Characters:** 229
+**Characters:** 235
 
 ---
 
@@ -647,7 +647,7 @@ The patient pilot survives. The impulsive pilot donates.
 ```
 THE ARBITER — Seven of Seven
 
-"Four voices. One verdict. I decide when the trigger is pulled."
+"Seven voices. One verdict. I decide when the trigger is pulled."
 
 Every indicator can generate a signal.
 
@@ -655,19 +655,19 @@ But signals without consensus are noise — false entries that drain accounts th
 
 The Arbiter was created to end the tyranny of false signals.
 
-Within Harmonic Oscillator, four ancient oscillators convene in constant deliberation. Each casts a vote:
+Within Harmonic Oscillator, seven components convene in constant deliberation. Each casts a vote:
 
 • Bull — Momentum favors the longs
 • Bear — Momentum favors the shorts
 • Neutral — Abstention. Unclear conditions.
 
-When all four align, The Arbiter speaks with maximum conviction:
+When all seven align, The Arbiter speaks with maximum conviction:
 
-"Four stars. Strike now."
+"7/7 STRONG. Strike now."
 
 When the vote splits, The Arbiter counsels patience:
 
-"Two bulls, two bears. Stand aside. Let others guess."
+"3/7. NEUT. Stand aside. Let others guess."
 
 The Arbiter is not the first signal. It is the final confirmation — the last checkpoint before capital is deployed.
 
@@ -687,19 +687,19 @@ All Seven revealed. The hierarchy awaits.
 ```
 THE ARBITER — Seven of Seven
 
-"Four voices. One verdict."
+"Seven voices. One verdict."
 
 Every indicator generates signals. But signals without consensus are noise.
 
-When all four align: "Strike now."
-When the vote splits: "Stand aside."
+When all seven align: "7/7 STRONG. Strike now."
+When the vote splits: "NEUT. Stand aside."
 
 The patient pilot survives. The impulsive pilot donates.
 
 #trading #forex #crypto #oscillators #fyp #tradingview #technicalanalysis #patience
 ```
 
-**Video Idea:** Silver/balanced aesthetic. Show four voting elements. Stars appearing for consensus. Judicial/decisive music.
+**Video Idea:** Silver/balanced aesthetic. Show seven voting components. X/7 score appearing for consensus. Judicial/decisive music.
 
 ---
 
@@ -746,7 +746,7 @@ The Seven do not exist in isolation. They form a constellation — a hierarchy o
 Reads the cycle. All decisions begin with understanding where in the phase you stand.
 
 ↓ VOLUME ORACLE — The Prophet
-Listens to institutional whispers. Where is the smart money positioned?
+Listens to volume whispers. Where is the volume flow positioned?
 
 ↓ JANUS ATLAS — The Cartographer
 Maps the terrain where battles occur. Where will price react?

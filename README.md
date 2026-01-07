@@ -42,8 +42,8 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
 2. **SP — Omnideck** (ALL-IN-ONE)
    *Comprehensive overlay unifying 10 premium systems: TD Sequential, Squeeze Cloud, SuperTrend Ensemble, Supply/Demand Zones, Liquidity Sweeps, Candlestick Patterns, and more.*
 
-3. **SP — Volume Oracle** (INSTITUTIONAL)
-   *Accumulation/distribution detector showing when smart money is moving — before retail notices.*
+3. **SP — Volume Oracle** (REGIME DETECTION)
+   *Accumulation/distribution detector showing volume flow patterns — before retail notices.*
 
 4. **SP — Plutus Flow** (ACCUMULATION)
    *Cumulative delta ribbon revealing hidden buying/selling pressure with divergence detection.*
@@ -55,7 +55,7 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
    *Multi-symbol watchlist table tracking 8 tickers simultaneously with quality scores and real-time P&L.*
 
 7. **SP — Harmonic Oscillator** (TIMING)
-   *4-oscillator voting system with star rating confidence (★ to ★★★★) for entry timing.*
+   *7-oscillator voting system with star rating confidence (★ to ★★★★) for entry timing.*
 
 ### Pricing Plans
 - **Monthly:** $99/month — Flexible month-to-month billing

@@ -42,12 +42,14 @@ Each day has:
 
 ## QUICK STATUS
 
-### Already Posted (as of Dec 25)
+### Already Posted (as of Dec 27)
 | Platform | Posts |
 |----------|-------|
 | Instagram | 6 posts (Origin, Education, Council, Pentarch, Volume Oracle, Pilot's Oath) |
-| X/Twitter | 1 post (Origin) |
-| TikTok | 1 post (Origin) |
+| X/Twitter | 6 posts (Origin, Education, Council, Pentarch, Volume Oracle, Pilot's Oath) |
+| TikTok | 6 posts (Origin, Education, Council, Pentarch, Volume Oracle, Pilot's Oath) |
+
+**All platforms synced and ready for Day 1 (Dec 25) content.**
 
 ---
 
@@ -68,7 +70,7 @@ Each day has:
 | 11 | Jan 4 | Education Hub: Volume Analysis lesson |
 | 12 | Jan 5 | 🗳️ Community Poll — Engage early |
 | 13 | Jan 6 | Pentarch Deep Dive — 5-Phase Cycle |
-| 14 | Jan 7 | 📊 Chart Breakdown: Smart Money in Action |
+| 14 | Jan 7 | 📊 Chart Breakdown: volume flow in Action |
 | 15 | Jan 8 | Janus Atlas Deep Dive — Key Levels |
 | 16 | Jan 9 | 📊 Chart Breakdown: Pressure Divergence |
 | 17 | Jan 10 | OmniDeck Deep Dive — 10 Systems |
@@ -76,7 +78,7 @@ Each day has:
 | 19 | Jan 12 | Harmonic Oscillator Deep Dive — Consensus |
 | 20 | Jan 13 | Education Hub: Position Sizing lesson |
 | 21 | Jan 14 | 🏆 UGC Spotlight — Feature user wins |
-| 22 | Jan 15 | Blog Feature: Smart Money Moves |
+| 22 | Jan 15 | Blog Feature: volume flow Moves |
 | 23 | Jan 16 | Education Hub: Backtesting lesson |
 | 24 | Jan 17 | The Hierarchy of Signals explained |
 | 25 | Jan 18 | Philosophy: The Pilot's Oath deep dive |
@@ -308,7 +310,7 @@ While you're drawing hundreds of support lines hoping one holds...
 
 The Cartographer reveals only the lines that matter.
 
-60+ institutional levels. Auto-plotted.
+60+ volume levels. Auto-plotted.
 
 Stop drawing. Start navigating.
 
@@ -380,7 +382,7 @@ The Commander unified ten legendary systems:
 2. Squeeze Cloud — breakouts
 3. SuperTrend Ensemble — direction
 4. Bull Market Support Band — structure
-5. Supply & Demand Zones — institutional footprints
+5. Supply & Demand Zones — volume footprints
 6. Candlestick Patterns — price action truth
 7. Liquidity Sweeps — trap detection
 8. Regime Classification — market state
@@ -625,20 +627,24 @@ Seven of Seven.
 
 HARMONIC OSCILLATOR — The Arbiter.
 
-"Four voices. One verdict. I decide when the trigger is pulled."
+"Seven voices. One verdict. I decide when the trigger is pulled."
 
 The council is complete.
 
-Four oscillators convene:
-• MACD
+Seven components convene:
 • RSI
-• StochRSI
-• Williams %R
+• Stochastic RSI
+• MACD
+• EMA Trend
+• Momentum
+• Volume
+• Divergence Zone
 
-Each votes: Bull. Bear. Neutral.
+Each votes: Bull. Bear. Neutral. Results show as X/7.
 
-★★★★ Four stars = Maximum conviction. Strike.
-★★☆☆ Split vote = Unclear. Stand aside. Let others guess.
+7/7 or 6/7 = STRONG signal. Maximum conviction. Strike.
+5/7 or 4/7 = Bull/Bear signal. Solid consensus.
+3/7 or less = NEUT. Stand aside. Let others guess.
 
 Signals without consensus are noise.
 False entries drain accounts through a thousand cuts.
@@ -662,11 +668,11 @@ Full lore: signalpilot.io/chronicle/the-arbiter
 ```
 SEVEN OF SEVEN: HARMONIC OSCILLATOR — The Arbiter
 
-"Four voices. One verdict."
+"Seven voices. One verdict."
 
 This is the final piece.
 
-MACD + RSI + StochRSI + Williams %R convene as a council.
+Seven components convene as a council.
 
 Each votes: Bull | Bear | Neutral
 
@@ -675,12 +681,11 @@ The verdict determines when you pull the trigger. 🧵
 
 **Post 2:**
 ```
-The star system:
+The voting system:
 
-★★★★ = All four agree. Maximum conviction. STRIKE.
-★★★☆ = Three agree. High conviction.
-★★☆☆ = Split vote. STAND ASIDE. Let others guess.
-★☆☆☆ = Minimal consensus. Wait.
+7/7 or 6/7 = STRONG signal. Maximum conviction. STRIKE.
+5/7 or 4/7 = Bull/Bear signal. Solid consensus.
+3/7 or less = NEUT signal. STAND ASIDE. Let others guess.
 
 This is how you stop taking bad entries.
 ```
@@ -726,12 +731,12 @@ Seven of Seven.
 
 HARMONIC OSCILLATOR — The Arbiter.
 
-Four oscillators. One verdict.
+Seven components. One verdict.
 
-MACD. RSI. StochRSI. Williams %R.
+RSI. Stochastic RSI. MACD. EMA Trend. Momentum. Volume. Divergence Zone.
 
-All four agree? ★★★★ STRIKE.
-Split vote? ★★☆☆ Stand aside.
+7/7 agreement? STRONG signal. STRIKE.
+3/7 or less? NEUT. Stand aside.
 
 "The patient pilot survives. The impulsive pilot donates."
 
@@ -785,7 +790,7 @@ Zero repainting.
 THE ELITE SEVEN ARE LIVE.
 
 🔥 Pentarch — The Sovereign (cycle detection)
-🔥 Volume Oracle — The Prophet (institutional flow)
+🔥 Volume Oracle — The Prophet (volume flow)
 🔥 Janus Atlas — The Cartographer (key levels)
 🔥 Plutus Flow — The Scales (pressure analysis)
 🔥 OmniDeck — The Commander (10 systems unified)
@@ -829,7 +834,7 @@ signalpilot.io
 THE SEVEN:
 
 1️⃣ PENTARCH — Cycle detection (TD→IGN→WRN→CAP→BDN)
-2️⃣ VOLUME ORACLE — Institutional flow detection
+2️⃣ VOLUME ORACLE — volume flow detection
 3️⃣ JANUS ATLAS — 60+ auto-plotted key levels
 4️⃣ PLUTUS FLOW — Cumulative pressure analysis
 ```
@@ -838,7 +843,7 @@ THE SEVEN:
 ```
 5️⃣ OMNIDECK — 10 legendary systems unified
 6️⃣ AUGURY GRID — 8-market scanner with quality scores
-7️⃣ HARMONIC OSCILLATOR — 4-oscillator consensus
+7️⃣ HARMONIC OSCILLATOR — 7-oscillator consensus
 
 All non-repainting. All audited.
 
@@ -926,7 +931,7 @@ The Elite Seven are LIVE.
 Seven indicators. One unified system.
 
 Pentarch — reads market cycles
-Volume Oracle — hears smart money
+Volume Oracle — hears volume flow
 Janus Atlas — maps key levels
 Plutus Flow — reveals true pressure
 OmniDeck — unifies 10 systems
@@ -1279,7 +1284,7 @@ THE SWEEP PATTERN:
 4. Price reverses sharply
 5. Real move begins
 
-You're already out. Smart money is in.
+You're already out. volume flow is in.
 ```
 
 **Post 5:**
@@ -1820,7 +1825,7 @@ Link in bio.
 **Poll 1:**
 "Which indicator are you most excited about?"
 - Pentarch (cycles)
-- Volume Oracle (smart money)
+- Volume Oracle (volume flow)
 - OmniDeck (all-in-one)
 - Harmonic Oscillator (consensus)
 
@@ -1928,7 +1933,7 @@ Every market. Every asset. Every timeframe.
 The same 5 phases repeat:
 
 📍 TD (Touchdown)
-Selling exhaustion. Smart money enters.
+Selling exhaustion. volume flow enters.
 The bottom is forming.
 
 📍 IGN (Ignition)
@@ -1937,7 +1942,7 @@ The uptrend has started.
 
 📍 WRN (Warning)
 Hidden weakness. Distribution begins.
-Smart money exits into strength.
+volume flow exits into strength.
 
 📍 CAP (Climax)
 Buying exhaustion. Euphoria peaks.
@@ -1984,7 +1989,7 @@ What it looks like: "Dead" price action, low volatility
 What to do: Watch for reversal confirmation
 What NOT to do: Short into exhaustion
 
-This is where smart money buys fear.
+This is where volume flow buys fear.
 ```
 
 **Post 3:**
@@ -2008,7 +2013,7 @@ What it looks like: Price may still rise, but strength is fading
 What to do: Tighten stops, reduce size, take profits
 What NOT to do: Add to positions aggressively
 
-Hidden weakness. Smart money exiting.
+Hidden weakness. volume flow exiting.
 ```
 
 **Post 5:**
@@ -2084,7 +2089,7 @@ Link in bio.
 ## DAY 14 — JANUARY 7
 
 ### 📌 Theme
-📊 Chart Breakdown: Smart Money in Action
+📊 Chart Breakdown: volume flow in Action
 
 **Strategy:** SHOW, don't tell. Real chart, real signals, real outcome. This is PROOF content.
 
@@ -2098,13 +2103,13 @@ Link in bio.
 **Slide 2:** Same chart 3 days later — price exploded +12%
 **Slide 3:** Zoom in on the Volume Oracle reading at signal time
 **Slide 4:** "Retail saw: boring sideways price action"
-**Slide 5:** "Volume Oracle saw: Smart money loading"
+**Slide 5:** "Volume Oracle saw: volume flow loading"
 **Slide 6:** "Result: +12% move within 72 hours"
 **Slide 7:** "The Prophet sees what retail can't"
 
 **Caption:**
 ```
-CHART BREAKDOWN: Smart Money in Action
+CHART BREAKDOWN: volume flow in Action
 
 📅 Signal: January 4th
 📊 Volume Oracle: "ACCUMULATION 84%"
@@ -2114,7 +2119,7 @@ Here's exactly what happened:
 
 Slide 1 → Price looked dead. Retail was bored.
 Slide 2 → Volume Oracle flashed ACCUMULATION 84%
-Slide 3 → Smart money was quietly loading
+Slide 3 → volume flow was quietly loading
 Slide 4 → 72 hours later: price exploded
 
 The second lesson:
@@ -2127,7 +2132,7 @@ Want to see more breakdowns like this? Save this post and follow for daily proof
 Full documentation:
 docs.signalpilot.io/volume-oracle-v10
 
-#tradingview #volumeoracle #smartmoney #institutionaltrading #technicalanalysis #tradingproof #chartanalysis
+#tradingview #volumeoracle #smartmoney #volumetrading #technicalanalysis #tradingproof #chartanalysis
 ```
 
 **IMPORTANT:** Use REAL charts with REAL signals. No hypotheticals.
@@ -2139,7 +2144,7 @@ docs.signalpilot.io/volume-oracle-v10
 **Story 1:** Post the chart screenshot
 **Story 2:** Circle the Volume Oracle reading
 **Story 3:** "What retail saw: nothing happening"
-**Story 4:** "What smart money saw: accumulation"
+**Story 4:** "What volume flow saw: accumulation"
 **Story 5:** Show the result
 **Story 6:** Poll: "Have you ever missed a move like this?"
 
@@ -2149,7 +2154,7 @@ docs.signalpilot.io/volume-oracle-v10
 
 **Post 1:**
 ```
-CHART BREAKDOWN: Smart Money Caught Live
+CHART BREAKDOWN: volume flow Caught Live
 
 📅 January 4th
 📊 Volume Oracle: ACCUMULATION 84%
@@ -2174,7 +2179,7 @@ Wrong.
 
 Volume Oracle flashed: "ACCUMULATION 84%"
 
-Smart money was quietly loading while everyone else was asleep.
+volume flow was quietly loading while everyone else was asleep.
 
 [Screenshot of chart with signal]
 ```
@@ -2200,7 +2205,7 @@ This is why I say:
 "Price is the last to know. Volume knows first."
 
 → Retail watches candles
-→ Smart money moves volume
+→ volume flow moves volume
 → Volume Oracle detects the imbalance
 → You get positioned BEFORE the move
 
@@ -2224,11 +2229,11 @@ docs.signalpilot.io/volume-oracle-v10
 
 ### 🎬 TIKTOK
 
-**Hook:** "I caught smart money loading. Here's the proof."
+**Hook:** "I caught volume flow loading. Here's the proof."
 
 **Script:**
 ```
-I caught smart money loading.
+I caught volume flow loading.
 
 Here's the proof.
 
@@ -2244,7 +2249,7 @@ Plus 12%.
 "Why didn't I see that coming?"
 
 Because you were watching price.
-Smart money was moving volume.
+volume flow was moving volume.
 
 Price is the last to know.
 
@@ -2280,7 +2285,7 @@ Janus Atlas Deep Dive — Key Level Mapping
 ```
 JANUS ATLAS — The Cartographer
 
-Deep Dive: Institutional Level Mapping
+Deep Dive: volume Level Mapping
 
 Named after the two-faced god who sees past and future.
 
@@ -2634,7 +2639,7 @@ Key moving average zone.
 **Slide 6:**
 ```
 5. SUPPLY & DEMAND ZONES
-Institutional footprints.
+volume footprints.
 Where big players positioned.
 ```
 
@@ -2739,7 +2744,7 @@ THE FIRST 5 SYSTEMS:
 2. Squeeze Cloud → breakout preparation
 3. SuperTrend Ensemble → direction confirmation
 4. Bull Market Support Band → structure ID
-5. Supply & Demand Zones → institutional footprints
+5. Supply & Demand Zones → volume footprints
 ```
 
 **Post 3:**
@@ -3026,29 +3031,29 @@ Harmonic Oscillator Deep Dive — The Consensus System
 ```
 HARMONIC OSCILLATOR — The Arbiter
 
-Deep Dive: 4-Voice Consensus
+Deep Dive: 7-Component Consensus
 
-Four oscillators convene:
-• MACD
+Seven components convene:
 • RSI
-• StochRSI
-• Williams %R
+• Stochastic RSI
+• MACD
+• EMA Trend
+• Momentum
+• Volume
+• Divergence Zone
 
-Each votes: Bull | Bear | Neutral
+Each votes: Bull | Bear | Neutral. Results show as X/7.
 
-THE STAR SYSTEM:
+THE VOTING SYSTEM:
 
-★★★★ = All four agree
+7/7 or 6/7 = STRONG signal
 MAXIMUM CONVICTION. Strike.
 
-★★★☆ = Three agree
-HIGH CONVICTION. Strong signal.
+5/7 or 4/7 = Bull/Bear signal
+SOLID CONSENSUS. Worth attention.
 
-★★☆☆ = Split vote
+3/7 or less = NEUT signal
 UNCLEAR. Stand aside. Let others guess.
-
-★☆☆☆ = Minimal consensus
-WAIT. Patience is a weapon.
 
 The Arbiter is not your first signal.
 It is your FINAL confirmation.
@@ -3071,7 +3076,7 @@ docs.signalpilot.io/harmonic-oscillator-v10
 ```
 HARMONIC OSCILLATOR DEEP DIVE — The Arbiter
 
-"Four voices. One verdict."
+"Seven voices. One verdict."
 
 You've seen the setup.
 Cycle looks good.
@@ -3087,33 +3092,27 @@ The Arbiter decides.
 
 **Post 2:**
 ```
-THE FOUR VOICES:
+THE SEVEN COMPONENTS:
 
-1. MACD — momentum direction
-2. RSI — overbought/oversold
-3. StochRSI — momentum within momentum
-4. Williams %R — price position in range
+RSI | Stochastic RSI | MACD | EMA Trend | Momentum | Volume | Divergence Zone
 
 Each votes: Bull | Bear | Neutral
 
-The Arbiter tallies the council.
+The Arbiter tallies the council. Shows X/7.
 ```
 
 **Post 3:**
 ```
-THE STAR SYSTEM:
+THE VOTING SYSTEM:
 
-★★★★ = All four agree
+7/7 or 6/7 = STRONG signal
 MAXIMUM CONVICTION. Strike.
 
-★★★☆ = Three agree
-HIGH CONVICTION. Strong signal.
+5/7 or 4/7 = Bull/Bear signal
+SOLID CONSENSUS. Worth attention.
 
-★★☆☆ = Split vote
-UNCLEAR. Stand aside.
-
-★☆☆☆ = Minimal consensus
-WAIT. Let others guess.
+3/7 or less = NEUT signal
+UNCLEAR. Stand aside. Let others guess.
 ```
 
 **Post 4:**
@@ -3128,8 +3127,8 @@ Most traders:
 
 Pilots:
 → Wait for consensus
-→ 4 systems agreeing
-→ Enter with conviction
+→ 7 components voting
+→ Enter with conviction on STRONG
 → Higher probability
 ```
 
@@ -3144,7 +3143,7 @@ It's your LAST checkpoint.
 2. Volume Oracle confirms ✓
 3. Janus Atlas shows level ✓
 4. Plutus Flow confirms pressure ✓
-5. Arbiter says... ★★★★
+5. Arbiter says... 7/7 STRONG
 
 NOW you strike.
 ```
@@ -3172,27 +3171,33 @@ Should you take this trade?
 
 Let's ask the council.
 
-MACD says... bullish.
 RSI says... bullish.
-StochRSI says... bullish.
-Williams %R says... bullish.
+Stochastic RSI says... bullish.
+MACD says... bullish.
+EMA Trend says... bullish.
+Momentum says... bullish.
+Volume says... bullish.
+Divergence Zone says... bullish.
 
-★★★★ Four stars. Maximum conviction.
+7/7. STRONG signal. Maximum conviction.
 
 STRIKE.
 
 But what if:
 
-MACD says bullish.
-RSI says bearish.
-StochRSI says neutral.
-Williams says bullish.
+RSI says bullish.
+Stochastic RSI says bearish.
+MACD says neutral.
+EMA Trend says bullish.
+Momentum says neutral.
+Volume says neutral.
+Divergence Zone says neutral.
 
-★★☆☆ Split vote.
+3/7. NEUT signal.
 
 STAND ASIDE. Let others guess.
 
-The Arbiter tallies the council.
+The Arbiter tallies the seven voices.
 It's not your first signal.
 It's your FINAL confirmation.
 
@@ -3560,7 +3565,7 @@ YOUR WINS. YOUR CHARTS.
 
 This week's #SignalPilotWins spotlight 🏆
 
-@user1 — Caught smart money loading with Volume Oracle
+@user1 — Caught volume flow loading with Volume Oracle
 @user2 — Nailed the cycle turn with Pentarch
 @user3 — Found the level with Janus Atlas
 
@@ -3619,7 +3624,7 @@ Let's celebrate 👇
 ```
 First up: @user1
 
-Caught smart money accumulating with Volume Oracle.
+Caught volume flow accumulating with Volume Oracle.
 82% reading. Entered. Held.
 Result: Rode the wave.
 
@@ -3680,7 +3685,7 @@ These aren't my charts.
 
 They're yours.
 
-@user1 caught smart money loading.
+@user1 caught volume flow loading.
 Volume Oracle: Accumulation 82%.
 
 @user2 nailed the cycle turn.
@@ -3718,7 +3723,7 @@ Link in bio.
 ## DAY 22 — JANUARY 15
 
 ### 📌 Theme
-Blog Feature: How Smart Money Moves
+Blog Feature: How volume flow Moves
 
 ---
 
@@ -3726,7 +3731,7 @@ Blog Feature: How Smart Money Moves
 
 **Caption:**
 ```
-HOW SMART MONEY MOVES:
+HOW volume flow MOVES:
 
 1. They can't buy/sell in one order (too big)
 2. They accumulate/distribute over TIME
@@ -3740,7 +3745,7 @@ They caused it.
 Read the full breakdown:
 blog.signalpilot.io/articles/how-smart-money-moves
 
-#smartmoney #institutionaltrading #volumeanalysis #tradingstrategy
+#smartmoney #volumetrading #volumeanalysis #tradingstrategy
 ```
 
 ---
@@ -3755,7 +3760,7 @@ They're not smarter than you.
 
 They're POSITIONED before you.
 
-Here's how smart money actually moves:
+Here's how volume flow actually moves:
 
 🧵 Thread:
 ```
@@ -5712,7 +5717,7 @@ For new images via Nano Banana Pro or similar:
 Epic digital art, cosmic space background with purple nebula, five glowing orbs in cycle formation labeled TD IGN WRN CAP BDN, connected by golden energy streams, 4K cinematic
 ```
 
-**2. "Follow the Smart Money":**
+**2. "Follow the volume flow":**
 ```
 Dark atmospheric scene, hooded figure standing on mountain of gold coins watching smaller figures below in valley, ethereal blue fog, dramatic lighting, mystical fantasy art style, 4K
 ```
@@ -5727,9 +5732,9 @@ Pilot in futuristic spacecraft cockpit, serene expression, holographic star char
 Two massive ethereal hands (one green one red) holding ancient golden balance scales, pressure waves emanating from scales, cosmic dark background, dramatic lighting, 4K fantasy art
 ```
 
-**5. "Four Voices One Verdict":**
+**5. "Five Voices One Verdict":**
 ```
-Four robed council members seated in circular stone chamber, each holding glowing orb of different color, all orbs now glowing same color showing consensus, light beam shooting upward from center, cosmic courtroom aesthetic, 4K epic fantasy
+Five robed council members seated in circular stone chamber, each holding glowing orb of different color, all orbs now glowing same color showing consensus, light beam shooting upward from center, cosmic courtroom aesthetic, 4K epic fantasy
 ```
 
 **6. "The Watchman":**
@@ -5758,7 +5763,7 @@ Ten glowing symbols arranged in formation converging into single bright light at
 
 ### Niche
 ```
-#institutionaltrading #marketcycles #divergence #supportandresistance #nonrepainting
+#volumetrading #marketcycles #divergence #supportandresistance #nonrepainting
 ```
 
 ### TikTok-specific
@@ -5817,7 +5822,7 @@ Ten glowing symbols arranged in formation converging into single bright light at
 |---------|-----|
 | How to Trade Cycles with Pentarch | blog.signalpilot.io/articles/how-to-trade-cycles-with-pentarch |
 | Accumulation vs Distribution | blog.signalpilot.io/articles/accumulation-vs-distribution |
-| How Smart Money Moves | blog.signalpilot.io/articles/how-smart-money-moves |
+| How volume flow Moves | blog.signalpilot.io/articles/how-smart-money-moves |
 | The Repainting Problem | blog.signalpilot.io/articles/the-repainting-problem |
 | The 1% Rule | blog.signalpilot.io/articles/the-1-percent-rule |
 | Building Your First System | blog.signalpilot.io/articles/building-your-first-system |
