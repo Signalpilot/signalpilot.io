@@ -1596,6 +1596,38 @@
       to{transform:rotate(360deg)}
     }
 
+    /* Shiny CTA button */
+    @property --gradient-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
+    @property --gradient-angle-offset{syntax:"<angle>";initial-value:0deg;inherits:false}
+    @property --gradient-percent{syntax:"<percentage>";initial-value:20%;inherits:false}
+    @property --gradient-shine{syntax:"<color>";initial-value:#60a5fa;inherits:false}
+
+    .shiny-cta{
+      --gradient-angle:0deg;--gradient-angle-offset:0deg;--gradient-percent:20%;--gradient-shine:#60a5fa;
+      position:relative;overflow:hidden;border-radius:9999px;padding:0.875rem 1.5rem;font-size:0.875rem;line-height:1.2;font-weight:500;color:#fff;
+      background:linear-gradient(#000,#000) padding-box,conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)),transparent 0%,#1d4ed8 5%,var(--gradient-shine) 15%,#1d4ed8 30%,transparent 40%,transparent 100%) border-box;
+      border:2px solid transparent;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1);cursor:pointer;isolation:isolate;z-index:0;
+      animation:shiny-spin 2.5s linear infinite;width:100%;display:flex;align-items:center;justify-content:center;height:48px;
+    }
+    @keyframes shiny-spin{to{--gradient-angle:360deg}}
+    .shiny-cta:active{transform:translateY(1px)}
+    .shiny-cta::before{
+      content:'';pointer-events:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:0;
+      --size:calc(100% - 6px);--position:2px;--space:4px;width:var(--size);height:var(--size);
+      background:radial-gradient(circle at var(--position) var(--position),white 0.5px,transparent 0) padding-box;
+      background-size:var(--space) var(--space);background-repeat:space;
+      mask-image:conic-gradient(from calc(var(--gradient-angle) + 45deg),black,transparent 10% 90%,black);
+      border-radius:inherit;opacity:0.4;
+    }
+    .shiny-cta::after{
+      content:'';pointer-events:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;
+      width:100%;aspect-ratio:1;background:linear-gradient(-50deg,transparent,#1d4ed8,transparent);
+      mask-image:radial-gradient(circle at bottom,transparent 40%,black);opacity:0.6;
+      animation:shiny-shimmer 4s linear infinite;
+    }
+    @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
+    .shiny-cta span{position:relative;z-index:2;display:inline-block}
+
     .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02)),var(--bg);border-radius:16px;padding:1.05rem;box-shadow:var(--shadow);min-width:0;position:relative;overflow:visible}
 
     .card:hover{border-color:rgba(91,138,255,0.3)}
@@ -3316,7 +3348,7 @@
         </button>
       </div>
 
-      <a class="btn btn-primary cta-header btn-magnetic" href="#trial">Try Free 7 Days →</a>
+      <a class="shiny-cta" href="#trial" style="display:inline-flex;width:auto;padding:0.75rem 1.5rem;height:auto"><span>Try Free 7 Days →</span></a>
 
 
 
@@ -3841,12 +3873,8 @@
               </span>
             </label>
 
-            <button
-              type="submit"
-              class="btn btn-primary"
-              style="width:100%;padding:1.25rem;font-size:1.1rem;font-weight:700"
-            >
-              Try Free 7 Days →
+            <button type="submit" class="shiny-cta" style="font-size:1rem;font-weight:600">
+              <span>Try Free 7 Days →</span>
             </button>
 
             <p style="text-align:center;font-size:0.85rem;color:var(--muted-2);margin-top:1rem">
@@ -5692,9 +5720,9 @@
 
         <!-- Explore All CTA -->
         <div data-reveal="fade-up" data-reveal-delay="500" style="text-align:center;margin-top:2.5rem">
-          <a href="/chronicle/" style="display:inline-flex;align-items:center;gap:0.75rem;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;font-weight:600;font-size:1rem;padding:0.9rem 1.8rem;border-radius:10px;text-decoration:none;transition:all 0.3s ease;box-shadow:0 4px 20px rgba(91,138,255,0.3)">
+          <a href="/chronicle/" class="shiny-cta" style="display:inline-flex;width:auto;padding:0.9rem 1.8rem;height:auto;gap:0.75rem">
             <span style="font-family:'EB Garamond',Georgia,serif;font-style:italic">Explore All 12 Chronicles</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:relative;z-index:2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <p style="margin-top:1rem;font-size:0.9rem;color:var(--muted-2)">Including audio narrations in deep wizard voice</p>
         </div>
@@ -6085,7 +6113,7 @@
                   <div id="error-consent-yearly" style="display:none" class="text-red-400 text-xs mt-1.5">Consent required</div>
 
                   <div class="mt-6">
-                    <button type="button" id="btn-yearly-paypal" class="group relative inline-flex w-full h-12 cursor-pointer overflow-hidden rounded-full items-center justify-center text-base font-medium text-white shadow-[inset_0_2px_8px_rgba(255,255,255,0.25),_inset_0_-3px_8px_rgba(0,0,0,0.35),_0_4px_10px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-[2px]" style="background: linear-gradient(45deg, #06b6d4, #3b82f6, #2563eb);">
+                    <button type="button" id="btn-yearly-paypal" class="group relative inline-flex items-center justify-center w-full h-12 px-6 py-3 text-sm font-semibold tracking-tight cursor-pointer overflow-hidden rounded-full border border-white/15 bg-white/5 text-neutral-300 transition-all duration-300 hover:-translate-y-[2px] hover:text-white hover:bg-white/10">
                       Subscribe with PayPal
                     </button>
                     <a href="https://signalpilotlabs.lemonsqueezy.com/buy/bb59d34b-20bb-478d-9db3-533b7e84930b" class="mt-2 group relative inline-flex items-center justify-center w-full h-12 px-6 py-3 text-sm font-semibold tracking-tight cursor-pointer overflow-hidden rounded-full border border-white/15 bg-white/5 text-neutral-300 transition-all duration-300 hover:-translate-y-[2px] hover:text-white hover:bg-white/10" target="_blank" rel="noopener">
@@ -6145,8 +6173,8 @@
                   <div id="error-consent-lifetime" style="display:none" class="text-red-400 text-xs mt-1.5">Consent required</div>
 
                   <div class="mt-6">
-                    <button type="button" id="btn-lifetime-paypal" class="group relative inline-flex items-center justify-center w-full h-12 px-6 py-3 text-sm font-semibold tracking-tight cursor-pointer overflow-hidden rounded-full border border-white/15 bg-white/5 text-neutral-300 transition-all duration-300 hover:-translate-y-[2px] hover:text-white hover:bg-white/10">
-                      Buy Now with PayPal
+                    <button type="button" id="btn-lifetime-paypal" class="shiny-cta">
+                      <span>Buy Now with PayPal</span>
                     </button>
                     <a href="https://signalpilotlabs.lemonsqueezy.com/buy/81822d54-6e08-4c26-b2f0-d5d5e3cdd25e" class="mt-2 group relative inline-flex items-center justify-center w-full h-12 px-6 py-3 text-sm font-semibold tracking-tight cursor-pointer overflow-hidden rounded-full border border-white/15 bg-white/5 text-neutral-300 transition-all duration-300 hover:-translate-y-[2px] hover:text-white hover:bg-white/10" target="_blank" rel="noopener">
                       Pay with Card
@@ -6711,8 +6739,8 @@
 
     <!-- View All FAQs Link -->
     <div style="text-align:center;margin-top:2.5rem">
-      <a href="/faq.html" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:.5rem">
-        View Complete FAQ (30+ Questions) →
+      <a href="/faq.html" class="shiny-cta" style="display:inline-flex;width:auto;padding:0.875rem 2rem;height:auto">
+        <span>View Complete FAQ (30+ Questions) →</span>
       </a>
       <p style="color:var(--muted-2);font-size:.85rem;margin-top:.8rem">Setup guides, strategies, and technical details</p>
     </div>
@@ -6774,8 +6802,8 @@
       </div>
 
       <div style="text-align:center;margin-top:1.5rem">
-        <a href="https://blog.signalpilot.io/" target="_blank" rel="noopener" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:.5rem">
-          View All Articles <span style="font-size:1.1rem">→</span>
+        <a href="https://blog.signalpilot.io/" target="_blank" rel="noopener" class="shiny-cta" style="display:inline-flex;width:auto;padding:0.875rem 2rem;height:auto">
+          <span>View All Articles →</span>
         </a>
       </div>
     </div>
