@@ -1628,25 +1628,13 @@
     @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
     .shiny-cta span{position:relative;z-index:2;display:inline-block}
 
-    /* Use fallback animation on mobile that doesn't rely on @property */
+    /* Slow down shiny animations on mobile */
     @media (max-width: 768px) {
       .shiny-cta {
-        animation: shiny-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        background: linear-gradient(#0a0a0f, #0a0a0f) padding-box,
-                    linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e3a8a 100%) border-box;
-        -webkit-animation: shiny-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        animation-duration: 4s;
       }
-      .shiny-cta::before,
       .shiny-cta::after {
-        display: none;
-      }
-      @-webkit-keyframes shiny-pulse {
-        0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25), inset 0 0 0 1px rgba(255,255,255,0.08); }
-        50% { box-shadow: 0 0 25px rgba(59,130,246,0.4), inset 0 0 0 1px rgba(255,255,255,0.15); }
-      }
-      @keyframes shiny-pulse {
-        0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25), inset 0 0 0 1px rgba(255,255,255,0.08); }
-        50% { box-shadow: 0 0 25px rgba(59,130,246,0.4), inset 0 0 0 1px rgba(255,255,255,0.15); }
+        animation-duration: 6s;
       }
     }
 
@@ -1923,8 +1911,7 @@
     nav[aria-label="Main"] ul li:nth-child(3){animation:fadeInUp 0.4s ease 0.3s forwards;opacity:0}
     nav[aria-label="Main"] ul li:nth-child(4){animation:fadeInUp 0.4s ease 0.4s forwards;opacity:0}
     nav[aria-label="Main"] ul li:nth-child(5){animation:fadeInUp 0.4s ease 0.45s forwards;opacity:0}
-    .lang-dropdown,.cta-header:not(.shiny-cta){animation:fadeInUp 0.4s ease 0.5s forwards;opacity:0}
-    .cta-header.shiny-cta{opacity:1}
+    .lang-dropdown,.cta-header{animation:fadeInUp 0.4s ease 0.5s forwards;opacity:0}
     .menu-toggle{animation:fadeInUp 0.4s ease 0.5s forwards;opacity:0}
 
     /* Allow brand to shrink slightly on very constrained screens with translations */
@@ -2215,13 +2202,7 @@
       overflow:hidden;
       transition:box-shadow 0.3s ease;
     }
-    .cta-header .cta-short{display:none}
-    @media (max-width:1350px){
-      .cta-header .cta-full{display:none}
-      .cta-header .cta-short{display:inline}
-    }
-    /* Old sweep effect disabled - using shiny-cta animation instead */
-    .cta-header:not(.shiny-cta)::before{
+    .cta-header::before{
       content:'';
       position:absolute;
       top:0;
@@ -2231,7 +2212,7 @@
       background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
       transition:none;
     }
-    .cta-header:not(.shiny-cta):hover::before{
+    .cta-header:hover::before{
       left:100%;
       transition:left 0.5s ease;
     }
@@ -3386,6 +3367,7 @@
         </button>
       </div>
 
+      <a class="shiny-cta cta-header" href="#trial" style="display:inline-flex;width:auto;padding:0.75rem 1.5rem;height:auto;white-space:nowrap"><span>Try Free 7 Days →</span></a>
 
 
 
@@ -4653,9 +4635,8 @@
           Seven precision tools. Zero repaint. One unified system for reading complete market cycles.
         </p>
         <div style="margin-top:1.5rem">
-          <a href="#pricing" class="btn btn-primary btn-glow btn-glow-blue" style="display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:9999px;font-size:.9rem;font-weight:600">
-            Explore the Suite
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <a href="#pricing" class="shiny-cta" style="width:auto;padding:.75rem 1.5rem;height:auto">
+            <span style="display:inline-flex;align-items:center;gap:.5rem">Explore the Suite <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
           </a>
         </div>
       </div>
@@ -4823,7 +4804,7 @@
         /* Panel Cards - taller to show indicators properly */
         .elite-panel-card {
           position: relative;
-          aspect-ratio: 4 / 1;
+          aspect-ratio: 2.5 / 1;
           border-radius: 12px;
           overflow: hidden;
           background: linear-gradient(145deg, rgba(20,25,40,1) 0%, rgba(10,14,24,1) 100%);
@@ -4854,12 +4835,12 @@
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: left center;
+          object-position: center;
         }
         .elite-panel-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to right, rgba(10,14,24,0.9) 0%, rgba(10,14,24,0.3) 12%, transparent 25%, transparent 75%, rgba(10,14,24,0.3) 88%, rgba(10,14,24,0.9) 100%);
+          background: linear-gradient(to top, rgba(10,14,24,0.85) 0%, rgba(10,14,24,0.3) 30%, transparent 60%);
         }
 
         /* Shared Card Elements */
@@ -4903,17 +4884,13 @@
           font-weight: 500;
         }
 
-        /* Panel card - vertically center the content */
+        /* Panel card - position content at bottom */
         .elite-panel-card .elite-card-content {
-          bottom: 50%;
-          transform: translateY(50%);
-        }
-        .elite-panel-card .elite-card-badge {
-          top: 50%;
-          transform: translateY(-50%);
+          bottom: 1rem;
+          transform: none;
         }
         .elite-panel-card .elite-card-title {
-          font-size: 1rem;
+          font-size: 1.15rem;
         }
 
         @media (max-width: 768px) {
@@ -4921,7 +4898,7 @@
             grid-template-columns: 1fr !important;
           }
           .elite-panel-card {
-            aspect-ratio: 3.5 / 1;
+            aspect-ratio: 2 / 1;
           }
           .elite-card-title {
             font-size: 1rem;
@@ -4932,7 +4909,7 @@
         }
         @media (max-width: 480px) {
           .elite-panel-card {
-            aspect-ratio: 3 / 1;
+            aspect-ratio: 2 / 1;
           }
         }
       </style>
@@ -6604,8 +6581,6 @@
           overflow: hidden;
           mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
           -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-          touch-action: pan-y;
-          -webkit-overflow-scrolling: auto;
         }
 
         .partners-track {
