@@ -4318,6 +4318,34 @@
         }
       </style>
 
+      <script>
+        // Force Elite Seven images to stay visible on mobile
+        document.querySelectorAll('.elite-chart-card, .elite-panel-card').forEach(card => {
+          const img = card.querySelector('img');
+
+          // Force image always visible
+          if (img) {
+            img.style.cssText = 'opacity:1!important;visibility:visible!important;filter:none!important;-webkit-tap-highlight-color:transparent!important;';
+          }
+
+          // Prevent default behaviors
+          card.style.cssText += '-webkit-tap-highlight-color:rgba(0,0,0,0)!important;';
+
+          ['touchstart', 'touchend', 'touchmove'].forEach(evt => {
+            card.addEventListener(evt, e => {
+              e.stopPropagation();
+              if (img) img.style.opacity = '1';
+            }, {passive: true});
+          });
+
+          card.addEventListener('click', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (img) img.style.opacity = '1';
+          });
+        });
+      </script>
+
     </section>
 
     <!-- FEATURE COMPARISON TABLE -->
