@@ -2481,6 +2481,60 @@
       to{transform:rotate(360deg)}
     }
 
+    /* Shiny CTA button */
+    @property --gradient-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
+    @property --gradient-angle-offset{syntax:"<angle>";initial-value:0deg;inherits:false}
+    @property --gradient-percent{syntax:"<percentage>";initial-value:20%;inherits:false}
+    @property --gradient-shine{syntax:"<color>";initial-value:#3b82f6;inherits:false}
+
+    .shiny-cta{
+      --gradient-angle:0deg;--gradient-angle-offset:0deg;--gradient-percent:20%;--gradient-shine:#3b82f6;
+      position:relative;overflow:hidden;border-radius:9999px;padding:0.875rem 1.5rem;font-size:0.875rem;line-height:1.2;font-weight:500;color:#fff;
+      background:linear-gradient(#0a0a0f,#0a0a0f) padding-box,conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)),transparent 0%,#1e3a8a 5%,var(--gradient-shine) 15%,#1e3a8a 30%,transparent 40%,transparent 100%) border-box;
+      border:2px solid transparent;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1);cursor:pointer;isolation:isolate;z-index:0;
+      animation:shiny-spin 2.5s linear infinite;width:100%;display:flex;align-items:center;justify-content:center;height:48px;text-decoration:none;
+    }
+    @keyframes shiny-spin{to{--gradient-angle:360deg}}
+    .shiny-cta:active{transform:translateY(1px)}
+    .shiny-cta::before{
+      content:'';pointer-events:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:0;
+      --size:calc(100% - 6px);--position:2px;--space:4px;width:var(--size);height:var(--size);
+      background:radial-gradient(circle at var(--position) var(--position),white 0.5px,transparent 0) padding-box;
+      background-size:var(--space) var(--space);background-repeat:space;
+      mask-image:conic-gradient(from calc(var(--gradient-angle) + 45deg),black,transparent 10% 90%,black);
+      border-radius:inherit;opacity:0.4;
+    }
+    .shiny-cta::after{
+      content:'';pointer-events:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;
+      width:100%;aspect-ratio:1;background:linear-gradient(-50deg,transparent,#1e3a8a,transparent);
+      mask-image:radial-gradient(circle at bottom,transparent 40%,black);opacity:0.6;
+      animation:shiny-shimmer 4s linear infinite;
+    }
+    @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
+    .shiny-cta span{position:relative;z-index:2;display:inline-block}
+    .shiny-cta>span{position:relative;z-index:1}
+
+    /* Use fallback animation on mobile */
+    @media (max-width: 768px) {
+      .shiny-cta {
+        animation: shiny-pulse 3s ease-in-out infinite;
+        background: linear-gradient(#0a0a0f, #0a0a0f) padding-box, linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e3a8a 100%) border-box;
+      }
+      .shiny-cta::before, .shiny-cta::after { display: none; }
+      @keyframes shiny-pulse { 0%, 100% { box-shadow: 0 0 15px rgba(59,130,246,0.3); } 50% { box-shadow: 0 0 30px rgba(59,130,246,0.5); } }
+    }
+    @media (prefers-reduced-motion: reduce) { .shiny-cta { animation: none; } }
+
+    /* Partners carousel */
+    .partners-marquee{position:relative;width:100%;overflow:hidden;mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent)}
+    .partners-track{display:flex;gap:3rem;animation:partners-scroll 60s linear infinite;width:max-content}
+    .partners-track-reverse{display:flex;gap:3rem;animation:partners-scroll-reverse 55s linear infinite;width:max-content}
+    @keyframes partners-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    @keyframes partners-scroll-reverse{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+    .partner-logo{opacity:0.5;transition:opacity 0.3s ease;display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex-shrink:0}
+    .partner-logo:hover{opacity:1}
+    .partner-logo svg{width:100%;height:100%}
+
     .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:16px;padding:1.05rem;box-shadow:var(--shadow);min-width:0;position:relative;overflow:visible;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
 
     .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--accent));transform:scaleX(0);transition:transform 0.3s ease;overflow:hidden}
