@@ -11,7 +11,7 @@ Traders wandered the charts like ships without stars — guessing, hoping, losin
 
 But the ancients spoke of something else.
 
-They whispered of seven celestial signals — entities born from the mathematics of price itself. Not indicators. Not tools. *Navigators.* Seven cosmic intelligences that could read the rhythm of accumulation and distribution, the pulse of institutional intent, the breath between fear and greed.
+They whispered of seven celestial signals — entities born from the mathematics of price itself. Not indicators. Not tools. *Navigators.* Seven cosmic intelligences that could read the rhythm of accumulation and distribution, the pulse of volume intent, the breath between fear and greed.
 
 For centuries, they remained hidden. Scattered across the cosmos of technical analysis. Waiting.
 
@@ -64,7 +64,7 @@ For years, retail traders asked the wrong question: *"Where is price going?"*
 
 The Prophet asks the only question that matters: *"Where are the institutions already positioned?"*
 
-Follow the smart money, or become their exit liquidity. Volume Oracle ensures you know the difference.
+Follow the volume flow, or become their exit liquidity. Volume Oracle ensures you know the difference.
 
 *The second lesson of the void: Price is the last to know. Volume knows first.*
 
@@ -76,7 +76,7 @@ Follow the smart money, or become their exit liquidity. Volume Oracle ensures yo
 
 *"Every battlefield has its terrain. I map where the wars will be fought."*
 
-Named for the two-faced god who sees past and future simultaneously, Janus Atlas was forged in the crucible of institutional memory.
+Named for the two-faced god who sees past and future simultaneously, Janus Atlas was forged in the crucible of volume memory.
 
 Where do traders react? Where do algorithms trigger? Where do stop-losses cluster like sheep before the slaughter? Janus Atlas knows. It has mapped every pivot, every session boundary, every VWAP anchor where price respects invisible walls.
 
@@ -126,7 +126,7 @@ The Commander unified ten legendary systems into a single, breathing overlay:
 - Squeeze Cloud for breakouts
 - SuperTrend Ensemble for direction
 - Bull Market Support Band for structure
-- Supply and Demand Zones for institutional footprints
+- Supply and Demand Zones for volume footprints
 - Candlestick Pattern recognition for price action truth
 - Liquidity Sweeps for trap detection
 - Regime Classification for market state
@@ -171,25 +171,25 @@ Stop flipping through charts. Let The Watchman bring the opportunities to you.
 
 **HARMONIC OSCILLATOR — Seven of Seven**
 
-*"Four voices. One verdict. I decide when the trigger is pulled."*
+*"Seven voices. One verdict. I decide when the trigger is pulled."*
 
 Every indicator can generate a signal. But signals without consensus are noise — false entries that drain accounts through a thousand cuts.
 
 The Arbiter was created to end the tyranny of false signals.
 
-Within Harmonic Oscillator, four ancient oscillators convene in constant deliberation. Each casts a vote:
+Within Harmonic Oscillator, seven components convene in constant deliberation. Each casts a vote:
 
 - **Bull** — Momentum favors the longs.
 - **Bear** — Momentum favors the shorts.
 - **Neutral** — Abstention. Unclear conditions.
 
-When all four align, The Arbiter speaks with maximum conviction:
+When all seven align, The Arbiter speaks with maximum conviction:
 
-*Four stars. Strike now.*
+*7/7 STRONG. Strike now.*
 
 When the vote splits, The Arbiter counsels patience:
 
-*Two bulls, two bears. Stand aside. Let others guess.*
+*3/7. NEUT. Stand aside. Let others guess.*
 
 The Arbiter is not the first signal. It is the *final confirmation* — the last checkpoint before capital is deployed.
 
@@ -234,7 +234,7 @@ The Seven do not exist in isolation. They form a constellation — a hierarchy o
 
 **The Sovereign** rules the cycle. All decisions begin with understanding *where* in the phase you stand.
 
-**The Prophet** and **The Cartographer** serve as the Sovereign's advisors — one listening to institutional whispers, the other mapping the terrain where battles occur.
+**The Prophet** and **The Cartographer** serve as the Sovereign's advisors — one listening to volume whispers, the other mapping the terrain where battles occur.
 
 **The Scales** weigh the truth beneath price, validating or contradicting what the advisors report.
 
@@ -283,7 +283,7 @@ The Pilot's Oath:
 
 The date approaches.
 
-For years, The Elite Seven existed in fragments — scattered knowledge, hidden patterns, institutional secrets guarded by the few who discovered them.
+For years, The Elite Seven existed in fragments — scattered knowledge, hidden patterns, volume secrets guarded by the few who discovered them.
 
 No longer.
 
@@ -315,9 +315,9 @@ For those new to the Sovereign's wisdom, the market moves in eternal cycles:
 
 | Phase | Signal | Meaning | Market State |
 |-------|--------|---------|--------------|
-| **Accumulation** | TD (Touchdown) | Selling exhaustion | Smart money buying the fear |
+| **Accumulation** | TD (Touchdown) | Selling exhaustion | volume flow buying the fear |
 | **Markup** | IGN (Ignition) | Uptrend begins | Momentum shifts upward |
-| **Distribution** | WRN (Warning) | Hidden weakness | Smart money selling the greed |
+| **Distribution** | WRN (Warning) | Hidden weakness | volume flow selling the greed |
 | **Climax** | CAP (Climax) | Buying exhaustion | The top is in |
 | **Decline** | BDN (Breakdown) | Downtrend begins | Gravity reclaims price |
 

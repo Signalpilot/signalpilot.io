@@ -86,7 +86,7 @@ Dynamic pricing: price increases as we sell slots (only 350 total).
 
 1. **SP Pentarch** ⭐ - 5-phase cycle detection
 2. **SP OmniDeck** - 10-in-1 dashboard
-3. **SP Volume Oracle** - Institutional flow tracking
+3. **SP Volume Oracle** - Regime detection
 4. **SP Plutus Flow** - Money flow analysis
 5. **SP Janus Atlas** - Multi-timeframe key levels
 6. **SP Augury Grid** - Support/resistance matrix
@@ -125,9 +125,9 @@ All components independently toggleable.
 
 [Learn more →](#inside)`,
 
-      volumeoracle: `**SP Volume Oracle** - *INSTITUTIONAL*
+      volumeoracle: `**SP Volume Oracle** - *REGIME DETECTION*
 
-Advanced volume analysis detecting institutional activity.
+Advanced volume analysis detecting accumulation/distribution patterns.
 
 **Features:**
 • Volume divergence detection
@@ -141,12 +141,12 @@ Green ribbon shows accumulation before retail notices.
 
       plutusflow: `**SP Plutus Flow** - *ACCUMULATION*
 
-Money flow analysis tracking smart money movements.
+Money flow analysis tracking volume patterns.
 
 **Features:**
-• Smart money tracking
+• Volume flow tracking
 • Cumulative delta analysis
-• Institutional signals
+• Statistical volume signals
 • Flow divergence detection
 
 Reveals hidden buying/selling pressure.
@@ -184,15 +184,15 @@ Your entire watchlist, ranked by quality.
 
       harmonicoscillator: `**SP Harmonic Oscillator** - *TIMING*
 
-4-oscillator voting system with confidence ratings.
+7-oscillator voting system with confidence ratings.
 
 **Features:**
-• 4-in-1 momentum
+• 7-in-1 momentum
 • Star rating (★ to ★★★★)
 • Composite signals
 • Clear trend identification
 
-4/4 agreement = max confidence.
+7/7 agreement = max confidence.
 
 [Learn more →](#inside)`
     },

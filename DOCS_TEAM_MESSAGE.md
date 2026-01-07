@@ -81,7 +81,7 @@ PayPal, Stripe, and LemonSqueezy **actively scan** for:
 **Product truth:**
 - "Non-repainting indicators" (if technically true)
 - "Professional-grade analysis tools"
-- "Institutional education curriculum"
+- "volume education curriculum"
 
 **Educational claims:**
 - "42 lessons covering..." (if you have 42 lessons)
