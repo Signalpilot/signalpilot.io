@@ -2600,6 +2600,28 @@
       to{transform:rotate(360deg)}
     }
 
+    @property --gradient-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
+    @property --gradient-angle-offset{syntax:"<angle>";initial-value:0deg;inherits:false}
+    @property --gradient-percent{syntax:"<percentage>";initial-value:20%;inherits:false}
+    @property --gradient-shine{syntax:"<color>";initial-value:#3b82f6;inherits:false}
+    .shiny-cta{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:0.85rem 1.8rem;font-weight:600;font-size:0.95rem;color:#fff;background:linear-gradient(#0a0a0f,#0a0a0f) padding-box,conic-gradient(from calc(var(--gradient-angle) + var(--gradient-angle-offset)),transparent,#1e3a8a,#3b82f6,#60a5fa,#3b82f6,#1e3a8a,transparent) border-box;border:2px solid transparent;border-radius:12px;cursor:pointer;overflow:hidden;transition:transform 0.2s ease,box-shadow 0.3s ease;animation:shiny-spin 2.5s linear infinite;z-index:1;text-decoration:none}
+    @keyframes shiny-spin{to{--gradient-angle:360deg}}
+    .shiny-cta:active{transform:translateY(1px)}
+    .shiny-cta::before{content:'';pointer-events:none;position:absolute;inset:-2px;background:conic-gradient(from calc(var(--gradient-angle) + var(--gradient-angle-offset)),transparent,#1e3a8a,#3b82f6 var(--gradient-percent),var(--gradient-shine),#3b82f6 calc(100% - var(--gradient-percent)),#1e3a8a,transparent);border-radius:inherit;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask-composite:xor;padding:2px;animation:inherit;z-index:-1}
+    .shiny-cta::after{content:'';pointer-events:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;width:100%;aspect-ratio:1;background:linear-gradient(-50deg,transparent,#1e3a8a,transparent);mask-image:radial-gradient(circle at bottom,transparent 40%,black);opacity:0.6;animation:shiny-shimmer 4s linear infinite}
+    @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
+    .shiny-cta span,.shiny-cta>span{position:relative;z-index:2;display:inline-block}
+    @media (max-width: 768px){.shiny-cta{animation:shiny-pulse 3s ease-in-out infinite;background:linear-gradient(#0a0a0f,#0a0a0f) padding-box,linear-gradient(135deg,#1e3a8a 0%,#3b82f6 50%,#1e3a8a 100%) border-box}.shiny-cta::before,.shiny-cta::after{display:none}@keyframes shiny-pulse{0%,100%{box-shadow:0 0 15px rgba(59,130,246,0.3)}50%{box-shadow:0 0 30px rgba(59,130,246,0.5)}}}
+    @media (prefers-reduced-motion: reduce){.shiny-cta{animation:none}}
+    .partners-marquee{position:relative;width:100%;overflow:hidden;mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent)}
+    .partners-track{display:flex;gap:3rem;animation:partners-scroll 60s linear infinite;width:max-content}
+    .partners-track-reverse{display:flex;gap:3rem;animation:partners-scroll-reverse 55s linear infinite;width:max-content}
+    @keyframes partners-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    @keyframes partners-scroll-reverse{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+    .partner-logo{opacity:0.5;transition:opacity 0.3s ease;display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex-shrink:0}
+    .partner-logo:hover{opacity:1}
+    .partner-logo svg{width:100%;height:100%}
+
     .card{border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-radius:16px;padding:1.05rem;box-shadow:var(--shadow);min-width:0;position:relative;overflow:visible;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
 
     .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--brand),var(--accent));transform:scaleX(0);transition:transform 0.3s ease;overflow:hidden}
@@ -3084,7 +3106,7 @@
       overflow:hidden;
       transition:box-shadow 0.3s ease;
     }
-    .cta-header::before{
+    .cta-header:not(.shiny-cta)::before{
       content:'';
       position:absolute;
       top:0;
@@ -3094,7 +3116,7 @@
       background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
       transition:none;
     }
-    .cta-header:hover::before{
+    .cta-header:not(.shiny-cta):hover::before{
       left:100%;
       transition:left 0.5s ease;
     }
@@ -4618,7 +4640,7 @@
 
 
 
-      <a class="btn btn-primary cta-header btn-magnetic" href="#trial">Teste Grátis 7 Dias →</a>
+      <a class="shiny-cta cta-header" href="#trial" style="display:inline-flex;width:auto;padding:0.75rem 1.5rem;height:auto;white-space:nowrap"><span>Teste Grátis 7 Dias →</span></a>
 
 
 
