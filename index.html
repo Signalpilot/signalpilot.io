@@ -650,7 +650,10 @@
       }
 
       /* Reduce animations for performance - but don't kill them entirely */
-      *, *::before, *::after {
+      /* EXCLUDE: marquee carousels need their full animation duration */
+      *:not(.testimonials-track):not(.partners-track):not(.partners-track-reverse),
+      *:not(.testimonials-track):not(.partners-track):not(.partners-track-reverse)::before,
+      *:not(.testimonials-track):not(.partners-track):not(.partners-track-reverse)::after {
         animation-duration: 0.2s !important;
         transition-duration: 0.2s !important;
       }
@@ -662,6 +665,17 @@
       [id*="modal"] {
         animation-duration: 0.3s !important;
         transition-duration: 0.3s !important;
+      }
+
+      /* Restore carousel animations on mobile */
+      .testimonials-track {
+        animation-duration: 30s !important;
+      }
+      .partners-track {
+        animation-duration: 50s !important;
+      }
+      .partners-track-reverse {
+        animation-duration: 45s !important;
       }
     }
 
@@ -3171,7 +3185,7 @@
 
 <body>
 
-<!-- Unicorn Studio animated background - using high z-index + mix-blend-mode for mobile compatibility -->
+<!-- DISABLED: Unicorn Studio animated background
 <div id="unicorn-bg-container" style="
   position: fixed;
   top: 0;
@@ -3189,6 +3203,7 @@
 <script>
 !function(){if(!window.UnicornStudio){window.UnicornStudio={isInitialized:!1};var i=document.createElement("script");i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",i.onload=function(){window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)},(document.head || document.body).appendChild(i)}}();
 </script>
+-->
 
 <!-- Starfield video background -->
 <div id="starfield-container" style="
@@ -6529,8 +6544,16 @@
           width: fit-content;
         }
 
-        .partners-marquee:hover .partners-track {
+        .partners-marquee:hover .partners-track,
+        .partners-marquee:hover .partners-track-reverse {
           animation-play-state: paused;
+        }
+
+        .partners-track-reverse {
+          display: flex;
+          gap: 3rem;
+          animation: partners-scroll-reverse 55s linear infinite;
+          width: fit-content;
         }
 
         @keyframes partners-scroll {
@@ -6539,6 +6562,15 @@
           }
           100% {
             transform: translateX(calc(-50% - 1.5rem));
+          }
+        }
+
+        @keyframes partners-scroll-reverse {
+          0% {
+            transform: translateX(calc(-50% - 1.5rem));
+          }
+          100% {
+            transform: translateX(0);
           }
         }
 
@@ -6573,9 +6605,9 @@
         }
 
         @media (max-width: 768px) {
-          .partners-track {
+          .partners-track,
+          .partners-track-reverse {
             gap: 2rem;
-            animation-duration: 40s;
           }
 
           .partner-logo svg {
