@@ -1641,20 +1641,41 @@
     @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
     .shiny-cta span{position:relative;z-index:2;display:inline-block}
 
-    /* Mobile: Disable @property animation (Chrome can't handle it), use simple shimmer only */
+    /* Mobile: Chrome-compatible rotating border using transforms */
+    @keyframes mobile-spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
     @media (max-width: 768px) {
       .shiny-cta {
-        animation: none !important; /* Kill the @property animation - Chrome flickers */
-        background: linear-gradient(#0a0a0f,#0a0a0f) padding-box,
-                    linear-gradient(135deg, transparent 0%, #1e3a8a 25%, #3b82f6 50%, #1e3a8a 75%, transparent 100%) border-box !important;
+        animation: none !important;
+        background: #0a0a0f !important;
+        border: none !important;
+        position: relative !important;
       }
       .shiny-cta::before {
-        display: none !important; /* Hide complex mask element */
+        content: '' !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        width: 300% !important;
+        height: 300% !important;
+        background: conic-gradient(transparent 40%, #1e3a8a 45%, #3b82f6 50%, #1e3a8a 55%, transparent 60%) !important;
+        animation: mobile-spin 4s linear infinite !important;
+        z-index: -2 !important;
+        border-radius: 0 !important;
+        opacity: 1 !important;
+        mask-image: none !important;
+        -webkit-mask-image: none !important;
       }
       .shiny-cta::after {
-        animation: shiny-shimmer 6s linear infinite !important;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
+        content: '' !important;
+        position: absolute !important;
+        inset: 2px !important;
+        background: #0a0a0f !important;
+        border-radius: 9999px !important;
+        z-index: -1 !important;
+        animation: none !important;
       }
     }
 
