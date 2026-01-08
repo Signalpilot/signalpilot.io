@@ -12,7 +12,7 @@
     orientation: 'vertical',
     smoothWheel: true,
     syncTouch: true,
-    syncTouchLerp: 0.03,
+    syncTouchLerp: 0.045,
     touchMultiplier: 2,
   });
 
