@@ -208,11 +208,11 @@ What you see in history is exactly what you would have seen live.`,
 
       trial: `We don't have a traditional free trial, but we offer something better:
 
-**7-day money-back guarantee** ✅
+**14-day money-back guarantee** ✅
 
-Full refund within 7 days of your first payment, no questions asked.
+Full refund within 14 days of your first payment, no questions asked.
 
-You can test everything risk-free for a full week!
+You can test everything risk-free for two full weeks!
 
 [Try the demo →](#comparison-slider)`,
 
@@ -264,11 +264,11 @@ Trading involves substantial risk of loss. You are solely responsible for your t
 
 [Read full disclaimer →](#faq)`,
 
-      refund: `💰 **7-day money-back guarantee**
+      refund: `💰 **14-day money-back guarantee**
 
-Full refund within 7 days of your first payment, no questions asked.
+Full refund within 14 days of your first payment, no questions asked.
 
-After 7 days, you can cancel anytime—no penalty.
+After 14 days, you can cancel anytime—no penalty.
 
 • Card customers: Self-service portal
 • PayPal customers: Manage via PayPal settings
@@ -384,7 +384,7 @@ I can answer quick questions, but for detailed information check our comprehensi
 3. Complete payment (PayPal or card)
 4. Get access in 1-8 hours!
 
-**7-day money-back guarantee** on all plans.
+**14-day money-back guarantee** on all plans.
 
 [View pricing →](#pricing)`;
 
