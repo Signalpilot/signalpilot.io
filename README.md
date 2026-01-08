@@ -25,7 +25,7 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
 
 ### Hero Section
 - **Headline:** "The edge isn't seeing more. It's seeing what matters."
-- **Trust badges:** 100% Non-Repainting (Audited) | 7-Day Money-Back Guarantee
+- **Trust badges:** 100% Non-Repainting (Audited) | 14-Day Money-Back Guarantee
 - **Hero video:** Live chart demo showcasing Pentarch cycle detection
 - **CTA:** Get Started button linking to pricing
 
@@ -85,7 +85,7 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
 - TradingView invite process
 - Access delivery speed (1-8 hours)
 - Support response times
-- Refund policy (7-day money-back)
+- Refund policy (14-day money-back)
 
 ### Footer
 - **Product:** Indicators, Pricing, Documentation, FAQ
