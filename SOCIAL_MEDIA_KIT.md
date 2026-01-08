@@ -799,7 +799,7 @@ THE ELITE SEVEN ARE LIVE.
 
 + 82 free lessons at education.signalpilot.io
 + Full documentation at docs.signalpilot.io
-+ 7-day free trial. No credit card.
++ 14-day free trial. No credit card.
 
 Navigate the noise.
 
@@ -861,7 +861,7 @@ WHAT'S INCLUDED:
 → 82 free educational lessons
 → Full documentation
 → Email support
-→ 7-day free trial (no credit card)
+→ 14-day free trial (no credit card)
 ```
 
 **Post 5:**
@@ -940,7 +940,7 @@ Harmonic Oscillator — confirms the strike
 
 Non-repainting. Audited. $100 bounty.
 
-7-day free trial. No credit card.
+14-day free trial. No credit card.
 
 Link in bio.
 
