@@ -7,7 +7,7 @@
 
   // Initialize Lenis smooth scrolling
   const lenis = new Lenis({
-    duration: 2.5,
+    duration: 3.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
     orientation: 'vertical',
     smoothWheel: true,
