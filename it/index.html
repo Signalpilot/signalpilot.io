@@ -2437,10 +2437,23 @@
     @property --gradient-angle-offset{syntax:"<angle>";initial-value:0deg;inherits:false}
     @property --gradient-percent{syntax:"<percentage>";initial-value:20%;inherits:false}
     @property --gradient-shine{syntax:"<color>";initial-value:#3b82f6;inherits:false}
-    .shiny-cta{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:0.85rem 1.8rem;font-weight:600;font-size:0.95rem;color:#fff;background:linear-gradient(#0a0a0f,#0a0a0f) padding-box,conic-gradient(from calc(var(--gradient-angle) + var(--gradient-angle-offset)),transparent,#1e3a8a,#3b82f6,#60a5fa,#3b82f6,#1e3a8a,transparent) border-box;border:2px solid transparent;border-radius:12px;cursor:pointer;overflow:hidden;transition:transform 0.2s ease,box-shadow 0.3s ease;animation:shiny-spin 2.5s linear infinite;z-index:1;text-decoration:none}
+    .shiny-cta{
+      --gradient-angle:0deg;--gradient-angle-offset:0deg;--gradient-percent:20%;--gradient-shine:#3b82f6;
+      position:relative;overflow:hidden;border-radius:9999px;padding:0.875rem 1.5rem;font-size:0.875rem;line-height:1.2;font-weight:500;color:#fff;
+      background:linear-gradient(#0a0a0f,#0a0a0f) padding-box,conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)),transparent 0%,#1e3a8a 5%,var(--gradient-shine) 15%,#1e3a8a 30%,transparent 40%,transparent 100%) border-box;
+      border:2px solid transparent;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1);cursor:pointer;isolation:isolate;z-index:0;
+      animation:shiny-spin 2.5s linear infinite;width:100%;display:flex;align-items:center;justify-content:center;height:48px;text-decoration:none;
+    }
     @keyframes shiny-spin{to{--gradient-angle:360deg}}
     .shiny-cta:active{transform:translateY(1px)}
-    .shiny-cta::before{content:'';pointer-events:none;position:absolute;inset:-2px;background:conic-gradient(from calc(var(--gradient-angle) + var(--gradient-angle-offset)),transparent,#1e3a8a,#3b82f6 var(--gradient-percent),var(--gradient-shine),#3b82f6 calc(100% - var(--gradient-percent)),#1e3a8a,transparent);border-radius:inherit;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask-composite:xor;padding:2px;animation:inherit;z-index:-1}
+    .shiny-cta::before{
+      content:'';pointer-events:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:0;
+      --size:calc(100% - 6px);--position:2px;--space:4px;width:var(--size);height:var(--size);
+      background:radial-gradient(circle at var(--position) var(--position),white 0.5px,transparent 0) padding-box;
+      background-size:var(--space) var(--space);background-repeat:space;
+      mask-image:conic-gradient(from calc(var(--gradient-angle) + 45deg),black,transparent 10% 90%,black);
+      border-radius:inherit;opacity:0.4;
+    }
     .shiny-cta::after{content:'';pointer-events:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;width:100%;aspect-ratio:1;background:linear-gradient(-50deg,transparent,#1e3a8a,transparent);mask-image:radial-gradient(circle at bottom,transparent 40%,black);opacity:0.6;animation:shiny-shimmer 4s linear infinite}
     @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
     .shiny-cta span,.shiny-cta>span{position:relative;z-index:2;display:inline-block}
