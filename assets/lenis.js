@@ -11,6 +11,8 @@
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
     orientation: 'vertical',
     smoothWheel: true,
+    syncTouch: true,
+    syncTouchLerp: 0.06,
     touchMultiplier: 2,
   });
 
