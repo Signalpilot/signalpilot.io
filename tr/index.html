@@ -1130,18 +1130,24 @@
     .shiny-cta:active{transform:translateY(0)}
     .shiny-cta>span{position:relative;z-index:1}
     @keyframes shiny-spin{0%{--gradient-angle:0deg}100%{--gradient-angle:360deg}}
-    /* Use fallback animation on mobile */
+    /* Slow down shiny animations on mobile */
     @media (max-width: 768px) {
       .shiny-cta {
-        animation: shiny-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        -webkit-animation: shiny-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        background: linear-gradient(#0a0a0f, #0a0a0f) padding-box, linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e3a8a 100%) border-box;
+        animation-duration: 4s;
       }
-      .shiny-cta::before, .shiny-cta::after { display: none; }
-      @-webkit-keyframes shiny-pulse { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25), inset 0 0 0 1px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 25px rgba(59,130,246,0.4), inset 0 0 0 1px rgba(255,255,255,0.15); } }
-      @keyframes shiny-pulse { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25), inset 0 0 0 1px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 25px rgba(59,130,246,0.4), inset 0 0 0 1px rgba(255,255,255,0.15); } }
+      .shiny-cta::after {
+        animation-duration: 6s;
+      }
     }
-    @media (prefers-reduced-motion: reduce) { .shiny-cta { animation: none; } }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .shiny-cta,
+      .shiny-cta::before,
+      .shiny-cta::after {
+        animation: none;
+      }
+    }
 
     /* Chrome ONLY: Replace @property with transform-based rotation */
     @keyframes mobile-spin {
@@ -1908,18 +1914,24 @@
     .shiny-cta:active{transform:translateY(0)}
     .shiny-cta>span{position:relative;z-index:1}
     @keyframes shiny-spin{0%{--gradient-angle:0deg}100%{--gradient-angle:360deg}}
-    /* Use fallback animation on mobile */
+    /* Slow down shiny animations on mobile */
     @media (max-width: 768px) {
       .shiny-cta {
-        animation: shiny-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        -webkit-animation: shiny-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        background: linear-gradient(#0a0a0f, #0a0a0f) padding-box, linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e3a8a 100%) border-box;
+        animation-duration: 4s;
       }
-      .shiny-cta::before, .shiny-cta::after { display: none; }
-      @-webkit-keyframes shiny-pulse { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25), inset 0 0 0 1px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 25px rgba(59,130,246,0.4), inset 0 0 0 1px rgba(255,255,255,0.15); } }
-      @keyframes shiny-pulse { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25), inset 0 0 0 1px rgba(255,255,255,0.08); } 50% { box-shadow: 0 0 25px rgba(59,130,246,0.4), inset 0 0 0 1px rgba(255,255,255,0.15); } }
+      .shiny-cta::after {
+        animation-duration: 6s;
+      }
     }
-    @media (prefers-reduced-motion: reduce) { .shiny-cta { animation: none; } }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .shiny-cta,
+      .shiny-cta::before,
+      .shiny-cta::after {
+        animation: none;
+      }
+    }
 
     /* Chrome ONLY: Replace @property with transform-based rotation */
     @keyframes mobile-spin {
@@ -6537,47 +6549,237 @@
 
     <!-- POWERED BY / TECH STACK -->
     <section id="partners" class="section" style="padding:3rem 0;overflow:hidden">
+      <!-- Slow smooth stroke drawing animation + horizontal marquee -->
+      <style>
+        @keyframes strokeDraw {
+          0% { stroke-dashoffset: 100; opacity: 0.4; }
+          50% { stroke-dashoffset: 0; opacity: 1; }
+          100% { stroke-dashoffset: 100; opacity: 0.4; }
+        }
+        .stroke-animate path, .stroke-animate circle, .stroke-animate polygon, .stroke-animate rect, .stroke-animate line {
+          stroke-dasharray: 100;
+          animation: strokeDraw 8s ease-in-out infinite;
+        }
+        /* Stagger animations */
+        .partner-logo:nth-child(1) .stroke-animate * { animation-delay: 0s; }
+        .partner-logo:nth-child(2) .stroke-animate * { animation-delay: 0.6s; }
+        .partner-logo:nth-child(3) .stroke-animate * { animation-delay: 1.2s; }
+        .partner-logo:nth-child(4) .stroke-animate * { animation-delay: 1.8s; }
+        .partner-logo:nth-child(5) .stroke-animate * { animation-delay: 2.4s; }
+        .partner-logo:nth-child(6) .stroke-animate * { animation-delay: 3s; }
+        .partner-logo:nth-child(7) .stroke-animate * { animation-delay: 3.6s; }
+        .partner-logo:nth-child(8) .stroke-animate * { animation-delay: 4.2s; }
+        .partner-logo:nth-child(9) .stroke-animate * { animation-delay: 4.8s; }
+        .partner-logo:nth-child(10) .stroke-animate * { animation-delay: 5.4s; }
+        .partner-logo:nth-child(n+11) .stroke-animate * { animation-delay: inherit; }
+
+        .partners-marquee {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+          -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+        .partners-track {
+          display: flex;
+          gap: 4rem;
+          padding: 0 2rem;
+          animation: partners-scroll 50s linear infinite;
+          width: max-content;
+        }
+        .partners-marquee:hover .partners-track {
+          animation-play-state: paused;
+        }
+        @keyframes partners-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .partner-logo {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          color: var(--muted);
+          text-decoration: none;
+          transition: all 0.3s ease;
+          opacity: 0.7;
+          flex-shrink: 0;
+          padding: 0.75rem;
+        }
+        .partner-logo svg {
+          width: 32px;
+          height: 32px;
+          transition: all 0.3s ease;
+        }
+        .partner-logo span {
+          font-size: 0.7rem;
+          font-weight: 500;
+          letter-spacing: 0.02em;
+          white-space: nowrap;
+          opacity: 0.8;
+        }
+        .partner-logo:hover {
+          opacity: 1;
+        }
+        .partner-logo:hover svg {
+          filter: drop-shadow(0 0 8px rgba(99, 149, 255, 0.5));
+          color: #6395ff;
+        }
+        @media (max-width: 768px) {
+          .partners-track { gap: 2.5rem; }
+          .partner-logo svg { width: 24px; height: 24px; }
+          .partner-logo span { font-size: 0.6rem; }
+        }
+      </style>
+
       <div class="container">
         <div data-reveal="fade-up" style="text-align:center;margin-bottom:2rem">
-          <p style="color:var(--muted);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em">Destekleyen Teknolojiler</p>
+          <p style="color:var(--muted);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em">Tarafından desteklenmektedir</p>
         </div>
+
         <div class="partners-marquee" data-reveal="fade-up" data-reveal-delay="100">
           <div class="partners-track">
-            <a href="https://www.tradingview.com/" target="_blank" rel="noopener" class="partner-logo" title="TradingView"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M15.8654 8.2789c0 1.3541-1.0978 2.4519-2.452 2.4519-1.354 0-2.4519-1.0978-2.4519-2.452 0-1.354 1.0978-2.4518 2.452-2.4518 1.3541 0 2.4519 1.0977 2.4519 2.4519zM9.75 6H0v4.9038h4.8462v7.2692H9.75Zm8.5962 0H24l-5.1058 12.173h-5.6538z"/></svg><span>TradingView</span></a>
-            <a href="https://github.com/" target="_blank" rel="noopener" class="partner-logo" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg><span>GitHub</span></a>
-            <a href="https://discord.com/" target="_blank" rel="noopener" class="partner-logo" title="Discord"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg><span>Discord</span></a>
-            <a href="https://vercel.com/" target="_blank" rel="noopener" class="partner-logo" title="Vercel"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg><span>Vercel</span></a>
-            <a href="https://stripe.com/" target="_blank" rel="noopener" class="partner-logo" title="Stripe"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg><span>Stripe</span></a>
-            <a href="https://claude.ai/" target="_blank" rel="noopener" class="partner-logo" title="Claude AI"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24"/><path d="M10.5363 3.5409L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg><span>Claude</span></a>
-            <a href="https://runwayml.com/" target="_blank" rel="noopener" class="partner-logo" title="Runway"><svg width="28" height="28" viewBox="0 0 512 512" fill="currentColor"><path d="M392.51 511.69c-62.032 5.67-113.901-67.019-153.657-103.887C218.749 552.665-.15 538.933 0 391.985c.072-61.724 0-212.549 0-272.331C0 98.16 5.899 76.515 16.965 58.16c21-35.599 61.58-58.584 102.906-58.14c62.254.079 212.177-.071 272.639 0c147.084 0 161.053 218.821 15.696 238.523l68.977 68.884c75.785 71.27 18.906 207.396-84.673 204.263zm-33.407-86.199c42.745 44.035 110.984-24.182 66.963-66.869L306.489 239.217h-66.891v66.862l103.365 103.222l16.14 16.19zM72.417 392.056c-.974 61.201 95.66 61.423 94.693 0V119.654c.817-30.525-31.464-54.778-60.613-45.375c-1.268.373-2.465.746-3.59 1.197c-18.306 6.787-31.013 25.522-30.49 45.074v271.506zM392.51 166.893c61.429.975 61.358-95.524 0-94.556H230.109c12.335 25.974 9.196 66.425 9.418 94.556H392.51z"/></svg><span>Runway</span></a>
-            <a href="https://www.godaddy.com/" target="_blank" rel="noopener" class="partner-logo" title="GoDaddy"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20.702 2.29c-2.494-1.554-5.778-1.187-8.706.654C9.076 1.104 5.79.736 3.3 2.29c-3.941 2.463-4.42 8.806-1.07 14.167 2.47 3.954 6.333 6.269 9.77 6.226 3.439.043 7.301-2.273 9.771-6.226 3.347-5.361 2.872-11.704-1.069-14.167zM4.042 15.328a12.838 12.838 0 01-1.546-3.541 10.12 10.12 0 01-.336-3.338c.15-1.98.956-3.524 2.27-4.345 1.315-.822 3.052-.87 4.903-.137.281.113.556.24.825.382A15.11 15.11 0 007.5 7.54c-2.035 3.255-2.655 6.878-1.945 9.765a13.247 13.247 0 01-1.514-1.98zm17.465-3.541a12.866 12.866 0 01-1.547 3.54 13.25 13.25 0 01-1.513 1.984c.635-2.589.203-5.76-1.353-8.734a.39.39 0 00-.563-.153l-4.852 3.032a.397.397 0 00-.126.546l.712 1.139a.395.395 0 00.547.126l3.145-1.965c.101.306.203.606.28.916.296 1.086.41 2.214.335 3.337-.15 1.982-.956 3.525-2.27 4.347a4.437 4.437 0 01-2.25.65h-.101a4.432 4.432 0 01-2.25-.65c-1.314-.822-2.121-2.365-2.27-4.347-.074-1.123.039-2.251.335-3.337a13.212 13.212 0 014.05-6.482 10.148 10.148 0 012.849-1.765c1.845-.733 3.586-.685 4.9.137 1.316.822 2.122 2.365 2.271 4.345a10.146 10.146 0 01-.33 3.334z"/></svg><span>GoDaddy</span></a>
-            <a href="https://www.tradingview.com/pine-script-docs/" target="_blank" rel="noopener" class="partner-logo" title="Pine Script"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3H8zm8 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2z"/></svg><span>Pine Script</span></a>
-            <a href="https://www.ycombinator.com/" target="_blank" rel="noopener" class="partner-logo" title="Unicorn"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg><span>Unicorn</span></a>
-            <a href="https://www.tradingview.com/" target="_blank" rel="noopener" class="partner-logo" title="TradingView" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M15.8654 8.2789c0 1.3541-1.0978 2.4519-2.452 2.4519-1.354 0-2.4519-1.0978-2.4519-2.452 0-1.354 1.0978-2.4518 2.452-2.4518 1.3541 0 2.4519 1.0977 2.4519 2.4519zM9.75 6H0v4.9038h4.8462v7.2692H9.75Zm8.5962 0H24l-5.1058 12.173h-5.6538z"/></svg><span>TradingView</span></a>
-            <a href="https://github.com/" target="_blank" rel="noopener" class="partner-logo" title="GitHub" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg><span>GitHub</span></a>
-            <a href="https://discord.com/" target="_blank" rel="noopener" class="partner-logo" title="Discord" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg><span>Discord</span></a>
-            <a href="https://vercel.com/" target="_blank" rel="noopener" class="partner-logo" title="Vercel" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg><span>Vercel</span></a>
-            <a href="https://stripe.com/" target="_blank" rel="noopener" class="partner-logo" title="Stripe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/></svg><span>Stripe</span></a>
-            <a href="https://claude.ai/" target="_blank" rel="noopener" class="partner-logo" title="Claude AI" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24"/><path d="M10.5363 3.5409L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg><span>Claude</span></a>
-            <a href="https://runwayml.com/" target="_blank" rel="noopener" class="partner-logo" title="Runway" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 512 512" fill="currentColor"><path d="M392.51 511.69c-62.032 5.67-113.901-67.019-153.657-103.887C218.749 552.665-.15 538.933 0 391.985c.072-61.724 0-212.549 0-272.331C0 98.16 5.899 76.515 16.965 58.16c21-35.599 61.58-58.584 102.906-58.14c62.254.079 212.177-.071 272.639 0c147.084 0 161.053 218.821 15.696 238.523l68.977 68.884c75.785 71.27 18.906 207.396-84.673 204.263zm-33.407-86.199c42.745 44.035 110.984-24.182 66.963-66.869L306.489 239.217h-66.891v66.862l103.365 103.222l16.14 16.19zM72.417 392.056c-.974 61.201 95.66 61.423 94.693 0V119.654c.817-30.525-31.464-54.778-60.613-45.375c-1.268.373-2.465.746-3.59 1.197c-18.306 6.787-31.013 25.522-30.49 45.074v271.506zM392.51 166.893c61.429.975 61.358-95.524 0-94.556H230.109c12.335 25.974 9.196 66.425 9.418 94.556H392.51z"/></svg><span>Runway</span></a>
-            <a href="https://www.godaddy.com/" target="_blank" rel="noopener" class="partner-logo" title="GoDaddy" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20.702 2.29c-2.494-1.554-5.778-1.187-8.706.654C9.076 1.104 5.79.736 3.3 2.29c-3.941 2.463-4.42 8.806-1.07 14.167 2.47 3.954 6.333 6.269 9.77 6.226 3.439.043 7.301-2.273 9.771-6.226 3.347-5.361 2.872-11.704-1.069-14.167zM4.042 15.328a12.838 12.838 0 01-1.546-3.541 10.12 10.12 0 01-.336-3.338c.15-1.98.956-3.524 2.27-4.345 1.315-.822 3.052-.87 4.903-.137.281.113.556.24.825.382A15.11 15.11 0 007.5 7.54c-2.035 3.255-2.655 6.878-1.945 9.765a13.247 13.247 0 01-1.514-1.98zm17.465-3.541a12.866 12.866 0 01-1.547 3.54 13.25 13.25 0 01-1.513 1.984c.635-2.589.203-5.76-1.353-8.734a.39.39 0 00-.563-.153l-4.852 3.032a.397.397 0 00-.126.546l.712 1.139a.395.395 0 00.547.126l3.145-1.965c.101.306.203.606.28.916.296 1.086.41 2.214.335 3.337-.15 1.982-.956 3.525-2.27 4.347a4.437 4.437 0 01-2.25.65h-.101a4.432 4.432 0 01-2.25-.65c-1.314-.822-2.121-2.365-2.27-4.347-.074-1.123.039-2.251.335-3.337a13.212 13.212 0 014.05-6.482 10.148 10.148 0 012.849-1.765c1.845-.733 3.586-.685 4.9.137 1.316.822 2.122 2.365 2.271 4.345a10.146 10.146 0 01-.33 3.334z"/></svg><span>GoDaddy</span></a>
-            <a href="https://www.tradingview.com/pine-script-docs/" target="_blank" rel="noopener" class="partner-logo" title="Pine Script" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3H8zm8 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2z"/></svg><span>Pine Script</span></a>
-            <a href="https://www.ycombinator.com/" target="_blank" rel="noopener" class="partner-logo" title="Unicorn" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg><span>Unicorn</span></a>
+            <!-- TradingView -->
+            <a href="https://www.tradingview.com/" target="_blank" rel="noopener" class="partner-logo" title="TradingView">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <circle cx="13.4" cy="8.3" r="2.5"/><path d="M9.75 6H0v4.9h4.85v7.27H9.75z"/><path d="M18.35 6H24l-5.1 12.17h-5.65z"/>
+              </svg>
+              <span>TradingView</span>
+            </a>
+            <!-- GitHub -->
+            <a href="https://github.com/" target="_blank" rel="noopener" class="partner-logo" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.164 6.839 9.49.5.09.682-.218.682-.484 0-.236-.009-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <!-- Discord -->
+            <a href="https://discord.com/" target="_blank" rel="noopener" class="partner-logo" title="Discord">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0c-.175-.386-.406-.875-.617-1.25a19.736 19.736 0 00-4.885 1.515C.533 9.046-.32 13.58.099 18.057a19.9 19.9 0 005.993 3.03c.462-.63.874-1.295 1.226-1.994a13.1 13.1 0 01-1.872-.892c.126-.094.252-.192.372-.292 3.928 1.793 8.18 1.793 12.062 0c.12.1.246.2.373.292a12.3 12.3 0 01-1.873.892c.36.698.772 1.362 1.225 1.993a19.84 19.84 0 006.002-3.03c.5-5.177-.838-9.674-3.549-13.66z"/>
+                <circle cx="8.5" cy="13.5" r="1.5"/><circle cx="15.5" cy="13.5" r="1.5"/>
+              </svg>
+              <span>Discord</span>
+            </a>
+            <!-- Vercel -->
+            <a href="https://vercel.com/" target="_blank" rel="noopener" class="partner-logo" title="Vercel">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <polygon points="12 2 22 20 2 20 12 2"/>
+              </svg>
+              <span>Vercel</span>
+            </a>
+            <!-- Stripe -->
+            <a href="https://stripe.com/" target="_blank" rel="noopener" class="partner-logo" title="Stripe">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/>
+              </svg>
+              <span>Stripe</span>
+            </a>
+            <!-- Claude -->
+            <a href="https://www.anthropic.com/" target="_blank" rel="noopener" class="partner-logo" title="Claude AI">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M17.3 3.5h-3.7l6.7 17H24"/><path d="M10.5 3.5L0 20.5h3.7l1.4-3.6h7l1.4 3.6h3.7L10.5 3.5zm-.4 10.2l2.3-6 2.3 6z"/>
+              </svg>
+              <span>Claude</span>
+            </a>
+            <!-- Runway -->
+            <a href="https://runwayml.com/" target="_blank" rel="noopener" class="partner-logo" title="Runway">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M18.4 24c-2.9.3-5.3-3.1-7.2-4.9C10.2 26 0 25.3 0 18.4c0-2.9 0-10 0-12.8C0 4.6.3 3.6.8 2.7c1-1.7 2.9-2.7 4.8-2.7h12.8c6.9 0 7.5 10.3.7 11.2l3.2 3.2c3.5 3.3.9 9.7-4 9.6zm-1.6-4c2-.1 5.2-1.1 3.1-3.1L14.4 11.2h-3.1v3.1l4.8 4.8l.7.8zM3.4 18.4c0 2.9 4.5 2.9 4.4 0V5.6c0-1.4-1.5-2.6-2.8-2.1c-.9.3-1.5 1.2-1.4 2.1v12.8zM18.4 7.8c2.9 0 2.9-4.5 0-4.4h-7.6c.6 1.2.4 3.1.4 4.4h7.2z"/>
+              </svg>
+              <span>Runway</span>
+            </a>
+            <!-- GoDaddy -->
+            <a href="https://www.godaddy.com/" target="_blank" rel="noopener" class="partner-logo" title="GoDaddy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M20.702 2.29c-2.494-1.554-5.778-1.187-8.706.654C9.076 1.104 5.79.736 3.3 2.29c-3.941 2.463-4.42 8.806-1.07 14.167 2.47 3.954 6.333 6.269 9.77 6.226 3.439.043 7.301-2.273 9.771-6.226 3.347-5.361 2.872-11.704-1.069-14.167z"/>
+                <circle cx="8" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/>
+              </svg>
+              <span>GoDaddy</span>
+            </a>
+            <!-- Pine Script -->
+            <a href="https://www.tradingview.com/pine-script-docs/" target="_blank" rel="noopener" class="partner-logo" title="Pine Script">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3H8z"/>
+                <path d="M16 3a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2z"/>
+              </svg>
+              <span>Pine Script</span>
+            </a>
+            <!-- Unicorn -->
+            <a href="https://unicorn.studio/" target="_blank" rel="noopener" class="partner-logo" title="Unicorn Studio">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <span>Unicorn</span>
+            </a>
+            <!-- Duplicate set for seamless loop -->
+            <a href="https://www.tradingview.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <circle cx="13.4" cy="8.3" r="2.5"/><path d="M9.75 6H0v4.9h4.85v7.27H9.75z"/><path d="M18.35 6H24l-5.1 12.17h-5.65z"/>
+              </svg>
+              <span>TradingView</span>
+            </a>
+            <a href="https://github.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.164 6.839 9.49.5.09.682-.218.682-.484 0-.236-.009-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a href="https://discord.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0c-.175-.386-.406-.875-.617-1.25a19.736 19.736 0 00-4.885 1.515C.533 9.046-.32 13.58.099 18.057a19.9 19.9 0 005.993 3.03c.462-.63.874-1.295 1.226-1.994a13.1 13.1 0 01-1.872-.892c.126-.094.252-.192.372-.292 3.928 1.793 8.18 1.793 12.062 0c.12.1.246.2.373.292a12.3 12.3 0 01-1.873.892c.36.698.772 1.362 1.225 1.993a19.84 19.84 0 006.002-3.03c.5-5.177-.838-9.674-3.549-13.66z"/>
+                <circle cx="8.5" cy="13.5" r="1.5"/><circle cx="15.5" cy="13.5" r="1.5"/>
+              </svg>
+              <span>Discord</span>
+            </a>
+            <a href="https://vercel.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <polygon points="12 2 22 20 2 20 12 2"/>
+              </svg>
+              <span>Vercel</span>
+            </a>
+            <a href="https://stripe.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/>
+              </svg>
+              <span>Stripe</span>
+            </a>
+            <a href="https://www.anthropic.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M17.3 3.5h-3.7l6.7 17H24"/><path d="M10.5 3.5L0 20.5h3.7l1.4-3.6h7l1.4 3.6h3.7L10.5 3.5zm-.4 10.2l2.3-6 2.3 6z"/>
+              </svg>
+              <span>Claude</span>
+            </a>
+            <a href="https://runwayml.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M18.4 24c-2.9.3-5.3-3.1-7.2-4.9C10.2 26 0 25.3 0 18.4c0-2.9 0-10 0-12.8C0 4.6.3 3.6.8 2.7c1-1.7 2.9-2.7 4.8-2.7h12.8c6.9 0 7.5 10.3.7 11.2l3.2 3.2c3.5 3.3.9 9.7-4 9.6zm-1.6-4c2-.1 5.2-1.1 3.1-3.1L14.4 11.2h-3.1v3.1l4.8 4.8l.7.8zM3.4 18.4c0 2.9 4.5 2.9 4.4 0V5.6c0-1.4-1.5-2.6-2.8-2.1c-.9.3-1.5 1.2-1.4 2.1v12.8zM18.4 7.8c2.9 0 2.9-4.5 0-4.4h-7.6c.6 1.2.4 3.1.4 4.4h7.2z"/>
+              </svg>
+              <span>Runway</span>
+            </a>
+            <a href="https://www.godaddy.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M20.702 2.29c-2.494-1.554-5.778-1.187-8.706.654C9.076 1.104 5.79.736 3.3 2.29c-3.941 2.463-4.42 8.806-1.07 14.167 2.47 3.954 6.333 6.269 9.77 6.226 3.439.043 7.301-2.273 9.771-6.226 3.347-5.361 2.872-11.704-1.069-14.167z"/>
+                <circle cx="8" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/>
+              </svg>
+              <span>GoDaddy</span>
+            </a>
+            <a href="https://www.tradingview.com/pine-script-docs/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3H8z"/>
+                <path d="M16 3a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3h2z"/>
+              </svg>
+              <span>Pine Script</span>
+            </a>
+            <a href="https://unicorn.studio/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-animate">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <span>Unicorn</span>
+            </a>
           </div>
         </div>
       </div>
-      <style>
-        .partners-marquee{position:relative;width:100%;overflow:hidden;mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent)}
-        .partners-track{display:flex;gap:4rem;padding:0 2rem;animation:partners-scroll 60s linear infinite;width:max-content}
-        .partners-marquee:hover .partners-track{animation-play-state:paused}
-        @keyframes partners-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-        .partner-logo{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.4rem;color:var(--muted);text-decoration:none;transition:all 0.15s ease;opacity:0.5;flex-shrink:0;padding:0.75rem}
-        .partner-logo svg{width:28px;height:28px;transition:all 0.15s ease}
-        .partner-logo span{font-size:0.7rem;font-weight:500;letter-spacing:0.02em;white-space:nowrap}
-        .partner-logo:hover{opacity:1;color:var(--brand)}
-        .partner-logo:hover svg{transform:scale(1.1)}
-        @media(max-width:768px){.partners-track{gap:2.5rem}.partner-logo svg{width:24px;height:24px}.partner-logo span{font-size:0.6rem}}
-      </style>
     </section>
 
     <!-- FAQ -->
