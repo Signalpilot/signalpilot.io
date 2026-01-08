@@ -742,6 +742,114 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
+
+    /* Shiny CTA Button - copied from main site */
+    @property --gradient-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false }
+    @property --gradient-angle-offset { syntax: "<angle>"; initial-value: 0deg; inherits: false }
+
+    .shiny-cta {
+      --gradient-angle: 0deg;
+      --gradient-angle-offset: 0deg;
+      --gradient-percent: 20%;
+      --gradient-shine: #3b82f6;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(#0a0a0f, #0a0a0f) padding-box,
+                  conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent 0%, #1e3a8a 5%, var(--gradient-shine) 15%, #1e3a8a 30%, transparent 40%, transparent 100%) border-box;
+      border: 2px solid transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      overflow: hidden;
+      text-decoration: none;
+      font-family: inherit;
+      animation: shiny-spin 2.5s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes shiny-spin {
+      0% { --gradient-angle: 0deg; }
+      100% { --gradient-angle: 360deg; }
+    }
+
+    .shiny-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(91,138,255,0.4);
+    }
+
+    .shiny-cta:active {
+      transform: translateY(1px);
+    }
+
+    .shiny-cta::before {
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      --size: calc(100% - 6px);
+      --position: 2px;
+      --space: 4px;
+      width: var(--size);
+      height: var(--size);
+      background: radial-gradient(circle at var(--position) var(--position), white 0.5px, transparent 0) padding-box;
+      background-size: var(--space) var(--space);
+      background-repeat: space;
+      mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 10% 90%, black);
+      border-radius: inherit;
+      opacity: 0.4;
+    }
+
+    .shiny-cta::after {
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(-50deg, transparent, #1e3a8a, transparent);
+      mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+      opacity: 0.6;
+      animation: shiny-shimmer 4s linear infinite;
+    }
+
+    @keyframes shiny-shimmer {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .shiny-cta span {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Slow down on mobile */
+    @media (max-width: 768px) {
+      .shiny-cta {
+        animation-duration: 5s;
+      }
+      .shiny-cta::after {
+        animation-duration: 8s;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .shiny-cta,
+      .shiny-cta::before,
+      .shiny-cta::after {
+        animation: none;
+      }
+    }
   </style>
 </head>
 
@@ -751,7 +859,7 @@
     <div class="container">
       <div class="header-content">
         <a href="/" class="logo brand">Signal Pilot</a>
-        <a href="#apply" class="btn btn-primary">Apply Now</a>
+        <a href="#apply" class="shiny-cta" style="padding:0.6rem 1.2rem;font-size:0.95rem"><span>Apply Now</span></a>
       </div>
     </div>
   </header>
@@ -779,8 +887,8 @@
       </p>
 
       <div class="hero-ctas">
-        <a href="#calculator" class="btn btn-primary" style="padding:1.25rem 2.5rem;font-size:1.1rem">
-          Calculate Your Earnings →
+        <a href="#calculator" class="shiny-cta" style="padding:1.25rem 2.5rem;font-size:1.1rem">
+          <span>Calculate Your Earnings →</span>
         </a>
         <a href="#tiers" class="btn btn-ghost" style="padding:1.25rem 2.5rem;font-size:1.1rem">
           View Tiers
@@ -1247,8 +1355,8 @@
         </p>
       </div>
 
-      <a href="mailto:support@signalpilot.io" class="btn btn-primary" style="padding:1.25rem 2.5rem;font-size:1.15rem">
-        Apply Now →
+      <a href="mailto:support@signalpilot.io" class="shiny-cta" style="padding:1.25rem 2.5rem;font-size:1.15rem">
+        <span>Apply Now →</span>
       </a>
 
       <p style="color:var(--muted-2);font-size:0.9rem;margin-top:1.5rem">
