@@ -1708,21 +1708,36 @@
       }
     }
 
-    /* Chrome ONLY: Simple pulse fallback instead of @property animation */
-    @keyframes chrome-pulse {
-      0%, 100% { box-shadow: 0 0 15px rgba(59,130,246,0.4), inset 0 0 0 2px rgba(59,130,246,0.5); }
-      50% { box-shadow: 0 0 25px rgba(59,130,246,0.6), inset 0 0 0 2px rgba(59,130,246,0.8); }
+    /* Chrome ONLY: Spinning border that traces the full button */
+    @keyframes chrome-border-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
     @media (max-width: 768px) {
       html.is-chrome .shiny-cta {
-        animation: chrome-pulse 2s ease-in-out infinite !important;
-        background: linear-gradient(135deg, #0a0a0f 0%, #111827 100%) !important;
-        border: 2px solid rgba(59,130,246,0.5) !important;
-        border-radius: inherit !important;
+        animation: none !important;
+        background: linear-gradient(#0a0a0f, #0a0a0f) padding-box,
+                    conic-gradient(from 0deg, transparent 0%, #1e3a8a 10%, #3b82f6 20%, #60a5fa 30%, #3b82f6 40%, #1e3a8a 50%, transparent 60%) border-box !important;
+        border: 2px solid transparent !important;
+        border-radius: 9999px !important;
+        position: relative !important;
+        overflow: hidden !important;
       }
-      html.is-chrome .shiny-cta::before,
+      html.is-chrome .shiny-cta::before {
+        content: '' !important;
+        position: absolute !important;
+        inset: -50% !important;
+        background: conic-gradient(from 0deg, transparent 0%, #1e3a8a 10%, #3b82f6 20%, #60a5fa 30%, #3b82f6 40%, #1e3a8a 50%, transparent 60%) !important;
+        animation: chrome-border-spin 3s linear infinite !important;
+        z-index: -2 !important;
+      }
       html.is-chrome .shiny-cta::after {
-        display: none !important;
+        content: '' !important;
+        position: absolute !important;
+        inset: 2px !important;
+        background: #0a0a0f !important;
+        border-radius: 9999px !important;
+        z-index: -1 !important;
       }
     }
 
