@@ -8855,30 +8855,36 @@ if ('serviceWorker' in navigator) {
 (function() {
   'use strict';
 
-  // Pause CSS animations when elements are not visible
-  const animatedElements = [
-    { selector: '.testimonials-track', property: 'animationPlayState' },
-    { selector: '.partners-track', property: 'animationPlayState' },
-    { selector: '.partner-logo .stroke-animate *', property: 'animationPlayState' }
-  ];
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const state = entry.isIntersecting ? 'running' : 'paused';
       entry.target.style.animationPlayState = state;
-      // Also pause child animations (for stroke-animate)
+      // Also pause ::before and ::after via CSS custom property
+      entry.target.style.setProperty('--anim-state', state);
+      // Pause child animations
       entry.target.querySelectorAll('*').forEach(child => {
-        if (child.style.animation || getComputedStyle(child).animationName !== 'none') {
-          child.style.animationPlayState = state;
-        }
+        child.style.animationPlayState = state;
+        child.style.setProperty('--anim-state', state);
       });
     });
-  }, { threshold: 0, rootMargin: '100px' });
+  }, { threshold: 0, rootMargin: '50px' });
 
-  // Observe marquees and partner section
-  document.querySelectorAll('.testimonials-marquee, .partners-marquee, #partners').forEach(el => {
-    if (el) observer.observe(el);
-  });
+  // All elements with infinite animations that should pause offscreen
+  const selectors = [
+    '.testimonials-marquee',
+    '.partners-marquee',
+    '#partners',
+    '.shiny-cta',
+    '.shimmer-text',
+    '.pulse-animate',
+    '[style*="borderGlow"]',
+    '[style*="chronicle-glow"]',
+    '.glow-border',
+    '.btn-glow',
+    '.card-glow'
+  ].join(',');
+
+  document.querySelectorAll(selectors).forEach(el => observer.observe(el));
 })();
 </script>
 
