@@ -9251,6 +9251,41 @@ if ('serviceWorker' in navigator) {
 })();
 </script>
 
+<!-- Pause offscreen animations for mobile performance -->
+<script>
+(function() {
+  'use strict';
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const state = entry.isIntersecting ? 'running' : 'paused';
+      entry.target.style.animationPlayState = state;
+      entry.target.style.setProperty('--anim-state', state);
+      entry.target.querySelectorAll('*').forEach(child => {
+        child.style.animationPlayState = state;
+        child.style.setProperty('--anim-state', state);
+      });
+    });
+  }, { threshold: 0, rootMargin: '50px' });
+
+  const selectors = [
+    '.testimonials-marquee',
+    '.partners-marquee',
+    '#partners',
+    '.shiny-cta',
+    '.shimmer-text',
+    '.pulse-animate',
+    '[style*="borderGlow"]',
+    '[style*="chronicle-glow"]',
+    '.glow-border',
+    '.btn-glow',
+    '.card-glow'
+  ].join(',');
+
+  document.querySelectorAll(selectors).forEach(el => observer.observe(el));
+})();
+</script>
+
 </body>
 
 </html>
