@@ -8850,6 +8850,38 @@ if ('serviceWorker' in navigator) {
   })();
 </script>
 
+<!-- Pause offscreen animations for mobile performance -->
+<script>
+(function() {
+  'use strict';
+
+  // Pause CSS animations when elements are not visible
+  const animatedElements = [
+    { selector: '.testimonials-track', property: 'animationPlayState' },
+    { selector: '.partners-track', property: 'animationPlayState' },
+    { selector: '.partner-logo .stroke-animate *', property: 'animationPlayState' }
+  ];
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const state = entry.isIntersecting ? 'running' : 'paused';
+      entry.target.style.animationPlayState = state;
+      // Also pause child animations (for stroke-animate)
+      entry.target.querySelectorAll('*').forEach(child => {
+        if (child.style.animation || getComputedStyle(child).animationName !== 'none') {
+          child.style.animationPlayState = state;
+        }
+      });
+    });
+  }, { threshold: 0, rootMargin: '100px' });
+
+  // Observe marquees and partner section
+  document.querySelectorAll('.testimonials-marquee, .partners-marquee, #partners').forEach(el => {
+    if (el) observer.observe(el);
+  });
+})();
+</script>
+
 </body>
 
 </html>
