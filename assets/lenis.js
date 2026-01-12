@@ -1,19 +1,35 @@
 /**
  * Lenis Smooth Scroll - Butter smooth scrolling
  * https://lenis.darkroom.engineering
+ *
+ * MOBILE OPTIMIZATION: Disabled on mobile/tablet devices
+ * Native iOS/Android scrolling is smoother and more battery-efficient
  */
 (function() {
   'use strict';
 
-  // Initialize Lenis smooth scrolling
+  // Mobile/tablet detection - disable Lenis for better native scroll
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || window.innerWidth <= 1024
+    || ('ontouchstart' in window && navigator.maxTouchPoints > 1);
+
+  // Skip Lenis entirely on mobile - native scroll is better
+  if (isMobile) {
+    // Remove any Lenis-injected styles that might interfere
+    document.documentElement.style.scrollBehavior = 'auto';
+    document.body.style.scrollBehavior = 'auto';
+    window.lenis = null;
+    return;
+  }
+
+  // Desktop-only: Initialize Lenis with optimized settings
   const lenis = new Lenis({
-    duration: 4,
+    duration: 3,  // Smooth desktop scroll
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
     orientation: 'vertical',
     smoothWheel: true,
-    syncTouch: true,
-    syncTouchLerp: 0.035,
-    touchMultiplier: 2,
+    syncTouch: false,  // Disable touch sync on desktop (mouse/trackpad only)
+    touchMultiplier: 1.5,
   });
 
   // Integrate with requestAnimationFrame - OPTIMIZED
@@ -43,10 +59,9 @@
     }, 150); // Stop RAF 150ms after last scroll
   }
 
-  // Start RAF on scroll/wheel events
+  // Start RAF on scroll/wheel events (desktop only)
   window.addEventListener('scroll', startRAF, { passive: true });
   window.addEventListener('wheel', startRAF, { passive: true });
-  window.addEventListener('touchmove', startRAF, { passive: true });
 
   // Initial RAF call for page load animations
   rafId = requestAnimationFrame(raf);
