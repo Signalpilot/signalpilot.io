@@ -152,6 +152,9 @@
    * Initialize parallax scrolling
    */
   function initParallax() {
+    // Skip parallax on mobile - not useful and wastes FPS
+    if (window.innerWidth <= 768) return;
+
     const parallaxElements = document.querySelectorAll('[data-parallax]');
 
     if (parallaxElements.length === 0) return;
