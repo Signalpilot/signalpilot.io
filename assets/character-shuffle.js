@@ -202,9 +202,6 @@
    * Initialize all shuffle effects
    */
   function init() {
-    // Skip on mobile - fancy effect not worth the CPU cost
-    if (window.innerWidth <= 768) return;
-
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
