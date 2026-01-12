@@ -24,7 +24,7 @@
 
   // Desktop-only: Initialize Lenis with optimized settings
   const lenis = new Lenis({
-    duration: 1.2,  // Much faster - was 4 (way too slow!)
+    duration: 3,  // Smooth desktop scroll
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
     orientation: 'vertical',
     smoothWheel: true,
