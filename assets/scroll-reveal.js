@@ -39,9 +39,10 @@
   function initScrollReveal() {
     if (initialized) return;
     initialized = true;
-    // Skip if reduced motion is preferred and we're respecting it
-    if (config.respectReducedMotion && prefersReducedMotion) {
-      // Just show all elements immediately
+
+    // Skip all scroll animations on mobile - just show content immediately
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile || (config.respectReducedMotion && prefersReducedMotion)) {
       document.querySelectorAll('[data-reveal], [data-reveal-stagger]').forEach(el => {
         el.classList.add('revealed');
         el.style.opacity = '1';
