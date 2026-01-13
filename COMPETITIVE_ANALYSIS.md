@@ -144,13 +144,20 @@ SignalPilot has a distinctive branding approach via **The Chronicle** - a lore-b
 - Market Core Pro (Order Blocks, FVG, Liquidity)
 - Market Waves Pro (Trend Signals, Smart Bands)
 - Market Nautilus Pro (Oscillator)
-- Sonar (Browser extension)
+- **Sonar** (Chrome browser extension) - "The World's First Trading Extension"
+
+**Sonar Extension Details:**
+- AI assistant trained for technical analysis, sits directly in TradingView charts
+- Real exchange data: order books, long/short ratios from Binance/Bybit
+- 3 bonus premium indicators included
+- Exchange affiliate partnerships (reduced fees + deposit bonuses for signups)
+- Works on Chrome, Edge, Brave
 
 **Strengths:**
 - Clean, refined visuals
 - Competitive lifetime pricing ($1,999)
 - 24/7 support
-- Browser extension (Sonar) - unique offering
+- **Sonar browser extension** - unique AI + exchange data integration (no competitor has this)
 
 **Weaknesses:**
 - Smaller community than LuxAlgo
@@ -307,24 +314,25 @@ SignalPilot is **NOT a signal service** - this is a key differentiator. The phil
 3. **Curated indicator suite** (7 elite) vs. overwhelming libraries (80+)
 4. **"Anti-pitch" philosophy** - authentic, educational positioning
 5. **Chronicle brand storytelling** - unique mythic personas for each indicator (no competitor has this)
-6. **Multi-language support** (16 languages)
-7. **Full ecosystem** (main site, chronicle, education, docs, blog)
-8. **Competitive lifetime pricing** with urgency mechanism
+6. **Private Discord community** - exclusive to Lifetime members (adds premium tier value)
+7. **Multi-language support** (16 languages)
+8. **Full ecosystem** (main site, chronicle, education, docs, blog)
+9. **Competitive lifetime pricing** with urgency mechanism
 
 ### Weaknesses
 1. **Premium monthly pricing** ($99 vs. $48-75 market average)
 2. **TradingView-only** (competitors like UltraAlgo support multiple platforms)
 3. **Lower TradingView follower count** vs. LuxAlgo (800k+), Flux (150k+)
 4. **Limited brand recognition** compared to established players
-5. **No free trial with credit card** (7-day trial exists but limits testing)
+5. **No browser extension** (BigBeluga's Sonar adds AI + exchange data directly in TradingView)
 
 ### Opportunities
 1. **AI/automation trend** - Could add AI-powered features like LuxAlgo
-2. **Community building** - Discord/Telegram community could match competitors
+2. **Expand Discord access** - Currently Lifetime-only; could add tiers or grow community
 3. **Chronicle content expansion** - More lore articles, video content, community participation
 4. **Content marketing** - Blog could rank for competitive keywords
 5. **Affiliate program** - Partner with trading influencers
-6. **Browser extension** - Similar to BigBeluga's Sonar
+6. **Browser extension** - Similar to BigBeluga's Sonar (AI assistant + exchange data in TradingView)
 
 ### Threats
 1. **LuxAlgo's market dominance** and AI features
@@ -349,10 +357,10 @@ SignalPilot is **NOT a signal service** - this is a key differentiator. The phil
 4. **"Last tool you'll buy"** - Strong lifetime messaging
 
 ### Product Opportunities
-1. **Discord community** - Nearly all competitors have active Discord
-2. **AI features** - Even simple AI enhancements would match market trends
-3. **Browser extension** - Like BigBeluga's Sonar
-4. **Backtest templates** - Already have, emphasize more
+1. **AI features** - Even simple AI enhancements would match market trends
+2. **Browser extension** - Like BigBeluga's Sonar (AI + exchange order book data)
+3. **Backtest templates** - Already have, emphasize more
+4. **Discord community expansion** - Currently Lifetime-only; consider tiers or growth strategy
 
 ### Competitive Gaps to Exploit
 1. **Education + Tools bundle** - No competitor matches this
