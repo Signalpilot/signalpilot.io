@@ -73,9 +73,7 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
 - 200+ preset configurations (Lifetime)
 
 **Payment methods:**
-- PayPal (integrated Smart Buttons)
-- Card checkout via LemonSqueezy
-- Formspree form for card checkout notification waitlist
+- Gumroad (credit/debit card checkout)
 
 ### FAQ Section
 8 questions covering:
@@ -104,8 +102,7 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
   - Google Analytics 4 (custom event tracking for 10+ events)
 - **Forms:** Formspree (card checkout notifications)
 - **Payments:**
-  - PayPal Smart Buttons (subscription integration)
-  - LemonSqueezy (card checkout)
+  - Gumroad (card checkout)
 - **Internationalization:** Google Translate (16 languages: en, de, fr, es, it, zh, ru, ar, pt, tr, ja, ko, vi, th, hi, id)
 - **Assets:**
   - Background video: `assets/aurora-720p.webm`, `assets/aurora-720p.mp4`
@@ -149,9 +146,8 @@ Since this is a single-file site, all edits are in `/index.html`.
 | Hero headline | 2541 | `See The Complete Market Cycle` |
 | Hero video | 2556-2573 | `id="heroVideo"` |
 | Indicator names/descriptions | 3067-3237 | `<!-- INDICATOR 1: PENTARCH` |
-| Pricing amounts | 3423, 3476, 3521 | `$99`, `$699`, `$1,799` |
-| PayPal button IDs | 3453, 3505, 3567 | `paypal-button-container-` |
-| LemonSqueezy checkout URLs | 3455, 3507, 3569 | `lemonsqueezy.com/buy/` |
+| Pricing amounts | Various | `$99`, `$699`, `$1,799` |
+| Gumroad checkout URLs | Various | `signalpilot.gumroad.com` |
 | FAQ questions | 3604-3702 | `<section id="faq"` |
 | Footer links | 3731-3777 | `<footer` |
 | Analytics tracking IDs | 93, 99, 105 | `plausible.io`, `clarity`, `gtag` |
@@ -172,9 +168,8 @@ Since this is a single-file site, all edits are in `/index.html`.
 - **Mobile menu:** Lines 3908-3984
 - **Language dropdown:** Lines 4030-4085
 - **Google Translate integration:** Lines 4191-4215
-- **Countdown timer:** Lines 4089-4099
-- **PayPal buttons:** Lines 4217-4392
-- **GA4 event tracking:** Lines 4610-4773 (10 event types)
+- **Countdown timer:** Various
+- **GA4 event tracking:** Various (10+ event types)
 
 ---
 
@@ -203,9 +198,9 @@ clarity("set", "userId", "txh7b3h2ja");
 gtag('config', 'G-3RCZ0JBB0V');
 ```
 
-**Custom GA4 events tracked** (lines 4610-4773):
+**Custom GA4 events tracked:**
 1. `cta_click` — CTA button clicks with location
-2. `select_plan` — Pricing plan selections (PayPal form submits)
+2. `select_plan` — Pricing plan selections
 3. `faq_interaction` — FAQ card clicks with question text
 4. `scroll_depth` — 25%, 50%, 75%, 100% milestones
 5. `dropdown_open` — Resources/Language dropdown opens
