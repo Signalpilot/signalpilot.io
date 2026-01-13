@@ -270,15 +270,13 @@ Full refund within 14 days of your first payment, no questions asked.
 
 After 14 days, you can cancel anytime—no penalty.
 
-• Card customers: Self-service portal
-• PayPal customers: Manage via PayPal settings
+Manage via [self-service portal](/manage-subscription.html).
 
 [Full policy →](/refund.html)`,
 
       manage: `📋 **Manage your subscription:**
 
-• **Card customers:** Use our [self-service portal](/manage-subscription.html) to pause, cancel, or update payment methods
-• **PayPal customers:** Manage via PayPal subscription settings
+Use our [self-service portal](/manage-subscription.html) to pause, cancel, or update payment methods.
 
 You can cancel anytime—no penalty. You keep access until the end of your current billing period.
 
@@ -381,7 +379,7 @@ I can answer quick questions, but for detailed information check our comprehensi
 
 1. [Choose your plan →](#pricing)
 2. Enter your TradingView username
-3. Complete payment (PayPal or card)
+3. Complete payment via Gumroad
 4. Get access in 1-8 hours!
 
 **14-day money-back guarantee** on all plans.

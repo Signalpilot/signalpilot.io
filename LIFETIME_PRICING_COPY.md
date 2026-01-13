@@ -183,7 +183,7 @@ Early buyers get the best deal. As we add more indicators, lifetime access becom
 ```
 
 **Update trigger:**
-Every time a lifetime sale completes (webhook from LemonSqueezy/PayPal):
+Every time a lifetime sale completes (webhook from Gumroad):
 1. Increment lifetime_sales_count in database
 2. Check if tier threshold reached (50, 150, 350)
 3. If yes, update current_tier and current_price
