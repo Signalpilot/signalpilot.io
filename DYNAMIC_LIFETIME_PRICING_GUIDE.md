@@ -191,15 +191,9 @@ You'll need to update your LemonSqueezy product prices:
 
 2. Update the buy button link based on current tier
 
-### PayPal
+### Gumroad
 
-PayPal buttons are generated with fixed prices. You'll need to:
-1. Create 3 different PayPal button IDs (one per tier)
-2. Update `action` URL in the form when tier changes
-
-**Quick Fix for Now:**
-- Keep using current PayPal button ($2,499)
-- Manually create new buttons when tiers change
+Gumroad products can have variable pricing. Create separate products for each tier or use Gumroad's custom pricing features.
 
 ---
 
@@ -243,8 +237,7 @@ if (window.gtag) {
 - [ ] Test all tier transitions (0→50, 51→150, 151→350)
 - [ ] Add FAQ explaining pricing tiers
 - [ ] (Optional) Build API endpoint for auto-updates
-- [ ] (Optional) Create separate PayPal buttons per tier
-- [ ] (Optional) Update LemonSqueezy with tier pricing
+- [ ] (Optional) Create separate Gumroad products per tier
 
 ---
 
