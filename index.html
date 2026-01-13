@@ -6249,6 +6249,14 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               </a>
             </div>
+            <!-- Newsletter Subscription -->
+            <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.06)">
+              <p style="color:var(--muted);font-size:.85rem;margin:0 0 .75rem 0">Get updates on new features & indicators</p>
+              <div style="display:flex;gap:.5rem;max-width:280px">
+                <input type="email" id="footerNewsletterEmail" placeholder="your@email.com" style="flex:1;padding:.65rem .9rem;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='rgba(91,138,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+                <button type="button" id="footerNewsletterBtn" style="padding:.65rem 1rem;border-radius:8px;border:none;background:linear-gradient(135deg,#5b8aff,#764ba2);color:#fff;font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s,transform .2s" onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-1px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">Subscribe</button>
+              </div>
+            </div>
           </div>
 
           <!-- Product Column -->
@@ -7986,7 +7994,7 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // Newsletter signup handler
+  // Newsletter signup handler - redirects to Gumroad subscribe
   const footerNewsletterBtn = document.getElementById('footerNewsletterBtn');
   const footerNewsletterEmail = document.getElementById('footerNewsletterEmail');
 
@@ -8004,40 +8012,30 @@ if ('serviceWorker' in navigator) {
 
       const originalText = footerNewsletterBtn.textContent;
       footerNewsletterBtn.disabled = true;
-      footerNewsletterBtn.textContent = 'Subscribing...';
+      footerNewsletterBtn.textContent = 'Redirecting...';
 
-      try {
-        // For now, show success message
-        // TODO: Connect to newsletter service (ConvertKit, Mailchimp, etc.)
-
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 800));
-
-        // Show success
-        footerNewsletterEmail.value = '';
-        footerNewsletterBtn.textContent = '✓ Subscribed!';
-        footerNewsletterBtn.style.background = 'var(--good)';
-
-        // Optional: Track conversion
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'newsletter_signup', {
-            event_category: 'engagement',
-            event_label: 'footer_newsletter'
-          });
-        }
-
-        // Reset button after 3 seconds
-        setTimeout(() => {
-          footerNewsletterBtn.textContent = originalText;
-          footerNewsletterBtn.disabled = false;
-          footerNewsletterBtn.style.background = '';
-        }, 3000);
-
-      } catch (error) {
-        alert('Something went wrong. Please try again or email support@signalpilot.io');
-        footerNewsletterBtn.disabled = false;
-        footerNewsletterBtn.textContent = originalText;
+      // Track conversion
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'newsletter_signup', {
+          event_category: 'engagement',
+          event_label: 'footer_newsletter'
+        });
       }
+
+      // Open Gumroad subscribe page with email pre-filled
+      const gumroadUrl = 'https://signalpilot.gumroad.com/subscribe?email=' + encodeURIComponent(email);
+      window.open(gumroadUrl, '_blank');
+
+      // Show success and reset
+      footerNewsletterEmail.value = '';
+      footerNewsletterBtn.textContent = 'Opened!';
+      footerNewsletterBtn.style.background = 'var(--good)';
+
+      setTimeout(() => {
+        footerNewsletterBtn.textContent = originalText;
+        footerNewsletterBtn.disabled = false;
+        footerNewsletterBtn.style.background = '';
+      }, 2000);
     });
 
     // Allow Enter key to submit
