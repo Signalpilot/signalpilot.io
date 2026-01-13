@@ -4,7 +4,7 @@
 
 We discovered **false claims** across our marketing materials that could result in:
 - **FTC violations** (up to $43,280 per violation)
-- **Payment processor bans** (PayPal, Stripe, LemonSqueezy)
+- **Payment processor bans** (Gumroad, Stripe, etc.)
 - **Legal liability** for false advertising
 - **Loss of customer trust**
 
@@ -59,7 +59,7 @@ The Federal Trade Commission prohibits:
 - Permanent ban from payment processors
 
 ### Payment Processors
-PayPal, Stripe, and LemonSqueezy **actively scan** for:
+Gumroad, Stripe, and other payment processors **actively scan** for:
 - Fake testimonials
 - Inflated user counts
 - Fabricated reviews
