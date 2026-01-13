@@ -6243,10 +6243,9 @@
             <!-- Newsletter Subscription -->
             <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.06)">
               <p style="color:var(--muted);font-size:.85rem;margin:0 0 .75rem 0">Get updates on new features & indicators</p>
-              <div style="display:flex;gap:.5rem;max-width:280px">
-                <input type="email" id="footerNewsletterEmail" placeholder="your@email.com" style="flex:1;padding:.65rem .9rem;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='rgba(91,138,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
-                <button type="button" id="footerNewsletterBtn" style="padding:.65rem 1rem;border-radius:8px;border:none;background:linear-gradient(135deg,#5b8aff,#764ba2);color:#fff;font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s,transform .2s" onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-1px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">Subscribe</button>
-              </div>
+              <a href="https://signalpilot.gumroad.com/subscribe" target="_blank" rel="noopener" class="shiny-cta" style="width:auto;height:auto;padding:0.7rem 1.5rem;font-size:.85rem;text-decoration:none">
+                <span>Subscribe</span>
+              </a>
             </div>
           </div>
 
@@ -7639,57 +7638,6 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // Newsletter signup handler - redirects to Gumroad subscribe
-  const footerNewsletterBtn = document.getElementById('footerNewsletterBtn');
-  const footerNewsletterEmail = document.getElementById('footerNewsletterEmail');
-
-  if (footerNewsletterBtn && footerNewsletterEmail) {
-    footerNewsletterBtn.addEventListener('click', async function() {
-      const email = footerNewsletterEmail.value.trim();
-
-      // Basic email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email || !emailRegex.test(email)) {
-        alert('Please enter a valid email address');
-        footerNewsletterEmail.focus();
-        return;
-      }
-
-      const originalText = footerNewsletterBtn.textContent;
-      footerNewsletterBtn.disabled = true;
-      footerNewsletterBtn.textContent = 'Redirecting...';
-
-      // Track conversion
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'newsletter_signup', {
-          event_category: 'engagement',
-          event_label: 'footer_newsletter'
-        });
-      }
-
-      // Open Gumroad subscribe page with email pre-filled
-      const gumroadUrl = 'https://signalpilot.gumroad.com/subscribe?email=' + encodeURIComponent(email);
-      window.open(gumroadUrl, '_blank');
-
-      // Show success and reset
-      footerNewsletterEmail.value = '';
-      footerNewsletterBtn.textContent = 'Opened!';
-      footerNewsletterBtn.style.background = 'var(--good)';
-
-      setTimeout(() => {
-        footerNewsletterBtn.textContent = originalText;
-        footerNewsletterBtn.disabled = false;
-        footerNewsletterBtn.style.background = '';
-      }, 2000);
-    });
-
-    // Allow Enter key to submit
-    footerNewsletterEmail.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        footerNewsletterBtn.click();
-      }
-    });
-  }
 })();
 </script>
 
