@@ -6951,14 +6951,14 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
               </a>
             </div>
-            <!-- Newsletter Subscription -->
-            <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.06)">
-              <p style="color:var(--muted);font-size:.85rem;margin:0 0 .75rem 0">Receba atualizações sobre novos recursos e indicadores</p>
-              <div style="display:flex;gap:.5rem;max-width:280px">
-                <input type="email" id="footerNewsletterEmail" placeholder="seu@email.com" style="flex:1;padding:.65rem .9rem;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='rgba(91,138,255,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
-                <button type="button" id="footerNewsletterBtn" style="padding:.65rem 1rem;border-radius:8px;border:none;background:linear-gradient(135deg,#5b8aff,#764ba2);color:#fff;font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s,transform .2s" onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-1px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">Inscrever-se</button>
-              </div>
-            </div>
+<!-- Newsletter Subscription -->
+<div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.06)">
+  <p style="color:var(--muted);font-size:.85rem;margin:0 0 .75rem 0">Receba atualizações sobre novos recursos e indicadores</p>
+  <a href="https://signalpilot.gumroad.com/subscribe" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.25rem;border-radius:8px;border:none;background:linear-gradient(135deg,#5b8aff,#764ba2);color:#fff;font-size:.85rem;font-weight:600;text-decoration:none;transition:opacity .2s,transform .2s" onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-1px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    Inscreva-se na newsletter
+  </a>
+</div>
           </div>
 
           <!-- Product Column -->
@@ -8592,57 +8592,6 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  // Newsletter signup handler - redirects to Gumroad subscribe
-  const footerNewsletterBtn = document.getElementById('footerNewsletterBtn');
-  const footerNewsletterEmail = document.getElementById('footerNewsletterEmail');
-
-  if (footerNewsletterBtn && footerNewsletterEmail) {
-    footerNewsletterBtn.addEventListener('click', async function() {
-      const email = footerNewsletterEmail.value.trim();
-
-      // Basic email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email || !emailRegex.test(email)) {
-        alert('Por favor, insira um endereço de e-mail válido');
-        footerNewsletterEmail.focus();
-        return;
-      }
-
-      const originalText = footerNewsletterBtn.textContent;
-      footerNewsletterBtn.disabled = true;
-      footerNewsletterBtn.textContent = 'Redirecionando...';
-
-      // Track conversion
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'newsletter_signup', {
-          event_category: 'engagement',
-          event_label: 'footer_newsletter'
-        });
-      }
-
-      // Open Gumroad subscribe page with email pre-filled
-      const gumroadUrl = 'https://signalpilot.gumroad.com/subscribe?email=' + encodeURIComponent(email);
-      window.open(gumroadUrl, '_blank');
-
-      // Show success and reset
-      footerNewsletterEmail.value = '';
-      footerNewsletterBtn.textContent = 'Aberto!';
-      footerNewsletterBtn.style.background = 'var(--good)';
-
-      setTimeout(() => {
-        footerNewsletterBtn.textContent = originalText;
-        footerNewsletterBtn.disabled = false;
-        footerNewsletterBtn.style.background = '';
-      }, 2000);
-    });
-
-    // Allow Enter key to submit
-    footerNewsletterEmail.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        footerNewsletterBtn.click();
-      }
-    });
-  }
 })();
 </script>
 
