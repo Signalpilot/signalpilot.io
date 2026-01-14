@@ -208,9 +208,9 @@ What you see in history is exactly what you would have seen live.`,
 
       trial: `We don't have a traditional free trial, but we offer something better:
 
-**14-day money-back guarantee** ✅
+**7-day money-back guarantee** ✅
 
-Full refund within 14 days of your first payment, no questions asked.
+Full refund within 7 days of your first payment, no questions asked.
 
 You can test everything risk-free for two full weeks!
 
@@ -264,11 +264,11 @@ Trading involves substantial risk of loss. You are solely responsible for your t
 
 [Read full disclaimer →](#faq)`,
 
-      refund: `💰 **14-day money-back guarantee**
+      refund: `💰 **7-day money-back guarantee**
 
-Full refund within 14 days of your first payment, no questions asked.
+Full refund within 7 days of your first payment, no questions asked.
 
-After 14 days, you can cancel anytime—no penalty.
+After 7 days, you can cancel anytime—no penalty.
 
 Manage via [self-service portal](/manage-subscription.html).
 
@@ -382,7 +382,7 @@ I can answer quick questions, but for detailed information check our comprehensi
 3. Complete payment via Gumroad
 4. Get access in 1-8 hours!
 
-**14-day money-back guarantee** on all plans.
+**7-day money-back guarantee** on all plans.
 
 [View pricing →](#pricing)`;
 
