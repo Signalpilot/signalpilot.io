@@ -1670,6 +1670,60 @@
     @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
     .shiny-cta span{position:relative;z-index:2;display:inline-block}
 
+    /* Founding Member Badge - Urgency Animation */
+    .founding-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(251, 191, 36, 0.08));
+      border: 1px solid rgba(234, 179, 8, 0.4);
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #fbbf24;
+      animation: founding-pulse 3s ease-in-out infinite;
+    }
+    .founding-badge svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+    @keyframes founding-pulse {
+      0%, 100% {
+        box-shadow: 0 0 8px rgba(234, 179, 8, 0.3), inset 0 0 8px rgba(234, 179, 8, 0.1);
+        border-color: rgba(234, 179, 8, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 16px rgba(234, 179, 8, 0.5), inset 0 0 12px rgba(234, 179, 8, 0.15);
+        border-color: rgba(234, 179, 8, 0.6);
+      }
+    }
+    .founding-counter {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+      padding: 0.5rem 0.75rem;
+      background: rgba(234, 179, 8, 0.08);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .founding-counter strong {
+      color: #fbbf24;
+      font-weight: 600;
+    }
+    .founding-counter svg {
+      width: 14px;
+      height: 14px;
+      color: #fbbf24;
+    }
+
     /* Safari: Slow down @property animation on mobile */
     @media (max-width: 768px) {
       .shiny-cta {
@@ -5246,13 +5300,37 @@
 
 
               <!-- LIFETIME -->
-              <div class="relative rounded-2xl ring-1 ring-white/10 bg-gradient-to-b from-zinc-900/70 to-zinc-950 px-5 py-6 sm:px-8 sm:py-8 overflow-hidden" id="plan-lifetime" data-plan="lifetime">
+              <div class="relative rounded-2xl ring-1 ring-amber-500/30 bg-gradient-to-b from-zinc-900/70 to-zinc-950 px-5 py-6 sm:px-8 sm:py-8 overflow-hidden" id="plan-lifetime" data-plan="lifetime">
                 <div class="pointer-events-none absolute inset-0 opacity-[0.18]" style="background-image: radial-gradient(rgba(255,255,255,0.25) 1px, transparent 1px); background-size: 18px 18px;"></div>
 
                 <div class="relative">
+                  <!-- Founding Member Badge -->
+                  <div class="founding-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                      <path d="M2 17l10 5 10-5"/>
+                      <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    <span>Founding 100 Edition</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                      <path d="M2 17l10 5 10-5"/>
+                      <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                  </div>
+
                   <div class="flex items-end gap-3">
-                    <p id="plan-lifetime-title" class="text-5xl sm:text-6xl font-semibold tracking-tight bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600 bg-clip-text text-transparent"><span id="lifetime-display-price">$1,799</span></p>
+                    <p id="plan-lifetime-title" class="text-5xl sm:text-6xl font-semibold tracking-tight bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 bg-clip-text text-transparent"><span id="lifetime-display-price">$1,799</span></p>
                     <span class="text-[11px] uppercase text-neutral-400 mb-1">once</span>
+                  </div>
+
+                  <!-- Remaining Counter -->
+                  <div class="founding-counter">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 6v6l4 2"/>
+                    </svg>
+                    <span><strong id="lifetime-remaining">99</strong> of 100 remaining</span>
                   </div>
 
                   <p class="mt-4 text-sm sm:text-base text-neutral-300 max-w-[40ch]">Pay once, yours forever. All future updates included.</p>
@@ -7260,122 +7338,67 @@ if ('serviceWorker' in navigator) {
 })();
 </script>
 
-<!-- Dynamic Lifetime Pricing System -->
+<!-- Dynamic Lifetime Pricing System - Founding 100 -->
 <script>
 (function() {
   'use strict';
 
-  // Configuration: Define pricing tiers
-  const PRICING_TIERS = [
-    { min: 0, max: 50, price: 1799, name: 'Tier 1' },
-    { min: 51, max: 150, price: 2499, name: 'Tier 2' },
-    { min: 151, max: 350, price: 3499, name: 'Tier 3' },
-    { min: 351, max: Infinity, price: null, name: 'Removed' }
-  ];
-
-  const TOTAL_SLOTS = 350;
+  // Configuration: 100 Founding Member slots at fixed price
+  const TOTAL_SLOTS = 100;
+  const PRICE = 1799;
 
   // Manual update: Change this number when you make a sale
-  let currentSalesCount = 0; // UPDATE THIS MANUALLY FOR NOW
+  // Current: 1 sold (99 remaining per Gumroad)
+  let currentSalesCount = 1;
 
   // DOM Elements
   const elements = {
-    progressFill: document.getElementById('lifetime-progress-fill'),
-    progressText: document.getElementById('lifetime-progress-text'),
-    currentPrice: document.getElementById('lifetime-current-price'),
-    nextPrice: document.getElementById('lifetime-next-price'),
-    slotsRemaining: document.getElementById('lifetime-slots-remaining'),
     displayPrice: document.getElementById('lifetime-display-price'),
-    buyButton: document.getElementById('lifetime-buy-button')
+    remaining: document.getElementById('lifetime-remaining')
   };
 
-  // Get current tier based on sales count
-  function getCurrentTier(salesCount) {
-    return PRICING_TIERS.find(tier => salesCount >= tier.min && salesCount <= tier.max);
-  }
+  // Update UI with current sales data
+  function updateUI(salesCount) {
+    const remaining = Math.max(0, TOTAL_SLOTS - salesCount);
 
-  // Get next tier
-  function getNextTier(currentTier) {
-    const currentIndex = PRICING_TIERS.indexOf(currentTier);
-    return PRICING_TIERS[currentIndex + 1] || null;
-  }
-
-  // Update UI with current pricing data
-  function updatePricingUI(salesCount) {
-    const currentTier = getCurrentTier(salesCount);
-    const nextTier = getNextTier(currentTier);
-
-    if (!currentTier) return;
-
-    // Calculate progress percentage
-    const progressPercent = Math.min((salesCount / TOTAL_SLOTS) * 100, 100);
-
-    // Calculate slots remaining in current tier
-    const slotsRemainingInTier = currentTier.max - salesCount;
-
-    // Update UI elements
-    if (elements.progressFill) {
-      elements.progressFill.style.width = progressPercent + '%';
+    // Update remaining counter
+    if (elements.remaining) {
+      elements.remaining.textContent = remaining;
     }
 
-    if (elements.progressText) {
-      elements.progressText.innerHTML = `<strong style="color:#fff">${salesCount} of ${TOTAL_SLOTS}</strong> founding member slots claimed`;
+    // Update price display
+    if (elements.displayPrice) {
+      elements.displayPrice.textContent = `$${PRICE.toLocaleString()}`;
     }
 
-    if (elements.currentPrice && currentTier.price) {
-      elements.currentPrice.textContent = `$${currentTier.price.toLocaleString()}`;
-    }
-
-    if (elements.displayPrice && currentTier.price) {
-      elements.displayPrice.textContent = `$${currentTier.price.toLocaleString()}`;
-    }
-
-    if (elements.buyButton && currentTier.price) {
-      elements.buyButton.value = `Buy Now - $${currentTier.price.toLocaleString()}`;
-    }
-
-    if (nextTier && nextTier.price) {
-      if (elements.nextPrice) {
-        elements.nextPrice.textContent = `$${nextTier.price.toLocaleString()}`;
-      }
-      if (elements.slotsRemaining) {
-        elements.slotsRemaining.textContent = slotsRemainingInTier;
-      }
-    } else {
-      // Last tier or removed
-      if (elements.nextPrice) {
-        elements.nextPrice.textContent = 'REMOVED';
-      }
-      if (elements.slotsRemaining) {
-        elements.slotsRemaining.textContent = slotsRemainingInTier;
+    // If sold out, could hide the card or show "SOLD OUT"
+    if (remaining === 0) {
+      const lifetimeCard = document.getElementById('plan-lifetime');
+      if (lifetimeCard) {
+        const badge = lifetimeCard.querySelector('.founding-badge span');
+        if (badge) badge.textContent = 'SOLD OUT';
+        const counter = lifetimeCard.querySelector('.founding-counter');
+        if (counter) counter.innerHTML = '<strong style="color:#ef4444">All 100 founding slots claimed</strong>';
       }
     }
   }
 
-  // Optional: Fetch from API (implement this later)
-  async function fetchLifetimeSalesCount() {
+  // Optional: Fetch from Gumroad API via your serverless function
+  async function fetchFromGumroad() {
     try {
-      // Replace with your actual API endpoint
-      const response = await fetch('/api/lifetime-slots-remaining');
+      const response = await fetch('/api/lifetime-remaining');
       const data = await response.json();
-      return data.sales_count || currentSalesCount;
+      return data.sold || currentSalesCount;
     } catch (error) {
       // API not available - use manual fallback
       return currentSalesCount;
     }
   }
 
-  // Initialize pricing on page load
+  // Initialize on page load
   async function init() {
-    // Try to fetch from API, fallback to manual count
-    const salesCount = await fetchLifetimeSalesCount();
-    updatePricingUI(salesCount);
-
-    // Optional: Auto-refresh every 60 seconds
-    // setInterval(async () => {
-    //   const updatedCount = await fetchLifetimeSalesCount();
-    //   updatePricingUI(updatedCount);
-    // }, 60000);
+    const salesCount = await fetchFromGumroad();
+    updateUI(salesCount);
   }
 
   // Run on page load
@@ -7385,10 +7408,10 @@ if ('serviceWorker' in navigator) {
     init();
   }
 
-  // Export function for manual updates (from browser console)
-  window.updateLifetimePricing = function(newSalesCount) {
-    currentSalesCount = newSalesCount;
-    updatePricingUI(newSalesCount);
+  // Export for manual updates: window.updateLifetimeCount(5) = 5 sold, 95 remaining
+  window.updateLifetimeCount = function(sold) {
+    currentSalesCount = sold;
+    updateUI(sold);
   };
 })();
 </script>
