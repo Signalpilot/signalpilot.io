@@ -1,1961 +1,1235 @@
-# Signal Pilot X Content Plan
-## 8-Week Calendar | 2 Posts Per Day | 112 Total Posts
+# 🚀 SIGNAL PILOT X CONTENT PLAN
+## The Ultimate 12-Week Calendar | 3 Posts/Day | 252 Total Posts
 
 ---
 
-## Content Strategy Overview
+## 📋 CONTENT MIX PER WEEK (21 Posts)
 
-### Mission
-Education first. Product proof second. Chronicle flavor third.
+| Type | Posts/Week | % | Purpose |
+|------|------------|---|---------|
+| 🎓 Education Hub Lessons | 7 | 33% | Core value, establish authority |
+| 📝 Blog Articles | 4 | 19% | SEO traffic, deeper education |
+| 💬 Original Quotes | 3 | 14% | Engagement, shareable branded content |
+| 🛠️ Product/Feature Demos | 3 | 14% | Conversion, show tools in action |
+| 🌐 Main Site Marketing | 2 | 10% | Conversion, pricing, free trial |
+| 📚 Docs Explainers | 1 | 5% | Technical credibility |
+| 🔮 Chronicle Lore | 1 | 5% | Brand differentiation, mythology |
 
-### Content Mix Per Week (14 posts)
-
-| Type | Posts/Week | Description |
-|------|------------|-------------|
-| Education | 5 | Blog article links, trading wisdom |
-| Quote Cards | 4 | Branded Canva original quotes |
-| Product | 3 | Chart screenshots with indicators |
-| Chronicle | 1 | Character lore/mythology |
-| Engagement | 1 | Polls/questions/community |
-
-### Posting Schedule
-
-- **Morning:** 9:00 AM EST
-- **Evening:** 7:00 PM EST
-
-### Compliance Rules
-
-- No directive language ("you should," "look for," "buy," "sell")
-- All content observational and educational
-- No financial advice claims
-- No guaranteed outcomes
-- Language: "tends to," "often," "may indicate," "historically"
+**EDUCATION TOTAL: 57%** (Lessons + Blog + Docs)
 
 ---
 
-# WEEK 1
+## 🔗 VERIFIED URL PATTERNS
+
+- **Education Hub**: `education.signalpilot.io/curriculum/[tier]/[##-slug].html`
+- **Blog**: `blog.signalpilot.io/articles/[slug]/`
+- **Docs**: `docs.signalpilot.io/`
+- **Chronicle**: `signalpilot.io/chronicle/[slug]/`
+- **Main Site**: `signalpilot.io/`
+- **TradingView**: `tradingview.com/script/WDMfwVPE-Pentarch/`
 
 ---
 
-## Monday
+## ⚠️ COMPLIANCE RULES (MUST FOLLOW)
 
-### Morning — Education
-```
-"RSI is oversold, time to buy"
-
-RSI can stay oversold for 47 candles 
-while price keeps falling.
-
-Oversold ≠ reversal imminent.
-Context matters more than numbers.
-
-blog.signalpilot.io/why-indicators-keep-failing
-```
-**Image:** Blog header or chart example
+1. ❌ NO directive language ("buy", "sell", "you should")
+2. ❌ NO guaranteed outcomes
+3. ❌ NO financial advice claims
+4. ✅ Use observational language ("tends to", "historically", "may indicate")
+5. ✅ Include disclaimers where appropriate
+6. ✅ Educational framing always
 
 ---
 
-### Evening — Quote Card
-```
-The best trade you'll ever make
-is the one you didn't take.
-```
-**Image:** Branded Canva quote card
+## 📸 IMAGE GUIDANCE BY POST TYPE
+
+| Post Type | Image Source |
+|-----------|--------------|
+| Education Hub | Screenshot of lesson page header |
+| Blog | Blog article header image |
+| Product Demo | Chart screenshot with indicators active |
+| Chronicle | Character art from chronicle page |
+| Quote Cards | Branded Canva design (dark theme, stars) |
+| Main Site | Homepage/pricing section screenshots |
+| Docs | Code snippets or indicator settings |
 
 ---
 
-## Tuesday
+# 📅 WEEK 1: FOUNDATION
 
-### Morning — Product
-```
-Pentarch showing WRN (Warning) phase —
-hidden weakness while price still rising.
+## Day 1 (Monday)
 
-Distribution often occurs 
-before the chart makes it obvious.
+### Post 1 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 01-what-is-technical-analysis
+**URL**: `education.signalpilot.io/curriculum/beginner/01-what-is-technical-analysis.html`
 
-signalpilot.io
-```
-**Image:** Chart screenshot with Pentarch
+**Copy**:
+Technical analysis isn't about predicting the future.
 
----
+It's about recognizing patterns that have repeated across markets for over a century.
 
-### Evening — Education
-```
-You took a loss.
-Then another trying to make it back.
-Then another.
+Price, volume, time—three variables that tell a story if you know how to read them.
 
-The hole got deeper.
+Start here → [link]
 
-Revenge trading has destroyed more accounts 
-than bad analysis ever will.
-
-blog.signalpilot.io/revenge-trading-recovery
-```
-**Image:** Blog header
+**Image**: Screenshot of lesson page
+**Hashtags**: #TechnicalAnalysis #TradingEducation #SignalPilot
 
 ---
 
-## Wednesday
+### Post 2 - 🌐 Main Site Marketing (1:00 PM)
+**URL**: `signalpilot.io`
 
-### Morning — Quote Card
-```
-Risk management isn't sexy.
-Neither is blowing your account.
-```
-**Image:** Branded Canva quote card
+**Copy**:
+82 free lessons.
+7 non-repainting indicators.
+7-day money-back guarantee.
 
----
+No alerts pinging your phone.
+No signals telling you what to do.
+Just a system you learn once and keep forever.
 
-### Evening — Education
-```
-That indicator with the perfect backtest?
-It's probably repainting.
+This is Signal Pilot → [link]
 
-Signals that change after the candle closes 
-are hindsight disguised as foresight.
-
-blog.signalpilot.io/repainting-problem
-```
-**Image:** Blog header
+**Image**: Homepage screenshot with "The Elite Seven" section
+**Hashtags**: #TradingTools #TradingView #SignalPilot
 
 ---
 
-## Thursday
+### Post 3 - 💬 Quote Card (5:00 PM)
+**Type**: Original branded quote
 
-### Morning — Product
-```
-Harmonic Oscillator synthesizes 
-7 momentum measures into one verdict:
+**Copy**:
+"The edge isn't seeing more.
+It's seeing what matters."
 
-★★★★★★★ = Full consensus
-★★★☆☆☆☆ = Conflicting — stand aside
+— Signal Pilot
 
-One glance. Clear conviction rating.
-
-signalpilot.io
-```
-**Image:** Chart screenshot with Harmonic Oscillator
+**Image**: Dark theme Canva card with stars background, quote in serif font
+**Hashtags**: #TradingWisdom #MarketWisdom
 
 ---
 
-### Evening — Quote Card
-```
-You're not trading the market.
-You're trading yourself.
-```
-**Image:** Branded Canva quote card
+## Day 2 (Tuesday)
+
+### Post 4 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 02-reading-price-charts
+**URL**: `education.signalpilot.io/curriculum/beginner/02-reading-price-charts.html`
+
+**Copy**:
+Candlesticks aren't just pretty colors.
+
+Each one captures the entire battle between buyers and sellers—open, high, low, close.
+
+Four numbers. One story.
+
+Learn to read it → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #Candlesticks #PriceAction #TradingEducation
 
 ---
 
-## Friday
+### Post 5 - 📝 Blog Article (1:00 PM)
+**Article**: pentarch-cycle-philosophy
+**URL**: `blog.signalpilot.io/articles/pentarch-cycle-philosophy/`
 
-### Morning — Education
-```
-Most traders obsess over entries.
+**Copy**:
+Most traders react to what happened.
 
-The ones who survive 
-obsess over position sizing.
+Cycle-aware traders prepare for what's coming.
 
-The math that keeps you in the game:
-blog.signalpilot.io/position-sizing-101
-```
-**Image:** Blog header
+The Pentarch framework maps five distinct market phases—each with its own character, each with its own opportunities.
 
----
+Understand the philosophy → [link]
 
-### Evening — Product
-```
-Volume Oracle tracking accumulation 
-before the breakout became obvious.
-
-Volume often leads price.
-
-signalpilot.io
-```
-**Image:** Chart screenshot with Volume Oracle
+**Image**: Blog header image
+**Hashtags**: #MarketCycles #Pentarch #TradingPhilosophy
 
 ---
 
-## Saturday
+### Post 6 - 🛠️ Product Demo (5:00 PM)
+**Feature**: Pentarch TD signal
+**URL**: `signalpilot.io`
 
-### Morning — Chronicle
-```
-"Price can deceive.
-Pressure cannot."
+**Copy**:
+TD appears when selling exhausts.
 
-— The Scales
+Not a buy signal. Not financial advice.
 
-signalpilot.io/chronicle
-```
-**Image:** Plutus Flow character art
+Just a structural observation: the downtrend may be losing steam.
 
----
+What happens next depends on confluence.
 
-### Evening — Quote Card
-```
-The market doesn't care about your analysis.
-It doesn't care about your conviction.
-It doesn't care at all.
-```
-**Image:** Branded Canva quote card
+**Image**: Chart screenshot showing TD signal on a reversal
+**Hashtags**: #Pentarch #TradingView #MarketStructure
 
 ---
 
-## Sunday
+## Day 3 (Wednesday)
 
-### Morning — Education
-```
-Price hits your stop exactly.
-Reverses.
-Hits your target without you.
+### Post 7 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 03-timeframes-explained
+**URL**: `education.signalpilot.io/curriculum/beginner/03-timeframes-explained.html`
 
-It's not conspiracy.
+**Copy**:
+The same chart looks completely different on the 5m vs the weekly.
 
-blog.signalpilot.io/stop-loss-placement
-```
-**Image:** Blog header
+This isn't a bug—it's the foundation of multi-timeframe analysis.
 
----
+Zoom out to see context.
+Zoom in to see precision.
 
-### Evening — Engagement
-```
-What's your biggest trading struggle?
+Master timeframes → [link]
 
-📊 Finding good entries
-⏱️ Patience / waiting
-🎯 Taking profits too early
-😤 Revenge trading
-```
-**Format:** Poll
+**Image**: Screenshot of lesson page
+**Hashtags**: #Timeframes #MultiTimeframe #TradingEducation
 
 ---
 
-# WEEK 2
+### Post 8 - 📚 Docs Explainer (1:00 PM)
+**Section**: Pentarch Overview
+**URL**: `docs.signalpilot.io/`
+
+**Copy**:
+Five signals. Five phases. One complete cycle.
+
+TD → Accumulation
+IGN → Markup
+CAP → Climax
+WRN → Distribution
+BDN → Decline
+
+The Pentarch documentation breaks down exactly what each signal represents and how to interpret them in context.
+
+Full docs → [link]
+
+**Image**: Screenshot of cycle diagram from docs
+**Hashtags**: #Pentarch #Documentation #TradingEducation
 
 ---
 
-## Monday
+### Post 9 - 💬 Quote Card (5:00 PM)
+**Type**: Original branded quote
 
-### Morning — Education
-```
-Your chart has four indicators.
-They rarely agree.
+**Copy**:
+"You stop chasing signals.
+You stop stacking indicators.
+You stop depending on strangers."
 
-When they do, the move is already over.
+— The Signal Pilot Philosophy
 
-Why more tools often means worse results:
-blog.signalpilot.io/confirmation-trap
-```
-**Image:** Cluttered chart example
-
----
-
-### Evening — Quote Card
-```
-Indicators don't predict.
-They illuminate.
-```
-**Image:** Branded Canva quote card
+**Image**: Dark theme Canva card
+**Hashtags**: #TradingMindset #Independence
 
 ---
 
-## Tuesday
+## Day 4 (Thursday)
 
-### Morning — Product
-```
-Janus Atlas plots 60+ levels automatically:
+### Post 10 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 04-support-and-resistance-basics
+**URL**: `education.signalpilot.io/curriculum/beginner/04-support-and-resistance-basics.html`
 
-→ Daily/Weekly/Monthly pivots
-→ VWAP anchors
-→ Volume profile (POC, VAH, VAL)
+**Copy**:
+Markets have memory.
 
-Levels where price historically reacts.
-No manual drawing.
+Prices that mattered before tend to matter again. Support holds until it breaks. Resistance caps until it doesn't.
 
-signalpilot.io
-```
-**Image:** Chart screenshot with Janus Atlas
+These levels aren't magic—they're where traders made decisions.
 
----
+Understand why → [link]
 
-### Evening — Education
-```
-Two charts look identical.
-
-One precedes a rally.
-One precedes a collapse.
-
-How to read accumulation vs distribution:
-blog.signalpilot.io/accumulation-vs-distribution
-```
-**Image:** Blog header
+**Image**: Screenshot of lesson page
+**Hashtags**: #SupportResistance #PriceAction #TradingEducation
 
 ---
 
-## Wednesday
+### Post 11 - 📝 Blog Article (1:00 PM)
+**Article**: obv-beyond-basics
+**URL**: `blog.signalpilot.io/articles/obv-beyond-basics/`
 
-### Morning — Quote Card
-```
-The goal isn't to be right.
-The goal is to be profitable.
-They're not the same thing.
-```
-**Image:** Branded Canva quote card
+**Copy**:
+On-Balance Volume was invented in 1963.
+
+Six decades later, most traders still use it wrong.
+
+OBV isn't about the absolute number—it's about divergences between price and cumulative volume.
+
+The deeper mechanics → [link]
+
+**Image**: Blog header image
+**Hashtags**: #OBV #VolumeAnalysis #TechnicalAnalysis
 
 ---
 
-### Evening — Education
-```
-The 5-minute chart says buy.
-The 4-hour says sell.
-The daily says wait.
+### Post 12 - 🛠️ Product Demo (5:00 PM)
+**Feature**: Volume Oracle dashboard
+**URL**: `signalpilot.io`
+
+**Copy**:
+The Volume Oracle doesn't just show volume bars.
+
+It shows:
+- Accumulation/Distribution phase
+- Health status
+- Structure alignment
+- Market regime
+
+All in one panel. All without repainting.
+
+**Image**: Chart screenshot with Volume Oracle panel visible
+**Hashtags**: #VolumeOracle #TradingView #VolumeAnalysis
+
+---
+
+## Day 5 (Friday)
+
+### Post 13 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 05-trend-identification
+**URL**: `education.signalpilot.io/curriculum/beginner/05-trend-identification.html`
+
+**Copy**:
+Higher highs and higher lows = uptrend.
+Lower highs and lower lows = downtrend.
+
+It sounds simple because it is.
+
+The hard part isn't identifying trends. It's having the patience to trade with them instead of against them.
+
+Foundation lesson → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #TrendTrading #MarketStructure #TradingEducation
+
+---
+
+### Post 14 - 🌐 Main Site Marketing (1:00 PM)
+**URL**: `signalpilot.io`
+
+**Copy**:
+Why Signal Pilot indicators don't repaint:
+
+Because backtesting tools that change history aren't tools—they're lies.
+
+Every signal you see on our charts appeared exactly when it appears now. No redrawing. No hindsight magic.
+
+100% non-repainting. Audited.
+
+**Image**: Screenshot of "100% Non-Repainting (Audited)" badge from site
+**Hashtags**: #NonRepainting #TradingView #Backtesting
+
+---
+
+### Post 15 - 🔮 Chronicle Lore (5:00 PM)
+**Character**: The Pentarch
+**URL**: `signalpilot.io/chronicle/the-pentarch/`
+
+**Copy**:
+"He does not speak of what will happen.
+He speaks of what is happening—and what has always happened."
+
+— The Chronicle of the Pentarch
+
+In a sea of prediction sellers, the Pentarch observes.
+
+Enter the Chronicle → [link]
+
+**Image**: Pentarch character art from chronicle page
+**Hashtags**: #Chronicle #SignalPilot #TradingMythology
+
+---
+
+## Day 6 (Saturday)
+
+### Post 16 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 06-volume-fundamentals
+**URL**: `education.signalpilot.io/curriculum/beginner/06-volume-fundamentals.html`
+
+**Copy**:
+Price tells you WHAT happened.
+Volume tells you HOW MUCH conviction was behind it.
+
+A breakout on low volume? Suspicious.
+A breakout on massive volume? The crowd agrees.
+
+Volume fundamentals → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #Volume #VolumeAnalysis #TradingEducation
+
+---
+
+### Post 17 - 📝 Blog Article (1:00 PM)
+**Article**: market-structure-deep-dive
+**URL**: `blog.signalpilot.io/articles/market-structure-deep-dive/`
+
+**Copy**:
+Swing highs. Swing lows. Break of structure. Change of character.
+
+These aren't just buzzwords—they're the grammar of price action.
+
+Understanding market structure means understanding how trends start, evolve, and end.
+
+Deep dive → [link]
+
+**Image**: Blog header image
+**Hashtags**: #MarketStructure #PriceAction #TechnicalAnalysis
+
+---
+
+### Post 18 - 💬 Quote Card (5:00 PM)
+**Type**: Original branded quote
+
+**Copy**:
+"It's harder.
+And it's the last trading tool you'll buy."
+
+— Signal Pilot
+
+**Image**: Dark theme Canva card with stars
+**Hashtags**: #TradingTools #LastToolYoullBuy
+
+---
+
+## Day 7 (Sunday)
+
+### Post 19 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 07-candlestick-patterns-intro
+**URL**: `education.signalpilot.io/curriculum/beginner/07-candlestick-patterns-intro.html`
+
+**Copy**:
+Doji. Hammer. Engulfing. Shooting star.
+
+Names don't matter. Psychology does.
+
+Every candlestick pattern represents a shift in the battle between bulls and bears—a moment where momentum changed hands.
+
+Pattern fundamentals → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #Candlesticks #CandlestickPatterns #TradingEducation
+
+---
+
+### Post 20 - 🛠️ Product Demo (1:00 PM)
+**Feature**: Janus Atlas multi-timeframe levels
+**URL**: `signalpilot.io`
+
+**Copy**:
+Most support/resistance tools make you draw lines manually.
+
+Janus Atlas calculates them automatically across multiple timeframes—then shows you which levels matter most.
+
+Same chart. Different timeframes. One unified view.
+
+**Image**: Chart screenshot with Janus Atlas levels visible
+**Hashtags**: #JanusAtlas #SupportResistance #TradingView
+
+---
+
+### Post 21 - 📝 Blog Article (5:00 PM)
+**Article**: emotional-discipline-trading
+**URL**: `blog.signalpilot.io/articles/emotional-discipline-trading/`
+
+**Copy**:
+The best analysis in the world means nothing if you can't execute.
+
+Fear, greed, FOMO, revenge trading—every trader faces them.
+
+The difference between profitable and unprofitable traders often isn't knowledge. It's emotional discipline.
+
+Read more → [link]
+
+**Image**: Blog header image
+**Hashtags**: #TradingPsychology #EmotionalDiscipline #TradingMindset
+
+---
+
+# 📅 WEEK 2: BUILDING BLOCKS
+
+## Day 8 (Monday)
+
+### Post 22 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 08-moving-averages-explained
+**URL**: `education.signalpilot.io/curriculum/beginner/08-moving-averages-explained.html`
+
+**Copy**:
+Moving averages smooth the noise.
+
+SMA, EMA, WMA—different calculations, same purpose: showing the underlying trend beneath the chaos.
+
+The 20, 50, 100, 200... these aren't magic numbers. They're consensus. Everyone's watching them.
+
+MA foundations → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #MovingAverages #TechnicalAnalysis #TradingEducation
+
+---
+
+### Post 23 - 🌐 Main Site Marketing (1:00 PM)
+**URL**: `signalpilot.io`
+
+**Copy**:
+The free trial math:
+
+$99/month with 7-day money-back guarantee.
+
+Meaning: full access to all 7 indicators, all lessons, all documentation for a week.
+
+If it's not for you, full refund. No questions.
+
+Start learning → signalpilot.io
+
+**Image**: Pricing section screenshot
+**Hashtags**: #FreeTrial #SignalPilot #TradingView
+
+---
+
+### Post 24 - 💬 Quote Card (5:00 PM)
+**Type**: Original branded quote
+
+**Copy**:
+"We could send alerts.
+Ping your phone.
+Tell you what to buy.
+
+But then you'd need us forever."
+
+— Signal Pilot
+
+**Image**: Dark theme Canva card
+**Hashtags**: #Independence #TradingEducation
+
+---
+
+## Day 9 (Tuesday)
+
+### Post 25 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 09-rsi-basics
+**URL**: `education.signalpilot.io/curriculum/beginner/09-rsi-basics.html`
+
+**Copy**:
+RSI measures momentum, not direction.
+
+70+ doesn't mean "sell."
+30- doesn't mean "buy."
+
+It means momentum is stretched. What happens next depends on context, structure, and whether you're in a trending or ranging market.
+
+RSI decoded → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #RSI #Momentum #TradingEducation
+
+---
+
+### Post 26 - 📝 Blog Article (1:00 PM)
+**Article**: confluence-trading
+**URL**: `blog.signalpilot.io/articles/confluence-trading/`
+
+**Copy**:
+One indicator says buy.
+Another says wait.
+A third says sell.
+
+This is where most traders fail: they pick the one that confirms their bias.
+
+Confluence trading means waiting until multiple tools agree—and sitting out when they don't.
+
+Master confluence → [link]
+
+**Image**: Blog header image
+**Hashtags**: #Confluence #TradingStrategy #RiskManagement
+
+---
+
+### Post 27 - 🛠️ Product Demo (5:00 PM)
+**Feature**: Harmonic Oscillator multi-component view
+**URL**: `signalpilot.io`
+
+**Copy**:
+The Harmonic Oscillator isn't one indicator.
+
+It's six:
+- RSI
+- Stochastic RSI
+- MACD
+- Momentum
+- EMA direction
+- Volume
+
+Combined into one unified momentum score. Divergences highlighted automatically.
+
+**Image**: Chart screenshot with Harmonic Oscillator panel
+**Hashtags**: #HarmonicOscillator #Momentum #TradingView
+
+---
+
+## Day 10 (Wednesday)
+
+### Post 28 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 10-macd-fundamentals
+**URL**: `education.signalpilot.io/curriculum/beginner/10-macd-fundamentals.html`
+
+**Copy**:
+MACD: Moving Average Convergence Divergence.
+
+A momentum indicator built from two moving averages and the distance between them.
+
+Signal line crossovers, histogram divergences, zero-line crosses—three ways to read the same tool.
+
+MACD foundations → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #MACD #Momentum #TechnicalAnalysis
+
+---
+
+### Post 29 - 📚 Docs Explainer (1:00 PM)
+**Section**: Signal Definitions
+**URL**: `docs.signalpilot.io/`
+
+**Copy**:
+Every Signal Pilot indicator has documented logic.
+
+No black boxes. No "proprietary algorithms" hiding in mystery.
+
+What triggers TD? What defines a CAP? When does Volume Oracle flip to accumulation?
+
+It's all in the docs → [link]
+
+**Image**: Screenshot of signal definitions from docs
+**Hashtags**: #Transparency #Documentation #TradingTools
+
+---
+
+### Post 30 - 💬 Quote Card (5:00 PM)
+**Type**: Original branded quote
+
+**Copy**:
+"You don't guess the turn.
+You see the structure shift.
+
+Prepare for transitions.
+Don't chase them."
+
+— Signal Pilot
+
+**Image**: Dark theme Canva card
+**Hashtags**: #MarketStructure #TradingWisdom
+
+---
+
+## Day 11 (Thursday)
+
+### Post 31 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 11-bollinger-bands
+**URL**: `education.signalpilot.io/curriculum/beginner/11-bollinger-bands.html`
+
+**Copy**:
+Bollinger Bands measure volatility, not direction.
+
+Wide bands = high volatility (explosive moves likely)
+Tight bands = low volatility (breakout brewing)
+
+The squeeze before the storm is often more valuable than the storm itself.
+
+Band mechanics → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #BollingerBands #Volatility #TechnicalAnalysis
+
+---
+
+### Post 32 - 📝 Blog Article (1:00 PM)
+**Article**: risk-reward-fundamentals
+**URL**: `blog.signalpilot.io/articles/risk-reward-fundamentals/`
+
+**Copy**:
+You can be wrong 60% of the time and still be profitable.
+
+How? Risk-reward ratio.
+
+If your winners are 3x bigger than your losers, you only need to win 25% to break even.
+
+Math, not magic → [link]
+
+**Image**: Blog header image
+**Hashtags**: #RiskReward #RiskManagement #TradingMath
+
+---
+
+### Post 33 - 🛠️ Product Demo (5:00 PM)
+**Feature**: Augury Grid multi-symbol scanner
+**URL**: `signalpilot.io`
+
+**Copy**:
+Augury Grid scans multiple symbols simultaneously.
+
+One chart. One indicator. Seven different markets at once.
+
+It shows you where cycle signals are appearing across your watchlist—without switching charts.
+
+**Image**: Chart screenshot with Augury Grid panel showing multiple symbols
+**Hashtags**: #AuguryGrid #Scanner #TradingView
+
+---
+
+## Day 12 (Friday)
+
+### Post 34 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 12-fibonacci-introduction
+**URL**: `education.signalpilot.io/curriculum/beginner/12-fibonacci-introduction.html`
+
+**Copy**:
+Fibonacci levels aren't mystical.
+
+They're self-fulfilling prophecy: so many traders watch 38.2%, 50%, and 61.8% that these levels become meaningful precisely because everyone's looking.
+
+Math meets crowd psychology.
+
+Fib fundamentals → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #Fibonacci #PriceAction #TradingEducation
+
+---
+
+### Post 35 - 🌐 Main Site Marketing (1:00 PM)
+**URL**: `signalpilot.io`
+
+**Copy**:
+Three ways to access Signal Pilot:
+
+- $99/month — cancel anytime
+- $699/year — save $489
+- $1,799 lifetime — yours forever
+
+Every plan includes all 7 indicators, 82 lessons, full documentation, and the 7-day money-back guarantee.
+
+Choose your edge → signalpilot.io
+
+**Image**: Full pricing comparison screenshot
+**Hashtags**: #Pricing #SignalPilot #TradingTools
+
+---
+
+### Post 36 - 🔮 Chronicle Lore (5:00 PM)
+**Character**: The Volume Oracle
+**URL**: `signalpilot.io/chronicle/the-volume-oracle/`
+
+**Copy**:
+"Where others see candles, she sees intention.
+Where others see wicks, she sees exhaustion."
+
+— The Chronicle of the Volume Oracle
+
+Volume doesn't lie. It just requires someone willing to listen.
+
+Enter the Chronicle → [link]
+
+**Image**: Volume Oracle character art from chronicle
+**Hashtags**: #Chronicle #VolumeOracle #SignalPilot
+
+---
+
+## Day 13 (Saturday)
+
+### Post 37 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 13-chart-patterns-triangles
+**URL**: `education.signalpilot.io/curriculum/beginner/13-chart-patterns-triangles.html`
+
+**Copy**:
+Triangles are compression patterns.
+
+Ascending, descending, symmetrical—each tells a different story about who's winning the battle between support and resistance.
+
+The breakout direction often resolves the argument.
+
+Triangle patterns → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #ChartPatterns #Triangles #TechnicalAnalysis
+
+---
+
+### Post 38 - 📝 Blog Article (1:00 PM)
+**Article**: position-sizing-guide
+**URL**: `blog.signalpilot.io/articles/position-sizing-guide/`
+
+**Copy**:
+Risk management isn't about avoiding losses.
+
+It's about making sure no single loss can knock you out of the game.
+
+Position sizing determines how much you risk per trade. Get this wrong and even a 90% win rate can blow up.
+
+Size correctly → [link]
+
+**Image**: Blog header image
+**Hashtags**: #PositionSizing #RiskManagement #TradingEducation
+
+---
+
+### Post 39 - 💬 Quote Card (5:00 PM)
+**Type**: Original branded quote
+
+**Copy**:
+"This is different.
+
+A system you learn once and keep."
+
+— Signal Pilot
+
+**Image**: Dark theme Canva card
+**Hashtags**: #TradingEducation #LongTermThinking
+
+---
+
+## Day 14 (Sunday)
+
+### Post 40 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 14-head-and-shoulders
+**URL**: `education.signalpilot.io/curriculum/beginner/14-head-and-shoulders.html`
+
+**Copy**:
+Head and shoulders: the most famous reversal pattern.
+
+Left shoulder → Head → Right shoulder → Neckline break.
+
+The pattern shows exhaustion: buyers tried three times to push higher, failed twice, then gave up.
+
+Classic pattern mechanics → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #HeadAndShoulders #ReversalPatterns #TradingEducation
+
+---
+
+### Post 41 - 🛠️ Product Demo (1:00 PM)
+**Feature**: OmniDeck unified overlay
+**URL**: `signalpilot.io`
+
+**Copy**:
+OmniDeck combines multiple overlays into one clean view:
+
+- Cycle signals from Pentarch
+- Key levels from Janus Atlas
+- Volume regime from Volume Oracle
+
+Three perspectives. One chart. No clutter.
+
+**Image**: Chart screenshot with OmniDeck active
+**Hashtags**: #OmniDeck #TradingView #ChartOverlay
+
+---
+
+### Post 42 - 📝 Blog Article (5:00 PM)
+**Article**: backtesting-best-practices
+**URL**: `blog.signalpilot.io/articles/backtesting-best-practices/`
+
+**Copy**:
+Backtesting tells you what WOULD have worked.
+
+It doesn't tell you what WILL work.
+
+Curve-fitting, survivorship bias, look-ahead bias—the traps are everywhere.
+
+Here's how to backtest honestly → [link]
+
+**Image**: Blog header image
+**Hashtags**: #Backtesting #Strategy #TradingEducation
+
+---
+
+# 📅 WEEK 3: INTERMEDIATE CONCEPTS
+
+## Day 15 (Monday)
+
+### Post 43 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 01-market-cycles-deep-dive (Intermediate)
+**URL**: `education.signalpilot.io/curriculum/intermediate/01-market-cycles-deep-dive.html`
+
+**Copy**:
+Markets move in cycles. Always have. Always will.
+
+Accumulation → Markup → Distribution → Decline.
+
+Understanding where you are in the cycle changes everything about how you interpret signals.
+
+Intermediate lesson → [link]
+
+**Image**: Screenshot of lesson page
+**Hashtags**: #MarketCycles #IntermediateTrading #TradingEducation
+
+---
+
+### Post 44 - 🌐 Main Site Marketing (1:00 PM)
+**URL**: `signalpilot.io`
+
+**Copy**:
+"After 3 years of trading, I feel like I've struck gold with this platform."
+
+— Axl F., Verified Buyer on Trustpilot
+
+4.2 stars from real traders. Real reviews. No fake testimonials.
+
+See what traders are saying → signalpilot.io
+
+**Image**: Trustpilot review section screenshot
+**Hashtags**: #Trustpilot #Reviews #SignalPilot
+
+---
+
+### Post 45 - 💬 Quote Card (5:00 PM)
+**Type**: Original branded quote
+
+**Copy**:
+"TD appears when selling exhausts.
+CAP appears when buying climaxes.
+
+You don't guess the turn.
+You see the structure shift."
+
+— Signal Pilot
+
+**Image**: Dark theme Canva card
+**Hashtags**: #Pentarch #CycleSignals #TradingWisdom
+
+---
+
+## Day 16 (Tuesday)
+
+### Post 46 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 02-multi-timeframe-analysis (Intermediate)
+**URL**: `education.signalpilot.io/curriculum/intermediate/02-multi-timeframe-analysis.html`
+
+**Copy**:
+The 15-minute chart says buy.
+The daily chart says sell.
 
 Who's right?
 
-blog.signalpilot.io/timeframe-selection
-```
-**Image:** Multi-timeframe example
+Multi-timeframe analysis teaches you to read context: higher timeframes for direction, lower timeframes for timing.
 
----
-
-## Thursday
-
-### Morning — Product
-```
-OmniDeck unifies 10 systems into one overlay:
-
-→ TD Sequential
-→ Squeeze Cloud
-→ SuperTrend Ensemble
-→ Supply/Demand Zones
-→ And more...
-
-One view. Reduced noise.
-
-signalpilot.io
-```
-**Image:** Chart screenshot with OmniDeck
-
----
-
-### Evening — Quote Card
-```
-Every trader has a plan
-until they're down 3 trades in a row.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Friday
-
-### Morning — Education
-```
-No setups. Hours of waiting.
-
-Then you take a trade just to feel something.
-
-Boredom has destroyed more accounts 
-than bad analysis ever will.
-
-blog.signalpilot.io/boredom-trap
-```
-**Image:** Blog header
-
----
-
-### Evening — Product
-```
-Augury Grid scans 8 markets simultaneously.
-
-Ranks each by conviction score.
-Brings opportunities to you.
-
-No more flipping through 50 charts.
-
-signalpilot.io
-```
-**Image:** Augury Grid screenshot
-
----
-
-## Saturday
-
-### Morning — Chronicle
-```
-"I hear what retail cannot.
-I see the giants move in darkness."
-
-— The Prophet
-
-signalpilot.io/chronicle
-```
-**Image:** Volume Oracle character art
-
----
-
-### Evening — Quote Card
-```
-FOMO costs more than missed trades.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Sunday
-
-### Morning — Education
-```
-You have a trading plan.
-It's written down.
-
-And yet you took that trade 
-you knew you shouldn't take.
-
-blog.signalpilot.io/breaking-trading-rules
-```
-**Image:** Blog header
-
----
-
-### Evening — Engagement
-```
-How long have you been trading?
-
-🌱 Less than 1 year
-📈 1-2 years
-💪 3-5 years
-🧠 5+ years
-```
-**Format:** Poll
-
----
-
-# WEEK 3
-
----
-
-## Monday
-
-### Morning — Education
-```
-RSI divergence! MACD divergence!
-
-The indicator says reversal is coming.
-
-Except... it usually isn't.
-
-When divergence actually matters:
-blog.signalpilot.io/when-to-ignore-divergence
-```
-**Image:** Divergence chart
-
----
-
-### Evening — Quote Card
-```
-The hardest part of trading
-is doing nothing.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Tuesday
-
-### Morning — Product
-```
-Plutus Flow showing bearish divergence —
-price making new highs,
-but buying pressure declining.
-
-When price and pressure disagree,
-something is developing.
-
-signalpilot.io
-```
-**Image:** Chart screenshot with Plutus Flow
-
----
-
-### Evening — Education
-```
-Early wins.
-Growing confidence.
-Increasing size.
-Then everything gone.
-
-The sequence is predictable.
-
-blog.signalpilot.io/first-account-blow
-```
-**Image:** Blog header
-
----
-
-## Wednesday
-
-### Morning — Quote Card
-```
-A simple system you trust
-beats a complex system you doubt.
-```
-**Image:** Branded Canva quote card
-
----
-
-### Evening — Education
-```
-Everyone talks about having an "edge."
-
-But what does that actually mean?
-
-How to identify a real trading edge:
-blog.signalpilot.io/what-is-trading-edge
-```
-**Image:** Blog header
-
----
-
-## Thursday
-
-### Morning — Product
-```
-Pentarch cycle phases:
-
-TD → Touchdown (accumulation)
-IGN → Ignition (momentum shift)
-WRN → Warning (hidden weakness)
-CAP → Climax (exhaustion)
-BDN → Breakdown (reversal)
-
-Knowing the phase changes everything.
-
-signalpilot.io
-```
-**Image:** Chart showing cycle phases
-
----
-
-### Evening — Quote Card
-```
-Position sizing is the difference between
-a bad week and a blown account.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Friday
-
-### Morning — Education
-```
-"How long until I'm profitable?"
-
-The honest answer most won't give you.
-
-blog.signalpilot.io/how-long-profitable-trader
-```
-**Image:** Blog header
-
----
-
-### Evening — Product
-```
-All 7 Signal Pilot indicators 
-are 100% non-repainting.
-
-Audited. Verified.
-
-What you see is what would have appeared.
-No hindsight tricks.
-
-signalpilot.io
-```
-**Image:** Branded product image or chart
-
----
-
-## Saturday
-
-### Morning — Chronicle
-```
-The patient pilot survives.
-The impulsive pilot donates.
-
-— The Arbiter's Lesson
-
-signalpilot.io/chronicle
-```
-**Image:** Harmonic Oscillator character art
-
----
-
-### Evening — Quote Card
-```
-Journal the losses.
-That's where the lessons are.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Sunday
-
-### Morning — Education
-```
-Risking 1% per trade sounds overly cautious.
-
-It's actually the most aggressive approach 
-that still works long-term.
-
-blog.signalpilot.io/1-percent-rule
-```
-**Image:** Blog header
-
----
-
-### Evening — Engagement
-```
-"I will not chase."
-
-Three words.
-
-What does this mean to you in practice? 👇
-```
-**Image:** Optional branded image
-
----
-
-# WEEK 4
-
----
-
-## Monday
-
-### Morning — Education
-```
-100,000+ free indicators on TradingView.
-Reviews and likes to guide your choice.
-
-What could go wrong?
-
-A lot, actually.
-
-blog.signalpilot.io/tradingview-free-scripts
-```
-**Image:** Blog header
-
----
-
-### Evening — Quote Card
-```
-The market rewards patience.
-It punishes impatience.
-There is no third option.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Tuesday
-
-### Morning — Product
-```
-Volume Oracle detected distribution 
-while price was making new highs.
-
-Three days later, breakdown confirmed.
-
-Volume often knows first.
-
-signalpilot.io
-```
-**Image:** Chart screenshot
-
----
-
-### Evening — Education
-```
-Your backtest shows 80% wins.
-You trade it live and get destroyed.
-
-Here's why — and how to test honestly:
-blog.signalpilot.io/backtesting-without-fooling-yourself
-```
-**Image:** Blog header
-
----
-
-## Wednesday
-
-### Morning — Quote Card
-```
-Your edge isn't the indicator.
-Your edge is the discipline 
-to wait for it to speak.
-```
-**Image:** Branded Canva quote card
-
----
-
-### Evening — Education
-```
-Most trade journals are useless busywork.
-
-Here's how to build one 
-that actually improves your trading:
-
-blog.signalpilot.io/trade-journaling-that-works
-```
-**Image:** Blog header
-
----
-
-## Thursday
-
-### Morning — Product
-```
-Harmonic Oscillator at 7/7 STRONG:
-
-★★★★★★★
-
-All seven oscillators in agreement.
-Maximum consensus.
-
-These moments are rare.
-When they appear, the noise becomes signal.
-
-signalpilot.io
-```
-**Image:** Chart screenshot showing 7/7
-
----
-
-### Evening — Quote Card
-```
-The traders who make it
-aren't talented. They're stubborn.
-They refused to quit before it clicked.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Friday
-
-### Morning — Education
-```
-Confidence without discipline is arrogance.
-Discipline without confidence is hesitation.
-
-The balance between them 
-is what separates profitable traders.
-
-blog.signalpilot.io/what-profitable-traders-know
-```
-**Image:** Blog header
-
----
-
-### Evening — Product
-```
-82 free lessons.
-250,000+ words.
-4 progressive tiers.
-
-From market structure basics 
-to institutional order flow.
-
-No fluff. No hype.
-
-education.signalpilot.io
-```
-**Image:** Education hub screenshot
-
----
-
-## Saturday
-
-### Morning — Chronicle
-```
-"The map exists before the journey begins.
-
-Those without it wander.
-Those with it navigate."
-
-— The Cartographer
-
-signalpilot.io/chronicle
-```
-**Image:** Janus Atlas character art
-
----
-
-### Evening — Quote Card
-```
-One good setup per day 
-beats ten mediocre ones.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Sunday
-
-### Morning — Education
-```
-Fight with your spouse. 
-Bad news at work. 
-Didn't sleep well.
-
-You still traded.
-
-Here's why that's costing you more than you realize:
-blog.signalpilot.io/trading-while-emotional
-```
-**Image:** Blog header
-
----
-
-### Evening — Engagement
-```
-Which member of The Seven resonates most?
-
-🏛️ The Sovereign (Pentarch)
-👁️ The Prophet (Volume Oracle)
-🗺️ The Cartographer (Janus Atlas)
-⚖️ The Scales (Plutus Flow)
-```
-**Format:** Poll
-
----
-
-# WEEK 5
-
----
-
-## Monday
-
-### Morning — Education
-```
-Support and resistance are the foundation 
-of technical analysis.
-
-Here's how to identify real levels — 
-and trade them without getting chopped up:
-
-blog.signalpilot.io/support-and-resistance
-```
-**Image:** Blog header
+Level up → [link]
 
----
-
-### Evening — Quote Card
-```
-Protect the downside.
-The upside takes care of itself.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Tuesday
-
-### Morning — Product
-```
-Janus Atlas identified the weekly pivot.
-
-Price rejected it three times in one session.
-
-The levels exist whether you see them or not.
-
-signalpilot.io
-```
-**Image:** Chart screenshot with Janus Atlas
-
----
-
-### Evening — Education
-```
-Candlesticks are the language of price.
-
-Here's how to read them — 
-and which patterns actually matter:
-
-blog.signalpilot.io/candlestick-basics
-```
-**Image:** Blog header
-
----
-
-## Wednesday
-
-### Morning — Quote Card
-```
-It's not about how much you make when you're right.
-It's about how little you lose when you're wrong.
-```
-**Image:** Branded Canva quote card
-
----
-
-### Evening — Education
-```
-Trend identification is the foundation 
-of technical analysis.
-
-How to spot trends, confirm them, 
-and know when they're ending:
-
-blog.signalpilot.io/how-to-identify-trend
-```
-**Image:** Blog header
-
----
-
-## Thursday
-
-### Morning — Product
-```
-Pentarch showing TD (Touchdown) —
-accumulation pattern forming at lows.
-
-The cycle begins again.
-
-signalpilot.io
-```
-**Image:** Chart screenshot with Pentarch TD
-
----
-
-### Evening — Quote Card
-```
-One trade should never matter that much.
-If it does, you're risking too much.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Friday
-
-### Morning — Education
-```
-There are hundreds of chart patterns in textbooks.
-Most are useless.
-
-Here are the few that actually work:
-blog.signalpilot.io/chart-patterns-that-work
-```
-**Image:** Blog header
-
----
-
-### Evening — Product
-```
-OmniDeck detected a liquidity sweep 
-below the previous low.
-
-Price reversed within 3 candles.
-
-Sweeps often precede reversals.
-
-signalpilot.io
-```
-**Image:** Chart screenshot with OmniDeck
-
----
-
-## Saturday
-
-### Morning — Chronicle
-```
-"I am the cycle. The cycle is me."
-
-— The Sovereign
-
-signalpilot.io/chronicle
-```
-**Image:** Pentarch character art
-
----
-
-### Evening — Quote Card
-```
-The market doesn't know your position size.
-But your emotions do.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Sunday
-
-### Morning — Education
-```
-Moving averages are everywhere on charts.
-
-Here's what they actually tell you — 
-and which settings matter:
-
-blog.signalpilot.io/moving-averages-explained
-```
-**Image:** Blog header
-
----
-
-### Evening — Engagement
-```
-What timeframe do you primarily trade?
-
-📊 1-5 minute
-📈 15-30 minute
-🕐 1-4 hour
-📅 Daily+
-```
-**Format:** Poll
-
----
-
-# WEEK 6
-
----
-
-## Monday
-
-### Morning — Education
-```
-Your 5-minute setup looks perfect.
-
-But the daily chart is screaming something else.
-
-Here's how to align timeframes:
-blog.signalpilot.io/multi-timeframe-confirmation
-```
-**Image:** Blog header
-
----
-
-### Evening — Quote Card
-```
-The best indicator in the world
-can't fix bad risk management.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Tuesday
-
-### Morning — Product
-```
-Augury Grid ranking 8 markets:
-
-BTC: ★★★★★ (Strong)
-ETH: ★★★☆☆ (Neutral)
-SOL: ★★☆☆☆ (Weak)
-...
-
-One glance. All opportunities ranked.
-
-signalpilot.io
-```
-**Image:** Augury Grid screenshot
-
----
-
-### Evening — Education
-```
-Price charts show where the market went.
-
-Volume profile shows where it actually wanted to be.
-
-blog.signalpilot.io/volume-profile-basics
-```
-**Image:** Blog header
-
----
-
-## Wednesday
-
-### Morning — Quote Card
-```
-The indicator didn't fail.
-The context was wrong.
-```
-**Image:** Branded Canva quote card
-
----
-
-### Evening — Education
-```
-Markets trend about 20-30% of the time.
-
-The rest? Cycles.
-
-Understanding this changes everything:
-blog.signalpilot.io/why-markets-move-in-cycles
-```
-**Image:** Blog header
-
----
-
-## Thursday
-
-### Morning — Product
-```
-Plutus Flow green ribbon expanding —
-buying pressure increasing 
-while price consolidates.
-
-Accumulation often looks boring.
+**Image**: Screenshot of lesson page
+**Hashtags**: #MultiTimeframe #TradingStrategy #TradingEducation
 
-signalpilot.io
-```
-**Image:** Chart screenshot with Plutus Flow
-
----
-
-### Evening — Quote Card
-```
-Your P&L is a reflection of your psychology,
-not your strategy.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Friday
-
-### Morning — Education
-```
-Head and shoulders. Double tops.
-They don't work reliably.
-
-But there's one pattern 
-that genuinely repeats everywhere:
-
-blog.signalpilot.io/only-pattern-that-repeats
-```
-**Image:** Blog header
-
----
-
-### Evening — Product
-```
-Harmonic Oscillator at 2/7:
-
-★★☆☆☆☆☆
-
-The council is divided.
-The Arbiter counsels patience.
-
-Some of the best trades are the ones not taken.
-
-signalpilot.io
-```
-**Image:** Chart screenshot showing weak consensus
-
----
-
-## Saturday
-
-### Morning — Chronicle
-```
-"Ten systems. One vision. Total clarity."
-
-— The Commander
-
-signalpilot.io/chronicle
-```
-**Image:** OmniDeck character art
-
----
-
-### Evening — Quote Card
-```
-The best traders aren't the smartest.
-They're the most consistent.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Sunday
-
-### Morning — Education
-```
-Zoom in on a cycle and you find smaller cycles.
-Zoom out and you find larger ones.
-
-The fractal nature of markets:
-blog.signalpilot.io/cycles-within-cycles
-```
-**Image:** Blog header
-
----
-
-### Evening — Engagement
-```
-Be honest:
-
-How often do you break your own trading rules?
-
-😇 Rarely
-😅 Sometimes
-😬 Often
-🙈 What rules?
-```
-**Format:** Poll
-
----
-
-# WEEK 7
-
----
-
-## Monday
-
-### Morning — Education
-```
-You expected the cycle to play out.
-It didn't.
-
-That breakdown is actually telling you something:
-blog.signalpilot.io/cycle-failures
-```
-**Image:** Blog header
-
----
-
-### Evening — Quote Card
-```
-Backtests show what happened.
-They don't guarantee what will.
-```
-**Image:** Branded Canva quote card
-
----
-
-## Tuesday
-
-### Morning — Product
-```
-Volume Oracle showing volume spike 
-at a key Janus Atlas level.
-
-When two members of The Seven agree,
-conviction increases.
-
-signalpilot.io
-```
-**Image:** Chart with Volume Oracle + Janus Atlas
-
----
-
-### Evening — Education
-```
-"Follow the smart money."
-
-But what does that actually mean?
-And how do you do it?
-
-blog.signalpilot.io/how-smart-money-moves
-```
-**Image:** Blog header
-
 ---
-
-## Wednesday
 
-### Morning — Quote Card
-```
-Every indicator works sometimes.
-The skill is knowing when.
-```
-**Image:** Branded Canva quote card
+### Post 47 - 📝 Blog Article (1:00 PM)
+**Article**: divergence-trading-complete
+**URL**: `blog.signalpilot.io/articles/divergence-trading-complete/`
 
----
+**Copy**:
+Price makes a higher high.
+Momentum makes a lower high.
 
-### Evening — Education
-```
-Every trader faces drawdowns.
+Divergence: when price and indicators disagree, someone's lying.
 
-The difference between survivors and casualties 
-is how you manage them:
+Regular divergences, hidden divergences, continuation signals—the complete breakdown → [link]
 
-blog.signalpilot.io/drawdown-management
-```
-**Image:** Blog header
+**Image**: Blog header image
+**Hashtags**: #Divergence #Momentum #TechnicalAnalysis
 
 ---
 
-## Thursday
+### Post 48 - 🛠️ Product Demo (5:00 PM)
+**Feature**: Pentarch CAP and WRN signals
+**URL**: `signalpilot.io`
 
-### Morning — Product
-```
-Pentarch transitioning from WRN to CAP —
-warning phase complete,
-climax forming.
+**Copy**:
+CAP (Climax) often appears at tops.
+WRN (Warning) confirms distribution is underway.
 
-The cycle continues.
+Together, they map the transition from markup to decline—before the decline begins.
 
-signalpilot.io
-```
-**Image:** Chart screenshot with Pentarch
-
----
+Observational, not predictive. But preparation beats reaction.
 
-### Evening — Quote Card
-```
-Confidence without discipline is arrogance.
-Discipline without confidence is hesitation.
-```
-**Image:** Branded Canva quote card
+**Image**: Chart screenshot showing CAP → WRN → BDN sequence
+**Hashtags**: #Pentarch #MarketStructure #TradingView
 
 ---
 
-## Friday
+## Day 17 (Wednesday)
 
-### Morning — Education
-```
-Your stop loss is your maximum risk.
+### Post 49 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 03-volume-profile-basics (Intermediate)
+**URL**: `education.signalpilot.io/curriculum/intermediate/03-volume-profile-basics.html`
 
-But sometimes exiting early is smarter:
-blog.signalpilot.io/when-to-cut-losses-early
-```
-**Image:** Blog header
+**Copy**:
+Volume profile shows WHERE volume occurred, not just WHEN.
 
----
+High volume nodes = price acceptance (value areas)
+Low volume nodes = price rejection (gaps to fill)
 
-### Evening — Product
-```
-The Seven working together:
+The horizontal histogram reveals what the time-based chart hides.
 
-Pentarch: IGN phase ✓
-Volume Oracle: Accumulation ✓
-Janus Atlas: Above key level ✓
-Harmonic Oscillator: 6/7 ✓
+Volume profile intro → [link]
 
-Confluence across the system.
+**Image**: Screenshot of lesson page
+**Hashtags**: #VolumeProfile #VolumeAnalysis #TradingEducation
 
-signalpilot.io
-```
-**Image:** Chart showing multiple indicators
-
 ---
 
-## Saturday
+### Post 50 - 📚 Docs Explainer (1:00 PM)
+**Section**: Indicator Settings Guide
+**URL**: `docs.signalpilot.io/`
 
-### Morning — Chronicle
-```
-"While you watch one chart, I watch them all."
+**Copy**:
+Every Signal Pilot indicator is customizable.
 
-— The Watchman
+Colors, sensitivity, alerts, display options—all documented with explanations for why you might change each setting.
 
-signalpilot.io/chronicle
-```
-**Image:** Augury Grid character art
+Default settings work. Custom settings work better when tuned to your style.
 
----
+Settings guide → [link]
 
-### Evening — Quote Card
-```
-Trading isn't hard because the market is complex.
-It's hard because you are.
-```
-**Image:** Branded Canva quote card
+**Image**: Screenshot of settings documentation
+**Hashtags**: #Customization #TradingView #Documentation
 
 ---
-
-## Sunday
-
-### Morning — Education
-```
-You've been consistent.
-Your account is growing.
-
-When is it time to increase position sizes?
 
-blog.signalpilot.io/when-to-size-up
-```
-**Image:** Blog header
+### Post 51 - 💬 Quote Card (5:00 PM)
+**Type**: Original branded quote
 
----
+**Copy**:
+"Price tells you WHAT happened.
+Volume tells you WHO believed it."
 
-### Evening — Engagement
-```
-What's your primary market?
+— Signal Pilot
 
-📈 Crypto
-💹 Forex
-🏢 Stocks
-📊 Futures/Options
-```
-**Format:** Poll
+**Image**: Dark theme Canva card
+**Hashtags**: #VolumeAnalysis #TradingWisdom
 
 ---
 
-# WEEK 8
-
----
+## Day 18 (Thursday)
 
-## Monday
+### Post 52 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 04-order-flow-introduction (Intermediate)
+**URL**: `education.signalpilot.io/curriculum/intermediate/04-order-flow-introduction.html`
 
-### Morning — Education
-```
-News events can make or break your account.
+**Copy**:
+Order flow reveals what candlesticks hide.
 
-When to trade around news, 
-when to stay flat:
+Who's buying at the ask? Who's selling at the bid? Where are the large players positioned?
 
-blog.signalpilot.io/trading-around-news
-```
-**Image:** Blog header
+The chart shows results. Order flow shows intentions.
 
----
+Order flow intro → [link]
 
-### Evening — Quote Card
-```
-The goal isn't to eliminate emotions.
-It's to stop letting them drive.
-```
-**Image:** Branded Canva quote card
+**Image**: Screenshot of lesson page
+**Hashtags**: #OrderFlow #MarketMicrostructure #TradingEducation
 
 ---
-
-## Tuesday
 
-### Morning — Product
-```
-OmniDeck Supply/Demand zone held perfectly.
+### Post 53 - 📝 Blog Article (1:00 PM)
+**Article**: stop-loss-strategies
+**URL**: `blog.signalpilot.io/articles/stop-loss-strategies/`
 
-Price wicked into the zone,
-absorbed the selling,
-reversed.
+**Copy**:
+A stop-loss isn't an admission of failure.
 
-Structure matters.
+It's a predefined exit that removes emotion from the equation.
 
-signalpilot.io
-```
-**Image:** Chart screenshot with OmniDeck
-
----
+ATR-based stops, structure-based stops, percentage stops—each has its place.
 
-### Evening — Education
-```
-Understanding order types is fundamental.
+The worst stop? None at all.
 
-Market, limit, stop — 
-here's how they actually work:
+Stop strategies → [link]
 
-blog.signalpilot.io/order-types-explained
-```
-**Image:** Blog header
+**Image**: Blog header image
+**Hashtags**: #StopLoss #RiskManagement #TradingStrategy
 
 ---
 
-## Wednesday
+### Post 54 - 🛠️ Product Demo (5:00 PM)
+**Feature**: Plutus Flow OBV analysis
+**URL**: `signalpilot.io`
 
-### Morning — Quote Card
-```
-Small improvements compound.
-So do small mistakes.
-Choose which one you're stacking.
-```
-**Image:** Branded Canva quote card
+**Copy**:
+Plutus Flow takes OBV beyond basics.
 
----
+Statistical bands show when volume flow is stretched.
+Divergences highlight when price and volume disagree.
+Regime detection identifies accumulation vs distribution.
 
-### Evening — Education
-```
-Most indicator suites are grab bags.
+Volume, upgraded.
 
-Signal Pilot's 7 indicators 
-were designed as an integrated system.
+**Image**: Chart screenshot with Plutus Flow panel
+**Hashtags**: #PlutusFlow #OBV #VolumeAnalysis
 
-Here's how they connect:
-blog.signalpilot.io/how-indicators-work-together
-```
-**Image:** Blog header
-
 ---
 
-## Thursday
+## Day 19 (Friday)
 
-### Morning — Product
-```
-Janus Atlas VWAP anchor 
-acting as dynamic support.
+### Post 55 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 05-wyckoff-methodology (Intermediate)
+**URL**: `education.signalpilot.io/curriculum/intermediate/05-wyckoff-methodology.html`
 
-Price tested it four times.
-Held every time.
+**Copy**:
+Richard Wyckoff figured it out in the 1930s.
 
-Anchored VWAP often acts as institutional reference.
+Accumulation. Markup. Distribution. Decline.
 
-signalpilot.io
-```
-**Image:** Chart screenshot with Janus Atlas
+The composite operator. Springs and upthrusts. Tests and re-tests.
 
----
+Old wisdom, still working → [link]
 
-### Evening — Quote Card
-```
-Learn the rules first.
-Then you'll know which ones to break.
-```
-**Image:** Branded Canva quote card
+**Image**: Screenshot of lesson page
+**Hashtags**: #Wyckoff #MarketCycles #TradingEducation
 
 ---
-
-## Friday
-
-### Morning — Education
-```
-Free indicators got you started.
-
-Are they holding you back?
 
-Here's how to know:
-blog.signalpilot.io/free-vs-professional-tools
-```
-**Image:** Blog header
+### Post 56 - 🌐 Main Site Marketing (1:00 PM)
+**URL**: `signalpilot.io`
 
----
+**Copy**:
+What's included in every Signal Pilot plan:
 
-### Evening — Product
-```
-Volume Oracle + Plutus Flow agreement:
+✓ All 7 indicators (Pentarch, Volume Oracle, Janus Atlas, Plutus Flow, OmniDeck, Augury Grid, Harmonic Oscillator)
+✓ 82 free lessons (250K+ words)
+✓ Complete documentation
+✓ Real-time alerts
+✓ 7-day money-back guarantee
 
-Volume showing accumulation.
-Pressure showing demand.
+Full details → signalpilot.io
 
-Two forms of confirmation.
-Same conclusion.
+**Image**: Homepage features section screenshot
+**Hashtags**: #SignalPilot #Features #TradingView
 
-signalpilot.io
-```
-**Image:** Chart with both indicators
-
 ---
 
-## Saturday
+### Post 57 - 🔮 Chronicle Lore (5:00 PM)
+**Character**: Janus Atlas
+**URL**: `signalpilot.io/chronicle/janus-atlas/`
 
-### Morning — Chronicle
-```
-"Seven voices. One verdict.
-I decide when the trigger is pulled."
+**Copy**:
+"One face looks to higher timeframes for context.
+One face looks to lower timeframes for precision.
 
-— The Arbiter
+Together, they see what single-minded traders miss."
 
-signalpilot.io/chronicle
-```
-**Image:** Harmonic Oscillator character art
+— The Chronicle of Janus Atlas
 
----
+Multi-timeframe wisdom → [link]
 
-### Evening — Quote Card
-```
-The market humbles everyone eventually.
-The question is whether you learn from it.
-```
-**Image:** Branded Canva quote card
+**Image**: Janus Atlas character art from chronicle
+**Hashtags**: #Chronicle #JanusAtlas #SignalPilot
 
 ---
 
-## Sunday
+## Day 20 (Saturday)
 
-### Morning — Education
-```
-Ready to place your first trade?
+### Post 58 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 06-smart-money-concepts (Intermediate)
+**URL**: `education.signalpilot.io/curriculum/intermediate/06-smart-money-concepts.html`
 
-Here's exactly how to do it right:
-blog.signalpilot.io/your-first-trade
-```
-**Image:** Blog header
+**Copy**:
+Liquidity. Order blocks. Fair value gaps.
 
----
+Smart Money Concepts reverse-engineer how institutions move markets.
 
-### Evening — Engagement
-```
-8 weeks of content.
+They don't chase breakouts—they create them. They don't hit stops—they hunt them.
 
-What type of post has been most valuable?
+Learn the framework → [link]
 
-📚 Education articles
-💬 Quote cards
-📊 Product demonstrations
-🏛️ Chronicle lore
-```
-**Format:** Poll
+**Image**: Screenshot of lesson page
+**Hashtags**: #SmartMoney #SMC #InstitutionalTrading
 
 ---
-
-# ORIGINAL QUOTES MASTER LIST
 
-## For Branded Canva Quote Cards
-
----
+### Post 59 - 📝 Blog Article (1:00 PM)
+**Article**: trading-journal-guide
+**URL**: `blog.signalpilot.io/articles/trading-journal-guide/`
 
-### Mindset & Discipline
-```
-The best trade you'll ever make
-is the one you didn't take.
-```
-```
-The market rewards patience.
-It punishes impatience.
-There is no third option.
-```
-```
-Your edge isn't the indicator.
-Your edge is the discipline 
-to wait for it to speak.
-```
-```
-Consistency isn't about winning every trade.
-It's about executing the same way every time.
-```
-```
-Hope is not a strategy.
-Neither is revenge.
-```
-```
-The goal isn't to be right.
-The goal is to be profitable.
-They're not the same thing.
-```
-```
-You don't rise to the level of your goals.
-You fall to the level of your systems.
-```
-```
-Every trader has a plan
-until they're down 3 trades in a row.
-```
-```
-The market will test your conviction.
-Make sure it's built on process, not hope.
-```
-```
-Discipline is choosing between 
-what you want now 
-and what you want most.
-```
+**Copy**:
+The best traders review their trades obsessively.
 
----
+Not to punish themselves for losses—to understand their patterns.
 
-### Risk & Survival
-```
-Risk management isn't sexy.
-Neither is blowing your account.
-```
-```
-The traders who survive long enough to compound
-are the ones who sized small enough to stay alive.
-```
-```
-Position sizing is the difference between
-a bad week and a blown account.
-```
-```
-Protect the downside.
-The upside takes care of itself.
-```
-```
-It's not about how much you make when you're right.
-It's about how little you lose when you're wrong.
-```
-```
-One trade should never matter that much.
-If it does, you're risking too much.
-```
-```
-The market doesn't know your position size.
-But your emotions do.
-```
+When do you perform best? When do you make mistakes? Your journal knows.
 
----
+Start journaling → [link]
 
-### Indicators & Systems
-```
-Indicators don't predict.
-They illuminate.
-```
-```
-The best indicator in the world
-can't fix bad risk management.
-```
-```
-More indicators ≠ more clarity.
-Usually the opposite.
-```
-```
-Backtests show what happened.
-They don't guarantee what will.
-```
-```
-A simple system you trust
-beats a complex system you doubt.
-```
-```
-The indicator didn't fail.
-The context was wrong.
-```
-```
-Every indicator works sometimes.
-The skill is knowing when.
-```
+**Image**: Blog header image
+**Hashtags**: #TradingJournal #Performance #TradingEducation
 
 ---
 
-### Psychology & Reality
-```
-The market doesn't care about your analysis.
-It doesn't care about your conviction.
-It doesn't care at all.
-```
-```
-You're not trading the market.
-You're trading yourself.
-```
-```
-The hardest part of trading
-is doing nothing.
-```
-```
-FOMO costs more than missed trades.
-```
-```
-Your P&L is a reflection of your psychology,
-not your strategy.
-```
-```
-The best traders aren't the smartest.
-They're the most consistent.
-```
-```
-Confidence without discipline is arrogance.
-Discipline without confidence is hesitation.
-```
-```
-The market humbles everyone eventually.
-The question is whether you learn from it.
-```
+### Post 60 - 💬 Quote Card (5:00 PM)
+**Type**: Original branded quote
 
----
+**Copy**:
+"Five signals map the complete market cycle.
 
-### Process & Growth
-```
-Journal the losses.
-That's where the lessons are.
-```
-```
-You don't need to trade every day.
-You need to trade well.
-```
-```
-One good setup per day 
-beats ten mediocre ones.
-```
-```
-The traders who make it
-aren't talented. They're stubborn.
-They refused to quit before it clicked.
-```
-```
-Trading isn't hard because the market is complex.
-It's hard because you are.
-```
-```
-The goal isn't to eliminate emotions.
-It's to stop letting them drive.
-```
-```
-Small improvements compound.
-So do small mistakes.
-Choose which one you're stacking.
-```
-```
-Learn the rules first.
-Then you'll know which ones to break.
-```
+Prepare for transitions.
+Don't chase them."
 
----
+— Signal Pilot
 
-# CHRONICLE QUOTES MASTER LIST
-
-## For Character Art Posts
-```
-"Price can deceive. Pressure cannot."
-— The Scales (Plutus Flow)
-```
-```
-"I hear what retail cannot. I see the giants move in darkness."
-— The Prophet (Volume Oracle)
-```
-```
-"The map exists before the journey begins. Those without it wander. Those with it navigate."
-— The Cartographer (Janus Atlas)
-```
-```
-"The patient pilot survives. The impulsive pilot donates."
-— The Arbiter (Harmonic Oscillator)
-```
-```
-"I am the cycle. The cycle is me."
-— The Sovereign (Pentarch)
-```
-```
-"Ten systems. One vision. Total clarity."
-— The Commander (OmniDeck)
-```
-```
-"While you watch one chart, I watch them all."
-— The Watchman (Augury Grid)
-```
-```
-"Seven voices. One verdict. I decide when the trigger is pulled."
-— The Arbiter (Harmonic Oscillator)
-```
+**Image**: Dark theme Canva card
+**Hashtags**: #MarketCycles #Pentarch #TradingWisdom
 
 ---
-
-# IMAGE REQUIREMENTS
-
-## Quote Cards (Canva)
 
-- **Background:** Dark (#0a0a0f or similar)
-- **Text:** Blue gradient for emphasis (match site style)
-- **Logo:** "SIGNAL PILOT" wordmark at bottom
-- **Optional:** Subtle star/constellation elements
-- **Size:** 1080x1080 (square) or 1200x675 (landscape)
+## Day 21 (Sunday)
 
-## Chronicle Posts
+### Post 61 - 🎓 Education Hub (9:00 AM)
+**Lesson**: 07-liquidity-concepts (Intermediate)
+**URL**: `education.signalpilot.io/curriculum/intermediate/07-liquidity-concepts.html`
 
-Use character art from signalpilot.io/chronicle:
-- Pentarch (The Sovereign)
-- Volume Oracle (The Prophet)
-- Janus Atlas (The Cartographer)
-- Plutus Flow (The Scales)
-- OmniDeck (The Commander)
-- Augury Grid (The Watchman)
-- Harmonic Oscillator (The Arbiter)
+**Copy**:
+Liquidity is where the orders are.
 
-## Product Posts
+Above swing highs: stop-losses from shorts.
+Below swing lows: stop-losses from longs.
 
-- Actual chart screenshots with Signal Pilot indicators
-- Clean, focused on the indicator being highlighted
-- Include signalpilot.io link
+Big players need liquidity to fill their positions. Understanding where it sits changes how you see "fakeouts."
 
-## Education Posts
+Liquidity mechanics → [link]
 
-- Blog header images from blog.signalpilot.io
-- Or relevant chart examples
-- Include blog article link
+**Image**: Screenshot of lesson page
+**Hashtags**: #Liquidity #SmartMoney #TradingEducation
 
 ---
 
-# BLOG ARTICLES REFERENCED
-
-| Article | URL |
-|---------|-----|
-| Why Your Indicators Keep Failing | blog.signalpilot.io/why-indicators-keep-failing |
-| Revenge Trading Recovery | blog.signalpilot.io/revenge-trading-recovery |
-| The Repainting Problem | blog.signalpilot.io/repainting-problem |
-| Position Sizing 101 | blog.signalpilot.io/position-sizing-101 |
-| Stop Loss Placement | blog.signalpilot.io/stop-loss-placement |
-| The Confirmation Trap | blog.signalpilot.io/confirmation-trap |
-| Accumulation vs Distribution | blog.signalpilot.io/accumulation-vs-distribution |
-| Timeframe Selection | blog.signalpilot.io/timeframe-selection |
-| The Boredom Trap | blog.signalpilot.io/boredom-trap |
-| Breaking Your Own Rules | blog.signalpilot.io/breaking-trading-rules |
-| When to Ignore Divergence | blog.signalpilot.io/when-to-ignore-divergence |
-| First Account Blow | blog.signalpilot.io/first-account-blow |
-| What Is a Trading Edge | blog.signalpilot.io/what-is-trading-edge |
-| How Long to Become Profitable | blog.signalpilot.io/how-long-profitable-trader |
-| The 1% Rule | blog.signalpilot.io/1-percent-rule |
-| TradingView Free Scripts | blog.signalpilot.io/tradingview-free-scripts |
-| Backtesting Without Fooling Yourself | blog.signalpilot.io/backtesting-without-fooling-yourself |
-| Trade Journaling That Works | blog.signalpilot.io/trade-journaling-that-works |
-| What Profitable Traders Know | blog.signalpilot.io/what-profitable-traders-know |
-| Trading While Emotional | blog.signalpilot.io/trading-while-emotional |
-| Support and Resistance | blog.signalpilot.io/support-and-resistance |
-| Candlestick Basics | blog.signalpilot.io/candlestick-basics |
-| How to Identify a Trend | blog.signalpilot.io/how-to-identify-trend |
-| Chart Patterns That Work | blog.signalpilot.io/chart-patterns-that-work |
-| Moving Averages Explained | blog.signalpilot.io/moving-averages-explained |
-| Multi-Timeframe Confirmation | blog.signalpilot.io/multi-timeframe-confirmation |
-| Volume Profile Basics | blog.signalpilot.io/volume-profile-basics |
-| Why Markets Move in Cycles | blog.signalpilot.io/why-markets-move-in-cycles |
-| The Only Pattern That Repeats | blog.signalpilot.io/only-pattern-that-repeats |
-| Cycles Within Cycles | blog.signalpilot.io/cycles-within-cycles |
-| Cycle Failures | blog.signalpilot.io/cycle-failures |
-| How Smart Money Moves | blog.signalpilot.io/how-smart-money-moves |
-| Drawdown Management | blog.signalpilot.io/drawdown-management |
-| When to Cut Losses Early | blog.signalpilot.io/when-to-cut-losses-early |
-| When to Size Up | blog.signalpilot.io/when-to-size-up |
-| Trading Around News | blog.signalpilot.io/trading-around-news |
-| Order Types Explained | blog.signalpilot.io/order-types-explained |
-| How Indicators Work Together | blog.signalpilot.io/how-indicators-work-together |
-| Free vs Professional Tools | blog.signalpilot.io/free-vs-professional-tools |
-| Your First Trade | blog.signalpilot.io/your-first-trade |
+### Post 62 - 🛠️ Product Demo (1:00 PM)
+**Feature**: Pentarch full cycle demonstration
+**URL**: `signalpilot.io`
 
----
+**Copy**:
+One Bitcoin cycle. All five signals.
 
-# 8-WEEK CONTENT SUMMARY
-
-| Week | Education | Quotes | Product | Chronicle | Engagement | Total |
-|------|-----------|--------|---------|-----------|------------|-------|
-| 1 | 5 | 4 | 3 | 1 | 1 | 14 |
-| 2 | 5 | 4 | 3 | 1 | 1 | 14 |
-| 3 | 5 | 4 | 3 | 1 | 1 | 14 |
-| 4 | 5 | 4 | 3 | 1 | 1 | 14 |
-| 5 | 5 | 4 | 3 | 1 | 1 | 14 |
-| 6 | 5 | 4 | 3 | 1 | 1 | 14 |
-| 7 | 5 | 4 | 3 | 1 | 1 | 14 |
-| 8 | 5 | 4 | 3 | 1 | 1 | 14 |
-| **TOTAL** | **40** | **32** | **24** | **8** | **8** | **112** |
-
----
+TD at the accumulation low.
+IGN as markup begins.
+CAP at the climax high.
+WRN as distribution unfolds.
+BDN when decline confirms.
 
-# CONTENT RATIOS
+Historical, not predictive. Educational, not advice.
 
-| Type | Count | Percentage |
-|------|-------|------------|
-| Education | 40 | 36% |
-| Quote Cards | 32 | 29% |
-| Product | 24 | 21% |
-| Chronicle | 8 | 7% |
-| Engagement | 8 | 7% |
+**Image**: Full BTC cycle chart with all Pentarch signals labeled
+**Hashtags**: #Pentarch #Bitcoin #CycleAnalysis
 
 ---
 
-# COMPLIANCE CHECKLIST
+### Post 63 - 📝 Blog Article (5:00 PM)
+**Article**: breakout-vs-fakeout
+**URL**: `blog.signalpilot.io/articles/breakout-vs-fakeout/`
 
-Before posting, verify:
+**Copy**:
+Every fakeout looks like a breakout at first.
 
-- [ ] No directive language ("you should," "look for," "buy," "sell")
-- [ ] No financial advice claims
-- [ ] No guaranteed outcomes or promises
-- [ ] Language is observational ("tends to," "often," "may indicate")
-- [ ] Educational disclaimer present where appropriate
-- [ ] Links are correct and working
-- [ ] Image matches content type
+Volume, momentum, and structure confirmation separate real moves from traps.
 
----
-
-# NOTES
+The best traders don't chase the break—they wait for the retest.
 
-- All blog URLs need verification against actual blog.signalpilot.io slugs
-- Chart screenshots needed for product posts (24 total)
-- Canva quote card templates needed (32 total)
-- Chronicle character art available at signalpilot.io/chronicle
-
----
+Spot the difference → [link]
 
-*Document created for Signal Pilot X content strategy*
-*112 posts | 8 weeks | 2 posts per day*
+**Image**: Blog header image
+**Hashtags**: #Breakouts #F
