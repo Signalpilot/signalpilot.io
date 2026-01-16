@@ -1680,8 +1680,10 @@
     @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
     .shiny-cta span{position:relative;z-index:2;display:inline-block}
 
-    /* Founding Member Badge - Urgency Animation */
+    /* Founding Member Badge - Shiny Gold Border (like CTA buttons) */
+    @property --founding-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
     .founding-badge {
+      --founding-angle:0deg;
       position: absolute;
       top: -12px;
       left: 50%;
@@ -1691,31 +1693,39 @@
       justify-content: center;
       gap: 0.5rem;
       padding: 0.4rem 1rem;
-      background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(245,158,11,0.15));
-      border: 1px solid rgba(251,191,36,0.5);
+      background: linear-gradient(rgba(15,12,8,0.95), rgba(15,12,8,0.95)) padding-box,
+                  conic-gradient(from var(--founding-angle), transparent 0%, #92400e 10%, #fbbf24 25%, #92400e 40%, transparent 50%) border-box;
+      border: 2px solid transparent;
       border-radius: 20px;
       font-size: 0.7rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: #fbbf24;
-      animation: founding-pulse 3s ease-in-out infinite;
+      animation: founding-spin 6s linear infinite;
       white-space: nowrap;
       z-index: 10;
+      box-shadow: inset 0 0 0 1px rgba(251,191,36,0.2);
     }
+    @keyframes founding-spin{0%{--founding-angle:0deg}100%{--founding-angle:360deg}}
     .founding-badge svg {
       width: 12px;
       height: 12px;
       flex-shrink: 0;
     }
-    @keyframes founding-pulse {
-      0%, 100% {
-        box-shadow: 0 0 8px rgba(251,191,36,0.4), 0 0 20px rgba(91,138,255,0.3);
-        border-color: rgba(251,191,36,0.5);
+    /* Safari mobile: Slow down animation */
+    @media (max-width: 768px) {
+      .founding-badge {
+        animation-duration: 8s;
       }
-      50% {
-        box-shadow: 0 0 16px rgba(251,191,36,0.6), 0 0 32px rgba(91,138,255,0.4);
-        border-color: rgba(251,191,36,0.7);
+    }
+    /* Chrome mobile: Static gold gradient (no animation) */
+    @media (max-width: 768px) {
+      html.is-chrome .founding-badge {
+        animation: none !important;
+        background: linear-gradient(rgba(15,12,8,0.95), rgba(15,12,8,0.95)) padding-box,
+                    linear-gradient(135deg, #92400e 0%, #fbbf24 50%, #92400e 100%) border-box !important;
+        border: 2px solid transparent !important;
       }
     }
     .founding-counter {
