@@ -121,6 +121,20 @@ export const config = {
   ],
 };
 
+// Parse cookies from Cookie header
+function parseCookies(cookieHeader) {
+  const cookies = {};
+  if (!cookieHeader) return cookies;
+
+  cookieHeader.split(';').forEach(cookie => {
+    const [name, ...rest] = cookie.trim().split('=');
+    if (name) {
+      cookies[name] = rest.join('=');
+    }
+  });
+  return cookies;
+}
+
 export default function middleware(request) {
   const url = new URL(request.url);
   const pathname = url.pathname;
@@ -130,10 +144,11 @@ export default function middleware(request) {
     return;
   }
 
-  // Get cookies
-  const cookies = request.cookies;
-  const userPreference = cookies.get(PREFERENCE_COOKIE)?.value;
-  const alreadyRedirected = cookies.get(REDIRECTED_COOKIE)?.value;
+  // Parse cookies from header
+  const cookieHeader = request.headers.get('cookie');
+  const cookies = parseCookies(cookieHeader);
+  const userPreference = cookies[PREFERENCE_COOKIE];
+  const alreadyRedirected = cookies[REDIRECTED_COOKIE];
 
   // If user has manually set a preference, respect it (no auto-redirect)
   if (userPreference) {
