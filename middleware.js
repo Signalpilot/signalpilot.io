@@ -114,13 +114,6 @@ function shouldSkipRedirect(pathname) {
   return skipPatterns.some(pattern => pattern.test(pathname));
 }
 
-export const config = {
-  matcher: [
-    // Match all paths except static files
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-  ],
-};
-
 // Parse cookies from Cookie header
 function parseCookies(cookieHeader) {
   const cookies = {};
@@ -136,85 +129,90 @@ function parseCookies(cookieHeader) {
 }
 
 export default function middleware(request) {
-  const url = new URL(request.url);
-  const pathname = url.pathname;
+  try {
+    const url = new URL(request.url);
+    const pathname = url.pathname;
 
-  // Skip static assets and special paths
-  if (shouldSkipRedirect(pathname)) {
-    return;
-  }
-
-  // Parse cookies from header
-  const cookieHeader = request.headers.get('cookie');
-  const cookies = parseCookies(cookieHeader);
-  const userPreference = cookies[PREFERENCE_COOKIE];
-  const alreadyRedirected = cookies[REDIRECTED_COOKIE];
-
-  // If user has manually set a preference, respect it (no auto-redirect)
-  if (userPreference) {
-    return;
-  }
-
-  // If we've already redirected this session, don't redirect again
-  if (alreadyRedirected) {
-    return;
-  }
-
-  // Get current locale from URL
-  const currentLocale = getCurrentLocale(pathname);
-
-  // Determine target locale
-  // Priority: 1. Browser language, 2. IP country
-  const acceptLanguage = request.headers.get('accept-language');
-  const country = request.headers.get('x-vercel-ip-country');
-
-  let targetLocale = getBrowserLocale(acceptLanguage);
-
-  // Fall back to country-based detection if browser language doesn't match
-  if (!targetLocale) {
-    targetLocale = getCountryLocale(country);
-  }
-
-  // Fall back to default if nothing matches
-  if (!targetLocale) {
-    targetLocale = DEFAULT_LOCALE;
-  }
-
-  // If already on the correct locale, let the request proceed
-  if (currentLocale === targetLocale) {
-    return;
-  }
-
-  // Build redirect URL
-  let newPathname;
-  if (targetLocale === 'en') {
-    // English is at root - remove locale prefix if present
-    newPathname = pathname.replace(/^\/[a-z]{2}(\/|$)/, '/');
-  } else {
-    // Add locale prefix
-    if (currentLocale === 'en') {
-      // Currently at root, add prefix
-      newPathname = `/${targetLocale}${pathname}`;
-    } else {
-      // Replace existing prefix
-      newPathname = pathname.replace(/^\/[a-z]{2}(\/|$)/, `/${targetLocale}$1`);
+    // Skip static assets and special paths
+    if (shouldSkipRedirect(pathname)) {
+      return;
     }
+
+    // Parse cookies from header
+    const cookieHeader = request.headers.get('cookie');
+    const cookies = parseCookies(cookieHeader);
+    const userPreference = cookies[PREFERENCE_COOKIE];
+    const alreadyRedirected = cookies[REDIRECTED_COOKIE];
+
+    // If user has manually set a preference, respect it (no auto-redirect)
+    if (userPreference) {
+      return;
+    }
+
+    // If we've already redirected this session, don't redirect again
+    if (alreadyRedirected) {
+      return;
+    }
+
+    // Get current locale from URL
+    const currentLocale = getCurrentLocale(pathname);
+
+    // Determine target locale
+    // Priority: 1. Browser language, 2. IP country
+    const acceptLanguage = request.headers.get('accept-language');
+    const country = request.headers.get('x-vercel-ip-country');
+
+    let targetLocale = getBrowserLocale(acceptLanguage);
+
+    // Fall back to country-based detection if browser language doesn't match
+    if (!targetLocale) {
+      targetLocale = getCountryLocale(country);
+    }
+
+    // Fall back to default if nothing matches
+    if (!targetLocale) {
+      targetLocale = DEFAULT_LOCALE;
+    }
+
+    // If already on the correct locale, let the request proceed
+    if (currentLocale === targetLocale) {
+      return;
+    }
+
+    // Build redirect URL
+    let newPathname;
+    if (targetLocale === 'en') {
+      // English is at root - remove locale prefix if present
+      newPathname = pathname.replace(/^\/[a-z]{2}(\/|$)/, '/');
+    } else {
+      // Add locale prefix
+      if (currentLocale === 'en') {
+        // Currently at root, add prefix
+        newPathname = '/' + targetLocale + pathname;
+      } else {
+        // Replace existing prefix
+        newPathname = pathname.replace(/^\/[a-z]{2}(\/|$)/, '/' + targetLocale + '$1');
+      }
+    }
+
+    // Ensure trailing slash consistency
+    if (!newPathname.endsWith('/') && newPathname.indexOf('.') === -1) {
+      newPathname += '/';
+    }
+
+    const redirectUrl = new URL(newPathname, request.url);
+    redirectUrl.search = url.search; // Preserve query params
+
+    // Create redirect response with cookie to prevent redirect loops
+    const response = Response.redirect(redirectUrl.toString(), 307);
+
+    // Set cookie to mark that we've redirected (expires in 24 hours)
+    // This prevents redirect loops while allowing users to navigate manually
+    response.headers.append('Set-Cookie', REDIRECTED_COOKIE + '=1; Path=/; Max-Age=86400; SameSite=Lax');
+
+    return response;
+  } catch (e) {
+    // On any error, let the request proceed normally
+    return;
   }
-
-  // Ensure trailing slash consistency
-  if (!newPathname.endsWith('/') && !newPathname.includes('.')) {
-    newPathname += '/';
-  }
-
-  const redirectUrl = new URL(newPathname, request.url);
-  redirectUrl.search = url.search; // Preserve query params
-
-  // Create redirect response with cookie to prevent redirect loops
-  const response = Response.redirect(redirectUrl.toString(), 307);
-
-  // Set cookie to mark that we've redirected (expires in 24 hours)
-  // This prevents redirect loops while allowing users to navigate manually
-  response.headers.append('Set-Cookie', `${REDIRECTED_COOKIE}=1; Path=/; Max-Age=86400; SameSite=Lax`);
-
-  return response;
 }
