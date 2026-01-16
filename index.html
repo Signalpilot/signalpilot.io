@@ -1,6 +1,26 @@
 <!doctype html>
 <html lang="en" dir="ltr" data-theme="dark">
 <head>
+  <!-- Geo-redirect: redirect users to their preferred language on first visit -->
+  <script>
+    (function() {
+      // Skip if user has manually set a preference
+      if (document.cookie.indexOf('sp_locale_pref=') !== -1) return;
+      // Skip if already redirected in this session
+      if (document.cookie.indexOf('sp_geo_redirected=') !== -1) return;
+
+      var supported = ['de', 'fr', 'es', 'it', 'ru', 'ar', 'pt', 'tr', 'ja', 'hu', 'nl'];
+      var lang = (navigator.language || navigator.userLanguage || '').toLowerCase().split('-')[0];
+
+      if (supported.indexOf(lang) !== -1) {
+        // Set cookie to prevent redirect loops (24 hour expiry)
+        document.cookie = 'sp_geo_redirected=1; path=/; max-age=86400; SameSite=Lax';
+        // Redirect to language-specific page
+        window.location.replace('/' + lang + '/');
+      }
+    })();
+  </script>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LE5N7LQ828"></script>
   <script>
