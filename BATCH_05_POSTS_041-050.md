@@ -221,7 +221,7 @@ Win rate is overrated. #trading #riskmanagement #riskreward #forex #crypto
 |-------|-------|
 | Pillar | P3: Market Mechanics |
 | Type | Blog Article |
-| Source | https://blog.signalpilot.io/articles/volume-profile-guide/ |
+| Source | https://blog.signalpilot.io/articles/volume-profile-basics/ |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel | TikTok: Discovery |
 
@@ -254,7 +254,7 @@ Price tends to consolidate at HVN, move quickly through LVN.
 ```
 Full volume profile guide:
 
-https://blog.signalpilot.io/articles/volume-profile-guide/
+https://blog.signalpilot.io/articles/volume-profile-basics/
 
 #volumeprofile #trading #marketstructure
 ```
@@ -602,7 +602,7 @@ Protect your capital. #trading #stoploss #riskmanagement #forex #crypto
 |-------|-------|
 | Pillar | P1: Liquidity Lie |
 | Type | Blog Article |
-| Source | https://blog.signalpilot.io/articles/smart-money-concepts/ |
+| Source | https://blog.signalpilot.io/articles/how-smart-money-moves/ |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel | TikTok: Explainer |
 
@@ -635,7 +635,7 @@ Key SMC concepts:
 ```
 Not magic. Market mechanics.
 
-Full breakdown: https://blog.signalpilot.io/articles/smart-money-concepts/
+Full breakdown: https://blog.signalpilot.io/articles/how-smart-money-moves/
 
 #smartmoney #SMC #trading
 ```

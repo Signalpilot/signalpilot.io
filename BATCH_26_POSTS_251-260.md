@@ -1268,7 +1268,7 @@
 
 ## POST 260 — 📚 DOCS: ALERT SETUP GUIDE
 
-**Source:** https://docs.signalpilot.io/guides/alerts/
+**Source:** https://docs.signalpilot.io/how-to-alerts
 
 ---
 

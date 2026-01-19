@@ -1258,7 +1258,7 @@
 
 ## POST 270 — 📚 DOCS: MOBILE TRADING SETUP
 
-**Source:** https://docs.signalpilot.io/guides/mobile-setup/
+**Source:** https://docs.signalpilot.io/start-quick
 
 ---
 

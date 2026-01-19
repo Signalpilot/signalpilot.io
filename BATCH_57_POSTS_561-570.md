@@ -1365,7 +1365,7 @@ Each session:
 
 ## POST 570 — 📚 Docs: Glossary of Terms
 
-**Source:** `https://docs.signalpilot.io/glossary/`
+**Source:** https://docs.signalpilot.io/ref-glossary
 
 ---
 

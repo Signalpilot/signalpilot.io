@@ -1800,7 +1800,7 @@
 
 # POST 520 — 📚 Docs: Frequently Asked Questions
 
-**Source:** `https://docs.signalpilot.io/faq/`
+**Source:** https://docs.signalpilot.io/about-faq
 
 ---
 

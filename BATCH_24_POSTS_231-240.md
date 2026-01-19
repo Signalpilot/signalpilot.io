@@ -547,7 +547,7 @@ Save this. 🔖
 
 # POST 235 — 🛠️ HARMONIC OSCILLATOR COMPONENTS
 
-**Source:** https://docs.signalpilot.io/indicators/harmonic-oscillator/
+**Source:** https://docs.signalpilot.io/harmonic-oscillator-v10
 
 ---
 
@@ -1211,7 +1211,7 @@ Full lesson in bio 🔗
 
 # POST 240 — 📚 MULTI-MONITOR SETUP
 
-**Source:** https://docs.signalpilot.io/guides/multi-monitor-setup/
+**Source:** https://docs.signalpilot.io/start-quick
 
 ---
 

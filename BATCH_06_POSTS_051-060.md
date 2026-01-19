@@ -205,7 +205,7 @@ Levels flip. #trading #supportresistance #forex #crypto
 |-------|-------|
 | Pillar | P4: Trading Psychology |
 | Type | Blog Article |
-| Source | https://blog.signalpilot.io/articles/why-most-traders-fail/ |
+| Source | https://blog.signalpilot.io/articles/why-traders-blow-first-account/ |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel | TikTok: Reality check |
 
@@ -239,7 +239,7 @@ In that order. No shortcuts.
 ```
 Full article on why most traders fail:
 
-https://blog.signalpilot.io/articles/why-most-traders-fail/
+https://blog.signalpilot.io/articles/why-traders-blow-first-account/
 
 #tradingmistakes #trading #psychology
 ```
@@ -576,7 +576,7 @@ Context over pattern. #trading #candlesticks #doji #forex #crypto
 |-------|-------|
 | Pillar | P4: Trading Psychology |
 | Type | Blog Article |
-| Source | https://blog.signalpilot.io/articles/psychology-round-numbers/ |
+| Source | https://blog.signalpilot.io/articles/support-and-resistance-explained/ |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel | TikTok: Insight |
 
@@ -606,7 +606,7 @@ Self-fulfilling prophecy.
 ```
 Full article on round number psychology:
 
-https://blog.signalpilot.io/articles/psychology-round-numbers/
+https://blog.signalpilot.io/articles/support-and-resistance-explained/
 
 #tradingpsychology #roundnumbers #trading
 ```

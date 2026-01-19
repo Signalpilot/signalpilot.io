@@ -294,7 +294,7 @@ Full lesson in bio 🔗
 
 # POST 193 — 📝 THE POWER OF SAYING NO
 
-**Source:** https://blog.signalpilot.io/articles/power-of-saying-no/
+**Source:** https://blog.signalpilot.io/articles/the-boredom-trap/
 
 ---
 
@@ -834,7 +834,7 @@ Full lesson in bio 🔗
 
 # POST 197 — 📝 WHEN TO STOP TRADING
 
-**Source:** https://blog.signalpilot.io/articles/when-to-stop-trading/
+**Source:** https://blog.signalpilot.io/articles/trading-while-emotional/
 
 ---
 

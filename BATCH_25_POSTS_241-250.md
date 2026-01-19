@@ -1278,7 +1278,7 @@
 
 ## POST 250 — 📚 DOCS: INDICATOR STACKING GUIDE
 
-**Source:** https://docs.signalpilot.io/guides/indicator-stacking/
+**Source:** https://docs.signalpilot.io/ref-workflow
 
 ---
 

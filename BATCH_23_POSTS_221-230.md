@@ -541,7 +541,7 @@ Save this. 🔖
 
 # POST 225 — 🛠️ PENTARCH SOW SIGNAL DEEP DIVE
 
-**Source:** https://docs.signalpilot.io/indicators/pentarch/
+**Source:** https://docs.signalpilot.io/pentarch-v10
 
 ---
 
@@ -1187,7 +1187,7 @@ Full lesson in bio 🔗
 
 # POST 230 — 📚 PERFORMANCE OPTIMIZATION
 
-**Source:** https://docs.signalpilot.io/guides/performance-optimization/
+**Source:** https://docs.signalpilot.io/ref-troubleshooting
 
 ---
 

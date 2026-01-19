@@ -313,7 +313,7 @@ Full lesson in bio 🔗
 
 # POST 183 — 📝 THE IMPORTANCE OF SCREEN TIME
 
-**Source:** https://blog.signalpilot.io/articles/importance-of-screen-time/
+**Source:** https://blog.signalpilot.io/articles/how-long-to-become-profitable/
 
 ---
 
@@ -849,7 +849,7 @@ Full lesson in bio 🔗
 
 # POST 187 — 📝 TRADING AS A BUSINESS
 
-**Source:** https://blog.signalpilot.io/articles/trading-as-business/
+**Source:** https://blog.signalpilot.io/articles/what-profitable-traders-know/
 
 ---
 

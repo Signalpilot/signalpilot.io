@@ -296,7 +296,7 @@ Full lesson in bio 🔗
 
 # POST 203 — 📝 TRADER'S MORNING ROUTINE
 
-**Source:** https://blog.signalpilot.io/articles/morning-routine/
+**Source:** https://blog.signalpilot.io/articles/building-a-pre-trade-checklist/
 
 ---
 
@@ -821,7 +821,7 @@ Full lesson in bio 🔗
 
 # POST 207 — 📝 AVOIDING TILT
 
-**Source:** https://blog.signalpilot.io/articles/avoiding-tilt/
+**Source:** https://blog.signalpilot.io/articles/revenge-trading-recovery/
 
 ---
 
