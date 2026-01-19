@@ -51,8 +51,9 @@
   <!-- Gumroad Checkout -->
   <script src="https://gumroad.com/js/gumroad.js"></script>
 
-  <!-- Preload hero video for faster initial display -->
-  <link rel="preload" href="assets/videos/hero-demo.mp4" as="video" type="video/mp4" fetchpriority="high">
+  <!-- Preload hero comparison images for faster initial display -->
+  <link rel="preload" href="assets/showcase/chart-without.jpg" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/showcase/chart-with.jpg" as="image" fetchpriority="high">
 
   <!-- Preload mobile backgrounds for instant display -->
   <link rel="preload" href="assets/videos/starfield-bg-mobile.mp4?v=23" as="video" type="video/mp4" fetchpriority="high">
@@ -3612,190 +3613,225 @@
 
         </div>
 
-        <!-- HERO VIDEO - Contained -->
-        <div style="margin-bottom:3rem;max-width:1000px;margin-left:auto;margin-right:auto">
+        <!-- HERO COMPARISON SLIDER -->
+        <div style="margin-bottom:3rem;max-width:1100px;margin-left:auto;margin-right:auto">
 
-            <!-- PENTARCH CHART SHOWCASE -->
-            <div style="position:relative;border-radius:12px;overflow:hidden;background:#0a0e18;margin:0 auto;aspect-ratio:2/1;width:100%;">
+            <!-- Slider Hint -->
+            <p style="text-align:center;margin-bottom:1rem;font-size:0.95rem;color:var(--muted)">
+              <strong style="color:var(--brand)">👇 Drag to compare</strong> — Same chart. Different clarity.
+            </p>
 
-              <!-- Chart Video -->
-              <video
-                id="heroVideo"
-                src="assets/videos/hero-demo.mp4"
-                autoplay
-                loop
-                muted
-                playsinline
-                webkit-playsinline
-                preload="auto"
-                poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%230a0e18' width='1200' height='600'/%3E%3C/svg%3E"
-                style="width:100%;height:auto;display:block;background:#0a0e18;pointer-events:none"
-                width="1200"
-                height="600"
-              >
-                <source src="assets/videos/hero-demo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              
-              <!-- Overlay Badge - Reduced Opacity -->
-              <div style="position:absolute;top:1rem;right:1rem;background:rgba(12,16,27,.92);padding:.5rem .8rem;border-radius:8px;border:1px solid rgba(91,138,255,.25);display:flex;align-items:center;gap:.5rem">
-                <span style="width:6px;height:6px;border-radius:50%;background:#3ed598;box-shadow:0 0 8px rgba(62,213,152,.6)"></span>
-                <span style="font-size:.8rem;font-weight:700;color:#3ed598">LIVE CHART</span>
+            <!-- Hero Comparison Slider Container -->
+            <div id="hero-comparison-slider" role="region" aria-label="Before and after comparison slider" style="position:relative;max-width:1100px;width:100%;margin:0 auto;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 20px 60px rgba(0,0,0,.5);touch-action:pan-x;background:#0a0e18">
+
+              <!-- Without Signal Pilot (Background) -->
+              <div class="hero-comparison-image" style="position:relative;width:100%;aspect-ratio:16/9;background:#0a0e18">
+                <img
+                  src="assets/showcase/chart-without.jpg"
+                  alt="Chart without Signal Pilot"
+                  loading="eager"
+                  style="width:100%;height:100%;object-fit:contain;display:block"
+                />
+                <!-- Label -->
+                <div style="position:absolute;bottom:1rem;left:1rem;background:rgba(12,16,27,.9);padding:.4rem .8rem;border-radius:6px;border:1px solid rgba(255,100,100,.3)">
+                  <span style="font-size:.75rem;font-weight:600;color:#ff6b6b;text-transform:uppercase;letter-spacing:.05em">Without Signal Pilot</span>
+                </div>
               </div>
+
+              <!-- With Signal Pilot (Overlay - slides over) -->
+              <div id="hero-slider-overlay" class="hero-comparison-image" style="position:absolute;top:0;left:0;width:50%;height:100%;overflow:hidden;z-index:10">
+                <img
+                  id="hero-overlay-image"
+                  src="assets/showcase/chart-with.jpg"
+                  alt="Chart with Signal Pilot"
+                  loading="eager"
+                  style="position:absolute;top:0;left:0;width:100%;height:100%;max-width:none;object-fit:contain;display:block;pointer-events:none"
+                />
+                <!-- Label -->
+                <div style="position:absolute;bottom:1rem;left:1rem;background:rgba(12,16,27,.9);padding:.4rem .8rem;border-radius:6px;border:1px solid rgba(62,213,152,.3)">
+                  <span style="font-size:.75rem;font-weight:600;color:#3ed598;text-transform:uppercase;letter-spacing:.05em">With Signal Pilot</span>
+                </div>
+              </div>
+
+              <!-- Slider Handle -->
+              <div id="hero-slider-handle" role="slider" aria-label="Comparison slider position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0" style="position:absolute;top:0;left:50%;width:48px;height:100%;transform:translateX(-50%);z-index:100;cursor:ew-resize;touch-action:pan-x">
+                <!-- Hit area -->
+                <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:100%;cursor:ew-resize"></div>
+                <!-- Visual line -->
+                <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:3px;height:100%;background:rgba(255,255,255,.9);box-shadow:0 0 10px rgba(255,255,255,.3);pointer-events:none"></div>
+                <!-- Handle circle -->
+                <div id="hero-handle-circle" class="pulse-animate" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;background:#fff;border-radius:50%;box-shadow:0 4px 16px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;pointer-events:none">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0e18" stroke-width="2.5">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0e18" stroke-width="2.5" style="margin-left:-10px">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </div>
+
             </div>
-            
-            <!-- Video Force Play Script + Mobile Fix -->
-            <script>
-              (function() {
-                const video = document.getElementById('heroVideo');
-                if (!video) return;
+        </div>
 
-                // Set playback speed (1.0 = normal, 1.5 = 50% faster, 2.25 = 2.25x speed)
-                video.playbackRate = 2.25;
+        <!-- Hero Comparison Slider Script -->
+        <script>
+        (function() {
+          const slider = document.getElementById('hero-comparison-slider');
+          const handle = document.getElementById('hero-slider-handle');
+          const handleCircle = document.getElementById('hero-handle-circle');
+          const overlay = document.getElementById('hero-slider-overlay');
+          const overlayImage = document.getElementById('hero-overlay-image');
 
-                // ALL DEVICES: Force dimensions and visibility - SUPER VISIBLE
-                function forceVideoVisible() {
-                  const width = window.innerWidth;
-                  const isMobile = width <= 768;
-                  const isTablet = width > 768 && width <= 1024;
-                  const isDesktop = width > 1024;
+          if (!slider || !handle || !overlay) return;
 
-                  // Force video container styles FOR ALL DEVICES
-                  const container = video.parentElement;
-                  if (container) {
-                    container.style.display = 'block';
-                    container.style.visibility = 'visible';
-                    container.style.background = '#0a0e18';
+          let isDragging = false;
+          let hasInteracted = false;
 
-                    if (isMobile) {
-                      container.style.minHeight = '300px';
-                    }
-                  }
+          // Auto-sweep animation on load
+          function autoSweep() {
+            let progress = 0;
+            const duration = 2500;
+            const startTime = Date.now();
 
-                  // Force video element styles - VISIBLE ON ALL DEVICES
-                  video.style.display = 'block';
-                  video.style.visibility = 'visible';
-                  video.style.opacity = '1';
-                  video.style.width = '100%';
-                  video.style.objectFit = 'cover';
-                  video.style.background = '#0a0e18';
+            function animate() {
+              const elapsed = Date.now() - startTime;
+              progress = Math.min(elapsed / duration, 1);
 
-                  // Device-specific sizing
-                  if (isMobile) {
-                    video.style.minHeight = '300px';
-                    video.style.maxHeight = '550px';
-                    video.style.height = 'auto';
-                    video.style.borderRadius = '12px';
-                  } else if (isTablet) {
-                    video.style.height = '100%';
-                    video.style.maxHeight = '600px';
-                  } else {
-                    // Desktop
-                    video.style.height = '100%';
-                  }
-                }
+              // Ease in-out
+              const eased = progress < 0.5
+                ? 2 * progress * progress
+                : 1 - Math.pow(-2 * progress + 2, 2) / 2;
 
-                // Run on load and after delay to override other scripts
-                forceVideoVisible();
-                setTimeout(forceVideoVisible, 1000);
+              const percentage = eased * 100;
+              setSliderPosition(percentage, true);
 
-                // Re-run on resize (throttled to prevent spam during drag)
-                let resizeTimeout;
-                window.addEventListener('resize', () => {
-                  if (resizeTimeout) return;
-                  resizeTimeout = setTimeout(() => {
-                    forceVideoVisible();
-                    resizeTimeout = null;
-                  }, 200);
-                });
+              if (progress < 1 && !hasInteracted) {
+                requestAnimationFrame(animate);
+              }
+            }
+            animate();
+          }
 
-                // Aggressive play attempts
-                function tryPlay(source) {
-                  video.play().then(() => {
-                    // Video playing successfully
-                  }).catch(e => {
-                    // Autoplay blocked or failed
-                  });
-                }
+          function setSliderPosition(percentage, smooth = false) {
+            percentage = Math.max(0, Math.min(percentage, 100));
 
-                // IMMEDIATE play attempt - before anything else
-                video.play().catch(() => {});
+            if (smooth && !isDragging) {
+              handle.classList.add('smooth-transition');
+              overlay.classList.add('smooth-transition');
+              setTimeout(() => {
+                handle.classList.remove('smooth-transition');
+                overlay.classList.remove('smooth-transition');
+              }, 300);
+            }
 
-                // Try to play immediately
-                tryPlay('initial');
+            handle.style.left = percentage + '%';
+            overlay.style.width = percentage + '%';
+            handle.setAttribute('aria-valuenow', Math.round(percentage));
+          }
 
-                // Force play after short delay
-                setTimeout(() => {
-                  video.play().catch(() => {});
-                }, 100);
+          function updateOverlayImageWidth() {
+            if (overlayImage && slider) {
+              const width = slider.clientWidth;
+              if (width > 0) {
+                overlayImage.style.width = width + 'px';
+              }
+            }
+          }
 
-                setTimeout(() => {
-                  video.play().catch(() => {});
-                }, 300);
+          function updateSliderFromPosition(clientX, smooth = false) {
+            const rect = slider.getBoundingClientRect();
+            let x = clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+            setSliderPosition(percentage, smooth);
+          }
 
-                // Wait for loadeddata event
-                video.addEventListener('loadeddata', function() {
-                  tryPlay('loadeddata');
-                  // Extra play attempt
-                  setTimeout(() => video.play().catch(() => {}), 50);
-                }, { once: true });
+          function markInteraction() {
+            hasInteracted = true;
+            if (handleCircle) handleCircle.classList.remove('pulse-animate');
+          }
 
-                // Wait for canplay event
-                video.addEventListener('canplay', function() {
-                  tryPlay('canplay');
-                }, { once: true });
+          // Mouse events
+          handle.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            markInteraction();
+            document.body.style.cursor = 'ew-resize';
+          });
 
-                // Wait for canplaythrough event (fully loaded)
-                video.addEventListener('canplaythrough', function() {
-                  tryPlay('canplaythrough');
-                }, { once: true });
+          document.addEventListener('mousemove', (e) => {
+            if (isDragging) updateSliderFromPosition(e.clientX, false);
+          });
 
-                // Retry play on user interaction
-                let played = false;
-                document.addEventListener('click', function() {
-                  if (!played && video.paused) {
-                    tryPlay('click');
-                    played = true;
-                  }
-                });
+          document.addEventListener('mouseup', () => {
+            isDragging = false;
+            document.body.style.cursor = '';
+          });
 
-                // Also try to play on touch (mobile)
-                document.addEventListener('touchstart', function() {
-                  if (!played && video.paused) {
-                    tryPlay('touch');
-                    played = true;
-                  }
-                });
+          // Touch events
+          handle.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isDragging = true;
+            markInteraction();
+          }, { passive: false });
 
-                // Ensure loop
-                video.addEventListener('ended', function() {
-                  video.currentTime = 0;
-                  video.play();
-                });
+          slider.addEventListener('touchstart', (e) => {
+            if (!handle.contains(e.target)) {
+              e.preventDefault();
+              isDragging = true;
+              markInteraction();
+              updateSliderFromPosition(e.touches[0].clientX, false);
+            }
+          }, { passive: false });
 
-                // Check if video is actually playing
-                setTimeout(() => {
-                  // Silent check - no logging needed in production
-                  if (video.paused) {
-                    // Video requires user interaction
-                  }
-                }, 2000);
+          document.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+              e.preventDefault();
+              updateSliderFromPosition(e.touches[0].clientX, false);
+            }
+          }, { passive: false });
 
-                // Pause when scrolled out of view to save GPU
-                video.isInView = true;
-                const observer = new IntersectionObserver((entries) => {
-                  entries.forEach(entry => {
-                    video.isInView = entry.isIntersecting;
-                    if (entry.isIntersecting && !document.hidden) {
-                      video.play().catch(() => {});
-                    } else {
-                      video.pause();
-                    }
-                  });
-                }, { threshold: 0, rootMargin: '100px' });
-                observer.observe(video);
-              })();
-            </script>
+          document.addEventListener('touchend', () => {
+            isDragging = false;
+          });
+
+          // Click anywhere
+          slider.addEventListener('click', (e) => {
+            if (!isDragging && e.target !== handle && !handle.contains(e.target)) {
+              markInteraction();
+              updateSliderFromPosition(e.clientX, true);
+            }
+          });
+
+          // Keyboard
+          handle.addEventListener('keydown', (e) => {
+            let currentPercentage = parseFloat(handle.style.left) || 50;
+            if (e.key === 'ArrowLeft') {
+              e.preventDefault();
+              markInteraction();
+              setSliderPosition(currentPercentage - 5, true);
+            } else if (e.key === 'ArrowRight') {
+              e.preventDefault();
+              markInteraction();
+              setSliderPosition(currentPercentage + 5, true);
+            }
+          });
+
+          // Initialize
+          function init() {
+            updateOverlayImageWidth();
+            setSliderPosition(0, false); // Start at 0 for auto-sweep
+          }
+
+          window.addEventListener('load', () => {
+            init();
+            setTimeout(() => {
+              if (!hasInteracted) autoSweep();
+            }, 800);
+          });
+
+          window.addEventListener('resize', updateOverlayImageWidth);
+          init();
+        })();
+        </script>
 
             </div>
 
