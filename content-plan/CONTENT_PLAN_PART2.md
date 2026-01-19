@@ -51178,6 +51178,133 @@ Follow TikTok timing showing plan options.
 
 ---
 
+# POST 611 — 🌐 Marketing: Risk-Free Trial
+
+**Source:** `https://signalpilot.io`
+
+---
+
+## 𝕏 Twitter
+
+**Copy:**
+> Still on the fence? Here's what makes it easy:
+>
+> → 7-day money-back guarantee
+> → No questions asked
+> → Full access from day one
+> → Cancel anytime
+>
+> Try Signal Pilot risk-free. If it's not for you, get your money back.
+>
+> [link]
+
+**Image:** Clean graphic showing "7-Day Money-Back Guarantee" with Signal Pilot branding
+
+**Hashtags:** #SignalPilot #RiskFree #TradingTools #MoneyBackGuarantee #TryItFree
+
+---
+
+## 📸 Instagram
+
+**Caption:**
+> 🛡️ RISK-FREE TRIAL
+>
+> We know choosing trading tools is a big decision.
+>
+> That's why every Signal Pilot subscription comes with a 7-day money-back guarantee.
+>
+> HERE'S HOW IT WORKS:
+>
+> ✅ Sign up for any plan
+> ✅ Get full access to all 7 indicators
+> ✅ Test everything on your charts
+> ✅ Explore the full documentation
+> ✅ Join the community
+>
+> IF IT'S NOT FOR YOU:
+>
+> → Contact us within 7 days
+> → Get a full refund
+> → No questions asked
+> → No hard feelings
+>
+> We believe in our tools. We want you to believe in them too—before you commit.
+>
+> Try Signal Pilot risk-free. Link in bio.
+>
+> ⚠️ Educational content only. Not financial advice.
+
+**Image Spec:** 1080x1080 — Shield icon with "7-Day Money-Back Guarantee" text, Signal Pilot logo, dark premium background
+
+**Hashtags:** #SignalPilot #RiskFree #MoneyBackGuarantee #TradingTools #TryBeforeYouBuy #TradingIndicators #TechnicalAnalysis #CryptoTrading #StockTrading #ForexTrading
+
+---
+
+## 🎬 TikTok
+
+**Hook:** "Scared to try new trading tools? Here's why you shouldn't be..."
+
+**Script:**
+> Scared to try new trading tools?
+>
+> I get it. You've probably been burned before.
+>
+> But here's what Signal Pilot offers:
+>
+> Seven-day money-back guarantee.
+>
+> Full access to all seven indicators from day one.
+>
+> If you don't love it? Full refund. No questions asked.
+>
+> We're confident enough in our tools to let you test them risk-free.
+>
+> Link in bio to start your trial.
+
+**Visual Cues:**
+- Open with "worried" expression or hesitant gesture
+- Show guarantee badge/shield
+- Quick montage of indicator dashboards
+- End with confident nod and CTA
+
+**Duration:** 30-45 seconds
+
+**Music:** Upbeat, confidence-building track
+
+**Hashtags:** #SignalPilot #TradingTools #RiskFree #MoneyBackGuarantee #TradingTok #LearnToTrade
+
+---
+
+## 🎨 Canva Instructions
+
+**Template:** Marketing - Guarantee
+**Size:** 1080x1080 (Instagram), 1080x1920 (Stories/TikTok)
+
+**Elements:**
+- Large shield icon (gold accent #c9a962)
+- "7-DAY MONEY-BACK GUARANTEE" headline
+- Bullet points: Full Access, No Questions, Risk-Free
+- Signal Pilot logo bottom center
+- Dark background (#0a0a0f)
+
+---
+
+## 🎬 CapCut Instructions
+
+**Style:** Trust-building promo
+**Duration:** 30-45 seconds
+
+**Sequence:**
+1. Hook text: "Risk-free trading tools?"
+2. Shield/guarantee badge animation
+3. Quick cuts of indicator features
+4. Testimonial-style confidence building
+5. CTA: "Try Signal Pilot today"
+
+**Effects:** Subtle glow on guarantee text, smooth transitions
+
+---
+
 # POST 612 — EDUCATION HUB
 ## Volume Basics
 
