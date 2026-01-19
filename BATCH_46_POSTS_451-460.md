@@ -412,7 +412,7 @@
 
 ## POST 453 — 📝 Blog: The Danger of Hindsight Analysis
 
-**Source:** `https://blog.signalpilot.io/articles/danger-of-hindsight-analysis/`
+**Source:** `https://blog.signalpilot.io/articles/why-backtesting-results-are-worthless/`
 
 ---
 
@@ -1130,7 +1130,7 @@
 
 ## POST 457 — 📝 Blog: Building a Pre-Trade Checklist
 
-**Source:** `https://blog.signalpilot.io/articles/pre-trade-checklist/`
+**Source:** `https://blog.signalpilot.io/articles/building-a-pre-trade-checklist/`
 
 ---
 
@@ -1332,7 +1332,7 @@
 
 ## POST 458 — 🔮 Chronicle: The Scales of Truth
 
-**Source:** `https://signalpilot.io/chronicle/the-scales-of-truth/`
+**Source:** `https://signalpilot.io/chronicle/the-scales/`
 
 ---
 
@@ -1683,7 +1683,7 @@
 
 ## POST 460 — 📚 Docs: Troubleshooting Common Issues
 
-**Source:** `https://docs.signalpilot.io/troubleshooting/`
+**Source:** `https://docs.signalpilot.io/ref-troubleshooting`
 
 ---
 

@@ -397,7 +397,7 @@
 
 ## POST 443 — 📝 Blog: Recovery After a Losing Streak
 
-**Source:** `https://blog.signalpilot.io/articles/recovery-after-losing-streak/`
+**Source:** `https://blog.signalpilot.io/articles/revenge-trading-recovery/`
 
 ---
 
@@ -1103,7 +1103,7 @@
 
 ## POST 447 — 📝 Blog: Journaling Beyond P&L
 
-**Source:** `https://blog.signalpilot.io/articles/journaling-beyond-pnl/`
+**Source:** `https://blog.signalpilot.io/articles/trade-journaling-that-works/`
 
 ---
 
@@ -1294,7 +1294,7 @@
 
 ## POST 448 — 🔮 Chronicle: The Commander's Burden
 
-**Source:** `https://signalpilot.io/chronicle/the-commanders-burden/`
+**Source:** `https://signalpilot.io/chronicle/the-commander/`
 
 ---
 
@@ -1654,7 +1654,7 @@
 
 ## POST 450 — 📚 Docs: Indicator Settings Overview
 
-**Source:** `https://docs.signalpilot.io/settings/`
+**Source:** `https://docs.signalpilot.io/configuration-wizard`
 
 ---
 

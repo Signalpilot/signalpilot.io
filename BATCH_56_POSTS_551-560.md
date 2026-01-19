@@ -365,7 +365,7 @@
 
 ## POST 553 — 📝 Trading as a Business
 
-**Source:** `https://blog.signalpilot.io/articles/trading-as-business/`
+**Source:** `https://blog.signalpilot.io/articles/what-profitable-traders-know/`
 
 ---
 
@@ -945,7 +945,7 @@ Each feature:
 
 ## POST 557 — 📝 The First Hour Trading Trap
 
-**Source:** `https://blog.signalpilot.io/articles/first-hour-trading-trap/`
+**Source:** `https://blog.signalpilot.io/articles/best-times-to-trade/`
 
 ---
 
@@ -1097,7 +1097,7 @@ Each trap:
 
 ## POST 558 — 🔮 Chronicle: The Arbiter's Judgment
 
-**Source:** `https://signalpilot.io/chronicle/the-arbiters-judgment/`
+**Source:** `https://signalpilot.io/chronicle/the-arbiter/`
 
 ---
 
@@ -1410,7 +1410,7 @@ Each trap:
 
 ## POST 560 — 📚 Docs: Video Tutorial Library
 
-**Source:** `https://docs.signalpilot.io/videos/`
+**Source:** `https://docs.signalpilot.io/start-here`
 
 ---
 

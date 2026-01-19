@@ -426,7 +426,7 @@
 
 # POST 593 — 📝 Accepting Losses as Part of the Game
 
-**Source:** `https://blog.signalpilot.io/articles/accepting-losses/`
+**Source:** `https://blog.signalpilot.io/articles/psychology-of-getting-stopped-out/`
 
 ---
 
@@ -1145,7 +1145,7 @@
 
 # POST 597 — 📝 The 80/20 Rule in Trading
 
-**Source:** `https://blog.signalpilot.io/articles/80-20-rule-trading/`
+**Source:** `https://blog.signalpilot.io/articles/what-profitable-traders-know/`
 
 ---
 
@@ -1701,7 +1701,7 @@
 
 # POST 600 — 📚 Docs: Quick Start Guide
 
-**Source:** `https://docs.signalpilot.io/quickstart/`
+**Source:** `https://docs.signalpilot.io/start-quick`
 
 ---
 

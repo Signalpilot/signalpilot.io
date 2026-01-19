@@ -1403,7 +1403,7 @@
 >
 > We respond to every message.
 >
-> Support info: docs.signalpilot.io/support
+> Support info: docs.signalpilot.io/about-support
 
 **Hashtags:** #SignalPilot #Support #CustomerService #Documentation
 
@@ -1451,7 +1451,7 @@
 **Slide 6 — CTA:**
 > DON'T STRUGGLE ALONE
 >
-> docs.signalpilot.io/support 📚
+> docs.signalpilot.io/about-support 📚
 
 **Caption:**
 > 💬 NEED HELP? WE'RE HERE.

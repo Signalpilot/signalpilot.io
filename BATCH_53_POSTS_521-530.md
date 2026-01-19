@@ -401,7 +401,7 @@
 
 # POST 523 — 📝 The Power of "I Don't Know"
 
-**Source:** `https://blog.signalpilot.io/articles/power-of-i-dont-know/`
+**Source:** `https://blog.signalpilot.io/articles/why-traders-blow-first-account/`
 
 ---
 
@@ -1141,7 +1141,7 @@
 
 # POST 527 — 📝 Building Mental Resilience for Trading
 
-**Source:** `https://blog.signalpilot.io/articles/mental-resilience-trading/`
+**Source:** `https://blog.signalpilot.io/articles/trading-while-emotional/`
 
 ---
 
@@ -1340,7 +1340,7 @@
 
 # POST 528 — 🔮 Chronicle: The Prophet's Warning
 
-**Source:** `https://signalpilot.io/chronicle/the-prophets-warning/`
+**Source:** `https://signalpilot.io/chronicle/the-prophet/`
 
 ---
 
@@ -1730,7 +1730,7 @@
 
 # POST 530 — 📚 Docs: Update History & Changelog
 
-**Source:** `https://docs.signalpilot.io/changelog/`
+**Source:** `https://docs.signalpilot.io/about-changelog`
 
 ---
 

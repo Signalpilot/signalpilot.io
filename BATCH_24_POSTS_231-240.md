@@ -297,7 +297,7 @@ Full lesson in bio 🔗
 
 # POST 233 — 📝 MYTH OF THE PERFECT SETUP
 
-**Source:** https://blog.signalpilot.io/articles/myth-perfect-setup/
+**Source:** https://blog.signalpilot.io/articles/why-your-indicators-keep-failing/
 
 ---
 
@@ -821,7 +821,7 @@ Full lesson in bio 🔗
 
 # POST 237 — 📝 WHEN YOUR STRATEGY STOPS WORKING
 
-**Source:** https://blog.signalpilot.io/articles/strategy-stops-working/
+**Source:** https://blog.signalpilot.io/articles/system-optimization/
 
 ---
 

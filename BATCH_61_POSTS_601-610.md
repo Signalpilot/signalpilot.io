@@ -336,7 +336,7 @@ Follow TikTok timing with world map lighting up different zones.
 
 # POST 603 — 📝 Dealing with FOMO
 
-**Source:** `https://blog.signalpilot.io/articles/dealing-with-fomo/`
+**Source:** `https://blog.signalpilot.io/articles/the-boredom-trap/`
 
 ---
 
@@ -931,7 +931,7 @@ Follow TikTok timing showing the "both" answer.
 
 # POST 607 — 📝 Year One Expectations
 
-**Source:** `https://blog.signalpilot.io/articles/year-one-expectations/`
+**Source:** `https://blog.signalpilot.io/articles/how-long-to-become-profitable/`
 
 ---
 
@@ -1370,7 +1370,7 @@ Follow TikTok timing with simple pressure explanation.
 
 # POST 610 — 📚 Docs: Upgrade Path Options
 
-**Source:** `https://docs.signalpilot.io/upgrade/`
+**Source:** `https://docs.signalpilot.io/about-faq`
 
 ---
 

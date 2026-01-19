@@ -311,7 +311,7 @@
 
 ## POST 253 — 📝 THE COMPOUND EFFECT IN TRADING
 
-**Source:** https://blog.signalpilot.io/articles/compound-effect-trading/
+**Source:** https://blog.signalpilot.io/articles/how-long-to-become-profitable/
 
 ---
 
@@ -1001,7 +1001,7 @@
 
 ## POST 258 — 🔮 CHRONICLE: THE CARTOGRAPHER'S FIRST MAP
 
-**Source:** https://signalpilot.io/chronicle/the-cartographers-first-map/
+**Source:** https://signalpilot.io/chronicle/the-cartographer/
 
 ---
 

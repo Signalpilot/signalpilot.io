@@ -317,7 +317,7 @@
 
 ## POST 283 — 📝 TRADING IS A MARATHON, NOT A SPRINT
 
-**Source:** https://blog.signalpilot.io/articles/marathon-not-sprint/
+**Source:** https://blog.signalpilot.io/articles/how-long-to-become-profitable/
 
 ---
 
@@ -854,7 +854,7 @@
 
 ## POST 287 — 📝 EMOTIONAL DETACHMENT IN TRADING
 
-**Source:** https://blog.signalpilot.io/articles/emotional-detachment/
+**Source:** https://blog.signalpilot.io/articles/trading-while-emotional/
 
 ---
 
@@ -988,7 +988,7 @@
 
 ## POST 288 — 🔮 CHRONICLE: THE COMMANDER'S STRATEGY
 
-**Source:** https://signalpilot.io/chronicle/the-commanders-strategy/
+**Source:** https://signalpilot.io/chronicle/the-commander/
 
 ---
 
@@ -1262,7 +1262,7 @@
 
 ## POST 290 — 📚 DOCS: TROUBLESHOOTING GUIDE
 
-**Source:** https://docs.signalpilot.io/support/troubleshooting/
+**Source:** https://docs.signalpilot.io/ref-troubleshooting
 
 ---
 
