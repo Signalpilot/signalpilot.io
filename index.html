@@ -3616,10 +3616,18 @@
         <!-- HERO COMPARISON SLIDER -->
         <div style="margin-bottom:3rem;max-width:1100px;margin-left:auto;margin-right:auto">
 
-            <!-- Slider Hint -->
-            <p style="text-align:center;margin-bottom:1rem;font-size:0.95rem;color:var(--muted)">
-              <strong style="color:var(--brand)">👇 Drag to compare</strong> — Same chart. Different clarity.
-            </p>
+            <!-- Slider Controls -->
+            <div style="display:flex;justify-content:center;gap:0.75rem;margin-bottom:1.25rem;flex-wrap:nowrap;align-items:center">
+              <button id="hero-btn-before" class="btn btn-secondary" style="padding:0.45rem 0.9rem;font-size:0.8rem;min-height:36px;height:36px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1">
+                ← Before
+              </button>
+              <button id="hero-btn-autoplay" class="shiny-cta" style="padding:0.45rem 0.9rem;font-size:0.8rem;min-height:36px;height:36px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1;width:auto">
+                <span>▶ Auto</span>
+              </button>
+              <button id="hero-btn-after" class="btn btn-secondary" style="padding:0.45rem 0.9rem;font-size:0.8rem;min-height:36px;height:36px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1">
+                After →
+              </button>
+            </div>
 
             <!-- Hero Comparison Slider Container -->
             <div id="hero-comparison-slider" role="region" aria-label="Before and after comparison slider" style="position:relative;max-width:1100px;width:100%;margin:0 auto;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 20px 60px rgba(0,0,0,.5);touch-action:pan-x;background:#0a0e18">
@@ -3819,6 +3827,100 @@
           function init() {
             updateOverlayImageWidth();
             setSliderPosition(0, false); // Start at 0 for auto-sweep
+          }
+
+          // Button Controls
+          const btnBefore = document.getElementById('hero-btn-before');
+          const btnAutoplay = document.getElementById('hero-btn-autoplay');
+          const btnAfter = document.getElementById('hero-btn-after');
+
+          let autoplayInterval = null;
+          let isAutoPlaying = false;
+          let autoplayDirection = 1;
+          let autoplayPos = 0;
+
+          if (btnBefore) {
+            btnBefore.addEventListener('click', () => {
+              stopAutoPlay();
+              markInteraction();
+              setSliderPosition(0, true);
+            });
+          }
+
+          if (btnAfter) {
+            btnAfter.addEventListener('click', () => {
+              stopAutoPlay();
+              markInteraction();
+              setSliderPosition(100, true);
+            });
+          }
+
+          if (btnAutoplay) {
+            btnAutoplay.addEventListener('click', () => {
+              if (isAutoPlaying) {
+                stopAutoPlay();
+              } else {
+                startAutoPlay();
+              }
+            });
+          }
+
+          function startAutoPlay() {
+            stopAutoPlay();
+            isAutoPlaying = true;
+            autoplayDirection = 1;
+            autoplayPos = parseFloat(handle.style.left) || 0;
+            btnAutoplay.innerHTML = '<span>⏸ Pause</span>';
+            resumeAutoPlay();
+          }
+
+          let lastAutoplayTime = 0;
+          function resumeAutoPlay() {
+            if (autoplayInterval) return;
+            lastAutoplayTime = performance.now();
+            function animateSlider(currentTime) {
+              if (!isAutoPlaying) {
+                autoplayInterval = null;
+                return;
+              }
+              const delta = currentTime - lastAutoplayTime;
+              if (delta >= 30) {
+                autoplayPos += (autoplayDirection * 2);
+                if (autoplayPos >= 100) {
+                  autoplayPos = 100;
+                  autoplayDirection = -1;
+                } else if (autoplayPos <= 0) {
+                  autoplayPos = 0;
+                  autoplayDirection = 1;
+                }
+                setSliderPosition(autoplayPos, false);
+                lastAutoplayTime = currentTime;
+              }
+              autoplayInterval = requestAnimationFrame(animateSlider);
+            }
+            autoplayInterval = requestAnimationFrame(animateSlider);
+          }
+
+          function stopAutoPlay() {
+            if (autoplayInterval) {
+              cancelAnimationFrame(autoplayInterval);
+              autoplayInterval = null;
+            }
+            isAutoPlaying = false;
+            if (btnAutoplay) btnAutoplay.innerHTML = '<span>▶ Auto</span>';
+          }
+
+          // Stop autoplay on manual interaction
+          const originalMarkInteraction = markInteraction;
+          markInteraction = function() {
+            stopAutoPlay();
+            originalMarkInteraction();
+          };
+
+          // Initialize
+          function init() {
+            updateOverlayImageWidth();
+            setSliderPosition(0, false);
           }
 
           window.addEventListener('load', () => {
@@ -4336,456 +4438,6 @@
       </script>
 
     </section>
-
-    <!-- INTERACTIVE DEMO -->
-
-    <section class="section">
-
-      <div class="container stack">
-
-        <div style="text-align:center;max-width:800px;margin:0 auto 1.5rem">
-          <span class="badge" style="margin-bottom:1rem">INTERACTIVE DEMO</span>
-          <h2 class="headline lg"><span class="shimmer-text">The Difference</span></h2>
-          <p style="color:var(--muted);font-size:1.1rem;line-height:1.6;margin-top:1rem">
-            <strong style="color:var(--brand)">👇 Drag the slider</strong> to compare trading with and without <span style="font-family:'Gugi',system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.1em;font-weight:400">Signal Pilot</span>. Same chart. Same timeframe. Completely different clarity.
-          </p>
-        </div>
-
-        <!-- Slider Controls -->
-        <div style="display:flex;justify-content:center;gap:0.8rem;margin-bottom:1.5rem;flex-wrap:nowrap;align-items:center">
-          <button id="btn-before" class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.85rem;min-height:38px;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1">
-            ← Before
-          </button>
-          <button id="btn-autoplay" class="shiny-cta" style="padding:0.5rem 1rem;font-size:0.85rem;min-height:38px;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1;width:auto">
-            <span>▶ Auto Play</span>
-          </button>
-          <button id="btn-after" class="btn btn-secondary" style="padding:0.5rem 1rem;font-size:0.85rem;min-height:38px;height:38px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;line-height:1">
-            After →
-          </button>
-        </div>
-
-        <!-- Interactive Slider Container -->
-        <div id="comparison-slider" role="region" aria-label="Before and after comparison slider" style="position:relative;max-width:1400px;width:100%;margin:0 auto;border-radius:16px;overflow:hidden;border:3px solid rgba(91,138,255,.4);box-shadow:0 30px 80px rgba(0,0,0,.6);touch-action:pan-x">
-
-          <!-- Without Signal Pilot (Background) -->
-          <div class="comparison-image" style="position:relative;width:100%;min-height:600px;aspect-ratio:16/9;background:#0a0e18">
-            <img
-              src="assets/showcase/chart-without.jpg"
-              alt="Chart without Signal Pilot"
-              loading="eager"
-              style="width:100%;height:100%;object-fit:contain;display:block"
-              onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:rgba(10,12,20,1);color:rgba(255,255,255,.5);flex-direction:column;gap:1rem\'><svg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><path d=\'M3 9h18\'/><path d=\'M9 21V9\'/></svg><span style=\'font-size:1.1rem;font-weight:600\'>WITHOUT Signal Pilot</span><span style=\'font-size:.9rem;opacity:.7\'>Add your chart image to:<br/>assets/showcase/chart-without.jpg</span></div>'"
-            />
-          </div>
-
-          <!-- With Signal Pilot (Overlay - slides over) -->
-          <div id="slider-overlay" class="comparison-image" style="position:absolute;top:0;left:0;width:50%;height:100%;overflow:hidden;z-index:10">
-            <img
-              id="overlay-image"
-              src="assets/showcase/chart-with.jpg"
-              alt="Chart with Signal Pilot"
-              loading="eager"
-              style="position:absolute;top:0;left:0;width:100%;height:100%;max-width:none;object-fit:contain;display:block;pointer-events:none"
-              onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;background:rgba(10,30,20,1);color:rgba(255,255,255,.5);flex-direction:column;gap:1rem\'><svg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'><polyline points=\'20 6 9 17 4 12\'/></svg><span style=\'font-size:1.1rem;font-weight:600;color:#3ed598\'>WITH Signal Pilot</span><span style=\'font-size:.9rem;opacity:.7\'>Add your chart image to:<br/>assets/showcase/chart-with.jpg</span></div>'"
-            />
-          </div>
-
-          <!-- Slider Handle with Pulse Animation -->
-          <div id="slider-handle" role="slider" aria-label="Comparison slider position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0" style="position:absolute;top:0;left:50%;width:48px;height:100%;transform:translateX(-50%);z-index:100;cursor:ew-resize;touch-action:pan-x">
-            <!-- Hit area (wider for easier grabbing) -->
-            <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:100%;cursor:ew-resize"></div>
-            <!-- Visual line -->
-            <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:4px;height:100%;background:#0a0e18;box-shadow:0 0 20px rgba(10,14,24,.5);pointer-events:none"></div>
-            <!-- Handle circle -->
-            <div id="handle-circle" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:#0a0e18;border-radius:50%;box-shadow:0 4px 16px rgba(0,0,0,.3),0 0 0 0 rgba(10,14,24,.7);display:flex;align-items:center;justify-content:center;pointer-events:none">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="margin-left:-12px">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <style>
-      /* Pulse animation for handle */
-      @keyframes pulse {
-        0% { box-shadow: 0 4px 16px rgba(0,0,0,.3), 0 0 0 0 rgba(10,14,24,.7); }
-        50% { box-shadow: 0 4px 16px rgba(0,0,0,.3), 0 0 0 8px rgba(10,14,24,0); }
-        100% { box-shadow: 0 4px 16px rgba(0,0,0,.3), 0 0 0 0 rgba(10,14,24,.7); }
-      }
-      .pulse-animate { animation: pulse 2s ease-in-out infinite; }
-
-      /* Smooth transition for non-dragging movements */
-      .smooth-transition { transition: left 0.3s ease, width 0.3s ease !important; }
-
-      /* Remove focus outline and any white backgrounds from slider handle */
-      #slider-handle, #slider-handle *, #slider-handle:focus {
-        outline: none !important;
-        background: transparent !important;
-      }
-      #handle-circle {
-        background: #0a0e18 !important;
-      }
-    </style>
-
-    <script>
-    // Interactive Before/After Slider
-    (function() {
-      const slider = document.getElementById('comparison-slider');
-      const handle = document.getElementById('slider-handle');
-      const handleCircle = document.getElementById('handle-circle');
-      const overlay = document.getElementById('slider-overlay');
-      const overlayImage = document.getElementById('overlay-image');
-
-      if (!slider || !handle || !overlay) return;
-
-      let isDragging = false;
-      let hasInteracted = false;
-      let lastTapTime = 0;
-
-      // Feature 1: Auto-animation on page load
-      function autoSweep() {
-        let progress = 0;
-        const duration = 3000; // 3 seconds
-        const startTime = Date.now();
-
-        function animate() {
-          const elapsed = Date.now() - startTime;
-          progress = Math.min(elapsed / duration, 1);
-
-          // Ease in-out
-          const eased = progress < 0.5
-            ? 2 * progress * progress
-            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-
-          const percentage = eased * 100;
-          setSliderPosition(percentage, true);
-
-          if (progress < 1 && !hasInteracted) {
-            requestAnimationFrame(animate);
-          }
-          // Animation completes at 100% and stays there to show the final "with Signal Pilot" result
-        }
-
-        animate();
-      }
-
-      // Feature 3: Animated pulse on handle (starts pulsing, stops on interact)
-      handleCircle.classList.add('pulse-animate');
-
-      // Core function to update slider position
-      function setSliderPosition(percentage, smooth = false) {
-        percentage = Math.max(0, Math.min(percentage, 100));
-
-        if (smooth && !isDragging) {
-          handle.classList.add('smooth-transition');
-          overlay.classList.add('smooth-transition');
-          setTimeout(() => {
-            handle.classList.remove('smooth-transition');
-            overlay.classList.remove('smooth-transition');
-          }, 300);
-        }
-
-        handle.style.left = percentage + '%';
-        overlay.style.width = percentage + '%';
-
-        // Update ARIA value for accessibility
-        handle.setAttribute('aria-valuenow', Math.round(percentage));
-      }
-
-      // Update overlay image width to match slider container
-      function updateOverlayImageWidth() {
-        if (overlayImage && slider) {
-          const width = slider.clientWidth;
-          if (width > 0) {
-            overlayImage.style.width = width + 'px';
-          } else {
-            // Retry if width is 0 (layout not ready yet)
-            setTimeout(() => updateOverlayImageWidth(), 100);
-          }
-        }
-      }
-
-      // Feature 2: Click anywhere to position (enhanced)
-      function updateSliderFromPosition(clientX, smooth = false) {
-        const rect = slider.getBoundingClientRect();
-        let x = clientX - rect.left;
-        const percentage = (x / rect.width) * 100;
-        setSliderPosition(percentage, smooth);
-      }
-
-      function markInteraction() {
-        hasInteracted = true;
-        handleCircle.classList.remove('pulse-animate');
-      }
-
-      // Initialize
-      function initSlider() {
-        updateOverlayImageWidth();
-        setSliderPosition(50, false);
-      }
-
-      // Update overlay width when images load
-      const backgroundImage = slider.querySelector('img[alt="Chart without Signal Pilot"]');
-      const foregroundImage = overlayImage;
-
-      if (backgroundImage) {
-        backgroundImage.addEventListener('load', updateOverlayImageWidth);
-      }
-      if (foregroundImage) {
-        foregroundImage.addEventListener('load', updateOverlayImageWidth);
-      }
-
-      // Feature 8: Keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (!slider) return;
-
-        const rect = slider.getBoundingClientRect();
-        const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-
-        if (isInView) {
-          let currentPercentage = parseFloat(handle.style.left) || 50;
-
-          if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            markInteraction();
-            setSliderPosition(currentPercentage - 5, true);
-          } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            markInteraction();
-            setSliderPosition(currentPercentage + 5, true);
-          }
-        }
-      });
-
-      // Feature 4: Larger draggable area + Feature 7: Cursor changes
-      handle.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        markInteraction();
-        document.body.style.cursor = 'ew-resize';
-      });
-
-      document.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-          updateSliderFromPosition(e.clientX, false);
-        }
-      });
-
-      document.addEventListener('mouseup', () => {
-        isDragging = false;
-        document.body.style.cursor = '';
-      });
-
-      // Touch support with Feature 13: Double-tap to center
-      handle.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // Prevent scrolling immediately
-        const currentTime = Date.now();
-        const tapGap = currentTime - lastTapTime;
-
-        if (tapGap < 300 && tapGap > 0) {
-          // Double tap detected
-          setSliderPosition(50, true);
-        } else {
-          isDragging = true;
-          markInteraction();
-        }
-
-        lastTapTime = currentTime;
-      }, { passive: false });
-
-      // Also add touch support directly on slider for easier mobile interaction
-      slider.addEventListener('touchstart', (e) => {
-        if (!handle.contains(e.target)) {
-          e.preventDefault(); // Prevent scrolling
-          isDragging = true;
-          markInteraction();
-          updateSliderFromPosition(e.touches[0].clientX, false);
-        }
-      }, { passive: false });
-
-      document.addEventListener('touchmove', (e) => {
-        if (isDragging) {
-          e.preventDefault(); // Critical: prevent page scroll while dragging
-          updateSliderFromPosition(e.touches[0].clientX, false);
-        }
-      }, { passive: false });
-
-      document.addEventListener('touchend', () => {
-        isDragging = false;
-      });
-
-      // Feature 2: Click anywhere on slider or scrubber
-      slider.addEventListener('click', (e) => {
-        if (!isDragging && e.target !== handle && !handle.contains(e.target)) {
-          markInteraction();
-          updateSliderFromPosition(e.clientX, true);
-        }
-      });
-
-      // Initialize and start auto-sweep
-      window.addEventListener('load', () => {
-        initSlider();
-        // Start auto-sweep after a short delay
-        setTimeout(() => {
-          if (!hasInteracted) autoSweep();
-        }, 500);
-      });
-
-      window.addEventListener('resize', initSlider);
-      initSlider();
-
-      // Intersection Observer for auto-sweep when section comes into view
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-          try {
-            entries.forEach(entry => {
-              if (entry.isIntersecting && !hasInteracted) {
-                setTimeout(() => {
-                  if (!hasInteracted) autoSweep();
-                }, 300);
-              }
-            });
-          } catch(e) {
-            // Silently handle observer errors
-          }
-        }, { threshold: 0.5 });
-
-        observer.observe(slider);
-      }
-
-      // Button Controls
-      const btnBefore = document.getElementById('btn-before');
-      const btnAutoplay = document.getElementById('btn-autoplay');
-      const btnAfter = document.getElementById('btn-after');
-
-      let autoplayInterval = null;
-      let isAutoPlaying = false;
-      let isSliderVisible = true;
-      let autoplayDirection = 1;
-      let autoplayPos = 50;
-
-      // Visibility tracking for autoplay
-      if ('IntersectionObserver' in window) {
-        const visObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            isSliderVisible = entry.isIntersecting;
-            // Auto-pause when scrolled away, auto-resume when back
-            if (!isSliderVisible && isAutoPlaying) {
-              pauseAutoPlay();
-            } else if (isSliderVisible && isAutoPlaying && !autoplayInterval) {
-              resumeAutoPlay();
-            }
-          });
-        }, { threshold: 0 });
-        visObserver.observe(slider);
-      }
-
-      // Pause when tab hidden
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden && isAutoPlaying) {
-          pauseAutoPlay();
-        } else if (!document.hidden && isAutoPlaying && isSliderVisible && !autoplayInterval) {
-          resumeAutoPlay();
-        }
-      });
-
-      // Before button - snap to 0%
-      if (btnBefore) {
-        btnBefore.addEventListener('click', () => {
-          stopAutoPlay();
-          markInteraction();
-          setSliderPosition(0, true);
-        });
-      }
-
-      // After button - snap to 100%
-      if (btnAfter) {
-        btnAfter.addEventListener('click', () => {
-          stopAutoPlay();
-          markInteraction();
-          setSliderPosition(100, true);
-        });
-      }
-
-      // Auto Play button - toggle continuous animation
-      if (btnAutoplay) {
-        btnAutoplay.addEventListener('click', () => {
-          if (isAutoPlaying) {
-            stopAutoPlay();
-          } else {
-            startAutoPlay();
-          }
-        });
-      }
-
-      function startAutoPlay() {
-        stopAutoPlay(); // Clear any existing interval
-        isAutoPlaying = true;
-        autoplayDirection = 1;
-        autoplayPos = 50;
-        btnAutoplay.innerHTML = '<span>⏸ Pause</span>';
-        if (isSliderVisible && !document.hidden) {
-          resumeAutoPlay();
-        }
-      }
-
-      let lastAutoplayTime = 0;
-      function resumeAutoPlay() {
-        if (autoplayInterval) return;
-        lastAutoplayTime = performance.now();
-        function animateSlider(currentTime) {
-          if (!isAutoPlaying || !isSliderVisible || document.hidden) {
-            autoplayInterval = null;
-            return;
-          }
-          // Move ~2% every 30ms (same speed as before)
-          const delta = currentTime - lastAutoplayTime;
-          if (delta >= 30) {
-            autoplayPos += (autoplayDirection * 2);
-            if (autoplayPos >= 100) {
-              autoplayPos = 100;
-              autoplayDirection = -1;
-            } else if (autoplayPos <= 0) {
-              autoplayPos = 0;
-              autoplayDirection = 1;
-            }
-            setSliderPosition(autoplayPos, false);
-            lastAutoplayTime = currentTime;
-          }
-          autoplayInterval = requestAnimationFrame(animateSlider);
-        }
-        autoplayInterval = requestAnimationFrame(animateSlider);
-      }
-
-      function pauseAutoPlay() {
-        if (autoplayInterval) {
-          cancelAnimationFrame(autoplayInterval);
-          autoplayInterval = null;
-        }
-      }
-
-      function stopAutoPlay() {
-        pauseAutoPlay();
-        isAutoPlaying = false;
-        btnAutoplay.innerHTML = '<span>▶ Auto Play</span>';
-      }
-
-      // Stop auto play if user manually interacts
-      const originalMarkInteraction = markInteraction;
-      markInteraction = function() {
-        stopAutoPlay();
-        originalMarkInteraction();
-      };
-    })();
-    </script>
-
 
     <!-- TESTIMONIALS - MOVED UP FOR TRUST BEFORE ASK -->
 
