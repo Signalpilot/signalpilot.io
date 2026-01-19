@@ -410,7 +410,7 @@
 
 ## POST 463 — 📝 Blog: The 3 Types of Trading Edges
 
-**Source:** `https://blog.signalpilot.io/articles/three-types-of-trading-edges/`
+**Source:** `https://blog.signalpilot.io/articles/what-is-a-trading-edge/`
 
 ---
 
@@ -1107,7 +1107,7 @@
 
 ## POST 467 — 📝 Blog: Analysis Paralysis
 
-**Source:** `https://blog.signalpilot.io/articles/analysis-paralysis/`
+**Source:** `https://blog.signalpilot.io/articles/the-boredom-trap/`
 
 ---
 
@@ -1292,7 +1292,7 @@
 
 ## POST 468 — 🔮 Chronicle: The Cartographer's Map
 
-**Source:** `https://signalpilot.io/chronicle/the-cartographers-map/`
+**Source:** `https://signalpilot.io/chronicle/the-cartographer/`
 
 ---
 
@@ -1654,7 +1654,7 @@
 
 ## POST 470 — 📚 Docs: Multi-Chart Layouts
 
-**Source:** `https://docs.signalpilot.io/layouts/`
+**Source:** `https://docs.signalpilot.io/start-quick`
 
 ---
 

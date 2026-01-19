@@ -1359,7 +1359,7 @@
 >
 > Full performance guide in docs.
 >
-> 📚 docs.signalpilot.io/performance
+> 📚 docs.signalpilot.io/ref-troubleshooting
 
 **Hashtags:** #TradingView #Performance #SignalPilot #Documentation
 
@@ -1419,7 +1419,7 @@
 **Slide 7 — CTA:**
 > FULL PERFORMANCE GUIDE
 >
-> docs.signalpilot.io/performance 📚
+> docs.signalpilot.io/ref-troubleshooting 📚
 
 **Caption:**
 > ⚡ PERFORMANCE OPTIMIZATION

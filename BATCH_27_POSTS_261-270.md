@@ -304,7 +304,7 @@
 
 ## POST 263 — 📝 THE MYTH OF THE HOLY GRAIL STRATEGY
 
-**Source:** https://blog.signalpilot.io/articles/holy-grail-myth/
+**Source:** https://blog.signalpilot.io/articles/why-your-indicators-keep-failing/
 
 ---
 
@@ -848,7 +848,7 @@
 
 ## POST 267 — 📝 WHY BACKTESTING LIES (AND HOW TO FIX IT)
 
-**Source:** https://blog.signalpilot.io/articles/backtesting-lies/
+**Source:** https://blog.signalpilot.io/articles/why-backtesting-results-are-worthless/
 
 ---
 
@@ -987,7 +987,7 @@
 
 ## POST 268 — 🔮 CHRONICLE: THE ARBITER'S BALANCE
 
-**Source:** https://signalpilot.io/chronicle/the-arbiters-balance/
+**Source:** https://signalpilot.io/chronicle/the-arbiter/
 
 ---
 

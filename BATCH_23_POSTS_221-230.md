@@ -291,7 +291,7 @@ Full lesson in bio 🔗
 
 # POST 223 — 📝 DANGER OF SOCIAL MEDIA TRADING
 
-**Source:** https://blog.signalpilot.io/articles/social-media-trading/
+**Source:** https://blog.signalpilot.io/articles/what-profitable-traders-know/
 
 ---
 
@@ -806,7 +806,7 @@ Full lesson in bio 🔗
 
 # POST 227 — 📝 BUILDING CONFIDENCE IN YOUR SYSTEM
 
-**Source:** https://blog.signalpilot.io/articles/building-confidence/
+**Source:** https://blog.signalpilot.io/articles/what-profitable-traders-know/
 
 ---
 

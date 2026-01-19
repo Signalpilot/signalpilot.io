@@ -325,7 +325,7 @@
 
 ## POST 243 — 📝 THE TRADER'S GREATEST EDGE: DOING NOTHING
 
-**Source:** https://blog.signalpilot.io/articles/doing-nothing-edge/
+**Source:** https://blog.signalpilot.io/articles/the-boredom-trap/
 
 ---
 
@@ -870,7 +870,7 @@
 
 ## POST 247 — 📝 WHY MOST INDICATORS FAIL (AND WHAT TO DO INSTEAD)
 
-**Source:** https://blog.signalpilot.io/articles/why-indicators-fail/
+**Source:** https://blog.signalpilot.io/articles/why-your-indicators-keep-failing/
 
 ---
 
@@ -1010,7 +1010,7 @@
 
 ## POST 248 — 🔮 CHRONICLE: THE PROPHET'S REVELATION
 
-**Source:** https://signalpilot.io/chronicle/the-prophets-revelation/
+**Source:** https://signalpilot.io/chronicle/the-prophet/
 
 ---
 

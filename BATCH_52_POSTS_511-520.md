@@ -432,7 +432,7 @@
 
 # POST 513 — 📝 The Loneliness of Trading
 
-**Source:** `https://blog.signalpilot.io/articles/loneliness-of-trading/`
+**Source:** `https://blog.signalpilot.io/articles/trading-while-emotional/`
 
 ---
 
@@ -1192,7 +1192,7 @@
 
 # POST 517 — 📝 When to Take a Break from Trading
 
-**Source:** `https://blog.signalpilot.io/articles/when-to-take-break/`
+**Source:** `https://blog.signalpilot.io/articles/trading-while-emotional/`
 
 ---
 
@@ -1397,7 +1397,7 @@
 
 # POST 518 — 🔮 Chronicle: The Eternal Dance
 
-**Source:** `https://signalpilot.io/chronicle/the-eternal-dance/`
+**Source:** `https://signalpilot.io/chronicle/why-non-repainting-matters/`
 
 ---
 

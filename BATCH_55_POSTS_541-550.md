@@ -343,7 +343,7 @@ Each sign:
 
 ## POST 543 — 📝 The Importance of Sleep for Trading
 
-**Source:** `https://blog.signalpilot.io/articles/importance-of-sleep-trading/`
+**Source:** `https://blog.signalpilot.io/articles/trading-while-emotional/`
 
 ---
 
@@ -939,7 +939,7 @@ Each effect:
 
 ## POST 547 — 📝 Handling Winning Streaks
 
-**Source:** `https://blog.signalpilot.io/articles/handling-winning-streaks/`
+**Source:** `https://blog.signalpilot.io/articles/what-profitable-traders-know/`
 
 ---
 
@@ -1092,7 +1092,7 @@ Each danger:
 
 ## POST 548 — 🔮 Chronicle: The Seven Virtues
 
-**Source:** `https://signalpilot.io/chronicle/the-seven-virtues/`
+**Source:** `https://signalpilot.io/chronicle/the-pilots-oath/`
 
 ---
 
@@ -1405,7 +1405,7 @@ Each virtue:
 
 ## POST 550 — 📚 Docs: Best Practices Guide
 
-**Source:** `https://docs.signalpilot.io/best-practices/`
+**Source:** `https://docs.signalpilot.io/ref-best-practices`
 
 ---
 

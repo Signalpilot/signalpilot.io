@@ -901,7 +901,7 @@ Keep it simple. #trading #trends #trendidentification #forex #crypto
 |-------|-------|
 | Pillar | P2: Indicator Truth |
 | Type | Docs |
-| Source | https://docs.signalpilot.io/getting-started/quick-start/ |
+| Source | https://docs.signalpilot.io/start-quick |
 | CTA | Docs |
 | Format | Twitter: Single | Instagram: Carousel | TikTok: Checklist |
 

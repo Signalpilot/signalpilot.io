@@ -503,7 +503,7 @@
 
 # POST 493 — 📝 The Art of Doing Nothing
 
-**Source:** `https://blog.signalpilot.io/articles/art-of-doing-nothing/`
+**Source:** `https://blog.signalpilot.io/articles/the-boredom-trap/`
 
 ---
 
@@ -1314,7 +1314,7 @@
 
 # POST 497 — 📝 Why Most Trading Education Fails
 
-**Source:** `https://blog.signalpilot.io/articles/why-most-trading-education-fails/`
+**Source:** `https://blog.signalpilot.io/articles/what-profitable-traders-know/`
 
 ---
 
@@ -1522,7 +1522,7 @@
 
 # POST 498 — 🔮 Chronicle: The Council of Seven
 
-**Source:** `https://signalpilot.io/chronicle/the-council-of-seven/`
+**Source:** `https://signalpilot.io/chronicle/the-council-assembles/`
 
 ---
 

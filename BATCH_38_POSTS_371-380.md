@@ -1375,7 +1375,7 @@
 >
 > Full alert setup guide in docs.
 >
-> 📚 docs.signalpilot.io/alerts
+> 📚 docs.signalpilot.io/how-to-alerts
 
 **Hashtags:** #TradingView #Alerts #SignalPilot #Documentation
 
@@ -1428,7 +1428,7 @@
 **Slide 6 — CTA:**
 > FULL ALERT SETUP GUIDE
 >
-> docs.signalpilot.io/alerts 📚
+> docs.signalpilot.io/how-to-alerts 📚
 
 **Caption:**
 > 🔔 ALERT CONFIGURATION

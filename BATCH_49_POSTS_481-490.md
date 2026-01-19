@@ -404,7 +404,7 @@
 
 ## POST 483 — 📝 Blog: The Myth of the Holy Grail Indicator
 
-**Source:** `https://blog.signalpilot.io/articles/myth-of-holy-grail-indicator/`
+**Source:** `https://blog.signalpilot.io/articles/why-your-indicators-keep-failing/`
 
 ---
 
@@ -1102,7 +1102,7 @@
 
 ## POST 487 — 📝 Blog: Building Trading Confidence (The Right Way)
 
-**Source:** `https://blog.signalpilot.io/articles/building-trading-confidence/`
+**Source:** `https://blog.signalpilot.io/articles/what-profitable-traders-know/`
 
 ---
 
@@ -1289,7 +1289,7 @@
 
 ## POST 488 — 🔮 Chronicle: The Watchman's Vigil
 
-**Source:** `https://signalpilot.io/chronicle/the-watchmans-vigil/`
+**Source:** `https://signalpilot.io/chronicle/the-watchman/`
 
 ---
 
@@ -1654,7 +1654,7 @@
 
 ## POST 490 — 📚 Docs: Mobile Access Guide
 
-**Source:** `https://docs.signalpilot.io/mobile/`
+**Source:** `https://docs.signalpilot.io/start-quick`
 
 ---
 

@@ -1419,7 +1419,7 @@
 >
 > Full mobile guide in docs.
 >
-> 📚 docs.signalpilot.io/mobile
+> 📚 docs.signalpilot.io/start-quick
 
 **Hashtags:** #TradingView #MobileTrading #SignalPilot #Documentation
 
@@ -1470,7 +1470,7 @@
 **Slide 6 — CTA:**
 > FULL MOBILE GUIDE
 >
-> docs.signalpilot.io/mobile 📚
+> docs.signalpilot.io/start-quick 📚
 
 **Caption:**
 > 📱 MOBILE TRADING GUIDE

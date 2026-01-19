@@ -348,7 +348,7 @@
 
 ## POST 563 — 📝 The Comparison Trap
 
-**Source:** `https://blog.signalpilot.io/articles/comparison-trap-trading/`
+**Source:** `https://blog.signalpilot.io/articles/the-confirmation-trap/`
 
 ---
 
@@ -924,7 +924,7 @@ Each factor type:
 
 ## POST 567 — 📝 Setting Realistic Trading Goals
 
-**Source:** `https://blog.signalpilot.io/articles/realistic-trading-goals/`
+**Source:** `https://blog.signalpilot.io/articles/how-long-to-become-profitable/`
 
 ---
 
@@ -1081,7 +1081,7 @@ Each category:
 
 ## POST 568 — 🔮 Chronicle: The Complete Picture
 
-**Source:** `https://signalpilot.io/chronicle/the-complete-picture/`
+**Source:** `https://signalpilot.io/chronicle/the-hierarchy-of-signals/`
 
 ---
 

@@ -331,7 +331,7 @@
 
 ## POST 533 — 📝 Conviction vs. Stubbornness
 
-**Source:** `https://blog.signalpilot.io/articles/conviction-vs-stubbornness/`
+**Source:** `https://blog.signalpilot.io/articles/why-you-break-trading-rules/`
 
 ---
 
@@ -906,7 +906,7 @@ Each slide:
 
 ## POST 537 — 📝 Trade Smaller Than You Think
 
-**Source:** `https://blog.signalpilot.io/articles/trade-smaller-than-you-think/`
+**Source:** `https://blog.signalpilot.io/articles/position-sizing-101/`
 
 ---
 
@@ -1065,7 +1065,7 @@ Each benefit:
 
 ## POST 538 — 🔮 Chronicle: The Cartographer's Journey
 
-**Source:** `https://signalpilot.io/chronicle/the-cartographers-journey/`
+**Source:** `https://signalpilot.io/chronicle/the-cartographer/`
 
 ---
 
@@ -1374,7 +1374,7 @@ Each benefit:
 
 ## POST 540 — 📚 Docs: Contact & Support
 
-**Source:** `https://docs.signalpilot.io/support/`
+**Source:** `https://docs.signalpilot.io/about-support`
 
 ---
 

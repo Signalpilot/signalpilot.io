@@ -321,7 +321,7 @@
 
 ## POST 273 — 📝 POSITION SIZING: THE UNSEXY EDGE
 
-**Source:** https://blog.signalpilot.io/articles/position-sizing-edge/
+**Source:** https://blog.signalpilot.io/articles/position-sizing-101/
 
 ---
 
@@ -876,7 +876,7 @@
 
 ## POST 277 — 📝 THE ART OF DOING LESS
 
-**Source:** https://blog.signalpilot.io/articles/art-of-doing-less/
+**Source:** https://blog.signalpilot.io/articles/the-boredom-trap/
 
 ---
 
@@ -1011,7 +1011,7 @@
 
 ## POST 278 — 🔮 CHRONICLE: THE WATCHMAN'S VIGIL
 
-**Source:** https://signalpilot.io/chronicle/the-watchmans-vigil/
+**Source:** https://signalpilot.io/chronicle/the-watchman/
 
 ---
 
@@ -1285,7 +1285,7 @@
 
 ## POST 280 — 📚 DOCS: CUSTOM COLOR SCHEMES
 
-**Source:** https://docs.signalpilot.io/customization/colors/
+**Source:** https://docs.signalpilot.io/start-quick
 
 ---
 

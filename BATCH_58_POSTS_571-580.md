@@ -405,7 +405,7 @@
 
 # POST 573 — 📝 Why Most Traders Quit (And How Not To)
 
-**Source:** `https://blog.signalpilot.io/articles/why-traders-quit/`
+**Source:** `https://blog.signalpilot.io/articles/why-traders-blow-first-account/`
 
 ---
 
@@ -1134,7 +1134,7 @@
 
 # POST 577 — 📝 The Weekend Review Ritual
 
-**Source:** `https://blog.signalpilot.io/articles/weekend-review-ritual/`
+**Source:** `https://blog.signalpilot.io/articles/trade-journaling-that-works/`
 
 ---
 
@@ -1322,7 +1322,7 @@
 
 # POST 578 — 🔮 Chronicle: Epilogue — The Trader's Path
 
-**Source:** `https://signalpilot.io/chronicle/epilogue-traders-path/`
+**Source:** `https://signalpilot.io/chronicle/the-pilots-oath/`
 
 ---
 
@@ -1699,7 +1699,7 @@
 
 # POST 580 — 📚 Docs: System Requirements
 
-**Source:** `https://docs.signalpilot.io/requirements/`
+**Source:** `https://docs.signalpilot.io/about-system-requirements`
 
 ---
 

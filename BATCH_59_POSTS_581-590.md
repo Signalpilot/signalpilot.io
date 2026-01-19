@@ -416,7 +416,7 @@
 
 # POST 583 — 📝 The Sunk Cost Fallacy in Trading
 
-**Source:** `https://blog.signalpilot.io/articles/sunk-cost-fallacy-trading/`
+**Source:** `https://blog.signalpilot.io/articles/when-to-cut-losses-early/`
 
 ---
 
@@ -1151,7 +1151,7 @@
 
 # POST 587 — 📝 Finding Your Trading Style
 
-**Source:** `https://blog.signalpilot.io/articles/finding-trading-style/`
+**Source:** `https://blog.signalpilot.io/articles/rules-based-vs-discretionary/`
 
 ---
 
@@ -1737,7 +1737,7 @@
 
 # POST 590 — 📚 Docs: Feedback & Feature Requests
 
-**Source:** `https://docs.signalpilot.io/feedback/`
+**Source:** `https://docs.signalpilot.io/about-support`
 
 ---
 

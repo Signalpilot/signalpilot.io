@@ -32,7 +32,7 @@
 
 # POST 501 — 📚 Docs: Performance Optimization
 
-**Source:** `https://docs.signalpilot.io/performance/`
+**Source:** `https://docs.signalpilot.io/ref-troubleshooting`
 
 ---
 
@@ -432,7 +432,7 @@
 
 # POST 503 — 📝 The Cost of Impatience
 
-**Source:** `https://blog.signalpilot.io/articles/cost-of-impatience/`
+**Source:** `https://blog.signalpilot.io/articles/the-boredom-trap/`
 
 ---
 
@@ -1185,7 +1185,7 @@
 
 # POST 507 — 📝 Managing Expectations vs. Reality
 
-**Source:** `https://blog.signalpilot.io/articles/expectations-vs-reality/`
+**Source:** `https://blog.signalpilot.io/articles/how-long-to-become-profitable/`
 
 ---
 
@@ -1387,7 +1387,7 @@
 
 # POST 508 — 🔮 Chronicle: Origins of the Elite Seven
 
-**Source:** `https://signalpilot.io/chronicle/origins-elite-seven/`
+**Source:** `https://signalpilot.io/chronicle/birth-of-the-elite-seven/`
 
 ---
 
@@ -1804,7 +1804,7 @@
 
 # POST 510 — 📚 Docs: API & Webhook Integration
 
-**Source:** `https://docs.signalpilot.io/api/`
+**Source:** `https://docs.signalpilot.io/how-to-webhooks`
 
 ---
 

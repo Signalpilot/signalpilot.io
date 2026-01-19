@@ -1361,7 +1361,7 @@
 >
 > Full layout guide in docs.
 >
-> 📚 docs.signalpilot.io/layouts
+> 📚 docs.signalpilot.io/start-quick
 
 **Hashtags:** #TradingView #ChartLayouts #SignalPilot #Documentation
 
@@ -1417,7 +1417,7 @@
 **Slide 6 — CTA:**
 > FULL LAYOUT GUIDE
 >
-> docs.signalpilot.io/layouts 📚
+> docs.signalpilot.io/start-quick 📚
 
 **Caption:**
 > 🖥️ MULTI-CHART LAYOUTS

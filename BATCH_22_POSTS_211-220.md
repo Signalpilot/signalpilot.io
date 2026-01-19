@@ -284,7 +284,7 @@ Full lesson in bio 🔗
 
 # POST 213 — 📝 WEEKLY REVIEW RITUAL
 
-**Source:** https://blog.signalpilot.io/articles/weekly-review/
+**Source:** https://blog.signalpilot.io/articles/trade-journaling-that-works/
 
 ---
 
@@ -806,7 +806,7 @@ Full lesson in bio 🔗
 
 # POST 217 — 📝 COST OF OVERTRADING
 
-**Source:** https://blog.signalpilot.io/articles/cost-of-overtrading/
+**Source:** https://blog.signalpilot.io/articles/the-boredom-trap/
 
 ---
 

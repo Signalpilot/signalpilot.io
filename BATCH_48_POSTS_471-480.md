@@ -410,7 +410,7 @@
 
 ## POST 473 — 📝 Blog: The Compound Effect in Trading
 
-**Source:** `https://blog.signalpilot.io/articles/compound-effect-trading/`
+**Source:** `https://blog.signalpilot.io/articles/how-long-to-become-profitable/`
 
 ---
 
@@ -1121,7 +1121,7 @@
 
 ## POST 477 — 📝 Blog: Why Demo Trading Isn't Enough
 
-**Source:** `https://blog.signalpilot.io/articles/why-demo-isnt-enough/`
+**Source:** `https://blog.signalpilot.io/articles/your-first-trade/`
 
 ---
 
@@ -1308,7 +1308,7 @@
 
 ## POST 478 — 🔮 Chronicle: The Sovereign's Cycle
 
-**Source:** `https://signalpilot.io/chronicle/the-sovereigns-cycle/`
+**Source:** `https://signalpilot.io/chronicle/meet-the-sovereign/`
 
 ---
 
@@ -1671,7 +1671,7 @@
 
 ## POST 480 — 📚 Docs: Keyboard Shortcuts Guide
 
-**Source:** `https://docs.signalpilot.io/shortcuts/`
+**Source:** `https://docs.signalpilot.io/start-quick`
 
 ---
 
