@@ -4641,212 +4641,171 @@
 
         </div>
 
-        <!-- HERO VIDEO - Full Width -->
-        <div style="margin-bottom:3rem">
+        <!-- HERO COMPARISON SLIDER -->
+        <div style="margin-bottom:1.5rem">
 
-            <!-- PENTARCH CHART SHOWCASE -->
-            <div style="position:relative;border-radius:8px;overflow:hidden;background:#0a0e18;margin:0 auto;aspect-ratio:245/106;">
+          <!-- Slider Controls -->
+          <div style="display:flex;justify-content:center;gap:0.5rem;margin-bottom:1.25rem;flex-wrap:nowrap;align-items:center">
+            <button id="hero-btn-before" class="btn btn-secondary" style="width:90px;height:38px;font-size:0.85rem;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;padding:0">← Előtte</button>
+            <button id="hero-btn-autoplay" class="shiny-cta" style="width:90px;height:38px;font-size:0.85rem;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;padding:0"><span>▶ Auto</span></button>
+            <button id="hero-btn-after" class="btn btn-secondary" style="width:90px;height:38px;font-size:0.85rem;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;padding:0">Utána →</button>
+          </div>
 
-              <!-- Chart Video -->
-              <video
-                id="heroVideo"
-                src="../assets/videos/hero-demo.mp4"
-                autoplay
-                loop
-                muted
-                playsinline
-                webkit-playsinline
-                preload="auto"
-                poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%230a0e18' width='1200' height='600'/%3E%3C/svg%3E"
-                style="width:100%;height:100%;display:block;object-fit:cover;object-position:center;background:#0a0e18;pointer-events:none;position:absolute;top:0;left:0"
-                width="1200"
-                height="600"
-              >
-                <source src="../assets/videos/hero-demo.mp4" type="video/mp4">
-                A böngésződ nem támogatja a videó lejátszást.
-              </video>
-              
-              <!-- Overlay Badge - Reduced Opacity -->
-              <div style="position:absolute;top:1rem;right:1rem;background:rgba(12,16,27,.92);padding:.5rem .8rem;border-radius:8px;border:1px solid rgba(91,138,255,.25);display:flex;align-items:center;gap:.5rem">
-                <span style="width:6px;height:6px;border-radius:50%;background:#3ed598;box-shadow:0 0 8px rgba(62,213,152,.6)"></span>
-                <span style="font-size:.8rem;font-weight:700;color:#3ed598">ÉLŐ GRAFIKON</span>
+          <!-- Interactive Slider Container -->
+          <div id="hero-comparison-slider" role="region" aria-label="Előtte-utána összehasonlító csúszka" style="position:relative;max-width:1400px;width:100%;margin:0 auto;border-radius:16px;overflow:hidden;border:3px solid rgba(91,138,255,.4);box-shadow:0 30px 80px rgba(0,0,0,.6);touch-action:pan-x">
+
+            <!-- Without Signal Pilot (Background) -->
+            <div class="comparison-image" style="position:relative;width:100%;aspect-ratio:16/9;background:#0a0e18">
+              <img
+                src="/assets/showcase/chart-without.jpg"
+                alt="Grafikon Signal Pilot nélkül"
+                loading="eager"
+                style="width:100%;height:100%;object-fit:contain;display:block"
+              />
+              <!-- Without Label -->
+              <div style="position:absolute;top:1rem;left:1rem;background:rgba(10,14,24,0.9);padding:0.5rem 1rem;border-radius:8px;border:1px solid rgba(239,68,68,0.3)">
+                <span style="color:#f87171;font-weight:700;font-size:0.85rem">Signal Pilot nélkül</span>
               </div>
             </div>
-            
-            <!-- Video Force Play Script + Mobile Fix -->
-            <script>
-              (function() {
-                const video = document.getElementById('heroVideo');
-                if (!video) {
-                  console.error('Hero video element not found!');
-                  return;
 
-                // Set playback speed (1.0 = normal, 1.5 = 50% faster, 2.25 = 2.25x speed, 2.0 = 2x speed)
-                video.playbackRate = 2.25;
-                }
-
-                // ALL DEVICES: Force dimensions and visibility - SUPER VISIBLE
-                function forceVideoVisible() {
-                  const width = window.innerWidth;
-                  const isMobile = width <= 768;
-                  const isTablet = width > 768 && width <= 1024;
-                  const isDesktop = width > 1024;
-
-                  // Force video container styles FOR ALL DEVICES
-                  const container = video.parentElement;
-                  if (container) {
-                    container.style.display = 'block';
-                    container.style.visibility = 'visible';
-                    container.style.background = '#0a0e18';
-
-                    if (isMobile) {
-                      container.style.minHeight = '300px';
-                    }
-                  }
-
-                  // Force video element styles - VISIBLE ON ALL DEVICES
-                  video.style.display = 'block';
-                  video.style.visibility = 'visible';
-                  video.style.opacity = '1';
-                  video.style.width = '100%';
-                  video.style.objectFit = 'cover';
-                  video.style.background = '#0a0e18';
-
-                  // Device-specific sizing
-                  if (isMobile) {
-                    video.style.minHeight = '300px';
-                    video.style.maxHeight = '550px';
-                    video.style.height = 'auto';
-                    video.style.borderRadius = '12px';
-                  } else if (isTablet) {
-                    video.style.height = '100%';
-                    video.style.maxHeight = '600px';
-                  } else {
-                    // Desktop
-                    video.style.height = '100%';
-                  }
-                }
-
-                // Run on load
-                forceVideoVisible();
-
-                // Run after delays to override other scripts
-                setTimeout(forceVideoVisible, 100);
-                setTimeout(forceVideoVisible, 500);
-                setTimeout(forceVideoVisible, 1000);
-
-                // Re-run on resize
-                window.addEventListener('resize', forceVideoVisible);
-
-                // Aggressive play attempts
-                function tryPlay(source) {
-                  video.play().then(() => {
-                    // Video playing successfully
-                  }).catch(e => {
-                    // Autoplay blocked or failed
-                  });
-                }
-
-                // IMMEDIATE play attempt - before anything else
-                video.play().catch(() => {});
-
-                // Try to play immediately
-                tryPlay('initial');
-
-                // Force play after short delay
-                setTimeout(() => {
-                  video.play().catch(() => {});
-                }, 100);
-
-                setTimeout(() => {
-                  video.play().catch(() => {});
-                }, 300);
-
-                // Wait for loadeddata event
-                video.addEventListener('loadeddata', function() {
-                  tryPlay('loadeddata');
-                  // Extra play attempt
-                  setTimeout(() => video.play().catch(() => {}), 50);
-                }, { once: true });
-
-                // Wait for canplay event
-                video.addEventListener('canplay', function() {
-                  tryPlay('canplay');
-                }, { once: true });
-
-                // Wait for canplaythrough event (fully loaded)
-                video.addEventListener('canplaythrough', function() {
-                  tryPlay('canplaythrough');
-                }, { once: true });
-
-                // Retry play on user interaction
-                let played = false;
-                document.addEventListener('click', function() {
-                  if (!played && video.paused) {
-                    tryPlay('click');
-                    played = true;
-                  }
-                });
-
-                // Also try to play on touch (mobile)
-                document.addEventListener('touchstart', function() {
-                  if (!played && video.paused) {
-                    tryPlay('touch');
-                    played = true;
-                  }
-                });
-
-                // Ensure loop
-                video.addEventListener('ended', function() {
-                  video.currentTime = 0;
-                  video.play();
-                });
-
-                // Check if video is actually playing
-                setTimeout(() => {
-                  // Silent check - no logging needed in production
-                  if (video.paused) {
-                    // Video requires user interaction
-                  }
-                }, 2000);
-              })();
-            </script>
-
-            </div>
-
-            <!-- Signal Legend - Improved Readability -->
-            <div class="video-caption" style="padding:2rem 1rem;text-align:center;max-width:1000px;margin:0 auto">
-              <p style="margin:0 0 1.5rem 0;font-size:1rem;line-height:1.7;color:rgba(255,255,255,0.9)">
-                <strong>Öt jelzés térképezi fel a teljes piaci ciklust.</strong> TD akkor jelenik meg, amikor az eladás kimerül. CAP akkor jelenik meg, amikor a vásárlás csúcsra ér. Nem találgatod a fordulót, hanem látod a struktúra változását. Készülj fel az átmenetekre. Ne kergesd őket.
-              </p>
-              <div class="signal-legend" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;max-width:1200px;margin:0 auto">
-                <div class="signal-item" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.2);border-radius:8px;min-width:0">
-                  <span class="signal-icon" style="width:8px;height:8px;border-radius:50%;background:#a855f7;box-shadow:0 0 8px rgba(168,85,247,.4);flex-shrink:0"></span>
-                  <strong style="color:#c084fc;font-size:.9rem;white-space:nowrap;flex-shrink:0">TD</strong>
-                  <span style="color:rgba(255,255,255,.7);font-size:.85rem">→ Földet érés (Akkumulációs Fázis)</span>
-                </div>
-                <div class="signal-item" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:rgba(20,184,166,.08);border:1px solid rgba(20,184,166,.2);border-radius:8px;min-width:0">
-                  <span class="signal-icon" style="width:8px;height:8px;border-radius:50%;background:#14b8a6;box-shadow:0 0 8px rgba(20,184,166,.4);flex-shrink:0"></span>
-                  <strong style="color:#2dd4bf;font-size:.9rem;white-space:nowrap;flex-shrink:0">IGN</strong>
-                  <span style="color:rgba(255,255,255,.7);font-size:.85rem">→ Gyújtás (Emelkedési Fázis)</span>
-                </div>
-                <div class="signal-item" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:8px;min-width:0">
-                  <span class="signal-icon" style="width:8px;height:8px;border-radius:50%;background:#f97316;box-shadow:0 0 8px rgba(249,115,22,.4);flex-shrink:0"></span>
-                  <strong style="color:#fb923c;font-size:.9rem;white-space:nowrap;flex-shrink:0">CAP</strong>
-                  <span style="color:rgba(255,255,255,.7);font-size:.85rem">→ Tetőzés (Csúcs Fázis)</span>
-                </div>
-                <div class="signal-item" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.2);border-radius:8px;min-width:0">
-                  <span class="signal-icon" style="width:8px;height:8px;border-radius:50%;background:#eab308;box-shadow:0 0 8px rgba(234,179,8,.4);flex-shrink:0"></span>
-                  <strong style="color:#facc15;font-size:.9rem;white-space:nowrap;flex-shrink:0">WRN</strong>
-                  <span style="color:rgba(255,255,255,.7);font-size:.85rem">→ Figyelmeztetés (Elosztási Fázis)</span>
-                </div>
-                <div class="signal-item" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:8px;min-width:0">
-                  <span class="signal-icon" style="width:8px;height:8px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.4);flex-shrink:0"></span>
-                  <strong style="color:#f87171;font-size:.9rem;white-space:nowrap;flex-shrink:0">BDN</strong>
-                  <span style="color:rgba(255,255,255,.7);font-size:.85rem">→ Összeomlás (Hanyatlási Fázis)</span>
-                </div>
+            <!-- With Signal Pilot (Overlay - slides over) -->
+            <div id="hero-slider-overlay" class="comparison-image" style="position:absolute;top:0;left:0;width:50%;height:100%;overflow:hidden;z-index:10">
+              <img
+                id="hero-overlay-image"
+                src="/assets/showcase/chart-with.jpg"
+                alt="Grafikon Signal Pilottal"
+                loading="eager"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;max-width:none;object-fit:contain;display:block;pointer-events:none"
+              />
+              <!-- With Label -->
+              <div style="position:absolute;top:1rem;left:1rem;background:rgba(10,14,24,0.9);padding:0.5rem 1rem;border-radius:8px;border:1px solid rgba(62,213,152,0.3)">
+                <span style="color:#3ed598;font-weight:700;font-size:0.85rem">Signal Pilottal</span>
               </div>
             </div>
+
+            <!-- Slider Handle -->
+            <div id="hero-slider-handle" role="slider" aria-label="Összehasonlító csúszka pozíció" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0" style="position:absolute;top:0;left:50%;width:48px;height:100%;transform:translateX(-50%);z-index:100;cursor:ew-resize;touch-action:pan-x">
+              <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:100%;cursor:ew-resize"></div>
+              <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:4px;height:100%;background:#0a0e18;box-shadow:0 0 20px rgba(10,14,24,.5);pointer-events:none"></div>
+              <div id="hero-handle-circle" class="pulse-animate" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:#0a0e18;border-radius:50%;box-shadow:0 4px 16px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;pointer-events:none">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="margin-left:-12px"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Disclaimer below slider -->
+          <p style="margin-top:1rem;font-size:0.75rem;color:var(--muted);opacity:0.8;text-align:center;max-width:600px;margin-left:auto;margin-right:auto">
+            ⚠️ Csak oktatási célú eszközök. A kereskedés veszteséggel járhat.
+          </p>
+
+        </div>
+
+        <style>
+          @keyframes pulse{0%{box-shadow:0 4px 16px rgba(0,0,0,.3),0 0 0 0 rgba(91,138,255,.7)}50%{box-shadow:0 4px 16px rgba(0,0,0,.3),0 0 0 12px rgba(91,138,255,0)}100%{box-shadow:0 4px 16px rgba(0,0,0,.3),0 0 0 0 rgba(91,138,255,.7)}}
+          .pulse-animate{animation:pulse 2s ease-in-out infinite}
+          #hero-slider-handle:focus,#hero-slider-handle *:focus{outline:none !important}
+          .hero-smooth-transition{transition:left 0.3s ease,width 0.3s ease !important}
+        </style>
+
+        <script>
+        (function(){
+          const slider=document.getElementById('hero-comparison-slider');
+          const handle=document.getElementById('hero-slider-handle');
+          const handleCircle=document.getElementById('hero-handle-circle');
+          const overlay=document.getElementById('hero-slider-overlay');
+          const overlayImage=document.getElementById('hero-overlay-image');
+          if(!slider||!handle||!overlay)return;
+
+          let isDragging=false;
+          let hasInteracted=false;
+          let heroAutoplayInterval=null;
+          let isHeroAutoPlaying=false;
+
+          function setSliderPosition(pct,smooth){
+            pct=Math.max(0,Math.min(pct,100));
+            if(smooth&&!isDragging){
+              handle.classList.add('hero-smooth-transition');
+              overlay.classList.add('hero-smooth-transition');
+              setTimeout(()=>{handle.classList.remove('hero-smooth-transition');overlay.classList.remove('hero-smooth-transition')},300);
+            }
+            handle.style.left=pct+'%';
+            overlay.style.width=pct+'%';
+            handle.setAttribute('aria-valuenow',Math.round(pct));
+          }
+
+          function updateOverlayImageWidth(){
+            if(overlayImage&&slider){
+              const w=slider.clientWidth;
+              if(w>0)overlayImage.style.width=w+'px';
+            }
+          }
+
+          function updateFromPosition(clientX,smooth){
+            const rect=slider.getBoundingClientRect();
+            const pct=((clientX-rect.left)/rect.width)*100;
+            setSliderPosition(pct,smooth);
+          }
+
+          function markInteraction(){
+            hasInteracted=true;
+            handleCircle.classList.remove('pulse-animate');
+            stopHeroAutoPlay();
+          }
+
+          function startHeroAutoPlay(){
+            stopHeroAutoPlay();
+            isHeroAutoPlaying=true;
+            const btn=document.getElementById('hero-btn-autoplay');
+            if(btn)btn.innerHTML='<span>⏸ Szünet</span>';
+            let dir=1,pos=parseFloat(handle.style.left)||50;
+            heroAutoplayInterval=setInterval(()=>{
+              pos+=dir*1.5;
+              if(pos>=100){pos=100;dir=-1}
+              else if(pos<=0){pos=0;dir=1}
+              setSliderPosition(pos,false);
+            },30);
+          }
+
+          function stopHeroAutoPlay(){
+            if(heroAutoplayInterval){clearInterval(heroAutoplayInterval);heroAutoplayInterval=null}
+            isHeroAutoPlaying=false;
+            const btn=document.getElementById('hero-btn-autoplay');
+            if(btn)btn.innerHTML='<span>▶ Auto</span>';
+          }
+
+          const btnBefore=document.getElementById('hero-btn-before');
+          const btnAutoplay=document.getElementById('hero-btn-autoplay');
+          const btnAfter=document.getElementById('hero-btn-after');
+          if(btnBefore)btnBefore.addEventListener('click',()=>{markInteraction();setSliderPosition(0,true)});
+          if(btnAfter)btnAfter.addEventListener('click',()=>{markInteraction();setSliderPosition(100,true)});
+          if(btnAutoplay)btnAutoplay.addEventListener('click',()=>{if(isHeroAutoPlaying)stopHeroAutoPlay();else{hasInteracted=true;handleCircle.classList.remove('pulse-animate');startHeroAutoPlay()}});
+
+          handle.addEventListener('mousedown',()=>{isDragging=true;markInteraction();document.body.style.cursor='ew-resize'});
+          document.addEventListener('mousemove',e=>{if(isDragging)updateFromPosition(e.clientX,false)});
+          document.addEventListener('mouseup',()=>{isDragging=false;document.body.style.cursor=''});
+          handle.addEventListener('touchstart',e=>{e.preventDefault();isDragging=true;markInteraction()},{passive:false});
+          slider.addEventListener('touchstart',e=>{if(!handle.contains(e.target)){e.preventDefault();isDragging=true;markInteraction();updateFromPosition(e.touches[0].clientX,false)}},{passive:false});
+          document.addEventListener('touchmove',e=>{if(isDragging){e.preventDefault();updateFromPosition(e.touches[0].clientX,false)}},{passive:false});
+          document.addEventListener('touchend',()=>{isDragging=false});
+          slider.addEventListener('click',e=>{if(!isDragging&&e.target!==handle&&!handle.contains(e.target)){markInteraction();updateFromPosition(e.clientX,true)}});
+
+          document.addEventListener('keydown',e=>{
+            const rect=slider.getBoundingClientRect();
+            if(rect.top<window.innerHeight&&rect.bottom>0){
+              let cur=parseFloat(handle.style.left)||50;
+              if(e.key==='ArrowLeft'){e.preventDefault();markInteraction();setSliderPosition(cur-5,true)}
+              else if(e.key==='ArrowRight'){e.preventDefault();markInteraction();setSliderPosition(cur+5,true)}
+            }
+          });
+
+          function initSlider(){updateOverlayImageWidth();setSliderPosition(50,false)}
+          window.addEventListener('load',()=>{initSlider();setTimeout(()=>{if(!hasInteracted)startHeroAutoPlay()},800)});
+          window.addEventListener('resize',updateOverlayImageWidth);
+          initSlider();
+        })();
+        </script>
 
       </div>
 
