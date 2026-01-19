@@ -536,7 +536,7 @@ Save this. 🔖
 
 # POST 215 — 🛠️ VOLUME ORACLE TRANSITION REGIME
 
-**Source:** https://docs.signalpilot.io/indicators/volume-oracle/
+**Source:** https://docs.signalpilot.io/volume-oracle-v10
 
 ---
 
@@ -1205,7 +1205,7 @@ Full lesson in bio 🔗
 
 # POST 220 — 📚 ALERT NOTIFICATION OPTIONS
 
-**Source:** https://docs.signalpilot.io/guides/alert-notifications/
+**Source:** https://docs.signalpilot.io/how-to-alerts
 
 ---
 

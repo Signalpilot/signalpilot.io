@@ -434,7 +434,7 @@ Win rate is a vanity metric. #trading #mindset #riskreward #forex #crypto
 |-------|-------|
 | Pillar | P2: Indicator Truth |
 | Type | Product Demo |
-| Source | https://docs.signalpilot.io/indicators/plutus-flow/ |
+| Source | https://docs.signalpilot.io/plutus-flow-v10 |
 | CTA | Trial |
 | Format | Twitter: Single | Instagram: Carousel | TikTok: Product showcase |
 
@@ -916,7 +916,7 @@ Math > Emotion. #trading #riskmanagement #positionsizing #forex #crypto
 |-------|-------|
 | Pillar | P2: Indicator Truth |
 | Type | Docs |
-| Source | https://docs.signalpilot.io/cheatsheets/plutus-flow/ |
+| Source | https://docs.signalpilot.io/ref-cheatsheets-plutus |
 | CTA | Docs |
 | Format | Twitter: Single | Instagram: Carousel | TikTok: Save-worthy |
 

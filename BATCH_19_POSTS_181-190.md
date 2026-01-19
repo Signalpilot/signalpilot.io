@@ -577,7 +577,7 @@ Save this. 🔖
 
 # POST 185 — 🛠️ PENTARCH SOS SIGNAL DEEP DIVE
 
-**Source:** https://docs.signalpilot.io/indicators/pentarch/
+**Source:** https://docs.signalpilot.io/pentarch-v10
 
 ---
 
@@ -1249,7 +1249,7 @@ Full lesson in bio 🔗
 
 # POST 190 — 📚 DOCS: FAQ - COMMON QUESTIONS
 
-**Source:** https://docs.signalpilot.io/faq/
+**Source:** https://docs.signalpilot.io/about-faq
 
 ---
 

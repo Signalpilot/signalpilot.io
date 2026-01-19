@@ -550,7 +550,7 @@ Save this. 🔖
 
 # POST 205 — 🛠️ JANUS ATLAS FRESH VS TESTED LEVELS
 
-**Source:** https://docs.signalpilot.io/indicators/janus-atlas/
+**Source:** https://docs.signalpilot.io/janus-atlas-v10
 
 ---
 
@@ -1217,7 +1217,7 @@ Full lesson in bio 🔗
 
 # POST 210 — 📚 INDICATOR COMPARISON CHART
 
-**Source:** https://docs.signalpilot.io/guides/indicator-comparison/
+**Source:** https://docs.signalpilot.io/ref-comparison
 
 ---
 

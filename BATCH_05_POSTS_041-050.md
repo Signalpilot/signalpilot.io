@@ -404,7 +404,7 @@ Exit > Entry. #trading #mindset #exitstrategy #forex #crypto
 |-------|-------|
 | Pillar | P2: Indicator Truth |
 | Type | Product Demo |
-| Source | https://docs.signalpilot.io/indicators/augury-grid/ |
+| Source | https://docs.signalpilot.io/augury-grid-v10 |
 | CTA | Trial |
 | Format | Twitter: Single | Instagram: Carousel | TikTok: Product showcase |
 

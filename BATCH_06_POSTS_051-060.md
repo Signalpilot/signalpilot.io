@@ -392,7 +392,7 @@ Patience pays. #trading #mindset #patience #forex #crypto
 |-------|-------|
 | Pillar | P2: Indicator Truth |
 | Type | Product Demo |
-| Source | https://docs.signalpilot.io/indicators/omnideck/ |
+| Source | https://docs.signalpilot.io/omnideck-v10 |
 | CTA | Trial |
 | Format | Twitter: Single | Instagram: Carousel | TikTok: Transformation |
 
@@ -869,7 +869,7 @@ They lag. Always. #trading #movingaverages #goldencross #forex #crypto
 |-------|-------|
 | Pillar | P2: Indicator Truth |
 | Type | Docs |
-| Source | https://docs.signalpilot.io/indicators/harmonic-oscillator/ |
+| Source | https://docs.signalpilot.io/harmonic-oscillator-v10 |
 | CTA | Docs |
 | Format | Twitter: Single | Instagram: Carousel | TikTok: Settings guide |
 

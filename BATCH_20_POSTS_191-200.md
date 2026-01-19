@@ -548,7 +548,7 @@ Save this. 🔖
 
 # POST 195 — 🛠️ OMNIDECK UNIFIED VIEW DEMO
 
-**Source:** https://docs.signalpilot.io/indicators/omnideck/
+**Source:** https://docs.signalpilot.io/omnideck-v10
 
 ---
 
@@ -1231,7 +1231,7 @@ Full lesson in bio 🔗
 
 # POST 200 — 📚 BEST PRACTICES GUIDE
 
-**Source:** https://docs.signalpilot.io/guides/best-practices/
+**Source:** https://docs.signalpilot.io/ref-best-practices
 
 ---
 
