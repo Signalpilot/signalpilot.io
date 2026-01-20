@@ -5864,26 +5864,6 @@ Free PDF guide in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Three steps to trading. Most skip two."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | THE TRADING LOOP |
-| 2-4s | 1️⃣ PLAN the trade |
-| 4-6s | 2️⃣ TRADE the plan |
-| 6-8s | 3️⃣ REVIEW the trade |
-| 8-10s | Most traders? |
-| 10-11s | Skip planning ❌ |
-| 11-12s | Skip reviewing ❌ |
-| 12-14s | Don't be most traders. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -5895,17 +5875,6 @@ Free PDF guide in bio
 7. Subtle gradient overlay
 8. SignalPilot logo bottom
 9. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → Dark background
-2. Create circular arrow animation
-3. Add each step appearing around circle
-4. Show ❌ marks on skipped steps
-5. Systematic/process sound, 20% volume
-6. Export 1080x1920
 
 ---
 
@@ -5960,25 +5929,6 @@ Free PDF guide in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "One Bitcoin cycle. Five signals. Watch closely."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | ONE COMPLETE CYCLE |
-| 2-4s | 🟣 TD — Accumulation Zone |
-| 4-6s | 🩵 IGN — Momentum Building |
-| 6-8s | 🟡 WRN — Distribution Begins |
-| 8-10s | 🟠 CAP — Climax / Late Cycle |
-| 10-12s | 🔴 BDN — Structure Break |
-| 12-14s | The Sovereign observes. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -5990,18 +5940,6 @@ Free PDF guide in bio
 7. "Historical observation only" disclaimer
 8. SignalPilot branding
 9. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open TradingView with BTC full cycle chart
-2. Add Pentarch indicator, ensure all 5 signals visible
-3. Screen record slowly panning left to right
-4. Import to CapCut
-5. Add text overlays with color circles
-6. Cinematic ambient music, 20% volume
-7. Export 1080x1920
 
 ---
 
@@ -6082,25 +6020,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Fibonacci levels work because everyone watches them"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | FIBONACCI RETRACEMENTS |
-| 2-4s | 38.2% — Common pullback |
-| 4-5s | 50% — Halfway point |
-| 5-7s | 61.8% — Golden ratio |
-| 7-9s | Why do they work? |
-| 9-11s | Self-fulfilling prophecy |
-| 11-13s | Millions watch the same levels |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA CAROUSEL GUIDE
 
 1. Open Canva → 1080x1080
@@ -6112,19 +6031,6 @@ Full lesson + PDF in bio
 7. Use gold (#c9a962) for 61.8% (golden ratio)
 8. Slide 6: CTA with lead magnet
 9. Export as PNG sequence
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear Fibonacci reactions
-2. Draw Fib retracement tool on chart
-3. Screen record showing price at levels
-4. Import to CapCut
-5. Add text at timestamps
-6. Highlight each level with glow effect
-7. Discovery sound, 20% volume
-8. Export 1080x1920
 
 ---
 
@@ -6178,27 +6084,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "I'll just average down — famous last words"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "I'LL AVERAGE DOWN" |
-| 2-3s | Famous last words 💀 |
-| 3-5s | Price drops |
-| 5-6s | You add more |
-| 6-7s | Price drops again |
-| 7-8s | You add MORE |
-| 8-10s | Now one trade = entire account |
-| 10-12s | Your thesis was WRONG |
-| 12-14s | Adding more doesn't fix wrong |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -6210,18 +6095,6 @@ Full lesson + PDF in bio
 7. Bottom: "Don't marry a losing trade"
 8. SignalPilot branding
 9. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create or find chart showing averaging down disaster
-2. Add arrows at each entry point
-3. Screen record the decline
-4. Import to CapCut
-5. Skull emoji for "famous last words"
-6. Horror/warning sound, 25% volume
-7. Export 1080x1920
 
 ---
 
@@ -6271,25 +6144,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Meet The Commander"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | THE COMMANDER 🎯 |
-| 2-4s | "Alone, they are powerful" |
-| 4-6s | "United, they are unstoppable" |
-| 6-8s | OmniDeck coordinates everything |
-| 8-10s | One overlay |
-| 10-12s | Total command |
-| 12-14s | The Commander leads. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -6301,18 +6155,6 @@ Full lesson + PDF in bio
 7. "OmniDeck" product name subtle bottom
 8. Chronicle series badge
 9. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Get The Commander character image
-2. Import to CapCut
-3. Apply dramatic zoom effect
-4. Add text at timestamps, bold font
-5. Use gold/commanding color scheme
-6. Epic leadership sound, 30% volume
-7. Export 1080x1920
 
 ---
 
@@ -6365,26 +6207,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Price is the headline. Volume is the story."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | PRICE vs VOLUME |
-| 2-4s | Price = What happened |
-| 4-6s | Volume = If it mattered |
-| 6-8s | Big move + Low volume? |
-| 8-9s | Suspicious 🤔 |
-| 9-11s | Small move + High volume? |
-| 11-12s | Something's building |
-| 12-14s | Volume = Conviction |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -6396,18 +6218,6 @@ Full lesson + PDF in bio
 7. Bottom quote: "Volume is conviction"
 8. SignalPilot branding
 9. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear volume/price relationships
-2. Highlight volume bars during screen record
-3. Import to CapCut
-4. Add text at timestamps
-5. Circle suspicious low volume moves
-6. Discovery sound, 20% volume
-7. Export 1080x1920
 
 ---
 
