@@ -144,8 +144,8 @@
 ### Pentarch TD (The Sovereign ⚜️)
 - Full Cycle Demo
 - TD Signal Deep Dive
-- SOS Signal Deep Dive
-- SOW Signal Deep Dive
+- WRN Signal Deep Dive
+- CAP Signal Deep Dive
 - IGN Signal Deep Dive
 - Cycle Phase Transitions
 - Cheatsheet
@@ -153,9 +153,9 @@
 ### Volume Oracle (The Prophet 🔮)
 - Dashboard Demo
 - Regime Detection
-- Expansion Regime
-- Contraction Regime
-- Transition Regime
+- ACCUMULATION Regime
+- DISTRIBUTION Regime
+- NEUTRAL Regime
 - Divergence Detection
 
 ### Janus Atlas (The Cartographer 🗺️)
