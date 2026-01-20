@@ -19782,30 +19782,6 @@ Start your transformation in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "6 months ago: gambling. Today: trading."
-
-**Script:**
-```
-[0-2s] 6 MONTHS AGO
-[2-3s] Random entries
-[3-4s] No stop losses
-[4-5s] Emotional mess
-[5-7s] TODAY
-[7-8s] Rule-based system
-[8-9s] Defined risk
-[9-10s] Consistent results
-[10-12s] The education WORKS
-[12-14s] When you WORK it
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Your transformation is waiting. #signalpilot #trading #transformation #journey"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -19819,22 +19795,6 @@ Start your transformation in bio 🔗
 6. **Timeline:** "6 MONTHS" badge
 7. **Footer:** "The education works" in Inter, 24pt
 8. **Export:** PNG, high quality
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Before/after transformation
-3. **Timeline Setup:**
-   - 0-5s: "Before" chaos visuals
-   - 5-10s: "After" clarity visuals
-   - 10-14s: Message reveal
-4. **Animation:** Contrast dark chaos vs bright clarity
-5. **Color Grading:** Gray→Color transition
-6. **Audio:** Transformation/success sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -19910,27 +19870,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Only trade these hours for best results"
-
-**Script:**
-```
-[0-2s] KILL ZONES ⏰
-[2-4s] 🇬🇧 London Open: 2-5 AM EST
-[4-6s] 🗽 NY Open: 8-11 AM EST
-[6-8s] 🌅 London Close: 10-12 PM EST
-[8-10s] 80% of moves happen HERE
-[10-12s] Rest = Chop
-[12-14s] Focus your energy
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Trade the kill zones. #trading #killzones #sessions #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -19953,24 +19892,6 @@ Full lesson in bio 🔗
 4. **Slide 4:** NY Open details
 5. **Slide 5:** London Close details
 6. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Clock with zones lighting up
-3. **Timeline Setup:**
-   - 0-2s: "KILL ZONES" with clock
-   - 2-4s: London Open lights up blue
-   - 4-6s: NY Open lights up gold
-   - 6-8s: London Close lights up green
-   - 8-14s: "80%" stat and conclusion
-4. **Animation:** Clock zones illuminating
-5. **Flags:** Use country flag emojis
-6. **Audio:** Clock chime sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
