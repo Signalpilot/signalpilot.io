@@ -18751,27 +18751,6 @@ Start learning in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Why give away 82 lessons for free?"
-
-**Script:**
-```
-[0-2s] WHY FREE EDUCATION?
-[2-4s] Indicators alone = Just lines
-[4-6s] Indicators + Education = Power
-[6-8s] We don't want customers who fail
-[8-10s] We want SUCCESSFUL traders
-[10-12s] Your success = Our success
-[12-14s] Education first. Always.
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Education changes everything. #signalpilot #educationfirst #trading #free"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -18785,23 +18764,6 @@ Start learning in bio 🔗
 6. **Philosophy Statement:** "Your success = Our success" in gold
 7. **Footer:** "82 lessons. 100% free." in Inter, 24pt
 8. **Export:** PNG, high quality
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Transformation/philosophy
-3. **Timeline Setup:**
-   - 0-2s: "WHY FREE EDUCATION?" title
-   - 2-6s: Indicators without education visual (chaos)
-   - 6-10s: With education visual (clarity)
-   - 10-14s: Mission statement reveal
-4. **Animation:** Transformation effect
-5. **Color:** Dark to illuminated transition
-6. **Audio:** Mission/purpose sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -18873,27 +18835,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Price moved too fast. Now it has to come back."
-
-**Script:**
-```
-[0-2s] LIQUIDITY VOID
-[2-4s] Price moved TOO FAST
-[4-6s] No trading occurred here
-[6-8s] Creates IMBALANCE
-[8-10s] Price often RETURNS
-[10-12s] To fill the void
-[12-14s] Mark it. Watch it. Trade it.
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Voids get filled. #trading #liquidityvoid #smc #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -18915,23 +18856,6 @@ Full lesson in bio 🔗
 4. **Slide 4:** Magnet effect
 5. **Slide 5:** Trading method
 6. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Void formation and fill
-3. **Timeline Setup:**
-   - 0-2s: "LIQUIDITY VOID" title
-   - 2-6s: Aggressive candle creates gap
-   - 6-10s: Price returns to fill (animation)
-   - 10-14s: "Mark it. Watch it. Trade it."
-4. **Animation:** Gap highlighting, price returning
-5. **Magnet Effect:** Visual pull toward void
-6. **Audio:** Void/magnet sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -19010,28 +18934,6 @@ Full template in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Do this every Sunday to improve your trading"
-
-**Script:**
-```
-[0-2s] WEEKLY REVIEW
-[2-4s] Every Sunday, 30-60 min
-[4-5s] 📊 Review metrics
-[5-6s] 📝 Analyze best/worst trades
-[6-7s] 🔍 Find patterns
-[7-8s] 📋 Plan next week
-[8-10s] Those who review, IMPROVE
-[10-12s] Those who don't, REPEAT
-```
-
-**Duration:** 12 seconds
-
-**Caption:** "Review to improve. #trading #weeklyreview #habits #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -19052,23 +18954,6 @@ Full template in bio 🔗
 1. **Slide 1:** Title with Sunday calendar
 2. **Slides 2-5:** Each review section
 3. **Slide 6:** CTA - Template link
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Ritual/routine
-3. **Timeline Setup:**
-   - 0-2s: "WEEKLY REVIEW" with Sunday highlight
-   - 2-8s: Each section appears with icon
-   - 8-10s: "Those who review, IMPROVE"
-   - 10-12s: "Those who don't, REPEAT"
-4. **Animation:** Checklist filling in
-5. **Calendar Visual:** Sunday emphasized
-6. **Audio:** Productive/routine sound at 20% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -19131,28 +19016,6 @@ Save this. 🔖
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Good vs great traders? About 1% difference."
-
-**Script:**
-```
-[0-2s] GOOD vs GREAT
-[2-4s] The difference? About 1%
-[4-6s] 1% better entries
-[6-7s] 1% better exits
-[7-8s] 1% better discipline
-[8-10s] 1% + 1% + 1%...
-[10-12s] = MASSIVE edge
-[12-14s] Small improvements compound
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "1% at a time. #trading #improvement #quotes #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -19167,23 +19030,6 @@ Save this. 🔖
 5. **Compound Effect:** Blocks building into larger structure
 6. **Footer:** "Small edges compound" in Inter, 24pt, #c9a962
 7. **Export:** PNG, high quality
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Building/stacking
-3. **Timeline Setup:**
-   - 0-2s: "GOOD vs GREAT" title
-   - 2-4s: "About 1%" reveal
-   - 4-10s: 1% blocks stacking with labels
-   - 10-14s: Blocks compound into tower
-4. **Animation:** Blocks stacking with satisfying effect
-5. **Color:** Each 1% block slightly different shade
-6. **Audio:** Building/stacking sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
