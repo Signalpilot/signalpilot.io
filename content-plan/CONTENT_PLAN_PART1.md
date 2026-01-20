@@ -17897,29 +17897,6 @@ Full routine in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "This morning routine will improve your trading"
-
-**Script:**
-```
-[0-2s] TRADER'S MORNING ROUTINE
-[2-3s] ☐ Review overnight action
-[3-4s] ☐ Mark key levels
-[4-5s] ☐ Check economic calendar
-[5-6s] ☐ Review watchlist
-[6-7s] ☐ Set alerts
-[7-8s] ☐ Mental check
-[8-10s] 30-40 minutes
-[10-12s] Prepared = Profitable
-```
-
-**Duration:** 12 seconds
-
-**Caption:** "Start right. #trading #routine #morningroutine #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -17942,23 +17919,6 @@ Full routine in bio 🔗
 1. **Slide 1:** Title with morning/clock visual
 2. **Slides 2-5:** Each routine step with time
 3. **Slide 6:** Total time + CTA
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Checklist checking off
-3. **Timeline Setup:**
-   - 0-2s: Title with morning visual
-   - 2-8s: Each item appears and gets checked
-   - 8-10s: Total time display
-   - 10-12s: "Prepared = Profitable" conclusion
-4. **Animation:** Checkbox fill animation for each item
-5. **Morning Visual:** Sunrise colors, fresh start feel
-6. **Audio:** Morning/productive sound at 20% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -18018,27 +17978,6 @@ Save this. 🔖
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "The market rewards patience. It punishes greed."
-
-**Script:**
-```
-[0-2s] THE MARKET
-[2-4s] REWARDS patience ✅
-[4-6s] Waiting for setups
-[6-8s] PUNISHES greed ❌
-[8-10s] Forcing trades, oversizing
-[10-12s] Which are YOU practicing?
-[12-14s] The market keeps score.
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Which side are you on? #trading #mindset #patience #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -18054,25 +17993,6 @@ Save this. 🔖
 6. **Footer:** "Which are you practicing?" in Inter, 24pt
 7. **Brand Mark:** Signal Pilot logo, small
 8. **Export:** PNG, high quality
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Balance scale visualization
-3. **Timeline Setup:**
-   - 0-2s: "THE MARKET" title
-   - 2-4s: "REWARDS patience" with green glow
-   - 4-6s: Patience behaviors listed
-   - 6-8s: "PUNISHES greed" with red glow
-   - 8-10s: Greed behaviors listed
-   - 10-14s: "Which are YOU?" + scale tipping
-4. **Animation:** Scale tipping, rewards vs punishments
-5. **Color Coding:** Green for patience, red for greed
-6. **Audio:** Balance/judgment sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -18148,27 +18068,6 @@ Demo in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Fresh levels react better. Here's why."
-
-**Script:**
-```
-[0-2s] FRESH vs TESTED LEVELS
-[2-4s] FRESH = Never retested
-[4-6s] Orders still waiting
-[6-8s] Stronger reaction ✅
-[8-10s] TESTED = Touched multiple times
-[10-12s] Orders already filled
-[12-14s] May break easier ⚠️
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Fresh is best. #janusatlas #levels #trading #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -18192,23 +18091,6 @@ Demo in bio 🔗
 4. **Slide 4:** Trading fresh levels
 5. **Slide 5:** Trading tested levels
 6. **Slide 6:** CTA - Try Janus Atlas
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Chart comparison
-3. **Timeline Setup:**
-   - 0-2s: "FRESH vs TESTED" title
-   - 2-6s: Fresh level chart with clean bounce animation
-   - 6-10s: Tested level chart with choppy action
-   - 10-14s: Conclusion - fresh is better
-4. **Animation:** Price bouncing off levels
-5. **Highlight:** Green glow on fresh, yellow caution on tested
-6. **Audio:** Fresh/clean sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -18282,27 +18164,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "The open is chaos. Unless you have a plan."
-
-**Script:**
-```
-[0-2s] TRADING THE OPEN
-[2-4s] Option 1: Breakout of opening range
-[4-6s] Option 2: Fade the opening spike
-[6-8s] Option 3: Wait 30 min for clarity
-[8-10s] Don't trade it BLINDLY
-[10-12s] Have a STRATEGY
-[12-14s] Chaos or opportunity. You choose.
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Have a plan for the open. #trading #daytrading #open #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -18326,24 +18187,6 @@ Full lesson in bio 🔗
 5. **Slide 5:** Wait strategy chart
 6. **Slide 6:** Rules summary
 7. **Slide 7:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Opening bell energy
-3. **Timeline Setup:**
-   - 0-2s: Bell rings, "TRADING THE OPEN" title
-   - 2-4s: Strategy 1 with chart snippet
-   - 4-6s: Strategy 2 with chart snippet
-   - 6-8s: Strategy 3 with chart snippet
-   - 8-14s: "Have a strategy" conclusion
-4. **Animation:** Bell ring, chaos settling
-5. **Energy Level:** High at start, calmer at end
-6. **Audio:** Opening bell sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -18423,28 +18266,6 @@ Full article in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "If you're doing this, you're on TILT"
-
-**Script:**
-```
-[0-2s] ARE YOU ON TILT?
-[2-4s] 🚨 Increasing size after losses
-[4-5s] 🚨 Breaking your rules
-[5-6s] 🚨 Trading for revenge
-[6-7s] 🚨 Can't walk away
-[7-9s] If YES to any...
-[9-11s] STOP. NOW.
-[11-13s] Return tomorrow.
-```
-
-**Duration:** 13 seconds
-
-**Caption:** "Recognize it. Stop it. #trading #tilt #psychology #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -18467,24 +18288,6 @@ Full article in bio 🔗
 3. **Slides 3-4:** Warning signs
 4. **Slide 5:** Action steps
 5. **Slide 6:** CTA
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Warning, urgent
-3. **Timeline Setup:**
-   - 0-2s: "ARE YOU ON TILT?" with alarm effect
-   - 2-7s: Warning signs appear with 🚨
-   - 7-9s: "If YES..." transition
-   - 9-11s: "STOP. NOW." with impact
-   - 11-13s: "Return tomorrow" calming down
-4. **Animation:** Warning stamps, urgent shaking
-5. **Color Mood:** Red warning tones
-6. **Audio:** Alarm/warning sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -18550,27 +18353,6 @@ Read the full chronicle in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "A commander sees the full field before battle"
-
-**Script:**
-```
-[0-2s] THE COMMANDER 🎯
-[2-4s] "Never enter battle"
-[4-6s] "Without seeing the full field"
-[6-8s] OmniDeck shows EVERYTHING
-[8-10s] All indicators. One view.
-[10-12s] See clearly. Decide clearly.
-[12-14s] Command the trade.
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Command the field. #signalpilot #thecommander #chronicle #trading"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -18587,24 +18369,6 @@ Read the full chronicle in bio 🔗
 7. **Target Icon:** 🎯 as accent
 8. **Footer:** "THE COMMANDER" in small caps
 9. **Export:** PNG, high quality
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Cinematic, strategic
-3. **Timeline Setup:**
-   - 0-2s: The Commander figure reveal
-   - 2-6s: Quote reveals word by word
-   - 6-10s: OmniDeck unified view visualization
-   - 10-14s: "Command the trade" conclusion
-4. **Animation:** Strategic map unfolding, pieces aligning
-5. **Character:** The Commander figure in commanding pose
-6. **Audio:** Strategic/command sound at 30% volume
-7. **Color Grading:** Deep blues, gold accents
-8. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -18679,27 +18443,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "The optimal entry zone: 62-79% Fibonacci"
-
-**Script:**
-```
-[0-2s] OPTIMAL TRADE ENTRY
-[2-4s] The 62-79% Fib zone
-[4-6s] Deep enough = Good R:R
-[6-8s] Not too deep = Trend intact
-[8-10s] The GOLDILOCKS zone
-[10-12s] Not too hot. Not too cold.
-[12-14s] Just right. 🎯
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "The sweet spot. #trading #ote #fibonacci #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -18722,24 +18465,6 @@ Full lesson in bio 🔗
 4. **Slide 4:** Why not too deep
 5. **Slide 5:** How to use steps
 6. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Fibonacci drawing with OTE highlight
-3. **Timeline Setup:**
-   - 0-2s: "OTE" title with Fib tool appearing
-   - 2-4s: Fibonacci levels draw on chart
-   - 4-8s: 62-79% zone highlights in gold
-   - 8-12s: "Goldilocks zone" explanation
-   - 12-14s: Entry point marked with target
-4. **Animation:** Fibonacci drawing, zone highlighting
-5. **Target:** Target icon 🎯 on entry point
-6. **Audio:** Precision/target sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -18825,29 +18550,6 @@ Full comparison in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "All 7 Signal Pilot indicators explained in 15 seconds"
-
-**Script:**
-```
-[0-1s] 7 INDICATORS
-[1-3s] 👑 Pentarch = Cycles
-[3-4s] 🔮 Volume Oracle = Regimes
-[4-5s] 🗺️ Janus Atlas = Levels
-[5-6s] ⚖️ Plutus Flow = Flow
-[6-7s] ⚔️ Harmonic = Momentum
-[7-8s] 👁️ Augury Grid = Scanning
-[8-9s] 🎯 OmniDeck = Unified
-[9-12s] Know your tools 🔧
-```
-
-**Duration:** 12 seconds
-
-**Caption:** "All seven. #signalpilot #indicators #trading #tools"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -18868,22 +18570,6 @@ Full comparison in bio 🔗
 1. **Slide 1:** All 7 overview grid
 2. **Slides 2-7:** One indicator per slide with details
 3. **Slide 8:** CTA - Full comparison doc
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Rapid-fire info cards
-3. **Timeline Setup:**
-   - 0-1s: "7 INDICATORS" title
-   - 1-9s: Each indicator appears with emoji and purpose
-   - 9-12s: "Know your tools" conclusion with all 7 shown
-4. **Animation:** Cards sliding in quickly
-5. **Pacing:** Fast, informative rhythm
-6. **Audio:** Quick info chime sounds at 20% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -18960,18 +18646,6 @@ Full comparison in bio 🔗
 - [ ] The Commander character art
 - [ ] OTE Fibonacci chart
 - [ ] 7 indicators comparison grid
-
-### Videos Needed
-- [ ] 200 celebration confetti (13s)
-- [ ] Context comparison animation (14s)
-- [ ] Morning routine checklist (12s)
-- [ ] Patience/Greed scale (14s)
-- [ ] Fresh/Tested level bounces (14s)
-- [ ] Opening bell chaos (14s)
-- [ ] Tilt warning sequence (13s)
-- [ ] The Commander cinematic (14s)
-- [ ] OTE zone highlight (14s)
-- [ ] 7 indicators rapid-fire (12s)
 
 ---
 
