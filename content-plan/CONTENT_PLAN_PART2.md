@@ -12387,13 +12387,13 @@ Layer 6: Chronicle branding
 > Stronger context for new trends
 
 **Slide 5 - Combo 2:**
-> DIS (Distribution) + Declining Volume
+> WRN (Warning) + Declining Volume
 >
 > Cycle maturing + conviction fading
 > Caution context
 
 **Slide 6 - Combo 3:**
-> ACC (Accumulation) + Low Volume
+> TD (Touchdown) + Low Volume
 >
 > Building phase + quiet
 > Prepare for potential breakout
@@ -12429,11 +12429,11 @@ Layer 6: Chronicle branding
 > Cycle starting + conviction present
 > Stronger context for new trends
 >
-> DIS (Distribution) + Declining Volume
+> WRN (Warning) + Declining Volume
 > Cycle maturing + conviction fading
 > Caution context
 >
-> ACC (Accumulation) + Low Volume
+> TD (Touchdown) + Low Volume
 > Building phase + quiet
 > Prepare for potential breakout
 >
