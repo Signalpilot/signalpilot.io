@@ -38170,29 +38170,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "621 down. 29 to go."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 621 |
-| 2-4s | 29 posts remaining |
-| 4-6s | Education ✓ |
-| 6-7s | Psychology ✓ |
-| 7-8s | All 7 Indicators ✓ |
-| 8-9s | The Chronicle ✓ |
-| 9-11s | Almost there... |
-| 11-12s | Thank you 🙏 |
-
-**Background:** Montage of previous post images or progress bar filling up
-
-**Sound:** Reflective/grateful trending audio with building energy
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 621
 
 #### Static Image (Instagram/Twitter)
@@ -38240,59 +38217,6 @@ Each category:
    - CTA: "Start from the beginning — link in bio"
 
 10. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 621
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Progress bar animation
-   - Previous content thumbnails (montage)
-   - Celebratory but grounded graphics
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): The Number**
-   - Large "621" appearing
-   - Text: "POST 621"
-   - Counter animation effect
-
-5. **Segment 2 (2-4s): Remaining**
-   - Text: "29 posts remaining"
-   - Progress bar filling to 95%
-   - Building anticipation
-
-6. **Segment 3 (4-9s): Achievements**
-   - Quick montage with checkmarks:
-   - "Education ✓" (quick flash of education content)
-   - "Psychology ✓" (flash of psychology content)
-   - "All 7 Indicators ✓" (flash of indicator content)
-   - "The Chronicle ✓" (flash of Chronicle content)
-   - Each gets checkmark animation
-
-7. **Segment 4 (9-11s): Almost There**
-   - Text: "Almost there..."
-   - Progress bar nearly full
-   - Building but not concluding
-
-8. **Segment 5 (11-12s): Gratitude**
-   - Text: "Thank you 🙏"
-   - Signal Pilot logo
-   - Warm, grateful tone
-   - Fade out
-
-9. **Audio:**
-   - Reflective but energized music
-   - Builds throughout
-   - Doesn't peak — suggests more to come
-   - Grateful undertone
-
-10. **Export:** 1080x1920, 30fps
 
 ---
 
@@ -38484,27 +38408,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "You don't need to be right most of the time..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Risk $100 to make $300 |
-| 2-4s | That's 1:3 risk-reward |
-| 4-6s | At 1:3 R:R... |
-| 6-8s | Win 40% = Still profitable |
-| 8-10s | The math changes everything |
-| 10-12s | Free lesson → bio |
-
-**Background:** Chart showing clear 1:3 setup with entry, stop, and target marked
-
-**Sound:** Mind-shift/realization trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 622
 
 #### Static Image (Instagram/Twitter)
@@ -38545,45 +38448,6 @@ Each category:
    - Educational disclaimer
 
 10. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 622
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Chart with R:R setup marked
-   - Calculator or math visuals
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s):** Show chart with risk marked
-   - Text: "Risk $100 to make $300"
-
-5. **Segment 2 (2-4s):** Highlight the ratio
-   - Text: "That's 1:3 risk-reward"
-
-6. **Segment 3 (4-6s):** Setup the reveal
-   - Text: "At 1:3 R:R..."
-
-7. **Segment 4 (6-8s):** The key insight
-   - Text: "Win 40% = Still profitable"
-   - Add "aha" sound effect
-
-8. **Segment 5 (8-10s):** Takeaway
-   - Text: "The math changes everything"
-
-9. **Segment 6 (10-12s):** CTA
-   - Text: "Free lesson → bio"
-   - Signal Pilot logo
-
-10. **Audio:** Educational/revelation music
-
-11. **Export:** 1080x1920, 30fps
 
 ---
 
