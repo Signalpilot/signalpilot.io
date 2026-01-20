@@ -22815,27 +22815,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Trading alone? You don't have to."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Trading alone?" |
-| 2-4s | "Join 10,000+ traders" |
-| 4-6s | "Daily discussions" |
-| 6-8s | "Learn together" |
-| 8-10s | "Free community → bio" |
-
-**Background:** Scrolling through Discord community (blur usernames)
-
-**Sound:** Uplifting community/friendship trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -22858,33 +22837,6 @@ Full setup guide in bio 🔗
 - Connected dots/lines suggesting community
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Discord scroll or community visuals
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Lonely trader visual | "Trading alone?" |
-| 2-4s | Discord member list scrolling | "Join 10,000+ traders" |
-| 4-6s | Chat messages scrolling | "Daily discussions" |
-| 6-8s | Educational content preview | "Learn together" |
-| 8-10s | Community logo | "Free community → bio" |
-
-**Audio:** Uplifting community sound at 20% volume
-
-**Effects:**
-- Blur all usernames/identifiable info
-- Warm color grade
-- Smooth scroll animations
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -22956,28 +22908,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "This candle tells you where institutions entered."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Where did institutions enter?" |
-| 2-4s | "Find the ORDER BLOCK" |
-| 4-6s | "Last candle before the move" |
-| 6-8s | "Price often reacts here" |
-| 8-10s | "Support or resistance zone" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording highlighting order block on chart
-
-**Sound:** Discovery/revelation trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -23001,34 +22931,6 @@ Full setup guide in bio 🔗
 - Chart examples for bullish and bearish
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: TradingView chart
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Chart overview | "Where did institutions enter?" |
-| 2-4s | Zoom to candle | "Find the ORDER BLOCK" |
-| 4-6s | Highlight last candle | "Last candle before the move" |
-| 6-8s | Show price returning | "Price often reacts here" |
-| 8-10s | Show reaction | "Support or resistance zone" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Discovery sound at 20% volume
-
-**Effects:**
-- Zoom and highlight animations
-- Box drawing around order block
-- Arrow animations
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -23096,27 +22998,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "1% per day sounds boring. Until you do the math."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "1% daily = boring?" |
-| 2-4s | "Do the math" |
-| 4-6s | "Compounding is powerful" |
-| 6-8s | "Consistency > home runs" |
-| 8-10s | "Stack singles. Win long-term." |
-
-**Background:** Animation of compound growth curve or calculator
-
-**Sound:** Motivational/inspirational trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -23139,33 +23020,6 @@ Full setup guide in bio 🔗
 - Clean, mathematical aesthetic
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Dark with animated graph
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Flat line | "1% daily = boring?" |
-| 2-4s | Calculator animation | "Do the math" |
-| 4-6s | Curve starts rising | "Compounding is powerful" |
-| 6-8s | Curve goes exponential | "Consistency > home runs" |
-| 8-10s | Final height with logo | "Stack singles. Win long-term." |
-
-**Audio:** Motivational sound at 20% volume
-
-**Effects:**
-- Line drawing animation for curve
-- Number counter animation
-- Satisfying reveal at peak
-
-**Export:** 1080x1920, 30fps
 
 ---
 
