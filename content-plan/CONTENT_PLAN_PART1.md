@@ -13767,22 +13767,6 @@ Compare for yourself — link in bio 🔗
 
 **Format:** Single image (1080x1080) — Comparison checklist
 
-### TikTok Script
-```
-HOOK: "Signal Pilot vs the competition"
-
-[0-2s] SIGNAL PILOT vs OTHERS
-[2-4s] ❌ They repaint ✅ We don't
-[4-6s] ❌ Education paywalled ✅ 82 free lessons
-[6-8s] ❌ Buy separately ✅ 7 indicators included
-[8-10s] ❌ Just signals ✅ Complete system
-[10-12s] Not just indicators
-[12-14s] A trading education 🏆
-
-DURATION: 14 seconds
-SOUND: Winner/champion sound
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → Create Design → 1080x1080px
@@ -13800,21 +13784,6 @@ SOUND: Winner/champion sound
 7. Footer: "Not just indicators. A complete system."
 8. Signal Pilot logo bottom right
 9. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Create comparison visual with ❌ and ✅
-2. Reveal each comparison row one by one
-3. Text overlays at timestamps:
-   - 0-2s: "SIGNAL PILOT vs OTHERS"
-   - 2-10s: Each comparison point
-   - 10-14s: Conclusion with trophy
-4. Use winner/champion sound at 25% volume
-5. ❌ appears on left, then ✅ appears on right
-6. End with "complete system" emphasis
-7. Export: 1080x1920, 30fps
-8. Caption: "The clear choice. #signalpilot #compare"
 ```
 
 ---
@@ -13876,22 +13845,6 @@ Free breakout guide — link in bio 🔗
 - Slide 4: Retest & HTF alignment
 - Slide 5: CTA
 
-### TikTok Script
-```
-HOOK: "70% of breakouts fail. Here's how to filter them."
-
-[0-2s] 70% OF BREAKOUTS FAIL
-[2-4s] How to filter:
-[4-6s] ✅ Volume spike on break
-[6-8s] ✅ Candle CLOSES beyond
-[8-10s] ✅ Wait for RETEST
-[10-12s] ✅ Higher TF alignment
-[12-14s] Confirm it. Don't chase it.
-
-DURATION: 14 seconds
-SOUND: Filter/selection sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -13930,22 +13883,6 @@ SLIDE 5 - CTA:
 2. "Free Breakout Guide"
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Find chart with breakout and fakeout examples
-2. Show the difference between confirmed vs failed
-3. Text overlays at timestamps:
-   - 0-2s: "70% OF BREAKOUTS FAIL"
-   - 2-4s: "How to filter:"
-   - 4-12s: Each confirmation with ✅
-   - 12-14s: "Confirm it. Don't chase it."
-4. Use filter/selection sound at 25% volume
-5. Show fakeout first, then confirmed breakout
-6. Highlight each confirmation on chart
-7. Export: 1080x1920, 30fps
-8. Caption: "Filter the fakes. #trading #breakouts"
 ```
 
 ---
@@ -14010,24 +13947,6 @@ Full article — link in bio 🔗
 - Slide 4: Mindset & Lesson sections
 - Slide 5: CTA
 
-### TikTok Script
-```
-HOOK: "Every profitable trader does this"
-
-[0-2s] EVERY PROFITABLE TRADER
-[2-4s] Does THIS
-[4-6s] JOURNALS 📓
-[6-7s] Log the setup
-[7-8s] Log the trade
-[8-9s] Log the emotion
-[9-10s] Log the lesson
-[10-12s] Your journal = Your edge
-[12-14s] Start today.
-
-DURATION: 14 seconds
-SOUND: Writing/paper sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -14068,22 +13987,6 @@ SLIDE 5 - CTA:
 2. "Read the Full Article"
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Create journal visual with entries
-2. Animate pages flipping with content
-3. Text overlays at timestamps:
-   - 0-4s: Introduction
-   - 4-6s: "JOURNALS"
-   - 6-10s: Each section briefly
-   - 10-14s: "Your edge" + CTA
-4. Use writing/paper sound at 20% volume
-5. Show pen writing entries
-6. Pages flipping animation
-7. Export: 1080x1920, 30fps
-8. Caption: "Journal everything. #trading #journal"
 ```
 
 ---
@@ -14131,22 +14034,6 @@ Save this. 🔖
 
 **Format:** Single image (1080x1080) — Quote card
 
-### TikTok Script
-```
-HOOK: "The best trade is often no trade"
-
-[0-2s] THE BEST TRADE
-[2-4s] Is often NO trade
-[4-6s] Forcing trades = Losses
-[6-8s] Waiting = Profits
-[8-10s] Your job isn't to trade
-[10-12s] It's to wait for YOUR trade
-[12-14s] Be selective. Win more.
-
-DURATION: 14 seconds
-SOUND: Calm/patience sound
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → 1080x1080px
@@ -14163,23 +14050,6 @@ SOUND: Calm/patience sound
 6. Footer: "Wait for YOUR trade."
 7. Signal Pilot logo bottom right
 8. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Create contrast: busy trading vs patient waiting
-2. Show patient trader winning
-3. Text overlays at timestamps:
-   - 0-4s: Quote introduction
-   - 4-6s: "Forcing trades = Losses"
-   - 6-8s: "Waiting = Profits"
-   - 8-12s: "Wait for YOUR trade"
-   - 12-14s: "Be selective"
-4. Use calm/patience sound at 25% volume
-5. Busy side: frantic clicking
-6. Calm side: patient, then precise execution
-7. Export: 1080x1920, 30fps
-8. Caption: "Wait for yours. #trading #patience"
 ```
 
 ---
@@ -14235,22 +14105,6 @@ Start your free trial — link in bio 🔗
 - Slide 3: How to trade it
 - Slide 4: The caution
 - Slide 5: CTA
-
-### TikTok Script
-```
-HOOK: "DISTRIBUTION regime detected. Here's what it means."
-
-[0-2s] DISTRIBUTION REGIME 🔴
-[2-4s] Bearish bias DETECTED
-[4-6s] Smart money selling
-[6-8s] Short setups favored
-[8-10s] Sell signals higher quality
-[10-12s] OPPORTUNITY...
-[12-14s] But context still matters.
-
-DURATION: 14 seconds
-SOUND: Bearish/caution sound
-```
 
 ### Canva Visual Creation Guide
 ```
