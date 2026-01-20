@@ -12387,13 +12387,13 @@ Layer 6: Chronicle branding
 > Stronger context for new trends
 
 **Slide 5 - Combo 2:**
-> DIS (Distribution) + Declining Volume
+> WRN (Warning) + Declining Volume
 >
 > Cycle maturing + conviction fading
 > Caution context
 
 **Slide 6 - Combo 3:**
-> ACC (Accumulation) + Low Volume
+> TD (Touchdown) + Low Volume
 >
 > Building phase + quiet
 > Prepare for potential breakout
@@ -12429,11 +12429,11 @@ Layer 6: Chronicle branding
 > Cycle starting + conviction present
 > Stronger context for new trends
 >
-> DIS (Distribution) + Declining Volume
+> WRN (Warning) + Declining Volume
 > Cycle maturing + conviction fading
 > Caution context
 >
-> ACC (Accumulation) + Low Volume
+> TD (Touchdown) + Low Volume
 > Building phase + quiet
 > Prepare for potential breakout
 >
@@ -16134,19 +16134,19 @@ Layer 6: Chronicle branding
 ### Twitter/X
 
 **Copy:**
-> Volume Oracle detects regime shifts in real-time.
+> Volume Oracle detects bias regimes in real-time.
 >
-> High activity — volatility expansion
-> Transitional — regime changing
-> Low activity — consolidation
+> ACCUMULATION (Green) — Bullish bias, buying pressure
+> DISTRIBUTION (Red) — Bearish bias, selling pressure
+> NEUTRAL (Gray) — No clear bias, wait for direction
 >
-> Know the environment before taking action.
+> Know the bias before taking action.
 >
 > See how it works → [link]
 
 **Hashtags:** #VolumeOracle #SignalPilot #TradingIndicator #VolumeAnalysis #RegimeDetection
 
-**Image:** Chart showing Volume Oracle regime bands with clear color transitions
+**Image:** Chart showing Volume Oracle regime colors with clear bias states
 
 ---
 
@@ -16156,31 +16156,31 @@ Layer 6: Chronicle branding
 
 **Slide 1 - Hook:**
 > VOLUME ORACLE — THE PROPHET
-> Not all market conditions are equal
+> Not all market biases are equal
 
-**Slide 2 - High Activity:**
-> HIGH ACTIVITY
+**Slide 2 - Accumulation:**
+> ACCUMULATION 🟢
 >
-> Volatility expanding
-> Larger moves, faster pace
-> Trending conditions
+> Bullish bias detected
+> Buying pressure present
+> Long setups favored
 
-**Slide 3 - Transitional:**
-> TRANSITIONAL
+**Slide 3 - Distribution:**
+> DISTRIBUTION 🔴
 >
-> Regime shifting
-> Caution zone
-> Wait for clarity
+> Bearish bias detected
+> Selling pressure present
+> Short setups favored
 
-**Slide 4 - Low Activity:**
-> LOW ACTIVITY
+**Slide 4 - Neutral:**
+> NEUTRAL ⚪
 >
-> Consolidation
-> Range-bound
-> Mean reversion favored
+> No clear bias
+> Wait for direction
+> Reduce position sizes
 
 **Slide 5 - Key Point:**
-> Different regimes require different approaches.
+> Different biases require different approaches.
 
 **Slide 6 - CTA:**
 > One of 7 indicators in the Signal Pilot suite.
@@ -16190,47 +16190,47 @@ Layer 6: Chronicle branding
 **Caption:**
 > VOLUME ORACLE — THE PROPHET
 >
-> Not all market conditions are equal.
+> Not all market biases are equal.
 >
 > Volume Oracle identifies the current regime:
 >
-> HIGH ACTIVITY
-> Volatility expanding
-> Larger moves, faster pace
-> Trending conditions
+> ACCUMULATION 🟢
+> Bullish bias detected
+> Buying pressure present
+> Long setups favored
 >
-> TRANSITIONAL
-> Regime shifting
-> Caution zone
-> Wait for clarity
+> DISTRIBUTION 🔴
+> Bearish bias detected
+> Selling pressure present
+> Short setups favored
 >
-> LOW ACTIVITY
-> Consolidation
-> Range-bound
-> Mean reversion favored
+> NEUTRAL ⚪
+> No clear bias
+> Wait for direction
+> Reduce position sizes
 >
-> Different regimes require different approaches.
+> Different biases require different approaches.
 >
 > One of 7 indicators in the Signal Pilot suite.
 >
 > Link in bio
 
-**Hashtags:** #VolumeOracle #SignalPilot #TradingIndicator #VolumeAnalysis #RegimeDetection #TradingTools #TechnicalAnalysis #CryptoTrading #ForexTrading #MarketAnalysis #TradingView #VolatilityTrading #MarketRegime #TradingStrategy #SmartTrading #IndicatorSuite #VolumeProfile #TraderTools #ChartAnalysis #MarketConditions
+**Hashtags:** #VolumeOracle #SignalPilot #TradingIndicator #VolumeAnalysis #RegimeDetection #TradingTools #TechnicalAnalysis #CryptoTrading #ForexTrading #MarketAnalysis #TradingView #AccumulationDistribution #MarketRegime #TradingStrategy #SmartTrading #IndicatorSuite #VolumeAnalysis #TraderTools #ChartAnalysis #MarketBias
 
 ---
 
 ### TikTok
 
-**Hook:** "This indicator tells you WHEN to trade"
+**Hook:** "This indicator tells you WHICH WAY to trade"
 
 **Script with Timestamps:**
 | Timestamp | Visual | On-Screen Text | Voiceover |
 |-----------|--------|----------------|-----------|
-| 0-2s | When question | "When should you trade?" | "When should you trade?" |
+| 0-2s | Bias question | "Which way should you trade?" | "Which way should you trade?" |
 | 2-4s | Volume Oracle | "Volume Oracle knows" | "Volume Oracle knows" |
-| 4-6s | High activity | "High activity = trend" | "High activity equals trend" |
-| 6-8s | Low activity | "Low activity = range" | "Low activity equals range" |
-| 8-10s | Transitional | "Transitional = wait" | "Transitional equals wait" |
+| 4-6s | Accumulation | "ACCUMULATION = bullish bias" | "Accumulation equals bullish bias" |
+| 6-8s | Distribution | "DISTRIBUTION = bearish bias" | "Distribution equals bearish bias" |
+| 8-10s | Neutral | "NEUTRAL = wait" | "Neutral equals wait" |
 | 10-12s | CTA | "Link in bio" | "Link in bio" |
 
 **Duration:** 12 seconds
@@ -16244,13 +16244,13 @@ Layer 6: Chronicle branding
 - Background: #0a0a0f
 
 **Step 2: Regime Slides**
-- High activity: red/warm coloring
-- Transitional: yellow/amber coloring
-- Low activity: green/cool coloring
+- Accumulation: green coloring
+- Distribution: red coloring
+- Neutral: gray coloring
 
 **Step 3: Chart Mockup**
-- Show Volume Oracle bands
-- Clear regime transitions
+- Show Volume Oracle regime colors
+- Clear bias indicators
 
 **Step 4: CTA Slide**
 - Trial reference
@@ -16268,7 +16268,7 @@ Layer 6: Chronicle branding
 - Background: #0a0a0f
 
 **Step 2: Question**
-- "When should you trade?" opening
+- "Which way should you trade?" opening
 - Duration: 0-2s
 
 **Step 3: Volume Oracle**
@@ -43594,7 +43594,7 @@ Each category:
 | 572 | 🎓 Education | Position Management Principles | All |
 | 573 | 📝 Blog | Why Most Traders Quit | All |
 | 574 | 💬 Quote | Consistency Definition | All |
-| 575 | 🛠️ Indicator | Volume Oracle Transitions | All |
+| 575 | 🛠️ Indicator | Volume Oracle Regime Shifts | All |
 | 576 | 🎓 Education | Stop Loss Placement | All |
 | 577 | 📝 Blog | Weekend Review Ritual | All |
 | 578 | 🔮 Chronicle | Epilogue — The Trader's Path | All |
@@ -44344,7 +44344,7 @@ Each category:
 
 ---
 
-# POST 575 — 🛠️ Volume Oracle Transition Signals
+# POST 575 — 🛠️ Volume Oracle Regime Shifts
 
 **Source:** `https://signalpilot.io/#indicators`
 
@@ -44353,74 +44353,74 @@ Each category:
 ## 𝕏 Twitter
 
 **Copy:**
-> Volume Oracle doesn't just show regimes—it shows transitions.
+> Volume Oracle doesn't just show regimes—it shows regime shifts.
 >
-> Transition signals:
-> → Low → High: Volatility incoming
-> → High → Low: Calm returning
-> → Transitional: Regime changing
+> Regime shifts:
+> → DISTRIBUTION → ACCUMULATION: Bias flipping bullish
+> → ACCUMULATION → DISTRIBUTION: Bias flipping bearish
+> → Any → NEUTRAL: Bias unclear, wait
 >
 > The shift is often the signal.
 >
-> See transitions → [link]
+> See regime shifts → [link]
 
-**Image:** Chart showing Volume Oracle regime transitions
+**Image:** Chart showing Volume Oracle regime changes
 
-**Hashtags:** #VolumeOracle #RegimeTransition #SignalPilot #TradingTools #VolatilityShift
+**Hashtags:** #VolumeOracle #RegimeShift #SignalPilot #TradingTools #BiasChange
 
 ---
 
 ## 📸 Instagram
 
 **Caption:**
-> 🔄 VOLUME ORACLE — TRANSITION SIGNALS
+> 🔄 VOLUME ORACLE — REGIME SHIFTS
 >
 > The change is the message.
 >
-> REGIME TRANSITIONS:
+> REGIME SHIFTS:
 >
-> 🟢→🔴 LOW TO HIGH
-> → Volatility expanding
-> → Big moves coming
-> → Prepare for action
-> → Opportunity (and risk) increasing
+> 🔴→🟢 DISTRIBUTION TO ACCUMULATION
+> → Bearish bias ending
+> → Bullish bias beginning
+> → Look for long setups
+> → Smart money may be buying
 >
-> 🔴→🟢 HIGH TO LOW
-> → Volatility contracting
-> → Calm returning
-> → Range-bound behavior
-> → Reduce expectations
+> 🟢→🔴 ACCUMULATION TO DISTRIBUTION
+> → Bullish bias ending
+> → Bearish bias beginning
+> → Look for short setups
+> → Smart money may be selling
 >
-> 🟡 TRANSITIONAL STATE
-> → Regime is shifting
-> → Direction uncertain
-> → Caution zone
+> ⚪ TO/FROM NEUTRAL
+> → Bias uncertain
+> → Direction unclear
 > → Wait for clarity
+> → Reduce position sizes
 >
-> WHY TRANSITIONS MATTER:
+> WHY REGIME SHIFTS MATTER:
 > → Static regime is known
 > → Changing regime is opportunity
 > → Early awareness = better preparation
 >
 > HOW TO USE:
 > → Watch for color shifts
-> → Prepare before the move
-> → Adapt strategy to new regime
+> → Adapt bias to new regime
+> → Match setups to regime
 >
 > The Prophet warns before the shift.
 >
 > 🔗 Link in bio
 
-**Image:** 1080x1080 — Chart with Volume Oracle showing clear regime transitions, arrows indicating shift points
+**Image:** 1080x1080 — Chart with Volume Oracle showing clear regime shifts, arrows indicating change points
 
-**Hashtags:** #VolumeOracle #RegimeTransition #SignalPilot #TradingTools #VolatilityShift #TradingView #CryptoTrading #ForexTrading #EliteSeven #TheProphet #RegimeChange #TransitionSignal #MarketShift #ChartAnalysis #TradingStrategy #PrepareForChange #VolatilityTrading #IndicatorSuite #EarlyWarning #AdaptToRegime
+**Hashtags:** #VolumeOracle #RegimeShift #SignalPilot #TradingTools #BiasChange #TradingView #CryptoTrading #ForexTrading #EliteSeven #TheProphet #RegimeChange #AccumulationDistribution #MarketShift #ChartAnalysis #TradingStrategy #PrepareForChange #VolumeTrading #IndicatorSuite #EarlyWarning #AdaptToRegime
 
 **Carousel Slides:**
-1. "VOLUME ORACLE TRANSITIONS" — Title with indicator visual
-2. "LOW TO HIGH" — Volatility expanding
-3. "HIGH TO LOW" — Calm returning
-4. "TRANSITIONAL STATE" — Caution zone
-5. "WHY TRANSITIONS MATTER" — Early awareness
+1. "VOLUME ORACLE REGIME SHIFTS" — Title with indicator visual
+2. "DISTRIBUTION TO ACCUMULATION" — Bias flipping bullish
+3. "ACCUMULATION TO DISTRIBUTION" — Bias flipping bearish
+4. "TO/FROM NEUTRAL" — Wait for clarity
+5. "WHY SHIFTS MATTER" — Early awareness
 6. "HOW TO USE" — Practical application
 7. "THE PROPHET WARNS" — CTA
 
@@ -44435,12 +44435,12 @@ Each category:
 |------|------|
 | 0-2s | "Volume Oracle shows:" |
 | 2-4s | "Not just the regime" |
-| 4-6s | "But the TRANSITION" |
-| 6-8s | "Low → High = prepare for volatility" |
+| 4-6s | "But the SHIFT" |
+| 6-8s | "DISTRIBUTION → ACCUMULATION = Bullish flip" |
 | 8-10s | "The shift is the signal" |
 | 10-12s | "Link in bio" |
 
-**Background:** Chart showing Volume Oracle regime transition in action
+**Background:** Chart showing Volume Oracle regime shift in action
 
 **Sound:** Transition/change audio
 
@@ -44456,19 +44456,19 @@ Each category:
 
 ### Visual Elements
 1. **Chart with Volume Oracle:**
-   - Real chart showing regime transitions
-   - Clear color shifts visible
-   - Arrows pointing to transition moments
+   - Real chart showing regime shifts
+   - Clear color changes visible
+   - Arrows pointing to shift moments
 
 2. **Title:**
    - "VOLUME ORACLE" in Playfair Display
-   - "TRANSITION SIGNALS" below in gold #c9a962
+   - "REGIME SHIFTS" below in gold #c9a962
    - Position top
 
-3. **Transition Legend:**
-   - Green → Red: "VOLATILITY INCOMING"
-   - Red → Green: "CALM RETURNING"
-   - Yellow: "REGIME CHANGING"
+3. **Shift Legend:**
+   - Red → Green: "BEARISH → BULLISH BIAS"
+   - Green → Red: "BULLISH → BEARISH BIAS"
+   - Gray: "NEUTRAL - WAIT"
    - Color-coded icons
 
 4. **Prophet Character:**
@@ -44478,7 +44478,7 @@ Each category:
 
 ### Export
 - Export as PNG, high quality
-- Save as "575_volume_oracle_transitions_static.png"
+- Save as "575_volume_oracle_regime_shifts_static.png"
 
 ---
 
@@ -44501,19 +44501,19 @@ Each category:
 - Highlight current regime state
 - Static color shown
 
-**Scene 3 (4-6s): The Transition**
-- Text: "But the TRANSITION"
-- Animate regime color shift
+**Scene 3 (4-6s): The Shift**
+- Text: "But the SHIFT"
+- Animate regime color change
 - Arrow pointing to change moment
 
 **Scene 4 (6-8s): Example**
-- Text: "Low → High = prepare for volatility"
-- Show green to red transition
+- Text: "DISTRIBUTION → ACCUMULATION = Bullish flip"
+- Show red to green shift
 - Price movement following
 
 **Scene 5 (8-10s): Key Insight**
 - Text: "The shift is the signal"
-- Emphasize transition point
+- Emphasize shift point
 - Gold #c9a962 highlight
 
 **Scene 6 (10-12s): CTA**
@@ -44522,11 +44522,11 @@ Each category:
 
 ### Audio
 - Add transition/change audio
-- Build anticipation at transition moments
+- Build anticipation at shift moments
 
 ### Export
 - Export 1080x1920, 30fps
-- Save as "575_volume_oracle_transitions_video.mp4"
+- Save as "575_volume_oracle_regime_shifts_video.mp4"
 
 ---
 
@@ -45503,7 +45503,7 @@ Each category:
 | Mon | 572 | Education | Position Management |
 | Tue | 573 | Blog | Why Traders Quit |
 | Tue | 574 | Quote | Consistency |
-| Wed | 575 | Indicator | Volume Oracle Transitions |
+| Wed | 575 | Indicator | Volume Oracle Regime Shifts |
 | Wed | 576 | Education | Stop Loss Placement |
 | Thu | 577 | Blog | Weekend Review Ritual |
 | Thu | 578 | Chronicle | Epilogue |
@@ -51861,13 +51861,13 @@ Follow TikTok timing showing plan options.
 >
 > Markets don't behave the same way all the time.
 >
-> Volume Oracle identifies five regimes:
+> Volume Oracle identifies three core regimes:
 >
-> 1️⃣ Compression — Low volatility, coiling
-> 2️⃣ Expansion — High volatility, moving
-> 3️⃣ Accumulation — Building positions
-> 4️⃣ Distribution — Releasing positions
-> 5️⃣ Transition — Regime shifting
+> 🟢 ACCUMULATION — Bullish bias, institutional buying
+> 🔴 DISTRIBUTION — Bearish bias, institutional selling
+> ⚪ NEUTRAL — No clear direction, wait for clarity
+>
+> Plus FLIP signals when regime is about to change.
 >
 > Why does this matter?
 >
@@ -51879,7 +51879,7 @@ Follow TikTok timing showing plan options.
 >
 > ⚠️ Educational content only. Not financial advice.
 
-**Image Spec:** 1080x1080 — Volume Oracle indicator on chart with all five regimes visible and labeled
+**Image Spec:** 1080x1080 — Volume Oracle indicator on chart with all three regimes visible and labeled
 
 **Hashtags:** #VolumeOracle #SignalPilot #TradingIndicator #VolumeAnalysis #MarketRegimes #TradingView #TechnicalAnalysis #CryptoTrading #StockTrading #Volatility #MarketStructure #TradingTools #ChartAnalysis #SmartTrading #IndicatorSuite
 
