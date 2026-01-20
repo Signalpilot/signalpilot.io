@@ -37869,11 +37869,11 @@ Layer 6: Signal Pilot logo bottom center
 **Copy:**
 > Pentarch's five cycle signals:
 >
-> TD - Turnaround Day
-> IGN - Ignition
-> DIS - Distribution
-> EXT - Exhaustion/Extension
-> ACC - Accumulation
+> TD - Touchdown (Accumulation)
+> IGN - Ignition (Markup)
+> WRN - Warning (Distribution)
+> CAP - Climax (Climax)
+> BDN - Breakdown (Decline)
 >
 > Each marks a different phase of the market cycle. Understanding them adds context.
 >
@@ -37892,34 +37892,34 @@ Layer 6: Signal Pilot logo bottom center
 - Five signal abbreviations arranged in circle
 
 **Slide 2 — TD Signal:**
-"TD - TURNAROUND DAY"
-- Potential trend change
-- Often marks extremes
+"TD - TOUCHDOWN"
+- Accumulation phase
+- Selling exhausted, potential base
 - Chart example with TD marked
 
 **Slide 3 — IGN Signal:**
 "IGN - IGNITION"
-- Momentum beginning
-- New trend potentially starting
+- Markup phase
+- Momentum beginning, trend starting
 - Chart example with IGN marked
 
-**Slide 4 — DIS Signal:**
-"DIS - DISTRIBUTION"
-- Trend mature
+**Slide 4 — WRN Signal:**
+"WRN - WARNING"
+- Distribution phase
 - Smart money potentially exiting
-- Chart example with DIS marked
+- Chart example with WRN marked
 
-**Slide 5 — EXT Signal:**
-"EXT - EXHAUSTION/EXTENSION"
-- Trend overextended
-- Potential reversal zone
-- Chart example with EXT marked
+**Slide 5 — CAP Signal:**
+"CAP - CLIMAX"
+- Climax phase
+- Trend overextended, potential reversal
+- Chart example with CAP marked
 
-**Slide 6 — ACC Signal:**
-"ACC - ACCUMULATION"
-- Quiet building phase
-- Potential base forming
-- Chart example with ACC marked
+**Slide 6 — BDN Signal:**
+"BDN - BREAKDOWN"
+- Decline phase
+- Breakdown confirmed, downtrend
+- Chart example with BDN marked
 
 **Slide 7 — How to Use:**
 "How to use:"
@@ -37938,25 +37938,25 @@ Layer 6: Signal Pilot logo bottom center
 >
 > Understanding each cycle phase:
 >
-> TD - TURNAROUND DAY
-> - Potential trend change
-> - Often marks extremes
+> TD - TOUCHDOWN
+> - Accumulation phase
+> - Selling exhausted, potential base
 >
 > IGN - IGNITION
-> - Momentum beginning
-> - New trend potentially starting
+> - Markup phase
+> - Momentum beginning, trend starting
 >
-> DIS - DISTRIBUTION
-> - Trend mature
+> WRN - WARNING
+> - Distribution phase
 > - Smart money potentially exiting
 >
-> EXT - EXHAUSTION/EXTENSION
-> - Trend overextended
-> - Potential reversal zone
+> CAP - CLIMAX
+> - Climax phase
+> - Trend overextended, potential reversal
 >
-> ACC - ACCUMULATION
-> - Quiet building phase
-> - Potential base forming
+> BDN - BREAKDOWN
+> - Decline phase
+> - Breakdown confirmed, downtrend
 >
 > How to use:
 >
@@ -37981,11 +37981,11 @@ Layer 6: Signal Pilot logo bottom center
 | Timestamp | On-Screen Text | Audio/Voiceover |
 |-----------|----------------|-----------------|
 | 0:00-0:02 | "Pentarch's 5 signals:" | "Pentarch's five cycle signals" |
-| 0:02-0:03 | "TD = Turnaround" | "TD equals turnaround" |
+| 0:02-0:03 | "TD = Touchdown" | "TD equals touchdown" |
 | 0:03-0:04 | "IGN = Ignition" | "IGN equals ignition" |
-| 0:04-0:05 | "DIS = Distribution" | "DIS equals distribution" |
-| 0:05-0:06 | "EXT = Exhaustion" | "EXT equals exhaustion" |
-| 0:06-0:07 | "ACC = Accumulation" | "ACC equals accumulation" |
+| 0:04-0:05 | "WRN = Warning" | "WRN equals warning" |
+| 0:05-0:06 | "CAP = Climax" | "CAP equals climax" |
+| 0:06-0:07 | "BDN = Breakdown" | "BDN equals breakdown" |
 | 0:07-0:10 | "Know where you are in the cycle" | "Know where you are in the cycle" |
 | 0:10-0:12 | "Link in bio" | "Link in bio" |
 
