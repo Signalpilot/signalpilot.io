@@ -4815,11 +4815,9 @@
             <div id="hero-comparison-slider" role="region" aria-label="Öncesi ve sonrası karşılaştırma kaydırıcısı" style="position:relative;max-width:1100px;width:100%;margin:0 auto;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 20px 60px rgba(0,0,0,.5);touch-action:pan-x;background:#0a0e18">
               <div class="hero-comparison-image" style="position:relative;width:100%;aspect-ratio:16/9;background:#0a0e18">
                 <img src="/assets/showcase/chart-without.jpg" alt="Signal Pilot olmadan grafik" loading="eager" style="width:100%;height:100%;object-fit:contain;display:block"/>
-                <div style="position:absolute;bottom:1rem;left:1rem;background:rgba(12,16,27,.9);padding:.4rem .8rem;border-radius:6px;border:1px solid rgba(255,100,100,.3)"><span style="font-size:.75rem;font-weight:600;color:#ff6b6b;text-transform:uppercase;letter-spacing:.05em">Signal Pilot Olmadan</span></div>
               </div>
-              <div id="hero-slider-overlay" class="hero-comparison-image" style="position:absolute;top:0;left:0;width:50%;height:100%;overflow:hidden;z-index:10">
-                <img id="hero-overlay-image" src="/assets/showcase/chart-with.jpg" alt="Signal Pilot ile grafik" loading="eager" style="position:absolute;top:0;left:0;width:100%;height:100%;max-width:none;object-fit:contain;display:block;pointer-events:none"/>
-                <div style="position:absolute;bottom:1rem;left:1rem;background:rgba(12,16,27,.9);padding:.4rem .8rem;border-radius:6px;border:1px solid rgba(62,213,152,.3)"><span style="font-size:.75rem;font-weight:600;color:#3ed598;text-transform:uppercase;letter-spacing:.05em">Signal Pilot İle</span></div>
+              <div id="hero-slider-overlay" class="hero-comparison-image" style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:10;will-change:clip-path;clip-path:inset(0 50% 0 0)">
+                <img id="hero-overlay-image" src="/assets/showcase/chart-with.jpg" alt="Signal Pilot ile grafik" loading="eager" style="width:100%;height:100%;object-fit:contain;display:block;pointer-events:none"/>
               </div>
               <div id="hero-slider-handle" role="slider" aria-label="Karşılaştırma kaydırıcısı pozisyonu" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0" style="position:absolute;top:0;left:50%;width:48px;height:100%;transform:translateX(-50%);z-index:100;cursor:ew-resize;touch-action:pan-x">
                 <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:100%;cursor:ew-resize"></div>
@@ -4835,40 +4833,36 @@
 
         <script>
         (function() {
-          const slider = document.getElementById('hero-comparison-slider');
-          const handle = document.getElementById('hero-slider-handle');
-          const handleCircle = document.getElementById('hero-handle-circle');
-          const overlay = document.getElementById('hero-slider-overlay');
-          const overlayImage = document.getElementById('hero-overlay-image');
+          const slider = document.getElementById('hero-comparison-slider'), handle = document.getElementById('hero-slider-handle'), handleCircle = document.getElementById('hero-handle-circle'), overlay = document.getElementById('hero-slider-overlay');
           if (!slider || !handle || !overlay) return;
-          let isDragging = false, hasInteracted = false;
+          let isDragging = false, hasInteracted = false, sliderWidth = slider.offsetWidth;
+          handle.style.willChange = 'transform';
           function autoSweep() { let progress = 0; const duration = 2500, startTime = Date.now(); function animate() { const elapsed = Date.now() - startTime; progress = Math.min(elapsed / duration, 1); const eased = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2; setSliderPosition(eased * 100, true); if (progress < 1 && !hasInteracted) requestAnimationFrame(animate); } animate(); }
-          function setSliderPosition(percentage, smooth = false) { percentage = Math.max(0, Math.min(percentage, 100)); if (smooth && !isDragging) { handle.classList.add('smooth-transition'); overlay.classList.add('smooth-transition'); setTimeout(() => { handle.classList.remove('smooth-transition'); overlay.classList.remove('smooth-transition'); }, 300); } handle.style.left = percentage + '%'; overlay.style.width = percentage + '%'; handle.setAttribute('aria-valuenow', Math.round(percentage)); }
-          function updateOverlayImageWidth() { if (overlayImage && slider) { const width = slider.clientWidth; if (width > 0) overlayImage.style.width = width + 'px'; } }
+          function setSliderPosition(percentage, smooth = false) { percentage = Math.max(0, Math.min(percentage, 100)); if (smooth && !isDragging) { handle.classList.add('smooth-transition'); overlay.classList.add('smooth-transition'); setTimeout(() => { handle.classList.remove('smooth-transition'); overlay.classList.remove('smooth-transition'); }, 300); } handle.style.transform = `translateX(${(percentage / 100) * sliderWidth - 24}px)`; overlay.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`; handle.setAttribute('aria-valuenow', Math.round(percentage)); }
           function updateSliderFromPosition(clientX, smooth = false) { const rect = slider.getBoundingClientRect(); const percentage = ((clientX - rect.left) / rect.width) * 100; setSliderPosition(percentage, smooth); }
           function markInteraction() { hasInteracted = true; if (handleCircle) handleCircle.classList.remove('pulse-animate'); }
           handle.addEventListener('mousedown', () => { isDragging = true; markInteraction(); document.body.style.cursor = 'ew-resize'; });
           document.addEventListener('mousemove', (e) => { if (isDragging) updateSliderFromPosition(e.clientX, false); });
           document.addEventListener('mouseup', () => { isDragging = false; document.body.style.cursor = ''; });
-          handle.addEventListener('touchstart', (e) => { e.preventDefault(); isDragging = true; markInteraction(); }, { passive: false });
-          slider.addEventListener('touchstart', (e) => { if (!handle.contains(e.target)) { e.preventDefault(); isDragging = true; markInteraction(); updateSliderFromPosition(e.touches[0].clientX, false); } }, { passive: false });
-          document.addEventListener('touchmove', (e) => { if (isDragging) { e.preventDefault(); updateSliderFromPosition(e.touches[0].clientX, false); } }, { passive: false });
+          handle.addEventListener('touchstart', () => { isDragging = true; markInteraction(); }, { passive: true });
+          slider.addEventListener('touchstart', (e) => { if (!handle.contains(e.target)) { isDragging = true; markInteraction(); updateSliderFromPosition(e.touches[0].clientX, false); } }, { passive: true });
+          document.addEventListener('touchmove', (e) => { if (isDragging) updateSliderFromPosition(e.touches[0].clientX, false); }, { passive: true });
           document.addEventListener('touchend', () => { isDragging = false; });
           slider.addEventListener('click', (e) => { if (!isDragging && e.target !== handle && !handle.contains(e.target)) { markInteraction(); updateSliderFromPosition(e.clientX, true); } });
-          handle.addEventListener('keydown', (e) => { let curr = parseFloat(handle.style.left) || 50; if (e.key === 'ArrowLeft') { e.preventDefault(); markInteraction(); setSliderPosition(curr - 5, true); } else if (e.key === 'ArrowRight') { e.preventDefault(); markInteraction(); setSliderPosition(curr + 5, true); } });
+          handle.addEventListener('keydown', (e) => { const curr = (parseFloat(handle.getAttribute('aria-valuenow')) || 50); if (e.key === 'ArrowLeft') { e.preventDefault(); markInteraction(); setSliderPosition(curr - 5, true); } else if (e.key === 'ArrowRight') { e.preventDefault(); markInteraction(); setSliderPosition(curr + 5, true); } });
           const btnBefore = document.getElementById('hero-btn-before'), btnAutoplay = document.getElementById('hero-btn-autoplay'), btnAfter = document.getElementById('hero-btn-after');
           let autoplayInterval = null, isAutoPlaying = false, autoplayDirection = 1, autoplayPos = 0;
           if (btnBefore) btnBefore.addEventListener('click', () => { stopAutoPlay(); markInteraction(); setSliderPosition(0, true); });
           if (btnAfter) btnAfter.addEventListener('click', () => { stopAutoPlay(); markInteraction(); setSliderPosition(100, true); });
           if (btnAutoplay) btnAutoplay.addEventListener('click', () => { if (isAutoPlaying) stopAutoPlay(); else startAutoPlay(); });
-          function startAutoPlay() { stopAutoPlay(); isAutoPlaying = true; autoplayDirection = 1; autoplayPos = parseFloat(handle.style.left) || 0; btnAutoplay.innerHTML = '<span>⏸ Durdur</span>'; resumeAutoPlay(); }
+          function startAutoPlay() { stopAutoPlay(); isAutoPlaying = true; autoplayDirection = 1; autoplayPos = parseFloat(handle.getAttribute('aria-valuenow')) || 0; btnAutoplay.innerHTML = '<span>⏸ Durdur</span>'; resumeAutoPlay(); }
           let lastAutoplayTime = 0;
-          function resumeAutoPlay() { if (autoplayInterval) return; lastAutoplayTime = performance.now(); function animateSlider(currentTime) { if (!isAutoPlaying) { autoplayInterval = null; return; } const delta = currentTime - lastAutoplayTime; if (delta >= 30) { autoplayPos += (autoplayDirection * 2); if (autoplayPos >= 100) { autoplayPos = 100; autoplayDirection = -1; } else if (autoplayPos <= 0) { autoplayPos = 0; autoplayDirection = 1; } setSliderPosition(autoplayPos, false); lastAutoplayTime = currentTime; } autoplayInterval = requestAnimationFrame(animateSlider); } autoplayInterval = requestAnimationFrame(animateSlider); }
+          function resumeAutoPlay() { if (autoplayInterval) return; lastAutoplayTime = performance.now(); function animateSlider(currentTime) { if (!isAutoPlaying) { autoplayInterval = null; return; } const delta = currentTime - lastAutoplayTime; if (delta >= 16) { autoplayPos += (autoplayDirection * 1.5); if (autoplayPos >= 100) { autoplayPos = 100; autoplayDirection = -1; } else if (autoplayPos <= 0) { autoplayPos = 0; autoplayDirection = 1; } setSliderPosition(autoplayPos, false); lastAutoplayTime = currentTime; } autoplayInterval = requestAnimationFrame(animateSlider); } autoplayInterval = requestAnimationFrame(animateSlider); }
           function stopAutoPlay() { if (autoplayInterval) { cancelAnimationFrame(autoplayInterval); autoplayInterval = null; } isAutoPlaying = false; if (btnAutoplay) btnAutoplay.innerHTML = '<span>▶ Oto</span>'; }
           const originalMarkInteraction = markInteraction; markInteraction = function() { stopAutoPlay(); originalMarkInteraction(); };
-          function init() { updateOverlayImageWidth(); setSliderPosition(0, false); }
+          function init() { sliderWidth = slider.offsetWidth; setSliderPosition(0, false); }
           window.addEventListener('load', () => { init(); setTimeout(() => { if (!hasInteracted) autoSweep(); }, 800); });
-          window.addEventListener('resize', updateOverlayImageWidth);
+          window.addEventListener('resize', () => { sliderWidth = slider.offsetWidth; setSliderPosition(parseFloat(handle.getAttribute('aria-valuenow')) || 50, false); });
           init();
         })();
         </script>
