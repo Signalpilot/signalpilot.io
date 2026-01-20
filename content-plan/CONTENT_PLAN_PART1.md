@@ -38,7 +38,7 @@
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/01-the-liquidity-lie.html |
 | CTA | Lead Magnet (Liquidity Lie Cheatsheet) |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Tutorial |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -145,38 +145,6 @@ Save this. Share with a trader who needs it.
 #trading #liquidity #smartmoney #stophunting #forex #crypto #bitcoin #stockmarket #daytrader #swingtrader #tradingstrategy #priceaction #technicalanalysis #signalpilot
 ```
 
-## TIKTOK — Tutorial Format
-
-### Script:
-```
-[HOOK - 0:00-0:03]
-"You've been lied to about support..."
-
-[REVEAL - 0:03-0:08]
-"Support doesn't HOLD. It's BROKEN to harvest your stops."
-
-[EXPLAIN - 0:08-0:20]
-Show chart: "Every stop below support is liquidity"
-"Smart money NEEDS your stop loss"
-"To fill their massive orders"
-"They break it ON PURPOSE"
-
-[PATTERN - 0:20-0:32]
-"The pattern every time:"
-Show 5 steps with chart annotations
-
-[SOLUTION - 0:32-0:42]
-"Wait for the sweep, THEN enter"
-
-[CTA - 0:42-0:45]
-"Full lesson + free cheatsheet in bio"
-```
-
-### Caption:
-```
-This is why your stops always get hit 🎯 Full lesson in bio #trading #forex #crypto #smartmoney #liquidity #stophunting
-```
-
 ## CANVA CREATION GUIDE
 
 ### Carousel (1080x1080 x 10 slides):
@@ -192,14 +160,6 @@ This is why your stops always get hit 🎯 Full lesson in bio #trading #forex #c
 
 ### Export: PNG, all slides + multi-page PDF
 
-## CAPCUT VIDEO GUIDE
-
-### Setup: 1080x1920, 45 seconds
-### Background: TradingView screen recording of liquidity sweep
-### Text: Large, centered, 2-3 second holds
-### Sound: Dramatic/educational trending
-### Effects: Subtle zoom, circle annotations on chart
-
 ---
 
 # POST 002 — Why Markets Move in Cycles
@@ -211,7 +171,7 @@ This is why your stops always get hit 🎯 Full lesson in bio #trading #forex #c
 | Type | Blog Article |
 | Source | https://blog.signalpilot.io/articles/why-markets-move-in-cycles/ |
 | CTA | Lead Magnet (Market Cycle Quick Reference) |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Tutorial |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -328,30 +288,6 @@ Link in bio → signalpilot.io/free
 #marketcycles #trading #wyckoff #accumulation #distribution #forex #crypto #bitcoin #stockmarket #technicalanalysis #signalpilot
 ```
 
-## TIKTOK — Tutorial Format
-
-### Script:
-```
-[HOOK - 0:00-0:03]
-"Markets have done the same thing for 100 years..."
-
-[CYCLE - 0:03-0:20]
-"1929. 2008. 2021. Same pattern."
-"Accumulation → Markup → Distribution → Decline"
-Show each phase with chart
-
-[INSIGHT - 0:20-0:28]
-"It's not prediction. It's pattern recognition."
-
-[CTA - 0:28-0:32]
-"Free cycle cheatsheet in bio"
-```
-
-### Caption:
-```
-100 years of the same pattern 🔄 #trading #marketcycles #crypto #bitcoin #forex #stockmarket
-```
-
 ## CANVA CREATION GUIDE
 
 ### Key Visual:
@@ -369,7 +305,7 @@ Show each phase with chart
 | Pillar | P4: Trading Psychology |
 | Type | Quote Card |
 | CTA | Follow for daily clarity |
-| Format | Twitter: Single + Image | Instagram: Single | TikTok: Dramatic reveal |
+| Format | Twitter: Single + Image | Instagram: Single |
 
 ## TWITTER/X — Single Tweet
 
@@ -401,28 +337,6 @@ Save this. 📌
 #tradingwisdom #tradingmindset #tradingquotes #forex #crypto #daytrader #swingtrader #tradingmotivation #signalpilot
 ```
 
-## TIKTOK — Dramatic Reveal
-
-### Script:
-```
-[TEXT - 0:00-0:03]
-"The edge isn't seeing more."
-
-[REVEAL - 0:03-0:06]
-"It's seeing what matters."
-
-[HOLD - 0:06-0:08]
-"— Signal Pilot"
-```
-
-Sound: Atmospheric/inspirational
-Duration: 8 seconds
-
-### Caption:
-```
-This changed how I trade 🎯 #tradingwisdom #trading #mindset #forex #crypto
-```
-
 ## CANVA CREATION GUIDE
 
 ### Quote Card (1080x1080):
@@ -443,7 +357,7 @@ This changed how I trade 🎯 #tradingwisdom #trading #mindset #forex #crypto
 | Type | Product Demo |
 | Source | https://docs.signalpilot.io/pentarch-v10/ |
 | CTA | Try it free for 7 days |
-| Format | Twitter: Single + Chart | Instagram: Carousel | TikTok: Tutorial |
+| Format | Twitter: Single + Chart | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet + Chart
 
@@ -497,29 +411,6 @@ One signal isn't enough. Confluence is everything.
 #pentarch #tradingview #technicalanalysis #tradingsignals #crypto #forex #signalpilot
 ```
 
-## TIKTOK — Tutorial Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"What does TD mean?"
-
-[EXPLAIN - 0:02-0:10]
-"TD = Touchdown"
-"Selling exhaustion detected"
-"Downtrend may be losing steam"
-"Not a buy signal..."
-"A structural observation"
-
-[CTA - 0:10-0:12]
-"Learn more in bio 🔵"
-```
-
-### Caption:
-```
-TD = Touchdown. Selling exhausted. 🔵 #pentarch #trading #tradingview #forex #crypto
-```
-
 ## CANVA CREATION GUIDE
 
 ### Product Demo Card (1080x1080):
@@ -540,7 +431,7 @@ TD = Touchdown. Selling exhausted. 🔵 #pentarch #trading #tradingview #forex #
 | Type | Chronicle Lore |
 | Source | https://signalpilot.io/chronicle/meet-the-sovereign/ |
 | CTA | Enter the Chronicle |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Cinematic |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -622,30 +513,6 @@ Enter the Chronicle. Link in bio.
 #signalpilot #chronicle #tradingmythology #pentarch #eliteseven #tradingwisdom
 ```
 
-## TIKTOK — Cinematic Format
-
-### Script:
-```
-[HOOK - 0:00-0:03]
-"Meet the Sovereign..."
-
-[REVEAL - 0:03-0:12]
-"He doesn't predict."
-"He observes."
-"He doesn't guess."
-"He recognizes."
-"The Sovereign. The Chronicle. 👑"
-```
-
-Sound: Epic/cinematic (Hans Zimmer style)
-Visual: Sovereign art with slow Ken Burns zoom
-Duration: 12 seconds
-
-### Caption:
-```
-The Sovereign doesn't predict. He observes. 👑 #trading #signalpilot #chronicle #tradingwisdom
-```
-
 ## CANVA CREATION GUIDE
 
 ### Chronicle Lore Card (1080x1080):
@@ -666,7 +533,7 @@ The Sovereign doesn't predict. He observes. 👑 #trading #signalpilot #chronicl
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Tutorial |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -753,29 +620,6 @@ This 5,100-word lesson breaks it all down.
 #volumeanalysis #trading #deltaanalysis #orderflow #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Tutorial Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Volume is lying to you..."
-
-[REVEAL - 0:02-0:10]
-"Same volume bar"
-"Completely different meaning"
-"One is buying strength"
-"One is sellers absorbing"
-"Raw volume doesn't tell you which"
-
-[CTA - 0:10-0:12]
-"Delta does. 📚 Link in bio"
-```
-
-### Caption:
-```
-Same volume. Different meaning. Here's what you're missing 📊 #volume #trading #orderflow #forex #crypto
-```
-
 ---
 
 # POST 007 — The Repainting Problem
@@ -787,7 +631,7 @@ Same volume. Different meaning. Here's what you're missing 📊 #volume #trading
 | Type | Blog Article |
 | Source | https://blog.signalpilot.io/articles/the-repainting-problem/ |
 | CTA | Lead Magnet (Repainting Checklist) |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Suspenseful reveal |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -886,32 +730,6 @@ Link in bio → signalpilot.io/free
 #repainting #tradingindicators #backtesting #tradingview #signalpilot
 ```
 
-## TIKTOK — Suspenseful Reveal
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Your indicator is lying to you..."
-
-[BUILD - 0:02-0:08]
-"Perfect entry on the chart ✓"
-"But wait..."
-"That signal didn't exist yesterday"
-"It REPAINTED"
-
-[REVEAL - 0:08-0:12]
-"60-90% of indicators do this"
-"Here's how to spot it 👇"
-```
-
-Sound: Suspenseful/reveal trending
-Duration: 12 seconds
-
-### Caption:
-```
-Your indicator isn't that good. It's lying. 🚨 #repainting #trading #indicators #tradingview
-```
-
 ---
 
 # POST 008 — Quote: "Support Doesn't Hold"
@@ -922,7 +740,7 @@ Your indicator isn't that good. It's lying. 🚨 #repainting #trading #indicator
 | Pillar | P1: Liquidity Lie |
 | Type | Quote Card |
 | CTA | Follow |
-| Format | Twitter: Single + Image | Instagram: Single | TikTok: Dramatic |
+| Format | Twitter: Single + Image | Instagram: Single |
 
 ## TWITTER/X — Single Tweet
 
@@ -956,29 +774,6 @@ Save this. Change how you place stops forever. 📌
 #liquidity #smartmoney #tradingwisdom #stoploss #supportresistance #signalpilot
 ```
 
-## TIKTOK — Dramatic Format
-
-### Script:
-```
-[TEXT - 0:00-0:03]
-"Support doesn't hold."
-
-[REVEAL - 0:03-0:06]
-"It's broken to harvest your stops."
-
-[HOLD - 0:06-0:08]
-"— Signal Pilot"
-```
-
-Background: Chart showing support break → sweep → reversal
-Sound: Dramatic/impactful
-Duration: 8 seconds
-
-### Caption:
-```
-This is why your stops keep getting hit 💀 #trading #liquidity #smartmoney #stoploss
-```
-
 ---
 
 # POST 009 — Main Site Marketing
@@ -990,7 +785,7 @@ This is why your stops keep getting hit 💀 #trading #liquidity #smartmoney #st
 | Type | Main Site Marketing |
 | Source | https://signalpilot.io |
 | CTA | Trial (7 days free) |
-| Format | Twitter: Single | Instagram: Single/Carousel | TikTok: Product showcase |
+| Format | Twitter: Single | Instagram: Single/Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -1037,33 +832,6 @@ We want you to understand markets so well you don't need anyone.
 #signalpilot #tradingtools #tradingview #tradingeducation #forex #crypto
 ```
 
-## TIKTOK — Product Showcase
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"What if trading tools actually taught you?"
-
-[FEATURES - 0:02-0:10]
-"82 free lessons"
-"7 non-repainting indicators"
-"No alerts telling you what to buy"
-"Just a system you learn"
-"And keep forever"
-
-[CTA - 0:10-0:12]
-"Signal Pilot ↓"
-```
-
-Background: Website scroll or indicator showcase
-Sound: Confident/upbeat
-Duration: 12 seconds
-
-### Caption:
-```
-Trading tools that actually teach you 📚 Link in bio #signalpilot #trading #tradingview
-```
-
 ---
 
 # POST 010 — Pentarch Cheatsheet
@@ -1075,7 +843,7 @@ Trading tools that actually teach you 📚 Link in bio #signalpilot #trading #tr
 | Type | Docs/Cheatsheet |
 | Source | https://docs.signalpilot.io/ref-cheatsheets-pentarch/ |
 | CTA | Docs |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Save-worthy |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -1130,32 +898,6 @@ Save this. Reference it every time you trade. 📌
 🔗 Full cheatsheet in bio.
 
 #pentarch #cheatsheet #marketcycles #trading #signalpilot
-```
-
-## TIKTOK — Save-Worthy Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Save this Pentarch cheatsheet..."
-
-[CYCLE - 0:02-0:10]
-"TD → Accumulation 🟣"
-"IGN → Markup 🩵"
-"WRN → Distribution 🟡"
-"CAP → Climax 🟠"
-"BDN → Decline 🔴"
-
-[CTA - 0:10-0:12]
-"Save this 📌"
-```
-
-Sound: Educational/helpful
-Duration: 12 seconds
-
-### Caption:
-```
-Save the Pentarch cheatsheet 📋 #pentarch #trading #cheatsheet #marketcycles #tradingview
 ```
 
 ---
@@ -1374,7 +1116,7 @@ Small: #tradingmythology #signalpilot #eliteseven
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/03-price-action-is-dead.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Tutorial |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -1460,29 +1202,6 @@ This 5,700-word lesson goes deep.
 #orderflow #priceaction #trading #candlesticks #volumeanalysis #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Tutorial Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Price action is lying to you..."
-
-[REVEAL - 0:02-0:10]
-"Big green candle = bullish?"
-"Not always."
-"Could be sellers ABSORBING buyers"
-"The candle looks the same"
-"The meaning is opposite"
-
-[CTA - 0:10-0:12]
-"Order flow reveals the truth 📚"
-```
-
-### Caption:
-```
-That green candle isn't what you think 👀 #priceaction #orderflow #trading #forex #crypto
-```
-
 ---
 
 # POST 012 — Volume Oracle Dashboard Demo
@@ -1494,7 +1213,7 @@ That green candle isn't what you think 👀 #priceaction #orderflow #trading #fo
 | Type | Product Demo |
 | Source | https://docs.signalpilot.io/volume-oracle-v10/ |
 | CTA | Trial (7 days free) |
-| Format | Twitter: Single + Chart | Instagram: Carousel | TikTok: Product showcase |
+| Format | Twitter: Single + Chart | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet + Chart
 
@@ -1552,29 +1271,6 @@ All without repainting. What you see today is what existed yesterday.
 #volumeoracle #tradingview #signalpilot #volumeanalysis #tradingtools #forex #crypto
 ```
 
-## TIKTOK — Product Showcase
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"One panel tells you everything..."
-
-[FEATURES - 0:02-0:10]
-"Volume Oracle Dashboard"
-"Accumulation or Distribution? ✓"
-"Health status? ✓"
-"Structure alignment? ✓"
-"Market regime? ✓"
-
-[CTA - 0:10-0:12]
-"All in one panel 📊"
-```
-
-### Caption:
-```
-One panel. Everything about volume. 📊 #volumeoracle #trading #tradingview #forex #crypto
-```
-
 ---
 
 # POST 013 — How Smart Money Moves
@@ -1586,7 +1282,7 @@ One panel. Everything about volume. 📊 #volumeoracle #trading #tradingview #fo
 | Type | Blog Article |
 | Source | https://blog.signalpilot.io/articles/how-smart-money-moves/ |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Comparison |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -1677,29 +1373,6 @@ One consistently takes from the other.
 #smartmoney #institutionaltrading #trading #forex #crypto #liquidity #signalpilot
 ```
 
-## TIKTOK — Comparison Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Why institutions always win..."
-
-[COMPARISON - 0:02-0:10]
-"Retail: Buys breakouts"
-"Institutions: Accumulate before breakouts"
-"Retail: Obvious stop placement"
-"Institutions: Hunt those stops"
-"Same market. Opposite game."
-
-[CTA - 0:10-0:12]
-"Learn their playbook 📚"
-```
-
-### Caption:
-```
-This is why you keep losing to institutions 🏦 #smartmoney #trading #forex #crypto #institutions
-```
-
 ---
 
 # POST 014 — Quote: "You Stop Chasing Signals"
@@ -1710,7 +1383,7 @@ This is why you keep losing to institutions 🏦 #smartmoney #trading #forex #cr
 | Pillar | P4: Trading Psychology |
 | Type | Quote Card |
 | CTA | Follow |
-| Format | Twitter: Single + Image | Instagram: Single | TikTok: Dramatic |
+| Format | Twitter: Single + Image | Instagram: Single |
 
 ## TWITTER/X — Single Tweet
 
@@ -1748,29 +1421,6 @@ Save this. 📌
 #tradingmindset #independence #tradingwisdom #tradingquotes #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Dramatic Reveal
-
-### Script:
-```
-[TEXT - 0:00-0:03]
-"You stop chasing signals."
-
-[REVEAL - 0:03-0:05]
-"You stop stacking indicators."
-
-[REVEAL - 0:05-0:07]
-"You stop depending on strangers."
-
-[CLOSE - 0:07-0:11]
-"You start understanding."
-"— Signal Pilot"
-```
-
-### Caption:
-```
-This is the goal 🎯 #trading #tradingmindset #independence #forex #crypto
-```
-
 ---
 
 # POST 015 — The Repaint Problem (Lesson)
@@ -1782,7 +1432,7 @@ This is the goal 🎯 #trading #tradingmindset #independence #forex #crypto
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/04-repaint-problem.html |
 | CTA | Lead Magnet (Repainting Checklist) |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Warning |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -1869,29 +1519,6 @@ Never be fooled again.
 #repainting #tradingindicators #trading #backtesting #signalpilot
 ```
 
-## TIKTOK — Warning Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"60-90% of indicators are lying..."
-
-[REVEAL - 0:02-0:10]
-"That indicator with perfect signals?"
-"It's probably REPAINTING"
-"Signals that change AFTER the fact"
-"60-90% of indicators do this"
-"Here's how to test any indicator"
-
-[CTA - 0:10-0:12]
-"Link in bio 📚"
-```
-
-### Caption:
-```
-Is your indicator lying? Here's how to know 🚨 #repainting #trading #indicators #forex #crypto
-```
-
 ---
 
 # POST 016 — Stop Hunting Deep Dive
@@ -1903,7 +1530,7 @@ Is your indicator lying? Here's how to know 🚨 #repainting #trading #indicator
 | Type | Education Hub Lesson (Deep Dive) |
 | Source | https://education.signalpilot.io/curriculum/beginner/01-the-liquidity-lie.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Reality check |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -1985,29 +1612,6 @@ You're predictable.
 #stophunting #liquidity #smartmoney #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Reality Check Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"This is why your stops always get hit..."
-
-[REVEAL - 0:02-0:10]
-"Stop loss below support?"
-"So is everyone else's"
-"Institutions NEED those stops"
-"To fill their massive orders"
-"You're not unlucky"
-
-[PUNCH - 0:10-0:12]
-"You're predictable 🎯"
-```
-
-### Caption:
-```
-You're not unlucky. You're predictable. 🎯 #stophunting #trading #forex #crypto #liquidity
-```
-
 ---
 
 # POST 017 — Chronicle: The Prophet
@@ -2019,7 +1623,7 @@ You're not unlucky. You're predictable. 🎯 #stophunting #trading #forex #crypt
 | Type | Chronicle Lore |
 | Source | https://signalpilot.io/chronicle/the-prophet/ |
 | CTA | Chronicle Site |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Cinematic |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -2090,31 +1694,6 @@ Enter the Chronicle. Link in bio.
 #chronicle #volumeoracle #signalpilot #eliteseven #tradingmythology
 ```
 
-## TIKTOK — Cinematic Format
-
-### Script:
-```
-[HOOK - 0:00-0:03]
-"Meet the Prophet..."
-
-[REVEAL - 0:03-0:09]
-"Where others see candles..."
-"She sees intention."
-"Where others see wicks..."
-"She sees exhaustion."
-
-[CLOSE - 0:09-0:12]
-"The Prophet. The Chronicle. 🔮"
-```
-
-Sound: Mystical/ethereal
-Visual: Prophet art with slow Ken Burns zoom
-
-### Caption:
-```
-The Prophet sees what others miss 🔮 #trading #chronicle #volumeoracle #signalpilot
-```
-
 ---
 
 # POST 018 — 7-Day Money Back Guarantee
@@ -2126,7 +1705,7 @@ The Prophet sees what others miss 🔮 #trading #chronicle #volumeoracle #signal
 | Type | Main Site Marketing |
 | Source | https://signalpilot.io/#pricing |
 | CTA | Trial |
-| Format | Twitter: Single | Instagram: Single | TikTok: Confidence |
+| Format | Twitter: Single | Instagram: Single |
 
 ## TWITTER/X — Single Tweet
 
@@ -2175,29 +1754,6 @@ But don't take our word for it — try it yourself.
 #signalpilot #freetrial #tradingtools #tradingview #forex #crypto
 ```
 
-## TIKTOK — Confidence Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"No risk way to try Signal Pilot..."
-
-[FEATURES - 0:02-0:08]
-"7-day money-back guarantee"
-"All 7 indicators ✓"
-"All 82 lessons ✓"
-"Don't like it?"
-"Full refund. No questions."
-
-[CTA - 0:08-0:12]
-"Link in bio 👇"
-```
-
-### Caption:
-```
-No risk. Try everything for 7 days. 🎯 #signalpilot #trading #tradingview #freetrial
-```
-
 ---
 
 # POST 019 — Delta Analysis Deep Dive
@@ -2209,7 +1765,7 @@ No risk. Try everything for 7 days. 🎯 #signalpilot #trading #tradingview #fre
 | Type | Education Hub Lesson (Deep Dive) |
 | Source | https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Tutorial |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -2289,29 +1845,6 @@ The candle lies. Delta tells the truth.
 #deltaanalysis #volumetrading #orderflow #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Tutorial Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"The candle is lying to you..."
-
-[REVEAL - 0:02-0:10]
-"Green candle = Bullish?"
-"Check the DELTA"
-"Delta = Buy volume - Sell volume"
-"Green candle + Negative delta"
-"= Sellers absorbing buyers"
-
-[PUNCH - 0:10-0:12]
-"The candle lies. Delta doesn't. 📊"
-```
-
-### Caption:
-```
-Green candle ≠ Bullish. Check the delta. 📊 #delta #orderflow #trading #forex #crypto
-```
-
 ---
 
 # POST 020 — RSI Extremes
@@ -2323,7 +1856,7 @@ Green candle ≠ Bullish. Check the delta. 📊 #delta #orderflow #trading #fore
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/05-rsi-extremes.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Corrective |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -2402,29 +1935,6 @@ Same indicator. Different context. Opposite approach.
 🔗 Link in bio.
 
 #rsi #tradingindicators #trading #technicalanalysis #forex #crypto #signalpilot
-```
-
-## TIKTOK — Corrective Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Stop using RSI wrong..."
-
-[REVEAL - 0:02-0:10]
-"RSI > 70 = Sell? ❌"
-"Not in a trend."
-"Overbought can stay overbought"
-"For WEEKS"
-"Context matters."
-
-[CTA - 0:10-0:12]
-"Learn when RSI actually works 📚"
-```
-
-### Caption:
-```
-RSI overbought ≠ Sell. Here's why 📈 #rsi #trading #indicators #forex #crypto
 ```
 
 ---
@@ -2612,7 +2122,7 @@ RSI overbought ≠ Sell. Here's why 📈 #rsi #trading #indicators #forex #crypt
 | Pillar | P4: Trading Psychology |
 | Type | Quote Card |
 | CTA | Follow |
-| Format | Twitter: Single | Instagram: Single | TikTok: Dramatic |
+| Format | Twitter: Single | Instagram: Single |
 
 ## TWITTER/X — Single Tweet
 
@@ -2652,28 +2162,6 @@ Save this. 📌
 #tradingwisdom #patience #tradingmindset #marketcycles #accumulation #distribution #signalpilot
 ```
 
-## TIKTOK — Dramatic Format
-
-### Script:
-```
-[TEXT - 0:00-0:03]
-"Prepare for transitions."
-
-[REVEAL - 0:03-0:06]
-"Don't chase them."
-
-[HOLD - 0:06-0:09]
-"— Signal Pilot"
-```
-
-Sound: Calm, wise, atmospheric
-Duration: 9 seconds
-
-### Caption:
-```
-Prepare. Don't chase. 🎯 #trading #patience #tradingwisdom #forex #crypto
-```
-
 ---
 
 # POST 022 — Janus Atlas Multi-Timeframe Demo
@@ -2685,7 +2173,7 @@ Prepare. Don't chase. 🎯 #trading #patience #tradingwisdom #forex #crypto
 | Type | Product Demo |
 | Source | https://docs.signalpilot.io/janus-atlas-v10/ |
 | CTA | Trial |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Product showcase |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -2736,29 +2224,6 @@ Janus Atlas finds these confluences automatically.
 #janusatlas #supportresistance #tradingview #signalpilot #multitimeframe #forex #crypto
 ```
 
-## TIKTOK — Product Showcase
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Stop drawing support/resistance manually..."
-
-[DEMO - 0:02-0:10]
-"Drawing lines manually?"
-"Janus Atlas does it automatically"
-"Across MULTIPLE timeframes"
-"Daily levels on your 1H chart"
-"Shows which levels matter most"
-
-[CTA - 0:10-0:12]
-"Link in bio 👇"
-```
-
-### Caption:
-```
-Auto support/resistance across all timeframes 📏 #janusatlas #trading #tradingview #forex #crypto
-```
-
 ---
 
 # POST 023 — Accumulation vs Distribution
@@ -2770,7 +2235,7 @@ Auto support/resistance across all timeframes 📏 #janusatlas #trading #trading
 | Type | Blog Article |
 | Source | https://blog.signalpilot.io/articles/accumulation-vs-distribution/ |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Comparison |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -2862,29 +2327,6 @@ Volume and context reveal which one you're in.
 #accumulation #distribution #smartmoney #wyckoff #marketcycles #signalpilot
 ```
 
-## TIKTOK — Comparison Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"They look the same but they're opposite..."
-
-[COMPARISON - 0:02-0:10]
-"Sideways consolidation..."
-"Accumulation or Distribution?"
-"Accumulation → Smart money BUYING"
-"Distribution → Smart money SELLING"
-"Same chart pattern"
-
-[PUNCH - 0:10-0:12]
-"Opposite outcome 📊"
-```
-
-### Caption:
-```
-Same pattern. Opposite outcome. Know the difference. 📊 #accumulation #distribution #smartmoney #trading
-```
-
 ---
 
 # POST 024 — Quote: "We Could Send Alerts"
@@ -2895,7 +2337,7 @@ Same pattern. Opposite outcome. Know the difference. 📊 #accumulation #distrib
 | Pillar | P4: Trading Psychology |
 | Type | Quote Card |
 | CTA | Follow |
-| Format | Twitter: Single | Instagram: Single | TikTok: Thoughtful |
+| Format | Twitter: Single | Instagram: Single |
 
 ## TWITTER/X — Single Tweet
 
@@ -2942,31 +2384,6 @@ Independence > Dependence.
 #tradingeducation #independence #tradingwisdom #signalpilot
 ```
 
-## TIKTOK — Thoughtful Format
-
-### Script:
-```
-[BUILD - 0:00-0:06]
-"We could send alerts."
-"Ping your phone."
-"Tell you what to buy."
-
-[PAUSE - 0:06-0:08]
-"But then..."
-
-[REVEAL - 0:08-0:12]
-"You'd need us forever."
-"We want you independent. 🎯"
-```
-
-Sound: Thoughtful/philosophical
-Duration: 12 seconds
-
-### Caption:
-```
-We don't want you to need us forever 🎯 #trading #education #independence #signalpilot
-```
-
 ---
 
 # POST 025 — Moving Averages
@@ -2978,7 +2395,7 @@ We don't want you to need us forever 🎯 #trading #education #independence #sig
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/06-moving-averages.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Corrective |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -3055,31 +2472,6 @@ How to actually use MAs:
 #movingaverages #technicalanalysis #ema #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Corrective Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"You're using moving averages wrong..."
-
-[MYTHS - 0:02-0:06]
-"EMA = Support? ❌"
-"Golden Cross = Buy? ❌"
-
-[TRUTH - 0:06-0:10]
-"MAs are TREND FILTERS"
-"Above 200 EMA = Look for longs"
-"Below 200 EMA = Look for shorts"
-
-[CLOSE - 0:10-0:12]
-"That's it. Simple. 📈"
-```
-
-### Caption:
-```
-MAs are filters, not magic lines 📈 #movingaverages #ema #trading #forex #crypto
-```
-
 ---
 
 # POST 026 — Liquidity Sweeps Deep Dive
@@ -3091,7 +2483,7 @@ MAs are filters, not magic lines 📈 #movingaverages #ema #trading #forex #cryp
 | Type | Education Hub Lesson (Deep Dive) |
 | Source | https://education.signalpilot.io/curriculum/beginner/01-the-liquidity-lie.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Revelation |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -3170,29 +2562,6 @@ That's hunting.
 #liquiditysweep #smartmoney #trading #stophunting #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Revelation Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"This isn't a breakdown..."
-
-[SEQUENCE - 0:02-0:10]
-"Price breaks support 📉"
-"Stops triggered..."
-"IMMEDIATE reversal 📈"
-"That's not a breakdown"
-"That's a LIQUIDITY SWEEP"
-
-[PUNCH - 0:10-0:12]
-"Institutions just filled orders 🎯"
-```
-
-### Caption:
-```
-That's not a breakdown. That's hunting. 🎯 #liquiditysweep #trading #smartmoney #forex #crypto
-```
-
 ---
 
 # POST 027 — Why Your Indicators Keep Failing
@@ -3204,7 +2573,7 @@ That's not a breakdown. That's hunting. 🎯 #liquiditysweep #trading #smartmone
 | Type | Blog Article |
 | Source | https://blog.signalpilot.io/articles/why-your-indicators-keep-failing/ |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Problem-solving |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -3287,29 +2656,6 @@ Indicators don't fail. Context ignorance fails.
 #tradingindicators #trading #technicalanalysis #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Problem-Solving Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Your indicators aren't broken..."
-
-[PROBLEM - 0:02-0:08]
-"Indicators keep failing?"
-"They're not broken"
-"You're using them in wrong CONTEXT"
-"RSI in trends = failure"
-"MA crossovers in ranges = failure"
-
-[SOLUTION - 0:08-0:12]
-"Context first. Then indicators. 📊"
-```
-
-### Caption:
-```
-It's not the indicator. It's the context. 🔧 #indicators #trading #forex #crypto #tradingmistakes
-```
-
 ---
 
 # POST 028 — Harmonic Oscillator Demo
@@ -3321,7 +2667,7 @@ It's not the indicator. It's the context. 🔧 #indicators #trading #forex #cryp
 | Type | Product Demo |
 | Source | https://docs.signalpilot.io/harmonic-oscillator-v10/ |
 | CTA | Trial |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Product showcase |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -3382,29 +2728,6 @@ When 4/7 align = Mixed, proceed with caution
 #harmonicoscillator #momentum #tradingview #signalpilot #trading #forex #crypto
 ```
 
-## TIKTOK — Product Showcase
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"7 indicators in 1 panel..."
-
-[FEATURES - 0:02-0:10]
-"RSI ✓ MACD ✓ Stochastic ✓"
-"Momentum ✓ EMA ✓ Volume ✓ Divergence ✓"
-"7 indicators. 1 panel."
-"Voting system shows agreement"
-"7/7 aligned = Strong signal"
-
-[CTA - 0:10-0:12]
-"Harmonic Oscillator 📊"
-```
-
-### Caption:
-```
-7 indicators. 1 panel. No clutter. 📊 #harmonicoscillator #trading #indicators #tradingview
-```
-
 ---
 
 # POST 029 — Chronicle: The Cartographer
@@ -3416,7 +2739,7 @@ When 4/7 align = Mixed, proceed with caution
 | Type | Chronicle Lore |
 | Source | https://signalpilot.io/chronicle/the-cartographer/ |
 | CTA | Chronicle Site |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Cinematic |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -3490,31 +2813,6 @@ Enter the Chronicle. Link in bio.
 #chronicle #janusatlas #signalpilot #eliteseven #multitimeframe #tradingwisdom
 ```
 
-## TIKTOK — Cinematic Format
-
-### Script:
-```
-[HOOK - 0:00-0:03]
-"Meet the Cartographer..."
-
-[REVEAL - 0:03-0:09]
-"One face looks higher"
-"For context."
-"One face looks lower"
-"For precision."
-
-[CLOSE - 0:09-0:12]
-"The Cartographer. 🗺️"
-```
-
-Sound: Epic/mystical
-Visual: Cartographer art with slow zoom
-
-### Caption:
-```
-Two faces. One truth. The Cartographer. 🗺️ #chronicle #trading #janusatlas #signalpilot
-```
-
 ---
 
 # POST 030 — Quick Start Guide
@@ -3526,7 +2824,7 @@ Two faces. One truth. The Cartographer. 🗺️ #chronicle #trading #janusatlas 
 | Type | Docs |
 | Source | https://docs.signalpilot.io/start-quick/ |
 | CTA | Docs |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Tutorial |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -3581,29 +2879,6 @@ No complex setup. No coding. No confusion.
 🔗 Quick Start guide in bio.
 
 #gettingstarted #signalpilot #tradingview #tradingtools #forex #crypto
-```
-
-## TIKTOK — Tutorial Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Signal Pilot setup in 10 minutes..."
-
-[STEPS - 0:02-0:10]
-"Step 1: Get access ✓"
-"Step 2: Add to TradingView ✓"
-"Step 3: Configure (optional) ✓"
-"Step 4: Start trading ✓"
-"10 minutes. That's it."
-
-[CTA - 0:10-0:12]
-"Quick Start guide in bio ⚡"
-```
-
-### Caption:
-```
-10 minutes from signup to charting ⚡ #signalpilot #tradingview #trading #quickstart
 ```
 
 ---
@@ -3787,7 +3062,7 @@ No complex setup. No coding. No confusion.
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/07-revenge-trading.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Scientific |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -3881,29 +3156,6 @@ The solution is SYSTEMS:
 #revengetrading #tradingpsychology #trading #forex #crypto #tradingmindset #signalpilot
 ```
 
-## TIKTOK — Scientific Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Revenge trading isn't about discipline..."
-
-[SCIENCE - 0:02-0:10]
-"You took a loss 📉"
-"Amygdala activates 🧠"
-"Rational brain goes OFFLINE"
-"You NEED to make it back"
-"This isn't weakness"
-
-[SOLUTION - 0:10-0:12]
-"It's neuroscience. You need systems. 🔧"
-```
-
-### Caption:
-```
-Your brain is literally hijacked after a loss 🧠 #revengetrading #tradingpsychology #trading #forex #crypto
-```
-
 ---
 
 # POST 032 — Confirmation Bias
@@ -3915,7 +3167,7 @@ Your brain is literally hijacked after a loss 🧠 #revengetrading #tradingpsych
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/08-confirmation-bias.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Dramatic |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -3991,30 +3243,6 @@ Free lesson in bio 🔗
 #confirmationbias #tradingpsychology #trading #forex #crypto #tradingmindset #signalpilot
 ```
 
-## TIKTOK — Dramatic Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Why you keep losing even when you're 'right'"
-
-[REVEAL - 0:02-0:10]
-"WHY YOU KEEP LOSING"
-"Even when you're 'right'"
-"It's called CONFIRMATION BIAS"
-"You only see what you WANT to see"
-"The chart showed the reversal"
-"You ignored it"
-
-[PUNCH - 0:10-0:14]
-"The market doesn't care what you believe"
-```
-
-### Caption:
-```
-Your brain is lying to you. #trading #psychology #confirmationbias #forex #crypto
-```
-
 ---
 
 # POST 033 — Position Sizing 101
@@ -4026,7 +3254,7 @@ Your brain is lying to you. #trading #psychology #confirmationbias #forex #crypt
 | Type | Blog Article |
 | Source | https://blog.signalpilot.io/articles/position-sizing-101/ |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Math |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -4086,31 +3314,6 @@ Full breakdown in bio 🔗
 #positionsizing #riskmanagement #trading #forex #crypto #tradingmath #signalpilot
 ```
 
-## TIKTOK — Math Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Why most traders blow their accounts"
-
-[MATH - 0:02-0:10]
-"WHY TRADERS BLOW UP"
-"It's not bad entries"
-"It's POSITION SIZING"
-"10 losses at 2% risk"
-"= 82% account left ✅"
-"10 losses at 10% risk"
-"= 35% account left 💀"
-
-[PUNCH - 0:10-0:12]
-"Same losses. Different survival."
-```
-
-### Caption:
-```
-The math doesn't lie. #trading #riskmanagement #positionsizing #forex #crypto
-```
-
 ---
 
 # POST 034 — Quote: "Right vs Profitable"
@@ -4121,7 +3324,7 @@ The math doesn't lie. #trading #riskmanagement #positionsizing #forex #crypto
 | Pillar | P4: Trading Psychology |
 | Type | Quote Card |
 | CTA | Follow |
-| Format | Twitter: Single | Instagram: Single | TikTok: Reflective |
+| Format | Twitter: Single | Instagram: Single |
 
 ## TWITTER/X — Single Tweet
 
@@ -4159,29 +3362,6 @@ Save this. 🔖
 #tradingquotes #tradingwisdom #winrate #riskreward #expectancy #signalpilot
 ```
 
-## TIKTOK — Reflective Format
-
-### Script:
-```
-[CONTRAST - 0:00-0:06]
-"80% WIN RATE"
-"Still broke?"
-"40% WIN RATE"
-"Still profitable?"
-
-[TRUTH - 0:06-0:10]
-"It's not about being RIGHT"
-"It's about EXPECTANCY"
-
-[CLOSE - 0:10-0:12]
-"Risk:Reward > Win Rate"
-```
-
-### Caption:
-```
-Win rate is a vanity metric. #trading #mindset #riskreward #forex #crypto
-```
-
 ---
 
 # POST 035 — Plutus Flow Demo
@@ -4193,7 +3373,7 @@ Win rate is a vanity metric. #trading #mindset #riskreward #forex #crypto
 | Type | Product Demo |
 | Source | https://docs.signalpilot.io/plutus-flow-v10 |
 | CTA | Trial |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Product showcase |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -4238,29 +3418,6 @@ See the difference in bio 🔗
 #plutusflow #volumeanalysis #tradingview #signalpilot #trading #forex #crypto
 ```
 
-## TIKTOK — Product Showcase
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Your volume bars are lying to you"
-
-[DEMO - 0:02-0:10]
-"YOUR VOLUME BARS ARE LYING"
-"Green volume on red candle?"
-"Could be ABSORPTION"
-"Regular volume can't show this"
-"Plutus Flow can"
-
-[CLOSE - 0:10-0:12]
-"The Scales weigh what matters ⚖️"
-```
-
-### Caption:
-```
-Volume ≠ Flow. #trading #volume #plutusflow #signalpilot
-```
-
 ---
 
 # POST 036 — Volume Deep Dive: Absorption
@@ -4272,7 +3429,7 @@ Volume ≠ Flow. #trading #volume #plutusflow #signalpilot
 | Type | Education Hub Lesson (Deep Dive) |
 | Source | https://education.signalpilot.io/curriculum/beginner/05-volume-doesnt-lie.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Ominous |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -4347,29 +3504,6 @@ Full lesson in bio 🔗
 #absorption #volumeanalysis #smartmoney #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Ominous Format
-
-### Script:
-```
-[SCENE - 0:00-0:05]
-"PRICE DUMPS 📉"
-"VOLUME SPIKES 📊"
-"Everyone screams SELL"
-
-[TWIST - 0:05-0:09]
-"But someone is BUYING"
-"This is ABSORPTION"
-
-[REVEAL - 0:09-0:13]
-"The panic IS the opportunity"
-"For someone."
-```
-
-### Caption:
-```
-Someone's always on the other side. #trading #volume #absorption #smartmoney
-```
-
 ---
 
 # POST 037 — The Confirmation Trap
@@ -4381,7 +3515,7 @@ Someone's always on the other side. #trading #volume #absorption #smartmoney
 | Type | Blog Article |
 | Source | https://blog.signalpilot.io/articles/the-confirmation-trap/ |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Exposure |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -4451,32 +3585,6 @@ Full article in bio 🔗
 #confirmationbias #tradingpsychology #analysis #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Exposure Format
-
-### Script:
-```
-[ANALYSIS - 0:00-0:05]
-"YOUR 'ANALYSIS'"
-"✅ RSI oversold"
-"✅ Support level"
-"✅ Bullish divergence"
-
-[IGNORED - 0:05-0:09]
-"WHAT YOU IGNORED"
-"❌ Downtrend"
-"❌ Weak volume"
-"❌ Resistance above"
-
-[TRUTH - 0:09-0:13]
-"That's not analysis"
-"That's justification"
-```
-
-### Caption:
-```
-Be honest with yourself. #trading #psychology #confirmationbias #forex #crypto
-```
-
 ---
 
 # POST 038 — Chronicle: The Scales (Plutus)
@@ -4488,7 +3596,7 @@ Be honest with yourself. #trading #psychology #confirmationbias #forex #crypto
 | Type | Chronicle Lore |
 | Source | https://signalpilot.io/chronicle/the-scales/ |
 | CTA | Chronicle Site |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Cinematic |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -4534,34 +3642,6 @@ Meet Plutus in bio 🔗
 #thescales #plutus #signalpilot #chronicle #eliteseven #tradingmythology
 ```
 
-## TIKTOK — Cinematic Format
-
-### Script:
-```
-[INTRO - 0:00-0:02]
-"THE SCALES ⚖️"
-
-[QUOTE - 0:02-0:06]
-"'Price is opinion'"
-"'Flow is fact'"
-
-[REVEAL - 0:06-0:12]
-"Plutus sees where money moves"
-"Not how much traded"
-"WHERE it's going"
-
-[CLOSE - 0:12-0:14]
-"The Scales weighs the evidence"
-```
-
-Sound: Ethereal/mystical ambient
-Visual: The Scales character art with slow zoom
-
-### Caption:
-```
-The Scales. #signalpilot #chronicle #plutus #trading
-```
-
 ---
 
 # POST 039 — Position Sizing (Lesson)
@@ -4573,7 +3653,7 @@ The Scales. #signalpilot #chronicle #plutus #trading
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/09-position-sizing.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Formula |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -4640,30 +3720,6 @@ Full lesson in bio 🔗
 #positionsizing #riskmanagement #tradingmath #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Formula Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"The formula that keeps traders alive"
-
-[FORMULA - 0:02-0:10]
-"THE SURVIVAL FORMULA"
-"Position Size ="
-"(Account × Risk%) ÷ Risk Per Share"
-"$10,000 × 2% = $200 max loss"
-"$5 risk per share"
-"$200 ÷ $5 = 40 shares"
-
-[CLOSE - 0:10-0:14]
-"Calculate BEFORE you click"
-```
-
-### Caption:
-```
-Math > Emotion. #trading #riskmanagement #positionsizing #forex #crypto
-```
-
 ---
 
 # POST 040 — Plutus Flow Cheatsheet
@@ -4675,7 +3731,7 @@ Math > Emotion. #trading #riskmanagement #positionsizing #forex #crypto
 | Type | Docs |
 | Source | https://docs.signalpilot.io/ref-cheatsheets-plutus |
 | CTA | Docs |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Save-worthy |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -4726,30 +3782,6 @@ Divergence = potential reversal signal
 Full docs in bio 🔗
 
 #plutusflow #cheatsheet #divergence #trading #signalpilot
-```
-
-## TIKTOK — Save-Worthy Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Save this Plutus Flow cheatsheet"
-
-[COMBOS - 0:02-0:10]
-"PLUTUS FLOW CHEATSHEET ⚖️"
-"Flow UP + Price UP = Trend confirmed"
-"Flow UP + Price DOWN = Accumulation?"
-"Flow DOWN + Price UP = Distribution?"
-"Flow DOWN + Price DOWN = Trend confirmed"
-
-[KEY - 0:10-0:13]
-"DIVERGENCE = Watch closely"
-"Save this."
-```
-
-### Caption:
-```
-Bookmark this. #trading #cheatsheet #plutusflow #signalpilot
 ```
 
 ---
@@ -4927,7 +3959,7 @@ Bookmark this. #trading #cheatsheet #plutusflow #signalpilot
 | Type | Main Site Marketing |
 | Source | https://signalpilot.io/ |
 | CTA | Trial |
-| Format | Twitter: Single | Instagram: Single | TikTok: Epic showcase |
+| Format | Twitter: Single | Instagram: Single |
 
 ## TWITTER/X — Single Tweet
 
@@ -4971,35 +4003,6 @@ Link in bio 🔗
 #eliteseven #signalpilot #tradingview #tradingtools #forex #crypto
 ```
 
-## TIKTOK — Epic Showcase
-
-### Script:
-```
-[INTRO - 0:00-0:02]
-"THE ELITE SEVEN"
-
-[REVEAL - 0:02-0:09]
-"👑 The Sovereign — Cycles"
-"🔮 The Prophet — Regimes"
-"🗺️ The Cartographer — Levels"
-"⚖️ The Scales — Flow"
-"⚔️ The Arbiter — Momentum"
-"👁️ The Watchman — Scanner"
-"🎯 The Commander — Unified"
-
-[CLOSE - 0:09-0:12]
-"82 free lessons included"
-"Signal Pilot"
-```
-
-Sound: Epic/heroic intro music
-Visual: Each character appearing with name, cinematic style
-
-### Caption:
-```
-The Elite Seven. #signalpilot #trading #eliteseven
-```
-
 ---
 
 # POST 042 — Risk-Reward Ratio
@@ -5011,7 +4014,7 @@ The Elite Seven. #signalpilot #trading #eliteseven
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/10-risk-reward-ratio.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Math |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -5085,30 +4088,6 @@ Full lesson in bio 🔗
 #riskreward #tradingmath #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Math Format
-
-### Script:
-```
-[HOOK - 0:00-0:03]
-"You don't need a high win rate to be profitable"
-
-[MATH - 0:03-0:09]
-"HIGH WIN RATE = PROFITABLE?"
-"Not necessarily."
-"1:1 R:R = Need 50% wins"
-"1:2 R:R = Need 34% wins"
-"1:3 R:R = Need 25% wins"
-
-[KEY - 0:09-0:13]
-"Better setups > More wins"
-"It's math, not magic"
-```
-
-### Caption:
-```
-Win rate is overrated. #trading #riskmanagement #riskreward #forex #crypto
-```
-
 ---
 
 # POST 043 — Volume Profile Guide
@@ -5120,7 +4099,7 @@ Win rate is overrated. #trading #riskmanagement #riskreward #forex #crypto
 | Type | Blog Article |
 | Source | https://blog.signalpilot.io/articles/volume-profile-basics/ |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Discovery |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -5194,31 +4173,6 @@ Full guide in bio 🔗
 #volumeprofile #trading #marketstructure #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Discovery Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"The market has memory. Here's how to see it."
-
-[EXPLAIN - 0:02-0:12]
-"THE MARKET HAS MEMORY"
-"Volume Profile shows it"
-"POC = Most traded price"
-"HVN = Price accepted here"
-"LVN = Price rejected here"
-"Price moves fast through LVN"
-"Consolidates at HVN"
-
-[CLOSE - 0:12-0:14]
-(Show annotated chart)
-```
-
-### Caption:
-```
-Volume profile > price alone. #trading #volumeprofile #forex #crypto
-```
-
 ---
 
 # POST 044 — Quote: "Entries vs Exits"
@@ -5229,7 +4183,7 @@ Volume profile > price alone. #trading #volumeprofile #forex #crypto
 | Pillar | P4: Trading Psychology |
 | Type | Quote Card |
 | CTA | Follow |
-| Format | Twitter: Single | Instagram: Single | TikTok: Comparison |
+| Format | Twitter: Single | Instagram: Single |
 
 ## TWITTER/X — Single Tweet
 
@@ -5269,29 +4223,6 @@ Save this. 🔖
 #tradingquotes #exitstrategy #tradingwisdom #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Comparison Format
-
-### Script:
-```
-[SPLIT - 0:00-0:06]
-"AMATEURS vs PROS"
-"Amateurs obsess over entries"
-"'Perfect entry!'"
-
-[REVEAL - 0:06-0:10]
-"Pros obsess over EXITS"
-"Entry gets you in"
-"Exit gets you PAID"
-
-[CLOSE - 0:10-0:14]
-"Plan both. Always."
-```
-
-### Caption:
-```
-Exit > Entry. #trading #mindset #exitstrategy #forex #crypto
-```
-
 ---
 
 # POST 045 — Augury Grid Demo (The Watchman)
@@ -5303,7 +4234,7 @@ Exit > Entry. #trading #mindset #exitstrategy #forex #crypto
 | Type | Product Demo |
 | Source | https://docs.signalpilot.io/augury-grid-v10 |
 | CTA | Trial |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Product showcase |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -5349,30 +4280,6 @@ Demo in bio 🔗
 #augurygrid #scanner #tradingview #signalpilot #trading #forex #crypto
 ```
 
-## TIKTOK — Product Showcase
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Stop missing moves while staring at one chart"
-
-[DEMO - 0:02-0:10]
-"WATCHING ONE CHART?"
-"Meanwhile, setups happening elsewhere"
-"The Watchman sees ALL"
-"Augury Grid scans your watchlist"
-"Real-time. Multiple symbols."
-
-[CLOSE - 0:10-0:12]
-"See the whole forest 🌲"
-```
-
-Sound: Tech/radar scanning sound
-### Caption:
-```
-One indicator. Entire watchlist. #trading #scanner #augurygrid #signalpilot
-```
-
 ---
 
 # POST 046 — Stop Loss Strategies
@@ -5384,7 +4291,7 @@ One indicator. Entire watchlist. #trading #scanner #augurygrid #signalpilot
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/11-stop-loss-strategies.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Educational |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -5465,31 +4372,6 @@ Full lesson in bio 🔗
 #stoploss #riskmanagement #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Educational Format
-
-### Script:
-```
-[HOOK - 0:00-0:04]
-"NO STOP LOSS?"
-"= Unlimited risk"
-"= Eventually zero"
-
-[TYPES - 0:04-0:10]
-"4 STOP TYPES:"
-"1. Fixed — Simple %"
-"2. Structure — Below support"
-"3. ATR — Based on volatility"
-"4. Trailing — Locks profits"
-
-[CLOSE - 0:10-0:12]
-"Pick one. Use it. Always."
-```
-
-### Caption:
-```
-Protect your capital. #trading #stoploss #riskmanagement #forex #crypto
-```
-
 ---
 
 # POST 047 — Smart Money Concepts Explained
@@ -5501,7 +4383,7 @@ Protect your capital. #trading #stoploss #riskmanagement #forex #crypto
 | Type | Blog Article |
 | Source | https://blog.signalpilot.io/articles/how-smart-money-moves/ |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Explainer |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -5575,30 +4457,6 @@ Full breakdown in bio 🔗
 #smartmoney #SMC #liquidity #orderblock #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Explainer Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Smart Money Concepts in 30 seconds"
-
-[CONCEPTS - 0:02-0:12]
-"SMART MONEY CONCEPTS"
-"LIQUIDITY = Stop loss clusters"
-"INDUCEMENT = Traps to grab them"
-"ORDER BLOCKS = Institutional zones"
-"FVG = Gaps price revisits"
-"BOS = Structure shift"
-
-[CLOSE - 0:12-0:14]
-"Not magic. Mechanics."
-```
-
-### Caption:
-```
-SMC simplified. #smartmoney #trading #forex #crypto #liquidity
-```
-
 ---
 
 # POST 048 — Chronicle: The Arbiter
@@ -5610,7 +4468,7 @@ SMC simplified. #smartmoney #trading #forex #crypto #liquidity
 | Type | Chronicle Lore |
 | Source | https://signalpilot.io/chronicle/the-arbiter/ |
 | CTA | Chronicle Site |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Cinematic |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -5659,34 +4517,6 @@ Meet The Arbiter in bio 🔗
 #thearbiter #harmonicoscillator #signalpilot #chronicle #eliteseven #momentum
 ```
 
-## TIKTOK — Cinematic Format
-
-### Script:
-```
-[INTRO - 0:00-0:02]
-"THE ARBITER ⚔️"
-
-[QUOTE - 0:02-0:06]
-"'Momentum without context is noise'"
-"'Context without momentum is hesitation'"
-
-[REVEAL - 0:06-0:12]
-"The Harmonic Oscillator"
-"Judges the balance of forces"
-"When they align..."
-
-[CLOSE - 0:12-0:14]
-"Movement follows."
-```
-
-Sound: Dramatic/judgmental ambient
-Visual: The Arbiter character art with epic Ken Burns zoom
-
-### Caption:
-```
-The Arbiter. #signalpilot #chronicle #momentum #trading
-```
-
 ---
 
 # POST 049 — Trend Identification
@@ -5698,7 +4528,7 @@ The Arbiter. #signalpilot #chronicle #momentum #trading
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/12-trend-identification.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Simple |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -5766,29 +4596,6 @@ Full lesson in bio 🔗
 #trendidentification #marketstructure #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Simple Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Trend identification in 10 seconds"
-
-[EXPLAIN - 0:02-0:08]
-"TREND IDENTIFICATION"
-"UPTREND = HH + HL"
-"DOWNTREND = LH + LL"
-"RANGE = Neither"
-
-[CLOSE - 0:08-0:12]
-"That's literally it."
-"Don't overcomplicate it."
-```
-
-### Caption:
-```
-Keep it simple. #trading #trends #trendidentification #forex #crypto
-```
-
 ---
 
 # POST 050 — Quick Start Checklist
@@ -5800,7 +4607,7 @@ Keep it simple. #trading #trends #trendidentification #forex #crypto
 | Type | Docs |
 | Source | https://docs.signalpilot.io/start-quick |
 | CTA | Docs |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Checklist |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -5847,32 +4654,6 @@ No rush. Education first.
 Full guide in bio 🔗
 
 #signalpilot #quickstart #tradingview #trading #forex #crypto
-```
-
-## TIKTOK — Checklist Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"New to Signal Pilot? Do this."
-
-[CHECKLIST - 0:02-0:08]
-"NEW TO SIGNAL PILOT?"
-"✅ Add to TradingView"
-"✅ Start with Pentarch"
-"✅ Complete beginner lessons"
-"✅ Paper trade first"
-"✅ Journal observations"
-"✅ Go live when consistent"
-
-[CLOSE - 0:08-0:10]
-"Education before execution"
-```
-
-Sound: Satisfying check sounds
-### Caption:
-```
-Start here. #signalpilot #trading #quickstart
 ```
 
 ---
@@ -6076,7 +4857,7 @@ Start here. #signalpilot #trading #quickstart
 | Type | Main Site Marketing |
 | Source | https://signalpilot.io/ |
 | CTA | Trial |
-| Format | Twitter: Single | Instagram: Single | TikTok: Trust |
+| Format | Twitter: Single | Instagram: Single |
 
 ## TWITTER/X — Single Tweet
 
@@ -6116,29 +4897,6 @@ Link in bio 🔗
 #signalpilot #moneybackguarantee #riskfree #tradingview #trading
 ```
 
-## TIKTOK — Trust Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Still not sure? Here's the deal."
-
-[OFFER - 0:02-0:10]
-"NOT SURE YET?"
-"7-DAY MONEY-BACK GUARANTEE"
-"Full access to everything"
-"7 indicators. 82 lessons."
-"Not for you? Full refund."
-
-[CLOSE - 0:10-0:12]
-"No questions asked."
-```
-
-### Caption:
-```
-Zero risk. #signalpilot #guarantee #trading
-```
-
 ---
 
 # POST 052 — Support and Resistance
@@ -6150,7 +4908,7 @@ Zero risk. #signalpilot #guarantee #trading
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/13-support-and-resistance.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Educational |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -6218,30 +4976,6 @@ Full lesson in bio 🔗
 #supportresistance #technicalanalysis #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Educational Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Support and resistance explained in 15 seconds"
-
-[EXPLAIN - 0:02-0:12]
-"SUPPORT & RESISTANCE"
-"SUPPORT = Buyers stepped in"
-"RESISTANCE = Sellers stepped in"
-"More touches = Stronger level"
-"Support breaks → Becomes resistance"
-"Resistance breaks → Becomes support"
-
-[KEY - 0:12-0:14]
-"They flip. Remember that."
-```
-
-### Caption:
-```
-Levels flip. #trading #supportresistance #forex #crypto
-```
-
 ---
 
 # POST 053 — Why Most Traders Fail
@@ -6253,7 +4987,7 @@ Levels flip. #trading #supportresistance #forex #crypto
 | Type | Blog Article |
 | Source | https://blog.signalpilot.io/articles/why-traders-blow-first-account/ |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Reality check |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -6328,32 +5062,6 @@ Full article in bio 🔗
 #tradingmistakes #tradingpsychology #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Reality Check Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Why 90% of traders lose everything"
-
-[REASONS - 0:02-0:08]
-"WHY 90% LOSE"
-"❌ No edge"
-"❌ Size too big"
-"❌ No stop losses"
-"❌ Trading emotions"
-"❌ Skipping education"
-
-[FLIP - 0:08-0:12]
-"The 10% who win?"
-"Fixed these FIRST"
-"Which one is killing you?"
-```
-
-### Caption:
-```
-Be the 10%. #trading #truth #tradingmistakes #forex #crypto
-```
-
 ---
 
 # POST 054 — Quote: "Patience"
@@ -6364,7 +5072,7 @@ Be the 10%. #trading #truth #tradingmistakes #forex #crypto
 | Pillar | P4: Trading Psychology |
 | Type | Quote Card |
 | CTA | Follow |
-| Format | Twitter: Single | Instagram: Single | TikTok: Reflective |
+| Format | Twitter: Single | Instagram: Single |
 
 ## TWITTER/X — Single Tweet
 
@@ -6407,28 +5115,6 @@ Save this. 🔖
 #tradingquotes #patience #tradingwisdom #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Reflective Format
-
-### Script:
-```
-[INTRO - 0:00-0:02]
-"THE MARKET IS A TRANSFER DEVICE"
-
-[EXPLAIN - 0:02-0:10]
-"From the IMPATIENT"
-"To the PATIENT"
-"Panic sell? Someone's buying."
-"FOMO buy? Someone's selling."
-
-[QUESTION - 0:10-0:12]
-"Which side are you on?"
-```
-
-### Caption:
-```
-Patience pays. #trading #mindset #patience #forex #crypto
-```
-
 ---
 
 # POST 055 — OmniDeck Demo (The Commander)
@@ -6440,7 +5126,7 @@ Patience pays. #trading #mindset #patience #forex #crypto
 | Type | Product Demo |
 | Source | https://docs.signalpilot.io/omnideck-v10 |
 | CTA | Trial |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Transformation |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -6487,31 +5173,6 @@ Demo in bio 🔗
 #omnideck #cleancharts #tradingview #signalpilot #trading #forex #crypto
 ```
 
-## TIKTOK — Transformation Format
-
-### Script:
-```
-[PROBLEM - 0:00-0:04]
-"YOUR CHART: 🎄🎄🎄"
-"Too many indicators"
-"Can't see anything"
-
-[SOLUTION - 0:04-0:10]
-"THE COMMANDER (OmniDeck)"
-"One unified overlay"
-"All signals. Clean chart."
-
-[CLOSE - 0:10-0:12]
-(Show before/after)
-```
-
-Sound: Transformation/cleanup sound
-
-### Caption:
-```
-Command your chart. #trading #omnideck #signalpilot
-```
-
 ---
 
 # POST 056 — Candlestick Patterns: Doji
@@ -6523,7 +5184,7 @@ Command your chart. #trading #omnideck #signalpilot
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/14-candlestick-patterns.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Corrective |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -6590,29 +5251,6 @@ Full lesson in bio 🔗
 #doji #candlestickpatterns #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Corrective Format
-
-### Script:
-```
-[MYTH - 0:00-0:03]
-"DOJI = REVERSAL?"
-"❌ Wrong."
-
-[TRUTH - 0:03-0:09]
-"DOJI = INDECISION"
-"Open ≈ Close"
-"Neither side won"
-"The NEXT candle decides"
-
-[KEY - 0:09-0:13]
-"Context > Pattern"
-```
-
-### Caption:
-```
-Context over pattern. #trading #candlesticks #doji #forex #crypto
-```
-
 ---
 
 # POST 057 — Psychology of Round Numbers
@@ -6624,7 +5262,7 @@ Context over pattern. #trading #candlesticks #doji #forex #crypto
 | Type | Blog Article |
 | Source | https://blog.signalpilot.io/articles/support-and-resistance-explained/ |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Insight |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -6691,30 +5329,6 @@ Full article in bio 🔗
 #roundnumbers #tradingpsychology #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Insight Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Why price always reacts at round numbers"
-
-[EXPLAIN - 0:02-0:10]
-"$100. $50,000. $1.00."
-"Why does price react here?"
-"Because HUMANS are lazy"
-"Stop losses at round numbers"
-"Take profits at round numbers"
-"Limit orders at round numbers"
-
-[KEY - 0:10-0:12]
-"Self-fulfilling prophecy"
-```
-
-### Caption:
-```
-Humans are predictable. #trading #psychology #roundnumbers #forex #crypto
-```
-
 ---
 
 # POST 058 — Chronicle: The Watchman
@@ -6726,7 +5340,7 @@ Humans are predictable. #trading #psychology #roundnumbers #forex #crypto
 | Type | Chronicle Lore |
 | Source | https://signalpilot.io/chronicle/the-watchman/ |
 | CTA | Chronicle Site |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Cinematic |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -6773,34 +5387,6 @@ Meet The Watchman in bio 🔗
 #thewatchman #augurygrid #signalpilot #chronicle #eliteseven #scanner
 ```
 
-## TIKTOK — Cinematic Format
-
-### Script:
-```
-[INTRO - 0:00-0:02]
-"THE WATCHMAN 👁️"
-
-[QUOTE - 0:02-0:06]
-"'While you watch one'"
-"'I watch ALL'"
-
-[REVEAL - 0:06-0:12]
-"Augury Grid scans everything"
-"Never blinks"
-"Never misses"
-
-[CLOSE - 0:12-0:14]
-"The Watchman sees all."
-```
-
-Sound: Surveillance/vigilant ambient
-Visual: The Watchman character art with slow dramatic zoom
-
-### Caption:
-```
-The Watchman. #signalpilot #chronicle #scanner #trading
-```
-
 ---
 
 # POST 059 — Moving Averages: Crossovers
@@ -6812,7 +5398,7 @@ The Watchman. #signalpilot #chronicle #scanner #trading
 | Type | Education Hub Lesson |
 | Source | https://education.signalpilot.io/curriculum/beginner/07-moving-averages.html |
 | CTA | Lead Magnet |
-| Format | Twitter: Thread | Instagram: Carousel | TikTok: Reality check |
+| Format | Twitter: Thread | Instagram: Carousel |
 
 ## TWITTER/X — Thread Format
 
@@ -6882,30 +5468,6 @@ Full lesson in bio 🔗
 #goldencross #deathcross #movingaverages #trading #forex #crypto #signalpilot
 ```
 
-## TIKTOK — Reality Check Format
-
-### Script:
-```
-[INTRO - 0:00-0:05]
-"GOLDEN CROSS ✨"
-"50 MA above 200 MA"
-"DEATH CROSS 💀"
-"50 MA below 200 MA"
-
-[TRUTH - 0:05-0:11]
-"Sounds important right?"
-"By the time they cross..."
-"The move is 50% DONE"
-
-[KEY - 0:11-0:13]
-"MAs LAG. They confirm."
-```
-
-### Caption:
-```
-They lag. Always. #trading #movingaverages #goldencross #forex #crypto
-```
-
 ---
 
 # POST 060 — Harmonic Oscillator Settings
@@ -6917,7 +5479,7 @@ They lag. Always. #trading #movingaverages #goldencross #forex #crypto
 | Type | Docs |
 | Source | https://docs.signalpilot.io/harmonic-oscillator-v10 |
 | CTA | Docs |
-| Format | Twitter: Single | Instagram: Carousel | TikTok: Settings guide |
+| Format | Twitter: Single | Instagram: Carousel |
 
 ## TWITTER/X — Single Tweet
 
@@ -6970,30 +5532,6 @@ Match settings to YOUR style.
 Full docs in bio 🔗
 
 #harmonicoscillator #indicatorsettings #tradingview #signalpilot #trading
-```
-
-## TIKTOK — Settings Guide Format
-
-### Script:
-```
-[HOOK - 0:00-0:02]
-"Which settings should you use?"
-
-[OPTIONS - 0:02-0:10]
-"HARMONIC OSCILLATOR SETTINGS"
-"DEFAULT = Balanced"
-"FASTER = More signals, more noise"
-"SLOWER = Fewer signals, cleaner"
-
-[ADVICE - 0:10-0:14]
-"Scalping? Go faster."
-"Swing trading? Go slower."
-"Match YOUR style."
-```
-
-### Caption:
-```
-Customize your edge. #trading #settings #harmonicoscillator #signalpilot
 ```
 
 ---
