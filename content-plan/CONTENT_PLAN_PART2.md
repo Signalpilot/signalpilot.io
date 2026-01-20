@@ -2486,7 +2486,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -3791,7 +3790,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -5148,7 +5146,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -6462,7 +6459,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -7765,7 +7761,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -14631,28 +14626,28 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Trust Shield Badge:**
-   - Use shield shape from Elements → Shapes
-   - Fill with gradient: #4a90d9 to #c9a962
-   - Size: 400x450px, center-top position
-   - Add inner shadow for depth
+ - Use shield shape from Elements → Shapes
+ - Fill with gradient: #4a90d9 to #c9a962
+ - Size: 400x450px, center-top position
+ - Add inner shadow for depth
 
 2. **Guarantee Text:**
-   - Inside shield: "7-DAY" in Playfair Display Bold, 48pt, white
-   - Below: "MONEY BACK" in Inter Bold, 36pt, white
-   - Bottom of shield: "GUARANTEE" in Inter Medium, 28pt, #c9a962
+ - Inside shield: "7-DAY" in Playfair Display Bold, 48pt, white
+ - Below: "MONEY BACK" in Inter Bold, 36pt, white
+ - Bottom of shield: "GUARANTEE" in Inter Medium, 28pt, #c9a962
 
 3. **Checkmark Icon:**
-   - Large checkmark inside shield
-   - Color: #c9a962
-   - Position: center of shield
+ - Large checkmark inside shield
+ - Color: #c9a962
+ - Position: center of shield
 
 4. **Supporting Text:**
-   - "TRY RISK-FREE" at top in Inter Medium, 24pt, #4a90d9
-   - "No Questions Asked" below shield in Inter Regular, 22pt, white 60%
+ - "TRY RISK-FREE" at top in Inter Medium, 24pt, #4a90d9
+ - "No Questions Asked" below shield in Inter Regular, 22pt, white 60%
 
 5. **Brand Footer:**
-   - Signal Pilot logo bottom center
-   - Subtle gold line separator above
+ - Signal Pilot logo bottom center
+ - Subtle gold line separator above
 
 **Export:** PNG, high quality
 
@@ -14962,22 +14957,22 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Quote Text:**
-   - "Confidence comes from preparation," in Cormorant Garamond, 52pt, white
-   - "not prediction." on new line, same font, 52pt, #c9a962
-   - Centered, middle of canvas
+ - "Confidence comes from preparation," in Cormorant Garamond, 52pt, white
+ - "not prediction." on new line, same font, 52pt, #c9a962
+ - Centered, middle of canvas
 
 2. **Decorative Elements:**
-   - Subtle quotation marks in #4a90d9 at 20% opacity
-   - Thin gold line above and below quote
-   - Compass or checklist icon faintly in background
+ - Subtle quotation marks in #4a90d9 at 20% opacity
+ - Thin gold line above and below quote
+ - Compass or checklist icon faintly in background
 
 3. **Attribution:**
-   - "— Signal Pilot" in Inter Medium, 24pt, white 70%
-   - Below quote, right-aligned
+ - "— Signal Pilot" in Inter Medium, 24pt, white 70%
+ - Below quote, right-aligned
 
 4. **Brand Mark:**
-   - Small Signal Pilot logo bottom center
-   - Subtle, doesn't compete with quote
+ - Small Signal Pilot logo bottom center
+ - Subtle, doesn't compete with quote
 
 **Color Palette:**
 - Background: #0a0a0f
@@ -15422,35 +15417,35 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Commander Character Art:**
-   - Central figure, powerful stance
-   - Size: 600x800px
-   - Position: Center
-   - Apply subtle glow effect
+ - Central figure, powerful stance
+ - Size: 600x800px
+ - Position: Center
+ - Apply subtle glow effect
 
 2. **Seven Indicator Symbols:**
-   - Arrange in circle around Commander
-   - Each symbol with its color:
-     - Pentarch (Sovereign) - Gold crown
-     - Volume Oracle (Prophet) - Blue eye
-     - Janus Atlas (Cartographer) - Compass
-     - Plutus Flow (Scales) - Balance scales
-     - Harmonic Oscillator (Arbiter) - Wave
-     - Augury Grid (Watchman) - Grid eye
-     - OmniDeck (Commander) - All-seeing symbol
+ - Arrange in circle around Commander
+ - Each symbol with its color:
+ - Pentarch (Sovereign) - Gold crown
+ - Volume Oracle (Prophet) - Blue eye
+ - Janus Atlas (Cartographer) - Compass
+ - Plutus Flow (Scales) - Balance scales
+ - Harmonic Oscillator (Arbiter) - Wave
+ - Augury Grid (Watchman) - Grid eye
+ - OmniDeck (Commander) - All-seeing symbol
 
 3. **Quote Overlay:**
-   - "To see everything is to bear everything"
-   - Cormorant Garamond Italic, 32pt, white 90%
-   - Bottom third of image
+ - "To see everything is to bear everything"
+ - Cormorant Garamond Italic, 32pt, white 90%
+ - Bottom third of image
 
 4. **Title:**
-   - "THE COMMANDER'S BURDEN" at top
-   - Playfair Display, 36pt, #c9a962
+ - "THE COMMANDER'S BURDEN" at top
+ - Playfair Display, 36pt, #c9a962
 
 5. **Atmospheric Effects:**
-   - Subtle light rays from Commander
-   - Dark vignette edges
-   - Epic, mythological feel
+ - Subtle light rays from Commander
+ - Dark vignette edges
+ - Epic, mythological feel
 
 **Export:** PNG, high quality
 
@@ -15559,18 +15554,18 @@ Layer 6: Chronicle branding
 
 **Slides 4 & 6 - Chart Visuals:**
 1. **Bearish SFP (Slide 4):**
-   - Draw swing high level
-   - Show candle with wick above
-   - Body closes below the high
-   - Annotate: "Wick breaks high" and "Body rejects"
-   - Red color scheme
+ - Draw swing high level
+ - Show candle with wick above
+ - Body closes below the high
+ - Annotate: "Wick breaks high" and "Body rejects"
+ - Red color scheme
 
 2. **Bullish SFP (Slide 6):**
-   - Draw swing low level
-   - Show candle with wick below
-   - Body closes above the low
-   - Annotate: "Wick breaks low" and "Body recovers"
-   - Green color scheme
+ - Draw swing low level
+ - Show candle with wick below
+ - Body closes above the low
+ - Annotate: "Wick breaks low" and "Body recovers"
+ - Green color scheme
 
 **Slide 8 - CTA Design:**
 1. "The failure IS the signal" in Playfair Display, 40pt, white
@@ -15675,10 +15670,10 @@ Layer 6: Chronicle branding
 
 **Slides 2-5 - Category Design:**
 1. **Each slide has category icon:**
-   - Visual: Paint palette 🎨
-   - Sensitivity: Chart 📊
-   - Display: Eye 👁️
-   - Alerts: Bell 🔔
+ - Visual: Paint palette 🎨
+ - Sensitivity: Chart 📊
+ - Display: Eye 👁️
+ - Alerts: Bell 🔔
 
 2. **Category header:** Inter Bold, 36pt, #c9a962
 3. **Options list:** Inter Regular, 26pt, white
@@ -15907,28 +15902,28 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Unlocked Padlock Icon:**
-   - Large unlocked padlock from Elements
-   - Color: #4a90d9 with gold accent
-   - Size: 300x350px, upper portion
-   - Add subtle glow effect
+ - Large unlocked padlock from Elements
+ - Color: #4a90d9 with gold accent
+ - Size: 300x350px, upper portion
+ - Add subtle glow effect
 
 2. **Main Text:**
-   - "CANCEL ANYTIME" in Playfair Display Bold, 64pt, white
-   - Centered, middle of canvas
+ - "CANCEL ANYTIME" in Playfair Display Bold, 64pt, white
+ - Centered, middle of canvas
 
 3. **Supporting Points:**
-   - "No contracts • No fees • No guilt trips"
-   - Inter Regular, 24pt, white 80%
-   - Below main text
+ - "No contracts • No fees • No guilt trips"
+ - Inter Regular, 24pt, white 80%
+ - Below main text
 
 4. **Freedom Imagery:**
-   - Subtle broken chain links in background
-   - Or open door concept
-   - Low opacity, atmospheric
+ - Subtle broken chain links in background
+ - Or open door concept
+ - Low opacity, atmospheric
 
 5. **Brand Footer:**
-   - Signal Pilot logo bottom center
-   - "Stay because you want to" tagline
+ - Signal Pilot logo bottom center
+ - "Stay because you want to" tagline
 
 **Export:** PNG, high quality
 
@@ -16058,11 +16053,11 @@ Layer 6: Chronicle branding
 2. Draw trading range with clear boundaries
 3. Label all key points: PS, SC, AR, ST, Spring, SOS, LPS
 4. Use color coding:
-   - Phase A: Red to yellow transition
-   - Phase B: Yellow (range)
-   - Phase C: Brief red dip (spring)
-   - Phase D: Yellow to green
-   - Phase E: Green (uptrend)
+ - Phase A: Red to yellow transition
+ - Phase B: Yellow (range)
+ - Phase C: Brief red dip (spring)
+ - Phase D: Yellow to green
+ - Phase E: Green (uptrend)
 
 **Slide 10 - CTA Design:**
 1. "Classic framework. Still relevant." in Playfair Display, 40pt, white
@@ -16247,25 +16242,25 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Quote Text:**
-   - "Risk management isn't about avoiding losses."
-   - Cormorant Garamond, 44pt, white
-   - "It's about surviving them."
-   - Same font, 44pt, #c9a962
-   - Centered, stacked
+ - "Risk management isn't about avoiding losses."
+ - Cormorant Garamond, 44pt, white
+ - "It's about surviving them."
+ - Same font, 44pt, #c9a962
+ - Centered, stacked
 
 2. **Shield Icon:**
-   - Subtle shield shape in background
-   - Color: #4a90d9 at 15% opacity
-   - Behind quote text
-   - Represents protection
+ - Subtle shield shape in background
+ - Color: #4a90d9 at 15% opacity
+ - Behind quote text
+ - Represents protection
 
 3. **Attribution:**
-   - "— Signal Pilot" in Inter Medium, 24pt, white 70%
-   - Below quote, right-aligned
+ - "— Signal Pilot" in Inter Medium, 24pt, white 70%
+ - Below quote, right-aligned
 
 4. **Decorative Elements:**
-   - Thin gold lines above and below quote
-   - Subtle texture for depth
+ - Thin gold lines above and below quote
+ - Subtle texture for depth
 
 **Export:** PNG, high quality
 
@@ -16368,9 +16363,9 @@ Layer 6: Chronicle branding
 1. Full Augury Grid interface
 2. Multiple assets visible
 3. Status indicators color-coded:
-   - Green: Bullish alignment
-   - Red: Bearish alignment
-   - Yellow: Neutral/transitioning
+ - Green: Bullish alignment
+ - Red: Bearish alignment
+ - Yellow: Neutral/transitioning
 4. Clean annotations
 
 **Slide 6 - CTA Design:**
@@ -16506,11 +16501,11 @@ Layer 6: Chronicle branding
 2. Draw trading range with clear boundaries
 3. Label all key points: PSY, BC, AR, ST, UT/UTAD, SOW, LPSY
 4. Use color coding:
-   - Phase A: Green to yellow transition
-   - Phase B: Yellow (range)
-   - Phase C: Brief green spike (upthrust)
-   - Phase D: Yellow to red
-   - Phase E: Red (downtrend)
+ - Phase A: Green to yellow transition
+ - Phase B: Yellow (range)
+ - Phase C: Brief green spike (upthrust)
+ - Phase D: Yellow to red
+ - Phase E: Red (downtrend)
 
 **Slide 10 - CTA Design:**
 1. "The inverse of accumulation" in Playfair Display, 40pt, white
@@ -16621,9 +16616,9 @@ Layer 6: Chronicle branding
 **Slides 2-5 - Checklist Sections:**
 1. **Section Header:** Inter Bold, 36pt, #c9a962
 2. **Checkbox Items:**
-   - Create checkbox icons (☐)
-   - Inter Regular, 26pt, white
-   - Each item on separate line
+ - Create checkbox icons (☐)
+ - Inter Regular, 26pt, white
+ - Each item on separate line
 3. **Clipboard icon:** For each section
 
 **Visual Design:**
@@ -16709,30 +16704,30 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Scales Character Art:**
-   - Central figure holding balance scales
-   - Size: 600x700px
-   - Position: Center
-   - Mystical glow effect
+ - Central figure holding balance scales
+ - Size: 600x700px
+ - Position: Center
+ - Mystical glow effect
 
 2. **Balance Scales Imagery:**
-   - Golden scales in character's hands
-   - One side: "Price" (lighter)
-   - Other side: "Volume" (heavier)
-   - Showing truth has weight
+ - Golden scales in character's hands
+ - One side: "Price" (lighter)
+ - Other side: "Volume" (heavier)
+ - Showing truth has weight
 
 3. **Flowing Energy:**
-   - Blue and gold energy streams
-   - Flowing around the Scales character
-   - Representing market flow
+ - Blue and gold energy streams
+ - Flowing around the Scales character
+ - Representing market flow
 
 4. **Quote Overlay:**
-   - "Price lies. Volume whispers truth."
-   - Cormorant Garamond Italic, 32pt, white 90%
-   - Bottom third
+ - "Price lies. Volume whispers truth."
+ - Cormorant Garamond Italic, 32pt, white 90%
+ - Bottom third
 
 5. **Title:**
-   - "THE SCALES OF TRUTH" at top
-   - Playfair Display, 36pt, #c9a962
+ - "THE SCALES OF TRUTH" at top
+ - Playfair Display, 36pt, #c9a962
 
 **Export:** PNG, high quality
 
@@ -16841,19 +16836,19 @@ Layer 6: Chronicle branding
 
 **Slides 4-6 - Chart Sequence:**
 1. **Slide 4 - FVG Forms:**
-   - Show impulse move with gap
-   - Mark the FVG zone
-   - "Step 1: FVG forms"
+ - Show impulse move with gap
+ - Mark the FVG zone
+ - "Step 1: FVG forms"
 
 2. **Slide 5 - Gap Fills:**
-   - Show price returning to gap
-   - Gap zone getting filled
-   - "Step 2: Gap gets filled"
+ - Show price returning to gap
+ - Gap zone getting filled
+ - "Step 2: Gap gets filled"
 
 3. **Slide 6 - Inverse Reaction:**
-   - Show price returning again
-   - Reaction at the zone (bounce or rejection)
-   - "Step 3: Zone acts as S/R"
+ - Show price returning again
+ - Reaction at the zone (bounce or rejection)
+ - "Step 3: Zone acts as S/R"
 
 **Slide 8 - CTA Design:**
 1. "Gaps evolve. Track their lifecycle." in Playfair Display, 40pt, white
@@ -17186,30 +17181,30 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Infinity Symbol:**
-   - Large infinity symbol (∞) from Elements
-   - Gradient: #4a90d9 to #c9a962
-   - Size: 400x200px, upper portion
-   - Subtle glow effect
+ - Large infinity symbol (∞) from Elements
+ - Gradient: #4a90d9 to #c9a962
+ - Size: 400x200px, upper portion
+ - Subtle glow effect
 
 2. **Main Text:**
-   - "LIFETIME ACCESS" in Playfair Display Bold, 56pt, white
-   - "$1,799" in Inter Bold, 72pt, #c9a962
-   - "ONE TIME" below price, Inter Medium, 24pt, white 80%
+ - "LIFETIME ACCESS" in Playfair Display Bold, 56pt, white
+ - "$1,799" in Inter Bold, 72pt, #c9a962
+ - "ONE TIME" below price, Inter Medium, 24pt, white 80%
 
 3. **Value Comparison:**
-   - "18 months of monthly = $1,782"
-   - "Lifetime = $1,799 forever"
-   - Crossed out monthly total vs. highlighted lifetime
+ - "18 months of monthly = $1,782"
+ - "Lifetime = $1,799 forever"
+ - Crossed out monthly total vs. highlighted lifetime
 
 4. **Features List:**
-   - "All 7 indicators ∞"
-   - "All future updates ∞"
-   - "No expiration ∞"
-   - Inter Regular, 22pt, white
+ - "All 7 indicators ∞"
+ - "All future updates ∞"
+ - "No expiration ∞"
+ - Inter Regular, 22pt, white
 
 5. **Brand Footer:**
-   - Signal Pilot logo bottom center
-   - Premium badge effect
+ - Signal Pilot logo bottom center
+ - Premium badge effect
 
 **Export:** PNG, high quality
 
@@ -17322,16 +17317,16 @@ Layer 6: Chronicle branding
 
 **Chart Elements:**
 - **Sweep Chart (Slide 3):**
-  - Mark liquidity level
-  - Show quick wick through
-  - Immediate snap back
-  - Single candle or fast action
+ - Mark liquidity level
+ - Show quick wick through
+ - Immediate snap back
+ - Single candle or fast action
 
 - **Grab Chart (Slide 5):**
-  - Mark liquidity level
-  - Show sustained push through
-  - Multiple candles beyond
-  - Gradual return
+ - Mark liquidity level
+ - Show sustained push through
+ - Multiple candles beyond
+ - Gradual return
 
 **Slide 6 - Comparison:**
 1. Split screen design
@@ -17451,9 +17446,9 @@ Layer 6: Chronicle branding
 2. **Edge name:** Inter Bold, 36pt, #c9a962
 3. **Characteristics:** Inter Regular, 26pt, white
 4. **Visual distinction:**
-   - Analytical: Brain/chart icon
-   - Informational: Data/news icon
-   - Behavioral: Heart/discipline icon
+ - Analytical: Brain/chart icon
+ - Informational: Data/news icon
+ - Behavioral: Heart/discipline icon
 
 **Slides 5-6 - Truth:**
 1. Analytical and Informational faded/crossed out
@@ -17526,24 +17521,24 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Quote Text:**
-   - "The best traders aren't right more often."
-   - Cormorant Garamond, 44pt, white
-   - "They're wrong better."
-   - Same font, 44pt, #c9a962 (emphasized)
-   - Centered layout
+ - "The best traders aren't right more often."
+ - Cormorant Garamond, 44pt, white
+ - "They're wrong better."
+ - Same font, 44pt, #c9a962 (emphasized)
+ - Centered layout
 
 2. **Visual Metaphor:**
-   - Small falling domino (loss) vs. tall standing dominos
-   - Or small red bar vs. larger green bars
-   - Subtle, doesn't overpower quote
+ - Small falling domino (loss) vs. tall standing dominos
+ - Or small red bar vs. larger green bars
+ - Subtle, doesn't overpower quote
 
 3. **Attribution:**
-   - "— Signal Pilot" in Inter Medium, 24pt, white 70%
-   - Right-aligned, below quote
+ - "— Signal Pilot" in Inter Medium, 24pt, white 70%
+ - Right-aligned, below quote
 
 4. **Decorative Elements:**
-   - Thin gold lines framing quote
-   - Subtle resilience imagery
+ - Thin gold lines framing quote
+ - Subtle resilience imagery
 
 **Export:** PNG, high quality
 
@@ -17636,18 +17631,18 @@ Layer 6: Chronicle branding
 
 **Chart Elements (Slides 3 & 5):**
 1. **Bearish Divergence Chart (Slide 3):**
-   - Price making higher high
-   - Draw divergence line on price (ascending)
-   - Plutus Flow making lower high
-   - Draw divergence line on flow (descending)
-   - Lines diverging = warning
+ - Price making higher high
+ - Draw divergence line on price (ascending)
+ - Plutus Flow making lower high
+ - Draw divergence line on flow (descending)
+ - Lines diverging = warning
 
 2. **Bullish Divergence Chart (Slide 5):**
-   - Price making lower low
-   - Draw divergence line on price (descending)
-   - Plutus Flow making higher low
-   - Draw divergence line on flow (ascending)
-   - Hidden strength shown
+ - Price making lower low
+ - Draw divergence line on price (descending)
+ - Plutus Flow making higher low
+ - Draw divergence line on flow (ascending)
+ - Hidden strength shown
 
 **Slide 6 - CTA Design:**
 1. "Context + divergence = better reads" in Playfair Display, 40pt, white
@@ -17758,18 +17753,18 @@ Layer 6: Chronicle branding
 
 **Chart Elements (Slides 3 & 5):**
 1. **Bullish OB (Slide 3):**
-   - Show downtrend or consolidation
-   - Mark last bearish candle
-   - Show impulse move up from that candle
-   - Zone marked as "Bullish OB"
-   - Optional: Show price returning and bouncing
+ - Show downtrend or consolidation
+ - Mark last bearish candle
+ - Show impulse move up from that candle
+ - Zone marked as "Bullish OB"
+ - Optional: Show price returning and bouncing
 
 2. **Bearish OB (Slide 5):**
-   - Show uptrend or consolidation
-   - Mark last bullish candle
-   - Show impulse move down from that candle
-   - Zone marked as "Bearish OB"
-   - Optional: Show price returning and rejecting
+ - Show uptrend or consolidation
+ - Mark last bullish candle
+ - Show impulse move down from that candle
+ - Zone marked as "Bearish OB"
+ - Optional: Show price returning and rejecting
 
 **Slide 8 - CTA Design:**
 1. "Not all OBs are equal. Quality matters." in Playfair Display, 40pt, white
@@ -17966,31 +17961,31 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Cartographer Character Art:**
-   - Figure with compass and map scroll
-   - Size: 550x700px
-   - Position: Center-left
-   - Explorer/scholar aesthetic
+ - Figure with compass and map scroll
+ - Size: 550x700px
+ - Position: Center-left
+ - Explorer/scholar aesthetic
 
 2. **Map Elements:**
-   - Subtle map lines in background
-   - Compass rose in corner
-   - Price level markers like map points
-   - Blue/silver color scheme
+ - Subtle map lines in background
+ - Compass rose in corner
+ - Price level markers like map points
+ - Blue/silver color scheme
 
 3. **Quote Overlay:**
-   - "I do not predict where price will go."
-   - "I mark where it has been—and where it may return."
-   - Cormorant Garamond, 28pt, white 90%
-   - Right side or bottom
+ - "I do not predict where price will go."
+ - "I mark where it has been—and where it may return."
+ - Cormorant Garamond, 28pt, white 90%
+ - Right side or bottom
 
 4. **Title:**
-   - "THE CARTOGRAPHER'S MAP" at top
-   - Playfair Display, 36pt, #4a90d9
+ - "THE CARTOGRAPHER'S MAP" at top
+ - Playfair Display, 36pt, #4a90d9
 
 5. **Atmospheric Effects:**
-   - Subtle compass navigation lines
-   - Aged map texture overlay
-   - Mystical but precise feel
+ - Subtle compass navigation lines
+ - Aged map texture overlay
+ - Mystical but precise feel
 
 **Export:** PNG, high quality
 
@@ -18441,30 +18436,30 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Open Book Icon:**
-   - Large open book from Elements
-   - Or unlocked padlock over book
-   - Color: #4a90d9 with gold accents
-   - Size: 350x350px, upper portion
+ - Large open book from Elements
+ - Or unlocked padlock over book
+ - Color: #4a90d9 with gold accents
+ - Size: 350x350px, upper portion
 
 2. **Main Text:**
-   - "EDUCATION FIRST" in Playfair Display Bold, 56pt, white
-   - "82 FREE LESSONS" in Inter Bold, 40pt, #c9a962
-   - Centered
+ - "EDUCATION FIRST" in Playfair Display Bold, 56pt, white
+ - "82 FREE LESSONS" in Inter Bold, 40pt, #c9a962
+ - Centered
 
 3. **Feature List:**
-   - "No email gates"
-   - "No paywall"
-   - "Real, usable education"
-   - Checkmarks in #4a90d9
+ - "No email gates"
+ - "No paywall"
+ - "Real, usable education"
+ - Checkmarks in #4a90d9
 
 4. **Philosophy Text:**
-   - "Knowledge shouldn't be locked"
-   - Cormorant Garamond Italic, 28pt, white 80%
-   - Bottom area
+ - "Knowledge shouldn't be locked"
+ - Cormorant Garamond Italic, 28pt, white 80%
+ - Bottom area
 
 5. **Brand Footer:**
-   - Signal Pilot logo
-   - Warm, inviting energy
+ - Signal Pilot logo
+ - Warm, inviting energy
 
 **Export:** PNG, high quality
 
@@ -18578,17 +18573,17 @@ Layer 6: Chronicle branding
 3. **Time range:** Inter Bold, 28pt, white
 4. **Details:** Inter Regular, 24pt, white 90%
 5. **Color coding per session:**
-   - Asian: Calm blue
-   - London: Active orange
-   - NY: Peak gold
+ - Asian: Calm blue
+ - London: Active orange
+ - NY: Peak gold
 
 **Slide 5 - Chart Visual:**
 1. Create 24-hour chart timeline
 2. Mark sessions with color bands
 3. Show volatility/price movement:
-   - Asian: Flat/range
-   - London: Movement begins
-   - NY: Peak volatility
+ - Asian: Flat/range
+ - London: Movement begins
+ - NY: Peak volatility
 4. Clear visual difference
 
 **Slides 6-7 - Content:**
@@ -18787,25 +18782,25 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Quote Text:**
-   - "The market is a mirror."
-   - Cormorant Garamond, 44pt, white
-   - "It reflects your preparation—or lack of it."
-   - Same font, 36pt, #c9a962
-   - Centered layout
+ - "The market is a mirror."
+ - Cormorant Garamond, 44pt, white
+ - "It reflects your preparation—or lack of it."
+ - Same font, 36pt, #c9a962
+ - Centered layout
 
 2. **Mirror Visual:**
-   - Subtle mirror frame or reflection effect
-   - Chart visible in "reflection"
-   - Elegant, not literal
+ - Subtle mirror frame or reflection effect
+ - Chart visible in "reflection"
+ - Elegant, not literal
 
 3. **Attribution:**
-   - "— Signal Pilot" in Inter Medium, 24pt, white 70%
-   - Right-aligned
+ - "— Signal Pilot" in Inter Medium, 24pt, white 70%
+ - Right-aligned
 
 4. **Decorative:**
-   - Thin gold lines
-   - Reflective surface hint
-   - Dark, elegant atmosphere
+ - Thin gold lines
+ - Reflective surface hint
+ - Dark, elegant atmosphere
 
 **Export:** PNG, high quality
 
@@ -18905,9 +18900,9 @@ Layer 6: Chronicle branding
 2. Confluence score meter (like a gauge)
 3. Individual indicator contributions visible
 4. Color coding:
-   - Green: Contributing positively
-   - Red: Contributing negatively
-   - Gold: Score value
+ - Green: Contributing positively
+ - Red: Contributing negatively
+ - Gold: Score value
 
 **Slide 6 - CTA Design:**
 1. "Stop juggling indicators. Read one score." in Playfair Display, 36pt, white
@@ -19022,14 +19017,14 @@ Layer 6: Chronicle branding
 
 **Slides 5-6 - Chart Visuals:**
 1. **Volume Anomaly (Slide 5):**
-   - Show volume bars
-   - One significantly larger
-   - Price reaction at that candle
+ - Show volume bars
+ - One significantly larger
+ - Price reaction at that candle
 
 2. **Displacement (Slide 6):**
-   - Show large candle
-   - FVG created
-   - Imbalance marked
+ - Show large candle
+ - FVG created
+ - Imbalance marked
 
 **Slides 7-8 - Summary & CTA:**
 1. Why it matters summary
@@ -19227,31 +19222,31 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Sovereign Character Art:**
-   - Royal figure with crown
-   - Size: 500x650px
-   - Position: Center-left
-   - Majestic pose
+ - Royal figure with crown
+ - Size: 500x650px
+ - Position: Center-left
+ - Majestic pose
 
 2. **Cycle Wheel:**
-   - Four phases in circular arrangement
-   - Accumulation → Markup → Distribution → Markdown
-   - Arrows showing eternal rotation
-   - Gold/blue color scheme
+ - Four phases in circular arrangement
+ - Accumulation → Markup → Distribution → Markdown
+ - Arrows showing eternal rotation
+ - Gold/blue color scheme
 
 3. **Quote Overlay:**
-   - "All markets breathe..."
-   - Cormorant Garamond, 30pt, white 90%
-   - Phase names listed below
+ - "All markets breathe..."
+ - Cormorant Garamond, 30pt, white 90%
+ - Phase names listed below
 
 4. **Title:**
-   - "THE SOVEREIGN'S CYCLE" at top
-   - Playfair Display, 36pt, #c9a962
-   - Crown icon
+ - "THE SOVEREIGN'S CYCLE" at top
+ - Playfair Display, 36pt, #c9a962
+ - Crown icon
 
 5. **Atmospheric:**
-   - Royal purple/gold lighting
-   - Eternal/timeless feel
-   - Majestic atmosphere
+ - Royal purple/gold lighting
+ - Eternal/timeless feel
+ - Majestic atmosphere
 
 **Export:** PNG, high quality
 
@@ -19364,11 +19359,11 @@ Layer 6: Chronicle branding
 
 **Slide 7 - Chart Visual:**
 1. Create chart showing:
-   - Asian session range (boxed area)
-   - High and low clearly marked
-   - London open sweeping the high
-   - Reversal candle forming
-   - Move toward opposite side
+ - Asian session range (boxed area)
+ - High and low clearly marked
+ - London open sweeping the high
+ - Reversal candle forming
+ - Move toward opposite side
 2. Color code: Asian (blue), London (orange)
 
 **Slide 8 - CTA Design:**
@@ -19704,28 +19699,28 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Connection Imagery:**
-   - Network nodes connected by lines
-   - Or group of people silhouettes
-   - Color: #4a90d9 with gold accents
-   - Central focus
+ - Network nodes connected by lines
+ - Or group of people silhouettes
+ - Color: #4a90d9 with gold accents
+ - Central focus
 
 2. **Main Text:**
-   - "COMMUNITY & SUPPORT" in Playfair Display Bold, 52pt, white
-   - Handshake or group icon (🤝)
+ - "COMMUNITY & SUPPORT" in Playfair Display Bold, 52pt, white
+ - Handshake or group icon (🤝)
 
 3. **Feature Icons:**
-   - Discord logo/icon
-   - Speech bubbles for discussion
-   - Support/help icon
-   - Book/learning icon
+ - Discord logo/icon
+ - Speech bubbles for discussion
+ - Support/help icon
+ - Book/learning icon
 
 4. **Tagline:**
-   - "Better together" in Cormorant Garamond Italic, 32pt, #c9a962
-   - Bottom area
+ - "Better together" in Cormorant Garamond Italic, 32pt, #c9a962
+ - Bottom area
 
 5. **Brand Footer:**
-   - Signal Pilot logo
-   - Warm, inviting energy
+ - Signal Pilot logo
+ - Warm, inviting energy
 
 **Export:** PNG, high quality
 
@@ -19836,15 +19831,15 @@ Layer 6: Chronicle branding
 2. **Phase name:** Inter Bold, 36pt, #c9a962
 3. **Details:** Inter Regular, 26pt, white
 4. **Color coding:**
-   - Accumulation: Blue (calm)
-   - Manipulation: Red (false move)
-   - Distribution: Green (real move)
+ - Accumulation: Blue (calm)
+ - Manipulation: Red (false move)
+ - Distribution: Green (real move)
 
 **Slide 5 - Chart Visual:**
 1. Create chart showing AMD sequence:
-   - Asian session range (boxed, blue)
-   - London sweep beyond range (red spike)
-   - NY reversal and trend (green move)
+ - Asian session range (boxed, blue)
+ - London sweep beyond range (red spike)
+ - NY reversal and trend (green move)
 2. Clear phase labels
 3. Time annotations
 
@@ -20041,24 +20036,24 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Quote Text:**
-   - "Trade the chart in front of you,"
-   - Cormorant Garamond, 42pt, white
-   - "not the one in your head."
-   - Same font, 42pt, #c9a962
-   - Centered
+ - "Trade the chart in front of you,"
+ - Cormorant Garamond, 42pt, white
+ - "not the one in your head."
+ - Same font, 42pt, #c9a962
+ - Centered
 
 2. **Visual Metaphor:**
-   - Thought bubble with different chart direction
-   - Real chart showing opposite
-   - Subtle visual conflict
+ - Thought bubble with different chart direction
+ - Real chart showing opposite
+ - Subtle visual conflict
 
 3. **Attribution:**
-   - "— Signal Pilot" in Inter Medium, 24pt, white 70%
-   - Right-aligned
+ - "— Signal Pilot" in Inter Medium, 24pt, white 70%
+ - Right-aligned
 
 4. **Chart Element:**
-   - Small chart icon (📊)
-   - Represents objectivity
+ - Small chart icon (📊)
+ - Represents objectivity
 
 **Export:** PNG, high quality
 
@@ -20476,30 +20471,30 @@ Layer 6: Chronicle branding
 
 **Visual Elements:**
 1. **Watchman Character Art:**
-   - Figure with keen, watchful eyes
-   - Size: 500x650px
-   - Position: Center
-   - Surveillance aesthetic
+ - Figure with keen, watchful eyes
+ - Size: 500x650px
+ - Position: Center
+ - Surveillance aesthetic
 
 2. **Scanning Elements:**
-   - Grid overlay (Augury Grid reference)
-   - Scanning lines moving
-   - Blue radar-like effects
-   - Multiple "watched" symbols
+ - Grid overlay (Augury Grid reference)
+ - Scanning lines moving
+ - Blue radar-like effects
+ - Multiple "watched" symbols
 
 3. **Quote Overlay:**
-   - "While others sleep, I scan..."
-   - Cormorant Garamond, 30pt, white 90%
-   - Bottom third
+ - "While others sleep, I scan..."
+ - Cormorant Garamond, 30pt, white 90%
+ - Bottom third
 
 4. **Title:**
-   - "THE WATCHMAN'S VIGIL" at top
-   - Playfair Display, 36pt, #4a90d9
+ - "THE WATCHMAN'S VIGIL" at top
+ - Playfair Display, 36pt, #4a90d9
 
 5. **Eye Imagery:**
-   - Watchful eye icon (👁️)
-   - Never-blinking feel
-   - Vigilance personified
+ - Watchful eye icon (👁️)
+ - Never-blinking feel
+ - Vigilance personified
 
 **Export:** PNG, high quality
 
@@ -20611,10 +20606,10 @@ Layer 6: Chronicle branding
 2. **Quarter name:** "Q1 (Jan-Mar)" in Inter Bold, 32pt, #c9a962
 3. **Tendencies:** Inter Regular, 26pt, white
 4. **Color coding:**
-   - Q1: Fresh start (blue)
-   - Q2: Consolidation (yellow)
-   - Q3: Quiet (gray/blue)
-   - Q4: Active (gold)
+ - Q1: Fresh start (blue)
+ - Q2: Consolidation (yellow)
+ - Q3: Quiet (gray/blue)
+ - Q4: Active (gold)
 
 **Slide 6 - Chart Visual:**
 1. Create yearly timeline
@@ -20957,62 +20952,62 @@ Layer 6: Chronicle branding
 **Step-by-Step Instructions:**
 
 1. **Create New Design**
-   - Open Canva → Create design → Instagram Post (1080x1080)
-   - Name: "SP_491_Transparent_Pricing"
+ - Open Canva → Create design → Instagram Post (1080x1080)
+ - Name: "SP_491_Transparent_Pricing"
 
 2. **Set Background**
-   - Set solid color: #0a0a0f
+ - Set solid color: #0a0a0f
 
 3. **Create Header**
-   - Add text: "TRANSPARENT PRICING"
-   - Font: Playfair Display Bold, 58px
-   - Color: #FFFFFF
-   - Position: Center, 80px from top
+ - Add text: "TRANSPARENT PRICING"
+ - Font: Playfair Display Bold, 58px
+ - Color: #FFFFFF
+ - Position: Center, 80px from top
 
 4. **Add Trust Badge**
-   - Add text: "💎 WHAT YOU SEE = WHAT YOU PAY"
-   - Font: Inter SemiBold, 20px
-   - Color: #c9a962
-   - Position: Below header
+ - Add text: "💎 WHAT YOU SEE = WHAT YOU PAY"
+ - Font: Inter SemiBold, 20px
+ - Color: #c9a962
+ - Position: Below header
 
 5. **Create Pricing Cards**
-   - Create 3 vertical cards (280x300px each)
-   - Background: #141419 with subtle #4a90d9 border
-   - Arrange horizontally centered
+ - Create 3 vertical cards (280x300px each)
+ - Background: #141419 with subtle #4a90d9 border
+ - Arrange horizontally centered
 
 6. **Monthly Card Content**
-   - Header: "MONTHLY" (Inter Bold, 18px, #4a90d9)
-   - Price: "$99" (Playfair Display, 48px, #FFFFFF)
-   - Subtext: "/month" (Inter Regular, 14px, #888888)
-   - Feature: "Cancel anytime" (Inter Regular, 12px, #AAAAAA)
+ - Header: "MONTHLY" (Inter Bold, 18px, #4a90d9)
+ - Price: "$99" (Playfair Display, 48px, #FFFFFF)
+ - Subtext: "/month" (Inter Regular, 14px, #888888)
+ - Feature: "Cancel anytime" (Inter Regular, 12px, #AAAAAA)
 
 7. **Yearly Card Content**
-   - Add "BEST VALUE" badge (gold accent background)
-   - Header: "YEARLY" (Inter Bold, 18px, #c9a962)
-   - Price: "$699" (Playfair Display, 48px, #FFFFFF)
-   - Subtext: "/year" (Inter Regular, 14px, #888888)
-   - Feature: "Save $489" (Inter Regular, 12px, #c9a962)
+ - Add "BEST VALUE" badge (gold accent background)
+ - Header: "YEARLY" (Inter Bold, 18px, #c9a962)
+ - Price: "$699" (Playfair Display, 48px, #FFFFFF)
+ - Subtext: "/year" (Inter Regular, 14px, #888888)
+ - Feature: "Save $489" (Inter Regular, 12px, #c9a962)
 
 8. **Lifetime Card Content**
-   - Header: "LIFETIME" (Inter Bold, 18px, #4a90d9)
-   - Price: "$1,799" (Playfair Display, 48px, #FFFFFF)
-   - Subtext: "one payment" (Inter Regular, 14px, #888888)
-   - Feature: "Forever access" (Inter Regular, 12px, #AAAAAA)
+ - Header: "LIFETIME" (Inter Bold, 18px, #4a90d9)
+ - Price: "$1,799" (Playfair Display, 48px, #FFFFFF)
+ - Subtext: "one payment" (Inter Regular, 14px, #888888)
+ - Feature: "Forever access" (Inter Regular, 12px, #AAAAAA)
 
 9. **Add Inclusions List**
-   - Text: "All plans include: 7 indicators • 82 lessons • Full docs • Updates"
-   - Font: Inter Regular, 14px
-   - Color: #888888
-   - Position: Below cards
+ - Text: "All plans include: 7 indicators • 82 lessons • Full docs • Updates"
+ - Font: Inter Regular, 14px
+ - Color: #888888
+ - Position: Below cards
 
 10. **Add Signal Pilot Branding**
-    - Add Signal Pilot logo bottom right
-    - Size: 80px width
-    - Opacity: 100%
+ - Add Signal Pilot logo bottom right
+ - Size: 80px width
+ - Opacity: 100%
 
 11. **Export**
-    - Download as PNG
-    - Filename: "SP_491_Transparent_Pricing.png"
+ - Download as PNG
+ - Filename: "SP_491_Transparent_Pricing.png"
 
 ---
 
@@ -21147,59 +21142,59 @@ Layer 6: Chronicle branding
 **Step-by-Step Instructions:**
 
 1. **Create Master Template**
-   - Open Canva → Create design → Instagram Post (1080x1080)
-   - Set background: #0a0a0f
-   - Add subtle grid pattern at 5% opacity
+ - Open Canva → Create design → Instagram Post (1080x1080)
+ - Set background: #0a0a0f
+ - Add subtle grid pattern at 5% opacity
 
 2. **Slide 1 - Hook**
-   - Add institutional building icon/silhouette
-   - Text: "MARKET MAKER MODELS" (Playfair Display Bold, 56px, white)
-   - Subtext: "How the other side thinks" (Inter Regular, 24px, #4a90d9)
-   - Add Signal Pilot logo bottom right
+ - Add institutional building icon/silhouette
+ - Text: "MARKET MAKER MODELS" (Playfair Display Bold, 56px, white)
+ - Subtext: "How the other side thinks" (Inter Regular, 24px, #4a90d9)
+ - Add Signal Pilot logo bottom right
 
 3. **Slide 2 - Objectives**
-   - Header: "THEIR OBJECTIVES" (Playfair Display, 42px)
-   - Create 4 bullet points with icon containers
-   - Use professional/corporate icons
-   - Gold accent for icons (#c9a962)
+ - Header: "THEIR OBJECTIVES" (Playfair Display, 42px)
+ - Create 4 bullet points with icon containers
+ - Use professional/corporate icons
+ - Gold accent for icons (#c9a962)
 
 4. **Slide 3 - Accumulation**
-   - Header: "📥 ACCUMULATION" (blue accent)
-   - Add range-bound price chart illustration
-   - Three bullet points explaining accumulation
-   - Subtle buying arrows at bottom
+ - Header: "📥 ACCUMULATION" (blue accent)
+ - Add range-bound price chart illustration
+ - Three bullet points explaining accumulation
+ - Subtle buying arrows at bottom
 
 5. **Slide 4 - Manipulation**
-   - Header: "🎯 MANIPULATION" (gold accent)
-   - Add stop hunt chart illustration
-   - Show stops being triggered
-   - Three bullet points
+ - Header: "🎯 MANIPULATION" (gold accent)
+ - Add stop hunt chart illustration
+ - Show stops being triggered
+ - Three bullet points
 
 6. **Slide 5 - Distribution**
-   - Header: "📤 DISTRIBUTION" (blue accent)
-   - Add distribution zone chart illustration
-   - Show selling into rallies
-   - Three bullet points
+ - Header: "📤 DISTRIBUTION" (blue accent)
+ - Add distribution zone chart illustration
+ - Show selling into rallies
+ - Three bullet points
 
 7. **Slide 6 - Perspective Shift**
-   - Header: "CHANGE YOUR THINKING"
-   - Three key questions in boxes
-   - Question mark icon prominent
+ - Header: "CHANGE YOUR THINKING"
+ - Three key questions in boxes
+ - Question mark icon prominent
 
 8. **Slide 7 - Chart Example**
-   - Full MM cycle chart
-   - Label accumulation, manipulation, distribution
-   - Use real-looking price action
+ - Full MM cycle chart
+ - Label accumulation, manipulation, distribution
+ - Use real-looking price action
 
 9. **Slide 8 - CTA**
-   - "See the game from the other side"
-   - "Free lesson in curriculum"
-   - Arrow pointing right
-   - Signal Pilot logo centered
+ - "See the game from the other side"
+ - "Free lesson in curriculum"
+ - Arrow pointing right
+ - Signal Pilot logo centered
 
 10. **Export All Slides**
-    - Download as PNG (separate files)
-    - Naming: "SP_492_MM_Models_Slide_1.png" etc.
+ - Download as PNG (separate files)
+ - Naming: "SP_492_MM_Models_Slide_1.png" etc.
 
 ---
 
@@ -21322,48 +21317,48 @@ Layer 6: Chronicle branding
 **Step-by-Step Instructions:**
 
 1. **Create Zen Design Template**
-   - Background: #0a0a0f with subtle gradient
-   - Add minimalist zen elements (optional circles, lines)
+ - Background: #0a0a0f with subtle gradient
+ - Add minimalist zen elements (optional circles, lines)
 
 2. **Slide 1 - Hook**
-   - Text: "THE ART OF DOING NOTHING" (Playfair Display Bold, 52px)
-   - Subtext: "Active inaction is a skill" (Inter Regular, 22px, #4a90d9)
-   - Add calm/zen visual element
-   - Signal Pilot logo
+ - Text: "THE ART OF DOING NOTHING" (Playfair Display Bold, 52px)
+ - Subtext: "Active inaction is a skill" (Inter Regular, 22px, #4a90d9)
+ - Add calm/zen visual element
+ - Signal Pilot logo
 
 3. **Slide 2 - Why It's Hard**
-   - Header with icon
-   - 4 bullet points in contained boxes
-   - Use red/warning accent subtly
+ - Header with icon
+ - 4 bullet points in contained boxes
+ - Use red/warning accent subtly
 
 4. **Slide 3 - Why It Matters**
-   - Header with icon
-   - 4 bullet points
-   - Use green/positive accent subtly
+ - Header with icon
+ - 4 bullet points
+ - Use green/positive accent subtly
 
 5. **Slide 4 - When To Do Nothing**
-   - Header with pause icon
-   - 5 conditions listed
-   - Use checklist visual style
+ - Header with pause icon
+ - 5 conditions listed
+ - Use checklist visual style
 
 6. **Slide 5 - The Paradox**
-   - Visual scale/balance
-   - "Feels like losing" on one side
-   - "Often winning" on other
+ - Visual scale/balance
+ - "Feels like losing" on one side
+ - "Often winning" on other
 
 7. **Slide 6 - Key Quote**
-   - "Master the pause."
-   - Cormorant Garamond Italic, 56px
-   - Centered on zen background
+ - "Master the pause."
+ - Cormorant Garamond Italic, 56px
+ - Centered on zen background
 
 8. **Slide 7 - CTA**
-   - Blog article CTA
-   - Link in bio
-   - Signal Pilot logo
+ - Blog article CTA
+ - Link in bio
+ - Signal Pilot logo
 
 9. **Export**
-    - PNG format
-    - Naming: "SP_493_Art_Nothing_Slide_X.png"
+ - PNG format
+ - Naming: "SP_493_Art_Nothing_Slide_X.png"
 
 ---
 
@@ -21426,44 +21421,44 @@ Layer 6: Chronicle branding
 **Step-by-Step Instructions:**
 
 1. **Create New Design**
-   - Open Canva → Instagram Post (1080x1080)
-   - Name: "SP_494_Quote_Process"
+ - Open Canva → Instagram Post (1080x1080)
+ - Name: "SP_494_Quote_Process"
 
 2. **Set Background**
-   - Color: #0a0a0f
-   - Add subtle texture or gradient
+ - Color: #0a0a0f
+ - Add subtle texture or gradient
 
 3. **Add Visual Element**
-   - Forward arrow or reset icon
-   - Color: #4a90d9 at 30% opacity
-   - Position: Center background
+ - Forward arrow or reset icon
+ - Color: #4a90d9 at 30% opacity
+ - Position: Center background
 
 4. **Create Quote Text**
-   - Font: Cormorant Garamond Italic
-   - Size: 44px
-   - Color: #FFFFFF
-   - Text: "Your last trade doesn't define your next one. The process does."
-   - Center aligned
+ - Font: Cormorant Garamond Italic
+ - Size: 44px
+ - Color: #FFFFFF
+ - Text: "Your last trade doesn't define your next one. The process does."
+ - Center aligned
 
 5. **Add Quotation Marks**
-   - Large decorative " " marks
-   - Color: #c9a962 (gold)
-   - Subtle, semi-transparent
+ - Large decorative " " marks
+ - Color: #c9a962 (gold)
+ - Subtle, semi-transparent
 
 6. **Add Attribution**
-   - Text: "— Signal Pilot"
-   - Font: Inter SemiBold, 20px
-   - Color: #4a90d9
-   - Position: Below quote, right-aligned
+ - Text: "— Signal Pilot"
+ - Font: Inter SemiBold, 20px
+ - Color: #4a90d9
+ - Position: Below quote, right-aligned
 
 7. **Add Logo**
-   - Signal Pilot logo
-   - Bottom right corner
-   - Size: 60px width
+ - Signal Pilot logo
+ - Bottom right corner
+ - Size: 60px width
 
 8. **Export**
-    - PNG format
-    - Filename: "SP_494_Quote_Process.png"
+ - PNG format
+ - Filename: "SP_494_Quote_Process.png"
 
 ---
 
@@ -21583,38 +21578,38 @@ Layer 6: Chronicle branding
 **Step-by-Step Instructions:**
 
 1. **Create Unified Design System**
-   - Background: #0a0a0f
-   - Each indicator gets its own accent color
-   - Consistent layout across slides
+ - Background: #0a0a0f
+ - Each indicator gets its own accent color
+ - Consistent layout across slides
 
 2. **Slide 1 - Hook**
-   - "FULL SUITE INTEGRATION" (Playfair Display Bold, 52px)
-   - Arrange 7 indicator icons in circular formation
-   - Signal Pilot logo center
+ - "FULL SUITE INTEGRATION" (Playfair Display Bold, 52px)
+ - Arrange 7 indicator icons in circular formation
+ - Signal Pilot logo center
 
 3. **Slide 2 - Overview**
-   - List all 7 indicators with icons
-   - Clean, organized presentation
-   - Each with brief descriptor
+ - List all 7 indicators with icons
+ - Clean, organized presentation
+ - Each with brief descriptor
 
 4. **Slides 3-7 - Individual Indicators**
-   - Each slide features one or two indicators
-   - Show on-chart screenshot or mockup
-   - Include icon, name, and key function
+ - Each slide features one or two indicators
+ - Show on-chart screenshot or mockup
+ - Include icon, name, and key function
 
 5. **Slide 8 - Integration**
-   - Show all working together
-   - OmniDeck as central hub
-   - Connection lines between indicators
+ - Show all working together
+ - OmniDeck as central hub
+ - Connection lines between indicators
 
 6. **Slide 9 - CTA**
-   - "Seven tools. One vision."
-   - Signal Pilot branding
-   - Link in bio CTA
+ - "Seven tools. One vision."
+ - Signal Pilot branding
+ - Link in bio CTA
 
 7. **Export All**
-    - PNG format
-    - Naming: "SP_495_Full_Suite_Slide_X.png"
+ - PNG format
+ - Naming: "SP_495_Full_Suite_Slide_X.png"
 
 ---
 
@@ -21737,41 +21732,41 @@ Layer 6: Chronicle branding
 **Step-by-Step Instructions:**
 
 1. **Create Split Design Theme**
-   - Left side: Blue tones (algorithmic)
-   - Right side: Gold tones (discretionary)
-   - Center: Purple merge (hybrid)
+ - Left side: Blue tones (algorithmic)
+ - Right side: Gold tones (discretionary)
+ - Center: Purple merge (hybrid)
 
 2. **Slide 1 - Hook**
-   - Split visual: robot/code left, human/brain right
-   - Title centered
-   - Signal Pilot logo
+ - Split visual: robot/code left, human/brain right
+ - Title centered
+ - Signal Pilot logo
 
 3. **Slide 2 - Algorithmic**
-   - Blue accent dominant
-   - Code/circuit visual elements
-   - 5 bullet points
+ - Blue accent dominant
+ - Code/circuit visual elements
+ - 5 bullet points
 
 4. **Slide 3 - Discretionary**
-   - Gold accent dominant
-   - Human/brain visual elements
-   - 5 bullet points
+ - Gold accent dominant
+ - Human/brain visual elements
+ - 5 bullet points
 
 5. **Slide 4 - Hybrid**
-   - Both colors merging
-   - Balance visual
-   - 4 bullet points
+ - Both colors merging
+ - Balance visual
+ - 4 bullet points
 
 6. **Slide 5 - Signal Pilot Fits**
-   - Three options shown
-   - Signal Pilot logo central
+ - Three options shown
+ - Signal Pilot logo central
 
 7. **Slides 6-7**
-   - Style spectrum visual
-   - CTA with branding
+ - Style spectrum visual
+ - CTA with branding
 
 8. **Export**
-    - PNG format
-    - Naming: "SP_496_Algo_Disc_Slide_X.png"
+ - PNG format
+ - Naming: "SP_496_Algo_Disc_Slide_X.png"
 
 ---
 
@@ -21899,36 +21894,36 @@ Layer 6: Chronicle branding
 **Step-by-Step Instructions:**
 
 1. **Create Contrast Design**
-   - Red X marks for failures
-   - Green checkmarks for solutions
-   - Dark, honest aesthetic
+ - Red X marks for failures
+ - Green checkmarks for solutions
+ - Dark, honest aesthetic
 
 2. **Slide 1 - Hook**
-   - Broken diploma/certificate visual
-   - Title with bold typography
-   - Signal Pilot logo
+ - Broken diploma/certificate visual
+ - Title with bold typography
+ - Signal Pilot logo
 
 3. **Slides 2-5 - Failures**
-   - Red ❌ headers
-   - Clear problem statements
-   - Visual warning elements
+ - Red ❌ headers
+ - Clear problem statements
+ - Visual warning elements
 
 4. **Slide 6 - What Works**
-   - Green ✅ header
-   - Solution statements
-   - Positive but honest tone
+ - Green ✅ header
+ - Solution statements
+ - Positive but honest tone
 
 5. **Slide 7 - Key Insight**
-   - Independence quote
-   - Clean, powerful design
+ - Independence quote
+ - Clean, powerful design
 
 6. **Slide 8 - CTA**
-   - Blog article link
-   - Signal Pilot branding
+ - Blog article link
+ - Signal Pilot branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_497_Education_Fails_Slide_X.png"
+ - PNG format
+ - Naming: "SP_497_Education_Fails_Slide_X.png"
 
 ---
 
@@ -22045,33 +22040,33 @@ Layer 6: Chronicle branding
 **Step-by-Step Instructions:**
 
 1. **Create Epic Council Theme**
-   - Dark, majestic backgrounds
-   - Gold and blue accents
-   - Chronicle branding throughout
+ - Dark, majestic backgrounds
+ - Gold and blue accents
+ - Chronicle branding throughout
 
 2. **Slide 1 - Hook**
-   - Council chamber silhouette
-   - Dramatic lighting effect
-   - Chronicle logo
+ - Council chamber silhouette
+ - Dramatic lighting effect
+ - Chronicle logo
 
 3. **Slides 2-7 - Characters**
-   - Each character gets dedicated space
-   - Character art or icon prominent
-   - Domain and description
+ - Each character gets dedicated space
+ - Character art or icon prominent
+ - Domain and description
 
 4. **Slide 8 - Unity**
-   - All seven arranged in council formation
-   - "Together, they see all"
-   - Chronicle CTA
+ - All seven arranged in council formation
+ - "Together, they see all"
+ - Chronicle CTA
 
 5. **Use Chronicle Visual Language**
-   - Mythological feel
-   - Epic scale
-   - Unified aesthetic
+ - Mythological feel
+ - Epic scale
+ - Unified aesthetic
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_498_Council_Seven_Slide_X.png"
+ - PNG format
+ - Naming: "SP_498_Council_Seven_Slide_X.png"
 
 ---
 
@@ -22198,35 +22193,35 @@ Layer 6: Chronicle branding
 **Step-by-Step Instructions:**
 
 1. **Create Blueprint Theme**
-   - Technical drawing aesthetic
-   - Grid patterns at low opacity
-   - Professional, systematic feel
+ - Technical drawing aesthetic
+ - Grid patterns at low opacity
+ - Professional, systematic feel
 
 2. **Slide 1 - Hook**
-   - Blueprint/diagram visual
-   - System building imagery
-   - Signal Pilot logo
+ - Blueprint/diagram visual
+ - System building imagery
+ - Signal Pilot logo
 
 3. **Slides 2-6 - Components**
-   - Each component gets a slide
-   - Icon + header + bullets
-   - Consistent layout
+ - Each component gets a slide
+ - Icon + header + bullets
+ - Consistent layout
 
 4. **Slide 7 - CTA**
-   - "Write it. Test it. Follow it."
-   - Curriculum link
-   - Signal Pilot branding
+ - "Write it. Test it. Follow it."
+ - Curriculum link
+ - Signal Pilot branding
 
 5. **Use Consistent Icons**
-   - 📊 for analysis
-   - 🎯 for entry
-   - 🚪 for exit
-   - 📐 for sizing
-   - 📝 for review
+ - 📊 for analysis
+ - 🎯 for entry
+ - 🚪 for exit
+ - 📐 for sizing
+ - 📝 for review
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_499_Trading_System_Slide_X.png"
+ - PNG format
+ - Naming: "SP_499_Trading_System_Slide_X.png"
 
 ---
 
@@ -22300,57 +22295,57 @@ Layer 6: Chronicle branding
 **Step-by-Step Instructions:**
 
 1. **Create New Design**
-   - Open Canva → Instagram Post (1080x1080)
-   - Name: "SP_500_Milestone"
+ - Open Canva → Instagram Post (1080x1080)
+ - Name: "SP_500_Milestone"
 
 2. **Set Celebratory Background**
-   - Base: #0a0a0f
-   - Add confetti elements (gold and blue)
-   - Add subtle sparkle effects
+ - Base: #0a0a0f
+ - Add confetti elements (gold and blue)
+ - Add subtle sparkle effects
 
 3. **Create "500" Centerpiece**
-   - Text: "500"
-   - Font: Playfair Display Bold, 200px
-   - Color: Gradient gold (#c9a962 to #e8d5a3)
-   - Add subtle glow effect
+ - Text: "500"
+ - Font: Playfair Display Bold, 200px
+ - Color: Gradient gold (#c9a962 to #e8d5a3)
+ - Add subtle glow effect
 
 4. **Add Celebration Elements**
-   - Confetti particles (gold and blue)
-   - Subtle rays emanating from 500
-   - Achievement badge or star elements
+ - Confetti particles (gold and blue)
+ - Subtle rays emanating from 500
+ - Achievement badge or star elements
 
 5. **Add Milestone Text**
-   - Text: "POSTS"
-   - Font: Inter Bold, 48px
-   - Color: #FFFFFF
-   - Below the 500
+ - Text: "POSTS"
+ - Font: Inter Bold, 48px
+ - Color: #FFFFFF
+ - Below the 500
 
 6. **Add Thank You Message**
-   - Text: "Thank you for being here."
-   - Font: Inter Regular, 24px
-   - Color: #888888
-   - Position: Lower portion
+ - Text: "Thank you for being here."
+ - Font: Inter Regular, 24px
+ - Color: #888888
+ - Position: Lower portion
 
 7. **Add Tagline**
-   - Text: "Just getting started."
-   - Font: Inter SemiBold, 20px
-   - Color: #4a90d9
-   - Below thank you message
+ - Text: "Just getting started."
+ - Font: Inter SemiBold, 20px
+ - Color: #4a90d9
+ - Below thank you message
 
 8. **Add Signal Pilot Branding**
-   - Logo at bottom center
-   - Size: 100px width
-   - Premium placement for milestone
+ - Logo at bottom center
+ - Size: 100px width
+ - Premium placement for milestone
 
 9. **Add Decorative Elements**
-   - Party/celebration emojis: 🎉🎊
-   - Position tastefully around design
-   - Keep professional feel
+ - Party/celebration emojis: 🎉🎊
+ - Position tastefully around design
+ - Keep professional feel
 
 10. **Export**
-    - PNG format
-    - High quality
-    - Filename: "SP_500_Milestone.png"
+ - PNG format
+ - High quality
+ - Filename: "SP_500_Milestone.png"
 
 ---
 
@@ -22609,32 +22604,32 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Performance Theme**
-   - Background: #0a0a0f
-   - Speed/efficiency visual elements
-   - Blue accent for tech feel
+ - Background: #0a0a0f
+ - Speed/efficiency visual elements
+ - Blue accent for tech feel
 
 2. **Slide 1 - Hook**
-   - Speedometer or performance meter visual
-   - "PERFORMANCE OPTIMIZATION" (Playfair Display Bold, 52px)
-   - Signal Pilot logo
+ - Speedometer or performance meter visual
+ - "PERFORMANCE OPTIMIZATION" (Playfair Display Bold, 52px)
+ - Signal Pilot logo
 
 3. **Slide 2 - Problem Statement**
-   - "IF CHARTS ARE SLOW"
-   - Visual of slow loading indicator
-   - Lead to solutions
+ - "IF CHARTS ARE SLOW"
+ - Visual of slow loading indicator
+ - Lead to solutions
 
 4. **Slides 3-6 - Solutions**
-   - Each optimization category gets a slide
-   - Icon + header + bullet points
-   - Consistent layout
+ - Each optimization category gets a slide
+ - Icon + header + bullet points
+ - Consistent layout
 
 5. **Slide 7 - CTA**
-   - Docs link
-   - Signal Pilot branding
+ - Docs link
+ - Signal Pilot branding
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_501_Performance_Slide_X.png"
+ - PNG format
+ - Naming: "SP_501_Performance_Slide_X.png"
 
 ---
 
@@ -22763,31 +22758,31 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Testing/Scientific Theme**
-   - Background: #0a0a0f
-   - Data/chart visual elements
-   - Professional, analytical feel
+ - Background: #0a0a0f
+ - Data/chart visual elements
+ - Professional, analytical feel
 
 2. **Slide 1 - Hook**
-   - Historical chart with test markers
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Historical chart with test markers
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-6 - Rules**
-   - Each backtesting rule gets a slide
-   - Icon + header + bullets
-   - Consistent visual language
+ - Each backtesting rule gets a slide
+ - Icon + header + bullets
+ - Consistent visual language
 
 4. **Slide 7 - Key Insight**
-   - "A strategy you haven't tested is a guess."
-   - Bold, memorable presentation
+ - "A strategy you haven't tested is a guess."
+ - Bold, memorable presentation
 
 5. **Slide 8 - CTA**
-   - Curriculum link
-   - Signal Pilot branding
+ - Curriculum link
+ - Signal Pilot branding
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_502_Backtesting_Slide_X.png"
+ - PNG format
+ - Naming: "SP_502_Backtesting_Slide_X.png"
 
 ---
 
@@ -22907,35 +22902,35 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Cost/Expense Theme**
-   - Background: #0a0a0f
-   - Money/cost visual elements
-   - Red accents for costs
+ - Background: #0a0a0f
+ - Money/cost visual elements
+ - Red accents for costs
 
 2. **Slide 1 - Hook**
-   - Money draining or cost meter visual
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Money draining or cost meter visual
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-4 - Costs**
-   - Each cost category gets a slide
-   - Red warning colors
-   - Clear cost breakdown
+ - Each cost category gets a slide
+ - Red warning colors
+ - Clear cost breakdown
 
 4. **Slide 5 - The Math**
-   - Show compounding cost visual
-   - Small → Big illustration
+ - Show compounding cost visual
+ - Small → Big illustration
 
 5. **Slide 6 - Key Insight**
-   - Memorable quote
-   - Strong visual emphasis
+ - Memorable quote
+ - Strong visual emphasis
 
 6. **Slide 7 - CTA**
-   - Blog link
-   - Signal Pilot branding
+ - Blog link
+ - Signal Pilot branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_503_Impatience_Slide_X.png"
+ - PNG format
+ - Naming: "SP_503_Impatience_Slide_X.png"
 
 ---
 
@@ -22995,44 +22990,44 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create New Design**
-   - Open Canva → Instagram Post (1080x1080)
-   - Name: "SP_504_Quote_Possibilities"
+ - Open Canva → Instagram Post (1080x1080)
+ - Name: "SP_504_Quote_Possibilities"
 
 2. **Set Background**
-   - Color: #0a0a0f
-   - Add subtle chart pattern at low opacity
+ - Color: #0a0a0f
+ - Add subtle chart pattern at low opacity
 
 3. **Add Visual Element**
-   - Chart with multiple directional arrows
-   - One arrow highlighted (chosen by rules)
-   - Color: Blue for chosen, gray for others
+ - Chart with multiple directional arrows
+ - One arrow highlighted (chosen by rules)
+ - Color: Blue for chosen, gray for others
 
 4. **Create Quote Text**
-   - Font: Cormorant Garamond Italic
-   - Size: 42px
-   - Color: #FFFFFF
-   - Text: "The chart shows possibilities. Your rules choose which to act on."
-   - Center aligned
+ - Font: Cormorant Garamond Italic
+ - Size: 42px
+ - Color: #FFFFFF
+ - Text: "The chart shows possibilities. Your rules choose which to act on."
+ - Center aligned
 
 5. **Add Quotation Marks**
-   - Large decorative " " marks
-   - Color: #c9a962 (gold)
-   - Semi-transparent
+ - Large decorative " " marks
+ - Color: #c9a962 (gold)
+ - Semi-transparent
 
 6. **Add Attribution**
-   - Text: "— Signal Pilot"
-   - Font: Inter SemiBold, 20px
-   - Color: #4a90d9
-   - Below quote, right-aligned
+ - Text: "— Signal Pilot"
+ - Font: Inter SemiBold, 20px
+ - Color: #4a90d9
+ - Below quote, right-aligned
 
 7. **Add Logo**
-   - Signal Pilot logo
-   - Bottom right corner
-   - Size: 60px width
+ - Signal Pilot logo
+ - Bottom right corner
+ - Size: 60px width
 
 8. **Export**
-    - PNG format
-    - Filename: "SP_504_Quote_Possibilities.png"
+ - PNG format
+ - Filename: "SP_504_Quote_Possibilities.png"
 
 ---
 
@@ -23159,35 +23154,35 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Cycle Theme**
-   - Circular/cyclical visual elements
-   - Four distinct color phases
-   - Arrows showing progression
+ - Circular/cyclical visual elements
+ - Four distinct color phases
+ - Arrows showing progression
 
 2. **Slide 1 - Hook**
-   - Cycle diagram visual
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Cycle diagram visual
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-5 - Phases**
-   - Each phase gets a slide
-   - Distinct color coding
-   - Phase characteristics listed
+ - Each phase gets a slide
+ - Distinct color coding
+ - Phase characteristics listed
 
 4. **Slide 6 - Transitions**
-   - Show transition signals
-   - What each means for trading
+ - Show transition signals
+ - What each means for trading
 
 5. **Slide 7 - On Chart**
-   - Pentarch on actual chart
-   - Phases labeled
+ - Pentarch on actual chart
+ - Phases labeled
 
 6. **Slide 8 - CTA**
-   - Product link
-   - Signal Pilot branding
+ - Product link
+ - Signal Pilot branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_505_Pentarch_Transitions_Slide_X.png"
+ - PNG format
+ - Naming: "SP_505_Pentarch_Transitions_Slide_X.png"
 
 ---
 
@@ -23314,31 +23309,31 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Bridge/Process Theme**
-   - Background: #0a0a0f
-   - Bridge visual connecting backtest → live
-   - Process flow elements
+ - Background: #0a0a0f
+ - Bridge visual connecting backtest → live
+ - Process flow elements
 
 2. **Slide 1 - Hook**
-   - Bridge concept visual
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Bridge concept visual
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-5 - Protocol Elements**
-   - Each benefit/step gets a slide
-   - Icon + header + bullets
-   - Consistent layout
+ - Each benefit/step gets a slide
+ - Icon + header + bullets
+ - Consistent layout
 
 4. **Slide 6 - Protocol Summary**
-   - Steps listed clearly
-   - Process flow visual
+ - Steps listed clearly
+ - Process flow visual
 
 5. **Slide 7 - CTA**
-   - Curriculum link
-   - Signal Pilot branding
+ - Curriculum link
+ - Signal Pilot branding
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_506_Forward_Testing_Slide_X.png"
+ - PNG format
+ - Naming: "SP_506_Forward_Testing_Slide_X.png"
 
 ---
 
@@ -23463,34 +23458,34 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Split Comparison Theme**
-   - Left side: Glamorous/fantasy (gold tint)
-   - Right side: Realistic (blue tint)
-   - Contrast between the two
+ - Left side: Glamorous/fantasy (gold tint)
+ - Right side: Realistic (blue tint)
+ - Contrast between the two
 
 2. **Slide 1 - Hook**
-   - Split visual concept
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Split visual concept
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-3 - Expectations vs Reality**
-   - Clear contrast
-   - Honest but not discouraging
+ - Clear contrast
+ - Honest but not discouraging
 
 4. **Slides 4-5 - Gap Analysis**
-   - Why it matters
-   - How to calibrate
+ - Why it matters
+ - How to calibrate
 
 5. **Slides 6-7 - Positive Reframe**
-   - Reality can still be good
-   - Comparison visual
+ - Reality can still be good
+ - Comparison visual
 
 6. **Slide 8 - CTA**
-   - Blog link
-   - Signal Pilot branding
+ - Blog link
+ - Signal Pilot branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_507_Expectations_Reality_Slide_X.png"
+ - PNG format
+ - Naming: "SP_507_Expectations_Reality_Slide_X.png"
 
 ---
 
@@ -23622,34 +23617,34 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Origin Story Theme**
-   - Epic, mythological aesthetic
-   - Transformation visual (scattered → unified)
-   - Chronicle branding throughout
+ - Epic, mythological aesthetic
+ - Transformation visual (scattered → unified)
+ - Chronicle branding throughout
 
 2. **Slide 1 - Hook**
-   - Scattered symbols visual
-   - Origin story feel
-   - Chronicle logo
+ - Scattered symbols visual
+ - Origin story feel
+ - Chronicle logo
 
 3. **Slides 2-4 - The Story**
-   - Beginning, realization, unification
-   - Progressive narrative
+ - Beginning, realization, unification
+ - Progressive narrative
 
 4. **Slides 5-6 - Transformation**
-   - Chaos to clarity visual
-   - Before and after
+ - Chaos to clarity visual
+ - Before and after
 
 5. **Slide 7 - Epic Visual**
-   - Seven coming together
-   - Mythological composition
+ - Seven coming together
+ - Mythological composition
 
 6. **Slide 8 - CTA**
-   - Chronicle link
-   - Signal Pilot branding
+ - Chronicle link
+ - Signal Pilot branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_508_Origins_Elite_Seven_Slide_X.png"
+ - PNG format
+ - Naming: "SP_508_Origins_Elite_Seven_Slide_X.png"
 
 ---
 
@@ -23779,35 +23774,35 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Analytical/Metrics Theme**
-   - Background: #0a0a0f
-   - Dashboard/metrics visual elements
-   - Professional, data-driven feel
+ - Background: #0a0a0f
+ - Dashboard/metrics visual elements
+ - Professional, data-driven feel
 
 2. **Slide 1 - Hook**
-   - Comparison dashboard visual
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Comparison dashboard visual
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-5 - Metrics**
-   - Each metric gets a slide
-   - Clear explanation
-   - Formula representation
+ - Each metric gets a slide
+ - Clear explanation
+ - Formula representation
 
 4. **Slide 6 - The Comparison**
-   - Side by side strategies
-   - Clear which is better
+ - Side by side strategies
+ - Clear which is better
 
 5. **Slide 7 - Key Insight**
-   - Quality visual
-   - Two equity curves
+ - Quality visual
+ - Two equity curves
 
 6. **Slide 8 - CTA**
-   - Curriculum link
-   - Signal Pilot branding
+ - Curriculum link
+ - Signal Pilot branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_509_Risk_Adjusted_Slide_X.png"
+ - PNG format
+ - Naming: "SP_509_Risk_Adjusted_Slide_X.png"
 
 ---
 
@@ -23934,34 +23929,34 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Tech/Code Theme**
-   - Background: #0a0a0f
-   - Code snippets/terminal visual elements
-   - Tech/developer aesthetic
+ - Background: #0a0a0f
+ - Code snippets/terminal visual elements
+ - Tech/developer aesthetic
 
 2. **Slide 1 - Hook**
-   - Code/connection interface visual
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Code/connection interface visual
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-4 - Use Cases**
-   - Bot triggers, notifications, logging
-   - Clear visual flows
+ - Bot triggers, notifications, logging
+ - Clear visual flows
 
 4. **Slide 5 - How It Works**
-   - Webhook flow diagram
-   - Clear step progression
+ - Webhook flow diagram
+ - Clear step progression
 
 5. **Slide 6 - Requirements**
-   - Prerequisites listed
-   - Technical but accessible
+ - Prerequisites listed
+ - Technical but accessible
 
 6. **Slide 7 - CTA**
-   - Docs link
-   - Signal Pilot branding
+ - Docs link
+ - Signal Pilot branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_510_API_Webhooks_Slide_X.png"
+ - PNG format
+ - Naming: "SP_510_API_Webhooks_Slide_X.png"
 
 ---
 
@@ -24206,32 +24201,32 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Authentic/Craft Theme**
-   - Background: #0a0a0f
-   - Workshop/craft visual elements
-   - Honest, genuine aesthetic
+ - Background: #0a0a0f
+ - Workshop/craft visual elements
+ - Honest, genuine aesthetic
 
 2. **Slide 1 - Hook**
-   - Craft/workshop imagery
-   - "BUILT BY TRADERS, FOR TRADERS" (Playfair Display Bold, 48px)
-   - Signal Pilot logo
+ - Craft/workshop imagery
+ - "BUILT BY TRADERS, FOR TRADERS" (Playfair Display Bold, 48px)
+ - Signal Pilot logo
 
 3. **Slides 2-4 - Story Elements**
-   - Origin, philosophy, result
-   - Honest, direct messaging
+ - Origin, philosophy, result
+ - Honest, direct messaging
 
 4. **Slide 5 - Contrast**
-   - What we're NOT
-   - Red X marks for negatives
+ - What we're NOT
+ - Red X marks for negatives
 
 5. **Slide 6 - Key Message**
-   - Strong, memorable statement
+ - Strong, memorable statement
 
 6. **Slide 7 - CTA**
-   - Signal Pilot branding
+ - Signal Pilot branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_511_Built_By_Traders_Slide_X.png"
+ - PNG format
+ - Naming: "SP_511_Built_By_Traders_Slide_X.png"
 
 ---
 
@@ -24366,32 +24361,32 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Entry Strategy Theme**
-   - Background: #0a0a0f
-   - Chart with multiple entry points
-   - Building/construction visual feel
+ - Background: #0a0a0f
+ - Chart with multiple entry points
+ - Building/construction visual feel
 
 2. **Slide 1 - Hook**
-   - Chart with multiple entries marked
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Chart with multiple entries marked
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-5 - Benefits**
-   - Each benefit gets visual
-   - Green checkmarks for benefits
+ - Each benefit gets visual
+ - Green checkmarks for benefits
 
 4. **Slide 6 - Risks**
-   - Yellow/orange warning colors
-   - Clear caution messaging
+ - Yellow/orange warning colors
+ - Clear caution messaging
 
 5. **Slide 7 - When to Use**
-   - Conditions listed
+ - Conditions listed
 
 6. **Slide 8 - CTA**
-   - Key message + curriculum link
+ - Key message + curriculum link
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_512_Scaling_In_Slide_X.png"
+ - PNG format
+ - Naming: "SP_512_Scaling_In_Slide_X.png"
 
 ---
 
@@ -24520,33 +24515,33 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Empathetic Theme**
-   - Background: #0a0a0f
-   - Solitary to connected visual journey
-   - Warm, supportive feeling
+ - Background: #0a0a0f
+ - Solitary to connected visual journey
+ - Warm, supportive feeling
 
 2. **Slide 1 - Hook**
-   - Solitary trader silhouette
-   - Empathetic, not dramatic
-   - Signal Pilot logo
+ - Solitary trader silhouette
+ - Empathetic, not dramatic
+ - Signal Pilot logo
 
 3. **Slides 2-3 - The Problem**
-   - Loneliness acknowledged
-   - Honest, relatable
+ - Loneliness acknowledged
+ - Honest, relatable
 
 4. **Slides 4-6 - Solutions**
-   - Community, journaling, balance
-   - Each with warm visual
+ - Community, journaling, balance
+ - Each with warm visual
 
 5. **Slide 7 - Key Message**
-   - Supportive statement
+ - Supportive statement
 
 6. **Slide 8 - CTA**
-   - Blog link
-   - Signal Pilot branding
+ - Blog link
+ - Signal Pilot branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_513_Loneliness_Trading_Slide_X.png"
+ - PNG format
+ - Naming: "SP_513_Loneliness_Trading_Slide_X.png"
 
 ---
 
@@ -24613,40 +24608,40 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create New Design**
-   - Open Canva → Instagram Post (1080x1080)
-   - Name: "SP_514_Quote_Tuition"
+ - Open Canva → Instagram Post (1080x1080)
+ - Name: "SP_514_Quote_Tuition"
 
 2. **Set Background**
-   - Color: #0a0a0f
-   - Add subtle education/graduation element
+ - Color: #0a0a0f
+ - Add subtle education/graduation element
 
 3. **Add Visual Element**
-   - Graduation cap or book icon
-   - Color: #c9a962 at 30% opacity
+ - Graduation cap or book icon
+ - Color: #c9a962 at 30% opacity
 
 4. **Create Quote Text**
-   - Font: Cormorant Garamond Italic
-   - Size: 44px
-   - Color: #FFFFFF
-   - Text: "Losses are tuition. Repeated losses are ignoring the lesson."
-   - Center aligned
+ - Font: Cormorant Garamond Italic
+ - Size: 44px
+ - Color: #FFFFFF
+ - Text: "Losses are tuition. Repeated losses are ignoring the lesson."
+ - Center aligned
 
 5. **Add Quotation Marks**
-   - Large decorative " " marks
-   - Color: #c9a962 (gold)
+ - Large decorative " " marks
+ - Color: #c9a962 (gold)
 
 6. **Add Attribution**
-   - Text: "— Signal Pilot"
-   - Font: Inter SemiBold, 20px
-   - Color: #4a90d9
+ - Text: "— Signal Pilot"
+ - Font: Inter SemiBold, 20px
+ - Color: #4a90d9
 
 7. **Add Logo**
-   - Signal Pilot logo
-   - Bottom right corner
+ - Signal Pilot logo
+ - Bottom right corner
 
 8. **Export**
-    - PNG format
-    - Filename: "SP_514_Quote_Tuition.png"
+ - PNG format
+ - Filename: "SP_514_Quote_Tuition.png"
 
 ---
 
@@ -24772,32 +24767,32 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Combo/Synergy Theme**
-   - Background: #0a0a0f
-   - Two indicator colors blending
-   - Connection/synergy visual elements
+ - Background: #0a0a0f
+ - Two indicator colors blending
+ - Connection/synergy visual elements
 
 2. **Slide 1 - Hook**
-   - Both indicators shown together
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Both indicators shown together
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-3 - Individual Indicators**
-   - What each provides
-   - Clear differentiation
+ - What each provides
+ - Clear differentiation
 
 4. **Slides 4-6 - Combo Scenarios**
-   - Color coded (red/green/yellow)
-   - Each combination explained
+ - Color coded (red/green/yellow)
+ - Each combination explained
 
 5. **Slide 7 - Chart Example**
-   - Real combo in action
+ - Real combo in action
 
 6. **Slide 8 - CTA**
-   - Key message + link
+ - Key message + link
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_515_VO_JA_Combo_Slide_X.png"
+ - PNG format
+ - Naming: "SP_515_VO_JA_Combo_Slide_X.png"
 
 ---
 
@@ -24929,31 +24924,31 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Exit Strategy Theme**
-   - Background: #0a0a0f
-   - Multiple exit points shown
-   - Green profit colors
+ - Background: #0a0a0f
+ - Multiple exit points shown
+ - Green profit colors
 
 2. **Slide 1 - Hook**
-   - Chart with multiple exits
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Chart with multiple exits
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-5 - Methods**
-   - Each method explained
-   - Visual examples
+ - Each method explained
+ - Visual examples
 
 4. **Slide 6 - Benefits**
-   - Green checkmarks
+ - Green checkmarks
 
 5. **Slide 7 - Consideration**
-   - Yellow caution note
+ - Yellow caution note
 
 6. **Slide 8 - CTA**
-   - Key message + curriculum link
+ - Key message + curriculum link
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_516_Scaling_Out_Slide_X.png"
+ - PNG format
+ - Naming: "SP_516_Scaling_Out_Slide_X.png"
 
 ---
 
@@ -25084,32 +25079,32 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Rest/Reset Theme**
-   - Background: #0a0a0f
-   - Peaceful, calm visual elements
-   - Supportive, caring feel
+ - Background: #0a0a0f
+ - Peaceful, calm visual elements
+ - Supportive, caring feel
 
 2. **Slide 1 - Hook**
-   - Peaceful rest imagery
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Peaceful rest imagery
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-5 - Warning Signs**
-   - Red warning icons
-   - Each sign clearly stated
+ - Red warning icons
+ - Each sign clearly stated
 
 4. **Slide 6 - What Break Provides**
-   - Green positive elements
+ - Green positive elements
 
 5. **Slide 7 - Key Message**
-   - Supportive statement
+ - Supportive statement
 
 6. **Slide 8 - CTA**
-   - Blog link
-   - Signal Pilot branding
+ - Blog link
+ - Signal Pilot branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_517_Trading_Break_Slide_X.png"
+ - PNG format
+ - Naming: "SP_517_Trading_Break_Slide_X.png"
 
 ---
 
@@ -25229,32 +25224,32 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Elegant Dance Theme**
-   - Background: #0a0a0f
-   - Yin-yang inspired design
-   - Flowing, elegant movement
+ - Background: #0a0a0f
+ - Yin-yang inspired design
+ - Flowing, elegant movement
 
 2. **Slide 1 - Hook**
-   - Bull and bear in dance pose
-   - Chronicle logo
-   - Elegant typography
+ - Bull and bear in dance pose
+ - Chronicle logo
+ - Elegant typography
 
 3. **Slides 2-4 - The Dancers**
-   - Each pair visualized
-   - Opposing forces shown
+ - Each pair visualized
+ - Opposing forces shown
 
 4. **Slide 5 - Wisdom**
-   - Philosophical message
+ - Philosophical message
 
 5. **Slide 6 - Key Message**
-   - Centuries of dance
+ - Centuries of dance
 
 6. **Slide 7 - CTA**
-   - Chronicle link
-   - Signal Pilot branding
+ - Chronicle link
+ - Signal Pilot branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_518_Eternal_Dance_Slide_X.png"
+ - PNG format
+ - Naming: "SP_518_Eternal_Dance_Slide_X.png"
 
 ---
 
@@ -25392,28 +25387,28 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Review/Journal Theme**
-   - Background: #0a0a0f
-   - Journal/checklist visual elements
-   - Professional, growth-oriented feel
+ - Background: #0a0a0f
+ - Journal/checklist visual elements
+ - Professional, growth-oriented feel
 
 2. **Slide 1 - Hook**
-   - Journal/review concept visual
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Journal/review concept visual
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-6 - Review Steps**
-   - Each component gets a slide
-   - Checklist/form styling
+ - Each component gets a slide
+ - Checklist/form styling
 
 4. **Slide 7 - Document Everything**
-   - Complete documentation list
+ - Complete documentation list
 
 5. **Slide 8 - CTA**
-   - Growth message + curriculum link
+ - Growth message + curriculum link
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_519_Trade_Review_Slide_X.png"
+ - PNG format
+ - Naming: "SP_519_Trade_Review_Slide_X.png"
 
 ---
 
@@ -25537,29 +25532,29 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Helpful/Support Theme**
-   - Background: #0a0a0f
-   - Question marks → checkmarks visual
-   - Helpful, supportive feel
+ - Background: #0a0a0f
+ - Question marks → checkmarks visual
+ - Helpful, supportive feel
 
 2. **Slide 1 - Hook**
-   - Q&A transformation visual
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Q&A transformation visual
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-5 - Categories**
-   - Each FAQ category
-   - Clear question examples
+ - Each FAQ category
+ - Clear question examples
 
 4. **Slide 6 - Human Help**
-   - Support available
+ - Support available
 
 5. **Slide 7 - CTA**
-   - Docs link
-   - Signal Pilot branding
+ - Docs link
+ - Signal Pilot branding
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_520_FAQ_Slide_X.png"
+ - PNG format
+ - Naming: "SP_520_FAQ_Slide_X.png"
 
 ---
 
@@ -25769,41 +25764,41 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create New Design**
-   - Open Canva → Instagram Post (1080x1080)
-   - Name: "SP_521_10K_Traders"
+ - Open Canva → Instagram Post (1080x1080)
+ - Name: "SP_521_10K_Traders"
 
 2. **Set Background**
-   - Color: #0a0a0f
-   - Add subtle community/network pattern
+ - Color: #0a0a0f
+ - Add subtle community/network pattern
 
 3. **Create "10K+" Centerpiece**
-   - Text: "10,000+"
-   - Font: Playfair Display Bold, 140px
-   - Color: Gradient gold (#c9a962 to #e8d5a3)
+ - Text: "10,000+"
+ - Font: Playfair Display Bold, 140px
+ - Color: Gradient gold (#c9a962 to #e8d5a3)
 
 4. **Add "TRADERS" Text**
-   - Text: "TRADERS"
-   - Font: Inter Bold, 48px
-   - Color: #FFFFFF
-   - Below the number
+ - Text: "TRADERS"
+ - Font: Inter Bold, 48px
+ - Color: #FFFFFF
+ - Below the number
 
 5. **Add Value Props**
-   - Three icons with brief text
-   - Professional tools, Education, Community
-   - Font: Inter Regular, 16px
+ - Three icons with brief text
+ - Professional tools, Education, Community
+ - Font: Inter Regular, 16px
 
 6. **Add CTA**
-   - Text: "Join them"
-   - Font: Inter SemiBold, 20px
-   - Color: #4a90d9
+ - Text: "Join them"
+ - Font: Inter SemiBold, 20px
+ - Color: #4a90d9
 
 7. **Add Signal Pilot Logo**
-   - Bottom center
-   - Size: 80px width
+ - Bottom center
+ - Size: 80px width
 
 8. **Export**
-    - PNG format
-    - Filename: "SP_521_10K_Traders.png"
+ - PNG format
+ - Filename: "SP_521_10K_Traders.png"
 
 ---
 
@@ -25933,30 +25928,30 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Correlation Theme**
-   - Background: #0a0a0f
-   - Dual chart visuals
-   - Connection lines between assets
+ - Background: #0a0a0f
+ - Dual chart visuals
+ - Connection lines between assets
 
 2. **Slide 1 - Hook**
-   - Two charts moving together
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Two charts moving together
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-4 - Types**
-   - Each correlation type visualized
-   - Color coded (green/red/gray)
+ - Each correlation type visualized
+ - Color coded (green/red/gray)
 
 4. **Slides 5-7 - Implications**
-   - Risk, diversification, confirmation
-   - Clear visual explanations
+ - Risk, diversification, confirmation
+ - Clear visual explanations
 
 5. **Slide 8 - CTA**
-   - Curriculum link
-   - Signal Pilot branding
+ - Curriculum link
+ - Signal Pilot branding
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_522_Correlation_Slide_X.png"
+ - PNG format
+ - Naming: "SP_522_Correlation_Slide_X.png"
 
 ---
 
@@ -26084,29 +26079,29 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Humility/Power Theme**
-   - Background: #0a0a0f
-   - Balance of humble and powerful
-   - Clean, confident design
+ - Background: #0a0a0f
+ - Balance of humble and powerful
+ - Clean, confident design
 
 2. **Slide 1 - Hook**
-   - "I Don't Know" as statement of power
-   - Title prominently displayed
-   - Signal Pilot logo
+ - "I Don't Know" as statement of power
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-6 - Benefits**
-   - Each benefit of admitting uncertainty
-   - Green checkmarks
+ - Each benefit of admitting uncertainty
+ - Green checkmarks
 
 4. **Slide 7 - Paradox**
-   - Paradoxical insight
-   - Thought-provoking design
+ - Paradoxical insight
+ - Thought-provoking design
 
 5. **Slide 8 - CTA**
-   - Key quote + blog link
+ - Key quote + blog link
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_523_IDK_Power_Slide_X.png"
+ - PNG format
+ - Naming: "SP_523_IDK_Power_Slide_X.png"
 
 ---
 
@@ -26171,40 +26166,40 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create New Design**
-   - Open Canva → Instagram Post (1080x1080)
-   - Name: "SP_524_Quote_Response"
+ - Open Canva → Instagram Post (1080x1080)
+ - Name: "SP_524_Quote_Response"
 
 2. **Set Background**
-   - Color: #0a0a0f
-   - Add flowing/water element at low opacity
+ - Color: #0a0a0f
+ - Add flowing/water element at low opacity
 
 3. **Add Visual Element**
-   - Flowing water or adaptive nature imagery
-   - Subtle, elegant
+ - Flowing water or adaptive nature imagery
+ - Subtle, elegant
 
 4. **Create Quote Text**
-   - Font: Cormorant Garamond Italic
-   - Size: 44px
-   - Color: #FFFFFF
-   - Text: "The goal isn't to predict the market. It's to respond to it."
-   - Center aligned
+ - Font: Cormorant Garamond Italic
+ - Size: 44px
+ - Color: #FFFFFF
+ - Text: "The goal isn't to predict the market. It's to respond to it."
+ - Center aligned
 
 5. **Add Quotation Marks**
-   - Large decorative " " marks
-   - Color: #c9a962 (gold)
+ - Large decorative " " marks
+ - Color: #c9a962 (gold)
 
 6. **Add Attribution**
-   - Text: "— Signal Pilot"
-   - Font: Inter SemiBold, 20px
-   - Color: #4a90d9
+ - Text: "— Signal Pilot"
+ - Font: Inter SemiBold, 20px
+ - Color: #4a90d9
 
 7. **Add Logo**
-   - Signal Pilot logo
-   - Bottom right corner
+ - Signal Pilot logo
+ - Bottom right corner
 
 8. **Export**
-    - PNG format
-    - Filename: "SP_524_Quote_Response.png"
+ - PNG format
+ - Filename: "SP_524_Quote_Response.png"
 
 ---
 
@@ -26321,29 +26316,29 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Hidden/Reveal Theme**
-   - Background: #0a0a0f
-   - Surface/underneath visual concept
-   - Discovery elements
+ - Background: #0a0a0f
+ - Surface/underneath visual concept
+ - Discovery elements
 
 2. **Slide 1 - Hook**
-   - "Beneath the surface" concept
-   - Title prominently displayed
-   - Signal Pilot logo
+ - "Beneath the surface" concept
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-5 - Feature Explanation**
-   - Scenario, reveal, insight, usage
-   - Progressive discovery
+ - Scenario, reveal, insight, usage
+ - Progressive discovery
 
 4. **Slide 6 - Chart Example**
-   - Flat price + positive flow
-   - Clear accumulation visual
+ - Flat price + positive flow
+ - Clear accumulation visual
 
 5. **Slide 7 - CTA**
-   - Key insight + link
+ - Key insight + link
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_525_Plutus_Accum_Slide_X.png"
+ - PNG format
+ - Naming: "SP_525_Plutus_Accum_Slide_X.png"
 
 ---
 
@@ -26477,31 +26472,31 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Cycle/Breathing Theme**
-   - Background: #0a0a0f
-   - Cyclical visual elements
-   - Compression/expansion contrast
+ - Background: #0a0a0f
+ - Cyclical visual elements
+ - Compression/expansion contrast
 
 2. **Slide 1 - Hook**
-   - Breathing/cycle visual
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Breathing/cycle visual
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-3 - Phases**
-   - Compression and expansion detailed
-   - Different colors for each
+ - Compression and expansion detailed
+ - Different colors for each
 
 4. **Slides 4-6 - Trading Implications**
-   - What to do in each phase
+ - What to do in each phase
 
 5. **Slide 7 - Volume Oracle**
-   - Indicator connection
+ - Indicator connection
 
 6. **Slide 8 - CTA**
-   - Curriculum link
+ - Curriculum link
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_526_Vol_Cycles_Slide_X.png"
+ - PNG format
+ - Naming: "SP_526_Vol_Cycles_Slide_X.png"
 
 ---
 
@@ -26630,28 +26625,28 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Strength/Resilience Theme**
-   - Background: #0a0a0f
-   - Getting back up imagery
-   - Empowering, not fearful
+ - Background: #0a0a0f
+ - Getting back up imagery
+ - Empowering, not fearful
 
 2. **Slide 1 - Hook**
-   - Resilience/strength visual
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Resilience/strength visual
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-6 - Resilience Builders**
-   - Each strategy detailed
-   - Empowering icons
+ - Each strategy detailed
+ - Empowering icons
 
 4. **Slide 7 - Key Message**
-   - "Always getting up" emphasis
+ - "Always getting up" emphasis
 
 5. **Slide 8 - CTA**
-   - Blog link + branding
+ - Blog link + branding
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_527_Mental_Resilience_Slide_X.png"
+ - PNG format
+ - Naming: "SP_527_Mental_Resilience_Slide_X.png"
 
 ---
 
@@ -26768,28 +26763,28 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Warning/Prophet Theme**
-   - Background: #0a0a0f
-   - Storm/warning visual elements
-   - Prophet character art
+ - Background: #0a0a0f
+ - Storm/warning visual elements
+ - Prophet character art
 
 2. **Slide 1 - Hook**
-   - Prophet with storm clouds
-   - Chronicle logo
-   - Warning aesthetic
+ - Prophet with storm clouds
+ - Chronicle logo
+ - Warning aesthetic
 
 3. **Slides 2-5 - Warning Content**
-   - Quote, warning, wisdom, action
-   - Building tension
+ - Quote, warning, wisdom, action
+ - Building tension
 
 4. **Slide 6 - Key Message**
-   - Prophet prepares you
+ - Prophet prepares you
 
 5. **Slide 7 - CTA**
-   - Chronicle link + branding
+ - Chronicle link + branding
 
 6. **Export**
-    - PNG format
-    - Naming: "SP_528_Prophets_Warning_Slide_X.png"
+ - PNG format
+ - Naming: "SP_528_Prophets_Warning_Slide_X.png"
 
 ---
 
@@ -26921,31 +26916,31 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create Mean/Oscillation Theme**
-   - Background: #0a0a0f
-   - Price oscillating around center line
-   - Rubber band visual concept
+ - Background: #0a0a0f
+ - Price oscillating around center line
+ - Rubber band visual concept
 
 2. **Slide 1 - Hook**
-   - Oscillating price visual
-   - Title prominently displayed
-   - Signal Pilot logo
+ - Oscillating price visual
+ - Title prominently displayed
+ - Signal Pilot logo
 
 3. **Slides 2-4 - Concept**
-   - Mean reversion explained
-   - Overbought and oversold
+ - Mean reversion explained
+ - Overbought and oversold
 
 4. **Slides 5-6 - Tools and Caveats**
-   - How to identify, when it fails
+ - How to identify, when it fails
 
 5. **Slide 7 - Chart Example**
-   - Visual reversion example
+ - Visual reversion example
 
 6. **Slide 8 - CTA**
-   - Curriculum link + branding
+ - Curriculum link + branding
 
 7. **Export**
-    - PNG format
-    - Naming: "SP_529_Mean_Reversion_Slide_X.png"
+ - PNG format
+ - Naming: "SP_529_Mean_Reversion_Slide_X.png"
 
 ---
 
@@ -27029,35 +27024,35 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 **Step-by-Step Instructions:**
 
 1. **Create New Design**
-   - Open Canva → Instagram Post (1080x1080)
-   - Name: "SP_530_Changelog"
+ - Open Canva → Instagram Post (1080x1080)
+ - Name: "SP_530_Changelog"
 
 2. **Set Background**
-   - Color: #0a0a0f
-   - Add subtle update/version visual elements
+ - Color: #0a0a0f
+ - Add subtle update/version visual elements
 
 3. **Create Header**
-   - Text: "CHANGELOG"
-   - Font: Playfair Display Bold, 56px
-   - Color: #FFFFFF
+ - Text: "CHANGELOG"
+ - Font: Playfair Display Bold, 56px
+ - Color: #FFFFFF
 
 4. **Add Update Categories**
-   - Four sections with icons
-   - New Features, Bug Fixes, Enhancements, User Requests
-   - Each with brief description
+ - Four sections with icons
+ - New Features, Bug Fixes, Enhancements, User Requests
+ - Each with brief description
 
 5. **Add Transparency Message**
-   - "We build in the open"
-   - Font: Inter SemiBold, 20px
-   - Color: #4a90d9
+ - "We build in the open"
+ - Font: Inter SemiBold, 20px
+ - Color: #4a90d9
 
 6. **Add Signal Pilot Logo**
-   - Bottom center
-   - Size: 80px width
+ - Bottom center
+ - Size: 80px width
 
 7. **Export**
-    - PNG format
-    - Filename: "SP_530_Changelog.png"
+ - PNG format
+ - Filename: "SP_530_Changelog.png"
 
 ---
 
@@ -28363,7 +28358,7 @@ Each benefit:
 
 **Posts Created:** 531-540 (10 posts)
 **Content Types:** 1 Marketing, 3 Education, 2 Blog, 1 Quote, 1 Product, 1 Chronicle, 1 Docs
-**Total Assets:** 67 carousel slides  + 3 screen recordings
+**Total Assets:** 67 carousel slides + 3 screen recordings
 
 **Key Themes This Batch:**
 - 7-Day Challenge invitation for lead generation
@@ -29612,7 +29607,7 @@ Each virtue:
 
 **Posts Created:** 541-550 (10 posts)
 **Content Types:** 1 Marketing, 3 Education, 2 Blog, 1 Quote, 1 Product, 1 Chronicle, 1 Docs
-**Total Assets:** 68 carousel slides  + 2 screen recordings
+**Total Assets:** 68 carousel slides + 2 screen recordings
 
 **Key Themes This Batch:**
 - Competitive comparison positioning
@@ -30862,7 +30857,7 @@ Each category:
 
 **Posts Created:** 551-560 (10 posts)
 **Content Types:** 1 Marketing, 3 Education, 2 Blog, 1 Quote, 1 Product, 1 Chronicle, 1 Docs
-**Total Assets:** 66 carousel slides  + 3 screen recordings
+**Total Assets:** 66 carousel slides + 3 screen recordings
 
 **Key Themes This Batch:**
 - Honest marketing positioning (results over promises)
@@ -32068,7 +32063,7 @@ Each category:
 
 **Posts Created:** 561-570 (10 posts)
 **Content Types:** 1 Marketing, 3 Education, 2 Blog, 1 Quote, 1 Product, 1 Chronicle, 1 Docs
-**Total Assets:** 68 carousel slides  + 2 screen recordings
+**Total Assets:** 68 carousel slides + 2 screen recordings
 
 **Key Themes This Batch:**
 - Zero-barrier free education invitation
@@ -32208,25 +32203,25 @@ Each category:
 
 ### Visual Elements
 1. **Path/Journey Imagery:**
-   - Use path, road, or door opening visual as hero
-   - Position in center or leading from bottom
-   - Apply subtle glow effect
+ - Use path, road, or door opening visual as hero
+ - Position in center or leading from bottom
+ - Apply subtle glow effect
 
 2. **Title Treatment:**
-   - "YOUR JOURNEY STARTS HERE" in Playfair Display
-   - Size 64pt, color white
-   - Position top third
-   - Add subtle gold #c9a962 underline
+ - "YOUR JOURNEY STARTS HERE" in Playfair Display
+ - Size 64pt, color white
+ - Position top third
+ - Add subtle gold #c9a962 underline
 
 3. **Offering Icons:**
-   - Create 4 icons: book (education), tools, people (community), chart (growth)
-   - Arrange in 2x2 grid lower section
-   - Icon color #4a90d9
+ - Create 4 icons: book (education), tools, people (community), chart (growth)
+ - Arrange in 2x2 grid lower section
+ - Icon color #4a90d9
 
 4. **CTA Element:**
-   - "START NOW" button style
-   - Background #4a90d9, text white
-   - Position bottom center
+ - "START NOW" button style
+ - Background #4a90d9, text white
+ - Position bottom center
 
 ### Export
 - Export as PNG, high quality
@@ -32234,57 +32229,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Every expert started somewhere"
-- Font: Playfair Display, 48pt, white
-- Animation: Fade in from black
-
-**Scene 2 (2-4s): Education**
-- Text: "Free education ✓"
-- Checkmark animation
-- Blue #4a90d9 accent
-
-**Scene 3 (4-5s): Tools**
-- Text: "Professional tools ✓"
-- Checkmark animation
-
-**Scene 4 (5-6s): Community**
-- Text: "Supportive community ✓"
-- Checkmark animation
-
-**Scene 5 (6-8s): Journey Starts**
-- Text: "Your journey starts"
-- Path/door imagery background
-- Scale up animation
-
-**Scene 6 (8-10s): Call to Action**
-- Text: "Right here. Right now."
-- Gold #c9a962 highlight
-- Pulse animation
-
-**Scene 7 (10-12s): CTA**
-- Text: "Link in bio"
-- Arrow pointing down
-- Fade out
-
-### Audio
-- Add inspirational/beginning audio
-- Fade in 0-1s, fade out 11-12s
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "571_journey_starts_video.mp4"
-
----
 
 # POST 572 — 🎓 Position Management Principles
 
@@ -32374,23 +32318,23 @@ Each category:
 
 ### Visual Elements
 1. **Chart Background:**
-   - Use trading chart showing full position lifecycle
-   - Entry point, stop loss, scale-out levels, trailing stop
-   - Apply 40% opacity overlay
+ - Use trading chart showing full position lifecycle
+ - Entry point, stop loss, scale-out levels, trailing stop
+ - Apply 40% opacity overlay
 
 2. **Title:**
-   - "POSITION MANAGEMENT" in Playfair Display
-   - Size 56pt, color white
-   - "PRINCIPLES" below in gold #c9a962
+ - "POSITION MANAGEMENT" in Playfair Display
+ - Size 56pt, color white
+ - "PRINCIPLES" below in gold #c9a962
 
 3. **Five Principles List:**
-   - Number icons 1-5 in blue #4a90d9 circles
-   - Principle names in Inter Bold
-   - Brief description in Inter Regular
+ - Number icons 1-5 in blue #4a90d9 circles
+ - Principle names in Inter Bold
+ - Brief description in Inter Regular
 
 4. **Visual Flow:**
-   - Arrow connecting entry → stop → scale → trail → exit
-   - Shows progression of trade management
+ - Arrow connecting entry → stop → scale → trail → exit
+ - Shows progression of trade management
 
 ### Export
 - Export as PNG, high quality
@@ -32398,53 +32342,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: trading chart with position
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Hook**
-- Text: "Got a good entry?"
-- Show chart with entry point marked
-- Font: Playfair Display, 52pt
-
-**Scene 2 (2-4s): Management Intro**
-- Text: "Now manage it"
-- Zoom into position management area
-- Blue #4a90d9 highlight on trade
-
-**Scene 3 (4-6s): Stop Rule**
-- Text: "Never move stop further"
-- Show stop loss holding firm
-- Red warning indicator
-
-**Scene 4 (6-8s): Scale Out**
-- Text: "Scale out strategically"
-- Show partial profit taking
-- Green profit indicators
-
-**Scene 5 (8-10s): Trail**
-- Text: "Trail to protect profits"
-- Animated trailing stop moving up
-- Gold #c9a962 trail line
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Add management/control audio
-- Keep professional tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "572_position_management_video.mp4"
-
----
 
 # POST 573 — 📝 Why Most Traders Quit (And How Not To)
 
@@ -32539,23 +32436,23 @@ Each category:
 
 ### Visual Elements
 1. **Split Design:**
-   - Left side: Exit door with "QUIT" reasons
-   - Right side: Path forward with "STAY" solutions
-   - Divider line in gold #c9a962
+ - Left side: Exit door with "QUIT" reasons
+ - Right side: Path forward with "STAY" solutions
+ - Divider line in gold #c9a962
 
 2. **Title:**
-   - "WHY TRADERS QUIT" in Playfair Display
-   - Size 52pt, white
-   - "(And How Not To)" in smaller text below
+ - "WHY TRADERS QUIT" in Playfair Display
+ - Size 52pt, white
+ - "(And How Not To)" in smaller text below
 
 3. **Five Reasons:**
-   - List on left with X icons (red)
-   - Corresponding fixes on right with ✓ icons (green)
-   - Inter font, 18pt
+ - List on left with X icons (red)
+ - Corresponding fixes on right with ✓ icons (green)
+ - Inter font, 18pt
 
 4. **Visual Contrast:**
-   - Left side slightly darker/red tint
-   - Right side with blue #4a90d9 accents
+ - Left side slightly darker/red tint
+ - Right side with blue #4a90d9 accents
 
 ### Export
 - Export as PNG, high quality
@@ -32563,52 +32460,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Dark with exit door imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Most traders quit because:"
-- Exit door visual
-- Warning tone
-
-**Scene 2-5 (2-6s): Rapid Reasons**
-- Flash each reason (1 second each)
-- "Unrealistic expectations"
-- "Undercapitalized"
-- "No real system"
-- "Burnout"
-- Red warning color accents
-
-**Scene 6 (6-8s): Transition**
-- Text: "Know the traps"
-- Visual shift from door to path
-- Color shift to hopeful
-
-**Scene 7 (8-10s): Solution**
-- Text: "Avoid them"
-- Path forward imagery
-- Green/blue positive colors
-
-**Scene 8 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Blog visual
-
-### Audio
-- Warning audio 0-6s
-- Hopeful audio 6-12s
-- Smooth transition
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "573_traders_quit_video.mp4"
-
----
 
 # POST 574 — 💬 Quote Card
 
@@ -32680,26 +32531,26 @@ Each category:
 
 ### Visual Elements
 1. **Quote Typography:**
-   - Main quote in Cormorant Garamond Italic
-   - Size 42pt, white
-   - Center aligned
-   - Line height 1.4
+ - Main quote in Cormorant Garamond Italic
+ - Size 42pt, white
+ - Center aligned
+ - Line height 1.4
 
 2. **Quotation Marks:**
-   - Large decorative quotes
-   - Gold #c9a962
-   - Top left and bottom right corners
-   - Size 120pt, 20% opacity
+ - Large decorative quotes
+ - Gold #c9a962
+ - Top left and bottom right corners
+ - Size 120pt, 20% opacity
 
 3. **Attribution:**
-   - "— Signal Pilot" in Inter
-   - Size 24pt
-   - Gold #c9a962
-   - Right aligned below quote
+ - "— Signal Pilot" in Inter
+ - Size 24pt
+ - Gold #c9a962
+ - Right aligned below quote
 
 4. **Accent Elements:**
-   - Thin gold line above attribution
-   - Subtle radial gradient from center
+ - Thin gold line above attribution
+ - Subtle radial gradient from center
 
 ### Export
 - Export as PNG, high quality
@@ -32707,53 +32558,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 10 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Question**
-- Text: "What is consistency?"
-- Font: Playfair Display, 52pt
-- Fade in animation
-
-**Scene 2 (2-4s): Wrong Definition**
-- Text: "Not: trade every day"
-- Red X icon
-- Strike through effect
-
-**Scene 3 (4-6s): Right Definition**
-- Text: "Yes: follow rules every time"
-- Green checkmark
-- Blue #4a90d9 highlight
-
-**Scene 4 (6-8s): Paradox**
-- Text: "Even when rules say 'wait'"
-- Calendar visual with "no trade" days
-- Thoughtful pause
-
-**Scene 5 (8-9s): Truth**
-- Text: "That's true consistency"
-- Gold #c9a962 text
-- Emphasis animation
-
-**Scene 6 (9-10s): Attribution**
-- Text: "— Signal Pilot"
-- Fade out with logo
-
-### Audio
-- Add clarifying/wisdom audio
-- Contemplative tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "574_consistency_quote_video.mp4"
-
----
 
 # POST 575 — 🛠️ Volume Oracle Regime Shifts
 
@@ -32845,25 +32649,25 @@ Each category:
 
 ### Visual Elements
 1. **Chart with Volume Oracle:**
-   - Real chart showing regime shifts
-   - Clear color changes visible
-   - Arrows pointing to shift moments
+ - Real chart showing regime shifts
+ - Clear color changes visible
+ - Arrows pointing to shift moments
 
 2. **Title:**
-   - "VOLUME ORACLE" in Playfair Display
-   - "REGIME SHIFTS" below in gold #c9a962
-   - Position top
+ - "VOLUME ORACLE" in Playfair Display
+ - "REGIME SHIFTS" below in gold #c9a962
+ - Position top
 
 3. **Shift Legend:**
-   - Red → Green: "BEARISH → BULLISH BIAS"
-   - Green → Red: "BULLISH → BEARISH BIAS"
-   - Gray: "NEUTRAL - WAIT"
-   - Color-coded icons
+ - Red → Green: "BEARISH → BULLISH BIAS"
+ - Green → Red: "BULLISH → BEARISH BIAS"
+ - Gray: "NEUTRAL - WAIT"
+ - Color-coded icons
 
 4. **Prophet Character:**
-   - Small Volume Oracle/Prophet icon
-   - Position bottom right
-   - Subtle glow effect
+ - Small Volume Oracle/Prophet icon
+ - Position bottom right
+ - Subtle glow effect
 
 ### Export
 - Export as PNG, high quality
@@ -32871,53 +32675,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Chart with Volume Oracle
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Volume Oracle shows:"
-- Chart in background
-- Volume Oracle indicator visible
-
-**Scene 2 (2-4s): Beyond Regime**
-- Text: "Not just the regime"
-- Highlight current regime state
-- Static color shown
-
-**Scene 3 (4-6s): The Shift**
-- Text: "But the SHIFT"
-- Animate regime color change
-- Arrow pointing to change moment
-
-**Scene 4 (6-8s): Example**
-- Text: "DISTRIBUTION → ACCUMULATION = Bullish flip"
-- Show red to green shift
-- Price movement following
-
-**Scene 5 (8-10s): Key Insight**
-- Text: "The shift is the signal"
-- Emphasize shift point
-- Gold #c9a962 highlight
-
-**Scene 6 (10-12s): CTA**
-- Text: "Link in bio"
-- Prophet icon appear
-
-### Audio
-- Add transition/change audio
-- Build anticipation at shift moments
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "575_volume_oracle_regime_shifts_video.mp4"
-
----
 
 # POST 576 — 🎓 Stop Loss Placement Strategies
 
@@ -33010,25 +32767,25 @@ Each category:
 
 ### Visual Elements
 1. **Three-Column Comparison:**
-   - Structure-based (left)
-   - ATR-based (center)
-   - Percentage-based (right)
-   - Each with mini chart example
+ - Structure-based (left)
+ - ATR-based (center)
+ - Percentage-based (right)
+ - Each with mini chart example
 
 2. **Title:**
-   - "STOP LOSS PLACEMENT" in Playfair Display
-   - Size 52pt, white
-   - Red stop icon accent
+ - "STOP LOSS PLACEMENT" in Playfair Display
+ - Size 52pt, white
+ - Red stop icon accent
 
 3. **Method Cards:**
-   - Each method in bordered card
-   - Pros in green checkmarks
-   - Cons in yellow warnings
-   - Best use case listed
+ - Each method in bordered card
+ - Pros in green checkmarks
+ - Cons in yellow warnings
+ - Best use case listed
 
 4. **Bottom Section:**
-   - "Worst: Arbitrary distance" with X
-   - "Best: Structure + volatility" with ✓
+ - "Worst: Arbitrary distance" with X
+ - "Best: Structure + volatility" with ✓
 
 ### Export
 - Export as PNG, high quality
@@ -33036,54 +32793,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Trading chart
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Question**
-- Text: "Where's your stop?"
-- Chart with entry point marked
-- Question tone
-
-**Scene 2 (2-4s): Wrong Answer**
-- Text: "'I use 50 pips'"
-- Show arbitrary stop on chart
-- Red warning color
-
-**Scene 3 (4-6s): Rejection**
-- Text: "Wrong answer"
-- X animation over arbitrary stop
-- Gets stopped out visual
-
-**Scene 4 (6-8s): Right Way**
-- Text: "Use structure. Use ATR."
-- Show proper stop below structure
-- Green approval color
-
-**Scene 5 (8-10s): Key Message**
-- Text: "Let the chart decide"
-- Highlight structure levels
-- Blue #4a90d9 emphasis
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Add correction/improvement audio
-- Wrong answer = warning tone
-- Right answer = approval tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "576_stop_placement_video.mp4"
-
----
 
 # POST 577 — 📝 The Weekend Review Ritual
 
@@ -33177,25 +32886,25 @@ Each category:
 
 ### Visual Elements
 1. **Setup Photography Style:**
-   - Journal, laptop with charts, coffee cup
-   - Sunday morning calm aesthetic
-   - Professional but relaxed
+ - Journal, laptop with charts, coffee cup
+ - Sunday morning calm aesthetic
+ - Professional but relaxed
 
 2. **Title:**
-   - "WEEKEND REVIEW RITUAL" in Playfair Display
-   - Size 52pt, white
-   - Calendar icon accent
+ - "WEEKEND REVIEW RITUAL" in Playfair Display
+ - Size 52pt, white
+ - Calendar icon accent
 
 3. **Four Steps:**
-   - Numbered 1-4 in gold #c9a962 circles
-   - Step names in Inter Bold
-   - Icon for each step
-   - Arranged vertically
+ - Numbered 1-4 in gold #c9a962 circles
+ - Step names in Inter Bold
+ - Icon for each step
+ - Arranged vertically
 
 4. **Time Badge:**
-   - "30-60 min" in badge format
-   - Bottom corner
-   - Clock icon
+ - "30-60 min" in badge format
+ - Bottom corner
+ - Clock icon
 
 ### Export
 - Export as PNG, high quality
@@ -33203,53 +32912,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Calm Sunday setup imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Sunday trading ritual:"
-- Calm environment visual
-- Coffee, journal setup
-
-**Scene 2 (2-4s): Step 1**
-- Text: "Review all trades"
-- Journal being opened
-- Trade notes visible
-
-**Scene 3 (4-6s): Step 2**
-- Text: "Update statistics"
-- Spreadsheet/numbers visual
-- Stats being updated
-
-**Scene 4 (6-8s): Step 3**
-- Text: "Plan next week"
-- Charts with levels marked
-- Calendar visible
-
-**Scene 5 (8-10s): Time**
-- Text: "30-60 minutes"
-- Clock visual
-- Emphasize investment
-
-**Scene 6 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Blog visual
-
-### Audio
-- Add calm, preparation audio
-- Sunday morning vibes
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "577_weekend_review_video.mp4"
-
----
 
 # POST 578 — 🔮 Chronicle: Epilogue — The Trader's Path
 
@@ -33334,25 +32996,25 @@ Each category:
 
 ### Visual Elements
 1. **Sunrise/Path Imagery:**
-   - Dawn breaking over horizon
-   - Path leading forward
-   - Trader silhouette looking ahead
-   - Hopeful, epic atmosphere
+ - Dawn breaking over horizon
+ - Path leading forward
+ - Trader silhouette looking ahead
+ - Hopeful, epic atmosphere
 
 2. **Title:**
-   - "EPILOGUE" in Cormorant Garamond
-   - "THE TRADER'S PATH" below in gold #c9a962
-   - Elegant, finale typography
+ - "EPILOGUE" in Cormorant Garamond
+ - "THE TRADER'S PATH" below in gold #c9a962
+ - Elegant, finale typography
 
 3. **Seven Icons:**
-   - Small icons for each of the Elite Seven
-   - Arranged in arc above path
-   - Glowing, watching over
+ - Small icons for each of the Elite Seven
+ - Arranged in arc above path
+ - Glowing, watching over
 
 4. **Final Message:**
-   - "The Chronicle ends. Your story begins."
-   - Position bottom
-   - White text with subtle glow
+ - "The Chronicle ends. Your story begins."
+ - Position bottom
+ - White text with subtle glow
 
 ### Export
 - Export as PNG, high quality
@@ -33360,56 +33022,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Epic sunrise/path imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "The Seven have spoken"
-- Flash each Elite Seven icon
-- Epic music begins
-
-**Scene 2 (2-4s): Wisdom**
-- Text: "Wisdom shared"
-- Golden light emanating
-- Chronicle imagery
-
-**Scene 3 (4-6s): Tools**
-- Text: "Tools available"
-- Indicator icons appear
-- Blue #4a90d9 glow
-
-**Scene 4 (6-8s): Education**
-- Text: "Education free"
-- Book/curriculum visual
-- Knowledge imagery
-
-**Scene 5 (8-10s): Torch Pass**
-- Text: "Now... your turn"
-- Torch being passed visual
-- Camera moving to viewer perspective
-- Gold #c9a962 light
-
-**Scene 6 (10-12s): CTA**
-- Text: "Chronicle — link in bio"
-- Sunrise finale
-- Hopeful ending
-
-### Audio
-- Epic/triumphant audio building
-- Transition to hopeful at "your turn"
-- Satisfying conclusion
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "578_chronicle_epilogue_video.mp4"
-
----
 
 # POST 579 — 🎓 Trading Journal Best Practices
 
@@ -33508,26 +33120,26 @@ Each category:
 
 ### Visual Elements
 1. **Journal Template Visual:**
-   - Mock journal page with sections
-   - "Before / During / After" headers
-   - Sample entries visible
-   - Professional, organized look
+ - Mock journal page with sections
+ - "Before / During / After" headers
+ - Sample entries visible
+ - Professional, organized look
 
 2. **Title:**
-   - "TRADING JOURNAL" in Playfair Display
-   - "BEST PRACTICES" below in gold #c9a962
-   - Journal icon
+ - "TRADING JOURNAL" in Playfair Display
+ - "BEST PRACTICES" below in gold #c9a962
+ - Journal icon
 
 3. **Three Phases:**
-   - Before (blue icon)
-   - During (gold icon)
-   - After (green icon)
-   - Each with key questions listed
+ - Before (blue icon)
+ - During (gold icon)
+ - After (green icon)
+ - Each with key questions listed
 
 4. **Honesty Badge:**
-   - "Be Brutally Honest" callout
-   - Bottom section
-   - Important emphasis
+ - "Be Brutally Honest" callout
+ - Bottom section
+ - Important emphasis
 
 ### Export
 - Export as PNG, high quality
@@ -33535,54 +33147,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Journal/notebook imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Trading journal must-haves:"
-- Journal opening animation
-- Pen ready to write
-
-**Scene 2 (2-4s): Before**
-- Text: "Before: Why this trade?"
-- Writing "before" section
-- Blue #4a90d9 accent
-
-**Scene 3 (4-6s): During**
-- Text: "During: How do I feel?"
-- Adding notes mid-trade
-- Gold #c9a962 accent
-
-**Scene 4 (6-8s): After**
-- Text: "After: What did I learn?"
-- Completing entry
-- Green accent
-
-**Scene 5 (8-10s): Key Message**
-- Text: "Be brutally honest"
-- Emphasis animation
-- Red underline for importance
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Journal closing
-- Fade to CTA
-
-### Audio
-- Add reflective/learning audio
-- Calm, introspective tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "579_trading_journal_video.mp4"
-
----
 
 # POST 580 — 📚 Docs: System Requirements
 
@@ -33620,9 +33184,9 @@ Each category:
 > TRADINGVIEW ACCOUNT:
 > → Free account works for basics
 > → Paid account recommended for:
->   - More indicators
->   - More alerts
->   - Server-side alerts
+> - More indicators
+> - More alerts
+> - Server-side alerts
 > → Premium+ for webhooks
 >
 > BROWSER:
@@ -33675,26 +33239,26 @@ Each category:
 
 ### Visual Elements
 1. **Checklist Design:**
-   - Large checkboxes for each requirement
-   - Green checkmarks
-   - Clean, simple layout
+ - Large checkboxes for each requirement
+ - Green checkmarks
+ - Clean, simple layout
 
 2. **Title:**
-   - "SYSTEM REQUIREMENTS" in Playfair Display
-   - Size 52pt, white
-   - Gear/settings icon
+ - "SYSTEM REQUIREMENTS" in Playfair Display
+ - Size 52pt, white
+ - Gear/settings icon
 
 3. **Four Requirements:**
-   - TradingView (with logo)
-   - Browser (Chrome icon)
-   - Internet (wifi icon)
-   - Device (laptop/tablet icons)
-   - Each with checkmark
+ - TradingView (with logo)
+ - Browser (Chrome icon)
+ - Internet (wifi icon)
+ - Device (laptop/tablet icons)
+ - Each with checkmark
 
 4. **Simplicity Message:**
-   - "That's it. Simple." at bottom
-   - Blue #4a90d9 highlight
-   - Emphasize ease
+ - "That's it. Simple." at bottom
+ - Blue #4a90d9 highlight
+ - Emphasize ease
 
 ### Export
 - Export as PNG, high quality
@@ -33702,53 +33266,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Signal Pilot requirements:"
-- Clipboard/checklist visual
-- Question tone
-
-**Scene 2 (2-4s): TradingView**
-- Text: "TradingView account ✓"
-- TradingView logo
-- Checkmark animation
-
-**Scene 3 (4-6s): Browser**
-- Text: "Modern browser ✓"
-- Browser icons
-- Checkmark animation
-
-**Scene 4 (6-8s): Internet**
-- Text: "Stable internet ✓"
-- Wifi icon
-- Checkmark animation
-
-**Scene 5 (8-10s): Simplicity**
-- Text: "That's it. Simple."
-- All checkmarks visible
-- Satisfaction animation
-
-**Scene 6 (10-12s): CTA**
-- Text: "Link in bio"
-- Docs visual
-
-### Audio
-- Add simple/easy audio
-- Satisfying checkmark sounds
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "580_system_requirements_video.mp4"
-
----
 
 # 📋 Batch 58 Hashtag Bank
 
@@ -33804,18 +33321,6 @@ Each category:
 - [ ] 578_chronicle_epilogue_static.png
 - [ ] 579_trading_journal_static.png
 - [ ] 580_system_requirements_static.png
-
-## Videos (CapCut)
-- [ ] 571_journey_starts_video.mp4
-- [ ] 572_position_management_video.mp4
-- [ ] 573_traders_quit_video.mp4
-- [ ] 574_consistency_quote_video.mp4
-- [ ] 575_volume_oracle_transitions_video.mp4
-- [ ] 576_stop_placement_video.mp4
-- [ ] 577_weekend_review_video.mp4
-- [ ] 578_chronicle_epilogue_video.mp4
-- [ ] 579_trading_journal_video.mp4
-- [ ] 580_system_requirements_video.mp4
 
 ## Carousel Slides
 - [ ] 571 carousel (7 slides)
@@ -33954,25 +33459,25 @@ Each category:
 
 ### Visual Elements
 1. **Promise/Handshake Imagery:**
-   - Symbolic handshake or pledge gesture
-   - Professional, trustworthy aesthetic
-   - Subtle glow effect
+ - Symbolic handshake or pledge gesture
+ - Professional, trustworthy aesthetic
+ - Subtle glow effect
 
 2. **Title:**
-   - "THE SIGNAL PILOT PROMISE" in Playfair Display
-   - Size 52pt, white
-   - Gold #c9a962 underline accent
+ - "THE SIGNAL PILOT PROMISE" in Playfair Display
+ - Size 52pt, white
+ - Gold #c9a962 underline accent
 
 3. **Four Promises:**
-   - Quality Tools (wrench icon)
-   - Free Education (book icon)
-   - Honest Marketing (megaphone with heart)
-   - Real Support (person icon)
-   - Each with blue #4a90d9 checkmark
+ - Quality Tools (wrench icon)
+ - Free Education (book icon)
+ - Honest Marketing (megaphone with heart)
+ - Real Support (person icon)
+ - Each with blue #4a90d9 checkmark
 
 4. **Bottom Statement:**
-   - "We stand by this. Always."
-   - Elegant, sincere typography
+ - "We stand by this. Always."
+ - Elegant, sincere typography
 
 ### Export
 - Export as PNG, high quality
@@ -33980,60 +33485,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "The Signal Pilot Promise:"
-- Handshake or pledge imagery
-- Sincere tone set
-
-**Scene 2 (2-4s): Quality**
-- Text: "Quality tools ✓"
-- Checkmark animation
-- Tool icon
-
-**Scene 3 (4-5s): Education**
-- Text: "Free education ✓"
-- Checkmark animation
-
-**Scene 4 (5-6s): Honesty**
-- Text: "Honest marketing ✓"
-- Checkmark animation
-
-**Scene 5 (6-7s): Support**
-- Text: "Real support ✓"
-- Checkmark animation
-
-**Scene 6 (7-9s): Statement**
-- Text: "This is what we stand for"
-- All four promises visible
-- Unified display
-
-**Scene 7 (9-11s): Commitment**
-- Text: "Always"
-- Gold #c9a962 highlight
-- Emphasis
-
-**Scene 8 (11-12s): CTA**
-- Text: "Link in bio"
-- Fade out
-
-### Audio
-- Add sincere/commitment audio
-- Professional, trustworthy tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "581_promise_video.mp4"
-
----
 
 # POST 582 — 🎓 Entry Trigger Types
 
@@ -34129,25 +33580,25 @@ Each category:
 
 ### Visual Elements
 1. **Chart with Setup Zone:**
-   - Clear setup area highlighted
-   - Four trigger types shown around it
-   - Arrows pointing to specific trigger moments
+ - Clear setup area highlighted
+ - Four trigger types shown around it
+ - Arrows pointing to specific trigger moments
 
 2. **Title:**
-   - "ENTRY TRIGGER TYPES" in Playfair Display
-   - Size 52pt, white
-   - Target icon accent
+ - "ENTRY TRIGGER TYPES" in Playfair Display
+ - Size 52pt, white
+ - Target icon accent
 
 3. **Four Trigger Cards:**
-   - Candle Close (candle icon)
-   - Structure Break (arrow icon)
-   - Rejection Candle (hammer icon)
-   - Indicator Signal (chart icon)
-   - Each with brief description
+ - Candle Close (candle icon)
+ - Structure Break (arrow icon)
+ - Rejection Candle (hammer icon)
+ - Indicator Signal (chart icon)
+ - Each with brief description
 
 4. **Key Message:**
-   - "Setup ≠ Entry" highlighted
-   - "Trigger = Entry" below
+ - "Setup ≠ Entry" highlighted
+ - "Trigger = Entry" below
 
 ### Export
 - Export as PNG, high quality
@@ -34155,53 +33606,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Trading chart with setup zone
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Hook**
-- Text: "Found a setup?"
-- Chart with attractive setup zone
-- Excitement tone
-
-**Scene 2 (2-4s): Pause**
-- Text: "Don't enter yet"
-- Red warning
-- Patience emphasized
-
-**Scene 3 (4-6s): Key Concept**
-- Text: "Wait for the TRIGGER"
-- Blue #4a90d9 highlight
-- Zoom into setup zone
-
-**Scene 4 (6-8s): Triggers**
-- Text: "Candle close. Rejection. Break."
-- Show each trigger type quickly
-- Visual examples
-
-**Scene 5 (8-10s): Action**
-- Text: "Then enter"
-- Green entry confirmation
-- Execute trade visual
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Add timing/precision audio
-- Build anticipation, release on trigger
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "582_entry_triggers_video.mp4"
-
----
 
 # POST 583 — 📝 The Sunk Cost Fallacy in Trading
 
@@ -34291,24 +33695,24 @@ Each category:
 
 ### Visual Elements
 1. **Anchor/Trap Imagery:**
-   - Heavy anchor dragging trader down
-   - Or chain/trap visual
-   - Trader breaking free concept
+ - Heavy anchor dragging trader down
+ - Or chain/trap visual
+ - Trader breaking free concept
 
 2. **Title:**
-   - "SUNK COST FALLACY" in Playfair Display
-   - Size 52pt, white
-   - Anchor icon
+ - "SUNK COST FALLACY" in Playfair Display
+ - Size 52pt, white
+ - Anchor icon
 
 3. **The Test Question:**
-   - "Would you enter this trade RIGHT NOW?"
-   - Highlighted box
-   - YES/NO decision visual
+ - "Would you enter this trade RIGHT NOW?"
+ - Highlighted box
+ - YES/NO decision visual
 
 4. **Key Message:**
-   - "Past losses ≠ future justification"
-   - Bottom section
-   - Liberation imagery
+ - "Past losses ≠ future justification"
+ - Bottom section
+ - Liberation imagery
 
 ### Export
 - Export as PNG, high quality
@@ -34316,53 +33720,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Anchor/trap imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): The Trap**
-- Text: "'Can't exit now, I've lost too much'"
-- Trader held by anchor visual
-- Heavy, trapped feeling
-
-**Scene 2 (2-4s): Name It**
-- Text: "Sunk cost fallacy"
-- Label the trap
-- Educational tone
-
-**Scene 3 (4-6s): Truth**
-- Text: "What's lost is lost"
-- Anchor starting to dissolve
-- Freeing realization
-
-**Scene 4 (6-8s): The Test**
-- Text: "Would you enter NOW?"
-- Question highlighted
-- Decision moment
-
-**Scene 5 (8-10s): Action**
-- Text: "No? Then exit."
-- Breaking free animation
-- Liberation visual
-
-**Scene 6 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Fade to blog visual
-
-### Audio
-- Heavy/trapped audio 0-4s
-- Liberation/clarity audio 4-12s
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "583_sunk_cost_video.mp4"
-
----
 
 # POST 584 — 💬 Quote Card
 
@@ -34438,24 +33795,24 @@ Each category:
 
 ### Visual Elements
 1. **Quote Typography:**
-   - Main quote in Cormorant Garamond Italic
-   - Size 40pt, white
-   - Center aligned
+ - Main quote in Cormorant Garamond Italic
+ - Size 40pt, white
+ - Center aligned
 
 2. **Quotation Marks:**
-   - Large decorative quotes
-   - Gold #c9a962
-   - 20% opacity
+ - Large decorative quotes
+ - Gold #c9a962
+ - 20% opacity
 
 3. **Attribution:**
-   - "— Signal Pilot" in Inter
-   - Gold #c9a962
-   - Right aligned
+ - "— Signal Pilot" in Inter
+ - Gold #c9a962
+ - Right aligned
 
 4. **Subtle Visual:**
-   - Entry price number fading
-   - Current price highlighted
-   - Letting go concept
+ - Entry price number fading
+ - Current price highlighted
+ - Letting go concept
 
 ### Export
 - Export as PNG, high quality
@@ -34463,53 +33820,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 10 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Question**
-- Text: "Your entry price?"
-- Entry price number displayed
-- Question tone
-
-**Scene 2 (2-4s): Market Truth**
-- Text: "Market doesn't care"
-- Entry price fading
-- Indifference visual
-
-**Scene 3 (4-6s): Advice**
-- Text: "Stop caring too"
-- Entry completely faded
-- Liberation beginning
-
-**Scene 4 (6-8s): Focus**
-- Text: "Focus on NOW"
-- Current price highlighted
-- Blue #4a90d9 emphasis
-
-**Scene 5 (8-9s): Clarification**
-- Text: "Not where you got in"
-- Present moment focus
-- Gold #c9a962 accent
-
-**Scene 6 (9-10s): Attribution**
-- Text: "— Signal Pilot"
-- Fade with logo
-
-### Audio
-- Add freeing/present-moment audio
-- Contemplative to liberating
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "584_entry_price_quote_video.mp4"
-
----
 
 # POST 585 — 🛠️ Pentarch Full Cycle Walkthrough
 
@@ -34601,25 +33911,25 @@ Each category:
 
 ### Visual Elements
 1. **Complete Cycle Chart:**
-   - Full market cycle visible
-   - Pentarch labels at each phase
-   - Accumulation → Markup → Distribution → Markdown
-   - Clear phase transitions
+ - Full market cycle visible
+ - Pentarch labels at each phase
+ - Accumulation → Markup → Distribution → Markdown
+ - Clear phase transitions
 
 2. **Title:**
-   - "PENTARCH FULL CYCLE" in Playfair Display
-   - Size 52pt, white
-   - Cycle icon
+ - "PENTARCH FULL CYCLE" in Playfair Display
+ - Size 52pt, white
+ - Cycle icon
 
 3. **Phase Labels:**
-   - Four phases with icons
-   - Color-coded (green accumulation, blue markup, yellow distribution, red markdown)
-   - Brief description each
+ - Four phases with icons
+ - Color-coded (green accumulation, blue markup, yellow distribution, red markdown)
+ - Brief description each
 
 4. **Sovereign Character:**
-   - Small Pentarch/Sovereign icon
-   - Bottom corner
-   - "The Sovereign sees all"
+ - Small Pentarch/Sovereign icon
+ - Bottom corner
+ - "The Sovereign sees all"
 
 ### Export
 - Export as PNG, high quality
@@ -34627,63 +33937,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Chart with full cycle
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Pentarch shows:"
-- Chart starting position
-- Cycle beginning
-
-**Scene 2 (2-3s): Phase 1**
-- Text: "Accumulation"
-- Highlight accumulation zone
-- Green accent
-
-**Scene 3 (3-4s): Phase 2**
-- Text: "→ Markup"
-- Chart advancing through markup
-- Blue accent
-
-**Scene 4 (4-5s): Phase 3**
-- Text: "→ Distribution"
-- Price stalling at highs
-- Yellow accent
-
-**Scene 5 (5-6s): Phase 4**
-- Text: "→ Markdown"
-- Price declining
-- Red accent
-
-**Scene 6 (6-8s): Complete**
-- Text: "Complete cycle identified"
-- Full cycle visible
-- Satisfaction moment
-
-**Scene 7 (8-10s): Character**
-- Text: "The Sovereign sees all"
-- Sovereign icon appear
-- Gold #c9a962 glow
-
-**Scene 8 (10-12s): CTA**
-- Text: "Link in bio"
-- Fade to CTA
-
-### Audio
-- Cyclical audio building through phases
-- Complete/satisfying at finish
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "585_pentarch_cycle_video.mp4"
-
----
 
 # POST 586 — 🎓 Understanding Spread and Slippage
 
@@ -34776,23 +34029,23 @@ Each category:
 
 ### Visual Elements
 1. **Split Diagram:**
-   - Left side: Spread visualization (bid/ask gap)
-   - Right side: Slippage visualization (expected vs fill)
-   - Clear labels and arrows
+ - Left side: Spread visualization (bid/ask gap)
+ - Right side: Slippage visualization (expected vs fill)
+ - Clear labels and arrows
 
 2. **Title:**
-   - "SPREAD & SLIPPAGE" in Playfair Display
-   - Size 52pt, white
-   - Money/cost icon
+ - "SPREAD & SLIPPAGE" in Playfair Display
+ - Size 52pt, white
+ - Money/cost icon
 
 3. **Examples:**
-   - Real numbers showing spread cost
-   - Real numbers showing slippage cost
-   - Red negative indicators
+ - Real numbers showing spread cost
+ - Real numbers showing slippage cost
+ - Red negative indicators
 
 4. **Bottom Message:**
-   - "Factor into your R:R"
-   - Practical takeaway
+ - "Factor into your R:R"
+ - Practical takeaway
 
 ### Export
 - Export as PNG, high quality
@@ -34800,53 +34053,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Hook**
-- Text: "Hidden trading costs:"
-- Money disappearing visual
-- Warning tone
-
-**Scene 2 (2-4s): Spread**
-- Text: "SPREAD: bid vs ask gap"
-- Bid/ask visualization
-- Gap highlighted in red
-
-**Scene 3 (4-6s): Slippage**
-- Text: "SLIPPAGE: price moves on you"
-- Expected price → actual fill
-- Difference shown
-
-**Scene 4 (6-8s): Reality**
-- Text: "Both cost real money"
-- Dollar signs flowing out
-- Cost accumulating
-
-**Scene 5 (8-10s): Action**
-- Text: "Factor them into your math"
-- Calculator/R:R visual
-- Blue #4a90d9 positive tone
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Warning/cost audio 0-6s
-- Solution/positive audio 6-12s
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "586_spread_slippage_video.mp4"
-
----
 
 # POST 587 — 📝 Finding Your Trading Style
 
@@ -34943,25 +34149,25 @@ Each category:
 
 ### Visual Elements
 1. **Four Style Cards:**
-   - Scalping (lightning bolt icon)
-   - Day Trading (sun icon)
-   - Swing Trading (wave icon)
-   - Position Trading (mountain icon)
-   - Each with timeframe and key trait
+ - Scalping (lightning bolt icon)
+ - Day Trading (sun icon)
+ - Swing Trading (wave icon)
+ - Position Trading (mountain icon)
+ - Each with timeframe and key trait
 
 2. **Title:**
-   - "FIND YOUR TRADING STYLE" in Playfair Display
-   - Size 48pt, white
-   - Palette/brush icon
+ - "FIND YOUR TRADING STYLE" in Playfair Display
+ - Size 48pt, white
+ - Palette/brush icon
 
 3. **Lifestyle Match:**
-   - "Full-time job? → Swing/Position"
-   - "Want action? → Day/Scalp"
-   - Quick reference guide
+ - "Full-time job? → Swing/Position"
+ - "Want action? → Day/Scalp"
+ - Quick reference guide
 
 4. **Bottom Message:**
-   - "No 'best' — only best for YOU"
-   - Personalization emphasis
+ - "No 'best' — only best for YOU"
+ - Personalization emphasis
 
 ### Export
 - Export as PNG, high quality
@@ -34969,63 +34175,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Trading styles:"
-- Four icons teased
-- Choice atmosphere
-
-**Scene 2 (2-3s): Scalping**
-- Text: "Scalping = seconds/minutes"
-- Lightning bolt
-- Fast visual
-
-**Scene 3 (3-4s): Day Trading**
-- Text: "Day trading = hours"
-- Sun icon
-- Daily rhythm
-
-**Scene 4 (4-5s): Swing**
-- Text: "Swing = days/weeks"
-- Wave icon
-- Patient visual
-
-**Scene 5 (5-6s): Position**
-- Text: "Position = weeks/months"
-- Mountain icon
-- Long-term visual
-
-**Scene 6 (6-8s): Match**
-- Text: "Match YOUR lifestyle"
-- Person icon
-- Personalization emphasis
-
-**Scene 7 (8-10s): Key Message**
-- Text: "No 'best' — only best for you"
-- All styles equal
-- No judgment
-
-**Scene 8 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Blog visual
-
-### Audio
-- Choice/personalization audio
-- Non-judgmental, exploratory tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "587_trading_style_video.mp4"
-
----
 
 # POST 588 — 🔮 Chronicle Recap: Lessons from the Seven
 
@@ -35114,24 +34263,24 @@ Each category:
 
 ### Visual Elements
 1. **Seven Character Icons:**
-   - All seven arranged in circle or arc
-   - Each with their lesson word below
-   - Glowing, unified visual
+ - All seven arranged in circle or arc
+ - Each with their lesson word below
+ - Glowing, unified visual
 
 2. **Title:**
-   - "LESSONS FROM THE SEVEN" in Playfair Display
-   - Size 48pt, white
-   - Chronicle scroll icon
+ - "LESSONS FROM THE SEVEN" in Playfair Display
+ - Size 48pt, white
+ - Chronicle scroll icon
 
 3. **Lesson Words:**
-   - PATIENCE - CLARITY - PERSPECTIVE
-   - TRUTH - MEASURE - VIGILANCE - UNITY
-   - Gold #c9a962 text
+ - PATIENCE - CLARITY - PERSPECTIVE
+ - TRUTH - MEASURE - VIGILANCE - UNITY
+ - Gold #c9a962 text
 
 4. **Center Element:**
-   - "One Complete Trader"
-   - Or Signal Pilot logo
-   - All lessons pointing to center
+ - "One Complete Trader"
+ - Or Signal Pilot logo
+ - All lessons pointing to center
 
 ### Export
 - Export as PNG, high quality
@@ -35139,69 +34288,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Dark with subtle epic imagery
-
-### Timeline Structure
-
-**Scene 1 (0-1s): Sovereign**
-- Text: "Sovereign: Patience"
-- Crown icon flash
-- Quick beat
-
-**Scene 2 (1-2s): Prophet**
-- Text: "Prophet: Clarity"
-- Crystal ball flash
-- Quick beat
-
-**Scene 3 (2-3s): Cartographer**
-- Text: "Cartographer: Perspective"
-- Map icon flash
-- Quick beat
-
-**Scene 4 (3-4s): Scales**
-- Text: "Scales: Truth"
-- Balance icon flash
-- Quick beat
-
-**Scene 5 (4-5s): Arbiter**
-- Text: "Arbiter: Measure"
-- Lightning icon flash
-- Quick beat
-
-**Scene 6 (5-6s): Watchman**
-- Text: "Watchman: Vigilance"
-- Eye icon flash
-- Quick beat
-
-**Scene 7 (6-7s): Commander**
-- Text: "Commander: Unity"
-- Star/command icon flash
-- Quick beat
-
-**Scene 8 (7-9s): Unity**
-- Text: "Seven lessons. One trader."
-- All seven unite
-- Epic moment
-
-**Scene 9 (9-12s): CTA**
-- Text: "Chronicle — link in bio"
-- Fade to CTA
-
-### Audio
-- Epic recap audio
-- Building through each character
-- Satisfying unity at end
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "588_chronicle_recap_video.mp4"
-
----
 
 # POST 589 — 🎓 The Importance of Liquidity
 
@@ -35291,23 +34377,23 @@ Each category:
 
 ### Visual Elements
 1. **Order Book Comparison:**
-   - Left: Deep order book (high liquidity)
-   - Right: Thin order book (low liquidity)
-   - Visual contrast clear
+ - Left: Deep order book (high liquidity)
+ - Right: Thin order book (low liquidity)
+ - Visual contrast clear
 
 2. **Title:**
-   - "LIQUIDITY MATTERS" in Playfair Display
-   - Size 52pt, white
-   - Water drop icon
+ - "LIQUIDITY MATTERS" in Playfair Display
+ - Size 52pt, white
+ - Water drop icon
 
 3. **Pros/Cons:**
-   - High liquidity: Green checkmarks
-   - Low liquidity: Yellow warnings
-   - Clear comparison
+ - High liquidity: Green checkmarks
+ - Low liquidity: Yellow warnings
+ - Clear comparison
 
 4. **Bottom Message:**
-   - "Trade liquid markets"
-   - Practical takeaway
+ - "Trade liquid markets"
+ - Practical takeaway
 
 ### Export
 - Export as PNG, high quality
@@ -35315,53 +34401,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Scenario**
-- Text: "Want to exit your trade?"
-- Trader at computer
-- Normal situation
-
-**Scene 2 (2-4s): Requirement**
-- Text: "Need someone to buy it"
-- Order book visual
-- Buyer needed
-
-**Scene 3 (4-6s): Problem**
-- Text: "Low liquidity = no buyers"
-- Empty order book
-- Warning red
-
-**Scene 4 (6-8s): Consequence**
-- Text: "You're trapped"
-- Trader trapped visual
-- Alarming tone
-
-**Scene 5 (8-10s): Solution**
-- Text: "Trade liquid markets"
-- Deep order book
-- Blue #4a90d9 positive
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Building warning audio 0-8s
-- Resolution audio 8-12s
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "589_liquidity_video.mp4"
-
----
 
 # POST 590 — 📚 Docs: Feedback & Feature Requests
 
@@ -35453,25 +34492,25 @@ Each category:
 
 ### Visual Elements
 1. **Feedback Flow:**
-   - Speech bubble → Signal Pilot → New feature
-   - Circular flow diagram
-   - Community-driven visual
+ - Speech bubble → Signal Pilot → New feature
+ - Circular flow diagram
+ - Community-driven visual
 
 2. **Title:**
-   - "YOUR VOICE SHAPES SIGNAL PILOT" in Playfair Display
-   - Size 48pt, white
-   - Speech bubble icon
+ - "YOUR VOICE SHAPES SIGNAL PILOT" in Playfair Display
+ - Size 48pt, white
+ - Speech bubble icon
 
 3. **Four Input Types:**
-   - Feature Requests (lightbulb)
-   - Bug Reports (bug icon)
-   - Improvements (rocket)
-   - Suggestions (notepad)
-   - Each with brief description
+ - Feature Requests (lightbulb)
+ - Bug Reports (bug icon)
+ - Improvements (rocket)
+ - Suggestions (notepad)
+ - Each with brief description
 
 4. **Bottom Message:**
-   - "We listen. We build."
-   - Blue #4a90d9 highlight
+ - "We listen. We build."
+ - Blue #4a90d9 highlight
 
 ### Export
 - Export as PNG, high quality
@@ -35479,53 +34518,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Invitation**
-- Text: "Got an idea?"
-- Lightbulb icon
-- Open, inviting tone
-
-**Scene 2 (2-4s): Types**
-- Text: "Feature request? Bug report?"
-- Multiple icons
-- Options shown
-
-**Scene 3 (4-6s): We Listen**
-- Text: "We listen"
-- Ear icon
-- Feedback flowing in
-
-**Scene 4 (6-8s): We Build**
-- Text: "We build"
-- Construction/building visual
-- Feedback becoming features
-
-**Scene 5 (8-10s): Impact**
-- Text: "Your voice matters"
-- Community visual
-- Gold #c9a962 highlight
-
-**Scene 6 (10-12s): CTA**
-- Text: "Link in bio"
-- Docs visual
-
-### Audio
-- Collaborative/building audio
-- Positive, community-focused
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "590_feedback_video.mp4"
-
----
 
 # 📋 Batch 59 Hashtag Bank
 
@@ -35581,18 +34573,6 @@ Each category:
 - [ ] 588_chronicle_recap_static.png
 - [ ] 589_liquidity_static.png
 - [ ] 590_feedback_static.png
-
-## Videos (CapCut)
-- [ ] 581_promise_video.mp4
-- [ ] 582_entry_triggers_video.mp4
-- [ ] 583_sunk_cost_video.mp4
-- [ ] 584_entry_price_quote_video.mp4
-- [ ] 585_pentarch_cycle_video.mp4
-- [ ] 586_spread_slippage_video.mp4
-- [ ] 587_trading_style_video.mp4
-- [ ] 588_chronicle_recap_video.mp4
-- [ ] 589_liquidity_video.mp4
-- [ ] 590_feedback_video.mp4
 
 ## Carousel Slides
 - [ ] 581 carousel (6 slides)
@@ -35738,25 +34718,25 @@ Each category:
 
 ### Visual Elements
 1. **600+ Number:**
-   - Large "600+" in Playfair Display
-   - Size 120pt, gold #c9a962
-   - Center positioning
-   - Subtle glow effect
+ - Large "600+" in Playfair Display
+ - Size 120pt, gold #c9a962
+ - Center positioning
+ - Subtle glow effect
 
 2. **Content Categories:**
-   - Education, Indicators, Psychology, Chronicle
-   - Small icons around the number
-   - Checkmarks showing completion
+ - Education, Indicators, Psychology, Chronicle
+ - Small icons around the number
+ - Checkmarks showing completion
 
 3. **Gratitude Message:**
-   - "Thank You" below main number
-   - Inter font, white
-   - Sincere, not flashy
+ - "Thank You" below main number
+ - Inter font, white
+ - Sincere, not flashy
 
 4. **Confetti/Celebration:**
-   - Subtle gold and blue confetti
-   - Not overwhelming
-   - Professional celebration
+ - Subtle gold and blue confetti
+ - Not overwhelming
+ - Professional celebration
 
 ### Export
 - Export as PNG, high quality
@@ -35764,59 +34744,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "600+ posts"
-- Number counting up animation
-- Celebration tone
-
-**Scene 2 (2-3s): Education**
-- Text: "Education ✓"
-- Checkmark animation
-- Book icon
-
-**Scene 3 (3-4s): Indicators**
-- Text: "Indicators ✓"
-- Checkmark animation
-
-**Scene 4 (4-5s): Psychology**
-- Text: "Psychology ✓"
-- Checkmark animation
-
-**Scene 5 (5-6s): Chronicle**
-- Text: "Chronicle ✓"
-- Checkmark animation
-
-**Scene 6 (6-8s): Gratitude**
-- Text: "Thank you for being here"
-- Warm, sincere visual
-- Gold #c9a962 accents
-
-**Scene 7 (8-10s): Future**
-- Text: "More to come"
-- Forward-looking visual
-
-**Scene 8 (10-12s): CTA**
-- Text: "Link in bio"
-- Fade out
-
-### Audio
-- Celebratory but tasteful audio
-- Grateful tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "591_600_milestone_video.mp4"
-
----
 
 # POST 592 — 🎓 Trading Plan Essentials
 
@@ -35914,24 +34841,24 @@ Each category:
 
 ### Visual Elements
 1. **Plan Document Visual:**
-   - Template/document aesthetic
-   - Sections visible
-   - Professional look
+ - Template/document aesthetic
+ - Sections visible
+ - Professional look
 
 2. **Title:**
-   - "TRADING PLAN ESSENTIALS" in Playfair Display
-   - Size 48pt, white
-   - Clipboard/document icon
+ - "TRADING PLAN ESSENTIALS" in Playfair Display
+ - Size 48pt, white
+ - Clipboard/document icon
 
 3. **Four Questions:**
-   - WHAT, WHEN, HOW, HOW MUCH
-   - Each with key points
-   - Blue #4a90d9 icons
+ - WHAT, WHEN, HOW, HOW MUCH
+ - Each with key points
+ - Blue #4a90d9 icons
 
 4. **Key Message:**
-   - "If not written, not a plan"
-   - Bottom section
-   - Gold #c9a962 highlight
+ - "If not written, not a plan"
+ - Bottom section
+ - Gold #c9a962 highlight
 
 ### Export
 - Export as PNG, high quality
@@ -35939,55 +34866,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Document/plan aesthetic
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Challenge**
-- Text: "Do you have a trading plan?"
-- Question tone
-- Empty document visual
-
-**Scene 2 (2-4s): What**
-- Text: "What markets?"
-- First section filling in
-
-**Scene 3 (4-5s): What Setups**
-- Text: "What setups?"
-- More sections filling
-
-**Scene 4 (5-6s): Risk**
-- Text: "How much risk?"
-- Risk section highlighted
-
-**Scene 5 (6-8s): Key Point**
-- Text: "If not written, not a plan"
-- Pen writing on document
-- Emphasis moment
-
-**Scene 6 (8-10s): Action**
-- Text: "Write it down"
-- Completed document shown
-- Blue #4a90d9 approval
-
-**Scene 7 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Planning/structure audio
-- Professional, organized tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "592_trading_plan_video.mp4"
-
----
 
 # POST 593 — 📝 Accepting Losses as Part of the Game
 
@@ -36080,24 +34958,24 @@ Each category:
 
 ### Visual Elements
 1. **Business Ledger Visual:**
-   - Expense ledger/spreadsheet style
-   - "Losses" as line item
-   - Normal business expense framing
+ - Expense ledger/spreadsheet style
+ - "Losses" as line item
+ - Normal business expense framing
 
 2. **Title:**
-   - "LOSSES ARE BUSINESS EXPENSES" in Playfair Display
-   - Size 48pt, white
-   - Receipt/ledger icon
+ - "LOSSES ARE BUSINESS EXPENSES" in Playfair Display
+ - Size 48pt, white
+ - Receipt/ledger icon
 
 3. **Comparison:**
-   - Restaurant → Ingredients
-   - Trader → Losses
-   - Both are costs
+ - Restaurant → Ingredients
+ - Trader → Losses
+ - Both are costs
 
 4. **Key Message:**
-   - "Accept. Budget. Move on."
-   - Gold #c9a962 text
-   - Liberation concept
+ - "Accept. Budget. Move on."
+ - Gold #c9a962 text
+ - Liberation concept
 
 ### Export
 - Export as PNG, high quality
@@ -36105,53 +34983,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Scenario**
-- Text: "Took a loss?"
-- Red down arrow
-- Common situation
-
-**Scene 2 (2-4s): Reframe**
-- Text: "That's a business expense"
-- Ledger appearing
-- Shift in perspective
-
-**Scene 3 (4-6s): Analogy**
-- Text: "Restaurants pay for ingredients"
-- Restaurant visual
-- Normal cost
-
-**Scene 4 (6-8s): Application**
-- Text: "Traders pay for losses"
-- Trading visual
-- Same concept
-
-**Scene 5 (8-10s): Action**
-- Text: "Accept it. Move on."
-- Acceptance visual
-- Freedom feeling
-
-**Scene 6 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Blog visual
-
-### Audio
-- Accepting/business professional audio
-- Calm, normalized tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "593_accepting_losses_video.mp4"
-
----
 
 # POST 594 — 💬 Quote Card
 
@@ -36230,23 +35061,23 @@ Each category:
 
 ### Visual Elements
 1. **Quote Typography:**
-   - Main quote in Cormorant Garamond Italic
-   - Size 38pt, white
-   - Center aligned
+ - Main quote in Cormorant Garamond Italic
+ - Size 38pt, white
+ - Center aligned
 
 2. **Quotation Marks:**
-   - Large decorative quotes
-   - Gold #c9a962
-   - 20% opacity
+ - Large decorative quotes
+ - Gold #c9a962
+ - 20% opacity
 
 3. **Attribution:**
-   - "— Signal Pilot" in Inter
-   - Gold #c9a962
+ - "— Signal Pilot" in Inter
+ - Gold #c9a962
 
 4. **Visual Concept:**
-   - Split: Perfect/idle vs Imperfect/running
-   - Running machine making money
-   - Idle machine making nothing
+ - Split: Perfect/idle vs Imperfect/running
+ - Running machine making money
+ - Idle machine making nothing
 
 ### Export
 - Export as PNG, high quality
@@ -36254,53 +35085,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 10 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Perfect**
-- Text: "Perfect system?"
-- Pristine but idle visual
-- Question tone
-
-**Scene 2 (2-4s): Unused**
-- Text: "Never traded?"
-- Dust collecting
-- Unused emphasis
-
-**Scene 3 (4-6s): Result**
-- Text: "= $0"
-- Zero, no results
-- Red negative
-
-**Scene 4 (6-8s): Alternative**
-- Text: "Imperfect system + execution"
-- Running, working system
-- Green positive
-
-**Scene 5 (8-9s): Real Result**
-- Text: "= actual results"
-- Money/profits visual
-- Success
-
-**Scene 6 (9-10s): Attribution**
-- Text: "— Signal Pilot"
-- Fade with logo
-
-### Audio
-- Action/execution audio
-- Builds from static to active
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "594_execution_quote_video.mp4"
-
----
 
 # POST 595 — 🛠️ Complete Indicator Suite Overview
 
@@ -36395,23 +35179,23 @@ Each category:
 
 ### Visual Elements
 1. **Seven Indicator Icons:**
-   - All seven arranged in circle or grid
-   - Each with icon and name
-   - Color-coded for recognition
+ - All seven arranged in circle or grid
+ - Each with icon and name
+ - Color-coded for recognition
 
 2. **Title:**
-   - "THE ELITE SEVEN" in Playfair Display
-   - Size 52pt, white
-   - Subtitle: "Complete Indicator Suite"
+ - "THE ELITE SEVEN" in Playfair Display
+ - Size 52pt, white
+ - Subtitle: "Complete Indicator Suite"
 
 3. **Brief Descriptions:**
-   - One-liner for each indicator
-   - Clean, organized layout
-   - Professional toolkit visual
+ - One-liner for each indicator
+ - Clean, organized layout
+ - Professional toolkit visual
 
 4. **Unity Message:**
-   - "Designed Together. Work Together."
-   - Gold #c9a962 accent
+ - "Designed Together. Work Together."
+ - Gold #c9a962 accent
 
 ### Export
 - Export as PNG, high quality
@@ -36419,43 +35203,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-1s): Opening**
-- Text: "7 indicators"
-- All icons teased
-
-**Scene 2-8 (1-8s): Each Indicator**
-- Quick flash through all seven
-- Name: Function format
-- 1 second each
-- Icon highlight
-
-**Scene 9 (8-10s): Unity**
-- Text: "Designed as a system"
-- All seven unified
-- Blue #4a90d9 glow
-
-**Scene 10 (10-12s): CTA**
-- Text: "Link in bio"
-- Fade to CTA
-
-### Audio
-- Building/complete audio
-- Satisfying unity at end
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "595_complete_suite_video.mp4"
-
----
 
 # POST 596 — 🎓 Common Beginner Mistakes
 
@@ -36551,23 +35298,23 @@ Each category:
 
 ### Visual Elements
 1. **Mistakes List:**
-   - Six mistakes with warning icons
-   - Each with brief fix
-   - Red X marks
+ - Six mistakes with warning icons
+ - Each with brief fix
+ - Red X marks
 
 2. **Title:**
-   - "COMMON BEGINNER MISTAKES" in Playfair Display
-   - Size 48pt, white
-   - Warning triangle icon
+ - "COMMON BEGINNER MISTAKES" in Playfair Display
+ - Size 48pt, white
+ - Warning triangle icon
 
 3. **Fix Solutions:**
-   - Green checkmarks for fixes
-   - Brief, actionable
-   - Contrast with mistakes
+ - Green checkmarks for fixes
+ - Brief, actionable
+ - Contrast with mistakes
 
 4. **Bottom Message:**
-   - "Know them. Avoid them."
-   - Blue #4a90d9 positive message
+ - "Know them. Avoid them."
+ - Blue #4a90d9 positive message
 
 ### Export
 - Export as PNG, high quality
@@ -36575,44 +35322,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Beginner mistakes:"
-- Warning tone set
-- List beginning
-
-**Scene 2-6 (2-7s): Mistakes**
-- Each mistake with ❌
-- 1 second each
-- Quick pace
-- Red warning colors
-
-**Scene 7 (7-9s): Solution**
-- Text: "Know them. Avoid them."
-- Shift to positive
-- Green/blue colors
-
-**Scene 8 (9-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Education emphasis
-
-### Audio
-- Warning audio for mistakes
-- Positive resolution at end
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "596_beginner_mistakes_video.mp4"
-
----
 
 # POST 597 — 📝 The 80/20 Rule in Trading
 
@@ -36704,23 +35413,23 @@ Each category:
 
 ### Visual Elements
 1. **80/20 Pie Chart:**
-   - Small 20% slice highlighted
-   - Producing 80% of results
-   - Visual Pareto principle
+ - Small 20% slice highlighted
+ - Producing 80% of results
+ - Visual Pareto principle
 
 2. **Title:**
-   - "THE 80/20 RULE" in Playfair Display
-   - Size 52pt, white
-   - Pie chart icon
+ - "THE 80/20 RULE" in Playfair Display
+ - Size 52pt, white
+ - Pie chart icon
 
 3. **Application Points:**
-   - Profits, Time, Learning
-   - Each showing 80/20 application
-   - Blue #4a90d9 accents
+ - Profits, Time, Learning
+ - Each showing 80/20 application
+ - Blue #4a90d9 accents
 
 4. **Key Message:**
-   - "Less But Better"
-   - Gold #c9a962 highlight
+ - "Less But Better"
+ - Gold #c9a962 highlight
 
 ### Export
 - Export as PNG, high quality
@@ -36728,50 +35437,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "80/20 rule in trading:"
-- Pie chart appearing
-
-**Scene 2 (2-4s): Result**
-- Text: "80% of profits"
-- Large number emphasized
-
-**Scene 3 (4-6s): Source**
-- Text: "From 20% of trades"
-- Small slice highlighted
-
-**Scene 4 (6-8s): Action**
-- Text: "Focus on the 20%"
-- 20% expanding/highlighted
-- Blue #4a90d9 glow
-
-**Scene 5 (8-10s): Elimination**
-- Text: "Eliminate the rest"
-- 80% fading
-- Focus remaining
-
-**Scene 6 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Blog visual
-
-### Audio
-- Focus/efficiency audio
-- Clean, decisive
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "597_8020_rule_video.mp4"
-
----
 
 # POST 598 — 🔮 Final Chronicle Message
 
@@ -36862,24 +35527,24 @@ Each category:
 
 ### Visual Elements
 1. **Seven Guardians:**
-   - All seven icons arranged watching over
-   - Ethereal, eternal presence
-   - Glowing softly
+ - All seven icons arranged watching over
+ - Ethereal, eternal presence
+ - Glowing softly
 
 2. **Title:**
-   - "THE SEVEN ARE ALWAYS WITH YOU" in Cormorant Garamond
-   - Size 44pt, gold #c9a962
-   - Elegant, final
+ - "THE SEVEN ARE ALWAYS WITH YOU" in Cormorant Garamond
+ - Size 44pt, gold #c9a962
+ - Elegant, final
 
 3. **Center Element:**
-   - Trader or trading screen
-   - Seven's presence around it
-   - Protected/guided feeling
+ - Trader or trading screen
+ - Seven's presence around it
+ - Protected/guided feeling
 
 4. **Eternal Quality:**
-   - Soft light rays
-   - Timeless atmosphere
-   - Beautiful finale energy
+ - Soft light rays
+ - Timeless atmosphere
+ - Beautiful finale energy
 
 ### Export
 - Export as PNG, high quality
@@ -36887,53 +35552,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Ethereal, eternal imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Completion**
-- Text: "The Chronicle is complete"
-- Scroll closing visual
-- Completion tone
-
-**Scene 2 (2-4s): But**
-- Text: "But the Seven..."
-- Seven icons appearing
-- Presence building
-
-**Scene 3 (4-6s): Always**
-- Text: "Are always with you"
-- Seven surrounding viewer
-- Protective, guiding
-
-**Scene 4 (6-8s): In Indicators**
-- Text: "In every indicator"
-- Quick flash of each tool
-- Living wisdom
-
-**Scene 5 (8-10s): In Trades**
-- Text: "In every trade"
-- Trading action
-- Seven watching over
-
-**Scene 6 (10-12s): CTA**
-- Text: "Chronicle — link in bio"
-- Eternal fade
-
-### Audio
-- Eternal/timeless orchestral audio
-- Beautiful, peaceful conclusion
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "598_final_chronicle_video.mp4"
-
----
 
 # POST 599 — 🎓 Building Good Trading Habits
 
@@ -37032,23 +35650,23 @@ Each category:
 
 ### Visual Elements
 1. **Routine Checklist:**
-   - Daily and weekly habits listed
-   - Checkboxes for each
-   - Professional routine visual
+ - Daily and weekly habits listed
+ - Checkboxes for each
+ - Professional routine visual
 
 2. **Title:**
-   - "TRADING HABITS" in Playfair Display
-   - Size 52pt, white
-   - Refresh/routine icon
+ - "TRADING HABITS" in Playfair Display
+ - Size 52pt, white
+ - Refresh/routine icon
 
 3. **Time-Based Organization:**
-   - Daily section (morning, pre-trade, post-trade)
-   - Weekly section (review, plan)
-   - Clear structure
+ - Daily section (morning, pre-trade, post-trade)
+ - Weekly section (review, plan)
+ - Clear structure
 
 4. **Key Message:**
-   - "Habits = Consistency = Results"
-   - Blue #4a90d9 positive
+ - "Habits = Consistency = Results"
+ - Blue #4a90d9 positive
 
 ### Export
 - Export as PNG, high quality
@@ -37056,53 +35674,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Daily trading habits:"
-- Checklist appearing
-- Routine tone
-
-**Scene 2 (2-4s): Morning**
-- Text: "Morning prep ☀️"
-- Sun icon
-- First habit
-
-**Scene 3 (4-6s): Pre-Trade**
-- Text: "Pre-trade checklist ✅"
-- Checkmark animation
-- Second habit
-
-**Scene 4 (6-8s): Post-Trade**
-- Text: "Post-trade review 📝"
-- Notes icon
-- Third habit
-
-**Scene 5 (8-10s): Result**
-- Text: "Habits = consistency"
-- All habits unified
-- Gold #c9a962 success
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Routine/habit audio
-- Steady, consistent rhythm
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "599_trading_habits_video.mp4"
-
----
 
 # POST 600 — 📚 Docs: Quick Start Guide
 
@@ -37195,24 +35766,24 @@ Each category:
 
 ### Visual Elements
 1. **Numbered Steps:**
-   - 1-5 in large circles
-   - Each with step name
-   - Vertical flow
+ - 1-5 in large circles
+ - Each with step name
+ - Vertical flow
 
 2. **Title:**
-   - "QUICK START GUIDE" in Playfair Display
-   - Size 52pt, white
-   - Rocket icon
+ - "QUICK START GUIDE" in Playfair Display
+ - Size 52pt, white
+ - Rocket icon
 
 3. **5 Minutes Badge:**
-   - "5 MIN" badge
-   - Gold #c9a962
-   - Speed emphasis
+ - "5 MIN" badge
+ - Gold #c9a962
+ - Speed emphasis
 
 4. **Simplicity Message:**
-   - "No downloads. No complexity."
-   - Cloud-based visual
-   - Easy, accessible
+ - "No downloads. No complexity."
+ - Cloud-based visual
+ - Easy, accessible
 
 ### Export
 - Export as PNG, high quality
@@ -37220,59 +35791,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Quick start:"
-- Rocket animation
-- Speed implied
-
-**Scene 2 (2-3s): Step 1**
-- Text: "1. TradingView account"
-- Quick step
-- Number animation
-
-**Scene 3 (3-4s): Step 2**
-- Text: "2. Add Signal Pilot"
-- Quick step
-
-**Scene 4 (4-5s): Step 3**
-- Text: "3. Configure"
-- Quick step
-
-**Scene 5 (5-6s): Step 4**
-- Text: "4. Explore"
-- Quick step
-
-**Scene 6 (6-8s): Complete**
-- Text: "5 minutes. Ready to go."
-- Completion animation
-- Green success
-
-**Scene 7 (8-10s): Simplicity**
-- Text: "That simple."
-- Satisfaction moment
-
-**Scene 8 (10-12s): CTA**
-- Text: "Link in bio"
-- Docs visual
-
-### Audio
-- Quick/easy audio
-- Satisfying completion sound
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "600_quickstart_video.mp4"
-
----
 
 # 📋 Batch 60 Hashtag Bank
 
@@ -37328,18 +35846,6 @@ Each category:
 - [ ] 598_final_chronicle_static.png
 - [ ] 599_trading_habits_static.png
 - [ ] 600_quickstart_static.png
-
-## Videos (CapCut)
-- [ ] 591_600_milestone_video.mp4
-- [ ] 592_trading_plan_video.mp4
-- [ ] 593_accepting_losses_video.mp4
-- [ ] 594_execution_quote_video.mp4
-- [ ] 595_complete_suite_video.mp4
-- [ ] 596_beginner_mistakes_video.mp4
-- [ ] 597_8020_rule_video.mp4
-- [ ] 598_final_chronicle_video.mp4
-- [ ] 599_trading_habits_video.mp4
-- [ ] 600_quickstart_video.mp4
 
 ## Carousel Slides
 - [ ] 591 carousel (7 slides)
@@ -37478,25 +35984,25 @@ Each category:
 
 ### Visual Elements
 1. **Progress Bar:**
-   - Large progress bar showing 601/650
-   - 92% filled
-   - Blue #4a90d9 fill color
-   - Gold #c9a962 endpoint
+ - Large progress bar showing 601/650
+ - 92% filled
+ - Blue #4a90d9 fill color
+ - Gold #c9a962 endpoint
 
 2. **Title:**
-   - "49 TO GO" in Playfair Display
-   - Size 64pt, white
-   - Countdown energy
+ - "49 TO GO" in Playfair Display
+ - Size 64pt, white
+ - Countdown energy
 
 3. **Completed Items:**
-   - Education ✓
-   - Indicators ✓
-   - Chronicle ✓
-   - Green checkmarks
+ - Education ✓
+ - Indicators ✓
+ - Chronicle ✓
+ - Green checkmarks
 
 4. **Message:**
-   - "Let's finish strong"
-   - Bottom section
+ - "Let's finish strong"
+ - Bottom section
 
 ### Export
 - Export as PNG, high quality
@@ -37504,26 +36010,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1-8:** Follow video text timing with progress bar filling animation, checkmarks appearing, and momentum building to finish.
-
-### Audio
-- Momentum/final stretch audio
-- Building energy
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "601_final_push_video.mp4"
-
----
 
 # POST 602 — 🎓 Understanding Market Hours
 
@@ -37607,21 +36093,21 @@ Each category:
 
 ### Visual Elements
 1. **World Map:**
-   - Global map with session zones highlighted
-   - Different colors for each session
-   - Overlap zones emphasized
+ - Global map with session zones highlighted
+ - Different colors for each session
+ - Overlap zones emphasized
 
 2. **Title:**
-   - "MARKET HOURS" in Playfair Display
-   - Globe icon
+ - "MARKET HOURS" in Playfair Display
+ - Globe icon
 
 3. **Session Times:**
-   - Four sessions listed with times
-   - Overlap highlighted in gold
+ - Four sessions listed with times
+ - Overlap highlighted in gold
 
 4. **Key Insight:**
-   - "London/NY Overlap = Best Volume"
-   - Blue #4a90d9 highlight
+ - "London/NY Overlap = Best Volume"
+ - Blue #4a90d9 highlight
 
 ### Export
 - Export as PNG, high quality
@@ -37629,24 +36115,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: World map with session zones
-
-### Timeline Structure
-Follow video timing with world map lighting up different zones.
-
-### Audio
-- Global/time-zone audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "602_market_hours_video.mp4"
-
----
 
 # POST 603 — 📝 Dealing with FOMO
 
@@ -37741,23 +36209,23 @@ Follow video timing with world map lighting up different zones.
 
 ### Visual Elements
 1. **FOMO Cycle:**
-   - Circular diagram showing chase → lose → regret → repeat
-   - Breaking free arrow
-   - Red to green transition
+ - Circular diagram showing chase → lose → regret → repeat
+ - Breaking free arrow
+ - Red to green transition
 
 2. **Title:**
-   - "BREAKING FOMO" in Playfair Display
-   - Warning icon
+ - "BREAKING FOMO" in Playfair Display
+ - Warning icon
 
 3. **Antidotes:**
-   - Trust Process
-   - Abundance Mindset
-   - Review Chases
-   - Green checkmarks
+ - Trust Process
+ - Abundance Mindset
+ - Review Chases
+ - Green checkmarks
 
 4. **Key Message:**
-   - "There's always another trade"
-   - Calming blue #4a90d9
+ - "There's always another trade"
+ - Calming blue #4a90d9
 
 ### Export
 - Export as PNG, high quality
@@ -37765,25 +36233,6 @@ Follow video timing with world map lighting up different zones.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Anxiety to calm visual transition
-
-### Timeline Structure
-Follow video timing with FOMO cycle then breaking free.
-
-### Audio
-- Anxiety audio 0-6s
-- Calm/liberation audio 6-12s
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "603_fomo_video.mp4"
-
----
 
 # POST 604 — 💬 Quote Card
 
@@ -37862,22 +36311,22 @@ Follow video timing with FOMO cycle then breaking free.
 
 ### Visual Elements
 1. **Quote Typography:**
-   - Main quote in Cormorant Garamond Italic
-   - Size 40pt, white
-   - Center aligned
+ - Main quote in Cormorant Garamond Italic
+ - Size 40pt, white
+ - Center aligned
 
 2. **Quotation Marks:**
-   - Large decorative quotes
-   - Gold #c9a962
-   - 20% opacity
+ - Large decorative quotes
+ - Gold #c9a962
+ - 20% opacity
 
 3. **Attribution:**
-   - "— Signal Pilot" in Inter
-   - Gold #c9a962
+ - "— Signal Pilot" in Inter
+ - Gold #c9a962
 
 4. **Subtle Visual:**
-   - Classroom/learning concept
-   - Market charts as "books"
+ - Classroom/learning concept
+ - Market charts as "books"
 
 ### Export
 - Export as PNG, high quality
@@ -37885,24 +36334,6 @@ Follow video timing with FOMO cycle then breaking free.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 10 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-Follow video timing with contemplative to action progression.
-
-### Audio
-- Wisdom/learning audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "604_market_teacher_quote_video.mp4"
-
----
 
 # POST 605 — 🛠️ Signal Pilot Settings Deep Dive
 
@@ -37985,25 +36416,25 @@ Follow video timing with contemplative to action progression.
 
 ### Visual Elements
 1. **Settings Panel Mock:**
-   - Slider controls
-   - Color pickers
-   - Toggle switches
-   - Professional UI look
+ - Slider controls
+ - Color pickers
+ - Toggle switches
+ - Professional UI look
 
 2. **Title:**
-   - "SETTINGS DEEP DIVE" in Playfair Display
-   - Gear icon
+ - "SETTINGS DEEP DIVE" in Playfair Display
+ - Gear icon
 
 3. **Four Categories:**
-   - Sensitivity
-   - Visuals
-   - Alerts
-   - Timeframe
-   - Each with icon
+ - Sensitivity
+ - Visuals
+ - Alerts
+ - Timeframe
+ - Each with icon
 
 4. **Key Message:**
-   - "Make them yours"
-   - Blue #4a90d9
+ - "Make them yours"
+ - Blue #4a90d9
 
 ### Export
 - Export as PNG, high quality
@@ -38011,24 +36442,6 @@ Follow video timing with contemplative to action progression.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Settings panel screen recording
-
-### Timeline Structure
-Follow video timing showing settings being adjusted.
-
-### Audio
-- Customization/tech audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "605_settings_video.mp4"
-
----
 
 # POST 606 — 🎓 Price Action vs Indicators
 
@@ -38113,22 +36526,22 @@ Follow video timing showing settings being adjusted.
 
 ### Visual Elements
 1. **Split Chart:**
-   - Price action structure visible
-   - Indicators overlaid
-   - Showing complementary nature
+ - Price action structure visible
+ - Indicators overlaid
+ - Showing complementary nature
 
 2. **Title:**
-   - "PRICE ACTION + INDICATORS" in Playfair Display
-   - Plus sign emphasized
+ - "PRICE ACTION + INDICATORS" in Playfair Display
+ - Plus sign emphasized
 
 3. **Two Columns:**
-   - Price Action provides: [list]
-   - Indicators provide: [list]
-   - Both valuable
+ - Price Action provides: [list]
+ - Indicators provide: [list]
+ - Both valuable
 
 4. **Key Message:**
-   - "Together = Complete Picture"
-   - Gold #c9a962
+ - "Together = Complete Picture"
+ - Gold #c9a962
 
 ### Export
 - Export as PNG, high quality
@@ -38136,24 +36549,6 @@ Follow video timing showing settings being adjusted.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Chart with both price action and indicators
-
-### Timeline Structure
-Follow video timing showing the "both" answer.
-
-### Audio
-- Balance/harmony audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "606_price_vs_indicators_video.mp4"
-
----
 
 # POST 607 — 📝 Year One Expectations
 
@@ -38243,24 +36638,24 @@ Follow video timing showing the "both" answer.
 
 ### Visual Elements
 1. **Foundation Building:**
-   - Year 1 as foundation blocks
-   - Future years building on top
-   - Patient progress visual
+ - Year 1 as foundation blocks
+ - Future years building on top
+ - Patient progress visual
 
 2. **Title:**
-   - "YEAR ONE: BUILD THE FOUNDATION" in Playfair Display
-   - Calendar icon
+ - "YEAR ONE: BUILD THE FOUNDATION" in Playfair Display
+ - Calendar icon
 
 3. **Four Goals:**
-   - Don't Blow Up
-   - Learn Basics
-   - Develop System
-   - Build Habits
-   - Numbered 1-4
+ - Don't Blow Up
+ - Learn Basics
+ - Develop System
+ - Build Habits
+ - Numbered 1-4
 
 4. **Key Message:**
-   - "Survival > Stardom"
-   - Gold #c9a962
+ - "Survival > Stardom"
+ - Gold #c9a962
 
 ### Export
 - Export as PNG, high quality
@@ -38268,24 +36663,6 @@ Follow video timing showing the "both" answer.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Foundation/building visual
-
-### Timeline Structure
-Follow video timing with goals being checked off.
-
-### Audio
-- Patient/building audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "607_year_one_video.mp4"
-
----
 
 # POST 608 — 🔮 The Signal Pilot Vision
 
@@ -38364,21 +36741,21 @@ Follow video timing with goals being checked off.
 
 ### Visual Elements
 1. **Four Pillars:**
-   - Tools, Education, Community, Improvement
-   - Each with icon
-   - Building upward visual
+ - Tools, Education, Community, Improvement
+ - Each with icon
+ - Building upward visual
 
 2. **Title:**
-   - "OUR VISION" in Playfair Display
-   - Telescope/vision icon
+ - "OUR VISION" in Playfair Display
+ - Telescope/vision icon
 
 3. **Pillar Details:**
-   - Brief description for each
-   - Connected by lines
+ - Brief description for each
+ - Connected by lines
 
 4. **Key Message:**
-   - "This is Signal Pilot"
-   - Gold #c9a962
+ - "This is Signal Pilot"
+ - Gold #c9a962
 
 ### Export
 - Export as PNG, high quality
@@ -38386,24 +36763,6 @@ Follow video timing with goals being checked off.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Forward-looking, building imagery
-
-### Timeline Structure
-Follow video timing with vision pillars appearing.
-
-### Audio
-- Visionary/inspiring audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "608_vision_video.mp4"
-
----
 
 # POST 609 — 🎓 Reading Order Flow Simply
 
@@ -38486,22 +36845,22 @@ Follow video timing with vision pillars appearing.
 
 ### Visual Elements
 1. **Two-Column Comparison:**
-   - Buying Pressure (green/blue)
-   - Selling Pressure (red)
-   - Arrows showing direction
+ - Buying Pressure (green/blue)
+ - Selling Pressure (red)
+ - Arrows showing direction
 
 2. **Title:**
-   - "ORDER FLOW SIMPLIFIED" in Playfair Display
-   - Flow icon
+ - "ORDER FLOW SIMPLIFIED" in Playfair Display
+ - Flow icon
 
 3. **Plutus Flow Visual:**
-   - Sample indicator reading
-   - Positive vs negative values
-   - Easy to understand
+ - Sample indicator reading
+ - Positive vs negative values
+ - Easy to understand
 
 4. **Key Message:**
-   - "Just watch the pressure"
-   - Blue #4a90d9
+ - "Just watch the pressure"
+ - Blue #4a90d9
 
 ### Export
 - Export as PNG, high quality
@@ -38509,24 +36868,6 @@ Follow video timing with vision pillars appearing.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Order flow visualization
-
-### Timeline Structure
-Follow video timing with simple pressure explanation.
-
-### Audio
-- Simplifying/clarifying audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "609_order_flow_video.mp4"
-
----
 
 # POST 610 — 📚 Docs: Upgrade Path Options
 
@@ -38610,22 +36951,22 @@ Follow video timing with simple pressure explanation.
 
 ### Visual Elements
 1. **Three Plan Cards:**
-   - Monthly: $99
-   - Yearly: $699 (highlighted as best value)
-   - Lifetime: $1,799
-   - Each with brief benefit
+ - Monthly: $99
+ - Yearly: $699 (highlighted as best value)
+ - Lifetime: $1,799
+ - Each with brief benefit
 
 2. **Title:**
-   - "CHOOSE YOUR PATH" in Playfair Display
-   - Rocket icon
+ - "CHOOSE YOUR PATH" in Playfair Display
+ - Rocket icon
 
 3. **Feature Parity:**
-   - "All include everything"
-   - Checkmarks for features
+ - "All include everything"
+ - Checkmarks for features
 
 4. **Best Value Badge:**
-   - On yearly plan
-   - Gold #c9a962
+ - On yearly plan
+ - Gold #c9a962
 
 ### Export
 - Export as PNG, high quality
@@ -38633,24 +36974,6 @@ Follow video timing with simple pressure explanation.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-Follow video timing showing plan options.
-
-### Audio
-- Choice/options audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "610_upgrade_video.mp4"
-
----
 
 # 📋 Batch 61 Hashtag Bank
 
@@ -38706,20 +37029,6 @@ Follow video timing showing plan options.
 - [ ] 608_vision_static.png
 - [ ] 609_order_flow_static.png
 - [ ] 610_upgrade_static.png
-
-## Videos (CapCut)
-- [ ] 601_final_push_video.mp4
-- [ ] 602_market_hours_video.mp4
-- [ ] 603_fomo_video.mp4
-- [ ] 604_market_teacher_quote_video.mp4
-- [ ] 605_settings_video.mp4
-- [ ] 606_price_vs_indicators_video.mp4
-- [ ] 607_year_one_video.mp4
-- [ ] 608_vision_video.mp4
-- [ ] 609_order_flow_video.mp4
-- [ ] 610_upgrade_video.mp4
-
----
 
 # ✅ BATCH 61 COMPLETE
 
@@ -38852,22 +37161,6 @@ Follow video timing showing plan options.
 
 ---
 
-## 🎬 CapCut Instructions
-
-**Style:** Trust-building promo
-**Duration:** 30-45 seconds
-
-**Sequence:**
-1. Hook text: "Risk-free trading tools?"
-2. Shield/guarantee badge animation
-3. Quick cuts of indicator features
-4. Testimonial-style confidence building
-5. CTA: "Try Signal Pilot today"
-
-**Effects:** Subtle glow on guarantee text, smooth transitions
-
----
-
 # POST 612 — EDUCATION HUB
 ## Volume Basics
 
@@ -38925,36 +37218,36 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Background:**
-   - Background color: #0a0a0f (near black)
-   - Add subtle gradient overlay from top-left (#1a1a2e at 20% opacity)
+ - Background color: #0a0a0f (near black)
+ - Add subtle gradient overlay from top-left (#1a1a2e at 20% opacity)
 
 3. **Create Split Layout:**
-   - Draw vertical divider line (color: #4a90d9, 2px width)
-   - Position at center (X: 540)
+ - Draw vertical divider line (color: #4a90d9, 2px width)
+ - Position at center (X: 540)
 
 4. **Add Left Panel (High Volume):**
-   - Import or create candlestick chart image
-   - Add large volume bars beneath candles
-   - Label: "HIGH VOLUME" (Playfair Display, 28pt, #c9a962)
-   - Subtitle: "Strong participation" (Inter, 16pt, #ffffff)
+ - Import or create candlestick chart image
+ - Add large volume bars beneath candles
+ - Label: "HIGH VOLUME" (Playfair Display, 28pt, #c9a962)
+ - Subtitle: "Strong participation" (Inter, 16pt, #ffffff)
 
 5. **Add Right Panel (Low Volume):**
-   - Same candle pattern
-   - Smaller volume bars beneath
-   - Label: "LOW VOLUME" (Playfair Display, 28pt, #4a90d9)
-   - Subtitle: "Potential hesitation" (Inter, 16pt, #ffffff)
+ - Same candle pattern
+ - Smaller volume bars beneath
+ - Label: "LOW VOLUME" (Playfair Display, 28pt, #4a90d9)
+ - Subtitle: "Potential hesitation" (Inter, 16pt, #ffffff)
 
 6. **Add Header:**
-   - Text: "📊 VOLUME: THE MARKET'S HEARTBEAT" (Playfair Display, 32pt, #ffffff)
-   - Position: Top center with 60px margin
+ - Text: "📊 VOLUME: THE MARKET'S HEARTBEAT" (Playfair Display, 32pt, #ffffff)
+ - Position: Top center with 60px margin
 
 7. **Add Key Insight:**
-   - Text: "Same move. Different conviction." (Cormorant Garamond, 24pt, italic, #c9a962)
-   - Position: Bottom center, 80px from bottom
+ - Text: "Same move. Different conviction." (Cormorant Garamond, 24pt, italic, #c9a962)
+ - Position: Bottom center, 80px from bottom
 
 8. **Brand Elements:**
-   - Add Signal Pilot logo (bottom right, 60px)
-   - Disclaimer: "Educational content only" (Inter, 10pt, #666666)
+ - Add Signal Pilot logo (bottom right, 60px)
+ - Disclaimer: "Educational content only" (Inter, 10pt, #666666)
 
 9. **Export:** PNG, highest quality
 
@@ -39011,25 +37304,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Why does price always stop at round numbers?"
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Why $50K? Why $100? |
-| 2-4s | It's human psychology |
-| 4-6s | We place orders at round numbers |
-| 6-8s | Orders cluster = reactions |
-| 8-10s | This creates support & resistance |
-| 10-12s | Link in bio 🧠 |
-
-**Background:** Chart showing BTC bouncing at $50K, or any asset reacting at round levels
-
-**Sound:** "Mind blown" or realization-style trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 613
@@ -39040,41 +37314,41 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Background:**
-   - Background color: #0a0a0f
-   - Add subtle grid pattern overlay (10% opacity)
+ - Background color: #0a0a0f
+ - Add subtle grid pattern overlay (10% opacity)
 
 3. **Add Chart Element:**
-   - Import Bitcoin or stock chart image
-   - Position in center, taking 60% of canvas height
-   - Add semi-transparent overlay for readability
+ - Import Bitcoin or stock chart image
+ - Position in center, taking 60% of canvas height
+ - Add semi-transparent overlay for readability
 
 4. **Highlight Round Numbers:**
-   - Draw horizontal lines at $50,000, $40,000, $30,000 levels
-   - Line color: #c9a962 (gold), 3px dashed
-   - Add small circle markers at reaction points
+ - Draw horizontal lines at $50,000, $40,000, $30,000 levels
+ - Line color: #c9a962 (gold), 3px dashed
+ - Add small circle markers at reaction points
 
 5. **Add Labels:**
-   - "$50,000" label (Inter Bold, 18pt, #ffffff)
-   - "Price rejected here" annotation (Inter, 14pt, #4a90d9)
-   - Add arrows pointing to reactions
+ - "$50,000" label (Inter Bold, 18pt, #ffffff)
+ - "Price rejected here" annotation (Inter, 14pt, #4a90d9)
+ - Add arrows pointing to reactions
 
 6. **Header Text:**
-   - "🧠 PSYCHOLOGY OF ROUND NUMBERS" (Playfair Display, 30pt, #ffffff)
-   - Position: Top, 50px margin
+ - "🧠 PSYCHOLOGY OF ROUND NUMBERS" (Playfair Display, 30pt, #ffffff)
+ - Position: Top, 50px margin
 
 7. **Key Insight Box:**
-   - Create rounded rectangle (fill: #1a1a2e, corner radius: 12px)
-   - Text inside: "Humans cluster orders at clean levels" (Inter, 16pt)
-   - Position: Bottom third of canvas
+ - Create rounded rectangle (fill: #1a1a2e, corner radius: 12px)
+ - Text inside: "Humans cluster orders at clean levels" (Inter, 16pt)
+ - Position: Bottom third of canvas
 
 8. **Add Statistics Visual:**
-   - Small icons: 📍 Orders cluster → Support/Resistance
-   - Use bullet point layout
-   - Color code: Gold for key terms
+ - Small icons: 📍 Orders cluster → Support/Resistance
+ - Use bullet point layout
+ - Color code: Gold for key terms
 
 9. **Brand Elements:**
-   - Signal Pilot logo (bottom right)
-   - Disclaimer text (bottom, small)
+ - Signal Pilot logo (bottom right)
+ - Disclaimer text (bottom, small)
 
 10. **Export:** PNG, highest quality
 
@@ -39133,25 +37407,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "The hardest choice in trading..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | The hardest choice in trading |
-| 2-4s | What you want NOW |
-| 4-5s | vs. |
-| 5-7s | What you want MOST |
-| 7-9s | Discipline is the difference |
-| 9-11s | Choose patience 🎯 |
-
-**Background:** Slow zoom on quote card graphic, or trader contemplating chart
-
-**Sound:** Reflective/motivational trending audio
-
-**Duration:** 11 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 614
@@ -39162,40 +37417,40 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Premium Background:**
-   - Base color: #0a0a0f
-   - Add subtle radial gradient (center: #1a1a2e, edges: #0a0a0f)
-   - Optional: Add very subtle gold particle texture (5% opacity)
+ - Base color: #0a0a0f
+ - Add subtle radial gradient (center: #1a1a2e, edges: #0a0a0f)
+ - Optional: Add very subtle gold particle texture (5% opacity)
 
 3. **Create Quote Layout:**
-   - Main quote area: Center of canvas
-   - Add decorative quotation mark (Playfair Display, 200pt, #c9a962, 15% opacity) top-left
+ - Main quote area: Center of canvas
+ - Add decorative quotation mark (Playfair Display, 200pt, #c9a962, 15% opacity) top-left
 
 4. **Add Quote Text:**
-   - Line 1: "Discipline is choosing" (Cormorant Garamond, 36pt, #ffffff)
-   - Line 2: "between what you want NOW" (Cormorant Garamond, 32pt, #ffffff)
-   - Line 3: "and what you want MOST." (Cormorant Garamond, 32pt, #c9a962)
-   - Center align all text
+ - Line 1: "Discipline is choosing" (Cormorant Garamond, 36pt, #ffffff)
+ - Line 2: "between what you want NOW" (Cormorant Garamond, 32pt, #ffffff)
+ - Line 3: "and what you want MOST." (Cormorant Garamond, 32pt, #c9a962)
+ - Center align all text
 
 5. **Add Visual Emphasis:**
-   - Underline "NOW" with thin gold line
-   - Underline "MOST" with thicker gold line
-   - This creates visual hierarchy
+ - Underline "NOW" with thin gold line
+ - Underline "MOST" with thicker gold line
+ - This creates visual hierarchy
 
 6. **Add Decorative Elements:**
-   - Thin gold horizontal lines above and below quote (50% width)
-   - Small diamond or star accent between lines
+ - Thin gold horizontal lines above and below quote (50% width)
+ - Small diamond or star accent between lines
 
 7. **Add Context:**
-   - Below quote: "— Trading Wisdom" (Inter, 14pt, #666666)
-   - Or: "The market rewards patience, not urgency."
+ - Below quote: "— Trading Wisdom" (Inter, 14pt, #666666)
+ - Or: "The market rewards patience, not urgency."
 
 8. **Brand Elements:**
-   - Signal Pilot logo watermark (bottom center, 40% opacity)
-   - Clean, minimal placement
+ - Signal Pilot logo watermark (bottom center, 40% opacity)
+ - Clean, minimal placement
 
 9. **Final Touches:**
-   - Add very subtle outer glow to text (#c9a962, 10% spread)
-   - Ensure text is perfectly centered
+ - Add very subtle outer glow to text (#c9a962, 10% spread)
+ - Ensure text is perfectly centered
 
 10. **Export:** PNG, highest quality
 
@@ -39256,27 +37511,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Five market regimes. One indicator."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | VOLUME ORACLE 🔮 |
-| 2-4s | Regime 1: Compression |
-| 4-5s | Regime 2: Expansion |
-| 5-6s | Regime 3: Accumulation |
-| 6-7s | Regime 4: Distribution |
-| 7-8s | Regime 5: Transition |
-| 8-10s | Context before action |
-| 10-12s | Link in bio ⬇️ |
-
-**Background:** Screen recording cycling through chart showing each regime type
-
-**Sound:** Tech/futuristic trending audio with beats matching regime changes
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 615
@@ -39287,43 +37521,43 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Background:**
-   - Background color: #0a0a0f
-   - Add TradingView chart screenshot with Volume Oracle as base
+ - Background color: #0a0a0f
+ - Add TradingView chart screenshot with Volume Oracle as base
 
 3. **Overlay Semi-Transparent Layer:**
-   - Add dark rectangle over bottom portion (for text readability)
-   - Fill: #0a0a0f, 85% opacity
+ - Add dark rectangle over bottom portion (for text readability)
+ - Fill: #0a0a0f, 85% opacity
 
 4. **Add Title Section:**
-   - "🔮 VOLUME ORACLE" (Playfair Display, 36pt, #c9a962)
-   - "The Regime Detector" (Inter, 20pt, #ffffff)
-   - Position: Top center
+ - "🔮 VOLUME ORACLE" (Playfair Display, 36pt, #c9a962)
+ - "The Regime Detector" (Inter, 20pt, #ffffff)
+ - Position: Top center
 
 5. **Create Regime List:**
-   - Layout: 5 rows, left-aligned
-   - Each regime gets:
-     - Number (gold): "1️⃣"
-     - Name (white, bold): "Compression"
-     - Description (gray): "Low volatility, coiling"
+ - Layout: 5 rows, left-aligned
+ - Each regime gets:
+ - Number (gold): "1️⃣"
+ - Name (white, bold): "Compression"
+ - Description (gray): "Low volatility, coiling"
 
 6. **Color Code Regimes:**
-   - Compression: Blue accent
-   - Expansion: Green accent
-   - Accumulation: Gold accent
-   - Distribution: Red accent
-   - Transition: Purple accent
+ - Compression: Blue accent
+ - Expansion: Green accent
+ - Accumulation: Gold accent
+ - Distribution: Red accent
+ - Transition: Purple accent
 
 7. **Add Visual Indicators:**
-   - Small colored circles or bars next to each regime
-   - Match colors to actual Volume Oracle display
+ - Small colored circles or bars next to each regime
+ - Match colors to actual Volume Oracle display
 
 8. **Guardian Reference:**
-   - Small icon: 🔮
-   - Text: "The Prophet" (Cormorant Garamond, italic, 14pt)
+ - Small icon: 🔮
+ - Text: "The Prophet" (Cormorant Garamond, italic, 14pt)
 
 9. **Brand Elements:**
-   - Signal Pilot logo
-   - CTA: "See it in action — link in bio"
+ - Signal Pilot logo
+ - CTA: "See it in action — link in bio"
 
 10. **Export:** PNG, highest quality
 
@@ -39385,25 +37619,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "One signal means nothing. Here's why..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | One signal = a hint |
-| 2-4s | Two signals = interesting |
-| 4-6s | Three signals = CONFLUENCE |
-| 6-8s | Level + Momentum + Volume |
-| 8-10s | Stack the factors |
-| 10-12s | Free lesson → bio |
-
-**Background:** Chart zooming into zone where multiple indicators align
-
-**Sound:** Building/crescendo audio that peaks at "CONFLUENCE"
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 616
@@ -39414,98 +37629,45 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Background:**
-   - Background: #0a0a0f
-   - Import chart image with clear confluence zone
+ - Background: #0a0a0f
+ - Import chart image with clear confluence zone
 
 3. **Highlight Confluence Zone:**
-   - Draw circle or ellipse around zone (stroke: #c9a962, 3px)
-   - Add glow effect (gold, 20% spread)
+ - Draw circle or ellipse around zone (stroke: #c9a962, 3px)
+ - Add glow effect (gold, 20% spread)
 
 4. **Add Pointing Arrows:**
-   - Arrow 1: From "Support Level" label → zone
-   - Arrow 2: From "Momentum" label → zone
-   - Arrow 3: From "Volume" label → zone
-   - Arrow color: #4a90d9
+ - Arrow 1: From "Support Level" label → zone
+ - Arrow 2: From "Momentum" label → zone
+ - Arrow 3: From "Volume" label → zone
+ - Arrow color: #4a90d9
 
 5. **Create Factor Labels:**
-   - Each label in rounded rectangle
-   - Background: #1a1a2e
-   - Text: Factor name (Inter Bold, 14pt, white)
+ - Each label in rounded rectangle
+ - Background: #1a1a2e
+ - Text: Factor name (Inter Bold, 14pt, white)
 
 6. **Add Title:**
-   - "🎯 CONFLUENCE" (Playfair Display, 40pt, #c9a962)
-   - "Where Signals Align" (Inter, 20pt, #ffffff)
+ - "🎯 CONFLUENCE" (Playfair Display, 40pt, #c9a962)
+ - "Where Signals Align" (Inter, 20pt, #ffffff)
 
 7. **Add Progression:**
-   - "One signal = hint" (gray, crossed out lightly)
-   - "Two signals = interesting" (gray)
-   - "Three signals = CONFLUENCE" (gold, bold)
+ - "One signal = hint" (gray, crossed out lightly)
+ - "Two signals = interesting" (gray)
+ - "Three signals = CONFLUENCE" (gold, bold)
 
 8. **Key Message:**
-   - "Stack the factors" (Cormorant Garamond, 24pt, italic)
-   - Position: Bottom of canvas
+ - "Stack the factors" (Cormorant Garamond, 24pt, italic)
+ - Position: Bottom of canvas
 
 9. **Brand Elements:**
-   - Signal Pilot logo
-   - Educational disclaimer
+ - Signal Pilot logo
+ - Educational disclaimer
 
 10. **Export:** PNG, highest quality
 
 ---
 
-### CapCut Video Creation Guide — Post 616
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Chart with confluence zone
-   - Factor labels/graphics
-   - Crescendo sound effect
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): First Level**
-   - Show chart with one indicator highlighted
-   - Text: "One signal = a hint" (Gray text)
-   - Subtle, not impactful
-
-5. **Segment 2 (2-4s): Second Level**
-   - Add second indicator highlight
-   - Text: "Two signals = interesting" (Slightly brighter)
-   - Building energy
-
-6. **Segment 3 (4-6s): Confluence**
-   - Add third indicator, zoom into zone
-   - Text: "Three signals = CONFLUENCE" (Gold, large, bold)
-   - Peak of crescendo sound
-   - Add impact effect (flash, zoom)
-
-7. **Segment 4 (6-8s): The Formula**
-   - Text: "Level + Momentum + Volume"
-   - Show all three aligned on chart
-   - Circle the confluence zone
-
-8. **Segment 5 (8-10s): Takeaway**
-   - Text: "Stack the factors"
-   - Pull back to show full picture
-   - Add stacking animation
-
-9. **Segment 6 (10-12s): CTA**
-   - Text: "Free lesson → bio"
-   - Signal Pilot logo
-   - Fade out
-
-10. **Audio:**
-    - Building music that crescendos at "CONFLUENCE"
-    - Impact sound at peak
-    - Trending educational audio
-
-11. **Export:** 1080x1920, 30fps
-
----
 
 # POST 617 — BLOG ARTICLE
 ## Journaling What to Track
@@ -39565,27 +37727,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Your journal isn't a diary..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Your journal ≠ a diary |
-| 2-4s | It's a FEEDBACK LOOP |
-| 4-5s | Track: Entry reason |
-| 5-6s | Track: Exit reason |
-| 6-7s | Track: Emotions |
-| 7-8s | Track: Lessons |
-| 8-10s | Patterns will emerge |
-| 10-12s | Guide in bio 📓 |
-
-**Background:** Someone writing in journal, or scrolling through trade log spreadsheet
-
-**Sound:** Focused/productivity trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 617
@@ -39596,95 +37737,45 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Background:**
-   - Background: #0a0a0f
-   - Add subtle paper texture overlay (5% opacity) for journal feel
+ - Background: #0a0a0f
+ - Add subtle paper texture overlay (5% opacity) for journal feel
 
 3. **Create Journal Template Visual:**
-   - Draw rounded rectangle (fill: #1a1a2e, corner radius: 16px)
-   - Position: Center, 80% of canvas width
+ - Draw rounded rectangle (fill: #1a1a2e, corner radius: 16px)
+ - Position: Center, 80% of canvas width
 
 4. **Add Journal Fields:**
-   - Create checklist-style layout:
-   - □ Entry Reason: ________________
-   - □ Exit Reason: ________________
-   - □ Emotional State: ________________
-   - □ Lessons: ________________
-   - Font: Inter, 16pt, spacing between fields
+ - Create checklist-style layout:
+ - □ Entry Reason: ________________
+ - □ Exit Reason: ________________
+ - □ Emotional State: ________________
+ - □ Lessons: ________________
+ - Font: Inter, 16pt, spacing between fields
 
 5. **Add Checkmarks:**
-   - Use gold checkmarks (✓) instead of empty boxes
-   - Color: #c9a962
+ - Use gold checkmarks (✓) instead of empty boxes
+ - Color: #c9a962
 
 6. **Title Section:**
-   - "📓 TRADING JOURNAL" (Playfair Display, 32pt, #ffffff)
-   - "Your Feedback Loop" (Inter, 18pt, #c9a962)
+ - "📓 TRADING JOURNAL" (Playfair Display, 32pt, #ffffff)
+ - "Your Feedback Loop" (Inter, 18pt, #c9a962)
 
 7. **Add Visual Elements:**
-   - Small pen or pencil icon
-   - Circular arrow icon (representing feedback loop)
+ - Small pen or pencil icon
+ - Circular arrow icon (representing feedback loop)
 
 8. **Key Message:**
-   - "Patterns emerge. Weaknesses surface." (Cormorant Garamond, 18pt, italic)
-   - Position: Below journal template
+ - "Patterns emerge. Weaknesses surface." (Cormorant Garamond, 18pt, italic)
+ - Position: Below journal template
 
 9. **Brand Elements:**
-   - Signal Pilot logo (subtle)
-   - CTA: "Full guide in bio"
+ - Signal Pilot logo (subtle)
+ - CTA: "Full guide in bio"
 
 10. **Export:** PNG, highest quality
 
 ---
 
-### CapCut Video Creation Guide — Post 617
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Journal writing footage or spreadsheet scroll
-   - Checkmark animations
-   - Productivity-themed graphics
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): Misconception**
-   - Show diary with X over it
-   - Text: "Your journal ≠ a diary" (Strike through "diary")
-   - Quick dismissal effect
-
-5. **Segment 2 (2-4s): Reality**
-   - Circular arrow animation
-   - Text: "It's a FEEDBACK LOOP" (Blue highlight)
-   - Emphasis effect
-
-6. **Segment 3 (4-8s): What to Track**
-   - Rapid checklist reveal:
-   - "Track: Entry reason" (checkmark appears)
-   - "Track: Exit reason" (checkmark appears)
-   - "Track: Emotions" (checkmark appears)
-   - "Track: Lessons" (checkmark appears)
-   - Satisfying click sound for each
-
-7. **Segment 4 (8-10s): Result**
-   - Text: "Patterns will emerge"
-   - Show data visualization graphic
-   - Upward trend line
-
-8. **Segment 5 (10-12s): CTA**
-   - Text: "Guide in bio 📓"
-   - Journal icon animation
-   - Signal Pilot logo
-
-9. **Audio:**
-   - Productive, focused music
-   - Click sounds for checkmarks
-   - Satisfying completion sound at end
-
-10. **Export:** 1080x1920, 30fps
-
----
 
 # POST 618 — CHRONICLE RECAP
 ## Elite Seven Summary
@@ -39746,29 +37837,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Seven guardians. One system."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-1s | THE ELITE SEVEN |
-| 1-2s | ⚜️ Pentarch — Cycles |
-| 2-3s | 🔮 Volume Oracle — Regimes |
-| 3-4s | 🗺️ Janus Atlas — Levels |
-| 4-5s | ⚖️ Plutus Flow — Flow |
-| 5-6s | 🎵 Harmonic Oscillator — Momentum |
-| 6-7s | 👁️ Augury Grid — Scanner |
-| 7-8s | ⚔️ OmniDeck — Commander |
-| 8-10s | One unified system |
-| 10-12s | Chronicle in bio 📜 |
-
-**Background:** Each guardian icon appearing one by one, or all seven in epic reveal
-
-**Sound:** Epic/cinematic orchestral audio building throughout
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 618
@@ -39779,103 +37847,49 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Epic Background:**
-   - Background: #0a0a0f
-   - Add radial gradient from center (subtle gold glow)
-   - Optional: Add subtle star/constellation pattern
+ - Background: #0a0a0f
+ - Add radial gradient from center (subtle gold glow)
+ - Optional: Add subtle star/constellation pattern
 
 3. **Arrange Seven Icons in Circle:**
-   - Create circular arrangement
-   - Each icon positioned evenly around center
-   - Use emoji or custom icons for each guardian
+ - Create circular arrangement
+ - Each icon positioned evenly around center
+ - Use emoji or custom icons for each guardian
 
 4. **Icon Details:**
-   - ⚜️ Pentarch (top, 12 o'clock)
-   - 🔮 Volume Oracle (2 o'clock)
-   - 🗺️ Janus Atlas (4 o'clock)
-   - ⚖️ Plutus Flow (6 o'clock)
-   - 🎵 Harmonic Oscillator (8 o'clock)
-   - 👁️ Augury Grid (10 o'clock)
-   - ⚔️ OmniDeck (center, larger)
+ - ⚜️ Pentarch (top, 12 o'clock)
+ - 🔮 Volume Oracle (2 o'clock)
+ - 🗺️ Janus Atlas (4 o'clock)
+ - ⚖️ Plutus Flow (6 o'clock)
+ - 🎵 Harmonic Oscillator (8 o'clock)
+ - 👁️ Augury Grid (10 o'clock)
+ - ⚔️ OmniDeck (center, larger)
 
 5. **Add Connection Lines:**
-   - Draw lines connecting each outer icon to center
-   - Line color: #c9a962, 1px, 50% opacity
+ - Draw lines connecting each outer icon to center
+ - Line color: #c9a962, 1px, 50% opacity
 
 6. **Title:**
-   - "📜 THE ELITE SEVEN" (Playfair Display, 36pt, #c9a962)
-   - Position: Top center
+ - "📜 THE ELITE SEVEN" (Playfair Display, 36pt, #c9a962)
+ - Position: Top center
 
 7. **Guardian Names:**
-   - Small labels below each icon
-   - "The Sovereign", "The Prophet", etc.
-   - Font: Cormorant Garamond, 12pt, #ffffff
+ - Small labels below each icon
+ - "The Sovereign", "The Prophet", etc.
+ - Font: Cormorant Garamond, 12pt, #ffffff
 
 8. **Tagline:**
-   - "Seven guardians. One unified system." (Inter, 16pt)
-   - Position: Bottom center
+ - "Seven guardians. One unified system." (Inter, 16pt)
+ - Position: Bottom center
 
 9. **Add Glow Effects:**
-   - Subtle gold glow behind central OmniDeck icon
-   - Individual glows for each guardian (matching their accent color)
+ - Subtle gold glow behind central OmniDeck icon
+ - Individual glows for each guardian (matching their accent color)
 
 10. **Export:** PNG, highest quality
 
 ---
 
-### CapCut Video Creation Guide — Post 618
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Seven guardian icons (individual images)
-   - Epic background (dark with gold particles)
-   - Orchestral music
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-1s): Grand Opening**
-   - Text: "THE ELITE SEVEN" (Epic reveal, gold)
-   - Orchestral hit
-   - Flash effect
-
-5. **Segments 2-8 (1-8s): Guardian Reveals**
-   - Each guardian gets exactly 1 second
-   - Icon appears with glow effect
-   - Name and role appear:
-     - "⚜️ Pentarch — Cycles"
-     - "🔮 Volume Oracle — Regimes"
-     - etc.
-   - Musical beat on each reveal
-
-6. **Segment 9 (8-10s): Unification**
-   - All seven icons come together
-   - Text: "One unified system"
-   - Show them forming a circle or constellation
-   - Peak orchestral moment
-
-7. **Segment 10 (10-12s): CTA**
-   - Text: "Chronicle in bio 📜"
-   - All icons visible, glowing
-   - Signal Pilot logo
-   - Fade out with reverb
-
-8. **Audio:**
-   - Epic orchestral/cinematic music
-   - Build throughout
-   - Peak at unification
-   - Dramatic but not overwhelming
-
-9. **Effects:**
-   - Particle effects (gold sparks)
-   - Glow on each icon
-   - Smooth reveal transitions
-
-10. **Export:** 1080x1920, 30fps
-
----
 
 # POST 619 — EDUCATION HUB
 ## Understanding Trends
@@ -39936,25 +37950,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Stop asking where. Start asking what."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | What is price DOING? |
-| 2-4s | UPTREND: HH + HL |
-| 4-6s | DOWNTREND: LH + LL |
-| 6-8s | RANGE: Mixed structure |
-| 8-10s | Context before direction |
-| 10-12s | Free lesson → bio |
-
-**Background:** Chart cycling through clear examples of each market state
-
-**Sound:** Educational/tech trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 619
@@ -39965,102 +37960,47 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Background:**
-   - Background: #0a0a0f
+ - Background: #0a0a0f
 
 3. **Create Three-Panel Layout:**
-   - Divide canvas into three horizontal sections
-   - Add subtle divider lines between sections
-   - Each section approximately 300px tall
+ - Divide canvas into three horizontal sections
+ - Add subtle divider lines between sections
+ - Each section approximately 300px tall
 
 4. **Panel 1 — Uptrend:**
-   - Draw ascending zigzag line (green: #22c55e)
-   - Mark HH (Higher High) and HL (Higher Low) points
-   - Label: "⬆️ UPTREND" (Bold, green)
-   - Add: "Higher Highs + Higher Lows"
+ - Draw ascending zigzag line (green: #22c55e)
+ - Mark HH (Higher High) and HL (Higher Low) points
+ - Label: "⬆️ UPTREND" (Bold, green)
+ - Add: "Higher Highs + Higher Lows"
 
 5. **Panel 2 — Downtrend:**
-   - Draw descending zigzag line (red: #ef4444)
-   - Mark LH (Lower High) and LL (Lower Low) points
-   - Label: "⬇️ DOWNTREND" (Bold, red)
-   - Add: "Lower Highs + Lower Lows"
+ - Draw descending zigzag line (red: #ef4444)
+ - Mark LH (Lower High) and LL (Lower Low) points
+ - Label: "⬇️ DOWNTREND" (Bold, red)
+ - Add: "Lower Highs + Lower Lows"
 
 6. **Panel 3 — Range:**
-   - Draw sideways zigzag line (blue: #4a90d9)
-   - Mark horizontal boundaries (resistance/support)
-   - Label: "↔️ RANGE" (Bold, blue)
-   - Add: "Mixed Structure"
+ - Draw sideways zigzag line (blue: #4a90d9)
+ - Mark horizontal boundaries (resistance/support)
+ - Label: "↔️ RANGE" (Bold, blue)
+ - Add: "Mixed Structure"
 
 7. **Title:**
-   - "📈 UNDERSTANDING TRENDS" (Playfair Display, 32pt, #ffffff)
-   - Position: Top of canvas
+ - "📈 UNDERSTANDING TRENDS" (Playfair Display, 32pt, #ffffff)
+ - Position: Top of canvas
 
 8. **Add Key Question:**
-   - "What is price DOING?" (Cormorant Garamond, 24pt, italic, #c9a962)
-   - Position: Bottom of canvas
+ - "What is price DOING?" (Cormorant Garamond, 24pt, italic, #c9a962)
+ - Position: Bottom of canvas
 
 9. **Brand Elements:**
-   - Signal Pilot logo
-   - Educational disclaimer
+ - Signal Pilot logo
+ - Educational disclaimer
 
 10. **Export:** PNG, highest quality
 
 ---
 
-### CapCut Video Creation Guide — Post 619
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Three chart examples (uptrend, downtrend, range)
-   - Arrow/line drawing animations
-   - Educational graphics
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): The Question**
-   - Text: "What is price DOING?" (Large, centered)
-   - Question mark animation
-   - Hook the viewer
-
-5. **Segment 2 (2-4s): Uptrend**
-   - Show uptrend chart
-   - Draw HH and HL markers
-   - Text: "UPTREND: HH + HL" (Green)
-   - Ascending arrow animation
-
-6. **Segment 3 (4-6s): Downtrend**
-   - Show downtrend chart
-   - Draw LH and LL markers
-   - Text: "DOWNTREND: LH + LL" (Red)
-   - Descending arrow animation
-
-7. **Segment 4 (6-8s): Range**
-   - Show range chart
-   - Draw horizontal boundaries
-   - Text: "RANGE: Mixed structure" (Blue)
-   - Sideways arrow animation
-
-8. **Segment 5 (8-10s): Takeaway**
-   - Text: "Context before direction"
-   - Show all three examples briefly
-   - Emphasize identification first
-
-9. **Segment 6 (10-12s): CTA**
-   - Text: "Free lesson → bio"
-   - Signal Pilot logo
-   - Fade out
-
-10. **Audio:**
-    - Educational/tech music
-    - Clear, structured feel
-    - Transition sounds between states
-
-11. **Export:** 1080x1920, 30fps
-
----
 
 # POST 620 — DOCS
 ## Multi-Asset FAQ
@@ -40115,28 +38055,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Does it work on crypto AND stocks?"
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | "Does it work on everything?" |
-| 2-3s | ✅ Crypto |
-| 3-4s | ✅ Stocks |
-| 4-5s | ✅ Forex |
-| 5-6s | ✅ Futures |
-| 6-7s | ✅ Indices |
-| 7-9s | If TradingView charts it... |
-| 9-11s | Signal Pilot analyzes it |
-| 11-12s | Link in bio ⬇️ |
-
-**Background:** Quick cuts showing the same indicator on different asset charts
-
-**Sound:** Confirmation/success sound effects with each checkmark
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 620
@@ -40147,94 +38065,44 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Background:**
-   - Background: #0a0a0f
+ - Background: #0a0a0f
 
 3. **Create 2x2 Grid Layout:**
-   - Four sections showing different assets
-   - Each section approximately 500x500px (with padding)
+ - Four sections showing different assets
+ - Each section approximately 500x500px (with padding)
 
 4. **Grid Sections:**
-   - Top-left: BTC chart with Signal Pilot indicator
-   - Top-right: AAPL chart with Signal Pilot indicator
-   - Bottom-left: EUR/USD chart with Signal Pilot indicator
-   - Bottom-right: ES Futures chart with Signal Pilot indicator
+ - Top-left: BTC chart with Signal Pilot indicator
+ - Top-right: AAPL chart with Signal Pilot indicator
+ - Bottom-left: EUR/USD chart with Signal Pilot indicator
+ - Bottom-right: ES Futures chart with Signal Pilot indicator
 
 5. **Add Labels:**
-   - Each section has asset name/symbol
-   - "BTC" (Crypto icon), "AAPL" (Stock icon), etc.
-   - Font: Inter Bold, 18pt, #ffffff
+ - Each section has asset name/symbol
+ - "BTC" (Crypto icon), "AAPL" (Stock icon), etc.
+ - Font: Inter Bold, 18pt, #ffffff
 
 6. **Add Checkmarks:**
-   - Green checkmark (✅) next to each asset label
-   - Shows universal compatibility
+ - Green checkmark (✅) next to each asset label
+ - Shows universal compatibility
 
 7. **Title:**
-   - "❓ FAQ: ANY ASSET?" (Playfair Display, 32pt, #ffffff)
-   - Answer: "Yes. All of them." (Inter, 20pt, #c9a962)
+ - "❓ FAQ: ANY ASSET?" (Playfair Display, 32pt, #ffffff)
+ - Answer: "Yes. All of them." (Inter, 20pt, #c9a962)
 
 8. **Key Message:**
-   - "If TradingView charts it, Signal Pilot analyzes it."
-   - Position: Bottom center
-   - Font: Cormorant Garamond, 18pt, italic
+ - "If TradingView charts it, Signal Pilot analyzes it."
+ - Position: Bottom center
+ - Font: Cormorant Garamond, 18pt, italic
 
 9. **Brand Elements:**
-   - Signal Pilot logo
-   - CTA: "More FAQs in bio"
+ - Signal Pilot logo
+ - CTA: "More FAQs in bio"
 
 10. **Export:** PNG, highest quality
 
 ---
 
-### CapCut Video Creation Guide — Post 620
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Screenshots of Signal Pilot on 5 different asset types
-   - Checkmark animation
-   - Success sound effect
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): The Question**
-   - Text: "Does it work on everything?" (Questioning tone)
-   - Use question mark animation
-
-5. **Segments 2-6 (2-7s): Asset Checkmarks**
-   - Each asset gets 1 second:
-   - Show chart, checkmark appears
-   - "✅ Crypto" (Bitcoin chart)
-   - "✅ Stocks" (Apple chart)
-   - "✅ Forex" (EUR/USD chart)
-   - "✅ Futures" (ES chart)
-   - "✅ Indices" (SPX chart)
-   - Satisfying "ding" sound for each checkmark
-
-6. **Segment 7 (7-9s): Explanation**
-   - Text: "If TradingView charts it..."
-   - Show TradingView logo briefly
-
-7. **Segment 8 (9-11s): Conclusion**
-   - Text: "Signal Pilot analyzes it"
-   - Show all five charts in quick montage
-   - Confident tone
-
-8. **Segment 9 (11-12s): CTA**
-   - Text: "Link in bio ⬇️"
-   - Signal Pilot logo
-   - Fade out
-
-9. **Audio:**
-   - Upbeat, confident music
-   - "Ding" success sound for each checkmark
-   - Builds energy throughout
-
-10. **Export:** 1080x1920, 30fps
-
----
 
 # POST 621 — MARKETING
 ## 621 Progress Update
@@ -40292,27 +38160,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "621 down. 29 to go."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 621 |
-| 2-4s | 29 posts remaining |
-| 4-6s | Education ✓ |
-| 6-7s | Psychology ✓ |
-| 7-8s | All 7 Indicators ✓ |
-| 8-9s | The Chronicle ✓ |
-| 9-11s | Almost there... |
-| 11-12s | Thank you 🙏 |
-
-**Background:** Montage of previous post images or progress bar filling up
-
-**Sound:** Reflective/grateful trending audio with building energy
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 621
@@ -40323,100 +38170,48 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Background:**
-   - Background: #0a0a0f
-   - Add subtle celebratory elements (gold particles, 10% opacity)
+ - Background: #0a0a0f
+ - Add subtle celebratory elements (gold particles, 10% opacity)
 
 3. **Create Progress Bar:**
-   - Draw rounded rectangle (full width: 800px, height: 40px)
-   - Background: #1a1a2e
-   - Fill progress: 621/650 = 95.5% filled with #c9a962 (gold)
-   - Add subtle glow to filled portion
+ - Draw rounded rectangle (full width: 800px, height: 40px)
+ - Background: #1a1a2e
+ - Fill progress: 621/650 = 95.5% filled with #c9a962 (gold)
+ - Add subtle glow to filled portion
 
 4. **Add Numbers:**
-   - "621" (large, Playfair Display, 72pt, #c9a962) — left side
-   - "/" (Inter, 36pt, #666666) — center
-   - "650" (large, Playfair Display, 72pt, #ffffff) — right side
+ - "621" (large, Playfair Display, 72pt, #c9a962) — left side
+ - "/" (Inter, 36pt, #666666) — center
+ - "650" (large, Playfair Display, 72pt, #ffffff) — right side
 
 5. **Add Context:**
-   - "Posts Complete" (Inter, 18pt, #ffffff)
-   - "29 Remaining" (Inter, 16pt, #4a90d9)
+ - "Posts Complete" (Inter, 18pt, #ffffff)
+ - "29 Remaining" (Inter, 16pt, #4a90d9)
 
 6. **List Achievements:**
-   - Create checklist with checkmarks:
-   - ✓ Education Library
-   - ✓ Psychology Deep Dives
-   - ✓ All 7 Indicators
-   - ✓ The Chronicle
-   - Font: Inter, 14pt, left-aligned
+ - Create checklist with checkmarks:
+ - ✓ Education Library
+ - ✓ Psychology Deep Dives
+ - ✓ All 7 Indicators
+ - ✓ The Chronicle
+ - Font: Inter, 14pt, left-aligned
 
 7. **Gratitude Message:**
-   - "Thank you for being here 🙏" (Cormorant Garamond, 24pt, italic, #c9a962)
-   - Position: Lower third
+ - "Thank you for being here 🙏" (Cormorant Garamond, 24pt, italic, #c9a962)
+ - Position: Lower third
 
 8. **Energy:**
-   - Keep celebratory but not "final"
-   - Suggest momentum, not completion
+ - Keep celebratory but not "final"
+ - Suggest momentum, not completion
 
 9. **Brand Elements:**
-   - Signal Pilot logo
-   - CTA: "Start from the beginning — link in bio"
+ - Signal Pilot logo
+ - CTA: "Start from the beginning — link in bio"
 
 10. **Export:** PNG, highest quality
 
 ---
 
-### CapCut Video Creation Guide — Post 621
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Progress bar animation
-   - Previous content thumbnails (montage)
-   - Celebratory but grounded graphics
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): The Number**
-   - Large "621" appearing
-   - Text: "POST 621"
-   - Counter animation effect
-
-5. **Segment 2 (2-4s): Remaining**
-   - Text: "29 posts remaining"
-   - Progress bar filling to 95%
-   - Building anticipation
-
-6. **Segment 3 (4-9s): Achievements**
-   - Quick montage with checkmarks:
-   - "Education ✓" (quick flash of education content)
-   - "Psychology ✓" (flash of psychology content)
-   - "All 7 Indicators ✓" (flash of indicator content)
-   - "The Chronicle ✓" (flash of Chronicle content)
-   - Each gets checkmark animation
-
-7. **Segment 4 (9-11s): Almost There**
-   - Text: "Almost there..."
-   - Progress bar nearly full
-   - Building but not concluding
-
-8. **Segment 5 (11-12s): Gratitude**
-   - Text: "Thank you 🙏"
-   - Signal Pilot logo
-   - Warm, grateful tone
-   - Fade out
-
-9. **Audio:**
-   - Reflective but energized music
-   - Builds throughout
-   - Doesn't peak — suggests more to come
-   - Grateful undertone
-
-10. **Export:** 1080x1920, 30fps
-
----
 
 # BATCH 62 HASHTAG BANK
 
@@ -40440,16 +38235,16 @@ Follow video timing showing plan options.
 
 | Post | Recommended Day | Best Time | Platform Order |
 |------|-----------------|-----------|----------------|
-| 612 | Monday | 11:00 AM | Twitter → Instagram → TikTok |
-| 613 | Monday | 3:00 PM | Twitter → Instagram → TikTok |
-| 614 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok |
-| 615 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram |
-| 616 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok |
-| 617 | Wednesday | 4:00 PM | Twitter → Instagram → TikTok |
-| 618 | Thursday | 7:00 PM | Instagram → TikTok → Twitter |
-| 619 | Friday | 10:00 AM | Twitter → Instagram → TikTok |
-| 620 | Friday | 2:00 PM | Twitter → Instagram → TikTok |
-| 621 | Friday | 6:00 PM | Instagram → Twitter → TikTok |
+| 612 | Monday | 11:00 AM | Twitter → Instagram |
+| 613 | Monday | 3:00 PM | Twitter → Instagram |
+| 614 | Tuesday | 8:00 AM | Instagram → Twitter |
+| 615 | Tuesday | 1:00 PM | Twitter → Instagram |
+| 616 | Wednesday | 11:00 AM | Twitter → Instagram |
+| 617 | Wednesday | 4:00 PM | Twitter → Instagram |
+| 618 | Thursday | 7:00 PM | Instagram → Twitter |
+| 619 | Friday | 10:00 AM | Twitter → Instagram |
+| 620 | Friday | 2:00 PM | Twitter → Instagram |
+| 621 | Friday | 6:00 PM | Instagram → Twitter |
 
 ---
 
@@ -40606,25 +38401,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "You don't need to be right most of the time..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Risk $100 to make $300 |
-| 2-4s | That's 1:3 risk-reward |
-| 4-6s | At 1:3 R:R... |
-| 6-8s | Win 40% = Still profitable |
-| 8-10s | The math changes everything |
-| 10-12s | Free lesson → bio |
-
-**Background:** Chart showing clear 1:3 setup with entry, stop, and target marked
-
-**Sound:** Mind-shift/realization trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 622
@@ -40635,79 +38411,41 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Background:**
-   - Background color: #0a0a0f
+ - Background color: #0a0a0f
 
 3. **Add Chart Element:**
-   - Import or create simple candlestick chart
-   - Position centrally
+ - Import or create simple candlestick chart
+ - Position centrally
 
 4. **Mark R:R Levels:**
-   - Entry line (white, horizontal)
-   - Stop loss line below (red: #ef4444)
-   - Target line above (green: #22c55e, 3x distance from entry)
+ - Entry line (white, horizontal)
+ - Stop loss line below (red: #ef4444)
+ - Target line above (green: #22c55e, 3x distance from entry)
 
 5. **Add Labels:**
-   - "Entry" at entry line
-   - "Stop: $100 risk" at stop line
-   - "Target: $300 reward" at target line
-   - Show "1:3 R:R" prominently
+ - "Entry" at entry line
+ - "Stop: $100 risk" at stop line
+ - "Target: $300 reward" at target line
+ - Show "1:3 R:R" prominently
 
 6. **Add Math Box:**
-   - Create info box showing win rate math
-   - "Win 40% = Profitable" highlighted
+ - Create info box showing win rate math
+ - "Win 40% = Profitable" highlighted
 
 7. **Title:**
-   - "📐 RISK-TO-REWARD" (Playfair Display, 32pt, #ffffff)
+ - "📐 RISK-TO-REWARD" (Playfair Display, 32pt, #ffffff)
 
 8. **Key Message:**
-   - "The math changes everything" (Cormorant Garamond, italic)
+ - "The math changes everything" (Cormorant Garamond, italic)
 
 9. **Brand Elements:**
-   - Signal Pilot logo
-   - Educational disclaimer
+ - Signal Pilot logo
+ - Educational disclaimer
 
 10. **Export:** PNG, highest quality
 
 ---
 
-### CapCut Video Creation Guide — Post 622
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Chart with R:R setup marked
-   - Calculator or math visuals
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s):** Show chart with risk marked
-   - Text: "Risk $100 to make $300"
-
-5. **Segment 2 (2-4s):** Highlight the ratio
-   - Text: "That's 1:3 risk-reward"
-
-6. **Segment 3 (4-6s):** Setup the reveal
-   - Text: "At 1:3 R:R..."
-
-7. **Segment 4 (6-8s):** The key insight
-   - Text: "Win 40% = Still profitable"
-   - Add "aha" sound effect
-
-8. **Segment 5 (8-10s):** Takeaway
-   - Text: "The math changes everything"
-
-9. **Segment 6 (10-12s):** CTA
-   - Text: "Free lesson → bio"
-   - Signal Pilot logo
-
-10. **Audio:** Educational/revelation music
-
-11. **Export:** 1080x1920, 30fps
-
----
 
 # POST 623 — BLOG ARTICLE
 ## Surviving First Drawdown
@@ -40765,25 +38503,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Your first drawdown will break you... if you let it."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Your first real drawdown |
-| 2-4s | It won't test your strategy |
-| 4-6s | It will test YOU |
-| 6-8s | Doubt. Frustration. Urge to quit. |
-| 8-10s | Every trader faces this |
-| 10-12s | Trust the process 🙏 |
-
-**Background:** Equity curve showing drawdown, or trader looking stressed then refocusing
-
-**Sound:** Emotional/motivational trending audio with buildup
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 623
@@ -40794,30 +38513,30 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Background:**
-   - Background: #0a0a0f
-   - Add subtle gradient suggesting depth/valley
+ - Background: #0a0a0f
+ - Add subtle gradient suggesting depth/valley
 
 3. **Create Equity Curve Visual:**
-   - Draw line going up, then dipping (drawdown), then recovering
-   - Use colors: Green for up, red for drawdown, gold for recovery
+ - Draw line going up, then dipping (drawdown), then recovering
+ - Use colors: Green for up, red for drawdown, gold for recovery
 
 4. **Highlight Drawdown Phase:**
-   - Circle or box around the dip
-   - Label: "You are here" with arrow
+ - Circle or box around the dip
+ - Label: "You are here" with arrow
 
 5. **Add Emotional Labels:**
-   - Around drawdown area: "Doubt", "Fear", "Frustration"
-   - After recovery: "Growth", "Stronger"
+ - Around drawdown area: "Doubt", "Fear", "Frustration"
+ - After recovery: "Growth", "Stronger"
 
 6. **Title:**
-   - "📉 SURVIVING YOUR FIRST DRAWDOWN" (Playfair Display, 28pt)
+ - "📉 SURVIVING YOUR FIRST DRAWDOWN" (Playfair Display, 28pt)
 
 7. **Key Message:**
-   - "Trust the process over any single outcome" (Cormorant Garamond)
+ - "Trust the process over any single outcome" (Cormorant Garamond)
 
 8. **Brand Elements:**
-   - Signal Pilot logo
-   - CTA and disclaimer
+ - Signal Pilot logo
+ - CTA and disclaimer
 
 9. **Export:** PNG, highest quality
 
@@ -40879,25 +38598,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "The goal isn't to be right..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | "The goal isn't to be right" |
-| 2-4s | "The goal is to make money" |
-| 4-6s | EGO wants to be right |
-| 6-8s | DISCIPLINE wants to profit |
-| 8-10s | They're at war |
-| 10-12s | Choose discipline 🎯 |
-
-**Background:** Quote card with slow zoom, or split screen showing ego vs discipline visually
-
-**Sound:** Deep/thoughtful trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 624
@@ -40908,25 +38608,25 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Premium Background:**
-   - Background: #0a0a0f
-   - Add subtle radial gradient
+ - Background: #0a0a0f
+ - Add subtle radial gradient
 
 3. **Add Quote:**
-   - "The goal isn't to be right." (Line 1)
-   - "The goal is to make money." (Line 2, #c9a962)
-   - Font: Cormorant Garamond, 32pt
+ - "The goal isn't to be right." (Line 1)
+ - "The goal is to make money." (Line 2, #c9a962)
+ - Font: Cormorant Garamond, 32pt
 
 4. **Create Visual Contrast:**
-   - Left side: "EGO" (red tint)
-   - Right side: "DISCIPLINE" (green tint)
-   - Subtle divider line
+ - Left side: "EGO" (red tint)
+ - Right side: "DISCIPLINE" (green tint)
+ - Subtle divider line
 
 5. **Add Decorative Elements:**
-   - Gold quotation marks
-   - Thin gold accent lines
+ - Gold quotation marks
+ - Thin gold accent lines
 
 6. **Brand Elements:**
-   - Signal Pilot logo watermark
+ - Signal Pilot logo watermark
 
 7. **Export:** PNG, highest quality
 
@@ -40985,25 +38685,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Daily levels on your 1-minute chart..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | JANUS ATLAS 🗺️ |
-| 2-4s | Daily levels — any timeframe |
-| 4-6s | Weekly levels — any timeframe |
-| 6-8s | Monthly levels — any timeframe |
-| 8-10s | Higher TF context, always |
-| 10-12s | Link in bio ⬇️ |
-
-**Background:** Screen recording showing Janus Atlas levels on different timeframe charts
-
-**Sound:** Exploratory/discovery trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 625
@@ -41014,27 +38695,27 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Background:**
-   - Background: #0a0a0f
-   - Add TradingView chart with Janus Atlas
+ - Background: #0a0a0f
+ - Add TradingView chart with Janus Atlas
 
 3. **Highlight Level Types:**
-   - Daily levels: Blue lines (#4a90d9)
-   - Weekly levels: Gold lines (#c9a962)
-   - Monthly levels: White lines
+ - Daily levels: Blue lines (#4a90d9)
+ - Weekly levels: Gold lines (#c9a962)
+ - Monthly levels: White lines
 
 4. **Add Labels:**
-   - "Daily" "Weekly" "Monthly" next to respective levels
+ - "Daily" "Weekly" "Monthly" next to respective levels
 
 5. **Title:**
-   - "🗺️ JANUS ATLAS" (Playfair Display, 36pt)
-   - "Multi-Timeframe Levels" subtitle
+ - "🗺️ JANUS ATLAS" (Playfair Display, 36pt)
+ - "Multi-Timeframe Levels" subtitle
 
 6. **Guardian Reference:**
-   - "The Cartographer" (Cormorant Garamond, italic)
+ - "The Cartographer" (Cormorant Garamond, italic)
 
 7. **Brand Elements:**
-   - Signal Pilot logo
-   - CTA
+ - Signal Pilot logo
+ - CTA
 
 8. **Export:** PNG, highest quality
 
@@ -41095,25 +38776,6 @@ Follow video timing showing plan options.
 **Hashtags:** #Wicks #CandlestickPatterns #PriceAction #TechnicalAnalysis #TradingEducation #SignalPilot #ChartReading #CryptoTrading #StockTrading #CandleAnalysis #TradingTips #RejectionWicks #MarketStructure #LearnToTrade #WickAnalysis
 
 ---
-
-#### TikTok
-**Hook:** "Wicks tell you what bodies can't..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Wicks tell hidden stories |
-| 2-4s | Long lower wick = buyers stepped in |
-| 4-6s | Long upper wick = sellers stepped in |
-| 6-8s | Wick = rejection |
-| 8-10s | Body = acceptance |
-| 10-12s | Learn more → bio |
-
-**Background:** Chart zooming into candles with significant wicks
-
-**Sound:** Revealing/discovery trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -41176,26 +38838,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "The best trade you'll ever make..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | The best trade? |
-| 2-4s | Sometimes it's NO trade |
-| 4-6s | No setup = no trade |
-| 6-7s | Uncertain = no trade |
-| 7-8s | Emotional = no trade |
-| 8-10s | Doing nothing = discipline |
-| 10-12s | Protect your capital 🛡️ |
-
-**Background:** Calm, zen imagery or trader sitting back from screen peacefully
-
-**Sound:** Peaceful/mindful trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # POST 628 — CHRONICLE WISDOM
@@ -41255,25 +38897,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Each guardian teaches a lesson..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE CHRONICLE WISDOM |
-| 2-4s | ⚜️ Pentarch: Patience through cycles |
-| 4-6s | 🔮 Oracle: Truth through volume |
-| 6-8s | 🗺️ Atlas: Context through levels |
-| 8-10s | Principles, not just tools |
-| 10-12s | Read more → bio 📜 |
-
-**Background:** Guardian icons appearing one by one with mystical transitions
-
-**Sound:** Epic/mystical trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # POST 629 — EDUCATION HUB
@@ -41332,25 +38955,6 @@ Follow video timing showing plan options.
 **Hashtags:** #AdvancedConfluence #TradingStrategy #TechnicalAnalysis #ConfluenceTrading #SignalPilot #QualityOverQuantity #MultiFactorAnalysis #TradingEducation #ProfessionalTrading #IndicatorConfluence #SmartTrading #AdvancedTrading #EdgeBuilding #TradingEdge #SystematicTrading
 
 ---
-
-#### TikTok
-**Hook:** "Multiple signals isn't confluence..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Multiple signals ≠ confluence |
-| 2-4s | Quality > Quantity |
-| 4-6s | Independent factors |
-| 6-8s | Different data sources |
-| 8-10s | Orchestration, not accumulation |
-| 10-12s | Advanced lesson → bio |
-
-**Background:** Chart building up layers of different indicator types
-
-**Sound:** Strategic/intelligent trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -41414,26 +39018,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "5 minutes to your first setup..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | GETTING STARTED |
-| 2-3s | Step 1: Subscribe |
-| 3-4s | Step 2: Connect TradingView |
-| 4-6s | Step 3: Add indicators |
-| 6-8s | Step 4: Start with defaults |
-| 8-10s | That's it. You're ready. |
-| 10-12s | Link in bio 🚀 |
-
-**Background:** Screen recording walking through actual setup process
-
-**Sound:** Upbeat/productive trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # POST 631 — MARKETING
@@ -41494,25 +39078,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "19 posts to go..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 631 |
-| 2-4s | 19 remaining |
-| 4-6s | Education ✓ Psychology ✓ |
-| 6-8s | Tools ✓ Chronicle ✓ |
-| 8-10s | Finish line in sight 🏁 |
-| 10-12s | Let's go 💪 |
-
-**Background:** Progress bar filling, montage of previous content, finish line imagery
-
-**Sound:** Motivational/final push trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # BATCH 63 HASHTAG BANK
@@ -41537,16 +39102,16 @@ Follow video timing showing plan options.
 
 | Post | Day | Time | Priority |
 |------|-----|------|----------|
-| 622 | Monday | 11:00 AM | Twitter → Instagram → TikTok |
-| 623 | Monday | 3:00 PM | Twitter → Instagram → TikTok |
-| 624 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok |
-| 625 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram |
-| 626 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok |
-| 627 | Wednesday | 4:00 PM | Twitter → Instagram → TikTok |
-| 628 | Thursday | 7:00 PM | Instagram → TikTok → Twitter |
-| 629 | Friday | 10:00 AM | Twitter → Instagram → TikTok |
-| 630 | Friday | 2:00 PM | Twitter → Instagram → TikTok |
-| 631 | Friday | 6:00 PM | Instagram → Twitter → TikTok |
+| 622 | Monday | 11:00 AM | Twitter → Instagram |
+| 623 | Monday | 3:00 PM | Twitter → Instagram |
+| 624 | Tuesday | 8:00 AM | Instagram → Twitter |
+| 625 | Tuesday | 1:00 PM | Twitter → Instagram |
+| 626 | Wednesday | 11:00 AM | Twitter → Instagram |
+| 627 | Wednesday | 4:00 PM | Twitter → Instagram |
+| 628 | Thursday | 7:00 PM | Instagram → Twitter |
+| 629 | Friday | 10:00 AM | Twitter → Instagram |
+| 630 | Friday | 2:00 PM | Twitter → Instagram |
+| 631 | Friday | 6:00 PM | Instagram → Twitter |
 
 ---
 
@@ -41673,23 +39238,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "100 assets on your watchlist? That's the problem..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 100 assets = scattered |
-| 2-4s | 5-10 assets = focused |
-| 4-6s | Familiarity builds intuition |
-| 6-8s | Know them deeply |
-| 8-10s | Go deep, not wide |
-| 10-12s | Free lesson → bio |
-
-**Sound:** Clarity/focus trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # POST 633 — BLOG ARTICLE
@@ -41745,25 +39293,6 @@ Follow video timing showing plan options.
 **Hashtags:** #WalkAway #TradingPsychology #MentalCapital #TradingDiscipline #EmotionalControl #SignalPilot #RestDay #TradingMindset #ProtectYourself #TradingTips #SelfCare #TraderLife #KnowYourLimits #TradingWisdom #StepBack
 
 ---
-
-#### TikTok
-**Hook:** "The hardest trade you'll ever make..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | The hardest trade? |
-| 2-4s | Closing the laptop |
-| 4-5s | After big win? Walk away. |
-| 5-6s | After big loss? Walk away. |
-| 6-7s | When exhausted? Walk away. |
-| 7-9s | The market will be there tomorrow |
-| 9-11s | Your mind needs rest |
-| 11-12s | Link in bio 🚪 |
-
-**Sound:** Peaceful/reflective trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -41824,23 +39353,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Six words every trader knows..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | "Plan the trade" |
-| 2-4s | "Trade the plan" |
-| 4-6s | Planning is EASY |
-| 6-8s | Executing is HARD |
-| 8-10s | Discipline bridges the gap |
-| 10-12s | Trust your plan 📝 |
-
-**Sound:** Thoughtful/contemplative trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # POST 635 — PRODUCT DEMO
@@ -41894,23 +39406,6 @@ Follow video timing showing plan options.
 **Hashtags:** #PlutusFlow #SignalPilot #FlowAnalysis #OBV #VolumeFlow #TradingIndicator #TradingView #Accumulation #Distribution #TechnicalAnalysis #CryptoTrading #StockTrading #HiddenPressure #MarketFlow #TheScales
 
 ---
-
-#### TikTok
-**Hook:** "What's happening beneath the surface..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | PLUTUS FLOW ⚖️ |
-| 2-4s | Tracks the balance |
-| 4-6s | Accumulation = buyers building |
-| 6-8s | Distribution = sellers releasing |
-| 8-10s | See pressure before price moves |
-| 10-12s | Link in bio ⬇️ |
-
-**Sound:** Mysterious/revealing trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -41969,23 +39464,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Ever wonder why price sweeps the highs then dumps?"
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | LIQUIDITY EXPLAINED 💧 |
-| 2-4s | Above highs = stops + breakout orders |
-| 4-6s | Below lows = stops + breakdown orders |
-| 6-8s | Price hunts liquidity |
-| 8-10s | Then moves |
-| 10-12s | Learn more → bio |
-
-**Sound:** Revealing/educational trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # POST 637 — BLOG ARTICLE
@@ -42042,23 +39520,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "1% better every week for a year..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 1% better each week |
-| 2-4s | After 1 month: 4% better |
-| 4-6s | After 6 months: 29% better |
-| 6-8s | After 1 year: 67% BETTER |
-| 8-10s | Small improvements compound |
-| 10-12s | Start today → bio |
-
-**Sound:** Building/motivational trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # POST 638 — CHRONICLE LESSON
@@ -42113,23 +39574,6 @@ Follow video timing showing plan options.
 **Hashtags:** #Chronicle #SignalPilot #EliteSeven #HarmonicOscillator #AuguryGrid #OmniDeck #TheArbiter #TheWatchman #TheCommander #TradingIndicators #TradingView #TradingLore #CompleteSystem #TheGuardians #UnifiedAnalysis
 
 ---
-
-#### TikTok
-**Hook:** "The final three guardians..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE FINAL THREE |
-| 2-4s | 🎵 Harmonic Oscillator — Rhythm |
-| 4-6s | 👁️ Augury Grid — Scanner |
-| 6-8s | ⚔️ OmniDeck — Commander |
-| 8-10s | The Elite Seven complete |
-| 10-12s | Chronicle in bio 📜 |
-
-**Sound:** Epic/triumphant orchestral trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -42192,26 +39636,6 @@ Follow video timing showing plan options.
 **Hashtags:** #TradingSystem #SystemBuilding #TradingProcess #ProfessionalTrading #SignalPilot #TradingEducation #EntryExit #PositionSizing #RiskManagement #TradingStrategy #SystematicTrading #TradingPlan #ProcessDriven #AdvancedTrading #EdgeBuilding
 
 ---
-
-#### TikTok
-**Hook:** "Your system is missing something..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 5 SYSTEM COMPONENTS |
-| 2-3s | 1. Market selection |
-| 3-4s | 2. Entry criteria |
-| 4-5s | 3. Exit criteria |
-| 5-6s | 4. Position sizing |
-| 6-7s | 5. Review process |
-| 7-9s | Miss one = hole in system |
-| 9-11s | Build complete systems |
-| 11-12s | Pro lesson → bio |
-
-**Sound:** Strategic/systematic trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -42276,25 +39700,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Indicator not loading? Try this..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | NOT LOADING? |
-| 2-3s | 1. Refresh TradingView |
-| 3-4s | 2. Check subscription |
-| 4-5s | 3. Clear cache |
-| 5-6s | 4. Try another browser |
-| 6-8s | Still stuck? |
-| 8-10s | Support has your back |
-| 10-12s | Link in bio 🔧 |
-
-**Sound:** Helpful/solution trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # POST 641 — MARKETING
@@ -42354,23 +39759,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Single digits. 9 to go."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 641 |
-| 2-4s | 9 POSTS REMAINING |
-| 4-6s | Single digits. |
-| 6-8s | The final push |
-| 8-10s | 650 is so close |
-| 10-12s | Let's finish this 🎯 |
-
-**Sound:** Intense/final stretch motivational trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # BATCH 64 HASHTAG BANK
@@ -42395,16 +39783,16 @@ Follow video timing showing plan options.
 
 | Post | Day | Time | Priority |
 |------|-----|------|----------|
-| 632 | Monday | 11:00 AM | Twitter → Instagram → TikTok |
-| 633 | Monday | 3:00 PM | Twitter → Instagram → TikTok |
-| 634 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok |
-| 635 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram |
-| 636 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok |
-| 637 | Wednesday | 4:00 PM | Twitter → Instagram → TikTok |
-| 638 | Thursday | 7:00 PM | Instagram → TikTok → Twitter |
-| 639 | Friday | 10:00 AM | Twitter → Instagram → TikTok |
-| 640 | Friday | 2:00 PM | Twitter → Instagram → TikTok |
-| 641 | Friday | 6:00 PM | Instagram → Twitter → TikTok |
+| 632 | Monday | 11:00 AM | Twitter → Instagram |
+| 633 | Monday | 3:00 PM | Twitter → Instagram |
+| 634 | Tuesday | 8:00 AM | Instagram → Twitter |
+| 635 | Tuesday | 1:00 PM | Twitter → Instagram |
+| 636 | Wednesday | 11:00 AM | Twitter → Instagram |
+| 637 | Wednesday | 4:00 PM | Twitter → Instagram |
+| 638 | Thursday | 7:00 PM | Instagram → Twitter |
+| 639 | Friday | 10:00 AM | Twitter → Instagram |
+| 640 | Friday | 2:00 PM | Twitter → Instagram |
+| 641 | Friday | 6:00 PM | Instagram → Twitter |
 
 ---
 
@@ -42544,23 +39932,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Every journey starts here..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | LESSON 01 |
-| 2-4s | Welcome to Signal Pilot |
-| 4-6s | 82 free lessons await |
-| 6-8s | 7 indicators ready |
-| 8-10s | Your journey starts now |
-| 10-12s | Begin free → bio 🎓 |
-
-**Sound:** Inspirational/new beginning trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 642
@@ -42571,29 +39942,29 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Welcoming Background:**
-   - Background: #0a0a0f
-   - Add subtle gradient suggesting dawn/beginning
+ - Background: #0a0a0f
+ - Add subtle gradient suggesting dawn/beginning
 
 3. **Create Welcome Layout:**
-   - "LESSON 01" prominently at top
-   - "Welcome to Signal Pilot" as main heading
+ - "LESSON 01" prominently at top
+ - "Welcome to Signal Pilot" as main heading
 
 4. **List What Awaits:**
-   - 📚 82 Lessons
-   - 🛠️ 7 Indicators
-   - 📜 The Chronicle
-   - Clean icon layout
+ - 📚 82 Lessons
+ - 🛠️ 7 Indicators
+ - 📜 The Chronicle
+ - Clean icon layout
 
 5. **Add Inviting Energy:**
-   - Door opening visual or path beginning
-   - Warm gold accents
+ - Door opening visual or path beginning
+ - Warm gold accents
 
 6. **Key Message:**
-   - "Your journey starts here" (Cormorant Garamond)
+ - "Your journey starts here" (Cormorant Garamond)
 
 7. **Brand Elements:**
-   - Signal Pilot logo
-   - Welcoming CTA
+ - Signal Pilot logo
+ - Welcoming CTA
 
 8. **Export:** PNG, highest quality
 
@@ -42663,25 +40034,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Why do 90% of traders fail?"
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Why most traders fail |
-| 2-3s | ❌ No defined edge |
-| 3-4s | ❌ No risk management |
-| 4-5s | ❌ No emotional control |
-| 5-6s | ❌ No patience |
-| 6-8s | The solution? |
-| 8-10s | Education + Discipline + Time |
-| 10-12s | Don't be most → bio |
-
-**Sound:** Serious/truth-telling trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # POST 644 — QUOTE CARD
@@ -42737,23 +40089,6 @@ Follow video timing showing plan options.
 **Hashtags:** #WarrenBuffett #Patience #TradingWisdom #TimelessQuote #SignalPilot #TradingMindset #WaitForIt #TradingQuotes #InvestingWisdom #MarketWisdom #PatiencePays #CompetitiveAdvantage #LongTermThinking #TradingEducation #WisdomWednesday
 
 ---
-
-#### TikTok
-**Hook:** "Warren Buffett said it best..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-3s | "The market is a device..." |
-| 3-6s | "...for transferring money..." |
-| 6-8s | "...from the impatient to the patient" |
-| 8-9s | — Warren Buffett |
-| 9-11s | Patience is an edge |
-| 11-12s | 🎯 |
-
-**Sound:** Wise/contemplative trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -42814,26 +40149,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "All seven indicators. One chart."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | OMNIDECK ⚔️ |
-| 2-3s | Pentarch ✓ |
-| 3-4s | Volume Oracle ✓ |
-| 4-5s | Janus Atlas ✓ |
-| 5-6s | Plutus Flow ✓ |
-| 6-7s | Harmonic ✓ Augury ✓ |
-| 7-9s | All unified. One overlay. |
-| 9-11s | The complete picture |
-| 11-12s | Link in bio ⬇️ |
-
-**Sound:** Epic/powerful unification trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # POST 646 — EDUCATION HUB
@@ -42890,24 +40205,6 @@ Follow video timing showing plan options.
 **Hashtags:** #Mastery #Lesson82 #FinalLesson #TradingJourney #SignalPilot #NeverStopLearning #ContinuousImprovement #TradingEducation #PathToMastery #ExpertMindset #LifelongLearner #TradingWisdom #ProfessionalTrader #GrowthMindset #TheJourneyContinues
 
 ---
-
-#### TikTok
-**Hook:** "The final lesson teaches this..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | LESSON 82 |
-| 2-4s | Mastery and Beyond |
-| 4-6s | Mastery isn't a destination |
-| 6-8s | It's a practice |
-| 8-10s | The curriculum ends |
-| 10-11s | Your path begins |
-| 11-12s | Never stop 🎓 |
-
-**Sound:** Inspirational/completion trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -42969,23 +40266,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "The Chronicle's final message..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE CHRONICLE FINALE |
-| 2-4s | "The Seven stood together..." |
-| 4-6s | "Not as tools, but as teachers" |
-| 6-8s | "The Signal was never outside" |
-| 8-10s | "It was within" |
-| 10-12s | 📜 The End |
-
-**Sound:** Epic orchestral conclusion trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 647
@@ -42996,26 +40276,26 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Epic Finale Background:**
-   - Background: #0a0a0f
-   - Add central golden radial glow
-   - Particle/star overlay for mystical effect
+ - Background: #0a0a0f
+ - Add central golden radial glow
+ - Particle/star overlay for mystical effect
 
 3. **Arrange Seven Icons in Circle:**
-   - All seven guardian icons evenly spaced
-   - Central glow point
-   - Lines connecting to center
+ - All seven guardian icons evenly spaced
+ - Central glow point
+ - Lines connecting to center
 
 4. **Add Final Quote:**
-   - "The Signal was never outside." (Cormorant Garamond)
-   - "It was within." (Gold, larger)
+ - "The Signal was never outside." (Cormorant Garamond)
+ - "It was within." (Gold, larger)
 
 5. **Add "End of Chronicle":**
-   - Elegant typography
-   - Scroll/parchment visual element
+ - Elegant typography
+ - Scroll/parchment visual element
 
 6. **Create Sense of Completion:**
-   - All icons glowing
-   - Triumphant but meaningful energy
+ - All icons glowing
+ - Triumphant but meaningful energy
 
 7. **Export:** PNG, highest quality
 
@@ -43081,26 +40361,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Every question answered..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE DOCUMENTATION 📚 |
-| 2-3s | Getting Started ✓ |
-| 3-4s | Indicator Settings ✓ |
-| 4-5s | Best Practices ✓ |
-| 5-6s | Troubleshooting ✓ |
-| 6-7s | FAQ ✓ |
-| 7-9s | Nothing hidden |
-| 9-11s | Everything documented |
-| 11-12s | Link in bio ⬇️ |
-
-**Sound:** Organized/helpful trending audio
-
-**Duration:** 12 seconds
-
 ---
 
 # POST 649 — MARKETING
@@ -43160,24 +40420,6 @@ Follow video timing showing plan options.
 **Hashtags:** #SignalPilot #Post649 #OneToGo #FinishLine #Tomorrow #TradingEducation #ContentJourney #AlmostThere #FinalPost #TradingCommunity #Milestone #Anticipation #SeeYouThere #CompleteLibrary #LastStep
 
 ---
-
-#### TikTok
-**Hook:** "One more..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 649 |
-| 2-4s | ONE remains |
-| 4-6s | Education ✓ Psychology ✓ |
-| 6-7s | Indicators ✓ Chronicle ✓ |
-| 7-9s | Tomorrow: 650 |
-| 9-11s | See you at the finish line |
-| 11-12s | 🏁 |
-
-**Sound:** Anticipation/building trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -43255,25 +40497,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "650. We made it."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 650 |
-| 2-3s | 🏆 |
-| 3-5s | 82 lessons. 7 indicators. |
-| 5-7s | 1 Chronicle. Complete docs. |
-| 7-9s | Built for your journey |
-| 9-10s | Free. Forever. |
-| 10-11s | Thank you 🙏 |
-| 11-12s | ⚜️🔮🗺️⚖️🎵👁️⚔️ |
-
-**Sound:** Triumphant/celebration trending audio with emotional depth
-
-**Duration:** 12 seconds
-
 ---
 
 ### Canva Visual Creation Guide — Post 650 (FINALE)
@@ -43284,116 +40507,47 @@ Follow video timing showing plan options.
 1. **Open Canva** → Create Design → Instagram Post (1080x1080)
 
 2. **Set Epic Celebration Background:**
-   - Background: #0a0a0f
-   - Add radial golden burst from center
-   - Subtle confetti or particle overlay
-   - Premium celebration energy
+ - Background: #0a0a0f
+ - Add radial golden burst from center
+ - Subtle confetti or particle overlay
+ - Premium celebration energy
 
 3. **Create "650" Centerpiece:**
-   - "650" in massive Playfair Display (120pt+)
-   - Color: #c9a962 (gold)
-   - Add outer glow effect
-   - Trophy emoji above or crown element
+ - "650" in massive Playfair Display (120pt+)
+ - Color: #c9a962 (gold)
+ - Add outer glow effect
+ - Trophy emoji above or crown element
 
 4. **Arrange Seven Guardian Icons:**
-   - Circle formation around the "650"
-   - All seven icons visible and glowing
-   - Connected by subtle golden lines
+ - Circle formation around the "650"
+ - All seven icons visible and glowing
+ - Connected by subtle golden lines
 
 5. **Add Achievement List:**
-   - 🎓 82 Lessons
-   - 🛠️ 7 Indicators
-   - 📜 1 Chronicle
-   - 📚 Full Docs
-   - Elegant, small typography
+ - 🎓 82 Lessons
+ - 🛠️ 7 Indicators
+ - 📜 1 Chronicle
+ - 📚 Full Docs
+ - Elegant, small typography
 
 6. **Add Gratitude Message:**
-   - "Thank you for being part of this journey"
-   - "Free. Forever. Yours."
-   - Heartfelt tone
+ - "Thank you for being part of this journey"
+ - "Free. Forever. Yours."
+ - Heartfelt tone
 
 7. **Guardian Icons Row:**
-   - ⚜️🔮🗺️⚖️🎵👁️⚔️
-   - Bottom of image
-   - Unified appearance
+ - ⚜️🔮🗺️⚖️🎵👁️⚔️
+ - Bottom of image
+ - Unified appearance
 
 8. **Brand Elements:**
-   - Signal Pilot logo prominent
-   - Celebratory but meaningful energy
+ - Signal Pilot logo prominent
+ - Celebratory but meaningful energy
 
 9. **Export:** PNG, highest quality
 
 ---
 
-### CapCut Video Creation Guide — Post 650 (FINALE)
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - "650" graphic with celebration effects
-   - All seven guardian icons
-   - Confetti/celebration overlays
-   - Previous content montage clips
-
-3. **Timeline Setup (Epic Finale):**
-
-4. **Segment 1 (0-2s): The Number**
-   - "650" appears with dramatic reveal
-   - Golden flash effect
-   - Epic sound hit
-
-5. **Segment 2 (2-3s): Trophy Moment**
-   - 🏆 emoji animation
-   - Celebration sound
-   - Confetti effect
-
-6. **Segment 3 (3-5s): Achievements**
-   - "82 lessons. 7 indicators."
-   - Quick montage of content
-   - Building energy
-
-7. **Segment 4 (5-7s): Complete**
-   - "1 Chronicle. Complete docs."
-   - All seven icons appearing
-   - Unified glow
-
-8. **Segment 5 (7-9s): For You**
-   - "Built for your journey"
-   - Heartfelt transition
-   - Warm energy
-
-9. **Segment 6 (9-10s): Promise**
-   - "Free. Forever."
-   - Commitment tone
-
-10. **Segment 7 (10-11s): Gratitude**
-    - "Thank you 🙏"
-    - Sincere moment
-    - Music softens
-
-11. **Segment 8 (11-12s): The Seven**
-    - All guardian icons: ⚜️🔮🗺️⚖️🎵👁️⚔️
-    - Final triumphant display
-    - Fade to Signal Pilot logo
-
-12. **Audio:**
-    - Epic orchestral with emotional depth
-    - Builds to climax at "650"
-    - Softens for gratitude
-    - Triumphant but meaningful conclusion
-
-13. **Effects:**
-    - Confetti at key moments
-    - Golden glows
-    - Smooth, premium transitions
-    - Celebratory but not overdone
-
-14. **Export:** 1080x1920, 30fps, highest quality
-
----
 
 # BATCH 65 HASHTAG BANK (FINALE)
 
@@ -43420,14 +40574,14 @@ Follow video timing showing plan options.
 
 | Post | Day | Time | Priority | Notes |
 |------|-----|------|----------|-------|
-| 642 | Monday | 11:00 AM | Twitter → Instagram → TikTok | New beginnings |
-| 643 | Monday | 3:00 PM | Twitter → Instagram → TikTok | Real talk |
-| 644 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok | Wisdom |
-| 645 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram | Product |
-| 646 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok | Mastery |
-| 647 | Wednesday | 7:00 PM | Instagram → TikTok → Twitter | Chronicle Finale |
-| 648 | Thursday | 2:00 PM | Twitter → Instagram → TikTok | Resources |
-| 649 | Thursday | 8:00 PM | Instagram → Twitter → TikTok | Anticipation |
+| 642 | Monday | 11:00 AM | Twitter → Instagram | New beginnings |
+| 643 | Monday | 3:00 PM | Twitter → Instagram | Real talk |
+| 644 | Tuesday | 8:00 AM | Instagram → Twitter | Wisdom |
+| 645 | Tuesday | 1:00 PM | Twitter → Instagram | Product |
+| 646 | Wednesday | 11:00 AM | Twitter → Instagram | Mastery |
+| 647 | Wednesday | 7:00 PM | Instagram → Twitter | Chronicle Finale |
+| 648 | Thursday | 2:00 PM | Twitter → Instagram | Resources |
+| 649 | Thursday | 8:00 PM | Instagram → Twitter | Anticipation |
 | 650 | Friday | 12:00 PM | ALL PLATFORMS SIMULTANEOUSLY | 🏆 FINALE |
 
 **Note:** Post 650 should go live on ALL platforms at the same time for maximum impact.
@@ -43496,11 +40650,10 @@ Follow video timing showing plan options.
 ## Platforms Covered
 - 𝕏 Twitter — Copy, image guidance, hashtags
 - 📸 Instagram — Extended caption, 1080x1080 specs, hashtags
-- 🎬 TikTok — Hook, on-screen text timing, background, sound, creation guides
+- 🎬 — Hook, on-screen text timing, background, sound, creation guides
 
 ## A+ Transformation Elements
 - ✅ Full Canva step-by-step visual creation guides
-- ✅ Full CapCut step-by-step video creation guides
 - ✅ Brand specifications maintained throughout
 - ✅ Elite Seven Guardian theming consistent
 - ✅ Hashtag banks organized by pillar

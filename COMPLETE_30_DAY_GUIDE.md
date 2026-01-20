@@ -53,34 +53,6 @@ The Sovereign awaits.
 
 ---
 
-### TIKTOK
-
-**Hook:** "Something's coming..."
-
-```
-December 30th.
-
-Seven indicators.
-One system.
-Years in development.
-
-The Elite Seven are almost here.
-
-Pentarch. Volume Oracle. Janus Atlas.
-Plutus Flow. OmniDeck. Augury Grid.
-Harmonic Oscillator.
-
-Non-repainting. Education included.
-82 free lessons.
-
-The wait is almost over.
-
-Link in bio — countdown.
-
-#tradingview #indicators #technicalanalysis #cryptotrading #forex #tradingstrategy #signalpilot
-```
-
----
 
 # DAY 2 — DEC 26
 
@@ -209,56 +181,6 @@ signalpilot.io/chronicle/the-scales
 
 ---
 
-### TIKTOK VIDEO 1
-
-**IMAGE:** Janus Atlas
-**Hook:** "Three of Seven..."
-
-```
-JANUS ATLAS — The Cartographer.
-
-"I map where the wars will be fought."
-
-While you're drawing hundreds of support lines hoping one holds...
-
-The Cartographer reveals only the lines that matter.
-
-60+ volume levels. Auto-plotted.
-
-Stop drawing. Start navigating.
-
-Link in bio.
-
-#tradingview #supportresistance #technicalanalysis #priceaction #keylevels #tradingstrategy #forex #crypto
-```
-
----
-
-### TIKTOK VIDEO 2
-
-**IMAGE:** Plutus Flow
-**Hook:** "Price lies. This doesn't."
-
-```
-PLUTUS FLOW — The Scales.
-
-Price can make new highs...
-But if pressure doesn't confirm?
-
-"This throne is built on sand."
-
-Green = buyers winning
-Red = sellers winning
-White dots = reversal incoming
-
-The Scales don't lie.
-
-Link in bio.
-
-#tradingview #divergence #volumeanalysis #technicalanalysis #priceaction #tradingstrategy #crypto
-```
-
----
 
 # DAY 3 — DEC 27
 
@@ -361,35 +283,6 @@ signalpilot.io/chronicle/the-commander
 
 ---
 
-### TIKTOK
-
-**IMAGE:** OmniDeck
-**Hook:** "Your chart looks like this? 😵"
-
-```
-15 indicators. All fighting each other.
-Red here. Green there. Signals contradicting.
-
-You don't have a system. You have chaos.
-
-OMNIDECK — The Commander.
-
-Ten systems. Unified into ONE.
-
-TD Sequential. Squeeze Cloud. SuperTrend.
-Supply zones. Liquidity sweeps. And more.
-
-All working together. Not against each other.
-
-Complexity without unity is chaos.
-Unity creates command.
-
-Link in bio.
-
-#tradingview #indicators #allinone #technicalanalysis #tradingstrategy #priceaction #crypto #forex
-```
-
----
 
 # DAY 4 — DEC 28
 
@@ -474,36 +367,6 @@ signalpilot.io/chronicle/the-watchman
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Augury Grid
-**Hook:** "POV: You at 2 AM flipping through 50 charts"
-
-```
-BTC? Nah.
-ETH? Meh.
-AAPL? Maybe.
-EUR/USD? Let me check...
-
-STOP.
-
-AUGURY GRID — The Watchman.
-
-It watches 8 markets. Simultaneously.
-Ranks them by opportunity score.
-Brings the best setups TO YOU.
-
-Stop hunting.
-Start receiving.
-
-"While you watch one chart, I watch them all."
-
-Link in bio.
-
-#tradingview #marketscanner #technicalanalysis #crypto #forex #tradingstrategy #opportunities
-```
-
----
 
 # DAY 5 — DEC 29
 
@@ -615,37 +478,6 @@ signalpilot.io
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Harmonic Oscillator
-**Hook:** "The final piece..."
-
-```
-Seven of Seven.
-
-HARMONIC OSCILLATOR — The Arbiter.
-
-Seven components. One verdict.
-
-RSI. Stochastic RSI. MACD. EMA Trend. Momentum. Volume. Divergence Zone.
-
-7/7 agreement? STRONG signal. STRIKE.
-3/7 or less? NEUT. Stand aside.
-
-"The patient pilot survives. The impulsive pilot donates."
-
-This is your final confirmation.
-The last checkpoint before you trade.
-
-The Council is complete.
-Tomorrow, they go live.
-
-Link in bio.
-
-#tradingview #oscillators #technicalanalysis #tradingstrategy #consensus #harmonic
-```
-
----
 
 ### INSTAGRAM STORIES — "COUNCIL COMPLETE" HYPE
 
@@ -807,36 +639,6 @@ signalpilot.io
 
 ---
 
-### TIKTOK — LAUNCH VIDEO
-
-**IMAGE:** Council Assembles or all 7 images cycling
-**Hook:** "It's live."
-
-```
-The Elite Seven are LIVE.
-
-Seven indicators. One unified system.
-
-Pentarch — reads market cycles
-Volume Oracle — hears volume flow
-Janus Atlas — maps key levels
-Plutus Flow — reveals true pressure
-OmniDeck — unifies 10 systems
-Augury Grid — scans 8 markets
-Harmonic Oscillator — confirms the strike
-
-Non-repainting. Audited. $100 bounty.
-
-7-day free trial. No credit card.
-
-Link in bio.
-
-Navigate the noise.
-
-#tradingview #technicalanalysis #indicators #launch #tradingstrategy #crypto #forex #priceaction
-```
-
----
 
 ### INSTAGRAM STORIES — LAUNCH DAY SEQUENCE
 
@@ -893,40 +695,6 @@ Happy New Year 🎆
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Council Assembles or countdown visual
-**Hook:** "2026 trading resolution"
-
-```
-2026.
-
-One resolution that actually matters:
-
-Stop guessing.
-Start reading.
-
-The market moves in cycles.
-TD. IGN. WRN. CAP. BDN.
-
-It's not random.
-It's not luck.
-It's structure.
-
-This year, learn to see it.
-
-82 free lessons.
-7 non-repainting indicators.
-No more hoping.
-
-Happy New Year.
-
-Link in bio.
-
-#tradingview #newyear #2026 #tradingstrategy #technicalanalysis #crypto #forex
-```
-
----
 
 # DAY 8 — JAN 1 (NEW YEAR)
 
@@ -960,39 +728,6 @@ signalpilot.io
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Pentarch or cycle visual
-**Hook:** "The market doesn't know it's 2026"
-
-```
-Happy New Year!
-
-Quick reminder:
-
-The market doesn't know what year it is.
-
-It doesn't care about your resolutions.
-It doesn't care about fresh starts.
-
-It just moves in cycles.
-
-TD. IGN. WRN. CAP. BDN.
-
-Same structure. Every year. Every asset.
-
-2026 won't be different.
-But YOU can be.
-
-Learn to read the cycles.
-Stop hoping. Start seeing.
-
-Link in bio.
-
-#tradingview #newyear #marketcycles #technicalanalysis #tradingstrategy #crypto
-```
-
----
 
 # DAY 9 — JAN 2
 
@@ -1208,42 +943,6 @@ education.signalpilot.io
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Screenshot of Lesson 01 hero OR chart showing sweep pattern
-**Hook:** "Support just broke... again."
-
-```
-"I bought at support."
-"It broke."
-"I got stopped out."
-"Then it reversed."
-
-Sound familiar?
-
-That wasn't bad luck.
-That was a LIQUIDITY SWEEP.
-
-Institutions see your obvious levels.
-They hunt your stops.
-They take your liquidity.
-THEN they reverse.
-
-The fix?
-
-Don't enter AT support.
-Enter AFTER the sweep.
-
-34% win rate → 68% win rate.
-
-Same trade. Different timing.
-
-Link in bio — free lesson.
-
-#tradingview #liquiditysweep #technicalanalysis #priceaction #smartmoney #tradingstrategy
-```
-
----
 
 # DAY 10 — JAN 3
 
@@ -1344,35 +1043,6 @@ signalpilot.io
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Non-repainting graphic or before/after comparison
-**Hook:** "Your indicator is lying to you."
-
-```
-See this perfect signal?
-It wasn't there yesterday.
-
-It appeared AFTER the move happened.
-That's called repainting.
-
-And most indicators do it.
-
-They show you perfect history...
-While giving you garbage in real-time.
-
-The Elite Seven? Non-repainting.
-
-$100 bounty if you can prove otherwise.
-
-No one ever has.
-
-Link in bio.
-
-#tradingview #indicators #nonrepainting #technicalanalysis #tradingstrategy #honest
-```
-
----
 
 ### INSTAGRAM STORY — UGC LAUNCH
 
@@ -1628,45 +1298,6 @@ education.signalpilot.io
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Screenshot of Lesson 02 hero OR volume chart with delta
-**Hook:** "Big green bar = bullish... right?"
-
-```
-"Look at that volume! Bullish!"
-
-No.
-
-Volume means transactions.
-Every trade has a buyer AND seller.
-
-What actually matters: DELTA.
-
-Buy volume minus sell volume.
-
-And watch for these:
-
-ABSORPTION:
-High volume. Price doesn't move.
-Someone's eating all the pressure.
-
-EXHAUSTION:
-High volume. Price rejects.
-One side just failed.
-
-One trader lost $93K ignoring this.
-
-Then recovered by reading delta properly.
-
-Lesson 02. Free.
-
-Link in bio.
-
-#tradingview #volumeanalysis #deltaanalysis #technicalanalysis #smartmoney #tradingstrategy
-```
-
----
 
 # DAY 12 — JAN 5
 
@@ -1731,36 +1362,6 @@ More on this tomorrow.
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Text-on-screen or talking head
-**Hook:** "Quick question for traders"
-
-```
-Quick question.
-
-What's the hardest part of trading for you?
-
-Is it entries? Finding setups that actually work?
-
-Exits? Knowing when to get out before it reverses?
-
-Psychology? Managing emotions after a loss?
-
-Or analysis paralysis? Too many indicators, too much noise?
-
-Drop your answer in the comments.
-
-I read every single one.
-
-And I'll tell you which of our 82 free lessons addresses YOUR specific struggle.
-
-Link in bio.
-
-#tradingview #tradingpsychology #technicalanalysis #tradingstruggles #tradingstrategy
-```
-
----
 
 # DAY 13 — JAN 6
 
@@ -1901,33 +1502,6 @@ docs.signalpilot.io/pentarch-v10
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Pentarch
-**Hook:** "Where are you in the cycle?"
-
-```
-TD — bottom forming
-IGN — uptrend starting
-WRN — weakness appearing
-CAP — top is in
-BDN — decline begins
-
-Then back to TD.
-
-This cycle repeats. Forever.
-
-Most traders see it after.
-Pentarch shows it during.
-
-Where are you right now?
-
-Link in bio.
-
-#tradingview #marketcycles #pentarch #technicalanalysis #tradingstrategy #priceaction
-```
-
----
 
 # DAY 14 — JAN 7
 
@@ -2055,41 +1629,6 @@ docs.signalpilot.io/volume-oracle-v10
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Screen recording of actual chart with Volume Oracle
-**Hook:** "I caught volume flow loading. Here's the proof."
-
-```
-I caught volume flow loading.
-
-Here's the proof.
-
-January 4th. Price looks dead.
-Volume Oracle: ACCUMULATION 84%.
-
-What does that mean?
-Institutions quietly buying while retail sleeps.
-
-72 hours later?
-Plus 12%.
-
-"Why didn't I see that coming?"
-
-Because you were watching price.
-volume flow was moving volume.
-
-Price is the last to know.
-
-This isn't theory.
-This is the actual chart.
-
-More proof in bio.
-
-#tradingview #smartmoney #volumeoracle #technicalanalysis #tradingproof #crypto #forex
-```
-
----
 
 # DAY 15 — JAN 8
 
@@ -2194,32 +1733,6 @@ docs.signalpilot.io/janus-atlas-v10
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Janus Atlas
-**Hook:** "Stop drawing random lines."
-
-```
-"I think support is here..."
-"Maybe resistance here..."
-"Let me draw 50 more lines..."
-
-STOP.
-
-Janus Atlas plots 60+ levels automatically.
-
-Pivots. VWAP. Volume profile. Session boundaries.
-
-The lines institutions ACTUALLY use.
-
-Stop drawing. Start navigating.
-
-Link in bio.
-
-#tradingview #keylevels #supportresistance #technicalanalysis #priceaction #tradingstrategy
-```
-
----
 
 # DAY 16 — JAN 9
 
@@ -2350,42 +1863,6 @@ docs.signalpilot.io/plutus-flow-v10
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Screen recording of actual divergence chart
-**Hook:** "I caught this crash 48 hours early. Here's the proof."
-
-```
-I caught this crash 48 hours early.
-
-Here's the proof.
-
-January 6th. Price at new highs.
-Everyone celebrating.
-
-But I checked Plutus Flow.
-Pressure was declining.
-
-Price up. Pressure down.
-
-That's a divergence.
-
-"This throne is built on sand."
-
-48 hours later?
-Minus 8%.
-
-"How did you know?!"
-
-Because price lies.
-Pressure doesn't.
-
-More proof in bio.
-
-#tradingview #divergence #plutusflow #technicalanalysis #tradingproof #reversal
-```
-
----
 
 # DAY 17 — JAN 10
 
@@ -2504,45 +1981,6 @@ docs.signalpilot.io/omnideck-v10
 
 ---
 
-### TIKTOK
-
-**IMAGE:** OmniDeck or cluttered chart → clean chart comparison
-**Hook:** "One indicator. Ten systems."
-
-```
-Your chart looks like this?
-
-15 indicators. All fighting each other.
-Red here. Green there. Signals contradicting.
-
-That's chaos.
-
-OMNIDECK — The Commander.
-
-Ten systems. ONE overlay.
-
-TD Sequential — exhaustion
-Squeeze Cloud — breakouts
-SuperTrend — direction
-Supply zones — institutions
-Liquidity sweeps — traps
-
-And 5 more.
-
-All unified. Nothing fighting.
-
-Toggle what you need.
-Silence what you don't.
-
-"Complexity without unity is chaos.
-Unity creates command."
-
-Link in bio.
-
-#tradingview #omnideck #allinone #technicalanalysis #tradingstrategy #indicators
-```
-
----
 
 # DAY 18 — JAN 11
 
@@ -2672,46 +2110,6 @@ docs.signalpilot.io/augury-grid-v10
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Screen recording of Augury Grid panel
-**Hook:** "Found this trade in 30 seconds. Here's the proof."
-
-```
-Found this trade in 30 seconds.
-
-Here's the proof.
-
-I wasn't even looking for BTC.
-Augury Grid was running in the corner.
-
-BTCUSDT ↑ 92%.
-
-92% means high conviction.
-Multiple systems aligned.
-
-I clicked. Checked the chart. Entered.
-
-24 hours later?
-Plus 6.5%.
-
-"How do you find setups so fast?"
-
-I don't find them.
-The Watchman brings them to me.
-
-8 markets. Scanned simultaneously.
-Ranked by opportunity score.
-
-Stop hunting.
-Start receiving.
-
-More scans in bio.
-
-#tradingview #augurygrid #scanner #technicalanalysis #tradingproof #crypto #opportunities
-```
-
----
 
 # DAY 19 — JAN 12
 
@@ -2856,55 +2254,6 @@ docs.signalpilot.io/harmonic-oscillator-v10
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Harmonic Oscillator
-**Hook:** "Should you take this trade? Let's ask the council."
-
-```
-Should you take this trade?
-
-Let's ask the council.
-
-RSI says... bullish.
-Stochastic RSI says... bullish.
-MACD says... bullish.
-EMA Trend says... bullish.
-Momentum says... bullish.
-Volume says... bullish.
-Divergence Zone says... bullish.
-
-7/7. STRONG signal. Maximum conviction.
-
-STRIKE.
-
-But what if:
-
-RSI says bullish.
-Stochastic RSI says bearish.
-MACD says neutral.
-EMA Trend says bullish.
-Momentum says neutral.
-Volume says neutral.
-Divergence Zone says neutral.
-
-3/7. NEUT signal.
-
-STAND ASIDE. Let others guess.
-
-The Arbiter tallies the seven voices.
-It's not your first signal.
-It's your FINAL confirmation.
-
-"The patient pilot survives.
-The impulsive pilot donates."
-
-Link in bio.
-
-#tradingview #oscillators #consensus #technicalanalysis #tradingstrategy #harmonic
-```
-
----
 
 # DAY 20 — JAN 13
 
@@ -3055,44 +2404,6 @@ FREE at education.signalpilot.io
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Screenshot of Lesson 09 hero OR calculator visual
-**Hook:** "70% win rate but still losing money?"
-
-```
-"I have a 70% win rate!"
-
-Cool. You could still be broke.
-
-70% wins at $50 = +$350
-30% losses at $200 = -$600
-Net: LOSING.
-
-40% wins at $350 = +$1,400
-60% losses at $100 = -$600
-Net: WINNING.
-
-Win rate doesn't matter.
-POSITION SIZING matters.
-
-The formula:
-Position = (Account × 1%) ÷ Stop Distance
-
-One trader ignored this.
-$45K → $8K in 6 weeks.
-
-Same trades at 1% risk?
-$38K preserved.
-
-Lesson 09. Free.
-
-Link in bio.
-
-#tradingview #positionsizing #riskmanagement #tradingstrategy #discipline
-```
-
----
 
 # DAY 21 — JAN 14
 
@@ -3214,44 +2525,6 @@ Show us what you've got.
 
 ---
 
-### TIKTOK
-
-**IMAGE:** User charts cycling or split screen
-**Hook:** "These aren't my charts. They're yours."
-
-```
-These aren't my charts.
-
-They're yours.
-
-@user1 caught volume flow loading.
-Volume Oracle: Accumulation 82%.
-
-@user2 nailed the cycle turn.
-Pentarch: IGN phase confirmed.
-
-@user3 found the level.
-Janus Atlas: Bounced perfectly.
-
-Real traders. Real signals. Real wins.
-
-#SignalPilotWins
-
-Want to be featured?
-
-Post your chart with the hashtag.
-Tag us.
-
-Best submissions get featured plus free extended access.
-
-Show me what you've got.
-
-Link in bio.
-
-#tradingview #tradingwins #socialproof #community #technicalanalysis
-```
-
----
 
 # DAY 22 — JAN 15
 
@@ -3367,44 +2640,6 @@ blog.signalpilot.io/articles/how-smart-money-moves
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Volume Oracle or volume flow diagram
-**Hook:** "They're not smarter. They're positioned."
-
-```
-"How do institutions always buy the bottom?"
-
-They don't.
-
-They buy BEFORE the bottom.
-
-Here's the difference:
-
-You see price crash, you panic sell.
-They see YOUR panic as their opportunity.
-
-You see price pump, you FOMO buy.
-They see YOUR greed as their exit.
-
-They're not smarter.
-They're positioned BEFORE you.
-
-Accumulation → before the pump
-Distribution → before the dump
-
-By the time you see the move...
-They caused it.
-
-Follow the money.
-Not the price.
-
-Link in bio.
-
-#tradingview #smartmoney #volumetrading #volumeanalysis #technicalanalysis
-```
-
----
 
 # DAY 23 — JAN 16
 
@@ -3584,57 +2819,6 @@ education.signalpilot.io
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Screenshot of backtesting lesson hero OR spreadsheet visual
-**Hook:** "I have a strategy!" — but does it actually work?
-
-```
-"I have a strategy!"
-
-Cool. Does it work?
-
-Not "did it work once."
-Does it work over 100+ trades?
-
-Here's the formula:
-
-(Win% × Avg Win) - (Loss% × Avg Loss)
-
-Example:
-50% × $200 = $100
-50% × $100 = $50
-$100 - $50 = +$50 per trade
-
-That's your EDGE.
-
-Positive = profitable system
-Negative = losing system
-
-But here's the trap:
-
-Most indicators REPAINT.
-They show perfect signals in history...
-That weren't there when you needed them.
-
-Your backtest: 80% win rate
-Live: 40%
-
-Why? Signals changed after the fact.
-
-The Elite Seven? Non-repainting.
-What you test is what you get.
-
-100 trades minimum.
-No cherry-picking.
-Calculate your edge.
-
-Link in bio.
-
-#tradingview #backtesting #tradingsystem #technicalanalysis #edge
-```
-
----
 
 # DAY 24 — JAN 17
 
@@ -3705,34 +2889,6 @@ signalpilot.io/chronicle/the-hierarchy-of-signals
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Hierarchy pyramid or Council Assembles
-**Hook:** "The order matters."
-
-```
-The Elite Seven aren't random.
-They work in order.
-
-Pentarch — where are we in the cycle?
-Volume Oracle — what's volume flow doing?
-Janus Atlas — where will price react?
-Plutus Flow — is the move real?
-OmniDeck — what's the full picture?
-Augury Grid — where's the best opportunity?
-Harmonic Oscillator — is it time to strike?
-
-Each builds on the last.
-
-Together?
-Complete market intelligence.
-
-Link in bio.
-
-#tradingview #tradingsystem #technicalanalysis #indicators #hierarchy
-```
-
----
 
 # DAY 25 — JAN 18 (WEEKEND)
 
@@ -3864,35 +3020,6 @@ signalpilot.io/chronicle/the-pilots-oath
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Pilot's Oath
-**Hook:** "Three things that destroy accounts"
-
-```
-Chasing. Guessing. Hoping.
-
-Three things that destroy accounts.
-Three things pilots reject.
-
-"I will not chase."
-Missed it? Let it go. There's always another.
-
-"I will not guess."
-No random entries. Either it confirms or you stand aside.
-
-"I will not hope."
-Once you're in, hope is worthless. Have a plan.
-
-I am not a gambler.
-I am a Pilot.
-
-Full oath in bio.
-
-#tradingview #tradingpsychology #discipline #mindset #tradingstrategy
-```
-
----
 
 # DAY 26 — JAN 19
 
@@ -3944,33 +3071,6 @@ signalpilot.io
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Testimonial text or talking head
-**Hook:** "What they're saying about The Elite Seven..."
-
-```
-Since launch, here's what we're hearing:
-
-"The cycle detection actually works."
-"Volume Oracle caught the accumulation before the move."
-"OmniDeck cleaned up my chart — finally."
-"Non-repainting is real. I tested it myself."
-
-Thank you to everyone navigating with The Seven.
-
-More updates coming.
-More education content.
-More improvements.
-
-This is just the beginning.
-
-Link in bio.
-
-#tradingview #signalpilot #testimonials #technicalanalysis
-```
-
----
 
 # DAY 27 — JAN 20
 
@@ -4131,44 +3231,6 @@ education.signalpilot.io
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Screenshot of risk lesson hero OR rules list
-**Hook:** "7 rules that keep traders alive"
-
-```
-7 rules that keep you in the game:
-
-1. Never risk more than 1% per trade.
-10 losses in a row = 10% down. Survivable.
-
-2. Know your stop BEFORE entry.
-No stop = no trade.
-
-3. Minimum R:R based on win rate.
-50% win rate = minimum 1:2
-
-4. Cap correlated positions.
-3 crypto longs = 1 bet, not 3.
-
-5. 3 losses = done for the day.
-Walk away.
-
-6. Max daily drawdown: 2-3%.
-Hit it? Stop trading.
-
-7. Accept that losses are operating costs.
-50% win rate loses half the time. That's EXPECTED.
-
-The goal isn't no losses.
-The goal is controlled losses.
-
-Link in bio.
-
-#tradingview #riskmanagement #tradingpsychology #discipline #survival
-```
-
----
 
 # DAY 28 — JAN 21
 
@@ -4251,39 +3313,6 @@ This is for traders who refuse to guess anymore.
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Origin story graphic or Council Assembles
-**Hook:** "Why we built this..."
-
-```
-Years ago, we got burned.
-
-Bought an indicator.
-Perfect backtest. 80% win rate.
-
-Live trading?
-Signals kept disappearing.
-What looked perfect in history wasn't there when it mattered.
-
-That's called repainting.
-And most indicators do it.
-
-We decided: If no one would build honest tools, we would.
-
-The Elite Seven don't repaint.
-$100 bounty if you can prove otherwise.
-
-No one ever has.
-
-This is for traders who refuse to guess anymore.
-
-Link in bio.
-
-#tradingview #indicators #origin #nonrepainting #technicalanalysis
-```
-
----
 
 # DAY 29 — JAN 22
 
@@ -4325,32 +3354,6 @@ Reply below. We actually read these.
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Talking head or text-on-screen
-**Hook:** "What should we build next?"
-
-```
-We're always improving.
-
-What would make SignalPilot better for YOU?
-
-New indicator ideas?
-More education content?
-Different documentation?
-Better alert configs?
-
-Drop a comment.
-We actually read these.
-
-Your feedback = our roadmap.
-
-Link in bio.
-
-#tradingview #signalpilot #feedback #community
-```
-
----
 
 # DAY 30 — JAN 23 🎉
 
@@ -4439,46 +3442,6 @@ signalpilot.io
 
 ---
 
-### TIKTOK
-
-**IMAGE:** Montage of all indicator reveals, ending on Council Assembles
-**Hook:** "30 days. 7 indicators. One system."
-
-```
-30 days ago, we launched The Elite Seven.
-
-7 indicators:
-Pentarch — reads cycles
-Volume Oracle — hears institutions
-Janus Atlas — maps levels
-Plutus Flow — weighs pressure
-OmniDeck — unifies systems
-Augury Grid — scans markets
-Harmonic Oscillator — confirms strikes
-
-The Pilot's Oath:
-
-"I will not chase.
-I will not guess.
-I will not hope.
-
-I am not a gambler.
-I am a Pilot."
-
-82 free lessons.
-7 non-repainting indicators.
-$100 bounty still unclaimed.
-
-This was just the beginning.
-
-Thank you for navigating with us.
-
-Link in bio.
-
-#tradingview #signalpilot #30days #technicalanalysis #launch
-```
-
----
 
 # QUICK BUILD NOTES FOR IMAGES
 

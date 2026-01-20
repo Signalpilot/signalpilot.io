@@ -378,9 +378,7 @@ The posts follow a 10-post rotation pattern:
 Each post includes ready-to-use content for:
 - **Twitter/X** — Copy + hashtags
 - **Instagram** — Caption + image spec + hashtags
-- **TikTok** — Hook + script + visual cues
 - **Canva** — Design instructions
-- **CapCut** — Video editing guide
 
 ---
 

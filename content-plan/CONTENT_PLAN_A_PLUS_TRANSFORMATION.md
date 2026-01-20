@@ -42,29 +42,29 @@ This is high-friction. Cold audiences don't buy $99/month subscriptions from soc
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                           AWARENESS (Top)                                │
-│                                                                         │
-│   Social Content → Engagement → Follow                                  │
-│   Goal: Build audience, establish credibility                           │
-│   Metrics: Followers, reach, impressions, engagement rate               │
+│ AWARENESS (Top) │
+│ │
+│ Social Content → Engagement → Follow │
+│ Goal: Build audience, establish credibility │
+│ Metrics: Followers, reach, impressions, engagement rate │
 └─────────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
+ │
+ ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                          CAPTURE (Middle)                                │
-│                                                                         │
-│   Lead Magnet → Email Opt-in → Nurture Sequence                         │
-│   Goal: Convert followers to email subscribers                          │
-│   Metrics: Opt-in rate, email list growth, open rates                   │
+│ CAPTURE (Middle) │
+│ │
+│ Lead Magnet → Email Opt-in → Nurture Sequence │
+│ Goal: Convert followers to email subscribers │
+│ Metrics: Opt-in rate, email list growth, open rates │
 └─────────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
+ │
+ ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         CONVERT (Bottom)                                 │
-│                                                                         │
-│   Email Sequence → Free Trial → Paid Subscription                       │
-│   Goal: Convert subscribers to paying customers                         │
-│   Metrics: Trial starts, trial-to-paid conversion, MRR                  │
+│ CONVERT (Bottom) │
+│ │
+│ Email Sequence → Free Trial → Paid Subscription │
+│ Goal: Convert subscribers to paying customers │
+│ Metrics: Trial starts, trial-to-paid conversion, MRR │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -102,39 +102,39 @@ Create 3-4 high-value free resources that capture emails:
 #### Lead Magnet #1: "The Repainting Indicator Checklist"
 - **Format:** PDF (2-3 pages)
 - **Content:**
-  - What repainting is (with visual examples)
-  - 7-question checklist to test any indicator
-  - Red flags to watch for
-  - Why 60-90% of indicators repaint
+ - What repainting is (with visual examples)
+ - 7-question checklist to test any indicator
+ - Red flags to watch for
+ - Why 60-90% of indicators repaint
 - **Why it works:** Directly addresses core pain point, positions Signal Pilot as the solution
 - **CTA after download:** "Now that you know what to avoid, see indicators that don't repaint →"
 
 #### Lead Magnet #2: "The Liquidity Lie Cheatsheet"
 - **Format:** PDF infographic (single page, print-friendly)
 - **Content:**
-  - Visual map of how stop hunts work
-  - Where institutions hunt liquidity
-  - 3 rules to stop being predictable
+ - Visual map of how stop hunts work
+ - Where institutions hunt liquidity
+ - 3 rules to stop being predictable
 - **Why it works:** Visualizes the core concept, shareable, establishes expertise
 - **CTA after download:** "Learn to read liquidity like institutions →"
 
 #### Lead Magnet #3: "Market Cycle Quick Reference"
 - **Format:** PDF (1-2 pages)
 - **Content:**
-  - Accumulation → Markup → Distribution → Decline visual
-  - Characteristics of each phase
-  - How to identify current phase
-  - What to do in each phase
+ - Accumulation → Markup → Distribution → Decline visual
+ - Characteristics of each phase
+ - How to identify current phase
+ - What to do in each phase
 - **Why it works:** Evergreen, practical, directly tied to curriculum
 - **CTA after download:** "Master all 4 phases in the full curriculum →"
 
 #### Lead Magnet #4: "The Elite Seven Indicator Guide"
 - **Format:** PDF (5-7 pages)
 - **Content:**
-  - Overview of all 7 indicators
-  - What each one does (without giving away the sauce)
-  - Which indicator for which market condition
-  - Sample chart screenshots
+ - Overview of all 7 indicators
+ - What each one does (without giving away the sauce)
+ - Which indicator for which market condition
+ - Sample chart screenshots
 - **Why it works:** Product education without hard sell
 - **CTA after download:** "Try all 7 for free →"
 
@@ -142,21 +142,21 @@ Create 3-4 high-value free resources that capture emails:
 
 ```
 User clicks "Get the free cheatsheet"
-           │
-           ▼
-   Landing page (name + email)
-           │
-           ▼
-   Instant PDF delivery (email + download page)
-           │
-           ▼
-   Welcome email (Day 0)
-           │
-           ▼
-   Nurture sequence begins (Days 1-7)
-           │
-           ▼
-   Trial offer email (Day 7)
+ │
+ ▼
+ Landing page (name + email)
+ │
+ ▼
+ Instant PDF delivery (email + download page)
+ │
+ ▼
+ Welcome email (Day 0)
+ │
+ ▼
+ Nurture sequence begins (Days 1-7)
+ │
+ ▼
+ Trial offer email (Day 7)
 ```
 
 ### Lead Magnet Content Mapping
@@ -193,9 +193,9 @@ Current plan repeats the same themes (liquidity lie, repainting, stop hunting) w
 #### Weekly Rotation Schedule
 
 ```
-Week 1:  P1 → P2 → P3 → P4 → P5 → P6 → P1...
-Week 2:  P2 → P3 → P4 → P5 → P6 → P1 → P2...
-Week 3:  P3 → P4 → P5 → P6 → P1 → P2 → P3...
+Week 1: P1 → P2 → P3 → P4 → P5 → P6 → P1...
+Week 2: P2 → P3 → P4 → P5 → P6 → P1 → P2...
+Week 3: P3 → P4 → P5 → P6 → P1 → P2 → P3...
 (Rotate starting pillar each week)
 ```
 
@@ -292,7 +292,7 @@ Each pillar needs multiple angles to avoid repetition. Here are 10 angles per pi
 ## 4. Platform-Specific Format Variations
 
 ### The Problem
-Current plan uses the same format for every TikTok (hook → 5 text lines → CTA). Algorithm death.
+Current plan uses the same format for every (hook → 5 text lines → CTA). Algorithm death.
 
 ### Twitter/X Format Variations
 
@@ -375,7 +375,7 @@ Swipe-up (or link sticker) on final story
 ```
 Use for: Behind-the-scenes, launches, engagement
 
-### TikTok Format Variations
+### Format Variations
 
 #### Format 1: The Classic (Current approach)
 ```
@@ -449,7 +449,6 @@ Use for: Reach, comments, algorithm boost
 | | Reels | 35% |
 | | Single images | 15% |
 | | Stories | 10% |
-| **TikTok** | POV | 20% |
 | | Green screen | 20% |
 | | Tutorial | 20% |
 | | Classic text | 15% |
@@ -516,16 +515,16 @@ Don't just wait for comments. Go to them:
 
 ```
 New follower
-     │
-     ▼
+ │
+ ▼
 Auto-DM (Day 1):
 "Hey [name] — thanks for the follow.
 Quick question: Are you currently trading or still learning?"
-     │
-     ▼
+ │
+ ▼
 [If reply received]
-     │
-     ▼
+ │
+ ▼
 Manual conversation → Lead qualification → Appropriate CTA
 ```
 
@@ -703,20 +702,20 @@ Use community for content creation:
 
 ```
 Social media follower
-        │
-        ▼
+ │
+ ▼
 Lead magnet download
-        │
-        ▼
+ │
+ ▼
 Email nurture (mention community)
-        │
-        ▼
+ │
+ ▼
 Free Discord join (limited access)
-        │
-        ▼
+ │
+ ▼
 Trial signup (full Discord access)
-        │
-        ▼
+ │
+ ▼
 Paid subscriber (premium channels)
 ```
 
@@ -743,7 +742,6 @@ Every post uses 9 hashtags (Instagram) structured as:
 |----------|-----------------|-----|
 | Twitter | 2-3 | 5 |
 | Instagram | 9-12 | 30 |
-| TikTok | 3-5 | 10 |
 
 ### Hashtag Banks by Pillar
 
@@ -862,7 +860,7 @@ CTA: Relevant lead magnet
 1. **0-30 min:** Assess if relevant to audience
 2. **30-60 min:** Draft response content
 3. **1-2 hours:** Post first response (Twitter priority)
-4. **2-4 hours:** Expand to Instagram/TikTok if warranted
+4. **2-4 hours:** Expand to Instagram/ if warranted
 5. **24-48 hours:** Follow-up educational content
 
 ---
@@ -1080,7 +1078,6 @@ For each Elite Seven character:
 |--------|----------|-----------|
 | Written lore drops | Twitter threads | 1x/week |
 | Visual character cards | Instagram | 2x/week |
-| Animated shorts (15-30s) | TikTok/Reels | 1x/week |
 | Audio narration | Podcast/YouTube | 1x/month |
 | Interactive story | Discord | 1x/month |
 
@@ -1128,11 +1125,6 @@ Results not typical. Trading involves risk of loss. Only trade with money you ca
 | "Easy money" | "Serious edge" |
 
 ### Platform-Specific Compliance
-
-#### TikTok
-- No financial advice claims
-- "Entertainment purposes" disclaimer if needed
-- Avoid "money" sounds/hashtags that trigger review
 
 #### Instagram
 - Disclaimers in captions AND bio
@@ -1212,7 +1204,6 @@ Batch by content type, not by day:
 |-----|-------|
 | Monday | All Twitter copy for the week |
 | Tuesday | All Instagram carousels |
-| Wednesday | All TikTok videos |
 | Thursday | All graphics and visuals |
 | Friday | Scheduling and QA |
 
@@ -1222,7 +1213,7 @@ Batch by content type, not by day:
 |----------|------------------|
 | Scheduling | Later or Buffer |
 | Graphics | Canva or Figma |
-| Video editing | CapCut (mobile) or DaVinci Resolve |
+| Video editing | DaVinci Resolve or Adobe Premiere |
 | Analytics | Native + Sprout Social |
 | Community | Discord + Slack |
 | Email | ConvertKit or Beehiiv |
@@ -1243,7 +1234,6 @@ No success metrics defined. How do you know if it's working?
 |--------|---------------|----------------|----------------|
 | Twitter followers | +500 | +2,000 | +5,000 |
 | Instagram followers | +300 | +1,500 | +4,000 |
-| TikTok followers | +1,000 | +5,000 | +15,000 |
 | Total reach | 100K | 500K | 2M |
 | Engagement rate | 3% | 4% | 5% |
 
@@ -1270,18 +1260,18 @@ Track weekly:
 
 ```
 ┌────────────────────────────────────────────────────┐
-│                 WEEKLY SCORECARD                    │
+│ WEEKLY SCORECARD │
 ├────────────────────────────────────────────────────┤
-│ Posts published: ___/35                            │
-│ Total reach: ___                                   │
-│ Total engagement: ___                              │
-│ New followers: ___                                 │
-│ New email subscribers: ___                         │
-│ Trial starts: ___                                  │
-│ Conversions: ___                                   │
-│ Top performing post: ___                           │
-│ Worst performing post: ___                         │
-│ Learnings: ___                                     │
+│ Posts published: ___/35 │
+│ Total reach: ___ │
+│ Total engagement: ___ │
+│ New followers: ___ │
+│ New email subscribers: ___ │
+│ Trial starts: ___ │
+│ Conversions: ___ │
+│ Top performing post: ___ │
+│ Worst performing post: ___ │
+│ Learnings: ___ │
 └────────────────────────────────────────────────────┘
 ```
 
@@ -1304,7 +1294,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 9 AM | Twitter | Educational | P1-P4 | Thread |
 | 11 AM | Instagram | Educational | P1-P4 | Carousel |
-| 1 PM | TikTok | Educational | P1-P4 | Tutorial |
 | 4 PM | Twitter | Engagement | - | Poll |
 | 7 PM | Instagram | Quote | P4 | Single image |
 
@@ -1313,7 +1302,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 9 AM | Twitter | Social Proof | P6 | Single tweet |
 | 11 AM | Instagram | Product Demo | P2 | Reel |
-| 1 PM | TikTok | POV | P4 | POV format |
 | 4 PM | Twitter | Educational | P3 | Thread |
 | 7 PM | Instagram | Social Proof | P6 | Carousel |
 
@@ -1322,7 +1310,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 9 AM | Twitter | Chronicle | P5 | Thread |
 | 11 AM | Instagram | Chronicle | P5 | Carousel |
-| 1 PM | TikTok | Chronicle | P5 | Story format |
 | 4 PM | Twitter | Quote | P4 | Quote card |
 | 7 PM | Instagram | Educational | P1 | Reel |
 
@@ -1331,7 +1318,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 9 AM | Twitter | Educational | P2 | Thread |
 | 11 AM | Instagram | Social Proof | P6 | Single image |
-| 1 PM | TikTok | Green screen | P2 | Talking head |
 | 4 PM | Twitter | Engagement | - | Question |
 | 7 PM | Instagram | Product Demo | P2 | Carousel |
 
@@ -1340,7 +1326,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 9 AM | Twitter | Social Proof | P6 | Single tweet |
 | 11 AM | Instagram | Educational | P3 | Carousel |
-| 1 PM | TikTok | Meme | - | Trending format |
 | 4 PM | Twitter | Chronicle | P5 | Thread |
 | 7 PM | Instagram | Quote | P4 | Single image |
 
@@ -1349,7 +1334,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 10 AM | Twitter | Quote | P4 | Quote card |
 | 12 PM | Instagram | Chronicle | P5 | Carousel |
-| 2 PM | TikTok | Tutorial | P1 | Screen recording |
 | 5 PM | Twitter | Educational | P1 | Single tweet |
 | 8 PM | Instagram | Engagement | - | Story series |
 
@@ -1358,7 +1342,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 10 AM | Twitter | Engagement | - | Thread (week recap) |
 | 12 PM | Instagram | Social Proof | P6 | Reel |
-| 2 PM | TikTok | Story | P4 | Narrative |
 | 5 PM | Twitter | Chronicle | P5 | Quote card |
 | 8 PM | Instagram | Educational | P2 | Carousel |
 
@@ -1380,7 +1363,7 @@ Track weekly:
 #### Week 2: Content Production Sprint
 - [ ] Batch produce 2 weeks of content
 - [ ] Create all Chronicle character assets
-- [ ] Record first 10 TikTok videos
+- [ ] Record first 10 videos
 - [ ] Design first 10 Instagram carousels
 - [ ] Write first 10 Twitter threads
 
@@ -1552,7 +1535,6 @@ CONNECT:
 | Element | Variation A | Variation B |
 |---------|-------------|-------------|
 | Carousel length | 5 slides | 10 slides |
-| TikTok style | Text overlay | Talking head |
 | Twitter | Thread | Single tweet |
 | Reel length | 7 seconds | 30 seconds |
 
@@ -1583,18 +1565,6 @@ CONNECT:
 ## 20. Contingency Planning
 
 ### Platform Risk Mitigation
-
-#### TikTok Ban Scenario
-**Risk:** US TikTok ban or severe restrictions
-**Probability:** Medium
-**Impact:** High (if TikTok is primary growth channel)
-
-**Contingency:**
-1. Never put >40% of effort into TikTok
-2. Cross-post all TikTok content to Instagram Reels + YouTube Shorts
-3. Build email list aggressively (owned audience)
-4. Maintain content archives locally
-5. If ban announced: Accelerate Instagram/YouTube, pivot budget immediately
 
 #### Algorithm Change Scenario
 **Risk:** Major algorithm shift tanks reach
@@ -1710,29 +1680,24 @@ Provide affiliates with:
 - **Follower campaigns:** Audience building
 - **Website clicks:** Lead magnet or trial
 
-#### TikTok
-- **Spark ads:** Boost top organic performers
-- **Lead gen ads:** In-app lead capture
-- **Website conversion:** Trial signups
-
 ### Retargeting Strategy
 
 ```
 Website visitor (no action)
-        │
-        ▼
+ │
+ ▼
 Retarget with lead magnet ad (Days 1-7)
-        │
-        ▼
+ │
+ ▼
 Lead magnet downloader (no trial)
-        │
-        ▼
+ │
+ ▼
 Retarget with trial offer ad (Days 1-14)
-        │
-        ▼
+ │
+ ▼
 Trial user (not converted)
-        │
-        ▼
+ │
+ ▼
 Retarget with conversion ad (Days 1-7 post-trial)
 ```
 

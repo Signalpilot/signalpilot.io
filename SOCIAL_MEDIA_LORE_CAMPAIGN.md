@@ -4,7 +4,7 @@
 
 **Goal:** Build intrigue and brand identity before December 30 launch
 **Duration:** 10 posts over 5 days (2 posts per day)
-**Platforms:** Twitter/X, Instagram, TikTok
+**Platforms:** Twitter/X, Instagram
 **Start Date:** December 25, 2024
 **Launch Date:** December 30, 2024
 
@@ -90,7 +90,7 @@ Follow for the revelation.
 
 ---
 
-## TikTok
+##
 
 **Caption:**
 ```
@@ -172,7 +172,7 @@ One of Seven revealed. Six remain.
 
 ---
 
-## TikTok
+##
 
 **Caption:**
 ```
@@ -257,7 +257,7 @@ Two of Seven revealed. Five remain.
 
 ---
 
-## TikTok
+##
 
 **Caption:**
 ```
@@ -338,7 +338,7 @@ Three of Seven revealed. Four remain.
 
 ---
 
-## TikTok
+##
 
 **Caption:**
 ```
@@ -424,7 +424,7 @@ Four of Seven revealed. Three remain.
 
 ---
 
-## TikTok
+##
 
 **Caption:**
 ```
@@ -511,7 +511,7 @@ Five of Seven revealed. Two remain.
 
 ---
 
-## TikTok
+##
 
 **Caption:**
 ```
@@ -594,7 +594,7 @@ Six of Seven revealed. One remains.
 
 ---
 
-## TikTok
+##
 
 **Caption:**
 ```
@@ -681,7 +681,7 @@ All Seven revealed. The hierarchy awaits.
 
 ---
 
-## TikTok
+##
 
 **Caption:**
 ```
@@ -773,7 +773,7 @@ December 30: The Pilot's Oath. The revelation.
 
 ---
 
-## TikTok
+##
 
 **Caption:**
 ```
@@ -888,7 +888,7 @@ signalpilot.io
 
 ---
 
-## TikTok
+##
 
 **Caption:**
 ```
@@ -945,7 +945,7 @@ The Elite Seven are live. Link in bio.
 - Use Stories to tease "New entity revealed today"
 - Save all posts to a "Elite Seven" highlight
 
-## TikTok
+##
 - Keep videos 15-30 seconds
 - Use trending sounds if they fit the vibe (dark/epic/mysterious)
 - Add text overlays that match the captions
@@ -970,8 +970,6 @@ The Elite Seven are live. Link in bio.
 #priceaction #indicators #chartanalysis #marketanalysis #tradingstrategy #forexsignals #cryptosignals
 ```
 
-## TikTok Specific
-```
 #fyp #foryou #foryoupage #viral #tradertok #cryptotok #forextok
 ```
 
