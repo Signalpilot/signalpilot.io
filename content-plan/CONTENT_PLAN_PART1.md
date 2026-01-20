@@ -27804,55 +27804,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### TikTok
-**Hook:** "Before you ask, check this."
-
-**Script with Timestamps:**
-| Timestamp | On-Screen Text | Audio/Voiceover |
-|-----------|----------------|-----------------|
-| 0:00-0:02 | "Before you DM:" | "Before you send that DM" |
-| 0:02-0:04 | "Check the FAQ" | "Check the FAQ first" |
-| 0:04-0:06 | "Billing? ✓ Indicators? ✓" | "Billing, indicators" |
-| 0:06-0:08 | "Education? ✓ Tech? ✓" | "Education, tech support" |
-| 0:08-0:10 | "Link in bio" | "All answered. Link in bio" |
-
-**Duration:** 10 seconds
-
----
-
-### Canva Visual Creation Guide — Post 301
-
-**TEMPLATE SETUP:**
-1. Create 1080x1080 documentation style
-2. Background: #0a0a0f
-3. Clean, organized layout
-
-**LAYER STRUCTURE:**
-Layer 1: Dark gradient background
-Layer 2: Large "FAQ" or "?" icon centered top
-Layer 3: Question categories with icons
-Layer 4: Clean typography in Inter font
-Layer 5: Signal Pilot logo bottom
-
-**EXPORT:** PNG, maximum quality, all 6 slides
-
----
-
-### CapCut Video Creation Guide — Post 301
-
-**TIMELINE:**
-- 0:00-0:02: Hook with FAQ visual
-- 0:02-0:04: FAQ page scroll or checklist
-- 0:04-0:08: Categories appearing with checkmarks
-- 0:08-0:10: CTA with logo
-
-**AUDIO:** Helpful/efficiency trending sound
-**EFFECTS:** Checklist animations, smooth scrolling
-
-**EXPORT:** 1080x1920, 30fps, MP4
-
----
-
 ## POST 302 — Trend Identification
 **Type:** Education | **Pillar:** P3-Market Mechanics | **CTA:** Education Hub
 
