@@ -20135,27 +20135,6 @@ Full docs in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "CAP signal fired. What does it mean?"
-
-**Script:**
-```
-[0-2s] CAP SIGNAL 🟠
-[2-4s] Climax — Exhaustion Phase
-[4-6s] Extreme extension detected
-[6-8s] NOT an instant sell
-[8-10s] NOT a guarantee
-[10-12s] It's AWARENESS
-[12-14s] Context determines action
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Climax observed. #pentarch #signalpilot #trading #indicators"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -20178,24 +20157,6 @@ Full docs in bio 🔗
 4. **Slide 4:** What it's NOT
 5. **Slide 5:** How to use
 6. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Chart with CAP signal highlight
-3. **Timeline Setup:**
-   - 0-2s: CAP signal zooms in with orange glow
-   - 2-4s: "Climax — Exhaustion Phase" text
-   - 4-8s: "Extreme extension" language emphasized
-   - 8-12s: "NOT a sell signal" warning
-   - 12-14s: "Context determines action"
-4. **Color Theme:** Orange for climax
-5. **Pulsing:** "Extreme" and "NOT" pulse for emphasis
-6. **Audio:** Peak/climax sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -20268,27 +20229,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Buy cheap. Sell expensive. Here's how."
-
-**Script:**
-```
-[0-2s] PREMIUM vs DISCOUNT
-[2-4s] Find 50% of the range
-[4-6s] ABOVE 50% = Premium (expensive)
-[6-8s] BELOW 50% = Discount (cheap)
-[8-10s] BUY in discount ✅
-[10-12s] SELL in premium ✅
-[12-14s] Simple. Effective.
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Buy cheap, sell expensive. #trading #smc #zones #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -20312,24 +20252,6 @@ Full lesson in bio 🔗
 4. **Slide 4:** Buying strategy
 5. **Slide 5:** Selling strategy
 6. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Chart with zones highlighting
-3. **Timeline Setup:**
-   - 0-2s: "PREMIUM vs DISCOUNT" title
-   - 2-4s: 50% line draws across chart
-   - 4-6s: Premium zone highlights red/orange above
-   - 6-8s: Discount zone highlights green below
-   - 8-14s: Buy/sell arrows appear in correct zones
-4. **Animation:** Zones filling in with color
-5. **Color Coding:** Red=premium, Green=discount
-6. **Audio:** Value/price sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
