@@ -19297,28 +19297,6 @@ Full article in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Overtrading is costing you more than you think"
-
-**Script:**
-```
-[0-2s] OVERTRADING COSTS
-[2-4s] 💸 Commissions add up
-[4-5s] 😩 Mental energy drained
-[5-6s] 📉 Quality setups missed
-[6-8s] 🎰 Edge diluted
-[8-10s] More trades ≠ More profit
-[10-12s] BETTER trades = More profit
-[12-14s] Quality > Quantity
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Trade less. Trade better. #trading #overtrading #discipline #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -19338,23 +19316,6 @@ Full article in bio 🔗
 1. **Slide 1:** Title with cost visual
 2. **Slides 2-5:** Each cost type detailed
 3. **Slide 6:** The truth + CTA
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Costs accumulating
-3. **Timeline Setup:**
-   - 0-2s: "OVERTRADING COSTS" title
-   - 2-8s: Each cost appears with icon
-   - 8-10s: "More ≠ More profit"
-   - 10-14s: "BETTER = More profit"
-4. **Animation:** Costs stacking/draining
-5. **Money Visual:** Coins draining away
-6. **Audio:** Money drain sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -19424,28 +19385,6 @@ Read the full chronicle in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Every cycle ends. Every cycle begins again."
-
-**Script:**
-```
-[0-2s] THE SOVEREIGN'S CYCLE 👑
-[2-4s] 🟢 Accumulation
-[4-5s] 🔵 Markup
-[5-6s] 🟡 Distribution
-[6-7s] 🔴 Markdown
-[7-9s] Then it begins AGAIN
-[9-11s] The wheel always turns
-[11-13s] The Sovereign watches
-```
-
-**Duration:** 13 seconds
-
-**Caption:** "The wheel turns. #signalpilot #thesovereign #chronicle #cycles"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -19465,24 +19404,6 @@ Read the full chronicle in bio 🔗
    - Cormorant Garamond Italic, 32pt
 6. **Footer:** "THE SOVEREIGN" in small caps
 7. **Export:** PNG, high quality
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Cinematic, cyclical
-3. **Timeline Setup:**
-   - 0-2s: The Sovereign reveal with crown
-   - 2-7s: Cycle wheel rotates through phases
-   - 7-9s: "Then it begins again"
-   - 9-13s: Wheel continues turning
-4. **Animation:** Wheel rotation, continuous
-5. **Character:** The Sovereign figure watching
-6. **Audio:** Eternal/cyclical ambient at 30% volume
-7. **Color Grading:** Deep, royal tones
-8. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
