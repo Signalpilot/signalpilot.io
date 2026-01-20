@@ -14147,23 +14147,6 @@ SLIDE 5 - CTA:
 4. Signal Pilot logo
 ```
 
-### CapCut Video Creation Guide
-```
-1. Find chart with Volume Oracle showing distribution
-2. Show the bearish price action with red regime
-3. Text overlays at timestamps:
-   - 0-2s: "DISTRIBUTION REGIME"
-   - 2-8s: Characteristics
-   - 8-10s: "Short setups favored"
-   - 10-12s: "BUT..."
-   - 12-14s: "Context matters" with caution effect
-4. Sound design:
-   - Bearish/caution sound at 25% volume
-5. Show selling pressure and regime color
-7. Export: 1080x1920, 30fps
-8. Caption: "Distribution = bearish bias. #volumeoracle #trading"
-```
-
 ---
 
 ## POST 166 — MEAN REVERSION (Education)
@@ -14222,23 +14205,6 @@ Free mean reversion guide — link in bio 🔗
 - Slide 4: When it fails
 - Slide 5: Tools + CTA
 
-### TikTok Script
-```
-HOOK: "Mean reversion: Buy low, sell high, literally"
-
-[0-2s] MEAN REVERSION
-[2-4s] Price stretched HIGH
-[4-5s] → May come DOWN
-[5-7s] Price stretched LOW
-[7-8s] → May come UP
-[8-10s] Works in RANGES
-[10-12s] FAILS in trends
-[12-14s] Know your regime first
-
-DURATION: 14 seconds
-SOUND: Rubber band/snap sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -14277,24 +14243,6 @@ SLIDE 5 - Tools + CTA:
 3. "Free Mean Reversion Guide"
 4. Arrow to "Link in Bio"
 5. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Find chart with clear mean reversion bounces
-2. Show price stretching and returning to mean
-3. Text overlays at timestamps:
-   - 0-2s: "MEAN REVERSION"
-   - 2-5s: "Stretched HIGH → May come DOWN"
-   - 5-8s: "Stretched LOW → May come UP"
-   - 8-10s: "Works in RANGES"
-   - 10-12s: "FAILS in trends"
-   - 12-14s: "Know your regime"
-4. Use rubber band/snap sound at 25% volume
-5. Show the "snap back" to mean visually
-6. End with regime warning
-7. Export: 1080x1920, 30fps
-8. Caption: "Return to mean. #trading #meanreversion"
 ```
 
 ---
@@ -14357,22 +14305,6 @@ Full article — link in bio 🔗
 - Slide 4: Let it breathe & have a plan
 - Slide 5: CTA
 
-### TikTok Script
-```
-HOOK: "You cut your winners too early. Here's how to fix it."
-
-[0-2s] CUTTING WINNERS TOO EARLY?
-[2-4s] THE FIX:
-[4-6s] 📍 Take PARTIALS at targets
-[6-8s] 📍 TRAIL your stop
-[8-10s] 📍 Let it BREATHE
-[10-12s] Money is made in winners
-[12-14s] Don't sabotage them
-
-DURATION: 14 seconds
-SOUND: Success/growth sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -14410,22 +14342,6 @@ SLIDE 5 - CTA:
 2. "Read the Full Article"
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Find chart with well-managed winning trade
-2. Mark partial exits and trailing stops
-3. Text overlays at timestamps:
-   - 0-2s: "CUTTING WINNERS TOO EARLY?"
-   - 2-4s: "THE FIX:"
-   - 4-10s: Three management rules
-   - 10-14s: "Don't sabotage them"
-4. Use success/growth sound at 25% volume
-5. Show profit growing as trade is managed
-6. Highlight each management step
-7. Export: 1080x1920, 30fps
-8. Caption: "Let winners run. #trading #management"
 ```
 
 ---
