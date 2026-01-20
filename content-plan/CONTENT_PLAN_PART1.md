@@ -19970,28 +19970,6 @@ Full article in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Social media is ruining your trading"
-
-**Script:**
-```
-[0-2s] SOCIAL MEDIA TRADING
-[2-4s] ❌ Following calls blindly
-[4-5s] ❌ Comparing your journey
-[5-6s] ❌ FOMO from others' wins
-[6-8s] ❌ Fake gurus everywhere
-[8-10s] USE IT FOR:
-[10-12s] ✅ Education only
-[12-14s] Not trade signals
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Education, not signals. #trading #socialmedia #danger #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -20013,23 +19991,6 @@ Full article in bio 🔗
 2. **Slides 2-4:** Each danger explained
 3. **Slide 5:** What to use it for
 4. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Social media scroll with warnings
-3. **Timeline Setup:**
-   - 0-2s: Social feed scrolling
-   - 2-8s: Each danger stamps on with ❌
-   - 8-12s: "USE FOR:" transition to positive
-   - 12-14s: Education message
-4. **Animation:** Warning stamps appearing
-5. **Color Shift:** Red warnings → Green education
-6. **Audio:** Warning sound then positive ding
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -20090,27 +20051,6 @@ Save this. 🔖
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Pay for education or pay the market. Your choice."
-
-**Script:**
-```
-[0-2s] TWO OPTIONS
-[2-4s] Option 1: Educate FIRST
-[4-6s] Time + Paper losses
-[6-8s] Option 2: Learn from MARKET
-[8-10s] Real money + Confidence lost
-[10-12s] Same lessons
-[12-14s] Different price tag
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Choose wisely. #trading #education #quotes #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -20125,23 +20065,6 @@ Save this. 🔖
 5. **Diverging Road:** Visual showing paths splitting
 6. **Footer:** "Same lessons. Different price." in Inter, 24pt
 7. **Export:** PNG, high quality
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Two paths diverging
-3. **Timeline Setup:**
-   - 0-2s: "TWO OPTIONS" title
-   - 2-6s: Path 1 - Education (green glow)
-   - 6-10s: Path 2 - Market (red glow)
-   - 10-14s: Price comparison
-4. **Animation:** Paths diverging
-5. **Color Coding:** Green vs Red contrast
-6. **Audio:** Choice/decision sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
