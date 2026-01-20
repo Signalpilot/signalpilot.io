@@ -21535,28 +21535,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Entry is easy. Management is where money is made."
-
-**Script:**
-```
-[0-2s] OPTIMAL MANAGEMENT
-[2-4s] 1️⃣ Entry with stop
-[4-5s] 2️⃣ At 1R → Break-even
-[5-6s] 3️⃣ At 2R → Take 50%
-[6-8s] 4️⃣ Trail remainder
-[8-10s] 5️⃣ Extended target or trail out
-[10-12s] Entry is easy
-[12-14s] Management makes money
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Manage for profits. #trading #management #strategy #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -21576,25 +21554,6 @@ Full lesson in bio 🔗
 3. **Slides 3-4:** Steps detailed
 4. **Slide 5:** Goals
 5. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Trade progressing through levels
-3. **Timeline Setup:**
-   - 0-2s: "OPTIMAL MANAGEMENT" title
-   - 2-4s: Entry point marked
-   - 4-6s: 1R → Break-even animation
-   - 6-8s: 2R → Partial taken
-   - 8-10s: Trail stop moving
-   - 10-14s: Conclusion
-4. **Animation:** Price moving up, stops adjusting
-5. **Level Markers:** 1R, 2R, 3R visual
-6. **Audio:** Progress/level-up sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -21668,27 +21627,6 @@ Full setup guide in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Multi-monitor trading setup done right"
-
-**Script:**
-```
-[0-2s] MULTI-MONITOR SETUP
-[2-4s] 🖥️ Monitor 1: Main chart
-[4-6s] 🖥️ Monitor 2: Watchlist + Scanner
-[6-8s] 🖥️ Monitor 3: Calendar + News
-[8-10s] More context
-[10-12s] But keep it CLEAN
-[12-14s] Only what you actually use
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "More screens, more context. #trading #setup #multimonitor #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -21709,23 +21647,6 @@ Full setup guide in bio 🔗
 2. **Slides 2-4:** Each monitor detailed
 3. **Slide 5:** Tips
 4. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Setup tour
-3. **Timeline Setup:**
-   - 0-2s: "MULTI-MONITOR SETUP" title
-   - 2-8s: Pan across each monitor with labels
-   - 8-12s: Tips appearing
-   - 12-14s: "Only what you use"
-4. **Animation:** Pan/slide through monitors
-5. **Labels:** Monitor purpose appearing
-6. **Audio:** Tech setup sound at 20% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -21802,18 +21723,6 @@ Full setup guide in bio 🔗
 - [ ] The Cartographer character art
 - [ ] Trade management flow
 - [ ] Multi-monitor setup diagram
-
-### Videos Needed
-- [ ] Discord community (14s)
-- [ ] AMD candle building (14s)
-- [ ] Perfect setup myth (14s)
-- [ ] Journal value comparison (14s)
-- [ ] Harmonic components (14s)
-- [ ] Judas betrayal animation (14s)
-- [ ] Strategy troubleshooting (14s)
-- [ ] Cartographer journey (14s)
-- [ ] Trade management flow (14s)
-- [ ] Multi-monitor tour (14s)
 
 ---
 
@@ -21917,29 +21826,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Price increase coming. Lock in your rate now."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | PRICE INCREASE COMING ⏰ |
-| 2-4s | More features being added |
-| 4-6s | More education |
-| 6-8s | More value |
-| 8-10s | Current subscribers: LOCKED IN |
-| 10-12s | New subscribers: Act NOW |
-| 12-14s | Don't wait 🚨 |
-
-**Background:** Countdown/urgency visual
-
-**Sound:** Urgency/countdown sound
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -21961,35 +21847,6 @@ Full setup guide in bio 🔗
 - Include subtle countdown numbers in background
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 14 seconds
-3. Background: #0a0a0f with animated countdown
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Countdown clock animation | "PRICE INCREASE COMING ⏰" |
-| 2-4s | Feature icons appearing | "More features being added" |
-| 4-6s | Education icon | "More education" |
-| 6-8s | Value rising graphic | "More value" |
-| 8-10s | Checkmark lock-in | "Current subscribers: LOCKED IN" |
-| 10-12s | Clock ticking down | "New subscribers: Act NOW" |
-| 12-14s | Urgent flash | "Don't wait 🚨" |
-
-**Audio:** Urgency/alarm sound at 25% volume
-
-**Effects:**
-- Flash/pulse on final frames
-- Countdown timer overlay throughout
-- Text pop-in animations
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -22063,28 +21920,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Not all trading hours are created equal."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Not all hours are equal" |
-| 2-4s | "London Open = Expansion" |
-| 4-6s | "NY Overlap = Peak Volume" |
-| 6-8s | "Asia = Consolidation" |
-| 8-10s | "Session timing matters" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** World map animation with session zones lighting up in sequence
-
-**Sound:** Trending cinematic/educational sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -22113,34 +21948,6 @@ Full setup guide in bio 🔗
 - Slide 8: CTA
 
 **Export:** PNG, high quality for each slide
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Dark world map
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Dark world map | "Not all hours are equal" |
-| 2-4s | London zone lights up blue | "London Open = Expansion" |
-| 4-6s | NY + London both lit | "NY Overlap = Peak Volume" |
-| 6-8s | Asia zone lights up | "Asia = Consolidation" |
-| 8-10s | Full map with all zones | "Session timing matters" |
-| 10-12s | Signal Pilot logo | "Free lesson → bio" |
-
-**Audio:** Cinematic educational sound at 20% volume
-
-**Effects:**
-- Zone glow animations as each lights up
-- Subtle pulse effects
-- Smooth transitions between zones
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -22206,27 +22013,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "The trade that made me the most money?"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Trade that made me most money?" |
-| 2-4s | "The one I didn't take." |
-| 4-6s | "No setup = no trade" |
-| 6-8s | "Discipline > activity" |
-| 8-10s | "Patience is a strategy" |
-
-**Background:** Trader sitting back from screen, hands behind head
-
-**Sound:** Reflective/thoughtful trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -22247,33 +22033,6 @@ Full setup guide in bio 🔗
 - Final slide: Blog link CTA
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Calm trading setup or dark background
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Trading screens visible | "Trade that made me most money?" |
-| 2-4s | Fade to black or calm scene | "The one I didn't take." |
-| 4-6s | Empty chart | "No setup = no trade" |
-| 6-8s | Trader sitting back | "Discipline > activity" |
-| 8-10s | Calm scene | "Patience is a strategy" |
-
-**Audio:** Reflective, thoughtful sound at 20% volume
-
-**Effects:**
-- Slow fade transitions
-- Minimal movement, contemplative feel
-- Text fade-ins
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -22337,28 +22096,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "This mindset shift changed everything."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Mindset shift that changed everything:" |
-| 2-4s | "Good trades can lose money" |
-| 4-6s | "Bad trades can make money" |
-| 6-8s | "Judge the PROCESS" |
-| 8-10s | "Not the outcome" |
-| 10-12s | "Focus on what you control" |
-
-**Background:** Close-up of trading journal or trade review screen
-
-**Sound:** Motivational/reflective trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -22379,34 +22116,6 @@ Full setup guide in bio 🔗
 - Clean, centered composition
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Dark with subtle texture
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Trading journal close-up | "Mindset shift that changed everything:" |
-| 2-4s | Dark background | "Good trades can lose money" |
-| 4-6s | Dark background | "Bad trades can make money" |
-| 6-8s | Emphasis graphic | "Judge the PROCESS" (larger) |
-| 8-10s | Continuation | "Not the outcome" |
-| 10-12s | Logo | "Focus on what you control" |
-
-**Audio:** Motivational, reflective audio at 20% volume
-
-**Effects:**
-- Text scale animation on "PROCESS"
-- Smooth fades between concepts
-- Impactful reveal on key line
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -22476,28 +22185,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "This indicator tells you what kind of market you're in."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "What kind of market is this?" |
-| 2-4s | "Volume Oracle classifies regimes" |
-| 4-6s | "TRENDING = directional flow" |
-| 6-8s | "RANGING = balanced, wait" |
-| 8-10s | "BREAKOUT = expansion incoming" |
-| 10-12s | "Context before action" |
-
-**Background:** Screen recording of Volume Oracle showing regime transitions
-
-**Sound:** Tech/futuristic trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -22521,34 +22208,6 @@ Full setup guide in bio 🔗
 - Slide 7: CTA
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: TradingView screen recording
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Chart with Volume Oracle | "What kind of market is this?" |
-| 2-4s | Indicator highlighted | "Volume Oracle classifies regimes" |
-| 4-6s | Trending section | "TRENDING = directional flow" |
-| 6-8s | Ranging section | "RANGING = balanced, wait" |
-| 8-10s | Breakout section | "BREAKOUT = expansion incoming" |
-| 10-12s | Full view with logo | "Context before action" |
-
-**Audio:** Tech/futuristic sound at 20% volume
-
-**Effects:**
-- Highlight box around indicator
-- Color tint matching regime
-- Smooth scrolling through chart
-
-**Export:** 1080x1920, 30fps
 
 ---
 
