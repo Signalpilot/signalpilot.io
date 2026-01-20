@@ -6330,7 +6330,6 @@ Full lesson + PDF in bio
 - [ ] 10 Twitter graphics (1200x675)
 - [ ] 10 Instagram posts (1080x1080)
 - [ ] 2 Instagram carousels (6 slides each)
-- [ ] 10 TikTok videos (1080x1920)
 - [ ] Character art: The Commander
 - [ ] Chart screenshots: BTC cycle, Fib levels, volume examples
 - [ ] Quote cards: 1 (Plan-Trade-Review)
@@ -6540,25 +6539,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "One timeframe shows the battle. Multiple show the war."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | MULTI-TIMEFRAME ANALYSIS |
-| 2-4s | HIGHER TF = Your bias |
-| 4-6s | What's the overall trend? |
-| 6-8s | LOWER TF = Your entry |
-| 8-10s | Where do you get in? |
-| 10-12s | Never fight the higher timeframe |
-| 12-14s | Align them. Win more. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -6569,17 +6549,6 @@ Full lesson + PDF in bio
 6. Use blue (#4a90d9) for labels
 7. "Don't fight the trend" bottom
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open TradingView with same asset on 3 TFs
-2. Screen record switching between them
-3. Import to CapCut
-4. Label each timeframe as it appears
-5. Strategic ambient sound, 25% volume
-6. Export 1080x1920
 
 ---
 
@@ -6628,27 +6597,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Being early and being wrong look exactly the same"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | BEING EARLY |
-| 2-3s | vs |
-| 3-4s | BEING WRONG |
-| 4-6s | They look IDENTICAL |
-| 6-8s | Your thesis was right |
-| 8-9s | Your timing was off |
-| 9-10s | Stop hit. Then it moved. |
-| 10-12s | "Right" doesn't matter if you're OUT |
-| 12-14s | Wait for confirmation. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -6658,16 +6606,6 @@ Full lesson + PDF in bio
 5. Dramatic spacing
 6. SignalPilot logo subtle bottom
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → Dark gradient background
-2. Add text with dramatic timing
-3. Pause between "early" and "wrong"
-4. Painful realization sound, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -6722,25 +6660,6 @@ Full lesson + PDF in bio
 > Demo in bio 🔗
 
 **Hashtags:** #VolumeOracle #TheProphet #MarketRegimes #Volatility #SignalPilot #CryptoTrading #ForexTrading #TradingIndicators #TradingView #RegimeDetection #VolatilityTrading #TradingStrategy #MarketPhases #AdaptiveTrading #TradingEdge
-
----
-
-### 🎬 TikTok
-
-**Hook:** "Your strategy isn't broken. You're using it in the wrong regime."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | YOUR BIAS ISN'T BROKEN |
-| 2-4s | You're in the WRONG REGIME |
-| 4-6s | ACCUMULATION = Bullish bias |
-| 6-8s | DISTRIBUTION = Bearish bias |
-| 8-10s | Volume Oracle detects the regime |
-| 10-12s | Match trades to regime |
-| 12-14s | The Prophet sees the phase. |
-
-**Duration:** 14 seconds
 
 ---
 
@@ -6820,27 +6739,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "If it doesn't work on past data, why would it work live?"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | BACKTESTING |
-| 2-4s | Test BEFORE you trade live |
-| 4-5s | Win rate? |
-| 5-6s | Risk:Reward? |
-| 6-7s | Max drawdown? |
-| 7-8s | Expectancy? |
-| 8-10s | 100+ trades minimum |
-| 10-12s | No cherry-picking |
-| 12-14s | Data > Hope |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -6850,16 +6748,6 @@ Full lesson + PDF in bio
 5. Use green for positive, red for negative
 6. "Data > Hope" tagline bottom
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create or find backtesting results example
-2. Screen record scrolling through metrics
-3. Highlight each metric as mentioned
-4. Analytical ambient sound, 20% volume
-5. Export 1080x1920
 
 ---
 
@@ -6915,27 +6803,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Your stop loss isn't hidden. It's obvious."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | YOUR STOP ISN'T HIDDEN |
-| 2-3s | It's OBVIOUS |
-| 3-5s | Below that swing low? |
-| 5-6s | LIQUIDITY |
-| 6-8s | Price sweeps it |
-| 8-9s | Triggers your stop |
-| 9-10s | Then reverses |
-| 10-12s | You got hunted 🎯 |
-| 12-14s | Give your stops room. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -6945,17 +6812,6 @@ Full lesson + PDF in bio
 5. Labels: "Liquidity zone" "Your stop" "Reversal"
 6. Red for stop hit, green for reversal
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear liquidity grab
-2. Circle the obvious stop level
-3. Show the sweep and reversal
-4. Hunting/predator sound, 25% volume
-5. Target emoji for "hunted"
-6. Export 1080x1920
 
 ---
 
@@ -7005,25 +6861,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Meet The Prophet"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | THE PROPHET 🔮 |
-| 2-4s | "I do not see the future" |
-| 4-6s | "I see the conditions that create it" |
-| 6-8s | Volume Oracle reads the environment |
-| 8-10s | Volatility regimes |
-| 10-12s | Market phases |
-| 12-14s | The Prophet prepares. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -7033,16 +6870,6 @@ Full lesson + PDF in bio
 5. Purple/mystical color accents
 6. Chronicle series badge
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Import The Prophet character image
-2. Apply mystical zoom/glow effect
-3. Ethereal font for text
-4. Oracle ambient sound, 30% volume
-5. Export 1080x1920
 
 ---
 
@@ -7097,26 +6924,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "You wouldn't fly a plane without a simulator"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | PILOTS USE SIMULATORS |
-| 2-4s | Why don't you? |
-| 4-6s | PAPER TRADING |
-| 6-7s | Test strategies |
-| 7-8s | Build process |
-| 8-9s | Make mistakes FREE |
-| 9-11s | Treat it like real money |
-| 11-13s | Then go live |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -7126,16 +6933,6 @@ Full lesson + PDF in bio
 5. Checklist of paper trading rules
 6. Green checkmarks
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Screen record paper trading interface
-2. Show demo account features
-3. Training/preparation sound, 20% volume
-4. Text at timestamps
-5. Export 1080x1920
 
 ---
 
@@ -7197,25 +6994,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Pentarch signals explained in 15 seconds"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | PENTARCH SIGNALS |
-| 2-3s | 🟣 TD = Accumulation zone |
-| 3-5s | 🩵 IGN = Momentum building |
-| 5-7s | 🟡 WRN = Distribution warning |
-| 7-9s | 🟠 CAP = Climax / Peak |
-| 9-11s | 🔴 BDN = Breakdown |
-| 11-13s | The Sovereign speaks in phases |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -7229,16 +7007,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → Dark royal background
-2. Each signal appears with matching color circle
-3. Elegant/royal font
-4. Sovereign ambient sound, 25% volume
-5. Export 1080x1920
-
----
-
 ## 📅 BATCH 08 POSTING SCHEDULE
 
 | Day | Post | Platform Focus | Best Time |
@@ -7247,11 +7015,11 @@ Full lesson + PDF in bio
 | Mon | 072 | Instagram | 12:00 PM EST |
 | Tue | 073 | Twitter/Blog | 9:00 AM EST |
 | Tue | 074 | All Platforms | 6:00 PM EST |
-| Wed | 075 | Twitter/TikTok | 9:00 AM EST |
+| Wed | 075 | Twitter | 9:00 AM EST |
 | Wed | 076 | Instagram | 12:00 PM EST |
 | Thu | 077 | Twitter/Blog | 9:00 AM EST |
 | Thu | 078 | All Platforms | 6:00 PM EST |
-| Fri | 079 | Twitter/TikTok | 9:00 AM EST |
+| Fri | 079 | Twitter | 9:00 AM EST |
 | Fri | 080 | Twitter/Docs | 12:00 PM EST |
 
 ---
@@ -7279,7 +7047,6 @@ Full lesson + PDF in bio
 
 - [ ] 10 Twitter graphics (1200x675)
 - [ ] 10 Instagram posts (1080x1080)
-- [ ] 10 TikTok videos (1080x1920)
 - [ ] Character art: The Prophet
 - [ ] Chart screenshots: Volume Oracle regimes, liquidity sweep
 - [ ] Quote cards: 1 (Early vs Wrong)
@@ -7361,25 +7128,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Stop paying full price"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | STOP PAYING FULL PRICE |
-| 2-4s | Monthly: $99 × 12 = $1,188 |
-| 4-6s | Annual: $699 |
-| 6-8s | You save: $489 💰 |
-| 8-10s | Same indicators |
-| 10-11s | Same lessons |
-| 11-12s | Smarter math |
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -7391,17 +7139,6 @@ Full lesson + PDF in bio
 7. Checkmarks for included features
 8. SignalPilot branding
 9. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → Dark background
-2. Calculator-style math animation
-3. Highlight savings in green
-4. Money bag emoji on savings reveal
-5. Smart decision sound, 25% volume
-6. Export 1080x1920
 
 ---
 
@@ -7454,26 +7191,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Paper trading profitable? Here's how to go live."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | READY TO GO LIVE? |
-| 2-3s | ✅ Paper profitable 3+ months |
-| 3-4s | ✅ 100+ backtested trades |
-| 4-5s | ✅ Risk management set |
-| 5-6s | ✅ Journal ready |
-| 6-8s | START SMALL |
-| 8-10s | Emotions hit DIFFERENT with real money |
-| 10-12s | Scale up as you prove yourself |
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -7484,17 +7201,6 @@ Full lesson + PDF in bio
 6. "START SMALL" emphasized in gold
 7. SignalPilot branding
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → Dark background
-2. Checklist items appearing one by one
-3. Animate checkmarks appearing
-4. Emphasize "START SMALL" with bold/glow
-5. Achievement sound, 25% volume
-6. Export 1080x1920
 
 ---
 
@@ -7553,27 +7259,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Every market follows this cycle"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | EVERY MARKET. SAME CYCLE. |
-| 2-4s | 1. ACCUMULATION |
-| 4-5s | Smart money buys quietly |
-| 5-7s | 2. MARKUP |
-| 7-8s | Price rises, public joins |
-| 8-10s | 3. DISTRIBUTION |
-| 10-11s | Smart money sells quietly |
-| 11-13s | 4. MARKDOWN |
-| 13-14s | Public panics. Repeat. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -7585,16 +7270,6 @@ Full lesson + PDF in bio
 7. Red for distribution/markdown
 8. Labels for each phase
 9. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create or find Wyckoff cycle diagram
-2. Animate each phase appearing sequentially
-3. Arrows showing the cycle loop
-4. Cycle/rhythmic ambient sound, 20% volume
-5. Export 1080x1920
 
 ---
 
@@ -7644,25 +7319,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "The market can stay irrational longer than you can stay solvent"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | THE MARKET |
-| 2-4s | Can remain IRRATIONAL |
-| 4-6s | Longer than YOU |
-| 6-8s | Can remain SOLVENT |
-| 8-10s | You can be RIGHT |
-| 10-11s | And still go BROKE |
-| 11-13s | Survival > Being right |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -7672,17 +7328,6 @@ Full lesson + PDF in bio
 5. Classic elegant styling
 6. SignalPilot logo subtle bottom
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → Dark dramatic background
-2. Build text slowly for emphasis
-3. Different colors for contrast
-4. Pause before final message
-5. Serious warning ambient, 25% volume
-6. Export 1080x1920
 
 ---
 
@@ -7735,25 +7380,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "One level is a suggestion. Multiple levels is confluence."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | ONE LEVEL = Suggestion |
-| 2-4s | MULTIPLE LEVELS = Confluence |
-| 4-6s | Daily level: $50,000 |
-| 6-7s | 4H level: $50,100 |
-| 7-8s | 1H level: $49,950 |
-| 8-10s | Same zone. STRONG. |
-| 10-12s | The Cartographer maps them all 🗺️ |
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -7764,17 +7390,6 @@ Full lesson + PDF in bio
 6. Legend showing TF colors
 7. SignalPilot branding
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open TradingView with Janus Atlas
-2. Find area where levels cluster
-3. Screen record highlighting confluence
-4. Circle the zone
-5. Discovery/alignment sound, 25% volume
-6. Export 1080x1920
 
 ---
 
@@ -7833,25 +7448,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Market structure is everything"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | MARKET STRUCTURE |
-| 2-4s | BULLISH = HH + HL |
-| 4-6s | BEARISH = LH + LL |
-| 6-8s | BREAK OF STRUCTURE |
-| 8-10s | = Trend may be changing |
-| 10-12s | Read structure FIRST |
-| 12-14s | Patterns come second |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -7862,16 +7458,6 @@ Full lesson + PDF in bio
 6. BOS line highlighted
 7. "Structure > Patterns" tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear market structure
-2. Screen record, draw HH/HL/LH/LL labels
-3. Highlight the BOS moment
-4. Educational ambient sound, 20% volume
-5. Export 1080x1920
 
 ---
 
@@ -7926,25 +7512,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Order blocks are footprints, not magic"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | ORDER BLOCKS |
-| 2-4s | Not magic. FOOTPRINTS. |
-| 4-6s | Last candle before the move |
-| 6-8s | = Where institutions positioned |
-| 8-10s | Price often returns to test |
-| 10-12s | That's your entry zone |
-| 12-14s | Mark it. Wait. React. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -7955,16 +7522,6 @@ Full lesson + PDF in bio
 6. Labels: "OB" "Impulse" "Retest"
 7. Blue for bullish OB, red for bearish
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear order block + retest
-2. Draw box around the OB
-3. Show price returning to it
-4. Footstep/discovery sound, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -8022,26 +7579,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Before the Elite Seven, there was only chaos"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | BEFORE THE SEVEN |
-| 2-4s | There was CHAOS |
-| 4-5s | Repainting indicators |
-| 5-6s | Contradicting signals |
-| 6-7s | Noise everywhere |
-| 7-9s | Then they emerged |
-| 9-11s | THE ELITE SEVEN |
-| 11-13s | Clarity from chaos. |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -8052,16 +7589,6 @@ Full lesson + PDF in bio
 6. Epic/mythological font
 7. Chronicle series badge
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Get Elite Seven origin artwork
-2. Dramatic reveal of figures emerging
-3. Build intensity toward "ELITE SEVEN"
-4. Epic orchestral sound, 35% volume
-5. Export 1080x1920
 
 ---
 
@@ -8118,25 +7645,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Support is a line. Demand is a ZONE."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | SUPPORT = Line |
-| 2-4s | DEMAND = ZONE |
-| 4-6s | Where buyers overwhelmed sellers |
-| 6-8s | Strong rally started here |
-| 8-10s | Price returns to retest |
-| 10-12s | Fresh zones = Best zones |
-| 12-14s | That's your opportunity |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -8147,17 +7655,6 @@ Full lesson + PDF in bio
 6. Labels: "Demand" "Supply"
 7. "Zones > Lines" tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear zones
-2. Draw zone boxes
-3. Show price returning to test
-4. Green for demand, red for supply
-5. Strategic ambient sound, 20% volume
-6. Export 1080x1920
 
 ---
 
@@ -8212,26 +7709,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Volume Oracle settings explained"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | VOLUME ORACLE SETTINGS |
-| 2-4s | SENSITIVITY |
-| 4-5s | Higher = More changes detected |
-| 5-6s | Lower = Fewer, bigger changes |
-| 6-8s | SMOOTHING |
-| 8-9s | Higher = Cleaner, slower |
-| 9-10s | Lower = Faster, noisier |
-| 10-12s | Match settings to market |
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -8244,16 +7721,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Screen record Volume Oracle settings
-2. Show adjusting sliders
-3. Highlight each setting effect
-4. Tech/settings ambient sound, 20% volume
-5. Export 1080x1920
-
----
-
 ## 📅 BATCH 09 POSTING SCHEDULE
 
 | Day | Post | Platform Focus | Best Time |
@@ -8262,11 +7729,11 @@ Full lesson + PDF in bio
 | Mon | 082 | Instagram | 12:00 PM EST |
 | Tue | 083 | Twitter/Blog | 9:00 AM EST |
 | Tue | 084 | All Platforms | 6:00 PM EST |
-| Wed | 085 | Twitter/TikTok | 9:00 AM EST |
+| Wed | 085 | Twitter | 9:00 AM EST |
 | Wed | 086 | Instagram | 12:00 PM EST |
 | Thu | 087 | Twitter/Blog | 9:00 AM EST |
 | Thu | 088 | All Platforms | 6:00 PM EST |
-| Fri | 089 | Twitter/TikTok | 9:00 AM EST |
+| Fri | 089 | Twitter | 9:00 AM EST |
 | Fri | 090 | Twitter/Docs | 12:00 PM EST |
 
 ---
@@ -8294,7 +7761,6 @@ Full lesson + PDF in bio
 
 - [ ] 10 Twitter graphics (1200x675)
 - [ ] 10 Instagram posts (1080x1080)
-- [ ] 10 TikTok videos (1080x1920)
 - [ ] Character art: Elite Seven origin
 - [ ] Chart screenshots: Janus confluence, market structure, order blocks, zones
 - [ ] Quote cards: 1 (Market irrationality)
@@ -8374,26 +7840,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "If your indicator repaints, it's lying to you"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | DOES YOUR INDICATOR REPAINT? |
-| 2-4s | Then it's LYING to you |
-| 4-6s | Repainting = Changes past signals |
-| 6-8s | Looks perfect in hindsight |
-| 8-9s | Fails in real-time |
-| 9-11s | Signal Pilot? |
-| 11-12s | NON-REPAINTING. Guaranteed. |
-| 12-14s | What you see is what happened. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -8404,16 +7850,6 @@ Full lesson + PDF in bio
 6. "NON-REPAINTING GUARANTEED" badge
 7. SignalPilot branding
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create visual showing repaint problem
-2. Show Signal Pilot consistency
-3. Use ❌ for repainting, ✅ for non-repainting
-4. Trust/guarantee sound, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -8468,25 +7904,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Price leaves gaps. Then comes back to fill them."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | FAIR VALUE GAP |
-| 2-4s | Price moves TOO fast |
-| 4-6s | Leaves a gap between candles |
-| 6-8s | That's IMBALANCE |
-| 8-10s | Price often returns to fill it |
-| 10-12s | Not always. But often. |
-| 12-14s | Use with confluence. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -8497,16 +7914,6 @@ Full lesson + PDF in bio
 6. Arrow showing price returning to fill
 7. Blue (#4a90d9) for the gap zone
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear FVG and fill
-2. Highlight the gap with box
-3. Show price returning
-4. Imbalance/void sound, 20% volume
-5. Export 1080x1920
 
 ---
 
@@ -8564,26 +7971,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Indicators aren't broken. You're using them wrong."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | INDICATORS DON'T FAIL |
-| 2-4s | YOU misuse them |
-| 4-5s | ❌ Expecting prediction |
-| 5-6s | ❌ Lagging for entries |
-| 6-7s | ❌ Ignoring context |
-| 7-8s | ❌ Too many = paralysis |
-| 8-10s | Indicators are TOOLS |
-| 10-12s | Not crystal balls 🔮 |
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -8594,16 +7981,6 @@ Full lesson + PDF in bio
 6. List of common mistakes with ❌
 7. "Tools, Not Crystal Balls" tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create cluttered chart screenshot
-2. Transform to clean chart
-3. ❌ appearing with each mistake
-4. Reality check sound, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -8655,26 +8032,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Discipline is choosing what you want MOST over what you want NOW"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | DISCIPLINE |
-| 2-4s | What you want NOW: |
-| 4-5s | Revenge trade |
-| 5-6s | FOMO buy |
-| 6-7s | Skip the process |
-| 7-9s | What you want MOST: |
-| 9-10s | Long-term profitability |
-| 10-12s | Every impulse = Vote against future you |
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -8684,16 +8041,6 @@ Full lesson + PDF in bio
 5. Gold (#c9a962) for key emphasis
 6. SignalPilot branding
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → Dark background
-2. Split NOW vs MOST visual
-3. Build tension then resolution
-4. Reflective sound, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -8748,24 +8095,6 @@ Full lesson + PDF in bio
 
 **Hashtags:** #Divergence #HarmonicOscillator #TheArbiter #MomentumTrading #SignalPilot #CryptoTrading #ForexTrading #TechnicalAnalysis #TradingIndicators #BearishDivergence #BullishDivergence #LearnTrading #OscillatorTrading #TradingWarning #TrendWeakness
 
----
-
-### 🎬 TikTok
-
-**Hook:** "Price makes new high. Momentum doesn't. Watch out."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | PRICE: New high ⬆️ |
-| 2-4s | OSCILLATOR: Lower high ⬇️ |
-| 4-6s | That's DIVERGENCE |
-| 6-8s | Momentum is FAILING |
-| 8-10s | Not instant reversal |
-| 10-12s | But a WARNING ⚠️ |
-| 12-14s | The Arbiter sees it. |
-
-**Duration:** 14 seconds
 
 ---
 
@@ -8778,16 +8107,6 @@ Full lesson + PDF in bio
 5. "⚠️ WARNING" label
 6. "The Arbiter" branding element
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear divergence
-2. Draw divergence lines
-3. Show price vs oscillator disagreement
-4. Warning sound, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -8840,26 +8159,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "That breakout? It was a trap."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | THE BREAKOUT 📈 |
-| 2-3s | You bought it |
-| 3-4s | Stop below the level |
-| 4-6s | Then it REVERSED 📉 |
-| 6-8s | Stopped you out |
-| 8-9s | Then went YOUR direction |
-| 9-11s | That was INDUCEMENT |
-| 11-13s | The trap before the move 🪤 |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -8870,16 +8169,6 @@ Full lesson + PDF in bio
 6. 🪤 trap emoji prominent
 7. "Don't fall for it" tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear inducement
-2. Show the trap unfold step by step
-3. Stop getting hit, then reversal
-4. Trap sound effect, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -8933,26 +8222,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "The hardest trading skill? Doing absolutely nothing."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | HARDEST TRADING SKILL |
-| 2-4s | Doing NOTHING |
-| 4-5s | No setup? Nothing. |
-| 5-6s | Uncertain? Nothing. |
-| 6-7s | Emotional? Nothing. |
-| 7-9s | Most losses = |
-| 9-11s | Trades that shouldn't exist |
-| 11-13s | Patience IS a position |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -8963,16 +8232,6 @@ Full lesson + PDF in bio
 6. Gold (#c9a962) accents
 7. SignalPilot branding subtle
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → Calm zen background
-2. Text appearing slowly, peacefully
-3. Minimal animation
-4. Zen ambient sound, 15% volume
-5. Export 1080x1920
 
 ---
 
@@ -9024,28 +8283,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "When the Elite Seven gather..."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | THE COUNCIL ASSEMBLES |
-| 2-3s | 👑 The Sovereign — Cycles |
-| 3-4s | 🔮 The Prophet — Regimes |
-| 4-5s | 🗺️ The Cartographer — Levels |
-| 5-6s | ⚖️ The Scales — Flow |
-| 6-7s | ⚔️ The Arbiter — Momentum |
-| 7-8s | 👁️ The Watchman — Scanning |
-| 8-9s | 🎯 The Commander — Unity |
-| 9-11s | Together, unstoppable. |
-| 11-13s | This is CONFLUENCE. |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -9056,16 +8293,6 @@ Full lesson + PDF in bio
 6. "CONFLUENCE" as final reveal
 7. Chronicle series badge
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Get council assembly artwork
-2. Highlight each figure as named
-3. Build to dramatic confluence reveal
-4. Epic orchestral sound, 35% volume
-5. Export 1080x1920
 
 ---
 
@@ -9121,26 +8348,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Not every pattern means reversal"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | NOT EVERY PATTERN = REVERSAL |
-| 2-4s | Some are just PAUSES |
-| 4-6s | 🚩 FLAGS |
-| 6-7s | Sharp move, tight rest, continue |
-| 7-9s | 📐 PENNANTS |
-| 9-10s | Pole + triangle, then break |
-| 10-12s | Trade WITH the trend |
-| 12-14s | Not against it. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -9151,16 +8358,6 @@ Full lesson + PDF in bio
 6. "Pauses, Not Reversals" tagline
 7. Blue (#4a90d9) for pattern lines
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find charts with flag and pennant patterns
-2. Show the continuation playing out
-3. Draw patterns as mentioned
-4. Flow/smooth sound, 20% volume
-5. Export 1080x1920
 
 ---
 
@@ -9221,27 +8418,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "New to Signal Pilot? Here's your workflow."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | SIGNAL PILOT WORKFLOW |
-| 2-3s | 1. Add to TradingView |
-| 3-4s | 2. Start with ONE indicator |
-| 4-5s | 3. Complete beginner lessons |
-| 5-6s | 4. Paper trade |
-| 6-7s | 5. Add more gradually |
-| 7-8s | 6. Go live when ready |
-| 8-10s | Master one first |
-| 10-12s | Don't rush. |
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -9255,16 +8431,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create path/journey visual animation
-2. Steps appearing along the path
-3. Icons for each step
-4. Journey/progress sound, 20% volume
-5. Export 1080x1920
-
----
-
 ## 📅 BATCH 10 POSTING SCHEDULE
 
 | Day | Post | Platform Focus | Best Time |
@@ -9273,11 +8439,11 @@ Full lesson + PDF in bio
 | Mon | 092 | Instagram | 12:00 PM EST |
 | Tue | 093 | Twitter/Blog | 9:00 AM EST |
 | Tue | 094 | All Platforms | 6:00 PM EST |
-| Wed | 095 | Twitter/TikTok | 9:00 AM EST |
+| Wed | 095 | Twitter | 9:00 AM EST |
 | Wed | 096 | Instagram | 12:00 PM EST |
 | Thu | 097 | Twitter/Blog | 9:00 AM EST |
 | Thu | 098 | All Platforms | 6:00 PM EST |
-| Fri | 099 | Twitter/TikTok | 9:00 AM EST |
+| Fri | 099 | Twitter | 9:00 AM EST |
 | Fri | 100 | Twitter/Docs | 12:00 PM EST |
 
 ---
@@ -9305,7 +8471,6 @@ Full lesson + PDF in bio
 
 - [ ] 10 Twitter graphics (1200x675)
 - [ ] 10 Instagram posts (1080x1080)
-- [ ] 10 TikTok videos (1080x1920)
 - [ ] Character art: Council assembly
 - [ ] Chart screenshots: FVG, divergence, inducement, continuation patterns
 - [ ] Quote cards: 1 (Discipline now vs most)
@@ -9385,26 +8550,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "100 posts. All free. And we're just starting."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | 100 POSTS 🎉 |
-| 2-4s | Psychology ✅ |
-| 4-5s | Risk Management ✅ |
-| 5-6s | Technical Analysis ✅ |
-| 6-7s | Indicator Demos ✅ |
-| 7-8s | Chronicle Lore ✅ |
-| 8-10s | 500+ more coming |
-| 10-12s | Thank you for learning with us 🙏 |
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -9415,17 +8560,6 @@ Full lesson + PDF in bio
 6. "THANK YOU" message
 7. SignalPilot branding
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → Celebration background
-2. Big "100" with confetti effect
-3. Checkmarks appearing for each category
-4. End with gratitude message
-5. Celebration sound, 30% volume
-6. Export 1080x1920
 
 ---
 
@@ -9480,26 +8614,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Price is a magnet for liquidity"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | LIQUIDITY POOLS 🧲 |
-| 2-4s | Where stop losses CLUSTER |
-| 4-5s | Above equal highs |
-| 5-6s | Below equal lows |
-| 6-7s | At round numbers |
-| 7-9s | Price HUNTS these levels |
-| 9-11s | Your stop = Their entry |
-| 11-13s | Expect the sweep first |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -9510,16 +8624,6 @@ Full lesson + PDF in bio
 6. Magnet emoji for visual
 7. "Price is drawn to liquidity"
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with liquidity sweep
-2. Mark the equal highs/lows
-3. Show price sweeping then reversing
-4. Magnet sound effect, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -9578,25 +8682,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Stop fighting the trend"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | STOP FIGHTING THE TREND |
-| 2-4s | UPTREND = Look for longs |
-| 4-6s | DOWNTREND = Look for shorts |
-| 6-8s | NO TREND = Wait |
-| 8-10s | Trend is your FRIEND |
-| 10-12s | Until it ends |
-| 12-14s | Don't be a hero. Follow it. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -9607,15 +8692,6 @@ Full lesson + PDF in bio
 6. Green for uptrend, red for downtrend
 7. "Trade with the trend" tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear trend
-2. Mark ideal entry points with arrows
-3. Smooth flow sound, 20% volume
-4. Export 1080x1920
 
 ---
 
@@ -9668,26 +8744,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Losses are tuition. Blow-ups are expulsion."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | LOSSES = TUITION 📚 |
-| 2-4s | They teach you |
-| 4-5s | Part of the process |
-| 5-7s | BLOW-UPS = EXPULSION 🚫 |
-| 7-8s | They remove you |
-| 8-9s | Game over |
-| 9-11s | Pay the tuition |
-| 11-13s | Avoid expulsion |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -9698,15 +8754,6 @@ Full lesson + PDF in bio
 6. Gold (#c9a962) accents
 7. SignalPilot branding
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → Split theme visual
-2. 📚 for tuition, 🚫 for expulsion
-3. School bell then warning sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -9765,25 +8812,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "TD signal fired. Now what?"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | TD SIGNAL 🟢 |
-| 2-4s | Trend Determination |
-| 4-6s | Market MAY be establishing direction |
-| 6-8s | It's NOT a buy signal |
-| 8-10s | It's NOT a sell signal |
-| 10-12s | It's AWARENESS |
-| 12-14s | The Sovereign observes. You decide. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -9793,15 +8821,6 @@ Full lesson + PDF in bio
 5. Labels: "What it IS" vs "What it's NOT"
 6. "The Sovereign" branding element
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear TD signal
-2. Show context around the signal
-3. Awareness/alert sound, 20% volume
-4. Export 1080x1920
 
 ---
 
@@ -9857,26 +8876,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Reversal patterns don't mean instant reversal"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | REVERSAL PATTERNS |
-| 2-4s | Head & Shoulders 👤 |
-| 4-5s | Double Top/Bottom 📊 |
-| 5-6s | Triple Top/Bottom 📈 |
-| 6-8s | They show EXHAUSTION |
-| 8-10s | NOT instant reversal |
-| 10-12s | Wait for NECKLINE BREAK |
-| 12-14s | Confirmation > Anticipation |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -9887,15 +8886,6 @@ Full lesson + PDF in bio
 6. Break confirmation arrows
 7. "Wait for confirmation" emphasized
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find charts with reversal patterns
-2. Show neckline break confirmation
-3. Turning/pivot sound, 20% volume
-4. Export 1080x1920
 
 ---
 
@@ -9956,25 +8946,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Stop trading dead hours"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | STOP TRADING DEAD HOURS |
-| 2-4s | ASIA = Low volatility 🌙 |
-| 4-6s | LONDON = Volatility spike ☀️ |
-| 6-8s | NEW YORK = Peak volume 🗽 |
-| 8-10s | OVERLAP = Maximum opportunity |
-| 10-12s | Trade when market MOVES |
-| 12-14s | Rest when it doesn't |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -9985,15 +8956,6 @@ Full lesson + PDF in bio
 6. Color code each session
 7. "Trade when market moves" tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create session map animation
-2. Each session "lighting up" in sequence
-3. Clock/chime sound, 20% volume
-4. Export 1080x1920
 
 ---
 
@@ -10042,25 +9004,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Take the Pilot's Oath"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | THE PILOT'S OATH 📜 |
-| 2-4s | "I will observe, not predict" |
-| 4-6s | "I will manage risk, not chase reward" |
-| 6-8s | "I will respect the market" |
-| 8-10s | "For it owes me nothing" |
-| 10-12s | "I will be a pilot" |
-| 12-14s | "Not a gambler" |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10071,15 +9014,6 @@ Full lesson + PDF in bio
 6. Chronicle series badge
 7. Elegant serif formatting
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create scroll unfurling animation
-2. Text appearing line by line
-3. Epic ceremonial sound, 30% volume
-4. Export 1080x1920
 
 ---
 
@@ -10137,26 +9071,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "One signal is nothing. Three signals is confluence."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | ONE SIGNAL = Suggestion |
-| 2-4s | TWO SIGNALS = Interesting |
-| 4-6s | THREE SIGNALS = CONFLUENCE |
-| 6-8s | Support level ✓ |
-| 8-9s | Fib level ✓ |
-| 9-10s | Volume zone ✓ |
-| 10-12s | All at same price? |
-| 12-14s | HIGH PROBABILITY 🎯 |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10167,16 +9081,6 @@ Full lesson + PDF in bio
 6. "Stack the Odds" tagline
 7. Blue (#4a90d9) for the zone
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear confluence
-2. Show factors stacking one by one
-3. Checkmarks appearing for each
-4. Stacking/building sound, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -10236,25 +9140,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Setting up Augury Grid? Do this."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | AUGURY GRID SETUP |
-| 2-4s | ✅ 5-10 symbols max |
-| 4-6s | ✅ Avoid correlated pairs |
-| 6-8s | ✅ Match your timeframe |
-| 8-10s | ✅ Set alerts |
-| 10-12s | Focus > Chaos |
-| 12-14s | The Watchman sees all 👁️ |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10268,15 +9153,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Screen record Augury Grid setup
-2. Show adding symbols, setting alerts
-3. Configuration sound, 20% volume
-4. Export 1080x1920
-
----
-
 ## 📅 BATCH 11 POSTING SCHEDULE
 
 | Day | Post | Platform Focus | Best Time |
@@ -10285,11 +9161,11 @@ Full lesson + PDF in bio
 | Mon | 102 | Instagram | 12:00 PM EST |
 | Tue | 103 | Twitter/Blog | 9:00 AM EST |
 | Tue | 104 | All Platforms | 6:00 PM EST |
-| Wed | 105 | Twitter/TikTok | 9:00 AM EST |
+| Wed | 105 | Twitter | 9:00 AM EST |
 | Wed | 106 | Instagram | 12:00 PM EST |
 | Thu | 107 | Twitter/Blog | 9:00 AM EST |
 | Thu | 108 | All Platforms | 6:00 PM EST |
-| Fri | 109 | Twitter/TikTok | 9:00 AM EST |
+| Fri | 109 | Twitter | 9:00 AM EST |
 | Fri | 110 | Twitter/Docs | 12:00 PM EST |
 
 ---
@@ -10317,7 +9193,6 @@ Full lesson + PDF in bio
 
 - [ ] 10 Twitter graphics (1200x675)
 - [ ] 10 Instagram posts (1080x1080)
-- [ ] 10 TikTok videos (1080x1920)
 - [ ] Celebration graphic: 100 posts
 - [ ] Chart screenshots: Liquidity pools, TD signal, reversal patterns, confluence
 - [ ] Quote cards: 1 (Tuition vs Expulsion)
@@ -10402,26 +9277,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Get paid to share what you already use"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | LOVE SIGNAL PILOT? |
-| 2-4s | GET PAID TO SHARE IT |
-| 4-6s | 💵 Generous commissions |
-| 6-7s | 🍪 30-day cookie |
-| 7-8s | 📊 Real-time tracking |
-| 8-9s | 💸 Monthly payouts |
-| 9-11s | Help others trade smarter |
-| 11-13s | Earn while you do 🤝 |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10432,16 +9287,6 @@ Full lesson + PDF in bio
 6. "Share & Earn" tagline
 7. SignalPilot branding
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create affiliate benefits visual
-2. Show dashboard or earnings preview
-3. Money emojis for emphasis
-4. Opportunity sound, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -10499,27 +9344,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Momentum tells you if the move is real"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | MOMENTUM = Speed of price |
-| 2-4s | STRONG MOMENTUM 🚀 |
-| 4-5s | Big candles, volume up |
-| 5-6s | Move has conviction |
-| 6-8s | WEAK MOMENTUM 🐌 |
-| 8-9s | Small candles, volume down |
-| 9-10s | Move is dying |
-| 10-12s | Trade WITH momentum |
-| 12-14s | Not against it |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10530,15 +9354,6 @@ Full lesson + PDF in bio
 6. Labels for each characteristic
 7. "Trade WITH momentum" tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with momentum contrast
-2. Highlight both scenarios
-3. Speed/energy sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -10597,27 +9412,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "FOMO is how you buy the top every time"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | FOMO 😱 |
-| 2-3s | Fear Of Missing Out |
-| 3-5s | Price is PUMPING |
-| 5-6s | "I need to get in!" |
-| 6-7s | You chase |
-| 7-8s | You buy the TOP |
-| 8-10s | Then it dumps |
-| 10-12s | Missed it? Move on. |
-| 12-14s | Next setup > Chasing this one |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10628,16 +9422,6 @@ Full lesson + PDF in bio
 6. 😱 emoji prominent
 7. "Next setup" message at bottom
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with pump and dump
-2. Mark FOMO entry at the top
-3. Show the aftermath
-4. Anxiety then calm sound, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -10691,26 +9475,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Stop trying to be right. Start trying to be profitable."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | BEING RIGHT |
-| 2-3s | vs |
-| 3-4s | MAKING MONEY |
-| 4-6s | 80% win rate + bad R:R = Losses |
-| 6-8s | 40% win rate + good R:R = Profit |
-| 8-10s | Ego wants to be right |
-| 10-12s | Traders want to profit |
-| 12-14s | Choose profit. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10721,15 +9485,6 @@ Full lesson + PDF in bio
 6. Gold (#c9a962) for emphasis
 7. "Choose profit" emphasized
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → Dark background
-2. Contrast "right" and "profit"
-3. Realization sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -10788,25 +9543,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "ACCUMULATION regime detected. Here's what it means."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | ACCUMULATION REGIME 🟢 |
-| 2-4s | Bullish bias DETECTED |
-| 4-6s | Smart money buying |
-| 6-8s | Long setups favored |
-| 8-10s | Buy signals higher quality |
-| 10-12s | OPPORTUNITY... |
-| 12-14s | But context still matters. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10816,15 +9552,6 @@ Full lesson + PDF in bio
 5. Show bullish bias + caution balance
 6. "The Prophet" branding element
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with Volume Oracle green accumulation
-2. Show bullish price moves
-3. Bullish/opportunity sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -10880,27 +9607,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Risk management is survival. Here are the rules."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | RISK MANAGEMENT RULES |
-| 2-4s | 1% RULE |
-| 4-5s | Max 1% risk per trade |
-| 5-7s | 5% RULE |
-| 7-8s | Max 5% total exposure |
-| 8-10s | RULE OF RUIN |
-| 10-11s | 50% loss = need 100% gain |
-| 11-13s | Protect the downside |
-| 13-14s | Always. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10911,15 +9617,6 @@ Full lesson + PDF in bio
 6. "Protect the downside" at bottom
 7. SignalPilot branding
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create pyramid building animation
-2. Rules appearing in hierarchy
-3. Protection/shield sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -10978,28 +9675,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Too many indicators? You're probably frozen."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | ANALYSIS PARALYSIS 🧊 |
-| 2-3s | 10 indicators |
-| 3-4s | 5 timeframes |
-| 4-5s | Conflicting signals |
-| 5-7s | You're FROZEN |
-| 7-9s | THE FIX: |
-| 9-10s | Simple checklist |
-| 10-11s | Criteria met? Trade. |
-| 11-12s | Not met? Skip. |
-| 12-14s | Simplicity wins. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -11009,15 +9684,6 @@ Full lesson + PDF in bio
 5. Clarity visual for solution
 6. "Simplicity Wins" tagline
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Show cluttered chart → simple chart transformation
-2. Ice effect for frozen state
-3. Freeze then thaw sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -11079,26 +9745,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Not all signals are equal. Here's the hierarchy."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | THE HIERARCHY OF SIGNALS |
-| 2-4s | #1 TREND — Rules all |
-| 4-5s | #2 KEY LEVELS — Structure |
-| 5-6s | #3 VOLUME — Confirmation |
-| 6-7s | #4 MOMENTUM — Strength |
-| 7-8s | #5 PATTERNS — Entry |
-| 8-10s | Higher tiers > Lower tiers |
-| 10-12s | Never fight #1 for #5 |
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -11109,15 +9755,6 @@ Full lesson + PDF in bio
 6. Gold (#c9a962) for top tier
 7. Chronicle series badge
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Build pyramid from most important down
-2. Number each tier clearly
-3. Ranking/hierarchy sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -11177,26 +9814,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "The candle lies. Volume tells the truth."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | VOLUME SPREAD ANALYSIS |
-| 2-4s | Big candle + Big volume |
-| 4-5s | = REAL move ✅ |
-| 5-7s | Big candle + Low volume |
-| 7-8s | = Possible TRAP ⚠️ |
-| 8-10s | Small candle + Big volume |
-| 10-11s | = ABSORPTION 🧲 |
-| 11-13s | Volume reveals truth |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -11206,15 +9823,6 @@ Full lesson + PDF in bio
 5. Labels: ✅ for real, ⚠️ for trap, 🧲 for absorption
 6. "Volume Reveals Truth" tagline
 7. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart examples of each VSA combination
-2. Highlight spread and volume
-3. Revelation sound, 20% volume
-4. Export 1080x1920
 
 ---
 
@@ -11272,27 +9880,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "When price and flow disagree, pay attention"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | PLUTUS FLOW DIVERGENCE ⚖️ |
-| 2-4s | BULLISH: |
-| 4-5s | Price lower low |
-| 5-6s | Flow higher low |
-| 6-8s | BEARISH: |
-| 8-9s | Price higher high |
-| 9-10s | Flow lower high |
-| 10-12s | Divergence = WARNING |
-| 12-14s | The Scales reveals imbalance |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -11306,15 +9893,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with Plutus Flow divergence
-2. Draw divergence lines
-3. Scale tipping sound, 25% volume
-4. Export 1080x1920
-
----
-
 ## 📅 BATCH 12 POSTING SCHEDULE
 
 | Day | Post | Platform Focus | Best Time |
@@ -11323,11 +9901,11 @@ Full lesson + PDF in bio
 | Mon | 112 | Instagram | 12:00 PM EST |
 | Tue | 113 | Twitter/Blog | 9:00 AM EST |
 | Tue | 114 | All Platforms | 6:00 PM EST |
-| Wed | 115 | Twitter/TikTok | 9:00 AM EST |
+| Wed | 115 | Twitter | 9:00 AM EST |
 | Wed | 116 | Instagram | 12:00 PM EST |
 | Thu | 117 | Twitter/Blog | 9:00 AM EST |
 | Thu | 118 | All Platforms | 6:00 PM EST |
-| Fri | 119 | Twitter/TikTok | 9:00 AM EST |
+| Fri | 119 | Twitter | 9:00 AM EST |
 | Fri | 120 | Twitter/Docs | 12:00 PM EST |
 
 ---
@@ -11355,7 +9933,6 @@ Full lesson + PDF in bio
 
 - [ ] 10 Twitter graphics (1200x675)
 - [ ] 10 Instagram posts (1080x1080)
-- [ ] 10 TikTok videos (1080x1920)
 - [ ] Chart screenshots: Momentum, FOMO, Volume Oracle ACCUMULATION, VSA, Plutus Flow divergence
 - [ ] Quote cards: 1 (Right vs Profitable)
 - [ ] Hierarchy pyramid: Signal ranking
@@ -12381,7 +10958,6 @@ Full lesson + PDF in bio
 
 - [ ] 10 Twitter graphics (1200x675)
 - [ ] 10 Instagram posts (1080x1080)
-- [ ] 10 TikTok videos (1080x1920)
 - [ ] Chart screenshots: Swing trade, Janus MTF, stop hunt, position management
 - [ ] Quote cards: 1 (Emotional control)
 - [ ] Testimonial cards: 4 user reviews
