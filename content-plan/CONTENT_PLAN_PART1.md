@@ -7590,7 +7590,7 @@ Free PDF guide in bio
 **Copy:**
 > One Bitcoin cycle. All five Pentarch signals.
 >
-> TD at the accumulation low. IGN as markup begins. SOS at the distribution peak. SOW when sentiment shifts. AUT as the trend confirms.
+> TD at the accumulation low. IGN as markup begins. WRN at the distribution warning. CAP at the climax peak. BDN as breakdown confirms.
 >
 > Historical observation, not prediction. Educational, not advice.
 
@@ -12293,7 +12293,7 @@ Full lesson + PDF in bio
 | 112 | Education | P2 | Momentum Trading | Lead Magnet |
 | 113 | Blog | P4 | Psychology of FOMO | Chronicle |
 | 114 | Quote | P4 | Right vs Profitable | Follow |
-| 115 | Product Demo | P2 | Volume Oracle Expansion | Trial |
+| 115 | Product Demo | P2 | Volume Oracle ACCUMULATION | Trial |
 | 116 | Education | P4 | Risk Management Deep Dive | Lead Magnet |
 | 117 | Blog | P4 | Analysis Paralysis | Docs |
 | 118 | Chronicle | P5 | Hierarchy of Signals | Chronicle |
@@ -12688,7 +12688,7 @@ Full lesson + PDF in bio
 
 ---
 
-## POST 115 — 🛠️ VOLUME ORACLE EXPANSION REGIME
+## POST 115 — 🛠️ VOLUME ORACLE ACCUMULATION REGIME
 
 **Pillar:** P2 - Indicator Truth
 **CTA Strategy:** Trial
@@ -12697,66 +12697,66 @@ Full lesson + PDF in bio
 ### 𝕏 Twitter
 
 **Copy:**
-> Volume Oracle shows EXPANSION regime.
+> Volume Oracle shows ACCUMULATION regime (green).
 >
 > What does that mean?
-> ◾ Volatility increasing
-> ◾ Big moves possible
-> ◾ Trends may develop
-> ◾ Breakouts more likely to follow through
+> ◾ Bullish bias detected
+> ◾ Institutional buying may be present
+> ◾ Smart money potentially accumulating
+> ◾ Trend-following long strategies favor
 >
-> Expansion = Opportunity. But also risk.
+> ACCUMULATION = Bullish opportunity. Context still matters.
 
-**Hashtags:** #VolumeOracle #Expansion #MarketRegimes #SignalPilot #Volatility
+**Hashtags:** #VolumeOracle #Accumulation #MarketRegimes #SignalPilot #SmartMoney
 
 ---
 
 ### 📸 Instagram
 
-**Format:** Expansion Chart (1080x1080)
+**Format:** Accumulation Chart (1080x1080)
 
 **Caption:**
-> Volume Oracle: EXPANSION Regime 📈
+> Volume Oracle: ACCUMULATION Regime 🟢
 >
-> WHAT IS EXPANSION?
-> Period of increasing volatility and larger price moves
+> WHAT IS ACCUMULATION?
+> Bullish bias — institutional buying phase detected
 >
 > CHARACTERISTICS:
-> ◾ Larger candles
-> ◾ Volume increasing
-> ◾ Trends forming or accelerating
-> ◾ Breakouts more reliable
+> ◾ Green regime background
+> ◾ Buying pressure dominant
+> ◾ Smart money potentially accumulating
+> ◾ Bullish signals favored
 >
 > HOW TO TRADE IT:
-> ◾ Trend-following strategies work best
-> ◾ Breakout entries more valid
-> ◾ Wider stops may be needed
-> ◾ Bigger reward potential
+> ◾ Long bias strategies work best
+> ◾ Buy signals have higher conviction
+> ◾ Pullbacks may be buying opportunities
+> ◾ Trend-following approach favored
 >
 > CAUTION:
-> Expansion = bigger moves both ways.
+> ACCUMULATION = bullish bias, not guarantee.
 > Risk management still critical.
 >
 > Demo in bio 🔗
 
-**Hashtags:** #VolumeOracle #ExpansionRegime #Volatility #MarketRegimes #SignalPilot #CryptoTrading #ForexTrading #TradingIndicators #TrendFollowing #BigMoves #LearnTrading #TradingStrategy #VolatilityExpansion #TradingOpportunity #RegimeTrading
+**Hashtags:** #VolumeOracle #AccumulationRegime #BullishBias #MarketRegimes #SignalPilot #CryptoTrading #ForexTrading #TradingIndicators #SmartMoney #InstitutionalBuying #LearnTrading #TradingStrategy #BullishSetup #TradingOpportunity #RegimeTrading
 
 ---
 
 ### 🎬 TikTok
 
-**Hook:** "Expansion regime detected. Here's what it means."
+**Hook:** "ACCUMULATION regime detected. Here's what it means."
 
 **On-Screen Text:**
 | Time | Text |
 |------|------|
-| 0-2s | EXPANSION REGIME 📈 |
-| 2-4s | Volatility INCREASING |
-| 4-6s | Big moves incoming |
-| 6-8s | Trends more reliable |
-| 8-10s | Breakouts follow through |
+| 0-2s | ACCUMULATION REGIME 🟢 |
+| 2-4s | Bullish bias DETECTED |
+| 4-6s | Smart money buying |
+| 6-8s | Long setups favored |
+| 8-10s | Buy signals higher quality |
 | 10-12s | OPPORTUNITY... |
-| 12-14s | But also RISK. Manage it. |
+| 12-14s | But context still matters. |
 
 **Duration:** 14 seconds
 
@@ -12765,10 +12765,10 @@ Full lesson + PDF in bio
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
-2. Background: Chart with Volume Oracle showing expansion
-3. Highlight big moves during expansion
-4. Label "EXPANSION REGIME"
-5. Show opportunity + caution balance
+2. Background: Chart with Volume Oracle showing green ACCUMULATION
+3. Highlight bullish price action during accumulation
+4. Label "ACCUMULATION REGIME" in green
+5. Show bullish bias + caution balance
 6. "The Prophet" branding element
 7. Export PNG
 
@@ -12776,9 +12776,9 @@ Full lesson + PDF in bio
 
 ### 🎬 CAPCUT VIDEO GUIDE
 
-1. Find chart with Volume Oracle expansion
-2. Show big price moves
-3. Energy/expansion sound, 25% volume
+1. Find chart with Volume Oracle green accumulation
+2. Show bullish price moves
+3. Bullish/opportunity sound, 25% volume
 4. Export 1080x1920
 
 ---
@@ -18424,7 +18424,7 @@ SLIDE 5 - CTA:
 | 162 | Education | P3-Market Mechanics | Breakout Trading | Lead Magnet |
 | 163 | Blog | P4-Psychology | The Journaling Habit | Docs |
 | 164 | Quote Card | P4-Psychology | Best Trade Is No Trade | Follow |
-| 165 | Product | P2-Indicator Truth | Volume Oracle Contraction Regime | Trial |
+| 165 | Product | P2-Indicator Truth | Volume Oracle DISTRIBUTION Regime | Trial |
 | 166 | Education | P3-Market Mechanics | Mean Reversion | Lead Magnet |
 | 167 | Blog | P3-Market Mechanics | Managing Winning Trades | Docs |
 | 168 | Chronicle | P5-Chronicle | The Arbiter's Judgment | Chronicle |
@@ -18896,74 +18896,72 @@ SOUND: Calm/patience sound
 
 ---
 
-## POST 165 — VOLUME ORACLE CONTRACTION REGIME (Product)
+## POST 165 — VOLUME ORACLE DISTRIBUTION REGIME (Product)
 
 ### Twitter/X Copy
 ```
-Volume Oracle shows CONTRACTION regime.
+Volume Oracle shows DISTRIBUTION regime (red).
 
 What does that mean?
-◾ Volatility decreasing
-◾ Range-bound conditions
-◾ Breakouts less reliable
-◾ Mean-reversion works better
+◾ Bearish bias detected
+◾ Institutional selling may be present
+◾ Smart money potentially distributing
+◾ Short bias strategies favor
 
-Contraction precedes expansion. Get ready.
+DISTRIBUTION = Bearish opportunity. Context still matters.
 
-#VolumeOracle #Contraction #MarketRegimes #SignalPilot #Volatility
+#VolumeOracle #Distribution #MarketRegimes #SignalPilot #SmartMoney
 ```
 
 ### Instagram Caption
 ```
-Volume Oracle: CONTRACTION Regime 📊
+Volume Oracle: DISTRIBUTION Regime 🔴
 
-WHAT IS CONTRACTION?
-Period of decreasing volatility and smaller moves
+WHAT IS DISTRIBUTION?
+Bearish bias — institutional selling phase detected
 
 CHARACTERISTICS:
-◾ Smaller candles
-◾ Tighter ranges
-◾ Volume declining
-◾ Breakouts failing
+◾ Red regime background
+◾ Selling pressure dominant
+◾ Smart money potentially distributing
+◾ Bearish signals favored
 
 HOW TO TRADE IT:
-◾ Mean-reversion strategies work best
-◾ Fade extremes of range
-◾ Tighter stops (less volatility)
-◾ Smaller targets
+◾ Short bias strategies work best
+◾ Sell signals have higher conviction
+◾ Rallies may be selling opportunities
+◾ Trend-following short approach favored
 
-THE OPPORTUNITY:
-Contraction ALWAYS precedes expansion.
-Low volatility = Coiling for move.
-
-Prepare for the breakout.
+CAUTION:
+DISTRIBUTION = bearish bias, not guarantee.
+Risk management still critical.
 
 Start your free trial — link in bio 🔗
 
-#VolumeOracle #ContractionRegime #LowVolatility #MarketRegimes #SignalPilot #CryptoTrading #ForexTrading #TradingIndicators #RangeBound #MeanReversion #LearnTrading #VolatilityContraction #CoilingMarket #PrepareForBreakout #RegimeTrading
+#VolumeOracle #DistributionRegime #BearishBias #MarketRegimes #SignalPilot #CryptoTrading #ForexTrading #TradingIndicators #SmartMoney #InstitutionalSelling #LearnTrading #TradingStrategy #BearishSetup #TradingOpportunity #RegimeTrading
 ```
 
 **Format:** Carousel (5 slides)
-- Slide 1: "CONTRACTION REGIME" title
+- Slide 1: "DISTRIBUTION REGIME" title
 - Slide 2: Characteristics
 - Slide 3: How to trade it
-- Slide 4: The opportunity
+- Slide 4: The caution
 - Slide 5: CTA
 
 ### TikTok Script
 ```
-HOOK: "Contraction regime detected. Here's what it means."
+HOOK: "DISTRIBUTION regime detected. Here's what it means."
 
-[0-2s] CONTRACTION REGIME 📊
-[2-4s] Volatility DECREASING
-[4-6s] Range-bound conditions
-[6-8s] Breakouts FAILING
-[8-10s] Mean-reversion works
-[10-12s] BUT...
-[12-14s] Contraction precedes EXPANSION 💥
+[0-2s] DISTRIBUTION REGIME 🔴
+[2-4s] Bearish bias DETECTED
+[4-6s] Smart money selling
+[6-8s] Short setups favored
+[8-10s] Sell signals higher quality
+[10-12s] OPPORTUNITY...
+[12-14s] But context still matters.
 
 DURATION: 14 seconds
-SOUND: Coiling/tension then release sound
+SOUND: Bearish/caution sound
 ```
 
 ### Canva Visual Creation Guide
@@ -18972,31 +18970,31 @@ CAROUSEL (5 slides):
 
 SLIDE 1 - Title:
 1. Background: #0a0a0f
-2. Volume Oracle showing contraction state
-3. Title: "CONTRACTION REGIME" in Playfair Display
-4. Subtitle: "Low Volatility Period" in Inter
+2. Volume Oracle showing red distribution state
+3. Title: "DISTRIBUTION REGIME" in Playfair Display
+4. Subtitle: "Bearish Bias Phase" in Inter
 5. The Prophet icon
 
 SLIDE 2 - Characteristics:
 1. Header: "CHARACTERISTICS"
-2. Chart showing tight range
+2. Chart showing bearish price action
 3. Bullet points:
-   - "Smaller candles"
-   - "Tighter ranges"
-   - "Volume declining"
-   - "Breakouts failing"
+   - "Red regime background"
+   - "Selling pressure dominant"
+   - "Smart money distributing"
+   - "Bearish signals favored"
 
 SLIDE 3 - How to Trade:
 1. Header: "HOW TO TRADE IT"
 2. Bullet points:
-   - "Mean-reversion strategies"
-   - "Fade range extremes"
-   - "Tighter stops"
-   - "Smaller targets"
+   - "Short bias strategies"
+   - "Sell signals favored"
+   - "Rallies as sell opportunities"
+   - "Trend-following short"
 
-SLIDE 4 - Opportunity:
-1. Header: "THE OPPORTUNITY"
-2. Visual: Tight range → Explosion
+SLIDE 4 - Caution:
+1. Header: "CAUTION"
+2. Visual: Bearish bias indicator
 3. Text: "Contraction ALWAYS precedes expansion"
 4. "Low volatility = Coiling for move"
 
@@ -21055,7 +21053,7 @@ SLIDE 4 - CTA:
 | 182 | Education | P3 | Wyckoff Accumulation Schematic | Lead Magnet |
 | 183 | Blog | P4 | The Importance of Screen Time | Follow |
 | 184 | Quote | P4 | Risk Comes From Not Knowing | Follow |
-| 185 | Product | P2 | Pentarch SOS Signal Deep Dive | Trial |
+| 185 | Product | P2 | Pentarch WRN Signal Deep Dive | Trial |
 | 186 | Education | P3 | Wyckoff Distribution Schematic | Lead Magnet |
 | 187 | Blog | P4 | Trading as a Business | Follow |
 | 188 | Chronicle | P5 | The Scales of Truth | Chronicle |
@@ -21619,7 +21617,7 @@ Save this. 🔖
 
 ---
 
-# POST 185 — 🛠️ PENTARCH SOS SIGNAL DEEP DIVE
+# POST 185 — 🛠️ PENTARCH WRN SIGNAL DEEP DIVE
 
 **Source:** https://docs.signalpilot.io/pentarch-v10
 
@@ -21629,17 +21627,17 @@ Save this. 🔖
 
 **Copy:**
 ```
-SOS (Sign of Strength) — The Sovereign observes potential strength.
+WRN (Warning) — The Sovereign observes distribution phase.
 
-When SOS fires:
-◾ Buying pressure may be present
-◾ Accumulation may be occurring
-◾ Structure may be building
+When WRN fires (yellow, above candle):
+◾ Extended price action detected
+◾ Momentum may be weakening
+◾ Late cycle warning observed
 
-Not a buy signal. An observation of potential strength.
+Not an instant sell signal. An observation that the cycle is maturing.
 ```
 
-**Hashtags:** #Pentarch #SOSSignal #SignalPilot #TradingIndicators #TheSovereign
+**Hashtags:** #Pentarch #WRNSignal #SignalPilot #TradingIndicators #TheSovereign
 
 ---
 
@@ -21649,36 +21647,36 @@ Not a buy signal. An observation of potential strength.
 
 **Caption:**
 ```
-Pentarch Deep Dive: SOS Signal ⚪
+Pentarch Deep Dive: WRN Signal 🟡
 
-WHAT IS SOS?
-Sign of Strength — Pentarch observing potential buying pressure
+WHAT IS WRN?
+Warning — Pentarch observing potential distribution phase
 
 WHEN IT FIRES:
-◾ Market may be showing accumulation
-◾ Buying interest may be present
-◾ Strength may be building
+◾ Price extended from Pilot Line
+◾ Momentum potentially weakening
+◾ Late cycle conditions detected
 
 WHAT IT'S NOT:
-◾ Not an instant buy signal
+◾ Not an instant sell signal
 ◾ Not a guarantee of reversal
 ◾ Not standalone trade trigger
 
 HOW TO USE:
-◾ SOS + Structure support = Higher conviction
-◾ SOS + Volume confirmation = Watch closely
-◾ SOS in downtrend = Just awareness
+◾ WRN + Structure resistance = Higher conviction
+◾ WRN + Volume divergence = Watch closely
+◾ WRN in strong uptrend = Just awareness
 
 Context determines meaning.
 
 Full docs in bio 🔗
 
-#Pentarch #SOSSignal #SignOfStrength #TheSovereign #SignalPilot #TradingIndicators #TradingView #AccumulationSignal #TradingEducation #SignalInterpretation #LearnTrading #IndicatorDeepDive #StrengthSignal #ProperUsage #ContextMatters
+#Pentarch #WRNSignal #WarningSignal #TheSovereign #SignalPilot #TradingIndicators #TradingView #DistributionSignal #TradingEducation #SignalInterpretation #LearnTrading #IndicatorDeepDive #LateCycle #ProperUsage #ContextMatters
 ```
 
 **Slide Breakdown:**
-- Slide 1: "PENTARCH: SOS SIGNAL" with The Sovereign icon
-- Slide 2: What SOS means - Sign of Strength explained
+- Slide 1: "PENTARCH: WRN SIGNAL" with The Sovereign icon
+- Slide 2: What WRN means - Warning signal explained
 - Slide 3: When it fires - conditions and observations
 - Slide 4: What it's NOT - managing expectations
 - Slide 5: How to use - confluence requirements
@@ -21688,14 +21686,14 @@ Full docs in bio 🔗
 
 ## 🎬 TikTok
 
-**Hook:** "SOS signal fired. What now?"
+**Hook:** "WRN signal fired. What now?"
 
 **Script:**
 ```
-[0-2s] SOS SIGNAL ⚪
-[2-4s] Sign of Strength
-[4-6s] Buying pressure MAY be present
-[6-8s] NOT a buy signal
+[0-2s] WRN SIGNAL 🟡
+[2-4s] Warning — Distribution Phase
+[4-6s] Momentum MAY be weakening
+[6-8s] NOT an instant sell
 [8-10s] NOT a guarantee
 [10-12s] It's AWARENESS
 [12-14s] Context determines action
@@ -21703,7 +21701,7 @@ Full docs in bio 🔗
 
 **Duration:** 14 seconds
 
-**Caption:** "Strength observed. #pentarch #signalpilot #trading #indicators"
+**Caption:** "Warning observed. #pentarch #signalpilot #trading #indicators"
 
 ---
 
@@ -21712,21 +21710,21 @@ Full docs in bio 🔗
 ### Static Image (Instagram/Twitter)
 1. **Open Canva** → Create design → 1080x1080px
 2. **Background:** Set to #0a0a0f
-3. **Header:** "PENTARCH: SOS SIGNAL" in Playfair Display, 48pt, #ffffff
+3. **Header:** "PENTARCH: WRN SIGNAL" in Playfair Display, 48pt, #ffffff
 4. **Chart Area:** Create mock chart (500x300px)
-   - Show price action with clear SOS signal marked
-   - Use white circle/dot for SOS signal point
+   - Show price action with clear WRN signal marked
+   - Use yellow circle/dot for WRN signal point (above candle)
    - Add annotation arrow pointing to signal
-5. **Signal Label:** "SOS" in circle with white glow
+5. **Signal Label:** "WRN" in circle with yellow glow
 6. **Explanation Box:** Dark card below chart
-   - "Sign of Strength" as title
+   - "Warning — Distribution Phase" as title
    - 3 bullet points of what it observes
-7. **Warning Text:** "Not a buy signal. An observation." in #c9a962
+7. **Warning Text:** "Not a sell signal. An observation." in #c9a962
 8. **The Sovereign Icon:** Small character icon in corner
 9. **Export:** PNG, high quality
 
 ### Carousel Slides
-1. **Slide 1:** Hero with SOS signal on chart
+1. **Slide 1:** Hero with WRN signal on chart
 2. **Slide 2:** Definition and meaning
 3. **Slide 3:** What fires it (conditions)
 4. **Slide 4:** What it's NOT (red X marks)
@@ -21739,16 +21737,16 @@ Full docs in bio 🔗
 
 ### TikTok Video (1080x1920)
 1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Base Visual:** Chart with SOS signal highlighted
+2. **Base Visual:** Chart with WRN signal highlighted
 3. **Timeline Setup:**
-   - 0-2s: SOS signal zooms in with glow effect
-   - 2-4s: "Sign of Strength" text reveals
-   - 4-8s: "MAY be present" language emphasized
-   - 8-12s: "NOT a buy signal" with warning visual
+   - 0-2s: WRN signal zooms in with yellow glow effect
+   - 2-4s: "Warning — Distribution Phase" text reveals
+   - 4-8s: "MAY be weakening" language emphasized
+   - 8-12s: "NOT a sell signal" with warning visual
    - 12-14s: "Context determines action" final message
 4. **Key Emphasis:** Use pulsing effect on "MAY" and "NOT"
-5. **Color Coding:** Green for what it is, red for what it's not
-6. **Audio:** Strength/power sound at 25% volume
+5. **Color Coding:** Yellow for WRN signal, red for what it's not
+6. **Audio:** Caution/alert sound at 25% volume
 7. **Export:** 1080x1920, 30fps, high quality
 
 ---
@@ -25230,11 +25228,11 @@ KNOW WHAT EACH INDICATOR DOES:
 
 👑 PENTARCH (The Sovereign)
 Purpose: Cycle phase detection
-Shows: TD, IGN, SOS, SOW, AUT signals
+Shows: TD, IGN, WRN, CAP, BDN signals
 
 🔮 VOLUME ORACLE (The Prophet)
 Purpose: Regime classification
-Shows: Expansion, contraction, transition
+Shows: ACCUMULATION, DISTRIBUTION, NEUTRAL
 
 🗺️ JANUS ATLAS (The Cartographer)
 Purpose: Multi-timeframe levels
@@ -25438,7 +25436,7 @@ Full comparison in bio 🔗
 | 212 | Education | P3 | Liquidity Voids | Lead Magnet |
 | 213 | Blog | P4 | Weekly Review Ritual | Follow |
 | 214 | Quote | P4 | 1% Difference Quote | Follow |
-| 215 | Product | P2 | Volume Oracle Transition Regime | Trial |
+| 215 | Product | P2 | Volume Oracle NEUTRAL Regime | Trial |
 | 216 | Education | P3 | Breaker Blocks | Lead Magnet |
 | 217 | Blog | P4 | Cost of Overtrading | Follow |
 | 218 | Chronicle | P5 | The Sovereign's Cycle | Chronicle |
@@ -25961,7 +25959,7 @@ Save this. 🔖
 
 ---
 
-# POST 215 — 🛠️ VOLUME ORACLE TRANSITION REGIME
+# POST 215 — 🛠️ VOLUME ORACLE NEUTRAL REGIME
 
 **Source:** https://docs.signalpilot.io/volume-oracle-v10
 
@@ -25971,18 +25969,18 @@ Save this. 🔖
 
 **Copy:**
 ```
-Volume Oracle shows TRANSITION regime.
+Volume Oracle shows NEUTRAL regime (gray).
 
 What does that mean?
-◾ Regime is changing
-◾ Volatility shifting
-◾ Old strategy may stop working
-◾ Be cautious
+◾ No clear directional bias
+◾ Mixed signals present
+◾ Neither bulls nor bears dominant
+◾ Wait for clarity
 
-Transition = Adapt or get caught.
+NEUTRAL = Patience required. Don't force trades.
 ```
 
-**Hashtags:** #VolumeOracle #Transition #MarketRegimes #SignalPilot #Volatility
+**Hashtags:** #VolumeOracle #Neutral #MarketRegimes #SignalPilot #Patience
 
 ---
 
@@ -25992,40 +25990,40 @@ Transition = Adapt or get caught.
 
 **Caption:**
 ```
-Volume Oracle: TRANSITION Regime ⚡
+Volume Oracle: NEUTRAL Regime ⚪
 
-WHAT IS TRANSITION?
-The regime is changing between expansion and contraction
+WHAT IS NEUTRAL?
+No clear directional momentum — market undecided
 
 CHARACTERISTICS:
-◾ Mixed signals
-◾ Volatility uncertain
-◾ Old patterns may fail
-◾ New patterns forming
+◾ Gray regime background
+◾ Mixed buying/selling pressure
+◾ No dominant bias
+◾ Signals less reliable
 
-THE DANGER:
-◾ Trend strategy worked yesterday
-◾ Today the market is ranging
-◾ You get chopped up
+THE CHALLENGE:
+◾ Long signals may fail
+◾ Short signals may fail
+◾ Choppy conditions common
 
 HOW TO TRADE:
 ◾ Reduce position size
-◾ Tighten stops
-◾ Wait for new regime to establish
+◾ Tighter stops essential
+◾ Wait for regime to shift
 ◾ Or sit out entirely
 
-TRANSITION = Adapt or suffer
+NEUTRAL = Wait for clarity
 
 Demo in bio 🔗
 
-#VolumeOracle #TransitionRegime #RegimeChange #Volatility #SignalPilot #CryptoTrading #ForexTrading #TradingIndicators #MarketShift #AdaptOrDie #LearnTrading #TradingCaution #ChangingConditions #RegimeTrading #BeCareful
+#VolumeOracle #NeutralRegime #NoDirection #MarketRegimes #SignalPilot #CryptoTrading #ForexTrading #TradingIndicators #Patience #WaitForClarity #LearnTrading #TradingCaution #ChoppyMarket #RegimeTrading #BePatient
 ```
 
 **Slide Breakdown:**
-- Slide 1: "TRANSITION REGIME" with shift visual
-- Slide 2: What is transition
+- Slide 1: "NEUTRAL REGIME" with gray visual
+- Slide 2: What is neutral
 - Slide 3: Characteristics
-- Slide 4: The danger
+- Slide 4: The challenge
 - Slide 5: How to trade (or not trade)
 - Slide 6: CTA - Volume Oracle demo
 
@@ -26033,23 +26031,23 @@ Demo in bio 🔗
 
 ## 🎬 TikTok
 
-**Hook:** "Transition regime = Danger zone"
+**Hook:** "NEUTRAL regime = Wait mode"
 
 **Script:**
 ```
-[0-2s] TRANSITION REGIME ⚡
-[2-4s] Regime is CHANGING
-[4-6s] Old strategy may FAIL
-[6-8s] New conditions forming
+[0-2s] NEUTRAL REGIME ⚪
+[2-4s] No clear direction
+[4-6s] Bulls and bears equal
+[6-8s] Signals less reliable
 [8-10s] WHAT TO DO:
 [10-11s] Reduce size
-[11-12s] Or sit out
-[12-14s] Adapt or get caught
+[11-12s] Or wait it out
+[12-14s] Patience over action
 ```
 
 **Duration:** 14 seconds
 
-**Caption:** "Transition = caution. #volumeoracle #trading #regime #signalpilot"
+**Caption:** "Neutral = patience. #volumeoracle #trading #regime #signalpilot"
 
 ---
 
@@ -26058,21 +26056,21 @@ Demo in bio 🔗
 ### Static Image (Instagram/Twitter)
 1. **Open Canva** → Create design → 1080x1080px
 2. **Background:** Set to #0a0a0f
-3. **Header:** "TRANSITION REGIME" in Playfair Display, 52pt, #ffffff
-4. **Lightning Icon:** ⚡ as accent (change/shift)
-5. **Two-State Visual:**
-   - Left: "EXPANSION" with trend icon
-   - Right: "CONTRACTION" with range icon
-   - Center: "TRANSITION" with warning
-6. **Warning Box:** "Adapt or get caught" in yellow
+3. **Header:** "NEUTRAL REGIME" in Playfair Display, 52pt, #ffffff
+4. **Gray Circle Icon:** ⚪ as accent (neutral/undecided)
+5. **Balance Visual:**
+   - Left: "ACCUMULATION" (green)
+   - Right: "DISTRIBUTION" (red)
+   - Center: "NEUTRAL" (gray) - balanced scale
+6. **Patience Box:** "Wait for clarity" in gray
 7. **Volume Oracle Badge:** Small indicator icon
 8. **Export:** PNG, high quality
 
 ### Carousel Slides
-1. **Slide 1:** Transition title with shift visual
+1. **Slide 1:** Neutral title with gray visual
 2. **Slide 2:** What it means
 3. **Slide 3:** Characteristics
-4. **Slide 4:** The danger
+4. **Slide 4:** The challenge
 5. **Slide 5:** How to handle
 6. **Slide 6:** CTA slide
 
@@ -26873,7 +26871,7 @@ Full setup guide in bio 🔗
 | 222 | Education | P3 | Kill Zones | Lead Magnet |
 | 223 | Blog | P4 | Danger of Social Media Trading | Follow |
 | 224 | Quote | P4 | Expensive Lessons Quote | Follow |
-| 225 | Product | P2 | Pentarch SOW Signal Deep Dive | Trial |
+| 225 | Product | P2 | Pentarch CAP Signal Deep Dive | Trial |
 | 226 | Education | P3 | Premium & Discount Zones | Lead Magnet |
 | 227 | Blog | P4 | Building Confidence in System | Follow |
 | 228 | Chronicle | P5 | The Scales' Balance | Chronicle |
@@ -27401,7 +27399,7 @@ Save this. 🔖
 
 ---
 
-# POST 225 — 🛠️ PENTARCH SOW SIGNAL DEEP DIVE
+# POST 225 — 🛠️ PENTARCH CAP SIGNAL DEEP DIVE
 
 **Source:** https://docs.signalpilot.io/pentarch-v10
 
@@ -27411,17 +27409,17 @@ Save this. 🔖
 
 **Copy:**
 ```
-SOW (Sign of Weakness) — The Sovereign observes potential weakness.
+CAP (Climax) — The Sovereign observes extreme extension.
 
-When SOW fires:
-◾ Selling pressure may be present
-◾ Distribution may be occurring
-◾ Trend may be tiring
+When CAP fires (orange, above candle):
+◾ Extreme price extension detected
+◾ Exhaustion conditions present
+◾ Peak before potential reversal
 
-Not a sell signal. An observation of potential weakness.
+Not an instant sell signal. An observation of climax conditions.
 ```
 
-**Hashtags:** #Pentarch #SOWSignal #SignalPilot #TradingIndicators #TheSovereign
+**Hashtags:** #Pentarch #CAPSignal #SignalPilot #TradingIndicators #TheSovereign
 
 ---
 
@@ -27431,15 +27429,15 @@ Not a sell signal. An observation of potential weakness.
 
 **Caption:**
 ```
-Pentarch Deep Dive: SOW Signal 🟡
+Pentarch Deep Dive: CAP Signal 🟠
 
-WHAT IS SOW?
-Sign of Weakness — Pentarch observing potential selling pressure
+WHAT IS CAP?
+Climax — Pentarch observing extreme exhaustion conditions
 
 WHEN IT FIRES:
-◾ Market may be showing distribution
-◾ Selling interest may be present
-◾ Weakness may be building
+◾ Price extremely extended from Pilot Line
+◾ Exhaustion conditions detected
+◾ Peak before potential reversal
 
 WHAT IT'S NOT:
 ◾ Not an instant sell signal
@@ -27447,20 +27445,20 @@ WHAT IT'S NOT:
 ◾ Not standalone trade trigger
 
 HOW TO USE:
-◾ SOW + Structure resistance = Higher conviction
-◾ SOW + Volume confirmation = Watch closely
-◾ SOW in uptrend = Just awareness
+◾ CAP + Structure resistance = Higher conviction
+◾ CAP + Volume climax = Watch closely
+◾ CAP in strong trend = Caution, not action
 
 Context determines meaning.
 
 Full docs in bio 🔗
 
-#Pentarch #SOWSignal #SignOfWeakness #TheSovereign #SignalPilot #TradingIndicators #TradingView #DistributionSignal #TradingEducation #SignalInterpretation #LearnTrading #IndicatorDeepDive #WeaknessSignal #ProperUsage #ContextMatters
+#Pentarch #CAPSignal #ClimaxSignal #TheSovereign #SignalPilot #TradingIndicators #TradingView #ExhaustionSignal #TradingEducation #SignalInterpretation #LearnTrading #IndicatorDeepDive #PeakDetection #ProperUsage #ContextMatters
 ```
 
 **Slide Breakdown:**
-- Slide 1: "PENTARCH: SOW SIGNAL" with Sovereign icon
-- Slide 2: What is SOW
+- Slide 1: "PENTARCH: CAP SIGNAL" with Sovereign icon
+- Slide 2: What is CAP - Climax explained
 - Slide 3: When it fires
 - Slide 4: What it's NOT
 - Slide 5: How to use properly
@@ -27470,14 +27468,14 @@ Full docs in bio 🔗
 
 ## 🎬 TikTok
 
-**Hook:** "SOW signal fired. What does it mean?"
+**Hook:** "CAP signal fired. What does it mean?"
 
 **Script:**
 ```
-[0-2s] SOW SIGNAL 🟡
-[2-4s] Sign of Weakness
-[4-6s] Selling pressure MAY be present
-[6-8s] NOT a sell signal
+[0-2s] CAP SIGNAL 🟠
+[2-4s] Climax — Exhaustion Phase
+[4-6s] Extreme extension detected
+[6-8s] NOT an instant sell
 [8-10s] NOT a guarantee
 [10-12s] It's AWARENESS
 [12-14s] Context determines action
@@ -27485,7 +27483,7 @@ Full docs in bio 🔗
 
 **Duration:** 14 seconds
 
-**Caption:** "Weakness observed. #pentarch #signalpilot #trading #indicators"
+**Caption:** "Climax observed. #pentarch #signalpilot #trading #indicators"
 
 ---
 
@@ -27494,19 +27492,19 @@ Full docs in bio 🔗
 ### Static Image (Instagram/Twitter)
 1. **Open Canva** → Create design → 1080x1080px
 2. **Background:** Set to #0a0a0f
-3. **Header:** "PENTARCH: SOW SIGNAL" in Playfair Display, 48pt, #ffffff
-4. **Chart Area:** Show chart with SOW signal marked
-   - Yellow/gold circle for SOW signal
+3. **Header:** "PENTARCH: CAP SIGNAL" in Playfair Display, 48pt, #ffffff
+4. **Chart Area:** Show chart with CAP signal marked
+   - Orange circle for CAP signal (above candle)
    - Annotation pointing to signal
-5. **Signal Label:** "SOW" with yellow glow
-6. **Explanation Box:** "Sign of Weakness" as title
-7. **Warning:** "Not a sell signal" in yellow text
+5. **Signal Label:** "CAP" with orange glow
+6. **Explanation Box:** "Climax — Exhaustion Phase" as title
+7. **Warning:** "Not a sell signal" in orange text
 8. **The Sovereign Icon:** Crown/Sovereign in corner
 9. **Export:** PNG, high quality
 
 ### Carousel Slides
-1. **Slide 1:** SOW signal on chart
-2. **Slide 2:** Definition
+1. **Slide 1:** CAP signal on chart
+2. **Slide 2:** Definition - Climax
 3. **Slide 3:** When it fires
 4. **Slide 4:** What it's NOT
 5. **Slide 5:** How to use
@@ -27518,16 +27516,16 @@ Full docs in bio 🔗
 
 ### TikTok Video (1080x1920)
 1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Chart with SOW signal highlight
+2. **Visual Concept:** Chart with CAP signal highlight
 3. **Timeline Setup:**
-   - 0-2s: SOW signal zooms in with yellow glow
-   - 2-4s: "Sign of Weakness" text
-   - 4-8s: "MAY" language emphasized
+   - 0-2s: CAP signal zooms in with orange glow
+   - 2-4s: "Climax — Exhaustion Phase" text
+   - 4-8s: "Extreme extension" language emphasized
    - 8-12s: "NOT a sell signal" warning
    - 12-14s: "Context determines action"
-4. **Color Theme:** Yellow/gold for weakness
-5. **Pulsing:** MAY and NOT pulse for emphasis
-6. **Audio:** Caution/weakness sound at 25% volume
+4. **Color Theme:** Orange for climax
+5. **Pulsing:** "Extreme" and "NOT" pulse for emphasis
+6. **Audio:** Peak/climax sound at 25% volume
 7. **Export:** 1080x1920, 30fps, high quality
 
 ---

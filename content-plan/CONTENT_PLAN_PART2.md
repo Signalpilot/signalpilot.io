@@ -51861,13 +51861,13 @@ Follow TikTok timing showing plan options.
 >
 > Markets don't behave the same way all the time.
 >
-> Volume Oracle identifies five regimes:
+> Volume Oracle identifies three core regimes:
 >
-> 1️⃣ Compression — Low volatility, coiling
-> 2️⃣ Expansion — High volatility, moving
-> 3️⃣ Accumulation — Building positions
-> 4️⃣ Distribution — Releasing positions
-> 5️⃣ Transition — Regime shifting
+> 🟢 ACCUMULATION — Bullish bias, institutional buying
+> 🔴 DISTRIBUTION — Bearish bias, institutional selling
+> ⚪ NEUTRAL — No clear direction, wait for clarity
+>
+> Plus FLIP signals when regime is about to change.
 >
 > Why does this matter?
 >
@@ -51879,7 +51879,7 @@ Follow TikTok timing showing plan options.
 >
 > ⚠️ Educational content only. Not financial advice.
 
-**Image Spec:** 1080x1080 — Volume Oracle indicator on chart with all five regimes visible and labeled
+**Image Spec:** 1080x1080 — Volume Oracle indicator on chart with all three regimes visible and labeled
 
 **Hashtags:** #VolumeOracle #SignalPilot #TradingIndicator #VolumeAnalysis #MarketRegimes #TradingView #TechnicalAnalysis #CryptoTrading #StockTrading #Volatility #MarketStructure #TradingTools #ChartAnalysis #SmartTrading #IndicatorSuite
 
