@@ -41392,7 +41392,13 @@ Deploy these templates within 1-4 hours of major market events. Customize with s
 
 ## Overview
 
-These are 15-30 second video scripts optimized for Instagram Reels. Each script includes:
+These are 15-30 second video scripts optimized for Instagram Reels. Posts selected for **highest viral potential** across the entire 650-post library based on:
+- Pattern-interrupt hooks
+- Myth-busting content
+- High-relatability psychology
+- Controversial/contrarian angles
+
+Each script includes:
 - **Duration breakdown** with timestamps
 - **Voiceover script** (word-for-word)
 - **On-screen text** for visual impact
@@ -41407,8 +41413,8 @@ Best practices:
 
 ---
 
-## REEL-001 — THE LIQUIDITY LIE (Based on Post 001)
-**Duration:** 20 seconds | **Topic:** Stop hunting mechanics
+## REEL-001 — THE LIQUIDITY LIE (Post 001)
+**Duration:** 20 seconds | **Topic:** Stop hunting mechanics | **Viral Type:** Pattern-interrupt
 
 ### Timestamps & Script
 
@@ -41436,289 +41442,417 @@ Full lesson free — link in bio 🔗
 
 ---
 
-## REEL-002 — WHY MARKETS MOVE IN CYCLES (Based on Post 002)
-**Duration:** 25 seconds | **Topic:** Market cycle education
+## REEL-002 — THE SUNK COST FALLACY (Post 337)
+**Duration:** 20 seconds | **Topic:** Psychology | **Viral Type:** High-relatability
 
 ### Timestamps & Script
 
 | Time | Voiceover | On-Screen Text | Visual |
 |------|-----------|----------------|--------|
-| 0-3s | "Markets have moved in cycles for centuries." | MARKETS MOVE IN CYCLES | Historical chart montage |
-| 3-7s | "Accumulation. Smart money buys while you panic." | 🔵 ACCUMULATION | Cycle diagram highlight |
-| 7-10s | "Markup. The trend everyone chases." | 🟢 MARKUP | Upward price movement |
-| 10-14s | "Distribution. Smart money exits while you buy the hype." | 🟡 DISTRIBUTION | Top formation visual |
-| 14-17s | "Decline. Cycle completes. Rinse and repeat." | 🔴 DECLINE | Downward movement |
-| 17-22s | "1929. 2008. 2021. Same pattern." | THE PATTERN REPEATS | Historical charts comparison |
-| 22-25s | "Free cycle guide. Link in bio." | LINK IN BIO | Logo + CTA |
+| 0-4s | "I've lost so much already. I can't sell now." | "I CAN'T SELL NOW" | Red portfolio visual |
+| 4-8s | "Sound familiar? That's the sunk cost fallacy." | SUNK COST FALLACY | Text definition |
+| 8-12s | "What you've lost is gone. It doesn't come back by holding." | WHAT'S LOST IS GONE | Money fading visual |
+| 12-16s | "The only question: Would you buy this position today?" | WOULD YOU BUY IT TODAY? | Question emphasis |
+| 16-18s | "If no, why are you holding?" | WHY ARE YOU HOLDING? | Mirror/reflection visual |
+| 18-20s | "Psychology guide. Link in bio." | LINK IN BIO | Logo + CTA |
 
 ### Audio Suggestion
-Epic/educational music or trending revelation sound
+Emotional/realization audio, contemplative sound
 
 ### Caption
 ```
-Markets have moved in cycles for centuries. 🔄
+"I've lost so much already. I can't sell now."
 
-Accumulation → Markup → Distribution → Decline
+Sound familiar? 💀
 
-1929. 2008. 2021. Same pattern. Different names.
+That's the sunk cost fallacy destroying your account.
 
-Understanding cycles = understanding markets.
+What you've already lost is GONE. It doesn't come back by holding.
 
-Free guide — link in bio 🔗
+The only question that matters:
+Would you buy this position TODAY at this price?
 
-#marketcycles #trading #wyckoff #crypto #forex #bitcoin
-```
-
----
-
-## REEL-003 — THE REPAINTING PROBLEM (Based on Post 007)
-**Duration:** 18 seconds | **Topic:** Why indicators fail
-
-### Timestamps & Script
-
-| Time | Voiceover | On-Screen Text | Visual |
-|------|-----------|----------------|--------|
-| 0-3s | "Your indicator looked perfect in hindsight. But it changed." | IT LOOKED PERFECT... | Clean chart with "buy signal" |
-| 3-7s | "That's repainting. The signal you saw? It moved after the fact." | BUT IT CHANGED | Same chart, signal moved |
-| 7-11s | "You thought you had a winning signal. You had a liar." | YOU HAD A LIAR | Split screen: before/after |
-| 11-15s | "Non-repainting indicators don't lie about history." | NON-REPAINTING = TRUTH | Signal stays fixed |
-| 15-18s | "Learn the difference. Link in bio." | LINK IN BIO | Logo + URL |
-
-### Audio Suggestion
-Shocking reveal audio or lie detector sound effect
-
-### Caption
-```
-That perfect signal? It changed after the fact. 🚨
-
-Repainting indicators lie about history.
-
-The signal you saw moved. You never had the entry you thought.
-
-Non-repainting means what you see is what you get.
-
-Full breakdown — link in bio 🔗
-
-#tradingview #indicators #repainting #tradingtools #forex #crypto
-```
-
----
-
-## REEL-004 — HOW SMART MONEY MOVES (Based on Post 013)
-**Duration:** 22 seconds | **Topic:** Institutional vs retail
-
-### Timestamps & Script
-
-| Time | Voiceover | On-Screen Text | Visual |
-|------|-----------|----------------|--------|
-| 0-4s | "You see support. They see liquidity." | YOU SEE SUPPORT / THEY SEE LIQUIDITY | Split screen comparison |
-| 4-8s | "You chase breakouts. They fade them." | YOU CHASE / THEY FADE | Breakout failing visual |
-| 8-12s | "You follow the crowd. They position against it." | YOU FOLLOW / THEY POSITION | Crowd vs individual visual |
-| 12-16s | "Smart money doesn't predict. They react." | THEY DON'T PREDICT / THEY REACT | Clean chart observation |
-| 16-19s | "Think like them. Or stay their exit liquidity." | THINK LIKE THEM | Text emphasis |
-| 19-22s | "Free education. Link in bio." | LINK IN BIO | Logo + CTA |
-
-### Audio Suggestion
-Strategic/chess-like audio or "villain reveal" trending sound
-
-### Caption
-```
-You see support. They see liquidity.
-You chase breakouts. They fade them.
-You follow the crowd. They position against it.
-
-Smart money doesn't predict the market.
-They react to what it shows them.
-
-Think like them — or stay their exit liquidity.
-
-Free lessons — link in bio 🔗
-
-#smartmoney #trading #institutional #liquidity #forex #crypto
-```
-
----
-
-## REEL-005 — STOP HUNTING EXPOSED (Based on Post 016)
-**Duration:** 20 seconds | **Topic:** Stop hunting mechanics
-
-### Timestamps & Script
-
-| Time | Voiceover | On-Screen Text | Visual |
-|------|-----------|----------------|--------|
-| 0-3s | "Where do you put your stop loss?" | WHERE'S YOUR STOP? | Question on screen |
-| 3-6s | "Just below support, right? Same as everyone." | JUST BELOW SUPPORT | Chart with obvious stop zone |
-| 6-10s | "That's exactly where they're hunting." | THEY'RE HUNTING THERE | Stops get swept visual |
-| 10-14s | "Your stop = their entry. Every single time." | YOUR STOP = THEIR ENTRY | Price reverses after sweep |
-| 14-17s | "Stop being predictable." | STOP BEING PREDICTABLE | Text emphasis |
-| 17-20s | "Learn where to actually place stops. Link in bio." | LINK IN BIO | Logo + CTA |
-
-### Audio Suggestion
-Suspenseful/hunting themed audio
-
-### Caption
-```
-Where do you put your stop loss? 🎯
-
-Just below support, right? Same as everyone else.
-
-That's exactly where they're hunting.
-
-Your stop = their entry. Every. Single. Time.
-
-Stop being predictable.
-
-Full guide — link in bio 🔗
-
-#stoploss #stophunting #trading #smartmoney #forex #crypto
-```
-
----
-
-## REEL-006 — WHY YOUR INDICATORS KEEP FAILING (Based on Post 027)
-**Duration:** 22 seconds | **Topic:** Indicator reality check
-
-### Timestamps & Script
-
-| Time | Voiceover | On-Screen Text | Visual |
-|------|-----------|----------------|--------|
-| 0-4s | "You keep adding indicators. They keep failing." | MORE INDICATORS ≠ BETTER | Cluttered chart |
-| 4-8s | "RSI said oversold. Price kept falling." | RSI: OVERSOLD / PRICE: FALLING | RSI divergence fail |
-| 8-12s | "MACD crossed up. Price reversed down." | MACD: UP / PRICE: DOWN | MACD fail visual |
-| 12-16s | "The problem isn't the indicator. It's how you use it." | THE PROBLEM IS USAGE | Clean chart appears |
-| 16-19s | "Context over signals. Structure over noise." | CONTEXT > SIGNALS | Minimal chart, clear structure |
-| 19-22s | "Learn what actually works. Link in bio." | LINK IN BIO | Logo + CTA |
-
-### Audio Suggestion
-Frustrated/realization transition audio
-
-### Caption
-```
-You keep adding indicators. They keep failing. 📉
-
-RSI said oversold — price kept falling.
-MACD crossed bullish — price reversed down.
-
-The problem isn't the indicator.
-It's how you use it.
-
-Context over signals. Structure over noise.
-
-Learn what works — link in bio 🔗
-
-#indicators #tradingview #RSI #MACD #trading #forex #crypto
-```
-
----
-
-## REEL-007 — REVENGE TRADING KILLS ACCOUNTS (Based on Post 031)
-**Duration:** 18 seconds | **Topic:** Psychology / revenge trading
-
-### Timestamps & Script
-
-| Time | Voiceover | On-Screen Text | Visual |
-|------|-----------|----------------|--------|
-| 0-3s | "You took a loss. Now you want it back." | TOOK A LOSS? | Red P&L visual |
-| 3-7s | "So you size up. Chase a setup. Force a trade." | SIZE UP / CHASE / FORCE | Quick cut sequence |
-| 7-11s | "Now you have two losses. Then three." | LOSS. LOSS. LOSS. | Cascading red numbers |
-| 11-15s | "That's revenge trading. And it kills accounts." | REVENGE TRADING KILLS | Text warning |
-| 15-18s | "Learn to stop. Link in bio." | LINK IN BIO | Logo + CTA |
-
-### Audio Suggestion
-Intense/cautionary audio or downward spiral sound
-
-### Caption
-```
-You took a loss. Now you want it back. 💀
-
-So you size up. Chase a setup. Force a trade.
-
-Now you have two losses. Then three. Then your week is ruined.
-
-That's revenge trading. And it kills accounts.
-
-The hardest trade? Walking away.
-
-Guide in bio 🔗
-
-#revengetrading #tradingpsychology #riskmanagement #forex #crypto
-```
-
----
-
-## REEL-008 — CONFIRMATION BIAS (Based on Post 032)
-**Duration:** 20 seconds | **Topic:** Psychology / cognitive bias
-
-### Timestamps & Script
-
-| Time | Voiceover | On-Screen Text | Visual |
-|------|-----------|----------------|--------|
-| 0-3s | "You're bullish. So you look for reasons to buy." | YOU'RE BULLISH | Upward bias visual |
-| 3-7s | "You ignore the bearish signals. Cherry-pick the bullish ones." | IGNORING THE WARNINGS | Dismissing red flags visual |
-| 7-11s | "That's confirmation bias. Your brain lying to itself." | CONFIRMATION BIAS | Brain/mind visual |
-| 11-15s | "The market doesn't care what you believe." | MARKET DOESN'T CARE | Cold truth visual |
-| 15-17s | "See what IS, not what you want." | SEE WHAT IS | Clear chart |
-| 17-20s | "Psychology guide. Link in bio." | LINK IN BIO | Logo + CTA |
-
-### Audio Suggestion
-Mind-bending/revelation audio
-
-### Caption
-```
-You're bullish. So you look for reasons to buy. 🧠
-
-You ignore the bearish signals.
-Cherry-pick the bullish ones.
-Find what you want to find.
-
-That's confirmation bias.
-Your brain lying to itself.
-
-The market doesn't care what you believe.
-
-See what IS — not what you want.
+If no — why are you still holding?
 
 Psychology guide — link in bio 🔗
 
-#confirmationbias #tradingpsychology #mindset #forex #crypto
+#sunkcost #tradingpsychology #mindset #forex #crypto #bitcoin
 ```
 
 ---
 
-## REEL-009 — THE EDGE ISN'T MORE INDICATORS (Based on Post 003)
-**Duration:** 15 seconds | **Topic:** Quote / clarity
+## REEL-003 — BORING IS PROFITABLE (Post 374)
+**Duration:** 18 seconds | **Topic:** Contrarian wisdom | **Viral Type:** Counter-intuitive
 
 ### Timestamps & Script
 
 | Time | Voiceover | On-Screen Text | Visual |
 |------|-----------|----------------|--------|
-| 0-4s | "The edge isn't seeing more." | THE EDGE ISN'T SEEING MORE | Text fade in |
-| 4-8s | "It's seeing what matters." | IT'S SEEING WHAT MATTERS | Second line reveals |
-| 8-12s | "More screens won't save you. More indicators won't save you. Clarity will." | CLARITY WILL | Clean chart visual |
-| 12-15s | "Follow for more." | FOLLOW FOR CLARITY | Logo |
+| 0-3s | "Exciting trading is usually bad trading." | EXCITING = BAD | Chaotic chart visual |
+| 3-7s | "Boring trading — same setup, same rules, same process — is profitable trading." | BORING = PROFITABLE | Clean, simple chart |
+| 7-11s | "The dopamine hit of action costs you money." | DOPAMINE COSTS MONEY | Brain/reward visual |
+| 11-15s | "Consistency is boring. Consistency pays." | CONSISTENCY PAYS | Steady equity curve |
+| 15-18s | "Embrace the boring. Link in bio." | LINK IN BIO | Logo + CTA |
 
 ### Audio Suggestion
-Calm/wisdom type audio or popular motivational sound
+Calm, almost meditative audio — contrast to "exciting" hook
 
 ### Caption
 ```
-"The edge isn't seeing more. It's seeing what matters." ✨
+Exciting trading is usually bad trading. 😴
 
-More indicators won't save you.
-More screens won't save you.
-More alerts won't save you.
+Boring trading — same setup, same rules, same process — is usually profitable trading.
 
-Clarity will.
+The dopamine hit of "action" costs you money.
 
-Follow for more 🔔
+Winners:
+→ Wait for their setup
+→ Follow their rules
+→ Repeat endlessly
 
-#tradingwisdom #clarity #minimalism #trading #forex #crypto
+That's boring. That's profitable.
+
+Embrace the boring — link in bio 🔗
+
+#tradingmindset #consistency #discipline #forex #crypto
 ```
 
 ---
 
-## REEL-010 — PRICE ACTION IS DEAD (Based on Post 011)
-**Duration:** 22 seconds | **Topic:** Controversial / educational
+## REEL-004 — THE MYTH OF THE PERFECT ENTRY (Post 383)
+**Duration:** 20 seconds | **Topic:** Myth-busting | **Viral Type:** Permission-giving
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-3s | "There is no perfect entry." | NO PERFECT ENTRY | Text impact |
+| 3-7s | "Entry is maybe 10% of the trade. Management is 90%." | 10% ENTRY / 90% MANAGEMENT | Pie chart visual |
+| 7-11s | "You're obsessing over the wrong thing." | WRONG OBSESSION | Frustrated trader visual |
+| 11-15s | "A good entry with bad management = loss. An okay entry with great management = profit." | MANAGEMENT > ENTRY | Split comparison |
+| 15-18s | "Stop optimizing entry. Start optimizing exits." | OPTIMIZE EXITS | Text emphasis |
+| 18-20s | "Full guide. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Reality-check audio, "aha moment" sound
+
+### Caption
+```
+There is no perfect entry. ❌
+
+Entry is maybe 10% of the trade.
+Management is 90%.
+
+A perfect entry with bad management = loss.
+An okay entry with great management = profit.
+
+Stop optimizing entry.
+Start optimizing management.
+
+→ When to add
+→ When to trim
+→ When to exit
+
+That's where the edge lives.
+
+Full guide — link in bio 🔗
+
+#tradingentry #riskmanagement #tradingstrategy #forex #crypto
+```
+
+---
+
+## REEL-005 — THE COMPARISON TRAP (Post 357)
+**Duration:** 22 seconds | **Topic:** Psychology | **Viral Type:** High-relatability / Meta
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-4s | "He made 10x this month. Why can't I?" | "WHY CAN'T I?" | Scrolling social media visual |
+| 4-8s | "Comparing yourself to other traders is a trap." | THE COMPARISON TRAP | Text emphasis |
+| 8-12s | "You don't see their losses. You don't know their risk. You don't have their capital." | YOU DON'T SEE... | List appears |
+| 12-16s | "Their journey is not your journey." | NOT YOUR JOURNEY | Two different paths visual |
+| 16-19s | "Compare yourself to yesterday's you. That's it." | YESTERDAY'S YOU | Mirror visual |
+| 19-22s | "Psychology guide. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Emotional/reflective audio, Instagram-native sound
+
+### Caption
+```
+"He made 10x this month. Why can't I?" 📱
+
+Comparing yourself to other traders is a trap.
+
+You don't see their losses.
+You don't know their risk.
+You don't have their capital.
+You don't know their timeline.
+
+Their highlight reel ≠ your reality.
+
+Compare yourself to yesterday's you.
+That's the only competition that matters.
+
+Psychology guide — link in bio 🔗
+
+#tradingpsychology #comparison #mindset #mentalhealth #forex #crypto
+```
+
+---
+
+## REEL-006 — IMPOSTER SYNDROME IN TRADING (Post 363)
+**Duration:** 20 seconds | **Topic:** Psychology | **Viral Type:** Emotional validation
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-4s | "Am I actually good at this? Or just lucky?" | "AM I JUST LUCKY?" | Doubt/questioning visual |
+| 4-8s | "Imposter syndrome hits traders too." | IMPOSTER SYNDROME | Definition visual |
+| 8-12s | "Every profitable month feels like a fluke. Every loss confirms the doubt." | FLUKE... DOUBT... | Emotional rollercoaster |
+| 12-16s | "But you've put in the work. You've earned your edge." | YOU'VE EARNED IT | Confidence building visual |
+| 16-18s | "Own your skills. You're not faking it." | OWN YOUR SKILLS | Empowerment text |
+| 18-20s | "You're not alone. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Vulnerable/emotional audio, building to empowerment
+
+### Caption
+```
+"Am I actually good at this, or just lucky?" 🎭
+
+Imposter syndrome hits traders too.
+
+Every profitable month feels like a fluke.
+Every loss confirms the doubt.
+Every win feels like it doesn't count.
+
+But here's the truth:
+→ You put in the work
+→ You learned the lessons
+→ You developed the skills
+
+You've earned your edge. Own it.
+
+You're not faking it. You're doing it.
+
+More psychology — link in bio 🔗
+
+#impostersyndrome #tradingpsychology #mentalhealth #forex #crypto
+```
+
+---
+
+## REEL-007 — ADAPT OR DIE (Post 354)
+**Duration:** 18 seconds | **Topic:** Market reality | **Viral Type:** High-stakes urgency
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-3s | "The strategy that worked last year might not work this year." | LAST YEAR ≠ THIS YEAR | Calendar flip visual |
+| 3-7s | "Markets evolve. Algorithms change. Participants shift." | MARKETS EVOLVE | Changing market visual |
+| 7-11s | "Your job: adapt faster than the market changes." | ADAPT FASTER | Speed/evolution visual |
+| 11-15s | "Adapt or become a statistic." | ADAPT OR DIE | Bold text impact |
+| 15-18s | "Stay adaptable. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Urgent/dramatic audio, evolution sound
+
+### Caption
+```
+The strategy that worked last year might not work this year. ⚠️
+
+Markets evolve.
+Algorithms update.
+Participants change.
+Liquidity shifts.
+
+Your edge today may be someone else's edge tomorrow.
+
+Your job isn't to find ONE strategy.
+It's to adapt faster than the market changes.
+
+Adapt or become a statistic.
+
+Stay sharp — link in bio 🔗
+
+#adaptation #tradingstrategy #marketevolution #forex #crypto
+```
+
+---
+
+## REEL-008 — THERE ARE NO TRADING SECRETS (Post 407)
+**Duration:** 20 seconds | **Topic:** Myth-busting | **Viral Type:** Truth-telling
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-4s | "There are no trading secrets." | NO SECRETS | Secret/reveal visual |
+| 4-8s | "Everything you need to know is already public." | IT'S ALL PUBLIC | Open book visual |
+| 8-12s | "The 'secret' is execution. Discipline. Risk management. Patience." | THE REAL SECRET | List reveals |
+| 12-16s | "Everything works. Nothing works all the time." | EVERYTHING WORKS / NOTHING WORKS | Paradox visual |
+| 16-18s | "Stop looking for secrets. Start executing." | START EXECUTING | Action visual |
+| 18-20s | "Reality check. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Revelation/truth audio, "the answer was here all along" sound
+
+### Caption
+```
+There are no trading secrets. 🔓
+
+Everything you need to know is already public.
+Books. YouTube. Free courses. It's all there.
+
+The "secret" is:
+→ Execution
+→ Discipline
+→ Risk management
+→ Patience
+→ Consistency
+
+Everything works. Nothing works all the time.
+
+Stop searching for the hidden answer.
+Start executing what you already know.
+
+Reality check — link in bio 🔗
+
+#tradingsecrets #tradingtruth #discipline #forex #crypto
+```
+
+---
+
+## REEL-009 — TRADE THE CHART IN FRONT OF YOU (Post 364)
+**Duration:** 15 seconds | **Topic:** Wisdom | **Viral Type:** Philosophical / Quotable
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-4s | "Trade the chart in front of you." | TRADE THE CHART IN FRONT OF YOU | Text fade in |
+| 4-8s | "Not the chart you wish you had. Not the chart you expected." | NOT THE CHART YOU WANTED | Fading alternate charts |
+| 8-11s | "This chart. Now." | THIS CHART. NOW. | Current chart focus |
+| 11-13s | "That's the only chart that matters." | THE ONLY CHART | Emphasis |
+| 13-15s | "Follow for clarity." | FOLLOW | Logo |
+
+### Audio Suggestion
+Zen/meditative audio, clarity sound
+
+### Caption
+```
+Trade the chart in front of you. 📊
+
+Not the chart you wish you had.
+Not the chart you expected.
+Not the chart from yesterday.
+
+THIS chart. NOW.
+
+What is the market actually doing?
+Not what you want it to do.
+Not what it "should" do.
+What it IS doing.
+
+That's the only chart that matters.
+
+Follow for clarity 🔔
+
+#tradingwisdom #mindfulness #priceaction #forex #crypto
+```
+
+---
+
+## REEL-010 — THE POWER OF "I DON'T KNOW" (Post 373)
+**Duration:** 18 seconds | **Topic:** Wisdom | **Viral Type:** Paradoxical / Contrarian
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-4s | "The most powerful words in trading: 'I don't know.'" | "I DON'T KNOW" | Quote reveal |
+| 4-8s | "I don't know where price is going. I don't know if this trade will work." | I DON'T KNOW... | List of unknowns |
+| 8-12s | "That uncertainty keeps you humble. Keeps you risk-aware." | HUMBLE. RISK-AWARE. | Protection visual |
+| 12-15s | "Certainty kills accounts. Uncertainty saves them." | CERTAINTY KILLS | Bold contrast |
+| 15-18s | "Embrace not knowing. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Contemplative/wisdom audio, philosophical sound
+
+### Caption
+```
+The most powerful words in trading:
+
+"I don't know." 🤷
+
+I don't know where price is going.
+I don't know if this trade will work.
+I don't know what happens next.
+
+That uncertainty keeps you:
+→ Humble
+→ Risk-aware
+→ Position-sized correctly
+→ Ready for anything
+
+Certainty kills accounts.
+Uncertainty saves them.
+
+Embrace not knowing — link in bio 🔗
+
+#tradingwisdom #uncertainty #riskmanagement #humility #forex #crypto
+```
+
+---
+
+## REEL-011 — WHEN TO WALK AWAY (Post 343)
+**Duration:** 18 seconds | **Topic:** Psychology | **Viral Type:** Permission-giving
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-3s | "Knowing when to walk away is a skill." | WALK AWAY | Laptop closing visual |
+| 3-7s | "Sometimes the best trade is no trade." | BEST TRADE = NO TRADE | Empty chart |
+| 7-11s | "Tired? Walk away. Emotional? Walk away. Forcing it? Walk away." | TIRED. EMOTIONAL. FORCING. | Checklist appears |
+| 11-15s | "The market will be there tomorrow." | TOMORROW EXISTS | Calendar visual |
+| 15-18s | "Protect your capital. Protect your mind. Link in bio." | PROTECT YOURSELF | Logo + CTA |
+
+### Audio Suggestion
+Peaceful/self-care audio, gentle exit sound
+
+### Caption
+```
+Knowing when to walk away is a skill. 🚶
+
+Sometimes the best trade is no trade.
+The market will be there tomorrow.
+
+Walk away when:
+→ You're tired
+→ You're emotional
+→ You're forcing trades
+→ You've hit your loss limit
+→ You're not seeing clearly
+
+Protect your capital.
+Protect your mental health.
+
+The laptop closes. The market continues. You come back fresh.
+
+Self-care guide — link in bio 🔗
+
+#tradingpsychology #mentalhealth #selfcare #discipline #forex #crypto
+```
+
+---
+
+## REEL-012 — PRICE ACTION IS DEAD (Post 011)
+**Duration:** 22 seconds | **Topic:** Controversial | **Viral Type:** Pattern-interrupt
 
 ### Timestamps & Script
 
@@ -41743,7 +41877,7 @@ Pin bars, engulfing candles, head and shoulders?
 
 Everyone knows those patterns. They're hunted.
 
-Real price action in 2024:
+Real price action now:
 → Market structure
 → Liquidity zones
 → Order flow
@@ -41765,7 +41899,7 @@ Full lesson — link in bio 🔗
 ### Video Creation Workflow
 1. **Script prep** — Print/display timestamps and text
 2. **Audio first** — Select trending audio or use recommended
-3. **Record/compile** — Use Canva, CapCut, or phone editor
+3. **Record/compile** — Use Canva, DaVinci Resolve, or phone editor
 4. **Text sync** — Add text exactly on voiceover timing
 5. **Brand check** — Dark theme, correct fonts, logo placement
 
@@ -41782,4 +41916,13 @@ Full lesson — link in bio 🔗
 - First 3 seconds determine watch-through
 - Strong hook = higher reach
 
-*10 Reel Scripts Ready for Production*
+### Viral Categories Covered
+| Category | Reels |
+|----------|-------|
+| Pattern-Interrupt | REEL-001, REEL-012 |
+| Myth-Busting | REEL-004, REEL-008 |
+| High-Relatability Psychology | REEL-002, REEL-005, REEL-006, REEL-011 |
+| Contrarian/Counter-intuitive | REEL-003, REEL-007 |
+| Philosophical Wisdom | REEL-009, REEL-010 |
+
+*12 Reel Scripts Ready for Production — Curated from 650-Post Library*
