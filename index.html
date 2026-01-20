@@ -3622,39 +3622,31 @@
                   loading="eager"
                   style="width:100%;height:100%;object-fit:contain;display:block"
                 />
-                <!-- Label -->
-                <div style="position:absolute;bottom:1rem;left:1rem;background:rgba(12,16,27,.9);padding:.4rem .8rem;border-radius:6px;border:1px solid rgba(255,100,100,.3)">
-                  <span style="font-size:.75rem;font-weight:600;color:#ff6b6b;text-transform:uppercase;letter-spacing:.05em">Without Signal Pilot</span>
-                </div>
               </div>
 
               <!-- With Signal Pilot (Overlay - slides over) -->
-              <div id="hero-slider-overlay" class="hero-comparison-image" style="position:absolute;top:0;left:0;width:50%;height:100%;overflow:hidden;z-index:10">
+              <div id="hero-slider-overlay" class="hero-comparison-image" style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:10;will-change:clip-path;clip-path:inset(0 50% 0 0)">
                 <img
                   id="hero-overlay-image"
                   src="assets/showcase/chart-with.jpg"
                   alt="Chart with Signal Pilot"
                   loading="eager"
-                  style="position:absolute;top:0;left:0;width:100%;height:100%;max-width:none;object-fit:contain;display:block;pointer-events:none"
+                  style="width:100%;height:100%;object-fit:contain;display:block;pointer-events:none"
                 />
-                <!-- Label -->
-                <div style="position:absolute;bottom:1rem;left:1rem;background:rgba(12,16,27,.9);padding:.4rem .8rem;border-radius:6px;border:1px solid rgba(62,213,152,.3)">
-                  <span style="font-size:.75rem;font-weight:600;color:#3ed598;text-transform:uppercase;letter-spacing:.05em">With Signal Pilot</span>
-                </div>
               </div>
 
               <!-- Slider Handle -->
-              <div id="hero-slider-handle" role="slider" aria-label="Comparison slider position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0" style="position:absolute;top:0;left:50%;width:48px;height:100%;transform:translateX(-50%);z-index:100;cursor:ew-resize;touch-action:pan-x">
+              <div id="hero-slider-handle" role="slider" aria-label="Comparison slider position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0" style="position:absolute;top:0;left:0;width:48px;height:100%;transform:translateX(-50%);z-index:100;cursor:ew-resize;touch-action:pan-x;will-change:transform" data-pos="50">
                 <!-- Hit area -->
                 <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:100%;cursor:ew-resize"></div>
                 <!-- Visual line -->
-                <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:3px;height:100%;background:rgba(255,255,255,.9);box-shadow:0 0 10px rgba(255,255,255,.3);pointer-events:none"></div>
+                <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:3px;height:100%;background:rgba(255,255,255,.95);pointer-events:none"></div>
                 <!-- Handle circle -->
-                <div id="hero-handle-circle" class="pulse-animate" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;background:#fff;border-radius:50%;box-shadow:0 4px 16px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;pointer-events:none">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0e18" stroke-width="2.5">
+                <div id="hero-handle-circle" class="pulse-animate" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;pointer-events:none">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a0e18" stroke-width="2.5">
                     <polyline points="15 18 9 12 15 6"></polyline>
                   </svg>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0e18" stroke-width="2.5" style="margin-left:-10px">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0a0e18" stroke-width="2.5" style="margin-left:-8px">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </div>
@@ -3668,76 +3660,70 @@
             </p>
         </div>
 
-        <!-- Hero Comparison Slider Script -->
+        <!-- Hero Comparison Slider Script - GPU Optimized -->
         <script>
         (function() {
           const slider = document.getElementById('hero-comparison-slider');
           const handle = document.getElementById('hero-slider-handle');
           const handleCircle = document.getElementById('hero-handle-circle');
           const overlay = document.getElementById('hero-slider-overlay');
-          const overlayImage = document.getElementById('hero-overlay-image');
 
           if (!slider || !handle || !overlay) return;
 
           let isDragging = false;
           let hasInteracted = false;
+          let currentPos = 50; // Track position as percentage
+          let sliderWidth = slider.offsetWidth;
+
+          // Cache slider width on resize
+          function updateSliderWidth() {
+            sliderWidth = slider.offsetWidth;
+          }
+
+          // GPU-accelerated position update using transform & clip-path
+          function setSliderPosition(percentage, smooth = false) {
+            percentage = Math.max(0, Math.min(percentage, 100));
+            currentPos = percentage;
+
+            const pixelPos = (percentage / 100) * sliderWidth;
+
+            // Use transform for handle (GPU accelerated)
+            handle.style.transform = `translateX(${pixelPos - 24}px)`;
+
+            // Use clip-path for overlay (GPU accelerated)
+            overlay.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+
+            handle.setAttribute('aria-valuenow', Math.round(percentage));
+          }
 
           // Auto-sweep animation on load
           function autoSweep() {
-            let progress = 0;
             const duration = 2500;
-            const startTime = Date.now();
+            const startTime = performance.now();
 
-            function animate() {
-              const elapsed = Date.now() - startTime;
-              progress = Math.min(elapsed / duration, 1);
+            function animate(currentTime) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
 
               // Ease in-out
               const eased = progress < 0.5
                 ? 2 * progress * progress
                 : 1 - Math.pow(-2 * progress + 2, 2) / 2;
 
-              const percentage = eased * 100;
-              setSliderPosition(percentage, true);
+              setSliderPosition(eased * 100);
 
               if (progress < 1 && !hasInteracted) {
                 requestAnimationFrame(animate);
               }
             }
-            animate();
+            requestAnimationFrame(animate);
           }
 
-          function setSliderPosition(percentage, smooth = false) {
-            percentage = Math.max(0, Math.min(percentage, 100));
-
-            if (smooth && !isDragging) {
-              handle.classList.add('smooth-transition');
-              overlay.classList.add('smooth-transition');
-              setTimeout(() => {
-                handle.classList.remove('smooth-transition');
-                overlay.classList.remove('smooth-transition');
-              }, 300);
-            }
-
-            handle.style.left = percentage + '%';
-            overlay.style.width = percentage + '%';
-            handle.setAttribute('aria-valuenow', Math.round(percentage));
-          }
-
-          function updateOverlayImageWidth() {
-            if (overlayImage && slider) {
-              const width = slider.clientWidth;
-              if (width > 0) {
-                overlayImage.style.width = width + 'px';
-              }
-            }
-          }
-
-          function updateSliderFromPosition(clientX, smooth = false) {
+          function updateSliderFromPosition(clientX) {
             const rect = slider.getBoundingClientRect();
-            let x = clientX - rect.left;
+            const x = clientX - rect.left;
             const percentage = (x / rect.width) * 100;
-            setSliderPosition(percentage, smooth);
+            setSliderPosition(percentage);
           }
 
           function markInteraction() {
@@ -3753,7 +3739,7 @@
           });
 
           document.addEventListener('mousemove', (e) => {
-            if (isDragging) updateSliderFromPosition(e.clientX, false);
+            if (isDragging) updateSliderFromPosition(e.clientX);
           });
 
           document.addEventListener('mouseup', () => {
@@ -3761,28 +3747,25 @@
             document.body.style.cursor = '';
           });
 
-          // Touch events
+          // Touch events - optimized
           handle.addEventListener('touchstart', (e) => {
-            e.preventDefault();
             isDragging = true;
             markInteraction();
-          }, { passive: false });
+          }, { passive: true });
 
           slider.addEventListener('touchstart', (e) => {
             if (!handle.contains(e.target)) {
-              e.preventDefault();
               isDragging = true;
               markInteraction();
-              updateSliderFromPosition(e.touches[0].clientX, false);
+              updateSliderFromPosition(e.touches[0].clientX);
             }
-          }, { passive: false });
+          }, { passive: true });
 
           document.addEventListener('touchmove', (e) => {
             if (isDragging) {
-              e.preventDefault();
-              updateSliderFromPosition(e.touches[0].clientX, false);
+              updateSliderFromPosition(e.touches[0].clientX);
             }
-          }, { passive: false });
+          }, { passive: true });
 
           document.addEventListener('touchend', () => {
             isDragging = false;
@@ -3792,29 +3775,22 @@
           slider.addEventListener('click', (e) => {
             if (!isDragging && e.target !== handle && !handle.contains(e.target)) {
               markInteraction();
-              updateSliderFromPosition(e.clientX, true);
+              updateSliderFromPosition(e.clientX);
             }
           });
 
           // Keyboard
           handle.addEventListener('keydown', (e) => {
-            let currentPercentage = parseFloat(handle.style.left) || 50;
             if (e.key === 'ArrowLeft') {
               e.preventDefault();
               markInteraction();
-              setSliderPosition(currentPercentage - 5, true);
+              setSliderPosition(currentPos - 5);
             } else if (e.key === 'ArrowRight') {
               e.preventDefault();
               markInteraction();
-              setSliderPosition(currentPercentage + 5, true);
+              setSliderPosition(currentPos + 5);
             }
           });
-
-          // Initialize
-          function init() {
-            updateOverlayImageWidth();
-            setSliderPosition(0, false); // Start at 0 for auto-sweep
-          }
 
           // Button Controls
           const btnBefore = document.getElementById('hero-btn-before');
@@ -3824,13 +3800,12 @@
           let autoplayInterval = null;
           let isAutoPlaying = false;
           let autoplayDirection = 1;
-          let autoplayPos = 0;
 
           if (btnBefore) {
             btnBefore.addEventListener('click', () => {
               stopAutoPlay();
               markInteraction();
-              setSliderPosition(0, true);
+              setSliderPosition(0);
             });
           }
 
@@ -3838,7 +3813,7 @@
             btnAfter.addEventListener('click', () => {
               stopAutoPlay();
               markInteraction();
-              setSliderPosition(100, true);
+              setSliderPosition(100);
             });
           }
 
@@ -3856,32 +3831,24 @@
             stopAutoPlay();
             isAutoPlaying = true;
             autoplayDirection = 1;
-            autoplayPos = parseFloat(handle.style.left) || 0;
             btnAutoplay.innerHTML = '<span>⏸ Pause</span>';
-            resumeAutoPlay();
-          }
 
-          let lastAutoplayTime = 0;
-          function resumeAutoPlay() {
-            if (autoplayInterval) return;
-            lastAutoplayTime = performance.now();
+            let lastTime = performance.now();
             function animateSlider(currentTime) {
-              if (!isAutoPlaying) {
-                autoplayInterval = null;
-                return;
-              }
-              const delta = currentTime - lastAutoplayTime;
-              if (delta >= 30) {
-                autoplayPos += (autoplayDirection * 2);
-                if (autoplayPos >= 100) {
-                  autoplayPos = 100;
+              if (!isAutoPlaying) return;
+
+              const delta = currentTime - lastTime;
+              if (delta >= 16) { // ~60fps
+                currentPos += (autoplayDirection * 1.5);
+                if (currentPos >= 100) {
+                  currentPos = 100;
                   autoplayDirection = -1;
-                } else if (autoplayPos <= 0) {
-                  autoplayPos = 0;
+                } else if (currentPos <= 0) {
+                  currentPos = 0;
                   autoplayDirection = 1;
                 }
-                setSliderPosition(autoplayPos, false);
-                lastAutoplayTime = currentTime;
+                setSliderPosition(currentPos);
+                lastTime = currentTime;
               }
               autoplayInterval = requestAnimationFrame(animateSlider);
             }
@@ -3906,8 +3873,8 @@
 
           // Initialize
           function init() {
-            updateOverlayImageWidth();
-            setSliderPosition(0, false);
+            updateSliderWidth();
+            setSliderPosition(0);
           }
 
           window.addEventListener('load', () => {
@@ -3917,7 +3884,11 @@
             }, 800);
           });
 
-          window.addEventListener('resize', updateOverlayImageWidth);
+          window.addEventListener('resize', () => {
+            updateSliderWidth();
+            setSliderPosition(currentPos);
+          });
+
           init();
         })();
         </script>
