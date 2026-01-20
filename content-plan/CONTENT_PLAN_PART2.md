@@ -38507,27 +38507,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Your first drawdown will break you... if you let it."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Your first real drawdown |
-| 2-4s | It won't test your strategy |
-| 4-6s | It will test YOU |
-| 6-8s | Doubt. Frustration. Urge to quit. |
-| 8-10s | Every trader faces this |
-| 10-12s | Trust the process 🙏 |
-
-**Background:** Equity curve showing drawdown, or trader looking stressed then refocusing
-
-**Sound:** Emotional/motivational trending audio with buildup
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 623
 
 #### Static Image (Instagram/Twitter)
@@ -38621,27 +38600,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "The goal isn't to be right..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | "The goal isn't to be right" |
-| 2-4s | "The goal is to make money" |
-| 4-6s | EGO wants to be right |
-| 6-8s | DISCIPLINE wants to profit |
-| 8-10s | They're at war |
-| 10-12s | Choose discipline 🎯 |
-
-**Background:** Quote card with slow zoom, or split screen showing ego vs discipline visually
-
-**Sound:** Deep/thoughtful trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 624
 
 #### Static Image (Instagram/Twitter)
@@ -38724,27 +38682,6 @@ Each category:
 **Image Spec:** 1080x1080 — Janus Atlas on chart showing Daily, Weekly, and Monthly levels with clear labels
 
 **Hashtags:** #JanusAtlas #SignalPilot #MultiTimeframe #SupportResistance #TradingLevels #TechnicalAnalysis #TradingView #ChartAnalysis #CryptoTrading #StockTrading #StructureTrading #KeyLevels #TradingIndicators #HTFLevels #TheCartographer
-
----
-
-#### TikTok
-**Hook:** "Daily levels on your 1-minute chart..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | JANUS ATLAS 🗺️ |
-| 2-4s | Daily levels — any timeframe |
-| 4-6s | Weekly levels — any timeframe |
-| 6-8s | Monthly levels — any timeframe |
-| 8-10s | Higher TF context, always |
-| 10-12s | Link in bio ⬇️ |
-
-**Background:** Screen recording showing Janus Atlas levels on different timeframe charts
-
-**Sound:** Exploratory/discovery trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -38838,27 +38775,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Wicks tell you what bodies can't..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Wicks tell hidden stories |
-| 2-4s | Long lower wick = buyers stepped in |
-| 4-6s | Long upper wick = sellers stepped in |
-| 6-8s | Wick = rejection |
-| 8-10s | Body = acceptance |
-| 10-12s | Learn more → bio |
-
-**Background:** Chart zooming into candles with significant wicks
-
-**Sound:** Revealing/discovery trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 627 — BLOG ARTICLE
 ## Importance of Doing Nothing
 
@@ -38915,28 +38831,6 @@ Each category:
 **Image Spec:** 1080x1080 — Minimalist/zen visual, perhaps empty chart or calm water representing stillness
 
 **Hashtags:** #Patience #DoingNothing #TradingDiscipline #CapitalPreservation #NoTrade #TradingWisdom #SignalPilot #EmotionalControl #TradingMindset #WaitForSetup #TradingEducation #ActivePatience #ProtectCapital #TradingTips #ZenTrading
-
----
-
-#### TikTok
-**Hook:** "The best trade you'll ever make..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | The best trade? |
-| 2-4s | Sometimes it's NO trade |
-| 4-6s | No setup = no trade |
-| 6-7s | Uncertain = no trade |
-| 7-8s | Emotional = no trade |
-| 8-10s | Doing nothing = discipline |
-| 10-12s | Protect your capital 🛡️ |
-
-**Background:** Calm, zen imagery or trader sitting back from screen peacefully
-
-**Sound:** Peaceful/mindful trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -38997,27 +38891,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Each guardian teaches a lesson..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE CHRONICLE WISDOM |
-| 2-4s | ⚜️ Pentarch: Patience through cycles |
-| 4-6s | 🔮 Oracle: Truth through volume |
-| 6-8s | 🗺️ Atlas: Context through levels |
-| 8-10s | Principles, not just tools |
-| 10-12s | Read more → bio 📜 |
-
-**Background:** Guardian icons appearing one by one with mystical transitions
-
-**Sound:** Epic/mystical trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 629 — EDUCATION HUB
 ## Advanced Confluence
 
@@ -39072,27 +38945,6 @@ Each category:
 **Image Spec:** 1080x1080 — Complex chart showing multiple independent factors aligning (level + volume regime + momentum + cycle phase)
 
 **Hashtags:** #AdvancedConfluence #TradingStrategy #TechnicalAnalysis #ConfluenceTrading #SignalPilot #QualityOverQuantity #MultiFactorAnalysis #TradingEducation #ProfessionalTrading #IndicatorConfluence #SmartTrading #AdvancedTrading #EdgeBuilding #TradingEdge #SystematicTrading
-
----
-
-#### TikTok
-**Hook:** "Multiple signals isn't confluence..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Multiple signals ≠ confluence |
-| 2-4s | Quality > Quantity |
-| 4-6s | Independent factors |
-| 6-8s | Different data sources |
-| 8-10s | Orchestration, not accumulation |
-| 10-12s | Advanced lesson → bio |
-
-**Background:** Chart building up layers of different indicator types
-
-**Sound:** Strategic/intelligent trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -39156,28 +39008,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "5 minutes to your first setup..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | GETTING STARTED |
-| 2-3s | Step 1: Subscribe |
-| 3-4s | Step 2: Connect TradingView |
-| 4-6s | Step 3: Add indicators |
-| 6-8s | Step 4: Start with defaults |
-| 8-10s | That's it. You're ready. |
-| 10-12s | Link in bio 🚀 |
-
-**Background:** Screen recording walking through actual setup process
-
-**Sound:** Upbeat/productive trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 631 — MARKETING
 ## 631 Progress Update
 
@@ -39233,27 +39063,6 @@ Each category:
 **Image Spec:** 1080x1080 — Progress visualization 631/650, energetic but focused design, finish line imagery
 
 **Hashtags:** #SignalPilot #ContentCreation #631Posts #TradingEducation #FinishLine #AlmostThere #TradingJourney #FreeEducation #ContentLibrary #Milestone #TradingCommunity #FinishStrong #Dedication #TradingResources #FinalStretch
-
----
-
-#### TikTok
-**Hook:** "19 posts to go..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 631 |
-| 2-4s | 19 remaining |
-| 4-6s | Education ✓ Psychology ✓ |
-| 6-8s | Tools ✓ Chronicle ✓ |
-| 8-10s | Finish line in sight 🏁 |
-| 10-12s | Let's go 💪 |
-
-**Background:** Progress bar filling, montage of previous content, finish line imagery
-
-**Sound:** Motivational/final push trending audio
-
-**Duration:** 12 seconds
 
 ---
 
