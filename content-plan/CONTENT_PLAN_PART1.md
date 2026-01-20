@@ -19478,27 +19478,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Institutions get trapped too. Here's how they get out."
-
-**Script:**
-```
-[0-2s] MITIGATION BLOCKS
-[2-4s] Institutions BOUGHT here
-[4-6s] Price DROPPED
-[6-8s] They're TRAPPED
-[8-10s] Price RETURNS
-[10-12s] They SELL to break even
-[12-14s] That's why the level reacts
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Mitigation explained. #trading #smc #institutions #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -19522,24 +19501,6 @@ Full lesson in bio 🔗
 4. **Slide 4:** Steps 3-4
 5. **Slide 5:** Why it works
 6. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Trap and escape story
-3. **Timeline Setup:**
-   - 0-2s: "MITIGATION BLOCKS" title
-   - 2-4s: Buy point marked
-   - 4-6s: Price drops (trapped)
-   - 6-10s: Price returns (opportunity)
-   - 10-14s: Close at break-even (reaction)
-4. **Animation:** Price movement, trap highlight
-5. **Emotion:** Show "trapped" then "relief"
-6. **Audio:** Escape/relief sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -19619,28 +19580,6 @@ Full setup guide in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Never miss a setup. Get alerted your way."
-
-**Script:**
-```
-[0-2s] ALERT OPTIONS 🔔
-[2-4s] 📱 Push to phone
-[4-5s] 📧 Email
-[5-6s] 🔔 TradingView popup
-[6-7s] 📲 Webhook (Discord, Telegram)
-[7-9s] Choose YOUR method
-[9-11s] Never miss a setup
-[11-13s] Get notified. Execute.
-```
-
-**Duration:** 13 seconds
-
-**Caption:** "Your alerts, your way. #signalpilot #alerts #notifications #trading"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -19663,23 +19602,6 @@ Full setup guide in bio 🔗
 2. **Slides 2-4:** Each notification type detailed
 3. **Slide 5:** Setup steps
 4. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Notifications appearing
-3. **Timeline Setup:**
-   - 0-2s: "ALERT OPTIONS" with bell
-   - 2-7s: Each notification type appears
-   - 7-9s: "Choose YOUR method"
-   - 9-13s: "Never miss" + execute
-4. **Animation:** Notification pop-ups appearing
-5. **Sound Effects:** Different notification sounds
-6. **Audio:** Various notification dings at 20% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -19756,18 +19678,6 @@ Full setup guide in bio 🔗
 - [ ] The Sovereign with cycle wheel
 - [ ] Mitigation block diagram
 - [ ] Alert notification options
-
-### Videos Needed
-- [ ] Education philosophy (14s)
-- [ ] Void formation/fill (14s)
-- [ ] Weekly review ritual (12s)
-- [ ] 1% blocks stacking (14s)
-- [ ] NEUTRAL regime explanation (14s)
-- [ ] Breaker block flip (14s)
-- [ ] Overtrading costs (14s)
-- [ ] Sovereign's cycle wheel (13s)
-- [ ] Mitigation logic (14s)
-- [ ] Alert options (13s)
 
 ---
 
