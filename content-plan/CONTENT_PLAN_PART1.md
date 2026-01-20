@@ -16696,64 +16696,6 @@ Join the community in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Thousands of traders. 50+ countries. One community."
-
-**Script:**
-```
-[0-2s] SIGNAL PILOT COMMUNITY
-[2-4s] THOUSANDS of traders
-[4-6s] 50+ COUNTRIES
-[6-8s] Crypto, forex, stocks
-[8-10s] Learning together
-[10-12s] Growing together
-[12-14s] Join us 🌍
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Global community. #signalpilot #trading #community #global"
-
----
-
-## 🎨 CANVA VISUAL CREATION GUIDE
-
-### Static Image (Instagram/Twitter)
-1. **Open Canva** → Create design → 1080x1080px
-2. **Background:** Set to #0a0a0f
-3. **Header:** "JOIN THE COMMUNITY" in Playfair Display, 56pt, #ffffff
-4. **Central Visual:** World map with glowing dots
-   - Dots in various countries (50+)
-   - Connecting lines between dots
-   - Pulse animation effect on key markets
-5. **Stats Overlay:**
-   - "THOUSANDS OF TRADERS" - large, gold
-   - "50+ COUNTRIES" - below
-   - "MULTIPLE MARKETS" - below
-6. **Market Icons:** Small crypto, forex, stock icons
-7. **Brand Footer:** Signal Pilot logo, signalpilot.io
-8. **Export:** PNG, high quality
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Base Visual:** Dark world map
-3. **Timeline Setup:**
-   - 0-2s: Community title drops in
-   - 2-6s: Dots appear across map one by one
-   - 6-10s: Stats fly in from sides
-   - 10-14s: "Join us" CTA with pulse effect
-4. **Animation:** Dots appear with pop effect
-5. **Connection Lines:** Draw lines between major markets
-6. **Audio:** Community/together ambient at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
-
----
-
 # POST 192 — 🎓 AUCTION MARKET THEORY
 
 **Source:** https://education.signalpilot.io/curriculum/advanced/53-auction-market-theory.html
@@ -16828,27 +16770,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Markets are auctions. Here's how they work."
-
-**Script:**
-```
-[0-2s] AUCTION MARKET THEORY
-[2-4s] Price UP = Finding sellers
-[4-6s] Price DOWN = Finding buyers
-[6-8s] BALANCE = Both agree
-[8-10s] IMBALANCE = One dominates
-[10-12s] It's always an auction
-[12-14s] Understand this. Trade better.
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "It's all an auction. #trading #amt #auctionmarkettheory #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -16875,25 +16796,6 @@ Full lesson in bio 🔗
 5. **Slide 5:** Balance (range) state
 6. **Slide 6:** Imbalance (trend) state
 7. **Slide 7:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Auction transforming to price chart
-3. **Timeline Setup:**
-   - 0-2s: Gavel drops, title appears
-   - 2-4s: Price arrows moving up with text
-   - 4-6s: Price arrows moving down with text
-   - 6-8s: Balance visualization (range box)
-   - 8-10s: Imbalance visualization (trending)
-   - 10-14s: "It's always an auction" conclusion
-4. **Animation:** Smooth arrow movements
-5. **Color Coding:** Green for buyers, red for sellers
-6. **Audio:** Auction gavel sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -16968,28 +16870,6 @@ Full article in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "The best traders say NO more than YES"
-
-**Script:**
-```
-[0-2s] BEST TRADERS SAY NO
-[2-4s] ❌ Mediocre setups
-[4-5s] ❌ Emotional trades
-[5-6s] ❌ Oversizing
-[6-7s] ❌ FOMO
-[7-9s] Every NO protects capital
-[9-11s] For the RIGHT yes
-[11-13s] Say NO more. Win more.
-```
-
-**Duration:** 13 seconds
-
-**Caption:** "NO is power. #trading #discipline #sayno #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -17012,24 +16892,6 @@ Full article in bio 🔗
 2. **Slides 2-4:** Each NO scenario explained
 3. **Slide 5:** The payoff - protecting capital
 4. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** "NO" stamps appearing
-3. **Timeline Setup:**
-   - 0-2s: "BEST TRADERS SAY NO" title
-   - 2-7s: Each NO item appears with red stamp
-   - 7-9s: Transition to "protects capital"
-   - 9-11s: Green "YES" appears with checkmark
-   - 11-13s: Final message with impact
-4. **Animation:** Use stamp/seal effect for each NO
-5. **Audio:** Rejection buzzer then success ding at end
-6. **Color:** Red for NO scenes, green for YES scene
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -17091,63 +16953,6 @@ Save this. 🔖
 
 #TradingQuotes #RiskManagement #ManageRisk #TradingWisdom #SignalPilot #CryptoTrading #ForexTrading #TradingMindset #RiskIsOpportunity #CalculatedRisk #LearnTrading #TradingTruth #SmartRisk #SustainableTrading #TradingPhilosophy
 ```
-
----
-
-## 🎬 TikTok
-
-**Hook:** "Don't avoid risk. Manage it."
-
-**Script:**
-```
-[0-2s] RISK IN TRADING
-[2-4s] ❌ AVOIDING = No opportunity
-[4-6s] ❌ IGNORING = Blow up
-[6-8s] ✅ MANAGING = Sustainable
-[8-10s] Risk is unavoidable
-[10-12s] Managed risk = Opportunity
-[12-14s] Don't fear it. Manage it.
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Manage the risk. #trading #riskmanagement #quotes #signalpilot"
-
----
-
-## 🎨 CANVA VISUAL CREATION GUIDE
-
-### Static Image (Instagram/Twitter)
-1. **Open Canva** → Create design → 1080x1080px
-2. **Background:** Set to #0a0a0f with subtle gradient
-3. **Quote Text:** Center of design
-   - "Successful trading is about managing risk, not avoiding it."
-   - Cormorant Garamond Italic, 44pt, #ffffff
-   - Add elegant quotation marks in #c9a962
-4. **Three Approaches Visual:** Below quote
-   - Three icons: Shield (avoiding), Dice (ignoring), Scale (managing)
-   - X over first two, checkmark on third
-5. **Footer:** "Manage it." in bold Inter, 28pt
-6. **Brand Mark:** Signal Pilot logo, small, bottom corner
-7. **Export:** PNG, high quality
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Three scenarios comparison
-3. **Timeline Setup:**
-   - 0-2s: "RISK IN TRADING" title
-   - 2-4s: Avoiding scenario with X
-   - 4-6s: Ignoring scenario with X
-   - 6-8s: Managing scenario with checkmark
-   - 8-14s: Quote reveal and conclusion
-4. **Animation:** Each scenario slides in/out
-5. **Color Grading:** Dark, contemplative mood
-6. **Audio:** Balance/wisdom sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -17224,27 +17029,6 @@ Demo in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "7 indicators cluttering your chart? Try this."
-
-**Script:**
-```
-[0-2s] CHART CLUTTER?
-[2-4s] 7 indicators = Confusion
-[4-6s] OMNIDECK = Unified
-[6-8s] 🟢 Alignment = Go
-[8-10s] 🟡 Partial = Caution
-[10-12s] 🔴 Conflict = Wait
-[12-14s] The Commander unifies 🎯
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Unified clarity. #omnideck #signalpilot #trading #indicators"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -17270,24 +17054,6 @@ Demo in bio 🔗
 4. **Slide 4:** Traffic light explanation
 5. **Slide 5:** Before/after transformation
 6. **Slide 6:** CTA - Try demo
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Clutter to clarity transformation
-3. **Timeline Setup:**
-   - 0-2s: Show messy chart with many indicators
-   - 2-4s: "This is confusing" text
-   - 4-6s: Transformation effect to clean OmniDeck
-   - 6-12s: Traffic light system explanation
-   - 12-14s: The Commander character flash, CTA
-4. **Transition:** Use "dissolve" for transformation
-5. **Traffic Lights:** Animate circles appearing
-6. **Audio:** Clarity/ding sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -17368,27 +17134,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Delta shows who's really in control"
-
-**Script:**
-```
-[0-2s] DELTA VOLUME
-[2-4s] = Buyers minus Sellers
-[4-6s] Positive = Buyers dominating
-[6-8s] Negative = Sellers dominating
-[8-10s] Price UP + Negative delta?
-[10-12s] WEAKNESS ⚠️
-[12-14s] Delta reveals the pressure
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "See the pressure. #trading #delta #volume #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -17415,25 +17160,6 @@ Full lesson in bio 🔗
 5. **Slide 5:** Divergence examples
 6. **Slide 6:** Divergence examples continued
 7. **Slide 7:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Pressure/force visualization
-3. **Timeline Setup:**
-   - 0-2s: "DELTA VOLUME" title with impact
-   - 2-4s: Formula animation
-   - 4-6s: Green bars for positive delta
-   - 6-8s: Red bars for negative delta
-   - 8-12s: Divergence warning scenario
-   - 12-14s: "Delta reveals pressure" conclusion
-4. **Animation:** Bars growing up (buy) and down (sell)
-5. **Color Coding:** Green buyers, red sellers
-6. **Audio:** Pressure/force sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -17513,28 +17239,6 @@ Full article in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Knowing when to STOP is a skill"
-
-**Script:**
-```
-[0-2s] WHEN TO STOP TRADING
-[2-4s] 🛑 Hit daily loss limit
-[4-5s] 🛑 Feeling emotional
-[5-6s] 🛑 Breaking rules
-[6-7s] 🛑 Losing streak
-[7-9s] 🛑 Market unclear
-[9-11s] Stopping isn't quitting
-[11-13s] It's SURVIVING
-```
-
-**Duration:** 13 seconds
-
-**Caption:** "Know when to stop. #trading #discipline #survival #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -17556,23 +17260,6 @@ Full article in bio 🔗
 1. **Slide 1:** Stop sign hero
 2. **Slides 2-5:** One or two scenarios each
 3. **Slide 6:** "Stopping is surviving" + CTA
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Stop signs appearing
-3. **Timeline Setup:**
-   - 0-2s: "WHEN TO STOP TRADING" title
-   - 2-7s: Each scenario with stop sign stamp
-   - 7-9s: Transition to positive message
-   - 9-13s: "Stopping is SURVIVING" with impact
-4. **Animation:** Stop sign stamps appearing
-5. **Color:** Red warning tones throughout
-6. **Audio:** Brake/stop sounds, then resolution sound
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -17634,27 +17321,6 @@ Read the full chronicle in bio 🔗
 
 #TheWatchman #AuguryGrid #SignalPilot #Chronicle #NeverSleeps #TradingLore #SignalPilotChronicle #Vigilance #AlwaysWatching #TradingMythology #MarketScanner #TradingFreedom #AlertsWork #TradingAssistant #VigilantTrading
 ```
-
----
-
-## 🎬 TikTok
-
-**Hook:** "The Watchman never sleeps"
-
-**Script:**
-```
-[0-2s] THE WATCHMAN 👁️
-[2-4s] "Sleep if you must"
-[4-6s] "I never will"
-[6-8s] While you sleep — Scanning
-[8-10s] While you work — Monitoring
-[10-12s] When setups form — Alerting
-[12-14s] The Watchman never rests
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Always watching. #signalpilot #thewatchman #chronicle #trading"
 
 ---
 
