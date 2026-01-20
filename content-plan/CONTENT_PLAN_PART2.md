@@ -39224,25 +39224,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "100 assets on your watchlist? That's the problem..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 100 assets = scattered |
-| 2-4s | 5-10 assets = focused |
-| 4-6s | Familiarity builds intuition |
-| 6-8s | Know them deeply |
-| 8-10s | Go deep, not wide |
-| 10-12s | Free lesson → bio |
-
-**Sound:** Clarity/focus trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 633 — BLOG ARTICLE
 ## When to Walk Away
 
@@ -39294,27 +39275,6 @@ Each category:
 **Image Spec:** 1080x1080 — Person stepping away from trading desk, or closed laptop with peaceful atmosphere
 
 **Hashtags:** #WalkAway #TradingPsychology #MentalCapital #TradingDiscipline #EmotionalControl #SignalPilot #RestDay #TradingMindset #ProtectYourself #TradingTips #SelfCare #TraderLife #KnowYourLimits #TradingWisdom #StepBack
-
----
-
-#### TikTok
-**Hook:** "The hardest trade you'll ever make..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | The hardest trade? |
-| 2-4s | Closing the laptop |
-| 4-5s | After big win? Walk away. |
-| 5-6s | After big loss? Walk away. |
-| 6-7s | When exhausted? Walk away. |
-| 7-9s | The market will be there tomorrow |
-| 9-11s | Your mind needs rest |
-| 11-12s | Link in bio 🚪 |
-
-**Sound:** Peaceful/reflective trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -39375,25 +39335,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Six words every trader knows..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | "Plan the trade" |
-| 2-4s | "Trade the plan" |
-| 4-6s | Planning is EASY |
-| 6-8s | Executing is HARD |
-| 8-10s | Discipline bridges the gap |
-| 10-12s | Trust your plan 📝 |
-
-**Sound:** Thoughtful/contemplative trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 635 — PRODUCT DEMO
 ## Plutus Flow
 
@@ -39443,25 +39384,6 @@ Each category:
 **Image Spec:** 1080x1080 — Plutus Flow indicator showing clear accumulation/distribution phases with labels
 
 **Hashtags:** #PlutusFlow #SignalPilot #FlowAnalysis #OBV #VolumeFlow #TradingIndicator #TradingView #Accumulation #Distribution #TechnicalAnalysis #CryptoTrading #StockTrading #HiddenPressure #MarketFlow #TheScales
-
----
-
-#### TikTok
-**Hook:** "What's happening beneath the surface..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | PLUTUS FLOW ⚖️ |
-| 2-4s | Tracks the balance |
-| 4-6s | Accumulation = buyers building |
-| 6-8s | Distribution = sellers releasing |
-| 8-10s | See pressure before price moves |
-| 10-12s | Link in bio ⬇️ |
-
-**Sound:** Mysterious/revealing trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -39520,25 +39442,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Ever wonder why price sweeps the highs then dumps?"
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | LIQUIDITY EXPLAINED 💧 |
-| 2-4s | Above highs = stops + breakout orders |
-| 4-6s | Below lows = stops + breakdown orders |
-| 6-8s | Price hunts liquidity |
-| 8-10s | Then moves |
-| 10-12s | Learn more → bio |
-
-**Sound:** Revealing/educational trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 637 — BLOG ARTICLE
 ## Compound Effect in Trading
 
@@ -39593,25 +39496,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "1% better every week for a year..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 1% better each week |
-| 2-4s | After 1 month: 4% better |
-| 4-6s | After 6 months: 29% better |
-| 6-8s | After 1 year: 67% BETTER |
-| 8-10s | Small improvements compound |
-| 10-12s | Start today → bio |
-
-**Sound:** Building/motivational trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 638 — CHRONICLE LESSON
 ## Final Three Guardians
 
@@ -39662,25 +39546,6 @@ Each category:
 **Image Spec:** 1080x1080 — Final three guardian icons in premium Chronicle styling, completing the seven
 
 **Hashtags:** #Chronicle #SignalPilot #EliteSeven #HarmonicOscillator #AuguryGrid #OmniDeck #TheArbiter #TheWatchman #TheCommander #TradingIndicators #TradingView #TradingLore #CompleteSystem #TheGuardians #UnifiedAnalysis
-
----
-
-#### TikTok
-**Hook:** "The final three guardians..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE FINAL THREE |
-| 2-4s | 🎵 Harmonic Oscillator — Rhythm |
-| 4-6s | 👁️ Augury Grid — Scanner |
-| 6-8s | ⚔️ OmniDeck — Commander |
-| 8-10s | The Elite Seven complete |
-| 10-12s | Chronicle in bio 📜 |
-
-**Sound:** Epic/triumphant orchestral trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -39744,28 +39609,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Your system is missing something..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 5 SYSTEM COMPONENTS |
-| 2-3s | 1. Market selection |
-| 3-4s | 2. Entry criteria |
-| 4-5s | 3. Exit criteria |
-| 5-6s | 4. Position sizing |
-| 6-7s | 5. Review process |
-| 7-9s | Miss one = hole in system |
-| 9-11s | Build complete systems |
-| 11-12s | Pro lesson → bio |
-
-**Sound:** Strategic/systematic trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 640 — DOCS
 ## Troubleshooting Guide
 
@@ -39824,27 +39667,6 @@ Each category:
 **Image Spec:** 1080x1080 — Clean troubleshooting checklist with numbered steps and icons
 
 **Hashtags:** #Troubleshooting #SignalPilot #CustomerSupport #TradingView #TechSupport #QuickFix #Documentation #HelpCenter #TradingTools #ProblemSolving #Support #UserGuide #TradingIndicators #HereToHelp #FixIt
-
----
-
-#### TikTok
-**Hook:** "Indicator not loading? Try this..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | NOT LOADING? |
-| 2-3s | 1. Refresh TradingView |
-| 3-4s | 2. Check subscription |
-| 4-5s | 3. Clear cache |
-| 5-6s | 4. Try another browser |
-| 6-8s | Still stuck? |
-| 8-10s | Support has your back |
-| 10-12s | Link in bio 🔧 |
-
-**Sound:** Helpful/solution trending audio
-
-**Duration:** 12 seconds
 
 ---
 
