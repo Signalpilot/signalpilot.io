@@ -2486,7 +2486,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -3791,7 +3790,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -5148,7 +5146,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -6462,7 +6459,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -7765,7 +7761,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -32234,58 +32229,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Every expert started somewhere"
-- Font: Playfair Display, 48pt, white
-- Animation: Fade in from black
-
-**Scene 2 (2-4s): Education**
-- Text: "Free education ✓"
-- Checkmark animation
-- Blue #4a90d9 accent
-
-**Scene 3 (4-5s): Tools**
-- Text: "Professional tools ✓"
-- Checkmark animation
-
-**Scene 4 (5-6s): Community**
-- Text: "Supportive community ✓"
-- Checkmark animation
-
-**Scene 5 (6-8s): Journey Starts**
-- Text: "Your journey starts"
-- Path/door imagery background
-- Scale up animation
-
-**Scene 6 (8-10s): Call to Action**
-- Text: "Right here. Right now."
-- Gold #c9a962 highlight
-- Pulse animation
-
-**Scene 7 (10-12s): CTA**
-- Text: "Link in bio"
-- Arrow pointing down
-- Fade out
-
-### Audio
-- Add inspirational/beginning audio
-- Fade in 0-1s, fade out 11-12s
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "571_journey_starts_video.mp4"
-
----
-
 # POST 572 — 🎓 Position Management Principles
 
 **Source:** `https://education.signalpilot.io/curriculum/intermediate/50-position-management.html`
@@ -32395,54 +32338,6 @@ Each category:
 ### Export
 - Export as PNG, high quality
 - Save as "572_position_management_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: trading chart with position
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Hook**
-- Text: "Got a good entry?"
-- Show chart with entry point marked
-- Font: Playfair Display, 52pt
-
-**Scene 2 (2-4s): Management Intro**
-- Text: "Now manage it"
-- Zoom into position management area
-- Blue #4a90d9 highlight on trade
-
-**Scene 3 (4-6s): Stop Rule**
-- Text: "Never move stop further"
-- Show stop loss holding firm
-- Red warning indicator
-
-**Scene 4 (6-8s): Scale Out**
-- Text: "Scale out strategically"
-- Show partial profit taking
-- Green profit indicators
-
-**Scene 5 (8-10s): Trail**
-- Text: "Trail to protect profits"
-- Animated trailing stop moving up
-- Gold #c9a962 trail line
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Add management/control audio
-- Keep professional tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "572_position_management_video.mp4"
 
 ---
 
@@ -32563,53 +32458,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Dark with exit door imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Most traders quit because:"
-- Exit door visual
-- Warning tone
-
-**Scene 2-5 (2-6s): Rapid Reasons**
-- Flash each reason (1 second each)
-- "Unrealistic expectations"
-- "Undercapitalized"
-- "No real system"
-- "Burnout"
-- Red warning color accents
-
-**Scene 6 (6-8s): Transition**
-- Text: "Know the traps"
-- Visual shift from door to path
-- Color shift to hopeful
-
-**Scene 7 (8-10s): Solution**
-- Text: "Avoid them"
-- Path forward imagery
-- Green/blue positive colors
-
-**Scene 8 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Blog visual
-
-### Audio
-- Warning audio 0-6s
-- Hopeful audio 6-12s
-- Smooth transition
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "573_traders_quit_video.mp4"
-
----
-
 # POST 574 — 💬 Quote Card
 
 **Source:** Signal Pilot Philosophy
@@ -32704,54 +32552,6 @@ Each category:
 ### Export
 - Export as PNG, high quality
 - Save as "574_consistency_quote_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 10 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Question**
-- Text: "What is consistency?"
-- Font: Playfair Display, 52pt
-- Fade in animation
-
-**Scene 2 (2-4s): Wrong Definition**
-- Text: "Not: trade every day"
-- Red X icon
-- Strike through effect
-
-**Scene 3 (4-6s): Right Definition**
-- Text: "Yes: follow rules every time"
-- Green checkmark
-- Blue #4a90d9 highlight
-
-**Scene 4 (6-8s): Paradox**
-- Text: "Even when rules say 'wait'"
-- Calendar visual with "no trade" days
-- Thoughtful pause
-
-**Scene 5 (8-9s): Truth**
-- Text: "That's true consistency"
-- Gold #c9a962 text
-- Emphasis animation
-
-**Scene 6 (9-10s): Attribution**
-- Text: "— Signal Pilot"
-- Fade out with logo
-
-### Audio
-- Add clarifying/wisdom audio
-- Contemplative tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "574_consistency_quote_video.mp4"
 
 ---
 
@@ -32871,54 +32671,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Chart with Volume Oracle
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Volume Oracle shows:"
-- Chart in background
-- Volume Oracle indicator visible
-
-**Scene 2 (2-4s): Beyond Regime**
-- Text: "Not just the regime"
-- Highlight current regime state
-- Static color shown
-
-**Scene 3 (4-6s): The Shift**
-- Text: "But the SHIFT"
-- Animate regime color change
-- Arrow pointing to change moment
-
-**Scene 4 (6-8s): Example**
-- Text: "DISTRIBUTION → ACCUMULATION = Bullish flip"
-- Show red to green shift
-- Price movement following
-
-**Scene 5 (8-10s): Key Insight**
-- Text: "The shift is the signal"
-- Emphasize shift point
-- Gold #c9a962 highlight
-
-**Scene 6 (10-12s): CTA**
-- Text: "Link in bio"
-- Prophet icon appear
-
-### Audio
-- Add transition/change audio
-- Build anticipation at shift moments
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "575_volume_oracle_regime_shifts_video.mp4"
-
----
-
 # POST 576 — 🎓 Stop Loss Placement Strategies
 
 **Source:** `https://education.signalpilot.io/curriculum/beginner/15-stop-loss-placement.html`
@@ -33033,55 +32785,6 @@ Each category:
 ### Export
 - Export as PNG, high quality
 - Save as "576_stop_placement_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Trading chart
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Question**
-- Text: "Where's your stop?"
-- Chart with entry point marked
-- Question tone
-
-**Scene 2 (2-4s): Wrong Answer**
-- Text: "'I use 50 pips'"
-- Show arbitrary stop on chart
-- Red warning color
-
-**Scene 3 (4-6s): Rejection**
-- Text: "Wrong answer"
-- X animation over arbitrary stop
-- Gets stopped out visual
-
-**Scene 4 (6-8s): Right Way**
-- Text: "Use structure. Use ATR."
-- Show proper stop below structure
-- Green approval color
-
-**Scene 5 (8-10s): Key Message**
-- Text: "Let the chart decide"
-- Highlight structure levels
-- Blue #4a90d9 emphasis
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Add correction/improvement audio
-- Wrong answer = warning tone
-- Right answer = approval tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "576_stop_placement_video.mp4"
 
 ---
 
@@ -33203,54 +32906,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Calm Sunday setup imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Sunday trading ritual:"
-- Calm environment visual
-- Coffee, journal setup
-
-**Scene 2 (2-4s): Step 1**
-- Text: "Review all trades"
-- Journal being opened
-- Trade notes visible
-
-**Scene 3 (4-6s): Step 2**
-- Text: "Update statistics"
-- Spreadsheet/numbers visual
-- Stats being updated
-
-**Scene 4 (6-8s): Step 3**
-- Text: "Plan next week"
-- Charts with levels marked
-- Calendar visible
-
-**Scene 5 (8-10s): Time**
-- Text: "30-60 minutes"
-- Clock visual
-- Emphasize investment
-
-**Scene 6 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Blog visual
-
-### Audio
-- Add calm, preparation audio
-- Sunday morning vibes
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "577_weekend_review_video.mp4"
-
----
-
 # POST 578 — 🔮 Chronicle: Epilogue — The Trader's Path
 
 **Source:** `https://signalpilot.io/chronicle/epilogue-traders-path/`
@@ -33357,57 +33012,6 @@ Each category:
 ### Export
 - Export as PNG, high quality
 - Save as "578_chronicle_epilogue_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Epic sunrise/path imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "The Seven have spoken"
-- Flash each Elite Seven icon
-- Epic music begins
-
-**Scene 2 (2-4s): Wisdom**
-- Text: "Wisdom shared"
-- Golden light emanating
-- Chronicle imagery
-
-**Scene 3 (4-6s): Tools**
-- Text: "Tools available"
-- Indicator icons appear
-- Blue #4a90d9 glow
-
-**Scene 4 (6-8s): Education**
-- Text: "Education free"
-- Book/curriculum visual
-- Knowledge imagery
-
-**Scene 5 (8-10s): Torch Pass**
-- Text: "Now... your turn"
-- Torch being passed visual
-- Camera moving to viewer perspective
-- Gold #c9a962 light
-
-**Scene 6 (10-12s): CTA**
-- Text: "Chronicle — link in bio"
-- Sunrise finale
-- Hopeful ending
-
-### Audio
-- Epic/triumphant audio building
-- Transition to hopeful at "your turn"
-- Satisfying conclusion
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "578_chronicle_epilogue_video.mp4"
 
 ---
 
@@ -33535,55 +33139,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Journal/notebook imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Trading journal must-haves:"
-- Journal opening animation
-- Pen ready to write
-
-**Scene 2 (2-4s): Before**
-- Text: "Before: Why this trade?"
-- Writing "before" section
-- Blue #4a90d9 accent
-
-**Scene 3 (4-6s): During**
-- Text: "During: How do I feel?"
-- Adding notes mid-trade
-- Gold #c9a962 accent
-
-**Scene 4 (6-8s): After**
-- Text: "After: What did I learn?"
-- Completing entry
-- Green accent
-
-**Scene 5 (8-10s): Key Message**
-- Text: "Be brutally honest"
-- Emphasis animation
-- Red underline for importance
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Journal closing
-- Fade to CTA
-
-### Audio
-- Add reflective/learning audio
-- Calm, introspective tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "579_trading_journal_video.mp4"
-
----
-
 # POST 580 — 📚 Docs: System Requirements
 
 **Source:** `https://docs.signalpilot.io/about-system-requirements`
@@ -33702,54 +33257,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Signal Pilot requirements:"
-- Clipboard/checklist visual
-- Question tone
-
-**Scene 2 (2-4s): TradingView**
-- Text: "TradingView account ✓"
-- TradingView logo
-- Checkmark animation
-
-**Scene 3 (4-6s): Browser**
-- Text: "Modern browser ✓"
-- Browser icons
-- Checkmark animation
-
-**Scene 4 (6-8s): Internet**
-- Text: "Stable internet ✓"
-- Wifi icon
-- Checkmark animation
-
-**Scene 5 (8-10s): Simplicity**
-- Text: "That's it. Simple."
-- All checkmarks visible
-- Satisfaction animation
-
-**Scene 6 (10-12s): CTA**
-- Text: "Link in bio"
-- Docs visual
-
-### Audio
-- Add simple/easy audio
-- Satisfying checkmark sounds
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "580_system_requirements_video.mp4"
-
----
-
 # 📋 Batch 58 Hashtag Bank
 
 ## By Pillar
@@ -33804,18 +33311,6 @@ Each category:
 - [ ] 578_chronicle_epilogue_static.png
 - [ ] 579_trading_journal_static.png
 - [ ] 580_system_requirements_static.png
-
-## Videos (CapCut)
-- [ ] 571_journey_starts_video.mp4
-- [ ] 572_position_management_video.mp4
-- [ ] 573_traders_quit_video.mp4
-- [ ] 574_consistency_quote_video.mp4
-- [ ] 575_volume_oracle_transitions_video.mp4
-- [ ] 576_stop_placement_video.mp4
-- [ ] 577_weekend_review_video.mp4
-- [ ] 578_chronicle_epilogue_video.mp4
-- [ ] 579_trading_journal_video.mp4
-- [ ] 580_system_requirements_video.mp4
 
 ## Carousel Slides
 - [ ] 571 carousel (7 slides)
@@ -33980,61 +33475,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "The Signal Pilot Promise:"
-- Handshake or pledge imagery
-- Sincere tone set
-
-**Scene 2 (2-4s): Quality**
-- Text: "Quality tools ✓"
-- Checkmark animation
-- Tool icon
-
-**Scene 3 (4-5s): Education**
-- Text: "Free education ✓"
-- Checkmark animation
-
-**Scene 4 (5-6s): Honesty**
-- Text: "Honest marketing ✓"
-- Checkmark animation
-
-**Scene 5 (6-7s): Support**
-- Text: "Real support ✓"
-- Checkmark animation
-
-**Scene 6 (7-9s): Statement**
-- Text: "This is what we stand for"
-- All four promises visible
-- Unified display
-
-**Scene 7 (9-11s): Commitment**
-- Text: "Always"
-- Gold #c9a962 highlight
-- Emphasis
-
-**Scene 8 (11-12s): CTA**
-- Text: "Link in bio"
-- Fade out
-
-### Audio
-- Add sincere/commitment audio
-- Professional, trustworthy tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "581_promise_video.mp4"
-
----
-
 # POST 582 — 🎓 Entry Trigger Types
 
 **Source:** `https://education.signalpilot.io/curriculum/beginner/17-entry-triggers.html`
@@ -34155,54 +33595,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Trading chart with setup zone
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Hook**
-- Text: "Found a setup?"
-- Chart with attractive setup zone
-- Excitement tone
-
-**Scene 2 (2-4s): Pause**
-- Text: "Don't enter yet"
-- Red warning
-- Patience emphasized
-
-**Scene 3 (4-6s): Key Concept**
-- Text: "Wait for the TRIGGER"
-- Blue #4a90d9 highlight
-- Zoom into setup zone
-
-**Scene 4 (6-8s): Triggers**
-- Text: "Candle close. Rejection. Break."
-- Show each trigger type quickly
-- Visual examples
-
-**Scene 5 (8-10s): Action**
-- Text: "Then enter"
-- Green entry confirmation
-- Execute trade visual
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Add timing/precision audio
-- Build anticipation, release on trigger
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "582_entry_triggers_video.mp4"
-
----
-
 # POST 583 — 📝 The Sunk Cost Fallacy in Trading
 
 **Source:** `https://blog.signalpilot.io/articles/when-to-cut-losses-early/`
@@ -34316,54 +33708,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Anchor/trap imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): The Trap**
-- Text: "'Can't exit now, I've lost too much'"
-- Trader held by anchor visual
-- Heavy, trapped feeling
-
-**Scene 2 (2-4s): Name It**
-- Text: "Sunk cost fallacy"
-- Label the trap
-- Educational tone
-
-**Scene 3 (4-6s): Truth**
-- Text: "What's lost is lost"
-- Anchor starting to dissolve
-- Freeing realization
-
-**Scene 4 (6-8s): The Test**
-- Text: "Would you enter NOW?"
-- Question highlighted
-- Decision moment
-
-**Scene 5 (8-10s): Action**
-- Text: "No? Then exit."
-- Breaking free animation
-- Liberation visual
-
-**Scene 6 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Fade to blog visual
-
-### Audio
-- Heavy/trapped audio 0-4s
-- Liberation/clarity audio 4-12s
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "583_sunk_cost_video.mp4"
-
----
-
 # POST 584 — 💬 Quote Card
 
 **Source:** Signal Pilot Philosophy
@@ -34460,54 +33804,6 @@ Each category:
 ### Export
 - Export as PNG, high quality
 - Save as "584_entry_price_quote_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 10 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Question**
-- Text: "Your entry price?"
-- Entry price number displayed
-- Question tone
-
-**Scene 2 (2-4s): Market Truth**
-- Text: "Market doesn't care"
-- Entry price fading
-- Indifference visual
-
-**Scene 3 (4-6s): Advice**
-- Text: "Stop caring too"
-- Entry completely faded
-- Liberation beginning
-
-**Scene 4 (6-8s): Focus**
-- Text: "Focus on NOW"
-- Current price highlighted
-- Blue #4a90d9 emphasis
-
-**Scene 5 (8-9s): Clarification**
-- Text: "Not where you got in"
-- Present moment focus
-- Gold #c9a962 accent
-
-**Scene 6 (9-10s): Attribution**
-- Text: "— Signal Pilot"
-- Fade with logo
-
-### Audio
-- Add freeing/present-moment audio
-- Contemplative to liberating
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "584_entry_price_quote_video.mp4"
 
 ---
 
@@ -34627,64 +33923,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Chart with full cycle
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Pentarch shows:"
-- Chart starting position
-- Cycle beginning
-
-**Scene 2 (2-3s): Phase 1**
-- Text: "Accumulation"
-- Highlight accumulation zone
-- Green accent
-
-**Scene 3 (3-4s): Phase 2**
-- Text: "→ Markup"
-- Chart advancing through markup
-- Blue accent
-
-**Scene 4 (4-5s): Phase 3**
-- Text: "→ Distribution"
-- Price stalling at highs
-- Yellow accent
-
-**Scene 5 (5-6s): Phase 4**
-- Text: "→ Markdown"
-- Price declining
-- Red accent
-
-**Scene 6 (6-8s): Complete**
-- Text: "Complete cycle identified"
-- Full cycle visible
-- Satisfaction moment
-
-**Scene 7 (8-10s): Character**
-- Text: "The Sovereign sees all"
-- Sovereign icon appear
-- Gold #c9a962 glow
-
-**Scene 8 (10-12s): CTA**
-- Text: "Link in bio"
-- Fade to CTA
-
-### Audio
-- Cyclical audio building through phases
-- Complete/satisfying at finish
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "585_pentarch_cycle_video.mp4"
-
----
-
 # POST 586 — 🎓 Understanding Spread and Slippage
 
 **Source:** `https://education.signalpilot.io/curriculum/beginner/18-spread-slippage.html`
@@ -34797,54 +34035,6 @@ Each category:
 ### Export
 - Export as PNG, high quality
 - Save as "586_spread_slippage_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Hook**
-- Text: "Hidden trading costs:"
-- Money disappearing visual
-- Warning tone
-
-**Scene 2 (2-4s): Spread**
-- Text: "SPREAD: bid vs ask gap"
-- Bid/ask visualization
-- Gap highlighted in red
-
-**Scene 3 (4-6s): Slippage**
-- Text: "SLIPPAGE: price moves on you"
-- Expected price → actual fill
-- Difference shown
-
-**Scene 4 (6-8s): Reality**
-- Text: "Both cost real money"
-- Dollar signs flowing out
-- Cost accumulating
-
-**Scene 5 (8-10s): Action**
-- Text: "Factor them into your math"
-- Calculator/R:R visual
-- Blue #4a90d9 positive tone
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Warning/cost audio 0-6s
-- Solution/positive audio 6-12s
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "586_spread_slippage_video.mp4"
 
 ---
 
@@ -34969,64 +34159,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Trading styles:"
-- Four icons teased
-- Choice atmosphere
-
-**Scene 2 (2-3s): Scalping**
-- Text: "Scalping = seconds/minutes"
-- Lightning bolt
-- Fast visual
-
-**Scene 3 (3-4s): Day Trading**
-- Text: "Day trading = hours"
-- Sun icon
-- Daily rhythm
-
-**Scene 4 (4-5s): Swing**
-- Text: "Swing = days/weeks"
-- Wave icon
-- Patient visual
-
-**Scene 5 (5-6s): Position**
-- Text: "Position = weeks/months"
-- Mountain icon
-- Long-term visual
-
-**Scene 6 (6-8s): Match**
-- Text: "Match YOUR lifestyle"
-- Person icon
-- Personalization emphasis
-
-**Scene 7 (8-10s): Key Message**
-- Text: "No 'best' — only best for you"
-- All styles equal
-- No judgment
-
-**Scene 8 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Blog visual
-
-### Audio
-- Choice/personalization audio
-- Non-judgmental, exploratory tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "587_trading_style_video.mp4"
-
----
-
 # POST 588 — 🔮 Chronicle Recap: Lessons from the Seven
 
 **Source:** `https://signalpilot.io/chronicle/`
@@ -35139,70 +34271,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Dark with subtle epic imagery
-
-### Timeline Structure
-
-**Scene 1 (0-1s): Sovereign**
-- Text: "Sovereign: Patience"
-- Crown icon flash
-- Quick beat
-
-**Scene 2 (1-2s): Prophet**
-- Text: "Prophet: Clarity"
-- Crystal ball flash
-- Quick beat
-
-**Scene 3 (2-3s): Cartographer**
-- Text: "Cartographer: Perspective"
-- Map icon flash
-- Quick beat
-
-**Scene 4 (3-4s): Scales**
-- Text: "Scales: Truth"
-- Balance icon flash
-- Quick beat
-
-**Scene 5 (4-5s): Arbiter**
-- Text: "Arbiter: Measure"
-- Lightning icon flash
-- Quick beat
-
-**Scene 6 (5-6s): Watchman**
-- Text: "Watchman: Vigilance"
-- Eye icon flash
-- Quick beat
-
-**Scene 7 (6-7s): Commander**
-- Text: "Commander: Unity"
-- Star/command icon flash
-- Quick beat
-
-**Scene 8 (7-9s): Unity**
-- Text: "Seven lessons. One trader."
-- All seven unite
-- Epic moment
-
-**Scene 9 (9-12s): CTA**
-- Text: "Chronicle — link in bio"
-- Fade to CTA
-
-### Audio
-- Epic recap audio
-- Building through each character
-- Satisfying unity at end
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "588_chronicle_recap_video.mp4"
-
----
-
 # POST 589 — 🎓 The Importance of Liquidity
 
 **Source:** `https://education.signalpilot.io/curriculum/beginner/19-liquidity-importance.html`
@@ -35312,54 +34380,6 @@ Each category:
 ### Export
 - Export as PNG, high quality
 - Save as "589_liquidity_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Scenario**
-- Text: "Want to exit your trade?"
-- Trader at computer
-- Normal situation
-
-**Scene 2 (2-4s): Requirement**
-- Text: "Need someone to buy it"
-- Order book visual
-- Buyer needed
-
-**Scene 3 (4-6s): Problem**
-- Text: "Low liquidity = no buyers"
-- Empty order book
-- Warning red
-
-**Scene 4 (6-8s): Consequence**
-- Text: "You're trapped"
-- Trader trapped visual
-- Alarming tone
-
-**Scene 5 (8-10s): Solution**
-- Text: "Trade liquid markets"
-- Deep order book
-- Blue #4a90d9 positive
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Building warning audio 0-8s
-- Resolution audio 8-12s
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "589_liquidity_video.mp4"
 
 ---
 
@@ -35479,54 +34499,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Invitation**
-- Text: "Got an idea?"
-- Lightbulb icon
-- Open, inviting tone
-
-**Scene 2 (2-4s): Types**
-- Text: "Feature request? Bug report?"
-- Multiple icons
-- Options shown
-
-**Scene 3 (4-6s): We Listen**
-- Text: "We listen"
-- Ear icon
-- Feedback flowing in
-
-**Scene 4 (6-8s): We Build**
-- Text: "We build"
-- Construction/building visual
-- Feedback becoming features
-
-**Scene 5 (8-10s): Impact**
-- Text: "Your voice matters"
-- Community visual
-- Gold #c9a962 highlight
-
-**Scene 6 (10-12s): CTA**
-- Text: "Link in bio"
-- Docs visual
-
-### Audio
-- Collaborative/building audio
-- Positive, community-focused
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "590_feedback_video.mp4"
-
----
-
 # 📋 Batch 59 Hashtag Bank
 
 ## By Pillar
@@ -35581,18 +34553,6 @@ Each category:
 - [ ] 588_chronicle_recap_static.png
 - [ ] 589_liquidity_static.png
 - [ ] 590_feedback_static.png
-
-## Videos (CapCut)
-- [ ] 581_promise_video.mp4
-- [ ] 582_entry_triggers_video.mp4
-- [ ] 583_sunk_cost_video.mp4
-- [ ] 584_entry_price_quote_video.mp4
-- [ ] 585_pentarch_cycle_video.mp4
-- [ ] 586_spread_slippage_video.mp4
-- [ ] 587_trading_style_video.mp4
-- [ ] 588_chronicle_recap_video.mp4
-- [ ] 589_liquidity_video.mp4
-- [ ] 590_feedback_video.mp4
 
 ## Carousel Slides
 - [ ] 581 carousel (6 slides)
@@ -35764,60 +34724,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "600+ posts"
-- Number counting up animation
-- Celebration tone
-
-**Scene 2 (2-3s): Education**
-- Text: "Education ✓"
-- Checkmark animation
-- Book icon
-
-**Scene 3 (3-4s): Indicators**
-- Text: "Indicators ✓"
-- Checkmark animation
-
-**Scene 4 (4-5s): Psychology**
-- Text: "Psychology ✓"
-- Checkmark animation
-
-**Scene 5 (5-6s): Chronicle**
-- Text: "Chronicle ✓"
-- Checkmark animation
-
-**Scene 6 (6-8s): Gratitude**
-- Text: "Thank you for being here"
-- Warm, sincere visual
-- Gold #c9a962 accents
-
-**Scene 7 (8-10s): Future**
-- Text: "More to come"
-- Forward-looking visual
-
-**Scene 8 (10-12s): CTA**
-- Text: "Link in bio"
-- Fade out
-
-### Audio
-- Celebratory but tasteful audio
-- Grateful tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "591_600_milestone_video.mp4"
-
----
-
 # POST 592 — 🎓 Trading Plan Essentials
 
 **Source:** `https://education.signalpilot.io/curriculum/beginner/20-trading-plan.html`
@@ -35939,56 +34845,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Document/plan aesthetic
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Challenge**
-- Text: "Do you have a trading plan?"
-- Question tone
-- Empty document visual
-
-**Scene 2 (2-4s): What**
-- Text: "What markets?"
-- First section filling in
-
-**Scene 3 (4-5s): What Setups**
-- Text: "What setups?"
-- More sections filling
-
-**Scene 4 (5-6s): Risk**
-- Text: "How much risk?"
-- Risk section highlighted
-
-**Scene 5 (6-8s): Key Point**
-- Text: "If not written, not a plan"
-- Pen writing on document
-- Emphasis moment
-
-**Scene 6 (8-10s): Action**
-- Text: "Write it down"
-- Completed document shown
-- Blue #4a90d9 approval
-
-**Scene 7 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Planning/structure audio
-- Professional, organized tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "592_trading_plan_video.mp4"
-
----
-
 # POST 593 — 📝 Accepting Losses as Part of the Game
 
 **Source:** `https://blog.signalpilot.io/articles/psychology-of-getting-stopped-out/`
@@ -36105,54 +34961,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Scenario**
-- Text: "Took a loss?"
-- Red down arrow
-- Common situation
-
-**Scene 2 (2-4s): Reframe**
-- Text: "That's a business expense"
-- Ledger appearing
-- Shift in perspective
-
-**Scene 3 (4-6s): Analogy**
-- Text: "Restaurants pay for ingredients"
-- Restaurant visual
-- Normal cost
-
-**Scene 4 (6-8s): Application**
-- Text: "Traders pay for losses"
-- Trading visual
-- Same concept
-
-**Scene 5 (8-10s): Action**
-- Text: "Accept it. Move on."
-- Acceptance visual
-- Freedom feeling
-
-**Scene 6 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Blog visual
-
-### Audio
-- Accepting/business professional audio
-- Calm, normalized tone
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "593_accepting_losses_video.mp4"
-
----
-
 # POST 594 — 💬 Quote Card
 
 **Source:** Signal Pilot Philosophy
@@ -36251,54 +35059,6 @@ Each category:
 ### Export
 - Export as PNG, high quality
 - Save as "594_execution_quote_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 10 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Perfect**
-- Text: "Perfect system?"
-- Pristine but idle visual
-- Question tone
-
-**Scene 2 (2-4s): Unused**
-- Text: "Never traded?"
-- Dust collecting
-- Unused emphasis
-
-**Scene 3 (4-6s): Result**
-- Text: "= $0"
-- Zero, no results
-- Red negative
-
-**Scene 4 (6-8s): Alternative**
-- Text: "Imperfect system + execution"
-- Running, working system
-- Green positive
-
-**Scene 5 (8-9s): Real Result**
-- Text: "= actual results"
-- Money/profits visual
-- Success
-
-**Scene 6 (9-10s): Attribution**
-- Text: "— Signal Pilot"
-- Fade with logo
-
-### Audio
-- Action/execution audio
-- Builds from static to active
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "594_execution_quote_video.mp4"
 
 ---
 
@@ -36416,44 +35176,6 @@ Each category:
 ### Export
 - Export as PNG, high quality
 - Save as "595_complete_suite_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-1s): Opening**
-- Text: "7 indicators"
-- All icons teased
-
-**Scene 2-8 (1-8s): Each Indicator**
-- Quick flash through all seven
-- Name: Function format
-- 1 second each
-- Icon highlight
-
-**Scene 9 (8-10s): Unity**
-- Text: "Designed as a system"
-- All seven unified
-- Blue #4a90d9 glow
-
-**Scene 10 (10-12s): CTA**
-- Text: "Link in bio"
-- Fade to CTA
-
-### Audio
-- Building/complete audio
-- Satisfying unity at end
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "595_complete_suite_video.mp4"
 
 ---
 
@@ -36575,45 +35297,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Beginner mistakes:"
-- Warning tone set
-- List beginning
-
-**Scene 2-6 (2-7s): Mistakes**
-- Each mistake with ❌
-- 1 second each
-- Quick pace
-- Red warning colors
-
-**Scene 7 (7-9s): Solution**
-- Text: "Know them. Avoid them."
-- Shift to positive
-- Green/blue colors
-
-**Scene 8 (9-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Education emphasis
-
-### Audio
-- Warning audio for mistakes
-- Positive resolution at end
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "596_beginner_mistakes_video.mp4"
-
----
-
 # POST 597 — 📝 The 80/20 Rule in Trading
 
 **Source:** `https://blog.signalpilot.io/articles/80-20-rule-trading/`
@@ -36728,51 +35411,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "80/20 rule in trading:"
-- Pie chart appearing
-
-**Scene 2 (2-4s): Result**
-- Text: "80% of profits"
-- Large number emphasized
-
-**Scene 3 (4-6s): Source**
-- Text: "From 20% of trades"
-- Small slice highlighted
-
-**Scene 4 (6-8s): Action**
-- Text: "Focus on the 20%"
-- 20% expanding/highlighted
-- Blue #4a90d9 glow
-
-**Scene 5 (8-10s): Elimination**
-- Text: "Eliminate the rest"
-- 80% fading
-- Focus remaining
-
-**Scene 6 (10-12s): CTA**
-- Text: "Full article — link in bio"
-- Blog visual
-
-### Audio
-- Focus/efficiency audio
-- Clean, decisive
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "597_8020_rule_video.mp4"
-
----
-
 # POST 598 — 🔮 Final Chronicle Message
 
 **Source:** `https://signalpilot.io/chronicle/`
@@ -36884,54 +35522,6 @@ Each category:
 ### Export
 - Export as PNG, high quality
 - Save as "598_final_chronicle_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Ethereal, eternal imagery
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Completion**
-- Text: "The Chronicle is complete"
-- Scroll closing visual
-- Completion tone
-
-**Scene 2 (2-4s): But**
-- Text: "But the Seven..."
-- Seven icons appearing
-- Presence building
-
-**Scene 3 (4-6s): Always**
-- Text: "Are always with you"
-- Seven surrounding viewer
-- Protective, guiding
-
-**Scene 4 (6-8s): In Indicators**
-- Text: "In every indicator"
-- Quick flash of each tool
-- Living wisdom
-
-**Scene 5 (8-10s): In Trades**
-- Text: "In every trade"
-- Trading action
-- Seven watching over
-
-**Scene 6 (10-12s): CTA**
-- Text: "Chronicle — link in bio"
-- Eternal fade
-
-### Audio
-- Eternal/timeless orchestral audio
-- Beautiful, peaceful conclusion
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "598_final_chronicle_video.mp4"
 
 ---
 
@@ -37056,54 +35646,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Daily trading habits:"
-- Checklist appearing
-- Routine tone
-
-**Scene 2 (2-4s): Morning**
-- Text: "Morning prep ☀️"
-- Sun icon
-- First habit
-
-**Scene 3 (4-6s): Pre-Trade**
-- Text: "Pre-trade checklist ✅"
-- Checkmark animation
-- Second habit
-
-**Scene 4 (6-8s): Post-Trade**
-- Text: "Post-trade review 📝"
-- Notes icon
-- Third habit
-
-**Scene 5 (8-10s): Result**
-- Text: "Habits = consistency"
-- All habits unified
-- Gold #c9a962 success
-
-**Scene 6 (10-12s): CTA**
-- Text: "Free lesson — link in bio"
-- Fade to CTA
-
-### Audio
-- Routine/habit audio
-- Steady, consistent rhythm
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "599_trading_habits_video.mp4"
-
----
-
 # POST 600 — 📚 Docs: Quick Start Guide
 
 **Source:** `https://docs.signalpilot.io/start-quick`
@@ -37220,60 +35762,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1 (0-2s): Opening**
-- Text: "Quick start:"
-- Rocket animation
-- Speed implied
-
-**Scene 2 (2-3s): Step 1**
-- Text: "1. TradingView account"
-- Quick step
-- Number animation
-
-**Scene 3 (3-4s): Step 2**
-- Text: "2. Add Signal Pilot"
-- Quick step
-
-**Scene 4 (4-5s): Step 3**
-- Text: "3. Configure"
-- Quick step
-
-**Scene 5 (5-6s): Step 4**
-- Text: "4. Explore"
-- Quick step
-
-**Scene 6 (6-8s): Complete**
-- Text: "5 minutes. Ready to go."
-- Completion animation
-- Green success
-
-**Scene 7 (8-10s): Simplicity**
-- Text: "That simple."
-- Satisfaction moment
-
-**Scene 8 (10-12s): CTA**
-- Text: "Link in bio"
-- Docs visual
-
-### Audio
-- Quick/easy audio
-- Satisfying completion sound
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "600_quickstart_video.mp4"
-
----
-
 # 📋 Batch 60 Hashtag Bank
 
 ## By Pillar
@@ -37328,18 +35816,6 @@ Each category:
 - [ ] 598_final_chronicle_static.png
 - [ ] 599_trading_habits_static.png
 - [ ] 600_quickstart_static.png
-
-## Videos (CapCut)
-- [ ] 591_600_milestone_video.mp4
-- [ ] 592_trading_plan_video.mp4
-- [ ] 593_accepting_losses_video.mp4
-- [ ] 594_execution_quote_video.mp4
-- [ ] 595_complete_suite_video.mp4
-- [ ] 596_beginner_mistakes_video.mp4
-- [ ] 597_8020_rule_video.mp4
-- [ ] 598_final_chronicle_video.mp4
-- [ ] 599_trading_habits_video.mp4
-- [ ] 600_quickstart_video.mp4
 
 ## Carousel Slides
 - [ ] 591 carousel (7 slides)
@@ -37504,27 +35980,6 @@ Each category:
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-
-**Scene 1-8:** Follow video text timing with progress bar filling animation, checkmarks appearing, and momentum building to finish.
-
-### Audio
-- Momentum/final stretch audio
-- Building energy
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "601_final_push_video.mp4"
-
----
-
 # POST 602 — 🎓 Understanding Market Hours
 
 **Source:** `https://education.signalpilot.io/curriculum/beginner/03-market-hours.html`
@@ -37626,25 +36081,6 @@ Each category:
 ### Export
 - Export as PNG, high quality
 - Save as "602_market_hours_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: World map with session zones
-
-### Timeline Structure
-Follow video timing with world map lighting up different zones.
-
-### Audio
-- Global/time-zone audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "602_market_hours_video.mp4"
 
 ---
 
@@ -37765,26 +36201,6 @@ Follow video timing with world map lighting up different zones.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Anxiety to calm visual transition
-
-### Timeline Structure
-Follow video timing with FOMO cycle then breaking free.
-
-### Audio
-- Anxiety audio 0-6s
-- Calm/liberation audio 6-12s
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "603_fomo_video.mp4"
-
----
-
 # POST 604 — 💬 Quote Card
 
 **Source:** Signal Pilot Philosophy
@@ -37882,25 +36298,6 @@ Follow video timing with FOMO cycle then breaking free.
 ### Export
 - Export as PNG, high quality
 - Save as "604_market_teacher_quote_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 10 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-Follow video timing with contemplative to action progression.
-
-### Audio
-- Wisdom/learning audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "604_market_teacher_quote_video.mp4"
 
 ---
 
@@ -38011,25 +36408,6 @@ Follow video timing with contemplative to action progression.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Settings panel screen recording
-
-### Timeline Structure
-Follow video timing showing settings being adjusted.
-
-### Audio
-- Customization/tech audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "605_settings_video.mp4"
-
----
-
 # POST 606 — 🎓 Price Action vs Indicators
 
 **Source:** `https://education.signalpilot.io/curriculum/beginner/04-price-action-indicators.html`
@@ -38133,25 +36511,6 @@ Follow video timing showing settings being adjusted.
 ### Export
 - Export as PNG, high quality
 - Save as "606_price_vs_indicators_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Chart with both price action and indicators
-
-### Timeline Structure
-Follow video timing showing the "both" answer.
-
-### Audio
-- Balance/harmony audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "606_price_vs_indicators_video.mp4"
 
 ---
 
@@ -38268,25 +36627,6 @@ Follow video timing showing the "both" answer.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Foundation/building visual
-
-### Timeline Structure
-Follow video timing with goals being checked off.
-
-### Audio
-- Patient/building audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "607_year_one_video.mp4"
-
----
-
 # POST 608 — 🔮 The Signal Pilot Vision
 
 **Source:** `https://signalpilot.io/`
@@ -38383,25 +36723,6 @@ Follow video timing with goals being checked off.
 ### Export
 - Export as PNG, high quality
 - Save as "608_vision_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Forward-looking, building imagery
-
-### Timeline Structure
-Follow video timing with vision pillars appearing.
-
-### Audio
-- Visionary/inspiring audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "608_vision_video.mp4"
 
 ---
 
@@ -38506,25 +36827,6 @@ Follow video timing with vision pillars appearing.
 ### Export
 - Export as PNG, high quality
 - Save as "609_order_flow_static.png"
-
----
-
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background: Order flow visualization
-
-### Timeline Structure
-Follow video timing with simple pressure explanation.
-
-### Audio
-- Simplifying/clarifying audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "609_order_flow_video.mp4"
 
 ---
 
@@ -38633,25 +36935,6 @@ Follow video timing with simple pressure explanation.
 
 ---
 
-## 🎬 CapCut Video Guide
-
-### Project Setup
-1. Create 1080x1920 project (9:16)
-2. Set duration to 12 seconds
-3. Background color #0a0a0f
-
-### Timeline Structure
-Follow video timing showing plan options.
-
-### Audio
-- Choice/options audio
-
-### Export
-- Export 1080x1920, 30fps
-- Save as "610_upgrade_video.mp4"
-
----
-
 # 📋 Batch 61 Hashtag Bank
 
 ## By Pillar
@@ -38706,18 +36989,6 @@ Follow video timing showing plan options.
 - [ ] 608_vision_static.png
 - [ ] 609_order_flow_static.png
 - [ ] 610_upgrade_static.png
-
-## Videos (CapCut)
-- [ ] 601_final_push_video.mp4
-- [ ] 602_market_hours_video.mp4
-- [ ] 603_fomo_video.mp4
-- [ ] 604_market_teacher_quote_video.mp4
-- [ ] 605_settings_video.mp4
-- [ ] 606_price_vs_indicators_video.mp4
-- [ ] 607_year_one_video.mp4
-- [ ] 608_vision_video.mp4
-- [ ] 609_order_flow_video.mp4
-- [ ] 610_upgrade_video.mp4
 
 ---
 
@@ -38849,22 +37120,6 @@ Follow video timing showing plan options.
 - Bullet points: Full Access, No Questions, Risk-Free
 - Signal Pilot logo bottom center
 - Dark background (#0a0a0f)
-
----
-
-## 🎬 CapCut Instructions
-
-**Style:** Trust-building promo
-**Duration:** 30-45 seconds
-
-**Sequence:**
-1. Hook text: "Risk-free trading tools?"
-2. Shield/guarantee badge animation
-3. Quick cuts of indicator features
-4. Testimonial-style confidence building
-5. CTA: "Try Signal Pilot today"
-
-**Effects:** Subtle glow on guarantee text, smooth transitions
 
 ---
 
@@ -39011,27 +37266,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Why does price always stop at round numbers?"
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Why $50K? Why $100? |
-| 2-4s | It's human psychology |
-| 4-6s | We place orders at round numbers |
-| 6-8s | Orders cluster = reactions |
-| 8-10s | This creates support & resistance |
-| 10-12s | Link in bio 🧠 |
-
-**Background:** Chart showing BTC bouncing at $50K, or any asset reacting at round levels
-
-**Sound:** "Mind blown" or realization-style trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 613
 
 #### Static Image (Instagram/Twitter)
@@ -39130,27 +37364,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Premium quote card with dark/navy background, gold accents, elegant serif font
 
 **Hashtags:** #TradingQuotes #Discipline #TradingMindset #Patience #TradingWisdom #CryptoTrader #StockTrader #TradingMotivation #SignalPilot #TraderLife #MindsetMatters #DelayedGratification #TradingJourney #FinancialEducation #WealthMindset
-
----
-
-#### TikTok
-**Hook:** "The hardest choice in trading..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | The hardest choice in trading |
-| 2-4s | What you want NOW |
-| 4-5s | vs. |
-| 5-7s | What you want MOST |
-| 7-9s | Discipline is the difference |
-| 9-11s | Choose patience 🎯 |
-
-**Background:** Slow zoom on quote card graphic, or trader contemplating chart
-
-**Sound:** Reflective/motivational trending audio
-
-**Duration:** 11 seconds
 
 ---
 
@@ -39253,29 +37466,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Volume Oracle indicator on chart with all three regimes visible and labeled
 
 **Hashtags:** #VolumeOracle #SignalPilot #TradingIndicator #VolumeAnalysis #MarketRegimes #TradingView #TechnicalAnalysis #CryptoTrading #StockTrading #Volatility #MarketStructure #TradingTools #ChartAnalysis #SmartTrading #IndicatorSuite
-
----
-
-#### TikTok
-**Hook:** "Five market regimes. One indicator."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | VOLUME ORACLE 🔮 |
-| 2-4s | Regime 1: Compression |
-| 4-5s | Regime 2: Expansion |
-| 5-6s | Regime 3: Accumulation |
-| 6-7s | Regime 4: Distribution |
-| 7-8s | Regime 5: Transition |
-| 8-10s | Context before action |
-| 10-12s | Link in bio ⬇️ |
-
-**Background:** Screen recording cycling through chart showing each regime type
-
-**Sound:** Tech/futuristic trending audio with beats matching regime changes
-
-**Duration:** 12 seconds
 
 ---
 
@@ -39385,27 +37575,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "One signal means nothing. Here's why..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | One signal = a hint |
-| 2-4s | Two signals = interesting |
-| 4-6s | Three signals = CONFLUENCE |
-| 6-8s | Level + Momentum + Volume |
-| 8-10s | Stack the factors |
-| 10-12s | Free lesson → bio |
-
-**Background:** Chart zooming into zone where multiple indicators align
-
-**Sound:** Building/crescendo audio that peaks at "CONFLUENCE"
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 616
 
 #### Static Image (Instagram/Twitter)
@@ -39450,60 +37619,6 @@ Follow video timing showing plan options.
    - Educational disclaimer
 
 10. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 616
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Chart with confluence zone
-   - Factor labels/graphics
-   - Crescendo sound effect
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): First Level**
-   - Show chart with one indicator highlighted
-   - Text: "One signal = a hint" (Gray text)
-   - Subtle, not impactful
-
-5. **Segment 2 (2-4s): Second Level**
-   - Add second indicator highlight
-   - Text: "Two signals = interesting" (Slightly brighter)
-   - Building energy
-
-6. **Segment 3 (4-6s): Confluence**
-   - Add third indicator, zoom into zone
-   - Text: "Three signals = CONFLUENCE" (Gold, large, bold)
-   - Peak of crescendo sound
-   - Add impact effect (flash, zoom)
-
-7. **Segment 4 (6-8s): The Formula**
-   - Text: "Level + Momentum + Volume"
-   - Show all three aligned on chart
-   - Circle the confluence zone
-
-8. **Segment 5 (8-10s): Takeaway**
-   - Text: "Stack the factors"
-   - Pull back to show full picture
-   - Add stacking animation
-
-9. **Segment 6 (10-12s): CTA**
-   - Text: "Free lesson → bio"
-   - Signal Pilot logo
-   - Fade out
-
-10. **Audio:**
-    - Building music that crescendos at "CONFLUENCE"
-    - Impact sound at peak
-    - Trending educational audio
-
-11. **Export:** 1080x1920, 30fps
 
 ---
 
@@ -39565,29 +37680,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Your journal isn't a diary..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Your journal ≠ a diary |
-| 2-4s | It's a FEEDBACK LOOP |
-| 4-5s | Track: Entry reason |
-| 5-6s | Track: Exit reason |
-| 6-7s | Track: Emotions |
-| 7-8s | Track: Lessons |
-| 8-10s | Patterns will emerge |
-| 10-12s | Guide in bio 📓 |
-
-**Background:** Someone writing in journal, or scrolling through trade log spreadsheet
-
-**Sound:** Focused/productivity trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 617
 
 #### Static Image (Instagram/Twitter)
@@ -39632,57 +37724,6 @@ Follow video timing showing plan options.
    - CTA: "Full guide in bio"
 
 10. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 617
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Journal writing footage or spreadsheet scroll
-   - Checkmark animations
-   - Productivity-themed graphics
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): Misconception**
-   - Show diary with X over it
-   - Text: "Your journal ≠ a diary" (Strike through "diary")
-   - Quick dismissal effect
-
-5. **Segment 2 (2-4s): Reality**
-   - Circular arrow animation
-   - Text: "It's a FEEDBACK LOOP" (Blue highlight)
-   - Emphasis effect
-
-6. **Segment 3 (4-8s): What to Track**
-   - Rapid checklist reveal:
-   - "Track: Entry reason" (checkmark appears)
-   - "Track: Exit reason" (checkmark appears)
-   - "Track: Emotions" (checkmark appears)
-   - "Track: Lessons" (checkmark appears)
-   - Satisfying click sound for each
-
-7. **Segment 4 (8-10s): Result**
-   - Text: "Patterns will emerge"
-   - Show data visualization graphic
-   - Upward trend line
-
-8. **Segment 5 (10-12s): CTA**
-   - Text: "Guide in bio 📓"
-   - Journal icon animation
-   - Signal Pilot logo
-
-9. **Audio:**
-   - Productive, focused music
-   - Click sounds for checkmarks
-   - Satisfying completion sound at end
-
-10. **Export:** 1080x1920, 30fps
 
 ---
 
@@ -39746,31 +37787,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Seven guardians. One system."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-1s | THE ELITE SEVEN |
-| 1-2s | ⚜️ Pentarch — Cycles |
-| 2-3s | 🔮 Volume Oracle — Regimes |
-| 3-4s | 🗺️ Janus Atlas — Levels |
-| 4-5s | ⚖️ Plutus Flow — Flow |
-| 5-6s | 🎵 Harmonic Oscillator — Momentum |
-| 6-7s | 👁️ Augury Grid — Scanner |
-| 7-8s | ⚔️ OmniDeck — Commander |
-| 8-10s | One unified system |
-| 10-12s | Chronicle in bio 📜 |
-
-**Background:** Each guardian icon appearing one by one, or all seven in epic reveal
-
-**Sound:** Epic/cinematic orchestral audio building throughout
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 618
 
 #### Static Image (Instagram/Twitter)
@@ -39819,61 +37835,6 @@ Follow video timing showing plan options.
    - Individual glows for each guardian (matching their accent color)
 
 10. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 618
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Seven guardian icons (individual images)
-   - Epic background (dark with gold particles)
-   - Orchestral music
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-1s): Grand Opening**
-   - Text: "THE ELITE SEVEN" (Epic reveal, gold)
-   - Orchestral hit
-   - Flash effect
-
-5. **Segments 2-8 (1-8s): Guardian Reveals**
-   - Each guardian gets exactly 1 second
-   - Icon appears with glow effect
-   - Name and role appear:
-     - "⚜️ Pentarch — Cycles"
-     - "🔮 Volume Oracle — Regimes"
-     - etc.
-   - Musical beat on each reveal
-
-6. **Segment 9 (8-10s): Unification**
-   - All seven icons come together
-   - Text: "One unified system"
-   - Show them forming a circle or constellation
-   - Peak orchestral moment
-
-7. **Segment 10 (10-12s): CTA**
-   - Text: "Chronicle in bio 📜"
-   - All icons visible, glowing
-   - Signal Pilot logo
-   - Fade out with reverb
-
-8. **Audio:**
-   - Epic orchestral/cinematic music
-   - Build throughout
-   - Peak at unification
-   - Dramatic but not overwhelming
-
-9. **Effects:**
-   - Particle effects (gold sparks)
-   - Glow on each icon
-   - Smooth reveal transitions
-
-10. **Export:** 1080x1920, 30fps
 
 ---
 
@@ -39936,27 +37897,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Stop asking where. Start asking what."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | What is price DOING? |
-| 2-4s | UPTREND: HH + HL |
-| 4-6s | DOWNTREND: LH + LL |
-| 6-8s | RANGE: Mixed structure |
-| 8-10s | Context before direction |
-| 10-12s | Free lesson → bio |
-
-**Background:** Chart cycling through clear examples of each market state
-
-**Sound:** Educational/tech trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 619
 
 #### Static Image (Instagram/Twitter)
@@ -40003,62 +37943,6 @@ Follow video timing showing plan options.
    - Educational disclaimer
 
 10. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 619
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Three chart examples (uptrend, downtrend, range)
-   - Arrow/line drawing animations
-   - Educational graphics
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): The Question**
-   - Text: "What is price DOING?" (Large, centered)
-   - Question mark animation
-   - Hook the viewer
-
-5. **Segment 2 (2-4s): Uptrend**
-   - Show uptrend chart
-   - Draw HH and HL markers
-   - Text: "UPTREND: HH + HL" (Green)
-   - Ascending arrow animation
-
-6. **Segment 3 (4-6s): Downtrend**
-   - Show downtrend chart
-   - Draw LH and LL markers
-   - Text: "DOWNTREND: LH + LL" (Red)
-   - Descending arrow animation
-
-7. **Segment 4 (6-8s): Range**
-   - Show range chart
-   - Draw horizontal boundaries
-   - Text: "RANGE: Mixed structure" (Blue)
-   - Sideways arrow animation
-
-8. **Segment 5 (8-10s): Takeaway**
-   - Text: "Context before direction"
-   - Show all three examples briefly
-   - Emphasize identification first
-
-9. **Segment 6 (10-12s): CTA**
-   - Text: "Free lesson → bio"
-   - Signal Pilot logo
-   - Fade out
-
-10. **Audio:**
-    - Educational/tech music
-    - Clear, structured feel
-    - Transition sounds between states
-
-11. **Export:** 1080x1920, 30fps
 
 ---
 
@@ -40115,30 +37999,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Does it work on crypto AND stocks?"
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | "Does it work on everything?" |
-| 2-3s | ✅ Crypto |
-| 3-4s | ✅ Stocks |
-| 4-5s | ✅ Forex |
-| 5-6s | ✅ Futures |
-| 6-7s | ✅ Indices |
-| 7-9s | If TradingView charts it... |
-| 9-11s | Signal Pilot analyzes it |
-| 11-12s | Link in bio ⬇️ |
-
-**Background:** Quick cuts showing the same indicator on different asset charts
-
-**Sound:** Confirmation/success sound effects with each checkmark
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 620
 
 #### Static Image (Instagram/Twitter)
@@ -40182,57 +38042,6 @@ Follow video timing showing plan options.
    - CTA: "More FAQs in bio"
 
 10. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 620
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Screenshots of Signal Pilot on 5 different asset types
-   - Checkmark animation
-   - Success sound effect
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): The Question**
-   - Text: "Does it work on everything?" (Questioning tone)
-   - Use question mark animation
-
-5. **Segments 2-6 (2-7s): Asset Checkmarks**
-   - Each asset gets 1 second:
-   - Show chart, checkmark appears
-   - "✅ Crypto" (Bitcoin chart)
-   - "✅ Stocks" (Apple chart)
-   - "✅ Forex" (EUR/USD chart)
-   - "✅ Futures" (ES chart)
-   - "✅ Indices" (SPX chart)
-   - Satisfying "ding" sound for each checkmark
-
-6. **Segment 7 (7-9s): Explanation**
-   - Text: "If TradingView charts it..."
-   - Show TradingView logo briefly
-
-7. **Segment 8 (9-11s): Conclusion**
-   - Text: "Signal Pilot analyzes it"
-   - Show all five charts in quick montage
-   - Confident tone
-
-8. **Segment 9 (11-12s): CTA**
-   - Text: "Link in bio ⬇️"
-   - Signal Pilot logo
-   - Fade out
-
-9. **Audio:**
-   - Upbeat, confident music
-   - "Ding" success sound for each checkmark
-   - Builds energy throughout
-
-10. **Export:** 1080x1920, 30fps
 
 ---
 
@@ -40292,29 +38101,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "621 down. 29 to go."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 621 |
-| 2-4s | 29 posts remaining |
-| 4-6s | Education ✓ |
-| 6-7s | Psychology ✓ |
-| 7-8s | All 7 Indicators ✓ |
-| 8-9s | The Chronicle ✓ |
-| 9-11s | Almost there... |
-| 11-12s | Thank you 🙏 |
-
-**Background:** Montage of previous post images or progress bar filling up
-
-**Sound:** Reflective/grateful trending audio with building energy
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 621
 
 #### Static Image (Instagram/Twitter)
@@ -40365,59 +38151,6 @@ Follow video timing showing plan options.
 
 ---
 
-### CapCut Video Creation Guide — Post 621
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Progress bar animation
-   - Previous content thumbnails (montage)
-   - Celebratory but grounded graphics
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): The Number**
-   - Large "621" appearing
-   - Text: "POST 621"
-   - Counter animation effect
-
-5. **Segment 2 (2-4s): Remaining**
-   - Text: "29 posts remaining"
-   - Progress bar filling to 95%
-   - Building anticipation
-
-6. **Segment 3 (4-9s): Achievements**
-   - Quick montage with checkmarks:
-   - "Education ✓" (quick flash of education content)
-   - "Psychology ✓" (flash of psychology content)
-   - "All 7 Indicators ✓" (flash of indicator content)
-   - "The Chronicle ✓" (flash of Chronicle content)
-   - Each gets checkmark animation
-
-7. **Segment 4 (9-11s): Almost There**
-   - Text: "Almost there..."
-   - Progress bar nearly full
-   - Building but not concluding
-
-8. **Segment 5 (11-12s): Gratitude**
-   - Text: "Thank you 🙏"
-   - Signal Pilot logo
-   - Warm, grateful tone
-   - Fade out
-
-9. **Audio:**
-   - Reflective but energized music
-   - Builds throughout
-   - Doesn't peak — suggests more to come
-   - Grateful undertone
-
-10. **Export:** 1080x1920, 30fps
-
----
-
 # BATCH 62 HASHTAG BANK
 
 ## By Content Pillar
@@ -40440,16 +38173,16 @@ Follow video timing showing plan options.
 
 | Post | Recommended Day | Best Time | Platform Order |
 |------|-----------------|-----------|----------------|
-| 612 | Monday | 11:00 AM | Twitter → Instagram → TikTok |
-| 613 | Monday | 3:00 PM | Twitter → Instagram → TikTok |
-| 614 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok |
-| 615 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram |
-| 616 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok |
-| 617 | Wednesday | 4:00 PM | Twitter → Instagram → TikTok |
-| 618 | Thursday | 7:00 PM | Instagram → TikTok → Twitter |
-| 619 | Friday | 10:00 AM | Twitter → Instagram → TikTok |
-| 620 | Friday | 2:00 PM | Twitter → Instagram → TikTok |
-| 621 | Friday | 6:00 PM | Instagram → Twitter → TikTok |
+| 612 | Monday | 11:00 AM | Twitter → Instagram |
+| 613 | Monday | 3:00 PM | Twitter → Instagram |
+| 614 | Tuesday | 8:00 AM | Instagram → Twitter |
+| 615 | Tuesday | 1:00 PM | Twitter → Instagram |
+| 616 | Wednesday | 11:00 AM | Twitter → Instagram |
+| 617 | Wednesday | 4:00 PM | Twitter → Instagram |
+| 618 | Thursday | 7:00 PM | Instagram → Twitter |
+| 619 | Friday | 10:00 AM | Twitter → Instagram |
+| 620 | Friday | 2:00 PM | Twitter → Instagram |
+| 621 | Friday | 6:00 PM | Instagram → Twitter |
 
 ---
 
@@ -40606,27 +38339,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "You don't need to be right most of the time..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Risk $100 to make $300 |
-| 2-4s | That's 1:3 risk-reward |
-| 4-6s | At 1:3 R:R... |
-| 6-8s | Win 40% = Still profitable |
-| 8-10s | The math changes everything |
-| 10-12s | Free lesson → bio |
-
-**Background:** Chart showing clear 1:3 setup with entry, stop, and target marked
-
-**Sound:** Mind-shift/realization trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 622
 
 #### Static Image (Instagram/Twitter)
@@ -40667,45 +38379,6 @@ Follow video timing showing plan options.
    - Educational disclaimer
 
 10. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 622
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Chart with R:R setup marked
-   - Calculator or math visuals
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s):** Show chart with risk marked
-   - Text: "Risk $100 to make $300"
-
-5. **Segment 2 (2-4s):** Highlight the ratio
-   - Text: "That's 1:3 risk-reward"
-
-6. **Segment 3 (4-6s):** Setup the reveal
-   - Text: "At 1:3 R:R..."
-
-7. **Segment 4 (6-8s):** The key insight
-   - Text: "Win 40% = Still profitable"
-   - Add "aha" sound effect
-
-8. **Segment 5 (8-10s):** Takeaway
-   - Text: "The math changes everything"
-
-9. **Segment 6 (10-12s):** CTA
-   - Text: "Free lesson → bio"
-   - Signal Pilot logo
-
-10. **Audio:** Educational/revelation music
-
-11. **Export:** 1080x1920, 30fps
 
 ---
 
@@ -40762,27 +38435,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Abstract visual of valley/dip with light at the end, or equity curve showing drawdown and recovery
 
 **Hashtags:** #Drawdown #TradingPsychology #TrustTheProcess #TraderMindset #TradingEducation #SignalPilot #EmotionalControl #TradingJourney #CryptoTrader #StockTrader #MentalGame #TradingStruggles #Perseverance #TradingTips #StayTheCourse
-
----
-
-#### TikTok
-**Hook:** "Your first drawdown will break you... if you let it."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Your first real drawdown |
-| 2-4s | It won't test your strategy |
-| 4-6s | It will test YOU |
-| 6-8s | Doubt. Frustration. Urge to quit. |
-| 8-10s | Every trader faces this |
-| 10-12s | Trust the process 🙏 |
-
-**Background:** Equity curve showing drawdown, or trader looking stressed then refocusing
-
-**Sound:** Emotional/motivational trending audio with buildup
-
-**Duration:** 12 seconds
 
 ---
 
@@ -40879,27 +38531,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "The goal isn't to be right..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | "The goal isn't to be right" |
-| 2-4s | "The goal is to make money" |
-| 4-6s | EGO wants to be right |
-| 6-8s | DISCIPLINE wants to profit |
-| 8-10s | They're at war |
-| 10-12s | Choose discipline 🎯 |
-
-**Background:** Quote card with slow zoom, or split screen showing ego vs discipline visually
-
-**Sound:** Deep/thoughtful trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 624
 
 #### Static Image (Instagram/Twitter)
@@ -40982,27 +38613,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Janus Atlas on chart showing Daily, Weekly, and Monthly levels with clear labels
 
 **Hashtags:** #JanusAtlas #SignalPilot #MultiTimeframe #SupportResistance #TradingLevels #TechnicalAnalysis #TradingView #ChartAnalysis #CryptoTrading #StockTrading #StructureTrading #KeyLevels #TradingIndicators #HTFLevels #TheCartographer
-
----
-
-#### TikTok
-**Hook:** "Daily levels on your 1-minute chart..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | JANUS ATLAS 🗺️ |
-| 2-4s | Daily levels — any timeframe |
-| 4-6s | Weekly levels — any timeframe |
-| 6-8s | Monthly levels — any timeframe |
-| 8-10s | Higher TF context, always |
-| 10-12s | Link in bio ⬇️ |
-
-**Background:** Screen recording showing Janus Atlas levels on different timeframe charts
-
-**Sound:** Exploratory/discovery trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -41096,27 +38706,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Wicks tell you what bodies can't..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Wicks tell hidden stories |
-| 2-4s | Long lower wick = buyers stepped in |
-| 4-6s | Long upper wick = sellers stepped in |
-| 6-8s | Wick = rejection |
-| 8-10s | Body = acceptance |
-| 10-12s | Learn more → bio |
-
-**Background:** Chart zooming into candles with significant wicks
-
-**Sound:** Revealing/discovery trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 627 — BLOG ARTICLE
 ## Importance of Doing Nothing
 
@@ -41173,28 +38762,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Minimalist/zen visual, perhaps empty chart or calm water representing stillness
 
 **Hashtags:** #Patience #DoingNothing #TradingDiscipline #CapitalPreservation #NoTrade #TradingWisdom #SignalPilot #EmotionalControl #TradingMindset #WaitForSetup #TradingEducation #ActivePatience #ProtectCapital #TradingTips #ZenTrading
-
----
-
-#### TikTok
-**Hook:** "The best trade you'll ever make..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | The best trade? |
-| 2-4s | Sometimes it's NO trade |
-| 4-6s | No setup = no trade |
-| 6-7s | Uncertain = no trade |
-| 7-8s | Emotional = no trade |
-| 8-10s | Doing nothing = discipline |
-| 10-12s | Protect your capital 🛡️ |
-
-**Background:** Calm, zen imagery or trader sitting back from screen peacefully
-
-**Sound:** Peaceful/mindful trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -41255,27 +38822,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Each guardian teaches a lesson..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE CHRONICLE WISDOM |
-| 2-4s | ⚜️ Pentarch: Patience through cycles |
-| 4-6s | 🔮 Oracle: Truth through volume |
-| 6-8s | 🗺️ Atlas: Context through levels |
-| 8-10s | Principles, not just tools |
-| 10-12s | Read more → bio 📜 |
-
-**Background:** Guardian icons appearing one by one with mystical transitions
-
-**Sound:** Epic/mystical trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 629 — EDUCATION HUB
 ## Advanced Confluence
 
@@ -41330,27 +38876,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Complex chart showing multiple independent factors aligning (level + volume regime + momentum + cycle phase)
 
 **Hashtags:** #AdvancedConfluence #TradingStrategy #TechnicalAnalysis #ConfluenceTrading #SignalPilot #QualityOverQuantity #MultiFactorAnalysis #TradingEducation #ProfessionalTrading #IndicatorConfluence #SmartTrading #AdvancedTrading #EdgeBuilding #TradingEdge #SystematicTrading
-
----
-
-#### TikTok
-**Hook:** "Multiple signals isn't confluence..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Multiple signals ≠ confluence |
-| 2-4s | Quality > Quantity |
-| 4-6s | Independent factors |
-| 6-8s | Different data sources |
-| 8-10s | Orchestration, not accumulation |
-| 10-12s | Advanced lesson → bio |
-
-**Background:** Chart building up layers of different indicator types
-
-**Sound:** Strategic/intelligent trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -41414,28 +38939,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "5 minutes to your first setup..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | GETTING STARTED |
-| 2-3s | Step 1: Subscribe |
-| 3-4s | Step 2: Connect TradingView |
-| 4-6s | Step 3: Add indicators |
-| 6-8s | Step 4: Start with defaults |
-| 8-10s | That's it. You're ready. |
-| 10-12s | Link in bio 🚀 |
-
-**Background:** Screen recording walking through actual setup process
-
-**Sound:** Upbeat/productive trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 631 — MARKETING
 ## 631 Progress Update
 
@@ -41494,27 +38997,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "19 posts to go..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 631 |
-| 2-4s | 19 remaining |
-| 4-6s | Education ✓ Psychology ✓ |
-| 6-8s | Tools ✓ Chronicle ✓ |
-| 8-10s | Finish line in sight 🏁 |
-| 10-12s | Let's go 💪 |
-
-**Background:** Progress bar filling, montage of previous content, finish line imagery
-
-**Sound:** Motivational/final push trending audio
-
-**Duration:** 12 seconds
-
----
-
 # BATCH 63 HASHTAG BANK
 
 ## By Content Pillar
@@ -41537,16 +39019,16 @@ Follow video timing showing plan options.
 
 | Post | Day | Time | Priority |
 |------|-----|------|----------|
-| 622 | Monday | 11:00 AM | Twitter → Instagram → TikTok |
-| 623 | Monday | 3:00 PM | Twitter → Instagram → TikTok |
-| 624 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok |
-| 625 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram |
-| 626 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok |
-| 627 | Wednesday | 4:00 PM | Twitter → Instagram → TikTok |
-| 628 | Thursday | 7:00 PM | Instagram → TikTok → Twitter |
-| 629 | Friday | 10:00 AM | Twitter → Instagram → TikTok |
-| 630 | Friday | 2:00 PM | Twitter → Instagram → TikTok |
-| 631 | Friday | 6:00 PM | Instagram → Twitter → TikTok |
+| 622 | Monday | 11:00 AM | Twitter → Instagram |
+| 623 | Monday | 3:00 PM | Twitter → Instagram |
+| 624 | Tuesday | 8:00 AM | Instagram → Twitter |
+| 625 | Tuesday | 1:00 PM | Twitter → Instagram |
+| 626 | Wednesday | 11:00 AM | Twitter → Instagram |
+| 627 | Wednesday | 4:00 PM | Twitter → Instagram |
+| 628 | Thursday | 7:00 PM | Instagram → Twitter |
+| 629 | Friday | 10:00 AM | Twitter → Instagram |
+| 630 | Friday | 2:00 PM | Twitter → Instagram |
+| 631 | Friday | 6:00 PM | Instagram → Twitter |
 
 ---
 
@@ -41673,25 +39155,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "100 assets on your watchlist? That's the problem..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 100 assets = scattered |
-| 2-4s | 5-10 assets = focused |
-| 4-6s | Familiarity builds intuition |
-| 6-8s | Know them deeply |
-| 8-10s | Go deep, not wide |
-| 10-12s | Free lesson → bio |
-
-**Sound:** Clarity/focus trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 633 — BLOG ARTICLE
 ## When to Walk Away
 
@@ -41743,27 +39206,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Person stepping away from trading desk, or closed laptop with peaceful atmosphere
 
 **Hashtags:** #WalkAway #TradingPsychology #MentalCapital #TradingDiscipline #EmotionalControl #SignalPilot #RestDay #TradingMindset #ProtectYourself #TradingTips #SelfCare #TraderLife #KnowYourLimits #TradingWisdom #StepBack
-
----
-
-#### TikTok
-**Hook:** "The hardest trade you'll ever make..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | The hardest trade? |
-| 2-4s | Closing the laptop |
-| 4-5s | After big win? Walk away. |
-| 5-6s | After big loss? Walk away. |
-| 6-7s | When exhausted? Walk away. |
-| 7-9s | The market will be there tomorrow |
-| 9-11s | Your mind needs rest |
-| 11-12s | Link in bio 🚪 |
-
-**Sound:** Peaceful/reflective trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -41824,25 +39266,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Six words every trader knows..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | "Plan the trade" |
-| 2-4s | "Trade the plan" |
-| 4-6s | Planning is EASY |
-| 6-8s | Executing is HARD |
-| 8-10s | Discipline bridges the gap |
-| 10-12s | Trust your plan 📝 |
-
-**Sound:** Thoughtful/contemplative trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 635 — PRODUCT DEMO
 ## Plutus Flow
 
@@ -41892,25 +39315,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Plutus Flow indicator showing clear accumulation/distribution phases with labels
 
 **Hashtags:** #PlutusFlow #SignalPilot #FlowAnalysis #OBV #VolumeFlow #TradingIndicator #TradingView #Accumulation #Distribution #TechnicalAnalysis #CryptoTrading #StockTrading #HiddenPressure #MarketFlow #TheScales
-
----
-
-#### TikTok
-**Hook:** "What's happening beneath the surface..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | PLUTUS FLOW ⚖️ |
-| 2-4s | Tracks the balance |
-| 4-6s | Accumulation = buyers building |
-| 6-8s | Distribution = sellers releasing |
-| 8-10s | See pressure before price moves |
-| 10-12s | Link in bio ⬇️ |
-
-**Sound:** Mysterious/revealing trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -41969,25 +39373,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Ever wonder why price sweeps the highs then dumps?"
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | LIQUIDITY EXPLAINED 💧 |
-| 2-4s | Above highs = stops + breakout orders |
-| 4-6s | Below lows = stops + breakdown orders |
-| 6-8s | Price hunts liquidity |
-| 8-10s | Then moves |
-| 10-12s | Learn more → bio |
-
-**Sound:** Revealing/educational trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 637 — BLOG ARTICLE
 ## Compound Effect in Trading
 
@@ -42042,25 +39427,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "1% better every week for a year..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 1% better each week |
-| 2-4s | After 1 month: 4% better |
-| 4-6s | After 6 months: 29% better |
-| 6-8s | After 1 year: 67% BETTER |
-| 8-10s | Small improvements compound |
-| 10-12s | Start today → bio |
-
-**Sound:** Building/motivational trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 638 — CHRONICLE LESSON
 ## Final Three Guardians
 
@@ -42111,25 +39477,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Final three guardian icons in premium Chronicle styling, completing the seven
 
 **Hashtags:** #Chronicle #SignalPilot #EliteSeven #HarmonicOscillator #AuguryGrid #OmniDeck #TheArbiter #TheWatchman #TheCommander #TradingIndicators #TradingView #TradingLore #CompleteSystem #TheGuardians #UnifiedAnalysis
-
----
-
-#### TikTok
-**Hook:** "The final three guardians..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE FINAL THREE |
-| 2-4s | 🎵 Harmonic Oscillator — Rhythm |
-| 4-6s | 👁️ Augury Grid — Scanner |
-| 6-8s | ⚔️ OmniDeck — Commander |
-| 8-10s | The Elite Seven complete |
-| 10-12s | Chronicle in bio 📜 |
-
-**Sound:** Epic/triumphant orchestral trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -42190,28 +39537,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Clean five-component diagram with icons for each element
 
 **Hashtags:** #TradingSystem #SystemBuilding #TradingProcess #ProfessionalTrading #SignalPilot #TradingEducation #EntryExit #PositionSizing #RiskManagement #TradingStrategy #SystematicTrading #TradingPlan #ProcessDriven #AdvancedTrading #EdgeBuilding
-
----
-
-#### TikTok
-**Hook:** "Your system is missing something..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 5 SYSTEM COMPONENTS |
-| 2-3s | 1. Market selection |
-| 3-4s | 2. Entry criteria |
-| 4-5s | 3. Exit criteria |
-| 5-6s | 4. Position sizing |
-| 6-7s | 5. Review process |
-| 7-9s | Miss one = hole in system |
-| 9-11s | Build complete systems |
-| 11-12s | Pro lesson → bio |
-
-**Sound:** Strategic/systematic trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -42276,27 +39601,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Indicator not loading? Try this..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | NOT LOADING? |
-| 2-3s | 1. Refresh TradingView |
-| 3-4s | 2. Check subscription |
-| 4-5s | 3. Clear cache |
-| 5-6s | 4. Try another browser |
-| 6-8s | Still stuck? |
-| 8-10s | Support has your back |
-| 10-12s | Link in bio 🔧 |
-
-**Sound:** Helpful/solution trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 641 — MARKETING
 ## 641 Progress (9 to go)
 
@@ -42354,25 +39658,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Single digits. 9 to go."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 641 |
-| 2-4s | 9 POSTS REMAINING |
-| 4-6s | Single digits. |
-| 6-8s | The final push |
-| 8-10s | 650 is so close |
-| 10-12s | Let's finish this 🎯 |
-
-**Sound:** Intense/final stretch motivational trending audio
-
-**Duration:** 12 seconds
-
----
-
 # BATCH 64 HASHTAG BANK
 
 ## By Pillar
@@ -42395,16 +39680,16 @@ Follow video timing showing plan options.
 
 | Post | Day | Time | Priority |
 |------|-----|------|----------|
-| 632 | Monday | 11:00 AM | Twitter → Instagram → TikTok |
-| 633 | Monday | 3:00 PM | Twitter → Instagram → TikTok |
-| 634 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok |
-| 635 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram |
-| 636 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok |
-| 637 | Wednesday | 4:00 PM | Twitter → Instagram → TikTok |
-| 638 | Thursday | 7:00 PM | Instagram → TikTok → Twitter |
-| 639 | Friday | 10:00 AM | Twitter → Instagram → TikTok |
-| 640 | Friday | 2:00 PM | Twitter → Instagram → TikTok |
-| 641 | Friday | 6:00 PM | Instagram → Twitter → TikTok |
+| 632 | Monday | 11:00 AM | Twitter → Instagram |
+| 633 | Monday | 3:00 PM | Twitter → Instagram |
+| 634 | Tuesday | 8:00 AM | Instagram → Twitter |
+| 635 | Tuesday | 1:00 PM | Twitter → Instagram |
+| 636 | Wednesday | 11:00 AM | Twitter → Instagram |
+| 637 | Wednesday | 4:00 PM | Twitter → Instagram |
+| 638 | Thursday | 7:00 PM | Instagram → Twitter |
+| 639 | Friday | 10:00 AM | Twitter → Instagram |
+| 640 | Friday | 2:00 PM | Twitter → Instagram |
+| 641 | Friday | 6:00 PM | Instagram → Twitter |
 
 ---
 
@@ -42544,25 +39829,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Every journey starts here..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | LESSON 01 |
-| 2-4s | Welcome to Signal Pilot |
-| 4-6s | 82 free lessons await |
-| 6-8s | 7 indicators ready |
-| 8-10s | Your journey starts now |
-| 10-12s | Begin free → bio 🎓 |
-
-**Sound:** Inspirational/new beginning trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 642
 
 #### Static Image (Instagram/Twitter)
@@ -42663,27 +39929,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Why do 90% of traders fail?"
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Why most traders fail |
-| 2-3s | ❌ No defined edge |
-| 3-4s | ❌ No risk management |
-| 4-5s | ❌ No emotional control |
-| 5-6s | ❌ No patience |
-| 6-8s | The solution? |
-| 8-10s | Education + Discipline + Time |
-| 10-12s | Don't be most → bio |
-
-**Sound:** Serious/truth-telling trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 644 — QUOTE CARD
 ## Warren Buffett (Patience)
 
@@ -42735,25 +39980,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Premium quote card, dark background, elegant serif font, timeless design
 
 **Hashtags:** #WarrenBuffett #Patience #TradingWisdom #TimelessQuote #SignalPilot #TradingMindset #WaitForIt #TradingQuotes #InvestingWisdom #MarketWisdom #PatiencePays #CompetitiveAdvantage #LongTermThinking #TradingEducation #WisdomWednesday
-
----
-
-#### TikTok
-**Hook:** "Warren Buffett said it best..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-3s | "The market is a device..." |
-| 3-6s | "...for transferring money..." |
-| 6-8s | "...from the impatient to the patient" |
-| 8-9s | — Warren Buffett |
-| 9-11s | Patience is an edge |
-| 11-12s | 🎯 |
-
-**Sound:** Wise/contemplative trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -42814,28 +40040,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "All seven indicators. One chart."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | OMNIDECK ⚔️ |
-| 2-3s | Pentarch ✓ |
-| 3-4s | Volume Oracle ✓ |
-| 4-5s | Janus Atlas ✓ |
-| 5-6s | Plutus Flow ✓ |
-| 6-7s | Harmonic ✓ Augury ✓ |
-| 7-9s | All unified. One overlay. |
-| 9-11s | The complete picture |
-| 11-12s | Link in bio ⬇️ |
-
-**Sound:** Epic/powerful unification trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 646 — EDUCATION HUB
 ## Mastery and Beyond (Lesson 82)
 
@@ -42888,26 +40092,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — "Mastery" themed visual, graduation or path continuing forward imagery
 
 **Hashtags:** #Mastery #Lesson82 #FinalLesson #TradingJourney #SignalPilot #NeverStopLearning #ContinuousImprovement #TradingEducation #PathToMastery #ExpertMindset #LifelongLearner #TradingWisdom #ProfessionalTrader #GrowthMindset #TheJourneyContinues
-
----
-
-#### TikTok
-**Hook:** "The final lesson teaches this..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | LESSON 82 |
-| 2-4s | Mastery and Beyond |
-| 4-6s | Mastery isn't a destination |
-| 6-8s | It's a practice |
-| 8-10s | The curriculum ends |
-| 10-11s | Your path begins |
-| 11-12s | Never stop 🎓 |
-
-**Sound:** Inspirational/completion trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -42966,25 +40150,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — All seven guardian icons unified in circle, epic finale styling, "The Signal Within" text
 
 **Hashtags:** #Chronicle #SignalPilot #EliteSeven #Finale #TheSignalWithin #TradingLore #TheGuardians #EpicConclusion #TradingPhilosophy #Pentarch #VolumeOracle #JanusAtlas #PlutusFlow #HarmonicOscillator #AuguryGrid #OmniDeck
-
----
-
-#### TikTok
-**Hook:** "The Chronicle's final message..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE CHRONICLE FINALE |
-| 2-4s | "The Seven stood together..." |
-| 4-6s | "Not as tools, but as teachers" |
-| 6-8s | "The Signal was never outside" |
-| 8-10s | "It was within" |
-| 10-12s | 📜 The End |
-
-**Sound:** Epic orchestral conclusion trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -43081,28 +40246,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "Every question answered..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE DOCUMENTATION 📚 |
-| 2-3s | Getting Started ✓ |
-| 3-4s | Indicator Settings ✓ |
-| 4-5s | Best Practices ✓ |
-| 5-6s | Troubleshooting ✓ |
-| 6-7s | FAQ ✓ |
-| 7-9s | Nothing hidden |
-| 9-11s | Everything documented |
-| 11-12s | Link in bio ⬇️ |
-
-**Sound:** Organized/helpful trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 649 — MARKETING
 ## One to Go
 
@@ -43158,26 +40301,6 @@ Follow video timing showing plan options.
 **Image Spec:** 1080x1080 — Bold "649" with "ONE TO GO" prominent, anticipation and excitement energy
 
 **Hashtags:** #SignalPilot #Post649 #OneToGo #FinishLine #Tomorrow #TradingEducation #ContentJourney #AlmostThere #FinalPost #TradingCommunity #Milestone #Anticipation #SeeYouThere #CompleteLibrary #LastStep
-
----
-
-#### TikTok
-**Hook:** "One more..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 649 |
-| 2-4s | ONE remains |
-| 4-6s | Education ✓ Psychology ✓ |
-| 6-7s | Indicators ✓ Chronicle ✓ |
-| 7-9s | Tomorrow: 650 |
-| 9-11s | See you at the finish line |
-| 11-12s | 🏁 |
-
-**Sound:** Anticipation/building trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -43255,27 +40378,6 @@ Follow video timing showing plan options.
 
 ---
 
-#### TikTok
-**Hook:** "650. We made it."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 650 |
-| 2-3s | 🏆 |
-| 3-5s | 82 lessons. 7 indicators. |
-| 5-7s | 1 Chronicle. Complete docs. |
-| 7-9s | Built for your journey |
-| 9-10s | Free. Forever. |
-| 10-11s | Thank you 🙏 |
-| 11-12s | ⚜️🔮🗺️⚖️🎵👁️⚔️ |
-
-**Sound:** Triumphant/celebration trending audio with emotional depth
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 650 (FINALE)
 
 #### Static Image (Instagram/Twitter)
@@ -43325,76 +40427,6 @@ Follow video timing showing plan options.
 
 ---
 
-### CapCut Video Creation Guide — Post 650 (FINALE)
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - "650" graphic with celebration effects
-   - All seven guardian icons
-   - Confetti/celebration overlays
-   - Previous content montage clips
-
-3. **Timeline Setup (Epic Finale):**
-
-4. **Segment 1 (0-2s): The Number**
-   - "650" appears with dramatic reveal
-   - Golden flash effect
-   - Epic sound hit
-
-5. **Segment 2 (2-3s): Trophy Moment**
-   - 🏆 emoji animation
-   - Celebration sound
-   - Confetti effect
-
-6. **Segment 3 (3-5s): Achievements**
-   - "82 lessons. 7 indicators."
-   - Quick montage of content
-   - Building energy
-
-7. **Segment 4 (5-7s): Complete**
-   - "1 Chronicle. Complete docs."
-   - All seven icons appearing
-   - Unified glow
-
-8. **Segment 5 (7-9s): For You**
-   - "Built for your journey"
-   - Heartfelt transition
-   - Warm energy
-
-9. **Segment 6 (9-10s): Promise**
-   - "Free. Forever."
-   - Commitment tone
-
-10. **Segment 7 (10-11s): Gratitude**
-    - "Thank you 🙏"
-    - Sincere moment
-    - Music softens
-
-11. **Segment 8 (11-12s): The Seven**
-    - All guardian icons: ⚜️🔮🗺️⚖️🎵👁️⚔️
-    - Final triumphant display
-    - Fade to Signal Pilot logo
-
-12. **Audio:**
-    - Epic orchestral with emotional depth
-    - Builds to climax at "650"
-    - Softens for gratitude
-    - Triumphant but meaningful conclusion
-
-13. **Effects:**
-    - Confetti at key moments
-    - Golden glows
-    - Smooth, premium transitions
-    - Celebratory but not overdone
-
-14. **Export:** 1080x1920, 30fps, highest quality
-
----
-
 # BATCH 65 HASHTAG BANK (FINALE)
 
 ## By Content Pillar
@@ -43420,14 +40452,14 @@ Follow video timing showing plan options.
 
 | Post | Day | Time | Priority | Notes |
 |------|-----|------|----------|-------|
-| 642 | Monday | 11:00 AM | Twitter → Instagram → TikTok | New beginnings |
-| 643 | Monday | 3:00 PM | Twitter → Instagram → TikTok | Real talk |
-| 644 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok | Wisdom |
-| 645 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram | Product |
-| 646 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok | Mastery |
-| 647 | Wednesday | 7:00 PM | Instagram → TikTok → Twitter | Chronicle Finale |
-| 648 | Thursday | 2:00 PM | Twitter → Instagram → TikTok | Resources |
-| 649 | Thursday | 8:00 PM | Instagram → Twitter → TikTok | Anticipation |
+| 642 | Monday | 11:00 AM | Twitter → Instagram | New beginnings |
+| 643 | Monday | 3:00 PM | Twitter → Instagram | Real talk |
+| 644 | Tuesday | 8:00 AM | Instagram → Twitter | Wisdom |
+| 645 | Tuesday | 1:00 PM | Twitter → Instagram | Product |
+| 646 | Wednesday | 11:00 AM | Twitter → Instagram | Mastery |
+| 647 | Wednesday | 7:00 PM | Instagram → Twitter | Chronicle Finale |
+| 648 | Thursday | 2:00 PM | Twitter → Instagram | Resources |
+| 649 | Thursday | 8:00 PM | Instagram → Twitter | Anticipation |
 | 650 | Friday | 12:00 PM | ALL PLATFORMS SIMULTANEOUSLY | 🏆 FINALE |
 
 **Note:** Post 650 should go live on ALL platforms at the same time for maximum impact.
@@ -43496,11 +40528,9 @@ Follow video timing showing plan options.
 ## Platforms Covered
 - 𝕏 Twitter — Copy, image guidance, hashtags
 - 📸 Instagram — Extended caption, 1080x1080 specs, hashtags
-- 🎬 TikTok — Hook, on-screen text timing, background, sound, creation guides
 
 ## A+ Transformation Elements
 - ✅ Full Canva step-by-step visual creation guides
-- ✅ Full CapCut step-by-step video creation guides
 - ✅ Brand specifications maintained throughout
 - ✅ Elite Seven Guardian theming consistent
 - ✅ Hashtag banks organized by pillar
