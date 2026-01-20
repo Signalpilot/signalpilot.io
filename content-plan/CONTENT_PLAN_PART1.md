@@ -23353,28 +23353,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "The tool that improved my trading more than any indicator."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Best trading tool?" |
-| 2-4s | "Not an indicator" |
-| 4-6s | "A JOURNAL" |
-| 6-8s | "Track everything" |
-| 8-10s | "Find your patterns" |
-| 10-12s | "Data > feelings" |
-
-**Background:** Close-up of trading journal, flipping pages or scrolling
-
-**Sound:** Revelation/educational trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -23397,34 +23375,6 @@ Full setup guide in bio 🔗
 - Professional data aesthetic
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Journal pages or spreadsheet
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Various indicators | "Best trading tool?" |
-| 2-4s | Indicators fade | "Not an indicator" |
-| 4-6s | Journal appears | "A JOURNAL" |
-| 6-8s | Scrolling entries | "Track everything" |
-| 8-10s | Stats/patterns | "Find your patterns" |
-| 10-12s | Logo | "Data > feelings" |
-
-**Audio:** Educational revelation sound at 20% volume
-
-**Effects:**
-- Page turn or scroll animations
-- Data visualization reveals
-- Clean transitions
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -23478,28 +23428,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "The first map changed everything."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "The first map was crude" |
-| 2-4s | "Just lines and levels" |
-| 4-6s | "Then I overlaid them" |
-| 6-8s | "Structure is fractal" |
-| 8-10s | "Janus Atlas was born" |
-| 10-12s | "Read the Chronicle → bio" |
-
-**Background:** Cartographer character art with Ken Burns zoom, old map textures
-
-**Sound:** Epic/discovery orchestral trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -23523,34 +23451,6 @@ Full setup guide in bio 🔗
 - Gold accents on title
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Cartographer artwork with old map textures
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Old map texture | "The first map was crude" |
-| 2-4s | Lines appearing | "Just lines and levels" |
-| 4-6s | Overlays combining | "Then I overlaid them" |
-| 6-8s | Fractal pattern reveal | "Structure is fractal" |
-| 8-10s | Janus Atlas icon | "Janus Atlas was born" |
-| 10-12s | Logo | "Read the Chronicle → bio" |
-
-**Audio:** Epic discovery orchestral at 25% volume
-
-**Effects:**
-- Lines drawing onto map
-- Overlay blending animations
-- Ken Burns slow zoom
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -23620,28 +23520,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Unfilled orders wait here."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Unfilled orders wait here" |
-| 2-4s | "MITIGATION BLOCK" |
-| 4-6s | "Price left orders behind" |
-| 6-8s | "Returns to fill them" |
-| 8-10s | "Then continues" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording highlighting mitigation block
-
-**Sound:** Technical/educational trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -23664,34 +23542,6 @@ Full setup guide in bio 🔗
 - Zone highlighted throughout
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart with mitigation example
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Zone highlighted | "Unfilled orders wait here" |
-| 2-4s | Zone labeled | "MITIGATION BLOCK" |
-| 4-6s | Show original move | "Price left orders behind" |
-| 6-8s | Show price returning | "Returns to fill them" |
-| 8-10s | Show continuation | "Then continues" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Educational sound at 20% volume
-
-**Effects:**
-- Zone highlight pulse
-- Arrow animations
-- Price movement animation
-
-**Export:** 1080x1920, 30fps
 
 ---
 
