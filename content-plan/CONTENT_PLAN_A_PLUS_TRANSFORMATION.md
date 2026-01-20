@@ -292,7 +292,7 @@ Each pillar needs multiple angles to avoid repetition. Here are 10 angles per pi
 ## 4. Platform-Specific Format Variations
 
 ### The Problem
-Current plan uses the same format for every TikTok (hook → 5 text lines → CTA). Algorithm death.
+Current plan uses the same format for every post (hook → 5 text lines → CTA). Algorithm death.
 
 ### Twitter/X Format Variations
 
@@ -375,67 +375,6 @@ Swipe-up (or link sticker) on final story
 ```
 Use for: Behind-the-scenes, launches, engagement
 
-### TikTok Format Variations
-
-#### Format 1: The Classic (Current approach)
-```
-Hook (0-2s) → 5 text lines (2s each) → CTA
-```
-Use for: 20% of content max
-
-#### Format 2: The POV
-```
-"POV: You just discovered your indicator repaints"
-First-person narrative with emotional hook
-```
-Use for: Relatable moments, pain points
-
-#### Format 3: The Green Screen
-```
-You in corner, chart/content behind you
-Talking through the content
-More personal, builds face recognition
-```
-Use for: Explanations, reactions, commentary
-
-#### Format 4: The Stitch/Duet
-```
-React to trading content (good or bad)
-Add your expertise
-Piggyback on existing viral content
-```
-Use for: Trending topics, myth-busting, hot takes
-
-#### Format 5: The Tutorial
-```
-Screen recording with voiceover
-"Here's how to check if your indicator repaints..."
-Slower pace, more detail
-```
-Use for: How-tos, product demos
-
-#### Format 6: The Story
-```
-"I lost $10,000 before I learned this..."
-Narrative hook, emotional journey, lesson
-```
-Use for: Psychology, mistakes, transformation
-
-#### Format 7: The Meme
-```
-Trending template + trading twist
-Quick, funny, shareable
-```
-Use for: Virality, reach, brand personality
-
-#### Format 8: The Controversy
-```
-Hot take that invites disagreement
-"RSI is useless. Here's why."
-Engagement through debate
-```
-Use for: Reach, comments, algorithm boost
-
 ### Format Distribution Recommendation
 
 | Platform | Format | % of Content |
@@ -449,13 +388,6 @@ Use for: Reach, comments, algorithm boost
 | | Reels | 35% |
 | | Single images | 15% |
 | | Stories | 10% |
-| **TikTok** | POV | 20% |
-| | Green screen | 20% |
-| | Tutorial | 20% |
-| | Classic text | 15% |
-| | Stitch/Duet | 10% |
-| | Meme | 10% |
-| | Story | 5% |
 
 ---
 
@@ -743,7 +675,6 @@ Every post uses 9 hashtags (Instagram) structured as:
 |----------|-----------------|-----|
 | Twitter | 2-3 | 5 |
 | Instagram | 9-12 | 30 |
-| TikTok | 3-5 | 10 |
 
 ### Hashtag Banks by Pillar
 
@@ -862,7 +793,7 @@ CTA: Relevant lead magnet
 1. **0-30 min:** Assess if relevant to audience
 2. **30-60 min:** Draft response content
 3. **1-2 hours:** Post first response (Twitter priority)
-4. **2-4 hours:** Expand to Instagram/TikTok if warranted
+4. **2-4 hours:** Expand to Instagram if warranted
 5. **24-48 hours:** Follow-up educational content
 
 ---
@@ -1080,7 +1011,7 @@ For each Elite Seven character:
 |--------|----------|-----------|
 | Written lore drops | Twitter threads | 1x/week |
 | Visual character cards | Instagram | 2x/week |
-| Animated shorts (15-30s) | TikTok/Reels | 1x/week |
+| Animated shorts (15-30s) | Reels | 1x/week |
 | Audio narration | Podcast/YouTube | 1x/month |
 | Interactive story | Discord | 1x/month |
 
@@ -1128,11 +1059,6 @@ Results not typical. Trading involves risk of loss. Only trade with money you ca
 | "Easy money" | "Serious edge" |
 
 ### Platform-Specific Compliance
-
-#### TikTok
-- No financial advice claims
-- "Entertainment purposes" disclaimer if needed
-- Avoid "money" sounds/hashtags that trigger review
 
 #### Instagram
 - Disclaimers in captions AND bio
@@ -1212,9 +1138,8 @@ Batch by content type, not by day:
 |-----|-------|
 | Monday | All Twitter copy for the week |
 | Tuesday | All Instagram carousels |
-| Wednesday | All TikTok videos |
-| Thursday | All graphics and visuals |
-| Friday | Scheduling and QA |
+| Wednesday | All graphics and visuals |
+| Thursday | Scheduling and QA |
 
 ### Tools Stack
 
@@ -1222,7 +1147,7 @@ Batch by content type, not by day:
 |----------|------------------|
 | Scheduling | Later or Buffer |
 | Graphics | Canva or Figma |
-| Video editing | CapCut (mobile) or DaVinci Resolve |
+| Video editing | DaVinci Resolve |
 | Analytics | Native + Sprout Social |
 | Community | Discord + Slack |
 | Email | ConvertKit or Beehiiv |
@@ -1243,7 +1168,6 @@ No success metrics defined. How do you know if it's working?
 |--------|---------------|----------------|----------------|
 | Twitter followers | +500 | +2,000 | +5,000 |
 | Instagram followers | +300 | +1,500 | +4,000 |
-| TikTok followers | +1,000 | +5,000 | +15,000 |
 | Total reach | 100K | 500K | 2M |
 | Engagement rate | 3% | 4% | 5% |
 
@@ -1304,7 +1228,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 9 AM | Twitter | Educational | P1-P4 | Thread |
 | 11 AM | Instagram | Educational | P1-P4 | Carousel |
-| 1 PM | TikTok | Educational | P1-P4 | Tutorial |
 | 4 PM | Twitter | Engagement | - | Poll |
 | 7 PM | Instagram | Quote | P4 | Single image |
 
@@ -1313,7 +1236,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 9 AM | Twitter | Social Proof | P6 | Single tweet |
 | 11 AM | Instagram | Product Demo | P2 | Reel |
-| 1 PM | TikTok | POV | P4 | POV format |
 | 4 PM | Twitter | Educational | P3 | Thread |
 | 7 PM | Instagram | Social Proof | P6 | Carousel |
 
@@ -1322,7 +1244,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 9 AM | Twitter | Chronicle | P5 | Thread |
 | 11 AM | Instagram | Chronicle | P5 | Carousel |
-| 1 PM | TikTok | Chronicle | P5 | Story format |
 | 4 PM | Twitter | Quote | P4 | Quote card |
 | 7 PM | Instagram | Educational | P1 | Reel |
 
@@ -1331,7 +1252,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 9 AM | Twitter | Educational | P2 | Thread |
 | 11 AM | Instagram | Social Proof | P6 | Single image |
-| 1 PM | TikTok | Green screen | P2 | Talking head |
 | 4 PM | Twitter | Engagement | - | Question |
 | 7 PM | Instagram | Product Demo | P2 | Carousel |
 
@@ -1340,7 +1260,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 9 AM | Twitter | Social Proof | P6 | Single tweet |
 | 11 AM | Instagram | Educational | P3 | Carousel |
-| 1 PM | TikTok | Meme | - | Trending format |
 | 4 PM | Twitter | Chronicle | P5 | Thread |
 | 7 PM | Instagram | Quote | P4 | Single image |
 
@@ -1349,7 +1268,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 10 AM | Twitter | Quote | P4 | Quote card |
 | 12 PM | Instagram | Chronicle | P5 | Carousel |
-| 2 PM | TikTok | Tutorial | P1 | Screen recording |
 | 5 PM | Twitter | Educational | P1 | Single tweet |
 | 8 PM | Instagram | Engagement | - | Story series |
 
@@ -1358,7 +1276,6 @@ Track weekly:
 |------|----------|------|--------|--------|
 | 10 AM | Twitter | Engagement | - | Thread (week recap) |
 | 12 PM | Instagram | Social Proof | P6 | Reel |
-| 2 PM | TikTok | Story | P4 | Narrative |
 | 5 PM | Twitter | Chronicle | P5 | Quote card |
 | 8 PM | Instagram | Educational | P2 | Carousel |
 
@@ -1380,7 +1297,6 @@ Track weekly:
 #### Week 2: Content Production Sprint
 - [ ] Batch produce 2 weeks of content
 - [ ] Create all Chronicle character assets
-- [ ] Record first 10 TikTok videos
 - [ ] Design first 10 Instagram carousels
 - [ ] Write first 10 Twitter threads
 
@@ -1552,7 +1468,6 @@ CONNECT:
 | Element | Variation A | Variation B |
 |---------|-------------|-------------|
 | Carousel length | 5 slides | 10 slides |
-| TikTok style | Text overlay | Talking head |
 | Twitter | Thread | Single tweet |
 | Reel length | 7 seconds | 30 seconds |
 
@@ -1583,18 +1498,6 @@ CONNECT:
 ## 20. Contingency Planning
 
 ### Platform Risk Mitigation
-
-#### TikTok Ban Scenario
-**Risk:** US TikTok ban or severe restrictions
-**Probability:** Medium
-**Impact:** High (if TikTok is primary growth channel)
-
-**Contingency:**
-1. Never put >40% of effort into TikTok
-2. Cross-post all TikTok content to Instagram Reels + YouTube Shorts
-3. Build email list aggressively (owned audience)
-4. Maintain content archives locally
-5. If ban announced: Accelerate Instagram/YouTube, pivot budget immediately
 
 #### Algorithm Change Scenario
 **Risk:** Major algorithm shift tanks reach
@@ -1709,11 +1612,6 @@ Provide affiliates with:
 - **Promoted tweets:** High-performing organic content
 - **Follower campaigns:** Audience building
 - **Website clicks:** Lead magnet or trial
-
-#### TikTok
-- **Spark ads:** Boost top organic performers
-- **Lead gen ads:** In-app lead capture
-- **Website conversion:** Trial signups
 
 ### Retargeting Strategy
 
