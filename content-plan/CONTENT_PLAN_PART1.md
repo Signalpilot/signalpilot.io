@@ -6675,17 +6675,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open TradingView with Volume Oracle
-2. Screen record showing different regime phases
-3. Import to CapCut
-4. Highlight regime changes with circles
-5. Revelation sound, 25% volume
-6. Export 1080x1920
-
----
-
 ## POST 076 — 🎓 BACKTESTING BASICS (Lesson 18)
 
 **Pillar:** P2 - Indicator Truth
@@ -23712,18 +23701,6 @@ Full setup guide in bio 🔗
 - [ ] Post 259: Mitigation blocks chart (8 carousel slides)
 - [ ] Post 260: Alert setup tutorial (7 carousel slides)
 
-### Videos to Create
-- [ ] Post 251: 10s community welcome TikTok
-- [ ] Post 252: 12s order blocks TikTok
-- [ ] Post 253: 10s compound effect TikTok
-- [ ] Post 254: 10s risk first TikTok
-- [ ] Post 255: 12s Janus Atlas demo TikTok
-- [ ] Post 256: 12s breaker blocks TikTok
-- [ ] Post 257: 12s trading journal TikTok
-- [ ] Post 258: 12s Chronicle mystical TikTok
-- [ ] Post 259: 12s mitigation blocks TikTok
-- [ ] Post 260: 10s alert setup TikTok
-
 ### Screen Recordings Needed
 - [ ] Discord community preview (blur usernames)
 - [ ] Order blocks on TradingView
@@ -25943,28 +25920,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "This is why you got stopped out early."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Why you got stopped out early:" |
-| 2-4s | "INDUCEMENT" |
-| 4-6s | "Minor level taken first" |
-| 6-8s | "Lures you in" |
-| 8-10s | "Then the REAL sweep happens" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording showing inducement pattern
-
-**Sound:** Trap/revelation trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -25983,34 +25938,6 @@ Full setup guide in bio 🔗
 8. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart with inducement pattern
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Chart overview | "Why you got stopped out early:" |
-| 2-4s | Minor level highlight | "INDUCEMENT" |
-| 4-6s | Zoom on minor | "Minor level taken first" |
-| 6-8s | Show entry trap | "Lures you in" |
-| 8-10s | Major level sweep | "Then the REAL sweep happens" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Trap revelation sound at 20% volume
-
-**Effects:**
-- Level highlights
-- Arrow animations
-- Trap door visual
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26077,27 +26004,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Most traders quit within 6 months."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Most quit in 6 months" |
-| 2-4s | "They sprinted" |
-| 4-6s | "Trading is a MARATHON" |
-| 6-8s | "Think in years" |
-| 8-10s | "Consistency wins" |
-
-**Background:** Sprinter collapsing vs marathon runner steady
-
-**Sound:** Motivational/endurance trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26115,33 +26021,6 @@ Full setup guide in bio 🔗
 7. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Marathon visual or equity curves
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Statistics | "Most quit in 6 months" |
-| 2-4s | Sprinter crashing | "They sprinted" |
-| 4-6s | Marathon runner | "Trading is a MARATHON" |
-| 6-8s | Long road ahead | "Think in years" |
-| 8-10s | Finish line visible | "Consistency wins" |
-
-**Audio:** Motivational endurance sound at 20% volume
-
-**Effects:**
-- Sprinter crash animation
-- Steady marathon progression
-- Long-term path visual
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26207,27 +26086,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Stop chasing the upside."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Stop chasing upside" |
-| 2-4s | "Protect the DOWNSIDE" |
-| 4-6s | "The upside?" |
-| 6-8s | "Takes care of itself" |
-| 8-10s | "Risk first. Always." |
-
-**Background:** Shield imagery or calm trader managing risk
-
-**Sound:** Wisdom/calm trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26245,33 +26103,6 @@ Full setup guide in bio 🔗
 7. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Dark with shield effects
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Upside arrow fading | "Stop chasing upside" |
-| 2-4s | Shield appearing | "Protect the DOWNSIDE" |
-| 4-6s | Question pause | "The upside?" |
-| 6-8s | Upward trend appears | "Takes care of itself" |
-| 8-10s | Shield solid | "Risk first. Always." |
-
-**Audio:** Calm wisdom sound at 20% volume
-
-**Effects:**
-- Arrow animations
-- Shield reveal
-- Protection glow
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26338,28 +26169,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "One indicator to rule them all."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "One indicator" |
-| 2-4s | "Cycles. Levels. Momentum." |
-| 4-6s | "All in ONE view" |
-| 6-8s | "OmniDeck" |
-| 8-10s | "The Commander's view" |
-| 10-12s | "Link in bio" |
-
-**Background:** Screen recording of OmniDeck on chart
-
-**Sound:** Epic/powerful trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26377,34 +26186,6 @@ Full setup guide in bio 🔗
 7. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: OmniDeck screen recording
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Chart overview | "One indicator" |
-| 2-4s | Components highlighted | "Cycles. Levels. Momentum." |
-| 4-6s | Full unified view | "All in ONE view" |
-| 6-8s | OmniDeck name | "OmniDeck" |
-| 8-10s | Commander theme | "The Commander's view" |
-| 10-12s | Logo | "Link in bio" |
-
-**Audio:** Epic powerful sound at 20% volume
-
-**Effects:**
-- Component highlight sequence
-- Unified view reveal
-- Commander aesthetic
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26476,28 +26257,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Price always comes back to where it started."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Price comes back" |
-| 2-4s | "To where it STARTED" |
-| 4-6s | "Return to Origin (RTO)" |
-| 6-8s | "Order blocks. FVGs. Breakers." |
-| 8-10s | "Origins have memory" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording showing displacement and return
-
-**Sound:** Cyclical/return trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26520,34 +26279,6 @@ Full setup guide in bio 🔗
 - Return: #c9a962 (gold, coming back)
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart with RTO pattern
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Origin zone | "Price comes back" |
-| 2-4s | Highlight origin | "To where it STARTED" |
-| 4-6s | Show pattern | "Return to Origin (RTO)" |
-| 6-8s | Zone types | "Order blocks. FVGs. Breakers." |
-| 8-10s | Return complete | "Origins have memory" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Cyclical return sound at 20% volume
-
-**Effects:**
-- Origin highlight
-- Arrow animations (out and back)
-- Memory/echo effect
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26616,27 +26347,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "I stopped caring about my trades. Then I started winning."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Stopped caring about trades" |
-| 2-4s | "Started winning more" |
-| 4-6s | "Emotional detachment" |
-| 6-8s | "Trades are just data" |
-| 8-10s | "Process > outcome" |
-
-**Background:** Calm trader reviewing charts without emotion
-
-**Sound:** Zen/calm trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26655,33 +26365,6 @@ Full setup guide in bio 🔗
 8. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Transformation visual
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Stressed trader | "Stopped caring about trades" |
-| 2-4s | Calm trader | "Started winning more" |
-| 4-6s | Ice/clarity visual | "Emotional detachment" |
-| 6-8s | Data screen | "Trades are just data" |
-| 8-10s | Process chart | "Process > outcome" |
-
-**Audio:** Zen calm sound at 20% volume
-
-**Effects:**
-- Transformation from chaos to calm
-- Ice/clarity visual effect
-- Data visualization
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26740,28 +26423,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "I don't need seven voices."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Seven indicators speaking" |
-| 2-4s | "The Commander said:" |
-| 4-6s | "Give me ONE voice" |
-| 6-8s | "That heard them ALL" |
-| 8-10s | "OmniDeck was born" |
-| 10-12s | "Chronicle → bio" |
-
-**Background:** Commander character art with Ken Burns zoom, command center
-
-**Sound:** Epic/commanding orchestral trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26784,34 +26445,6 @@ Full setup guide in bio 🔗
 - Military/leadership aesthetic
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Command center artwork
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Multiple screens | "Seven indicators speaking" |
-| 2-4s | Commander appears | "The Commander said:" |
-| 4-6s | Screens converging | "Give me ONE voice" |
-| 6-8s | Unity achieved | "That heard them ALL" |
-| 8-10s | OmniDeck glow | "OmniDeck was born" |
-| 10-12s | Logo | "Chronicle → bio" |
-
-**Audio:** Epic commanding orchestral at 25% volume
-
-**Effects:**
-- Screen convergence animation
-- Character reveal
-- Unity glow effect
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26886,28 +26519,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "This is the final boss of trading education."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Final boss of trading:" |
-| 2-4s | "IOFED" |
-| 4-6s | "All concepts combined" |
-| 6-8s | "Structure. Timing. Value. Entry." |
-| 8-10s | "Theory → Practice" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording showing complete IOFED setup
-
-**Sound:** Boss level/achievement trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26928,34 +26539,6 @@ Full setup guide in bio 🔗
 10. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: IOFED chart example
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Boss level badge | "Final boss of trading:" |
-| 2-4s | IOFED title | "IOFED" |
-| 4-6s | Elements appearing | "All concepts combined" |
-| 6-8s | Checklist items | "Structure. Timing. Value. Entry." |
-| 8-10s | Complete setup | "Theory → Practice" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Achievement/boss level sound at 25% volume
-
-**Effects:**
-- Sequential element reveals
-- Checklist check animations
-- Achievement unlock effect
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -27027,27 +26610,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Signal Pilot not working? Try this."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Indicator not working?" |
-| 2-4s | "1. Clear cache" |
-| 4-6s | "2. Check subscription" |
-| 6-8s | "3. Reset settings" |
-| 8-10s | "Full guide → bio" |
-
-**Background:** Screen recording of troubleshooting steps
-
-**Sound:** Problem-solving/fix trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -27066,33 +26628,6 @@ Full setup guide in bio 🔗
 8. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: TradingView troubleshooting
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Error screen | "Indicator not working?" |
-| 2-4s | Cache clearing | "1. Clear cache" |
-| 4-6s | Subscription check | "2. Check subscription" |
-| 6-8s | Settings reset | "3. Reset settings" |
-| 8-10s | Logo | "Full guide → bio" |
-
-**Audio:** Fix-it/problem-solving sound at 20% volume
-
-**Effects:**
-- Error to solution transition
-- Step counter animations
-- Success checkmark at end
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -27169,18 +26704,6 @@ Full setup guide in bio 🔗
 - [ ] Post 288: Commander character art
 - [ ] Post 289: IOFED complete setup (8 carousel slides)
 - [ ] Post 290: Troubleshooting flowchart (7 carousel slides)
-
-### Videos to Create
-- [ ] Post 281: 10s education hub TikTok
-- [ ] Post 282: 12s inducement TikTok
-- [ ] Post 283: 10s marathon TikTok
-- [ ] Post 284: 10s downside TikTok
-- [ ] Post 285: 12s OmniDeck demo TikTok
-- [ ] Post 286: 12s RTO TikTok
-- [ ] Post 287: 10s detachment TikTok
-- [ ] Post 288: 12s Chronicle TikTok
-- [ ] Post 289: 12s IOFED TikTok
-- [ ] Post 290: 10s troubleshooting TikTok
 
 ### Screen Recordings Needed
 - [ ] Education Hub interface scroll
@@ -27282,113 +26805,6 @@ Full setup guide in bio 🔗
 > Start your trial. Link in bio
 
 **Hashtags:** #SignalPilot #MoneyBackGuarantee #RiskFree #TradingTools #TradingView #Forex #Crypto #DayTrading #SwingTrading #TryBeforeYouBuy #TradingIndicators #NoRisk #TradingCommunity #TrustBadge #TradingEducation #ConfidentPurchase #TradingSoftware #GuaranteedSatisfaction #TradingInvestment #StartToday
-
----
-
-### TikTok
-**Hook:** "Don't like it? Get your money back."
-
-**Script with Timestamps:**
-| Timestamp | On-Screen Text | Audio/Voiceover |
-|-----------|----------------|-----------------|
-| 0:00-0:02 | "Not sure about Signal Pilot?" | "Not sure if Signal Pilot is right for you?" |
-| 0:02-0:04 | "7-day money-back guarantee" | "Try it risk-free with our 7-day guarantee" |
-| 0:04-0:06 | "Try everything" | "Access all 7 indicators, full education hub" |
-| 0:06-0:08 | "Not for you? Full refund." | "Not for you? Full refund. No questions asked" |
-| 0:08-0:10 | "Zero risk - bio" | "Zero risk. Link in bio" |
-
-**Duration:** 10 seconds
-
----
-
-### Canva Visual Creation Guide — Post 291
-
-**TEMPLATE SETUP:**
-1. Create new design 1080x1080px
-2. Set background color #0a0a0f
-3. Enable snap to grid for alignment
-
-**LAYER STRUCTURE:**
-Layer 1 (Background):
-- Solid fill #0a0a0f
-- Subtle radial gradient center: #0a0a0f to #050508
-
-Layer 2 (Trust Badge):
-- Shield/guarantee badge icon centered
-- Color: Gold gradient #c9a962 to #d4b978
-- Size: 300x300px centered upper-third
-- Add subtle drop shadow (black, 20% opacity, 8px blur)
-
-Layer 3 (Main Text):
-- "7-DAY" in Playfair Display Bold
-- Size: 72pt, color: #ffffff
-- "MONEY-BACK" below
-- Size: 56pt, color: #4a90d9
-- "GUARANTEE" below
-- Size: 72pt, color: #c9a962
-
-Layer 4 (Subtext):
-- "TRY RISK-FREE" in Inter Medium
-- Size: 24pt, color: #ffffff
-- Centered below main text
-
-Layer 5 (Brand):
-- Signal Pilot logo bottom center
-- Size: 120px wide
-- Opacity: 100%
-
-**VISUAL EFFECTS:**
-- Checkmark icons next to guarantee points
-- Trust seal treatment on badge
-- Subtle glow behind badge (#c9a962, 20% opacity)
-
-**EXPORT SETTINGS:**
-- Format: PNG
-- Quality: Maximum
-- Color profile: sRGB
-
----
-
-### CapCut Video Creation Guide — Post 291
-
-**PROJECT SETUP:**
-1. Create 1080x1920 portrait project (9:16)
-2. Set project duration to 10 seconds
-3. Frame rate: 30fps
-
-**TIMELINE ASSEMBLY:**
-
-Track 1 (Background):
-- Dark gradient background #0a0a0f to #050508
-- Duration: Full 10 seconds
-
-Track 2 (Main Visual):
-- 0:00-0:02: Question text with fade in
-- 0:02-0:04: Guarantee badge zoom reveal
-- 0:04-0:06: Feature list appears
-- 0:06-0:08: Refund promise text
-- 0:08-0:10: CTA with Signal Pilot logo
-
-Track 3 (Text Overlays):
-- Apply text animations at timestamps
-- Use Inter Bold for emphasis text
-- Playfair Display for headline moments
-
-**AUDIO:**
-- Add confident/trustworthy trending sound
-- Background music at 40% volume
-- Add subtle whoosh for badge reveal
-
-**EFFECTS:**
-- Smooth zoom in on guarantee badge
-- Text pop animations (scale 0.8 to 1.0)
-- Soft glow pulse on guarantee text
-
-**EXPORT SETTINGS:**
-- Resolution: 1080x1920
-- Frame rate: 30fps
-- Format: MP4 H.264
-- Quality: High
 
 ---
 
@@ -27496,71 +26912,6 @@ Track 3 (Text Overlays):
 
 ---
 
-### TikTok
-**Hook:** "Can't read this? Don't trade yet."
-
-**Script with Timestamps:**
-| Timestamp | On-Screen Text | Audio/Voiceover |
-|-----------|----------------|-----------------|
-| 0:00-0:02 | "Can't read this?" | "If you can't read this..." |
-| 0:02-0:04 | "Don't trade yet." | "Don't trade yet" |
-| 0:04-0:06 | "HH + HL = Uptrend" | "Higher highs, higher lows equals uptrend" |
-| 0:06-0:08 | "LH + LL = Downtrend" | "Lower highs, lower lows equals downtrend" |
-| 0:08-0:10 | "Master structure FIRST" | "Master structure first" |
-| 0:10-0:12 | "Free lesson - bio" | "Free lesson. Link in bio" |
-
-**Duration:** 12 seconds
-**Background:** Screen recording showing clear market structure with HH/HL and LH/LL marked
-
----
-
-### Canva Visual Creation Guide — Post 292
-
-**TEMPLATE SETUP:**
-1. Create 1080x1080 for single/carousel
-2. Background: #0a0a0f
-3. Use consistent carousel template
-
-**LAYER STRUCTURE (Cover Slide):**
-Layer 1: Dark gradient background
-Layer 2: Abstract market structure pattern (subtle lines showing HH/HL)
-Layer 3: "BACK TO BASICS" in Inter Bold 32pt #4a90d9
-Layer 4: "MARKET STRUCTURE" in Playfair Display Bold 56pt #ffffff
-Layer 5: Pillar badge "P3-Market Mechanics" in gold accent
-Layer 6: Signal Pilot logo bottom
-
-**CHART DIAGRAMS (Slides 3-5):**
-- Create clean, simplified chart showing structure
-- Use white lines for price movement
-- Label HH/HL with gold (#c9a962) callouts
-- Label LH/LL with blue (#4a90d9) callouts
-- Keep chart minimal - no indicators, just structure
-
-**EXPORT:** PNG, maximum quality, all 8 slides
-
----
-
-### CapCut Video Creation Guide — Post 292
-
-**PROJECT SETUP:**
-1. 1080x1920 portrait, 12 seconds
-2. Import TradingView screen recording of market structure
-
-**TIMELINE:**
-- 0:00-0:02: Hook text with chart in background
-- 0:02-0:04: Reality check text
-- 0:04-0:06: Zoom to uptrend section, mark HH/HL
-- 0:06-0:08: Zoom to downtrend section, mark LH/LL
-- 0:08-0:10: "Master structure" text overlay
-- 0:10-0:12: CTA with logo
-
-**AUDIO:** Reality check/basics trending sound
-**EFFECTS:** Drawing/annotation animation on structure marks
-
-**EXPORT:** 1080x1920, 30fps, MP4 H.264
-
----
-
 ## POST 293 — The Psychology of Drawdowns
 **Type:** Blog | **Pillar:** P4-Psychology | **CTA:** Blog
 
@@ -27657,56 +27008,6 @@ Layer 6: Signal Pilot logo bottom
 
 ---
 
-### TikTok
-**Hook:** "Losing streaks break most traders. Here's why."
-
-**Script with Timestamps:**
-| Timestamp | On-Screen Text | Audio/Voiceover |
-|-----------|----------------|-----------------|
-| 0:00-0:02 | "Losing streaks break traders" | "Losing streaks break most traders" |
-| 0:02-0:04 | "Not because of losses" | "Not because of the losses themselves" |
-| 0:04-0:06 | "Because of REACTION to losses" | "But because of how they react" |
-| 0:06-0:08 | "Revenge trading. Fear. Doubt." | "Revenge trading, fear, doubt" |
-| 0:08-0:10 | "Master drawdowns = master trading" | "Master drawdowns, master trading" |
-
-**Duration:** 10 seconds
-
----
-
-### Canva Visual Creation Guide — Post 293
-
-**COVER SLIDE:**
-- Equity curve showing drawdown period (red shaded area)
-- Recovery curve after drawdown
-- Title in Playfair Display
-- Subdued emotional colors during drawdown section
-
-**PSYCHOLOGY SLIDES:**
-- Use brain/mind icons for psychology section
-- Use chart icons for strategy section
-- Use calculator/scales for risk management
-- Consistent icon style throughout
-
-**EXPORT:** PNG, maximum quality, all 7 slides
-
----
-
-### CapCut Video Creation Guide — Post 293
-
-**TIMELINE:**
-- 0:00-0:02: Hook with equity curve showing drop
-- 0:02-0:04: "Not because of losses" text
-- 0:04-0:06: Reaction examples flash on screen
-- 0:06-0:08: Emotional states text
-- 0:08-0:10: Key insight with recovery visual
-
-**AUDIO:** Serious/educational trending sound
-**EFFECTS:** Equity curve animation, emotion color shifts
-
-**EXPORT:** 1080x1920, 30fps, MP4
-
----
-
 ## POST 294 — Quote Card: Simplicity Wins
 **Type:** Quote Card | **Pillar:** P4-Psychology | **CTA:** Follow
 
@@ -27755,66 +27056,6 @@ Layer 6: Signal Pilot logo bottom
 > Save this
 
 **Hashtags:** #TradingSimplicity #TradingWisdom #SignalPilot #KISS #TradingMindset #TradingPsychology #TraderLife #TradingEducation #Forex #Crypto #DayTrading #SwingTrading #TradingTips #TradingStrategy #TradingCommunity #LearnTrading #Execution #Clarity #TradingRules #KeepItSimple
-
----
-
-### TikTok
-**Hook:** "Your strategy is too complicated."
-
-**Script with Timestamps:**
-| Timestamp | On-Screen Text | Audio/Voiceover |
-|-----------|----------------|-----------------|
-| 0:00-0:02 | "Strategy too complicated?" | "Is your strategy too complicated?" |
-| 0:02-0:04 | "Can you explain it in ONE sentence?" | "Can you explain it in one sentence?" |
-| 0:04-0:06 | "No? Simplify." | "No? Time to simplify" |
-| 0:06-0:08 | "Best strategies are EXECUTABLE" | "The best strategies are executable" |
-| 0:08-0:10 | "Under pressure. Every time." | "Under pressure. Every single time" |
-
-**Duration:** 10 seconds
-
----
-
-### Canva Visual Creation Guide — Post 294
-
-**TEMPLATE SETUP:**
-1. 1080x1080 quote card template
-2. Background: #0a0a0f
-3. Minimalist design emphasizing quote
-
-**LAYER STRUCTURE:**
-Layer 1: Solid #0a0a0f background
-Layer 2: Subtle geometric pattern (very faint, 5% opacity)
-Layer 3: Quote in Cormorant Garamond Italic
-- "Complexity is the enemy of execution."
-- Size: 42pt, color: #ffffff
-- Line 2: "The best strategies are simple enough to follow under pressure."
-- Size: 32pt, color: #e0e0e0
-Layer 4: Quotation marks large, gold #c9a962, 15% opacity, decorative
-Layer 5: "SIMPLICITY" accent word, Playfair Display, #4a90d9
-Layer 6: Signal Pilot logo bottom center
-
-**VISUAL EFFECTS:**
-- Subtle inner glow on quote text
-- Elegant simplicity in design matching message
-
-**EXPORT:** PNG, maximum quality
-
----
-
-### CapCut Video Creation Guide — Post 294
-
-**TIMELINE:**
-- 0:00-0:02: Question hook
-- 0:02-0:04: "One sentence" challenge
-- 0:04-0:06: "Simplify" directive
-- 0:06-0:08: "Executable" emphasis
-- 0:08-0:10: "Under pressure" closer
-
-**VISUAL:** Before/after showing cluttered chart vs clean chart
-**AUDIO:** Clarity/focus trending sound
-**EFFECTS:** Smooth transitions, text reveals
-
-**EXPORT:** 1080x1920, 30fps, MP4
 
 ---
 
@@ -27930,60 +27171,6 @@ Layer 6: Signal Pilot logo bottom center
 
 ---
 
-### TikTok
-**Hook:** "What these 5 signals mean:"
-
-**Script with Timestamps:**
-| Timestamp | On-Screen Text | Audio/Voiceover |
-|-----------|----------------|-----------------|
-| 0:00-0:02 | "Pentarch's 5 signals:" | "Pentarch's five cycle signals" |
-| 0:02-0:03 | "TD = Touchdown" | "TD equals touchdown" |
-| 0:03-0:04 | "IGN = Ignition" | "IGN equals ignition" |
-| 0:04-0:05 | "WRN = Warning" | "WRN equals warning" |
-| 0:05-0:06 | "CAP = Climax" | "CAP equals climax" |
-| 0:06-0:07 | "BDN = Breakdown" | "BDN equals breakdown" |
-| 0:07-0:10 | "Know where you are in the cycle" | "Know where you are in the cycle" |
-| 0:10-0:12 | "Link in bio" | "Link in bio" |
-
-**Duration:** 12 seconds
-
----
-
-### Canva Visual Creation Guide — Post 295
-
-**COVER SLIDE:**
-- Crown icon representing The Sovereign
-- Five signal abbreviations in circular arrangement
-- Each with distinct color coding within brand palette
-- Dark background with subtle radial glow
-
-**SIGNAL SLIDES:**
-- Each signal gets dedicated slide
-- Signal abbreviation large and prominent
-- Brief explanation text
-- Mini chart diagram showing where signal appears
-- Consistent layout across all 5 signal slides
-
-**EXPORT:** PNG, maximum quality, all 8 slides
-
----
-
-### CapCut Video Creation Guide — Post 295
-
-**TIMELINE:**
-- 0:00-0:02: Hook with Pentarch on screen
-- 0:02-0:07: Quick succession of all 5 signals with labels
-- 0:07-0:10: "Know where you are" insight
-- 0:10-0:12: CTA with logo
-
-**VISUAL:** Screen recording of Pentarch showing each signal type
-**AUDIO:** Educational/list trending sound
-**EFFECTS:** Pop-in animation for each signal label
-
-**EXPORT:** 1080x1920, 30fps, MP4
-
----
-
 ## POST 296 — Support & Resistance Basics
 **Type:** Education | **Pillar:** P3-Market Mechanics | **CTA:** Education Hub
 
@@ -28085,59 +27272,6 @@ Layer 6: Signal Pilot logo bottom center
 
 ---
 
-### TikTok
-**Hook:** "If you can't find these, don't trade."
-
-**Script with Timestamps:**
-| Timestamp | On-Screen Text | Audio/Voiceover |
-|-----------|----------------|-----------------|
-| 0:00-0:02 | "Can't find these?" | "If you can't find these..." |
-| 0:02-0:04 | "Don't trade." | "Don't trade" |
-| 0:04-0:06 | "SUPPORT = bounces UP" | "Support is where price bounces up" |
-| 0:06-0:08 | "RESISTANCE = bounces DOWN" | "Resistance is where price bounces down" |
-| 0:08-0:10 | "Zones, not lines" | "Remember, zones not lines" |
-| 0:10-0:12 | "Free lesson - bio" | "Free lesson. Link in bio" |
-
-**Duration:** 12 seconds
-
----
-
-### Canva Visual Creation Guide — Post 296
-
-**CHART DIAGRAMS:**
-- Support zone: Green shaded horizontal area
-- Resistance zone: Red shaded horizontal area
-- Multiple touch points marked with arrows
-- Clean, educational style charts
-- No clutter, just S/R concept
-
-**FLIP CONCEPT:**
-- Before: Support zone (green)
-- Break: Price moves through
-- After: Same zone becomes resistance (red)
-- Clear visual transformation
-
-**EXPORT:** PNG, maximum quality, all 8 slides
-
----
-
-### CapCut Video Creation Guide — Post 296
-
-**TIMELINE:**
-- 0:00-0:04: Hook with chart showing unmarked levels
-- 0:04-0:06: Draw support zone on screen
-- 0:06-0:08: Draw resistance zone on screen
-- 0:08-0:10: "Zones not lines" emphasis
-- 0:10-0:12: CTA
-
-**VISUAL:** Screen recording of drawing S/R zones on TradingView
-**AUDIO:** Basics/fundamentals trending sound
-**EFFECTS:** Drawing animation for zones
-
-**EXPORT:** 1080x1920, 30fps, MP4
-
----
-
 ## POST 297 — The Danger of Paper Trading Too Long
 **Type:** Blog | **Pillar:** P4-Psychology | **CTA:** Blog
 
@@ -28231,56 +27365,6 @@ Layer 6: Signal Pilot logo bottom center
 
 ---
 
-### TikTok
-**Hook:** "Paper trading is lying to you."
-
-**Script with Timestamps:**
-| Timestamp | On-Screen Text | Audio/Voiceover |
-|-----------|----------------|-----------------|
-| 0:00-0:02 | "Paper trading lies" | "Paper trading is lying to you" |
-| 0:02-0:04 | "It teaches mechanics" | "It teaches mechanics" |
-| 0:04-0:06 | "NOT psychology" | "Not psychology" |
-| 0:06-0:08 | "$0 at risk = no emotion" | "Zero dollars at risk means no real emotion" |
-| 0:08-0:10 | "Go live (even tiny). Feel real." | "Go live, even tiny. Feel the real thing" |
-
-**Duration:** 10 seconds
-
----
-
-### Canva Visual Creation Guide — Post 297
-
-**SPLIT VISUAL CONCEPT:**
-- Left side: Calm trader at demo account (relaxed colors)
-- Right side: Same trader at live account (tension indicators)
-- Same chart on both screens
-- Different facial expressions/body language
-
-**CONTRAST SLIDES:**
-- Checkmark slides: Green checkmarks, positive treatment
-- X mark slides: Red X's, warning treatment
-- Clear visual distinction between what works and doesn't
-
-**EXPORT:** PNG, maximum quality, all 7 slides
-
----
-
-### CapCut Video Creation Guide — Post 297
-
-**TIMELINE:**
-- 0:00-0:02: Hook with paper trading visual
-- 0:02-0:04: Mechanics acknowledgment
-- 0:04-0:06: "NOT psychology" emphasis with emotion visuals
-- 0:06-0:08: $0 vs real money comparison
-- 0:08-0:10: Call to action to go live
-
-**VISUAL:** Split showing relaxed paper trader vs intense live trader
-**AUDIO:** Truth bomb/reality trending sound
-**EFFECTS:** Side-by-side comparison, emotion indicators
-
-**EXPORT:** 1080x1920, 30fps, MP4
-
----
-
 ## POST 298 — Chronicle: The Founding of Signal Pilot
 **Type:** Chronicle | **Pillar:** P5-Chronicle | **CTA:** Chronicle Site
 
@@ -28331,67 +27415,6 @@ Layer 6: Signal Pilot logo bottom center
 > Link in bio
 
 **Hashtags:** #SignalPilotChronicle #Founding #TradingLore #SignalPilot #TradingCommunity #Forex #Crypto #TradingView #CompanyStory #TradingEducation #TradingPhilosophy #Origin #TradingStory #MarketWisdom #CryptoTrading #ForexTrading #DayTrader #SwingTrader #WhyWeBuild #MissionDriven
-
----
-
-### TikTok
-**Hook:** "Why we built Signal Pilot differently."
-
-**Script with Timestamps:**
-| Timestamp | On-Screen Text | Audio/Voiceover |
-|-----------|----------------|-----------------|
-| 0:00-0:02 | "Why we built it differently:" | "Why we built Signal Pilot differently" |
-| 0:02-0:04 | "Most indicators give SIGNALS" | "Most indicators just give you signals" |
-| 0:04-0:06 | "We give CONTEXT" | "We give you context" |
-| 0:06-0:08 | "Education > dependency" | "Education over dependency" |
-| 0:08-0:10 | "Make traders BETTER" | "Make traders better, not just busier" |
-| 0:10-0:12 | "Full story - bio" | "Full story. Link in bio" |
-
-**Duration:** 12 seconds
-
----
-
-### Canva Visual Creation Guide — Post 298
-
-**TEMPLATE SETUP:**
-1. 1080x1080 Chronicle series template
-2. Background: Deep dark with subtle constellation pattern
-3. Seven stars/elements representing the Elite Seven forming
-
-**LAYER STRUCTURE:**
-Layer 1: Dark gradient #0a0a0f to #050510
-Layer 2: Subtle star field/constellation pattern (10% opacity)
-Layer 3: Chronicle scroll or origin emblem
-Layer 4: Quote text in Cormorant Garamond Italic
-Layer 5: "THE FOUNDING" header in Playfair Display
-Layer 6: Signal Pilot logo with "Chronicle" subtitle
-Layer 7: Gold decorative border elements
-
-**VISUAL TREATMENT:**
-- Ancient/origin aesthetic
-- Seven elements coming together visual metaphor
-- Subtle glow effects on key text
-- Premium, storytelling feel
-
-**EXPORT:** PNG, maximum quality
-
----
-
-### CapCut Video Creation Guide — Post 298
-
-**TIMELINE:**
-- 0:00-0:02: Hook with origin visual building
-- 0:02-0:04: "Signals" vs "Context" contrast
-- 0:04-0:06: Context emphasis with visual transformation
-- 0:06-0:08: Education principle text
-- 0:08-0:10: "Make traders BETTER" reveal
-- 0:10-0:12: Chronicle CTA with logo formation
-
-**VISUAL:** Seven elements/indicators forming Signal Pilot symbol
-**AUDIO:** Origin story/inspiring trending sound
-**EFFECTS:** Ethereal glow, constellation formation
-
-**EXPORT:** 1080x1920, 30fps, MP4
 
 ---
 
@@ -28496,59 +27519,6 @@ Layer 7: Gold decorative border elements
 
 ---
 
-### TikTok
-**Hook:** "Can you read a candle?"
-
-**Script with Timestamps:**
-| Timestamp | On-Screen Text | Audio/Voiceover |
-|-----------|----------------|-----------------|
-| 0:00-0:02 | "Can you read a candle?" | "Can you read a candle?" |
-| 0:02-0:04 | "BODY = commitment" | "The body shows commitment" |
-| 0:04-0:06 | "WICK = rejection" | "The wick shows rejection" |
-| 0:06-0:08 | "Green = buyers won" | "Green means buyers won" |
-| 0:08-0:10 | "Red = sellers won" | "Red means sellers won" |
-| 0:10-0:12 | "Basics matter - bio" | "Basics matter. Link in bio" |
-
-**Duration:** 12 seconds
-
----
-
-### Canva Visual Creation Guide — Post 299
-
-**CANDLESTICK ANATOMY DIAGRAM:**
-- Large, clean candlestick illustration
-- Labels pointing to: Open, Close, High, Low, Body, Upper Wick, Lower Wick
-- Use gold (#c9a962) for callout lines
-- White text for labels
-- Dark background
-
-**BULLISH/BEARISH COMPARISON:**
-- Side by side: Green bullish candle, Red bearish candle
-- Clear open/close positions marked
-- "Close > Open" vs "Close < Open" labels
-
-**EXPORT:** PNG, maximum quality, all 8 slides
-
----
-
-### CapCut Video Creation Guide — Post 299
-
-**TIMELINE:**
-- 0:00-0:02: Hook with candlestick appearing
-- 0:02-0:04: Body highlight with label
-- 0:04-0:06: Wick highlight with label
-- 0:06-0:08: Green candle example
-- 0:08-0:10: Red candle example
-- 0:10-0:12: CTA
-
-**VISUAL:** Animated candlestick forming with labels appearing
-**AUDIO:** Educational/basics trending sound
-**EFFECTS:** Label animations, highlight effects on components
-
-**EXPORT:** 1080x1920, 30fps, MP4
-
----
-
 ## POST 300 — 300 Posts Milestone
 **Type:** Marketing | **Pillar:** P5-Chronicle | **CTA:** Follow
 
@@ -28602,71 +27572,6 @@ Layer 7: Gold decorative border elements
 > Here's to the next 300.
 
 **Hashtags:** #SignalPilot #Milestone #300Posts #TradingCommunity #ThankYou #TradingEducation #Forex #Crypto #TradingView #Gratitude #TradingJourney #CommunityLove #Celebration #TradersOfInstagram #LearnTrading #GrowthMindset #TradingLife #EducationFirst #MissionDriven #KeepGoing
-
----
-
-### TikTok
-**Hook:** "300 posts. Zero buy signals."
-
-**Script with Timestamps:**
-| Timestamp | On-Screen Text | Audio/Voiceover |
-|-----------|----------------|-----------------|
-| 0:00-0:02 | "300 posts" | "300 posts" |
-| 0:02-0:04 | "Zero 'buy now' signals" | "Zero buy now signals" |
-| 0:04-0:06 | "Just education" | "Just education" |
-| 0:06-0:08 | "Thank you for learning with us" | "Thank you for learning with us" |
-| 0:08-0:10 | "The journey continues" | "The journey continues" |
-
-**Duration:** 10 seconds
-
----
-
-### Canva Visual Creation Guide — Post 300
-
-**TEMPLATE SETUP:**
-1. 1080x1080 celebration template
-2. Background: #0a0a0f with celebratory elements
-3. "300" as hero element
-
-**LAYER STRUCTURE:**
-Layer 1: Dark gradient background
-Layer 2: Subtle confetti or celebration particles (tasteful, on-brand)
-Layer 3: "300" in large Playfair Display Bold
-- Gold gradient #c9a962 to #d4b978
-- Size: Hero size, centered
-Layer 4: "POSTS" below in Inter Medium, white
-Layer 5: "Thank you" message in smaller text
-Layer 6: Signal Pilot logo bottom center
-Layer 7: Subtle glow behind "300"
-
-**VISUAL TREATMENT:**
-- Celebration without being garish
-- On-brand colors maintained
-- Premium, grateful aesthetic
-- Milestone acknowledgment
-
-**EXPORT:** PNG, maximum quality
-
----
-
-### CapCut Video Creation Guide — Post 300
-
-**TIMELINE:**
-- 0:00-0:02: "300" number reveal with celebration effect
-- 0:02-0:04: "Zero buy signals" contrast statement
-- 0:04-0:06: "Just education" reaffirmation
-- 0:06-0:08: Thank you message
-- 0:08-0:10: "Journey continues" with logo
-
-**VISUAL:**
-- Post montage flashing by (thumbnails of previous posts)
-- "300" reveal with subtle celebration effects
-- Signal Pilot logo formation
-
-**AUDIO:** Celebration/milestone trending sound (uplifting but not over the top)
-**EFFECTS:** Number counter to 300, subtle confetti, montage flash
-
-**EXPORT:** 1080x1920, 30fps, MP4
 
 ---
 
