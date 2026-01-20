@@ -39727,25 +39727,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Single digits. 9 to go."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 641 |
-| 2-4s | 9 POSTS REMAINING |
-| 4-6s | Single digits. |
-| 6-8s | The final push |
-| 8-10s | 650 is so close |
-| 10-12s | Let's finish this 🎯 |
-
-**Sound:** Intense/final stretch motivational trending audio
-
-**Duration:** 12 seconds
-
----
-
 # BATCH 64 HASHTAG BANK
 
 ## By Pillar
@@ -39917,25 +39898,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Every journey starts here..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | LESSON 01 |
-| 2-4s | Welcome to Signal Pilot |
-| 4-6s | 82 free lessons await |
-| 6-8s | 7 indicators ready |
-| 8-10s | Your journey starts now |
-| 10-12s | Begin free → bio 🎓 |
-
-**Sound:** Inspirational/new beginning trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 642
 
 #### Static Image (Instagram/Twitter)
@@ -40036,27 +39998,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Why do 90% of traders fail?"
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | Why most traders fail |
-| 2-3s | ❌ No defined edge |
-| 3-4s | ❌ No risk management |
-| 4-5s | ❌ No emotional control |
-| 5-6s | ❌ No patience |
-| 6-8s | The solution? |
-| 8-10s | Education + Discipline + Time |
-| 10-12s | Don't be most → bio |
-
-**Sound:** Serious/truth-telling trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 644 — QUOTE CARD
 ## Warren Buffett (Patience)
 
@@ -40108,25 +40049,6 @@ Each category:
 **Image Spec:** 1080x1080 — Premium quote card, dark background, elegant serif font, timeless design
 
 **Hashtags:** #WarrenBuffett #Patience #TradingWisdom #TimelessQuote #SignalPilot #TradingMindset #WaitForIt #TradingQuotes #InvestingWisdom #MarketWisdom #PatiencePays #CompetitiveAdvantage #LongTermThinking #TradingEducation #WisdomWednesday
-
----
-
-#### TikTok
-**Hook:** "Warren Buffett said it best..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-3s | "The market is a device..." |
-| 3-6s | "...for transferring money..." |
-| 6-8s | "...from the impatient to the patient" |
-| 8-9s | — Warren Buffett |
-| 9-11s | Patience is an edge |
-| 11-12s | 🎯 |
-
-**Sound:** Wise/contemplative trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -40187,28 +40109,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "All seven indicators. One chart."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | OMNIDECK ⚔️ |
-| 2-3s | Pentarch ✓ |
-| 3-4s | Volume Oracle ✓ |
-| 4-5s | Janus Atlas ✓ |
-| 5-6s | Plutus Flow ✓ |
-| 6-7s | Harmonic ✓ Augury ✓ |
-| 7-9s | All unified. One overlay. |
-| 9-11s | The complete picture |
-| 11-12s | Link in bio ⬇️ |
-
-**Sound:** Epic/powerful unification trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 646 — EDUCATION HUB
 ## Mastery and Beyond (Lesson 82)
 
@@ -40261,26 +40161,6 @@ Each category:
 **Image Spec:** 1080x1080 — "Mastery" themed visual, graduation or path continuing forward imagery
 
 **Hashtags:** #Mastery #Lesson82 #FinalLesson #TradingJourney #SignalPilot #NeverStopLearning #ContinuousImprovement #TradingEducation #PathToMastery #ExpertMindset #LifelongLearner #TradingWisdom #ProfessionalTrader #GrowthMindset #TheJourneyContinues
-
----
-
-#### TikTok
-**Hook:** "The final lesson teaches this..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | LESSON 82 |
-| 2-4s | Mastery and Beyond |
-| 4-6s | Mastery isn't a destination |
-| 6-8s | It's a practice |
-| 8-10s | The curriculum ends |
-| 10-11s | Your path begins |
-| 11-12s | Never stop 🎓 |
-
-**Sound:** Inspirational/completion trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -40339,25 +40219,6 @@ Each category:
 **Image Spec:** 1080x1080 — All seven guardian icons unified in circle, epic finale styling, "The Signal Within" text
 
 **Hashtags:** #Chronicle #SignalPilot #EliteSeven #Finale #TheSignalWithin #TradingLore #TheGuardians #EpicConclusion #TradingPhilosophy #Pentarch #VolumeOracle #JanusAtlas #PlutusFlow #HarmonicOscillator #AuguryGrid #OmniDeck
-
----
-
-#### TikTok
-**Hook:** "The Chronicle's final message..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE CHRONICLE FINALE |
-| 2-4s | "The Seven stood together..." |
-| 4-6s | "Not as tools, but as teachers" |
-| 6-8s | "The Signal was never outside" |
-| 8-10s | "It was within" |
-| 10-12s | 📜 The End |
-
-**Sound:** Epic orchestral conclusion trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -40454,28 +40315,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Every question answered..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | THE DOCUMENTATION 📚 |
-| 2-3s | Getting Started ✓ |
-| 3-4s | Indicator Settings ✓ |
-| 4-5s | Best Practices ✓ |
-| 5-6s | Troubleshooting ✓ |
-| 6-7s | FAQ ✓ |
-| 7-9s | Nothing hidden |
-| 9-11s | Everything documented |
-| 11-12s | Link in bio ⬇️ |
-
-**Sound:** Organized/helpful trending audio
-
-**Duration:** 12 seconds
-
----
-
 # POST 649 — MARKETING
 ## One to Go
 
@@ -40531,26 +40370,6 @@ Each category:
 **Image Spec:** 1080x1080 — Bold "649" with "ONE TO GO" prominent, anticipation and excitement energy
 
 **Hashtags:** #SignalPilot #Post649 #OneToGo #FinishLine #Tomorrow #TradingEducation #ContentJourney #AlmostThere #FinalPost #TradingCommunity #Milestone #Anticipation #SeeYouThere #CompleteLibrary #LastStep
-
----
-
-#### TikTok
-**Hook:** "One more..."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | POST 649 |
-| 2-4s | ONE remains |
-| 4-6s | Education ✓ Psychology ✓ |
-| 6-7s | Indicators ✓ Chronicle ✓ |
-| 7-9s | Tomorrow: 650 |
-| 9-11s | See you at the finish line |
-| 11-12s | 🏁 |
-
-**Sound:** Anticipation/building trending audio
-
-**Duration:** 12 seconds
 
 ---
 
@@ -40628,27 +40447,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "650. We made it."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | 650 |
-| 2-3s | 🏆 |
-| 3-5s | 82 lessons. 7 indicators. |
-| 5-7s | 1 Chronicle. Complete docs. |
-| 7-9s | Built for your journey |
-| 9-10s | Free. Forever. |
-| 10-11s | Thank you 🙏 |
-| 11-12s | ⚜️🔮🗺️⚖️🎵👁️⚔️ |
-
-**Sound:** Triumphant/celebration trending audio with emotional depth
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 650 (FINALE)
 
 #### Static Image (Instagram/Twitter)
@@ -40695,76 +40493,6 @@ Each category:
    - Celebratory but meaningful energy
 
 9. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 650 (FINALE)
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - "650" graphic with celebration effects
-   - All seven guardian icons
-   - Confetti/celebration overlays
-   - Previous content montage clips
-
-3. **Timeline Setup (Epic Finale):**
-
-4. **Segment 1 (0-2s): The Number**
-   - "650" appears with dramatic reveal
-   - Golden flash effect
-   - Epic sound hit
-
-5. **Segment 2 (2-3s): Trophy Moment**
-   - 🏆 emoji animation
-   - Celebration sound
-   - Confetti effect
-
-6. **Segment 3 (3-5s): Achievements**
-   - "82 lessons. 7 indicators."
-   - Quick montage of content
-   - Building energy
-
-7. **Segment 4 (5-7s): Complete**
-   - "1 Chronicle. Complete docs."
-   - All seven icons appearing
-   - Unified glow
-
-8. **Segment 5 (7-9s): For You**
-   - "Built for your journey"
-   - Heartfelt transition
-   - Warm energy
-
-9. **Segment 6 (9-10s): Promise**
-   - "Free. Forever."
-   - Commitment tone
-
-10. **Segment 7 (10-11s): Gratitude**
-    - "Thank you 🙏"
-    - Sincere moment
-    - Music softens
-
-11. **Segment 8 (11-12s): The Seven**
-    - All guardian icons: ⚜️🔮🗺️⚖️🎵👁️⚔️
-    - Final triumphant display
-    - Fade to Signal Pilot logo
-
-12. **Audio:**
-    - Epic orchestral with emotional depth
-    - Builds to climax at "650"
-    - Softens for gratitude
-    - Triumphant but meaningful conclusion
-
-13. **Effects:**
-    - Confetti at key moments
-    - Golden glows
-    - Smooth, premium transitions
-    - Celebratory but not overdone
-
-14. **Export:** 1080x1920, 30fps, highest quality
 
 ---
 
