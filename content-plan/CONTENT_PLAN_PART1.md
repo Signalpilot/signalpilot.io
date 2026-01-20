@@ -23077,27 +23077,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "One question separates amateurs from pros."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Amateur vs Pro:" |
-| 2-4s | "Amateur: 'How much can I make?'" |
-| 4-6s | "Pro: 'How much can I lose?'" |
-| 6-8s | "Risk first. Always." |
-| 8-10s | "That's the difference." |
-
-**Background:** Split screen or dramatic text reveal
-
-**Sound:** Reality check/truth trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -23119,33 +23098,6 @@ Full setup guide in bio 🔗
 - Clean, dramatic layout
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Dark with split screen effect
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Title card | "Amateur vs Pro:" |
-| 2-4s | Left side highlight | "Amateur: 'How much can I make?'" |
-| 4-6s | Right side highlight | "Pro: 'How much can I lose?'" |
-| 6-8s | Center focus | "Risk first. Always." |
-| 8-10s | Logo | "That's the difference." |
-
-**Audio:** Impactful reality-check sound at 25% volume
-
-**Effects:**
-- Split screen visual
-- Color contrast (red vs blue)
-- Text emphasis animations
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -23212,28 +23164,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Stop switching between timeframes."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Stop switching timeframes" |
-| 2-4s | "Janus Atlas shows them all" |
-| 4-6s | "Weekly levels on your hourly" |
-| 6-8s | "Daily levels on your 15min" |
-| 8-10s | "Confluence, one chart" |
-| 10-12s | "Link in bio" |
-
-**Background:** Screen recording of Janus Atlas in action
-
-**Sound:** Tech/efficiency trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -23257,34 +23187,6 @@ Full setup guide in bio 🔗
 - 4H: #6b7280 (gray)
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: TradingView screen recording
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Frustrated chart switching | "Stop switching timeframes" |
-| 2-4s | Janus Atlas applied | "Janus Atlas shows them all" |
-| 4-6s | Highlight weekly level | "Weekly levels on your hourly" |
-| 6-8s | Highlight daily level | "Daily levels on your 15min" |
-| 8-10s | Full view | "Confluence, one chart" |
-| 10-12s | Logo | "Link in bio" |
-
-**Audio:** Tech efficiency sound at 20% volume
-
-**Effects:**
-- Highlight animations on each level
-- Color-coded level labels
-- Smooth transitions
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -23354,28 +23256,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "When an order block fails, something interesting happens."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Order block failed?" |
-| 2-4s | "It becomes a BREAKER" |
-| 4-6s | "Support → Resistance" |
-| 6-8s | "Resistance → Support" |
-| 8-10s | "Role reversal" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording showing order block failure and role reversal
-
-**Sound:** Plot twist/revelation trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -23398,34 +23278,6 @@ Full setup guide in bio 🔗
 - Before/after annotation style
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart with breaker block example
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Order block on chart | "Order block failed?" |
-| 2-4s | Price breaking through | "It becomes a BREAKER" |
-| 4-6s | Flip visual | "Support → Resistance" |
-| 6-8s | Or opposite | "Resistance → Support" |
-| 8-10s | Price reacting | "Role reversal" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Plot twist sound at 20% volume
-
-**Effects:**
-- Arrow animations for price movement
-- Color change for role reversal
-- Highlight on reaction
-
-**Export:** 1080x1920, 30fps
 
 ---
 
