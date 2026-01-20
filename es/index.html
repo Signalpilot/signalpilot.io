@@ -4307,7 +4307,44 @@
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
         touch-action: pan-x pan-y !important;
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: x proximity;
+      }
+    }
+
+    /* iOS Safari: Aggressive fix for horizontal touch scroll */
+    @supports (-webkit-touch-callout: none) {
+      @media (max-width: 768px) {
+        #blog-section {
+          position: relative !important;
+          z-index: 1 !important;
+          isolation: isolate !important;
+        }
+        #blog-section,
+        #blog-section .container {
+          overflow: visible !important;
+          overflow-x: visible !important;
+          -webkit-transform: none !important;
+          transform: none !important;
+        }
+        #blog-carousel,
+        .articles-carousel {
+          display: flex !important;
+          flex-wrap: nowrap !important;
+          overflow-x: scroll !important;
+          overflow-y: hidden !important;
+          -webkit-overflow-scrolling: touch !important;
+          scroll-snap-type: none !important;
+          touch-action: pan-x !important;
+          -webkit-touch-callout: none !important;
+          overscroll-behavior-x: contain !important;
+          scroll-behavior: auto !important;
+        }
+        #blog-carousel .article-card,
+        .articles-carousel .article-card {
+          flex: 0 0 280px !important;
+          min-width: 280px !important;
+          max-width: 280px !important;
+        }
       }
     }
 
@@ -6389,14 +6426,14 @@
 
 
   <!-- LATEST ARTICLES CAROUSEL -->
-  <section id="blog-section" style="padding:4rem 0;background:var(--bg-elev);border-top:1px solid var(--border)">
-    <div class="container" style="overflow:visible !important">
+  <section id="blog-section" style="padding:4rem 0;background:var(--bg-elev);border-top:1px solid var(--border);overflow:visible !important">
+    <div class="container" style="overflow:visible !important;max-width:100vw">
       <div style="text-align:center;margin-bottom:2rem">
         <h2 style="font-size:2rem;font-weight:700;margin:0 0 .5rem 0">Últimos Artículos</h2>
         <p style="color:var(--muted);font-size:1rem;margin:0">Perspectivas de trading, estrategias y análisis de mercado</p>
       </div>
 
-      <div id="blog-carousel" class="articles-carousel" style="display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:1rem 0;-webkit-overflow-scrolling:touch;scrollbar-width:thin;touch-action:pan-x pan-y;-webkit-touch-callout:none">
+      <div id="blog-carousel" class="articles-carousel" style="display:flex;flex-wrap:nowrap;gap:1.5rem;overflow-x:scroll;overflow-y:hidden;scroll-snap-type:none;padding:1rem 0;-webkit-overflow-scrolling:touch;scrollbar-width:thin;touch-action:pan-x;overscroll-behavior-x:contain">
 
         <!-- Loading skeleton -->
         <div class="article-card article-skeleton" style="flex:0 0 300px;scroll-snap-align:start;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem">
@@ -7169,6 +7206,56 @@
             </a>
           `;
         });
+    })();
+
+    /* ======================== Mobile Blog Carousel Touch Fix ======================== */
+    (function() {
+      function fixCarouselScroll() {
+        const carousel = document.getElementById('blog-carousel');
+        if (!carousel) return;
+
+        // Force these styles with setProperty for maximum override
+        carousel.style.setProperty('overflow-x', 'scroll', 'important');
+        carousel.style.setProperty('overflow-y', 'hidden', 'important');
+        carousel.style.setProperty('-webkit-overflow-scrolling', 'touch', 'important');
+        carousel.style.setProperty('touch-action', 'pan-x', 'important');
+        carousel.style.setProperty('scroll-snap-type', 'none', 'important');
+        carousel.style.setProperty('overscroll-behavior-x', 'contain', 'important');
+        carousel.style.setProperty('display', 'flex', 'important');
+        carousel.style.setProperty('flex-wrap', 'nowrap', 'important');
+
+        // Ensure parent allows overflow
+        const container = carousel.closest('.container');
+        if (container) {
+          container.style.setProperty('overflow', 'visible', 'important');
+          container.style.setProperty('overflow-x', 'visible', 'important');
+        }
+
+        const section = document.getElementById('blog-section');
+        if (section) {
+          section.style.setProperty('overflow', 'visible', 'important');
+          section.style.setProperty('overflow-x', 'visible', 'important');
+        }
+
+        // Fix cards width
+        carousel.querySelectorAll('.article-card').forEach(function(card) {
+          card.style.setProperty('flex', '0 0 280px', 'important');
+          card.style.setProperty('min-width', '280px', 'important');
+        });
+      }
+
+      // Run on mobile only
+      if (window.innerWidth <= 768) {
+        // Run immediately
+        fixCarouselScroll();
+        // Run again after DOM ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', fixCarouselScroll);
+        }
+        // Run again after a delay (for dynamically loaded content)
+        setTimeout(fixCarouselScroll, 1000);
+        setTimeout(fixCarouselScroll, 3000);
+      }
     })();
 
 
