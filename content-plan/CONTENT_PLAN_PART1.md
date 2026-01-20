@@ -10014,24 +10014,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "What traders are saying about Signal Pilot"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | WHAT TRADERS SAY |
-| 2-4s | ⭐⭐⭐⭐⭐ |
-| 4-6s | "Indicators that don't repaint" |
-| 6-8s | "Education worth more than paid courses" |
-| 8-10s | "Changed how I see cycles" |
-| 10-12s | Join thousands trading smarter |
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10042,16 +10024,6 @@ Full lesson + PDF in bio
 6. Multiple cards arrangement
 7. "Join thousands" CTA
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create testimonial card visuals
-2. Animate appearing one by one
-3. Star ratings prominently
-4. Positive/uplifting sound, 25% volume
-5. Export 1080x1920
 
 ---
 
@@ -10110,27 +10082,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Don't have time to day trade? Try swing trading."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | NO TIME TO DAY TRADE? |
-| 2-4s | SWING TRADING 🌊 |
-| 4-6s | Hold for days to weeks |
-| 6-7s | Use Daily/4H charts |
-| 7-8s | Bigger moves |
-| 8-9s | Fewer trades |
-| 9-10s | Less screen time |
-| 10-12s | Works with a job ✅ |
-| 12-14s | Patience required |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10141,15 +10092,6 @@ Full lesson + PDF in bio
 6. 🌊 wave emoji for visual identity
 7. "Sweet spot for busy traders" tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with clear swing trade
-2. Mark the full swing duration
-3. Calm ambient sound, 20% volume
-4. Export 1080x1920
 
 ---
 
@@ -10208,26 +10150,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "1% per day doesn't sound like much. Watch this."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | 1% PER DAY |
-| 2-3s | "That's nothing" |
-| 3-5s | 1% compounded daily |
-| 5-7s | = 1,278% per year |
-| 7-9s | $10,000 → $137,800 |
-| 9-11s | Small consistent gains |
-| 11-12s | Beat home runs |
-| 12-14s | Compound effect. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10238,15 +10160,6 @@ Full lesson + PDF in bio
 6. Comparison: home run vs compound
 7. "Slow is smooth. Smooth is fast." tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Show compound calculation building
-2. Animate growth curve rising
-3. Mind-blown sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -10300,26 +10213,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Your biggest edge isn't your strategy"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | YOUR BIGGEST EDGE |
-| 2-4s | Isn't your strategy |
-| 4-6s | Isn't your indicators |
-| 6-8s | It's EMOTIONAL CONTROL |
-| 8-10s | Not revenge trading |
-| 10-11s | Not FOMO buying |
-| 11-12s | Sticking to the plan |
-| 12-14s | Master yourself first. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10330,15 +10223,6 @@ Full lesson + PDF in bio
 6. Gold (#c9a962) for emphasis
 7. SignalPilot branding
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Build up to emotional control reveal
-2. Show brain controlling emotions
-3. Powerful realization sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -10396,25 +10280,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Three timeframes. Same level. That's confluence."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | JANUS ATLAS MTF 🗺️ |
-| 2-4s | DAILY: Support at $45K |
-| 4-6s | 4H: Confirms the level |
-| 6-8s | 1H: Entry precision |
-| 8-10s | All three ALIGN |
-| 10-12s | = High probability zone |
-| 12-14s | The Cartographer maps it all |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10425,15 +10290,6 @@ Full lesson + PDF in bio
 6. "CONFLUENCE" label at bottom
 7. "The Cartographer" branding
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Screen record switching timeframes
-2. Show same level on each
-3. Map/discovery sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -10496,27 +10352,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Day trading looks exciting. Here's the reality."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | DAY TRADING ⚡ |
-| 2-3s | In and out same day |
-| 3-5s | REQUIRES: |
-| 5-6s | Full attention |
-| 6-7s | Fast decisions |
-| 7-8s | Strict discipline |
-| 8-10s | REALITY: |
-| 10-11s | Most fail |
-| 11-13s | It's a job, not a game |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10527,15 +10362,6 @@ Full lesson + PDF in bio
 6. "Most fail" highlighted in red
 7. "It's a job, not a game" tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create fast-paced trading visual
-2. Contrast excitement with reality
-3. Intense then serious sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -10590,26 +10416,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Your stop is at the most obvious place. That's why it keeps getting hit."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | STOP KEEPS GETTING HIT? |
-| 2-4s | It's PREDICTABLE |
-| 4-5s | Below swing low? Obvious. |
-| 5-6s | At round number? Obvious. |
-| 6-8s | Price HUNTS obvious stops |
-| 8-10s | Then reverses |
-| 10-12s | THE FIX: Add buffer |
-| 12-14s | Smart stops > Tight stops |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10620,15 +10426,6 @@ Full lesson + PDF in bio
 6. Show price sweeping then reversing
 7. "Smart Stops > Tight Stops" tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart showing stop hunt
-2. Show the sweep and reversal
-3. Hunt then fix sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -10685,26 +10482,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "If your indicator repaints, it's lying to you"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | REPAINTING INDICATORS |
-| 2-4s | Change signals AFTER |
-| 4-5s | Look perfect in hindsight |
-| 5-6s | Fail in real-time |
-| 6-8s | That's a LIE |
-| 8-10s | Signal Pilot? |
-| 10-12s | NON-REPAINTING |
-| 12-14s | What you see is what happened. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10715,15 +10492,6 @@ Full lesson + PDF in bio
 6. "A signal that changes is a lie" quote
 7. Chronicle series badge
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create animation of signal moving (repaint)
-2. Show fixed signal (non-repaint)
-3. Deception then truth sound, 25% volume
-4. Export 1080x1920
 
 ---
 
@@ -10781,25 +10549,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Entry is 10%. Management is 90%."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | ENTRY = 10% |
-| 2-4s | MANAGEMENT = 90% |
-| 4-6s | SCALE IN — Reduce risk |
-| 6-8s | SCALE OUT — Lock profits |
-| 8-10s | MOVE STOP — Protect gains |
-| 10-12s | ADD TO WINNERS — Maximize |
-| 12-14s | Manage better, profit more |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10810,15 +10559,6 @@ Full lesson + PDF in bio
 6. Stop movement visualization
 7. "Manage better, profit more" tagline
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create diagram showing position changes
-2. Animate scaling and stop movement
-3. Strategic/tactical sound, 20% volume
-4. Export 1080x1920
 
 ---
 
@@ -10877,25 +10617,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Which indicators work best together?"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | BEST INDICATOR COMBOS |
-| 2-4s | TREND: Pentarch + Volume Oracle |
-| 4-6s | LEVELS: Janus Atlas + Plutus Flow |
-| 6-8s | MOMENTUM: Harmonic + Volume Oracle |
-| 8-10s | SCANNING: Augury Grid + Any |
-| 10-12s | ALL-IN-ONE: OmniDeck |
-| 12-14s | Match to YOUR style |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -10909,15 +10630,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Show indicator pairs appearing
-2. Lines connecting them
-3. Combination/pairing sound, 20% volume
-4. Export 1080x1920
-
----
-
 ## 📅 BATCH 13 POSTING SCHEDULE
 
 | Day | Post | Platform Focus | Best Time |
@@ -10926,11 +10638,11 @@ Full lesson + PDF in bio
 | Mon | 122 | Instagram | 12:00 PM EST |
 | Tue | 123 | Twitter/Blog | 9:00 AM EST |
 | Tue | 124 | All Platforms | 6:00 PM EST |
-| Wed | 125 | Twitter/TikTok | 9:00 AM EST |
+| Wed | 125 | Twitter | 9:00 AM EST |
 | Wed | 126 | Instagram | 12:00 PM EST |
 | Thu | 127 | Twitter/Blog | 9:00 AM EST |
 | Thu | 128 | All Platforms | 6:00 PM EST |
-| Fri | 129 | Twitter/TikTok | 9:00 AM EST |
+| Fri | 129 | Twitter | 9:00 AM EST |
 | Fri | 130 | Twitter/Docs | 12:00 PM EST |
 
 ---
@@ -11033,22 +10745,6 @@ Full roadmap in bio 🔗
 
 **Format:** Single image (1080x1080)
 
-### TikTok Script
-```
-HOOK: "Here's what's coming to Signal Pilot"
-
-[0-2s] WHAT'S COMING 🛤️
-[2-4s] 🔜 New indicator features
-[4-6s] 🔜 More education
-[6-8s] 🔜 Mobile improvements
-[8-10s] 🔜 Community features
-[10-12s] Built with YOUR feedback
-[12-14s] Stay tuned 👀
-
-DURATION: 14 seconds
-SOUND: Anticipation/building sound
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → Create Design → 1080x1080px
@@ -11067,24 +10763,6 @@ SOUND: Anticipation/building sound
 8. Footer: "We Build In Public" in Inter
 9. Signal Pilot logo bottom right
 10. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Import roadmap timeline visual
-2. Create feature reveal animation:
-   - Each feature slides in from right
-   - 2-second intervals
-3. Add text overlays at timestamps:
-   - 0-2s: "WHAT'S COMING" (scale up)
-   - 2-4s: First feature appears
-   - 4-6s: Second feature appears
-   - Continue pattern
-4. Use anticipation/building background music at 25% volume
-5. Add subtle glow effects on timeline nodes
-6. End frame: "Stay tuned" with eyes emoji
-7. Export: 1080x1920, 30fps
-8. Caption: "The future is bright. #signalpilot #roadmap"
 ```
 
 ---
@@ -11148,24 +10826,6 @@ Free scalping guide — link in bio 🔗
 - Slide 5: Who it's for
 - Slide 6: CTA to free guide
 
-### TikTok Script
-```
-HOOK: "Scalping: Trading on hard mode"
-
-[0-2s] SCALPING ⚡
-[2-3s] In and out in MINUTES
-[3-4s] Sometimes SECONDS
-[4-6s] Tiny profits, many times
-[6-8s] REQUIRES:
-[8-9s] Lightning execution
-[9-10s] Zero hesitation
-[10-11s] Iron discipline
-[11-13s] NOT for beginners
-
-DURATION: 13 seconds
-SOUND: Fast/intense electronic sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (6 slides):
@@ -11217,23 +10877,6 @@ SLIDE 6 - CTA:
 4. Signal Pilot logo
 ```
 
-### CapCut Video Creation Guide
-```
-1. Create fast-paced scalping visualization
-2. Import 1m chart showing quick entries/exits
-3. Add rapid text overlays:
-   - 0-2s: "SCALPING ⚡" with flash effect
-   - 2-4s: "In and out in MINUTES/SECONDS"
-   - 4-6s: "Tiny profits, many times"
-   - 6-11s: Requirements appearing rapidly
-   - 11-13s: "NOT for beginners" warning
-4. Use fast transitions (0.2s cuts)
-5. Add intense electronic music at 30% volume
-6. Quick zoom effects on key points
-7. Export: 1080x1920, 30fps
-8. Caption: "Fast and furious. #scalping #trading"
-```
-
 ---
 
 ## POST 133 — THE ART OF WAITING (Blog)
@@ -11282,22 +10925,6 @@ Full article — link in bio 🔗
 
 **Format:** Single image (1080x1080) — Split comparison
 
-### TikTok Script
-```
-HOOK: "The best traders do nothing most of the time"
-
-[0-2s] BEST TRADERS
-[2-4s] Do NOTHING most of the time
-[4-6s] AMATEURS: Trade to feel busy
-[6-8s] PROS: Wait for the setup
-[8-10s] 90% waiting
-[10-11s] 10% executing
-[11-13s] Money is made in the waiting
-
-DURATION: 13 seconds
-SOUND: Calm ambient then precise click
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → 1080x1080px
@@ -11320,25 +10947,6 @@ SOUND: Calm ambient then precise click
 4. Bottom text: "90% Waiting. 10% Executing."
 5. Signal Pilot logo bottom right
 6. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Create split-screen visualization
-2. Left side: Chaotic trading (fast cuts, many trades)
-3. Right side: Calm waiting (still, patient)
-4. Text overlays at timestamps:
-   - 0-4s: Introduction
-   - 4-6s: Amateur behavior (chaotic side active)
-   - 6-8s: Pro behavior (calm side highlighted)
-   - 8-11s: "90% waiting / 10% executing"
-   - 11-13s: "Money made in the waiting"
-5. Sound design:
-   - Start: calm ambient (20% volume)
-   - End: precise click for execution moment
-6. Transition from chaos to calm
-7. Export: 1080x1920, 30fps
-8. Caption: "Wait for it. #trading #patience"
 ```
 
 ---
@@ -11388,23 +10996,6 @@ Save this. 🔖
 
 **Format:** Single image (1080x1080) — Quote card
 
-### TikTok Script
-```
-HOOK: "Your opinion doesn't move markets"
-
-[0-2s] YOUR OPINION
-[2-4s] Doesn't move markets
-[4-6s] WHAT YOU THINK:
-[6-7s] "It should go up"
-[7-9s] WHAT YOU SEE:
-[9-10s] Price broke down
-[10-12s] Trade what you SEE
-[12-14s] Not what you THINK
-
-DURATION: 14 seconds
-SOUND: Reality check sound
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → 1080x1080px
@@ -11421,24 +11012,6 @@ SOUND: Reality check sound
 6. Subtle gradient overlay from top (dark to transparent)
 7. Signal Pilot logo bottom right, small
 8. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Create quote card base visual
-2. Add chart showing expectation vs reality:
-   - Show "expected" up arrow
-   - Then actual price going down
-3. Text overlays:
-   - 0-4s: "YOUR OPINION doesn't move markets"
-   - 4-7s: "WHAT YOU THINK" with example
-   - 7-10s: "WHAT YOU SEE" with chart reality
-   - 10-14s: Quote reveal with emphasis
-4. Use reality check/revelation sound at 25% volume
-5. Contrast effect between think/see sections
-6. End on clean quote card
-7. Export: 1080x1920, 30fps
-8. Caption: "See the chart. #trading #priceaction"
 ```
 
 ---
@@ -11499,23 +11072,6 @@ Start your free trial — link in bio 🔗
 - Slide 4: Setup step 3-4
 - Slide 5: CTA for free trial
 
-### TikTok Script
-```
-HOOK: "Stop staring at charts. Do this instead."
-
-[0-2s] STOP STARING AT CHARTS
-[2-4s] Set up ALERTS instead
-[4-6s] Augury Grid alerts you when:
-[6-7s] 📊 Momentum shifts
-[7-8s] 📈 Volume spikes
-[8-9s] 🔄 Regime changes
-[9-11s] The Watchman notifies
-[11-13s] You execute 👁️
-
-DURATION: 13 seconds
-SOUND: Alert/notification sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -11556,23 +11112,6 @@ SLIDE 5 - CTA:
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
 5. The Watchman character subtle in background
-```
-
-### CapCut Video Creation Guide
-```
-1. Screen record Augury Grid alert setup process
-2. Show TradingView interface with settings
-3. Text overlays at timestamps:
-   - 0-2s: "STOP STARING AT CHARTS"
-   - 2-4s: "Set up ALERTS instead"
-   - 4-9s: Show each alert type with icon
-   - 9-11s: "The Watchman notifies"
-   - 11-13s: "You execute" with eye symbol
-4. Add actual alert/notification sound at key moments
-5. Use screen recording of real setup process
-6. Highlight important buttons/settings
-7. Export: 1080x1920, 30fps
-8. Caption: "Work smarter. #augurygrid #alerts"
 ```
 
 ---
@@ -11635,24 +11174,6 @@ Free psychology guide — link in bio 🔗
 - Slide 5: FOMO enemy
 - Slide 6: The solution + CTA
 
-### TikTok Script
-```
-HOOK: "Your strategy isn't the problem. Your mind is."
-
-[0-2s] YOUR STRATEGY ISN'T THE PROBLEM
-[2-4s] Your MIND is
-[4-5s] 😱 FEAR — Won't take trades
-[5-6s] 🤑 GREED — Oversize
-[6-7s] 😤 REVENGE — Break rules
-[7-8s] 😰 FOMO — Chase
-[8-10s] THE FIX:
-[10-12s] Awareness. Rules. Journal.
-[12-14s] Master your mind.
-
-DURATION: 14 seconds
-SOUND: Mind/psychological sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (6 slides):
@@ -11701,22 +11222,6 @@ SLIDE 6 - Solution + CTA:
 3. "Free Psychology Guide"
 4. Arrow to "Link in Bio"
 5. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Create brain visualization with emotion zones
-2. Animate each emotion appearing and highlighting
-3. Text overlays at timestamps:
-   - 0-4s: Problem statement
-   - 4-8s: Each emotion with emoji (rapid succession)
-   - 8-12s: The fix/solution
-   - 12-14s: "Master your mind"
-4. Use psychological/mind ambient sound at 25% volume
-5. Color code each emotion section
-6. Add subtle pulse effect on brain when emotions appear
-7. Export: 1080x1920, 30fps
-8. Caption: "The real battle. #trading #psychology"
 ```
 
 ---
@@ -11775,23 +11280,6 @@ Full routine template — link in bio 🔗
 - Slide 4: Post-market routine
 - Slide 5: Weekly review + CTA
 
-### TikTok Script
-```
-HOOK: "Successful traders have routines. Here's one."
-
-[0-2s] TRADING ROUTINE
-[2-4s] PRE-MARKET:
-[4-5s] News, levels, watchlist
-[5-7s] DURING SESSION:
-[7-8s] Execute plan ONLY
-[8-10s] POST-MARKET:
-[10-11s] Review, journal, plan
-[11-13s] Routine = Consistency
-
-DURATION: 13 seconds
-SOUND: Productive/routine sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -11838,23 +11326,6 @@ SLIDE 5 - Weekly + CTA:
 3. "Get the Full Routine Template"
 4. Arrow to "Link in Bio"
 5. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Create timeline visualization showing day progression
-2. Use clock animation moving through day
-3. Text overlays at timestamps:
-   - 0-2s: "TRADING ROUTINE" title
-   - 2-5s: Pre-market phase
-   - 5-8s: During session phase
-   - 8-11s: Post-market phase
-   - 11-13s: "Routine = Consistency"
-4. Use productive/focus music at 20% volume
-5. Transition through times of day (sunrise → day → sunset)
-6. Add checkmark animations for completed tasks
-7. Export: 1080x1920, 30fps
-8. Caption: "Build the routine. #trading #habits"
 ```
 
 ---
@@ -11905,22 +11376,6 @@ Read the full chronicle — link in bio 🔗
 
 **Format:** Single image (1080x1080) — Character art with quote
 
-### TikTok Script
-```
-HOOK: "Cycles repeat because human nature never changes"
-
-[0-2s] THE SOVEREIGN'S WISDOM 👑
-[2-4s] "Cycles repeat"
-[4-6s] "Because human nature never changes"
-[6-8s] Fear at bottoms
-[8-10s] Greed at tops
-[10-12s] Same patterns. Every era.
-[12-14s] The Sovereign has seen it all.
-
-DURATION: 14 seconds
-SOUND: Ancient wisdom ambient
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → 1080x1080px
@@ -11939,23 +11394,6 @@ SOUND: Ancient wisdom ambient
 7. Attribution: "— The Sovereign" in gold
 8. Footer: "Signal Pilot Chronicle" in Inter
 9. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Import The Sovereign character art
-2. Create cycling market pattern animation behind character
-3. Text overlays at timestamps:
-   - 0-2s: "THE SOVEREIGN'S WISDOM" with crown
-   - 2-6s: Quote appearing word by word
-   - 6-10s: "Fear at bottoms / Greed at tops"
-   - 10-12s: "Same patterns. Every era."
-   - 12-14s: "Has seen it all"
-4. Add ancient wisdom ambient music at 30% volume
-5. Use slow zoom on Sovereign
-6. Subtle particle effects (dust/age aesthetic)
-7. Export: 1080x1920, 30fps
-8. Caption: "History rhymes. #signalpilot #thesovereign"
 ```
 
 ---
@@ -12014,23 +11452,6 @@ Free pattern guide — link in bio 🔗
 - Slide 5: Abandoned Baby
 - Slide 6: Context reminder + CTA
 
-### TikTok Script
-```
-HOOK: "Advanced candlestick patterns most traders miss"
-
-[0-2s] ADVANCED CANDLESTICKS
-[2-4s] THREE WHITE SOLDIERS 📈
-[4-5s] Strong bullish reversal
-[5-7s] THREE BLACK CROWS 📉
-[7-8s] Strong bearish reversal
-[8-10s] TWEEZER TOPS/BOTTOMS
-[10-11s] Level rejection
-[11-13s] Context makes them work
-
-DURATION: 13 seconds
-SOUND: Educational/discovery sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (6 slides):
@@ -12084,23 +11505,6 @@ SLIDE 6 - Context + CTA:
 4. "Pattern alone = Noise"
 5. "Free Pattern Guide" CTA
 6. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Create candlestick pattern animations
-2. Show each pattern forming on chart
-3. Text overlays at timestamps:
-   - 0-2s: "ADVANCED CANDLESTICKS" title
-   - 2-5s: Three White Soldiers (show formation)
-   - 5-8s: Three Black Crows (show formation)
-   - 8-11s: Tweezer pattern
-   - 11-13s: "Context makes them work"
-4. Use educational/discovery sound at 20% volume
-5. Animate candles forming in real-time
-6. Highlight pattern boundaries
-7. Export: 1080x1920, 30fps
-8. Caption: "Level up your candles. #trading #candlesticks"
 ```
 
 ---
@@ -12157,23 +11561,6 @@ Full troubleshooting guide — link in bio 🔗
 - Slide 4: Settings resetting
 - Slide 5: Still stuck + CTA
 
-### TikTok Script
-```
-HOOK: "Indicator not working? Try this."
-
-[0-2s] INDICATOR NOT WORKING?
-[2-4s] ❓ Not loading
-[4-5s] → Refresh TradingView
-[5-7s] ❓ Signals delayed
-[7-8s] → Check data subscription
-[8-10s] ❓ Settings reset
-[10-11s] → Save as template
-[11-13s] Still stuck? Contact support
-
-DURATION: 13 seconds
-SOUND: Fix/solution sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -12217,23 +11604,6 @@ SLIDE 5 - Still Stuck + CTA:
    - "Contact support@signalpilot.io"
 3. "Full Guide" CTA
 4. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Screen record TradingView troubleshooting steps
-2. Show common issues and solutions
-3. Text overlays at timestamps:
-   - 0-2s: "INDICATOR NOT WORKING?"
-   - 2-5s: First issue and solution
-   - 5-8s: Second issue and solution
-   - 8-11s: Third issue and solution
-   - 11-13s: "Still stuck? Contact support"
-4. Use fix/solution sound at 20% volume
-5. Add checkmark animations after each fix
-6. Show actual TradingView interface
-7. Export: 1080x1920, 30fps
-8. Caption: "Quick fixes. #signalpilot #troubleshooting"
 ```
 
 ---
@@ -12293,17 +11663,6 @@ SLIDE 5 - Still Stuck + CTA:
 - [ ] Post 139: Advanced candlestick patterns (6 carousel slides)
 - [ ] Post 140: Troubleshooting flowchart (5 carousel slides)
 
-### Videos Needed
-- [ ] Post 131: Roadmap feature reveal (14s)
-- [ ] Post 132: Fast-paced scalping visualization (13s)
-- [ ] Post 133: Amateur vs Pro comparison (13s)
-- [ ] Post 134: Think vs See reality check (14s)
-- [ ] Post 135: Alert setup screen recording (13s)
-- [ ] Post 136: Psychology emotions animation (14s)
-- [ ] Post 137: Daily routine timeline (13s)
-- [ ] Post 138: The Sovereign with cycles (14s)
-- [ ] Post 139: Candlestick pattern formations (13s)
-- [ ] Post 140: Troubleshooting screen recording (13s)
 
 ### Character Assets
 - [ ] The Sovereign (Post 138)
@@ -12392,21 +11751,6 @@ Take the quiz — link in bio 🔗
 
 **Format:** Single image (1080x1080)
 
-### TikTok Script
-```
-HOOK: "Not sure which indicator to use? Take the quiz."
-
-[0-2s] WHICH INDICATOR IS RIGHT FOR YOU?
-[2-4s] Take the FREE quiz
-[4-6s] 5 quick questions
-[6-8s] About YOUR trading style
-[8-10s] Get personalized recommendations
-[10-12s] 2 minutes to clarity 🎯
-
-DURATION: 12 seconds
-SOUND: Quiz/game show sound
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → Create Design → 1080x1080px
@@ -12422,23 +11766,6 @@ SOUND: Quiz/game show sound
 8. CTA: "Link in Bio" with arrow
 9. Signal Pilot logo bottom right
 10. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Screen record quiz interface (or create mockup)
-2. Show questions scrolling through
-3. Text overlays at timestamps:
-   - 0-2s: "WHICH INDICATOR IS RIGHT FOR YOU?"
-   - 2-4s: "Take the FREE quiz"
-   - 4-8s: Show questions appearing
-   - 8-10s: "Get personalized recommendations"
-   - 10-12s: "2 minutes to clarity"
-4. Use quiz/game show sound at 25% volume
-5. Add interactive feel (button clicks, selections)
-6. End with target/bullseye hitting center
-7. Export: 1080x1920, 30fps
-8. Caption: "Find your perfect indicator. #signalpilot #quiz"
 ```
 
 ---
@@ -12495,22 +11822,6 @@ Free correlation guide — link in bio 🔗
 - Slide 4: No correlation / true diversification
 - Slide 5: The danger + CTA
 
-### TikTok Script
-```
-HOOK: "You're not diversified. You're doubling risk."
-
-[0-2s] THINK YOU'RE DIVERSIFIED?
-[2-4s] BTC long ✅
-[4-5s] ETH long ✅
-[5-7s] They're 95% CORRELATED
-[7-9s] That's not diversification
-[9-11s] That's DOUBLE exposure
-[11-13s] Learn correlation. Manage risk.
-
-DURATION: 13 seconds
-SOUND: Warning/realization sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -12553,24 +11864,6 @@ SLIDE 5 - Danger + CTA:
 3. Text: "Thinking you're diversified when you're just doubling risk"
 4. "Free Correlation Guide" CTA
 5. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Create BTC/ETH overlay chart showing correlation
-2. Show both charts moving identically
-3. Text overlays at timestamps:
-   - 0-2s: "THINK YOU'RE DIVERSIFIED?"
-   - 2-5s: Show BTC and ETH positions
-   - 5-7s: "95% CORRELATED" reveal
-   - 7-9s: "That's not diversification"
-   - 9-11s: "That's DOUBLE exposure"
-   - 11-13s: Call to action
-4. Use warning/realization sound at 25% volume
-5. Show charts merging/syncing animation
-6. End with correlation matrix visual
-7. Export: 1080x1920, 30fps
-8. Caption: "Correlation is risk. #trading #correlation"
 ```
 
 ---
@@ -12632,23 +11925,6 @@ Full template — link in bio 🔗
 - Slide 4: Process section
 - Slide 5: Rules section + CTA
 
-### TikTok Script
-```
-HOOK: "No trading plan? Here's what you need."
-
-[0-2s] YOUR TRADING PLAN NEEDS:
-[2-4s] 📊 STRATEGY
-[4-5s] What setups, what timeframes
-[5-7s] ⚠️ RISK
-[7-8s] Max per trade, max daily loss
-[8-10s] 📋 PROCESS
-[10-11s] Routines and reviews
-[11-13s] Write it. Follow it.
-
-DURATION: 13 seconds
-SOUND: Organized/systematic sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -12697,23 +11973,6 @@ SLIDE 5 - Rules + CTA:
 5. Signal Pilot logo
 ```
 
-### CapCut Video Creation Guide
-```
-1. Create trading plan document visual
-2. Scroll through sections with highlights
-3. Text overlays at timestamps:
-   - 0-2s: "YOUR TRADING PLAN NEEDS:"
-   - 2-5s: Strategy section with icon
-   - 5-8s: Risk section with icon
-   - 8-11s: Process section with icon
-   - 11-13s: "Write it. Follow it."
-4. Use organized/systematic sound at 20% volume
-5. Add checkmark animations for each section
-6. Use document scroll animation
-7. Export: 1080x1920, 30fps
-8. Caption: "Plan the trade. #trading #tradingplan"
-```
-
 ---
 
 ## POST 144 — QUOTE CARD (Psychology)
@@ -12759,23 +12018,6 @@ Save this. 🔖
 
 **Format:** Single image (1080x1080) — Quote card
 
-### TikTok Script
-```
-HOOK: "The market is never wrong. You are."
-
-[0-2s] THE MARKET IS NEVER WRONG
-[2-4s] YOU: "It's overbought!"
-[4-5s] MARKET: Goes higher
-[5-7s] YOU: "Support will hold!"
-[7-8s] MARKET: Breaks it
-[8-10s] YOU: "This makes no sense!"
-[10-11s] MARKET: Doesn't care
-[11-13s] Adapt or lose.
-
-DURATION: 13 seconds
-SOUND: Reality check sound
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → 1080x1080px
@@ -12792,23 +12034,6 @@ SOUND: Reality check sound
 6. Add subtle gradient overlay
 7. Signal Pilot logo bottom right, small
 8. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Create split narrative: trader expectation vs market reality
-2. Show chart doing opposite of expectations
-3. Text overlays at timestamps:
-   - 0-2s: "THE MARKET IS NEVER WRONG"
-   - 2-5s: "YOU" says something, "MARKET" does opposite
-   - 5-8s: Another example
-   - 8-11s: Third example
-   - 11-13s: "Adapt or lose" conclusion
-4. Use reality check sound at 25% volume
-5. Show chart animation defying expectations each time
-6. End on quote card
-7. Export: 1080x1920, 30fps
-8. Caption: "The market wins. #trading #truth"
 ```
 
 ---
@@ -12866,22 +12091,6 @@ Start your free trial — link in bio 🔗
 - Slide 4: How to use
 - Slide 5: CTA for free trial
 
-### TikTok Script
-```
-HOOK: "IGN fired. What does it mean?"
-
-[0-2s] IGN SIGNAL 🔵
-[2-4s] Ignition — Momentum building?
-[4-6s] Something MAY be starting
-[6-8s] It's NOT an entry signal
-[8-10s] It's NOT a guarantee
-[10-12s] It's AWARENESS
-[12-14s] The spark. Not the fire.
-
-DURATION: 14 seconds
-SOUND: Spark/ignition sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -12924,24 +12133,6 @@ SLIDE 5 - CTA:
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
 5. The Sovereign accent
-```
-
-### CapCut Video Creation Guide
-```
-1. Show chart with clear IGN signal appearing
-2. Add spark visual effect when IGN fires
-3. Text overlays at timestamps:
-   - 0-2s: "IGN SIGNAL" with blue glow
-   - 2-4s: "Ignition — Momentum building?"
-   - 4-6s: "Something MAY be starting"
-   - 6-10s: What it's NOT (rapid)
-   - 10-12s: "It's AWARENESS"
-   - 12-14s: "The spark. Not the fire."
-4. Use spark/ignition sound at 25% volume
-5. Add actual IGN signal on chart screenshot
-6. Spark visual effects throughout
-7. Export: 1080x1920, 30fps
-8. Caption: "Spark, not fire. #pentarch #signalpilot"
 ```
 
 ---
@@ -13001,22 +12192,6 @@ Free drawdown guide — link in bio 🔗
 - Slide 4: Management rules (part 2)
 - Slide 5: Conclusion + CTA
 
-### TikTok Script
-```
-HOOK: "50% drawdown needs 100% gain to recover"
-
-[0-2s] DRAWDOWN MATH
-[2-4s] 10% loss → Need 11% to recover
-[4-6s] 20% loss → Need 25% to recover
-[6-8s] 50% loss → Need 100% to recover
-[8-10s] THE BIGGER THE HOLE
-[10-12s] THE HARDER TO CLIMB OUT
-[12-14s] Manage drawdowns. Survive.
-
-DURATION: 14 seconds
-SOUND: Falling then climbing sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -13055,25 +12230,6 @@ SLIDE 5 - Conclusion + CTA:
 2. "Free Drawdown Guide"
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Create equity curve animation showing drawdown
-2. Animate the "hole" getting deeper
-3. Text overlays at timestamps:
-   - 0-2s: "DRAWDOWN MATH"
-   - 2-8s: Show the math (10%, 20%, 50%)
-   - 8-10s: "THE BIGGER THE HOLE"
-   - 10-12s: "THE HARDER TO CLIMB OUT"
-   - 12-14s: "Manage drawdowns. Survive."
-4. Sound design:
-   - Falling sound as drawdown deepens
-   - Climbing sound for recovery (25% volume)
-5. Show visual of climbing out of progressively deeper holes
-6. End with recovery message
-7. Export: 1080x1920, 30fps
-8. Caption: "Manage the drawdown. #trading #riskmanagement"
 ```
 
 ---
@@ -13129,22 +12285,6 @@ Full article — link in bio 🔗
 - Slide 4: Absorption
 - Slide 5: CTA
 
-### TikTok Script
-```
-HOOK: "Candles show what happened. Order flow shows WHO."
-
-[0-2s] CANDLES = What happened
-[2-4s] ORDER FLOW = Who's doing it
-[4-6s] Buyers hitting ask?
-[6-7s] Bullish aggression
-[7-9s] Sellers hitting bid?
-[9-10s] Bearish aggression
-[10-12s] Large limits absorbing?
-[12-14s] Reversal incoming
-
-DURATION: 14 seconds
-SOUND: Market/trading sound
-```
 
 ### Canva Visual Creation Guide
 ```
@@ -13188,24 +12328,6 @@ SLIDE 5 - CTA:
 2. "Read the Full Article"
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Create order flow visualization (DOM, tape)
-2. Show buyers and sellers activity
-3. Text overlays at timestamps:
-   - 0-2s: "CANDLES = What happened"
-   - 2-4s: "ORDER FLOW = Who's doing it"
-   - 4-7s: Buyers hitting ask example
-   - 7-10s: Sellers hitting bid example
-   - 10-12s: Absorption example
-   - 12-14s: "Reversal incoming"
-4. Use trading pit/market sound at 20% volume
-5. Show DOM or tape reading visual
-6. Highlight aggressive vs passive orders
-7. Export: 1080x1920, 30fps
-8. Caption: "See who's trading. #orderflow #trading"
 ```
 
 ---
@@ -13252,22 +12374,6 @@ Read the full chronicle — link in bio 🔗
 
 **Format:** Single image (1080x1080) — Character art with quote
 
-### TikTok Script
-```
-HOOK: "Every chart is a map"
-
-[0-2s] THE CARTOGRAPHER 🗺️
-[2-4s] "Every chart is a map"
-[4-6s] "Every level is a landmark"
-[6-8s] Support = Where buyers appeared
-[8-10s] Resistance = Where sellers appeared
-[10-12s] The map reveals the terrain
-[12-14s] Navigate with precision.
-
-DURATION: 14 seconds
-SOUND: Explorer/cartographer ambient
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → 1080x1080px
@@ -13285,24 +12391,6 @@ SOUND: Explorer/cartographer ambient
 6. Attribution: "— The Cartographer" in #c9a962 gold
 7. Footer: "Signal Pilot Chronicle" in Inter
 8. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Import The Cartographer character art
-2. Add map/chart overlay effects (parallax)
-3. Text overlays at timestamps:
-   - 0-2s: "THE CARTOGRAPHER" with map icon
-   - 2-6s: Quote appearing
-   - 6-8s: "Support = Where buyers appeared"
-   - 8-10s: "Resistance = Where sellers appeared"
-   - 10-12s: "The map reveals the terrain"
-   - 12-14s: "Navigate with precision"
-4. Use explorer/cartographer ambient sound at 30% volume
-5. Add subtle compass animation
-6. Map unfurling effect in background
-7. Export: 1080x1920, 30fps
-8. Caption: "Map the market. #signalpilot #thecartographer"
 ```
 
 ---
@@ -13362,21 +12450,6 @@ Free MTF guide — link in bio 🔗
 - Slide 4: 1H timeframe example
 - Slide 5: The result + CTA
 
-### TikTok Script
-```
-HOOK: "One timeframe? A guess. Three timeframes? A trade."
-
-[0-2s] MTF CONFLUENCE
-[2-4s] DAILY: Support at $100
-[4-6s] 4H: Structure confirms
-[6-8s] 1H: Entry pattern appears
-[8-10s] THREE TIMEFRAMES
-[10-12s] Same zone
-[12-14s] HIGH PROBABILITY 🎯
-
-DURATION: 14 seconds
-SOUND: Alignment/confluence sound
-```
 
 ### Canva Visual Creation Guide
 ```
@@ -13421,25 +12494,6 @@ SLIDE 5 - Result + CTA:
    - "Trade with confidence"
 3. "Free MTF Guide" CTA
 4. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Create three timeframe charts of same asset
-2. Show alignment at same zone
-3. Text overlays at timestamps:
-   - 0-2s: "MTF CONFLUENCE"
-   - 2-4s: Daily timeframe with support
-   - 4-6s: 4H confirming structure
-   - 6-8s: 1H showing entry pattern
-   - 8-10s: "THREE TIMEFRAMES"
-   - 10-12s: "Same zone"
-   - 12-14s: "HIGH PROBABILITY" with target
-4. Use alignment/confluence sound at 25% volume
-5. Transition smoothly between timeframes
-6. Highlight the same price zone on each
-7. Export: 1080x1920, 30fps
-8. Caption: "Confluence wins. #trading #mtf"
 ```
 
 ---
@@ -13498,23 +12552,6 @@ Full shortcut guide — link in bio 🔗
 - Slide 4: Chart control & timeframes
 - Slide 5: CTA
 
-### TikTok Script
-```
-HOOK: "TradingView shortcuts you need to know"
-
-[0-2s] TRADINGVIEW SHORTCUTS ⌨️
-[2-3s] Alt+T = Trendline
-[3-4s] Alt+H = Horizontal line
-[4-5s] Alt+F = Fibonacci
-[5-6s] Alt+R = Rectangle
-[6-8s] + / - = Zoom
-[8-10s] Ctrl+S = Screenshot
-[10-12s] Learn them. Trade faster.
-
-DURATION: 12 seconds
-SOUND: Keyboard typing sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -13558,22 +12595,6 @@ SLIDE 5 - CTA:
 4. Signal Pilot logo
 ```
 
-### CapCut Video Creation Guide
-```
-1. Screen record TradingView using shortcuts
-2. Show the speed improvement
-3. Text overlays at timestamps:
-   - 0-2s: "TRADINGVIEW SHORTCUTS"
-   - 2-6s: Drawing shortcuts (rapid fire)
-   - 6-8s: Zoom shortcuts
-   - 8-10s: Screenshot shortcut
-   - 10-12s: "Learn them. Trade faster."
-4. Use keyboard typing sound at 20% volume
-5. Show keyboard visual with keys highlighting
-6. Include actual TradingView interface
-7. Export: 1080x1920, 30fps
-8. Caption: "Work faster. #tradingview #shortcuts"
-```
 
 ---
 
@@ -13738,24 +12759,6 @@ Start your journey — link in bio 🔗
 
 **Format:** Single image (1080x1080)
 
-### TikTok Script
-```
-HOOK: "From guessing to systematic in 3 months"
-
-[0-2s] 3 MONTHS AGO:
-[2-3s] Trading randomly
-[3-4s] No plan
-[4-5s] Emotional decisions
-[5-7s] TODAY:
-[7-8s] Following a system
-[8-9s] Trading with rules
-[9-10s] Finally consistent
-[10-12s] Education works.
-
-DURATION: 12 seconds
-SOUND: Transformation/success sound
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → Create Design → 1080x1080px
@@ -13780,23 +12783,6 @@ SOUND: Transformation/success sound
 8. Footer: "Education Works" in Inter
 9. Signal Pilot logo bottom right
 10. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Create before/after transformation visual
-2. Show chaotic trading → systematic trading transition
-3. Text overlays at timestamps:
-   - 0-2s: "3 MONTHS AGO" (darker tone)
-   - 2-5s: Before state bullet points
-   - 5-7s: "TODAY" (brighter tone)
-   - 7-10s: After state bullet points
-   - 10-12s: "Education works"
-4. Use transformation/success sound at 25% volume
-5. Add visual transition from chaos to order
-6. Color grade: muted → vibrant transition
-7. Export: 1080x1920, 30fps
-8. Caption: "Your transformation awaits. #signalpilot #success"
 ```
 
 ---
@@ -13859,22 +12845,6 @@ Free gap trading guide — link in bio 🔗
 - Slide 5: Context matters
 - Slide 6: CTA
 
-### TikTok Script
-```
-HOOK: "Not all gaps fill. Here's how to tell."
-
-[0-2s] GAP TYPES
-[2-4s] COMMON — Fills quickly
-[4-6s] BREAKAWAY — New trend, may not fill
-[6-8s] RUNAWAY — Trend accelerating
-[8-10s] EXHAUSTION — Trend ending, fills fast
-[10-12s] Context determines destiny
-[12-14s] Know your gaps.
-
-DURATION: 14 seconds
-SOUND: Jump/gap sound effect
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (6 slides):
@@ -13920,24 +12890,6 @@ SLIDE 6 - CTA:
 2. "Free Gap Guide"
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Create chart visualizations of each gap type
-2. Show gaps on real charts with labels
-3. Text overlays at timestamps:
-   - 0-2s: "GAP TYPES"
-   - 2-4s: Common gap with example
-   - 4-6s: Breakaway gap with example
-   - 6-8s: Runaway gap with example
-   - 8-10s: Exhaustion gap with example
-   - 10-14s: Conclusion
-4. Use jump/gap sound at 25% volume
-5. Add "jump" transition effect between gaps
-6. Show fill vs no-fill examples
-7. Export: 1080x1920, 30fps
-8. Caption: "Know your gaps. #trading #gaps"
 ```
 
 ---
@@ -13996,22 +12948,6 @@ Full article — link in bio 🔗
 - Slide 4: Edge & Time 80/20
 - Slide 5: Conclusion + CTA
 
-### TikTok Script
-```
-HOOK: "80% of your profits come from 20% of your trades"
-
-[0-2s] THE 80/20 RULE
-[2-4s] 80% profits from 20% trades
-[4-6s] 80% learning from 20% concepts
-[6-8s] 80% edge from 20% rules
-[8-10s] Find your 20%
-[10-12s] Eliminate the rest
-[12-14s] Simplify. Focus. Win.
-
-DURATION: 14 seconds
-SOUND: Focus/clarity sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -14046,23 +12982,6 @@ SLIDE 5 - CTA:
 2. "Read the Full Article"
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Create 80/20 pie chart animation
-2. Animate the split and emphasis on the 20%
-3. Text overlays at timestamps:
-   - 0-2s: "THE 80/20 RULE"
-   - 2-8s: Each application (profits, learning, edge)
-   - 8-10s: "Find your 20%"
-   - 10-12s: "Eliminate the rest"
-   - 12-14s: "Simplify. Focus. Win."
-4. Use focus/clarity sound at 25% volume
-5. Emphasize the "20%" in each line (different color)
-6. End with the 20% glowing
-7. Export: 1080x1920, 30fps
-8. Caption: "Find your 20%. #trading #pareto"
 ```
 
 ---
@@ -14114,22 +13033,6 @@ Save this. 🔖
 
 **Format:** Single image (1080x1080) — Quote card
 
-### TikTok Script
-```
-HOOK: "Every expert was once a beginner"
-
-[0-2s] EVERY EXPERT
-[2-4s] Was once a BEGINNER
-[4-6s] They lost money too
-[6-8s] They felt like quitting too
-[8-10s] But they KEPT GOING
-[10-12s] You're not behind
-[12-14s] You're beginning. Keep going.
-
-DURATION: 14 seconds
-SOUND: Inspirational/motivational sound
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → 1080x1080px
@@ -14149,23 +13052,6 @@ SOUND: Inspirational/motivational sound
 7. Footer: "Your journey is valid."
 8. Signal Pilot logo bottom right
 9. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Create journey visual from beginner to expert
-2. Show progression path with milestones
-3. Text overlays at timestamps:
-   - 0-2s: "EVERY EXPERT"
-   - 2-4s: "Was once a BEGINNER"
-   - 4-8s: Shared struggles (lost money, felt like quitting)
-   - 8-10s: "But they KEPT GOING"
-   - 10-14s: "You're beginning. Keep going."
-4. Use inspirational/motivational sound at 30% volume
-5. Animate path lighting up as progress shown
-6. Build to uplifting ending
-7. Export: 1080x1920, 30fps
-8. Caption: "Keep going. #trading #motivation"
 ```
 
 ---
@@ -14224,22 +13110,6 @@ Start your free trial — link in bio 🔗
 - Slide 4: How to use
 - Slide 5: CTA
 
-### TikTok Script
-```
-HOOK: "Overbought doesn't mean sell. Here's why."
-
-[0-2s] OVERBOUGHT = SELL?
-[2-3s] ❌ WRONG
-[3-5s] Markets can STAY overbought
-[5-7s] For WEEKS
-[7-9s] Overbought = STRETCHED
-[9-11s] Not reversed
-[11-13s] Wait for CONFIRMATION
-
-DURATION: 13 seconds
-SOUND: Correction/learning sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -14281,23 +13151,6 @@ SLIDE 5 - CTA:
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
 5. The Arbiter silhouette
-```
-
-### CapCut Video Creation Guide
-```
-1. Find chart where overbought stayed overbought (price kept rising)
-2. Show the misconception being disproven
-3. Text overlays at timestamps:
-   - 0-3s: "OVERBOUGHT = SELL?" with ❌
-   - 3-7s: Show price continuing up despite extreme
-   - 7-9s: "Overbought = STRETCHED"
-   - 9-11s: "Not reversed"
-   - 11-13s: "Wait for CONFIRMATION"
-4. Use correction/learning sound at 25% volume
-5. Show oscillator at top while price keeps rising
-6. End with proper usage guidance
-7. Export: 1080x1920, 30fps
-8. Caption: "Extremes need confirmation. #trading #oscillator"
 ```
 
 ---
