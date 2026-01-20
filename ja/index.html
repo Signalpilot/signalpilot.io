@@ -2791,15 +2791,32 @@
     @property --gradient-angle-offset{syntax:"<angle>";initial-value:0deg;inherits:false}
     @property --gradient-percent{syntax:"<percentage>";initial-value:20%;inherits:false}
     @property --gradient-shine{syntax:"<color>";initial-value:#3b82f6;inherits:false}
-    .shiny-cta{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:0.85rem 1.8rem;font-weight:600;font-size:0.95rem;color:#fff;background:linear-gradient(#0a0a0f,#0a0a0f) padding-box,conic-gradient(from calc(var(--gradient-angle) + var(--gradient-angle-offset)),transparent,#1e3a8a,#3b82f6,#60a5fa,#3b82f6,#1e3a8a,transparent) border-box;border:2px solid transparent;border-radius:12px;cursor:pointer;overflow:hidden;transition:transform 0.2s ease,box-shadow 0.3s ease;animation:shiny-spin 2.5s linear infinite;z-index:1;text-decoration:none}
-    @keyframes shiny-spin{to{--gradient-angle:360deg}}
+
+    .shiny-cta{
+      --gradient-angle:0deg;--gradient-angle-offset:0deg;--gradient-percent:20%;--gradient-shine:#3b82f6;
+      position:relative;overflow:hidden;border-radius:9999px;padding:0.875rem 1.5rem;font-size:0.875rem;line-height:1.2;font-weight:500;color:#fff;
+      background:linear-gradient(#0a0a0f,#0a0a0f) padding-box,conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)),transparent 0%,#1e3a8a 5%,var(--gradient-shine) 15%,#1e3a8a 30%,transparent 40%,transparent 100%) border-box;
+      border:2px solid transparent;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.1);cursor:pointer;isolation:isolate;z-index:0;
+      animation:shiny-spin 2.5s linear infinite;width:100%;display:inline-flex;align-items:center;justify-content:center;height:48px;
+    }
+    @keyframes shiny-spin{0%{--gradient-angle:0deg}100%{--gradient-angle:360deg}}
     .shiny-cta:active{transform:translateY(1px)}
-    .shiny-cta::before{content:'';pointer-events:none;position:absolute;inset:-2px;background:conic-gradient(from calc(var(--gradient-angle) + var(--gradient-angle-offset)),transparent,#1e3a8a,#3b82f6 var(--gradient-percent),var(--gradient-shine),#3b82f6 calc(100% - var(--gradient-percent)),#1e3a8a,transparent);border-radius:inherit;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask-composite:xor;padding:2px;animation:inherit;z-index:-1}
-    .shiny-cta::after{content:'';pointer-events:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;width:100%;aspect-ratio:1;background:linear-gradient(-50deg,transparent,#1e3a8a,transparent);mask-image:radial-gradient(circle at bottom,transparent 40%,black);opacity:0.6;animation:shiny-shimmer 4s linear infinite}
+    .shiny-cta::before{
+      content:'';pointer-events:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:0;
+      --size:calc(100% - 6px);--position:2px;--space:4px;width:var(--size);height:var(--size);
+      background:radial-gradient(circle at var(--position) var(--position),white 0.5px,transparent 0) padding-box;
+      background-size:var(--space) var(--space);background-repeat:space;
+      mask-image:conic-gradient(from calc(var(--gradient-angle) + 45deg),black,transparent 10% 90%,black);
+      border-radius:inherit;opacity:0.4;
+    }
+    .shiny-cta::after{
+      content:'';pointer-events:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;
+      width:100%;aspect-ratio:1;background:linear-gradient(-50deg,transparent,#1e3a8a,transparent);
+      mask-image:radial-gradient(circle at bottom,transparent 40%,black);opacity:0.6;
+      animation:shiny-shimmer 4s linear infinite;
+    }
     @keyframes shiny-shimmer{to{transform:translate(-50%,-50%) rotate(360deg)}}
-    .shiny-cta span,.shiny-cta>span{position:relative;z-index:2;display:inline-block}
-@media (max-width: 768px){.shiny-cta{animation:shiny-pulse 4s cubic-bezier(0.4,0,0.6,1) infinite;-webkit-animation:shiny-pulse 4s cubic-bezier(0.4,0,0.6,1) infinite;background:linear-gradient(#0a0a0f,#0a0a0f) padding-box,linear-gradient(135deg,#1e3a8a 0%,#3b82f6 50%,#1e3a8a 100%) border-box}.shiny-cta::before,.shiny-cta::after{display:none}@-webkit-keyframes shiny-pulse{0%,100%{box-shadow:0 0 12px rgba(59,130,246,0.25)}50%{box-shadow:0 0 25px rgba(59,130,246,0.4)}}@keyframes shiny-pulse{0%,100%{box-shadow:0 0 12px rgba(59,130,246,0.25)}50%{box-shadow:0 0 25px rgba(59,130,246,0.4)}}}
-    @media (prefers-reduced-motion: reduce){.shiny-cta,.shiny-cta::before,.shiny-cta::after{animation:none}}
+    .shiny-cta span{position:relative;z-index:2;display:inline-block}
 
     /* Founding Member Badge - Urgency Animation */
     .founding-badge {
@@ -4981,25 +4998,30 @@
             <strong>5つのシグナルが完全な市場サイクルをマッピングします。</strong> TDは売りが枯渇した時に出現。CAPは買いがクライマックスを迎えた時に出現。IGNは上昇モメンタムを確認。WRNは反転を警告。BDNは弱気を確定。
           </p>
           <div class="signal-legend" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;max-width:1200px;margin:0 auto">
-            <div style="display:flex;align-items:center;gap:0.75rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.75rem 1rem">
-              <span style="background:#00d9ff;color:#000;font-weight:700;padding:0.25rem 0.5rem;border-radius:4px;font-size:0.75rem">TD</span>
-              <span style="color:rgba(255,255,255,0.8);font-size:0.875rem;text-align:left">タッチダウン — 売り枯渇で発生</span>
+            <div class="signal-item" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.2);border-radius:8px;min-width:0">
+              <span class="signal-icon" style="width:8px;height:8px;border-radius:50%;background:#a855f7;box-shadow:0 0 8px rgba(168,85,247,.4);flex-shrink:0"></span>
+              <strong style="color:#c084fc;font-size:.9rem;white-space:nowrap;flex-shrink:0">TD</strong>
+              <span style="color:rgba(255,255,255,.7);font-size:.85rem">→ Touchdown (蓄積フェーズ)</span>
             </div>
-            <div style="display:flex;align-items:center;gap:0.75rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.75rem 1rem">
-              <span style="background:#00ff88;color:#000;font-weight:700;padding:0.25rem 0.5rem;border-radius:4px;font-size:0.75rem">IGN</span>
-              <span style="color:rgba(255,255,255,0.8);font-size:0.875rem;text-align:left">イグニッション — 強い上昇モメンタムを確認</span>
+            <div class="signal-item" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:rgba(20,184,166,.08);border:1px solid rgba(20,184,166,.2);border-radius:8px;min-width:0">
+              <span class="signal-icon" style="width:8px;height:8px;border-radius:50%;background:#14b8a6;box-shadow:0 0 8px rgba(20,184,166,.4);flex-shrink:0"></span>
+              <strong style="color:#2dd4bf;font-size:.9rem;white-space:nowrap;flex-shrink:0">IGN</strong>
+              <span style="color:rgba(255,255,255,.7);font-size:.85rem">→ Ignition (上昇フェーズ)</span>
             </div>
-            <div style="display:flex;align-items:center;gap:0.75rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.75rem 1rem">
-              <span style="background:#ff6600;color:#000;font-weight:700;padding:0.25rem 0.5rem;border-radius:4px;font-size:0.75rem">CAP</span>
-              <span style="color:rgba(255,255,255,0.8);font-size:0.875rem;text-align:left">キャップ — 買いクライマックスを警告</span>
+            <div class="signal-item" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:8px;min-width:0">
+              <span class="signal-icon" style="width:8px;height:8px;border-radius:50%;background:#f97316;box-shadow:0 0 8px rgba(249,115,22,.4);flex-shrink:0"></span>
+              <strong style="color:#fb923c;font-size:.9rem;white-space:nowrap;flex-shrink:0">CAP</strong>
+              <span style="color:rgba(255,255,255,.7);font-size:.85rem">→ Climax (クライマックスフェーズ)</span>
             </div>
-            <div style="display:flex;align-items:center;gap:0.75rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.75rem 1rem">
-              <span style="background:#ffcc00;color:#000;font-weight:700;padding:0.25rem 0.5rem;border-radius:4px;font-size:0.75rem">WRN</span>
-              <span style="color:rgba(255,255,255,0.8);font-size:0.875rem;text-align:left">ウォーニング — 潜在的反転を示唆</span>
+            <div class="signal-item" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.2);border-radius:8px;min-width:0">
+              <span class="signal-icon" style="width:8px;height:8px;border-radius:50%;background:#eab308;box-shadow:0 0 8px rgba(234,179,8,.4);flex-shrink:0"></span>
+              <strong style="color:#facc15;font-size:.9rem;white-space:nowrap;flex-shrink:0">WRN</strong>
+              <span style="color:rgba(255,255,255,.7);font-size:.85rem">→ Warning (分配フェーズ)</span>
             </div>
-            <div style="display:flex;align-items:center;gap:0.75rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.75rem 1rem">
-              <span style="background:#ff0066;color:#fff;font-weight:700;padding:0.25rem 0.5rem;border-radius:4px;font-size:0.75rem">BDN</span>
-              <span style="color:rgba(255,255,255,0.8);font-size:0.875rem;text-align:left">ブレイクダウン — 下降トレンドを確定</span>
+            <div class="signal-item" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:8px;min-width:0">
+              <span class="signal-icon" style="width:8px;height:8px;border-radius:50%;background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,.4);flex-shrink:0"></span>
+              <strong style="color:#f87171;font-size:.9rem;white-space:nowrap;flex-shrink:0">BDN</strong>
+              <span style="color:rgba(255,255,255,.7);font-size:.85rem">→ Breakdown (下落フェーズ)</span>
             </div>
           </div>
         </div>
