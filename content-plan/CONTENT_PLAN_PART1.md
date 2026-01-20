@@ -13211,22 +13211,6 @@ Free exhaustion guide — link in bio 🔗
 - Slide 5: Failed attempts
 - Slide 6: CTA
 
-### TikTok Script
-```
-HOOK: "The trend is dying. Here are the signs."
-
-[0-2s] TREND EXHAUSTION SIGNS
-[2-4s] ⚠️ Momentum divergence
-[4-6s] ⚠️ Volume declining
-[6-8s] ⚠️ Candles getting smaller
-[8-10s] ⚠️ Failed new highs
-[10-12s] The trend WHISPERS
-[12-14s] Before it SCREAMS
-
-DURATION: 14 seconds
-SOUND: Warning/fading sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (6 slides):
@@ -13266,24 +13250,6 @@ SLIDE 6 - CTA:
 2. "Free Exhaustion Guide"
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Find chart with clear trend exhaustion
-2. Mark each warning sign as it appears
-3. Text overlays at timestamps:
-   - 0-2s: "TREND EXHAUSTION SIGNS"
-   - 2-4s: Divergence with ⚠️
-   - 4-6s: Volume with ⚠️
-   - 6-8s: Candles with ⚠️
-   - 8-10s: Failed attempts with ⚠️
-   - 10-14s: "Whispers before screams"
-4. Use warning/fading sound at 25% volume
-5. Show trend visually weakening
-6. End with reversal occurring
-7. Export: 1080x1920, 30fps
-8. Caption: "Listen to the whispers. #trading #exhaustion"
 ```
 
 ---
@@ -13343,24 +13309,6 @@ Full article — link in bio 🔗
 - Slide 4: Options 2 & 3 - Wait or stay out
 - Slide 5: CTA
 
-### TikTok Script
-```
-HOOK: "Trading during news? Think twice."
-
-[0-2s] NEWS EVENT INCOMING
-[2-4s] ⚠️ Spreads WIDEN
-[4-5s] ⚠️ Slippage INCREASES
-[5-6s] ⚠️ Stops get BLOWN
-[6-8s] YOUR OPTIONS:
-[8-9s] Trade the reaction
-[9-10s] Wait for calm
-[10-11s] Or stay OUT
-[11-13s] Often, out is best
-
-DURATION: 13 seconds
-SOUND: Chaos then calm sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -13401,25 +13349,6 @@ SLIDE 5 - CTA:
 2. "Read the Full Article"
 3. Arrow to "Link in Bio"
 4. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Find chart with extreme news volatility
-2. Show the chaos of the spike
-3. Text overlays at timestamps:
-   - 0-2s: "NEWS EVENT INCOMING"
-   - 2-6s: Dangers with ⚠️
-   - 6-8s: "YOUR OPTIONS"
-   - 8-11s: Three options briefly
-   - 11-13s: "Often, out is best"
-4. Sound design:
-   - Chaos sound during spike
-   - Calm sound for solution (25% volume)
-5. Show the wild candle/movement
-6. End with calm/settled chart
-7. Export: 1080x1920, 30fps
-8. Caption: "Chaos isn't edge. #trading #news"
 ```
 
 ---
@@ -13476,25 +13405,6 @@ Read the full chronicle — link in bio 🔗
 
 **Format:** Single image (1080x1080) — All seven united
 
-### TikTok Script
-```
-HOOK: "When all seven align..."
-
-[0-2s] THE ELITE SEVEN
-[2-3s] 👑 Cycles
-[3-4s] 🔮 Regimes
-[4-5s] 🗺️ Levels
-[5-6s] ⚖️ Flow
-[6-7s] ⚔️ Momentum
-[7-8s] 👁️ Scanning
-[8-9s] 🎯 Unity
-[9-11s] WHEN THEY ALIGN
-[11-13s] The path becomes clear
-
-DURATION: 13 seconds
-SOUND: Epic assembly/power sound
-```
-
 ### Canva Visual Creation Guide
 ```
 1. Open Canva → 1080x1080px
@@ -13514,22 +13424,6 @@ SOUND: Epic assembly/power sound
 8. Energy/power visual emanating from center
 9. Signal Pilot logo bottom
 10. Export as PNG
-```
-
-### CapCut Video Creation Guide
-```
-1. Create animation of seven icons assembling
-2. Each icon appears one by one, building to unity
-3. Text overlays at timestamps:
-   - 0-2s: "THE ELITE SEVEN"
-   - 2-9s: Each icon appearing with name
-   - 9-11s: "WHEN THEY ALIGN"
-   - 11-13s: "The path becomes clear"
-4. Use epic assembly/power sound at 35% volume
-5. Add connection lines forming as icons appear
-6. Final moment: all connected with energy pulse
-7. Export: 1080x1920, 30fps
-8. Caption: "Stronger together. #signalpilot #eliteseven"
 ```
 
 ---
@@ -13590,22 +13484,6 @@ Free Fibonacci guide — link in bio 🔗
 - Slide 4: Key levels 2.0 & 2.618
 - Slide 5: How to use + CTA
 
-### TikTok Script
-```
-HOOK: "Retracements show pullbacks. Extensions show targets."
-
-[0-2s] FIBONACCI EXTENSIONS
-[2-4s] Retracements = Pullbacks
-[4-6s] Extensions = TARGETS
-[6-8s] 1.618 — Golden target
-[8-10s] 2.0 — Double the move
-[10-12s] Profit targets from MATH
-[12-14s] Not from hope
-
-DURATION: 14 seconds
-SOUND: Target/goal sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -13643,24 +13521,6 @@ SLIDE 5 - How to Use + CTA:
 3. Visual: Drawing Fib tool
 4. "Free Fibonacci Guide"
 5. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Find chart with clear Fibonacci extension targets hit
-2. Show price reaching each extension level
-3. Text overlays at timestamps:
-   - 0-2s: "FIBONACCI EXTENSIONS"
-   - 2-4s: "Retracements = Pullbacks"
-   - 4-6s: "Extensions = TARGETS"
-   - 6-8s: Show 1.618 hit
-   - 8-10s: Show 2.0 hit
-   - 10-14s: "Math, not hope"
-4. Use target/goal sound at 25% volume
-5. Mark extension levels clearly on chart
-6. Show price hitting each target
-7. Export: 1080x1920, 30fps
-8. Caption: "Math-based targets. #trading #fibonacci"
 ```
 
 ---
@@ -13721,22 +13581,6 @@ Full setup guide — link in bio 🔗
 - Slide 4: Step 5 + Best practices
 - Slide 5: CTA
 
-### TikTok Script
-```
-HOOK: "Signal Pilot in your pocket"
-
-[0-2s] SIGNAL PILOT MOBILE 📱
-[2-4s] Download TradingView app
-[4-6s] Log in — Indicators sync
-[6-8s] Set alerts
-[8-10s] Get notified anywhere
-[10-12s] Trade on the go
-[12-14s] Your indicators, your pocket
-
-DURATION: 14 seconds
-SOUND: Mobile/notification sound
-```
-
 ### Canva Visual Creation Guide
 ```
 CAROUSEL (5 slides):
@@ -13776,24 +13620,6 @@ SLIDE 5 - CTA:
 3. "Full Setup Guide"
 4. Arrow to "Link in Bio"
 5. Signal Pilot logo
-```
-
-### CapCut Video Creation Guide
-```
-1. Screen record mobile TradingView with Signal Pilot
-2. Show sync and alert setup process
-3. Text overlays at timestamps:
-   - 0-2s: "SIGNAL PILOT MOBILE"
-   - 2-4s: Download step
-   - 4-6s: Login and sync
-   - 6-8s: Set alerts
-   - 8-10s: Get notified
-   - 10-14s: "Your pocket"
-4. Use mobile notification sound at 20% volume
-5. Show actual phone screen recording
-6. Add phone frame overlay
-7. Export: 1080x1920, 30fps
-8. Caption: "Trade anywhere. #signalpilot #mobile"
 ```
 
 ---
@@ -13852,18 +13678,6 @@ SLIDE 5 - CTA:
 - [ ] Post 158: Elite Seven united visual
 - [ ] Post 159: Fibonacci extensions chart (5 carousel slides)
 - [ ] Post 160: Mobile phone with TradingView (5 carousel slides)
-
-### Videos Needed
-- [ ] Post 151: Transformation journey (12s)
-- [ ] Post 152: Gap types demonstration (14s)
-- [ ] Post 153: 80/20 animation (14s)
-- [ ] Post 154: Journey from beginner to expert (14s)
-- [ ] Post 155: Overbought staying overbought (13s)
-- [ ] Post 156: Trend exhaustion chart (14s)
-- [ ] Post 157: News volatility chaos (13s)
-- [ ] Post 158: Elite Seven assembly (13s)
-- [ ] Post 159: Fibonacci targets hit (14s)
-- [ ] Post 160: Mobile setup demo (14s)
 
 ### Character Assets
 - [ ] The Arbiter (Post 155)
