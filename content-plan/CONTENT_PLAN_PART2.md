@@ -98,6 +98,8 @@
 > Start with free. Upgrade if it helps.
 >
 > Link in bio
+>
+> Does transparency matter to you? Drop a 🙌 in the comments.
 
 **Hashtags:** #SignalPilot #FreeEducation #TradingTools #ValueComparison #TradingView #Forex #Crypto #DayTrading #SwingTrading #TradingIndicators #FreeCourse #TradingEducation #TradingCommunity #Transparency #HonestBusiness #LearnTrading #TradingValue #NoHiddenCosts #TradingJourney #EducationFirst
 
@@ -218,6 +220,8 @@
 > Free lesson. Link in bio
 >
 > Educational only. Not financial advice.
+>
+> Save this for your next chart analysis. Which pattern do you spot most often? 👇
 
 **Hashtags:** #ContinuationPatterns #TradingPatterns #SignalPilot #TradingEducation #TechnicalAnalysis #Forex #Crypto #DayTrading #SwingTrading #Flags #Pennants #Wedges #TradingView #ChartPatterns #TradingTips #LearnTrading #TradingCommunity #PatternRecognition #TrendTrading #Consolidation
 
@@ -328,6 +332,8 @@
 > - Forced selectivity
 >
 > Full article. Link in bio
+>
+> Tag a trader who's balancing work and trading. You're not alone. 💪
 
 **Hashtags:** #PartTimeTrading #WorkLifeBalance #SignalPilot #TradingLifestyle #SwingTrading #TradingEducation #Forex #Crypto #DayJob #TradingTips #TradingCommunity #LearnTrading #HigherTimeframes #AlertTrading #TradingFreedom #SideHustle #WorkAndTrade #TimeManagement #BusyTrader #TradingJourney
 
@@ -514,6 +520,8 @@
 > See it in action. Link in bio
 >
 > Educational demo. Not financial advice.
+>
+> Which phase do you think we're in right now? Drop your guess below 👇
 
 **Hashtags:** #Pentarch #CyclePhases #SignalPilot #TradingView #MarketCycles #TechnicalAnalysis #TradingIndicators #Forex #Crypto #DayTrading #SwingTrading #CycleTrading #TradingTools #TradingEducation #LearnTrading #TradingCommunity #PhaseAnalysis #MarketStructure #TrendCycle #SmartMoney
 
@@ -634,6 +642,8 @@
 > Free lesson. Link in bio
 >
 > Educational only. Not financial advice.
+>
+> Save this cheatsheet. Have you caught a reversal pattern recently? Share your experience 👇
 
 **Hashtags:** #ReversalPatterns #ChartPatterns #SignalPilot #TradingEducation #TechnicalAnalysis #Forex #Crypto #DayTrading #SwingTrading #DoubleTop #DoubleBottom #HeadAndShoulders #TradingView #TradingTips #LearnTrading #TradingCommunity #PatternRecognition #TrendReversal #Neckline #ClassicPatterns
 
@@ -735,6 +745,8 @@
 > Every moment is a new choice.
 >
 > Full article. Link in bio
+>
+> Be honest: have you ever held a losing trade just because you'd already held it too long? 🙋‍♂️
 
 **Hashtags:** #SunkCost #TradingPsychology #SignalPilot #TradingMistakes #TradingEducation #Forex #Crypto #DayTrading #SwingTrading #TradingMindset #CutLosses #TradingTips #TradingCommunity #LearnTrading #EmotionalTrading #RationalThinking #TradingJourney #LetItGo #TradingDecisions #ClearThinking
 
@@ -798,6 +810,8 @@
 > Read the full Chronicle
 >
 > Link in bio
+>
+> Can you sense when the storm is gathering? Share a time you felt the calm before a big move 🌩️
 
 **Hashtags:** #SignalPilotChronicle #TradingLore #Consolidation #SignalPilot #TradingCommunity #Forex #Crypto #TradingView #Volatility #TradingEducation #TradingStory #MarketWisdom #CryptoTrading #ForexTrading #DayTrader #SwingTrader #TradingMythology #Compression #CalmBeforeStorm #Breakout
 
@@ -937,6 +951,8 @@ Layer 6: Chronicle branding
 > Free lesson. Link in bio
 >
 > Educational only. Not financial advice.
+>
+> Which one gets you most? Fear, greed, revenge, or overconfidence? Be honest below 👇
 
 **Hashtags:** #TradingPsychology #MentalGame #SignalPilot #TradingEducation #TradingMindset #Forex #Crypto #DayTrading #SwingTrading #EmotionalControl #TradingTips #TradingCommunity #LearnTrading #Fear #Greed #Discipline #TradingJourney #MasterYourMind #SelfAwareness #TradingEmotions
 
@@ -1043,6 +1059,8 @@ Layer 6: Chronicle branding
 > Pro tip: Create multiple layouts for different strategies.
 >
 > Full guide in docs. Link in bio
+>
+> Save this for later. How many chart layouts do you use? Drop the number 👇
 
 **Hashtags:** #TradingView #ChartLayouts #SignalPilot #Documentation #Efficiency #TradingTools #Forex #Crypto #DayTrading #SwingTrading #ChartSetup #TradingTips #TradingCommunity #WorkSmarter #TradingEducation #Templates #TimeSaver #TradingHacks #ChartTemplates #Productivity
 
@@ -1291,6 +1309,8 @@ Layer 6: Chronicle branding
 > Pick what you need. Or use them all.
 >
 > Free guide in bio 📊
+>
+> Which indicator sounds most useful for your trading style? Comment below 👇
 
 **Hashtags:** #SignalPilot #TradingIndicators #TradingView #CompleteToolkit #Forex #Crypto #DayTrading #SwingTrading #Pentarch #VolumeOracle #JanusAtlas #PlutusFlow #HarmonicOscillator #AuguryGrid #OmniDeck #TradingTools #TradingEducation #TradingCommunity #ProTools #TechnicalAnalysis
 
@@ -1423,6 +1443,8 @@ Layer 6: Chronicle branding
 > Follow for more basics 🎓
 >
 > ⚠️ Educational only. Not financial advice.
+>
+> What's your favorite MA period? 20, 50, or 200? Drop it below 👇
 
 **Hashtags:** #MovingAverages #TradingBasics #SignalPilot #TradingEducation #TechnicalAnalysis #Forex #Crypto #DayTrading #SwingTrading #SMA #EMA #TradingView #TrendFilter #TradingTips #LearnTrading #TradingCommunity #ChartAnalysis #TrendTrading #MA200 #MovingAverage
 
@@ -1545,6 +1567,8 @@ Layer 6: Chronicle branding
 > The market will be there tomorrow.
 >
 > Follow for more psychology insights
+>
+> When was the last time you should have walked away but didn't? Share your lesson 💭
 
 **Hashtags:** #TradingDiscipline #WalkAway #SignalPilot #TradingPsychology #TradingEducation #Forex #Crypto #DayTrading #SwingTrading #MentalHealth #TradingTips #TradingCommunity #LearnTrading #ProtectCapital #TradingBreak #SelfCare #TradingMindset #EmotionalControl #KnowYourLimits #TradingLife
 
@@ -1620,6 +1644,8 @@ Layer 6: Chronicle branding
 > One trade is noise. Many trades reveal truth.
 >
 > Save this. Follow for more.
+>
+> Do you trust your edge through losing streaks? Be honest 👇
 
 **Hashtags:** #TradingEdge #Process #SignalPilot #TradingMindset #TradingPsychology #TraderLife #TradingEducation #Forex #Crypto #DayTrading #SwingTrading #Probability #TradingTips #TradingCommunity #LearnTrading #Expectancy #LongTermThinking #TradingMath #TrustTheProcess #Statistics
 
@@ -1736,6 +1762,8 @@ Layer 6: Chronicle branding
 > Try it free. Link in bio.
 >
 > ⚠️ Educational demo. Not financial advice.
+>
+> How many symbols do you track? Quality over quantity? Drop your number 👇
 
 **Hashtags:** #AuguryGrid #SignalPilot #TradingView #Scanner #Filtering #TradingTools #Forex #Crypto #DayTrading #SwingTrading #MarketScanner #TradingIndicators #TradingEducation #LearnTrading #TradingCommunity #FocusedTrading #SmartScanning #Watchlist #ConditionFilter #Efficiency
 
@@ -1861,6 +1889,8 @@ Layer 6: Chronicle branding
 > Free pattern guide in bio 🎓
 >
 > ⚠️ Educational only. Not financial advice.
+>
+> Save this cheatsheet. Which pattern do you rely on most? 🕯️
 
 **Hashtags:** #CandlestickPatterns #PriceAction #SignalPilot #TradingEducation #TechnicalAnalysis #Forex #Crypto #DayTrading #SwingTrading #Doji #Hammer #Engulfing #TradingView #ChartPatterns #TradingTips #LearnTrading #TradingCommunity #JapaneseCandlesticks #PatternRecognition #CandleAnalysis
 
@@ -1992,6 +2022,8 @@ Layer 6: Chronicle branding
 > You don't have to figure it all out alone.
 >
 > Follow for more insights
+>
+> Have you had a trading mentor? What did they teach you? Share below 👇
 
 **Hashtags:** #TradingMentor #TradingEducation #SignalPilot #Mentorship #TradingCommunity #Forex #Crypto #DayTrading #SwingTrading #LearnTrading #TradingTips #Guidance #TradingJourney #Accountability #TradingDevelopment #FindAMentor #TradingSupport #GrowthMindset #TradingHelp #MentorshipMatters
 
@@ -2105,6 +2137,8 @@ Layer 6: Chronicle branding
 >
 > Read the full Chronicle 📜
 > Link in bio
+>
+> What's one thing you're still learning about trading? Share your journey 🌟
 
 **Hashtags:** #SignalPilotChronicle #TradingLore #NeverStopLearning #SignalPilot #TradingCommunity #Forex #Crypto #TradingView #LifelongLearning #TradingEducation #TradingStory #MarketWisdom #CryptoTrading #ForexTrading #DayTrader #SwingTrader #TradingMythology #Humility #Curiosity #GrowthMindset
 
@@ -2234,6 +2268,8 @@ Layer 6: Chronicle branding
 > Free calculator in bio 🧮
 >
 > ⚠️ Educational only. Not financial advice.
+>
+> Save this formula. What % do you risk per trade? Drop your answer 👇
 
 **Hashtags:** #PositionSizing #RiskManagement #SignalPilot #TradingEducation #TradingMath #Forex #Crypto #DayTrading #SwingTrading #TradingFormula #TradingView #TradingTips #LearnTrading #TradingCommunity #RiskPerTrade #MoneyManagement #TradingCalculator #ProtectCapital #TradingStrategy #SmartSizing
 
@@ -2358,6 +2394,8 @@ Layer 6: Chronicle branding
 > Don't struggle alone. Reach out.
 >
 > Link in bio
+>
+> Drop a 👋 if you've joined our Discord community!
 
 **Hashtags:** #SignalPilot #Support #CustomerService #Documentation #TradingCommunity #Forex #Crypto #TradingView #HelpDesk #TradingHelp #Discord #TradingEducation #CustomerCare #WeAreHere #TradingSupport #AskUs #CommunityFirst #TradersHelpingTraders #GetHelp #ReachOut
 
@@ -3026,6 +3064,8 @@ Layer 6: Chronicle branding
 > Try it free. Link in bio.
 >
 > ⚠️ Educational demo. Not financial advice.
+>
+> Do you track accumulation vs distribution? What's your method? 👇
 
 **Hashtags:** #PlutusFlow #Accumulation #Distribution #SignalPilot #TradingView #VolumeAnalysis #TechnicalAnalysis #TradingIndicators #Forex #Crypto #DayTrading #SwingTrading #SmartMoney #Wyckoff #TradingTools #TradingEducation #LearnTrading #TradingCommunity #FlowAnalysis #MarketPhases
 
@@ -3160,6 +3200,8 @@ Layer 6: Chronicle branding
 > Free guide in bio 🎓
 >
 > ⚠️ Educational only. Not financial advice.
+>
+> Aggressive or conservative entry? Which do you prefer for breakouts? 💬
 
 **Hashtags:** #BreakoutTrading #Breakouts #SignalPilot #TradingEducation #TechnicalAnalysis #Forex #Crypto #DayTrading #SwingTrading #RangeBreak #VolumeConfirmation #TradingView #ChartPatterns #TradingTips #LearnTrading #TradingCommunity #MomentumTrading #TradingStrategy #Consolidation #TrendStart
 
@@ -3287,6 +3329,8 @@ Layer 6: Chronicle branding
 > That's all that matters.
 >
 > Follow for more psychology insights
+>
+> Has comparing yourself to others ever hurt your trading? Share your experience 💭
 
 **Hashtags:** #ComparisonTrap #TradingPsychology #SignalPilot #SelfImprovement #TradingEducation #Forex #Crypto #DayTrading #SwingTrading #TradingMindset #PersonalGrowth #TradingCommunity #LearnTrading #YourJourney #StopComparing #FocusOnYou #TradingJourney #MentalHealth #GrowthMindset #ProgressNotPerfection
 
@@ -4074,6 +4118,8 @@ Layer 6: Chronicle branding
 > Follow for more basics 🎓
 >
 > ⚠️ Educational only. Not financial advice.
+>
+> Which session do you trade most? London, NY, or Asia? 🌍
 
 **Hashtags:** #TradingSessions #ForexSessions #SignalPilot #TradingEducation #TechnicalAnalysis #Forex #Crypto #DayTrading #SwingTrading #LondonSession #NYSession #AsiaSession #TradingView #TradingTips #LearnTrading #TradingCommunity #SessionTrading #MarketHours #GlobalMarkets #Volatility
 
@@ -4200,6 +4246,8 @@ Layer 6: Chronicle branding
 > You didn't get here by accident. Own it.
 >
 > Follow for more psychology insights
+>
+> Ever felt like a "fraud" after a winning streak? You're not alone. Share below 💬
 
 **Hashtags:** #ImposterSyndrome #TradingPsychology #SignalPilot #MentalHealth #TradingEducation #Forex #Crypto #DayTrading #SwingTrading #TradingMindset #SelfDoubt #TradingCommunity #LearnTrading #OwnYourSuccess #TradingJourney #MentalGame #YouDeserveIt #GrowthMindset #TradingReality #SelfBelief
 
@@ -4281,6 +4329,8 @@ Layer 6: Chronicle branding
 > Reality is the only tradeable thing.
 >
 > Save this 📌
+>
+> Have you ever forced a trade because of what you EXPECTED? We've all been there 🙋
 
 **Hashtags:** #TradeTheChart #PresentMoment #SignalPilot #TradingMindset #TradingPsychology #TraderLife #TradingEducation #Forex #Crypto #DayTrading #SwingTrading #TradingReality #TradingTips #TradingCommunity #LearnTrading #NoExpectations #BePresent #TradingWisdom #AcceptReality #ChartReading
 
@@ -5970,6 +6020,8 @@ Layer 6: Chronicle branding
 > Confidence comes from evidence, not hope.
 >
 > Follow for more insights
+>
+> What gave YOU confidence as a trader? Journaling? Surviving a drawdown? Share below 💪
 
 **Hashtags:** #TradingConfidence #TradingPsychology #SignalPilot #MentalGame #TradingEducation #Forex #Crypto #DayTrading #SwingTrading #TradingMindset #BuildConfidence #TradingTips #TradingCommunity #LearnTrading #Journaling #Resilience #TradingJourney #SelfTrust #Evidence #GrowthMindset
 
@@ -6078,6 +6130,8 @@ Layer 6: Chronicle branding
 >
 > Read the full Chronicle 📜
 > Link in bio
+>
+> Which of the Elite Seven resonates most with your trading style? 🔮
 
 **Hashtags:** #SignalPilotChronicle #TradingLore #SevenAligned #SignalPilot #TradingCommunity #Forex #Crypto #TradingView #Confluence #TradingEducation #TradingStory #MarketWisdom #CryptoTrading #ForexTrading #DayTrader #SwingTrader #TradingMythology #RareEvent #Alignment #EliteSeven
 
@@ -6213,6 +6267,8 @@ Layer 6: Chronicle branding
 > Free guide in bio 🎓
 >
 > ⚠️ Educational only. Not financial advice.
+>
+> Which stop loss type do you use most? Fixed, structure, ATR, or time? 🛑
 
 **Hashtags:** #StopLoss #RiskManagement #SignalPilot #TradingEducation #TechnicalAnalysis #Forex #Crypto #DayTrading #SwingTrading #ATR #TradingView #TradingTips #LearnTrading #TradingCommunity #RiskControl #StopLossPlacement #TradingStrategy #ProtectCapital #TradingRules #ExitStrategy
 
@@ -40554,3 +40610,1176 @@ Each category:
 **The journey continues — with you.**
 
 ⚜️🔮🗺️⚖️🎵👁️⚔️
+
+---
+
+# SOCIAL PROOF TEMPLATES (Supplemental Batch)
+
+## 25 Ready-to-Use Social Proof Post Templates
+
+These templates are designed to showcase community success, build trust, and demonstrate value. Customize with real testimonials and community feedback.
+
+---
+
+## SP-001 — TESTIMONIAL: CLARITY GAINED
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Trial
+
+### Twitter/X
+> "Before Signal Pilot, I had 12 indicators on my chart and no idea what I was looking at. Now I have 2, and I actually understand what's happening." — Community Member
+
+### Instagram
+> 💬 FROM THE COMMUNITY: "Before Signal Pilot, I had 12 indicators on my chart and no idea what I was looking at. Now I have 2, and I actually understand what's happening." — Community Member
+>
+> What's your chart look like now vs when you started? 👇
+
+---
+
+## SP-002 — TESTIMONIAL: EDUCATION FOCUS
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Education Hub
+
+### Twitter/X
+> "Most indicator vendors just sell you a tool. Signal Pilot gave me 82 free lessons to actually understand what I'm looking at." — Community Member
+
+### Instagram
+> 💬 FROM THE COMMUNITY: "Most indicator vendors just sell you a tool. Signal Pilot gave me 82 free lessons to actually understand what I'm looking at." — Community Member
+>
+> Have you explored the Education Hub yet? 🎓
+
+---
+
+## SP-003 — TESTIMONIAL: NON-REPAINTING
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Trial
+
+### Twitter/X
+> "I tested Signal Pilot with bar replay for 2 weeks. Not a single signal changed. Not one." — Community Member
+
+### Instagram
+> 💬 FROM THE COMMUNITY: "I tested Signal Pilot with bar replay for 2 weeks. Not a single signal changed. Not one." — Community Member
+>
+> Have you ever tested if your indicators repaint? 🔍
+
+---
+
+## SP-004 — COMMUNITY MILESTONE
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Follow
+
+### Twitter/X
+> 🎉 [X,000] traders in the Signal Pilot community. From launch to here — thank you. 🙏
+
+### Instagram
+> 🎉 [X,000] TRADERS STRONG — To everyone who's been part of this journey — thank you.
+>
+> Drop a 🎉 if you're part of the community!
+
+---
+
+## SP-005 — BEFORE/AFTER: APPROACH
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Education Hub
+
+### Twitter/X
+> BEFORE: 15 indicators, conflicting signals
+> AFTER: 3 indicators, understanding why
+>
+> The shift isn't more tools. It's better understanding.
+
+### Instagram
+> BEFORE vs AFTER: BEFORE ❌ 15 indicators, conflicting signals | AFTER ✅ 3 indicators, understanding WHY
+>
+> What did YOUR chart look like when you started? 👇
+
+---
+
+## SP-006 — COMMUNITY HIGHLIGHT
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Follow
+
+### Twitter/X
+> Shoutout to the Discord community for helping new members every day. Questions answered. Charts reviewed. Support given. 🙏
+
+### Instagram
+> 💬 COMMUNITY SPOTLIGHT — Every day in our Discord: ✅ Questions answered ✅ Charts reviewed ✅ Knowledge shared
+>
+> What's the most helpful trading community you've been part of? 💬
+
+---
+
+## SP-007 — FAQ: WHY NO ALERTS?
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Education Hub
+
+### Twitter/X
+> FAQ: "Why doesn't Signal Pilot send buy/sell alerts?" — Because we don't want you dependent on us. We want you to UNDERSTAND.
+
+### Instagram
+> ❓ FAQ: "Why no alerts?" — Because that would make you dependent on us. YOU make the decision. YOU understand why.
+>
+> Do you prefer alerts or understanding? 🤔
+
+---
+
+## SP-008 — TESTIMONIAL: SUPPORT QUALITY
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Docs
+
+### Twitter/X
+> "Asked a question in Discord at 11pm. Had an answer with screenshots by midnight." — Community Member
+
+### Instagram
+> 💬 FROM THE COMMUNITY: "Asked a question in Discord at 11pm. Had an answer with screenshots by midnight." — Community Member
+>
+> What's the best support experience you've had with a trading tool? 💬
+
+---
+
+## SP-009 — WHY TRADERS CHOOSE
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Trial
+
+### Twitter/X
+> Why traders choose Signal Pilot: → Non-repainting (verified) → 82 free lessons (no paywall) → 7-day money-back → No alerts dependency
+
+### Instagram
+> 🛠️ WHY TRADERS CHOOSE SIGNAL PILOT: ✅ Non-repainting ✅ 82 free lessons ✅ 7-day money-back ✅ No alerts dependency
+>
+> What matters most to you in a trading tool? 👇
+
+---
+
+## SP-010 — TESTIMONIAL: DOCUMENTATION
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Docs
+
+### Twitter/X
+> "The documentation is better than most paid courses I've taken. And it's free." — Community Member
+
+### Instagram
+> 💬 FROM THE COMMUNITY: "The documentation is better than most paid courses I've taken. And it's free." — Community Member
+>
+> Have you explored the full docs yet? 📚
+
+---
+
+## SP-011 — COMMUNITY STATS
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Follow
+
+### Twitter/X
+> 📊 Community Update: → [X]+ lessons completed → [X]+ Discord members active daily → [X]+ countries represented — Global. Growing. Grateful. 🌍
+
+### Instagram
+> 📊 COMMUNITY BY THE NUMBERS: 🎓 [X]+ lessons completed 💬 [X]+ Discord active 🌍 [X]+ countries
+>
+> Where are you joining from? Drop your country 🌍
+
+---
+
+## SP-012 — TESTIMONIAL: MINDSET SHIFT
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Education Hub
+
+### Twitter/X
+> "Signal Pilot didn't just give me indicators. It changed how I think about markets." — Community Member
+
+### Instagram
+> 💬 FROM THE COMMUNITY: "Signal Pilot didn't just give me indicators. It changed how I think about markets." — Community Member
+>
+> What's one thing that changed how YOU think about trading? 💭
+
+---
+
+## SP-013 — REFUND TRANSPARENCY
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Trial
+
+### Twitter/X
+> Our refund policy: 7 days. Full refund. No questions. Why? Because confident products don't need traps.
+
+### Instagram
+> 💯 REFUND POLICY: 7 days. Full refund. No questions asked. If Signal Pilot isn't for you, we part as friends.
+>
+> Does transparency like this matter to you? 👇
+
+---
+
+## SP-014 — TESTIMONIAL: SIMPLIFICATION
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Trial
+
+### Twitter/X
+> "I used to think more indicators = better analysis. Signal Pilot taught me the opposite." — Community Member
+
+### Instagram
+> 💬 FROM THE COMMUNITY: "I used to think more indicators = better analysis. Signal Pilot taught me the opposite." — Community Member
+>
+> How many indicators are on your chart right now? Be honest 👇
+
+---
+
+## SP-015 — COMMUNITY CULTURE
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Follow
+
+### Twitter/X
+> Signal Pilot community rules: → No flexing P/L screenshots → No ego, just learning → Questions welcomed, not mocked — Culture matters.
+
+### Instagram
+> 📋 OUR COMMUNITY CULTURE: ❌ No P/L flexing ❌ No ego ✅ Questions welcomed ✅ Growth celebrated
+>
+> What's your biggest pet peeve in trading communities? 🙄
+
+---
+
+## SP-016 — PRICING TRANSPARENCY
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Trial
+
+### Twitter/X
+> Signal Pilot pricing: Monthly $99 | Yearly $699 | Lifetime $1,799 — No hidden fees. No upsells. No surprises.
+
+### Instagram
+> 💰 PRICING TRANSPARENCY: Monthly $99 | Yearly $699 (save $489) | Lifetime $1,799 — No hidden fees.
+>
+> Which option fits your trading journey? 💭
+
+---
+
+## SP-017 — TESTIMONIAL: PATIENCE
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Education Hub
+
+### Twitter/X
+> "The Education Hub taught me patience isn't passive. It's actively waiting for YOUR setup." — Community Member
+
+### Instagram
+> 💬 FROM THE COMMUNITY: "The Education Hub taught me patience isn't passive. It's actively waiting for YOUR setup." — Community Member
+>
+> What's your hardest lesson in trading patience? ⏳
+
+---
+
+## SP-018 — YEARLY RECAP TEMPLATE
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Follow
+
+### Twitter/X
+> [Year] Signal Pilot Recap: → [X] major updates shipped → [X]+ new lessons → 0 security incidents → [X]★ rating maintained
+
+### Instagram
+> 📊 [YEAR] RECAP: ✅ [X] updates shipped ✅ [X]+ new lessons ✅ 0 security incidents
+>
+> What feature would you like to see next? 👇
+
+---
+
+## SP-019 — TESTIMONIAL: DISCORD VALUE
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Trial
+
+### Twitter/X
+> "The Discord alone is worth the subscription. Real traders. Real discussions. No guru worship." — Community Member
+
+### Instagram
+> 💬 FROM THE COMMUNITY: "The Discord alone is worth the subscription. Real traders. Real discussions. No guru worship." — Community Member
+>
+> What do you value most in a trading community? 💬
+
+---
+
+## SP-020 — FAQ: SKILL LEVEL
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Education Hub
+
+### Twitter/X
+> FAQ: "Is Signal Pilot for beginners?" Yes, Education Hub starts from zero. "For experienced traders?" Yes, indicators add depth.
+
+### Instagram
+> ❓ FAQ: "Who is Signal Pilot for?" BEGINNERS: Education Hub starts from zero | EXPERIENCED: Non-repainting adds depth
+>
+> Where are you in your journey? 📈
+
+---
+
+## SP-021 — TRUST SIGNALS
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Trial
+
+### Twitter/X
+> Trust signals: ✓ Public docs ✓ Bar replay testable ✓ Active Discord ✓ Money-back guarantee — We earn trust. We don't demand it.
+
+### Instagram
+> ✅ WHY TRADERS TRUST US: → Public documentation → Bar replay testable → Active Discord → Money-back guarantee
+>
+> What matters most when choosing tools? 👇
+
+---
+
+## SP-022 — TESTIMONIAL: CYCLES
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Trial
+
+### Twitter/X
+> "Pentarch changed everything for me. I finally understand where we are in the cycle." — Community Member
+
+### Instagram
+> 💬 FROM THE COMMUNITY: "Pentarch changed everything for me. I finally understand where we are in the cycle." — Community Member
+>
+> Do you track cycle phases? How? 🔄
+
+---
+
+## SP-023 — VALUES STATEMENT
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Follow
+
+### Twitter/X
+> Signal Pilot values: 1. Truth over hype 2. Education over dependency 3. Simplicity over complexity 4. Community over competition
+
+### Instagram
+> 🎯 OUR VALUES: 1️⃣ Truth over hype 2️⃣ Education over dependency 3️⃣ Simplicity over complexity 4️⃣ Community over competition
+>
+> Which value resonates most with you? 🎯
+
+---
+
+## SP-024 — TESTIMONIAL: TIME SAVED
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Trial
+
+### Twitter/X
+> "Augury Grid saves me 2 hours a day. Instead of flipping through 50 charts, I see everything at once." — Community Member
+
+### Instagram
+> 💬 FROM THE COMMUNITY: "Augury Grid saves me 2 hours a day. Instead of flipping through 50 charts, I see everything at once." — Community Member
+>
+> How much time do you spend flipping through charts? ⏱️
+
+---
+
+## SP-025 — COMMITMENT STATEMENT
+**Type:** Social Proof | **Pillar:** P6 | **CTA:** Follow
+
+### Twitter/X
+> Our commitment: → Keep education free → Never add repainting → Respond to every message → Improve continuously — This is who we are.
+
+### Instagram
+> 🤝 OUR COMMITMENT: ✅ Education free — always ✅ No repainting — non-negotiable ✅ Every message answered ✅ Continuous improvement
+>
+> What commitments matter most to you? 🤝
+
+---
+
+# END OF SOCIAL PROOF TEMPLATES
+
+*25 templates ready for customization*
+*Replace [Community Member] with actual testimonials*
+*Update metrics with current numbers*
+
+---
+
+# REACTIVE TEMPLATES (Market Events)
+
+## 10 Ready-to-Deploy Templates for Market Events
+
+Deploy these templates within 1-4 hours of major market events. Customize with specific details.
+
+---
+
+## RT-001 — MARKET CRASH RESPONSE
+**Trigger:** Major market decline (>3% single day)
+**Deploy:** Within 2-4 hours
+
+### Twitter/X
+> Markets down [X]% today.
+>
+> Reminder:
+> → This happened before
+> → This will happen again
+> → Panic selling rarely helps
+> → Your plan should have accounted for this
+>
+> Zoom out. Breathe. Stick to the plan.
+
+**Hashtags:** #MarketCrash #StayCalm #TradingPsychology #SignalPilot
+
+### Instagram
+> 📉 MARKET DOWN [X]% TODAY
+>
+> Before you panic:
+>
+> ✅ This happened before (it always does)
+> ✅ This will happen again (it always does)
+> ✅ Panic selling rarely helps long-term
+> ✅ Your plan should account for this
+>
+> Questions to ask yourself:
+>
+> → Did your stops trigger? (If so, the plan worked)
+> → Is this a buying opportunity? (For some, maybe)
+> → Are you making decisions from fear? (Bad sign)
+>
+> Zoom out. Breathe. Stick to your plan.
+>
+> How are you handling today's move? 💭
+
+---
+
+## RT-002 — FOMC/FED DAY
+**Trigger:** Federal Reserve rate decision
+**Deploy:** 1-2 hours before announcement
+
+### Twitter/X
+> FOMC day.
+>
+> Expectations: [Hike/Cut/Hold]
+>
+> Remember:
+> → The announcement isn't the trade
+> → The reaction to the announcement is
+> → Wait for dust to settle
+> → Don't let FOMO decide
+>
+> Patience wins today.
+
+**Hashtags:** #FOMC #FedDecision #RateDecision #TradingCalm
+
+### Instagram
+> ⚠️ FOMC DAY
+>
+> Rate decision: [Expected action]
+>
+> WHAT TO EXPECT:
+> → Volatility spike on announcement
+> → Potential reversal after initial move
+> → Choppy conditions for hours
+>
+> WHAT TO DO:
+> ❌ Don't trade the announcement moment
+> ✅ Wait for dust to settle (30-60 min)
+> ✅ Let the market show direction
+> ✅ Smaller size on event days
+>
+> The announcement isn't the trade. The reaction is.
+>
+> What's your FOMC day strategy? 📊
+
+---
+
+## RT-003 — CPI DATA RELEASE
+**Trigger:** Inflation data release
+**Deploy:** 1 hour before release
+
+### Twitter/X
+> CPI day.
+>
+> Expected: [X]%
+> Previous: [X]%
+>
+> Higher than expected = potential [direction]
+> Lower than expected = potential [direction]
+>
+> But first moves often reverse. Wait for confirmation.
+
+**Hashtags:** #CPI #Inflation #EconomicData #TradingCalendar
+
+### Instagram
+> 📊 CPI DATA TODAY
+>
+> Expected: [X]%
+> Previous: [X]%
+>
+> POSSIBLE SCENARIOS:
+>
+> HOT (Higher than expected):
+> → Potentially bearish for risk assets
+> → Fed may stay hawkish longer
+>
+> COOL (Lower than expected):
+> → Potentially bullish for risk assets
+> → Fed pivot narrative strengthens
+>
+> BUT REMEMBER:
+> → First move often reverses
+> → Wait for confirmation
+> → Don't chase the spike
+>
+> How do you trade data releases? 📈
+
+---
+
+## RT-004 — FLASH CRASH
+**Trigger:** Sudden, extreme price movement (>5% in minutes)
+**Deploy:** As it's happening or immediately after
+
+### Twitter/X
+> Flash crash just happened.
+>
+> → Don't panic sell into it
+> → Don't FOMO buy the dip
+> → Wait for stabilization
+> → Check your positions calmly
+>
+> Emotional decisions in chaos = regret.
+
+**Hashtags:** #FlashCrash #StayCalmTrader #MarketChaos #Volatility
+
+### Instagram
+> ⚡ FLASH CRASH ALERT
+>
+> [Asset] just moved [X]% in [X] minutes.
+>
+> WHAT TO DO NOW:
+>
+> ❌ DON'T panic sell into the crash
+> ❌ DON'T FOMO buy the "dip"
+> ❌ DON'T make emotional decisions
+>
+> ✅ DO check your positions calmly
+> ✅ DO wait for stabilization (15-30 min)
+> ✅ DO assess if stops triggered (plan worked)
+> ✅ DO zoom out for context
+>
+> Flash crashes are designed to shake you out.
+> Don't let them.
+>
+> How are you handling this? 💬
+
+---
+
+## RT-005 — MAJOR BREAKOUT
+**Trigger:** Asset breaks significant level (ATH, major support/resistance)
+**Deploy:** Within 1-2 hours of breakout
+
+### Twitter/X
+> [Asset] just broke [level].
+>
+> Before you FOMO:
+> → Is there volume confirming?
+> → Has it retested the level?
+> → Is this chase or conviction?
+>
+> Breakouts need follow-through. Watch, don't chase.
+
+**Hashtags:** #Breakout #ATH #TechnicalAnalysis #NoFOMO
+
+### Instagram
+> 🚀 BREAKOUT ALERT
+>
+> [Asset] just broke [significant level]!
+>
+> BEFORE YOU JUMP IN:
+>
+> ✅ Is volume confirming the break?
+> ✅ Has it closed above/below the level?
+> ✅ Is a retest coming? (Often does)
+> ✅ Are you chasing or following plan?
+>
+> BREAKOUT CHECKLIST:
+> → Volume spike? [Check]
+> → Clear close beyond level? [Check]
+> → Plan in place? [Check]
+>
+> Breakouts need follow-through.
+> Watch, don't blindly chase.
+>
+> Are you trading this breakout? How? 📊
+
+---
+
+## RT-006 — TRENDING TOPIC RESPONSE
+**Trigger:** Trading topic goes viral (good or bad)
+**Deploy:** Within 4-8 hours of trend
+
+### Twitter/X
+> Everyone's talking about [trending topic] today.
+>
+> Our take: [Educational perspective]
+>
+> Remember:
+> → Viral ≠ valuable
+> → FOMO ≠ analysis
+> → Headlines ≠ strategy
+>
+> Think before you trade the trend.
+
+**Hashtags:** #TrendingNow #TradingTake #Education #ThinkFirst
+
+### Instagram
+> 📢 EVERYONE'S TALKING ABOUT [TOPIC]
+>
+> Here's our educational take:
+>
+> [Insert balanced, educational perspective]
+>
+> REMEMBER:
+>
+> ❌ Viral doesn't mean valuable
+> ❌ FOMO isn't analysis
+> ❌ Headlines aren't strategy
+>
+> Questions to ask:
+> → Is this opportunity or hype?
+> → What's my actual edge here?
+> → Am I trading or gambling?
+>
+> Think before you trade the trend.
+>
+> What's your take on [topic]? 💭
+
+---
+
+## RT-007 — BLACK SWAN EVENT
+**Trigger:** Unexpected major event (geopolitical, institutional failure, etc.)
+**Deploy:** Within 4-12 hours, when facts are clearer
+
+### Twitter/X
+> [Event] has markets reacting.
+>
+> This is not normal volatility. This is uncertainty.
+>
+> Appropriate responses:
+> → Reduce exposure
+> → Widen stops
+> → Wait for clarity
+> → Accept you don't know
+>
+> Sometimes the best trade is no trade.
+
+**Hashtags:** #BlackSwan #Uncertainty #RiskManagement #WaitAndSee
+
+### Instagram
+> ⚠️ [MAJOR EVENT] — MARKET IMPACT
+>
+> This is not normal volatility.
+> This is genuine uncertainty.
+>
+> APPROPRIATE RESPONSES:
+>
+> ✅ Reduce position sizes
+> ✅ Widen stop losses (volatility is elevated)
+> ✅ Wait for clarity before new positions
+> ✅ Accept that you don't know what happens next
+>
+> INAPPROPRIATE RESPONSES:
+>
+> ❌ "Buying the dip" without analysis
+> ❌ Leveraging up in chaos
+> ❌ Pretending you know the outcome
+>
+> Sometimes the best trade is no trade.
+>
+> How are you approaching this situation? 💬
+
+---
+
+## RT-008 — EARNINGS SEASON START
+**Trigger:** Major earnings season begins
+**Deploy:** First day of major earnings
+
+### Twitter/X
+> Earnings season is here.
+>
+> Remember:
+> → Earnings beat ≠ price up
+> → Guidance matters more than numbers
+> → IV crush after announcements
+> → Don't hold through unless planned
+>
+> Trade the reaction, not the expectation.
+
+**Hashtags:** #EarningsSeason #EarningsReport #TradingEarnings #IVCrush
+
+### Instagram
+> 📊 EARNINGS SEASON BEGINS
+>
+> KEY REMINDERS:
+>
+> 💡 Beat ≠ Price Up
+> → Market already priced in expectations
+> → Guidance matters more than numbers
+>
+> 💡 IV Crush is Real
+> → Options lose value after announcement
+> → Even if you're "right" on direction
+>
+> 💡 Plan Before, Not During
+> → Know if you're holding through or not
+> → Set exits before emotions kick in
+>
+> The reaction is what matters, not the report.
+>
+> Are you trading earnings this season? How? 📈
+
+---
+
+## RT-009 — WEEKEND GAP (CRYPTO)
+**Trigger:** Significant weekend price movement in crypto
+**Deploy:** Sunday evening or Monday morning
+
+### Twitter/X
+> Crypto gapped [up/down] over the weekend.
+>
+> → Gap fills are common (but not guaranteed)
+> → Weekend moves often retrace Monday
+> → Low liquidity weekends = manipulation opportunities
+>
+> Don't chase the Sunday move. See what Monday brings.
+
+**Hashtags:** #CryptoWeekend #GapFill #MondayTrading #Patience
+
+### Instagram
+> 📉📈 WEEKEND CRYPTO GAP
+>
+> [Crypto] moved [X]% over the weekend.
+>
+> WHAT TO KNOW:
+>
+> ✅ Gap fills are common (not guaranteed)
+> ✅ Weekend moves often retrace on Monday
+> ✅ Low liquidity = easier manipulation
+> ✅ Smart money waits for regular hours
+>
+> WHAT TO DO:
+>
+> → Don't FOMO into Sunday pump/dump
+> → See what Monday brings
+> → Let Asia and Europe weigh in first
+> → Trade with full market participation
+>
+> Weekend moves lie sometimes. Monday tells truth.
+>
+> Are you trading this gap? Or waiting? 💬
+
+---
+
+## RT-010 — NEW YEAR MARKET OPEN
+**Trigger:** First trading day of new year
+**Deploy:** January 1st or first trading day
+
+### Twitter/X
+> First trading day of [Year].
+>
+> New year. Same market.
+>
+> → Last year's lessons still apply
+> → New year ≠ new edge
+> → Don't force trades to "start strong"
+>
+> The goal is consistent, not spectacular. Happy trading.
+
+**Hashtags:** #NewYear #FirstTradingDay #TradingGoals #Consistency
+
+### Instagram
+> 🎉 FIRST TRADING DAY OF [YEAR]
+>
+> New year. Same principles.
+>
+> REMINDERS FOR THE YEAR:
+>
+> ✅ Last year's lessons still apply
+> ✅ New year ≠ new edge (yet)
+> ✅ Don't force trades to "start strong"
+> ✅ Consistency beats one good month
+>
+> GOALS TO SET:
+>
+> → Process goals, not profit goals
+> → "Follow my plan X% of trades"
+> → "Journal every trade"
+> → "Take Y breaks when emotional"
+>
+> The goal is consistent, not spectacular.
+>
+> What's your trading goal for [Year]? 🎯
+
+---
+
+# END OF REACTIVE TEMPLATES
+
+## How to Use These Templates
+
+1. **Monitor for triggers** — Follow news, price alerts, economic calendar
+2. **Customize quickly** — Fill in specific numbers, assets, context
+3. **Deploy fast** — First 1-4 hours gets most engagement
+4. **Stay educational** — Never predict outcomes, provide framework
+5. **Engage in comments** — These posts generate discussion
+
+*10 Reactive Templates Ready for Rapid Deployment*
+
+---
+
+# 🎬 REEL SCRIPTS FOR TOP POSTS
+
+## Overview
+
+These are 15-30 second video scripts optimized for Instagram Reels. Each script includes:
+- **Duration breakdown** with timestamps
+- **Voiceover script** (word-for-word)
+- **On-screen text** for visual impact
+- **Visual direction** for video creation
+- **Hook → Value → CTA** structure
+
+Best practices:
+- Use trending audio or calm music
+- Text appears with voiceover (never ahead)
+- Dark backgrounds (#0a0a0f) for brand consistency
+- Quick cuts every 2-3 seconds maintain attention
+
+---
+
+## REEL-001 — THE LIQUIDITY LIE (Based on Post 001)
+**Duration:** 20 seconds | **Topic:** Stop hunting mechanics
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-3s | "Support doesn't hold. It's broken on purpose." | SUPPORT DOESN'T HOLD | Dark screen, text punch in |
+| 3-7s | "Every stop below support is liquidity. Smart money needs YOUR stop loss to fill their orders." | YOUR STOPS = THEIR FILLS | Chart showing stops below support |
+| 7-12s | "Price drops, hits your stop, immediately reverses. Sound familiar?" | THE PATTERN REPEATS | Chart animation: price drops, sweeps, reverses |
+| 12-17s | "Once you see liquidity, you can't unsee it." | YOU CAN'T UNSEE IT | Slow zoom on liquidity sweep |
+| 17-20s | "Free lesson. Link in bio." | LINK IN BIO | Logo + URL overlay |
+
+### Audio Suggestion
+Suspenseful/revelation type audio or trending sound
+
+### Caption
+```
+Support doesn't "hold." It's broken to harvest your stops. 💀
+
+Once you see liquidity, you can't unsee it.
+
+Full lesson free — link in bio 🔗
+
+#trading #liquidity #smartmoney #stophunting #forex #crypto
+```
+
+---
+
+## REEL-002 — WHY MARKETS MOVE IN CYCLES (Based on Post 002)
+**Duration:** 25 seconds | **Topic:** Market cycle education
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-3s | "Markets have moved in cycles for centuries." | MARKETS MOVE IN CYCLES | Historical chart montage |
+| 3-7s | "Accumulation. Smart money buys while you panic." | 🔵 ACCUMULATION | Cycle diagram highlight |
+| 7-10s | "Markup. The trend everyone chases." | 🟢 MARKUP | Upward price movement |
+| 10-14s | "Distribution. Smart money exits while you buy the hype." | 🟡 DISTRIBUTION | Top formation visual |
+| 14-17s | "Decline. Cycle completes. Rinse and repeat." | 🔴 DECLINE | Downward movement |
+| 17-22s | "1929. 2008. 2021. Same pattern." | THE PATTERN REPEATS | Historical charts comparison |
+| 22-25s | "Free cycle guide. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Epic/educational music or trending revelation sound
+
+### Caption
+```
+Markets have moved in cycles for centuries. 🔄
+
+Accumulation → Markup → Distribution → Decline
+
+1929. 2008. 2021. Same pattern. Different names.
+
+Understanding cycles = understanding markets.
+
+Free guide — link in bio 🔗
+
+#marketcycles #trading #wyckoff #crypto #forex #bitcoin
+```
+
+---
+
+## REEL-003 — THE REPAINTING PROBLEM (Based on Post 007)
+**Duration:** 18 seconds | **Topic:** Why indicators fail
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-3s | "Your indicator looked perfect in hindsight. But it changed." | IT LOOKED PERFECT... | Clean chart with "buy signal" |
+| 3-7s | "That's repainting. The signal you saw? It moved after the fact." | BUT IT CHANGED | Same chart, signal moved |
+| 7-11s | "You thought you had a winning signal. You had a liar." | YOU HAD A LIAR | Split screen: before/after |
+| 11-15s | "Non-repainting indicators don't lie about history." | NON-REPAINTING = TRUTH | Signal stays fixed |
+| 15-18s | "Learn the difference. Link in bio." | LINK IN BIO | Logo + URL |
+
+### Audio Suggestion
+Shocking reveal audio or lie detector sound effect
+
+### Caption
+```
+That perfect signal? It changed after the fact. 🚨
+
+Repainting indicators lie about history.
+
+The signal you saw moved. You never had the entry you thought.
+
+Non-repainting means what you see is what you get.
+
+Full breakdown — link in bio 🔗
+
+#tradingview #indicators #repainting #tradingtools #forex #crypto
+```
+
+---
+
+## REEL-004 — HOW SMART MONEY MOVES (Based on Post 013)
+**Duration:** 22 seconds | **Topic:** Institutional vs retail
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-4s | "You see support. They see liquidity." | YOU SEE SUPPORT / THEY SEE LIQUIDITY | Split screen comparison |
+| 4-8s | "You chase breakouts. They fade them." | YOU CHASE / THEY FADE | Breakout failing visual |
+| 8-12s | "You follow the crowd. They position against it." | YOU FOLLOW / THEY POSITION | Crowd vs individual visual |
+| 12-16s | "Smart money doesn't predict. They react." | THEY DON'T PREDICT / THEY REACT | Clean chart observation |
+| 16-19s | "Think like them. Or stay their exit liquidity." | THINK LIKE THEM | Text emphasis |
+| 19-22s | "Free education. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Strategic/chess-like audio or "villain reveal" trending sound
+
+### Caption
+```
+You see support. They see liquidity.
+You chase breakouts. They fade them.
+You follow the crowd. They position against it.
+
+Smart money doesn't predict the market.
+They react to what it shows them.
+
+Think like them — or stay their exit liquidity.
+
+Free lessons — link in bio 🔗
+
+#smartmoney #trading #institutional #liquidity #forex #crypto
+```
+
+---
+
+## REEL-005 — STOP HUNTING EXPOSED (Based on Post 016)
+**Duration:** 20 seconds | **Topic:** Stop hunting mechanics
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-3s | "Where do you put your stop loss?" | WHERE'S YOUR STOP? | Question on screen |
+| 3-6s | "Just below support, right? Same as everyone." | JUST BELOW SUPPORT | Chart with obvious stop zone |
+| 6-10s | "That's exactly where they're hunting." | THEY'RE HUNTING THERE | Stops get swept visual |
+| 10-14s | "Your stop = their entry. Every single time." | YOUR STOP = THEIR ENTRY | Price reverses after sweep |
+| 14-17s | "Stop being predictable." | STOP BEING PREDICTABLE | Text emphasis |
+| 17-20s | "Learn where to actually place stops. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Suspenseful/hunting themed audio
+
+### Caption
+```
+Where do you put your stop loss? 🎯
+
+Just below support, right? Same as everyone else.
+
+That's exactly where they're hunting.
+
+Your stop = their entry. Every. Single. Time.
+
+Stop being predictable.
+
+Full guide — link in bio 🔗
+
+#stoploss #stophunting #trading #smartmoney #forex #crypto
+```
+
+---
+
+## REEL-006 — WHY YOUR INDICATORS KEEP FAILING (Based on Post 027)
+**Duration:** 22 seconds | **Topic:** Indicator reality check
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-4s | "You keep adding indicators. They keep failing." | MORE INDICATORS ≠ BETTER | Cluttered chart |
+| 4-8s | "RSI said oversold. Price kept falling." | RSI: OVERSOLD / PRICE: FALLING | RSI divergence fail |
+| 8-12s | "MACD crossed up. Price reversed down." | MACD: UP / PRICE: DOWN | MACD fail visual |
+| 12-16s | "The problem isn't the indicator. It's how you use it." | THE PROBLEM IS USAGE | Clean chart appears |
+| 16-19s | "Context over signals. Structure over noise." | CONTEXT > SIGNALS | Minimal chart, clear structure |
+| 19-22s | "Learn what actually works. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Frustrated/realization transition audio
+
+### Caption
+```
+You keep adding indicators. They keep failing. 📉
+
+RSI said oversold — price kept falling.
+MACD crossed bullish — price reversed down.
+
+The problem isn't the indicator.
+It's how you use it.
+
+Context over signals. Structure over noise.
+
+Learn what works — link in bio 🔗
+
+#indicators #tradingview #RSI #MACD #trading #forex #crypto
+```
+
+---
+
+## REEL-007 — REVENGE TRADING KILLS ACCOUNTS (Based on Post 031)
+**Duration:** 18 seconds | **Topic:** Psychology / revenge trading
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-3s | "You took a loss. Now you want it back." | TOOK A LOSS? | Red P&L visual |
+| 3-7s | "So you size up. Chase a setup. Force a trade." | SIZE UP / CHASE / FORCE | Quick cut sequence |
+| 7-11s | "Now you have two losses. Then three." | LOSS. LOSS. LOSS. | Cascading red numbers |
+| 11-15s | "That's revenge trading. And it kills accounts." | REVENGE TRADING KILLS | Text warning |
+| 15-18s | "Learn to stop. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Intense/cautionary audio or downward spiral sound
+
+### Caption
+```
+You took a loss. Now you want it back. 💀
+
+So you size up. Chase a setup. Force a trade.
+
+Now you have two losses. Then three. Then your week is ruined.
+
+That's revenge trading. And it kills accounts.
+
+The hardest trade? Walking away.
+
+Guide in bio 🔗
+
+#revengetrading #tradingpsychology #riskmanagement #forex #crypto
+```
+
+---
+
+## REEL-008 — CONFIRMATION BIAS (Based on Post 032)
+**Duration:** 20 seconds | **Topic:** Psychology / cognitive bias
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-3s | "You're bullish. So you look for reasons to buy." | YOU'RE BULLISH | Upward bias visual |
+| 3-7s | "You ignore the bearish signals. Cherry-pick the bullish ones." | IGNORING THE WARNINGS | Dismissing red flags visual |
+| 7-11s | "That's confirmation bias. Your brain lying to itself." | CONFIRMATION BIAS | Brain/mind visual |
+| 11-15s | "The market doesn't care what you believe." | MARKET DOESN'T CARE | Cold truth visual |
+| 15-17s | "See what IS, not what you want." | SEE WHAT IS | Clear chart |
+| 17-20s | "Psychology guide. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Mind-bending/revelation audio
+
+### Caption
+```
+You're bullish. So you look for reasons to buy. 🧠
+
+You ignore the bearish signals.
+Cherry-pick the bullish ones.
+Find what you want to find.
+
+That's confirmation bias.
+Your brain lying to itself.
+
+The market doesn't care what you believe.
+
+See what IS — not what you want.
+
+Psychology guide — link in bio 🔗
+
+#confirmationbias #tradingpsychology #mindset #forex #crypto
+```
+
+---
+
+## REEL-009 — THE EDGE ISN'T MORE INDICATORS (Based on Post 003)
+**Duration:** 15 seconds | **Topic:** Quote / clarity
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-4s | "The edge isn't seeing more." | THE EDGE ISN'T SEEING MORE | Text fade in |
+| 4-8s | "It's seeing what matters." | IT'S SEEING WHAT MATTERS | Second line reveals |
+| 8-12s | "More screens won't save you. More indicators won't save you. Clarity will." | CLARITY WILL | Clean chart visual |
+| 12-15s | "Follow for more." | FOLLOW FOR CLARITY | Logo |
+
+### Audio Suggestion
+Calm/wisdom type audio or popular motivational sound
+
+### Caption
+```
+"The edge isn't seeing more. It's seeing what matters." ✨
+
+More indicators won't save you.
+More screens won't save you.
+More alerts won't save you.
+
+Clarity will.
+
+Follow for more 🔔
+
+#tradingwisdom #clarity #minimalism #trading #forex #crypto
+```
+
+---
+
+## REEL-010 — PRICE ACTION IS DEAD (Based on Post 011)
+**Duration:** 22 seconds | **Topic:** Controversial / educational
+
+### Timestamps & Script
+
+| Time | Voiceover | On-Screen Text | Visual |
+|------|-----------|----------------|--------|
+| 0-3s | "Price action is dead. Sort of." | PRICE ACTION IS DEAD | Shocking hook text |
+| 3-7s | "The version you learned? Pin bars and engulfing candles? That's not enough." | NOT ENOUGH | Basic patterns visual |
+| 7-11s | "Everyone knows those patterns now. They're hunted." | EVERYONE KNOWS THEM | Pattern gets faked out |
+| 11-16s | "Real price action? Structure. Liquidity. Order flow. Context." | THE REAL PRICE ACTION | Advanced structure visual |
+| 16-19s | "Evolve or become exit liquidity." | EVOLVE OR EXIT | Text emphasis |
+| 19-22s | "Full lesson. Link in bio." | LINK IN BIO | Logo + CTA |
+
+### Audio Suggestion
+Controversial/shocking reveal audio
+
+### Caption
+```
+Price action is dead. Sort of. 💀
+
+The version you learned?
+Pin bars, engulfing candles, head and shoulders?
+
+Everyone knows those patterns. They're hunted.
+
+Real price action in 2024:
+→ Market structure
+→ Liquidity zones
+→ Order flow
+→ Context over patterns
+
+Evolve — or become exit liquidity.
+
+Full lesson — link in bio 🔗
+
+#priceaction #trading #smartmoney #technicalanalysis #forex #crypto
+```
+
+---
+
+# END OF REEL SCRIPTS
+
+## How to Create These Reels
+
+### Video Creation Workflow
+1. **Script prep** — Print/display timestamps and text
+2. **Audio first** — Select trending audio or use recommended
+3. **Record/compile** — Use Canva, CapCut, or phone editor
+4. **Text sync** — Add text exactly on voiceover timing
+5. **Brand check** — Dark theme, correct fonts, logo placement
+
+### Technical Specs
+- Dimensions: 1080x1920 (9:16 vertical)
+- Duration: 15-30 seconds optimal
+- Text: Inter Bold for on-screen, readable size
+- Background: #0a0a0f dark theme
+- Accents: #4a90d9 blue, #c9a962 gold highlights
+
+### Posting Strategy
+- Post 4-7x per week for algorithm favor
+- Best times: 6-9 AM, 12-3 PM, 7-10 PM (audience timezone)
+- First 3 seconds determine watch-through
+- Strong hook = higher reach
+
+*10 Reel Scripts Ready for Production*
