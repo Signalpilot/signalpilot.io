@@ -475,7 +475,7 @@ Hashtags: #Pentarch #TradingView #SignalPilot #TechnicalAnalysis
 
 ### Caption:
 ```
-TD appears when selling exhausts. 🔵
+TD appears when selling exhausts. 🟣
 
 What does that mean?
 
@@ -1084,8 +1084,8 @@ Five signals. Five phases. One complete cycle.
 
 TD → Accumulation
 IGN → Markup
-CAP → Climax
 WRN → Distribution
+CAP → Climax
 BDN → Decline
 
 The Pentarch cheatsheet. Print it. Pin it. Use it ↓
@@ -1098,10 +1098,10 @@ Hashtags: #Pentarch #Cheatsheet #TradingEducation #SignalPilot
 
 ### Slide Structure:
 1. **Title:** "THE PENTARCH CHEATSHEET"
-2. **TD:** 🔵 Touchdown → Accumulation (selling exhausted)
-3. **IGN:** 🟢 Ignition → Markup (momentum ignites)
-4. **CAP:** 🟡 Climax → Climax (buying peaks)
-5. **WRN:** 🟠 Warning → Distribution (smart money exits)
+2. **TD:** 🟣 Touchdown → Accumulation (selling exhausted)
+3. **IGN:** 🩵 Ignition → Markup (momentum ignites)
+4. **WRN:** 🟡 Warning → Distribution (late cycle warning)
+5. **CAP:** 🟠 Climax → Climax (exhaustion peak)
 6. **BDN:** 🔴 Breakdown → Decline (cycle completes)
 
 ### Caption:
@@ -1110,17 +1110,17 @@ The Pentarch Cheatsheet 📋
 
 Five signals. Five phases. One complete cycle:
 
-🔵 TD (Touchdown) → Accumulation phase
+🟣 TD (Touchdown) → Accumulation phase
 The selling is exhausted. Smart money may be accumulating.
 
-🟢 IGN (Ignition) → Markup phase
+🩵 IGN (Ignition) → Markup phase
 Momentum ignites. The trend begins.
 
-🟡 CAP (Climax) → Climax phase
-Buying reaches a peak. Caution ahead.
+🟡 WRN (Warning) → Distribution phase
+Late cycle warning. Momentum weakening.
 
-🟠 WRN (Warning) → Distribution phase
-Smart money distributing. Retail still buying.
+🟠 CAP (Climax) → Climax phase
+Extreme extension. Exhaustion peak.
 
 🔴 BDN (Breakdown) → Decline phase
 The cycle completes. Decline confirmed.
@@ -1140,10 +1140,10 @@ Save this. Reference it every time you trade. 📌
 "Save this Pentarch cheatsheet..."
 
 [CYCLE - 0:02-0:10]
-"TD → Accumulation 🔵"
-"IGN → Markup 🟢"
-"CAP → Climax 🟡"
-"WRN → Distribution 🟠"
+"TD → Accumulation 🟣"
+"IGN → Markup 🩵"
+"WRN → Distribution 🟡"
+"CAP → Climax 🟠"
 "BDN → Decline 🔴"
 
 [CTA - 0:10-0:12]
@@ -1543,7 +1543,7 @@ CRITICAL = high risk environment
 Does volume confirm price action?
 
 🔴 Market Regime
-Trending? Ranging? Volatile?
+ACCUMULATION? DISTRIBUTION? NEUTRAL?
 
 All without repainting. What you see today is what existed yesterday.
 
@@ -3326,14 +3326,15 @@ It's not the indicator. It's the context. 🔧 #indicators #trading #forex #cryp
 ## TWITTER/X — Single Tweet
 
 ```
-Harmonic Oscillator combines 6 momentum components:
+Harmonic Oscillator combines 7 momentum components:
 
 • RSI
 • Stochastic RSI
 • MACD
 • Momentum
-• EMA direction
+• EMA Trend
 • Volume
+• Divergence Zone
 
 One unified score. Divergences highlighted automatically.
 
@@ -3346,8 +3347,8 @@ Hashtags: #HarmonicOscillator #Momentum #TradingView #SignalPilot
 ## INSTAGRAM — Carousel (6 Slides)
 
 ### Slide Structure:
-1. **Hook:** "6 INDICATORS IN 1 PANEL"
-2. **Components:** RSI, Stoch RSI, MACD, Momentum, EMA, Volume
+1. **Hook:** "7 INDICATORS IN 1 PANEL"
+2. **Components:** RSI, Stoch RSI, MACD, Momentum, EMA, Volume, Divergence Zone
 3. **Feature:** Voting system shows agreement
 4. **Feature:** Automatic divergence detection
 5. **Benefit:** No indicator clutter
@@ -3355,7 +3356,7 @@ Hashtags: #HarmonicOscillator #Momentum #TradingView #SignalPilot
 
 ### Caption:
 ```
-6 momentum indicators. 1 unified view. 📊
+7 momentum indicators. 1 unified view. 📊
 
 The Harmonic Oscillator combines:
 
@@ -3363,8 +3364,9 @@ The Harmonic Oscillator combines:
 2️⃣ Stochastic RSI — Momentum of RSI
 3️⃣ MACD — Trend momentum
 4️⃣ Momentum — Rate of change
-5️⃣ EMA Direction — Trend filter
+5️⃣ EMA Trend — Trend filter
 6️⃣ Volume — Confirmation
+7️⃣ Divergence Zone — Extreme detection
 
 What you get:
 → Voting system showing how many agree
@@ -3372,8 +3374,8 @@ What you get:
 → Unified momentum score
 → No indicator stacking needed
 
-When 6/6 components align = Strong signal
-When 3/6 align = Mixed, proceed with caution
+When 7/7 components align = Strong signal
+When 4/7 align = Mixed, proceed with caution
 
 🔗 Documentation in bio.
 
@@ -3385,14 +3387,14 @@ When 3/6 align = Mixed, proceed with caution
 ### Script:
 ```
 [HOOK - 0:00-0:02]
-"6 indicators in 1 panel..."
+"7 indicators in 1 panel..."
 
 [FEATURES - 0:02-0:10]
 "RSI ✓ MACD ✓ Stochastic ✓"
-"Momentum ✓ EMA ✓ Volume ✓"
-"6 indicators. 1 panel."
+"Momentum ✓ EMA ✓ Volume ✓ Divergence ✓"
+"7 indicators. 1 panel."
 "Voting system shows agreement"
-"6/6 aligned = Strong signal"
+"7/7 aligned = Strong signal"
 
 [CTA - 0:10-0:12]
 "Harmonic Oscillator 📊"
@@ -3400,7 +3402,7 @@ When 3/6 align = Mixed, proceed with caution
 
 ### Caption:
 ```
-6 indicators. 1 panel. No clutter. 📊 #harmonicoscillator #trading #indicators #tradingview
+7 indicators. 1 panel. No clutter. 📊 #harmonicoscillator #trading #indicators #tradingview
 ```
 
 ---
@@ -7607,20 +7609,20 @@ Free PDF guide in bio
 >
 > Here's what each signal historically indicated:
 >
-> 🟢 TD (Trend Determination)
+> 🟣 TD (TouchDown)
 > → Potential accumulation zone identified
 >
-> 🔵 IGN (Ignition)
+> 🩵 IGN (Ignition)
 > → Momentum may be building
 >
-> ⚪ SOS (Sign of Strength)
-> → Possible distribution beginning
+> 🟡 WRN (Warning)
+> → Distribution may be beginning
 >
-> 🟡 SOW (Sign of Weakness)
-> → Sentiment may be shifting
+> 🟠 CAP (Climax)
+> → Sentiment may be shifting, late cycle
 >
-> 🔴 AUT (Autumn)
-> → Trend may be confirming direction
+> 🔴 BDN (BreakDown)
+> → Structure break, cycle completing
 >
 > The Sovereign observes the full cycle.
 >
@@ -7638,11 +7640,11 @@ Free PDF guide in bio
 | Time | Text |
 |------|------|
 | 0-2s | ONE COMPLETE CYCLE |
-| 2-4s | 🟢 TD — Accumulation Zone |
-| 4-6s | 🔵 IGN — Momentum Building |
-| 6-8s | ⚪ SOS — Distribution Begins |
-| 8-10s | 🟡 SOW — Sentiment Shifts |
-| 10-12s | 🔴 AUT — Trend Confirms |
+| 2-4s | 🟣 TD — Accumulation Zone |
+| 4-6s | 🩵 IGN — Momentum Building |
+| 6-8s | 🟡 WRN — Distribution Begins |
+| 8-10s | 🟠 CAP — Climax / Late Cycle |
+| 10-12s | 🔴 BDN — Structure Break |
 | 12-14s | The Sovereign observes. |
 
 **Duration:** 14 seconds
@@ -8653,26 +8655,26 @@ Full lesson + PDF in bio
 **Format:** Regime Chart (1080x1080)
 
 **Caption:**
-> Market regimes explained 📊
+> Volume regimes explained 📊
 >
 > The Prophet (Volume Oracle) sees what phase the market is in.
 >
-> EXPANSION REGIME 📈
-> ◾ High volatility
-> ◾ Big moves, clear trends
-> ◾ Trend-following works
+> ACCUMULATION REGIME 🟢
+> ◾ Bullish bias
+> ◾ Buying pressure detected
+> ◾ Look for long setups
 >
-> CONTRACTION REGIME 📉
-> ◾ Low volatility
-> ◾ Choppy, range-bound
-> ◾ Mean-reversion works
+> DISTRIBUTION REGIME 🔴
+> ◾ Bearish bias
+> ◾ Selling pressure detected
+> ◾ Look for short setups
 >
-> TRANSITION REGIME ⚡
-> ◾ Regime changing
-> ◾ Volatility shifting
+> NEUTRAL REGIME ⚪
+> ◾ No clear bias
+> ◾ Wait for direction
 > ◾ Be cautious
 >
-> Wrong strategy + Wrong regime = Losses
+> Wrong bias + Wrong setup = Losses
 >
 > Demo in bio 🔗
 
@@ -8687,12 +8689,12 @@ Full lesson + PDF in bio
 **On-Screen Text:**
 | Time | Text |
 |------|------|
-| 0-2s | YOUR STRATEGY ISN'T BROKEN |
+| 0-2s | YOUR BIAS ISN'T BROKEN |
 | 2-4s | You're in the WRONG REGIME |
-| 4-6s | EXPANSION = Trend-following |
-| 6-8s | CONTRACTION = Mean-reversion |
+| 4-6s | ACCUMULATION = Bullish bias |
+| 6-8s | DISTRIBUTION = Bearish bias |
 | 8-10s | Volume Oracle detects the regime |
-| 10-12s | Match strategy to regime |
+| 10-12s | Match trades to regime |
 | 12-14s | The Prophet sees the phase. |
 
 **Duration:** 14 seconds
@@ -8704,7 +8706,7 @@ Full lesson + PDF in bio
 1. Open Canva → 1080x1080
 2. Background: Chart screenshot with Volume Oracle
 3. Color-code regime zones
-4. Add labels: Expansion, Contraction, Transition
+4. Add labels: Accumulation, Distribution, Neutral
 5. Strategy labels for each regime
 6. "The Prophet" branding element
 7. Export PNG
@@ -9105,11 +9107,11 @@ Full lesson + PDF in bio
 **Copy:**
 > Pentarch signal reference:
 >
-> 🟢 TD — Potential trend determination
-> 🔵 IGN — Potential ignition of momentum
-> ⚪ SOS — Potential sign of strength
-> 🟡 SOW — Potential sign of weakness
-> 🔴 AUT — Potential autumn phase
+> 🟣 TD — TouchDown (Accumulation)
+> 🩵 IGN — Ignition (Markup)
+> 🟡 WRN — Warning (Distribution)
+> 🟠 CAP — Climax (Peak)
+> 🔴 BDN — BreakDown (Decline)
 >
 > The Sovereign speaks in phases, not predictions.
 
@@ -9124,25 +9126,25 @@ Full lesson + PDF in bio
 **Caption:**
 > Pentarch Signal Reference Guide 👑
 >
-> 🟢 TD (Trend Determination)
-> → Market may be establishing direction
-> → Watch for continuation or reversal
+> 🟣 TD (TouchDown)
+> → Oversold, below Pilot Line
+> → Potential reversal from decline
 >
-> 🔵 IGN (Ignition)
-> → Momentum may be building
-> → Early phase of potential move
+> 🩵 IGN (Ignition)
+> → Momentum breakout
+> → Bullish structure shift
 >
-> ⚪ SOS (Sign of Strength)
-> → Buying pressure may be present
-> → Potential accumulation
+> 🟡 WRN (Warning)
+> → Extended, momentum weakening
+> → Late cycle warning
 >
-> 🟡 SOW (Sign of Weakness)
-> → Selling pressure may be present
-> → Potential distribution
+> 🟠 CAP (Climax)
+> → Extreme extension, exhaustion
+> → Peak before reversal
 >
-> 🔴 AUT (Autumn)
-> → Cycle may be maturing
-> → Watch for phase transition
+> 🔴 BDN (BreakDown)
+> → Structure break, bearish shift
+> → Cycle completion
 >
 > Save this reference 📌
 >
@@ -9160,11 +9162,11 @@ Full lesson + PDF in bio
 | Time | Text |
 |------|------|
 | 0-2s | PENTARCH SIGNALS |
-| 2-3s | 🟢 TD = Trend forming |
-| 3-5s | 🔵 IGN = Momentum building |
-| 5-7s | ⚪ SOS = Strength showing |
-| 7-9s | 🟡 SOW = Weakness showing |
-| 9-11s | 🔴 AUT = Cycle maturing |
+| 2-3s | 🟣 TD = Accumulation zone |
+| 3-5s | 🩵 IGN = Momentum building |
+| 5-7s | 🟡 WRN = Distribution warning |
+| 7-9s | 🟠 CAP = Climax / Peak |
+| 9-11s | 🔴 BDN = Breakdown |
 | 11-13s | The Sovereign speaks in phases |
 
 **Duration:** 13 seconds
@@ -13311,7 +13313,7 @@ Full lesson + PDF in bio
 - [ ] 10 Twitter graphics (1200x675)
 - [ ] 10 Instagram posts (1080x1080)
 - [ ] 10 TikTok videos (1080x1920)
-- [ ] Chart screenshots: Momentum, FOMO, Volume Oracle expansion, VSA, Plutus Flow divergence
+- [ ] Chart screenshots: Momentum, FOMO, Volume Oracle ACCUMULATION, VSA, Plutus Flow divergence
 - [ ] Quote cards: 1 (Right vs Profitable)
 - [ ] Hierarchy pyramid: Signal ranking
 - [ ] Risk pyramid: 1%/5%/Ruin rules
@@ -18995,8 +18997,8 @@ SLIDE 3 - How to Trade:
 SLIDE 4 - Caution:
 1. Header: "CAUTION"
 2. Visual: Bearish bias indicator
-3. Text: "Contraction ALWAYS precedes expansion"
-4. "Low volatility = Coiling for move"
+3. Text: "DISTRIBUTION = bearish bias, not certainty"
+4. "Risk management still essential"
 
 SLIDE 5 - CTA:
 1. Quote: "Prepare for the breakout."
@@ -19007,20 +19009,19 @@ SLIDE 5 - CTA:
 
 ### CapCut Video Creation Guide
 ```
-1. Find chart with contraction then expansion
-2. Show the coiling and eventual breakout
+1. Find chart with Volume Oracle showing distribution
+2. Show the bearish price action with red regime
 3. Text overlays at timestamps:
-   - 0-2s: "CONTRACTION REGIME"
+   - 0-2s: "DISTRIBUTION REGIME"
    - 2-8s: Characteristics
-   - 8-10s: "Mean-reversion works"
+   - 8-10s: "Short setups favored"
    - 10-12s: "BUT..."
-   - 12-14s: "Precedes EXPANSION" with explosion effect
+   - 12-14s: "Context matters" with caution effect
 4. Sound design:
-   - Coiling/tension sound building
-   - Release/explosion sound at end (25% volume)
-5. Show tight range, then breakout
+   - Bearish/caution sound at 25% volume
+5. Show selling pressure and regime color
 7. Export: 1080x1920, 30fps
-8. Caption: "Coiling before explosion. #volumeoracle #trading"
+8. Caption: "Distribution = bearish bias. #volumeoracle #trading"
 ```
 
 ---
@@ -19555,8 +19556,8 @@ Pentarch TD signal + Price at Janus Atlas level
 → "Cycle signal at key level"
 
 EXAMPLE ALERT 2:
-Volume Oracle regime change from contraction to expansion
-→ "Volatility breakout incoming"
+Volume Oracle regime change (DISTRIBUTION to ACCUMULATION)
+→ "Bias shift detected"
 
 EXAMPLE ALERT 3:
 Harmonic Oscillator at extreme + Divergence forming
@@ -19663,7 +19664,7 @@ SLIDE 5 - CTA:
 
 ### P2 — Indicator Truth
 ```
-#SignalPilot #TradingIndicators #TradingView #VolumeOracle #ContractionRegime #CustomAlerts #TradingAlerts #MarketRegimes #NonRepainting #TheProphet
+#SignalPilot #TradingIndicators #TradingView #VolumeOracle #DistributionRegime #CustomAlerts #TradingAlerts #MarketRegimes #NonRepainting #TheProphet
 ```
 
 ### P3 — Market Mechanics
@@ -19707,7 +19708,7 @@ SLIDE 5 - CTA:
 - [ ] Post 162: Breakout confirmation chart (5 carousel slides)
 - [ ] Post 163: Trading journal template (5 carousel slides)
 - [ ] Post 164: Quote card — "Best trade is no trade"
-- [ ] Post 165: Volume Oracle contraction (5 carousel slides)
+- [ ] Post 165: Volume Oracle DISTRIBUTION (5 carousel slides)
 - [ ] Post 166: Mean reversion chart (5 carousel slides)
 - [ ] Post 167: Winner management chart (5 carousel slides)
 - [ ] Post 168: The Arbiter character with scales
@@ -19903,7 +19904,7 @@ THE CONCEPT:
 
 IDEAL CONDITIONS:
 ✅ Clear, tested boundaries
-✅ Volume Oracle shows contraction
+✅ Volume Oracle shows NEUTRAL (no directional bias)
 ✅ Multiple touches confirm levels
 ✅ Range is wide enough for profit
 
@@ -19962,7 +19963,7 @@ SLIDE 3 - Ideal Conditions:
 1. Header: "IDEAL CONDITIONS"
 2. Checkmarks:
    - "Clear, tested boundaries"
-   - "Volume Oracle shows contraction"
+   - "Volume Oracle shows NEUTRAL"
    - "Multiple touches confirm levels"
    - "Range wide enough for profit"
 
@@ -22429,7 +22430,7 @@ Link in bio 🔗
 ### Content Breakdown
 - **Education Posts:** 3 (Wyckoff Accumulation, Wyckoff Distribution, Market Profile)
 - **Blog Posts:** 2 (Screen Time, Trading as Business)
-- **Product Posts:** 1 (Pentarch SOS Deep Dive)
+- **Product Posts:** 1 (Pentarch WRN Deep Dive)
 - **Chronicle Posts:** 1 (The Scales of Truth)
 - **Quote Posts:** 1 (Risk & Knowledge)
 - **Docs Posts:** 2 (Education Hub, FAQ)
@@ -22489,7 +22490,7 @@ Link in bio 🔗
 - [ ] Wyckoff Accumulation schematic
 - [ ] Screen time/clock visual
 - [ ] Quote card (Risk & Knowledge)
-- [ ] Pentarch SOS signal on chart
+- [ ] Pentarch WRN signal on chart
 - [ ] Wyckoff Distribution schematic
 - [ ] Hobby vs Business comparison
 - [ ] The Scales character art
@@ -22501,7 +22502,7 @@ Link in bio 🔗
 - [ ] Wyckoff accumulation animation (14s)
 - [ ] Time-lapse chart study (14s)
 - [ ] Quote reveal animation (14s)
-- [ ] SOS signal explanation (14s)
+- [ ] WRN signal explanation (14s)
 - [ ] Wyckoff distribution animation (12s)
 - [ ] Hobby vs Business comparison (14s)
 - [ ] The Scales cinematic (14s)
@@ -26773,7 +26774,7 @@ Full setup guide in bio 🔗
 ### Content Breakdown
 - **Education Posts:** 3 (Liquidity Voids, Breaker Blocks, Mitigation Blocks)
 - **Blog Posts:** 2 (Weekly Review, Cost of Overtrading)
-- **Product Posts:** 1 (Volume Oracle Transition)
+- **Product Posts:** 1 (Volume Oracle NEUTRAL Regime)
 - **Chronicle Posts:** 1 (The Sovereign's Cycle)
 - **Quote Posts:** 1 (1% Difference)
 - **Marketing Posts:** 1 (Why Education First)
@@ -26815,7 +26816,7 @@ Full setup guide in bio 🔗
 ## 🏷️ HASHTAG BANK
 
 ### P2 — Indicator Truth
-#SignalPilot #VolumeOracle #TransitionRegime #TradingIndicators #Alerts #Notifications #TradingView
+#SignalPilot #VolumeOracle #NeutralRegime #TradingIndicators #Alerts #Notifications #TradingView
 
 ### P3 — Market Mechanics
 #LiquidityVoid #BreakerBlock #MitigationBlock #SMC #OrderBlocks #InstitutionalTrading #ICTConcepts
@@ -26835,7 +26836,7 @@ Full setup guide in bio 🔗
 - [ ] Liquidity void chart
 - [ ] Weekly review template
 - [ ] 1% difference stacking visual
-- [ ] Transition regime chart
+- [ ] NEUTRAL regime chart
 - [ ] Breaker block formation
 - [ ] Overtrading costs visual
 - [ ] The Sovereign with cycle wheel
@@ -26847,7 +26848,7 @@ Full setup guide in bio 🔗
 - [ ] Void formation/fill (14s)
 - [ ] Weekly review ritual (12s)
 - [ ] 1% blocks stacking (14s)
-- [ ] Transition warning (14s)
+- [ ] NEUTRAL regime explanation (14s)
 - [ ] Breaker block flip (14s)
 - [ ] Overtrading costs (14s)
 - [ ] Sovereign's cycle wheel (13s)
@@ -28188,7 +28189,7 @@ Full guide in bio 🔗
 ### Content Breakdown
 - **Education Posts:** 3 (Kill Zones, Premium/Discount, MSS)
 - **Blog Posts:** 2 (Social Media Dangers, Building Confidence)
-- **Product Posts:** 1 (Pentarch SOW Signal)
+- **Product Posts:** 1 (Pentarch CAP Signal)
 - **Chronicle Posts:** 1 (The Scales' Balance)
 - **Quote Posts:** 1 (Expensive Lessons)
 - **Marketing Posts:** 1 (Trader Transformation)
@@ -28230,7 +28231,7 @@ Full guide in bio 🔗
 ## 🏷️ HASHTAG BANK
 
 ### P2 — Indicator Truth
-#SignalPilot #Pentarch #SOWSignal #TradingIndicators #TradingView #Performance #TheSovereign
+#SignalPilot #Pentarch #CAPSignal #TradingIndicators #TradingView #Performance #TheSovereign
 
 ### P3 — Market Mechanics
 #KillZones #PremiumDiscount #MarketStructureShift #MSS #SMC #SessionTrading #TradingZones
@@ -28250,7 +28251,7 @@ Full guide in bio 🔗
 - [ ] Kill zones clock visual
 - [ ] Social media dangers
 - [ ] Expensive lessons quote card
-- [ ] Pentarch SOW on chart
+- [ ] Pentarch CAP on chart
 - [ ] Premium/Discount zones
 - [ ] Confidence building blocks
 - [ ] The Scales with buyers/sellers
@@ -28262,7 +28263,7 @@ Full guide in bio 🔗
 - [ ] Kill zones clock (14s)
 - [ ] Social media warnings (14s)
 - [ ] Two paths decision (14s)
-- [ ] SOW signal explanation (14s)
+- [ ] CAP signal explanation (14s)
 - [ ] Zone identification (14s)
 - [ ] Confidence blocks (14s)
 - [ ] The Scales balance (14s)
