@@ -19103,28 +19103,6 @@ Demo in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "NEUTRAL regime = Wait mode"
-
-**Script:**
-```
-[0-2s] NEUTRAL REGIME ⚪
-[2-4s] No clear direction
-[4-6s] Bulls and bears equal
-[6-8s] Signals less reliable
-[8-10s] WHAT TO DO:
-[10-11s] Reduce size
-[11-12s] Or wait it out
-[12-14s] Patience over action
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Neutral = patience. #volumeoracle #trading #regime #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -19147,24 +19125,6 @@ Demo in bio 🔗
 4. **Slide 4:** The challenge
 5. **Slide 5:** How to handle
 6. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Warning/shift
-3. **Timeline Setup:**
-   - 0-2s: "TRANSITION" title with warning
-   - 2-4s: Regime change visualization
-   - 4-8s: Dangers appearing
-   - 8-12s: What to do
-   - 12-14s: "Adapt or get caught"
-4. **Animation:** Shifting colors, warning flashes
-5. **Color Mood:** Yellow/orange warning tones
-6. **Audio:** Warning/shift sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -19238,27 +19198,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "When an order block FAILS, it becomes a breaker"
-
-**Script:**
-```
-[0-2s] BREAKER BLOCKS
-[2-4s] Order block FORMS
-[4-6s] Order block FAILS
-[6-8s] Zone FLIPS
-[8-10s] Support → Resistance
-[10-12s] Resistance → Support
-[12-14s] The breaker is born
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Failed OB = Breaker. #trading #smc #breaker #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -19281,25 +19220,6 @@ Full lesson in bio 🔗
 4. **Slide 4:** Bullish breaker
 5. **Slide 5:** Why it works
 6. **Slide 6:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** OB formation, failure, flip
-3. **Timeline Setup:**
-   - 0-2s: "BREAKER BLOCKS" title
-   - 2-4s: Order block forms
-   - 4-6s: Price breaks through (fails)
-   - 6-8s: Zone flips (animation)
-   - 8-12s: S/R flip visual
-   - 12-14s: "Breaker is born"
-4. **Animation:** Flip/rotate effect on zone
-5. **Color Change:** Green→Red or Red→Green on flip
-6. **Audio:** Breaking/flipping sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
