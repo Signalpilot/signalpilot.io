@@ -938,28 +938,6 @@ Save this. Reference it every time you trade. 📌
 - Save-worthy design
 - Print-friendly option
 
-## CapCut Templates Needed:
-
-### 1. Educational Tutorial (45s)
-- Screen recording base
-- Text overlays with timing
-- Circle/arrow annotations
-- Dramatic sound
-
-### 2. Quote Reveal (8-10s)
-- Slow zoom background
-- Large centered text
-- Fade animations
-- Atmospheric sound
-
-### 3. Cheatsheet/Save (12s)
-- Quick text sequence
-- Color-coded elements
-- "Save this" ending
-- Helpful sound
-
----
-
 # HASHTAG BANKS (Batch 01)
 
 ## P1: Liquidity Lie
@@ -1005,22 +983,18 @@ Small: #tradingmythology #signalpilot #eliteseven
 |-----|------|------|-------------------|
 | Mon | 9 AM | 001 | Twitter Thread |
 | Mon | 11 AM | 001 | Instagram Carousel |
-| Mon | 1 PM | 001 | TikTok |
 | Mon | 4 PM | 002 | Twitter Thread |
 | Mon | 7 PM | 002 | Instagram Carousel |
 | Tue | 9 AM | 003 | Twitter + All |
 | Tue | 11 AM | 004 | Instagram Carousel |
-| Tue | 1 PM | 004 | TikTok |
 | Tue | 4 PM | 005 | Twitter Thread |
 | Tue | 7 PM | 005 | Instagram Carousel |
 | Wed | 9 AM | 006 | Twitter Thread |
 | Wed | 11 AM | 006 | Instagram Carousel |
-| Wed | 1 PM | 006 | TikTok |
 | Wed | 4 PM | 007 | Twitter Thread |
 | Wed | 7 PM | 007 | Instagram Carousel |
 | Thu | 9 AM | 008 | Twitter + All |
 | Thu | 11 AM | 009 | Instagram |
-| Thu | 1 PM | 009 | TikTok |
 | Thu | 4 PM | 010 | Twitter |
 | Thu | 7 PM | 010 | Instagram Carousel |
 
@@ -1032,52 +1006,42 @@ Small: #tradingmythology #signalpilot #eliteseven
 - [ ] Canva carousel (10 slides)
 - [ ] Twitter header image
 - [ ] TradingView liquidity sweep recording
-- [ ] CapCut TikTok video (45s)
 
 ## Post 002
 - [ ] Canva carousel (10 slides)
 - [ ] Cycle diagram graphic
 - [ ] Historical chart example
-- [ ] CapCut TikTok video (32s)
 
 ## Post 003
 - [ ] Quote card (1080x1080)
 - [ ] Twitter card (1200x675)
-- [ ] CapCut quote reveal (8s)
 
 ## Post 004
 - [ ] Product demo carousel (6 slides)
 - [ ] TD signal chart screenshot
-- [ ] CapCut tutorial video (12s)
 
 ## Post 005
 - [ ] Chronicle carousel (7 slides)
 - [ ] Sovereign character art
-- [ ] CapCut cinematic video (12s)
 
 ## Post 006
 - [ ] Canva carousel (8 slides)
 - [ ] Volume comparison chart
-- [ ] CapCut tutorial video (12s)
 
 ## Post 007
 - [ ] Canva carousel (8 slides)
 - [ ] Repainting example graphic
-- [ ] CapCut suspense video (12s)
 
 ## Post 008
 - [ ] Quote card (1080x1080)
-- [ ] CapCut dramatic video (8s)
 
 ## Post 009
 - [ ] Main site feature graphic
 - [ ] Website scroll recording
-- [ ] CapCut product video (12s)
 
 ## Post 010
 - [ ] Cheatsheet carousel (6 slides)
 - [ ] Printable cheatsheet PDF
-- [ ] CapCut save-worthy video (12s)
 
 ---
 
@@ -14185,16 +14149,16 @@ SLIDE 5 - Still Stuck + CTA:
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 131 | Twitter, IG, TikTok | 9:00 AM |
-| Mon | 132 | Twitter, IG, TikTok | 1:00 PM |
-| Tue | 133 | Twitter, IG, TikTok | 9:00 AM |
-| Tue | 134 | Twitter, IG, TikTok | 1:00 PM |
-| Wed | 135 | Twitter, IG, TikTok | 9:00 AM |
-| Wed | 136 | Twitter, IG, TikTok | 1:00 PM |
-| Thu | 137 | Twitter, IG, TikTok | 9:00 AM |
-| Thu | 138 | Twitter, IG, TikTok | 1:00 PM |
-| Fri | 139 | Twitter, IG, TikTok | 9:00 AM |
-| Fri | 140 | Twitter, IG, TikTok | 1:00 PM |
+| Mon | 131 | Twitter, IG | 9:00 AM |
+| Mon | 132 | Twitter, IG | 1:00 PM |
+| Tue | 133 | Twitter, IG | 9:00 AM |
+| Tue | 134 | Twitter, IG | 1:00 PM |
+| Wed | 135 | Twitter, IG | 9:00 AM |
+| Wed | 136 | Twitter, IG | 1:00 PM |
+| Thu | 137 | Twitter, IG | 9:00 AM |
+| Thu | 138 | Twitter, IG | 1:00 PM |
+| Fri | 139 | Twitter, IG | 9:00 AM |
+| Fri | 140 | Twitter, IG | 1:00 PM |
 
 ---
 
@@ -14238,7 +14202,7 @@ SLIDE 5 - Still Stuck + CTA:
 - **Quote Font:** Cormorant Garamond (italic)
 - **Blue Accent:** #4a90d9
 - **Gold Accent:** #c9a962
-- **Export Sizes:** 1080x1080 (IG), 1080x1920 (TikTok/Reels)
+- **Export Sizes:** 1080x1080 (IG), 1080x1920 (Reels)
 
 ---
 
@@ -15524,16 +15488,16 @@ SLIDE 5 - CTA:
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 141 | Twitter, IG, TikTok | 9:00 AM |
-| Mon | 142 | Twitter, IG, TikTok | 1:00 PM |
-| Tue | 143 | Twitter, IG, TikTok | 9:00 AM |
-| Tue | 144 | Twitter, IG, TikTok | 1:00 PM |
-| Wed | 145 | Twitter, IG, TikTok | 9:00 AM |
-| Wed | 146 | Twitter, IG, TikTok | 1:00 PM |
-| Thu | 147 | Twitter, IG, TikTok | 9:00 AM |
-| Thu | 148 | Twitter, IG, TikTok | 1:00 PM |
-| Fri | 149 | Twitter, IG, TikTok | 9:00 AM |
-| Fri | 150 | Twitter, IG, TikTok | 1:00 PM |
+| Mon | 141 | Twitter, IG | 9:00 AM |
+| Mon | 142 | Twitter, IG | 1:00 PM |
+| Tue | 143 | Twitter, IG | 9:00 AM |
+| Tue | 144 | Twitter, IG | 1:00 PM |
+| Wed | 145 | Twitter, IG | 9:00 AM |
+| Wed | 146 | Twitter, IG | 1:00 PM |
+| Thu | 147 | Twitter, IG | 9:00 AM |
+| Thu | 148 | Twitter, IG | 1:00 PM |
+| Fri | 149 | Twitter, IG | 9:00 AM |
+| Fri | 150 | Twitter, IG | 1:00 PM |
 
 ---
 
@@ -15577,7 +15541,7 @@ SLIDE 5 - CTA:
 - **Quote Font:** Cormorant Garamond (italic)
 - **Blue Accent:** #4a90d9
 - **Gold Accent:** #c9a962
-- **Export Sizes:** 1080x1080 (IG), 1080x1920 (TikTok/Reels)
+- **Export Sizes:** 1080x1080 (IG), 1080x1920 (Reels)
 
 ---
 
@@ -16892,16 +16856,16 @@ SLIDE 5 - CTA:
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 151 | Twitter, IG, TikTok | 9:00 AM |
-| Mon | 152 | Twitter, IG, TikTok | 1:00 PM |
-| Tue | 153 | Twitter, IG, TikTok | 9:00 AM |
-| Tue | 154 | Twitter, IG, TikTok | 1:00 PM |
-| Wed | 155 | Twitter, IG, TikTok | 9:00 AM |
-| Wed | 156 | Twitter, IG, TikTok | 1:00 PM |
-| Thu | 157 | Twitter, IG, TikTok | 9:00 AM |
-| Thu | 158 | Twitter, IG, TikTok | 1:00 PM |
-| Fri | 159 | Twitter, IG, TikTok | 9:00 AM |
-| Fri | 160 | Twitter, IG, TikTok | 1:00 PM |
+| Mon | 151 | Twitter, IG | 9:00 AM |
+| Mon | 152 | Twitter, IG | 1:00 PM |
+| Tue | 153 | Twitter, IG | 9:00 AM |
+| Tue | 154 | Twitter, IG | 1:00 PM |
+| Wed | 155 | Twitter, IG | 9:00 AM |
+| Wed | 156 | Twitter, IG | 1:00 PM |
+| Thu | 157 | Twitter, IG | 9:00 AM |
+| Thu | 158 | Twitter, IG | 1:00 PM |
+| Fri | 159 | Twitter, IG | 9:00 AM |
+| Fri | 160 | Twitter, IG | 1:00 PM |
 
 ---
 
@@ -16945,7 +16909,7 @@ SLIDE 5 - CTA:
 - **Quote Font:** Cormorant Garamond (italic)
 - **Blue Accent:** #4a90d9
 - **Gold Accent:** #c9a962
-- **Export Sizes:** 1080x1080 (IG), 1080x1920 (TikTok/Reels)
+- **Export Sizes:** 1080x1080 (IG), 1080x1920 (Reels)
 
 ---
 
@@ -18226,16 +18190,16 @@ SLIDE 5 - CTA:
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 161 | Twitter, IG, TikTok | 9:00 AM |
-| Mon | 162 | Twitter, IG, TikTok | 1:00 PM |
-| Tue | 163 | Twitter, IG, TikTok | 9:00 AM |
-| Tue | 164 | Twitter, IG, TikTok | 1:00 PM |
-| Wed | 165 | Twitter, IG, TikTok | 9:00 AM |
-| Wed | 166 | Twitter, IG, TikTok | 1:00 PM |
-| Thu | 167 | Twitter, IG, TikTok | 9:00 AM |
-| Thu | 168 | Twitter, IG, TikTok | 1:00 PM |
-| Fri | 169 | Twitter, IG, TikTok | 9:00 AM |
-| Fri | 170 | Twitter, IG, TikTok | 1:00 PM |
+| Mon | 161 | Twitter, IG | 9:00 AM |
+| Mon | 162 | Twitter, IG | 1:00 PM |
+| Tue | 163 | Twitter, IG | 9:00 AM |
+| Tue | 164 | Twitter, IG | 1:00 PM |
+| Wed | 165 | Twitter, IG | 9:00 AM |
+| Wed | 166 | Twitter, IG | 1:00 PM |
+| Thu | 167 | Twitter, IG | 9:00 AM |
+| Thu | 168 | Twitter, IG | 1:00 PM |
+| Fri | 169 | Twitter, IG | 9:00 AM |
+| Fri | 170 | Twitter, IG | 1:00 PM |
 
 ---
 
@@ -18279,7 +18243,7 @@ SLIDE 5 - CTA:
 - **Quote Font:** Cormorant Garamond (italic)
 - **Blue Accent:** #4a90d9
 - **Gold Accent:** #c9a962
-- **Export Sizes:** 1080x1080 (IG), 1080x1920 (TikTok/Reels)
+- **Export Sizes:** 1080x1080 (IG), 1080x1920 (Reels)
 
 ---
 
@@ -19520,16 +19484,16 @@ SLIDE 4 - CTA:
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 171 | Twitter, IG, TikTok | 9:00 AM |
-| Mon | 172 | Twitter, IG, TikTok | 1:00 PM |
-| Tue | 173 | Twitter, IG, TikTok | 9:00 AM |
-| Tue | 174 | Twitter, IG, TikTok | 1:00 PM |
-| Wed | 175 | Twitter, IG, TikTok | 9:00 AM |
-| Wed | 176 | Twitter, IG, TikTok | 1:00 PM |
-| Thu | 177 | Twitter, IG, TikTok | 9:00 AM |
-| Thu | 178 | Twitter, IG, TikTok | 1:00 PM |
-| Fri | 179 | Twitter, IG, TikTok | 9:00 AM |
-| Fri | 180 | Twitter, IG, TikTok | 1:00 PM |
+| Mon | 171 | Twitter, IG | 9:00 AM |
+| Mon | 172 | Twitter, IG | 1:00 PM |
+| Tue | 173 | Twitter, IG | 9:00 AM |
+| Tue | 174 | Twitter, IG | 1:00 PM |
+| Wed | 175 | Twitter, IG | 9:00 AM |
+| Wed | 176 | Twitter, IG | 1:00 PM |
+| Thu | 177 | Twitter, IG | 9:00 AM |
+| Thu | 178 | Twitter, IG | 1:00 PM |
+| Fri | 179 | Twitter, IG | 9:00 AM |
+| Fri | 180 | Twitter, IG | 1:00 PM |
 
 ---
 
@@ -19573,7 +19537,7 @@ SLIDE 4 - CTA:
 - **Quote Font:** Cormorant Garamond (italic)
 - **Blue Accent:** #4a90d9
 - **Gold Accent:** #c9a962
-- **Export Sizes:** 1080x1080 (IG), 1080x1920 (TikTok/Reels)
+- **Export Sizes:** 1080x1080 (IG), 1080x1920 (Reels)
 
 ---
 
@@ -19611,7 +19575,7 @@ SLIDE 4 - CTA:
 | Quote Font | Cormorant Garamond (Italic) |
 | Blue Accent | #4a90d9 |
 | Gold Accent | #c9a962 |
-| Aspect Ratios | 1080x1080 (IG), 1080x1920 (TikTok/Story) |
+| Aspect Ratios | 1080x1080 (IG), 1080x1920 (Story) |
 
 ---
 
@@ -20992,16 +20956,16 @@ Link in bio 🔗
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 181 | Twitter, IG, TikTok | 9:00 AM |
-| Mon | 182 | Twitter, IG, TikTok | 2:00 PM |
-| Tue | 183 | Twitter, IG, TikTok | 9:00 AM |
-| Tue | 184 | Twitter, IG, TikTok | 2:00 PM |
-| Wed | 185 | Twitter, IG, TikTok | 9:00 AM |
-| Wed | 186 | Twitter, IG, TikTok | 2:00 PM |
-| Thu | 187 | Twitter, IG, TikTok | 9:00 AM |
-| Thu | 188 | Twitter, IG, TikTok | 2:00 PM |
-| Fri | 189 | Twitter, IG, TikTok | 9:00 AM |
-| Fri | 190 | Twitter, IG, TikTok | 2:00 PM |
+| Mon | 181 | Twitter, IG | 9:00 AM |
+| Mon | 182 | Twitter, IG | 2:00 PM |
+| Tue | 183 | Twitter, IG | 9:00 AM |
+| Tue | 184 | Twitter, IG | 2:00 PM |
+| Wed | 185 | Twitter, IG | 9:00 AM |
+| Wed | 186 | Twitter, IG | 2:00 PM |
+| Thu | 187 | Twitter, IG | 9:00 AM |
+| Thu | 188 | Twitter, IG | 2:00 PM |
+| Fri | 189 | Twitter, IG | 9:00 AM |
+| Fri | 190 | Twitter, IG | 2:00 PM |
 
 ---
 
@@ -21083,7 +21047,7 @@ Link in bio 🔗
 | Quote Font | Cormorant Garamond (Italic) |
 | Blue Accent | #4a90d9 |
 | Gold Accent | #c9a962 |
-| Aspect Ratios | 1080x1080 (IG), 1080x1920 (TikTok/Story) |
+| Aspect Ratios | 1080x1080 (IG), 1080x1920 (Story) |
 
 ---
 
@@ -22452,16 +22416,16 @@ Full guide in bio 🔗
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 191 | Twitter, IG, TikTok | 9:00 AM |
-| Mon | 192 | Twitter, IG, TikTok | 2:00 PM |
-| Tue | 193 | Twitter, IG, TikTok | 9:00 AM |
-| Tue | 194 | Twitter, IG, TikTok | 2:00 PM |
-| Wed | 195 | Twitter, IG, TikTok | 9:00 AM |
-| Wed | 196 | Twitter, IG, TikTok | 2:00 PM |
-| Thu | 197 | Twitter, IG, TikTok | 9:00 AM |
-| Thu | 198 | Twitter, IG, TikTok | 2:00 PM |
-| Fri | 199 | Twitter, IG, TikTok | 9:00 AM |
-| Fri | 200 | Twitter, IG, TikTok | 2:00 PM |
+| Mon | 191 | Twitter, IG | 9:00 AM |
+| Mon | 192 | Twitter, IG | 2:00 PM |
+| Tue | 193 | Twitter, IG | 9:00 AM |
+| Tue | 194 | Twitter, IG | 2:00 PM |
+| Wed | 195 | Twitter, IG | 9:00 AM |
+| Wed | 196 | Twitter, IG | 2:00 PM |
+| Thu | 197 | Twitter, IG | 9:00 AM |
+| Thu | 198 | Twitter, IG | 2:00 PM |
+| Fri | 199 | Twitter, IG | 9:00 AM |
+| Fri | 200 | Twitter, IG | 2:00 PM |
 
 ---
 
@@ -22543,7 +22507,7 @@ Full guide in bio 🔗
 | Quote Font | Cormorant Garamond (Italic) |
 | Blue Accent | #4a90d9 |
 | Gold Accent | #c9a962 |
-| Aspect Ratios | 1080x1080 (IG), 1080x1920 (TikTok/Story) |
+| Aspect Ratios | 1080x1080 (IG), 1080x1920 (Story) |
 
 ---
 
@@ -23903,16 +23867,16 @@ Full comparison in bio 🔗
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 201 | Twitter, IG, TikTok | 9:00 AM |
-| Mon | 202 | Twitter, IG, TikTok | 2:00 PM |
-| Tue | 203 | Twitter, IG, TikTok | 9:00 AM |
-| Tue | 204 | Twitter, IG, TikTok | 2:00 PM |
-| Wed | 205 | Twitter, IG, TikTok | 9:00 AM |
-| Wed | 206 | Twitter, IG, TikTok | 2:00 PM |
-| Thu | 207 | Twitter, IG, TikTok | 9:00 AM |
-| Thu | 208 | Twitter, IG, TikTok | 2:00 PM |
-| Fri | 209 | Twitter, IG, TikTok | 9:00 AM |
-| Fri | 210 | Twitter, IG, TikTok | 2:00 PM |
+| Mon | 201 | Twitter, IG | 9:00 AM |
+| Mon | 202 | Twitter, IG | 2:00 PM |
+| Tue | 203 | Twitter, IG | 9:00 AM |
+| Tue | 204 | Twitter, IG | 2:00 PM |
+| Wed | 205 | Twitter, IG | 9:00 AM |
+| Wed | 206 | Twitter, IG | 2:00 PM |
+| Thu | 207 | Twitter, IG | 9:00 AM |
+| Thu | 208 | Twitter, IG | 2:00 PM |
+| Fri | 209 | Twitter, IG | 9:00 AM |
+| Fri | 210 | Twitter, IG | 2:00 PM |
 
 ---
 
@@ -23994,7 +23958,7 @@ Full comparison in bio 🔗
 | Quote Font | Cormorant Garamond (Italic) |
 | Blue Accent | #4a90d9 |
 | Gold Accent | #c9a962 |
-| Aspect Ratios | 1080x1080 (IG), 1080x1920 (TikTok/Story) |
+| Aspect Ratios | 1080x1080 (IG), 1080x1920 (Story) |
 
 ---
 
@@ -25338,16 +25302,16 @@ Full setup guide in bio 🔗
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 211 | Twitter, IG, TikTok | 9:00 AM |
-| Mon | 212 | Twitter, IG, TikTok | 2:00 PM |
-| Tue | 213 | Twitter, IG, TikTok | 9:00 AM |
-| Tue | 214 | Twitter, IG, TikTok | 2:00 PM |
-| Wed | 215 | Twitter, IG, TikTok | 9:00 AM |
-| Wed | 216 | Twitter, IG, TikTok | 2:00 PM |
-| Thu | 217 | Twitter, IG, TikTok | 9:00 AM |
-| Thu | 218 | Twitter, IG, TikTok | 2:00 PM |
-| Fri | 219 | Twitter, IG, TikTok | 9:00 AM |
-| Fri | 220 | Twitter, IG, TikTok | 2:00 PM |
+| Mon | 211 | Twitter, IG | 9:00 AM |
+| Mon | 212 | Twitter, IG | 2:00 PM |
+| Tue | 213 | Twitter, IG | 9:00 AM |
+| Tue | 214 | Twitter, IG | 2:00 PM |
+| Wed | 215 | Twitter, IG | 9:00 AM |
+| Wed | 216 | Twitter, IG | 2:00 PM |
+| Thu | 217 | Twitter, IG | 9:00 AM |
+| Thu | 218 | Twitter, IG | 2:00 PM |
+| Fri | 219 | Twitter, IG | 9:00 AM |
+| Fri | 220 | Twitter, IG | 2:00 PM |
 
 ---
 
@@ -25429,7 +25393,7 @@ Full setup guide in bio 🔗
 | Quote Font | Cormorant Garamond (Italic) |
 | Blue Accent | #4a90d9 |
 | Gold Accent | #c9a962 |
-| Aspect Ratios | 1080x1080 (IG), 1080x1920 (TikTok/Story) |
+| Aspect Ratios | 1080x1080 (IG), 1080x1920 (Story) |
 
 ---
 
@@ -26753,16 +26717,16 @@ Full guide in bio 🔗
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 221 | Twitter, IG, TikTok | 9:00 AM |
-| Mon | 222 | Twitter, IG, TikTok | 2:00 PM |
-| Tue | 223 | Twitter, IG, TikTok | 9:00 AM |
-| Tue | 224 | Twitter, IG, TikTok | 2:00 PM |
-| Wed | 225 | Twitter, IG, TikTok | 9:00 AM |
-| Wed | 226 | Twitter, IG, TikTok | 2:00 PM |
-| Thu | 227 | Twitter, IG, TikTok | 9:00 AM |
-| Thu | 228 | Twitter, IG, TikTok | 2:00 PM |
-| Fri | 229 | Twitter, IG, TikTok | 9:00 AM |
-| Fri | 230 | Twitter, IG, TikTok | 2:00 PM |
+| Mon | 221 | Twitter, IG | 9:00 AM |
+| Mon | 222 | Twitter, IG | 2:00 PM |
+| Tue | 223 | Twitter, IG | 9:00 AM |
+| Tue | 224 | Twitter, IG | 2:00 PM |
+| Wed | 225 | Twitter, IG | 9:00 AM |
+| Wed | 226 | Twitter, IG | 2:00 PM |
+| Thu | 227 | Twitter, IG | 9:00 AM |
+| Thu | 228 | Twitter, IG | 2:00 PM |
+| Fri | 229 | Twitter, IG | 9:00 AM |
+| Fri | 230 | Twitter, IG | 2:00 PM |
 
 ---
 
@@ -26844,7 +26808,7 @@ Full guide in bio 🔗
 | Quote Font | Cormorant Garamond (Italic) |
 | Blue Accent | #4a90d9 |
 | Gold Accent | #c9a962 |
-| Aspect Ratios | 1080x1080 (IG), 1080x1920 (TikTok/Story) |
+| Aspect Ratios | 1080x1080 (IG), 1080x1920 (Story) |
 
 ---
 
@@ -28185,16 +28149,16 @@ Full setup guide in bio 🔗
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 231 | Twitter, IG, TikTok | 9:00 AM |
-| Mon | 232 | Twitter, IG, TikTok | 2:00 PM |
-| Tue | 233 | Twitter, IG, TikTok | 9:00 AM |
-| Tue | 234 | Twitter, IG, TikTok | 2:00 PM |
-| Wed | 235 | Twitter, IG, TikTok | 9:00 AM |
-| Wed | 236 | Twitter, IG, TikTok | 2:00 PM |
-| Thu | 237 | Twitter, IG, TikTok | 9:00 AM |
-| Thu | 238 | Twitter, IG, TikTok | 2:00 PM |
-| Fri | 239 | Twitter, IG, TikTok | 9:00 AM |
-| Fri | 240 | Twitter, IG, TikTok | 2:00 PM |
+| Mon | 231 | Twitter, IG | 9:00 AM |
+| Mon | 232 | Twitter, IG | 2:00 PM |
+| Tue | 233 | Twitter, IG | 9:00 AM |
+| Tue | 234 | Twitter, IG | 2:00 PM |
+| Wed | 235 | Twitter, IG | 9:00 AM |
+| Wed | 236 | Twitter, IG | 2:00 PM |
+| Thu | 237 | Twitter, IG | 9:00 AM |
+| Thu | 238 | Twitter, IG | 2:00 PM |
+| Fri | 239 | Twitter, IG | 9:00 AM |
+| Fri | 240 | Twitter, IG | 2:00 PM |
 
 ---
 
@@ -29689,16 +29653,16 @@ Full setup guide in bio 🔗
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 241 | Twitter, IG, TikTok | 8:00 AM |
-| Mon | 242 | Twitter, IG, TikTok | 12:00 PM |
-| Tue | 243 | Twitter, IG, TikTok | 8:00 AM |
-| Tue | 244 | Twitter, IG, TikTok | 12:00 PM |
-| Wed | 245 | Twitter, IG, TikTok | 8:00 AM |
-| Wed | 246 | Twitter, IG, TikTok | 12:00 PM |
-| Thu | 247 | Twitter, IG, TikTok | 8:00 AM |
-| Thu | 248 | Twitter, IG, TikTok | 12:00 PM |
-| Fri | 249 | Twitter, IG, TikTok | 8:00 AM |
-| Fri | 250 | Twitter, IG, TikTok | 12:00 PM |
+| Mon | 241 | Twitter, IG | 8:00 AM |
+| Mon | 242 | Twitter, IG | 12:00 PM |
+| Tue | 243 | Twitter, IG | 8:00 AM |
+| Tue | 244 | Twitter, IG | 12:00 PM |
+| Wed | 245 | Twitter, IG | 8:00 AM |
+| Wed | 246 | Twitter, IG | 12:00 PM |
+| Thu | 247 | Twitter, IG | 8:00 AM |
+| Thu | 248 | Twitter, IG | 12:00 PM |
+| Fri | 249 | Twitter, IG | 8:00 AM |
+| Fri | 250 | Twitter, IG | 12:00 PM |
 
 ---
 
@@ -31195,16 +31159,16 @@ Full setup guide in bio 🔗
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 251 | Twitter, IG, TikTok | 8:00 AM |
-| Mon | 252 | Twitter, IG, TikTok | 12:00 PM |
-| Tue | 253 | Twitter, IG, TikTok | 8:00 AM |
-| Tue | 254 | Twitter, IG, TikTok | 12:00 PM |
-| Wed | 255 | Twitter, IG, TikTok | 8:00 AM |
-| Wed | 256 | Twitter, IG, TikTok | 12:00 PM |
-| Thu | 257 | Twitter, IG, TikTok | 8:00 AM |
-| Thu | 258 | Twitter, IG, TikTok | 12:00 PM |
-| Fri | 259 | Twitter, IG, TikTok | 8:00 AM |
-| Fri | 260 | Twitter, IG, TikTok | 12:00 PM |
+| Mon | 251 | Twitter, IG | 8:00 AM |
+| Mon | 252 | Twitter, IG | 12:00 PM |
+| Tue | 253 | Twitter, IG | 8:00 AM |
+| Tue | 254 | Twitter, IG | 12:00 PM |
+| Wed | 255 | Twitter, IG | 8:00 AM |
+| Wed | 256 | Twitter, IG | 12:00 PM |
+| Thu | 257 | Twitter, IG | 8:00 AM |
+| Thu | 258 | Twitter, IG | 12:00 PM |
+| Fri | 259 | Twitter, IG | 8:00 AM |
+| Fri | 260 | Twitter, IG | 12:00 PM |
 
 ---
 
@@ -32695,16 +32659,16 @@ Full setup guide in bio 🔗
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 261 | Twitter, IG, TikTok | 8:00 AM |
-| Mon | 262 | Twitter, IG, TikTok | 12:00 PM |
-| Tue | 263 | Twitter, IG, TikTok | 8:00 AM |
-| Tue | 264 | Twitter, IG, TikTok | 12:00 PM |
-| Wed | 265 | Twitter, IG, TikTok | 8:00 AM |
-| Wed | 266 | Twitter, IG, TikTok | 12:00 PM |
-| Thu | 267 | Twitter, IG, TikTok | 8:00 AM |
-| Thu | 268 | Twitter, IG, TikTok | 12:00 PM |
-| Fri | 269 | Twitter, IG, TikTok | 8:00 AM |
-| Fri | 270 | Twitter, IG, TikTok | 12:00 PM |
+| Mon | 261 | Twitter, IG | 8:00 AM |
+| Mon | 262 | Twitter, IG | 12:00 PM |
+| Tue | 263 | Twitter, IG | 8:00 AM |
+| Tue | 264 | Twitter, IG | 12:00 PM |
+| Wed | 265 | Twitter, IG | 8:00 AM |
+| Wed | 266 | Twitter, IG | 12:00 PM |
+| Thu | 267 | Twitter, IG | 8:00 AM |
+| Thu | 268 | Twitter, IG | 12:00 PM |
+| Fri | 269 | Twitter, IG | 8:00 AM |
+| Fri | 270 | Twitter, IG | 12:00 PM |
 
 ---
 
@@ -34213,16 +34177,16 @@ Full setup guide in bio 🔗
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 271 | Twitter, IG, TikTok | 8:00 AM |
-| Mon | 272 | Twitter, IG, TikTok | 12:00 PM |
-| Tue | 273 | Twitter, IG, TikTok | 8:00 AM |
-| Tue | 274 | Twitter, IG, TikTok | 12:00 PM |
-| Wed | 275 | Twitter, IG, TikTok | 8:00 AM |
-| Wed | 276 | Twitter, IG, TikTok | 12:00 PM |
-| Thu | 277 | Twitter, IG, TikTok | 8:00 AM |
-| Thu | 278 | Twitter, IG, TikTok | 12:00 PM |
-| Fri | 279 | Twitter, IG, TikTok | 8:00 AM |
-| Fri | 280 | Twitter, IG, TikTok | 12:00 PM |
+| Mon | 271 | Twitter, IG | 8:00 AM |
+| Mon | 272 | Twitter, IG | 12:00 PM |
+| Tue | 273 | Twitter, IG | 8:00 AM |
+| Tue | 274 | Twitter, IG | 12:00 PM |
+| Wed | 275 | Twitter, IG | 8:00 AM |
+| Wed | 276 | Twitter, IG | 12:00 PM |
+| Thu | 277 | Twitter, IG | 8:00 AM |
+| Thu | 278 | Twitter, IG | 12:00 PM |
+| Fri | 279 | Twitter, IG | 8:00 AM |
+| Fri | 280 | Twitter, IG | 12:00 PM |
 
 ---
 
@@ -35709,16 +35673,16 @@ Full setup guide in bio 🔗
 
 | Day | Post # | Platform | Time (EST) |
 |-----|--------|----------|------------|
-| Mon | 281 | Twitter, IG, TikTok | 8:00 AM |
-| Mon | 282 | Twitter, IG, TikTok | 12:00 PM |
-| Tue | 283 | Twitter, IG, TikTok | 8:00 AM |
-| Tue | 284 | Twitter, IG, TikTok | 12:00 PM |
-| Wed | 285 | Twitter, IG, TikTok | 8:00 AM |
-| Wed | 286 | Twitter, IG, TikTok | 12:00 PM |
-| Thu | 287 | Twitter, IG, TikTok | 8:00 AM |
-| Thu | 288 | Twitter, IG, TikTok | 12:00 PM |
-| Fri | 289 | Twitter, IG, TikTok | 8:00 AM |
-| Fri | 290 | Twitter, IG, TikTok | 12:00 PM |
+| Mon | 281 | Twitter, IG | 8:00 AM |
+| Mon | 282 | Twitter, IG | 12:00 PM |
+| Tue | 283 | Twitter, IG | 8:00 AM |
+| Tue | 284 | Twitter, IG | 12:00 PM |
+| Wed | 285 | Twitter, IG | 8:00 AM |
+| Wed | 286 | Twitter, IG | 12:00 PM |
+| Thu | 287 | Twitter, IG | 8:00 AM |
+| Thu | 288 | Twitter, IG | 12:00 PM |
+| Fri | 289 | Twitter, IG | 8:00 AM |
+| Fri | 290 | Twitter, IG | 12:00 PM |
 
 ---
 
