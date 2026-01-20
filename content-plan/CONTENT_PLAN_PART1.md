@@ -6275,26 +6275,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Which timeframe should you use?"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | JANUS ATLAS TIMEFRAMES |
-| 2-4s | WEEKLY/DAILY = Swing trades |
-| 4-6s | Strongest levels |
-| 6-8s | 4H/1H = Day trades |
-| 8-9s | Balanced levels |
-| 9-11s | 15m/5m = Scalps |
-| 11-12s | More noise |
-| 12-14s | Match TF to strategy |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -6309,31 +6289,19 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Screen record Janus Atlas on multiple timeframes
-2. Or use dark background with pyramid graphic
-3. Import to CapCut
-4. Add text at timestamps
-5. Show visual hierarchy
-6. Strategic ambient sound, 20% volume
-7. Export 1080x1920
-
----
-
 ## 📅 BATCH 07 POSTING SCHEDULE
 
 | Day | Post | Platform Focus | Best Time |
 |-----|------|----------------|-----------|
-| Mon | 061 | Twitter/TikTok | 9:00 AM EST |
+| Mon | 061 | Twitter | 9:00 AM EST |
 | Mon | 062 | Instagram | 12:00 PM EST |
 | Tue | 063 | Twitter/Blog | 9:00 AM EST |
 | Tue | 064 | All Platforms | 6:00 PM EST |
-| Wed | 065 | Twitter/TikTok | 9:00 AM EST |
+| Wed | 065 | Twitter | 9:00 AM EST |
 | Wed | 066 | Instagram | 12:00 PM EST |
 | Thu | 067 | Twitter/Blog | 9:00 AM EST |
 | Thu | 068 | All Platforms | 6:00 PM EST |
-| Fri | 069 | Twitter/TikTok | 9:00 AM EST |
+| Fri | 069 | Twitter | 9:00 AM EST |
 | Fri | 070 | Twitter/Docs | 12:00 PM EST |
 
 ---
@@ -6442,26 +6410,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "82 trading lessons. Completely free."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | 82 LESSONS |
-| 2-3s | FREE |
-| 3-5s | 20 Beginner lessons |
-| 5-6s | 27 Intermediate lessons |
-| 6-7s | 27 Advanced lessons |
-| 7-8s | 8 Professional lessons |
-| 8-10s | No paywall. No catch. |
-| 10-12s | Educated traders > Guessing traders |
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -6472,17 +6420,6 @@ Full lesson + PDF in bio
 6. Use blue (#4a90d9) accent for numbers
 7. SignalPilot logo bottom
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Screen record scrolling through education hub
-2. Or use dark background with animated numbers
-3. Import to CapCut
-4. Emphasize "FREE" with glow effect
-5. Positive upbeat sound, 25% volume
-6. Export 1080x1920
 
 ---
 
@@ -6536,26 +6473,6 @@ Full lesson + PDF in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "The one habit that separates winners from losers"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | THE #1 TRADING HABIT |
-| 2-4s | JOURNALING |
-| 4-5s | Every trade logged |
-| 5-6s | Entry, exit, thesis |
-| 6-7s | Emotion, outcome |
-| 7-9s | Patterns emerge |
-| 9-11s | You see what ACTUALLY works |
-| 11-13s | Can't fix what you don't track |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -6566,18 +6483,6 @@ Full lesson + PDF in bio
 6. Highlight "Emotion" field in gold
 7. SignalPilot branding
 8. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Create or find trading journal example
-2. Screen record scrolling through entries
-3. Import to CapCut
-4. Add text at timestamps
-5. Highlight key fields
-6. Productive ambient sound, 20% volume
-7. Export 1080x1920
 
 ---
 
