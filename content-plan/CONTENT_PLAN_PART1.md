@@ -22278,28 +22278,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "See this gap? Price usually comes back."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "See this gap?" |
-| 2-4s | "Fair Value Gap (FVG)" |
-| 4-6s | "Price moved too fast" |
-| 6-8s | "Left imbalance behind" |
-| 8-10s | "Often acts as magnet" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording zooming into FVG on chart
-
-**Sound:** Educational/discovery trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -22317,34 +22295,6 @@ Full setup guide in bio 🔗
 7. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: TradingView chart with FVG
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Zooming to chart area | "See this gap?" |
-| 2-4s | FVG highlighted | "Fair Value Gap (FVG)" |
-| 4-6s | Show aggressive move | "Price moved too fast" |
-| 6-8s | Highlight gap | "Left imbalance behind" |
-| 8-10s | Show price returning | "Often acts as magnet" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Discovery/educational sound at 20% volume
-
-**Effects:**
-- Zoom and highlight animations
-- Arrow drawing onto gap
-- Price movement animation
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -22417,28 +22367,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "This is why your indicators aren't working."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Why your indicators fail:" |
-| 2-4s | "Lag ≠ prediction" |
-| 4-6s | "Wrong regime = wrong signals" |
-| 6-8s | "More indicators ≠ better" |
-| 8-10s | "Indicators INFORM" |
-| 10-12s | "They don't DECIDE" |
-
-**Background:** Split screen: messy chart → clean chart
-
-**Sound:** Reality check/truth bomb trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -22457,34 +22385,6 @@ Full setup guide in bio 🔗
 8. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart comparisons
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Cluttered chart | "Why your indicators fail:" |
-| 2-4s | Lagging indicator | "Lag ≠ prediction" |
-| 4-6s | Conflicting signals | "Wrong regime = wrong signals" |
-| 6-8s | Pan across overload | "More indicators ≠ better" |
-| 8-10s | Transition to clean chart | "Indicators INFORM" |
-| 10-12s | Clean chart with logo | "They don't DECIDE" |
-
-**Audio:** Impactful reality-check audio at 25% volume
-
-**Effects:**
-- Red tint on cluttered sections
-- Green tint on clean sections
-- Dramatic transition between
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -22539,28 +22439,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Volume speaks before price moves."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Volume speaks first" |
-| 2-4s | "The Prophet learned to listen" |
-| 4-6s | "Not predictions..." |
-| 6-8s | "But conviction" |
-| 8-10s | "The Oracle was born" |
-| 10-12s | "Read the Chronicle → bio" |
-
-**Background:** Volume Oracle character art with Ken Burns zoom, mystical atmosphere
-
-**Sound:** Epic/mystical orchestral trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -22584,35 +22462,6 @@ Full setup guide in bio 🔗
 - Cosmic atmosphere
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Mystical artwork with slow zoom
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Character art, slow zoom in | "Volume speaks first" |
-| 2-4s | Zoom continues | "The Prophet learned to listen" |
-| 4-6s | Particle effects | "Not predictions..." |
-| 6-8s | Volume bars appear | "But conviction" |
-| 8-10s | Oracle glow | "The Oracle was born" |
-| 10-12s | Full art with logo | "Read the Chronicle → bio" |
-
-**Audio:** Epic orchestral/mystical sound at 25% volume
-
-**Effects:**
-- Slow Ken Burns zoom (push in)
-- Particle/dust overlay
-- Subtle glow pulses
-- Text fade-ins
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -22685,28 +22534,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "This is where all the stop losses are hiding."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Where stops hide:" |
-| 2-4s | "Above swing highs ⬆️" |
-| 4-6s | "Below swing lows ⬇️" |
-| 6-8s | "Price seeks liquidity" |
-| 8-10s | "Then often reverses" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording highlighting liquidity pools on chart
-
-**Sound:** Suspenseful/revelation trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -22725,34 +22552,6 @@ Full setup guide in bio 🔗
 8. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart with structure
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Chart overview | "Where stops hide:" |
-| 2-4s | Circle above swing high | "Above swing highs ⬆️" |
-| 4-6s | Circle below swing low | "Below swing lows ⬇️" |
-| 6-8s | Show price moving to zone | "Price seeks liquidity" |
-| 8-10s | Show reversal | "Then often reverses" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Suspenseful/revelation sound at 20% volume
-
-**Effects:**
-- Highlight circles appearing
-- Price movement animation
-- Arrow animations
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -22823,27 +22622,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Best indicator combos for Signal Pilot:"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Best combos:" |
-| 2-4s | "Pentarch + Volume Oracle" |
-| 4-6s | "Janus Atlas + Plutus Flow" |
-| 6-8s | "Or just use OmniDeck" |
-| 8-10s | "Full guide in docs" |
-
-**Background:** Quick cuts showing each indicator pair on charts
-
-**Sound:** Upbeat educational trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -22862,33 +22640,6 @@ Full setup guide in bio 🔗
 8. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Indicator screenshots
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Title graphic | "Best combos:" |
-| 2-4s | Pentarch + Volume Oracle on chart | "Pentarch + Volume Oracle" |
-| 4-6s | Janus Atlas + Plutus Flow on chart | "Janus Atlas + Plutus Flow" |
-| 6-8s | OmniDeck full view | "Or just use OmniDeck" |
-| 8-10s | Docs page or logo | "Full guide in docs" |
-
-**Audio:** Upbeat educational sound at 20% volume
-
-**Effects:**
-- Quick cuts between combos
-- Highlight animations
-- Logo reveal at end
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -22965,25 +22716,6 @@ Full setup guide in bio 🔗
 - [ ] Post 248: Prophet/Volume Oracle character art
 - [ ] Post 249: Liquidity pools chart (8 carousel slides)
 - [ ] Post 250: Indicator stacking diagram (7 carousel slides)
-
-### Videos to Create
-- [ ] Post 241: 14s urgency countdown TikTok
-- [ ] Post 242: 12s session zones lighting up TikTok
-- [ ] Post 243: 10s patience/discipline TikTok
-- [ ] Post 244: 12s process mindset TikTok
-- [ ] Post 245: 12s Volume Oracle demo TikTok
-- [ ] Post 246: 12s FVG education TikTok
-- [ ] Post 247: 12s indicator overload TikTok
-- [ ] Post 248: 12s Chronicle mystical TikTok
-- [ ] Post 249: 12s liquidity pools TikTok
-- [ ] Post 250: 10s indicator combos TikTok
-
-### Screen Recordings Needed
-- [ ] Volume Oracle regime transitions
-- [ ] FVG formation and fill example
-- [ ] Cluttered chart vs clean chart
-- [ ] Liquidity pools on chart structure
-- [ ] Indicator combinations on TradingView
 
 ---
 
