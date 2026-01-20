@@ -20329,27 +20329,6 @@ Full article in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Confidence isn't felt. It's BUILT."
-
-**Script:**
-```
-[0-2s] BUILDING CONFIDENCE
-[2-4s] Step 1: BACKTEST it
-[4-6s] Step 2: PAPER TRADE it
-[6-8s] Step 3: JOURNAL everything
-[8-10s] Step 4: REVIEW the data
-[10-12s] Step 5: SMALL live trades
-[12-14s] Confidence is BUILT. Not felt.
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Build it step by step. #trading #confidence #system #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -20370,22 +20349,6 @@ Full article in bio 🔗
 1. **Slide 1:** Building blocks visual
 2. **Slides 2-5:** Each step detailed
 3. **Slide 6:** CTA - Article link
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Blocks stacking/building
-3. **Timeline Setup:**
-   - 0-2s: "BUILDING CONFIDENCE" title
-   - 2-12s: Each block appears and stacks
-   - 12-14s: Complete structure + message
-4. **Animation:** Blocks dropping into place
-5. **Building Effect:** Satisfying stacking animation
-6. **Audio:** Building/construction sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -20446,27 +20409,6 @@ Read the full chronicle in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "One side is wrong. The Scales knows which."
-
-**Script:**
-```
-[0-2s] THE SCALES ⚖️
-[2-4s] Buyers: "Great price!"
-[4-6s] Sellers: "Thanks for buying!"
-[6-8s] Both CAN'T be right
-[8-10s] The Scales sees the FLOW
-[10-12s] Who is accumulating
-[12-14s] Who is distributing
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "The Scales knows. #signalpilot #thescales #chronicle #trading"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -20482,24 +20424,6 @@ Read the full chronicle in bio 🔗
 6. **Color Theme:** Gold (#c9a962) for scales, blue accents
 7. **Footer:** "THE SCALES" in small caps
 8. **Export:** PNG, high quality
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Cinematic, judgment
-3. **Timeline Setup:**
-   - 0-2s: The Scales reveal
-   - 2-6s: Buyers vs Sellers visual
-   - 6-8s: "Both can't be right"
-   - 8-14s: Scales tip, flow revealed
-4. **Animation:** Scales tipping, balance judgment
-5. **Character:** The Scales figure central
-6. **Audio:** Balance/judgment sound at 30% volume
-7. **Color Grading:** Gold and deep blue
-8. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
