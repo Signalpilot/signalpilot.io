@@ -23613,27 +23613,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Stop watching charts all day."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Stop watching charts" |
-| 2-4s | "Set alerts instead" |
-| 4-6s | "Pentarch phase change? Alert." |
-| 6-8s | "Price hits level? Alert." |
-| 8-10s | "Guide in docs → bio" |
-
-**Background:** Screen recording of alert setup or split showing freedom
-
-**Sound:** Life hack/efficiency trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -23656,33 +23635,6 @@ Full setup guide in bio 🔗
 - Highlight key UI elements
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: TradingView screen recording
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Tired trader watching charts | "Stop watching charts" |
-| 2-4s | Phone notification | "Set alerts instead" |
-| 4-6s | Alert setup demo | "Pentarch phase change? Alert." |
-| 6-8s | Another alert | "Price hits level? Alert." |
-| 8-10s | Logo | "Guide in docs → bio" |
-
-**Audio:** Life hack/efficiency sound at 20% volume
-
-**Effects:**
-- Notification pop animations
-- Highlight circles on UI
-- Quick, snappy cuts
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -23872,27 +23824,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "This changed how I see the market."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Changed how I see markets" |
-| 2-4s | "Stopped looking for signals" |
-| 4-6s | "Started looking for context" |
-| 6-8s | "Results followed" |
-| 8-10s | "Join the community → bio" |
-
-**Background:** Testimonial text appearing on screen, or chart transformation
-
-**Sound:** Inspirational/transformation trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -23914,33 +23845,6 @@ Full setup guide in bio 🔗
 - Professional typography hierarchy
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Dark with text reveals
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Quote card appearing | "Changed how I see markets" |
-| 2-4s | Text reveal | "Stopped looking for signals" |
-| 4-6s | Emphasis | "Started looking for context" |
-| 6-8s | Result highlight | "Results followed" |
-| 8-10s | CTA | "Join the community → bio" |
-
-**Audio:** Inspirational transformation sound at 20% volume
-
-**Effects:**
-- Text typing or reveal animations
-- Subtle particle effects
-- Professional transitions
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -24014,28 +23918,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "This is what real momentum looks like."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Real momentum looks like this" |
-| 2-4s | "DISPLACEMENT" |
-| 4-6s | "Big candles. Strong closes." |
-| 6-8s | "Not this → weak, wicky" |
-| 8-10s | "Conviction matters" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording comparing displacement to weak candles
-
-**Sound:** Powerful/impactful trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -24057,34 +23939,6 @@ Full setup guide in bio 🔗
 - Weak side: Red/gray negative tones
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart with both examples
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Strong candles | "Real momentum looks like this" |
-| 2-4s | Highlight | "DISPLACEMENT" |
-| 4-6s | Zoom on features | "Big candles. Strong closes." |
-| 6-8s | Switch to weak example | "Not this → weak, wicky" |
-| 8-10s | Back to displacement | "Conviction matters" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Powerful impactful sound at 20% volume
-
-**Effects:**
-- Highlight circles on candle features
-- Side-by-side comparison animation
-- Emphasis on key differences
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -24152,28 +24006,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "I found the holy grail of trading."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Found the holy grail" |
-| 2-4s | "Just kidding. It doesn't exist." |
-| 4-6s | "Every strategy has drawdowns" |
-| 6-8s | "The REAL edge?" |
-| 8-10s | "Knowing WHEN to use it" |
-| 10-12s | "And when to sit out" |
-
-**Background:** Exciting discovery visual, then reality check
-
-**Sound:** Bait-and-switch/reality check trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -24195,34 +24027,6 @@ Full setup guide in bio 🔗
 - Clean typography
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Mythical to reality transition
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Golden glow, treasure | "Found the holy grail" |
-| 2-4s | Record scratch, reality | "Just kidding. It doesn't exist." |
-| 4-6s | Equity drawdown chart | "Every strategy has drawdowns" |
-| 6-8s | Question reveal | "The REAL edge?" |
-| 8-10s | Insight reveal | "Knowing WHEN to use it" |
-| 10-12s | Final message | "And when to sit out" |
-
-**Audio:** Bait-and-switch sound at 25% volume
-
-**Effects:**
-- Glowing treasure effect at start
-- Record scratch visual effect
-- Reality check transition
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -24282,27 +24086,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "The only rule that matters in trading."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Only rule that matters:" |
-| 2-4s | "Rule #1: Don't lose money" |
-| 4-6s | "Rule #2: See rule #1" |
-| 6-8s | "Can't compound from zero" |
-| 8-10s | "Stay in the game" |
-
-**Background:** Dramatic text reveal on dark background
-
-**Sound:** Serious/wisdom trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -24324,33 +24107,6 @@ Full setup guide in bio 🔗
 - Gold accent on survival message
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Dark with dramatic reveals
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Title | "Only rule that matters:" |
-| 2-4s | Rule 1 | "Rule #1: Don't lose money" |
-| 4-6s | Rule 2 | "Rule #2: See rule #1" |
-| 6-8s | Zero account visual | "Can't compound from zero" |
-| 8-10s | Shield icon | "Stay in the game" |
-
-**Audio:** Serious wisdom sound at 20% volume
-
-**Effects:**
-- Dramatic text reveals
-- Rule number emphasis
-- Protective icon animation
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -24417,28 +24173,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "OBV is good. This is better."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "OBV is good" |
-| 2-4s | "Plutus Flow is better" |
-| 4-6s | "Z-score normalization" |
-| 6-8s | "Is this flow UNUSUAL?" |
-| 8-10s | "Context changes everything" |
-| 10-12s | "Link in bio" |
-
-**Background:** Screen recording comparing OBV to Plutus Flow
-
-**Sound:** Upgrade/evolution trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -24460,34 +24194,6 @@ Full setup guide in bio 🔗
 - Plutus Flow: Enhanced, feature-rich appearance
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart with both indicators
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Standard OBV | "OBV is good" |
-| 2-4s | Transition to Plutus Flow | "Plutus Flow is better" |
-| 4-6s | Z-score highlight | "Z-score normalization" |
-| 6-8s | Unusual reading | "Is this flow UNUSUAL?" |
-| 8-10s | Full view | "Context changes everything" |
-| 10-12s | Logo | "Link in bio" |
-
-**Audio:** Upgrade evolution sound at 20% volume
-
-**Effects:**
-- Comparison wipe transition
-- Feature highlight animations
-- Upgrade arrow animation
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -24561,28 +24267,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "The entry zone most traders miss."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Entry zone most miss:" |
-| 2-4s | "OTE — 62-79% Fib" |
-| 4-6s | "After displacement" |
-| 6-8s | "Wait for retracement" |
-| 8-10s | "Better risk:reward" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording drawing Fibonacci, highlighting OTE zone
-
-**Sound:** Educational/discovery trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -24601,34 +24285,6 @@ Full setup guide in bio 🔗
 8. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart with Fibonacci
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Chart overview | "Entry zone most miss:" |
-| 2-4s | Fib drawn, zone highlighted | "OTE — 62-79% Fib" |
-| 4-6s | Show impulsive move | "After displacement" |
-| 6-8s | Show retracement | "Wait for retracement" |
-| 8-10s | Show entry with R:R | "Better risk:reward" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Educational discovery sound at 20% volume
-
-**Effects:**
-- Fibonacci drawing animation
-- Zone highlight pulse
-- Entry point emphasis
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -24700,28 +24356,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "My backtest made millions. My live account didn't."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Backtest: +500%" |
-| 2-4s | "Live trading: -20%" |
-| 4-6s | "What went wrong?" |
-| 6-8s | "Hindsight bias. Overfitting." |
-| 8-10s | "Test honestly or lose money" |
-| 10-12s | "Full article → bio" |
-
-**Background:** Split showing amazing backtest vs disappointing live results
-
-**Sound:** Reality check/disappointment trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -24740,34 +24374,6 @@ Full setup guide in bio 🔗
 8. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Equity curve comparisons
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Beautiful equity curve | "Backtest: +500%" |
-| 2-4s | Crashed equity curve | "Live trading: -20%" |
-| 4-6s | Question reveal | "What went wrong?" |
-| 6-8s | Mistake list | "Hindsight bias. Overfitting." |
-| 8-10s | Solution hint | "Test honestly or lose money" |
-| 10-12s | Logo | "Full article → bio" |
-
-**Audio:** Reality check sound at 25% volume
-
-**Effects:**
-- Dramatic curve comparison
-- Record scratch on reality
-- Text emphasis animations
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -24823,28 +24429,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Momentum has many voices."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Momentum has many voices" |
-| 2-4s | "RSI says one thing" |
-| 4-6s | "MACD says another" |
-| 6-8s | "The Arbiter heard them all" |
-| 8-10s | "Harmonic Oscillator was born" |
-| 10-12s | "Chronicle → bio" |
-
-**Background:** Arbiter character art with waveform visuals, Ken Burns zoom
-
-**Sound:** Epic/mystical orchestral trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -24867,34 +24451,6 @@ Full setup guide in bio 🔗
 - Mystical atmosphere
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Arbiter artwork with waveforms
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Waveform visualization | "Momentum has many voices" |
-| 2-4s | RSI wave highlight | "RSI says one thing" |
-| 4-6s | MACD wave highlight | "MACD says another" |
-| 6-8s | Arbiter appears | "The Arbiter heard them all" |
-| 8-10s | Harmonic Oscillator glow | "Harmonic Oscillator was born" |
-| 10-12s | Logo | "Chronicle → bio" |
-
-**Audio:** Epic orchestral sound at 25% volume
-
-**Effects:**
-- Waveform animations
-- Character reveal
-- Harmonic convergence visual
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -24966,28 +24522,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Trade at these times. Avoid the rest."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "When to trade:" |
-| 2-4s | "London Open: 2-5 AM EST" |
-| 4-6s | "NY Open: 7-10 AM EST" |
-| 6-8s | "London Close: 10 AM-12 PM" |
-| 8-10s | "These are KILL ZONES" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Clock animation or chart with time windows
-
-**Sound:** Strategic/tactical trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -25011,34 +24545,6 @@ Full setup guide in bio 🔗
 - London Close: #8b5cf6 (purple)
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Clock/timeline animation
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Clock visual | "When to trade:" |
-| 2-4s | London zone highlight | "London Open: 2-5 AM EST" |
-| 4-6s | NY zone highlight | "NY Open: 7-10 AM EST" |
-| 6-8s | LC zone highlight | "London Close: 10 AM-12 PM" |
-| 8-10s | All zones shown | "These are KILL ZONES" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Strategic tactical sound at 20% volume
-
-**Effects:**
-- Zone highlight animations
-- Clock hand movement
-- Color-coded reveals
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -25113,27 +24619,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Yes, Signal Pilot works on your phone."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Works on mobile?" |
-| 2-4s | "Yes." |
-| 4-6s | "All 7 indicators" |
-| 6-8s | "Alerts on the go" |
-| 8-10s | "Setup guide → bio" |
-
-**Background:** Phone screen recording with Signal Pilot indicators
-
-**Sound:** Convenience/modern trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -25156,33 +24641,6 @@ Full setup guide in bio 🔗
 - Feature callouts
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Phone screen recording
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Question card | "Works on mobile?" |
-| 2-4s | Phone appears with app | "Yes." |
-| 4-6s | Show multiple indicators | "All 7 indicators" |
-| 6-8s | Notification pop | "Alerts on the go" |
-| 8-10s | Logo | "Setup guide → bio" |
-
-**Audio:** Modern convenience sound at 20% volume
-
-**Effects:**
-- Phone slide-in animation
-- Indicator showcase
-- Notification animation
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -25259,18 +24717,6 @@ Full setup guide in bio 🔗
 - [ ] Post 268: Arbiter character art with waveforms
 - [ ] Post 269: Kill zones timeline (8 carousel slides)
 - [ ] Post 270: Phone mockup with Signal Pilot (7 carousel slides)
-
-### Videos to Create
-- [ ] Post 261: 10s testimonial TikTok
-- [ ] Post 262: 12s displacement TikTok
-- [ ] Post 263: 12s holy grail myth TikTok
-- [ ] Post 264: 10s survive first TikTok
-- [ ] Post 265: 12s Plutus Flow demo TikTok
-- [ ] Post 266: 12s OTE education TikTok
-- [ ] Post 267: 12s backtesting reality TikTok
-- [ ] Post 268: 12s Chronicle mystical TikTok
-- [ ] Post 269: 12s kill zones TikTok
-- [ ] Post 270: 10s mobile setup TikTok
 
 ### Screen Recordings Needed
 - [ ] Displacement vs weak candles on TradingView
@@ -25384,27 +24830,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Lock in this price before it's gone."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Current pricing:" |
-| 2-4s | "$99/mo or $699/yr" |
-| 4-6s | "7 indicators. 82 lessons." |
-| 6-8s | "Prices going up soon" |
-| 8-10s | "Lock in now → bio" |
-
-**Background:** Pricing graphic animation, countdown-style urgency
-
-**Sound:** Urgency/limited-time trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -25427,33 +24852,6 @@ Full setup guide in bio 🔗
 - Urgency elements subtle but present
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Animated pricing reveal
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Title card | "Current pricing:" |
-| 2-4s | Price reveal | "$99/mo or $699/yr" |
-| 4-6s | Features list | "7 indicators. 82 lessons." |
-| 6-8s | Timer/urgency | "Prices going up soon" |
-| 8-10s | CTA | "Lock in now → bio" |
-
-**Audio:** Urgency sound at 20% volume
-
-**Effects:**
-- Price counter animations
-- Timer/countdown element
-- Emphasis on savings
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -25529,28 +24927,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "This is how you get stop hunted."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "How you get stop hunted:" |
-| 2-4s | "1. ACCUMULATION (range)" |
-| 4-6s | "2. MANIPULATION (fake move)" |
-| 6-8s | "3. DISTRIBUTION (real move)" |
-| 8-10s | "Don't be the exit liquidity" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording showing AMD pattern on chart
-
-**Sound:** Revelation/eye-opening trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -25573,34 +24949,6 @@ Full setup guide in bio 🔗
 - Distribution: #4a90d9 (blue arrow)
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart with AMD sequence
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Chart overview | "How you get stop hunted:" |
-| 2-4s | Range highlighted | "1. ACCUMULATION (range)" |
-| 4-6s | False move shown | "2. MANIPULATION (fake move)" |
-| 6-8s | Real move | "3. DISTRIBUTION (real move)" |
-| 8-10s | Stopped traders | "Don't be the exit liquidity" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Eye-opening revelation sound at 20% volume
-
-**Effects:**
-- Sequential phase highlighting
-- Arrow animations
-- Phase transitions
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -25669,27 +25017,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Same strategy. Completely different results."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Same strategy" |
-| 2-4s | "1% risk: survives drawdowns" |
-| 4-6s | "10% risk: blown account" |
-| 6-8s | "Position sizing matters" |
-| 8-10s | "More than your strategy" |
-
-**Background:** Split showing two equity curves diverging
-
-**Sound:** Reality check trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -25711,33 +25038,6 @@ Full setup guide in bio 🔗
 - Volatile curve: Wild swings ending low
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Dual equity curves
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Both curves starting | "Same strategy" |
-| 2-4s | Stable curve continues | "1% risk: survives drawdowns" |
-| 4-6s | Volatile curve crashes | "10% risk: blown account" |
-| 6-8s | Comparison view | "Position sizing matters" |
-| 8-10s | Logo | "More than your strategy" |
-
-**Audio:** Reality check sound at 25% volume
-
-**Effects:**
-- Curve drawing animations
-- Crash animation for 10% curve
-- Comparison reveal
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -25803,27 +25103,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "The market is your teacher."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "The market teaches you" |
-| 2-4s | "Tuition = your losses" |
-| 4-6s | "Pay attention" |
-| 6-8s | "Or keep paying" |
-| 8-10s | "Every loss is a lesson" |
-
-**Background:** Education/books transitioning to trading charts
-
-**Sound:** Thoughtful/wisdom trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -25846,33 +25125,6 @@ Full setup guide in bio 🔗
 - Gold accents on key elements
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Dark with text reveals
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Book/education visual | "The market teaches you" |
-| 2-4s | Price tag visual | "Tuition = your losses" |
-| 4-6s | Eyes/attention | "Pay attention" |
-| 6-8s | Money leaving | "Or keep paying" |
-| 8-10s | Notebook/journal | "Every loss is a lesson" |
-
-**Audio:** Wisdom/thoughtful sound at 20% volume
-
-**Effects:**
-- Text fade-ins
-- Visual metaphors for each line
-- Contemplative pacing
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -25942,28 +25194,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Watching 50 charts is stupid. Do this instead."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Watching 50 charts?" |
-| 2-4s | "Stop." |
-| 4-6s | "Augury Grid scans them all" |
-| 6-8s | "One view. All symbols." |
-| 8-10s | "Work smarter" |
-| 10-12s | "Link in bio" |
-
-**Background:** Quick cuts: flipping charts (frustrated) → Augury Grid (calm)
-
-**Sound:** Efficiency/hack trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -25986,34 +25216,6 @@ Full setup guide in bio 🔗
 - Caution: Yellow/red
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart flipping to Augury Grid
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Rapid chart flipping | "Watching 50 charts?" |
-| 2-4s | Stop/pause | "Stop." |
-| 4-6s | Augury Grid appears | "Augury Grid scans them all" |
-| 6-8s | Grid overview | "One view. All symbols." |
-| 8-10s | Calm workspace | "Work smarter" |
-| 10-12s | Logo | "Link in bio" |
-
-**Audio:** Efficiency hack sound at 20% volume
-
-**Effects:**
-- Frantic chart flipping at start
-- Calm reveal of grid
-- Status dot animations
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26088,28 +25290,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Is this a breakout or a trap?"
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Breakout or trap?" |
-| 2-4s | "Look at the CLOSE" |
-| 4-6s | "Wick through + close inside = SWEEP" |
-| 6-8s | "Body through + close beyond = REAL" |
-| 8-10s | "The close tells the truth" |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording comparing sweep vs breakout candles
-
-**Sound:** Detective/discovery trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26128,34 +25308,6 @@ Full setup guide in bio 🔗
 8. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart with both examples
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Level being tested | "Breakout or trap?" |
-| 2-4s | Highlight close area | "Look at the CLOSE" |
-| 4-6s | Sweep candle | "Wick through + close inside = SWEEP" |
-| 6-8s | Breakout candle | "Body through + close beyond = REAL" |
-| 8-10s | Both shown | "The close tells the truth" |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Detective discovery sound at 20% volume
-
-**Effects:**
-- Circle/highlight on close positions
-- Comparison animation
-- Truth reveal effect
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26225,27 +25377,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "I took fewer trades. Made more money."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Took fewer trades" |
-| 2-4s | "Made more money" |
-| 4-6s | "Quality > quantity" |
-| 6-8s | "Only A+ setups" |
-| 8-10s | "Activity ≠ results" |
-
-**Background:** Before/after trade journal comparison
-
-**Sound:** Revelation/wisdom trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26264,33 +25395,6 @@ Full setup guide in bio 🔗
 8. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Trade log visuals
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Many trades, losses | "Took fewer trades" |
-| 2-4s | Fewer trades, profits | "Made more money" |
-| 4-6s | Comparison | "Quality > quantity" |
-| 6-8s | A+ setup | "Only A+ setups" |
-| 8-10s | Logo | "Activity ≠ results" |
-
-**Audio:** Wisdom revelation sound at 20% volume
-
-**Effects:**
-- Before/after transition
-- Counter animations
-- Calm reveal
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26348,28 +25452,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "I can't watch every market."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Can't watch every market" |
-| 2-4s | "The Watchman said:" |
-| 4-6s | "Let me watch them all" |
-| 6-8s | "I'll signal when needed" |
-| 8-10s | "Augury Grid was born" |
-| 10-12s | "Chronicle → bio" |
-
-**Background:** Watchman character art with multiple screens, Ken Burns zoom
-
-**Sound:** Epic/mysterious orchestral trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26392,34 +25474,6 @@ Full setup guide in bio 🔗
 - Dark, mysterious atmosphere
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Watchman artwork with screen effects
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Weary trader visual | "Can't watch every market" |
-| 2-4s | Watchman emerges | "The Watchman said:" |
-| 4-6s | Multiple screens | "Let me watch them all" |
-| 6-8s | Alert notification | "I'll signal when needed" |
-| 8-10s | Augury Grid icon | "Augury Grid was born" |
-| 10-12s | Logo | "Chronicle → bio" |
-
-**Audio:** Epic mysterious orchestral at 25% volume
-
-**Effects:**
-- Character emergence animation
-- Screen multiplication effect
-- Alert pulse animation
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26492,28 +25546,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Buy cheap. Sell expensive. Here's how."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Buy cheap. Sell expensive." |
-| 2-4s | "Find the 50% of any range" |
-| 4-6s | "Above = PREMIUM (expensive)" |
-| 6-8s | "Below = DISCOUNT (cheap)" |
-| 8-10s | "Simple filter. Big edge." |
-| 10-12s | "Free lesson → bio" |
-
-**Background:** Screen recording showing range with 50% and zones
-
-**Sound:** Strategic/educational trending sound
-
-**Duration:** 12 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26537,34 +25569,6 @@ Full setup guide in bio 🔗
 - 50%: Gold equilibrium line
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 12 seconds
-3. Background: Chart with range
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Chart view | "Buy cheap. Sell expensive." |
-| 2-4s | Draw 50% line | "Find the 50% of any range" |
-| 4-6s | Highlight top half | "Above = PREMIUM (expensive)" |
-| 6-8s | Highlight bottom half | "Below = DISCOUNT (cheap)" |
-| 8-10s | Full zone view | "Simple filter. Big edge." |
-| 10-12s | Logo | "Free lesson → bio" |
-
-**Audio:** Strategic educational sound at 20% volume
-
-**Effects:**
-- Line drawing animation
-- Zone fill animations
-- Color reveals
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26635,27 +25639,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Make Signal Pilot match YOUR style."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "Default colors boring?" |
-| 2-4s | "Customize everything" |
-| 4-6s | "Settings → Style" |
-| 6-8s | "Your chart, your colors" |
-| 8-10s | "Guide in docs → bio" |
-
-**Background:** Screen recording of color customization process
-
-**Sound:** Creative/customization trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26674,33 +25657,6 @@ Full setup guide in bio 🔗
 8. **Logo** (corner): Signal Pilot logo
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: TradingView settings recording
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | Default chart | "Default colors boring?" |
-| 2-4s | Opening settings | "Customize everything" |
-| 4-6s | Style tab | "Settings → Style" |
-| 6-8s | Color changes | "Your chart, your colors" |
-| 8-10s | Logo | "Guide in docs → bio" |
-
-**Audio:** Creative customization sound at 20% volume
-
-**Effects:**
-- Settings panel animation
-- Color change transitions
-- Before/after reveal
-
-**Export:** 1080x1920, 30fps
 
 ---
 
@@ -26777,18 +25733,6 @@ Full setup guide in bio 🔗
 - [ ] Post 278: Watchman character art
 - [ ] Post 279: Premium/discount zones chart (8 carousel slides)
 - [ ] Post 280: Before/after color customization (7 carousel slides)
-
-### Videos to Create
-- [ ] Post 271: 10s pricing urgency TikTok
-- [ ] Post 272: 12s AMD pattern TikTok
-- [ ] Post 273: 10s position sizing TikTok
-- [ ] Post 274: 10s market teaches TikTok
-- [ ] Post 275: 12s Augury Grid demo TikTok
-- [ ] Post 276: 12s sweep vs breakout TikTok
-- [ ] Post 277: 10s less is more TikTok
-- [ ] Post 278: 12s Chronicle mystical TikTok
-- [ ] Post 279: 12s premium/discount TikTok
-- [ ] Post 280: 10s customization TikTok
 
 ### Screen Recordings Needed
 - [ ] AMD pattern on TradingView
@@ -26902,27 +25846,6 @@ Full setup guide in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "82 trading lessons. Completely free."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | "82 lessons. Free." |
-| 2-4s | "Beginner → Professional" |
-| 4-6s | "Smart money concepts" |
-| 6-8s | "No paywall. No catch." |
-| 8-10s | "Start learning → bio" |
-
-**Background:** Scrolling through Education Hub interface
-
-**Sound:** Generous/gift trending sound
-
-**Duration:** 10 seconds
-
----
-
 ### 🎨 CANVA VISUAL CREATION GUIDE
 
 **Template Setup:**
@@ -26946,33 +25869,6 @@ Full setup guide in bio 🔗
 - Professional: #ef4444 (red)
 
 **Export:** PNG, high quality
-
----
-
-### 🎬 CAPCUT VIDEO CREATION GUIDE
-
-**Project Setup:**
-1. New project 1080x1920 (9:16)
-2. Duration: 10 seconds
-3. Background: Education Hub scrolling
-
-**Timeline Assembly:**
-| Timestamp | Visual | Text Overlay |
-|-----------|--------|--------------|
-| 0-2s | "82" number animation | "82 lessons. Free." |
-| 2-4s | Track levels appearing | "Beginner → Professional" |
-| 4-6s | Advanced content preview | "Smart money concepts" |
-| 6-8s | No paywall graphic | "No paywall. No catch." |
-| 8-10s | Logo | "Start learning → bio" |
-
-**Audio:** Generous gift sound at 20% volume
-
-**Effects:**
-- Number counter animation
-- Track card reveals
-- Value emphasis
-
-**Export:** 1080x1920, 30fps
 
 ---
 
