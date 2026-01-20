@@ -37856,31 +37856,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Seven guardians. One system."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-1s | THE ELITE SEVEN |
-| 1-2s | ⚜️ Pentarch — Cycles |
-| 2-3s | 🔮 Volume Oracle — Regimes |
-| 3-4s | 🗺️ Janus Atlas — Levels |
-| 4-5s | ⚖️ Plutus Flow — Flow |
-| 5-6s | 🎵 Harmonic Oscillator — Momentum |
-| 6-7s | 👁️ Augury Grid — Scanner |
-| 7-8s | ⚔️ OmniDeck — Commander |
-| 8-10s | One unified system |
-| 10-12s | Chronicle in bio 📜 |
-
-**Background:** Each guardian icon appearing one by one, or all seven in epic reveal
-
-**Sound:** Epic/cinematic orchestral audio building throughout
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 618
 
 #### Static Image (Instagram/Twitter)
@@ -37929,61 +37904,6 @@ Each category:
    - Individual glows for each guardian (matching their accent color)
 
 10. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 618
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Seven guardian icons (individual images)
-   - Epic background (dark with gold particles)
-   - Orchestral music
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-1s): Grand Opening**
-   - Text: "THE ELITE SEVEN" (Epic reveal, gold)
-   - Orchestral hit
-   - Flash effect
-
-5. **Segments 2-8 (1-8s): Guardian Reveals**
-   - Each guardian gets exactly 1 second
-   - Icon appears with glow effect
-   - Name and role appear:
-     - "⚜️ Pentarch — Cycles"
-     - "🔮 Volume Oracle — Regimes"
-     - etc.
-   - Musical beat on each reveal
-
-6. **Segment 9 (8-10s): Unification**
-   - All seven icons come together
-   - Text: "One unified system"
-   - Show them forming a circle or constellation
-   - Peak orchestral moment
-
-7. **Segment 10 (10-12s): CTA**
-   - Text: "Chronicle in bio 📜"
-   - All icons visible, glowing
-   - Signal Pilot logo
-   - Fade out with reverb
-
-8. **Audio:**
-   - Epic orchestral/cinematic music
-   - Build throughout
-   - Peak at unification
-   - Dramatic but not overwhelming
-
-9. **Effects:**
-   - Particle effects (gold sparks)
-   - Glow on each icon
-   - Smooth reveal transitions
-
-10. **Export:** 1080x1920, 30fps
 
 ---
 
@@ -38046,27 +37966,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Stop asking where. Start asking what."
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | What is price DOING? |
-| 2-4s | UPTREND: HH + HL |
-| 4-6s | DOWNTREND: LH + LL |
-| 6-8s | RANGE: Mixed structure |
-| 8-10s | Context before direction |
-| 10-12s | Free lesson → bio |
-
-**Background:** Chart cycling through clear examples of each market state
-
-**Sound:** Educational/tech trending audio
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 619
 
 #### Static Image (Instagram/Twitter)
@@ -38113,62 +38012,6 @@ Each category:
    - Educational disclaimer
 
 10. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 619
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Three chart examples (uptrend, downtrend, range)
-   - Arrow/line drawing animations
-   - Educational graphics
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): The Question**
-   - Text: "What is price DOING?" (Large, centered)
-   - Question mark animation
-   - Hook the viewer
-
-5. **Segment 2 (2-4s): Uptrend**
-   - Show uptrend chart
-   - Draw HH and HL markers
-   - Text: "UPTREND: HH + HL" (Green)
-   - Ascending arrow animation
-
-6. **Segment 3 (4-6s): Downtrend**
-   - Show downtrend chart
-   - Draw LH and LL markers
-   - Text: "DOWNTREND: LH + LL" (Red)
-   - Descending arrow animation
-
-7. **Segment 4 (6-8s): Range**
-   - Show range chart
-   - Draw horizontal boundaries
-   - Text: "RANGE: Mixed structure" (Blue)
-   - Sideways arrow animation
-
-8. **Segment 5 (8-10s): Takeaway**
-   - Text: "Context before direction"
-   - Show all three examples briefly
-   - Emphasize identification first
-
-9. **Segment 6 (10-12s): CTA**
-   - Text: "Free lesson → bio"
-   - Signal Pilot logo
-   - Fade out
-
-10. **Audio:**
-    - Educational/tech music
-    - Clear, structured feel
-    - Transition sounds between states
-
-11. **Export:** 1080x1920, 30fps
 
 ---
 
@@ -38225,30 +38068,6 @@ Each category:
 
 ---
 
-#### TikTok
-**Hook:** "Does it work on crypto AND stocks?"
-
-**On-Screen Text Sequence:**
-| Timestamp | Text |
-|-----------|------|
-| 0-2s | "Does it work on everything?" |
-| 2-3s | ✅ Crypto |
-| 3-4s | ✅ Stocks |
-| 4-5s | ✅ Forex |
-| 5-6s | ✅ Futures |
-| 6-7s | ✅ Indices |
-| 7-9s | If TradingView charts it... |
-| 9-11s | Signal Pilot analyzes it |
-| 11-12s | Link in bio ⬇️ |
-
-**Background:** Quick cuts showing the same indicator on different asset charts
-
-**Sound:** Confirmation/success sound effects with each checkmark
-
-**Duration:** 12 seconds
-
----
-
 ### Canva Visual Creation Guide — Post 620
 
 #### Static Image (Instagram/Twitter)
@@ -38292,57 +38111,6 @@ Each category:
    - CTA: "More FAQs in bio"
 
 10. **Export:** PNG, highest quality
-
----
-
-### CapCut Video Creation Guide — Post 620
-
-#### TikTok Video (12 seconds)
-**Step-by-Step Instructions:**
-
-1. **Open CapCut** → New Project → 9:16 aspect ratio
-
-2. **Import Assets:**
-   - Screenshots of Signal Pilot on 5 different asset types
-   - Checkmark animation
-   - Success sound effect
-
-3. **Timeline Setup:**
-
-4. **Segment 1 (0-2s): The Question**
-   - Text: "Does it work on everything?" (Questioning tone)
-   - Use question mark animation
-
-5. **Segments 2-6 (2-7s): Asset Checkmarks**
-   - Each asset gets 1 second:
-   - Show chart, checkmark appears
-   - "✅ Crypto" (Bitcoin chart)
-   - "✅ Stocks" (Apple chart)
-   - "✅ Forex" (EUR/USD chart)
-   - "✅ Futures" (ES chart)
-   - "✅ Indices" (SPX chart)
-   - Satisfying "ding" sound for each checkmark
-
-6. **Segment 7 (7-9s): Explanation**
-   - Text: "If TradingView charts it..."
-   - Show TradingView logo briefly
-
-7. **Segment 8 (9-11s): Conclusion**
-   - Text: "Signal Pilot analyzes it"
-   - Show all five charts in quick montage
-   - Confident tone
-
-8. **Segment 9 (11-12s): CTA**
-   - Text: "Link in bio ⬇️"
-   - Signal Pilot logo
-   - Fade out
-
-9. **Audio:**
-   - Upbeat, confident music
-   - "Ding" success sound for each checkmark
-   - Builds energy throughout
-
-10. **Export:** 1080x1920, 30fps
 
 ---
 
