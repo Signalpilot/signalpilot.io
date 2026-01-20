@@ -1233,6 +1233,8 @@ All without repainting. What you see today is what existed yesterday.
 🔗 Full documentation in bio.
 
 #volumeoracle #tradingview #signalpilot #volumeanalysis #tradingtools #forex #crypto
+
+Do you track volume regimes? What signs do you look for? 👇
 ```
 
 ---
@@ -1335,6 +1337,8 @@ One consistently takes from the other.
 🔗 Link in bio.
 
 #smartmoney #institutionaltrading #trading #forex #crypto #liquidity #signalpilot
+
+Which side are you on? Retail or institutional mindset? Share your approach 💭
 ```
 
 ---
@@ -1481,6 +1485,8 @@ Never be fooled again.
 🔗 Link in bio.
 
 #repainting #tradingindicators #trading #backtesting #signalpilot
+
+Have you ever tested if your indicator repaints? Share what you found 🔍
 ```
 
 ---
@@ -1574,6 +1580,8 @@ You're predictable.
 🔗 Link in bio.
 
 #stophunting #liquidity #smartmoney #trading #forex #crypto #signalpilot
+
+Have your stops ever been hit right before the reversal? We've ALL been there 🙋‍♂️
 ```
 
 ---
@@ -2510,6 +2518,8 @@ That's hunting.
 🔗 Learn to recognize sweeps in bio.
 
 #liquiditysweep #smartmoney #trading #stophunting #forex #crypto #signalpilot
+
+Can you spot the difference now? Save this for your next sweep vs breakdown analysis 📊
 ```
 
 ---
@@ -2604,6 +2614,8 @@ Indicators don't fail. Context ignorance fails.
 🔗 Full article in bio.
 
 #tradingindicators #trading #technicalanalysis #forex #crypto #signalpilot
+
+What's the biggest indicator mismatch you've experienced? Share below 💬
 ```
 
 ---
@@ -2676,6 +2688,8 @@ When 4/7 align = Mixed, proceed with caution
 🔗 Documentation in bio.
 
 #harmonicoscillator #momentum #tradingview #signalpilot #trading #forex #crypto
+
+How many momentum indicators do you currently use? Time to simplify? 🎯
 ```
 
 ---
@@ -2761,6 +2775,8 @@ Multi-timeframe traders see the full map.
 Enter the Chronicle. Link in bio.
 
 #chronicle #janusatlas #signalpilot #eliteseven #multitimeframe #tradingwisdom
+
+Do you trade multiple timeframes? What's your go-to combination? 🗺️
 ```
 
 ---
@@ -4007,6 +4023,8 @@ Stop chasing high win rates. Chase good setups.
 Full lesson in bio 🔗
 
 #riskreward #tradingmath #trading #forex #crypto #signalpilot
+
+What's your typical risk-reward ratio? 1:2? 1:3? Higher? Drop it below 📊
 ```
 
 ---
@@ -4092,6 +4110,8 @@ Key concepts:
 Full guide in bio 🔗
 
 #volumeprofile #trading #marketstructure #forex #crypto #signalpilot
+
+Do you use volume profile? What's your favorite zone to trade around? 📍
 ```
 
 ---
@@ -4142,6 +4162,8 @@ Plan both. Every time.
 Save this. 🔖
 
 #tradingquotes #exitstrategy #tradingwisdom #forex #crypto #signalpilot
+
+Are you an entry-focused or exit-focused trader? Be honest 🎯
 ```
 
 ---
@@ -4199,6 +4221,8 @@ Stop watching one tree. See the whole forest.
 Demo in bio 🔗
 
 #augurygrid #scanner #tradingview #signalpilot #trading #forex #crypto
+
+How many symbols are on your watchlist? More than you can watch at once? 👁️
 ```
 
 ---
@@ -4291,6 +4315,8 @@ No stop = unlimited risk.
 Full lesson in bio 🔗
 
 #stoploss #riskmanagement #trading #forex #crypto #signalpilot
+
+What's your go-to stop loss strategy? Fixed, structure, ATR, or trailing? 🛑
 ```
 
 ---
@@ -4376,6 +4402,8 @@ Not magic. Market mechanics.
 Full breakdown in bio 🔗
 
 #smartmoney #SMC #liquidity #orderblock #forex #crypto #signalpilot
+
+Which SMC concept changed your trading the most? Liquidity? Order blocks? Share below 🧠
 ```
 
 ---
@@ -6018,6 +6046,8 @@ Full lesson + PDF in bio
 
 **Hashtags:** #Fibonacci #FibRetracement #GoldenRatio #TechnicalAnalysis #SignalPilot #CryptoTrading #ForexTrading #ChartAnalysis #FibLevels #TradingEducation #LearnTrading #SupportResistance #TradingTools #SwingTrading #Confluence
 
+Save this for your next Fib setup. Which level is your favorite entry? 61.8%? 50%? 📐
+
 ---
 
 ### 🎨 CANVA CAROUSEL GUIDE
@@ -6081,6 +6111,8 @@ Full lesson + PDF in bio
 > Full article in bio 🔗
 
 **Hashtags:** #AveragingDown #TradingMistakes #RiskManagement #TradingPsychology #SignalPilot #CryptoTrading #ForexTrading #TradingEducation #CutYourLosses #TradingDiscipline #CommonMistakes #AccountKiller #TradingTips #LosingTrades #HopeIsNotAStrategy
+
+Confession time: have you ever averaged down on a loser? We've all learned this lesson 💀
 
 ---
 
@@ -6204,6 +6236,8 @@ Full lesson + PDF in bio
 > Full lesson in bio 🔗
 
 **Hashtags:** #VolumeAnalysis #VolumeTrading #TechnicalAnalysis #TradingEducation #SignalPilot #CryptoTrading #ForexTrading #VolumeConfirmation #ChartAnalysis #TradingVolume #LearnTrading #VolumeSpike #TradingTips #MarketAnalysis #PriceAndVolume
+
+Do you watch volume on every trade? What volume patterns catch your attention? 📊
 
 ---
 
