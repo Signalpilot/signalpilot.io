@@ -2486,7 +2486,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -3791,7 +3790,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -5148,7 +5146,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -6462,7 +6459,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -7765,7 +7761,6 @@ Layer 6: Chronicle branding
 
 - [ ] All posts have Twitter and Instagram versions
 - [ ] Canva guides specify exact dimensions and colors
-- [ ] CapCut guides include timestamps and audio suggestions
 - [ ] CTAs match strategy for each post type
 - [ ] Brand colors consistent (#0a0a0f, #4a90d9, #c9a962)
 - [ ] Hashtags relevant and varied
@@ -33317,18 +33312,6 @@ Each category:
 - [ ] 579_trading_journal_static.png
 - [ ] 580_system_requirements_static.png
 
-## Videos (CapCut)
-- [ ] 571_journey_starts_video.mp4
-- [ ] 572_position_management_video.mp4
-- [ ] 573_traders_quit_video.mp4
-- [ ] 574_consistency_quote_video.mp4
-- [ ] 575_volume_oracle_transitions_video.mp4
-- [ ] 576_stop_placement_video.mp4
-- [ ] 577_weekend_review_video.mp4
-- [ ] 578_chronicle_epilogue_video.mp4
-- [ ] 579_trading_journal_video.mp4
-- [ ] 580_system_requirements_video.mp4
-
 ## Carousel Slides
 - [ ] 571 carousel (7 slides)
 - [ ] 572 carousel (7 slides)
@@ -34570,18 +34553,6 @@ Each category:
 - [ ] 588_chronicle_recap_static.png
 - [ ] 589_liquidity_static.png
 - [ ] 590_feedback_static.png
-
-## Videos (CapCut)
-- [ ] 581_promise_video.mp4
-- [ ] 582_entry_triggers_video.mp4
-- [ ] 583_sunk_cost_video.mp4
-- [ ] 584_entry_price_quote_video.mp4
-- [ ] 585_pentarch_cycle_video.mp4
-- [ ] 586_spread_slippage_video.mp4
-- [ ] 587_trading_style_video.mp4
-- [ ] 588_chronicle_recap_video.mp4
-- [ ] 589_liquidity_video.mp4
-- [ ] 590_feedback_video.mp4
 
 ## Carousel Slides
 - [ ] 581 carousel (6 slides)
@@ -35846,18 +35817,6 @@ Each category:
 - [ ] 599_trading_habits_static.png
 - [ ] 600_quickstart_static.png
 
-## Videos (CapCut)
-- [ ] 591_600_milestone_video.mp4
-- [ ] 592_trading_plan_video.mp4
-- [ ] 593_accepting_losses_video.mp4
-- [ ] 594_execution_quote_video.mp4
-- [ ] 595_complete_suite_video.mp4
-- [ ] 596_beginner_mistakes_video.mp4
-- [ ] 597_8020_rule_video.mp4
-- [ ] 598_final_chronicle_video.mp4
-- [ ] 599_trading_habits_video.mp4
-- [ ] 600_quickstart_video.mp4
-
 ## Carousel Slides
 - [ ] 591 carousel (7 slides)
 - [ ] 592 carousel (7 slides)
@@ -37031,18 +36990,6 @@ Each category:
 - [ ] 609_order_flow_static.png
 - [ ] 610_upgrade_static.png
 
-## Videos (CapCut)
-- [ ] 601_final_push_video.mp4
-- [ ] 602_market_hours_video.mp4
-- [ ] 603_fomo_video.mp4
-- [ ] 604_market_teacher_quote_video.mp4
-- [ ] 605_settings_video.mp4
-- [ ] 606_price_vs_indicators_video.mp4
-- [ ] 607_year_one_video.mp4
-- [ ] 608_vision_video.mp4
-- [ ] 609_order_flow_video.mp4
-- [ ] 610_upgrade_video.mp4
-
 ---
 
 # ✅ BATCH 61 COMPLETE
@@ -37173,22 +37120,6 @@ Each category:
 - Bullet points: Full Access, No Questions, Risk-Free
 - Signal Pilot logo bottom center
 - Dark background (#0a0a0f)
-
----
-
-## 🎬 CapCut Instructions
-
-**Style:** Trust-building promo
-**Duration:** 30-45 seconds
-
-**Sequence:**
-1. Hook text: "Risk-free trading tools?"
-2. Shield/guarantee badge animation
-3. Quick cuts of indicator features
-4. Testimonial-style confidence building
-5. CTA: "Try Signal Pilot today"
-
-**Effects:** Subtle glow on guarantee text, smooth transitions
 
 ---
 
@@ -38242,16 +38173,16 @@ Each category:
 
 | Post | Recommended Day | Best Time | Platform Order |
 |------|-----------------|-----------|----------------|
-| 612 | Monday | 11:00 AM | Twitter → Instagram → TikTok |
-| 613 | Monday | 3:00 PM | Twitter → Instagram → TikTok |
-| 614 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok |
-| 615 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram |
-| 616 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok |
-| 617 | Wednesday | 4:00 PM | Twitter → Instagram → TikTok |
-| 618 | Thursday | 7:00 PM | Instagram → TikTok → Twitter |
-| 619 | Friday | 10:00 AM | Twitter → Instagram → TikTok |
-| 620 | Friday | 2:00 PM | Twitter → Instagram → TikTok |
-| 621 | Friday | 6:00 PM | Instagram → Twitter → TikTok |
+| 612 | Monday | 11:00 AM | Twitter → Instagram |
+| 613 | Monday | 3:00 PM | Twitter → Instagram |
+| 614 | Tuesday | 8:00 AM | Instagram → Twitter |
+| 615 | Tuesday | 1:00 PM | Twitter → Instagram |
+| 616 | Wednesday | 11:00 AM | Twitter → Instagram |
+| 617 | Wednesday | 4:00 PM | Twitter → Instagram |
+| 618 | Thursday | 7:00 PM | Instagram → Twitter |
+| 619 | Friday | 10:00 AM | Twitter → Instagram |
+| 620 | Friday | 2:00 PM | Twitter → Instagram |
+| 621 | Friday | 6:00 PM | Instagram → Twitter |
 
 ---
 
@@ -39088,16 +39019,16 @@ Each category:
 
 | Post | Day | Time | Priority |
 |------|-----|------|----------|
-| 622 | Monday | 11:00 AM | Twitter → Instagram → TikTok |
-| 623 | Monday | 3:00 PM | Twitter → Instagram → TikTok |
-| 624 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok |
-| 625 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram |
-| 626 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok |
-| 627 | Wednesday | 4:00 PM | Twitter → Instagram → TikTok |
-| 628 | Thursday | 7:00 PM | Instagram → TikTok → Twitter |
-| 629 | Friday | 10:00 AM | Twitter → Instagram → TikTok |
-| 630 | Friday | 2:00 PM | Twitter → Instagram → TikTok |
-| 631 | Friday | 6:00 PM | Instagram → Twitter → TikTok |
+| 622 | Monday | 11:00 AM | Twitter → Instagram |
+| 623 | Monday | 3:00 PM | Twitter → Instagram |
+| 624 | Tuesday | 8:00 AM | Instagram → Twitter |
+| 625 | Tuesday | 1:00 PM | Twitter → Instagram |
+| 626 | Wednesday | 11:00 AM | Twitter → Instagram |
+| 627 | Wednesday | 4:00 PM | Twitter → Instagram |
+| 628 | Thursday | 7:00 PM | Instagram → Twitter |
+| 629 | Friday | 10:00 AM | Twitter → Instagram |
+| 630 | Friday | 2:00 PM | Twitter → Instagram |
+| 631 | Friday | 6:00 PM | Instagram → Twitter |
 
 ---
 
@@ -39749,16 +39680,16 @@ Each category:
 
 | Post | Day | Time | Priority |
 |------|-----|------|----------|
-| 632 | Monday | 11:00 AM | Twitter → Instagram → TikTok |
-| 633 | Monday | 3:00 PM | Twitter → Instagram → TikTok |
-| 634 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok |
-| 635 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram |
-| 636 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok |
-| 637 | Wednesday | 4:00 PM | Twitter → Instagram → TikTok |
-| 638 | Thursday | 7:00 PM | Instagram → TikTok → Twitter |
-| 639 | Friday | 10:00 AM | Twitter → Instagram → TikTok |
-| 640 | Friday | 2:00 PM | Twitter → Instagram → TikTok |
-| 641 | Friday | 6:00 PM | Instagram → Twitter → TikTok |
+| 632 | Monday | 11:00 AM | Twitter → Instagram |
+| 633 | Monday | 3:00 PM | Twitter → Instagram |
+| 634 | Tuesday | 8:00 AM | Instagram → Twitter |
+| 635 | Tuesday | 1:00 PM | Twitter → Instagram |
+| 636 | Wednesday | 11:00 AM | Twitter → Instagram |
+| 637 | Wednesday | 4:00 PM | Twitter → Instagram |
+| 638 | Thursday | 7:00 PM | Instagram → Twitter |
+| 639 | Friday | 10:00 AM | Twitter → Instagram |
+| 640 | Friday | 2:00 PM | Twitter → Instagram |
+| 641 | Friday | 6:00 PM | Instagram → Twitter |
 
 ---
 
@@ -40521,14 +40452,14 @@ Each category:
 
 | Post | Day | Time | Priority | Notes |
 |------|-----|------|----------|-------|
-| 642 | Monday | 11:00 AM | Twitter → Instagram → TikTok | New beginnings |
-| 643 | Monday | 3:00 PM | Twitter → Instagram → TikTok | Real talk |
-| 644 | Tuesday | 8:00 AM | Instagram → Twitter → TikTok | Wisdom |
-| 645 | Tuesday | 1:00 PM | Twitter → TikTok → Instagram | Product |
-| 646 | Wednesday | 11:00 AM | Twitter → Instagram → TikTok | Mastery |
-| 647 | Wednesday | 7:00 PM | Instagram → TikTok → Twitter | Chronicle Finale |
-| 648 | Thursday | 2:00 PM | Twitter → Instagram → TikTok | Resources |
-| 649 | Thursday | 8:00 PM | Instagram → Twitter → TikTok | Anticipation |
+| 642 | Monday | 11:00 AM | Twitter → Instagram | New beginnings |
+| 643 | Monday | 3:00 PM | Twitter → Instagram | Real talk |
+| 644 | Tuesday | 8:00 AM | Instagram → Twitter | Wisdom |
+| 645 | Tuesday | 1:00 PM | Twitter → Instagram | Product |
+| 646 | Wednesday | 11:00 AM | Twitter → Instagram | Mastery |
+| 647 | Wednesday | 7:00 PM | Instagram → Twitter | Chronicle Finale |
+| 648 | Thursday | 2:00 PM | Twitter → Instagram | Resources |
+| 649 | Thursday | 8:00 PM | Instagram → Twitter | Anticipation |
 | 650 | Friday | 12:00 PM | ALL PLATFORMS SIMULTANEOUSLY | 🏆 FINALE |
 
 **Note:** Post 650 should go live on ALL platforms at the same time for maximum impact.
@@ -40597,11 +40528,9 @@ Each category:
 ## Platforms Covered
 - 𝕏 Twitter — Copy, image guidance, hashtags
 - 📸 Instagram — Extended caption, 1080x1080 specs, hashtags
-- 🎬 TikTok — Hook, on-screen text timing, background, sound, creation guides
 
 ## A+ Transformation Elements
 - ✅ Full Canva step-by-step visual creation guides
-- ✅ Full CapCut step-by-step video creation guides
 - ✅ Brand specifications maintained throughout
 - ✅ Elite Seven Guardian theming consistent
 - ✅ Hashtag banks organized by pillar
