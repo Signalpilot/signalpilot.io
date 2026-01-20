@@ -17344,24 +17344,6 @@ Read the full chronicle in bio 🔗
 
 ---
 
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Cinematic, mysterious
-3. **Timeline Setup:**
-   - 0-2s: Eye opens slowly, title appears
-   - 2-6s: Quote reveals word by word
-   - 6-10s: Scanning visualization (charts scrolling)
-   - 10-14s: Alert notification flash, "never rests"
-4. **Character:** The Watchman figure with glowing eyes
-5. **Animation:** Slow zoom, scanning lines
-6. **Audio:** Vigilant ambient, mysterious at 30% volume
-7. **Color Grading:** Dark blue and gold
-8. **Export:** 1080x1920, 30fps, high quality
-
----
-
 # POST 199 — 🎓 INTERMARKET ANALYSIS
 
 **Source:** https://education.signalpilot.io/curriculum/advanced/55-intermarket-analysis.html
@@ -17432,27 +17414,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "No market moves alone"
-
-**Script:**
-```
-[0-2s] INTERMARKET ANALYSIS
-[2-4s] DXY up → Commodities down
-[4-6s] Bonds down → Stocks up
-[6-8s] Risk-on → Crypto up
-[8-10s] Risk-off → Gold, USD up
-[10-12s] Markets are CONNECTED
-[12-14s] Understand the web
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Everything is connected. #trading #macro #intermarket #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -17478,25 +17439,6 @@ Full lesson in bio 🔗
 5. **Slide 5:** Risk On/Off
 6. **Slide 6:** Commodities
 7. **Slide 7:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Network/web building
-3. **Timeline Setup:**
-   - 0-2s: Title with web forming
-   - 2-4s: DXY node lights up, shows relationships
-   - 4-6s: Bonds node lights up
-   - 6-8s: Risk on/off toggle visualization
-   - 8-10s: Commodities connections
-   - 10-14s: Full web view, "understand the web"
-4. **Animation:** Nodes appear, connections draw
-5. **Light Up Effect:** Each market lights up when discussed
-6. **Audio:** Network/connection sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -17576,27 +17518,6 @@ Full guide in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "Signal Pilot best practices for maximum results"
-
-**Script:**
-```
-[0-2s] BEST PRACTICES ✅
-[2-4s] ✅ Start with ONE indicator
-[4-6s] ✅ Complete the lessons
-[6-8s] ✅ Paper trade first
-[8-10s] ✅ Journal observations
-[10-12s] ✅ Add gradually
-[12-14s] Mastery takes time. Start right.
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Do it right. #signalpilot #bestpractices #trading #tips"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -17619,23 +17540,6 @@ Full guide in bio 🔗
 1. **Slide 1:** Big checkmark hero
 2. **Slides 2-5:** Best practices explained
 3. **Slide 6:** CTA - Full guide link
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Checklist completion
-3. **Timeline Setup:**
-   - 0-2s: "BEST PRACTICES" title with checkmark
-   - 2-10s: Each practice appears with satisfying checkmark
-   - 10-14s: "Mastery takes time" conclusion
-4. **Animation:** Checkmarks animate in (draw effect)
-5. **Satisfying Effect:** Use "pop" when checkmark completes
-6. **Audio:** Achievement/checklist ding sounds at 25% volume
-7. **Color:** Green checkmarks on dark background
-8. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
@@ -17712,18 +17616,6 @@ Full guide in bio 🔗
 - [ ] The Watchman character art
 - [ ] Intermarket web diagram
 - [ ] Best practices checklist
-
-### Videos Needed
-- [ ] Community map animation (14s)
-- [ ] AMT auction visualization (14s)
-- [ ] NO stamp sequence (13s)
-- [ ] Risk approaches animation (14s)
-- [ ] OmniDeck transformation (14s)
-- [ ] Delta pressure bars (14s)
-- [ ] Stop sign sequence (13s)
-- [ ] The Watchman cinematic (14s)
-- [ ] Intermarket web building (14s)
-- [ ] Best practices checklist (14s)
 
 ---
 
@@ -17830,62 +17722,6 @@ Here's to the next 200! 🚀
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "200 posts. All free. And we're just getting started."
-
-**Script:**
-```
-[0-2s] 200 POSTS! 🎉
-[2-4s] Psychology ✅
-[4-5s] Strategy ✅
-[5-6s] Indicators ✅
-[6-7s] Chronicle ✅
-[7-9s] All FREE
-[9-11s] 450+ more coming
-[11-13s] Thank you for learning with us 🙏
-```
-
-**Duration:** 13 seconds
-
-**Caption:** "200 down. Let's keep going! #signalpilot #milestone #trading #education"
-
----
-
-## 🎨 CANVA VISUAL CREATION GUIDE
-
-### Static Image (Instagram/Twitter)
-1. **Open Canva** → Create design → 1080x1080px
-2. **Background:** Set to #0a0a0f with subtle confetti elements
-3. **Central Number:** "200" in Playfair Display, 200pt, #c9a962
-4. **Subtext:** "POSTS" below, 48pt, #ffffff
-5. **Confetti Elements:** Gold and blue particles scattered
-6. **Category Tags:** Small boxes around edges
-   - Psychology, Strategy, Indicators, Chronicle
-7. **Thank You Message:** "Thank you for learning with us" at bottom
-8. **Brand Footer:** Signal Pilot logo
-9. **Export:** PNG, high quality
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Style:** Celebration, achievement
-3. **Timeline Setup:**
-   - 0-2s: "200" number explodes onto screen with confetti
-   - 2-7s: Categories check off one by one
-   - 7-9s: "All FREE" statement
-   - 9-11s: "450+ more coming" with excitement
-   - 11-13s: Thank you message with heart
-4. **Animation:** Number counter effect, confetti burst
-5. **Colors:** Gold, blue, celebratory tones
-6. **Audio:** Celebration/party sound at 35% volume
-7. **Export:** 1080x1920, 30fps, high quality
-
----
-
 # POST 202 — 🎓 PRICE ACTION CONTEXT
 
 **Source:** https://education.signalpilot.io/curriculum/advanced/56-price-action-context.html
@@ -17961,27 +17797,6 @@ Full lesson in bio 🔗
 
 ---
 
-## 🎬 TikTok
-
-**Hook:** "A hammer means nothing without this"
-
-**Script:**
-```
-[0-2s] SAME PATTERN
-[2-4s] Different CONTEXT
-[4-6s] Hammer at support = Bullish ✅
-[6-8s] Hammer at resistance = Nothing ❌
-[8-10s] WHERE matters more than WHAT
-[10-12s] Context determines meaning
-[12-14s] Always ask: WHERE is this?
-```
-
-**Duration:** 14 seconds
-
-**Caption:** "Context is everything. #trading #priceaction #context #signalpilot"
-
----
-
 ## 🎨 CANVA VISUAL CREATION GUIDE
 
 ### Static Image (Instagram/Twitter)
@@ -18004,24 +17819,6 @@ Full lesson in bio 🔗
 5. **Slide 5:** Visual examples of same pattern in different locations
 6. **Slide 6:** "WHERE > WHAT" punchline
 7. **Slide 7:** CTA slide
-
----
-
-## 🎬 CAPCUT VIDEO CREATION GUIDE
-
-### TikTok Video (1080x1920)
-1. **Open CapCut** → New project → 9:16 aspect ratio
-2. **Visual Concept:** Same pattern appearing in different chart locations
-3. **Timeline Setup:**
-   - 0-2s: "SAME PATTERN" with hammer appearing
-   - 2-4s: Pattern duplicates to two chart locations
-   - 4-6s: At support - green glow, checkmark
-   - 6-8s: At resistance - red glow, X mark
-   - 8-14s: "WHERE > WHAT" conclusion
-4. **Animation:** Pattern slides to different positions
-5. **Color Coding:** Green for valid, red for invalid
-6. **Audio:** Location/context sound at 25% volume
-7. **Export:** 1080x1920, 30fps, high quality
 
 ---
 
