@@ -1976,12 +1976,10 @@ Same indicator. Different context. Opposite approach.
 |-----|------|------|----------|
 | Fri | 9 AM | 011 | Twitter Thread |
 | Fri | 11 AM | 011 | Instagram Carousel |
-| Fri | 1 PM | 011 | TikTok |
 | Fri | 4 PM | 012 | Twitter |
 | Fri | 7 PM | 012 | Instagram Carousel |
 | Sat | 10 AM | 013 | Twitter Thread |
 | Sat | 12 PM | 013 | Instagram Carousel |
-| Sat | 2 PM | 013 | TikTok |
 | Sat | 5 PM | 014 | All Platforms |
 | Sun | 10 AM | 015 | Twitter Thread |
 | Sun | 12 PM | 015 | Instagram Carousel |
@@ -1989,11 +1987,9 @@ Same indicator. Different context. Opposite approach.
 | Sun | 5 PM | 016 | Instagram Carousel |
 | Mon | 9 AM | 017 | Twitter Thread |
 | Mon | 11 AM | 017 | Instagram Carousel |
-| Mon | 1 PM | 017 | TikTok |
 | Mon | 4 PM | 018 | All Platforms |
 | Tue | 9 AM | 019 | Twitter Thread |
 | Tue | 11 AM | 019 | Instagram Carousel |
-| Tue | 1 PM | 019 | TikTok |
 | Tue | 4 PM | 020 | Twitter Thread |
 | Tue | 7 PM | 020 | Instagram Carousel |
 
@@ -2004,51 +2000,41 @@ Same indicator. Different context. Opposite approach.
 ## Post 011 - Price Action Is Dead
 - [ ] Canva carousel (8 slides)
 - [ ] Chart comparison graphic
-- [ ] CapCut tutorial video (12s)
 
 ## Post 012 - Volume Oracle Dashboard
 - [ ] Product demo carousel (6 slides)
 - [ ] Dashboard screenshot annotated
-- [ ] CapCut showcase video (12s)
 
 ## Post 013 - How Smart Money Moves
 - [ ] Comparison carousel (8 slides)
 - [ ] Retail vs Institutional graphic
-- [ ] CapCut comparison video (12s)
 
 ## Post 014 - Quote Card
 - [ ] Quote card (1080x1080)
-- [ ] CapCut dramatic reveal (11s)
 
 ## Post 015 - Repaint Problem
 - [ ] Education carousel (8 slides)
 - [ ] Repainting example graphic
-- [ ] CapCut warning video (12s)
 
 ## Post 016 - Stop Hunting Deep Dive
 - [ ] Education carousel (8 slides)
 - [ ] Stop hunt chart screenshot
-- [ ] CapCut reality check video (12s)
 
 ## Post 017 - Chronicle: The Prophet
 - [ ] Chronicle carousel (7 slides)
 - [ ] Prophet character art
-- [ ] CapCut cinematic video (12s)
 
 ## Post 018 - 7-Day Guarantee
 - [ ] Marketing graphic
 - [ ] Website scroll recording
-- [ ] CapCut confidence video (12s)
 
 ## Post 019 - Delta Analysis
 - [ ] Education carousel (8 slides)
 - [ ] Delta chart example
-- [ ] CapCut tutorial video (12s)
 
 ## Post 020 - RSI Extremes
 - [ ] Education carousel (8 slides)
 - [ ] RSI trending chart example
-- [ ] CapCut corrective video (12s)
 
 ---
 
@@ -2920,21 +2906,17 @@ No complex setup. No coding. No confusion.
 |-----|------|------|----------|
 | Wed | 9 AM | 021 | All Platforms |
 | Wed | 11 AM | 022 | Instagram Carousel |
-| Wed | 1 PM | 022 | TikTok |
 | Wed | 4 PM | 023 | Twitter Thread |
 | Wed | 7 PM | 023 | Instagram Carousel |
 | Thu | 9 AM | 024 | All Platforms |
 | Thu | 11 AM | 025 | Instagram Carousel |
-| Thu | 1 PM | 025 | TikTok |
 | Thu | 4 PM | 026 | Twitter Thread |
 | Thu | 7 PM | 026 | Instagram Carousel |
 | Fri | 9 AM | 027 | Twitter Thread |
 | Fri | 11 AM | 027 | Instagram Carousel |
-| Fri | 1 PM | 028 | TikTok |
 | Fri | 4 PM | 028 | Twitter |
 | Fri | 7 PM | 029 | Instagram Carousel |
 | Sat | 10 AM | 029 | Twitter Thread |
-| Sat | 12 PM | 029 | TikTok |
 | Sat | 5 PM | 030 | All Platforms |
 
 ---
@@ -2943,51 +2925,41 @@ No complex setup. No coding. No confusion.
 
 ## Post 021 - Quote Card
 - [ ] Quote card (1080x1080)
-- [ ] CapCut dramatic video (9s)
 
 ## Post 022 - Janus Atlas Demo
 - [ ] Product demo carousel (6 slides)
 - [ ] Multi-TF chart screenshot
-- [ ] CapCut showcase video (12s)
 
 ## Post 023 - Accumulation vs Distribution
 - [ ] Comparison carousel (8 slides)
 - [ ] Side-by-side chart examples
-- [ ] CapCut comparison video (12s)
 
 ## Post 024 - Quote Card
 - [ ] Quote card (1080x1080)
-- [ ] CapCut thoughtful video (12s)
 
 ## Post 025 - Moving Averages
 - [ ] Education carousel (8 slides)
 - [ ] MA chart examples
-- [ ] CapCut corrective video (12s)
 
 ## Post 026 - Liquidity Sweeps
 - [ ] Education carousel (8 slides)
 - [ ] Sweep vs breakdown chart
-- [ ] CapCut revelation video (12s)
 
 ## Post 027 - Indicator Failure
 - [ ] Blog carousel (8 slides)
 - [ ] Context mismatch examples
-- [ ] CapCut problem-solving video (12s)
 
 ## Post 028 - Harmonic Oscillator
 - [ ] Product demo carousel (6 slides)
 - [ ] HO panel screenshot
-- [ ] CapCut showcase video (12s)
 
 ## Post 029 - Chronicle: Cartographer
 - [ ] Chronicle carousel (7 slides)
 - [ ] Cartographer character art
-- [ ] CapCut cinematic video (12s)
 
 ## Post 030 - Quick Start Guide
 - [ ] Docs carousel (6 slides)
 - [ ] Setup process screenshots
-- [ ] CapCut tutorial video (12s)
 
 ---
 
@@ -3811,26 +3783,21 @@ Full docs in bio 🔗
 |-----|------|------|----------|
 | Sun | 10 AM | 031 | Twitter Thread |
 | Sun | 12 PM | 031 | Instagram Carousel |
-| Sun | 2 PM | 031 | TikTok |
 | Sun | 5 PM | 032 | Twitter Thread |
 | Mon | 9 AM | 032 | Instagram Carousel |
-| Mon | 11 AM | 032 | TikTok |
 | Mon | 1 PM | 033 | Twitter Thread |
 | Mon | 4 PM | 033 | Instagram Carousel |
 | Mon | 7 PM | 034 | All Platforms |
 | Tue | 9 AM | 035 | Twitter |
 | Tue | 11 AM | 035 | Instagram Carousel |
-| Tue | 1 PM | 035 | TikTok |
 | Tue | 4 PM | 036 | Twitter Thread |
 | Tue | 7 PM | 036 | Instagram Carousel |
 | Wed | 9 AM | 037 | Twitter Thread |
 | Wed | 11 AM | 037 | Instagram Carousel |
 | Wed | 1 PM | 038 | Twitter |
 | Wed | 4 PM | 038 | Instagram Carousel |
-| Wed | 7 PM | 038 | TikTok |
 | Thu | 9 AM | 039 | Twitter Thread |
 | Thu | 11 AM | 039 | Instagram Carousel |
-| Thu | 1 PM | 039 | TikTok |
 | Thu | 4 PM | 040 | All Platforms |
 
 ---
@@ -3840,51 +3807,41 @@ Full docs in bio 🔗
 ## Post 031 - Revenge Trading
 - [ ] Education carousel (8 slides)
 - [ ] Brain/neuroscience graphic
-- [ ] CapCut scientific video (12s)
 
 ## Post 032 - Confirmation Bias
 - [ ] Education carousel (8 slides)
 - [ ] What you see vs reality graphic
-- [ ] CapCut dramatic video (14s)
 
 ## Post 033 - Position Sizing 101
 - [ ] Blog carousel (6 slides)
 - [ ] Account decay infographic
-- [ ] CapCut math video (12s)
 
 ## Post 034 - Quote Card
 - [ ] Quote card (1080x1080)
-- [ ] CapCut reflective video (12s)
 
 ## Post 035 - Plutus Flow Demo
 - [ ] Product demo carousel (6 slides)
 - [ ] Volume vs Flow comparison chart
-- [ ] CapCut showcase video (12s)
 
 ## Post 036 - Absorption Patterns
 - [ ] Education carousel (8 slides)
 - [ ] Absorption chart example
-- [ ] CapCut ominous video (13s)
 
 ## Post 037 - Confirmation Trap
 - [ ] Blog carousel (8 slides)
 - [ ] Checklist graphic (confirms vs ignores)
-- [ ] CapCut exposure video (13s)
 
 ## Post 038 - Chronicle: The Scales
 - [ ] Chronicle carousel (7 slides)
 - [ ] The Scales character art
-- [ ] CapCut cinematic video (14s)
 
 ## Post 039 - Position Sizing (Lesson)
 - [ ] Education carousel (6 slides)
 - [ ] Formula infographic
-- [ ] CapCut formula video (14s)
 
 ## Post 040 - Plutus Flow Cheatsheet
 - [ ] Cheatsheet carousel (6 slides)
 - [ ] 2x2 grid graphic
-- [ ] CapCut save-worthy video (13s)
 
 ---
 
@@ -4708,27 +4665,20 @@ Full guide in bio 🔗
 |-----|------|------|----------|
 | Fri | 9 AM | 041 | All Platforms |
 | Fri | 11 AM | 042 | Instagram Carousel |
-| Fri | 1 PM | 042 | TikTok |
 | Fri | 4 PM | 042 | Twitter Thread |
 | Sat | 10 AM | 043 | Twitter Thread |
 | Sat | 12 PM | 043 | Instagram Carousel |
-| Sat | 2 PM | 043 | TikTok |
 | Sat | 5 PM | 044 | All Platforms |
 | Sun | 10 AM | 045 | Twitter |
 | Sun | 12 PM | 045 | Instagram Carousel |
-| Sun | 2 PM | 045 | TikTok |
 | Sun | 5 PM | 046 | Twitter Thread |
 | Mon | 9 AM | 046 | Instagram Carousel |
-| Mon | 11 AM | 046 | TikTok |
 | Mon | 1 PM | 047 | Twitter Thread |
 | Mon | 4 PM | 047 | Instagram Carousel |
-| Mon | 7 PM | 047 | TikTok |
 | Tue | 9 AM | 048 | Twitter |
 | Tue | 11 AM | 048 | Instagram Carousel |
-| Tue | 1 PM | 048 | TikTok |
 | Tue | 4 PM | 049 | Twitter Thread |
 | Tue | 7 PM | 049 | Instagram Carousel |
-| Wed | 9 AM | 049 | TikTok |
 | Wed | 11 AM | 050 | All Platforms |
 
 ---
@@ -4738,51 +4688,41 @@ Full guide in bio 🔗
 ## Post 041 - Elite Seven Marketing
 - [ ] All 7 characters lineup graphic
 - [ ] Epic showcase visual
-- [ ] CapCut epic video (12s)
 
 ## Post 042 - Risk-Reward Ratio
 - [ ] Education carousel (6 slides)
 - [ ] R:R comparison infographic
-- [ ] CapCut math video (13s)
 
 ## Post 043 - Volume Profile Guide
 - [ ] Blog carousel (8 slides)
 - [ ] Annotated VP chart (POC, HVN, LVN)
-- [ ] CapCut discovery video (14s)
 
 ## Post 044 - Quote Card
 - [ ] Quote card (1080x1080)
-- [ ] CapCut comparison video (14s)
 
 ## Post 045 - Augury Grid Demo
 - [ ] Product demo carousel (6 slides)
 - [ ] Scanner interface screenshot
-- [ ] CapCut showcase video (12s)
 
 ## Post 046 - Stop Loss Strategies
 - [ ] Education carousel (8 slides)
 - [ ] 4-panel stop types graphic
-- [ ] CapCut educational video (12s)
 
 ## Post 047 - Smart Money Concepts
 - [ ] Blog carousel (8 slides)
 - [ ] SMC annotated chart
-- [ ] CapCut explainer video (14s)
 
 ## Post 048 - Chronicle: The Arbiter
 - [ ] Chronicle carousel (7 slides)
 - [ ] The Arbiter character art
-- [ ] CapCut cinematic video (14s)
 
 ## Post 049 - Trend Identification
 - [ ] Education carousel (6 slides)
 - [ ] HH/HL structure diagram
-- [ ] CapCut simple video (12s)
 
 ## Post 050 - Quick Start Checklist
 - [ ] Docs carousel (6 slides)
 - [ ] Checklist graphic
-- [ ] CapCut checklist video (10s)
 
 ---
 
@@ -5577,26 +5517,19 @@ Full docs in bio 🔗
 | Wed | 4 PM | 051 | All Platforms |
 | Thu | 9 AM | 052 | Twitter Thread |
 | Thu | 11 AM | 052 | Instagram Carousel |
-| Thu | 1 PM | 052 | TikTok |
 | Thu | 4 PM | 053 | Twitter Thread |
 | Thu | 7 PM | 053 | Instagram Carousel |
-| Fri | 9 AM | 053 | TikTok |
 | Fri | 11 AM | 054 | All Platforms |
 | Fri | 1 PM | 055 | Twitter |
 | Fri | 4 PM | 055 | Instagram Carousel |
-| Fri | 7 PM | 055 | TikTok |
 | Sat | 10 AM | 056 | Twitter Thread |
 | Sat | 12 PM | 056 | Instagram Carousel |
-| Sat | 2 PM | 056 | TikTok |
 | Sat | 5 PM | 057 | Twitter Thread |
 | Sun | 10 AM | 057 | Instagram Carousel |
-| Sun | 12 PM | 057 | TikTok |
 | Sun | 2 PM | 058 | Twitter |
 | Sun | 5 PM | 058 | Instagram Carousel |
-| Mon | 9 AM | 058 | TikTok |
 | Mon | 11 AM | 059 | Twitter Thread |
 | Mon | 1 PM | 059 | Instagram Carousel |
-| Mon | 4 PM | 059 | TikTok |
 | Mon | 7 PM | 060 | All Platforms |
 
 ---
@@ -5606,51 +5539,41 @@ Full docs in bio 🔗
 ## Post 051 - 7-Day Guarantee
 - [ ] Guarantee badge graphic
 - [ ] Trust-focused design
-- [ ] CapCut trust video (12s)
 
 ## Post 052 - Support and Resistance
 - [ ] Education carousel (8 slides)
 - [ ] S/R chart with touches
-- [ ] CapCut educational video (14s)
 
 ## Post 053 - Why Traders Fail
 - [ ] Blog carousel (8 slides)
 - [ ] 5 reasons list graphic
-- [ ] CapCut reality check video (12s)
 
 ## Post 054 - Quote Card
 - [ ] Quote card (1080x1080)
-- [ ] CapCut reflective video (12s)
 
 ## Post 055 - OmniDeck Demo
 - [ ] Product demo carousel (6 slides)
 - [ ] Before/after chart comparison
-- [ ] CapCut transformation video (12s)
 
 ## Post 056 - Doji Candlestick
 - [ ] Education carousel (6 slides)
 - [ ] Doji anatomy chart
-- [ ] CapCut corrective video (13s)
 
 ## Post 057 - Round Numbers
 - [ ] Blog carousel (6 slides)
 - [ ] Round number reactions chart
-- [ ] CapCut insight video (12s)
 
 ## Post 058 - Chronicle: The Watchman
 - [ ] Chronicle carousel (7 slides)
 - [ ] The Watchman character art
-- [ ] CapCut cinematic video (14s)
 
 ## Post 059 - MA Crossovers
 - [ ] Education carousel (6 slides)
 - [ ] Golden/death cross chart
-- [ ] CapCut reality check video (13s)
 
 ## Post 060 - HO Settings
 - [ ] Docs carousel (6 slides)
 - [ ] Settings comparison table
-- [ ] CapCut settings guide video (14s)
 
 ---
 
@@ -5730,25 +5653,6 @@ Full docs in bio 🔗
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Stop paying monthly. Here's why."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | MONTHLY VS LIFETIME |
-| 2-4s | $99/month × 18 = $1,782 |
-| 4-6s | Lifetime = $1,799 |
-| 6-8s | Month 19+? |
-| 8-10s | FREE. Forever. |
-| 10-12s | All updates included. |
-| 12-14s | Pay once. Trade forever. |
-
-**Duration:** 14 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 **Template:** Value Comparison Card (1080x1080)
@@ -5763,19 +5667,6 @@ Full docs in bio 🔗
 8. Add checkmarks for benefits list
 9. SignalPilot logo bottom center
 10. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Open CapCut → 1080x1920 project
-2. Dark background with calculator animation
-3. Show monthly cost accumulating with counter
-4. Reveal lifetime price as comparison
-5. Green highlight on "FREE. Forever."
-6. Add money/cha-ching sound effect
-7. Text animations: fade up each line
-8. Export 1080x1920
 
 ---
 
@@ -5845,26 +5736,6 @@ Free PDF guide in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Candlestick patterns are stories. Here's how to read them."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | CANDLESTICKS = STORIES |
-| 2-4s | HAMMER 🔨 |
-| 4-5s | Sellers attacked. Buyers won. |
-| 5-7s | ENGULFING 🌊 |
-| 7-8s | Momentum completely shifted. |
-| 8-10s | MORNING STAR ⭐ |
-| 10-11s | Bears lost control. |
-| 11-13s | Read the story. Not the name. |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA CAROUSEL GUIDE
 
 1. Open Canva → Instagram Post 1080x1080
@@ -5877,18 +5748,6 @@ Free PDF guide in bio
 8. Slide 6: CTA with lead magnet offer
 9. Add page indicators (dots) bottom
 10. Export all as PNG sequence
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart examples of each pattern
-2. Screen record highlighting each pattern
-3. Import to CapCut
-4. Add text overlays at timestamps
-5. Circle each pattern when named
-6. Narrative ambient sound, 20% volume
-7. Export 1080x1920
 
 ---
 
@@ -5941,27 +5800,6 @@ Free PDF guide in bio
 
 ---
 
-### 🎬 TikTok
-
-**Hook:** "Every fakeout looks like a breakout. Here's the difference."
-
-**On-Screen Text:**
-| Time | Text |
-|------|------|
-| 0-2s | BREAKOUT OR FAKEOUT? |
-| 2-4s | REAL BREAKOUT ✅ |
-| 4-5s | Volume spikes |
-| 5-6s | Closes beyond level |
-| 6-7s | FAKEOUT ❌ |
-| 7-8s | Low volume |
-| 8-9s | Wicks out, closes back |
-| 9-11s | Wait for CONFIRMATION |
-| 11-13s | Patience > Impulse |
-
-**Duration:** 13 seconds
-
----
-
 ### 🎨 CANVA VISUAL GUIDE
 
 1. Open Canva → 1080x1080
@@ -5974,18 +5812,6 @@ Free PDF guide in bio
 8. Bottom: "Wait for confirmation"
 9. SignalPilot branding
 10. Export PNG
-
----
-
-### 🎬 CAPCUT VIDEO GUIDE
-
-1. Find chart with breakout and fakeout examples
-2. Screen record highlighting differences
-3. Import to CapCut
-4. Add ✅ and ❌ overlays
-5. Alert/warning sound, 25% volume
-6. Text at timestamps
-7. Export 1080x1920
 
 ---
 
