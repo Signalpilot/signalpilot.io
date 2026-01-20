@@ -32522,7 +32522,7 @@ Full setup guide in bio 🔗
 **Slide 2 - Pentarch Alerts:**
 > 🔄 PENTARCH ALERTS
 > → Phase change notifications
-> → IGN, TD, DIS, EXT signals
+> → TD, IGN, WRN, CAP, BDN signals
 
 **Slide 3 - Volume Oracle:**
 > 🔮 VOLUME ORACLE ALERTS
@@ -36352,7 +36352,7 @@ Full setup guide in bio 🔗
 **Slide 2 - Pentarch Phases:**
 > 🔄 PENTARCH PHASES
 > → Cycle state visible
-> → IGN, TD, DIS, EXT signals
+> → TD, IGN, WRN, CAP, BDN signals
 
 **Slide 3 - Key Levels:**
 > 🗺️ KEY LEVELS
