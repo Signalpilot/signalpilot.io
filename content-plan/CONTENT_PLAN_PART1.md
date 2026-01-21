@@ -1200,26 +1200,91 @@ Small: #tradingmythology #signalpilot #eliteseven
 
 ---
 
-# POSTING SCHEDULE (Week 1)
+# POSTING SCHEDULE (Week 1) — Context-Aware Timing
 
-| Day | Time | Post | Platform Priority |
-|-----|------|------|-------------------|
-| Mon | 9 AM | 001 | Twitter Thread |
-| Mon | 11 AM | 001 | Instagram Carousel |
-| Mon | 4 PM | 002 | Twitter Thread |
-| Mon | 7 PM | 002 | Instagram Carousel |
-| Tue | 9 AM | 003 | Twitter + All |
-| Tue | 11 AM | 004 | Instagram Carousel |
-| Tue | 4 PM | 005 | Twitter Thread |
-| Tue | 7 PM | 005 | Instagram Carousel |
-| Wed | 9 AM | 006 | Twitter Thread |
-| Wed | 11 AM | 006 | Instagram Carousel |
-| Wed | 4 PM | 007 | Twitter Thread |
-| Wed | 7 PM | 007 | Instagram Carousel |
-| Thu | 9 AM | 008 | Twitter + All |
-| Thu | 11 AM | 009 | Instagram |
-| Thu | 4 PM | 010 | Twitter |
-| Thu | 7 PM | 010 | Instagram Carousel |
+> **Philosophy:** 3 posts per day, strategically timed. At this pace, 650 posts = ~7 months. Times matched to content context.
+
+## Day 0: Wednesday (Launch Day)
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 2:00 PM | 000 | Twitter | Manifesto Thread | Before US market open. Traders preparing for session. |
+| 9:15 PM | 000 | Instagram | Manifesto Carousel | Late night vulnerability. Speaks to "3AM traders." |
+
+**⭐ Pin Post 000 to both profiles. Launch day stands alone.**
+
+---
+
+## Day 1: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 001 | Twitter | The Liquidity Lie (Education) | Pre-market. Day after launch, education begins. |
+| 8:30 AM | 001 | Instagram | The Liquidity Lie | Morning learning mode. |
+| 1:00 PM | 002 | Twitter | Why Markets Move in Cycles (Blog) | Lunch break deep read. |
+| 1:30 PM | 002 | Instagram | Why Markets Move in Cycles | Midday scroll, educational. |
+| 7:00 PM | 003 | Twitter | Quote: "The Edge" | Evening wind-down. Motivational reflection. |
+| 7:30 PM | 003 | Instagram | Quote: "The Edge" | End of day inspiration. |
+
+---
+
+## Day 2: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 004 | Twitter | Pentarch TD Signal Demo | Morning tool feature. Start Friday informed. |
+| 8:30 AM | 004 | Instagram | Pentarch TD Demo | Friday morning learning. |
+| 1:00 PM | 005 | Twitter | Chronicle: Meet The Sovereign | Lunch break storytelling. Lore as entertainment. |
+| 1:30 PM | 005 | Instagram | Chronicle: Meet The Sovereign | Midday narrative break. |
+| 7:00 PM | 006 | Twitter | Volume Doesn't Lie (Education) | Friday evening education. Weekend prep. |
+| 7:30 PM | 006 | Instagram | Volume Doesn't Lie | Evening learning before weekend. |
+
+---
+
+## Day 3: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 007 | Twitter | The Repainting Problem (Blog) | Weekend morning deep read. No market pressure. |
+| 10:30 AM | 007 | Instagram | The Repainting Problem | Relaxed weekend learning. |
+| 2:00 PM | 008 | Twitter | Quote: "Support Doesn't Hold" | Saturday afternoon motivation. |
+| 2:30 PM | 008 | Instagram | Quote: "Support Doesn't Hold" | Mindset content during leisure. |
+| 7:00 PM | 009 | Twitter | Marketing: 82 Lessons, 7 Indicators | Saturday evening visibility. Planning mindset. |
+| 7:30 PM | 009 | Instagram | Marketing: Main Site Push | Weekend evening scroll. |
+
+---
+
+## Day 4: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 010 | Twitter | Pentarch Cheatsheet (Docs) | Sunday morning prep. Saving resources for Monday. |
+| 10:30 AM | 010 | Instagram | Pentarch Cheatsheet | Getting tools ready for new week. |
+| 2:00 PM | 011 | Twitter | Price Action Is Dead (Education) | Sunday afternoon learning. No market, time to study. |
+| 2:30 PM | 011 | Instagram | Price Action Is Dead | Weekend deep education. |
+| 6:00 PM | 012 | Twitter | Volume Oracle Dashboard Demo | Sunday evening tool preview. Prep for new week. |
+| 6:30 PM | 012 | Instagram | Volume Oracle Dashboard Demo | Evaluating tools before Monday. |
+
+---
+
+## Timing Logic Reference (3 Posts/Day)
+
+| Slot | Time Range | Best For |
+|------|------------|----------|
+| **Morning** | 8-10 AM | Education, Docs, Quotes |
+| **Midday** | 12-2 PM | Marketing, Blog, lighter content |
+| **Evening** | 4-10 PM | Product Demos, Chronicle, deep reads |
+
+| Content Type | Best Time | Reasoning |
+|--------------|-----------|-----------|
+| **Manifesto/Emotional** | 9-10 PM | Vulnerable, reflective mood |
+| **Education (Technical)** | 8 AM or 4 PM | Pre/post-market learning |
+| **Product Demos** | 4-6 PM | Post-market tool evaluation |
+| **Quote Cards** | 7-8 AM or 7 PM | Morning motivation or evening reflection |
+| **Blog/Deep Dives** | 12-2 PM or 7-8 PM | Lunch break or evening leisure |
+| **Chronicle Lore** | 9-10 PM | Night storytelling |
+| **Marketing/Promos** | 12 PM | Midday visibility |
+| **Docs/Guides** | 8-10 AM or 6 PM | Morning work mode or evening prep |
 
 ---
 
@@ -2201,28 +2266,98 @@ Same indicator. Different context. Opposite approach.
 
 ---
 
-# POSTING SCHEDULE (Week 2-3)
+# POSTING SCHEDULE (Week 2) — Context-Aware Timing
 
-| Day | Time | Post | Platform |
-|-----|------|------|----------|
-| Fri | 9 AM | 011 | Twitter Thread |
-| Fri | 11 AM | 011 | Instagram Carousel |
-| Fri | 4 PM | 012 | Twitter |
-| Fri | 7 PM | 012 | Instagram Carousel |
-| Sat | 10 AM | 013 | Twitter Thread |
-| Sat | 12 PM | 013 | Instagram Carousel |
-| Sat | 5 PM | 014 | All Platforms |
-| Sun | 10 AM | 015 | Twitter Thread |
-| Sun | 12 PM | 015 | Instagram Carousel |
-| Sun | 2 PM | 016 | Twitter Thread |
-| Sun | 5 PM | 016 | Instagram Carousel |
-| Mon | 9 AM | 017 | Twitter Thread |
-| Mon | 11 AM | 017 | Instagram Carousel |
-| Mon | 4 PM | 018 | All Platforms |
-| Tue | 9 AM | 019 | Twitter Thread |
-| Tue | 11 AM | 019 | Instagram Carousel |
-| Tue | 4 PM | 020 | Twitter Thread |
-| Tue | 7 PM | 020 | Instagram Carousel |
+> Posts 013-033. Full week = 21 posts at 3/day. Times matched to content psychology.
+
+## Day 5: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 014 | Twitter | Quote: "You Stop Chasing Signals" | Monday morning motivation. Set the mindset. |
+| 7:30 AM | 014 | Instagram | Quote Card | Coffee scroll inspiration. |
+| 1:00 PM | 013 | Twitter | How Smart Money Moves (Blog) | Lunch break deep read. |
+| 1:30 PM | 013 | Instagram | How Smart Money Moves | Midday educational content. |
+| 4:30 PM | 015 | Twitter | The Repaint Problem (Education) | Post-market. "Why did my indicator fail?" |
+| 5:00 PM | 015 | Instagram | The Repaint Problem | Evening learning after market close. |
+
+---
+
+## Day 6: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 016 | Twitter | Stop Hunting Deep Dive (Education) | Pre-market. Learn the traps before trading. |
+| 8:30 AM | 016 | Instagram | Stop Hunting Deep Dive | Morning education mode. |
+| 12:00 PM | 018 | Twitter | 7-Day Money Back Guarantee (Marketing) | Midday visibility. Lunch scroll promo. |
+| 12:30 PM | 018 | Instagram | Marketing: 7-Day Guarantee | Peak engagement window. |
+| 9:00 PM | 017 | Twitter | Chronicle: The Prophet | Late night storytelling. Lore as entertainment. |
+| 9:30 PM | 017 | Instagram | Chronicle: The Prophet | Night owls, relaxed mood. |
+
+---
+
+## Day 7: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 019 | Twitter | Delta Analysis Deep Dive (Education) | Pre-market technical learning. |
+| 8:30 AM | 019 | Instagram | Delta Analysis | Morning education slot. |
+| 4:30 PM | 020 | Twitter | RSI Extremes (Education) | Post-market. Review indicator signals. |
+| 5:00 PM | 020 | Instagram | RSI Extremes | Evening technical follow-up. |
+| 7:00 PM | 021 | Twitter | Quote: "Prepare for Transitions" | Evening motivation. Midweek mindset check. |
+| 7:30 PM | 021 | Instagram | Quote Card | Wind-down inspiration. |
+
+---
+
+## Day 8: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 024 | Twitter | Quote: "We Could Send Alerts" | Morning provocation. Challenge expectations. |
+| 7:30 AM | 024 | Instagram | Quote Card | Coffee scroll thought-starter. |
+| 8:00 AM | 023 | Twitter | Accumulation vs Distribution (Education) | Pre-market. Learn the phases. |
+| 8:30 AM | 023 | Instagram | Accumulation vs Distribution | Morning learning mode. |
+| 5:00 PM | 022 | Twitter | Janus Atlas Multi-Timeframe Demo | Post-market tool demo. |
+| 5:30 PM | 022 | Instagram | Janus Atlas Demo | Evening tool evaluation. |
+
+---
+
+## Day 9: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 025 | Twitter | Moving Averages (Education) | Pre-market Friday education. |
+| 8:30 AM | 025 | Instagram | Moving Averages | End of week learning. |
+| 1:00 PM | 026 | Twitter | Liquidity Sweeps Deep Dive (Blog) | Lunch deep read. |
+| 1:30 PM | 026 | Instagram | Liquidity Sweeps Deep Dive | Friday afternoon learning. |
+| 7:00 PM | 027 | Twitter | Why Your Indicators Keep Failing (Blog) | Friday evening deep read. Weekend prep. |
+| 7:30 PM | 027 | Instagram | Why Your Indicators Keep Failing | Evening reflection time. |
+
+---
+
+## Day 10: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 030 | Twitter | Quick Start Guide (Docs) | Weekend morning prep. Saving resources. |
+| 10:30 AM | 030 | Instagram | Quick Start Guide | Relaxed Saturday learning. |
+| 2:00 PM | 028 | Twitter | Harmonic Oscillator Demo | Saturday afternoon tool demo. |
+| 2:30 PM | 028 | Instagram | Harmonic Oscillator Demo | Weekend tool exploration. |
+| 9:00 PM | 029 | Twitter | Chronicle: The Cartographer | Saturday night storytelling. |
+| 9:30 PM | 029 | Instagram | Chronicle: The Cartographer | Night lore entertainment. |
+
+---
+
+## Day 11: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 11:00 AM | 033 | Twitter | Position Sizing 101 (Education) | Sunday morning fundamentals. |
+| 11:30 AM | 033 | Instagram | Position Sizing 101 | Weekend education time. |
+| 2:00 PM | 031 | Twitter | Revenge Trading (Blog) | Sunday afternoon deep read. |
+| 2:30 PM | 031 | Instagram | Revenge Trading | Reflective weekend content. |
+| 7:00 PM | 032 | Twitter | Confirmation Bias (Blog) | Sunday evening psychology. Prep for new week. |
+| 7:30 PM | 032 | Instagram | Confirmation Bias | Mindset content before Monday. |
 
 ---
 
@@ -3139,24 +3274,98 @@ No complex setup. No coding. No confusion.
 
 ---
 
-# POSTING SCHEDULE (Week 3-4)
+# POSTING SCHEDULE (Week 3) — Context-Aware Timing
 
-| Day | Time | Post | Platform |
-|-----|------|------|----------|
-| Wed | 9 AM | 021 | All Platforms |
-| Wed | 11 AM | 022 | Instagram Carousel |
-| Wed | 4 PM | 023 | Twitter Thread |
-| Wed | 7 PM | 023 | Instagram Carousel |
-| Thu | 9 AM | 024 | All Platforms |
-| Thu | 11 AM | 025 | Instagram Carousel |
-| Thu | 4 PM | 026 | Twitter Thread |
-| Thu | 7 PM | 026 | Instagram Carousel |
-| Fri | 9 AM | 027 | Twitter Thread |
-| Fri | 11 AM | 027 | Instagram Carousel |
-| Fri | 4 PM | 028 | Twitter |
-| Fri | 7 PM | 029 | Instagram Carousel |
-| Sat | 10 AM | 029 | Twitter Thread |
-| Sat | 5 PM | 030 | All Platforms |
+> Posts 034-054. Full week = 21 posts at 3/day.
+
+## Day 12: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 034 | Twitter | Quote: "Right vs Profitable" | Monday morning mindset. |
+| 7:30 AM | 034 | Instagram | Quote Card | Coffee scroll motivation. |
+| 5:00 PM | 035 | Twitter | Plutus Flow Demo | Post-market tool demo. |
+| 5:30 PM | 035 | Instagram | Plutus Flow Demo | Evening tool evaluation. |
+| 8:00 AM | 036 | Twitter | Volume Deep Dive: Absorption (Education) | Pre-market technical learning. |
+| 8:30 AM | 036 | Instagram | Volume Absorption | Morning education slot. |
+
+---
+
+## Day 13: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 1:00 PM | 037 | Twitter | The Confirmation Trap (Blog) | Lunch break deep read. |
+| 1:30 PM | 037 | Instagram | The Confirmation Trap | Midday psychology content. |
+| 9:00 PM | 038 | Twitter | Chronicle: The Scales | Late night storytelling. |
+| 9:30 PM | 038 | Instagram | Chronicle: The Scales | Night lore entertainment. |
+| 8:00 AM | 039 | Twitter | Position Sizing Lesson (Education) | Pre-market fundamentals. |
+| 8:30 AM | 039 | Instagram | Position Sizing Lesson | Morning learning mode. |
+
+---
+
+## Day 14: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 040 | Twitter | Plutus Flow Cheatsheet (Docs) | Morning reference content. |
+| 10:30 AM | 040 | Instagram | Plutus Flow Cheatsheet | Saving resources mode. |
+| 12:00 PM | 041 | Twitter | The Elite Seven (Marketing) | Midday visibility. |
+| 12:30 PM | 041 | Instagram | The Elite Seven | Lunch scroll promo. |
+| 4:30 PM | 042 | Twitter | Risk-Reward Ratio (Education) | Post-market. Review the math. |
+| 5:00 PM | 042 | Instagram | Risk-Reward Ratio | Evening education. |
+
+---
+
+## Day 15: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 043 | Twitter | Volume Profile Guide (Education) | Pre-market technical. |
+| 8:30 AM | 043 | Instagram | Volume Profile Guide | Morning learning. |
+| 7:00 AM | 044 | Twitter | Quote: "Entries vs Exits" | Early motivation. |
+| 7:30 AM | 044 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 045 | Twitter | Augury Grid Demo (The Watchman) | Post-market tool demo. |
+| 5:30 PM | 045 | Instagram | Augury Grid Demo | Evening tool evaluation. |
+
+---
+
+## Day 16: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 046 | Twitter | Stop Loss Strategies (Education) | Pre-market Friday education. |
+| 8:30 AM | 046 | Instagram | Stop Loss Strategies | End of week learning. |
+| 1:00 PM | 047 | Twitter | Smart Money Concepts Explained (Education) | Lunch deep read. |
+| 1:30 PM | 047 | Instagram | Smart Money Concepts | Friday afternoon learning. |
+| 9:00 PM | 048 | Twitter | Chronicle: The Arbiter | Friday night lore. |
+| 9:30 PM | 048 | Instagram | Chronicle: The Arbiter | Night storytelling. |
+
+---
+
+## Day 17: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 049 | Twitter | Trend Identification (Education) | Weekend morning education. |
+| 10:30 AM | 049 | Instagram | Trend Identification | Relaxed learning time. |
+| 2:00 PM | 050 | Twitter | Quick Start Checklist (Docs) | Saturday afternoon prep. |
+| 2:30 PM | 050 | Instagram | Quick Start Checklist | Weekend resource saving. |
+| 12:00 PM | 051 | Twitter | 7-Day Money-Back Guarantee (Marketing) | Midday visibility. |
+| 12:30 PM | 051 | Instagram | 7-Day Guarantee | Lunch scroll promo. |
+
+---
+
+## Day 18: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 052 | Twitter | Support and Resistance (Education) | Sunday morning fundamentals. |
+| 10:30 AM | 052 | Instagram | Support and Resistance | Weekend education. |
+| 2:00 PM | 053 | Twitter | Why Most Traders Fail (Blog) | Sunday afternoon reflection. |
+| 2:30 PM | 053 | Instagram | Why Most Traders Fail | Deep read before new week. |
+| 7:00 PM | 054 | Twitter | Quote: "Patience" | Sunday evening motivation. |
+| 7:30 PM | 054 | Instagram | Quote Card | Prep mindset for Monday. |
 
 ---
 
@@ -4016,28 +4225,98 @@ Full docs in bio 🔗
 
 ---
 
-# POSTING SCHEDULE (Week 4-5)
+# POSTING SCHEDULE (Week 4) — Context-Aware Timing
 
-| Day | Time | Post | Platform |
-|-----|------|------|----------|
-| Sun | 10 AM | 031 | Twitter Thread |
-| Sun | 12 PM | 031 | Instagram Carousel |
-| Sun | 5 PM | 032 | Twitter Thread |
-| Mon | 9 AM | 032 | Instagram Carousel |
-| Mon | 1 PM | 033 | Twitter Thread |
-| Mon | 4 PM | 033 | Instagram Carousel |
-| Mon | 7 PM | 034 | All Platforms |
-| Tue | 9 AM | 035 | Twitter |
-| Tue | 11 AM | 035 | Instagram Carousel |
-| Tue | 4 PM | 036 | Twitter Thread |
-| Tue | 7 PM | 036 | Instagram Carousel |
-| Wed | 9 AM | 037 | Twitter Thread |
-| Wed | 11 AM | 037 | Instagram Carousel |
-| Wed | 1 PM | 038 | Twitter |
-| Wed | 4 PM | 038 | Instagram Carousel |
-| Thu | 9 AM | 039 | Twitter Thread |
-| Thu | 11 AM | 039 | Instagram Carousel |
-| Thu | 4 PM | 040 | All Platforms |
+> Posts 055-075. Full week = 21 posts at 3/day.
+
+## Day 19: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 5:00 PM | 055 | Twitter | OmniDeck Demo (The Commander) | Post-market tool demo. |
+| 5:30 PM | 055 | Instagram | OmniDeck Demo | Evening tool evaluation. |
+| 8:00 AM | 056 | Twitter | Candlestick Patterns: Doji (Education) | Pre-market technical. |
+| 8:30 AM | 056 | Instagram | Candlestick Patterns: Doji | Morning learning. |
+| 1:00 PM | 057 | Twitter | Psychology of Round Numbers (Blog) | Lunch break deep read. |
+| 1:30 PM | 057 | Instagram | Psychology of Round Numbers | Midday psychology. |
+
+---
+
+## Day 20: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 9:00 PM | 058 | Twitter | Chronicle: The Watchman | Late night storytelling. |
+| 9:30 PM | 058 | Instagram | Chronicle: The Watchman | Night lore entertainment. |
+| 8:00 AM | 059 | Twitter | Moving Averages: Crossovers (Education) | Pre-market technical. |
+| 8:30 AM | 059 | Instagram | Moving Averages: Crossovers | Morning learning mode. |
+| 10:00 AM | 060 | Twitter | Harmonic Oscillator Settings (Docs) | Morning reference content. |
+| 10:30 AM | 060 | Instagram | Harmonic Oscillator Settings | Work mode resource. |
+
+---
+
+## Day 21: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 12:00 PM | 061 | Twitter | Lifetime Access (Marketing) | Midday visibility. |
+| 12:30 PM | 061 | Instagram | Lifetime Access | Lunch scroll promo. |
+| 8:00 AM | 062 | Twitter | Candlestick Patterns (Education) | Pre-market education. |
+| 8:30 AM | 062 | Instagram | Candlestick Patterns | Morning learning. |
+| 7:00 PM | 063 | Twitter | Breakout vs Fakeout (Blog) | Evening deep read. |
+| 7:30 PM | 063 | Instagram | Breakout vs Fakeout | Evening reflection. |
+
+---
+
+## Day 22: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 064 | Twitter | Quote Card | Morning motivation. |
+| 7:30 AM | 064 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 065 | Twitter | Pentarch Full Cycle Demo | Post-market tool demo. |
+| 5:30 PM | 065 | Instagram | Pentarch Full Cycle Demo | Evening tool evaluation. |
+| 8:00 AM | 066 | Twitter | Fibonacci Retracements (Education) | Pre-market technical. |
+| 8:30 AM | 066 | Instagram | Fibonacci Retracements | Morning education. |
+
+---
+
+## Day 23: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 1:00 PM | 067 | Twitter | Danger of Averaging Down (Blog) | Lunch deep read. |
+| 1:30 PM | 067 | Instagram | Danger of Averaging Down | Friday afternoon reflection. |
+| 9:00 PM | 068 | Twitter | Chronicle: The Commander | Friday night lore. |
+| 9:30 PM | 068 | Instagram | Chronicle: The Commander | Night storytelling. |
+| 8:00 AM | 069 | Twitter | Volume Analysis (Education) | Pre-market Friday. |
+| 8:30 AM | 069 | Instagram | Volume Analysis | End of week learning. |
+
+---
+
+## Day 24: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 070 | Twitter | Janus Atlas Timeframe Guide (Docs) | Weekend morning prep. |
+| 10:30 AM | 070 | Instagram | Janus Atlas Timeframe Guide | Resource saving mode. |
+| 12:00 PM | 071 | Twitter | 82 Free Lessons (Marketing) | Midday visibility. |
+| 12:30 PM | 071 | Instagram | 82 Free Lessons | Weekend promo. |
+| 8:00 AM | 072 | Twitter | Trading Journals (Education) | Saturday morning education. |
+| 8:30 AM | 072 | Instagram | Trading Journals | Weekend learning. |
+
+---
+
+## Day 25: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 2:00 PM | 073 | Twitter | Multi-Timeframe Advantage (Blog) | Sunday afternoon deep read. |
+| 2:30 PM | 073 | Instagram | Multi-Timeframe Advantage | Weekend reflection. |
+| 7:00 PM | 074 | Twitter | Quote Card | Sunday evening motivation. |
+| 7:30 PM | 074 | Instagram | Quote Card | Prep for new week. |
+| 5:00 PM | 075 | Twitter | Volume Oracle Regime Detection | Sunday tool preview. |
+| 5:30 PM | 075 | Instagram | Volume Oracle Regime Detection | Evaluating for Monday. |
 
 ---
 
@@ -4910,27 +5189,98 @@ Full guide in bio 🔗
 
 ---
 
-# POSTING SCHEDULE (Week 5-6)
+# POSTING SCHEDULE (Week 5) — Context-Aware Timing
 
-| Day | Time | Post | Platform |
-|-----|------|------|----------|
-| Fri | 9 AM | 041 | All Platforms |
-| Fri | 11 AM | 042 | Instagram Carousel |
-| Fri | 4 PM | 042 | Twitter Thread |
-| Sat | 10 AM | 043 | Twitter Thread |
-| Sat | 12 PM | 043 | Instagram Carousel |
-| Sat | 5 PM | 044 | All Platforms |
-| Sun | 10 AM | 045 | Twitter |
-| Sun | 12 PM | 045 | Instagram Carousel |
-| Sun | 5 PM | 046 | Twitter Thread |
-| Mon | 9 AM | 046 | Instagram Carousel |
-| Mon | 1 PM | 047 | Twitter Thread |
-| Mon | 4 PM | 047 | Instagram Carousel |
-| Tue | 9 AM | 048 | Twitter |
-| Tue | 11 AM | 048 | Instagram Carousel |
-| Tue | 4 PM | 049 | Twitter Thread |
-| Tue | 7 PM | 049 | Instagram Carousel |
-| Wed | 11 AM | 050 | All Platforms |
+> Posts 076-096. Full week = 21 posts at 3/day.
+
+## Day 26: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 076 | Twitter | Backtesting Basics (Education) | Pre-market technical. |
+| 8:30 AM | 076 | Instagram | Backtesting Basics | Morning learning. |
+| 1:00 PM | 077 | Twitter | Liquidity Hunting Explained (Blog) | Lunch break deep read. |
+| 1:30 PM | 077 | Instagram | Liquidity Hunting Explained | Midday education. |
+| 9:00 PM | 078 | Twitter | Chronicle: The Prophet | Late night storytelling. |
+| 9:30 PM | 078 | Instagram | Chronicle: The Prophet | Night lore. |
+
+---
+
+## Day 27: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 079 | Twitter | Paper Trading (Education) | Pre-market fundamentals. |
+| 8:30 AM | 079 | Instagram | Paper Trading | Morning learning mode. |
+| 10:00 AM | 080 | Twitter | Pentarch Signal Meanings (Docs) | Morning reference content. |
+| 10:30 AM | 080 | Instagram | Pentarch Signal Meanings | Work mode resource. |
+| 12:00 PM | 081 | Twitter | Annual Plan Savings (Marketing) | Midday visibility. |
+| 12:30 PM | 081 | Instagram | Annual Plan Savings | Lunch scroll promo. |
+
+---
+
+## Day 28: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 082 | Twitter | Going Live (Education) | Pre-market preparation. |
+| 8:30 AM | 082 | Instagram | Going Live | Morning learning. |
+| 7:00 PM | 083 | Twitter | Wyckoff Method Simplified (Blog) | Evening deep read. |
+| 7:30 PM | 083 | Instagram | Wyckoff Method Simplified | Evening reflection. |
+| 7:00 AM | 084 | Twitter | Quote Card | Morning motivation. |
+| 7:30 AM | 084 | Instagram | Quote Card | Coffee scroll. |
+
+---
+
+## Day 29: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 5:00 PM | 085 | Twitter | Janus Atlas Level Confluence | Post-market tool demo. |
+| 5:30 PM | 085 | Instagram | Janus Atlas Level Confluence | Evening tool evaluation. |
+| 8:00 AM | 086 | Twitter | Market Structure (Education) | Pre-market technical. |
+| 8:30 AM | 086 | Instagram | Market Structure | Morning learning. |
+| 1:00 PM | 087 | Twitter | Order Blocks Demystified (Blog) | Lunch deep read. |
+| 1:30 PM | 087 | Instagram | Order Blocks Demystified | Midday education. |
+
+---
+
+## Day 30: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 9:00 PM | 088 | Twitter | Chronicle: Birth of Elite Seven | Friday night lore. |
+| 9:30 PM | 088 | Instagram | Chronicle: Birth of Elite Seven | Night storytelling. |
+| 8:00 AM | 089 | Twitter | Supply and Demand Zones (Education) | Pre-market Friday. |
+| 8:30 AM | 089 | Instagram | Supply and Demand Zones | End of week learning. |
+| 10:00 AM | 090 | Twitter | Volume Oracle Settings (Docs) | Morning reference. |
+| 10:30 AM | 090 | Instagram | Volume Oracle Settings | Resource saving mode. |
+
+---
+
+## Day 31: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 12:00 PM | 091 | Twitter | Non-Repainting Guarantee (Marketing) | Midday visibility. |
+| 12:30 PM | 091 | Instagram | Non-Repainting Guarantee | Weekend promo. |
+| 10:00 AM | 092 | Twitter | Fair Value Gaps (Education) | Weekend morning education. |
+| 10:30 AM | 092 | Instagram | Fair Value Gaps | Relaxed learning time. |
+| 2:00 PM | 093 | Twitter | Problem with Indicators (Blog) | Saturday afternoon deep read. |
+| 2:30 PM | 093 | Instagram | Problem with Indicators | Weekend reflection. |
+
+---
+
+## Day 32: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 094 | Twitter | Quote Card | Sunday morning motivation. |
+| 7:30 AM | 094 | Instagram | Quote Card | Weekend coffee scroll. |
+| 5:00 PM | 095 | Twitter | Harmonic Oscillator Divergence | Sunday tool preview. |
+| 5:30 PM | 095 | Instagram | Harmonic Oscillator Divergence | Evaluating for Monday. |
+| 8:00 AM | 096 | Twitter | Inducement & Liquidity (Education) | Sunday morning fundamentals. |
+| 8:30 AM | 096 | Instagram | Inducement & Liquidity | Weekend education. |
 
 ---
 
@@ -5761,27 +6111,98 @@ Full docs in bio 🔗
 
 ---
 
-# POSTING SCHEDULE (Week 6-7)
+# POSTING SCHEDULE (Week 6) — Context-Aware Timing
 
-| Day | Time | Post | Platform |
-|-----|------|------|----------|
-| Wed | 4 PM | 051 | All Platforms |
-| Thu | 9 AM | 052 | Twitter Thread |
-| Thu | 11 AM | 052 | Instagram Carousel |
-| Thu | 4 PM | 053 | Twitter Thread |
-| Thu | 7 PM | 053 | Instagram Carousel |
-| Fri | 11 AM | 054 | All Platforms |
-| Fri | 1 PM | 055 | Twitter |
-| Fri | 4 PM | 055 | Instagram Carousel |
-| Sat | 10 AM | 056 | Twitter Thread |
-| Sat | 12 PM | 056 | Instagram Carousel |
-| Sat | 5 PM | 057 | Twitter Thread |
-| Sun | 10 AM | 057 | Instagram Carousel |
-| Sun | 2 PM | 058 | Twitter |
-| Sun | 5 PM | 058 | Instagram Carousel |
-| Mon | 11 AM | 059 | Twitter Thread |
-| Mon | 1 PM | 059 | Instagram Carousel |
-| Mon | 7 PM | 060 | All Platforms |
+> Posts 097-117. Full week = 21 posts at 3/day.
+
+## Day 33: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 1:00 PM | 097 | Twitter | Power of Doing Nothing (Blog) | Lunch break deep read. |
+| 1:30 PM | 097 | Instagram | Power of Doing Nothing | Midday psychology. |
+| 9:00 PM | 098 | Twitter | Chronicle: The Council Assembles | Late night storytelling. |
+| 9:30 PM | 098 | Instagram | Chronicle: The Council Assembles | Night lore. |
+| 8:00 AM | 099 | Twitter | Trend Continuation Patterns (Education) | Pre-market technical. |
+| 8:30 AM | 099 | Instagram | Trend Continuation Patterns | Morning learning. |
+
+---
+
+## Day 34: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 100 | Twitter | Getting Started Workflow (Docs) | Morning reference content. |
+| 10:30 AM | 100 | Instagram | Getting Started Workflow | Work mode resource. |
+| 12:00 PM | 101 | Twitter | 100 Posts Milestone (Marketing) | Midday celebration visibility. |
+| 12:30 PM | 101 | Instagram | 100 Posts Milestone | Lunch scroll celebration. |
+| 8:00 AM | 102 | Twitter | Liquidity Pools (Education) | Pre-market technical. |
+| 8:30 AM | 102 | Instagram | Liquidity Pools | Morning learning mode. |
+
+---
+
+## Day 35: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 PM | 103 | Twitter | Trading with the Trend (Blog) | Evening deep read. |
+| 7:30 PM | 103 | Instagram | Trading with the Trend | Evening reflection. |
+| 7:00 AM | 104 | Twitter | Quote Card | Morning motivation. |
+| 7:30 AM | 104 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 105 | Twitter | Pentarch TD Signal Deep Dive | Post-market tool demo. |
+| 5:30 PM | 105 | Instagram | Pentarch TD Signal Deep Dive | Evening tool evaluation. |
+
+---
+
+## Day 36: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 106 | Twitter | Reversal Patterns (Education) | Pre-market technical. |
+| 8:30 AM | 106 | Instagram | Reversal Patterns | Morning learning. |
+| 1:00 PM | 107 | Twitter | Importance of Trading Hours (Blog) | Lunch deep read. |
+| 1:30 PM | 107 | Instagram | Importance of Trading Hours | Midday education. |
+| 9:00 PM | 108 | Twitter | Chronicle: The Pilot's Oath | Late night lore. |
+| 9:30 PM | 108 | Instagram | Chronicle: The Pilot's Oath | Night storytelling. |
+
+---
+
+## Day 37: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 109 | Twitter | Confluence Trading (Education) | Pre-market Friday. |
+| 8:30 AM | 109 | Instagram | Confluence Trading | End of week learning. |
+| 10:00 AM | 110 | Twitter | Augury Grid Symbol Setup (Docs) | Morning reference. |
+| 10:30 AM | 110 | Instagram | Augury Grid Symbol Setup | Resource saving mode. |
+| 12:00 PM | 111 | Twitter | Affiliate Program (Marketing) | Midday visibility. |
+| 12:30 PM | 111 | Instagram | Affiliate Program | Lunch scroll promo. |
+
+---
+
+## Day 38: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 112 | Twitter | Momentum Trading (Education) | Weekend morning education. |
+| 10:30 AM | 112 | Instagram | Momentum Trading | Relaxed learning time. |
+| 2:00 PM | 113 | Twitter | Psychology of FOMO (Blog) | Saturday afternoon deep read. |
+| 2:30 PM | 113 | Instagram | Psychology of FOMO | Weekend reflection. |
+| 7:00 AM | 114 | Twitter | Quote Card | Saturday morning motivation. |
+| 7:30 AM | 114 | Instagram | Quote Card | Weekend coffee scroll. |
+
+---
+
+## Day 39: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 5:00 PM | 115 | Twitter | Volume Oracle Accumulation Regime | Sunday tool preview. |
+| 5:30 PM | 115 | Instagram | Volume Oracle Accumulation Regime | Evaluating for Monday. |
+| 8:00 AM | 116 | Twitter | Risk Management Deep Dive (Education) | Sunday morning fundamentals. |
+| 8:30 AM | 116 | Instagram | Risk Management Deep Dive | Weekend education. |
+| 2:00 PM | 117 | Twitter | Avoiding Analysis Paralysis (Blog) | Sunday afternoon deep read. |
+| 2:30 PM | 117 | Instagram | Avoiding Analysis Paralysis | Prep for new week. |
 
 ---
 
@@ -6546,20 +6967,98 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 
 ---
 
-## 📅 BATCH 07 POSTING SCHEDULE
+# POSTING SCHEDULE (Week 7) — Context-Aware Timing
 
-| Day | Post | Platform Focus | Best Time |
-|-----|------|----------------|-----------|
-| Mon | 061 | Twitter | 9:00 AM EST |
-| Mon | 062 | Instagram | 12:00 PM EST |
-| Tue | 063 | Twitter/Blog | 9:00 AM EST |
-| Tue | 064 | All Platforms | 6:00 PM EST |
-| Wed | 065 | Twitter | 9:00 AM EST |
-| Wed | 066 | Instagram | 12:00 PM EST |
-| Thu | 067 | Twitter/Blog | 9:00 AM EST |
-| Thu | 068 | All Platforms | 6:00 PM EST |
-| Fri | 069 | Twitter | 9:00 AM EST |
-| Fri | 070 | Twitter/Docs | 12:00 PM EST |
+> Posts 118-138. Full week = 21 posts at 3/day.
+
+## Day 40: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 9:00 PM | 118 | Twitter | Chronicle: The Hierarchy of Signals | Late night storytelling. |
+| 9:30 PM | 118 | Instagram | Chronicle: The Hierarchy of Signals | Night lore. |
+| 8:00 AM | 119 | Twitter | Volume Spread Analysis (Education) | Pre-market technical. |
+| 8:30 AM | 119 | Instagram | Volume Spread Analysis | Morning learning. |
+| 10:00 AM | 120 | Twitter | Plutus Flow Divergence Guide (Docs) | Morning reference content. |
+| 10:30 AM | 120 | Instagram | Plutus Flow Divergence Guide | Work mode resource. |
+
+---
+
+## Day 41: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 12:00 PM | 121 | Twitter | Community Testimonials (Marketing) | Midday visibility. |
+| 12:30 PM | 121 | Instagram | Community Testimonials | Lunch scroll promo. |
+| 8:00 AM | 122 | Twitter | Swing Trading Fundamentals (Education) | Pre-market technical. |
+| 8:30 AM | 122 | Instagram | Swing Trading Fundamentals | Morning learning mode. |
+| 7:00 PM | 123 | Twitter | Compound Effect in Trading (Blog) | Evening deep read. |
+| 7:30 PM | 123 | Instagram | Compound Effect in Trading | Evening reflection. |
+
+---
+
+## Day 42: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 124 | Twitter | Quote Card | Morning motivation. |
+| 7:30 AM | 124 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 125 | Twitter | Janus Atlas Multi-Timeframe Demo | Post-market tool demo. |
+| 5:30 PM | 125 | Instagram | Janus Atlas Multi-Timeframe Demo | Evening tool evaluation. |
+| 8:00 AM | 126 | Twitter | Day Trading Essentials (Education) | Pre-market technical. |
+| 8:30 AM | 126 | Instagram | Day Trading Essentials | Morning learning. |
+
+---
+
+## Day 43: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 1:00 PM | 127 | Twitter | Why Your Stop Loss Keeps Getting Hit (Blog) | Lunch deep read. |
+| 1:30 PM | 127 | Instagram | Why Your Stop Loss Keeps Getting Hit | Midday education. |
+| 9:00 PM | 128 | Twitter | Chronicle: Why Non-Repainting Matters | Late night lore. |
+| 9:30 PM | 128 | Instagram | Chronicle: Why Non-Repainting Matters | Night storytelling. |
+| 8:00 AM | 129 | Twitter | Position Management (Education) | Pre-market fundamentals. |
+| 8:30 AM | 129 | Instagram | Position Management | Morning learning mode. |
+
+---
+
+## Day 44: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 130 | Twitter | Indicator Combinations (Docs) | Morning reference. |
+| 10:30 AM | 130 | Instagram | Indicator Combinations | Resource saving mode. |
+| 12:00 PM | 131 | Twitter | Roadmap Preview (Marketing) | Midday visibility. |
+| 12:30 PM | 131 | Instagram | Roadmap Preview | Lunch scroll promo. |
+| 8:00 AM | 132 | Twitter | Scalping Strategies (Education) | Pre-market Friday. |
+| 8:30 AM | 132 | Instagram | Scalping Strategies | End of week learning. |
+
+---
+
+## Day 45: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 2:00 PM | 133 | Twitter | The Art of Waiting (Blog) | Saturday afternoon deep read. |
+| 2:30 PM | 133 | Instagram | The Art of Waiting | Weekend reflection. |
+| 7:00 AM | 134 | Twitter | Quote Card | Saturday morning motivation. |
+| 7:30 AM | 134 | Instagram | Quote Card | Weekend coffee scroll. |
+| 5:00 PM | 135 | Twitter | Augury Grid Alert Setup | Saturday tool demo. |
+| 5:30 PM | 135 | Instagram | Augury Grid Alert Setup | Weekend tool exploration. |
+
+---
+
+## Day 46: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 136 | Twitter | Trading Psychology Mastery (Education) | Sunday morning fundamentals. |
+| 10:30 AM | 136 | Instagram | Trading Psychology Mastery | Weekend education. |
+| 2:00 PM | 137 | Twitter | Building a Trading Routine (Blog) | Sunday afternoon deep read. |
+| 2:30 PM | 137 | Instagram | Building a Trading Routine | Prep for new week. |
+| 9:00 PM | 138 | Twitter | Chronicle: The Sovereign's Wisdom | Sunday night lore. |
+| 9:30 PM | 138 | Instagram | Chronicle: The Sovereign's Wisdom | Night storytelling. |
 
 ---
 
@@ -7253,20 +7752,98 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 
 ---
 
-## 📅 BATCH 08 POSTING SCHEDULE
+# POSTING SCHEDULE (Week 8) — Context-Aware Timing
 
-| Day | Post | Platform Focus | Best Time |
-|-----|------|----------------|-----------|
-| Mon | 071 | Twitter/Instagram | 9:00 AM EST |
-| Mon | 072 | Instagram | 12:00 PM EST |
-| Tue | 073 | Twitter/Blog | 9:00 AM EST |
-| Tue | 074 | All Platforms | 6:00 PM EST |
-| Wed | 075 | Twitter | 9:00 AM EST |
-| Wed | 076 | Instagram | 12:00 PM EST |
-| Thu | 077 | Twitter/Blog | 9:00 AM EST |
-| Thu | 078 | All Platforms | 6:00 PM EST |
-| Fri | 079 | Twitter | 9:00 AM EST |
-| Fri | 080 | Twitter/Docs | 12:00 PM EST |
+> Posts 139-159. Full week = 21 posts at 3/day.
+
+## Day 47: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 139 | Twitter | Advanced Candlestick Patterns (Education) | Pre-market technical. |
+| 8:30 AM | 139 | Instagram | Advanced Candlestick Patterns | Morning learning. |
+| 10:00 AM | 140 | Twitter | Troubleshooting Guide (Docs) | Morning reference content. |
+| 10:30 AM | 140 | Instagram | Troubleshooting Guide | Work mode resource. |
+| 12:00 PM | 141 | Twitter | Signal Pilot Quiz (Marketing) | Midday visibility. |
+| 12:30 PM | 141 | Instagram | Signal Pilot Quiz | Lunch scroll engagement. |
+
+---
+
+## Day 48: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 142 | Twitter | Correlation Trading (Education) | Pre-market technical. |
+| 8:30 AM | 142 | Instagram | Correlation Trading | Morning learning mode. |
+| 7:00 PM | 143 | Twitter | Trading Plan Template (Blog) | Evening deep read. |
+| 7:30 PM | 143 | Instagram | Trading Plan Template | Evening reflection. |
+| 7:00 AM | 144 | Twitter | Quote Card | Morning motivation. |
+| 7:30 AM | 144 | Instagram | Quote Card | Coffee scroll. |
+
+---
+
+## Day 49: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 5:00 PM | 145 | Twitter | Pentarch IGN Signal Deep Dive | Post-market tool demo. |
+| 5:30 PM | 145 | Instagram | Pentarch IGN Signal Deep Dive | Evening tool evaluation. |
+| 8:00 AM | 146 | Twitter | Drawdown Management (Education) | Pre-market fundamentals. |
+| 8:30 AM | 146 | Instagram | Drawdown Management | Morning learning. |
+| 1:00 PM | 147 | Twitter | Reading Order Flow (Blog) | Lunch deep read. |
+| 1:30 PM | 147 | Instagram | Reading Order Flow | Midday education. |
+
+---
+
+## Day 50: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 9:00 PM | 148 | Twitter | Chronicle: The Cartographer's Map | Late night lore. |
+| 9:30 PM | 148 | Instagram | Chronicle: The Cartographer's Map | Night storytelling. |
+| 8:00 AM | 149 | Twitter | MTF Confluence (Education) | Pre-market technical. |
+| 8:30 AM | 149 | Instagram | MTF Confluence | Morning learning. |
+| 10:00 AM | 150 | Twitter | Keyboard Shortcuts (Docs) | Morning reference. |
+| 10:30 AM | 150 | Instagram | Keyboard Shortcuts | Resource saving mode. |
+
+---
+
+## Day 51: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 12:00 PM | 151 | Twitter | Success Story (Marketing) | Midday visibility. |
+| 12:30 PM | 151 | Instagram | Success Story | Lunch scroll social proof. |
+| 8:00 AM | 152 | Twitter | Gap Trading (Education) | Pre-market Friday. |
+| 8:30 AM | 152 | Instagram | Gap Trading | End of week learning. |
+| 2:00 PM | 153 | Twitter | The 80/20 of Trading (Blog) | Friday afternoon deep read. |
+| 2:30 PM | 153 | Instagram | The 80/20 of Trading | Weekend prep reflection. |
+
+---
+
+## Day 52: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 154 | Twitter | Quote Card | Saturday morning motivation. |
+| 7:30 AM | 154 | Instagram | Quote Card | Weekend coffee scroll. |
+| 5:00 PM | 155 | Twitter | Harmonic Oscillator Overbought/Oversold | Saturday tool demo. |
+| 5:30 PM | 155 | Instagram | Harmonic Oscillator Overbought/Oversold | Weekend tool exploration. |
+| 10:00 AM | 156 | Twitter | Trend Exhaustion Signals (Education) | Weekend morning education. |
+| 10:30 AM | 156 | Instagram | Trend Exhaustion Signals | Relaxed learning time. |
+
+---
+
+## Day 53: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 2:00 PM | 157 | Twitter | Trading During News Events (Blog) | Sunday afternoon deep read. |
+| 2:30 PM | 157 | Instagram | Trading During News Events | Weekend reflection. |
+| 9:00 PM | 158 | Twitter | Chronicle: The Elite Seven United | Sunday night lore. |
+| 9:30 PM | 158 | Instagram | Chronicle: The Elite Seven United | Night storytelling. |
+| 8:00 AM | 159 | Twitter | Fibonacci Extensions (Education) | Sunday morning fundamentals. |
+| 8:30 AM | 159 | Instagram | Fibonacci Extensions | Weekend education. |
 
 ---
 
@@ -7967,20 +8544,98 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 
 ---
 
-## 📅 BATCH 09 POSTING SCHEDULE
+# POSTING SCHEDULE (Week 9) — Context-Aware Timing
 
-| Day | Post | Platform Focus | Best Time |
-|-----|------|----------------|-----------|
-| Mon | 081 | Twitter/Instagram | 9:00 AM EST |
-| Mon | 082 | Instagram | 12:00 PM EST |
-| Tue | 083 | Twitter/Blog | 9:00 AM EST |
-| Tue | 084 | All Platforms | 6:00 PM EST |
-| Wed | 085 | Twitter | 9:00 AM EST |
-| Wed | 086 | Instagram | 12:00 PM EST |
-| Thu | 087 | Twitter/Blog | 9:00 AM EST |
-| Thu | 088 | All Platforms | 6:00 PM EST |
-| Fri | 089 | Twitter | 9:00 AM EST |
-| Fri | 090 | Twitter/Docs | 12:00 PM EST |
+> Posts 160-180. Full week = 21 posts at 3/day.
+
+## Day 54: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 160 | Twitter | Mobile TradingView Setup (Docs) | Morning reference content. |
+| 10:30 AM | 160 | Instagram | Mobile TradingView Setup | Work mode resource. |
+| 12:00 PM | 161 | Twitter | Compare vs Competitors (Marketing) | Midday visibility. |
+| 12:30 PM | 161 | Instagram | Compare vs Competitors | Lunch scroll promo. |
+| 8:00 AM | 162 | Twitter | Breakout Trading (Education) | Pre-market technical. |
+| 8:30 AM | 162 | Instagram | Breakout Trading | Morning learning. |
+
+---
+
+## Day 55: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 PM | 163 | Twitter | The Journaling Habit (Blog) | Evening deep read. |
+| 7:30 PM | 163 | Instagram | The Journaling Habit | Evening reflection. |
+| 7:00 AM | 164 | Twitter | Quote Card | Morning motivation. |
+| 7:30 AM | 164 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 165 | Twitter | Volume Oracle Distribution Regime | Post-market tool demo. |
+| 5:30 PM | 165 | Instagram | Volume Oracle Distribution Regime | Evening tool evaluation. |
+
+---
+
+## Day 56: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 166 | Twitter | Mean Reversion (Education) | Pre-market technical. |
+| 8:30 AM | 166 | Instagram | Mean Reversion | Morning learning. |
+| 1:00 PM | 167 | Twitter | Managing Winning Trades (Blog) | Lunch deep read. |
+| 1:30 PM | 167 | Instagram | Managing Winning Trades | Midday education. |
+| 9:00 PM | 168 | Twitter | Chronicle: The Arbiter's Judgment | Late night lore. |
+| 9:30 PM | 168 | Instagram | Chronicle: The Arbiter's Judgment | Night storytelling. |
+
+---
+
+## Day 57: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 169 | Twitter | Divergence Trading (Education) | Pre-market technical. |
+| 8:30 AM | 169 | Instagram | Divergence Trading | Morning learning. |
+| 10:00 AM | 170 | Twitter | Custom Alert Conditions (Docs) | Morning reference. |
+| 10:30 AM | 170 | Instagram | Custom Alert Conditions | Resource saving mode. |
+| 12:00 PM | 171 | Twitter | Free Trial Reminder (Marketing) | Midday visibility. |
+| 12:30 PM | 171 | Instagram | Free Trial Reminder | Lunch scroll promo. |
+
+---
+
+## Day 58: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 172 | Twitter | Range Trading (Education) | Pre-market Friday. |
+| 8:30 AM | 172 | Instagram | Range Trading | End of week learning. |
+| 2:00 PM | 173 | Twitter | Sunk Cost Fallacy (Blog) | Friday afternoon deep read. |
+| 2:30 PM | 173 | Instagram | Sunk Cost Fallacy | Weekend prep reflection. |
+| 7:00 AM | 174 | Twitter | Quote Card | Friday morning motivation. |
+| 7:30 AM | 174 | Instagram | Quote Card | Coffee scroll. |
+
+---
+
+## Day 59: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 5:00 PM | 175 | Twitter | Plutus Flow Accumulation Detection | Saturday tool demo. |
+| 5:30 PM | 175 | Instagram | Plutus Flow Accumulation Detection | Weekend tool exploration. |
+| 10:00 AM | 176 | Twitter | Advanced Entry Techniques (Education) | Weekend morning education. |
+| 10:30 AM | 176 | Instagram | Advanced Entry Techniques | Relaxed learning time. |
+| 2:00 PM | 177 | Twitter | Equity Curve Trading (Blog) | Saturday afternoon deep read. |
+| 2:30 PM | 177 | Instagram | Equity Curve Trading | Weekend reflection. |
+
+---
+
+## Day 60: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 9:00 PM | 178 | Twitter | Chronicle: The Prophet's Vision | Sunday night lore. |
+| 9:30 PM | 178 | Instagram | Chronicle: The Prophet's Vision | Night storytelling. |
+| 8:00 AM | 179 | Twitter | Institutional Order Flow (Education) | Sunday morning fundamentals. |
+| 8:30 AM | 179 | Instagram | Institutional Order Flow | Weekend education. |
+| 10:00 AM | 180 | Twitter | Indicator Update Log (Docs) | Sunday morning reference. |
+| 10:30 AM | 180 | Instagram | Indicator Update Log | Prep for new week. |
 
 ---
 
@@ -8677,20 +9332,98 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 
 ---
 
-## 📅 BATCH 10 POSTING SCHEDULE
+# POSTING SCHEDULE (Week 10) — Context-Aware Timing
 
-| Day | Post | Platform Focus | Best Time |
-|-----|------|----------------|-----------|
-| Mon | 091 | Twitter/Instagram | 9:00 AM EST |
-| Mon | 092 | Instagram | 12:00 PM EST |
-| Tue | 093 | Twitter/Blog | 9:00 AM EST |
-| Tue | 094 | All Platforms | 6:00 PM EST |
-| Wed | 095 | Twitter | 9:00 AM EST |
-| Wed | 096 | Instagram | 12:00 PM EST |
-| Thu | 097 | Twitter/Blog | 9:00 AM EST |
-| Thu | 098 | All Platforms | 6:00 PM EST |
-| Fri | 099 | Twitter | 9:00 AM EST |
-| Fri | 100 | Twitter/Docs | 12:00 PM EST |
+> Posts 181-201. Full week = 21 posts at 3/day.
+
+## Day 61: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 12:00 PM | 181 | Twitter | Education Hub Spotlight (Marketing) | Midday visibility. |
+| 12:30 PM | 181 | Instagram | Education Hub Spotlight | Lunch scroll promo. |
+| 8:00 AM | 182 | Twitter | Wyckoff Accumulation Schematic (Education) | Pre-market technical. |
+| 8:30 AM | 182 | Instagram | Wyckoff Accumulation Schematic | Morning learning. |
+| 7:00 PM | 183 | Twitter | The Importance of Screen Time (Blog) | Evening deep read. |
+| 7:30 PM | 183 | Instagram | The Importance of Screen Time | Evening reflection. |
+
+---
+
+## Day 62: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 184 | Twitter | Quote Card: Risk & Knowledge | Morning motivation. |
+| 7:30 AM | 184 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 185 | Twitter | Pentarch WRN Signal Deep Dive | Post-market tool demo. |
+| 5:30 PM | 185 | Instagram | Pentarch WRN Signal Deep Dive | Evening tool evaluation. |
+| 8:00 AM | 186 | Twitter | Wyckoff Distribution Schematic (Education) | Pre-market technical. |
+| 8:30 AM | 186 | Instagram | Wyckoff Distribution Schematic | Morning learning mode. |
+
+---
+
+## Day 63: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 1:00 PM | 187 | Twitter | Trading as a Business (Blog) | Lunch deep read. |
+| 1:30 PM | 187 | Instagram | Trading as a Business | Midday education. |
+| 9:00 PM | 188 | Twitter | Chronicle: The Scales of Truth | Late night lore. |
+| 9:30 PM | 188 | Instagram | Chronicle: The Scales of Truth | Night storytelling. |
+| 8:00 AM | 189 | Twitter | Market Profile Basics (Education) | Pre-market technical. |
+| 8:30 AM | 189 | Instagram | Market Profile Basics | Morning learning. |
+
+---
+
+## Day 64: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 190 | Twitter | FAQ - Common Questions (Docs) | Morning reference. |
+| 10:30 AM | 190 | Instagram | FAQ - Common Questions | Resource saving mode. |
+| 12:00 PM | 191 | Twitter | Social Proof: User Count (Marketing) | Midday visibility. |
+| 12:30 PM | 191 | Instagram | Social Proof: User Count | Lunch scroll social proof. |
+| 8:00 AM | 192 | Twitter | Auction Market Theory (Education) | Pre-market technical. |
+| 8:30 AM | 192 | Instagram | Auction Market Theory | Morning learning. |
+
+---
+
+## Day 65: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 2:00 PM | 193 | Twitter | The Power of Saying No (Blog) | Friday afternoon deep read. |
+| 2:30 PM | 193 | Instagram | The Power of Saying No | Weekend prep reflection. |
+| 7:00 AM | 194 | Twitter | Quote Card: Managing Risk | Friday morning motivation. |
+| 7:30 AM | 194 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 195 | Twitter | OmniDeck Unified View Demo | Friday tool demo. |
+| 5:30 PM | 195 | Instagram | OmniDeck Unified View Demo | Weekend tool evaluation. |
+
+---
+
+## Day 66: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 196 | Twitter | Delta Volume Analysis (Education) | Weekend morning education. |
+| 10:30 AM | 196 | Instagram | Delta Volume Analysis | Relaxed learning time. |
+| 2:00 PM | 197 | Twitter | When to Stop Trading (Blog) | Saturday afternoon deep read. |
+| 2:30 PM | 197 | Instagram | When to Stop Trading | Weekend reflection. |
+| 9:00 PM | 198 | Twitter | Chronicle: The Watchman's Vigil | Saturday night lore. |
+| 9:30 PM | 198 | Instagram | Chronicle: The Watchman's Vigil | Night storytelling. |
+
+---
+
+## Day 67: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 199 | Twitter | Intermarket Analysis (Education) | Sunday morning fundamentals. |
+| 8:30 AM | 199 | Instagram | Intermarket Analysis | Weekend education. |
+| 10:00 AM | 200 | Twitter | Best Practices Guide (Docs) | Sunday morning reference. |
+| 10:30 AM | 200 | Instagram | Best Practices Guide | Prep for new week. |
+| 12:00 PM | 201 | Twitter | 200 Posts Milestone (Marketing) | Midday celebration visibility. |
+| 12:30 PM | 201 | Instagram | 200 Posts Milestone | Lunch scroll celebration. |
 
 ---
 
@@ -9399,20 +10132,98 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 
 ---
 
-## 📅 BATCH 11 POSTING SCHEDULE
+# POSTING SCHEDULE (Week 11) — Context-Aware Timing
 
-| Day | Post | Platform Focus | Best Time |
-|-----|------|----------------|-----------|
-| Mon | 101 | All Platforms | 9:00 AM EST |
-| Mon | 102 | Instagram | 12:00 PM EST |
-| Tue | 103 | Twitter/Blog | 9:00 AM EST |
-| Tue | 104 | All Platforms | 6:00 PM EST |
-| Wed | 105 | Twitter | 9:00 AM EST |
-| Wed | 106 | Instagram | 12:00 PM EST |
-| Thu | 107 | Twitter/Blog | 9:00 AM EST |
-| Thu | 108 | All Platforms | 6:00 PM EST |
-| Fri | 109 | Twitter | 9:00 AM EST |
-| Fri | 110 | Twitter/Docs | 12:00 PM EST |
+> Posts 202-222. Full week = 21 posts at 3/day.
+
+## Day 68: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 202 | Twitter | Price Action Context (Education) | Pre-market technical. |
+| 8:30 AM | 202 | Instagram | Price Action Context | Morning learning. |
+| 1:00 PM | 203 | Twitter | Trader's Morning Routine (Blog) | Lunch deep read. |
+| 1:30 PM | 203 | Instagram | Trader's Morning Routine | Midday education. |
+| 7:00 AM | 204 | Twitter | Quote Card: Patience vs Greed | Morning motivation. |
+| 7:30 AM | 204 | Instagram | Quote Card | Coffee scroll. |
+
+---
+
+## Day 69: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 5:00 PM | 205 | Twitter | Janus Atlas Fresh vs Tested Levels | Post-market tool demo. |
+| 5:30 PM | 205 | Instagram | Janus Atlas Fresh vs Tested Levels | Evening tool evaluation. |
+| 8:00 AM | 206 | Twitter | Trading the Open (Education) | Pre-market technical. |
+| 8:30 AM | 206 | Instagram | Trading the Open | Morning learning mode. |
+| 7:00 PM | 207 | Twitter | Avoiding Tilt (Blog) | Evening deep read. |
+| 7:30 PM | 207 | Instagram | Avoiding Tilt | Evening reflection. |
+
+---
+
+## Day 70: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 9:00 PM | 208 | Twitter | Chronicle: The Commander's Strategy | Late night lore. |
+| 9:30 PM | 208 | Instagram | Chronicle: The Commander's Strategy | Night storytelling. |
+| 8:00 AM | 209 | Twitter | Optimal Trade Entry OTE (Education) | Pre-market technical. |
+| 8:30 AM | 209 | Instagram | Optimal Trade Entry | Morning learning. |
+| 10:00 AM | 210 | Twitter | Indicator Comparison Chart (Docs) | Morning reference. |
+| 10:30 AM | 210 | Instagram | Indicator Comparison Chart | Resource saving mode. |
+
+---
+
+## Day 71: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 12:00 PM | 211 | Twitter | Why Education First (Marketing) | Midday visibility. |
+| 12:30 PM | 211 | Instagram | Why Education First | Lunch scroll promo. |
+| 8:00 AM | 212 | Twitter | Liquidity Voids (Education) | Pre-market technical. |
+| 8:30 AM | 212 | Instagram | Liquidity Voids | Morning learning. |
+| 2:00 PM | 213 | Twitter | Weekly Review Ritual (Blog) | Afternoon deep read. |
+| 2:30 PM | 213 | Instagram | Weekly Review Ritual | Midday education. |
+
+---
+
+## Day 72: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 214 | Twitter | Quote Card: The 1% Difference | Friday morning motivation. |
+| 7:30 AM | 214 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 215 | Twitter | Volume Oracle Neutral Regime | Friday tool demo. |
+| 5:30 PM | 215 | Instagram | Volume Oracle Neutral Regime | Weekend tool evaluation. |
+| 8:00 AM | 216 | Twitter | Breaker Blocks (Education) | Pre-market Friday. |
+| 8:30 AM | 216 | Instagram | Breaker Blocks | End of week learning. |
+
+---
+
+## Day 73: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 2:00 PM | 217 | Twitter | Cost of Overtrading (Blog) | Saturday afternoon deep read. |
+| 2:30 PM | 217 | Instagram | Cost of Overtrading | Weekend reflection. |
+| 9:00 PM | 218 | Twitter | Chronicle: The Sovereign's Cycle | Saturday night lore. |
+| 9:30 PM | 218 | Instagram | Chronicle: The Sovereign's Cycle | Night storytelling. |
+| 10:00 AM | 219 | Twitter | Mitigation Blocks (Education) | Weekend morning education. |
+| 10:30 AM | 219 | Instagram | Mitigation Blocks | Relaxed learning time. |
+
+---
+
+## Day 74: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 220 | Twitter | Alert Notification Options (Docs) | Sunday morning reference. |
+| 10:30 AM | 220 | Instagram | Alert Notification Options | Prep for new week. |
+| 12:00 PM | 221 | Twitter | Trader Transformation Story (Marketing) | Midday visibility. |
+| 12:30 PM | 221 | Instagram | Trader Transformation Story | Lunch scroll social proof. |
+| 8:00 AM | 222 | Twitter | Kill Zones (Education) | Sunday morning fundamentals. |
+| 8:30 AM | 222 | Instagram | Kill Zones | Weekend education. |
 
 ---
 
@@ -10139,20 +10950,98 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 
 ---
 
-## 📅 BATCH 12 POSTING SCHEDULE
+# POSTING SCHEDULE (Week 12) — Context-Aware Timing
 
-| Day | Post | Platform Focus | Best Time |
-|-----|------|----------------|-----------|
-| Mon | 111 | Twitter/Instagram | 9:00 AM EST |
-| Mon | 112 | Instagram | 12:00 PM EST |
-| Tue | 113 | Twitter/Blog | 9:00 AM EST |
-| Tue | 114 | All Platforms | 6:00 PM EST |
-| Wed | 115 | Twitter | 9:00 AM EST |
-| Wed | 116 | Instagram | 12:00 PM EST |
-| Thu | 117 | Twitter/Blog | 9:00 AM EST |
-| Thu | 118 | All Platforms | 6:00 PM EST |
-| Fri | 119 | Twitter | 9:00 AM EST |
-| Fri | 120 | Twitter/Docs | 12:00 PM EST |
+> Posts 223-243. Full week = 21 posts at 3/day.
+
+## Day 75: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 PM | 223 | Twitter | Danger of Social Media Trading (Blog) | Evening deep read. |
+| 7:30 PM | 223 | Instagram | Danger of Social Media Trading | Evening reflection. |
+| 7:00 AM | 224 | Twitter | Quote Card: Expensive Lessons | Morning motivation. |
+| 7:30 AM | 224 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 225 | Twitter | Pentarch CAP Signal Deep Dive | Post-market tool demo. |
+| 5:30 PM | 225 | Instagram | Pentarch CAP Signal Deep Dive | Evening tool evaluation. |
+
+---
+
+## Day 76: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 226 | Twitter | Premium & Discount Zones (Education) | Pre-market technical. |
+| 8:30 AM | 226 | Instagram | Premium & Discount Zones | Morning learning. |
+| 1:00 PM | 227 | Twitter | Building Confidence in Your System (Blog) | Lunch deep read. |
+| 1:30 PM | 227 | Instagram | Building Confidence in Your System | Midday education. |
+| 9:00 PM | 228 | Twitter | Chronicle: The Scales' Balance | Late night lore. |
+| 9:30 PM | 228 | Instagram | Chronicle: The Scales' Balance | Night storytelling. |
+
+---
+
+## Day 77: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 229 | Twitter | ICT Market Structure Shift (Education) | Pre-market technical. |
+| 8:30 AM | 229 | Instagram | ICT Market Structure Shift | Morning learning. |
+| 10:00 AM | 230 | Twitter | Performance Optimization (Docs) | Morning reference. |
+| 10:30 AM | 230 | Instagram | Performance Optimization | Resource saving mode. |
+| 12:00 PM | 231 | Twitter | Join the Discord (Marketing) | Midday visibility. |
+| 12:30 PM | 231 | Instagram | Join the Discord | Lunch scroll promo. |
+
+---
+
+## Day 78: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 232 | Twitter | Power of Three AMD (Education) | Pre-market technical. |
+| 8:30 AM | 232 | Instagram | Power of Three AMD | Morning learning. |
+| 2:00 PM | 233 | Twitter | Myth of the Perfect Setup (Blog) | Afternoon deep read. |
+| 2:30 PM | 233 | Instagram | Myth of the Perfect Setup | Midday education. |
+| 7:00 AM | 234 | Twitter | Quote Card: Trading Journal | Morning motivation. |
+| 7:30 AM | 234 | Instagram | Quote Card | Coffee scroll. |
+
+---
+
+## Day 79: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 5:00 PM | 235 | Twitter | Harmonic Oscillator Components | Friday tool demo. |
+| 5:30 PM | 235 | Instagram | Harmonic Oscillator Components | Weekend tool evaluation. |
+| 8:00 AM | 236 | Twitter | Judas Swing (Education) | Pre-market Friday. |
+| 8:30 AM | 236 | Instagram | Judas Swing | End of week learning. |
+| 7:00 PM | 237 | Twitter | When Your Strategy Stops Working (Blog) | Friday evening deep read. |
+| 7:30 PM | 237 | Instagram | When Your Strategy Stops Working | Weekend prep reflection. |
+
+---
+
+## Day 80: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 9:00 PM | 238 | Twitter | Chronicle: The Cartographer's Journey | Saturday night lore. |
+| 9:30 PM | 238 | Instagram | Chronicle: The Cartographer's Journey | Night storytelling. |
+| 10:00 AM | 239 | Twitter | Optimal Trade Management (Education) | Weekend morning education. |
+| 10:30 AM | 239 | Instagram | Optimal Trade Management | Relaxed learning time. |
+| 10:00 AM | 240 | Twitter | Multi-Monitor Setup (Docs) | Weekend morning reference. |
+| 10:30 AM | 240 | Instagram | Multi-Monitor Setup | Resource saving mode. |
+
+---
+
+## Day 81: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 12:00 PM | 241 | Twitter | Price Increase Coming (Marketing) | Midday visibility. |
+| 12:30 PM | 241 | Instagram | Price Increase Coming | Lunch scroll promo. |
+| 8:00 AM | 242 | Twitter | Session Timing & Institutional Flow (Education) | Sunday morning fundamentals. |
+| 8:30 AM | 242 | Instagram | Session Timing & Institutional Flow | Weekend education. |
+| 2:00 PM | 243 | Twitter | The Trader's Greatest Edge: Doing Nothing (Blog) | Sunday afternoon deep read. |
+| 2:30 PM | 243 | Instagram | The Trader's Greatest Edge | Prep for new week. |
 
 ---
 
@@ -10876,20 +11765,98 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 
 ---
 
-## 📅 BATCH 13 POSTING SCHEDULE
+# POSTING SCHEDULE (Week 13) — Context-Aware Timing
 
-| Day | Post | Platform Focus | Best Time |
-|-----|------|----------------|-----------|
-| Mon | 121 | Twitter/Instagram | 9:00 AM EST |
-| Mon | 122 | Instagram | 12:00 PM EST |
-| Tue | 123 | Twitter/Blog | 9:00 AM EST |
-| Tue | 124 | All Platforms | 6:00 PM EST |
-| Wed | 125 | Twitter | 9:00 AM EST |
-| Wed | 126 | Instagram | 12:00 PM EST |
-| Thu | 127 | Twitter/Blog | 9:00 AM EST |
-| Thu | 128 | All Platforms | 6:00 PM EST |
-| Fri | 129 | Twitter | 9:00 AM EST |
-| Fri | 130 | Twitter/Docs | 12:00 PM EST |
+> Posts 244-264. Full week = 21 posts at 3/day.
+
+## Day 82: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 244 | Twitter | Quote Card: Process Over Outcome | Morning motivation. |
+| 7:30 AM | 244 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 245 | Twitter | Volume Oracle: Regime Transitions | Post-market tool demo. |
+| 5:30 PM | 245 | Instagram | Volume Oracle: Regime Transitions | Evening tool evaluation. |
+| 8:00 AM | 246 | Twitter | Fair Value Gaps: Institutional Footprints (Education) | Pre-market technical. |
+| 8:30 AM | 246 | Instagram | Fair Value Gaps: Institutional Footprints | Morning learning. |
+
+---
+
+## Day 83: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 PM | 247 | Twitter | Why Most Indicators Fail (Blog) | Evening deep read. |
+| 7:30 PM | 247 | Instagram | Why Most Indicators Fail | Evening reflection. |
+| 9:00 PM | 248 | Twitter | Chronicle: The Prophet's Revelation | Late night lore. |
+| 9:30 PM | 248 | Instagram | Chronicle: The Prophet's Revelation | Night storytelling. |
+| 8:00 AM | 249 | Twitter | Liquidity Pools: Where Stops Cluster (Education) | Pre-market technical. |
+| 8:30 AM | 249 | Instagram | Liquidity Pools | Morning learning mode. |
+
+---
+
+## Day 84: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 250 | Twitter | Indicator Stacking Guide (Docs) | Morning reference. |
+| 10:30 AM | 250 | Instagram | Indicator Stacking Guide | Resource saving mode. |
+| 12:00 PM | 251 | Twitter | Join the Community (Marketing) | Midday visibility. |
+| 12:30 PM | 251 | Instagram | Join the Community | Lunch scroll promo. |
+| 8:00 AM | 252 | Twitter | Order Blocks: Institutional Entry Zones (Education) | Pre-market technical. |
+| 8:30 AM | 252 | Instagram | Order Blocks: Institutional Entry Zones | Morning learning. |
+
+---
+
+## Day 85: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 1:00 PM | 253 | Twitter | The Compound Effect in Trading (Blog) | Lunch deep read. |
+| 1:30 PM | 253 | Instagram | The Compound Effect in Trading | Midday education. |
+| 7:00 AM | 254 | Twitter | Quote Card: Risk First | Morning motivation. |
+| 7:30 AM | 254 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 255 | Twitter | Janus Atlas: Multi-Timeframe Confluence | Post-market tool demo. |
+| 5:30 PM | 255 | Instagram | Janus Atlas: Multi-Timeframe Confluence | Evening tool evaluation. |
+
+---
+
+## Day 86: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 256 | Twitter | Breaker Blocks: Failed Order Blocks (Education) | Pre-market Friday. |
+| 8:30 AM | 256 | Instagram | Breaker Blocks | End of week learning. |
+| 2:00 PM | 257 | Twitter | Trading Journal: Your Most Valuable Tool (Blog) | Friday afternoon deep read. |
+| 2:30 PM | 257 | Instagram | Trading Journal | Weekend prep reflection. |
+| 9:00 PM | 258 | Twitter | Chronicle: The Cartographer's First Map | Friday night lore. |
+| 9:30 PM | 258 | Instagram | Chronicle: The Cartographer's First Map | Night storytelling. |
+
+---
+
+## Day 87: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 259 | Twitter | Mitigation Blocks: Unfilled Orders (Education) | Weekend morning education. |
+| 10:30 AM | 259 | Instagram | Mitigation Blocks | Relaxed learning time. |
+| 10:00 AM | 260 | Twitter | Alert Setup Guide (Docs) | Weekend morning reference. |
+| 10:30 AM | 260 | Instagram | Alert Setup Guide | Resource saving mode. |
+| 12:00 PM | 261 | Twitter | Testimonial Feature (Marketing) | Midday visibility. |
+| 12:30 PM | 261 | Instagram | Testimonial Feature | Lunch scroll social proof. |
+
+---
+
+## Day 88: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 262 | Twitter | Displacement: Momentum Reveals Intent (Education) | Sunday morning fundamentals. |
+| 8:30 AM | 262 | Instagram | Displacement | Weekend education. |
+| 2:00 PM | 263 | Twitter | The Myth of the Holy Grail Strategy (Blog) | Sunday afternoon deep read. |
+| 2:30 PM | 263 | Instagram | The Myth of the Holy Grail Strategy | Prep for new week. |
+| 7:00 PM | 264 | Twitter | Quote Card: Survive First | Sunday evening motivation. |
+| 7:30 PM | 264 | Instagram | Quote Card | Prep mindset for Monday. |
 
 ---
 
@@ -11878,20 +12845,98 @@ SLIDE 5 - Still Stuck + CTA:
 
 ---
 
-## POSTING SCHEDULE — BATCH 14
+# POSTING SCHEDULE (Week 14) — Context-Aware Timing
 
-| Day | Post # | Platform | Time (EST) |
-|-----|--------|----------|------------|
-| Mon | 131 | Twitter, IG | 9:00 AM |
-| Mon | 132 | Twitter, IG | 1:00 PM |
-| Tue | 133 | Twitter, IG | 9:00 AM |
-| Tue | 134 | Twitter, IG | 1:00 PM |
-| Wed | 135 | Twitter, IG | 9:00 AM |
-| Wed | 136 | Twitter, IG | 1:00 PM |
-| Thu | 137 | Twitter, IG | 9:00 AM |
-| Thu | 138 | Twitter, IG | 1:00 PM |
-| Fri | 139 | Twitter, IG | 9:00 AM |
-| Fri | 140 | Twitter, IG | 1:00 PM |
+> Posts 265-285. Full week = 21 posts at 3/day.
+
+## Day 89: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 5:00 PM | 265 | Twitter | Plutus Flow: Statistical OBV | Post-market tool demo. |
+| 5:30 PM | 265 | Instagram | Plutus Flow: Statistical OBV | Evening tool evaluation. |
+| 8:00 AM | 266 | Twitter | Optimal Trade Entry OTE (Education) | Pre-market technical. |
+| 8:30 AM | 266 | Instagram | Optimal Trade Entry OTE | Morning learning. |
+| 7:00 PM | 267 | Twitter | Why Backtesting Lies (Blog) | Evening deep read. |
+| 7:30 PM | 267 | Instagram | Why Backtesting Lies | Evening reflection. |
+
+---
+
+## Day 90: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 9:00 PM | 268 | Twitter | Chronicle: The Arbiter's Balance | Late night lore. |
+| 9:30 PM | 268 | Instagram | Chronicle: The Arbiter's Balance | Night storytelling. |
+| 8:00 AM | 269 | Twitter | Kill Zones: High-Probability Windows (Education) | Pre-market technical. |
+| 8:30 AM | 269 | Instagram | Kill Zones | Morning learning mode. |
+| 10:00 AM | 270 | Twitter | Mobile Trading Setup (Docs) | Morning reference. |
+| 10:30 AM | 270 | Instagram | Mobile Trading Setup | Resource saving mode. |
+
+---
+
+## Day 91: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 12:00 PM | 271 | Twitter | Limited Time Pricing (Marketing) | Midday visibility. |
+| 12:30 PM | 271 | Instagram | Limited Time Pricing | Lunch scroll promo. |
+| 8:00 AM | 272 | Twitter | Market Maker Models (Education) | Pre-market technical. |
+| 8:30 AM | 272 | Instagram | Market Maker Models | Morning learning. |
+| 1:00 PM | 273 | Twitter | Position Sizing: The Unsexy Edge (Blog) | Lunch deep read. |
+| 1:30 PM | 273 | Instagram | Position Sizing | Midday education. |
+
+---
+
+## Day 92: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 274 | Twitter | Quote Card: The Market Will Teach You | Morning motivation. |
+| 7:30 AM | 274 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 275 | Twitter | Augury Grid: Multi-Symbol Scanning | Post-market tool demo. |
+| 5:30 PM | 275 | Instagram | Augury Grid: Multi-Symbol Scanning | Evening tool evaluation. |
+| 8:00 AM | 276 | Twitter | Liquidity Sweeps vs Breakouts (Education) | Pre-market technical. |
+| 8:30 AM | 276 | Instagram | Liquidity Sweeps vs Breakouts | Morning learning. |
+
+---
+
+## Day 93: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 2:00 PM | 277 | Twitter | The Art of Doing Less (Blog) | Friday afternoon deep read. |
+| 2:30 PM | 277 | Instagram | The Art of Doing Less | Weekend prep reflection. |
+| 9:00 PM | 278 | Twitter | Chronicle: The Watchman's Vigil | Friday night lore. |
+| 9:30 PM | 278 | Instagram | Chronicle: The Watchman's Vigil | Night storytelling. |
+| 8:00 AM | 279 | Twitter | Premium & Discount Arrays (Education) | Pre-market Friday. |
+| 8:30 AM | 279 | Instagram | Premium & Discount Arrays | End of week learning. |
+
+---
+
+## Day 94: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 280 | Twitter | Custom Color Schemes (Docs) | Weekend morning reference. |
+| 10:30 AM | 280 | Instagram | Custom Color Schemes | Resource saving mode. |
+| 12:00 PM | 281 | Twitter | Education Hub Highlight (Marketing) | Midday visibility. |
+| 12:30 PM | 281 | Instagram | Education Hub Highlight | Weekend promo. |
+| 10:00 AM | 282 | Twitter | Inducement: The Trap Before the Move (Education) | Weekend morning education. |
+| 10:30 AM | 282 | Instagram | Inducement | Relaxed learning time. |
+
+---
+
+## Day 95: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 2:00 PM | 283 | Twitter | Trading Is a Marathon, Not a Sprint (Blog) | Sunday afternoon deep read. |
+| 2:30 PM | 283 | Instagram | Trading Is a Marathon | Weekend reflection. |
+| 7:00 AM | 284 | Twitter | Quote Card: Protect the Downside | Sunday morning motivation. |
+| 7:30 AM | 284 | Instagram | Quote Card | Weekend coffee scroll. |
+| 5:00 PM | 285 | Twitter | OmniDeck: Everything in One | Sunday tool preview. |
+| 5:30 PM | 285 | Instagram | OmniDeck: Everything in One | Evaluating for Monday. |
 
 ---
 
@@ -12868,20 +13913,98 @@ SLIDE 5 - CTA:
 
 ---
 
-## POSTING SCHEDULE — BATCH 15
+# POSTING SCHEDULE (Week 15) — Context-Aware Timing
 
-| Day | Post # | Platform | Time (EST) |
-|-----|--------|----------|------------|
-| Mon | 141 | Twitter, IG | 9:00 AM |
-| Mon | 142 | Twitter, IG | 1:00 PM |
-| Tue | 143 | Twitter, IG | 9:00 AM |
-| Tue | 144 | Twitter, IG | 1:00 PM |
-| Wed | 145 | Twitter, IG | 9:00 AM |
-| Wed | 146 | Twitter, IG | 1:00 PM |
-| Thu | 147 | Twitter, IG | 9:00 AM |
-| Thu | 148 | Twitter, IG | 1:00 PM |
-| Fri | 149 | Twitter, IG | 9:00 AM |
-| Fri | 150 | Twitter, IG | 1:00 PM |
+> Posts 286-306. Full week = 21 posts at 3/day.
+
+## Day 96: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 286 | Twitter | Return to Origin RTO (Education) | Pre-market technical. |
+| 8:30 AM | 286 | Instagram | Return to Origin RTO | Morning learning. |
+| 7:00 PM | 287 | Twitter | Emotional Detachment in Trading (Blog) | Evening deep read. |
+| 7:30 PM | 287 | Instagram | Emotional Detachment in Trading | Evening reflection. |
+| 9:00 PM | 288 | Twitter | Chronicle: The Commander's Strategy | Late night lore. |
+| 9:30 PM | 288 | Instagram | Chronicle: The Commander's Strategy | Night storytelling. |
+
+---
+
+## Day 97: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 289 | Twitter | Institutional Order Flow Entry Drills (Education) | Pre-market technical. |
+| 8:30 AM | 289 | Instagram | Institutional Order Flow Entry Drills | Morning learning mode. |
+| 10:00 AM | 290 | Twitter | Troubleshooting Guide (Docs) | Morning reference. |
+| 10:30 AM | 290 | Instagram | Troubleshooting Guide | Resource saving mode. |
+| 12:00 PM | 291 | Twitter | 7-Day Money-Back Guarantee (Marketing) | Midday visibility. |
+| 12:30 PM | 291 | Instagram | 7-Day Money-Back Guarantee | Lunch scroll promo. |
+
+---
+
+## Day 98: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 292 | Twitter | Market Structure Fundamentals (Education) | Pre-market technical. |
+| 8:30 AM | 292 | Instagram | Market Structure Fundamentals | Morning learning. |
+| 1:00 PM | 293 | Twitter | The Psychology of Drawdowns (Blog) | Lunch deep read. |
+| 1:30 PM | 293 | Instagram | The Psychology of Drawdowns | Midday education. |
+| 7:00 AM | 294 | Twitter | Quote Card: Simplicity Wins | Morning motivation. |
+| 7:30 AM | 294 | Instagram | Quote Card | Coffee scroll. |
+
+---
+
+## Day 99: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 5:00 PM | 295 | Twitter | Pentarch: The Five Signals Explained | Post-market tool demo. |
+| 5:30 PM | 295 | Instagram | Pentarch: The Five Signals Explained | Evening tool evaluation. |
+| 8:00 AM | 296 | Twitter | Support & Resistance Basics (Education) | Pre-market technical. |
+| 8:30 AM | 296 | Instagram | Support & Resistance Basics | Morning learning. |
+| 2:00 PM | 297 | Twitter | The Danger of Paper Trading Too Long (Blog) | Afternoon deep read. |
+| 2:30 PM | 297 | Instagram | The Danger of Paper Trading Too Long | Midday education. |
+
+---
+
+## Day 100: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 9:00 PM | 298 | Twitter | Chronicle: The Founding of Signal Pilot | Friday night lore. |
+| 9:30 PM | 298 | Instagram | Chronicle: The Founding of Signal Pilot | Night storytelling. |
+| 8:00 AM | 299 | Twitter | Candlestick Basics (Education) | Pre-market Friday. |
+| 8:30 AM | 299 | Instagram | Candlestick Basics | End of week learning. |
+| 12:00 PM | 300 | Twitter | 300 Posts Milestone (Marketing) | Midday celebration visibility. |
+| 12:30 PM | 300 | Instagram | 300 Posts Milestone | Lunch scroll celebration. |
+
+---
+
+## Day 101: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 301 | Twitter | FAQ Compilation (Docs) | Weekend morning reference. |
+| 10:30 AM | 301 | Instagram | FAQ Compilation | Resource saving mode. |
+| 10:00 AM | 302 | Twitter | Trend Identification (Education) | Weekend morning education. |
+| 10:30 AM | 302 | Instagram | Trend Identification | Relaxed learning time. |
+| 2:00 PM | 303 | Twitter | Why Trading Courses Fail (Blog) | Saturday afternoon deep read. |
+| 2:30 PM | 303 | Instagram | Why Trading Courses Fail | Weekend reflection. |
+
+---
+
+## Day 102: Sunday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 304 | Twitter | Quote Card: Patience is Profitable | Sunday morning motivation. |
+| 7:30 AM | 304 | Instagram | Quote Card | Weekend coffee scroll. |
+| 5:00 PM | 305 | Twitter | Harmonic Oscillator: Momentum Components | Sunday tool preview. |
+| 5:30 PM | 305 | Instagram | Harmonic Oscillator: Momentum Components | Evaluating for Monday. |
+| 8:00 AM | 306 | Twitter | Risk-Reward Ratios (Education) | Sunday morning fundamentals. |
+| 8:30 AM | 306 | Instagram | Risk-Reward Ratios | Weekend education. |
 
 ---
 
@@ -13894,20 +15017,98 @@ SLIDE 5 - CTA:
 
 ---
 
-## POSTING SCHEDULE — BATCH 16
+# POSTING SCHEDULE (Week 16) — Context-Aware Timing
 
-| Day | Post # | Platform | Time (EST) |
-|-----|--------|----------|------------|
-| Mon | 151 | Twitter, IG | 9:00 AM |
-| Mon | 152 | Twitter, IG | 1:00 PM |
-| Tue | 153 | Twitter, IG | 9:00 AM |
-| Tue | 154 | Twitter, IG | 1:00 PM |
-| Wed | 155 | Twitter, IG | 9:00 AM |
-| Wed | 156 | Twitter, IG | 1:00 PM |
-| Thu | 157 | Twitter, IG | 9:00 AM |
-| Thu | 158 | Twitter, IG | 1:00 PM |
-| Fri | 159 | Twitter, IG | 9:00 AM |
-| Fri | 160 | Twitter, IG | 1:00 PM |
+> Posts 307-325 (END OF PART 1). 19 posts over 7 days.
+
+## Day 103: Monday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 1:00 PM | 307 | Twitter | Building a Trading Routine (Blog) | Lunch deep read. |
+| 1:30 PM | 307 | Instagram | Building a Trading Routine | Midday education. |
+| 9:00 PM | 308 | Twitter | Chronicle: The Seven United | Late night lore. |
+| 9:30 PM | 308 | Instagram | Chronicle: The Seven United | Night storytelling. |
+| 8:00 AM | 309 | Twitter | Volume Basics (Education) | Pre-market technical. |
+| 8:30 AM | 309 | Instagram | Volume Basics | Morning learning. |
+
+---
+
+## Day 104: Tuesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 310 | Twitter | Keyboard Shortcuts (Docs) | Morning reference. |
+| 10:30 AM | 310 | Instagram | Keyboard Shortcuts | Resource saving mode. |
+| 12:00 PM | 311 | Twitter | What Makes Us Different (Marketing) | Midday visibility. |
+| 12:30 PM | 311 | Instagram | What Makes Us Different | Lunch scroll promo. |
+| 8:00 AM | 312 | Twitter | Timeframe Selection (Education) | Pre-market technical. |
+| 8:30 AM | 312 | Instagram | Timeframe Selection | Morning learning mode. |
+
+---
+
+## Day 105: Wednesday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 PM | 313 | Twitter | The Overnight Edge: Sleep (Blog) | Evening deep read. |
+| 7:30 PM | 313 | Instagram | The Overnight Edge: Sleep | Evening reflection. |
+| 7:00 AM | 314 | Twitter | Quote Card: The Market Doesn't Care | Morning motivation. |
+| 7:30 AM | 314 | Instagram | Quote Card | Coffee scroll. |
+| 5:00 PM | 315 | Twitter | Janus Atlas: Level Strength | Post-market tool demo. |
+| 5:30 PM | 315 | Instagram | Janus Atlas: Level Strength | Evening tool evaluation. |
+
+---
+
+## Day 106: Thursday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 316 | Twitter | Trading Plan Essentials (Education) | Pre-market technical. |
+| 8:30 AM | 316 | Instagram | Trading Plan Essentials | Morning learning. |
+| 2:00 PM | 317 | Twitter | Survivorship Bias (Blog) | Afternoon deep read. |
+| 2:30 PM | 317 | Instagram | Survivorship Bias | Midday education. |
+| 9:00 PM | 318 | Twitter | Chronicle: The Scales of Balance | Late night lore. |
+| 9:30 PM | 318 | Instagram | Chronicle: The Scales of Balance | Night storytelling. |
+
+---
+
+## Day 107: Friday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 8:00 AM | 319 | Twitter | Fear and Greed (Education) | Pre-market Friday. |
+| 8:30 AM | 319 | Instagram | Fear and Greed | End of week learning. |
+| 10:00 AM | 320 | Twitter | Updating Indicators (Docs) | Morning reference. |
+| 10:30 AM | 320 | Instagram | Updating Indicators | Resource saving mode. |
+| 12:00 PM | 321 | Twitter | Yearly Plan Value (Marketing) | Midday visibility. |
+| 12:30 PM | 321 | Instagram | Yearly Plan Value | Lunch scroll promo. |
+
+---
+
+## Day 108: Saturday
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 10:00 AM | 322 | Twitter | Multiple Timeframe Analysis (Education) | Weekend morning education. |
+| 10:30 AM | 322 | Instagram | Multiple Timeframe Analysis | Relaxed learning time. |
+| 2:00 PM | 323 | Twitter | The Cost of FOMO (Blog) | Saturday afternoon deep read. |
+| 2:30 PM | 323 | Instagram | The Cost of FOMO | Weekend reflection. |
+
+---
+
+## Day 109: Sunday (PART 1 COMPLETE)
+
+| Time (Local) | Post | Platform | Content | Why This Time |
+|--------------|------|----------|---------|---------------|
+| 7:00 AM | 324 | Twitter | Quote Card: Lose Small, Win Big | Sunday morning motivation. |
+| 7:30 AM | 324 | Instagram | Quote Card | Weekend coffee scroll. |
+| 5:00 PM | 325 | Twitter | Volume Oracle: Divergence Detection | Sunday tool preview. Part 1 finale. |
+| 5:30 PM | 325 | Instagram | Volume Oracle: Divergence Detection | Final post of Part 1. |
+
+---
+
+**🎉 PART 1 COMPLETE — Posts 000-325 (326 posts) scheduled over ~16 weeks at 3/day.**
 
 ---
 
