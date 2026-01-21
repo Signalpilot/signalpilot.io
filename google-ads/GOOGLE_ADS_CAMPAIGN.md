@@ -45,10 +45,17 @@
 [tradingview indicators for day trading]
 [non repainting tradingview indicators]
 [tradingview indicators that don't repaint]
+[paid tradingview indicators]
+[top tradingview indicators]
+[tradingview indicator suite]
+[professional tradingview indicators]
+[tradingview indicators for swing trading]
+[tradingview indicators for scalping]
+[buy tradingview indicators]
 "tradingview indicators"
-"non repainting indicators"
-+tradingview +indicators +premium
-+tradingview +indicator +best
+"best tradingview indicators"
+"premium indicators tradingview"
+"tradingview indicator subscription"
 ```
 
 **Negative Keywords:**
@@ -68,10 +75,18 @@
 [market cycle analysis]
 [trading cycle indicator]
 [cycle trading indicator]
+[market cycle tradingview]
+[cycle analysis tool]
+[market phase indicator]
+[trend cycle indicator]
+[wyckoff cycle indicator]
+[market timing indicator]
+[cycle oscillator tradingview]
+[reversal cycle indicator]
 "market cycle detection"
 "cycle analysis indicator"
-+market +cycle +indicator
-+cycle +detection +trading
+"market cycle indicator"
+"trading cycles"
 ```
 
 #### Ad Group 3: Non-Repainting (Pain Point)
@@ -82,11 +97,19 @@
 [non repaint indicator tradingview]
 [no repaint tradingview]
 [indicators without repaint]
+[non repainting tradingview indicator]
+[reliable tradingview indicator]
+[accurate tradingview indicator]
+[tradingview indicator no repaint]
+[legit trading indicators]
+[honest trading indicators]
+[indicators that actually work]
+[real trading signals]
 "non repainting"
 "doesn't repaint"
 "no repaint"
-+non +repainting +indicator
-+indicator +no +repaint
+"non repainting indicator"
+"indicators don't repaint"
 ```
 
 #### Ad Group 4: Volume Analysis
@@ -97,10 +120,19 @@
 [accumulation distribution indicator]
 [volume profile indicator]
 [smart money volume indicator]
+[volume flow indicator]
+[institutional volume indicator]
+[volume spread analysis]
+[vsa indicator tradingview]
+[money flow indicator]
+[buying selling pressure indicator]
+[volume delta indicator]
+[footprint indicator tradingview]
+[order flow indicator]
 "volume oracle"
 "volume analysis"
-+volume +indicator +tradingview
-+accumulation +distribution +indicator
+"volume indicator tradingview"
+"institutional volume"
 ```
 
 #### Ad Group 5: Smart Money / ICT
@@ -112,10 +144,19 @@
 [liquidity indicator tradingview]
 [fair value gap indicator]
 [supply demand indicator]
+[ict concepts indicator]
+[smart money concepts indicator]
+[breaker block indicator]
+[fvg indicator tradingview]
+[liquidity sweep indicator]
+[institutional trading indicator]
+[order flow indicator tradingview]
+[imbalance indicator]
+[ict trading tools]
 "smart money concepts"
 "ict indicator"
-+smart +money +indicator
-+order +block +tradingview
+"order block indicator"
+"fair value gap"
 ```
 
 #### Ad Group 6: Multi-Timeframe
@@ -125,8 +166,17 @@
 [mtf indicator tradingview]
 [multi timeframe analysis tool]
 [htf ltf indicator]
+[multiple timeframe indicator]
+[mtf levels indicator]
+[higher timeframe indicator]
+[multi tf indicator]
+[timeframe analysis tradingview]
+[mtf support resistance]
+[multi timeframe levels]
 "multi timeframe"
-+multi +timeframe +indicator
+"multi timeframe indicator"
+"mtf indicator"
+"multiple timeframe analysis"
 ```
 
 ---
@@ -303,6 +353,93 @@
 
 **Final URL:** `https://signalpilot.io#indicators`
 **Display Path:** signalpilot.io / pentarch
+
+---
+
+### RSA 4: Volume Analysis Focus
+**Headlines:**
+1. Volume Oracle Indicator
+2. See Institutional Volume
+3. Volume Analysis TradingView
+4. Accumulation Distribution
+5. Smart Money Volume Flow
+6. Volume Profile Indicator
+7. See Buying & Selling Pressure
+8. Institutional Flow Detection
+9. VSA Indicator TradingView
+10. 7 Premium Indicators
+11. 7-Day Free Trial
+12. Non-Repainting Guaranteed
+13. Works on Any Market
+14. Try Before You Buy
+15. Join 10,000+ Traders
+
+**Descriptions:**
+1. See accumulation before retail notices. Volume Oracle shows institutional flow patterns.
+2. Volume analysis that actually works. See buying/selling pressure in real-time. Try free.
+3. Stop guessing volume. See institutional accumulation and distribution. 7-day free trial.
+4. 7 premium TradingView indicators including Volume Oracle. Non-repainting. Try free.
+
+**Final URL:** `https://signalpilot.io#indicators`
+**Display Path:** signalpilot.io / volume
+
+---
+
+### RSA 5: Smart Money / ICT Focus
+**Headlines:**
+1. Smart Money Indicator
+2. ICT Concepts TradingView
+3. Order Block Indicator
+4. Fair Value Gap Detector
+5. Liquidity Sweep Indicator
+6. Supply & Demand Zones
+7. Institutional Trading Tools
+8. See Smart Money Flow
+9. ICT Indicator Suite
+10. 7 Premium Indicators
+11. 7-Day Free Trial
+12. Non-Repainting Guaranteed
+13. Works on Any Market
+14. Try Before You Buy
+15. Join 10,000+ Traders
+
+**Descriptions:**
+1. Smart money concepts made visible. Order blocks, FVGs, liquidity sweeps. Try 7 days free.
+2. ICT trading indicators for TradingView. Non-repainting, audited. See institutional flow.
+3. Stop trading against smart money. See order blocks and liquidity zones. Free trial.
+4. 7 premium indicators including smart money tools. Non-repainting guaranteed. Try free.
+
+**Final URL:** `https://signalpilot.io#indicators`
+**Display Path:** signalpilot.io / smart-money
+
+---
+
+### RSA 6: Multi-Timeframe Focus
+**Headlines:**
+1. Multi-Timeframe Indicator
+2. MTF Levels TradingView
+3. Higher Timeframe Analysis
+4. HTF & LTF Combined
+5. Multi-TF Support Resistance
+6. Timeframe Confluence Tool
+7. MTF VWAP & Levels
+8. See All Timeframes
+9. Auto-Plotted MTF Levels
+10. 7 Premium Indicators
+11. 7-Day Free Trial
+12. Non-Repainting Guaranteed
+13. Works on Any Market
+14. Try Before You Buy
+15. Join 10,000+ Traders
+
+**Descriptions:**
+1. Multi-timeframe levels, auto-plotted. VWAP anchors, support/resistance. All included.
+2. See higher timeframe levels on any chart. MTF analysis made simple. Try 7 days free.
+3. Stop switching timeframes. See HTF levels on your trading chart. Non-repainting.
+4. 7 premium indicators including MTF tools. All timeframes, one chart. Try free.
+
+**Final URL:** `https://signalpilot.io#indicators`
+**Display Path:** signalpilot.io / mtf
 
 ---
 
