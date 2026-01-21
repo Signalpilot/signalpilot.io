@@ -34,6 +34,8 @@ This folder contains the complete Google Ads campaign strategy for Signal Pilot.
 |------|-------------|
 | `GOOGLE_ADS_CAMPAIGN.md` | Main campaign strategy, English markets, all ad copy, keywords, extensions |
 | `GOOGLE_ADS_LOCALIZED.md` | Localized campaigns: Turkish, Portuguese, Arabic ad copy |
+| `GOOGLE_ADS_PRO_ADDITIONS.md` | **NEW:** Competitor analysis, remarketing, UTM structure, conversion tracking, urgency copy |
+| `BROWSER_EXTENSION_PROMPT.md` | **NEW:** Copy-paste prompts for Claude browser extension to set up campaigns |
 | `README.md` | This file |
 
 ---
