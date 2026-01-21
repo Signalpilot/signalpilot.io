@@ -9,15 +9,22 @@ This folder contains the complete Google Ads campaign strategy for Signal Pilot.
 ### Campaign 1: English Markets
 | Countries | Language | Landing Page | Budget |
 |-----------|----------|--------------|--------|
-| US, UK, CA, AU, IN, ID, TH | English | signalpilot.io | 60% |
+| US, UK, CA, AU, IN, ID*, TH* | English | signalpilot.io | 70% |
+
+*ID/TH on trial basis - remove if poor performance
 
 ### Campaign 2: Localized Markets
 | Country | Language | Landing Page | Budget |
 |---------|----------|--------------|--------|
 | Turkey 🇹🇷 | Turkish | signalpilot.io/tr/ | 10% |
-| Russia 🇷🇺 | Russian | signalpilot.io/ru/ | 10% |
 | Brazil 🇧🇷 | Portuguese | signalpilot.io/pt/ | 10% |
-| UAE 🇦🇪 / Saudi 🇸🇦 / Egypt 🇪🇬 | Arabic | signalpilot.io/ar/ | 10% |
+| UAE 🇦🇪 / Saudi 🇸🇦 | Arabic | signalpilot.io/ar/ | 10% |
+
+### Excluded Markets
+| Country | Reason |
+|---------|--------|
+| Russia 🇷🇺 | Payment restrictions (Visa/MC blocked, sanctions) |
+| Egypt 🇪🇬 | Low purchasing power ($99/mo too expensive) |
 
 ---
 
@@ -26,7 +33,7 @@ This folder contains the complete Google Ads campaign strategy for Signal Pilot.
 | File | Description |
 |------|-------------|
 | `GOOGLE_ADS_CAMPAIGN.md` | Main campaign strategy, English markets, all ad copy, keywords, extensions |
-| `GOOGLE_ADS_LOCALIZED.md` | Localized campaigns: Turkish, Russian, Portuguese, Arabic ad copy |
+| `GOOGLE_ADS_LOCALIZED.md` | Localized campaigns: Turkish, Portuguese, Arabic ad copy |
 | `README.md` | This file |
 
 ---

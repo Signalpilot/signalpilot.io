@@ -9,9 +9,12 @@
 | Market | Language | Landing Page | Target Countries |
 |--------|----------|--------------|------------------|
 | **Turkish** | Türkçe | signalpilot.io/tr/ | Turkey 🇹🇷 |
-| **Russian** | Русский | signalpilot.io/ru/ | Russia 🇷🇺 |
 | **Portuguese** | Português | signalpilot.io/pt/ | Brazil 🇧🇷 |
-| **Arabic** | العربية | signalpilot.io/ar/ | UAE 🇦🇪, Saudi Arabia 🇸🇦, Egypt 🇪🇬 |
+| **Arabic** | العربية | signalpilot.io/ar/ | UAE 🇦🇪, Saudi Arabia 🇸🇦 |
+
+### Excluded Markets
+- **Russia 🇷🇺** - Payment restrictions (Visa/MC blocked, Gumroad/Stripe sanctions)
+- **Egypt 🇪🇬** - Low purchasing power ($99/mo = 25-50% of average income)
 
 ---
 
@@ -97,90 +100,6 @@
 
 **Final URL:** `https://signalpilot.io/tr/`
 **Display Path:** signalpilot.io / tr / göstergeler
-
----
-
-# RUSSIAN CAMPAIGN (Russia 🇷🇺)
-
-## Landing Page
-`https://signalpilot.io/ru/`
-
-## Keywords (Russian)
-
-### Ad Group 1: TradingView Индикаторы
-```
-[индикаторы tradingview]
-[tradingview индикаторы]
-[лучшие индикаторы tradingview]
-[профессиональные индикаторы]
-[премиум индикаторы tradingview]
-"индикаторы tradingview"
-"технический анализ индикаторы"
-+tradingview +индикаторы
-+индикатор +tradingview
-```
-
-### Ad Group 2: Без Перерисовки (Non-Repainting)
-```
-[индикатор без перерисовки]
-[не перерисовывающий индикатор]
-[индикаторы без репейнта]
-"без перерисовки"
-"не перерисовывает"
-+без +перерисовки +индикатор
-```
-
-### Ad Group 3: Определение Циклов
-```
-[индикатор рыночных циклов]
-[определение циклов рынка]
-[циклический анализ]
-"рыночные циклы"
-"циклы рынка"
-+рыночные +циклы +индикатор
-```
-
-## Headlines (Russian - 30 chars max)
-
-```
-1. 7 Индикаторов Без Репейнта   (27 chars)
-2. Определение Циклов Рынка     (25 chars)
-3. Видьте Полные Циклы          (20 chars)
-4. Гарантия Без Перерисовки     (25 chars)
-5. 7 Дней Бесплатно             (17 chars)
-6. Система Циклов Pentarch      (24 chars)
-7. Хватит Гнаться За Сигналами  (28 chars)
-8. Для Серьёзных Трейдеров      (25 chars)
-9. Все 7 Индикаторов            (18 chars)
-10. Работает На Любом Рынке     (25 chars)
-11. Проверенные Индикаторы      (24 chars)
-12. Начните Бесплатно Сегодня   (26 chars)
-13. 82 Бесплатных Урока         (21 chars)
-14. 10 000+ Трейдеров           (18 chars)
-15. Попробуйте Сейчас           (19 chars)
-```
-
-## Descriptions (Russian - 90 chars max)
-
-```
-1. 7 премиум индикаторов TradingView. Гарантия без перерисовки. Попробуйте 7 дней бесплатно. (92 - trim)
-   → 7 премиум индикаторов TradingView. Гарантия без перерисовки. 7 дней бесплатно. (82 chars)
-
-2. Pentarch отображает полные рыночные циклы. TD→IGN→WRN→CAP→BDN. Попробуйте бесплатно. (87 chars)
-
-3. Хватит копить индикаторы. Одна система для циклов, объёма, уровней. Бесплатный пробный. (90 chars)
-
-4. Для серьёзных трейдеров. Изучите один раз, используйте всегда. 82 бесплатных урока. (86 chars)
-
-5. Работает на акциях, крипте, форексе, товарах. Любые данные OHLC + объём. Бесплатно. (86 chars)
-
-6. Месяц $99 | Год $699 (скидка 41%) | Навсегда $1.799. 7-дневная гарантия возврата денег. (90 chars)
-```
-
-## RSA (Russian)
-
-**Final URL:** `https://signalpilot.io/ru/`
-**Display Path:** signalpilot.io / ru / индикаторы
 
 ---
 
@@ -270,7 +189,7 @@
 
 ---
 
-# ARABIC CAMPAIGN (UAE 🇦🇪, Saudi Arabia 🇸🇦, Egypt 🇪🇬)
+# ARABIC CAMPAIGN (UAE 🇦🇪, Saudi Arabia 🇸🇦)
 
 ## Landing Page
 `https://signalpilot.io/ar/`
@@ -278,7 +197,6 @@
 ## Target Countries
 - United Arab Emirates 🇦🇪
 - Saudi Arabia 🇸🇦
-- Egypt 🇪🇬
 
 ## Keywords (Arabic)
 
@@ -370,14 +288,6 @@
 | Izmir | Base | |
 | Other | -10% | Test performance |
 
-### Russian Campaign
-| Region | Adjustment | Notes |
-|--------|------------|-------|
-| Moscow | +20% | Financial center |
-| St. Petersburg | +15% | Second city |
-| Other major cities | Base | |
-| Rural | -20% | Lower conversion |
-
 ### Brazil Campaign
 | Region | Adjustment | Notes |
 |--------|------------|-------|
@@ -389,22 +299,20 @@
 ### Arabic Campaign
 | Country | Adjustment | Notes |
 |---------|------------|-------|
-| UAE | +25% | Highest purchasing power |
-| Saudi Arabia | +15% | Strong economy |
-| Egypt | -20% | Lower purchasing power, high volume |
+| UAE | +20% | Highest purchasing power |
+| Saudi Arabia | Base | Strong economy |
 
 ---
 
 ## Budget Allocation (Localized Campaigns)
 
-**Example: $300/month total for localized**
+**Example: $300/month total for localized (30% of total budget)**
 
 | Market | Budget | Daily | Reasoning |
 |--------|--------|-------|-----------|
-| Turkish | $90 (30%) | $3/day | Large trading community, currency volatility interest |
-| Russian | $90 (30%) | $3/day | Sophisticated TA culture |
-| Portuguese (Brazil) | $60 (20%) | $2/day | Growing market, test phase |
-| Arabic | $60 (20%) | $2/day | Split across 3 countries |
+| Turkish | $100 (33%) | $3.30/day | Large trading community, currency volatility interest |
+| Portuguese (Brazil) | $100 (33%) | $3.30/day | Growing market, active trading community |
+| Arabic (UAE/KSA) | $100 (33%) | $3.30/day | High purchasing power markets |
 
 ---
 
@@ -413,9 +321,8 @@
 | Market | Local Currency | Pricing Display |
 |--------|---------------|-----------------|
 | Turkey | TRY (Turkish Lira) | Show USD (stable reference) |
-| Russia | RUB (Ruble) | Show USD (stable reference) |
 | Brazil | BRL (Real) | Show USD or BRL equivalent |
-| UAE/KSA/EG | AED/SAR/EGP | Show USD (common in trading) |
+| UAE/KSA | AED/SAR | Show USD (common in trading) |
 
 **Note:** Gumroad processes in USD, so prices are displayed in USD on landing pages.
 
@@ -425,22 +332,22 @@
 
 ### Sitelinks (Translate for each language)
 
-| English | Turkish | Russian | Portuguese | Arabic |
-|---------|---------|---------|------------|--------|
-| Try Free 7 Days | 7 Gün Ücretsiz Dene | Попробуйте 7 Дней | Teste Grátis 7 Dias | جرّب 7 أيام مجاناً |
-| View Pricing | Fiyatları Gör | Посмотреть Цены | Ver Preços | عرض الأسعار |
-| All 7 Indicators | 7 Göstergenin Tümü | Все 7 Индикаторов | Todos 7 Indicadores | جميع المؤشرات السبعة |
-| 82 Free Lessons | 82 Ücretsiz Ders | 82 Бесплатных Урока | 82 Aulas Grátis | 82 درساً مجانياً |
-| FAQ | SSS | Частые Вопросы | Perguntas Frequentes | الأسئلة الشائعة |
+| English | Turkish | Portuguese | Arabic |
+|---------|---------|------------|--------|
+| Try Free 7 Days | 7 Gün Ücretsiz Dene | Teste Grátis 7 Dias | جرّب 7 أيام مجاناً |
+| View Pricing | Fiyatları Gör | Ver Preços | عرض الأسعار |
+| All 7 Indicators | 7 Göstergenin Tümü | Todos 7 Indicadores | جميع المؤشرات السبعة |
+| 82 Free Lessons | 82 Ücretsiz Ders | 82 Aulas Grátis | 82 درساً مجانياً |
+| FAQ | SSS | Perguntas Frequentes | الأسئلة الشائعة |
 
 ### Callouts (Translate for each language)
 
-| English | Turkish | Russian | Portuguese | Arabic |
-|---------|---------|---------|------------|--------|
-| 7-Day Free Trial | 7 Gün Ücretsiz | 7 Дней Бесплатно | 7 Dias Grátis | 7 أيام مجاناً |
-| Non-Repainting | Yeniden Boyamayan | Без Перерисовки | Sem Repintura | بدون إعادة رسم |
-| Money Back Guarantee | Para İade Garantisi | Гарантия Возврата | Garantia de Reembolso | ضمان استرداد المال |
-| 24h Support | 24 Saat Destek | Поддержка 24ч | Suporte 24h | دعم 24 ساعة |
+| English | Turkish | Portuguese | Arabic |
+|---------|---------|------------|--------|
+| 7-Day Free Trial | 7 Gün Ücretsiz | 7 Dias Grátis | 7 أيام مجاناً |
+| Non-Repainting | Yeniden Boyamayan | Sem Repintura | بدون إعادة رسم |
+| Money Back Guarantee | Para İade Garantisi | Garantia de Reembolso | ضمان استرداد المال |
+| 24h Support | 24 Saat Destek | Suporte 24h | دعم 24 ساعة |
 
 ---
 
@@ -451,21 +358,15 @@
 - Avoid profit guarantees
 - Disclaimer already on landing page
 
-### Russia
-- May have restrictions on financial advertising
-- Focus on "educational tools" messaging
-- Monitor for policy changes
-
 ### Brazil
 - CVM (securities regulator) has advertising guidelines
 - Emphasize "educational use only"
 - No profit promises
 
-### Arabic Markets (UAE/KSA/Egypt)
+### Arabic Markets (UAE/KSA)
 - UAE: Relatively open for trading education
 - Saudi Arabia: Some restrictions, emphasize education
-- Egypt: Conservative approach, educational focus
-- All: Avoid "guaranteed returns" language
+- Both: Avoid "guaranteed returns" language
 
 ---
 
@@ -474,18 +375,16 @@
 | Market | Expected CPC | Expected CTR | Notes |
 |--------|-------------|--------------|-------|
 | Turkey | $0.30-0.80 | 2-4% | Lower CPC, moderate competition |
-| Russia | $0.40-1.00 | 2-4% | Moderate CPC |
 | Brazil | $0.50-1.20 | 2-3% | Growing competition |
 | UAE | $1.50-3.00 | 3-5% | Higher CPC, higher intent |
 | Saudi Arabia | $1.00-2.50 | 2-4% | Moderate-high CPC |
-| Egypt | $0.20-0.60 | 2-3% | Lowest CPC, lower conversion |
 
 ---
 
 ## Testing Roadmap
 
 ### Phase 1 (Weeks 1-2): Launch
-- Start all 4 language campaigns
+- Start all 3 language campaigns (Turkish, Portuguese, Arabic)
 - Use Maximize Clicks strategy
 - Monitor quality scores
 
@@ -506,9 +405,8 @@
 | Market | URL | Language |
 |--------|-----|----------|
 | Turkey | `https://signalpilot.io/tr/` | Turkish |
-| Russia | `https://signalpilot.io/ru/` | Russian |
 | Brazil | `https://signalpilot.io/pt/` | Portuguese |
-| UAE/KSA/Egypt | `https://signalpilot.io/ar/` | Arabic |
+| UAE/KSA | `https://signalpilot.io/ar/` | Arabic |
 
 ---
 

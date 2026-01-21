@@ -8,8 +8,12 @@
 
 | Campaign | Markets | Language | Landing Page | Budget Split |
 |----------|---------|----------|--------------|--------------|
-| **Campaign 1: English Markets** | US, UK, CA, AU, IN, ID, TH | English | signalpilot.io | 60% |
-| **Campaign 2: Localized Markets** | TR, RU, BR, UAE, EG, SA | Native | /tr/, /ru/, /pt/, /ar/ | 40% |
+| **Campaign 1: English Markets** | US, UK, CA, AU, IN, ID, TH | English | signalpilot.io | 70% |
+| **Campaign 2: Localized Markets** | TR, BR, UAE, SA | Native | /tr/, /pt/, /ar/ | 30% |
+
+**Excluded:**
+- Russia 🇷🇺 - Payment restrictions (Visa/MC blocked, Gumroad/Stripe sanctions)
+- Egypt 🇪🇬 - Low purchasing power ($99/mo = 25-50% of avg income)
 
 **Note:** EU markets (DE, FR, IT, NL, HU) blocked pending Google financial services verification.
 
