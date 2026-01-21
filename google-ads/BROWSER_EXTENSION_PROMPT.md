@@ -267,6 +267,71 @@ Budget: $5/day
 
 ---
 
+## LANDING PAGE A/B TEST PROMPT
+
+```
+Help me set up a landing page A/B test for Signal Pilot. I want to test which landing page destination converts best.
+
+I need to create 4 identical RSAs in the same ad group, but with DIFFERENT Final URLs:
+
+**Ad 1 (Control):**
+Final URL: https://signalpilot.io?utm_source=google&utm_medium=cpc&utm_campaign=en_search&utm_content=lp_homepage
+(Lands on homepage, user scrolls to find trial form)
+
+**Ad 2 (Pricing Focus):**
+Final URL: https://signalpilot.io?utm_source=google&utm_medium=cpc&utm_campaign=en_search&utm_content=lp_pricing#pricing
+(Jumps directly to pricing section)
+
+**Ad 3 (Trial Focus):**
+Final URL: https://signalpilot.io?utm_source=google&utm_medium=cpc&utm_campaign=en_search&utm_content=lp_trial#trial
+(Jumps directly to trial signup form)
+
+**Ad 4 (Features Focus):**
+Final URL: https://signalpilot.io?utm_source=google&utm_medium=cpc&utm_campaign=en_search&utm_content=lp_indicators#indicators
+(Jumps to indicator showcase first)
+
+All 4 ads should use these SAME headlines:
+1. 7 Non-Repainting Indicators
+2. TradingView Cycle Detection
+3. Zero Repaint Guarantee
+4. 7-Day Free Trial
+5. Stop Chasing Signals
+6. $100 Repaint Bounty
+7. 82 Free Lessons
+8. Join 10,000+ Traders
+9. Built for Serious Traders
+10. Try Before You Buy
+
+And these SAME descriptions:
+1. 7 premium TradingView indicators. Non-repainting guaranteed. $100 bounty if proven wrong.
+2. Stop stacking indicators. One system that maps cycles, volume, levels. 7-day free trial.
+3. Serious traders only. Learn once, keep forever. 82 free lessons. Try 7 days free.
+4. The edge isn't seeing more. It's seeing what matters. 7 elite indicators, one system.
+
+Set ad rotation to "Rotate indefinitely" so Google doesn't optimize too early.
+
+After 2 weeks (or 100+ clicks per ad), we'll compare:
+- Which URL has highest CTR?
+- Which URL has highest conversion rate?
+- Which URL has lowest cost per trial signup?
+
+Walk me through creating each of these 4 ads.
+```
+
+### Quick A/B Test Setup (Shorter Version)
+```
+Help me duplicate my existing RSA 3 times with different Final URLs for A/B testing:
+- Original: signalpilot.io
+- Copy 1: signalpilot.io#pricing
+- Copy 2: signalpilot.io#trial
+- Copy 3: signalpilot.io#indicators
+
+Keep all headlines and descriptions the same. Add UTM parameter utm_content=lp_[variation] to each.
+Set ad rotation to "Rotate indefinitely".
+```
+
+---
+
 ## TROUBLESHOOTING PROMPTS
 
 ### If ads get disapproved:
