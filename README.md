@@ -9,8 +9,20 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
 
 ---
 
+## Signal Pilot Ecosystem
+
+| Repository | Description | Live URL |
+|------------|-------------|----------|
+| [signalpilot.io](https://github.com/Signalpilot/signalpilot.io) | Marketing website (this repo) | [signalpilot.io](https://www.signalpilot.io) |
+| [signalpilot-education-hub](https://github.com/Signalpilot/signalpilot-education-hub) | 82 professional lessons across 4 skill tiers (250k+ words) | [education.signalpilot.io](https://education.signalpilot.io) |
+| [signalpilot-docs](https://github.com/Signalpilot/signalpilot-docs) | Official documentation — guides, cheatsheets, troubleshooting | [docs.signalpilot.io](https://docs.signalpilot.io) |
+| [signalpilot-blog](https://github.com/Signalpilot/signalpilot-blog) | Trading education blog in 12 languages | [blog.signalpilot.io](https://blog.signalpilot.io) |
+
+---
+
 ## Contents
 
+- [Signal Pilot Ecosystem](#signal-pilot-ecosystem)
 - [What's on the site](#whats-on-the-site)
 - [Tech stack](#tech-stack)
 - [Quick start (local dev)](#quick-start-local-dev)
@@ -239,5 +251,9 @@ No build step required — just deploy the repo as-is.
 
 ## License
 
-All rights reserved © 2025 Signal Pilot Labs.
+All rights reserved © 2025-2026 Signal Pilot Labs.
 This project is closed-source for commercial use.
+
+---
+
+*Last updated: January 2026*
