@@ -1117,11 +1117,11 @@ Layer 6: Chronicle branding
 
 ## Day 110: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 331 | Twitter | Free vs Paid Comparison (Marketing) | Midday visibility. |
 | 12:30 PM | 331 | Instagram | Free vs Paid Comparison | Lunch scroll promo. |
-| 8:00 AM | 332 | Twitter | Trend Continuation Patterns (Education) | Pre-market technical. |
+| 8:00 AM | 332 | Twitter | Trend Continuation Patterns (Education) | Morning technical learning. |
 | 8:30 AM | 332 | Instagram | Trend Continuation Patterns | Morning learning. |
 | 7:00 PM | 333 | Twitter | Trading With a Full-Time Job (Blog) | Evening deep read. |
 | 7:30 PM | 333 | Instagram | Trading With a Full-Time Job | Evening reflection. |
@@ -1130,46 +1130,46 @@ Layer 6: Chronicle branding
 
 ## Day 111: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 334 | Twitter | Quote Card: Plan Your Trade | Morning motivation. |
 | 7:30 AM | 334 | Instagram | Quote Card | Coffee scroll. |
-| 5:00 PM | 335 | Twitter | Pentarch: Cycle Phase Transitions | Post-market tool demo. |
+| 5:00 PM | 335 | Twitter | Pentarch: Cycle Phase Transitions | Late afternoon tool demo. US mid-morning. |
 | 5:30 PM | 335 | Instagram | Pentarch: Cycle Phase Transitions | Evening tool evaluation. |
-| 8:00 AM | 336 | Twitter | Reversal Patterns (Education) | Pre-market technical. |
+| 8:00 AM | 336 | Twitter | Reversal Patterns (Education) | Morning technical learning. |
 | 8:30 AM | 336 | Instagram | Reversal Patterns | Morning learning mode. |
 
 ---
 
 ## Day 112: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 1:00 PM | 337 | Twitter | The Sunk Cost Fallacy (Blog) | Lunch deep read. |
 | 1:30 PM | 337 | Instagram | The Sunk Cost Fallacy | Midday education. |
 | 9:00 PM | 338 | Twitter | Chronicle: The Gathering Storm | Late night lore. |
 | 9:30 PM | 338 | Instagram | Chronicle: The Gathering Storm | Night storytelling. |
-| 8:00 AM | 339 | Twitter | Trading Psychology Fundamentals (Education) | Pre-market technical. |
+| 8:00 AM | 339 | Twitter | Trading Psychology Fundamentals (Education) | Morning technical learning. |
 | 8:30 AM | 339 | Instagram | Trading Psychology Fundamentals | Morning learning. |
 
 ---
 
 ## Day 113: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 340 | Twitter | Chart Layout Templates (Docs) | Morning reference. |
 | 10:30 AM | 340 | Instagram | Chart Layout Templates | Resource saving mode. |
 | 10:00 AM | 341 | Twitter | Complete Indicator Overview (Docs) | Morning reference. |
 | 10:30 AM | 341 | Instagram | Complete Indicator Overview | Work mode resource. |
-| 8:00 AM | 342 | Twitter | Moving Averages Basics (Education) | Pre-market technical. |
+| 8:00 AM | 342 | Twitter | Moving Averages Basics (Education) | Morning technical learning. |
 | 8:30 AM | 342 | Instagram | Moving Averages Basics | Morning learning. |
 
 ---
 
 ## Day 114: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 343 | Twitter | When to Walk Away (Blog) | Friday evening deep read. |
 | 7:30 PM | 343 | Instagram | When to Walk Away | Weekend prep reflection. |
@@ -1182,7 +1182,7 @@ Layer 6: Chronicle branding
 
 ## Day 115: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 346 | Twitter | Candlestick Patterns Basics (Education) | Weekend morning education. |
 | 10:30 AM | 346 | Instagram | Candlestick Patterns Basics | Relaxed learning time. |
@@ -1195,7 +1195,7 @@ Layer 6: Chronicle branding
 
 ## Day 116: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 8:00 AM | 349 | Twitter | Position Sizing Formulas (Education) | Sunday morning fundamentals. |
 | 8:30 AM | 349 | Instagram | Position Sizing Formulas | Weekend education. |
@@ -3932,39 +3932,39 @@ Layer 6: Chronicle branding
 
 ## Day 117: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 352 | Twitter | Education: Fibonacci Retracements | Pre-market technical learning. |
+| 8:00 AM | 352 | Twitter | Education: Fibonacci Retracements | Morning technical learning. |
 | 7:00 PM | 353 | Twitter | Blog: Trading and Relationships | Evening deep read. Personal topic. |
 | 9:15 PM | 352 | Instagram | Education: Fibonacci Retracements | Late learning. Visual carousel. |
 
 ## Day 118: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 354 | Twitter | Quote Card: Adapt or Die | Morning motivation. |
-| 5:00 PM | 355 | Twitter | Product: Plutus Flow (Accumulation/Distribution) | Post-market tool evaluation. |
+| 5:00 PM | 355 | Twitter | Product: Plutus Flow (Accumulation/Distribution) | Late afternoon tool evaluation. US mid-morning. |
 | 9:15 PM | 353 | Instagram | Blog: Trading and Relationships | Evening reflection. |
 
 ## Day 119: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 356 | Twitter | Education: Breakout Trading | Pre-market strategy. |
+| 8:00 AM | 356 | Twitter | Education: Breakout Trading | Morning strategy. |
 | 7:00 PM | 357 | Twitter | Blog: The Comparison Trap | Evening psychology read. |
 | 9:15 PM | 354 | Instagram | Quote Card: Adapt or Die | Late night inspiration. |
 
 ## Day 120: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 358 | Twitter | Chronicle: The Watchman Never Sleeps | Night storytelling. Chronicle hour. |
-| 8:00 AM | 359 | Twitter | Education: Divergence Trading | Pre-market technical. |
+| 8:00 AM | 359 | Twitter | Education: Divergence Trading | Morning technical learning. |
 | 9:15 PM | 355 | Instagram | Product: Plutus Flow | Evening tool showcase. |
 
 ## Day 121: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 360 | Twitter | Docs: Performance Optimization | Morning reference. |
 | 12:00 PM | 361 | Twitter | Marketing: Why Education First | Midday visibility. |
@@ -3972,7 +3972,7 @@ Layer 6: Chronicle branding
 
 ## Day 122: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 8:00 AM | 362 | Twitter | Education: Trading Sessions Overview | Weekend morning education. |
 | 7:00 PM | 363 | Twitter | Blog: Imposter Syndrome | Evening psychology. |
@@ -3980,7 +3980,7 @@ Layer 6: Chronicle branding
 
 ## Day 123: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 364 | Twitter | Quote Card: Trade the Chart in Front of You | Sunday morning wisdom. |
 | 5:00 PM | 365 | Twitter | Product: OmniDeck (The Unified View) | Sunday tool preview. |
@@ -3988,15 +3988,15 @@ Layer 6: Chronicle branding
 
 ## Day 124: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 366 | Twitter | Education: Entry Techniques | Pre-market strategy. |
+| 8:00 AM | 366 | Twitter | Education: Entry Techniques | Morning strategy. |
 | 9:15 AM | 359 | Instagram | Education: Divergence Trading | Morning carousel. |
 | 9:30 AM | 360 | Instagram | Docs: Performance Optimization | Morning reference visual. |
 
 ## Day 125: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 367 | Twitter | Blog: When Trading Becomes Gambling | Evening psychology read. |
 | 9:15 PM | 361 | Instagram | Marketing: Why Education First | Evening promo. |
@@ -4004,7 +4004,7 @@ Layer 6: Chronicle branding
 
 ## Day 126: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 368 | Twitter | Chronicle: The Path Forward | Night storytelling. |
 | 9:15 PM | 363 | Instagram | Blog: Imposter Syndrome | Evening reflection. |
@@ -4012,23 +4012,23 @@ Layer 6: Chronicle branding
 
 ## Day 127: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 369 | Twitter | Education: Chart Patterns Overview | Pre-market patterns. |
+| 8:00 AM | 369 | Twitter | Education: Chart Patterns Overview | Morning patterns. |
 | 10:00 AM | 370 | Twitter | Docs: Mobile App Usage | Morning reference. |
 | 9:15 PM | 365 | Instagram | Product: OmniDeck | Evening tool visual. |
 
 ## Day 128: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 371 | Twitter | Marketing: The Signal Pilot Promise | Midday brand message. |
-| 8:00 AM | 372 | Twitter | Education: Risk Per Trade | Pre-market risk education. |
+| 8:00 AM | 372 | Twitter | Education: Risk Per Trade | Morning risk education. |
 | 9:15 PM | 366 | Instagram | Education: Entry Techniques | Weekend prep. |
 
 ## Day 129: Saturday (Week 18 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 367 | Instagram | Blog: When Trading Becomes Gambling | Weekend reading. |
 | 2:00 PM | 368 | Instagram | Chronicle: The Path Forward | Afternoon story. |
@@ -4036,7 +4036,7 @@ Layer 6: Chronicle branding
 
 ## Day 130: Sunday (Week 18 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 370 | Instagram | Docs: Mobile App Usage | Sunday reference. |
 | 12:00 PM | 371 | Instagram | Marketing: The Signal Pilot Promise | Midday brand. |
@@ -6728,7 +6728,7 @@ Layer 6: Chronicle branding
 
 ## Day 131: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 373 | Twitter | Blog: Power of "I Don't Know" | Evening psychology read. |
 | 7:00 AM | 374 | Twitter | Quote Card: Boring Is Profitable | Morning motivation. |
@@ -6736,15 +6736,15 @@ Layer 6: Chronicle branding
 
 ## Day 132: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 5:00 PM | 375 | Twitter | Product: Volume Oracle (Volume Regimes) | Post-market tool demo. |
-| 8:00 AM | 376 | Twitter | Education: Trade Management | Pre-market strategy. |
+| 5:00 PM | 375 | Twitter | Product: Volume Oracle (Volume Regimes) | Late afternoon tool demo. US mid-morning. |
+| 8:00 AM | 376 | Twitter | Education: Trade Management | Morning strategy. |
 | 9:15 PM | 374 | Instagram | Quote Card: Boring Is Profitable | Night inspiration. |
 
 ## Day 133: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 377 | Twitter | Blog: Building Confidence | Evening psychology. |
 | 9:00 PM | 378 | Twitter | Chronicle: The Seven Aligned | Night storytelling. |
@@ -6752,23 +6752,23 @@ Layer 6: Chronicle branding
 
 ## Day 134: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 379 | Twitter | Education: Stop Loss Types | Pre-market risk education. |
+| 8:00 AM | 379 | Twitter | Education: Stop Loss Types | Morning risk education. |
 | 10:00 AM | 380 | Twitter | Docs: Alert Configuration | Morning reference. |
 | 9:15 PM | 376 | Instagram | Education: Trade Management | Evening learning. |
 
 ## Day 135: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 381 | Twitter | Marketing: Community Spotlight | Midday community feature. |
-| 8:00 AM | 382 | Twitter | Education: Correlation in Trading | Pre-market concepts. |
+| 8:00 AM | 382 | Twitter | Education: Correlation in Trading | Morning concepts. |
 | 9:15 PM | 377 | Instagram | Blog: Building Confidence | Weekend prep read. |
 
 ## Day 136: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 383 | Twitter | Blog: Myth of the Perfect Entry | Evening psychology. |
 | 7:00 AM | 384 | Twitter | Quote Card: Your Only Competition | Morning motivation. |
@@ -6776,7 +6776,7 @@ Layer 6: Chronicle branding
 
 ## Day 137: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 5:00 PM | 385 | Twitter | Product: Janus Atlas (Timeframe Hierarchy) | Sunday tool preview. |
 | 8:00 AM | 386 | Twitter | Education: Backtesting Basics | Sunday morning fundamentals. |
@@ -6784,7 +6784,7 @@ Layer 6: Chronicle branding
 
 ## Day 138: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 387 | Twitter | Blog: When to Increase Size | Evening psychology read. |
 | 9:00 PM | 388 | Twitter | Chronicle: Where It All Began | Night storytelling. |
@@ -6792,23 +6792,23 @@ Layer 6: Chronicle branding
 
 ## Day 139: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 389 | Twitter | Education: Indicator Settings Explained | Pre-market technical. |
+| 8:00 AM | 389 | Twitter | Education: Indicator Settings Explained | Morning technical learning. |
 | 10:00 AM | 390 | Twitter | Docs: Multi-Chart Layouts | Morning reference. |
 | 9:15 PM | 381 | Instagram | Marketing: Community Spotlight | Evening promo. |
 
 ## Day 140: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 391 | Twitter | Marketing: 400 Posts Approaching | Midday milestone hype. |
-| 8:00 AM | 392 | Twitter | Education Recap: Market Types | Pre-market fundamentals. |
+| 8:00 AM | 392 | Twitter | Education Recap: Market Types | Morning fundamentals. |
 | 9:15 PM | 382 | Instagram | Education: Correlation in Trading | Night learning. |
 
 ## Day 141: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 393 | Twitter | Blog: Your Trading Identity | Evening deep read. |
 | 9:15 PM | 383 | Instagram | Blog: Myth of the Perfect Entry | Night reflection. |
@@ -6816,7 +6816,7 @@ Layer 6: Chronicle branding
 
 ## Day 142: Friday (Week 19 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 385 | Instagram | Product: Janus Atlas | Morning tool visual. |
 | 2:00 PM | 386 | Instagram | Education: Backtesting Basics | Afternoon learning. |
@@ -6824,7 +6824,7 @@ Layer 6: Chronicle branding
 
 ## Day 143: Saturday (Week 19 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 388 | Instagram | Chronicle: Where It All Began | Morning story visual. |
 | 2:00 PM | 389 | Instagram | Education: Indicator Settings | Afternoon learning. |
@@ -6832,7 +6832,7 @@ Layer 6: Chronicle branding
 
 ## Day 144: Sunday (Week 19 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 391 | Instagram | Marketing: 400 Posts Approaching | Midday milestone. |
 | 9:15 PM | 392 | Instagram | Education Recap: Market Types | Night learning. |
@@ -9546,23 +9546,23 @@ Layer 6: Chronicle branding
 
 ## Day 145: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 394 | Twitter | Quote Card: The Process Is the Goal | Morning motivation. |
-| 5:00 PM | 395 | Twitter | Product: Harmonic Oscillator Divergence Alerts | Post-market tool demo. |
+| 5:00 PM | 395 | Twitter | Product: Harmonic Oscillator Divergence Alerts | Late afternoon tool demo. US mid-morning. |
 | 9:15 PM | 394 | Instagram | Quote Card: The Process Is the Goal | Night inspiration. |
 
 ## Day 146: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 396 | Twitter | Education Recap: Journaling for Improvement | Pre-market habits. |
+| 8:00 AM | 396 | Twitter | Education Recap: Journaling for Improvement | Morning habits. |
 | 7:00 PM | 397 | Twitter | Blog: The 10,000 Hour Myth | Evening deep read. |
 | 9:15 PM | 395 | Instagram | Product: Harmonic Oscillator | Night tool visual. |
 
 ## Day 147: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 398 | Twitter | Chronicle: The Eternal Student | Night storytelling. |
 | 10:00 AM | 399 | Twitter | Docs: Community Guidelines | Morning reference. |
@@ -9570,7 +9570,7 @@ Layer 6: Chronicle branding
 
 ## Day 148: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 400 | Twitter | Marketing: 400 Posts Milestone 🎉 | Midday celebration! Maximum visibility. |
 | 12:30 PM | 400 | Instagram | Marketing: 400 Posts Milestone 🎉 | Immediate follow-up celebration. |
@@ -9578,15 +9578,15 @@ Layer 6: Chronicle branding
 
 ## Day 149: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 401 | Twitter | Education Recap: Looking Ahead | Pre-market forward vision. |
-| 8:00 AM | 402 | Twitter | Advanced Education: Wyckoff Accumulation | Pre-market advanced concepts. |
+| 8:00 AM | 401 | Twitter | Education Recap: Looking Ahead | Morning forward vision. |
+| 8:00 AM | 402 | Twitter | Advanced Education: Wyckoff Accumulation | Morning advanced concepts. |
 | 9:15 PM | 398 | Instagram | Chronicle: The Eternal Student | Night story visual. |
 
 ## Day 150: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 403 | Twitter | Blog: Trading Burnout (Signs and Solutions) | Weekend psychology. |
 | 7:00 AM | 404 | Twitter | Quote Card: Small Consistent Wins | Morning motivation. |
@@ -9594,7 +9594,7 @@ Layer 6: Chronicle branding
 
 ## Day 151: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 5:00 PM | 405 | Twitter | Product: Pentarch + Volume Oracle Combo | Sunday tool preview. |
 | 8:00 AM | 406 | Twitter | Advanced Education: Wyckoff Distribution | Sunday morning advanced. |
@@ -9602,7 +9602,7 @@ Layer 6: Chronicle branding
 
 ## Day 152: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 407 | Twitter | Blog: The Myth of Trading Secrets | Evening deep read. |
 | 9:00 PM | 408 | Twitter | Chronicle: The Market's Memory | Night storytelling. |
@@ -9610,23 +9610,23 @@ Layer 6: Chronicle branding
 
 ## Day 153: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 409 | Twitter | Advanced Education: ICT Concepts Overview | Pre-market advanced. |
+| 8:00 AM | 409 | Twitter | Advanced Education: ICT Concepts Overview | Morning advanced learning. |
 | 10:00 AM | 410 | Twitter | Docs: Multi-Chart Layouts | Morning reference. |
 | 9:15 PM | 403 | Instagram | Blog: Trading Burnout | Night reading. |
 
 ## Day 154: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 411 | Twitter | Marketing: Education Hub Depth | Midday promotion. |
-| 8:00 AM | 412 | Twitter | Advanced Education: Market Structure Shift | Pre-market advanced. |
+| 8:00 AM | 412 | Twitter | Advanced Education: Market Structure Shift | Morning advanced learning. |
 | 9:15 PM | 404 | Instagram | Quote Card: Small Consistent Wins | Night inspiration. |
 
 ## Day 155: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 413 | Twitter | Blog: Building Trading Systems | Evening deep read. |
 | 7:00 AM | 414 | Twitter | Quote Card: Trust Your Preparation | Morning motivation. |
@@ -9634,7 +9634,7 @@ Layer 6: Chronicle branding
 
 ## Day 156: Friday (Week 20 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 406 | Instagram | Advanced Education: Wyckoff Distribution | Morning advanced visual. |
 | 2:00 PM | 407 | Instagram | Blog: The Myth of Trading Secrets | Afternoon reading. |
@@ -9642,7 +9642,7 @@ Layer 6: Chronicle branding
 
 ## Day 157: Saturday (Week 20 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 409 | Instagram | Advanced Education: ICT Concepts | Morning advanced visual. |
 | 2:00 PM | 410 | Instagram | Docs: Multi-Chart Layouts | Afternoon reference. |
@@ -9650,7 +9650,7 @@ Layer 6: Chronicle branding
 
 ## Day 158: Sunday (Week 20 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 412 | Instagram | Advanced Education: Market Structure Shift | Morning advanced. |
 | 2:00 PM | 413 | Instagram | Blog: Building Trading Systems | Afternoon reading. |
@@ -12581,15 +12581,15 @@ Layer 6: Chronicle branding
 
 ## Day 159: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 5:00 PM | 415 | Twitter | Product: Janus Atlas + Plutus Flow Combo | Post-market tool combo. |
-| 8:00 AM | 416 | Twitter | Advanced Education: Change of Character (ChOCH) | Pre-market advanced concept. |
+| 5:00 PM | 415 | Twitter | Product: Janus Atlas + Plutus Flow Combo | Late afternoon tool combo. US mid-morning. |
+| 8:00 AM | 416 | Twitter | Advanced Education: Change of Character (ChOCH) | Morning advanced concept. |
 | 9:15 PM | 415 | Instagram | Product: Janus Atlas + Plutus Flow Combo | Night tool visual. |
 
 ## Day 160: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 417 | Twitter | Blog: The Cost of Perfectionism | Evening psychology read. |
 | 9:00 PM | 418 | Twitter | Chronicle: The Patience of the Cartographer | Night storytelling. |
@@ -12597,23 +12597,23 @@ Layer 6: Chronicle branding
 
 ## Day 161: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 419 | Twitter | Advanced Education: Break of Structure (BOS) | Pre-market advanced. |
+| 8:00 AM | 419 | Twitter | Advanced Education: Break of Structure (BOS) | Morning advanced learning. |
 | 10:00 AM | 420 | Twitter | Docs: Backtesting in TradingView | Morning reference. |
 | 9:15 PM | 417 | Instagram | Blog: The Cost of Perfectionism | Night reading. |
 
 ## Day 162: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 421 | Twitter | Marketing: Indicator Integration | Midday promotion. |
-| 8:00 AM | 422 | Twitter | Advanced Education: Liquidity Concepts | Pre-market advanced. |
+| 8:00 AM | 422 | Twitter | Advanced Education: Liquidity Concepts | Morning advanced learning. |
 | 9:15 PM | 418 | Instagram | Chronicle: The Patience of the Cartographer | Night story visual. |
 
 ## Day 163: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 423 | Twitter | Blog: The Psychology of Waiting | Evening psychology. |
 | 7:00 AM | 424 | Twitter | Quote Card: Complexity vs Simplicity | Morning motivation. |
@@ -12621,7 +12621,7 @@ Layer 6: Chronicle branding
 
 ## Day 164: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 5:00 PM | 425 | Twitter | Product: Volume Oracle Regime Detection | Weekend tool demo. |
 | 8:00 AM | 426 | Twitter | Advanced Education: Order Flow Basics | Weekend morning advanced. |
@@ -12629,7 +12629,7 @@ Layer 6: Chronicle branding
 
 ## Day 165: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 427 | Twitter | Blog: Position Sizing Psychology | Evening psychology. |
 | 9:00 PM | 428 | Twitter | Chronicle: The Arbiter's Balance | Night storytelling. |
@@ -12637,23 +12637,23 @@ Layer 6: Chronicle branding
 
 ## Day 166: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 429 | Twitter | Advanced Education: Imbalance & Fair Value Gaps | Pre-market advanced. |
+| 8:00 AM | 429 | Twitter | Advanced Education: Imbalance & Fair Value Gaps | Morning advanced learning. |
 | 10:00 AM | 430 | Twitter | Docs: Alert Configuration | Morning reference. |
 | 9:15 PM | 422 | Instagram | Advanced Education: Liquidity Concepts | Night advanced. |
 
 ## Day 167: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 431 | Twitter | Marketing: Free Education Access | Midday promotion. |
-| 8:00 AM | 432 | Twitter | Advanced Education: Inducement & Trap Setups | Pre-market advanced. |
+| 8:00 AM | 432 | Twitter | Advanced Education: Inducement & Trap Setups | Morning advanced learning. |
 | 9:15 PM | 423 | Instagram | Blog: The Psychology of Waiting | Night reading. |
 
 ## Day 168: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 433 | Twitter | Blog: When To Break Your Rules | Evening psychology. |
 | 7:00 AM | 434 | Twitter | Quote Card: Market Rewards Alignment | Morning motivation. |
@@ -12661,15 +12661,15 @@ Layer 6: Chronicle branding
 
 ## Day 169: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 5:00 PM | 435 | Twitter | Product: Pentarch + Harmonic Oscillator Combo | Post-market tool combo. |
+| 5:00 PM | 435 | Twitter | Product: Pentarch + Harmonic Oscillator Combo | Late afternoon tool combo. US mid-morning. |
 | 9:15 PM | 425 | Instagram | Product: Volume Oracle Regime Detection | Night tool visual. |
 | 9:30 PM | 426 | Instagram | Advanced Education: Order Flow Basics | Night advanced. |
 
 ## Day 170: Friday (Week 21 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 427 | Instagram | Blog: Position Sizing Psychology | Morning reading. |
 | 2:00 PM | 428 | Instagram | Chronicle: The Arbiter's Balance | Afternoon story. |
@@ -12677,7 +12677,7 @@ Layer 6: Chronicle branding
 
 ## Day 171: Saturday (Week 21 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 430 | Instagram | Docs: Alert Configuration | Morning reference. |
 | 2:00 PM | 431 | Instagram | Marketing: Free Education Access | Afternoon promo. |
@@ -12685,7 +12685,7 @@ Layer 6: Chronicle branding
 
 ## Day 172: Sunday (Week 21 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 433 | Instagram | Blog: When To Break Your Rules | Morning reading. |
 | 2:00 PM | 434 | Instagram | Quote Card: Market Rewards Alignment | Afternoon inspiration. |
@@ -15126,23 +15126,23 @@ Layer 6: Chronicle branding
 
 ## Day 173: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 436 | Twitter | Advanced Education: Premium & Discount Zones | Pre-market advanced concept. |
+| 8:00 AM | 436 | Twitter | Advanced Education: Premium & Discount Zones | Morning advanced concept. |
 | 7:00 PM | 437 | Twitter | Blog: The Myth of the Perfect Setup | Evening psychology. |
 | 9:15 PM | 436 | Instagram | Advanced Education: Premium & Discount Zones | Night advanced visual. |
 
 ## Day 174: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 438 | Twitter | Chronicle: The Prophet's Silence | Night storytelling. |
-| 8:00 AM | 439 | Twitter | Advanced Education: Mitigation Blocks | Pre-market advanced. |
+| 8:00 AM | 439 | Twitter | Advanced Education: Mitigation Blocks | Morning advanced learning. |
 | 9:15 PM | 437 | Instagram | Blog: The Myth of the Perfect Setup | Night reading. |
 
 ## Day 175: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 440 | Twitter | Docs: Timeframe Selection Guide | Morning reference. |
 | 12:00 PM | 441 | Twitter | Marketing: 7-Day Money Back Guarantee | Midday promo. |
@@ -15150,23 +15150,23 @@ Layer 6: Chronicle branding
 
 ## Day 176: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 442 | Twitter | Education: Breaker Blocks | Pre-market education. |
+| 8:00 AM | 442 | Twitter | Education: Breaker Blocks | Morning education. |
 | 7:00 PM | 443 | Twitter | Blog: Recovery After a Losing Streak | Evening psychology. |
 | 9:15 PM | 439 | Instagram | Advanced Education: Mitigation Blocks | Night advanced visual. |
 
 ## Day 177: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 444 | Twitter | Quote Card: Confidence from Preparation | Morning motivation. |
-| 5:00 PM | 445 | Twitter | Product: Janus Atlas Multi-Timeframe Demo | Post-market tool demo. |
+| 5:00 PM | 445 | Twitter | Product: Janus Atlas Multi-Timeframe Demo | Late afternoon tool demo. US mid-morning. |
 | 9:15 PM | 440 | Instagram | Docs: Timeframe Selection Guide | Night reference. |
 
 ## Day 178: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 8:00 AM | 446 | Twitter | Education: Optimal Trade Entry (OTE) | Weekend morning education. |
 | 7:00 PM | 447 | Twitter | Blog: Journaling Beyond P&L | Evening psychology. |
@@ -15174,7 +15174,7 @@ Layer 6: Chronicle branding
 
 ## Day 179: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 448 | Twitter | Chronicle: The Commander's Burden | Night storytelling. |
 | 8:00 AM | 449 | Twitter | Education: Swing Failure Pattern (SFP) | Sunday morning education. |
@@ -15182,7 +15182,7 @@ Layer 6: Chronicle branding
 
 ## Day 180: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 450 | Twitter | Docs: Indicator Settings Overview | Morning reference. |
 | 12:00 PM | 451 | Twitter | Marketing: Cancel Anytime | Midday promo. |
@@ -15190,31 +15190,31 @@ Layer 6: Chronicle branding
 
 ## Day 181: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 452 | Twitter | Education: Wyckoff Accumulation Schematic | Pre-market advanced. |
+| 8:00 AM | 452 | Twitter | Education: Wyckoff Accumulation Schematic | Morning advanced learning. |
 | 7:00 PM | 453 | Twitter | Blog: The Danger of Hindsight Analysis | Evening psychology. |
 | 9:15 PM | 444 | Instagram | Quote Card: Confidence from Preparation | Night inspiration. |
 
 ## Day 182: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 454 | Twitter | Quote Card: Risk Management = Survival | Morning motivation. |
-| 5:00 PM | 455 | Twitter | Product: Augury Grid Scanner Demo | Post-market tool demo. |
+| 5:00 PM | 455 | Twitter | Product: Augury Grid Scanner Demo | Late afternoon tool demo. US mid-morning. |
 | 9:15 PM | 445 | Instagram | Product: Janus Atlas Multi-Timeframe | Night tool visual. |
 
 ## Day 183: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 456 | Twitter | Education: Wyckoff Distribution Schematic | Pre-market advanced. |
+| 8:00 AM | 456 | Twitter | Education: Wyckoff Distribution Schematic | Morning advanced learning. |
 | 9:15 PM | 446 | Instagram | Education: OTE | Night learning. |
 | 9:30 PM | 447 | Instagram | Blog: Journaling Beyond P&L | Night reading. |
 
 ## Day 184: Friday (Week 22 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 448 | Instagram | Chronicle: The Commander's Burden | Morning story visual. |
 | 2:00 PM | 449 | Instagram | Education: SFP | Afternoon learning. |
@@ -15222,7 +15222,7 @@ Layer 6: Chronicle branding
 
 ## Day 185: Saturday (Week 22 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 451 | Instagram | Marketing: Cancel Anytime | Morning promo. |
 | 2:00 PM | 452 | Instagram | Education: Wyckoff Accumulation | Afternoon advanced. |
@@ -15230,7 +15230,7 @@ Layer 6: Chronicle branding
 
 ## Day 186: Sunday (Week 22 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 454 | Instagram | Quote Card: Risk Management = Survival | Morning inspiration. |
 | 2:00 PM | 455 | Instagram | Product: Augury Grid Scanner | Afternoon tool visual. |
@@ -17793,7 +17793,7 @@ Layer 6: Chronicle branding
 
 ## Day 187: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 457 | Twitter | Blog: Building a Pre-Trade Checklist | Evening process read. |
 | 9:00 PM | 458 | Twitter | Chronicle: The Scales of Truth | Night storytelling. |
@@ -17801,23 +17801,23 @@ Layer 6: Chronicle branding
 
 ## Day 188: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 459 | Twitter | Education: Inverse Fair Value Gaps | Pre-market advanced. |
+| 8:00 AM | 459 | Twitter | Education: Inverse Fair Value Gaps | Morning advanced learning. |
 | 10:00 AM | 460 | Twitter | Docs: Troubleshooting Common Issues | Morning reference. |
 | 9:15 PM | 458 | Instagram | Chronicle: The Scales of Truth | Night story visual. |
 
 ## Day 189: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 461 | Twitter | Marketing: Lifetime Access Option | Midday promo. |
-| 8:00 AM | 462 | Twitter | Education: Liquidity Sweeps vs. Grabs | Pre-market concepts. |
+| 8:00 AM | 462 | Twitter | Education: Liquidity Sweeps vs. Grabs | Morning concepts. |
 | 9:15 PM | 459 | Instagram | Education: Inverse FVG | Night advanced visual. |
 
 ## Day 190: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 463 | Twitter | Blog: The 3 Types of Trading Edges | Evening strategy read. |
 | 7:00 AM | 464 | Twitter | Quote Card: Being Wrong Better | Morning motivation. |
@@ -17825,15 +17825,15 @@ Layer 6: Chronicle branding
 
 ## Day 191: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 5:00 PM | 465 | Twitter | Product: Plutus Flow Divergence Demo | Post-market tool demo. |
-| 8:00 AM | 466 | Twitter | Education: Order Blocks Deep Dive | Pre-market advanced. |
+| 5:00 PM | 465 | Twitter | Product: Plutus Flow Divergence Demo | Late afternoon tool demo. US mid-morning. |
+| 8:00 AM | 466 | Twitter | Education: Order Blocks Deep Dive | Morning advanced learning. |
 | 9:15 PM | 461 | Instagram | Marketing: Lifetime Access Option | Night promo. |
 
 ## Day 192: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 467 | Twitter | Blog: Analysis Paralysis | Weekend psychology. |
 | 9:00 PM | 468 | Twitter | Chronicle: The Cartographer's Map | Night storytelling. |
@@ -17841,7 +17841,7 @@ Layer 6: Chronicle branding
 
 ## Day 193: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 8:00 AM | 469 | Twitter | Education: Time-Based Liquidity Concepts | Sunday morning advanced. |
 | 10:00 AM | 470 | Twitter | Docs: Multi-Chart Layouts | Morning reference. |
@@ -17849,15 +17849,15 @@ Layer 6: Chronicle branding
 
 ## Day 194: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 471 | Twitter | Marketing: Education-First Philosophy | Midday brand message. |
-| 8:00 AM | 472 | Twitter | Education: Killzones & High-Probability Windows | Pre-market concepts. |
+| 8:00 AM | 472 | Twitter | Education: Killzones & High-Probability Windows | Morning concepts. |
 | 9:15 PM | 464 | Instagram | Quote Card: Being Wrong Better | Night inspiration. |
 
 ## Day 195: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 473 | Twitter | Blog: The Compound Effect in Trading | Evening deep read. |
 | 7:00 AM | 474 | Twitter | Quote Card: Market is a Mirror | Morning motivation. |
@@ -17865,15 +17865,15 @@ Layer 6: Chronicle branding
 
 ## Day 196: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 5:00 PM | 475 | Twitter | Product: OmniDeck Confluence Score Demo | Post-market tool demo. |
-| 8:00 AM | 476 | Twitter | Education: Institutional Order Flow | Pre-market advanced. |
+| 5:00 PM | 475 | Twitter | Product: OmniDeck Confluence Score Demo | Late afternoon tool demo. US mid-morning. |
+| 8:00 AM | 476 | Twitter | Education: Institutional Order Flow | Morning advanced learning. |
 | 9:15 PM | 466 | Instagram | Education: Order Blocks Deep Dive | Night advanced visual. |
 
 ## Day 197: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 477 | Twitter | Blog: Why Demo Trading Isn't Enough | Evening psychology. |
 | 9:15 PM | 467 | Instagram | Blog: Analysis Paralysis | Night reading. |
@@ -17881,7 +17881,7 @@ Layer 6: Chronicle branding
 
 ## Day 198: Friday (Week 23 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 469 | Instagram | Education: Time-Based Liquidity | Morning advanced. |
 | 2:00 PM | 470 | Instagram | Docs: Multi-Chart Layouts | Afternoon reference. |
@@ -17889,7 +17889,7 @@ Layer 6: Chronicle branding
 
 ## Day 199: Saturday (Week 23 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 472 | Instagram | Education: Killzones | Morning advanced. |
 | 2:00 PM | 473 | Instagram | Blog: The Compound Effect | Afternoon reading. |
@@ -17897,7 +17897,7 @@ Layer 6: Chronicle branding
 
 ## Day 200: Sunday (Week 23 Instagram Finale — Day 200 Milestone!)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 475 | Instagram | Product: OmniDeck Confluence Score | Morning tool visual. |
 | 2:00 PM | 476 | Instagram | Education: Institutional Order Flow | Afternoon advanced. |
@@ -20423,15 +20423,15 @@ Layer 6: Chronicle branding
 
 ## Day 201: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 478 | Twitter | Chronicle: The Sovereign's Cycle | Night storytelling. |
-| 8:00 AM | 479 | Twitter | Education: Asian Range Strategy Concepts | Pre-market strategy. |
+| 8:00 AM | 479 | Twitter | Education: Asian Range Strategy Concepts | Morning strategy. |
 | 9:15 PM | 478 | Instagram | Chronicle: The Sovereign's Cycle | Night story visual. |
 
 ## Day 202: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 480 | Twitter | Docs: Keyboard Shortcuts Guide | Morning reference. |
 | 12:00 PM | 481 | Twitter | Marketing: Community & Support | Midday community promo. |
@@ -20439,31 +20439,31 @@ Layer 6: Chronicle branding
 
 ## Day 203: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 482 | Twitter | Education: Power of Three (AMD) | Pre-market advanced. |
+| 8:00 AM | 482 | Twitter | Education: Power of Three (AMD) | Morning advanced learning. |
 | 7:00 PM | 483 | Twitter | Blog: The Myth of the Holy Grail Indicator | Evening psychology. |
 | 9:15 PM | 480 | Instagram | Docs: Keyboard Shortcuts Guide | Night reference. |
 
 ## Day 204: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 484 | Twitter | Quote Card: Trade the Chart in Front of You | Morning motivation. |
-| 5:00 PM | 485 | Twitter | Product: Harmonic Oscillator Exhaustion Signals | Post-market tool demo. |
+| 5:00 PM | 485 | Twitter | Product: Harmonic Oscillator Exhaustion Signals | Late afternoon tool demo. US mid-morning. |
 | 9:15 PM | 481 | Instagram | Marketing: Community & Support | Night promo. |
 
 ## Day 205: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 486 | Twitter | Education: ICT Judas Swing Concept | Pre-market advanced. |
+| 8:00 AM | 486 | Twitter | Education: ICT Judas Swing Concept | Morning advanced learning. |
 | 7:00 PM | 487 | Twitter | Blog: Building Trading Confidence | Evening psychology. |
 | 9:15 PM | 482 | Instagram | Education: Power of Three (AMD) | Night advanced visual. |
 
 ## Day 206: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 488 | Twitter | Chronicle: The Watchman's Vigil | Night storytelling. |
 | 8:00 AM | 489 | Twitter | Education: Quarterly Theory Basics | Weekend morning education. |
@@ -20471,7 +20471,7 @@ Layer 6: Chronicle branding
 
 ## Day 207: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 490 | Twitter | Docs: Mobile Access Guide | Sunday morning reference. |
 | 12:00 PM | 491 | Twitter | Marketing: Transparent Pricing | Midday promo. |
@@ -20479,31 +20479,31 @@ Layer 6: Chronicle branding
 
 ## Day 208: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 492 | Twitter | Education: Market Maker Models | Pre-market advanced. |
+| 8:00 AM | 492 | Twitter | Education: Market Maker Models | Morning advanced learning. |
 | 7:00 PM | 493 | Twitter | Blog: The Art of Doing Nothing | Evening psychology. |
 | 9:15 PM | 485 | Instagram | Product: Harmonic Oscillator Exhaustion | Night tool visual. |
 
 ## Day 209: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 494 | Twitter | Quote Card: Process Defines Next Trade | Morning motivation. |
-| 5:00 PM | 495 | Twitter | Product: Full Suite Integration Demo | Post-market tool demo. |
+| 5:00 PM | 495 | Twitter | Product: Full Suite Integration Demo | Late afternoon tool demo. US mid-morning. |
 | 9:15 PM | 486 | Instagram | Education: ICT Judas Swing | Night advanced. |
 
 ## Day 210: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 496 | Twitter | Education: Algorithmic vs. Discretionary | Pre-market concepts. |
+| 8:00 AM | 496 | Twitter | Education: Algorithmic vs. Discretionary | Morning concepts. |
 | 7:00 PM | 497 | Twitter | Blog: Why Most Trading Education Fails | Evening deep read. |
 | 9:15 PM | 487 | Instagram | Blog: Building Trading Confidence | Night reading. |
 
 ## Day 211: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 498 | Twitter | Chronicle: The Council of Seven | Night storytelling. |
 | 9:15 PM | 488 | Instagram | Chronicle: The Watchman's Vigil | Night story visual. |
@@ -20511,7 +20511,7 @@ Layer 6: Chronicle branding
 
 ## Day 212: Friday (Week 24 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 490 | Instagram | Docs: Mobile Access Guide | Morning reference. |
 | 2:00 PM | 491 | Instagram | Marketing: Transparent Pricing | Afternoon promo. |
@@ -20519,7 +20519,7 @@ Layer 6: Chronicle branding
 
 ## Day 213: Saturday (Week 24 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 493 | Instagram | Blog: The Art of Doing Nothing | Morning reading. |
 | 2:00 PM | 494 | Instagram | Quote Card: Process Defines Next Trade | Afternoon inspiration. |
@@ -20527,7 +20527,7 @@ Layer 6: Chronicle branding
 
 ## Day 214: Sunday (Week 24 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 496 | Instagram | Education: Algorithmic vs. Discretionary | Morning learning. |
 | 2:00 PM | 497 | Instagram | Blog: Why Most Trading Education Fails | Afternoon reading. |
@@ -23407,14 +23407,14 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 215: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 499 | Twitter | Education: Building Your Trading System | Pre-market systems. |
+| 8:00 AM | 499 | Twitter | Education: Building Your Trading System | Morning systems learning. |
 | 9:15 PM | 499 | Instagram | Education: Building Your Trading System | Night learning visual. |
 
 ## Day 216: Tuesday — 🎉 500 MILESTONE DAY!
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | **12:00 PM** | **500** | **Twitter** | **🎉 500th Post Milestone** | **Maximum visibility! Midday celebration!** |
 | **12:30 PM** | **500** | **Instagram** | **🎉 500th Post Milestone** | **Immediate follow-up celebration!** |
@@ -23422,31 +23422,31 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 217: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 502 | Twitter | Education: Backtesting Fundamentals | Pre-market education. |
+| 8:00 AM | 502 | Twitter | Education: Backtesting Fundamentals | Morning education. |
 | 7:00 PM | 503 | Twitter | Blog: The Cost of Impatience | Evening psychology. |
 | 9:15 PM | 501 | Instagram | Docs: Performance Optimization | Night reference. |
 
 ## Day 218: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 504 | Twitter | Quote Card: Chart Shows Possibilities | Morning motivation. |
-| 5:00 PM | 505 | Twitter | Product: Pentarch Cycle Phase Transitions | Post-market tool demo. |
+| 5:00 PM | 505 | Twitter | Product: Pentarch Cycle Phase Transitions | Late afternoon tool demo. US mid-morning. |
 | 9:15 PM | 502 | Instagram | Education: Backtesting Fundamentals | Night learning. |
 
 ## Day 219: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 506 | Twitter | Education: Forward Testing Protocol | Pre-market education. |
+| 8:00 AM | 506 | Twitter | Education: Forward Testing Protocol | Morning education. |
 | 7:00 PM | 507 | Twitter | Blog: Managing Expectations vs Reality | Evening deep read. |
 | 9:15 PM | 503 | Instagram | Blog: The Cost of Impatience | Night reading. |
 
 ## Day 220: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 508 | Twitter | Chronicle: Origins of the Elite Seven | Night storytelling. |
 | 8:00 AM | 509 | Twitter | Education: Risk-Adjusted Returns | Weekend morning education. |
@@ -23454,7 +23454,7 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 221: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 510 | Twitter | Docs: API & Webhook Integration | Sunday morning reference. |
 | 12:00 PM | 511 | Twitter | Marketing: Built by Traders, For Traders | Midday brand message. |
@@ -23462,39 +23462,39 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 222: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 512 | Twitter | Education: Scaling Into Positions | Pre-market strategy. |
+| 8:00 AM | 512 | Twitter | Education: Scaling Into Positions | Morning strategy. |
 | 7:00 PM | 513 | Twitter | Blog: The Loneliness of Trading | Evening psychology. |
 | 9:15 PM | 506 | Instagram | Education: Forward Testing Protocol | Night learning. |
 
 ## Day 223: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 514 | Twitter | Quote Card: Losses Are Tuition | Morning motivation. |
-| 5:00 PM | 515 | Twitter | Product: Volume Oracle + Janus Atlas Combo | Post-market tool demo. |
+| 5:00 PM | 515 | Twitter | Product: Volume Oracle + Janus Atlas Combo | Late afternoon tool demo. US mid-morning. |
 | 9:15 PM | 507 | Instagram | Blog: Managing Expectations vs Reality | Night reading. |
 
 ## Day 224: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 516 | Twitter | Education: Scaling Out of Positions | Pre-market strategy. |
+| 8:00 AM | 516 | Twitter | Education: Scaling Out of Positions | Morning strategy. |
 | 7:00 PM | 517 | Twitter | Blog: When to Take a Break | Evening psychology. |
 | 9:15 PM | 508 | Instagram | Chronicle: Origins of the Elite Seven | Night story visual. |
 
 ## Day 225: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 518 | Twitter | Chronicle: The Eternal Dance | Night storytelling. |
-| 8:00 AM | 519 | Twitter | Education: Trade Review Process | Pre-market habits. |
+| 8:00 AM | 519 | Twitter | Education: Trade Review Process | Morning habits. |
 | 9:15 PM | 509 | Instagram | Education: Risk-Adjusted Returns | Night learning. |
 
 ## Day 226: Friday (Week 25 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 510 | Instagram | Docs: API & Webhook Integration | Morning reference. |
 | 2:00 PM | 511 | Instagram | Marketing: Built by Traders, For Traders | Afternoon promo. |
@@ -23502,7 +23502,7 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 227: Saturday (Week 25 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 513 | Instagram | Blog: The Loneliness of Trading | Morning reading. |
 | 2:00 PM | 514 | Instagram | Quote Card: Losses Are Tuition | Afternoon inspiration. |
@@ -23510,7 +23510,7 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 228: Sunday (Week 25 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 516 | Instagram | Education: Scaling Out of Positions | Morning learning. |
 | 2:00 PM | 517 | Instagram | Blog: When to Take a Break | Afternoon reading. |
@@ -26729,7 +26729,7 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 229: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 520 | Twitter | Docs: Frequently Asked Questions | Morning reference. |
 | 12:00 PM | 521 | Twitter | Marketing: Join 10,000+ Traders | Midday community promo. |
@@ -26737,39 +26737,39 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 230: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 522 | Twitter | Education: Correlation in Trading | Pre-market concepts. |
+| 8:00 AM | 522 | Twitter | Education: Correlation in Trading | Morning concepts. |
 | 7:00 PM | 523 | Twitter | Blog: Power of "I Don't Know" | Evening psychology. |
 | 9:15 PM | 521 | Instagram | Marketing: Join 10,000+ Traders | Night promo. |
 
 ## Day 231: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 524 | Twitter | Quote Card: Respond Not Predict | Morning motivation. |
-| 5:00 PM | 525 | Twitter | Product: Plutus Flow Accumulation Detection | Post-market tool demo. |
+| 5:00 PM | 525 | Twitter | Product: Plutus Flow Accumulation Detection | Late afternoon tool demo. US mid-morning. |
 | 9:15 PM | 522 | Instagram | Education: Correlation in Trading | Night learning. |
 
 ## Day 232: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 526 | Twitter | Education: Volatility Cycles | Pre-market concepts. |
+| 8:00 AM | 526 | Twitter | Education: Volatility Cycles | Morning concepts. |
 | 7:00 PM | 527 | Twitter | Blog: Building Mental Resilience | Evening psychology. |
 | 9:15 PM | 523 | Instagram | Blog: Power of "I Don't Know" | Night reading. |
 
 ## Day 233: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 528 | Twitter | Chronicle: The Prophet's Warning | Night storytelling. |
-| 8:00 AM | 529 | Twitter | Education: Mean Reversion Basics | Pre-market education. |
+| 8:00 AM | 529 | Twitter | Education: Mean Reversion Basics | Morning education. |
 | 9:15 PM | 524 | Instagram | Quote Card: Respond Not Predict | Night inspiration. |
 
 ## Day 234: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 530 | Twitter | Docs: Update History & Changelog | Weekend morning reference. |
 | 12:00 PM | 531 | Twitter | Marketing: 7-Day Free Education Challenge | Midday promo. |
@@ -26777,7 +26777,7 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 235: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 8:00 AM | 532 | Twitter | Education: Trend Strength Assessment | Sunday morning education. |
 | 7:00 PM | 533 | Twitter | Blog: Conviction vs. Stubbornness | Evening psychology. |
@@ -26785,31 +26785,31 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 236: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 534 | Twitter | Quote: Small Loss = Successful Trade | Morning motivation. |
-| 5:00 PM | 535 | Twitter | Product: Harmonic Oscillator Multi-Component | Post-market tool demo. |
+| 5:00 PM | 535 | Twitter | Product: Harmonic Oscillator Multi-Component | Late afternoon tool demo. US mid-morning. |
 | 9:15 PM | 527 | Instagram | Blog: Building Mental Resilience | Night reading. |
 
 ## Day 237: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 536 | Twitter | Education: Support Becomes Resistance | Pre-market concepts. |
+| 8:00 AM | 536 | Twitter | Education: Support Becomes Resistance | Morning concepts. |
 | 7:00 PM | 537 | Twitter | Blog: Trade Smaller Than You Think | Evening psychology. |
 | 9:15 PM | 528 | Instagram | Chronicle: The Prophet's Warning | Night story visual. |
 
 ## Day 238: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 538 | Twitter | Chronicle: The Cartographer's Journey | Night storytelling. |
-| 8:00 AM | 539 | Twitter | Education: Multi-Timeframe Confirmation | Pre-market concepts. |
+| 8:00 AM | 539 | Twitter | Education: Multi-Timeframe Confirmation | Morning concepts. |
 | 9:15 PM | 529 | Instagram | Education: Mean Reversion Basics | Night learning. |
 
 ## Day 239: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 540 | Twitter | Docs: Contact & Support | Morning reference. |
 | 9:15 PM | 530 | Instagram | Docs: Update History & Changelog | Night reference. |
@@ -26817,7 +26817,7 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 240: Friday (Week 26 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 532 | Instagram | Education: Trend Strength Assessment | Morning learning. |
 | 2:00 PM | 533 | Instagram | Blog: Conviction vs. Stubbornness | Afternoon reading. |
@@ -26825,7 +26825,7 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 241: Saturday (Week 26 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 535 | Instagram | Product: Harmonic Oscillator Multi-Component | Morning tool visual. |
 | 2:00 PM | 536 | Instagram | Education: Support Becomes Resistance | Afternoon learning. |
@@ -26833,7 +26833,7 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 
 ## Day 242: Sunday (Week 26 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 538 | Instagram | Chronicle: The Cartographer's Journey | Morning story visual. |
 | 2:00 PM | 539 | Instagram | Education: Multi-Timeframe Confirmation | Afternoon learning. |
@@ -29563,15 +29563,15 @@ Each benefit:
 
 ## Day 243: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 541 | Twitter | Marketing: Compare Us to Alternatives | Midday comparison promo. |
-| 8:00 AM | 542 | Twitter | Education: False Breakout Recognition | Pre-market patterns. |
+| 8:00 AM | 542 | Twitter | Education: False Breakout Recognition | Morning patterns. |
 | 9:15 PM | 541 | Instagram | Marketing: Compare Us to Alternatives | Night promo. |
 
 ## Day 244: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 543 | Twitter | Blog: Importance of Sleep for Trading | Evening lifestyle read. |
 | 7:00 AM | 544 | Twitter | Quote: Patience vs. Prediction | Morning motivation. |
@@ -29579,15 +29579,15 @@ Each benefit:
 
 ## Day 245: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 5:00 PM | 545 | Twitter | Product: Janus Atlas Historical Level Strength | Post-market tool demo. |
-| 8:00 AM | 546 | Twitter | Education: Gap Trading Basics | Pre-market gaps education. |
+| 5:00 PM | 545 | Twitter | Product: Janus Atlas Historical Level Strength | Late afternoon tool demo. US mid-morning. |
+| 8:00 AM | 546 | Twitter | Education: Gap Trading Basics | Morning gaps education. |
 | 9:15 PM | 543 | Instagram | Blog: Importance of Sleep for Trading | Night reading. |
 
 ## Day 246: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 547 | Twitter | Blog: Handling Winning Streaks | Evening psychology. |
 | 9:00 PM | 548 | Twitter | Chronicle: The Seven Virtues | Night storytelling. |
@@ -29595,15 +29595,15 @@ Each benefit:
 
 ## Day 247: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 549 | Twitter | Education: Volume Confirmation Basics | Pre-market volume. |
+| 8:00 AM | 549 | Twitter | Education: Volume Confirmation Basics | Morning volume concepts. |
 | 10:00 AM | 550 | Twitter | Docs: Best Practices Guide | Morning reference. |
 | 9:15 PM | 545 | Instagram | Product: Janus Atlas Historical Level | Night tool visual. |
 
 ## Day 248: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 551 | Twitter | Marketing: Results Over Promises | Midday brand message. |
 | 8:00 AM | 552 | Twitter | Education: Candlestick Psychology | Weekend morning education. |
@@ -29611,7 +29611,7 @@ Each benefit:
 
 ## Day 249: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 553 | Twitter | Blog: Trading as a Business | Evening deep read. |
 | 7:00 AM | 554 | Twitter | Quote: Beginners Who Didn't Quit | Sunday morning motivation. |
@@ -29619,15 +29619,15 @@ Each benefit:
 
 ## Day 250: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 5:00 PM | 555 | Twitter | Product: Augury Grid Watchlist Prioritization | Post-market tool demo. |
-| 8:00 AM | 556 | Twitter | Education: Divergence Trading Fundamentals | Pre-market education. |
+| 5:00 PM | 555 | Twitter | Product: Augury Grid Watchlist Prioritization | Late afternoon tool demo. US mid-morning. |
+| 8:00 AM | 556 | Twitter | Education: Divergence Trading Fundamentals | Morning education. |
 | 9:15 PM | 548 | Instagram | Chronicle: The Seven Virtues | Night story visual. |
 
 ## Day 251: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 557 | Twitter | Blog: First Hour Trading Trap | Evening warning read. |
 | 9:00 PM | 558 | Twitter | Chronicle: The Arbiter's Judgment | Night storytelling. |
@@ -29635,15 +29635,15 @@ Each benefit:
 
 ## Day 252: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 559 | Twitter | Education: Trend Reversal Patterns | Pre-market patterns. |
+| 8:00 AM | 559 | Twitter | Education: Trend Reversal Patterns | Morning patterns. |
 | 10:00 AM | 560 | Twitter | Docs: Video Tutorial Library | Morning reference. |
 | 9:15 PM | 550 | Instagram | Docs: Best Practices Guide | Night reference. |
 
 ## Day 253: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 561 | Twitter | Marketing: Start Free Today | Midday CTA. |
 | 9:15 PM | 551 | Instagram | Marketing: Results Over Promises | Night promo. |
@@ -29651,7 +29651,7 @@ Each benefit:
 
 ## Day 254: Friday (Week 27 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 553 | Instagram | Blog: Trading as a Business | Morning reading. |
 | 2:00 PM | 554 | Instagram | Quote: Beginners Who Didn't Quit | Afternoon inspiration. |
@@ -29659,7 +29659,7 @@ Each benefit:
 
 ## Day 255: Saturday (Week 27 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 556 | Instagram | Education: Divergence Trading | Morning learning. |
 | 2:00 PM | 557 | Instagram | Blog: First Hour Trading Trap | Afternoon reading. |
@@ -29667,7 +29667,7 @@ Each benefit:
 
 ## Day 256: Sunday (Week 27 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 559 | Instagram | Education: Trend Reversal Patterns | Morning learning. |
 | 2:00 PM | 560 | Instagram | Docs: Video Tutorial Library | Afternoon reference. |
@@ -32179,39 +32179,39 @@ Each category:
 
 ## Day 257: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 562 | Twitter | Education: Risk-to-Reward Optimization | Pre-market strategy. |
+| 8:00 AM | 562 | Twitter | Education: Risk-to-Reward Optimization | Morning strategy. |
 | 7:00 PM | 563 | Twitter | Blog: The Comparison Trap | Evening psychology. |
 | 9:15 PM | 562 | Instagram | Education: Risk-to-Reward | Night learning. |
 
 ## Day 258: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 564 | Twitter | Quote: Missed vs. Forced Trades | Morning motivation. |
-| 5:00 PM | 565 | Twitter | Product: OmniDeck Daily Routine Demo | Post-market tool demo. |
+| 5:00 PM | 565 | Twitter | Product: OmniDeck Daily Routine Demo | Late afternoon tool demo. US mid-morning. |
 | 9:15 PM | 563 | Instagram | Blog: The Comparison Trap | Night reading. |
 
 ## Day 259: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 566 | Twitter | Education: Confluence Zones | Pre-market concepts. |
+| 8:00 AM | 566 | Twitter | Education: Confluence Zones | Morning concepts. |
 | 7:00 PM | 567 | Twitter | Blog: Setting Realistic Trading Goals | Evening deep read. |
 | 9:15 PM | 564 | Instagram | Quote: Missed vs. Forced Trades | Night inspiration. |
 
 ## Day 260: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 568 | Twitter | Chronicle: The Complete Picture | Night storytelling. |
-| 8:00 AM | 569 | Twitter | Education: Trading Session Characteristics | Pre-market education. |
+| 8:00 AM | 569 | Twitter | Education: Trading Session Characteristics | Morning education. |
 | 9:15 PM | 565 | Instagram | Product: OmniDeck Daily Routine | Night tool visual. |
 
 ## Day 261: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 570 | Twitter | Docs: Glossary of Terms | Morning reference. |
 | 12:00 PM | 571 | Twitter | Marketing: Your Journey Starts Here | Midday brand message. |
@@ -32219,7 +32219,7 @@ Each category:
 
 ## Day 262: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 8:00 AM | 572 | Twitter | Education: Position Management Principles | Weekend morning education. |
 | 7:00 PM | 573 | Twitter | Blog: Why Most Traders Quit | Evening psychology. |
@@ -32227,7 +32227,7 @@ Each category:
 
 ## Day 263: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 574 | Twitter | Quote: Consistency Definition | Sunday morning motivation. |
 | 5:00 PM | 575 | Twitter | Product: Volume Oracle Regime Shifts | Sunday tool preview. |
@@ -32235,23 +32235,23 @@ Each category:
 
 ## Day 264: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 576 | Twitter | Education: Stop Loss Placement | Pre-market risk education. |
+| 8:00 AM | 576 | Twitter | Education: Stop Loss Placement | Morning risk education. |
 | 7:00 PM | 577 | Twitter | Blog: Weekend Review Ritual | Evening process read. |
 | 9:15 PM | 569 | Instagram | Education: Trading Session Characteristics | Night learning. |
 
 ## Day 265: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 578 | Twitter | Chronicle: Epilogue — The Trader's Path | Night storytelling. |
-| 8:00 AM | 579 | Twitter | Education: Trading Journal Best Practices | Pre-market habits. |
+| 8:00 AM | 579 | Twitter | Education: Trading Journal Best Practices | Morning habits. |
 | 9:15 PM | 570 | Instagram | Docs: Glossary of Terms | Night reference. |
 
 ## Day 266: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 580 | Twitter | Docs: System Requirements | Morning reference. |
 | 12:00 PM | 581 | Twitter | Marketing: The Signal Pilot Promise | Midday brand message. |
@@ -32259,15 +32259,15 @@ Each category:
 
 ## Day 267: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 582 | Twitter | Education: Entry Trigger Types | Pre-market strategy. |
+| 8:00 AM | 582 | Twitter | Education: Entry Trigger Types | Morning strategy. |
 | 9:15 PM | 572 | Instagram | Education: Position Management | Night learning. |
 | 9:30 PM | 573 | Instagram | Blog: Why Most Traders Quit | Night reading. |
 
 ## Day 268: Friday (Week 28 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 574 | Instagram | Quote: Consistency Definition | Morning inspiration. |
 | 2:00 PM | 575 | Instagram | Product: Volume Oracle Regime Shifts | Afternoon tool visual. |
@@ -32275,7 +32275,7 @@ Each category:
 
 ## Day 269: Saturday (Week 28 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 577 | Instagram | Blog: Weekend Review Ritual | Morning reading. |
 | 2:00 PM | 578 | Instagram | Chronicle: Epilogue — The Trader's Path | Afternoon story visual. |
@@ -32283,7 +32283,7 @@ Each category:
 
 ## Day 270: Sunday (Week 28 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 580 | Instagram | Docs: System Requirements | Morning reference. |
 | 2:00 PM | 581 | Instagram | Marketing: The Signal Pilot Promise | Afternoon promo. |
@@ -34747,7 +34747,7 @@ Each category:
 
 ## Day 271: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 583 | Twitter | Blog: Sunk Cost Fallacy | Evening psychology. |
 | 7:00 AM | 584 | Twitter | Quote: Entry Price Irrelevance | Morning motivation. |
@@ -34755,15 +34755,15 @@ Each category:
 
 ## Day 272: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 5:00 PM | 585 | Twitter | Indicator: Pentarch Full Cycle | Post-market tool demo. |
-| 8:00 AM | 586 | Twitter | Education: Spread and Slippage | Pre-market execution concepts. |
+| 5:00 PM | 585 | Twitter | Indicator: Pentarch Full Cycle | Late afternoon tool demo. US mid-morning. |
+| 8:00 AM | 586 | Twitter | Education: Spread and Slippage | Morning execution concepts. |
 | 9:15 PM | 584 | Instagram | Quote: Entry Price Irrelevance | Night inspiration. |
 
 ## Day 273: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 587 | Twitter | Blog: Finding Your Trading Style | Evening self-discovery read. |
 | 9:00 PM | 588 | Twitter | Chronicle: Recap — Lessons from Seven | Night storytelling. |
@@ -34771,23 +34771,23 @@ Each category:
 
 ## Day 274: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 589 | Twitter | Education: Importance of Liquidity | Pre-market fundamentals. |
+| 8:00 AM | 589 | Twitter | Education: Importance of Liquidity | Morning fundamentals. |
 | 10:00 AM | 590 | Twitter | Docs: Feedback & Feature Requests | Morning reference. |
 | 9:15 PM | 586 | Instagram | Education: Spread and Slippage | Night learning. |
 
 ## Day 275: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 591 | Twitter | Marketing: Thank You for 600+ Posts 🎉 | Midday celebration! |
 | 12:30 PM | 591 | Instagram | Marketing: Thank You for 600+ Posts 🎉 | Immediate follow-up celebration! |
-| 8:00 AM | 592 | Twitter | Education: Trading Plan Essentials | Pre-market planning. |
+| 8:00 AM | 592 | Twitter | Education: Trading Plan Essentials | Morning planning. |
 
 ## Day 276: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 593 | Twitter | Blog: Accepting Losses | Weekend psychology. |
 | 7:00 AM | 594 | Twitter | Quote: System Execution | Saturday motivation. |
@@ -34795,7 +34795,7 @@ Each category:
 
 ## Day 277: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 5:00 PM | 595 | Twitter | Indicator: Complete Suite Overview | Sunday tool showcase. |
 | 8:00 AM | 596 | Twitter | Education: Common Beginner Mistakes | Sunday morning education. |
@@ -34803,7 +34803,7 @@ Each category:
 
 ## Day 278: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 597 | Twitter | Blog: 80/20 Rule in Trading | Evening efficiency read. |
 | 9:00 PM | 598 | Twitter | Chronicle: Final Chronicle Message | Night storytelling. |
@@ -34811,23 +34811,23 @@ Each category:
 
 ## Day 279: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 599 | Twitter | Education: Building Trading Habits | Pre-market habits. |
+| 8:00 AM | 599 | Twitter | Education: Building Trading Habits | Morning habits. |
 | 10:00 AM | 600 | Twitter | Docs: Quick Start Guide | Morning reference. |
 | 9:15 PM | 590 | Instagram | Docs: Feedback & Feature Requests | Night reference. |
 
 ## Day 280: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 601 | Twitter | Marketing: Final Push — 49 to Go | Midday milestone. |
-| 8:00 AM | 602 | Twitter | Education: Understanding Market Hours | Pre-market education. |
+| 8:00 AM | 602 | Twitter | Education: Understanding Market Hours | Morning education. |
 | 9:15 PM | 592 | Instagram | Education: Trading Plan Essentials | Night learning. |
 
 ## Day 281: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 PM | 603 | Twitter | Blog: Dealing with FOMO | Evening psychology. |
 | 9:15 PM | 593 | Instagram | Blog: Accepting Losses | Night reading. |
@@ -34835,7 +34835,7 @@ Each category:
 
 ## Day 282: Friday (Week 29 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 595 | Instagram | Indicator: Complete Suite Overview | Morning tool visual. |
 | 2:00 PM | 596 | Instagram | Education: Common Beginner Mistakes | Afternoon learning. |
@@ -34843,7 +34843,7 @@ Each category:
 
 ## Day 283: Saturday (Week 29 Instagram Catch-up)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 598 | Instagram | Chronicle: Final Chronicle Message | Morning story visual. |
 | 2:00 PM | 599 | Instagram | Education: Building Trading Habits | Afternoon learning. |
@@ -34851,7 +34851,7 @@ Each category:
 
 ## Day 284: Sunday (Week 29 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 12:00 PM | 601 | Instagram | Marketing: Final Push — 49 to Go | Midday milestone. |
 | 9:15 PM | 602 | Instagram | Education: Understanding Market Hours | Night learning. |
@@ -34865,31 +34865,31 @@ Each category:
 
 ## Day 285: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 604 | Twitter | Quote: Market Teacher | Morning motivation. |
-| 5:00 PM | 605 | Twitter | Indicator: Settings Deep Dive | Post-market tool demo. |
+| 5:00 PM | 605 | Twitter | Indicator: Settings Deep Dive | Late afternoon tool demo. US mid-morning. |
 | 9:15 PM | 604 | Instagram | Quote: Market Teacher | Night inspiration. |
 
 ## Day 286: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 606 | Twitter | Education: Price Action vs Indicators | Pre-market concepts. |
+| 8:00 AM | 606 | Twitter | Education: Price Action vs Indicators | Morning concepts. |
 | 7:00 PM | 607 | Twitter | Blog: Year One Expectations | Evening deep read. |
 | 9:15 PM | 605 | Instagram | Indicator: Settings Deep Dive | Night tool visual. |
 
 ## Day 287: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 608 | Twitter | Vision: The Signal Pilot Vision | Night vision statement. |
-| 8:00 AM | 609 | Twitter | Education: Reading Order Flow Simply | Pre-market education. |
+| 8:00 AM | 609 | Twitter | Education: Reading Order Flow Simply | Morning education. |
 | 9:15 PM | 606 | Instagram | Education: Price Action vs Indicators | Night learning. |
 
 ## Day 288: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 610 | Twitter | Docs: Upgrade Path Options | Morning reference. |
 | 12:00 PM | 611 | Twitter | Marketing: Risk-Free Trial | Midday CTA. |
@@ -34897,7 +34897,7 @@ Each category:
 
 ## Day 289: Friday (Week 29.5 Instagram Finale)
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 608 | Instagram | Vision: The Signal Pilot Vision | Morning vision visual. |
 | 2:00 PM | 609 | Instagram | Education: Reading Order Flow Simply | Afternoon learning. |
@@ -39751,9 +39751,9 @@ Each category:
 
 ## Day 196: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 612 | Twitter | Volume Basics (Education) | Pre-market technical. |
+| 8:00 AM | 612 | Twitter | Volume Basics (Education) | Morning technical learning. |
 | 8:30 AM | 612 | Instagram | Volume Basics | Morning learning. |
 | 1:00 PM | 613 | Twitter | Blog Article | Lunch deep read. |
 | 1:30 PM | 613 | Instagram | Blog Article | Midday education. |
@@ -39764,11 +39764,11 @@ Each category:
 
 ## Day 197: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 5:00 PM | 615 | Twitter | Product Demo | Post-market tool demo. |
+| 5:00 PM | 615 | Twitter | Product Demo | Late afternoon tool demo. US mid-morning. |
 | 5:30 PM | 615 | Instagram | Product Demo | Evening tool evaluation. |
-| 8:00 AM | 616 | Twitter | Education Hub | Pre-market technical. |
+| 8:00 AM | 616 | Twitter | Education Hub | Morning technical learning. |
 | 8:30 AM | 616 | Instagram | Education Hub | Morning learning mode. |
 | 7:00 PM | 617 | Twitter | Blog Article | Evening deep read. |
 | 7:30 PM | 617 | Instagram | Blog Article | Evening reflection. |
@@ -39777,7 +39777,7 @@ Each category:
 
 ## Day 198: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 618 | Twitter | Chronicle Recap | Late night lore. |
 | 9:30 PM | 618 | Instagram | Chronicle Recap | Night storytelling. |
@@ -39786,9 +39786,9 @@ Each category:
 
 ## Day 199: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 619 | Twitter | Education Hub | Pre-market technical. |
+| 8:00 AM | 619 | Twitter | Education Hub | Morning technical learning. |
 | 8:30 AM | 619 | Instagram | Education Hub | Morning learning. |
 | 10:00 AM | 620 | Twitter | Docs | Morning reference. |
 | 10:30 AM | 620 | Instagram | Docs | Resource saving mode. |
@@ -40632,9 +40632,9 @@ Each category:
 
 ## Day 200: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 622 | Twitter | Education Hub | Pre-market technical. |
+| 8:00 AM | 622 | Twitter | Education Hub | Morning technical learning. |
 | 8:30 AM | 622 | Instagram | Education Hub | Morning learning. |
 | 1:00 PM | 623 | Twitter | Blog Article | Lunch deep read. |
 | 1:30 PM | 623 | Instagram | Blog Article | Midday education. |
@@ -40645,7 +40645,7 @@ Each category:
 
 ## Day 201: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 5:00 PM | 625 | Twitter | Product Demo | Weekend tool demo. |
 | 5:30 PM | 625 | Instagram | Product Demo | Weekend tool exploration. |
@@ -40658,7 +40658,7 @@ Each category:
 
 ## Day 202: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 628 | Twitter | Chronicle Wisdom | Sunday night lore. |
 | 9:30 PM | 628 | Instagram | Chronicle Wisdom | Night storytelling. |
@@ -40667,9 +40667,9 @@ Each category:
 
 ## Day 203: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 629 | Twitter | Education Hub | Pre-market technical. |
+| 8:00 AM | 629 | Twitter | Education Hub | Morning technical learning. |
 | 8:30 AM | 629 | Instagram | Education Hub | Morning learning. |
 | 10:00 AM | 630 | Twitter | Docs | Morning reference. |
 | 10:30 AM | 630 | Instagram | Docs | Resource saving mode. |
@@ -41328,31 +41328,31 @@ Each category:
 
 ## Day 211: Monday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 632 | Twitter | Education Hub: Building a Watchlist | Pre-market prep. Traders refining their focus. |
+| 8:00 AM | 632 | Twitter | Education Hub: Building a Watchlist | Morning prep. Traders refining their focus. |
 | 1:00 PM | 633 | Twitter | Blog: When to Walk Away | Lunch break reflection. Mid-session reality check. |
-| 5:00 PM | 632 | Instagram | Education Hub: Building a Watchlist | Post-market review. Visual learners catching up. |
+| 5:00 PM | 632 | Instagram | Education Hub: Building a Watchlist | Late afternoon review. Visual learners catching up. |
 
 ## Day 212: Tuesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 634 | Twitter | Quote Card: Plan the Trade | Morning motivation. Setting daily intention. |
-| 5:00 PM | 635 | Twitter | Product Demo: Plutus Flow | Post-market. Traders evaluating tools. |
+| 5:00 PM | 635 | Twitter | Product Demo: Plutus Flow | Late afternoon. Traders evaluating tools. |
 | 9:15 PM | 633 | Instagram | Blog: When to Walk Away | Evening wind-down. Deep reading time. |
 
 ## Day 213: Wednesday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 636 | Twitter | Education Hub: Understanding Liquidity | Pre-market education. Core concept time. |
+| 8:00 AM | 636 | Twitter | Education Hub: Understanding Liquidity | Morning education. Core concept time. |
 | 7:00 PM | 637 | Twitter | Blog: Compound Effect in Trading | Evening insight. Long-term thinking hour. |
 | 9:15 PM | 634 | Instagram | Quote Card: Plan the Trade | Late night inspiration. Visual quote impact. |
 
 ## Day 214: Thursday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:00 PM | 638 | Twitter | Chronicle: Final Three Guardians | Night storytelling. Chronicle magic hour. |
 | 9:15 PM | 635 | Instagram | Product Demo: Plutus Flow | Evening showcase. Visual demo impact. |
@@ -41360,15 +41360,15 @@ Each category:
 
 ## Day 215: Friday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 639 | Twitter | Education Hub: Building Trading Systems | Pre-market systems. Week-end prep. |
+| 8:00 AM | 639 | Twitter | Education Hub: Building Trading Systems | Morning systems learning. Week-end prep. |
 | 10:00 AM | 640 | Twitter | Docs: Troubleshooting Guide | Mid-morning reference. Problem-solving time. |
 | 12:00 PM | 641 | Twitter | Marketing: 641 Progress (9 to go) | Midday visibility. Milestone celebration. |
 
 ## Day 216: Saturday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 636 | Instagram | Education Hub: Understanding Liquidity | Weekend learning. Catch-up education. |
 | 2:00 PM | 639 | Instagram | Education Hub: Building Trading Systems | Afternoon review. Systems visual. |
@@ -41376,7 +41376,7 @@ Each category:
 
 ## Day 217: Sunday
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 640 | Instagram | Docs: Troubleshooting Guide | Sunday reference. Week prep time. |
 | 12:00 PM | 641 | Instagram | Marketing: 641 Progress (9 to go) | Midday milestone. Community celebration. |
@@ -42144,31 +42144,31 @@ Each category:
 
 ## Day 218: Monday — New Beginnings
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 642 | Twitter | Education Hub: Welcome to Signal Pilot | Pre-market. Full circle — back to Lesson 01. |
+| 8:00 AM | 642 | Twitter | Education Hub: Welcome to Signal Pilot | Morning learning. Full circle — back to Lesson 01. |
 | 1:00 PM | 643 | Twitter | Blog: Why Most Traders Fail | Lunch truth bomb. Hard lessons, perfect timing. |
-| 5:00 PM | 642 | Instagram | Education Hub: Welcome to Signal Pilot | Post-market. Visual welcome to new followers. |
+| 5:00 PM | 642 | Instagram | Education Hub: Welcome to Signal Pilot | Late afternoon. Visual welcome to new followers. |
 
 ## Day 219: Tuesday — Wisdom & Power
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 7:00 AM | 644 | Twitter | Quote Card: Warren Buffett (Patience) | Morning wisdom. Starting the day right. |
-| 5:00 PM | 645 | Twitter | Product Demo: OmniDeck | Post-market. The Commander revealed. |
+| 5:00 PM | 645 | Twitter | Product Demo: OmniDeck | Late afternoon. The Commander revealed. |
 | 9:15 PM | 643 | Instagram | Blog: Why Most Traders Fail | Evening reflection. Deep reading time. |
 
 ## Day 220: Wednesday — Mastery & Chronicle
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
-| 8:00 AM | 646 | Twitter | Education Hub: Mastery and Beyond | Pre-market. The path forward. |
+| 8:00 AM | 646 | Twitter | Education Hub: Mastery and Beyond | Morning learning. The path forward. |
 | 9:00 PM | 647 | Twitter | Chronicle FINALE: The Signal Within | Night storytelling. The ultimate Chronicle. |
 | 9:15 PM | 644 | Instagram | Quote Card: Warren Buffett (Patience) | Late night wisdom. Visual impact. |
 
 ## Day 221: Thursday — Final Prep
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 648 | Twitter | Docs: Documentation Overview | Morning reference. Complete resource guide. |
 | 12:00 PM | 649 | Twitter | Marketing: ONE TO GO | Midday hype. Building anticipation. |
@@ -42176,7 +42176,7 @@ Each category:
 
 ## Day 222: Friday — 🏆 THE FINALE
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 9:15 AM | 646 | Instagram | Education Hub: Mastery and Beyond | Morning mastery visual. |
 | 9:30 AM | 647 | Instagram | Chronicle FINALE: The Signal Within | Chronicle visual. Seven united. |
@@ -42184,7 +42184,7 @@ Each category:
 
 ## Day 223: Saturday — Celebration Echo
 
-| Time (Local) | Post | Platform | Content | Why This Time |
+| Time (CET) | Post | Platform | Content | Why This Time |
 |--------------|------|----------|---------|---------------|
 | 10:00 AM | 648 | Instagram | Docs: Documentation Overview | Weekend catch-up. Resource visual. |
 | 12:00 PM | 649 | Instagram | Marketing: ONE TO GO | Milestone visual. Weekend celebration. |
