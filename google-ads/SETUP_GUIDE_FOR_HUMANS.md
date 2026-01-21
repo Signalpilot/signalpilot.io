@@ -439,37 +439,361 @@ After 1-2 weeks of data:
 
 ---
 
-# PART 9: CREATE LOCALIZED CAMPAIGNS (LATER)
+# PART 9: TURKISH CAMPAIGN (Complete)
 
-Once your English campaign is running well, add these:
+Once your English campaign is running well (after 1-2 weeks), add Turkey.
 
-## Turkish Campaign
+## Step 9.1: Create Turkish Campaign
 
-**Same process as above, but:**
+1. Click **"+ New Campaign"**
+2. Goal: **Leads**
+3. Type: **Search**
+4. Click **Continue**
+
+**Campaign Settings:**
 - Campaign name: `Signal Pilot - Turkey`
-- Location: Turkey only
-- Language: Turkish
-- Budget: $3/day
-- Landing page: `signalpilot.io/tr/`
-- Use Turkish keywords and ad copy from `BROWSER_EXTENSION_PROMPT.md`
+- Networks: ✅ Search Network only (uncheck Display)
+- Locations: **Turkey** only
+- Languages: **Turkish**
+- Budget: **$3.30/day** (~$100/month)
+- Bidding: **Maximize clicks**, max CPC $2.00
 
-## Brazil Campaign
+## Step 9.2: Turkish Ad Groups & Keywords
 
+**Ad Group 1: TradingView Göstergeleri**
+```
+[tradingview göstergeleri]
+[tradingview indikatör]
+[en iyi tradingview göstergeleri]
+[tradingview teknik analiz]
+[profesyonel tradingview göstergeleri]
+"tradingview göstergeleri"
+"teknik analiz göstergeleri"
+```
+
+**Ad Group 2: Yeniden Boyamayan**
+```
+[yeniden boyamayan gösterge]
+[repaint yapmayan indikatör]
+[güvenilir tradingview göstergeleri]
+"yeniden boyamayan"
+"repaint yapmayan"
+```
+
+**Ad Group 3: Piyasa Döngüsü**
+```
+[piyasa döngüsü göstergesi]
+[trend dönüş göstergesi]
+[döngü analizi]
+"piyasa döngüsü"
+"trend analizi"
+```
+
+## Step 9.3: Turkish Ad Copy
+
+**Final URL:**
+```
+https://signalpilot.io/tr/?utm_source=google&utm_medium=cpc&utm_campaign=tr_search
+```
+
+**Display path:** `signalpilot.io / tr / göstergeler`
+
+**Headlines (copy all 15):**
+```
+7 Yeniden Boyamayan Gösterge
+TradingView Döngü Tespiti
+Sıfır Repaint Garantisi
+7 Gün Ücretsiz Deneyin
+Pentarch Döngü Sistemi
+Sinyal Kovalamayı Bırakın
+Ciddi Yatırımcılar İçin
+7 Gösterge Dahil
+Tüm Piyasalarda Çalışır
+Denetlenmiş Göstergeler
+Bugün Ücretsiz Başlayın
+82 Ücretsiz Ders
+10.000+ Yatırımcı Güveniyor
+Hemen Deneyin
+Para İade Garantisi
+```
+
+**Descriptions (copy all 4):**
+```
+7 premium TradingView göstergesi. Yeniden boyamama garantisi. 7 gün ücretsiz deneyin.
+```
+```
+Pentarch tam piyasa döngülerini haritalandırır. TD→IGN→WRN→CAP→BDN. Ücretsiz deneyin.
+```
+```
+Gösterge yığınlamayı bırakın. Döngü, hacim, seviyeleri haritalayan tek sistem. Ücretsiz.
+```
+```
+Ciddi yatırımcılar için. Bir kez öğrenin, sonsuza kadar kullanın. 82 ücretsiz ders.
+```
+
+## Step 9.4: Turkish Extensions
+
+**Sitelinks:**
+| Text | URL |
+|------|-----|
+| 7 Gün Ücretsiz Dene | signalpilot.io/tr/#trial |
+| Fiyatları Gör | signalpilot.io/tr/#pricing |
+| 7 Göstergenin Tümü | signalpilot.io/tr/#indicators |
+| 82 Ücretsiz Ders | education.signalpilot.io |
+
+**Callouts:**
+```
+7 Gün Ücretsiz
+Yeniden Boyamayan
+Para İade Garantisi
+24 Saat Destek
+```
+
+## Step 9.5: Turkish Geographic Bids
+
+| City | Bid Adjustment |
+|------|---------------|
+| Istanbul | +15% |
+| Ankara | +10% |
+| Izmir | 0% |
+| Other | -10% |
+
+---
+
+# PART 10: BRAZIL CAMPAIGN (Complete)
+
+## Step 10.1: Create Brazil Campaign
+
+1. Click **"+ New Campaign"**
+2. Goal: **Leads**
+3. Type: **Search**
+
+**Campaign Settings:**
 - Campaign name: `Signal Pilot - Brazil`
-- Location: Brazil only
-- Language: Portuguese
-- Budget: $3/day
-- Landing page: `signalpilot.io/pt/`
-- Use Portuguese keywords and ad copy from `BROWSER_EXTENSION_PROMPT.md`
+- Networks: ✅ Search Network only
+- Locations: **Brazil** only
+- Languages: **Portuguese**
+- Budget: **$3.30/day** (~$100/month)
+- Bidding: **Maximize clicks**, max CPC $2.00
 
-## Arabic Campaign
+## Step 10.2: Brazil Ad Groups & Keywords
 
+**Ad Group 1: Indicadores TradingView**
+```
+[indicadores tradingview]
+[tradingview indicadores]
+[melhores indicadores tradingview]
+[indicadores profissionais tradingview]
+[indicadores premium tradingview]
+"indicadores tradingview"
+"análise técnica indicadores"
+```
+
+**Ad Group 2: Sem Repintura**
+```
+[indicador sem repintura]
+[indicador que não repinta]
+[indicadores não repintam]
+[indicador confiável tradingview]
+"sem repintura"
+"não repinta"
+```
+
+**Ad Group 3: Ciclos de Mercado**
+```
+[indicador de ciclo de mercado]
+[detecção de ciclos]
+[análise de ciclos trading]
+"ciclos de mercado"
+"ciclo de mercado"
+```
+
+## Step 10.3: Brazil Ad Copy
+
+**Final URL:**
+```
+https://signalpilot.io/pt/?utm_source=google&utm_medium=cpc&utm_campaign=br_search
+```
+
+**Display path:** `signalpilot.io / pt / indicadores`
+
+**Headlines (copy all 15):**
+```
+7 Indicadores Sem Repintura
+Detecção de Ciclos Trading
+Veja Ciclos Completos
+Garantia Zero Repintura
+Teste Grátis 7 Dias
+Sistema de Ciclos Pentarch
+Pare de Perseguir Sinais
+Para Traders Sérios
+Todos 7 Indicadores
+Funciona em Qualquer Mercado
+Indicadores Auditados
+Comece Grátis Hoje
+82 Aulas Gratuitas
+10.000+ Traders Confiam
+Experimente Agora
+```
+
+**Descriptions (copy all 4):**
+```
+7 indicadores premium TradingView. Garantia sem repintura. Teste grátis por 7 dias.
+```
+```
+Pentarch mapeia ciclos completos de mercado. TD→IGN→WRN→CAP→BDN. Experimente grátis.
+```
+```
+Pare de empilhar indicadores. Um sistema que mapeia ciclos, volume, níveis. Grátis.
+```
+```
+Para traders sérios. Aprenda uma vez, use para sempre. 82 aulas gratuitas incluídas.
+```
+
+## Step 10.4: Brazil Extensions
+
+**Sitelinks:**
+| Text | URL |
+|------|-----|
+| Teste Grátis 7 Dias | signalpilot.io/pt/#trial |
+| Ver Preços | signalpilot.io/pt/#pricing |
+| Todos 7 Indicadores | signalpilot.io/pt/#indicators |
+| 82 Aulas Grátis | education.signalpilot.io |
+
+**Callouts:**
+```
+7 Dias Grátis
+Sem Repintura
+Garantia de Reembolso
+Suporte 24h
+```
+
+## Step 10.5: Brazil Geographic Bids
+
+| Region | Bid Adjustment |
+|--------|---------------|
+| São Paulo | +20% |
+| Rio de Janeiro | +10% |
+| Other capitals | 0% |
+| Rural | -15% |
+
+---
+
+# PART 11: ARABIC CAMPAIGN (Complete)
+
+## Step 11.1: Create Arabic Campaign
+
+1. Click **"+ New Campaign"**
+2. Goal: **Leads**
+3. Type: **Search**
+
+**Campaign Settings:**
 - Campaign name: `Signal Pilot - Arabic`
-- Locations: UAE, Saudi Arabia
-- Language: Arabic
-- Budget: $3/day
-- Landing page: `signalpilot.io/ar/`
-- Use Arabic keywords and ad copy from `BROWSER_EXTENSION_PROMPT.md`
+- Networks: ✅ Search Network only
+- Locations: **United Arab Emirates** AND **Saudi Arabia**
+- Languages: **Arabic**
+- Budget: **$3.30/day** (~$100/month)
+- Bidding: **Maximize clicks**, max CPC $3.00 (higher CPCs in Gulf)
+
+## Step 11.2: Arabic Ad Groups & Keywords
+
+**Ad Group 1: مؤشرات TradingView**
+```
+[مؤشرات tradingview]
+[مؤشرات تريدينج فيو]
+[أفضل مؤشرات tradingview]
+[مؤشرات تداول احترافية]
+[مؤشرات تحليل فني]
+"مؤشرات تريدينج فيو"
+"مؤشرات التحليل الفني"
+```
+
+**Ad Group 2: بدون إعادة رسم**
+```
+[مؤشر بدون إعادة رسم]
+[مؤشرات لا تعيد الرسم]
+[مؤشر موثوق tradingview]
+"بدون إعادة رسم"
+"لا يعيد الرسم"
+```
+
+**Ad Group 3: دورات السوق**
+```
+[مؤشر دورات السوق]
+[كشف دورات السوق]
+[تحليل الدورات]
+"دورات السوق"
+"دورة السوق"
+```
+
+## Step 11.3: Arabic Ad Copy
+
+**Final URL:**
+```
+https://signalpilot.io/ar/?utm_source=google&utm_medium=cpc&utm_campaign=ar_search
+```
+
+**Display path:** `signalpilot.io / ar / مؤشرات`
+
+**Headlines (copy all 15):**
+```
+7 مؤشرات بدون إعادة رسم
+كشف دورات السوق
+شاهد الدورات الكاملة
+ضمان عدم إعادة الرسم
+تجربة مجانية 7 أيام
+نظام دورات Pentarch
+توقف عن مطاردة الإشارات
+للمتداولين الجادين
+جميع المؤشرات السبعة
+يعمل على أي سوق
+مؤشرات مدققة
+ابدأ مجاناً اليوم
+82 درساً مجانياً
++10,000 متداول يثقون
+جرّب الآن
+```
+
+**Descriptions (copy all 4):**
+```
+7 مؤشرات TradingView احترافية. ضمان عدم إعادة الرسم. جرّب مجاناً لمدة 7 أيام.
+```
+```
+Pentarch يرسم خريطة دورات السوق الكاملة. TD→IGN→WRN→CAP→BDN. جرّب مجاناً.
+```
+```
+توقف عن تكديس المؤشرات. نظام واحد يرسم الدورات والحجم والمستويات. مجاني.
+```
+```
+للمتداولين الجادين. تعلّم مرة واحدة، استخدم للأبد. 82 درساً مجانياً.
+```
+
+## Step 11.4: Arabic Extensions
+
+**Sitelinks:**
+| Text | URL |
+|------|-----|
+| جرّب 7 أيام مجاناً | signalpilot.io/ar/#trial |
+| عرض الأسعار | signalpilot.io/ar/#pricing |
+| جميع المؤشرات السبعة | signalpilot.io/ar/#indicators |
+| 82 درساً مجانياً | education.signalpilot.io |
+
+**Callouts:**
+```
+7 أيام مجاناً
+بدون إعادة رسم
+ضمان استرداد المال
+دعم 24 ساعة
+```
+
+## Step 11.5: Arabic Geographic Bids
+
+| Country | Bid Adjustment |
+|---------|---------------|
+| UAE | +20% |
+| Saudi Arabia | 0% |
+
+**Note:** Arabic text is right-to-left (RTL). Google Ads handles this automatically - just paste the text and it will display correctly.
 
 ---
 
