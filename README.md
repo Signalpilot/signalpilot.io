@@ -9,8 +9,20 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
 
 ---
 
+## Signal Pilot Ecosystem
+
+| Repository | Description | Live URL |
+|------------|-------------|----------|
+| [signalpilot.io](https://github.com/Signalpilot/signalpilot.io) | Marketing website (this repo) | [signalpilot.io](https://www.signalpilot.io) |
+| [signalpilot-education-hub](https://github.com/Signalpilot/signalpilot-education-hub) | 82 professional lessons across 4 skill tiers (250k+ words) | [education.signalpilot.io](https://education.signalpilot.io) |
+| [signalpilot-docs](https://github.com/Signalpilot/signalpilot-docs) | Official documentation — guides, cheatsheets, troubleshooting | [docs.signalpilot.io](https://docs.signalpilot.io) |
+| [signalpilot-blog](https://github.com/Signalpilot/signalpilot-blog) | Trading education blog in 12 languages | [blog.signalpilot.io](https://blog.signalpilot.io) |
+
+---
+
 ## Contents
 
+- [Signal Pilot Ecosystem](#signal-pilot-ecosystem)
 - [What's on the site](#whats-on-the-site)
 - [Tech stack](#tech-stack)
 - [Quick start (local dev)](#quick-start-local-dev)
@@ -36,25 +48,25 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
 - **Testimonials:** User reviews with ratings and verification badges
 
 ### The Elite Seven Indicators
-1. **SP — Pentarch** (★ FLAGSHIP)
+1. **SP — Pentarch: Cycle Phase Detection** (★ FLAGSHIP)
    *Complete trend regime detection system. Maps 5-phase market reversal sequences (TD→IGN→WRN→CAP→BDN).*
 
-2. **SP — Omnideck** (ALL-IN-ONE)
+2. **SP — OmniDeck: Unified Chart Overlay** (ALL-IN-ONE)
    *Comprehensive overlay unifying 10 premium systems: TD Sequential, Squeeze Cloud, SuperTrend Ensemble, Supply/Demand Zones, Liquidity Sweeps, Candlestick Patterns, and more.*
 
-3. **SP — Volume Oracle** (REGIME DETECTION)
+3. **SP — Volume Oracle: Regime Detection** (REGIME DETECTION)
    *Accumulation/distribution detector showing volume flow patterns — before retail notices.*
 
-4. **SP — Plutus Flow** (ACCUMULATION)
+4. **SP — Plutus Flow: Statistical OBV Analysis** (ACCUMULATION)
    *Cumulative delta ribbon revealing hidden buying/selling pressure with divergence detection.*
 
-5. **SP — Janus Atlas** (KEY LEVELS)
+5. **SP — Janus Atlas: Multi-Timeframe Auto-Levels** (KEY LEVELS)
    *Auto-plots HTF levels, D/W/M pivots, VWAP anchors, and volume profile zones (POC, VAH, VAL).*
 
-6. **SP — Augury Grid** (S/R MATRIX)
+6. **SP — Augury Grid: Multi-Timeframe Scanner** (S/R MATRIX)
    *Multi-symbol watchlist table tracking 8 tickers simultaneously with quality scores and real-time P&L.*
 
-7. **SP — Harmonic Oscillator** (TIMING)
+7. **SP — Harmonic Oscillator: Multi-Component Momentum** (TIMING)
    *7-oscillator voting system with star rating confidence (★ to ★★★★) for entry timing.*
 
 ### Pricing Plans
@@ -89,7 +101,7 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
 - **Product:** Indicators, Pricing, Documentation, FAQ
 - **Legal:** Privacy Policy, Terms of Service, Refund Policy
 - **Connect:** GitHub, support@signalpilot.io
-- **Copyright:** © 2025 Signal Pilot Labs
+- **Copyright:** © 2025-2026 Signal Pilot Labs
 
 ---
 
@@ -239,5 +251,9 @@ No build step required — just deploy the repo as-is.
 
 ## License
 
-All rights reserved © 2025 Signal Pilot Labs.
+All rights reserved © 2025-2026 Signal Pilot Labs.
 This project is closed-source for commercial use.
+
+---
+
+*Last updated: January 2026*
