@@ -612,8 +612,7 @@ TD appears when selling exhausts. 🟣
 What does that mean?
 
 The Pentarch indicator detects cycle phases:
-→ TD (Touchdown) = Selling pressure exhausted
-→ Accumulation phase may be starting
+→ TD (Touchdown) = Early-cycle reversal on selling exhaustion
 → Not a "buy signal" — a structural observation
 
 What you do with this depends on:
@@ -9777,7 +9776,7 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 >
 > Full docs in bio 🔗
 
-**Hashtags:** #Pentarch #TDSignal #TrendDetermination #TheSovereign #SignalPilot #TradingIndicators #TradingView #CycleAnalysis #TradingEducation #SignalInterpretation #LearnTrading #IndicatorDeepDive #TradingContext #AwarenessSignal #ProperUsage
+**Hashtags:** #Pentarch #TDSignal #Touchdown #TheSovereign #SignalPilot #TradingIndicators #TradingView #CycleAnalysis #TradingEducation #SignalInterpretation #LearnTrading #IndicatorDeepDive #TradingContext #AwarenessSignal #ProperUsage
 
 ---
 
@@ -17522,7 +17521,7 @@ Full docs in bio 🔗
    - Add annotation arrow pointing to signal
 5. **Signal Label:** "WRN" in circle with yellow glow
 6. **Explanation Box:** Dark card below chart
-   - "Warning — Distribution Phase" as title
+   - "Warning — Early weakness in uptrends" as title
    - 3 bullet points of what it observes
 7. **Warning Text:** "Not a sell signal. An observation." in #c9a962
 8. **The Sovereign Icon:** Small character icon in corner
@@ -28578,25 +28577,20 @@ Full setup guide in bio 🔗
 >
 > Understanding each cycle phase:
 >
-> TD - TOUCHDOWN
-> - Accumulation phase
-> - Selling exhausted, potential base
+> 🟢 TD - TOUCHDOWN
+> Early-cycle reversal on selling exhaustion
 >
-> IGN - IGNITION
-> - Markup phase
-> - Momentum beginning, trend starting
+> 🔵 IGN - IGNITION
+> Breakout confirmation with conviction
 >
-> WRN - WARNING
-> - Distribution phase
-> - Smart money potentially exiting
+> 🟡 WRN - WARNING
+> Early weakness in uptrends
 >
-> CAP - CLIMAX
-> - Climax phase
-> - Trend overextended, potential reversal
+> 🟠 CAP - CLIMAX
+> Late-cycle exhaustion with volume spikes
 >
-> BDN - BREAKDOWN
-> - Decline phase
-> - Breakdown confirmed, downtrend
+> 🔴 BDN - BREAKDOWN
+> Bearish structure break
 >
 > How to use:
 >
