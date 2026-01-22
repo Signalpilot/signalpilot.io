@@ -20058,8 +20058,8 @@ Layer 6: Chronicle branding
    - Majestic pose
 
 2. **Cycle Wheel:**
-   - Four phases in circular arrangement
-   - Accumulation → Markup → Distribution → Markdown
+   - Five phases in circular arrangement
+   - TD → IGN → WRN → CAP → BDN (Pentarch's 5-phase cycle)
    - Arrows showing eternal rotation
    - Gold/blue color scheme
 
@@ -24174,35 +24174,41 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 >
 > The shift is the signal.
 >
-> THE FOUR PHASES:
+> THE FIVE PHASES:
 >
-> 📥 ACCUMULATION
-> → Smart money buying
-> → Range-bound price
-> → Building position
+> 🟢 TD (TOUCHDOWN)
+> → Cycle begins
+> → Reversal potential
+> → Watch for confirmation
 >
-> 📈 MARKUP
-> → Trend begins
-> → Price advances
-> → Momentum builds
+> 🔵 IGN (IGNITION)
+> → Momentum confirmed
+> → Trend launching
+> → Entry zone
 >
-> 📤 DISTRIBUTION
-> → Smart money selling
-> → Price stalls at highs
-> → Positions unwound
+> 🟡 WRN (WARNING)
+> → Trend maturing
+> → Caution ahead
+> → Manage positions
 >
-> 📉 MARKDOWN
-> → Trend down begins
-> → Price declines
-> → Cycle resets
+> 🟠 CAP (CLIMAX)
+> → Exhaustion phase
+> → Peak/bottom forming
+> → Exit preparation
+>
+> 🔴 BDN (BREAKDOWN)
+> → Cycle ending
+> → Reversal imminent
+> → Cycle reset begins
 >
 > THE TRANSITIONS:
-> → Accum → Markup = potential long context
-> → Markup → Distrib = caution on longs
-> → Distrib → Markdown = potential short context
-> → Markdown → Accum = cycle reset
+> → TD → IGN = trend confirmation, entry zone
+> → IGN → WRN = trend maturing, trail stops
+> → WRN → CAP = exhaustion near, tighten risk
+> → CAP → BDN = reversal starting, exit or flip
+> → BDN → TD = new cycle begins
 >
-> Pentarch identifies these shifts.
+> Pentarch maps all 5 phases in real-time.
 >
 > 🔗 Link in bio
 
@@ -35475,7 +35481,7 @@ Each category:
 1. **Complete Cycle Chart:**
    - Full market cycle visible
    - Pentarch labels at each phase
-   - Accumulation → Markup → Distribution → Markdown
+   - TD → IGN → WRN → CAP → BDN (5 phases)
    - Clear phase transitions
 
 2. **Title:**
@@ -35484,8 +35490,8 @@ Each category:
    - Cycle icon
 
 3. **Phase Labels:**
-   - Four phases with icons
-   - Color-coded (green accumulation, blue markup, yellow distribution, red markdown)
+   - Five phases with icons
+   - Color-coded (green TD, blue IGN, yellow WRN, orange CAP, red BDN)
    - Brief description each
 
 4. **Sovereign Character:**
