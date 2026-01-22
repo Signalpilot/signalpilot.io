@@ -427,7 +427,7 @@
 **Copy:**
 > Markets transition between phases. Pentarch tracks them.
 >
-> Accumulation → Ignition → Trend → Distribution → Exhaustion
+> TD → IGN → WRN → CAP → BDN
 >
 > Different phases = different behavior. Know where you are.
 >
@@ -438,101 +438,84 @@
 ---
 
 ### Instagram
-**Format:** Carousel (8 slides)
+**Format:** Carousel (7 slides)
 
 **Slide 1 — Cover:**
-"PENTARCH: TRACKING PHASE TRANSITIONS"
+"PENTARCH: THE 5 CYCLE PHASES"
 - Crown icon
 - Cycle wheel visual
 
 **Slide 2 — The Concept:**
-"Markets don't move randomly. They cycle through phases."
+"Markets don't move randomly. They cycle through 5 phases."
 
-**Slide 3 — Accumulation:**
-"ACCUMULATION (ACC)"
-- Smart money building positions
-- Range-bound, quiet
-- Prepare for ignition
+**Slide 3 — TD & IGN:**
+"🟢 TD (TOUCHDOWN)"
+- Early-cycle reversal on selling exhaustion
 
-**Slide 4 — Ignition:**
-"IGNITION (IGN)"
-- Breakout from accumulation
-- Trend begins
-- Momentum starting
+"🔵 IGN (IGNITION)"
+- Breakout confirmation with conviction
 
-**Slide 5 — Trend:**
-"TREND (TD)"
-- Established direction
-- Follow, don't fight
-- Let it run
+**Slide 4 — WRN:**
+"🟡 WRN (WARNING)"
+- Early weakness in uptrends
 
-**Slide 6 — Distribution:**
-"DISTRIBUTION (DIS)"
-- Smart money exiting
-- Trend mature
-- Caution increasing
+**Slide 5 — CAP & BDN:**
+"🟠 CAP (CLIMAX)"
+- Late-cycle exhaustion with volume spikes
 
-**Slide 7 — Exhaustion:**
-"EXHAUSTION (EXT)"
-- Trend overextended
-- Reversal potential
-- New cycle brewing
+"🔴 BDN (BREAKDOWN)"
+- Bearish structure break
 
-**Slide 8 — CTA:**
-"Pentarch shows these transitions visually."
+**Slide 6 — The Cycle:**
+"TD → IGN → WRN → CAP → BDN → TD..."
+- Cycle repeats
+- Know where you are
+
+**Slide 7 — CTA:**
+"Pentarch maps these phases in real-time."
 - See it in action link
 - Disclaimer
 
 **Caption:**
-> PENTARCH: TRACKING PHASE TRANSITIONS
+> PENTARCH: THE 5 CYCLE PHASES
 >
-> Markets don't move randomly. They cycle through phases.
+> Markets don't move randomly. They cycle through 5 phases.
 >
-> THE CYCLE:
+> 🟢 TD (TOUCHDOWN)
+> Early-cycle reversal on selling exhaustion
 >
-> ACCUMULATION (ACC)
-> - Smart money building positions
-> - Range-bound, quiet
-> - Prepare for ignition
+> 🔵 IGN (IGNITION)
+> Breakout confirmation with conviction
 >
-> IGNITION (IGN)
-> - Breakout from accumulation
-> - Trend begins
-> - Momentum starting
+> 🟡 WRN (WARNING)
+> Early weakness in uptrends
 >
-> TREND (TD)
-> - Established direction
-> - Follow, don't fight
-> - Let it run
+> 🟠 CAP (CLIMAX)
+> Late-cycle exhaustion with volume spikes
 >
-> DISTRIBUTION (DIS)
-> - Smart money exiting
-> - Trend mature
-> - Caution increasing
+> 🔴 BDN (BREAKDOWN)
+> Bearish structure break
 >
-> EXHAUSTION (EXT)
-> - Trend overextended
-> - Reversal potential
-> - New cycle brewing
+> TD → IGN → WRN → CAP → BDN → TD...
 >
-> Pentarch shows these transitions visually.
+> The cycle repeats. Know where you are.
+>
+> Pentarch maps these phases in real-time.
 >
 > See it in action. Link in bio
 >
 > Educational demo. Not financial advice.
->
-> Which phase do you think we're in right now? Drop your guess below 👇
 
-**Hashtags:** #Pentarch #CyclePhases #SignalPilot #TradingView #MarketCycles #TechnicalAnalysis #TradingIndicators #Forex #Crypto #DayTrading #SwingTrading #CycleTrading #TradingTools #TradingEducation #LearnTrading #TradingCommunity #PhaseAnalysis #MarketStructure #TrendCycle #SmartMoney
+**Hashtags:** #Pentarch #CyclePhases #SignalPilot #TradingView #MarketCycles #TechnicalAnalysis #TradingIndicators #Forex #Crypto #DayTrading #SwingTrading #CycleTrading #TradingTools #TradingEducation #LearnTrading #TradingCommunity #TD #IGN #WRN #CAP #BDN
 
 ---
 
 ### Canva Visual Creation Guide — Post 335
 
 **CYCLE DIAGRAM:**
-- Five phases in circular arrangement
+- Five phases in circular arrangement: TD → IGN → WRN → CAP → BDN
 - Arrows showing progression
-- Pentarch signals at each phase
+- Color-coded: Green (TD), Blue (IGN), Yellow (WRN), Orange (CAP), Red (BDN)
 - Market cycle visual metaphor
 
 **EXPORT:** PNG, maximum quality, all 8 slides
@@ -1329,7 +1312,7 @@ Layer 6: Chronicle branding
 >
 > → Market cycle phases
 > → Know where you are in time
-> → IGN • TRD • DST • RNG • EXT
+> → TD • IGN • WRN • CAP • BDN
 
 **Slide 3 — Volume Oracle:**
 > 🔮 VOLUME ORACLE — The Prophet
@@ -1788,7 +1771,7 @@ Layer 6: Chronicle branding
 **Slide 4 — Filter Options:**
 > 🎛️ FILTER BY:
 >
-> ✦ Pentarch Phase (IGN, TRD, etc.)
+> ✦ Pentarch Phase (TD, IGN, WRN, CAP, BDN)
 > ✦ Volume Regime
 > ✦ Momentum State
 > ✦ Custom Combinations
