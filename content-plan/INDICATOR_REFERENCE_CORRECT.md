@@ -9,13 +9,13 @@
 
 ### The 5 Cycle Signals
 
-| Signal | Color | Position | Phase | Meaning |
-|--------|-------|----------|-------|---------|
-| **TD** | Purple | Below candle | Accumulation | Oversold, below Pilot Line, potential reversal from decline |
-| **IGN** | Teal | Below candle | Markup | Momentum breakout, bullish structure shift |
-| **WRN** | Yellow | Above candle | Distribution | Extended, momentum weakening, late cycle warning |
-| **CAP** | Orange | Above candle | Climax | Extreme extension, exhaustion, peak before reversal |
-| **BDN** | Red | Above candle | Decline | Structure break, bearish shift, cycle completion |
+| Signal | Color | Position | Meaning |
+|--------|-------|----------|---------|
+| **TD** | Purple | Below candle | Early-cycle reversal on selling exhaustion |
+| **IGN** | Teal | Below candle | Breakout confirmation with conviction |
+| **WRN** | Yellow | Above candle | Early weakness in uptrends |
+| **CAP** | Orange | Above candle | Late-cycle exhaustion with volume spikes |
+| **BDN** | Red | Above candle | Bearish structure break |
 
 ### 4-Layer Detection System
 All 4 layers must confirm at bar close:
