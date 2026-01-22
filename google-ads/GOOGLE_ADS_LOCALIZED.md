@@ -32,10 +32,16 @@
 [en iyi tradingview göstergeleri]
 [tradingview teknik analiz]
 [profesyonel tradingview göstergeleri]
+[tradingview premium göstergeler]
+[tradingview ücretli göstergeler]
+[borsa göstergeleri tradingview]
+[kripto göstergeleri tradingview]
+[forex göstergeleri tradingview]
 "tradingview göstergeleri"
 "teknik analiz göstergeleri"
-+tradingview +gösterge
-+tradingview +indikatör
+"tradingview gösterge paketi"
+"en iyi indikatörler tradingview"
+"profesyonel trading göstergeleri"
 ```
 
 ### Ad Group 2: Yeniden Boyamayan (Non-Repainting)
@@ -43,9 +49,16 @@
 [yeniden boyamayan gösterge]
 [repaint yapmayan indikatör]
 [güvenilir tradingview göstergeleri]
+[sinyal değiştirmeyen gösterge]
+[gecikmesiz tradingview göstergesi]
+[doğru sinyal veren gösterge]
+[güvenilir trading indikatörü]
+[yanlış sinyal vermeyen gösterge]
 "yeniden boyamayan"
 "repaint yapmayan"
-+yeniden +boyamayan +gösterge
+"yeniden boyamayan indikatör"
+"güvenilir sinyal göstergesi"
+"sinyal değiştirmeyen"
 ```
 
 ### Ad Group 3: Döngü/Cycle Tespiti
@@ -53,9 +66,16 @@
 [piyasa döngüsü göstergesi]
 [trend dönüş göstergesi]
 [döngü analizi]
+[piyasa döngüsü tespiti]
+[trend değişim göstergesi]
+[boğa ayı döngüsü göstergesi]
+[piyasa zamanlaması göstergesi]
+[döngü tahmin göstergesi]
 "piyasa döngüsü"
 "trend analizi"
-+piyasa +döngüsü +gösterge
+"döngü tespiti tradingview"
+"piyasa döngüsü indikatörü"
+"trend dönüş sinyali"
 ```
 
 ## Headlines (Turkish - 30 chars max)
@@ -117,10 +137,17 @@
 [melhores indicadores tradingview]
 [indicadores profissionais tradingview]
 [indicadores premium tradingview]
+[indicadores pagos tradingview]
+[indicadores de trading profissional]
+[indicadores para day trade]
+[indicadores cripto tradingview]
+[indicadores forex tradingview]
+[indicadores ações tradingview]
 "indicadores tradingview"
 "análise técnica indicadores"
-+tradingview +indicadores
-+indicador +tradingview
+"melhores indicadores para trading"
+"indicadores profissionais para trader"
+"pacote indicadores tradingview"
 ```
 
 ### Ad Group 2: Sem Repintura (Non-Repainting)
@@ -129,9 +156,16 @@
 [indicador que não repinta]
 [indicadores não repintam]
 [indicador confiável tradingview]
+[indicador sem delay]
+[indicador de sinais precisos]
+[indicador que não muda sinal]
+[indicador confiável para trading]
+[indicador sem atraso tradingview]
 "sem repintura"
 "não repinta"
-+sem +repintura +indicador
+"indicador sem repintura tradingview"
+"sinais precisos sem delay"
+"indicador confiável para trader"
 ```
 
 ### Ad Group 3: Detecção de Ciclos
@@ -139,9 +173,17 @@
 [indicador de ciclo de mercado]
 [detecção de ciclos]
 [análise de ciclos trading]
+[indicador de tendência de mercado]
+[indicador de reversão de tendência]
+[ciclos de alta e baixa]
+[indicador timing de mercado]
+[previsão de ciclos trading]
+[indicador de topos e fundos]
 "ciclos de mercado"
 "ciclo de mercado"
-+ciclo +mercado +indicador
+"detecção de ciclos tradingview"
+"indicador de ciclos para trading"
+"reversão de tendência indicador"
 ```
 
 ## Headlines (Portuguese - 30 chars max)
@@ -207,10 +249,17 @@
 [أفضل مؤشرات tradingview]
 [مؤشرات تداول احترافية]
 [مؤشرات تحليل فني]
+[مؤشرات بريميوم تريدينج فيو]
+[مؤشرات مدفوعة tradingview]
+[مؤشرات كريبتو تريدينج فيو]
+[مؤشرات فوركس تريدينج فيو]
+[مؤشرات أسهم tradingview]
+[أدوات التحليل الفني]
 "مؤشرات تريدينج فيو"
 "مؤشرات التحليل الفني"
-+tradingview +مؤشرات
-+مؤشر +تريدينج +فيو
+"أفضل مؤشرات للتداول"
+"مؤشرات احترافية للتداول"
+"باقة مؤشرات تريدينج فيو"
 ```
 
 ### Ad Group 2: بدون إعادة رسم (Non-Repainting)
@@ -218,9 +267,17 @@
 [مؤشر بدون إعادة رسم]
 [مؤشرات لا تعيد الرسم]
 [مؤشر موثوق tradingview]
+[مؤشر بدون تأخير]
+[مؤشر إشارات دقيقة]
+[مؤشر لا يغير الإشارات]
+[مؤشر موثوق للتداول]
+[مؤشر بدون تغيير في السجل]
+[إشارات تداول دقيقة]
 "بدون إعادة رسم"
 "لا يعيد الرسم"
-+بدون +إعادة +رسم +مؤشر
+"مؤشر بدون إعادة رسم تريدينج فيو"
+"إشارات دقيقة بدون تأخير"
+"مؤشر موثوق للمتداولين"
 ```
 
 ### Ad Group 3: كشف الدورات
@@ -228,9 +285,18 @@
 [مؤشر دورات السوق]
 [كشف دورات السوق]
 [تحليل الدورات]
+[مؤشر اتجاه السوق]
+[مؤشر انعكاس الاتجاه]
+[دورات الصعود والهبوط]
+[مؤشر توقيت السوق]
+[توقع دورات التداول]
+[مؤشر القمم والقيعان]
+[تحديد اتجاه السوق]
 "دورات السوق"
 "دورة السوق"
-+دورة +السوق +مؤشر
+"كشف دورات تريدينج فيو"
+"مؤشر دورات للتداول"
+"انعكاس الاتجاه مؤشر"
 ```
 
 ## Headlines (Arabic - 30 chars max)
