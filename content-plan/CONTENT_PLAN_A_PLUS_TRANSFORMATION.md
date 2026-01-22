@@ -121,12 +121,13 @@ Create 3-4 high-value free resources that capture emails:
 #### Lead Magnet #3: "Market Cycle Quick Reference"
 - **Format:** PDF (1-2 pages)
 - **Content:**
-  - Accumulation → Markup → Distribution → Decline visual
+  - Wyckoff's classic 4 phases: Accumulation → Markup → Distribution → Decline
+  - How Pentarch refines this into 5 precise phases: TD→IGN→WRN→CAP→BDN
   - Characteristics of each phase
   - How to identify current phase
   - What to do in each phase
 - **Why it works:** Evergreen, practical, directly tied to curriculum
-- **CTA after download:** "Master all 4 phases in the full curriculum →"
+- **CTA after download:** "Master all 5 Pentarch phases in the full curriculum →"
 
 #### Lead Magnet #4: "The Elite Seven Indicator Guide"
 - **Format:** PDF (5-7 pages)

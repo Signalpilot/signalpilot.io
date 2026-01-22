@@ -19995,7 +19995,7 @@ Layer 6: Chronicle branding
 ### 𝕏 Twitter
 
 **Copy:**
-> "All markets breathe," the Sovereign observed. "Accumulation. Markup. Distribution. Markdown. The cycle is eternal."
+> "All markets breathe," the Sovereign observed. "TD. IGN. WRN. CAP. BDN. The 5-phase cycle is eternal."
 >
 > Pentarch reads this breath.
 >
@@ -20018,12 +20018,12 @@ Layer 6: Chronicle branding
 >
 > From the Signal Pilot Chronicle:
 >
-> "All markets breathe. Accumulation. Markup. Distribution. Markdown. The cycle is eternal."
+> "All markets breathe. TD. IGN. WRN. CAP. BDN. The 5-phase cycle is eternal."
 >
 > The Sovereign sees the breath.
 >
 > Pentarch identifies:
-> → Where we are in the cycle
+> → Where we are in the 5-phase cycle
 > → Transition signals between phases
 > → The rhythm of expansion and contraction
 >
@@ -20058,8 +20058,8 @@ Layer 6: Chronicle branding
    - Majestic pose
 
 2. **Cycle Wheel:**
-   - Four phases in circular arrangement
-   - Accumulation → Markup → Distribution → Markdown
+   - Five phases in circular arrangement
+   - TD → IGN → WRN → CAP → BDN (Pentarch's 5-phase cycle)
    - Arrows showing eternal rotation
    - Gold/blue color scheme
 
@@ -24129,43 +24129,45 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 - Visual: Cycle diagram
 - Branding: Signal Pilot logo
 
-**Slide 2 - Accumulation Phase:**
-- Header: "📥 ACCUMULATION"
-- "Smart money buying"
-- "Range-bound price"
-- "Building position"
+**Slide 2 - TD Phase:**
+- Header: "🟢 TD (TOUCHDOWN)"
+- "Early-cycle reversal"
+- "Selling exhaustion"
+- "Potential base forming"
 
-**Slide 3 - Markup Phase:**
-- Header: "📈 MARKUP"
-- "Trend begins"
-- "Price advances"
-- "Momentum builds"
+**Slide 3 - IGN Phase:**
+- Header: "🔵 IGN (IGNITION)"
+- "Breakout confirmation"
+- "Conviction present"
+- "Momentum building"
 
-**Slide 4 - Distribution Phase:**
-- Header: "📤 DISTRIBUTION"
-- "Smart money selling"
-- "Price stalls at highs"
-- "Positions unwound"
+**Slide 4 - WRN Phase:**
+- Header: "🟡 WRN (WARNING)"
+- "Early weakness"
+- "Uptrend showing strain"
+- "Caution warranted"
 
-**Slide 5 - Markdown Phase:**
-- Header: "📉 MARKDOWN"
-- "Trend down begins"
-- "Price declines"
-- "Cycle resets"
+**Slide 5 - CAP Phase:**
+- Header: "🟠 CAP (CLIMAX)"
+- "Late-cycle exhaustion"
+- "Volume spikes"
+- "Potential peak forming"
 
-**Slide 6 - The Transitions:**
+**Slide 6 - BDN Phase:**
+- Header: "🔴 BDN (BREAKDOWN)"
+- "Bearish structure break"
+- "Downside confirmed"
+- "Cycle completing"
+
+**Slide 7 - The Transitions:**
 - Header: "THE TRANSITIONS"
-- "Accum → Markup = potential long context"
-- "Markup → Distrib = caution on longs"
-- "Distrib → Markdown = potential short context"
-- "Markdown → Accum = cycle reset"
-
-**Slide 7 - On Chart:**
-- Full chart showing Pentarch phases
-- Transitions highlighted
+- "TD → IGN = exhaustion confirmed, breakout begins"
+- "IGN → WRN = conviction fading, weakness appearing"
+- "WRN → CAP = exhaustion building, volume spikes"
+- "CAP → BDN = structure breaking"
 
 **Slide 8 - CTA:**
-- "Pentarch identifies these shifts"
+- "Pentarch maps all 5 phases"
 - "Link in bio"
 - Signal Pilot branding
 
@@ -24174,35 +24176,31 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 >
 > The shift is the signal.
 >
-> THE FOUR PHASES:
+> THE FIVE PHASES:
 >
-> 📥 ACCUMULATION
-> → Smart money buying
-> → Range-bound price
-> → Building position
+> 🟢 TD (TOUCHDOWN)
+> Early-cycle reversal on selling exhaustion
 >
-> 📈 MARKUP
-> → Trend begins
-> → Price advances
-> → Momentum builds
+> 🔵 IGN (IGNITION)
+> Breakout confirmation with conviction
 >
-> 📤 DISTRIBUTION
-> → Smart money selling
-> → Price stalls at highs
-> → Positions unwound
+> 🟡 WRN (WARNING)
+> Early weakness in uptrends
 >
-> 📉 MARKDOWN
-> → Trend down begins
-> → Price declines
-> → Cycle resets
+> 🟠 CAP (CLIMAX)
+> Late-cycle exhaustion with volume spikes
+>
+> 🔴 BDN (BREAKDOWN)
+> Bearish structure break
 >
 > THE TRANSITIONS:
-> → Accum → Markup = potential long context
-> → Markup → Distrib = caution on longs
-> → Distrib → Markdown = potential short context
-> → Markdown → Accum = cycle reset
+> → TD → IGN = exhaustion confirmed, breakout begins
+> → IGN → WRN = conviction fading, weakness appearing
+> → WRN → CAP = exhaustion building, volume spikes
+> → CAP → BDN = structure breaking
+> → BDN → TD = new cycle exhaustion
 >
-> Pentarch identifies these shifts.
+> Pentarch maps all 5 phases in real-time.
 >
 > 🔗 Link in bio
 
@@ -35394,9 +35392,9 @@ Each category:
 **Copy:**
 > Watch Pentarch identify a complete market cycle.
 >
-> Accumulation → Markup → Distribution → Markdown
+> TD → IGN → WRN → CAP → BDN
 >
-> Each phase labeled in real-time.
+> All 5 phases labeled in real-time.
 >
 > The Sovereign sees the full breath.
 >
@@ -35413,55 +35411,47 @@ Each category:
 **Caption:**
 > 🔄 PENTARCH — FULL CYCLE WALKTHROUGH
 >
-> One complete market breath.
+> One complete market breath in 5 phases.
 >
 > THE CYCLE:
 >
-> 📥 PHASE 1: ACCUMULATION
-> → Range-bound price action
-> → Pentarch signals accumulation
-> → Smart money building position
-> → Duration: Variable
+> 🟢 PHASE 1: TD (TOUCHDOWN)
+> Early-cycle reversal on selling exhaustion
 >
-> 📈 PHASE 2: MARKUP
-> → Trend begins
-> → Pentarch shifts to markup
-> → Price advances
-> → Best phase for trend following
+> 🔵 PHASE 2: IGN (IGNITION)
+> Breakout confirmation with conviction
 >
-> 📤 PHASE 3: DISTRIBUTION
-> → Price stalls at highs
-> → Pentarch signals distribution
-> → Smart money selling
-> → Caution on longs
+> 🟡 PHASE 3: WRN (WARNING)
+> Early weakness in uptrends
 >
-> 📉 PHASE 4: MARKDOWN
-> → Trend down begins
-> → Pentarch confirms markdown
-> → Price declines
-> → Cycle prepares to reset
+> 🟠 PHASE 4: CAP (CLIMAX)
+> Late-cycle exhaustion with volume spikes
+>
+> 🔴 PHASE 5: BDN (BREAKDOWN)
+> Bearish structure break
 >
 > THE VALUE:
-> → Know where you are
-> → Adjust strategy to phase
-> → Don't fight the cycle
+> → Pentarch maps each phase in real-time
+> → See where you are in the cycle
+> → Observe the structure
 >
 > The Sovereign reads the breath.
 >
 > 🔗 Link in bio
 
-**Image:** 1080x1080 — Chart showing complete cycle with Pentarch phases labeled at each stage
+**Image:** 1080x1080 — Chart showing complete cycle with Pentarch 5 phases labeled at each stage
 
-**Hashtags:** #Pentarch #MarketCycle #SignalPilot #CycleAnalysis #TradingTools #TheSovereign #FullCycle #TradingView #CryptoTrading #ForexTrading #EliteSeven #CyclePhases #ChartAnalysis #TradingStrategy #AccumulationMarkup #DistributionMarkdown #CycleTrading #IndicatorSuite #CompleteBreath #MarketRhythm
+**Hashtags:** #Pentarch #MarketCycle #SignalPilot #CycleAnalysis #TradingTools #TheSovereign #FullCycle #TradingView #CryptoTrading #ForexTrading #EliteSeven #CyclePhases #ChartAnalysis #TradingStrategy #TD #IGN #WRN #CAP #BDN #CycleTrading #IndicatorSuite #CompleteBreath #MarketRhythm
 
 **Carousel Slides:**
-1. "PENTARCH FULL CYCLE" — Title with cycle visual
-2. "ACCUMULATION" — Phase 1 explained
-3. "MARKUP" — Phase 2 explained
-4. "DISTRIBUTION" — Phase 3 explained
-5. "MARKDOWN" — Phase 4 explained
-6. "THE VALUE" — Know where you are
-7. "THE SOVEREIGN" — CTA
+1. "PENTARCH FULL CYCLE" — Title with 5-phase cycle visual
+2. "TD (TOUCHDOWN)" — Phase 1 explained
+3. "IGN (IGNITION)" — Phase 2 explained
+4. "WRN (WARNING)" — Phase 3 explained
+5. "CAP (CLIMAX)" — Phase 4 explained
+6. "BDN (BREAKDOWN)" — Phase 5 explained
+7. "THE VALUE" — Know where you are in the 5-phase cycle
+8. "THE SOVEREIGN" — CTA
 
 ---
 
@@ -35475,7 +35465,7 @@ Each category:
 1. **Complete Cycle Chart:**
    - Full market cycle visible
    - Pentarch labels at each phase
-   - Accumulation → Markup → Distribution → Markdown
+   - TD → IGN → WRN → CAP → BDN (5 phases)
    - Clear phase transitions
 
 2. **Title:**
@@ -35484,8 +35474,8 @@ Each category:
    - Cycle icon
 
 3. **Phase Labels:**
-   - Four phases with icons
-   - Color-coded (green accumulation, blue markup, yellow distribution, red markdown)
+   - Five phases with icons
+   - Color-coded (green TD, blue IGN, yellow WRN, orange CAP, red BDN)
    - Brief description each
 
 4. **Sovereign Character:**
