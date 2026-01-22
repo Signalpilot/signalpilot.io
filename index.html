@@ -631,8 +631,9 @@
       }
 
       /* Header needs high z-index for dropdown menus but FULLY transparent bg */
+      /* EXCEPTION: .shiny-cta needs its gradient background for the animated border */
       header,
-      header *,
+      header *:not(.shiny-cta),
       header .container,
       header .container.nav,
       header .nav-backdrop,
@@ -641,10 +642,16 @@
       header .nav-spacer,
       header .menu-toggle,
       header .lang-dropdown,
-      header .btn {
+      header .btn:not(.shiny-cta) {
         background: none !important;
         background-color: transparent !important;
         background-image: none !important;
+      }
+      /* Restore shiny-cta background in header for animated border */
+      header .shiny-cta {
+        background: linear-gradient(#0a0a0f,#0a0a0f) padding-box,
+                    conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
+                      transparent 0%,#1e3a8a 5%,var(--gradient-shine) 15%,#1e3a8a 30%,transparent 40%,transparent 100%) border-box !important;
       }
 
       header {
@@ -2055,7 +2062,7 @@
     nav[aria-label="Main"] ul li:nth-child(4){animation:fadeInUp 0.4s ease 0.4s forwards;opacity:0}
     nav[aria-label="Main"] ul li:nth-child(5){animation:fadeInUp 0.4s ease 0.45s forwards;opacity:0}
     .lang-dropdown,.cta-header:not(.shiny-cta){animation:fadeInUp 0.4s ease 0.5s forwards;opacity:0}
-    .shiny-cta.cta-header{animation:fadeInUp 0.4s ease 0.5s forwards, shiny-spin 2.5s linear infinite;opacity:0}
+    /* Let .shiny-cta.cta-header use the default shiny-cta animations without override */
     .menu-toggle{animation:fadeInUp 0.4s ease 0.5s forwards;opacity:0}
 
     /* Allow brand to shrink slightly on very constrained screens with translations */
