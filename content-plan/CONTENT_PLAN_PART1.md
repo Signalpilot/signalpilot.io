@@ -468,7 +468,7 @@ Grab it: signalpilot.io/free
 
 ### Slide Structure:
 1. **Hook:** "MARKETS MOVE IN CYCLES" / "1929. 2008. 2021."
-2. **Overview:** 4-phase cycle diagram
+2. **Overview:** Wyckoff's 4-phase cycle diagram (Note: Pentarch refines to 5 phases)
 3. **Accumulation:** Smart money buys despair
 4. **Markup:** The trend phase
 5. **Distribution:** Smart money exits hype
@@ -504,6 +504,9 @@ Retail holds bags
 
 Understanding cycles = understanding markets.
 
+💡 Classic Wyckoff describes 4 phases.
+Pentarch maps them into 5 precise phases: TD→IGN→WRN→CAP→BDN
+
 🎯 Free Market Cycle Quick Reference PDF in bio
 
 Link in bio → signalpilot.io/free
@@ -514,9 +517,11 @@ Link in bio → signalpilot.io/free
 ## CANVA CREATION GUIDE
 
 ### Key Visual:
-- Cycle diagram with 4 phases in circular arrangement
+- Wyckoff cycle diagram with 4 phases in circular arrangement
+- Note: "Wyckoff's Classic 4 Phases" as label
 - Historical chart overlay showing real cycle
 - Color code: Blue (Accum), Green (Markup), Yellow (Distrib), Red (Decline)
+- Optional: Small callout "Pentarch refines this into 5 phases →"
 
 ---
 
