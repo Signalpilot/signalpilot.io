@@ -321,7 +321,7 @@ This one lesson changes everything.
 
 Full breakdown: Why support fails, how stops get hunted, how to trade with institutional flow.
 
-Free at signalpilot.io/education
+Free at education.signalpilot.io
 
 #trading #liquidity #smartmoney
 ```
@@ -793,7 +793,7 @@ The candle tells you WHERE. Delta tells you WHO.
 
 Including delta analysis, absorption patterns, and why most volume analysis is incomplete.
 
-Free at signalpilot.io/education
+Free at education.signalpilot.io
 
 #trading #volume #orderflow
 ```
@@ -2056,7 +2056,7 @@ Sellers quietly filling while price ticks up.
 ```
 The candle lies. Delta tells the truth.
 
-Full lesson: signalpilot.io/education
+Full lesson: education.signalpilot.io
 
 #delta #orderflow #trading
 ```
@@ -17192,7 +17192,7 @@ Start learning in bio 🔗
    - Advanced: Purple border (#8b5cf6), "27 LESSONS"
    - Professional: Gold border (#c9a962), "8 LESSONS"
 6. **Topics List:** Small text below in Inter, 18pt, #a0a0a0
-7. **Bottom CTA:** "signalpilot.io/education" in Inter, 24pt, #4a90d9
+7. **Bottom CTA:** "education.signalpilot.io" in Inter, 24pt, #4a90d9
 8. **Export:** PNG, high quality
 
 ### Carousel Slides
