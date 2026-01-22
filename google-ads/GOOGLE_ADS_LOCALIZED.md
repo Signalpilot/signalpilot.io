@@ -78,48 +78,105 @@
 "trend dönüş sinyali"
 ```
 
-## Headlines (Turkish - 30 chars max)
+## RSA 1: TradingView Göstergeleri (General Indicators)
 
+**Headlines (15):**
 ```
-1. 7 Yeniden Boyamayan Gösterge  (29 chars)
-2. TradingView Döngü Tespiti     (26 chars)
-3. Piyasa Döngülerini Görün      (25 chars)
-4. Sıfır Repaint Garantisi       (23 chars)
-5. 7 Gün Ücretsiz Deneyin        (24 chars)
-6. Pentarch Döngü Sistemi        (23 chars)
-7. Sinyal Kovalamayı Bırakın     (26 chars)
-8. Ciddi Yatırımcılar İçin       (24 chars)
-9. 7 Gösterge Dahil              (17 chars)
-10. Tüm Piyasalarda Çalışır      (25 chars)
-11. Denetlenmiş Göstergeler      (24 chars)
-12. Bugün Ücretsiz Başlayın      (24 chars)
-13. 82 Ücretsiz Ders             (17 chars)
-14. 10.000+ Yatırımcı Güveniyor  (28 chars)
-15. Hemen Deneyin                (13 chars)
-```
-
-## Descriptions (Turkish - 90 chars max)
-
-```
-1. 7 premium TradingView göstergesi. Yeniden boyamama garantisi. 7 gün ücretsiz deneyin. (86 chars)
-
-2. Pentarch tam piyasa döngülerini haritalandırır. TD→IGN→WRN→CAP→BDN. Ücretsiz deneyin. (87 chars)
-
-3. Gösterge yığınlamayı bırakın. Döngü, hacim, seviyeleri haritalayan tek sistem. Ücretsiz. (90 chars)
-
-4. Ciddi yatırımcılar için. Bir kez öğrenin, sonsuza kadar kullanın. 82 ücretsiz ders dahil. (91 - trim)
-   → Ciddi yatırımcılar için. Bir kez öğrenin, sonsuza kadar kullanın. 82 ücretsiz ders. (86 chars)
-
-5. Hisse, kripto, forex, emtiada çalışır. OHLC + hacim verisi olan her yerde. 7 gün ücretsiz. (91 - trim)
-   → Hisse, kripto, forex, emtiada çalışır. OHLC + hacim verisi olan her yerde. Ücretsiz. (87 chars)
-
-6. Aylık $99 | Yıllık $699 (%41 tasarruf) | Ömür boyu $1.799. 7 gün para iade garantisi. (87 chars)
+1. 7 Premium TradingView Gösterge  (29 chars)
+2. Profesyonel Gösterge Paketi     (27 chars)
+3. En İyi TradingView Göstergeleri (30 chars)
+4. 7 Gösterge Tek Pakette          (23 chars)
+5. 7 Gün Ücretsiz Deneyin          (24 chars)
+6. Tüm Piyasalarda Çalışır         (25 chars)
+7. Ciddi Yatırımcılar İçin         (24 chars)
+8. Premium Gösterge Seti           (21 chars)
+9. TradingView İçin Tasarlandı     (27 chars)
+10. 82 Ücretsiz Ders Dahil         (23 chars)
+11. Bugün Ücretsiz Başlayın        (24 chars)
+12. 10.000+ Yatırımcı Güveniyor    (28 chars)
+13. Hemen Deneyin                  (13 chars)
+14. Ayda $99'dan Başlayan          (22 chars)
+15. Ömür Boyu Erişim Seçeneği      (26 chars)
 ```
 
-## RSA (Turkish)
+**Descriptions (4):**
+```
+1. 7 premium TradingView göstergesi. Döngü, hacim, seviye analizi tek pakette. 7 gün ücretsiz. (90 chars)
+2. Gösterge yığınlamayı bırakın. Döngü, hacim, seviyeleri haritalayan tek sistem. Ücretsiz. (90 chars)
+3. Ciddi yatırımcılar için. Bir kez öğrenin, sonsuza kadar kullanın. 82 ücretsiz ders. (86 chars)
+4. Hisse, kripto, forex, emtiada çalışır. OHLC + hacim verisi olan her yerde. Ücretsiz. (87 chars)
+```
 
 **Final URL:** `https://signalpilot.io/tr/`
 **Display Path:** signalpilot.io / tr / göstergeler
+
+---
+
+## RSA 2: Yeniden Boyamayan (Non-Repainting Focus)
+
+**Headlines (15):**
+```
+1. Yeniden Boyamayan Göstergeler   (29 chars)
+2. Sıfır Repaint Garantisi         (23 chars)
+3. %100 Denetlenmiş Göstergeler    (28 chars)
+4. Repaint Yapmayan İndikatör      (28 chars)
+5. Güvenilir Sinyal Göstergeleri   (29 chars)
+6. Sinyal Değiştirmeyen Gösterge   (29 chars)
+7. Dürüst Trading Göstergeleri     (28 chars)
+8. Gerçek Sinyaller, Sıfır Repaint (30 chars)
+9. 7 Gün Ücretsiz Deneyin          (24 chars)
+10. Canlı Test Edin                (15 chars)
+11. Satın Almadan Deneyin          (23 chars)
+12. 10.000+ Yatırımcı Güveniyor    (28 chars)
+13. $100 Repaint Ödülü             (19 chars)
+14. Bağımsız Denetimli             (19 chars)
+15. Aldanmayı Bırakın              (18 chars)
+```
+
+**Descriptions (4):**
+```
+1. %100 yeniden boyamayan, bağımsız denetimli. Repaint kanıtlarsanız $100 ödül. Ücretsiz deneyin. (90 chars)
+2. Repaint yapan göstergelerden bıktınız mı? Signal Pilot denetlenmiş ve kanıtlanmış. Deneyin. (90 chars)
+3. 7 gerçekten çalışan TradingView göstergesi. Yeniden boyamama garantili. 7 gün ücretsiz. (88 chars)
+4. 10.000+ yatırımcı Signal Pilot kullanıyor. TradingView'da yayınlandı. Ücretsiz deneyin. (88 chars)
+```
+
+**Final URL:** `https://signalpilot.io/tr/#pricing`
+**Display Path:** signalpilot.io / tr / repaint-yok
+
+---
+
+## RSA 3: Döngü Tespiti (Cycle Detection Focus)
+
+**Headlines (15):**
+```
+1. Piyasa Döngüsü Göstergesi       (25 chars)
+2. Pentarch Döngü Sistemi          (23 chars)
+3. 5 Fazlı Dönüş Haritası          (23 chars)
+4. TD→IGN→WRN→CAP→BDN              (21 chars)
+5. Tam Döngüleri Görün             (20 chars)
+6. Piyasa Dönüşlerini Haritalayın  (30 chars)
+7. Döngü Fazı Göstergesi           (22 chars)
+8. Nerede Olduğunuzu Bilin         (24 chars)
+9. Tam Döngü Haritalaması          (23 chars)
+10. TradingView Döngü Tespiti      (26 chars)
+11. 7 Gün Ücretsiz Deneyin         (24 chars)
+12. Yeniden Boyamama Garantisi     (27 chars)
+13. 10.000+ Yatırımcı Kullanıyor   (28 chars)
+14. Pentarch'ı Ücretsiz Deneyin    (27 chars)
+15. Sinyal Kovalamayı Bırakın      (26 chars)
+```
+
+**Descriptions (4):**
+```
+1. Pentarch tam piyasa döngülerini haritalandırır. TD→IGN→WRN→CAP→BDN. Ücretsiz deneyin. (87 chars)
+2. Aşırı alım/satım yerine hassas 5 fazlı döngü konumlandırması. 7 gün ücretsiz deneyin. (87 chars)
+3. Gerçekten çalışan döngü tespiti. Denetlenmiş yeniden boyamayan. 10.000+ yatırımcı. (84 chars)
+4. Piyasa fazlarını tahmin etmeyi bırakın. Pentarch tam döngü konumunu gösterir. Deneyin. (88 chars)
+```
+
+**Final URL:** `https://signalpilot.io/tr/#indicators`
+**Display Path:** signalpilot.io / tr / pentarch
 
 ---
 
@@ -186,48 +243,105 @@
 "reversão de tendência indicador"
 ```
 
-## Headlines (Portuguese - 30 chars max)
+## RSA 1: Indicadores TradingView (General Indicators)
 
+**Headlines (15):**
 ```
-1. 7 Indicadores Sem Repintura   (28 chars)
-2. Detecção de Ciclos Trading    (27 chars)
-3. Veja Ciclos Completos         (22 chars)
-4. Garantia Zero Repintura       (24 chars)
-5. Teste Grátis 7 Dias           (20 chars)
-6. Sistema de Ciclos Pentarch    (26 chars)
-7. Pare de Perseguir Sinais      (25 chars)
-8. Para Traders Sérios           (20 chars)
-9. Todos 7 Indicadores           (20 chars)
-10. Funciona em Qualquer Mercado (29 chars)
-11. Indicadores Auditados        (22 chars)
-12. Comece Grátis Hoje           (18 chars)
-13. 82 Aulas Gratuitas           (20 chars)
-14. 10.000+ Traders Confiam      (24 chars)
-15. Experimente Agora            (18 chars)
-```
-
-## Descriptions (Portuguese - 90 chars max)
-
-```
-1. 7 indicadores premium TradingView. Garantia sem repintura. Teste grátis por 7 dias. (85 chars)
-
-2. Pentarch mapeia ciclos completos de mercado. TD→IGN→WRN→CAP→BDN. Experimente grátis. (86 chars)
-
-3. Pare de empilhar indicadores. Um sistema que mapeia ciclos, volume, níveis. Teste grátis. (91 - trim)
-   → Pare de empilhar indicadores. Um sistema que mapeia ciclos, volume, níveis. Grátis. (86 chars)
-
-4. Para traders sérios. Aprenda uma vez, use para sempre. 82 aulas gratuitas incluídas. (85 chars)
-
-5. Funciona em ações, cripto, forex, commodities. Qualquer dado OHLC + volume. Teste grátis. (91 - trim)
-   → Funciona em ações, cripto, forex, commodities. Qualquer dado OHLC + volume. Grátis. (86 chars)
-
-6. Mensal $99 | Anual $699 (41% off) | Vitalício $1.799. Garantia de 7 dias de reembolso. (88 chars)
+1. 7 Indicadores Premium Trading   (29 chars)
+2. Pacote Indicadores Profissional (30 chars)
+3. Melhores Indicadores TradingView(30 chars)
+4. 7 Indicadores em Um Pacote      (27 chars)
+5. Teste Grátis 7 Dias             (20 chars)
+6. Funciona em Qualquer Mercado    (29 chars)
+7. Para Traders Sérios             (20 chars)
+8. Conjunto Premium de Indicadores (30 chars)
+9. Feito para TradingView          (22 chars)
+10. 82 Aulas Grátis Incluídas      (27 chars)
+11. Comece Grátis Hoje             (18 chars)
+12. 10.000+ Traders Confiam        (24 chars)
+13. Experimente Agora              (18 chars)
+14. A Partir de $99/mês            (20 chars)
+15. Opção de Acesso Vitalício      (27 chars)
 ```
 
-## RSA (Portuguese)
+**Descriptions (4):**
+```
+1. 7 indicadores premium TradingView. Análise de ciclos, volume, níveis em um pacote. Grátis. (90 chars)
+2. Pare de empilhar indicadores. Um sistema que mapeia ciclos, volume, níveis. Teste grátis. (89 chars)
+3. Para traders sérios. Aprenda uma vez, use para sempre. 82 aulas gratuitas incluídas. (85 chars)
+4. Funciona em ações, cripto, forex, commodities. Qualquer dado OHLC + volume. Grátis. (86 chars)
+```
 
 **Final URL:** `https://signalpilot.io/pt/`
 **Display Path:** signalpilot.io / pt / indicadores
+
+---
+
+## RSA 2: Sem Repintura (Non-Repainting Focus)
+
+**Headlines (15):**
+```
+1. Indicadores Sem Repintura       (26 chars)
+2. Garantia Zero Repintura         (24 chars)
+3. 100% Indicadores Auditados      (26 chars)
+4. Indicador Que Não Repinta       (26 chars)
+5. Sinais Confiáveis de Verdade    (28 chars)
+6. Indicador Sem Mudar Sinal       (26 chars)
+7. Indicadores Honestos Trading    (28 chars)
+8. Sinais Reais, Zero Repintura    (28 chars)
+9. Teste Grátis 7 Dias             (20 chars)
+10. Teste Ao Vivo                  (14 chars)
+11. Experimente Antes de Comprar   (29 chars)
+12. 10.000+ Traders Confiam        (24 chars)
+13. $100 de Recompensa Se Repintar (30 chars)
+14. Auditoria Independente         (24 chars)
+15. Pare de Ser Enganado           (22 chars)
+```
+
+**Descriptions (4):**
+```
+1. 100% sem repintura, auditoria independente. $100 de recompensa se provar repintura. Grátis. (90 chars)
+2. Cansado de indicadores que repintam? Signal Pilot é auditado e comprovado. Experimente. (89 chars)
+3. 7 indicadores TradingView que realmente funcionam. Garantia sem repintura. 7 dias grátis. (89 chars)
+4. Junte-se a 10.000+ traders usando Signal Pilot. Publicado no TradingView. Teste grátis. (88 chars)
+```
+
+**Final URL:** `https://signalpilot.io/pt/#pricing`
+**Display Path:** signalpilot.io / pt / sem-repintura
+
+---
+
+## RSA 3: Detecção de Ciclos (Cycle Detection Focus)
+
+**Headlines (15):**
+```
+1. Indicador de Ciclo de Mercado   (28 chars)
+2. Sistema de Ciclos Pentarch      (26 chars)
+3. Mapeamento de 5 Fases           (22 chars)
+4. TD→IGN→WRN→CAP→BDN              (21 chars)
+5. Veja Ciclos Completos           (22 chars)
+6. Mapeie Reversões de Mercado     (28 chars)
+7. Indicador de Fase de Ciclo      (27 chars)
+8. Saiba Onde Você Está            (21 chars)
+9. Mapeamento Completo de Ciclos   (29 chars)
+10. Detecção de Ciclos TradingView (30 chars)
+11. Teste Grátis 7 Dias            (20 chars)
+12. Garantia Sem Repintura         (24 chars)
+13. 10.000+ Traders Usam           (21 chars)
+14. Experimente Pentarch Grátis    (28 chars)
+15. Pare de Perseguir Sinais       (25 chars)
+```
+
+**Descriptions (4):**
+```
+1. Pentarch mapeia ciclos completos de mercado. TD→IGN→WRN→CAP→BDN. Experimente grátis. (86 chars)
+2. Substitua sobrecompra/sobrevenda por posicionamento preciso de 5 fases. 7 dias grátis. (88 chars)
+3. Detecção de ciclos que realmente funciona. Auditado sem repintura. 10.000+ traders. (85 chars)
+4. Pare de adivinhar fases do mercado. Pentarch mostra posição exata do ciclo. Teste grátis. (90 chars)
+```
+
+**Final URL:** `https://signalpilot.io/pt/#indicators`
+**Display Path:** signalpilot.io / pt / pentarch
 
 ---
 
@@ -299,46 +413,105 @@
 "انعكاس الاتجاه مؤشر"
 ```
 
-## Headlines (Arabic - 30 chars max)
+## RSA 1: مؤشرات TradingView (General Indicators)
 
+**Headlines (15):**
 ```
-1. 7 مؤشرات بدون إعادة رسم       (25 chars)
-2. كشف دورات السوق              (17 chars)
-3. شاهد الدورات الكاملة          (21 chars)
-4. ضمان عدم إعادة الرسم          (22 chars)
-5. تجربة مجانية 7 أيام           (20 chars)
-6. نظام دورات Pentarch          (21 chars)
-7. توقف عن مطاردة الإشارات       (24 chars)
-8. للمتداولين الجادين            (19 chars)
-9. جميع المؤشرات السبعة          (21 chars)
-10. يعمل على أي سوق             (17 chars)
-11. مؤشرات مدققة                (14 chars)
-12. ابدأ مجاناً اليوم            (17 chars)
-13. 82 درساً مجانياً             (17 chars)
-14. +10,000 متداول يثقون        (20 chars)
-15. جرّب الآن                   (10 chars)
-```
-
-## Descriptions (Arabic - 90 chars max)
-
-```
-1. 7 مؤشرات TradingView احترافية. ضمان عدم إعادة الرسم. جرّب مجاناً لمدة 7 أيام. (75 chars)
-
-2. Pentarch يرسم خريطة دورات السوق الكاملة. TD→IGN→WRN→CAP→BDN. جرّب مجاناً. (73 chars)
-
-3. توقف عن تكديس المؤشرات. نظام واحد يرسم الدورات والحجم والمستويات. مجاني. (72 chars)
-
-4. للمتداولين الجادين. تعلّم مرة واحدة، استخدم للأبد. 82 درساً مجانياً. (67 chars)
-
-5. يعمل على الأسهم والعملات الرقمية والفوركس والسلع. بيانات OHLC + الحجم. (73 chars)
-
-6. شهري $99 | سنوي $699 (خصم 41%) | مدى الحياة $1,799. ضمان استرداد 7 أيام. (76 chars)
+1. 7 مؤشرات تداول احترافية         (24 chars)
+2. باقة مؤشرات احترافية            (22 chars)
+3. أفضل مؤشرات TradingView        (24 chars)
+4. 7 مؤشرات في باقة واحدة          (24 chars)
+5. تجربة مجانية 7 أيام             (20 chars)
+6. يعمل على أي سوق                (17 chars)
+7. للمتداولين الجادين              (19 chars)
+8. مجموعة مؤشرات بريميوم           (23 chars)
+9. مصمم لـ TradingView            (19 chars)
+10. 82 درساً مجانياً مشمولة        (24 chars)
+11. ابدأ مجاناً اليوم              (17 chars)
+12. +10,000 متداول يثقون           (20 chars)
+13. جرّب الآن                     (10 chars)
+14. بدءاً من $99/شهر              (17 chars)
+15. خيار الوصول مدى الحياة         (23 chars)
 ```
 
-## RSA (Arabic)
+**Descriptions (4):**
+```
+1. 7 مؤشرات TradingView احترافية. تحليل الدورات والحجم والمستويات في باقة واحدة. مجاني. (83 chars)
+2. توقف عن تكديس المؤشرات. نظام واحد يرسم الدورات والحجم والمستويات. مجاني. (72 chars)
+3. للمتداولين الجادين. تعلّم مرة واحدة، استخدم للأبد. 82 درساً مجانياً. (67 chars)
+4. يعمل على الأسهم والعملات الرقمية والفوركس والسلع. بيانات OHLC + الحجم. مجاني. (79 chars)
+```
 
 **Final URL:** `https://signalpilot.io/ar/`
 **Display Path:** signalpilot.io / ar / مؤشرات
+
+---
+
+## RSA 2: بدون إعادة رسم (Non-Repainting Focus)
+
+**Headlines (15):**
+```
+1. مؤشرات بدون إعادة رسم           (22 chars)
+2. ضمان عدم إعادة الرسم            (22 chars)
+3. مؤشرات مدققة 100%              (18 chars)
+4. مؤشر لا يعيد الرسم              (20 chars)
+5. إشارات موثوقة حقيقية            (21 chars)
+6. مؤشر لا يغير الإشارات           (23 chars)
+7. مؤشرات تداول صادقة              (20 chars)
+8. إشارات حقيقية، صفر إعادة رسم    (28 chars)
+9. تجربة مجانية 7 أيام             (20 chars)
+10. اختبر مباشرة                  (13 chars)
+11. جرّب قبل الشراء               (17 chars)
+12. +10,000 متداول يثقون          (20 chars)
+13. مكافأة $100 إذا أعاد الرسم     (26 chars)
+14. تدقيق مستقل                   (12 chars)
+15. توقف عن الانخداع              (18 chars)
+```
+
+**Descriptions (4):**
+```
+1. 100% بدون إعادة رسم، مدقق بشكل مستقل. مكافأة $100 إذا أثبت إعادة الرسم. مجاني. (77 chars)
+2. سئمت من المؤشرات التي تعيد الرسم؟ Signal Pilot مدقق ومثبت. جرّب مجاناً. (72 chars)
+3. 7 مؤشرات TradingView تعمل فعلاً. ضمان عدم إعادة الرسم. 7 أيام مجاناً. (69 chars)
+4. انضم لأكثر من 10,000 متداول يستخدمون Signal Pilot. منشور على TradingView. مجاني. (81 chars)
+```
+
+**Final URL:** `https://signalpilot.io/ar/#pricing`
+**Display Path:** signalpilot.io / ar / بدون-إعادة-رسم
+
+---
+
+## RSA 3: كشف الدورات (Cycle Detection Focus)
+
+**Headlines (15):**
+```
+1. مؤشر دورات السوق               (18 chars)
+2. نظام دورات Pentarch            (21 chars)
+3. خريطة انعكاس 5 مراحل            (22 chars)
+4. TD→IGN→WRN→CAP→BDN             (21 chars)
+5. شاهد الدورات الكاملة            (21 chars)
+6. ارسم خريطة انعكاسات السوق       (26 chars)
+7. مؤشر مرحلة الدورة              (19 chars)
+8. اعرف أين أنت                   (13 chars)
+9. خريطة دورات كاملة              (19 chars)
+10. كشف دورات TradingView         (23 chars)
+11. تجربة مجانية 7 أيام           (20 chars)
+12. ضمان عدم إعادة الرسم          (22 chars)
+13. +10,000 متداول يستخدمون       (23 chars)
+14. جرّب Pentarch مجاناً          (21 chars)
+15. توقف عن مطاردة الإشارات        (24 chars)
+```
+
+**Descriptions (4):**
+```
+1. Pentarch يرسم خريطة دورات السوق الكاملة. TD→IGN→WRN→CAP→BDN. جرّب مجاناً. (73 chars)
+2. استبدل ذروة الشراء/البيع بتحديد موقع دورة دقيق من 5 مراحل. 7 أيام مجاناً. (74 chars)
+3. كشف دورات يعمل فعلاً. مدقق بدون إعادة رسم. أكثر من 10,000 متداول. (65 chars)
+4. توقف عن تخمين مراحل السوق. Pentarch يعرض موقع الدورة بدقة. جرّب مجاناً. (73 chars)
+```
+
+**Final URL:** `https://signalpilot.io/ar/#indicators`
+**Display Path:** signalpilot.io / ar / pentarch
 
 **Note:** Arabic ads read right-to-left. Google Ads handles RTL automatically.
 
