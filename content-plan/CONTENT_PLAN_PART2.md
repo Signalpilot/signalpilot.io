@@ -1312,7 +1312,7 @@ Layer 6: Chronicle branding
 >
 > → Market cycle phases
 > → Know where you are in time
-> → IGN • TRD • DST • RNG • EXT
+> → TD • IGN • WRN • CAP • BDN
 
 **Slide 3 — Volume Oracle:**
 > 🔮 VOLUME ORACLE — The Prophet
@@ -1771,7 +1771,7 @@ Layer 6: Chronicle branding
 **Slide 4 — Filter Options:**
 > 🎛️ FILTER BY:
 >
-> ✦ Pentarch Phase (IGN, TRD, etc.)
+> ✦ Pentarch Phase (TD, IGN, WRN, CAP, BDN)
 > ✦ Volume Regime
 > ✦ Momentum State
 > ✦ Custom Combinations
