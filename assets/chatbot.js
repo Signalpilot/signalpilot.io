@@ -206,15 +206,13 @@ All signals finalize on candle close only. We audit every indicator for lookahea
 
 What you see in history is exactly what you would have seen live.`,
 
-      trial: `We don't have a traditional free trial, but we offer something better:
+      trial: `**Yes! 7-day free trial** ✅
 
-**7-day money-back guarantee** ✅
+No payment required upfront. Try all 7 indicators completely free for 7 days.
 
-Full refund within 7 days of your first payment, no questions asked.
+Just provide your TradingView username and you're in!
 
-You can test everything risk-free for two full weeks!
-
-[Try the demo →](#comparison-slider)`,
+[Start free trial →](#pricing)`,
 
       activation: `⚡ **Access: 1-8 hours** (usually under 2 hours)
 
@@ -377,14 +375,12 @@ I can answer quick questions, but for detailed information check our comprehensi
   // Special responses
   knowledgeBase.getstarted = `🚀 **Ready to get started?**
 
-1. [Choose your plan →](#pricing)
+1. [Start your free trial →](#pricing)
 2. Enter your TradingView username
-3. Complete payment via Gumroad
-4. Get access in 1-8 hours!
+3. Get access in 1-8 hours!
+4. Try free for 7 days - no payment required
 
-**7-day money-back guarantee** on all plans.
-
-[View pricing →](#pricing)`;
+[Start free trial →](#pricing)`;
 
   // ========================================
   // HELPER FUNCTIONS
