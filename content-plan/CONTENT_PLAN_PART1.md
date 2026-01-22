@@ -6556,7 +6556,7 @@ Free PDF guide in bio
 **Copy:**
 > One Bitcoin cycle. All five Pentarch signals.
 >
-> TD at the accumulation low. IGN as markup begins. WRN at the distribution warning. CAP at the climax peak. BDN as breakdown confirms.
+> TD signals early-cycle reversal. IGN confirms breakout with conviction. WRN warns of early weakness. CAP marks late-cycle exhaustion. BDN confirms bearish structure break.
 >
 > Historical observation, not prediction. Educational, not advice.
 
@@ -6573,20 +6573,20 @@ Free PDF guide in bio
 >
 > Here's what each signal historically indicated:
 >
-> 🟣 TD (TouchDown)
-> → Potential accumulation zone identified
+> 🟢 TD (TouchDown)
+> → Early-cycle reversal on selling exhaustion
 >
-> 🩵 IGN (Ignition)
-> → Momentum may be building
+> 🔵 IGN (Ignition)
+> → Breakout confirmation with conviction
 >
 > 🟡 WRN (Warning)
-> → Distribution may be beginning
+> → Early weakness in uptrends
 >
 > 🟠 CAP (Climax)
-> → Sentiment may be shifting, late cycle
+> → Late-cycle exhaustion with volume spikes
 >
 > 🔴 BDN (BreakDown)
-> → Structure break, cycle completing
+> → Bearish structure break
 >
 > The Sovereign observes the full cycle.
 >
@@ -7687,11 +7687,11 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 **Copy:**
 > Pentarch signal reference:
 >
-> 🟣 TD — TouchDown (Accumulation)
-> 🩵 IGN — Ignition (Markup)
-> 🟡 WRN — Warning (Distribution)
-> 🟠 CAP — Climax (Peak)
-> 🔴 BDN — BreakDown (Decline)
+> 🟢 TD — Early-cycle reversal on selling exhaustion
+> 🔵 IGN — Breakout confirmation with conviction
+> 🟡 WRN — Early weakness in uptrends
+> 🟠 CAP — Late-cycle exhaustion with volume spikes
+> 🔴 BDN — Bearish structure break
 >
 > The Sovereign speaks in phases, not predictions.
 
@@ -7706,25 +7706,20 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 **Caption:**
 > Pentarch Signal Reference Guide 👑
 >
-> 🟣 TD (TouchDown)
-> → Oversold, below Pilot Line
-> → Potential reversal from decline
+> 🟢 TD (TouchDown)
+> → Early-cycle reversal on selling exhaustion
 >
-> 🩵 IGN (Ignition)
-> → Momentum breakout
-> → Bullish structure shift
+> 🔵 IGN (Ignition)
+> → Breakout confirmation with conviction
 >
 > 🟡 WRN (Warning)
-> → Extended, momentum weakening
-> → Late cycle warning
+> → Early weakness in uptrends
 >
 > 🟠 CAP (Climax)
-> → Extreme extension, exhaustion
-> → Peak before reversal
+> → Late-cycle exhaustion with volume spikes
 >
 > 🔴 BDN (BreakDown)
-> → Structure break, bearish shift
-> → Cycle completion
+> → Bearish structure break
 >
 > Save this reference 📌
 >
@@ -9740,9 +9735,9 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 ### 𝕏 Twitter
 
 **Copy:**
-> TD (Trend Determination) — The first signal.
+> TD (Touchdown) — Early-cycle reversal on selling exhaustion.
 >
-> When Pentarch fires TD, it's observing potential trend establishment.
+> When Pentarch fires TD, selling exhaustion may be present.
 >
 > Not a buy signal. Not a sell signal.
 > An awareness signal.
@@ -9761,12 +9756,12 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 > Pentarch Deep Dive: TD Signal 🟢
 >
 > WHAT IS TD?
-> Trend Determination — Pentarch observing potential trend establishment
+> Touchdown — Early-cycle reversal on selling exhaustion
 >
 > WHEN IT FIRES:
-> ◾ Market may be establishing direction
-> ◾ Cycle phase potentially shifting
-> ◾ Attention warranted
+> ◾ Selling exhaustion may be present
+> ◾ Early-cycle reversal conditions detected
+> ◾ Potential base forming
 >
 > WHAT IT'S NOT:
 > ◾ Not a buy/sell signal
@@ -13330,7 +13325,7 @@ Save this. 🔖
 ```
 IGN (Ignition) — The spark signal.
 
-When Pentarch fires IGN, momentum may be building.
+When Pentarch fires IGN, breakout confirmation with conviction may be present.
 
 Not "buy now." Not "guaranteed move."
 
@@ -13346,12 +13341,12 @@ The Sovereign sees the spark. You decide if it becomes a fire.
 Pentarch Deep Dive: IGN Signal 🔵
 
 WHAT IS IGN?
-Ignition — Pentarch observing potential momentum building
+Ignition — Breakout confirmation with conviction
 
 WHEN IT FIRES:
-◾ Energy may be entering the market
-◾ Movement could be initiating
-◾ Early phase of potential trend
+◾ Breakout may be confirming
+◾ Conviction signals appearing
+◾ Bullish structure shift detected
 
 WHAT IT'S NOT:
 ◾ Not an entry signal
@@ -13391,7 +13386,7 @@ SLIDE 1 - Title:
 SLIDE 2 - What is IGN:
 1. Header: "WHAT IS IGN?"
 2. Blue dot visual representing IGN
-3. Text: "Ignition — Pentarch observing potential momentum building"
+3. Text: "Ignition — Breakout confirmation with conviction"
 4. Bullet points:
    - "Energy entering market"
    - "Movement initiating"
@@ -17458,14 +17453,14 @@ Save this. 🔖
 
 **Copy:**
 ```
-WRN (Warning) — The Sovereign observes distribution phase.
+WRN (Warning) — Early weakness in uptrends.
 
 When WRN fires (yellow, above candle):
-◾ Extended price action detected
-◾ Momentum may be weakening
-◾ Late cycle warning observed
+◾ Early weakness detected
+◾ Uptrend showing signs of strain
+◾ Cycle phase shifting
 
-Not an instant sell signal. An observation that the cycle is maturing.
+Not an instant sell signal. An observation of early weakness.
 ```
 
 **Hashtags:** #Pentarch #WRNSignal #SignalPilot #TradingIndicators #TheSovereign
@@ -17481,12 +17476,12 @@ Not an instant sell signal. An observation that the cycle is maturing.
 Pentarch Deep Dive: WRN Signal 🟡
 
 WHAT IS WRN?
-Warning — Pentarch observing potential distribution phase
+Warning — Early weakness in uptrends
 
 WHEN IT FIRES:
-◾ Price extended from Pilot Line
-◾ Momentum potentially weakening
-◾ Late cycle conditions detected
+◾ Early weakness detected in uptrend
+◾ Momentum potentially shifting
+◾ Cycle showing signs of strain
 
 WHAT IT'S NOT:
 ◾ Not an instant sell signal
@@ -17502,7 +17497,7 @@ Context determines meaning.
 
 Full docs in bio 🔗
 
-#Pentarch #WRNSignal #WarningSignal #TheSovereign #SignalPilot #TradingIndicators #TradingView #DistributionSignal #TradingEducation #SignalInterpretation #LearnTrading #IndicatorDeepDive #LateCycle #ProperUsage #ContextMatters
+#Pentarch #WRNSignal #WarningSignal #TheSovereign #SignalPilot #TradingIndicators #TradingView #TradingEducation #SignalInterpretation #LearnTrading #IndicatorDeepDive #LateCycle #ProperUsage #ContextMatters
 ```
 
 **Slide Breakdown:**
@@ -20798,24 +20793,19 @@ THE SOVEREIGN'S CYCLE 👑
 THE ETERNAL 5-PHASE WHEEL:
 
 🟢 TD (TOUCHDOWN)
-Cycle begins
-Reversal potential
+Early-cycle reversal on selling exhaustion
 
 🔵 IGN (IGNITION)
-Momentum confirmed
-Entry zone
+Breakout confirmation with conviction
 
 🟡 WRN (WARNING)
-Trend maturing
-Manage risk
+Early weakness in uptrends
 
 🟠 CAP (CLIMAX)
-Exhaustion phase
-Exit preparation
+Late-cycle exhaustion with volume spikes
 
 🔴 BDN (BREAKDOWN)
-Reversal begins
-Cycle resets
+Bearish structure break
 
 Then it begins again.
 
@@ -21525,14 +21515,14 @@ Save this. 🔖
 
 **Copy:**
 ```
-CAP (Climax) — The Sovereign observes extreme extension.
+CAP (Climax) — Late-cycle exhaustion with volume spikes.
 
 When CAP fires (orange, above candle):
-◾ Extreme price extension detected
-◾ Exhaustion conditions present
-◾ Peak before potential reversal
+◾ Late-cycle exhaustion detected
+◾ Volume spikes appearing
+◾ Cycle nearing potential completion
 
-Not an instant sell signal. An observation of climax conditions.
+Not an instant sell signal. An observation of late-cycle conditions.
 ```
 
 **Hashtags:** #Pentarch #CAPSignal #SignalPilot #TradingIndicators #TheSovereign
@@ -21548,12 +21538,12 @@ Not an instant sell signal. An observation of climax conditions.
 Pentarch Deep Dive: CAP Signal 🟠
 
 WHAT IS CAP?
-Climax — Pentarch observing extreme exhaustion conditions
+Climax — Late-cycle exhaustion with volume spikes
 
 WHEN IT FIRES:
-◾ Price extremely extended from Pilot Line
-◾ Exhaustion conditions detected
-◾ Peak before potential reversal
+◾ Late-cycle exhaustion detected
+◾ Volume spikes appearing
+◾ Cycle nearing potential completion
 
 WHAT IT'S NOT:
 ◾ Not an instant sell signal
@@ -28524,11 +28514,11 @@ Full setup guide in bio 🔗
 **Copy:**
 > Pentarch's five cycle signals:
 >
-> TD - Touchdown (Accumulation)
-> IGN - Ignition (Markup)
-> WRN - Warning (Distribution)
-> CAP - Climax (Climax)
-> BDN - Breakdown (Decline)
+> TD — Early-cycle reversal on selling exhaustion
+> IGN — Breakout confirmation with conviction
+> WRN — Early weakness in uptrends
+> CAP — Late-cycle exhaustion with volume spikes
+> BDN — Bearish structure break
 >
 > Each marks a different phase of the market cycle. Understanding them adds context.
 >
@@ -28548,32 +28538,27 @@ Full setup guide in bio 🔗
 
 **Slide 2 — TD Signal:**
 "TD - TOUCHDOWN"
-- Accumulation phase
-- Selling exhausted, potential base
+- Early-cycle reversal on selling exhaustion
 - Chart example with TD marked
 
 **Slide 3 — IGN Signal:**
 "IGN - IGNITION"
-- Markup phase
-- Momentum beginning, trend starting
+- Breakout confirmation with conviction
 - Chart example with IGN marked
 
 **Slide 4 — WRN Signal:**
 "WRN - WARNING"
-- Distribution phase
-- Smart money potentially exiting
+- Early weakness in uptrends
 - Chart example with WRN marked
 
 **Slide 5 — CAP Signal:**
 "CAP - CLIMAX"
-- Climax phase
-- Trend overextended, potential reversal
+- Late-cycle exhaustion with volume spikes
 - Chart example with CAP marked
 
 **Slide 6 — BDN Signal:**
 "BDN - BREAKDOWN"
-- Decline phase
-- Breakdown confirmed, downtrend
+- Bearish structure break
 - Chart example with BDN marked
 
 **Slide 7 — How to Use:**
