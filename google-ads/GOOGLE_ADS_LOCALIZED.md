@@ -135,7 +135,7 @@
 
 **Descriptions (4):**
 ```
-1. %100 yeniden boyamayan, bağımsız denetimli. Repaint kanıtlarsanız $100 ödül. Ücretsiz deneyin. (90 chars)
+1. %100 yeniden boyamayan, bağımsız denetimli. Repaint kanıtlarsanız $100 ödül. Deneyin. (87 chars)
 2. Repaint yapan göstergelerden bıktınız mı? Signal Pilot denetlenmiş ve kanıtlanmış. Deneyin. (90 chars)
 3. 7 gerçekten çalışan TradingView göstergesi. Yeniden boyamama garantili. 7 gün ücretsiz. (88 chars)
 4. 10.000+ yatırımcı Signal Pilot kullanıyor. TradingView'da yayınlandı. Ücretsiz deneyin. (88 chars)
