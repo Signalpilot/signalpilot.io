@@ -25,8 +25,8 @@
   const knowledgeBase = {
     greetings: [
       "Hey! 👋 I'm here to help you understand Signal Pilot. What would you like to know?",
-      "Hi there! Ask me about pricing, our indicators, or how to get started.",
-      "Hello! I can help you with product info, pricing, or answer any questions."
+      "Hi there! Ask me about our 7-day free trial, pricing, or indicators.",
+      "Hello! Want to try our indicators free for 7 days? Ask me how to get started!"
     ],
 
     pricing: {
@@ -36,24 +36,24 @@
 📅 **Yearly** - $699/year (save $489)
 ♾️ **Lifetime** - $1,799-$3,499
 
-All plans include the same 7 indicators. The only difference is billing frequency and support level.
+All plans include the same 7 indicators. Start with a **7-day free trial** - no payment required!
 
-[View pricing →](#pricing)`,
+[Start free trial →](#pricing)`,
 
       monthly: `**Monthly Plan - $99/month**
 
-Flexible month-to-month billing. Cancel anytime.
+Flexible month-to-month billing. Cancel anytime. **Start with 7-day free trial!**
 
 **Includes:**
 • All 7 elite indicators
 • Email support (48h response)
 • All future updates
 
-[Get started →](#pricing)`,
+[Start free trial →](#pricing)`,
 
       yearly: `**Yearly Plan - $699/year**
 
-Save $489 vs monthly (41% off) ⭐ **Most Popular**
+Save $489 vs monthly (41% off) ⭐ **Most Popular** - Start with 7-day free trial!
 
 **Includes:**
 • All 7 elite indicators
@@ -62,11 +62,11 @@ Save $489 vs monthly (41% off) ⭐ **Most Popular**
 • Advanced training resources
 • Beta access
 
-[Get started →](#pricing)`,
+[Start free trial →](#pricing)`,
 
       lifetime: `**Lifetime Plan - $1,799-$3,499**
 
-One-time payment for lifetime access 🏆
+One-time payment for lifetime access 🏆 Start with 7-day free trial!
 
 **Includes everything, forever:**
 • All 7 indicators + all future releases
@@ -78,7 +78,7 @@ One-time payment for lifetime access 🏆
 
 Dynamic pricing: price increases as we sell slots (only 350 total).
 
-[Get started →](#pricing)`
+[Start free trial →](#pricing)`
     },
 
     products: {
@@ -264,7 +264,7 @@ Trading involves substantial risk of loss. You are solely responsible for your t
 
       refund: `💰 **7-day money-back guarantee**
 
-Full refund within 7 days of your first payment, no questions asked.
+After your free trial, if you pay and change your mind - full refund within 7 days, no questions asked.
 
 After 7 days, you can cancel anytime—no penalty.
 
@@ -483,8 +483,8 @@ Email: support@signalpilot.io`;
       <div class="sp-chatbot-messages" id="sp-chatbot-messages"></div>
 
       <div class="sp-chatbot-quick-actions" id="sp-chatbot-quick-actions">
+        <button class="sp-chatbot-quick-btn" data-query="Do you have a free trial?">🎁 Free Trial</button>
         <button class="sp-chatbot-quick-btn" data-query="How much does it cost?">💰 Pricing</button>
-        <button class="sp-chatbot-quick-btn" data-query="Show me the demo">🎮 Demo</button>
         <button class="sp-chatbot-quick-btn" data-query="What is Pentarch?">⭐ Pentarch</button>
         <button class="sp-chatbot-quick-btn" data-query="Does it repaint?">🚫 Non-Repainting</button>
       </div>
