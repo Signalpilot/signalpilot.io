@@ -34,7 +34,7 @@
 
 💳 **Monthly** - $99/month
 📅 **Yearly** - $699/year (save $489)
-♾️ **Lifetime** - $1,799-$3,499
+♾️ **Lifetime** - $1,799 (Founding 100 Edition)
 
 All plans include the same 7 indicators. Start with a **7-day free trial** - no payment required!
 
@@ -64,7 +64,7 @@ Save $489 vs monthly (41% off) ⭐ **Most Popular** - Start with 7-day free tria
 
 [Start free trial →](#pricing)`,
 
-      lifetime: `**Lifetime Plan - $1,799-$3,499**
+      lifetime: `**Lifetime Plan - $1,799 (Founding 100 Edition)**
 
 One-time payment for lifetime access 🏆 Start with 7-day free trial!
 
@@ -72,11 +72,10 @@ One-time payment for lifetime access 🏆 Start with 7-day free trial!
 • All 7 indicators + all future releases
 • Private Discord community
 • Founding member badge
-• Feature voting rights
 • 200+ preset configurations
 • Priority support
 
-Dynamic pricing: price increases as we sell slots (only 350 total).
+Limited to 100 founding members only.
 
 [Start free trial →](#pricing)`
     },
