@@ -25,8 +25,8 @@
   const knowledgeBase = {
     greetings: [
       "Hey! 👋 I'm here to help you understand Signal Pilot. What would you like to know?",
-      "Hi there! Ask me about pricing, our indicators, or how to get started.",
-      "Hello! I can help you with product info, pricing, or answer any questions."
+      "Hi there! Ask me about our 7-day free trial, pricing, or indicators.",
+      "Hello! Want to try our indicators free for 7 days? Ask me how to get started!"
     ],
 
     pricing: {
@@ -34,26 +34,26 @@
 
 💳 **Monthly** - $99/month
 📅 **Yearly** - $699/year (save $489)
-♾️ **Lifetime** - $1,799-$3,499
+♾️ **Lifetime** - $1,799 (Founding 100 Edition)
 
-All plans include the same 7 indicators. The only difference is billing frequency and support level.
+All plans include the same 7 indicators. Start with a **7-day free trial** - no payment required!
 
-[View pricing →](#pricing)`,
+[Start free trial →](#pricing)`,
 
       monthly: `**Monthly Plan - $99/month**
 
-Flexible month-to-month billing. Cancel anytime.
+Flexible month-to-month billing. Cancel anytime. **Start with 7-day free trial!**
 
 **Includes:**
 • All 7 elite indicators
 • Email support (48h response)
 • All future updates
 
-[Get started →](#pricing)`,
+[Start free trial →](#pricing)`,
 
       yearly: `**Yearly Plan - $699/year**
 
-Save $489 vs monthly (41% off) ⭐ **Most Popular**
+Save $489 vs monthly (41% off) ⭐ **Most Popular** - Start with 7-day free trial!
 
 **Includes:**
 • All 7 elite indicators
@@ -62,23 +62,22 @@ Save $489 vs monthly (41% off) ⭐ **Most Popular**
 • Advanced training resources
 • Beta access
 
-[Get started →](#pricing)`,
+[Start free trial →](#pricing)`,
 
-      lifetime: `**Lifetime Plan - $1,799-$3,499**
+      lifetime: `**Lifetime Plan - $1,799 (Founding 100 Edition)**
 
-One-time payment for lifetime access 🏆
+One-time payment for lifetime access 🏆 Start with 7-day free trial!
 
 **Includes everything, forever:**
 • All 7 indicators + all future releases
 • Private Discord community
 • Founding member badge
-• Feature voting rights
 • 200+ preset configurations
 • Priority support
 
-Dynamic pricing: price increases as we sell slots (only 350 total).
+Limited to 100 founding members only.
 
-[Get started →](#pricing)`
+[Start free trial →](#pricing)`
     },
 
     products: {
@@ -206,15 +205,13 @@ All signals finalize on candle close only. We audit every indicator for lookahea
 
 What you see in history is exactly what you would have seen live.`,
 
-      trial: `We don't have a traditional free trial, but we offer something better:
+      trial: `**Yes! 7-day free trial** ✅
 
-**7-day money-back guarantee** ✅
+No payment required upfront. Try all 7 indicators completely free for 7 days.
 
-Full refund within 7 days of your first payment, no questions asked.
+Just provide your TradingView username and you're in!
 
-You can test everything risk-free for two full weeks!
-
-[Try the demo →](#comparison-slider)`,
+[Start free trial →](#pricing)`,
 
       activation: `⚡ **Access: 1-8 hours** (usually under 2 hours)
 
@@ -266,7 +263,7 @@ Trading involves substantial risk of loss. You are solely responsible for your t
 
       refund: `💰 **7-day money-back guarantee**
 
-Full refund within 7 days of your first payment, no questions asked.
+After your free trial, if you pay and change your mind - full refund within 7 days, no questions asked.
 
 After 7 days, you can cancel anytime—no penalty.
 
@@ -377,14 +374,12 @@ I can answer quick questions, but for detailed information check our comprehensi
   // Special responses
   knowledgeBase.getstarted = `🚀 **Ready to get started?**
 
-1. [Choose your plan →](#pricing)
+1. [Start your free trial →](#pricing)
 2. Enter your TradingView username
-3. Complete payment via Gumroad
-4. Get access in 1-8 hours!
+3. Get access in 1-8 hours!
+4. Try free for 7 days - no payment required
 
-**7-day money-back guarantee** on all plans.
-
-[View pricing →](#pricing)`;
+[Start free trial →](#pricing)`;
 
   // ========================================
   // HELPER FUNCTIONS
@@ -487,8 +482,8 @@ Email: support@signalpilot.io`;
       <div class="sp-chatbot-messages" id="sp-chatbot-messages"></div>
 
       <div class="sp-chatbot-quick-actions" id="sp-chatbot-quick-actions">
+        <button class="sp-chatbot-quick-btn" data-query="Do you have a free trial?">🎁 Free Trial</button>
         <button class="sp-chatbot-quick-btn" data-query="How much does it cost?">💰 Pricing</button>
-        <button class="sp-chatbot-quick-btn" data-query="Show me the demo">🎮 Demo</button>
         <button class="sp-chatbot-quick-btn" data-query="What is Pentarch?">⭐ Pentarch</button>
         <button class="sp-chatbot-quick-btn" data-query="Does it repaint?">🚫 Non-Repainting</button>
       </div>
