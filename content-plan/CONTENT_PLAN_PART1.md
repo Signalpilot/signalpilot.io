@@ -400,128 +400,142 @@ Save this. Share with a trader who needs it.
 
 ### Tweet 1 (Hook):
 ```
-Markets have moved in cycles for centuries.
+Markets move in cycles. Always have. Always will.
 
-Accumulation → Markup → Distribution → Decline
+TD → IGN → WRN → CAP → BDN
 
 1929. 2008. 2021. The pattern repeats.
 
-Here's why understanding this changes everything 🧵
+Here's the 5-phase cycle that governs every market 🧵
 ```
 
 ### Tweet 2:
 ```
-ACCUMULATION
-Smart money quietly buys while retail sells in despair.
-Volume increases on up moves.
-"No one wants this asset."
+🟢 TD (TOUCHDOWN)
+The cycle begins.
+Price finds a bottom after exhaustion.
+Smart money starts accumulating.
 
-This is where fortunes begin.
+This is where reversals are born.
 ```
 
 ### Tweet 3:
 ```
-MARKUP
-The trend everyone wants to catch.
-Higher highs, higher lows.
-Retail starts buying.
-"It's finally going up!"
+🔵 IGN (IGNITION)
+Momentum confirmed.
+The trend launches.
+Volume increases on moves in trend direction.
 
-Smart money is already in.
+This is the entry zone.
 ```
 
 ### Tweet 4:
 ```
-DISTRIBUTION
-Smart money quietly sells while retail buys the hype.
-Volume increases on down moves.
-"This time is different."
+🟡 WRN (WARNING)
+Trend is maturing.
+Early signs of exhaustion appear.
+Smart money starts scaling out.
 
-The top is forming.
+Time to manage positions, not add.
 ```
 
 ### Tweet 5:
 ```
-DECLINE
-The cycle completes.
-Retail holds bags hoping for recovery.
-"It'll come back."
+🟠 CAP (CLIMAX)
+Exhaustion phase.
+Peak or bottom is forming.
+Retail chases while smart money exits.
 
-Smart money waits for the next accumulation.
+The reversal is near.
 ```
 
-### Tweet 6 (CTA):
+### Tweet 6:
+```
+🔴 BDN (BREAKDOWN)
+Cycle ending.
+Reversal begins.
+Old trend structure breaks.
+
+The cycle resets. TD approaches again.
+```
+
+### Tweet 7 (CTA):
 ```
 Understanding cycles = understanding markets.
 
-We made a free PDF: Market Cycle Quick Reference
-- How to identify each phase
-- What to do in each phase
-- Historical examples
+Pentarch maps all 5 phases in real-time on your TradingView chart.
 
-Grab it: signalpilot.io/free
+Free PDF: The 5-Phase Cycle Quick Reference
+→ signalpilot.io/free
 
-#trading #marketcycles #wyckoff
+#trading #marketcycles #pentarch #signalpilot
 ```
 
 ## INSTAGRAM — Carousel (10 Slides)
 
 ### Slide Structure:
-1. **Hook:** "MARKETS MOVE IN CYCLES" / "1929. 2008. 2021."
-2. **Overview:** Wyckoff's 4-phase cycle diagram (Note: Pentarch refines to 5 phases)
-3. **Accumulation:** Smart money buys despair
-4. **Markup:** The trend phase
-5. **Distribution:** Smart money exits hype
-6. **Decline:** Cycle completes
-7. **Visual:** Historical chart showing cycle
-8. **Recognition:** How to identify current phase
+1. **Hook:** "MARKETS MOVE IN 5 PHASES" / "TD → IGN → WRN → CAP → BDN"
+2. **Overview:** Pentarch's 5-phase cycle diagram
+3. **TD (Touchdown):** Cycle begins, reversal potential
+4. **IGN (Ignition):** Momentum confirmed, entry zone
+5. **WRN (Warning):** Trend maturing, manage risk
+6. **CAP (Climax):** Exhaustion, exit preparation
+7. **BDN (Breakdown):** Reversal begins, cycle resets
+8. **Visual:** Chart showing all 5 phases labeled
 9. **Application:** What to do in each phase
-10. **CTA:** Free Market Cycle Quick Reference
+10. **CTA:** Free 5-Phase Cycle Quick Reference
 
 ### Caption:
 ```
-Markets have moved in cycles for centuries. 🔄
+Markets move in cycles. Always have. Always will. 🔄
 
-Accumulation → Markup → Distribution → Decline
+TD → IGN → WRN → CAP → BDN
 
-It happened in 1929. 2008. 2021. It's happening right now.
+The 5-phase cycle that governs every market:
 
-🔵 ACCUMULATION
-Smart money buys while retail sells in despair
-"No one wants this asset"
+🟢 TD (TOUCHDOWN)
+Cycle begins
+Reversal potential
+Smart money accumulates
 
-🟢 MARKUP
-The trend everyone chases
-Retail finally starts buying
+🔵 IGN (IGNITION)
+Momentum confirmed
+Trend launches
+Entry zone
 
-🟡 DISTRIBUTION
-Smart money exits while retail buys the hype
-"This time is different"
+🟡 WRN (WARNING)
+Trend maturing
+Exhaustion signs
+Manage positions
 
-🔴 DECLINE
-Cycle completes
-Retail holds bags
+🟠 CAP (CLIMAX)
+Peak/bottom forming
+Retail chases
+Exit preparation
 
-Understanding cycles = understanding markets.
+🔴 BDN (BREAKDOWN)
+Reversal begins
+Cycle ending
+Reset to TD
 
-💡 Classic Wyckoff describes 4 phases.
-Pentarch maps them into 5 precise phases: TD→IGN→WRN→CAP→BDN
+Understanding these 5 phases = understanding markets.
 
-🎯 Free Market Cycle Quick Reference PDF in bio
+Pentarch maps them in real-time on TradingView.
+
+🎯 Free 5-Phase Cycle Quick Reference PDF in bio
 
 Link in bio → signalpilot.io/free
 
-#marketcycles #trading #wyckoff #accumulation #distribution #forex #crypto #bitcoin #stockmarket #technicalanalysis #signalpilot
+#marketcycles #trading #pentarch #signalpilot #tradingview #forex #crypto #bitcoin #stockmarket #technicalanalysis
 ```
 
 ## CANVA CREATION GUIDE
 
 ### Key Visual:
-- Wyckoff cycle diagram with 4 phases in circular arrangement
-- Note: "Wyckoff's Classic 4 Phases" as label
-- Historical chart overlay showing real cycle
-- Color code: Blue (Accum), Green (Markup), Yellow (Distrib), Red (Decline)
-- Optional: Small callout "Pentarch refines this into 5 phases →"
+- Pentarch 5-phase cycle diagram in circular arrangement
+- TD → IGN → WRN → CAP → BDN with arrows
+- Color code: Green (TD), Blue (IGN), Yellow (WRN), Orange (CAP), Red (BDN)
+- Chart example showing real cycle with phases labeled
 
 ---
 
@@ -1078,11 +1092,11 @@ We want you to understand markets so well you don't need anyone.
 ```
 Five signals. Five phases. One complete cycle.
 
-TD → Accumulation
-IGN → Markup
-WRN → Distribution
-CAP → Climax
-BDN → Decline
+TD → Cycle begins
+IGN → Momentum confirmed
+WRN → Trend maturing
+CAP → Exhaustion phase
+BDN → Reversal begins
 
 The Pentarch cheatsheet. Print it. Pin it. Use it ↓
 https://docs.signalpilot.io/ref-cheatsheets-pentarch/
@@ -1094,11 +1108,11 @@ Hashtags: #Pentarch #Cheatsheet #TradingEducation #SignalPilot
 
 ### Slide Structure:
 1. **Title:** "THE PENTARCH CHEATSHEET"
-2. **TD:** 🟣 Touchdown → Accumulation (selling exhausted)
-3. **IGN:** 🩵 Ignition → Markup (momentum ignites)
-4. **WRN:** 🟡 Warning → Distribution (late cycle warning)
-5. **CAP:** 🟠 Climax → Climax (exhaustion peak)
-6. **BDN:** 🔴 Breakdown → Decline (cycle completes)
+2. **TD:** 🟢 Touchdown → Cycle begins (reversal potential)
+3. **IGN:** 🔵 Ignition → Momentum confirmed (entry zone)
+4. **WRN:** 🟡 Warning → Trend maturing (manage risk)
+5. **CAP:** 🟠 Climax → Exhaustion phase (exit preparation)
+6. **BDN:** 🔴 Breakdown → Reversal begins (cycle resets)
 
 ### Caption:
 ```
@@ -1106,26 +1120,26 @@ The Pentarch Cheatsheet 📋
 
 Five signals. Five phases. One complete cycle:
 
-🟣 TD (Touchdown) → Accumulation phase
-The selling is exhausted. Smart money may be accumulating.
+🟢 TD (Touchdown)
+Cycle begins. Reversal potential. Watch for confirmation.
 
-🩵 IGN (Ignition) → Markup phase
-Momentum ignites. The trend begins.
+🔵 IGN (Ignition)
+Momentum confirmed. Trend launching. Entry zone.
 
-🟡 WRN (Warning) → Distribution phase
-Late cycle warning. Momentum weakening.
+🟡 WRN (Warning)
+Trend maturing. Early exhaustion signs. Manage positions.
 
-🟠 CAP (Climax) → Climax phase
-Extreme extension. Exhaustion peak.
+🟠 CAP (Climax)
+Exhaustion phase. Peak/bottom forming. Exit preparation.
 
-🔴 BDN (Breakdown) → Decline phase
-The cycle completes. Decline confirmed.
+🔴 BDN (Breakdown)
+Reversal begins. Cycle ending. Prepare for reset to TD.
 
 Save this. Reference it every time you trade. 📌
 
 🔗 Full cheatsheet in bio.
 
-#pentarch #cheatsheet #marketcycles #trading #signalpilot
+#pentarch #cheatsheet #marketcycles #trading #signalpilot #TD #IGN #WRN #CAP #BDN
 ```
 
 ---
@@ -12572,8 +12586,8 @@ THE SOVEREIGN'S WISDOM 👑
 
 WHAT THE SOVEREIGN KNOWS:
 
-◾ Markets cycle through phases
-◾ Accumulation → Markup → Distribution → Markdown
+◾ Markets cycle through 5 phases
+◾ TD → IGN → WRN → CAP → BDN
 ◾ Fear at bottoms, greed at tops
 ◾ The crowd always late
 
@@ -12583,7 +12597,7 @@ WHY IT REPEATS:
 ◾ Fear and greed eternal
 
 THE LESSON:
-Study cycles. Recognize patterns. Position accordingly.
+Study the 5 phases. Recognize patterns. Position accordingly.
 
 The Sovereign has seen it all before. And will again.
 
@@ -12602,7 +12616,7 @@ Read the full chronicle — link in bio 🔗
    - Position on left side or centered
    - Soft glow effect around crown
 4. Market cycle visualization behind/around:
-   - Accumulation → Markup → Distribution → Markdown
+   - TD → IGN → WRN → CAP → BDN (5 phases)
    - Subtle, flowing lines in #4a90d9 blue
 5. Quote overlay:
    - "Cycles repeat because human nature never changes."
@@ -20784,9 +20798,9 @@ Full article in bio 🔗
 "Every cycle ends. Every cycle begins again."
 — The Sovereign
 
-Accumulation. Markup. Distribution. Markdown.
+TD. IGN. WRN. CAP. BDN.
 
-The wheel turns.
+The 5-phase wheel turns.
 The Sovereign watches.
 The pattern persists.
 ```
@@ -20805,34 +20819,38 @@ THE SOVEREIGN'S CYCLE 👑
 
 "Every cycle ends. Every cycle begins again."
 
-THE ETERNAL WHEEL:
+THE ETERNAL 5-PHASE WHEEL:
 
-🟢 ACCUMULATION
-Smart money buys quietly
-Price bases
+🟢 TD (TOUCHDOWN)
+Cycle begins
+Reversal potential
 
-🔵 MARKUP
-Price rises
-Public joins late
+🔵 IGN (IGNITION)
+Momentum confirmed
+Entry zone
 
-🟡 DISTRIBUTION
-Smart money sells quietly
-Price tops
+🟡 WRN (WARNING)
+Trend maturing
+Manage risk
 
-🔴 MARKDOWN
-Price falls
-Public panics
+🟠 CAP (CLIMAX)
+Exhaustion phase
+Exit preparation
+
+🔴 BDN (BREAKDOWN)
+Reversal begins
+Cycle resets
 
 Then it begins again.
 
 THE SOVEREIGN KNOWS:
-◾ Cycles repeat
+◾ Cycles repeat in 5 phases
 ◾ Human nature unchanging
 ◾ The wheel always turns
 
 Read the full chronicle in bio 🔗
 
-#TheSovereign #Pentarch #SignalPilot #Chronicle #MarketCycles #TradingLore #SignalPilotChronicle #CycleWheel #EternalPattern #TradingMythology #Wyckoff #AccumulationDistribution #WheelTurns #TradingWisdom #CyclicNature
+#TheSovereign #Pentarch #SignalPilot #Chronicle #MarketCycles #TradingLore #SignalPilotChronicle #CycleWheel #EternalPattern #TradingMythology #TD #IGN #WRN #CAP #BDN #WheelTurns #TradingWisdom #CyclicNature
 ```
 
 ---
@@ -20845,11 +20863,12 @@ Read the full chronicle in bio 🔗
 3. **Central Figure:** The Sovereign silhouette
    - Crown, regal pose
    - Cycle wheel behind/below
-4. **Cycle Wheel:** Four quadrants
-   - Green: Accumulation
-   - Blue: Markup
-   - Yellow: Distribution
-   - Red: Markdown
+4. **Cycle Wheel:** Five sections
+   - Green: TD
+   - Blue: IGN
+   - Yellow: WRN
+   - Orange: CAP
+   - Red: BDN
    - Arrow showing rotation
 5. **Quote:** Above figure
    - "Every cycle ends. Every cycle begins again."

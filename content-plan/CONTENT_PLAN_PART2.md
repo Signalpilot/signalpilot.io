@@ -19995,7 +19995,7 @@ Layer 6: Chronicle branding
 ### 𝕏 Twitter
 
 **Copy:**
-> "All markets breathe," the Sovereign observed. "Accumulation. Markup. Distribution. Markdown. The cycle is eternal."
+> "All markets breathe," the Sovereign observed. "TD. IGN. WRN. CAP. BDN. The 5-phase cycle is eternal."
 >
 > Pentarch reads this breath.
 >
@@ -20018,12 +20018,12 @@ Layer 6: Chronicle branding
 >
 > From the Signal Pilot Chronicle:
 >
-> "All markets breathe. Accumulation. Markup. Distribution. Markdown. The cycle is eternal."
+> "All markets breathe. TD. IGN. WRN. CAP. BDN. The 5-phase cycle is eternal."
 >
 > The Sovereign sees the breath.
 >
 > Pentarch identifies:
-> → Where we are in the cycle
+> → Where we are in the 5-phase cycle
 > → Transition signals between phases
 > → The rhythm of expansion and contraction
 >
@@ -35400,9 +35400,9 @@ Each category:
 **Copy:**
 > Watch Pentarch identify a complete market cycle.
 >
-> Accumulation → Markup → Distribution → Markdown
+> TD → IGN → WRN → CAP → BDN
 >
-> Each phase labeled in real-time.
+> All 5 phases labeled in real-time.
 >
 > The Sovereign sees the full breath.
 >
@@ -35419,36 +35419,42 @@ Each category:
 **Caption:**
 > 🔄 PENTARCH — FULL CYCLE WALKTHROUGH
 >
-> One complete market breath.
+> One complete market breath in 5 phases.
 >
 > THE CYCLE:
 >
-> 📥 PHASE 1: ACCUMULATION
-> → Range-bound price action
-> → Pentarch signals accumulation
-> → Smart money building position
-> → Duration: Variable
+> 🟢 PHASE 1: TD (TOUCHDOWN)
+> → Cycle begins
+> → Reversal potential
+> → Smart money accumulating
+> → Watch for confirmation
 >
-> 📈 PHASE 2: MARKUP
-> → Trend begins
-> → Pentarch shifts to markup
-> → Price advances
-> → Best phase for trend following
+> 🔵 PHASE 2: IGN (IGNITION)
+> → Momentum confirmed
+> → Trend launching
+> → Entry zone
+> → Best phase for entries
 >
-> 📤 PHASE 3: DISTRIBUTION
-> → Price stalls at highs
-> → Pentarch signals distribution
-> → Smart money selling
-> → Caution on longs
+> 🟡 PHASE 3: WRN (WARNING)
+> → Trend maturing
+> → Early exhaustion signs
+> → Manage positions
+> → Trail stops
 >
-> 📉 PHASE 4: MARKDOWN
-> → Trend down begins
-> → Pentarch confirms markdown
-> → Price declines
-> → Cycle prepares to reset
+> 🟠 PHASE 4: CAP (CLIMAX)
+> → Exhaustion phase
+> → Peak/bottom forming
+> → Exit preparation
+> → Caution on new entries
+>
+> 🔴 PHASE 5: BDN (BREAKDOWN)
+> → Reversal begins
+> → Cycle ending
+> → Prepare for reset
+> → TD approaches again
 >
 > THE VALUE:
-> → Know where you are
+> → Know where you are in the 5-phase cycle
 > → Adjust strategy to phase
 > → Don't fight the cycle
 >
@@ -35456,18 +35462,19 @@ Each category:
 >
 > 🔗 Link in bio
 
-**Image:** 1080x1080 — Chart showing complete cycle with Pentarch phases labeled at each stage
+**Image:** 1080x1080 — Chart showing complete cycle with Pentarch 5 phases labeled at each stage
 
-**Hashtags:** #Pentarch #MarketCycle #SignalPilot #CycleAnalysis #TradingTools #TheSovereign #FullCycle #TradingView #CryptoTrading #ForexTrading #EliteSeven #CyclePhases #ChartAnalysis #TradingStrategy #AccumulationMarkup #DistributionMarkdown #CycleTrading #IndicatorSuite #CompleteBreath #MarketRhythm
+**Hashtags:** #Pentarch #MarketCycle #SignalPilot #CycleAnalysis #TradingTools #TheSovereign #FullCycle #TradingView #CryptoTrading #ForexTrading #EliteSeven #CyclePhases #ChartAnalysis #TradingStrategy #TD #IGN #WRN #CAP #BDN #CycleTrading #IndicatorSuite #CompleteBreath #MarketRhythm
 
 **Carousel Slides:**
-1. "PENTARCH FULL CYCLE" — Title with cycle visual
-2. "ACCUMULATION" — Phase 1 explained
-3. "MARKUP" — Phase 2 explained
-4. "DISTRIBUTION" — Phase 3 explained
-5. "MARKDOWN" — Phase 4 explained
-6. "THE VALUE" — Know where you are
-7. "THE SOVEREIGN" — CTA
+1. "PENTARCH FULL CYCLE" — Title with 5-phase cycle visual
+2. "TD (TOUCHDOWN)" — Phase 1 explained
+3. "IGN (IGNITION)" — Phase 2 explained
+4. "WRN (WARNING)" — Phase 3 explained
+5. "CAP (CLIMAX)" — Phase 4 explained
+6. "BDN (BREAKDOWN)" — Phase 5 explained
+7. "THE VALUE" — Know where you are in the 5-phase cycle
+8. "THE SOVEREIGN" — CTA
 
 ---
 
