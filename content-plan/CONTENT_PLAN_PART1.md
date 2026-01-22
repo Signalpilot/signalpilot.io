@@ -9776,7 +9776,7 @@ Do you watch volume on every trade? What volume patterns catch your attention? ð
 >
 > Full docs in bio ðŸ”—
 
-**Hashtags:** #Pentarch #TDSignal #TrendDetermination #TheSovereign #SignalPilot #TradingIndicators #TradingView #CycleAnalysis #TradingEducation #SignalInterpretation #LearnTrading #IndicatorDeepDive #TradingContext #AwarenessSignal #ProperUsage
+**Hashtags:** #Pentarch #TDSignal #Touchdown #TheSovereign #SignalPilot #TradingIndicators #TradingView #CycleAnalysis #TradingEducation #SignalInterpretation #LearnTrading #IndicatorDeepDive #TradingContext #AwarenessSignal #ProperUsage
 
 ---
 
