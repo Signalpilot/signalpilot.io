@@ -396,7 +396,36 @@
 
 ## Language-Specific Extensions
 
-### Sitelinks (Translate for each language)
+### Sitelinks (Full Details)
+
+#### 🇹🇷 Turkish Sitelinks
+
+| Field | Sitelink 1 | Sitelink 2 | Sitelink 3 | Sitelink 4 |
+|-------|------------|------------|------------|------------|
+| **Sitelink text** | 7 Gün Ücretsiz Dene | Fiyatları Gör | 7 Göstergenin Tümü | 82 Ücretsiz Ders |
+| **Description line 1** | Kredi kartı gerekmez | Aylık, Yıllık ve Ömür Boyu | Pentarch, Volume Oracle ve daha | Profesyonel trading eğitimi |
+| **Description line 2** | Tüm 7 göstergeye tam erişim | Ayda $99'dan başlayan planlar | Tam gösterge paketi | Piyasa yapısını ücretsiz öğren |
+| **Final URL** | signalpilot.io/tr/#trial | signalpilot.io/tr/#pricing | signalpilot.io/tr/#indicators | education.signalpilot.io |
+
+#### 🇧🇷 Portuguese (Brazil) Sitelinks
+
+| Field | Sitelink 1 | Sitelink 2 | Sitelink 3 | Sitelink 4 |
+|-------|------------|------------|------------|------------|
+| **Sitelink text** | Teste Grátis 7 Dias | Ver Preços | Todos 7 Indicadores | 82 Aulas Grátis |
+| **Description line 1** | Sem cartão de crédito | Mensal, Anual e Vitalício | Pentarch, Volume Oracle e mais | Educação profissional de trading |
+| **Description line 2** | Acesso total aos 7 indicadores | Planos a partir de $99/mês | Pacote completo de indicadores | Aprenda estrutura de mercado |
+| **Final URL** | signalpilot.io/pt/#trial | signalpilot.io/pt/#pricing | signalpilot.io/pt/#indicators | education.signalpilot.io |
+
+#### 🇦🇪 Arabic (UAE/KSA) Sitelinks
+
+| Field | Sitelink 1 | Sitelink 2 | Sitelink 3 | Sitelink 4 |
+|-------|------------|------------|------------|------------|
+| **Sitelink text** | جرّب 7 أيام مجاناً | عرض الأسعار | جميع المؤشرات السبعة | 82 درساً مجانياً |
+| **Description line 1** | لا حاجة لبطاقة ائتمان | شهري، سنوي ومدى الحياة | Pentarch و Volume Oracle والمزيد | تعليم تداول احترافي |
+| **Description line 2** | وصول كامل لجميع المؤشرات | خطط تبدأ من 99$/شهر | حزمة المؤشرات الكاملة | تعلّم هيكل السوق مجاناً |
+| **Final URL** | signalpilot.io/ar/#trial | signalpilot.io/ar/#pricing | signalpilot.io/ar/#indicators | education.signalpilot.io |
+
+#### Quick Reference Table
 
 | English | Turkish | Portuguese | Arabic |
 |---------|---------|------------|--------|
@@ -404,7 +433,6 @@
 | View Pricing | Fiyatları Gör | Ver Preços | عرض الأسعار |
 | All 7 Indicators | 7 Göstergenin Tümü | Todos 7 Indicadores | جميع المؤشرات السبعة |
 | 82 Free Lessons | 82 Ücretsiz Ders | 82 Aulas Grátis | 82 درساً مجانياً |
-| FAQ | SSS | Perguntas Frequentes | الأسئلة الشائعة |
 
 ### Callouts (Translate for each language)
 
