@@ -24129,43 +24129,45 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 - Visual: Cycle diagram
 - Branding: Signal Pilot logo
 
-**Slide 2 - Accumulation Phase:**
-- Header: "📥 ACCUMULATION"
-- "Smart money buying"
-- "Range-bound price"
-- "Building position"
+**Slide 2 - TD Phase:**
+- Header: "🟢 TD (TOUCHDOWN)"
+- "Early-cycle reversal"
+- "Selling exhaustion"
+- "Potential base forming"
 
-**Slide 3 - Markup Phase:**
-- Header: "📈 MARKUP"
-- "Trend begins"
-- "Price advances"
-- "Momentum builds"
+**Slide 3 - IGN Phase:**
+- Header: "🔵 IGN (IGNITION)"
+- "Breakout confirmation"
+- "Conviction present"
+- "Momentum building"
 
-**Slide 4 - Distribution Phase:**
-- Header: "📤 DISTRIBUTION"
-- "Smart money selling"
-- "Price stalls at highs"
-- "Positions unwound"
+**Slide 4 - WRN Phase:**
+- Header: "🟡 WRN (WARNING)"
+- "Early weakness"
+- "Uptrend showing strain"
+- "Caution warranted"
 
-**Slide 5 - Markdown Phase:**
-- Header: "📉 MARKDOWN"
-- "Trend down begins"
-- "Price declines"
-- "Cycle resets"
+**Slide 5 - CAP Phase:**
+- Header: "🟠 CAP (CLIMAX)"
+- "Late-cycle exhaustion"
+- "Volume spikes"
+- "Potential peak forming"
 
-**Slide 6 - The Transitions:**
+**Slide 6 - BDN Phase:**
+- Header: "🔴 BDN (BREAKDOWN)"
+- "Bearish structure break"
+- "Downside confirmed"
+- "Cycle completing"
+
+**Slide 7 - The Transitions:**
 - Header: "THE TRANSITIONS"
-- "Accum → Markup = potential long context"
-- "Markup → Distrib = caution on longs"
-- "Distrib → Markdown = potential short context"
-- "Markdown → Accum = cycle reset"
-
-**Slide 7 - On Chart:**
-- Full chart showing Pentarch phases
-- Transitions highlighted
+- "TD → IGN = exhaustion confirmed, breakout begins"
+- "IGN → WRN = conviction fading, weakness appearing"
+- "WRN → CAP = exhaustion building, volume spikes"
+- "CAP → BDN = structure breaking"
 
 **Slide 8 - CTA:**
-- "Pentarch identifies these shifts"
+- "Pentarch maps all 5 phases"
 - "Link in bio"
 - Signal Pilot branding
 
