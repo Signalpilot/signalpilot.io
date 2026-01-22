@@ -24177,36 +24177,26 @@ This batch marks a significant milestone in the Signal Pilot content journey. 50
 > THE FIVE PHASES:
 >
 > 🟢 TD (TOUCHDOWN)
-> → Cycle begins
-> → Reversal potential
-> → Watch for confirmation
+> Early-cycle reversal on selling exhaustion
 >
 > 🔵 IGN (IGNITION)
-> → Momentum confirmed
-> → Trend launching
-> → Entry zone
+> Breakout confirmation with conviction
 >
 > 🟡 WRN (WARNING)
-> → Trend maturing
-> → Caution ahead
-> → Manage positions
+> Early weakness in uptrends
 >
 > 🟠 CAP (CLIMAX)
-> → Exhaustion phase
-> → Peak/bottom forming
-> → Exit preparation
+> Late-cycle exhaustion with volume spikes
 >
 > 🔴 BDN (BREAKDOWN)
-> → Cycle ending
-> → Reversal imminent
-> → Cycle reset begins
+> Bearish structure break
 >
 > THE TRANSITIONS:
-> → TD → IGN = trend confirmation, entry zone
-> → IGN → WRN = trend maturing, trail stops
-> → WRN → CAP = exhaustion near, tighten risk
-> → CAP → BDN = reversal starting, exit or flip
-> → BDN → TD = new cycle begins
+> → TD → IGN = exhaustion confirmed, breakout begins
+> → IGN → WRN = conviction fading, weakness appearing
+> → WRN → CAP = exhaustion building, volume spikes
+> → CAP → BDN = structure breaking
+> → BDN → TD = new cycle exhaustion
 >
 > Pentarch maps all 5 phases in real-time.
 >
@@ -35424,39 +35414,24 @@ Each category:
 > THE CYCLE:
 >
 > 🟢 PHASE 1: TD (TOUCHDOWN)
-> → Cycle begins
-> → Reversal potential
-> → Smart money accumulating
-> → Watch for confirmation
+> Early-cycle reversal on selling exhaustion
 >
 > 🔵 PHASE 2: IGN (IGNITION)
-> → Momentum confirmed
-> → Trend launching
-> → Entry zone
-> → Best phase for entries
+> Breakout confirmation with conviction
 >
 > 🟡 PHASE 3: WRN (WARNING)
-> → Trend maturing
-> → Early exhaustion signs
-> → Manage positions
-> → Trail stops
+> Early weakness in uptrends
 >
 > 🟠 PHASE 4: CAP (CLIMAX)
-> → Exhaustion phase
-> → Peak/bottom forming
-> → Exit preparation
-> → Caution on new entries
+> Late-cycle exhaustion with volume spikes
 >
 > 🔴 PHASE 5: BDN (BREAKDOWN)
-> → Reversal begins
-> → Cycle ending
-> → Prepare for reset
-> → TD approaches again
+> Bearish structure break
 >
 > THE VALUE:
-> → Know where you are in the 5-phase cycle
-> → Adjust strategy to phase
-> → Don't fight the cycle
+> → Pentarch maps each phase in real-time
+> → See where you are in the cycle
+> → Observe the structure
 >
 > The Sovereign reads the breath.
 >

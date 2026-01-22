@@ -406,63 +406,51 @@ TD → IGN → WRN → CAP → BDN
 
 1929. 2008. 2021. The pattern repeats.
 
-Here's the 5-phase cycle that governs every market 🧵
+Here's the 5-phase cycle Pentarch detects 🧵
 ```
 
 ### Tweet 2:
 ```
 🟢 TD (TOUCHDOWN)
-The cycle begins.
-Price finds a bottom after exhaustion.
-Smart money starts accumulating.
+Early-cycle reversal on selling exhaustion.
 
-This is where reversals are born.
+The selling pressure has exhausted itself.
 ```
 
 ### Tweet 3:
 ```
 🔵 IGN (IGNITION)
-Momentum confirmed.
-The trend launches.
-Volume increases on moves in trend direction.
+Breakout confirmation with conviction.
 
-This is the entry zone.
+Momentum has confirmed the move.
 ```
 
 ### Tweet 4:
 ```
 🟡 WRN (WARNING)
-Trend is maturing.
-Early signs of exhaustion appear.
-Smart money starts scaling out.
+Early weakness in uptrends.
 
-Time to manage positions, not add.
+Signs of weakness appearing while trend still intact.
 ```
 
 ### Tweet 5:
 ```
 🟠 CAP (CLIMAX)
-Exhaustion phase.
-Peak or bottom is forming.
-Retail chases while smart money exits.
+Late-cycle exhaustion with volume spikes.
 
-The reversal is near.
+Extreme extension with climactic volume.
 ```
 
 ### Tweet 6:
 ```
 🔴 BDN (BREAKDOWN)
-Cycle ending.
-Reversal begins.
-Old trend structure breaks.
+Bearish structure break.
 
-The cycle resets. TD approaches again.
+The structure has broken. Cycle completes.
 ```
 
 ### Tweet 7 (CTA):
 ```
-Understanding cycles = understanding markets.
-
 Pentarch maps all 5 phases in real-time on your TradingView chart.
 
 Free PDF: The 5-Phase Cycle Quick Reference
@@ -476,13 +464,13 @@ Free PDF: The 5-Phase Cycle Quick Reference
 ### Slide Structure:
 1. **Hook:** "MARKETS MOVE IN 5 PHASES" / "TD → IGN → WRN → CAP → BDN"
 2. **Overview:** Pentarch's 5-phase cycle diagram
-3. **TD (Touchdown):** Cycle begins, reversal potential
-4. **IGN (Ignition):** Momentum confirmed, entry zone
-5. **WRN (Warning):** Trend maturing, manage risk
-6. **CAP (Climax):** Exhaustion, exit preparation
-7. **BDN (Breakdown):** Reversal begins, cycle resets
+3. **TD (Touchdown):** Early-cycle reversal on selling exhaustion
+4. **IGN (Ignition):** Breakout confirmation with conviction
+5. **WRN (Warning):** Early weakness in uptrends
+6. **CAP (Climax):** Late-cycle exhaustion with volume spikes
+7. **BDN (Breakdown):** Bearish structure break
 8. **Visual:** Chart showing all 5 phases labeled
-9. **Application:** What to do in each phase
+9. **How Pentarch Works:** Maps these phases in real-time
 10. **CTA:** Free 5-Phase Cycle Quick Reference
 
 ### Caption:
@@ -491,36 +479,24 @@ Markets move in cycles. Always have. Always will. 🔄
 
 TD → IGN → WRN → CAP → BDN
 
-The 5-phase cycle that governs every market:
+Pentarch's 5-phase cycle detection:
 
 🟢 TD (TOUCHDOWN)
-Cycle begins
-Reversal potential
-Smart money accumulates
+Early-cycle reversal on selling exhaustion
 
 🔵 IGN (IGNITION)
-Momentum confirmed
-Trend launches
-Entry zone
+Breakout confirmation with conviction
 
 🟡 WRN (WARNING)
-Trend maturing
-Exhaustion signs
-Manage positions
+Early weakness in uptrends
 
 🟠 CAP (CLIMAX)
-Peak/bottom forming
-Retail chases
-Exit preparation
+Late-cycle exhaustion with volume spikes
 
 🔴 BDN (BREAKDOWN)
-Reversal begins
-Cycle ending
-Reset to TD
+Bearish structure break
 
-Understanding these 5 phases = understanding markets.
-
-Pentarch maps them in real-time on TradingView.
+Pentarch maps these 5 phases in real-time on TradingView.
 
 🎯 Free 5-Phase Cycle Quick Reference PDF in bio
 
@@ -1092,11 +1068,11 @@ We want you to understand markets so well you don't need anyone.
 ```
 Five signals. Five phases. One complete cycle.
 
-TD → Cycle begins
-IGN → Momentum confirmed
-WRN → Trend maturing
-CAP → Exhaustion phase
-BDN → Reversal begins
+TD → Selling exhaustion
+IGN → Breakout confirmation
+WRN → Early weakness
+CAP → Late-cycle exhaustion
+BDN → Structure break
 
 The Pentarch cheatsheet. Print it. Pin it. Use it ↓
 https://docs.signalpilot.io/ref-cheatsheets-pentarch/
@@ -1108,11 +1084,11 @@ Hashtags: #Pentarch #Cheatsheet #TradingEducation #SignalPilot
 
 ### Slide Structure:
 1. **Title:** "THE PENTARCH CHEATSHEET"
-2. **TD:** 🟢 Touchdown → Cycle begins (reversal potential)
-3. **IGN:** 🔵 Ignition → Momentum confirmed (entry zone)
-4. **WRN:** 🟡 Warning → Trend maturing (manage risk)
-5. **CAP:** 🟠 Climax → Exhaustion phase (exit preparation)
-6. **BDN:** 🔴 Breakdown → Reversal begins (cycle resets)
+2. **TD:** 🟢 Touchdown — Early-cycle reversal on selling exhaustion
+3. **IGN:** 🔵 Ignition — Breakout confirmation with conviction
+4. **WRN:** 🟡 Warning — Early weakness in uptrends
+5. **CAP:** 🟠 Climax — Late-cycle exhaustion with volume spikes
+6. **BDN:** 🔴 Breakdown — Bearish structure break
 
 ### Caption:
 ```
@@ -1121,19 +1097,19 @@ The Pentarch Cheatsheet 📋
 Five signals. Five phases. One complete cycle:
 
 🟢 TD (Touchdown)
-Cycle begins. Reversal potential. Watch for confirmation.
+Early-cycle reversal on selling exhaustion
 
 🔵 IGN (Ignition)
-Momentum confirmed. Trend launching. Entry zone.
+Breakout confirmation with conviction
 
 🟡 WRN (Warning)
-Trend maturing. Early exhaustion signs. Manage positions.
+Early weakness in uptrends
 
 🟠 CAP (Climax)
-Exhaustion phase. Peak/bottom forming. Exit preparation.
+Late-cycle exhaustion with volume spikes
 
 🔴 BDN (Breakdown)
-Reversal begins. Cycle ending. Prepare for reset to TD.
+Bearish structure break
 
 Save this. Reference it every time you trade. 📌
 
