@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 042 — Risk-Reward Ratio | Carousel Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-red: #d94a4a;
+      --accent-green: #4ad97a;
+      --text-primary: #e8e8e8;
+      --text-secondary: #a0a0a0;
+      --text-dim: #6a6a6a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .controls label {
+      color: var(--text-secondary);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .controls input[type="checkbox"] {
+      cursor: pointer;
+    }
+
+    .controls input[type="range"] {
+      width: 80px;
+      cursor: pointer;
+    }
+
+    .controls button {
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .controls button:hover {
+      opacity: 0.9;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-title h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .page-title p {
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .slide-wrapper {
+      aspect-ratio: 1 / 1;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-dark);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+
+    .slide-wrapper .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: var(--video-opacity, 0.08);
+      pointer-events: none;
+    }
+
+    .slide-wrapper .slide-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 48px;
+      text-align: center;
+    }
+
+    .slide-number {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    /* Slide Typography */
+    .slide-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .slide-title.large {
+      font-size: 42px;
+    }
+
+    .slide-subtitle {
+      font-size: 14px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .slide-body {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 320px;
+    }
+
+    .ratio-box {
+      width: 100%;
+      max-width: 340px;
+      border-radius: 16px;
+      padding: 32px;
+      margin: 16px 0;
+    }
+
+    .ratio-box.easy {
+      background: rgba(74, 217, 122, 0.1);
+      border: 2px solid rgba(74, 217, 122, 0.4);
+    }
+
+    .ratio-box.medium {
+      background: rgba(201, 169, 98, 0.1);
+      border: 2px solid rgba(201, 169, 98, 0.4);
+    }
+
+    .ratio-box.hard {
+      background: rgba(217, 74, 74, 0.1);
+      border: 2px solid rgba(217, 74, 74, 0.4);
+    }
+
+    .ratio-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .ratio-box.easy .ratio-label {
+      color: var(--accent-green);
+    }
+
+    .ratio-box.medium .ratio-label {
+      color: var(--accent-gold);
+    }
+
+    .ratio-box.hard .ratio-label {
+      color: var(--accent-red);
+    }
+
+    .ratio-winrate {
+      font-size: 18px;
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .ratio-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .vs-box {
+      background: linear-gradient(135deg, rgba(74, 217, 122, 0.1), rgba(217, 74, 74, 0.1));
+      border-radius: 16px;
+      padding: 24px;
+      margin: 16px 0;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: center;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .vs-item {
+      text-align: center;
+    }
+
+    .vs-item .value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .vs-item.winner .value {
+      color: var(--accent-green);
+    }
+
+    .vs-item.loser .value {
+      color: var(--accent-red);
+    }
+
+    .vs-item .label {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .vs-divider {
+      font-size: 20px;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .key-insight {
+      background: linear-gradient(135deg, rgba(74, 144, 217, 0.15), rgba(201, 169, 98, 0.15));
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid rgba(201, 169, 98, 0.2);
+    }
+
+    .cta-link {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 14px 32px;
+      background: var(--accent-gold);
+      color: var(--bg-dark);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Export mode */
+    body.export-mode {
+      padding: 0;
+      background: #000;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      width: 1080px;
+      height: 1080px;
+      border-radius: 0;
+      margin: 0;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    body.export-mode .export-nav {
+      display: flex;
+    }
+
+    .export-nav button {
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .export-nav .slide-indicator {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .slide-wrapper .slide-content {
+        padding: 32px;
+      }
+
+      .slide-title {
+        font-size: 26px;
+      }
+
+      .slide-title.large {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label>
+      <input type="checkbox" id="bgToggle" checked>
+      Background
+    </label>
+    <label>
+      Opacity
+      <input type="range" id="opacitySlider" min="0" max="30" value="8">
+    </label>
+    <button onclick="toggleExportMode()">Export Mode</button>
+  </div>
+
+  <div class="page-title">
+    <h1>Post 042 — Risk-Reward Ratio</h1>
+    <p>Education Carousel — 6 Slides</p>
+  </div>
+
+  <div class="carousel-grid">
+    <!-- Slide 1: Hook -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">01 / 06</span>
+        <div class="slide-icon">📊</div>
+        <div class="slide-subtitle">Trading Math</div>
+        <h2 class="slide-title large">WIN RATE IS OVERRATED</h2>
+        <p class="slide-body">Risk-reward isn't about greed. It's about math.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 2: 1:1 R:R -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">02 / 06</span>
+        <div class="slide-subtitle">Risk-Reward Ratio</div>
+        <div class="ratio-box hard">
+          <div class="ratio-label">1:1</div>
+          <div class="ratio-winrate">Need 50%+ Win Rate</div>
+          <div class="ratio-desc">Risk $100 to make $100. That's a coin flip.</div>
+        </div>
+        <p class="slide-body">No room for error. Every loss must be recovered.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 3: 1:2 R:R -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">03 / 06</span>
+        <div class="slide-subtitle">Risk-Reward Ratio</div>
+        <div class="ratio-box medium">
+          <div class="ratio-label">1:2</div>
+          <div class="ratio-winrate">Need 34%+ Win Rate</div>
+          <div class="ratio-desc">Risk $100 to make $200.</div>
+        </div>
+        <p class="slide-body">Now you can be wrong 2 out of 3 times and still break even.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 4: 1:3 R:R -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">04 / 06</span>
+        <div class="slide-subtitle">Risk-Reward Ratio</div>
+        <div class="ratio-box easy">
+          <div class="ratio-label">1:3</div>
+          <div class="ratio-winrate">Need 25%+ Win Rate</div>
+          <div class="ratio-desc">Risk $100 to make $300.</div>
+        </div>
+        <p class="slide-body">Win just 1 in 4 trades and you're profitable.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 5: Key Insight -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">05 / 06</span>
+        <div class="key-insight">
+          <div class="slide-icon">💡</div>
+          <h2 class="slide-title">Higher R:R = More Room for Error</h2>
+          <div class="vs-box">
+            <div class="vs-item winner">
+              <div class="value">40%</div>
+              <div class="label">win rate @ 1:3</div>
+            </div>
+            <div class="vs-divider">beats</div>
+            <div class="vs-item loser">
+              <div class="value">80%</div>
+              <div class="label">win rate @ 1:0.5</div>
+            </div>
+          </div>
+          <p class="slide-body">Stop chasing high win rates. Chase good setups.</p>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 6: CTA -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">06 / 06</span>
+        <div class="slide-icon">📚</div>
+        <h2 class="slide-title">Master the Math</h2>
+        <p class="slide-body">Full lesson with examples, calculators, and the math behind profitable trading.</p>
+        <a href="https://education.signalpilot.io/curriculum/beginner/10-risk-reward-ratio.html" class="cta-link">Read Full Lesson</a>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="export-nav">
+    <button onclick="prevSlide()">← Previous</button>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 6</span>
+    <button onclick="nextSlide()">Next →</button>
+  </div>
+
+  <script>
+    const bgToggle = document.getElementById('bgToggle');
+    const opacitySlider = document.getElementById('opacitySlider');
+    const videos = document.querySelectorAll('.bg-video');
+    const slides = document.querySelectorAll('.slide-wrapper');
+    let currentSlide = 0;
+    let exportMode = false;
+
+    bgToggle.addEventListener('change', (e) => {
+      videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none');
+    });
+
+    opacitySlider.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
+    });
+
+    function toggleExportMode() {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        currentSlide = 0;
+        updateExportView();
+      }
+    }
+
+    function updateExportView() {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+      });
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateExportView();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateExportView();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') toggleExportMode();
+    });
+  </script>
+</body>
+</html>
