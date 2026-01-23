@@ -1904,3 +1904,788 @@ SignalPilot column highlighted
 
 *Total Production Time: ~15-20 hours spread over 8 days*
 *Can be compressed to 4-5 days if working full days*
+
+---
+
+# DETAILED RECORDING INSTRUCTIONS (Step-by-Step for Beginners)
+
+This section walks you through EXACTLY how to record each clip. Follow these instructions literally.
+
+---
+
+## PART 1: Setting Up OBS Studio (One-Time Setup)
+
+### Step 1: Download OBS
+1. Go to https://obsproject.com/
+2. Click "Download" for your operating system (Windows/Mac)
+3. Install it (just click Next through the installer)
+4. Open OBS Studio
+
+### Step 2: Configure OBS for Screen Recording
+
+**When OBS opens for the first time:**
+1. It may ask "Auto-Configuration Wizard" → Click "Cancel" (we'll do it manually)
+
+**Set up your Scene:**
+1. In the bottom-left, you see "Scenes" → There should be one called "Scene"
+2. Below that, you see "Sources" → Click the **+** button
+3. Select **"Display Capture"**
+4. Name it "My Screen" → Click OK
+5. Select your monitor (if you have multiple) → Click OK
+6. You should now see your screen in the preview
+
+**Set up Audio (optional but recommended):**
+1. Click **+** in Sources again
+2. Select **"Audio Output Capture"** (this records system sound)
+3. Click OK twice
+4. If you want to record your mic too: **+** → "Audio Input Capture" → Select your mic
+
+**Configure Output Settings:**
+1. Click **Settings** (bottom right)
+2. Go to **Output** tab
+3. Set these:
+   - Output Mode: **Simple**
+   - Recording Quality: **High Quality, Medium File Size**
+   - Recording Format: **mp4**
+   - Recording Path: Click **Browse** → Create a folder like `Elite_Seven_Recordings` on your Desktop
+4. Go to **Video** tab
+5. Set these:
+   - Base Resolution: **1920x1080**
+   - Output Resolution: **1920x1080**
+   - FPS: **30**
+6. Click **Apply** then **OK**
+
+### Step 3: Test Recording
+1. Click **Start Recording** (bottom right)
+2. Do something on screen for 10 seconds
+3. Click **Stop Recording**
+4. Go to your recording folder and play the file
+5. If you see your screen clearly → You're ready!
+
+---
+
+## PART 2: How to Record TradingView Clips
+
+### Before You Start Recording:
+1. Open TradingView in your browser
+2. Make it **fullscreen** (F11 key on most browsers)
+3. Set your chart to a **dark theme** (looks better on video)
+4. Remove any unnecessary panels/toolbars
+5. Make sure your indicators are loaded
+
+### General Recording Workflow:
+1. Set up the chart how you want it
+2. Go to OBS → Click **Start Recording**
+3. Wait 2 seconds (gives you editing buffer)
+4. Do your thing on TradingView
+5. Wait 2 seconds at the end
+6. Go to OBS → Click **Stop Recording**
+7. Rename the file immediately so you don't forget what it is
+
+---
+
+## PART 3: Recording Each Specific Clip
+
+### CLIP 1: Pentarch TD Signal (15-20 seconds)
+
+**What you need:** A chart showing a clear TD (Touchdown) signal
+
+**How to find it:**
+1. Open any chart (BTC, ETH, SPY work well)
+2. Add Pentarch indicator
+3. Scroll back in time using your mouse wheel or the bottom timeline
+4. Look for a **purple marker below a candle** with "TD" label
+5. Find one where it's clearly visible (not crowded)
+
+**How to record:**
+1. Zoom in so the signal takes up about 1/3 of the screen
+2. Position so there's some context (bars before and after the signal)
+3. Start recording in OBS
+4. Wait 2 seconds
+5. Slowly move your mouse to the TD signal (don't click yet)
+6. Hover over it for 3 seconds (shows any tooltip)
+7. Maybe zoom in slightly using TradingView's zoom (mouse wheel while holding Ctrl)
+8. Hold for 5 more seconds
+9. Stop recording
+
+**File name:** `01_pentarch_td_signal.mp4`
+
+---
+
+### CLIP 2: Pentarch IGN Signal (15-20 seconds)
+
+**What you need:** A chart showing an Ignition signal (teal marker below candle)
+
+**How to find it:**
+1. Look for a **teal/cyan marker below a candle** with "IGN" label
+2. Best if it appears AFTER a TD signal (shows the sequence)
+3. Look for regime bars turning green around the same time
+
+**How to record:**
+1. Position chart so IGN signal is centered
+2. Start recording
+3. Wait 2 seconds
+4. Point mouse at the IGN signal
+5. Maybe slowly pan left to show the TD that came before it
+6. Hold on IGN for 5 seconds
+7. Stop recording
+
+**File name:** `02_pentarch_ign_signal.mp4`
+
+---
+
+### CLIP 3: Pentarch WRN Signal (15-20 seconds)
+
+**What you need:** A Warning signal during an uptrend
+
+**How to find it:**
+1. Look for a **yellow marker ABOVE a candle** with "WRN" label
+2. It should appear during an uptrend (price was going up)
+3. Best if you can see the uptrend clearly before the warning
+
+**How to record:**
+1. Zoom out slightly to show the uptrend context
+2. Start recording
+3. Slowly pan from the uptrend to the WRN signal
+4. Hover on the WRN for 5 seconds
+5. Stop recording
+
+**File name:** `03_pentarch_wrn_signal.mp4`
+
+---
+
+### CLIP 4: Pentarch CAP Signal (15-20 seconds)
+
+**What you need:** A Climax signal with visible volume spike
+
+**How to find it:**
+1. Look for an **orange marker ABOVE a candle** with "CAP" label
+2. Should appear at or near a local top
+3. Bonus: find one where volume bars are visibly higher
+
+**How to record:**
+1. Make sure volume panel is visible at bottom
+2. Position CAP signal in upper portion of chart
+3. Start recording
+4. Point to the CAP signal
+5. Then move mouse down to show the volume spike
+6. Back up to CAP
+7. Stop recording
+
+**File name:** `04_pentarch_cap_signal.mp4`
+
+---
+
+### CLIP 5: Pentarch BDN Signal (15-20 seconds)
+
+**What you need:** A Breakdown signal showing structure failure
+
+**How to find it:**
+1. Look for a **red marker ABOVE a candle** with "BDN" label
+2. Should appear when price breaks down through support
+3. Best if you can see the support level that was broken
+
+**How to record:**
+1. Position to show support level and the break
+2. Start recording
+3. Maybe draw a quick horizontal line at support (optional)
+4. Point to where price broke down
+5. Point to the BDN signal
+6. Stop recording
+
+**File name:** `05_pentarch_bdn_signal.mp4`
+
+---
+
+### CLIP 6: Pentarch Full Cycle (30-45 seconds)
+
+**What you need:** A complete cycle showing TD → IGN → WRN → CAP → BDN
+
+**How to find it:**
+1. This is the hardest to find - need a complete sequence
+2. Try daily timeframe on BTC or ETH
+3. Look for a period that had accumulation → rally → top → decline
+4. May need to scroll through several months
+
+**How to record:**
+1. Zoom out enough to see the full cycle
+2. Start recording
+3. Start at the left (beginning of cycle)
+4. Slowly pan right, pausing at each signal:
+   - Pause at TD (3 sec)
+   - Continue to IGN (3 sec)
+   - Continue to WRN (3 sec)
+   - Continue to CAP (3 sec)
+   - Continue to BDN (3 sec)
+5. Stop recording
+
+**File name:** `06_pentarch_full_cycle.mp4`
+
+---
+
+### CLIP 7: Volume Oracle Accumulation (15-20 seconds)
+
+**What you need:** Volume Oracle showing green "Accumulation" regime
+
+**How to find it:**
+1. Add Volume Oracle indicator (it's a panel indicator, appears below chart)
+2. Look for a period where the background is **green**
+3. The dashboard should show "ACCUMULATION" or similar text
+
+**How to record:**
+1. Make sure the Volume Oracle panel is large enough to read
+2. Start recording
+3. Point to the green background
+4. Point to any text/labels showing "Accumulation"
+5. Maybe scroll slightly to show it persisting
+6. Stop recording
+
+**File name:** `07_volume_oracle_accumulation.mp4`
+
+---
+
+### CLIP 8: Volume Oracle Distribution (15-20 seconds)
+
+**What you need:** Volume Oracle showing red "Distribution" regime
+
+**How to find it:**
+1. Look for a period where the background is **red**
+2. Usually appears at or after market tops
+
+**How to record:**
+1. Same as above but with red/distribution
+2. Start recording
+3. Highlight the red background
+4. Show any dashboard elements indicating distribution
+5. Stop recording
+
+**File name:** `08_volume_oracle_distribution.mp4`
+
+---
+
+### CLIP 9: Volume Oracle Regime Flip (20-30 seconds)
+
+**What you need:** Show the transition from Distribution → Accumulation
+
+**How to find it:**
+1. Find a spot where the background changes from red to green
+2. This is a key moment - regime change
+
+**How to record:**
+1. Position chart so the regime change is visible
+2. Start recording
+3. Point to the red (distribution) area
+4. Slowly move right to the green (accumulation) area
+5. Pause at the exact candle where it flipped
+6. Stop recording
+
+**File name:** `09_volume_oracle_regime_flip.mp4`
+
+---
+
+### CLIP 10: Janus Atlas Levels Overview (20-30 seconds)
+
+**What you need:** Janus Atlas showing multiple level types
+
+**How to find it:**
+1. Add Janus Atlas indicator
+2. Make sure multiple level types are enabled (VWAP, session levels, etc.)
+3. Find a spot where several levels are visible
+
+**How to record:**
+1. Zoom to show multiple horizontal lines/levels
+2. Start recording
+3. Slowly point to each major level type
+4. Maybe hover to show tooltips/labels
+5. Stop recording
+
+**File name:** `10_janus_atlas_levels_overview.mp4`
+
+---
+
+### CLIP 11: Janus Atlas VWAP Family (15-20 seconds)
+
+**What you need:** Show dVWAP, wVWAP, mVWAP with bands
+
+**How to find it:**
+1. Enable VWAP levels in Janus Atlas settings
+2. Find an area where multiple VWAPs are visible
+
+**How to record:**
+1. Start recording
+2. Point to daily VWAP
+3. Point to weekly VWAP
+4. Point to monthly VWAP
+5. Show the bands if visible
+6. Stop recording
+
+**File name:** `11_janus_atlas_vwap_family.mp4`
+
+---
+
+### CLIP 12: Janus Atlas Confluence Zone (15-20 seconds)
+
+**What you need:** An area where 3+ levels cluster together
+
+**How to find it:**
+1. Look for a price area where multiple horizontal lines are very close
+2. This is where institutions operate - price often reacts here
+
+**How to record:**
+1. Find the confluence zone
+2. Start recording
+3. Draw a circle or rectangle around it (use TradingView drawing tools)
+4. Or just point your mouse in that area and move slowly between levels
+5. Stop recording
+
+**File name:** `12_janus_atlas_confluence_zone.mp4`
+
+---
+
+### CLIP 13: Plutus Flow OBV Line (15-20 seconds)
+
+**What you need:** Plutus Flow indicator showing OBV line with Flow Ribbon
+
+**How to find it:**
+1. Add Plutus Flow indicator
+2. Should show a line with a ribbon/band around it
+
+**How to record:**
+1. Make the Plutus Flow panel large enough to see clearly
+2. Start recording
+3. Point to the OBV line
+4. Point to the Flow Ribbon (the colored area around it)
+5. Show green = bullish, red = bearish
+6. Stop recording
+
+**File name:** `13_plutus_flow_obv_line.mp4`
+
+---
+
+### CLIP 14: Plutus Flow Bullish Divergence (20-30 seconds)
+
+**What you need:** Price making Lower Low, OBV making Higher Low
+
+**How to find it:**
+1. Look for price making a lower low (going down)
+2. But Plutus Flow OBV is making a higher low (going up)
+3. This indicates hidden buying pressure
+
+**How to record:**
+1. Split your view: price chart on top, Plutus Flow on bottom
+2. Start recording
+3. Point to the Lower Low on price
+4. Draw a line connecting the lows on price (optional)
+5. Point to the Higher Low on OBV
+6. Draw a line connecting the lows on OBV (optional)
+7. Pause to let viewer see the divergence
+8. Stop recording
+
+**File name:** `14_plutus_flow_bullish_divergence.mp4`
+
+---
+
+### CLIP 15: Plutus Flow Bearish Divergence (20-30 seconds)
+
+**What you need:** Price making Higher High, OBV making Lower High
+
+**How to find it:**
+1. Look for price making a higher high (going up)
+2. But Plutus Flow OBV is making a lower high (going down)
+3. This indicates hidden selling pressure
+
+**How to record:**
+1. Same approach as bullish divergence but inverted
+2. Start recording
+3. Point to Higher High on price
+4. Point to Lower High on OBV
+5. Stop recording
+
+**File name:** `15_plutus_flow_bearish_divergence.mp4`
+
+---
+
+### CLIP 16: Plutus Flow Extreme Zones (15-20 seconds)
+
+**What you need:** Show white/yellow dots at ±2σ bands
+
+**How to find it:**
+1. Look for dots appearing at the extreme bands
+2. White dot = entering extreme, Yellow dot = exiting extreme
+
+**How to record:**
+1. Find an area with visible dots
+2. Start recording
+3. Point to the extreme band
+4. Point to the dots
+5. Stop recording
+
+**File name:** `16_plutus_flow_extreme_zones.mp4`
+
+---
+
+### CLIPS 17-21: OmniDeck Recordings
+
+**CLIP 17: OmniDeck Full Overlay (15-20 seconds)**
+- Show the chart with multiple OmniDeck systems visible
+- Point to different elements briefly
+- File: `17_omnideck_full_overlay.mp4`
+
+**CLIP 18: OmniDeck TD Sequential (15-20 seconds)**
+- Find candles with numbers 1-9 on them
+- Point to the sequence counting up
+- Show a completed 9-count if possible
+- File: `18_omnideck_td_sequential.mp4`
+
+**CLIP 19: OmniDeck Squeeze (20-30 seconds)**
+- Find the squeeze dots (usually at bottom of chart or in indicator panel)
+- Show squeeze building (dots one color)
+- Show squeeze releasing (dots changing color)
+- File: `19_omnideck_squeeze.mp4`
+
+**CLIP 20: OmniDeck Liquidity Sweep (20-30 seconds)**
+- Look for 💧 or 🩸 markers on the chart
+- Show price sweeping below a level then reclaiming
+- Point to the sweep marker
+- File: `20_omnideck_liquidity_sweep.mp4`
+
+**CLIP 21: OmniDeck Supply/Demand Zones (15-20 seconds)**
+- Show the colored zones on the chart
+- Point to star ratings (⭐⭐⭐)
+- Show price reacting to a zone
+- File: `21_omnideck_supply_demand.mp4`
+
+---
+
+### CLIPS 22-23: Augury Grid Recordings
+
+**CLIP 22: Augury Grid Scanner (20-30 seconds)**
+- Open the Augury Grid indicator (shows a table)
+- Show multiple symbols listed
+- Point to different columns (symbol, timeframe, bias, score)
+- File: `22_augury_grid_scanner.mp4`
+
+**CLIP 23: Augury Grid Multi-TF Confluence (15-20 seconds)**
+- Find a row with 🔗 or 🔗🔗 icons
+- This shows multiple timeframes agreeing
+- Point to the confluence indicator
+- File: `23_augury_grid_multi_tf.mp4`
+
+---
+
+### CLIPS 24-26: Harmonic Oscillator Recordings
+
+**CLIP 24: Harmonic Oscillator Panel (20-30 seconds)**
+- Show the full panel with all 7 components
+- Point to each component briefly (RSI, Stoch RSI, MACD, EMA, Momentum, Volume, Divergence)
+- File: `24_harmonic_oscillator_panel.mp4`
+
+**CLIP 25: Harmonic Oscillator TRENDING▲ (15-20 seconds)**
+- Find a period showing 6-7 bullish votes
+- Show the "TRENDING" or strong directional reading
+- File: `25_harmonic_oscillator_trending.mp4`
+
+**CLIP 26: Harmonic Oscillator RANGING (15-20 seconds)**
+- Find a period with mixed/conflicting votes (3-4 either way)
+- Show the "RANGING" or neutral reading
+- File: `26_harmonic_oscillator_ranging.mp4`
+
+---
+
+### CLIPS 27-34: Trade Walkthrough Recordings (CRITICAL)
+
+These are the most important clips. You need to find ONE real historical trade that shows all the indicators aligning.
+
+**How to Find a Good Trade Example:**
+
+1. Pick an asset you know well (ETH, BTC, SPY, etc.)
+2. Go to 4H timeframe
+3. Find a spot where:
+   - Pentarch showed TD or IGN signal
+   - Volume Oracle showed Accumulation (green)
+   - There was a confluence zone nearby (Janus Atlas)
+   - Plutus Flow showed bullish divergence
+   - Harmonic Oscillator showed 5+ bullish votes
+   - Price actually went up afterward (winning trade)
+
+4. This might take 30-60 minutes to find the perfect example
+5. Once you find it, BOOKMARK IT in TradingView (star icon)
+
+**Recording the Trade Walkthrough:**
+
+**CLIP 27:** Augury Grid Alert
+- Show the scanner highlighting this asset
+- File: `27_trade_augury_alert.mp4`
+
+**CLIP 28:** Pentarch Check
+- Show the TD/IGN signal on the chart
+- File: `28_trade_pentarch.mp4`
+
+**CLIP 29:** Volume Oracle Check
+- Show the Accumulation regime
+- File: `29_trade_volume_oracle.mp4`
+
+**CLIP 30:** Janus Atlas Levels
+- Show the confluence zone
+- File: `30_trade_janus_levels.mp4`
+
+**CLIP 31:** Plutus Flow Divergence
+- Show the bullish divergence
+- File: `31_trade_plutus_flow.mp4`
+
+**CLIP 32:** OmniDeck Context
+- Show squeeze release, no supply overhead
+- File: `32_trade_omnideck.mp4`
+
+**CLIP 33:** Harmonic Oscillator
+- Show the 5+/7 bullish votes
+- File: `33_trade_harmonic.mp4`
+
+**CLIP 34:** Outcome
+- Use TradingView replay or scroll forward
+- Show price hitting targets
+- File: `34_trade_outcome.mp4`
+
+---
+
+### CLIPS 35-37: Hook Recordings
+
+**CLIP 35: Cluttered Chart Example (10-15 seconds)**
+
+**What you need:** A chart with 10+ random indicators stacked
+
+**How to create it:**
+1. Open a fresh chart
+2. Add a bunch of free indicators:
+   - RSI
+   - MACD
+   - Bollinger Bands
+   - 3 moving averages (20, 50, 200)
+   - Volume
+   - Stochastic
+   - ATR
+   - Some random colored indicator
+3. Make it look chaotic and unreadable
+
+**How to record:**
+1. Start recording
+2. Just let the chaos speak for itself
+3. Maybe scroll a bit to show it's all over the place
+4. Stop recording
+
+**File name:** `35_cluttered_chart.mp4`
+
+---
+
+**CLIP 36: Clean SignalPilot Chart (10-15 seconds)**
+
+**What you need:** Same asset, same timeframe, but clean with just Pentarch + Volume Oracle
+
+**How to record:**
+1. Remove all the clutter indicators
+2. Add only Pentarch and Volume Oracle
+3. Same asset, same timeframe as cluttered chart
+4. Start recording
+5. Show how clean and readable it is
+6. Stop recording
+
+**File name:** `36_clean_signalpilot_chart.mp4`
+
+---
+
+**CLIP 37: Repainting Demo (20-30 seconds) - OPTIONAL**
+
+This is hard to do unless you have access to a repainting indicator.
+
+**Alternative:** You can describe repainting in the voiceover and use a graphic instead.
+
+---
+
+## PART 4: Recording Voiceover
+
+### Equipment Setup
+
+**Minimum Setup (Phone):**
+1. Use your phone's voice memo app
+2. Find a quiet room (no AC hum, no traffic, no echo)
+3. Put phone 6-8 inches from your mouth
+4. Put a pillow or blanket behind you (reduces echo)
+
+**Better Setup (USB Mic):**
+1. Blue Yeti or similar ($100-150)
+2. Or cheap USB mic like Fifine ($30-50)
+3. Use Audacity (free software) to record
+4. Same quiet room rules apply
+
+### Recording Process
+
+**Before each session:**
+1. Read the script section 2-3 times silently
+2. Read it once out loud (practice run)
+3. Have water nearby
+4. Close other apps (no notification sounds)
+
+**During recording:**
+1. Open Audacity (or OBS for audio-only)
+2. Click Record
+3. Wait 3 seconds (silence buffer)
+4. Start reading at a natural pace
+5. If you mess up a sentence: pause 2 seconds, then re-read that sentence
+6. Continue until end of section
+7. Wait 3 seconds at end
+8. Stop recording
+
+**After recording:**
+1. Play it back and listen
+2. If it sounds good → Save as MP3
+3. If major issues → Re-record that section
+4. Don't stress about small mistakes - you can edit in CapCut
+
+### Voiceover Session Breakdown
+
+| Session | Duration | Script Lines | What to Say |
+|---------|----------|--------------|-------------|
+| 1 | ~6 min | Lines 45-134 | Hook through Philosophy |
+| 2 | ~3 min | Lines 138-216 | Competitor Comparison |
+| 3 | ~6 min | Lines 220-350 | Overview + Pentarch |
+| 4 | ~7 min | Lines 354-520 | Volume Oracle + Janus Atlas |
+| 5 | ~6.5 min | Lines 524-670 | Plutus Flow + OmniDeck |
+| 6 | ~5.5 min | Lines 674-735 | Augury Grid + Harmonic Oscillator |
+| 7 | ~3.5 min | Lines 739-820 | How They Work + CTA |
+| 8 | ~4 min | Lines 823-947 | Trade Walkthrough |
+| 9 | ~5 min | Lines 951-1084 | Mistakes + FAQ |
+| 10 | ~3 min | Lines 1088-1183 | Getting Started + Closing |
+
+---
+
+## PART 5: Putting It All Together in CapCut
+
+### Opening CapCut
+
+1. Download CapCut from https://www.capcut.com/ (free)
+2. Install and open
+3. Click "New Project"
+4. Set: 1080p, 30fps
+
+### Importing Your Files
+
+1. Click "Import" or drag files into the media panel
+2. Import all your folders:
+   - Screen recordings
+   - Voiceover files
+   - Graphics (when ready)
+   - Stock footage
+   - Music
+
+### Building the Timeline (Step by Step)
+
+**Step 1: Lay down Session 1 voiceover**
+1. Drag `session_01_hook_philosophy.mp3` to the timeline
+2. It appears as a purple/blue bar
+3. This is your audio backbone
+
+**Step 2: Add visuals to match**
+1. Play the voiceover
+2. When you hear "cluttered charts" → pause
+3. Drag `35_cluttered_chart.mp4` to the video track above
+4. Trim it to fit the timing (grab the edge and drag)
+5. Continue playing
+6. When you hear "SignalPilot" → add `36_clean_signalpilot_chart.mp4`
+7. Keep going until Session 1 is done
+
+**Step 3: Add text overlays**
+1. Click "Text" in CapCut
+2. Type key words like "REPAINTING"
+3. Position them on screen
+4. Time them to appear when you say the word
+
+**Step 4: Repeat for all sessions**
+- Add Session 2 voiceover after Session 1
+- Match with Competitor clips/graphics
+- Continue through all 10 sessions
+
+**Step 5: Add background music**
+1. Drag your music file to the bottom track
+2. Right-click → "Volume" → Set to about 15-20%
+3. It should be barely audible - just vibes
+4. Fade in at start: Right-click → "Fade" → 2 seconds
+5. Fade out at end: Same process
+
+**Step 6: Add transitions**
+1. Between clips: Click the junction point
+2. Add "Cross Dissolve" (0.3 seconds)
+3. Don't go crazy with transitions - simple is better
+
+**Step 7: Final Review**
+1. Play the whole thing start to finish
+2. Check for:
+   - Audio levels (voice should be clear)
+   - Timing (visuals match words)
+   - No awkward gaps
+   - Music not too loud
+
+### Exporting
+
+1. Click "Export" (top right)
+2. Settings:
+   - Resolution: 1080p
+   - Frame rate: 30
+   - Quality: High
+   - Format: MP4
+3. Click "Export"
+4. Wait (might take 20-60 minutes for 46-minute video)
+
+---
+
+## PART 6: Troubleshooting Common Issues
+
+**Problem: My screen recording is blurry**
+→ Check OBS settings: Output resolution should be 1920x1080
+
+**Problem: No audio in my screen recording**
+→ Add "Audio Output Capture" source in OBS
+
+**Problem: My voiceover has echo**
+→ Record in a smaller room with soft surfaces (blankets, pillows)
+
+**Problem: My voiceover volume is inconsistent**
+→ In CapCut: Select audio → "Normalize" volume
+
+**Problem: The video and audio don't sync**
+→ Zoom into the timeline and nudge clips left/right
+
+**Problem: CapCut is slow/lagging**
+→ Use "Proxy" mode (lower quality preview, full quality export)
+
+**Problem: File sizes are huge**
+→ Use MP4 format and "High" quality (not "Highest")
+
+---
+
+## PART 7: Quick Checklist Before You Start
+
+### Day Before Recording:
+- [ ] OBS installed and tested
+- [ ] TradingView logged in with SignalPilot indicators
+- [ ] Quiet room prepared
+- [ ] Script printed or on second monitor
+- [ ] Water bottle ready
+- [ ] Phone on silent
+
+### During Recording:
+- [ ] Fullscreen TradingView
+- [ ] OBS recording indicator is ON
+- [ ] 2-second buffer at start and end
+- [ ] Rename files immediately after recording
+- [ ] Take breaks every 30-45 minutes
+
+### Before Editing:
+- [ ] All 37 screen recordings complete
+- [ ] All 10 voiceover sessions complete
+- [ ] Stock footage downloaded
+- [ ] Music downloaded
+- [ ] Graphics ready (or placeholders)
+
+---
+
+*You've got this. Take it one clip at a time. If something doesn't work, message me and we'll troubleshoot together.*
