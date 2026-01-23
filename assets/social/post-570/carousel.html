@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 570 — Trading Glossary A-Z Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 64px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .slide-title .highlight {
+            color: var(--accent-gold);
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .glossary-card {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 16px;
+            padding: 48px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .glossary-card.blue {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+            border-color: rgba(74, 144, 217, 0.3);
+        }
+
+        .glossary-card.blue h3 {
+            color: var(--accent-blue);
+        }
+
+        .glossary-card.blue .term-letter {
+            color: var(--accent-blue);
+        }
+
+        .glossary-card.green {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border-color: rgba(74, 217, 122, 0.3);
+        }
+
+        .glossary-card.green h3 {
+            color: var(--accent-green);
+        }
+
+        .glossary-card.green .term-letter {
+            color: var(--accent-green);
+        }
+
+        .glossary-card.purple {
+            background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%);
+            border-color: rgba(155, 74, 217, 0.3);
+        }
+
+        .glossary-card.purple h3 {
+            color: var(--accent-purple);
+        }
+
+        .glossary-card.purple .term-letter {
+            color: var(--accent-purple);
+        }
+
+        .glossary-card.teal {
+            background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
+            border-color: rgba(74, 217, 217, 0.3);
+        }
+
+        .glossary-card.teal h3 {
+            color: var(--accent-teal);
+        }
+
+        .glossary-card.teal .term-letter {
+            color: var(--accent-teal);
+        }
+
+        .glossary-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--accent-gold);
+        }
+
+        .terms-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .term-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .term-letter {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            width: 50px;
+            flex-shrink: 0;
+        }
+
+        .term-content {
+            flex: 1;
+        }
+
+        .term-word {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .term-definition {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .alphabet-display {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .letter-box {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            background: rgba(201, 169, 98, 0.1);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 8px;
+        }
+
+        .letter-box:nth-child(odd) {
+            color: var(--accent-blue);
+            background: rgba(74, 144, 217, 0.1);
+            border-color: rgba(74, 144, 217, 0.3);
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .cta-title .emphasis {
+            color: var(--accent-gold);
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 06</span>
+                    <div class="center-content">
+                        <div class="alphabet-display">
+                            <div class="letter-box">A</div>
+                            <div class="letter-box">B</div>
+                            <div class="letter-box">C</div>
+                            <div class="letter-box">D</div>
+                            <div class="letter-box">E</div>
+                            <div class="letter-box">F</div>
+                            <div class="letter-box">G</div>
+                            <div class="letter-box">H</div>
+                            <div class="letter-box">I</div>
+                            <div class="letter-box">J</div>
+                            <div class="letter-box">K</div>
+                            <div class="letter-box">L</div>
+                            <div class="letter-box">M</div>
+                        </div>
+                        <h1 class="slide-title">Trading<br><span class="highlight">Glossary A-Z</span></h1>
+                        <p class="subtitle">Essential terms every trader must know</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: A-F Terms -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — A-F Terms</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 06</span>
+                    <div class="center-content">
+                        <div class="glossary-card">
+                            <h3>A - F</h3>
+                            <div class="terms-grid">
+                                <div class="term-row">
+                                    <span class="term-letter">A</span>
+                                    <div class="term-content">
+                                        <div class="term-word">Ask</div>
+                                        <div class="term-definition">The price sellers are willing to accept</div>
+                                    </div>
+                                </div>
+                                <div class="term-row">
+                                    <span class="term-letter">B</span>
+                                    <div class="term-content">
+                                        <div class="term-word">BOS</div>
+                                        <div class="term-definition">Break of Structure - shift in market direction</div>
+                                    </div>
+                                </div>
+                                <div class="term-row">
+                                    <span class="term-letter">F</span>
+                                    <div class="term-content">
+                                        <div class="term-word">FVG</div>
+                                        <div class="term-definition">Fair Value Gap - imbalance zone in price</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: L-O Terms -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — L-O Terms</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 06</span>
+                    <div class="center-content">
+                        <div class="glossary-card blue">
+                            <h3>L - O</h3>
+                            <div class="terms-grid">
+                                <div class="term-row">
+                                    <span class="term-letter">L</span>
+                                    <div class="term-content">
+                                        <div class="term-word">Liquidity</div>
+                                        <div class="term-definition">Resting orders that institutions target</div>
+                                    </div>
+                                </div>
+                                <div class="term-row">
+                                    <span class="term-letter">M</span>
+                                    <div class="term-content">
+                                        <div class="term-word">MSS</div>
+                                        <div class="term-definition">Market Structure Shift - trend change signal</div>
+                                    </div>
+                                </div>
+                                <div class="term-row">
+                                    <span class="term-letter">O</span>
+                                    <div class="term-content">
+                                        <div class="term-word">OTE</div>
+                                        <div class="term-definition">Optimal Trade Entry - 61.8-78.6% retracement</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: P-S Terms -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — P-S Terms</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 06</span>
+                    <div class="center-content">
+                        <div class="glossary-card purple">
+                            <h3>P - S</h3>
+                            <div class="terms-grid">
+                                <div class="term-row">
+                                    <span class="term-letter">P</span>
+                                    <div class="term-content">
+                                        <div class="term-word">Premium</div>
+                                        <div class="term-definition">Price above equilibrium - sell zone</div>
+                                    </div>
+                                </div>
+                                <div class="term-row">
+                                    <span class="term-letter">R</span>
+                                    <div class="term-content">
+                                        <div class="term-word">R:R</div>
+                                        <div class="term-definition">Risk to Reward ratio for position sizing</div>
+                                    </div>
+                                </div>
+                                <div class="term-row">
+                                    <span class="term-letter">S</span>
+                                    <div class="term-content">
+                                        <div class="term-word">SFP</div>
+                                        <div class="term-definition">Swing Failure Pattern - reversal signal</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: T-Z Terms -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — T-Z Terms</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 06</span>
+                    <div class="center-content">
+                        <div class="glossary-card teal">
+                            <h3>T - Z</h3>
+                            <div class="terms-grid">
+                                <div class="term-row">
+                                    <span class="term-letter">T</span>
+                                    <div class="term-content">
+                                        <div class="term-word">Take Profit</div>
+                                        <div class="term-definition">Target price to exit winning trade</div>
+                                    </div>
+                                </div>
+                                <div class="term-row">
+                                    <span class="term-letter">V</span>
+                                    <div class="term-content">
+                                        <div class="term-word">Volume</div>
+                                        <div class="term-definition">Number of contracts/shares traded</div>
+                                    </div>
+                                </div>
+                                <div class="term-row">
+                                    <span class="term-letter">W</span>
+                                    <div class="term-content">
+                                        <div class="term-word">Wyckoff</div>
+                                        <div class="term-definition">Methodology analyzing institutional behavior</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: CTA -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — CTA</span>
+            <div class="slide slide-6">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">06 / 06</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">Speak the<br><span class="emphasis">Language</span></h2>
+                        <p class="cta-text">Master the terminology.</p>
+                        <p class="cta-text">Link in bio</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const totalSlides = slides.length;
+        let exportMode = false;
+
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+        }
+
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (exportMode && currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateExportView();
+            }
+        }
+
+        function prevSlide() {
+            if (exportMode && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (!exportMode) enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>
