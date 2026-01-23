@@ -1193,13 +1193,17 @@ The indicators play well with others. They're not a closed ecosystem."
 
 **What Traders Are Saying:**
 
-Before I give you the resources, let me share what actual users experience:
+Before I give you the resources, let me share what actual users are saying on Trustpilot:
 
-'Finally, indicators that don't change their mind after the fact. I can actually trust my backtests now.' — verified user
+'This is the first time I feel like I've struck gold, literally.' — Xhesika L., verified Trustpilot review ⭐⭐⭐⭐⭐
 
-'The education hub alone is worth it. I learned more in two weeks than in a year of YouTube videos.' — community member
+'It has helped me understand the market cycles better.' — Arber L., verified Trustpilot review ⭐⭐⭐⭐⭐
 
-'Pentarch + Volume Oracle changed how I see the market. I actually understand what I'm looking at now.' — Discord community
+'You can tell they are passionate about building this project.' — Axl F., verified Trustpilot review ⭐⭐⭐⭐⭐
+
+'Top experience from dedicated devs.' — Artur Y., verified Trustpilot review ⭐⭐⭐⭐⭐
+
+These aren't paid testimonials. Check our Trustpilot page yourself — link in the description.
 
 We're not promising riches. We're delivering clarity. That's what traders tell us makes the difference.
 
@@ -1370,6 +1374,7 @@ I lost $47,000 before I understood why most trading indicators fail. In this vid
 📖 Full Documentation: https://docs.signalpilot.io
 📊 Get SignalPilot on TradingView: [LINK]
 💬 Join Our Community: [DISCORD LINK]
+⭐ Read Our Reviews: https://www.trustpilot.com/review/signalpilot.io
 
 ---
 
