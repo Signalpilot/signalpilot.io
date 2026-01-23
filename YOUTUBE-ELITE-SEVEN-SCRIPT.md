@@ -1165,13 +1165,13 @@ Don't rush. Screen time is irreplaceable.
 
 **'What's the difference between the plans?'**
 
-Starter gives you access to individual indicators — pick the ones you need.
+Monthly at $99/month gives you all 7 indicators with month-to-month flexibility. Great for trying it out.
 
-Pro gives you the full suite with all seven indicators plus priority support.
+Yearly at $699/year is the same features but saves you $489 — that's 41% off. Best value if you're committed.
 
-Lifetime is Pro forever, plus access to our private Discord community with over 200 preset configurations shared by other traders.
+Lifetime at $1,799 one-time is everything forever — all future updates, private Discord community, 200+ preset configurations, beta access, priority support. Limited to 350 total slots.
 
-All plans include full documentation and the free education hub.
+All plans include full documentation, the free education hub, and a 7-day money-back guarantee.
 
 **'Can I use these with other indicators?'**
 
@@ -1223,9 +1223,11 @@ Full documentation for every indicator is at docs.signalpilot.io. Every setting 
 
 The Elite Seven are available on TradingView. Three plan options:
 
-- **Starter** — Access to individual indicators. Perfect if you want to start with just Pentarch or a specific tool.
-- **Pro** — Full suite with all seven indicators plus priority support.
-- **Lifetime** — Pro forever, plus access to our private Discord community with 200+ preset configurations shared by other traders.
+- **Monthly ($99/month)** — All 7 indicators, future updates, 48-hour support. Month-to-month flexibility.
+- **Yearly ($699/year)** — Same features, 41% savings ($489 off), 24-hour support. Best value.
+- **Lifetime ($1,799 one-time)** — Everything forever. Private Discord, 200+ presets, beta access, priority support. Limited to 350 slots.
+
+All plans include a 7-day money-back guarantee. Works on stocks, crypto, forex, indices, commodities.
 
 Links are in the description.
 
@@ -1449,19 +1451,454 @@ I lost $47,000 before I understood why most trading indicators fail. In this vid
 
 ---
 
-## PRODUCTION CHECKLIST
+## PRODUCTION GUIDE
 
-- [ ] Record all indicator demonstrations
-- [ ] Record real trade walkthrough (or find historical example)
-- [ ] Create competitor comparison graphic
-- [ ] Create Elite Seven hierarchy diagram
-- [ ] Record voiceover
-- [ ] Source stock footage (frustrated trader, etc.)
-- [ ] Design thumbnail (test Option D)
-- [ ] Add captions/subtitles
-- [ ] Create end screen with next video suggestion
-- [ ] Schedule at optimal time (check analytics)
+This section covers everything you need to produce this video, broken into what you do yourself, what we do together, and a step-by-step recording tutorial.
 
 ---
 
-*Script v2.0 ready for production. Total runtime: ~46 minutes.*
+# COMPLETE ASSET LIST
+
+## Category 1: Screen Recordings (You Do — TradingView)
+
+| # | Asset | Duration | Section Used | Priority |
+|---|-------|----------|--------------|----------|
+| 1 | **Pentarch TD Signal** — Find a historical TD signal, zoom in, show the purple marker | 15-20 sec | Pentarch section | HIGH |
+| 2 | **Pentarch IGN Signal** — Show Ignition signal with regime bars turning green | 15-20 sec | Pentarch section | HIGH |
+| 3 | **Pentarch WRN Signal** — Show Warning during an uptrend | 15-20 sec | Pentarch section | HIGH |
+| 4 | **Pentarch CAP Signal** — Show Climax with volume spike | 15-20 sec | Pentarch section | HIGH |
+| 5 | **Pentarch BDN Signal** — Show Breakdown with structure failure | 15-20 sec | Pentarch section | HIGH |
+| 6 | **Pentarch Full Cycle** — Show a complete cycle (TD → IGN → WRN → CAP → BDN) | 30-45 sec | Pentarch section | MEDIUM |
+| 7 | **Volume Oracle Accumulation** — Green regime with dashboard | 15-20 sec | Volume Oracle section | HIGH |
+| 8 | **Volume Oracle Distribution** — Red regime with dashboard | 15-20 sec | Volume Oracle section | HIGH |
+| 9 | **Volume Oracle Regime Flip** — Show transition from Distribution to Accumulation | 20-30 sec | Volume Oracle section | HIGH |
+| 10 | **Janus Atlas Levels Overview** — Show multiple level types on clean chart | 20-30 sec | Janus Atlas section | HIGH |
+| 11 | **Janus Atlas VWAP Family** — Highlight dVWAP, wVWAP, mVWAP with bands | 15-20 sec | Janus Atlas section | MEDIUM |
+| 12 | **Janus Atlas Confluence Zone** — Show 3+ levels clustering | 15-20 sec | Janus Atlas section | HIGH |
+| 13 | **Plutus Flow OBV Line** — Show OBV with Flow Ribbon | 15-20 sec | Plutus Flow section | HIGH |
+| 14 | **Plutus Flow Bullish Divergence** — Price LL, OBV HL clearly visible | 20-30 sec | Plutus Flow section | HIGH |
+| 15 | **Plutus Flow Bearish Divergence** — Price HH, OBV LH clearly visible | 20-30 sec | Plutus Flow section | MEDIUM |
+| 16 | **Plutus Flow Extreme Zones** — Show white/yellow dots at ±2σ | 15-20 sec | Plutus Flow section | MEDIUM |
+| 17 | **OmniDeck Full Overlay** — Show all systems active (briefly) | 15-20 sec | OmniDeck section | HIGH |
+| 18 | **OmniDeck TD Sequential** — Show 1-9 count on candles | 15-20 sec | OmniDeck section | HIGH |
+| 19 | **OmniDeck Squeeze** — Show squeeze building and releasing | 20-30 sec | OmniDeck section | HIGH |
+| 20 | **OmniDeck Liquidity Sweep** — Show 💧 or 🩸 marker with reclaim | 20-30 sec | OmniDeck section | HIGH |
+| 21 | **OmniDeck Supply/Demand Zones** — Show ⭐⭐⭐ zone with price reaction | 15-20 sec | OmniDeck section | MEDIUM |
+| 22 | **Augury Grid Scanner** — Show the table with multiple symbols/timeframes | 20-30 sec | Augury Grid section | HIGH |
+| 23 | **Augury Grid Multi-TF Confluence** — Show 🔗🔗 indicator | 15-20 sec | Augury Grid section | HIGH |
+| 24 | **Harmonic Oscillator Panel** — Show all 7 components voting | 20-30 sec | Harmonic Oscillator section | HIGH |
+| 25 | **Harmonic Oscillator TRENDING▲** — Show 6-7 bullish votes | 15-20 sec | Harmonic Oscillator section | HIGH |
+| 26 | **Harmonic Oscillator RANGING** — Show conflicting votes | 15-20 sec | Harmonic Oscillator section | MEDIUM |
+| 27 | **TRADE WALKTHROUGH — Augury Grid Alert** — ETH 4H bullish signal | 20-30 sec | Trade Walkthrough | CRITICAL |
+| 28 | **TRADE WALKTHROUGH — Pentarch Check** — TD signal on ETH | 20-30 sec | Trade Walkthrough | CRITICAL |
+| 29 | **TRADE WALKTHROUGH — Volume Oracle Check** — Accumulation regime | 15-20 sec | Trade Walkthrough | CRITICAL |
+| 30 | **TRADE WALKTHROUGH — Janus Atlas Levels** — Confluence zone at ~$2,847 | 20-30 sec | Trade Walkthrough | CRITICAL |
+| 31 | **TRADE WALKTHROUGH — Plutus Flow Divergence** — Bullish divergence visible | 20-30 sec | Trade Walkthrough | CRITICAL |
+| 32 | **TRADE WALKTHROUGH — OmniDeck Context** — Squeeze release, no supply overhead | 20-30 sec | Trade Walkthrough | CRITICAL |
+| 33 | **TRADE WALKTHROUGH — Harmonic Oscillator** — BIAS▲ with 5/7 votes | 15-20 sec | Trade Walkthrough | CRITICAL |
+| 34 | **TRADE WALKTHROUGH — Outcome** — Show price hitting targets (time lapse or replay) | 30-45 sec | Trade Walkthrough | CRITICAL |
+| 35 | **Cluttered Chart Example** — 10+ random indicators stacked (for hook) | 10-15 sec | Hook | HIGH |
+| 36 | **Clean SignalPilot Chart** — Same asset, clean with Pentarch + Volume Oracle | 10-15 sec | Hook | HIGH |
+| 37 | **Repainting Demo (if possible)** — Show signal appearing/disappearing on replay | 20-30 sec | Hook / Philosophy | MEDIUM |
+
+**Total Screen Recordings: 37**
+**Estimated Recording Time: 2-3 hours**
+
+---
+
+## Category 2: Graphics (We Create Together)
+
+| # | Asset | Dimensions | Section Used | Who Creates |
+|---|-------|------------|--------------|-------------|
+| 1 | **Elite Seven Hierarchy Diagram** — Pentarch at top, Council of Four, Support | 1920x1080 | Overview section | Together (I design, you review) |
+| 2 | **5-Phase Market Cycle Visualization** — Accumulation → Markup → Distribution → Decline | 1920x1080 | Philosophy section | Together |
+| 3 | **Competitor Comparison Table** — SignalPilot vs LuxAlgo vs TrendSpider vs Trade Ideas | 1920x1080 | Competitor section | Together |
+| 4 | **Divergence Types Diagram** — Bullish, Bearish, Hidden Bullish, Hidden Bearish | 1920x1080 | Plutus Flow section | Together |
+| 5 | **Workflow Flowchart** — Augury Grid → Pentarch → Volume Oracle → etc. | 1920x1080 | How They Work Together | Together |
+| 6 | **Common Mistakes Warning Cards** — 6 cards with X icon | 1920x1080 each | Common Mistakes section | Together |
+| 7 | **FAQ Question Cards** — 7 question text overlays | 1920x1080 each | FAQ section | Together |
+| 8 | **Testimonial Cards** — 4 Trustpilot quotes with stars | 1920x1080 each | Getting Started section | Together |
+| 9 | **Pricing Comparison Card** — Monthly vs Yearly vs Lifetime | 1920x1080 | Getting Started section | Together |
+| 10 | **Subscribe Button Animation** — Animated subscribe CTA | 400x100 | Mid-roll CTA | You (CapCut preset) |
+| 11 | **End Card Template** — Subscribe, links, next video | 1920x1080 | Closing | You (CapCut/YouTube) |
+
+**Total Graphics: 11**
+**Format: PNG or MP4 (for animated)**
+
+---
+
+## Category 3: Stock Footage (You Source — Free Sites)
+
+| # | Asset | Duration | Section Used | Source Suggestion |
+|---|-------|----------|--------------|-------------------|
+| 1 | **Frustrated trader at desk** | 5-10 sec | Hook | Pexels, Pixabay |
+| 2 | **Multiple monitors with charts** | 5-10 sec | Hook | Pexels, Pixabay |
+| 3 | **Account showing losses/red** | 5-10 sec | Hook | Create yourself or Pexels |
+| 4 | **Person looking confused at screen** | 5-10 sec | Hook | Pexels |
+| 5 | **Clean professional trading setup** | 5-10 sec | Closing | Pexels, Pixabay |
+| 6 | **Abstract financial/money flow** | 5-10 sec | Smart Money sections | Pexels |
+| 7 | **Success/achievement imagery** | 5-10 sec | Closing | Pexels (use sparingly) |
+
+**Free Stock Footage Sites:**
+- Pexels.com (best for trading/finance)
+- Pixabay.com
+- Videvo.net (some free)
+- Coverr.co
+
+**Total Stock Footage: 7 clips**
+
+---
+
+## Category 4: Audio (You Record)
+
+| # | Asset | Duration | Notes |
+|---|-------|----------|-------|
+| 1 | **Full Voiceover** | ~46 min | Record in sections (see tutorial below) |
+| 2 | **Background Music** | ~46 min | Subtle, non-distracting (see suggestions) |
+
+**Voiceover Equipment Needed:**
+- Decent microphone (USB mic like Blue Yeti, or even phone in quiet room)
+- Quiet environment (no echo, no background noise)
+- Water nearby (long recording)
+
+**Background Music Sources (Royalty-Free):**
+- YouTube Audio Library (free, no attribution)
+- Epidemic Sound (paid, high quality)
+- Artlist (paid)
+- Uppbeat.io (free tier available)
+
+**Music Style:** Corporate/tech, subtle, 60-80 BPM, no lyrics
+
+---
+
+## Category 5: Thumbnails (You Create)
+
+| # | Option | Elements Needed |
+|---|--------|-----------------|
+| 1 | **Option D: "$47,000"** | Red background, bold white text "$47,000", smaller text "What I Lost Before I Found This", downward chart |
+| 2 | **Option A: "Elite Seven"** | Dark gradient, 7 indicator icons (can use from TradingView), "THE ELITE SEVEN" text |
+
+**Thumbnail Specs:**
+- Size: 1280x720 (minimum) or 1920x1080
+- Format: PNG or JPG
+- Text: Large, readable on mobile
+- Tool: Canva (free), Photoshop, or CapCut
+
+---
+
+# RECORDING TUTORIAL: How to Record in Pieces for CapCut
+
+## The Strategy: Section-by-Section Recording
+
+You don't record 46 minutes straight. You record each section separately, then stitch in CapCut.
+
+### Step 1: Prep Your Recording Setup
+
+**Screen Recording Software:**
+- **Windows:** OBS Studio (free) or built-in Xbox Game Bar (Win+G)
+- **Mac:** OBS Studio or built-in QuickTime
+- **Recommended:** OBS Studio — free, powerful, records system audio
+
+**OBS Settings for Quality:**
+```
+Output Resolution: 1920x1080
+FPS: 30 (or 60 for smoother)
+Encoder: x264 or NVENC (if you have NVIDIA GPU)
+Bitrate: 6000-10000 kbps
+Format: MP4 or MKV
+Audio: 48kHz, 192kbps
+```
+
+**Voiceover Recording:**
+- Use a separate audio track (OBS can do this)
+- Or record voiceover separately in Audacity (free) for cleaner editing
+
+### Step 2: The Recording Order
+
+Record in this order (easiest to hardest):
+
+**PHASE 1: Screen Recordings (No Voice)**
+Record all TradingView clips FIRST, without talking. Just capture the visuals.
+
+1. Open TradingView
+2. Load chart with SignalPilot indicators
+3. Find examples of each signal/feature
+4. Record 15-45 second clips of each
+5. Name files clearly: `01_pentarch_td_signal.mp4`, `02_pentarch_ign_signal.mp4`, etc.
+
+**Tip:** Use TradingView's replay mode to find historical examples of signals.
+
+**PHASE 2: Voiceover Recording**
+Record voiceover in sections, matching the script timestamps:
+
+| Recording Session | Script Sections | Duration |
+|-------------------|-----------------|----------|
+| Session 1 | Hook + Who This Is For + Philosophy | ~6 min |
+| Session 2 | Competitor Comparison | ~3 min |
+| Session 3 | Elite Seven Overview + Pentarch | ~6 min |
+| Session 4 | Volume Oracle + Janus Atlas | ~7 min |
+| Session 5 | Plutus Flow + OmniDeck | ~6.5 min |
+| Session 6 | Augury Grid + Harmonic Oscillator | ~5.5 min |
+| Session 7 | How They Work Together + Mid-roll CTA | ~3.5 min |
+| Session 8 | Trade Walkthrough | ~4 min |
+| Session 9 | Common Mistakes + FAQ | ~5 min |
+| Session 10 | Getting Started + Closing | ~3 min |
+
+**Recording Tips:**
+- Read each section 2-3 times before recording
+- Keep water nearby
+- If you mess up, pause, then restart that sentence
+- Speak slightly slower than conversational (YouTube viewers can speed up)
+- Record in a quiet room, same time of day for consistent sound
+
+**PHASE 3: Stock Footage**
+Download stock footage after voiceover so you know exact durations needed.
+
+### Step 3: File Organization
+
+Create this folder structure:
+
+```
+Elite_Seven_Video/
+├── 01_Screen_Recordings/
+│   ├── 01_hook/
+│   │   ├── cluttered_chart.mp4
+│   │   └── clean_signalpilot_chart.mp4
+│   ├── 02_pentarch/
+│   │   ├── td_signal.mp4
+│   │   ├── ign_signal.mp4
+│   │   └── ...
+│   ├── 03_volume_oracle/
+│   ├── 04_janus_atlas/
+│   ├── 05_plutus_flow/
+│   ├── 06_omnideck/
+│   ├── 07_augury_grid/
+│   ├── 08_harmonic_oscillator/
+│   └── 09_trade_walkthrough/
+├── 02_Voiceover/
+│   ├── session_01_hook_philosophy.mp3
+│   ├── session_02_competitors.mp3
+│   └── ...
+├── 03_Graphics/
+│   ├── hierarchy_diagram.png
+│   ├── market_cycle.png
+│   └── ...
+├── 04_Stock_Footage/
+│   ├── frustrated_trader.mp4
+│   └── ...
+├── 05_Music/
+│   └── background_track.mp3
+└── 06_Export/
+    └── (final video goes here)
+```
+
+### Step 4: CapCut Assembly Tutorial
+
+**Opening CapCut:**
+1. Create new project (1920x1080, 30fps)
+2. Import all folders
+
+**Timeline Structure:**
+```
+Track 1 (top): Text overlays, graphics, titles
+Track 2: Screen recordings / stock footage
+Track 3: Voiceover audio
+Track 4: Background music (low volume, -12 to -18 dB)
+```
+
+**Assembly Process:**
+
+1. **Drag voiceover Session 1 to Track 3**
+2. **Listen and add visuals to Track 2:**
+   - When script mentions "cluttered charts" → add cluttered_chart.mp4
+   - When script mentions "SignalPilot" → add clean_signalpilot_chart.mp4
+   - Match timing to spoken words
+
+3. **Add text overlays to Track 1:**
+   - Key terms (like "REPAINTING") can appear as text
+   - Use CapCut's text presets for consistency
+
+4. **Repeat for each section**
+
+5. **Add transitions:**
+   - Use simple cuts or cross-dissolve (0.3-0.5 sec)
+   - Don't overdo fancy transitions
+
+6. **Add background music to Track 4:**
+   - Volume: -12 to -18 dB (voice should be clear)
+   - Fade in at start, fade out at end
+
+7. **Final review:**
+   - Watch full video at 1x speed
+   - Check audio levels
+   - Check timing of visuals to voice
+
+**CapCut Export Settings:**
+```
+Resolution: 1080p
+Frame Rate: 30fps
+Quality: High
+Format: MP4
+```
+
+---
+
+# WHAT YOU DO vs WHAT WE DO TOGETHER
+
+## You Do (Independently)
+
+| Task | Time Estimate | Notes |
+|------|---------------|-------|
+| Set up OBS/recording software | 30 min | One-time setup |
+| Record all 37 screen recordings | 2-3 hours | TradingView clips |
+| Record voiceover (10 sessions) | 3-4 hours | Take breaks |
+| Download stock footage | 30 min | Pexels, Pixabay |
+| Download background music | 15 min | YouTube Audio Library |
+| Create thumbnails | 30-45 min | Canva |
+| CapCut assembly | 4-6 hours | Longest part |
+| Export and upload | 1-2 hours | Render + upload |
+
+**Your Total Time: ~12-17 hours** (spread over several days)
+
+## We Do Together
+
+| Task | How We Do It |
+|------|--------------|
+| **Graphics design** | I create the designs (descriptions/layouts), you implement in Canva or I provide exact specifications |
+| **Script refinements** | You read it, tell me what feels unnatural, I adjust |
+| **Trade walkthrough selection** | You find a real historical trade that matches the criteria, I help verify it's a good example |
+| **Review rough cut** | You export a draft, tell me timestamps of issues, I suggest fixes |
+| **Thumbnail A/B testing ideas** | I give you 2-3 variations to test |
+
+---
+
+# GRAPHICS SPECIFICATIONS (For You to Create in Canva)
+
+## 1. Elite Seven Hierarchy Diagram
+
+```
+Layout: Pyramid structure
+
+TOP (The Sovereign):
+┌─────────────────────────────────────┐
+│           PENTARCH                   │
+│      "The Sovereign"                 │
+│    Cycle Phase Detection            │
+└─────────────────────────────────────┘
+
+MIDDLE (Council of Four):
+┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐
+│  VOLUME    │ │   JANUS    │ │  PLUTUS    │ │  OMNIDECK  │
+│  ORACLE    │ │   ATLAS    │ │   FLOW     │ │            │
+│ "Prophet"  │ │"Cartograph"│ │ "Scales"   │ │"Commander" │
+└────────────┘ └────────────┘ └────────────┘ └────────────┘
+
+BOTTOM (Support):
+┌──────────────────┐ ┌──────────────────┐
+│   AUGURY GRID    │ │    HARMONIC      │
+│  "The Watchman"  │ │   OSCILLATOR     │
+│                  │ │  "The Arbiter"   │
+└──────────────────┘ └──────────────────┘
+
+Colors: Dark background (#1a1a2e), Gold accents (#ffd700), White text
+Font: Clean sans-serif (Montserrat, Inter)
+```
+
+## 2. 5-Phase Market Cycle
+
+```
+Layout: Circular or wave diagram
+
+       MARKUP (2)
+         ↗️
+ACCUMULATION (1) ──────→ DISTRIBUTION (3)
+    ↖️                         ↘️
+       ←── DECLINE (4) ←──
+
+Each phase labeled with:
+- Phase name
+- What smart money is doing
+- What retail is doing
+
+Colors:
+- Accumulation: Purple (TD signal color)
+- Markup: Teal (IGN signal color)
+- Distribution: Yellow/Orange (WRN/CAP colors)
+- Decline: Red (BDN signal color)
+```
+
+## 3. Competitor Comparison Table
+
+```
+┌─────────────────┬────────────┬──────────┬─────────────┬─────────────┐
+│ Feature         │ SignalPilot│ LuxAlgo  │ TrendSpider │ Trade Ideas │
+├─────────────────┼────────────┼──────────┼─────────────┼─────────────┤
+│ Non-repainting  │ ✅ Verified │ ⚠️ Issues│ ✅          │ ✅          │
+│ Ease of use     │ ✅ Immediate│ ✅ Good  │ ❌ Steep    │ ⚠️ Complex  │
+│ Cycle focus     │ ✅ Core     │ ❌       │ ❌          │ ❌          │
+│ Price           │ $$         │ $$       │ $$$         │ $$$$        │
+└─────────────────┴────────────┴──────────┴─────────────┴─────────────┘
+
+Colors: Green checks, Red X's, Yellow warnings
+SignalPilot column highlighted
+```
+
+---
+
+# RECORDING SCHEDULE TEMPLATE
+
+## Day 1: Setup & Screen Recordings (3-4 hours)
+- [ ] Install OBS, test settings
+- [ ] Record Hook clips (cluttered vs clean)
+- [ ] Record all Pentarch clips (5 signals + cycle)
+- [ ] Record Volume Oracle clips
+
+## Day 2: More Screen Recordings (2-3 hours)
+- [ ] Record Janus Atlas clips
+- [ ] Record Plutus Flow clips
+- [ ] Record OmniDeck clips
+- [ ] Record Augury Grid clips
+- [ ] Record Harmonic Oscillator clips
+
+## Day 3: Trade Walkthrough & Voiceover Prep (2-3 hours)
+- [ ] Find perfect historical trade example
+- [ ] Record all Trade Walkthrough clips
+- [ ] Read through script 2x (practice)
+- [ ] Download stock footage
+- [ ] Download music
+
+## Day 4: Voiceover Sessions 1-5 (2-3 hours)
+- [ ] Record Hook + Philosophy (Session 1)
+- [ ] Record Competitor Comparison (Session 2)
+- [ ] Record Overview + Pentarch (Session 3)
+- [ ] Record Volume Oracle + Janus Atlas (Session 4)
+- [ ] Record Plutus Flow + OmniDeck (Session 5)
+
+## Day 5: Voiceover Sessions 6-10 (2 hours)
+- [ ] Record Augury Grid + Harmonic (Session 6)
+- [ ] Record How They Work + CTA (Session 7)
+- [ ] Record Trade Walkthrough (Session 8)
+- [ ] Record Mistakes + FAQ (Session 9)
+- [ ] Record Getting Started + Closing (Session 10)
+
+## Day 6-7: CapCut Assembly (4-6 hours)
+- [ ] Import all assets
+- [ ] Assemble Hook through Pentarch
+- [ ] Assemble remaining indicator sections
+- [ ] Assemble Trade Walkthrough
+- [ ] Assemble final sections
+- [ ] Add music, transitions, text overlays
+- [ ] First full review
+
+## Day 8: Polish & Export (2-3 hours)
+- [ ] Fix timing issues
+- [ ] Adjust audio levels
+- [ ] Add end card
+- [ ] Create thumbnail
+- [ ] Export final video
+- [ ] Upload to YouTube
+
+---
+
+*Total Production Time: ~15-20 hours spread over 8 days*
+*Can be compressed to 4-5 days if working full days*
