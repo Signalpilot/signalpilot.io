@@ -1171,7 +1171,7 @@ Yearly at $699/year is the same features but saves you $489 — that's 41% off. 
 
 Lifetime at $1,799 one-time is everything forever — all future updates, private Discord community, 200+ preset configurations, beta access, priority support. Limited to 350 total slots.
 
-All plans include full documentation, the free education hub, and a 7-day money-back guarantee.
+All plans come with a 7-day free trial — no credit card, full access. Plus a 7-day money-back guarantee if you subscribe and change your mind. And of course, full documentation and the free education hub.
 
 **'Can I use these with other indicators?'**
 
@@ -1227,7 +1227,9 @@ The Elite Seven are available on TradingView. Three plan options:
 - **Yearly ($699/year)** — Same features, 41% savings ($489 off), 24-hour support. Best value.
 - **Lifetime ($1,799 one-time)** — Everything forever. Private Discord, 200+ presets, beta access, priority support. Limited to 350 slots.
 
-All plans include a 7-day money-back guarantee. Works on stocks, crypto, forex, indices, commodities.
+All plans include a 7-day free trial — use everything, no credit card required. And if you do subscribe and it's not for you, there's also a 7-day money-back guarantee. Zero risk either way.
+
+Works on stocks, crypto, forex, indices, commodities.
 
 Links are in the description.
 
