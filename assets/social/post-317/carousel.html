@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 317 — Survivorship Bias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --text-primary: #e8e6e3;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-cyan: #4ad9d9;
+            --accent-purple: #9b4ad9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1800px;
+        }
+
+        .slide-wrapper {
+            position: relative;
+            width: 1080px;
+            height: 1080px;
+            transform: scale(0.45);
+            transform-origin: top left;
+            margin-bottom: -594px;
+            margin-right: -594px;
+        }
+
+        .slide-wrapper:hover {
+            z-index: 10;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 0;
+        }
+
+        .slide {
+            position: relative;
+            width: 1080px;
+            height: 1080px;
+            background: var(--bg-dark);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 72px;
+        }
+
+        /* Typography */
+        .slide-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 82px;
+            font-weight: 600;
+            line-height: 1.0;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+        }
+
+        .headline-large {
+            font-size: 88px;
+        }
+
+        .headline-medium {
+            font-size: 72px;
+        }
+
+        .subheadline {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .accent-text {
+            color: var(--accent-cyan);
+        }
+
+        .accent-gold {
+            color: var(--accent-gold);
+        }
+
+        .accent-purple {
+            color: var(--accent-purple);
+        }
+
+        /* Cover slide specific */
+        .cover-slide .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            padding: 16px 32px;
+            border: 1px solid rgba(74, 217, 217, 0.3);
+            border-radius: 6px;
+            margin-bottom: 48px;
+            background: rgba(74, 217, 217, 0.05);
+        }
+
+        .cover-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 96px;
+            font-weight: 600;
+            line-height: 1.0;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+        }
+
+        .cover-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        /* Iceberg visual */
+        .iceberg-container {
+            position: absolute;
+            bottom: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 400px;
+        }
+
+        .iceberg-above {
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(180deg, rgba(74, 217, 217, 0.3), rgba(74, 217, 217, 0.1));
+            margin: 0 auto;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            margin-bottom: -2px;
+        }
+
+        .water-line {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(74, 217, 217, 0.5), transparent);
+        }
+
+        .iceberg-below {
+            width: 280px;
+            height: 300px;
+            background: linear-gradient(180deg, rgba(74, 217, 217, 0.1), rgba(74, 217, 217, 0.02));
+            margin: 0 auto;
+            clip-path: polygon(20% 0%, 80% 0%, 100% 80%, 60% 100%, 40% 100%, 0% 80%);
+            opacity: 0.4;
+        }
+
+        /* Content list styling */
+        .content-list {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .content-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            padding: 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .content-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(74, 217, 217, 0.2);
+        }
+
+        .item-icon {
+            font-size: 32px;
+            line-height: 1;
+            min-width: 40px;
+        }
+
+        .item-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .item-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .item-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Warning card */
+        .warning-card {
+            padding: 40px;
+            background: rgba(201, 169, 98, 0.08);
+            border: 1px solid rgba(201, 169, 98, 0.25);
+            border-radius: 16px;
+            margin-top: 32px;
+        }
+
+        .warning-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+
+        .warning-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Contrast boxes */
+        .contrast-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .contrast-box {
+            padding: 36px;
+            border-radius: 16px;
+            text-align: left;
+        }
+
+        .contrast-box.visible {
+            background: rgba(74, 217, 217, 0.08);
+            border: 1px solid rgba(74, 217, 217, 0.2);
+        }
+
+        .contrast-box.invisible {
+            background: rgba(155, 74, 217, 0.08);
+            border: 1px solid rgba(155, 74, 217, 0.2);
+        }
+
+        .contrast-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .contrast-box.visible .contrast-label {
+            color: var(--accent-cyan);
+        }
+
+        .contrast-box.invisible .contrast-label {
+            color: var(--accent-purple);
+        }
+
+        .contrast-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contrast-item {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .contrast-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .contrast-box.visible .contrast-item::before {
+            background: var(--accent-cyan);
+        }
+
+        .contrast-box.invisible .contrast-item::before {
+            background: var(--accent-purple);
+        }
+
+        /* Stat display */
+        .stat-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 200px;
+            font-weight: 600;
+            color: var(--accent-purple);
+            line-height: 1;
+            text-shadow: 0 0 80px rgba(155, 74, 217, 0.4);
+        }
+
+        .stat-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-top: 24px;
+        }
+
+        /* Reality check card */
+        .reality-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 48px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            margin-top: auto;
+        }
+
+        .reality-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+        }
+
+        .reality-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Takeaway cards */
+        .takeaway-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            flex: 1;
+            align-content: center;
+        }
+
+        .takeaway-card {
+            padding: 36px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .takeaway-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            min-width: 60px;
+        }
+
+        .takeaway-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* CTA slide */
+        .cta-slide .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 80px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+            max-width: 800px;
+        }
+
+        .cta-subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--bg-dark);
+            background: linear-gradient(135deg, var(--accent-cyan), #3ab8b8);
+            padding: 24px 64px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .brand-tag {
+            position: absolute;
+            bottom: 56px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 6px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        /* Export mode */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            transform: none;
+            margin: 0;
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Slide 1: Cover -->
+        <div class="slide-wrapper">
+            <div class="slide cover-slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="cover-badge">Reality Check</div>
+                    <h1 class="cover-title">Survivorship<br>Bias</h1>
+                    <p class="cover-subtitle">What you see vs. what's actually there</p>
+                    <div class="iceberg-container">
+                        <div class="iceberg-above"></div>
+                        <div class="water-line"></div>
+                        <div class="iceberg-below"></div>
+                    </div>
+                    <div class="brand-tag">SignalPilot</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: What You See -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 02</div>
+                    <h2 class="headline headline-medium">What You <span class="accent-text">See</span></h2>
+                    <p class="subheadline">On social media and trading forums:</p>
+                    <div class="content-list">
+                        <div class="content-item">
+                            <span class="item-icon">📈</span>
+                            <div class="item-content">
+                                <div class="item-title">Profitable Traders Showing Gains</div>
+                                <div class="item-description">Screenshots of winning trades and green P&L</div>
+                            </div>
+                        </div>
+                        <div class="content-item">
+                            <span class="item-icon">🏆</span>
+                            <div class="item-content">
+                                <div class="item-title">Success Stories</div>
+                                <div class="item-description">"I made $X this month" posts everywhere</div>
+                            </div>
+                        </div>
+                        <div class="content-item">
+                            <span class="item-icon">✨</span>
+                            <div class="item-content">
+                                <div class="item-title">Lifestyle Content</div>
+                                <div class="item-description">Laptops on beaches, luxury cars, freedom</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: What You Don't See -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 03</div>
+                    <h2 class="headline headline-medium">What You <span class="accent-purple">Don't</span> See</h2>
+                    <p class="subheadline">The invisible majority:</p>
+                    <div class="content-list">
+                        <div class="content-item">
+                            <span class="item-icon">💀</span>
+                            <div class="item-content">
+                                <div class="item-title">The 90%+ Who Blew Up</div>
+                                <div class="item-description">Accounts wiped, savings gone, no posts about it</div>
+                            </div>
+                        </div>
+                        <div class="content-item">
+                            <span class="item-icon">🔇</span>
+                            <div class="item-content">
+                                <div class="item-title">The Quiet Failures</div>
+                                <div class="item-description">Nobody brags about losing money</div>
+                            </div>
+                        </div>
+                        <div class="content-item">
+                            <span class="item-icon">🚫</span>
+                            <div class="item-content">
+                                <div class="item-title">Deleted Accounts & Giving Up</div>
+                                <div class="item-description">They just disappear—no goodbye post</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Why It Matters -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 04</div>
+                    <h2 class="headline headline-medium">Why This <span class="accent-gold">Matters</span></h2>
+                    <div class="stat-display">
+                        <div class="stat-number">90%</div>
+                        <div class="stat-label">of retail traders lose money</div>
+                    </div>
+                    <div class="warning-card">
+                        <div class="warning-title">⚠️ The Distortion</div>
+                        <div class="warning-text">Survivorship bias makes trading look easier than it is. You only see the survivors.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: The Hidden Graveyard -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 05</div>
+                    <h2 class="headline headline-medium">The Hidden<br><span class="accent-purple">Graveyard</span></h2>
+                    <p class="subheadline">For every visible success story:</p>
+                    <div class="contrast-grid">
+                        <div class="contrast-box visible">
+                            <div class="contrast-label">What's Visible</div>
+                            <div class="contrast-items">
+                                <div class="contrast-item">1 profitable trader posting gains</div>
+                                <div class="contrast-item">Courses from "successful" traders</div>
+                            </div>
+                        </div>
+                        <div class="contrast-box invisible">
+                            <div class="contrast-label">What's Invisible</div>
+                            <div class="contrast-items">
+                                <div class="contrast-item">9+ traders who blew their accounts</div>
+                                <div class="contrast-item">Countless people who quit silently</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Reality Check -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 06</div>
+                    <h2 class="headline headline-medium">Reality<br><span class="accent-text">Check</span></h2>
+                    <p class="subheadline">Keep these truths in mind:</p>
+                    <div class="takeaway-grid">
+                        <div class="takeaway-card">
+                            <div class="takeaway-number">1</div>
+                            <div class="takeaway-text">Trading is harder than social media suggests</div>
+                        </div>
+                        <div class="takeaway-card">
+                            <div class="takeaway-number">2</div>
+                            <div class="takeaway-text">Survival comes before profit optimization</div>
+                        </div>
+                        <div class="takeaway-card">
+                            <div class="takeaway-number">3</div>
+                            <div class="takeaway-text">Risk management isn't optional—it's essential</div>
+                        </div>
+                        <div class="takeaway-card">
+                            <div class="takeaway-number">4</div>
+                            <div class="takeaway-text">Don't compare your start to someone's highlight reel</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide-wrapper">
+            <div class="slide cta-slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <h2 class="cta-headline">Survival First.<br><span class="accent-text">Profits Second.</span></h2>
+                    <p class="cta-subtext">Stay grounded. Trade with discipline. Focus on risk management before returns.</p>
+                    <a href="#" class="cta-button">Read on Blog</a>
+                    <div class="brand-tag">SignalPilot</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide-wrapper');
+            let currentSlide = 0;
+            let exportMode = false;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            function toggleExportMode() {
+                exportMode = !exportMode;
+                document.body.classList.toggle('export-mode', exportMode);
+                if (exportMode) {
+                    currentSlide = 0;
+                    showSlide(currentSlide);
+                }
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'e' || e.key === 'E') {
+                    toggleExportMode();
+                } else if (exportMode) {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        showSlide(currentSlide);
+                    } else if (e.key === 'ArrowLeft') {
+                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                        showSlide(currentSlide);
+                    } else if (e.key === 'Escape') {
+                        toggleExportMode();
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 162 — Breakout Confirmation Chart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 58px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .slide-title .highlight {
+            color: var(--accent-green);
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .breakout-card {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border: 1px solid rgba(74, 217, 122, 0.3);
+            border-radius: 16px;
+            padding: 48px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .breakout-card.false {
+            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
+            border-color: rgba(217, 74, 74, 0.3);
+        }
+
+        .breakout-card.false h3 {
+            color: var(--accent-red);
+        }
+
+        .breakout-card.false .feature-list li::before {
+            color: var(--accent-red);
+        }
+
+        .breakout-card.confirm {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+            border-color: rgba(74, 144, 217, 0.3);
+        }
+
+        .breakout-card.confirm h3 {
+            color: var(--accent-blue);
+        }
+
+        .breakout-card.confirm .feature-list li::before {
+            color: var(--accent-blue);
+        }
+
+        .breakout-card.entry {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+
+        .breakout-card.entry h3 {
+            color: var(--accent-gold);
+        }
+
+        .breakout-card.entry .feature-list li::before {
+            color: var(--accent-gold);
+        }
+
+        .breakout-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--accent-green);
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .feature-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 14px 0;
+            padding-left: 36px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .feature-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .cta-title .emphasis {
+            color: var(--accent-green);
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 05</span>
+                    <div class="center-content">
+                        <h1 class="slide-title">Breakout<br><span class="highlight">Confirmation</span></h1>
+                        <p class="subtitle">Avoid the fakeouts</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: True Breakout Signs -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — True Breakout</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 05</span>
+                    <div class="center-content">
+                        <div class="breakout-card">
+                            <h3>TRUE BREAKOUT SIGNS</h3>
+                            <ul class="feature-list">
+                                <li>Strong candle close beyond level</li>
+                                <li>Volume spike on the break</li>
+                                <li>Clean break, not just a wick</li>
+                                <li>Follow-through in next candle</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: False Breakout Signs -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — False Breakout</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 05</span>
+                    <div class="center-content">
+                        <div class="breakout-card false">
+                            <h3>FALSE BREAKOUT SIGNS</h3>
+                            <ul class="feature-list">
+                                <li>Long wick with small body</li>
+                                <li>Low or declining volume</li>
+                                <li>Quick reversal back into range</li>
+                                <li>Occurs against major trend</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Confirmation Checklist -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Checklist</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 05</span>
+                    <div class="center-content">
+                        <div class="breakout-card confirm">
+                            <h3>CONFIRMATION CHECKLIST</h3>
+                            <ul class="feature-list">
+                                <li>Wait for candle close above/below</li>
+                                <li>Check volume is above average</li>
+                                <li>Look for retest of broken level</li>
+                                <li>Align with higher timeframe bias</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: CTA -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — CTA</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 05</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">Confirm<br><span class="emphasis">First</span></h2>
+                        <p class="cta-text">Patience beats FOMO every time.</p>
+                        <p class="cta-text">Link in bio</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const totalSlides = slides.length;
+        let exportMode = false;
+
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+        }
+
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (exportMode && currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateExportView();
+            }
+        }
+
+        function prevSlide() {
+            if (exportMode && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (!exportMode) enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>

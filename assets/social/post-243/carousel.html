@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 243 — The Trader's Greatest Edge: Doing Nothing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 54px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .slide-title .highlight {
+            color: var(--accent-gold);
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .patience-card {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 16px;
+            padding: 48px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .patience-card.problem {
+            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
+            border-color: rgba(217, 74, 74, 0.3);
+        }
+
+        .patience-card.problem h3 {
+            color: var(--accent-red);
+        }
+
+        .patience-card.problem .feature-list li::before {
+            content: "✕";
+            color: var(--accent-red);
+        }
+
+        .patience-card.discipline {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border-color: rgba(74, 217, 122, 0.3);
+        }
+
+        .patience-card.discipline h3 {
+            color: var(--accent-green);
+        }
+
+        .patience-card.discipline .feature-list li::before {
+            content: "✓";
+            color: var(--accent-green);
+        }
+
+        .patience-card.truth {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+            border-color: rgba(74, 144, 217, 0.3);
+        }
+
+        .patience-card.truth h3 {
+            color: var(--accent-blue);
+        }
+
+        .patience-card.truth .feature-list li::before {
+            color: var(--accent-blue);
+        }
+
+        .patience-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--accent-gold);
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .feature-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 14px 0;
+            padding-left: 36px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .feature-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+        }
+
+        .quote-block {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.4;
+            max-width: 700px;
+            position: relative;
+            padding: 0 40px;
+        }
+
+        .quote-block::before {
+            content: """;
+            position: absolute;
+            left: 0;
+            top: -20px;
+            font-size: 80px;
+            color: var(--accent-gold);
+            opacity: 0.5;
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .cta-title .emphasis {
+            color: var(--accent-gold);
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 07</span>
+                    <div class="center-content">
+                        <h1 class="slide-title">The Hardest Trade<br><span class="highlight">You'll Ever Make</span></h1>
+                        <p class="subtitle">...is no trade at all</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Problem</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 07</span>
+                    <div class="center-content">
+                        <div class="patience-card problem">
+                            <h3>MOST TRADERS LOSE BY</h3>
+                            <ul class="feature-list">
+                                <li>"I need to trade today"</li>
+                                <li>"Something has to work"</li>
+                                <li>"I'll just take a small position"</li>
+                                <li>Forcing setups that aren't there</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Discipline -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Discipline</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 07</span>
+                    <div class="center-content">
+                        <div class="patience-card discipline">
+                            <h3>THE DISCIPLINED APPROACH</h3>
+                            <ul class="feature-list">
+                                <li>No setup = no trade</li>
+                                <li>Unclear conditions = observe</li>
+                                <li>Capital preservation > forced entries</li>
+                                <li>Wait for your edge</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Truth -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Truth</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 07</span>
+                    <div class="center-content">
+                        <div class="patience-card truth">
+                            <h3>THE TRUTH</h3>
+                            <ul class="feature-list">
+                                <li>Your edge only exists when criteria are met</li>
+                                <li>The rest is gambling</li>
+                                <li>Professional traders sit out more than trade</li>
+                                <li>Quality over quantity</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Reframe -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Reframe</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 07</span>
+                    <div class="center-content">
+                        <div class="patience-card">
+                            <h3>REFRAME YOUR THINKING</h3>
+                            <ul class="feature-list">
+                                <li>Patience isn't passive</li>
+                                <li>It's strategic</li>
+                                <li>Doing nothing is doing something</li>
+                                <li>Preserving capital IS an edge</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Quote -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Quote</span>
+            <div class="slide slide-6">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">06 / 07</span>
+                    <div class="center-content">
+                        <p class="quote-block">The best trade is often no trade.</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — CTA</span>
+            <div class="slide slide-7">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">07 / 07</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">Master the Art of<br><span class="emphasis">Waiting</span></h2>
+                        <p class="cta-text">Your opportunity will come.</p>
+                        <p class="cta-text">Link in bio</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const totalSlides = slides.length;
+        let exportMode = false;
+
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+        }
+
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (exportMode && currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateExportView();
+            }
+        }
+
+        function prevSlide() {
+            if (exportMode && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (!exportMode) enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>
