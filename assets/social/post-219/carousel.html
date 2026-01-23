@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 219 - Mitigation Blocks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =====================================================
+           CSS CUSTOM PROPERTIES - SIGNALPILOT BRAND
+           ===================================================== */
+        :root {
+            /* Brand Colors */
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --border-subtle: #2a2a3a;
+
+            /* Accent Colors */
+            --accent-blue: #4a90d9;
+            --accent-blue-glow: rgba(74, 144, 217, 0.3);
+            --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
+            --accent-green: #4ad97a;
+            --accent-green-glow: rgba(74, 217, 122, 0.3);
+            --accent-red: #d94a4a;
+            --accent-red-glow: rgba(217, 74, 74, 0.3);
+            --accent-teal: #4ad9d9;
+            --accent-teal-glow: rgba(74, 217, 217, 0.3);
+            --accent-purple: #9b4ad9;
+            --accent-purple-glow: rgba(155, 74, 217, 0.3);
+            --accent-orange: #d9944a;
+            --accent-orange-glow: rgba(217, 148, 74, 0.3);
+
+            /* Text Colors */
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+
+            /* Typography */
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --slide-padding: 60px;
+            --content-gap: 24px;
+
+            /* Dimensions */
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+        }
+
+        /* =====================================================
+           CSS RESET & BASE STYLES
+           ===================================================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: #000000;
+        }
+
+        /* =====================================================
+           CAROUSEL CONTAINER STYLES
+           ===================================================== */
+        .carousel-container {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            padding: 40px;
+            overflow-x: auto;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        /* =====================================================
+           SLIDE BASE STYLES
+           ===================================================== */
+        .slide {
+            position: relative;
+            width: var(--slide-width);
+            height: var(--slide-height);
+            min-width: var(--slide-width);
+            min-height: var(--slide-height);
+            background-color: var(--bg-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: var(--slide-padding);
+        }
+
+        /* =====================================================
+           VIDEO BACKGROUND STYLES
+           ===================================================== */
+        .slide-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .slide-video-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        /* =====================================================
+           SLIDE CONTENT WRAPPER
+           ===================================================== */
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            gap: var(--content-gap);
+        }
+
+        /* =====================================================
+           TYPOGRAPHY STYLES
+           ===================================================== */
+        .slide-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-teal);
+            margin-bottom: 16px;
+        }
+
+        .slide-title {
+            font-family: var(--font-serif);
+            font-size: 72px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .slide-title-large {
+            font-size: 84px;
+        }
+
+        .slide-title-medium {
+            font-size: 64px;
+        }
+
+        .slide-subtitle {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* =====================================================
+           INSTITUTIONAL VISUAL STYLES
+           ===================================================== */
+        .institution-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            margin: 40px 0;
+        }
+
+        .institution-icon {
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            background: var(--bg-card);
+            border-radius: 50%;
+            border: 3px solid var(--accent-teal);
+            box-shadow: 0 0 60px var(--accent-teal-glow);
+        }
+
+        .institution-label {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-teal);
+        }
+
+        /* =====================================================
+           DEFINITION CARD STYLES
+           ===================================================== */
+        .definition-card {
+            width: 100%;
+            max-width: 800px;
+            padding: 48px;
+            background: var(--bg-card);
+            border-radius: 24px;
+            border: 1px solid var(--border-subtle);
+            text-align: center;
+        }
+
+        .definition-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+        }
+
+        .definition-title {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .definition-text {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .definition-highlight {
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           STEP FLOW STYLES
+           ===================================================== */
+        .step-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .step-card {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 28px 32px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 700;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .step-number.step-1 {
+            background: var(--accent-green);
+            color: var(--bg-dark);
+        }
+
+        .step-number.step-2 {
+            background: var(--accent-red);
+            color: var(--text-primary);
+        }
+
+        .step-number.step-3 {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+        }
+
+        .step-number.step-4 {
+            background: var(--accent-teal);
+            color: var(--bg-dark);
+        }
+
+        .step-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .step-label {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .step-text {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .step-arrow {
+            display: flex;
+            justify-content: center;
+            padding: 8px 0;
+        }
+
+        .step-arrow-icon {
+            font-size: 28px;
+            color: var(--text-muted);
+        }
+
+        /* =====================================================
+           REASON SECTION STYLES
+           ===================================================== */
+        .reason-section {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .section-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--accent-teal);
+            box-shadow: 0 0 20px var(--accent-teal-glow);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .reason-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .reason-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px 28px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .reason-bullet {
+            width: 12px;
+            height: 12px;
+            border-radius: 4px;
+            background: var(--accent-teal);
+            flex-shrink: 0;
+        }
+
+        .reason-text {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* =====================================================
+           WISDOM CALLOUT STYLES
+           ===================================================== */
+        .wisdom-callout {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 28px 36px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border-left: 4px solid var(--accent-teal);
+            margin-top: 32px;
+        }
+
+        .wisdom-icon {
+            font-size: 36px;
+            flex-shrink: 0;
+        }
+
+        .wisdom-text {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* =====================================================
+           CTA SLIDE STYLES
+           ===================================================== */
+        .cta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .cta-visual {
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            background: linear-gradient(135deg, var(--accent-teal) 0%, var(--accent-blue) 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 60px var(--accent-teal-glow);
+        }
+
+        .cta-text {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .cta-highlight {
+            color: var(--accent-teal);
+        }
+
+        .cta-subtext {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 48px;
+            background: linear-gradient(135deg, var(--accent-teal) 0%, var(--accent-blue) 100%);
+            border-radius: 100px;
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--bg-dark);
+            text-decoration: none;
+            box-shadow: 0 4px 24px var(--accent-teal-glow);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--accent-teal-glow);
+        }
+
+        /* =====================================================
+           BRAND FOOTER STYLES
+           ===================================================== */
+        .brand-footer {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .brand-logo-text {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .slide-indicator {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* =====================================================
+           EXPORT MODE STYLES
+           ===================================================== */
+        body.export-mode {
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            padding: 0;
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+        }
+
+        body.export-mode .slide:not(.exporting) {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- =====================================================
+             SLIDE 1: TITLE - MITIGATION BLOCKS
+             ===================================================== -->
+        <div class="slide" data-slide="1">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="slide-number">Smart Money Concepts</div>
+                    <h1 class="slide-title slide-title-large">Mitigation<br>Blocks</h1>
+                    <p class="slide-subtitle">Where Institutions Fix Their Losses</p>
+                </div>
+
+                <div class="institution-visual">
+                    <div class="institution-icon">🏦</div>
+                    <span class="institution-label">Institutional Logic</span>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">1 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 2: WHAT IS MITIGATION
+             ===================================================== -->
+        <div class="slide" data-slide="2">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="definition-card">
+                    <div class="definition-icon">🔄</div>
+                    <h2 class="definition-title">What is Mitigation?</h2>
+                    <p class="definition-text">
+                        Where <span class="definition-highlight">trapped institutional positions</span>
+                        get closed at <span class="definition-highlight">break-even</span>
+                    </p>
+                </div>
+
+                <div class="wisdom-callout">
+                    <span class="wisdom-icon">💡</span>
+                    <span class="wisdom-text">Even institutions have "bad" positions — they just manage them better</span>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">2 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 3: STEPS 1-2 - BUY THEN UNDERWATER
+             ===================================================== -->
+        <div class="slide" data-slide="3">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title slide-title-medium">The Setup</h2>
+                </div>
+
+                <div class="step-flow">
+                    <div class="step-card">
+                        <div class="step-number step-1">1</div>
+                        <div class="step-content">
+                            <span class="step-label">Institutions Buy</span>
+                            <span class="step-text">Large position at a level</span>
+                        </div>
+                    </div>
+
+                    <div class="step-arrow">
+                        <span class="step-arrow-icon">↓</span>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number step-2">2</div>
+                        <div class="step-content">
+                            <span class="step-label">Price Drops</span>
+                            <span class="step-text">They're now underwater</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wisdom-callout">
+                    <span class="wisdom-icon">📉</span>
+                    <span class="wisdom-text">Their position is losing — but they can't sell into weakness</span>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">3 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 4: STEPS 3-4 - RETURN AND CLOSE
+             ===================================================== -->
+        <div class="slide" data-slide="4">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h2 class="slide-title slide-title-medium">The Mitigation</h2>
+                </div>
+
+                <div class="step-flow">
+                    <div class="step-card">
+                        <div class="step-number step-3">3</div>
+                        <div class="step-content">
+                            <span class="step-label">Price Returns</span>
+                            <span class="step-text">Back to their entry level</span>
+                        </div>
+                    </div>
+
+                    <div class="step-arrow">
+                        <span class="step-arrow-icon">↓</span>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number step-4">4</div>
+                        <div class="step-content">
+                            <span class="step-label">They Sell</span>
+                            <span class="step-text">Close at break-even → Price drops again</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wisdom-callout">
+                    <span class="wisdom-icon">⚡</span>
+                    <span class="wisdom-text">Their selling pressure = predictable price reaction</span>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">4 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 5: WHY IT WORKS
+             ===================================================== -->
+        <div class="slide" data-slide="5">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="reason-section">
+                    <div class="section-header">
+                        <div class="section-icon">💡</div>
+                        <h2 class="section-title">Why It Works</h2>
+                    </div>
+
+                    <div class="reason-cards">
+                        <div class="reason-card">
+                            <div class="reason-bullet"></div>
+                            <span class="reason-text">Institutions have "bad" positions too</span>
+                        </div>
+
+                        <div class="reason-card">
+                            <div class="reason-bullet"></div>
+                            <span class="reason-text">They wait to exit at better prices</span>
+                        </div>
+
+                        <div class="reason-card">
+                            <div class="reason-bullet"></div>
+                            <span class="reason-text">When price returns, they act</span>
+                        </div>
+
+                        <div class="reason-card">
+                            <div class="reason-bullet"></div>
+                            <span class="reason-text">Creates predictable reactions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">5 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 6: CTA - FULL LESSON
+             ===================================================== -->
+        <div class="slide" data-slide="6">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="cta-container">
+                    <div class="cta-visual">🔄</div>
+
+                    <h2 class="cta-text">Mitigation =<br><span class="cta-highlight">Closing Underwater Positions</span></h2>
+
+                    <p class="cta-subtext">
+                        Trade with institutional logic
+                    </p>
+
+                    <a href="#" class="cta-button">
+                        <span>Full Lesson in Bio</span>
+                        <span>🔗</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">6 / 6</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         EXPORT MODE JAVASCRIPT
+         ===================================================== -->
+    <script>
+        /**
+         * Export Mode Controller
+         * Press 'E' to enter export mode
+         * Use Arrow keys to navigate slides
+         * Press 'Escape' to exit export mode
+         */
+        (function() {
+            let exportMode = false;
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                currentSlide = 0;
+                updateExportView();
+                console.log('Export mode enabled. Use Arrow keys to navigate, Escape to exit.');
+            }
+
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.classList.remove('exporting'));
+                console.log('Export mode disabled.');
+            }
+
+            function updateExportView() {
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.classList.add('exporting');
+                    } else {
+                        slide.classList.remove('exporting');
+                    }
+                });
+                console.log(`Showing slide ${currentSlide + 1} of ${totalSlides}`);
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateExportView();
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateExportView();
+                }
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'e' || e.key === 'E') {
+                    if (!exportMode) {
+                        enterExportMode();
+                    }
+                } else if (e.key === 'Escape') {
+                    if (exportMode) {
+                        exitExportMode();
+                    }
+                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    if (exportMode) {
+                        nextSlide();
+                    }
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    if (exportMode) {
+                        prevSlide();
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
