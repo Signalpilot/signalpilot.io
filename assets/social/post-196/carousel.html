@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 196 — Delta Volume Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* =====================================================
+           CSS VARIABLES - SignalPilot Brand System
+           ===================================================== */
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --bg-card-hover: rgba(255, 255, 255, 0.04);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-medium: rgba(255, 255, 255, 0.1);
+            --text-primary: #e8e6e3;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --accent-blue: #4a90d9;
+            --accent-blue-glow: rgba(74, 144, 217, 0.3);
+            --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
+            --accent-green: #4ad97a;
+            --accent-green-glow: rgba(74, 217, 122, 0.3);
+            --accent-red: #d94a4a;
+            --accent-red-glow: rgba(217, 74, 74, 0.3);
+            --accent-yellow: #d9c94a;
+            --accent-yellow-glow: rgba(217, 201, 74, 0.3);
+            --accent-teal: #4ad9d9;
+            --accent-teal-glow: rgba(74, 217, 217, 0.3);
+            --accent-purple: #9b4ad9;
+            --accent-purple-glow: rgba(155, 74, 217, 0.3);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+            --slide-padding: 72px;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* =====================================================
+           RESET & BASE STYLES
+           ===================================================== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           CAROUSEL CONTAINER & LAYOUT
+           ===================================================== */
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            position: relative;
+            width: var(--slide-width);
+            height: var(--slide-height);
+            transform: scale(0.45);
+            transform-origin: top left;
+            margin-bottom: -594px;
+            margin-right: -594px;
+            transition: var(--transition-smooth);
+        }
+
+        .slide-wrapper:hover {
+            z-index: 10;
+        }
+
+        /* =====================================================
+           SLIDE BACKGROUND VIDEO
+           ===================================================== */
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* =====================================================
+           SLIDE BASE STYLES
+           ===================================================== */
+        .slide {
+            position: relative;
+            width: var(--slide-width);
+            height: var(--slide-height);
+            background: var(--bg-dark);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: var(--slide-padding);
+        }
+
+        /* =====================================================
+           SLIDE NUMBER INDICATOR
+           ===================================================== */
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        /* =====================================================
+           TYPOGRAPHY - HEADLINES
+           ===================================================== */
+        .headline {
+            font-family: var(--font-serif);
+            font-size: 82px;
+            font-weight: 600;
+            line-height: 1.0;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            letter-spacing: -0.02em;
+        }
+
+        .headline-medium {
+            font-size: 68px;
+        }
+
+        .headline-small {
+            font-size: 54px;
+        }
+
+        /* =====================================================
+           ACCENT COLOR CLASSES
+           ===================================================== */
+        .accent-text {
+            color: var(--accent-blue);
+        }
+
+        .accent-gold {
+            color: var(--accent-gold);
+        }
+
+        .accent-green {
+            color: var(--accent-green);
+        }
+
+        .accent-blue {
+            color: var(--accent-blue);
+        }
+
+        .accent-teal {
+            color: var(--accent-teal);
+        }
+
+        .accent-purple {
+            color: var(--accent-purple);
+        }
+
+        .accent-red {
+            color: var(--accent-red);
+        }
+
+        /* =====================================================
+           COVER SLIDE STYLES
+           ===================================================== */
+        .cover-slide .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            padding: 16px 32px;
+            border: 1px solid var(--accent-blue-glow);
+            border-radius: 6px;
+            margin-bottom: 48px;
+            background: rgba(74, 144, 217, 0.05);
+        }
+
+        .cover-title {
+            font-family: var(--font-serif);
+            font-size: 86px;
+            font-weight: 600;
+            line-height: 1.0;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
+        }
+
+        .cover-subtitle {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 700px;
+            line-height: 1.5;
+        }
+
+        .cover-icon {
+            font-size: 100px;
+            margin-bottom: 24px;
+        }
+
+        /* =====================================================
+           FORMULA CARD
+           ===================================================== */
+        .formula-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .formula-card {
+            padding: 60px;
+            background: rgba(74, 144, 217, 0.08);
+            border: 1px solid rgba(74, 144, 217, 0.25);
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .formula-text {
+            font-family: 'Courier New', monospace;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 24px;
+        }
+
+        .formula-desc {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           DELTA CARD STYLES
+           ===================================================== */
+        .delta-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .delta-card {
+            padding: 48px;
+            border-radius: 20px;
+            transition: var(--transition-smooth);
+        }
+
+        .delta-card-green {
+            background: rgba(74, 217, 122, 0.08);
+            border: 1px solid rgba(74, 217, 122, 0.25);
+        }
+
+        .delta-card-red {
+            background: rgba(217, 74, 74, 0.08);
+            border: 1px solid rgba(217, 74, 74, 0.25);
+        }
+
+        .delta-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .delta-icon {
+            font-size: 56px;
+        }
+
+        .delta-title {
+            font-family: var(--font-sans);
+            font-size: 32px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .delta-desc {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           DIVERGENCE CARD
+           ===================================================== */
+        .divergence-card {
+            padding: 48px;
+            background: rgba(217, 201, 74, 0.08);
+            border: 1px solid rgba(217, 201, 74, 0.25);
+            border-radius: 20px;
+        }
+
+        .divergence-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .divergence-icon {
+            font-size: 48px;
+        }
+
+        .divergence-title {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--accent-yellow);
+        }
+
+        .divergence-formula {
+            font-family: var(--font-sans);
+            font-size: 32px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .divergence-meaning {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        /* =====================================================
+           CTA SLIDE STYLES
+           ===================================================== */
+        .cta-slide .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-headline {
+            font-family: var(--font-serif);
+            font-size: 76px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-subtext {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--bg-dark);
+            background: linear-gradient(135deg, var(--accent-blue), #3a7bc9);
+            padding: 24px 64px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px var(--accent-blue-glow);
+        }
+
+        /* =====================================================
+           BRAND TAG
+           ===================================================== */
+        .brand-tag {
+            position: absolute;
+            bottom: 56px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 6px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        /* =====================================================
+           EXPORT MODE STYLES
+           ===================================================== */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            transform: none;
+            margin: 0;
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: block;
+        }
+
+        /* =====================================================
+           UTILITY CLASSES
+           ===================================================== */
+        .mb-24 {
+            margin-bottom: 24px;
+        }
+
+        .mb-32 {
+            margin-bottom: 32px;
+        }
+
+        .mb-48 {
+            margin-bottom: 48px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- =====================================================
+             SLIDE 1: COVER
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide cover-slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="cover-badge">Advanced Education</div>
+                    <div class="cover-icon">📊</div>
+                    <h1 class="cover-title">Delta<br><span class="accent-text">Volume</span></h1>
+                    <p class="cover-subtitle">See who's in control</p>
+                    <div class="brand-tag">SignalPilot</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 2: THE FORMULA
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 02</div>
+                    <h2 class="headline headline-medium">The<br><span class="accent-text">Formula</span></h2>
+                    <div class="formula-section">
+                        <div class="formula-card">
+                            <p class="formula-text">Delta = Buy Volume - Sell Volume</p>
+                            <p class="formula-desc">The difference between aggressive buying and aggressive selling volume. Positive = buyers dominant. Negative = sellers dominant.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 3: POSITIVE DELTA
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 03</div>
+                    <h2 class="headline headline-medium">Positive<br><span class="accent-green">Delta</span></h2>
+                    <div class="delta-section">
+                        <div class="delta-card delta-card-green">
+                            <div class="delta-header">
+                                <span class="delta-icon">📈</span>
+                                <h3 class="delta-title">Buyers in Control</h3>
+                            </div>
+                            <p class="delta-desc">More aggressive buying than selling. Bullish pressure. Buyers are hitting the ask (paying market price to buy immediately).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 4: NEGATIVE DELTA
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 04</div>
+                    <h2 class="headline headline-medium">Negative<br><span class="accent-red">Delta</span></h2>
+                    <div class="delta-section">
+                        <div class="delta-card delta-card-red">
+                            <div class="delta-header">
+                                <span class="delta-icon">📉</span>
+                                <h3 class="delta-title">Sellers in Control</h3>
+                            </div>
+                            <p class="delta-desc">More aggressive selling than buying. Bearish pressure. Sellers are hitting the bid (selling at market price to exit immediately).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 5: DIVERGENCE - WEAKNESS
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 05</div>
+                    <h2 class="headline headline-medium">Divergence<br><span class="accent-gold">Weakness</span></h2>
+                    <div class="delta-section">
+                        <div class="divergence-card">
+                            <div class="divergence-header">
+                                <span class="divergence-icon">⚠️</span>
+                                <h3 class="divergence-title">Warning Signal</h3>
+                            </div>
+                            <p class="divergence-formula">Price UP + Negative Delta</p>
+                            <p class="divergence-meaning">Buying not supporting the move. Price rising but sellers more aggressive. Potential weakness - move may reverse.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 6: DIVERGENCE - STRENGTH
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 06</div>
+                    <h2 class="headline headline-medium">Divergence<br><span class="accent-gold">Strength</span></h2>
+                    <div class="delta-section">
+                        <div class="divergence-card">
+                            <div class="divergence-header">
+                                <span class="divergence-icon">⚠️</span>
+                                <h3 class="divergence-title">Watch Signal</h3>
+                            </div>
+                            <p class="divergence-formula">Price DOWN + Positive Delta</p>
+                            <p class="divergence-meaning">Selling not supporting the move. Price falling but buyers more aggressive. Potential strength - move may reverse.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 7: CTA
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide cta-slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <h2 class="cta-headline">See Who's<br><span class="accent-text">In Control</span></h2>
+                    <p class="cta-subtext">Full Delta Volume lesson with chart examples.</p>
+                    <a href="#" class="cta-button">Free Lesson</a>
+                    <div class="brand-tag">SignalPilot</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         EXPORT MODE JAVASCRIPT
+         ===================================================== -->
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide-wrapper');
+            let currentSlide = 0;
+            let exportMode = false;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            function toggleExportMode() {
+                exportMode = !exportMode;
+                document.body.classList.toggle('export-mode', exportMode);
+                if (exportMode) {
+                    currentSlide = 0;
+                    showSlide(0);
+                }
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'e' || e.key === 'E') {
+                    toggleExportMode();
+                } else if (exportMode) {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        nextSlide();
+                    } else if (e.key === 'ArrowLeft') {
+                        prevSlide();
+                    } else if (e.key === 'Escape') {
+                        toggleExportMode();
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

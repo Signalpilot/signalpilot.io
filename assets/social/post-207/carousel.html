@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 207 - Avoiding Tilt</title>
+
+    <!-- ===== GOOGLE FONTS ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --border-accent: rgba(201, 169, 98, 0.3);
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 40px rgba(201, 169, 98, 0.15);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: #1a1a2e;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ===== CAROUSEL CONTAINER ===== */
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            max-width: 1800px;
+        }
+
+        /* ===== SLIDE BASE STYLES ===== */
+        .slide {
+            width: var(--slide-width);
+            height: var(--slide-height);
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* ===== VIDEO BACKGROUND ===== */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        /* ===== SLIDE CONTENT ===== */
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .headline {
+            font-family: var(--font-serif);
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .headline-small {
+            font-size: 56px;
+        }
+
+        .body-text {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .warning-visual {
+            width: 200px;
+            height: 200px;
+            background: rgba(217, 74, 74, 0.15);
+            border: 4px solid var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            box-shadow: 0 0 60px rgba(217, 74, 74, 0.3);
+        }
+
+        .warning-icon {
+            font-size: 80px;
+            margin-top: 30px;
+        }
+
+        .hero-headline {
+            font-family: var(--font-serif);
+            font-size: 100px;
+            font-weight: 700;
+            color: var(--accent-red);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        /* ===== DEFINITION CARD ===== */
+        .definition-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .definition-card {
+            background: rgba(217, 74, 74, 0.08);
+            border: 2px solid var(--accent-red);
+            border-radius: 16px;
+            padding: 50px;
+            margin-bottom: 30px;
+        }
+
+        .definition-label {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .definition-text {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .origin-note {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        /* ===== WARNING SIGNS ===== */
+        .warning-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .warning-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .warning-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(217, 74, 74, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .warning-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .warning-badge {
+            font-size: 28px;
+        }
+
+        .warning-title {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-red);
+        }
+
+        .warning-quote {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ===== ACTION STEPS ===== */
+        .action-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .action-card {
+            background: rgba(74, 217, 122, 0.08);
+            border: 2px solid var(--accent-green);
+            border-radius: 16px;
+            padding: 50px;
+        }
+
+        .action-title {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .action-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .action-step {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px;
+            background: var(--bg-card);
+            border-radius: 12px;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: rgba(74, 217, 122, 0.2);
+            border: 2px solid var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-green);
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            color: var(--text-primary);
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-badge {
+            width: 140px;
+            height: 140px;
+            border: 3px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        .cta-icon {
+            font-size: 70px;
+        }
+
+        .cta-headline {
+            font-family: var(--font-serif);
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .cta-emphasis {
+            color: var(--accent-gold);
+        }
+
+        .cta-text {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            line-height: 1.6;
+            margin-bottom: 50px;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border: 2px solid var(--accent-gold);
+            border-radius: 16px;
+            padding: 40px 60px;
+        }
+
+        .cta-box-text {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .cta-link {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        /* ===== BRAND FOOTER ===== */
+        .brand-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: auto;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8d5a3 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--bg-dark);
+        }
+
+        .logo-text {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
+
+        .slide-indicator {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* ===== EXPORT MODE STYLES ===== */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        body.export-mode .export-controls {
+            display: none;
+        }
+
+        /* ===== EXPORT CONTROLS ===== */
+        .export-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 16px 28px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .export-controls span {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .export-controls kbd {
+            background: var(--bg-card);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            color: var(--accent-gold);
+            border: 1px solid var(--border-subtle);
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- ===== SLIDE 1: HERO ===== -->
+        <div class="slide" data-slide="1">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="hero-container">
+                    <div class="warning-visual">
+                        <span class="warning-icon">⚠️</span>
+                    </div>
+                    <h1 class="hero-headline">TILT</h1>
+                    <p class="hero-subtitle">When emotions override your system.<br>Recognize it. Stop it. Survive it.</p>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">1 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 2: DEFINITION ===== -->
+        <div class="slide" data-slide="2">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">What is Tilt?</span>
+                <div class="definition-container">
+                    <div class="definition-card">
+                        <p class="definition-label">Definition</p>
+                        <p class="definition-text">
+                            An emotional state where logic is overridden by frustration,
+                            anger, or desperation. Your system gets thrown out the window.
+                            Decision-making becomes impulsive and irrational.
+                        </p>
+                        <p class="origin-note">
+                            The term comes from poker — when a player "goes on tilt" after
+                            a bad beat and starts making emotional decisions. In trading,
+                            it's equally deadly.
+                        </p>
+                    </div>
+                    <p class="body-text" style="text-align: center; color: var(--accent-red); font-weight: 500;">
+                        Tilt is responsible for more blown accounts than bad strategy.
+                    </p>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">2 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 3: WARNING SIGNS PART 1 ===== -->
+        <div class="slide" data-slide="3">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">Warning Signs</span>
+                <h2 class="headline-small" style="margin-bottom: 30px; color: var(--accent-red);">You're Tilting If...</h2>
+                <div class="warning-container">
+                    <div class="warning-grid">
+                        <div class="warning-card">
+                            <div class="warning-header">
+                                <span class="warning-badge">🚨</span>
+                                <h3 class="warning-title">Increasing Size</h3>
+                            </div>
+                            <p class="warning-quote">"I need to make it back"</p>
+                        </div>
+                        <div class="warning-card">
+                            <div class="warning-header">
+                                <span class="warning-badge">🚨</span>
+                                <h3 class="warning-title">Breaking Rules</h3>
+                            </div>
+                            <p class="warning-quote">"Just this once"</p>
+                        </div>
+                        <div class="warning-card">
+                            <div class="warning-header">
+                                <span class="warning-badge">🚨</span>
+                                <h3 class="warning-title">Revenge Trading</h3>
+                            </div>
+                            <p class="warning-quote">"The market owes me"</p>
+                        </div>
+                        <div class="warning-card">
+                            <div class="warning-header">
+                                <span class="warning-badge">🚨</span>
+                                <h3 class="warning-title">Can't Walk Away</h3>
+                            </div>
+                            <p class="warning-quote">"One more trade"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">3 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 4: PHYSICAL SIGNS ===== -->
+        <div class="slide" data-slide="4">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">Physical Signs</span>
+                <h2 class="headline-small" style="margin-bottom: 30px;">Your Body Knows Before Your Mind</h2>
+                <div class="warning-container">
+                    <div class="definition-card">
+                        <div class="warning-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                            <div style="text-align: center; padding: 30px;">
+                                <span style="font-size: 60px; display: block; margin-bottom: 16px;">💓</span>
+                                <p style="font-family: var(--font-sans); font-size: 22px; color: var(--text-primary); font-weight: 600;">Racing Heart</p>
+                            </div>
+                            <div style="text-align: center; padding: 30px;">
+                                <span style="font-size: 60px; display: block; margin-bottom: 16px;">💦</span>
+                                <p style="font-family: var(--font-sans); font-size: 22px; color: var(--text-primary); font-weight: 600;">Sweating</p>
+                            </div>
+                            <div style="text-align: center; padding: 30px;">
+                                <span style="font-size: 60px; display: block; margin-bottom: 16px;">😤</span>
+                                <p style="font-family: var(--font-sans); font-size: 22px; color: var(--text-primary); font-weight: 600;">Anger/Tension</p>
+                            </div>
+                        </div>
+                        <p class="origin-note" style="text-align: center;">
+                            These are your body's warning signals. Listen to them.
+                            If you feel these symptoms, you're already in the danger zone.
+                        </p>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">4 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 5: WHAT TO DO ===== -->
+        <div class="slide" data-slide="5">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">The Solution</span>
+                <div class="action-container">
+                    <div class="action-card">
+                        <h2 class="action-title">What To Do</h2>
+                        <div class="action-steps">
+                            <div class="action-step">
+                                <span class="step-number">1</span>
+                                <span class="step-text">Recognize the signs</span>
+                            </div>
+                            <div class="action-step">
+                                <span class="step-number">2</span>
+                                <span class="step-text">STOP immediately</span>
+                            </div>
+                            <div class="action-step">
+                                <span class="step-number">3</span>
+                                <span class="step-text">Close the platform</span>
+                            </div>
+                            <div class="action-step">
+                                <span class="step-number">4</span>
+                                <span class="step-text">Walk away physically</span>
+                            </div>
+                            <div class="action-step">
+                                <span class="step-number">5</span>
+                                <span class="step-text">Return tomorrow with fresh eyes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">5 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 6: CTA ===== -->
+        <div class="slide" data-slide="6">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="cta-container">
+                    <div class="cta-badge">
+                        <span class="cta-icon">🛡️</span>
+                    </div>
+                    <h2 class="cta-headline">
+                        Recognize Tilt.<br><span class="cta-emphasis">Protect Your Capital.</span>
+                    </h2>
+                    <p class="cta-text">
+                        The ability to recognize and stop tilt separates surviving traders
+                        from those who blow up. It's not weakness to walk away.
+                        It's wisdom.
+                    </p>
+                    <div class="cta-box">
+                        <p class="cta-box-text">Read the full article on revenge trading recovery</p>
+                        <span class="cta-link">blog.signalpilot.io</span>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">6 / 6</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== EXPORT CONTROLS ===== -->
+    <div class="export-controls">
+        <span>Press</span>
+        <kbd>E</kbd>
+        <span>for export mode</span>
+        <span>|</span>
+        <kbd>←</kbd>
+        <kbd>→</kbd>
+        <span>to navigate</span>
+        <span>|</span>
+        <kbd>ESC</kbd>
+        <span>to exit</span>
+    </div>
+
+    <!-- ===== EXPORT MODE JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            let exportMode = false;
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                currentSlide = 0;
+                showOnlySlide(currentSlide);
+            }
+
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.style.display = 'flex');
+            }
+
+            function showOnlySlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.style.display = i === index ? 'flex' : 'none';
+                });
+            }
+
+            function nextSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showOnlySlide(currentSlide);
+            }
+
+            function prevSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                showOnlySlide(currentSlide);
+            }
+
+            document.addEventListener('keydown', function(e) {
+                switch(e.key.toLowerCase()) {
+                    case 'e':
+                        if (!exportMode) {
+                            enterExportMode();
+                        }
+                        break;
+                    case 'escape':
+                        if (exportMode) {
+                            exitExportMode();
+                        }
+                        break;
+                    case 'arrowright':
+                        nextSlide();
+                        break;
+                    case 'arrowleft':
+                        prevSlide();
+                        break;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
