@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 195 — OmniDeck Unified View Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* =====================================================
+           CSS VARIABLES - SignalPilot Brand System
+           ===================================================== */
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --bg-card-hover: rgba(255, 255, 255, 0.04);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-medium: rgba(255, 255, 255, 0.1);
+            --text-primary: #e8e6e3;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --accent-blue: #4a90d9;
+            --accent-blue-glow: rgba(74, 144, 217, 0.3);
+            --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
+            --accent-green: #4ad97a;
+            --accent-green-glow: rgba(74, 217, 122, 0.3);
+            --accent-red: #d94a4a;
+            --accent-red-glow: rgba(217, 74, 74, 0.3);
+            --accent-yellow: #d9c94a;
+            --accent-yellow-glow: rgba(217, 201, 74, 0.3);
+            --accent-teal: #4ad9d9;
+            --accent-teal-glow: rgba(74, 217, 217, 0.3);
+            --accent-purple: #9b4ad9;
+            --accent-purple-glow: rgba(155, 74, 217, 0.3);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+            --slide-padding: 72px;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* =====================================================
+           RESET & BASE STYLES
+           ===================================================== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           CAROUSEL CONTAINER & LAYOUT
+           ===================================================== */
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            position: relative;
+            width: var(--slide-width);
+            height: var(--slide-height);
+            transform: scale(0.45);
+            transform-origin: top left;
+            margin-bottom: -594px;
+            margin-right: -594px;
+            transition: var(--transition-smooth);
+        }
+
+        .slide-wrapper:hover {
+            z-index: 10;
+        }
+
+        /* =====================================================
+           SLIDE BACKGROUND VIDEO
+           ===================================================== */
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* =====================================================
+           SLIDE BASE STYLES
+           ===================================================== */
+        .slide {
+            position: relative;
+            width: var(--slide-width);
+            height: var(--slide-height);
+            background: var(--bg-dark);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: var(--slide-padding);
+        }
+
+        /* =====================================================
+           SLIDE NUMBER INDICATOR
+           ===================================================== */
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        /* =====================================================
+           TYPOGRAPHY - HEADLINES
+           ===================================================== */
+        .headline {
+            font-family: var(--font-serif);
+            font-size: 82px;
+            font-weight: 600;
+            line-height: 1.0;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            letter-spacing: -0.02em;
+        }
+
+        .headline-medium {
+            font-size: 68px;
+        }
+
+        .headline-small {
+            font-size: 54px;
+        }
+
+        /* =====================================================
+           ACCENT COLOR CLASSES
+           ===================================================== */
+        .accent-text {
+            color: var(--accent-gold);
+        }
+
+        .accent-gold {
+            color: var(--accent-gold);
+        }
+
+        .accent-green {
+            color: var(--accent-green);
+        }
+
+        .accent-blue {
+            color: var(--accent-blue);
+        }
+
+        .accent-teal {
+            color: var(--accent-teal);
+        }
+
+        .accent-purple {
+            color: var(--accent-purple);
+        }
+
+        .accent-red {
+            color: var(--accent-red);
+        }
+
+        /* =====================================================
+           COVER SLIDE STYLES
+           ===================================================== */
+        .cover-slide .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            padding: 16px 32px;
+            border: 1px solid var(--accent-gold-glow);
+            border-radius: 6px;
+            margin-bottom: 48px;
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        .cover-title {
+            font-family: var(--font-serif);
+            font-size: 86px;
+            font-weight: 600;
+            line-height: 1.0;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
+        }
+
+        .cover-subtitle {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 700px;
+            line-height: 1.5;
+        }
+
+        .cover-icon {
+            font-size: 100px;
+            margin-bottom: 24px;
+        }
+
+        /* =====================================================
+           PROBLEM CARD
+           ===================================================== */
+        .problem-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .problem-card {
+            padding: 48px;
+            background: rgba(217, 74, 74, 0.08);
+            border: 1px solid rgba(217, 74, 74, 0.25);
+            border-radius: 20px;
+            transition: var(--transition-smooth);
+        }
+
+        .problem-title {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--accent-red);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .problem-desc {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        /* =====================================================
+           SOLUTION CARD
+           ===================================================== */
+        .solution-card {
+            padding: 48px;
+            background: rgba(74, 217, 122, 0.08);
+            border: 1px solid rgba(74, 217, 122, 0.25);
+            border-radius: 20px;
+            transition: var(--transition-smooth);
+        }
+
+        .solution-title {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--accent-green);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .solution-desc {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        /* =====================================================
+           TRAFFIC LIGHT SYSTEM
+           ===================================================== */
+        .traffic-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .traffic-card {
+            padding: 32px 40px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            transition: var(--transition-smooth);
+        }
+
+        .traffic-card-green {
+            background: rgba(74, 217, 122, 0.08);
+            border: 1px solid rgba(74, 217, 122, 0.25);
+        }
+
+        .traffic-card-yellow {
+            background: rgba(217, 201, 74, 0.08);
+            border: 1px solid rgba(217, 201, 74, 0.25);
+        }
+
+        .traffic-card-red {
+            background: rgba(217, 74, 74, 0.08);
+            border: 1px solid rgba(217, 74, 74, 0.25);
+        }
+
+        .traffic-dot {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+        }
+
+        .traffic-dot-green {
+            background: var(--accent-green);
+            box-shadow: 0 0 20px var(--accent-green-glow);
+        }
+
+        .traffic-dot-yellow {
+            background: var(--accent-yellow);
+            box-shadow: 0 0 20px var(--accent-yellow-glow);
+        }
+
+        .traffic-dot-red {
+            background: var(--accent-red);
+            box-shadow: 0 0 20px var(--accent-red-glow);
+        }
+
+        .traffic-content {
+            flex: 1;
+        }
+
+        .traffic-title {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .traffic-desc {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        /* =====================================================
+           BENEFIT LIST
+           ===================================================== */
+        .benefit-list {
+            list-style: none;
+            margin-top: 32px;
+        }
+
+        .benefit-list li {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            padding: 16px 0;
+            padding-left: 36px;
+            position: relative;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .benefit-list li:last-child {
+            border-bottom: none;
+        }
+
+        .benefit-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           CTA SLIDE STYLES
+           ===================================================== */
+        .cta-slide .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-headline {
+            font-family: var(--font-serif);
+            font-size: 72px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-subtext {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--bg-dark);
+            background: linear-gradient(135deg, var(--accent-gold), #b99952);
+            padding: 24px 64px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px var(--accent-gold-glow);
+        }
+
+        /* =====================================================
+           BRAND TAG
+           ===================================================== */
+        .brand-tag {
+            position: absolute;
+            bottom: 56px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 6px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        /* =====================================================
+           EXPORT MODE STYLES
+           ===================================================== */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            transform: none;
+            margin: 0;
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: block;
+        }
+
+        /* =====================================================
+           UTILITY CLASSES
+           ===================================================== */
+        .mb-24 {
+            margin-bottom: 24px;
+        }
+
+        .mb-32 {
+            margin-bottom: 32px;
+        }
+
+        .mb-48 {
+            margin-bottom: 48px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- =====================================================
+             SLIDE 1: COVER
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide cover-slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="cover-badge">The Commander</div>
+                    <div class="cover-icon">🎯</div>
+                    <h1 class="cover-title">OmniDeck<br><span class="accent-text">Unified View</span></h1>
+                    <p class="cover-subtitle">All signals. One view. Clear decisions.</p>
+                    <div class="brand-tag">SignalPilot</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 2: THE PROBLEM
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 02</div>
+                    <h2 class="headline headline-medium">The<br><span class="accent-red">Problem</span></h2>
+                    <div class="problem-section">
+                        <div class="problem-card">
+                            <h3 class="problem-title">Chart Chaos</h3>
+                            <p class="problem-desc">7 indicators = cluttered charts, conflicting signals, analysis paralysis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 3: THE SOLUTION
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 03</div>
+                    <h2 class="headline headline-medium">The<br><span class="accent-green">Solution</span></h2>
+                    <div class="problem-section">
+                        <div class="solution-card">
+                            <h3 class="solution-title">OmniDeck</h3>
+                            <p class="solution-desc">One unified overlay showing agreement across all indicators</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 4: TRAFFIC LIGHT SYSTEM
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 04</div>
+                    <h2 class="headline headline-medium">Signal<br><span class="accent-text">States</span></h2>
+                    <div class="traffic-section">
+                        <div class="traffic-card traffic-card-green">
+                            <div class="traffic-dot traffic-dot-green"></div>
+                            <div class="traffic-content">
+                                <h3 class="traffic-title">Alignment</h3>
+                                <p class="traffic-desc">Multiple indicators agree. Higher conviction zone.</p>
+                            </div>
+                        </div>
+                        <div class="traffic-card traffic-card-yellow">
+                            <div class="traffic-dot traffic-dot-yellow"></div>
+                            <div class="traffic-content">
+                                <h3 class="traffic-title">Partial</h3>
+                                <p class="traffic-desc">Some indicators agree. Proceed with caution.</p>
+                            </div>
+                        </div>
+                        <div class="traffic-card traffic-card-red">
+                            <div class="traffic-dot traffic-dot-red"></div>
+                            <div class="traffic-content">
+                                <h3 class="traffic-title">Conflict</h3>
+                                <p class="traffic-desc">Indicators disagree. Wait for clarity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 5: THE BENEFITS
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 05</div>
+                    <h2 class="headline headline-medium">The<br><span class="accent-text">Benefits</span></h2>
+                    <div class="problem-section">
+                        <ul class="benefit-list">
+                            <li>Clean, uncluttered charts</li>
+                            <li>Clear, unified signals</li>
+                            <li>Quick, confident decisions</li>
+                            <li>Less confusion, more clarity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 6: CTA
+             ===================================================== -->
+        <div class="slide-wrapper">
+            <div class="slide cta-slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <h2 class="cta-headline">The Commander<br><span class="accent-text">Unifies</span></h2>
+                    <p class="cta-subtext">See how OmniDeck brings clarity to your charts.</p>
+                    <a href="#" class="cta-button">View Demo</a>
+                    <div class="brand-tag">SignalPilot</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         EXPORT MODE JAVASCRIPT
+         ===================================================== -->
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide-wrapper');
+            let currentSlide = 0;
+            let exportMode = false;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            function toggleExportMode() {
+                exportMode = !exportMode;
+                document.body.classList.toggle('export-mode', exportMode);
+                if (exportMode) {
+                    currentSlide = 0;
+                    showSlide(0);
+                }
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'e' || e.key === 'E') {
+                    toggleExportMode();
+                } else if (exportMode) {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        nextSlide();
+                    } else if (e.key === 'ArrowLeft') {
+                        prevSlide();
+                    } else if (e.key === 'Escape') {
+                        toggleExportMode();
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
