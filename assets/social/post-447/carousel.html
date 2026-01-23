@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 447 — Journaling Beyond P&L</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-orange: #d9884a;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 64px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--accent-blue);
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .basic-box {
+            background: linear-gradient(135deg, rgba(107, 105, 101, 0.2) 0%, rgba(107, 105, 101, 0.05) 100%);
+            border: 1px solid rgba(107, 105, 101, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .basic-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .basic-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .basic-list li {
+            font-size: 24px;
+            color: var(--text-secondary);
+            padding: 12px 0;
+            padding-left: 36px;
+            position: relative;
+        }
+
+        .basic-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+        }
+
+        .basic-box .note {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .add-box {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border: 1px solid rgba(74, 217, 122, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .add-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--accent-green);
+            margin-bottom: 28px;
+        }
+
+        .add-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .add-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 10px 0;
+            padding-left: 36px;
+            position: relative;
+        }
+
+        .add-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+        }
+
+        .emotion-box {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .emotion-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 28px;
+        }
+
+        .emotion-section {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .emotion-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .emotion-section h4 {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .emotion-section p {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding-left: 24px;
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+            border: 1px solid rgba(74, 144, 217, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .insight-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 28px;
+        }
+
+        .insight-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .insight-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 10px 0;
+            padding-left: 36px;
+            position: relative;
+        }
+
+        .insight-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        .prompt-box {
+            background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
+            border: 1px solid rgba(74, 217, 217, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .prompt-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--accent-teal);
+            margin-bottom: 28px;
+        }
+
+        .prompt-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .prompt-list li {
+            font-size: 20px;
+            color: var(--text-primary);
+            padding: 10px 0;
+            padding-left: 36px;
+            position: relative;
+            font-style: italic;
+        }
+
+        .prompt-list li::before {
+            content: "\"";
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+            font-size: 24px;
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: var(--text-secondary);
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 07</span>
+                    <div class="center-content">
+                        <h1 class="slide-title">JOURNALING<br>BEYOND P&L</h1>
+                        <p class="subtitle">Results tell you what. Process tells you why.</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: What Most Track -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — What Most Track</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 07</span>
+                    <div class="center-content">
+                        <div class="basic-box">
+                            <h3>WHAT MOST TRADERS TRACK</h3>
+                            <ul class="basic-list">
+                                <li>Entry price</li>
+                                <li>Exit price</li>
+                                <li>Profit/loss</li>
+                            </ul>
+                            <p class="note">That's not enough.</p>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: What To Add -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — What To Add</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 07</span>
+                    <div class="center-content">
+                        <div class="add-box">
+                            <h3>WHAT YOU SHOULD ADD</h3>
+                            <ul class="add-list">
+                                <li>Emotional state before entry</li>
+                                <li>Why you took the trade (real reason)</li>
+                                <li>What you saw vs. what happened</li>
+                                <li>Execution quality (followed rules?)</li>
+                                <li>Market context/regime</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Emotional Tracking -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Emotional Tracking</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 07</span>
+                    <div class="center-content">
+                        <div class="emotion-box">
+                            <h3>EMOTIONAL TRACKING</h3>
+                            <div class="emotion-section">
+                                <h4>Before trade:</h4>
+                                <p>Confident? Anxious? FOMO?</p>
+                            </div>
+                            <div class="emotion-section">
+                                <h4>During trade:</h4>
+                                <p>Calm? Panicked? Greedy?</p>
+                            </div>
+                            <div class="emotion-section">
+                                <h4>After trade:</h4>
+                                <p>Satisfied? Frustrated? Learned?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: The Insights -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — The Insights</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 07</span>
+                    <div class="center-content">
+                        <div class="insight-box">
+                            <h3>THE INSIGHTS</h3>
+                            <ul class="insight-list">
+                                <li>Patterns in your mistakes</li>
+                                <li>Emotional triggers identified</li>
+                                <li>Good process vs. lucky outcomes</li>
+                                <li>Bad process vs. unlucky outcomes</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Journal Prompts -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Journal Prompts</span>
+            <div class="slide slide-6">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">06 / 07</span>
+                    <div class="center-content">
+                        <div class="prompt-box">
+                            <h3>JOURNAL PROMPTS</h3>
+                            <ul class="prompt-list">
+                                <li>What made me take this trade?</li>
+                                <li>Did I follow my rules? Y/N</li>
+                                <li>What would I do differently?</li>
+                                <li>What regime was the market in?</li>
+                                <li>Rate execution quality 1-10</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — CTA</span>
+            <div class="slide slide-7">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">07 / 07</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">The Journal Is Your Coach</h2>
+                        <p class="cta-text">Full article on blog • Link in bio</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Export mode functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const totalSlides = slides.length;
+        let exportMode = false;
+
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+        }
+
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (exportMode && currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateExportView();
+            }
+        }
+
+        function prevSlide() {
+            if (exportMode && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (!exportMode) enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>
