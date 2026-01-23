@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 202 - Price Action Context</title>
+
+    <!-- ===== GOOGLE FONTS ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --border-accent: rgba(201, 169, 98, 0.3);
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 40px rgba(201, 169, 98, 0.15);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: #1a1a2e;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ===== CAROUSEL CONTAINER ===== */
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            max-width: 1800px;
+        }
+
+        /* ===== SLIDE BASE STYLES ===== */
+        .slide {
+            width: var(--slide-width);
+            height: var(--slide-height);
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* ===== VIDEO BACKGROUND ===== */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        /* ===== SLIDE CONTENT ===== */
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .headline {
+            font-family: var(--font-serif);
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .headline-large {
+            font-size: 84px;
+        }
+
+        .headline-small {
+            font-size: 56px;
+        }
+
+        .subheadline {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--accent-purple);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .body-text {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .body-text-large {
+            font-size: 30px;
+        }
+
+        .accent-text {
+            color: var(--accent-purple);
+            font-weight: 600;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .pattern-comparison {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .pattern-box {
+            width: 200px;
+            height: 200px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .pattern-box.support {
+            border: 3px solid var(--accent-green);
+            background: rgba(74, 217, 122, 0.1);
+        }
+
+        .pattern-box.resistance {
+            border: 3px solid var(--accent-red);
+            background: rgba(217, 74, 74, 0.1);
+        }
+
+        .candlestick-visual {
+            font-size: 80px;
+            margin-bottom: 16px;
+        }
+
+        .pattern-label {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pattern-box.support .pattern-label {
+            color: var(--accent-green);
+        }
+
+        .pattern-box.resistance .pattern-label {
+            color: var(--accent-red);
+        }
+
+        .pattern-result {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .vs-badge {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-muted);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-headline {
+            font-family: var(--font-serif);
+            font-size: 84px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        /* ===== MISTAKE CARD ===== */
+        .mistake-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .mistake-card {
+            background: rgba(217, 74, 74, 0.08);
+            border: 2px solid var(--accent-red);
+            border-radius: 16px;
+            padding: 50px;
+            margin-bottom: 40px;
+        }
+
+        .mistake-label {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .mistake-quote {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 600;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .truth-card {
+            background: rgba(74, 217, 122, 0.08);
+            border: 2px solid var(--accent-green);
+            border-radius: 16px;
+            padding: 50px;
+        }
+
+        .truth-label {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .truth-text {
+            font-family: var(--font-sans);
+            font-size: 32px;
+            font-weight: 500;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        /* ===== CONTEXT FACTORS ===== */
+        .context-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .context-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .context-factor {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 35px;
+        }
+
+        .context-factor.purple-border {
+            border-color: rgba(155, 74, 217, 0.4);
+        }
+
+        .factor-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .factor-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(155, 74, 217, 0.2);
+            border: 2px solid var(--accent-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .factor-title {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent-purple);
+        }
+
+        .factor-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .factor-question {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== COMPARISON VISUAL ===== */
+        .comparison-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .comparison-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .comparison-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 40px;
+        }
+
+        .comparison-icon.green {
+            background: rgba(74, 217, 122, 0.2);
+            border: 2px solid var(--accent-green);
+        }
+
+        .comparison-icon.red {
+            background: rgba(217, 74, 74, 0.2);
+            border: 2px solid var(--accent-red);
+        }
+
+        .comparison-icon.yellow {
+            background: rgba(201, 169, 98, 0.2);
+            border: 2px solid var(--accent-gold);
+        }
+
+        .comparison-content h3 {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .comparison-content p {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== WHERE MATTERS SLIDE ===== */
+        .where-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .where-visual {
+            width: 180px;
+            height: 180px;
+            border: 4px solid var(--accent-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            background: rgba(155, 74, 217, 0.1);
+            box-shadow: 0 0 60px rgba(155, 74, 217, 0.3);
+        }
+
+        .where-icon {
+            font-size: 80px;
+        }
+
+        .where-headline {
+            font-family: var(--font-serif);
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        .where-emphasis {
+            color: var(--accent-purple);
+        }
+
+        .where-text {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-badge {
+            width: 140px;
+            height: 140px;
+            border: 3px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        .cta-icon {
+            font-size: 70px;
+        }
+
+        .cta-headline {
+            font-family: var(--font-serif);
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .cta-emphasis {
+            color: var(--accent-gold);
+        }
+
+        .cta-text {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            line-height: 1.6;
+            margin-bottom: 50px;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border: 2px solid var(--accent-gold);
+            border-radius: 16px;
+            padding: 40px 60px;
+        }
+
+        .cta-box-text {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .cta-link {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        /* ===== BRAND FOOTER ===== */
+        .brand-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: auto;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8d5a3 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--bg-dark);
+        }
+
+        .logo-text {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
+
+        .slide-indicator {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* ===== EXPORT MODE STYLES ===== */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        body.export-mode .export-controls {
+            display: none;
+        }
+
+        /* ===== EXPORT CONTROLS ===== */
+        .export-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 16px 28px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .export-controls span {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .export-controls kbd {
+            background: var(--bg-card);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            color: var(--accent-gold);
+            border: 1px solid var(--border-subtle);
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- ===== SLIDE 1: HERO ===== -->
+        <div class="slide" data-slide="1">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="hero-container">
+                    <div class="pattern-comparison" style="position: relative;">
+                        <div class="pattern-box support">
+                            <span class="candlestick-visual">🔨</span>
+                            <span class="pattern-label">At Support</span>
+                            <span class="pattern-result">= Bullish</span>
+                        </div>
+                        <div class="pattern-box resistance">
+                            <span class="candlestick-visual">🔨</span>
+                            <span class="pattern-label">At Resistance</span>
+                            <span class="pattern-result">= Nothing</span>
+                        </div>
+                    </div>
+                    <h1 class="hero-headline">Price Action<br>Context</h1>
+                    <p class="hero-subtitle">Same pattern. Different location.<br>Completely different meaning.</p>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">1 / 7</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 2: THE MISTAKE ===== -->
+        <div class="slide" data-slide="2">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">The Problem</span>
+                <div class="mistake-container">
+                    <div class="mistake-card">
+                        <p class="mistake-label">The Common Mistake</p>
+                        <p class="mistake-quote">"I saw a hammer candle,<br>so I bought."</p>
+                    </div>
+                    <div class="truth-card">
+                        <p class="truth-label">The Truth</p>
+                        <p class="truth-text">
+                            Patterns mean <strong>nothing</strong> without context.
+                            A hammer at support is meaningful.
+                            A hammer in the middle of nowhere is noise.
+                        </p>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">2 / 7</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 3: WHERE & TREND ===== -->
+        <div class="slide" data-slide="3">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">Context Factors</span>
+                <h2 class="headline-small" style="margin-bottom: 40px;">Questions to Ask</h2>
+                <div class="context-container">
+                    <div class="context-grid">
+                        <div class="context-factor purple-border">
+                            <div class="factor-header">
+                                <div class="factor-icon">📍</div>
+                                <h3 class="factor-title">WHERE</h3>
+                            </div>
+                            <div class="factor-questions">
+                                <p class="factor-question">At support?</p>
+                                <p class="factor-question">At resistance?</p>
+                                <p class="factor-question">Mid-range?</p>
+                            </div>
+                        </div>
+                        <div class="context-factor purple-border">
+                            <div class="factor-header">
+                                <div class="factor-icon">📈</div>
+                                <h3 class="factor-title">TREND</h3>
+                            </div>
+                            <div class="factor-questions">
+                                <p class="factor-question">With trend?</p>
+                                <p class="factor-question">Against trend?</p>
+                                <p class="factor-question">No trend?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">3 / 7</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 4: TIMEFRAME & VOLUME ===== -->
+        <div class="slide" data-slide="4">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">Context Factors</span>
+                <h2 class="headline-small" style="margin-bottom: 40px;">More Questions</h2>
+                <div class="context-container">
+                    <div class="context-grid">
+                        <div class="context-factor purple-border">
+                            <div class="factor-header">
+                                <div class="factor-icon">⏱️</div>
+                                <h3 class="factor-title">TIMEFRAME</h3>
+                            </div>
+                            <div class="factor-questions">
+                                <p class="factor-question">Daily hammer > 5m hammer</p>
+                                <p class="factor-question">Higher TF = More weight</p>
+                                <p class="factor-question">Lower TF = More noise</p>
+                            </div>
+                        </div>
+                        <div class="context-factor purple-border">
+                            <div class="factor-header">
+                                <div class="factor-icon">📊</div>
+                                <h3 class="factor-title">VOLUME</h3>
+                            </div>
+                            <div class="factor-questions">
+                                <p class="factor-question">High volume = Confirmation</p>
+                                <p class="factor-question">Low volume = Weakness</p>
+                                <p class="factor-question">Volume spike = Attention</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">4 / 7</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 5: SAME PATTERN, DIFFERENT MEANING ===== -->
+        <div class="slide" data-slide="5">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">Same Pattern, Different Meaning</span>
+                <h2 class="headline-small" style="margin-bottom: 30px;">The Hammer Example</h2>
+                <div class="comparison-container">
+                    <div class="comparison-card">
+                        <div class="comparison-icon green">🔨</div>
+                        <div class="comparison-content">
+                            <h3>Hammer at Support</h3>
+                            <p>Bullish potential — buyers stepping in at key level</p>
+                        </div>
+                    </div>
+                    <div class="comparison-card">
+                        <div class="comparison-icon red">🔨</div>
+                        <div class="comparison-content">
+                            <h3>Hammer at Resistance</h3>
+                            <p>Probably nothing — no structural significance</p>
+                        </div>
+                    </div>
+                    <div class="comparison-card">
+                        <div class="comparison-icon yellow">🔨</div>
+                        <div class="comparison-content">
+                            <h3>Hammer Mid-Trend</h3>
+                            <p>Possible continuation — needs more confirmation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">5 / 7</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 6: WHERE MATTERS ===== -->
+        <div class="slide" data-slide="6">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="where-container">
+                    <div class="where-visual">
+                        <span class="where-icon">📍</span>
+                    </div>
+                    <h2 class="where-headline">
+                        <span class="where-emphasis">WHERE</span> Matters<br>More Than <span class="where-emphasis">WHAT</span>
+                    </h2>
+                    <p class="where-text">
+                        The location of a pattern determines its meaning.
+                        Always ask "where?" before asking "what?"
+                    </p>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">6 / 7</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 7: CTA ===== -->
+        <div class="slide" data-slide="7">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="cta-container">
+                    <div class="cta-badge">
+                        <span class="cta-icon">🎓</span>
+                    </div>
+                    <h2 class="cta-headline">
+                        Context Changes<br><span class="cta-emphasis">Everything</span>
+                    </h2>
+                    <p class="cta-text">
+                        Learn to read patterns in their proper context
+                        and transform how you analyze price action.
+                    </p>
+                    <div class="cta-box">
+                        <p class="cta-box-text">Full lesson on Price Action Context</p>
+                        <span class="cta-link">education.signalpilot.io</span>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">7 / 7</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== EXPORT CONTROLS ===== -->
+    <div class="export-controls">
+        <span>Press</span>
+        <kbd>E</kbd>
+        <span>for export mode</span>
+        <span>|</span>
+        <kbd>←</kbd>
+        <kbd>→</kbd>
+        <span>to navigate</span>
+        <span>|</span>
+        <kbd>ESC</kbd>
+        <span>to exit</span>
+    </div>
+
+    <!-- ===== EXPORT MODE JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            let exportMode = false;
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                currentSlide = 0;
+                showOnlySlide(currentSlide);
+            }
+
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.style.display = 'flex');
+            }
+
+            function showOnlySlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.style.display = i === index ? 'flex' : 'none';
+                });
+            }
+
+            function nextSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showOnlySlide(currentSlide);
+            }
+
+            function prevSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                showOnlySlide(currentSlide);
+            }
+
+            document.addEventListener('keydown', function(e) {
+                switch(e.key.toLowerCase()) {
+                    case 'e':
+                        if (!exportMode) {
+                            enterExportMode();
+                        }
+                        break;
+                    case 'escape':
+                        if (exportMode) {
+                            exitExportMode();
+                        }
+                        break;
+                    case 'arrowright':
+                        nextSlide();
+                        break;
+                    case 'arrowleft':
+                        prevSlide();
+                        break;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

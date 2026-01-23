@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 205 - Janus Atlas Fresh vs Tested Levels</title>
+
+    <!-- ===== GOOGLE FONTS ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --border-accent: rgba(201, 169, 98, 0.3);
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 40px rgba(201, 169, 98, 0.15);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: #1a1a2e;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ===== CAROUSEL CONTAINER ===== */
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            max-width: 1800px;
+        }
+
+        /* ===== SLIDE BASE STYLES ===== */
+        .slide {
+            width: var(--slide-width);
+            height: var(--slide-height);
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* ===== VIDEO BACKGROUND ===== */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        /* ===== SLIDE CONTENT ===== */
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .headline {
+            font-family: var(--font-serif);
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .headline-large {
+            font-size: 84px;
+        }
+
+        .headline-small {
+            font-size: 56px;
+        }
+
+        .subheadline {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--accent-teal);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .body-text {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .body-text-large {
+            font-size: 30px;
+        }
+
+        .accent-text {
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .level-comparison {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .level-visual {
+            width: 200px;
+            height: 240px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 2px solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .level-visual.fresh {
+            border-color: var(--accent-green);
+        }
+
+        .level-visual.tested {
+            border-color: var(--accent-gold);
+        }
+
+        .level-line {
+            width: 100%;
+            height: 4px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .level-visual.fresh .level-line {
+            background: var(--accent-green);
+        }
+
+        .level-visual.tested .level-line {
+            background: var(--accent-gold);
+        }
+
+        .touch-indicator {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            bottom: -4px;
+        }
+
+        .level-visual.fresh .touch-indicator {
+            display: none;
+        }
+
+        .level-visual.tested .touch-indicator:nth-child(1) {
+            left: 20%;
+        }
+
+        .level-visual.tested .touch-indicator:nth-child(2) {
+            left: 50%;
+        }
+
+        .level-visual.tested .touch-indicator:nth-child(3) {
+            left: 80%;
+        }
+
+        .level-label {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 16px;
+        }
+
+        .level-visual.fresh .level-label {
+            color: var(--accent-green);
+        }
+
+        .level-visual.tested .level-label {
+            color: var(--accent-gold);
+        }
+
+        .level-desc {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .hero-headline {
+            font-family: var(--font-serif);
+            font-size: 84px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        /* ===== DEFINITION CARD ===== */
+        .definition-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .definition-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 50px;
+            margin-bottom: 30px;
+        }
+
+        .definition-card.green-border {
+            border-color: rgba(74, 217, 122, 0.4);
+            background: rgba(74, 217, 122, 0.05);
+        }
+
+        .definition-card.gold-border {
+            border-color: rgba(201, 169, 98, 0.4);
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        .definition-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .definition-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .definition-icon.green {
+            background: rgba(74, 217, 122, 0.2);
+            border: 2px solid var(--accent-green);
+        }
+
+        .definition-icon.gold {
+            background: rgba(201, 169, 98, 0.2);
+            border: 2px solid var(--accent-gold);
+        }
+
+        .definition-icon-text {
+            font-size: 40px;
+        }
+
+        .definition-title {
+            font-family: var(--font-serif);
+            font-size: 52px;
+            font-weight: 700;
+        }
+
+        .definition-title.green {
+            color: var(--accent-green);
+        }
+
+        .definition-title.gold {
+            color: var(--accent-gold);
+        }
+
+        .definition-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .definition-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            font-family: var(--font-sans);
+            font-size: 24px;
+            color: var(--text-secondary);
+        }
+
+        .definition-item::before {
+            content: '◾';
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        /* ===== TRADE ADVANTAGE CARD ===== */
+        .advantage-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .advantage-card {
+            background: var(--bg-card);
+            border: 1px solid;
+            border-radius: 16px;
+            padding: 45px;
+            margin-bottom: 25px;
+        }
+
+        .advantage-card.green-border {
+            border-color: rgba(74, 217, 122, 0.4);
+        }
+
+        .advantage-card.gold-border {
+            border-color: rgba(201, 169, 98, 0.4);
+        }
+
+        .advantage-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .advantage-badge {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .advantage-badge.green {
+            background: rgba(74, 217, 122, 0.2);
+            color: var(--accent-green);
+        }
+
+        .advantage-badge.gold {
+            background: rgba(201, 169, 98, 0.2);
+            color: var(--accent-gold);
+        }
+
+        .advantage-title {
+            font-family: var(--font-serif);
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .advantage-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .advantage-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-sans);
+            font-size: 22px;
+            color: var(--text-secondary);
+        }
+
+        .advantage-item .check {
+            color: var(--accent-green);
+            font-size: 20px;
+        }
+
+        .advantage-item .warning {
+            color: var(--accent-gold);
+            font-size: 20px;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-badge {
+            width: 140px;
+            height: 140px;
+            border: 3px solid var(--accent-teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            background: rgba(74, 217, 217, 0.1);
+        }
+
+        .cta-icon {
+            font-size: 70px;
+        }
+
+        .cta-headline {
+            font-family: var(--font-serif);
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .cta-emphasis {
+            color: var(--accent-teal);
+        }
+
+        .cta-text {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            line-height: 1.6;
+            margin-bottom: 50px;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
+            border: 2px solid var(--accent-teal);
+            border-radius: 16px;
+            padding: 40px 60px;
+        }
+
+        .cta-box-text {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .cta-link {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--accent-teal);
+        }
+
+        /* ===== BRAND FOOTER ===== */
+        .brand-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: auto;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8d5a3 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--bg-dark);
+        }
+
+        .logo-text {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
+
+        .slide-indicator {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* ===== EXPORT MODE STYLES ===== */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        body.export-mode .export-controls {
+            display: none;
+        }
+
+        /* ===== EXPORT CONTROLS ===== */
+        .export-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 16px 28px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .export-controls span {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .export-controls kbd {
+            background: var(--bg-card);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            color: var(--accent-gold);
+            border: 1px solid var(--border-subtle);
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- ===== SLIDE 1: HERO ===== -->
+        <div class="slide" data-slide="1">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="hero-container">
+                    <div class="level-comparison">
+                        <div class="level-visual fresh">
+                            <div class="level-line"></div>
+                            <span class="level-label">Fresh</span>
+                            <span class="level-desc">Never touched</span>
+                        </div>
+                        <div class="level-visual tested">
+                            <div class="level-line">
+                                <span class="touch-indicator"></span>
+                                <span class="touch-indicator"></span>
+                                <span class="touch-indicator"></span>
+                            </div>
+                            <span class="level-label">Tested</span>
+                            <span class="level-desc">Multiple touches</span>
+                        </div>
+                    </div>
+                    <h1 class="hero-headline">Fresh vs Tested<br>Levels</h1>
+                    <p class="hero-subtitle">Not all support and resistance levels<br>are created equal</p>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">1 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 2: FRESH LEVEL ===== -->
+        <div class="slide" data-slide="2">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">Definition</span>
+                <div class="definition-container">
+                    <div class="definition-card green-border">
+                        <div class="definition-header">
+                            <div class="definition-icon green">
+                                <span class="definition-icon-text">✨</span>
+                            </div>
+                            <h2 class="definition-title green">Fresh Level</h2>
+                        </div>
+                        <div class="definition-list">
+                            <p class="definition-item">Created but never retested</p>
+                            <p class="definition-item">"Unused" support or resistance</p>
+                            <p class="definition-item">Often produces stronger reaction</p>
+                            <p class="definition-item">More resting orders waiting there</p>
+                            <p class="definition-item">First touch is typically the cleanest</p>
+                        </div>
+                    </div>
+                    <p class="body-text" style="text-align: center; font-style: italic; color: var(--accent-green);">
+                        Fresh levels are like a full tank — maximum potential energy.
+                    </p>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">2 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 3: TESTED LEVEL ===== -->
+        <div class="slide" data-slide="3">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">Definition</span>
+                <div class="definition-container">
+                    <div class="definition-card gold-border">
+                        <div class="definition-header">
+                            <div class="definition-icon gold">
+                                <span class="definition-icon-text">🔄</span>
+                            </div>
+                            <h2 class="definition-title gold">Tested Level</h2>
+                        </div>
+                        <div class="definition-list">
+                            <p class="definition-item">Already touched 2+ times</p>
+                            <p class="definition-item">Some orders already filled</p>
+                            <p class="definition-item">May hold or may break</p>
+                            <p class="definition-item">Watch for signs of weakening</p>
+                            <p class="definition-item">Each test reduces remaining orders</p>
+                        </div>
+                    </div>
+                    <p class="body-text" style="text-align: center; font-style: italic; color: var(--accent-gold);">
+                        Tested levels are partially depleted — proceed with caution.
+                    </p>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">3 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 4: FRESH LEVEL TRADE ===== -->
+        <div class="slide" data-slide="4">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">Trading Fresh Levels</span>
+                <div class="advantage-container">
+                    <div class="advantage-card green-border">
+                        <div class="advantage-header">
+                            <span class="advantage-badge green">Higher Probability</span>
+                        </div>
+                        <h3 class="advantage-title">Fresh Level Trade Advantages</h3>
+                        <div class="advantage-list">
+                            <p class="advantage-item"><span class="check">✓</span> Stronger expected reaction</p>
+                            <p class="advantage-item"><span class="check">✓</span> Cleaner bounce/rejection</p>
+                            <p class="advantage-item"><span class="check">✓</span> Tighter stop loss possible</p>
+                            <p class="advantage-item"><span class="check">✓</span> Better risk-to-reward setup</p>
+                            <p class="advantage-item"><span class="check">✓</span> Less noise around the level</p>
+                        </div>
+                    </div>
+                    <p class="body-text" style="text-align: center; padding: 20px; background: var(--bg-card); border-radius: 12px;">
+                        <strong style="color: var(--accent-green);">Pro tip:</strong> Prioritize fresh levels when multiple setups are available.
+                    </p>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">4 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 5: TESTED LEVEL TRADE ===== -->
+        <div class="slide" data-slide="5">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">Trading Tested Levels</span>
+                <div class="advantage-container">
+                    <div class="advantage-card gold-border">
+                        <div class="advantage-header">
+                            <span class="advantage-badge gold">Extra Caution Needed</span>
+                        </div>
+                        <h3 class="advantage-title">Tested Level Considerations</h3>
+                        <div class="advantage-list">
+                            <p class="advantage-item"><span class="warning">⚠️</span> Lower probability of holding</p>
+                            <p class="advantage-item"><span class="warning">⚠️</span> May chop around the level</p>
+                            <p class="advantage-item"><span class="warning">⚠️</span> Need more confirmation signals</p>
+                            <p class="advantage-item"><span class="warning">⚠️</span> Watch for exhaustion signs</p>
+                            <p class="advantage-item"><span class="warning">⚠️</span> Consider breakout scenario</p>
+                        </div>
+                    </div>
+                    <p class="body-text" style="text-align: center; padding: 20px; background: var(--bg-card); border-radius: 12px;">
+                        <strong style="color: var(--accent-gold);">Remember:</strong> The more a level is tested, the weaker it becomes.
+                    </p>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">5 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 6: CTA ===== -->
+        <div class="slide" data-slide="6">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="cta-container">
+                    <div class="cta-badge">
+                        <span class="cta-icon">🗺️</span>
+                    </div>
+                    <h2 class="cta-headline">
+                        Janus Atlas Marks<br><span class="cta-emphasis">Both Types</span>
+                    </h2>
+                    <p class="cta-text">
+                        The Cartographer distinguishes fresh from tested levels automatically,
+                        giving you the edge of knowing which levels have the most potential.
+                    </p>
+                    <div class="cta-box">
+                        <p class="cta-box-text">Try Janus Atlas in the demo</p>
+                        <span class="cta-link">docs.signalpilot.io</span>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">6 / 6</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== EXPORT CONTROLS ===== -->
+    <div class="export-controls">
+        <span>Press</span>
+        <kbd>E</kbd>
+        <span>for export mode</span>
+        <span>|</span>
+        <kbd>←</kbd>
+        <kbd>→</kbd>
+        <span>to navigate</span>
+        <span>|</span>
+        <kbd>ESC</kbd>
+        <span>to exit</span>
+    </div>
+
+    <!-- ===== EXPORT MODE JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            let exportMode = false;
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                currentSlide = 0;
+                showOnlySlide(currentSlide);
+            }
+
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.style.display = 'flex');
+            }
+
+            function showOnlySlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.style.display = i === index ? 'flex' : 'none';
+                });
+            }
+
+            function nextSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showOnlySlide(currentSlide);
+            }
+
+            function prevSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                showOnlySlide(currentSlide);
+            }
+
+            document.addEventListener('keydown', function(e) {
+                switch(e.key.toLowerCase()) {
+                    case 'e':
+                        if (!exportMode) {
+                            enterExportMode();
+                        }
+                        break;
+                    case 'escape':
+                        if (exportMode) {
+                            exitExportMode();
+                        }
+                        break;
+                    case 'arrowright':
+                        nextSlide();
+                        break;
+                    case 'arrowleft':
+                        prevSlide();
+                        break;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
