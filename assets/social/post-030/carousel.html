@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 030 — Quick Start Guide | Carousel Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg-dark: #0a0a0f; --accent-blue: #4a90d9; --accent-gold: #c9a962; --accent-green: #4ad97a; --text-primary: #ffffff; --text-secondary: rgba(255, 255, 255, 0.85); }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #111; font-family: 'Inter', sans-serif; color: var(--text-primary); padding: 2rem; min-height: 100vh; }
+    .controls { position: fixed; top: 1rem; right: 1rem; z-index: 1000; display: flex; gap: 1rem; align-items: center; background: rgba(0,0,0,0.8); padding: 1rem 1.5rem; border-radius: 8px; backdrop-filter: blur(10px); }
+    .controls label { font-size: 0.875rem; color: var(--text-secondary); }
+    .controls select, .controls button { background: var(--bg-dark); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-family: inherit; }
+    .page-title { text-align: center; margin-bottom: 2rem; font-family: 'Cormorant Garamond', serif; }
+    .page-title h1 { font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-secondary); font-size: 0.875rem; }
+    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; padding-bottom: 4rem; }
+    .slide-wrapper { display: flex; flex-direction: column; align-items: center; }
+    .slide-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-gold); margin-bottom: 0.75rem; }
+    .slide { width: 100%; max-width: 540px; aspect-ratio: 1/1; position: relative; overflow: hidden; background: var(--bg-dark); border-radius: 4px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+    .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+    .slide-bg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.08; }
+    .slide.bg-black .slide-bg video { opacity: 0; }
+    .slide-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; display: flex; flex-direction: column; justify-content: center; padding: 10%; }
+    .slide-1 .slide-content { align-items: center; text-align: center; }
+    .slide-1 .icon { font-size: 3rem; margin-bottom: 1.5rem; }
+    .slide-1 .hook-main { font-family: 'Cormorant Garamond', serif; font-size: 1.65rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent-green); margin-bottom: 1.5rem; }
+    .slide-1 .hook-sub { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 300; color: var(--text-secondary); line-height: 1.6; }
+    .slide-content .header { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 500; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+    .slide-content .text { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.15rem; line-height: 1.7; color: var(--text-secondary); }
+    .slide-content .text em { font-style: italic; color: var(--accent-gold); }
+    .slide-content .text .highlight { color: var(--text-primary); font-weight: 400; }
+    .slide-content .text .green { color: var(--accent-green); }
+    .step-box { background: rgba(74, 217, 122, 0.1); border-left: 3px solid var(--accent-green); padding: 1.25rem; margin-bottom: 1rem; }
+    .step-num { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; color: var(--accent-green); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .step-title { font-family: 'Inter', sans-serif; font-size: 1.15rem; font-weight: 400; color: var(--text-primary); margin-bottom: 0.5rem; }
+    .step-desc { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 300; color: var(--text-secondary); }
+    .slide-6 .slide-content { align-items: center; text-align: center; }
+    .slide-6 .cta-text { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 0.75rem; }
+    .slide-6 .cta-sub { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-secondary); margin-bottom: 2rem; }
+    .slide-6 .cta-button { display: inline-block; padding: 1rem 2.5rem; border: 1px solid var(--accent-green); color: var(--accent-green); font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; }
+    .slide-6 .logo { width: 50%; max-width: 200px; margin-top: 2rem; opacity: 0.8; }
+    .slide-6 .link-hint { font-family: 'Inter', sans-serif; font-size: 0.875rem; color: var(--text-secondary); margin-top: 1.5rem; }
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .carousel-grid { display: block; padding: 0; }
+    body.export-mode .slide-wrapper { display: none; }
+    body.export-mode .slide-wrapper.active { display: flex; }
+    body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; border-radius: 0; box-shadow: none; }
+    @media (max-width: 900px) { .carousel-grid { grid-template-columns: 1fr; } .controls { position: static; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; } }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.05">5%</option><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.15">15%</option></select></label>
+    <button id="export-btn">Export Mode</button>
+  </div>
+  <div class="page-title">
+    <h1>Post 030 — Quick Start Guide</h1>
+    <p>Instagram Carousel • 6 Slides • 1080×1080px</p>
+  </div>
+  <div class="carousel-grid">
+    <!-- Slide 1: Hook -->
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide slide-1">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <div class="icon">⚡</div>
+          <div class="hook-main">Zero to Charting in 10 Minutes</div>
+          <p class="hook-sub">Installation. Configuration. First signals.<br><br>No complex setup. No coding. No confusion.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 2: Step 1 -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — Step 1</span>
+      <div class="slide slide-2">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <p class="header">Quick Start</p>
+          <div class="step-box">
+            <div class="step-num">Step 1</div>
+            <div class="step-title">Access Your Indicators</div>
+            <div class="step-desc">After signup, you'll receive TradingView access to all 7 Signal Pilot indicators.</div>
+          </div>
+          <p class="text">Check your email for the access confirmation. Your indicators will appear in TradingView within minutes.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 3: Step 2 -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Step 2</span>
+      <div class="slide slide-3">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <p class="header">Quick Start</p>
+          <div class="step-box">
+            <div class="step-num">Step 2</div>
+            <div class="step-title">Add to TradingView</div>
+            <div class="step-desc">Find Signal Pilot in your Indicators list.</div>
+          </div>
+          <p class="text">Open any chart → Click "Indicators" → Search "Signal Pilot" → Add <span class="green">Pentarch</span>, <span class="green">Volume Oracle</span>, or any of the 7.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 4: Step 3 -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Step 3</span>
+      <div class="slide slide-4">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <p class="header">Quick Start</p>
+          <div class="step-box">
+            <div class="step-num">Step 3</div>
+            <div class="step-title">Basic Configuration</div>
+            <div class="step-desc">Default settings work great out of the box.</div>
+          </div>
+          <p class="text">Customize colors and alerts as needed. Each indicator comes with sensible defaults — no PhD required.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 5: Step 4 -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Step 4</span>
+      <div class="slide slide-5">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <p class="header">Quick Start</p>
+          <div class="step-box">
+            <div class="step-num">Step 4</div>
+            <div class="step-title">First Signals</div>
+            <div class="step-desc">Understand what you're seeing.</div>
+          </div>
+          <p class="text">Reference the cheatsheets in the docs. Each indicator has a clear guide explaining every signal and what it means.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 6: CTA -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — CTA</span>
+      <div class="slide slide-6">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <p class="cta-text">That's It. You're Ready.</p>
+          <p class="cta-sub">Full Quick Start guide with screenshots.</p>
+          <a href="#" class="cta-button">Read Guide</a>
+          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
+          <p class="link-hint">Link in bio</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const bgToggle = document.getElementById('bg-toggle'); const opacityControl = document.getElementById('opacity-control'); const slides = document.querySelectorAll('.slide'); const videos = document.querySelectorAll('.slide-bg video');
+    bgToggle.addEventListener('change', (e) => { slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black')); });
+    opacityControl.addEventListener('change', (e) => { videos.forEach(video => video.style.opacity = e.target.value); });
+    const exportBtn = document.getElementById('export-btn'); const slideWrappers = document.querySelectorAll('.slide-wrapper'); let exportMode = false; let currentExportSlide = 0;
+    exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { exportBtn.textContent = 'Exit Export (←/→ to navigate)'; currentExportSlide = 0; updateExportSlide(); } else { exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); } });
+    function updateExportSlide() { slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide)); }
+    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight' || e.key === ' ') { currentExportSlide = (currentExportSlide + 1) % slideWrappers.length; updateExportSlide(); } else if (e.key === 'ArrowLeft') { currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length; updateExportSlide(); } else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); } });
+  </script>
+</body>
+</html>

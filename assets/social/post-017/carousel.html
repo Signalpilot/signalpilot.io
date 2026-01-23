@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 017 — Chronicle: The Prophet | Carousel Preview</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-purple: #9a4ad9;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .controls label { font-size: 0.875rem; color: var(--text-secondary); }
+
+    .controls select, .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .page-title h1 { font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-secondary); font-size: 0.875rem; }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    .slide-wrapper { display: flex; flex-direction: column; align-items: center; }
+
+    .slide-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+    }
+
+    .slide-bg video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+    }
+
+    .slide.bg-black .slide-bg video { opacity: 0; }
+
+    .slide-content {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10%;
+    }
+
+    /* Slide 1 - Hook */
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide-1 .icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 20px rgba(154, 74, 217, 0.5));
+    }
+
+    .slide-1 .title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-purple);
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-1 .quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 85%;
+    }
+
+    .slide-1 .attribution {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--accent-purple);
+      margin-top: 1.5rem;
+    }
+
+    .slide-content .header {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-content .text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 1.35rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .slide-content .text em { font-style: italic; color: var(--accent-purple); }
+    .slide-content .text .highlight { color: var(--text-primary); font-weight: 400; }
+
+    .ability-card {
+      background: rgba(154, 74, 217, 0.1);
+      border-left: 3px solid var(--accent-purple);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .ability-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .ability-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Connection slide */
+    .slide-5 .slide-content {
+      text-align: center;
+      align-items: center;
+    }
+
+    .slide-5 .indicator-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.25rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .slide-5 .equals {
+      font-size: 2rem;
+      color: var(--accent-purple);
+      margin: 1rem 0;
+    }
+
+    .slide-5 .persona {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* Lore teaser */
+    .slide-6 .slide-content {
+      text-align: center;
+      align-items: center;
+    }
+
+    .slide-6 .seven-icons {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+      opacity: 0.4;
+    }
+
+    .slide-6 .seven-icons .active {
+      opacity: 1;
+      filter: drop-shadow(0 0 10px rgba(154, 74, 217, 0.6));
+    }
+
+    .slide-6 .lore-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .slide-6 .lore-text .highlight {
+      color: var(--accent-purple);
+      font-weight: 500;
+    }
+
+    /* CTA slide */
+    .slide-7 .slide-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide-7 .cta-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+    }
+
+    .slide-7 .cta-button {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border: 1px solid var(--accent-purple);
+      color: var(--accent-purple);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .slide-7 .logo {
+      width: 50%;
+      max-width: 200px;
+      margin-top: 2rem;
+      opacity: 0.8;
+    }
+
+    .slide-7 .link-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 1.5rem;
+    }
+
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .carousel-grid { display: block; padding: 0; }
+    body.export-mode .slide-wrapper { display: none; }
+    body.export-mode .slide-wrapper.active { display: flex; }
+    body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; border-radius: 0; box-shadow: none; }
+
+    @media (max-width: 900px) {
+      .carousel-grid { grid-template-columns: 1fr; }
+      .controls { position: static; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.05">5%</option><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.15">15%</option></select></label>
+    <button id="export-btn">Export Mode</button>
+  </div>
+
+  <div class="page-title">
+    <h1>Post 017 — Chronicle: The Prophet</h1>
+    <p>Instagram Carousel • 7 Slides • 1080×1080px</p>
+  </div>
+
+  <div class="carousel-grid">
+
+    <!-- Slide 1: Hook -->
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — The Hook</span>
+      <div class="slide slide-1">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <div class="icon">🔮</div>
+          <div class="title">The Prophet</div>
+          <p class="quote">
+            "Where others see candles, she sees intention.<br><br>
+            Where others see wicks, she sees exhaustion."
+          </p>
+          <p class="attribution">— The Chronicle</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Philosophy -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — Philosophy</span>
+      <div class="slide slide-2">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <p class="text">
+            The Prophet doesn't <span class="highlight">predict</span>.
+            <br><br>
+            She reads what's <em>already there</em> —
+            <br><br>
+            hidden in plain sight.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Ability 1 -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Sees Intention</span>
+      <div class="slide slide-3">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <div class="ability-card">
+            <div class="ability-title">She Sees</div>
+            <div class="ability-desc">Intention behind candles</div>
+          </div>
+          <p class="text" style="font-size: 1.2rem;">
+            While others stare at green and red,
+            <br><br>
+            she sees <em>who is truly in control</em>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Ability 2 -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Sees Exhaustion</span>
+      <div class="slide slide-4">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <div class="ability-card">
+            <div class="ability-title">She Sees</div>
+            <div class="ability-desc">Exhaustion in wicks</div>
+          </div>
+          <p class="text" style="font-size: 1.2rem;">
+            Where exhaustion is building.
+            <br><br>
+            When <em>regimes are shifting</em>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Connection -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Connection</span>
+      <div class="slide slide-5">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <p class="header">The Indicator</p>
+          <p class="indicator-name">VOLUME ORACLE</p>
+          <p class="equals">=</p>
+          <p class="persona">The Prophet</p>
+          <p class="text" style="font-size: 1.1rem; margin-top: 2rem;">
+            Volume doesn't lie.<br>
+            <em>It just requires someone willing to listen.</em>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Lore Teaser -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — Lore Teaser</span>
+      <div class="slide slide-6">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <div class="seven-icons">
+            <span>👑</span>
+            <span class="active">🔮</span>
+            <span>🗺️</span>
+            <span>⚖️</span>
+            <span>⚔️</span>
+            <span>👁️</span>
+            <span>🎖️</span>
+          </div>
+          <p class="lore-text">
+            "The <span class="highlight">second</span> of the Elite Seven."
+            <br><br>
+            Five more await.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: CTA -->
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — CTA</span>
+      <div class="slide slide-7">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <p class="cta-text">Enter the Chronicle</p>
+          <a href="#" class="cta-button">Read the Story</a>
+          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
+          <p class="link-hint">Link in bio</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const bgToggle = document.getElementById('bg-toggle');
+    const opacityControl = document.getElementById('opacity-control');
+    const slides = document.querySelectorAll('.slide');
+    const videos = document.querySelectorAll('.slide-bg video');
+
+    bgToggle.addEventListener('change', (e) => {
+      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
+    });
+
+    opacityControl.addEventListener('change', (e) => {
+      videos.forEach(video => video.style.opacity = e.target.value);
+    });
+
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
+        currentExportSlide = 0;
+        updateExportSlide();
+      } else {
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'ArrowLeft') {
+        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'Escape') {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+  </script>
+</body>
+</html>
