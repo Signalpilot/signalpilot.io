@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 223 - Danger of Social Media Trading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =====================================================
+           CSS CUSTOM PROPERTIES - SIGNALPILOT BRAND
+           ===================================================== */
+        :root {
+            /* Brand Colors */
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --border-subtle: #2a2a3a;
+
+            /* Accent Colors */
+            --accent-blue: #4a90d9;
+            --accent-blue-glow: rgba(74, 144, 217, 0.3);
+            --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
+            --accent-green: #4ad97a;
+            --accent-green-glow: rgba(74, 217, 122, 0.3);
+            --accent-red: #d94a4a;
+            --accent-red-glow: rgba(217, 74, 74, 0.3);
+            --accent-teal: #4ad9d9;
+            --accent-teal-glow: rgba(74, 217, 217, 0.3);
+            --accent-purple: #9b4ad9;
+            --accent-purple-glow: rgba(155, 74, 217, 0.3);
+            --accent-orange: #d9944a;
+            --accent-orange-glow: rgba(217, 148, 74, 0.3);
+
+            /* Text Colors */
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+
+            /* Typography */
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --slide-padding: 60px;
+            --content-gap: 24px;
+
+            /* Dimensions */
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+        }
+
+        /* =====================================================
+           CSS RESET & BASE STYLES
+           ===================================================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: #000000;
+        }
+
+        /* =====================================================
+           CAROUSEL CONTAINER STYLES
+           ===================================================== */
+        .carousel-container {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            padding: 40px;
+            overflow-x: auto;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        /* =====================================================
+           SLIDE BASE STYLES
+           ===================================================== */
+        .slide {
+            position: relative;
+            width: var(--slide-width);
+            height: var(--slide-height);
+            min-width: var(--slide-width);
+            min-height: var(--slide-height);
+            background-color: var(--bg-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: var(--slide-padding);
+        }
+
+        /* =====================================================
+           VIDEO BACKGROUND STYLES
+           ===================================================== */
+        .slide-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .slide-video-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        /* =====================================================
+           SLIDE CONTENT WRAPPER
+           ===================================================== */
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            gap: var(--content-gap);
+        }
+
+        /* =====================================================
+           TYPOGRAPHY STYLES
+           ===================================================== */
+        .slide-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            margin-bottom: 16px;
+        }
+
+        .slide-title {
+            font-family: var(--font-serif);
+            font-size: 72px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .slide-title-large {
+            font-size: 80px;
+        }
+
+        .slide-title-medium {
+            font-size: 64px;
+        }
+
+        .slide-subtitle {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* =====================================================
+           WARNING VISUAL STYLES
+           ===================================================== */
+        .warning-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            margin: 32px 0;
+        }
+
+        .phone-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            background: var(--bg-card);
+            border-radius: 32px;
+            border: 2px solid var(--accent-red);
+            box-shadow: 0 0 60px var(--accent-red-glow);
+        }
+
+        .warning-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background: var(--accent-red);
+            border-radius: 50%;
+        }
+
+        /* =====================================================
+           DANGER CARD STYLES
+           ===================================================== */
+        .danger-section {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .danger-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .danger-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: var(--accent-red);
+            border-radius: 16px;
+        }
+
+        .danger-title {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .danger-card {
+            padding: 32px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--accent-red);
+        }
+
+        .danger-text {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .danger-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .danger-item {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--text-muted);
+            padding-left: 20px;
+            border-left: 2px solid var(--accent-red);
+        }
+
+        /* =====================================================
+           DUAL DANGER CARDS
+           ===================================================== */
+        .dual-dangers {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .dual-danger-card {
+            display: flex;
+            gap: 24px;
+            padding: 28px 32px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--accent-red);
+        }
+
+        .dual-danger-card.orange {
+            border-left-color: var(--accent-orange);
+        }
+
+        .dual-danger-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            border: 1px solid var(--accent-red);
+            flex-shrink: 0;
+        }
+
+        .dual-danger-icon.orange {
+            border-color: var(--accent-orange);
+        }
+
+        .dual-danger-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .dual-danger-title {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--accent-red);
+        }
+
+        .dual-danger-title.orange {
+            color: var(--accent-orange);
+        }
+
+        .dual-danger-desc {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        /* =====================================================
+           POSITIVE USE STYLES
+           ===================================================== */
+        .positive-section {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .positive-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .positive-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: var(--accent-green);
+            border-radius: 16px;
+        }
+
+        .positive-title {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+
+        .positive-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .positive-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px 28px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .positive-check {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .positive-text {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .not-for-box {
+            margin-top: 24px;
+            padding: 20px 28px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 2px solid var(--accent-red);
+            text-align: center;
+        }
+
+        .not-for-text {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--accent-red);
+        }
+
+        /* =====================================================
+           CTA SLIDE STYLES
+           ===================================================== */
+        .cta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .cta-visual {
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 60px var(--accent-green-glow);
+        }
+
+        .cta-text {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .cta-highlight {
+            color: var(--accent-green);
+        }
+
+        .cta-subtext {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 48px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue) 100%);
+            border-radius: 100px;
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            box-shadow: 0 4px 24px var(--accent-blue-glow);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--accent-blue-glow);
+        }
+
+        /* =====================================================
+           BRAND FOOTER STYLES
+           ===================================================== */
+        .brand-footer {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .brand-logo-text {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .slide-indicator {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* =====================================================
+           EXPORT MODE STYLES
+           ===================================================== */
+        body.export-mode {
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            padding: 0;
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+        }
+
+        body.export-mode .slide:not(.exporting) {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- =====================================================
+             SLIDE 1: TITLE - SOCIAL MEDIA DANGERS
+             ===================================================== -->
+        <div class="slide" data-slide="1">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="slide-number">Trading Psychology</div>
+                    <h1 class="slide-title slide-title-large">Social Media<br>Dangers</h1>
+                    <p class="slide-subtitle">The Traps Every Trader Falls Into</p>
+                </div>
+
+                <div class="warning-visual">
+                    <div class="phone-container">
+                        📱
+                        <span class="warning-badge">⚠️</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">1 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 2: FOLLOWING CALLS BLINDLY
+             ===================================================== -->
+        <div class="slide" data-slide="2">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="danger-section">
+                    <div class="danger-header">
+                        <div class="danger-icon">❌</div>
+                        <h2 class="danger-title">Following Calls Blindly</h2>
+                    </div>
+
+                    <div class="danger-card">
+                        <p class="danger-text">
+                            When you copy someone's trade without understanding:
+                        </p>
+                        <div class="danger-list">
+                            <span class="danger-item">You don't know their risk</span>
+                            <span class="danger-item">You don't know their size</span>
+                            <span class="danger-item">You don't know if it's even real</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">2 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 3: COMPARING JOURNEYS
+             ===================================================== -->
+        <div class="slide" data-slide="3">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="danger-section">
+                    <div class="danger-header">
+                        <div class="danger-icon">❌</div>
+                        <h2 class="danger-title">Comparing Your Journey</h2>
+                    </div>
+
+                    <div class="danger-card">
+                        <p class="danger-text">
+                            Social media shows a distorted reality:
+                        </p>
+                        <div class="danger-list">
+                            <span class="danger-item">They show wins, hide losses</span>
+                            <span class="danger-item">You see highlight reels</span>
+                            <span class="danger-item">Not the full picture</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">3 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 4: FOMO + FAKE GURUS
+             ===================================================== -->
+        <div class="slide" data-slide="4">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="dual-dangers">
+                    <div class="dual-danger-card">
+                        <div class="dual-danger-icon">😰</div>
+                        <div class="dual-danger-content">
+                            <h3 class="dual-danger-title">FOMO From Others' Wins</h3>
+                            <p class="dual-danger-desc">
+                                "They made 500% why can't I?" — leads to reckless trading
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="dual-danger-card orange">
+                        <div class="dual-danger-icon orange">🎭</div>
+                        <div class="dual-danger-content">
+                            <h3 class="dual-danger-title orange">Fake Gurus Everywhere</h3>
+                            <p class="dual-danger-desc">
+                                Lambos rented. Screenshots edited. Results fabricated.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">4 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 5: WHAT TO USE IT FOR
+             ===================================================== -->
+        <div class="slide" data-slide="5">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="positive-section">
+                    <div class="positive-header">
+                        <div class="positive-icon">✅</div>
+                        <h2 class="positive-title">Use Social Media For</h2>
+                    </div>
+
+                    <div class="positive-grid">
+                        <div class="positive-item">
+                            <div class="positive-check">✓</div>
+                            <span class="positive-text">Education & concepts</span>
+                        </div>
+
+                        <div class="positive-item">
+                            <div class="positive-check">✓</div>
+                            <span class="positive-text">Community support</span>
+                        </div>
+
+                        <div class="positive-item">
+                            <div class="positive-check">✓</div>
+                            <span class="positive-text">Market awareness</span>
+                        </div>
+                    </div>
+
+                    <div class="not-for-box">
+                        <span class="not-for-text">NOT for trade signals ❌</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">5 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 6: CTA - FULL ARTICLE
+             ===================================================== -->
+        <div class="slide" data-slide="6">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="cta-container">
+                    <div class="cta-visual">🧠</div>
+
+                    <h2 class="cta-text">Think For<br><span class="cta-highlight">Yourself</span></h2>
+
+                    <p class="cta-subtext">
+                        Use social media wisely
+                    </p>
+
+                    <a href="#" class="cta-button">
+                        <span>Full Article in Bio</span>
+                        <span>🔗</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">6 / 6</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         EXPORT MODE JAVASCRIPT
+         ===================================================== -->
+    <script>
+        /**
+         * Export Mode Controller
+         * Press 'E' to enter export mode
+         * Use Arrow keys to navigate slides
+         * Press 'Escape' to exit export mode
+         */
+        (function() {
+            let exportMode = false;
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                currentSlide = 0;
+                updateExportView();
+                console.log('Export mode enabled. Use Arrow keys to navigate, Escape to exit.');
+            }
+
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.classList.remove('exporting'));
+                console.log('Export mode disabled.');
+            }
+
+            function updateExportView() {
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.classList.add('exporting');
+                    } else {
+                        slide.classList.remove('exporting');
+                    }
+                });
+                console.log(`Showing slide ${currentSlide + 1} of ${totalSlides}`);
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateExportView();
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateExportView();
+                }
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'e' || e.key === 'E') {
+                    if (!exportMode) {
+                        enterExportMode();
+                    }
+                } else if (e.key === 'Escape') {
+                    if (exportMode) {
+                        exitExportMode();
+                    }
+                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    if (exportMode) {
+                        nextSlide();
+                    }
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    if (exportMode) {
+                        prevSlide();
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
