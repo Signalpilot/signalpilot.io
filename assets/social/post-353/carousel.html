@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 353 — Trading and Relationships | Carousel Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg-dark: #0a0a0f; --accent-blue: #4a90d9; --accent-gold: #c9a962; --accent-red: #d94a4a; --accent-green: #4ad97a; --text-primary: #e8e8e8; --text-secondary: #a0a0a0; --text-dim: #6a6a6a; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
+    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
+    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
+    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+    .page-title { text-align: center; margin-bottom: 40px; }
+    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
+    .page-title p { color: var(--text-dim); font-size: 14px; }
+    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
+    .slide-wrapper { aspect-ratio: 1 / 1; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
+    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 48px; text-align: center; }
+    .slide-number { position: absolute; top: 16px; left: 16px; font-size: 11px; color: var(--text-dim); letter-spacing: 1px; }
+    .brand-mark { position: absolute; bottom: 16px; right: 16px; font-size: 10px; color: var(--text-dim); letter-spacing: 1px; }
+    .slide-icon { font-size: 48px; margin-bottom: 20px; }
+    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; margin-bottom: 16px; line-height: 1.2; }
+    .slide-title.large { font-size: 36px; }
+    .slide-subtitle { font-size: 14px; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; }
+    .slide-body { font-size: 16px; color: var(--text-secondary); line-height: 1.7; max-width: 320px; }
+    .problem-box { width: 100%; max-width: 340px; border-radius: 16px; padding: 28px; margin: 16px 0; text-align: left; background: rgba(217, 74, 74, 0.1); border: 2px solid rgba(217, 74, 74, 0.4); }
+    .problem-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--accent-red); margin-bottom: 12px; }
+    .problem-list { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+    .solution-box { width: 100%; max-width: 340px; border-radius: 16px; padding: 28px; margin: 16px 0; text-align: left; background: rgba(74, 217, 122, 0.1); border: 2px solid rgba(74, 217, 122, 0.4); }
+    .solution-box.blue { background: rgba(74, 144, 217, 0.1); border-color: rgba(74, 144, 217, 0.4); }
+    .solution-box.gold { background: rgba(201, 169, 98, 0.1); border-color: rgba(201, 169, 98, 0.4); }
+    .solution-box.purple { background: rgba(148, 74, 217, 0.1); border-color: rgba(148, 74, 217, 0.4); }
+    .solution-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--accent-green); margin-bottom: 12px; }
+    .solution-box.blue .solution-title { color: var(--accent-blue); }
+    .solution-box.gold .solution-title { color: var(--accent-gold); }
+    .solution-box.purple .solution-title { color: #944ad9; }
+    .solution-list { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+    body.export-mode { padding: 0; background: #000; }
+    body.export-mode .controls, body.export-mode .page-title { display: none; }
+    body.export-mode .carousel-grid { display: block; }
+    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1080px; border-radius: 0; margin: 0; }
+    body.export-mode .slide-wrapper.active { display: block; }
+    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
+    body.export-mode .export-nav { display: flex; }
+    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; }
+    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label><input type="checkbox" id="bgToggle" checked> Background</label>
+    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
+    <button onclick="toggleExportMode()">Export Mode</button>
+  </div>
+
+  <div class="page-title">
+    <h1>Post 353 — Trading and Relationships</h1>
+    <p>Blog Carousel — 7 Slides</p>
+  </div>
+
+  <div class="carousel-grid">
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
+      <div class="slide-content">
+        <span class="slide-number">01 / 07</span>
+        <div class="slide-icon">💑</div>
+        <div class="slide-subtitle">Life Balance</div>
+        <h2 class="slide-title large">TRADING AND RELATIONSHIPS</h2>
+        <p class="slide-body">The balance nobody talks about.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
+      <div class="slide-content">
+        <span class="slide-number">02 / 07</span>
+        <div class="problem-box">
+          <div class="problem-title">⚠️ COMMON PROBLEMS</div>
+          <div class="problem-list">❌ Bringing losses home emotionally<br><br>❌ Always distracted by charts<br><br>❌ Financial stress affecting family<br><br>❌ Mood swings from P/L</div>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
+      <div class="slide-content">
+        <span class="slide-number">03 / 07</span>
+        <div class="solution-box blue">
+          <div class="solution-title">🕐 SET TRADING HOURS</div>
+          <div class="solution-list">Trading time is trading time<br><br>Family time is family time<br><br>Don't blur the lines<br><br>Close the laptop</div>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
+      <div class="slide-content">
+        <span class="slide-number">04 / 07</span>
+        <div class="solution-box">
+          <div class="solution-title">💬 COMMUNICATE</div>
+          <div class="solution-list">Explain what you're doing<br><br>Be honest about risk<br><br>Share the journey (good and bad)<br><br>No secrets about money</div>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
+      <div class="slide-content">
+        <span class="slide-number">05 / 07</span>
+        <div class="solution-box purple">
+          <div class="solution-title">🧘 EMOTIONAL SEPARATION</div>
+          <div class="solution-list">Leave losses at the desk<br><br>Don't punish loved ones for bad trades<br><br>Develop coping strategies<br><br>Take walks, breathe</div>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
+      <div class="slide-content">
+        <span class="slide-number">06 / 07</span>
+        <div class="solution-box gold">
+          <div class="solution-title">💰 FINANCIAL AGREEMENTS</div>
+          <div class="solution-list">What's the risk capital?<br><br>What's off-limits?<br><br>Alignment prevents conflict<br><br>Partner should know the plan</div>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
+      <div class="slide-content">
+        <span class="slide-number">07 / 07</span>
+        <div class="slide-icon">❤️</div>
+        <h2 class="slide-title">Profit Means Nothing If You Lose What Matters</h2>
+        <p class="slide-body">Follow @signalpilot</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="export-nav">
+    <button onclick="prevSlide()">← Previous</button>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 7</span>
+    <button onclick="nextSlide()">Next →</button>
+  </div>
+
+  <script>
+    const bgToggle = document.getElementById('bgToggle');
+    const opacitySlider = document.getElementById('opacitySlider');
+    const videos = document.querySelectorAll('.bg-video');
+    const slides = document.querySelectorAll('.slide-wrapper');
+    let currentSlide = 0, exportMode = false;
+    bgToggle.addEventListener('change', (e) => videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'));
+    opacitySlider.addEventListener('input', (e) => document.documentElement.style.setProperty('--video-opacity', e.target.value / 100));
+    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
+    function updateExportView() { slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
+    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
+    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
+    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+  </script>
+</body>
+</html>
