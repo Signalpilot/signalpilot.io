@@ -132,55 +132,112 @@
 ### Discord Servers — Specific Communities
 
 **Day Trading & Stocks:**
-| Server | Members | Culture | Access | Your Approach |
-|--------|---------|---------|--------|---------------|
-| Warrior Trading | 50K+ | Education-focused day trading | Free tier available | Help in education channels |
-| Bear Bull Traders | 30K+ | Andrew Aziz community | Paid ($99/mo) | Serious discussion, avoid promotion |
-| The Trading Fraternity | 20K+ | UK-focused, diverse markets | Free | Share London session analysis |
-| Humbled Trader | 40K+ | Beginner-friendly | Free tier | Help newbies, share losses not just wins |
+| Server | Members | How to Join | Access | Your Approach |
+|--------|---------|-------------|--------|---------------|
+| Warrior Trading | 50K+ | warriortrading.com/day-trading-chat-room (their own platform, not Discord) | Paid membership | Help in education channels, serious only |
+| Bear Bull Traders | 30K+ | bearbulltraders.com → Community | Paid ($99/mo) | Andrew Aziz community, serious discussion |
+| Humbled Trader | 40K+ | community.humbledtrader.com/join-ht-discord | Paid ($1,490/yr) | Help newbies, share losses not just wins |
+| Traders War Room | 5K+ | discord.com/servers/traders-war-room-llc-873073458433638410 | Free + Premium | Multi-asset alerts, 40+ analysts |
 
 **Crypto:**
-| Server | Members | Culture | Access | Your Approach |
-|--------|---------|---------|--------|---------------|
-| Cryptohub | 50K+ | Mixed skill levels | Free + Premium ($15/mo) | Share free analysis, don't compete with their signals |
-| Jacob's Crypto Clan | 40K+ | Active, YouTuber-led | Free + VIP | Engage in discussion, not signals |
-| Kaizen | 14K+ | Education-focused | Paid ($199/mo) | Learn and contribute to discussions |
-| WallStreetBets (Crypto) | 160K+ | Meme culture, high risk | Free | Only engage if you can match tone |
+| Server | Members | How to Join | Access | Your Approach |
+|--------|---------|-------------|--------|---------------|
+| LuxAlgo | 197K+ | discord.com/invite/lux | Free | Engage in strategy forums, learn competitor |
+| Cryptohub | 50K+ | Search "Cryptohub" on Disboard | Free + Premium ($15/mo) | Share analysis, don't compete with signals |
+| Jacob's Crypto Clan | 40K+ | Links in Jacob Bury's YouTube descriptions | Free + VIP | Engage in discussion, not signals |
+| Kaizen | 14K+ | Search "Kaizen crypto" on Disboard | Paid ($199/mo) | Education-focused, learn and contribute |
+| WallStreetBets (Crypto) | 160K+ | Search "WSB crypto" on Discord.me | Free | Only engage if you can match degen tone |
 
-**Multi-Asset:**
-| Server | Focus | Your Approach |
-|--------|-------|---------------|
-| TradingView Unofficial | Platform users | Help with Pine Script, indicator setup |
-| Forex Factory Discord | Forex-focused | Session analysis, institutional concepts |
+**How to Actually Join Discord Servers:**
 
-**How to find more:**
-- Disboard.org — Search "trading," "forex," "crypto"
-- Top.gg — Discord server rankings
-- Follow traders on Twitter — They often post Discord links
+1. **Direct invite links** (when available):
+   - Go to discord.com/invite/[code]
+   - Links expire — if dead, use methods below
+
+2. **Discovery directories:**
+   - **Disboard.org** — Search "day trading," "forex," "crypto trading"
+   - **Discord.me** — Browse trading category
+   - **Top.gg** — Server rankings by member count
+   - **Discadia.com** — Search specific server names
+
+3. **From content creators:**
+   - YouTube descriptions (most reliable)
+   - Twitter/X bios
+   - Website community pages
+   - Linktree profiles
+
+4. **Verification steps** (most servers require):
+   - Email verification
+   - Phone verification (larger servers)
+   - React to rules message
+   - Wait 10-min gate period
+   - Answer entry questions
+
+**Warning:** ~1,200+ scam trading Discord servers exist. Verify by:
+- Checking server age (older = more legit)
+- Looking for verified badges
+- Confirming through official website/YouTube
+- Avoiding servers that DM you immediately with "signals"
 
 ---
 
 ### Telegram Groups — Specific Communities
 
-**High-Quality Groups (Engage, Don't Compete):**
-| Group | Members | Focus | Your Approach |
-|-------|---------|-------|---------------|
-| Binance Killers | 250K+ | Crypto signals | Share analysis as discussion, not competing signals |
-| Fat Pig Signals | 50K+ | Long-running (since 2017) | Educational discussion, not signal competition |
-| Bitcoin Bullets | 100K+ | BTC-focused | Technical discussion on BTC specifically |
-| Crypto Inner Circle | Varies | Mixed content | Verify legitimacy first, engage cautiously |
+**High-Quality Groups (Verified, Long-Running):**
+| Group | Members | Est. | Focus | How to Find | Your Approach |
+|-------|---------|------|-------|-------------|---------------|
+| Binance Killers | 250K+ | 2019 | High-frequency crypto signals | Search @BinanceKillers on Telegram | Share analysis as discussion, never compete |
+| Bitcoin Bullets | 36K+ | 2018 | BTC-focused, quality over quantity | bitcoinbullets.com → Telegram link | Technical BTC discussion only |
+| Fat Pig Signals | 50K+ | 2017 | Long-running, established | fatpigsignals.com → Free Telegram | Educational discussion, respect their calls |
+| Crypto Quality Signals | 40K+ | 2018 | Multi-coin analysis | Search on Telegram directory sites | Add to their analysis, don't compete |
 
-**Finding Groups:**
-- Search "[coin name] telegram" for coin-specific groups
-- Check project websites for official Telegram links
-- Join groups for coins you actually trade (authenticity matters)
+**How to Actually Find & Join Telegram Groups:**
 
-**Telegram Rules:**
-- Lurk 1-2 weeks before posting
-- Never post competing signals
-- Share analysis as "here's what I'm seeing" not "here's the call"
-- Most groups ban promotion instantly — be extremely subtle
-- Build reputation through accuracy over time, not volume
+1. **Official sources (safest):**
+   - Project/service official website → Telegram link
+   - YouTube channel descriptions
+   - Twitter/X bio links
+   - CoinGecko/CoinMarketCap project pages → Social links
+
+2. **Telegram search:**
+   - Open Telegram → Search icon
+   - Search: "[coin name] trading" or "[service name]"
+   - Look for verified badges and high member counts
+   - Check channel age and post history
+
+3. **Aggregator sites:**
+   - **Safetrading.today** — Vetted signal providers
+   - **PrimeXBT signal list** — Curated groups
+   - **TelegramChannels.me** — Directory by category
+
+4. **From traders you trust:**
+   - Ask in Discord/Twitter DMs
+   - Check their Linktree
+   - YouTube video descriptions
+
+**CRITICAL: Avoiding Scam Groups**
+
+~33% of crypto Telegram signal groups are scams. Red flags:
+- Promises of "guaranteed profits" or specific % returns
+- Requires payment before seeing any content
+- Admins DM you first with offers
+- Group is less than 6 months old
+- No verifiable track record or website
+- Pressure tactics ("limited spots")
+
+**Telegram Engagement Rules:**
+- **Week 1-2:** Lurk only. Read culture. Note who's respected.
+- **Week 3:** React with emoji, brief "good call" type comments
+- **Week 4+:** Add small insights: "I'm watching the same setup on 4H"
+- **Never:** Post links, share competing calls, DM members, mention your product
+- **Build reputation:** Through accuracy over time, not volume of posts
+
+**Your Telegram Profile Setup:**
+```
+Name: [Your real name or trading handle]
+Bio: Trader | Market cycles & volume flow | TradingView
+```
+Don't put SignalPilot in bio initially — earn trust first.
 
 ---
 
@@ -964,6 +1021,232 @@ What finally helped you get selective?
 
 ---
 
+## Response Category 5: Community-Specific Tone Adjustments
+
+Different communities have different cultures. Same message, different delivery.
+
+### r/algotrading — Quant-Minded, Skeptical
+
+**Culture:** Data-driven, hates hype, wants evidence, will call out BS immediately.
+
+**When discussing indicators:**
+```
+The non-repainting claim is verifiable: run it on 1-min bars live for an hour, compare to historical. If signals move or disappear post-close, it's using future data.
+
+Most TradingView indicators fail this test — they optimize for screenshot performance, not live trading. Lookahead bias is trivial to add and makes backtests look incredible.
+
+I built SignalPilot specifically to pass this test. But don't take my word for it — here's how to verify any indicator yourself: [methodology]
+```
+
+**What works here:**
+- Specific technical claims
+- Verifiable statements
+- Methodology transparency
+- Acknowledging limitations
+- Links to audits/evidence
+
+**What fails:**
+- Hype language
+- Vague claims
+- "It just works"
+- Screenshots of winning trades
+
+---
+
+### r/CryptoCurrency — Noisy, Meme-Heavy, Skeptical of Shills
+
+**Culture:** 7.5M members, lots of noise, hates obvious promotion, but respects genuine analysis.
+
+**When discussing market cycles:**
+```
+y'all realize we've seen this exact pattern before right?
+
+distribution phase classic signs:
+- rallies on lower volume ✓
+- everyone and their grandma suddenly bullish ✓
+- "this time is different" takes everywhere ✓
+
+not saying we dump tomorrow. but the signs are there for anyone looking at volume, not just price.
+
+been tracking market phases for years. this feels like late 2021 vibes to me. anyone else seeing this or am I coping?
+```
+
+**What works here:**
+- Casual tone, lowercase ok
+- Self-deprecating humor
+- Asking questions back
+- Being contrarian with evidence
+- Acknowledging uncertainty
+
+**What fails:**
+- Corporate speak
+- "Our indicators show..."
+- Long technical explanations
+- Taking yourself too seriously
+
+---
+
+### r/Forex — Session-Focused, Institutional Concepts
+
+**Culture:** More professional than crypto, respects institutional methodology, session-aware.
+
+**When discussing liquidity:**
+```
+London open sweep into NY continuation is one of the highest probability setups I trade.
+
+Here's the logic: Asian range builds liquidity on both sides. London comes in, sweeps one side (usually the obvious one where retail put stops), reverses. NY confirms direction.
+
+Not saying it works every time, but tracking this pattern changed how I think about sessions. The key is waiting for the sweep to COMPLETE before entering — most people jump in during the sweep and get stopped on the continuation.
+
+Anyone else trade this framework?
+```
+
+**What works here:**
+- Session-specific language
+- Institutional concepts
+- "Smart money" framework
+- Specific setup descriptions
+- Patience emphasis
+
+**What fails:**
+- Crypto degen language
+- "Just buy the dip"
+- Ignoring session context
+
+---
+
+### r/Daytrading — Mixed Experience Levels
+
+**Culture:** 1.8M members, lots of beginners, appreciates practical advice.
+
+**When helping a beginner:**
+```
+Hey, I was in the same place 3 years ago. Here's what I wish someone told me:
+
+1. Your indicators aren't the problem — you could make money with a 20 EMA if you had proper risk management
+2. Size down. If a loss makes you emotional, you're too big
+3. Track your trades in a spreadsheet. Look for patterns in YOUR behavior, not just charts
+
+The hard truth: most beginners lose because of psychology and size, not strategy. The strategy stuff comes later.
+
+What's your current routine look like?
+```
+
+**What works here:**
+- Empathy and shared experience
+- Practical, actionable advice
+- Not talking down to people
+- Asking follow-up questions
+- Admitting your own struggles
+
+**What fails:**
+- Gatekeeping
+- "Just read the wiki"
+- Overwhelming with complexity
+- Subtle flexing
+
+---
+
+### Twitter/X — Punchy, Chart-Forward
+
+**Culture:** Trading community lives here, short attention spans, charts perform well.
+
+**Format that works:**
+```
+BTC 4H looking interesting.
+
+What I see:
+• Volume divergence at highs
+• Distribution structure forming
+• Liquidity sitting below 64k
+
+Not short yet. Waiting for structure break.
+
+Invalidation: new ATH
+
+🧵 if you want the breakdown
+```
+
+**What works:**
+- Bullet points
+- Clear thesis
+- Specific levels
+- "Thread if interested" hooks
+- Charts attached
+- Emojis sparingly (1-2 max)
+
+---
+
+### Discord — Real-Time, Conversational
+
+**Culture:** Casual, fast-moving, relationship-focused.
+
+**When someone asks about your tools:**
+```
+yo — yeah I built SignalPilot
+
+it's cycle detection focused, non-repainting (that part was non-negotiable for me after getting burned)
+
+but tbh the concepts work without any tools. the 5-phase framework is just wyckoff with clearer labels
+
+happy to explain if you want, or check education.signalpilot.io for free lessons
+
+what are you currently using?
+```
+
+**What works:**
+- Casual tone
+- Quick responses
+- Offering value before asking
+- Being accessible
+
+---
+
+### LinkedIn — Professional, Longer-Form
+
+**Culture:** Finance professionals, longer content works, vulnerability performs well.
+
+**Post format that works:**
+```
+I lost $47,000 in 2019.
+
+Not because of a bad trade.
+Because of 47 bad trades in a row.
+
+Here's what I learned:
+
+→ I was trading my P&L, not the chart
+→ Every loss made me want to "make it back"
+→ I had no rules, just impulses
+
+The turnaround came when I started tracking WHY I entered, not just WHAT I traded.
+
+Patterns in my behavior:
+• 80% of losses were revenge trades
+• My win rate at 9:30am: 62%
+• My win rate after 2pm: 34%
+
+The data didn't lie. I was my own worst enemy.
+
+Now I have one rule: 2 losses = done for the day.
+
+Simple. Boring. Profitable.
+
+What's the hardest lesson trading taught you?
+
+---
+I write about trading psychology and market cycles.
+Free education: education.signalpilot.io
+```
+
+**What works:**
+- Vulnerability with numbers
+- Line breaks for readability
+- Ending with a question
+- Subtle CTA at bottom
+
+---
+
 # 5. TIKTOK STRATEGY
 
 ## Why TikTok Matters for Trading Content
@@ -1325,66 +1608,183 @@ Appreciate what this community offers. Lesson learned.
 
 # 8. COMPETITOR POSITIONING
 
-## Landscape Overview
+## Deep Competitive Analysis
 
-| Competitor | Price | Strengths | Weaknesses | Their Community |
-|------------|-------|-----------|------------|-----------------|
-| **LuxAlgo** | $40-60/mo | 500K+ TV followers, AI-powered, frequent updates | Complexity, learning curve | Active on TV, Twitter |
-| **TrendSpider** | $54-139/mo | Auto-trendlines, all-in-one platform | Expensive, separate from TV | Own community |
-| **Trade Ideas** | $118-228/mo | AI-driven, stock scanning | Very expensive, stocks only | Established traders |
-| **3Commas** | Varies | Bots, automation | Crypto only, complexity | Crypto communities |
-| **AltSignals** | Varies | Signals + tools | Signal-dependent | Telegram-heavy |
-| **Bookmap** | $49-79/mo | DOM/orderflow | Learning curve, specific use | Scalper communities |
+### LuxAlgo — The 800-Pound Gorilla
 
-## How to Position Against Each
+**The Facts:**
+- 750K+ TradingView followers (most-followed profile on platform)
+- 197K+ Discord members (official Discord Partner)
+- 2M+ social media followers total
+- Price: $40/mo (Premium) to $60/mo (Ultimate)
+- Claims: "World's largest provider of technical indicators"
 
-### vs. LuxAlgo
-**Never say:** "LuxAlgo sucks" or "We're better than LuxAlgo"
+**What Users Love:**
+- Massive community (24/7 Discord support)
+- 50+ free open-source indicators
+- AI-powered pattern recognition
+- Frequent updates and new features
+- Fast support (agents like "PHOENIX" praised)
 
-**Say (if directly asked):**
+**What Users Complain About (Your Opportunities):**
+| Complaint | Frequency | SignalPilot Angle |
+|-----------|-----------|-------------------|
+| **Repainting concerns** | Common | "Some users report repainting. SignalPilot is audited for zero lookahead bias." |
+| **"Not much better than free"** | Moderate | "We focus on what free can't do: complete cycle detection." |
+| **Charts get cluttered** | Common | "We designed for clarity, not feature overload." |
+| **Billing/refund issues** | Moderate | "7-day refund, no auto-renewal surprises." |
+| **Overwhelming for beginners** | Common | "82-lesson education hub included free." |
+
+**Their Positioning:** AI + Patterns + Community
+**Your Counter-Positioning:** Cycles + Simplicity + Education
+
+**Response when asked "How are you different from LuxAlgo?":**
 ```
-LuxAlgo's solid — they have a huge following for a reason. Different focus though.
+LuxAlgo's the biggest in the space — 750K followers for good reason. We're different in philosophy:
 
-They're more AI/pattern recognition. SignalPilot is more market cycle detection — the 5-phase framework (accumulation through decline).
+They're AI-powered pattern recognition. We're market cycle detection — the 5-phase framework from Wyckoff.
 
-Really depends on how you think about markets. Some people want patterns identified, others want to understand where they are in the cycle.
+Some people want an AI to find patterns. Others want to understand WHERE they are in the market cycle and WHY. That's our lane.
+
+Also: we're audited for non-repainting. That's non-negotiable for us after I got burned by indicators that looked perfect in backtests.
+
+What matters more to you — pattern alerts or cycle understanding?
+```
+
+---
+
+### TrendSpider — The All-in-One Platform
+
+**The Facts:**
+- Price: $54/mo (Essential) to $139/mo (Elite)
+- Separate platform (not TradingView-based)
+- A+ BBB rating, 5 stars on Trustpilot (592 reviews)
+- Features: Auto-trendlines, Raindrop Charts™, AI bots
+
+**What Users Love:**
+- Auto-draws trendlines, patterns, levels
+- AI trading bots (no coding required)
+- Multi-timeframe analysis built-in
+- Clean, modern interface
+- Excellent customer support
+
+**What Users Complain About (Your Opportunities):**
+| Complaint | Frequency | SignalPilot Angle |
+|-----------|-----------|-------------------|
+| **Steep learning curve** | Very common | "We work inside TradingView — zero platform learning." |
+| **No broker integration** | Common | "We're analysis layer, use your existing broker." |
+| **Expensive** | Common | "SignalPilot is $99/mo vs $139/mo for their top tier." |
+| **No free trial** | Moderate | "We have free education hub + 7-day refund." |
+| **Have to leave TradingView** | Common | "We're TradingView-native. No switching." |
+
+**Their Positioning:** Replace your charting platform
+**Your Counter-Positioning:** Enhance your existing TradingView
+
+**Response when asked "How are you different from TrendSpider?":**
+```
+TrendSpider's impressive — they built an entire platform with auto-trendlines, bots, the whole thing.
+
+Completely different approach though. They want you to switch to their platform. We're TradingView-native — if you already use TV, you just add our indicators. No new platform to learn.
+
+They're "replace everything." We're "enhance what you have."
+
+Also different price point: $99/mo vs $139/mo for their full version.
+
+Do you already use TradingView, or are you open to switching platforms?
+```
+
+---
+
+### Trade Ideas — The Expensive AI Scanner
+
+**The Facts:**
+- Price: $127/mo (Standard) to $254/mo (Premium) — $1,524-$3,048/year
+- HOLLY AI and Money Machine (proprietary AI)
+- Scans 8,000+ stocks in real-time
+- Connects to Interactive Brokers for auto-trading
+- Stocks only (no crypto, forex)
+
+**What Users Love:**
+- Best-in-class AI scanning
+- Real-time alerts on thousands of stocks
+- Auto-trading capability
+- Live trading room included
+- Professional-grade tools
+
+**What Users Complain About (Your Opportunities):**
+| Complaint | Frequency | SignalPilot Angle |
+|-----------|-----------|-------------------|
+| **Extremely expensive** | Very common | "SignalPilot is $99/mo vs $254/mo." |
+| **Steep learning curve** | Very common | "We include 82 lessons to get you started." |
+| **Poor customer support** | Moderate | "We answer within 24-48 hours, personally." |
+| **Stocks only** | For crypto/forex traders | "We work on all markets." |
+| **AI tutorials are robotic** | Moderate | "Real humans made our education." |
+
+**Their Positioning:** AI finds trades for you
+**Your Counter-Positioning:** Understand markets yourself
+
+**Response when asked "How are you different from Trade Ideas?":**
+```
+Trade Ideas is enterprise-grade — $254/month for a reason. They scan thousands of stocks with AI and can auto-trade for you.
+
+We're solving a different problem. We don't find trades FOR you — we help you understand WHERE you are in the market cycle so you can find your own.
+
+Also:
+- We're $99/mo vs $254/mo
+- We work on crypto, forex, everything — they're stocks only
+- We teach you to fish vs. giving you fish
+
+If you want AI to scan and execute, Trade Ideas. If you want to understand market structure yourself, that's us.
 
 What's your trading style?
 ```
 
-### vs. TrendSpider
-**Say (if directly asked):**
-```
-TrendSpider's a full platform — auto-trendlines, their own charting, the whole ecosystem.
+---
 
-SignalPilot's different — we're TradingView-native. If you already use TradingView and want to add cycle analysis and non-repainting tools, that's our lane.
+### Quick Comparison Table
 
-They're more "replace your charting" — we're more "enhance your existing setup."
-```
+| Factor | SignalPilot | LuxAlgo | TrendSpider | Trade Ideas |
+|--------|-------------|---------|-------------|-------------|
+| **Price** | $99/mo | $40-60/mo | $54-139/mo | $127-254/mo |
+| **Platform** | TradingView | TradingView | Own platform | Own platform |
+| **Markets** | All | All | Stocks focus | Stocks only |
+| **Non-repainting** | Audited | Claimed (disputed) | N/A | N/A |
+| **Philosophy** | Cycle detection | AI patterns | Auto-everything | AI scanning |
+| **Education** | 82 lessons free | Community forums | Tutorials | Trading room |
+| **Community** | Discord | 197K Discord | Own forums | Trading room |
+| **Best for** | Understanding cycles | Pattern alerts | Platform switchers | Stock scanners |
 
-### vs. Free Indicators
-**Say (if directly asked):**
-```
-There's genuinely good free stuff on TradingView. Not everything needs to be paid.
+---
 
-The paid tool question is: does it save you time, add genuine edge, and actually work live (not just in backtests)?
+## Competitive Intelligence System
 
-For me, non-repainting was non-negotiable. Hard to find that free. But if someone's just starting, free tools + education is the move.
-```
+**Monitor Weekly:**
+| Source | What to Track | How |
+|--------|---------------|-----|
+| Reddit | Search "[competitor] review" | Set Google Alert |
+| Twitter | @LuxAlgo, @TrendSpider | Follow, note complaints |
+| TradingView | Comments on competitor indicators | Check weekly |
+| Trustpilot | New reviews for competitors | Check monthly |
+| Discord | LuxAlgo server sentiment | Join, lurk |
 
-## Competitive Intelligence to Know
+**What to Look For:**
+- Features users request that competitors don't have
+- Common frustrations you can address
+- Pricing complaints (anchor your value)
+- Support complaints (differentiate on service)
+- Repainting/accuracy concerns (your key differentiator)
 
-**Watch:**
-- Competitor Twitter accounts
-- Their Discord/community feedback
-- TradingView comments on their indicators
-- Reddit mentions (search "[competitor] review")
+**Use For:**
+- Content ideas ("Why indicators repaint" when LuxAlgo complaints spike)
+- Positioning refinement
+- Feature prioritization
+- Understanding user language
 
-**Use for:**
-- Understanding what users like/dislike about alternatives
-- Finding gaps you can address
-- Knowing what claims they make
-- Never for attacking them
+**Never Use For:**
+- Attacking competitors
+- Spreading FUD
+- Brigading their communities
+- Stealing their customers aggressively
 
 ---
 
@@ -1458,6 +1858,24 @@ For me, non-repainting was non-negotiable. Hard to find that free. But if someon
 
 # 10. TRACKING FRAMEWORK
 
+## Ready-to-Use CSV Templates
+
+**Three tracking files are included in this repo:**
+
+| File | Purpose | How to Use |
+|------|---------|------------|
+| `community-tracking-template.csv` | Weekly metrics | Import to Google Sheets, fill weekly |
+| `community-tracking-monthly.csv` | Monthly rollup + learnings | Review end of each month |
+| `community-content-performance.csv` | Track individual posts | Log every significant post |
+
+**Setup Instructions:**
+1. Import CSVs to Google Sheets (File → Import → Upload)
+2. Make a copy for your own use
+3. Set calendar reminder: Fridays for weekly, 1st of month for monthly
+4. Color-code: Green = above target, Yellow = on track, Red = below
+
+---
+
 ## UTM Strategy
 
 **Base URL:** `https://education.signalpilot.io`
@@ -1470,39 +1888,74 @@ For me, non-repainting was non-negotiable. Hard to find that free. But if someon
 &utm_content=[specific_post]
 ```
 
-**Examples:**
-```
-Reddit link share:
-education.signalpilot.io?utm_source=reddit&utm_medium=comment&utm_campaign=community_engagement&utm_content=daytrading_indicator_question
+**Standard UTMs by Platform:**
 
-Twitter bio:
+| Platform | Source | Medium | Campaign |
+|----------|--------|--------|----------|
+| Reddit comment | reddit | comment | community_q1_2026 |
+| Reddit post | reddit | post | community_q1_2026 |
+| Twitter bio | twitter | bio | organic_social |
+| Twitter post | twitter | post | organic_social |
+| TikTok bio | tiktok | bio | short_form |
+| Discord share | discord | message | community_q1_2026 |
+| LinkedIn bio | linkedin | bio | professional |
+| YouTube description | youtube | description | video_content |
+
+**Full URL Examples:**
+```
+Reddit (when sharing education link in comment):
+education.signalpilot.io?utm_source=reddit&utm_medium=comment&utm_campaign=community_q1_2026&utm_content=daytrading_repainting_post
+
+Twitter bio (set once):
 education.signalpilot.io?utm_source=twitter&utm_medium=bio&utm_campaign=organic_social
 
-TikTok bio:
-education.signalpilot.io?utm_source=tiktok&utm_medium=bio&utm_campaign=short_form_video
+TikTok bio (set once):
+education.signalpilot.io?utm_source=tiktok&utm_medium=bio&utm_campaign=short_form
 ```
 
-## Tracking Spreadsheet Template
+**Tracking in Google Analytics:**
+- Go to Acquisition → Campaigns → All Campaigns
+- Filter by campaign name to see community traffic
+- Set up goals for trial signups to track conversion
 
-### Weekly Metrics Tab
+---
 
-| Week | Reddit Posts | Reddit Comments | Reddit Karma Gained | Twitter Posts | Twitter Impressions | TikTok Videos | TikTok Views | "What Tools?" Questions | Education Hub Visits (UTM) |
-|------|--------------|-----------------|---------------------|---------------|---------------------|---------------|--------------|-------------------------|---------------------------|
-| W1 | | | | | | | | | |
-| W2 | | | | | | | | | |
+## Tracking Spreadsheet Structure
 
-### Monthly Metrics Tab
+### Weekly Metrics (community-tracking-template.csv)
 
-| Month | Total Reddit Karma | Twitter Followers | TikTok Followers | Discord Connections | DMs Received | Trial Signups | Conversions | Referral Revenue |
-|-------|-------------------|-------------------|------------------|---------------------|--------------|---------------|-------------|------------------|
-| M1 | | | | | | | | |
-| M2 | | | | | | | | |
+| Column | What to Track | Where to Find It |
+|--------|---------------|------------------|
+| Reddit_Posts | Original posts made | Your Reddit profile |
+| Reddit_Comments | Replies/comments made | Your Reddit profile |
+| Reddit_Karma_Gained | Net karma change | Profile → hover karma |
+| Twitter_Posts | Tweets + threads | Twitter analytics |
+| Twitter_Impressions | Total views | Twitter analytics |
+| TikTok_Videos | Videos posted | TikTok studio |
+| TikTok_Views | Total views this week | TikTok studio |
+| What_Tools_Questions | Times asked unprompted | Manual count |
+| Education_Hub_Visits | UTM traffic | Google Analytics |
 
-### Content Performance Tab
+### Monthly Metrics (community-tracking-monthly.csv)
 
-| Date | Platform | Content Type | Topic | Link | Engagement | Traffic to Education | Notes |
-|------|----------|--------------|-------|------|------------|---------------------|-------|
-| | | | | | | | |
+| Column | What to Track | Why It Matters |
+|--------|---------------|----------------|
+| Total_Reddit_Karma | Cumulative | Authority signal |
+| Twitter_Followers | Current count | Reach |
+| Trial_Signups_Community | Attributed to social | ROI |
+| Conversions_Community | Paid from community | Revenue impact |
+| Top_Performing_Content | Best post link | Replicate success |
+| Key_Learnings | What worked | Strategy refinement |
+
+### Content Performance (community-content-performance.csv)
+
+| Column | Purpose |
+|--------|---------|
+| UTM_Campaign | Attribution |
+| Response_Variation_Used | A/B testing templates |
+| Performance_Rating_1to10 | Quick assessment |
+| Notes_What_Worked | Learnings |
+| Notes_What_Didnt | Avoid repeating |
 
 ## Key Metrics Definitions
 
@@ -1677,6 +2130,18 @@ When someone eventually asks "what tools do you use?" — that's the moment. And
 |---------|------|---------|
 | 1.0 | Jan 2026 | Initial strategy document |
 | 2.0 | Jan 2026 | Added: specific communities, TikTok/YouTube strategy, crisis management, competitor positioning, warm-up protocols, response variations, tracking framework, quick reference cheat sheet |
+| 2.1 | Jan 2026 | **Upgrade to 9+:** Discord with actual invite methods, Telegram verification guidance, deep competitor analysis (LuxAlgo repainting complaints, TrendSpider learning curve, Trade Ideas pricing), community-specific tone variations (r/algotrading quant tone, r/CryptoCurrency degen tone, LinkedIn professional tone), CSV tracking files with import instructions |
+
+---
+
+## Files Included
+
+| File | Description |
+|------|-------------|
+| `COMMUNITY-ENGAGEMENT-STRATEGY.md` | This document |
+| `community-tracking-template.csv` | Weekly metrics tracker (import to Google Sheets) |
+| `community-tracking-monthly.csv` | Monthly rollup with learnings |
+| `community-content-performance.csv` | Individual post performance tracking |
 
 ---
 
