@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 012 — Volume Oracle Dashboard Demo | Carousel Preview</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-green: #4ad97a;
+      --accent-yellow: #d9c94a;
+      --accent-red: #d94a4a;
+      --accent-purple: #9a4ad9;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .controls label { font-size: 0.875rem; color: var(--text-secondary); }
+
+    .controls select, .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .page-title h1 { font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-secondary); font-size: 0.875rem; }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    .slide-wrapper { display: flex; flex-direction: column; align-items: center; }
+
+    .slide-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+    }
+
+    .slide-bg video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+    }
+
+    .slide.bg-black .slide-bg video { opacity: 0; }
+
+    .slide-content {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10%;
+    }
+
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide-1 .icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-1 .title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-purple);
+      margin-bottom: 1rem;
+    }
+
+    .slide-1 .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+    }
+
+    .slide-content .header {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-content .text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .slide-content .text em { font-style: italic; color: var(--accent-gold); }
+    .slide-content .text .highlight { color: var(--text-primary); font-weight: 400; }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .status-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 4px;
+    }
+
+    .status-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-badge.green { background: var(--accent-green); color: var(--bg-dark); }
+    .status-badge.yellow { background: var(--accent-yellow); color: var(--bg-dark); }
+    .status-badge.red { background: var(--accent-red); color: var(--bg-dark); }
+
+    .status-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+    }
+
+    .slide-6 .slide-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide-6 .badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      background: var(--accent-green);
+      color: var(--bg-dark);
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-6 .cta-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .slide-6 .cta-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .slide-6 .cta-button {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .slide-6 .logo {
+      width: 50%;
+      max-width: 200px;
+      margin-top: 2rem;
+      opacity: 0.8;
+    }
+
+    .slide-6 .link-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 1.5rem;
+    }
+
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .carousel-grid { display: block; padding: 0; }
+    body.export-mode .slide-wrapper { display: none; }
+    body.export-mode .slide-wrapper.active { display: flex; }
+    body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; border-radius: 0; box-shadow: none; }
+
+    @media (max-width: 900px) {
+      .carousel-grid { grid-template-columns: 1fr; }
+      .controls { position: static; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.05">5%</option><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.15">15%</option></select></label>
+    <button id="export-btn">Export Mode</button>
+  </div>
+
+  <div class="page-title">
+    <h1>Post 012 — Volume Oracle Dashboard Demo</h1>
+    <p>Instagram Carousel • 6 Slides • 1080×1080px</p>
+  </div>
+
+  <div class="carousel-grid">
+
+    <!-- Slide 1: Hook -->
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide slide-1">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <div class="icon">🔮</div>
+          <div class="title">The Volume Oracle Dashboard</div>
+          <p class="subtitle">One panel. Everything you need to know about volume regime.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Feature 1 -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — Accumulation/Distribution</span>
+      <div class="slide slide-2">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <div class="feature-title">Accumulation / Distribution Phase</div>
+            <div class="feature-desc">Is smart money buying or selling?<br><br>See the current phase at a glance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Feature 2 -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Health Status</span>
+      <div class="slide slide-3">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <p class="header">Health Status</p>
+          <ul class="status-list">
+            <li class="status-item">
+              <span class="status-badge green">ALIGNED</span>
+              <span class="status-text">Structure supports direction</span>
+            </li>
+            <li class="status-item">
+              <span class="status-badge yellow">WATCH</span>
+              <span class="status-text">Proceed with caution</span>
+            </li>
+            <li class="status-item">
+              <span class="status-badge red">CRITICAL</span>
+              <span class="status-text">High risk environment</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Feature 3 -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Structure Alignment</span>
+      <div class="slide slide-4">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <div class="feature-card">
+            <div class="feature-icon">🔗</div>
+            <div class="feature-title">Structure Alignment</div>
+            <div class="feature-desc">Does volume confirm price action?<br><br>See when volume and price agree — or diverge.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Feature 4 -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Market Regime</span>
+      <div class="slide slide-5">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-title">Market Regime</div>
+            <div class="feature-desc">ACCUMULATION?<br>DISTRIBUTION?<br>NEUTRAL?<br><br>Know the environment before you trade.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: CTA -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — CTA</span>
+      <div class="slide slide-6">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+        <div class="slide-content">
+          <div class="badge">Non-Repainting</div>
+          <p class="cta-text">Try Free for 7 Days</p>
+          <p class="cta-sub">What you see today is what existed yesterday.</p>
+          <a href="#" class="cta-button">Start Trial</a>
+          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
+          <p class="link-hint">Link in bio</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const bgToggle = document.getElementById('bg-toggle');
+    const opacityControl = document.getElementById('opacity-control');
+    const slides = document.querySelectorAll('.slide');
+    const videos = document.querySelectorAll('.slide-bg video');
+
+    bgToggle.addEventListener('change', (e) => {
+      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
+    });
+
+    opacityControl.addEventListener('change', (e) => {
+      videos.forEach(video => video.style.opacity = e.target.value);
+    });
+
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
+        currentExportSlide = 0;
+        updateExportSlide();
+      } else {
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'ArrowLeft') {
+        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'Escape') {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+  </script>
+</body>
+</html>
