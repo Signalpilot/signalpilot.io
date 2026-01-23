@@ -1,4 +1,4 @@
-# SignalPilot Community Engagement Strategy v2.0
+# SignalPilot Community Engagement Strategy v2.3
 
 > **Philosophy:** Be the trader you wish you met when you started. Give first, sell never.
 
@@ -34,7 +34,7 @@
 ## The Ratios
 - **90/10**: 90% pure value, 10% soft mentions
 - **Content mix**: 40% market commentary, 30% education, 20% engagement, 10% product-adjacent
-- **Reddit**: Build 500+ karma before ANY link sharing (60+ days)
+- **Reddit**: Build 500+ karma AND 60+ day account age before ANY link sharing
 
 ## Red Flags You're Being Too Salesy
 - Mentioned SignalPilot more than once in thread
@@ -45,6 +45,20 @@
 
 ## Emergency Recovery Script
 > "Fair point. Didn't mean to come across as pitchy. Happy to stick to concepts without product mentions. The methodology matters more than tools anyway."
+
+## International Quick Reference
+
+| Market | #1 Platform | Key Cultural Note |
+|--------|-------------|-------------------|
+| 🇧🇷 Brazil | Telegram + WhatsApp | Warmth > formality, Portuguese only |
+| 🇮🇳 India | Telegram + YouTube | Price-sensitive, Hindi + English mix |
+| 🇦🇪 UAE | Telegram + Twitter | Affluent, quality focus, Ramadan timing |
+| 🇸🇦 Saudi | Telegram + Twitter | Fri-Sat weekend, regulatory emphasis |
+| 🇹🇷 Turkey | Telegram + YouTube | Lira context matters, warmth valued |
+| 🇹🇭 Thailand | Facebook + Telegram | Indirect communication, respect hierarchy |
+| 🇮🇩 Indonesia | TikTok + Telegram | Mobile-first, Ramadan timing |
+
+**Universal International Rule:** Native speaker quality only. Google Translate = instant credibility loss.
 
 ---
 
@@ -60,9 +74,12 @@
 6. [YouTube Strategy](#6-youtube-strategy)
 7. [Crisis Management](#7-crisis-management)
 8. [Competitor Positioning](#8-competitor-positioning)
-9. [Content Calendar](#9-content-calendar)
-10. [Tracking Framework with UTMs](#10-tracking-framework)
-11. [30-60-90 Day Execution Plan](#11-execution-plan)
+9. [International Market Strategy](#9-international-market-strategy)
+10. [Content Calendar](#10-content-calendar)
+11. [Tracking Framework with UTMs](#11-tracking-framework)
+12. [30-60-90 Day Execution Plan](#12-execution-plan)
+13. [Priority Matrix (Time-Constrained Guide)](#13-priority-matrix)
+14. [Escalation Protocol (When Strategy Works)](#14-escalation-protocol)
 
 ---
 
@@ -421,9 +438,11 @@ Trade safe.
 ### Days 31-60: Soft Presence
 | Day | Actions | Target Karma |
 |-----|---------|--------------|
-| 31-40 | Can mention "tools I built" if directly asked | 600+ |
-| 41-50 | Share first blog link (only if genuinely relevant to discussion) | 750+ |
-| 51-60 | Establish as regular helpful presence, people recognize username | 1000+ |
+| 31-45 | Can mention "tools I built" if directly asked, zero links | 600+ |
+| 46-55 | Continue building presence, prepare to share when trusted | 800+ |
+| 56-60+ | Share first blog link (only if genuinely relevant + 500+ karma) | 1000+ |
+
+**Critical:** 500+ karma AND 60+ day account age before ANY external link sharing.
 
 ### Rules:
 - **Never** link to signalpilot.io in first 30 days
@@ -2505,7 +2524,7 @@ If scaling internationally, consider hiring local community managers who:
 | **Mon** | Reddit | Answer 2-3 questions | 20 min |
 | **Mon** | Twitter | "Week ahead" chart post | 15 min |
 | **Tue** | Reddit | Daily discussion engagement | 15 min |
-| **Tue** | TikTok | Quick tip video | Post |
+| **Tue** | TikTok | Quick tip video (minimum) | Post |
 | **Wed** | Twitter | Educational thread OR chart analysis | 20 min |
 | **Wed** | Discord | Active participation | 15 min |
 | **Thu** | Reddit | One original post (discussion starter) | 30 min |
@@ -2564,7 +2583,7 @@ If scaling internationally, consider hiring local community managers who:
 
 ---
 
-# 10. TRACKING FRAMEWORK
+# 11. TRACKING FRAMEWORK
 
 ## Ready-to-Use CSV Templates
 
@@ -2702,7 +2721,7 @@ education.signalpilot.io?utm_source=tiktok&utm_medium=bio&utm_campaign=short_for
 
 ---
 
-# 11. 30-60-90 DAY EXECUTION PLAN
+# 12. 30-60-90 DAY EXECUTION PLAN
 
 ## Days 1-30: Foundation
 
@@ -2808,6 +2827,172 @@ education.signalpilot.io?utm_source=tiktok&utm_medium=bio&utm_campaign=short_for
 
 ---
 
+# 13. PRIORITY MATRIX (Time-Constrained Guide)
+
+**If you can only dedicate limited time, prioritize in this order:**
+
+## 2-3 Hours Per Week (Minimum Viable)
+| Priority | Platform | Action | Time |
+|----------|----------|--------|------|
+| 1 | Reddit | Answer 3-5 questions in r/Daytrading | 45 min |
+| 2 | Twitter | 5 engagement comments + 1 original tweet | 30 min |
+| 3 | Discord | Quick check-in, 2-3 helpful replies | 15 min |
+
+**Skip:** TikTok, YouTube, LinkedIn, Telegram (add when you have more time)
+
+## 5-7 Hours Per Week (Recommended)
+| Priority | Platform | Action | Time |
+|----------|----------|--------|------|
+| 1 | Reddit | 5-7 questions answered + 1 post | 2 hr |
+| 2 | Twitter | Daily engagement + 3 original tweets | 1.5 hr |
+| 3 | Discord/Telegram | Active participation in 2 servers/groups | 1 hr |
+| 4 | TikTok | 2 videos per week | 1 hr |
+
+**Add when ready:** YouTube comments, LinkedIn
+
+## 10+ Hours Per Week (Full Strategy)
+Execute the complete weekly calendar in Section 10.
+
+## Platform Ranking by ROI
+
+| Rank | Platform | Why | Best For |
+|------|----------|-----|----------|
+| 1 | Reddit | Permanent content, SEO value, high-intent users | Long-term authority |
+| 2 | Twitter | Real-time engagement, trading community lives here | Quick growth |
+| 3 | Discord | Deep relationships, recognized member status | Community trust |
+| 4 | TikTok | Algorithm favors new creators, viral potential | Rapid awareness |
+| 5 | Telegram | Active trading groups, especially crypto | Crypto audience |
+| 6 | YouTube | Evergreen content, SEO, deep teaching | Long-term brand |
+| 7 | LinkedIn | Professional audience, less competition | B2B, serious traders |
+
+## International Priority by Market
+
+| Market | If only 1 platform | If 2 platforms | If 3 platforms |
+|--------|-------------------|----------------|----------------|
+| Brazil | Telegram | + YouTube | + Instagram |
+| India | Telegram | + YouTube | + Twitter |
+| UAE/Saudi | Telegram | + Twitter | + Instagram |
+| Turkey | Telegram | + YouTube | + Instagram |
+| Thailand | Facebook | + Telegram | + YouTube |
+| Indonesia | TikTok | + Telegram | + Instagram |
+
+---
+
+# 14. ESCALATION PROTOCOL (When Strategy Works)
+
+## Stage 1: Growing Attention (100-500 followers)
+
+**Signs:**
+- People recognize your username
+- Getting 5-10 DMs per week asking questions
+- Comments get upvoted/liked consistently
+
+**Actions:**
+- Continue current rhythm (don't scale too fast)
+- Start tracking "What tools?" questions formally
+- Begin subtle education hub links when relevant
+- Save best-performing content for replication
+
+## Stage 2: Established Presence (500-2000 followers)
+
+**Signs:**
+- 20+ DMs per week
+- People tag you in relevant discussions
+- "What tools do you use?" questions weekly
+- Collaboration offers from small creators
+
+**Actions:**
+- Create FAQ response for common questions
+- Set up template responses for DMs (personalize each)
+- Accept 1-2 small collaborations (podcasts, guest posts)
+- Consider hiring part-time help for engagement
+
+**Collaboration Evaluation:**
+| Accept | Decline |
+|--------|---------|
+| Educational podcasts | "Guaranteed profit" promoters |
+| Guest blog posts on trading sites | Pump-and-dump groups |
+| Joint analysis with respected traders | Anyone asking for free product |
+| YouTube interviews | Scammy "influencer" collabs |
+
+## Stage 3: Authority Status (2000+ followers)
+
+**Signs:**
+- 50+ DMs per week
+- Interview/speaking requests
+- People defend you in threads
+- Organic referrals to SignalPilot
+
+**Actions:**
+- Delegate routine engagement to trained assistant
+- Focus on high-impact content (threads, videos)
+- Accept strategic collaborations only
+- Consider paid community/Discord
+- Document everything for future hires
+
+## Handling Overwhelming DMs
+
+**Template Response (when too many):**
+```
+Hey! Thanks for reaching out. I'm getting a lot of DMs lately so responses might be slower.
+
+Quick answer to your question: [brief answer]
+
+For more depth, check out education.signalpilot.io — I've written extensively about this topic there.
+
+If this doesn't answer it, reply and I'll get back to you when I can.
+```
+
+**When to Stop Responding:**
+- Asks for financial advice (liability)
+- Asks for free product
+- Obvious scam/spam
+- Aggressive or demanding tone
+
+## Handling Collaboration Requests
+
+**Evaluation Questions:**
+1. Does this person have genuine credibility?
+2. Would I follow them if I didn't have a product?
+3. Is the audience aligned with our target?
+4. Is there mutual value (not just them using our reach)?
+
+**Polite Decline Template:**
+```
+Thanks for thinking of me! I'm pretty selective with collabs right now to keep my content focused.
+
+Not the right fit at the moment, but appreciate you reaching out. Good luck with [their project].
+```
+
+**Acceptance Template:**
+```
+This sounds interesting. Let me know more about:
+- Format and timeline
+- Audience size and demographic
+- What you're thinking for topic
+
+Happy to explore if it's a fit.
+```
+
+## When Things Go Viral
+
+**Scenario:** A post/video unexpectedly gets 100K+ views
+
+**Do:**
+- Pin a comment with value-add (not promotion)
+- Respond to thoughtful comments quickly
+- Create follow-up content on the same topic
+- Update bio with current CTA
+- Track UTM conversions carefully
+
+**Don't:**
+- Spam product links in comments
+- Get defensive with critics
+- Abandon your normal content rhythm
+- Let viral success change your voice
+
+---
+
 # FINAL NOTES
 
 ## The Meta-Strategy
@@ -2840,6 +3025,7 @@ When someone eventually asks "what tools do you use?" — that's the moment. And
 | 2.0 | Jan 2026 | Added: specific communities, TikTok/YouTube strategy, crisis management, competitor positioning, warm-up protocols, response variations, tracking framework, quick reference cheat sheet |
 | 2.1 | Jan 2026 | **Upgrade to 9+:** Discord with actual invite methods, Telegram verification guidance, deep competitor analysis (LuxAlgo repainting complaints, TrendSpider learning curve, Trade Ideas pricing), community-specific tone variations (r/algotrading quant tone, r/CryptoCurrency degen tone, LinkedIn professional tone), CSV tracking files with import instructions |
 | 2.2 | Jan 2026 | **10/10 International Strategy:** Complete market breakdowns for Brazil, India, UAE, Saudi Arabia, Turkey, Thailand, Indonesia. Platform priorities by region. 30+ ready-to-paste templates in Portuguese, Hindi, Arabic, Turkish, Indonesian, Thai. Cultural considerations. Timing by timezone. Local influencer engagement strategy. Localization checklist. Language quality requirements. |
+| 2.3 | Jan 2026 | **Final Polish (9.5+):** Fixed Table of Contents to match actual sections. Fixed duplicate Section 10 numbering. Resolved karma guidance inconsistency (now: 500+ karma AND 60+ days before links). Added Section 13: Priority Matrix (time-constrained guide with 2-3hr/5-7hr/10hr+ tiers). Added Section 14: Escalation Protocol (handling growth, DM overload, collaboration requests, viral moments). Clarified TikTok posting frequency. |
 
 ---
 
