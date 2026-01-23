@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 229 - Market Structure Shift (MSS)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --border-subtle: #2a2a3a;
+            --accent-blue: #4a90d9;
+            --accent-blue-glow: rgba(74, 144, 217, 0.3);
+            --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
+            --accent-green: #4ad97a;
+            --accent-green-glow: rgba(74, 217, 122, 0.3);
+            --accent-red: #d94a4a;
+            --accent-red-glow: rgba(217, 74, 74, 0.3);
+            --accent-purple: #9b4ad9;
+            --accent-purple-glow: rgba(155, 74, 217, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --slide-padding: 60px;
+            --content-gap: 24px;
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font-sans); font-weight: 400; line-height: 1.6; color: var(--text-primary); background-color: #000000; }
+
+        .carousel-container { display: flex; flex-direction: row; gap: 40px; padding: 40px; overflow-x: auto; min-height: 100vh; align-items: center; }
+
+        .slide { position: relative; width: var(--slide-width); height: var(--slide-height); min-width: var(--slide-width); min-height: var(--slide-height); background-color: var(--bg-dark); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: var(--slide-padding); }
+
+        .slide-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
+        .slide-video-bg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.08; }
+
+        .slide-content { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1; gap: var(--content-gap); }
+
+        .slide-header { text-align: center; margin-bottom: 24px; }
+        .slide-number { font-family: var(--font-sans); font-size: 14px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent-purple); margin-bottom: 16px; }
+        .slide-title { font-family: var(--font-serif); font-size: 68px; font-weight: 600; line-height: 1.1; color: var(--text-primary); margin-bottom: 16px; }
+        .slide-subtitle { font-family: var(--font-sans); font-size: 28px; font-weight: 400; color: var(--text-secondary); line-height: 1.4; }
+
+        .shift-visual { display: flex; align-items: center; justify-content: center; gap: 32px; margin: 40px 0; }
+        .shift-state { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .shift-box { width: 180px; height: 100px; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-size: 18px; font-weight: 600; border-radius: 16px; text-align: center; padding: 16px; }
+        .shift-box.intact { background: var(--bg-card); border: 2px solid var(--accent-green); color: var(--accent-green); }
+        .shift-box.broken { background: var(--bg-card); border: 2px solid var(--accent-red); color: var(--accent-red); }
+        .shift-arrow { font-size: 48px; color: var(--accent-purple); }
+        .shift-label { font-family: var(--font-sans); font-size: 16px; font-weight: 500; color: var(--text-muted); }
+
+        .definition-card { width: 100%; max-width: 800px; padding: 48px; background: var(--bg-card); border-radius: 24px; border: 1px solid var(--border-subtle); text-align: center; }
+        .definition-icon { font-size: 64px; margin-bottom: 24px; }
+        .definition-title { font-family: var(--font-serif); font-size: 36px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; }
+        .definition-text { font-family: var(--font-sans); font-size: 26px; font-weight: 400; color: var(--text-secondary); line-height: 1.6; }
+        .definition-highlight { color: var(--accent-purple); font-weight: 600; }
+
+        .trend-section { width: 100%; max-width: 800px; }
+        .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+        .section-icon { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; font-size: 32px; background: var(--bg-card); border-radius: 16px; }
+        .section-icon.green { border: 2px solid var(--accent-green); box-shadow: 0 0 20px var(--accent-green-glow); }
+        .section-icon.red { border: 2px solid var(--accent-red); box-shadow: 0 0 20px var(--accent-red-glow); }
+        .section-icon.gold { border: 2px solid var(--accent-gold); box-shadow: 0 0 20px var(--accent-gold-glow); }
+        .section-title { font-family: var(--font-serif); font-size: 42px; font-weight: 600; }
+        .section-title.green { color: var(--accent-green); }
+        .section-title.red { color: var(--accent-red); }
+
+        .trend-card { padding: 32px; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border-subtle); }
+        .trend-card.green { border-left: 4px solid var(--accent-green); }
+        .trend-card.red { border-left: 4px solid var(--accent-red); }
+        .trend-list { display: flex; flex-direction: column; gap: 12px; }
+        .trend-item { display: flex; align-items: center; gap: 16px; }
+        .trend-bullet { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+        .trend-bullet.green { background: var(--accent-green); }
+        .trend-bullet.red { background: var(--accent-red); }
+        .trend-bullet.gold { background: var(--accent-gold); }
+        .trend-text { font-family: var(--font-sans); font-size: 24px; font-weight: 500; color: var(--text-primary); }
+
+        .meaning-section { width: 100%; max-width: 800px; }
+        .meaning-cards { display: flex; flex-direction: column; gap: 16px; }
+        .meaning-card { display: flex; align-items: center; gap: 20px; padding: 24px 28px; background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-subtle); }
+        .meaning-emoji { font-size: 32px; flex-shrink: 0; }
+        .meaning-text { font-family: var(--font-sans); font-size: 24px; font-weight: 500; color: var(--text-primary); }
+
+        .wisdom-callout { display: flex; align-items: center; gap: 20px; padding: 28px 36px; background: var(--bg-card); border-radius: 16px; border-left: 4px solid var(--accent-purple); margin-top: 24px; }
+        .wisdom-icon { font-size: 36px; flex-shrink: 0; }
+        .wisdom-text { font-family: var(--font-serif); font-size: 28px; font-style: italic; color: var(--text-secondary); line-height: 1.4; }
+
+        .cta-container { display: flex; flex-direction: column; align-items: center; gap: 40px; }
+        .cta-visual { width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; font-size: 80px; background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%); border-radius: 50%; box-shadow: 0 0 60px var(--accent-purple-glow); }
+        .cta-text { font-family: var(--font-serif); font-size: 52px; font-weight: 600; color: var(--text-primary); text-align: center; line-height: 1.3; }
+        .cta-highlight { color: var(--accent-purple); }
+        .cta-subtext { font-family: var(--font-sans); font-size: 28px; font-weight: 400; color: var(--text-secondary); text-align: center; }
+        .cta-button { display: inline-flex; align-items: center; gap: 12px; padding: 20px 48px; background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%); border-radius: 100px; font-family: var(--font-sans); font-size: 22px; font-weight: 600; color: var(--text-primary); text-decoration: none; box-shadow: 0 4px 24px var(--accent-purple-glow); transition: all 0.3s ease; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 32px var(--accent-purple-glow); }
+
+        .brand-footer { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid var(--border-subtle); }
+        .brand-logo { display: flex; align-items: center; gap: 12px; }
+        .brand-logo img { height: 36px; width: auto; }
+        .brand-logo-text { font-family: var(--font-sans); font-size: 20px; font-weight: 600; color: var(--text-primary); letter-spacing: 0.5px; }
+        .slide-indicator { font-family: var(--font-sans); font-size: 16px; font-weight: 500; color: var(--text-muted); }
+
+        body.export-mode { background: transparent; }
+        body.export-mode .carousel-container { padding: 0; gap: 0; }
+        body.export-mode .slide { border-radius: 0; }
+        body.export-mode .slide:not(.exporting) { display: none; }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="slide" data-slide="1">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="slide-number">Smart Money Concepts</div>
+                    <h1 class="slide-title">Market<br>Structure Shift</h1>
+                    <p class="slide-subtitle">When the Trend Changes Character</p>
+                </div>
+                <div class="shift-visual">
+                    <div class="shift-state">
+                        <div class="shift-box intact">Structure<br>Intact</div>
+                        <span class="shift-label">HH/HL Pattern</span>
+                    </div>
+                    <span class="shift-arrow">→</span>
+                    <div class="shift-state">
+                        <div class="shift-box broken">Structure<br>Broken</div>
+                        <span class="shift-label">MSS Occurred</span>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">1 / 6</span>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="2">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="definition-card">
+                    <div class="definition-icon">📊</div>
+                    <h2 class="definition-title">What is MSS?</h2>
+                    <p class="definition-text">
+                        The <span class="definition-highlight">first break</span> of established
+                        <span class="definition-highlight">market structure</span>
+                    </p>
+                </div>
+                <div class="wisdom-callout">
+                    <span class="wisdom-icon">⚠️</span>
+                    <span class="wisdom-text">First warning sign — not confirmed reversal</span>
+                </div>
+            </div>
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">2 / 6</span>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="3">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="trend-section">
+                    <div class="section-header">
+                        <div class="section-icon green">📈</div>
+                        <h2 class="section-title green">MSS in Uptrend</h2>
+                    </div>
+                    <div class="trend-card green">
+                        <div class="trend-list">
+                            <div class="trend-item"><div class="trend-bullet green"></div><span class="trend-text">Price making HH and HL</span></div>
+                            <div class="trend-item"><div class="trend-bullet green"></div><span class="trend-text">Then breaks BELOW a higher low</span></div>
+                            <div class="trend-item"><div class="trend-bullet green"></div><span class="trend-text">That's the shift</span></div>
+                            <div class="trend-item"><div class="trend-bullet green"></div><span class="trend-text">Trend character changed</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">3 / 6</span>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="4">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="trend-section">
+                    <div class="section-header">
+                        <div class="section-icon red">📉</div>
+                        <h2 class="section-title red">MSS in Downtrend</h2>
+                    </div>
+                    <div class="trend-card red">
+                        <div class="trend-list">
+                            <div class="trend-item"><div class="trend-bullet red"></div><span class="trend-text">Price making LH and LL</span></div>
+                            <div class="trend-item"><div class="trend-bullet red"></div><span class="trend-text">Then breaks ABOVE a lower high</span></div>
+                            <div class="trend-item"><div class="trend-bullet red"></div><span class="trend-text">That's the shift</span></div>
+                            <div class="trend-item"><div class="trend-bullet red"></div><span class="trend-text">Trend character changed</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">4 / 6</span>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="5">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="meaning-section">
+                    <div class="section-header">
+                        <div class="section-icon gold">💡</div>
+                        <h2 class="section-title">What It Means</h2>
+                    </div>
+                    <div class="meaning-cards">
+                        <div class="meaning-card"><span class="meaning-emoji">⚠️</span><span class="meaning-text">NOT confirmed reversal</span></div>
+                        <div class="meaning-card"><span class="meaning-emoji">🚨</span><span class="meaning-text">First warning sign</span></div>
+                        <div class="meaning-card"><span class="meaning-emoji">🔨</span><span class="meaning-text">Structure damaged</span></div>
+                        <div class="meaning-card"><span class="meaning-emoji">👀</span><span class="meaning-text">Watch for continuation or reversal</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">5 / 6</span>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="6">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="cta-container">
+                    <div class="cta-visual">📊</div>
+                    <h2 class="cta-text">MSS =<br><span class="cta-highlight">Change of Character</span></h2>
+                    <p class="cta-subtext">The first sign the trend may be changing</p>
+                    <a href="#" class="cta-button">
+                        <span>Full Lesson in Bio</span>
+                        <span>🔗</span>
+                    </a>
+                </div>
+            </div>
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">6 / 6</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            let exportMode = false;
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+
+            function enterExportMode() { exportMode = true; document.body.classList.add('export-mode'); currentSlide = 0; updateExportView(); }
+            function exitExportMode() { exportMode = false; document.body.classList.remove('export-mode'); slides.forEach(slide => slide.classList.remove('exporting')); }
+            function updateExportView() { slides.forEach((slide, index) => { if (index === currentSlide) { slide.classList.add('exporting'); } else { slide.classList.remove('exporting'); } }); }
+            function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateExportView(); } }
+            function prevSlide() { if (currentSlide > 0) { currentSlide--; updateExportView(); } }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'e' || e.key === 'E') { if (!exportMode) enterExportMode(); }
+                else if (e.key === 'Escape') { if (exportMode) exitExportMode(); }
+                else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { if (exportMode) nextSlide(); }
+                else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { if (exportMode) prevSlide(); }
+            });
+        })();
+    </script>
+</body>
+</html>
