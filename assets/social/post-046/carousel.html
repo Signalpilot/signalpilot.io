@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 046 — Stop Loss Strategies | Carousel Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-red: #d94a4a;
+      --accent-green: #4ad97a;
+      --text-primary: #e8e8e8;
+      --text-secondary: #a0a0a0;
+      --text-dim: #6a6a6a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .controls label {
+      color: var(--text-secondary);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .controls input[type="checkbox"] {
+      cursor: pointer;
+    }
+
+    .controls input[type="range"] {
+      width: 80px;
+      cursor: pointer;
+    }
+
+    .controls button {
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .controls button:hover {
+      opacity: 0.9;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-title h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .page-title p {
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .slide-wrapper {
+      aspect-ratio: 1 / 1;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-dark);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+
+    .slide-wrapper .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: var(--video-opacity, 0.08);
+      pointer-events: none;
+    }
+
+    .slide-wrapper .slide-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 48px;
+      text-align: center;
+    }
+
+    .slide-number {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    /* Slide Typography */
+    .slide-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .slide-title.large {
+      font-size: 42px;
+    }
+
+    .slide-subtitle {
+      font-size: 14px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .slide-body {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 320px;
+    }
+
+    .stop-type-box {
+      width: 100%;
+      max-width: 340px;
+      border-radius: 16px;
+      padding: 28px;
+      margin: 16px 0;
+      text-align: left;
+    }
+
+    .stop-type-box.fixed {
+      background: rgba(74, 144, 217, 0.1);
+      border: 2px solid rgba(74, 144, 217, 0.4);
+    }
+
+    .stop-type-box.structure {
+      background: rgba(201, 169, 98, 0.1);
+      border: 2px solid rgba(201, 169, 98, 0.4);
+    }
+
+    .stop-type-box.atr {
+      background: rgba(74, 217, 122, 0.1);
+      border: 2px solid rgba(74, 217, 122, 0.4);
+    }
+
+    .stop-type-box.trailing {
+      background: rgba(217, 74, 74, 0.1);
+      border: 2px solid rgba(217, 74, 74, 0.4);
+    }
+
+    .stop-type-number {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .stop-type-box.fixed .stop-type-number { color: var(--accent-blue); }
+    .stop-type-box.structure .stop-type-number { color: var(--accent-gold); }
+    .stop-type-box.atr .stop-type-number { color: var(--accent-green); }
+    .stop-type-box.trailing .stop-type-number { color: var(--accent-red); }
+
+    .stop-type-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .stop-type-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .stop-type-note {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+      max-width: 340px;
+      margin: 16px 0;
+    }
+
+    .comparison-item {
+      padding: 14px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .comparison-item.blue {
+      background: rgba(74, 144, 217, 0.1);
+      border: 1px solid rgba(74, 144, 217, 0.3);
+    }
+
+    .comparison-item.gold {
+      background: rgba(201, 169, 98, 0.1);
+      border: 1px solid rgba(201, 169, 98, 0.3);
+    }
+
+    .comparison-item.green {
+      background: rgba(74, 217, 122, 0.1);
+      border: 1px solid rgba(74, 217, 122, 0.3);
+    }
+
+    .comparison-item.red {
+      background: rgba(217, 74, 74, 0.1);
+      border: 1px solid rgba(217, 74, 74, 0.3);
+    }
+
+    .comparison-item .type {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .comparison-item .use {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .key-insight {
+      background: linear-gradient(135deg, rgba(217, 74, 74, 0.15), rgba(201, 169, 98, 0.15));
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid rgba(217, 74, 74, 0.2);
+      max-width: 340px;
+    }
+
+    .warning-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--accent-red);
+      margin-bottom: 16px;
+    }
+
+    .cta-link {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 14px 32px;
+      background: var(--accent-gold);
+      color: var(--bg-dark);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Export mode */
+    body.export-mode {
+      padding: 0;
+      background: #000;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      width: 1080px;
+      height: 1080px;
+      border-radius: 0;
+      margin: 0;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    body.export-mode .export-nav {
+      display: flex;
+    }
+
+    .export-nav button {
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .export-nav .slide-indicator {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .slide-wrapper .slide-content {
+        padding: 32px;
+      }
+
+      .slide-title {
+        font-size: 26px;
+      }
+
+      .slide-title.large {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label>
+      <input type="checkbox" id="bgToggle" checked>
+      Background
+    </label>
+    <label>
+      Opacity
+      <input type="range" id="opacitySlider" min="0" max="30" value="8">
+    </label>
+    <button onclick="toggleExportMode()">Export Mode</button>
+  </div>
+
+  <div class="page-title">
+    <h1>Post 046 — Stop Loss Strategies</h1>
+    <p>Education Carousel — 8 Slides</p>
+  </div>
+
+  <div class="carousel-grid">
+    <!-- Slide 1: Hook -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">01 / 08</span>
+        <div class="slide-icon">🛑</div>
+        <div class="slide-subtitle">Risk Management</div>
+        <h2 class="slide-title large">NO STOP = EVENTUALLY ZERO</h2>
+        <p class="slide-body">A stop loss isn't defeat. It's defining your risk BEFORE the trade.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 2: Type 1 - Fixed -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">02 / 08</span>
+        <div class="stop-type-box fixed">
+          <div class="stop-type-number">Type 1</div>
+          <div class="stop-type-title">Fixed Stop</div>
+          <div class="stop-type-desc">Set percentage or dollar amount from entry.</div>
+          <div class="stop-type-note">Simple but not adaptive to market conditions.</div>
+        </div>
+        <p class="slide-body">Example: 2% of account, $50 max loss per trade.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 3: Type 2 - Structure -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">03 / 08</span>
+        <div class="stop-type-box structure">
+          <div class="stop-type-number">Type 2</div>
+          <div class="stop-type-title">Structure Stop</div>
+          <div class="stop-type-desc">Below support for longs, above resistance for shorts.</div>
+          <div class="stop-type-note">Based on chart logic, not arbitrary numbers.</div>
+        </div>
+        <p class="slide-body">Your stop has a reason: the trade thesis is invalid there.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 4: Type 3 - ATR -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">04 / 08</span>
+        <div class="stop-type-box atr">
+          <div class="stop-type-number">Type 3</div>
+          <div class="stop-type-title">ATR Stop</div>
+          <div class="stop-type-desc">Based on volatility. Usually 1.5-2x Average True Range.</div>
+          <div class="stop-type-note">Adapts to current market conditions.</div>
+        </div>
+        <p class="slide-body">Wider in volatile markets, tighter in calm markets.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 5: Type 4 - Trailing -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">05 / 08</span>
+        <div class="stop-type-box trailing">
+          <div class="stop-type-number">Type 4</div>
+          <div class="stop-type-title">Trailing Stop</div>
+          <div class="stop-type-desc">Moves with profit. Locks in gains as price moves.</div>
+          <div class="stop-type-note">Great for trending markets, tricky in ranges.</div>
+        </div>
+        <p class="slide-body">Let winners run while protecting profits.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 6: Comparison -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">06 / 08</span>
+        <div class="slide-subtitle">When to Use</div>
+        <h2 class="slide-title">Pick Your Stop</h2>
+        <div class="comparison-grid">
+          <div class="comparison-item blue">
+            <div class="type">Fixed</div>
+            <div class="use">Beginners, quick trades</div>
+          </div>
+          <div class="comparison-item gold">
+            <div class="type">Structure</div>
+            <div class="use">Swing trades, technicals</div>
+          </div>
+          <div class="comparison-item green">
+            <div class="type">ATR</div>
+            <div class="use">Volatile assets, adapting</div>
+          </div>
+          <div class="comparison-item red">
+            <div class="type">Trailing</div>
+            <div class="use">Trending markets</div>
+          </div>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 7: Key Insight -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">07 / 08</span>
+        <div class="key-insight">
+          <div class="slide-icon">⚠️</div>
+          <div class="warning-text">No Stop = Unlimited Risk</div>
+          <p class="slide-body">The question isn't IF you'll have a losing trade. It's how MUCH you'll lose.<br><br>Define risk BEFORE you enter.</p>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+
+    <!-- Slide 8: CTA -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">08 / 08</span>
+        <div class="slide-icon">📚</div>
+        <h2 class="slide-title">Master Stop Strategies</h2>
+        <p class="slide-body">Full lesson with examples, placement tips, and common mistakes to avoid.</p>
+        <a href="https://education.signalpilot.io/curriculum/beginner/11-stop-loss-strategies.html" class="cta-link">Read Full Lesson</a>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="export-nav">
+    <button onclick="prevSlide()">← Previous</button>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
+    <button onclick="nextSlide()">Next →</button>
+  </div>
+
+  <script>
+    const bgToggle = document.getElementById('bgToggle');
+    const opacitySlider = document.getElementById('opacitySlider');
+    const videos = document.querySelectorAll('.bg-video');
+    const slides = document.querySelectorAll('.slide-wrapper');
+    let currentSlide = 0;
+    let exportMode = false;
+
+    bgToggle.addEventListener('change', (e) => {
+      videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none');
+    });
+
+    opacitySlider.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
+    });
+
+    function toggleExportMode() {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        currentSlide = 0;
+        updateExportView();
+      }
+    }
+
+    function updateExportView() {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+      });
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateExportView();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateExportView();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') toggleExportMode();
+    });
+  </script>
+</body>
+</html>
