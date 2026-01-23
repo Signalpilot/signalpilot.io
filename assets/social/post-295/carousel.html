@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 295 — Pentarch: The Five Signals Explained</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --bg-card-hover: rgba(255, 255, 255, 0.04);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-glow: rgba(201, 169, 98, 0.3);
+            --text-primary: #e8e6e3;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --accent-orange: #d98c4a;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+            max-width: 1800px;
+            width: 100%;
+        }
+
+        .slide-wrapper {
+            position: relative;
+            width: 1080px;
+            height: 1080px;
+            transform: scale(0.4);
+            transform-origin: top center;
+            margin-bottom: -648px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.4),
+                0 0 0 1px var(--border-subtle);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 72px;
+            background: linear-gradient(
+                145deg,
+                rgba(10, 10, 15, 0.97) 0%,
+                rgba(10, 10, 15, 0.92) 100%
+            );
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 48px;
+        }
+
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .brand-logo {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+        }
+
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hook-icon {
+            font-size: 80px;
+            margin-bottom: 32px;
+            line-height: 1;
+        }
+
+        .hook-title {
+            font-family: var(--font-serif);
+            font-size: 72px;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+
+        .hook-subtitle {
+            font-family: var(--font-sans);
+            font-size: 34px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .signal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 56px;
+        }
+
+        .signal-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .signal-badge {
+            font-family: var(--font-sans);
+            font-size: 36px;
+            font-weight: 700;
+            padding: 16px 28px;
+            border-radius: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        .signal-badge.td {
+            background: rgba(74, 217, 122, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(74, 217, 122, 0.3);
+        }
+
+        .signal-badge.ign {
+            background: rgba(74, 144, 217, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(74, 144, 217, 0.3);
+        }
+
+        .signal-badge.wrn {
+            background: rgba(201, 169, 98, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+        }
+
+        .signal-badge.cap {
+            background: rgba(217, 140, 74, 0.15);
+            color: var(--accent-orange);
+            border: 1px solid rgba(217, 140, 74, 0.3);
+        }
+
+        .signal-badge.bdn {
+            background: rgba(217, 74, 74, 0.15);
+            color: var(--accent-red);
+            border: 1px solid rgba(217, 74, 74, 0.3);
+        }
+
+        .signal-name {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .signal-description {
+            font-family: var(--font-sans);
+            font-size: 32px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .chart-placeholder {
+            margin-top: 32px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-subtle);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .chart-placeholder span {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            color: var(--text-tertiary);
+        }
+
+        .how-to-use {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .how-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .how-icon {
+            font-size: 36px;
+            flex-shrink: 0;
+        }
+
+        .how-text {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .how-text strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .cta-container {
+            text-align: center;
+        }
+
+        .cta-primary {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .cta-secondary {
+            font-family: var(--font-sans);
+            font-size: 32px;
+            color: var(--accent-gold);
+            font-weight: 400;
+            margin-bottom: 48px;
+        }
+
+        .disclaimer {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            color: var(--text-tertiary);
+            font-style: italic;
+        }
+
+        .slide-footer {
+            margin-top: auto;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-tag {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            color: var(--text-tertiary);
+            letter-spacing: 0.05em;
+        }
+
+        .footer-accent {
+            width: 48px;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                var(--accent-gold),
+                var(--accent-orange)
+            );
+            border-radius: 2px;
+        }
+
+        .section-label {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 56px;
+            font-weight: 600;
+            line-height: 1.15;
+            margin-bottom: 48px;
+            color: var(--text-primary);
+        }
+
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            transform: none;
+            margin-bottom: 0;
+        }
+
+        body.export-mode .slide-wrapper:not(.active) {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .slide-wrapper {
+                transform: scale(0.35);
+                margin-bottom: -702px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-wrapper {
+                transform: scale(0.3);
+                margin-bottom: -756px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Slide 1: Cover -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">01 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="hook-icon">👑</div>
+                    <h1 class="hook-title">Pentarch:<br>The Five Signals</h1>
+                    <p class="hook-subtitle">Understanding each phase of the market cycle.</p>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">The Sovereign</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: TD Signal -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">02 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <span class="signal-badge td">TD</span>
+                            <span class="signal-name">Touchdown</span>
+                        </div>
+                        <p class="signal-description">Early-cycle reversal on selling exhaustion.</p>
+                        <div class="chart-placeholder">
+                            <span>Chart example with TD marked</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Signal 1 of 5</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: IGN Signal -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">03 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <span class="signal-badge ign">IGN</span>
+                            <span class="signal-name">Ignition</span>
+                        </div>
+                        <p class="signal-description">Breakout confirmation with conviction.</p>
+                        <div class="chart-placeholder">
+                            <span>Chart example with IGN marked</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Signal 2 of 5</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: WRN Signal -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">04 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <span class="signal-badge wrn">WRN</span>
+                            <span class="signal-name">Warning</span>
+                        </div>
+                        <p class="signal-description">Early weakness in uptrends.</p>
+                        <div class="chart-placeholder">
+                            <span>Chart example with WRN marked</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Signal 3 of 5</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: CAP Signal -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">05 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <span class="signal-badge cap">CAP</span>
+                            <span class="signal-name">Climax</span>
+                        </div>
+                        <p class="signal-description">Late-cycle exhaustion with volume spikes.</p>
+                        <div class="chart-placeholder">
+                            <span>Chart example with CAP marked</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Signal 4 of 5</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: BDN Signal -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">06 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <span class="signal-badge bdn">BDN</span>
+                            <span class="signal-name">Breakdown</span>
+                        </div>
+                        <p class="signal-description">Bearish structure break.</p>
+                        <div class="chart-placeholder">
+                            <span>Chart example with BDN marked</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Signal 5 of 5</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: How to Use -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">07 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <span class="section-label">Application</span>
+                    <h2 class="section-title">How to Use</h2>
+                    <div class="how-to-use">
+                        <div class="how-item">
+                            <span class="how-icon">🧭</span>
+                            <span class="how-text"><strong>Context,</strong> not just signals</span>
+                        </div>
+                        <div class="how-item">
+                            <span class="how-icon">📐</span>
+                            <span class="how-text"><strong>Combine</strong> with structure</span>
+                        </div>
+                        <div class="how-item">
+                            <span class="how-icon">🔄</span>
+                            <span class="how-text"><strong>Different phases</strong> = different behavior</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Best Practices</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">08 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="cta-container">
+                        <h2 class="cta-primary">"The Sovereign reveals where you are in the cycle."</h2>
+                        <p class="cta-secondary">See it in action — Link in bio</p>
+                        <p class="disclaimer">Educational only. Not financial advice.</p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Try the Demo</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide-wrapper');
+            let currentSlide = 0;
+            let exportMode = false;
+
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                currentSlide = 0;
+                updateSlideVisibility();
+            }
+
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.style.display = '');
+                slides.forEach(slide => slide.classList.remove('active'));
+            }
+
+            function updateSlideVisibility() {
+                if (!exportMode) return;
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === currentSlide);
+                });
+            }
+
+            function nextSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlideVisibility();
+            }
+
+            function prevSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                updateSlideVisibility();
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'e' || e.key === 'E') {
+                    if (!exportMode) enterExportMode();
+                } else if (e.key === 'Escape') {
+                    exitExportMode();
+                } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

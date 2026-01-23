@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 256 — Breaker Blocks: Failed Order Blocks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 58px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .slide-title .highlight {
+            color: var(--accent-purple);
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .breaker-card {
+            background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%);
+            border: 1px solid rgba(155, 74, 217, 0.3);
+            border-radius: 16px;
+            padding: 48px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .breaker-card.bullish-fail {
+            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
+            border-color: rgba(217, 74, 74, 0.3);
+        }
+
+        .breaker-card.bullish-fail h3 {
+            color: var(--accent-red);
+        }
+
+        .breaker-card.bullish-fail .feature-list li::before {
+            color: var(--accent-red);
+        }
+
+        .breaker-card.bearish-fail {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border-color: rgba(74, 217, 122, 0.3);
+        }
+
+        .breaker-card.bearish-fail h3 {
+            color: var(--accent-green);
+        }
+
+        .breaker-card.bearish-fail .feature-list li::before {
+            color: var(--accent-green);
+        }
+
+        .breaker-card.why {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+            border-color: rgba(74, 144, 217, 0.3);
+        }
+
+        .breaker-card.why h3 {
+            color: var(--accent-blue);
+        }
+
+        .breaker-card.why .feature-list li::before {
+            content: "✦";
+            color: var(--accent-blue);
+        }
+
+        .breaker-card.concept {
+            background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
+            border-color: rgba(74, 217, 217, 0.3);
+        }
+
+        .breaker-card.concept h3 {
+            color: var(--accent-teal);
+        }
+
+        .breaker-card.caution {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+
+        .breaker-card.caution h3 {
+            color: var(--accent-gold);
+        }
+
+        .breaker-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--accent-purple);
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .feature-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 14px 0;
+            padding-left: 36px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .feature-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+        }
+
+        .flip-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .flip-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            width: 100%;
+        }
+
+        .flip-box {
+            flex: 1;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .flip-box.support {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.2) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border: 1px solid rgba(74, 217, 122, 0.4);
+        }
+
+        .flip-box.resistance {
+            background: linear-gradient(135deg, rgba(217, 74, 74, 0.2) 0%, rgba(217, 74, 74, 0.05) 100%);
+            border: 1px solid rgba(217, 74, 74, 0.4);
+        }
+
+        .flip-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .flip-box.support .flip-label {
+            color: var(--accent-green);
+        }
+
+        .flip-box.resistance .flip-label {
+            color: var(--accent-red);
+        }
+
+        .flip-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        .flip-arrow {
+            font-size: 36px;
+            color: var(--accent-purple);
+        }
+
+        .quote-block {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.4;
+            max-width: 700px;
+            position: relative;
+            padding: 0 40px;
+        }
+
+        .quote-block::before {
+            content: """;
+            position: absolute;
+            left: 0;
+            top: -20px;
+            font-size: 80px;
+            color: var(--accent-teal);
+            opacity: 0.5;
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .cta-title .emphasis {
+            color: var(--accent-purple);
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .disclaimer-text {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-top: 16px;
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 08</span>
+                    <div class="center-content">
+                        <h1 class="slide-title">Breaker Blocks<br><span class="highlight">Explained</span></h1>
+                        <p class="subtitle">When order blocks fail and flip</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Bullish Fails -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Bullish Fails</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 08</span>
+                    <div class="center-content">
+                        <div class="breaker-card bullish-fail">
+                            <h3>📍 BULLISH OB FAILS</h3>
+                            <ul class="feature-list">
+                                <li>Price breaks below bullish order block</li>
+                                <li>Previous support becomes resistance</li>
+                                <li>"Breaker block" is formed</li>
+                                <li>Watch for rejection on return</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Bearish Fails -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Bearish Fails</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 08</span>
+                    <div class="center-content">
+                        <div class="breaker-card bearish-fail">
+                            <h3>📍 BEARISH OB FAILS</h3>
+                            <ul class="feature-list">
+                                <li>Price breaks above bearish order block</li>
+                                <li>Previous resistance becomes support</li>
+                                <li>Role reversal complete</li>
+                                <li>Watch for bounce on return</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Why It Matters -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Why It Matters</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 08</span>
+                    <div class="center-content">
+                        <div class="breaker-card why">
+                            <h3>WHY THIS MATTERS</h3>
+                            <ul class="feature-list">
+                                <li>Previous support → new resistance</li>
+                                <li>Previous resistance → new support</li>
+                                <li>Context for market reversals</li>
+                                <li>Understand the role flip</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Concept -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Concept</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 08</span>
+                    <div class="center-content">
+                        <p class="quote-block">If institutions were wrong at a level, that level may now trap them. Price returning there could see the opposite reaction.</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Caution -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Caution</span>
+            <div class="slide slide-6">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">06 / 08</span>
+                    <div class="center-content">
+                        <div class="breaker-card caution">
+                            <h3>⚠️ IMPORTANT</h3>
+                            <ul class="feature-list">
+                                <li>Breaker blocks aren't guaranteed</li>
+                                <li>They're areas of interest</li>
+                                <li>Based on failed order block theory</li>
+                                <li>Use with other confluence</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Visual -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — Visual</span>
+            <div class="slide slide-7">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">07 / 08</span>
+                    <div class="center-content">
+                        <div class="flip-visual">
+                            <div class="flip-row">
+                                <div class="flip-box support">
+                                    <span class="flip-label">SUPPORT</span>
+                                    <p class="flip-desc">Order block holds</p>
+                                </div>
+                                <span class="flip-arrow">→</span>
+                                <div class="flip-box resistance">
+                                    <span class="flip-label">RESISTANCE</span>
+                                    <p class="flip-desc">Becomes breaker</p>
+                                </div>
+                            </div>
+                            <div class="flip-row">
+                                <div class="flip-box resistance">
+                                    <span class="flip-label">RESISTANCE</span>
+                                    <p class="flip-desc">Order block holds</p>
+                                </div>
+                                <span class="flip-arrow">→</span>
+                                <div class="flip-box support">
+                                    <span class="flip-label">SUPPORT</span>
+                                    <p class="flip-desc">Becomes breaker</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide-wrapper" data-slide="8">
+            <span class="slide-label">Slide 8 — CTA</span>
+            <div class="slide slide-8">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">08 / 08</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">Free<br><span class="emphasis">Lesson</span></h2>
+                        <p class="cta-text">Understand the flip.</p>
+                        <p class="cta-text">Link in bio</p>
+                        <p class="disclaimer-text">Educational only. Not financial advice.</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const totalSlides = slides.length;
+        let exportMode = false;
+
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+        }
+
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (exportMode && currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateExportView();
+            }
+        }
+
+        function prevSlide() {
+            if (exportMode && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (!exportMode) enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>

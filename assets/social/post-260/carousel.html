@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 260 — Alert Setup Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 54px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .slide-title .highlight {
+            color: var(--accent-gold);
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .alert-card {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 16px;
+            padding: 48px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .alert-card.pentarch {
+            background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%);
+            border-color: rgba(155, 74, 217, 0.3);
+        }
+
+        .alert-card.pentarch h3 {
+            color: var(--accent-purple);
+        }
+
+        .alert-card.pentarch .feature-list li::before {
+            color: var(--accent-purple);
+        }
+
+        .alert-card.oracle {
+            background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
+            border-color: rgba(74, 217, 217, 0.3);
+        }
+
+        .alert-card.oracle h3 {
+            color: var(--accent-teal);
+        }
+
+        .alert-card.oracle .feature-list li::before {
+            color: var(--accent-teal);
+        }
+
+        .alert-card.janus {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+            border-color: rgba(74, 144, 217, 0.3);
+        }
+
+        .alert-card.janus h3 {
+            color: var(--accent-blue);
+        }
+
+        .alert-card.janus .feature-list li::before {
+            color: var(--accent-blue);
+        }
+
+        .alert-card.howto {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border-color: rgba(74, 217, 122, 0.3);
+        }
+
+        .alert-card.howto h3 {
+            color: var(--accent-green);
+        }
+
+        .alert-card.howto .feature-list li::before {
+            color: var(--accent-green);
+        }
+
+        .alert-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--accent-gold);
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .feature-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 14px 0;
+            padding-left: 36px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .feature-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+        }
+
+        .steps-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .step-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 24px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.3) 0%, rgba(74, 217, 122, 0.1) 100%);
+            border: 2px solid rgba(74, 217, 122, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--accent-green);
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 20px;
+            color: var(--text-primary);
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .cta-title .emphasis {
+            color: var(--accent-gold);
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            font-size: 20px;
+            color: var(--accent-gold);
+            margin-top: 16px;
+            font-weight: 500;
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 07</span>
+                    <div class="center-content">
+                        <h1 class="slide-title">Stop Staring<br><span class="highlight">at Charts</span></h1>
+                        <p class="subtitle">Set alerts instead</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Pentarch Alerts -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Pentarch</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 07</span>
+                    <div class="center-content">
+                        <div class="alert-card pentarch">
+                            <h3>🔄 PENTARCH ALERTS</h3>
+                            <ul class="feature-list">
+                                <li>Phase change notifications</li>
+                                <li>TD, IGN, WRN, CAP, BDN signals</li>
+                                <li>Know when cycle shifts</li>
+                                <li>Never miss a phase transition</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Volume Oracle -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Volume Oracle</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 07</span>
+                    <div class="center-content">
+                        <div class="alert-card oracle">
+                            <h3>🔮 VOLUME ORACLE ALERTS</h3>
+                            <ul class="feature-list">
+                                <li>Regime shift notifications</li>
+                                <li>Trending, ranging, breakout</li>
+                                <li>Volume context changes</li>
+                                <li>Adapt to market conditions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Janus Atlas -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Janus Atlas</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 07</span>
+                    <div class="center-content">
+                        <div class="alert-card janus">
+                            <h3>🗺️ JANUS ATLAS ALERTS</h3>
+                            <ul class="feature-list">
+                                <li>Price touching key levels</li>
+                                <li>Multi-timeframe notifications</li>
+                                <li>Support/resistance tests</li>
+                                <li>Structure awareness alerts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: How To -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — How To</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 07</span>
+                    <div class="center-content">
+                        <div class="alert-card howto">
+                            <h3>HOW TO SET UP</h3>
+                            <ul class="feature-list">
+                                <li>Right-click indicator on chart</li>
+                                <li>Select "Add Alert"</li>
+                                <li>Choose your condition</li>
+                                <li>Set notification method</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Visual -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Visual</span>
+            <div class="slide slide-6">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">06 / 07</span>
+                    <div class="center-content">
+                        <div class="steps-visual">
+                            <div class="step-row">
+                                <span class="step-number">1</span>
+                                <span class="step-text">Right-click indicator → "Add Alert"</span>
+                            </div>
+                            <div class="step-row">
+                                <span class="step-number">2</span>
+                                <span class="step-text">Select condition (phase change, level touch)</span>
+                            </div>
+                            <div class="step-row">
+                                <span class="step-number">3</span>
+                                <span class="step-text">Choose notification (app, email, webhook)</span>
+                            </div>
+                            <div class="step-row">
+                                <span class="step-number">4</span>
+                                <span class="step-text">Create alert → Get notified</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — CTA</span>
+            <div class="slide slide-7">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">07 / 07</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">Full Guide<br><span class="emphasis">in Docs</span></h2>
+                        <p class="cta-text">Get notified. Stay free.</p>
+                        <p class="cta-text">Link in bio</p>
+                        <p class="tagline">Trade smarter, not harder.</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const totalSlides = slides.length;
+        let exportMode = false;
+
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+        }
+
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (exportMode && currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateExportView();
+            }
+        }
+
+        function prevSlide() {
+            if (exportMode && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (!exportMode) enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>

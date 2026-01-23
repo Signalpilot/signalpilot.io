@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 297 — The Danger of Paper Trading Too Long</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --bg-card-hover: rgba(255, 255, 255, 0.04);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-glow: rgba(155, 74, 217, 0.3);
+            --text-primary: #e8e6e3;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --accent-orange: #d98c4a;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+            max-width: 1800px;
+            width: 100%;
+        }
+
+        .slide-wrapper {
+            position: relative;
+            width: 1080px;
+            height: 1080px;
+            transform: scale(0.4);
+            transform-origin: top center;
+            margin-bottom: -648px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.4),
+                0 0 0 1px var(--border-subtle);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 72px;
+            background: linear-gradient(
+                145deg,
+                rgba(10, 10, 15, 0.97) 0%,
+                rgba(10, 10, 15, 0.92) 100%
+            );
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 48px;
+        }
+
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .brand-logo {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+        }
+
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pillar-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(155, 74, 217, 0.1);
+            border: 1px solid rgba(155, 74, 217, 0.3);
+            border-radius: 100px;
+            padding: 12px 24px;
+            margin-bottom: 32px;
+            width: fit-content;
+        }
+
+        .pillar-badge span {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .hook-title {
+            font-family: var(--font-serif);
+            font-size: 64px;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+
+        .hook-subtitle {
+            font-family: var(--font-sans);
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .section-label {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-purple);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 56px;
+            font-weight: 600;
+            line-height: 1.15;
+            margin-bottom: 48px;
+            color: var(--text-primary);
+        }
+
+        .teaches-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 48px;
+        }
+
+        .teaches-header {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+        }
+
+        .teaches-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .teaches-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: var(--font-sans);
+            font-size: 28px;
+            color: var(--text-secondary);
+        }
+
+        .check-icon {
+            font-size: 24px;
+            color: var(--accent-green);
+        }
+
+        .x-icon {
+            font-size: 24px;
+            color: var(--accent-red);
+        }
+
+        .gap-card {
+            background: linear-gradient(
+                135deg,
+                rgba(217, 74, 74, 0.1) 0%,
+                rgba(217, 74, 74, 0.05) 100%
+            );
+            border: 1px solid rgba(217, 74, 74, 0.2);
+            border-radius: 24px;
+            padding: 56px;
+            text-align: center;
+        }
+
+        .gap-title {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+        }
+
+        .gap-points {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .gap-point {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .transition-card {
+            background: linear-gradient(
+                135deg,
+                rgba(74, 217, 122, 0.1) 0%,
+                rgba(74, 217, 122, 0.05) 100%
+            );
+            border: 1px solid rgba(74, 217, 122, 0.2);
+            border-radius: 24px;
+            padding: 56px;
+        }
+
+        .transition-header {
+            font-family: var(--font-serif);
+            font-size: 44px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 36px;
+        }
+
+        .transition-points {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .transition-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .transition-arrow {
+            font-size: 28px;
+            color: var(--accent-green);
+            flex-shrink: 0;
+        }
+
+        .transition-text {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .insight-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 64px;
+            text-align: center;
+        }
+
+        .insight-text {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .cta-container {
+            text-align: center;
+        }
+
+        .cta-primary {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .cta-secondary {
+            font-family: var(--font-sans);
+            font-size: 32px;
+            color: var(--accent-purple);
+            font-weight: 400;
+        }
+
+        .slide-footer {
+            margin-top: auto;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-tag {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            color: var(--text-tertiary);
+            letter-spacing: 0.05em;
+        }
+
+        .footer-accent {
+            width: 48px;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                var(--accent-purple),
+                var(--accent-blue)
+            );
+            border-radius: 2px;
+        }
+
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            transform: none;
+            margin-bottom: 0;
+        }
+
+        body.export-mode .slide-wrapper:not(.active) {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .slide-wrapper {
+                transform: scale(0.35);
+                margin-bottom: -702px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-wrapper {
+                transform: scale(0.3);
+                margin-bottom: -756px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Slide 1: Cover -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">01 / 07</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="pillar-badge">
+                        <span>P4 — Psychology</span>
+                    </div>
+                    <h1 class="hook-title">The Danger of Paper Trading Too Long</h1>
+                    <p class="hook-subtitle">Practice is good. Hiding in practice isn't.</p>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Trading Psychology</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: What Paper Trading Teaches -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">02 / 07</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="teaches-card">
+                        <h3 class="teaches-header">What paper trading teaches:</h3>
+                        <div class="teaches-list">
+                            <div class="teaches-item">
+                                <span class="check-icon">✓</span>
+                                <span>Platform mechanics</span>
+                            </div>
+                            <div class="teaches-item">
+                                <span class="check-icon">✓</span>
+                                <span>Order execution</span>
+                            </div>
+                            <div class="teaches-item">
+                                <span class="check-icon">✓</span>
+                                <span>Strategy testing</span>
+                            </div>
+                            <div class="teaches-item">
+                                <span class="check-icon">✓</span>
+                                <span>Pattern recognition</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">The Benefits</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: What It Doesn't Teach -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">03 / 07</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="teaches-card">
+                        <h3 class="teaches-header">What paper trading DOESN'T teach:</h3>
+                        <div class="teaches-list">
+                            <div class="teaches-item">
+                                <span class="x-icon">✗</span>
+                                <span>Real emotional pressure</span>
+                            </div>
+                            <div class="teaches-item">
+                                <span class="x-icon">✗</span>
+                                <span>Fear of losing actual money</span>
+                            </div>
+                            <div class="teaches-item">
+                                <span class="x-icon">✗</span>
+                                <span>Greed when winning</span>
+                            </div>
+                            <div class="teaches-item">
+                                <span class="x-icon">✗</span>
+                                <span>Hesitation and doubt</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">The Limitations</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: The Gap -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">04 / 07</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="gap-card">
+                        <h3 class="gap-title">The Gap</h3>
+                        <div class="gap-points">
+                            <p class="gap-point">$0 at risk = different psychology</p>
+                            <p class="gap-point">No amount of paper trading simulates real stakes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Reality Check</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: The Transition -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">05 / 07</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="transition-card">
+                        <h3 class="transition-header">The Transition</h3>
+                        <div class="transition-points">
+                            <div class="transition-point">
+                                <span class="transition-arrow">→</span>
+                                <span class="transition-text">Switch to real money—even tiny amounts</span>
+                            </div>
+                            <div class="transition-point">
+                                <span class="transition-arrow">→</span>
+                                <span class="transition-text">$10 trades feel different than $0 trades</span>
+                            </div>
+                            <div class="transition-point">
+                                <span class="transition-arrow">→</span>
+                                <span class="transition-text">Psychology only develops with real stakes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Next Step</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Key Insight -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">06 / 07</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="insight-box">
+                        <p class="insight-text">"You can't paper trade your way to emotional mastery."</p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Key Insight</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">07 / 07</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="cta-container">
+                        <h2 class="cta-primary">"Practice the mechanics.<br>Then face the real test."</h2>
+                        <p class="cta-secondary">Full article — Link in bio</p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Blog Post</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide-wrapper');
+            let currentSlide = 0;
+            let exportMode = false;
+
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                currentSlide = 0;
+                updateSlideVisibility();
+            }
+
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.style.display = '');
+                slides.forEach(slide => slide.classList.remove('active'));
+            }
+
+            function updateSlideVisibility() {
+                if (!exportMode) return;
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === currentSlide);
+                });
+            }
+
+            function nextSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlideVisibility();
+            }
+
+            function prevSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                updateSlideVisibility();
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'e' || e.key === 'E') {
+                    if (!exportMode) enterExportMode();
+                } else if (e.key === 'Escape') {
+                    exitExportMode();
+                } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
