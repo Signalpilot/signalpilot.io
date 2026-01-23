@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 002 — Why Markets Move in Cycles | Carousel Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-green: #4ad97a;
+      --accent-red: #d94a4a;
+      --accent-orange: #d9884a;
+      --accent-yellow: #d9c94a;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .controls label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .controls select,
+    .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .page-title h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .slide-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .slide-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+    }
+
+    .slide.bg-black .slide-bg video {
+      opacity: 0;
+    }
+
+    .slide-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10%;
+    }
+
+    .slide-number {
+      position: absolute;
+      top: 8%;
+      left: 10%;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: 8%;
+      left: 10%;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.3);
+      text-transform: uppercase;
+    }
+
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide-1 .hook-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-1 .cycle-flow {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    .slide-1 .hook-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .slide-content .header {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-content .text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .slide-content .text em {
+      font-style: italic;
+      color: var(--accent-gold);
+    }
+
+    .cycle-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .cycle-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .cycle-badge {
+      width: 60px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 4px;
+    }
+
+    .cycle-badge.td {
+      background: rgba(74, 217, 122, 0.2);
+      color: var(--accent-green);
+    }
+
+    .cycle-badge.ign {
+      background: rgba(74, 144, 217, 0.2);
+      color: var(--accent-blue);
+    }
+
+    .cycle-badge.wrn {
+      background: rgba(217, 201, 74, 0.2);
+      color: var(--accent-yellow);
+    }
+
+    .cycle-badge.cap {
+      background: rgba(217, 136, 74, 0.2);
+      color: var(--accent-orange);
+    }
+
+    .cycle-badge.bdn {
+      background: rgba(217, 74, 74, 0.2);
+      color: var(--accent-red);
+    }
+
+    .cycle-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .phase-box {
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+    }
+
+    .phase-box.td {
+      background: rgba(74, 217, 122, 0.1);
+      border-left: 3px solid var(--accent-green);
+    }
+
+    .phase-box.ign {
+      background: rgba(74, 144, 217, 0.1);
+      border-left: 3px solid var(--accent-blue);
+    }
+
+    .phase-box.wrn {
+      background: rgba(217, 201, 74, 0.1);
+      border-left: 3px solid var(--accent-yellow);
+    }
+
+    .phase-box.cap {
+      background: rgba(217, 136, 74, 0.1);
+      border-left: 3px solid var(--accent-orange);
+    }
+
+    .phase-box.bdn {
+      background: rgba(217, 74, 74, 0.1);
+      border-left: 3px solid var(--accent-red);
+    }
+
+    .phase-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .phase-name.td {
+      color: var(--accent-green);
+    }
+
+    .phase-name.ign {
+      color: var(--accent-blue);
+    }
+
+    .phase-name.wrn {
+      color: var(--accent-yellow);
+    }
+
+    .phase-name.cap {
+      color: var(--accent-orange);
+    }
+
+    .phase-name.bdn {
+      color: var(--accent-red);
+    }
+
+    .phase-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .phase-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .chart-placeholder {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      padding: 2rem;
+      text-align: center;
+      border-radius: 4px;
+      margin-top: 1rem;
+    }
+
+    .chart-placeholder-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .feature-box {
+      background: rgba(201, 169, 98, 0.1);
+      border-left: 3px solid var(--accent-gold);
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .feature-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .slide-10 .slide-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide-10 .cta-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .slide-10 .cta-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .slide-10 .cta-button {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .slide-10 .logo {
+      width: 50%;
+      max-width: 200px;
+      margin-top: 2rem;
+      opacity: 0.8;
+    }
+
+    .slide-10 .link-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 1.5rem;
+    }
+
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+      padding: 0;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1080px;
+      max-width: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    @media (max-width: 900px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        position: static;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label>Background:
+      <select id="bg-toggle">
+        <option value="starfield">Starfield</option>
+        <option value="black">Pure Black</option>
+      </select>
+    </label>
+    <label>Opacity:
+      <select id="opacity-control">
+        <option value="0.03">3%</option>
+        <option value="0.05">5%</option>
+        <option value="0.08" selected>8%</option>
+        <option value="0.12">12%</option>
+        <option value="0.15">15%</option>
+      </select>
+    </label>
+    <button id="export-btn">Export Mode</button>
+  </div>
+
+  <div class="page-title">
+    <h1>Post 002 — Why Markets Move in Cycles</h1>
+    <p>Instagram Carousel • 10 Slides • 1080×1080px</p>
+  </div>
+
+  <div class="carousel-grid">
+    <!-- Slide 1: Hook -->
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide slide-1">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">01 / 10</span>
+          <div class="hook-main">Markets Move in 5 Phases</div>
+          <div class="cycle-flow">TD → IGN → WRN → CAP → BDN</div>
+          <p class="hook-sub">1929. 2008. 2021.<br>The pattern repeats. Always.</p>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Overview -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — Overview</span>
+      <div class="slide slide-2">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">02 / 10</span>
+          <p class="header">The 5-Phase Cycle</p>
+          <div class="cycle-diagram">
+            <div class="cycle-row">
+              <div class="cycle-badge td">TD</div>
+              <span class="cycle-label">Touchdown — Early reversal</span>
+            </div>
+            <div class="cycle-row">
+              <div class="cycle-badge ign">IGN</div>
+              <span class="cycle-label">Ignition — Breakout confirmation</span>
+            </div>
+            <div class="cycle-row">
+              <div class="cycle-badge wrn">WRN</div>
+              <span class="cycle-label">Warning — Early weakness</span>
+            </div>
+            <div class="cycle-row">
+              <div class="cycle-badge cap">CAP</div>
+              <span class="cycle-label">Climax — Late exhaustion</span>
+            </div>
+            <div class="cycle-row">
+              <div class="cycle-badge bdn">BDN</div>
+              <span class="cycle-label">Breakdown — Structure break</span>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: TD Phase -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — TD Phase</span>
+      <div class="slide slide-3">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">03 / 10</span>
+          <p class="header">Phase 1</p>
+          <div class="phase-box td">
+            <div class="phase-name td">TD — Touchdown</div>
+            <div class="phase-title">Early-Cycle Reversal</div>
+            <div class="phase-desc">The selling pressure has exhausted itself. This marks potential cycle bottom conditions.</div>
+          </div>
+          <p class="text">Selling exhaustion detected. The downtrend may be losing steam.</p>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: IGN Phase -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — IGN Phase</span>
+      <div class="slide slide-4">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">04 / 10</span>
+          <p class="header">Phase 2</p>
+          <div class="phase-box ign">
+            <div class="phase-name ign">IGN — Ignition</div>
+            <div class="phase-title">Breakout Confirmation</div>
+            <div class="phase-desc">Momentum has confirmed the move. The new trend is gaining conviction.</div>
+          </div>
+          <p class="text">Price breaks out with conviction. The cycle accelerates.</p>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: WRN Phase -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — WRN Phase</span>
+      <div class="slide slide-5">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">05 / 10</span>
+          <p class="header">Phase 3</p>
+          <div class="phase-box wrn">
+            <div class="phase-name wrn">WRN — Warning</div>
+            <div class="phase-title">Early Weakness</div>
+            <div class="phase-desc">Signs of weakness appearing while the trend still appears intact.</div>
+          </div>
+          <p class="text">The first cracks appear. Smart money starts paying attention.</p>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: CAP Phase -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — CAP Phase</span>
+      <div class="slide slide-6">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">06 / 10</span>
+          <p class="header">Phase 4</p>
+          <div class="phase-box cap">
+            <div class="phase-name cap">CAP — Climax</div>
+            <div class="phase-title">Late-Cycle Exhaustion</div>
+            <div class="phase-desc">Extreme extension with climactic volume. The cycle is nearing completion.</div>
+          </div>
+          <p class="text">Maximum euphoria or panic. Volume spikes. The end is near.</p>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: BDN Phase -->
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — BDN Phase</span>
+      <div class="slide slide-7">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">07 / 10</span>
+          <p class="header">Phase 5</p>
+          <div class="phase-box bdn">
+            <div class="phase-name bdn">BDN — Breakdown</div>
+            <div class="phase-title">Bearish Structure Break</div>
+            <div class="phase-desc">The structure has broken. Cycle completes. New cycle begins.</div>
+          </div>
+          <p class="text">Confirmation of reversal. The old trend is officially over.</p>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Chart Example -->
+    <div class="slide-wrapper" data-slide="8">
+      <span class="slide-label">Slide 8 — Chart Example</span>
+      <div class="slide slide-8">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">08 / 10</span>
+          <p class="header">See the Pattern</p>
+          <p class="text">Every market cycle follows this structure. Once you see it, you can't unsee it.</p>
+          <div class="chart-placeholder">
+            <p class="chart-placeholder-text">[Chart showing all 5 phases labeled]</p>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: How Pentarch Works -->
+    <div class="slide-wrapper" data-slide="9">
+      <span class="slide-label">Slide 9 — Pentarch</span>
+      <div class="slide slide-9">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">09 / 10</span>
+          <p class="header">Pentarch Maps It Live</p>
+          <p class="text">Pentarch detects these 5 phases in real-time on your TradingView charts.</p>
+          <div class="feature-box">
+            <div class="feature-text">No guessing. No subjectivity. The algorithm identifies which phase you're in — automatically.</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: CTA -->
+    <div class="slide-wrapper" data-slide="10">
+      <span class="slide-label">Slide 10 — CTA</span>
+      <div class="slide slide-10">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">10 / 10</span>
+          <p class="cta-text">Free 5-Phase Cycle PDF</p>
+          <p class="cta-sub">Quick reference guide for cycle detection.</p>
+          <a href="#" class="cta-button">Get Free PDF</a>
+          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
+          <p class="link-hint">Link in bio</p>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bgToggle = document.getElementById('bg-toggle');
+    const opacityControl = document.getElementById('opacity-control');
+    const slides = document.querySelectorAll('.slide');
+    const videos = document.querySelectorAll('.slide-bg video');
+
+    bgToggle.addEventListener('change', (e) => {
+      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
+    });
+
+    opacityControl.addEventListener('change', (e) => {
+      videos.forEach(video => video.style.opacity = e.target.value);
+    });
+
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
+        currentExportSlide = 0;
+        updateExportSlide();
+      } else {
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'ArrowLeft') {
+        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'Escape') {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+  </script>
+</body>
+</html>
