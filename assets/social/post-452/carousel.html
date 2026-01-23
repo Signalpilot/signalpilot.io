@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 452 — Wyckoff Accumulation Schematic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-orange: #d9884a;
+            --accent-yellow: #d9d94a;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--accent-gold);
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .overview-box {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .overview-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 28px;
+        }
+
+        .overview-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .overview-list li {
+            font-size: 24px;
+            color: var(--text-primary);
+            padding: 10px 0;
+            padding-left: 36px;
+            position: relative;
+        }
+
+        .overview-list li::before {
+            content: attr(data-phase);
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .phase-box {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+            border: 1px solid rgba(74, 144, 217, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .phase-box.phase-a {
+            background: linear-gradient(135deg, rgba(217, 136, 74, 0.15) 0%, rgba(217, 136, 74, 0.05) 100%);
+            border-color: rgba(217, 136, 74, 0.3);
+        }
+
+        .phase-box.phase-b {
+            background: linear-gradient(135deg, rgba(217, 217, 74, 0.15) 0%, rgba(217, 217, 74, 0.05) 100%);
+            border-color: rgba(217, 217, 74, 0.3);
+        }
+
+        .phase-box.phase-c {
+            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
+            border-color: rgba(217, 74, 74, 0.3);
+        }
+
+        .phase-box.phase-d {
+            background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
+            border-color: rgba(74, 217, 217, 0.3);
+        }
+
+        .phase-box.phase-e {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border-color: rgba(74, 217, 122, 0.3);
+        }
+
+        .phase-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .phase-box.phase-a h3 {
+            color: var(--accent-orange);
+        }
+
+        .phase-box.phase-b h3 {
+            color: var(--accent-yellow);
+        }
+
+        .phase-box.phase-c h3 {
+            color: var(--accent-red);
+        }
+
+        .phase-box.phase-d h3 {
+            color: var(--accent-teal);
+        }
+
+        .phase-box.phase-e h3 {
+            color: var(--accent-green);
+        }
+
+        .phase-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .phase-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 10px 0;
+            padding-left: 36px;
+            position: relative;
+        }
+
+        .phase-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+        }
+
+        .phase-box.phase-a .phase-list li::before {
+            color: var(--accent-orange);
+        }
+
+        .phase-box.phase-b .phase-list li::before {
+            color: var(--accent-yellow);
+        }
+
+        .phase-box.phase-c .phase-list li::before {
+            color: var(--accent-red);
+        }
+
+        .phase-box.phase-d .phase-list li::before {
+            color: var(--accent-teal);
+        }
+
+        .phase-box.phase-e .phase-list li::before {
+            color: var(--accent-green);
+        }
+
+        .demo-placeholder {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.1) 0%, rgba(74, 144, 217, 0.02) 100%);
+            border: 2px dashed rgba(74, 144, 217, 0.3);
+            border-radius: 16px;
+            padding: 80px 40px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .demo-placeholder p {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .demo-placeholder .demo-note {
+            font-size: 16px;
+            color: var(--accent-blue);
+            font-style: italic;
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: var(--text-secondary);
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 10</span>
+                    <div class="center-content">
+                        <h1 class="slide-title">WYCKOFF<br>ACCUMULATION<br>SCHEMATIC</h1>
+                        <p class="subtitle">How bottoms form—in phases</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Overview -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Overview</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 10</span>
+                    <div class="center-content">
+                        <div class="overview-box">
+                            <h3>THE PHASES</h3>
+                            <ul class="overview-list">
+                                <li data-phase="A →">Stopping the downtrend</li>
+                                <li data-phase="B →">Building the cause</li>
+                                <li data-phase="C →">The test (Spring)</li>
+                                <li data-phase="D →">Markup begins</li>
+                                <li data-phase="E →">Uptrend confirmed</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Phase A -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Phase A</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 10</span>
+                    <div class="center-content">
+                        <div class="phase-box phase-a">
+                            <h3>PHASE A — Stopping the Downtrend</h3>
+                            <ul class="phase-list">
+                                <li>PS (Preliminary Support)</li>
+                                <li>SC (Selling Climax)</li>
+                                <li>AR (Automatic Rally)</li>
+                                <li>ST (Secondary Test)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Phase A Visual -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Phase A Visual</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 10</span>
+                    <div class="center-content">
+                        <div class="demo-placeholder">
+                            <p>[Schematic Visual]</p>
+                            <p>Phase A: PS, SC, AR, ST labeled</p>
+                            <span class="demo-note">Downtrend stopping, range forming</span>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Phase B -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Phase B</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 10</span>
+                    <div class="center-content">
+                        <div class="phase-box phase-b">
+                            <h3>PHASE B — Building the Cause</h3>
+                            <ul class="phase-list">
+                                <li>Trading range develops</li>
+                                <li>Supply absorbed over time</li>
+                                <li>Multiple tests of range</li>
+                                <li>Preparation for markup</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Phase C -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Phase C</span>
+            <div class="slide slide-6">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">06 / 10</span>
+                    <div class="center-content">
+                        <div class="phase-box phase-c">
+                            <h3>PHASE C — The Test</h3>
+                            <ul class="phase-list">
+                                <li>Spring (false breakdown)</li>
+                                <li>Shakeout of weak hands</li>
+                                <li>Final capitulation</li>
+                                <li>"The bear trap"</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Phase C Visual -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — Phase C Visual</span>
+            <div class="slide slide-7">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">07 / 10</span>
+                    <div class="center-content">
+                        <div class="demo-placeholder">
+                            <p>[Schematic Visual]</p>
+                            <p>Spring: price dips below range</p>
+                            <span class="demo-note">False breakdown, then recovery</span>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Phase D -->
+        <div class="slide-wrapper" data-slide="8">
+            <span class="slide-label">Slide 8 — Phase D</span>
+            <div class="slide slide-8">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">08 / 10</span>
+                    <div class="center-content">
+                        <div class="phase-box phase-d">
+                            <h3>PHASE D — Markup Begins</h3>
+                            <ul class="phase-list">
+                                <li>SOS (Sign of Strength)</li>
+                                <li>LPS (Last Point of Support)</li>
+                                <li>Higher lows forming</li>
+                                <li>Demand taking control</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Phase E -->
+        <div class="slide-wrapper" data-slide="9">
+            <span class="slide-label">Slide 9 — Phase E</span>
+            <div class="slide slide-9">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">09 / 10</span>
+                    <div class="center-content">
+                        <div class="phase-box phase-e">
+                            <h3>PHASE E — Uptrend Confirmed</h3>
+                            <ul class="phase-list">
+                                <li>Price breaks out of range</li>
+                                <li>Sustained higher highs/lows</li>
+                                <li>Volume confirms</li>
+                                <li>Accumulation complete</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: CTA -->
+        <div class="slide-wrapper" data-slide="10">
+            <span class="slide-label">Slide 10 — CTA</span>
+            <div class="slide slide-10">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">10 / 10</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">Classic Framework.<br>Still Relevant.</h2>
+                        <p class="cta-text">Full lesson in curriculum • Link in bio</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Export mode functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const totalSlides = slides.length;
+        let exportMode = false;
+
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+        }
+
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (exportMode && currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateExportView();
+            }
+        }
+
+        function prevSlide() {
+            if (exportMode && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (!exportMode) enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>
