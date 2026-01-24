@@ -14,7 +14,7 @@
 
 ### Excluded Markets
 - **Russia 🇷🇺** - Payment restrictions (Visa/MC blocked, Gumroad/Stripe sanctions)
-- **Egypt 🇪🇬** - Low purchasing power ($99/mo = 25-50% of average income)
+- **Egypt 🇪🇬** - Low purchasing power ($69/mo = 25-50% of average income)
 
 ---
 
@@ -95,7 +95,7 @@
 11. Bugün Ücretsiz Başlayın        (24 chars)
 12. 10.000+ Yatırımcı Güveniyor    (28 chars)
 13. Hemen Deneyin                  (13 chars)
-14. Ayda $99'dan Başlayan          (22 chars)
+14. Ayda $69'dan Başlayan          (22 chars)
 15. Ömür Boyu Erişim Seçeneği      (26 chars)
 ```
 
@@ -260,7 +260,7 @@
 11. Comece Grátis Hoje             (18 chars)
 12. 10.000+ Traders Confiam        (24 chars)
 13. Experimente Agora              (18 chars)
-14. A Partir de $99/mês            (20 chars)
+14. A Partir de $69/mês            (20 chars)
 15. Opção de Acesso Vitalício      (27 chars)
 ```
 
@@ -430,7 +430,7 @@
 11. ابدأ مجاناً اليوم              (17 chars)
 12. +10,000 متداول يثقون           (20 chars)
 13. جرّب الآن                     (10 chars)
-14. بدءاً من $99/شهر              (17 chars)
+14. بدءاً من $69/شهر              (17 chars)
 15. خيار الوصول مدى الحياة         (23 chars)
 ```
 
@@ -577,7 +577,7 @@
 |-------|------------|------------|------------|------------|
 | **Sitelink text** | 7 Gün Ücretsiz Dene | Fiyatları Gör | 7 Göstergenin Tümü | 82 Ücretsiz Ders |
 | **Description line 1** | Kredi kartı gerekmez | Aylık, Yıllık ve Ömür Boyu | Pentarch, Volume Oracle ve daha | Profesyonel trading eğitimi |
-| **Description line 2** | Tüm 7 göstergeye tam erişim | Ayda $99'dan başlayan planlar | Tam gösterge paketi | Piyasa yapısını ücretsiz öğren |
+| **Description line 2** | Tüm 7 göstergeye tam erişim | Ayda $69'dan başlayan planlar | Tam gösterge paketi | Piyasa yapısını ücretsiz öğren |
 | **Final URL** | signalpilot.io/tr/#trial | signalpilot.io/tr/#pricing | signalpilot.io/tr/#indicators | education.signalpilot.io |
 
 #### 🇧🇷 Portuguese (Brazil) Sitelinks
@@ -586,7 +586,7 @@
 |-------|------------|------------|------------|------------|
 | **Sitelink text** | Teste Grátis 7 Dias | Ver Preços | Todos 7 Indicadores | 82 Aulas Grátis |
 | **Description line 1** | Sem cartão de crédito | Mensal, Anual e Vitalício | Pentarch, Volume Oracle e mais | Educação profissional de trading |
-| **Description line 2** | Acesso total aos 7 indicadores | Planos a partir de $99/mês | Pacote completo de indicadores | Aprenda estrutura de mercado |
+| **Description line 2** | Acesso total aos 7 indicadores | Planos a partir de $69/mês | Pacote completo de indicadores | Aprenda estrutura de mercado |
 | **Final URL** | signalpilot.io/pt/#trial | signalpilot.io/pt/#pricing | signalpilot.io/pt/#indicators | education.signalpilot.io |
 
 #### 🇦🇪 Arabic (UAE/KSA) Sitelinks

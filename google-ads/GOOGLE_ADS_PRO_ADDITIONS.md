@@ -14,7 +14,7 @@
 | **LuxAlgo Premium** | $40 | $28/mo | 30-day | 100+ | 4.3/5 |
 | **LuxAlgo Ultimate** | $60 | $33/mo | 30-day | + AI Backtest | 4.3/5 |
 | **Flux Charts** | ~$50 | ~$30/mo | 7-day | 50+ | 4.6/5 |
-| **Signal Pilot** | **$99** | **$58/mo** | **7-day** | **7** | 4.2/5 |
+| **Signal Pilot** | **$69** | **$58/mo** | **7-day** | **7** | 4.2/5 |
 
 ### Competitive Positioning
 
@@ -112,7 +112,7 @@
 1. Finish What You Started
 2. Your Plan is Waiting
 3. 7 Days Free - No Risk
-4. $699/Year Saves 41%
+4. $399/Year Saves 52%
 5. 100 Lifetime Spots Left
 6. Money-Back Guarantee
 7. Questions? We're Here
@@ -120,7 +120,7 @@
 
 **Descriptions:**
 1. You were checking our pricing. Still have questions? Try all 7 indicators free for 7 days.
-2. Monthly $99 | Yearly $699 | Lifetime $1,799. All include 7-day free trial. Start today.
+2. Monthly $69 | Yearly $399 | Lifetime $999. All include 7-day free trial. Start today.
 
 ### Remarketing Duration Settings
 
@@ -222,8 +222,8 @@ This automatically inserts the actual search term that triggered the ad.
 ### Urgency Descriptions (90 chars max)
 
 ```
-1. Limited to 100 lifetime memberships. 87 remaining. Lock in $1,799 one-time before it's gone. (94 - trim)
-   → Limited to 100 lifetime spots. Lock in $1,799 one-time before price increases. (81 chars)
+1. Limited to 100 lifetime memberships. 87 remaining. Lock in $999 one-time before it's gone. (94 - trim)
+   → Limited to 100 lifetime spots. Lock in $999 one-time before price increases. (81 chars)
 
 2. Founding member pricing won't last. Get all 7 indicators + future releases. Start free today. (95 - trim)
    → Founding pricing won't last. Get all 7 indicators + future releases. Start free today. (89 chars)
@@ -255,7 +255,7 @@ This automatically inserts the actual search term that triggered the ad.
 15. Don't Wait Another Day
 
 **Descriptions:**
-1. Limited to 100 lifetime spots. Lock in $1,799 one-time before price increases.
+1. Limited to 100 lifetime spots. Lock in $999 one-time before price increases.
 2. Founding pricing won't last. Get all 7 indicators + future releases. Start free today.
 3. 10,000+ traders use Signal Pilot. Your 7-day free trial is waiting. No credit card.
 4. Stop losing to repainting indicators. Switch today. 7-day trial, money-back guarantee.
@@ -362,12 +362,12 @@ if (urlParams.get('purchase') === 'true') {
 
 | Conversion | Value | Reasoning |
 |------------|-------|-----------|
-| Trial Signup | $15 | ~15% trial-to-paid × $99 avg |
+| Trial Signup | $15 | ~15% trial-to-paid × $69 avg |
 | Pricing View | $2 | High intent signal |
 | Indicator Engagement | $1 | Interest signal |
-| Purchase (Monthly) | $99 | Actual revenue |
-| Purchase (Yearly) | $699 | Actual revenue |
-| Purchase (Lifetime) | $1,799 | Actual revenue |
+| Purchase (Monthly) | $69 | Actual revenue |
+| Purchase (Yearly) | $399 | Actual revenue |
+| Purchase (Lifetime) | $999 | Actual revenue |
 
 ### Attribution Model Recommendation
 
@@ -500,8 +500,8 @@ After 1000+ converters, create:
 
 ### Test 3: Price Mention (Week 5-6)
 - **Control:** No price in ad
-- **Variant A:** "From $99/month"
-- **Variant B:** "$699/year (Save 41%)"
+- **Variant A:** "From $69/month"
+- **Variant B:** "$399/year (Save 52%)"
 - **Success Metric:** Conversion Rate (filters tire-kickers)
 
 ### Test 4: Landing Page (Week 7-8)

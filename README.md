@@ -70,9 +70,9 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
    *7-oscillator voting system with star rating confidence (★ to ★★★★) for entry timing.*
 
 ### Pricing Plans
-- **Monthly:** $99/month — Flexible month-to-month billing
-- **Yearly:** $699/year (save $489, 41% off) — ⭐ Most Popular
-- **Lifetime:** $1,799 one-time — 🏆 Founding 100 (limited slots with counter)
+- **Monthly:** $69/month — Flexible month-to-month billing
+- **Yearly:** $399/year (save $429, 52% off) — ⭐ Most Popular
+- **Lifetime:** $999 one-time — 🏆 Founding 100 (limited slots with counter)
 
 **All plans include:**
 - All 7 elite indicators + all future releases
@@ -158,7 +158,7 @@ Since this is a single-file site, all edits are in `/index.html`.
 | Hero headline | 2541 | `See The Complete Market Cycle` |
 | Hero video | 2556-2573 | `id="heroVideo"` |
 | Indicator names/descriptions | 3067-3237 | `<!-- INDICATOR 1: PENTARCH` |
-| Pricing amounts | Various | `$99`, `$699`, `$1,799` |
+| Pricing amounts | Various | `$69`, `$399`, `$999` |
 | Gumroad checkout URLs | Various | `signalpilot.gumroad.com` |
 | FAQ questions | 3604-3702 | `<section id="faq"` |
 | Footer links | 3731-3777 | `<footer` |
