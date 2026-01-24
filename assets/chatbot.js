@@ -30,54 +30,63 @@
     ],
 
     pricing: {
-      overview: `We have 3 plans:
+      overview: `We have 4 plans:
 
-💳 **Monthly** - $99/month
-📅 **Yearly** - $699/year (save $489)
-♾️ **Lifetime** - $1,799 (Founding 100 Edition)
+⭐ **Pentarch Solo** - $29/month (flagship indicator only)
+💳 **Monthly** - $69/month (all 7 indicators)
+📅 **Yearly** - $399/year (save $429)
+♾️ **Lifetime** - $999 (Founding 100 Edition)
 
-All plans include the same 7 indicators. Start with a **7-day free trial** - no payment required!
+Start with a **7-day free trial** - no payment required!
 
 [Start free trial →](#pricing)`,
 
-      monthly: `**Monthly Plan - $99/month**
+      pentarch: `**Pentarch Solo - $29/month**
 
-Flexible month-to-month billing. Cancel anytime. **Start with 7-day free trial!**
+Our flagship cycle detection indicator. Perfect entry point!
+
+**Includes:**
+• Pentarch 5-phase cycle detection
+• Real-time alerts & signals
+• Upgrade anytime (we'll credit you)
+
+[Get Pentarch Solo →](#pricing)`,
+
+      monthly: `**Monthly Plan - $69/month**
+
+All 7 indicators. Flexible month-to-month billing. Cancel anytime.
 
 **Includes:**
 • All 7 elite indicators
-• Email support (48h response)
+• Real-time alerts & signals
+• Email support
+
+[Start free trial →](#pricing)`,
+
+      yearly: `**Yearly Plan - $399/year**
+
+Save $429 vs monthly! ⭐ **Most Popular**
+
+**Includes:**
+• All 7 elite indicators
+• Priority email support
 • All future updates
 
 [Start free trial →](#pricing)`,
 
-      yearly: `**Yearly Plan - $699/year**
+      lifetime: `**Lifetime Plan - $999 (Founding 100 Edition)**
 
-Save $489 vs monthly (41% off) ⭐ **Most Popular** - Start with 7-day free trial!
-
-**Includes:**
-• All 7 elite indicators
-• Priority email support (24h response)
-• All future updates
-• Advanced training resources
-• Beta access
-
-[Start free trial →](#pricing)`,
-
-      lifetime: `**Lifetime Plan - $1,799 (Founding 100 Edition)**
-
-One-time payment for lifetime access 🏆 Start with 7-day free trial!
+One-time payment for lifetime access 🏆
 
 **Includes everything, forever:**
 • All 7 indicators + all future releases
 • Private Discord community
 • Founding member badge
-• 200+ preset configurations
 • Priority support
 
 Limited to 100 founding members only.
 
-[Start free trial →](#pricing)`
+[Get Lifetime →](#pricing)`
     },
 
     products: {
@@ -331,9 +340,10 @@ I can answer quick questions, but for detailed information check our comprehensi
 
     // Pricing
     { regex: /(how much|price|cost|pricing|plans|subscription)/i, key: 'pricing.overview' },
-    { regex: /(monthly|per month|month to month)/i, key: 'pricing.monthly' },
-    { regex: /(yearly|annual|per year)/i, key: 'pricing.yearly' },
-    { regex: /(lifetime|one.?time|forever)/i, key: 'pricing.lifetime' },
+    { regex: /(pentarch solo|\$29|29.?month|solo plan)/i, key: 'pricing.pentarch' },
+    { regex: /(monthly|per month|month to month|\$69|69.?month)/i, key: 'pricing.monthly' },
+    { regex: /(yearly|annual|per year|\$399|399.?year)/i, key: 'pricing.yearly' },
+    { regex: /(lifetime|one.?time|forever|\$999)/i, key: 'pricing.lifetime' },
     { regex: /(difference|compare|which plan)/i, key: 'pricing.overview' },
 
     // Products

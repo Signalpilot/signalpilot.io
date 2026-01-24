@@ -222,7 +222,7 @@ Serious traders only. Learn once, keep forever. 82 free lessons. Try 7 days free
 ```
 
 ```
-Limited to 100 lifetime spots. Lock in $1,799 one-time before price increases.
+Limited to 100 lifetime spots. Lock in $999 one-time before price increases.
 ```
 
 3. Click **"Save"**
@@ -254,7 +254,7 @@ Extensions make your ads bigger and more clickable. Add them at the campaign lev
 **Sitelink 2:**
 - Sitelink text: `View Pricing`
 - Description 1: `Monthly, Yearly & Lifetime`
-- Description 2: `Plans from $99/month`
+- Description 2: `Plans from $69/month`
 - Final URL: `https://signalpilot.io#pricing`
 
 **Sitelink 3:**

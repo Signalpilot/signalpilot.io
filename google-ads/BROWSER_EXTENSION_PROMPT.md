@@ -24,7 +24,7 @@ I need help setting up Google Ads campaigns for Signal Pilot (signalpilot.io), a
 
 ## PRODUCT
 - 7 non-repainting TradingView indicators (Pentarch is flagship - cycle detection)
-- Pricing: $99/mo | $699/yr (41% off) | $1,799 lifetime (100 spots)
+- Pricing: $69/mo | $399/yr (52% off) | $999 lifetime (100 spots)
 - 7-day free trial, 7-day money-back guarantee
 - $100 bounty if anyone proves repaint
 - 82 free lessons at education.signalpilot.io
@@ -74,7 +74,7 @@ I need help setting up Google Ads campaigns for Signal Pilot (signalpilot.io), a
 1. 7 premium TradingView indicators. Non-repainting guaranteed. $100 bounty if proven wrong.
 2. Stop stacking indicators. One system that maps cycles, volume, levels. 7-day free trial.
 3. Serious traders only. Learn once, keep forever. 82 free lessons. Try 7 days free.
-4. Limited to 100 lifetime spots. Lock in $1,799 one-time before price increases.
+4. Limited to 100 lifetime spots. Lock in $999 one-time before price increases.
 
 ## EXTENSIONS TO ADD
 - Sitelinks: Try Free 7 Days, View Pricing, See All 7 Indicators, 82 Free Lessons
@@ -179,7 +179,7 @@ And these descriptions (4 total):
 1. 7 premium TradingView indicators. Non-repainting guaranteed. $100 bounty if proven wrong.
 2. Stop stacking indicators. One system that maps cycles, volume, levels. 7-day free trial.
 3. Serious traders only. Learn once, keep forever. 82 free lessons. Try 7 days free.
-4. Limited to 100 lifetime spots. Lock in $1,799 one-time before price increases.
+4. Limited to 100 lifetime spots. Lock in $999 one-time before price increases.
 
 Final URL: https://signalpilot.io?utm_source=google&utm_medium=cpc&utm_campaign=en_search_tradingview
 Display path: signalpilot.io / indicators
@@ -198,7 +198,7 @@ Sitelink 1:
 Sitelink 2:
 - Text: "View Pricing"
 - Description 1: "Monthly, Yearly & Lifetime"
-- Description 2: "Plans from $99/month"
+- Description 2: "Plans from $69/month"
 - URL: signalpilot.io#pricing
 
 Sitelink 3:
