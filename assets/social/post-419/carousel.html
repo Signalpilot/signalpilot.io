@@ -1,648 +1,746 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 419 — Break of Structure (BOS)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #0a0a0f;
-            --accent-blue: #4a90d9;
-            --accent-gold: #c9a962;
-            --accent-green: #4ad97a;
-            --accent-red: #d94a4a;
-            --accent-teal: #4ad9d9;
-            --text-primary: #e8e6e3;
-            --text-secondary: #a9a6a2;
-            --text-muted: #6b6965;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post 419 — Break of Structure (BOS)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-red: #d94a4a;
+      --accent-green: #4ad97a;
+      --text-primary: #e8e8e8;
+      --text-secondary: #a0a0a0;
+      --text-dim: #6a6a6a;
+      --video-opacity: 0.08;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            background-color: #050507;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
 
-        .carousel-container {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    /* === CONTROLS BAR === */
+    .controls-bar {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .control-group label {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .control-group select,
+    .control-group input[type="range"] {
+      font-size: 12px;
+      background: #1a1a24;
+      color: var(--text-primary);
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+    #export-btn {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 14px;
+      font-size: 12px;
+      cursor: pointer;
+    }
 
-        .slide-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
+    /* === PAGE TITLE === */
+    .page-title {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+    }
 
-        .slide-label {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+    /* === CAROUSEL GRID === */
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+      gap: 32px;
+      justify-items: center;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
 
-        .slide {
-            width: 1080px;
-            height: 1080px;
-            background-color: var(--bg-dark);
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    /* === SLIDE WRAPPER === */
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .slide-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
+    /* === SLIDE BASE === */
+    .slide {
+      position: relative;
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: clamp(24px, 4.44vw, 48px);
+      background: var(--bg-dark);
+    }
 
-        .slide-bg video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-        }
+    /* Background video */
+    .slide .bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: var(--video-opacity);
+      pointer-events: none;
+    }
 
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            height: 100%;
-            padding: 72px;
-            display: flex;
-            flex-direction: column;
-        }
+    /* Ensure content on top */
+    .slide > *:not(.bg-video) {
+      position: relative;
+      z-index: 2;
+    }
 
-        .slide-number {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            letter-spacing: 3px;
-            margin-bottom: auto;
-        }
+    /* Slide number & brand */
+    .slide-number {
+      position: absolute;
+      top: clamp(12px, 2.22vw, 24px);
+      left: clamp(12px, 2.22vw, 24px);
+      font-size: clamp(9px, 1.67vw, 18px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      z-index: 2;
+    }
+    .brand-mark {
+      position: absolute;
+      bottom: clamp(12px, 2.22vw, 24px);
+      right: clamp(12px, 2.22vw, 24px);
+      font-size: clamp(7px, 1.3vw, 14px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      z-index: 2;
+    }
 
-        .brand-mark {
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 4px;
-            color: var(--text-muted);
-            margin-top: auto;
-            text-align: center;
-        }
+    /* === TYPOGRAPHY === */
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5.93vw, 64px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: clamp(8px, 1.48vw, 16px);
+    }
+    .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(12px, 2.22vw, 24px);
+      font-weight: 400;
+      color: var(--accent-gold);
+      margin-bottom: clamp(16px, 2.96vw, 32px);
+    }
 
-        h1.slide-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 82px;
-            font-weight: 600;
-            line-height: 1.05;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-        }
+    /* === SECTION TITLE === */
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 4.44vw, 48px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(16px, 2.96vw, 32px);
+    }
 
-        h2.section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 64px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 32px;
-        }
+    /* === BOS BOX === */
+    .bos-box {
+      width: 100%;
+      max-width: clamp(200px, 37.04vw, 400px);
+      padding: clamp(16px, 2.96vw, 32px);
+      margin-bottom: clamp(8px, 1.48vw, 16px);
+      border-radius: clamp(8px, 1.48vw, 16px);
+      text-align: left;
+    }
+    .bos-box.bullish {
+      background: rgba(74, 217, 122, 0.1);
+      border: 1px solid rgba(74, 217, 122, 0.3);
+    }
+    .bos-box.bearish {
+      background: rgba(217, 74, 74, 0.1);
+      border: 1px solid rgba(217, 74, 74, 0.3);
+    }
+    .bos-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 3.33vw, 36px);
+      font-weight: 600;
+      margin-bottom: clamp(12px, 2.22vw, 24px);
+    }
+    .bos-box.bullish h3 { color: var(--accent-green); }
+    .bos-box.bearish h3 { color: var(--accent-red); }
+    .bos-list {
+      list-style: none;
+      padding: 0;
+    }
+    .bos-list li {
+      font-size: clamp(10px, 1.85vw, 20px);
+      color: var(--text-primary);
+      padding: clamp(6px, 1.11vw, 12px) 0;
+      padding-left: clamp(16px, 2.96vw, 32px);
+      position: relative;
+    }
+    .bos-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent-gold);
+    }
 
-        .subtitle {
-            font-size: 28px;
-            font-weight: 400;
-            color: var(--accent-gold);
-            margin-bottom: 40px;
-        }
+    /* === COMPARE GRID === */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(8px, 1.48vw, 16px);
+      width: 100%;
+      max-width: clamp(220px, 40.74vw, 440px);
+    }
+    .compare-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: clamp(6px, 1.11vw, 12px);
+      padding: clamp(12px, 2.22vw, 24px) clamp(8px, 1.48vw, 16px);
+      text-align: center;
+    }
+    .compare-item.bos {
+      border-color: rgba(74, 144, 217, 0.4);
+      background: rgba(74, 144, 217, 0.08);
+    }
+    .compare-item.choch {
+      border-color: rgba(201, 169, 98, 0.4);
+      background: rgba(201, 169, 98, 0.08);
+    }
+    .compare-item.mss {
+      border-color: rgba(217, 74, 74, 0.4);
+      background: rgba(217, 74, 74, 0.08);
+    }
+    .compare-item h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(14px, 2.59vw, 28px);
+      font-weight: 600;
+      margin-bottom: clamp(6px, 1.11vw, 12px);
+    }
+    .compare-item.bos h4 { color: var(--accent-blue); }
+    .compare-item.choch h4 { color: var(--accent-gold); }
+    .compare-item.mss h4 { color: var(--accent-red); }
+    .compare-item p {
+      font-size: clamp(9px, 1.67vw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .compare-item .direction {
+      font-size: clamp(7px, 1.3vw, 14px);
+      color: var(--text-dim);
+      margin-top: clamp(4px, 0.74vw, 8px);
+    }
 
-        .center-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+    /* === USAGE LIST === */
+    .usage-list {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+      max-width: clamp(200px, 37.04vw, 400px);
+      text-align: left;
+    }
+    .usage-list li {
+      font-size: clamp(10px, 1.85vw, 20px);
+      color: var(--text-primary);
+      padding: clamp(10px, 1.85vw, 20px) 0;
+      padding-left: clamp(20px, 3.7vw, 40px);
+      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .usage-list li:last-child { border-bottom: none; }
+    .usage-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent-green);
+      font-size: clamp(10px, 1.85vw, 20px);
+    }
 
-        .bos-box {
-            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
-            border: 1px solid rgba(74, 144, 217, 0.3);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 32px;
-        }
+    /* === CHART PLACEHOLDER === */
+    .chart-placeholder {
+      width: 100%;
+      max-width: clamp(200px, 37.04vw, 400px);
+      height: clamp(120px, 22.22vw, 240px);
+      background: rgba(74, 144, 217, 0.1);
+      border: 1px solid rgba(74, 144, 217, 0.2);
+      border-radius: clamp(8px, 1.48vw, 16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chart-label {
+      font-size: clamp(8px, 1.48vw, 16px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
 
-        .bos-box.bullish {
-            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
-            border-color: rgba(74, 217, 122, 0.3);
-        }
+    /* === KEY MESSAGE === */
+    .key-message {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 3.7vw, 40px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-primary);
+      max-width: 80%;
+      line-height: 1.3;
+      margin-bottom: clamp(12px, 2.22vw, 24px);
+    }
+    .key-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(12px, 2.22vw, 24px);
+      color: var(--accent-gold);
+    }
 
-        .bos-box.bearish {
-            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
-            border-color: rgba(217, 74, 74, 0.3);
-        }
+    /* === SLIDE 8: CTA === */
+    .slide-8 {
+      text-align: center;
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 4.44vw, 48px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(12px, 2.22vw, 24px);
+    }
+    .cta-text {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(12px, 2.22vw, 24px);
+      color: var(--text-secondary);
+    }
+    .disclaimer {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(7px, 1.3vw, 14px);
+      color: var(--text-dim);
+      margin-top: clamp(16px, 2.96vw, 32px);
+      max-width: 80%;
+    }
 
-        .bos-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
-            font-weight: 600;
-            color: var(--accent-blue);
-            margin-bottom: 24px;
-        }
+    /* ============================================================
+       EXPORT MODE
+       ============================================================ */
+    body.export-mode {
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      background: #000;
+    }
+    body.export-mode .controls-bar,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+    body.export-mode .carousel-grid {
+      display: block;
+      max-width: none;
+    }
+    body.export-mode .slide-wrapper {
+      display: none;
+    }
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1080px;
+      max-width: none;
+      aspect-ratio: auto;
+    }
+    body.export-mode .slide-number {
+      top: 24px;
+      left: 24px;
+      font-size: 18px;
+    }
+    body.export-mode .brand-mark {
+      bottom: 24px;
+      right: 24px;
+      font-size: 14px;
+    }
+    body.export-mode .slide-title {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+    body.export-mode .subtitle {
+      font-size: 24px;
+      margin-bottom: 32px;
+    }
+    body.export-mode .section-title {
+      font-size: 48px;
+      margin-bottom: 32px;
+    }
+    body.export-mode .bos-box {
+      max-width: 400px;
+      padding: 32px;
+      margin-bottom: 16px;
+      border-radius: 16px;
+    }
+    body.export-mode .bos-box h3 {
+      font-size: 36px;
+      margin-bottom: 24px;
+    }
+    body.export-mode .bos-list li {
+      font-size: 20px;
+      padding: 12px 0;
+      padding-left: 32px;
+    }
+    body.export-mode .compare-grid {
+      gap: 16px;
+      max-width: 440px;
+    }
+    body.export-mode .compare-item {
+      border-radius: 12px;
+      padding: 24px 16px;
+    }
+    body.export-mode .compare-item h4 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    body.export-mode .compare-item p {
+      font-size: 18px;
+    }
+    body.export-mode .compare-item .direction {
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    body.export-mode .usage-list {
+      max-width: 400px;
+    }
+    body.export-mode .usage-list li {
+      font-size: 20px;
+      padding: 20px 0;
+      padding-left: 40px;
+    }
+    body.export-mode .usage-list li::before {
+      font-size: 20px;
+    }
+    body.export-mode .chart-placeholder {
+      max-width: 400px;
+      height: 240px;
+      border-radius: 16px;
+    }
+    body.export-mode .chart-label {
+      font-size: 16px;
+    }
+    body.export-mode .key-message {
+      font-size: 40px;
+      margin-bottom: 24px;
+    }
+    body.export-mode .key-sub {
+      font-size: 24px;
+    }
+    body.export-mode .cta-title {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+    body.export-mode .cta-text {
+      font-size: 24px;
+    }
+    body.export-mode .disclaimer {
+      font-size: 14px;
+      margin-top: 32px;
+    }
 
-        .bos-box.bullish h3 {
-            color: var(--accent-green);
-        }
-
-        .bos-box.bearish h3 {
-            color: var(--accent-red);
-        }
-
-        .bos-list {
-            list-style: none;
-            text-align: left;
-        }
-
-        .bos-list li {
-            font-size: 24px;
-            color: var(--text-primary);
-            padding: 12px 0;
-            padding-left: 36px;
-            position: relative;
-        }
-
-        .bos-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-gold);
-        }
-
-        .compare-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            width: 100%;
-            max-width: 900px;
-        }
-
-        .compare-item {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 32px 24px;
-            text-align: center;
-        }
-
-        .compare-item.bos {
-            border-color: rgba(74, 144, 217, 0.4);
-            background: linear-gradient(135deg, rgba(74, 144, 217, 0.12) 0%, rgba(74, 144, 217, 0.04) 100%);
-        }
-
-        .compare-item.choch {
-            border-color: rgba(201, 169, 98, 0.4);
-            background: linear-gradient(135deg, rgba(201, 169, 98, 0.12) 0%, rgba(201, 169, 98, 0.04) 100%);
-        }
-
-        .compare-item.mss {
-            border-color: rgba(217, 74, 74, 0.4);
-            background: linear-gradient(135deg, rgba(217, 74, 74, 0.12) 0%, rgba(217, 74, 74, 0.04) 100%);
-        }
-
-        .compare-item h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .compare-item.bos h4 {
-            color: var(--accent-blue);
-        }
-
-        .compare-item.choch h4 {
-            color: var(--accent-gold);
-        }
-
-        .compare-item.mss h4 {
-            color: var(--accent-red);
-        }
-
-        .compare-item p {
-            font-size: 20px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        .compare-item .direction {
-            font-size: 16px;
-            color: var(--text-muted);
-            margin-top: 12px;
-        }
-
-        .usage-list {
-            list-style: none;
-            text-align: left;
-            max-width: 800px;
-        }
-
-        .usage-list li {
-            font-size: 26px;
-            color: var(--text-primary);
-            padding: 20px 0;
-            padding-left: 48px;
-            position: relative;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .usage-list li:last-child {
-            border-bottom: none;
-        }
-
-        .usage-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-            font-size: 24px;
-        }
-
-        .chart-placeholder {
-            width: 100%;
-            max-width: 800px;
-            height: 500px;
-            background: linear-gradient(135deg, rgba(74, 144, 217, 0.1) 0%, rgba(10, 10, 15, 0.5) 100%);
-            border: 1px solid rgba(74, 144, 217, 0.2);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .chart-placeholder::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            background: linear-gradient(90deg,
-                transparent 0%,
-                var(--accent-green) 15%,
-                var(--accent-green) 30%,
-                var(--accent-blue) 45%,
-                var(--accent-blue) 60%,
-                var(--accent-green) 75%,
-                var(--accent-green) 90%,
-                transparent 100%);
-            opacity: 0.6;
-        }
-
-        .chart-label {
-            font-size: 18px;
-            color: var(--text-muted);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: absolute;
-            bottom: 24px;
-        }
-
-        .key-message {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 52px;
-            font-weight: 400;
-            font-style: italic;
-            color: var(--text-primary);
-            max-width: 700px;
-            line-height: 1.3;
-            margin-bottom: 24px;
-        }
-
-        .key-sub {
-            font-size: 28px;
-            color: var(--accent-gold);
-        }
-
-        .cta-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 56px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-        }
-
-        .cta-text {
-            font-size: 24px;
-            color: var(--text-secondary);
-        }
-
-        .disclaimer {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-top: 40px;
-            max-width: 600px;
-        }
-
-        /* Export Mode */
-        body.export-mode {
-            padding: 0;
-            background: none;
-        }
-
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
-
-        body.export-mode .slide-wrapper {
-            display: none;
-        }
-
-        body.export-mode .slide-wrapper.active {
-            display: flex;
-        }
-
-        body.export-mode .slide-label {
-            display: none;
-        }
-
-        body.export-mode .slide {
-            border: none;
-        }
-    </style>
+    /* Export navigation */
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      z-index: 1000;
+    }
+    body.export-mode .export-nav {
+      display: flex;
+    }
+    .export-nav button {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .export-nav .slide-indicator {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-    <div class="carousel-container">
+  <!-- ============ CONTROLS BAR ============ -->
+  <div class="controls-bar">
+    <div class="control-group">
+      <label for="bg-select">Background</label>
+      <select id="bg-select">
+        <option value="starfield">Starfield</option>
+        <option value="none">None</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="opacity-slider">Opacity</label>
+      <input type="range" id="opacity-slider" min="0" max="30" value="8" />
+    </div>
+    <button id="export-btn">Export Mode</button>
+  </div>
 
-        <!-- Slide 1: Hook -->
-        <div class="slide-wrapper" data-slide="1">
-            <span class="slide-label">Slide 1 — Hook</span>
-            <div class="slide slide-1">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">01 / 08</span>
-                    <div class="center-content">
-                        <h1 class="slide-title">BREAK OF<br>STRUCTURE</h1>
-                        <p class="subtitle">Trend continuation confirmed</p>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
-        </div>
+  <div class="page-title">Post 419 — 8 Slides</div>
 
-        <!-- Slide 2: Bullish BOS -->
-        <div class="slide-wrapper" data-slide="2">
-            <span class="slide-label">Slide 2 — Bullish BOS</span>
-            <div class="slide slide-2">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">02 / 08</span>
-                    <div class="center-content">
-                        <div class="bos-box bullish">
-                            <h3>BULLISH BOS</h3>
-                            <ul class="bos-list">
-                                <li>Uptrend in place (HH/HL)</li>
-                                <li>Price makes NEW higher high</li>
-                                <li>Previous high broken</li>
-                                <li>Trend continues = BOS confirmed</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 3: Bearish BOS -->
-        <div class="slide-wrapper" data-slide="3">
-            <span class="slide-label">Slide 3 — Bearish BOS</span>
-            <div class="slide slide-3">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">03 / 08</span>
-                    <div class="center-content">
-                        <div class="bos-box bearish">
-                            <h3>BEARISH BOS</h3>
-                            <ul class="bos-list">
-                                <li>Downtrend in place (LH/LL)</li>
-                                <li>Price makes NEW lower low</li>
-                                <li>Previous low broken</li>
-                                <li>Trend continues = BOS confirmed</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 4: BOS vs ChOCH vs MSS -->
-        <div class="slide-wrapper" data-slide="4">
-            <span class="slide-label">Slide 4 — Comparison</span>
-            <div class="slide slide-4">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">04 / 08</span>
-                    <div class="center-content">
-                        <h2 class="section-title">BOS vs ChOCH vs MSS</h2>
-                        <div class="compare-grid">
-                            <div class="compare-item bos">
-                                <h4>BOS</h4>
-                                <p>Trend CONTINUES</p>
-                                <span class="direction">(with trend)</span>
-                            </div>
-                            <div class="compare-item choch">
-                                <h4>ChOCH</h4>
-                                <p>Early warning</p>
-                                <span class="direction">(against trend)</span>
-                            </div>
-                            <div class="compare-item mss">
-                                <h4>MSS</h4>
-                                <p>Trend CHANGES</p>
-                                <span class="direction">(against trend)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: How to Use -->
-        <div class="slide-wrapper" data-slide="5">
-            <span class="slide-label">Slide 5 — How to Use</span>
-            <div class="slide slide-5">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">05 / 08</span>
-                    <div class="center-content">
-                        <h2 class="section-title">How to Use BOS</h2>
-                        <ul class="usage-list">
-                            <li>Confirms trend still valid</li>
-                            <li>Look for entries on pullbacks after BOS</li>
-                            <li>Each BOS = trend stronger</li>
-                            <li>Failed BOS = warning sign</li>
-                        </ul>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 6: Visual -->
-        <div class="slide-wrapper" data-slide="6">
-            <span class="slide-label">Slide 6 — Visual</span>
-            <div class="slide slide-6">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">06 / 08</span>
-                    <div class="center-content">
-                        <div class="chart-placeholder">
-                            <span class="chart-label">Multiple BOS Points in Uptrend</span>
-                        </div>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 7: Key Point -->
-        <div class="slide-wrapper" data-slide="7">
-            <span class="slide-label">Slide 7 — Key Point</span>
-            <div class="slide slide-7">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">07 / 08</span>
-                    <div class="center-content">
-                        <p class="key-message">"Know the difference."</p>
-                        <p class="key-sub">Trade accordingly.</p>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 8: CTA -->
-        <div class="slide-wrapper" data-slide="8">
-            <span class="slide-label">Slide 8 — CTA</span>
-            <div class="slide slide-8">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">08 / 08</span>
-                    <div class="center-content">
-                        <h2 class="cta-title">Free Lesson</h2>
-                        <p class="cta-text">Link in bio</p>
-                        <p class="disclaimer">Educational content only. Not financial advice.</p>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
-        </div>
-
+  <div class="carousel-grid">
+    <!-- SLIDE 1 — Hook -->
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide slide-1">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">01 / 08</span>
+        <h1 class="slide-title">BREAK OF<br>STRUCTURE</h1>
+        <p class="subtitle">Trend continuation confirmed</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
     </div>
 
-    <script>
-        // Export mode functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide-wrapper');
-        const totalSlides = slides.length;
-        let exportMode = false;
+    <!-- SLIDE 2 — Bullish BOS -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — Bullish BOS</span>
+      <div class="slide slide-2">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">02 / 08</span>
+        <div class="bos-box bullish">
+          <h3>BULLISH BOS</h3>
+          <ul class="bos-list">
+            <li>Uptrend in place (HH/HL)</li>
+            <li>Price makes NEW higher high</li>
+            <li>Previous high broken</li>
+            <li>Trend continues = BOS confirmed</li>
+          </ul>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
 
-        function enterExportMode() {
-            exportMode = true;
-            document.body.classList.add('export-mode');
-            currentSlide = 0;
-            updateExportView();
-        }
+    <!-- SLIDE 3 — Bearish BOS -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Bearish BOS</span>
+      <div class="slide slide-3">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">03 / 08</span>
+        <div class="bos-box bearish">
+          <h3>BEARISH BOS</h3>
+          <ul class="bos-list">
+            <li>Downtrend in place (LH/LL)</li>
+            <li>Price makes NEW lower low</li>
+            <li>Previous low broken</li>
+            <li>Trend continues = BOS confirmed</li>
+          </ul>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
 
-        function exitExportMode() {
-            exportMode = false;
-            document.body.classList.remove('export-mode');
-            slides.forEach(slide => slide.classList.remove('active'));
-        }
+    <!-- SLIDE 4 — Comparison -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Comparison</span>
+      <div class="slide slide-4">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">04 / 08</span>
+        <h2 class="section-title">BOS vs ChOCH vs MSS</h2>
+        <div class="compare-grid">
+          <div class="compare-item bos">
+            <h4>BOS</h4>
+            <p>Trend CONTINUES</p>
+            <span class="direction">(with trend)</span>
+          </div>
+          <div class="compare-item choch">
+            <h4>ChOCH</h4>
+            <p>Early warning</p>
+            <span class="direction">(against trend)</span>
+          </div>
+          <div class="compare-item mss">
+            <h4>MSS</h4>
+            <p>Trend CHANGES</p>
+            <span class="direction">(against trend)</span>
+          </div>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
 
-        function updateExportView() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
-            });
-        }
+    <!-- SLIDE 5 — How to Use -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — How to Use</span>
+      <div class="slide slide-5">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">05 / 08</span>
+        <h2 class="section-title">How to Use BOS</h2>
+        <ul class="usage-list">
+          <li>Confirms trend still valid</li>
+          <li>Look for entries on pullbacks after BOS</li>
+          <li>Each BOS = trend stronger</li>
+          <li>Failed BOS = warning sign</li>
+        </ul>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
 
-        function nextSlide() {
-            if (exportMode && currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateExportView();
-            }
-        }
+    <!-- SLIDE 6 — Visual -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — Visual</span>
+      <div class="slide slide-6">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">06 / 08</span>
+        <div class="chart-placeholder">
+          <span class="chart-label">Multiple BOS Points in Uptrend</span>
+        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
 
-        function prevSlide() {
-            if (exportMode && currentSlide > 0) {
-                currentSlide--;
-                updateExportView();
-            }
-        }
+    <!-- SLIDE 7 — Key Point -->
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — Key Point</span>
+      <div class="slide slide-7">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">07 / 08</span>
+        <p class="key-message">"Know the difference."</p>
+        <p class="key-sub">Trade accordingly.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'e' || e.key === 'E') {
-                if (!exportMode) enterExportMode();
-            } else if (e.key === 'Escape') {
-                exitExportMode();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
+    <!-- SLIDE 8 — CTA -->
+    <div class="slide-wrapper" data-slide="8">
+      <span class="slide-label">Slide 8 — CTA</span>
+      <div class="slide slide-8">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">08 / 08</span>
+        <h2 class="cta-title">Free Lesson</h2>
+        <p class="cta-text">Link in bio</p>
+        <p class="disclaimer">Educational content only. Not financial advice.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
 
-        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
-    </script>
+  <!-- Export navigation (visible only in export mode) -->
+  <div class="export-nav">
+    <button id="prev-btn">← Previous</button>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
+    <button id="next-btn">Next →</button>
+  </div>
+
+  <script>
+    const bgSelect = document.getElementById('bg-select');
+    const opacitySlider = document.getElementById('opacity-slider');
+    const exportBtn = document.getElementById('export-btn');
+    const videos = document.querySelectorAll('.bg-video');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    const totalSlides = slideWrappers.length;
+    let currentSlide = 0;
+
+    bgSelect.addEventListener('change', (e) => {
+      const show = e.target.value === 'starfield';
+      videos.forEach(v => v.style.display = show ? 'block' : 'none');
+    });
+
+    opacitySlider.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
+    });
+
+    exportBtn.addEventListener('click', toggleExportMode);
+    document.getElementById('prev-btn').addEventListener('click', prevSlide);
+    document.getElementById('next-btn').addEventListener('click', nextSlide);
+
+    function toggleExportMode() {
+      document.body.classList.toggle('export-mode');
+      if (document.body.classList.contains('export-mode')) {
+        currentSlide = 0;
+        updateExportView();
+      }
+    }
+
+    function updateExportView() {
+      slideWrappers.forEach((sw, i) => sw.classList.toggle('active', i === currentSlide));
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateExportView();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateExportView();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!document.body.classList.contains('export-mode')) return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') toggleExportMode();
+    });
+  </script>
 </body>
 </html>
