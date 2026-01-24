@@ -1,505 +1,541 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 179 — Institutional Flow Cycle</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #0a0a0f;
-            --accent-blue: #4a90d9;
-            --accent-gold: #c9a962;
-            --accent-green: #4ad97a;
-            --accent-red: #d94a4a;
-            --accent-teal: #4ad9d9;
-            --accent-purple: #9b4ad9;
-            --text-primary: #e8e6e3;
-            --text-secondary: #a9a6a2;
-            --text-muted: #6b6965;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 179 — Institutional Flow Cycle | Carousel Preview</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-        body {
-            background-color: #050507;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-green: #4ad97a;
+      --accent-red: #d94a4a;
+      --accent-purple: #9b4ad9;
+      --text-primary: #e8e6e3;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: #6b6965;
+    }
 
-        .carousel-container {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .slide-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
 
-        .slide-label {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
 
-        .slide {
-            width: 1080px;
-            height: 1080px;
-            background-color: var(--bg-dark);
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    .controls label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
 
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
+    .controls select,
+    .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
 
-        .slide-bg video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-        }
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
 
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            height: 100%;
-            padding: 72px;
-            display: flex;
-            flex-direction: column;
-        }
+    .page-title h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
 
-        .slide-number {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            letter-spacing: 3px;
-            margin-bottom: auto;
-        }
+    .page-title p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
 
-        .brand-mark {
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 4px;
-            color: var(--text-muted);
-            margin-top: auto;
-            text-align: center;
-        }
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
 
-        h1.slide-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 54px;
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-        }
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        .slide-title .highlight {
-            color: var(--accent-purple);
-        }
+    .slide-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+    }
 
-        .subtitle {
-            font-size: 26px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            max-width: 700px;
-        }
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
 
-        .center-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+    .slide-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
 
-        .cycle-card {
-            background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%);
-            border: 1px solid rgba(155, 74, 217, 0.3);
-            border-radius: 16px;
-            padding: 48px;
-            width: 100%;
-            max-width: 800px;
-        }
+    .slide-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+    }
 
-        .cycle-card.accumulation {
-            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
-            border-color: rgba(74, 217, 122, 0.3);
-        }
+    .slide.bg-black .slide-bg video {
+      opacity: 0;
+    }
 
-        .cycle-card.accumulation h3 {
-            color: var(--accent-green);
-        }
+    .slide-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      padding: 8%;
+    }
 
-        .cycle-card.accumulation .feature-list li::before {
-            color: var(--accent-green);
-        }
+    .slide-number {
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      margin-bottom: auto;
+    }
 
-        .cycle-card.markup {
-            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
-            border-color: rgba(74, 144, 217, 0.3);
-        }
+    .brand-mark {
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-top: auto;
+      text-align: center;
+    }
 
-        .cycle-card.markup h3 {
-            color: var(--accent-blue);
-        }
+    .center-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
 
-        .cycle-card.markup .feature-list li::before {
-            color: var(--accent-blue);
-        }
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
 
-        .cycle-card.distribution {
-            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
-            border-color: rgba(201, 169, 98, 0.3);
-        }
+    .slide-title .highlight {
+      color: var(--accent-purple);
+    }
 
-        .cycle-card.distribution h3 {
-            color: var(--accent-gold);
-        }
+    .subtitle {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
 
-        .cycle-card.distribution .feature-list li::before {
-            color: var(--accent-gold);
-        }
+    .cycle-card {
+      background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%);
+      border: 1px solid rgba(155, 74, 217, 0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+      width: 100%;
+    }
 
-        .cycle-card.markdown {
-            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
-            border-color: rgba(217, 74, 74, 0.3);
-        }
+    .cycle-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--accent-purple);
+    }
 
-        .cycle-card.markdown h3 {
-            color: var(--accent-red);
-        }
+    .cycle-card .feature-list li::before {
+      color: var(--accent-purple);
+    }
 
-        .cycle-card.markdown .feature-list li::before {
-            color: var(--accent-red);
-        }
+    .cycle-card.accumulation {
+      background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+      border-color: rgba(74, 217, 122, 0.3);
+    }
 
-        .cycle-card h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
-            font-weight: 600;
-            margin-bottom: 32px;
-            color: var(--accent-purple);
-        }
+    .cycle-card.accumulation h3 {
+      color: var(--accent-green);
+    }
 
-        .feature-list {
-            list-style: none;
-            text-align: left;
-        }
+    .cycle-card.accumulation .feature-list li::before {
+      color: var(--accent-green);
+    }
 
-        .feature-list li {
-            font-size: 22px;
-            color: var(--text-primary);
-            padding: 14px 0;
-            padding-left: 36px;
-            position: relative;
-            line-height: 1.4;
-        }
+    .cycle-card.markup {
+      background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+      border-color: rgba(74, 144, 217, 0.3);
+    }
 
-        .feature-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-purple);
-        }
+    .cycle-card.markup h3 {
+      color: var(--accent-blue);
+    }
 
-        .cycle-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-            max-width: 700px;
-            flex-wrap: wrap;
-        }
+    .cycle-card.markup .feature-list li::before {
+      color: var(--accent-blue);
+    }
 
-        .cycle-phase {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
+    .cycle-card.distribution {
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+      border-color: rgba(201, 169, 98, 0.3);
+    }
 
-        .cycle-phase.acc {
-            background: rgba(74, 217, 122, 0.2);
-            border: 2px solid var(--accent-green);
-        }
+    .cycle-card.distribution h3 {
+      color: var(--accent-gold);
+    }
 
-        .cycle-phase.mark {
-            background: rgba(74, 144, 217, 0.2);
-            border: 2px solid var(--accent-blue);
-        }
+    .cycle-card.distribution .feature-list li::before {
+      color: var(--accent-gold);
+    }
 
-        .cycle-phase.dist {
-            background: rgba(201, 169, 98, 0.2);
-            border: 2px solid var(--accent-gold);
-        }
+    .feature-list {
+      list-style: none;
+      text-align: left;
+    }
 
-        .cycle-phase.down {
-            background: rgba(217, 74, 74, 0.2);
-            border: 2px solid var(--accent-red);
-        }
+    .feature-list li {
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      padding: 0.5rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      line-height: 1.4;
+    }
 
-        .phase-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
+    .feature-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent-purple);
+    }
 
-        .cta-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 52px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
 
-        .cta-title .emphasis {
-            color: var(--accent-purple);
-        }
+    .cta-title .emphasis {
+      color: var(--accent-purple);
+    }
 
-        .cta-text {
-            font-size: 24px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
+    .cta-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.25rem;
+    }
 
-        /* Export Mode */
-        body.export-mode {
-            padding: 0;
-            background: none;
-        }
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
 
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
 
-        body.export-mode .slide-wrapper {
-            display: none;
-        }
+    body.export-mode .carousel-grid {
+      display: block;
+      padding: 0;
+    }
 
-        body.export-mode .slide-wrapper.active {
-            display: flex;
-        }
+    body.export-mode .slide-wrapper {
+      display: none;
+    }
 
-        body.export-mode .slide-label {
-            display: none;
-        }
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+    }
 
-        body.export-mode .slide {
-            border: none;
-        }
-    </style>
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1080px;
+      max-width: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    @media (max-width: 900px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        position: static;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="carousel-container">
+  <div class="controls">
+    <label>Background:
+      <select id="bg-toggle">
+        <option value="starfield">Starfield</option>
+        <option value="black">Pure Black</option>
+      </select>
+    </label>
+    <label>Opacity:
+      <select id="opacity-control">
+        <option value="0.03">3%</option>
+        <option value="0.05">5%</option>
+        <option value="0.08" selected>8%</option>
+        <option value="0.12">12%</option>
+        <option value="0.15">15%</option>
+      </select>
+    </label>
+    <button id="export-btn">Export Mode</button>
+  </div>
 
-        <!-- Slide 1: Hook -->
-        <div class="slide-wrapper" data-slide="1">
-            <span class="slide-label">Slide 1 — Hook</span>
-            <div class="slide slide-1">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">01 / 05</span>
-                    <div class="center-content">
-                        <h1 class="slide-title">Institutional<br><span class="highlight">Flow Cycle</span></h1>
-                        <p class="subtitle">The four phases of market movement</p>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
+  <div class="page-title">
+    <h1>Post 179 — Institutional Flow Cycle</h1>
+    <p>Instagram Carousel • 5 Slides • 1080×1080px</p>
+  </div>
+
+  <div class="carousel-grid">
+
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
         </div>
-
-        <!-- Slide 2: Accumulation -->
-        <div class="slide-wrapper" data-slide="2">
-            <span class="slide-label">Slide 2 — Accumulation</span>
-            <div class="slide slide-2">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">02 / 05</span>
-                    <div class="center-content">
-                        <div class="cycle-card accumulation">
-                            <h3>1. ACCUMULATION</h3>
-                            <ul class="feature-list">
-                                <li>Smart money buying quietly</li>
-                                <li>Price consolidates at lows</li>
-                                <li>Low volatility, low interest</li>
-                                <li>Best time to build positions</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
+        <div class="slide-content">
+          <span class="slide-number">01 / 05</span>
+          <div class="center-content">
+            <h1 class="slide-title">Institutional<br><span class="highlight">Flow Cycle</span></h1>
+            <p class="subtitle">The four phases of market movement</p>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
-
-        <!-- Slide 3: Markup & Distribution -->
-        <div class="slide-wrapper" data-slide="3">
-            <span class="slide-label">Slide 3 — Markup</span>
-            <div class="slide slide-3">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">03 / 05</span>
-                    <div class="center-content">
-                        <div class="cycle-card markup">
-                            <h3>2. MARKUP</h3>
-                            <ul class="feature-list">
-                                <li>Price trending strongly higher</li>
-                                <li>Volume increasing with price</li>
-                                <li>Retail FOMO kicks in late</li>
-                                <li>Ride the trend, trail stops</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 4: Distribution & Markdown -->
-        <div class="slide-wrapper" data-slide="4">
-            <span class="slide-label">Slide 4 — Distribution</span>
-            <div class="slide slide-4">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">04 / 05</span>
-                    <div class="center-content">
-                        <div class="cycle-card distribution">
-                            <h3>3. DISTRIBUTION</h3>
-                            <ul class="feature-list">
-                                <li>Smart money selling to retail</li>
-                                <li>Price consolidates at highs</li>
-                                <li>High hype, maximum euphoria</li>
-                                <li>Time to reduce exposure</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: CTA -->
-        <div class="slide-wrapper" data-slide="5">
-            <span class="slide-label">Slide 5 — CTA</span>
-            <div class="slide slide-5">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide-content">
-                    <span class="slide-number">05 / 05</span>
-                    <div class="center-content">
-                        <h2 class="cta-title">Know the<br><span class="emphasis">Cycle</span></h2>
-                        <p class="cta-text">Trade with smart money, not against.</p>
-                        <p class="cta-text">Link in bio</p>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
 
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide-wrapper');
-        const totalSlides = slides.length;
-        let exportMode = false;
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — Accumulation</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">02 / 05</span>
+          <div class="center-content">
+            <div class="cycle-card accumulation">
+              <h3>1. ACCUMULATION</h3>
+              <ul class="feature-list">
+                <li>Smart money buying quietly</li>
+                <li>Price consolidates at lows</li>
+                <li>Low volatility, low interest</li>
+                <li>Best time to build positions</li>
+              </ul>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-        function enterExportMode() {
-            exportMode = true;
-            document.body.classList.add('export-mode');
-            currentSlide = 0;
-            updateExportView();
-        }
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Markup</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">03 / 05</span>
+          <div class="center-content">
+            <div class="cycle-card markup">
+              <h3>2. MARKUP</h3>
+              <ul class="feature-list">
+                <li>Price trending strongly higher</li>
+                <li>Volume increasing with price</li>
+                <li>Retail FOMO kicks in late</li>
+                <li>Ride the trend, trail stops</li>
+              </ul>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-        function exitExportMode() {
-            exportMode = false;
-            document.body.classList.remove('export-mode');
-            slides.forEach(slide => slide.classList.remove('active'));
-        }
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Distribution</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">04 / 05</span>
+          <div class="center-content">
+            <div class="cycle-card distribution">
+              <h3>3. DISTRIBUTION</h3>
+              <ul class="feature-list">
+                <li>Smart money selling to retail</li>
+                <li>Price consolidates at highs</li>
+                <li>High hype, maximum euphoria</li>
+                <li>Time to reduce exposure</li>
+              </ul>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-        function updateExportView() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
-            });
-        }
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — CTA</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">05 / 05</span>
+          <div class="center-content">
+            <h2 class="cta-title">Know the<br><span class="emphasis">Cycle</span></h2>
+            <p class="cta-text">Trade with smart money, not against.</p>
+            <p class="cta-text">Link in bio</p>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-        function nextSlide() {
-            if (exportMode && currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateExportView();
-            }
-        }
+  </div>
 
-        function prevSlide() {
-            if (exportMode && currentSlide > 0) {
-                currentSlide--;
-                updateExportView();
-            }
-        }
+  <script>
+    const bgToggle = document.getElementById('bg-toggle');
+    const opacityControl = document.getElementById('opacity-control');
+    const slides = document.querySelectorAll('.slide');
+    const videos = document.querySelectorAll('.slide-bg video');
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'e' || e.key === 'E') {
-                if (!exportMode) enterExportMode();
-            } else if (e.key === 'Escape') {
-                exitExportMode();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
+    bgToggle.addEventListener('change', (e) => {
+      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
+    });
 
-        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
-    </script>
+    opacityControl.addEventListener('change', (e) => {
+      videos.forEach(video => video.style.opacity = e.target.value);
+    });
+
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
+        currentExportSlide = 0;
+        updateExportSlide();
+      } else {
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'ArrowLeft') {
+        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'Escape') {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+  </script>
 </body>
 </html>

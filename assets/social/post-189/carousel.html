@@ -1,722 +1,725 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 189 — Market Profile Basics</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* =====================================================
-           CSS VARIABLES - SignalPilot Brand System
-           ===================================================== */
-        :root {
-            --bg-dark: #0a0a0f;
-            --bg-card: rgba(255, 255, 255, 0.02);
-            --bg-card-hover: rgba(255, 255, 255, 0.04);
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --border-medium: rgba(255, 255, 255, 0.1);
-            --text-primary: #e8e6e3;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-tertiary: rgba(255, 255, 255, 0.4);
-            --accent-blue: #4a90d9;
-            --accent-blue-glow: rgba(74, 144, 217, 0.3);
-            --accent-gold: #c9a962;
-            --accent-gold-glow: rgba(201, 169, 98, 0.3);
-            --accent-green: #4ad97a;
-            --accent-green-glow: rgba(74, 217, 122, 0.3);
-            --accent-red: #d94a4a;
-            --accent-red-glow: rgba(217, 74, 74, 0.3);
-            --accent-teal: #4ad9d9;
-            --accent-teal-glow: rgba(74, 217, 217, 0.3);
-            --accent-purple: #9b4ad9;
-            --accent-purple-glow: rgba(155, 74, 217, 0.3);
-            --font-serif: 'Cormorant Garamond', Georgia, serif;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --slide-width: 1080px;
-            --slide-height: 1080px;
-            --slide-padding: 72px;
-            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 189 — Market Profile Basics | Carousel Preview</title>
 
-        /* =====================================================
-           RESET & BASE STYLES
-           ===================================================== */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-        html {
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-green: #4ad97a;
+      --accent-red: #d94a4a;
+      --accent-purple: #9b4ad9;
+      --accent-teal: #4ad9d9;
+      --text-primary: #e8e6e3;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: #6b6965;
+    }
 
-        body {
-            background-color: var(--bg-dark);
-            font-family: var(--font-sans);
-            color: var(--text-primary);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding: 40px 20px;
-            line-height: 1.5;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* =====================================================
-           CAROUSEL CONTAINER & LAYOUT
-           ===================================================== */
-        .carousel-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            max-width: 1800px;
-            margin: 0 auto;
-        }
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
 
-        .slide-wrapper {
-            position: relative;
-            width: var(--slide-width);
-            height: var(--slide-height);
-            transform: scale(0.45);
-            transform-origin: top left;
-            margin-bottom: -594px;
-            margin-right: -594px;
-            transition: var(--transition-smooth);
-        }
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
 
-        .slide-wrapper:hover {
-            z-index: 10;
-        }
+    .controls label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
 
-        /* =====================================================
-           SLIDE BACKGROUND VIDEO
-           ===================================================== */
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-            z-index: 0;
-            pointer-events: none;
-        }
+    .controls select,
+    .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
 
-        /* =====================================================
-           SLIDE BASE STYLES
-           ===================================================== */
-        .slide {
-            position: relative;
-            width: var(--slide-width);
-            height: var(--slide-height);
-            background: var(--bg-dark);
-            overflow: hidden;
-            z-index: 1;
-        }
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
 
-        .slide-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: var(--slide-padding);
-        }
+    .page-title h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
 
-        /* =====================================================
-           SLIDE NUMBER INDICATOR
-           ===================================================== */
-        .slide-number {
-            font-family: var(--font-sans);
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            margin-bottom: 24px;
-        }
+    .page-title p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
 
-        /* =====================================================
-           TYPOGRAPHY - HEADLINES
-           ===================================================== */
-        .headline {
-            font-family: var(--font-serif);
-            font-size: 82px;
-            font-weight: 600;
-            line-height: 1.0;
-            color: var(--text-primary);
-            margin-bottom: 40px;
-            letter-spacing: -0.02em;
-        }
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
 
-        .headline-medium {
-            font-size: 68px;
-        }
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        .headline-small {
-            font-size: 54px;
-        }
+    .slide-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+    }
 
-        /* =====================================================
-           ACCENT COLOR CLASSES
-           ===================================================== */
-        .accent-text {
-            color: var(--accent-teal);
-        }
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
 
-        .accent-gold {
-            color: var(--accent-gold);
-        }
+    .slide-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
 
-        .accent-green {
-            color: var(--accent-green);
-        }
+    .slide-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+    }
 
-        .accent-blue {
-            color: var(--accent-blue);
-        }
+    .slide.bg-black .slide-bg video {
+      opacity: 0;
+    }
 
-        .accent-teal {
-            color: var(--accent-teal);
-        }
+    .slide-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      padding: 8%;
+    }
 
-        .accent-purple {
-            color: var(--accent-purple);
-        }
+    .slide-number {
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      margin-bottom: auto;
+    }
 
-        .accent-red {
-            color: var(--accent-red);
-        }
+    .brand-mark {
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-top: auto;
+      text-align: center;
+    }
 
-        /* =====================================================
-           COVER SLIDE STYLES
-           ===================================================== */
-        .cover-slide .slide-content {
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+    .center-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
 
-        .cover-badge {
-            display: inline-block;
-            font-family: var(--font-sans);
-            font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 4px;
-            color: var(--accent-teal);
-            text-transform: uppercase;
-            padding: 16px 32px;
-            border: 1px solid var(--accent-teal-glow);
-            border-radius: 6px;
-            margin-bottom: 48px;
-            background: rgba(74, 217, 217, 0.05);
-        }
+    .cover-badge {
+      display: inline-block;
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(74, 217, 217, 0.3);
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      background: rgba(74, 217, 217, 0.05);
+    }
 
-        .cover-title {
-            font-family: var(--font-serif);
-            font-size: 86px;
-            font-weight: 600;
-            line-height: 1.0;
-            color: var(--text-primary);
-            margin-bottom: 32px;
-            letter-spacing: -0.02em;
-        }
+    .cover-icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
 
-        .cover-subtitle {
-            font-family: var(--font-sans);
-            font-size: 28px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            max-width: 700px;
-            line-height: 1.5;
-        }
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
 
-        .cover-icon {
-            font-size: 100px;
-            margin-bottom: 24px;
-        }
+    .slide-title .highlight {
+      color: var(--accent-teal);
+    }
 
-        /* =====================================================
-           CONCEPT CARD STYLES
-           ===================================================== */
-        .concept-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    .slide-title .highlight-gold {
+      color: var(--accent-gold);
+    }
 
-        .concept-card {
-            padding: 48px;
-            background: rgba(74, 217, 217, 0.08);
-            border: 1px solid rgba(74, 217, 217, 0.25);
-            border-radius: 20px;
-            margin-bottom: 24px;
-            transition: var(--transition-smooth);
-        }
+    .slide-title .highlight-purple {
+      color: var(--accent-purple);
+    }
 
-        .concept-card:last-child {
-            margin-bottom: 0;
-        }
+    .subtitle {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
 
-        .concept-card:hover {
-            background: rgba(74, 217, 217, 0.12);
-            border-color: rgba(74, 217, 217, 0.35);
-        }
+    /* Concept card styles */
+    .concept-card {
+      background: rgba(74, 217, 217, 0.08);
+      border: 1px solid rgba(74, 217, 217, 0.25);
+      border-radius: 10px;
+      padding: 1rem;
+      width: 100%;
+    }
 
-        .concept-header {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
+    .concept-card.gold {
+      background: rgba(201, 169, 98, 0.08);
+      border-color: rgba(201, 169, 98, 0.25);
+    }
 
-        .concept-icon {
-            font-size: 48px;
-        }
+    .concept-card.purple {
+      background: rgba(155, 74, 217, 0.08);
+      border-color: rgba(155, 74, 217, 0.25);
+    }
 
-        .concept-title {
-            font-family: var(--font-sans);
-            font-size: 28px;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
+    .concept-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
 
-        .concept-abbr {
-            font-family: var(--font-sans);
-            font-size: 18px;
-            font-weight: 400;
-            color: var(--accent-teal);
-            margin-top: 4px;
-        }
+    .concept-icon {
+      font-size: 1.5rem;
+    }
 
-        .concept-desc {
-            font-family: var(--font-sans);
-            font-size: 24px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
+    .concept-title {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
 
-        /* =====================================================
-           FORMULA DISPLAY
-           ===================================================== */
-        .formula-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+    .concept-abbr {
+      font-size: 0.55rem;
+      color: var(--accent-teal);
+      margin-top: 0.1rem;
+    }
 
-        .formula-card {
-            padding: 60px 80px;
-            background: linear-gradient(135deg, rgba(74, 217, 217, 0.1), rgba(74, 144, 217, 0.1));
-            border: 1px solid rgba(74, 217, 217, 0.25);
-            border-radius: 24px;
-            max-width: 850px;
-        }
+    .concept-card.gold .concept-abbr {
+      color: var(--accent-gold);
+    }
 
-        .formula-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 32px;
-        }
+    .concept-card.purple .concept-abbr {
+      color: var(--accent-purple);
+    }
 
-        .formula-row:last-child {
-            margin-bottom: 0;
-        }
+    .concept-desc {
+      font-size: 0.6rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
 
-        .formula-text {
-            font-family: var(--font-serif);
-            font-size: 42px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
+    /* VA boundaries */
+    .va-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+    }
 
-        .formula-result {
-            font-family: var(--font-sans);
-            font-size: 26px;
-            font-weight: 300;
-            color: var(--accent-teal);
-        }
+    /* CTA styles */
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
 
-        /* =====================================================
-           LIST STYLES
-           ===================================================== */
-        .info-list {
-            list-style: none;
-        }
+    .cta-title .emphasis {
+      color: var(--accent-teal);
+    }
 
-        .info-list li {
-            font-family: var(--font-sans);
-            font-size: 26px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            padding: 16px 0;
-            padding-left: 32px;
-            position: relative;
-            border-bottom: 1px solid var(--border-subtle);
-        }
+    .cta-text {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      max-width: 280px;
+    }
 
-        .info-list li:last-child {
-            border-bottom: none;
-        }
+    .cta-button {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bg-dark);
+      background: linear-gradient(135deg, var(--accent-teal), #3ac9c9);
+      padding: 0.75rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+    }
 
-        .info-list li::before {
-            content: "◾";
-            position: absolute;
-            left: 0;
-            color: var(--accent-teal);
-        }
+    /* Export mode styles */
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
 
-        /* =====================================================
-           CTA SLIDE STYLES
-           ===================================================== */
-        .cta-slide .slide-content {
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
 
-        .cta-headline {
-            font-family: var(--font-serif);
-            font-size: 76px;
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--text-primary);
-            margin-bottom: 32px;
-            letter-spacing: -0.02em;
-        }
+    body.export-mode .carousel-grid {
+      display: block;
+      padding: 0;
+    }
 
-        .cta-subtext {
-            font-family: var(--font-sans);
-            font-size: 26px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            margin-bottom: 48px;
-            max-width: 600px;
-            line-height: 1.6;
-        }
+    body.export-mode .slide-wrapper {
+      display: none;
+    }
 
-        .cta-button {
-            display: inline-block;
-            font-family: var(--font-sans);
-            font-size: 20px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--bg-dark);
-            background: linear-gradient(135deg, var(--accent-teal), #3ac9c9);
-            padding: 24px 64px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: var(--transition-smooth);
-        }
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+    }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px var(--accent-teal-glow);
-        }
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1080px;
+      max-width: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
 
-        /* =====================================================
-           BRAND TAG
-           ===================================================== */
-        .brand-tag {
-            position: absolute;
-            bottom: 56px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: var(--font-sans);
-            font-size: 18px;
-            font-weight: 500;
-            letter-spacing: 6px;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-        }
+    body.export-mode .slide-content {
+      padding: 72px;
+    }
 
-        /* =====================================================
-           EXPORT MODE STYLES
-           ===================================================== */
-        body.export-mode {
-            padding: 0;
-            background: transparent;
-        }
+    body.export-mode .cover-badge {
+      font-size: 16px;
+      padding: 16px 32px;
+      margin-bottom: 24px;
+    }
 
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
+    body.export-mode .cover-icon {
+      font-size: 100px;
+      margin-bottom: 24px;
+    }
 
-        body.export-mode .slide-wrapper {
-            transform: none;
-            margin: 0;
-            display: none;
-        }
+    body.export-mode .slide-title {
+      font-size: 86px;
+      margin-bottom: 32px;
+    }
 
-        body.export-mode .slide-wrapper.active {
-            display: block;
-        }
+    body.export-mode .subtitle {
+      font-size: 28px;
+    }
 
-        /* =====================================================
-           UTILITY CLASSES
-           ===================================================== */
-        .mb-24 {
-            margin-bottom: 24px;
-        }
+    body.export-mode .slide-number {
+      font-size: 14px;
+      letter-spacing: 3px;
+    }
 
-        .mb-32 {
-            margin-bottom: 32px;
-        }
+    body.export-mode .brand-mark {
+      font-size: 18px;
+      letter-spacing: 6px;
+    }
 
-        .mb-48 {
-            margin-bottom: 48px;
-        }
+    body.export-mode .concept-card {
+      padding: 48px;
+      border-radius: 20px;
+    }
 
-        .text-center {
-            text-align: center;
-        }
-    </style>
+    body.export-mode .concept-header {
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    body.export-mode .concept-icon {
+      font-size: 48px;
+    }
+
+    body.export-mode .concept-title {
+      font-size: 28px;
+    }
+
+    body.export-mode .concept-abbr {
+      font-size: 18px;
+    }
+
+    body.export-mode .concept-desc {
+      font-size: 24px;
+    }
+
+    body.export-mode .va-cards {
+      gap: 24px;
+    }
+
+    body.export-mode .cta-title {
+      font-size: 76px;
+      margin-bottom: 32px;
+    }
+
+    body.export-mode .cta-text {
+      font-size: 26px;
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    body.export-mode .cta-button {
+      font-size: 20px;
+      padding: 24px 64px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        position: static;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="carousel-container">
-        <!-- =====================================================
-             SLIDE 1: COVER
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide cover-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="cover-badge">Advanced Education</div>
-                    <div class="cover-icon">📊</div>
-                    <h1 class="cover-title">Market<br><span class="accent-text">Profile</span></h1>
-                    <p class="cover-subtitle">See price and time together</p>
-                    <div class="brand-tag">SignalPilot</div>
-                </div>
-            </div>
-        </div>
+  <div class="controls">
+    <label>Background:
+      <select id="bg-toggle">
+        <option value="starfield">Starfield</option>
+        <option value="black">Pure Black</option>
+      </select>
+    </label>
+    <label>Opacity:
+      <select id="opacity-control">
+        <option value="0.03">3%</option>
+        <option value="0.05">5%</option>
+        <option value="0.08" selected>8%</option>
+        <option value="0.12">12%</option>
+        <option value="0.15">15%</option>
+      </select>
+    </label>
+    <button id="export-btn">Export Mode</button>
+  </div>
 
-        <!-- =====================================================
-             SLIDE 2: WHAT IS MARKET PROFILE
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 02</div>
-                    <h2 class="headline headline-medium">What Is<br><span class="accent-text">Market Profile?</span></h2>
-                    <div class="concept-section">
-                        <div class="concept-card">
-                            <div class="concept-header">
-                                <span class="concept-icon">🕐</span>
-                                <div>
-                                    <h3 class="concept-title">Price + Time Together</h3>
-                                </div>
-                            </div>
-                            <p class="concept-desc">Market Profile shows not just where price went, but how long it stayed there. Time at price reveals value and acceptance.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="page-title">
+    <h1>Post 189 — Market Profile Basics</h1>
+    <p>Instagram Carousel • 7 Slides • 1080×1080px</p>
+  </div>
 
-        <!-- =====================================================
-             SLIDE 3: VALUE AREA
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 03</div>
-                    <h2 class="headline headline-medium">Value<br><span class="accent-text">Area (VA)</span></h2>
-                    <div class="concept-section">
-                        <div class="concept-card">
-                            <div class="concept-header">
-                                <span class="concept-icon">📍</span>
-                                <div>
-                                    <h3 class="concept-title">Where 70% of Trading Occurred</h3>
-                                    <p class="concept-abbr">The "fair value" zone</p>
-                                </div>
-                            </div>
-                            <p class="concept-desc">Price was "accepted" here by both buyers and sellers. This is where the market found balance. A key reference zone for trading decisions.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="carousel-grid">
 
-        <!-- =====================================================
-             SLIDE 4: POC (POINT OF CONTROL)
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 04</div>
-                    <h2 class="headline headline-medium">Point of<br><span class="accent-gold">Control</span></h2>
-                    <div class="concept-section">
-                        <div class="concept-card" style="background: rgba(201, 169, 98, 0.08); border-color: rgba(201, 169, 98, 0.25);">
-                            <div class="concept-header">
-                                <span class="concept-icon">🎯</span>
-                                <div>
-                                    <h3 class="concept-title">The Strongest Magnet</h3>
-                                    <p class="concept-abbr" style="color: var(--accent-gold);">POC</p>
-                                </div>
-                            </div>
-                            <p class="concept-desc">The single price level where the most time/volume was traded. Price tends to gravitate back to POC. The "fairest" price level.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Cover</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
         </div>
-
-        <!-- =====================================================
-             SLIDE 5: VA HIGH / VA LOW
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 05</div>
-                    <h2 class="headline headline-medium">Value Area<br><span class="accent-text">Boundaries</span></h2>
-                    <div class="concept-section">
-                        <div class="concept-card mb-24">
-                            <div class="concept-header">
-                                <span class="concept-icon">⬆️</span>
-                                <div>
-                                    <h3 class="concept-title">VA High</h3>
-                                    <p class="concept-abbr">Top of Value Area</p>
-                                </div>
-                            </div>
-                            <p class="concept-desc">Upper boundary of accepted value. Resistance when approaching from below.</p>
-                        </div>
-                        <div class="concept-card">
-                            <div class="concept-header">
-                                <span class="concept-icon">⬇️</span>
-                                <div>
-                                    <h3 class="concept-title">VA Low</h3>
-                                    <p class="concept-abbr">Bottom of Value Area</p>
-                                </div>
-                            </div>
-                            <p class="concept-desc">Lower boundary of accepted value. Support when approaching from above.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="slide-content">
+          <span class="slide-number">01 / 07</span>
+          <div class="center-content">
+            <span class="cover-badge">Advanced Education</span>
+            <div class="cover-icon">📊</div>
+            <h1 class="slide-title">Market<br><span class="highlight">Profile</span></h1>
+            <p class="subtitle">See price and time together</p>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
-
-        <!-- =====================================================
-             SLIDE 6: SINGLE PRINTS
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 06</div>
-                    <h2 class="headline headline-medium">Single<br><span class="accent-purple">Prints</span></h2>
-                    <div class="concept-section">
-                        <div class="concept-card" style="background: rgba(155, 74, 217, 0.08); border-color: rgba(155, 74, 217, 0.25);">
-                            <div class="concept-header">
-                                <span class="concept-icon">⚡</span>
-                                <div>
-                                    <h3 class="concept-title">Price Moved Quickly</h3>
-                                    <p class="concept-abbr" style="color: var(--accent-purple);">Low Time at Price</p>
-                                </div>
-                            </div>
-                            <p class="concept-desc">Areas where price spent minimal time. Represents imbalance - price was "rejected" here. May be revisited to fill the gap.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- =====================================================
-             SLIDE 7: CTA
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide cta-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <h2 class="cta-headline">Time At<br><span class="accent-text">Price</span></h2>
-                    <p class="cta-subtext">Full Market Profile lesson with charts and examples.</p>
-                    <a href="#" class="cta-button">Free Lesson</a>
-                    <div class="brand-tag">SignalPilot</div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- =====================================================
-         EXPORT MODE JAVASCRIPT
-         ===================================================== -->
-    <script>
-        (function() {
-            const slides = document.querySelectorAll('.slide-wrapper');
-            let currentSlide = 0;
-            let exportMode = false;
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — What Is Market Profile</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">02 / 07</span>
+          <div class="center-content">
+            <h2 class="slide-title" style="font-size: 1.5rem; margin-bottom: 1rem;">What Is <span class="highlight">Market Profile?</span></h2>
+            <div class="concept-card">
+              <div class="concept-header">
+                <span class="concept-icon">🕐</span>
+                <div>
+                  <h3 class="concept-title">Price + Time Together</h3>
+                </div>
+              </div>
+              <p class="concept-desc">Market Profile shows not just where price went, but how long it stayed there. Time at price reveals value and acceptance.</p>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-            }
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Value Area</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">03 / 07</span>
+          <div class="center-content">
+            <h2 class="slide-title" style="font-size: 1.5rem; margin-bottom: 1rem;">Value <span class="highlight">Area (VA)</span></h2>
+            <div class="concept-card">
+              <div class="concept-header">
+                <span class="concept-icon">📍</span>
+                <div>
+                  <h3 class="concept-title">Where 70% of Trading Occurred</h3>
+                  <p class="concept-abbr">The "fair value" zone</p>
+                </div>
+              </div>
+              <p class="concept-desc">Price was "accepted" here by both buyers and sellers. This is where the market found balance. A key reference zone for trading decisions.</p>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-            function toggleExportMode() {
-                exportMode = !exportMode;
-                document.body.classList.toggle('export-mode', exportMode);
-                if (exportMode) {
-                    currentSlide = 0;
-                    showSlide(0);
-                }
-            }
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Point of Control</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">04 / 07</span>
+          <div class="center-content">
+            <h2 class="slide-title" style="font-size: 1.5rem; margin-bottom: 1rem;">Point of <span class="highlight-gold">Control</span></h2>
+            <div class="concept-card gold">
+              <div class="concept-header">
+                <span class="concept-icon">🎯</span>
+                <div>
+                  <h3 class="concept-title">The Strongest Magnet</h3>
+                  <p class="concept-abbr">POC</p>
+                </div>
+              </div>
+              <p class="concept-desc">The single price level where the most time/volume was traded. Price tends to gravitate back to POC. The "fairest" price level.</p>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            }
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — VA Boundaries</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">05 / 07</span>
+          <div class="center-content">
+            <h2 class="slide-title" style="font-size: 1.5rem; margin-bottom: 1rem;">Value Area <span class="highlight">Boundaries</span></h2>
+            <div class="va-cards">
+              <div class="concept-card">
+                <div class="concept-header">
+                  <span class="concept-icon">⬆️</span>
+                  <div>
+                    <h3 class="concept-title">VA High</h3>
+                    <p class="concept-abbr">Top of Value Area</p>
+                  </div>
+                </div>
+                <p class="concept-desc">Upper boundary of accepted value. Resistance when approaching from below.</p>
+              </div>
+              <div class="concept-card">
+                <div class="concept-header">
+                  <span class="concept-icon">⬇️</span>
+                  <div>
+                    <h3 class="concept-title">VA Low</h3>
+                    <p class="concept-abbr">Bottom of Value Area</p>
+                  </div>
+                </div>
+                <p class="concept-desc">Lower boundary of accepted value. Support when approaching from above.</p>
+              </div>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-            function prevSlide() {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                showSlide(currentSlide);
-            }
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — Single Prints</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">06 / 07</span>
+          <div class="center-content">
+            <h2 class="slide-title" style="font-size: 1.5rem; margin-bottom: 1rem;">Single <span class="highlight-purple">Prints</span></h2>
+            <div class="concept-card purple">
+              <div class="concept-header">
+                <span class="concept-icon">⚡</span>
+                <div>
+                  <h3 class="concept-title">Price Moved Quickly</h3>
+                  <p class="concept-abbr">Low Time at Price</p>
+                </div>
+              </div>
+              <p class="concept-desc">Areas where price spent minimal time. Represents imbalance - price was "rejected" here. May be revisited to fill the gap.</p>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'e' || e.key === 'E') {
-                    toggleExportMode();
-                } else if (exportMode) {
-                    if (e.key === 'ArrowRight' || e.key === ' ') {
-                        nextSlide();
-                    } else if (e.key === 'ArrowLeft') {
-                        prevSlide();
-                    } else if (e.key === 'Escape') {
-                        toggleExportMode();
-                    }
-                }
-            });
-        })();
-    </script>
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — CTA</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">07 / 07</span>
+          <div class="center-content">
+            <h2 class="cta-title">Time At<br><span class="emphasis">Price</span></h2>
+            <p class="cta-text">Full Market Profile lesson with charts and examples.</p>
+            <a href="#" class="cta-button">Free Lesson</a>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const bgToggle = document.getElementById('bg-toggle');
+    const opacityControl = document.getElementById('opacity-control');
+    const slides = document.querySelectorAll('.slide');
+    const videos = document.querySelectorAll('.slide-bg video');
+
+    bgToggle.addEventListener('change', (e) => {
+      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
+    });
+
+    opacityControl.addEventListener('change', (e) => {
+      videos.forEach(video => video.style.opacity = e.target.value);
+    });
+
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
+        currentExportSlide = 0;
+        updateExportSlide();
+      } else {
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'ArrowLeft') {
+        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'Escape') {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+  </script>
 </body>
 </html>
