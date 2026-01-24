@@ -8,17 +8,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* =====================================================
-           CSS CUSTOM PROPERTIES - SIGNALPILOT BRAND
-           ===================================================== */
         :root {
-            /* Brand Colors */
             --bg-dark: #0a0a0f;
             --bg-card: #12121a;
             --bg-card-hover: #1a1a25;
             --border-subtle: #2a2a3a;
-
-            /* Accent Colors */
             --accent-blue: #4a90d9;
             --accent-blue-glow: rgba(74, 144, 217, 0.3);
             --accent-gold: #c9a962;
@@ -33,84 +27,122 @@
             --accent-purple-glow: rgba(155, 74, 217, 0.3);
             --accent-orange: #d9944a;
             --accent-orange-glow: rgba(217, 148, 74, 0.3);
-
-            /* Text Colors */
             --text-primary: #ffffff;
             --text-secondary: #a0a0b0;
             --text-muted: #606070;
-
-            /* Typography */
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-
-            /* Spacing */
-            --slide-padding: 60px;
-            --content-gap: 24px;
-
-            /* Dimensions */
-            --slide-width: 1080px;
-            --slide-height: 1080px;
         }
 
-        /* =====================================================
-           CSS RESET & BASE STYLES
-           ===================================================== */
-        *,
-        *::before,
-        *::after {
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        html {
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
         body {
             font-family: var(--font-sans);
-            font-weight: 400;
-            line-height: 1.6;
+            background: var(--bg-dark);
             color: var(--text-primary);
-            background-color: #000000;
-        }
-
-        /* =====================================================
-           CAROUSEL CONTAINER STYLES
-           ===================================================== */
-        .carousel-container {
-            display: flex;
-            flex-direction: row;
-            gap: 40px;
-            padding: 40px;
-            overflow-x: auto;
             min-height: 100vh;
-            align-items: center;
+            padding: 2rem;
         }
 
-        /* =====================================================
-           SLIDE BASE STYLES
-           ===================================================== */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .controls label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .controls select, .controls button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .controls select:hover, .controls button:hover {
+            border-color: var(--accent-blue);
+        }
+
+        #export-btn {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        #export-btn:hover {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+
+        .page-title {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .page-title h1 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 0 auto;
+            justify-items: center;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slide-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
         .slide {
             position: relative;
-            width: var(--slide-width);
-            height: var(--slide-height);
-            min-width: var(--slide-width);
-            min-height: var(--slide-height);
-            background-color: var(--bg-dark);
+            width: 100%;
+            max-width: 540px;
+            aspect-ratio: 1 / 1;
+            background: var(--bg-dark);
             border-radius: 12px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: var(--slide-padding);
+            padding: clamp(30px, 5.5vw, 60px);
         }
 
-        /* =====================================================
-           VIDEO BACKGROUND STYLES
-           ===================================================== */
         .slide-video-bg {
             position: absolute;
             top: 0;
@@ -126,12 +158,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.08;
+            opacity: var(--video-opacity, 0.08);
         }
 
-        /* =====================================================
-           SLIDE CONTENT WRAPPER
-           ===================================================== */
         .slide-content {
             position: relative;
             z-index: 1;
@@ -140,77 +169,67 @@
             justify-content: center;
             align-items: center;
             flex: 1;
-            gap: var(--content-gap);
+            gap: clamp(12px, 2.2vw, 24px);
         }
 
-        /* =====================================================
-           TYPOGRAPHY STYLES
-           ===================================================== */
         .slide-header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: clamp(12px, 2.2vw, 24px);
         }
 
         .slide-number {
             font-family: var(--font-sans);
-            font-size: 14px;
+            font-size: clamp(7px, 1.3vw, 14px);
             font-weight: 600;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--accent-red);
-            margin-bottom: 16px;
+            margin-bottom: clamp(8px, 1.5vw, 16px);
         }
 
         .slide-title {
             font-family: var(--font-serif);
-            font-size: 72px;
+            font-size: clamp(36px, 6.7vw, 72px);
             font-weight: 600;
             line-height: 1.1;
             color: var(--text-primary);
-            margin-bottom: 16px;
+            margin-bottom: clamp(8px, 1.5vw, 16px);
         }
 
         .slide-title-large {
-            font-size: 80px;
-        }
-
-        .slide-title-medium {
-            font-size: 64px;
+            font-size: clamp(40px, 7.4vw, 80px);
         }
 
         .slide-subtitle {
             font-family: var(--font-sans);
-            font-size: 28px;
+            font-size: clamp(14px, 2.6vw, 28px);
             font-weight: 400;
             color: var(--text-secondary);
             line-height: 1.4;
         }
 
-        /* =====================================================
-           MONEY DRAIN VISUAL
-           ===================================================== */
         .drain-visual {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 24px;
-            margin: 40px 0;
+            gap: clamp(12px, 2.2vw, 24px);
+            margin: clamp(20px, 3.7vw, 40px) 0;
         }
 
         .drain-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: clamp(10px, 1.9vw, 20px);
         }
 
         .drain-box {
-            width: 160px;
-            height: 160px;
+            width: clamp(80px, 14.8vw, 160px);
+            height: clamp(80px, 14.8vw, 160px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 72px;
+            font-size: clamp(36px, 6.7vw, 72px);
             background: var(--bg-card);
             border-radius: 24px;
             border: 2px solid var(--accent-red);
@@ -218,7 +237,7 @@
         }
 
         .drain-arrow {
-            font-size: 48px;
+            font-size: clamp(24px, 4.4vw, 48px);
             color: var(--accent-red);
         }
 
@@ -226,25 +245,22 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: clamp(4px, 0.7vw, 8px);
         }
 
         .drain-result-icon {
-            font-size: 48px;
+            font-size: clamp(24px, 4.4vw, 48px);
         }
 
         .drain-result-text {
             font-family: var(--font-sans);
-            font-size: 18px;
+            font-size: clamp(9px, 1.7vw, 18px);
             font-weight: 600;
             color: var(--accent-red);
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        /* =====================================================
-           COST SECTION STYLES
-           ===================================================== */
         .cost-section {
             width: 100%;
             max-width: 800px;
@@ -253,17 +269,17 @@
         .section-header {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 32px;
+            gap: clamp(8px, 1.5vw, 16px);
+            margin-bottom: clamp(16px, 3vw, 32px);
         }
 
         .section-icon {
-            width: 64px;
-            height: 64px;
+            width: clamp(32px, 5.9vw, 64px);
+            height: clamp(32px, 5.9vw, 64px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: clamp(16px, 3vw, 32px);
             background: var(--bg-card);
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
@@ -291,7 +307,7 @@
 
         .section-title {
             font-family: var(--font-serif);
-            font-size: 42px;
+            font-size: clamp(21px, 3.9vw, 42px);
             font-weight: 600;
             color: var(--text-primary);
         }
@@ -299,58 +315,43 @@
         .cost-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: clamp(8px, 1.5vw, 16px);
         }
 
         .cost-item {
             display: flex;
             align-items: center;
-            gap: 20px;
-            padding: 24px 28px;
+            gap: clamp(10px, 1.9vw, 20px);
+            padding: clamp(12px, 2.2vw, 24px) clamp(14px, 2.6vw, 28px);
             background: var(--bg-card);
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
-            transition: all 0.3s ease;
         }
 
         .cost-bullet {
-            width: 12px;
-            height: 12px;
+            width: clamp(6px, 1.1vw, 12px);
+            height: clamp(6px, 1.1vw, 12px);
             border-radius: 4px;
             flex-shrink: 0;
         }
 
-        .cost-bullet.red {
-            background: var(--accent-red);
-        }
-
-        .cost-bullet.orange {
-            background: var(--accent-orange);
-        }
-
-        .cost-bullet.gold {
-            background: var(--accent-gold);
-        }
-
-        .cost-bullet.purple {
-            background: var(--accent-purple);
-        }
+        .cost-bullet.red { background: var(--accent-red); }
+        .cost-bullet.orange { background: var(--accent-orange); }
+        .cost-bullet.gold { background: var(--accent-gold); }
+        .cost-bullet.purple { background: var(--accent-purple); }
 
         .cost-text {
             font-family: var(--font-sans);
-            font-size: 26px;
+            font-size: clamp(13px, 2.4vw, 26px);
             font-weight: 500;
             color: var(--text-primary);
         }
 
-        /* =====================================================
-           EDGE DILUTION VISUAL
-           ===================================================== */
         .dilution-visual {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 24px;
+            gap: clamp(12px, 2.2vw, 24px);
             width: 100%;
             max-width: 700px;
         }
@@ -358,32 +359,32 @@
         .edge-bar-container {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: clamp(8px, 1.5vw, 16px);
             width: 100%;
         }
 
         .edge-bar-row {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: clamp(10px, 1.9vw, 20px);
         }
 
         .edge-label {
             font-family: var(--font-sans);
-            font-size: 18px;
+            font-size: clamp(9px, 1.7vw, 18px);
             font-weight: 600;
             color: var(--text-secondary);
-            width: 100px;
+            width: clamp(50px, 9.3vw, 100px);
             text-align: right;
         }
 
         .edge-bar {
             flex: 1;
-            height: 48px;
+            height: clamp(24px, 4.4vw, 48px);
             border-radius: 12px;
             display: flex;
             align-items: center;
-            padding-right: 16px;
+            padding-right: clamp(8px, 1.5vw, 16px);
             justify-content: flex-end;
         }
 
@@ -404,53 +405,47 @@
 
         .edge-bar-text {
             font-family: var(--font-sans);
-            font-size: 16px;
+            font-size: clamp(8px, 1.5vw, 16px);
             font-weight: 700;
             color: var(--bg-dark);
         }
 
-        /* =====================================================
-           WISDOM CALLOUT STYLES
-           ===================================================== */
         .wisdom-callout {
             display: flex;
             align-items: center;
-            gap: 20px;
-            padding: 28px 36px;
+            gap: clamp(10px, 1.9vw, 20px);
+            padding: clamp(14px, 2.6vw, 28px) clamp(18px, 3.3vw, 36px);
             background: var(--bg-card);
             border-radius: 16px;
             border-left: 4px solid var(--accent-red);
-            margin-top: 32px;
+            margin-top: clamp(16px, 3vw, 32px);
         }
 
         .wisdom-icon {
-            font-size: 36px;
+            font-size: clamp(18px, 3.3vw, 36px);
             flex-shrink: 0;
         }
 
         .wisdom-text {
             font-family: var(--font-serif);
-            font-size: 28px;
+            font-size: clamp(14px, 2.6vw, 28px);
             font-style: italic;
             color: var(--text-secondary);
             line-height: 1.4;
         }
 
-        /* =====================================================
-           CTA SLIDE STYLES
-           ===================================================== */
         .cta-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 40px;
+            gap: clamp(20px, 3.7vw, 40px);
         }
 
         .cta-truth-box {
             display: flex;
             flex-direction: column;
-            gap: 24px;
-            padding: 48px;
+            gap: clamp(12px, 2.2vw, 24px);
+            padding: clamp(24px, 4.4vw, 48px);
             background: var(--bg-card);
             border-radius: 24px;
             border: 1px solid var(--border-subtle);
@@ -461,47 +456,37 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 16px;
+            gap: clamp(8px, 1.5vw, 16px);
         }
 
         .truth-label {
             font-family: var(--font-sans);
-            font-size: 32px;
+            font-size: clamp(16px, 3vw, 32px);
             font-weight: 500;
             color: var(--text-secondary);
         }
 
         .truth-operator {
             font-family: var(--font-sans);
-            font-size: 36px;
+            font-size: clamp(18px, 3.3vw, 36px);
             font-weight: 700;
         }
 
-        .truth-operator.not-equal {
-            color: var(--accent-red);
-        }
-
-        .truth-operator.equal {
-            color: var(--accent-green);
-        }
+        .truth-operator.not-equal { color: var(--accent-red); }
+        .truth-operator.equal { color: var(--accent-green); }
 
         .truth-result {
             font-family: var(--font-sans);
-            font-size: 32px;
+            font-size: clamp(16px, 3vw, 32px);
             font-weight: 600;
         }
 
-        .truth-result.red {
-            color: var(--accent-red);
-        }
-
-        .truth-result.green {
-            color: var(--accent-green);
-        }
+        .truth-result.red { color: var(--accent-red); }
+        .truth-result.green { color: var(--accent-green); }
 
         .cta-text {
             font-family: var(--font-serif);
-            font-size: 48px;
+            font-size: clamp(24px, 4.4vw, 48px);
             font-weight: 600;
             color: var(--text-primary);
             text-align: center;
@@ -515,51 +500,42 @@
         .cta-button {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 20px 48px;
+            gap: clamp(6px, 1.1vw, 12px);
+            padding: clamp(10px, 1.9vw, 20px) clamp(24px, 4.4vw, 48px);
             background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue) 100%);
             border-radius: 100px;
             font-family: var(--font-sans);
-            font-size: 22px;
+            font-size: clamp(11px, 2vw, 22px);
             font-weight: 600;
             color: var(--text-primary);
             text-decoration: none;
             box-shadow: 0 4px 24px var(--accent-blue-glow);
-            transition: all 0.3s ease;
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px var(--accent-blue-glow);
-        }
-
-        /* =====================================================
-           BRAND FOOTER STYLES
-           ===================================================== */
         .brand-footer {
             position: relative;
             z-index: 1;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 24px;
+            padding-top: clamp(12px, 2.2vw, 24px);
             border-top: 1px solid var(--border-subtle);
         }
 
         .brand-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: clamp(6px, 1.1vw, 12px);
         }
 
         .brand-logo img {
-            height: 36px;
+            height: clamp(18px, 3.3vw, 36px);
             width: auto;
         }
 
         .brand-logo-text {
             font-family: var(--font-sans);
-            font-size: 20px;
+            font-size: clamp(10px, 1.9vw, 20px);
             font-weight: 600;
             color: var(--text-primary);
             letter-spacing: 0.5px;
@@ -567,398 +543,389 @@
 
         .slide-indicator {
             font-family: var(--font-sans);
-            font-size: 16px;
+            font-size: clamp(8px, 1.5vw, 16px);
             font-weight: 500;
             color: var(--text-muted);
         }
 
-        /* =====================================================
-           EXPORT MODE STYLES
-           ===================================================== */
+        /* Export mode */
         body.export-mode {
+            padding: 0;
             background: transparent;
         }
 
-        body.export-mode .carousel-container {
-            padding: 0;
-            gap: 0;
+        body.export-mode .controls,
+        body.export-mode .page-title {
+            display: none;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+            max-width: none;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.exporting {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
         }
 
         body.export-mode .slide {
+            width: 1080px;
+            height: 1080px;
+            max-width: none;
             border-radius: 0;
-        }
-
-        body.export-mode .slide:not(.exporting) {
-            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
-        <!-- =====================================================
-             SLIDE 1: TITLE - COST OF OVERTRADING
-             ===================================================== -->
-        <div class="slide" data-slide="1">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
+    <div class="controls">
+        <label>
+            Background:
+            <select id="bg-toggle">
+                <option value="dark">Dark</option>
+                <option value="transparent">Transparent</option>
+            </select>
+        </label>
+        <label>
+            Opacity:
+            <select id="opacity-control">
+                <option value="0.08" selected>8%</option>
+                <option value="0.15">15%</option>
+                <option value="0.25">25%</option>
+                <option value="0">0%</option>
+            </select>
+        </label>
+        <button id="export-btn">Export Mode</button>
+    </div>
 
-            <div class="slide-content">
-                <div class="slide-header">
-                    <div class="slide-number">Trading Psychology</div>
-                    <h1 class="slide-title slide-title-large">Cost of<br>Overtrading</h1>
-                    <p class="slide-subtitle">The Hidden Drain on Your Account</p>
+    <div class="page-title">
+        <h1>Cost of Overtrading</h1>
+        <p>6 slides · Trading Psychology</p>
+    </div>
+
+    <div class="carousel-grid">
+        <!-- Slide 1: Title - Cost of Overtrading -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
                 </div>
-
-                <div class="drain-visual">
-                    <div class="drain-container">
-                        <div class="drain-box">💰</div>
-                        <span class="drain-arrow">→</span>
-                        <div class="drain-result">
-                            <span class="drain-result-icon">📉</span>
-                            <span class="drain-result-text">Drained</span>
-                        </div>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <div class="slide-number">Trading Psychology</div>
+                        <h1 class="slide-title slide-title-large">Cost of<br>Overtrading</h1>
+                        <p class="slide-subtitle">The Hidden Drain on Your Account</p>
                     </div>
-                </div>
-            </div>
-
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
-                </div>
-                <span class="slide-indicator">1 / 6</span>
-            </div>
-        </div>
-
-        <!-- =====================================================
-             SLIDE 2: FINANCIAL COSTS
-             ===================================================== -->
-        <div class="slide" data-slide="2">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <div class="slide-content">
-                <div class="cost-section">
-                    <div class="section-header">
-                        <div class="section-icon red">💸</div>
-                        <h2 class="section-title">Financial Costs</h2>
-                    </div>
-
-                    <div class="cost-list">
-                        <div class="cost-item">
-                            <div class="cost-bullet red"></div>
-                            <span class="cost-text">Commissions pile up</span>
-                        </div>
-
-                        <div class="cost-item">
-                            <div class="cost-bullet red"></div>
-                            <span class="cost-text">Spread costs multiply</span>
-                        </div>
-
-                        <div class="cost-item">
-                            <div class="cost-bullet red"></div>
-                            <span class="cost-text">Small losses compound</span>
-                        </div>
-                    </div>
-
-                    <div class="wisdom-callout">
-                        <span class="wisdom-icon">💡</span>
-                        <span class="wisdom-text">Death by a thousand cuts — each trade has a cost</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
-                </div>
-                <span class="slide-indicator">2 / 6</span>
-            </div>
-        </div>
-
-        <!-- =====================================================
-             SLIDE 3: MENTAL COSTS
-             ===================================================== -->
-        <div class="slide" data-slide="3">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <div class="slide-content">
-                <div class="cost-section">
-                    <div class="section-header">
-                        <div class="section-icon orange">😩</div>
-                        <h2 class="section-title">Mental Costs</h2>
-                    </div>
-
-                    <div class="cost-list">
-                        <div class="cost-item">
-                            <div class="cost-bullet orange"></div>
-                            <span class="cost-text">Decision fatigue</span>
-                        </div>
-
-                        <div class="cost-item">
-                            <div class="cost-bullet orange"></div>
-                            <span class="cost-text">Emotional exhaustion</span>
-                        </div>
-
-                        <div class="cost-item">
-                            <div class="cost-bullet orange"></div>
-                            <span class="cost-text">Increased mistakes</span>
-                        </div>
-                    </div>
-
-                    <div class="wisdom-callout">
-                        <span class="wisdom-icon">🧠</span>
-                        <span class="wisdom-text">Your brain is a limited resource — don't waste it</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
-                </div>
-                <span class="slide-indicator">3 / 6</span>
-            </div>
-        </div>
-
-        <!-- =====================================================
-             SLIDE 4: OPPORTUNITY COSTS
-             ===================================================== -->
-        <div class="slide" data-slide="4">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <div class="slide-content">
-                <div class="cost-section">
-                    <div class="section-header">
-                        <div class="section-icon gold">📉</div>
-                        <h2 class="section-title">Opportunity Costs</h2>
-                    </div>
-
-                    <div class="cost-list">
-                        <div class="cost-item">
-                            <div class="cost-bullet gold"></div>
-                            <span class="cost-text">Capital tied up in bad trades</span>
-                        </div>
-
-                        <div class="cost-item">
-                            <div class="cost-bullet gold"></div>
-                            <span class="cost-text">Miss quality setups</span>
-                        </div>
-
-                        <div class="cost-item">
-                            <div class="cost-bullet gold"></div>
-                            <span class="cost-text">Can't size up when it matters</span>
-                        </div>
-                    </div>
-
-                    <div class="wisdom-callout">
-                        <span class="wisdom-icon">🎯</span>
-                        <span class="wisdom-text">Every bad trade takes capital from a better one</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
-                </div>
-                <span class="slide-indicator">4 / 6</span>
-            </div>
-        </div>
-
-        <!-- =====================================================
-             SLIDE 5: EDGE DILUTION
-             ===================================================== -->
-        <div class="slide" data-slide="5">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <div class="slide-content">
-                <div class="cost-section">
-                    <div class="section-header">
-                        <div class="section-icon purple">🎰</div>
-                        <h2 class="section-title">Edge Dilution</h2>
-                    </div>
-
-                    <div class="dilution-visual">
-                        <div class="edge-bar-container">
-                            <div class="edge-bar-row">
-                                <span class="edge-label">A Setups</span>
-                                <div class="edge-bar a-setup">
-                                    <span class="edge-bar-text">High Edge</span>
-                                </div>
-                            </div>
-                            <div class="edge-bar-row">
-                                <span class="edge-label">B Setups</span>
-                                <div class="edge-bar b-setup">
-                                    <span class="edge-bar-text">Medium</span>
-                                </div>
-                            </div>
-                            <div class="edge-bar-row">
-                                <span class="edge-label">C Setups</span>
-                                <div class="edge-bar c-setup">
-                                    <span class="edge-bar-text">Low</span>
-                                </div>
+                    <div class="drain-visual">
+                        <div class="drain-container">
+                            <div class="drain-box">💰</div>
+                            <span class="drain-arrow">→</span>
+                            <div class="drain-result">
+                                <span class="drain-result-icon">📉</span>
+                                <span class="drain-result-text">Drained</span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="wisdom-callout">
-                        <span class="wisdom-icon">⚠️</span>
-                        <span class="wisdom-text">Taking B and C setups weakens your overall expectancy</span>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
                     </div>
+                    <span class="slide-indicator">1 / 6</span>
                 </div>
-            </div>
-
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
-                </div>
-                <span class="slide-indicator">5 / 6</span>
             </div>
         </div>
 
-        <!-- =====================================================
-             SLIDE 6: CTA - THE TRUTH
-             ===================================================== -->
-        <div class="slide" data-slide="6">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <div class="slide-content">
-                <div class="cta-container">
-                    <div class="cta-truth-box">
-                        <div class="truth-row">
-                            <span class="truth-label">More trades</span>
-                            <span class="truth-operator not-equal">≠</span>
-                            <span class="truth-result red">More profit</span>
+        <!-- Slide 2: Financial Costs -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Financial Costs</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <div class="cost-section">
+                        <div class="section-header">
+                            <div class="section-icon red">💸</div>
+                            <h2 class="section-title">Financial Costs</h2>
                         </div>
-                        <div class="truth-row">
-                            <span class="truth-label">Better trades</span>
-                            <span class="truth-operator equal">=</span>
-                            <span class="truth-result green">More profit</span>
+                        <div class="cost-list">
+                            <div class="cost-item">
+                                <div class="cost-bullet red"></div>
+                                <span class="cost-text">Commissions pile up</span>
+                            </div>
+                            <div class="cost-item">
+                                <div class="cost-bullet red"></div>
+                                <span class="cost-text">Spread costs multiply</span>
+                            </div>
+                            <div class="cost-item">
+                                <div class="cost-bullet red"></div>
+                                <span class="cost-text">Small losses compound</span>
+                            </div>
+                        </div>
+                        <div class="wisdom-callout">
+                            <span class="wisdom-icon">💡</span>
+                            <span class="wisdom-text">Death by a thousand cuts — each trade has a cost</span>
                         </div>
                     </div>
-
-                    <h2 class="cta-text">Quality Over<br><span class="cta-highlight">Quantity</span></h2>
-
-                    <a href="#" class="cta-button">
-                        <span>Full Article in Bio</span>
-                        <span>🔗</span>
-                    </a>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
+                    </div>
+                    <span class="slide-indicator">2 / 6</span>
                 </div>
             </div>
+        </div>
 
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
+        <!-- Slide 3: Mental Costs -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Mental Costs</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
                 </div>
-                <span class="slide-indicator">6 / 6</span>
+                <div class="slide-content">
+                    <div class="cost-section">
+                        <div class="section-header">
+                            <div class="section-icon orange">😩</div>
+                            <h2 class="section-title">Mental Costs</h2>
+                        </div>
+                        <div class="cost-list">
+                            <div class="cost-item">
+                                <div class="cost-bullet orange"></div>
+                                <span class="cost-text">Decision fatigue</span>
+                            </div>
+                            <div class="cost-item">
+                                <div class="cost-bullet orange"></div>
+                                <span class="cost-text">Emotional exhaustion</span>
+                            </div>
+                            <div class="cost-item">
+                                <div class="cost-bullet orange"></div>
+                                <span class="cost-text">Increased mistakes</span>
+                            </div>
+                        </div>
+                        <div class="wisdom-callout" style="border-left-color: var(--accent-orange);">
+                            <span class="wisdom-icon">🧠</span>
+                            <span class="wisdom-text">Your brain is a limited resource — don't waste it</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
+                    </div>
+                    <span class="slide-indicator">3 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Opportunity Costs -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Opportunity Costs</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <div class="cost-section">
+                        <div class="section-header">
+                            <div class="section-icon gold">📉</div>
+                            <h2 class="section-title">Opportunity Costs</h2>
+                        </div>
+                        <div class="cost-list">
+                            <div class="cost-item">
+                                <div class="cost-bullet gold"></div>
+                                <span class="cost-text">Capital tied up in bad trades</span>
+                            </div>
+                            <div class="cost-item">
+                                <div class="cost-bullet gold"></div>
+                                <span class="cost-text">Miss quality setups</span>
+                            </div>
+                            <div class="cost-item">
+                                <div class="cost-bullet gold"></div>
+                                <span class="cost-text">Can't size up when it matters</span>
+                            </div>
+                        </div>
+                        <div class="wisdom-callout" style="border-left-color: var(--accent-gold);">
+                            <span class="wisdom-icon">🎯</span>
+                            <span class="wisdom-text">Every bad trade takes capital from a better one</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
+                    </div>
+                    <span class="slide-indicator">4 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Edge Dilution -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Edge Dilution</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <div class="cost-section">
+                        <div class="section-header">
+                            <div class="section-icon purple">🎰</div>
+                            <h2 class="section-title">Edge Dilution</h2>
+                        </div>
+                        <div class="dilution-visual">
+                            <div class="edge-bar-container">
+                                <div class="edge-bar-row">
+                                    <span class="edge-label">A Setups</span>
+                                    <div class="edge-bar a-setup">
+                                        <span class="edge-bar-text">High Edge</span>
+                                    </div>
+                                </div>
+                                <div class="edge-bar-row">
+                                    <span class="edge-label">B Setups</span>
+                                    <div class="edge-bar b-setup">
+                                        <span class="edge-bar-text">Medium</span>
+                                    </div>
+                                </div>
+                                <div class="edge-bar-row">
+                                    <span class="edge-label">C Setups</span>
+                                    <div class="edge-bar c-setup">
+                                        <span class="edge-bar-text">Low</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wisdom-callout" style="border-left-color: var(--accent-purple);">
+                            <span class="wisdom-icon">⚠️</span>
+                            <span class="wisdom-text">Taking B and C setups weakens your overall expectancy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
+                    </div>
+                    <span class="slide-indicator">5 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: CTA - The Truth -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — CTA</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <div class="cta-container">
+                        <div class="cta-truth-box">
+                            <div class="truth-row">
+                                <span class="truth-label">More trades</span>
+                                <span class="truth-operator not-equal">≠</span>
+                                <span class="truth-result red">More profit</span>
+                            </div>
+                            <div class="truth-row">
+                                <span class="truth-label">Better trades</span>
+                                <span class="truth-operator equal">=</span>
+                                <span class="truth-result green">More profit</span>
+                            </div>
+                        </div>
+                        <h2 class="cta-text">Quality Over<br><span class="cta-highlight">Quantity</span></h2>
+                        <a href="#" class="cta-button">
+                            <span>Full Article in Bio</span>
+                            <span>🔗</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
+                    </div>
+                    <span class="slide-indicator">6 / 6</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- =====================================================
-         EXPORT MODE JAVASCRIPT
-         ===================================================== -->
     <script>
-        /**
-         * Export Mode Controller
-         * Press 'E' to enter export mode
-         * Use Arrow keys to navigate slides
-         * Press 'Escape' to exit export mode
-         */
-        (function() {
-            let exportMode = false;
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.slide');
-            const totalSlides = slides.length;
+        const bgToggle = document.getElementById('bg-toggle');
+        const opacityControl = document.getElementById('opacity-control');
+        const exportBtn = document.getElementById('export-btn');
+        const slideWrappers = document.querySelectorAll('.slide-wrapper');
+        const slides = document.querySelectorAll('.slide');
+        let exportMode = false;
+        let currentSlide = 0;
 
-            function enterExportMode() {
-                exportMode = true;
-                document.body.classList.add('export-mode');
+        bgToggle.addEventListener('change', (e) => {
+            document.body.style.background = e.target.value === 'transparent' ? 'transparent' : '#0a0a0f';
+            slides.forEach(slide => {
+                slide.style.background = e.target.value === 'transparent' ? 'transparent' : '#0a0a0f';
+            });
+        });
+
+        opacityControl.addEventListener('change', (e) => {
+            document.documentElement.style.setProperty('--video-opacity', e.target.value);
+        });
+
+        exportBtn.addEventListener('click', () => {
+            exportMode = !exportMode;
+            document.body.classList.toggle('export-mode', exportMode);
+            exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+            if (exportMode) {
                 currentSlide = 0;
                 updateExportView();
-                console.log('Export mode enabled. Use Arrow keys to navigate, Escape to exit.');
             }
+        });
 
-            function exitExportMode() {
+        function updateExportView() {
+            slideWrappers.forEach((wrapper, i) => {
+                wrapper.classList.toggle('exporting', i === currentSlide);
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!exportMode) return;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                currentSlide = Math.min(currentSlide + 1, slideWrappers.length - 1);
+                updateExportView();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                currentSlide = Math.max(currentSlide - 1, 0);
+                updateExportView();
+            } else if (e.key === 'Escape') {
                 exportMode = false;
                 document.body.classList.remove('export-mode');
-                slides.forEach(slide => slide.classList.remove('exporting'));
-                console.log('Export mode disabled.');
+                exportBtn.textContent = 'Export Mode';
             }
-
-            function updateExportView() {
-                slides.forEach((slide, index) => {
-                    if (index === currentSlide) {
-                        slide.classList.add('exporting');
-                    } else {
-                        slide.classList.remove('exporting');
-                    }
-                });
-                console.log(`Showing slide ${currentSlide + 1} of ${totalSlides}`);
-            }
-
-            function nextSlide() {
-                if (currentSlide < totalSlides - 1) {
-                    currentSlide++;
-                    updateExportView();
-                }
-            }
-
-            function prevSlide() {
-                if (currentSlide > 0) {
-                    currentSlide--;
-                    updateExportView();
-                }
-            }
-
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'e' || e.key === 'E') {
-                    if (!exportMode) {
-                        enterExportMode();
-                    }
-                } else if (e.key === 'Escape') {
-                    if (exportMode) {
-                        exitExportMode();
-                    }
-                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                    if (exportMode) {
-                        nextSlide();
-                    }
-                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                    if (exportMode) {
-                        prevSlide();
-                    }
-                }
-            });
-        })();
+        });
     </script>
 </body>
 </html>
