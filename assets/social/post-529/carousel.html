@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mean Reversion Basics - Signal Pilot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-alt: #1a1a24;
+            --accent-blue: #4a90d9;
+            --accent-blue-dim: rgba(74, 144, 217, 0.3);
+            --accent-gold: #c9a962;
+            --accent-gold-dim: rgba(201, 169, 98, 0.3);
+            --accent-green: #4ecdc4;
+            --accent-red: #e74c3c;
+            --accent-purple: #9b59b6;
+            --accent-orange: #f39c12;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-dim: #6a6a6a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 40px 20px;
+            max-width: 100%;
+            scroll-snap-type: x mandatory;
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .carousel-container::-webkit-scrollbar-track {
+            background: var(--bg-card);
+            border-radius: 4px;
+        }
+
+        .carousel-container::-webkit-scrollbar-thumb {
+            background: var(--accent-blue-dim);
+            border-radius: 4px;
+        }
+
+        .carousel-container::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-blue);
+        }
+
+        .slide {
+            flex-shrink: 0;
+            width: 1080px;
+            height: 1080px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            scroll-snap-align: center;
+            border: 1px solid rgba(74, 144, 217, 0.2);
+        }
+
+        .slide-inner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 1;
+        }
+
+        .top-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-gold));
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--text-primary);
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+        }
+
+        .slide-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .slide-subheader {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--accent-gold);
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .concept-card {
+            padding: 50px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-blue);
+        }
+
+        .concept-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 35px;
+        }
+
+        .concept-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .concept-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .concept-arrow {
+            color: var(--accent-blue);
+            font-size: 22px;
+        }
+
+        .concept-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            color: var(--text-primary);
+        }
+
+        .extreme-card {
+            padding: 45px;
+            background: var(--bg-card);
+            border-radius: 20px;
+        }
+
+        .extreme-card.overbought {
+            border-left: 5px solid var(--accent-green);
+        }
+
+        .extreme-card.oversold {
+            border-left: 5px solid var(--accent-red);
+        }
+
+        .extreme-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .extreme-header.green {
+            color: var(--accent-green);
+        }
+
+        .extreme-header.red {
+            color: var(--accent-red);
+        }
+
+        .extreme-icon {
+            font-size: 32px;
+        }
+
+        .extreme-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .extreme-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .extreme-bullet {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .extreme-bullet.green {
+            background: var(--accent-green);
+        }
+
+        .extreme-bullet.red {
+            background: var(--accent-red);
+        }
+
+        .extreme-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            color: var(--text-primary);
+        }
+
+        .tools-card {
+            padding: 50px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-gold);
+        }
+
+        .tools-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 35px;
+        }
+
+        .tools-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 25px;
+            background: var(--bg-card-alt);
+            border-radius: 12px;
+        }
+
+        .tool-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(201, 169, 98, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            font-size: 20px;
+        }
+
+        .tool-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            color: var(--text-primary);
+        }
+
+        .caveat-card {
+            padding: 50px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-orange);
+        }
+
+        .caveat-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .caveat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .caveat-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .caveat-icon {
+            color: var(--accent-orange);
+            font-size: 22px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .caveat-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .chart-mockup {
+            flex: 1;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid rgba(74, 144, 217, 0.2);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .chart-visual {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        .mean-line {
+            width: 80%;
+            height: 3px;
+            background: var(--accent-gold);
+            position: relative;
+        }
+
+        .mean-label {
+            position: absolute;
+            right: -60px;
+            top: -10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--accent-gold);
+        }
+
+        .oscillation {
+            width: 80%;
+            height: 150px;
+            position: relative;
+        }
+
+        .oscillation-line {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--accent-blue);
+            border-radius: 50%;
+            clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+        }
+
+        .reversion-arrow {
+            position: absolute;
+            font-size: 24px;
+            color: var(--accent-green);
+        }
+
+        .chart-note {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cta-container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .cta-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 46px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 50px;
+            line-height: 1.4;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 24px 60px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold));
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(74, 144, 217, 0.4);
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 1200px) {
+            .slide {
+                width: 540px;
+                height: 540px;
+            }
+
+            .slide-inner {
+                padding: 30px;
+            }
+
+            .slide-header {
+                font-size: 32px;
+            }
+
+            .slide-subheader {
+                font-size: 16px;
+            }
+
+            .concept-header {
+                font-size: 24px;
+            }
+
+            .concept-text {
+                font-size: 16px;
+            }
+
+            .extreme-header {
+                font-size: 24px;
+            }
+
+            .extreme-text {
+                font-size: 16px;
+            }
+
+            .cta-text {
+                font-size: 26px;
+            }
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            padding: 0;
+            gap: 0;
+            overflow: visible;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+            border: none;
+        }
+
+        body.export-mode .slide:not(.active) {
+            display: none;
+        }
+
+        body.export-mode .slide.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Slide 1: Hook -->
+        <div class="slide" data-slide="1">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <h1 class="slide-header">Mean Reversion Basics</h1>
+                    <p class="slide-subheader">What goes far, often comes back</p>
+                </div>
+                <div class="slide-number">1 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Concept -->
+        <div class="slide" data-slide="2">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="concept-card">
+                        <h3 class="concept-header">The Concept</h3>
+                        <div class="concept-list">
+                            <div class="concept-item">
+                                <span class="concept-arrow">&#8594;</span>
+                                <span class="concept-text">Price tends to revert to average</span>
+                            </div>
+                            <div class="concept-item">
+                                <span class="concept-arrow">&#8594;</span>
+                                <span class="concept-text">Extremes don't last forever</span>
+                            </div>
+                            <div class="concept-item">
+                                <span class="concept-arrow">&#8594;</span>
+                                <span class="concept-text">Rubber band effect</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">2 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Overbought Extremes -->
+        <div class="slide" data-slide="3">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="extreme-card overbought">
+                        <h3 class="extreme-header green">
+                            <span class="extreme-icon">&#128200;</span>
+                            Overbought Extremes
+                        </h3>
+                        <div class="extreme-list">
+                            <div class="extreme-item">
+                                <span class="extreme-bullet green"></span>
+                                <span class="extreme-text">Price stretched above mean</span>
+                            </div>
+                            <div class="extreme-item">
+                                <span class="extreme-bullet green"></span>
+                                <span class="extreme-text">Momentum exhausted</span>
+                            </div>
+                            <div class="extreme-item">
+                                <span class="extreme-bullet green"></span>
+                                <span class="extreme-text">Tends to pull back</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">3 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Oversold Extremes -->
+        <div class="slide" data-slide="4">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="extreme-card oversold">
+                        <h3 class="extreme-header red">
+                            <span class="extreme-icon">&#128201;</span>
+                            Oversold Extremes
+                        </h3>
+                        <div class="extreme-list">
+                            <div class="extreme-item">
+                                <span class="extreme-bullet red"></span>
+                                <span class="extreme-text">Price stretched below mean</span>
+                            </div>
+                            <div class="extreme-item">
+                                <span class="extreme-bullet red"></span>
+                                <span class="extreme-text">Selling exhausted</span>
+                            </div>
+                            <div class="extreme-item">
+                                <span class="extreme-bullet red"></span>
+                                <span class="extreme-text">Tends to bounce</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">4 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Tools -->
+        <div class="slide" data-slide="5">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="tools-card">
+                        <h3 class="tools-header">Tools to Identify</h3>
+                        <div class="tools-list">
+                            <div class="tool-item">
+                                <span class="tool-icon">&#128202;</span>
+                                <span class="tool-text">Bollinger Bands</span>
+                            </div>
+                            <div class="tool-item">
+                                <span class="tool-icon">&#128202;</span>
+                                <span class="tool-text">RSI extremes</span>
+                            </div>
+                            <div class="tool-item">
+                                <span class="tool-icon">&#128202;</span>
+                                <span class="tool-text">Harmonic Oscillator</span>
+                            </div>
+                            <div class="tool-item">
+                                <span class="tool-icon">&#128202;</span>
+                                <span class="tool-text">Standard deviation measures</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">5 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Caveats -->
+        <div class="slide" data-slide="6">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="caveat-card">
+                        <h3 class="caveat-header">
+                            <span>&#9888;</span>
+                            Important Caveats
+                        </h3>
+                        <div class="caveat-list">
+                            <div class="caveat-item">
+                                <span class="caveat-icon">&#9888;</span>
+                                <span class="caveat-text">Trends can stay extreme longer than expected</span>
+                            </div>
+                            <div class="caveat-item">
+                                <span class="caveat-icon">&#9888;</span>
+                                <span class="caveat-text">Mean reversion fails in strong trends</span>
+                            </div>
+                            <div class="caveat-item">
+                                <span class="caveat-icon">&#9888;</span>
+                                <span class="caveat-text">Context determines validity</span>
+                            </div>
+                            <div class="caveat-item">
+                                <span class="caveat-icon">&#9888;</span>
+                                <span class="caveat-text">Not a standalone system</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">6 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Chart Example -->
+        <div class="slide" data-slide="7">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <h2 class="section-header">Chart Example</h2>
+                    <div class="chart-mockup">
+                        <span class="chart-title">Price Oscillation Around Mean</span>
+                        <div class="chart-visual">
+                            <div class="mean-line">
+                                <span class="mean-label">MEAN</span>
+                            </div>
+                        </div>
+                        <span class="chart-note">Price oscillates around average, reverting from extremes</span>
+                    </div>
+                </div>
+                <div class="slide-number">7 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide" data-slide="8">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="cta-container">
+                        <p class="cta-text">Use in the right conditions.<br>Full lesson in curriculum.</p>
+                        <a href="#" class="cta-button">Link in Bio</a>
+                    </div>
+                </div>
+                <div class="slide-number">8 / 8</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Export mode functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function enterExportMode() {
+            document.body.classList.add('export-mode');
+            showSlide(0);
+        }
+
+        function exitExportMode() {
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                slides[currentSlide].classList.add('active');
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>
