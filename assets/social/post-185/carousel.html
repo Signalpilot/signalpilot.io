@@ -1,718 +1,651 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 185 — Pentarch WRN Signal Deep Dive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* =====================================================
-           CSS VARIABLES - SignalPilot Brand System
-           ===================================================== */
-        :root {
-            --bg-dark: #0a0a0f;
-            --bg-card: rgba(255, 255, 255, 0.02);
-            --bg-card-hover: rgba(255, 255, 255, 0.04);
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --border-medium: rgba(255, 255, 255, 0.1);
-            --text-primary: #e8e6e3;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-tertiary: rgba(255, 255, 255, 0.4);
-            --accent-blue: #4a90d9;
-            --accent-blue-glow: rgba(74, 144, 217, 0.3);
-            --accent-gold: #c9a962;
-            --accent-gold-glow: rgba(201, 169, 98, 0.3);
-            --accent-yellow: #d9c94a;
-            --accent-yellow-glow: rgba(217, 201, 74, 0.3);
-            --accent-green: #4ad97a;
-            --accent-green-glow: rgba(74, 217, 122, 0.3);
-            --accent-red: #d94a4a;
-            --accent-red-glow: rgba(217, 74, 74, 0.3);
-            --accent-teal: #4ad9d9;
-            --accent-teal-glow: rgba(74, 217, 217, 0.3);
-            --accent-purple: #9b4ad9;
-            --accent-purple-glow: rgba(155, 74, 217, 0.3);
-            --font-serif: 'Cormorant Garamond', Georgia, serif;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --slide-width: 1080px;
-            --slide-height: 1080px;
-            --slide-padding: 72px;
-            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 185 — Pentarch WRN Signal Deep Dive | Carousel Preview</title>
 
-        /* =====================================================
-           RESET & BASE STYLES
-           ===================================================== */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-        html {
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-green: #4ad97a;
+      --accent-red: #d94a4a;
+      --accent-purple: #9b4ad9;
+      --accent-yellow: #d9c94a;
+      --text-primary: #e8e6e3;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: #6b6965;
+    }
 
-        body {
-            background-color: var(--bg-dark);
-            font-family: var(--font-sans);
-            color: var(--text-primary);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding: 40px 20px;
-            line-height: 1.5;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* =====================================================
-           CAROUSEL CONTAINER & LAYOUT
-           ===================================================== */
-        .carousel-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            max-width: 1800px;
-            margin: 0 auto;
-        }
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
 
-        .slide-wrapper {
-            position: relative;
-            width: var(--slide-width);
-            height: var(--slide-height);
-            transform: scale(0.45);
-            transform-origin: top left;
-            margin-bottom: -594px;
-            margin-right: -594px;
-            transition: var(--transition-smooth);
-        }
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
 
-        .slide-wrapper:hover {
-            z-index: 10;
-        }
+    .controls label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
 
-        /* =====================================================
-           SLIDE BACKGROUND VIDEO
-           ===================================================== */
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-            z-index: 0;
-            pointer-events: none;
-        }
+    .controls select,
+    .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
 
-        /* =====================================================
-           SLIDE BASE STYLES
-           ===================================================== */
-        .slide {
-            position: relative;
-            width: var(--slide-width);
-            height: var(--slide-height);
-            background: var(--bg-dark);
-            overflow: hidden;
-            z-index: 1;
-        }
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
 
-        .slide-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: var(--slide-padding);
-        }
+    .page-title h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
 
-        /* =====================================================
-           SLIDE NUMBER INDICATOR
-           ===================================================== */
-        .slide-number {
-            font-family: var(--font-sans);
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            margin-bottom: 24px;
-        }
+    .page-title p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
 
-        /* =====================================================
-           TYPOGRAPHY - HEADLINES
-           ===================================================== */
-        .headline {
-            font-family: var(--font-serif);
-            font-size: 82px;
-            font-weight: 600;
-            line-height: 1.0;
-            color: var(--text-primary);
-            margin-bottom: 40px;
-            letter-spacing: -0.02em;
-        }
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
 
-        .headline-medium {
-            font-size: 68px;
-        }
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        .headline-small {
-            font-size: 54px;
-        }
+    .slide-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+    }
 
-        /* =====================================================
-           ACCENT COLOR CLASSES
-           ===================================================== */
-        .accent-text {
-            color: var(--accent-yellow);
-        }
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
 
-        .accent-gold {
-            color: var(--accent-gold);
-        }
+    .slide-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
 
-        .accent-green {
-            color: var(--accent-green);
-        }
+    .slide-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+    }
 
-        .accent-blue {
-            color: var(--accent-blue);
-        }
+    .slide.bg-black .slide-bg video {
+      opacity: 0;
+    }
 
-        .accent-teal {
-            color: var(--accent-teal);
-        }
+    .slide-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      padding: 8%;
+    }
 
-        .accent-purple {
-            color: var(--accent-purple);
-        }
+    .slide-number {
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      margin-bottom: auto;
+    }
 
-        .accent-red {
-            color: var(--accent-red);
-        }
+    .brand-mark {
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-top: auto;
+      text-align: center;
+    }
 
-        /* =====================================================
-           COVER SLIDE STYLES
-           ===================================================== */
-        .cover-slide .slide-content {
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+    .center-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
 
-        .cover-badge {
-            display: inline-block;
-            font-family: var(--font-sans);
-            font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 4px;
-            color: var(--accent-yellow);
-            text-transform: uppercase;
-            padding: 16px 32px;
-            border: 1px solid var(--accent-yellow-glow);
-            border-radius: 6px;
-            margin-bottom: 48px;
-            background: rgba(217, 201, 74, 0.05);
-        }
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
 
-        .cover-title {
-            font-family: var(--font-serif);
-            font-size: 82px;
-            font-weight: 600;
-            line-height: 1.0;
-            color: var(--text-primary);
-            margin-bottom: 32px;
-            letter-spacing: -0.02em;
-        }
+    .slide-title .highlight {
+      color: var(--accent-yellow);
+    }
 
-        .cover-subtitle {
-            font-family: var(--font-sans);
-            font-size: 28px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            max-width: 700px;
-            line-height: 1.5;
-        }
+    .subtitle {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
 
-        .cover-icon {
-            font-size: 100px;
-            margin-bottom: 24px;
-        }
+    .cover-badge {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--accent-yellow);
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(217, 201, 74, 0.3);
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      background: rgba(217, 201, 74, 0.05);
+    }
 
-        /* =====================================================
-           SIGNAL CARD STYLES
-           ===================================================== */
-        .signal-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    .cover-icon {
+      font-size: 3rem;
+      margin-bottom: 0.75rem;
+    }
 
-        .signal-card {
-            padding: 48px;
-            background: rgba(217, 201, 74, 0.08);
-            border: 1px solid rgba(217, 201, 74, 0.25);
-            border-radius: 20px;
-            margin-bottom: 24px;
-        }
+    .signal-card {
+      background: rgba(217, 201, 74, 0.08);
+      border: 1px solid rgba(217, 201, 74, 0.25);
+      border-radius: 12px;
+      padding: 1.5rem;
+      width: 100%;
+    }
 
-        .signal-card:last-child {
-            margin-bottom: 0;
-        }
+    .signal-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
 
-        .signal-header {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 24px;
-        }
+    .signal-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      background: rgba(217, 201, 74, 0.2);
+      border: 2px solid var(--accent-yellow);
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent-yellow);
+    }
 
-        .signal-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 80px;
-            height: 80px;
-            background: rgba(217, 201, 74, 0.2);
-            border: 2px solid var(--accent-yellow);
-            border-radius: 50%;
-            font-family: var(--font-sans);
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--accent-yellow);
-        }
+    .signal-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
 
-        .signal-title {
-            font-family: var(--font-sans);
-            font-size: 32px;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
+    .signal-subtitle {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-top: 0.15rem;
+    }
 
-        .signal-subtitle {
-            font-family: var(--font-sans);
-            font-size: 20px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
+    .signal-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
 
-        .signal-desc {
-            font-family: var(--font-sans);
-            font-size: 24px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
+    .info-list {
+      list-style: none;
+      text-align: left;
+      width: 100%;
+    }
 
-        /* =====================================================
-           LIST STYLES
-           ===================================================== */
-        .info-list {
-            list-style: none;
-        }
+    .info-list li {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      padding: 0.75rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
 
-        .info-list li {
-            font-family: var(--font-sans);
-            font-size: 26px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            padding: 16px 0;
-            padding-left: 32px;
-            position: relative;
-            border-bottom: 1px solid var(--border-subtle);
-        }
+    .info-list li:last-child {
+      border-bottom: none;
+    }
 
-        .info-list li:last-child {
-            border-bottom: none;
-        }
+    .info-list li::before {
+      content: "◾";
+      position: absolute;
+      left: 0;
+      color: var(--accent-yellow);
+    }
 
-        .info-list li::before {
-            content: "◾";
-            position: absolute;
-            left: 0;
-            color: var(--accent-yellow);
-        }
+    .info-list.red li::before {
+      content: "✕";
+      color: var(--accent-red);
+    }
 
-        .info-list-red li::before {
-            content: "✕";
-            color: var(--accent-red);
-        }
+    .info-list.green li::before {
+      content: "✓";
+      color: var(--accent-green);
+    }
 
-        .info-list-green li::before {
-            content: "✓";
-            color: var(--accent-green);
-        }
+    .confluence-card {
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      width: 100%;
+    }
 
-        /* =====================================================
-           CONFLUENCE CARD STYLES
-           ===================================================== */
-        .confluence-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    .confluence-card:last-child {
+      margin-bottom: 0;
+    }
 
-        .confluence-card {
-            padding: 32px 40px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            margin-bottom: 20px;
-            transition: var(--transition-smooth);
-        }
+    .confluence-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
 
-        .confluence-card:last-child {
-            margin-bottom: 0;
-        }
+    .confluence-icon {
+      font-size: 1.2rem;
+    }
 
-        .confluence-card:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--border-medium);
-        }
+    .confluence-title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
 
-        .confluence-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 12px;
-        }
+    .confluence-result {
+      font-size: 0.7rem;
+      color: var(--accent-yellow);
+      padding-left: 1.7rem;
+    }
 
-        .confluence-icon {
-            font-size: 32px;
-        }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
 
-        .confluence-title {
-            font-family: var(--font-sans);
-            font-size: 22px;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
+    .cta-title .emphasis {
+      color: var(--accent-yellow);
+    }
 
-        .confluence-result {
-            font-family: var(--font-sans);
-            font-size: 18px;
-            font-weight: 300;
-            color: var(--accent-yellow);
-            padding-left: 48px;
-        }
+    .cta-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
 
-        /* =====================================================
-           CTA SLIDE STYLES
-           ===================================================== */
-        .cta-slide .slide-content {
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+    .cta-button {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg-dark);
+      background: linear-gradient(135deg, var(--accent-yellow), #c9b94a);
+      padding: 0.75rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+    }
 
-        .cta-headline {
-            font-family: var(--font-serif);
-            font-size: 76px;
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--text-primary);
-            margin-bottom: 32px;
-            letter-spacing: -0.02em;
-        }
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
 
-        .cta-subtext {
-            font-family: var(--font-sans);
-            font-size: 26px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            margin-bottom: 48px;
-            max-width: 600px;
-            line-height: 1.6;
-        }
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
 
-        .cta-button {
-            display: inline-block;
-            font-family: var(--font-sans);
-            font-size: 20px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--bg-dark);
-            background: linear-gradient(135deg, var(--accent-yellow), #c9b94a);
-            padding: 24px 64px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: var(--transition-smooth);
-        }
+    body.export-mode .carousel-grid {
+      display: block;
+      padding: 0;
+    }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px var(--accent-yellow-glow);
-        }
+    body.export-mode .slide-wrapper {
+      display: none;
+    }
 
-        /* =====================================================
-           BRAND TAG
-           ===================================================== */
-        .brand-tag {
-            position: absolute;
-            bottom: 56px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: var(--font-sans);
-            font-size: 18px;
-            font-weight: 500;
-            letter-spacing: 6px;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-        }
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+    }
 
-        /* =====================================================
-           EXPORT MODE STYLES
-           ===================================================== */
-        body.export-mode {
-            padding: 0;
-            background: transparent;
-        }
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1080px;
+      max-width: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
 
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
+    @media (max-width: 900px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+      }
 
-        body.export-mode .slide-wrapper {
-            transform: none;
-            margin: 0;
-            display: none;
-        }
-
-        body.export-mode .slide-wrapper.active {
-            display: block;
-        }
-
-        /* =====================================================
-           UTILITY CLASSES
-           ===================================================== */
-        .mb-16 {
-            margin-bottom: 16px;
-        }
-
-        .mb-24 {
-            margin-bottom: 24px;
-        }
-
-        .mb-32 {
-            margin-bottom: 32px;
-        }
-
-        .mb-48 {
-            margin-bottom: 48px;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-    </style>
+      .controls {
+        position: static;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="carousel-container">
-        <!-- =====================================================
-             SLIDE 1: COVER
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide cover-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="cover-badge">The Sovereign</div>
-                    <div class="cover-icon">👑</div>
-                    <h1 class="cover-title">Pentarch<br><span class="accent-text">WRN Signal</span></h1>
-                    <p class="cover-subtitle">Early warning in uptrends</p>
-                    <div class="brand-tag">SignalPilot</div>
-                </div>
-            </div>
-        </div>
+  <div class="controls">
+    <label>Background:
+      <select id="bg-toggle">
+        <option value="starfield">Starfield</option>
+        <option value="black">Pure Black</option>
+      </select>
+    </label>
+    <label>Opacity:
+      <select id="opacity-control">
+        <option value="0.03">3%</option>
+        <option value="0.05">5%</option>
+        <option value="0.08" selected>8%</option>
+        <option value="0.12">12%</option>
+        <option value="0.15">15%</option>
+      </select>
+    </label>
+    <button id="export-btn">Export Mode</button>
+  </div>
 
-        <!-- =====================================================
-             SLIDE 2: WHAT WRN MEANS
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 02</div>
-                    <h2 class="headline headline-medium">What Is<br><span class="accent-text">WRN?</span></h2>
-                    <div class="signal-section">
-                        <div class="signal-card">
-                            <div class="signal-header">
-                                <div class="signal-badge">WRN</div>
-                                <div>
-                                    <h3 class="signal-title">Warning Signal</h3>
-                                    <p class="signal-subtitle">Yellow dot, above candle</p>
-                                </div>
-                            </div>
-                            <p class="signal-desc">Early weakness detected in uptrend. The cycle is showing potential signs of strain. Momentum may be shifting.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="page-title">
+    <h1>Post 185 — Pentarch WRN Signal Deep Dive</h1>
+    <p>Instagram Carousel • 6 Slides • 1080×1080px</p>
+  </div>
 
-        <!-- =====================================================
-             SLIDE 3: WHEN IT FIRES
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 03</div>
-                    <h2 class="headline headline-medium">When It<br><span class="accent-text">Fires</span></h2>
-                    <div class="signal-section">
-                        <ul class="info-list">
-                            <li>Early weakness detected in uptrend</li>
-                            <li>Momentum potentially shifting</li>
-                            <li>Cycle showing signs of strain</li>
-                            <li>Price at late-cycle stage</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="carousel-grid">
 
-        <!-- =====================================================
-             SLIDE 4: WHAT IT'S NOT
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 04</div>
-                    <h2 class="headline headline-medium">What It's<br><span class="accent-red">Not</span></h2>
-                    <div class="signal-section">
-                        <ul class="info-list info-list-red">
-                            <li>Not an instant sell signal</li>
-                            <li>Not a guarantee of reversal</li>
-                            <li>Not a standalone trade trigger</li>
-                            <li>Not a reason to panic</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Cover</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
         </div>
-
-        <!-- =====================================================
-             SLIDE 5: HOW TO USE - CONFLUENCE
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 05</div>
-                    <h2 class="headline headline-medium">How To<br><span class="accent-text">Use It</span></h2>
-                    <div class="confluence-section">
-                        <div class="confluence-card">
-                            <div class="confluence-header">
-                                <span class="confluence-icon">🎯</span>
-                                <span class="confluence-title">WRN + Structure Resistance</span>
-                            </div>
-                            <p class="confluence-result">= Higher conviction warning</p>
-                        </div>
-                        <div class="confluence-card">
-                            <div class="confluence-header">
-                                <span class="confluence-icon">📊</span>
-                                <span class="confluence-title">WRN + Volume Divergence</span>
-                            </div>
-                            <p class="confluence-result">= Watch closely for confirmation</p>
-                        </div>
-                        <div class="confluence-card">
-                            <div class="confluence-header">
-                                <span class="confluence-icon">💪</span>
-                                <span class="confluence-title">WRN in Strong Uptrend</span>
-                            </div>
-                            <p class="confluence-result">= Just awareness, no action</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="slide-content">
+          <span class="slide-number">01 / 06</span>
+          <div class="center-content">
+            <div class="cover-badge">The Sovereign</div>
+            <div class="cover-icon">👑</div>
+            <h1 class="slide-title">Pentarch<br><span class="highlight">WRN Signal</span></h1>
+            <p class="subtitle">Early warning in uptrends</p>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
-
-        <!-- =====================================================
-             SLIDE 6: CTA
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide cta-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <h2 class="cta-headline">Context<br><span class="accent-text">Determines</span><br>Meaning</h2>
-                    <p class="cta-subtext">Full Pentarch documentation with all signal explanations.</p>
-                    <a href="#" class="cta-button">Read Docs</a>
-                    <div class="brand-tag">SignalPilot</div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- =====================================================
-         EXPORT MODE JAVASCRIPT
-         ===================================================== -->
-    <script>
-        (function() {
-            const slides = document.querySelectorAll('.slide-wrapper');
-            let currentSlide = 0;
-            let exportMode = false;
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — What Is WRN</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">02 / 06</span>
+          <div class="center-content">
+            <h2 class="slide-title">What Is<br><span class="highlight">WRN?</span></h2>
+            <div class="signal-card">
+              <div class="signal-header">
+                <div class="signal-badge">WRN</div>
+                <div>
+                  <h3 class="signal-title">Warning Signal</h3>
+                  <p class="signal-subtitle">Yellow dot, above candle</p>
+                </div>
+              </div>
+              <p class="signal-desc">Early weakness detected in uptrend. The cycle is showing potential signs of strain. Momentum may be shifting.</p>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-            }
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — When It Fires</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">03 / 06</span>
+          <div class="center-content">
+            <h2 class="slide-title">When It<br><span class="highlight">Fires</span></h2>
+            <ul class="info-list">
+              <li>Early weakness detected in uptrend</li>
+              <li>Momentum potentially shifting</li>
+              <li>Cycle showing signs of strain</li>
+              <li>Price at late-cycle stage</li>
+            </ul>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-            function toggleExportMode() {
-                exportMode = !exportMode;
-                document.body.classList.toggle('export-mode', exportMode);
-                if (exportMode) {
-                    currentSlide = 0;
-                    showSlide(0);
-                }
-            }
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — What It's Not</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">04 / 06</span>
+          <div class="center-content">
+            <h2 class="slide-title">What It's<br><span class="highlight" style="color: var(--accent-red);">Not</span></h2>
+            <ul class="info-list red">
+              <li>Not an instant sell signal</li>
+              <li>Not a guarantee of reversal</li>
+              <li>Not a standalone trade trigger</li>
+              <li>Not a reason to panic</li>
+            </ul>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            }
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — How To Use It</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">05 / 06</span>
+          <div class="center-content">
+            <h2 class="slide-title">How To<br><span class="highlight">Use It</span></h2>
+            <div class="confluence-card">
+              <div class="confluence-header">
+                <span class="confluence-icon">🎯</span>
+                <span class="confluence-title">WRN + Structure Resistance</span>
+              </div>
+              <p class="confluence-result">= Higher conviction warning</p>
+            </div>
+            <div class="confluence-card">
+              <div class="confluence-header">
+                <span class="confluence-icon">📊</span>
+                <span class="confluence-title">WRN + Volume Divergence</span>
+              </div>
+              <p class="confluence-result">= Watch closely for confirmation</p>
+            </div>
+            <div class="confluence-card">
+              <div class="confluence-header">
+                <span class="confluence-icon">💪</span>
+                <span class="confluence-title">WRN in Strong Uptrend</span>
+              </div>
+              <p class="confluence-result">= Just awareness, no action</p>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-            function prevSlide() {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                showSlide(currentSlide);
-            }
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — CTA</span>
+      <div class="slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <span class="slide-number">06 / 06</span>
+          <div class="center-content">
+            <h2 class="cta-title">Context<br><span class="emphasis">Determines</span><br>Meaning</h2>
+            <p class="cta-text">Full Pentarch documentation with all signal explanations.</p>
+            <a href="#" class="cta-button">Read Docs</a>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
 
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'e' || e.key === 'E') {
-                    toggleExportMode();
-                } else if (exportMode) {
-                    if (e.key === 'ArrowRight' || e.key === ' ') {
-                        nextSlide();
-                    } else if (e.key === 'ArrowLeft') {
-                        prevSlide();
-                    } else if (e.key === 'Escape') {
-                        toggleExportMode();
-                    }
-                }
-            });
-        })();
-    </script>
+  </div>
+
+  <script>
+    const bgToggle = document.getElementById('bg-toggle');
+    const opacityControl = document.getElementById('opacity-control');
+    const slides = document.querySelectorAll('.slide');
+    const videos = document.querySelectorAll('.slide-bg video');
+
+    bgToggle.addEventListener('change', (e) => {
+      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
+    });
+
+    opacityControl.addEventListener('change', (e) => {
+      videos.forEach(video => video.style.opacity = e.target.value);
+    });
+
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
+        currentExportSlide = 0;
+        updateExportSlide();
+      } else {
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'ArrowLeft') {
+        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'Escape') {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+  </script>
 </body>
 </html>
