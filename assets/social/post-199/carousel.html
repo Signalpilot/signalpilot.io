@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 199 - Intermarket Analysis</title>
-
-    <!-- ===== GOOGLE FONTS ===== -->
+    <title>Post 199 — Intermarket Analysis</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== CSS VARIABLES ===== */
         :root {
             --bg-dark: #0a0a0f;
             --bg-card: rgba(255, 255, 255, 0.03);
@@ -19,86 +15,158 @@
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
             --text-muted: rgba(255, 255, 255, 0.5);
-            --accent-blue: #4a90d9;
             --accent-gold: #c9a962;
+            --accent-gold-dim: rgba(201, 169, 98, 0.3);
+            --accent-teal: #4ad9d9;
+            --accent-teal-dim: rgba(74, 217, 217, 0.3);
+            --accent-blue: #4a90d9;
             --accent-green: #4ad97a;
             --accent-red: #d94a4a;
-            --accent-teal: #4ad9d9;
             --accent-purple: #9b4ad9;
             --border-subtle: rgba(255, 255, 255, 0.1);
-            --border-accent: rgba(201, 169, 98, 0.3);
-            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.4);
-            --shadow-glow: 0 0 40px rgba(201, 169, 98, 0.15);
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --slide-width: 1080px;
-            --slide-height: 1080px;
         }
 
-        /* ===== RESET & BASE ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: var(--font-sans);
-            background-color: #1a1a2e;
+            background: var(--bg-dark);
+            color: var(--text-primary);
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 2rem;
+        }
+
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .controls,
+        body.export-mode .page-title,
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+            margin: 0;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: block;
+        }
+
+        body.export-mode .slide {
+            width: 1080px;
+            height: 1080px;
+            max-width: none;
+            border-radius: 0;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .controls label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .controls select,
+        .controls button {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .controls select:hover,
+        .controls button:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-teal);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h1 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* ===== CAROUSEL CONTAINER ===== */
-        .carousel-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            justify-content: center;
-            max-width: 1800px;
+        .slide-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        /* ===== SLIDE BASE STYLES ===== */
         .slide {
-            width: var(--slide-width);
-            height: var(--slide-height);
+            width: 100%;
+            max-width: 540px;
+            aspect-ratio: 1 / 1;
             background: var(--bg-dark);
+            border-radius: 0.5rem;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            border-radius: 8px;
-            box-shadow: var(--shadow-soft);
         }
 
-        /* ===== VIDEO BACKGROUND ===== */
-        .video-background {
+        .video-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .video-background video {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
             opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        /* ===== SLIDE CONTENT ===== */
         .slide-content {
             position: relative;
             z-index: 1;
@@ -108,14 +176,13 @@
             padding: 60px;
         }
 
-        /* ===== TYPOGRAPHY ===== */
         .slide-number {
             font-family: var(--font-sans);
             font-size: 14px;
             font-weight: 500;
+            letter-spacing: 3px;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 3px;
             margin-bottom: 20px;
         }
 
@@ -128,21 +195,8 @@
             margin-bottom: 24px;
         }
 
-        .headline-large {
-            font-size: 84px;
-        }
-
         .headline-small {
             font-size: 56px;
-        }
-
-        .subheadline {
-            font-family: var(--font-serif);
-            font-size: 42px;
-            font-weight: 600;
-            color: var(--accent-teal);
-            line-height: 1.2;
-            margin-bottom: 20px;
         }
 
         .body-text {
@@ -163,7 +217,7 @@
             font-weight: 600;
         }
 
-        /* ===== HERO SECTION ===== */
+        /* Hero Section */
         .hero-container {
             flex: 1;
             display: flex;
@@ -173,12 +227,11 @@
             text-align: center;
         }
 
-        /* ===== NETWORK DIAGRAM ===== */
         .network-diagram {
-            width: 420px;
-            height: 420px;
+            width: 360px;
+            height: 360px;
             position: relative;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .network-center {
@@ -186,20 +239,20 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             background: linear-gradient(135deg, var(--accent-teal) 0%, var(--accent-blue) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10;
-            box-shadow: 0 0 60px rgba(74, 217, 217, 0.4);
+            box-shadow: 0 0 50px rgba(74, 217, 217, 0.4);
         }
 
         .network-center span {
             font-family: var(--font-sans);
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--bg-dark);
             text-transform: uppercase;
@@ -208,8 +261,8 @@
 
         .network-node {
             position: absolute;
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -219,62 +272,21 @@
             background: var(--bg-card);
         }
 
-        .network-node span {
-            font-size: 10px;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        .network-node span { font-size: 9px; font-weight: 600; color: var(--text-primary); text-transform: uppercase; }
+        .network-node .icon { font-size: 20px; margin-bottom: 4px; }
 
-        .network-node .icon {
-            font-size: 24px;
-            margin-bottom: 4px;
-        }
-
-        .node-dxy {
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-color: var(--accent-green);
-        }
-
-        .node-bonds {
-            top: 80px;
-            right: 30px;
-            border-color: var(--accent-blue);
-        }
-
-        .node-stocks {
-            bottom: 80px;
-            right: 30px;
-            border-color: var(--accent-purple);
-        }
-
-        .node-crypto {
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-color: var(--accent-gold);
-        }
-
-        .node-gold {
-            bottom: 80px;
-            left: 30px;
-            border-color: #ffd700;
-        }
-
-        .node-oil {
-            top: 80px;
-            left: 30px;
-            border-color: var(--accent-red);
-        }
+        .node-dxy { top: 10px; left: 50%; transform: translateX(-50%); border-color: var(--accent-green); }
+        .node-bonds { top: 70px; right: 25px; border-color: var(--accent-blue); }
+        .node-stocks { bottom: 70px; right: 25px; border-color: var(--accent-purple); }
+        .node-crypto { bottom: 10px; left: 50%; transform: translateX(-50%); border-color: var(--accent-gold); }
+        .node-gold { bottom: 70px; left: 25px; border-color: #ffd700; }
+        .node-oil { top: 70px; left: 25px; border-color: var(--accent-red); }
 
         .network-line {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 110px;
+            width: 90px;
             height: 2px;
             background: linear-gradient(90deg, rgba(74, 217, 217, 0.6) 0%, rgba(74, 217, 217, 0.1) 100%);
             transform-origin: left center;
@@ -290,22 +302,22 @@
 
         .hero-headline {
             font-family: var(--font-serif);
-            font-size: 84px;
+            font-size: 72px;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.1;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .hero-subtitle {
             font-family: var(--font-sans);
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 400;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 500px;
         }
 
-        /* ===== CONCEPT CARD ===== */
+        /* Concept Section */
         .concept-container {
             flex: 1;
             display: flex;
@@ -317,13 +329,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
-            margin-bottom: 50px;
+            gap: 24px;
+            margin-bottom: 40px;
         }
 
         .market-bubble {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             border: 3px solid var(--accent-teal);
             background: rgba(74, 217, 217, 0.1);
@@ -333,20 +345,11 @@
             flex-direction: column;
         }
 
-        .market-bubble .icon {
-            font-size: 42px;
-            margin-bottom: 8px;
-        }
-
-        .market-bubble span {
-            font-family: var(--font-sans);
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
+        .market-bubble .icon { font-size: 36px; margin-bottom: 6px; }
+        .market-bubble span { font-family: var(--font-sans); font-size: 12px; font-weight: 600; color: var(--text-primary); }
 
         .connection-line {
-            width: 80px;
+            width: 60px;
             height: 4px;
             background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue));
             position: relative;
@@ -363,49 +366,38 @@
             border-style: solid;
         }
 
-        .connection-line::before {
-            left: -10px;
-            border-width: 6px 10px 6px 0;
-            border-color: transparent var(--accent-teal) transparent transparent;
-        }
+        .connection-line::before { left: -8px; border-width: 5px 8px 5px 0; border-color: transparent var(--accent-teal) transparent transparent; }
+        .connection-line::after { right: -8px; border-width: 5px 0 5px 8px; border-color: transparent transparent transparent var(--accent-blue); }
 
-        .connection-line::after {
-            right: -10px;
-            border-width: 6px 0 6px 10px;
-            border-color: transparent transparent transparent var(--accent-blue);
-        }
-
-        .concept-text {
-            text-align: center;
-        }
+        .concept-text { text-align: center; }
 
         .concept-headline {
             font-family: var(--font-serif);
-            font-size: 64px;
+            font-size: 56px;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
-        /* ===== RELATIONSHIP CARD ===== */
+        /* Relationship Cards */
         .relationship-card {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             border-radius: 16px;
-            padding: 50px;
-            margin-bottom: 30px;
+            padding: 44px;
+            margin-bottom: 24px;
         }
 
         .relationship-header {
             display: flex;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .relationship-icon {
-            width: 80px;
-            height: 80px;
+            width: 68px;
+            height: 68px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -413,61 +405,34 @@
             flex-shrink: 0;
         }
 
-        .relationship-icon-text {
-            font-size: 42px;
-        }
+        .relationship-icon-text { font-size: 36px; }
+        .relationship-title { font-family: var(--font-serif); font-size: 42px; font-weight: 700; }
 
-        .relationship-title {
-            font-family: var(--font-serif);
-            font-size: 48px;
-            font-weight: 700;
-        }
-
-        .relationship-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        .relationship-list { display: flex; flex-direction: column; gap: 16px; }
 
         .relationship-item {
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 20px 24px;
+            gap: 14px;
+            padding: 16px 20px;
             background: var(--bg-card);
             border-radius: 12px;
             border: 1px solid var(--border-subtle);
         }
 
-        .arrow-indicator {
-            font-size: 28px;
-            font-weight: 700;
-        }
+        .arrow-indicator { font-size: 24px; font-weight: 700; }
+        .arrow-up { color: var(--accent-green); }
+        .arrow-down { color: var(--accent-red); }
 
-        .arrow-up {
-            color: var(--accent-green);
-        }
+        .relationship-text { font-family: var(--font-sans); font-size: 20px; color: var(--text-secondary); }
+        .relationship-text strong { color: var(--text-primary); }
 
-        .arrow-down {
-            color: var(--accent-red);
-        }
-
-        .relationship-text {
-            font-family: var(--font-sans);
-            font-size: 24px;
-            color: var(--text-secondary);
-        }
-
-        .relationship-text strong {
-            color: var(--text-primary);
-        }
-
-        /* ===== DUAL COLUMN LAYOUT ===== */
+        /* Dual Relationships */
         .dual-relationships {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 24px;
             justify-content: center;
         }
 
@@ -475,35 +440,17 @@
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             border-radius: 16px;
-            padding: 35px;
+            padding: 30px;
         }
 
-        .mini-relationship .relationship-header {
-            margin-bottom: 20px;
-        }
+        .mini-relationship .relationship-header { margin-bottom: 16px; }
+        .mini-relationship .relationship-icon { width: 54px; height: 54px; }
+        .mini-relationship .relationship-icon-text { font-size: 28px; }
+        .mini-relationship .relationship-title { font-size: 32px; }
+        .mini-relationship .relationship-item { padding: 14px 18px; }
+        .mini-relationship .relationship-text { font-size: 18px; }
 
-        .mini-relationship .relationship-icon {
-            width: 60px;
-            height: 60px;
-        }
-
-        .mini-relationship .relationship-icon-text {
-            font-size: 32px;
-        }
-
-        .mini-relationship .relationship-title {
-            font-size: 36px;
-        }
-
-        .mini-relationship .relationship-item {
-            padding: 16px 20px;
-        }
-
-        .mini-relationship .relationship-text {
-            font-size: 20px;
-        }
-
-        /* ===== RISK TOGGLE ===== */
+        /* Risk Toggle */
         .risk-toggle-container {
             flex: 1;
             display: flex;
@@ -513,73 +460,54 @@
 
         .risk-toggle {
             display: flex;
-            gap: 30px;
-            margin-bottom: 40px;
+            gap: 24px;
+            margin-bottom: 32px;
         }
 
         .risk-card {
             flex: 1;
-            padding: 40px;
+            padding: 34px;
             border-radius: 16px;
             border: 2px solid;
         }
 
-        .risk-on {
-            border-color: var(--accent-green);
-            background: rgba(74, 217, 122, 0.08);
-        }
-
-        .risk-off {
-            border-color: var(--accent-red);
-            background: rgba(217, 74, 74, 0.08);
-        }
+        .risk-on { border-color: var(--accent-green); background: rgba(74, 217, 122, 0.08); }
+        .risk-off { border-color: var(--accent-red); background: rgba(217, 74, 74, 0.08); }
 
         .risk-label {
             font-family: var(--font-sans);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
-        .risk-on .risk-label {
-            color: var(--accent-green);
-        }
-
-        .risk-off .risk-label {
-            color: var(--accent-red);
-        }
+        .risk-on .risk-label { color: var(--accent-green); }
+        .risk-off .risk-label { color: var(--accent-red); }
 
         .risk-title {
             font-family: var(--font-serif);
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
-        .risk-items {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .risk-items { display: flex; flex-direction: column; gap: 10px; }
 
         .risk-item {
             font-family: var(--font-sans);
-            font-size: 22px;
+            font-size: 18px;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .risk-item::before {
-            content: '▸';
-            color: var(--text-muted);
-        }
+        .risk-item::before { content: '▸'; color: var(--text-muted); }
 
-        /* ===== CTA SECTION ===== */
+        /* CTA Section */
         .cta-container {
             flex: 1;
             display: flex;
@@ -590,113 +518,62 @@
         }
 
         .cta-badge {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             border: 3px solid var(--accent-teal);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             background: rgba(74, 217, 217, 0.1);
         }
 
-        .cta-icon {
-            font-size: 70px;
-        }
+        .cta-icon { font-size: 60px; }
 
         .cta-headline {
             font-family: var(--font-serif);
-            font-size: 64px;
+            font-size: 56px;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.2;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
-        .cta-emphasis {
-            color: var(--accent-teal);
-        }
+        .cta-emphasis { color: var(--accent-teal); }
 
         .cta-text {
             font-family: var(--font-sans);
-            font-size: 28px;
+            font-size: 24px;
             color: var(--text-secondary);
-            max-width: 700px;
-            line-height: 1.6;
-            margin-bottom: 50px;
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 40px;
         }
 
         .cta-box {
             background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
             border: 2px solid var(--accent-teal);
-            border-radius: 16px;
-            padding: 40px 60px;
+            border-radius: 14px;
+            padding: 34px 50px;
         }
 
         .cta-box-text {
             font-family: var(--font-sans);
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 500;
             color: var(--text-primary);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .cta-link {
             font-family: var(--font-sans);
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
             color: var(--accent-teal);
         }
 
-        /* ===== BRAND FOOTER ===== */
-        .brand-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 30px;
-            border-top: 1px solid var(--border-subtle);
-            margin-top: auto;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8d5a3 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-icon svg {
-            width: 26px;
-            height: 26px;
-            fill: var(--bg-dark);
-        }
-
-        .logo-text {
-            font-family: var(--font-sans);
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: 1px;
-        }
-
-        .slide-indicator {
-            font-family: var(--font-sans);
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        /* ===== ICON COLORS ===== */
+        /* Icon Colors */
         .icon-green { background: rgba(74, 217, 122, 0.2); border: 2px solid var(--accent-green); }
         .icon-blue { background: rgba(74, 144, 217, 0.2); border: 2px solid var(--accent-blue); }
         .icon-gold { background: rgba(255, 215, 0, 0.2); border: 2px solid #ffd700; }
@@ -709,481 +586,391 @@
         .title-red { color: var(--accent-red); }
         .title-teal { color: var(--accent-teal); }
 
-        /* ===== EXPORT MODE STYLES ===== */
-        body.export-mode {
-            padding: 0;
-            background: transparent;
-        }
-
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
-
-        body.export-mode .slide {
-            border-radius: 0;
-            box-shadow: none;
-        }
-
-        body.export-mode .export-controls {
-            display: none;
-        }
-
-        /* ===== EXPORT CONTROLS ===== */
-        .export-controls {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.9);
-            padding: 16px 28px;
-            border-radius: 12px;
+        /* Brand Footer */
+        .brand-footer {
             display: flex;
             align-items: center;
-            gap: 20px;
-            z-index: 1000;
-            border: 1px solid var(--border-subtle);
+            justify-content: space-between;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: auto;
         }
 
-        .export-controls span {
-            font-family: var(--font-sans);
-            font-size: 14px;
-            color: var(--text-secondary);
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .export-controls kbd {
-            background: var(--bg-card);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-family: var(--font-sans);
-            font-size: 13px;
-            color: var(--accent-gold);
-            border: 1px solid var(--border-subtle);
+        .footer-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-gold), #e8d5a3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
+        .footer-logo-icon svg { width: 20px; height: 20px; fill: var(--bg-dark); }
+        .footer-logo-text { font-family: var(--font-sans); font-size: 18px; font-weight: 600; color: var(--text-primary); letter-spacing: 1px; }
+        .footer-slide-num { font-family: var(--font-sans); font-size: 14px; color: var(--text-muted); }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
-        <!-- ===== SLIDE 1: HERO ===== -->
-        <div class="slide" data-slide="1">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
+    <div class="controls">
+        <label>
+            Background:
+            <select id="bg-toggle">
+                <option value="video">Starfield</option>
+                <option value="static">Static</option>
+            </select>
+        </label>
+        <label>
+            Opacity:
+            <select id="opacity-control">
+                <option value="0.08">8%</option>
+                <option value="0.12">12%</option>
+                <option value="0.16">16%</option>
+                <option value="0.04">4%</option>
+            </select>
+        </label>
+        <button id="export-btn">Export Mode</button>
+    </div>
+
+    <div class="page-title">
+        <h1>Intermarket Analysis</h1>
+        <p>7 slides · Education</p>
+    </div>
+
+    <div class="carousel-grid">
+        <!-- Slide 1: Hero -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
-            </div>
-            <div class="slide-content">
-                <div class="hero-container">
-                    <div class="network-diagram">
-                        <div class="network-line line-1"></div>
-                        <div class="network-line line-2"></div>
-                        <div class="network-line line-3"></div>
-                        <div class="network-line line-4"></div>
-                        <div class="network-line line-5"></div>
-                        <div class="network-line line-6"></div>
-                        <div class="network-center">
-                            <span>Markets</span>
+                <div class="slide-content">
+                    <div class="hero-container">
+                        <div class="network-diagram">
+                            <div class="network-line line-1"></div>
+                            <div class="network-line line-2"></div>
+                            <div class="network-line line-3"></div>
+                            <div class="network-line line-4"></div>
+                            <div class="network-line line-5"></div>
+                            <div class="network-line line-6"></div>
+                            <div class="network-center"><span>Markets</span></div>
+                            <div class="network-node node-dxy"><span class="icon">💵</span><span>DXY</span></div>
+                            <div class="network-node node-bonds"><span class="icon">📊</span><span>Bonds</span></div>
+                            <div class="network-node node-stocks"><span class="icon">📈</span><span>Stocks</span></div>
+                            <div class="network-node node-crypto"><span class="icon">₿</span><span>Crypto</span></div>
+                            <div class="network-node node-gold"><span class="icon">🥇</span><span>Gold</span></div>
+                            <div class="network-node node-oil"><span class="icon">🛢️</span><span>Oil</span></div>
                         </div>
-                        <div class="network-node node-dxy">
-                            <span class="icon">💵</span>
-                            <span>DXY</span>
-                        </div>
-                        <div class="network-node node-bonds">
-                            <span class="icon">📊</span>
-                            <span>Bonds</span>
-                        </div>
-                        <div class="network-node node-stocks">
-                            <span class="icon">📈</span>
-                            <span>Stocks</span>
-                        </div>
-                        <div class="network-node node-crypto">
-                            <span class="icon">₿</span>
-                            <span>Crypto</span>
-                        </div>
-                        <div class="network-node node-gold">
-                            <span class="icon">🥇</span>
-                            <span>Gold</span>
-                        </div>
-                        <div class="network-node node-oil">
-                            <span class="icon">🛢️</span>
-                            <span>Oil</span>
-                        </div>
+                        <h1 class="hero-headline">Intermarket<br>Analysis</h1>
+                        <p class="hero-subtitle">Understanding how markets influence each other for smarter trading decisions</p>
                     </div>
-                    <h1 class="hero-headline">Intermarket<br>Analysis</h1>
-                    <p class="hero-subtitle">Understanding how markets influence each other<br>for smarter trading decisions</p>
-                </div>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
                         </div>
-                        <span class="logo-text">SIGNALPILOT</span>
+                        <span class="footer-slide-num">1 / 7</span>
                     </div>
-                    <span class="slide-indicator">1 / 7</span>
                 </div>
             </div>
         </div>
 
-        <!-- ===== SLIDE 2: CONCEPT ===== -->
-        <div class="slide" data-slide="2">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
+        <!-- Slide 2: Concept -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Concept</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
-            </div>
-            <div class="slide-content">
-                <span class="slide-number">Core Concept</span>
-                <div class="concept-container">
-                    <div class="concept-visual">
-                        <div class="market-bubble">
-                            <span class="icon">📊</span>
-                            <span>Market A</span>
+                <div class="slide-content">
+                    <span class="slide-number">Core Concept</span>
+                    <div class="concept-container">
+                        <div class="concept-visual">
+                            <div class="market-bubble"><span class="icon">📊</span><span>Market A</span></div>
+                            <div class="connection-line"></div>
+                            <div class="market-bubble"><span class="icon">📈</span><span>Market B</span></div>
                         </div>
-                        <div class="connection-line"></div>
-                        <div class="market-bubble">
-                            <span class="icon">📈</span>
-                            <span>Market B</span>
+                        <div class="concept-text">
+                            <h2 class="concept-headline">Markets Don't Exist<br>in Isolation</h2>
+                            <p class="body-text" style="max-width: 700px; margin: 0 auto;">Every market is connected. When one moves, others react. Understanding these relationships gives you an edge that single-market analysis can never provide.</p>
                         </div>
                     </div>
-                    <div class="concept-text">
-                        <h2 class="concept-headline">Markets Don't Exist<br>in Isolation</h2>
-                        <p class="body-text-large" style="max-width: 800px; margin: 0 auto;">
-                            Every market is connected. When one moves, others react.
-                            Understanding these relationships gives you an edge that
-                            single-market analysis can never provide.
-                        </p>
-                    </div>
-                </div>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
                         </div>
-                        <span class="logo-text">SIGNALPILOT</span>
+                        <span class="footer-slide-num">2 / 7</span>
                     </div>
-                    <span class="slide-indicator">2 / 7</span>
                 </div>
             </div>
         </div>
 
-        <!-- ===== SLIDE 3: US DOLLAR ===== -->
-        <div class="slide" data-slide="3">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
+        <!-- Slide 3: US Dollar -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — US Dollar</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
-            </div>
-            <div class="slide-content">
-                <span class="slide-number">Key Relationship #1</span>
-                <div class="relationship-card" style="border-color: rgba(74, 217, 122, 0.3);">
-                    <div class="relationship-header">
-                        <div class="relationship-icon icon-green">
-                            <span class="relationship-icon-text">💵</span>
-                        </div>
-                        <h2 class="relationship-title title-green">US Dollar (DXY)</h2>
-                    </div>
-                    <div class="relationship-list">
-                        <div class="relationship-item">
-                            <span class="arrow-indicator arrow-up">DXY ↑</span>
-                            <span class="relationship-text"><strong>Commodities</strong> typically go down</span>
-                        </div>
-                        <div class="relationship-item">
-                            <span class="arrow-indicator arrow-up">DXY ↑</span>
-                            <span class="relationship-text"><strong>EM Currencies</strong> typically weaken</span>
-                        </div>
-                        <div class="relationship-item">
-                            <span class="arrow-indicator arrow-down">DXY ↓</span>
-                            <span class="relationship-text"><strong>Gold</strong> typically rises</span>
-                        </div>
-                    </div>
-                </div>
-                <p class="body-text" style="text-align: center; font-style: italic; color: var(--accent-gold);">
-                    The dollar is the world's reserve currency — its movements ripple everywhere.
-                </p>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
-                        </div>
-                        <span class="logo-text">SIGNALPILOT</span>
-                    </div>
-                    <span class="slide-indicator">3 / 7</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===== SLIDE 4: BONDS & STOCKS ===== -->
-        <div class="slide" data-slide="4">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <span class="slide-number">Key Relationship #2</span>
-                <div class="relationship-card" style="border-color: rgba(74, 144, 217, 0.3);">
-                    <div class="relationship-header">
-                        <div class="relationship-icon icon-blue">
-                            <span class="relationship-icon-text">📈</span>
-                        </div>
-                        <h2 class="relationship-title title-blue">Bonds & Stocks</h2>
-                    </div>
-                    <div class="relationship-list">
-                        <div class="relationship-item">
-                            <span class="arrow-indicator arrow-up">Yields ↑</span>
-                            <span class="relationship-text"><strong>Stocks</strong> often face selling pressure</span>
-                        </div>
-                        <div class="relationship-item">
-                            <span class="arrow-indicator">Flight to Safety</span>
-                            <span class="relationship-text"><strong>Bonds</strong> up, <strong>Stocks</strong> down</span>
-                        </div>
-                        <div class="relationship-item">
-                            <span class="arrow-indicator arrow-down">Yields ↓</span>
-                            <span class="relationship-text"><strong>Growth stocks</strong> often benefit</span>
-                        </div>
-                    </div>
-                </div>
-                <p class="body-text" style="text-align: center; font-style: italic; color: var(--accent-gold);">
-                    Watch the 10-year yield — it's the heartbeat of global markets.
-                </p>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
-                        </div>
-                        <span class="logo-text">SIGNALPILOT</span>
-                    </div>
-                    <span class="slide-indicator">4 / 7</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===== SLIDE 5: RISK ON/OFF ===== -->
-        <div class="slide" data-slide="5">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <span class="slide-number">Key Relationship #3</span>
-                <div class="risk-toggle-container">
-                    <h2 class="headline-small" style="text-align: center; margin-bottom: 40px;">Risk Environment</h2>
-                    <div class="risk-toggle">
-                        <div class="risk-card risk-on">
-                            <p class="risk-label">Risk On</p>
-                            <h3 class="risk-title">Greed Mode</h3>
-                            <div class="risk-items">
-                                <span class="risk-item">Crypto pumps</span>
-                                <span class="risk-item">Growth stocks fly</span>
-                                <span class="risk-item">High-yield bonds bid</span>
-                                <span class="risk-item">VIX stays low</span>
-                            </div>
-                        </div>
-                        <div class="risk-card risk-off">
-                            <p class="risk-label">Risk Off</p>
-                            <h3 class="risk-title">Fear Mode</h3>
-                            <div class="risk-items">
-                                <span class="risk-item">Gold rises</span>
-                                <span class="risk-item">Treasury bonds bid</span>
-                                <span class="risk-item">USD strengthens</span>
-                                <span class="risk-item">VIX spikes</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
-                        </div>
-                        <span class="logo-text">SIGNALPILOT</span>
-                    </div>
-                    <span class="slide-indicator">5 / 7</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===== SLIDE 6: COMMODITIES ===== -->
-        <div class="slide" data-slide="6">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <span class="slide-number">Key Relationship #4</span>
-                <div class="dual-relationships">
-                    <div class="mini-relationship" style="border-color: rgba(217, 74, 74, 0.3);">
+                <div class="slide-content">
+                    <span class="slide-number">Key Relationship #1</span>
+                    <div class="relationship-card" style="border-color: rgba(74, 217, 122, 0.3); flex: 1; display: flex; flex-direction: column; justify-content: center;">
                         <div class="relationship-header">
-                            <div class="relationship-icon icon-red">
-                                <span class="relationship-icon-text">🛢️</span>
-                            </div>
-                            <h2 class="relationship-title title-red">Crude Oil</h2>
+                            <div class="relationship-icon icon-green"><span class="relationship-icon-text">💵</span></div>
+                            <h2 class="relationship-title title-green">US Dollar (DXY)</h2>
                         </div>
                         <div class="relationship-list">
                             <div class="relationship-item">
-                                <span class="arrow-indicator arrow-up">Oil ↑</span>
-                                <span class="relationship-text"><strong>Energy stocks</strong> rise with it</span>
+                                <span class="arrow-indicator arrow-up">DXY ↑</span>
+                                <span class="relationship-text"><strong>Commodities</strong> typically go down</span>
                             </div>
                             <div class="relationship-item">
-                                <span class="arrow-indicator arrow-up">Oil ↑↑</span>
-                                <span class="relationship-text"><strong>Inflation fears</strong> increase</span>
+                                <span class="arrow-indicator arrow-up">DXY ↑</span>
+                                <span class="relationship-text"><strong>EM Currencies</strong> typically weaken</span>
+                            </div>
+                            <div class="relationship-item">
+                                <span class="arrow-indicator arrow-down">DXY ↓</span>
+                                <span class="relationship-text"><strong>Gold</strong> typically rises</span>
                             </div>
                         </div>
                     </div>
-                    <div class="mini-relationship" style="border-color: rgba(74, 217, 217, 0.3);">
-                        <div class="relationship-header">
-                            <div class="relationship-icon icon-teal">
-                                <span class="relationship-icon-text">🔧</span>
-                            </div>
-                            <h2 class="relationship-title title-teal">Copper</h2>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
                         </div>
-                        <div class="relationship-list">
-                            <div class="relationship-item">
-                                <span class="arrow-indicator arrow-up">Copper ↑</span>
-                                <span class="relationship-text"><strong>Economic strength</strong> signal</span>
-                            </div>
-                            <div class="relationship-item">
-                                <span class="arrow-indicator arrow-down">Copper ↓</span>
-                                <span class="relationship-text"><strong>Recession</strong> warning</span>
-                            </div>
-                        </div>
+                        <span class="footer-slide-num">3 / 7</span>
                     </div>
-                </div>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
-                        </div>
-                        <span class="logo-text">SIGNALPILOT</span>
-                    </div>
-                    <span class="slide-indicator">6 / 7</span>
                 </div>
             </div>
         </div>
 
-        <!-- ===== SLIDE 7: CTA ===== -->
-        <div class="slide" data-slide="7">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
+        <!-- Slide 4: Bonds & Stocks -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Bonds & Stocks</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
-            </div>
-            <div class="slide-content">
-                <div class="cta-container">
-                    <div class="cta-badge">
-                        <span class="cta-icon">🌐</span>
+                <div class="slide-content">
+                    <span class="slide-number">Key Relationship #2</span>
+                    <div class="relationship-card" style="border-color: rgba(74, 144, 217, 0.3); flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                        <div class="relationship-header">
+                            <div class="relationship-icon icon-blue"><span class="relationship-icon-text">📈</span></div>
+                            <h2 class="relationship-title title-blue">Bonds & Stocks</h2>
+                        </div>
+                        <div class="relationship-list">
+                            <div class="relationship-item">
+                                <span class="arrow-indicator arrow-up">Yields ↑</span>
+                                <span class="relationship-text"><strong>Stocks</strong> often face selling pressure</span>
+                            </div>
+                            <div class="relationship-item">
+                                <span class="arrow-indicator">Flight to Safety</span>
+                                <span class="relationship-text"><strong>Bonds</strong> up, <strong>Stocks</strong> down</span>
+                            </div>
+                            <div class="relationship-item">
+                                <span class="arrow-indicator arrow-down">Yields ↓</span>
+                                <span class="relationship-text"><strong>Growth stocks</strong> often benefit</span>
+                            </div>
+                        </div>
                     </div>
-                    <h2 class="cta-headline">
-                        No Market Moves<br><span class="cta-emphasis">Alone</span>
-                    </h2>
-                    <p class="cta-text">
-                        The best traders see the whole board, not just one piece.
-                        Master intermarket relationships and trade with
-                        the confidence of understanding the bigger picture.
-                    </p>
-                    <div class="cta-box">
-                        <p class="cta-box-text">Full lesson on Intermarket Analysis</p>
-                        <span class="cta-link">education.signalpilot.io</span>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
+                        </div>
+                        <span class="footer-slide-num">4 / 7</span>
                     </div>
                 </div>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
+            </div>
+        </div>
+
+        <!-- Slide 5: Risk On/Off -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Risk Toggle</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <span class="slide-number">Key Relationship #3</span>
+                    <div class="risk-toggle-container">
+                        <h2 class="headline-small" style="text-align: center; margin-bottom: 32px;">Risk Environment</h2>
+                        <div class="risk-toggle">
+                            <div class="risk-card risk-on">
+                                <p class="risk-label">Risk On</p>
+                                <h3 class="risk-title">Greed Mode</h3>
+                                <div class="risk-items">
+                                    <span class="risk-item">Crypto pumps</span>
+                                    <span class="risk-item">Growth stocks fly</span>
+                                    <span class="risk-item">High-yield bonds bid</span>
+                                    <span class="risk-item">VIX stays low</span>
+                                </div>
+                            </div>
+                            <div class="risk-card risk-off">
+                                <p class="risk-label">Risk Off</p>
+                                <h3 class="risk-title">Fear Mode</h3>
+                                <div class="risk-items">
+                                    <span class="risk-item">Gold rises</span>
+                                    <span class="risk-item">Treasury bonds bid</span>
+                                    <span class="risk-item">USD strengthens</span>
+                                    <span class="risk-item">VIX spikes</span>
+                                </div>
+                            </div>
                         </div>
-                        <span class="logo-text">SIGNALPILOT</span>
                     </div>
-                    <span class="slide-indicator">7 / 7</span>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
+                        </div>
+                        <span class="footer-slide-num">5 / 7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Commodities -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Commodities</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <span class="slide-number">Key Relationship #4</span>
+                    <div class="dual-relationships">
+                        <div class="mini-relationship" style="border-color: rgba(217, 74, 74, 0.3);">
+                            <div class="relationship-header">
+                                <div class="relationship-icon icon-red"><span class="relationship-icon-text">🛢️</span></div>
+                                <h2 class="relationship-title title-red">Crude Oil</h2>
+                            </div>
+                            <div class="relationship-list">
+                                <div class="relationship-item">
+                                    <span class="arrow-indicator arrow-up">Oil ↑</span>
+                                    <span class="relationship-text"><strong>Energy stocks</strong> rise with it</span>
+                                </div>
+                                <div class="relationship-item">
+                                    <span class="arrow-indicator arrow-up">Oil ↑↑</span>
+                                    <span class="relationship-text"><strong>Inflation fears</strong> increase</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mini-relationship" style="border-color: rgba(74, 217, 217, 0.3);">
+                            <div class="relationship-header">
+                                <div class="relationship-icon icon-teal"><span class="relationship-icon-text">🔧</span></div>
+                                <h2 class="relationship-title title-teal">Copper</h2>
+                            </div>
+                            <div class="relationship-list">
+                                <div class="relationship-item">
+                                    <span class="arrow-indicator arrow-up">Copper ↑</span>
+                                    <span class="relationship-text"><strong>Economic strength</strong> signal</span>
+                                </div>
+                                <div class="relationship-item">
+                                    <span class="arrow-indicator arrow-down">Copper ↓</span>
+                                    <span class="relationship-text"><strong>Recession</strong> warning</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
+                        </div>
+                        <span class="footer-slide-num">6 / 7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — CTA</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="cta-container">
+                        <div class="cta-badge"><span class="cta-icon">🌐</span></div>
+                        <h2 class="cta-headline">No Market Moves<br><span class="cta-emphasis">Alone</span></h2>
+                        <p class="cta-text">The best traders see the whole board, not just one piece. Master intermarket relationships and trade with the confidence of understanding the bigger picture.</p>
+                        <div class="cta-box">
+                            <p class="cta-box-text">Full lesson on Intermarket Analysis</p>
+                            <span class="cta-link">education.signalpilot.io</span>
+                        </div>
+                    </div>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
+                        </div>
+                        <span class="footer-slide-num">7 / 7</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ===== EXPORT CONTROLS ===== -->
-    <div class="export-controls">
-        <span>Press</span>
-        <kbd>E</kbd>
-        <span>for export mode</span>
-        <span>|</span>
-        <kbd>←</kbd>
-        <kbd>→</kbd>
-        <span>to navigate</span>
-        <span>|</span>
-        <kbd>ESC</kbd>
-        <span>to exit</span>
-    </div>
-
-    <!-- ===== EXPORT MODE JAVASCRIPT ===== -->
     <script>
         (function() {
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
+            const videos = document.querySelectorAll('.video-bg');
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
             let exportMode = false;
             let currentSlide = 0;
-            const slides = document.querySelectorAll('.slide');
-            const totalSlides = slides.length;
 
-            function enterExportMode() {
-                exportMode = true;
-                document.body.classList.add('export-mode');
-                currentSlide = 0;
-                showOnlySlide(currentSlide);
-            }
+            bgToggle.addEventListener('change', function() {
+                videos.forEach(video => {
+                    video.style.display = this.value === 'video' ? 'block' : 'none';
+                });
+            });
 
-            function exitExportMode() {
-                exportMode = false;
-                document.body.classList.remove('export-mode');
-                slides.forEach(slide => slide.style.display = 'flex');
-            }
+            opacityControl.addEventListener('change', function() {
+                videos.forEach(video => {
+                    video.style.opacity = this.value;
+                });
+            });
 
-            function showOnlySlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.style.display = i === index ? 'flex' : 'none';
+            exportBtn.addEventListener('click', function() {
+                exportMode = !exportMode;
+                document.body.classList.toggle('export-mode', exportMode);
+                this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+                if (exportMode) {
+                    currentSlide = 0;
+                    updateActiveSlide();
+                }
+            });
+
+            function updateActiveSlide() {
+                slideWrappers.forEach((wrapper, index) => {
+                    wrapper.classList.toggle('active', index === currentSlide);
                 });
             }
 
-            function nextSlide() {
-                if (!exportMode) return;
-                currentSlide = (currentSlide + 1) % totalSlides;
-                showOnlySlide(currentSlide);
-            }
-
-            function prevSlide() {
-                if (!exportMode) return;
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                showOnlySlide(currentSlide);
-            }
-
             document.addEventListener('keydown', function(e) {
-                switch(e.key.toLowerCase()) {
-                    case 'e':
-                        if (!exportMode) {
-                            enterExportMode();
-                        }
-                        break;
-                    case 'escape':
-                        if (exportMode) {
-                            exitExportMode();
-                        }
-                        break;
-                    case 'arrowright':
-                        nextSlide();
-                        break;
-                    case 'arrowleft':
-                        prevSlide();
-                        break;
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    currentSlide = (currentSlide + 1) % slideWrappers.length;
+                    updateActiveSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+                    updateActiveSlide();
+                } else if (e.key === 'Escape') {
+                    exportMode = false;
+                    document.body.classList.remove('export-mode');
+                    exportBtn.textContent = 'Export Mode';
                 }
             });
         })();
