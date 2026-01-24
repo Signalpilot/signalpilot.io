@@ -24,7 +24,7 @@ This folder contains the complete Google Ads campaign strategy for Signal Pilot.
 | Country | Reason |
 |---------|--------|
 | Russia 🇷🇺 | Payment restrictions (Visa/MC blocked, sanctions) |
-| Egypt 🇪🇬 | Low purchasing power ($99/mo too expensive) |
+| Egypt 🇪🇬 | Low purchasing power ($69/mo too expensive) |
 
 ---
 

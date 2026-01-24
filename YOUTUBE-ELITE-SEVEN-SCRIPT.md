@@ -1165,11 +1165,11 @@ Don't rush. Screen time is irreplaceable.
 
 **'What's the difference between the plans?'**
 
-Monthly at $99/month gives you all 7 indicators with month-to-month flexibility. Great for trying it out.
+Monthly at $69/month gives you all 7 indicators with month-to-month flexibility. Great for trying it out.
 
-Yearly at $699/year is the same features but saves you $489 — that's 41% off. Best value if you're committed.
+Yearly at $399/year is the same features but saves you $429 — that's 52% off. Best value if you're committed.
 
-Lifetime at $1,799 one-time is everything forever — all future updates, private Discord community, 200+ preset configurations, beta access, priority support. Limited to 350 total slots.
+Lifetime at $999 one-time is everything forever — all future updates, private Discord community, 200+ preset configurations, beta access, priority support. Limited to 350 total slots.
 
 All plans come with a 7-day free trial — no credit card, full access. Plus a 7-day money-back guarantee if you subscribe and change your mind. And of course, full documentation and the free education hub.
 
@@ -1223,9 +1223,9 @@ Full documentation for every indicator is at docs.signalpilot.io. Every setting 
 
 The Elite Seven are available on TradingView. Three plan options:
 
-- **Monthly ($99/month)** — All 7 indicators, future updates, 48-hour support. Month-to-month flexibility.
-- **Yearly ($699/year)** — Same features, 41% savings ($489 off), 24-hour support. Best value.
-- **Lifetime ($1,799 one-time)** — Everything forever. Private Discord, 200+ presets, beta access, priority support. Limited to 350 slots.
+- **Monthly ($69/month)** — All 7 indicators, future updates, 48-hour support. Month-to-month flexibility.
+- **Yearly ($399/year)** — Same features, 52% savings ($429 off), 24-hour support. Best value.
+- **Lifetime ($999 one-time)** — Everything forever. Private Discord, 200+ presets, beta access, priority support. Limited to 350 slots.
 
 All plans include a 7-day free trial — use everything, no credit card required. And if you do subscribe and it's not for you, there's also a 7-day money-back guarantee. Zero risk either way.
 

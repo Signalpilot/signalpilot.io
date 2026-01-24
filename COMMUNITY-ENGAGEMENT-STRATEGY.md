@@ -152,7 +152,7 @@
 | Server | Members | How to Join | Access | Your Approach |
 |--------|---------|-------------|--------|---------------|
 | Warrior Trading | 50K+ | warriortrading.com/day-trading-chat-room (their own platform, not Discord) | Paid membership | Help in education channels, serious only |
-| Bear Bull Traders | 30K+ | bearbulltraders.com → Community | Paid ($99/mo) | Andrew Aziz community, serious discussion |
+| Bear Bull Traders | 30K+ | bearbulltraders.com → Community | Paid ($69/mo) | Andrew Aziz community, serious discussion |
 | Humbled Trader | 40K+ | community.humbledtrader.com/join-ht-discord | Paid ($1,490/yr) | Help newbies, share losses not just wins |
 | Traders War Room | 5K+ | discord.com/servers/traders-war-room-llc-873073458433638410 | Free + Premium | Multi-asset alerts, 40+ analysts |
 
@@ -1692,7 +1692,7 @@ What matters more to you — pattern alerts or cycle understanding?
 |-----------|-----------|-------------------|
 | **Steep learning curve** | Very common | "We work inside TradingView — zero platform learning." |
 | **No broker integration** | Common | "We're analysis layer, use your existing broker." |
-| **Expensive** | Common | "SignalPilot is $99/mo vs $139/mo for their top tier." |
+| **Expensive** | Common | "SignalPilot is $69/mo vs $139/mo for their top tier." |
 | **No free trial** | Moderate | "We have free education hub + 7-day refund." |
 | **Have to leave TradingView** | Common | "We're TradingView-native. No switching." |
 
@@ -1707,7 +1707,7 @@ Completely different approach though. They want you to switch to their platform.
 
 They're "replace everything." We're "enhance what you have."
 
-Also different price point: $99/mo vs $139/mo for their full version.
+Also different price point: $69/mo vs $139/mo for their full version.
 
 Do you already use TradingView, or are you open to switching platforms?
 ```
@@ -1733,7 +1733,7 @@ Do you already use TradingView, or are you open to switching platforms?
 **What Users Complain About (Your Opportunities):**
 | Complaint | Frequency | SignalPilot Angle |
 |-----------|-----------|-------------------|
-| **Extremely expensive** | Very common | "SignalPilot is $99/mo vs $254/mo." |
+| **Extremely expensive** | Very common | "SignalPilot is $69/mo vs $254/mo." |
 | **Steep learning curve** | Very common | "We include 82 lessons to get you started." |
 | **Poor customer support** | Moderate | "We answer within 24-48 hours, personally." |
 | **Stocks only** | For crypto/forex traders | "We work on all markets." |
@@ -1749,7 +1749,7 @@ Trade Ideas is enterprise-grade — $254/month for a reason. They scan thousands
 We're solving a different problem. We don't find trades FOR you — we help you understand WHERE you are in the market cycle so you can find your own.
 
 Also:
-- We're $99/mo vs $254/mo
+- We're $69/mo vs $254/mo
 - We work on crypto, forex, everything — they're stocks only
 - We teach you to fish vs. giving you fish
 
@@ -1764,7 +1764,7 @@ What's your trading style?
 
 | Factor | SignalPilot | LuxAlgo | TrendSpider | Trade Ideas |
 |--------|-------------|---------|-------------|-------------|
-| **Price** | $99/mo | $40-60/mo | $54-139/mo | $127-254/mo |
+| **Price** | $69/mo | $40-60/mo | $54-139/mo | $127-254/mo |
 | **Platform** | TradingView | TradingView | Own platform | Own platform |
 | **Markets** | All | All | Stocks focus | Stocks only |
 | **Non-repainting** | Audited | Claimed (disputed) | N/A | N/A |
