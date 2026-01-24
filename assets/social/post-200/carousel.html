@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 200 - Best Practices Guide</title>
-
-    <!-- ===== GOOGLE FONTS ===== -->
+    <title>Post 200 — Best Practices Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== CSS VARIABLES ===== */
         :root {
             --bg-dark: #0a0a0f;
             --bg-card: rgba(255, 255, 255, 0.03);
@@ -19,86 +15,154 @@
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
             --text-muted: rgba(255, 255, 255, 0.5);
-            --accent-blue: #4a90d9;
             --accent-gold: #c9a962;
+            --accent-gold-dim: rgba(201, 169, 98, 0.3);
             --accent-green: #4ad97a;
-            --accent-red: #d94a4a;
-            --accent-teal: #4ad9d9;
-            --accent-purple: #9b4ad9;
+            --accent-green-dim: rgba(74, 217, 122, 0.3);
             --border-subtle: rgba(255, 255, 255, 0.1);
-            --border-accent: rgba(201, 169, 98, 0.3);
-            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.4);
-            --shadow-glow: 0 0 40px rgba(201, 169, 98, 0.15);
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --slide-width: 1080px;
-            --slide-height: 1080px;
         }
 
-        /* ===== RESET & BASE ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: var(--font-sans);
-            background-color: #1a1a2e;
+            background: var(--bg-dark);
+            color: var(--text-primary);
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 2rem;
+        }
+
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .controls,
+        body.export-mode .page-title,
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+            margin: 0;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: block;
+        }
+
+        body.export-mode .slide {
+            width: 1080px;
+            height: 1080px;
+            max-width: none;
+            border-radius: 0;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .controls label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .controls select,
+        .controls button {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .controls select:hover,
+        .controls button:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-green);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h1 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* ===== CAROUSEL CONTAINER ===== */
-        .carousel-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            justify-content: center;
-            max-width: 1800px;
+        .slide-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        /* ===== SLIDE BASE STYLES ===== */
         .slide {
-            width: var(--slide-width);
-            height: var(--slide-height);
+            width: 100%;
+            max-width: 540px;
+            aspect-ratio: 1 / 1;
             background: var(--bg-dark);
+            border-radius: 0.5rem;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            border-radius: 8px;
-            box-shadow: var(--shadow-soft);
         }
 
-        /* ===== VIDEO BACKGROUND ===== */
-        .video-background {
+        .video-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .video-background video {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
             opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        /* ===== SLIDE CONTENT ===== */
         .slide-content {
             position: relative;
             z-index: 1;
@@ -108,62 +172,17 @@
             padding: 60px;
         }
 
-        /* ===== TYPOGRAPHY ===== */
         .slide-number {
             font-family: var(--font-sans);
             font-size: 14px;
             font-weight: 500;
+            letter-spacing: 3px;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 3px;
             margin-bottom: 20px;
         }
 
-        .headline {
-            font-family: var(--font-serif);
-            font-size: 72px;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.1;
-            margin-bottom: 24px;
-        }
-
-        .headline-large {
-            font-size: 84px;
-        }
-
-        .headline-small {
-            font-size: 56px;
-        }
-
-        .subheadline {
-            font-family: var(--font-serif);
-            font-size: 42px;
-            font-weight: 600;
-            color: var(--accent-gold);
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .body-text {
-            font-family: var(--font-sans);
-            font-size: 26px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .body-text-large {
-            font-size: 30px;
-        }
-
-        .accent-text {
-            color: var(--accent-gold);
-            font-weight: 600;
-        }
-
-        /* ===== HERO SECTION ===== */
+        /* Hero Section */
         .hero-container {
             flex: 1;
             display: flex;
@@ -174,41 +193,41 @@
         }
 
         .checkmark-hero {
-            width: 220px;
-            height: 220px;
+            width: 180px;
+            height: 180px;
             border: 4px solid var(--accent-green);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             background: rgba(74, 217, 122, 0.1);
-            box-shadow: 0 0 60px rgba(74, 217, 122, 0.3);
+            box-shadow: 0 0 50px rgba(74, 217, 122, 0.3);
         }
 
         .checkmark-icon {
-            font-size: 100px;
+            font-size: 80px;
             color: var(--accent-green);
         }
 
         .hero-headline {
             font-family: var(--font-serif);
-            font-size: 84px;
+            font-size: 72px;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.1;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .hero-subtitle {
             font-family: var(--font-sans);
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 400;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 500px;
         }
 
-        /* ===== PRACTICE CARD ===== */
+        /* Practice Cards */
         .practice-container {
             flex: 1;
             display: flex;
@@ -220,8 +239,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
             border-radius: 16px;
-            padding: 50px;
-            margin-bottom: 30px;
+            padding: 44px;
         }
 
         .practice-card.green-border {
@@ -232,13 +250,13 @@
         .practice-header {
             display: flex;
             align-items: center;
-            gap: 24px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: 24px;
         }
 
         .practice-icon {
-            width: 80px;
-            height: 80px;
+            width: 68px;
+            height: 68px;
             background: rgba(74, 217, 122, 0.2);
             border: 2px solid var(--accent-green);
             border-radius: 50%;
@@ -249,82 +267,89 @@
         }
 
         .practice-check {
-            font-size: 42px;
+            font-size: 36px;
             color: var(--accent-green);
         }
 
         .practice-number {
             font-family: var(--font-sans);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             color: var(--accent-green);
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .practice-title {
             font-family: var(--font-serif);
-            font-size: 48px;
+            font-size: 40px;
             font-weight: 700;
             color: var(--text-primary);
         }
 
         .practice-description {
             font-family: var(--font-sans);
-            font-size: 28px;
+            font-size: 22px;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .practice-tip {
             font-family: var(--font-sans);
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 500;
             color: var(--accent-gold);
-            margin-top: 24px;
-            padding-left: 20px;
+            margin-top: 20px;
+            padding-left: 16px;
             border-left: 3px solid var(--accent-gold);
         }
 
-        /* ===== DUAL PRACTICES LAYOUT ===== */
+        .body-text {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Dual Practices */
         .dual-practices {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 30px;
+            gap: 24px;
         }
 
         .practice-mini {
             background: var(--bg-card);
             border: 1px solid rgba(74, 217, 122, 0.3);
             border-radius: 16px;
-            padding: 40px;
+            padding: 32px;
         }
 
         .practice-mini .practice-header {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .practice-mini .practice-icon {
-            width: 60px;
-            height: 60px;
+            width: 54px;
+            height: 54px;
         }
 
         .practice-mini .practice-check {
-            font-size: 32px;
+            font-size: 28px;
         }
 
         .practice-mini .practice-title {
-            font-size: 36px;
+            font-size: 32px;
         }
 
         .practice-mini .practice-description {
-            font-size: 24px;
+            font-size: 18px;
         }
 
-        /* ===== CTA SECTION ===== */
+        /* CTA Section */
         .cta-container {
             flex: 1;
             display: flex;
@@ -335,28 +360,28 @@
         }
 
         .cta-badge {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             border: 3px solid var(--accent-gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             background: rgba(201, 169, 98, 0.1);
         }
 
         .cta-icon {
-            font-size: 70px;
+            font-size: 60px;
         }
 
         .cta-headline {
             font-family: var(--font-serif);
-            font-size: 64px;
+            font-size: 52px;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.2;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .cta-emphasis {
@@ -365,480 +390,350 @@
 
         .cta-text {
             font-family: var(--font-sans);
-            font-size: 28px;
+            font-size: 22px;
             color: var(--text-secondary);
-            max-width: 700px;
-            line-height: 1.6;
-            margin-bottom: 50px;
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 36px;
         }
 
         .cta-box {
             background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
             border: 2px solid var(--accent-gold);
-            border-radius: 16px;
-            padding: 40px 60px;
+            border-radius: 14px;
+            padding: 32px 48px;
         }
 
         .cta-box-text {
             font-family: var(--font-sans);
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 500;
             color: var(--text-primary);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .cta-link {
             font-family: var(--font-sans);
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 600;
             color: var(--accent-gold);
         }
 
-        /* ===== BRAND FOOTER ===== */
+        /* Brand Footer */
         .brand-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-top: 30px;
+            padding-top: 24px;
             border-top: 1px solid var(--border-subtle);
             margin-top: auto;
         }
 
-        .brand-logo {
+        .footer-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8d5a3 100%);
-            border-radius: 10px;
+        .footer-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-gold), #e8d5a3);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .logo-icon svg {
-            width: 26px;
-            height: 26px;
-            fill: var(--bg-dark);
-        }
-
-        .logo-text {
-            font-family: var(--font-sans);
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: 1px;
-        }
-
-        .slide-indicator {
-            font-family: var(--font-sans);
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        /* ===== EXPORT MODE STYLES ===== */
-        body.export-mode {
-            padding: 0;
-            background: transparent;
-        }
-
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
-
-        body.export-mode .slide {
-            border-radius: 0;
-            box-shadow: none;
-        }
-
-        body.export-mode .export-controls {
-            display: none;
-        }
-
-        /* ===== EXPORT CONTROLS ===== */
-        .export-controls {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.9);
-            padding: 16px 28px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            z-index: 1000;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .export-controls span {
-            font-family: var(--font-sans);
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .export-controls kbd {
-            background: var(--bg-card);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-family: var(--font-sans);
-            font-size: 13px;
-            color: var(--accent-gold);
-            border: 1px solid var(--border-subtle);
-        }
+        .footer-logo-icon svg { width: 20px; height: 20px; fill: var(--bg-dark); }
+        .footer-logo-text { font-family: var(--font-sans); font-size: 18px; font-weight: 600; color: var(--text-primary); letter-spacing: 1px; }
+        .footer-slide-num { font-family: var(--font-sans); font-size: 14px; color: var(--text-muted); }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
-        <!-- ===== SLIDE 1: HERO ===== -->
-        <div class="slide" data-slide="1">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
+    <div class="controls">
+        <label>
+            Background:
+            <select id="bg-toggle">
+                <option value="video">Starfield</option>
+                <option value="static">Static</option>
+            </select>
+        </label>
+        <label>
+            Opacity:
+            <select id="opacity-control">
+                <option value="0.08">8%</option>
+                <option value="0.12">12%</option>
+                <option value="0.16">16%</option>
+                <option value="0.04">4%</option>
+            </select>
+        </label>
+        <button id="export-btn">Export Mode</button>
+    </div>
+
+    <div class="page-title">
+        <h1>Best Practices Guide</h1>
+        <p>6 slides · Education</p>
+    </div>
+
+    <div class="carousel-grid">
+        <!-- Slide 1: Hero -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
-            </div>
-            <div class="slide-content">
-                <div class="hero-container">
-                    <div class="checkmark-hero">
-                        <span class="checkmark-icon">✓</span>
-                    </div>
-                    <h1 class="hero-headline">Best Practices</h1>
-                    <p class="hero-subtitle">Six steps to maximize your results<br>with Signal Pilot indicators</p>
-                </div>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
+                <div class="slide-content">
+                    <div class="hero-container">
+                        <div class="checkmark-hero">
+                            <span class="checkmark-icon">✓</span>
                         </div>
-                        <span class="logo-text">SIGNALPILOT</span>
+                        <h1 class="hero-headline">Best Practices</h1>
+                        <p class="hero-subtitle">Six steps to maximize your results with Signal Pilot indicators</p>
                     </div>
-                    <span class="slide-indicator">1 / 6</span>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
+                        </div>
+                        <span class="footer-slide-num">1 / 6</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== SLIDE 2: START WITH ONE ===== -->
-        <div class="slide" data-slide="2">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
+        <!-- Slide 2: Start With One -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Practice #1</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
-            </div>
-            <div class="slide-content">
-                <span class="slide-number">Practice #1</span>
-                <div class="practice-container">
-                    <div class="practice-card green-border">
-                        <div class="practice-header">
-                            <div class="practice-icon">
-                                <span class="practice-check">✓</span>
+                <div class="slide-content">
+                    <span class="slide-number">Practice #1</span>
+                    <div class="practice-container">
+                        <div class="practice-card green-border">
+                            <div class="practice-header">
+                                <div class="practice-icon"><span class="practice-check">✓</span></div>
+                                <div>
+                                    <p class="practice-number">Step One</p>
+                                    <h2 class="practice-title">Start With One Indicator</h2>
+                                </div>
                             </div>
-                            <div>
-                                <p class="practice-number">Step One</p>
-                                <h2 class="practice-title">Start With One Indicator</h2>
-                            </div>
+                            <p class="practice-description">Master Pentarch OR Volume Oracle first. Don't try to learn everything at once. Pick one indicator and truly understand it before adding complexity.</p>
+                            <p class="practice-tip">Tip: Most successful users start with Pentarch for trend direction.</p>
                         </div>
-                        <p class="practice-description">
-                            Master Pentarch OR Volume Oracle first. Don't try to learn
-                            everything at once. Pick one indicator and truly understand it
-                            before adding complexity.
-                        </p>
-                        <p class="practice-tip">
-                            Tip: Most successful users start with Pentarch for trend direction.
-                        </p>
+                        <p class="body-text" style="text-align: center; font-style: italic; margin-top: 24px;">Simplicity creates mastery. Complexity creates confusion.</p>
                     </div>
-                    <p class="body-text" style="text-align: center; font-style: italic; margin-top: 30px;">
-                        Simplicity creates mastery. Complexity creates confusion.
-                    </p>
-                </div>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
                         </div>
-                        <span class="logo-text">SIGNALPILOT</span>
+                        <span class="footer-slide-num">2 / 6</span>
                     </div>
-                    <span class="slide-indicator">2 / 6</span>
                 </div>
             </div>
         </div>
 
-        <!-- ===== SLIDE 3: LESSONS + PAPER TRADE ===== -->
-        <div class="slide" data-slide="3">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
+        <!-- Slide 3: Lessons + Paper Trade -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Practices #2 & #3</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
-            </div>
-            <div class="slide-content">
-                <span class="slide-number">Practices #2 & #3</span>
-                <div class="dual-practices">
-                    <div class="practice-mini">
-                        <div class="practice-header">
-                            <div class="practice-icon">
-                                <span class="practice-check">✓</span>
+                <div class="slide-content">
+                    <span class="slide-number">Practices #2 & #3</span>
+                    <div class="dual-practices">
+                        <div class="practice-mini">
+                            <div class="practice-header">
+                                <div class="practice-icon"><span class="practice-check">✓</span></div>
+                                <div>
+                                    <p class="practice-number">Step Two</p>
+                                    <h2 class="practice-title">Complete the Lessons</h2>
+                                </div>
                             </div>
-                            <div>
-                                <p class="practice-number">Step Two</p>
-                                <h2 class="practice-title">Complete the Lessons</h2>
-                            </div>
+                            <p class="practice-description">82 free lessons exist for a reason. They build your foundation and teach you concepts that make everything click.</p>
                         </div>
-                        <p class="practice-description">
-                            82 free lessons exist for a reason. They build your foundation
-                            and teach you concepts that make everything click.
-                        </p>
-                    </div>
-                    <div class="practice-mini">
-                        <div class="practice-header">
-                            <div class="practice-icon">
-                                <span class="practice-check">✓</span>
+                        <div class="practice-mini">
+                            <div class="practice-header">
+                                <div class="practice-icon"><span class="practice-check">✓</span></div>
+                                <div>
+                                    <p class="practice-number">Step Three</p>
+                                    <h2 class="practice-title">Paper Trade First</h2>
+                                </div>
                             </div>
-                            <div>
-                                <p class="practice-number">Step Three</p>
-                                <h2 class="practice-title">Paper Trade First</h2>
-                            </div>
+                            <p class="practice-description">Test before risking capital. Paper trading builds confidence and reveals what you still need to learn — without cost.</p>
                         </div>
-                        <p class="practice-description">
-                            Test before risking capital. Paper trading builds confidence
-                            and reveals what you still need to learn — without cost.
-                        </p>
                     </div>
-                </div>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
                         </div>
-                        <span class="logo-text">SIGNALPILOT</span>
+                        <span class="footer-slide-num">3 / 6</span>
                     </div>
-                    <span class="slide-indicator">3 / 6</span>
                 </div>
             </div>
         </div>
 
-        <!-- ===== SLIDE 4: JOURNAL ===== -->
-        <div class="slide" data-slide="4">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
+        <!-- Slide 4: Journal -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Practice #4</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
-            </div>
-            <div class="slide-content">
-                <span class="slide-number">Practice #4</span>
-                <div class="practice-container">
-                    <div class="practice-card green-border">
-                        <div class="practice-header">
-                            <div class="practice-icon">
-                                <span class="practice-check">✓</span>
+                <div class="slide-content">
+                    <span class="slide-number">Practice #4</span>
+                    <div class="practice-container">
+                        <div class="practice-card green-border">
+                            <div class="practice-header">
+                                <div class="practice-icon"><span class="practice-check">✓</span></div>
+                                <div>
+                                    <p class="practice-number">Step Four</p>
+                                    <h2 class="practice-title">Journal Your Observations</h2>
+                                </div>
                             </div>
-                            <div>
-                                <p class="practice-number">Step Four</p>
-                                <h2 class="practice-title">Journal Your Observations</h2>
-                            </div>
+                            <p class="practice-description">Note what you see. Track what works and what doesn't. Your trading journal is your most valuable learning tool. Over time, patterns emerge that charts alone can't show you.</p>
+                            <p class="practice-tip">Tip: Screenshot setups. Note the context. Review weekly.</p>
                         </div>
-                        <p class="practice-description">
-                            Note what you see. Track what works and what doesn't.
-                            Your trading journal is your most valuable learning tool.
-                            Over time, patterns emerge that charts alone can't show you.
-                        </p>
-                        <p class="practice-tip">
-                            Tip: Screenshot setups. Note the context. Review weekly.
-                        </p>
+                        <p class="body-text" style="text-align: center; font-style: italic; margin-top: 24px;">The traders who journal consistently improve 3x faster.</p>
                     </div>
-                    <p class="body-text" style="text-align: center; font-style: italic; margin-top: 30px;">
-                        The traders who journal consistently improve 3x faster.
-                    </p>
-                </div>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
                         </div>
-                        <span class="logo-text">SIGNALPILOT</span>
+                        <span class="footer-slide-num">4 / 6</span>
                     </div>
-                    <span class="slide-indicator">4 / 6</span>
                 </div>
             </div>
         </div>
 
-        <!-- ===== SLIDE 5: ADD GRADUALLY + COMMUNITY ===== -->
-        <div class="slide" data-slide="5">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
+        <!-- Slide 5: Add Gradually + Community -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Practices #5 & #6</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
-            </div>
-            <div class="slide-content">
-                <span class="slide-number">Practices #5 & #6</span>
-                <div class="dual-practices">
-                    <div class="practice-mini">
-                        <div class="practice-header">
-                            <div class="practice-icon">
-                                <span class="practice-check">✓</span>
+                <div class="slide-content">
+                    <span class="slide-number">Practices #5 & #6</span>
+                    <div class="dual-practices">
+                        <div class="practice-mini">
+                            <div class="practice-header">
+                                <div class="practice-icon"><span class="practice-check">✓</span></div>
+                                <div>
+                                    <p class="practice-number">Step Five</p>
+                                    <h2 class="practice-title">Add Indicators Gradually</h2>
+                                </div>
                             </div>
-                            <div>
-                                <p class="practice-number">Step Five</p>
-                                <h2 class="practice-title">Add Indicators Gradually</h2>
-                            </div>
+                            <p class="practice-description">One indicator at a time. Build layered understanding. Each addition should complement, not complicate.</p>
                         </div>
-                        <p class="practice-description">
-                            One indicator at a time. Build layered understanding.
-                            Each addition should complement, not complicate.
-                        </p>
-                    </div>
-                    <div class="practice-mini">
-                        <div class="practice-header">
-                            <div class="practice-icon">
-                                <span class="practice-check">✓</span>
+                        <div class="practice-mini">
+                            <div class="practice-header">
+                                <div class="practice-icon"><span class="practice-check">✓</span></div>
+                                <div>
+                                    <p class="practice-number">Step Six</p>
+                                    <h2 class="practice-title">Join the Community</h2>
+                                </div>
                             </div>
-                            <div>
-                                <p class="practice-number">Step Six</p>
-                                <h2 class="practice-title">Join the Community</h2>
-                            </div>
+                            <p class="practice-description">Learn from others. Share your insights. The community accelerates learning through shared experience.</p>
                         </div>
-                        <p class="practice-description">
-                            Learn from others. Share your insights. The community
-                            accelerates learning through shared experience.
-                        </p>
                     </div>
-                </div>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
                         </div>
-                        <span class="logo-text">SIGNALPILOT</span>
+                        <span class="footer-slide-num">5 / 6</span>
                     </div>
-                    <span class="slide-indicator">5 / 6</span>
                 </div>
             </div>
         </div>
 
-        <!-- ===== SLIDE 6: CTA ===== -->
-        <div class="slide" data-slide="6">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
+        <!-- Slide 6: CTA -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — CTA</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
-            </div>
-            <div class="slide-content">
-                <div class="cta-container">
-                    <div class="cta-badge">
-                        <span class="cta-icon">📚</span>
-                    </div>
-                    <h2 class="cta-headline">
-                        Mastery Takes Time.<br><span class="cta-emphasis">These Practices Accelerate It.</span>
-                    </h2>
-                    <p class="cta-text">
-                        Follow these six practices consistently and you'll progress
-                        faster than 90% of traders. There are no shortcuts,
-                        but there is a better path.
-                    </p>
-                    <div class="cta-box">
-                        <p class="cta-box-text">Read the complete Best Practices guide</p>
-                        <span class="cta-link">docs.signalpilot.io</span>
-                    </div>
-                </div>
-                <div class="brand-footer">
-                    <div class="brand-logo">
-                        <div class="logo-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
-                            </svg>
+                <div class="slide-content">
+                    <div class="cta-container">
+                        <div class="cta-badge"><span class="cta-icon">📚</span></div>
+                        <h2 class="cta-headline">Mastery Takes Time.<br><span class="cta-emphasis">These Practices Accelerate It.</span></h2>
+                        <p class="cta-text">Follow these six practices consistently and you'll progress faster than 90% of traders. There are no shortcuts, but there is a better path.</p>
+                        <div class="cta-box">
+                            <p class="cta-box-text">Read the complete Best Practices guide</p>
+                            <span class="cta-link">docs.signalpilot.io</span>
                         </div>
-                        <span class="logo-text">SIGNALPILOT</span>
                     </div>
-                    <span class="slide-indicator">6 / 6</span>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg></div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
+                        </div>
+                        <span class="footer-slide-num">6 / 6</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ===== EXPORT CONTROLS ===== -->
-    <div class="export-controls">
-        <span>Press</span>
-        <kbd>E</kbd>
-        <span>for export mode</span>
-        <span>|</span>
-        <kbd>←</kbd>
-        <kbd>→</kbd>
-        <span>to navigate</span>
-        <span>|</span>
-        <kbd>ESC</kbd>
-        <span>to exit</span>
-    </div>
-
-    <!-- ===== EXPORT MODE JAVASCRIPT ===== -->
     <script>
         (function() {
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
+            const videos = document.querySelectorAll('.video-bg');
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
             let exportMode = false;
             let currentSlide = 0;
-            const slides = document.querySelectorAll('.slide');
-            const totalSlides = slides.length;
 
-            function enterExportMode() {
-                exportMode = true;
-                document.body.classList.add('export-mode');
-                currentSlide = 0;
-                showOnlySlide(currentSlide);
-            }
+            bgToggle.addEventListener('change', function() {
+                videos.forEach(video => {
+                    video.style.display = this.value === 'video' ? 'block' : 'none';
+                });
+            });
 
-            function exitExportMode() {
-                exportMode = false;
-                document.body.classList.remove('export-mode');
-                slides.forEach(slide => slide.style.display = 'flex');
-            }
+            opacityControl.addEventListener('change', function() {
+                videos.forEach(video => {
+                    video.style.opacity = this.value;
+                });
+            });
 
-            function showOnlySlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.style.display = i === index ? 'flex' : 'none';
+            exportBtn.addEventListener('click', function() {
+                exportMode = !exportMode;
+                document.body.classList.toggle('export-mode', exportMode);
+                this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+                if (exportMode) {
+                    currentSlide = 0;
+                    updateActiveSlide();
+                }
+            });
+
+            function updateActiveSlide() {
+                slideWrappers.forEach((wrapper, index) => {
+                    wrapper.classList.toggle('active', index === currentSlide);
                 });
             }
 
-            function nextSlide() {
-                if (!exportMode) return;
-                currentSlide = (currentSlide + 1) % totalSlides;
-                showOnlySlide(currentSlide);
-            }
-
-            function prevSlide() {
-                if (!exportMode) return;
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                showOnlySlide(currentSlide);
-            }
-
             document.addEventListener('keydown', function(e) {
-                switch(e.key.toLowerCase()) {
-                    case 'e':
-                        if (!exportMode) {
-                            enterExportMode();
-                        }
-                        break;
-                    case 'escape':
-                        if (exportMode) {
-                            exitExportMode();
-                        }
-                        break;
-                    case 'arrowright':
-                        nextSlide();
-                        break;
-                    case 'arrowleft':
-                        prevSlide();
-                        break;
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    currentSlide = (currentSlide + 1) % slideWrappers.length;
+                    updateActiveSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+                    updateActiveSlide();
+                } else if (e.key === 'Escape') {
+                    exportMode = false;
+                    document.body.classList.remove('export-mode');
+                    exportBtn.textContent = 'Export Mode';
                 }
             });
         })();

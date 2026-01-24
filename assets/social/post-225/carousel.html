@@ -28,10 +28,7 @@
             --text-muted: #606070;
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --slide-padding: 60px;
-            --content-gap: 24px;
-            --slide-width: 1080px;
-            --slide-height: 1080px;
+            --video-opacity: 0.08;
         }
 
         *,
@@ -54,33 +51,149 @@
             line-height: 1.6;
             color: var(--text-primary);
             background-color: #000000;
-        }
-
-        .carousel-container {
-            display: flex;
-            flex-direction: row;
-            gap: 40px;
-            padding: 40px;
-            overflow-x: auto;
             min-height: 100vh;
-            align-items: center;
+            padding: 2rem;
         }
 
+        /* Controls Bar */
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            background: var(--bg-card);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .controls label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .controls select {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        #export-btn {
+            background: var(--accent-orange);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #export-btn:hover {
+            filter: brightness(1.1);
+        }
+
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            margin: 5rem auto 3rem;
+        }
+
+        .page-title h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* Carousel Grid */
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 0 auto;
+            justify-items: center;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slide-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Slide Base */
         .slide {
             position: relative;
-            width: var(--slide-width);
-            height: var(--slide-height);
-            min-width: var(--slide-width);
-            min-height: var(--slide-height);
+            width: 100%;
+            max-width: 540px;
+            aspect-ratio: 1 / 1;
             background-color: var(--bg-dark);
             border-radius: 12px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: var(--slide-padding);
+            padding: clamp(30px, 5.6vw, 60px);
         }
 
+        /* Export Mode */
+        body.export-mode .slide {
+            width: 1080px;
+            height: 1080px;
+            max-width: none;
+            border-radius: 0;
+            padding: 60px;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.exporting {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .page-title,
+        body.export-mode .controls {
+            display: none;
+        }
+
+        /* Video Background */
         .slide-video-bg {
             position: absolute;
             top: 0;
@@ -96,9 +209,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.08;
+            opacity: var(--video-opacity);
         }
 
+        /* Slide Content */
         .slide-content {
             position: relative;
             z-index: 1;
@@ -107,60 +221,61 @@
             justify-content: center;
             align-items: center;
             flex: 1;
-            gap: var(--content-gap);
+            gap: clamp(12px, 2.2vw, 24px);
         }
 
         .slide-header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: clamp(12px, 2.2vw, 24px);
         }
 
         .slide-number {
             font-family: var(--font-sans);
-            font-size: 14px;
+            font-size: clamp(7px, 1.3vw, 14px);
             font-weight: 600;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--accent-orange);
-            margin-bottom: 16px;
+            margin-bottom: clamp(8px, 1.5vw, 16px);
         }
 
         .slide-title {
             font-family: var(--font-serif);
-            font-size: 72px;
+            font-size: clamp(36px, 6.7vw, 72px);
             font-weight: 600;
             line-height: 1.1;
             color: var(--text-primary);
-            margin-bottom: 16px;
+            margin-bottom: clamp(8px, 1.5vw, 16px);
         }
 
         .slide-title-large {
-            font-size: 80px;
+            font-size: clamp(40px, 7.4vw, 80px);
         }
 
         .slide-subtitle {
             font-family: var(--font-sans);
-            font-size: 28px;
+            font-size: clamp(14px, 2.6vw, 28px);
             font-weight: 400;
             color: var(--text-secondary);
             line-height: 1.4;
         }
 
+        /* Sovereign Visual */
         .sovereign-visual {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 24px;
-            margin: 32px 0;
+            gap: clamp(12px, 2.2vw, 24px);
+            margin: clamp(16px, 3vw, 32px) 0;
         }
 
         .signal-badge {
-            width: 180px;
-            height: 180px;
+            width: clamp(90px, 16.7vw, 180px);
+            height: clamp(90px, 16.7vw, 180px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 80px;
+            font-size: clamp(40px, 7.4vw, 80px);
             background: linear-gradient(135deg, var(--accent-orange) 0%, #d97a4a 100%);
             border-radius: 50%;
             box-shadow: 0 0 60px var(--accent-orange-glow);
@@ -168,38 +283,39 @@
 
         .signal-label {
             font-family: var(--font-sans);
-            font-size: 36px;
+            font-size: clamp(18px, 3.3vw, 36px);
             font-weight: 700;
             color: var(--accent-orange);
             letter-spacing: 4px;
         }
 
+        /* Definition Card */
         .definition-card {
             width: 100%;
             max-width: 800px;
-            padding: 48px;
+            padding: clamp(24px, 4.4vw, 48px);
             background: var(--bg-card);
-            border-radius: 24px;
+            border-radius: clamp(12px, 2.2vw, 24px);
             border: 1px solid var(--border-subtle);
             text-align: center;
         }
 
         .definition-icon {
-            font-size: 64px;
-            margin-bottom: 24px;
+            font-size: clamp(32px, 5.9vw, 64px);
+            margin-bottom: clamp(12px, 2.2vw, 24px);
         }
 
         .definition-title {
             font-family: var(--font-serif);
-            font-size: 36px;
+            font-size: clamp(18px, 3.3vw, 36px);
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 16px;
+            margin-bottom: clamp(8px, 1.5vw, 16px);
         }
 
         .definition-text {
             font-family: var(--font-sans);
-            font-size: 26px;
+            font-size: clamp(13px, 2.4vw, 26px);
             font-weight: 400;
             color: var(--text-secondary);
             line-height: 1.6;
@@ -210,6 +326,7 @@
             font-weight: 600;
         }
 
+        /* Feature Section */
         .feature-section {
             width: 100%;
             max-width: 800px;
@@ -218,26 +335,26 @@
         .section-header {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 32px;
+            gap: clamp(8px, 1.5vw, 16px);
+            margin-bottom: clamp(16px, 3vw, 32px);
         }
 
         .section-icon {
-            width: 64px;
-            height: 64px;
+            width: clamp(32px, 5.9vw, 64px);
+            height: clamp(32px, 5.9vw, 64px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: clamp(16px, 3vw, 32px);
             background: var(--bg-card);
-            border-radius: 16px;
+            border-radius: clamp(8px, 1.5vw, 16px);
             border: 2px solid var(--accent-orange);
             box-shadow: 0 0 20px var(--accent-orange-glow);
         }
 
         .section-title {
             font-family: var(--font-serif);
-            font-size: 42px;
+            font-size: clamp(21px, 3.9vw, 42px);
             font-weight: 600;
             color: var(--text-primary);
         }
@@ -245,22 +362,22 @@
         .feature-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: clamp(8px, 1.5vw, 16px);
         }
 
         .feature-item {
             display: flex;
             align-items: center;
-            gap: 20px;
-            padding: 24px 28px;
+            gap: clamp(10px, 1.9vw, 20px);
+            padding: clamp(12px, 2.2vw, 24px) clamp(14px, 2.6vw, 28px);
             background: var(--bg-card);
-            border-radius: 16px;
+            border-radius: clamp(8px, 1.5vw, 16px);
             border: 1px solid var(--border-subtle);
         }
 
         .feature-bullet {
-            width: 12px;
-            height: 12px;
+            width: clamp(6px, 1.1vw, 12px);
+            height: clamp(6px, 1.1vw, 12px);
             border-radius: 4px;
             background: var(--accent-orange);
             flex-shrink: 0;
@@ -276,11 +393,12 @@
 
         .feature-text {
             font-family: var(--font-sans);
-            font-size: 24px;
+            font-size: clamp(12px, 2.2vw, 24px);
             font-weight: 500;
             color: var(--text-primary);
         }
 
+        /* Not Section */
         .not-section {
             width: 100%;
             max-width: 800px;
@@ -289,28 +407,29 @@
         .not-header {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 32px;
+            gap: clamp(8px, 1.5vw, 16px);
+            margin-bottom: clamp(16px, 3vw, 32px);
         }
 
         .not-icon {
-            width: 64px;
-            height: 64px;
+            width: clamp(32px, 5.9vw, 64px);
+            height: clamp(32px, 5.9vw, 64px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: clamp(16px, 3vw, 32px);
             background: var(--accent-red);
-            border-radius: 16px;
+            border-radius: clamp(8px, 1.5vw, 16px);
         }
 
         .not-title {
             font-family: var(--font-serif);
-            font-size: 42px;
+            font-size: clamp(21px, 3.9vw, 42px);
             font-weight: 600;
             color: var(--accent-red);
         }
 
+        /* Usage Section */
         .usage-section {
             width: 100%;
             max-width: 800px;
@@ -318,66 +437,68 @@
 
         .usage-card {
             display: flex;
-            gap: 20px;
-            padding: 24px 28px;
+            gap: clamp(10px, 1.9vw, 20px);
+            padding: clamp(12px, 2.2vw, 24px) clamp(14px, 2.6vw, 28px);
             background: var(--bg-card);
-            border-radius: 16px;
+            border-radius: clamp(8px, 1.5vw, 16px);
             border: 1px solid var(--border-subtle);
-            margin-bottom: 16px;
+            margin-bottom: clamp(8px, 1.5vw, 16px);
         }
 
         .usage-formula {
             font-family: var(--font-sans);
-            font-size: 22px;
+            font-size: clamp(11px, 2vw, 22px);
             font-weight: 500;
             color: var(--text-primary);
         }
 
         .usage-result {
             font-family: var(--font-sans);
-            font-size: 20px;
+            font-size: clamp(10px, 1.9vw, 20px);
             font-weight: 400;
             color: var(--text-secondary);
         }
 
+        /* Wisdom Callout */
         .wisdom-callout {
             display: flex;
             align-items: center;
-            gap: 20px;
-            padding: 28px 36px;
+            gap: clamp(10px, 1.9vw, 20px);
+            padding: clamp(14px, 2.6vw, 28px) clamp(18px, 3.3vw, 36px);
             background: var(--bg-card);
-            border-radius: 16px;
+            border-radius: clamp(8px, 1.5vw, 16px);
             border-left: 4px solid var(--accent-orange);
-            margin-top: 24px;
+            margin-top: clamp(12px, 2.2vw, 24px);
         }
 
         .wisdom-icon {
-            font-size: 36px;
+            font-size: clamp(18px, 3.3vw, 36px);
             flex-shrink: 0;
         }
 
         .wisdom-text {
             font-family: var(--font-serif);
-            font-size: 28px;
+            font-size: clamp(14px, 2.6vw, 28px);
             font-style: italic;
             color: var(--text-secondary);
             line-height: 1.4;
         }
 
+        /* CTA Container */
         .cta-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 40px;
+            gap: clamp(20px, 3.7vw, 40px);
         }
 
         .cta-visual {
-            width: 180px;
-            height: 180px;
+            width: clamp(90px, 16.7vw, 180px);
+            height: clamp(90px, 16.7vw, 180px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 80px;
+            font-size: clamp(40px, 7.4vw, 80px);
             background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 100%);
             border-radius: 50%;
             box-shadow: 0 0 60px var(--accent-orange-glow);
@@ -385,7 +506,7 @@
 
         .cta-text {
             font-family: var(--font-serif);
-            font-size: 52px;
+            font-size: clamp(26px, 4.8vw, 52px);
             font-weight: 600;
             color: var(--text-primary);
             text-align: center;
@@ -398,7 +519,7 @@
 
         .cta-subtext {
             font-family: var(--font-sans);
-            font-size: 28px;
+            font-size: clamp(14px, 2.6vw, 28px);
             font-weight: 400;
             color: var(--text-secondary);
             text-align: center;
@@ -407,12 +528,12 @@
         .cta-button {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 20px 48px;
+            gap: clamp(6px, 1.1vw, 12px);
+            padding: clamp(10px, 1.9vw, 20px) clamp(24px, 4.4vw, 48px);
             background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange) 100%);
             border-radius: 100px;
             font-family: var(--font-sans);
-            font-size: 22px;
+            font-size: clamp(11px, 2vw, 22px);
             font-weight: 600;
             color: var(--bg-dark);
             text-decoration: none;
@@ -425,30 +546,31 @@
             box-shadow: 0 8px 32px var(--accent-orange-glow);
         }
 
+        /* Brand Footer */
         .brand-footer {
             position: relative;
             z-index: 1;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 24px;
+            padding-top: clamp(12px, 2.2vw, 24px);
             border-top: 1px solid var(--border-subtle);
         }
 
         .brand-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: clamp(6px, 1.1vw, 12px);
         }
 
         .brand-logo img {
-            height: 36px;
+            height: clamp(18px, 3.3vw, 36px);
             width: auto;
         }
 
         .brand-logo-text {
             font-family: var(--font-sans);
-            font-size: 20px;
+            font-size: clamp(10px, 1.9vw, 20px);
             font-weight: 600;
             color: var(--text-primary);
             letter-spacing: 0.5px;
@@ -456,308 +578,334 @@
 
         .slide-indicator {
             font-family: var(--font-sans);
-            font-size: 16px;
+            font-size: clamp(8px, 1.5vw, 16px);
             font-weight: 500;
             color: var(--text-muted);
-        }
-
-        body.export-mode {
-            background: transparent;
-        }
-
-        body.export-mode .carousel-container {
-            padding: 0;
-            gap: 0;
-        }
-
-        body.export-mode .slide {
-            border-radius: 0;
-        }
-
-        body.export-mode .slide:not(.exporting) {
-            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
-        <div class="slide" data-slide="1">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
+    <div class="controls">
+        <label>Background:
+            <select id="bg-toggle">
+                <option value="video">Starfield</option>
+                <option value="solid">Solid</option>
+            </select>
+        </label>
+        <label>Opacity:
+            <select id="opacity-control">
+                <option value="0.08" selected>8%</option>
+                <option value="0.12">12%</option>
+                <option value="0.16">16%</option>
+                <option value="0.24">24%</option>
+            </select>
+        </label>
+        <button id="export-btn">Export Mode</button>
+    </div>
 
-            <div class="slide-content">
-                <div class="slide-header">
-                    <div class="slide-number">Pentarch TD • The Sovereign</div>
-                    <h1 class="slide-title slide-title-large">CAP<br>Signal</h1>
-                    <p class="slide-subtitle">Late-Cycle Exhaustion Detection</p>
+    <div class="page-title">
+        <h1>Pentarch CAP Signal Deep Dive</h1>
+        <p>6 slides · Sovereign Signal Education</p>
+    </div>
+
+    <div class="carousel-grid">
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
                 </div>
 
-                <div class="sovereign-visual">
-                    <div class="signal-badge">👑</div>
-                    <span class="signal-label">CAP</span>
-                </div>
-            </div>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <div class="slide-number">Pentarch TD • The Sovereign</div>
+                        <h1 class="slide-title slide-title-large">CAP<br>Signal</h1>
+                        <p class="slide-subtitle">Late-Cycle Exhaustion Detection</p>
+                    </div>
 
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
+                    <div class="sovereign-visual">
+                        <div class="signal-badge">👑</div>
+                        <span class="signal-label">CAP</span>
+                    </div>
                 </div>
-                <span class="slide-indicator">1 / 6</span>
+
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
+                    </div>
+                    <span class="slide-indicator">1 / 6</span>
+                </div>
             </div>
         </div>
 
-        <div class="slide" data-slide="2">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <div class="slide-content">
-                <div class="definition-card">
-                    <div class="definition-icon">🟠</div>
-                    <h2 class="definition-title">What is CAP?</h2>
-                    <p class="definition-text">
-                        <span class="definition-highlight">Climax</span> — Late-cycle exhaustion
-                        with <span class="definition-highlight">volume spikes</span>
-                    </p>
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Definition</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
                 </div>
 
-                <div class="wisdom-callout">
-                    <span class="wisdom-icon">👑</span>
-                    <span class="wisdom-text">The Sovereign sees exhaustion forming before the crowd</span>
-                </div>
-            </div>
-
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
-                </div>
-                <span class="slide-indicator">2 / 6</span>
-            </div>
-        </div>
-
-        <div class="slide" data-slide="3">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <div class="slide-content">
-                <div class="feature-section">
-                    <div class="section-header">
-                        <div class="section-icon">⚡</div>
-                        <h2 class="section-title">When CAP Fires</h2>
-                    </div>
-
-                    <div class="feature-list">
-                        <div class="feature-item">
-                            <div class="feature-bullet"></div>
-                            <span class="feature-text">Late-cycle exhaustion detected</span>
-                        </div>
-
-                        <div class="feature-item">
-                            <div class="feature-bullet"></div>
-                            <span class="feature-text">Volume spikes appearing</span>
-                        </div>
-
-                        <div class="feature-item">
-                            <div class="feature-bullet"></div>
-                            <span class="feature-text">Cycle nearing potential completion</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
-                </div>
-                <span class="slide-indicator">3 / 6</span>
-            </div>
-        </div>
-
-        <div class="slide" data-slide="4">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <div class="slide-content">
-                <div class="not-section">
-                    <div class="not-header">
-                        <div class="not-icon">❌</div>
-                        <h2 class="not-title">What CAP is NOT</h2>
-                    </div>
-
-                    <div class="feature-list">
-                        <div class="feature-item">
-                            <div class="feature-bullet red"></div>
-                            <span class="feature-text">NOT an instant sell signal</span>
-                        </div>
-
-                        <div class="feature-item">
-                            <div class="feature-bullet red"></div>
-                            <span class="feature-text">NOT a guarantee of reversal</span>
-                        </div>
-
-                        <div class="feature-item">
-                            <div class="feature-bullet red"></div>
-                            <span class="feature-text">NOT a standalone trade trigger</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
-                </div>
-                <span class="slide-indicator">4 / 6</span>
-            </div>
-        </div>
-
-        <div class="slide" data-slide="5">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <div class="slide-content">
-                <div class="usage-section">
-                    <div class="section-header">
-                        <div class="section-icon">🎯</div>
-                        <h2 class="section-title">How to Use Properly</h2>
-                    </div>
-
-                    <div class="usage-card">
-                        <span class="usage-formula">CAP + Structure Resistance</span>
-                        <span class="usage-result">→ Higher conviction</span>
-                    </div>
-
-                    <div class="usage-card">
-                        <span class="usage-formula">CAP + Volume Climax</span>
-                        <span class="usage-result">→ Watch closely</span>
-                    </div>
-
-                    <div class="usage-card">
-                        <span class="usage-formula">CAP in Strong Trend</span>
-                        <span class="usage-result">→ Caution, not action</span>
+                <div class="slide-content">
+                    <div class="definition-card">
+                        <div class="definition-icon">🟠</div>
+                        <h2 class="definition-title">What is CAP?</h2>
+                        <p class="definition-text">
+                            <span class="definition-highlight">Climax</span> — Late-cycle exhaustion
+                            with <span class="definition-highlight">volume spikes</span>
+                        </p>
                     </div>
 
                     <div class="wisdom-callout">
-                        <span class="wisdom-icon">💡</span>
-                        <span class="wisdom-text">Context determines meaning</span>
+                        <span class="wisdom-icon">👑</span>
+                        <span class="wisdom-text">The Sovereign sees exhaustion forming before the crowd</span>
                     </div>
                 </div>
-            </div>
 
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
+                    </div>
+                    <span class="slide-indicator">2 / 6</span>
                 </div>
-                <span class="slide-indicator">5 / 6</span>
             </div>
         </div>
 
-        <div class="slide" data-slide="6">
-            <div class="slide-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — When CAP Fires</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
 
-            <div class="slide-content">
-                <div class="cta-container">
-                    <div class="cta-visual">👑</div>
+                <div class="slide-content">
+                    <div class="feature-section">
+                        <div class="section-header">
+                            <div class="section-icon">⚡</div>
+                            <h2 class="section-title">When CAP Fires</h2>
+                        </div>
 
-                    <h2 class="cta-text">Observe.<br><span class="cta-highlight">Don't React.</span></h2>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="feature-bullet"></div>
+                                <span class="feature-text">Late-cycle exhaustion detected</span>
+                            </div>
 
-                    <p class="cta-subtext">
-                        Learn to interpret CAP correctly
-                    </p>
+                            <div class="feature-item">
+                                <div class="feature-bullet"></div>
+                                <span class="feature-text">Volume spikes appearing</span>
+                            </div>
 
-                    <a href="#" class="cta-button">
-                        <span>Full Docs in Bio</span>
-                        <span>🔗</span>
-                    </a>
+                            <div class="feature-item">
+                                <div class="feature-bullet"></div>
+                                <span class="feature-text">Cycle nearing potential completion</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
+                    </div>
+                    <span class="slide-indicator">3 / 6</span>
                 </div>
             </div>
+        </div>
 
-            <div class="brand-footer">
-                <div class="brand-logo">
-                    <img src="../../images/logo-flat.png" alt="SignalPilot">
-                    <span class="brand-logo-text">SignalPilot</span>
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — What CAP is NOT</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
                 </div>
-                <span class="slide-indicator">6 / 6</span>
+
+                <div class="slide-content">
+                    <div class="not-section">
+                        <div class="not-header">
+                            <div class="not-icon">❌</div>
+                            <h2 class="not-title">What CAP is NOT</h2>
+                        </div>
+
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="feature-bullet red"></div>
+                                <span class="feature-text">NOT an instant sell signal</span>
+                            </div>
+
+                            <div class="feature-item">
+                                <div class="feature-bullet red"></div>
+                                <span class="feature-text">NOT a guarantee of reversal</span>
+                            </div>
+
+                            <div class="feature-item">
+                                <div class="feature-bullet red"></div>
+                                <span class="feature-text">NOT a standalone trade trigger</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
+                    </div>
+                    <span class="slide-indicator">4 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — How to Use</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="slide-content">
+                    <div class="usage-section">
+                        <div class="section-header">
+                            <div class="section-icon">🎯</div>
+                            <h2 class="section-title">How to Use Properly</h2>
+                        </div>
+
+                        <div class="usage-card">
+                            <span class="usage-formula">CAP + Structure Resistance</span>
+                            <span class="usage-result">→ Higher conviction</span>
+                        </div>
+
+                        <div class="usage-card">
+                            <span class="usage-formula">CAP + Volume Climax</span>
+                            <span class="usage-result">→ Watch closely</span>
+                        </div>
+
+                        <div class="usage-card">
+                            <span class="usage-formula">CAP in Strong Trend</span>
+                            <span class="usage-result">→ Caution, not action</span>
+                        </div>
+
+                        <div class="wisdom-callout">
+                            <span class="wisdom-icon">💡</span>
+                            <span class="wisdom-text">Context determines meaning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
+                    </div>
+                    <span class="slide-indicator">5 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — CTA</span>
+            <div class="slide">
+                <div class="slide-video-bg">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="slide-content">
+                    <div class="cta-container">
+                        <div class="cta-visual">👑</div>
+
+                        <h2 class="cta-text">Observe.<br><span class="cta-highlight">Don't React.</span></h2>
+
+                        <p class="cta-subtext">
+                            Learn to interpret CAP correctly
+                        </p>
+
+                        <a href="#" class="cta-button">
+                            <span>Full Docs in Bio</span>
+                            <span>🔗</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <img src="../../images/logo-flat.png" alt="SignalPilot">
+                        <span class="brand-logo-text">SignalPilot</span>
+                    </div>
+                    <span class="slide-indicator">6 / 6</span>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
             let exportMode = false;
             let currentSlide = 0;
-            const slides = document.querySelectorAll('.slide');
-            const totalSlides = slides.length;
-
-            function enterExportMode() {
-                exportMode = true;
-                document.body.classList.add('export-mode');
-                currentSlide = 0;
-                updateExportView();
-            }
-
-            function exitExportMode() {
-                exportMode = false;
-                document.body.classList.remove('export-mode');
-                slides.forEach(slide => slide.classList.remove('exporting'));
-            }
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
 
             function updateExportView() {
-                slides.forEach((slide, index) => {
-                    if (index === currentSlide) {
-                        slide.classList.add('exporting');
-                    } else {
-                        slide.classList.remove('exporting');
+                slideWrappers.forEach((wrapper, index) => {
+                    wrapper.classList.toggle('exporting', index === currentSlide);
+                });
+            }
+
+            if (defined(bgToggle)) {
+                bgToggle.addEventListener('change', (e) => {
+                    document.querySelectorAll('.slide-video-bg').forEach(bg => {
+                        bg.style.display = e.target.value === 'video' ? 'block' : 'none';
+                    });
+                });
+            }
+
+            if (defined(opacityControl)) {
+                opacityControl.addEventListener('change', (e) => {
+                    document.documentElement.style.setProperty('--video-opacity', e.target.value);
+                });
+            }
+
+            if (defined(exportBtn)) {
+                exportBtn.addEventListener('click', () => {
+                    exportMode = !exportMode;
+                    document.body.classList.toggle('export-mode', exportMode);
+                    exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+                    if (exportMode) {
+                        currentSlide = 0;
+                        updateExportView();
                     }
                 });
             }
 
-            function nextSlide() {
-                if (currentSlide < totalSlides - 1) {
-                    currentSlide++;
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    currentSlide = Math.min(currentSlide + 1, totalSlides - 1);
                     updateExportView();
-                }
-            }
-
-            function prevSlide() {
-                if (currentSlide > 0) {
-                    currentSlide--;
-                    updateExportView();
-                }
-            }
-
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'e' || e.key === 'E') {
-                    if (!exportMode) enterExportMode();
-                } else if (e.key === 'Escape') {
-                    if (exportMode) exitExportMode();
-                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                    if (exportMode) nextSlide();
                 } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                    if (exportMode) prevSlide();
+                    currentSlide = Math.max(currentSlide - 1, 0);
+                    updateExportView();
+                } else if (e.key === 'Escape') {
+                    exportMode = false;
+                    document.body.classList.remove('export-mode');
+                    exportBtn.textContent = 'Export Mode';
                 }
             });
         })();
