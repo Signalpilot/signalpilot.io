@@ -11,6 +11,25 @@
     gtag('config', 'AW-17835897996');
   </script>
 
+  <!-- Event snippet for Gumroad Purchase conversion tracking -->
+  <script>
+  function gtag_report_conversion(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') {
+        window.location = url;
+      }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-17835897996/eDa_CMPAjuYbEIzp6LhC',
+        'value': 1.0,
+        'currency': 'USD',
+        'transaction_id': '',
+        'event_callback': callback
+    });
+    return false;
+  }
+  </script>
+
   <meta charset="utf-8" />
   <!-- Cache bust v2 - force reload after mobile fixes -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -7541,6 +7560,10 @@ if ('serviceWorker' in navigator) {
           plan_name: this.textContent.trim(),
           payment_method: 'gumroad'
         });
+        // Report Google Ads conversion on Gumroad button click
+        if (typeof gtag_report_conversion === 'function') {
+          gtag_report_conversion();
+        }
       });
     });
 
