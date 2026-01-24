@@ -4,883 +4,453 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post 232 - Power of Three (AMD)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0a0a0f;
             --bg-card: rgba(20, 20, 30, 0.85);
             --text-primary: #f0f0f0;
             --text-secondary: #a0a0a0;
+            --text-muted: #606070;
             --accent-blue: #4a90d9;
+            --accent-blue-glow: rgba(74, 144, 217, 0.3);
             --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
             --accent-green: #5cb85c;
             --accent-red: #d9534f;
-            --accent-purple: #9b59b6;
             --border-subtle: rgba(255, 255, 255, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            padding: 20px;
-        }
-
-        .carousel-container {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 100%;
-        }
-
-        .slide {
-            width: 1080px;
-            height: 1080px;
-            background: var(--bg-dark);
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .video-background video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-        }
-
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px;
-            text-align: center;
-        }
-
-        .slide-number {
-            position: absolute;
-            bottom: 30px;
-            right: 40px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: var(--text-secondary);
-            opacity: 0.6;
-        }
-
-        .brand-header {
-            position: absolute;
-            top: 40px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--accent-gold);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        /* Slide 1 - Title */
-        .slide-1 .candle-container {
-            width: 200px;
-            height: 280px;
-            position: relative;
-            margin-bottom: 50px;
-        }
-
-        .slide-1 .candle {
-            width: 60px;
-            height: 200px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 0;
-            border-radius: 4px;
-        }
-
-        .slide-1 .candle-body {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                var(--accent-blue) 0%,
-                var(--accent-blue) 33%,
-                var(--accent-red) 33%,
-                var(--accent-red) 66%,
-                var(--accent-green) 66%,
-                var(--accent-green) 100%
-            );
-            border-radius: 4px;
-        }
-
-        .slide-1 .candle-wick {
-            position: absolute;
-            width: 4px;
-            height: 40px;
-            background: var(--text-secondary);
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .slide-1 .candle-wick.top {
-            top: -40px;
-        }
-
-        .slide-1 .candle-wick.bottom {
-            bottom: -40px;
-        }
-
-        .slide-1 .phase-labels {
-            position: absolute;
-            right: -120px;
-            top: 0;
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .slide-1 .phase-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
-            text-align: left;
-        }
-
-        .slide-1 .phase-label.a {
-            color: var(--accent-blue);
-        }
-
-        .slide-1 .phase-label.m {
-            color: var(--accent-red);
-        }
-
-        .slide-1 .phase-label.d {
-            color: var(--accent-green);
-        }
-
-        .slide-1 h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 68px;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .slide-1 .subtitle {
-            font-family: 'Inter', sans-serif;
-            font-size: 28px;
-            font-weight: 400;
-            color: var(--accent-gold);
-            letter-spacing: 2px;
-        }
-
-        /* Slide 2 - What is AMD */
-        .slide-2 h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 52px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 50px;
-        }
-
-        .slide-2 .phases {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            max-width: 750px;
-        }
-
-        .slide-2 .phase {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 25px 35px;
-        }
-
-        .slide-2 .phase-letter {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--bg-dark);
-            flex-shrink: 0;
-        }
-
-        .slide-2 .phase-letter.a {
-            background: var(--accent-blue);
-        }
-
-        .slide-2 .phase-letter.m {
-            background: var(--accent-red);
-        }
-
-        .slide-2 .phase-letter.d {
-            background: var(--accent-green);
-        }
-
-        .slide-2 .phase-text {
-            text-align: left;
-        }
-
-        .slide-2 .phase-name {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 5px;
-        }
-
-        .slide-2 .phase-session {
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            font-weight: 400;
-            color: var(--text-secondary);
-        }
-
-        /* Slide 3 - Accumulation */
-        .slide-3 .phase-icon {
-            width: 120px;
-            height: 120px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .slide-3 .phase-icon span {
-            font-size: 60px;
-        }
-
-        .slide-3 h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 52px;
-            font-weight: 700;
-            color: var(--accent-blue);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .slide-3 .session {
-            font-family: 'Inter', sans-serif;
-            font-size: 22px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-        }
-
-        .slide-3 .points {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            max-width: 600px;
-        }
-
-        .slide-3 .point {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .slide-3 .point-bullet {
-            width: 10px;
-            height: 10px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .slide-3 .point-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            font-weight: 400;
-            color: var(--text-primary);
-            text-align: left;
-        }
-
-        /* Slide 4 - Manipulation */
-        .slide-4 .phase-icon {
-            width: 120px;
-            height: 120px;
-            background: var(--accent-red);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .slide-4 .phase-icon span {
-            font-size: 60px;
-        }
-
-        .slide-4 h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 52px;
-            font-weight: 700;
-            color: var(--accent-red);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .slide-4 .session {
-            font-family: 'Inter', sans-serif;
-            font-size: 22px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-        }
-
-        .slide-4 .points {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            max-width: 600px;
-        }
-
-        .slide-4 .point {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .slide-4 .point-bullet {
-            width: 10px;
-            height: 10px;
-            background: var(--accent-red);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .slide-4 .point-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            font-weight: 400;
-            color: var(--text-primary);
-            text-align: left;
-        }
-
-        /* Slide 5 - Distribution */
-        .slide-5 .phase-icon {
-            width: 120px;
-            height: 120px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .slide-5 .phase-icon span {
-            font-size: 60px;
-        }
-
-        .slide-5 h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 52px;
-            font-weight: 700;
-            color: var(--accent-green);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .slide-5 .session {
-            font-family: 'Inter', sans-serif;
-            font-size: 22px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-        }
-
-        .slide-5 .points {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            max-width: 600px;
-        }
-
-        .slide-5 .point {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .slide-5 .point-bullet {
-            width: 10px;
-            height: 10px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .slide-5 .point-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            font-weight: 400;
-            color: var(--text-primary);
-            text-align: left;
-        }
-
-        /* Slide 6 - The Pattern */
-        .slide-6 h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 52px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 50px;
-        }
-
-        .slide-6 .flow {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .slide-6 .flow-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .slide-6 .flow-circle {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--bg-dark);
-        }
-
-        .slide-6 .flow-circle.a {
-            background: var(--accent-blue);
-        }
-
-        .slide-6 .flow-circle.m {
-            background: var(--accent-red);
-        }
-
-        .slide-6 .flow-circle.d {
-            background: var(--accent-green);
-        }
-
-        .slide-6 .flow-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-
-        .slide-6 .flow-arrow {
-            font-size: 36px;
-            color: var(--accent-gold);
-        }
-
-        .slide-6 .insight {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 30px 50px;
-            max-width: 700px;
-        }
-
-        .slide-6 .insight-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            font-style: italic;
-            color: var(--accent-gold);
-        }
-
-        /* Slide 7 - CTA */
-        .slide-7 .cta-icon {
-            font-size: 100px;
-            margin-bottom: 50px;
-        }
-
-        .slide-7 h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 56px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 30px;
-            line-height: 1.3;
-        }
-
-        .slide-7 .tagline {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-style: italic;
-            color: var(--accent-gold);
-            margin-bottom: 50px;
-        }
-
-        .slide-7 .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent-blue), #3a7bc8);
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            padding: 22px 55px;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .slide-7 .link-hint {
-            margin-top: 35px;
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            color: var(--text-secondary);
-        }
-
-        /* Export Mode Styles */
-        body.export-mode {
-            background: none;
-            padding: 0;
-        }
-
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
-
-        body.export-mode .slide {
-            border-radius: 0;
-        }
-
-        body.export-mode .slide:not(.active) {
-            display: none;
-        }
-
-        body.export-mode .slide.active {
-            display: flex;
-        }
-
-        .export-instructions {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            z-index: 1000;
-            text-align: center;
-        }
-
-        body.export-mode .export-instructions {
-            display: none;
-        }
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { font-family: var(--font-sans); font-weight: 400; line-height: 1.6; color: var(--text-primary); background-color: #000; min-height: 100vh; padding: 2rem; }
+
+        .controls { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 1rem; background: var(--bg-card); padding: 0.75rem 1.5rem; border-radius: 9999px; border: 1px solid var(--border-subtle); }
+        .controls label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); }
+        .controls select { background: var(--bg-dark); color: var(--text-primary); border: 1px solid var(--border-subtle); border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.875rem; cursor: pointer; }
+        #export-btn { background: var(--accent-blue); color: var(--text-primary); border: none; border-radius: 9999px; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        #export-btn:hover { filter: brightness(1.1); }
+
+        .page-title { text-align: center; margin: 5rem auto 3rem; }
+        .page-title h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .page-title p { font-size: 1rem; color: var(--text-muted); }
+
+        .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; justify-items: center; }
+        .slide-wrapper { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .slide-label { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .slide { position: relative; width: 100%; max-width: 540px; aspect-ratio: 1 / 1; background: var(--bg-dark); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(30px, 5.6vw, 60px); text-align: center; }
+        body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; border-radius: 0; padding: 60px; }
+        body.export-mode .carousel-grid { display: block; }
+        body.export-mode .slide-wrapper { display: none; }
+        body.export-mode .slide-wrapper.exporting { display: flex; }
+        body.export-mode .slide-label { display: none; }
+        body.export-mode .page-title, body.export-mode .controls { display: none; }
+
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity); }
+
+        .slide-content { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1; width: 100%; }
+
+        .brand-header { position: absolute; top: clamp(20px, 3.7vw, 40px); left: 0; right: 0; text-align: center; font-family: var(--font-serif); font-size: clamp(9px, 1.7vw, 18px); font-weight: 600; color: var(--accent-gold); letter-spacing: 3px; text-transform: uppercase; z-index: 1; }
+        .slide-number { position: absolute; bottom: clamp(15px, 2.8vw, 30px); right: clamp(20px, 3.7vw, 40px); font-family: var(--font-sans); font-size: clamp(7px, 1.3vw, 14px); color: var(--text-secondary); opacity: 0.6; z-index: 1; }
+
+        /* Slide 1 Candle Visual */
+        .candle-container { width: clamp(100px, 18.5vw, 200px); height: clamp(140px, 25.9vw, 280px); position: relative; margin-bottom: clamp(25px, 4.6vw, 50px); }
+        .candle { width: clamp(30px, 5.6vw, 60px); height: clamp(100px, 18.5vw, 200px); position: absolute; left: 50%; transform: translateX(-50%); bottom: 0; border-radius: 4px; }
+        .candle-body { width: 100%; height: 100%; background: linear-gradient(to bottom, var(--accent-blue) 0%, var(--accent-blue) 33%, var(--accent-red) 33%, var(--accent-red) 66%, var(--accent-green) 66%, var(--accent-green) 100%); border-radius: 4px; }
+        .candle-wick { position: absolute; width: clamp(2px, 0.4vw, 4px); height: clamp(20px, 3.7vw, 40px); background: var(--text-secondary); left: 50%; transform: translateX(-50%); }
+        .candle-wick.top { top: clamp(-20px, -3.7vw, -40px); }
+        .candle-wick.bottom { bottom: clamp(-20px, -3.7vw, -40px); }
+        .phase-labels { position: absolute; right: clamp(-60px, -11.1vw, -120px); top: 0; height: clamp(100px, 18.5vw, 200px); display: flex; flex-direction: column; justify-content: space-between; }
+        .phase-label { font-family: var(--font-sans); font-size: clamp(9px, 1.7vw, 18px); font-weight: 600; text-align: left; }
+        .phase-label.a { color: var(--accent-blue); }
+        .phase-label.m { color: var(--accent-red); }
+        .phase-label.d { color: var(--accent-green); }
+
+        .slide-title { font-family: var(--font-serif); font-size: clamp(34px, 6.3vw, 68px); font-weight: 700; color: var(--text-primary); letter-spacing: 4px; margin-bottom: clamp(7px, 1.4vw, 15px); text-transform: uppercase; }
+        .subtitle { font-family: var(--font-sans); font-size: clamp(14px, 2.6vw, 28px); font-weight: 400; color: var(--accent-gold); letter-spacing: 2px; }
+
+        /* Slide 2 Phases */
+        .section-title { font-family: var(--font-serif); font-size: clamp(26px, 4.8vw, 52px); font-weight: 700; color: var(--text-primary); margin-bottom: clamp(25px, 4.6vw, 50px); }
+        .phases { display: flex; flex-direction: column; gap: clamp(12px, 2.3vw, 25px); max-width: 750px; width: 100%; }
+        .phase { display: flex; align-items: center; gap: clamp(12px, 2.3vw, 25px); background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: clamp(6px, 1.1vw, 12px); padding: clamp(12px, 2.3vw, 25px) clamp(17px, 3.2vw, 35px); }
+        .phase-letter { width: clamp(30px, 5.6vw, 60px); height: clamp(30px, 5.6vw, 60px); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-family: var(--font-serif); font-size: clamp(16px, 3vw, 32px); font-weight: 700; color: var(--bg-dark); flex-shrink: 0; }
+        .phase-letter.a { background: var(--accent-blue); }
+        .phase-letter.m { background: var(--accent-red); }
+        .phase-letter.d { background: var(--accent-green); }
+        .phase-text { text-align: left; }
+        .phase-name { font-family: var(--font-sans); font-size: clamp(12px, 2.2vw, 24px); font-weight: 600; color: var(--text-primary); margin-bottom: clamp(2px, 0.5vw, 5px); }
+        .phase-session { font-family: var(--font-sans); font-size: clamp(9px, 1.7vw, 18px); font-weight: 400; color: var(--text-secondary); }
+
+        /* Slides 3-5 Phase Details */
+        .phase-icon { width: clamp(60px, 11.1vw, 120px); height: clamp(60px, 11.1vw, 120px); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: clamp(20px, 3.7vw, 40px); }
+        .phase-icon.blue { background: var(--accent-blue); }
+        .phase-icon.red { background: var(--accent-red); }
+        .phase-icon.green { background: var(--accent-green); }
+        .phase-icon span { font-size: clamp(30px, 5.6vw, 60px); }
+
+        .phase-title { font-family: var(--font-serif); font-size: clamp(26px, 4.8vw, 52px); font-weight: 700; margin-bottom: clamp(7px, 1.4vw, 15px); text-transform: uppercase; }
+        .phase-title.blue { color: var(--accent-blue); }
+        .phase-title.red { color: var(--accent-red); }
+        .phase-title.green { color: var(--accent-green); }
+        .session-label { font-family: var(--font-sans); font-size: clamp(11px, 2vw, 22px); font-weight: 400; color: var(--text-secondary); margin-bottom: clamp(20px, 3.7vw, 40px); }
+
+        .points { display: flex; flex-direction: column; gap: clamp(9px, 1.7vw, 18px); max-width: 600px; }
+        .point { display: flex; align-items: center; gap: clamp(7px, 1.4vw, 15px); }
+        .point-bullet { width: clamp(5px, 0.9vw, 10px); height: clamp(5px, 0.9vw, 10px); border-radius: 50%; flex-shrink: 0; }
+        .point-bullet.blue { background: var(--accent-blue); }
+        .point-bullet.red { background: var(--accent-red); }
+        .point-bullet.green { background: var(--accent-green); }
+        .point-text { font-family: var(--font-sans); font-size: clamp(12px, 2.2vw, 24px); font-weight: 400; color: var(--text-primary); text-align: left; }
+
+        /* Slide 6 Flow */
+        .flow { display: flex; align-items: center; gap: clamp(15px, 2.8vw, 30px); margin-bottom: clamp(25px, 4.6vw, 50px); flex-wrap: wrap; justify-content: center; }
+        .flow-step { display: flex; flex-direction: column; align-items: center; gap: clamp(7px, 1.4vw, 15px); }
+        .flow-circle { width: clamp(50px, 9.3vw, 100px); height: clamp(50px, 9.3vw, 100px); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-family: var(--font-serif); font-size: clamp(24px, 4.4vw, 48px); font-weight: 700; color: var(--bg-dark); }
+        .flow-circle.a { background: var(--accent-blue); }
+        .flow-circle.m { background: var(--accent-red); }
+        .flow-circle.d { background: var(--accent-green); }
+        .flow-label { font-family: var(--font-sans); font-size: clamp(9px, 1.7vw, 18px); font-weight: 500; color: var(--text-secondary); }
+        .flow-arrow { font-size: clamp(18px, 3.3vw, 36px); color: var(--accent-gold); }
+
+        .insight { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: clamp(6px, 1.1vw, 12px); padding: clamp(15px, 2.8vw, 30px) clamp(25px, 4.6vw, 50px); max-width: 700px; }
+        .insight-text { font-family: var(--font-serif); font-size: clamp(14px, 2.6vw, 28px); font-style: italic; color: var(--accent-gold); }
+
+        /* CTA */
+        .cta-icon { font-size: clamp(50px, 9.3vw, 100px); margin-bottom: clamp(25px, 4.6vw, 50px); }
+        .cta-title { font-family: var(--font-serif); font-size: clamp(28px, 5.2vw, 56px); font-weight: 700; color: var(--text-primary); margin-bottom: clamp(15px, 2.8vw, 30px); line-height: 1.3; }
+        .tagline { font-family: var(--font-serif); font-size: clamp(16px, 3vw, 32px); font-style: italic; color: var(--accent-gold); margin-bottom: clamp(25px, 4.6vw, 50px); }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, var(--accent-blue), #3a7bc8); color: var(--text-primary); font-family: var(--font-sans); font-size: clamp(10px, 1.9vw, 20px); font-weight: 600; padding: clamp(11px, 2vw, 22px) clamp(27px, 5.1vw, 55px); border-radius: 50px; text-transform: uppercase; letter-spacing: 3px; text-decoration: none; }
+        .link-hint { margin-top: clamp(17px, 3.2vw, 35px); font-family: var(--font-sans); font-size: clamp(9px, 1.7vw, 18px); color: var(--text-secondary); }
     </style>
 </head>
 <body>
-    <div class="export-instructions">
-        Press <strong>E</strong> for export mode | <strong>Arrow keys</strong> to navigate | <strong>Escape</strong> to exit
+    <div class="controls">
+        <label>Background:
+            <select id="bg-toggle">
+                <option value="video">Starfield</option>
+                <option value="solid">Solid</option>
+            </select>
+        </label>
+        <label>Opacity:
+            <select id="opacity-control">
+                <option value="0.08" selected>8%</option>
+                <option value="0.12">12%</option>
+                <option value="0.16">16%</option>
+                <option value="0.24">24%</option>
+            </select>
+        </label>
+        <button id="export-btn">Export Mode</button>
     </div>
 
-    <div class="carousel-container">
-        <!-- Slide 1: Title -->
-        <div class="slide slide-1 active">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="candle-container">
-                    <div class="candle">
-                        <div class="candle-wick top"></div>
-                        <div class="candle-body"></div>
-                        <div class="candle-wick bottom"></div>
-                    </div>
-                    <div class="phase-labels">
-                        <span class="phase-label a">A</span>
-                        <span class="phase-label m">M</span>
-                        <span class="phase-label d">D</span>
-                    </div>
-                </div>
-                <h1>Power of Three</h1>
-                <div class="subtitle">Accumulation &#8594; Manipulation &#8594; Distribution</div>
-            </div>
-            <div class="slide-number">1 / 7</div>
-        </div>
+    <div class="page-title">
+        <h1>Power of Three (AMD)</h1>
+        <p>7 slides · ICT Concepts</p>
+    </div>
 
-        <!-- Slide 2: What is AMD -->
-        <div class="slide slide-2">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
+    <div class="carousel-grid">
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
                 <div class="brand-header">Signal Pilot</div>
-                <h2>How Daily Candles Actually Form</h2>
-                <div class="phases">
-                    <div class="phase">
-                        <div class="phase-letter a">A</div>
-                        <div class="phase-text">
-                            <div class="phase-name">Accumulation</div>
-                            <div class="phase-session">Asian Session</div>
+                <div class="slide-content">
+                    <div class="candle-container">
+                        <div class="candle">
+                            <div class="candle-wick top"></div>
+                            <div class="candle-body"></div>
+                            <div class="candle-wick bottom"></div>
+                        </div>
+                        <div class="phase-labels">
+                            <span class="phase-label a">A</span>
+                            <span class="phase-label m">M</span>
+                            <span class="phase-label d">D</span>
                         </div>
                     </div>
-                    <div class="phase">
-                        <div class="phase-letter m">M</div>
-                        <div class="phase-text">
-                            <div class="phase-name">Manipulation</div>
-                            <div class="phase-session">London Open</div>
+                    <h1 class="slide-title">Power of Three</h1>
+                    <div class="subtitle">Accumulation → Manipulation → Distribution</div>
+                </div>
+                <div class="slide-number">1 / 7</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — What is AMD</span>
+            <div class="slide">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="brand-header">Signal Pilot</div>
+                <div class="slide-content">
+                    <h2 class="section-title">How Daily Candles Actually Form</h2>
+                    <div class="phases">
+                        <div class="phase">
+                            <div class="phase-letter a">A</div>
+                            <div class="phase-text">
+                                <div class="phase-name">Accumulation</div>
+                                <div class="phase-session">Asian Session</div>
+                            </div>
+                        </div>
+                        <div class="phase">
+                            <div class="phase-letter m">M</div>
+                            <div class="phase-text">
+                                <div class="phase-name">Manipulation</div>
+                                <div class="phase-session">London Open</div>
+                            </div>
+                        </div>
+                        <div class="phase">
+                            <div class="phase-letter d">D</div>
+                            <div class="phase-text">
+                                <div class="phase-name">Distribution</div>
+                                <div class="phase-session">NY Session</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="phase">
-                        <div class="phase-letter d">D</div>
-                        <div class="phase-text">
-                            <div class="phase-name">Distribution</div>
-                            <div class="phase-session">NY Session</div>
+                </div>
+                <div class="slide-number">2 / 7</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Accumulation</span>
+            <div class="slide">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="brand-header">Signal Pilot</div>
+                <div class="slide-content">
+                    <div class="phase-icon blue">
+                        <span>🌙</span>
+                    </div>
+                    <h2 class="phase-title blue">Accumulation</h2>
+                    <div class="session-label">Asian Session</div>
+                    <div class="points">
+                        <div class="point">
+                            <div class="point-bullet blue"></div>
+                            <div class="point-text">Tight range, low volatility</div>
+                        </div>
+                        <div class="point">
+                            <div class="point-bullet blue"></div>
+                            <div class="point-text">Low volume environment</div>
+                        </div>
+                        <div class="point">
+                            <div class="point-bullet blue"></div>
+                            <div class="point-text">Positions built quietly</div>
+                        </div>
+                        <div class="point">
+                            <div class="point-bullet blue"></div>
+                            <div class="point-text">The trap is being set</div>
                         </div>
                     </div>
                 </div>
+                <div class="slide-number">3 / 7</div>
             </div>
-            <div class="slide-number">2 / 7</div>
         </div>
 
-        <!-- Slide 3: Accumulation -->
-        <div class="slide slide-3">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Manipulation</span>
+            <div class="slide">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
                 <div class="brand-header">Signal Pilot</div>
-                <div class="phase-icon">
-                    <span>&#127769;</span>
+                <div class="slide-content">
+                    <div class="phase-icon red">
+                        <span>💥</span>
+                    </div>
+                    <h2 class="phase-title red">Manipulation</h2>
+                    <div class="session-label">London Open</div>
+                    <div class="points">
+                        <div class="point">
+                            <div class="point-bullet red"></div>
+                            <div class="point-text">Fake move to trap traders</div>
+                        </div>
+                        <div class="point">
+                            <div class="point-bullet red"></div>
+                            <div class="point-text">Stop losses hunted</div>
+                        </div>
+                        <div class="point">
+                            <div class="point-bullet red"></div>
+                            <div class="point-text">Liquidity grabbed</div>
+                        </div>
+                        <div class="point">
+                            <div class="point-bullet red"></div>
+                            <div class="point-text">Wrong direction first</div>
+                        </div>
+                    </div>
                 </div>
-                <h2>Accumulation</h2>
-                <div class="session">Asian Session</div>
-                <div class="points">
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">Tight range, low volatility</div>
-                    </div>
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">Low volume environment</div>
-                    </div>
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">Positions built quietly</div>
-                    </div>
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">The trap is being set</div>
-                    </div>
-                </div>
+                <div class="slide-number">4 / 7</div>
             </div>
-            <div class="slide-number">3 / 7</div>
         </div>
 
-        <!-- Slide 4: Manipulation -->
-        <div class="slide slide-4">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Distribution</span>
+            <div class="slide">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
                 <div class="brand-header">Signal Pilot</div>
-                <div class="phase-icon">
-                    <span>&#128165;</span>
+                <div class="slide-content">
+                    <div class="phase-icon green">
+                        <span>🎯</span>
+                    </div>
+                    <h2 class="phase-title green">Distribution</h2>
+                    <div class="session-label">NY Session</div>
+                    <div class="points">
+                        <div class="point">
+                            <div class="point-bullet green"></div>
+                            <div class="point-text">The real move begins</div>
+                        </div>
+                        <div class="point">
+                            <div class="point-bullet green"></div>
+                            <div class="point-text">True direction revealed</div>
+                        </div>
+                        <div class="point">
+                            <div class="point-bullet green"></div>
+                            <div class="point-text">Profits distributed</div>
+                        </div>
+                        <div class="point">
+                            <div class="point-bullet green"></div>
+                            <div class="point-text">Daily range completes</div>
+                        </div>
+                    </div>
                 </div>
-                <h2>Manipulation</h2>
-                <div class="session">London Open</div>
-                <div class="points">
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">Fake move to trap traders</div>
-                    </div>
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">Stop losses hunted</div>
-                    </div>
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">Liquidity grabbed</div>
-                    </div>
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">Wrong direction first</div>
-                    </div>
-                </div>
+                <div class="slide-number">5 / 7</div>
             </div>
-            <div class="slide-number">4 / 7</div>
         </div>
 
-        <!-- Slide 5: Distribution -->
-        <div class="slide slide-5">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Daily Cycle</span>
+            <div class="slide">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
                 <div class="brand-header">Signal Pilot</div>
-                <div class="phase-icon">
-                    <span>&#127919;</span>
+                <div class="slide-content">
+                    <h2 class="section-title">The Daily Cycle</h2>
+                    <div class="flow">
+                        <div class="flow-step">
+                            <div class="flow-circle a">A</div>
+                            <div class="flow-label">Accumulate</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-step">
+                            <div class="flow-circle m">M</div>
+                            <div class="flow-label">Manipulate</div>
+                        </div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-step">
+                            <div class="flow-circle d">D</div>
+                            <div class="flow-label">Distribute</div>
+                        </div>
+                    </div>
+                    <div class="insight">
+                        <div class="insight-text">"The daily range is engineered, not random."</div>
+                    </div>
                 </div>
-                <h2>Distribution</h2>
-                <div class="session">NY Session</div>
-                <div class="points">
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">The real move begins</div>
-                    </div>
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">True direction revealed</div>
-                    </div>
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">Profits distributed</div>
-                    </div>
-                    <div class="point">
-                        <div class="point-bullet"></div>
-                        <div class="point-text">Daily range completes</div>
-                    </div>
-                </div>
+                <div class="slide-number">6 / 7</div>
             </div>
-            <div class="slide-number">5 / 7</div>
         </div>
 
-        <!-- Slide 6: The Pattern -->
-        <div class="slide slide-6">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <h2>The Daily Cycle</h2>
-                <div class="flow">
-                    <div class="flow-step">
-                        <div class="flow-circle a">A</div>
-                        <div class="flow-label">Accumulate</div>
-                    </div>
-                    <span class="flow-arrow">&#8594;</span>
-                    <div class="flow-step">
-                        <div class="flow-circle m">M</div>
-                        <div class="flow-label">Manipulate</div>
-                    </div>
-                    <span class="flow-arrow">&#8594;</span>
-                    <div class="flow-step">
-                        <div class="flow-circle d">D</div>
-                        <div class="flow-label">Distribute</div>
-                    </div>
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — CTA</span>
+            <div class="slide">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
                 </div>
-                <div class="insight">
-                    <div class="insight-text">"The daily range is engineered, not random."</div>
-                </div>
-            </div>
-            <div class="slide-number">6 / 7</div>
-        </div>
-
-        <!-- Slide 7: CTA -->
-        <div class="slide slide-7">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
                 <div class="brand-header">Signal Pilot</div>
-                <span class="cta-icon">&#128218;</span>
-                <h2>Learn Market Engineering</h2>
-                <div class="tagline">Understand the daily dance</div>
-                <div class="cta-button">Full Lesson</div>
-                <div class="link-hint">Link in bio</div>
+                <div class="slide-content">
+                    <span class="cta-icon">📚</span>
+                    <h2 class="cta-title">Learn Market Engineering</h2>
+                    <div class="tagline">Understand the daily dance</div>
+                    <a href="#" class="cta-button">Full Lesson</a>
+                    <div class="link-hint">Link in bio</div>
+                </div>
+                <div class="slide-number">7 / 7</div>
             </div>
-            <div class="slide-number">7 / 7</div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.slide');
+        (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
             let exportMode = false;
+            let currentSlide = 0;
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
 
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
+            function updateExportView() {
+                slideWrappers.forEach((wrapper, index) => {
+                    wrapper.classList.toggle('exporting', index === currentSlide);
                 });
             }
 
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'e' || e.key === 'E') {
+            if (defined(bgToggle)) {
+                bgToggle.addEventListener('change', (e) => {
+                    document.querySelectorAll('.video-background').forEach(bg => {
+                        bg.style.display = e.target.value === 'video' ? 'block' : 'none';
+                    });
+                });
+            }
+
+            if (defined(opacityControl)) {
+                opacityControl.addEventListener('change', (e) => {
+                    document.documentElement.style.setProperty('--video-opacity', e.target.value);
+                });
+            }
+
+            if (defined(exportBtn)) {
+                exportBtn.addEventListener('click', () => {
                     exportMode = !exportMode;
                     document.body.classList.toggle('export-mode', exportMode);
+                    exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode';
                     if (exportMode) {
-                        showSlide(currentSlide);
+                        currentSlide = 0;
+                        updateExportView();
                     }
+                });
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    currentSlide = Math.min(currentSlide + 1, totalSlides - 1);
+                    updateExportView();
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    currentSlide = Math.max(currentSlide - 1, 0);
+                    updateExportView();
                 } else if (e.key === 'Escape') {
                     exportMode = false;
                     document.body.classList.remove('export-mode');
-                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    if (exportMode) showSlide(currentSlide);
-                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                    if (exportMode) showSlide(currentSlide);
+                    exportBtn.textContent = 'Export Mode';
                 }
             });
-        });
+        })();
     </script>
 </body>
 </html>
