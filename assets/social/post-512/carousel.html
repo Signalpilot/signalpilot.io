@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 512 - Scaling Into Positions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #5cb85c;
+            --accent-purple: #9b59b6;
+            --accent-teal: #17a2b8;
+            --accent-red: #dc3545;
+            --accent-orange: #fd7e14;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 20px;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 100%;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .brand-header {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Slide 1 - Title */
+        .slide-1 .entry-visual {
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .slide-1 .entry-bar {
+            width: 50px;
+            background: var(--accent-green);
+            border-radius: 4px 4px 0 0;
+        }
+
+        .slide-1 .entry-bar:nth-child(1) {
+            height: 60px;
+            opacity: 0.5;
+        }
+
+        .slide-1 .entry-bar:nth-child(2) {
+            height: 90px;
+            opacity: 0.7;
+        }
+
+        .slide-1 .entry-bar:nth-child(3) {
+            height: 120px;
+            opacity: 0.85;
+        }
+
+        .slide-1 .entry-bar:nth-child(4) {
+            height: 150px;
+        }
+
+        .slide-1 h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 58px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .slide-1 .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--accent-green);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Content slides */
+        .content-icon {
+            font-size: 72px;
+            margin-bottom: 30px;
+        }
+
+        .content-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .content-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+        }
+
+        .content-box {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 35px 50px;
+            max-width: 650px;
+        }
+
+        .content-items {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .content-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .content-bullet {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .content-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        /* Slide 2 - Definition */
+        .slide-2 .content-label {
+            color: var(--accent-blue);
+        }
+
+        .slide-2 .content-box {
+            border: 1px solid rgba(74, 144, 217, 0.3);
+        }
+
+        .slide-2 .content-bullet {
+            background: var(--accent-blue);
+        }
+
+        /* Slide 3-5 - Benefits */
+        .slide-3 .content-label,
+        .slide-4 .content-label,
+        .slide-5 .content-label {
+            color: var(--accent-green);
+        }
+
+        .slide-3 .content-box,
+        .slide-4 .content-box,
+        .slide-5 .content-box {
+            border: 1px solid rgba(92, 184, 92, 0.3);
+        }
+
+        .slide-3 .content-bullet,
+        .slide-4 .content-bullet,
+        .slide-5 .content-bullet {
+            background: var(--accent-green);
+        }
+
+        /* Slide 6 - Risks */
+        .slide-6 .content-label {
+            color: var(--accent-orange);
+        }
+
+        .slide-6 .content-box {
+            border: 1px solid rgba(253, 126, 20, 0.3);
+        }
+
+        .slide-6 .content-bullet {
+            background: var(--accent-orange);
+        }
+
+        /* Slide 7 - When to Scale */
+        .slide-7 .content-label {
+            color: var(--accent-teal);
+        }
+
+        .slide-7 .content-box {
+            border: 1px solid rgba(23, 162, 184, 0.3);
+        }
+
+        .slide-7 .content-bullet {
+            background: var(--accent-teal);
+        }
+
+        /* Slide 8 - CTA */
+        .slide-8 .cta-icon {
+            font-size: 80px;
+            margin-bottom: 40px;
+        }
+
+        .slide-8 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 44px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .slide-8 .cta-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .slide-8 .cta-button {
+            display: inline-block;
+            padding: 20px 60px;
+            background: linear-gradient(135deg, var(--accent-gold), #e5c77d);
+            color: var(--bg-dark);
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .slide-8 .brand-footer {
+            position: absolute;
+            bottom: 60px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            background: none;
+            padding: 0;
+        }
+
+        body.export-mode .carousel-container {
+            flex-wrap: nowrap;
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+        }
+
+        body.export-mode .slide:not(.active) {
+            display: none;
+        }
+
+        body.export-mode .slide.active {
+            display: block;
+        }
+
+        .export-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        body.export-mode .export-controls {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .export-controls button {
+            padding: 10px 20px;
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .export-controls span {
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Slide 1 - Title -->
+        <div class="slide slide-1">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="entry-visual">
+                    <div class="entry-bar"></div>
+                    <div class="entry-bar"></div>
+                    <div class="entry-bar"></div>
+                    <div class="entry-bar"></div>
+                </div>
+                <h1>Scaling Into<br>Positions</h1>
+                <div class="subtitle">Build positions strategically</div>
+                <div class="slide-number">1 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 2 - What Is Scaling In -->
+        <div class="slide slide-2">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="content-icon">📈</div>
+                <div class="content-label">Definition</div>
+                <div class="content-title">What Is Scaling In?</div>
+                <div class="content-box">
+                    <div class="content-items">
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Entering a position in portions</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Multiple entries instead of one</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Building as conviction grows</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">2 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 3 - Better Average -->
+        <div class="slide slide-3">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="content-icon">✅</div>
+                <div class="content-label">Benefit 1</div>
+                <div class="content-title">Better Average Entry</div>
+                <div class="content-box">
+                    <div class="content-items">
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">If price improves, better overall entry</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Reduces impact of timing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">3 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 4 - Reduced Pressure -->
+        <div class="slide slide-4">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="content-icon">✅</div>
+                <div class="content-label">Benefit 2</div>
+                <div class="content-title">Reduced Pressure</div>
+                <div class="content-box">
+                    <div class="content-items">
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Don't need perfect entry</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Can add on confirmation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">4 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 5 - Flexibility -->
+        <div class="slide slide-5">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="content-icon">✅</div>
+                <div class="content-label">Benefit 3</div>
+                <div class="content-title">Flexibility</div>
+                <div class="content-box">
+                    <div class="content-items">
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Adjust size based on action</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Can stop adding if thesis breaks</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">5 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 6 - Risks -->
+        <div class="slide slide-6">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="content-icon">⚠️</div>
+                <div class="content-label">Caution</div>
+                <div class="content-title">The Risks</div>
+                <div class="content-box">
+                    <div class="content-items">
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Averaging into losers</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Adding to bad trades</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Must have clear invalidation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">6 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 7 - When to Scale -->
+        <div class="slide slide-7">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="content-icon">🎯</div>
+                <div class="content-label">Application</div>
+                <div class="content-title">When to Scale</div>
+                <div class="content-box">
+                    <div class="content-items">
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Higher conviction setups</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Larger position targets</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">When volatility makes timing hard</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">7 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 8 - CTA -->
+        <div class="slide slide-8">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="cta-icon">📊</div>
+                <h2>Strategic Building,<br>Not Hopeful Adding</h2>
+                <p class="cta-text">Full lesson on scaling techniques in our curriculum.</p>
+                <a href="#" class="cta-button">Link in Bio</a>
+                <div class="brand-footer">SIGNAL PILOT</div>
+                <div class="slide-number">8 / 8</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="export-controls">
+        <button onclick="prevSlide()">← Previous</button>
+        <span id="slideIndicator">1 / 8</span>
+        <button onclick="nextSlide()">Next →</button>
+        <button onclick="exitExportMode()">Exit Export Mode</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 8;
+
+        function enterExportMode() {
+            document.body.classList.add('export-mode');
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            updateIndicator();
+        }
+
+        function exitExportMode() {
+            document.body.classList.remove('export-mode');
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            updateIndicator();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            updateIndicator();
+        }
+
+        function updateIndicator() {
+            document.getElementById('slideIndicator').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight' && document.body.classList.contains('export-mode')) {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' && document.body.classList.contains('export-mode')) {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
