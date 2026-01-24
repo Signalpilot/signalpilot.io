@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Makes Signal Pilot Different - Signal Pilot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-alt: #1a1a24;
+            --accent-blue: #4a90d9;
+            --accent-blue-dim: rgba(74, 144, 217, 0.3);
+            --accent-gold: #c9a962;
+            --accent-gold-dim: rgba(201, 169, 98, 0.3);
+            --accent-green: #4ecdc4;
+            --accent-red: #e74c3c;
+            --accent-purple: #9b59b6;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-dim: #6a6a6a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 40px 20px;
+            max-width: 100%;
+            scroll-snap-type: x mandatory;
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .carousel-container::-webkit-scrollbar-track {
+            background: var(--bg-card);
+            border-radius: 4px;
+        }
+
+        .carousel-container::-webkit-scrollbar-thumb {
+            background: var(--accent-blue-dim);
+            border-radius: 4px;
+        }
+
+        .carousel-container::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-blue);
+        }
+
+        .slide {
+            flex-shrink: 0;
+            width: 1080px;
+            height: 1080px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            scroll-snap-align: center;
+            border: 1px solid rgba(74, 144, 217, 0.2);
+        }
+
+        .slide-inner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 1;
+        }
+
+        .top-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-gold));
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--text-primary);
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+        }
+
+        .slide-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 58px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .slide-header .accent {
+            color: var(--accent-gold);
+        }
+
+        .slide-subheader {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--accent-blue);
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .dont-card {
+            padding: 50px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-red);
+        }
+
+        .dont-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 35px;
+        }
+
+        .dont-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .dont-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .dont-icon {
+            color: var(--accent-red);
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .dont-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            color: var(--text-primary);
+        }
+
+        .do-card {
+            padding: 50px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-green);
+        }
+
+        .do-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 35px;
+        }
+
+        .do-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .do-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .do-check {
+            width: 32px;
+            height: 32px;
+            background: rgba(78, 205, 196, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .do-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            color: var(--text-primary);
+        }
+
+        .philosophy-card {
+            padding: 50px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-gold);
+        }
+
+        .philosophy-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 35px;
+        }
+
+        .philosophy-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .philosophy-item {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            color: var(--text-primary);
+            padding-left: 30px;
+            border-left: 3px solid var(--accent-gold-dim);
+        }
+
+        .who-card {
+            text-align: center;
+            padding: 80px 60px;
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.1), rgba(201, 169, 98, 0.1));
+            border-radius: 20px;
+            border: 2px solid var(--accent-blue);
+        }
+
+        .who-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 46px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .who-text .highlight {
+            color: var(--accent-gold);
+        }
+
+        .who-text .emphasis {
+            color: var(--accent-blue);
+        }
+
+        .cta-container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .cta-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 46px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 50px;
+            line-height: 1.4;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 24px 60px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold));
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(74, 144, 217, 0.4);
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 1200px) {
+            .slide {
+                width: 540px;
+                height: 540px;
+            }
+
+            .slide-inner {
+                padding: 30px;
+            }
+
+            .slide-header {
+                font-size: 32px;
+            }
+
+            .dont-header, .do-header, .philosophy-header {
+                font-size: 24px;
+            }
+
+            .dont-text, .do-text {
+                font-size: 16px;
+            }
+
+            .philosophy-item {
+                font-size: 18px;
+            }
+
+            .who-text {
+                font-size: 26px;
+            }
+
+            .cta-text {
+                font-size: 26px;
+            }
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            padding: 0;
+            gap: 0;
+            overflow: visible;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+            border: none;
+        }
+
+        body.export-mode .slide:not(.active) {
+            display: none;
+        }
+
+        body.export-mode .slide.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Slide 1: Hook -->
+        <div class="slide" data-slide="1">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <h1 class="slide-header">What Makes Signal Pilot <span class="accent">Different</span></h1>
+                    <p class="slide-subheader">We built something we wished existed</p>
+                </div>
+                <div class="slide-number">1 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 2: What We Don't Do -->
+        <div class="slide" data-slide="2">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="dont-card">
+                        <h3 class="dont-header">What We Don't Do:</h3>
+                        <div class="dont-list">
+                            <div class="dont-item">
+                                <span class="dont-icon">&#10060;</span>
+                                <span class="dont-text">Give buy/sell signals</span>
+                            </div>
+                            <div class="dont-item">
+                                <span class="dont-icon">&#10060;</span>
+                                <span class="dont-text">Promise profits</span>
+                            </div>
+                            <div class="dont-item">
+                                <span class="dont-icon">&#10060;</span>
+                                <span class="dont-text">Hide our limitations</span>
+                            </div>
+                            <div class="dont-item">
+                                <span class="dont-icon">&#10060;</span>
+                                <span class="dont-text">Create dependency</span>
+                            </div>
+                            <div class="dont-item">
+                                <span class="dont-icon">&#10060;</span>
+                                <span class="dont-text">Gatekeep education</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">2 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 3: What We Do -->
+        <div class="slide" data-slide="3">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="do-card">
+                        <h3 class="do-header">What We Do:</h3>
+                        <div class="do-list">
+                            <div class="do-item">
+                                <span class="do-check">&#10003;</span>
+                                <span class="do-text">Provide context, not commands</span>
+                            </div>
+                            <div class="do-item">
+                                <span class="do-check">&#10003;</span>
+                                <span class="do-text">Show what's happening, not what to do</span>
+                            </div>
+                            <div class="do-item">
+                                <span class="do-check">&#10003;</span>
+                                <span class="do-text">Offer 82 free lessons</span>
+                            </div>
+                            <div class="do-item">
+                                <span class="do-check">&#10003;</span>
+                                <span class="do-text">Acknowledge no indicator is perfect</span>
+                            </div>
+                            <div class="do-item">
+                                <span class="do-check">&#10003;</span>
+                                <span class="do-text">Build independent traders</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">3 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Philosophy Part 1 -->
+        <div class="slide" data-slide="4">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="philosophy-card">
+                        <h3 class="philosophy-header">Our Philosophy:</h3>
+                        <div class="philosophy-list">
+                            <p class="philosophy-item">Tools should INFORM, not decide</p>
+                            <p class="philosophy-item">Education should be accessible</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">4 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Philosophy Part 2 -->
+        <div class="slide" data-slide="5">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="philosophy-card">
+                        <h3 class="philosophy-header">Our Philosophy:</h3>
+                        <div class="philosophy-list">
+                            <p class="philosophy-item">Honesty builds trust</p>
+                            <p class="philosophy-item">Your success is the goal</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">5 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Who We're For -->
+        <div class="slide" data-slide="6">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="who-card">
+                        <p class="who-text">
+                            We're <span class="highlight">not for everyone.</span><br><br>
+                            We're for traders who want to<br>
+                            <span class="emphasis">LEARN</span>, not follow.
+                        </p>
+                    </div>
+                </div>
+                <div class="slide-number">6 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide" data-slide="7">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="cta-container">
+                        <p class="cta-text">See the difference yourself</p>
+                        <a href="#" class="cta-button">Link in Bio</a>
+                    </div>
+                </div>
+                <div class="slide-number">7 / 7</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Export mode functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function enterExportMode() {
+            document.body.classList.add('export-mode');
+            showSlide(0);
+        }
+
+        function exitExportMode() {
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                slides[currentSlide].classList.add('active');
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>
