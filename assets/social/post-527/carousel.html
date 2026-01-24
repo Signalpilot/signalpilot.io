@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Mental Resilience - Signal Pilot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-alt: #1a1a24;
+            --accent-blue: #4a90d9;
+            --accent-blue-dim: rgba(74, 144, 217, 0.3);
+            --accent-gold: #c9a962;
+            --accent-gold-dim: rgba(201, 169, 98, 0.3);
+            --accent-green: #4ecdc4;
+            --accent-red: #e74c3c;
+            --accent-purple: #9b59b6;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-dim: #6a6a6a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 40px 20px;
+            max-width: 100%;
+            scroll-snap-type: x mandatory;
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .carousel-container::-webkit-scrollbar-track {
+            background: var(--bg-card);
+            border-radius: 4px;
+        }
+
+        .carousel-container::-webkit-scrollbar-thumb {
+            background: var(--accent-blue-dim);
+            border-radius: 4px;
+        }
+
+        .carousel-container::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-blue);
+        }
+
+        .slide {
+            flex-shrink: 0;
+            width: 1080px;
+            height: 1080px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            scroll-snap-align: center;
+            border: 1px solid rgba(74, 144, 217, 0.2);
+        }
+
+        .slide-inner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 1;
+        }
+
+        .top-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-gold));
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--text-primary);
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+        }
+
+        .slide-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 58px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .slide-subheader {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--accent-gold);
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .resilience-card {
+            padding: 45px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-blue);
+        }
+
+        .resilience-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .resilience-icon {
+            font-size: 36px;
+        }
+
+        .resilience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .resilience-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .resilience-arrow {
+            color: var(--accent-blue);
+            font-size: 22px;
+        }
+
+        .resilience-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            color: var(--text-primary);
+        }
+
+        .strategy-card {
+            padding: 50px;
+            background: var(--bg-card);
+            border-radius: 20px;
+        }
+
+        .strategy-card.brain {
+            border-left: 5px solid var(--accent-purple);
+        }
+
+        .strategy-card.notebook {
+            border-left: 5px solid var(--accent-blue);
+        }
+
+        .strategy-card.world {
+            border-left: 5px solid var(--accent-green);
+        }
+
+        .strategy-card.target {
+            border-left: 5px solid var(--accent-gold);
+        }
+
+        .strategy-card.lotus {
+            border-left: 5px solid #e91e63;
+        }
+
+        .strategy-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .strategy-header.purple {
+            color: var(--accent-purple);
+        }
+
+        .strategy-header.blue {
+            color: var(--accent-blue);
+        }
+
+        .strategy-header.green {
+            color: var(--accent-green);
+        }
+
+        .strategy-header.gold {
+            color: var(--accent-gold);
+        }
+
+        .strategy-header.pink {
+            color: #e91e63;
+        }
+
+        .strategy-icon {
+            font-size: 36px;
+        }
+
+        .strategy-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .strategy-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .strategy-bullet {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .strategy-bullet.purple {
+            background: var(--accent-purple);
+        }
+
+        .strategy-bullet.blue {
+            background: var(--accent-blue);
+        }
+
+        .strategy-bullet.green {
+            background: var(--accent-green);
+        }
+
+        .strategy-bullet.gold {
+            background: var(--accent-gold);
+        }
+
+        .strategy-bullet.pink {
+            background: #e91e63;
+        }
+
+        .strategy-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            color: var(--text-primary);
+        }
+
+        .key-message-card {
+            text-align: center;
+            padding: 80px 60px;
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.1), rgba(201, 169, 98, 0.1));
+            border-radius: 20px;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .key-message {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .key-message .highlight {
+            color: var(--accent-gold);
+        }
+
+        .key-message .emphasis {
+            color: var(--accent-green);
+        }
+
+        .cta-container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .cta-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 46px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 50px;
+            line-height: 1.4;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 24px 60px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold));
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(74, 144, 217, 0.4);
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 1200px) {
+            .slide {
+                width: 540px;
+                height: 540px;
+            }
+
+            .slide-inner {
+                padding: 30px;
+            }
+
+            .slide-header {
+                font-size: 32px;
+            }
+
+            .slide-subheader {
+                font-size: 16px;
+            }
+
+            .resilience-header {
+                font-size: 24px;
+            }
+
+            .resilience-text {
+                font-size: 16px;
+            }
+
+            .strategy-header {
+                font-size: 24px;
+            }
+
+            .strategy-text {
+                font-size: 16px;
+            }
+
+            .key-message {
+                font-size: 28px;
+            }
+
+            .cta-text {
+                font-size: 26px;
+            }
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            padding: 0;
+            gap: 0;
+            overflow: visible;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+            border: none;
+        }
+
+        body.export-mode .slide:not(.active) {
+            display: none;
+        }
+
+        body.export-mode .slide.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Slide 1: Hook -->
+        <div class="slide" data-slide="1">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <h1 class="slide-header">Building Mental Resilience</h1>
+                    <p class="slide-subheader">The market will test you. Be ready.</p>
+                </div>
+                <div class="slide-number">1 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Expect Adversity -->
+        <div class="slide" data-slide="2">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="strategy-card brain">
+                        <h3 class="strategy-header purple">
+                            <span class="strategy-icon">&#129504;</span>
+                            Expect Adversity
+                        </h3>
+                        <div class="strategy-list">
+                            <div class="strategy-item">
+                                <span class="strategy-bullet purple"></span>
+                                <span class="strategy-text">Losing streaks are normal</span>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-bullet purple"></span>
+                                <span class="strategy-text">Drawdowns happen</span>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-bullet purple"></span>
+                                <span class="strategy-text">Plan for them mentally</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">2 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Process Losses Properly -->
+        <div class="slide" data-slide="3">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="strategy-card notebook">
+                        <h3 class="strategy-header blue">
+                            <span class="strategy-icon">&#128221;</span>
+                            Process Losses Properly
+                        </h3>
+                        <div class="strategy-list">
+                            <div class="strategy-item">
+                                <span class="strategy-bullet blue"></span>
+                                <span class="strategy-text">Review, don't ruminate</span>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-bullet blue"></span>
+                                <span class="strategy-text">Extract lesson, move on</span>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-bullet blue"></span>
+                                <span class="strategy-text">Don't carry emotional weight</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">3 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Maintain Outside Interests -->
+        <div class="slide" data-slide="4">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="strategy-card world">
+                        <h3 class="strategy-header green">
+                            <span class="strategy-icon">&#127758;</span>
+                            Maintain Outside Interests
+                        </h3>
+                        <div class="strategy-list">
+                            <div class="strategy-item">
+                                <span class="strategy-bullet green"></span>
+                                <span class="strategy-text">Trading can't be everything</span>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-bullet green"></span>
+                                <span class="strategy-text">Hobbies provide perspective</span>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-bullet green"></span>
+                                <span class="strategy-text">Relationships ground you</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">4 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Celebrate Small Wins -->
+        <div class="slide" data-slide="5">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="strategy-card target">
+                        <h3 class="strategy-header gold">
+                            <span class="strategy-icon">&#127919;</span>
+                            Celebrate Small Wins
+                        </h3>
+                        <div class="strategy-list">
+                            <div class="strategy-item">
+                                <span class="strategy-bullet gold"></span>
+                                <span class="strategy-text">Good process, even in loss</span>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-bullet gold"></span>
+                                <span class="strategy-text">Following rules consistently</span>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-bullet gold"></span>
+                                <span class="strategy-text">Improvement over time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">5 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Build Recovery Rituals -->
+        <div class="slide" data-slide="6">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="strategy-card lotus">
+                        <h3 class="strategy-header pink">
+                            <span class="strategy-icon">&#129495;</span>
+                            Build Recovery Rituals
+                        </h3>
+                        <div class="strategy-list">
+                            <div class="strategy-item">
+                                <span class="strategy-bullet pink"></span>
+                                <span class="strategy-text">After bad days, reset</span>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-bullet pink"></span>
+                                <span class="strategy-text">Exercise, nature, rest</span>
+                            </div>
+                            <div class="strategy-item">
+                                <span class="strategy-bullet pink"></span>
+                                <span class="strategy-text">Don't trade when depleted</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">6 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Key Message -->
+        <div class="slide" data-slide="7">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="key-message-card">
+                        <p class="key-message">
+                            Resilience isn't <span class="highlight">never falling.</span><br><br>
+                            It's <span class="emphasis">always getting up.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="slide-number">7 / 8</div>
+            </div>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide" data-slide="8">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="top-border"></div>
+            <div class="slide-inner">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SIGNAL PILOT</span>
+                </div>
+                <div class="content-area">
+                    <div class="cta-container">
+                        <p class="cta-text">Full article on blog</p>
+                        <a href="#" class="cta-button">Link in Bio</a>
+                    </div>
+                </div>
+                <div class="slide-number">8 / 8</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Export mode functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function enterExportMode() {
+            document.body.classList.add('export-mode');
+            showSlide(0);
+        }
+
+        function exitExportMode() {
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                slides[currentSlide].classList.add('active');
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>

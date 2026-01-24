@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 503 - The Cost of Impatience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #5cb85c;
+            --accent-red: #dc3545;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 20px;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 100%;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .brand-header {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Slide 1 - Title */
+        .slide-1 .cost-icon {
+            font-size: 120px;
+            margin-bottom: 40px;
+        }
+
+        .slide-1 h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 60px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .slide-1 .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--accent-red);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Cost slides */
+        .cost-slide h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 46px;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 45px;
+        }
+
+        .cost-slide .cost-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            border-radius: 16px;
+            padding: 35px 50px;
+            max-width: 650px;
+        }
+
+        .cost-slide .cost-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .cost-slide .cost-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cost-slide .cost-bullet {
+            width: 10px;
+            height: 10px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .cost-slide .cost-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        /* Slide 5 - Alternative */
+        .slide-5 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 45px;
+        }
+
+        .slide-5 .alt-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(92, 184, 92, 0.3);
+            border-radius: 16px;
+            padding: 35px 50px;
+            max-width: 650px;
+        }
+
+        .slide-5 .alt-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .slide-5 .alt-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .slide-5 .alt-icon {
+            font-size: 26px;
+            flex-shrink: 0;
+        }
+
+        .slide-5 .alt-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        /* Slide 6 - Key Insight */
+        .slide-6 .insight-container {
+            max-width: 700px;
+        }
+
+        .slide-6 .insight-icon {
+            font-size: 100px;
+            margin-bottom: 40px;
+        }
+
+        .slide-6 .insight-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .slide-6 .insight-highlight {
+            color: var(--accent-gold);
+        }
+
+        /* Slide 7 - CTA */
+        .slide-7 .cta-icon {
+            font-size: 100px;
+            margin-bottom: 40px;
+        }
+
+        .slide-7 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .slide-7 .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-style: italic;
+            color: var(--accent-gold);
+            margin-bottom: 50px;
+        }
+
+        .slide-7 .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-blue), #3a7bc8);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 22px 55px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .slide-7 .link-hint {
+            margin-top: 35px;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        /* Export Mode Styles */
+        body.export-mode {
+            background: none;
+            padding: 0;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+        }
+
+        body.export-mode .slide:not(.active) {
+            display: none;
+        }
+
+        body.export-mode .slide.active {
+            display: flex;
+        }
+
+        .export-instructions {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        body.export-mode .export-instructions {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="export-instructions">
+        Press <strong>E</strong> for export mode | <strong>Arrow keys</strong> to navigate | <strong>Escape</strong> to exit
+    </div>
+
+    <div class="carousel-container">
+        <!-- Slide 1: Title -->
+        <div class="slide slide-1 active">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="cost-icon">&#128184;</div>
+                <h1>The Cost of<br>Impatience</h1>
+                <div class="subtitle">Rushing has a price tag</div>
+            </div>
+            <div class="slide-number">1 / 7</div>
+        </div>
+
+        <!-- Slide 2: Cost of Entering Early -->
+        <div class="slide slide-2 cost-slide">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <h2>Cost of Entering Early</h2>
+                <div class="cost-box">
+                    <div class="cost-list">
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Worse entry prices</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Wider stops needed</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Lower R:R</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Often get stopped, then price moves</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">2 / 7</div>
+        </div>
+
+        <!-- Slide 3: Cost of Exiting Early -->
+        <div class="slide slide-3 cost-slide">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <h2>Cost of Exiting Early</h2>
+                <div class="cost-box">
+                    <div class="cost-list">
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Missed runners</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Small wins, big misses</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Doesn't let winners run</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Erodes edge over time</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">3 / 7</div>
+        </div>
+
+        <!-- Slide 4: Cost of Overtrading -->
+        <div class="slide slide-4 cost-slide">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <h2>Cost of Overtrading</h2>
+                <div class="cost-box">
+                    <div class="cost-list">
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Commission drain</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Mental exhaustion</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Death by a thousand cuts</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-bullet"></div>
+                            <div class="cost-text">Taking setups that aren't there</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">4 / 7</div>
+        </div>
+
+        <!-- Slide 5: The Alternative -->
+        <div class="slide slide-5">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <h2>The Alternative: Patience</h2>
+                <div class="alt-box">
+                    <div class="alt-list">
+                        <div class="alt-item">
+                            <span class="alt-icon">&#9989;</span>
+                            <div class="alt-text">Wait for your setup</div>
+                        </div>
+                        <div class="alt-item">
+                            <span class="alt-icon">&#9989;</span>
+                            <div class="alt-text">Let the trade come to you</div>
+                        </div>
+                        <div class="alt-item">
+                            <span class="alt-icon">&#9989;</span>
+                            <div class="alt-text">Execute at optimal levels</div>
+                        </div>
+                        <div class="alt-item">
+                            <span class="alt-icon">&#9989;</span>
+                            <div class="alt-text">Preserve capital and energy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">5 / 7</div>
+        </div>
+
+        <!-- Slide 6: Key Insight -->
+        <div class="slide slide-6">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="insight-container">
+                    <div class="insight-icon">&#128161;</div>
+                    <div class="insight-text">The market <span class="insight-highlight">charges a fee</span> for rushing.</div>
+                </div>
+            </div>
+            <div class="slide-number">6 / 7</div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide slide-7">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <span class="cta-icon">&#128214;</span>
+                <h2>Full Article on Blog</h2>
+                <div class="tagline">Patience pays. Impatience costs.</div>
+                <div class="cta-button">Read More</div>
+                <div class="link-hint">Link in bio</div>
+            </div>
+            <div class="slide-number">7 / 7</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            let exportMode = false;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'e' || e.key === 'E') {
+                    exportMode = !exportMode;
+                    document.body.classList.toggle('export-mode', exportMode);
+                    if (exportMode) {
+                        showSlide(currentSlide);
+                    }
+                } else if (e.key === 'Escape') {
+                    exportMode = false;
+                    document.body.classList.remove('export-mode');
+                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    if (exportMode) showSlide(currentSlide);
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    if (exportMode) showSlide(currentSlide);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
