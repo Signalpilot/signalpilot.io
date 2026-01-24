@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 506 - Forward Testing Protocol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #5cb85c;
+            --accent-purple: #9b59b6;
+            --accent-teal: #17a2b8;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 20px;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 100%;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .brand-header {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Slide 1 - Title */
+        .slide-1 .bridge-visual {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .slide-1 .bridge-end {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-card);
+            border: 3px solid var(--accent-blue);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+        }
+
+        .slide-1 .bridge-end.live {
+            border-color: var(--accent-green);
+        }
+
+        .slide-1 .bridge-line {
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+            border-radius: 2px;
+        }
+
+        .slide-1 h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 58px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .slide-1 .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--accent-teal);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Content slides */
+        .content-icon {
+            font-size: 72px;
+            margin-bottom: 30px;
+        }
+
+        .content-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .content-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+        }
+
+        .content-box {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 35px 50px;
+            max-width: 650px;
+        }
+
+        .content-items {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .content-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .content-bullet {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .content-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        /* Slide 2 */
+        .slide-2 .content-label {
+            color: var(--accent-blue);
+        }
+
+        .slide-2 .content-box {
+            border: 1px solid rgba(74, 144, 217, 0.3);
+        }
+
+        .slide-2 .content-bullet {
+            background: var(--accent-blue);
+        }
+
+        /* Slide 3 */
+        .slide-3 .content-label {
+            color: var(--accent-purple);
+        }
+
+        .slide-3 .content-box {
+            border: 1px solid rgba(155, 89, 182, 0.3);
+        }
+
+        .slide-3 .content-bullet {
+            background: var(--accent-purple);
+        }
+
+        /* Slide 4 */
+        .slide-4 .content-label {
+            color: var(--accent-teal);
+        }
+
+        .slide-4 .content-box {
+            border: 1px solid rgba(23, 162, 184, 0.3);
+        }
+
+        .slide-4 .content-bullet {
+            background: var(--accent-teal);
+        }
+
+        /* Slide 5 */
+        .slide-5 .content-label {
+            color: var(--accent-green);
+        }
+
+        .slide-5 .content-box {
+            border: 1px solid rgba(92, 184, 92, 0.3);
+        }
+
+        .slide-5 .content-bullet {
+            background: var(--accent-green);
+        }
+
+        /* Slide 6 - Protocol */
+        .slide-6 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 50px;
+        }
+
+        .slide-6 .protocol-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 16px;
+            padding: 40px 60px;
+            max-width: 700px;
+        }
+
+        .slide-6 .protocol-items {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .slide-6 .protocol-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .slide-6 .protocol-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .slide-6 .protocol-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        /* Slide 7 - CTA */
+        .slide-7 .cta-icon {
+            font-size: 80px;
+            margin-bottom: 40px;
+        }
+
+        .slide-7 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .slide-7 .cta-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .slide-7 .cta-button {
+            display: inline-block;
+            padding: 20px 60px;
+            background: linear-gradient(135deg, var(--accent-gold), #e5c77d);
+            color: var(--bg-dark);
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .slide-7 .brand-footer {
+            position: absolute;
+            bottom: 60px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            background: none;
+            padding: 0;
+        }
+
+        body.export-mode .carousel-container {
+            flex-wrap: nowrap;
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+        }
+
+        body.export-mode .slide:not(.active) {
+            display: none;
+        }
+
+        body.export-mode .slide.active {
+            display: block;
+        }
+
+        .export-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        body.export-mode .export-controls {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .export-controls button {
+            padding: 10px 20px;
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .export-controls span {
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Slide 1 - Title -->
+        <div class="slide slide-1">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="bridge-visual">
+                    <div class="bridge-end">📊</div>
+                    <div class="bridge-line"></div>
+                    <div class="bridge-end live">💰</div>
+                </div>
+                <h1>Forward Testing<br>Protocol</h1>
+                <div class="subtitle">Bridge from backtest to live</div>
+                <div class="slide-number">1 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 2 - What Is Forward Testing -->
+        <div class="slide slide-2">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="content-icon">📋</div>
+                <div class="content-label">Definition</div>
+                <div class="content-title">What Is Forward Testing?</div>
+                <div class="content-box">
+                    <div class="content-items">
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Trading your strategy in real-time</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Without risking real capital (or minimal)</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Validating backtest results</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">2 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 3 - Reveals Execution Challenges -->
+        <div class="slide slide-3">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="content-icon">🔍</div>
+                <div class="content-label">Benefit 1</div>
+                <div class="content-title">Reveals Execution Challenges</div>
+                <div class="content-box">
+                    <div class="content-items">
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Fills aren't always perfect</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Emotions affect decisions</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Real-time is different than historical</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">3 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 4 - Validates Expectations -->
+        <div class="slide slide-4">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="content-icon">📊</div>
+                <div class="content-label">Benefit 2</div>
+                <div class="content-title">Validates Expectations</div>
+                <div class="content-box">
+                    <div class="content-items">
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Does performance match backtest?</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Are drawdowns as expected?</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Is the edge still present?</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">4 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 5 - Builds Confidence -->
+        <div class="slide slide-5">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="content-icon">🧠</div>
+                <div class="content-label">Benefit 3</div>
+                <div class="content-title">Builds Confidence</div>
+                <div class="content-box">
+                    <div class="content-items">
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">See the system work live</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Develop execution rhythm</span>
+                        </div>
+                        <div class="content-item">
+                            <div class="content-bullet"></div>
+                            <span class="content-text">Trust the process</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">5 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 6 - Protocol -->
+        <div class="slide slide-6">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <h2>The Protocol</h2>
+                <div class="protocol-box">
+                    <div class="protocol-items">
+                        <div class="protocol-item">
+                            <div class="protocol-number">1</div>
+                            <span class="protocol-text">Minimum 30-50 trades</span>
+                        </div>
+                        <div class="protocol-item">
+                            <div class="protocol-number">2</div>
+                            <span class="protocol-text">Track everything meticulously</span>
+                        </div>
+                        <div class="protocol-item">
+                            <div class="protocol-number">3</div>
+                            <span class="protocol-text">Compare to backtest metrics</span>
+                        </div>
+                        <div class="protocol-item">
+                            <div class="protocol-number">4</div>
+                            <span class="protocol-text">Adjust only after sufficient data</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">6 / 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 7 - CTA -->
+        <div class="slide slide-7">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="cta-icon">🌉</div>
+                <h2>Don't Skip This Step</h2>
+                <p class="cta-text">Forward testing is the bridge between theory and profitable live trading. Full lesson in curriculum.</p>
+                <a href="#" class="cta-button">Link in Bio</a>
+                <div class="brand-footer">SIGNAL PILOT</div>
+                <div class="slide-number">7 / 7</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="export-controls">
+        <button onclick="prevSlide()">← Previous</button>
+        <span id="slideIndicator">1 / 7</span>
+        <button onclick="nextSlide()">Next →</button>
+        <button onclick="exitExportMode()">Exit Export Mode</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 7;
+
+        function enterExportMode() {
+            document.body.classList.add('export-mode');
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            updateIndicator();
+        }
+
+        function exitExportMode() {
+            document.body.classList.remove('export-mode');
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            updateIndicator();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            updateIndicator();
+        }
+
+        function updateIndicator() {
+            document.getElementById('slideIndicator').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight' && document.body.classList.contains('export-mode')) {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' && document.body.classList.contains('export-mode')) {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
