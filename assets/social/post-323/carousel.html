@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 323 — The Cost of FOMO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --text-primary: #e8e6e3;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-red: #d94a4a;
+            --accent-green: #4ad97a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1800px;
+        }
+
+        .slide-wrapper {
+            position: relative;
+            width: 1080px;
+            height: 1080px;
+            transform: scale(0.45);
+            transform-origin: top left;
+            margin-bottom: -594px;
+            margin-right: -594px;
+        }
+
+        .slide-wrapper:hover {
+            z-index: 10;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 0;
+        }
+
+        .slide {
+            position: relative;
+            width: 1080px;
+            height: 1080px;
+            background: var(--bg-dark);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 72px;
+        }
+
+        /* Typography */
+        .slide-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 82px;
+            font-weight: 600;
+            line-height: 1.0;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+        }
+
+        .headline-large {
+            font-size: 88px;
+        }
+
+        .headline-medium {
+            font-size: 72px;
+        }
+
+        .subheadline {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .accent-text {
+            color: var(--accent-red);
+        }
+
+        .accent-gold {
+            color: var(--accent-gold);
+        }
+
+        .accent-green {
+            color: var(--accent-green);
+        }
+
+        .accent-teal {
+            color: var(--accent-teal);
+        }
+
+        /* Cover slide */
+        .cover-slide .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            padding: 16px 32px;
+            border: 1px solid rgba(217, 74, 74, 0.3);
+            border-radius: 6px;
+            margin-bottom: 48px;
+            background: rgba(217, 74, 74, 0.05);
+        }
+
+        .cover-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 100px;
+            font-weight: 600;
+            line-height: 1.0;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+        }
+
+        .cover-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        /* Fear visual */
+        .fear-icon {
+            margin-top: 60px;
+            font-size: 120px;
+        }
+
+        /* Statement */
+        .statement-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .statement-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 72px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-primary);
+            max-width: 800px;
+        }
+
+        .statement-emphasis {
+            color: var(--accent-red);
+            font-style: italic;
+        }
+
+        /* FOMO effects cards */
+        .fomo-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fomo-card {
+            padding: 48px;
+            background: rgba(217, 74, 74, 0.08);
+            border: 1px solid rgba(217, 74, 74, 0.25);
+            border-radius: 20px;
+        }
+
+        .fomo-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(217, 74, 74, 0.2);
+        }
+
+        .fomo-icon {
+            font-size: 48px;
+        }
+
+        .fomo-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-red);
+        }
+
+        .fomo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .fomo-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .fomo-bullet {
+            width: 10px;
+            height: 10px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .fomo-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        /* Overtrade specifics */
+        .overtrade-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .overtrade-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .overtrade-card {
+            padding: 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .overtrade-icon {
+            font-size: 40px;
+            min-width: 56px;
+        }
+
+        .overtrade-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .overtrade-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .overtrade-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        /* Antidote section */
+        .antidote-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .antidote-card {
+            padding: 48px;
+            background: rgba(74, 217, 122, 0.08);
+            border: 1px solid rgba(74, 217, 122, 0.25);
+            border-radius: 20px;
+        }
+
+        .antidote-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .antidote-icon {
+            font-size: 48px;
+        }
+
+        .antidote-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-green);
+        }
+
+        .antidote-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .antidote-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .antidote-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: rgba(74, 217, 122, 0.2);
+            border: 1px solid rgba(74, 217, 122, 0.4);
+            border-radius: 10px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+
+        .antidote-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        /* Reminder card */
+        .reminder-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .reminder-card {
+            padding: 60px;
+            background: linear-gradient(135deg, rgba(74, 217, 217, 0.1), rgba(74, 144, 217, 0.1));
+            border: 1px solid rgba(74, 217, 217, 0.25);
+            border-radius: 24px;
+            max-width: 800px;
+        }
+
+        .reminder-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        .reminder-emphasis {
+            color: var(--accent-teal);
+            font-style: italic;
+        }
+
+        /* CTA slide */
+        .cta-slide .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 80px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+            max-width: 800px;
+        }
+
+        .cta-subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--bg-dark);
+            background: linear-gradient(135deg, var(--accent-teal), #3ab8b8);
+            padding: 24px 64px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .brand-tag {
+            position: absolute;
+            bottom: 56px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 6px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        /* Export mode */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            transform: none;
+            margin: 0;
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Slide 1: Cover -->
+        <div class="slide-wrapper">
+            <div class="slide cover-slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="cover-badge">Psychology</div>
+                    <h1 class="cover-title">The Cost<br>of FOMO</h1>
+                    <p class="cover-subtitle">Fear of Missing Out destroys accounts</p>
+                    <div class="fear-icon">😰</div>
+                    <div class="brand-tag">SignalPilot</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 02</div>
+                    <div class="statement-container">
+                        <p class="statement-text">Fear Of Missing Out<br><span class="statement-emphasis">destroys</span> accounts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Chase Moves -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 03</div>
+                    <h2 class="headline headline-medium">FOMO Makes<br>You <span class="accent-text">Chase</span></h2>
+                    <div class="fomo-section">
+                        <div class="fomo-card">
+                            <div class="fomo-header">
+                                <span class="fomo-icon">🏃</span>
+                                <span class="fomo-title">Chase Moves</span>
+                            </div>
+                            <div class="fomo-list">
+                                <div class="fomo-item">
+                                    <span class="fomo-bullet"></span>
+                                    <span class="fomo-text">Enter after the move already happened</span>
+                                </div>
+                                <div class="fomo-item">
+                                    <span class="fomo-bullet"></span>
+                                    <span class="fomo-text">Buy at resistance, sell at support</span>
+                                </div>
+                                <div class="fomo-item">
+                                    <span class="fomo-bullet"></span>
+                                    <span class="fomo-text">Worst possible timing, every time</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Abandon Plan -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 04</div>
+                    <h2 class="headline headline-medium">FOMO Makes<br>You <span class="accent-text">Abandon</span></h2>
+                    <div class="fomo-section">
+                        <div class="fomo-card">
+                            <div class="fomo-header">
+                                <span class="fomo-icon">📋</span>
+                                <span class="fomo-title">Abandon Your Plan</span>
+                            </div>
+                            <div class="fomo-list">
+                                <div class="fomo-item">
+                                    <span class="fomo-bullet"></span>
+                                    <span class="fomo-text">"This one is different"</span>
+                                </div>
+                                <div class="fomo-item">
+                                    <span class="fomo-bullet"></span>
+                                    <span class="fomo-text">Skip confirmation signals</span>
+                                </div>
+                                <div class="fomo-item">
+                                    <span class="fomo-bullet"></span>
+                                    <span class="fomo-text">Ignore your risk rules completely</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Overtrade -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 05</div>
+                    <h2 class="headline headline-medium">FOMO Makes<br>You <span class="accent-text">Overtrade</span></h2>
+                    <div class="overtrade-section">
+                        <div class="overtrade-grid">
+                            <div class="overtrade-card">
+                                <span class="overtrade-icon">📊</span>
+                                <div class="overtrade-content">
+                                    <div class="overtrade-title">Take Every Setup</div>
+                                    <div class="overtrade-desc">Even low-quality ones—you can't miss out</div>
+                                </div>
+                            </div>
+                            <div class="overtrade-card">
+                                <span class="overtrade-icon">💸</span>
+                                <div class="overtrade-content">
+                                    <div class="overtrade-title">Death by Fees</div>
+                                    <div class="overtrade-desc">Commissions and spreads compound</div>
+                                </div>
+                            </div>
+                            <div class="overtrade-card">
+                                <span class="overtrade-icon">🔥</span>
+                                <div class="overtrade-content">
+                                    <div class="overtrade-title">Mental Burnout</div>
+                                    <div class="overtrade-desc">Exhaustion leads to more mistakes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: The Antidote -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 06</div>
+                    <h2 class="headline headline-medium">The <span class="accent-green">Antidote</span></h2>
+                    <div class="antidote-section">
+                        <div class="antidote-card">
+                            <div class="antidote-header">
+                                <span class="antidote-icon">💊</span>
+                                <span class="antidote-title">Fighting FOMO</span>
+                            </div>
+                            <div class="antidote-list">
+                                <div class="antidote-item">
+                                    <span class="antidote-number">1</span>
+                                    <span class="antidote-text">Remind yourself: there's always another setup</span>
+                                </div>
+                                <div class="antidote-item">
+                                    <span class="antidote-number">2</span>
+                                    <span class="antidote-text">If you missed it, you missed it—let it go</span>
+                                </div>
+                                <div class="antidote-item">
+                                    <span class="antidote-number">3</span>
+                                    <span class="antidote-text">Stick to your plan, not your emotions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide-wrapper">
+            <div class="slide cta-slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="reminder-container">
+                        <div class="reminder-card">
+                            <p class="reminder-text">There's <span class="reminder-emphasis">always</span><br>another setup.</p>
+                        </div>
+                    </div>
+                    <a href="#" class="cta-button">Read on Blog</a>
+                    <div class="brand-tag">SignalPilot</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide-wrapper');
+            let currentSlide = 0;
+            let exportMode = false;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            function toggleExportMode() {
+                exportMode = !exportMode;
+                document.body.classList.toggle('export-mode', exportMode);
+                if (exportMode) {
+                    currentSlide = 0;
+                    showSlide(currentSlide);
+                }
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'e' || e.key === 'E') {
+                    toggleExportMode();
+                } else if (exportMode) {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        showSlide(currentSlide);
+                    } else if (e.key === 'ArrowLeft') {
+                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                        showSlide(currentSlide);
+                    } else if (e.key === 'Escape') {
+                        toggleExportMode();
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

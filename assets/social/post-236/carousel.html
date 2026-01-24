@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 236 - Judas Swing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #5cb85c;
+            --accent-red: #d9534f;
+            --accent-purple: #9b59b6;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 20px;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 100%;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .brand-header {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Slide 1 - Title */
+        .slide-1 .icon-container {
+            width: 180px;
+            height: 180px;
+            border: 3px solid var(--accent-red);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .slide-1 .icon-container::before {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            border: 1px solid rgba(217, 83, 79, 0.3);
+            border-radius: 50%;
+        }
+
+        .slide-1 .knife-icon {
+            font-size: 80px;
+        }
+
+        .slide-1 h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .slide-1 .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-style: italic;
+            color: var(--accent-red);
+        }
+
+        /* Slide 2 - What Is It */
+        .slide-2 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 50px;
+        }
+
+        .slide-2 .definition-box {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-red);
+            border-radius: 16px;
+            padding: 50px 60px;
+            max-width: 800px;
+        }
+
+        .slide-2 .definition-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-primary);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .slide-2 .definition-note {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-style: italic;
+            color: var(--accent-gold);
+        }
+
+        /* Slide 3 - Steps 1-2 */
+        .slide-3 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 50px;
+        }
+
+        .slide-3 .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 750px;
+        }
+
+        .slide-3 .step {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 30px 35px;
+            text-align: left;
+        }
+
+        .slide-3 .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .slide-3 .step-number {
+            width: 45px;
+            height: 45px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--bg-dark);
+        }
+
+        .slide-3 .step-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .slide-3 .step-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            padding-left: 60px;
+        }
+
+        /* Slide 4 - Liquidity Grabbed */
+        .slide-4 .step-icon {
+            width: 120px;
+            height: 120px;
+            background: rgba(217, 83, 79, 0.2);
+            border: 3px solid var(--accent-red);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .slide-4 .step-icon span {
+            font-size: 60px;
+        }
+
+        .slide-4 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .slide-4 .step-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .slide-4 .grab-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 40px 50px;
+            max-width: 600px;
+        }
+
+        .slide-4 .grab-points {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .slide-4 .grab-point {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .slide-4 .point-bullet {
+            width: 10px;
+            height: 10px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .slide-4 .point-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        /* Slide 5 - Reversal */
+        .slide-5 .step-icon {
+            width: 120px;
+            height: 120px;
+            background: rgba(92, 184, 92, 0.2);
+            border: 3px solid var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .slide-5 .step-icon span {
+            font-size: 60px;
+        }
+
+        .slide-5 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .slide-5 .step-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .slide-5 .reversal-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(92, 184, 92, 0.3);
+            border-radius: 16px;
+            padding: 40px 50px;
+            max-width: 600px;
+        }
+
+        .slide-5 .reversal-points {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .slide-5 .reversal-point {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .slide-5 .point-bullet {
+            width: 10px;
+            height: 10px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .slide-5 .point-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        /* Slide 6 - How to Avoid */
+        .slide-6 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        .slide-6 .avoid-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 700px;
+        }
+
+        .slide-6 .avoid-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 25px 35px;
+        }
+
+        .slide-6 .avoid-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(201, 169, 98, 0.2);
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .slide-6 .avoid-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        /* Slide 7 - CTA */
+        .slide-7 .cta-icon {
+            font-size: 100px;
+            margin-bottom: 50px;
+        }
+
+        .slide-7 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        .slide-7 .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-style: italic;
+            color: var(--accent-gold);
+            margin-bottom: 50px;
+        }
+
+        .slide-7 .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-red), #c9302c);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 22px 55px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .slide-7 .link-hint {
+            margin-top: 35px;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        /* Export Mode Styles */
+        body.export-mode {
+            background: none;
+            padding: 0;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+        }
+
+        body.export-mode .slide:not(.active) {
+            display: none;
+        }
+
+        body.export-mode .slide.active {
+            display: flex;
+        }
+
+        .export-instructions {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        body.export-mode .export-instructions {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="export-instructions">
+        Press <strong>E</strong> for export mode | <strong>Arrow keys</strong> to navigate | <strong>Escape</strong> to exit
+    </div>
+
+    <div class="carousel-container">
+        <!-- Slide 1: Title -->
+        <div class="slide slide-1 active">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="icon-container">
+                    <span class="knife-icon">&#128481;</span>
+                </div>
+                <h1>Judas Swing</h1>
+                <div class="subtitle">The Betrayal Move</div>
+            </div>
+            <div class="slide-number">1 / 7</div>
+        </div>
+
+        <!-- Slide 2: What Is It -->
+        <div class="slide slide-2">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <h2>What Is It?</h2>
+                <div class="definition-box">
+                    <div class="definition-text">
+                        A fake move at session open designed to trap traders before
+                        reversing to the true direction
+                    </div>
+                    <div class="definition-note">
+                        Named after the biblical betrayal
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">2 / 7</div>
+        </div>
+
+        <!-- Slide 3: Steps 1-2 -->
+        <div class="slide slide-3">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <h2>How It Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-header">
+                            <div class="step-number">1</div>
+                            <div class="step-title">Session Opens</div>
+                        </div>
+                        <div class="step-desc">
+                            Price moves aggressively in one direction
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-header">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Traders React</div>
+                        </div>
+                        <div class="step-desc">
+                            "It's breaking out!" - Longs/shorts pile in
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">3 / 7</div>
+        </div>
+
+        <!-- Slide 4: Liquidity Grabbed -->
+        <div class="slide slide-4">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="step-icon">
+                    <span>&#128176;</span>
+                </div>
+                <h2>Liquidity Grabbed</h2>
+                <div class="step-label">Step 3</div>
+                <div class="grab-box">
+                    <div class="grab-points">
+                        <div class="grab-point">
+                            <div class="point-bullet"></div>
+                            <div class="point-text">Stop losses triggered</div>
+                        </div>
+                        <div class="grab-point">
+                            <div class="point-bullet"></div>
+                            <div class="point-text">Orders filled against you</div>
+                        </div>
+                        <div class="grab-point">
+                            <div class="point-bullet"></div>
+                            <div class="point-text">The trap is complete</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">4 / 7</div>
+        </div>
+
+        <!-- Slide 5: Reversal -->
+        <div class="slide slide-5">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="step-icon">
+                    <span>&#128260;</span>
+                </div>
+                <h2>The Reversal</h2>
+                <div class="step-label">Step 4</div>
+                <div class="reversal-box">
+                    <div class="reversal-points">
+                        <div class="reversal-point">
+                            <div class="point-bullet"></div>
+                            <div class="point-text">Price moves the OPPOSITE way</div>
+                        </div>
+                        <div class="reversal-point">
+                            <div class="point-bullet"></div>
+                            <div class="point-text">True direction revealed</div>
+                        </div>
+                        <div class="reversal-point">
+                            <div class="point-bullet"></div>
+                            <div class="point-text">Early traders trapped</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">5 / 7</div>
+        </div>
+
+        <!-- Slide 6: How to Avoid -->
+        <div class="slide slide-6">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <h2>How to Avoid</h2>
+                <div class="avoid-list">
+                    <div class="avoid-item">
+                        <div class="avoid-icon">&#9203;</div>
+                        <span class="avoid-text">Don't chase the open</span>
+                    </div>
+                    <div class="avoid-item">
+                        <div class="avoid-icon">&#128065;</div>
+                        <span class="avoid-text">Wait for manipulation to complete</span>
+                    </div>
+                    <div class="avoid-item">
+                        <div class="avoid-icon">&#127919;</div>
+                        <span class="avoid-text">Trade the reversal, not the fake</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">6 / 7</div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide slide-7">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <span class="cta-icon">&#128218;</span>
+                <h2>Recognize It.<br>Don't Be The Victim.</h2>
+                <div class="tagline">The betrayal only works once</div>
+                <div class="cta-button">Full Lesson</div>
+                <div class="link-hint">Link in bio</div>
+            </div>
+            <div class="slide-number">7 / 7</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            let exportMode = false;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'e' || e.key === 'E') {
+                    exportMode = !exportMode;
+                    document.body.classList.toggle('export-mode', exportMode);
+                    if (exportMode) {
+                        showSlide(currentSlide);
+                    }
+                } else if (e.key === 'Escape') {
+                    exportMode = false;
+                    document.body.classList.remove('export-mode');
+                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    if (exportMode) showSlide(currentSlide);
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    if (exportMode) showSlide(currentSlide);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 462 — Liquidity Sweeps vs. Grabs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 64px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--accent-blue);
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .content-box {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+            border: 1px solid rgba(74, 144, 217, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .content-box.sweep {
+            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
+            border-color: rgba(217, 74, 74, 0.3);
+        }
+
+        .content-box.grab {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border-color: rgba(74, 217, 122, 0.3);
+        }
+
+        .content-box.compare {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+
+        .content-box.matters {
+            background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%);
+            border-color: rgba(155, 74, 217, 0.3);
+        }
+
+        .content-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38px;
+            font-weight: 600;
+            margin-bottom: 28px;
+        }
+
+        .content-box h3 {
+            color: var(--accent-blue);
+        }
+
+        .content-box.sweep h3 {
+            color: var(--accent-red);
+        }
+
+        .content-box.grab h3 {
+            color: var(--accent-green);
+        }
+
+        .content-box.compare h3 {
+            color: var(--accent-gold);
+        }
+
+        .content-box.matters h3 {
+            color: var(--accent-purple);
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .feature-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 10px 0;
+            padding-left: 36px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        .content-box.sweep .feature-list li::before {
+            color: var(--accent-red);
+        }
+
+        .content-box.grab .feature-list li::before {
+            color: var(--accent-green);
+        }
+
+        .content-box.compare .feature-list li::before {
+            color: var(--accent-gold);
+        }
+
+        .content-box.matters .feature-list li::before {
+            color: var(--accent-purple);
+        }
+
+        .visual-placeholder {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.02) 100%);
+            border: 2px dashed rgba(201, 169, 98, 0.3);
+            border-radius: 16px;
+            padding: 80px 40px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .visual-placeholder p {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .visual-placeholder .visual-note {
+            font-size: 18px;
+            color: var(--accent-gold);
+            font-style: italic;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .compare-box {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.12) 0%, rgba(74, 144, 217, 0.04) 100%);
+            border: 1px solid rgba(74, 144, 217, 0.25);
+            border-radius: 12px;
+            padding: 28px;
+            text-align: left;
+        }
+
+        .compare-box.left {
+            background: linear-gradient(135deg, rgba(217, 74, 74, 0.12) 0%, rgba(217, 74, 74, 0.04) 100%);
+            border-color: rgba(217, 74, 74, 0.25);
+        }
+
+        .compare-box.right {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.12) 0%, rgba(74, 217, 122, 0.04) 100%);
+            border-color: rgba(74, 217, 122, 0.25);
+        }
+
+        .compare-box h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .compare-box.left h4 {
+            color: var(--accent-red);
+        }
+
+        .compare-box.right h4 {
+            color: var(--accent-green);
+        }
+
+        .compare-box p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .compare-divider {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            padding: 12px 0;
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 44px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 08</span>
+                    <div class="center-content">
+                        <h1 class="slide-title">LIQUIDITY SWEEPS<br>VS. GRABS</h1>
+                        <p class="subtitle">Same concept. Different execution.</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Liquidity Sweep -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Liquidity Sweep</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 08</span>
+                    <div class="center-content">
+                        <div class="content-box sweep">
+                            <h3>LIQUIDITY SWEEP</h3>
+                            <ul class="feature-list">
+                                <li>Fast wick through level</li>
+                                <li>Immediate rejection</li>
+                                <li>Quick reversal</li>
+                                <li>Often single candle</li>
+                                <li>Shows aggressive response</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Sweep Visual -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Sweep Visual</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 08</span>
+                    <div class="center-content">
+                        <div class="visual-placeholder">
+                            <p>[Chart Showing Liquidity Sweep]</p>
+                            <p>Quick wick through level with immediate snap back</p>
+                            <span class="visual-note">Fast, aggressive, decisive</span>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Liquidity Grab -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Liquidity Grab</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 08</span>
+                    <div class="center-content">
+                        <div class="content-box grab">
+                            <h3>LIQUIDITY GRAB</h3>
+                            <ul class="feature-list">
+                                <li>Sustained push through level</li>
+                                <li>Multiple candles beyond</li>
+                                <li>Slower return</li>
+                                <li>Absorption phase visible</li>
+                                <li>Shows gradual accumulation/distribution</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Grab Visual -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Grab Visual</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 08</span>
+                    <div class="center-content">
+                        <div class="visual-placeholder">
+                            <p>[Chart Showing Liquidity Grab]</p>
+                            <p>Sustained move through level with gradual return</p>
+                            <span class="visual-note">Patient, absorbing, methodical</span>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Side by Side -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Side by Side</span>
+            <div class="slide slide-6">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">06 / 08</span>
+                    <div class="center-content">
+                        <div class="comparison-grid">
+                            <div class="compare-box left">
+                                <h4>SWEEP</h4>
+                                <p>Fast wick through</p>
+                                <p>Single candle action</p>
+                                <p>Immediate rejection</p>
+                            </div>
+                            <div class="compare-box right">
+                                <h4>GRAB</h4>
+                                <p>Sustained push</p>
+                                <p>Multiple candles</p>
+                                <p>Gradual return</p>
+                            </div>
+                            <div class="compare-divider">Speed is the differentiator</div>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Why It Matters -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — Why It Matters</span>
+            <div class="slide slide-7">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">07 / 08</span>
+                    <div class="center-content">
+                        <div class="content-box matters">
+                            <h3>WHY IT MATTERS</h3>
+                            <ul class="feature-list">
+                                <li>Sweeps suggest urgency</li>
+                                <li>Grabs suggest patience</li>
+                                <li>Different trading responses needed</li>
+                                <li>Context determines which to expect</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide-wrapper" data-slide="8">
+            <span class="slide-label">Slide 8 — CTA</span>
+            <div class="slide slide-8">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">08 / 08</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">Same Liquidity Hunt.<br>Different Character.</h2>
+                        <p class="cta-text">Full lesson in curriculum</p>
+                        <p class="cta-text">Link in bio</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Export mode functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const totalSlides = slides.length;
+        let exportMode = false;
+
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+        }
+
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (exportMode && currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateExportView();
+            }
+        }
+
+        function prevSlide() {
+            if (exportMode && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (!exportMode) enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>

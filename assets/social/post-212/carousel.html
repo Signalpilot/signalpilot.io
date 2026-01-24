@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 212 - Liquidity Voids</title>
+
+    <!-- ===== GOOGLE FONTS ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: #1a1a2e;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ===== CAROUSEL CONTAINER ===== */
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            max-width: 1800px;
+        }
+
+        /* ===== SLIDE BASE STYLES ===== */
+        .slide {
+            width: var(--slide-width);
+            height: var(--slide-height);
+            background: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* ===== VIDEO BACKGROUND ===== */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        /* ===== SLIDE CONTENT ===== */
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .headline {
+            font-family: var(--font-serif);
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .headline-small {
+            font-size: 56px;
+        }
+
+        .body-text {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .void-visual {
+            width: 300px;
+            height: 200px;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .candle-up {
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            width: 40px;
+            height: 80px;
+            background: var(--accent-green);
+            border-radius: 4px;
+        }
+
+        .candle-up::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 20px;
+            background: var(--accent-green);
+            bottom: 100%;
+        }
+
+        .void-zone {
+            position: absolute;
+            left: 100px;
+            right: 100px;
+            top: 30px;
+            bottom: 90px;
+            background: rgba(201, 169, 98, 0.2);
+            border: 2px dashed var(--accent-gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .void-label {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .candle-down {
+            position: absolute;
+            top: 0;
+            right: 50px;
+            width: 40px;
+            height: 80px;
+            background: var(--accent-red);
+            border-radius: 4px;
+        }
+
+        .candle-down::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 20px;
+            background: var(--accent-red);
+            top: 100%;
+        }
+
+        .magnet-arrow {
+            position: absolute;
+            bottom: 60px;
+            right: 30px;
+            font-size: 40px;
+            color: var(--accent-gold);
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-headline {
+            font-family: var(--font-serif);
+            font-size: 84px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        /* ===== DEFINITION CARD ===== */
+        .definition-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .definition-card {
+            background: rgba(201, 169, 98, 0.08);
+            border: 2px solid var(--accent-gold);
+            border-radius: 16px;
+            padding: 50px;
+            margin-bottom: 30px;
+        }
+
+        .definition-label {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .definition-text {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        /* ===== FORMATION CARD ===== */
+        .formation-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .formation-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 50px;
+        }
+
+        .formation-title {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+        }
+
+        .formation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .formation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 24px;
+            background: rgba(201, 169, 98, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .formation-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .formation-text {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ===== MAGNET CARD ===== */
+        .magnet-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .magnet-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 50px;
+        }
+
+        .magnet-title {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .magnet-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .magnet-icon {
+            font-size: 80px;
+        }
+
+        .magnet-arrows {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .arrow-line {
+            font-size: 24px;
+            color: var(--accent-gold);
+        }
+
+        .magnet-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .magnet-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: var(--font-sans);
+            font-size: 24px;
+            color: var(--text-secondary);
+        }
+
+        .magnet-item::before {
+            content: '◾';
+            color: var(--accent-gold);
+        }
+
+        /* ===== TRADE CARD ===== */
+        .trade-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .trade-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 50px;
+        }
+
+        .trade-title {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+        }
+
+        .trade-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .trade-step {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 24px;
+            background: rgba(74, 217, 122, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(74, 217, 122, 0.2);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: rgba(74, 217, 122, 0.2);
+            border: 2px solid var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-green);
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            color: var(--text-primary);
+        }
+
+        .warning-note {
+            background: rgba(217, 74, 74, 0.1);
+            border: 1px solid rgba(217, 74, 74, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .warning-icon {
+            font-size: 28px;
+        }
+
+        .warning-text {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-badge {
+            width: 140px;
+            height: 140px;
+            border: 3px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        .cta-icon {
+            font-size: 70px;
+        }
+
+        .cta-headline {
+            font-family: var(--font-serif);
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .cta-emphasis {
+            color: var(--accent-gold);
+        }
+
+        .cta-text {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            line-height: 1.6;
+            margin-bottom: 50px;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border: 2px solid var(--accent-gold);
+            border-radius: 16px;
+            padding: 40px 60px;
+        }
+
+        .cta-box-text {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .cta-link {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        /* ===== BRAND FOOTER ===== */
+        .brand-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: auto;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #e8d5a3 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--bg-dark);
+        }
+
+        .logo-text {
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
+
+        .slide-indicator {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* ===== EXPORT MODE STYLES ===== */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        body.export-mode .export-controls {
+            display: none;
+        }
+
+        /* ===== EXPORT CONTROLS ===== */
+        .export-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 16px 28px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .export-controls span {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .export-controls kbd {
+            background: var(--bg-card);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            color: var(--accent-gold);
+            border: 1px solid var(--border-subtle);
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- ===== SLIDE 1: HERO ===== -->
+        <div class="slide" data-slide="1">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="hero-container">
+                    <div class="void-visual">
+                        <div class="candle-up"></div>
+                        <div class="void-zone">
+                            <span class="void-label">THE VOID</span>
+                        </div>
+                        <div class="candle-down"></div>
+                        <span class="magnet-arrow">🧲</span>
+                    </div>
+                    <h1 class="hero-headline">Liquidity Voids</h1>
+                    <p class="hero-subtitle">Where price moved so fast, no trading occurred.<br>These gaps act as magnets.</p>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">1 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 2: DEFINITION ===== -->
+        <div class="slide" data-slide="2">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">What is It?</span>
+                <div class="definition-container">
+                    <div class="definition-card">
+                        <p class="definition-label">Liquidity Void</p>
+                        <p class="definition-text">
+                            An area on the chart where price moved too fast for meaningful
+                            trading to occur. Little to no volume exists in this zone,
+                            creating an "imbalance" that often needs to be filled.
+                        </p>
+                    </div>
+                    <p class="body-text" style="text-align: center; font-style: italic; color: var(--accent-gold);">
+                        Think of it as "unfinished business" for the market.
+                    </p>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">2 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 3: HOW IT FORMS ===== -->
+        <div class="slide" data-slide="3">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">Formation</span>
+                <div class="formation-container">
+                    <div class="formation-card">
+                        <h2 class="formation-title">How Voids Form</h2>
+                        <div class="formation-list">
+                            <div class="formation-item">
+                                <span class="formation-icon">⚡</span>
+                                <p class="formation-text">
+                                    <strong>Aggressive move</strong> — News, momentum, or large orders
+                                    push price rapidly in one direction
+                                </p>
+                            </div>
+                            <div class="formation-item">
+                                <span class="formation-icon">📉</span>
+                                <p class="formation-text">
+                                    <strong>Little volume in zone</strong> — Price skipped through
+                                    without significant trading activity
+                                </p>
+                            </div>
+                            <div class="formation-item">
+                                <span class="formation-icon">🕳️</span>
+                                <p class="formation-text">
+                                    <strong>Gap between candles</strong> — Visible gap between
+                                    candle bodies or wicks creates the void
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">3 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 4: WHY IT MATTERS ===== -->
+        <div class="slide" data-slide="4">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">The Magnet Effect</span>
+                <div class="magnet-container">
+                    <div class="magnet-card">
+                        <h2 class="magnet-title">Why Voids Matter</h2>
+                        <div class="magnet-visual">
+                            <div class="magnet-arrows">
+                                <span class="arrow-line">← ← ←</span>
+                                <span class="arrow-line">← ← ←</span>
+                            </div>
+                            <span class="magnet-icon">🧲</span>
+                            <div class="magnet-arrows">
+                                <span class="arrow-line">→ → →</span>
+                                <span class="arrow-line">→ → →</span>
+                            </div>
+                        </div>
+                        <div class="magnet-list">
+                            <p class="magnet-item">Represents market imbalance</p>
+                            <p class="magnet-item">"Unfinished business" for price</p>
+                            <p class="magnet-item">Acts as a magnet pulling price back</p>
+                            <p class="magnet-item">Price tends to return and fill</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">4 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 5: HOW TO TRADE ===== -->
+        <div class="slide" data-slide="5">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <span class="slide-number">Trading Method</span>
+                <div class="trade-container">
+                    <div class="trade-card">
+                        <h2 class="trade-title">How to Trade Voids</h2>
+                        <div class="trade-steps">
+                            <div class="trade-step">
+                                <span class="step-number">1</span>
+                                <span class="step-text">Mark the void zone on your chart</span>
+                            </div>
+                            <div class="trade-step">
+                                <span class="step-number">2</span>
+                                <span class="step-text">Wait for price to return to the zone</span>
+                            </div>
+                            <div class="trade-step">
+                                <span class="step-number">3</span>
+                                <span class="step-text">Look for reaction/confirmation inside void</span>
+                            </div>
+                            <div class="trade-step">
+                                <span class="step-number">4</span>
+                                <span class="step-text">Use as entry zone or profit target</span>
+                            </div>
+                        </div>
+                        <div class="warning-note">
+                            <span class="warning-icon">⚠️</span>
+                            <p class="warning-text">Not all voids fill. Use with other confluence factors.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">5 / 6</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SLIDE 6: CTA ===== -->
+        <div class="slide" data-slide="6">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="cta-container">
+                    <div class="cta-badge">
+                        <span class="cta-icon">🎓</span>
+                    </div>
+                    <h2 class="cta-headline">
+                        Master the<br><span class="cta-emphasis">Imbalances</span>
+                    </h2>
+                    <p class="cta-text">
+                        Liquidity voids are powerful SMC concepts that help identify
+                        where price is likely to return. Add this to your analysis toolkit.
+                    </p>
+                    <div class="cta-box">
+                        <p class="cta-box-text">Full lesson on Liquidity Voids</p>
+                        <span class="cta-link">education.signalpilot.io</span>
+                    </div>
+                </div>
+                <div class="brand-footer">
+                    <div class="brand-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">SIGNALPILOT</span>
+                    </div>
+                    <span class="slide-indicator">6 / 6</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== EXPORT CONTROLS ===== -->
+    <div class="export-controls">
+        <span>Press</span>
+        <kbd>E</kbd>
+        <span>for export mode</span>
+        <span>|</span>
+        <kbd>←</kbd>
+        <kbd>→</kbd>
+        <span>to navigate</span>
+        <span>|</span>
+        <kbd>ESC</kbd>
+        <span>to exit</span>
+    </div>
+
+    <!-- ===== EXPORT MODE JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            let exportMode = false;
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                currentSlide = 0;
+                showOnlySlide(currentSlide);
+            }
+
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.style.display = 'flex');
+            }
+
+            function showOnlySlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.style.display = i === index ? 'flex' : 'none';
+                });
+            }
+
+            function nextSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showOnlySlide(currentSlide);
+            }
+
+            function prevSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                showOnlySlide(currentSlide);
+            }
+
+            document.addEventListener('keydown', function(e) {
+                switch(e.key.toLowerCase()) {
+                    case 'e':
+                        if (!exportMode) {
+                            enterExportMode();
+                        }
+                        break;
+                    case 'escape':
+                        if (exportMode) {
+                            exitExportMode();
+                        }
+                        break;
+                    case 'arrowright':
+                        nextSlide();
+                        break;
+                    case 'arrowleft':
+                        prevSlide();
+                        break;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 166 — Mean Reversion Chart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 58px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .slide-title .highlight {
+            color: var(--accent-teal);
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .reversion-card {
+            background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
+            border: 1px solid rgba(74, 217, 217, 0.3);
+            border-radius: 16px;
+            padding: 48px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .reversion-card.overbought {
+            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
+            border-color: rgba(217, 74, 74, 0.3);
+        }
+
+        .reversion-card.overbought h3 {
+            color: var(--accent-red);
+        }
+
+        .reversion-card.overbought .feature-list li::before {
+            color: var(--accent-red);
+        }
+
+        .reversion-card.oversold {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border-color: rgba(74, 217, 122, 0.3);
+        }
+
+        .reversion-card.oversold h3 {
+            color: var(--accent-green);
+        }
+
+        .reversion-card.oversold .feature-list li::before {
+            color: var(--accent-green);
+        }
+
+        .reversion-card.strategy {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+
+        .reversion-card.strategy h3 {
+            color: var(--accent-gold);
+        }
+
+        .reversion-card.strategy .feature-list li::before {
+            color: var(--accent-gold);
+        }
+
+        .reversion-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--accent-teal);
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .feature-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 14px 0;
+            padding-left: 36px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .feature-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+        }
+
+        .mean-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .mean-line {
+            width: 100%;
+            height: 4px;
+            background: var(--accent-teal);
+            position: relative;
+        }
+
+        .mean-label {
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+
+        .deviation-zones {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .zone {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            border-radius: 8px;
+        }
+
+        .zone.upper {
+            background: rgba(217, 74, 74, 0.2);
+            border: 1px solid rgba(217, 74, 74, 0.3);
+        }
+
+        .zone.lower {
+            background: rgba(74, 217, 122, 0.2);
+            border: 1px solid rgba(74, 217, 122, 0.3);
+        }
+
+        .zone-label {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .zone.upper .zone-label {
+            color: var(--accent-red);
+        }
+
+        .zone.lower .zone-label {
+            color: var(--accent-green);
+        }
+
+        .zone-action {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .cta-title .emphasis {
+            color: var(--accent-teal);
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 05</span>
+                    <div class="center-content">
+                        <h1 class="slide-title">Mean<br><span class="highlight">Reversion</span></h1>
+                        <p class="subtitle">Everything returns to the average</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Concept -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Concept</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 05</span>
+                    <div class="center-content">
+                        <div class="reversion-card">
+                            <h3>WHAT IS MEAN REVERSION?</h3>
+                            <ul class="feature-list">
+                                <li>Price tends to return to its average</li>
+                                <li>Extremes are temporary deviations</li>
+                                <li>Works best in ranging markets</li>
+                                <li>Counter-trend strategy by nature</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Overbought Signals -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Overbought</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 05</span>
+                    <div class="center-content">
+                        <div class="reversion-card overbought">
+                            <h3>OVERBOUGHT SIGNALS</h3>
+                            <ul class="feature-list">
+                                <li>Price far above moving average</li>
+                                <li>RSI above 70 level</li>
+                                <li>Extended Bollinger Band touch</li>
+                                <li>Consider short/sell positions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Oversold Signals -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Oversold</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 05</span>
+                    <div class="center-content">
+                        <div class="reversion-card oversold">
+                            <h3>OVERSOLD SIGNALS</h3>
+                            <ul class="feature-list">
+                                <li>Price far below moving average</li>
+                                <li>RSI below 30 level</li>
+                                <li>Lower Bollinger Band touch</li>
+                                <li>Consider long/buy positions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: CTA -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — CTA</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 05</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">Trade the<br><span class="emphasis">Extremes</span></h2>
+                        <p class="cta-text">Buy the dip. Sell the rip.</p>
+                        <p class="cta-text">Link in bio</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const totalSlides = slides.length;
+        let exportMode = false;
+
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+        }
+
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (exportMode && currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateExportView();
+            }
+        }
+
+        function prevSlide() {
+            if (exportMode && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (!exportMode) enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>

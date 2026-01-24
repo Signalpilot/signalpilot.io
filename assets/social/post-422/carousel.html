@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 422 — Liquidity Concepts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 82px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        h2.section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 54px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 36px;
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--accent-blue);
+            max-width: 700px;
+            line-height: 1.4;
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cluster-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 850px;
+        }
+
+        .cluster-item {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.12) 0%, rgba(74, 144, 217, 0.04) 100%);
+            border: 1px solid rgba(74, 144, 217, 0.25);
+            border-radius: 14px;
+            padding: 28px;
+            text-align: left;
+        }
+
+        .cluster-item h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .cluster-item p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .sweep-message {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-primary);
+            max-width: 750px;
+            line-height: 1.35;
+        }
+
+        .explain-list {
+            list-style: none;
+            text-align: left;
+            max-width: 800px;
+        }
+
+        .explain-list li {
+            font-size: 26px;
+            color: var(--text-primary);
+            padding: 20px 0;
+            padding-left: 48px;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .explain-list li:last-child {
+            border-bottom: none;
+        }
+
+        .explain-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-size: 24px;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            max-width: 850px;
+            height: 520px;
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.08) 0%, rgba(10, 10, 15, 0.5) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-placeholder::before {
+            content: "";
+            position: absolute;
+            top: 30%;
+            left: 15%;
+            width: 25%;
+            height: 2px;
+            background: var(--accent-gold);
+            opacity: 0.5;
+        }
+
+        .chart-placeholder::after {
+            content: "";
+            position: absolute;
+            bottom: 30%;
+            right: 15%;
+            width: 25%;
+            height: 2px;
+            background: var(--accent-gold);
+            opacity: 0.5;
+        }
+
+        .chart-label {
+            font-size: 18px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .key-message {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-primary);
+            max-width: 750px;
+            line-height: 1.4;
+        }
+
+        .janus-box {
+            background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
+            border: 1px solid rgba(74, 217, 217, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .janus-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--accent-teal);
+            margin-bottom: 20px;
+        }
+
+        .janus-box p {
+            font-size: 24px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: var(--text-secondary);
+        }
+
+        .disclaimer {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 40px;
+            max-width: 600px;
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 08</span>
+                    <div class="center-content">
+                        <h1 class="slide-title">LIQUIDITY<br>CONCEPTS</h1>
+                        <p class="subtitle">Ever notice price seems to "hunt" certain levels?</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Where Liquidity Clusters -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Liquidity Clusters</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 08</span>
+                    <div class="center-content">
+                        <h2 class="section-title">Liquidity Clusters At:</h2>
+                        <div class="cluster-grid">
+                            <div class="cluster-item">
+                                <h4>Equal Highs</h4>
+                                <p>Stop losses stacked above</p>
+                            </div>
+                            <div class="cluster-item">
+                                <h4>Equal Lows</h4>
+                                <p>Stops stacked below</p>
+                            </div>
+                            <div class="cluster-item">
+                                <h4>Round Numbers</h4>
+                                <p>Psychological magnets</p>
+                            </div>
+                            <div class="cluster-item">
+                                <h4>Previous Swing Points</h4>
+                                <p>Obvious targets</p>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Sweep -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — The Sweep</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 08</span>
+                    <div class="center-content">
+                        <p class="sweep-message">"Price often sweeps these pools before making its real move."</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: What It Explains -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — What It Explains</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 08</span>
+                    <div class="center-content">
+                        <h2 class="section-title">Understanding Liquidity<br>Helps Explain:</h2>
+                        <ul class="explain-list">
+                            <li>Why "perfect" setups fail</li>
+                            <li>Why breakouts reverse suddenly</li>
+                            <li>Why patience often outperforms aggression</li>
+                        </ul>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Visual -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Visual</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 08</span>
+                    <div class="center-content">
+                        <div class="chart-placeholder">
+                            <span class="chart-label">Liquidity Pool & Sweep Example</span>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Key Point -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Key Point</span>
+            <div class="slide slide-6">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">06 / 08</span>
+                    <div class="center-content">
+                        <p class="key-message">"This isn't about predicting—it's about understanding market mechanics."</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Using Janus Atlas -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — Janus Atlas</span>
+            <div class="slide slide-7">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">07 / 08</span>
+                    <div class="center-content">
+                        <div class="janus-box">
+                            <h3>JANUS ATLAS</h3>
+                            <p>Helps visualize where these zones exist.</p>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide-wrapper" data-slide="8">
+            <span class="slide-label">Slide 8 — CTA</span>
+            <div class="slide slide-8">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">08 / 08</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">Full Lesson in Our<br>Free Curriculum</h2>
+                        <p class="cta-text">Link in bio</p>
+                        <p class="disclaimer">Educational content only. Not financial advice.</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Export mode functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const totalSlides = slides.length;
+        let exportMode = false;
+
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+        }
+
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (exportMode && currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateExportView();
+            }
+        }
+
+        function prevSlide() {
+            if (exportMode && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (!exportMode) enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>

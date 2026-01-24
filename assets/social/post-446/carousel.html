@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 446 — Optimal Trade Entry (OTE)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-orange: #d9884a;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 58px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--accent-gold);
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .zone-box {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .zone-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 28px;
+        }
+
+        .zone-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .zone-list li {
+            font-size: 24px;
+            color: var(--text-primary);
+            padding: 12px 0;
+            padding-left: 36px;
+            position: relative;
+        }
+
+        .zone-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+        }
+
+        .why-box {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border: 1px solid rgba(74, 217, 122, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .why-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--accent-green);
+            margin-bottom: 28px;
+        }
+
+        .why-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .why-list li {
+            font-size: 24px;
+            color: var(--text-primary);
+            padding: 12px 0;
+            padding-left: 36px;
+            position: relative;
+        }
+
+        .why-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+        }
+
+        .demo-placeholder {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.1) 0%, rgba(74, 144, 217, 0.02) 100%);
+            border: 2px dashed rgba(74, 144, 217, 0.3);
+            border-radius: 16px;
+            padding: 80px 40px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .demo-placeholder p {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .demo-placeholder .demo-note {
+            font-size: 16px;
+            color: var(--accent-blue);
+            font-style: italic;
+        }
+
+        .how-box {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+            border: 1px solid rgba(74, 144, 217, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .how-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 28px;
+        }
+
+        .how-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .how-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 10px 0;
+            padding-left: 36px;
+            position: relative;
+        }
+
+        .how-list li::before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .caveat-box {
+            background: linear-gradient(135deg, rgba(217, 136, 74, 0.15) 0%, rgba(217, 136, 74, 0.05) 100%);
+            border: 1px solid rgba(217, 136, 74, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .caveat-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 28px;
+        }
+
+        .caveat-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .caveat-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 10px 0;
+            padding-left: 36px;
+            position: relative;
+        }
+
+        .caveat-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-orange);
+        }
+
+        .levels-box {
+            background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
+            border: 1px solid rgba(74, 217, 217, 0.3);
+            border-radius: 16px;
+            padding: 44px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .levels-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            font-weight: 600;
+            color: var(--accent-teal);
+            margin-bottom: 28px;
+        }
+
+        .levels-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .levels-list li {
+            font-size: 22px;
+            color: var(--text-primary);
+            padding: 10px 0;
+            padding-left: 36px;
+            position: relative;
+        }
+
+        .levels-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-teal);
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: var(--text-secondary);
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 08</span>
+                    <div class="center-content">
+                        <h1 class="slide-title">OPTIMAL TRADE<br>ENTRY (OTE)</h1>
+                        <p class="subtitle">Where patience often gets rewarded</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Zone -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — The Zone</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 08</span>
+                    <div class="center-content">
+                        <div class="zone-box">
+                            <h3>THE ZONE</h3>
+                            <ul class="zone-list">
+                                <li>62% to 79% retracement</li>
+                                <li>Deeper than standard 50% pullback</li>
+                                <li>Sweet spot for risk:reward</li>
+                                <li>Based on Fibonacci principles</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Why It Matters -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Why It Matters</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 08</span>
+                    <div class="center-content">
+                        <div class="why-box">
+                            <h3>WHY IT MATTERS</h3>
+                            <ul class="why-list">
+                                <li>Better entry = tighter stop</li>
+                                <li>Tighter stop = larger position (same risk)</li>
+                                <li>Or same position = less risk</li>
+                                <li>Improves R:R potential</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Visual Example -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Visual Example</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 08</span>
+                    <div class="center-content">
+                        <div class="demo-placeholder">
+                            <p>[Chart Visual]</p>
+                            <p>Impulse move with Fibonacci levels</p>
+                            <span class="demo-note">OTE zone highlighted between 62-79%</span>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: How to Use -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — How to Use</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 08</span>
+                    <div class="center-content">
+                        <div class="how-box">
+                            <h3>HOW TO USE</h3>
+                            <ul class="how-list">
+                                <li data-step="1.">Identify clear impulse move</li>
+                                <li data-step="2.">Apply Fibonacci retracement</li>
+                                <li data-step="3.">Mark 62-79% zone</li>
+                                <li data-step="4.">Wait for price to enter zone</li>
+                                <li data-step="5.">Look for confirmation signal</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: The Caveat -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — The Caveat</span>
+            <div class="slide slide-6">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">06 / 08</span>
+                    <div class="center-content">
+                        <div class="caveat-box">
+                            <h3>THE CAVEAT</h3>
+                            <ul class="caveat-list">
+                                <li>Price doesn't always reach OTE</li>
+                                <li>Strong trends may shallow retrace</li>
+                                <li>It's a framework, not a rule</li>
+                                <li>Confluence improves probability</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Key Levels -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — Key Levels</span>
+            <div class="slide slide-7">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">07 / 08</span>
+                    <div class="center-content">
+                        <div class="levels-box">
+                            <h3>KEY FIBONACCI LEVELS</h3>
+                            <ul class="levels-list">
+                                <li>50% — Standard pullback</li>
+                                <li>62% — Start of OTE zone</li>
+                                <li>70.5% — Middle of OTE</li>
+                                <li>79% — End of OTE zone</li>
+                                <li>Beyond = Potential structure break</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide-wrapper" data-slide="8">
+            <span class="slide-label">Slide 8 — CTA</span>
+            <div class="slide slide-8">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">08 / 08</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">Patience for Better Entries</h2>
+                        <p class="cta-text">Full lesson in curriculum • Link in bio</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Export mode functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const totalSlides = slides.length;
+        let exportMode = false;
+
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+        }
+
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slides.forEach(slide => slide.classList.remove('active'));
+        }
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (exportMode && currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateExportView();
+            }
+        }
+
+        function prevSlide() {
+            if (exportMode && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (!exportMode) enterExportMode();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+    </script>
+</body>
+</html>
