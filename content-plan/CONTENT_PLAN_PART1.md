@@ -1966,7 +1966,7 @@ Enter the Chronicle. Link in bio.
 ```
 The free trial math:
 
-$99/month with 7-day money-back guarantee.
+$69/month with 7-day money-back guarantee.
 
 Full access to all 7 indicators, all 82 lessons, all documentation for a week.
 
@@ -1984,7 +1984,7 @@ Hashtags: #SignalPilot #FreeTrial #TradingTools #TradingView
 ```
 The free trial math 🧮
 
-$99/month with 7-day money-back guarantee.
+$69/month with 7-day money-back guarantee.
 
 What you get for a week:
 ✅ All 7 indicators (full access)
@@ -6277,7 +6277,7 @@ Full docs in bio 🔗
 ### 𝕏 Twitter
 
 **Copy:**
-> $99/month forever. Or $1,799 once.
+> $69/month forever. Or $999 once.
 >
 > Lifetime access:
 > ◾ All 7 indicators, forever
@@ -6298,10 +6298,10 @@ Full docs in bio 🔗
 **Caption:**
 > The math on lifetime access 🧮
 >
-> Monthly: $99/month
+> Monthly: $69/month
 > → 18 months = $1,782
 >
-> Lifetime: $1,799 one-time
+> Lifetime: $999 one-time
 > → Month 19+ = FREE
 >
 > WHAT YOU GET:
@@ -6326,8 +6326,8 @@ Full docs in bio 🔗
 1. Open Canva → Custom 1080x1080
 2. Background: #0a0a0f solid
 3. Add split comparison layout
-4. Left side: "MONTHLY" with $99/mo × 18 = $1,782
-5. Right side: "LIFETIME" with $1,799 one-time
+4. Left side: "MONTHLY" with $69/mo × 18 = $1,782
+5. Right side: "LIFETIME" with $999 one-time
 6. Add gold (#c9a962) highlight on "Month 19+ = FREE"
 7. Font: Playfair Display headers, Inter for numbers
 8. Add checkmarks for benefits list
@@ -7897,10 +7897,10 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 ### 𝕏 Twitter
 
 **Copy:**
-> $99/month = $1,188/year
-> Annual plan = $699/year
+> $69/month = $828/year
+> Annual plan = $399/year
 >
-> Save $489 by committing to 12 months.
+> Save $429 by committing to 12 months.
 >
 > Same access. Same indicators. Same education.
 > Just smarter math.
@@ -7917,14 +7917,14 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 > The math on annual vs monthly 🧮
 >
 > MONTHLY PLAN
-> $99 × 12 months = $1,188/year
+> $69 × 12 months = $828/year
 >
 > ANNUAL PLAN
-> $699 one-time = $699/year
+> $399 one-time = $399/year
 >
-> YOU SAVE: $489 💰
+> YOU SAVE: $429 💰
 >
-> That's 41% off.
+> That's 52% off.
 >
 > Same access:
 > ✅ All 7 indicators
@@ -7947,7 +7947,7 @@ Do you watch volume on every trade? What volume patterns catch your attention? �
 3. Side-by-side pricing boxes
 4. Left: Monthly with red/neutral
 5. Right: Annual with green highlight
-6. Big "$489 SAVED" callout
+6. Big "$429 SAVED" callout
 7. Checkmarks for included features
 8. SignalPilot branding
 9. Export PNG
@@ -26200,7 +26200,7 @@ Full setup guide in bio 🔗
 **Copy:**
 > Current pricing won't last forever.
 >
-> $99/month • $699/year (save $489) • $1,799 lifetime
+> $69/month • $399/year (save $429) • $999 lifetime
 >
 > 82 free lessons. 7 indicators. Growing community.
 >
@@ -26224,17 +26224,17 @@ Full setup guide in bio 🔗
 > Lock in today's rates:
 >
 > 💳 MONTHLY
-> → $99/month
+> → $69/month
 > → Cancel anytime
 > → Full access
 >
 > 📅 YEARLY
-> → $699/year
-> → Save $489
+> → $399/year
+> → Save $429
 > → Best value for most
 >
 > ♾️ LIFETIME
-> → $1,799 once
+> → $999 once
 > → Never pay again
 > → All future updates included
 >
@@ -26264,8 +26264,8 @@ Full setup guide in bio 🔗
 **Layer Structure:**
 1. **Title** (top): "LOCK IN CURRENT PRICING" in Playfair Display 40pt
 2. **Three Pricing Cards**: Monthly, Yearly, Lifetime columns
-3. **Price Highlights**: $99, $699, $1,799 in bold, #c9a962
-4. **Savings Badge**: "SAVE $489" on yearly plan
+3. **Price Highlights**: $69, $399, $999 in bold, #c9a962
+4. **Savings Badge**: "SAVE $429" on yearly plan
 5. **Feature List**: Checkmarks with key inclusions
 6. **Urgency Banner** (bottom): "Prices increasing soon"
 7. **Logo** (corner): Signal Pilot logo
@@ -31429,10 +31429,10 @@ Visual showing balance between fear and greed
 
 ### Twitter/X
 **Copy:**
-> Monthly: $99 × 12 = $1,188/year
-> Yearly: $699/year
+> Monthly: $69 × 12 = $828/year
+> Yearly: $399/year
 >
-> Save $489 by going annual.
+> Save $429 by going annual.
 >
 > Same access. Same indicators. Same education. Less cost.
 >
@@ -31451,13 +31451,13 @@ Visual showing balance between fear and greed
 > Let's break it down:
 >
 > MONTHLY PLAN
-> - $99/month
-> - $99 × 12 = $1,188/year
+> - $69/month
+> - $69 × 12 = $828/year
 > - Flexibility to cancel
 >
 > YEARLY PLAN
-> - $699/year
-> - Save $489 (41% off)
+> - $399/year
+> - Save $429 (52% off)
 > - Same full access
 >
 > What you get either way:

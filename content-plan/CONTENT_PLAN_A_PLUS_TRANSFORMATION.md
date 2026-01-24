@@ -34,9 +34,9 @@
 ## 1. Funnel Architecture
 
 ### The Problem
-Current plan: Post → "Link in bio" → Direct sale ($99/month)
+Current plan: Post → "Link in bio" → Direct sale ($69/month)
 
-This is high-friction. Cold audiences don't buy $99/month subscriptions from social media posts.
+This is high-friction. Cold audiences don't buy $69/month subscriptions from social media posts.
 
 ### The Solution: 3-Tier Funnel
 

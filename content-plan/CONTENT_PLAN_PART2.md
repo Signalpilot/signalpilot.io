@@ -17931,7 +17931,7 @@ Layer 6: Chronicle branding
 **Copy:**
 > Pay once. Access forever.
 >
-> Lifetime plan: $1,799
+> Lifetime plan: $999
 >
 > No more monthly fees. No renewals. No expiration.
 >
@@ -17964,9 +17964,9 @@ Layer 6: Chronicle branding
 > → No expiration date
 >
 > THE MATH:
-> → Monthly: $99/month
+> → Monthly: $69/month
 > → After 18 months: $1,782 spent
-> → Lifetime: $1,799 one time
+> → Lifetime: $999 one time
 > → After 18 months: already profitable
 >
 > WHO IT'S FOR:
@@ -18001,12 +18001,12 @@ Layer 6: Chronicle branding
 
 2. **Main Text:**
    - "LIFETIME ACCESS" in Playfair Display Bold, 56pt, white
-   - "$1,799" in Inter Bold, 72pt, #c9a962
+   - "$999" in Inter Bold, 72pt, #c9a962
    - "ONE TIME" below price, Inter Medium, 24pt, white 80%
 
 3. **Value Comparison:**
    - "18 months of monthly = $1,782"
-   - "Lifetime = $1,799 forever"
+   - "Lifetime = $999 forever"
    - Crossed out monthly total vs. highlighted lifetime
 
 4. **Features List:**
@@ -21815,9 +21815,9 @@ Layer 6: Chronicle branding
 > No hidden fees. No surprise charges. No upsells.
 >
 > What you see is what you pay:
-> → $99/month
-> → $699/year
-> → $1,799 lifetime
+> → $69/month
+> → $399/year
+> → $999 lifetime
 >
 > Transparent from day one.
 >
@@ -21850,11 +21850,11 @@ Layer 6: Chronicle branding
 > → Full access
 > → Cancel anytime
 >
-> 📆 YEARLY: $699
-> → Save $489/year
+> 📆 YEARLY: $399
+> → Save $429/year
 > → Best value subscription
 >
-> ♾️ LIFETIME: $1,799
+> ♾️ LIFETIME: $999
 > → One payment
 > → Forever access
 >
@@ -21905,20 +21905,20 @@ Layer 6: Chronicle branding
 
 6. **Monthly Card Content**
    - Header: "MONTHLY" (Inter Bold, 18px, #4a90d9)
-   - Price: "$99" (Playfair Display, 48px, #FFFFFF)
+   - Price: "$69" (Playfair Display, 48px, #FFFFFF)
    - Subtext: "/month" (Inter Regular, 14px, #888888)
    - Feature: "Cancel anytime" (Inter Regular, 12px, #AAAAAA)
 
 7. **Yearly Card Content**
    - Add "BEST VALUE" badge (gold accent background)
    - Header: "YEARLY" (Inter Bold, 18px, #c9a962)
-   - Price: "$699" (Playfair Display, 48px, #FFFFFF)
+   - Price: "$399" (Playfair Display, 48px, #FFFFFF)
    - Subtext: "/year" (Inter Regular, 14px, #888888)
-   - Feature: "Save $489" (Inter Regular, 12px, #c9a962)
+   - Feature: "Save $429" (Inter Regular, 12px, #c9a962)
 
 8. **Lifetime Card Content**
    - Header: "LIFETIME" (Inter Bold, 18px, #4a90d9)
-   - Price: "$1,799" (Playfair Display, 48px, #FFFFFF)
+   - Price: "$999" (Playfair Display, 48px, #FFFFFF)
    - Subtext: "one payment" (Inter Regular, 14px, #888888)
    - Feature: "Forever access" (Inter Regular, 12px, #AAAAAA)
 
@@ -38391,9 +38391,9 @@ Each category:
 > Ready for more? Here are your options.
 >
 > Signal Pilot plans:
-> → Monthly: $99 (flexible)
-> → Yearly: $699 (best value)
-> → Lifetime: $1,799 (forever)
+> → Monthly: $69 (flexible)
+> → Yearly: $399 (best value)
+> → Lifetime: $999 (forever)
 >
 > All plans include everything. Just different commitments.
 >
@@ -38418,13 +38418,13 @@ Each category:
 > → Most flexible option
 > → Best for: Testing the waters
 >
-> 📆 YEARLY — $699
+> 📆 YEARLY — $399
 > → Full access to all 7 indicators
-> → Save $489 vs. monthly
+> → Save $429 vs. monthly
 > → Best value subscription
 > → Best for: Committed traders
 >
-> ♾️ LIFETIME — $1,799
+> ♾️ LIFETIME — $999
 > → Full access forever
 > → All future updates included
 > → One-time payment
@@ -38462,8 +38462,8 @@ Each category:
 ### Visual Elements
 1. **Three Plan Cards:**
    - Monthly: $99
-   - Yearly: $699 (highlighted as best value)
-   - Lifetime: $1,799
+   - Yearly: $399 (highlighted as best value)
+   - Lifetime: $999
    - Each with brief benefit
 
 2. **Title:**
@@ -42469,10 +42469,10 @@ These templates are designed to showcase community success, build trust, and dem
 **Type:** Social Proof | **Pillar:** P6 | **CTA:** Trial
 
 ### Twitter/X
-> Signal Pilot pricing: Monthly $99 | Yearly $699 | Lifetime $1,799 — No hidden fees. No upsells. No surprises.
+> Signal Pilot pricing: Monthly $69 | Yearly $399 | Lifetime $999 — No hidden fees. No upsells. No surprises.
 
 ### Instagram
-> 💰 PRICING TRANSPARENCY: Monthly $99 | Yearly $699 (save $489) | Lifetime $1,799 — No hidden fees.
+> 💰 PRICING TRANSPARENCY: Monthly $69 | Yearly $399 (save $429) | Lifetime $999 — No hidden fees.
 >
 > Which option fits your trading journey? 💭
 

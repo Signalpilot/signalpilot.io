@@ -13,7 +13,7 @@
 
 **Excluded:**
 - Russia 🇷🇺 - Payment restrictions (Visa/MC blocked, Gumroad/Stripe sanctions)
-- Egypt 🇪🇬 - Low purchasing power ($99/mo = 25-50% of avg income)
+- Egypt 🇪🇬 - Low purchasing power ($69/mo = 25-50% of avg income)
 
 **Note:** EU markets (DE, FR, IT, NL, HU) blocked pending Google financial services verification.
 
@@ -247,9 +247,9 @@
 
 ### Value Proposition Descriptions
 ```
-9. All 7 indicators + future releases. Real-time alerts. Presets included. From $99/month. (88 chars)
+9. All 7 indicators + future releases. Real-time alerts. Presets included. From $69/month. (88 chars)
 
-10. Monthly $99 | Yearly $699 (save 41%) | Lifetime $1,799. 7-day money-back guarantee. (84 chars)
+10. Monthly $69 | Yearly $399 (save 52%) | Lifetime $999. 7-day money-back guarantee. (84 chars)
 
 11. Works on stocks, crypto, forex, commodities, indices. Any OHLC + volume data supported. (88 chars)
 
@@ -449,7 +449,7 @@
 | Sitelink Text | Description Line 1 | Description Line 2 | Final URL |
 |---------------|-------------------|-------------------|-----------|
 | Try Free 7 Days | No credit card required | Full access to all 7 indicators | signalpilot.io#trial |
-| View Pricing | Monthly, Yearly & Lifetime | Plans from $99/month | signalpilot.io#pricing |
+| View Pricing | Monthly, Yearly & Lifetime | Plans from $69/month | signalpilot.io#pricing |
 | See All 7 Indicators | Pentarch, Volume Oracle & more | Complete indicator suite | signalpilot.io#indicators |
 | 82 Free Lessons | Professional trading education | Learn market structure free | education.signalpilot.io |
 | Documentation | Guides, cheatsheets, tutorials | Complete setup support | docs.signalpilot.io |
