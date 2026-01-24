@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 296 — Support & Resistance Basics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --bg-card-hover: rgba(255, 255, 255, 0.04);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-glow: rgba(74, 144, 217, 0.3);
+            --text-primary: #e8e6e3;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --accent-orange: #d98c4a;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+            max-width: 1800px;
+            width: 100%;
+        }
+
+        .slide-wrapper {
+            position: relative;
+            width: 1080px;
+            height: 1080px;
+            transform: scale(0.4);
+            transform-origin: top center;
+            margin-bottom: -648px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.4),
+                0 0 0 1px var(--border-subtle);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 72px;
+            background: linear-gradient(
+                145deg,
+                rgba(10, 10, 15, 0.97) 0%,
+                rgba(10, 10, 15, 0.92) 100%
+            );
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 48px;
+        }
+
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .brand-logo {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+        }
+
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pillar-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(74, 144, 217, 0.1);
+            border: 1px solid rgba(74, 144, 217, 0.3);
+            border-radius: 100px;
+            padding: 12px 24px;
+            margin-bottom: 32px;
+            width: fit-content;
+        }
+
+        .pillar-badge span {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .hook-title {
+            font-family: var(--font-serif);
+            font-size: 68px;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+
+        .hook-subtitle {
+            font-family: var(--font-sans);
+            font-size: 34px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .emphasis-text {
+            font-family: var(--font-serif);
+            font-size: 56px;
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.3;
+            color: var(--text-primary);
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .level-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 56px;
+        }
+
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .level-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+
+        .level-icon.support {
+            background: rgba(74, 217, 122, 0.15);
+            border: 1px solid rgba(74, 217, 122, 0.3);
+        }
+
+        .level-icon.resistance {
+            background: rgba(217, 74, 74, 0.15);
+            border: 1px solid rgba(217, 74, 74, 0.3);
+        }
+
+        .level-title {
+            font-family: var(--font-serif);
+            font-size: 56px;
+            font-weight: 600;
+        }
+
+        .level-title.support {
+            color: var(--accent-green);
+        }
+
+        .level-title.resistance {
+            color: var(--accent-red);
+        }
+
+        .level-points {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .level-point {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: var(--font-sans);
+            font-size: 30px;
+            color: var(--text-secondary);
+        }
+
+        .point-marker {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .point-marker.green {
+            background: var(--accent-green);
+        }
+
+        .point-marker.red {
+            background: var(--accent-red);
+        }
+
+        .point-marker.blue {
+            background: var(--accent-blue);
+        }
+
+        .principle-card {
+            background: linear-gradient(
+                135deg,
+                rgba(74, 144, 217, 0.1) 0%,
+                rgba(74, 144, 217, 0.05) 100%
+            );
+            border: 1px solid rgba(74, 144, 217, 0.2);
+            border-radius: 24px;
+            padding: 64px;
+            text-align: center;
+        }
+
+        .principle-title {
+            font-family: var(--font-serif);
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+        }
+
+        .principle-description {
+            font-family: var(--font-sans);
+            font-size: 30px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .flip-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .flip-box {
+            padding: 24px 40px;
+            border-radius: 12px;
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .flip-box.support-box {
+            background: rgba(74, 217, 122, 0.15);
+            border: 1px solid rgba(74, 217, 122, 0.3);
+            color: var(--accent-green);
+        }
+
+        .flip-box.resistance-box {
+            background: rgba(217, 74, 74, 0.15);
+            border: 1px solid rgba(217, 74, 74, 0.3);
+            color: var(--accent-red);
+        }
+
+        .flip-arrow {
+            font-size: 32px;
+            color: var(--text-tertiary);
+        }
+
+        .cta-container {
+            text-align: center;
+        }
+
+        .cta-primary {
+            font-family: var(--font-serif);
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .cta-secondary {
+            font-family: var(--font-sans);
+            font-size: 32px;
+            color: var(--accent-blue);
+            font-weight: 400;
+            margin-bottom: 48px;
+        }
+
+        .disclaimer {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            color: var(--text-tertiary);
+            font-style: italic;
+        }
+
+        .slide-footer {
+            margin-top: auto;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-tag {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            color: var(--text-tertiary);
+            letter-spacing: 0.05em;
+        }
+
+        .footer-accent {
+            width: 48px;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                var(--accent-blue),
+                var(--accent-teal)
+            );
+            border-radius: 2px;
+        }
+
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            transform: none;
+            margin-bottom: 0;
+        }
+
+        body.export-mode .slide-wrapper:not(.active) {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .slide-wrapper {
+                transform: scale(0.35);
+                margin-bottom: -702px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-wrapper {
+                transform: scale(0.3);
+                margin-bottom: -756px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Slide 1: Cover -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">01 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="pillar-badge">
+                        <span>P3 — Market Mechanics</span>
+                    </div>
+                    <h1 class="hook-title">Back to Basics:<br>Support & Resistance</h1>
+                    <p class="hook-subtitle">The foundation of all technical analysis.</p>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Trading Education</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Introduction -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">02 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <p class="emphasis-text">The foundation of all technical analysis.</p>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Core Concept</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Support -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">03 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-icon support">↑</div>
+                            <span class="level-title support">Support</span>
+                        </div>
+                        <div class="level-points">
+                            <div class="level-point">
+                                <span class="point-marker green"></span>
+                                <span>Where price has bounced <strong>UP</strong></span>
+                            </div>
+                            <div class="level-point">
+                                <span class="point-marker green"></span>
+                                <span>Buyers historically stepped in</span>
+                            </div>
+                            <div class="level-point">
+                                <span class="point-marker green"></span>
+                                <span>Zone, not exact line</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Demand Zone</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Resistance -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">04 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-icon resistance">↓</div>
+                            <span class="level-title resistance">Resistance</span>
+                        </div>
+                        <div class="level-points">
+                            <div class="level-point">
+                                <span class="point-marker red"></span>
+                                <span>Where price has bounced <strong>DOWN</strong></span>
+                            </div>
+                            <div class="level-point">
+                                <span class="point-marker red"></span>
+                                <span>Sellers historically stepped in</span>
+                            </div>
+                            <div class="level-point">
+                                <span class="point-marker red"></span>
+                                <span>Zone, not exact line</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Supply Zone</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: More Touches = Stronger -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">05 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="principle-card">
+                        <h3 class="principle-title">More Touches = Stronger</h3>
+                        <p class="principle-description">Each bounce adds significance to the level.<br>Respect zones that have proven themselves.</p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Key Principle</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Zones Not Lines -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">06 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="principle-card">
+                        <h3 class="principle-title">Zones, Not Lines</h3>
+                        <p class="principle-description">Price doesn't respect exact numbers.<br>Think areas, not pixels.</p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Practical Approach</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Roles Can Flip -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">07 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="principle-card">
+                        <h3 class="principle-title">Roles Can Flip</h3>
+                        <p class="principle-description">Broken support becomes new resistance.<br>Broken resistance becomes new support.</p>
+                        <div class="flip-visual">
+                            <span class="flip-box support-box">SUPPORT</span>
+                            <span class="flip-arrow">⟷</span>
+                            <span class="flip-box resistance-box">RESISTANCE</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">S/R Flip</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide-wrapper">
+            <video class="slide-bg" autoplay muted loop playsinline>
+                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-number">08 / 08</span>
+                    <span class="brand-logo">Signal Pilot</span>
+                </div>
+                <div class="slide-body">
+                    <div class="cta-container">
+                        <h2 class="cta-primary">"Simple but powerful.<br>Never stop practicing."</h2>
+                        <p class="cta-secondary">Free lesson — Link in bio</p>
+                        <p class="disclaimer">Educational only. Not financial advice.</p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="footer-tag">Education Hub</span>
+                    <div class="footer-accent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide-wrapper');
+            let currentSlide = 0;
+            let exportMode = false;
+
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                currentSlide = 0;
+                updateSlideVisibility();
+            }
+
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.style.display = '');
+                slides.forEach(slide => slide.classList.remove('active'));
+            }
+
+            function updateSlideVisibility() {
+                if (!exportMode) return;
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === currentSlide);
+                });
+            }
+
+            function nextSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlideVisibility();
+            }
+
+            function prevSlide() {
+                if (!exportMode) return;
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                updateSlideVisibility();
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'e' || e.key === 'E') {
+                    if (!exportMode) enterExportMode();
+                } else if (e.key === 'Escape') {
+                    exitExportMode();
+                } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

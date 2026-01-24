@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 066 — Fibonacci Retracements</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --text-primary: #e8e6e3;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .carousel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1800px;
+        }
+
+        .slide-wrapper {
+            position: relative;
+            width: 1080px;
+            height: 1080px;
+            transform: scale(0.45);
+            transform-origin: top left;
+            margin-bottom: -594px;
+            margin-right: -594px;
+        }
+
+        .slide-wrapper:hover {
+            z-index: 10;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            z-index: 0;
+        }
+
+        .slide {
+            position: relative;
+            width: 1080px;
+            height: 1080px;
+            background: var(--bg-dark);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 72px;
+        }
+
+        /* Typography */
+        .slide-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 82px;
+            font-weight: 600;
+            line-height: 1.0;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+        }
+
+        .headline-medium {
+            font-size: 72px;
+        }
+
+        .subheadline {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .accent-text {
+            color: var(--accent-gold);
+        }
+
+        .accent-blue {
+            color: var(--accent-blue);
+        }
+
+        .accent-green {
+            color: var(--accent-green);
+        }
+
+        .accent-purple {
+            color: var(--accent-purple);
+        }
+
+        /* Cover slide */
+        .cover-slide .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            padding: 16px 32px;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 6px;
+            margin-bottom: 48px;
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        .cover-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 86px;
+            font-weight: 600;
+            line-height: 1.0;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+        }
+
+        .cover-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        /* Fib spiral icon */
+        .fib-icon {
+            margin-top: 60px;
+            font-size: 100px;
+        }
+
+        /* Levels section */
+        .levels-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .levels-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .level-card {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 28px 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+        }
+
+        .level-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            min-width: 120px;
+        }
+
+        .level-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        /* Why they work */
+        .why-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .why-card {
+            padding: 60px;
+            background: rgba(201, 169, 98, 0.08);
+            border: 1px solid rgba(201, 169, 98, 0.25);
+            border-radius: 24px;
+            max-width: 800px;
+        }
+
+        .why-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 24px;
+        }
+
+        .why-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        .why-subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-top: 24px;
+        }
+
+        /* How to draw section */
+        .draw-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .draw-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .draw-card {
+            padding: 40px;
+            border-radius: 16px;
+        }
+
+        .draw-card.uptrend {
+            background: rgba(74, 217, 122, 0.08);
+            border: 1px solid rgba(74, 217, 122, 0.25);
+        }
+
+        .draw-card.downtrend {
+            background: rgba(217, 74, 74, 0.08);
+            border: 1px solid rgba(217, 74, 74, 0.25);
+        }
+
+        .draw-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .draw-card.uptrend .draw-label {
+            color: var(--accent-green);
+        }
+
+        .draw-card.downtrend .draw-label {
+            color: var(--accent-red);
+        }
+
+        .draw-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .draw-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Pro tip */
+        .tip-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .tip-card {
+            padding: 48px;
+            background: rgba(74, 144, 217, 0.08);
+            border: 1px solid rgba(74, 144, 217, 0.25);
+            border-radius: 20px;
+        }
+
+        .tip-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .tip-icon {
+            font-size: 40px;
+        }
+
+        .tip-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+        }
+
+        .tip-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .tip-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+        }
+
+        .tip-bullet {
+            width: 10px;
+            height: 10px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .tip-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        /* CTA slide */
+        .cta-slide .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 80px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+            max-width: 800px;
+        }
+
+        .cta-subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--bg-dark);
+            background: linear-gradient(135deg, var(--accent-gold), #b8963a);
+            padding: 24px 64px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .brand-tag {
+            position: absolute;
+            bottom: 56px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 6px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        /* Export mode */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            transform: none;
+            margin: 0;
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- Slide 1: Cover -->
+        <div class="slide-wrapper">
+            <div class="slide cover-slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="cover-badge">Lesson 15</div>
+                    <h1 class="cover-title">Fibonacci<br>Retracements</h1>
+                    <p class="cover-subtitle">The self-fulfilling prophecy</p>
+                    <div class="fib-icon">🌀</div>
+                    <div class="brand-tag">SignalPilot</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Key Levels -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 02</div>
+                    <h2 class="headline headline-medium">Key<br><span class="accent-text">Levels</span></h2>
+                    <div class="levels-section">
+                        <div class="levels-grid">
+                            <div class="level-card">
+                                <span class="level-number">23.6%</span>
+                                <span class="level-desc">Shallow pullback</span>
+                            </div>
+                            <div class="level-card">
+                                <span class="level-number">38.2%</span>
+                                <span class="level-desc">Common retracement</span>
+                            </div>
+                            <div class="level-card">
+                                <span class="level-number">50%</span>
+                                <span class="level-desc">Halfway (not technically Fib)</span>
+                            </div>
+                            <div class="level-card">
+                                <span class="level-number">61.8%</span>
+                                <span class="level-desc">Golden ratio, deep pullback</span>
+                            </div>
+                            <div class="level-card">
+                                <span class="level-number">78.6%</span>
+                                <span class="level-desc">Very deep, trend may be weakening</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Why They Work -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 03</div>
+                    <h2 class="headline headline-medium">Why They<br><span class="accent-text">Work</span></h2>
+                    <div class="why-container">
+                        <div class="why-card">
+                            <div class="why-title">The Secret</div>
+                            <p class="why-text">Self-fulfilling prophecy</p>
+                            <p class="why-subtext">Millions of traders watch the same levels</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: How to Draw -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 04</div>
+                    <h2 class="headline headline-medium">How to<br><span class="accent-blue">Draw</span></h2>
+                    <div class="draw-section">
+                        <div class="draw-grid">
+                            <div class="draw-card uptrend">
+                                <div class="draw-label">Uptrend</div>
+                                <div class="draw-icon">📈</div>
+                                <div class="draw-text">Draw from swing <strong>low</strong> to swing <strong>high</strong></div>
+                            </div>
+                            <div class="draw-card downtrend">
+                                <div class="draw-label">Downtrend</div>
+                                <div class="draw-icon">📉</div>
+                                <div class="draw-text">Draw from swing <strong>high</strong> to swing <strong>low</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Pro Tip -->
+        <div class="slide-wrapper">
+            <div class="slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 05</div>
+                    <h2 class="headline headline-medium">Pro<br><span class="accent-blue">Tip</span></h2>
+                    <div class="tip-container">
+                        <div class="tip-card">
+                            <div class="tip-header">
+                                <span class="tip-icon">💡</span>
+                                <span class="tip-title">Key Insights</span>
+                            </div>
+                            <div class="tip-content">
+                                <div class="tip-item">
+                                    <span class="tip-bullet"></span>
+                                    <span class="tip-text">Look for confluence with other levels</span>
+                                </div>
+                                <div class="tip-item">
+                                    <span class="tip-bullet"></span>
+                                    <span class="tip-text">Think zones, not exact lines</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: CTA -->
+        <div class="slide-wrapper">
+            <div class="slide cta-slide">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <h2 class="cta-headline">Master<br><span class="accent-text">Fibonacci</span></h2>
+                    <p class="cta-subtext">Full lesson + PDF guide available in bio.</p>
+                    <a href="#" class="cta-button">Get Free Lesson</a>
+                    <div class="brand-tag">SignalPilot</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide-wrapper');
+            let currentSlide = 0;
+            let exportMode = false;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            function toggleExportMode() {
+                exportMode = !exportMode;
+                document.body.classList.toggle('export-mode', exportMode);
+                if (exportMode) {
+                    currentSlide = 0;
+                    showSlide(currentSlide);
+                }
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'e' || e.key === 'E') {
+                    toggleExportMode();
+                } else if (exportMode) {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        showSlide(currentSlide);
+                    } else if (e.key === 'ArrowLeft') {
+                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                        showSlide(currentSlide);
+                    } else if (e.key === 'Escape') {
+                        toggleExportMode();
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

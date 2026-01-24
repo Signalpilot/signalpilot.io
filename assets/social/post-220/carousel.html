@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 220 - Alert Notification Options</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =====================================================
+           CSS CUSTOM PROPERTIES - SIGNALPILOT BRAND
+           ===================================================== */
+        :root {
+            /* Brand Colors */
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --border-subtle: #2a2a3a;
+
+            /* Accent Colors */
+            --accent-blue: #4a90d9;
+            --accent-blue-glow: rgba(74, 144, 217, 0.3);
+            --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
+            --accent-green: #4ad97a;
+            --accent-green-glow: rgba(74, 217, 122, 0.3);
+            --accent-red: #d94a4a;
+            --accent-red-glow: rgba(217, 74, 74, 0.3);
+            --accent-teal: #4ad9d9;
+            --accent-teal-glow: rgba(74, 217, 217, 0.3);
+            --accent-purple: #9b4ad9;
+            --accent-purple-glow: rgba(155, 74, 217, 0.3);
+
+            /* Text Colors */
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+
+            /* Typography */
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --slide-padding: 60px;
+            --content-gap: 24px;
+
+            /* Dimensions */
+            --slide-width: 1080px;
+            --slide-height: 1080px;
+        }
+
+        /* =====================================================
+           CSS RESET & BASE STYLES
+           ===================================================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: #000000;
+        }
+
+        /* =====================================================
+           CAROUSEL CONTAINER STYLES
+           ===================================================== */
+        .carousel-container {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            padding: 40px;
+            overflow-x: auto;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        /* =====================================================
+           SLIDE BASE STYLES
+           ===================================================== */
+        .slide {
+            position: relative;
+            width: var(--slide-width);
+            height: var(--slide-height);
+            min-width: var(--slide-width);
+            min-height: var(--slide-height);
+            background-color: var(--bg-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: var(--slide-padding);
+        }
+
+        /* =====================================================
+           VIDEO BACKGROUND STYLES
+           ===================================================== */
+        .slide-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .slide-video-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        /* =====================================================
+           SLIDE CONTENT WRAPPER
+           ===================================================== */
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            gap: var(--content-gap);
+        }
+
+        /* =====================================================
+           TYPOGRAPHY STYLES
+           ===================================================== */
+        .slide-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+        }
+
+        .slide-title {
+            font-family: var(--font-serif);
+            font-size: 72px;
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .slide-title-large {
+            font-size: 84px;
+        }
+
+        .slide-title-medium {
+            font-size: 64px;
+        }
+
+        .slide-subtitle {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* =====================================================
+           NOTIFICATION ICONS VISUAL
+           ===================================================== */
+        .notification-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            margin: 40px 0;
+        }
+
+        .central-bell {
+            width: 160px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-teal) 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 60px var(--accent-blue-glow);
+        }
+
+        .notification-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 600px;
+        }
+
+        .notification-chip {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: var(--bg-card);
+            border-radius: 100px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .notification-chip-icon {
+            font-size: 24px;
+        }
+
+        .notification-chip-text {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* =====================================================
+           ALERT OPTION CARD STYLES
+           ===================================================== */
+        .option-section {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .section-icon {
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 2px solid var(--accent-blue);
+            box-shadow: 0 0 20px var(--accent-blue-glow);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .option-description {
+            padding: 32px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .option-text {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .option-note {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-muted);
+            padding-top: 16px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        /* =====================================================
+           DUAL OPTION CARDS
+           ===================================================== */
+        .dual-options {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .dual-option-card {
+            display: flex;
+            gap: 24px;
+            padding: 28px 32px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .dual-option-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: var(--bg-dark);
+            border-radius: 16px;
+            border: 1px solid var(--accent-blue);
+            flex-shrink: 0;
+        }
+
+        .dual-option-icon.gold {
+            border-color: var(--accent-gold);
+        }
+
+        .dual-option-icon.green {
+            border-color: var(--accent-green);
+        }
+
+        .dual-option-icon.purple {
+            border-color: var(--accent-purple);
+        }
+
+        .dual-option-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .dual-option-title {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .dual-option-desc {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        /* =====================================================
+           SETUP STEPS STYLES
+           ===================================================== */
+        .setup-section {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .setup-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .setup-step {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 24px 28px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .step-number {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--accent-blue);
+            color: var(--text-primary);
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* =====================================================
+           CTA SLIDE STYLES
+           ===================================================== */
+        .cta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .cta-visual {
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-teal) 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 60px var(--accent-blue-glow);
+        }
+
+        .cta-text {
+            font-family: var(--font-serif);
+            font-size: 52px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .cta-highlight {
+            color: var(--accent-blue);
+        }
+
+        .cta-subtext {
+            font-family: var(--font-sans);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 48px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue) 100%);
+            border-radius: 100px;
+            font-family: var(--font-sans);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            box-shadow: 0 4px 24px var(--accent-blue-glow);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--accent-blue-glow);
+        }
+
+        /* =====================================================
+           BRAND FOOTER STYLES
+           ===================================================== */
+        .brand-footer {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .brand-logo-text {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .slide-indicator {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* =====================================================
+           EXPORT MODE STYLES
+           ===================================================== */
+        body.export-mode {
+            background: transparent;
+        }
+
+        body.export-mode .carousel-container {
+            padding: 0;
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+        }
+
+        body.export-mode .slide:not(.exporting) {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <!-- =====================================================
+             SLIDE 1: TITLE - ALERT OPTIONS
+             ===================================================== -->
+        <div class="slide" data-slide="1">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="slide-number">Signal Pilot Docs</div>
+                    <h1 class="slide-title slide-title-large">Alert<br>Options</h1>
+                    <p class="slide-subtitle">Get Notified Your Way</p>
+                </div>
+
+                <div class="notification-visual">
+                    <div class="central-bell">🔔</div>
+                    <div class="notification-options">
+                        <div class="notification-chip">
+                            <span class="notification-chip-icon">📱</span>
+                            <span class="notification-chip-text">Push</span>
+                        </div>
+                        <div class="notification-chip">
+                            <span class="notification-chip-icon">📧</span>
+                            <span class="notification-chip-text">Email</span>
+                        </div>
+                        <div class="notification-chip">
+                            <span class="notification-chip-icon">🔔</span>
+                            <span class="notification-chip-text">Popup</span>
+                        </div>
+                        <div class="notification-chip">
+                            <span class="notification-chip-icon">📲</span>
+                            <span class="notification-chip-text">Webhook</span>
+                        </div>
+                        <div class="notification-chip">
+                            <span class="notification-chip-icon">🔊</span>
+                            <span class="notification-chip-text">Sound</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">1 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 2: PUSH NOTIFICATIONS
+             ===================================================== -->
+        <div class="slide" data-slide="2">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="option-section">
+                    <div class="section-header">
+                        <div class="section-icon">📱</div>
+                        <h2 class="section-title">Push Notifications</h2>
+                    </div>
+
+                    <div class="option-description">
+                        <p class="option-text">
+                            Instant alerts delivered directly to your phone.
+                            Perfect for time-sensitive setups when you're away from your desk.
+                        </p>
+                        <p class="option-note">
+                            📌 Requires TradingView mobile app
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">2 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 3: EMAIL & POPUP
+             ===================================================== -->
+        <div class="slide" data-slide="3">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="dual-options">
+                    <div class="dual-option-card">
+                        <div class="dual-option-icon gold">📧</div>
+                        <div class="dual-option-content">
+                            <h3 class="dual-option-title">Email Alerts</h3>
+                            <p class="dual-option-desc">
+                                Sent to your inbox. Great for non-urgent signals
+                                and keeping a permanent record.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="dual-option-card">
+                        <div class="dual-option-icon green">🔔</div>
+                        <div class="dual-option-content">
+                            <h3 class="dual-option-title">TradingView Popup</h3>
+                            <p class="dual-option-desc">
+                                On-screen notification when you're at your desk.
+                                Non-intrusive but visible.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">3 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 4: WEBHOOKS & SOUND
+             ===================================================== -->
+        <div class="slide" data-slide="4">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="dual-options">
+                    <div class="dual-option-card">
+                        <div class="dual-option-icon purple">📲</div>
+                        <div class="dual-option-content">
+                            <h3 class="dual-option-title">Webhook Integrations</h3>
+                            <p class="dual-option-desc">
+                                Send to Discord, Telegram, or custom endpoints.
+                                Perfect for advanced automation.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="dual-option-card">
+                        <div class="dual-option-icon">🔊</div>
+                        <div class="dual-option-content">
+                            <h3 class="dual-option-title">Sound Alerts</h3>
+                            <p class="dual-option-desc">
+                                Audio notification so you never miss a signal
+                                while multitasking.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">4 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 5: HOW TO SET UP
+             ===================================================== -->
+        <div class="slide" data-slide="5">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="setup-section">
+                    <div class="section-header">
+                        <div class="section-icon">⚙️</div>
+                        <h2 class="section-title">How to Set Up</h2>
+                    </div>
+
+                    <div class="setup-steps">
+                        <div class="setup-step">
+                            <div class="step-number">1</div>
+                            <span class="step-text">Create alert on indicator</span>
+                        </div>
+
+                        <div class="setup-step">
+                            <div class="step-number">2</div>
+                            <span class="step-text">Choose notification method</span>
+                        </div>
+
+                        <div class="setup-step">
+                            <div class="step-number">3</div>
+                            <span class="step-text">Customize your message</span>
+                        </div>
+
+                        <div class="setup-step">
+                            <div class="step-number">4</div>
+                            <span class="step-text">Activate and trade</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">5 / 6</span>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             SLIDE 6: CTA - FULL GUIDE
+             ===================================================== -->
+        <div class="slide" data-slide="6">
+            <div class="slide-video-bg">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="slide-content">
+                <div class="cta-container">
+                    <div class="cta-visual">🔔</div>
+
+                    <h2 class="cta-text">Never Miss<br>a <span class="cta-highlight">Setup</span></h2>
+
+                    <p class="cta-subtext">
+                        Get notified your way
+                    </p>
+
+                    <a href="#" class="cta-button">
+                        <span>Full Setup Guide</span>
+                        <span>🔗</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <div class="brand-logo">
+                    <img src="../../images/logo-flat.png" alt="SignalPilot">
+                    <span class="brand-logo-text">SignalPilot</span>
+                </div>
+                <span class="slide-indicator">6 / 6</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         EXPORT MODE JAVASCRIPT
+         ===================================================== -->
+    <script>
+        /**
+         * Export Mode Controller
+         * Press 'E' to enter export mode
+         * Use Arrow keys to navigate slides
+         * Press 'Escape' to exit export mode
+         */
+        (function() {
+            let exportMode = false;
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                currentSlide = 0;
+                updateExportView();
+                console.log('Export mode enabled. Use Arrow keys to navigate, Escape to exit.');
+            }
+
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.classList.remove('exporting'));
+                console.log('Export mode disabled.');
+            }
+
+            function updateExportView() {
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.classList.add('exporting');
+                    } else {
+                        slide.classList.remove('exporting');
+                    }
+                });
+                console.log(`Showing slide ${currentSlide + 1} of ${totalSlides}`);
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateExportView();
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateExportView();
+                }
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'e' || e.key === 'E') {
+                    if (!exportMode) {
+                        enterExportMode();
+                    }
+                } else if (e.key === 'Escape') {
+                    if (exportMode) {
+                        exitExportMode();
+                    }
+                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    if (exportMode) {
+                        nextSlide();
+                    }
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    if (exportMode) {
+                        prevSlide();
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

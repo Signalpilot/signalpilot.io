@@ -8,179 +8,558 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root { --bg-dark: #0a0a0f; --accent-blue: #4a90d9; --accent-gold: #c9a962; --accent-teal: #4ad9d9; --text-primary: #ffffff; --text-secondary: rgba(255, 255, 255, 0.85); }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #111; font-family: 'Inter', sans-serif; color: var(--text-primary); padding: 2rem; min-height: 100vh; }
-    .controls { position: fixed; top: 1rem; right: 1rem; z-index: 1000; display: flex; gap: 1rem; align-items: center; background: rgba(0,0,0,0.8); padding: 1rem 1.5rem; border-radius: 8px; backdrop-filter: blur(10px); }
-    .controls label { font-size: 0.875rem; color: var(--text-secondary); }
-    .controls select, .controls button { background: var(--bg-dark); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-family: inherit; }
-    .page-title { text-align: center; margin-bottom: 2rem; font-family: 'Cormorant Garamond', serif; }
-    .page-title h1 { font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; }
-    .page-title p { color: var(--text-secondary); font-size: 0.875rem; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; padding-bottom: 4rem; }
-    .slide-wrapper { display: flex; flex-direction: column; align-items: center; }
-    .slide-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-gold); margin-bottom: 0.75rem; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 1/1; position: relative; overflow: hidden; background: var(--bg-dark); border-radius: 4px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-    .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-    .slide-bg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.08; }
-    .slide.bg-black .slide-bg video { opacity: 0; }
-    .slide-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; display: flex; flex-direction: column; justify-content: center; padding: 10%; }
-    .slide-1 .slide-content { align-items: center; text-align: center; }
-    .slide-1 .icon { font-size: 3rem; margin-bottom: 1.5rem; }
-    .slide-1 .character-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-teal); margin-bottom: 1rem; }
-    .slide-1 .hook-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; font-style: italic; color: var(--text-primary); line-height: 1.6; margin-bottom: 1.5rem; }
-    .slide-1 .hook-source { font-family: 'Inter', sans-serif; font-size: 0.875rem; color: var(--accent-gold); }
-    .slide-content .header { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 500; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
-    .slide-content .text { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.15rem; line-height: 1.7; color: var(--text-secondary); }
-    .slide-content .text em { font-style: italic; color: var(--accent-gold); }
-    .slide-content .text .highlight { color: var(--text-primary); font-weight: 400; }
-    .slide-content .text .teal { color: var(--accent-teal); }
-    .arrow-list { list-style: none; padding: 0; font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.1rem; line-height: 2.2; color: var(--text-secondary); }
-    .arrow-list li { display: flex; align-items: flex-start; gap: 0.75rem; }
-    .arrow-list .arrow { color: var(--accent-teal); flex-shrink: 0; }
-    .tf-box { padding: 1.25rem; margin-bottom: 1rem; background: rgba(74, 217, 217, 0.1); border-left: 3px solid var(--accent-teal); }
-    .tf-label { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; color: var(--accent-teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-    .tf-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; color: var(--text-primary); margin-bottom: 0.5rem; }
-    .lore-box { background: rgba(201, 169, 98, 0.08); border: 1px solid rgba(201, 169, 98, 0.3); padding: 1.5rem; text-align: center; margin-top: 1rem; }
-    .lore-text { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; color: var(--accent-gold); }
-    .slide-7 .slide-content { align-items: center; text-align: center; }
-    .slide-7 .cta-text { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; color: var(--text-primary); margin-bottom: 0.75rem; }
-    .slide-7 .cta-sub { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-secondary); margin-bottom: 2rem; }
-    .slide-7 .cta-button { display: inline-block; padding: 1rem 2.5rem; border: 1px solid var(--accent-teal); color: var(--accent-teal); font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; }
-    .slide-7 .logo { width: 50%; max-width: 200px; margin-top: 2rem; opacity: 0.8; }
-    .slide-7 .link-hint { font-family: 'Inter', sans-serif; font-size: 0.875rem; color: var(--text-secondary); margin-top: 1.5rem; }
-    body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
-    body.export-mode .carousel-grid { display: block; padding: 0; }
-    body.export-mode .slide-wrapper { display: none; }
-    body.export-mode .slide-wrapper.active { display: flex; }
-    body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; border-radius: 0; box-shadow: none; }
-    @media (max-width: 900px) { .carousel-grid { grid-template-columns: 1fr; } .controls { position: static; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; } }
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-red: #d94a4a;
+      --accent-green: #4ad97a;
+      --accent-teal: #4ad9d9;
+      --text-primary: #e8e8e8;
+      --text-secondary: #a0a0a0;
+      --text-dim: #6a6a6a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .controls label {
+      color: var(--text-secondary);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .controls input[type="checkbox"] {
+      cursor: pointer;
+    }
+
+    .controls input[type="range"] {
+      width: 80px;
+      cursor: pointer;
+    }
+
+    .controls button {
+      background: var(--accent-teal);
+      color: var(--bg-dark);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-title h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .page-title p {
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .slide-wrapper {
+      aspect-ratio: 1 / 1;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-dark);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+
+    .slide-wrapper .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: var(--video-opacity, 0.08);
+      pointer-events: none;
+    }
+
+    .slide-wrapper .slide-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 48px;
+      text-align: center;
+    }
+
+    .slide-number {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .slide-icon {
+      font-size: 56px;
+      margin-bottom: 20px;
+    }
+
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .slide-title.large {
+      font-size: 48px;
+    }
+
+    .slide-subtitle {
+      font-size: 14px;
+      color: var(--accent-teal);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+
+    .slide-body {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 320px;
+    }
+
+    .quote-box {
+      background: linear-gradient(135deg, rgba(74, 217, 217, 0.1), rgba(201, 169, 98, 0.1));
+      border: 1px solid rgba(74, 217, 217, 0.3);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 20px 0;
+      max-width: 340px;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .quote-author {
+      font-size: 14px;
+      color: var(--accent-gold);
+      font-weight: 500;
+    }
+
+    .tf-box {
+      width: 100%;
+      max-width: 340px;
+      background: rgba(74, 217, 217, 0.1);
+      border: 2px solid rgba(74, 217, 217, 0.4);
+      border-radius: 16px;
+      padding: 28px;
+      margin: 16px 0;
+      text-align: left;
+    }
+
+    .tf-box .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-teal);
+      margin-bottom: 8px;
+    }
+
+    .tf-box .title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .tf-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tf-list li {
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tf-list li::before {
+      content: "→";
+      color: var(--accent-teal);
+    }
+
+    .indicator-badge {
+      display: inline-block;
+      background: rgba(74, 217, 217, 0.2);
+      border: 1px solid var(--accent-teal);
+      color: var(--accent-teal);
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 16px;
+      letter-spacing: 1px;
+    }
+
+    .lore-box {
+      width: 100%;
+      max-width: 340px;
+      background: rgba(201, 169, 98, 0.1);
+      border: 2px solid rgba(201, 169, 98, 0.4);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 16px 0;
+      text-align: center;
+    }
+
+    .lore-box .text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--accent-gold);
+      line-height: 1.5;
+    }
+
+    .cta-link {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 14px 32px;
+      background: var(--accent-teal);
+      color: var(--bg-dark);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    body.export-mode {
+      padding: 0;
+      background: #000;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      width: 1080px;
+      height: 1080px;
+      border-radius: 0;
+      margin: 0;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    body.export-mode .export-nav {
+      display: flex;
+    }
+
+    .export-nav button {
+      background: var(--accent-teal);
+      color: var(--bg-dark);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .export-nav .slide-indicator {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .slide-wrapper .slide-content {
+        padding: 32px;
+      }
+
+      .slide-title {
+        font-size: 26px;
+      }
+
+      .slide-title.large {
+        font-size: 36px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.05">5%</option><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.15">15%</option></select></label>
-    <button id="export-btn">Export Mode</button>
+    <label><input type="checkbox" id="bgToggle" checked> Background</label>
+    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
+    <button onclick="toggleExportMode()">Export Mode</button>
   </div>
+
   <div class="page-title">
     <h1>Post 029 — Chronicle: The Cartographer</h1>
-    <p>Instagram Carousel • 7 Slides • 1080×1080px</p>
+    <p>Chronicle Lore Carousel — 7 Slides</p>
   </div>
+
   <div class="carousel-grid">
     <!-- Slide 1: Hook -->
-    <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Hook</span>
-      <div class="slide slide-1">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <div class="icon">🗺️</div>
-          <div class="character-name">The Cartographer</div>
-          <p class="hook-quote">"One face looks to higher timeframes for context. One face looks to lower timeframes for precision.<br><br>Together, they see what single-minded traders miss."</p>
-          <p class="hook-source">— The Chronicle</p>
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">01 / 07</span>
+        <div class="slide-icon">🗺️</div>
+        <div class="slide-subtitle">Chronicle</div>
+        <h2 class="slide-title large">THE CARTOGRAPHER</h2>
+        <div class="quote-box">
+          <div class="quote-text">"One face looks to higher timeframes for context. One face looks to lower timeframes for precision."</div>
+          <div class="quote-author">— The Cartographer</div>
         </div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
+
     <!-- Slide 2: Philosophy -->
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Philosophy</span>
-      <div class="slide slide-2">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <p class="header">Two Faces</p>
-          <p class="text">Like the Roman god <span class="teal">Janus</span> with two faces — one looking forward, one looking back.<br><br>The Cartographer sees markets from <em>multiple perspectives</em> simultaneously.<br><br>Not either/or. <span class="highlight">Both.</span></p>
-        </div>
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">02 / 07</span>
+        <div class="slide-subtitle">Philosophy</div>
+        <h2 class="slide-title">Two Faces</h2>
+        <p class="slide-body">Like the Roman god Janus with two faces — one looking forward, one looking back.<br><br>The Cartographer sees markets from multiple perspectives simultaneously. Not either/or. Both.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
+
     <!-- Slide 3: Higher TF -->
-    <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Higher Timeframes</span>
-      <div class="slide slide-3">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <p class="header">The First Face</p>
-          <div class="tf-box">
-            <div class="tf-label">Higher Timeframes</div>
-            <div class="tf-title">Context & Direction</div>
-          </div>
-          <ul class="arrow-list">
-            <li><span class="arrow">→</span> The bigger trend</li>
-            <li><span class="arrow">→</span> Major support/resistance</li>
-            <li><span class="arrow">→</span> Context for the move</li>
-            <li><span class="arrow">→</span> Where price is heading</li>
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">03 / 07</span>
+        <div class="tf-box">
+          <div class="label">The First Face</div>
+          <div class="title">Higher Timeframes</div>
+          <ul class="tf-list">
+            <li>The bigger trend</li>
+            <li>Major support/resistance</li>
+            <li>Context for the move</li>
+            <li>Where price is heading</li>
           </ul>
         </div>
+        <p class="slide-body">Context and direction.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
+
     <!-- Slide 4: Lower TF -->
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Lower Timeframes</span>
-      <div class="slide slide-4">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <p class="header">The Second Face</p>
-          <div class="tf-box">
-            <div class="tf-label">Lower Timeframes</div>
-            <div class="tf-title">Precision & Timing</div>
-          </div>
-          <ul class="arrow-list">
-            <li><span class="arrow">→</span> Entry precision</li>
-            <li><span class="arrow">→</span> Stop placement</li>
-            <li><span class="arrow">→</span> Immediate structure</li>
-            <li><span class="arrow">→</span> Exact trigger points</li>
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">04 / 07</span>
+        <div class="tf-box">
+          <div class="label">The Second Face</div>
+          <div class="title">Lower Timeframes</div>
+          <ul class="tf-list">
+            <li>Entry precision</li>
+            <li>Stop placement</li>
+            <li>Immediate structure</li>
+            <li>Exact trigger points</li>
           </ul>
         </div>
+        <p class="slide-body">Precision and timing.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
+
     <!-- Slide 5: Connection -->
-    <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Janus Atlas</span>
-      <div class="slide slide-5">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <p class="header">The Cartographer's Tool</p>
-          <p class="text"><span class="teal">Janus Atlas</span> — named for the two-faced god.<br><br>Multi-timeframe support and resistance, calculated automatically.<br><br>Higher timeframe levels overlaid on your execution chart. The Cartographer's philosophy made real.</p>
-        </div>
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">05 / 07</span>
+        <div class="slide-subtitle">The Tool</div>
+        <h2 class="slide-title">The Cartographer's Instrument</h2>
+        <p class="slide-body">Multi-timeframe support and resistance, calculated automatically. Higher timeframe levels overlaid on your execution chart.<br><br>The Cartographer's philosophy made real.</p>
+        <div class="indicator-badge">JANUS ATLAS</div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
+
     <!-- Slide 6: Lore -->
-    <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — Lore</span>
-      <div class="slide slide-6">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <p class="header">The Third of Seven</p>
-          <p class="text">Single timeframe traders see one piece of the puzzle.<br><br>Multi-timeframe traders see the <em>full map</em>.</p>
-          <div class="lore-box">
-            <div class="lore-text">"The Cartographer — third of the Elite Seven — maps what others overlook."</div>
-          </div>
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">06 / 07</span>
+        <div class="slide-icon">🗺️</div>
+        <h2 class="slide-title">The Third of Seven</h2>
+        <p class="slide-body">Single timeframe traders see one piece of the puzzle. Multi-timeframe traders see the full map.</p>
+        <div class="lore-box">
+          <div class="text">"The Cartographer — third of the Elite Seven — maps what others overlook."</div>
         </div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
+
     <!-- Slide 7: CTA -->
-    <div class="slide-wrapper" data-slide="7">
-      <span class="slide-label">Slide 7 — CTA</span>
-      <div class="slide slide-7">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <p class="cta-text">Enter The Chronicle</p>
-          <p class="cta-sub">Discover the wisdom of the Elite Seven.</p>
-          <a href="#" class="cta-button">Read More</a>
-          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
-          <p class="link-hint">Link in bio</p>
-        </div>
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">07 / 07</span>
+        <div class="slide-icon">📜</div>
+        <h2 class="slide-title">Enter the Chronicle</h2>
+        <p class="slide-body">Discover the full story of The Cartographer and the Elite Seven.</p>
+        <a href="https://signalpilot.io/chronicle/the-cartographer/" class="cta-link">Meet The Cartographer</a>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
   </div>
+
+  <div class="export-nav">
+    <button onclick="prevSlide()">← Previous</button>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 7</span>
+    <button onclick="nextSlide()">Next →</button>
+  </div>
+
   <script>
-    const bgToggle = document.getElementById('bg-toggle'); const opacityControl = document.getElementById('opacity-control'); const slides = document.querySelectorAll('.slide'); const videos = document.querySelectorAll('.slide-bg video');
-    bgToggle.addEventListener('change', (e) => { slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black')); });
-    opacityControl.addEventListener('change', (e) => { videos.forEach(video => video.style.opacity = e.target.value); });
-    const exportBtn = document.getElementById('export-btn'); const slideWrappers = document.querySelectorAll('.slide-wrapper'); let exportMode = false; let currentExportSlide = 0;
-    exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { exportBtn.textContent = 'Exit Export (←/→ to navigate)'; currentExportSlide = 0; updateExportSlide(); } else { exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); } });
-    function updateExportSlide() { slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide)); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight' || e.key === ' ') { currentExportSlide = (currentExportSlide + 1) % slideWrappers.length; updateExportSlide(); } else if (e.key === 'ArrowLeft') { currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length; updateExportSlide(); } else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); } });
+    const bgToggle = document.getElementById('bgToggle');
+    const opacitySlider = document.getElementById('opacitySlider');
+    const videos = document.querySelectorAll('.bg-video');
+    const slides = document.querySelectorAll('.slide-wrapper');
+    let currentSlide = 0;
+    let exportMode = false;
+
+    bgToggle.addEventListener('change', (e) => {
+      videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none');
+    });
+
+    opacitySlider.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
+    });
+
+    function toggleExportMode() {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        currentSlide = 0;
+        updateExportView();
+      }
+    }
+
+    function updateExportView() {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateExportView();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateExportView();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') toggleExportMode();
+    });
   </script>
 </body>
 </html>

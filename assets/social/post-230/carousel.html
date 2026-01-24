@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 230 - Performance Optimization</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #5cb85c;
+            --accent-orange: #f5a623;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 20px;
+        }
+
+        .carousel-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 100%;
+        }
+
+        .slide {
+            width: 1080px;
+            height: 1080px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .brand-header {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Slide 1 - Title */
+        .slide-1 .icon-container {
+            width: 180px;
+            height: 180px;
+            border: 3px solid var(--accent-orange);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .slide-1 .icon-container::before {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            border-radius: 50%;
+        }
+
+        .slide-1 .speed-icon {
+            font-size: 80px;
+        }
+
+        .slide-1 h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .slide-1 .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            font-weight: 300;
+            color: var(--accent-orange);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Slide 2 - Reduce History */
+        .slide-2 .tip-icon {
+            font-size: 80px;
+            margin-bottom: 40px;
+        }
+
+        .slide-2 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide-2 .tip-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 50px 60px;
+            max-width: 800px;
+        }
+
+        .slide-2 .tip-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 25px;
+        }
+
+        .slide-2 .tip-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .slide-2 .path {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--accent-blue);
+            background: rgba(74, 144, 217, 0.1);
+            padding: 15px 25px;
+            border-radius: 8px;
+        }
+
+        /* Slide 3 - Close Unused Indicators */
+        .slide-3 .tip-icon {
+            font-size: 80px;
+            margin-bottom: 40px;
+        }
+
+        .slide-3 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide-3 .tip-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 50px 60px;
+            max-width: 800px;
+        }
+
+        .slide-3 .tip-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 25px;
+        }
+
+        .slide-3 .tip-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .slide-3 .stat {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--accent-gold);
+            margin-top: 25px;
+        }
+
+        /* Slide 4 - Fewer Symbols + Clear Cache */
+        .slide-4 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide-4 .tips-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 850px;
+        }
+
+        .slide-4 .tip-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 35px 30px;
+            text-align: center;
+        }
+
+        .slide-4 .tip-card-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .slide-4 .tip-card-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 15px;
+        }
+
+        .slide-4 .tip-card-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Slide 5 - Restart + Desktop App */
+        .slide-5 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide-5 .tips-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 850px;
+        }
+
+        .slide-5 .tip-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 35px 30px;
+            text-align: center;
+        }
+
+        .slide-5 .tip-card-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .slide-5 .tip-card-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+        }
+
+        .slide-5 .tip-card-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .slide-5 .bottom-note {
+            margin-top: 40px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-style: italic;
+            color: var(--accent-gold);
+        }
+
+        /* Slide 6 - CTA */
+        .slide-6 .cta-icon {
+            font-size: 100px;
+            margin-bottom: 50px;
+        }
+
+        .slide-6 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+
+        .slide-6 .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-style: italic;
+            color: var(--accent-orange);
+            margin-bottom: 50px;
+        }
+
+        .slide-6 .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-orange), #e09015);
+            color: var(--bg-dark);
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 22px 55px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .slide-6 .link-hint {
+            margin-top: 35px;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        /* Export Mode Styles */
+        body.export-mode {
+            background: none;
+            padding: 0;
+        }
+
+        body.export-mode .carousel-container {
+            gap: 0;
+        }
+
+        body.export-mode .slide {
+            border-radius: 0;
+        }
+
+        body.export-mode .slide:not(.active) {
+            display: none;
+        }
+
+        body.export-mode .slide.active {
+            display: flex;
+        }
+
+        .export-instructions {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        body.export-mode .export-instructions {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="export-instructions">
+        Press <strong>E</strong> for export mode | <strong>Arrow keys</strong> to navigate | <strong>Escape</strong> to exit
+    </div>
+
+    <div class="carousel-container">
+        <!-- Slide 1: Title -->
+        <div class="slide slide-1 active">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <div class="icon-container">
+                    <span class="speed-icon">&#9889;</span>
+                </div>
+                <h1>Performance</h1>
+                <div class="subtitle">Optimization Tips</div>
+            </div>
+            <div class="slide-number">1 / 6</div>
+        </div>
+
+        <!-- Slide 2: Reduce History -->
+        <div class="slide slide-2">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <span class="tip-icon">&#128202;</span>
+                <h2>Reduce Visible History</h2>
+                <div class="tip-box">
+                    <div class="tip-title">Less Bars Loaded = Faster Performance</div>
+                    <div class="tip-desc">
+                        Loading thousands of historical bars consumes memory
+                        and slows down your charts significantly.
+                    </div>
+                    <div class="path">Settings &#8594; Chart &#8594; Bars Loaded</div>
+                </div>
+            </div>
+            <div class="slide-number">2 / 6</div>
+        </div>
+
+        <!-- Slide 3: Close Unused Indicators -->
+        <div class="slide slide-3">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <span class="tip-icon">&#128200;</span>
+                <h2>Close Unused Indicators</h2>
+                <div class="tip-box">
+                    <div class="tip-title">Each Indicator Uses Resources</div>
+                    <div class="tip-desc">
+                        Every active indicator runs calculations continuously.
+                        Keep only what you actually need for your strategy.
+                    </div>
+                    <div class="stat">Focus on quality, not quantity</div>
+                </div>
+            </div>
+            <div class="slide-number">3 / 6</div>
+        </div>
+
+        <!-- Slide 4: Fewer Symbols + Clear Cache -->
+        <div class="slide slide-4">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <h2>Quick Wins</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <span class="tip-card-icon">&#128269;</span>
+                        <div class="tip-card-title">Use Fewer Symbols</div>
+                        <div class="tip-card-desc">
+                            Fewer watchlist items = less strain on your system
+                        </div>
+                    </div>
+                    <div class="tip-card">
+                        <span class="tip-card-icon">&#128451;</span>
+                        <div class="tip-card-title">Clear Browser Cache</div>
+                        <div class="tip-card-desc">
+                            Refresh stored data for a clean slate
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">4 / 6</div>
+        </div>
+
+        <!-- Slide 5: Restart + Desktop App -->
+        <div class="slide slide-5">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <h2>Power Moves</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <span class="tip-card-icon">&#128260;</span>
+                        <div class="tip-card-title">Restart TradingView</div>
+                        <div class="tip-card-desc">
+                            A fresh start solves many performance issues
+                        </div>
+                    </div>
+                    <div class="tip-card">
+                        <span class="tip-card-icon">&#128187;</span>
+                        <div class="tip-card-title">Try Desktop App</div>
+                        <div class="tip-card-desc">
+                            Often faster and more stable than browser
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-note">"Fast charts = Better decisions"</div>
+            </div>
+            <div class="slide-number">5 / 6</div>
+        </div>
+
+        <!-- Slide 6: CTA -->
+        <div class="slide slide-6">
+            <div class="video-background">
+                <video autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+                <div class="brand-header">Signal Pilot</div>
+                <span class="cta-icon">&#128640;</span>
+                <h2>Optimize Your Setup</h2>
+                <div class="tagline">Speed matters in trading</div>
+                <div class="cta-button">Full Guide</div>
+                <div class="link-hint">Link in bio</div>
+            </div>
+            <div class="slide-number">6 / 6</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            let exportMode = false;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'e' || e.key === 'E') {
+                    exportMode = !exportMode;
+                    document.body.classList.toggle('export-mode', exportMode);
+                    if (exportMode) {
+                        showSlide(currentSlide);
+                    }
+                } else if (e.key === 'Escape') {
+                    exportMode = false;
+                    document.body.classList.remove('export-mode');
+                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    if (exportMode) showSlide(currentSlide);
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    if (exportMode) showSlide(currentSlide);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
