@@ -4,102 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post 195 — OmniDeck Unified View Demo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* =====================================================
-           CSS VARIABLES - SignalPilot Brand System
-           ===================================================== */
         :root {
             --bg-dark: #0a0a0f;
-            --bg-card: rgba(255, 255, 255, 0.02);
-            --bg-card-hover: rgba(255, 255, 255, 0.04);
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --border-medium: rgba(255, 255, 255, 0.1);
-            --text-primary: #e8e6e3;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-tertiary: rgba(255, 255, 255, 0.4);
-            --accent-blue: #4a90d9;
-            --accent-blue-glow: rgba(74, 144, 217, 0.3);
+            --text-muted: rgba(255, 255, 255, 0.5);
             --accent-gold: #c9a962;
-            --accent-gold-glow: rgba(201, 169, 98, 0.3);
+            --accent-gold-dim: rgba(201, 169, 98, 0.3);
             --accent-green: #4ad97a;
-            --accent-green-glow: rgba(74, 217, 122, 0.3);
-            --accent-red: #d94a4a;
-            --accent-red-glow: rgba(217, 74, 74, 0.3);
+            --accent-green-dim: rgba(74, 217, 122, 0.3);
             --accent-yellow: #d9c94a;
-            --accent-yellow-glow: rgba(217, 201, 74, 0.3);
-            --accent-teal: #4ad9d9;
-            --accent-teal-glow: rgba(74, 217, 217, 0.3);
-            --accent-purple: #9b4ad9;
-            --accent-purple-glow: rgba(155, 74, 217, 0.3);
+            --accent-yellow-dim: rgba(217, 201, 74, 0.3);
+            --accent-red: #d94a4a;
+            --accent-red-dim: rgba(217, 74, 74, 0.3);
+            --accent-blue: #4a90d9;
+            --border-subtle: rgba(255, 255, 255, 0.1);
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --slide-width: 1080px;
-            --slide-height: 1080px;
-            --slide-padding: 72px;
-            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* =====================================================
-           RESET & BASE STYLES
-           ===================================================== */
-        *,
-        *::before,
-        *::after {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
         body {
-            background-color: var(--bg-dark);
             font-family: var(--font-sans);
+            background: var(--bg-dark);
             color: var(--text-primary);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
             min-height: 100vh;
-            padding: 40px 20px;
-            line-height: 1.5;
+            padding: 2rem;
         }
 
-        /* =====================================================
-           CAROUSEL CONTAINER & LAYOUT
-           ===================================================== */
-        .carousel-container {
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .controls,
+        body.export-mode .page-title,
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+            margin: 0;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: block;
+        }
+
+        body.export-mode .slide {
+            width: 1080px;
+            height: 1080px;
+            max-width: none;
+            border-radius: 0;
+        }
+
+        .controls {
             display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
             justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .controls label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .controls select,
+        .controls button {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .controls select:hover,
+        .controls button:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-gold);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h1 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
             max-width: 1800px;
             margin: 0 auto;
         }
 
         .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .slide-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .slide {
+            width: 100%;
+            max-width: 540px;
+            aspect-ratio: 1 / 1;
+            background: var(--bg-dark);
+            border-radius: 0.5rem;
             position: relative;
-            width: var(--slide-width);
-            height: var(--slide-height);
-            transform: scale(0.45);
-            transform-origin: top left;
-            margin-bottom: -594px;
-            margin-right: -594px;
-            transition: var(--transition-smooth);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        .slide-wrapper:hover {
-            z-index: 10;
-        }
-
-        /* =====================================================
-           SLIDE BACKGROUND VIDEO
-           ===================================================== */
-        .slide-bg {
+        .video-bg {
             position: absolute;
             top: 0;
             left: 0;
@@ -111,66 +172,32 @@
             pointer-events: none;
         }
 
-        /* =====================================================
-           SLIDE BASE STYLES
-           ===================================================== */
-        .slide {
-            position: relative;
-            width: var(--slide-width);
-            height: var(--slide-height);
-            background: var(--bg-dark);
-            overflow: hidden;
-            z-index: 1;
-        }
-
         .slide-content {
             position: relative;
-            z-index: 2;
-            height: 100%;
+            z-index: 1;
+            flex: 1;
             display: flex;
             flex-direction: column;
-            padding: var(--slide-padding);
+            padding: 60px;
         }
 
-        /* =====================================================
-           SLIDE NUMBER INDICATOR
-           ===================================================== */
         .slide-number {
             font-family: var(--font-sans);
             font-size: 14px;
             font-weight: 500;
             letter-spacing: 3px;
-            color: var(--text-tertiary);
+            color: var(--text-muted);
             text-transform: uppercase;
             margin-bottom: 24px;
         }
 
-        /* =====================================================
-           TYPOGRAPHY - HEADLINES
-           ===================================================== */
         .headline {
             font-family: var(--font-serif);
-            font-size: 82px;
+            font-size: 68px;
             font-weight: 600;
             line-height: 1.0;
             color: var(--text-primary);
-            margin-bottom: 40px;
-            letter-spacing: -0.02em;
-        }
-
-        .headline-medium {
-            font-size: 68px;
-        }
-
-        .headline-small {
-            font-size: 54px;
-        }
-
-        /* =====================================================
-           ACCENT COLOR CLASSES
-           ===================================================== */
-        .accent-text {
-            color: var(--accent-gold);
+            margin-bottom: 32px;
         }
 
         .accent-gold {
@@ -181,26 +208,15 @@
             color: var(--accent-green);
         }
 
-        .accent-blue {
-            color: var(--accent-blue);
-        }
-
-        .accent-teal {
-            color: var(--accent-teal);
-        }
-
-        .accent-purple {
-            color: var(--accent-purple);
-        }
-
         .accent-red {
             color: var(--accent-red);
         }
 
-        /* =====================================================
-           COVER SLIDE STYLES
-           ===================================================== */
-        .cover-slide .slide-content {
+        /* Cover Slide */
+        .cover-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
@@ -209,46 +225,42 @@
         .cover-badge {
             display: inline-block;
             font-family: var(--font-sans);
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             color: var(--accent-gold);
             text-transform: uppercase;
-            padding: 16px 32px;
-            border: 1px solid var(--accent-gold-glow);
+            padding: 14px 28px;
+            border: 1px solid var(--accent-gold-dim);
             border-radius: 6px;
-            margin-bottom: 48px;
+            margin-bottom: 40px;
             background: rgba(201, 169, 98, 0.05);
+        }
+
+        .cover-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
         }
 
         .cover-title {
             font-family: var(--font-serif);
-            font-size: 86px;
+            font-size: 76px;
             font-weight: 600;
             line-height: 1.0;
             color: var(--text-primary);
-            margin-bottom: 32px;
-            letter-spacing: -0.02em;
+            margin-bottom: 28px;
         }
 
         .cover-subtitle {
             font-family: var(--font-sans);
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 300;
             color: var(--text-secondary);
-            max-width: 700px;
-            line-height: 1.5;
+            max-width: 600px;
         }
 
-        .cover-icon {
-            font-size: 100px;
-            margin-bottom: 24px;
-        }
-
-        /* =====================================================
-           PROBLEM CARD
-           ===================================================== */
-        .problem-section {
+        /* Problem/Solution Cards */
+        .content-section {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -256,78 +268,70 @@
         }
 
         .problem-card {
-            padding: 48px;
+            padding: 44px;
             background: rgba(217, 74, 74, 0.08);
             border: 1px solid rgba(217, 74, 74, 0.25);
             border-radius: 20px;
-            transition: var(--transition-smooth);
         }
 
         .problem-title {
             font-family: var(--font-sans);
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 600;
             color: var(--accent-red);
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .problem-desc {
             font-family: var(--font-serif);
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 600;
             color: var(--text-primary);
             line-height: 1.3;
         }
 
-        /* =====================================================
-           SOLUTION CARD
-           ===================================================== */
         .solution-card {
-            padding: 48px;
+            padding: 44px;
             background: rgba(74, 217, 122, 0.08);
             border: 1px solid rgba(74, 217, 122, 0.25);
             border-radius: 20px;
-            transition: var(--transition-smooth);
         }
 
         .solution-title {
             font-family: var(--font-sans);
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 600;
             color: var(--accent-green);
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .solution-desc {
             font-family: var(--font-serif);
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 600;
             color: var(--text-primary);
             line-height: 1.3;
         }
 
-        /* =====================================================
-           TRAFFIC LIGHT SYSTEM
-           ===================================================== */
+        /* Traffic Light Cards */
         .traffic-section {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 24px;
+            gap: 20px;
         }
 
         .traffic-card {
-            padding: 32px 40px;
-            border-radius: 16px;
+            padding: 28px 36px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
-            gap: 24px;
-            transition: var(--transition-smooth);
+            gap: 20px;
         }
 
         .traffic-card-green {
@@ -346,24 +350,25 @@
         }
 
         .traffic-dot {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
+            flex-shrink: 0;
         }
 
         .traffic-dot-green {
             background: var(--accent-green);
-            box-shadow: 0 0 20px var(--accent-green-glow);
+            box-shadow: 0 0 16px var(--accent-green-dim);
         }
 
         .traffic-dot-yellow {
             background: var(--accent-yellow);
-            box-shadow: 0 0 20px var(--accent-yellow-glow);
+            box-shadow: 0 0 16px var(--accent-yellow-dim);
         }
 
         .traffic-dot-red {
             background: var(--accent-red);
-            box-shadow: 0 0 20px var(--accent-red-glow);
+            box-shadow: 0 0 16px var(--accent-red-dim);
         }
 
         .traffic-content {
@@ -372,34 +377,32 @@
 
         .traffic-title {
             font-family: var(--font-sans);
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 500;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .traffic-desc {
             font-family: var(--font-sans);
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 300;
             color: var(--text-secondary);
         }
 
-        /* =====================================================
-           BENEFIT LIST
-           ===================================================== */
+        /* Benefit List */
         .benefit-list {
             list-style: none;
-            margin-top: 32px;
+            margin-top: 24px;
         }
 
         .benefit-list li {
             font-family: var(--font-sans);
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 300;
             color: var(--text-secondary);
-            padding: 16px 0;
-            padding-left: 36px;
+            padding: 14px 0;
+            padding-left: 32px;
             position: relative;
             border-bottom: 1px solid var(--border-subtle);
         }
@@ -416,10 +419,11 @@
             font-weight: 600;
         }
 
-        /* =====================================================
-           CTA SLIDE STYLES
-           ===================================================== */
-        .cta-slide .slide-content {
+        /* CTA Slide */
+        .cta-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
@@ -427,175 +431,205 @@
 
         .cta-headline {
             font-family: var(--font-serif);
-            font-size: 72px;
+            font-size: 64px;
             font-weight: 600;
             line-height: 1.1;
             color: var(--text-primary);
-            margin-bottom: 32px;
-            letter-spacing: -0.02em;
+            margin-bottom: 28px;
         }
 
         .cta-subtext {
             font-family: var(--font-sans);
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 300;
             color: var(--text-secondary);
-            margin-bottom: 48px;
-            max-width: 600px;
-            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 500px;
         }
 
         .cta-button {
             display: inline-block;
             font-family: var(--font-sans);
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 500;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--bg-dark);
             background: linear-gradient(135deg, var(--accent-gold), #b99952);
-            padding: 24px 64px;
+            padding: 20px 56px;
             border-radius: 8px;
             text-decoration: none;
-            transition: var(--transition-smooth);
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px var(--accent-gold-glow);
+        /* Brand Footer */
+        .brand-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: auto;
         }
 
-        /* =====================================================
-           BRAND TAG
-           ===================================================== */
-        .brand-tag {
-            position: absolute;
-            bottom: 56px;
-            left: 50%;
-            transform: translateX(-50%);
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-gold), #e8d5a3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--bg-dark);
+        }
+
+        .footer-logo-text {
             font-family: var(--font-sans);
             font-size: 18px;
-            font-weight: 500;
-            letter-spacing: 6px;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 1px;
         }
 
-        /* =====================================================
-           EXPORT MODE STYLES
-           ===================================================== */
-        body.export-mode {
-            padding: 0;
-            background: transparent;
-        }
-
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
-
-        body.export-mode .slide-wrapper {
-            transform: none;
-            margin: 0;
-            display: none;
-        }
-
-        body.export-mode .slide-wrapper.active {
-            display: block;
-        }
-
-        /* =====================================================
-           UTILITY CLASSES
-           ===================================================== */
-        .mb-24 {
-            margin-bottom: 24px;
-        }
-
-        .mb-32 {
-            margin-bottom: 32px;
-        }
-
-        .mb-48 {
-            margin-bottom: 48px;
-        }
-
-        .text-center {
-            text-align: center;
+        .footer-slide-num {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--text-muted);
         }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
-        <!-- =====================================================
-             SLIDE 1: COVER
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide cover-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
+    <div class="controls">
+        <label>
+            Background:
+            <select id="bg-toggle">
+                <option value="video">Starfield</option>
+                <option value="static">Static</option>
+            </select>
+        </label>
+        <label>
+            Opacity:
+            <select id="opacity-control">
+                <option value="0.08">8%</option>
+                <option value="0.12">12%</option>
+                <option value="0.16">16%</option>
+                <option value="0.04">4%</option>
+            </select>
+        </label>
+        <button id="export-btn">Export Mode</button>
+    </div>
+
+    <div class="page-title">
+        <h1>OmniDeck Unified View Demo</h1>
+        <p>6 slides · Product Feature</p>
+    </div>
+
+    <div class="carousel-grid">
+        <!-- Slide 1: Cover -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Cover</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
                 <div class="slide-content">
-                    <div class="cover-badge">The Commander</div>
-                    <div class="cover-icon">🎯</div>
-                    <h1 class="cover-title">OmniDeck<br><span class="accent-text">Unified View</span></h1>
-                    <p class="cover-subtitle">All signals. One view. Clear decisions.</p>
-                    <div class="brand-tag">SignalPilot</div>
+                    <div class="cover-content">
+                        <div class="cover-badge">The Commander</div>
+                        <div class="cover-icon">🎯</div>
+                        <h1 class="cover-title">OmniDeck<br><span class="accent-gold">Unified View</span></h1>
+                        <p class="cover-subtitle">All signals. One view. Clear decisions.</p>
+                    </div>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg>
+                            </div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
+                        </div>
+                        <span class="footer-slide-num">1 / 6</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- =====================================================
-             SLIDE 2: THE PROBLEM
-             ===================================================== -->
-        <div class="slide-wrapper">
+        <!-- Slide 2: The Problem -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Problem</span>
             <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
                 <div class="slide-content">
-                    <div class="slide-number">Slide 02</div>
-                    <h2 class="headline headline-medium">The<br><span class="accent-red">Problem</span></h2>
-                    <div class="problem-section">
+                    <span class="slide-number">Slide 02</span>
+                    <h2 class="headline">The<br><span class="accent-red">Problem</span></h2>
+                    <div class="content-section">
                         <div class="problem-card">
                             <h3 class="problem-title">Chart Chaos</h3>
                             <p class="problem-desc">7 indicators = cluttered charts, conflicting signals, analysis paralysis</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- =====================================================
-             SLIDE 3: THE SOLUTION
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 03</div>
-                    <h2 class="headline headline-medium">The<br><span class="accent-green">Solution</span></h2>
-                    <div class="problem-section">
-                        <div class="solution-card">
-                            <h3 class="solution-title">OmniDeck</h3>
-                            <p class="solution-desc">One unified overlay showing agreement across all indicators</p>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg>
+                            </div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
                         </div>
+                        <span class="footer-slide-num">2 / 6</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- =====================================================
-             SLIDE 4: TRAFFIC LIGHT SYSTEM
-             ===================================================== -->
-        <div class="slide-wrapper">
+        <!-- Slide 3: The Solution -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Solution</span>
             <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
                 <div class="slide-content">
-                    <div class="slide-number">Slide 04</div>
-                    <h2 class="headline headline-medium">Signal<br><span class="accent-text">States</span></h2>
+                    <span class="slide-number">Slide 03</span>
+                    <h2 class="headline">The<br><span class="accent-green">Solution</span></h2>
+                    <div class="content-section">
+                        <div class="solution-card">
+                            <h3 class="solution-title">OmniDeck</h3>
+                            <p class="solution-desc">One unified overlay showing agreement across all indicators</p>
+                        </div>
+                    </div>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg>
+                            </div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
+                        </div>
+                        <span class="footer-slide-num">3 / 6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Traffic Light System -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Signal States</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <span class="slide-number">Slide 04</span>
+                    <h2 class="headline">Signal<br><span class="accent-gold">States</span></h2>
                     <div class="traffic-section">
                         <div class="traffic-card traffic-card-green">
                             <div class="traffic-dot traffic-dot-green"></div>
@@ -619,22 +653,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg>
+                            </div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
+                        </div>
+                        <span class="footer-slide-num">4 / 6</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- =====================================================
-             SLIDE 5: THE BENEFITS
-             ===================================================== -->
-        <div class="slide-wrapper">
+        <!-- Slide 5: Benefits -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Benefits</span>
             <div class="slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
                 <div class="slide-content">
-                    <div class="slide-number">Slide 05</div>
-                    <h2 class="headline headline-medium">The<br><span class="accent-text">Benefits</span></h2>
-                    <div class="problem-section">
+                    <span class="slide-number">Slide 05</span>
+                    <h2 class="headline">The<br><span class="accent-gold">Benefits</span></h2>
+                    <div class="content-section">
                         <ul class="benefit-list">
                             <li>Clean, uncluttered charts</li>
                             <li>Clear, unified signals</li>
@@ -642,73 +684,96 @@
                             <li>Less confusion, more clarity</li>
                         </ul>
                     </div>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg>
+                            </div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
+                        </div>
+                        <span class="footer-slide-num">5 / 6</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- =====================================================
-             SLIDE 6: CTA
-             ===================================================== -->
-        <div class="slide-wrapper">
-            <div class="slide cta-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
+        <!-- Slide 6: CTA -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — CTA</span>
+            <div class="slide">
+                <video class="video-bg" autoplay muted loop playsinline>
                     <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                 </video>
                 <div class="slide-content">
-                    <h2 class="cta-headline">The Commander<br><span class="accent-text">Unifies</span></h2>
-                    <p class="cta-subtext">See how OmniDeck brings clarity to your charts.</p>
-                    <a href="#" class="cta-button">View Demo</a>
-                    <div class="brand-tag">SignalPilot</div>
+                    <div class="cta-content">
+                        <h2 class="cta-headline">The Commander<br><span class="accent-gold">Unifies</span></h2>
+                        <p class="cta-subtext">See how OmniDeck brings clarity to your charts.</p>
+                        <a href="#" class="cta-button">View Demo</a>
+                    </div>
+                    <div class="brand-footer">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 18.5L4 16V8.5l8 4v8zm0-9.5L4.5 7 12 3.5 19.5 7 12 11z"/></svg>
+                            </div>
+                            <span class="footer-logo-text">SIGNALPILOT</span>
+                        </div>
+                        <span class="footer-slide-num">6 / 6</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- =====================================================
-         EXPORT MODE JAVASCRIPT
-         ===================================================== -->
     <script>
         (function() {
-            const slides = document.querySelectorAll('.slide-wrapper');
-            let currentSlide = 0;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
+            const videos = document.querySelectorAll('.video-bg');
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
             let exportMode = false;
+            let currentSlide = 0;
 
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
+            bgToggle.addEventListener('change', function() {
+                videos.forEach(video => {
+                    video.style.display = this.value === 'video' ? 'block' : 'none';
+                });
+            });
+
+            opacityControl.addEventListener('change', function() {
+                videos.forEach(video => {
+                    video.style.opacity = this.value;
+                });
+            });
+
+            exportBtn.addEventListener('click', function() {
+                exportMode = !exportMode;
+                document.body.classList.toggle('export-mode', exportMode);
+                this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+                if (exportMode) {
+                    currentSlide = 0;
+                    updateActiveSlide();
+                }
+            });
+
+            function updateActiveSlide() {
+                slideWrappers.forEach((wrapper, index) => {
+                    wrapper.classList.toggle('active', index === currentSlide);
                 });
             }
 
-            function toggleExportMode() {
-                exportMode = !exportMode;
-                document.body.classList.toggle('export-mode', exportMode);
-                if (exportMode) {
-                    currentSlide = 0;
-                    showSlide(0);
-                }
-            }
-
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            }
-
-            function prevSlide() {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                showSlide(currentSlide);
-            }
-
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'e' || e.key === 'E') {
-                    toggleExportMode();
-                } else if (exportMode) {
-                    if (e.key === 'ArrowRight' || e.key === ' ') {
-                        nextSlide();
-                    } else if (e.key === 'ArrowLeft') {
-                        prevSlide();
-                    } else if (e.key === 'Escape') {
-                        toggleExportMode();
-                    }
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    currentSlide = (currentSlide + 1) % slideWrappers.length;
+                    updateActiveSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+                    updateActiveSlide();
+                } else if (e.key === 'Escape') {
+                    exportMode = false;
+                    document.body.classList.remove('export-mode');
+                    exportBtn.textContent = 'Export Mode';
                 }
             });
         })();
