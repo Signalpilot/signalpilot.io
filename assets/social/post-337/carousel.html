@@ -8,143 +8,565 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root { --bg-dark: #0a0a0f; --accent-blue: #4a90d9; --accent-gold: #c9a962; --accent-red: #d94a4a; --accent-green: #4ad97a; --text-primary: #e8e8e8; --text-secondary: #a0a0a0; --text-dim: #6a6a6a; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { aspect-ratio: 1 / 1; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
-    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
-    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 48px; text-align: center; }
-    .slide-number { position: absolute; top: 16px; left: 16px; font-size: 11px; color: var(--text-dim); letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 16px; right: 16px; font-size: 10px; color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: 48px; margin-bottom: 20px; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; margin-bottom: 16px; line-height: 1.2; }
-    .slide-title.large { font-size: 38px; }
-    .slide-subtitle { font-size: 14px; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; }
-    .slide-body { font-size: 16px; color: var(--text-secondary); line-height: 1.7; max-width: 320px; }
-    .trap-box { width: 100%; max-width: 340px; border-radius: 16px; padding: 28px; margin: 16px 0; text-align: left; background: rgba(217, 74, 74, 0.1); border: 2px solid rgba(217, 74, 74, 0.4); }
-    .trap-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--accent-red); margin-bottom: 12px; }
-    .trap-list { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
-    .truth-box { width: 100%; max-width: 340px; border-radius: 16px; padding: 28px; margin: 16px 0; text-align: left; background: rgba(74, 217, 122, 0.1); border: 2px solid rgba(74, 217, 122, 0.4); }
-    .truth-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--accent-green); margin-bottom: 12px; }
-    .truth-list { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
-    .question-box { width: 100%; max-width: 340px; border-radius: 16px; padding: 28px; margin: 16px 0; background: rgba(201, 169, 98, 0.1); border: 2px solid rgba(201, 169, 98, 0.4); }
-    .question-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--text-primary); line-height: 1.5; margin-bottom: 16px; }
-    .question-answer { font-size: 14px; color: var(--accent-gold); }
-    .cta-link { display: inline-block; margin-top: 24px; padding: 14px 32px; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 14px; }
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1080px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; }
-    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } .slide-wrapper .slide-content { padding: 32px; } .slide-title { font-size: 26px; } .slide-title.large { font-size: 32px; } }
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-red: #d94a4a;
+      --accent-green: #4ad97a;
+      --text-primary: #e8e8e8;
+      --text-secondary: #a0a0a0;
+      --text-dim: #6a6a6a;
+      --video-opacity: 0.08;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .controls-bar {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .control-group label {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .control-group select,
+    .control-group input[type="range"] {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background: #1a1a24;
+      color: var(--text-primary);
+      font-size: 14px;
+    }
+
+    .control-group input[type="range"] {
+      width: 100px;
+    }
+
+    #export-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      background: var(--accent-gold);
+      color: var(--bg-dark);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    #export-btn:hover {
+      background: #d9b972;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 3.7vw, 40px);
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+      gap: 32px;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .slide-label {
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .slide {
+      position: relative;
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-dark);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: var(--video-opacity);
+      pointer-events: none;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: clamp(32px, 5.93vw, 64px);
+      text-align: center;
+    }
+
+    .slide-number {
+      position: absolute;
+      top: clamp(12px, 2.22vw, 24px);
+      left: clamp(12px, 2.22vw, 24px);
+      font-size: clamp(9px, 1.67vw, 18px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: clamp(12px, 2.22vw, 24px);
+      right: clamp(12px, 2.22vw, 24px);
+      font-size: clamp(8px, 1.48vw, 16px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .slide-icon {
+      font-size: clamp(36px, 6.67vw, 72px);
+      margin-bottom: clamp(14px, 2.59vw, 28px);
+    }
+
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 4.44vw, 48px);
+      font-weight: 600;
+      margin-bottom: clamp(12px, 2.22vw, 24px);
+      line-height: 1.2;
+    }
+
+    .slide-title.large {
+      font-size: clamp(29px, 5.37vw, 58px);
+    }
+
+    .slide-subtitle {
+      font-size: clamp(11px, 2.04vw, 22px);
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: clamp(2px, 0.37vw, 4px);
+      margin-bottom: clamp(14px, 2.59vw, 28px);
+    }
+
+    .slide-body {
+      font-size: clamp(12px, 2.22vw, 24px);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: clamp(240px, 44.44vw, 480px);
+    }
+
+    .trap-box {
+      width: 100%;
+      max-width: clamp(255px, 47.22vw, 510px);
+      border-radius: clamp(12px, 2.22vw, 24px);
+      padding: clamp(21px, 3.89vw, 42px);
+      margin: clamp(12px, 2.22vw, 24px) 0;
+      text-align: left;
+      background: rgba(217, 74, 74, 0.1);
+      border: 2px solid rgba(217, 74, 74, 0.4);
+    }
+
+    .trap-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(17px, 3.15vw, 34px);
+      font-weight: 600;
+      color: var(--accent-red);
+      margin-bottom: clamp(9px, 1.67vw, 18px);
+    }
+
+    .trap-list {
+      font-size: clamp(11px, 2.04vw, 22px);
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .truth-box {
+      width: 100%;
+      max-width: clamp(255px, 47.22vw, 510px);
+      border-radius: clamp(12px, 2.22vw, 24px);
+      padding: clamp(21px, 3.89vw, 42px);
+      margin: clamp(12px, 2.22vw, 24px) 0;
+      text-align: left;
+      background: rgba(74, 217, 122, 0.1);
+      border: 2px solid rgba(74, 217, 122, 0.4);
+    }
+
+    .truth-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(17px, 3.15vw, 34px);
+      font-weight: 600;
+      color: var(--accent-green);
+      margin-bottom: clamp(9px, 1.67vw, 18px);
+    }
+
+    .truth-list {
+      font-size: clamp(11px, 2.04vw, 22px);
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .question-box {
+      width: 100%;
+      max-width: clamp(255px, 47.22vw, 510px);
+      border-radius: clamp(12px, 2.22vw, 24px);
+      padding: clamp(21px, 3.89vw, 42px);
+      margin: clamp(12px, 2.22vw, 24px) 0;
+      background: rgba(201, 169, 98, 0.1);
+      border: 2px solid rgba(201, 169, 98, 0.4);
+    }
+
+    .question-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(15px, 2.78vw, 30px);
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+      margin-bottom: clamp(12px, 2.22vw, 24px);
+    }
+
+    .question-answer {
+      font-size: clamp(11px, 2.04vw, 22px);
+      color: var(--accent-gold);
+    }
+
+    .cta-link {
+      display: inline-block;
+      margin-top: clamp(18px, 3.33vw, 36px);
+      padding: clamp(11px, 2.04vw, 22px) clamp(24px, 4.44vw, 48px);
+      background: var(--accent-gold);
+      color: var(--bg-dark);
+      text-decoration: none;
+      border-radius: clamp(6px, 1.11vw, 12px);
+      font-weight: 500;
+      font-size: clamp(11px, 2.04vw, 22px);
+    }
+
+    /* Export mode */
+    body.export-mode {
+      padding: 0;
+      background: #000;
+    }
+
+    body.export-mode .controls-bar,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+      padding: 0;
+      max-width: none;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1080px;
+      max-width: none;
+      aspect-ratio: auto;
+      border-radius: 0;
+    }
+
+    body.export-mode .slide-content {
+      padding: 64px;
+    }
+
+    body.export-mode .slide-number {
+      top: 24px;
+      left: 24px;
+      font-size: 18px;
+    }
+
+    body.export-mode .brand-mark {
+      bottom: 24px;
+      right: 24px;
+      font-size: 16px;
+    }
+
+    body.export-mode .slide-icon {
+      font-size: 72px;
+      margin-bottom: 28px;
+    }
+
+    body.export-mode .slide-title {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+
+    body.export-mode .slide-title.large {
+      font-size: 58px;
+    }
+
+    body.export-mode .slide-subtitle {
+      font-size: 22px;
+      letter-spacing: 4px;
+      margin-bottom: 28px;
+    }
+
+    body.export-mode .slide-body {
+      font-size: 24px;
+      max-width: 480px;
+    }
+
+    body.export-mode .trap-box,
+    body.export-mode .truth-box,
+    body.export-mode .question-box {
+      max-width: 510px;
+      border-radius: 24px;
+      padding: 42px;
+      margin: 24px 0;
+    }
+
+    body.export-mode .trap-title,
+    body.export-mode .truth-title {
+      font-size: 34px;
+      margin-bottom: 18px;
+    }
+
+    body.export-mode .trap-list,
+    body.export-mode .truth-list {
+      font-size: 22px;
+    }
+
+    body.export-mode .question-text {
+      font-size: 30px;
+      margin-bottom: 24px;
+    }
+
+    body.export-mode .question-answer {
+      font-size: 22px;
+    }
+
+    body.export-mode .cta-link {
+      margin-top: 36px;
+      padding: 22px 48px;
+      border-radius: 12px;
+      font-size: 22px;
+    }
+
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    body.export-mode .export-nav {
+      display: flex;
+    }
+
+    .export-nav button {
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .export-nav .slide-indicator {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
-  <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+  <div class="controls-bar">
+    <div class="control-group">
+      <label for="bg-select">Background</label>
+      <select id="bg-select">
+        <option value="starfield">Starfield</option>
+        <option value="none">None</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="opacity-slider">Opacity</label>
+      <input type="range" id="opacity-slider" min="0" max="30" value="8">
+    </div>
+    <button id="export-btn">Export Mode</button>
   </div>
 
-  <div class="page-title">
-    <h1>Post 337 — The Sunk Cost Fallacy</h1>
-    <p>Blog Article Carousel — 7 Slides</p>
-  </div>
+  <div class="page-title">Post 337 — 7 Slides</div>
 
   <div class="carousel-grid">
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">01 / 07</span>
-        <div class="slide-icon">⚓</div>
-        <div class="slide-subtitle">Trading Psychology</div>
-        <h2 class="slide-title large">THE SUNK COST FALLACY</h2>
-        <p class="slide-body">The trap that destroys accounts.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 07</span>
-        <div class="slide-icon">🪤</div>
-        <h2 class="slide-title">The Trap</h2>
-        <p class="slide-body">"I've lost so much already, I can't sell now."<br><br>This thinking destroys accounts.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 07</span>
-        <div class="trap-box">
-          <div class="trap-title">SUNK COST THINKING:</div>
-          <div class="trap-list">"I've held for 3 months, can't quit now"<br><br>"I'm down 40%, might as well wait"<br><br>"Selling now means the loss was real"</div>
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Cover</span>
+      <div class="slide slide-1">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <span class="slide-number">01 / 07</span>
+          <div class="slide-icon">⚓</div>
+          <div class="slide-subtitle">Trading Psychology</div>
+          <h2 class="slide-title large">THE SUNK COST FALLACY</h2>
+          <p class="slide-body">The trap that destroys accounts.</p>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 07</span>
-        <div class="truth-box">
-          <div class="truth-title">THE TRUTH:</div>
-          <div class="truth-list">Past losses are GONE<br><br>They shouldn't affect today's decision<br><br>Holding doesn't undo the loss</div>
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — The Trap</span>
+      <div class="slide slide-2">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <span class="slide-number">02 / 07</span>
+          <div class="slide-icon">🪤</div>
+          <h2 class="slide-title">The Trap</h2>
+          <p class="slide-body">"I've lost so much already, I can't sell now."<br><br>This thinking destroys accounts.</p>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 07</span>
-        <div class="slide-subtitle">The Right Question</div>
-        <div class="question-box">
-          <div class="question-text">"If I had cash instead of this position, would I BUY IT TODAY at this price?"</div>
-          <div class="question-answer">If NO → exit &nbsp; | &nbsp; If YES → hold</div>
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Sunk Cost Thinking</span>
+      <div class="slide slide-3">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <span class="slide-number">03 / 07</span>
+          <div class="trap-box">
+            <div class="trap-title">SUNK COST THINKING:</div>
+            <div class="trap-list">"I've held for 3 months, can't quit now"<br><br>"I'm down 40%, might as well wait"<br><br>"Selling now means the loss was real"</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 07</span>
-        <div class="slide-icon">💡</div>
-        <h2 class="slide-title">Key Insight</h2>
-        <p class="slide-body">Your past decision doesn't obligate your future.<br><br>Every moment is a new choice.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — The Truth</span>
+      <div class="slide slide-4">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <span class="slide-number">04 / 07</span>
+          <div class="truth-box">
+            <div class="truth-title">THE TRUTH:</div>
+            <div class="truth-list">Past losses are GONE<br><br>They shouldn't affect today's decision<br><br>Holding doesn't undo the loss</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">07 / 07</span>
-        <div class="slide-icon">📚</div>
-        <h2 class="slide-title">Let Go of the Past</h2>
-        <p class="slide-body">Full article on sunk cost psychology and how to overcome it.</p>
-        <a href="https://blog.signalpilot.io" class="cta-link">Read Full Article</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Right Question</span>
+      <div class="slide slide-5">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <span class="slide-number">05 / 07</span>
+          <div class="slide-subtitle">The Right Question</div>
+          <div class="question-box">
+            <div class="question-text">"If I had cash instead of this position, would I BUY IT TODAY at this price?"</div>
+            <div class="question-answer">If NO → exit &nbsp; | &nbsp; If YES → hold</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — Key Insight</span>
+      <div class="slide slide-6">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <span class="slide-number">06 / 07</span>
+          <div class="slide-icon">💡</div>
+          <h2 class="slide-title">Key Insight</h2>
+          <p class="slide-body">Your past decision doesn't obligate your future.<br><br>Every moment is a new choice.</p>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — CTA</span>
+      <div class="slide slide-7">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <span class="slide-number">07 / 07</span>
+          <div class="slide-icon">📚</div>
+          <h2 class="slide-title">Let Go of the Past</h2>
+          <p class="slide-body">Full article on sunk cost psychology and how to overcome it.</p>
+          <a href="https://blog.signalpilot.io" class="cta-link">Read Full Article</a>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
   </div>
@@ -156,18 +578,56 @@
   </div>
 
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
+    const bgSelect = document.getElementById('bg-select');
+    const opacitySlider = document.getElementById('opacity-slider');
+    const exportBtn = document.getElementById('export-btn');
     const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0, exportMode = false;
-    bgToggle.addEventListener('change', (e) => videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'));
-    opacitySlider.addEventListener('input', (e) => document.documentElement.style.setProperty('--video-opacity', e.target.value / 100));
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let currentSlide = 0;
+    let exportMode = false;
+
+    bgSelect.addEventListener('change', (e) => {
+      videos.forEach(v => v.style.display = e.target.value === 'none' ? 'none' : 'block');
+    });
+
+    opacitySlider.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
+    });
+
+    exportBtn.addEventListener('click', toggleExportMode);
+
+    function toggleExportMode() {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        currentSlide = 0;
+        updateExportView();
+      }
+    }
+
+    function updateExportView() {
+      slideWrappers.forEach((wrapper, i) => {
+        wrapper.classList.toggle('active', i === currentSlide);
+      });
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slideWrappers.length;
+      updateExportView();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+      updateExportView();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') toggleExportMode();
+    });
   </script>
 </body>
 </html>
