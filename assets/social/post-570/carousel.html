@@ -17,6 +17,7 @@
             --text-primary: #e8e6e3;
             --text-secondary: #a9a6a2;
             --text-muted: #6b6965;
+            --video-opacity: 0.08;
         }
 
         * {
@@ -29,27 +30,105 @@
             background-color: #050507;
             font-family: 'Inter', sans-serif;
             color: var(--text-primary);
-            padding: 40px 20px;
+            padding: clamp(16px, 4vw, 40px) clamp(12px, 3vw, 20px);
             min-height: 100vh;
         }
 
-        .carousel-container {
+        .controls {
+            max-width: 1800px;
+            margin: 0 auto clamp(16px, 3vw, 32px);
             display: flex;
-            flex-direction: column;
-            gap: 60px;
-            max-width: 1200px;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .toggle-label input {
+            cursor: pointer;
+        }
+
+        .opacity-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .opacity-control select {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            border: 1px solid var(--text-muted);
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .export-btn {
+            padding: 8px 16px;
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .export-btn:hover {
+            opacity: 0.9;
+        }
+
+        .page-title {
+            text-align: center;
+            max-width: 1800px;
+            margin: 0 auto clamp(24px, 4vw, 48px);
+        }
+
+        .page-title h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            font-size: clamp(12px, 2vw, 14px);
+            color: var(--text-muted);
+        }
+
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
+            gap: clamp(24px, 4vw, 48px);
+            max-width: 1800px;
             margin: 0 auto;
+            justify-items: center;
         }
 
         .slide-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
+            gap: clamp(8px, 2vw, 16px);
+            width: 100%;
+            max-width: 1080px;
         }
 
         .slide-label {
-            font-size: 14px;
+            font-size: clamp(10px, 1.5vw, 14px);
             font-weight: 500;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -57,16 +136,18 @@
         }
 
         .slide {
-            width: 1080px;
-            height: 1080px;
+            width: 100%;
+            max-width: 1080px;
+            aspect-ratio: 1 / 1;
             background-color: var(--bg-dark);
             position: relative;
             overflow: hidden;
             flex-shrink: 0;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
         }
 
-        .slide-bg {
+        .video-background {
             position: absolute;
             top: 0;
             left: 0;
@@ -75,24 +156,24 @@
             z-index: 0;
         }
 
-        .slide-bg video {
+        .video-background video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.08;
+            opacity: var(--video-opacity);
         }
 
         .slide-content {
             position: relative;
             z-index: 1;
             height: 100%;
-            padding: 72px;
+            padding: clamp(24px, 6.67%, 72px);
             display: flex;
             flex-direction: column;
         }
 
         .slide-number {
-            font-size: 14px;
+            font-size: clamp(10px, 1.3vw, 14px);
             font-weight: 500;
             color: var(--text-muted);
             letter-spacing: 3px;
@@ -100,7 +181,7 @@
         }
 
         .brand-mark {
-            font-size: 13px;
+            font-size: clamp(10px, 1.2vw, 13px);
             font-weight: 600;
             letter-spacing: 4px;
             color: var(--text-muted);
@@ -110,11 +191,11 @@
 
         h1.slide-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 64px;
+            font-size: clamp(32px, 5.93vw, 64px);
             font-weight: 600;
             line-height: 1.1;
             color: var(--text-primary);
-            margin-bottom: 24px;
+            margin-bottom: clamp(12px, 2.22%, 24px);
         }
 
         .slide-title .highlight {
@@ -122,7 +203,7 @@
         }
 
         .subtitle {
-            font-size: 26px;
+            font-size: clamp(14px, 2.41vw, 26px);
             font-weight: 400;
             color: var(--text-secondary);
             max-width: 700px;
@@ -140,8 +221,8 @@
         .glossary-card {
             background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
             border: 1px solid rgba(201, 169, 98, 0.3);
-            border-radius: 16px;
-            padding: 48px;
+            border-radius: clamp(8px, 1.48%, 16px);
+            padding: clamp(24px, 4.44%, 48px);
             width: 100%;
             max-width: 800px;
         }
@@ -200,31 +281,31 @@
 
         .glossary-card h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
+            font-size: clamp(22px, 3.89vw, 42px);
             font-weight: 600;
-            margin-bottom: 32px;
+            margin-bottom: clamp(16px, 2.96%, 32px);
             color: var(--accent-gold);
         }
 
         .terms-grid {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: clamp(10px, 1.85%, 20px);
         }
 
         .term-row {
             display: flex;
             align-items: flex-start;
-            gap: 20px;
+            gap: clamp(10px, 1.85%, 20px);
             text-align: left;
         }
 
         .term-letter {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
+            font-size: clamp(18px, 2.96vw, 32px);
             font-weight: 600;
             color: var(--accent-gold);
-            width: 50px;
+            width: clamp(25px, 4.63%, 50px);
             flex-shrink: 0;
         }
 
@@ -233,14 +314,14 @@
         }
 
         .term-word {
-            font-size: 22px;
+            font-size: clamp(12px, 2.04vw, 22px);
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 4px;
+            margin-bottom: clamp(2px, 0.37%, 4px);
         }
 
         .term-definition {
-            font-size: 18px;
+            font-size: clamp(10px, 1.67vw, 18px);
             color: var(--text-secondary);
             line-height: 1.4;
         }
@@ -249,23 +330,23 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 40px;
+            gap: clamp(6px, 1.11%, 12px);
+            margin-bottom: clamp(20px, 3.7%, 40px);
         }
 
         .letter-box {
-            width: 52px;
-            height: 52px;
+            width: clamp(26px, 4.81%, 52px);
+            height: clamp(26px, 4.81%, 52px);
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
+            font-size: clamp(14px, 2.59vw, 28px);
             font-weight: 600;
             color: var(--accent-gold);
             background: rgba(201, 169, 98, 0.1);
             border: 1px solid rgba(201, 169, 98, 0.3);
-            border-radius: 8px;
+            border-radius: clamp(4px, 0.74%, 8px);
         }
 
         .letter-box:nth-child(odd) {
@@ -276,10 +357,10 @@
 
         .cta-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 52px;
+            font-size: clamp(28px, 4.81vw, 52px);
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 20px;
+            margin-bottom: clamp(10px, 1.85%, 20px);
             line-height: 1.3;
         }
 
@@ -288,9 +369,59 @@
         }
 
         .cta-text {
-            font-size: 24px;
+            font-size: clamp(14px, 2.22vw, 24px);
             color: var(--text-secondary);
-            margin-bottom: 8px;
+            margin-bottom: clamp(4px, 0.74%, 8px);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .controls {
+                gap: 12px;
+            }
+
+            .slide-content {
+                padding: clamp(20px, 5%, 48px);
+            }
+
+            .glossary-card {
+                padding: clamp(16px, 3.5%, 36px);
+            }
+
+            .alphabet-display {
+                gap: clamp(4px, 0.8%, 8px);
+            }
+
+            .letter-box {
+                width: clamp(20px, 4%, 40px);
+                height: clamp(20px, 4%, 40px);
+                font-size: clamp(12px, 2%, 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .controls {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .slide-content {
+                padding: clamp(16px, 4%, 36px);
+            }
+
+            .glossary-card {
+                padding: clamp(12px, 3%, 28px);
+            }
+
+            .alphabet-display {
+                gap: clamp(3px, 0.6%, 6px);
+            }
+
+            .letter-box {
+                width: clamp(18px, 3.5%, 36px);
+                height: clamp(18px, 3.5%, 36px);
+                font-size: clamp(10px, 1.8%, 18px);
+            }
         }
 
         /* Export Mode */
@@ -299,12 +430,19 @@
             background: none;
         }
 
-        body.export-mode .carousel-container {
-            gap: 0;
+        body.export-mode .controls,
+        body.export-mode .page-title {
+            display: none;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+            max-width: none;
         }
 
         body.export-mode .slide-wrapper {
             display: none;
+            max-width: none;
         }
 
         body.export-mode .slide-wrapper.active {
@@ -316,18 +454,142 @@
         }
 
         body.export-mode .slide {
+            width: 1080px;
+            height: 1080px;
+            max-width: none;
+            aspect-ratio: auto;
             border: none;
+            border-radius: 0;
+        }
+
+        body.export-mode .slide-content {
+            padding: 72px;
+        }
+
+        body.export-mode .slide-number {
+            font-size: 14px;
+        }
+
+        body.export-mode .brand-mark {
+            font-size: 13px;
+        }
+
+        body.export-mode h1.slide-title {
+            font-size: 64px;
+            margin-bottom: 24px;
+        }
+
+        body.export-mode .subtitle {
+            font-size: 26px;
+        }
+
+        body.export-mode .glossary-card {
+            padding: 48px;
+            border-radius: 16px;
+        }
+
+        body.export-mode .glossary-card h3 {
+            font-size: 42px;
+            margin-bottom: 32px;
+        }
+
+        body.export-mode .terms-grid {
+            gap: 20px;
+        }
+
+        body.export-mode .term-row {
+            gap: 20px;
+        }
+
+        body.export-mode .term-letter {
+            font-size: 32px;
+            width: 50px;
+        }
+
+        body.export-mode .term-word {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        body.export-mode .term-definition {
+            font-size: 18px;
+        }
+
+        body.export-mode .alphabet-display {
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        body.export-mode .letter-box {
+            width: 52px;
+            height: 52px;
+            font-size: 28px;
+            border-radius: 8px;
+        }
+
+        body.export-mode .cta-title {
+            font-size: 52px;
+            margin-bottom: 20px;
+        }
+
+        body.export-mode .cta-text {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 20px;
+            }
+
+            .controls {
+                display: none;
+            }
+
+            .carousel-grid {
+                gap: 40px;
+            }
+
+            .slide {
+                break-inside: avoid;
+                border: 1px solid #ccc;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
+    <div class="controls">
+        <label class="toggle-label">
+            <input type="checkbox" id="bgToggle" checked>
+            Toggle Background
+        </label>
+        <div class="opacity-control">
+            <label for="opacitySelect">Opacity:</label>
+            <select id="opacitySelect">
+                <option value="0.04">4%</option>
+                <option value="0.08" selected>8%</option>
+                <option value="0.12">12%</option>
+                <option value="0.16">16%</option>
+                <option value="0.24">24%</option>
+            </select>
+        </div>
+        <button class="export-btn" onclick="enterExportMode()">Export Mode</button>
+    </div>
+
+    <div class="page-title">
+        <h1>Trading Glossary A-Z Interface</h1>
+        <p>6 Slides</p>
+    </div>
+
+    <div class="carousel-grid">
 
         <!-- Slide 1: Hook -->
         <div class="slide-wrapper" data-slide="1">
             <span class="slide-label">Slide 1 — Hook</span>
             <div class="slide slide-1">
-                <div class="slide-bg">
+                <div class="video-background">
                     <video autoplay loop muted playsinline>
                         <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                     </video>
@@ -362,7 +624,7 @@
         <div class="slide-wrapper" data-slide="2">
             <span class="slide-label">Slide 2 — A-F Terms</span>
             <div class="slide slide-2">
-                <div class="slide-bg">
+                <div class="video-background">
                     <video autoplay loop muted playsinline>
                         <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                     </video>
@@ -406,7 +668,7 @@
         <div class="slide-wrapper" data-slide="3">
             <span class="slide-label">Slide 3 — L-O Terms</span>
             <div class="slide slide-3">
-                <div class="slide-bg">
+                <div class="video-background">
                     <video autoplay loop muted playsinline>
                         <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                     </video>
@@ -450,7 +712,7 @@
         <div class="slide-wrapper" data-slide="4">
             <span class="slide-label">Slide 4 — P-S Terms</span>
             <div class="slide slide-4">
-                <div class="slide-bg">
+                <div class="video-background">
                     <video autoplay loop muted playsinline>
                         <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                     </video>
@@ -494,7 +756,7 @@
         <div class="slide-wrapper" data-slide="5">
             <span class="slide-label">Slide 5 — T-Z Terms</span>
             <div class="slide slide-5">
-                <div class="slide-bg">
+                <div class="video-background">
                     <video autoplay loop muted playsinline>
                         <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                     </video>
@@ -538,7 +800,7 @@
         <div class="slide-wrapper" data-slide="6">
             <span class="slide-label">Slide 6 — CTA</span>
             <div class="slide slide-6">
-                <div class="slide-bg">
+                <div class="video-background">
                     <video autoplay loop muted playsinline>
                         <source src="../../videos/starfield-bg.mp4" type="video/mp4">
                     </video>
@@ -558,6 +820,23 @@
     </div>
 
     <script>
+        // Background toggle functionality
+        const bgToggle = document.getElementById('bgToggle');
+        const videos = document.querySelectorAll('.video-background video');
+
+        bgToggle.addEventListener('change', function() {
+            videos.forEach(video => {
+                video.style.display = this.checked ? 'block' : 'none';
+            });
+        });
+
+        // Opacity control functionality
+        const opacitySelect = document.getElementById('opacitySelect');
+        opacitySelect.addEventListener('change', function() {
+            document.documentElement.style.setProperty('--video-opacity', this.value);
+        });
+
+        // Export mode functionality
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide-wrapper');
         const totalSlides = slides.length;

@@ -4,438 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post 512 - Scaling Into Positions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0a0a0f;
             --bg-card: rgba(20, 20, 30, 0.85);
             --text-primary: #f0f0f0;
             --text-secondary: #a0a0a0;
+            --text-muted: #606070;
             --accent-blue: #4a90d9;
             --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
             --accent-green: #5cb85c;
             --accent-purple: #9b59b6;
             --accent-teal: #17a2b8;
             --accent-red: #dc3545;
             --accent-orange: #fd7e14;
             --border-subtle: rgba(255, 255, 255, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { background-color: #000; min-height: 100vh; font-family: var(--font-sans); color: var(--text-primary); padding: clamp(16px, 4vw, 40px) clamp(12px, 3vw, 20px); }
 
-        body {
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            padding: 20px;
-        }
+        .controls { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 1rem; background: var(--bg-card); padding: 0.75rem 1.5rem; border-radius: 9999px; border: 1px solid var(--border-subtle); }
+        .controls label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); }
+        .controls select { background: var(--bg-dark); color: var(--text-primary); border: 1px solid var(--border-subtle); border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.875rem; cursor: pointer; }
+        #export-btn { background: var(--accent-gold); color: var(--bg-dark); border: none; border-radius: 9999px; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        #export-btn:hover { filter: brightness(1.1); }
 
-        .carousel-container {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 100%;
-        }
+        .page-title { text-align: center; margin: 5rem auto 3rem; }
+        .page-title h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .page-title p { font-size: 1rem; color: var(--text-muted); }
 
-        .slide {
-            width: 1080px;
-            height: 1080px;
-            background: var(--bg-dark);
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
+        .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; justify-items: center; }
+        .slide-wrapper { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .slide-label { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
+        .slide { width: 100%; max-width: 540px; aspect-ratio: 1 / 1; background: var(--bg-dark); border-radius: 12px; position: relative; overflow: hidden; }
 
-        .video-background video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-        }
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity); }
 
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px;
-            text-align: center;
-        }
-
-        .slide-number {
-            position: absolute;
-            bottom: 30px;
-            right: 40px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: var(--text-secondary);
-            opacity: 0.6;
-        }
-
-        .brand-header {
-            position: absolute;
-            top: 40px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--accent-gold);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
+        .slide-content { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(30px, 5.6vw, 60px); text-align: center; }
+        .slide-number { position: absolute; bottom: clamp(15px, 2.8vw, 30px); right: clamp(20px, 3.7vw, 40px); font-family: var(--font-sans); font-size: clamp(7px, 1.3vw, 14px); color: var(--text-secondary); opacity: 0.6; }
+        .brand-header { position: absolute; top: clamp(20px, 3.7vw, 40px); left: 0; right: 0; text-align: center; font-family: var(--font-serif); font-size: clamp(9px, 1.7vw, 18px); font-weight: 600; color: var(--accent-gold); letter-spacing: 3px; text-transform: uppercase; }
 
         /* Slide 1 - Title */
-        .slide-1 .entry-visual {
-            display: flex;
-            align-items: flex-end;
-            gap: 15px;
-            margin-bottom: 50px;
-        }
-
-        .slide-1 .entry-bar {
-            width: 50px;
-            background: var(--accent-green);
-            border-radius: 4px 4px 0 0;
-        }
-
-        .slide-1 .entry-bar:nth-child(1) {
-            height: 60px;
-            opacity: 0.5;
-        }
-
-        .slide-1 .entry-bar:nth-child(2) {
-            height: 90px;
-            opacity: 0.7;
-        }
-
-        .slide-1 .entry-bar:nth-child(3) {
-            height: 120px;
-            opacity: 0.85;
-        }
-
-        .slide-1 .entry-bar:nth-child(4) {
-            height: 150px;
-        }
-
-        .slide-1 h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 58px;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            line-height: 1.2;
-        }
-
-        .slide-1 .subtitle {
-            font-family: 'Inter', sans-serif;
-            font-size: 26px;
-            font-weight: 300;
-            color: var(--accent-green);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
+        .slide-1 .entry-visual { display: flex; align-items: flex-end; gap: clamp(8px, 1.4vw, 15px); margin-bottom: clamp(25px, 4.6vw, 50px); }
+        .slide-1 .entry-bar { width: clamp(25px, 4.6vw, 50px); background: var(--accent-green); border-radius: 4px 4px 0 0; }
+        .slide-1 .entry-bar:nth-child(1) { height: clamp(30px, 5.6vw, 60px); opacity: 0.5; }
+        .slide-1 .entry-bar:nth-child(2) { height: clamp(45px, 8.3vw, 90px); opacity: 0.7; }
+        .slide-1 .entry-bar:nth-child(3) { height: clamp(60px, 11.1vw, 120px); opacity: 0.85; }
+        .slide-1 .entry-bar:nth-child(4) { height: clamp(75px, 13.9vw, 150px); }
+        .slide-1 h1 { font-family: var(--font-serif); font-size: clamp(29px, 5.4vw, 58px); font-weight: 700; color: var(--text-primary); letter-spacing: 3px; margin-bottom: clamp(10px, 1.9vw, 20px); text-transform: uppercase; line-height: 1.2; }
+        .slide-1 .subtitle { font-family: var(--font-sans); font-size: clamp(13px, 2.4vw, 26px); font-weight: 300; color: var(--accent-green); letter-spacing: 4px; text-transform: uppercase; }
 
         /* Content slides */
-        .content-icon {
-            font-size: 72px;
-            margin-bottom: 30px;
-        }
-
-        .content-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .content-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 40px;
-        }
-
-        .content-box {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 35px 50px;
-            max-width: 650px;
-        }
-
-        .content-items {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .content-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .content-bullet {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .content-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            font-weight: 400;
-            color: var(--text-primary);
-            text-align: left;
-        }
+        .content-icon { font-size: clamp(36px, 6.7vw, 72px); margin-bottom: clamp(15px, 2.8vw, 30px); }
+        .content-label { font-family: var(--font-sans); font-size: clamp(8px, 1.5vw, 16px); font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: clamp(8px, 1.4vw, 15px); }
+        .content-title { font-family: var(--font-serif); font-size: clamp(24px, 4.4vw, 48px); font-weight: 700; color: var(--text-primary); margin-bottom: clamp(20px, 3.7vw, 40px); }
+        .content-box { background: var(--bg-card); border-radius: clamp(8px, 1.5vw, 16px); padding: clamp(18px, 3.2vw, 35px) clamp(25px, 4.6vw, 50px); max-width: 650px; }
+        .content-items { display: flex; flex-direction: column; gap: clamp(9px, 1.7vw, 18px); }
+        .content-item { display: flex; align-items: center; gap: clamp(8px, 1.4vw, 15px); }
+        .content-bullet { width: clamp(5px, 0.9vw, 10px); height: clamp(5px, 0.9vw, 10px); border-radius: 50%; flex-shrink: 0; }
+        .content-text { font-family: var(--font-sans); font-size: clamp(12px, 2.2vw, 24px); font-weight: 400; color: var(--text-primary); text-align: left; }
 
         /* Slide 2 - Definition */
-        .slide-2 .content-label {
-            color: var(--accent-blue);
-        }
-
-        .slide-2 .content-box {
-            border: 1px solid rgba(74, 144, 217, 0.3);
-        }
-
-        .slide-2 .content-bullet {
-            background: var(--accent-blue);
-        }
+        .slide-2 .content-label { color: var(--accent-blue); }
+        .slide-2 .content-box { border: 1px solid rgba(74, 144, 217, 0.3); }
+        .slide-2 .content-bullet { background: var(--accent-blue); }
 
         /* Slide 3-5 - Benefits */
-        .slide-3 .content-label,
-        .slide-4 .content-label,
-        .slide-5 .content-label {
-            color: var(--accent-green);
-        }
-
-        .slide-3 .content-box,
-        .slide-4 .content-box,
-        .slide-5 .content-box {
-            border: 1px solid rgba(92, 184, 92, 0.3);
-        }
-
-        .slide-3 .content-bullet,
-        .slide-4 .content-bullet,
-        .slide-5 .content-bullet {
-            background: var(--accent-green);
-        }
+        .slide-3 .content-label, .slide-4 .content-label, .slide-5 .content-label { color: var(--accent-green); }
+        .slide-3 .content-box, .slide-4 .content-box, .slide-5 .content-box { border: 1px solid rgba(92, 184, 92, 0.3); }
+        .slide-3 .content-bullet, .slide-4 .content-bullet, .slide-5 .content-bullet { background: var(--accent-green); }
 
         /* Slide 6 - Risks */
-        .slide-6 .content-label {
-            color: var(--accent-orange);
-        }
-
-        .slide-6 .content-box {
-            border: 1px solid rgba(253, 126, 20, 0.3);
-        }
-
-        .slide-6 .content-bullet {
-            background: var(--accent-orange);
-        }
+        .slide-6 .content-label { color: var(--accent-orange); }
+        .slide-6 .content-box { border: 1px solid rgba(253, 126, 20, 0.3); }
+        .slide-6 .content-bullet { background: var(--accent-orange); }
 
         /* Slide 7 - When to Scale */
-        .slide-7 .content-label {
-            color: var(--accent-teal);
-        }
-
-        .slide-7 .content-box {
-            border: 1px solid rgba(23, 162, 184, 0.3);
-        }
-
-        .slide-7 .content-bullet {
-            background: var(--accent-teal);
-        }
+        .slide-7 .content-label { color: var(--accent-teal); }
+        .slide-7 .content-box { border: 1px solid rgba(23, 162, 184, 0.3); }
+        .slide-7 .content-bullet { background: var(--accent-teal); }
 
         /* Slide 8 - CTA */
-        .slide-8 .cta-icon {
-            font-size: 80px;
-            margin-bottom: 40px;
-        }
-
-        .slide-8 h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 44px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 30px;
-            line-height: 1.3;
-        }
-
-        .slide-8 .cta-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            margin-bottom: 50px;
-            max-width: 600px;
-            line-height: 1.6;
-        }
-
-        .slide-8 .cta-button {
-            display: inline-block;
-            padding: 20px 60px;
-            background: linear-gradient(135deg, var(--accent-gold), #e5c77d);
-            color: var(--bg-dark);
-            font-family: 'Inter', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 8px;
-            text-decoration: none;
-        }
-
-        .slide-8 .brand-footer {
-            position: absolute;
-            bottom: 60px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            color: var(--accent-gold);
-            letter-spacing: 3px;
-        }
+        .slide-8 .cta-icon { font-size: clamp(40px, 7.4vw, 80px); margin-bottom: clamp(20px, 3.7vw, 40px); }
+        .slide-8 h2 { font-family: var(--font-serif); font-size: clamp(22px, 4.1vw, 44px); font-weight: 700; color: var(--text-primary); margin-bottom: clamp(15px, 2.8vw, 30px); line-height: 1.3; }
+        .slide-8 .cta-text { font-family: var(--font-sans); font-size: clamp(12px, 2.2vw, 24px); font-weight: 400; color: var(--text-secondary); margin-bottom: clamp(25px, 4.6vw, 50px); max-width: 600px; line-height: 1.6; }
+        .slide-8 .cta-button { display: inline-block; padding: clamp(10px, 1.9vw, 20px) clamp(30px, 5.6vw, 60px); background: linear-gradient(135deg, var(--accent-gold), #e5c77d); color: var(--bg-dark); font-family: var(--font-sans); font-size: clamp(10px, 1.9vw, 20px); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; border-radius: 8px; text-decoration: none; }
+        .slide-8 .brand-footer { position: absolute; bottom: clamp(30px, 5.6vw, 60px); font-family: var(--font-serif); font-size: clamp(9px, 1.7vw, 18px); color: var(--accent-gold); letter-spacing: 3px; }
 
         /* Export Mode */
-        body.export-mode {
-            background: none;
-            padding: 0;
+        body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; border-radius: 0; }
+        body.export-mode .carousel-grid { display: block; }
+        body.export-mode .slide-wrapper { display: none; }
+        body.export-mode .slide-wrapper.exporting { display: flex; }
+        body.export-mode .slide-label { display: none; }
+        body.export-mode .page-title, body.export-mode .controls { display: none; }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .controls { padding: 0.5rem 1rem; gap: 0.5rem; flex-wrap: wrap; justify-content: center; max-width: 95vw; }
+            .controls label { font-size: 0.75rem; }
+            .page-title { margin: 4rem auto 2rem; }
+            .carousel-grid { grid-template-columns: 1fr; gap: 1.5rem; }
         }
 
-        body.export-mode .carousel-container {
-            flex-wrap: nowrap;
-            gap: 0;
+        @media (max-width: 480px) {
+            .controls { top: 10px; padding: 0.5rem 0.75rem; }
+            .page-title h1 { font-size: 1.5rem; }
         }
 
-        body.export-mode .slide {
-            border-radius: 0;
-        }
-
-        body.export-mode .slide:not(.active) {
-            display: none;
-        }
-
-        body.export-mode .slide.active {
-            display: block;
-        }
-
-        .export-controls {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.9);
-            padding: 15px 30px;
-            border-radius: 10px;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        body.export-mode .export-controls {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .export-controls button {
-            padding: 10px 20px;
-            background: var(--accent-gold);
-            color: var(--bg-dark);
-            border: none;
-            border-radius: 5px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .export-controls span {
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
+        /* Print Styles */
+        @media print {
+            .controls, .page-title { display: none; }
+            .slide { break-inside: avoid; page-break-inside: avoid; }
         }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
-        <!-- Slide 1 - Title -->
-        <div class="slide slide-1">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="entry-visual">
-                    <div class="entry-bar"></div>
-                    <div class="entry-bar"></div>
-                    <div class="entry-bar"></div>
-                    <div class="entry-bar"></div>
+    <div class="controls">
+        <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="solid">Solid</option></select></label>
+        <label>Opacity: <select id="opacity-control"><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.16">16%</option><option value="0.24">24%</option></select></label>
+        <button id="export-btn">Export Mode</button>
+    </div>
+
+    <div class="page-title">
+        <h1>Scaling Into Positions</h1>
+        <p>8 slides</p>
+    </div>
+
+    <div class="carousel-grid">
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Title</span>
+            <div class="slide slide-1">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="entry-visual">
+                        <div class="entry-bar"></div>
+                        <div class="entry-bar"></div>
+                        <div class="entry-bar"></div>
+                        <div class="entry-bar"></div>
+                    </div>
+                    <h1>Scaling Into<br>Positions</h1>
+                    <div class="subtitle">Build positions strategically</div>
                 </div>
-                <h1>Scaling Into<br>Positions</h1>
-                <div class="subtitle">Build positions strategically</div>
                 <div class="slide-number">1 / 8</div>
             </div>
         </div>
 
-        <!-- Slide 2 - What Is Scaling In -->
-        <div class="slide slide-2">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="content-icon">📈</div>
-                <div class="content-label">Definition</div>
-                <div class="content-title">What Is Scaling In?</div>
-                <div class="content-box">
-                    <div class="content-items">
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Entering a position in portions</span>
-                        </div>
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Multiple entries instead of one</span>
-                        </div>
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Building as conviction grows</span>
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Definition</span>
+            <div class="slide slide-2">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-icon">📈</div>
+                    <div class="content-label">Definition</div>
+                    <div class="content-title">What Is Scaling In?</div>
+                    <div class="content-box">
+                        <div class="content-items">
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Entering a position in portions</span>
+                            </div>
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Multiple entries instead of one</span>
+                            </div>
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Building as conviction grows</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -443,27 +192,25 @@
             </div>
         </div>
 
-        <!-- Slide 3 - Better Average -->
-        <div class="slide slide-3">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="content-icon">✅</div>
-                <div class="content-label">Benefit 1</div>
-                <div class="content-title">Better Average Entry</div>
-                <div class="content-box">
-                    <div class="content-items">
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">If price improves, better overall entry</span>
-                        </div>
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Reduces impact of timing</span>
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Benefit 1</span>
+            <div class="slide slide-3">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-icon">✅</div>
+                    <div class="content-label">Benefit 1</div>
+                    <div class="content-title">Better Average Entry</div>
+                    <div class="content-box">
+                        <div class="content-items">
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">If price improves, better overall entry</span>
+                            </div>
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Reduces impact of timing</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -471,27 +218,25 @@
             </div>
         </div>
 
-        <!-- Slide 4 - Reduced Pressure -->
-        <div class="slide slide-4">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="content-icon">✅</div>
-                <div class="content-label">Benefit 2</div>
-                <div class="content-title">Reduced Pressure</div>
-                <div class="content-box">
-                    <div class="content-items">
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Don't need perfect entry</span>
-                        </div>
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Can add on confirmation</span>
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Benefit 2</span>
+            <div class="slide slide-4">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-icon">✅</div>
+                    <div class="content-label">Benefit 2</div>
+                    <div class="content-title">Reduced Pressure</div>
+                    <div class="content-box">
+                        <div class="content-items">
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Don't need perfect entry</span>
+                            </div>
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Can add on confirmation</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -499,27 +244,25 @@
             </div>
         </div>
 
-        <!-- Slide 5 - Flexibility -->
-        <div class="slide slide-5">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="content-icon">✅</div>
-                <div class="content-label">Benefit 3</div>
-                <div class="content-title">Flexibility</div>
-                <div class="content-box">
-                    <div class="content-items">
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Adjust size based on action</span>
-                        </div>
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Can stop adding if thesis breaks</span>
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Benefit 3</span>
+            <div class="slide slide-5">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-icon">✅</div>
+                    <div class="content-label">Benefit 3</div>
+                    <div class="content-title">Flexibility</div>
+                    <div class="content-box">
+                        <div class="content-items">
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Adjust size based on action</span>
+                            </div>
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Can stop adding if thesis breaks</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -527,31 +270,29 @@
             </div>
         </div>
 
-        <!-- Slide 6 - Risks -->
-        <div class="slide slide-6">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="content-icon">⚠️</div>
-                <div class="content-label">Caution</div>
-                <div class="content-title">The Risks</div>
-                <div class="content-box">
-                    <div class="content-items">
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Averaging into losers</span>
-                        </div>
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Adding to bad trades</span>
-                        </div>
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Must have clear invalidation</span>
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Caution</span>
+            <div class="slide slide-6">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-icon">⚠️</div>
+                    <div class="content-label">Caution</div>
+                    <div class="content-title">The Risks</div>
+                    <div class="content-box">
+                        <div class="content-items">
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Averaging into losers</span>
+                            </div>
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Adding to bad trades</span>
+                            </div>
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Must have clear invalidation</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -559,31 +300,29 @@
             </div>
         </div>
 
-        <!-- Slide 7 - When to Scale -->
-        <div class="slide slide-7">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="content-icon">🎯</div>
-                <div class="content-label">Application</div>
-                <div class="content-title">When to Scale</div>
-                <div class="content-box">
-                    <div class="content-items">
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Higher conviction setups</span>
-                        </div>
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">Larger position targets</span>
-                        </div>
-                        <div class="content-item">
-                            <div class="content-bullet"></div>
-                            <span class="content-text">When volatility makes timing hard</span>
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — Application</span>
+            <div class="slide slide-7">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-icon">🎯</div>
+                    <div class="content-label">Application</div>
+                    <div class="content-title">When to Scale</div>
+                    <div class="content-box">
+                        <div class="content-items">
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Higher conviction setups</span>
+                            </div>
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">Larger position targets</span>
+                            </div>
+                            <div class="content-item">
+                                <div class="content-bullet"></div>
+                                <span class="content-text">When volatility makes timing hard</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -591,82 +330,46 @@
             </div>
         </div>
 
-        <!-- Slide 8 - CTA -->
-        <div class="slide slide-8">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="cta-icon">📊</div>
-                <h2>Strategic Building,<br>Not Hopeful Adding</h2>
-                <p class="cta-text">Full lesson on scaling techniques in our curriculum.</p>
-                <a href="#" class="cta-button">Link in Bio</a>
-                <div class="brand-footer">SIGNAL PILOT</div>
+        <div class="slide-wrapper" data-slide="8">
+            <span class="slide-label">Slide 8 — CTA</span>
+            <div class="slide slide-8">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="cta-icon">📊</div>
+                    <h2>Strategic Building,<br>Not Hopeful Adding</h2>
+                    <p class="cta-text">Full lesson on scaling techniques in our curriculum.</p>
+                    <a href="#" class="cta-button">Link in Bio</a>
+                    <div class="brand-footer">SIGNAL PILOT</div>
+                </div>
                 <div class="slide-number">8 / 8</div>
             </div>
         </div>
     </div>
 
-    <div class="export-controls">
-        <button onclick="prevSlide()">← Previous</button>
-        <span id="slideIndicator">1 / 8</span>
-        <button onclick="nextSlide()">Next →</button>
-        <button onclick="exitExportMode()">Exit Export Mode</button>
-    </div>
-
     <script>
-        let currentSlide = 0;
-        const totalSlides = 8;
+        (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
+            let exportMode = false, currentSlide = 0;
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
 
-        function enterExportMode() {
-            document.body.classList.add('export-mode');
-            document.querySelectorAll('.slide').forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
+            function updateExportView() { slideWrappers.forEach((wrapper, index) => { wrapper.classList.toggle('exporting', index === currentSlide); }); }
+
+            if (defined(bgToggle)) { bgToggle.addEventListener('change', (e) => { document.querySelectorAll('.video-background').forEach(bg => { bg.style.display = e.target.value === 'video' ? 'block' : 'none'; }); }); }
+            if (defined(opacityControl)) { opacityControl.addEventListener('change', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value); }); }
+            if (defined(exportBtn)) { exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode'; if (exportMode) { currentSlide = 0; updateExportView(); } }); }
+
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { currentSlide = Math.min(currentSlide + 1, totalSlides - 1); updateExportView(); }
+                else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { currentSlide = Math.max(currentSlide - 1, 0); updateExportView(); }
+                else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
             });
-            updateIndicator();
-        }
-
-        function exitExportMode() {
-            document.body.classList.remove('export-mode');
-            document.querySelectorAll('.slide').forEach(slide => {
-                slide.classList.remove('active');
-            });
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            document.querySelectorAll('.slide').forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
-            });
-            updateIndicator();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            document.querySelectorAll('.slide').forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
-            });
-            updateIndicator();
-        }
-
-        function updateIndicator() {
-            document.getElementById('slideIndicator').textContent = `${currentSlide + 1} / ${totalSlides}`;
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'e' || e.key === 'E') {
-                enterExportMode();
-            } else if (e.key === 'Escape') {
-                exitExportMode();
-            } else if (e.key === 'ArrowRight' && document.body.classList.contains('export-mode')) {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft' && document.body.classList.contains('export-mode')) {
-                prevSlide();
-            }
-        });
+        })();
     </script>
 </body>
 </html>
