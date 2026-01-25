@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post 557 — First Hour Trap Warnings</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
             --accent-blue: #4a90d9;
             --accent-gold: #c9a962;
             --accent-green: #4ad97a;
@@ -17,310 +20,134 @@
             --text-primary: #e8e6e3;
             --text-secondary: #a9a6a2;
             --text-muted: #6b6965;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { background-color: #050507; min-height: 100vh; font-family: var(--font-sans); color: var(--text-primary); padding: clamp(1rem, 4vw, 2rem); }
+
+        .controls { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 1rem; background: var(--bg-card); padding: 0.75rem 1.5rem; border-radius: 9999px; border: 1px solid var(--border-subtle); }
+        .controls label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); cursor: pointer; }
+        .controls select { background: var(--bg-dark); color: var(--text-primary); border: 1px solid var(--border-subtle); border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.875rem; cursor: pointer; }
+        #export-btn { background: var(--accent-gold); color: var(--bg-dark); border: none; border-radius: 9999px; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        #export-btn:hover { filter: brightness(1.1); }
+
+        .page-title { text-align: center; margin: 5rem auto 3rem; }
+        .page-title h1 { font-family: var(--font-serif); font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .page-title p { font-size: clamp(0.875rem, 2vw, 1rem); color: var(--text-muted); }
+
+        .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; justify-items: center; }
+        .slide-wrapper { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .slide-label { font-size: clamp(0.75rem, 1.5vw, 0.875rem); font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+        .slide { width: 100%; max-width: 1080px; aspect-ratio: 1 / 1; background-color: var(--bg-dark); position: relative; overflow: hidden; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05); }
+
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity); }
+
+        .slide-content { position: relative; z-index: 1; height: 100%; padding: clamp(36px, 6.7vw, 72px); display: flex; flex-direction: column; }
+        .slide-number { position: absolute; bottom: clamp(15px, 2.8vw, 30px); right: clamp(20px, 3.7vw, 40px); font-family: var(--font-sans); font-size: clamp(10px, 1.3vw, 14px); font-weight: 500; color: var(--text-muted); letter-spacing: 3px; }
+        .brand-mark { position: absolute; bottom: clamp(15px, 2.8vw, 30px); left: 0; right: 0; text-align: center; font-size: clamp(10px, 1.2vw, 13px); font-weight: 600; letter-spacing: 4px; color: var(--text-muted); }
+
+        .center-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+
+        h1.slide-title { font-family: var(--font-serif); font-size: clamp(36px, 5.9vw, 64px); font-weight: 600; line-height: 1.1; color: var(--text-primary); margin-bottom: clamp(12px, 2.2vw, 24px); }
+        .slide-title .highlight { color: var(--accent-red); }
+        .subtitle { font-size: clamp(16px, 2.4vw, 26px); font-weight: 400; color: var(--accent-gold); }
+
+        .trap-box { background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%); border: 1px solid rgba(217, 74, 74, 0.3); border-radius: clamp(10px, 1.5vw, 16px); padding: clamp(24px, 4.1vw, 44px); width: 100%; max-width: 750px; }
+        .trap-box h3 { font-family: var(--font-serif); font-size: clamp(24px, 3.5vw, 38px); font-weight: 600; margin-bottom: clamp(16px, 2.6vw, 28px); color: var(--accent-red); }
+        .trap-box .feature-list li::before { color: var(--accent-red); }
+
+        .trap-box.chaos { background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%); border-color: rgba(155, 74, 217, 0.3); }
+        .trap-box.chaos h3 { color: var(--accent-purple); }
+        .trap-box.chaos .feature-list li::before { color: var(--accent-purple); }
+
+        .trap-box.fakeout { background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%); border-color: rgba(201, 169, 98, 0.3); }
+        .trap-box.fakeout h3 { color: var(--accent-gold); }
+        .trap-box.fakeout .feature-list li::before { color: var(--accent-gold); }
+
+        .trap-box.news { background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%); border-color: rgba(74, 144, 217, 0.3); }
+        .trap-box.news h3 { color: var(--accent-blue); }
+        .trap-box.news .feature-list li::before { color: var(--accent-blue); }
+
+        .trap-box.solution { background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%); border-color: rgba(74, 217, 122, 0.3); }
+        .trap-box.solution h3 { color: var(--accent-green); }
+        .trap-box.solution .feature-list li::before { color: var(--accent-green); }
+
+        .trap-box.patience { background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%); border-color: rgba(74, 217, 217, 0.3); }
+        .trap-box.patience h3 { color: var(--accent-teal); }
+        .trap-box.patience .feature-list li::before { color: var(--accent-teal); }
+
+        .feature-list { list-style: none; text-align: left; }
+        .feature-list li { font-size: clamp(14px, 2vw, 22px); color: var(--text-primary); padding: clamp(6px, 0.9vw, 10px) 0; padding-left: clamp(24px, 3.3vw, 36px); position: relative; }
+        .feature-list li::before { content: "\2192"; position: absolute; left: 0; }
+
+        .cta-title { font-family: var(--font-serif); font-size: clamp(28px, 4.1vw, 44px); font-weight: 600; color: var(--text-primary); margin-bottom: clamp(12px, 1.9vw, 20px); line-height: 1.3; }
+        .cta-title .emphasis { color: var(--accent-gold); }
+        .cta-text { font-size: clamp(16px, 2.2vw, 24px); color: var(--text-secondary); margin-bottom: clamp(4px, 0.7vw, 8px); }
+
+        @media (max-width: 768px) {
+            .controls { flex-wrap: wrap; justify-content: center; padding: 0.5rem 1rem; gap: 0.5rem; width: 90%; }
+            .page-title { margin: 4rem auto 2rem; }
+            .carousel-grid { gap: 1.5rem; }
+        }
+        @media (max-width: 480px) {
+            .controls { top: 10px; padding: 0.5rem 0.75rem; border-radius: 1rem; }
+            .controls label span { display: none; }
         }
 
-        body {
-            background-color: #050507;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
+        body.export-mode { padding: 0; background: none; }
+        body.export-mode .controls, body.export-mode .page-title { display: none; }
+        body.export-mode .carousel-grid { display: block; max-width: none; }
+        body.export-mode .slide-wrapper { display: none; }
+        body.export-mode .slide-wrapper.exporting { display: flex; }
+        body.export-mode .slide-label { display: none; }
+        body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; aspect-ratio: auto; border-radius: 0; border: none; }
 
-        .carousel-container {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .slide-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .slide-label {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .slide {
-            width: 1080px;
-            height: 1080px;
-            background-color: var(--bg-dark);
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .slide-bg video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-        }
-
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            height: 100%;
-            padding: 72px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .slide-number {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            letter-spacing: 3px;
-            margin-bottom: auto;
-        }
-
-        .brand-mark {
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 4px;
-            color: var(--text-muted);
-            margin-top: auto;
-            text-align: center;
-        }
-
-        h1.slide-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 64px;
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-        }
-
-        .slide-title .highlight {
-            color: var(--accent-red);
-        }
-
-        .subtitle {
-            font-size: 26px;
-            font-weight: 400;
-            color: var(--accent-gold);
-        }
-
-        .center-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .trap-box {
-            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
-            border: 1px solid rgba(217, 74, 74, 0.3);
-            border-radius: 16px;
-            padding: 44px;
-            width: 100%;
-            max-width: 750px;
-        }
-
-        .trap-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 38px;
-            font-weight: 600;
-            margin-bottom: 28px;
-            color: var(--accent-red);
-        }
-
-        .trap-box .feature-list li::before {
-            color: var(--accent-red);
-        }
-
-        .trap-box.chaos {
-            background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%);
-            border-color: rgba(155, 74, 217, 0.3);
-        }
-
-        .trap-box.chaos h3 {
-            color: var(--accent-purple);
-        }
-
-        .trap-box.chaos .feature-list li::before {
-            color: var(--accent-purple);
-        }
-
-        .trap-box.fakeout {
-            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
-            border-color: rgba(201, 169, 98, 0.3);
-        }
-
-        .trap-box.fakeout h3 {
-            color: var(--accent-gold);
-        }
-
-        .trap-box.fakeout .feature-list li::before {
-            color: var(--accent-gold);
-        }
-
-        .trap-box.news {
-            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
-            border-color: rgba(74, 144, 217, 0.3);
-        }
-
-        .trap-box.news h3 {
-            color: var(--accent-blue);
-        }
-
-        .trap-box.news .feature-list li::before {
-            color: var(--accent-blue);
-        }
-
-        .trap-box.solution {
-            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
-            border-color: rgba(74, 217, 122, 0.3);
-        }
-
-        .trap-box.solution h3 {
-            color: var(--accent-green);
-        }
-
-        .trap-box.solution .feature-list li::before {
-            color: var(--accent-green);
-        }
-
-        .trap-box.patience {
-            background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
-            border-color: rgba(74, 217, 217, 0.3);
-        }
-
-        .trap-box.patience h3 {
-            color: var(--accent-teal);
-        }
-
-        .trap-box.patience .feature-list li::before {
-            color: var(--accent-teal);
-        }
-
-        .feature-list {
-            list-style: none;
-            text-align: left;
-        }
-
-        .feature-list li {
-            font-size: 22px;
-            color: var(--text-primary);
-            padding: 10px 0;
-            padding-left: 36px;
-            position: relative;
-        }
-
-        .feature-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-        }
-
-        .cta-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 44px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .cta-title .emphasis {
-            color: var(--accent-gold);
-        }
-
-        .cta-text {
-            font-size: 24px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-
-        /* Export Mode */
-        body.export-mode {
-            padding: 0;
-            background: none;
-        }
-
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
-
-        body.export-mode .slide-wrapper {
-            display: none;
-        }
-
-        body.export-mode .slide-wrapper.active {
-            display: flex;
-        }
-
-        body.export-mode .slide-label {
-            display: none;
-        }
-
-        body.export-mode .slide {
-            border: none;
+        @media print {
+            .controls { display: none; }
+            .slide { break-inside: avoid; border-radius: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
+    <div class="controls">
+        <label><input type="checkbox" id="bg-toggle" checked> <span>Background</span></label>
+        <label><span>Opacity:</span> <select id="opacity-control"><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.16">16%</option><option value="0.24">24%</option></select></label>
+        <button id="export-btn">Export Mode</button>
+    </div>
 
-        <!-- Slide 1: Hook -->
+    <div class="page-title">
+        <h1>First Hour Trap Warnings</h1>
+        <p>8 slides</p>
+    </div>
+
+    <div class="carousel-grid">
         <div class="slide-wrapper" data-slide="1">
-            <span class="slide-label">Slide 1 — Hook</span>
+            <span class="slide-label">Slide 1</span>
             <div class="slide slide-1">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">01 / 08</span>
                     <div class="center-content">
                         <h1 class="slide-title">FIRST HOUR<br><span class="highlight">TRAP WARNINGS</span></h1>
                         <p class="subtitle">The most dangerous 60 minutes.</p>
                     </div>
+                    <span class="slide-number">01 / 08</span>
                     <span class="brand-mark">SIGNALPILOT</span>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 2: Opening Chaos -->
         <div class="slide-wrapper" data-slide="2">
-            <span class="slide-label">Slide 2 — Opening Chaos</span>
+            <span class="slide-label">Slide 2</span>
             <div class="slide slide-2">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">02 / 08</span>
                     <div class="center-content">
                         <div class="trap-box chaos">
                             <h3>OPENING CHAOS</h3>
@@ -332,22 +159,17 @@
                             </ul>
                         </div>
                     </div>
+                    <span class="slide-number">02 / 08</span>
                     <span class="brand-mark">SIGNALPILOT</span>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 3: The Gap Trap -->
         <div class="slide-wrapper" data-slide="3">
-            <span class="slide-label">Slide 3 — The Gap Trap</span>
+            <span class="slide-label">Slide 3</span>
             <div class="slide slide-3">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">03 / 08</span>
                     <div class="center-content">
                         <div class="trap-box">
                             <h3>THE GAP TRAP</h3>
@@ -359,22 +181,17 @@
                             </ul>
                         </div>
                     </div>
+                    <span class="slide-number">03 / 08</span>
                     <span class="brand-mark">SIGNALPILOT</span>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 4: Fakeout Moves -->
         <div class="slide-wrapper" data-slide="4">
-            <span class="slide-label">Slide 4 — Fakeout Moves</span>
+            <span class="slide-label">Slide 4</span>
             <div class="slide slide-4">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">04 / 08</span>
                     <div class="center-content">
                         <div class="trap-box fakeout">
                             <h3>FAKEOUT MOVES</h3>
@@ -386,22 +203,17 @@
                             </ul>
                         </div>
                     </div>
+                    <span class="slide-number">04 / 08</span>
                     <span class="brand-mark">SIGNALPILOT</span>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 5: News Reactions -->
         <div class="slide-wrapper" data-slide="5">
-            <span class="slide-label">Slide 5 — News Reactions</span>
+            <span class="slide-label">Slide 5</span>
             <div class="slide slide-5">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">05 / 08</span>
                     <div class="center-content">
                         <div class="trap-box news">
                             <h3>NEWS REACTIONS</h3>
@@ -413,22 +225,17 @@
                             </ul>
                         </div>
                     </div>
+                    <span class="slide-number">05 / 08</span>
                     <span class="brand-mark">SIGNALPILOT</span>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 6: The Solution -->
         <div class="slide-wrapper" data-slide="6">
-            <span class="slide-label">Slide 6 — The Solution</span>
+            <span class="slide-label">Slide 6</span>
             <div class="slide slide-6">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">06 / 08</span>
                     <div class="center-content">
                         <div class="trap-box solution">
                             <h3>THE SOLUTION</h3>
@@ -440,22 +247,17 @@
                             </ul>
                         </div>
                     </div>
+                    <span class="slide-number">06 / 08</span>
                     <span class="brand-mark">SIGNALPILOT</span>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 7: Patience Pays -->
         <div class="slide-wrapper" data-slide="7">
-            <span class="slide-label">Slide 7 — Patience Pays</span>
+            <span class="slide-label">Slide 7</span>
             <div class="slide slide-7">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">07 / 08</span>
                     <div class="center-content">
                         <div class="trap-box patience">
                             <h3>PATIENCE PAYS</h3>
@@ -467,86 +269,52 @@
                             </ul>
                         </div>
                     </div>
+                    <span class="slide-number">07 / 08</span>
                     <span class="brand-mark">SIGNALPILOT</span>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 8: CTA -->
         <div class="slide-wrapper" data-slide="8">
-            <span class="slide-label">Slide 8 — CTA</span>
+            <span class="slide-label">Slide 8</span>
             <div class="slide slide-8">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">08 / 08</span>
                     <div class="center-content">
                         <h2 class="cta-title">Let the Market<br><span class="emphasis">Show Its Hand</span></h2>
                         <p class="cta-text">Patience beats impulse.</p>
                         <p class="cta-text">Link in bio</p>
                     </div>
+                    <span class="slide-number">08 / 08</span>
                     <span class="brand-mark">SIGNALPILOT</span>
                 </div>
             </div>
         </div>
-
     </div>
 
     <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide-wrapper');
-        const totalSlides = slides.length;
-        let exportMode = false;
+        (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
+            let exportMode = false, currentSlide = 0;
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
 
-        function enterExportMode() {
-            exportMode = true;
-            document.body.classList.add('export-mode');
-            currentSlide = 0;
-            updateExportView();
-        }
+            function updateExportView() { slideWrappers.forEach((wrapper, index) => { wrapper.classList.toggle('exporting', index === currentSlide); }); }
 
-        function exitExportMode() {
-            exportMode = false;
-            document.body.classList.remove('export-mode');
-            slides.forEach(slide => slide.classList.remove('active'));
-        }
+            if (defined(bgToggle)) { bgToggle.addEventListener('change', (e) => { document.querySelectorAll('.video-background').forEach(bg => { bg.style.display = e.target.checked ? 'block' : 'none'; }); }); }
+            if (defined(opacityControl)) { opacityControl.addEventListener('change', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value); }); }
+            if (defined(exportBtn)) { exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode'; if (exportMode) { currentSlide = 0; updateExportView(); } }); }
 
-        function updateExportView() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { currentSlide = Math.min(currentSlide + 1, totalSlides - 1); updateExportView(); }
+                else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { currentSlide = Math.max(currentSlide - 1, 0); updateExportView(); }
+                else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
             });
-        }
-
-        function nextSlide() {
-            if (exportMode && currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateExportView();
-            }
-        }
-
-        function prevSlide() {
-            if (exportMode && currentSlide > 0) {
-                currentSlide--;
-                updateExportView();
-            }
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'e' || e.key === 'E') {
-                if (!exportMode) enterExportMode();
-            } else if (e.key === 'Escape') {
-                exitExportMode();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
-
-        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+        })();
     </script>
 </body>
 </html>

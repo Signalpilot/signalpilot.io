@@ -3,817 +3,405 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plutus Flow - Accumulation Detection - Signal Pilot</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Post 525 - Plutus Flow Accumulation Detection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0a0a0f;
-            --bg-card: #12121a;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --bg-card-solid: #12121a;
             --bg-card-alt: #1a1a24;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #606070;
+            --text-dim: #6a6a6a;
             --accent-blue: #4a90d9;
             --accent-blue-dim: rgba(74, 144, 217, 0.3);
             --accent-gold: #c9a962;
             --accent-gold-dim: rgba(201, 169, 98, 0.3);
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
             --accent-green: #4ecdc4;
             --accent-red: #e74c3c;
             --accent-purple: #9b59b6;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --text-dim: #6a6a6a;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { background-color: #000; min-height: 100vh; font-family: var(--font-sans); color: var(--text-primary); padding: 2rem; }
+
+        .controls { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 1rem; background: var(--bg-card); padding: 0.75rem 1.5rem; border-radius: 9999px; border: 1px solid var(--border-subtle); }
+        .controls label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); }
+        .controls select { background: var(--bg-dark); color: var(--text-primary); border: 1px solid var(--border-subtle); border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.875rem; cursor: pointer; }
+        #export-btn { background: var(--accent-gold); color: var(--bg-dark); border: none; border-radius: 9999px; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        #export-btn:hover { filter: brightness(1.1); }
+
+        .page-title { text-align: center; margin: 5rem auto 3rem; }
+        .page-title h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .page-title p { font-size: 1rem; color: var(--text-muted); }
+
+        .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; justify-items: center; }
+        .slide-wrapper { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .slide-label { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .slide { width: 100%; max-width: 540px; aspect-ratio: 1 / 1; background: var(--bg-dark); border-radius: 12px; position: relative; overflow: hidden; border: 1px solid rgba(74, 144, 217, 0.2); }
+
+        body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; border-radius: 0; border: none; }
+        body.export-mode .carousel-grid { display: block; }
+        body.export-mode .slide-wrapper { display: none; }
+        body.export-mode .slide-wrapper.exporting { display: flex; }
+        body.export-mode .slide-label { display: none; }
+        body.export-mode .page-title, body.export-mode .controls { display: none; }
+
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity); }
+
+        .top-border { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-gold)); z-index: 2; }
+
+        .slide-content { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; padding: clamp(30px, 5.6vw, 60px); }
+        .slide-number { position: absolute; bottom: clamp(15px, 2.8vw, 30px); right: clamp(20px, 3.7vw, 40px); font-family: var(--font-sans); font-size: clamp(9px, 1.7vw, 18px); color: var(--text-dim); letter-spacing: 2px; }
+
+        .logo-container { display: flex; align-items: center; gap: clamp(8px, 1.4vw, 15px); margin-bottom: clamp(20px, 3.7vw, 40px); }
+        .logo-icon { width: clamp(24px, 4.4vw, 48px); height: clamp(24px, 4.4vw, 48px); background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold)); border-radius: clamp(6px, 1.1vw, 12px); display: flex; align-items: center; justify-content: center; }
+        .logo-icon svg { width: clamp(14px, 2.6vw, 28px); height: clamp(14px, 2.6vw, 28px); fill: var(--text-primary); }
+        .logo-text { font-family: var(--font-serif); font-size: clamp(14px, 2.6vw, 28px); font-weight: 600; color: var(--text-primary); letter-spacing: 2px; }
+
+        .content-area { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+        .slide-header { font-family: var(--font-serif); font-size: clamp(27px, 5vw, 54px); font-weight: 700; color: var(--text-primary); line-height: 1.15; margin-bottom: clamp(10px, 1.9vw, 20px); text-transform: uppercase; letter-spacing: 3px; }
+        .slide-header .indicator-name { color: var(--accent-gold); }
+        .slide-subheader { font-family: var(--font-sans); font-size: clamp(13px, 2.4vw, 26px); font-weight: 400; color: var(--accent-blue); margin-bottom: clamp(25px, 4.6vw, 50px); letter-spacing: 1px; }
+
+        .section-header { font-family: var(--font-serif); font-size: clamp(24px, 4.4vw, 48px); font-weight: 700; color: var(--text-primary); margin-bottom: clamp(20px, 3.7vw, 40px); text-transform: uppercase; letter-spacing: 2px; }
+
+        .content-list { display: flex; flex-direction: column; gap: clamp(11px, 2vw, 22px); }
+        .content-item { display: flex; align-items: flex-start; gap: clamp(10px, 1.9vw, 20px); padding: clamp(13px, 2.4vw, 26px) clamp(18px, 3.2vw, 35px); background: var(--bg-card-solid); border-radius: clamp(8px, 1.5vw, 16px); border-left: 4px solid var(--accent-blue); transition: all 0.3s ease; }
+        .content-item:hover { background: var(--bg-card-alt); transform: translateX(5px); }
+        .item-bullet { width: clamp(6px, 1.1vw, 12px); height: clamp(6px, 1.1vw, 12px); background: var(--accent-gold); border-radius: 50%; margin-top: clamp(4px, 0.7vw, 8px); flex-shrink: 0; }
+        .item-text { font-family: var(--font-sans); font-size: clamp(13px, 2.4vw, 26px); font-weight: 400; color: var(--text-primary); line-height: 1.5; }
+
+        .scenario-box { padding: clamp(25px, 4.6vw, 50px); background: var(--bg-card-solid); border-radius: clamp(10px, 1.9vw, 20px); border: 1px solid rgba(201, 169, 98, 0.2); }
+        .scenario-items { display: flex; flex-direction: column; gap: clamp(10px, 1.9vw, 20px); }
+        .scenario-item { display: flex; align-items: center; gap: clamp(9px, 1.7vw, 18px); }
+        .scenario-icon { width: clamp(20px, 3.7vw, 40px); height: clamp(20px, 3.7vw, 40px); border-radius: 50%; background: rgba(160, 160, 160, 0.2); display: flex; align-items: center; justify-content: center; font-size: clamp(10px, 1.9vw, 20px); color: var(--text-secondary); }
+        .scenario-text { font-family: var(--font-sans); font-size: clamp(13px, 2.4vw, 26px); color: var(--text-secondary); }
+
+        .reveal-box { padding: clamp(25px, 4.6vw, 50px); background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(74, 144, 217, 0.1)); border-radius: clamp(10px, 1.9vw, 20px); border: 2px solid var(--accent-green); }
+        .reveal-header { font-family: var(--font-serif); font-size: clamp(19px, 3.5vw, 38px); font-weight: 700; color: var(--accent-green); margin-bottom: clamp(15px, 2.8vw, 30px); display: flex; align-items: center; gap: clamp(8px, 1.4vw, 15px); }
+        .reveal-items { display: flex; flex-direction: column; gap: clamp(9px, 1.7vw, 18px); }
+        .reveal-item { display: flex; align-items: center; gap: clamp(8px, 1.4vw, 15px); }
+        .reveal-item span { font-family: var(--font-sans); font-size: clamp(12px, 2.2vw, 24px); color: var(--text-primary); }
+        .reveal-check { width: clamp(14px, 2.6vw, 28px); height: clamp(14px, 2.6vw, 28px); background: rgba(78, 205, 196, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-size: clamp(8px, 1.5vw, 16px); }
+
+        .insight-card { text-align: center; padding: clamp(30px, 5.6vw, 60px); background: var(--bg-card-solid); border-radius: clamp(10px, 1.9vw, 20px); border: 1px solid rgba(74, 144, 217, 0.3); }
+        .insight-header { font-family: var(--font-serif); font-size: clamp(21px, 3.9vw, 42px); font-weight: 700; color: var(--accent-blue); margin-bottom: clamp(20px, 3.7vw, 40px); letter-spacing: 2px; }
+        .insight-text { font-family: var(--font-sans); font-size: clamp(15px, 2.8vw, 30px); color: var(--text-primary); line-height: 1.7; }
+        .insight-text .highlight { color: var(--accent-gold); font-weight: 500; }
+
+        .usage-box { padding: clamp(23px, 4.2vw, 45px); background: var(--bg-card-solid); border-radius: clamp(10px, 1.9vw, 20px); border-left: 5px solid var(--accent-blue); }
+        .usage-header { font-family: var(--font-serif); font-size: clamp(20px, 3.7vw, 40px); font-weight: 700; color: var(--text-primary); margin-bottom: clamp(15px, 2.8vw, 30px); }
+        .usage-list { display: flex; flex-direction: column; gap: clamp(9px, 1.7vw, 18px); }
+        .usage-item { display: flex; align-items: center; gap: clamp(8px, 1.4vw, 15px); }
+        .usage-arrow { color: var(--accent-blue); font-size: clamp(11px, 2vw, 22px); }
+        .usage-text { font-family: var(--font-sans); font-size: clamp(12px, 2.2vw, 24px); color: var(--text-primary); }
+
+        .chart-mockup { flex: 1; background: var(--bg-card-solid); border-radius: clamp(8px, 1.5vw, 16px); border: 1px solid rgba(74, 144, 217, 0.2); display: flex; flex-direction: column; padding: clamp(15px, 2.8vw, 30px); margin-top: clamp(10px, 1.9vw, 20px); }
+        .chart-label { font-family: var(--font-sans); font-size: clamp(9px, 1.7vw, 18px); color: var(--text-secondary); margin-bottom: clamp(8px, 1.4vw, 15px); text-transform: uppercase; letter-spacing: 2px; }
+        .chart-visual { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: clamp(15px, 2.8vw, 30px); }
+        .price-line-flat { height: 4px; background: var(--text-dim); border-radius: 2px; position: relative; }
+        .flow-line-up { height: 4px; background: linear-gradient(90deg, var(--accent-green), var(--accent-green)); border-radius: 2px; width: 80%; transform: rotate(-8deg); margin-left: 10%; }
+        .chart-note { font-family: var(--font-sans); font-size: clamp(8px, 1.5vw, 16px); color: var(--accent-gold); text-align: center; margin-top: auto; }
+
+        .cta-container { text-align: center; padding: clamp(20px, 3.7vw, 40px); }
+        .cta-text { font-family: var(--font-serif); font-size: clamp(23px, 4.3vw, 46px); font-weight: 600; color: var(--text-primary); margin-bottom: clamp(25px, 4.6vw, 50px); line-height: 1.4; }
+        .cta-button { display: inline-block; padding: clamp(12px, 2.2vw, 24px) clamp(30px, 5.6vw, 60px); background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold)); border-radius: 50px; font-family: var(--font-sans); font-size: clamp(11px, 2vw, 22px); font-weight: 600; color: var(--text-primary); text-transform: uppercase; letter-spacing: 3px; text-decoration: none; transition: all 0.3s ease; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(74, 144, 217, 0.4); }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .controls { flex-wrap: wrap; justify-content: center; padding: 0.5rem 1rem; }
+            .page-title { margin: 4rem auto 2rem; }
+            .carousel-grid { grid-template-columns: 1fr; gap: 1.5rem; }
         }
 
-        body {
-            background-color: var(--bg-dark);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            font-family: 'Inter', sans-serif;
+        @media (max-width: 480px) {
+            .controls { top: 10px; gap: 0.5rem; padding: 0.5rem 0.75rem; }
+            .controls label { font-size: 0.75rem; }
+            #export-btn { padding: 0.375rem 0.75rem; font-size: 0.75rem; }
         }
 
-        .carousel-container {
-            display: flex;
-            gap: 30px;
-            overflow-x: auto;
-            padding: 40px 20px;
-            max-width: 100%;
-            scroll-snap-type: x mandatory;
-        }
-
-        .carousel-container::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .carousel-container::-webkit-scrollbar-track {
-            background: var(--bg-card);
-            border-radius: 4px;
-        }
-
-        .carousel-container::-webkit-scrollbar-thumb {
-            background: var(--accent-blue-dim);
-            border-radius: 4px;
-        }
-
-        .carousel-container::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-blue);
-        }
-
-        .slide {
-            flex-shrink: 0;
-            width: 1080px;
-            height: 1080px;
-            background: var(--bg-dark);
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            scroll-snap-align: center;
-            border: 1px solid rgba(74, 144, 217, 0.2);
-        }
-
-        .slide-inner {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: 60px;
-        }
-
-        .video-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-            z-index: 1;
-        }
-
-        .top-border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-gold));
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-icon svg {
-            width: 28px;
-            height: 28px;
-            fill: var(--text-primary);
-        }
-
-        .logo-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: 2px;
-        }
-
-        .slide-header {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 54px;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.15;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .slide-header .indicator-name {
-            color: var(--accent-gold);
-        }
-
-        .slide-subheader {
-            font-family: 'Inter', sans-serif;
-            font-size: 26px;
-            font-weight: 400;
-            color: var(--accent-blue);
-            margin-bottom: 50px;
-            letter-spacing: 1px;
-        }
-
-        .content-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .section-header {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .content-list {
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-        }
-
-        .content-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 26px 35px;
-            background: var(--bg-card);
-            border-radius: 16px;
-            border-left: 4px solid var(--accent-blue);
-            transition: all 0.3s ease;
-        }
-
-        .content-item:hover {
-            background: var(--bg-card-alt);
-            transform: translateX(5px);
-        }
-
-        .item-bullet {
-            width: 12px;
-            height: 12px;
-            background: var(--accent-gold);
-            border-radius: 50%;
-            margin-top: 8px;
-            flex-shrink: 0;
-        }
-
-        .item-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 26px;
-            font-weight: 400;
-            color: var(--text-primary);
-            line-height: 1.5;
-        }
-
-        .scenario-box {
-            padding: 50px;
-            background: var(--bg-card);
-            border-radius: 20px;
-            border: 1px solid rgba(201, 169, 98, 0.2);
-        }
-
-        .scenario-items {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .scenario-item {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-
-        .scenario-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(160, 160, 160, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: var(--text-secondary);
-        }
-
-        .scenario-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 26px;
-            color: var(--text-secondary);
-        }
-
-        .reveal-box {
-            padding: 50px;
-            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(74, 144, 217, 0.1));
-            border-radius: 20px;
-            border: 2px solid var(--accent-green);
-        }
-
-        .reveal-header {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 38px;
-            font-weight: 700;
-            color: var(--accent-green);
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .reveal-items {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .reveal-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .reveal-item span {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            color: var(--text-primary);
-        }
-
-        .reveal-check {
-            width: 28px;
-            height: 28px;
-            background: rgba(78, 205, 196, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-green);
-            font-size: 16px;
-        }
-
-        .insight-card {
-            text-align: center;
-            padding: 60px;
-            background: var(--bg-card);
-            border-radius: 20px;
-            border: 1px solid rgba(74, 144, 217, 0.3);
-        }
-
-        .insight-header {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--accent-blue);
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-        }
-
-        .insight-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 30px;
-            color: var(--text-primary);
-            line-height: 1.7;
-        }
-
-        .insight-text .highlight {
-            color: var(--accent-gold);
-            font-weight: 500;
-        }
-
-        .usage-box {
-            padding: 45px;
-            background: var(--bg-card);
-            border-radius: 20px;
-            border-left: 5px solid var(--accent-blue);
-        }
-
-        .usage-header {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 40px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 30px;
-        }
-
-        .usage-list {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .usage-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .usage-arrow {
-            color: var(--accent-blue);
-            font-size: 22px;
-        }
-
-        .usage-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            color: var(--text-primary);
-        }
-
-        .chart-mockup {
-            flex: 1;
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid rgba(74, 144, 217, 0.2);
-            display: flex;
-            flex-direction: column;
-            padding: 30px;
-            margin-top: 20px;
-        }
-
-        .chart-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .chart-visual {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .price-line-flat {
-            height: 4px;
-            background: var(--text-dim);
-            border-radius: 2px;
-            position: relative;
-        }
-
-        .flow-line-up {
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-green));
-            border-radius: 2px;
-            width: 80%;
-            transform: rotate(-8deg);
-            margin-left: 10%;
-        }
-
-        .chart-note {
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            color: var(--accent-gold);
-            text-align: center;
-            margin-top: auto;
-        }
-
-        .cta-container {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .cta-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 46px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 50px;
-            line-height: 1.4;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 24px 60px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold));
-            border-radius: 50px;
-            font-family: 'Inter', sans-serif;
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(74, 144, 217, 0.4);
-        }
-
-        .slide-number {
-            position: absolute;
-            bottom: 30px;
-            right: 40px;
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            color: var(--text-dim);
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 1200px) {
-            .slide {
-                width: 540px;
-                height: 540px;
-            }
-
-            .slide-inner {
-                padding: 30px;
-            }
-
-            .slide-header {
-                font-size: 28px;
-            }
-
-            .slide-subheader {
-                font-size: 16px;
-            }
-
-            .section-header {
-                font-size: 26px;
-            }
-
-            .item-text {
-                font-size: 16px;
-            }
-
-            .cta-text {
-                font-size: 26px;
-            }
-        }
-
-        /* Export Mode */
-        body.export-mode {
-            padding: 0;
-            background: transparent;
-        }
-
-        body.export-mode .carousel-container {
-            padding: 0;
-            gap: 0;
-            overflow: visible;
-        }
-
-        body.export-mode .slide {
-            border-radius: 0;
-            border: none;
-        }
-
-        body.export-mode .slide:not(.active) {
-            display: none;
-        }
-
-        body.export-mode .slide.active {
-            display: flex;
+        @media print {
+            body { background: white; }
+            .controls, .page-title { display: none; }
+            .slide { break-inside: avoid; }
         }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
-        <!-- Slide 1: Hook -->
-        <div class="slide" data-slide="1">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+    <div class="controls">
+        <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="solid">Solid</option></select></label>
+        <label>Opacity: <select id="opacity-control"><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.16">16%</option><option value="0.24">24%</option></select></label>
+        <button id="export-btn">Export Mode</button>
+    </div>
+
+    <div class="page-title">
+        <h1>Plutus Flow - Accumulation Detection</h1>
+        <p>7 slides · Indicator Feature</p>
+    </div>
+
+    <div class="carousel-grid">
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-content">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
+                    <div class="content-area">
+                        <h1 class="slide-header">
+                            <span class="indicator-name">Plutus Flow</span><br>
+                            Accumulation Detection
+                        </h1>
+                        <p class="slide-subheader">See what price doesn't show</p>
+                    </div>
+                    <div class="slide-number">1 / 7</div>
                 </div>
-                <div class="content-area">
-                    <h1 class="slide-header">
-                        <span class="indicator-name">Plutus Flow</span><br>
-                        Accumulation Detection
-                    </h1>
-                    <p class="slide-subheader">See what price doesn't show</p>
-                </div>
-                <div class="slide-number">1 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 2: The Scenario -->
-        <div class="slide" data-slide="2">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — The Scenario</span>
+            <div class="slide slide-2">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-content">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                </div>
-                <div class="content-area">
-                    <h2 class="section-header">The Scenario</h2>
-                    <div class="scenario-box">
-                        <div class="scenario-items">
-                            <div class="scenario-item">
-                                <span class="scenario-icon">-</span>
-                                <span class="scenario-text">Price moving sideways</span>
-                            </div>
-                            <div class="scenario-item">
-                                <span class="scenario-icon">?</span>
-                                <span class="scenario-text">Looks like nothing happening</span>
-                            </div>
-                            <div class="scenario-item">
-                                <span class="scenario-icon">...</span>
-                                <span class="scenario-text">Most traders bored, waiting</span>
+                    <div class="content-area">
+                        <h2 class="section-header">The Scenario</h2>
+                        <div class="scenario-box">
+                            <div class="scenario-items">
+                                <div class="scenario-item">
+                                    <span class="scenario-icon">-</span>
+                                    <span class="scenario-text">Price moving sideways</span>
+                                </div>
+                                <div class="scenario-item">
+                                    <span class="scenario-icon">?</span>
+                                    <span class="scenario-text">Looks like nothing happening</span>
+                                </div>
+                                <div class="scenario-item">
+                                    <span class="scenario-icon">...</span>
+                                    <span class="scenario-text">Most traders bored, waiting</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="slide-number">2 / 7</div>
                 </div>
-                <div class="slide-number">2 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 3: What Plutus Flow Reveals -->
-        <div class="slide" data-slide="3">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — What Plutus Flow Reveals</span>
+            <div class="slide slide-3">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-content">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                </div>
-                <div class="content-area">
-                    <div class="reveal-box">
-                        <h3 class="reveal-header">
-                            <span>&#128270;</span> What Plutus Flow Reveals
-                        </h3>
-                        <div class="reveal-items">
-                            <div class="reveal-item">
-                                <span class="reveal-check">&#10003;</span>
-                                <span>Flow trending positive</span>
-                            </div>
-                            <div class="reveal-item">
-                                <span class="reveal-check">&#10003;</span>
-                                <span>Buying pressure building</span>
-                            </div>
-                            <div class="reveal-item">
-                                <span class="reveal-check">&#10003;</span>
-                                <span>Accumulation in progress</span>
-                            </div>
-                            <div class="reveal-item">
-                                <span class="reveal-check">&#10003;</span>
-                                <span>Smart money positioning</span>
+                    <div class="content-area">
+                        <div class="reveal-box">
+                            <h3 class="reveal-header">
+                                <span>&#128270;</span> What Plutus Flow Reveals
+                            </h3>
+                            <div class="reveal-items">
+                                <div class="reveal-item">
+                                    <span class="reveal-check">&#10003;</span>
+                                    <span>Flow trending positive</span>
+                                </div>
+                                <div class="reveal-item">
+                                    <span class="reveal-check">&#10003;</span>
+                                    <span>Buying pressure building</span>
+                                </div>
+                                <div class="reveal-item">
+                                    <span class="reveal-check">&#10003;</span>
+                                    <span>Accumulation in progress</span>
+                                </div>
+                                <div class="reveal-item">
+                                    <span class="reveal-check">&#10003;</span>
+                                    <span>Smart money positioning</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="slide-number">3 / 7</div>
                 </div>
-                <div class="slide-number">3 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 4: The Insight -->
-        <div class="slide" data-slide="4">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — The Insight</span>
+            <div class="slide slide-4">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-content">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                </div>
-                <div class="content-area">
-                    <div class="insight-card">
-                        <h3 class="insight-header">THE INSIGHT</h3>
-                        <p class="insight-text">
-                            Flat price <span class="highlight">&#8800;</span> no activity<br><br>
-                            Volume tells the <span class="highlight">hidden story</span><br><br>
-                            Accumulation precedes markup
-                        </p>
+                    <div class="content-area">
+                        <div class="insight-card">
+                            <h3 class="insight-header">THE INSIGHT</h3>
+                            <p class="insight-text">
+                                Flat price <span class="highlight">&#8800;</span> no activity<br><br>
+                                Volume tells the <span class="highlight">hidden story</span><br><br>
+                                Accumulation precedes markup
+                            </p>
+                        </div>
                     </div>
+                    <div class="slide-number">4 / 7</div>
                 </div>
-                <div class="slide-number">4 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 5: How To Use -->
-        <div class="slide" data-slide="5">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — How To Use</span>
+            <div class="slide slide-5">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-content">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                </div>
-                <div class="content-area">
-                    <div class="usage-box">
-                        <h3 class="usage-header">How To Use</h3>
-                        <div class="usage-list">
-                            <div class="usage-item">
-                                <span class="usage-arrow">&#8594;</span>
-                                <span class="usage-text">Watch flow during ranges</span>
-                            </div>
-                            <div class="usage-item">
-                                <span class="usage-arrow">&#8594;</span>
-                                <span class="usage-text">Positive divergence = bullish context</span>
-                            </div>
-                            <div class="usage-item">
-                                <span class="usage-arrow">&#8594;</span>
-                                <span class="usage-text">Negative divergence = bearish context</span>
-                            </div>
-                            <div class="usage-item">
-                                <span class="usage-arrow">&#8594;</span>
-                                <span class="usage-text">Combine with other indicators</span>
+                    <div class="content-area">
+                        <div class="usage-box">
+                            <h3 class="usage-header">How To Use</h3>
+                            <div class="usage-list">
+                                <div class="usage-item">
+                                    <span class="usage-arrow">&#8594;</span>
+                                    <span class="usage-text">Watch flow during ranges</span>
+                                </div>
+                                <div class="usage-item">
+                                    <span class="usage-arrow">&#8594;</span>
+                                    <span class="usage-text">Positive divergence = bullish context</span>
+                                </div>
+                                <div class="usage-item">
+                                    <span class="usage-arrow">&#8594;</span>
+                                    <span class="usage-text">Negative divergence = bearish context</span>
+                                </div>
+                                <div class="usage-item">
+                                    <span class="usage-arrow">&#8594;</span>
+                                    <span class="usage-text">Combine with other indicators</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="slide-number">5 / 7</div>
                 </div>
-                <div class="slide-number">5 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 6: Chart Example -->
-        <div class="slide" data-slide="6">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                </div>
-                <div class="content-area">
-                    <h2 class="section-header">Chart Example</h2>
-                    <div class="chart-mockup">
-                        <span class="chart-label">Price: Flat</span>
-                        <div class="chart-visual">
-                            <div class="price-line-flat"></div>
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Chart Example</span>
+            <div class="slide slide-6">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-content">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                         </div>
-                        <span class="chart-label" style="margin-top: 30px;">Plutus Flow: Rising</span>
-                        <div class="chart-visual">
-                            <div class="flow-line-up"></div>
-                        </div>
-                        <span class="chart-note">Accumulation visible in flow while price consolidates</span>
+                        <span class="logo-text">SIGNAL PILOT</span>
                     </div>
+                    <div class="content-area">
+                        <h2 class="section-header">Chart Example</h2>
+                        <div class="chart-mockup">
+                            <span class="chart-label">Price: Flat</span>
+                            <div class="chart-visual">
+                                <div class="price-line-flat"></div>
+                            </div>
+                            <span class="chart-label" style="margin-top: 30px;">Plutus Flow: Rising</span>
+                            <div class="chart-visual">
+                                <div class="flow-line-up"></div>
+                            </div>
+                            <span class="chart-note">Accumulation visible in flow while price consolidates</span>
+                        </div>
+                    </div>
+                    <div class="slide-number">6 / 7</div>
                 </div>
-                <div class="slide-number">6 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 7: CTA -->
-        <div class="slide" data-slide="7">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — CTA</span>
+            <div class="slide slide-7">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-content">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                </div>
-                <div class="content-area">
-                    <div class="cta-container">
-                        <p class="cta-text">The surface is calm.<br>Underneath, positions are building.</p>
-                        <a href="#" class="cta-button">Link in Bio</a>
+                    <div class="content-area">
+                        <div class="cta-container">
+                            <p class="cta-text">The surface is calm.<br>Underneath, positions are building.</p>
+                            <a href="#" class="cta-button">Link in Bio</a>
+                        </div>
                     </div>
+                    <div class="slide-number">7 / 7</div>
                 </div>
-                <div class="slide-number">7 / 7</div>
             </div>
         </div>
     </div>
 
     <script>
-        // Export mode functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
+        (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
+            let exportMode = false, currentSlide = 0;
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
 
-        function enterExportMode() {
-            document.body.classList.add('export-mode');
-            showSlide(0);
-        }
+            function updateExportView() { slideWrappers.forEach((wrapper, index) => { wrapper.classList.toggle('exporting', index === currentSlide); }); }
 
-        function exitExportMode() {
-            document.body.classList.remove('export-mode');
-            slides.forEach(slide => slide.classList.remove('active'));
-        }
+            if (defined(bgToggle)) { bgToggle.addEventListener('change', (e) => { document.querySelectorAll('.video-background').forEach(bg => { bg.style.display = e.target.value === 'video' ? 'block' : 'none'; }); }); }
+            if (defined(opacityControl)) { opacityControl.addEventListener('change', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value); }); }
+            if (defined(exportBtn)) { exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode'; if (exportMode) { currentSlide = 0; updateExportView(); } }); }
 
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            if (index >= 0 && index < slides.length) {
-                currentSlide = index;
-                slides[currentSlide].classList.add('active');
-            }
-        }
-
-        function nextSlide() {
-            if (currentSlide < slides.length - 1) {
-                showSlide(currentSlide + 1);
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                showSlide(currentSlide - 1);
-            }
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'e' || e.key === 'E') {
-                enterExportMode();
-            } else if (e.key === 'Escape') {
-                exitExportMode();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
-
-        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { currentSlide = Math.min(currentSlide + 1, totalSlides - 1); updateExportView(); }
+                else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { currentSlide = Math.max(currentSlide - 1, 0); updateExportView(); }
+                else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+            });
+        })();
     </script>
 </body>
 </html>
