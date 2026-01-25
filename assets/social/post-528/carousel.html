@@ -3,780 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chronicle: The Prophet's Warning - Signal Pilot</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Post 528 - Chronicle: The Prophet's Warning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0a0a0f;
-            --bg-card: #12121a;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --bg-card-solid: #12121a;
             --bg-card-alt: #1a1a24;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #606070;
+            --text-dim: #6a6a6a;
             --accent-blue: #4a90d9;
             --accent-blue-dim: rgba(74, 144, 217, 0.3);
             --accent-gold: #c9a962;
             --accent-gold-dim: rgba(201, 169, 98, 0.3);
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
             --accent-green: #4ecdc4;
             --accent-red: #e74c3c;
             --accent-purple: #9b59b6;
             --accent-orange: #f39c12;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --text-dim: #6a6a6a;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { background-color: #000; min-height: 100vh; font-family: var(--font-sans); color: var(--text-primary); padding: 2rem; }
 
-        body {
-            background-color: var(--bg-dark);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            font-family: 'Inter', sans-serif;
-        }
+        .controls { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 1rem; background: var(--bg-card); padding: 0.75rem 1.5rem; border-radius: 9999px; border: 1px solid var(--border-subtle); }
+        .controls label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); }
+        .controls select { background: var(--bg-dark); color: var(--text-primary); border: 1px solid var(--border-subtle); border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.875rem; cursor: pointer; }
+        #export-btn { background: var(--accent-gold); color: var(--bg-dark); border: none; border-radius: 9999px; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        #export-btn:hover { filter: brightness(1.1); }
 
-        .carousel-container {
-            display: flex;
-            gap: 30px;
-            overflow-x: auto;
-            padding: 40px 20px;
-            max-width: 100%;
-            scroll-snap-type: x mandatory;
-        }
+        .page-title { text-align: center; margin: 5rem auto 3rem; }
+        .page-title h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .page-title p { font-size: 1rem; color: var(--text-muted); }
 
-        .carousel-container::-webkit-scrollbar {
-            height: 8px;
-        }
+        .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; justify-items: center; }
+        .slide-wrapper { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .slide-label { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
-        .carousel-container::-webkit-scrollbar-track {
-            background: var(--bg-card);
-            border-radius: 4px;
-        }
+        .slide { width: 100%; max-width: 540px; aspect-ratio: 1 / 1; background: var(--bg-dark); border-radius: 12px; position: relative; overflow: hidden; border: 1px solid var(--accent-gold-dim); }
 
-        .carousel-container::-webkit-scrollbar-thumb {
-            background: var(--accent-blue-dim);
-            border-radius: 4px;
-        }
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity); }
 
-        .carousel-container::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-blue);
-        }
+        .slide-inner { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; padding: clamp(30px, 5.6vw, 60px); }
 
-        .slide {
-            flex-shrink: 0;
-            width: 1080px;
-            height: 1080px;
-            background: var(--bg-dark);
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            scroll-snap-align: center;
-            border: 1px solid rgba(201, 169, 98, 0.3);
-        }
+        .top-border { position: absolute; top: 0; left: 0; right: 0; height: clamp(2px, 0.4vw, 4px); background: linear-gradient(90deg, var(--accent-purple), var(--accent-gold)); z-index: 2; }
 
-        .slide-inner {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: 60px;
-        }
+        .logo-container { display: flex; align-items: center; gap: clamp(8px, 1.4vw, 15px); margin-bottom: clamp(20px, 3.7vw, 40px); }
+        .logo-icon { width: clamp(24px, 4.4vw, 48px); height: clamp(24px, 4.4vw, 48px); background: linear-gradient(135deg, var(--accent-purple), var(--accent-gold)); border-radius: clamp(6px, 1.1vw, 12px); display: flex; align-items: center; justify-content: center; }
+        .logo-icon svg { width: clamp(14px, 2.6vw, 28px); height: clamp(14px, 2.6vw, 28px); fill: var(--text-primary); }
+        .logo-text { font-family: var(--font-serif); font-size: clamp(12px, 2.2vw, 24px); font-weight: 600; color: var(--text-primary); letter-spacing: 2px; }
+        .chronicle-badge { font-family: var(--font-sans); font-size: clamp(7px, 1.3vw, 14px); font-weight: 600; color: var(--accent-purple); background: rgba(155, 89, 182, 0.2); padding: clamp(3px, 0.6vw, 6px) clamp(8px, 1.5vw, 16px); border-radius: 20px; margin-left: clamp(8px, 1.4vw, 15px); letter-spacing: 1px; }
 
-        .video-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-            z-index: 1;
-        }
+        .slide-header { font-family: var(--font-serif); font-size: clamp(29px, 5.4vw, 58px); font-weight: 700; color: var(--text-primary); line-height: 1.15; margin-bottom: clamp(10px, 1.9vw, 20px); text-transform: uppercase; letter-spacing: clamp(1.5px, 0.3vw, 3px); }
+        .slide-header .prophet { color: var(--accent-gold); }
+        .slide-subheader { font-family: var(--font-sans); font-size: clamp(13px, 2.4vw, 26px); font-weight: 400; color: var(--accent-purple); margin-bottom: clamp(25px, 4.6vw, 50px); letter-spacing: 1px; }
 
-        .top-border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-gold));
-        }
+        .content-area { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .slide-number { position: absolute; bottom: clamp(15px, 2.8vw, 30px); right: clamp(20px, 3.7vw, 40px); font-family: var(--font-sans); font-size: clamp(9px, 1.7vw, 18px); color: var(--text-dim); letter-spacing: 2px; }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
+        /* Quote Card */
+        .quote-card { padding: clamp(30px, 5.6vw, 60px); background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(201, 169, 98, 0.1)); border-radius: clamp(10px, 1.9vw, 20px); border: 2px solid var(--accent-gold-dim); text-align: center; }
+        .quote-text { font-family: var(--font-serif); font-size: clamp(21px, 3.9vw, 42px); font-weight: 600; color: var(--text-primary); line-height: 1.5; font-style: italic; }
+        .quote-text .emphasis { color: var(--accent-gold); font-style: normal; }
+        .quote-text .warning { color: var(--accent-orange); }
 
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-gold));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        /* Section Card (Warning) */
+        .section-card { padding: clamp(25px, 4.6vw, 50px); background: var(--bg-card-solid); border-radius: clamp(10px, 1.9vw, 20px); border-left: clamp(2.5px, 0.5vw, 5px) solid var(--accent-orange); }
+        .section-header { font-family: var(--font-serif); font-size: clamp(21px, 3.9vw, 42px); font-weight: 700; color: var(--accent-orange); margin-bottom: clamp(18px, 3.2vw, 35px); display: flex; align-items: center; gap: clamp(9px, 1.7vw, 18px); }
+        .section-icon { font-size: clamp(18px, 3.3vw, 36px); }
+        .section-list { display: flex; flex-direction: column; gap: clamp(10px, 1.9vw, 20px); }
+        .section-item { display: flex; align-items: center; gap: clamp(8px, 1.4vw, 15px); }
+        .section-bullet { width: clamp(5px, 0.9vw, 10px); height: clamp(5px, 0.9vw, 10px); border-radius: 50%; background: var(--accent-orange); flex-shrink: 0; }
+        .section-text { font-family: var(--font-sans); font-size: clamp(13px, 2.4vw, 26px); color: var(--text-primary); }
 
-        .logo-icon svg {
-            width: 28px;
-            height: 28px;
-            fill: var(--text-primary);
-        }
+        /* Wisdom Card */
+        .wisdom-card { padding: clamp(25px, 4.6vw, 50px); background: var(--bg-card-solid); border-radius: clamp(10px, 1.9vw, 20px); border-left: clamp(2.5px, 0.5vw, 5px) solid var(--accent-purple); }
+        .wisdom-header { font-family: var(--font-serif); font-size: clamp(21px, 3.9vw, 42px); font-weight: 700; color: var(--accent-purple); margin-bottom: clamp(18px, 3.2vw, 35px); display: flex; align-items: center; gap: clamp(9px, 1.7vw, 18px); }
+        .wisdom-list { display: flex; flex-direction: column; gap: clamp(10px, 1.9vw, 20px); }
+        .wisdom-item { display: flex; align-items: center; gap: clamp(8px, 1.4vw, 15px); }
+        .wisdom-bullet { width: clamp(5px, 0.9vw, 10px); height: clamp(5px, 0.9vw, 10px); border-radius: 50%; background: var(--accent-purple); flex-shrink: 0; }
+        .wisdom-text { font-family: var(--font-sans); font-size: clamp(13px, 2.4vw, 26px); color: var(--text-primary); }
 
-        .logo-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: 2px;
-        }
+        /* Action Card */
+        .action-card { padding: clamp(25px, 4.6vw, 50px); background: var(--bg-card-solid); border-radius: clamp(10px, 1.9vw, 20px); border-left: clamp(2.5px, 0.5vw, 5px) solid var(--accent-green); }
+        .action-header { font-family: var(--font-serif); font-size: clamp(21px, 3.9vw, 42px); font-weight: 700; color: var(--accent-green); margin-bottom: clamp(18px, 3.2vw, 35px); }
+        .action-list { display: flex; flex-direction: column; gap: clamp(10px, 1.9vw, 20px); }
+        .action-item { display: flex; align-items: center; gap: clamp(8px, 1.4vw, 15px); }
+        .action-check { width: clamp(16px, 3vw, 32px); height: clamp(16px, 3vw, 32px); background: rgba(78, 205, 196, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-size: clamp(9px, 1.7vw, 18px); flex-shrink: 0; }
+        .action-text { font-family: var(--font-sans); font-size: clamp(12px, 2.2vw, 24px); color: var(--text-primary); }
 
-        .chronicle-badge {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--accent-purple);
-            background: rgba(155, 89, 182, 0.2);
-            padding: 6px 16px;
-            border-radius: 20px;
-            margin-left: 15px;
-            letter-spacing: 1px;
-        }
+        /* Key Message Card */
+        .key-message-card { text-align: center; padding: clamp(40px, 7.4vw, 80px) clamp(30px, 5.6vw, 60px); background: linear-gradient(135deg, rgba(155, 89, 182, 0.15), rgba(201, 169, 98, 0.15)); border-radius: clamp(10px, 1.9vw, 20px); border: 2px solid var(--accent-gold); }
+        .key-message { font-family: var(--font-serif); font-size: clamp(24px, 4.4vw, 48px); font-weight: 600; color: var(--text-primary); line-height: 1.4; }
+        .key-message .highlight { color: var(--accent-gold); }
+        .prophet-symbol { font-size: clamp(30px, 5.6vw, 60px); display: block; margin-bottom: clamp(15px, 2.8vw, 30px); }
 
-        .slide-header {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 58px;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.15;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .slide-header .prophet {
-            color: var(--accent-gold);
-        }
-
-        .slide-subheader {
-            font-family: 'Inter', sans-serif;
-            font-size: 26px;
-            font-weight: 400;
-            color: var(--accent-purple);
-            margin-bottom: 50px;
-            letter-spacing: 1px;
-        }
-
-        .content-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .quote-card {
-            padding: 60px;
-            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(201, 169, 98, 0.1));
-            border-radius: 20px;
-            border: 2px solid var(--accent-gold-dim);
-            text-align: center;
-        }
-
-        .quote-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
-            font-weight: 600;
-            color: var(--text-primary);
-            line-height: 1.5;
-            font-style: italic;
-        }
-
-        .quote-text .emphasis {
-            color: var(--accent-gold);
-            font-style: normal;
-        }
-
-        .quote-text .warning {
-            color: var(--accent-orange);
-        }
-
-        .section-card {
-            padding: 50px;
-            background: var(--bg-card);
-            border-radius: 20px;
-            border-left: 5px solid var(--accent-orange);
-        }
-
-        .section-header {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--accent-orange);
-            margin-bottom: 35px;
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-
-        .section-icon {
-            font-size: 36px;
-        }
-
-        .section-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .section-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .section-bullet {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--accent-orange);
-            flex-shrink: 0;
-        }
-
-        .section-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 26px;
-            color: var(--text-primary);
-        }
-
-        .wisdom-card {
-            padding: 50px;
-            background: var(--bg-card);
-            border-radius: 20px;
-            border-left: 5px solid var(--accent-purple);
-        }
-
-        .wisdom-header {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--accent-purple);
-            margin-bottom: 35px;
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-
-        .wisdom-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .wisdom-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .wisdom-bullet {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--accent-purple);
-            flex-shrink: 0;
-        }
-
-        .wisdom-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 26px;
-            color: var(--text-primary);
-        }
-
-        .action-card {
-            padding: 50px;
-            background: var(--bg-card);
-            border-radius: 20px;
-            border-left: 5px solid var(--accent-green);
-        }
-
-        .action-header {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--accent-green);
-            margin-bottom: 35px;
-        }
-
-        .action-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .action-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .action-check {
-            width: 32px;
-            height: 32px;
-            background: rgba(78, 205, 196, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-green);
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-
-        .action-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            color: var(--text-primary);
-        }
-
-        .key-message-card {
-            text-align: center;
-            padding: 80px 60px;
-            background: linear-gradient(135deg, rgba(155, 89, 182, 0.15), rgba(201, 169, 98, 0.15));
-            border-radius: 20px;
-            border: 2px solid var(--accent-gold);
-        }
-
-        .key-message {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 600;
-            color: var(--text-primary);
-            line-height: 1.4;
-        }
-
-        .key-message .highlight {
-            color: var(--accent-gold);
-        }
-
-        .prophet-symbol {
-            font-size: 60px;
-            display: block;
-            margin-bottom: 30px;
-        }
-
-        .cta-container {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .cta-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 46px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 50px;
-            line-height: 1.4;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 24px 60px;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-gold));
-            border-radius: 50px;
-            font-family: 'Inter', sans-serif;
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(155, 89, 182, 0.4);
-        }
-
-        .slide-number {
-            position: absolute;
-            bottom: 30px;
-            right: 40px;
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            color: var(--text-dim);
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 1200px) {
-            .slide {
-                width: 540px;
-                height: 540px;
-            }
-
-            .slide-inner {
-                padding: 30px;
-            }
-
-            .slide-header {
-                font-size: 32px;
-            }
-
-            .slide-subheader {
-                font-size: 16px;
-            }
-
-            .quote-text {
-                font-size: 24px;
-            }
-
-            .section-header {
-                font-size: 24px;
-            }
-
-            .section-text {
-                font-size: 16px;
-            }
-
-            .key-message {
-                font-size: 28px;
-            }
-
-            .cta-text {
-                font-size: 26px;
-            }
-        }
+        /* CTA Styles */
+        .cta-container { text-align: center; padding: clamp(20px, 3.7vw, 40px); }
+        .cta-text { font-family: var(--font-serif); font-size: clamp(23px, 4.3vw, 46px); font-weight: 600; color: var(--text-primary); margin-bottom: clamp(25px, 4.6vw, 50px); line-height: 1.4; }
+        .cta-button { display: inline-block; padding: clamp(12px, 2.2vw, 24px) clamp(30px, 5.6vw, 60px); background: linear-gradient(135deg, var(--accent-purple), var(--accent-gold)); border-radius: 50px; font-family: var(--font-sans); font-size: clamp(11px, 2vw, 22px); font-weight: 600; color: var(--text-primary); text-transform: uppercase; letter-spacing: clamp(1.5px, 0.3vw, 3px); text-decoration: none; transition: all 0.3s ease; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(155, 89, 182, 0.4); }
 
         /* Export Mode */
-        body.export-mode {
-            padding: 0;
-            background: transparent;
+        body.export-mode { padding: 0; background: #000; }
+        body.export-mode .controls { display: none; }
+        body.export-mode .page-title { display: none; }
+        body.export-mode .carousel-grid { display: block; max-width: none; gap: 0; }
+        body.export-mode .slide-wrapper { display: none; }
+        body.export-mode .slide-wrapper.exporting { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        body.export-mode .slide-label { display: none; }
+        body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; aspect-ratio: auto; border-radius: 0; border: none; }
+
+        /* Responsive Breakpoints */
+        @media screen and (max-width: 768px) {
+            body { padding: 1rem; }
+            .controls { flex-wrap: wrap; justify-content: center; padding: 0.5rem 1rem; gap: 0.5rem; }
+            .page-title { margin: 4rem auto 2rem; }
+            .carousel-grid { gap: 1.5rem; }
         }
 
-        body.export-mode .carousel-container {
-            padding: 0;
-            gap: 0;
-            overflow: visible;
+        @media screen and (max-width: 480px) {
+            .controls { top: 10px; padding: 0.5rem 0.75rem; gap: 0.25rem; }
+            .controls label { font-size: 0.75rem; }
+            .controls select { padding: 0.2rem 0.4rem; font-size: 0.75rem; }
+            #export-btn { padding: 0.4rem 0.75rem; font-size: 0.75rem; }
+            .page-title h1 { font-size: 1.5rem; }
+            .page-title p { font-size: 0.875rem; }
         }
 
-        body.export-mode .slide {
-            border-radius: 0;
-            border: none;
-        }
-
-        body.export-mode .slide:not(.active) {
-            display: none;
-        }
-
-        body.export-mode .slide.active {
-            display: flex;
+        @media print {
+            body { padding: 0; }
+            .controls, .page-title, .slide-label { display: none; }
+            .carousel-grid { display: block; }
+            .slide-wrapper { page-break-inside: avoid; margin-bottom: 2rem; }
+            .slide { max-width: 100%; border-radius: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
-        <!-- Slide 1: Hook -->
-        <div class="slide" data-slide="1">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+    <div class="controls">
+        <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="solid">Solid</option></select></label>
+        <label>Opacity: <select id="opacity-control"><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.16">16%</option><option value="0.24">24%</option></select></label>
+        <button id="export-btn">Export Mode</button>
+    </div>
+
+    <div class="page-title">
+        <h1>Chronicle: The Prophet's Warning</h1>
+        <p>7 slides · Chronicle Series</p>
+    </div>
+
+    <div class="carousel-grid">
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-inner">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
+                        <span class="chronicle-badge">CHRONICLE</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                    <span class="chronicle-badge">CHRONICLE</span>
+                    <div class="content-area">
+                        <h1 class="slide-header">The <span class="prophet">Prophet's</span> Warning</h1>
+                        <p class="slide-subheader">Volume Oracle sees what's coming</p>
+                    </div>
+                    <div class="slide-number">1 / 7</div>
                 </div>
-                <div class="content-area">
-                    <h1 class="slide-header">The <span class="prophet">Prophet's</span> Warning</h1>
-                    <p class="slide-subheader">Volume Oracle sees what's coming</p>
-                </div>
-                <div class="slide-number">1 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 2: The Quote -->
-        <div class="slide" data-slide="2">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — The Quote</span>
+            <div class="slide slide-2">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-inner">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
+                        <span class="chronicle-badge">CHRONICLE</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                    <span class="chronicle-badge">CHRONICLE</span>
-                </div>
-                <div class="content-area">
-                    <div class="quote-card">
-                        <p class="quote-text">
-                            "High regime does not mean <span class="emphasis">trade.</span><br><br>
-                            It means <span class="emphasis">prepare.</span><br><br>
-                            Volatility is opportunity <span class="warning">AND</span> danger."
-                        </p>
+                    <div class="content-area">
+                        <div class="quote-card">
+                            <p class="quote-text">
+                                "High regime does not mean <span class="emphasis">trade.</span><br><br>
+                                It means <span class="emphasis">prepare.</span><br><br>
+                                Volatility is opportunity <span class="warning">AND</span> danger."
+                            </p>
+                        </div>
                     </div>
+                    <div class="slide-number">2 / 7</div>
                 </div>
-                <div class="slide-number">2 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 3: The Warning -->
-        <div class="slide" data-slide="3">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — The Warning</span>
+            <div class="slide slide-3">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-inner">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
+                        <span class="chronicle-badge">CHRONICLE</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                    <span class="chronicle-badge">CHRONICLE</span>
-                </div>
-                <div class="content-area">
-                    <div class="section-card">
-                        <h3 class="section-header">
-                            <span class="section-icon">&#9888;</span>
-                            The Warning
-                        </h3>
-                        <div class="section-list">
-                            <div class="section-item">
-                                <span class="section-bullet"></span>
-                                <span class="section-text">High activity regime detected</span>
-                            </div>
-                            <div class="section-item">
-                                <span class="section-bullet"></span>
-                                <span class="section-text">Volatility is expanding</span>
-                            </div>
-                            <div class="section-item">
-                                <span class="section-bullet"></span>
-                                <span class="section-text">Big moves possible</span>
-                            </div>
-                            <div class="section-item">
-                                <span class="section-bullet"></span>
-                                <span class="section-text">But direction uncertain</span>
+                    <div class="content-area">
+                        <div class="section-card">
+                            <h3 class="section-header">
+                                <span class="section-icon">&#9888;</span>
+                                The Warning
+                            </h3>
+                            <div class="section-list">
+                                <div class="section-item">
+                                    <span class="section-bullet"></span>
+                                    <span class="section-text">High activity regime detected</span>
+                                </div>
+                                <div class="section-item">
+                                    <span class="section-bullet"></span>
+                                    <span class="section-text">Volatility is expanding</span>
+                                </div>
+                                <div class="section-item">
+                                    <span class="section-bullet"></span>
+                                    <span class="section-text">Big moves possible</span>
+                                </div>
+                                <div class="section-item">
+                                    <span class="section-bullet"></span>
+                                    <span class="section-text">But direction uncertain</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="slide-number">3 / 7</div>
                 </div>
-                <div class="slide-number">3 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 4: The Wisdom -->
-        <div class="slide" data-slide="4">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — The Wisdom</span>
+            <div class="slide slide-4">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-inner">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
+                        <span class="chronicle-badge">CHRONICLE</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                    <span class="chronicle-badge">CHRONICLE</span>
-                </div>
-                <div class="content-area">
-                    <div class="wisdom-card">
-                        <h3 class="wisdom-header">
-                            <span class="section-icon">&#128161;</span>
-                            The Wisdom
-                        </h3>
-                        <div class="wisdom-list">
-                            <div class="wisdom-item">
-                                <span class="wisdom-bullet"></span>
-                                <span class="wisdom-text">Opportunity and risk increase together</span>
-                            </div>
-                            <div class="wisdom-item">
-                                <span class="wisdom-bullet"></span>
-                                <span class="wisdom-text">Don't confuse activity with signal</span>
-                            </div>
-                            <div class="wisdom-item">
-                                <span class="wisdom-bullet"></span>
-                                <span class="wisdom-text">Prepare, don't just react</span>
-                            </div>
-                            <div class="wisdom-item">
-                                <span class="wisdom-bullet"></span>
-                                <span class="wisdom-text">Respect the regime</span>
+                    <div class="content-area">
+                        <div class="wisdom-card">
+                            <h3 class="wisdom-header">
+                                <span class="section-icon">&#128161;</span>
+                                The Wisdom
+                            </h3>
+                            <div class="wisdom-list">
+                                <div class="wisdom-item">
+                                    <span class="wisdom-bullet"></span>
+                                    <span class="wisdom-text">Opportunity and risk increase together</span>
+                                </div>
+                                <div class="wisdom-item">
+                                    <span class="wisdom-bullet"></span>
+                                    <span class="wisdom-text">Don't confuse activity with signal</span>
+                                </div>
+                                <div class="wisdom-item">
+                                    <span class="wisdom-bullet"></span>
+                                    <span class="wisdom-text">Prepare, don't just react</span>
+                                </div>
+                                <div class="wisdom-item">
+                                    <span class="wisdom-bullet"></span>
+                                    <span class="wisdom-text">Respect the regime</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="slide-number">4 / 7</div>
                 </div>
-                <div class="slide-number">4 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 5: What To Do -->
-        <div class="slide" data-slide="5">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — What To Do</span>
+            <div class="slide slide-5">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-inner">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
+                        <span class="chronicle-badge">CHRONICLE</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                    <span class="chronicle-badge">CHRONICLE</span>
-                </div>
-                <div class="content-area">
-                    <div class="action-card">
-                        <h3 class="action-header">What To Do</h3>
-                        <div class="action-list">
-                            <div class="action-item">
-                                <span class="action-check">&#10003;</span>
-                                <span class="action-text">Tighten risk management</span>
-                            </div>
-                            <div class="action-item">
-                                <span class="action-check">&#10003;</span>
-                                <span class="action-text">Be ready for fast moves</span>
-                            </div>
-                            <div class="action-item">
-                                <span class="action-check">&#10003;</span>
-                                <span class="action-text">Have plans for both directions</span>
-                            </div>
-                            <div class="action-item">
-                                <span class="action-check">&#10003;</span>
-                                <span class="action-text">Don't overtrade in chaos</span>
+                    <div class="content-area">
+                        <div class="action-card">
+                            <h3 class="action-header">What To Do</h3>
+                            <div class="action-list">
+                                <div class="action-item">
+                                    <span class="action-check">&#10003;</span>
+                                    <span class="action-text">Tighten risk management</span>
+                                </div>
+                                <div class="action-item">
+                                    <span class="action-check">&#10003;</span>
+                                    <span class="action-text">Be ready for fast moves</span>
+                                </div>
+                                <div class="action-item">
+                                    <span class="action-check">&#10003;</span>
+                                    <span class="action-text">Have plans for both directions</span>
+                                </div>
+                                <div class="action-item">
+                                    <span class="action-check">&#10003;</span>
+                                    <span class="action-text">Don't overtrade in chaos</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="slide-number">5 / 7</div>
                 </div>
-                <div class="slide-number">5 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 6: Key Message -->
-        <div class="slide" data-slide="6">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Key Message</span>
+            <div class="slide slide-6">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-inner">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
+                        <span class="chronicle-badge">CHRONICLE</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                    <span class="chronicle-badge">CHRONICLE</span>
-                </div>
-                <div class="content-area">
-                    <div class="key-message-card">
-                        <span class="prophet-symbol">&#128302;</span>
-                        <p class="key-message">
-                            The Prophet warns<br>so you can <span class="highlight">prepare.</span>
-                        </p>
+                    <div class="content-area">
+                        <div class="key-message-card">
+                            <span class="prophet-symbol">&#128302;</span>
+                            <p class="key-message">
+                                The Prophet warns<br>so you can <span class="highlight">prepare.</span>
+                            </p>
+                        </div>
                     </div>
+                    <div class="slide-number">6 / 7</div>
                 </div>
-                <div class="slide-number">6 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 7: CTA -->
-        <div class="slide" data-slide="7">
-            <video class="video-bg" autoplay muted loop playsinline>
-                <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-            </video>
-            <div class="top-border"></div>
-            <div class="slide-inner">
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — CTA</span>
+            <div class="slide slide-7">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="top-border"></div>
+                <div class="slide-inner">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <span class="logo-text">SIGNAL PILOT</span>
+                        <span class="chronicle-badge">CHRONICLE</span>
                     </div>
-                    <span class="logo-text">SIGNAL PILOT</span>
-                    <span class="chronicle-badge">CHRONICLE</span>
-                </div>
-                <div class="content-area">
-                    <div class="cta-container">
-                        <p class="cta-text">Explore the Chronicle</p>
-                        <a href="#" class="cta-button">Link in Bio</a>
+                    <div class="content-area">
+                        <div class="cta-container">
+                            <p class="cta-text">Explore the Chronicle</p>
+                            <a href="#" class="cta-button">Link in Bio</a>
+                        </div>
                     </div>
+                    <div class="slide-number">7 / 7</div>
                 </div>
-                <div class="slide-number">7 / 7</div>
             </div>
         </div>
     </div>
 
     <script>
-        // Export mode functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
+        (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
+            let exportMode = false, currentSlide = 0;
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
 
-        function enterExportMode() {
-            document.body.classList.add('export-mode');
-            showSlide(0);
-        }
+            function updateExportView() { slideWrappers.forEach((wrapper, index) => { wrapper.classList.toggle('exporting', index === currentSlide); }); }
 
-        function exitExportMode() {
-            document.body.classList.remove('export-mode');
-            slides.forEach(slide => slide.classList.remove('active'));
-        }
+            if (defined(bgToggle)) { bgToggle.addEventListener('change', (e) => { document.querySelectorAll('.video-background').forEach(bg => { bg.style.display = e.target.value === 'video' ? 'block' : 'none'; }); }); }
+            if (defined(opacityControl)) { opacityControl.addEventListener('change', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value); }); }
+            if (defined(exportBtn)) { exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode'; if (exportMode) { currentSlide = 0; updateExportView(); } }); }
 
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            if (index >= 0 && index < slides.length) {
-                currentSlide = index;
-                slides[currentSlide].classList.add('active');
-            }
-        }
-
-        function nextSlide() {
-            if (currentSlide < slides.length - 1) {
-                showSlide(currentSlide + 1);
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                showSlide(currentSlide - 1);
-            }
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'e' || e.key === 'E') {
-                enterExportMode();
-            } else if (e.key === 'Escape') {
-                exitExportMode();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
-
-        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { currentSlide = Math.min(currentSlide + 1, totalSlides - 1); updateExportView(); }
+                else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { currentSlide = Math.max(currentSlide - 1, 0); updateExportView(); }
+                else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+            });
+        })();
     </script>
 </body>
 </html>

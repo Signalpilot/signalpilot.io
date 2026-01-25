@@ -3,70 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 551 — Results Over Promises</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Post 551 - Results Over Promises</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #606070;
             --accent-blue: #4a90d9;
             --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
             --accent-green: #4ad97a;
             --accent-red: #d94a4a;
-            --accent-teal: #4ad9d9;
             --accent-purple: #9b4ad9;
-            --text-primary: #e8e6e3;
-            --text-secondary: #a9a6a2;
-            --text-muted: #6b6965;
+            --accent-teal: #4ad9d9;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         body {
-            background-color: #050507;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            padding: 40px 20px;
+            background-color: #000;
             min-height: 100vh;
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            padding: clamp(16px, 4vw, 40px) clamp(12px, 3vw, 20px);
         }
 
-        .carousel-container {
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
             display: flex;
-            flex-direction: column;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 1rem;
+            background: var(--bg-card);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-subtle);
+        }
+        .controls label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        .controls select {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+        #export-btn {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        #export-btn:hover { filter: brightness(1.1); }
+
+        .page-title {
+            text-align: center;
+            margin: 5rem auto 3rem;
+        }
+        .page-title h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .page-title p {
+            font-size: 1rem;
+            color: var(--text-muted);
         }
 
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 0 auto;
+            justify-items: center;
+        }
         .slide-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
+            gap: 1rem;
         }
-
         .slide-label {
-            font-size: 14px;
+            font-size: 0.875rem;
             font-weight: 500;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 0.05em;
         }
 
         .slide {
-            width: 1080px;
-            height: 1080px;
-            background-color: var(--bg-dark);
+            width: 100%;
+            max-width: 1080px;
+            aspect-ratio: 1 / 1;
+            background: var(--bg-dark);
+            border-radius: 12px;
             position: relative;
             overflow: hidden;
-            flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .slide-bg {
+        .video-background {
             position: absolute;
             top: 0;
             left: 0;
@@ -74,57 +135,45 @@
             height: 100%;
             z-index: 0;
         }
-
-        .slide-bg video {
+        .video-background video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.08;
+            opacity: var(--video-opacity);
         }
 
         .slide-content {
             position: relative;
             z-index: 1;
             height: 100%;
-            padding: 72px;
             display: flex;
             flex-direction: column;
+            padding: clamp(40px, 6.7vw, 72px);
         }
 
         .slide-number {
-            font-size: 14px;
+            position: absolute;
+            bottom: clamp(15px, 2.8vw, 30px);
+            right: clamp(20px, 3.7vw, 40px);
+            font-family: var(--font-sans);
+            font-size: clamp(10px, 1.3vw, 14px);
             font-weight: 500;
             color: var(--text-muted);
             letter-spacing: 3px;
-            margin-bottom: auto;
         }
 
-        .brand-mark {
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 4px;
-            color: var(--text-muted);
-            margin-top: auto;
+        .brand-header {
+            position: absolute;
+            top: clamp(20px, 3.7vw, 40px);
+            left: 0;
+            right: 0;
             text-align: center;
-        }
-
-        h1.slide-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 64px;
+            font-family: var(--font-sans);
+            font-size: clamp(9px, 1.2vw, 13px);
             font-weight: 600;
-            line-height: 1.1;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-        }
-
-        .slide-title .highlight {
-            color: var(--accent-blue);
-        }
-
-        .subtitle {
-            font-size: 26px;
-            font-weight: 400;
-            color: var(--accent-gold);
+            color: var(--text-muted);
+            letter-spacing: 4px;
+            text-transform: uppercase;
         }
 
         .center-content {
@@ -136,20 +185,39 @@
             text-align: center;
         }
 
+        h1.slide-title {
+            font-family: var(--font-serif);
+            font-size: clamp(36px, 5.9vw, 64px);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: clamp(16px, 2.2vw, 24px);
+        }
+
+        .slide-title .highlight {
+            color: var(--accent-blue);
+        }
+
+        .subtitle {
+            font-size: clamp(16px, 2.4vw, 26px);
+            font-weight: 400;
+            color: var(--accent-gold);
+        }
+
         .honesty-box {
             background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
             border: 1px solid rgba(74, 144, 217, 0.3);
-            border-radius: 16px;
-            padding: 44px;
+            border-radius: clamp(10px, 1.5vw, 16px);
+            padding: clamp(28px, 4.1vw, 44px);
             width: 100%;
-            max-width: 750px;
+            max-width: clamp(500px, 69.4vw, 750px);
         }
 
         .honesty-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 38px;
+            font-family: var(--font-serif);
+            font-size: clamp(24px, 3.5vw, 38px);
             font-weight: 600;
-            margin-bottom: 28px;
+            margin-bottom: clamp(18px, 2.6vw, 28px);
             color: var(--accent-blue);
         }
 
@@ -211,26 +279,26 @@
         }
 
         .feature-list li {
-            font-size: 22px;
+            font-size: clamp(14px, 2vw, 22px);
             color: var(--text-primary);
-            padding: 10px 0;
-            padding-left: 36px;
+            padding: clamp(6px, 0.9vw, 10px) 0;
+            padding-left: clamp(24px, 3.3vw, 36px);
             position: relative;
         }
 
         .feature-list li::before {
-            content: "→";
+            content: "\2192";
             position: absolute;
             left: 0;
             color: var(--accent-blue);
         }
 
         .cta-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 44px;
+            font-family: var(--font-serif);
+            font-size: clamp(28px, 4.1vw, 44px);
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 20px;
+            margin-bottom: clamp(12px, 1.9vw, 20px);
             line-height: 1.3;
         }
 
@@ -239,72 +307,97 @@
         }
 
         .cta-text {
-            font-size: 24px;
+            font-size: clamp(16px, 2.2vw, 24px);
             color: var(--text-secondary);
-            margin-bottom: 8px;
+            margin-bottom: clamp(4px, 0.7vw, 8px);
         }
 
         /* Export Mode */
-        body.export-mode {
-            padding: 0;
-            background: none;
-        }
-
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
-
-        body.export-mode .slide-wrapper {
-            display: none;
-        }
-
-        body.export-mode .slide-wrapper.active {
-            display: flex;
-        }
-
-        body.export-mode .slide-label {
-            display: none;
-        }
-
+        body.export-mode { padding: 0; background: none; }
+        body.export-mode .controls { display: none; }
+        body.export-mode .page-title { display: none; }
+        body.export-mode .carousel-grid { display: block; }
+        body.export-mode .slide-wrapper { display: none; }
+        body.export-mode .slide-wrapper.exporting { display: flex; }
+        body.export-mode .slide-label { display: none; }
         body.export-mode .slide {
-            border: none;
+            width: 1080px;
+            height: 1080px;
+            max-width: none;
+            border-radius: 0;
+            aspect-ratio: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .controls {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0.5rem 1rem;
+                gap: 0.5rem;
+                width: 90%;
+            }
+            .page-title { margin: 4rem auto 2rem; }
+            .carousel-grid { gap: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .controls {
+                top: 10px;
+                padding: 0.5rem;
+                gap: 0.25rem;
+            }
+            .controls label { font-size: 0.75rem; }
+            .controls select { padding: 0.2rem 0.4rem; font-size: 0.75rem; }
+            #export-btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+            .page-title { margin: 3rem auto 1.5rem; }
+            .page-title h1 { font-size: 1.5rem; }
+            .page-title p { font-size: 0.875rem; }
+        }
+
+        /* Print Styles */
+        @media print {
+            body { background: white; }
+            .controls, .page-title { display: none; }
+            .slide { break-inside: avoid; border: 1px solid #ccc; }
+            .slide-label { color: #333; }
         }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
+    <div class="controls">
+        <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="solid">Solid</option></select></label>
+        <label>Opacity: <select id="opacity-control"><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.16">16%</option><option value="0.24">24%</option></select></label>
+        <button id="export-btn">Export Mode</button>
+    </div>
 
-        <!-- Slide 1: Hook -->
+    <div class="page-title">
+        <h1>Results Over Promises</h1>
+        <p>6 slides</p>
+    </div>
+
+    <div class="carousel-grid">
         <div class="slide-wrapper" data-slide="1">
-            <span class="slide-label">Slide 1 — Hook</span>
+            <span class="slide-label">Slide 1 - Hook</span>
             <div class="slide slide-1">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">01 / 06</span>
+                    <div class="brand-header">SIGNALPILOT</div>
                     <div class="center-content">
                         <h1 class="slide-title">RESULTS OVER<br><span class="highlight">PROMISES</span></h1>
                         <p class="subtitle">We won't lie to you.</p>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">01 / 06</div>
             </div>
         </div>
 
-        <!-- Slide 2: What We Don't Say -->
         <div class="slide-wrapper" data-slide="2">
-            <span class="slide-label">Slide 2 — What We Don't Say</span>
+            <span class="slide-label">Slide 2 - What We Don't Say</span>
             <div class="slide slide-2">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">02 / 06</span>
+                    <div class="brand-header">SIGNALPILOT</div>
                     <div class="center-content">
                         <div class="honesty-box dont">
                             <h3>WHAT WE DON'T SAY</h3>
@@ -316,22 +409,17 @@
                             </ul>
                         </div>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">02 / 06</div>
             </div>
         </div>
 
-        <!-- Slide 3: What We Do Say -->
         <div class="slide-wrapper" data-slide="3">
-            <span class="slide-label">Slide 3 — What We Do Say</span>
+            <span class="slide-label">Slide 3 - What We Do Say</span>
             <div class="slide slide-3">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">03 / 06</span>
+                    <div class="brand-header">SIGNALPILOT</div>
                     <div class="center-content">
                         <div class="honesty-box do">
                             <h3>WHAT WE DO SAY</h3>
@@ -343,22 +431,17 @@
                             </ul>
                         </div>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">03 / 06</div>
             </div>
         </div>
 
-        <!-- Slide 4: The Truth -->
         <div class="slide-wrapper" data-slide="4">
-            <span class="slide-label">Slide 4 — The Truth</span>
+            <span class="slide-label">Slide 4 - The Truth</span>
             <div class="slide slide-4">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">04 / 06</span>
+                    <div class="brand-header">SIGNALPILOT</div>
                     <div class="center-content">
                         <div class="honesty-box truth">
                             <h3>THE TRUTH</h3>
@@ -370,22 +453,17 @@
                             </ul>
                         </div>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">04 / 06</div>
             </div>
         </div>
 
-        <!-- Slide 5: Our Role -->
         <div class="slide-wrapper" data-slide="5">
-            <span class="slide-label">Slide 5 — Our Role</span>
+            <span class="slide-label">Slide 5 - Our Role</span>
             <div class="slide slide-5">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">05 / 06</span>
+                    <div class="brand-header">SIGNALPILOT</div>
                     <div class="center-content">
                         <div class="honesty-box role">
                             <h3>OUR ROLE</h3>
@@ -397,86 +475,51 @@
                             </ul>
                         </div>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">05 / 06</div>
             </div>
         </div>
 
-        <!-- Slide 6: CTA -->
         <div class="slide-wrapper" data-slide="6">
-            <span class="slide-label">Slide 6 — CTA</span>
+            <span class="slide-label">Slide 6 - CTA</span>
             <div class="slide slide-6">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">06 / 06</span>
+                    <div class="brand-header">SIGNALPILOT</div>
                     <div class="center-content">
                         <h2 class="cta-title">Your Results Are<br><span class="emphasis">Up to You</span></h2>
                         <p class="cta-text">We provide tools, not magic.</p>
                         <p class="cta-text">Link in bio</p>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">06 / 06</div>
             </div>
         </div>
-
     </div>
 
     <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide-wrapper');
-        const totalSlides = slides.length;
-        let exportMode = false;
+        (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
+            let exportMode = false, currentSlide = 0;
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
 
-        function enterExportMode() {
-            exportMode = true;
-            document.body.classList.add('export-mode');
-            currentSlide = 0;
-            updateExportView();
-        }
+            function updateExportView() { slideWrappers.forEach((wrapper, index) => { wrapper.classList.toggle('exporting', index === currentSlide); }); }
 
-        function exitExportMode() {
-            exportMode = false;
-            document.body.classList.remove('export-mode');
-            slides.forEach(slide => slide.classList.remove('active'));
-        }
+            if (defined(bgToggle)) { bgToggle.addEventListener('change', (e) => { document.querySelectorAll('.video-background').forEach(bg => { bg.style.display = e.target.value === 'video' ? 'block' : 'none'; }); }); }
+            if (defined(opacityControl)) { opacityControl.addEventListener('change', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value); }); }
+            if (defined(exportBtn)) { exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode'; if (exportMode) { currentSlide = 0; updateExportView(); } }); }
 
-        function updateExportView() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { currentSlide = Math.min(currentSlide + 1, totalSlides - 1); updateExportView(); }
+                else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { currentSlide = Math.max(currentSlide - 1, 0); updateExportView(); }
+                else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
             });
-        }
-
-        function nextSlide() {
-            if (exportMode && currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateExportView();
-            }
-        }
-
-        function prevSlide() {
-            if (exportMode && currentSlide > 0) {
-                currentSlide--;
-                updateExportView();
-            }
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'e' || e.key === 'E') {
-                if (!exportMode) enterExportMode();
-            } else if (e.key === 'Escape') {
-                exitExportMode();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
-
-        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+        })();
     </script>
 </body>
 </html>
