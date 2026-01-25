@@ -4,481 +4,240 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post 480 — Keyboard Shortcuts Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #606070;
             --accent-blue: #4a90d9;
             --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
             --accent-green: #4ad97a;
             --accent-red: #d94a4a;
-            --accent-teal: #4ad9d9;
             --accent-purple: #9b4ad9;
-            --text-primary: #e8e6e3;
-            --text-secondary: #a9a6a2;
-            --text-muted: #6b6965;
+            --accent-teal: #4ad9d9;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { background-color: #000; min-height: 100vh; font-family: var(--font-sans); color: var(--text-primary); padding: 2rem; }
 
-        body {
-            background-color: #050507;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
+        .controls { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 1rem; background: var(--bg-card); padding: 0.75rem 1.5rem; border-radius: 9999px; border: 1px solid var(--border-subtle); }
+        .controls label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); }
+        .controls select { background: var(--bg-dark); color: var(--text-primary); border: 1px solid var(--border-subtle); border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.875rem; cursor: pointer; }
+        #export-btn { background: var(--accent-gold); color: var(--bg-dark); border: none; border-radius: 9999px; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        #export-btn:hover { filter: brightness(1.1); }
 
-        .carousel-container {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .page-title { text-align: center; margin: 5rem auto 3rem; }
+        .page-title h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .page-title p { font-size: 1rem; color: var(--text-muted); }
 
-        .slide-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
+        .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; justify-items: center; }
+        .slide-wrapper { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .slide-label { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
-        .slide-label {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        .slide { width: 100%; max-width: 540px; aspect-ratio: 1 / 1; background: var(--bg-dark); border-radius: 12px; position: relative; overflow: hidden; }
 
-        .slide {
-            width: 1080px;
-            height: 1080px;
-            background-color: var(--bg-dark);
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+        body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; border-radius: 0; }
+        body.export-mode .carousel-grid { display: block; }
+        body.export-mode .slide-wrapper { display: none; }
+        body.export-mode .slide-wrapper.exporting { display: flex; }
+        body.export-mode .slide-label { display: none; }
+        body.export-mode .page-title, body.export-mode .controls { display: none; }
 
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity); }
 
-        .slide-bg video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-        }
+        .slide-content { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(30px, 5.6vw, 60px); text-align: center; }
+        .slide-number { position: absolute; bottom: clamp(15px, 2.8vw, 30px); right: clamp(20px, 3.7vw, 40px); font-family: var(--font-sans); font-size: clamp(7px, 1.3vw, 14px); color: var(--text-secondary); opacity: 0.6; }
+        .brand-header { position: absolute; top: clamp(20px, 3.7vw, 40px); left: 0; right: 0; text-align: center; font-family: var(--font-serif); font-size: clamp(9px, 1.7vw, 18px); font-weight: 600; color: var(--accent-gold); letter-spacing: 3px; text-transform: uppercase; }
 
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            height: 100%;
-            padding: 72px;
-            display: flex;
-            flex-direction: column;
-        }
+        /* Slide 1 - Hook */
+        .slide-1 .title { font-family: var(--font-serif); font-size: clamp(28px, 5.2vw, 56px); font-weight: 600; line-height: 1.1; color: var(--text-primary); margin-bottom: clamp(12px, 2.2vw, 24px); }
+        .slide-1 .subtitle { font-family: var(--font-sans); font-size: clamp(13px, 2.4vw, 26px); font-weight: 400; color: var(--accent-teal); }
 
-        .slide-number {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            letter-spacing: 3px;
-            margin-bottom: auto;
-        }
+        /* Keyboard box styling */
+        .keyboard-box { background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%); border: 1px solid rgba(74, 217, 217, 0.3); border-radius: clamp(8px, 1.5vw, 16px); padding: clamp(22px, 4.1vw, 44px); width: 100%; max-width: 90%; }
+        .keyboard-box.chart { background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%); border-color: rgba(74, 144, 217, 0.3); }
+        .keyboard-box.drawing { background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%); border-color: rgba(201, 169, 98, 0.3); }
+        .keyboard-box.execution { background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%); border-color: rgba(74, 217, 122, 0.3); }
+        .keyboard-box.pro { background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%); border-color: rgba(155, 74, 217, 0.3); }
 
-        .brand-mark {
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 4px;
-            color: var(--text-muted);
-            margin-top: auto;
-            text-align: center;
-        }
+        .keyboard-box h3 { font-family: var(--font-serif); font-size: clamp(18px, 3.3vw, 36px); font-weight: 600; margin-bottom: clamp(14px, 2.6vw, 28px); }
+        .keyboard-box h3 { color: var(--accent-teal); }
+        .keyboard-box.chart h3 { color: var(--accent-blue); }
+        .keyboard-box.drawing h3 { color: var(--accent-gold); }
+        .keyboard-box.execution h3 { color: var(--accent-green); }
+        .keyboard-box.pro h3 { color: var(--accent-purple); }
 
-        h1.slide-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 58px;
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-        }
+        .feature-list { list-style: none; text-align: left; }
+        .feature-list li { font-family: var(--font-sans); font-size: clamp(10px, 1.9vw, 21px); color: var(--text-primary); padding: clamp(5px, 0.9vw, 10px) 0; padding-left: clamp(18px, 3.3vw, 36px); position: relative; }
+        .feature-list li::before { content: "→"; position: absolute; left: 0; }
+        .keyboard-box .feature-list li::before { color: var(--accent-teal); }
+        .keyboard-box.chart .feature-list li::before { color: var(--accent-blue); }
+        .keyboard-box.drawing .feature-list li::before { color: var(--accent-gold); }
+        .keyboard-box.execution .feature-list li::before { color: var(--accent-green); }
+        .keyboard-box.pro .feature-list li::before { color: var(--accent-purple); }
 
-        .subtitle {
-            font-size: 26px;
-            font-weight: 400;
-            color: var(--accent-teal);
-        }
-
-        .center-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .shortcut-box {
-            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
-            border: 1px solid rgba(74, 144, 217, 0.3);
-            border-radius: 16px;
-            padding: 44px;
-            width: 100%;
-            max-width: 750px;
-        }
-
-        .shortcut-box.timeframes {
-            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
-            border-color: rgba(74, 144, 217, 0.3);
-        }
-
-        .shortcut-box.drawing {
-            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
-            border-color: rgba(74, 217, 122, 0.3);
-        }
-
-        .shortcut-box.navigation {
-            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
-            border-color: rgba(201, 169, 98, 0.3);
-        }
-
-        .shortcut-box.protips {
-            background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%);
-            border-color: rgba(155, 74, 217, 0.3);
-        }
-
-        .shortcut-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 38px;
-            font-weight: 600;
-            margin-bottom: 28px;
-        }
-
-        .shortcut-box.timeframes h3 {
-            color: var(--accent-blue);
-        }
-
-        .shortcut-box.drawing h3 {
-            color: var(--accent-green);
-        }
-
-        .shortcut-box.navigation h3 {
-            color: var(--accent-gold);
-        }
-
-        .shortcut-box.protips h3 {
-            color: var(--accent-purple);
-        }
-
-        .feature-list {
-            list-style: none;
-            text-align: left;
-        }
-
-        .feature-list li {
-            font-size: 22px;
-            color: var(--text-primary);
-            padding: 10px 0;
-            padding-left: 36px;
-            position: relative;
-        }
-
-        .feature-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-        }
-
-        .shortcut-box.timeframes .feature-list li::before {
-            color: var(--accent-blue);
-        }
-
-        .shortcut-box.drawing .feature-list li::before {
-            color: var(--accent-green);
-        }
-
-        .shortcut-box.navigation .feature-list li::before {
-            color: var(--accent-gold);
-        }
-
-        .shortcut-box.protips .feature-list li::before {
-            color: var(--accent-purple);
-        }
-
-        .key-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            padding: 4px 10px;
-            font-family: 'Inter', monospace;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-right: 8px;
-        }
-
-        .cta-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 40px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .cta-text {
-            font-size: 24px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-
-        /* Export Mode */
-        body.export-mode {
-            padding: 0;
-            background: none;
-        }
-
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
-
-        body.export-mode .slide-wrapper {
-            display: none;
-        }
-
-        body.export-mode .slide-wrapper.active {
-            display: flex;
-        }
-
-        body.export-mode .slide-label {
-            display: none;
-        }
-
-        body.export-mode .slide {
-            border: none;
-        }
+        /* CTA styling */
+        .cta-title { font-family: var(--font-serif); font-size: clamp(21px, 3.9vw, 42px); font-weight: 600; color: var(--text-primary); margin-bottom: clamp(10px, 1.9vw, 20px); line-height: 1.3; }
+        .cta-title .emphasis { color: var(--accent-teal); }
+        .cta-text { font-family: var(--font-sans); font-size: clamp(12px, 2.2vw, 24px); color: var(--text-secondary); margin-bottom: clamp(4px, 0.7vw, 8px); }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
+    <div class="controls">
+        <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="solid">Solid</option></select></label>
+        <label>Opacity: <select id="opacity-control"><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.16">16%</option><option value="0.24">24%</option></select></label>
+        <button id="export-btn">Export Mode</button>
+    </div>
 
-        <!-- Slide 1: Hook -->
+    <div class="page-title">
+        <h1>Keyboard Shortcuts Guide</h1>
+        <p>6 slides · TradingView Tips</p>
+    </div>
+
+    <div class="carousel-grid">
         <div class="slide-wrapper" data-slide="1">
             <span class="slide-label">Slide 1 — Hook</span>
             <div class="slide slide-1">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">01 / 06</span>
-                    <div class="center-content">
-                        <h1 class="slide-title">KEYBOARD<br>SHORTCUTS GUIDE</h1>
-                        <p class="subtitle">Speed is an edge.</p>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
+                    <div class="brand-header">Signal Pilot</div>
+                    <h1 class="title">KEYBOARD<br>SHORTCUTS GUIDE</h1>
+                    <p class="subtitle">Speed up your workflow.</p>
                 </div>
+                <div class="slide-number">1 / 6</div>
             </div>
         </div>
 
-        <!-- Slide 2: Timeframes -->
         <div class="slide-wrapper" data-slide="2">
-            <span class="slide-label">Slide 2 — Timeframes</span>
+            <span class="slide-label">Slide 2 — Chart Navigation</span>
             <div class="slide slide-2">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">02 / 06</span>
-                    <div class="center-content">
-                        <div class="shortcut-box timeframes">
-                            <h3>TIMEFRAMES</h3>
-                            <ul class="feature-list">
-                                <li><span class="key-badge">1-9</span> Number keys for presets</li>
-                                <li>Quick switching without clicking</li>
-                                <li>Customize in settings</li>
-                            </ul>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="keyboard-box chart">
+                        <h3>CHART NAVIGATION</h3>
+                        <ul class="feature-list">
+                            <li>Alt + T → Trendline tool</li>
+                            <li>Alt + H → Horizontal line</li>
+                            <li>Alt + F → Fibonacci tool</li>
+                            <li>Ctrl + Z → Undo last action</li>
+                        </ul>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">2 / 6</div>
             </div>
         </div>
 
-        <!-- Slide 3: Drawing Tools -->
         <div class="slide-wrapper" data-slide="3">
             <span class="slide-label">Slide 3 — Drawing Tools</span>
             <div class="slide slide-3">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">03 / 06</span>
-                    <div class="center-content">
-                        <div class="shortcut-box drawing">
-                            <h3>DRAWING TOOLS</h3>
-                            <ul class="feature-list">
-                                <li><span class="key-badge">Alt+T</span> Trendline</li>
-                                <li><span class="key-badge">Alt+H</span> Horizontal line</li>
-                                <li><span class="key-badge">Alt+F</span> Fibonacci</li>
-                                <li>Speed up your markup</li>
-                            </ul>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="keyboard-box drawing">
+                        <h3>DRAWING TOOLS</h3>
+                        <ul class="feature-list">
+                            <li>Alt + V → Vertical line</li>
+                            <li>Alt + R → Rectangle</li>
+                            <li>Ctrl + Click → Multi-select</li>
+                            <li>Delete → Remove selected</li>
+                        </ul>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">3 / 6</div>
             </div>
         </div>
 
-        <!-- Slide 4: Navigation -->
         <div class="slide-wrapper" data-slide="4">
-            <span class="slide-label">Slide 4 — Navigation</span>
+            <span class="slide-label">Slide 4 — Trade Execution</span>
             <div class="slide slide-4">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">04 / 06</span>
-                    <div class="center-content">
-                        <div class="shortcut-box navigation">
-                            <h3>NAVIGATION</h3>
-                            <ul class="feature-list">
-                                <li><span class="key-badge">← →</span> Move chart</li>
-                                <li><span class="key-badge">+ -</span> Zoom in/out</li>
-                                <li><span class="key-badge">Home</span> Go to current</li>
-                                <li><span class="key-badge">Esc</span> Cancel action</li>
-                            </ul>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="keyboard-box execution">
+                        <h3>TRADE EXECUTION</h3>
+                        <ul class="feature-list">
+                            <li>Shift + B → Buy order</li>
+                            <li>Shift + S → Sell order</li>
+                            <li>Shift + T → Trading panel</li>
+                            <li>Esc → Cancel / Exit</li>
+                        </ul>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">4 / 6</div>
             </div>
         </div>
 
-        <!-- Slide 5: Pro Tips -->
         <div class="slide-wrapper" data-slide="5">
             <span class="slide-label">Slide 5 — Pro Tips</span>
             <div class="slide slide-5">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">05 / 06</span>
-                    <div class="center-content">
-                        <div class="shortcut-box protips">
-                            <h3>PRO TIPS</h3>
-                            <ul class="feature-list">
-                                <li><span class="key-badge">Alt+S</span> Screenshot</li>
-                                <li><span class="key-badge">Alt+W</span> Add to watchlist</li>
-                                <li>Set custom hotkeys for indicator visibility</li>
-                                <li>Practice until muscle memory</li>
-                            </ul>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="keyboard-box pro">
+                        <h3>PRO TIPS</h3>
+                        <ul class="feature-list">
+                            <li>Space → Toggle crosshair</li>
+                            <li>/ → Quick search symbols</li>
+                            <li>, → Change timeframes</li>
+                            <li>Customize in Settings</li>
+                        </ul>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">5 / 6</div>
             </div>
         </div>
 
-        <!-- Slide 6: CTA -->
         <div class="slide-wrapper" data-slide="6">
             <span class="slide-label">Slide 6 — CTA</span>
             <div class="slide slide-6">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">06 / 06</span>
-                    <div class="center-content">
-                        <h2 class="cta-title">Faster Workflow =<br>More Time for Analysis</h2>
-                        <p class="cta-text">Full guide in docs</p>
-                        <p class="cta-text">Link in bio</p>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
+                    <div class="brand-header">Signal Pilot</div>
+                    <h2 class="cta-title">Work Smarter,<br><span class="emphasis">Not Harder</span></h2>
+                    <p class="cta-text">Full shortcuts list in docs</p>
+                    <p class="cta-text">Link in bio</p>
                 </div>
+                <div class="slide-number">6 / 6</div>
             </div>
         </div>
-
     </div>
 
     <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide-wrapper');
-        const totalSlides = slides.length;
-        let exportMode = false;
+        (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
+            let exportMode = false, currentSlide = 0;
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
 
-        function enterExportMode() {
-            exportMode = true;
-            document.body.classList.add('export-mode');
-            currentSlide = 0;
-            updateExportView();
-        }
+            function updateExportView() { slideWrappers.forEach((wrapper, index) => { wrapper.classList.toggle('exporting', index === currentSlide); }); }
 
-        function exitExportMode() {
-            exportMode = false;
-            document.body.classList.remove('export-mode');
-            slides.forEach(slide => slide.classList.remove('active'));
-        }
+            if (defined(bgToggle)) { bgToggle.addEventListener('change', (e) => { document.querySelectorAll('.video-background').forEach(bg => { bg.style.display = e.target.value === 'video' ? 'block' : 'none'; }); }); }
+            if (defined(opacityControl)) { opacityControl.addEventListener('change', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value); }); }
+            if (defined(exportBtn)) { exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode'; if (exportMode) { currentSlide = 0; updateExportView(); } }); }
 
-        function updateExportView() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { currentSlide = Math.min(currentSlide + 1, totalSlides - 1); updateExportView(); }
+                else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { currentSlide = Math.max(currentSlide - 1, 0); updateExportView(); }
+                else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
             });
-        }
-
-        function nextSlide() {
-            if (exportMode && currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateExportView();
-            }
-        }
-
-        function prevSlide() {
-            if (exportMode && currentSlide > 0) {
-                currentSlide--;
-                updateExportView();
-            }
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'e' || e.key === 'E') {
-                if (!exportMode) enterExportMode();
-            } else if (e.key === 'Escape') {
-                exitExportMode();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
-
-        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+        })();
     </script>
 </body>
 </html>
