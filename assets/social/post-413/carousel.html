@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 413 — Building Trading Systems | Carousel Preview</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post 413 — Building Trading Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg-dark: #0a0a0f;
       --accent-blue: #4a90d9;
       --accent-gold: #c9a962;
+      --accent-red: #d94a4a;
       --accent-green: #4ad97a;
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.85);
+      --text-primary: #e8e8e8;
+      --text-secondary: #a0a0a0;
+      --text-dim: #6a6a6a;
+      --video-opacity: 0.08;
     }
 
     * {
@@ -24,594 +27,636 @@
     }
 
     body {
-      background: #111;
-      font-family: 'Inter', sans-serif;
-      color: var(--text-primary);
-      padding: 2rem;
-      min-height: 100vh;
-    }
-
-    .controls {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 1000;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-    }
-
-    .controls label {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .controls select,
-    .controls button {
       background: var(--bg-dark);
       color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: inherit;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px;
     }
 
+    /* === CONTROLS BAR === */
+    .controls-bar {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .control-group label {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .control-group select,
+    .control-group input[type="range"] {
+      font-size: 12px;
+      background: #1a1a24;
+      color: var(--text-primary);
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+    #export-btn {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 14px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* === PAGE TITLE === */
     .page-title {
       text-align: center;
-      margin-bottom: 2rem;
       font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: var(--text-dim);
+      margin-bottom: 32px;
     }
 
-    .page-title h1 {
-      font-size: 2rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-
-    .page-title p {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-    }
-
+    /* === CAROUSEL GRID === */
     .carousel-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+      gap: 32px;
+      justify-items: center;
       max-width: 1800px;
       margin: 0 auto;
-      padding-bottom: 4rem;
     }
 
+    /* === SLIDE WRAPPER === */
     .slide-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 8px;
     }
-
     .slide-label {
-      font-size: 0.75rem;
+      font-size: 12px;
+      color: var(--text-dim);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-gold);
-      margin-bottom: 0.75rem;
+      letter-spacing: 1px;
     }
 
+    /* === SLIDE BASE === */
     .slide {
+      position: relative;
       width: 100%;
       max-width: 540px;
       aspect-ratio: 1 / 1;
-      position: relative;
       overflow: hidden;
-      background: var(--bg-dark);
-      border-radius: 4px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .slide-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    .slide-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.08;
-    }
-
-    .slide.bg-black .slide-bg video {
-      opacity: 0;
-    }
-
-    .slide-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 10%;
-    }
-
-    .slide-number {
-      position: absolute;
-      top: 8%;
-      left: 10%;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      color: rgba(255, 255, 255, 0.4);
-    }
-
-    .brand-mark {
-      position: absolute;
-      bottom: 8%;
-      left: 10%;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.625rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      color: rgba(255, 255, 255, 0.3);
-      text-transform: uppercase;
-    }
-
-    .slide-1 .slide-content {
       align-items: center;
       text-align: center;
+      padding: clamp(24px, 4.44vw, 48px);
+      background: var(--bg-dark);
     }
 
-    .slide-1 .hook-main {
+    /* Background video */
+    .slide .bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: var(--video-opacity);
+      pointer-events: none;
+    }
+
+    /* Ensure content on top */
+    .slide > *:not(.bg-video) {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Slide number & brand */
+    .slide-number {
+      position: absolute;
+      top: clamp(12px, 2.22vw, 24px);
+      left: clamp(12px, 2.22vw, 24px);
+      font-size: clamp(9px, 1.67vw, 18px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      z-index: 2;
+    }
+    .brand-mark {
+      position: absolute;
+      bottom: clamp(12px, 2.22vw, 24px);
+      right: clamp(12px, 2.22vw, 24px);
+      font-size: clamp(7px, 1.3vw, 14px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      z-index: 2;
+    }
+
+    /* === TYPOGRAPHY === */
+    .slide-icon {
+      font-size: clamp(32px, 5.93vw, 64px);
+      margin-bottom: clamp(12px, 2.22vw, 24px);
+    }
+    .slide-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.75rem;
+      font-size: clamp(24px, 4.44vw, 48px);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: clamp(12px, 2.22vw, 24px);
+    }
+    .slide-body {
+      font-size: clamp(12px, 2.22vw, 24px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 80%;
+    }
+
+    /* === SLIDE 1: HOOK === */
+    .slide-1 {
+      text-align: center;
+    }
+    .hook-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 3.7vw, 40px);
       font-weight: 600;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--accent-gold);
-      margin-bottom: 1.5rem;
+      margin-bottom: clamp(12px, 2.22vw, 24px);
     }
-
-    .slide-1 .hook-sub {
+    .hook-sub {
       font-family: 'Inter', sans-serif;
-      font-size: 1.1rem;
+      font-size: clamp(11px, 2.04vw, 22px);
       font-weight: 300;
       color: var(--text-secondary);
       line-height: 1.6;
     }
 
-    .slide-content .header {
+    /* === CONTENT HEADER === */
+    .header {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
+      font-size: clamp(14px, 2.59vw, 28px);
       font-weight: 500;
       color: var(--accent-gold);
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
+      margin-bottom: clamp(12px, 2.22vw, 24px);
     }
 
-    .slide-content .text {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
-
-    .slide-content .text em {
-      font-style: italic;
-      color: var(--accent-gold);
-    }
-
+    /* === COMPONENT BOX === */
     .component-box {
+      width: 100%;
+      max-width: clamp(200px, 37.04vw, 400px);
       background: rgba(74, 144, 217, 0.1);
       border-left: 3px solid var(--accent-blue);
-      padding: 1.25rem;
-      margin-bottom: 1rem;
+      padding: clamp(12px, 2.22vw, 24px);
+      margin-bottom: clamp(8px, 1.48vw, 16px);
+      text-align: left;
     }
-
     .component-label {
       font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
+      font-size: clamp(8px, 1.48vw, 16px);
       font-weight: 600;
       color: var(--accent-blue);
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
+      margin-bottom: clamp(4px, 0.74vw, 8px);
     }
-
     .component-title {
       font-family: 'Inter', sans-serif;
-      font-size: 1.1rem;
+      font-size: clamp(11px, 2.04vw, 22px);
       font-weight: 400;
       color: var(--text-primary);
-      margin-bottom: 0.5rem;
+      margin-bottom: clamp(4px, 0.74vw, 8px);
     }
-
     .component-desc {
       font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
+      font-size: clamp(9px, 1.67vw, 18px);
       font-weight: 300;
       color: var(--text-secondary);
       line-height: 1.5;
     }
 
+    /* === TEST BOX === */
     .test-box {
+      width: 100%;
+      max-width: clamp(200px, 37.04vw, 400px);
       background: rgba(201, 169, 98, 0.1);
       border: 1px solid rgba(201, 169, 98, 0.3);
-      padding: 1.5rem;
+      padding: clamp(12px, 2.22vw, 24px);
       text-align: center;
-      margin-top: 1rem;
+      margin-top: clamp(8px, 1.48vw, 16px);
     }
-
     .test-question {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
+      font-size: clamp(11px, 2.04vw, 22px);
       font-style: italic;
       color: var(--text-primary);
-      margin-bottom: 1rem;
+      margin-bottom: clamp(8px, 1.48vw, 16px);
     }
-
     .test-answer {
       font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
+      font-size: clamp(9px, 1.67vw, 18px);
       font-weight: 300;
       color: var(--accent-gold);
     }
 
-    .slide-8 .slide-content {
-      align-items: center;
+    /* === SLIDE 8: CTA === */
+    .slide-8 {
       text-align: center;
     }
-
-    .slide-8 .cta-text {
+    .cta-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
+      font-size: clamp(18px, 3.33vw, 36px);
       font-weight: 500;
       color: var(--text-primary);
-      margin-bottom: 0.75rem;
+      margin-bottom: clamp(6px, 1.11vw, 12px);
     }
-
-    .slide-8 .cta-sub {
+    .cta-sub {
       font-family: 'Inter', sans-serif;
-      font-size: 1rem;
+      font-size: clamp(10px, 1.85vw, 20px);
       color: var(--text-secondary);
-      margin-bottom: 2rem;
+      margin-bottom: clamp(16px, 2.96vw, 32px);
     }
-
-    .slide-8 .cta-button {
+    .cta-button {
       display: inline-block;
-      padding: 1rem 2.5rem;
+      padding: clamp(8px, 1.48vw, 16px) clamp(16px, 2.96vw, 32px);
       border: 1px solid var(--accent-gold);
       color: var(--accent-gold);
       font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
+      font-size: clamp(8px, 1.48vw, 16px);
       font-weight: 400;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       text-decoration: none;
     }
-
-    .slide-8 .logo {
+    .logo {
       width: 50%;
-      max-width: 200px;
-      margin-top: 2rem;
+      max-width: clamp(100px, 18.52vw, 200px);
+      margin-top: clamp(16px, 2.96vw, 32px);
       opacity: 0.8;
     }
-
-    .slide-8 .link-hint {
+    .link-hint {
       font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
+      font-size: clamp(8px, 1.48vw, 16px);
       color: var(--text-secondary);
-      margin-top: 1.5rem;
+      margin-top: clamp(12px, 2.22vw, 24px);
     }
 
+    /* ============================================================
+       EXPORT MODE
+       ============================================================ */
     body.export-mode {
       padding: 0;
-      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      background: #000;
     }
-
-    body.export-mode .controls,
+    body.export-mode .controls-bar,
     body.export-mode .page-title,
     body.export-mode .slide-label {
       display: none;
     }
-
     body.export-mode .carousel-grid {
       display: block;
-      padding: 0;
+      max-width: none;
     }
-
     body.export-mode .slide-wrapper {
       display: none;
     }
-
     body.export-mode .slide-wrapper.active {
-      display: flex;
+      display: block;
     }
-
     body.export-mode .slide {
       width: 1080px;
       height: 1080px;
       max-width: none;
-      border-radius: 0;
-      box-shadow: none;
+      aspect-ratio: auto;
+    }
+    body.export-mode .slide-number {
+      top: 24px;
+      left: 24px;
+      font-size: 18px;
+    }
+    body.export-mode .brand-mark {
+      bottom: 24px;
+      right: 24px;
+      font-size: 14px;
+    }
+    body.export-mode .hook-main {
+      font-size: 40px;
+      margin-bottom: 24px;
+    }
+    body.export-mode .hook-sub {
+      font-size: 22px;
+    }
+    body.export-mode .header {
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+    body.export-mode .component-box {
+      max-width: 400px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    body.export-mode .component-label {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    body.export-mode .component-title {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    body.export-mode .component-desc {
+      font-size: 18px;
+    }
+    body.export-mode .test-box {
+      max-width: 400px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+    body.export-mode .test-question {
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+    body.export-mode .test-answer {
+      font-size: 18px;
+    }
+    body.export-mode .cta-text {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+    body.export-mode .cta-sub {
+      font-size: 20px;
+      margin-bottom: 32px;
+    }
+    body.export-mode .cta-button {
+      padding: 16px 32px;
+      font-size: 16px;
+    }
+    body.export-mode .logo {
+      max-width: 200px;
+      margin-top: 32px;
+    }
+    body.export-mode .link-hint {
+      font-size: 16px;
+      margin-top: 24px;
     }
 
-    @media (max-width: 900px) {
-      .carousel-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .controls {
-        position: static;
-        margin-bottom: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+    /* Export navigation */
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      z-index: 1000;
+    }
+    body.export-mode .export-nav {
+      display: flex;
+    }
+    .export-nav button {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .export-nav .slide-indicator {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div class="controls">
-    <label>Background:
-      <select id="bg-toggle">
+  <!-- ============ CONTROLS BAR ============ -->
+  <div class="controls-bar">
+    <div class="control-group">
+      <label for="bg-select">Background</label>
+      <select id="bg-select">
         <option value="starfield">Starfield</option>
-        <option value="black">Pure Black</option>
+        <option value="none">None</option>
       </select>
-    </label>
-    <label>Opacity:
-      <select id="opacity-control">
-        <option value="0.03">3%</option>
-        <option value="0.05">5%</option>
-        <option value="0.08" selected>8%</option>
-        <option value="0.12">12%</option>
-        <option value="0.15">15%</option>
-      </select>
-    </label>
+    </div>
+    <div class="control-group">
+      <label for="opacity-slider">Opacity</label>
+      <input type="range" id="opacity-slider" min="0" max="30" value="8" />
+    </div>
     <button id="export-btn">Export Mode</button>
   </div>
 
-  <div class="page-title">
-    <h1>Post 413 — Building Trading Systems</h1>
-    <p>Instagram Carousel • 8 Slides • 1080×1080px</p>
-  </div>
+  <div class="page-title">Post 413 — 8 Slides</div>
 
   <div class="carousel-grid">
-    <!-- Slide 1: Hook -->
+    <!-- SLIDE 1 — Hook -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Hook</span>
       <div class="slide slide-1">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <span class="slide-number">01 / 08</span>
-          <div class="hook-main">Building Trading Systems</div>
-          <p class="hook-sub">A strategy isn't a system.<br><br>Here's the difference.</p>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">01 / 08</span>
+        <div class="hook-main">Building Trading Systems</div>
+        <p class="hook-sub">A strategy isn't a system.<br><br>Here's the difference.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 2: Market Selection -->
+    <!-- SLIDE 2 — Market Selection -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — Market Selection</span>
       <div class="slide slide-2">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">02 / 08</span>
+        <p class="header">System Components</p>
+        <div class="component-box">
+          <div class="component-label">Market Selection</div>
+          <div class="component-title">What do you trade?</div>
+          <div class="component-desc">Why those markets? What's your edge in them?</div>
         </div>
-        <div class="slide-content">
-          <span class="slide-number">02 / 08</span>
-          <p class="header">System Components</p>
-          <div class="component-box">
-            <div class="component-label">Market Selection</div>
-            <div class="component-title">What do you trade?</div>
-            <div class="component-desc">Why those markets? What's your edge in them?</div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 3: Timeframe & Entry -->
+    <!-- SLIDE 3 — Timeframe & Entry -->
     <div class="slide-wrapper" data-slide="3">
       <span class="slide-label">Slide 3 — Timeframe & Entry</span>
       <div class="slide slide-3">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">03 / 08</span>
+        <div class="component-box">
+          <div class="component-label">Timeframe Rules</div>
+          <div class="component-desc">What timeframes? How do they interact?</div>
         </div>
-        <div class="slide-content">
-          <span class="slide-number">03 / 08</span>
-          <div class="component-box">
-            <div class="component-label">Timeframe Rules</div>
-            <div class="component-desc">What timeframes? How do they interact?</div>
-          </div>
-          <div class="component-box">
-            <div class="component-label">Entry Rules</div>
-            <div class="component-desc">Specific, repeatable criteria. No ambiguity.</div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
+        <div class="component-box">
+          <div class="component-label">Entry Rules</div>
+          <div class="component-desc">Specific, repeatable criteria. No ambiguity.</div>
         </div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 4: Exit Rules -->
+    <!-- SLIDE 4 — Exit Rules -->
     <div class="slide-wrapper" data-slide="4">
       <span class="slide-label">Slide 4 — Exit Rules</span>
       <div class="slide slide-4">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">04 / 08</span>
+        <div class="component-box">
+          <div class="component-label">Exit Rules</div>
+          <div class="component-title">Define every exit scenario</div>
+          <div class="component-desc">Stop loss placement<br>Take profit levels<br>Trailing rules</div>
         </div>
-        <div class="slide-content">
-          <span class="slide-number">04 / 08</span>
-          <div class="component-box">
-            <div class="component-label">Exit Rules</div>
-            <div class="component-title">Define every exit scenario</div>
-            <div class="component-desc">Stop loss placement<br>Take profit levels<br>Trailing rules</div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 5: Position & Filter -->
+    <!-- SLIDE 5 — Position & Filter -->
     <div class="slide-wrapper" data-slide="5">
       <span class="slide-label">Slide 5 — Position & Filter</span>
       <div class="slide slide-5">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">05 / 08</span>
+        <div class="component-box">
+          <div class="component-label">Position Sizing</div>
+          <div class="component-desc">How much per trade? Based on what calculation?</div>
         </div>
-        <div class="slide-content">
-          <span class="slide-number">05 / 08</span>
-          <div class="component-box">
-            <div class="component-label">Position Sizing</div>
-            <div class="component-desc">How much per trade? Based on what calculation?</div>
-          </div>
-          <div class="component-box">
-            <div class="component-label">Filter Rules</div>
-            <div class="component-desc">When NOT to trade. News events? Market conditions?</div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
+        <div class="component-box">
+          <div class="component-label">Filter Rules</div>
+          <div class="component-desc">When NOT to trade. News events? Market conditions?</div>
         </div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 6: Management -->
+    <!-- SLIDE 6 — Management -->
     <div class="slide-wrapper" data-slide="6">
       <span class="slide-label">Slide 6 — Management</span>
       <div class="slide slide-6">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">06 / 08</span>
+        <div class="component-box">
+          <div class="component-label">Management Rules</div>
+          <div class="component-title">In-trade decisions</div>
+          <div class="component-desc">Breakeven moves<br>Partials<br>Adding to positions?</div>
         </div>
-        <div class="slide-content">
-          <span class="slide-number">06 / 08</span>
-          <div class="component-box">
-            <div class="component-label">Management Rules</div>
-            <div class="component-title">In-trade decisions</div>
-            <div class="component-desc">Breakeven moves<br>Partials<br>Adding to positions?</div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 7: The Test -->
+    <!-- SLIDE 7 — The Test -->
     <div class="slide-wrapper" data-slide="7">
       <span class="slide-label">Slide 7 — The Test</span>
       <div class="slide slide-7">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">07 / 08</span>
+        <p class="header">The Test</p>
+        <div class="test-box">
+          <div class="test-question">"Can someone else execute your system without asking questions?"</div>
+          <div class="test-answer">If no → it's not complete yet.</div>
         </div>
-        <div class="slide-content">
-          <span class="slide-number">07 / 08</span>
-          <p class="header">The Test</p>
-          <div class="test-box">
-            <div class="test-question">"Can someone else execute your system without asking questions?"</div>
-            <div class="test-answer">If no → it's not complete yet.</div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 8: CTA -->
+    <!-- SLIDE 8 — CTA -->
     <div class="slide-wrapper" data-slide="8">
       <span class="slide-label">Slide 8 — CTA</span>
       <div class="slide slide-8">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <span class="slide-number">08 / 08</span>
-          <p class="cta-text">Full System Building Guide</p>
-          <p class="cta-sub">Complete article with templates.</p>
-          <a href="#" class="cta-button">Read Article</a>
-          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
-          <p class="link-hint">Link in bio</p>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4" />
+        </video>
+        <span class="slide-number">08 / 08</span>
+        <p class="cta-text">Full System Building Guide</p>
+        <p class="cta-sub">Complete article with templates.</p>
+        <a href="#" class="cta-button">Read Article</a>
+        <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo" />
+        <p class="link-hint">Link in bio</p>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
   </div>
 
+  <!-- Export navigation (visible only in export mode) -->
+  <div class="export-nav">
+    <button id="prev-btn">← Previous</button>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
+    <button id="next-btn">Next →</button>
+  </div>
+
   <script>
-    const bgToggle = document.getElementById('bg-toggle');
-    const opacityControl = document.getElementById('opacity-control');
-    const slides = document.querySelectorAll('.slide');
-    const videos = document.querySelectorAll('.slide-bg video');
-
-    bgToggle.addEventListener('change', (e) => {
-      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
-    });
-
-    opacityControl.addEventListener('change', (e) => {
-      videos.forEach(video => video.style.opacity = e.target.value);
-    });
-
+    const bgSelect = document.getElementById('bg-select');
+    const opacitySlider = document.getElementById('opacity-slider');
     const exportBtn = document.getElementById('export-btn');
+    const videos = document.querySelectorAll('.bg-video');
     const slideWrappers = document.querySelectorAll('.slide-wrapper');
-    let exportMode = false;
-    let currentExportSlide = 0;
+    const totalSlides = slideWrappers.length;
+    let currentSlide = 0;
 
-    exportBtn.addEventListener('click', () => {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) {
-        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
-        currentExportSlide = 0;
-        updateExportSlide();
-      } else {
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
+    bgSelect.addEventListener('change', (e) => {
+      const show = e.target.value === 'starfield';
+      videos.forEach(v => v.style.display = show ? 'block' : 'none');
     });
 
-    function updateExportSlide() {
-      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
+    opacitySlider.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
+    });
+
+    exportBtn.addEventListener('click', toggleExportMode);
+    document.getElementById('prev-btn').addEventListener('click', prevSlide);
+    document.getElementById('next-btn').addEventListener('click', nextSlide);
+
+    function toggleExportMode() {
+      document.body.classList.toggle('export-mode');
+      if (document.body.classList.contains('export-mode')) {
+        currentSlide = 0;
+        updateExportView();
+      }
+    }
+
+    function updateExportView() {
+      slideWrappers.forEach((sw, i) => sw.classList.toggle('active', i === currentSlide));
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateExportView();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateExportView();
     }
 
     document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'ArrowLeft') {
-        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'Escape') {
-        exportMode = false;
-        document.body.classList.remove('export-mode');
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
+      if (!document.body.classList.contains('export-mode')) return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') toggleExportMode();
     });
   </script>
 </body>
