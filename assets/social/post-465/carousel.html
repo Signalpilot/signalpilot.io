@@ -3,491 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 465 — Plutus Flow Divergence Demo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Post 465 - Plutus Flow Divergence Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #606070;
             --accent-blue: #4a90d9;
             --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
             --accent-green: #4ad97a;
             --accent-red: #d94a4a;
-            --accent-teal: #4ad9d9;
-            --accent-purple: #9b4ad9;
-            --text-primary: #e8e6e3;
-            --text-secondary: #a9a6a2;
-            --text-muted: #6b6965;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { background-color: #000; min-height: 100vh; font-family: var(--font-sans); color: var(--text-primary); padding: 2rem; }
 
-        body {
-            background-color: #050507;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
+        .controls { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 1rem; background: var(--bg-card); padding: 0.75rem 1.5rem; border-radius: 9999px; border: 1px solid var(--border-subtle); }
+        .controls label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); }
+        .controls select { background: var(--bg-dark); color: var(--text-primary); border: 1px solid var(--border-subtle); border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.875rem; cursor: pointer; }
+        #export-btn { background: var(--accent-gold); color: var(--bg-dark); border: none; border-radius: 9999px; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        #export-btn:hover { filter: brightness(1.1); }
 
-        .carousel-container {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .page-title { text-align: center; margin: 5rem auto 3rem; }
+        .page-title h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .page-title p { font-size: 1rem; color: var(--text-muted); }
 
-        .slide-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
+        .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; justify-items: center; }
+        .slide-wrapper { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .slide-label { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
-        .slide-label {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        .slide { width: 100%; max-width: 540px; aspect-ratio: 1 / 1; background: var(--bg-dark); border-radius: 12px; position: relative; overflow: hidden; }
 
-        .slide {
-            width: 1080px;
-            height: 1080px;
-            background-color: var(--bg-dark);
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+        body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; border-radius: 0; }
+        body.export-mode .carousel-grid { display: block; }
+        body.export-mode .slide-wrapper { display: none; }
+        body.export-mode .slide-wrapper.exporting { display: flex; }
+        body.export-mode .slide-label { display: none; }
+        body.export-mode .page-title, body.export-mode .controls { display: none; }
 
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity); }
 
-        .slide-bg video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-        }
+        .slide-content { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(30px, 5.6vw, 60px); text-align: center; }
+        .slide-number { position: absolute; bottom: clamp(15px, 2.8vw, 30px); right: clamp(20px, 3.7vw, 40px); font-family: var(--font-sans); font-size: clamp(7px, 1.3vw, 14px); color: var(--text-secondary); opacity: 0.6; }
+        .brand-header { position: absolute; top: clamp(20px, 3.7vw, 40px); left: 0; right: 0; text-align: center; font-family: var(--font-serif); font-size: clamp(9px, 1.7vw, 18px); font-weight: 600; color: var(--accent-gold); letter-spacing: 3px; text-transform: uppercase; }
 
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            height: 100%;
-            padding: 72px;
-            display: flex;
-            flex-direction: column;
-        }
+        .slide-1 h1 { font-family: var(--font-serif); font-size: clamp(26px, 4.8vw, 52px); font-weight: 600; color: var(--text-primary); line-height: 1.1; margin-bottom: clamp(12px, 2.2vw, 24px); }
+        .slide-1 h1 .product-name { color: var(--accent-gold); }
+        .slide-1 .subtitle { font-family: var(--font-sans); font-size: clamp(13px, 2.4vw, 26px); font-weight: 400; color: var(--accent-blue); }
 
-        .slide-number {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            letter-spacing: 3px;
-            margin-bottom: auto;
-        }
+        .content-box { border-radius: clamp(8px, 1.5vw, 16px); padding: clamp(22px, 4.1vw, 44px); width: 100%; max-width: clamp(375px, 69.4vw, 750px); }
+        .content-box h3 { font-family: var(--font-serif); font-size: clamp(19px, 3.5vw, 38px); font-weight: 600; margin-bottom: clamp(14px, 2.6vw, 28px); }
+        .content-box ul { list-style: none; text-align: left; }
+        .content-box li { font-family: var(--font-sans); font-size: clamp(11px, 2vw, 22px); color: var(--text-primary); padding: clamp(5px, 0.9vw, 10px) 0; padding-left: clamp(18px, 3.3vw, 36px); position: relative; }
+        .content-box li::before { content: "→"; position: absolute; left: 0; }
 
-        .brand-mark {
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 4px;
-            color: var(--text-muted);
-            margin-top: auto;
-            text-align: center;
-        }
+        .bearish-box { background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%); border: 1px solid rgba(217, 74, 74, 0.3); }
+        .bearish-box h3 { color: var(--accent-red); }
+        .bearish-box li::before { color: var(--accent-red); }
 
-        h1.slide-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 58px;
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-        }
+        .bullish-box { background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%); border: 1px solid rgba(74, 217, 122, 0.3); }
+        .bullish-box h3 { color: var(--accent-green); }
+        .bullish-box li::before { color: var(--accent-green); }
 
-        .slide-title .product-name {
-            color: var(--accent-gold);
-        }
+        .visual-placeholder { background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.02) 100%); border: 2px dashed rgba(201, 169, 98, 0.3); border-radius: clamp(8px, 1.5vw, 16px); padding: clamp(40px, 7.4vw, 80px) clamp(20px, 3.7vw, 40px); width: 100%; max-width: clamp(400px, 74.1vw, 800px); text-align: center; }
+        .visual-placeholder.bearish { background: linear-gradient(135deg, rgba(217, 74, 74, 0.1) 0%, rgba(217, 74, 74, 0.02) 100%); border-color: rgba(217, 74, 74, 0.3); }
+        .visual-placeholder.bullish { background: linear-gradient(135deg, rgba(74, 217, 122, 0.1) 0%, rgba(74, 217, 122, 0.02) 100%); border-color: rgba(74, 217, 122, 0.3); }
+        .visual-placeholder p { font-size: clamp(10px, 1.9vw, 20px); color: var(--text-muted); margin-bottom: clamp(8px, 1.5vw, 16px); }
+        .visual-placeholder .visual-note { font-size: clamp(9px, 1.7vw, 18px); font-style: italic; }
+        .visual-placeholder.bearish .visual-note { color: var(--accent-red); }
+        .visual-placeholder.bullish .visual-note { color: var(--accent-green); }
 
-        .subtitle {
-            font-size: 26px;
-            font-weight: 400;
-            color: var(--accent-blue);
-        }
-
-        .center-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .divergence-box {
-            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
-            border: 1px solid rgba(217, 74, 74, 0.3);
-            border-radius: 16px;
-            padding: 44px;
-            width: 100%;
-            max-width: 750px;
-        }
-
-        .divergence-box.bearish {
-            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
-            border-color: rgba(217, 74, 74, 0.3);
-        }
-
-        .divergence-box.bullish {
-            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
-            border-color: rgba(74, 217, 122, 0.3);
-        }
-
-        .divergence-box.interpret {
-            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
-            border-color: rgba(201, 169, 98, 0.3);
-        }
-
-        .divergence-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 38px;
-            font-weight: 600;
-            margin-bottom: 28px;
-        }
-
-        .divergence-box.bearish h3 {
-            color: var(--accent-red);
-        }
-
-        .divergence-box.bullish h3 {
-            color: var(--accent-green);
-        }
-
-        .divergence-box.interpret h3 {
-            color: var(--accent-gold);
-        }
-
-        .feature-list {
-            list-style: none;
-            text-align: left;
-        }
-
-        .feature-list li {
-            font-size: 22px;
-            color: var(--text-primary);
-            padding: 10px 0;
-            padding-left: 36px;
-            position: relative;
-        }
-
-        .feature-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-        }
-
-        .divergence-box.bearish .feature-list li::before {
-            color: var(--accent-red);
-        }
-
-        .divergence-box.bullish .feature-list li::before {
-            color: var(--accent-green);
-        }
-
-        .divergence-box.interpret .feature-list li::before {
-            color: var(--accent-gold);
-        }
-
-        .visual-placeholder {
-            background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.02) 100%);
-            border: 2px dashed rgba(201, 169, 98, 0.3);
-            border-radius: 16px;
-            padding: 80px 40px;
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-        }
-
-        .visual-placeholder.bearish {
-            background: linear-gradient(135deg, rgba(217, 74, 74, 0.1) 0%, rgba(217, 74, 74, 0.02) 100%);
-            border-color: rgba(217, 74, 74, 0.3);
-        }
-
-        .visual-placeholder.bullish {
-            background: linear-gradient(135deg, rgba(74, 217, 122, 0.1) 0%, rgba(74, 217, 122, 0.02) 100%);
-            border-color: rgba(74, 217, 122, 0.3);
-        }
-
-        .visual-placeholder p {
-            font-size: 20px;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        .visual-placeholder .visual-note {
-            font-size: 18px;
-            font-style: italic;
-        }
-
-        .visual-placeholder.bearish .visual-note {
-            color: var(--accent-red);
-        }
-
-        .visual-placeholder.bullish .visual-note {
-            color: var(--accent-green);
-        }
-
-        .cta-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 44px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .cta-text {
-            font-size: 24px;
-            color: var(--text-secondary);
-        }
-
-        /* Export Mode */
-        body.export-mode {
-            padding: 0;
-            background: none;
-        }
-
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
-
-        body.export-mode .slide-wrapper {
-            display: none;
-        }
-
-        body.export-mode .slide-wrapper.active {
-            display: flex;
-        }
-
-        body.export-mode .slide-label {
-            display: none;
-        }
-
-        body.export-mode .slide {
-            border: none;
-        }
+        .cta-title { font-family: var(--font-serif); font-size: clamp(22px, 4.1vw, 44px); font-weight: 600; color: var(--text-primary); margin-bottom: clamp(10px, 1.9vw, 20px); line-height: 1.3; }
+        .cta-text { font-family: var(--font-sans); font-size: clamp(12px, 2.2vw, 24px); color: var(--text-secondary); }
     </style>
 </head>
 <body>
-    <div class="carousel-container">
+    <div class="controls">
+        <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="solid">Solid</option></select></label>
+        <label>Opacity: <select id="opacity-control"><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.16">16%</option><option value="0.24">24%</option></select></label>
+        <button id="export-btn">Export Mode</button>
+    </div>
 
-        <!-- Slide 1: Hook -->
+    <div class="page-title">
+        <h1>Plutus Flow Divergence Demo</h1>
+        <p>6 slides · Feature Demo</p>
+    </div>
+
+    <div class="carousel-grid">
         <div class="slide-wrapper" data-slide="1">
             <span class="slide-label">Slide 1 — Hook</span>
             <div class="slide slide-1">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">01 / 06</span>
-                    <div class="center-content">
-                        <h1 class="slide-title"><span class="product-name">PLUTUS FLOW</span><br>DIVERGENCE</h1>
-                        <p class="subtitle">When price and flow tell different stories.</p>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
+                    <div class="brand-header">Signal Pilot</div>
+                    <h1><span class="product-name">PLUTUS FLOW</span><br>DIVERGENCE</h1>
+                    <p class="subtitle">When price and flow tell different stories.</p>
                 </div>
+                <div class="slide-number">1 / 6</div>
             </div>
         </div>
 
-        <!-- Slide 2: Bearish Divergence -->
         <div class="slide-wrapper" data-slide="2">
             <span class="slide-label">Slide 2 — Bearish Divergence</span>
             <div class="slide slide-2">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">02 / 06</span>
-                    <div class="center-content">
-                        <div class="divergence-box bearish">
-                            <h3>BEARISH DIVERGENCE</h3>
-                            <ul class="feature-list">
-                                <li>Price makes higher high</li>
-                                <li>Plutus Flow makes lower high</li>
-                                <li>Flow not confirming the rally</li>
-                                <li>Suggests weakening momentum</li>
-                            </ul>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-box bearish-box">
+                        <h3>BEARISH DIVERGENCE</h3>
+                        <ul>
+                            <li>Price makes higher high</li>
+                            <li>Plutus Flow makes lower high</li>
+                            <li>Flow not confirming the rally</li>
+                            <li>Suggests weakening momentum</li>
+                        </ul>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">2 / 6</div>
             </div>
         </div>
 
-        <!-- Slide 3: Bearish Visual -->
         <div class="slide-wrapper" data-slide="3">
             <span class="slide-label">Slide 3 — Bearish Visual</span>
             <div class="slide slide-3">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">03 / 06</span>
-                    <div class="center-content">
-                        <div class="visual-placeholder bearish">
-                            <p>[TradingView Chart]</p>
-                            <p>Price making HH while Plutus Flow makes LH</p>
-                            <span class="visual-note">Early warning of potential reversal</span>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="visual-placeholder bearish">
+                        <p>[TradingView Chart]</p>
+                        <p>Price making HH while Plutus Flow makes LH</p>
+                        <span class="visual-note">Early warning of potential reversal</span>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">3 / 6</div>
             </div>
         </div>
 
-        <!-- Slide 4: Bullish Divergence -->
         <div class="slide-wrapper" data-slide="4">
             <span class="slide-label">Slide 4 — Bullish Divergence</span>
             <div class="slide slide-4">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">04 / 06</span>
-                    <div class="center-content">
-                        <div class="divergence-box bullish">
-                            <h3>BULLISH DIVERGENCE</h3>
-                            <ul class="feature-list">
-                                <li>Price makes lower low</li>
-                                <li>Plutus Flow makes higher low</li>
-                                <li>Accumulation despite price drop</li>
-                                <li>Suggests building strength</li>
-                            </ul>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-box bullish-box">
+                        <h3>BULLISH DIVERGENCE</h3>
+                        <ul>
+                            <li>Price makes lower low</li>
+                            <li>Plutus Flow makes higher low</li>
+                            <li>Accumulation despite price drop</li>
+                            <li>Suggests building strength</li>
+                        </ul>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">4 / 6</div>
             </div>
         </div>
 
-        <!-- Slide 5: Bullish Visual -->
         <div class="slide-wrapper" data-slide="5">
             <span class="slide-label">Slide 5 — Bullish Visual</span>
             <div class="slide slide-5">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">05 / 06</span>
-                    <div class="center-content">
-                        <div class="visual-placeholder bullish">
-                            <p>[TradingView Chart]</p>
-                            <p>Price making LL while Plutus Flow makes HL</p>
-                            <span class="visual-note">Hidden strength revealed</span>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="visual-placeholder bullish">
+                        <p>[TradingView Chart]</p>
+                        <p>Price making LL while Plutus Flow makes HL</p>
+                        <span class="visual-note">Hidden strength revealed</span>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">5 / 6</div>
             </div>
         </div>
 
-        <!-- Slide 6: CTA -->
         <div class="slide-wrapper" data-slide="6">
             <span class="slide-label">Slide 6 — CTA</span>
             <div class="slide slide-6">
-                <div class="slide-bg">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">06 / 06</span>
-                    <div class="center-content">
-                        <h2 class="cta-title">Context + Divergence<br>= Better Reads</h2>
-                        <p class="cta-text">Link in bio</p>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
+                    <div class="brand-header">Signal Pilot</div>
+                    <h2 class="cta-title">Context + Divergence<br>= Better Reads</h2>
+                    <p class="cta-text">Link in bio</p>
                 </div>
+                <div class="slide-number">6 / 6</div>
             </div>
         </div>
-
     </div>
 
     <script>
-        // Export mode functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide-wrapper');
-        const totalSlides = slides.length;
-        let exportMode = false;
+        (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
+            let exportMode = false, currentSlide = 0;
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
 
-        function enterExportMode() {
-            exportMode = true;
-            document.body.classList.add('export-mode');
-            currentSlide = 0;
-            updateExportView();
-        }
+            function updateExportView() { slideWrappers.forEach((wrapper, index) => { wrapper.classList.toggle('exporting', index === currentSlide); }); }
 
-        function exitExportMode() {
-            exportMode = false;
-            document.body.classList.remove('export-mode');
-            slides.forEach(slide => slide.classList.remove('active'));
-        }
+            if (defined(bgToggle)) { bgToggle.addEventListener('change', (e) => { document.querySelectorAll('.video-background').forEach(bg => { bg.style.display = e.target.value === 'video' ? 'block' : 'none'; }); }); }
+            if (defined(opacityControl)) { opacityControl.addEventListener('change', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value); }); }
+            if (defined(exportBtn)) { exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode'; if (exportMode) { currentSlide = 0; updateExportView(); } }); }
 
-        function updateExportView() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { currentSlide = Math.min(currentSlide + 1, totalSlides - 1); updateExportView(); }
+                else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { currentSlide = Math.max(currentSlide - 1, 0); updateExportView(); }
+                else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
             });
-        }
-
-        function nextSlide() {
-            if (exportMode && currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateExportView();
-            }
-        }
-
-        function prevSlide() {
-            if (exportMode && currentSlide > 0) {
-                currentSlide--;
-                updateExportView();
-            }
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'e' || e.key === 'E') {
-                if (!exportMode) enterExportMode();
-            } else if (e.key === 'Escape') {
-                exitExportMode();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
-
-        console.log('Press E to enter export mode, Escape to exit, Arrow keys to navigate');
+        })();
     </script>
 </body>
 </html>
