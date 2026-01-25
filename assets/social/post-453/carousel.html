@@ -4,816 +4,265 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post 453 — The Danger of Hindsight Analysis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #606070;
             --accent-blue: #4a90d9;
             --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
             --accent-green: #4ad97a;
             --accent-red: #d94a4a;
-            --accent-teal: #4ad9d9;
             --accent-orange: #d9884a;
-            --text-primary: #e8e6e3;
-            --text-secondary: #a9a6a2;
-            --text-muted: #6b6965;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { background-color: #000; min-height: 100vh; font-family: var(--font-sans); color: var(--text-primary); padding: 2rem; }
 
-        body {
-            background-color: #050507;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            padding: clamp(16px, 4vw, 40px) clamp(12px, 3vw, 20px);
-            min-height: 100vh;
-        }
+        .controls { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 1rem; background: var(--bg-card); padding: 0.75rem 1.5rem; border-radius: 9999px; border: 1px solid var(--border-subtle); }
+        .controls label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); }
+        .controls select { background: var(--bg-dark); color: var(--text-primary); border: 1px solid var(--border-subtle); border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.875rem; cursor: pointer; }
+        #export-btn { background: var(--accent-gold); color: var(--bg-dark); border: none; border-radius: 9999px; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        #export-btn:hover { filter: brightness(1.1); }
 
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: clamp(8px, 2vw, 16px);
-            margin-bottom: clamp(16px, 4vw, 32px);
-            flex-wrap: wrap;
-        }
+        .page-title { text-align: center; margin: 5rem auto 3rem; }
+        .page-title h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .page-title p { font-size: 1rem; color: var(--text-muted); }
 
-        .controls button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-primary);
-            padding: clamp(6px, 1.5vw, 10px) clamp(12px, 2.5vw, 20px);
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: clamp(11px, 1.4vw, 14px);
-            font-family: 'Inter', sans-serif;
-            transition: all 0.2s ease;
-        }
+        .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; justify-items: center; }
+        .slide-wrapper { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .slide-label { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
-        .controls button:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+        .slide { width: 100%; max-width: 540px; aspect-ratio: 1 / 1; background: var(--bg-dark); border-radius: 12px; position: relative; overflow: hidden; }
 
-        .controls button.active {
-            background: rgba(201, 169, 98, 0.3);
-            border-color: var(--accent-gold);
-        }
+        body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; border-radius: 0; }
+        body.export-mode .carousel-grid { display: block; }
+        body.export-mode .slide-wrapper { display: none; }
+        body.export-mode .slide-wrapper.exporting { display: flex; }
+        body.export-mode .slide-label { display: none; }
+        body.export-mode .page-title, body.export-mode .controls { display: none; }
 
-        .page-title {
-            text-align: center;
-            margin-bottom: clamp(24px, 5vw, 48px);
-        }
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity); }
 
-        .page-title h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(24px, 5vw, 42px);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: clamp(6px, 1.5vw, 12px);
-        }
+        .slide-content { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(30px, 5.6vw, 60px); text-align: center; }
+        .slide-number { position: absolute; bottom: clamp(15px, 2.8vw, 30px); right: clamp(20px, 3.7vw, 40px); font-family: var(--font-sans); font-size: clamp(7px, 1.3vw, 14px); color: var(--text-secondary); opacity: 0.6; }
+        .brand-header { position: absolute; top: clamp(20px, 3.7vw, 40px); left: 0; right: 0; text-align: center; font-family: var(--font-serif); font-size: clamp(9px, 1.7vw, 18px); font-weight: 600; color: var(--accent-gold); letter-spacing: 3px; text-transform: uppercase; }
 
-        .page-title p {
-            font-size: clamp(12px, 2vw, 16px);
-            color: var(--text-muted);
-        }
-
-        .carousel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
-            gap: clamp(24px, 5vw, 60px);
-            max-width: 2400px;
-            margin: 0 auto;
-        }
-
-        .slide-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(8px, 2vw, 16px);
-        }
-
-        .slide-label {
-            font-size: clamp(10px, 1.3vw, 14px);
-            font-weight: 500;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: clamp(1px, 0.2vw, 2px);
-        }
-
-        .slide {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            max-width: 1080px;
-            background-color: var(--bg-dark);
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .video-background video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: var(--video-opacity, 0.08);
-        }
-
-        .video-background.hidden video {
-            opacity: 0;
-        }
-
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            height: 100%;
-            padding: clamp(24px, 6.67%, 72px);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .slide-number {
-            font-size: clamp(8px, 1.3vw, 14px);
-            font-weight: 500;
-            color: var(--text-muted);
-            letter-spacing: clamp(1px, 0.3vw, 3px);
-            margin-bottom: auto;
-        }
-
-        .brand-mark {
-            font-size: clamp(8px, 1.2vw, 13px);
-            font-weight: 600;
-            letter-spacing: clamp(2px, 0.4vw, 4px);
-            color: var(--text-muted);
-            margin-top: auto;
-            text-align: center;
-        }
-
-        h1.slide-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(26px, 4.8vw, 52px);
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--text-primary);
-            margin-bottom: clamp(12px, 2.2vw, 24px);
-        }
-
-        .subtitle {
-            font-size: clamp(13px, 2.2vw, 24px);
-            font-weight: 400;
-            color: var(--accent-orange);
-        }
-
-        .center-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+        /* Slide 1 - Hook */
+        .slide-1 .title { font-family: var(--font-serif); font-size: clamp(26px, 4.8vw, 52px); font-weight: 600; line-height: 1.1; color: var(--text-primary); margin-bottom: clamp(12px, 2.2vw, 24px); }
+        .slide-1 .subtitle { font-family: var(--font-sans); font-size: clamp(13px, 2.4vw, 26px); font-weight: 400; color: var(--accent-orange); }
 
         /* Trap Box - Red */
-        .trap-box {
-            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
-            border: 1px solid rgba(217, 74, 74, 0.3);
-            border-radius: clamp(8px, 1.5vw, 16px);
-            padding: clamp(20px, 4vw, 44px);
-            width: 100%;
-            max-width: clamp(300px, 70%, 750px);
-        }
-
-        .trap-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(22px, 3.9vw, 42px);
-            font-weight: 600;
-            color: var(--accent-red);
-            margin-bottom: clamp(14px, 2.6vw, 28px);
-        }
-
-        .trap-list {
-            list-style: none;
-            text-align: left;
-        }
-
-        .trap-list li {
-            font-size: clamp(13px, 2.2vw, 24px);
-            color: var(--text-primary);
-            padding: clamp(6px, 1.1vw, 12px) 0;
-            padding-left: clamp(18px, 3.3vw, 36px);
-            position: relative;
-            line-height: 1.4;
-        }
-
-        .trap-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-red);
-        }
+        .trap-box { background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%); border: 1px solid rgba(217, 74, 74, 0.3); border-radius: clamp(8px, 1.5vw, 16px); padding: clamp(22px, 4.1vw, 44px); width: 100%; max-width: 90%; }
+        .trap-box h3 { font-family: var(--font-serif); font-size: clamp(19px, 3.5vw, 38px); font-weight: 600; color: var(--accent-red); margin-bottom: clamp(14px, 2.6vw, 28px); }
+        .trap-box .feature-list li::before { color: var(--accent-red); }
 
         /* Reality Box - Orange */
-        .reality-box {
-            background: linear-gradient(135deg, rgba(217, 136, 74, 0.15) 0%, rgba(217, 136, 74, 0.05) 100%);
-            border: 1px solid rgba(217, 136, 74, 0.3);
-            border-radius: clamp(8px, 1.5vw, 16px);
-            padding: clamp(20px, 4vw, 44px);
-            width: 100%;
-            max-width: clamp(300px, 70%, 750px);
-        }
-
-        .reality-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(22px, 3.9vw, 42px);
-            font-weight: 600;
-            color: var(--accent-orange);
-            margin-bottom: clamp(14px, 2.6vw, 28px);
-        }
-
-        .reality-list {
-            list-style: none;
-            text-align: left;
-        }
-
-        .reality-list li {
-            font-size: clamp(13px, 2.2vw, 24px);
-            color: var(--text-primary);
-            padding: clamp(6px, 1.1vw, 12px) 0;
-            padding-left: clamp(18px, 3.3vw, 36px);
-            position: relative;
-            line-height: 1.4;
-        }
-
-        .reality-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-orange);
-        }
+        .reality-box { background: linear-gradient(135deg, rgba(217, 136, 74, 0.15) 0%, rgba(217, 136, 74, 0.05) 100%); border: 1px solid rgba(217, 136, 74, 0.3); border-radius: clamp(8px, 1.5vw, 16px); padding: clamp(22px, 4.1vw, 44px); width: 100%; max-width: 90%; }
+        .reality-box h3 { font-family: var(--font-serif); font-size: clamp(19px, 3.5vw, 38px); font-weight: 600; color: var(--accent-orange); margin-bottom: clamp(14px, 2.6vw, 28px); }
+        .reality-box .feature-list li::before { color: var(--accent-orange); }
 
         /* Danger Box - Gold */
-        .danger-box {
-            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
-            border: 1px solid rgba(201, 169, 98, 0.3);
-            border-radius: clamp(8px, 1.5vw, 16px);
-            padding: clamp(20px, 4vw, 44px);
-            width: 100%;
-            max-width: clamp(300px, 70%, 750px);
-        }
-
-        .danger-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(22px, 3.9vw, 42px);
-            font-weight: 600;
-            color: var(--accent-gold);
-            margin-bottom: clamp(14px, 2.6vw, 28px);
-        }
-
-        .danger-list {
-            list-style: none;
-            text-align: left;
-        }
-
-        .danger-list li {
-            font-size: clamp(13px, 2.2vw, 24px);
-            color: var(--text-primary);
-            padding: clamp(6px, 1.1vw, 12px) 0;
-            padding-left: clamp(18px, 3.3vw, 36px);
-            position: relative;
-            line-height: 1.4;
-        }
-
-        .danger-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-gold);
-        }
+        .danger-box { background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%); border: 1px solid rgba(201, 169, 98, 0.3); border-radius: clamp(8px, 1.5vw, 16px); padding: clamp(22px, 4.1vw, 44px); width: 100%; max-width: 90%; }
+        .danger-box h3 { font-family: var(--font-serif); font-size: clamp(19px, 3.5vw, 38px); font-weight: 600; color: var(--accent-gold); margin-bottom: clamp(14px, 2.6vw, 28px); }
+        .danger-box .feature-list li::before { color: var(--accent-gold); }
 
         /* Better Box - Green */
-        .better-box {
-            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
-            border: 1px solid rgba(74, 217, 122, 0.3);
-            border-radius: clamp(8px, 1.5vw, 16px);
-            padding: clamp(20px, 4vw, 44px);
-            width: 100%;
-            max-width: clamp(300px, 70%, 750px);
-        }
-
-        .better-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(22px, 3.9vw, 42px);
-            font-weight: 600;
-            color: var(--accent-green);
-            margin-bottom: clamp(14px, 2.6vw, 28px);
-        }
-
-        .better-list {
-            list-style: none;
-            text-align: left;
-        }
-
-        .better-list li {
-            font-size: clamp(13px, 2.2vw, 24px);
-            color: var(--text-primary);
-            padding: clamp(6px, 1.1vw, 12px) 0;
-            padding-left: clamp(18px, 3.3vw, 36px);
-            position: relative;
-            line-height: 1.4;
-        }
-
-        .better-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-        }
+        .better-box { background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%); border: 1px solid rgba(74, 217, 122, 0.3); border-radius: clamp(8px, 1.5vw, 16px); padding: clamp(22px, 4.1vw, 44px); width: 100%; max-width: 90%; }
+        .better-box h3 { font-family: var(--font-serif); font-size: clamp(19px, 3.5vw, 38px); font-weight: 600; color: var(--accent-green); margin-bottom: clamp(14px, 2.6vw, 28px); }
+        .better-box .feature-list li::before { color: var(--accent-green); }
 
         /* Lesson Box - Blue */
-        .lesson-box {
-            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
-            border: 1px solid rgba(74, 144, 217, 0.3);
-            border-radius: clamp(8px, 1.5vw, 16px);
-            padding: clamp(20px, 4vw, 44px);
-            width: 100%;
-            max-width: clamp(300px, 70%, 750px);
-        }
+        .lesson-box { background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%); border: 1px solid rgba(74, 144, 217, 0.3); border-radius: clamp(8px, 1.5vw, 16px); padding: clamp(22px, 4.1vw, 44px); width: 100%; max-width: 90%; }
+        .lesson-box h3 { font-family: var(--font-serif); font-size: clamp(19px, 3.5vw, 38px); font-weight: 600; color: var(--accent-blue); margin-bottom: clamp(14px, 2.6vw, 28px); }
+        .lesson-box .feature-list li::before { color: var(--accent-blue); }
 
-        .lesson-box h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(22px, 3.9vw, 42px);
-            font-weight: 600;
-            color: var(--accent-blue);
-            margin-bottom: clamp(14px, 2.6vw, 28px);
-        }
+        /* Feature list styling */
+        .feature-list { list-style: none; text-align: left; }
+        .feature-list li { font-family: var(--font-sans); font-size: clamp(11px, 2vw, 22px); color: var(--text-primary); padding: clamp(5px, 0.9vw, 10px) 0; padding-left: clamp(18px, 3.3vw, 36px); position: relative; line-height: 1.4; }
+        .feature-list li::before { content: "→"; position: absolute; left: 0; }
 
-        .lesson-list {
-            list-style: none;
-            text-align: left;
-        }
-
-        .lesson-list li {
-            font-size: clamp(13px, 2.2vw, 24px);
-            color: var(--text-primary);
-            padding: clamp(6px, 1.1vw, 12px) 0;
-            padding-left: clamp(18px, 3.3vw, 36px);
-            position: relative;
-            line-height: 1.4;
-        }
-
-        .lesson-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-blue);
-        }
-
-        /* CTA Styles */
-        .cta-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(28px, 4.8vw, 52px);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: clamp(10px, 1.9vw, 20px);
-            line-height: 1.2;
-        }
-
-        .cta-text {
-            font-size: clamp(13px, 2.2vw, 24px);
-            color: var(--text-secondary);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .carousel-grid {
-                grid-template-columns: 1fr;
-                gap: clamp(32px, 8vw, 48px);
-            }
-
-            .slide-wrapper {
-                gap: clamp(6px, 1.5vw, 10px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 16px 12px;
-            }
-
-            .controls {
-                gap: 6px;
-            }
-
-            .controls button {
-                padding: 6px 10px;
-                font-size: 11px;
-            }
-
-            .page-title h1 {
-                font-size: 22px;
-            }
-
-            .page-title p {
-                font-size: 11px;
-            }
-        }
-
-        /* Export Mode Styles */
-        body.export-mode {
-            padding: 0;
-            background: none;
-            overflow: hidden;
-        }
-
-        body.export-mode .controls {
-            display: none;
-        }
-
-        body.export-mode .page-title {
-            display: none;
-        }
-
-        body.export-mode .carousel-grid {
-            display: block;
-            max-width: none;
-            gap: 0;
-        }
-
-        body.export-mode .slide-wrapper {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            margin: 0;
-            gap: 0;
-        }
-
-        body.export-mode .slide-wrapper.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        body.export-mode .slide-label {
-            display: none;
-        }
-
-        body.export-mode .slide {
-            width: 1080px;
-            height: 1080px;
-            max-width: none;
-            aspect-ratio: auto;
-            border: none;
-        }
-
-        /* Export mode slide scaling */
-        @media (max-height: 1080px) {
-            body.export-mode .slide {
-                transform: scale(calc(100vh / 1080));
-                transform-origin: center center;
-            }
-        }
-
-        @media (max-width: 1080px) {
-            body.export-mode .slide {
-                transform: scale(min(calc(100vw / 1080), calc(100vh / 1080)));
-                transform-origin: center center;
-            }
-        }
-
-        /* Print Styles */
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-
-            .controls {
-                display: none;
-            }
-
-            .page-title {
-                display: none;
-            }
-
-            .carousel-grid {
-                display: block;
-            }
-
-            .slide-wrapper {
-                page-break-after: always;
-                page-break-inside: avoid;
-                margin: 0;
-                padding: 0;
-            }
-
-            .slide-wrapper:last-child {
-                page-break-after: auto;
-            }
-
-            .slide {
-                width: 100%;
-                max-width: 100%;
-                border: 1px solid #ccc;
-            }
-
-            .slide-label {
-                color: #333;
-            }
-
-            .video-background {
-                display: none;
-            }
-        }
+        /* CTA styling */
+        .cta-title { font-family: var(--font-serif); font-size: clamp(21px, 3.9vw, 42px); font-weight: 600; color: var(--text-primary); margin-bottom: clamp(10px, 1.9vw, 20px); line-height: 1.3; }
+        .cta-text { font-family: var(--font-sans); font-size: clamp(12px, 2.2vw, 24px); color: var(--text-secondary); margin-bottom: clamp(4px, 0.7vw, 8px); }
     </style>
 </head>
 <body>
     <div class="controls">
-        <button id="toggle-bg">Toggle Background</button>
-        <button id="toggle-opacity">Toggle Opacity (8% / 15%)</button>
-        <button id="export-mode">Export Mode (E)</button>
+        <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="solid">Solid</option></select></label>
+        <label>Opacity: <select id="opacity-control"><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.16">16%</option><option value="0.24">24%</option></select></label>
+        <button id="export-btn">Export Mode</button>
     </div>
 
     <div class="page-title">
         <h1>The Danger of Hindsight Analysis</h1>
-        <p>Post 453 — 7 slides</p>
+        <p>7 slides · Trading Psychology</p>
     </div>
 
     <div class="carousel-grid">
-
-        <!-- Slide 1: Hook -->
         <div class="slide-wrapper" data-slide="1">
             <span class="slide-label">Slide 1 — Hook</span>
             <div class="slide slide-1">
-                <div class="video-background">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">01 / 07</span>
-                    <div class="center-content">
-                        <h1 class="slide-title">THE DANGER OF<br>HINDSIGHT ANALYSIS</h1>
-                        <p class="subtitle">Every chart looks easy... after the fact</p>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
+                    <div class="brand-header">Signal Pilot</div>
+                    <h1 class="title">THE DANGER OF<br>HINDSIGHT ANALYSIS</h1>
+                    <p class="subtitle">Every chart looks easy... after the fact</p>
                 </div>
+                <div class="slide-number">1 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 2: The Trap -->
         <div class="slide-wrapper" data-slide="2">
             <span class="slide-label">Slide 2 — The Trap</span>
             <div class="slide slide-2">
-                <div class="video-background">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">02 / 07</span>
-                    <div class="center-content">
-                        <div class="trap-box">
-                            <h3>THE TRAP</h3>
-                            <ul class="trap-list">
-                                <li>Look at historical chart</li>
-                                <li>"Obviously I would have bought there"</li>
-                                <li>Build false confidence</li>
-                                <li>Get humbled in real-time</li>
-                            </ul>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="trap-box">
+                        <h3>THE TRAP</h3>
+                        <ul class="feature-list">
+                            <li>Look at historical chart</li>
+                            <li>"Obviously I would have bought there"</li>
+                            <li>Build false confidence</li>
+                            <li>Get humbled in real-time</li>
+                        </ul>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">2 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 3: The Reality -->
         <div class="slide-wrapper" data-slide="3">
             <span class="slide-label">Slide 3 — The Reality</span>
             <div class="slide slide-3">
-                <div class="video-background">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">03 / 07</span>
-                    <div class="center-content">
-                        <div class="reality-box">
-                            <h3>THE REALITY</h3>
-                            <ul class="reality-list">
-                                <li>In the moment, there was uncertainty</li>
-                                <li>Multiple outcomes seemed possible</li>
-                                <li>Fear and FOMO were present</li>
-                                <li>The "obvious" signal wasn't obvious</li>
-                            </ul>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="reality-box">
+                        <h3>THE REALITY</h3>
+                        <ul class="feature-list">
+                            <li>In the moment, there was uncertainty</li>
+                            <li>Multiple outcomes seemed possible</li>
+                            <li>Fear and FOMO were present</li>
+                            <li>The "obvious" signal wasn't obvious</li>
+                        </ul>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">3 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 4: The Problem -->
         <div class="slide-wrapper" data-slide="4">
             <span class="slide-label">Slide 4 — The Problem</span>
             <div class="slide slide-4">
-                <div class="video-background">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">04 / 07</span>
-                    <div class="center-content">
-                        <div class="danger-box">
-                            <h3>WHY IT'S DANGEROUS</h3>
-                            <ul class="danger-list">
-                                <li>Creates overconfidence</li>
-                                <li>Underestimates real-time difficulty</li>
-                                <li>Leads to oversized positions</li>
-                                <li>Disappointment when reality differs</li>
-                            </ul>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="danger-box">
+                        <h3>WHY IT'S DANGEROUS</h3>
+                        <ul class="feature-list">
+                            <li>Creates overconfidence</li>
+                            <li>Underestimates real-time difficulty</li>
+                            <li>Leads to oversized positions</li>
+                            <li>Disappointment when reality differs</li>
+                        </ul>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">4 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 5: Better Approach -->
         <div class="slide-wrapper" data-slide="5">
             <span class="slide-label">Slide 5 — Better Approach</span>
             <div class="slide slide-5">
-                <div class="video-background">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">05 / 07</span>
-                    <div class="center-content">
-                        <div class="better-box">
-                            <h3>BETTER APPROACH</h3>
-                            <ul class="better-list">
-                                <li>Cover the right side of the chart</li>
-                                <li>Walk forward bar by bar</li>
-                                <li>Make decisions with incomplete info</li>
-                                <li>Then reveal what happened</li>
-                            </ul>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="better-box">
+                        <h3>BETTER APPROACH</h3>
+                        <ul class="feature-list">
+                            <li>Cover the right side of the chart</li>
+                            <li>Walk forward bar by bar</li>
+                            <li>Make decisions with incomplete info</li>
+                            <li>Then reveal what happened</li>
+                        </ul>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">5 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 6: The Lesson -->
         <div class="slide-wrapper" data-slide="6">
             <span class="slide-label">Slide 6 — The Lesson</span>
             <div class="slide slide-6">
-                <div class="video-background">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">06 / 07</span>
-                    <div class="center-content">
-                        <div class="lesson-box">
-                            <h3>THE LESSON</h3>
-                            <ul class="lesson-list">
-                                <li>Right edge is where trading happens</li>
-                                <li>Left edge is for learning patterns</li>
-                                <li>Don't confuse the two</li>
-                                <li>Humility is realistic</li>
-                            </ul>
-                        </div>
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="lesson-box">
+                        <h3>THE LESSON</h3>
+                        <ul class="feature-list">
+                            <li>Right edge is where trading happens</li>
+                            <li>Left edge is for learning patterns</li>
+                            <li>Don't confuse the two</li>
+                            <li>Humility is realistic</li>
+                        </ul>
                     </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
                 </div>
+                <div class="slide-number">6 / 7</div>
             </div>
         </div>
 
-        <!-- Slide 7: CTA -->
         <div class="slide-wrapper" data-slide="7">
             <span class="slide-label">Slide 7 — CTA</span>
             <div class="slide slide-7">
-                <div class="video-background">
-                    <video autoplay loop muted playsinline>
-                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                    </video>
-                </div>
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
                 <div class="slide-content">
-                    <span class="slide-number">07 / 07</span>
-                    <div class="center-content">
-                        <h2 class="cta-title">Practice Like You Play</h2>
-                        <p class="cta-text">Full article on blog • Link in bio</p>
-                    </div>
-                    <span class="brand-mark">SIGNALPILOT</span>
+                    <div class="brand-header">Signal Pilot</div>
+                    <h2 class="cta-title">Practice Like You Play</h2>
+                    <p class="cta-text">Full article on blog</p>
+                    <p class="cta-text">Link in bio</p>
                 </div>
+                <div class="slide-number">7 / 7</div>
             </div>
         </div>
-
     </div>
 
     <script>
-        // Background and opacity controls
-        let bgVisible = true;
-        let highOpacity = false;
+        (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
+            let exportMode = false, currentSlide = 0;
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
 
-        const toggleBgBtn = document.getElementById('toggle-bg');
-        const toggleOpacityBtn = document.getElementById('toggle-opacity');
-        const exportModeBtn = document.getElementById('export-mode');
-        const videoBackgrounds = document.querySelectorAll('.video-background');
+            function updateExportView() { slideWrappers.forEach((wrapper, index) => { wrapper.classList.toggle('exporting', index === currentSlide); }); }
 
-        toggleBgBtn.addEventListener('click', () => {
-            bgVisible = !bgVisible;
-            videoBackgrounds.forEach(bg => {
-                bg.classList.toggle('hidden', !bgVisible);
+            if (defined(bgToggle)) { bgToggle.addEventListener('change', (e) => { document.querySelectorAll('.video-background').forEach(bg => { bg.style.display = e.target.value === 'video' ? 'block' : 'none'; }); }); }
+            if (defined(opacityControl)) { opacityControl.addEventListener('change', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value); }); }
+            if (defined(exportBtn)) { exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode'; if (exportMode) { currentSlide = 0; updateExportView(); } }); }
+
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { currentSlide = Math.min(currentSlide + 1, totalSlides - 1); updateExportView(); }
+                else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { currentSlide = Math.max(currentSlide - 1, 0); updateExportView(); }
+                else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
             });
-            toggleBgBtn.classList.toggle('active', !bgVisible);
-        });
-
-        toggleOpacityBtn.addEventListener('click', () => {
-            highOpacity = !highOpacity;
-            document.documentElement.style.setProperty('--video-opacity', highOpacity ? '0.15' : '0.08');
-            toggleOpacityBtn.classList.toggle('active', highOpacity);
-        });
-
-        // Export mode functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide-wrapper');
-        const totalSlides = slides.length;
-        let exportMode = false;
-
-        function enterExportMode() {
-            exportMode = true;
-            document.body.classList.add('export-mode');
-            currentSlide = 0;
-            updateExportView();
-        }
-
-        function exitExportMode() {
-            exportMode = false;
-            document.body.classList.remove('export-mode');
-            slides.forEach(slide => slide.classList.remove('active'));
-        }
-
-        function updateExportView() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        function nextSlide() {
-            if (exportMode && currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateExportView();
-            }
-        }
-
-        function prevSlide() {
-            if (exportMode && currentSlide > 0) {
-                currentSlide--;
-                updateExportView();
-            }
-        }
-
-        exportModeBtn.addEventListener('click', () => {
-            if (!exportMode) {
-                enterExportMode();
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'e' || e.key === 'E') {
-                if (!exportMode) enterExportMode();
-            } else if (e.key === 'Escape') {
-                exitExportMode();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
-
-        console.log('Controls: Toggle Background, Toggle Opacity, Export Mode (E)');
-        console.log('Export Mode: Arrow keys to navigate, Escape to exit');
+        })();
     </script>
 </body>
 </html>
