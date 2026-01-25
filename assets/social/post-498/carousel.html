@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post 498 - Chronicle: The Council of Seven</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #0a0a0f;
             --bg-card: rgba(20, 20, 30, 0.85);
             --text-primary: #f0f0f0;
             --text-secondary: #a0a0a0;
+            --text-muted: #606070;
             --accent-blue: #4a90d9;
             --accent-gold: #c9a962;
             --accent-green: #5cb85c;
@@ -19,558 +22,318 @@
             --accent-red: #dc3545;
             --accent-orange: #fd7e14;
             --border-subtle: rgba(255, 255, 255, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { background-color: #000; min-height: 100vh; font-family: var(--font-sans); color: var(--text-primary); padding: 2rem; }
 
-        body {
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            padding: 20px;
-        }
+        .controls { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 1rem; background: var(--bg-card); padding: 0.75rem 1.5rem; border-radius: 9999px; border: 1px solid var(--border-subtle); }
+        .controls label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); }
+        .controls select { background: var(--bg-dark); color: var(--text-primary); border: 1px solid var(--border-subtle); border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.875rem; cursor: pointer; }
+        #export-btn { background: var(--accent-gold); color: var(--bg-dark); border: none; border-radius: 9999px; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        #export-btn:hover { filter: brightness(1.1); }
 
-        .carousel-container {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 100%;
-        }
+        .page-title { text-align: center; margin: 5rem auto 3rem; }
+        .page-title h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .page-title p { font-size: 1rem; color: var(--text-muted); }
 
-        .slide {
-            width: 1080px;
-            height: 1080px;
-            background: var(--bg-dark);
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
+        .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; justify-items: center; }
+        .slide-wrapper { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .slide-label { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
+        .slide { width: 100%; max-width: 540px; aspect-ratio: 1 / 1; background: var(--bg-dark); border-radius: 12px; position: relative; overflow: hidden; }
 
-        .video-background video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.08;
-        }
+        body.export-mode .slide { width: 1080px; height: 1080px; max-width: none; border-radius: 0; }
+        body.export-mode .carousel-grid { display: block; }
+        body.export-mode .slide-wrapper { display: none; }
+        body.export-mode .slide-wrapper.exporting { display: flex; }
+        body.export-mode .slide-label { display: none; }
+        body.export-mode .page-title, body.export-mode .controls { display: none; }
 
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px;
-            text-align: center;
-        }
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity); }
 
-        .slide-number {
-            position: absolute;
-            bottom: 30px;
-            right: 40px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: var(--text-secondary);
-            opacity: 0.6;
-        }
+        .slide-content { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(30px, 5.6vw, 60px); text-align: center; }
+        .slide-number { position: absolute; bottom: clamp(15px, 2.8vw, 30px); right: clamp(20px, 3.7vw, 40px); font-family: var(--font-sans); font-size: clamp(7px, 1.3vw, 14px); color: var(--text-secondary); opacity: 0.6; }
+        .brand-header { position: absolute; top: clamp(20px, 3.7vw, 40px); left: 0; right: 0; text-align: center; font-family: var(--font-serif); font-size: clamp(9px, 1.7vw, 18px); font-weight: 600; color: var(--accent-gold); letter-spacing: 3px; text-transform: uppercase; }
 
-        .brand-header {
-            position: absolute;
-            top: 40px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--accent-gold);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .chronicle-badge {
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--accent-purple);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: rgba(155, 89, 182, 0.2);
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(155, 89, 182, 0.4);
-        }
+        .chronicle-badge { position: absolute; top: clamp(20px, 3.7vw, 40px); left: clamp(20px, 3.7vw, 40px); font-family: var(--font-sans); font-size: clamp(6px, 1.1vw, 12px); font-weight: 600; color: var(--accent-purple); letter-spacing: 2px; text-transform: uppercase; background: rgba(155, 89, 182, 0.2); padding: clamp(4px, 0.7vw, 8px) clamp(7px, 1.4vw, 15px); border-radius: 20px; border: 1px solid rgba(155, 89, 182, 0.4); }
 
         /* Slide 1 - Title */
-        .slide-1 .council-visual {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 50px;
-            max-width: 500px;
-        }
-
-        .slide-1 .council-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 30px;
-            border: 2px solid;
-            background: var(--bg-card);
-        }
-
-        .slide-1 h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 60px;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .slide-1 .subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            font-style: italic;
-            color: var(--accent-gold);
-        }
+        .slide-1 .council-visual { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(7px, 1.4vw, 15px); margin-bottom: clamp(25px, 4.6vw, 50px); max-width: clamp(250px, 46.3vw, 500px); }
+        .slide-1 .council-icon { width: clamp(35px, 6.5vw, 70px); height: clamp(35px, 6.5vw, 70px); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: clamp(15px, 2.8vw, 30px); border: 2px solid; background: var(--bg-card); }
+        .slide-1 h1 { font-family: var(--font-serif); font-size: clamp(30px, 5.6vw, 60px); font-weight: 700; color: var(--text-primary); letter-spacing: 3px; margin-bottom: clamp(10px, 1.9vw, 20px); text-transform: uppercase; }
+        .slide-1 .subtitle { font-family: var(--font-serif); font-size: clamp(13px, 2.4vw, 26px); font-style: italic; color: var(--accent-gold); }
 
         /* Slide 2 - Council Members */
-        .slide-2 h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 52px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 40px;
-        }
-
-        .slide-2 .members-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            max-width: 750px;
-        }
-
-        .slide-2 .member-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--bg-card);
-            padding: 15px 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .slide-2 .member-icon {
-            font-size: 26px;
-            flex-shrink: 0;
-        }
-
-        .slide-2 .member-name {
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--text-primary);
-            text-align: left;
-        }
+        .slide-2 h2 { font-family: var(--font-serif); font-size: clamp(26px, 4.8vw, 52px); font-weight: 700; color: var(--text-primary); margin-bottom: clamp(20px, 3.7vw, 40px); }
+        .slide-2 .members-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(7px, 1.4vw, 15px); max-width: clamp(375px, 69.4vw, 750px); }
+        .slide-2 .member-item { display: flex; align-items: center; gap: clamp(6px, 1.1vw, 12px); background: var(--bg-card); padding: clamp(7px, 1.4vw, 15px) clamp(10px, 1.9vw, 20px); border-radius: clamp(6px, 1.1vw, 12px); border: 1px solid var(--border-subtle); }
+        .slide-2 .member-icon { font-size: clamp(13px, 2.4vw, 26px); flex-shrink: 0; }
+        .slide-2 .member-name { font-family: var(--font-sans); font-size: clamp(9px, 1.7vw, 18px); font-weight: 500; color: var(--text-primary); text-align: left; }
 
         /* Character slides */
-        .character-slide .char-icon {
-            font-size: 120px;
-            margin-bottom: 20px;
-        }
-
-        .character-slide .char-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .character-slide .char-role {
-            font-family: 'Inter', sans-serif;
-            font-size: 20px;
-            font-weight: 300;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-        }
-
-        .character-slide .char-desc {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            font-style: italic;
-            color: var(--text-secondary);
-            max-width: 500px;
-        }
+        .character-slide .char-icon { font-size: clamp(60px, 11.1vw, 120px); margin-bottom: clamp(10px, 1.9vw, 20px); }
+        .character-slide .char-title { font-family: var(--font-serif); font-size: clamp(24px, 4.4vw, 48px); font-weight: 700; margin-bottom: clamp(7px, 1.4vw, 15px); }
+        .character-slide .char-role { font-family: var(--font-sans); font-size: clamp(10px, 1.9vw, 20px); font-weight: 300; letter-spacing: 4px; text-transform: uppercase; margin-bottom: clamp(20px, 3.7vw, 40px); }
+        .character-slide .char-desc { font-family: var(--font-serif); font-size: clamp(14px, 2.6vw, 28px); font-style: italic; color: var(--text-secondary); max-width: clamp(250px, 46.3vw, 500px); }
 
         /* Slide 7 - Commander */
-        .slide-7 .commander-box {
-            background: var(--bg-card);
-            border: 2px solid var(--accent-gold);
-            border-radius: 20px;
-            padding: 50px;
-            max-width: 600px;
-        }
+        .slide-7 .commander-box { background: var(--bg-card); border: 2px solid var(--accent-gold); border-radius: clamp(10px, 1.9vw, 20px); padding: clamp(25px, 4.6vw, 50px); max-width: clamp(300px, 55.6vw, 600px); }
 
         /* Slide 8 - CTA */
-        .slide-8 .unity-visual {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 40px;
+        .slide-8 .unity-visual { display: flex; gap: clamp(5px, 0.9vw, 10px); margin-bottom: clamp(20px, 3.7vw, 40px); }
+        .slide-8 .unity-icon { font-size: clamp(20px, 3.7vw, 40px); }
+        .slide-8 h2 { font-family: var(--font-serif); font-size: clamp(24px, 4.4vw, 48px); font-weight: 700; color: var(--text-primary); margin-bottom: clamp(10px, 1.9vw, 20px); line-height: 1.3; }
+        .slide-8 .tagline { font-family: var(--font-serif); font-size: clamp(14px, 2.6vw, 28px); font-style: italic; color: var(--accent-gold); margin-bottom: clamp(25px, 4.6vw, 50px); }
+        .slide-8 .cta-button { display: inline-block; background: linear-gradient(135deg, var(--accent-purple), #7d4b9e); color: var(--text-primary); font-family: var(--font-sans); font-size: clamp(10px, 1.9vw, 20px); font-weight: 600; padding: clamp(11px, 2vw, 22px) clamp(27px, 5.1vw, 55px); border-radius: 50px; text-transform: uppercase; letter-spacing: 3px; }
+        .slide-8 .link-hint { margin-top: clamp(17px, 3.2vw, 35px); font-family: var(--font-sans); font-size: clamp(9px, 1.7vw, 18px); color: var(--text-secondary); }
+
+        /* Slide 6 - Three Characters */
+        .slide-6 .three-chars { display: flex; gap: clamp(30px, 5.6vw, 60px); }
+        .slide-6 .char-mini { text-align: center; }
+        .slide-6 .char-mini-icon { font-size: clamp(35px, 6.5vw, 70px); margin-bottom: clamp(7px, 1.4vw, 15px); }
+        .slide-6 .char-mini-title { font-family: var(--font-serif); font-size: clamp(14px, 2.6vw, 28px); margin-bottom: clamp(5px, 0.9vw, 10px); }
+        .slide-6 .char-mini-role { font-family: var(--font-sans); font-size: clamp(7px, 1.3vw, 14px); color: var(--text-secondary); }
+
+        @media (max-width: 768px) {
+            .carousel-grid { grid-template-columns: 1fr; padding: 0 1rem; }
+            .controls { flex-wrap: wrap; justify-content: center; padding: 0.5rem 1rem; }
         }
 
-        .slide-8 .unity-icon {
-            font-size: 40px;
-        }
-
-        .slide-8 h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .slide-8 .tagline {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            font-style: italic;
-            color: var(--accent-gold);
-            margin-bottom: 50px;
-        }
-
-        .slide-8 .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent-purple), #7d4b9e);
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            padding: 22px 55px;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .slide-8 .link-hint {
-            margin-top: 35px;
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            color: var(--text-secondary);
-        }
-
-        /* Export Mode Styles */
-        body.export-mode {
-            background: none;
-            padding: 0;
-        }
-
-        body.export-mode .carousel-container {
-            gap: 0;
-        }
-
-        body.export-mode .slide {
-            border-radius: 0;
-        }
-
-        body.export-mode .slide:not(.active) {
-            display: none;
-        }
-
-        body.export-mode .slide.active {
-            display: flex;
-        }
-
-        .export-instructions {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            z-index: 1000;
-            text-align: center;
-        }
-
-        body.export-mode .export-instructions {
-            display: none;
+        @media print {
+            .controls, .page-title { display: none; }
+            .slide-wrapper { break-inside: avoid; }
         }
     </style>
 </head>
 <body>
-    <div class="export-instructions">
-        Press <strong>E</strong> for export mode | <strong>Arrow keys</strong> to navigate | <strong>Escape</strong> to exit
+    <div class="controls">
+        <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="solid">Solid</option></select></label>
+        <label>Opacity: <select id="opacity-control"><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.16">16%</option><option value="0.24">24%</option></select></label>
+        <button id="export-btn">Export Mode</button>
     </div>
 
-    <div class="carousel-container">
-        <!-- Slide 1: Title -->
-        <div class="slide slide-1 active">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="chronicle-badge">Chronicle</div>
-                <div class="council-visual">
-                    <div class="council-icon" style="border-color: var(--accent-gold);">&#128081;</div>
-                    <div class="council-icon" style="border-color: var(--accent-purple);">&#128302;</div>
-                    <div class="council-icon" style="border-color: var(--accent-teal);">&#128506;</div>
-                    <div class="council-icon" style="border-color: var(--accent-blue);">&#9878;</div>
-                    <div class="council-icon" style="border-color: var(--accent-orange);">&#9889;</div>
-                    <div class="council-icon" style="border-color: var(--accent-green);">&#128065;</div>
-                    <div class="council-icon" style="border-color: var(--accent-red);">&#127942;</div>
+    <div class="page-title">
+        <h1>Chronicle: The Council of Seven</h1>
+        <p>8 slides · Elite Seven Lore</p>
+    </div>
+
+    <div class="carousel-grid">
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Title</span>
+            <div class="slide slide-1">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="chronicle-badge">Chronicle</div>
+                    <div class="council-visual">
+                        <div class="council-icon" style="border-color: var(--accent-gold);">&#128081;</div>
+                        <div class="council-icon" style="border-color: var(--accent-purple);">&#128302;</div>
+                        <div class="council-icon" style="border-color: var(--accent-teal);">&#128506;</div>
+                        <div class="council-icon" style="border-color: var(--accent-blue);">&#9878;</div>
+                        <div class="council-icon" style="border-color: var(--accent-orange);">&#9889;</div>
+                        <div class="council-icon" style="border-color: var(--accent-green);">&#128065;</div>
+                        <div class="council-icon" style="border-color: var(--accent-red);">&#127942;</div>
+                    </div>
+                    <h1>The Council of Seven</h1>
+                    <div class="subtitle">When the Seven convene, the picture becomes whole.</div>
                 </div>
-                <h1>The Council of Seven</h1>
-                <div class="subtitle">When the Seven convene, the picture becomes whole.</div>
+                <div class="slide-number">1 / 8</div>
             </div>
-            <div class="slide-number">1 / 8</div>
         </div>
 
-        <!-- Slide 2: Council Members -->
-        <div class="slide slide-2">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="chronicle-badge">Chronicle</div>
-                <h2>The Council</h2>
-                <div class="members-grid">
-                    <div class="member-item">
-                        <span class="member-icon">&#128081;</span>
-                        <span class="member-name">The Sovereign</span>
-                    </div>
-                    <div class="member-item">
-                        <span class="member-icon">&#128302;</span>
-                        <span class="member-name">The Prophet</span>
-                    </div>
-                    <div class="member-item">
-                        <span class="member-icon">&#128506;</span>
-                        <span class="member-name">The Cartographer</span>
-                    </div>
-                    <div class="member-item">
-                        <span class="member-icon">&#9878;</span>
-                        <span class="member-name">The Scales</span>
-                    </div>
-                    <div class="member-item">
-                        <span class="member-icon">&#9889;</span>
-                        <span class="member-name">The Arbiter</span>
-                    </div>
-                    <div class="member-item">
-                        <span class="member-icon">&#128065;</span>
-                        <span class="member-name">The Watchman</span>
-                    </div>
-                    <div class="member-item" style="grid-column: span 2; justify-content: center;">
-                        <span class="member-icon">&#127942;</span>
-                        <span class="member-name">The Commander</span>
-                    </div>
-                </div>
-            </div>
-            <div class="slide-number">2 / 8</div>
-        </div>
-
-        <!-- Slide 3: The Sovereign -->
-        <div class="slide slide-3 character-slide">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="chronicle-badge">Chronicle</div>
-                <div class="char-icon">&#128081;</div>
-                <div class="char-title" style="color: var(--accent-gold);">The Sovereign</div>
-                <div class="char-role" style="color: var(--accent-gold);">Sees Cycles</div>
-                <div class="char-desc">Pentarch - Master of the five market phases</div>
-            </div>
-            <div class="slide-number">3 / 8</div>
-        </div>
-
-        <!-- Slide 4: The Prophet -->
-        <div class="slide slide-4 character-slide">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="chronicle-badge">Chronicle</div>
-                <div class="char-icon">&#128302;</div>
-                <div class="char-title" style="color: var(--accent-purple);">The Prophet</div>
-                <div class="char-role" style="color: var(--accent-purple);">Reads Regimes</div>
-                <div class="char-desc">Volume Oracle - Seer of market volatility</div>
-            </div>
-            <div class="slide-number">4 / 8</div>
-        </div>
-
-        <!-- Slide 5: Cartographer -->
-        <div class="slide slide-5 character-slide">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="chronicle-badge">Chronicle</div>
-                <div class="char-icon">&#128506;</div>
-                <div class="char-title" style="color: var(--accent-teal);">The Cartographer</div>
-                <div class="char-role" style="color: var(--accent-teal);">Maps Levels</div>
-                <div class="char-desc">Janus Atlas - Guardian of key price zones</div>
-            </div>
-            <div class="slide-number">5 / 8</div>
-        </div>
-
-        <!-- Slide 6: Scales, Arbiter, Watchman -->
-        <div class="slide slide-6">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="chronicle-badge">Chronicle</div>
-                <div style="display: flex; gap: 60px;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 70px; margin-bottom: 15px;">&#9878;</div>
-                        <div style="font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--accent-blue); margin-bottom: 10px;">The Scales</div>
-                        <div style="font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text-secondary);">Weighs Flow</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 70px; margin-bottom: 15px;">&#9889;</div>
-                        <div style="font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--accent-orange); margin-bottom: 10px;">The Arbiter</div>
-                        <div style="font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text-secondary);">Measures Momentum</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 70px; margin-bottom: 15px;">&#128065;</div>
-                        <div style="font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--accent-green); margin-bottom: 10px;">The Watchman</div>
-                        <div style="font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text-secondary);">Scans Horizons</div>
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Council Members</span>
+            <div class="slide slide-2">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="chronicle-badge">Chronicle</div>
+                    <h2>The Council</h2>
+                    <div class="members-grid">
+                        <div class="member-item">
+                            <span class="member-icon">&#128081;</span>
+                            <span class="member-name">The Sovereign</span>
+                        </div>
+                        <div class="member-item">
+                            <span class="member-icon">&#128302;</span>
+                            <span class="member-name">The Prophet</span>
+                        </div>
+                        <div class="member-item">
+                            <span class="member-icon">&#128506;</span>
+                            <span class="member-name">The Cartographer</span>
+                        </div>
+                        <div class="member-item">
+                            <span class="member-icon">&#9878;</span>
+                            <span class="member-name">The Scales</span>
+                        </div>
+                        <div class="member-item">
+                            <span class="member-icon">&#9889;</span>
+                            <span class="member-name">The Arbiter</span>
+                        </div>
+                        <div class="member-item">
+                            <span class="member-icon">&#128065;</span>
+                            <span class="member-name">The Watchman</span>
+                        </div>
+                        <div class="member-item" style="grid-column: span 2; justify-content: center;">
+                            <span class="member-icon">&#127942;</span>
+                            <span class="member-name">The Commander</span>
+                        </div>
                     </div>
                 </div>
+                <div class="slide-number">2 / 8</div>
             </div>
-            <div class="slide-number">6 / 8</div>
         </div>
 
-        <!-- Slide 7: The Commander -->
-        <div class="slide slide-7 character-slide">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="chronicle-badge">Chronicle</div>
-                <div class="commander-box">
-                    <div class="char-icon" style="font-size: 100px; margin-bottom: 15px;">&#127942;</div>
-                    <div class="char-title" style="color: var(--accent-gold);">The Commander</div>
-                    <div class="char-role" style="color: var(--accent-gold);">Unifies All</div>
-                    <div class="char-desc">OmniDeck - Where all perspectives converge</div>
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — The Sovereign</span>
+            <div class="slide slide-3 character-slide">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="chronicle-badge">Chronicle</div>
+                    <div class="char-icon">&#128081;</div>
+                    <div class="char-title" style="color: var(--accent-gold);">The Sovereign</div>
+                    <div class="char-role" style="color: var(--accent-gold);">Sees Cycles</div>
+                    <div class="char-desc">Pentarch - Master of the five market phases</div>
                 </div>
+                <div class="slide-number">3 / 8</div>
             </div>
-            <div class="slide-number">7 / 8</div>
         </div>
 
-        <!-- Slide 8: CTA -->
-        <div class="slide slide-8">
-            <div class="video-background">
-                <video autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide-content">
-                <div class="brand-header">Signal Pilot</div>
-                <div class="chronicle-badge">Chronicle</div>
-                <div class="unity-visual">
-                    <span class="unity-icon">&#128081;</span>
-                    <span class="unity-icon">&#128302;</span>
-                    <span class="unity-icon">&#128506;</span>
-                    <span class="unity-icon">&#9878;</span>
-                    <span class="unity-icon">&#9889;</span>
-                    <span class="unity-icon">&#128065;</span>
-                    <span class="unity-icon">&#127942;</span>
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — The Prophet</span>
+            <div class="slide slide-4 character-slide">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="chronicle-badge">Chronicle</div>
+                    <div class="char-icon">&#128302;</div>
+                    <div class="char-title" style="color: var(--accent-purple);">The Prophet</div>
+                    <div class="char-role" style="color: var(--accent-purple);">Reads Regimes</div>
+                    <div class="char-desc">Volume Oracle - Seer of market volatility</div>
                 </div>
-                <h2>Together, They See All</h2>
-                <div class="tagline">Seven perspectives. One market.</div>
-                <div class="cta-button">Explore Chronicle</div>
-                <div class="link-hint">Link in bio</div>
+                <div class="slide-number">4 / 8</div>
             </div>
-            <div class="slide-number">8 / 8</div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — The Cartographer</span>
+            <div class="slide slide-5 character-slide">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="chronicle-badge">Chronicle</div>
+                    <div class="char-icon">&#128506;</div>
+                    <div class="char-title" style="color: var(--accent-teal);">The Cartographer</div>
+                    <div class="char-role" style="color: var(--accent-teal);">Maps Levels</div>
+                    <div class="char-desc">Janus Atlas - Guardian of key price zones</div>
+                </div>
+                <div class="slide-number">5 / 8</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Scales, Arbiter, Watchman</span>
+            <div class="slide slide-6">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="chronicle-badge">Chronicle</div>
+                    <div class="three-chars">
+                        <div class="char-mini">
+                            <div class="char-mini-icon">&#9878;</div>
+                            <div class="char-mini-title" style="color: var(--accent-blue);">The Scales</div>
+                            <div class="char-mini-role">Weighs Flow</div>
+                        </div>
+                        <div class="char-mini">
+                            <div class="char-mini-icon">&#9889;</div>
+                            <div class="char-mini-title" style="color: var(--accent-orange);">The Arbiter</div>
+                            <div class="char-mini-role">Measures Momentum</div>
+                        </div>
+                        <div class="char-mini">
+                            <div class="char-mini-icon">&#128065;</div>
+                            <div class="char-mini-title" style="color: var(--accent-green);">The Watchman</div>
+                            <div class="char-mini-role">Scans Horizons</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">6 / 8</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — The Commander</span>
+            <div class="slide slide-7 character-slide">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="chronicle-badge">Chronicle</div>
+                    <div class="commander-box">
+                        <div class="char-icon" style="font-size: clamp(50px, 9.3vw, 100px); margin-bottom: clamp(7px, 1.4vw, 15px);">&#127942;</div>
+                        <div class="char-title" style="color: var(--accent-gold);">The Commander</div>
+                        <div class="char-role" style="color: var(--accent-gold);">Unifies All</div>
+                        <div class="char-desc">OmniDeck - Where all perspectives converge</div>
+                    </div>
+                </div>
+                <div class="slide-number">7 / 8</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="8">
+            <span class="slide-label">Slide 8 — CTA</span>
+            <div class="slide slide-8">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="chronicle-badge">Chronicle</div>
+                    <div class="unity-visual">
+                        <span class="unity-icon">&#128081;</span>
+                        <span class="unity-icon">&#128302;</span>
+                        <span class="unity-icon">&#128506;</span>
+                        <span class="unity-icon">&#9878;</span>
+                        <span class="unity-icon">&#9889;</span>
+                        <span class="unity-icon">&#128065;</span>
+                        <span class="unity-icon">&#127942;</span>
+                    </div>
+                    <h2>Together, They See All</h2>
+                    <div class="tagline">Seven perspectives. One market.</div>
+                    <div class="cta-button">Explore Chronicle</div>
+                    <div class="link-hint">Link in bio</div>
+                </div>
+                <div class="slide-number">8 / 8</div>
+            </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.slide');
-            let exportMode = false;
+        (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
+            let exportMode = false, currentSlide = 0;
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
 
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-            }
+            function updateExportView() { slideWrappers.forEach((wrapper, index) => { wrapper.classList.toggle('exporting', index === currentSlide); }); }
 
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'e' || e.key === 'E') {
-                    exportMode = !exportMode;
-                    document.body.classList.toggle('export-mode', exportMode);
-                    if (exportMode) {
-                        showSlide(currentSlide);
-                    }
-                } else if (e.key === 'Escape') {
-                    exportMode = false;
-                    document.body.classList.remove('export-mode');
-                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    if (exportMode) showSlide(currentSlide);
-                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                    if (exportMode) showSlide(currentSlide);
-                }
+            if (defined(bgToggle)) { bgToggle.addEventListener('change', (e) => { document.querySelectorAll('.video-background').forEach(bg => { bg.style.display = e.target.value === 'video' ? 'block' : 'none'; }); }); }
+            if (defined(opacityControl)) { opacityControl.addEventListener('change', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value); }); }
+            if (defined(exportBtn)) { exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode'; if (exportMode) { currentSlide = 0; updateExportView(); } }); }
+
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { currentSlide = Math.min(currentSlide + 1, totalSlides - 1); updateExportView(); }
+                else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { currentSlide = Math.max(currentSlide - 1, 0); updateExportView(); }
+                else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
             });
-        });
+        })();
     </script>
 </body>
 </html>
