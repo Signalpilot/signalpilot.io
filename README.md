@@ -52,7 +52,7 @@ A fast, static marketing website for Signal Pilot — 7 non-repainting TradingVi
    *Complete trend regime detection system. Maps 5-phase market reversal sequences (TD→IGN→WRN→CAP→BDN).*
 
 2. **SP — OmniDeck: Unified Chart Overlay** (ALL-IN-ONE)
-   *Comprehensive overlay unifying 10 premium systems: TD Sequential, Squeeze Cloud, SuperTrend Ensemble, Supply/Demand Zones, Liquidity Sweeps, Candlestick Patterns, and more.*
+   *Comprehensive overlay unifying 10 premium systems: Exhaustion Counter, Squeeze Cloud, SuperTrend Ensemble, Supply/Demand Zones, Liquidity Sweeps, Candlestick Patterns, and more.*
 
 3. **SP — Volume Oracle: Regime Detection** (REGIME DETECTION)
    *Accumulation/distribution detector showing volume flow patterns — before retail notices.*
@@ -190,7 +190,7 @@ Since this is a single-file site, all edits are in `/index.html`.
 ### Meta tags
 - **Title:** "Signal Pilot — Non-Repainting TradingView Indicators"
 - **Description:** Professional cycle detection for TradingView. Pentarch™ maps complete market cycles. Zero repaint, audited.
-- **Keywords:** TradingView indicators, non-repainting, Pentarch, TD Sequential, crypto/stock indicators
+- **Keywords:** TradingView indicators, non-repainting, Pentarch, Exhaustion Counter, crypto/stock indicators
 - **OpenGraph/Twitter Cards:** Lines 62-87 (social sharing with preview.png)
 
 ### Analytics setup
