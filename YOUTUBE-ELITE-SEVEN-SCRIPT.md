@@ -594,7 +594,7 @@ Most traders only see price. Plutus Flow lets you see beneath the surface."
 
 ### [21:30 - 25:00] INDICATOR 5: OMNIDECK (The Commander)
 
-**[VISUAL: OmniDeck showing multiple systems — TD Sequential, Squeeze, Liquidity Sweeps, etc.]**
+**[VISUAL: OmniDeck showing multiple systems — Exhaustion Counter, Squeeze, Liquidity Sweeps, etc.]**
 
 **NARRATOR:**
 
@@ -610,7 +610,7 @@ OmniDeck unifies ten different trading systems into one cohesive overlay. Instea
 
 **[VISUAL: Each system shown as mentioned]**
 
-**1. TD Sequential**
+**1. Exhaustion Counter**
 Tom DeMark's exhaustion counter. Numbers 1-9 appear on candles, tracking exhaustion sequences. A completed 9-count often precedes reversals.
 
 **2. Squeeze Detector**
@@ -994,7 +994,7 @@ The Flow Ribbon just turned green. Momentum is shifting.
 **Step 6: Context Check**
 
 OmniDeck is giving me more confluence:
-- TD Sequential count is at 8. One more down candle would complete a 9 — exhaustion signal.
+- Exhaustion Counter count is at 8. One more down candle would complete a 9 — exhaustion signal.
 - The squeeze detector shows we JUST released from a squeeze. Volatility is about to expand.
 - No supply zone directly overhead until $3,100.
 
@@ -1482,7 +1482,7 @@ This section covers everything you need to produce this video, broken into what 
 | 15 | **Plutus Flow Bearish Divergence** — Price HH, OBV LH clearly visible | 20-30 sec | Plutus Flow section | MEDIUM |
 | 16 | **Plutus Flow Extreme Zones** — Show white/yellow dots at ±2σ | 15-20 sec | Plutus Flow section | MEDIUM |
 | 17 | **OmniDeck Full Overlay** — Show all systems active (briefly) | 15-20 sec | OmniDeck section | HIGH |
-| 18 | **OmniDeck TD Sequential** — Show 1-9 count on candles | 15-20 sec | OmniDeck section | HIGH |
+| 18 | **OmniDeck Exhaustion Counter** — Show 1-9 count on candles | 15-20 sec | OmniDeck section | HIGH |
 | 19 | **OmniDeck Squeeze** — Show squeeze building and releasing | 20-30 sec | OmniDeck section | HIGH |
 | 20 | **OmniDeck Liquidity Sweep** — Show 💧 or 🩸 marker with reclaim | 20-30 sec | OmniDeck section | HIGH |
 | 21 | **OmniDeck Supply/Demand Zones** — Show ⭐⭐⭐ zone with price reaction | 15-20 sec | OmniDeck section | MEDIUM |
@@ -2331,7 +2331,7 @@ This section walks you through EXACTLY how to record each clip. Follow these ins
 - Point to different elements briefly
 - File: `17_omnideck_full_overlay.mp4`
 
-**CLIP 18: OmniDeck TD Sequential (15-20 seconds)**
+**CLIP 18: OmniDeck Exhaustion Counter (15-20 seconds)**
 - Find candles with numbers 1-9 on them
 - Point to the sequence counting up
 - Show a completed 9-count if possible
