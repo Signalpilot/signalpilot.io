@@ -122,7 +122,7 @@ In the age of indicator overload, charts became battlefields of confusion — do
 OmniDeck was forged to end the chaos.
 
 The Commander unified ten legendary systems into a single, breathing overlay:
-- TD Sequential for exhaustion
+- Exhaustion Counter for exhaustion
 - Squeeze Cloud for breakouts
 - SuperTrend Ensemble for direction
 - Bull Market Support Band for structure

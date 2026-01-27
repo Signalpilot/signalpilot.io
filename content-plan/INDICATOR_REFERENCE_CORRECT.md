@@ -228,7 +228,7 @@ Bullish/Bearish FVG detection
 
 | # | System | Function |
 |---|--------|----------|
-| 1 | **TD Sequential** | Exhaustion counter (1-9) detecting reversals |
+| 1 | **Exhaustion Counter** | Exhaustion counter (1-9) detecting reversals |
 | 2 | **Squeeze Detector** | Volatility breakouts (BB vs Keltner) |
 | 3 | **Liquidity Sweeps** | Stop-hunt detection (💧 🩸 markers) |
 | 4 | **EMA Trio** | 50/100/200 moving averages |
@@ -274,7 +274,7 @@ Bullish/Bearish FVG detection
 |-------|---------|
 | NanoFlow component | Does NOT exist in OmniDeck |
 | Pilot Line component | Does NOT exist in OmniDeck |
-| Pentarch signals included | TD Sequential (different system) |
+| Pentarch signals included | Exhaustion Counter (different system) |
 
 ---
 
