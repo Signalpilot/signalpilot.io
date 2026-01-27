@@ -2335,7 +2335,7 @@ This section walks you through EXACTLY how to record each clip. Follow these ins
 - Find candles with numbers 1-9 on them
 - Point to the sequence counting up
 - Show a completed 9-count if possible
-- File: `18_omnideck_td_sequential.mp4`
+- File: `18_omnideck_exhaustion_counter.mp4`
 
 **CLIP 19: OmniDeck Squeeze (20-30 seconds)**
 - Find the squeeze dots (usually at bottom of chart or in indicator panel)
