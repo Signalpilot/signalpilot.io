@@ -611,7 +611,7 @@ OmniDeck unifies ten different trading systems into one cohesive overlay. Instea
 **[VISUAL: Each system shown as mentioned]**
 
 **1. Exhaustion Counter**
-Tom DeMark's exhaustion counter. Numbers 1-9 appear on candles, tracking exhaustion sequences. A completed 9-count often precedes reversals.
+Counts exhaustion sequences from 1-9 on candles. A completed 9-count (Count 9) often precedes reversals—the market has pushed too far and needs to breathe.
 
 **2. Squeeze Detector**
 Volatility compression detection. When Bollinger Bands move inside Keltner Channels, the market is coiling. The squeeze release often produces explosive moves.
@@ -683,7 +683,7 @@ In the corner, you'll see a 1-10 scale showing how many systems are aligned.
 
 **38 Built-In Alerts:**
 
-OmniDeck has 38 configurable alerts across all systems. Squeeze firing. Liquidity sweep detected. TD 9 complete. Pattern at key level.
+OmniDeck has 38 configurable alerts across all systems. Squeeze firing. Liquidity sweep detected. Count 9 complete. Pattern at key level.
 
 Set them once, then let the system notify you."
 
