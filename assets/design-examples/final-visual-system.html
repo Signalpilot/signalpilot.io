@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignalPilot — Final Visual System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 300;
+      font-size: 24px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #555;
+      margin: 60px 0 30px;
+    }
+
+    /* ================================
+       CARD GRID
+    ================================ */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .card-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .color-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .card-label.education { color: #00d4ff; }
+    .card-label.education .color-dot { background: #00d4ff; }
+
+    .card-label.blog { color: #a855f7; }
+    .card-label.blog .color-dot { background: #a855f7; }
+
+    .card-label.quote { color: #ffd700; }
+    .card-label.quote .color-dot { background: #ffd700; }
+
+    .card-label.docs { color: #94a3b8; }
+    .card-label.docs .color-dot { background: #94a3b8; }
+
+    .card-label.marketing { color: #f97316; }
+    .card-label.marketing .color-dot { background: #f97316; }
+
+    .card-label.product { color: #10b981; }
+    .card-label.product .color-dot { background: #10b981; }
+
+    .card-label.chronicle { color: #ec4899; }
+    .card-label.chronicle .color-dot { background: #ec4899; }
+
+    /* ================================
+       BASE CARD WITH STARFIELD
+    ================================ */
+    .card {
+      width: 300px;
+      height: 375px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      /* Starfield background */
+      background:
+        radial-gradient(1px 1px at 20px 30px, white, transparent),
+        radial-gradient(1px 1px at 45px 80px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 70px 160px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 100px 45px, white, transparent),
+        radial-gradient(1px 1px at 140px 90px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 180px 140px, white, transparent),
+        radial-gradient(1px 1px at 220px 60px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 250px 180px, white, transparent),
+        radial-gradient(1px 1px at 280px 100px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 50px 220px, white, transparent),
+        radial-gradient(1px 1px at 90px 260px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 150px 240px, white, transparent),
+        radial-gradient(1px 1px at 200px 290px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 260px 250px, white, transparent),
+        radial-gradient(1px 1px at 30px 320px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 120px 340px, white, transparent),
+        radial-gradient(1px 1px at 190px 360px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 270px 330px, white, transparent),
+        radial-gradient(2px 2px at 80px 120px, rgba(255,255,255,0.2), transparent),
+        radial-gradient(2px 2px at 220px 280px, rgba(255,255,255,0.15), transparent),
+        linear-gradient(180deg, #0a0a14 0%, #050508 100%);
+    }
+
+    .content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+
+    .body-text {
+      font-size: 14px;
+      color: #8b8b9b;
+      line-height: 1.6;
+    }
+
+    /* ================================
+       EDUCATION — Cyan
+    ================================ */
+    .education-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(0, 212, 255, 0.14) 0%,
+        rgba(0, 212, 255, 0.03) 25%,
+        transparent 50%,
+        rgba(0, 212, 255, 0.02) 80%,
+        rgba(0, 212, 255, 0.08) 100%
+      );
+      z-index: 1;
+    }
+
+    .education-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00d4ff, #0891b2);
+      z-index: 2;
+    }
+
+    .education-card .tag { color: #00d4ff; }
+    .education-card .accent { color: #00d4ff; }
+
+    /* ================================
+       BLOG — Purple
+    ================================ */
+    .blog-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 75% 0%, rgba(168, 85, 247, 0.18) 0%, transparent 55%),
+        linear-gradient(180deg,
+          rgba(168, 85, 247, 0.06) 0%,
+          transparent 40%,
+          rgba(139, 92, 246, 0.04) 100%
+        );
+      z-index: 1;
+    }
+
+    .blog-card .tag { color: #a855f7; }
+    .blog-card .accent { color: #c4b5fd; }
+
+    /* ================================
+       QUOTE — Gold
+    ================================ */
+    .quote-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(255, 215, 0, 0.07) 0%, transparent 55%),
+        linear-gradient(180deg,
+          rgba(255, 215, 0, 0.03) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba(255, 215, 0, 0.03) 100%
+        );
+      z-index: 1;
+    }
+
+    .quote-card .quote-mark {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 100px;
+      font-family: Georgia, serif;
+      color: rgba(255, 215, 0, 0.08);
+      line-height: 1;
+      z-index: 1;
+    }
+
+    .quote-card .content {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .quote-card h2 {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .quote-card .tag { color: #ffd700; }
+    .quote-card .accent { color: #ffd700; }
+
+    .quote-card .attribution {
+      margin-top: 24px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #555;
+    }
+
+    /* ================================
+       DOCS — Slate
+    ================================ */
+    .docs-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(148, 163, 184, 0.1) 0%,
+        rgba(148, 163, 184, 0.02) 20%,
+        transparent 50%,
+        rgba(148, 163, 184, 0.03) 100%
+      );
+      z-index: 1;
+    }
+
+    .docs-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #94a3b8, #64748b);
+      z-index: 2;
+    }
+
+    .docs-card .tag { color: #94a3b8; }
+    .docs-card .accent { color: #94a3b8; }
+
+    .docs-card .doc-list {
+      margin-top: 16px;
+    }
+
+    .docs-card .doc-item {
+      padding: 10px 14px;
+      background: rgba(148, 163, 184, 0.04);
+      border-left: 2px solid #334155;
+      margin-bottom: 8px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .docs-card .doc-item.highlight {
+      border-left-color: #94a3b8;
+      background: rgba(148, 163, 184, 0.08);
+    }
+
+    /* ================================
+       MARKETING — Orange
+    ================================ */
+    .marketing-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 25% 100%, rgba(249, 115, 22, 0.16) 0%, transparent 55%),
+        linear-gradient(180deg,
+          rgba(249, 115, 22, 0.04) 0%,
+          transparent 30%,
+          rgba(249, 115, 22, 0.08) 100%
+        );
+      z-index: 1;
+    }
+
+    .marketing-card .tag { color: #f97316; }
+    .marketing-card .accent { color: #f97316; }
+
+    .marketing-card .stat {
+      font-size: 56px;
+      font-weight: 700;
+      color: #f97316;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .marketing-card .stat-label {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .marketing-card .cta {
+      margin-top: auto;
+      padding: 14px 28px;
+      background: linear-gradient(90deg, #f97316, #ea580c);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    /* ================================
+       PRODUCT — Green
+    ================================ */
+    .product-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(16, 185, 129, 0.12) 0%,
+        rgba(16, 185, 129, 0.02) 25%,
+        transparent 50%,
+        rgba(16, 185, 129, 0.04) 100%
+      );
+      z-index: 1;
+    }
+
+    .product-card .tag { color: #10b981; }
+    .product-card .accent { color: #10b981; }
+
+    .product-card .chart-area {
+      height: 140px;
+      margin: -28px -28px 20px -28px;
+      background:
+        repeating-linear-gradient(90deg, rgba(16, 185, 129, 0.04) 0px, rgba(16, 185, 129, 0.04) 1px, transparent 1px, transparent 30px),
+        repeating-linear-gradient(0deg, rgba(16, 185, 129, 0.04) 0px, rgba(16, 185, 129, 0.04) 1px, transparent 1px, transparent 30px);
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px 28px;
+      gap: 4px;
+    }
+
+    .product-card .candle {
+      width: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product-card .candle .wick {
+      width: 1px;
+      background: currentColor;
+    }
+
+    .product-card .candle .body {
+      width: 6px;
+      min-height: 6px;
+      background: currentColor;
+    }
+
+    .product-card .candle.green { color: #10b981; }
+    .product-card .candle.red { color: #ef4444; }
+
+    .product-card .indicator-line {
+      position: absolute;
+      bottom: 50px;
+      left: 28px;
+      right: 28px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #10b981, #34d399);
+      border-radius: 1px;
+    }
+
+    .product-card .signal-dot {
+      position: absolute;
+      bottom: 46px;
+      right: 50px;
+      width: 10px;
+      height: 10px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.6);
+    }
+
+    /* ================================
+       CHRONICLE — Magenta
+    ================================ */
+    .chronicle-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(236, 72, 153, 0.16) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 85%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+        linear-gradient(180deg,
+          rgba(236, 72, 153, 0.04) 0%,
+          transparent 40%,
+          rgba(168, 85, 247, 0.04) 100%
+        );
+      z-index: 1;
+    }
+
+    .chronicle-card .tag { color: #ec4899; }
+    .chronicle-card .accent { color: #f472b6; }
+
+    .chronicle-card .character {
+      font-size: 13px;
+      font-style: italic;
+      color: #a78bfa;
+      margin-bottom: 16px;
+    }
+
+    .chronicle-card .lore-quote {
+      margin-top: auto;
+      font-size: 13px;
+      font-style: italic;
+      color: #6b6b7b;
+      line-height: 1.6;
+    }
+
+    .chronicle-card .symbol {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      font-size: 40px;
+      opacity: 0.2;
+      z-index: 1;
+    }
+
+    /* ================================
+       INSTAGRAM GRID PREVIEW
+    ================================ */
+    .grid-section {
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .instagram-mock {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #000;
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .instagram-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-bottom: 1px solid #222;
+      margin-bottom: 12px;
+    }
+
+    .instagram-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00d4ff, #a855f7, #ec4899);
+    }
+
+    .instagram-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+
+    .mini-card {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(1px 1px at 15px 20px, white, transparent),
+        radial-gradient(1px 1px at 40px 50px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 70px 30px, white, transparent),
+        radial-gradient(1px 1px at 25px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 90px 70px, white, transparent),
+        radial-gradient(1px 1px at 55px 100px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 100px 45px, white, transparent),
+        radial-gradient(1px 1px at 80px 110px, rgba(255,255,255,0.5), transparent),
+        linear-gradient(180deg, #0a0a14 0%, #050508 100%);
+    }
+
+    .mini-card span {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      font-size: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 3;
+    }
+
+    /* Mini overlays */
+    .mini-education::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,212,255,0.15) 0%, transparent 50%, rgba(0,212,255,0.08) 100%);
+      z-index: 1;
+    }
+    .mini-education::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: #00d4ff;
+      z-index: 2;
+    }
+    .mini-education span { color: #00d4ff; }
+
+    .mini-blog::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 0%, rgba(168,85,247,0.2) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .mini-blog span { color: #a855f7; }
+
+    .mini-quote::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(255,215,0,0.1) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .mini-quote span { color: #ffd700; }
+
+    .mini-docs::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(148,163,184,0.12) 0%, transparent 50%);
+      z-index: 1;
+    }
+    .mini-docs::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 2px;
+      background: #64748b;
+      z-index: 2;
+    }
+    .mini-docs span { color: #94a3b8; }
+
+    .mini-marketing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 100%, rgba(249,115,22,0.18) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .mini-marketing span { color: #f97316; }
+
+    .mini-product::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16,185,129,0.15) 0%, transparent 50%, rgba(16,185,129,0.08) 100%);
+      z-index: 1;
+    }
+    .mini-product span { color: #10b981; }
+
+    .mini-chronicle::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(236,72,153,0.2) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .mini-chronicle span { color: #ec4899; }
+
+    /* ================================
+       COLOR REFERENCE TABLE
+    ================================ */
+    .reference-section {
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .reference-table {
+      max-width: 800px;
+      margin: 0 auto;
+      border-collapse: collapse;
+    }
+
+    .reference-table th,
+    .reference-table td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .reference-table th {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .reference-table td {
+      font-size: 13px;
+    }
+
+    .reference-table .type-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .reference-table .type-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .reference-table code {
+      background: #1a1a1a;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: 'SF Mono', monospace;
+      font-size: 12px;
+    }
+
+    .reference-table .elements {
+      font-size: 12px;
+      color: #888;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>SignalPilot Visual System</h1>
+  <p class="subtitle">Starfield + Color Overlay + Colored Tag + Colored Headline Accent</p>
+
+  <!-- ALL 7 CARDS -->
+  <div class="card-grid">
+
+    <!-- EDUCATION -->
+    <div class="card-wrapper">
+      <div class="card-label education">
+        <span class="color-dot"></span>
+        Education
+      </div>
+      <div class="card education-card">
+        <div class="content">
+          <div class="tag">Lesson 05</div>
+          <h2><span class="accent">RSI Extremes</span> Don't Mean Reversal</h2>
+          <p class="body-text">Why overbought can stay overbought — and what to do about it.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOG -->
+    <div class="card-wrapper">
+      <div class="card-label blog">
+        <span class="color-dot"></span>
+        Blog
+      </div>
+      <div class="card blog-card">
+        <div class="content">
+          <div class="tag">Trading Psychology</div>
+          <h2>The Art of <span class="accent">Doing Nothing</span></h2>
+          <p class="body-text">Most traders lose money not from bad trades, but from trades they shouldn't have taken at all.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUOTE -->
+    <div class="card-wrapper">
+      <div class="card-label quote">
+        <span class="color-dot"></span>
+        Quote
+      </div>
+      <div class="card quote-card">
+        <div class="quote-mark">"</div>
+        <div class="content">
+          <h2>The goal isn't to be right. It's to <span class="accent">make money</span> when you're right and <span class="accent">lose little</span> when you're wrong.</h2>
+          <div class="attribution">— Trading Wisdom</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCS -->
+    <div class="card-wrapper">
+      <div class="card-label docs">
+        <span class="color-dot"></span>
+        Docs
+      </div>
+      <div class="card docs-card">
+        <div class="content">
+          <div class="tag">Documentation</div>
+          <h2><span class="accent">Alert</span> Setup Guide</h2>
+          <div class="doc-list">
+            <div class="doc-item highlight">TD Signal → Alert</div>
+            <div class="doc-item">WRN Signal → Alert</div>
+            <div class="doc-item">CAP Signal → Alert</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARKETING -->
+    <div class="card-wrapper">
+      <div class="card-label marketing">
+        <span class="color-dot"></span>
+        Marketing
+      </div>
+      <div class="card marketing-card">
+        <div class="content">
+          <div class="tag">Limited Time</div>
+          <div class="stat">10,000+</div>
+          <div class="stat-label">Traders trust SignalPilot</div>
+          <h2>Join the community that sees what others <span class="accent">miss</span>.</h2>
+          <div class="cta">Start Free Trial</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT -->
+    <div class="card-wrapper">
+      <div class="card-label product">
+        <span class="color-dot"></span>
+        Product
+      </div>
+      <div class="card product-card">
+        <div class="chart-area">
+          <div class="candle green"><div class="wick" style="height:12px"></div><div class="body" style="height:20px"></div><div class="wick" style="height:6px"></div></div>
+          <div class="candle green"><div class="wick" style="height:8px"></div><div class="body" style="height:28px"></div><div class="wick" style="height:4px"></div></div>
+          <div class="candle red"><div class="wick" style="height:16px"></div><div class="body" style="height:12px"></div><div class="wick" style="height:10px"></div></div>
+          <div class="candle red"><div class="wick" style="height:6px"></div><div class="body" style="height:22px"></div><div class="wick" style="height:12px"></div></div>
+          <div class="candle green"><div class="wick" style="height:10px"></div><div class="body" style="height:16px"></div><div class="wick" style="height:5px"></div></div>
+          <div class="candle green"><div class="wick" style="height:4px"></div><div class="body" style="height:32px"></div><div class="wick" style="height:3px"></div></div>
+          <div class="candle green"><div class="wick" style="height:6px"></div><div class="body" style="height:26px"></div><div class="wick" style="height:4px"></div></div>
+          <div class="candle red"><div class="wick" style="height:14px"></div><div class="body" style="height:10px"></div><div class="wick" style="height:8px"></div></div>
+          <div class="candle green"><div class="wick" style="height:5px"></div><div class="body" style="height:36px"></div><div class="wick" style="height:3px"></div></div>
+          <div class="candle green"><div class="wick" style="height:8px"></div><div class="body" style="height:30px"></div><div class="wick" style="height:6px"></div></div>
+          <div class="indicator-line"></div>
+          <div class="signal-dot"></div>
+        </div>
+        <div class="content" style="padding-top: 0;">
+          <div class="tag">Pentarch TD</div>
+          <h2>TD Signal: <span class="accent">Trend Confirmed</span></h2>
+          <p class="body-text">Momentum aligned across all components. High-probability setup.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHRONICLE -->
+    <div class="card-wrapper">
+      <div class="card-label chronicle">
+        <span class="color-dot"></span>
+        Chronicle
+      </div>
+      <div class="card chronicle-card">
+        <div class="content">
+          <div class="tag">Chronicle VII</div>
+          <div class="character">The Prophet speaks...</div>
+          <h2>When <span class="accent">Volume Whispers</span>, the Wise Listen</h2>
+          <p class="lore-quote">"The crowd sees price. The Prophet sees intent. In the silence between candles, fortunes are made."</p>
+        </div>
+        <div class="symbol">🔮</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INSTAGRAM GRID PREVIEW -->
+  <div class="grid-section">
+    <div class="section-title">Instagram Grid Preview</div>
+
+    <div class="instagram-mock">
+      <div class="instagram-header">
+        <div class="instagram-avatar"></div>
+        <div class="instagram-name">signalpilot</div>
+      </div>
+      <div class="instagram-grid">
+        <div class="mini-card mini-education"><span>Lesson</span></div>
+        <div class="mini-card mini-blog"><span>Blog</span></div>
+        <div class="mini-card mini-quote"><span>Quote</span></div>
+        <div class="mini-card mini-product"><span>Product</span></div>
+        <div class="mini-card mini-docs"><span>Docs</span></div>
+        <div class="mini-card mini-chronicle"><span>Lore</span></div>
+        <div class="mini-card mini-marketing"><span>CTA</span></div>
+        <div class="mini-card mini-education"><span>Lesson</span></div>
+        <div class="mini-card mini-blog"><span>Blog</span></div>
+        <div class="mini-card mini-chronicle"><span>Lore</span></div>
+        <div class="mini-card mini-product"><span>Product</span></div>
+        <div class="mini-card mini-quote"><span>Quote</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLOR REFERENCE -->
+  <div class="reference-section">
+    <div class="section-title">Quick Reference</div>
+
+    <table class="reference-table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Hex Code</th>
+          <th>What to Color</th>
+          <th>Extra Element</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="type-cell"><span class="type-dot" style="background:#00d4ff"></span> Education</div></td>
+          <td><code>#00D4FF</code></td>
+          <td class="elements">Tag + key concept word</td>
+          <td class="elements">Top bar (3px)</td>
+        </tr>
+        <tr>
+          <td><div class="type-cell"><span class="type-dot" style="background:#a855f7"></span> Blog</div></td>
+          <td><code>#A855F7</code></td>
+          <td class="elements">Tag + emotional hook word</td>
+          <td class="elements">—</td>
+        </tr>
+        <tr>
+          <td><div class="type-cell"><span class="type-dot" style="background:#ffd700"></span> Quote</div></td>
+          <td><code>#FFD700</code></td>
+          <td class="elements">Key wisdom phrase</td>
+          <td class="elements">Giant quote mark (8% opacity)</td>
+        </tr>
+        <tr>
+          <td><div class="type-cell"><span class="type-dot" style="background:#94a3b8"></span> Docs</div></td>
+          <td><code>#94A3B8</code></td>
+          <td class="elements">Tag + technical term</td>
+          <td class="elements">Left bar (3px)</td>
+        </tr>
+        <tr>
+          <td><div class="type-cell"><span class="type-dot" style="background:#f97316"></span> Marketing</div></td>
+          <td><code>#F97316</code></td>
+          <td class="elements">Tag + stat + CTA button</td>
+          <td class="elements">—</td>
+        </tr>
+        <tr>
+          <td><div class="type-cell"><span class="type-dot" style="background:#10b981"></span> Product</div></td>
+          <td><code>#10B981</code></td>
+          <td class="elements">Tag + signal/indicator name</td>
+          <td class="elements">Chart visual</td>
+        </tr>
+        <tr>
+          <td><div class="type-cell"><span class="type-dot" style="background:#ec4899"></span> Chronicle</div></td>
+          <td><code>#EC4899</code></td>
+          <td class="elements">Tag + mystical term</td>
+          <td class="elements">Character name (purple italic)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
