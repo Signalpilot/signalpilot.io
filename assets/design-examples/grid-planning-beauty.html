@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignalPilot — Grid Planning for Beauty</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f5f3f0;
+      color: #222;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 300;
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 60px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #999;
+      margin: 60px 0 30px;
+    }
+
+    /* ================================
+       COMPARISON: RANDOM vs PLANNED
+    ================================ */
+    .comparison {
+      display: flex;
+      gap: 60px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 80px;
+    }
+
+    .comparison-item {
+      text-align: center;
+    }
+
+    .comparison-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .comparison-label.bad { color: #c0392b; }
+    .comparison-label.good { color: #27ae60; }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      gap: 3px;
+      background: #000;
+      padding: 3px;
+      border-radius: 8px;
+    }
+
+    .mini-cell {
+      width: 80px;
+      height: 80px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Random - no pattern */
+    .random .c-edu { background: #1a1a2e; color: rgba(255,255,255,0.5); }
+    .random .c-quote { background: #0f0f14; color: rgba(255,255,255,0.5); }
+    .random .c-product { background: #0a1a15; color: rgba(255,255,255,0.5); }
+    .random .c-blog { background: #1a1020; color: rgba(255,255,255,0.5); }
+    .random .c-chronicle { background: #1a1025; color: rgba(255,255,255,0.5); }
+    .random .c-marketing { background: #1a1510; color: rgba(255,255,255,0.5); }
+    .random .c-docs { background: #15151a; color: rgba(255,255,255,0.5); }
+
+    /* Planned - with pattern */
+    .planned .c-visual {
+      background: linear-gradient(135deg, #1a1a2e, #0a1a15);
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+    }
+    .planned .c-minimal {
+      background: #0a0a0c;
+      color: rgba(255,255,255,0.4);
+    }
+    .planned .c-atmospheric {
+      background: linear-gradient(180deg, #1a1020, #0a0a14);
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ================================
+       THE PLANNED GRID - SIGNALPILOT
+    ================================ */
+    .grid-section {
+      max-width: 500px;
+      margin: 0 auto 60px;
+    }
+
+    .instagram-mock {
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .instagram-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid #111;
+    }
+
+    .instagram-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .instagram-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0a0a14, #1a1a2e);
+      border: 2px solid #222;
+    }
+
+    .instagram-info {
+      color: #fff;
+    }
+
+    .instagram-info .name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .instagram-info .bio {
+      font-size: 11px;
+      color: #666;
+    }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      padding: 2px;
+    }
+
+    .grid-item {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ================================
+       CONTENT TYPE STYLES
+    ================================ */
+
+    /* Base dark */
+    .dark-base {
+      background:
+        radial-gradient(1px 1px at 20px 25px, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 60px 70px, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 100px 45px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 40px 110px, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 130px 90px, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 80px 140px, rgba(255,255,255,0.3), transparent),
+        linear-gradient(180deg, #08080c 0%, #04040a 100%);
+    }
+
+    /* QUOTE - Minimal, centered, soft with GOLD accent */
+    .quote-style {
+      background: linear-gradient(180deg, #0b0b0e 0%, #070709 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .quote-style::before {
+      content: '"';
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      font-size: 32px;
+      font-family: Georgia, serif;
+      color: rgba(255, 215, 0, 0.12);
+    }
+
+    .quote-style .text {
+      font-size: 10px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.75);
+      max-width: 110px;
+    }
+
+    .quote-style .text .accent {
+      color: #ffd700;
+    }
+
+    /* EDUCATION - Structured, numbered with CYAN accent */
+    .education-style {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      border-top: 2px solid rgba(0, 212, 255, 0.6);
+    }
+
+    .education-style .num {
+      font-size: 32px;
+      font-weight: 200;
+      color: rgba(0, 212, 255, 0.15);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .education-style .tag {
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #00d4ff;
+      margin-bottom: 6px;
+    }
+
+    .education-style .title {
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .education-style .title .accent {
+      color: #00d4ff;
+    }
+
+    .education-style .steps {
+      margin-top: auto;
+      font-size: 7px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .education-style .step {
+      padding: 3px 0;
+      border-top: 1px solid rgba(0, 212, 255, 0.08);
+    }
+
+    .education-style .step-num {
+      color: rgba(0, 212, 255, 0.5);
+    }
+
+    /* PRODUCT - Charts */
+    .product-style {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-style .chart {
+      flex: 1;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 12px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 12px);
+      display: flex;
+      align-items: flex-end;
+      padding: 8px;
+      gap: 2px;
+    }
+
+    .product-style .candle {
+      width: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product-style .candle .wick {
+      width: 1px;
+      background: currentColor;
+    }
+
+    .product-style .candle .body {
+      width: 3px;
+      min-height: 2px;
+      background: currentColor;
+    }
+
+    .product-style .candle.up { color: rgba(16, 185, 129, 0.7); }
+    .product-style .candle.down { color: rgba(239, 68, 68, 0.5); }
+
+    .product-style .signal-line {
+      position: absolute;
+      bottom: 45px;
+      left: 8px;
+      right: 8px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(16,185,129,0.5));
+    }
+
+    .product-style .info {
+      padding: 8px;
+    }
+
+    .product-style .signal-name {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #10b981;
+    }
+
+    .product-style .signal-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .product-style .signal-title .accent {
+      color: #10b981;
+    }
+
+    /* BLOG - Editorial, atmospheric with PURPLE accent */
+    .blog-style {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .blog-style::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+    }
+
+    .blog-style .category {
+      position: relative;
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #a855f7;
+      margin-bottom: 8px;
+    }
+
+    .blog-style .title {
+      position: relative;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: #fff;
+    }
+
+    .blog-style .title em {
+      font-style: italic;
+      color: #c4b5fd;
+    }
+
+    /* CHRONICLE - Mystical with MAGENTA accent */
+    .chronicle-style {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .chronicle-style::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 15%, rgba(236, 72, 153, 0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 85%, rgba(139, 92, 246, 0.08) 0%, transparent 45%);
+    }
+
+    .chronicle-style .chapter {
+      position: relative;
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #ec4899;
+      margin-bottom: 4px;
+    }
+
+    .chronicle-style .character {
+      position: relative;
+      font-size: 9px;
+      font-style: italic;
+      color: #a78bfa;
+      margin-bottom: 6px;
+    }
+
+    .chronicle-style .title {
+      position: relative;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 1.3;
+      color: #fff;
+    }
+
+    .chronicle-style .title .accent {
+      color: #f472b6;
+    }
+
+    .chronicle-style .symbol {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 16px;
+      opacity: 0.2;
+      color: #ec4899;
+    }
+
+    /* MARKETING - Bold with ORANGE accent */
+    .marketing-style {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .marketing-style::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(249,115,22,0.1) 100%);
+    }
+
+    .marketing-style .tag {
+      position: relative;
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f97316;
+      margin-bottom: 8px;
+    }
+
+    .marketing-style .stat {
+      position: relative;
+      font-size: 32px;
+      font-weight: 700;
+      color: #f97316;
+      line-height: 1;
+    }
+
+    .marketing-style .stat-label {
+      position: relative;
+      font-size: 8px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+    }
+
+    .marketing-style .cta {
+      position: relative;
+      padding: 6px 14px;
+      background: linear-gradient(90deg, #f97316, #ea580c);
+      border-radius: 4px;
+      font-size: 8px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* DOCS - Technical */
+    .docs-style {
+      padding: 10px;
+      border-left: 2px solid rgba(255,255,255,0.06);
+    }
+
+    .docs-style .path {
+      font-size: 6px;
+      font-family: monospace;
+      color: rgba(255,255,255,0.2);
+      margin-bottom: 6px;
+    }
+
+    .docs-style .doc-title {
+      font-size: 9px;
+      font-weight: 500;
+      font-family: monospace;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 8px;
+    }
+
+    .docs-style .doc-line {
+      font-size: 7px;
+      font-family: monospace;
+      padding: 3px 5px;
+      background: rgba(255,255,255,0.02);
+      margin-bottom: 2px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ================================
+       GRID PLANNING DIAGRAM
+    ================================ */
+    .planning-section {
+      max-width: 600px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+    }
+
+    .planning-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .planning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .planning-cell {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .planning-cell.visual {
+      background: linear-gradient(135deg, #e8f4f8, #f0e8f4);
+      border: 2px solid #d0e0e8;
+    }
+
+    .planning-cell.minimal {
+      background: #fafafa;
+      border: 2px dashed #ddd;
+    }
+
+    .planning-cell.atmospheric {
+      background: linear-gradient(180deg, #f4e8f0, #f8f4f8);
+      border: 2px solid #e8d8e4;
+    }
+
+    .planning-cell .cell-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    .planning-cell .cell-types {
+      font-size: 8px;
+      color: #999;
+      line-height: 1.4;
+    }
+
+    .planning-note {
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    /* ================================
+       ROTATION SEQUENCE
+    ================================ */
+    .rotation-section {
+      max-width: 800px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+    }
+
+    .rotation-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .rotation-subtitle {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .rotation-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .rotation-item {
+      width: 70px;
+      padding: 12px 8px;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .rotation-item .num {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .rotation-item .type {
+      font-size: 8px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .rotation-item .pos {
+      font-size: 7px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    /* Position colors */
+    .pos-left { background: #e8f4f8; }
+    .pos-left .type { color: #2980b9; }
+
+    .pos-middle { background: #fafafa; border: 1px dashed #ddd; }
+    .pos-middle .type { color: #666; }
+
+    .pos-right { background: #f4e8f0; }
+    .pos-right .type { color: #8e44ad; }
+
+    .rotation-legend {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      font-size: 11px;
+      color: #888;
+    }
+
+    .rotation-legend span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .legend-dot.left { background: #e8f4f8; border: 1px solid #d0e0e8; }
+    .legend-dot.middle { background: #fafafa; border: 1px dashed #ccc; }
+    .legend-dot.right { background: #f4e8f0; border: 1px solid #e8d8e4; }
+
+  </style>
+</head>
+<body>
+
+  <h1>Grid Planning for Beauty</h1>
+  <p class="subtitle">It's not just what you post — it's WHERE in the grid it lands.</p>
+
+  <!-- COMPARISON -->
+  <div class="section-title">Random vs Planned</div>
+
+  <div class="comparison">
+    <div class="comparison-item">
+      <div class="comparison-label bad">❌ Random (no pattern)</div>
+      <div class="mini-grid random">
+        <div class="mini-cell c-edu">Edu</div>
+        <div class="mini-cell c-product">Product</div>
+        <div class="mini-cell c-blog">Blog</div>
+        <div class="mini-cell c-quote">Quote</div>
+        <div class="mini-cell c-chronicle">Chron</div>
+        <div class="mini-cell c-marketing">Mktg</div>
+        <div class="mini-cell c-docs">Docs</div>
+        <div class="mini-cell c-edu">Edu</div>
+        <div class="mini-cell c-quote">Quote</div>
+      </div>
+    </div>
+
+    <div class="comparison-item">
+      <div class="comparison-label good">✓ Planned (with rhythm)</div>
+      <div class="mini-grid planned">
+        <div class="mini-cell c-visual">Visual</div>
+        <div class="mini-cell c-minimal">Minimal</div>
+        <div class="mini-cell c-visual">Visual</div>
+        <div class="mini-cell c-atmospheric">Atmos</div>
+        <div class="mini-cell c-visual">Visual</div>
+        <div class="mini-cell c-minimal">Minimal</div>
+        <div class="mini-cell c-visual">Visual</div>
+        <div class="mini-cell c-atmospheric">Atmos</div>
+        <div class="mini-cell c-visual">Visual</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PLANNED GRID -->
+  <div class="section-title">SignalPilot — Planned Grid</div>
+
+  <div class="grid-section">
+    <div class="instagram-mock">
+      <div class="instagram-header">
+        <div class="instagram-profile">
+          <div class="instagram-avatar"></div>
+          <div class="instagram-info">
+            <div class="name">SignalPilot</div>
+            <div class="bio">Trading indicators that don't lie</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="instagram-grid">
+        <!-- Row 1: Visual | Minimal | Visual -->
+        <div class="grid-item dark-base education-style">
+          <div class="num">39</div>
+          <div class="tag">Lesson</div>
+          <div class="title"><span class="accent">Position Sizing</span>: The 1% Rule</div>
+          <div class="steps">
+            <div class="step"><span class="step-num">01</span> — Risk per trade</div>
+            <div class="step"><span class="step-num">02</span> — Account safety</div>
+          </div>
+        </div>
+
+        <div class="grid-item quote-style">
+          <div class="text">The goal isn't to be right. It's to <span class="accent">make money</span> when you're right.</div>
+        </div>
+
+        <div class="grid-item dark-base product-style">
+          <div class="chart">
+            <div class="candle up"><div class="wick" style="height:5px"></div><div class="body" style="height:10px"></div><div class="wick" style="height:3px"></div></div>
+            <div class="candle up"><div class="wick" style="height:3px"></div><div class="body" style="height:14px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle down"><div class="wick" style="height:6px"></div><div class="body" style="height:6px"></div><div class="wick" style="height:4px"></div></div>
+            <div class="candle up"><div class="wick" style="height:4px"></div><div class="body" style="height:8px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle up"><div class="wick" style="height:2px"></div><div class="body" style="height:16px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle up"><div class="wick" style="height:3px"></div><div class="body" style="height:12px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="signal-line"></div>
+          </div>
+          <div class="info">
+            <div class="signal-name">Pentarch</div>
+            <div class="signal-title">Trend Signal</div>
+          </div>
+        </div>
+
+        <!-- Row 2: Atmospheric | Visual | Minimal -->
+        <div class="grid-item dark-base blog-style">
+          <div class="category">Psychology</div>
+          <div class="title">The Art of <em>Doing Nothing</em></div>
+        </div>
+
+        <div class="grid-item dark-base chronicle-style">
+          <div class="symbol">◈</div>
+          <div class="chapter">Chronicle VII</div>
+          <div class="character">The Prophet speaks...</div>
+          <div class="title"><span class="accent">Volume</span> Whispers</div>
+        </div>
+
+        <div class="grid-item quote-style">
+          <div class="text"><span class="accent">Patience</span> is not the ability to wait, but how you act while waiting.</div>
+        </div>
+
+        <!-- Row 3: Visual | Minimal | Visual -->
+        <div class="grid-item dark-base marketing-style">
+          <div class="tag">Limited Time</div>
+          <div class="stat">10K+</div>
+          <div class="stat-label">traders trust us</div>
+          <div class="cta">Start Free</div>
+        </div>
+
+        <div class="grid-item quote-style">
+          <div class="text"><span class="accent">Risk management</span> is the only thing you can control.</div>
+        </div>
+
+        <div class="grid-item dark-base education-style">
+          <div class="num">42</div>
+          <div class="tag">Lesson</div>
+          <div class="title"><span class="accent">Risk-Reward</span> Ratio</div>
+          <div class="steps">
+            <div class="step"><span class="step-num">01</span> — Why 1:2 minimum</div>
+            <div class="step"><span class="step-num">02</span> — Calculating R</div>
+          </div>
+        </div>
+
+        <!-- Row 4: Atmospheric | Visual | Atmospheric -->
+        <div class="grid-item dark-base chronicle-style">
+          <div class="symbol">⬡</div>
+          <div class="chapter">Chronicle VIII</div>
+          <div class="character">The Scales speak...</div>
+          <div class="title"><span class="accent">Balance</span> in All</div>
+        </div>
+
+        <div class="grid-item dark-base product-style">
+          <div class="chart">
+            <div class="candle down"><div class="wick" style="height:6px"></div><div class="body" style="height:10px"></div><div class="wick" style="height:3px"></div></div>
+            <div class="candle down"><div class="wick" style="height:4px"></div><div class="body" style="height:8px"></div><div class="wick" style="height:5px"></div></div>
+            <div class="candle up"><div class="wick" style="height:3px"></div><div class="body" style="height:6px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle up"><div class="wick" style="height:2px"></div><div class="body" style="height:14px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle up"><div class="wick" style="height:4px"></div><div class="body" style="height:10px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle up"><div class="wick" style="height:2px"></div><div class="body" style="height:18px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="signal-line"></div>
+          </div>
+          <div class="info">
+            <div class="signal-name">Volume Oracle</div>
+            <div class="signal-title">Accumulation</div>
+          </div>
+        </div>
+
+        <div class="grid-item dark-base blog-style">
+          <div class="category">Mindset</div>
+          <div class="title">Why Your Stop <em>Keeps Getting Hit</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRID PLANNING DIAGRAM -->
+  <div class="planning-section">
+    <div class="planning-title">The Grid Pattern</div>
+    <div class="planning-grid">
+      <div class="planning-cell visual">
+        <div class="cell-label">Visual Weight</div>
+        <div class="cell-types">Education<br>Product<br>Marketing</div>
+      </div>
+      <div class="planning-cell minimal">
+        <div class="cell-label">Breathing Room</div>
+        <div class="cell-types">Quote Cards<br>(minimal, centered)</div>
+      </div>
+      <div class="planning-cell visual">
+        <div class="cell-label">Visual Weight</div>
+        <div class="cell-types">Education<br>Product<br>Docs</div>
+      </div>
+      <div class="planning-cell atmospheric">
+        <div class="cell-label">Atmospheric</div>
+        <div class="cell-types">Blog<br>Chronicle</div>
+      </div>
+      <div class="planning-cell visual">
+        <div class="cell-label">Visual Weight</div>
+        <div class="cell-types">Product<br>Chronicle<br>Education</div>
+      </div>
+      <div class="planning-cell minimal">
+        <div class="cell-label">Breathing Room</div>
+        <div class="cell-types">Quote Cards</div>
+      </div>
+    </div>
+    <p class="planning-note">The middle column alternates between <strong>minimal</strong> (quotes) and <strong>visual</strong> (charts, data).<br>This creates rhythm — the eye flows, never gets stuck.</p>
+  </div>
+
+  <!-- 10-POST ROTATION -->
+  <div class="rotation-section">
+    <div class="rotation-title">Your 10-Post Rotation (Grid-Optimized)</div>
+    <div class="rotation-subtitle">Each post lands in a specific column to create the pattern</div>
+
+    <div class="rotation-grid">
+      <div class="rotation-item pos-left">
+        <div class="num">1</div>
+        <div class="type">Education</div>
+        <div class="pos">Left</div>
+      </div>
+      <div class="rotation-item pos-middle">
+        <div class="num">2</div>
+        <div class="type">Quote</div>
+        <div class="pos">Middle</div>
+      </div>
+      <div class="rotation-item pos-right">
+        <div class="num">3</div>
+        <div class="type">Product</div>
+        <div class="pos">Right</div>
+      </div>
+      <div class="rotation-item pos-left">
+        <div class="num">4</div>
+        <div class="type">Blog</div>
+        <div class="pos">Left</div>
+      </div>
+      <div class="rotation-item pos-middle">
+        <div class="num">5</div>
+        <div class="type">Chronicle</div>
+        <div class="pos">Middle</div>
+      </div>
+      <div class="rotation-item pos-right">
+        <div class="num">6</div>
+        <div class="type">Quote</div>
+        <div class="pos">Right</div>
+      </div>
+      <div class="rotation-item pos-left">
+        <div class="num">7</div>
+        <div class="type">Marketing</div>
+        <div class="pos">Left</div>
+      </div>
+      <div class="rotation-item pos-middle">
+        <div class="num">8</div>
+        <div class="type">Quote</div>
+        <div class="pos">Middle</div>
+      </div>
+      <div class="rotation-item pos-right">
+        <div class="num">9</div>
+        <div class="type">Education</div>
+        <div class="pos">Right</div>
+      </div>
+      <div class="rotation-item pos-left">
+        <div class="num">10</div>
+        <div class="type">Docs</div>
+        <div class="pos">Left</div>
+      </div>
+    </div>
+
+    <div class="rotation-legend">
+      <span><div class="legend-dot left"></div> Left column</span>
+      <span><div class="legend-dot middle"></div> Middle column</span>
+      <span><div class="legend-dot right"></div> Right column</span>
+    </div>
+  </div>
+
+</body>
+</html>
