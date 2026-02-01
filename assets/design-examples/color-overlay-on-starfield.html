@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignalPilot — Color Overlays on Starfield</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 300;
+      font-size: 24px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 60px 0 30px;
+    }
+
+    /* ================================
+       GRID COMPARISON
+    ================================ */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .card-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    /* ================================
+       BASE CARD WITH STARFIELD
+    ================================ */
+    .card {
+      width: 280px;
+      height: 350px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      /* Simulated starfield background */
+      background:
+        radial-gradient(1px 1px at 20px 30px, white, transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 50px 160px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 90px 40px, white, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 160px 120px, white, transparent),
+        radial-gradient(1px 1px at 200px 50px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 220px 150px, white, transparent),
+        radial-gradient(1px 1px at 250px 90px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 80px 190px, white, transparent),
+        radial-gradient(1px 1px at 110px 220px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 170px 200px, white, transparent),
+        radial-gradient(1px 1px at 60px 280px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 140px 300px, white, transparent),
+        radial-gradient(1px 1px at 210px 260px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 240px 320px, white, transparent),
+        radial-gradient(1px 1px at 30px 340px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 180px 340px, white, transparent),
+        radial-gradient(2px 2px at 100px 100px, rgba(255,255,255,0.3), transparent),
+        radial-gradient(2px 2px at 200px 200px, rgba(255,255,255,0.2), transparent),
+        linear-gradient(180deg, #0a0a12 0%, #05050a 100%);
+    }
+
+    .card-description {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #555;
+      text-align: center;
+      max-width: 260px;
+      line-height: 1.4;
+    }
+
+    /* ================================
+       COLOR OVERLAYS
+    ================================ */
+
+    /* No overlay - current state */
+    .no-overlay .content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Education - Cyan overlay */
+    .education-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(0, 212, 255, 0.15) 0%,
+        rgba(0, 212, 255, 0.03) 30%,
+        transparent 50%,
+        rgba(0, 212, 255, 0.02) 80%,
+        rgba(0, 212, 255, 0.08) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .education-overlay::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00d4ff, #0891b2);
+      z-index: 2;
+    }
+
+    /* Blog - Purple overlay */
+    .blog-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 0%, rgba(168, 85, 247, 0.2) 0%, transparent 50%),
+        linear-gradient(180deg,
+          rgba(168, 85, 247, 0.08) 0%,
+          transparent 40%,
+          rgba(139, 92, 246, 0.05) 100%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Quote - Gold overlay */
+    .quote-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(255, 215, 0, 0.06) 0%, transparent 60%),
+        linear-gradient(180deg,
+          rgba(255, 215, 0, 0.04) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba(255, 215, 0, 0.04) 100%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Docs - Slate overlay */
+    .docs-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(148, 163, 184, 0.1) 0%,
+        rgba(148, 163, 184, 0.02) 20%,
+        transparent 50%,
+        rgba(148, 163, 184, 0.03) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .docs-overlay::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #64748b, #475569);
+      z-index: 2;
+    }
+
+    /* Marketing - Orange overlay */
+    .marketing-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 100%, rgba(249, 115, 22, 0.15) 0%, transparent 50%),
+        linear-gradient(180deg,
+          rgba(249, 115, 22, 0.05) 0%,
+          transparent 30%,
+          rgba(249, 115, 22, 0.1) 100%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Product - Green overlay */
+    .product-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(16, 185, 129, 0.12) 0%,
+        rgba(16, 185, 129, 0.03) 30%,
+        transparent 50%,
+        rgba(16, 185, 129, 0.05) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Chronicle - Magenta overlay */
+    .chronicle-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(236, 72, 153, 0.18) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%),
+        linear-gradient(180deg,
+          rgba(236, 72, 153, 0.05) 0%,
+          transparent 40%,
+          rgba(168, 85, 247, 0.05) 100%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ================================
+       CONTENT STYLING
+    ================================ */
+    .content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .tag.cyan { color: #00d4ff; }
+    .tag.purple { color: #a855f7; }
+    .tag.gold { color: #ffd700; }
+    .tag.slate { color: #94a3b8; }
+    .tag.orange { color: #f97316; }
+    .tag.green { color: #10b981; }
+    .tag.magenta { color: #ec4899; }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 13px;
+      color: #8b8b9b;
+      line-height: 1.5;
+    }
+
+    .accent-cyan { color: #00d4ff; }
+    .accent-purple { color: #c4b5fd; }
+    .accent-gold { color: #ffd700; }
+    .accent-slate { color: #94a3b8; }
+    .accent-orange { color: #f97316; }
+    .accent-green { color: #10b981; }
+    .accent-magenta { color: #ec4899; }
+
+    /* ================================
+       MINI GRID PREVIEW
+    ================================ */
+    .instagram-section {
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 120px);
+      gap: 3px;
+      justify-content: center;
+      background: #000;
+      padding: 3px;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
+
+    .mini-card {
+      width: 120px;
+      height: 120px;
+      position: relative;
+      overflow: hidden;
+      /* Mini starfield */
+      background:
+        radial-gradient(1px 1px at 10px 15px, white, transparent),
+        radial-gradient(1px 1px at 30px 40px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 50px 20px, white, transparent),
+        radial-gradient(1px 1px at 70px 60px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 90px 35px, white, transparent),
+        radial-gradient(1px 1px at 20px 80px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 60px 90px, white, transparent),
+        radial-gradient(1px 1px at 100px 70px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 40px 110px, white, transparent),
+        radial-gradient(1px 1px at 80px 100px, rgba(255,255,255,0.7), transparent),
+        linear-gradient(180deg, #0a0a12 0%, #05050a 100%);
+    }
+
+    .mini-card span {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Mini overlays */
+    .mini-education::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 212, 255, 0.15) 0%, transparent 50%, rgba(0, 212, 255, 0.08) 100%);
+      z-index: 1;
+    }
+    .mini-education::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: #00d4ff;
+      z-index: 2;
+    }
+
+    .mini-blog::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 0%, rgba(168, 85, 247, 0.2) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    .mini-quote::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    .mini-docs::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(148, 163, 184, 0.1) 0%, transparent 50%);
+      z-index: 1;
+    }
+    .mini-docs::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 2px;
+      background: #64748b;
+      z-index: 2;
+    }
+
+    .mini-marketing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 100%, rgba(249, 115, 22, 0.18) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    .mini-product::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.15) 0%, transparent 50%);
+      z-index: 1;
+    }
+
+    .mini-chronicle::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(236, 72, 153, 0.2) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    /* ================================
+       APPROACH COMPARISON
+    ================================ */
+    .approach-section {
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      max-width: 1000px;
+      margin: 30px auto 0;
+    }
+
+    .approach-card {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .approach-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+
+    .approach-card .carousel-preview {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .approach-card .slide {
+      width: 50px;
+      height: 62px;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(1px 1px at 10px 10px, white, transparent),
+        radial-gradient(1px 1px at 25px 30px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 40px 20px, white, transparent),
+        radial-gradient(1px 1px at 15px 50px, rgba(255,255,255,0.6), transparent),
+        linear-gradient(180deg, #0a0a12 0%, #05050a 100%);
+    }
+
+    .approach-card .slide.colored::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 212, 255, 0.15) 0%, transparent 50%);
+    }
+    .approach-card .slide.colored::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: #00d4ff;
+    }
+
+    .approach-card .slide span {
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .approach-card p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .approach-card .tag {
+      display: inline-block;
+      padding: 4px 8px;
+      background: rgba(0, 212, 255, 0.1);
+      border-radius: 4px;
+      font-size: 10px;
+      color: #00d4ff;
+      margin-top: 12px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Color Overlays on Starfield</h1>
+  <p class="subtitle">Keep your starfield background. Add subtle color temperature shifts per content type.</p>
+
+  <!-- SIDE BY SIDE: NO OVERLAY VS OVERLAYS -->
+  <div class="section-title">Before vs After</div>
+
+  <div class="comparison-grid">
+
+    <!-- No overlay -->
+    <div class="card-wrapper">
+      <div class="card-label">Current (No Overlay)</div>
+      <div class="card no-overlay">
+        <div class="content">
+          <div class="tag" style="color: #888;">Trading Education</div>
+          <h2>RSI Extremes Don't Mean Reversal</h2>
+          <p>Why overbought can stay overbought — and what to do about it.</p>
+        </div>
+      </div>
+      <p class="card-description">Starfield only. No color differentiation.</p>
+    </div>
+
+    <!-- Education overlay -->
+    <div class="card-wrapper">
+      <div class="card-label">Education (Cyan Overlay)</div>
+      <div class="card education-overlay">
+        <div class="content">
+          <div class="tag cyan">Lesson 05</div>
+          <h2>RSI Extremes Don't Mean Reversal</h2>
+          <p>Why overbought can stay overbought — and what to do about it.</p>
+        </div>
+      </div>
+      <p class="card-description">Same starfield + cyan gradient overlay + top bar.</p>
+    </div>
+
+    <!-- Blog overlay -->
+    <div class="card-wrapper">
+      <div class="card-label">Blog (Purple Overlay)</div>
+      <div class="card blog-overlay">
+        <div class="content">
+          <div class="tag purple">Trading Psychology</div>
+          <h2>The Art of <span class="accent-purple">Doing Nothing</span></h2>
+          <p>Most traders lose money not from bad trades, but from trades they shouldn't have taken.</p>
+        </div>
+      </div>
+      <p class="card-description">Same starfield + purple radial glow top-right.</p>
+    </div>
+
+    <!-- Quote overlay -->
+    <div class="card-wrapper">
+      <div class="card-label">Quote (Gold Overlay)</div>
+      <div class="card quote-overlay">
+        <div class="content" style="justify-content: center; text-align: center;">
+          <h2 style="font-weight: 300; font-size: 18px;">The goal isn't to be right. It's to <span class="accent-gold">make money</span> when you're right.</h2>
+        </div>
+      </div>
+      <p class="card-description">Same starfield + subtle gold center glow.</p>
+    </div>
+
+    <!-- Docs overlay -->
+    <div class="card-wrapper">
+      <div class="card-label">Docs (Slate Overlay)</div>
+      <div class="card docs-overlay">
+        <div class="content">
+          <div class="tag slate">Documentation</div>
+          <h2>Alert Setup Guide</h2>
+          <p style="font-family: 'SF Mono', monospace; font-size: 12px; color: #94a3b8;">TD Signal → Alert<br>WRN Signal → Alert<br>CAP Signal → Alert</p>
+        </div>
+      </div>
+      <p class="card-description">Same starfield + slate gradient + left bar.</p>
+    </div>
+
+    <!-- Marketing overlay -->
+    <div class="card-wrapper">
+      <div class="card-label">Marketing (Orange Overlay)</div>
+      <div class="card marketing-overlay">
+        <div class="content">
+          <div class="tag orange">Limited Time</div>
+          <h2 style="font-size: 36px; color: #f97316;">10,000+</h2>
+          <p>Traders trust SignalPilot</p>
+        </div>
+      </div>
+      <p class="card-description">Same starfield + warm orange glow bottom-left.</p>
+    </div>
+
+    <!-- Product overlay -->
+    <div class="card-wrapper">
+      <div class="card-label">Product (Green Overlay)</div>
+      <div class="card product-overlay">
+        <div class="content">
+          <div class="tag green">Pentarch TD</div>
+          <h2>TD Signal: <span class="accent-green">Trend Confirmed</span></h2>
+          <p>Momentum aligned across all components. High-probability setup detected.</p>
+        </div>
+      </div>
+      <p class="card-description">Same starfield + green gradient top/bottom.</p>
+    </div>
+
+    <!-- Chronicle overlay -->
+    <div class="card-wrapper">
+      <div class="card-label">Chronicle (Magenta Overlay)</div>
+      <div class="card chronicle-overlay">
+        <div class="content">
+          <div class="tag magenta">Chronicle VII</div>
+          <h2>When <span class="accent-magenta">Volume Whispers</span>, the Wise Listen</h2>
+          <p style="font-style: italic;">"The crowd sees price. The Prophet sees intent."</p>
+        </div>
+      </div>
+      <p class="card-description">Same starfield + magenta glow top + purple corner.</p>
+    </div>
+
+  </div>
+
+  <!-- INSTAGRAM GRID PREVIEW -->
+  <div class="instagram-section">
+    <div class="section-title">How It Looks in Your Grid</div>
+    <p class="subtitle">Same starfield base. Color overlays create visual rhythm.</p>
+
+    <div class="instagram-grid">
+      <div class="mini-card mini-education"><span>Education</span></div>
+      <div class="mini-card mini-blog"><span>Blog</span></div>
+      <div class="mini-card mini-quote"><span>Quote</span></div>
+      <div class="mini-card mini-product"><span>Product</span></div>
+      <div class="mini-card mini-docs"><span>Docs</span></div>
+      <div class="mini-card mini-chronicle"><span>Chronicle</span></div>
+      <div class="mini-card mini-marketing"><span>Marketing</span></div>
+      <div class="mini-card mini-education"><span>Education</span></div>
+      <div class="mini-card mini-blog"><span>Blog</span></div>
+    </div>
+  </div>
+
+  <!-- APPROACH OPTIONS -->
+  <div class="approach-section">
+    <div class="section-title">Implementation Approaches</div>
+    <p class="subtitle">How many slides get the color treatment?</p>
+
+    <div class="approach-grid">
+
+      <div class="approach-card">
+        <h3>A: First Slide Only</h3>
+        <div class="carousel-preview">
+          <div class="slide colored"><span>1</span></div>
+          <div class="slide"><span>2</span></div>
+          <div class="slide"><span>3</span></div>
+          <div class="slide"><span>4</span></div>
+          <div class="slide"><span>5</span></div>
+          <div class="slide"><span>6</span></div>
+        </div>
+        <p>Grid thumbnail shows differentiation. Rest of carousel stays pure starfield brand.</p>
+        <div class="tag">Minimal change</div>
+      </div>
+
+      <div class="approach-card">
+        <h3>B: Bookends (First + Last)</h3>
+        <div class="carousel-preview">
+          <div class="slide colored"><span>1</span></div>
+          <div class="slide"><span>2</span></div>
+          <div class="slide"><span>3</span></div>
+          <div class="slide"><span>4</span></div>
+          <div class="slide"><span>5</span></div>
+          <div class="slide colored"><span>6</span></div>
+        </div>
+        <p>Color on hook slide + CTA slide. Middle content stays focused and clean.</p>
+        <div class="tag">Recommended</div>
+      </div>
+
+      <div class="approach-card">
+        <h3>C: All Slides</h3>
+        <div class="carousel-preview">
+          <div class="slide colored"><span>1</span></div>
+          <div class="slide colored"><span>2</span></div>
+          <div class="slide colored"><span>3</span></div>
+          <div class="slide colored"><span>4</span></div>
+          <div class="slide colored"><span>5</span></div>
+          <div class="slide colored"><span>6</span></div>
+        </div>
+        <p>Consistent color temperature throughout. Strongest category reinforcement.</p>
+        <div class="tag">Most work</div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
