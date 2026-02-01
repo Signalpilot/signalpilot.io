@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canva Overlay Guide — SignalPilot</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 300;
+      font-size: 24px;
+      color: #888;
+      margin-bottom: 40px;
+    }
+
+    .section {
+      max-width: 900px;
+      margin: 0 auto 60px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #666;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    /* ================================
+       LAYER BREAKDOWN
+    ================================ */
+    .layers-demo {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .layer-card {
+      text-align: center;
+    }
+
+    .layer-card .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .layer-box {
+      width: 200px;
+      height: 250px;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .layer-card .caption {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #444;
+    }
+
+    /* Starfield only */
+    .starfield-only {
+      background:
+        radial-gradient(1px 1px at 20px 30px, white, transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 50px 160px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 90px 40px, white, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 160px 120px, white, transparent),
+        radial-gradient(1px 1px at 180px 200px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 60px 220px, white, transparent),
+        radial-gradient(1px 1px at 140px 180px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 100px 240px, white, transparent),
+        linear-gradient(180deg, #0a0a12 0%, #05050a 100%);
+    }
+
+    /* Overlay rectangle visualization */
+    .overlay-rect {
+      background: linear-gradient(180deg,
+        rgba(0, 212, 255, 0.5) 0%,
+        rgba(0, 212, 255, 0.1) 30%,
+        transparent 50%,
+        rgba(0, 212, 255, 0.05) 80%,
+        rgba(0, 212, 255, 0.3) 100%
+      );
+      border: 2px dashed rgba(0, 212, 255, 0.5);
+    }
+
+    /* Combined result */
+    .combined {
+      background:
+        radial-gradient(1px 1px at 20px 30px, white, transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 50px 160px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 90px 40px, white, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 160px 120px, white, transparent),
+        radial-gradient(1px 1px at 180px 200px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 60px 220px, white, transparent),
+        radial-gradient(1px 1px at 140px 180px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 100px 240px, white, transparent),
+        linear-gradient(180deg, #0a0a12 0%, #05050a 100%);
+    }
+
+    .combined::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(0, 212, 255, 0.15) 0%,
+        rgba(0, 212, 255, 0.03) 30%,
+        transparent 50%,
+        rgba(0, 212, 255, 0.02) 80%,
+        rgba(0, 212, 255, 0.08) 100%
+      );
+    }
+
+    .combined::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #00d4ff;
+    }
+
+    .plus-sign, .equals-sign {
+      font-size: 32px;
+      color: #333;
+      padding: 0 10px;
+      align-self: center;
+    }
+
+    /* ================================
+       CANVA STEPS
+    ================================ */
+    .steps {
+      background: #111;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #222;
+    }
+
+    .step:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      background: rgba(0, 212, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #00d4ff;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .step-content p {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.5;
+    }
+
+    .step-content code {
+      background: #1a1a1a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #00d4ff;
+    }
+
+    /* ================================
+       COLOR REFERENCE
+    ================================ */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .color-card {
+      background: #111;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .color-swatch {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .color-info h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .color-info .hex {
+      font-size: 12px;
+      font-family: monospace;
+      color: #888;
+    }
+
+    .cyan-swatch { background: linear-gradient(180deg, rgba(0, 212, 255, 0.8), rgba(0, 212, 255, 0.2)); }
+    .purple-swatch { background: linear-gradient(180deg, rgba(168, 85, 247, 0.8), rgba(168, 85, 247, 0.2)); }
+    .gold-swatch { background: linear-gradient(180deg, rgba(255, 215, 0, 0.8), rgba(255, 215, 0, 0.2)); }
+    .slate-swatch { background: linear-gradient(180deg, rgba(148, 163, 184, 0.8), rgba(148, 163, 184, 0.2)); }
+    .orange-swatch { background: linear-gradient(180deg, rgba(249, 115, 22, 0.8), rgba(249, 115, 22, 0.2)); }
+    .green-swatch { background: linear-gradient(180deg, rgba(16, 185, 129, 0.8), rgba(16, 185, 129, 0.2)); }
+    .magenta-swatch { background: linear-gradient(180deg, rgba(236, 72, 153, 0.8), rgba(236, 72, 153, 0.2)); }
+
+    /* ================================
+       FINAL EXAMPLES
+    ================================ */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .example-card {
+      text-align: center;
+    }
+
+    .example-card .label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .example-slide {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(1px 1px at 20px 30px, white, transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 80px 50px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 120px 90px, white, transparent),
+        radial-gradient(1px 1px at 60px 140px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 150px 120px, white, transparent),
+        radial-gradient(1px 1px at 30px 180px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 100px 200px, white, transparent),
+        linear-gradient(180deg, #0a0a12 0%, #05050a 100%);
+    }
+
+    .example-slide .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .example-slide .tag {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .example-slide h3 {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    /* Education */
+    .ex-education::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,212,255,0.15) 0%, transparent 50%, rgba(0,212,255,0.08) 100%);
+      z-index: 1;
+    }
+    .ex-education::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: #00d4ff;
+      z-index: 2;
+    }
+    .ex-education .tag { color: #00d4ff; }
+
+    /* Blog */
+    .ex-blog::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 0%, rgba(168,85,247,0.2) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .ex-blog .tag { color: #a855f7; }
+
+    /* Quote */
+    .ex-quote::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(255,215,0,0.08) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .ex-quote .tag { color: #ffd700; }
+
+    /* Docs */
+    .ex-docs::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(148,163,184,0.12) 0%, transparent 50%);
+      z-index: 1;
+    }
+    .ex-docs::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: #64748b;
+      z-index: 2;
+    }
+    .ex-docs .tag { color: #94a3b8; }
+
+    /* Marketing */
+    .ex-marketing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 100%, rgba(249,115,22,0.18) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .ex-marketing .tag { color: #f97316; }
+
+    /* Product */
+    .ex-product::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16,185,129,0.15) 0%, transparent 50%, rgba(16,185,129,0.08) 100%);
+      z-index: 1;
+    }
+    .ex-product .tag { color: #10b981; }
+
+    /* Chronicle */
+    .ex-chronicle::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(236,72,153,0.2) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .ex-chronicle .tag { color: #ec4899; }
+
+  </style>
+</head>
+<body>
+
+  <h1>Canva Overlay Guide</h1>
+
+  <!-- LAYER BREAKDOWN -->
+  <div class="section">
+    <div class="section-title">How It Works</div>
+
+    <div class="layers-demo">
+      <div class="layer-card">
+        <div class="label">Layer 1: Starfield</div>
+        <div class="layer-box starfield-only"></div>
+        <div class="caption">Your background image</div>
+      </div>
+
+      <div class="plus-sign">+</div>
+
+      <div class="layer-card">
+        <div class="label">Layer 2: Color Rectangle</div>
+        <div class="layer-box overlay-rect"></div>
+        <div class="caption">Gradient fill, 10-15% opacity</div>
+      </div>
+
+      <div class="equals-sign">=</div>
+
+      <div class="layer-card">
+        <div class="label">Result</div>
+        <div class="layer-box combined"></div>
+        <div class="caption">Starfield + color tint</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CANVA STEPS -->
+  <div class="section">
+    <div class="section-title">Canva Steps</div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Keep your starfield as the background</h3>
+          <p>This stays exactly as it is. Don't change anything.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Add a rectangle (full size of slide)</h3>
+          <p>Elements → Shapes → Square. Drag to cover the entire slide.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Set rectangle fill to gradient</h3>
+          <p>Click the rectangle → Fill color → Gradient. Use your category color at top and bottom, transparent in middle.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Lower the transparency</h3>
+          <p>Click rectangle → Transparency (top right) → Set to <code>10-15%</code></p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h3>Optional: Add a thin color bar</h3>
+          <p>For Education: Add a thin rectangle at top, fill with <code>#00d4ff</code>, height ~3-4px.<br>
+          For Docs: Add thin rectangle on left side, fill with <code>#94a3b8</code>, width ~3-4px.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">6</div>
+        <div class="step-content">
+          <h3>Send overlay to back (but above starfield)</h3>
+          <p>Right-click rectangle → Layer → Send backward. It should be between starfield and your text/content.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLOR REFERENCE -->
+  <div class="section">
+    <div class="section-title">Colors to Use in Canva</div>
+
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch cyan-swatch"></div>
+        <div class="color-info">
+          <h4>Education</h4>
+          <div class="hex">#00D4FF</div>
+        </div>
+      </div>
+
+      <div class="color-card">
+        <div class="color-swatch purple-swatch"></div>
+        <div class="color-info">
+          <h4>Blog</h4>
+          <div class="hex">#A855F7</div>
+        </div>
+      </div>
+
+      <div class="color-card">
+        <div class="color-swatch gold-swatch"></div>
+        <div class="color-info">
+          <h4>Quote</h4>
+          <div class="hex">#FFD700</div>
+        </div>
+      </div>
+
+      <div class="color-card">
+        <div class="color-swatch slate-swatch"></div>
+        <div class="color-info">
+          <h4>Docs</h4>
+          <div class="hex">#94A3B8</div>
+        </div>
+      </div>
+
+      <div class="color-card">
+        <div class="color-swatch orange-swatch"></div>
+        <div class="color-info">
+          <h4>Marketing</h4>
+          <div class="hex">#F97316</div>
+        </div>
+      </div>
+
+      <div class="color-card">
+        <div class="color-swatch green-swatch"></div>
+        <div class="color-info">
+          <h4>Product</h4>
+          <div class="hex">#10B981</div>
+        </div>
+      </div>
+
+      <div class="color-card">
+        <div class="color-swatch magenta-swatch"></div>
+        <div class="color-info">
+          <h4>Chronicle</h4>
+          <div class="hex">#EC4899</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL EXAMPLES -->
+  <div class="section">
+    <div class="section-title">Final Result for Each Type</div>
+
+    <div class="examples-grid">
+      <div class="example-card">
+        <div class="label">Education</div>
+        <div class="example-slide ex-education">
+          <div class="content">
+            <div class="tag">Lesson 05</div>
+            <h3>RSI Extremes Don't Mean Reversal</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="label">Blog</div>
+        <div class="example-slide ex-blog">
+          <div class="content">
+            <div class="tag">Psychology</div>
+            <h3>The Art of Doing Nothing</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="label">Quote</div>
+        <div class="example-slide ex-quote">
+          <div class="content" style="text-align: center;">
+            <div class="tag">Wisdom</div>
+            <h3>The goal isn't to be right...</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="label">Docs</div>
+        <div class="example-slide ex-docs">
+          <div class="content">
+            <div class="tag">Reference</div>
+            <h3>Alert Setup Guide</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="label">Marketing</div>
+        <div class="example-slide ex-marketing">
+          <div class="content">
+            <div class="tag">Limited Time</div>
+            <h3>10,000+ Traders Trust Us</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="label">Product</div>
+        <div class="example-slide ex-product">
+          <div class="content">
+            <div class="tag">Pentarch TD</div>
+            <h3>Signal Confirmed</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-card">
+        <div class="label">Chronicle</div>
+        <div class="example-slide ex-chronicle">
+          <div class="content">
+            <div class="tag">Chapter VII</div>
+            <h3>The Prophet Speaks</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
