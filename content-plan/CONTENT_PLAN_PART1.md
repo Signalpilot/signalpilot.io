@@ -3805,7 +3805,7 @@ See the difference in bio 🔗
 |-------|-------|
 | Pillar | P3: Market Mechanics |
 | Type | Education Hub Lesson (Deep Dive) |
-| Source | https://education.signalpilot.io/curriculum/beginner/05-volume-doesnt-lie.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -3844,7 +3844,7 @@ The crowd sells the bottom. Someone has to buy it.
 ```
 Full lesson on volume analysis:
 
-https://education.signalpilot.io/curriculum/beginner/05-volume-doesnt-lie.html
+https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html
 
 #volume #absorption #smartmoney
 ```
