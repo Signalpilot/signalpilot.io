@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignalPilot — Grid Beauty Through Texture</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 300;
+      font-size: 22px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 60px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #333;
+      margin: 80px 0 40px;
+    }
+
+    /* ================================
+       THE INSTAGRAM GRID - THE "WOW"
+    ================================ */
+    .instagram-section {
+      max-width: 500px;
+      margin: 0 auto 80px;
+    }
+
+    .instagram-mock {
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #111;
+    }
+
+    .instagram-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid #111;
+    }
+
+    .instagram-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .instagram-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0a0a14, #1a1a2e);
+      border: 2px solid #222;
+    }
+
+    .instagram-info .name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .instagram-info .bio {
+      font-size: 11px;
+      color: #555;
+    }
+
+    .instagram-stats {
+      text-align: right;
+      font-size: 11px;
+      color: #444;
+    }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      padding: 2px;
+    }
+
+    /* ================================
+       GRID ITEMS - EACH TYPE
+    ================================ */
+    .grid-item {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Base starfield for most */
+    .starfield-base {
+      background:
+        radial-gradient(1px 1px at 15px 20px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 45px 55px, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 80px 35px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 25px 85px, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 100px 70px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 60px 110px, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 120px 45px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 90px 125px, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 140px 100px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 35px 140px, rgba(255,255,255,0.4), transparent),
+        linear-gradient(180deg, #08080c 0%, #04040a 100%);
+    }
+
+    /* ================================
+       QUOTE CARD — Minimal, Breathing Room
+       Like "i am loved. i am enough."
+    ================================ */
+    .quote-item {
+      background: linear-gradient(180deg, #0c0c10 0%, #08080c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .quote-item .quote-text {
+      font-size: 11px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.7);
+      max-width: 120px;
+    }
+
+    /* ================================
+       EDUCATION — Structured, Numbered
+    ================================ */
+    .education-item {
+      display: flex;
+      flex-direction: column;
+      padding: 14px;
+    }
+
+    .education-item .lesson-num {
+      font-size: 28px;
+      font-weight: 200;
+      color: rgba(255,255,255,0.1);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .education-item .title {
+      font-size: 10px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .education-item .steps {
+      margin-top: auto;
+      font-size: 8px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .education-item .step {
+      padding: 4px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ================================
+       BLOG — Editorial, Atmospheric
+    ================================ */
+    .blog-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .blog-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(60,40,80,0.15) 0%, transparent 70%);
+    }
+
+    .blog-item .category {
+      position: relative;
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 10px;
+    }
+
+    .blog-item .title {
+      position: relative;
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.4;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .blog-item .title em {
+      font-style: italic;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ================================
+       PRODUCT DEMO — Charts, Data
+    ================================ */
+    .product-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-item .chart {
+      flex: 1;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 15px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 15px);
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px;
+      gap: 3px;
+    }
+
+    .product-item .candle {
+      width: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product-item .candle .wick {
+      width: 1px;
+      background: currentColor;
+    }
+
+    .product-item .candle .body {
+      width: 4px;
+      min-height: 3px;
+      background: currentColor;
+    }
+
+    .product-item .candle.up { color: rgba(16, 185, 129, 0.7); }
+    .product-item .candle.down { color: rgba(239, 68, 68, 0.5); }
+
+    .product-item .signal-line {
+      position: absolute;
+      bottom: 30px;
+      left: 10px;
+      right: 10px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(16,185,129,0.5));
+    }
+
+    .product-item .info {
+      padding: 10px;
+      background: rgba(0,0,0,0.3);
+    }
+
+    .product-item .signal-name {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(16,185,129,0.7);
+    }
+
+    .product-item .signal-title {
+      font-size: 10px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ================================
+       CHRONICLE — Mystical, Cinematic
+    ================================ */
+    .chronicle-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 14px;
+    }
+
+    .chronicle-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 20%, rgba(100,40,80,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(60,40,100,0.15) 0%, transparent 50%);
+    }
+
+    .chronicle-item .chapter {
+      position: relative;
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 6px;
+    }
+
+    .chronicle-item .character {
+      position: relative;
+      font-size: 9px;
+      font-style: italic;
+      color: rgba(167,139,250,0.5);
+      margin-bottom: 8px;
+    }
+
+    .chronicle-item .title {
+      position: relative;
+      font-size: 11px;
+      font-weight: 300;
+      line-height: 1.3;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .chronicle-item .symbol {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 16px;
+      opacity: 0.15;
+    }
+
+    /* ================================
+       MARKETING — Bold, Stats, CTA
+    ================================ */
+    .marketing-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 14px;
+    }
+
+    .marketing-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(249,115,22,0.08) 100%);
+    }
+
+    .marketing-item .stat {
+      position: relative;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .marketing-item .stat-label {
+      position: relative;
+      font-size: 8px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 12px;
+    }
+
+    .marketing-item .cta {
+      position: relative;
+      padding: 6px 14px;
+      background: #fff;
+      border-radius: 3px;
+      font-size: 8px;
+      font-weight: 600;
+      color: #000;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ================================
+       DOCS — Technical, Reference
+    ================================ */
+    .docs-item {
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+      border-left: 2px solid rgba(255,255,255,0.08);
+    }
+
+    .docs-item .doc-path {
+      font-size: 7px;
+      font-family: 'SF Mono', monospace;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 10px;
+    }
+
+    .docs-item .doc-title {
+      font-size: 10px;
+      font-weight: 500;
+      font-family: 'SF Mono', monospace;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 10px;
+    }
+
+    .docs-item .doc-list {
+      font-size: 8px;
+      font-family: 'SF Mono', monospace;
+    }
+
+    .docs-item .doc-line {
+      padding: 4px 6px;
+      background: rgba(255,255,255,0.02);
+      margin-bottom: 3px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ================================
+       INDIVIDUAL CARD EXAMPLES
+    ================================ */
+    .examples-section {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .example-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .example-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .example-card {
+      width: 260px;
+      height: 325px;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .example-note {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #444;
+      text-align: center;
+      max-width: 240px;
+      line-height: 1.5;
+    }
+
+    /* Large Quote Card */
+    .large-quote {
+      background: linear-gradient(180deg, #0c0c10 0%, #08080c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .large-quote .inner {
+      max-width: 200px;
+    }
+
+    .large-quote .quote-mark {
+      font-size: 36px;
+      font-family: Georgia, serif;
+      color: rgba(255,255,255,0.08);
+      margin-bottom: 16px;
+    }
+
+    .large-quote .quote-text {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 24px;
+    }
+
+    .large-quote .dash {
+      width: 24px;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 0 auto;
+    }
+
+    /* Large Education */
+    .large-education {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .large-education .lesson-num {
+      font-size: 56px;
+      font-weight: 200;
+      color: rgba(255,255,255,0.08);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .large-education .title {
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .large-education .desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .large-education .steps {
+      margin-top: auto;
+    }
+
+    .large-education .step {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .large-education .step-num {
+      color: rgba(255,255,255,0.2);
+      font-size: 10px;
+    }
+
+    /* Large Blog */
+    .large-blog {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 32px;
+    }
+
+    .large-blog::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(60,40,80,0.12) 0%, transparent 70%);
+    }
+
+    .large-blog .category {
+      position: relative;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 20px;
+    }
+
+    .large-blog .title {
+      position: relative;
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1.35;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .large-blog .title em {
+      font-style: italic;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .large-blog .excerpt {
+      position: relative;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* Large Chronicle */
+    .large-chronicle {
+      display: flex;
+      flex-direction: column;
+      padding: 32px;
+    }
+
+    .large-chronicle::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 10%, rgba(100,40,80,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 90%, rgba(60,40,100,0.12) 0%, transparent 45%);
+    }
+
+    .large-chronicle .chapter {
+      position: relative;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.2);
+      margin-bottom: 20px;
+    }
+
+    .large-chronicle .character {
+      position: relative;
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(167,139,250,0.6);
+      margin-bottom: 16px;
+    }
+
+    .large-chronicle .title {
+      position: relative;
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 20px;
+    }
+
+    .large-chronicle .lore {
+      position: relative;
+      margin-top: auto;
+      font-size: 12px;
+      font-style: italic;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .large-chronicle .symbol {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      font-size: 28px;
+      opacity: 0.12;
+    }
+
+    /* ================================
+       SUMMARY
+    ================================ */
+    .summary-section {
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid #111;
+    }
+
+    .summary-box {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .summary-box h3 {
+      font-size: 14px;
+      font-weight: 400;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    .texture-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px 32px;
+    }
+
+    .texture-item {
+      font-size: 11px;
+      color: #444;
+    }
+
+    .texture-item strong {
+      color: #666;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Grid Beauty Through Visual Texture</h1>
+  <p class="subtitle">Each content type has its own feeling. No labels needed. The design speaks.</p>
+
+  <!-- THE INSTAGRAM GRID -->
+  <div class="instagram-section">
+    <div class="instagram-mock">
+      <div class="instagram-header">
+        <div class="instagram-profile">
+          <div class="instagram-avatar"></div>
+          <div class="instagram-info">
+            <div class="name">SignalPilot</div>
+            <div class="bio">Trading indicators that don't lie</div>
+          </div>
+        </div>
+        <div class="instagram-stats">614 posts</div>
+      </div>
+
+      <div class="instagram-grid">
+        <!-- Row 1 -->
+        <div class="grid-item starfield-base education-item">
+          <div class="lesson-num">39</div>
+          <div class="title">Position Sizing: The 1% Rule</div>
+          <div class="steps">
+            <div class="step">01 — Risk per trade</div>
+            <div class="step">02 — Account protection</div>
+          </div>
+        </div>
+
+        <div class="grid-item quote-item">
+          <div class="quote-text">The goal isn't to be right. It's to make money when you're right.</div>
+        </div>
+
+        <div class="grid-item starfield-base product-item">
+          <div class="chart">
+            <div class="candle up"><div class="wick" style="height:6px"></div><div class="body" style="height:12px"></div><div class="wick" style="height:3px"></div></div>
+            <div class="candle up"><div class="wick" style="height:4px"></div><div class="body" style="height:16px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle down"><div class="wick" style="height:8px"></div><div class="body" style="height:8px"></div><div class="wick" style="height:5px"></div></div>
+            <div class="candle down"><div class="wick" style="height:3px"></div><div class="body" style="height:12px"></div><div class="wick" style="height:6px"></div></div>
+            <div class="candle up"><div class="wick" style="height:5px"></div><div class="body" style="height:10px"></div><div class="wick" style="height:3px"></div></div>
+            <div class="candle up"><div class="wick" style="height:2px"></div><div class="body" style="height:20px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle up"><div class="wick" style="height:4px"></div><div class="body" style="height:15px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="signal-line"></div>
+          </div>
+          <div class="info">
+            <div class="signal-name">Pentarch TD</div>
+            <div class="signal-title">Signal Confirmed</div>
+          </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="grid-item starfield-base blog-item">
+          <div class="category">Psychology</div>
+          <div class="title">The Art of <em>Doing Nothing</em></div>
+        </div>
+
+        <div class="grid-item starfield-base chronicle-item">
+          <div class="symbol">◈</div>
+          <div class="chapter">Chronicle VII</div>
+          <div class="character">The Prophet</div>
+          <div class="title">Volume Whispers</div>
+        </div>
+
+        <div class="grid-item quote-item">
+          <div class="quote-text">Patience is not the ability to wait, but how you act while waiting.</div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="grid-item starfield-base marketing-item">
+          <div class="stat">10K+</div>
+          <div class="stat-label">traders</div>
+          <div class="cta">Start Free</div>
+        </div>
+
+        <div class="grid-item starfield-base education-item">
+          <div class="lesson-num">42</div>
+          <div class="title">Risk-Reward Ratio Explained</div>
+          <div class="steps">
+            <div class="step">01 — Why 1:2 minimum</div>
+            <div class="step">02 — Calculating R</div>
+          </div>
+        </div>
+
+        <div class="grid-item starfield-base docs-item">
+          <div class="doc-path">docs / alerts</div>
+          <div class="doc-title">Alert Setup</div>
+          <div class="doc-list">
+            <div class="doc-line">TD → Alert</div>
+            <div class="doc-line">WRN → Alert</div>
+            <div class="doc-line">CAP → Alert</div>
+          </div>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="grid-item starfield-base chronicle-item">
+          <div class="symbol">⬡</div>
+          <div class="chapter">Chronicle VIII</div>
+          <div class="character">The Scales</div>
+          <div class="title">Balance in All</div>
+        </div>
+
+        <div class="grid-item starfield-base blog-item">
+          <div class="category">Mindset</div>
+          <div class="title">Why Your Stop Loss <em>Keeps Getting Hit</em></div>
+        </div>
+
+        <div class="grid-item starfield-base product-item">
+          <div class="chart">
+            <div class="candle down"><div class="wick" style="height:8px"></div><div class="body" style="height:14px"></div><div class="wick" style="height:4px"></div></div>
+            <div class="candle down"><div class="wick" style="height:5px"></div><div class="body" style="height:10px"></div><div class="wick" style="height:6px"></div></div>
+            <div class="candle up"><div class="wick" style="height:4px"></div><div class="body" style="height:8px"></div><div class="wick" style="height:3px"></div></div>
+            <div class="candle up"><div class="wick" style="height:3px"></div><div class="body" style="height:18px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle up"><div class="wick" style="height:5px"></div><div class="body" style="height:12px"></div><div class="wick" style="height:3px"></div></div>
+            <div class="candle down"><div class="wick" style="height:7px"></div><div class="body" style="height:6px"></div><div class="wick" style="height:4px"></div></div>
+            <div class="candle up"><div class="wick" style="height:2px"></div><div class="body" style="height:22px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="signal-line"></div>
+          </div>
+          <div class="info">
+            <div class="signal-name">Volume Oracle</div>
+            <div class="signal-title">Accumulation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDIVIDUAL EXAMPLES -->
+  <div class="section-title">Each Type Up Close</div>
+
+  <div class="examples-section">
+    <div class="example-grid">
+
+      <!-- Quote Card -->
+      <div class="example-wrapper">
+        <div class="example-label">Quote Card (10%)</div>
+        <div class="example-card large-quote">
+          <div class="inner">
+            <div class="quote-mark">"</div>
+            <div class="quote-text">The goal isn't to be right. It's to make money when you're right and lose little when you're wrong.</div>
+            <div class="dash"></div>
+          </div>
+        </div>
+        <p class="example-note">Minimal. Centered. Breathing room. The "pause" in your grid.</p>
+      </div>
+
+      <!-- Education -->
+      <div class="example-wrapper">
+        <div class="example-label">Education (37%)</div>
+        <div class="example-card starfield-base large-education">
+          <div class="lesson-num">39</div>
+          <div class="title">Position Sizing: The 1% Rule</div>
+          <div class="desc">Why risking more than 1% per trade is a path to ruin.</div>
+          <div class="steps">
+            <div class="step"><span class="step-num">01</span> Risk per trade</div>
+            <div class="step"><span class="step-num">02</span> Account protection</div>
+            <div class="step"><span class="step-num">03</span> Compounding safely</div>
+          </div>
+        </div>
+        <p class="example-note">Structured. Numbered. This looks like a lesson.</p>
+      </div>
+
+      <!-- Blog -->
+      <div class="example-wrapper">
+        <div class="example-label">Blog (22%)</div>
+        <div class="example-card starfield-base large-blog">
+          <div class="category">Trading Psychology</div>
+          <div class="title">The Art of <em>Doing Nothing</em></div>
+          <div class="excerpt">"Most traders lose money not from bad trades, but from trades they shouldn't have taken at all."</div>
+        </div>
+        <p class="example-note">Editorial. Atmospheric. This feels like a think piece.</p>
+      </div>
+
+      <!-- Chronicle -->
+      <div class="example-wrapper">
+        <div class="example-label">Chronicle (9%)</div>
+        <div class="example-card starfield-base large-chronicle">
+          <div class="symbol">◈</div>
+          <div class="chapter">Chronicle VII</div>
+          <div class="character">The Prophet speaks...</div>
+          <div class="title">When Volume Whispers, the Wise Listen</div>
+          <div class="lore">"The crowd sees price. The Prophet sees intent."</div>
+        </div>
+        <p class="example-note">Mystical. Cinematic. This is storytelling.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-section">
+    <div class="summary-box">
+      <h3>The Visual Texture System</h3>
+      <div class="texture-list">
+        <div class="texture-item"><strong>Quote</strong> → Minimal, soft</div>
+        <div class="texture-item"><strong>Education</strong> → Structured, numbered</div>
+        <div class="texture-item"><strong>Blog</strong> → Editorial, moody</div>
+        <div class="texture-item"><strong>Product</strong> → Charts, data</div>
+        <div class="texture-item"><strong>Chronicle</strong> → Mystical, cinematic</div>
+        <div class="texture-item"><strong>Marketing</strong> → Bold stats, CTA</div>
+        <div class="texture-item"><strong>Docs</strong> → Technical, reference</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
