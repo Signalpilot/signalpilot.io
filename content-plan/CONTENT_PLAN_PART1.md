@@ -5895,7 +5895,7 @@ Meet The Watchman in bio 🔗
 |-------|-------|
 | Pillar | P2: Indicator Truth |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/07-moving-averages.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/06-moving-averages.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -5926,7 +5926,7 @@ The media hypes crosses. Smart traders see them as confirmations, not signals.
 ```
 Full lesson on moving averages:
 
-https://education.signalpilot.io/curriculum/beginner/07-moving-averages.html
+https://education.signalpilot.io/curriculum/beginner/06-moving-averages.html
 
 #goldencross #deathcross #movingaverages
 ```
