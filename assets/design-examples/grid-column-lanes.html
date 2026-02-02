@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignalPilot — Column Lanes Grid</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 300;
+      font-size: 22px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    /* Column legend */
+    .column-legend {
+      max-width: 480px;
+      margin: 0 auto 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    .column-legend .col {
+      padding: 8px;
+      border-radius: 4px;
+    }
+
+    .column-legend .col-left {
+      background: rgba(168, 85, 247, 0.15);
+      color: #a855f7;
+    }
+
+    .column-legend .col-center {
+      background: rgba(0, 212, 255, 0.15);
+      color: #00d4ff;
+    }
+
+    .column-legend .col-right {
+      background: rgba(255, 215, 0, 0.15);
+      color: #ffd700;
+    }
+
+    .grid-section {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .instagram-mock {
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .instagram-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-bottom: 1px solid #111;
+    }
+
+    .instagram-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+    }
+
+    .instagram-info .name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .instagram-info .bio {
+      font-size: 11px;
+      color: #666;
+    }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      padding: 2px;
+    }
+
+    .grid-item {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Base starfield */
+    .dark-base {
+      background:
+        radial-gradient(1px 1px at 15px 20px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 45px 55px, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 80px 35px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 25px 85px, rgba(255,255,255,0.25), transparent),
+        radial-gradient(1px 1px at 110px 60px, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 60px 105px, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 130px 40px, rgba(255,255,255,0.5), transparent),
+        linear-gradient(180deg, #0a0a12 0%, #050508 100%);
+    }
+
+    /* ================================
+       LEFT COLUMN: Blog/Chronicle (Purple/Pink)
+       Atmospheric, editorial feel
+    ================================ */
+    .left-blog {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .left-blog::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+    }
+
+    .left-blog .category {
+      position: relative;
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #a855f7;
+      margin-bottom: 6px;
+    }
+
+    .left-blog .title {
+      position: relative;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: #fff;
+    }
+
+    .left-blog .title em {
+      font-style: italic;
+      color: #c4b5fd;
+    }
+
+    .left-chronicle {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .left-chronicle::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 10%, rgba(236, 72, 153, 0.14) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+    }
+
+    .left-chronicle .chapter {
+      position: relative;
+      font-size: 6px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #ec4899;
+      margin-bottom: 3px;
+    }
+
+    .left-chronicle .character {
+      position: relative;
+      font-size: 8px;
+      font-style: italic;
+      color: #a78bfa;
+      margin-bottom: 4px;
+    }
+
+    .left-chronicle .title {
+      position: relative;
+      font-size: 10px;
+      font-weight: 400;
+      line-height: 1.3;
+      color: #fff;
+    }
+
+    .left-chronicle .title .accent {
+      color: #f472b6;
+    }
+
+    .left-chronicle .symbol {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 14px;
+      opacity: 0.2;
+      color: #ec4899;
+    }
+
+    /* ================================
+       CENTER COLUMN: Education (Cyan)
+       Structured, numbered lessons
+    ================================ */
+    .center-education {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      border-top: 2px solid rgba(0, 212, 255, 0.7);
+    }
+
+    .center-education .num {
+      font-size: 32px;
+      font-weight: 200;
+      color: rgba(0, 212, 255, 0.2);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .center-education .tag {
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #00d4ff;
+      margin-bottom: 6px;
+    }
+
+    .center-education .title {
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .center-education .title .accent {
+      color: #00d4ff;
+    }
+
+    .center-education .steps {
+      margin-top: auto;
+      font-size: 7px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .center-education .step {
+      padding: 3px 0;
+      border-top: 1px solid rgba(0, 212, 255, 0.1);
+    }
+
+    /* ================================
+       RIGHT COLUMN: Quote/Product/Marketing (Gold/Green/Orange)
+       Action-oriented, results
+    ================================ */
+    .right-quote {
+      background: linear-gradient(180deg, #0c0c0f 0%, #08080a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .right-quote .text {
+      font-size: 10px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.75);
+      max-width: 110px;
+    }
+
+    .right-quote .accent {
+      color: #ffd700;
+      font-weight: 500;
+    }
+
+    .right-product {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .right-product .chart {
+      flex: 1;
+      background:
+        repeating-linear-gradient(90deg, rgba(16,185,129,0.03) 0px, rgba(16,185,129,0.03) 1px, transparent 1px, transparent 12px),
+        repeating-linear-gradient(0deg, rgba(16,185,129,0.03) 0px, rgba(16,185,129,0.03) 1px, transparent 1px, transparent 12px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 10px;
+      gap: 3px;
+    }
+
+    .right-product .candle {
+      width: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .right-product .candle .wick {
+      width: 1px;
+      background: currentColor;
+    }
+
+    .right-product .candle .body {
+      width: 4px;
+      min-height: 3px;
+      background: currentColor;
+    }
+
+    .right-product .candle.up { color: #10b981; }
+    .right-product .candle.down { color: #ef4444; }
+
+    .right-product .info {
+      padding: 8px 10px;
+    }
+
+    .right-product .signal-name {
+      font-size: 7px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #10b981;
+    }
+
+    .right-product .signal-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .right-marketing {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .right-marketing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(249,115,22,0.1) 100%);
+    }
+
+    .right-marketing .tag {
+      position: relative;
+      font-size: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f97316;
+      margin-bottom: 6px;
+    }
+
+    .right-marketing .stat {
+      position: relative;
+      font-size: 28px;
+      font-weight: 700;
+      color: #f97316;
+      line-height: 1;
+    }
+
+    .right-marketing .stat-label {
+      position: relative;
+      font-size: 8px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .right-marketing .cta {
+      position: relative;
+      padding: 5px 12px;
+      background: linear-gradient(90deg, #f97316, #ea580c);
+      border-radius: 3px;
+      font-size: 7px;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    /* Column highlight lines */
+    .column-lines {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      pointer-events: none;
+      gap: 2px;
+      padding: 2px;
+    }
+
+    .column-lines .line {
+      border-left: 1px dashed rgba(255,255,255,0.05);
+      border-right: 1px dashed rgba(255,255,255,0.05);
+    }
+
+    /* Explanation */
+    .explanation {
+      max-width: 500px;
+      margin: 40px auto 0;
+      background: #111;
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .explanation h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .explanation p {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .explanation .purple { color: #a855f7; }
+    .explanation .cyan { color: #00d4ff; }
+    .explanation .gold { color: #ffd700; }
+
+  </style>
+</head>
+<body>
+
+  <h1>Column Lanes Grid</h1>
+  <p class="subtitle">Each content type lives in its own vertical lane</p>
+
+  <!-- Column Legend -->
+  <div class="column-legend">
+    <div class="col col-left">LEFT<br>Blog / Chronicle</div>
+    <div class="col col-center">CENTER<br>Education</div>
+    <div class="col col-right">RIGHT<br>Quote / Product / Marketing</div>
+  </div>
+
+  <div class="grid-section">
+    <div class="instagram-mock">
+      <div class="instagram-header">
+        <div class="instagram-avatar"></div>
+        <div class="instagram-info">
+          <div class="name">SignalPilot</div>
+          <div class="bio">Trading indicators that don't lie</div>
+        </div>
+      </div>
+
+      <div class="instagram-grid">
+        <!-- Row 1 -->
+        <div class="grid-item dark-base left-blog">
+          <div class="category">Psychology</div>
+          <div class="title">The Art of <em>Doing Nothing</em></div>
+        </div>
+
+        <div class="grid-item dark-base center-education">
+          <div class="num">39</div>
+          <div class="tag">Lesson</div>
+          <div class="title"><span class="accent">Position Sizing</span></div>
+          <div class="steps">
+            <div class="step">01 — Risk per trade</div>
+            <div class="step">02 — Account safety</div>
+          </div>
+        </div>
+
+        <div class="grid-item right-quote">
+          <div class="text">The goal isn't to be right. It's to <span class="accent">make money</span> when you're right.</div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="grid-item dark-base left-chronicle">
+          <div class="symbol">◈</div>
+          <div class="chapter">Chronicle VII</div>
+          <div class="character">The Prophet</div>
+          <div class="title"><span class="accent">Volume</span> Whispers</div>
+        </div>
+
+        <div class="grid-item dark-base center-education">
+          <div class="num">40</div>
+          <div class="tag">Lesson</div>
+          <div class="title"><span class="accent">Stop Loss</span> Basics</div>
+          <div class="steps">
+            <div class="step">01 — Where to place</div>
+            <div class="step">02 — ATR method</div>
+          </div>
+        </div>
+
+        <div class="grid-item dark-base right-product">
+          <div class="chart">
+            <div class="candle up"><div class="wick" style="height:5px"></div><div class="body" style="height:12px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle up"><div class="wick" style="height:3px"></div><div class="body" style="height:16px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle down"><div class="wick" style="height:6px"></div><div class="body" style="height:6px"></div><div class="wick" style="height:4px"></div></div>
+            <div class="candle up"><div class="wick" style="height:3px"></div><div class="body" style="height:10px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle up"><div class="wick" style="height:2px"></div><div class="body" style="height:18px"></div><div class="wick" style="height:2px"></div></div>
+          </div>
+          <div class="info">
+            <div class="signal-name">Pentarch TD</div>
+            <div class="signal-title">Trend Signal</div>
+          </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="grid-item dark-base left-blog">
+          <div class="category">Mindset</div>
+          <div class="title">Why <em>Patience</em> Pays</div>
+        </div>
+
+        <div class="grid-item dark-base center-education">
+          <div class="num">41</div>
+          <div class="tag">Lesson</div>
+          <div class="title"><span class="accent">Risk-Reward</span></div>
+          <div class="steps">
+            <div class="step">01 — Why 1:2 minimum</div>
+            <div class="step">02 — Calculating R</div>
+          </div>
+        </div>
+
+        <div class="grid-item right-quote">
+          <div class="text"><span class="accent">Patience</span> is not waiting. It's how you wait.</div>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="grid-item dark-base left-chronicle">
+          <div class="symbol">⬡</div>
+          <div class="chapter">Chronicle VIII</div>
+          <div class="character">The Scales</div>
+          <div class="title"><span class="accent">Balance</span> in All</div>
+        </div>
+
+        <div class="grid-item dark-base center-education">
+          <div class="num">42</div>
+          <div class="tag">Lesson</div>
+          <div class="title"><span class="accent">Trend Lines</span></div>
+          <div class="steps">
+            <div class="step">01 — Drawing right</div>
+            <div class="step">02 — Breakouts</div>
+          </div>
+        </div>
+
+        <div class="grid-item dark-base right-marketing">
+          <div class="tag">This Week</div>
+          <div class="stat">93%</div>
+          <div class="stat-label">win rate</div>
+          <div class="cta">See Results</div>
+        </div>
+
+        <!-- Row 5 -->
+        <div class="grid-item dark-base left-blog">
+          <div class="category">Strategy</div>
+          <div class="title">Reading <em>Market Structure</em></div>
+        </div>
+
+        <div class="grid-item dark-base center-education">
+          <div class="num">43</div>
+          <div class="tag">Lesson</div>
+          <div class="title"><span class="accent">Support</span> & Resistance</div>
+          <div class="steps">
+            <div class="step">01 — Key levels</div>
+            <div class="step">02 — Flip zones</div>
+          </div>
+        </div>
+
+        <div class="grid-item right-quote">
+          <div class="text"><span class="accent">Risk</span> is the only thing you can control.</div>
+        </div>
+
+        <!-- Row 6 -->
+        <div class="grid-item dark-base left-chronicle">
+          <div class="symbol">◇</div>
+          <div class="chapter">Chronicle IX</div>
+          <div class="character">The Wanderer</div>
+          <div class="title">Beyond <span class="accent">Fear</span></div>
+        </div>
+
+        <div class="grid-item dark-base center-education">
+          <div class="num">44</div>
+          <div class="tag">Lesson</div>
+          <div class="title"><span class="accent">Candlestick</span> Patterns</div>
+          <div class="steps">
+            <div class="step">01 — Engulfing</div>
+            <div class="step">02 — Doji signals</div>
+          </div>
+        </div>
+
+        <div class="grid-item dark-base right-product">
+          <div class="chart">
+            <div class="candle down"><div class="wick" style="height:6px"></div><div class="body" style="height:10px"></div><div class="wick" style="height:3px"></div></div>
+            <div class="candle down"><div class="wick" style="height:4px"></div><div class="body" style="height:6px"></div><div class="wick" style="height:5px"></div></div>
+            <div class="candle up"><div class="wick" style="height:3px"></div><div class="body" style="height:8px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle up"><div class="wick" style="height:2px"></div><div class="body" style="height:14px"></div><div class="wick" style="height:2px"></div></div>
+            <div class="candle up"><div class="wick" style="height:2px"></div><div class="body" style="height:20px"></div><div class="wick" style="height:2px"></div></div>
+          </div>
+          <div class="info">
+            <div class="signal-name">Volume Oracle</div>
+            <div class="signal-title">Reversal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Explanation -->
+  <div class="explanation">
+    <h2>Vertical Visual Lanes</h2>
+    <p><span class="purple">Left column</span>: Blog & Chronicle posts — purple/pink atmospheric feel. Editorial, storytelling.</p>
+    <p><span class="cyan">Center column</span>: Education posts — cyan accents, numbered lessons. The learning spine.</p>
+    <p><span class="gold">Right column</span>: Quotes, Product demos, Marketing — gold/green/orange. Results & action.</p>
+    <p>When you scroll, each column has its own visual identity. Content types form vertical rivers.</p>
+  </div>
+
+</body>
+</html>
