@@ -1,0 +1,3767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignalPilot — 100 Grid Concepts (Full Detail)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 40px 20px;
+      line-height: 1.5;
+    }
+
+    h1 { text-align: center; font-weight: 200; font-size: 36px; margin-bottom: 8px; letter-spacing: 4px; }
+    .subtitle { text-align: center; font-size: 12px; color: #444; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 80px; }
+
+    .concept {
+      max-width: 800px;
+      margin: 0 auto 80px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .concept-visual {
+      position: sticky;
+      top: 40px;
+    }
+
+    .concept-num {
+      font-size: 64px;
+      font-weight: 100;
+      color: #1a1a1a;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      width: 180px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .cell {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .concept-info h2 {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .concept-info .tagline {
+      font-size: 14px;
+      color: #00d4ff;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    .concept-info .desc {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .concept-info .details {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    .concept-info .details strong {
+      color: #999;
+    }
+
+    .divider {
+      max-width: 800px;
+      margin: 0 auto 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #222, transparent);
+    }
+
+    .section-header {
+      max-width: 800px;
+      margin: 0 auto 60px;
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .section-header h3 {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .section-header h2 {
+      font-size: 24px;
+      font-weight: 300;
+      color: #fff;
+    }
+
+    /* ============================
+       CELL STYLES
+    ============================ */
+    .dark { background: #0a0a0a; }
+    .darker { background: #050505; }
+    .darkest { background: #020202; }
+    .light { background: #141414; }
+    .lighter { background: #1a1a1a; }
+    .lightest { background: #222; }
+
+    /* Starfield base */
+    .sf {
+      background:
+        radial-gradient(1px 1px at 10px 15px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 30px 35px, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 50px 20px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 15px 50px, rgba(255,255,255,0.25), transparent),
+        radial-gradient(1px 1px at 45px 45px, rgba(255,255,255,0.4), transparent),
+        linear-gradient(180deg, #0a0a12 0%, #050508 100%);
+    }
+
+    /* Glows */
+    .glow-cyan { background: radial-gradient(circle at 50% 50%, rgba(0,212,255,0.4) 0%, rgba(0,212,255,0.1) 40%, transparent 70%), #0a0a0a; }
+    .glow-purple { background: radial-gradient(circle at 50% 50%, rgba(139,92,246,0.4) 0%, rgba(139,92,246,0.1) 40%, transparent 70%), #0a0a0a; }
+    .glow-gold { background: radial-gradient(circle at 50% 50%, rgba(251,191,36,0.4) 0%, rgba(251,191,36,0.1) 40%, transparent 70%), #0a0a0a; }
+    .glow-green { background: radial-gradient(circle at 50% 50%, rgba(16,185,129,0.4) 0%, rgba(16,185,129,0.1) 40%, transparent 70%), #0a0a0a; }
+    .glow-pink { background: radial-gradient(circle at 50% 50%, rgba(236,72,153,0.4) 0%, rgba(236,72,153,0.1) 40%, transparent 70%), #0a0a0a; }
+    .glow-orange { background: radial-gradient(circle at 50% 50%, rgba(249,115,22,0.4) 0%, rgba(249,115,22,0.1) 40%, transparent 70%), #0a0a0a; }
+    .glow-red { background: radial-gradient(circle at 50% 50%, rgba(239,68,68,0.4) 0%, rgba(239,68,68,0.1) 40%, transparent 70%), #0a0a0a; }
+    .glow-teal { background: radial-gradient(circle at 50% 50%, rgba(20,184,166,0.4) 0%, rgba(20,184,166,0.1) 40%, transparent 70%), #0a0a0a; }
+    .glow-white { background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, transparent 70%), #0a0a0a; }
+
+    /* Soft glows (more subtle) */
+    .soft-cyan { background: radial-gradient(circle at 50% 50%, rgba(0,212,255,0.15) 0%, transparent 60%), #0a0a0a; }
+    .soft-purple { background: radial-gradient(circle at 50% 50%, rgba(139,92,246,0.15) 0%, transparent 60%), #0a0a0a; }
+    .soft-gold { background: radial-gradient(circle at 50% 50%, rgba(251,191,36,0.15) 0%, transparent 60%), #0a0a0a; }
+
+    /* Nebula effects */
+    .nebula-cyan { background: radial-gradient(ellipse at 30% 40%, rgba(0,212,255,0.3) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, rgba(0,212,255,0.2) 0%, transparent 40%), #0a0a0a; }
+    .nebula-purple { background: radial-gradient(ellipse at 40% 30%, rgba(139,92,246,0.3) 0%, transparent 50%), radial-gradient(ellipse at 60% 70%, rgba(168,85,247,0.2) 0%, transparent 40%), #0a0a0a; }
+    .nebula-gold { background: radial-gradient(ellipse at 50% 40%, rgba(251,191,36,0.25) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(245,158,11,0.15) 0%, transparent 40%), #0a0a0a; }
+    .nebula-mixed { background: radial-gradient(ellipse at 20% 30%, rgba(139,92,246,0.25) 0%, transparent 40%), radial-gradient(ellipse at 80% 70%, rgba(0,212,255,0.2) 0%, transparent 40%), radial-gradient(ellipse at 50% 90%, rgba(251,191,36,0.15) 0%, transparent 30%), #0a0a0a; }
+
+    /* Borders */
+    .border-cyan { border: 1px solid rgba(0,212,255,0.5); background: #0a0a0a; }
+    .border-purple { border: 1px solid rgba(139,92,246,0.5); background: #0a0a0a; }
+    .border-gold { border: 1px solid rgba(251,191,36,0.5); background: #0a0a0a; }
+    .border-white { border: 1px solid rgba(255,255,255,0.15); background: #0a0a0a; }
+
+    /* Top borders */
+    .top-cyan { border-top: 2px solid #00d4ff; background: #0a0a0a; }
+    .top-purple { border-top: 2px solid #8b5cf6; background: #0a0a0a; }
+    .top-gold { border-top: 2px solid #fbbf24; background: #0a0a0a; }
+    .top-green { border-top: 2px solid #10b981; background: #0a0a0a; }
+    .top-pink { border-top: 2px solid #ec4899; background: #0a0a0a; }
+    .top-orange { border-top: 2px solid #f97316; background: #0a0a0a; }
+    .top-white { border-top: 2px solid rgba(255,255,255,0.3); background: #0a0a0a; }
+
+    /* Left borders */
+    .left-cyan { border-left: 2px solid #00d4ff; background: #0a0a0a; }
+    .left-purple { border-left: 2px solid #8b5cf6; background: #0a0a0a; }
+    .left-gold { border-left: 2px solid #fbbf24; background: #0a0a0a; }
+    .left-white { border-left: 2px solid rgba(255,255,255,0.3); background: #0a0a0a; }
+
+    /* Bottom borders */
+    .bottom-cyan { border-bottom: 2px solid #00d4ff; background: #0a0a0a; }
+    .bottom-purple { border-bottom: 2px solid #8b5cf6; background: #0a0a0a; }
+    .bottom-gold { border-bottom: 2px solid #fbbf24; background: #0a0a0a; }
+
+    /* Right borders */
+    .right-cyan { border-right: 2px solid #00d4ff; background: #0a0a0a; }
+    .right-purple { border-right: 2px solid #8b5cf6; background: #0a0a0a; }
+    .right-gold { border-right: 2px solid #fbbf24; background: #0a0a0a; }
+
+    /* Neon effects */
+    .neon-cyan { box-shadow: 0 0 15px rgba(0,212,255,0.6), inset 0 0 15px rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.4); background: #0a0a0a; }
+    .neon-purple { box-shadow: 0 0 15px rgba(139,92,246,0.6), inset 0 0 15px rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.4); background: #0a0a0a; }
+    .neon-gold { box-shadow: 0 0 15px rgba(251,191,36,0.6), inset 0 0 15px rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.4); background: #0a0a0a; }
+    .neon-green { box-shadow: 0 0 15px rgba(16,185,129,0.6), inset 0 0 15px rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.4); background: #0a0a0a; }
+    .neon-pink { box-shadow: 0 0 15px rgba(236,72,153,0.6), inset 0 0 15px rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.4); background: #0a0a0a; }
+    .neon-orange { box-shadow: 0 0 15px rgba(249,115,22,0.6), inset 0 0 15px rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.4); background: #0a0a0a; }
+
+    /* Gradients */
+    .grad-down-cyan { background: linear-gradient(180deg, rgba(0,212,255,0.2) 0%, transparent 100%), #0a0a0a; }
+    .grad-down-purple { background: linear-gradient(180deg, rgba(139,92,246,0.2) 0%, transparent 100%), #0a0a0a; }
+    .grad-down-gold { background: linear-gradient(180deg, rgba(251,191,36,0.2) 0%, transparent 100%), #0a0a0a; }
+    .grad-up-cyan { background: linear-gradient(180deg, transparent 0%, rgba(0,212,255,0.2) 100%), #0a0a0a; }
+    .grad-up-purple { background: linear-gradient(180deg, transparent 0%, rgba(139,92,246,0.2) 100%), #0a0a0a; }
+    .grad-up-gold { background: linear-gradient(180deg, transparent 0%, rgba(251,191,36,0.2) 100%), #0a0a0a; }
+    .grad-left { background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, transparent 100%), #0a0a0a; }
+    .grad-right { background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 100%), #0a0a0a; }
+    .grad-diag { background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%, rgba(255,255,255,0.03) 100%), #0a0a0a; }
+
+    /* Corner glows */
+    .corner-tl { background: radial-gradient(circle at 0% 0%, rgba(0,212,255,0.3) 0%, transparent 50%), #0a0a0a; }
+    .corner-tr { background: radial-gradient(circle at 100% 0%, rgba(0,212,255,0.3) 0%, transparent 50%), #0a0a0a; }
+    .corner-bl { background: radial-gradient(circle at 0% 100%, rgba(0,212,255,0.3) 0%, transparent 50%), #0a0a0a; }
+    .corner-br { background: radial-gradient(circle at 100% 100%, rgba(0,212,255,0.3) 0%, transparent 50%), #0a0a0a; }
+    .corner-tl-purple { background: radial-gradient(circle at 0% 0%, rgba(139,92,246,0.3) 0%, transparent 50%), #0a0a0a; }
+    .corner-tr-gold { background: radial-gradient(circle at 100% 0%, rgba(251,191,36,0.3) 0%, transparent 50%), #0a0a0a; }
+    .corner-bl-gold { background: radial-gradient(circle at 0% 100%, rgba(251,191,36,0.3) 0%, transparent 50%), #0a0a0a; }
+    .corner-br-purple { background: radial-gradient(circle at 100% 100%, rgba(139,92,246,0.3) 0%, transparent 50%), #0a0a0a; }
+
+    /* Textures */
+    .stripe-h { background: repeating-linear-gradient(0deg, #0f0f0f 0px, #0f0f0f 2px, #0a0a0a 2px, #0a0a0a 4px); }
+    .stripe-v { background: repeating-linear-gradient(90deg, #0f0f0f 0px, #0f0f0f 2px, #0a0a0a 2px, #0a0a0a 4px); }
+    .stripe-d { background: repeating-linear-gradient(45deg, #0f0f0f 0px, #0f0f0f 2px, #0a0a0a 2px, #0a0a0a 4px); }
+    .dots { background: radial-gradient(circle, #1a1a1a 1px, transparent 1px), #0a0a0a; background-size: 6px 6px; }
+    .grid-pattern { background: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px), #0a0a0a; background-size: 10px 10px; }
+    .scanlines { background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px), #111; }
+    .noise { background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"), #0a0a0a; }
+
+    /* Special effects */
+    .void { background: radial-gradient(circle at 50% 50%, #000 0%, #0a0a0a 100%); }
+    .spotlight { background: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.1) 0%, transparent 40%), #0a0a0a; }
+    .spotlight-bottom { background: radial-gradient(circle at 50% 70%, rgba(255,255,255,0.1) 0%, transparent 40%), #0a0a0a; }
+    .vignette { background: radial-gradient(ellipse at 50% 50%, #0f0f0f 0%, #050505 100%); }
+    .vignette-inv { background: radial-gradient(ellipse at 50% 50%, #050505 0%, #111 100%); }
+    .portal { background: radial-gradient(circle at 50% 50%, rgba(139,92,246,0.4) 0%, rgba(0,212,255,0.2) 30%, transparent 60%), #0a0a0a; }
+    .eclipse { background: radial-gradient(circle at 50% 50%, #000 25%, rgba(251,191,36,0.4) 27%, transparent 50%), #0a0a0a; }
+    .holographic { background: linear-gradient(135deg, rgba(0,212,255,0.1) 0%, rgba(139,92,246,0.1) 25%, rgba(236,72,153,0.1) 50%, rgba(251,191,36,0.1) 75%, rgba(16,185,129,0.1) 100%), #0a0a0a; }
+    .matrix { background: repeating-linear-gradient(180deg, transparent 0px, transparent 3px, rgba(16,185,129,0.1) 3px, rgba(16,185,129,0.1) 4px), #0a0a0a; }
+    .data-stream { background: repeating-linear-gradient(180deg, transparent 0px, transparent 4px, rgba(0,212,255,0.08) 4px, rgba(0,212,255,0.08) 5px), #0a0a0a; }
+    .glitch { background: linear-gradient(90deg, transparent 0%, transparent 40%, rgba(0,212,255,0.15) 40%, rgba(0,212,255,0.15) 45%, transparent 45%, transparent 55%, rgba(236,72,153,0.1) 55%, rgba(236,72,153,0.1) 60%, transparent 60%), #0a0a0a; }
+    .chromatic { background: linear-gradient(90deg, rgba(255,0,0,0.08) 0%, rgba(0,255,0,0.08) 50%, rgba(0,0,255,0.08) 100%), #0a0a0a; }
+
+    /* Inner glows */
+    .inner-glow { box-shadow: inset 0 0 20px rgba(255,255,255,0.05); background: #0a0a0a; }
+    .inner-glow-cyan { box-shadow: inset 0 0 20px rgba(0,212,255,0.15); background: #0a0a0a; }
+    .inner-glow-purple { box-shadow: inset 0 0 20px rgba(139,92,246,0.15); background: #0a0a0a; }
+    .inner-glow-gold { box-shadow: inset 0 0 20px rgba(251,191,36,0.15); background: #0a0a0a; }
+
+    /* Rim lights */
+    .rim { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1); background: #0a0a0a; }
+    .rim-cyan { box-shadow: inset 0 0 0 1px rgba(0,212,255,0.3); background: #0a0a0a; }
+    .rim-purple { box-shadow: inset 0 0 0 1px rgba(139,92,246,0.3); background: #0a0a0a; }
+    .rim-gold { box-shadow: inset 0 0 0 1px rgba(251,191,36,0.3); background: #0a0a0a; }
+
+    /* Splits */
+    .split-h { background: linear-gradient(180deg, #141414 50%, #0a0a0a 50%); }
+    .split-v { background: linear-gradient(90deg, #141414 50%, #0a0a0a 50%); }
+    .split-d { background: linear-gradient(135deg, #141414 50%, #0a0a0a 50%); }
+    .split-d-inv { background: linear-gradient(225deg, #141414 50%, #0a0a0a 50%); }
+
+    /* Duotones */
+    .duotone-cyan-purple { background: linear-gradient(135deg, rgba(0,212,255,0.15) 0%, rgba(139,92,246,0.15) 100%), #0a0a0a; }
+    .duotone-purple-gold { background: linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(251,191,36,0.15) 100%), #0a0a0a; }
+    .duotone-gold-cyan { background: linear-gradient(135deg, rgba(251,191,36,0.15) 0%, rgba(0,212,255,0.15) 100%), #0a0a0a; }
+    .duotone-teal-orange { background: linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(249,115,22,0.2) 100%), #0a0a0a; }
+
+    /* Glass/Frost */
+    .glass { background: rgba(255,255,255,0.02); backdrop-filter: blur(4px); }
+    .frost { background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%), #0a0a0a; }
+    .glossy { background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.02) 100%), #0a0a0a; }
+
+    /* Depth levels */
+    .depth-1 { background: #030303; }
+    .depth-2 { background: #060606; }
+    .depth-3 { background: #0a0a0a; }
+    .depth-4 { background: #0e0e0e; }
+    .depth-5 { background: #121212; }
+    .depth-6 { background: #161616; }
+    .depth-7 { background: #1a1a1a; }
+
+  </style>
+</head>
+<body>
+
+  <h1>100 CONCEPTS</h1>
+  <p class="subtitle">Full detail • Every idea explored</p>
+
+  <!-- ============================================
+       SECTION 1: THE RIVERS (1-10)
+       Vertical column-based color systems
+  ============================================ -->
+  <div class="section-header">
+    <h3>Section 1</h3>
+    <h2>The Rivers</h2>
+  </div>
+
+  <!-- CONCEPT 01 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">01</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>The Cyan Spine</h2>
+      <div class="tagline">"The learning path glows."</div>
+      <div class="desc">
+        Everything is dark except the center column. Education posts emit a cyan glow that creates an unmissable vertical river. When someone lands on your profile, their eye is immediately drawn to this glowing spine — your free content funnel.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Single point of focus. The center column becomes the hero. All other content supports but doesn't compete.<br><br>
+        <strong>Best for:</strong> Brands where one content type (education) is the primary funnel.<br><br>
+        <strong>Canva execution:</strong> Center posts get a radial cyan gradient overlay (opacity 30-40%). Left and right posts stay pure starfield.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 02 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">02</div>
+      <div class="mini-grid">
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Three Rivers</h2>
+      <div class="tagline">"Purple stories. Cyan learning. Gold action."</div>
+      <div class="desc">
+        Each column has its own color identity that flows vertically. Left column glows purple (Blog, Chronicle, Docs = storytelling). Center glows cyan (Education = learning). Right glows gold (Quote, Product, Marketing = value/action). Three distinct rivers flowing in parallel.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Clear visual categorization. Followers can scan vertically for the content they want.<br><br>
+        <strong>Best for:</strong> Brands with distinct content pillars that deserve equal visual weight.<br><br>
+        <strong>Canva execution:</strong> Each column gets its assigned color as a radial overlay from center. Keep it subtle (20-30% opacity) so starfield shows through.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 03 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">03</div>
+      <div class="mini-grid">
+        <div class="cell soft-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell soft-gold"></div>
+        <div class="cell soft-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell soft-gold"></div>
+        <div class="cell soft-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell soft-gold"></div>
+        <div class="cell soft-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell soft-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Dominant Center</h2>
+      <div class="tagline">"The spine demands attention."</div>
+      <div class="desc">
+        Three rivers, but the center one is significantly brighter. Left and right columns are desaturated, subtle. The cyan center POPS. This creates a natural visual hierarchy where education dominates while other content provides context.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Hierarchy through intensity. The important content (funnel) is unmissable, supporting content doesn't distract.<br><br>
+        <strong>Best for:</strong> When education is 3x more important than other content types.<br><br>
+        <strong>Canva execution:</strong> Center = 40% opacity cyan glow. Sides = 15% opacity of their colors.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 04 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">04</div>
+      <div class="mini-grid">
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Edge Rivers</h2>
+      <div class="tagline">"The edges frame the void."</div>
+      <div class="desc">
+        Only the left and right columns glow. The center stays dark, creating negative space. Purple and gold edges act like theatrical curtains, framing the dark stage in the middle. Dramatic, bold, unconventional.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Unexpected. Most grids emphasize the center. This does the opposite, creating tension and visual interest.<br><br>
+        <strong>Best for:</strong> Brands that want to stand out by breaking conventions. Mysterious, artistic vibe.<br><br>
+        <strong>Canva execution:</strong> Left column = purple glow. Right column = gold glow. Center = pure starfield, no overlay.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 05 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">05</div>
+      <div class="mini-grid">
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Left River Only</h2>
+      <div class="tagline">"The story begins on the left."</div>
+      <div class="desc">
+        Only the left column glows purple. Everything else is dark. In Western reading patterns, eyes start left — this captures attention immediately. The purple river leads into the content.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Reading direction psychology. The left edge is where eyes land first.<br><br>
+        <strong>Best for:</strong> When Blog/Chronicle content is your hook — the story that draws people in.<br><br>
+        <strong>Canva execution:</strong> Left column posts = purple radial glow. All others = pure starfield.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 06 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">06</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Right River Only</h2>
+      <div class="tagline">"The conversion edge."</div>
+      <div class="desc">
+        Only the right column glows gold. Quote cards, Product demos, Marketing posts — all your conversion content illuminated. The rest stays dark. Your eye scans across the dark content and lands on the glowing call-to-action column.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Reading completion psychology. Eyes end on the right. Your CTA content is the last thing seen.<br><br>
+        <strong>Best for:</strong> When conversion is the priority. Quotes inspire, Products demonstrate, Marketing converts.<br><br>
+        <strong>Canva execution:</strong> Right column = gold/amber radial glow. All others = dark starfield.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 07 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">07</div>
+      <div class="mini-grid">
+        <div class="cell nebula-purple"></div>
+        <div class="cell nebula-cyan"></div>
+        <div class="cell nebula-gold"></div>
+        <div class="cell nebula-purple"></div>
+        <div class="cell nebula-cyan"></div>
+        <div class="cell nebula-gold"></div>
+        <div class="cell nebula-purple"></div>
+        <div class="cell nebula-cyan"></div>
+        <div class="cell nebula-gold"></div>
+        <div class="cell nebula-purple"></div>
+        <div class="cell nebula-cyan"></div>
+        <div class="cell nebula-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Nebula Rivers</h2>
+      <div class="tagline">"Cosmic clouds flowing down."</div>
+      <div class="desc">
+        Same three-column colors but with nebula treatment — soft, gaseous, organic shapes instead of centered radial glows. Colors appear as clouds that drift and blend at edges. Less structured, more cosmic.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Organic feels more natural, less "designed". The irregularity creates visual texture.<br><br>
+        <strong>Best for:</strong> Brands wanting a cosmic, ethereal, premium aesthetic.<br><br>
+        <strong>Canva execution:</strong> Multiple elliptical gradients at different positions within each post. Vary the placement so each post feels unique but maintains column color.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 08 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">08</div>
+      <div class="mini-grid">
+        <div class="cell top-purple"></div>
+        <div class="cell top-cyan"></div>
+        <div class="cell top-gold"></div>
+        <div class="cell top-purple"></div>
+        <div class="cell top-cyan"></div>
+        <div class="cell top-gold"></div>
+        <div class="cell top-purple"></div>
+        <div class="cell top-cyan"></div>
+        <div class="cell top-gold"></div>
+        <div class="cell top-purple"></div>
+        <div class="cell top-cyan"></div>
+        <div class="cell top-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Top Line Rivers</h2>
+      <div class="tagline">"Minimal color, maximum structure."</div>
+      <div class="desc">
+        No glows. Just a 2-3px colored line at the top of each post. Purple for left column, cyan for center, gold for right. Ultra-minimal but the color coding is still instantly visible when scanning the grid.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Subtlety is sophistication. The color is there but doesn't overpower the content.<br><br>
+        <strong>Best for:</strong> Premium brands that want categorization without the "glow" effect feeling too loud.<br><br>
+        <strong>Canva execution:</strong> Add a thin rectangle at the top of each slide 1, colored by column. 3px height, full width.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 09 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">09</div>
+      <div class="mini-grid">
+        <div class="cell left-purple"></div>
+        <div class="cell left-cyan"></div>
+        <div class="cell left-gold"></div>
+        <div class="cell left-purple"></div>
+        <div class="cell left-cyan"></div>
+        <div class="cell left-gold"></div>
+        <div class="cell left-purple"></div>
+        <div class="cell left-cyan"></div>
+        <div class="cell left-gold"></div>
+        <div class="cell left-purple"></div>
+        <div class="cell left-cyan"></div>
+        <div class="cell left-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Left Line Rivers</h2>
+      <div class="tagline">"Sidebar indicators."</div>
+      <div class="desc">
+        Colored line on the LEFT edge of each post instead of top. Creates a different visual rhythm — feels like a sidebar navigation or category indicator. The lines create vertical stripes of color down the grid.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> The left edge is a consistent anchor point. Feels like organized documentation or a color-coded filing system.<br><br>
+        <strong>Best for:</strong> Brands with a technical, organized, systematic feel.<br><br>
+        <strong>Canva execution:</strong> 3px wide rectangle on left edge of each slide 1. Column-appropriate color.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 10 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">10</div>
+      <div class="mini-grid">
+        <div class="cell grad-down-purple"></div>
+        <div class="cell grad-down-cyan"></div>
+        <div class="cell grad-down-gold"></div>
+        <div class="cell grad-down-purple"></div>
+        <div class="cell grad-down-cyan"></div>
+        <div class="cell grad-down-gold"></div>
+        <div class="cell grad-down-purple"></div>
+        <div class="cell grad-down-cyan"></div>
+        <div class="cell grad-down-gold"></div>
+        <div class="cell grad-down-purple"></div>
+        <div class="cell grad-down-cyan"></div>
+        <div class="cell grad-down-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Cascade Rivers</h2>
+      <div class="tagline">"Color raining down."</div>
+      <div class="desc">
+        Each post has a gradient from column color at top fading to transparent at bottom. The effect across the grid looks like color cascading down from above. Waterfalls of purple, cyan, and gold.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Movement and flow. The top-to-bottom gradient creates a sense of content "flowing" down the feed.<br><br>
+        <strong>Best for:</strong> Dynamic brands that want a sense of energy and motion.<br><br>
+        <strong>Canva execution:</strong> Linear gradient starting at top with column color (20-25% opacity) fading to transparent at 60% height.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 2: THE PATTERNS (11-25)
+       Position-based patterns across the grid
+  ============================================ -->
+  <div class="section-header">
+    <h3>Section 2</h3>
+    <h2>The Patterns</h2>
+  </div>
+
+  <!-- CONCEPT 11 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">11</div>
+      <div class="mini-grid">
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Classic Checkerboard</h2>
+      <div class="tagline">"Alternating rhythm."</div>
+      <div class="desc">
+        Every other post glows, creating a checkerboard pattern. Glow, dark, glow, dark. The grid breathes with alternating intensity. No column preference — just pure rhythm.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Predictable rhythm is satisfying. The pattern creates visual texture without chaos.<br><br>
+        <strong>Best for:</strong> When you don't want to emphasize columns but want visual interest.<br><br>
+        <strong>Canva execution:</strong> Posts 1, 3, 5, 7... get cyan glow. Posts 2, 4, 6, 8... stay dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 12 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">12</div>
+      <div class="mini-grid">
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Color Checkerboard</h2>
+      <div class="tagline">"Three colors dancing."</div>
+      <div class="desc">
+        Checkerboard with rotating colors. Purple, dark, gold, dark, cyan, dark, purple... The colored squares cycle through the palette while maintaining the checkerboard rhythm.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> More variety than single-color checkerboard. The color rotation adds another layer of rhythm.<br><br>
+        <strong>Best for:</strong> Brands wanting playful, dynamic energy without chaos.<br><br>
+        <strong>Canva execution:</strong> Alternate between dark and colored. Colored posts rotate: purple → gold → cyan → repeat.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 13 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">13</div>
+      <div class="mini-grid">
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Diagonal Flow</h2>
+      <div class="tagline">"Colors descending diagonally."</div>
+      <div class="desc">
+        One colored post per row, but the position shifts: left, center, right, left, center, right. Creates a diagonal line of color flowing down the grid. Eye follows the diagonal naturally.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Diagonals create movement. The eye is drawn to follow the colored path down and across.<br><br>
+        <strong>Best for:</strong> Brands wanting dynamic energy with clear visual direction.<br><br>
+        <strong>Canva execution:</strong> Row 1: left post colored. Row 2: center post colored. Row 3: right post colored. Repeat.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 14 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">14</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Ascending Diagonal</h2>
+      <div class="tagline">"Rising from the corner."</div>
+      <div class="desc">
+        Opposite direction. Colors start bottom-left and rise to top-right. The diagonal line ascends — feels like growth, progress, upward momentum.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Ascending lines psychologically feel positive — growth, improvement, success.<br><br>
+        <strong>Best for:</strong> Brands emphasizing progress, gains, improvement.<br><br>
+        <strong>Canva execution:</strong> Row 1: right post colored. Row 2: center post colored. Row 3: left post colored. Repeat.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 15 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">15</div>
+      <div class="mini-grid">
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>The X Pattern</h2>
+      <div class="tagline">"Cross of light."</div>
+      <div class="desc">
+        Colored posts at positions that form an X when you look at the grid. The two diagonals cross in the middle, creating a focal point. Dramatic, centered, intentional.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> The X draws eyes to center. Both diagonals guide attention to the heart of the grid.<br><br>
+        <strong>Best for:</strong> Brands wanting a strong central focus point.<br><br>
+        <strong>Canva execution:</strong> Color posts at: (1,1), (2,2), (3,3), (1,3), (3,1), etc. — forming X diagonals.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 16 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">16</div>
+      <div class="mini-grid">
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-cyan"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Row Pulse</h2>
+      <div class="tagline">"Horizontal bands of energy."</div>
+      <div class="desc">
+        Every third row is fully lit. Row 1: all glow. Row 2-3: dark. Row 4: all glow. Creates horizontal bands across the grid like a pulse or heartbeat.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Horizontal bands create rhythm and sectioning. Each lit row feels like a "chapter break".<br><br>
+        <strong>Best for:</strong> Content that follows 3-post cycles or wants clear visual breaks.<br><br>
+        <strong>Canva execution:</strong> Every 9th, 10th, 11th post (and 1st, 2nd, 3rd) are all colored. Others dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 17 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">17</div>
+      <div class="mini-grid">
+        <div class="cell border-cyan"></div>
+        <div class="cell border-cyan"></div>
+        <div class="cell border-cyan"></div>
+        <div class="cell border-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell border-cyan"></div>
+        <div class="cell border-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell border-cyan"></div>
+        <div class="cell border-cyan"></div>
+        <div class="cell border-cyan"></div>
+        <div class="cell border-cyan"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>The Frame</h2>
+      <div class="tagline">"Edges define the space."</div>
+      <div class="desc">
+        All outer edge posts have a colored border. The inner posts (center of the grid) are dark. Creates a frame effect — like looking through a portal at the dark center.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Frames draw attention inward. The colored border contains and focuses the eye.<br><br>
+        <strong>Best for:</strong> Brands wanting a gallery-like, curated presentation.<br><br>
+        <strong>Canva execution:</strong> Posts on the perimeter of the visible grid get thin cyan borders. Interior posts stay pure dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 18 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">18</div>
+      <div class="mini-grid">
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-green"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Four Corners</h2>
+      <div class="tagline">"Cardinal points of light."</div>
+      <div class="desc">
+        Only the four corner positions glow. Top-left, top-right, bottom-left, bottom-right. The rest is dark. Like four beacons marking the boundaries of your content.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Corners anchor the grid. Four points of color stabilize the visual while leaving center open.<br><br>
+        <strong>Best for:</strong> Minimalist approach that still has visual structure.<br><br>
+        <strong>Canva execution:</strong> Only posts at grid corners (positions 1, 3, 7, 9 in a 3x3 section) get colored. All others dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 19 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">19</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>The Cross</h2>
+      <div class="tagline">"Intersecting rivers."</div>
+      <div class="desc">
+        Center column AND center row both glow, forming a cross or plus sign. Horizontal and vertical light intersecting at the heart of the grid.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> The cross is a universal focal shape. Both axes of the grid are activated.<br><br>
+        <strong>Best for:</strong> When center content is most important (education) AND you want a specific row highlighted.<br><br>
+        <strong>Canva execution:</strong> All center column posts + all posts in one specific row (e.g., row 2) get colored.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 20 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">20</div>
+      <div class="mini-grid">
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Top-Left L</h2>
+      <div class="tagline">"The entry point."</div>
+      <div class="desc">
+        An L-shape of glowing posts in the top-left corner. Where Western eyes start reading. This illuminated corner acts as the "entry door" to your content.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Reading psychology. Eyes start top-left. This lights up the entrance.<br><br>
+        <strong>Best for:</strong> Brands wanting to hook attention immediately at the natural starting point.<br><br>
+        <strong>Canva execution:</strong> Posts at positions 1, 2, 4 (forming an L) get colored. Rest stays dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 21 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">21</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Bottom-Right L</h2>
+      <div class="tagline">"The exit destination."</div>
+      <div class="desc">
+        An L-shape of glowing posts in the bottom-right corner. Where eyes end when scanning. This illuminated corner acts as the "destination" — the call to action zone.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Reading completion. Eyes finish bottom-right. This is your conversion zone.<br><br>
+        <strong>Best for:</strong> When you want to drive action. The glowing exit is your CTA.<br><br>
+        <strong>Canva execution:</strong> Posts at positions forming bottom-right L get gold/orange colored.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 22 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">22</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Single Beacon</h2>
+      <div class="tagline">"One light in the void."</div>
+      <div class="desc">
+        Only ONE post glows. Everything else is dark. That single post becomes impossibly powerful — like a lighthouse in endless darkness. Maximum contrast, maximum focus.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Extreme minimalism. When only one thing glows, it gets 100% attention.<br><br>
+        <strong>Best for:</strong> Drawing attention to one specific post (a launch, announcement, key content).<br><br>
+        <strong>Canva execution:</strong> One specific post gets full glow treatment. All others pure dark starfield.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 23 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">23</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-green"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Center Cluster</h2>
+      <div class="tagline">"The heart of the grid."</div>
+      <div class="desc">
+        A cluster of 4-6 posts in the center glow while edges stay dark. The center becomes a glowing core surrounded by darkness. Focal point is literally in the middle.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Natural focal point. Human vision focuses on center. This amplifies that tendency.<br><br>
+        <strong>Best for:</strong> When you want the middle of your feed to be the hero zone.<br><br>
+        <strong>Canva execution:</strong> Posts in center 2x2 or 2x3 area get colors. Outer posts stay dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 24 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">24</div>
+      <div class="mini-grid">
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-green"></div>
+        <div class="cell glow-green"></div>
+        <div class="cell glow-green"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Row Bands</h2>
+      <div class="tagline">"Horizontal stripes of color."</div>
+      <div class="desc">
+        Each row is a different color. Row 1: cyan. Row 2: purple. Row 3: gold. Row 4: green. The grid becomes horizontal bands stacked on top of each other.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Clear horizontal sectioning. Each row feels like a distinct chapter or category.<br><br>
+        <strong>Best for:</strong> When you want clear visual breaks between 3-post sets.<br><br>
+        <strong>Canva execution:</strong> All posts in row 1 = cyan. All posts in row 2 = purple. And so on.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 25 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">25</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Center Stripe</h2>
+      <div class="tagline">"The middle matters."</div>
+      <div class="desc">
+        Only the middle two rows are colored (with column colors). Top row and bottom row are dark. Creates a horizontal band of color running through the middle of the grid.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Centers natural focus at middle height. Dark bookends above and below contain the color.<br><br>
+        <strong>Best for:</strong> When the middle content is current/important, older content fades to dark above.<br><br>
+        <strong>Canva execution:</strong> Rows 2 and 3 get column colors. Rows 1 and 4 stay dark.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 3: LIGHT & SHADOW (26-40)
+       Depth, brightness, luminosity concepts
+  ============================================ -->
+  <div class="section-header">
+    <h3>Section 3</h3>
+    <h2>Light & Shadow</h2>
+  </div>
+
+  <!-- CONCEPT 26 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">26</div>
+      <div class="mini-grid">
+        <div class="cell depth-7"></div>
+        <div class="cell depth-7"></div>
+        <div class="cell depth-7"></div>
+        <div class="cell depth-5"></div>
+        <div class="cell depth-5"></div>
+        <div class="cell depth-5"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-1"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Fade to Black</h2>
+      <div class="tagline">"Descending into darkness."</div>
+      <div class="desc">
+        No color — just brightness levels. Top row is brightest (lighter gray). Each row gets progressively darker until the bottom row is near-black. A gradient of luminosity from top to bottom.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Creates depth and movement. Feels like content descending into the void below.<br><br>
+        <strong>Best for:</strong> Dramatic, moody brands. Suggests depth and mystery.<br><br>
+        <strong>Canva execution:</strong> Row 1 = lighter overlay. Row 2 = medium. Row 3 = darker. Row 4 = darkest.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 27 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">27</div>
+      <div class="mini-grid">
+        <div class="cell depth-1"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-5"></div>
+        <div class="cell depth-5"></div>
+        <div class="cell depth-5"></div>
+        <div class="cell depth-7"></div>
+        <div class="cell depth-7"></div>
+        <div class="cell depth-7"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Rise from Darkness</h2>
+      <div class="tagline">"Emerging into light."</div>
+      <div class="desc">
+        Opposite of fade to black. Darkest at top, brightest at bottom. Feels like emerging, rising, ascending. Optimistic, uplifting.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Psychological association with rising, growth, hope.<br><br>
+        <strong>Best for:</strong> Brands emphasizing progress, improvement, positive outcomes.<br><br>
+        <strong>Canva execution:</strong> Row 1 = darkest. Each subsequent row gets slightly lighter background.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 28 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">28</div>
+      <div class="mini-grid">
+        <div class="cell depth-1"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-7"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-1"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Spotlight Center</h2>
+      <div class="tagline">"The center glows brightest."</div>
+      <div class="desc">
+        No color, just light. The center post is brightest, surrounding posts are progressively darker. Like a spotlight hitting the center of a stage.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Spotlight naturally draws focus. The brightness hierarchy guides the eye to center.<br><br>
+        <strong>Best for:</strong> When one piece of content needs to be the hero.<br><br>
+        <strong>Canva execution:</strong> Center post = lightest background. Surrounding posts = medium. Edge posts = darkest.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 29 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">29</div>
+      <div class="mini-grid">
+        <div class="cell depth-7"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-7"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-7"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-7"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-7"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-7"></div>
+        <div class="cell depth-1"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Light/Dark Checkerboard</h2>
+      <div class="tagline">"Breathing through brightness."</div>
+      <div class="desc">
+        No color — just alternating light and dark posts. Light, dark, light, dark. The grid breathes through luminosity changes alone. Minimal but effective rhythm.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Simplest possible contrast. No color decisions needed, just brightness levels.<br><br>
+        <strong>Best for:</strong> Ultra-minimal brands. Monochrome aesthetic.<br><br>
+        <strong>Canva execution:</strong> Alternate between darker and lighter background overlays.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 30 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">30</div>
+      <div class="mini-grid">
+        <div class="cell depth-1"></div>
+        <div class="cell depth-2"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-2"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-4"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-4"></div>
+        <div class="cell depth-5"></div>
+        <div class="cell depth-4"></div>
+        <div class="cell depth-5"></div>
+        <div class="cell depth-6"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Diagonal Fade</h2>
+      <div class="tagline">"Light descending diagonally."</div>
+      <div class="desc">
+        Brightness fades diagonally from top-left (brightest) to bottom-right (darkest). Creates a sense of depth and direction simultaneously.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Diagonal movement + depth = dynamic visual interest.<br><br>
+        <strong>Best for:</strong> Brands wanting subtle movement and depth without color.<br><br>
+        <strong>Canva execution:</strong> Calculate brightness based on distance from top-left corner. Closer = lighter. Further = darker.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 31 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">31</div>
+      <div class="mini-grid">
+        <div class="cell inner-glow"></div>
+        <div class="cell dark"></div>
+        <div class="cell inner-glow"></div>
+        <div class="cell dark"></div>
+        <div class="cell inner-glow"></div>
+        <div class="cell dark"></div>
+        <div class="cell inner-glow"></div>
+        <div class="cell dark"></div>
+        <div class="cell inner-glow"></div>
+        <div class="cell dark"></div>
+        <div class="cell inner-glow"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Inner Glow Pattern</h2>
+      <div class="tagline">"Light from within."</div>
+      <div class="desc">
+        No colored borders or overlays. Instead, alternating posts have a subtle inner glow — light emanating from within the frame. Ethereal, delicate.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Inner glow feels organic, like bioluminescence. Softer than border treatments.<br><br>
+        <strong>Best for:</strong> Ethereal, mystical, premium brands.<br><br>
+        <strong>Canva execution:</strong> Add a subtle white vignette (inverted — lighter in center, transparent at edges) to alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 32 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">32</div>
+      <div class="mini-grid">
+        <div class="cell spotlight"></div>
+        <div class="cell spotlight"></div>
+        <div class="cell spotlight"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell spotlight-bottom"></div>
+        <div class="cell spotlight-bottom"></div>
+        <div class="cell spotlight-bottom"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Top & Bottom Lit</h2>
+      <div class="tagline">"Bookends of light."</div>
+      <div class="desc">
+        Top row has spotlight from above. Bottom row has spotlight from below. Middle rows are dark. Creates a sandwich effect — light framing darkness.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> The light bookends draw attention to the entry and exit points of the grid.<br><br>
+        <strong>Best for:</strong> When newest and oldest visible content should stand out.<br><br>
+        <strong>Canva execution:</strong> Top row posts get top-down gradient spotlight. Bottom row gets bottom-up. Middle stays dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 33 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">33</div>
+      <div class="mini-grid">
+        <div class="cell vignette"></div>
+        <div class="cell vignette"></div>
+        <div class="cell vignette"></div>
+        <div class="cell vignette"></div>
+        <div class="cell vignette"></div>
+        <div class="cell vignette"></div>
+        <div class="cell vignette"></div>
+        <div class="cell vignette"></div>
+        <div class="cell vignette"></div>
+        <div class="cell vignette"></div>
+        <div class="cell vignette"></div>
+        <div class="cell vignette"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>All Vignette</h2>
+      <div class="tagline">"Each post has depth."</div>
+      <div class="desc">
+        Every post has a vignette effect — lighter in center, darker at edges. Each individual post feels like it has depth, like looking through a tunnel at each piece of content.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Vignettes naturally focus attention on center of each post where content lives.<br><br>
+        <strong>Best for:</strong> When each post's content needs individual focus, not grid-level patterns.<br><br>
+        <strong>Canva execution:</strong> Add radial gradient vignette to every post — darker at edges, lighter at center.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 34 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">34</div>
+      <div class="mini-grid">
+        <div class="cell grad-left"></div>
+        <div class="cell dark"></div>
+        <div class="cell grad-right"></div>
+        <div class="cell grad-left"></div>
+        <div class="cell dark"></div>
+        <div class="cell grad-right"></div>
+        <div class="cell grad-left"></div>
+        <div class="cell dark"></div>
+        <div class="cell grad-right"></div>
+        <div class="cell grad-left"></div>
+        <div class="cell dark"></div>
+        <div class="cell grad-right"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Side Lit</h2>
+      <div class="tagline">"Light from the edges."</div>
+      <div class="desc">
+        Left column has light coming from left edge. Right column has light coming from right edge. Center stays dark. The edges are lit, creating depth toward center.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Side lighting creates dramatic depth. Edges feel illuminated, center recedes.<br><br>
+        <strong>Best for:</strong> Theatrical, dramatic brands.<br><br>
+        <strong>Canva execution:</strong> Left column gets left-to-right gradient. Right column gets right-to-left gradient. Center = flat dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 35 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">35</div>
+      <div class="mini-grid">
+        <div class="cell rim"></div>
+        <div class="cell dark"></div>
+        <div class="cell rim"></div>
+        <div class="cell dark"></div>
+        <div class="cell rim"></div>
+        <div class="cell dark"></div>
+        <div class="cell rim"></div>
+        <div class="cell dark"></div>
+        <div class="cell rim"></div>
+        <div class="cell dark"></div>
+        <div class="cell rim"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Rim Light Checkerboard</h2>
+      <div class="tagline">"Subtle edges define space."</div>
+      <div class="desc">
+        Alternating posts have a subtle rim light — a thin bright line around the edge. Not a border, but a glow at the perimeter. Creates definition without color.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Rim light is ultra-subtle but adds definition. Premium, sophisticated.<br><br>
+        <strong>Best for:</strong> Luxury brands wanting minimal but intentional visual structure.<br><br>
+        <strong>Canva execution:</strong> Alternating posts get 1px inner glow at edges. Others stay flat.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Continue with concepts 36-40... -->
+
+  <!-- CONCEPT 36 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">36</div>
+      <div class="mini-grid">
+        <div class="cell void"></div>
+        <div class="cell dark"></div>
+        <div class="cell void"></div>
+        <div class="cell dark"></div>
+        <div class="cell void"></div>
+        <div class="cell dark"></div>
+        <div class="cell void"></div>
+        <div class="cell dark"></div>
+        <div class="cell void"></div>
+        <div class="cell dark"></div>
+        <div class="cell void"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Void Pockets</h2>
+      <div class="tagline">"Holes in the darkness."</div>
+      <div class="desc">
+        Alternating posts have a "void" effect — a radial gradient to pure black at center. Feels like looking into bottomless pits. Unsettling, mysterious, deep.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Voids create infinite depth. Psychologically compelling and slightly unsettling.<br><br>
+        <strong>Best for:</strong> Edgy, mysterious, dark brands.<br><br>
+        <strong>Canva execution:</strong> Alternating posts get radial gradient from black at center to dark gray at edges.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 37 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">37</div>
+      <div class="mini-grid">
+        <div class="cell glossy"></div>
+        <div class="cell dark"></div>
+        <div class="cell glossy"></div>
+        <div class="cell dark"></div>
+        <div class="cell glossy"></div>
+        <div class="cell dark"></div>
+        <div class="cell glossy"></div>
+        <div class="cell dark"></div>
+        <div class="cell glossy"></div>
+        <div class="cell dark"></div>
+        <div class="cell glossy"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Glossy Checkerboard</h2>
+      <div class="tagline">"Reflective surfaces."</div>
+      <div class="desc">
+        Alternating posts have a glossy treatment — a highlight gradient at the top as if light is reflecting off a curved surface. Adds perceived material quality.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Glossy surfaces feel premium, like glass or polished metal.<br><br>
+        <strong>Best for:</strong> Tech brands, luxury products.<br><br>
+        <strong>Canva execution:</strong> Add subtle white gradient at top 20% of alternating posts, fading to transparent.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 38 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">38</div>
+      <div class="mini-grid">
+        <div class="cell grad-down-cyan"></div>
+        <div class="cell grad-up-purple"></div>
+        <div class="cell grad-down-gold"></div>
+        <div class="cell grad-up-cyan"></div>
+        <div class="cell grad-down-purple"></div>
+        <div class="cell grad-up-gold"></div>
+        <div class="cell grad-down-cyan"></div>
+        <div class="cell grad-up-purple"></div>
+        <div class="cell grad-down-gold"></div>
+        <div class="cell grad-up-cyan"></div>
+        <div class="cell grad-down-purple"></div>
+        <div class="cell grad-up-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Wave Gradients</h2>
+      <div class="tagline">"Rising and falling light."</div>
+      <div class="desc">
+        Alternating direction gradients with color. One post fades color from top down. Next post fades color from bottom up. Creates a wave-like motion across the grid.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> The alternating direction creates perceived motion and rhythm.<br><br>
+        <strong>Best for:</strong> Dynamic, energetic brands.<br><br>
+        <strong>Canva execution:</strong> Alternate between top-to-bottom and bottom-to-top color gradients.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 39 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">39</div>
+      <div class="mini-grid">
+        <div class="cell corner-tl"></div>
+        <div class="cell dark"></div>
+        <div class="cell corner-tr"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell corner-bl"></div>
+        <div class="cell dark"></div>
+        <div class="cell corner-br"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Corner Glow Frame</h2>
+      <div class="tagline">"Light at the corners."</div>
+      <div class="desc">
+        Only the four corner posts have glows radiating from their outer corners. Creates a frame effect where light marks the boundaries of the grid.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Corner markers define space without filling it. Minimal but structured.<br><br>
+        <strong>Best for:</strong> Brands wanting subtle framing without full border treatment.<br><br>
+        <strong>Canva execution:</strong> Corner posts get radial glow from their outer corner. Inner posts stay dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 40 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">40</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell glow-white"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-white"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-white"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-white"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-white"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-white"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Pure Light Checkerboard</h2>
+      <div class="tagline">"White light, no color."</div>
+      <div class="desc">
+        Checkerboard pattern but the glowing posts are white/neutral — no color at all. Pure light alternating with pure dark. Maximum contrast, zero hue.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Sometimes no color is the strongest choice. Pure contrast, no distraction.<br><br>
+        <strong>Best for:</strong> Brands wanting ultimate minimalism. B&W aesthetic.<br><br>
+        <strong>Canva execution:</strong> Alternating posts get soft white radial glow. No colored elements.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 4: TEXTURE (41-55)
+       Patterns, noise, lines, grids
+  ============================================ -->
+  <div class="section-header">
+    <h3>Section 4</h3>
+    <h2>Texture</h2>
+  </div>
+
+  <!-- CONCEPT 41 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">41</div>
+      <div class="mini-grid">
+        <div class="cell stripe-h"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-h"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-h"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-h"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-h"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-h"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Horizontal Lines Check</h2>
+      <div class="tagline">"Textured breathing."</div>
+      <div class="desc">
+        Alternating posts have subtle horizontal line texture. The lined posts feel "busier" than flat dark ones, creating rhythm through texture density rather than color or brightness.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Texture contrast is subtle but effective. Adds visual interest without color.<br><br>
+        <strong>Best for:</strong> Tech, digital, modern aesthetic.<br><br>
+        <strong>Canva execution:</strong> Add thin horizontal line pattern overlay to alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 42 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">42</div>
+      <div class="mini-grid">
+        <div class="cell scanlines"></div>
+        <div class="cell scanlines"></div>
+        <div class="cell scanlines"></div>
+        <div class="cell scanlines"></div>
+        <div class="cell scanlines"></div>
+        <div class="cell scanlines"></div>
+        <div class="cell scanlines"></div>
+        <div class="cell scanlines"></div>
+        <div class="cell scanlines"></div>
+        <div class="cell scanlines"></div>
+        <div class="cell scanlines"></div>
+        <div class="cell scanlines"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>CRT Scanlines</h2>
+      <div class="tagline">"Retro digital."</div>
+      <div class="desc">
+        Every post has a CRT scanline effect — thin horizontal lines like an old monitor. Entire grid feels like viewing through vintage display technology.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Nostalgic, retro-tech aesthetic. Unifying texture across all content.<br><br>
+        <strong>Best for:</strong> Retro gaming, synthwave, 80s aesthetic brands.<br><br>
+        <strong>Canva execution:</strong> Overlay thin horizontal lines (2px spacing, 30% opacity black) on all posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 43 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">43</div>
+      <div class="mini-grid">
+        <div class="cell grid-pattern"></div>
+        <div class="cell dark"></div>
+        <div class="cell grid-pattern"></div>
+        <div class="cell dark"></div>
+        <div class="cell grid-pattern"></div>
+        <div class="cell dark"></div>
+        <div class="cell grid-pattern"></div>
+        <div class="cell dark"></div>
+        <div class="cell grid-pattern"></div>
+        <div class="cell dark"></div>
+        <div class="cell grid-pattern"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Grid Pattern Checkerboard</h2>
+      <div class="tagline">"Data visualization texture."</div>
+      <div class="desc">
+        Alternating posts have a subtle grid/graph paper pattern. Feels technical, data-driven. Great for trading/finance content where charts and data are central.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Grid pattern signals precision, data, analysis. Appropriate for trading brands.<br><br>
+        <strong>Best for:</strong> Finance, trading, analytics brands.<br><br>
+        <strong>Canva execution:</strong> Add subtle grid line overlay (10px spacing, 3% opacity white) to alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 44 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">44</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell grid-pattern"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell grid-pattern"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell grid-pattern"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell grid-pattern"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Center Grid Only</h2>
+      <div class="tagline">"The technical spine."</div>
+      <div class="desc">
+        Only center column has grid texture. Education posts (the technical content) get the data visualization treatment. Left and right stay clean.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Associates the grid pattern with learning/technical content specifically.<br><br>
+        <strong>Best for:</strong> When education is your technical/data-driven content pillar.<br><br>
+        <strong>Canva execution:</strong> Only center column posts get grid pattern overlay.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 45 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">45</div>
+      <div class="mini-grid">
+        <div class="cell dots"></div>
+        <div class="cell dots"></div>
+        <div class="cell dots"></div>
+        <div class="cell dots"></div>
+        <div class="cell dots"></div>
+        <div class="cell dots"></div>
+        <div class="cell dots"></div>
+        <div class="cell dots"></div>
+        <div class="cell dots"></div>
+        <div class="cell dots"></div>
+        <div class="cell dots"></div>
+        <div class="cell dots"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Dot Matrix All</h2>
+      <div class="tagline">"Pixel universe."</div>
+      <div class="desc">
+        Every post has a subtle dot pattern — like halftone printing or LED display. Unifying texture that feels digital, precise, technological.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Dot patterns feel digital and precise. Creates cohesive tech aesthetic.<br><br>
+        <strong>Best for:</strong> Digital-first brands, tech products.<br><br>
+        <strong>Canva execution:</strong> Add small dot pattern (6px spacing) as overlay on all posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 46 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">46</div>
+      <div class="mini-grid">
+        <div class="cell noise"></div>
+        <div class="cell dark"></div>
+        <div class="cell noise"></div>
+        <div class="cell dark"></div>
+        <div class="cell noise"></div>
+        <div class="cell dark"></div>
+        <div class="cell noise"></div>
+        <div class="cell dark"></div>
+        <div class="cell noise"></div>
+        <div class="cell dark"></div>
+        <div class="cell noise"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Film Grain Checkerboard</h2>
+      <div class="tagline">"Analog texture."</div>
+      <div class="desc">
+        Alternating posts have subtle film grain/noise texture. Adds organic, analog feel to digital content. The grainy posts contrast with smooth dark ones.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Film grain adds warmth and organic quality. Breaks the pure digital feel.<br><br>
+        <strong>Best for:</strong> Brands wanting cinematic, premium, less "digital" aesthetic.<br><br>
+        <strong>Canva execution:</strong> Add noise/grain texture overlay (8-10% opacity) to alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 47 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">47</div>
+      <div class="mini-grid">
+        <div class="cell stripe-d"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-d"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-d"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-d"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-d"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-d"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Diagonal Lines</h2>
+      <div class="tagline">"Dynamic texture."</div>
+      <div class="desc">
+        Alternating posts have diagonal line texture. Diagonals add energy and movement compared to horizontal/vertical lines. More dynamic feel.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Diagonal = movement, energy. More dynamic than straight lines.<br><br>
+        <strong>Best for:</strong> Action-oriented, energetic brands.<br><br>
+        <strong>Canva execution:</strong> Add 45-degree line pattern overlay to alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 48 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">48</div>
+      <div class="mini-grid">
+        <div class="cell matrix"></div>
+        <div class="cell dark"></div>
+        <div class="cell matrix"></div>
+        <div class="cell dark"></div>
+        <div class="cell matrix"></div>
+        <div class="cell dark"></div>
+        <div class="cell matrix"></div>
+        <div class="cell dark"></div>
+        <div class="cell matrix"></div>
+        <div class="cell dark"></div>
+        <div class="cell matrix"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Matrix Rain</h2>
+      <div class="tagline">"Digital cascade."</div>
+      <div class="desc">
+        Alternating posts have vertical "matrix rain" texture — thin vertical lines with subtle green tint. Evokes digital data, code, the Matrix aesthetic.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Iconic digital aesthetic. Instantly recognizable as "techy".<br><br>
+        <strong>Best for:</strong> Tech, coding, algorithmic trading brands.<br><br>
+        <strong>Canva execution:</strong> Add vertical line texture with subtle green tint to alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 49 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">49</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell data-stream"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell data-stream"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell data-stream"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell data-stream"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Data Stream Center</h2>
+      <div class="tagline">"Information flows through the spine."</div>
+      <div class="desc">
+        Only center column has data stream texture — vertical lines suggesting data flow. Education content appears to have information cascading through it.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Associates education/learning with data transmission. Information flowing down.<br><br>
+        <strong>Best for:</strong> When education content is information-heavy.<br><br>
+        <strong>Canva execution:</strong> Center column posts get cyan-tinted vertical line texture.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 50 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">50</div>
+      <div class="mini-grid">
+        <div class="cell split-d"></div>
+        <div class="cell dark"></div>
+        <div class="cell split-d-inv"></div>
+        <div class="cell dark"></div>
+        <div class="cell split-d"></div>
+        <div class="cell dark"></div>
+        <div class="cell split-d-inv"></div>
+        <div class="cell dark"></div>
+        <div class="cell split-d"></div>
+        <div class="cell dark"></div>
+        <div class="cell split-d-inv"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Diagonal Split</h2>
+      <div class="tagline">"Duality in each frame."</div>
+      <div class="desc">
+        Alternating posts are split diagonally — lighter on one half, darker on other. Creates internal contrast within each post. Direction alternates for variety.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Each post becomes a mini study in contrast. Internal drama.<br><br>
+        <strong>Best for:</strong> Brands exploring duality, contrast, balance themes.<br><br>
+        <strong>Canva execution:</strong> Add diagonal gradient from lighter to darker across alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 51 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">51</div>
+      <div class="mini-grid">
+        <div class="cell holographic"></div>
+        <div class="cell holographic"></div>
+        <div class="cell holographic"></div>
+        <div class="cell holographic"></div>
+        <div class="cell holographic"></div>
+        <div class="cell holographic"></div>
+        <div class="cell holographic"></div>
+        <div class="cell holographic"></div>
+        <div class="cell holographic"></div>
+        <div class="cell holographic"></div>
+        <div class="cell holographic"></div>
+        <div class="cell holographic"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Holographic All</h2>
+      <div class="tagline">"Rainbow shimmer."</div>
+      <div class="desc">
+        Every post has a subtle holographic gradient — multiple colors shifting diagonally. The entire grid shimmers with iridescent quality.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Holographic = futuristic, premium, eye-catching. Unified iridescent treatment.<br><br>
+        <strong>Best for:</strong> Futuristic, premium, innovative brands.<br><br>
+        <strong>Canva execution:</strong> Add diagonal gradient with all brand colors at low opacity to every post.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 52 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">52</div>
+      <div class="mini-grid">
+        <div class="cell glitch"></div>
+        <div class="cell dark"></div>
+        <div class="cell glitch"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glitch"></div>
+        <div class="cell dark"></div>
+        <div class="cell glitch"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Glitch Scatter</h2>
+      <div class="tagline">"Digital corruption."</div>
+      <div class="desc">
+        Random posts have glitch/corruption texture — horizontal displacement bars of color. Scattered unpredictably across the grid. Chaotic but intentional.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Glitch aesthetic is trendy and suggests digital edge. Controlled chaos.<br><br>
+        <strong>Best for:</strong> Edgy, digital, experimental brands.<br><br>
+        <strong>Canva execution:</strong> Add horizontal color bars (cyan and pink offset) to random posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 53 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">53</div>
+      <div class="mini-grid">
+        <div class="cell chromatic"></div>
+        <div class="cell dark"></div>
+        <div class="cell chromatic"></div>
+        <div class="cell dark"></div>
+        <div class="cell chromatic"></div>
+        <div class="cell dark"></div>
+        <div class="cell chromatic"></div>
+        <div class="cell dark"></div>
+        <div class="cell chromatic"></div>
+        <div class="cell dark"></div>
+        <div class="cell chromatic"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Chromatic Aberration</h2>
+      <div class="tagline">"RGB split."</div>
+      <div class="desc">
+        Alternating posts have chromatic aberration effect — subtle RGB color fringing. Looks like a lens defect, adds technical/optical quality.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Chromatic aberration is a recognized cinematic/photographic effect. Adds character.<br><br>
+        <strong>Best for:</strong> Photography, video, cinematic brands.<br><br>
+        <strong>Canva execution:</strong> Add subtle red-blue color fringe gradient to alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 54 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">54</div>
+      <div class="mini-grid">
+        <div class="cell frost"></div>
+        <div class="cell frost"></div>
+        <div class="cell frost"></div>
+        <div class="cell frost"></div>
+        <div class="cell frost"></div>
+        <div class="cell frost"></div>
+        <div class="cell frost"></div>
+        <div class="cell frost"></div>
+        <div class="cell frost"></div>
+        <div class="cell frost"></div>
+        <div class="cell frost"></div>
+        <div class="cell frost"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Frosted Glass All</h2>
+      <div class="tagline">"Diffused elegance."</div>
+      <div class="desc">
+        Every post has a frosted glass effect — subtle blur and lightening. The entire grid feels like looking through frosted panels. Soft, premium.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Frosted glass is associated with premium materials. Soft, diffused, elegant.<br><br>
+        <strong>Best for:</strong> Luxury, premium, sophisticated brands.<br><br>
+        <strong>Canva execution:</strong> Add subtle white overlay with gradient, slight blur effect on all posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 55 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">55</div>
+      <div class="mini-grid">
+        <div class="cell stripe-v glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-v glow-gold"></div>
+        <div class="cell stripe-v glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-v glow-gold"></div>
+        <div class="cell stripe-v glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-v glow-gold"></div>
+        <div class="cell stripe-v glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell stripe-v glow-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Textured Columns</h2>
+      <div class="tagline">"Color meets texture."</div>
+      <div class="desc">
+        Left and right columns have both color glow AND vertical line texture. Center stays clean. Combines color coding with textural differentiation.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Double differentiation — color AND texture make columns even more distinct.<br><br>
+        <strong>Best for:</strong> When you want maximum visual separation between columns.<br><br>
+        <strong>Canva execution:</strong> Left column = purple glow + vertical lines. Right = gold glow + vertical lines. Center = flat dark.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 5: NEON & EFFECTS (56-70)
+       Glowing, electric, special effects
+  ============================================ -->
+  <div class="section-header">
+    <h3>Section 5</h3>
+    <h2>Neon & Effects</h2>
+  </div>
+
+  <!-- CONCEPT 56 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">56</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Neon Spine</h2>
+      <div class="tagline">"Electric learning path."</div>
+      <div class="desc">
+        Center column has full neon treatment — glowing border, outer shadow, inner glow. The education spine looks like actual neon signs. Electric, impossible to miss.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Neon is maximum attention. The electric glow draws every eye.<br><br>
+        <strong>Best for:</strong> Bold brands not afraid of intense visual impact.<br><br>
+        <strong>Canva execution:</strong> Center posts get cyan border with outer glow (shadow blur) and inner glow.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 57 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">57</div>
+      <div class="mini-grid">
+        <div class="cell neon-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-gold"></div>
+        <div class="cell neon-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-gold"></div>
+        <div class="cell neon-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-gold"></div>
+        <div class="cell neon-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Neon Edges</h2>
+      <div class="tagline">"Electric frame."</div>
+      <div class="desc">
+        Left and right columns are full neon (purple and gold). Center stays dark. The edges of the grid are electrified while the middle is void.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Neon edges create a frame effect. The dark center becomes a stage between electric curtains.<br><br>
+        <strong>Best for:</strong> Theatrical, dramatic, nightlife-adjacent brands.<br><br>
+        <strong>Canva execution:</strong> Left column = full neon purple. Right column = full neon gold. Center = dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 58 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">58</div>
+      <div class="mini-grid">
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-gold"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Neon Diagonal</h2>
+      <div class="tagline">"Electric path descending."</div>
+      <div class="desc">
+        One neon post per row, position shifting diagonally. Creates a descending line of electric glow across the grid. Colors rotate through the palette.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Diagonal movement + neon intensity = dynamic, energetic path.<br><br>
+        <strong>Best for:</strong> High-energy brands wanting dramatic visual flow.<br><br>
+        <strong>Canva execution:</strong> Row 1: left neon. Row 2: center neon. Row 3: right neon. Colors rotate.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 59 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">59</div>
+      <div class="mini-grid">
+        <div class="cell portal"></div>
+        <div class="cell dark"></div>
+        <div class="cell portal"></div>
+        <div class="cell dark"></div>
+        <div class="cell portal"></div>
+        <div class="cell dark"></div>
+        <div class="cell portal"></div>
+        <div class="cell dark"></div>
+        <div class="cell portal"></div>
+        <div class="cell dark"></div>
+        <div class="cell portal"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Portal Checkerboard</h2>
+      <div class="tagline">"Doorways to elsewhere."</div>
+      <div class="desc">
+        Alternating posts have the portal effect — concentric circles of purple fading to cyan. Each glowing post looks like a portal or wormhole. Mystical, cosmic.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Portals suggest depth, mystery, journey. Each post is an invitation.<br><br>
+        <strong>Best for:</strong> Mystical, cosmic, journey-focused brands.<br><br>
+        <strong>Canva execution:</strong> Alternating posts get concentric radial gradients (purple center, cyan mid, transparent edge).
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 60 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">60</div>
+      <div class="mini-grid">
+        <div class="cell eclipse"></div>
+        <div class="cell dark"></div>
+        <div class="cell eclipse"></div>
+        <div class="cell dark"></div>
+        <div class="cell eclipse"></div>
+        <div class="cell dark"></div>
+        <div class="cell eclipse"></div>
+        <div class="cell dark"></div>
+        <div class="cell eclipse"></div>
+        <div class="cell dark"></div>
+        <div class="cell eclipse"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Eclipse Pattern</h2>
+      <div class="tagline">"Black sun rising."</div>
+      <div class="desc">
+        Alternating posts have an eclipse effect — black circle in center with golden corona around it. Dramatic, cosmic, powerful symbol.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Eclipse is a powerful symbol — rare, cosmic, transformative. Visually striking.<br><br>
+        <strong>Best for:</strong> Brands with transformation, power, cosmic themes.<br><br>
+        <strong>Canva execution:</strong> Add black circle with gold glow around edges to alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 61 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">61</div>
+      <div class="mini-grid">
+        <div class="cell neon-cyan"></div>
+        <div class="cell neon-purple"></div>
+        <div class="cell neon-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Neon Header</h2>
+      <div class="tagline">"The entrance glows."</div>
+      <div class="desc">
+        Only the top row is neon — full electric treatment across all three columns in their respective colors. The rest of the grid is dark. Entry point is electrified.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Maximum impact at the entry point. First impression is electric.<br><br>
+        <strong>Best for:</strong> When you want to grab attention immediately at the top of the grid.<br><br>
+        <strong>Canva execution:</strong> Top row posts get full neon treatment. All others stay dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 62 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">62</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell neon-purple"></div>
+        <div class="cell neon-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Neon Footer</h2>
+      <div class="tagline">"The destination glows."</div>
+      <div class="desc">
+        Only the bottom row is neon. The exit point is electrified. Older content (further down) becomes the glowing destination.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Draws eyes downward. Encourages scrolling to reach the glowing destination.<br><br>
+        <strong>Best for:</strong> Encouraging deeper exploration of older content.<br><br>
+        <strong>Canva execution:</strong> Bottom row posts get full neon treatment. All others stay dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 63 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">63</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-pink"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Scattered Neon</h2>
+      <div class="tagline">"Random electric sparks."</div>
+      <div class="desc">
+        Neon posts scattered seemingly randomly across the grid. No pattern, just unexpected bursts of electric color. Chaotic energy.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Unpredictability keeps eyes moving, searching for the next spark.<br><br>
+        <strong>Best for:</strong> Experimental, unpredictable, avant-garde brands.<br><br>
+        <strong>Canva execution:</strong> Randomly select ~20-30% of posts for neon treatment. Rotate colors.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 64 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">64</div>
+      <div class="mini-grid">
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Neon Corners</h2>
+      <div class="tagline">"Electric anchors."</div>
+      <div class="desc">
+        Only the four corner positions have neon treatment. Four electric anchors defining the grid boundaries. Simple, structural, bold.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Corners anchor attention. Neon at corners creates a powerful frame.<br><br>
+        <strong>Best for:</strong> Minimal but bold approach. Maximum impact, minimum elements.<br><br>
+        <strong>Canva execution:</strong> Only corner posts (1, 3, 7, 9 in a 3x3 section) get neon. All others dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 65 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">65</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Single Neon Beacon</h2>
+      <div class="tagline">"One light in the void."</div>
+      <div class="desc">
+        Only ONE post in the entire grid has neon treatment. Maximum contrast. That single electric post becomes incredibly powerful — a lighthouse in darkness.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Extreme contrast = extreme focus. 100% attention on one post.<br><br>
+        <strong>Best for:</strong> Highlighting one specific piece of content (launch, announcement).<br><br>
+        <strong>Canva execution:</strong> One specific post gets full neon. Everything else is pure dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 66 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">66</div>
+      <div class="mini-grid">
+        <div class="cell nebula-purple"></div>
+        <div class="cell nebula-cyan"></div>
+        <div class="cell nebula-gold"></div>
+        <div class="cell nebula-purple"></div>
+        <div class="cell nebula-cyan"></div>
+        <div class="cell nebula-gold"></div>
+        <div class="cell nebula-purple"></div>
+        <div class="cell nebula-cyan"></div>
+        <div class="cell nebula-gold"></div>
+        <div class="cell nebula-purple"></div>
+        <div class="cell nebula-cyan"></div>
+        <div class="cell nebula-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Nebula Rivers</h2>
+      <div class="tagline">"Cosmic clouds in columns."</div>
+      <div class="desc">
+        Each column has nebula treatment in its color — soft, cloudy, organic shapes instead of centered glows. Feels like looking at three parallel gas clouds in space.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Nebulae feel organic and cosmic. Less "designed" than hard glows.<br><br>
+        <strong>Best for:</strong> Space, cosmic, ethereal brand themes.<br><br>
+        <strong>Canva execution:</strong> Multiple overlapping elliptical gradients per post, positioned organically. Column-appropriate colors.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 67 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">67</div>
+      <div class="mini-grid">
+        <div class="cell nebula-mixed"></div>
+        <div class="cell nebula-mixed"></div>
+        <div class="cell nebula-mixed"></div>
+        <div class="cell nebula-mixed"></div>
+        <div class="cell nebula-mixed"></div>
+        <div class="cell nebula-mixed"></div>
+        <div class="cell nebula-mixed"></div>
+        <div class="cell nebula-mixed"></div>
+        <div class="cell nebula-mixed"></div>
+        <div class="cell nebula-mixed"></div>
+        <div class="cell nebula-mixed"></div>
+        <div class="cell nebula-mixed"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Aurora Canvas</h2>
+      <div class="tagline">"Northern lights across all."</div>
+      <div class="desc">
+        Every post has the same multi-color nebula effect — blended purples, cyans, and golds creating aurora borealis appearance. The entire grid is one continuous cosmic canvas.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Unified cosmic treatment. The grid feels like one large painting.<br><br>
+        <strong>Best for:</strong> Brands wanting an immersive, unified aesthetic.<br><br>
+        <strong>Canva execution:</strong> Same multi-color nebula overlay on every post, perhaps with slight position variations.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 68 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">68</div>
+      <div class="mini-grid">
+        <div class="cell rim-cyan"></div>
+        <div class="cell rim-purple"></div>
+        <div class="cell rim-gold"></div>
+        <div class="cell rim-cyan"></div>
+        <div class="cell rim-purple"></div>
+        <div class="cell rim-gold"></div>
+        <div class="cell rim-cyan"></div>
+        <div class="cell rim-purple"></div>
+        <div class="cell rim-gold"></div>
+        <div class="cell rim-cyan"></div>
+        <div class="cell rim-purple"></div>
+        <div class="cell rim-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Colored Rim Columns</h2>
+      <div class="tagline">"Subtle color definition."</div>
+      <div class="desc">
+        Each column has a subtle colored rim/outline — not full neon, just a thin colored border inside each post. Minimal color with clear column identity.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Rim is more subtle than full glow. Color-coded without being loud.<br><br>
+        <strong>Best for:</strong> Premium brands wanting quiet color differentiation.<br><br>
+        <strong>Canva execution:</strong> Add 1px inner glow/stroke to posts in column-appropriate colors.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 69 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">69</div>
+      <div class="mini-grid">
+        <div class="cell inner-glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell inner-glow-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell inner-glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell inner-glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell inner-glow-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell inner-glow-purple"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Colored Inner Glow</h2>
+      <div class="tagline">"Light from within, colored."</div>
+      <div class="desc">
+        Alternating posts have colored inner glow — light emanating from inside the frame in the appropriate column color. Softer than neon, more organic than borders.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Inner glow feels organic, like bioluminescence. Color adds identity without harshness.<br><br>
+        <strong>Best for:</strong> Organic, ethereal brands wanting color coding without hard edges.<br><br>
+        <strong>Canva execution:</strong> Add column-colored inner shadow/glow (15% opacity) to alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 70 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">70</div>
+      <div class="mini-grid">
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell glow-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Rotating Color Grid</h2>
+      <div class="tagline">"Colors cycling everywhere."</div>
+      <div class="desc">
+        All posts have color glow, but colors rotate through positions. Each row has different color arrangement. Kaleidoscopic, dynamic, full of movement.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Full color coverage with variety. No single color dominates, all are present.<br><br>
+        <strong>Best for:</strong> Playful, dynamic brands not wanting to emphasize any single content type.<br><br>
+        <strong>Canva execution:</strong> Every post gets color glow. Colors rotate position each row (offset by 1).
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 6: DUOTONE & CINEMA (71-80)
+       Film looks, duotones, cinematic
+  ============================================ -->
+  <div class="section-header">
+    <h3>Section 6</h3>
+    <h2>Duotone & Cinema</h2>
+  </div>
+
+  <!-- CONCEPT 71 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">71</div>
+      <div class="mini-grid">
+        <div class="cell duotone-teal-orange"></div>
+        <div class="cell duotone-teal-orange"></div>
+        <div class="cell duotone-teal-orange"></div>
+        <div class="cell duotone-teal-orange"></div>
+        <div class="cell duotone-teal-orange"></div>
+        <div class="cell duotone-teal-orange"></div>
+        <div class="cell duotone-teal-orange"></div>
+        <div class="cell duotone-teal-orange"></div>
+        <div class="cell duotone-teal-orange"></div>
+        <div class="cell duotone-teal-orange"></div>
+        <div class="cell duotone-teal-orange"></div>
+        <div class="cell duotone-teal-orange"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Cinematic Teal-Orange</h2>
+      <div class="tagline">"Hollywood color grade."</div>
+      <div class="desc">
+        The classic film color grade — teal and orange complementary colors. Every post has this diagonal gradient. The entire grid looks like a movie poster.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Teal-orange is the most recognized cinematic color scheme. Instantly professional.<br><br>
+        <strong>Best for:</strong> Brands wanting premium, cinematic, Hollywood-quality aesthetic.<br><br>
+        <strong>Canva execution:</strong> Diagonal gradient from teal to orange (low opacity) on all posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 72 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">72</div>
+      <div class="mini-grid">
+        <div class="cell glow-teal"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-orange"></div>
+        <div class="cell glow-teal"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-orange"></div>
+        <div class="cell glow-teal"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-orange"></div>
+        <div class="cell glow-teal"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-orange"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Teal vs Orange Columns</h2>
+      <div class="tagline">"Complementary opposition."</div>
+      <div class="desc">
+        Left column is teal, right column is orange. Center is neutral dark. The complementary colors create visual tension and balance. Cinematic but column-structured.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Complementary colors create maximum visual contrast while remaining harmonious.<br><br>
+        <strong>Best for:</strong> Cinematic brands wanting clear column differentiation.<br><br>
+        <strong>Canva execution:</strong> Left column = teal glow. Right column = orange glow. Center = dark.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 73 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">73</div>
+      <div class="mini-grid">
+        <div class="cell duotone-cyan-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell duotone-cyan-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell duotone-cyan-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell duotone-cyan-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell duotone-cyan-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell duotone-cyan-purple"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Cyan-Purple Duotone Check</h2>
+      <div class="tagline">"Synthwave checkerboard."</div>
+      <div class="desc">
+        Alternating posts have cyan-to-purple diagonal gradient. Synthwave/retrowave aesthetic. The duotone posts contrast with pure dark ones.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Cyan-purple is the synthwave signature. Trendy, retro-futuristic.<br><br>
+        <strong>Best for:</strong> Retrowave, synthwave, 80s-inspired brands.<br><br>
+        <strong>Canva execution:</strong> Alternating posts get cyan-to-purple diagonal gradient.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 74 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">74</div>
+      <div class="mini-grid">
+        <div class="cell duotone-purple-gold"></div>
+        <div class="cell duotone-cyan-purple"></div>
+        <div class="cell duotone-gold-cyan"></div>
+        <div class="cell duotone-purple-gold"></div>
+        <div class="cell duotone-cyan-purple"></div>
+        <div class="cell duotone-gold-cyan"></div>
+        <div class="cell duotone-purple-gold"></div>
+        <div class="cell duotone-cyan-purple"></div>
+        <div class="cell duotone-gold-cyan"></div>
+        <div class="cell duotone-purple-gold"></div>
+        <div class="cell duotone-cyan-purple"></div>
+        <div class="cell duotone-gold-cyan"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Duotone Columns</h2>
+      <div class="tagline">"Each column blends different."</div>
+      <div class="desc">
+        Each column has its own duotone treatment. Left = purple-gold blend. Center = cyan-purple blend. Right = gold-cyan blend. Three different gradients flowing down.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Duotones are more sophisticated than single colors. Each column has unique character.<br><br>
+        <strong>Best for:</strong> Brands wanting nuanced, sophisticated color treatment.<br><br>
+        <strong>Canva execution:</strong> Each column gets its unique two-color diagonal gradient.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 75 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">75</div>
+      <div class="mini-grid">
+        <div class="cell sf noise glow-cyan"></div>
+        <div class="cell sf noise"></div>
+        <div class="cell sf noise glow-gold"></div>
+        <div class="cell sf noise glow-purple"></div>
+        <div class="cell sf noise"></div>
+        <div class="cell sf noise glow-cyan"></div>
+        <div class="cell sf noise"></div>
+        <div class="cell sf noise glow-gold"></div>
+        <div class="cell sf noise glow-purple"></div>
+        <div class="cell sf noise glow-cyan"></div>
+        <div class="cell sf noise"></div>
+        <div class="cell sf noise glow-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Film Grain + Color</h2>
+      <div class="tagline">"Analog cinema."</div>
+      <div class="desc">
+        All posts have film grain texture. Some posts also have color glows. The combination of grain + glow creates a cinematic, analog film look.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Film grain softens digital harshness. Combined with color, it's cinematic.<br><br>
+        <strong>Best for:</strong> Premium brands wanting analog, cinematic quality.<br><br>
+        <strong>Canva execution:</strong> All posts get grain texture. Some also get color glow overlays.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Concepts 76-80 -->
+  <!-- CONCEPT 76 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">76</div>
+      <div class="mini-grid">
+        <div class="cell dark vignette"></div>
+        <div class="cell dark vignette"></div>
+        <div class="cell dark vignette"></div>
+        <div class="cell dark vignette"></div>
+        <div class="cell dark vignette"></div>
+        <div class="cell dark vignette"></div>
+        <div class="cell dark vignette"></div>
+        <div class="cell dark vignette"></div>
+        <div class="cell dark vignette"></div>
+        <div class="cell dark vignette"></div>
+        <div class="cell dark vignette"></div>
+        <div class="cell dark vignette"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Cinematic Vignette</h2>
+      <div class="tagline">"Every frame is a shot."</div>
+      <div class="desc">
+        Every post has a cinematic vignette — darker edges, lighter center. Each post feels like a film frame. Professional, dramatic, focused.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Vignettes are used in cinema to focus attention. Each post becomes a mini movie frame.<br><br>
+        <strong>Best for:</strong> Cinematic, professional, premium content.<br><br>
+        <strong>Canva execution:</strong> Add radial gradient vignette (darker edges, lighter center) to all posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 77 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">77</div>
+      <div class="mini-grid">
+        <div class="cell top-white"></div>
+        <div class="cell top-white"></div>
+        <div class="cell top-white"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell bottom-cyan"></div>
+        <div class="cell bottom-purple"></div>
+        <div class="cell bottom-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Letterbox Effect</h2>
+      <div class="tagline">"Cinematic aspect ratio."</div>
+      <div class="desc">
+        Top row has subtle white top border (like letterbox bars). Bottom row has colored bottom borders. Creates a cinematic widescreen feel.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Letterbox bars signal "cinema". The grid feels like a widescreen movie.<br><br>
+        <strong>Best for:</strong> Film, video, cinematic brands.<br><br>
+        <strong>Canva execution:</strong> Top row = white top border. Bottom row = colored bottom borders.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 78 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">78</div>
+      <div class="mini-grid">
+        <div class="cell dark grad-diag"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark grad-diag"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark grad-diag"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark grad-diag"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark grad-diag"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark grad-diag"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Lens Flare Pattern</h2>
+      <div class="tagline">"Light leaks."</div>
+      <div class="desc">
+        Alternating posts have subtle diagonal light leak — like a lens flare crossing the frame. Adds cinematic imperfection and warmth.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Lens flares add cinematic character. Controlled imperfection feels authentic.<br><br>
+        <strong>Best for:</strong> Brands wanting warm, organic, cinematic feel.<br><br>
+        <strong>Canva execution:</strong> Add subtle diagonal gradient (white, low opacity) from corner to alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 79 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">79</div>
+      <div class="mini-grid">
+        <div class="cell depth-5 glow-cyan"></div>
+        <div class="cell depth-4"></div>
+        <div class="cell depth-3 glow-gold"></div>
+        <div class="cell depth-4 glow-purple"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-2 glow-cyan"></div>
+        <div class="cell depth-3"></div>
+        <div class="cell depth-2 glow-gold"></div>
+        <div class="cell depth-1 glow-purple"></div>
+        <div class="cell depth-2 glow-cyan"></div>
+        <div class="cell depth-1"></div>
+        <div class="cell depth-1 glow-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Depth + Color Combined</h2>
+      <div class="tagline">"Dimension and identity."</div>
+      <div class="desc">
+        Combines depth gradient (fade to black downward) with color accents. Some posts have both depth treatment AND color glow. Complex, layered, sophisticated.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Multiple visual dimensions working together. Depth + color = rich visual language.<br><br>
+        <strong>Best for:</strong> Brands wanting maximum visual sophistication.<br><br>
+        <strong>Canva execution:</strong> Apply depth/brightness gradient based on row. Then add color glow to selected posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 80 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">80</div>
+      <div class="mini-grid">
+        <div class="cell dark border-white"></div>
+        <div class="cell dark border-white"></div>
+        <div class="cell dark border-white"></div>
+        <div class="cell dark border-white"></div>
+        <div class="cell dark border-white"></div>
+        <div class="cell dark border-white"></div>
+        <div class="cell dark border-white"></div>
+        <div class="cell dark border-white"></div>
+        <div class="cell dark border-white"></div>
+        <div class="cell dark border-white"></div>
+        <div class="cell dark border-white"></div>
+        <div class="cell dark border-white"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Gallery Frames</h2>
+      <div class="tagline">"Museum presentation."</div>
+      <div class="desc">
+        Every post has a subtle white border — like photographs in a gallery or museum. Clean, professional, institutional. Each post is a framed artwork.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> White frames are classic gallery presentation. Elevates content to "art".<br><br>
+        <strong>Best for:</strong> Brands wanting gallery, museum, high-art positioning.<br><br>
+        <strong>Canva execution:</strong> Add thin white border (15% opacity) to all posts.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 7: HYBRID & EXPERIMENTAL (81-100)
+       Combined approaches, wild ideas
+  ============================================ -->
+  <div class="section-header">
+    <h3>Section 7</h3>
+    <h2>Hybrid & Experimental</h2>
+  </div>
+
+  <!-- CONCEPT 81-100: Abbreviated for length but full detail -->
+
+  <!-- CONCEPT 81 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">81</div>
+      <div class="mini-grid">
+        <div class="cell neon-cyan scanlines"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-gold scanlines"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-purple scanlines"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan scanlines"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-gold scanlines"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-purple scanlines"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Neon + CRT</h2>
+      <div class="tagline">"Retro-futurism."</div>
+      <div class="desc">
+        Neon glowing posts with CRT scanline texture overlay. The combination of electric neon and analog TV scanlines creates a retro-futuristic vibe.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Neon (futuristic) + CRT (retro) = synthwave nostalgia. Best of both eras.<br><br>
+        <strong>Best for:</strong> Synthwave, retrowave, cyberpunk aesthetics.<br><br>
+        <strong>Canva execution:</strong> Add neon glow + scanline texture overlay to alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 82 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">82</div>
+      <div class="mini-grid">
+        <div class="cell portal matrix"></div>
+        <div class="cell dark"></div>
+        <div class="cell portal matrix"></div>
+        <div class="cell dark"></div>
+        <div class="cell portal matrix"></div>
+        <div class="cell dark"></div>
+        <div class="cell portal matrix"></div>
+        <div class="cell dark"></div>
+        <div class="cell portal matrix"></div>
+        <div class="cell dark"></div>
+        <div class="cell portal matrix"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Portal + Matrix</h2>
+      <div class="tagline">"Digital wormholes."</div>
+      <div class="desc">
+        Portal radial gradient combined with matrix vertical lines. Looks like wormholes with data streaming through them. Sci-fi, digital, futuristic.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Portal (depth) + Matrix (data) = digital dimension travel.<br><br>
+        <strong>Best for:</strong> Sci-fi, tech, algorithm-focused brands.<br><br>
+        <strong>Canva execution:</strong> Layer portal gradient + matrix line texture on alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 83 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">83</div>
+      <div class="mini-grid">
+        <div class="cell top-cyan inner-glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell top-gold inner-glow-gold"></div>
+        <div class="cell top-purple inner-glow-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell top-cyan inner-glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell top-gold inner-glow-gold"></div>
+        <div class="cell top-purple inner-glow-purple"></div>
+        <div class="cell top-cyan inner-glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell top-gold inner-glow-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Border + Inner Glow</h2>
+      <div class="tagline">"Double reinforcement."</div>
+      <div class="desc">
+        Colored top borders PLUS matching inner glows on the same posts. Double reinforcement of color identity. The posts that have color have it STRONG.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Redundant color signals make categorization unmistakable.<br><br>
+        <strong>Best for:</strong> When you really need clear, unmistakable content type identification.<br><br>
+        <strong>Canva execution:</strong> Selected posts get both colored top border AND matching inner glow.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 84 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">84</div>
+      <div class="mini-grid">
+        <div class="cell nebula-cyan vignette"></div>
+        <div class="cell dark"></div>
+        <div class="cell nebula-gold vignette"></div>
+        <div class="cell dark"></div>
+        <div class="cell nebula-purple vignette"></div>
+        <div class="cell dark"></div>
+        <div class="cell nebula-cyan vignette"></div>
+        <div class="cell dark"></div>
+        <div class="cell nebula-gold vignette"></div>
+        <div class="cell dark"></div>
+        <div class="cell nebula-purple vignette"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Nebula + Vignette</h2>
+      <div class="tagline">"Cosmic depth."</div>
+      <div class="desc">
+        Nebula color treatment combined with vignette darkening at edges. Creates cosmic clouds with focused centers. Dreamy, deep, atmospheric.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Nebula (cosmic) + vignette (focus) = infinite depth with clear center.<br><br>
+        <strong>Best for:</strong> Cosmic, space, meditative brands.<br><br>
+        <strong>Canva execution:</strong> Layer nebula color gradients + vignette darkening on alternating posts.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 85 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">85</div>
+      <div class="mini-grid">
+        <div class="cell glow-cyan grid-pattern"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold dots"></div>
+        <div class="cell glow-purple stripe-h"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan grid-pattern"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold dots"></div>
+        <div class="cell glow-purple stripe-h"></div>
+        <div class="cell glow-cyan grid-pattern"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-gold dots"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Color + Unique Textures</h2>
+      <div class="tagline">"Each type is different."</div>
+      <div class="desc">
+        Each content type gets both its column color AND a unique texture. Education = grid pattern. Blog = horizontal lines. Product = dots. Maximum differentiation.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Color + texture = two layers of identity. Even colorblind viewers can distinguish types.<br><br>
+        <strong>Best for:</strong> Maximum accessibility and content type clarity.<br><br>
+        <strong>Canva execution:</strong> Each content type gets assigned color + assigned texture pattern.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 86-90: Quick hits -->
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">86</div>
+      <div class="mini-grid">
+        <div class="cell eclipse neon-gold"></div>
+        <div class="cell void"></div>
+        <div class="cell eclipse neon-gold"></div>
+        <div class="cell void"></div>
+        <div class="cell eclipse neon-gold"></div>
+        <div class="cell void"></div>
+        <div class="cell eclipse neon-gold"></div>
+        <div class="cell void"></div>
+        <div class="cell eclipse neon-gold"></div>
+        <div class="cell void"></div>
+        <div class="cell eclipse neon-gold"></div>
+        <div class="cell void"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Eclipse vs Void</h2>
+      <div class="tagline">"Celestial opposition."</div>
+      <div class="desc">Alternating between eclipse (black sun with golden corona) and pure void (black hole effect). Cosmic drama between two dark forces.</div>
+      <div class="details"><strong>Best for:</strong> Dark, cosmic, dramatic themes.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">87</div>
+      <div class="mini-grid">
+        <div class="cell holographic neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell holographic neon-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell holographic neon-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell holographic neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell holographic neon-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell holographic neon-purple"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Holo-Neon</h2>
+      <div class="tagline">"Maximum future."</div>
+      <div class="desc">Holographic gradient background + neon glow border. The most futuristic combination possible. Each lit post is a mini light show.</div>
+      <div class="details"><strong>Best for:</strong> Futuristic, tech, innovation brands.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">88</div>
+      <div class="mini-grid">
+        <div class="cell glitch neon-cyan"></div>
+        <div class="cell glitch"></div>
+        <div class="cell glitch neon-gold"></div>
+        <div class="cell glitch neon-purple"></div>
+        <div class="cell glitch"></div>
+        <div class="cell glitch neon-cyan"></div>
+        <div class="cell glitch"></div>
+        <div class="cell glitch neon-gold"></div>
+        <div class="cell glitch neon-purple"></div>
+        <div class="cell glitch neon-cyan"></div>
+        <div class="cell glitch"></div>
+        <div class="cell glitch neon-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Corrupted Neon</h2>
+      <div class="tagline">"Broken beauty."</div>
+      <div class="desc">All posts have glitch texture. Some also have neon treatment. Looks like a malfunctioning neon display. Edgy, broken, chaotic.</div>
+      <div class="details"><strong>Best for:</strong> Punk, underground, experimental aesthetics.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">89</div>
+      <div class="mini-grid">
+        <div class="cell corner-tl-purple"></div>
+        <div class="cell top-cyan"></div>
+        <div class="cell corner-tr-gold"></div>
+        <div class="cell left-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell right-gold"></div>
+        <div class="cell left-purple"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell right-gold"></div>
+        <div class="cell corner-bl-gold"></div>
+        <div class="cell bottom-cyan"></div>
+        <div class="cell corner-br-purple"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Complete Frame System</h2>
+      <div class="tagline">"Every edge defined."</div>
+      <div class="desc">Corners get corner glows. Edges get border lines. Center gets radial glow. Every position has a unique treatment based on its location in the grid.</div>
+      <div class="details"><strong>Best for:</strong> Complex, detailed visual systems.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">90</div>
+      <div class="mini-grid">
+        <div class="cell depth-7 glow-cyan"></div>
+        <div class="cell depth-6"></div>
+        <div class="cell depth-5 glow-gold"></div>
+        <div class="cell depth-4 noise"></div>
+        <div class="cell depth-3 glow-purple"></div>
+        <div class="cell depth-2 noise"></div>
+        <div class="cell depth-1 glow-cyan"></div>
+        <div class="cell depth-2"></div>
+        <div class="cell depth-3 glow-gold"></div>
+        <div class="cell depth-4 noise"></div>
+        <div class="cell depth-5 glow-purple"></div>
+        <div class="cell depth-6 noise"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Everything Combined</h2>
+      <div class="tagline">"Kitchen sink."</div>
+      <div class="desc">Depth levels + color glows + film grain all combined. Each post might have a different combination. Maximum complexity, maximum visual richness.</div>
+      <div class="details"><strong>Best for:</strong> Experimental, maximalist brands not afraid of visual density.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Final concepts 91-100 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">91</div>
+      <div class="mini-grid">
+        <div class="cell sf"></div>
+        <div class="cell sf glow-cyan"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf glow-purple"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf glow-gold"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf glow-cyan"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf glow-purple"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf glow-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Starfield + Color Waves</h2>
+      <div class="tagline">"Stars with color rhythm."</div>
+      <div class="desc">Every post has starfield base. Colors appear in waves — one colored post per row, position varies. Color pulses through the stars.</div>
+      <div class="details"><strong>Best for:</strong> Cosmic brands wanting rhythm with stars visible everywhere.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">92</div>
+      <div class="mini-grid">
+        <div class="cell sf nebula-cyan"></div>
+        <div class="cell sf nebula-cyan"></div>
+        <div class="cell sf nebula-cyan"></div>
+        <div class="cell sf nebula-purple"></div>
+        <div class="cell sf nebula-purple"></div>
+        <div class="cell sf nebula-purple"></div>
+        <div class="cell sf nebula-gold"></div>
+        <div class="cell sf nebula-gold"></div>
+        <div class="cell sf nebula-gold"></div>
+        <div class="cell sf nebula-cyan"></div>
+        <div class="cell sf nebula-cyan"></div>
+        <div class="cell sf nebula-cyan"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Nebula Row Bands</h2>
+      <div class="tagline">"Cosmic stripes."</div>
+      <div class="desc">Each row is a different nebula color. Starfield underneath. Creates horizontal bands of cosmic clouds — like nebulae layered at different depths.</div>
+      <div class="details"><strong>Best for:</strong> Space themes with clear row differentiation.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">93</div>
+      <div class="mini-grid">
+        <div class="cell dark top-cyan bottom-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark top-gold bottom-gold"></div>
+        <div class="cell dark top-purple bottom-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark top-cyan bottom-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark top-gold bottom-gold"></div>
+        <div class="cell dark top-purple bottom-purple"></div>
+        <div class="cell dark top-cyan bottom-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark top-gold bottom-gold"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Double Line Posts</h2>
+      <div class="tagline">"Top and bottom."</div>
+      <div class="desc">Colored posts have matching lines at top AND bottom. Creates a strong bracket/sandwich effect. Very structured, very intentional.</div>
+      <div class="details"><strong>Best for:</strong> Systematic, organized, structured brands.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">94</div>
+      <div class="mini-grid">
+        <div class="cell neon-cyan"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell soft-cyan"></div>
+        <div class="cell neon-purple"></div>
+        <div class="cell glow-purple"></div>
+        <div class="cell soft-purple"></div>
+        <div class="cell neon-gold"></div>
+        <div class="cell glow-gold"></div>
+        <div class="cell soft-gold"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell soft-cyan"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Intensity Columns</h2>
+      <div class="tagline">"Left loud, right quiet."</div>
+      <div class="desc">Same color per row, but intensity varies by column. Left = neon (loud). Center = glow (medium). Right = soft (quiet). Color fades across.</div>
+      <div class="details"><strong>Best for:</strong> Showing emphasis fading from action to contemplation.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">95</div>
+      <div class="mini-grid">
+        <div class="cell sf glow-cyan rim-cyan"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf glow-gold rim-gold"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf glow-purple rim-purple"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf glow-cyan rim-cyan"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf glow-gold rim-gold"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf glow-purple rim-purple"></div>
+        <div class="cell sf"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Glow + Rim + Stars</h2>
+      <div class="tagline">"Triple layer."</div>
+      <div class="desc">Starfield base + colored radial glow + colored rim outline. Three layers on alternating posts. Maximum visual definition while maintaining cosmic theme.</div>
+      <div class="details"><strong>Best for:</strong> Complex, layered visual identity with space theme.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">96</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell portal neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Single Portal</h2>
+      <div class="tagline">"One doorway."</div>
+      <div class="desc">Only one post has the full portal + neon treatment. Everything else is dark. That single post is the doorway, the entry point, the invitation.</div>
+      <div class="details"><strong>Best for:</strong> Drawing massive attention to one specific piece of content.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">97</div>
+      <div class="mini-grid">
+        <div class="cell sf"></div>
+        <div class="cell sf top-cyan"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf left-purple"></div>
+        <div class="cell sf border-cyan"></div>
+        <div class="cell sf right-gold"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf bottom-cyan"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf top-purple"></div>
+        <div class="cell sf"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Line Art Grid</h2>
+      <div class="tagline">"Geometric drawing."</div>
+      <div class="desc">Posts have single-side borders that connect to create larger geometric patterns across the grid. The grid becomes one large line drawing.</div>
+      <div class="details"><strong>Best for:</strong> Minimal, geometric, artistic brands.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">98</div>
+      <div class="mini-grid">
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-purple"></div>
+        <div class="cell dark"></div>
+        <div class="cell neon-gold"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Descending Neon Steps</h2>
+      <div class="tagline">"Staircase of light."</div>
+      <div class="desc">Neon posts create a staircase pattern descending from top-right to bottom-left. Each step is a different color. A lit path through darkness.</div>
+      <div class="details"><strong>Best for:</strong> Journey, progression, step-by-step themes.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">99</div>
+      <div class="mini-grid">
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell glow-cyan"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+        <div class="cell dark"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Sparse Diagonal</h2>
+      <div class="tagline">"Less is more."</div>
+      <div class="desc">One glowing post every 3rd row, creating a sparse diagonal. Minimal color, maximum negative space. The few lit posts become incredibly precious.</div>
+      <div class="details"><strong>Best for:</strong> Ultra-minimal, luxury brands where scarcity = value.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPT 100 -->
+  <div class="concept">
+    <div class="concept-visual">
+      <div class="concept-num">100</div>
+      <div class="mini-grid">
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+        <div class="cell sf"></div>
+      </div>
+    </div>
+    <div class="concept-info">
+      <h2>Pure Starfield</h2>
+      <div class="tagline">"No tricks. Just stars."</div>
+      <div class="desc">
+        Every post is pure starfield. No overlays. No glows. No borders. No patterns. Just the cosmos. The content speaks for itself. The background is the background.
+      </div>
+      <div class="details">
+        <strong>Why it works:</strong> Sometimes the best design is no design. Let the content be the hero. The starfield unifies, the content differentiates.<br><br>
+        <strong>Best for:</strong> When your content design (typography, layout, messaging) is strong enough to carry without grid-level visual systems.<br><br>
+        <strong>The question:</strong> Maybe you don't need 99 concepts. Maybe you need concept 100 — and put all the visual energy into the content itself.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Final note -->
+  <div class="section-header">
+    <h3>Complete</h3>
+    <h2>100 Concepts Explored</h2>
+  </div>
+
+  <div style="max-width: 600px; margin: 0 auto; text-align: center; padding: 40px 20px;">
+    <p style="font-size: 14px; color: #666; line-height: 1.8;">
+      From rivers to patterns. From light to texture. From neon to cinema. From hybrid experiments to pure simplicity.
+    </p>
+    <p style="font-size: 14px; color: #888; line-height: 1.8; margin-top: 20px;">
+      Which ones made you feel something?
+    </p>
+  </div>
+
+</body>
+</html>
