@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 469 - Time-Based Liquidity Concepts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #606070;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
+            --accent-green: #4ad97a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --accent-orange: #d9884a;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { background-color: #000; min-height: 100vh; font-family: var(--font-sans); color: var(--text-primary); padding: 2rem; }
+
+        .controls { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; gap: 1rem; background: var(--bg-card); padding: 0.75rem 1.5rem; border-radius: 9999px; border: 1px solid var(--border-subtle); }
+        .controls label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); }
+        .controls select { background: var(--bg-dark); color: var(--text-primary); border: 1px solid var(--border-subtle); border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.875rem; cursor: pointer; }
+        #export-btn { background: var(--accent-gold); color: var(--bg-dark); border: none; border-radius: 9999px; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        #export-btn:hover { filter: brightness(1.1); }
+
+        .page-title { text-align: center; margin: 5rem auto 3rem; }
+        .page-title h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4cqw, 3rem); font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .page-title p { font-size: 1rem; color: var(--text-muted); }
+
+        .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; justify-items: center; }
+        .slide-wrapper { container-type: inline-size; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .slide-label { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 12px; position: relative; overflow: hidden; }
+
+        body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
+        body.export-mode .carousel-grid { display: block; }
+        body.export-mode .slide-wrapper { display: none; }
+        body.export-mode .slide-wrapper.exporting { display: flex; }
+        body.export-mode .slide-label { display: none; }
+        body.export-mode .page-title, body.export-mode .controls { display: none; }
+
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity); }
+
+        .slide-content { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(30px, 5.6cqw, 60px); text-align: center; }
+        .slide-number { position: absolute; bottom: clamp(15px, 2.8cqw, 30px); right: clamp(20px, 3.7cqw, 40px); font-family: var(--font-sans); font-size: clamp(7px, 1.3cqw, 14px); color: var(--text-secondary); opacity: 0.6; }
+        .brand-header { position: absolute; top: clamp(20px, 3.7cqw, 40px); left: 0; right: 0; text-align: center; font-family: var(--font-serif); font-size: clamp(9px, 1.7cqw, 18px); font-weight: 600; color: var(--accent-gold); letter-spacing: 3px; text-transform: uppercase; }
+
+        .slide-1 h1 { font-family: var(--font-serif); font-size: clamp(24px, 4.4cqw, 48px); font-weight: 600; color: var(--text-primary); line-height: 1.1; margin-bottom: clamp(12px, 2.2cqw, 24px); }
+        .slide-1 .subtitle { font-family: var(--font-sans); font-size: clamp(13px, 2.4cqw, 26px); font-weight: 400; color: var(--accent-teal); }
+
+        .content-box { border-radius: clamp(8px, 1.5cqw, 16px); padding: clamp(22px, 4.1cqw, 44px); width: 100%; max-width: clamp(375px, 69.4cqw, 750px); }
+        .content-box h3 { font-family: var(--font-serif); font-size: clamp(19px, 3.5cqw, 38px); font-weight: 600; margin-bottom: clamp(14px, 2.6cqw, 28px); }
+        .content-box ul { list-style: none; text-align: left; }
+        .content-box li { font-family: var(--font-sans); font-size: clamp(11px, 2cqw, 22px); color: var(--text-primary); padding: clamp(5px, 0.9cqw, 10px) 0; padding-left: clamp(18px, 3.3cqw, 36px); position: relative; }
+        .content-box li::before { content: "→"; position: absolute; left: 0; }
+
+        .session-box { background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%); border: 1px solid rgba(74, 217, 217, 0.3); }
+        .session-box h3 { color: var(--accent-teal); }
+        .session-box li::before { color: var(--accent-teal); }
+
+        .daily-box { background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%); border: 1px solid rgba(74, 217, 122, 0.3); }
+        .daily-box h3 { color: var(--accent-green); }
+        .daily-box li::before { color: var(--accent-green); }
+
+        .weekly-box { background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%); border: 1px solid rgba(201, 169, 98, 0.3); }
+        .weekly-box h3 { color: var(--accent-gold); }
+        .weekly-box li::before { color: var(--accent-gold); }
+
+        .monthly-box { background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%); border: 1px solid rgba(155, 74, 217, 0.3); }
+        .monthly-box h3 { color: var(--accent-purple); }
+        .monthly-box li::before { color: var(--accent-purple); }
+
+        .matters-box { background: linear-gradient(135deg, rgba(217, 136, 74, 0.15) 0%, rgba(217, 136, 74, 0.05) 100%); border: 1px solid rgba(217, 136, 74, 0.3); }
+        .matters-box h3 { color: var(--accent-orange); }
+        .matters-box li::before { color: var(--accent-orange); }
+
+        .visual-placeholder { background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.02) 100%); border: 2px dashed rgba(201, 169, 98, 0.3); border-radius: clamp(8px, 1.5cqw, 16px); padding: clamp(40px, 7.4cqw, 80px) clamp(20px, 3.7cqw, 40px); width: 100%; max-width: clamp(400px, 74.1cqw, 800px); text-align: center; }
+        .visual-placeholder p { font-size: clamp(10px, 1.9cqw, 20px); color: var(--text-muted); margin-bottom: clamp(8px, 1.5cqw, 16px); }
+        .visual-placeholder .visual-note { font-size: clamp(9px, 1.7cqw, 18px); color: var(--accent-gold); font-style: italic; }
+
+        .cta-title { font-family: var(--font-serif); font-size: clamp(24px, 4.4cqw, 48px); font-weight: 600; color: var(--text-primary); margin-bottom: clamp(10px, 1.9cqw, 20px); line-height: 1.3; }
+        .cta-text { font-family: var(--font-sans); font-size: clamp(12px, 2.2cqw, 24px); color: var(--text-secondary); margin-bottom: clamp(4px, 0.7cqw, 8px); }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="solid">Solid</option></select></label>
+        <label>Opacity: <select id="opacity-control"><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.16">16%</option><option value="0.24">24%</option></select></label>
+        <button id="export-btn">Export Mode</button>
+    </div>
+
+    <div class="page-title">
+        <h1>Time-Based Liquidity Concepts</h1>
+        <p>8 slides · ICT Concepts</p>
+    </div>
+
+    <div class="carousel-grid">
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <h1>TIME-BASED<br>LIQUIDITY CONCEPTS</h1>
+                    <p class="subtitle">When matters as much as where.</p>
+                </div>
+                <div class="slide-number">1 / 8</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Session Opens</span>
+            <div class="slide slide-2">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-box session-box">
+                        <h3>SESSION OPENS</h3>
+                        <ul>
+                            <li>London open</li>
+                            <li>New York open</li>
+                            <li>Often volatile, liquidity-rich</li>
+                            <li>Prime hunting ground</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-number">2 / 8</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Daily Levels</span>
+            <div class="slide slide-3">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-box daily-box">
+                        <h3>DAILY LEVELS</h3>
+                        <ul>
+                            <li>Previous day high/low</li>
+                            <li>Midnight open</li>
+                            <li>Targets for intraday sweeps</li>
+                            <li>Reset every 24 hours</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-number">3 / 8</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Weekly Levels</span>
+            <div class="slide slide-4">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-box weekly-box">
+                        <h3>WEEKLY LEVELS</h3>
+                        <ul>
+                            <li>Previous week high/low</li>
+                            <li>Often tested early in week</li>
+                            <li>Larger liquidity pools</li>
+                            <li>Multi-day relevance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-number">4 / 8</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Monthly Levels</span>
+            <div class="slide slide-5">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-box monthly-box">
+                        <h3>MONTHLY LEVELS</h3>
+                        <ul>
+                            <li>Previous month high/low</li>
+                            <li>Significant liquidity pools</li>
+                            <li>Major institutional targets</li>
+                            <li>Swing trade relevance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-number">5 / 8</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Chart Visual</span>
+            <div class="slide slide-6">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="visual-placeholder">
+                        <p>[TradingView Chart]</p>
+                        <p>Session opens marked, daily highs/lows shown</p>
+                        <p>Liquidity events occurring at these times</p>
+                        <span class="visual-note">Time + Price = Confluence</span>
+                    </div>
+                </div>
+                <div class="slide-number">6 / 8</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — Why It Matters</span>
+            <div class="slide slide-7">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <div class="content-box matters-box">
+                        <h3>WHY IT MATTERS</h3>
+                        <ul>
+                            <li>Time creates rhythm</li>
+                            <li>Institutions operate on schedules</li>
+                            <li>Predictable liquidity windows</li>
+                            <li>Combine time + price for edge</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-number">7 / 8</div>
+            </div>
+        </div>
+
+        <div class="slide-wrapper" data-slide="8">
+            <span class="slide-label">Slide 8 — CTA</span>
+            <div class="slide slide-8">
+                <div class="video-background"><video autoplay muted loop playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <h2 class="cta-title">Add Time to<br>Your Analysis</h2>
+                    <p class="cta-text">Full lesson in curriculum</p>
+                    <p class="cta-text">Link in bio</p>
+                </div>
+                <div class="slide-number">8 / 8</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const defined = (v) => typeof v !== 'undefined' && v !== null;
+            let exportMode = false, currentSlide = 0;
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            const totalSlides = slideWrappers.length;
+            const bgToggle = document.getElementById('bg-toggle');
+            const opacityControl = document.getElementById('opacity-control');
+            const exportBtn = document.getElementById('export-btn');
+
+            function updateExportView() { slideWrappers.forEach((wrapper, index) => { wrapper.classList.toggle('exporting', index === currentSlide); }); }
+
+            if (defined(bgToggle)) { bgToggle.addEventListener('change', (e) => { document.querySelectorAll('.video-background').forEach(bg => { bg.style.display = e.target.value === 'video' ? 'block' : 'none'; }); }); }
+            if (defined(opacityControl)) { opacityControl.addEventListener('change', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value); }); }
+            if (defined(exportBtn)) { exportBtn.addEventListener('click', () => { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode'; if (exportMode) { currentSlide = 0; updateExportView(); } }); }
+
+            document.addEventListener('keydown', (e) => {
+                if (!exportMode) return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { currentSlide = Math.min(currentSlide + 1, totalSlides - 1); updateExportView(); }
+                else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { currentSlide = Math.max(currentSlide - 1, 0); updateExportView(); }
+                else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+            });
+        })();
+    </script>
+</body>
+</html>
