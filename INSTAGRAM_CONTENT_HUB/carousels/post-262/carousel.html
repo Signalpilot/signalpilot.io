@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 262 — Displacement: Momentum Reveals Intent</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+            --video-opacity: 0.08;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .controls-bar {
+            max-width: 1200px;
+            margin: 0 auto 20px auto;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .control-group select,
+        .control-group input[type="range"] {
+            cursor: pointer;
+        }
+
+        .control-group select {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: 6px 10px;
+            font-size: 13px;
+            color: var(--text-primary);
+        }
+
+        .control-group select option {
+            background: #1a1a20;
+        }
+
+        #export-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            background: rgba(201, 169, 98, 0.2);
+            border: 1px solid rgba(201, 169, 98, 0.4);
+            color: var(--accent-gold);
+            transition: all 0.2s ease;
+        }
+
+        #export-btn:hover {
+            background: rgba(201, 169, 98, 0.3);
+        }
+
+        .page-title {
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 540px));
+            gap: 40px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            container-type: inline-size;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .slide {
+            max-width: 540px;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: var(--video-opacity);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: clamp(36px, 6.67cqw, 72px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-number {
+            font-size: clamp(7px, 1.30cqw, 14px);
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
+
+        .brand-mark {
+            font-size: clamp(6.5px, 1.20cqw, 13px);
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
+
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(29px, 5.37cqw, 58px);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: clamp(12px, 2.22cqw, 24px);
+        }
+
+        .slide-title .highlight {
+            color: var(--accent-green);
+        }
+
+        .subtitle {
+            font-size: clamp(13px, 2.41cqw, 26px);
+            font-weight: 400;
+            color: var(--text-secondary);
+            max-width: 700px;
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .displacement-card {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border: 1px solid rgba(74, 217, 122, 0.3);
+            border-radius: clamp(8px, 1.48cqw, 16px);
+            padding: clamp(24px, 4.44cqw, 48px);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .displacement-card.weak {
+            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
+            border-color: rgba(217, 74, 74, 0.3);
+        }
+
+        .displacement-card.weak h3 {
+            color: var(--accent-red);
+        }
+
+        .displacement-card.weak .feature-list li::before {
+            content: "✕";
+            color: var(--accent-red);
+        }
+
+        .displacement-card.why {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+            border-color: rgba(74, 144, 217, 0.3);
+        }
+
+        .displacement-card.why h3 {
+            color: var(--accent-blue);
+        }
+
+        .displacement-card.why .feature-list li::before {
+            content: "✦";
+            color: var(--accent-blue);
+        }
+
+        .displacement-card.compare {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+
+        .displacement-card.compare h3 {
+            color: var(--accent-gold);
+        }
+
+        .displacement-card.compare .feature-list li::before {
+            color: var(--accent-gold);
+        }
+
+        .displacement-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(21px, 3.89cqw, 42px);
+            font-weight: 600;
+            margin-bottom: clamp(16px, 2.96cqw, 32px);
+            color: var(--accent-green);
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .feature-list li {
+            font-size: clamp(11px, 2.04cqw, 22px);
+            color: var(--text-primary);
+            padding: clamp(7px, 1.30cqw, 14px) 0;
+            padding-left: clamp(18px, 3.33cqw, 36px);
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .feature-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+        }
+
+        .quote-block {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4.44cqw, 48px);
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.4;
+            max-width: 700px;
+            position: relative;
+            padding: 0 clamp(20px, 3.70cqw, 40px);
+        }
+
+        .quote-block::before {
+            content: """;
+            position: absolute;
+            left: 0;
+            top: clamp(-10px, -1.85cqw, -20px);
+            font-size: clamp(40px, 7.41cqw, 80px);
+            color: var(--accent-gold);
+            opacity: 0.5;
+        }
+
+        .comparison-visual {
+            display: flex;
+            gap: clamp(16px, 2.96cqw, 32px);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .compare-panel {
+            flex: 1;
+            padding: clamp(16px, 2.96cqw, 32px);
+            border-radius: clamp(8px, 1.48cqw, 16px);
+            text-align: center;
+        }
+
+        .compare-panel.strong {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+            border: 1px solid rgba(74, 217, 122, 0.3);
+        }
+
+        .compare-panel.weak-panel {
+            background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
+            border: 1px solid rgba(217, 74, 74, 0.3);
+        }
+
+        .compare-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(14px, 2.59cqw, 28px);
+            font-weight: 600;
+            margin-bottom: clamp(12px, 2.22cqw, 24px);
+        }
+
+        .compare-panel.strong .compare-label {
+            color: var(--accent-green);
+        }
+
+        .compare-panel.weak-panel .compare-label {
+            color: var(--accent-red);
+        }
+
+        .candle-visual {
+            display: flex;
+            justify-content: center;
+            gap: clamp(8px, 1.48cqw, 16px);
+            margin-bottom: clamp(8px, 1.48cqw, 16px);
+        }
+
+        .candle-bar {
+            width: clamp(12px, 2.22cqw, 24px);
+            border-radius: clamp(2px, 0.37cqw, 4px);
+        }
+
+        .compare-panel.strong .candle-bar {
+            background: var(--accent-green);
+        }
+
+        .compare-panel.weak-panel .candle-bar {
+            background: var(--accent-red);
+        }
+
+        .compare-desc {
+            font-size: clamp(8px, 1.48cqw, 16px);
+            color: var(--text-secondary);
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(26px, 4.81cqw, 52px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: clamp(10px, 1.85cqw, 20px);
+            line-height: 1.3;
+        }
+
+        .cta-title .emphasis {
+            color: var(--accent-green);
+        }
+
+        .cta-text {
+            font-size: clamp(12px, 2.22cqw, 24px);
+            color: var(--text-secondary);
+            margin-bottom: clamp(4px, 0.74cqw, 8px);
+        }
+
+        .disclaimer-text {
+            font-size: clamp(8px, 1.48cqw, 16px);
+            color: var(--text-muted);
+            margin-top: clamp(8px, 1.48cqw, 16px);
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .controls-bar,
+        body.export-mode .page-title {
+            display: none;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+            max-width: none;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            width: 1080px;
+            height: 1350px;
+            max-width: none;
+            aspect-ratio: auto;
+            border: none;
+        }
+
+        body.export-mode .slide-content {
+            padding: 72px;
+        }
+
+        body.export-mode .slide-number {
+            font-size: 14px;
+        }
+
+        body.export-mode .brand-mark {
+            font-size: 13px;
+        }
+
+        body.export-mode h1.slide-title {
+            font-size: 58px;
+            margin-bottom: 24px;
+        }
+
+        body.export-mode .subtitle {
+            font-size: 26px;
+        }
+
+        body.export-mode .displacement-card {
+            border-radius: 16px;
+            padding: 48px;
+        }
+
+        body.export-mode .displacement-card h3 {
+            font-size: 42px;
+            margin-bottom: 32px;
+        }
+
+        body.export-mode .feature-list li {
+            font-size: 22px;
+            padding: 14px 0;
+            padding-left: 36px;
+        }
+
+        body.export-mode .quote-block {
+            font-size: 48px;
+            padding: 0 40px;
+        }
+
+        body.export-mode .quote-block::before {
+            top: -20px;
+            font-size: 80px;
+        }
+
+        body.export-mode .comparison-visual {
+            gap: 32px;
+        }
+
+        body.export-mode .compare-panel {
+            padding: 32px;
+            border-radius: 16px;
+        }
+
+        body.export-mode .compare-label {
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+
+        body.export-mode .candle-visual {
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        body.export-mode .candle-bar {
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        body.export-mode .compare-desc {
+            font-size: 16px;
+        }
+
+        body.export-mode .cta-title {
+            font-size: 52px;
+            margin-bottom: 20px;
+        }
+
+        body.export-mode .cta-text {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        body.export-mode .disclaimer-text {
+            font-size: 16px;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls-bar">
+        <div class="control-group">
+            <label for="bg-select">Background</label>
+            <select id="bg-select">
+                <option value="starfield">Starfield</option>
+                <option value="none">None</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="opacity-slider">Opacity</label>
+            <input type="range" id="opacity-slider" min="0" max="30" value="8">
+        </div>
+        <button id="export-btn">Export Mode</button>
+    </div>
+
+    <div class="page-title">Post 262 — 8 Slides</div>
+
+    <div class="carousel-grid">
+
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Hook</span>
+            <div class="slide slide-1">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">01 / 08</span>
+                    <div class="center-content">
+                        <h1 class="slide-title">Displacement<br><span class="highlight">Explained</span></h1>
+                        <p class="subtitle">Momentum reveals intent</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Characteristics -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Characteristics</span>
+            <div class="slide slide-2">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 08</span>
+                    <div class="center-content">
+                        <div class="displacement-card">
+                            <h3>📊 DISPLACEMENT</h3>
+                            <ul class="feature-list">
+                                <li>Large-bodied candles</li>
+                                <li>Strong closes (near high/low)</li>
+                                <li>Minimal wicks</li>
+                                <li>Clear directional intent</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Weak Moves -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Weak Moves</span>
+            <div class="slide slide-3">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 08</span>
+                    <div class="center-content">
+                        <div class="displacement-card weak">
+                            <h3>📊 WEAK MOVES</h3>
+                            <ul class="feature-list">
+                                <li>Small candles</li>
+                                <li>Long wicks</li>
+                                <li>Indecisive closes</li>
+                                <li>Lack of conviction</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Why It Matters -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Why It Matters</span>
+            <div class="slide slide-4">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 08</span>
+                    <div class="center-content">
+                        <div class="displacement-card why">
+                            <h3>WHY IT MATTERS</h3>
+                            <ul class="feature-list">
+                                <li>Shows institutional participation</li>
+                                <li>Often precedes continuation</li>
+                                <li>Validates breakouts</li>
+                                <li>Separates real from fake moves</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Comparison -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Comparison</span>
+            <div class="slide slide-5">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 08</span>
+                    <div class="center-content">
+                        <div class="displacement-card compare">
+                            <h3>COMPARE</h3>
+                            <ul class="feature-list">
+                                <li>Breakout WITH displacement = conviction</li>
+                                <li>Breakout WITHOUT displacement = suspect</li>
+                                <li>Context is everything</li>
+                                <li>Look for the conviction behind the move</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Key Point -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Key Point</span>
+            <div class="slide slide-6">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">06 / 08</span>
+                    <div class="center-content">
+                        <p class="quote-block">Context changes everything. Look for the conviction behind the move.</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Visual -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — Visual</span>
+            <div class="slide slide-7">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">07 / 08</span>
+                    <div class="center-content">
+                        <div class="comparison-visual">
+                            <div class="compare-panel strong">
+                                <span class="compare-label">DISPLACEMENT</span>
+                                <div class="candle-visual">
+                                    <div class="candle-bar" style="height: clamp(60px, 11.11cqw, 120px);"></div>
+                                    <div class="candle-bar" style="height: clamp(70px, 12.96cqw, 140px);"></div>
+                                    <div class="candle-bar" style="height: clamp(65px, 12.04cqw, 130px);"></div>
+                                </div>
+                                <p class="compare-desc">Large bodies, small wicks, conviction</p>
+                            </div>
+                            <div class="compare-panel weak-panel">
+                                <span class="compare-label">WEAK MOVE</span>
+                                <div class="candle-visual">
+                                    <div class="candle-bar" style="height: clamp(20px, 3.70cqw, 40px);"></div>
+                                    <div class="candle-bar" style="height: clamp(17.5px, 3.24cqw, 35px);"></div>
+                                    <div class="candle-bar" style="height: clamp(22.5px, 4.17cqw, 45px);"></div>
+                                </div>
+                                <p class="compare-desc">Small bodies, long wicks, indecision</p>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide-wrapper" data-slide="8">
+            <span class="slide-label">Slide 8 — CTA</span>
+            <div class="slide slide-8">
+                <div class="slide-bg">
+                    <video autoplay loop muted playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <span class="slide-number">08 / 08</span>
+                    <div class="center-content">
+                        <h2 class="cta-title">Free<br><span class="emphasis">Lesson</span></h2>
+                        <p class="cta-text">Learn to read momentum.</p>
+                        <p class="cta-text">Link in bio</p>
+                        <p class="disclaimer-text">Educational only. Not financial advice.</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide-wrapper');
+        const bgSelect = document.getElementById('bg-select');
+        const opacitySlider = document.getElementById('opacity-slider');
+        const exportBtn = document.getElementById('export-btn');
+        let currentSlide = 0;
+        let exportMode = false;
+
+        bgSelect.addEventListener('change', (e) => {
+            const videos = document.querySelectorAll('.slide-bg video');
+            videos.forEach(video => {
+                video.style.display = e.target.value === 'none' ? 'none' : 'block';
+            });
+        });
+
+        opacitySlider.addEventListener('input', (e) => {
+            document.documentElement.style.setProperty('--video-opacity', (e.target.value / 100).toFixed(2));
+        });
+
+        exportBtn.addEventListener('click', () => {
+            if (!exportMode) {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                currentSlide = 0;
+                updateExportView();
+                exportBtn.textContent = 'Exit Export';
+            } else {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.classList.remove('active'));
+                exportBtn.textContent = 'Export Mode';
+            }
+        });
+
+        function updateExportView() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!exportMode) return;
+            if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateExportView();
+            } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            } else if (e.key === 'Escape') {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                slides.forEach(slide => slide.classList.remove('active'));
+                exportBtn.textContent = 'Export Mode';
+            }
+        });
+    </script>
+</body>
+</html>
