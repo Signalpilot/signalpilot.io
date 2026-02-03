@@ -411,7 +411,7 @@ Here's the 5-phase cycle Pentarch detects 🧵
 
 ### Tweet 2:
 ```
-🟢 TD (TOUCHDOWN)
+🟣 TD (TOUCHDOWN)
 Early-cycle reversal on selling exhaustion.
 
 The selling pressure has exhausted itself.
@@ -481,7 +481,7 @@ TD → IGN → WRN → CAP → BDN
 
 Pentarch's 5-phase cycle detection:
 
-🟢 TD (TOUCHDOWN)
+🟣 TD (TOUCHDOWN)
 Early-cycle reversal on selling exhaustion
 
 🔵 IGN (IGNITION)
