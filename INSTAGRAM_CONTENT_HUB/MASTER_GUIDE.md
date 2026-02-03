@@ -75,27 +75,45 @@ Post # mod 9 = Position
 
 ---
 
-# 3. POSTING SCHEDULE
+# 3. POSTING ORDER (CRITICAL)
 
-## Recommended: 1 Post Per Day
-| Day | Type | Column | Best Time |
-|-----|------|--------|-----------|
-| 1 | BLOG | Teal | 9 AM |
-| 2 | EDU | Neutral | 12 PM |
-| 3 | QUOTE | Orange | 6 PM |
-| 4 | CHRONICLE | Teal | 9 AM |
-| 5 | EDU | Neutral | 12 PM |
-| 6 | PRODUCT | Orange | 12 PM |
-| 7 | DOCS | Teal | 10 AM |
-| 8 | EDU | Neutral | 12 PM |
-| 9 | MARKETING | Orange | 6 PM |
+## Instagram Grid Direction
+**Instagram fills grids RIGHT-TO-LEFT** — newest post appears TOP LEFT, pushing older posts right.
+
+To achieve the visual layout (Teal-Neutral-Orange left-to-right), you must **POST IN REVERSE**:
+
+```
+POST ORDER         →  GRID RESULT
+─────────────────────────────────────
+1st: ORANGE (003)  →  Appears RIGHT
+2nd: NEUTRAL (002) →  Appears CENTER
+3rd: TEAL (001)    →  Appears LEFT
+```
+
+## Correct Posting Sequence (Per Row of 3)
+
+| Post # | Type | Column | Post ORDER |
+|--------|------|--------|------------|
+| **003** | QUOTE | Orange | **1st** |
+| **002** | EDU | Neutral | **2nd** |
+| **001** | BLOG | Teal | **3rd** |
+| **006** | PRODUCT | Orange | **4th** |
+| **005** | EDU | Neutral | **5th** |
+| **004** | CHRONICLE | Teal | **6th** |
+| **009** | MARKETING | Orange | **7th** |
+| **008** | EDU | Neutral | **8th** |
+| **007** | DOCS | Teal | **9th** |
+
+**Pattern: Always post ORANGE → NEUTRAL → TEAL (right to left)**
+
+## Recommended Timing
+| Color | Best Time | Reason |
+|-------|-----------|--------|
+| ORANGE | 6 PM | Engagement/emotional (evening) |
+| NEUTRAL | 12 PM | Quick learning (midday) |
+| TEAL | 9 AM | Informative (morning) |
 
 **Cycle repeats every 9 posts.**
-
-## Time Guidelines
-- **TEAL posts** → Morning (9-10 AM) — informative/educational
-- **NEUTRAL posts** → Midday (12 PM) — quick learning
-- **ORANGE posts** → Evening (6 PM) — engagement/emotional
 
 ---
 
@@ -146,9 +164,11 @@ Post # mod 9 = Position
 | Post-to-Type Mapping | `POST_MAPPING.md` |
 
 ## The Golden Rule
-> **Post in strict order. Never skip. Never double-post.**
+> **Post RIGHT-TO-LEFT for each row. Never skip. Never double-post.**
 >
-> BLOG → EDU → QUOTE → CHRONICLE → EDU → PRODUCT → DOCS → EDU → MARKETING → repeat
+> **Posting Order:** QUOTE → EDU → BLOG → PRODUCT → EDU → CHRONICLE → MARKETING → EDU → DOCS → repeat
+>
+> (ORANGE first, NEUTRAL second, TEAL third — for each row of 3)
 
 ---
 
