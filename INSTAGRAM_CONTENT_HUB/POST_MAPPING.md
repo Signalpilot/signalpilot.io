@@ -36,7 +36,7 @@
 | 5 | 005 | EDU | Volume Doesn't Lie | "Volume Is Lying To You" | ✅ |
 | 6 | 004 | Chronicle | Meet The Sovereign | "Meet The Sovereign" | ✅ |
 | 7 | 009 | Marketing | 82 Lessons, 7 Indicators | "Visit signalpilot.io" | ✅ |
-| 8 | 008 | EDU | The Repainting Problem | "Your Indicator Is Lying" | ✅ |
+| 8 | 008 | Quote | "Support Doesn't Hold" | "Support doesn't hold, it's broken to harvest your stops" | ✅ |
 | 9 | 007 | Docs | Pentarch Cheatsheet | "The Pentarch Cheatsheet" | ✅ |
 | 10 | 012 | Quote | "Stop Chasing Signals" | "You stop chasing signals" | ✅ |
 | 11 | 011 | EDU | Price Action Is Dead | "Price Action Is Lying" | ✅ |
