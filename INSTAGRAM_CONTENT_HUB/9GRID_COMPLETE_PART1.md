@@ -3948,7 +3948,1475 @@ https://blog.signalpilot.io/articles/why-traders-blow-first-account/
 
 ---
 
-# TO BE CONTINUED... (Rows 19-108 for Part 1)
+# ═══════════════════════════════════════════════════════════
+# ROW 19 (Posts 55-57) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 055 | Product: OmniDeck Demo (The Commander)
+
+**Type:** Product Demo | **Pillar:** P2: Indicator Truth | **CTA:** Trial
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Caption:**
+```
+Chart looking like a Christmas tree? 🎄
+
+The Commander (OmniDeck) fixes that.
+
+What it does:
+→ Unifies multiple indicator signals
+→ Clean, single overlay
+→ Coordinates cycles, levels, momentum, flow
+→ Reduces chart clutter
+
+Stop juggling 10 indicators. Command them.
+
+Demo in bio 🔗
+
+#omnideck #cleancharts #tradingview #signalpilot #trading
+```
+
+### TWITTER/X — Single Tweet
+```
+Too many indicators cluttering your chart?
+
+OmniDeck (The Commander) unifies everything into one clean overlay.
+
+Cycles, levels, momentum, flow—all coordinated.
+
+One indicator to command them all.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 056 | EDU: Candlestick Patterns - Doji
+
+**Type:** Education Hub | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Caption:**
+```
+The doji candle explained 🕯️
+
+WHAT IT IS:
+→ Open price ≈ Close price
+→ Small or no body
+
+WHAT IT MEANS:
+→ Indecision, NOT reversal
+→ The NEXT candle matters more
+
+CONTEXT IS EVERYTHING:
+→ Doji in middle of trend? Probably nothing.
+→ Doji at key support/resistance? Pay attention.
+
+Full lesson in bio 🔗
+
+#doji #candlestickpatterns #trading #signalpilot
+```
+
+### TWITTER/X — Thread
+```
+A doji isn't a reversal signal. It's an indecision signal.
+
+Open ≈ Close = Neither bulls nor bears won.
+
+What happens NEXT determines direction.
+```
+
+---
+
+## 🔵 TEAL | POST 057 | Blog: Psychology of Round Numbers
+
+**Type:** Blog Article | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Caption:**
+```
+Why price reacts at round numbers 🎯
+
+$100. $50,000. $1.00.
+
+HUMAN PSYCHOLOGY:
+→ We set stop losses at round numbers
+→ We set take profits at round numbers
+→ We set limit orders at round numbers
+
+Millions of orders cluster at the same levels.
+
+Self-fulfilling prophecy.
+
+Full article in bio 🔗
+
+#roundnumbers #tradingpsychology #trading #signalpilot
+```
+
+### TWITTER/X — Thread
+```
+Why does price always react at $100, $50,000, or $1.00?
+
+Because humans are lazy.
+
+We set orders at round numbers.
+
+Round numbers become self-fulfilling support/resistance.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 20 (Posts 58-60) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 058 | Chronicle: The Watchman
+
+**Type:** Chronicle Lore | **Pillar:** P5: Chronicle | **CTA:** Chronicle Site
+
+### INSTAGRAM — Carousel (7 Slides)
+
+**Caption:**
+```
+THE WATCHMAN 👁️
+
+"While you watch one, I watch all."
+
+Among the Elite Seven, The Watchman never blinks.
+
+Augury Grid:
+→ Scans multiple symbols simultaneously
+→ Alerts to potential setups forming
+→ Never misses while you're focused elsewhere
+
+Meet The Watchman in bio 🔗
+
+#thewatchman #augurygrid #signalpilot #chronicle #eliteseven
+```
+
+### TWITTER/X — Single Tweet
+```
+"While you watch one, I watch all."
+— The Watchman
+
+Augury Grid doesn't sleep. It scans.
+
+Opportunities don't wait. Neither should you.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 059 | EDU: Moving Averages - Crossovers
+
+**Type:** Education Hub | **Pillar:** P2: Indicator Truth | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Caption:**
+```
+Moving Average Crossovers explained 📊
+
+GOLDEN CROSS ✨
+→ 50 MA crosses ABOVE 200 MA
+→ Considered bullish
+
+DEATH CROSS 💀
+→ 50 MA crosses BELOW 200 MA
+→ Considered bearish
+
+THE TRUTH:
+By the time they cross, the move is often 50%+ done.
+
+MAs are LAGGING. Use them for context, not entries.
+
+Full lesson in bio 🔗
+
+#goldencross #deathcross #movingaverages #trading #signalpilot
+```
+
+### TWITTER/X — Thread
+```
+Golden cross: 50 MA crosses above 200 MA.
+Death cross: 50 MA crosses below 200 MA.
+
+By the time they cross, the move is often halfway done.
+
+Lagging indicators confirm. They don't predict.
+```
+
+---
+
+## 🔵 TEAL | POST 060 | Docs: Harmonic Oscillator Settings
+
+**Type:** Docs | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Caption:**
+```
+Harmonic Oscillator settings guide ⚔️
+
+DEFAULT SETTINGS
+→ Balanced for most markets
+
+FASTER SETTINGS
+→ More responsive, better for scalping
+
+SLOWER SETTINGS
+→ Fewer signals, better for swing trading
+
+Match settings to YOUR style.
+
+Full docs in bio 🔗
+
+#harmonicoscillator #indicatorsettings #tradingview #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Harmonic Oscillator settings guide:
+
+Default: Balanced for most markets
+Faster: More signals, more noise
+Slower: Fewer signals, more reliable
+
+Match your settings to your timeframe and style.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 21 (Posts 61-63) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 061 | Marketing: Lifetime Access
+
+**Type:** Main Site Marketing | **Pillar:** Product | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+The math on lifetime access 🧮
+
+Monthly: $69/month → 18 months = $1,782
+Lifetime: $999 one-time → Month 19+ = FREE
+
+WHAT YOU GET:
+✅ All 7 indicators forever
+✅ All future updates included
+✅ 82 lessons + new content
+✅ Never pay again
+
+Link in bio 🔗
+
+#signalpilot #lifetimeaccess #bestvalue #tradingindicators
+```
+
+### TWITTER/X — Single Tweet
+```
+$69/month forever. Or $999 once.
+
+Lifetime access:
+◾ All 7 indicators, forever
+◾ All future updates included
+◾ 82 lessons + all new content
+◾ No recurring payments
+
+Pay once. Trade forever.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 062 | EDU: Candlestick Patterns
+
+**Type:** Education Hub | **Pillar:** P2: Indicator Truth | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Caption:**
+```
+Candlestick patterns are stories, not signals 📖
+
+🔨 HAMMER
+→ Long lower wick, potential reversal at support
+
+🌊 ENGULFING
+→ Second candle covers first, momentum shift
+
+⭐ MORNING STAR
+→ Three candle reversal pattern
+
+Context determines if the story continues.
+
+Full lesson in bio 🔗
+
+#candlestickpatterns #hammer #engulfing #morningstar #trading #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Hammer. Engulfing. Morning star.
+
+Candlestick patterns aren't magic signals. They're stories.
+
+Each candle tells you who won that battle—bulls or bears.
+```
+
+---
+
+## 🔵 TEAL | POST 063 | Blog: Breakout vs Fakeout
+
+**Type:** Blog Article | **Pillar:** P3: Market Mechanics | **CTA:** Docs
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Breakout or fakeout? Here's how to tell 🎭
+
+REAL BREAKOUT ✅
+◾ Volume confirms (spike on break)
+◾ Closes beyond level
+◾ Follow-through candles
+
+FAKEOUT ❌
+◾ Low volume on break
+◾ Wicks beyond, closes back inside
+◾ Quick reversal
+
+Don't chase the initial break. Wait for confirmation.
+
+Full article in bio 🔗
+
+#breakout #fakeout #breakouttrading #trading #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Every fakeout looks like a breakout at first.
+
+Volume, momentum, and structure confirmation separate the two.
+
+The best traders don't chase the break—they wait for the confirmation.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 22 (Posts 64-66) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 064 | Quote: "Plan-Trade-Review Loop"
+
+**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+The complete trading loop 🔄
+
+"Plan the trade. Trade the plan. Review the trade."
+
+STEP 1: PLAN — Entry, stop, target BEFORE you click
+STEP 2: EXECUTE — Follow your plan exactly
+STEP 3: REVIEW — Journal and learn
+
+Most traders skip steps 1 and 3. Don't be most traders.
+
+Save this. 🔖
+
+#tradingquotes #tradingplan #tradingdiscipline #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+"Plan the trade. Trade the plan. Review the trade."
+
+Three steps. Most skip two of them.
+
+Planning without execution is fantasy.
+Execution without review is gambling.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 066 | EDU: Fibonacci Retracements
+
+**Type:** Education Hub | **Pillar:** P2: Indicator Truth | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Caption:**
+```
+Fibonacci Retracements explained 📐
+
+KEY LEVELS:
+◾ 38.2% — Common retracement
+◾ 50% — Halfway
+◾ 61.8% — Golden ratio, deep pullback
+
+WHY THEY WORK:
+Self-fulfilling prophecy. Millions watch them.
+
+HOW TO USE:
+◾ Draw from swing low to swing high (uptrend)
+◾ Look for confluence with other levels
+
+Zones, not exact lines.
+
+Full lesson in bio 🔗
+
+#fibonacci #fibretracement #goldenratio #trading #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+38.2%, 50%, 61.8%.
+
+Fibonacci levels aren't magic—they're self-fulfilling.
+
+Enough traders watch them that they often matter.
+
+Use them as zones of interest, not guaranteed reversals.
+```
+
+---
+
+## 🔵 TEAL | POST 065 | Product: Pentarch Full Cycle Demo
+
+**Type:** Product Demo | **Pillar:** P1: Liquidity Lie | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+One complete Bitcoin cycle. Five Pentarch signals. 🔮
+
+🟢 TD — Early-cycle reversal
+🔵 IGN — Breakout confirmation
+🟡 WRN — Early weakness
+🟠 CAP — Late-cycle exhaustion
+🔴 BDN — Bearish structure break
+
+The Sovereign observes the full cycle.
+
+Historical patterns. Educational purposes only.
+
+#pentarch #thesovereign #bitcoin #marketcycles #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+One Bitcoin cycle. All five Pentarch signals.
+
+TD signals early-cycle reversal. IGN confirms breakout. WRN warns of weakness. CAP marks exhaustion. BDN confirms breakdown.
+
+Historical observation, not prediction. Educational, not advice.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 23 (Posts 67-69) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 067 | Blog: Danger of Averaging Down
+
+**Type:** Blog Article | **Pillar:** P4: Psychology | **CTA:** Chronicle
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+"I'll just average down" 💀
+
+THE REALITY:
+◾ You're doubling exposure to a losing position
+◾ Your thesis was already wrong
+◾ Hope is not a strategy
+
+WHAT TO DO INSTEAD:
+◾ Cut the loss at your original stop
+◾ Re-evaluate with fresh eyes
+◾ If still valid, re-enter properly sized
+
+Don't marry a losing trade.
+
+Full article in bio 🔗
+
+#averagingdown #tradingmistakes #riskmanagement #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+"I'll just average down."
+
+Famous last words before account destruction.
+
+Averaging down on a loser = doubling your exposure to a bad idea.
+
+If your thesis was wrong, adding more doesn't make it right.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 069 | EDU: Volume Analysis
+
+**Type:** Education Hub | **Pillar:** P2: Indicator Truth | **CTA:** Lead Magnet
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Volume Analysis 101 📊
+
+VOLUME CONFIRMS MOVES:
+◾ Breakout + High Volume = Likely real
+◾ Breakout + Low Volume = Likely fake
+◾ Trend + Rising Volume = Healthy
+◾ Trend + Falling Volume = Weakening
+
+Price is the headline. Volume is the story.
+
+Full lesson in bio 🔗
+
+#volumeanalysis #volumetrading #technicalanalysis #trading #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Price tells you what happened.
+Volume tells you if it mattered.
+
+Big move on low volume? Suspicious.
+Small move on high volume? Something's building.
+
+Volume is the conviction behind price.
+```
+
+---
+
+## 🔵 TEAL | POST 068 | Chronicle: The Commander
+
+**Type:** Chronicle Lore | **Pillar:** P5: Chronicle | **CTA:** Chronicle Site
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+THE COMMANDER 🎯
+
+"Alone, they are powerful. United, they are unstoppable."
+
+Among the Elite Seven, The Commander stands at the center.
+
+OmniDeck:
+◾ Coordinates all indicator signals
+◾ Unified overlay, clean chart
+◾ Commands the complete picture
+
+One to lead them all.
+
+Meet The Commander in bio 🔗
+
+#thecommander #omnideck #signalpilot #chronicle #eliteseven
+```
+
+### TWITTER/X — Single Tweet
+```
+"Alone, they are powerful. United, they are unstoppable."
+— The Commander
+
+OmniDeck doesn't replace the Elite Seven.
+It commands them.
+
+One overlay. Total coordination.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 24 (Posts 70-72) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 071 | Marketing: 82 Free Lessons
+
+**Type:** Main Site Marketing | **Pillar:** Product | **CTA:** Lead Magnet
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+82 free trading lessons 📚
+
+No paywall. No "pay for advanced." Just free.
+
+BEGINNER (20 lessons)
+INTERMEDIATE (27 lessons)
+ADVANCED (27 lessons)
+PROFESSIONAL (8 lessons)
+
+Educated traders make better decisions. That's why we give this away.
+
+Start learning in bio 🔗
+
+#signalpilot #freeeducation #tradingeducation #82lessons
+```
+
+### TWITTER/X — Single Tweet
+```
+82 lessons. All free. No paywall.
+
+Beginner to Professional. Psychology to strategy.
+
+Most platforms gatekeep education.
+We give it away.
+
+Because educated traders make better decisions.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 072 | EDU: Trading Journals
+
+**Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Your trading journal is your edge 📓
+
+WHAT TO LOG:
+◾ Date/time and asset
+◾ Entry price and thesis
+◾ Stop loss and target
+◾ Actual exit and P/L
+◾ Emotion during trade
+
+WHY IT MATTERS:
+◾ Patterns in your behavior emerge
+◾ You see which setups actually work
+
+You can't fix what you don't track.
+
+Full lesson in bio 🔗
+
+#tradingjournal #journalyourtrades #tradinghabits #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+The most profitable habit in trading? Journaling.
+
+Every trade. Entry, exit, thesis, emotion, outcome.
+
+You can't improve what you don't measure.
+
+Your journal is your edge—if you actually use it.
+```
+
+---
+
+## 🔵 TEAL | POST 070 | Docs: Janus Atlas Timeframe Guide
+
+**Type:** Docs | **Pillar:** P3: Market Mechanics | **CTA:** Docs
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Janus Atlas Timeframe Guide 🗺️
+
+HIGHER TIMEFRAMES (Weekly, Daily)
+◾ Stronger levels
+◾ Best for swing trading
+
+MEDIUM TIMEFRAMES (4H, 1H)
+◾ Balance of strength and speed
+◾ Good for day trading
+
+LOWER TIMEFRAMES (15m, 5m)
+◾ More levels, more noise
+◾ Best for scalping
+
+The Cartographer maps all timeframes.
+
+Full docs in bio 🔗
+
+#janusatlas #thecartographer #multitimeframe #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Janus Atlas timeframe guide:
+
+Higher TF levels = Stronger, more significant
+Lower TF levels = Faster, more noise
+
+Match your timeframe to your strategy.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 25 (Posts 73-75) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 074 | Quote: "Early vs Wrong"
+
+**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+This one hurts because it's true 👇
+
+"In trading, being early and being wrong look exactly the same."
+
+Your thesis was correct.
+Your timing was off.
+Your stop got hit.
+Price then went your way.
+
+Being "right" means nothing if you're out of the trade.
+
+Patience. Confirmation. Timing.
+
+Save this. 🔖
+
+#tradingquotes #tradingtiming #patience #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+"In trading, being early and being wrong look exactly the same."
+
+Patience isn't passive. It's strategic.
+
+Wait for confirmation. Your thesis can be right and your timing can still kill you.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 073 | Blog: Multi-Timeframe Advantage
+
+**Type:** Blog Article | **Pillar:** P3: Market Mechanics | **CTA:** Docs
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Multi-Timeframe Analysis explained 🔍
+
+HIGHER TIMEFRAME (Weekly/Daily)
+◾ This is your BIAS
+
+MIDDLE TIMEFRAME (4H/1H)
+◾ This is your SETUP
+
+LOWER TIMEFRAME (15m/5m)
+◾ This is your ENTRY
+
+Don't fight higher timeframe direction.
+
+Full article in bio 🔗
+
+#multitimeframe #mtfanalysis #timeframealignment #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+One timeframe shows you the battle.
+Multiple timeframes show you the war.
+
+Higher TF = Direction bias
+Lower TF = Entry timing
+
+Trade with the trend of the timeframe above you.
+```
+
+---
+
+## 🔵 TEAL | POST 075 | Product: Volume Oracle Regime Detection
+
+**Type:** Product Demo | **Pillar:** P2: Indicator Truth | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Volume regimes explained 📊
+
+The Prophet (Volume Oracle) sees the market phase:
+
+ACCUMULATION REGIME 🟢 — Look for longs
+DISTRIBUTION REGIME 🔴 — Look for shorts
+NEUTRAL REGIME ⚪ — Wait for direction
+
+Wrong bias + Wrong setup = Losses
+
+Demo in bio 🔗
+
+#volumeoracle #theprophet #marketregimes #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Markets have regimes. Most traders ignore them.
+
+Volume Oracle (The Prophet) classifies:
+◾ High volatility expansion
+◾ Low volatility contraction
+◾ Transitional phases
+
+The strategy that works in one regime fails in another.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 26 (Posts 76-78) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 076 | EDU: Backtesting Basics
+
+**Type:** Education Hub | **Pillar:** P2: Indicator Truth | **CTA:** Lead Magnet
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Backtesting 101 📈
+
+KEY METRICS TO TRACK:
+◾ Win Rate — % of winning trades
+◾ Avg R:R — Average risk to reward
+◾ Expectancy — Expected $ per trade
+◾ Max Drawdown — Worst losing streak
+
+RULES:
+◾ Be honest, no cherry-picking
+◾ Include commissions/fees
+◾ Sample Size — Need 100+ trades minimum
+
+Full lesson in bio 🔗
+
+#backtesting #tradingstrategy #strategytesting #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+An untested strategy is just a guess with extra confidence.
+
+Backtesting shows you:
+◾ Win rate
+◾ Average R:R
+◾ Max drawdown
+◾ Expectancy
+
+If it doesn't work on historical data, why would it work on live money?
+```
+
+---
+
+## ⚪ NEUTRAL | POST 077 | Blog: Liquidity Hunting Explained
+
+**Type:** Blog Article | **Pillar:** P1: Liquidity Lie | **CTA:** Chronicle
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Why your stops keep getting hit 🎯
+
+LIQUIDITY = Where orders cluster
+
+WHERE IT SITS:
+◾ Below swing lows (everyone's stop losses)
+◾ Above swing highs
+◾ At obvious round numbers
+
+WHAT HAPPENS:
+Price sweeps → Triggers stops → Reverses
+
+THE FIX:
+Place stops at less obvious levels.
+
+Full article in bio 🔗
+
+#liquidity #stophunting #liquiditygrab #smartmoney #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Your stop loss isn't hidden. It's obvious.
+
+Below that swing low? Liquidity.
+Above that swing high? Liquidity.
+
+The market hunts stops before reversing.
+
+Understanding liquidity = understanding why you keep getting stopped out.
+```
+
+---
+
+## 🔵 TEAL | POST 078 | Chronicle: The Prophet
+
+**Type:** Chronicle Lore | **Pillar:** P5: Chronicle | **CTA:** Chronicle Site
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+THE PROPHET 🔮
+
+"I do not see the future. I see the conditions that create it."
+
+Volume Oracle sees:
+◾ Volatility regimes
+◾ Volume patterns
+◾ Market phase transitions
+
+The future isn't predicted. It's prepared for.
+
+Meet The Prophet in bio 🔗
+
+#theprophet #volumeoracle #signalpilot #chronicle #eliteseven
+```
+
+### TWITTER/X — Single Tweet
+```
+"I do not see the future. I see the conditions that create it."
+— The Prophet
+
+Volume Oracle doesn't predict.
+It reads the environment.
+
+Know the regime. Adapt your strategy.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 27 (Posts 79-81) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 081 | Marketing: Annual Plan Savings
+
+**Type:** Main Site Marketing | **Pillar:** Product | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+The math on annual vs monthly 🧮
+
+MONTHLY PLAN
+$69 × 12 months = $828/year
+
+ANNUAL PLAN
+$399 one-time = $399/year
+
+YOU SAVE: $429 💰
+
+Same access. Just smarter commitment.
+
+Link in bio 🔗
+
+#signalpilot #annualplan #savings #tradingindicators
+```
+
+### TWITTER/X — Single Tweet
+```
+$69/month = $828/year
+Annual plan = $399/year
+
+Save $429 by committing to 12 months.
+
+Same access. Same indicators. Same education.
+Just smarter math.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 079 | EDU: Paper Trading
+
+**Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Paper Trading 101 📝
+
+WHY DO IT:
+◾ Test strategies before going live
+◾ Build discipline and process
+◾ Make mistakes for free
+
+RULES:
+◾ Treat it like real money
+◾ Use realistic position sizes
+◾ Journal every trade
+
+Graduate to live when consistently profitable.
+
+Full lesson in bio 🔗
+
+#papertrading #demotrading #tradingpractice #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Paper trading isn't "fake" trading.
+
+It's practice without consequence.
+
+Test your strategy. Build your process. Make mistakes for free.
+
+You wouldn't fly a plane without a simulator. Why trade live without practice?
+```
+
+---
+
+## 🔵 TEAL | POST 080 | Docs: Pentarch Signal Meanings
+
+**Type:** Docs | **Pillar:** P1: Liquidity Lie | **CTA:** Docs
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Pentarch Signal Reference Guide 👑
+
+🟢 TD — Early-cycle reversal
+🔵 IGN — Breakout confirmation
+🟡 WRN — Early weakness in uptrends
+🟠 CAP — Late-cycle exhaustion
+🔴 BDN — Bearish structure break
+
+Save this reference 📌
+
+Full docs in bio 🔗
+
+#pentarch #thesovereign #signalreference #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Pentarch signal reference:
+
+🟢 TD — Early-cycle reversal
+🔵 IGN — Breakout confirmation
+🟡 WRN — Early weakness
+🟠 CAP — Late-cycle exhaustion
+🔴 BDN — Bearish structure break
+
+The Sovereign speaks in phases, not predictions.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 28 (Posts 82-84) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 084 | Quote: "Irrationality"
+
+**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+The most important quote in trading 👇
+
+"The market can remain irrational longer than you can remain solvent."
+
+You can be 100% right about direction.
+And still lose everything.
+
+Survival first. Profits second.
+
+Save this. 🔖
+
+#tradingquotes #marketirrationality #riskmanagement #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+"The market can remain irrational longer than you can remain solvent."
+
+Being right eventually doesn't matter if you're broke now.
+
+Manage your risk. Survive the irrationality. Live to trade another day.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 082 | EDU: Going Live
+
+**Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Ready to go live? Checklist ✅
+
+BEFORE YOU GO LIVE:
+☐ Profitable in paper trading (3+ months)
+☐ Strategy backtested (100+ trades)
+☐ Risk management defined
+☐ Journal system ready
+
+WHEN YOU GO LIVE:
+◾ Start with SMALLEST position size
+◾ Focus on PROCESS, not profit
+◾ Scale up SLOWLY
+
+Full lesson in bio 🔗
+
+#goinglive #livetrading #tradingchecklist #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Paper trading profitable? Time to go live.
+
+But not with full size. Start small.
+
+Live trading adds emotion. Emotion changes everything.
+
+Scale up only after proving you can handle real money on the line.
+```
+
+---
+
+## 🔵 TEAL | POST 083 | Blog: Wyckoff Method Simplified
+
+**Type:** Blog Article | **Pillar:** P1: Liquidity Lie | **CTA:** Chronicle
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+The Wyckoff Method simplified 📊
+
+PHASE 1: ACCUMULATION
+◾ Smart money quietly accumulates
+
+PHASE 2: MARKUP
+◾ Price breaks out and trends up
+
+PHASE 3: DISTRIBUTION
+◾ Smart money quietly sells
+
+PHASE 4: MARKDOWN
+◾ Price breaks down
+
+The cycle repeats. Every market. Every timeframe.
+
+Full article in bio 🔗
+
+#wyckoff #wyckoffmethod #marketcycles #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Wyckoff in 4 phases:
+
+1. Accumulation — Smart money quietly buys
+2. Markup — Price rises, public joins
+3. Distribution — Smart money quietly sells
+4. Markdown — Price falls, public panics
+
+The cycle repeats. Every market. Every timeframe.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 29 (Posts 85-87) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 085 | Product: Janus Atlas Level Confluence
+
+**Type:** Product Demo | **Pillar:** P3: Market Mechanics | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Confluence is where the magic happens ✨
+
+WHAT IS CONFLUENCE?
+Multiple levels/signals agreeing at the same zone
+
+JANUS ATLAS CONFLUENCE:
+◾ Daily level at $50,000
+◾ 4H level at $50,100
+◾ 1H level at $49,950
+→ All pointing to same zone = STRONG level
+
+The Cartographer maps them all.
+
+Demo in bio 🔗
+
+#janusatlas #confluence #thecartographer #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+One level is a suggestion.
+Multiple levels at the same price is confluence.
+
+Janus Atlas (The Cartographer) maps levels across timeframes.
+
+When daily, 4H, and 1H levels align—that's where the action happens.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 086 | EDU: Market Structure
+
+**Type:** Education Hub | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Market Structure 101 🦴
+
+BULLISH STRUCTURE
+◾ Higher Highs (HH) + Higher Lows (HL)
+
+BEARISH STRUCTURE
+◾ Lower Highs (LH) + Lower Lows (LL)
+
+BREAK OF STRUCTURE (BOS)
+◾ Pattern breaks = Potential trend reversal
+
+CHANGE OF CHARACTER (CHoCH)
+◾ First sign of shift
+
+Full lesson in bio 🔗
+
+#marketstructure #priceaction #breakofstructure #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Market structure is the skeleton of price action.
+
+Higher highs + Higher lows = Bullish structure
+Lower highs + Lower lows = Bearish structure
+
+Structure break = Potential trend change
+
+Read structure before reading patterns.
+```
+
+---
+
+## 🔵 TEAL | POST 087 | Blog: Order Blocks Demystified
+
+**Type:** Blog Article | **Pillar:** P1: Liquidity Lie | **CTA:** Docs
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Order Blocks explained 📦
+
+WHAT IS AN ORDER BLOCK?
+The last candle before a strong impulse move
+
+BULLISH ORDER BLOCK
+◾ Last down candle before strong up move
+◾ Price often returns to test it
+
+BEARISH ORDER BLOCK
+◾ Last up candle before strong down move
+◾ Price often returns to test it
+
+Full article in bio 🔗
+
+#orderblocks #smc #smartmoneyconcepts #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Order blocks aren't magic zones. They're footprints.
+
+Where did the move originate?
+Where was the last candle before the impulse?
+
+That's your order block. That's where institutions may have positioned.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 30 (Posts 88-90) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 088 | Chronicle: Birth of Elite Seven
+
+**Type:** Chronicle Lore | **Pillar:** P5: Chronicle | **CTA:** Chronicle Site
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+THE BIRTH OF THE ELITE SEVEN ⚔️
+
+Before them, there was chaos.
+◾ Indicators that repainted
+◾ Signals that contradicted
+◾ Traders lost in confusion
+
+Then came the Seven:
+👑 The Sovereign — Cycles
+🔮 The Prophet — Regimes
+🗺️ The Cartographer — Levels
+⚖️ The Scales — Flow
+⚔️ The Arbiter — Momentum
+👁️ The Watchman — Scanning
+🎯 The Commander — Unity
+
+Clarity from chaos.
+
+Read the full origin in bio 🔗
+
+#eliteseven #signalpilot #chronicle #origin #tradinglore
+```
+
+### TWITTER/X — Single Tweet
+```
+Before the Elite Seven, there was chaos.
+
+Indicators that lied. Signals that repainted. Traders lost in noise.
+
+Then came the Seven—each designed with one purpose: clarity.
+
+This is their origin.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 089 | EDU: Supply and Demand Zones
+
+**Type:** Education Hub | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Supply & Demand Zones 📊
+
+DEMAND ZONE (Bullish)
+◾ Where buyers overwhelmed sellers
+◾ Strong rally originated here
+
+SUPPLY ZONE (Bearish)
+◾ Where sellers overwhelmed buyers
+◾ Strong drop originated here
+
+KEY CONCEPT:
+Fresh zones > Tested zones
+Clean departure > Messy departure
+
+Full lesson in bio 🔗
+
+#supplyanddemand #demandzone #supplyzone #tradingzones #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Support and resistance are lines.
+Supply and demand are zones.
+
+Supply: Where sellers overwhelmed buyers
+Demand: Where buyers overwhelmed sellers
+
+Price returns to zones to retest. That's your opportunity.
+```
+
+---
+
+## 🔵 TEAL | POST 090 | Docs: Volume Oracle Settings
+
+**Type:** Docs | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Volume Oracle Settings Guide 🔮
+
+SENSITIVITY SETTING
+◾ Higher = Detects more regime changes
+◾ Lower = Fewer, more significant changes
+
+SMOOTHING SETTING
+◾ Higher = Cleaner signals, more lag
+◾ Lower = Faster signals, more noise
+
+DEFAULT:
+Balanced for most conditions. Start here.
+
+Full docs in bio 🔗
+
+#volumeoracle #theprophet #indicatorsettings #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Volume Oracle settings guide:
+
+Sensitivity: Higher = More regime changes detected
+Smoothing: Higher = Cleaner but slower signals
+
+For trending markets: Lower sensitivity
+For choppy markets: Higher sensitivity
+
+Match settings to conditions.
+```
+
+---
+
+# TO BE CONTINUED... (Rows 31-108 for Part 1)
 
 > **Part 1 covers Posts 1-325 organized by ROW (posting order).**
 > **Each post clearly shows: 🟠 ORANGE, ⚪ NEUTRAL, or 🔵 TEAL**
@@ -3970,7 +5438,7 @@ https://blog.signalpilot.io/articles/why-traders-blow-first-account/
 
 ---
 
-# ROWS SUMMARY (Rows 1-18)
+# ROWS SUMMARY (Rows 1-30)
 
 | Row | Post Orders | Orange Post | Neutral Post | Teal Post | Status |
 |-----|-------------|-------------|--------------|-----------|--------|
@@ -3992,16 +5460,29 @@ https://blog.signalpilot.io/articles/why-traders-blow-first-account/
 | 16 | 46-48 | 045 Product | 046 EDU | 048 Chronicle | 📋 Pending |
 | 17 | 49-51 | 051 Marketing | 049 EDU | 050 Docs | 📋 Pending |
 | 18 | 52-54 | 054 Quote | 052 EDU | 053 Blog | 📋 Pending |
-| 19+ | 55+ | ... | ... | ... | 📋 Pending |
+| 19 | 55-57 | 055 Product | 056 EDU | 057 Blog | 📋 Pending |
+| 20 | 58-60 | 058 Chronicle | 059 EDU | 060 Docs | 📋 Pending |
+| 21 | 61-63 | 061 Marketing | 062 EDU | 063 Blog | 📋 Pending |
+| 22 | 64-66 | 064 Quote | 066 EDU | 065 Product | 📋 Pending |
+| 23 | 67-69 | 067 Blog | 069 EDU | 068 Chronicle | 📋 Pending |
+| 24 | 70-72 | 071 Marketing | 072 EDU | 070 Docs | 📋 Pending |
+| 25 | 73-75 | 074 Quote | 073 Blog | 075 Product | 📋 Pending |
+| 26 | 76-78 | 076 EDU | 077 Blog | 078 Chronicle | 📋 Pending |
+| 27 | 79-81 | 081 Marketing | 079 EDU | 080 Docs | 📋 Pending |
+| 28 | 82-84 | 084 Quote | 082 EDU | 083 Blog | 📋 Pending |
+| 29 | 85-87 | 085 Product | 086 EDU | 087 Blog | 📋 Pending |
+| 30 | 88-90 | 088 Chronicle | 089 EDU | 090 Docs | 📋 Pending |
+| 31+ | 91+ | ... | ... | ... | 📋 Pending |
 
 ---
 
 # CONTENT INCLUDED IN THIS FILE
 
-**Total Rows:** 13 (39 posts by posting order)
-**Total Posts with Full Content:** ~40 unique posts
+**Total Rows:** 30 (90 posts by posting order)
+**Total Posts with Full Content:** ~90 unique posts
 
 **Status Breakdown:**
 - ✅ Posted: Rows 1-9 (27 posts)
 - ⏳ In Canva: Rows 10-12 (9 posts)
-- 📋 Pending: Row 13+ (remaining posts)
+- 📋 Pending: Rows 13-30 (54 posts)
+- 📋 Remaining: Rows 31-108 to be added
