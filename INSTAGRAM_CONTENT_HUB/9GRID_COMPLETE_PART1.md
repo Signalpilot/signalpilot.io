@@ -2205,6 +2205,802 @@ https://docs.signalpilot.io/quick-start/
 
 ---
 
+# ═══════════════════════════════════════════════════════════
+# ROW 10 (Posts 28-30) — IN CANVA, NOT YET POSTED
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 024 | Quote: "We Could Send Alerts"
+
+**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
+
+> **Note:** Content for this post already included in Row 9. This is the same post.
+
+---
+
+## ⚪ NEUTRAL | POST 031 | EDU: Revenge Trading
+
+**Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 Slides)
+
+**Slide Structure:**
+1. **Hook:** "REVENGE TRADING ISN'T A DISCIPLINE PROBLEM"
+2. **Truth:** It's a neuroscience problem
+3. **Step 1:** Amygdala activates after loss
+4. **Step 2:** Cortisol floods, rational brain offline
+5. **Step 3:** The revenge trade cycle
+6. **Solution:** Systems, not willpower
+7. **Systems:** Loss limits, breaks, pre-commitment
+8. **CTA:** Full lesson with actionable systems
+
+**Caption:**
+```
+Revenge trading isn't a discipline problem. 🧠
+
+It's a neuroscience problem.
+
+What happens after a loss:
+
+1. Amygdala activates (threat response)
+2. Cortisol floods your system (stress hormone)
+3. Prefrontal cortex goes offline (rational thinking impaired)
+4. You NEED to make it back (loss aversion)
+5. You take a bad trade
+6. You lose more
+7. Repeat
+
+You can't willpower your way out of this.
+
+Your brain is literally hijacked.
+
+The solution isn't "be more disciplined."
+
+The solution is SYSTEMS:
+→ Daily loss limits (auto-stop after X losses)
+→ Mandatory break after losses
+→ Pre-committed position sizes
+→ Circuit breakers you can't override
+
+🔗 Full lesson with actionable systems in bio.
+
+#revengetrading #tradingpsychology #trading #forex #crypto #tradingmindset #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+Revenge trading isn't a discipline problem.
+
+It's a neuroscience problem.
+
+Loss aversion triggers the amygdala. You can't willpower your way out.
+
+You need systems. 🧵
+```
+
+**Tweet 2:**
+```
+What happens after a loss:
+
+1. Amygdala activates (threat response)
+2. Cortisol floods your system
+3. Prefrontal cortex goes offline
+4. You NEED to make it back
+5. You take a bad trade
+6. You lose more
+```
+
+**Tweet 3:**
+```
+Your brain is literally hijacked.
+
+You can't "be more disciplined."
+
+You need SYSTEMS:
+→ Daily loss limits (auto-stop after X losses)
+→ Mandatory break after losses
+→ Pre-committed position sizes
+→ Circuit breakers you can't override
+```
+
+**Tweet 4 (CTA):**
+```
+Full lesson with actionable systems:
+
+https://education.signalpilot.io/curriculum/beginner/07-revenge-trading.html
+
+#revengetrading #tradingpsychology #trading
+```
+
+---
+
+## 🔵 TEAL | POST 029 | Chronicle: The Cartographer
+
+**Type:** Chronicle Lore | **Pillar:** P5: Chronicle | **CTA:** Chronicle Site
+
+### INSTAGRAM — Carousel (7 Slides)
+
+**Slide Structure:**
+1. **Hook:** Cartographer character art with quote
+2. **Philosophy:** Two faces, two perspectives
+3. **Higher TF:** Context, major levels, big trend
+4. **Lower TF:** Precision, entries, stops
+5. **Connection:** Cartographer = Janus Atlas
+6. **Lore:** "The third of the Elite Seven"
+7. **CTA:** Enter the Chronicle
+
+**Caption:**
+```
+"One face looks to higher timeframes for context.
+One face looks to lower timeframes for precision.
+
+Together, they see what single-minded traders miss."
+
+— The Chronicle of the Cartographer 🗺️
+
+Like the Roman god Janus with two faces — one looking forward, one looking back.
+
+The Cartographer sees markets from multiple perspectives simultaneously.
+
+Higher timeframes reveal:
+→ The bigger trend
+→ Major support/resistance
+→ Context for the move
+
+Lower timeframes reveal:
+→ Entry precision
+→ Stop placement
+→ Immediate structure
+
+Single timeframe traders see one piece.
+Multi-timeframe traders see the full map.
+
+Enter the Chronicle. Link in bio.
+
+#chronicle #janusatlas #signalpilot #eliteseven #multitimeframe #tradingwisdom
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+"One face looks to higher timeframes for context.
+One face looks to lower timeframes for precision.
+
+Together, they see what single-minded traders miss."
+
+— The Chronicle of the Cartographer 🧵
+```
+
+**Tweet 2:**
+```
+Like the Roman god Janus with two faces.
+
+The Cartographer sees markets from multiple perspectives simultaneously.
+
+Higher timeframes: The bigger trend, major S/R, context
+Lower timeframes: Entry precision, stop placement, structure
+```
+
+**Tweet 3 (CTA):**
+```
+Multi-timeframe wisdom ↓
+https://signalpilot.io/chronicle/the-cartographer/
+
+#Chronicle #JanusAtlas #EliteSeven
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 11 (Posts 31-33) — IN CANVA, NOT YET POSTED
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 028 | Product: Harmonic Oscillator
+
+**Type:** Product Demo | **Pillar:** P2: Indicator Truth | **CTA:** Trial
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Slide Structure:**
+1. **Hook:** "7 INDICATORS IN 1 PANEL"
+2. **Components:** RSI, Stoch RSI, MACD, Momentum, EMA, Volume, Divergence Zone
+3. **Feature:** Voting system shows agreement
+4. **Feature:** Automatic divergence detection
+5. **Benefit:** No indicator clutter
+6. **CTA:** Try free for 7 days
+
+**Caption:**
+```
+7 momentum indicators. 1 unified view. 📊
+
+The Harmonic Oscillator combines:
+
+1️⃣ RSI — Relative strength
+2️⃣ Stochastic RSI — Momentum of RSI
+3️⃣ MACD — Trend momentum
+4️⃣ Momentum — Rate of change
+5️⃣ EMA Trend — Trend filter
+6️⃣ Volume — Confirmation
+7️⃣ Divergence Zone — Extreme detection
+
+What you get:
+→ Voting system showing how many agree
+→ Automatic divergence detection
+→ Unified momentum score
+→ No indicator stacking needed
+
+When 7/7 components align = Strong signal
+When 4/7 align = Mixed, proceed with caution
+
+🔗 Documentation in bio.
+
+#harmonicoscillator #momentum #tradingview #signalpilot #trading #forex #crypto
+```
+
+### TWITTER/X — Single Tweet
+```
+Harmonic Oscillator combines 7 momentum components:
+
+• RSI
+• Stochastic RSI
+• MACD
+• Momentum
+• EMA Trend
+• Volume
+• Divergence Zone
+
+One unified score. Divergences highlighted automatically.
+
+Docs ↓
+https://docs.signalpilot.io/harmonic-oscillator-v10/
+```
+
+---
+
+## ⚪ NEUTRAL | POST 032 | EDU: Confirmation Bias
+
+**Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 Slides)
+
+**Slide Structure:**
+1. **Hook:** "YOU DON'T SEE THE CHART"
+2. **Truth:** You see what you want to see
+3. **Example:** What you see vs what's actually there
+4. **Consequence:** Ignoring red flags
+5. **How It Works:** Seeking confirming evidence
+6. **The Cost:** Double down on bad ideas
+7. **The Fix:** Actively look for reasons you're wrong
+8. **CTA:** Free lesson link
+
+**Caption:**
+```
+The most dangerous thing in trading? Your own mind. 🧠
+
+Confirmation bias is when you:
+→ Only see signals that support your position
+→ Ignore red flags screaming at you
+→ Convince yourself "this time is different"
+
+The chart doesn't lie. But your brain does.
+
+The fix:
+Before every trade, actively look for reasons you're WRONG.
+If you can't find any — you're not looking hard enough.
+
+Free lesson in bio 🔗
+
+#confirmationbias #tradingpsychology #trading #forex #crypto #tradingmindset #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+You don't see the chart.
+
+You see what you want to see.
+
+Confirmation bias makes traders ignore warning signs and double down on bad ideas.
+
+The market doesn't care what you believe. 🧵
+```
+
+**Tweet 2:**
+```
+Confirmation bias in action:
+
+You're long BTC.
+You see: "Golden cross forming!"
+You ignore: Downtrend, weak volume, resistance above.
+
+You didn't analyze. You justified.
+```
+
+**Tweet 3:**
+```
+The fix:
+
+Before every trade, actively look for reasons you're WRONG.
+
+If you can't find any — you're not looking hard enough.
+```
+
+**Tweet 4 (CTA):**
+```
+Full lesson on trading psychology:
+
+https://education.signalpilot.io/curriculum/beginner/08-confirmation-bias.html
+
+#confirmationbias #tradingpsychology #trading
+```
+
+---
+
+## 🔵 TEAL | POST 037 | Blog: The Confirmation Trap
+
+**Type:** Blog Article | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 Slides)
+
+**Slide Structure:**
+1. **Hook:** "THE CONFIRMATION TRAP"
+2. **Problem:** You find what you're looking for
+3. **Example:** Bullish bias = only bullish signals
+4. **Consequence:** Blind to warning signs
+5. **The Trap:** More confidence, more risk
+6. **Solution:** Devil's advocate checklist
+7. **Framework:** Before every trade, find 3 reasons to NOT take it
+8. **CTA:** Full article link
+
+**Caption:**
+```
+The Confirmation Trap 🪤
+
+You've decided you're bullish.
+Now everything looks bullish.
+
+The RSI? Bullish.
+The MA? Bullish.
+The chart pattern? Bullish.
+
+But you're not analyzing. You're confirming.
+
+The trap:
+→ Find what you're looking for
+→ Ignore what doesn't fit
+→ More confidence, more risk
+→ Bigger loss when wrong
+
+The escape:
+Before every trade, find 3 reasons NOT to take it.
+
+If you can't find any, you're not looking hard enough.
+
+🔗 Full article in bio.
+
+#confirmationtrap #tradingpsychology #trading #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+You've decided you're bullish.
+
+Now everything looks bullish.
+
+That's the confirmation trap — and it's costing you money. 🧵
+```
+
+**Tweet 2:**
+```
+The RSI? Bullish.
+The MA? Bullish.
+The chart pattern? Bullish.
+
+But you're not analyzing.
+You're confirming.
+
+You found what you were looking for.
+You ignored what didn't fit.
+```
+
+**Tweet 3:**
+```
+Before every trade, find 3 reasons NOT to take it.
+
+If you can't find any, you're not looking hard enough.
+
+The market doesn't care about your bias.
+```
+
+**Tweet 4 (CTA):**
+```
+Full article on escaping the confirmation trap:
+
+blog.signalpilot.io/articles/the-confirmation-trap/
+
+#trading #psychology #confirmationbias
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 12 (Posts 34-36) — IN CANVA, NOT YET POSTED
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 034 | Quote: "Right vs Profitable"
+
+**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Read this until it clicks. 👇
+
+"The goal isn't to be right. The goal is to be profitable."
+
+You can win 40% of trades and be profitable.
+You can win 80% of trades and blow up.
+
+Win rate means nothing without risk:reward.
+
+It's about EXPECTANCY, not ego.
+
+Save this. 🔖
+
+#tradingquotes #tradingwisdom #winrate #riskreward #expectancy #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+"The goal isn't to be right. The goal is to be profitable."
+
+You can win 40% of your trades and still make money.
+You can win 80% and still lose it all.
+
+It's never about accuracy. It's about expectancy.
+
+— Signal Pilot
+```
+
+### Canva Guide:
+- **Size:** 1080x1080
+- **Background:** #0a0a0f with subtle star field
+- **Quote:** Cormorant Garamond Medium 34pt, white
+- **Attribution:** Inter Regular 16pt, #888888
+
+---
+
+## ⚪ NEUTRAL | POST 033 | EDU: Position Sizing 101
+
+**Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Slide Structure:**
+1. **Hook:** "WHY TRADERS BLOW UP"
+2. **Truth:** It's not bad entries, it's position sizing
+3. **Math 1:** 10 losses at 2% = 82% remaining
+4. **Math 2:** 10 losses at 10% = 35% remaining
+5. **Key Insight:** Same losses, different survival
+6. **CTA:** Full breakdown link
+
+**Caption:**
+```
+This is the difference between traders who survive and traders who blow up 💀
+
+POSITION SIZING.
+
+Here's the math:
+
+📉 10 losses at 2% risk = 82% account remaining
+📉 10 losses at 5% risk = 60% account remaining
+📉 10 losses at 10% risk = 35% account remaining
+
+It's not about being "scared." It's about being smart.
+
+Full breakdown in bio 🔗
+
+#positionsizing #riskmanagement #trading #forex #crypto #tradingmath #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+The difference between surviving and blowing up?
+
+Position sizing.
+
+Risk 1-2% per trade. Not because it's conservative. Because it's math. 🧵
+```
+
+**Tweet 2:**
+```
+10 losses in a row at 2% = still 82% of your account.
+10 losses at 5% = 60% remaining.
+10 losses at 10% = gone.
+
+Same losing streak. Completely different outcomes.
+```
+
+**Tweet 3 (CTA):**
+```
+Full breakdown on position sizing:
+
+https://blog.signalpilot.io/articles/position-sizing-101/
+
+#positionsizing #riskmanagement #trading
+```
+
+---
+
+## 🔵 TEAL | POST 038 | Chronicle: The Scales (Plutus)
+
+**Type:** Chronicle Lore | **Pillar:** P5: Chronicle | **CTA:** Chronicle Site
+
+### INSTAGRAM — Carousel (7 Slides)
+
+**Slide Structure:**
+1. **Hook:** Plutus character art with quote
+2. **Philosophy:** "Where others see volume, he sees weight"
+3. **Ability:** Weighs buying vs selling pressure
+4. **Ability:** Detects accumulation/distribution
+5. **Connection:** Plutus = Plutus Flow indicator
+6. **Lore:** "The fourth of the Elite Seven"
+7. **CTA:** Enter the Chronicle
+
+**Caption:**
+```
+"Where others see volume, he sees weight.
+Where others see bars, he sees balance."
+
+— The Chronicle of the Scales ⚖️
+
+Plutus doesn't count. He weighs.
+
+While others stare at volume bars:
+→ He sees the flow of money
+→ He detects accumulation hiding under red candles
+→ He reveals distribution masked by green candles
+→ He weighs buying against selling pressure
+
+The Plutus Flow indicator embodies his wisdom.
+
+Enter the Chronicle. Link in bio.
+
+#chronicle #plutusflow #signalpilot #eliteseven #volumeanalysis #tradingmythology
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+"Where others see volume, he sees weight.
+Where others see bars, he sees balance."
+
+— The Chronicle of the Scales
+
+Volume doesn't lie. But it takes wisdom to read the scales. 🧵
+```
+
+**Tweet 2:**
+```
+Plutus doesn't count. He weighs.
+
+While others see volume bars, he sees:
+→ The flow of money
+→ Accumulation hiding under red candles
+→ Distribution masked by green candles
+```
+
+**Tweet 3 (CTA):**
+```
+The Plutus Flow indicator embodies his wisdom.
+
+Enter the Chronicle ↓
+https://signalpilot.io/chronicle/the-scales/
+
+#Chronicle #PlutusFlow #EliteSeven
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 13 (Posts 37-39) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 035 | Product: Plutus Flow Demo
+
+**Type:** Product Demo | **Pillar:** P2: Indicator Truth | **CTA:** Trial
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Slide Structure:**
+1. **Hook:** "YOUR VOLUME BARS ARE LYING"
+2. **Problem:** Volume shows how much, not where
+3. **Solution:** Plutus Flow shows direction
+4. **Example:** Divergence detection
+5. **Benefit:** See absorption/distribution
+6. **CTA:** Try free for 7 days
+
+**Caption:**
+```
+Regular volume tells you HOW MUCH traded.
+
+Plutus Flow tells you WHERE it's going. ⚖️
+
+The Scales (Plutus Flow) uses statistical OBV to show:
+→ Accumulation hiding under red candles
+→ Distribution hiding under green candles
+→ Divergences before price confirms
+
+Standard volume: "Lots of trading happened"
+Plutus Flow: "Money may be flowing OUT"
+
+See the difference in bio 🔗
+
+#plutusflow #volumeanalysis #tradingview #signalpilot #trading #forex #crypto
+```
+
+### TWITTER/X — Single Tweet
+```
+Volume bars lie. Cumulative flow doesn't.
+
+Plutus Flow (The Scales) shows where money may actually be moving—not just how much traded.
+
+Green volume on a red candle? That's absorption.
+The Scales weighs what matters.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 036 | EDU: Absorption Patterns
+
+**Type:** Education Hub | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 Slides)
+
+**Slide Structure:**
+1. **Hook:** "WHEN EVERYONE PANICS..."
+2. **Scene:** Price drops, volume spikes
+3. **Retail View:** "PANIC SELLING"
+4. **Smart Money View:** "ABSORPTION"
+5. **Definition:** Buyers absorbing panic sellers
+6. **Signs:** High volume, stabilization, wicks
+7. **Truth:** The panic IS the opportunity
+8. **CTA:** Full lesson link
+
+**Caption:**
+```
+When price drops and volume SPIKES... 📉📊
+
+Most traders see: PANIC SELLING
+
+Smart money sees: ABSORPTION
+
+What is absorption?
+→ Price falling on high volume
+→ But buyers are quietly accumulating
+→ They're "absorbing" the panic sellers
+→ Price often reverses after
+
+The crowd sells the bottom. Someone has to buy it.
+
+Full lesson in bio 🔗
+
+#absorption #volumeanalysis #smartmoney #trading #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+Price drops. Volume spikes. Everyone panics.
+
+But what if that volume is buyers absorbing the selling?
+
+The panic is the opportunity. For someone. 🧵
+```
+
+**Tweet 2:**
+```
+Absorption: When large players quietly accumulate while price falls.
+
+Price falling on high volume doesn't always mean selling.
+
+Sometimes buyers are "absorbing" the panic sellers.
+```
+
+**Tweet 3:**
+```
+Signs of absorption:
+→ High volume on down move
+→ Price stabilizes or reverses
+→ Wicks rejecting lows
+→ Follow-through to the upside
+
+The crowd sells the bottom. Someone has to buy it.
+```
+
+**Tweet 4 (CTA):**
+```
+Full lesson on volume analysis:
+
+https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html
+
+#volume #absorption #smartmoney
+```
+
+---
+
+## 🔵 TEAL | POST 040 | Docs: Plutus Flow Cheatsheet
+
+**Type:** Docs/Cheatsheet | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Slide Structure:**
+1. **Title:** "THE PLUTUS FLOW CHEATSHEET"
+2. **Signal 1:** Rising Flow + Rising Price = Healthy trend
+3. **Signal 2:** Rising Flow + Falling Price = Accumulation
+4. **Signal 3:** Falling Flow + Rising Price = Distribution
+5. **Signal 4:** Falling Flow + Falling Price = Confirmed downtrend
+6. **CTA:** Full cheatsheet in docs
+
+**Caption:**
+```
+The Plutus Flow Cheatsheet ⚖️
+
+Four scenarios. Four meanings:
+
+📈 Rising Flow + Rising Price
+= HEALTHY TREND (price confirmed by flow)
+
+📈 Rising Flow + Falling Price
+= ACCUMULATION (smart money buying the dip)
+
+📉 Falling Flow + Rising Price
+= DISTRIBUTION (smart money selling into strength)
+
+📉 Falling Flow + Falling Price
+= CONFIRMED DOWNTREND (both agree on direction)
+
+Save this. Reference it every time you check Plutus Flow. 📌
+
+🔗 Full cheatsheet in bio.
+
+#plutusflow #cheatsheet #volumeanalysis #trading #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Plutus Flow Cheatsheet:
+
+📈 Rising Flow + Rising Price = Healthy trend
+📈 Rising Flow + Falling Price = Accumulation
+📉 Falling Flow + Rising Price = Distribution
+📉 Falling Flow + Falling Price = Confirmed downtrend
+
+Print it. Pin it. Use it ↓
+https://docs.signalpilot.io/ref-cheatsheets-plutus/
+```
+
+---
+
 # TO BE CONTINUED...
 
 > **Part 1 covers Posts 1-325 organized by ROW (posting order).**
@@ -2227,7 +3023,7 @@ https://docs.signalpilot.io/quick-start/
 
 ---
 
-# ROWS SUMMARY (So Far)
+# ROWS SUMMARY (Rows 1-13)
 
 | Row | Post Orders | Orange Post | Neutral Post | Teal Post | Status |
 |-----|-------------|-------------|--------------|-----------|--------|
@@ -2240,7 +3036,20 @@ https://docs.signalpilot.io/quick-start/
 | 7 | 19-21 | 021 Quote | 020 EDU | 019 Blog | ✅ Posted |
 | 8 | 22-24 | 022 Product | 023 EDU | 027 Blog | ✅ Posted |
 | 9 | 25-27 | 024 Quote | 026 EDU | 030 Docs | ✅ Posted |
-| 10 | 28-30 | — | 031 EDU | 029 Chronicle | ⏳ In Canva |
+| 10 | 28-30 | 024 Quote | 031 EDU | 029 Chronicle | ⏳ In Canva |
 | 11 | 31-33 | 028 Product | 032 EDU | 037 Blog | ⏳ In Canva |
 | 12 | 34-36 | 034 Quote | 033 EDU | 038 Chronicle | ⏳ In Canva |
-| 13+ | 37+ | ... | ... | ... | 📋 Pending |
+| 13 | 37-39 | 035 Product | 036 EDU | 040 Docs | 📋 Pending |
+| 14+ | 40+ | ... | ... | ... | 📋 Pending |
+
+---
+
+# CONTENT INCLUDED IN THIS FILE
+
+**Total Rows:** 13 (39 posts by posting order)
+**Total Posts with Full Content:** ~40 unique posts
+
+**Status Breakdown:**
+- ✅ Posted: Rows 1-9 (27 posts)
+- ⏳ In Canva: Rows 10-12 (9 posts)
+- 📋 Pending: Row 13+ (remaining posts)
