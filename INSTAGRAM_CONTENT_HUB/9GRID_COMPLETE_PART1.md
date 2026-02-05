@@ -12964,7 +12964,672 @@ Recognize tilt. Stop immediately. Return tomorrow.
 
 ---
 
-# TO BE CONTINUED... (Rows 81-99 for Part 1)
+# ROW 81 (Posts 241-243)
+
+## 🟠 ORANGE | POST 265 | Product: Plutus Flow Statistical OBV
+
+**Type:** Product | **Pillar:** P2: Indicator Truth | **CTA:** Demo
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+⚖️ PLUTUS FLOW: OBV EVOLVED
+
+Standard OBV shows cumulative volume direction.
+Plutus Flow asks: "Is this statistically significant?"
+
+✦ Z-SCORE NORMALIZATION
+→ Compares current flow to historical
+→ Identifies unusual activity
+→ Context across assets
+
+✦ DIVERGENCE DETECTION
+→ Price vs flow disagreement
+→ Potential reversal context
+→ Visual alerts
+
+✦ FLOW REGIMES
+→ Accumulation vs distribution
+→ Visual regime classification
+→ Clear states
+
+See it in action 🔗 Link in bio
+
+⚠️ Educational demo. Not financial advice.
+
+#PlutusFlow #SignalPilot #TradingView #VolumeAnalysis #OBV #TechnicalAnalysis #TradingIndicators #Forex #Crypto #DayTrading #SwingTrading #FlowAnalysis #Divergence #TradingTools #TradingEducation #LearnTrading
+```
+
+### TWITTER/X — Single Tweet
+```
+OBV tells you cumulative volume. Plutus Flow tells you if it's statistically significant.
+
+Z-score normalization. Divergence detection. Flow regimes.
+
+Volume analysis, evolved.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 262 | EDU: Displacement
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+⚡ DISPLACEMENT EXPLAINED
+
+📊 DISPLACEMENT CHARACTERISTICS:
+→ Large-bodied candles
+→ Strong closes (near high/low)
+→ Minimal wicks
+→ Clear directional intent
+
+📊 WEAK MOVES:
+→ Small candles
+→ Long wicks
+→ Indecisive closes
+→ Lack of conviction
+
+Why displacement matters:
+✦ Shows institutional participation
+✦ Often precedes continuation
+✦ Validates breakouts
+
+Context changes everything.
+Look for the conviction behind the move.
+
+Free lesson 🎓 Link in bio
+
+⚠️ Educational only. Not financial advice.
+
+#Displacement #Momentum #PriceAction #SignalPilot #TradingEducation #TechnicalAnalysis #Forex #Crypto #DayTrading #SwingTrading #MarketStructure #TradingView #Breakouts #LearnTrading
+```
+
+### TWITTER/X — Single Tweet
+```
+Displacement: when price moves with conviction.
+
+Large candles. Strong closes. Minimal wicks.
+
+Displacement often precedes continuation.
+```
+
+---
+
+## 🔵 TEAL | POST 208 | Chronicle: The Commander's Strategy
+
+**Type:** Chronicle | **Pillar:** P5: Chronicle | **CTA:** Chronicle
+
+### INSTAGRAM — Single Image (Cinematic)
+
+**Caption:**
+```
+THE COMMANDER'S STRATEGY 🎯
+
+"A commander never enters battle without seeing the full field."
+
+THE COMMANDER'S APPROACH:
+
+👁️ SEE EVERYTHING
+OmniDeck unifies all indicator signals
+
+📊 ASSESS ALIGNMENT
+Are forces agreeing?
+
+⚔️ DECIDE CLEARLY
+Alignment = Attack
+Conflict = Wait
+
+🎯 EXECUTE PRECISELY
+Clear plan, clear action
+
+THE LESSON:
+Don't trade with partial vision.
+Command the full picture.
+
+Read the full chronicle in bio 🔗
+
+#TheCommander #OmniDeck #SignalPilot #Chronicle #TradingLore #SignalPilotChronicle #TradingWisdom #TradingMythology
+```
+
+### TWITTER/X — Single Tweet
+```
+"A commander never enters battle without seeing the full field."
+— The Commander
+
+OmniDeck shows the complete picture.
+See everything. Decide clearly.
+```
+
+---
+
+# ROW 82 (Posts 244-246)
+
+## 🟠 ORANGE | POST 271 | Marketing: Limited Time Pricing
+
+**Type:** Marketing | **Pillar:** P1: Origin Story | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+⏳ CURRENT PRICING WON'T LAST
+
+Lock in today's rates:
+
+💳 MONTHLY → $69/month
+📅 YEARLY → $399/year (Save $429)
+♾️ LIFETIME → $999 once
+
+What you get:
+✦ 7 professional indicators
+✦ 82 free education lessons
+✦ Active community access
+✦ 7-day money-back guarantee
+
+Prices locked at signup.
+
+Link in bio 🔗
+
+#SignalPilot #TradingTools #TradingView #TradingIndicators #Forex #Crypto #DayTrading #SwingTrading #TradingEducation
+```
+
+### TWITTER/X — Single Tweet
+```
+Current pricing won't last forever.
+
+$69/month • $399/year (save $429) • $999 lifetime
+
+82 free lessons. 7 indicators. Lock in before the next increase.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 266 | EDU: Optimal Trade Entry (OTE)
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+🎯 OPTIMAL TRADE ENTRY (OTE)
+
+The 62-79% Fibonacci retracement zone.
+
+📐 RISK:REWARD
+→ Deeper entry = tighter stop
+→ Better potential R:R
+
+✦ CONFLUENCE
+→ Often aligns with order blocks
+→ May overlap with FVGs
+
+How to use:
+1. Identify impulsive move
+2. Draw Fibonacci retracement
+3. Watch 62-79% zone for reaction
+4. Combine with other confluence
+
+Theory, not guarantee.
+
+Free lesson 🎓 Link in bio
+
+⚠️ Educational only. Not financial advice.
+
+#OTE #OptimalTradeEntry #Fibonacci #SignalPilot #TradingEducation #TechnicalAnalysis #Forex #Crypto #DayTrading #SwingTrading #ICTConcepts
+```
+
+### TWITTER/X — Single Tweet
+```
+Optimal Trade Entry: the Fibonacci sweet spot.
+
+The 62-79% retracement zone offers favorable risk:reward.
+
+Theory, not guarantee.
+```
+
+---
+
+## 🔵 TEAL | POST 210 | Docs: Indicator Comparison Chart
+
+**Type:** Docs | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+Indicator Comparison Chart 📊
+
+THE 7 INDICATORS:
+
+👑 PENTARCH → Cycle phase detection
+🔮 VOLUME ORACLE → Regime classification
+🗺️ JANUS ATLAS → Multi-timeframe levels
+⚖️ PLUTUS FLOW → Money flow analysis
+⚔️ HARMONIC OSCILLATOR → Momentum
+👁️ AUGURY GRID → Multi-symbol scanning
+🎯 OMNIDECK → Unified overlay
+
+Know your tools.
+
+Full comparison in bio 🔗
+
+#SignalPilot #IndicatorComparison #TradingIndicators #TradingView #TradingGuide
+```
+
+### TWITTER/X — Single Tweet
+```
+Which indicator does what?
+
+Pentarch → Cycles
+Volume Oracle → Regimes
+Janus Atlas → Levels
+Plutus Flow → Flow
+Harmonic Oscillator → Momentum
+Augury Grid → Scanning
+OmniDeck → Unified
+
+Know your tools.
+```
+
+---
+
+# ROW 83 (Posts 247-249)
+
+## 🟠 ORANGE | POST 274 | Quote: The Market Will Teach You
+
+**Type:** Quote | **Pillar:** P4: Psychology | **CTA:** Save
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+📚 THE MOST EXPENSIVE EDUCATION
+
+"The market will teach you.
+
+The tuition is your losses.
+
+Pay attention or keep paying."
+
+Every loss contains information:
+✦ Was the setup valid?
+✦ Did you follow your rules?
+✦ What would you do differently?
+
+You're going to pay tuition either way.
+Might as well learn something.
+
+Save this 📌
+
+#TradingWisdom #LearningFromLosses #SignalPilot #TradingMindset #TradingPsychology #TradingEducation
+```
+
+### TWITTER/X — Single Tweet
+```
+"The market will teach you.
+The tuition is your losses.
+Pay attention or keep paying."
+
+Every loss has a lesson.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 269 | EDU: Kill Zones
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+⏰ KILL ZONES EXPLAINED
+
+🇬🇧 LONDON OPEN
+→ 2:00 - 5:00 AM EST
+→ Often sees range expansion
+
+🇺🇸 NEW YORK OPEN
+→ 7:00 - 10:00 AM EST
+→ High liquidity period
+
+🇬🇧🇺🇸 LONDON CLOSE
+→ 10:00 - 12:00 PM EST
+→ NY takes full control
+
+Historically active periods where setups present more frequently.
+
+Free lesson 🎓 Link in bio
+
+⚠️ Educational only. Not financial advice.
+
+#KillZones #TradingTimes #SignalPilot #TradingEducation #ICT #SessionTrading #Forex #Crypto #DayTrading
+```
+
+### TWITTER/X — Single Tweet
+```
+Kill zones: time windows where setups present more frequently.
+
+London open. New York open. London close.
+
+Understanding when may help filter noise.
+```
+
+---
+
+## 🔵 TEAL | POST 213 | Blog: Weekly Review Ritual
+
+**Type:** Blog | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+The Weekly Review Ritual 📅
+
+Every Sunday (30-60 minutes):
+
+📊 METRICS
+◾ Number of trades
+◾ Win rate
+◾ Average R:R
+
+📝 TRADE ANALYSIS
+◾ Best trade — What went right?
+◾ Worst trade — What went wrong?
+
+🔍 PATTERNS
+◾ What setups worked?
+◾ What mistakes repeated?
+
+📋 NEXT WEEK PLAN
+◾ What will I do differently?
+
+Traders who review improve.
+
+Full template in bio 🔗
+
+#WeeklyReview #TradingJournal #SignalPilot #TradingEducation #TradingHabits
+```
+
+### TWITTER/X — Single Tweet
+```
+The weekly review: Where improvement happens.
+
+Every Sunday:
+◾ Review all trades
+◾ Calculate win rate & R:R
+◾ Identify patterns
+◾ Adjust for next week
+
+Traders who review, improve.
+```
+
+---
+
+# ROW 84 (Posts 250-252)
+
+## 🟠 ORANGE | POST 275 | Product: Augury Grid Multi-Symbol Scanning
+
+**Type:** Product | **Pillar:** P2: Indicator Truth | **CTA:** Demo
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+👁️ AUGURY GRID: SEE EVERYTHING AT ONCE
+
+🔍 MULTI-SYMBOL SCANNING
+→ Monitor dozens of assets
+→ One unified view
+→ Real-time updates
+
+📊 CONDITION TRACKING
+→ Pentarch phase signals
+→ Volume Oracle regimes
+→ Momentum states
+
+🎯 FOCUS FILTERS
+→ Show only symbols meeting criteria
+→ Find opportunities faster
+
+The Watchman sees all charts at once.
+
+See it in action 🔗 Link in bio
+
+⚠️ Educational demo. Not financial advice.
+
+#AuguryGrid #SignalPilot #TradingView #Scanner #MultiSymbol #TradingTools #Forex #Crypto
+```
+
+### TWITTER/X — Single Tweet
+```
+Stop flipping through 50 charts.
+
+Augury Grid scans multiple symbols simultaneously.
+
+The Watchman sees all.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 272 | EDU: Market Maker Models
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+🎭 MARKET MAKER MODELS EXPLAINED
+
+🔄 THE AMD PATTERN
+Accumulation → Manipulation → Distribution
+
+📦 ACCUMULATION
+→ Building positions quietly
+
+🎭 MANIPULATION
+→ Fake move to trap traders
+
+📤 DISTRIBUTION
+→ Real move revealed
+
+It's not conspiracy—it's market mechanics.
+
+Free lesson 🎓 Link in bio
+
+⚠️ Educational only. Not financial advice.
+
+#MarketMakers #AMD #SignalPilot #TradingEducation #SmartMoney #ICTConcepts #Forex #Crypto
+```
+
+### TWITTER/X — Single Tweet
+```
+Market maker models: how liquidity is engineered.
+
+Accumulation → Manipulation → Distribution
+
+It's not conspiracy—it's market mechanics.
+```
+
+---
+
+## 🔵 TEAL | POST 217 | Blog: Cost of Overtrading
+
+**Type:** Blog | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+The Cost of Overtrading 💸
+
+💸 FINANCIAL
+◾ Commissions pile up
+◾ Small losses compound
+
+😩 MENTAL
+◾ Decision fatigue
+◾ Emotional exhaustion
+
+📉 OPPORTUNITY
+◾ Miss quality setups
+
+🎰 EDGE DILUTION
+◾ Taking B and C setups
+
+THE TRUTH:
+More trades ≠ More profit
+Better trades = More profit
+
+Full article in bio 🔗
+
+#Overtrading #TradingMistakes #QualityOverQuantity #SignalPilot #TradingEducation
+```
+
+### TWITTER/X — Single Tweet
+```
+Overtrading costs:
+💸 Commissions add up
+😩 Mental energy depleted
+📉 Quality setups missed
+
+More trades ≠ More profit.
+Better trades = More profit.
+```
+
+---
+
+# ROW 85 (Posts 253-255)
+
+## 🟠 ORANGE | POST 281 | Marketing: Education Hub Highlight
+
+**Type:** Marketing | **Pillar:** P1: Origin Story | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+📚 82 FREE TRADING LESSONS
+
+No paywall. No email required.
+
+🟢 BEGINNER TRACK (20 lessons)
+🟡 INTERMEDIATE TRACK (27 lessons)
+🟠 ADVANCED TRACK (27 lessons)
+🔴 PROFESSIONAL TRACK (8 lessons)
+
+82 lessons. Free forever.
+
+Start learning 🔗 Link in bio
+
+#SignalPilot #TradingEducation #FreeEducation #LearnTrading #Forex #Crypto
+```
+
+### TWITTER/X — Single Tweet
+```
+82 lessons. Zero cost.
+
+From candlestick basics to advanced smart money concepts.
+
+No paywall. No upsell. Just education.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 276 | EDU: Liquidity Sweeps vs Breakouts
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+🔍 SWEEP OR BREAKOUT?
+
+Both break the level. Only one means it.
+
+🧹 LIQUIDITY SWEEP
+→ Wicks through level
+→ Closes BACK INSIDE
+→ Often reverses
+
+💥 TRUE BREAKOUT
+→ Closes BEYOND level
+→ Strong candle body
+→ Often continues
+
+The key: THE CLOSE
+✦ Wick through + close inside = sweep
+✦ Body through + close beyond = breakout
+
+Free lesson 🎓 Link in bio
+
+⚠️ Educational only. Not financial advice.
+
+#LiquiditySweep #Breakouts #PriceAction #SignalPilot #TradingEducation #SmartMoney
+```
+
+### TWITTER/X — Single Tweet
+```
+Liquidity sweep or real breakout?
+
+The difference lies in the close. Sweeps wick through then close inside. Breakouts close beyond with conviction.
+```
+
+---
+
+## 🔵 TEAL | POST 218 | Chronicle: The Sovereign's Cycle
+
+**Type:** Chronicle | **Pillar:** P5: Chronicle | **CTA:** Chronicle
+
+### INSTAGRAM — Single Image (Cinematic)
+
+**Caption:**
+```
+THE SOVEREIGN'S CYCLE 👑
+
+"Every cycle ends. Every cycle begins again."
+
+THE 5-PHASE WHEEL:
+
+🟢 TD (TOUCHDOWN)
+🔵 IGN (IGNITION)
+🟡 WRN (WARNING)
+🟠 CAP (CLIMAX)
+🔴 BDN (BREAKDOWN)
+
+Then it begins again.
+
+◾ Cycles repeat in 5 phases
+◾ Human nature unchanging
+◾ The wheel always turns
+
+Read the full chronicle in bio 🔗
+
+#TheSovereign #Pentarch #SignalPilot #Chronicle #MarketCycles #TradingLore
+```
+
+### TWITTER/X — Single Tweet
+```
+"Every cycle ends. Every cycle begins again."
+— The Sovereign
+
+TD. IGN. WRN. CAP. BDN.
+
+The 5-phase wheel turns.
+```
+
+---
+
+# TO BE CONTINUED... (Rows 86-99 for Part 1)
 
 > **Part 1 covers Posts 1-325 organized by ROW (posting order).**
 > **Each post clearly shows: 🟠 ORANGE, ⚪ NEUTRAL, or 🔵 TEAL**
@@ -12986,7 +13651,7 @@ Recognize tilt. Stop immediately. Return tomorrow.
 
 ---
 
-# ROWS SUMMARY (Rows 1-80)
+# ROWS SUMMARY (Rows 1-85)
 
 | Row | Post Orders | Orange Post | Neutral Post | Teal Post | Status |
 |-----|-------------|-------------|--------------|-----------|--------|
@@ -13070,17 +13735,22 @@ Recognize tilt. Stop immediately. Return tomorrow.
 | 78 | 232-234 | 255 Product | 252 EDU | 200 Docs | 📋 Pending |
 | 79 | 235-237 | 261 Marketing | 256 EDU | 203 Blog | 📋 Pending |
 | 80 | 238-240 | 264 Quote | 259 EDU | 207 Blog | 📋 Pending |
-| 81+ | 241+ | ... | ... | ... | 📋 Pending |
+| 81 | 241-243 | 265 Product | 262 EDU | 208 Chronicle | 📋 Pending |
+| 82 | 244-246 | 271 Marketing | 266 EDU | 210 Docs | 📋 Pending |
+| 83 | 247-249 | 274 Quote | 269 EDU | 213 Blog | 📋 Pending |
+| 84 | 250-252 | 275 Product | 272 EDU | 217 Blog | 📋 Pending |
+| 85 | 253-255 | 281 Marketing | 276 EDU | 218 Chronicle | 📋 Pending |
+| 86+ | 256+ | ... | ... | ... | 📋 Pending |
 
 ---
 
 # CONTENT INCLUDED IN THIS FILE
 
-**Total Rows:** 80 (240 posts by posting order)
-**Total Posts with Full Content:** ~240 unique posts
+**Total Rows:** 85 (255 posts by posting order)
+**Total Posts with Full Content:** ~255 unique posts
 
 **Status Breakdown:**
 - ✅ Posted: Rows 1-9 (27 posts)
 - ⏳ In Canva: Rows 10-12 (9 posts)
-- 📋 Pending: Rows 13-80 (204 posts)
-- 📋 Remaining: Rows 81-99 to be added (Part 1 ends at Row 99)
+- 📋 Pending: Rows 13-85 (219 posts)
+- 📋 Remaining: Rows 86-99 to be added (Part 1 ends at Row 99)
