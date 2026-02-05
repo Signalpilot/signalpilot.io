@@ -3001,7 +3001,954 @@ https://docs.signalpilot.io/ref-cheatsheets-plutus/
 
 ---
 
-# TO BE CONTINUED...
+# ═══════════════════════════════════════════════════════════
+# ROW 14 (Posts 40-42) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 041 | Marketing: The Elite Seven
+
+**Type:** Main Site Marketing | **Pillar:** Product | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Meet the Elite Seven 🔮
+
+7 indicators. Each with a purpose.
+
+👑 THE SOVEREIGN (Pentarch) — Cycle phase detection
+🔮 THE PROPHET (Volume Oracle) — Regime classification
+🗺️ THE CARTOGRAPHER (Janus Atlas) — Multi-TF levels
+⚖️ THE SCALES (Plutus Flow) — Statistical flow
+⚔️ THE ARBITER (Harmonic Oscillator) — Momentum
+👁️ THE WATCHMAN (Augury Grid) — Multi-symbol scanner
+🎯 THE COMMANDER (OmniDeck) — Unified overlay
+
+Plus 82 free lessons to learn them.
+
+Link in bio 🔗
+
+#eliteseven #signalpilot #tradingview #tradingtools #forex #crypto
+```
+
+### TWITTER/X — Single Tweet
+```
+7 indicators. 82 free lessons. 1 platform.
+
+👑 The Sovereign (Pentarch) — Cycles
+🔮 The Prophet (Volume Oracle) — Regimes
+🗺️ The Cartographer (Janus Atlas) — Levels
+⚖️ The Scales (Plutus Flow) — Flow
+⚔️ The Arbiter (Harmonic Oscillator) — Momentum
+👁️ The Watchman (Augury Grid) — Scanner
+🎯 The Commander (OmniDeck) — Unified
+
+Signal Pilot. Education first.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 039 | EDU: Position Sizing (Lesson)
+
+**Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Slide Structure:**
+1. **Hook:** "THE SURVIVAL FORMULA"
+2. **Formula:** Position Size = (Account × Risk%) ÷ Risk Per Share
+3. **Example 1:** $10,000 × 2% = $200 max loss
+4. **Example 2:** $5 risk per share = 40 shares
+5. **Key:** Calculate BEFORE you click
+6. **CTA:** Full lesson link
+
+**Caption:**
+```
+Position sizing isn't sexy. But it keeps you alive. 📏
+
+The formula:
+
+Position Size = (Account × Risk%) ÷ (Entry - Stop Loss)
+
+Example:
+→ $10,000 account
+→ 2% risk = $200 max loss
+→ Entry $100, Stop $95 = $5 risk per share
+→ Position = $200 ÷ $5 = 40 shares
+
+Calculate BEFORE you enter. Every time.
+
+Full lesson in bio 🔗
+
+#positionsizing #riskmanagement #tradingmath #trading #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+Your position size is your risk management.
+
+Too big: one bad trade ends you.
+Too small: you can't grow.
+Just right: you survive long enough to learn.
+
+Calculate before you click. Every single time. 🧵
+```
+
+**Tweet 2:**
+```
+The formula:
+
+Position Size = (Account × Risk%) ÷ (Entry - Stop Loss)
+
+Example:
+$10,000 account × 2% = $200 max loss
+Entry $100, Stop $95 = $5 risk per share
+Position = $200 ÷ $5 = 40 shares
+```
+
+**Tweet 3 (CTA):**
+```
+Full lesson on position sizing:
+
+https://education.signalpilot.io/curriculum/beginner/09-position-sizing.html
+
+#positionsizing #riskmanagement #trading
+```
+
+---
+
+## 🔵 TEAL | POST 043 | Blog: Volume Profile Guide
+
+**Type:** Blog Article | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 Slides)
+
+**Slide Structure:**
+1. **Hook:** "THE MARKET HAS MEMORY"
+2. **Intro:** Volume profile shows where price stayed
+3. **POC:** Point of Control explained
+4. **HVN:** High Volume Nodes explained
+5. **LVN:** Low Volume Nodes explained
+6. **Behavior:** Price consolidates at HVN, moves fast through LVN
+7. **Example:** Annotated chart
+8. **CTA:** Full guide link
+
+**Caption:**
+```
+Volume Profile 101 📊
+
+Price shows WHERE the market went.
+Volume Profile shows WHERE IT STAYED.
+
+Key concepts:
+
+📍 POC (Point of Control)
+→ Price level with most volume traded
+→ Acts as magnet for price
+
+📍 HVN (High Volume Node)
+→ Areas of acceptance
+→ Price tends to consolidate here
+
+📍 LVN (Low Volume Node)
+→ Areas of rejection
+→ Price tends to move quickly through
+
+Full guide in bio 🔗
+
+#volumeprofile #trading #marketstructure #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+Price tells you where the market went.
+
+Volume profile tells you where it STAYED.
+
+High volume nodes = areas of acceptance.
+Low volume nodes = areas of rejection.
+
+The market has memory. Volume profile shows it. 🧵
+```
+
+**Tweet 2:**
+```
+Key concepts:
+
+POC (Point of Control) → Price level with most volume
+HVN (High Volume Node) → Areas of acceptance
+LVN (Low Volume Node) → Areas of rejection
+
+Price tends to consolidate at HVN, move quickly through LVN.
+```
+
+**Tweet 3 (CTA):**
+```
+Full volume profile guide:
+
+https://blog.signalpilot.io/articles/volume-profile-basics/
+
+#volumeprofile #trading #marketstructure
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 15 (Posts 43-45) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 044 | Quote: "Entries vs Exits"
+
+**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Read this twice. 👇
+
+"Amateur traders focus on entries. Professional traders focus on exits."
+
+Think about it:
+→ Perfect entry, bad exit = small win or loss
+→ Average entry, great exit = solid profit
+
+The entry gets you in.
+The exit gets you paid.
+
+Plan both. Every time.
+
+Save this. 🔖
+
+#tradingquotes #exitstrategy #tradingwisdom #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+"Amateur traders focus on entries. Professional traders focus on exits."
+
+Your entry doesn't determine your profit.
+Your exit does.
+
+Plan the exit before you enter.
+
+— Signal Pilot
+```
+
+---
+
+## ⚪ NEUTRAL | POST 042 | EDU: Risk-Reward Ratio
+
+**Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Slide Structure:**
+1. **Hook:** "WIN RATE IS OVERRATED"
+2. **Math 1:** 1:1 R:R = Need 50% wins
+3. **Math 2:** 1:2 R:R = Need 34% wins
+4. **Math 3:** 1:3 R:R = Need 25% wins
+5. **Key Insight:** Higher R:R = More room for error
+6. **CTA:** Full lesson link
+
+**Caption:**
+```
+Risk-reward is the most misunderstood concept in trading 📊
+
+Here's why it matters:
+
+1:1 Risk-Reward
+→ Need 50%+ win rate to profit
+
+1:2 Risk-Reward
+→ Need 34%+ win rate to profit
+
+1:3 Risk-Reward
+→ Need 25%+ win rate to profit
+
+Higher R:R = More room for error.
+
+Stop chasing high win rates. Chase good setups.
+
+Full lesson in bio 🔗
+
+#riskreward #tradingmath #trading #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+Risk $100 to make $100? That's a coin flip.
+
+Risk $100 to make $300? Now you only need to win 33% of the time to break even.
+
+Risk-reward isn't about greed. It's about math. 🧵
+```
+
+**Tweet 2:**
+```
+1:1 Risk-Reward → Need 50%+ win rate to profit
+1:2 Risk-Reward → Need 34%+ win rate to profit
+1:3 Risk-Reward → Need 25%+ win rate to profit
+
+Higher R:R = More room for error.
+```
+
+**Tweet 3:**
+```
+Stop chasing high win rates. Chase good setups.
+
+A 40% win rate with 1:3 R:R beats an 80% win rate with 1:0.5 R:R.
+
+Every. Single. Time.
+```
+
+**Tweet 4 (CTA):**
+```
+Full lesson on risk-reward math:
+
+https://education.signalpilot.io/curriculum/beginner/10-risk-reward-ratio.html
+
+#riskreward #tradingmath #trading
+```
+
+---
+
+## 🔵 TEAL | POST 047 | Blog: Smart Money Concepts Explained
+
+**Type:** Blog Article | **Pillar:** P1: Liquidity Lie | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 Slides)
+
+**Slide Structure:**
+1. **Hook:** "SMART MONEY CONCEPTS"
+2. **Concept 1:** Liquidity
+3. **Concept 2:** Inducement
+4. **Concept 3:** Order Blocks
+5. **Concept 4:** FVG (Fair Value Gap)
+6. **Concept 5:** BOS (Break of Structure)
+7. **Key Insight:** Not magic, market mechanics
+8. **CTA:** Full breakdown link
+
+**Caption:**
+```
+Smart Money Concepts explained simply 🧠
+
+📍 LIQUIDITY
+Where stop losses cluster (above highs, below lows)
+
+📍 INDUCEMENT
+Fake moves designed to trigger those stops
+
+📍 ORDER BLOCKS
+Zones where institutions may have positioned
+
+📍 FVG (Fair Value Gap)
+Imbalances that price often revisits
+
+📍 BOS (Break of Structure)
+Confirmation of direction change
+
+Not magic. Market mechanics.
+
+Full breakdown in bio 🔗
+
+#smartmoney #SMC #liquidity #orderblock #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+Smart Money Concepts in 60 seconds:
+
+Liquidity = Where stop losses cluster
+Inducement = Traps to trigger those stops
+Order Blocks = Where institutions may have entered
+FVG = Gaps that price tends to revisit
+
+It's not magic. It's market structure. 🧵
+```
+
+**Tweet 2:**
+```
+Key SMC concepts:
+
+• LIQUIDITY — Stop clusters above highs, below lows
+• INDUCEMENT — Fake moves to grab liquidity
+• ORDER BLOCKS — Institutional entry zones
+• FVG — Fair Value Gaps price revisits
+• BOS — Break of Structure, direction change
+```
+
+**Tweet 3 (CTA):**
+```
+Not magic. Market mechanics.
+
+Full breakdown: https://blog.signalpilot.io/articles/how-smart-money-moves/
+
+#smartmoney #SMC #trading
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 16 (Posts 46-48) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 045 | Product: Augury Grid Demo (The Watchman)
+
+**Type:** Product Demo | **Pillar:** P2: Indicator Truth | **CTA:** Trial
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Slide Structure:**
+1. **Hook:** "STOP MISSING MOVES"
+2. **Problem:** Watching one chart while setups happen elsewhere
+3. **Solution:** Augury Grid scans multiple symbols
+4. **Feature:** Real-time status across watchlist
+5. **Feature:** Momentum, volume, trend per symbol
+6. **CTA:** Try free for 7 days
+
+**Caption:**
+```
+Watching one chart while opportunities happen elsewhere? 👁️
+
+The Watchman (Augury Grid) scans multiple symbols at once.
+
+What it shows:
+→ Real-time status across your watchlist
+→ Which assets may be setting up
+→ Momentum, volume, trend status per symbol
+→ All without switching charts
+
+Stop watching one tree. See the whole forest.
+
+Demo in bio 🔗
+
+#augurygrid #scanner #tradingview #signalpilot #trading #forex #crypto
+```
+
+### TWITTER/X — Single Tweet
+```
+One chart. Multiple symbols. Real-time scanning.
+
+Augury Grid (The Watchman) monitors your entire watchlist without switching tabs.
+
+See which assets may be setting up. All at once.
+
+Stop missing moves while watching one chart.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 046 | EDU: Stop Loss Strategies
+
+**Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 Slides)
+
+**Slide Structure:**
+1. **Hook:** "NO STOP = EVENTUALLY ZERO"
+2. **Type 1:** Fixed Stop
+3. **Type 2:** Structure Stop
+4. **Type 3:** ATR Stop
+5. **Type 4:** Trailing Stop
+6. **Comparison:** When to use each
+7. **Key Insight:** Define risk BEFORE the trade
+8. **CTA:** Full lesson link
+
+**Caption:**
+```
+Stop loss strategies every trader needs to know 🛑
+
+1️⃣ FIXED STOP
+→ Set percentage/dollar amount
+→ Simple but not adaptive
+
+2️⃣ STRUCTURE STOP
+→ Below support/above resistance
+→ Based on chart logic
+
+3️⃣ ATR STOP
+→ Based on volatility (e.g., 2x ATR)
+→ Adapts to market conditions
+
+4️⃣ TRAILING STOP
+→ Moves with profit
+→ Locks in gains
+
+No stop = unlimited risk.
+
+Full lesson in bio 🔗
+
+#stoploss #riskmanagement #trading #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+A stop loss isn't admitting defeat.
+
+It's defining your risk BEFORE the trade.
+
+Fixed. Trailing. Structure-based. ATR-based.
+
+Pick one. Use it. Every single trade. 🧵
+```
+
+**Tweet 2:**
+```
+4 stop loss types:
+
+1. FIXED — Set percentage/dollar
+2. STRUCTURE — Below support/above resistance
+3. ATR — Based on volatility (e.g., 2x ATR)
+4. TRAILING — Moves with profit, locks gains
+```
+
+**Tweet 3:**
+```
+No stop = unlimited risk = eventually zero.
+
+The question isn't IF you'll have a losing trade.
+It's how MUCH you'll lose.
+```
+
+**Tweet 4 (CTA):**
+```
+Full lesson on stop strategies:
+
+https://education.signalpilot.io/curriculum/beginner/11-stop-loss-strategies.html
+
+#stoploss #riskmanagement #trading
+```
+
+---
+
+## 🔵 TEAL | POST 048 | Chronicle: The Arbiter (Harmonic Oscillator)
+
+**Type:** Chronicle Lore | **Pillar:** P5: Chronicle | **CTA:** Chronicle Site
+
+### INSTAGRAM — Carousel (7 Slides)
+
+**Slide Structure:**
+1. **Hook:** "THE ARBITER ⚔️" with quote
+2. **Philosophy:** Momentum without context = noise
+3. **Philosophy:** Context without momentum = hesitation
+4. **Method:** Combines multiple momentum components
+5. **Result:** Agreement = strength, Disagreement = caution
+6. **Connection:** Arbiter = Harmonic Oscillator
+7. **CTA:** Meet The Arbiter in the Chronicle
+
+**Caption:**
+```
+THE ARBITER ⚔️
+
+"Momentum without context is noise. Context without momentum is hesitation."
+
+Among the Elite Seven, The Arbiter judges the balance of forces.
+
+Harmonic Oscillator combines:
+→ Multiple momentum components
+→ Into one unified signal
+→ Agreement = potential strength
+→ Disagreement = potential caution
+
+The Arbiter waits for alignment.
+
+Meet The Arbiter in bio 🔗
+
+#thearbiter #harmonicoscillator #signalpilot #chronicle #eliteseven #momentum
+```
+
+### TWITTER/X — Single Tweet
+```
+"Momentum without context is noise. Context without momentum is hesitation."
+— The Arbiter
+
+The Harmonic Oscillator doesn't just measure speed.
+It measures agreement between forces.
+
+When they align, movement follows.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 17 (Posts 49-51) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 051 | Marketing: 7-Day Money-Back Guarantee
+
+**Type:** Main Site Marketing | **Pillar:** Product | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Still on the fence? 🤔
+
+We get it. That's why we offer:
+
+🛡️ 7-DAY MONEY-BACK GUARANTEE
+
+→ Full access to all 7 indicators
+→ Full access to 82 lessons
+→ Full access to docs & support
+
+Try everything. Test the setups. Go through the education.
+
+Not for you? Full refund. No questions.
+
+Link in bio 🔗
+
+#signalpilot #moneybackguarantee #riskfree #tradingview #trading
+```
+
+### TWITTER/X — Single Tweet
+```
+Not sure if Signal Pilot is right for you?
+
+7-day money-back guarantee. No questions asked.
+
+Try the indicators. Go through the lessons. Test it yourself.
+
+If it's not for you, full refund. Simple.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 049 | EDU: Trend Identification
+
+**Type:** Education Hub | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Slide Structure:**
+1. **Hook:** "TREND IDENTIFICATION IN 10 SECONDS"
+2. **Uptrend:** HH + HL explained
+3. **Downtrend:** LH + LL explained
+4. **Range:** Neither pattern
+5. **Key Insight:** Don't overcomplicate it
+6. **CTA:** Full lesson link
+
+**Caption:**
+```
+Trend identification is simpler than you think 📈📉
+
+UPTREND
+→ Higher Highs (HH)
+→ Higher Lows (HL)
+→ Bias: Look for longs
+
+DOWNTREND
+→ Lower Highs (LH)
+→ Lower Lows (LL)
+→ Bias: Look for shorts
+
+RANGE
+→ Neither pattern
+→ Bias: Wait or fade extremes
+
+Don't fight the trend. Identify it first.
+
+Full lesson in bio 🔗
+
+#trendidentification #marketstructure #trading #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+Uptrend: Higher highs, higher lows.
+Downtrend: Lower highs, lower lows.
+Range: Neither.
+
+That's it. That's trend identification.
+
+Most traders overcomplicate it. Don't be most traders. 🧵
+```
+
+**Tweet 2:**
+```
+UPTREND → HH + HL → Bias: Look for longs
+DOWNTREND → LH + LL → Bias: Look for shorts
+RANGE → Neither → Bias: Wait or fade extremes
+
+Don't fight the trend. Identify it first.
+```
+
+**Tweet 3 (CTA):**
+```
+Full lesson on trend identification:
+
+https://education.signalpilot.io/curriculum/beginner/12-trend-identification.html
+
+#trendtrading #marketstructure #trading
+```
+
+---
+
+## 🔵 TEAL | POST 050 | Docs: Quick Start Checklist
+
+**Type:** Docs | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Slide Structure:**
+1. **Hook:** "NEW TO SIGNAL PILOT? START HERE"
+2. **Step 1:** Add indicators to TradingView
+3. **Step 2:** Start with Pentarch or Volume Oracle
+4. **Step 3:** Complete beginner lessons
+5. **Steps 4-5:** Paper trade, then go live
+6. **CTA:** Full guide link
+
+**Caption:**
+```
+New to Signal Pilot? Start here ✅
+
+QUICK START CHECKLIST:
+
+☐ Step 1: Add indicators to TradingView
+☐ Step 2: Start with Pentarch OR Volume Oracle
+☐ Step 3: Complete Beginner lessons (20 free)
+☐ Step 4: Paper trade setups
+☐ Step 5: Journal your observations
+☐ Step 6: Graduate to live when consistent
+
+No rush. Education first.
+
+Full guide in bio 🔗
+
+#signalpilot #quickstart #tradingview #trading #forex #crypto
+```
+
+### TWITTER/X — Single Tweet
+```
+Signal Pilot Quick Start:
+
+1. Add indicators to TradingView
+2. Start with Pentarch (cycles) or Volume Oracle (regimes)
+3. Complete beginner lessons (free)
+4. Paper trade first
+5. Graduate to live when consistent
+
+Education before execution.
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 18 (Posts 52-54) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 054 | Quote: "Patience"
+
+**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Read this slowly. 👇
+
+"The market is a device for transferring money from the impatient to the patient."
+
+Every panic sell funds someone's accumulation.
+Every FOMO buy funds someone's distribution.
+
+Which side are you on?
+
+Save this. 📌
+
+#tradingquotes #patience #tradingwisdom #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+"The market is a device for transferring money from the impatient to the patient."
+
+Every panic sell funds someone's accumulation.
+Every FOMO buy funds someone's distribution.
+
+Which side are you on?
+
+— Signal Pilot
+```
+
+---
+
+## ⚪ NEUTRAL | POST 052 | EDU: Support and Resistance
+
+**Type:** Education Hub | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 Slides)
+
+**Slide Structure:**
+1. **Hook:** "SUPPORT & RESISTANCE 101"
+2. **Support:** Where buyers stepped in
+3. **Resistance:** Where sellers stepped in
+4. **Key:** More touches = stronger level
+5. **Flip:** Support breaks → becomes resistance
+6. **Flip:** Resistance breaks → becomes support
+7. **Example:** Chart showing the flip
+8. **CTA:** Full lesson link
+
+**Caption:**
+```
+Support & Resistance 101 📊
+
+SUPPORT
+→ Price level where buying interest appeared
+→ "Floor" that held price up
+→ More touches = stronger level
+
+RESISTANCE
+→ Price level where selling interest appeared
+→ "Ceiling" that pushed price down
+→ More touches = stronger level
+
+KEY INSIGHT:
+When support breaks, it often becomes resistance.
+When resistance breaks, it often becomes support.
+
+Full lesson in bio 🔗
+
+#supportresistance #technicalanalysis #trading #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+Support: Where buyers historically stepped in.
+Resistance: Where sellers historically stepped in.
+
+These aren't magic lines. They're areas of memory.
+
+The more times a level is tested, the more significant it becomes—until it breaks. 🧵
+```
+
+**Tweet 2:**
+```
+KEY INSIGHT:
+
+When support breaks, it often becomes resistance.
+When resistance breaks, it often becomes support.
+
+They flip. Remember that.
+```
+
+**Tweet 3 (CTA):**
+```
+Full lesson on support and resistance:
+
+https://education.signalpilot.io/curriculum/beginner/13-support-and-resistance.html
+
+#supportresistance #trading #technicalanalysis
+```
+
+---
+
+## 🔵 TEAL | POST 053 | Blog: Why Most Traders Fail
+
+**Type:** Blog Article | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 Slides)
+
+**Slide Structure:**
+1. **Hook:** "WHY 90% OF TRADERS LOSE"
+2. **Reason 1:** No defined edge
+3. **Reason 2:** Position size too big
+4. **Reason 3:** No stop losses
+5. **Reason 4:** Trading emotions
+6. **Reason 5:** Skipping education
+7. **Truth:** The 10% who win fixed these first
+8. **CTA:** Full article link
+
+**Caption:**
+```
+Why 90% of traders lose money 💀
+
+❌ NO DEFINED EDGE
+Trading random setups hoping something works
+
+❌ POSITION SIZE TOO BIG
+One bad trade wipes out weeks of gains
+
+❌ NO STOP LOSSES
+"It'll come back" until it doesn't
+
+❌ TRADING EMOTIONS
+Revenge trading, FOMO, fear
+
+❌ SKIPPING EDUCATION
+Wanting profits without putting in work
+
+The 10% who win? They fixed these first.
+
+Full article in bio 🔗
+
+#tradingmistakes #tradingpsychology #trading #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+90% of traders lose money. Here's why:
+
+❌ No edge, just hope
+❌ Position sizes too big
+❌ No stop losses
+❌ Trading emotions, not setups
+❌ Skipping the education
+
+The market doesn't care how badly you want it. 🧵
+```
+
+**Tweet 2:**
+```
+The 10% who win?
+
+They fixed these FIRST.
+
+Edge → Risk management → Psychology → Execution
+
+In that order. No shortcuts.
+```
+
+**Tweet 3 (CTA):**
+```
+Full article on why most traders fail:
+
+https://blog.signalpilot.io/articles/why-traders-blow-first-account/
+
+#tradingmistakes #trading #psychology
+```
+
+---
+
+# TO BE CONTINUED... (Rows 19-108 for Part 1)
 
 > **Part 1 covers Posts 1-325 organized by ROW (posting order).**
 > **Each post clearly shows: 🟠 ORANGE, ⚪ NEUTRAL, or 🔵 TEAL**
@@ -3023,7 +3970,7 @@ https://docs.signalpilot.io/ref-cheatsheets-plutus/
 
 ---
 
-# ROWS SUMMARY (Rows 1-13)
+# ROWS SUMMARY (Rows 1-18)
 
 | Row | Post Orders | Orange Post | Neutral Post | Teal Post | Status |
 |-----|-------------|-------------|--------------|-----------|--------|
@@ -3040,7 +3987,12 @@ https://docs.signalpilot.io/ref-cheatsheets-plutus/
 | 11 | 31-33 | 028 Product | 032 EDU | 037 Blog | ⏳ In Canva |
 | 12 | 34-36 | 034 Quote | 033 EDU | 038 Chronicle | ⏳ In Canva |
 | 13 | 37-39 | 035 Product | 036 EDU | 040 Docs | 📋 Pending |
-| 14+ | 40+ | ... | ... | ... | 📋 Pending |
+| 14 | 40-42 | 041 Marketing | 039 EDU | 043 Blog | 📋 Pending |
+| 15 | 43-45 | 044 Quote | 042 EDU | 047 Blog | 📋 Pending |
+| 16 | 46-48 | 045 Product | 046 EDU | 048 Chronicle | 📋 Pending |
+| 17 | 49-51 | 051 Marketing | 049 EDU | 050 Docs | 📋 Pending |
+| 18 | 52-54 | 054 Quote | 052 EDU | 053 Blog | 📋 Pending |
+| 19+ | 55+ | ... | ... | ... | 📋 Pending |
 
 ---
 
