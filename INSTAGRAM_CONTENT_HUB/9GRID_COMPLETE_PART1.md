@@ -11385,7 +11385,1586 @@ Because better traders = better community.
 
 ---
 
-# TO BE CONTINUED... (Rows 71-108 for Part 1)
+# ROW 71 (Posts 211-213)
+
+## 🟠 ORANGE | POST 234 | Quote: Trading Journal
+
+**Type:** Quote | **Pillar:** P4: Psychology | **CTA:** Save
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+The most valuable trading tool 👇
+
+"Your trading journal is worth more than any course you'll ever buy."
+
+COURSES TEACH:
+◾ Theory
+◾ Concepts
+◾ Strategies
+◾ General principles
+
+YOUR JOURNAL TEACHES:
+◾ YOUR patterns
+◾ YOUR mistakes
+◾ YOUR strengths
+◾ YOUR weaknesses
+◾ YOUR edge
+
+THE JOURNAL REVEALS:
+◾ What setups actually work for you
+◾ When you trade best
+◾ What triggers your mistakes
+◾ Your real win rate and R:R
+
+No course can teach you yourself.
+
+Save this. 🔖
+
+#TradingQuotes #TradingJournal #SelfKnowledge #JournalWins #SignalPilot #CryptoTrading #ForexTrading #TradingWisdom #KnowYourself #TradingEducation #LearnTrading #PersonalizedLearning #TradeJournaling #YourData #TradingTruth
+```
+
+### TWITTER/X — Single Tweet
+```
+"Your trading journal is worth more than any course you'll ever buy."
+
+Courses teach theory.
+Your journal teaches YOU.
+
+It shows your patterns.
+Your mistakes.
+Your edge.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 229 | EDU: ICT Market Structure Shift
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Market Structure Shift (MSS) 📊
+
+WHAT IS MSS?
+The first break of established market structure
+
+IN AN UPTREND:
+◾ Price making HH and HL
+◾ Then breaks BELOW a higher low
+◾ That's the shift
+◾ Trend character changed
+
+IN A DOWNTREND:
+◾ Price making LH and LL
+◾ Then breaks ABOVE a lower high
+◾ That's the shift
+◾ Trend character changed
+
+WHAT IT MEANS:
+◾ NOT confirmed reversal
+◾ First warning sign
+◾ Structure damaged
+◾ Watch for continuation or reversal
+
+MSS = Change of character
+
+Full lesson in bio 🔗
+
+#MarketStructureShift #MSS #StructureShift #TrendChange #SignalPilot #CryptoTrading #ForexTrading #TradingEducation #ChangeOfCharacter #SMC #LearnTrading #ICTConcepts #TrendReversal #StructureBreak #FirstWarning
+```
+
+### TWITTER/X — Single Tweet
+```
+Market Structure Shift (MSS): When the trend changes character.
+
+Uptrend making HH/HL → Breaks below a HL
+That's a shift.
+
+First sign the trend may be changing.
+Not reversal confirmed. Shift observed.
+```
+
+---
+
+## 🔵 TEAL | POST 183 | Blog: The Importance of Screen Time
+
+**Type:** Blog | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+The Importance of Screen Time ⏱️
+
+EDUCATION GIVES YOU:
+◾ Theory
+◾ Concepts
+◾ Frameworks
+◾ Knowledge
+
+SCREEN TIME GIVES YOU:
+◾ Pattern recognition
+◾ Market intuition
+◾ Emotional experience
+◾ Real-time decision making
+
+HOW TO BUILD SCREEN TIME:
+
+◾ REPLAY MODE
+Fast-forward through historical data
+
+◾ PAPER TRADING
+Real-time practice without risk
+
+◾ STUDY SESSIONS
+Review charts daily, even without trading
+
+◾ JOURNALING
+Screenshot and review setups
+
+There are no shortcuts.
+
+Full article in bio 🔗
+
+#ScreenTime #ChartStudy #TradingEducation #PatternRecognition #SignalPilot #CryptoTrading #ForexTrading #TradingJourney #NoShortcuts #TradingIntuition #LearnTrading #PutInTheWork #ChartTime #TradingPractice #10000Hours
+```
+
+### TWITTER/X — Single Tweet
+```
+There's no shortcut to screen time.
+
+You need hours watching charts to:
+◾ Recognize patterns intuitively
+◾ Feel market rhythm
+◾ Build pattern recognition
+
+Education gives you knowledge.
+Screen time gives you intuition.
+```
+
+---
+
+# ROW 72 (Posts 214-216)
+
+## 🟠 ORANGE | POST 235 | Product: Harmonic Oscillator Components
+
+**Type:** Product | **Pillar:** P2: Indicator Truth | **CTA:** Demo
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Harmonic Oscillator: Multiple Components ⚔️
+
+NOT JUST ONE INDICATOR
+Multiple momentum forces combined
+
+WHAT IT MEASURES:
+◾ Multiple timeframe momentum
+◾ Different momentum calculations
+◾ Combined into unified signal
+
+READING THE COMPONENTS:
+
+✅ ALL AGREE
+All components pointing same direction
+Strong conviction
+Higher probability signal
+
+⚠️ COMPONENTS CONFLICT
+Some up, some down
+Mixed signals
+Wait for clarity
+
+THE ARBITER'S WAY:
+Judge all forces before deciding
+Agreement = Action
+Conflict = Patience
+
+Demo in bio 🔗
+
+#HarmonicOscillator #TheArbiter #MultiComponent #MomentumForces #SignalPilot #CryptoTrading #ForexTrading #TradingIndicators #SignalAgreement #TradingClarity #LearnTrading #ComponentAnalysis #MomentumTrading #UnifiedSignal #WaitForClarity
+```
+
+### TWITTER/X — Single Tweet
+```
+Harmonic Oscillator isn't one thing. It's multiple forces combined.
+
+When all components agree = Strong signal
+When components conflict = Wait for clarity
+
+The Arbiter weighs multiple voices before judging.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 232 | EDU: Power of Three (AMD)
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+Power of Three (AMD) 📊
+
+HOW DAILY CANDLES ACTUALLY FORM:
+
+🌙 ACCUMULATION (Asian Session)
+◾ Tight range
+◾ Low volume
+◾ Building positions quietly
+◾ Setting the trap
+
+💥 MANIPULATION (London Open)
+◾ Fake move
+◾ Stops hunted
+◾ Liquidity grabbed
+◾ Wrong direction first
+
+🎯 DISTRIBUTION (NY Session)
+◾ Real move
+◾ True direction revealed
+◾ Profits taken
+◾ Daily range completes
+
+THE PATTERN:
+Accumulate → Manipulate → Distribute
+
+The daily range is engineered, not random.
+
+Full lesson in bio 🔗
+
+#PowerOfThree #AMD #Accumulation #Manipulation #Distribution #SignalPilot #CryptoTrading #ForexTrading #TradingEducation #ICTConcepts #DailyRange #SessionTrading #LearnTrading #MarketEngineering #SmartMoney
+```
+
+### TWITTER/X — Single Tweet
+```
+Power of Three: How daily candles actually form.
+
+1. Accumulation (Asian session)
+2. Manipulation (London open)
+3. Distribution (NY session)
+
+The daily range isn't random. It's engineered.
+```
+
+---
+
+## 🔵 TEAL | POST 187 | Blog: Trading as a Business
+
+**Type:** Blog | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Trading as a Business 💼
+
+HOBBY MINDSET:
+◾ Trade when you feel like it
+◾ No written plan
+◾ Random position sizes
+◾ No review process
+◾ Emotional decisions
+
+BUSINESS MINDSET:
+◾ Trading plan (your business plan)
+◾ Risk management (your insurance)
+◾ Journal (your accounting)
+◾ Reviews (your performance meetings)
+◾ Rules (your operations manual)
+
+BUSINESSES:
+◾ Track expenses (losses)
+◾ Track revenue (wins)
+◾ Calculate ROI
+◾ Improve constantly
+
+Hobbies cost you money.
+Businesses make you money.
+
+Full article in bio 🔗
+
+#TradingBusiness #BusinessMindset #ProfessionalTrading #TradingPlan #SignalPilot #CryptoTrading #ForexTrading #TradingEducation #TreatItSeriously #TradingLikeBusiness #LearnTrading #TradingMindset #TradingCareer #BusinessApproach #ProfitableMindset
+```
+
+### TWITTER/X — Single Tweet
+```
+Treat trading like a business, not a hobby.
+
+Businesses have:
+◾ Written plans
+◾ Risk management
+◾ Performance reviews
+◾ Continuous improvement
+
+Hobbies cost money.
+Businesses make money.
+```
+
+---
+
+# ROW 73 (Posts 217-219)
+
+## 🟠 ORANGE | POST 241 | Marketing: Price Increase Coming
+
+**Type:** Marketing | **Pillar:** P1: Origin Story | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Price Increase Coming ⏰
+
+WHAT'S HAPPENING:
+We're adding more value, so pricing will increase.
+
+WHAT'S BEING ADDED:
+◾ New indicator features
+◾ More education content
+◾ Enhanced support
+◾ Community features
+
+WHAT THIS MEANS FOR YOU:
+
+✅ CURRENT SUBSCRIBERS
+Keep your current rate
+Locked in forever
+Get all new features
+
+⏰ NEW SUBSCRIBERS
+Lock in current pricing NOW
+Before increase takes effect
+
+💡 BEST VALUE
+Lifetime access = Never worry about increases
+
+Don't wait.
+
+Link in bio 🔗
+
+#SignalPilot #PriceIncrease #LockInNow #ActFast #TradingIndicators #TradingView #LastChance #CurrentPricing #MoreValue #TradingTools #Urgency #DontWait #BestDeal #LifetimeAccess #GrandfatheredRate
+```
+
+### TWITTER/X — Single Tweet
+```
+Lock in current pricing before the increase.
+
+More features coming.
+More education added.
+More value delivered.
+
+Current subscribers keep their rate.
+New pricing starts soon.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 236 | EDU: Judas Swing
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+Judas Swing 🗡️
+
+WHAT IS IT?
+A fake move at session open designed to trap traders
+
+HOW IT WORKS:
+
+1️⃣ SESSION OPENS
+Price moves aggressively one direction
+
+2️⃣ TRADERS REACT
+"It's breaking out!"
+Longs/shorts pile in
+
+3️⃣ LIQUIDITY GRABBED
+Stop losses triggered
+Orders filled
+
+4️⃣ REVERSAL
+Price moves the OPPOSITE way
+True direction revealed
+
+WHY "JUDAS"?
+Named after the betrayal
+Price betrays early traders
+
+HOW TO AVOID:
+◾ Don't chase the open
+◾ Wait for manipulation to complete
+◾ Trade the reversal, not the fake
+
+Full lesson in bio 🔗
+
+#JudasSwing #Judas #Manipulation #FakeMove #SignalPilot #CryptoTrading #ForexTrading #TradingEducation #ICTConcepts #StopHunt #LearnTrading #TradingTrap #SessionOpen #BetrayalMove #DontGetTrapped
+```
+
+### TWITTER/X — Single Tweet
+```
+Judas Swing: The betrayal move at session open.
+
+Price fakes one direction to grab liquidity.
+Then reverses to the true direction.
+
+Named after the betrayal.
+Recognize it. Don't be the victim.
+```
+
+---
+
+## 🔵 TEAL | POST 188 | Chronicle: The Scales of Truth
+
+**Type:** Chronicle | **Pillar:** P5: Chronicle | **CTA:** Chronicle
+
+### INSTAGRAM — Single Image (Cinematic)
+
+**Caption:**
+```
+THE SCALES OF TRUTH ⚖️
+
+"Numbers don't lie. Emotions do."
+
+THE SCALES' WISDOM:
+
+📊 WHAT FLOW SHOWS:
+◾ Where money actually moves
+◾ Accumulation beneath surface
+◾ Distribution despite rallies
+◾ The data, unbiased
+
+😤 WHAT EMOTIONS SHOW:
+◾ What you want to see
+◾ Confirmation bias
+◾ Fear and greed
+◾ Clouded judgment
+
+THE LESSON:
+When your feelings say one thing and flow says another...
+
+Trust the data.
+
+Read the full chronicle in bio 🔗
+
+#TheScales #PlutusFlow #SignalPilot #Chronicle #TruthInData #TradingLore #SignalPilotChronicle #NumbersDontLie #TradingWisdom #TradingMythology #DataVsEmotions #TrustTheData #FlowAnalysis #BiasAwareness #ObjectiveTrading
+```
+
+### TWITTER/X — Single Tweet
+```
+"Numbers don't lie. Emotions do."
+— The Scales
+
+Plutus Flow weighs the evidence.
+Flow reveals what feelings hide.
+
+Trust the data. Question your bias.
+```
+
+---
+
+# ROW 74 (Posts 220-222)
+
+## 🟠 ORANGE | POST 244 | Quote: Process Over Outcome
+
+**Type:** Quote | **Pillar:** P4: Psychology | **CTA:** Save
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+🧠 RESULTS LIE. PROCESS DOESN'T.
+
+"A good trade can lose money.
+A bad trade can make money.
+
+Judge the process, not the outcome."
+
+✦ Did you follow your rules?
+✦ Was the setup valid?
+✦ Did you manage risk properly?
+
+If yes → good trade (regardless of P/L)
+
+If no → bad trade (even if profitable)
+
+Outcome-based thinking leads to:
+❌ Abandoning working strategies
+❌ Doubling down on bad habits
+❌ Emotional decision-making
+
+Process-based thinking leads to:
+✅ Consistency
+✅ Improvement
+✅ Long-term edge
+
+Focus on what you can control.
+
+Save this. Share with a trader who needs it.
+
+#TradingMindset #ProcessOverOutcome #TradingWisdom #SignalPilot #TradingPsychology #TraderLife #TradingEducation #Forex #Crypto #StockTrader #DayTrading #SwingTrading #TradingTips #RiskManagement #TradingCommunity #LearnTrading #TradingJourney #Discipline #Consistency #MentalGame
+```
+
+### TWITTER/X — Single Tweet
+```
+"A good trade can lose money.
+A bad trade can make money.
+
+Judge the process, not the outcome."
+
+— Signal Pilot philosophy
+```
+
+---
+
+## ⚪ NEUTRAL | POST 239 | EDU: Optimal Trade Management
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Optimal Trade Management 📊
+
+ENTRY IS 10%. MANAGEMENT IS 90%.
+
+THE OPTIMAL FLOW:
+
+1️⃣ ENTRY
+Full position at planned entry
+Stop at invalidation
+
+2️⃣ AT 1R PROFIT
+Move stop to break-even
+Risk eliminated
+
+3️⃣ AT 2R PROFIT
+Take 50% partial
+Lock in gains
+
+4️⃣ TRAIL REMAINDER
+Move stop behind structure
+Let it breathe
+
+5️⃣ EXTENDED TARGET OR TRAIL OUT
+Take at 3R+ or trail until stopped
+
+THE GOAL:
+◾ Eliminate risk early
+◾ Lock in gains progressively
+◾ Let winners run
+◾ Never give back all profit
+
+Full lesson in bio 🔗
+
+#TradeManagement #OptimalManagement #TakeProfits #TrailingStop #SignalPilot #CryptoTrading #ForexTrading #TradingEducation #ManageYourTrade #ProfitManagement #LearnTrading #TradingFlow #LockInGains #RiskFreeTrading #TradeOptimization
+```
+
+### TWITTER/X — Single Tweet
+```
+Optimal trade management:
+
+1. Move stop to break-even at 1R
+2. Take partials at 2R
+3. Trail remainder
+4. Let runners run
+
+Entering is easy. Managing is where profits are made.
+```
+
+---
+
+## 🔵 TEAL | POST 190 | Docs: FAQ - Common Questions
+
+**Type:** Docs | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Signal Pilot FAQ 💬
+
+Q: DO INDICATORS REPAINT?
+A: Never. All 7 are non-repainting. Guaranteed.
+
+Q: WHICH INDICATOR SHOULD I START WITH?
+A: Pentarch (cycles) or Volume Oracle (regimes)
+
+Q: CAN I USE ON ANY ASSET?
+A: Yes! Crypto, forex, stocks, commodities.
+
+Q: DO I NEED ALL 7 INDICATORS?
+A: No. Start with 1-2. Add as you learn.
+
+Q: IS THE EDUCATION REALLY FREE?
+A: Yes. All 82 lessons. No paywall.
+
+Q: WHAT IF IT'S NOT FOR ME?
+A: 7-day money-back guarantee. No questions.
+
+More questions? Check full FAQ.
+
+Link in bio 🔗
+
+#SignalPilot #FAQ #CommonQuestions #TradingIndicators #TradingView #Answers #GettingStarted #TradingHelp #TradingDocs #NewUserGuide #QuestionsAnswered #TradingSupport #HelpCenter #LearnMore #QuickAnswers
+```
+
+### TWITTER/X — Single Tweet
+```
+Common Signal Pilot questions:
+
+Q: Do indicators repaint?
+A: Never. Guaranteed.
+
+Q: Which indicator first?
+A: Pentarch or Volume Oracle
+
+Q: Can I use on any asset?
+A: Yes. Crypto, forex, stocks.
+
+More FAQs in docs.
+```
+
+---
+
+# ROW 75 (Posts 223-225)
+
+## 🟠 ORANGE | POST 245 | Product: Volume Oracle Regime Transitions
+
+**Type:** Product | **Pillar:** P2: Indicator Truth | **CTA:** Demo
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+🔮 VOLUME ORACLE: READING MARKET REGIMES
+
+📈 TRENDING REGIME
+→ Sustained directional volume
+→ Background shifts to trend color
+→ Follow the flow
+
+↔️ RANGING REGIME
+→ Balanced, lower conviction
+→ Different visual state
+→ Wait for clarity
+
+💥 BREAKOUT REGIME
+→ Volume expansion signals
+→ Potential regime change
+→ Prepare for movement
+
+Why it matters:
+✦ Strategies behave differently per regime
+✦ Context changes everything
+✦ Visual regime awareness
+
+One indicator. Market character at a glance.
+
+See it in action 🔗 Link in bio
+
+⚠️ Educational demo. Not financial advice.
+
+#VolumeOracle #SignalPilot #TradingView #VolumeAnalysis #MarketRegimes #TechnicalAnalysis #TradingIndicators #Forex #Crypto #DayTrading #SwingTrading #ChartAnalysis #TradingTools #TradingEducation #LearnTrading #CryptoTrading #ForexTrading #TradingCommunity #MarketAnalysis #PriceAction
+```
+
+### TWITTER/X — Single Tweet
+```
+Volume Oracle doesn't just show volume—it classifies market regimes.
+
+Trending → Ranging → Breakout
+
+Watch how the background color shifts as market character changes. One indicator, three contexts.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 242 | EDU: Session Timing & Institutional Flow
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+🌍 THE 24-HOUR MARKET ISN'T EQUAL
+
+🇬🇧 LONDON OPEN
+→ Often associated with range expansion
+→ Historically higher volatility
+→ Major institutional activity
+
+🇺🇸 NY OVERLAP
+→ Peak liquidity window
+→ Where London meets New York
+→ Maximum market participation
+
+🌏 ASIA SESSION
+→ Often consolidation
+→ Range-building behavior
+→ Lower volatility periods
+
+Understanding session characteristics helps you:
+✦ Contextualize volume spikes
+✦ Recognize ranging vs trending hours
+✦ Plan observation windows
+
+Not a guarantee—markets do what they want.
+But historical tendencies exist.
+
+Free lesson in our Education Hub 📚
+Link in bio 🔗
+
+⚠️ Educational content only. Not financial advice.
+
+#TradingEducation #SessionTiming #LondonSession #NewYorkSession #AsiaSession #Liquidity #InstitutionalTrading #SignalPilot #TradingView #Forex #Crypto #DayTrading #SwingTrading #MarketStructure #TradingTips #LearnToTrade #TradingCommunity #ChartAnalysis #VolumeAnalysis #TechnicalAnalysis
+```
+
+### TWITTER/X — Single Tweet
+```
+London open. New York overlap. Asia close.
+
+Each session carries different liquidity profiles. Understanding when institutions typically engage may help contextualize volume spikes and range expansion.
+
+Timing isn't everything—but it's not nothing either.
+```
+
+---
+
+## 🔵 TEAL | POST 193 | Blog: The Power of Saying No
+
+**Type:** Blog | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+The Power of Saying NO 🚫
+
+BEST TRADERS SAY NO TO:
+
+❌ MEDIOCRE SETUPS
+"It's not perfect but maybe..."
+NO. Wait for your setup.
+
+❌ EMOTIONAL TRADES
+"I need to make back that loss"
+NO. Step away.
+
+❌ OVERSIZING
+"I'm confident, let me go bigger"
+NO. Stick to your rules.
+
+❌ FOMO
+"It's pumping, I have to get in"
+NO. Let it go.
+
+❌ TRADING WHEN TIRED
+"One more trade before bed"
+NO. Rest.
+
+Every NO protects capital for the right YES.
+
+Full article in bio 🔗
+
+#SayNo #TradingDiscipline #ProtectYourCapital #TradingPsychology #SignalPilot #CryptoTrading #ForexTrading #TradingEducation #SelectiveTrading #NoMeansMoney #LearnTrading #TradingMindset #WaitForSetup #DisciplinePays #TradingWisdom
+```
+
+### TWITTER/X — Single Tweet
+```
+The best traders say NO more than YES.
+
+No to mediocre setups.
+No to emotional trades.
+No to oversizing.
+No to FOMO.
+
+Every NO protects your capital for the right YES.
+```
+
+---
+
+# ROW 76 (Posts 226-228)
+
+## 🟠 ORANGE | POST 251 | Marketing: Join the Community
+
+**Type:** Marketing | **Pillar:** P1: Origin Story | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+👥 YOU DON'T HAVE TO TRADE ALONE
+
+Join the Signal Pilot community:
+
+💬 DAILY DISCUSSIONS
+→ Market analysis conversations
+→ Educational setup sharing
+→ Multiple asset classes
+
+🛠️ DIRECT DEVELOPER ACCESS
+→ Feature requests heard
+→ Bug reports addressed
+→ Continuous improvement
+
+🎓 LEARNING TOGETHER
+→ Questions welcomed
+→ No judgment zone
+→ Grow with others
+
+10,000+ traders. One community.
+
+Free to join 🔗 Link in bio
+
+See you inside 👋
+
+#SignalPilot #TradingCommunity #TradersOfInstagram #Discord #Forex #Crypto #DayTrading #SwingTrading #TradingEducation #LearnToTrade #TradingLife #CryptoTrading #ForexTrading #StockTrading #TradingView #TraderLife #CommunityFirst #TradeTogether #TradingSupport #JoinUs
+```
+
+### TWITTER/X — Single Tweet
+```
+Trading doesn't have to be lonely.
+
+Join 10,000+ traders in the Signal Pilot community:
+→ Daily analysis discussions
+→ Setup sharing (educational)
+→ Direct access to developers
+
+Free to join. Link in bio.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 246 | EDU: Fair Value Gaps
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+📊 FAIR VALUE GAPS EXPLAINED
+
+When price moves aggressively, it sometimes leaves "gaps" in the auction:
+✦ No overlap between candles
+✦ Imbalanced price action
+✦ Potential revisit zones
+
+🧲 MAGNET THEORY
+→ Price often returns to fill imbalances
+→ Not guaranteed, but historically common
+
+📍 CONTEXT ZONES
+→ Helps identify potential support/resistance
+→ Adds confluence to analysis
+
+⚡ MOMENTUM CLUES
+→ Large FVGs may indicate strong conviction
+→ Small FVGs in ranges = less significant
+
+FVGs are one piece of the puzzle.
+Use with other confluence.
+
+Full lesson free 🎓
+Link in bio 🔗
+
+⚠️ Educational only. Not financial advice.
+
+#FairValueGap #FVG #SmartMoney #ICTConcepts #SignalPilot #TradingEducation #TechnicalAnalysis #PriceAction #Forex #Crypto #DayTrading #SwingTrading #ChartPatterns #TradingView #MarketStructure #LiquidityZones #TradingTips #LearnTrading #TradingCommunity #OrderFlow
+```
+
+### TWITTER/X — Single Tweet
+```
+Fair Value Gaps: where price moved so fast, it left imbalance behind.
+
+These gaps often act as magnets—price tends to revisit them. Not always, but often enough to study.
+
+Understanding FVGs adds context to retracement behavior.
+```
+
+---
+
+## 🔵 TEAL | POST 197 | Blog: When to Stop Trading
+
+**Type:** Blog | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+When to Stop Trading 🛑
+
+STOP WHEN:
+
+🛑 HIT DAILY LOSS LIMIT
+Pre-defined max loss reached
+No more trades today
+
+🛑 FEELING EMOTIONAL
+Angry, frustrated, fearful
+Step away, clear your head
+
+🛑 BREAKING YOUR RULES
+Caught yourself improvising
+Stop before it gets worse
+
+🛑 ON A LOSING STREAK
+3+ losses in a row
+Take a break, review
+
+🛑 MARKET IS UNCLEAR
+No clear trend or range
+Wait for clarity
+
+🛑 FATIGUED
+Tired, distracted
+Rest is productive
+
+Stopping is not quitting. It's surviving.
+
+Full article in bio 🔗
+
+#WhenToStop #StopTrading #TradingDiscipline #CircuitBreakers #SignalPilot #CryptoTrading #ForexTrading #TradingPsychology #DailyLossLimit #TradingRules #LearnTrading #TradingSurvival #KnowWhenToStop #ProtectYourself #TradingBreak
+```
+
+### TWITTER/X — Single Tweet
+```
+Knowing when to stop is as important as knowing when to trade.
+
+Stop when:
+◾ Hit daily loss limit
+◾ Feeling emotional
+◾ Breaking rules
+◾ Market is unclear
+
+Live to trade another day.
+```
+
+---
+
+# ROW 77 (Posts 229-231)
+
+## 🟠 ORANGE | POST 254 | Quote: Risk First
+
+**Type:** Quote | **Pillar:** P4: Psychology | **CTA:** Save
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+🛡️ THE QUESTION THAT SEPARATES AMATEURS FROM PROS
+
+"Amateur traders ask: 'How much can I make?'
+
+Professional traders ask: 'How much can I lose?'"
+
+The difference:
+
+❌ AMATEUR MINDSET
+→ Focused on potential gains
+→ Ignores downside
+→ Position size based on greed
+
+✅ PROFESSIONAL MINDSET
+→ Focused on risk first
+→ Defines max loss before entry
+→ Position size based on risk tolerance
+
+Risk management isn't the boring part of trading.
+
+It's the part that keeps you in the game.
+
+Save this reminder 📌
+
+#RiskManagement #TradingWisdom #SignalPilot #TradingMindset #TradingPsychology #TraderLife #TradingEducation #Forex #Crypto #StockTrader #DayTrading #SwingTrading #TradingTips #CapitalPreservation #TradingCommunity #LearnTrading #TradingJourney #Discipline #ProfessionalTrader #RiskReward
+```
+
+### TWITTER/X — Single Tweet
+```
+"Amateur traders ask: 'How much can I make?'
+
+Professional traders ask: 'How much can I lose?'"
+
+Risk management isn't boring. It's survival.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 249 | EDU: Liquidity Pools
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+💧 LIQUIDITY POOLS EXPLAINED
+
+📍 ABOVE SWING HIGHS
+→ Breakout traders' stops
+→ Short sellers' stops
+→ Clustering zone
+
+📍 BELOW SWING LOWS
+→ Long position stops
+→ Breakdown traders' entries
+→ Another cluster zone
+
+📍 ROUND NUMBERS
+→ Psychological levels
+→ Common stop placement
+→ Obvious targets
+
+Why this matters:
+✦ Price often seeks liquidity
+✦ "Stop hunts" target these zones
+✦ Understanding adds context
+
+This doesn't mean fade every sweep.
+It means understand WHY price moves to certain areas.
+
+Free lesson 🎓 Link in bio
+
+⚠️ Educational only. Not financial advice.
+
+#Liquidity #LiquidityPools #SmartMoney #SignalPilot #TradingEducation #StopHunt #ICTConcepts #Forex #Crypto #DayTrading #SwingTrading #PriceAction #MarketStructure #TechnicalAnalysis #TradingView #OrderFlow #TradingTips #LearnTrading #TradingCommunity #MarketMakers
+```
+
+### TWITTER/X — Single Tweet
+```
+Liquidity pools: areas where stop losses tend to cluster.
+
+Above swing highs. Below swing lows. Around round numbers.
+
+Price often gravitates toward liquidity before reversing. Understanding this concept adds depth to structure analysis.
+```
+
+---
+
+## 🔵 TEAL | POST 198 | Chronicle: The Watchman's Vigil
+
+**Type:** Chronicle | **Pillar:** P5: Chronicle | **CTA:** Chronicle
+
+### INSTAGRAM — Single Image (Cinematic)
+
+**Caption:**
+```
+THE WATCHMAN'S VIGIL 👁️
+
+"Sleep if you must. I never will."
+
+THE WATCHMAN'S DUTY:
+
+🌙 WHILE YOU SLEEP
+Scanning markets across timezones
+
+💼 WHILE YOU WORK
+Monitoring your watchlist
+
+🏃 WHILE YOU LIVE
+Alert when setups form
+
+THE GIFT:
+◾ Never miss opportunities
+◾ Don't need to stare at screens
+◾ Get notified, then act
+◾ Trade with freedom
+
+You can't watch everything.
+The Watchman can.
+
+Read the full chronicle in bio 🔗
+
+#TheWatchman #AuguryGrid #SignalPilot #Chronicle #NeverSleeps #TradingLore #SignalPilotChronicle #Vigilance #AlwaysWatching #TradingMythology #MarketScanner #TradingFreedom #AlertsWork #TradingAssistant #VigilantTrading
+```
+
+### TWITTER/X — Single Tweet
+```
+"Sleep if you must. I never will."
+— The Watchman
+
+Augury Grid scans while you rest.
+Monitors while you work.
+Alerts when opportunities arise.
+
+The Watchman never sleeps.
+```
+
+---
+
+# ROW 78 (Posts 232-234)
+
+## 🟠 ORANGE | POST 255 | Product: Janus Atlas Multi-Timeframe
+
+**Type:** Product | **Pillar:** P2: Indicator Truth | **CTA:** Demo
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+🗺️ JANUS ATLAS: SEE ALL TIMEFRAMES AT ONCE
+
+The problem with multi-timeframe analysis:
+→ Constantly switching charts
+→ Forgetting where higher TF levels are
+→ Missing confluence
+
+✦ WEEKLY LEVELS
+→ Visible on your daily chart
+→ Major structure always in view
+
+✦ DAILY LEVELS
+→ Visible on your hourly chart
+→ Context without switching
+
+✦ COLOR-CODED
+→ Each timeframe distinct
+→ Instant visual hierarchy
+
+Multi-timeframe confluence, one chart.
+
+See it in action 🔗 Link in bio
+
+⚠️ Educational demo. Not financial advice.
+
+#JanusAtlas #SignalPilot #TradingView #MultiTimeframe #SupportResistance #TechnicalAnalysis #TradingIndicators #Forex #Crypto #DayTrading #SwingTrading #ChartAnalysis #TradingTools #PriceAction #MarketStructure #TradingEducation #LearnTrading #TradingCommunity #ChartPatterns #Confluence
+```
+
+### TWITTER/X — Single Tweet
+```
+One chart. Multiple timeframe levels.
+
+Janus Atlas maps support and resistance from higher timeframes onto your current view. See where the weekly level sits while trading the hourly.
+
+Confluence made visual.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 252 | EDU: Order Blocks
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+🧱 ORDER BLOCKS EXPLAINED
+
+What is an order block?
+→ The last candle before an impulsive move
+→ Often represents institutional accumulation/distribution
+→ Can act as future support/resistance
+
+📈 BULLISH ORDER BLOCK
+→ Last down candle before up move
+→ Potential support on retest
+→ Institutions may have accumulated here
+
+📉 BEARISH ORDER BLOCK
+→ Last up candle before down move
+→ Potential resistance on retest
+→ Institutions may have distributed here
+
+Why traders study them:
+✦ Identifies potential reaction zones
+✦ Adds confluence to analysis
+✦ Context for entries and exits
+
+Order blocks aren't guaranteed levels—they're areas of interest based on past institutional activity.
+
+Free lesson 🎓 Link in bio
+
+⚠️ Educational only. Not financial advice.
+
+#OrderBlocks #SmartMoney #ICTConcepts #SignalPilot #TradingEducation #TechnicalAnalysis #PriceAction #Forex #Crypto #DayTrading #SwingTrading #MarketStructure #TradingView #SupplyAndDemand #TradingTips #LearnTrading #TradingCommunity #InstitutionalTrading #OrderFlow #ChartAnalysis
+```
+
+### TWITTER/X — Single Tweet
+```
+Order blocks: the last candle before an impulsive move.
+
+These zones often represent where institutions accumulated or distributed. When price returns, it sometimes finds support or resistance there.
+
+Not magic. Just structure.
+```
+
+---
+
+## 🔵 TEAL | POST 200 | Docs: Best Practices Guide
+
+**Type:** Docs | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Signal Pilot Best Practices ✅
+
+FOR MAXIMUM RESULTS:
+
+✅ START WITH ONE INDICATOR
+Master Pentarch OR Volume Oracle first
+Don't overwhelm yourself
+
+✅ COMPLETE THE LESSONS
+82 free lessons exist for a reason
+Build your foundation
+
+✅ PAPER TRADE FIRST
+Test before risking capital
+Build confidence
+
+✅ JOURNAL OBSERVATIONS
+Note what you see
+Track what works
+
+✅ ADD GRADUALLY
+One indicator at a time
+Build layered understanding
+
+✅ JOIN THE COMMUNITY
+Learn from others
+Share your insights
+
+Mastery takes time. These practices accelerate it.
+
+Full guide in bio 🔗
+
+#SignalPilot #BestPractices #TradingTips #TradingGuide #TradingView #StartRight #TradingEducation #MasteryPath #TradingProcess #LearnTrading #TradingDocs #DoItRight #TradingSuccess #GuidedLearning #BestWayToLearn
+```
+
+### TWITTER/X — Single Tweet
+```
+Signal Pilot best practices:
+
+✅ Start with one indicator
+✅ Complete the lessons
+✅ Paper trade first
+✅ Journal your observations
+✅ Add indicators gradually
+
+Slow and steady builds mastery.
+```
+
+---
+
+# ROW 79 (Posts 235-237)
+
+## 🟠 ORANGE | POST 261 | Marketing: Testimonial Feature
+
+**Type:** Marketing | **Pillar:** P1: Origin Story | **CTA:** Trial
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+💬 FROM THE COMMUNITY
+
+"Signal Pilot changed how I see the market.
+
+The indicators don't tell me what to do—they show me what's happening.
+
+That shift in perspective was everything.
+
+I stopped looking for signals. Started looking for context. The results followed."
+
+— Signal Pilot community member
+
+✦ 82 free lessons
+✦ 7 professional indicators
+✦ Active community
+
+Join thousands of traders who've made the shift.
+
+Link in bio 🔗
+
+⚠️ Individual results vary. Not financial advice.
+
+#SignalPilot #Testimonial #TradingCommunity #TradingView #Forex #Crypto #DayTrading #SwingTrading #TradingEducation #TradingIndicators #TradingJourney #TraderLife #TradingResults #CommunityLove #LearnTrading #TradingTools #TechnicalAnalysis #CryptoTrading #ForexTrading #TradingSuccess
+```
+
+### TWITTER/X — Single Tweet
+```
+"Signal Pilot changed how I see the market. The indicators don't tell me what to do—they show me what's happening. That shift in perspective was everything."
+
+— Community member
+```
+
+---
+
+## ⚪ NEUTRAL | POST 256 | EDU: Breaker Blocks
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+🔄 BREAKER BLOCKS EXPLAINED
+
+📍 BULLISH ORDER BLOCK FAILS
+→ Price breaks below it
+→ Becomes potential resistance
+→ "Breaker block" formed
+
+📍 BEARISH ORDER BLOCK FAILS
+→ Price breaks above it
+→ Becomes potential support
+→ Role reversal complete
+
+Why this matters:
+✦ Previous support → new resistance
+✦ Previous resistance → new support
+✦ Context for reversals
+
+The concept:
+If institutions were wrong at a level, that level may now trap them. Price returning there could see the opposite reaction.
+
+Breaker blocks aren't guaranteed—they're areas of interest based on failed order block theory.
+
+Free lesson 🎓 Link in bio
+
+⚠️ Educational only. Not financial advice.
+
+#BreakerBlocks #OrderBlocks #SmartMoney #ICTConcepts #SignalPilot #TradingEducation #TechnicalAnalysis #PriceAction #Forex #Crypto #DayTrading #SwingTrading #MarketStructure #SupportResistance #TradingView #TradingTips #LearnTrading #TradingCommunity #InstitutionalTrading #ChartAnalysis
+```
+
+### TWITTER/X — Single Tweet
+```
+What happens when an order block fails?
+
+It becomes a breaker block—previous support turns resistance, or vice versa.
+
+Understanding this flip helps contextualize why price reverses at certain levels.
+```
+
+---
+
+## 🔵 TEAL | POST 203 | Blog: Trader's Morning Routine
+
+**Type:** Blog | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+The Trader's Morning Routine ☀️
+
+BEFORE THE SESSION:
+
+☐ REVIEW OVERNIGHT ACTION (5 min)
+What happened while you slept?
+Any gaps? Major moves?
+
+☐ MARK KEY LEVELS (10 min)
+Update support/resistance
+Note where price sits relative to them
+
+☐ CHECK ECONOMIC CALENDAR (5 min)
+Any high-impact news today?
+Avoid trading during releases
+
+☐ REVIEW WATCHLIST (10 min)
+Which assets have setups forming?
+Prioritize top 3-5
+
+☐ SET ALERTS (5 min)
+Let the chart come to you
+No need to stare
+
+☐ MENTAL CHECK (5 min)
+How do I feel?
+Am I ready to trade?
+
+Full routine in bio 🔗
+
+#MorningRoutine #TradingRoutine #PreMarket #TradingHabits #SignalPilot #CryptoTrading #ForexTrading #TradingEducation #StartRight #DailyPrep #LearnTrading #TradingProcess #MorningPrep #PreparedTrader #TradingChecklist
+```
+
+### TWITTER/X — Single Tweet
+```
+How you start determines how you trade.
+
+Morning routine:
+◾ Review overnight action
+◾ Mark key levels
+◾ Check economic calendar
+◾ Review watchlist
+◾ Set alerts
+
+Prepared traders perform better.
+```
+
+---
+
+# ROW 80 (Posts 238-240)
+
+## 🟠 ORANGE | POST 264 | Quote: Survive First
+
+**Type:** Quote | **Pillar:** P4: Psychology | **CTA:** Save
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+🛡️ THE FIRST RULE OF TRADING
+
+"Rule #1: Don't lose money.
+Rule #2: Don't forget rule #1."
+
+It sounds simple. It's not.
+
+Every blown account started with:
+❌ "Just this once"
+❌ "I'll make it back"
+❌ "It's definitely going to reverse"
+
+Survival means:
+✅ Position sizing that doesn't hurt
+✅ Stop losses that you actually honor
+✅ Living to trade another day
+
+You can't compound gains from zero.
+
+You can't learn from the sidelines.
+
+Stay in the game. The opportunities will come.
+
+Save this reminder 📌
+
+#RiskManagement #TradingWisdom #SignalPilot #TradingRules #Survival #TradingPsychology #TraderLife #TradingEducation #Forex #Crypto #StockTrader #DayTrading #SwingTrading #CapitalPreservation #TradingTips #TradingCommunity #Discipline #TradingMindset #LearnTrading #ProtectYourCapital
+```
+
+### TWITTER/X — Single Tweet
+```
+"Rule #1: Don't lose money.
+Rule #2: Don't forget rule #1."
+
+Survival isn't glamorous. But you can't compound gains from the sidelines.
+
+Stay in the game.
+```
+
+---
+
+## ⚪ NEUTRAL | POST 259 | EDU: Mitigation Blocks
+
+**Type:** EDU | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+🧩 MITIGATION BLOCKS EXPLAINED
+
+What are unfilled orders?
+When price moves aggressively, not all orders get filled. Some institutions may have orders left behind.
+
+📍 MITIGATION CONCEPT
+→ Price returns to fill unfilled orders
+→ Zone acts as support/resistance
+→ "Mitigation" of incomplete positions
+
+How to identify:
+✦ Strong move from a zone
+✦ Price returns to same area
+✦ Reaction suggests order filling
+
+Why it matters:
+→ Adds context to retracements
+→ Explains "random" reversals
+→ Another layer of structure analysis
+
+Mitigation blocks aren't guaranteed—they're areas of interest based on order flow theory.
+
+Free lesson 🎓 Link in bio
+
+⚠️ Educational only. Not financial advice.
+
+#MitigationBlocks #SmartMoney #ICTConcepts #SignalPilot #TradingEducation #TechnicalAnalysis #PriceAction #Forex #Crypto #DayTrading #SwingTrading #OrderFlow #MarketStructure #TradingView #TradingTips #LearnTrading #TradingCommunity #InstitutionalTrading #SupplyDemand #ChartAnalysis
+```
+
+### TWITTER/X — Single Tweet
+```
+Mitigation blocks: where unfilled orders may still wait.
+
+When price moves aggressively from a zone without full participation, it sometimes returns to "mitigate" those unfilled orders.
+
+Another piece of the smart money puzzle.
+```
+
+---
+
+## 🔵 TEAL | POST 207 | Blog: Avoiding Tilt
+
+**Type:** Blog | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Avoiding Tilt 🎰
+
+WHAT IS TILT?
+Emotional state where logic is overridden
+Borrowed from poker. Deadly in trading.
+
+WARNING SIGNS:
+
+🚨 INCREASING SIZE
+"I need to make it back"
+
+🚨 BREAKING RULES
+"Just this once"
+
+🚨 REVENGE TRADING
+"The market owes me"
+
+🚨 CAN'T WALK AWAY
+"One more trade"
+
+🚨 PHYSICAL SIGNS
+Racing heart, sweating, anger
+
+WHAT TO DO:
+1. Recognize the signs
+2. STOP immediately
+3. Close the platform
+4. Walk away
+5. Return tomorrow
+
+Full article in bio 🔗
+
+#Tilt #TradingTilt #EmotionalTrading #TradingPsychology #SignalPilot #CryptoTrading #ForexTrading #TradingDiscipline #RevengeTrading #StopTrading #LearnTrading #TradingMistakes #RecognizeTilt #WalkAway #TradingControl
+```
+
+### TWITTER/X — Single Tweet
+```
+Tilt: When emotions override your system.
+
+Signs you're tilting:
+◾ Increasing size after losses
+◾ Breaking your rules
+◾ Trading for revenge
+◾ Can't walk away
+
+Recognize tilt. Stop immediately. Return tomorrow.
+```
+
+---
+
+# TO BE CONTINUED... (Rows 81-99 for Part 1)
 
 > **Part 1 covers Posts 1-325 organized by ROW (posting order).**
 > **Each post clearly shows: 🟠 ORANGE, ⚪ NEUTRAL, or 🔵 TEAL**
@@ -11407,7 +12986,7 @@ Because better traders = better community.
 
 ---
 
-# ROWS SUMMARY (Rows 1-70)
+# ROWS SUMMARY (Rows 1-80)
 
 | Row | Post Orders | Orange Post | Neutral Post | Teal Post | Status |
 |-----|-------------|-------------|--------------|-----------|--------|
@@ -11481,17 +13060,27 @@ Because better traders = better community.
 | 68 | 202-204 | 224 Quote | 219 EDU | 178 Chronicle | 📋 Pending |
 | 69 | 205-207 | 225 Product | 222 EDU | 180 Docs | 📋 Pending |
 | 70 | 208-210 | 231 Marketing | 226 EDU | 181 Docs | 📋 Pending |
-| 71+ | 211+ | ... | ... | ... | 📋 Pending |
+| 71 | 211-213 | 234 Quote | 229 EDU | 183 Blog | 📋 Pending |
+| 72 | 214-216 | 235 Product | 232 EDU | 187 Blog | 📋 Pending |
+| 73 | 217-219 | 241 Marketing | 236 EDU | 188 Chronicle | 📋 Pending |
+| 74 | 220-222 | 244 Quote | 239 EDU | 190 Docs | 📋 Pending |
+| 75 | 223-225 | 245 Product | 242 EDU | 193 Blog | 📋 Pending |
+| 76 | 226-228 | 251 Marketing | 246 EDU | 197 Blog | 📋 Pending |
+| 77 | 229-231 | 254 Quote | 249 EDU | 198 Chronicle | 📋 Pending |
+| 78 | 232-234 | 255 Product | 252 EDU | 200 Docs | 📋 Pending |
+| 79 | 235-237 | 261 Marketing | 256 EDU | 203 Blog | 📋 Pending |
+| 80 | 238-240 | 264 Quote | 259 EDU | 207 Blog | 📋 Pending |
+| 81+ | 241+ | ... | ... | ... | 📋 Pending |
 
 ---
 
 # CONTENT INCLUDED IN THIS FILE
 
-**Total Rows:** 70 (210 posts by posting order)
-**Total Posts with Full Content:** ~210 unique posts
+**Total Rows:** 80 (240 posts by posting order)
+**Total Posts with Full Content:** ~240 unique posts
 
 **Status Breakdown:**
 - ✅ Posted: Rows 1-9 (27 posts)
 - ⏳ In Canva: Rows 10-12 (9 posts)
-- 📋 Pending: Rows 13-70 (174 posts)
-- 📋 Remaining: Rows 71-108 to be added
+- 📋 Pending: Rows 13-80 (204 posts)
+- 📋 Remaining: Rows 81-99 to be added (Part 1 ends at Row 99)
