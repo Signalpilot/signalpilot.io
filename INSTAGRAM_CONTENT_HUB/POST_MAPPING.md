@@ -3,6 +3,78 @@
 
 ---
 
+# ⚠️ CRITICAL: POSTING ORDER (READ FIRST!)
+
+**Instagram grids fill RIGHT-TO-LEFT.** Newest post = TOP LEFT.
+
+## To get Teal-Neutral-Orange columns, POST IN THIS ORDER:
+
+| Step | Post # | Type | Column | Color |
+|------|--------|------|--------|-------|
+| **1st** | 003 | QUOTE | Right | Orange |
+| **2nd** | 002 | EDU | Center | Neutral |
+| **3rd** | 001 | BLOG | Left | Teal |
+| **4th** | 006 | PRODUCT | Right | Orange |
+| **5th** | 005 | EDU | Center | Neutral |
+| **6th** | 004 | CHRONICLE | Left | Teal |
+| **7th** | 009 | MARKETING | Right | Orange |
+| **8th** | 008 | EDU | Center | Neutral |
+| **9th** | 007 | DOCS | Left | Teal |
+
+**PATTERN: For each row, post ORANGE → NEUTRAL → TEAL (003→002→001, 006→005→004, etc.)**
+
+## Quick Reference - First 45 Posts in POSTING ORDER:
+
+| Post Order | Post # | Type | Topic |
+|------------|--------|------|-------|
+| 1 | 003 | Quote | "The Edge" |
+| 2 | 002 | EDU | The Liquidity Lie |
+| 3 | 001 | Blog | Why Markets Move in Cycles |
+| 4 | 006 | Product | Pentarch TD Signal |
+| 5 | 005 | EDU | Volume Doesn't Lie |
+| 6 | 004 | Chronicle | Meet The Sovereign |
+| 7 | 009 | Marketing | 82 Lessons, 7 Indicators |
+| 8 | 008 | EDU | The Repainting Problem |
+| 9 | 007 | Docs | Pentarch Cheatsheet |
+| 10 | 012 | Quote | "Stop Chasing Signals" |
+| 11 | 011 | EDU | Price Action Is Dead |
+| 12 | 010 | Blog | How Smart Money Moves |
+| 13 | 015 | Product | Volume Oracle Dashboard |
+| 14 | 014 | EDU | Stop Hunting Deep Dive |
+| 15 | 013 | Chronicle | The Prophet |
+| 16 | 018 | Marketing | 7-Day Money Back |
+| 17 | 017 | EDU | Delta Analysis |
+| 18 | 016 | Docs | Quick Start Guide |
+| 19 | 021 | Quote | "Prepare for Transitions" |
+| 20 | 020 | EDU | RSI Extremes |
+| 21 | 019 | Blog | Accumulation vs Distribution |
+| 22 | 024 | Product | Janus Atlas Multi-Timeframe |
+| 23 | 023 | EDU | Moving Averages |
+| 24 | 022 | Chronicle | The Cartographer |
+| 25 | 027 | Marketing | "We Could Send Alerts" |
+| 26 | 026 | EDU | Liquidity Sweeps |
+| 27 | 025 | Docs | Janus Atlas Cheatsheet |
+| 28 | 030 | Quote | "Right vs Profitable" |
+| 29 | 029 | EDU | Revenge Trading |
+| 30 | 028 | Blog | Why Indicators Keep Failing |
+| 31 | 033 | Product | Harmonic Oscillator |
+| 32 | 032 | EDU | Confirmation Bias |
+| 33 | 031 | Chronicle | The Scales (Plutus) |
+| 34 | 036 | Marketing | Plutus Flow Promo |
+| 35 | 035 | EDU | Absorption Patterns |
+| 36 | 034 | Docs | Plutus Flow Cheatsheet |
+| 37 | 039 | Quote | "Entries vs Exits" |
+| 38 | 038 | EDU | Position Sizing |
+| 39 | 037 | Blog | The Confirmation Trap |
+| 40 | 042 | Product | Augury Grid |
+| 41 | 041 | EDU | Risk-Reward Ratio |
+| 42 | 040 | Chronicle | The Arbiter |
+| 43 | 045 | Marketing | The Elite Seven |
+| 44 | 044 | EDU | Stop Loss Strategies |
+| 45 | 043 | Docs | Quick Start Checklist |
+
+---
+
 # THE 9-GRID SYSTEM
 
 ## Visual Grid Layout (Instagram View)
