@@ -2147,6 +2147,85 @@ education.signalpilot.io
 
 ---
 
+## 🔵 TEAL | POST 025 | EDU: Moving Averages
+
+**Type:** Education Hub | **Pillar:** P2: Indicator Truth | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 Slides)
+
+**Slide Structure:**
+1. **Hook:** "YOU'RE USING MAs WRONG"
+2. **Myth 1:** EMAs as support/resistance
+3. **Myth 2:** Golden Cross = Buy signal
+4. **Myth 3:** MA crossover strategies
+5. **Truth 1:** MAs are trend filters
+6. **Truth 2:** Multi-timeframe alignment
+7. **Truth 3:** Context, not triggers
+8. **CTA:** Full lesson link
+
+**Caption:**
+```
+EMAs aren't support/resistance. They're trend filters.
+
+Common MA mistakes:
+
+❌ "Price bounced off the 200 EMA"
+❌ "Golden Cross = Buy signal"
+❌ "EMA crossover strategy"
+
+How to actually use MAs:
+
+✅ Trend filter — Above 200 EMA? Look for longs. Below? Shorts.
+✅ Multi-timeframe alignment — All MAs same direction = strong trend
+✅ Context, not triggers — MAs describe trend, don't predict reversals
+
+🔗 Full lesson in bio.
+
+#movingaverages #technicalanalysis #ema #trading #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+EMAs aren't support/resistance.
+
+They're trend filters.
+
+The Golden Cross lags too much. Here's how to actually use MAs 🧵
+```
+
+**Tweet 2:**
+```
+Common MA mistakes:
+
+❌ "Price bounced off the 200 EMA"
+→ No, it bounced near a level that happened to be there
+
+❌ "Golden Cross = Buy"
+→ By the time it crosses, the move is often over
+```
+
+**Tweet 3:**
+```
+How to actually use MAs:
+
+✅ Trend filter — Above 200 EMA? Look for longs. Below? Shorts.
+✅ Multi-timeframe alignment — All MAs same direction = strong trend
+✅ Context, not triggers — MAs describe trend, don't predict reversals
+```
+
+**Tweet 4 (CTA):**
+```
+Full lesson on moving averages:
+
+https://education.signalpilot.io/curriculum/beginner/06-moving-averages.html
+
+#movingaverages #technicalanalysis #trading
+```
+
+---
+
 ## 🔵 TEAL | POST 030 | Docs: Quick Start Guide
 
 **Type:** Docs/Guide | **Pillar:** Product | **CTA:** Docs
@@ -5418,6 +5497,99 @@ Match settings to conditions.
 
 # ROW 31 (Posts 91-93)
 
+## 🟠 ORANGE | POST 091 | Marketing: Non-Repainting Guarantee
+
+**Type:** Marketing | **Pillar:** P5: Chronicle/Brand | **CTA:** Trial
+
+### INSTAGRAM — Single Image (1080x1080)
+
+**Caption:**
+```
+Why non-repainting matters
+
+REPAINTING INDICATORS:
+❌ Change past signals
+❌ Look perfect in hindsight
+❌ Fail in real-time
+❌ Can't be trusted
+
+SIGNAL PILOT INDICATORS:
+✅ What you see is what happened
+✅ No retroactive changes
+✅ Same signal live and in history
+✅ Trustworthy in real-time
+
+If you can't trust the signal, what's the point?
+
+All 7 indicators. Non-repainting. Guaranteed.
+
+Link in bio 🔗
+
+#NonRepainting #SignalPilot #TrustTheSignal #TradingIndicators #TradingView #ReliableSignals #NoRepaint #TradingTools #IndicatorTrust #RealTimeSignals #HonestIndicators #TradingEducation #SignalIntegrity #TradingCommunity #QualityIndicators
+```
+
+### TWITTER/X — Single Tweet
+```
+Our indicators don't repaint. Ever.
+
+What you see is what happened. No retroactive changes. No "hindsight" signals.
+
+If a signal fires, it fired. Period.
+
+Non-repainting isn't a feature. It's a requirement.
+
+#NonRepainting #SignalPilot #TradingIndicators #TradingView #TrustTheSignal
+```
+
+---
+
+## ⚪ NEUTRAL | POST 092 | EDU: Fair Value Gaps (Lesson 23)
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+Fair Value Gaps explained
+
+WHAT IS AN FVG?
+A gap between candle wicks caused by aggressive buying/selling
+
+HOW TO IDENTIFY:
+◾ 3-candle formation
+◾ Middle candle moves aggressively
+◾ Gap between Candle 1 high and Candle 3 low (bullish)
+◾ Or Candle 1 low and Candle 3 high (bearish)
+
+WHY IT MATTERS:
+◾ Represents imbalance
+◾ Price often returns to "fill" the gap
+◾ Can act as support/resistance
+
+NOT A GUARANTEE:
+Price doesn't always fill. Use with confluence.
+
+Full lesson in bio 🔗
+
+#FVG #FairValueGap #Imbalance #SMC #SignalPilot #CryptoTrading #ForexTrading #TradingEducation #PriceAction #ICTConcepts #GapFill #TechnicalAnalysis #LearnTrading #TradingSetups #MarketImbalance
+```
+
+### TWITTER/X — Thread
+```
+Fair Value Gap = Imbalance in price.
+
+When price moves so fast it leaves a gap between candles, that's unfinished business.
+
+Price tends to return to fill FVGs.
+
+Not always. But often enough to matter.
+
+#FVG #FairValueGap #TradingEducation #SignalPilot #SMC
+```
+
+---
+
 ## 🟠 ORANGE | POST 095 | Product: Harmonic Oscillator Divergence
 
 **Type:** Product Demo | **Pillar:** P2: Indicator Truth | **CTA:** Trial
@@ -5554,6 +5726,50 @@ That's your order block. That's where institutions may have positioned.
 ---
 
 # ROW 32 (Posts 94-96)
+
+## 🟠 ORANGE | POST 094 | Quote: Discipline
+
+**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Single Image (1080x1080)
+
+**Caption:**
+```
+This is what discipline really means
+
+"Discipline is choosing between what you want now and what you want most."
+
+RIGHT NOW you want to:
+◾ Revenge trade that loss
+◾ FOMO into that pump
+◾ Skip the journal entry
+◾ Size up "just this once"
+
+MOST you want to:
+◾ Be consistently profitable
+◾ Build real wealth
+◾ Trade for years to come
+
+Every impulsive decision is a vote against your future.
+
+Save this.
+
+#TradingQuotes #Discipline #TradingMindset #DelayedGratification #SignalPilot #CryptoTrading #ForexTrading #TradingPsychology #ImpulseControl #FutureYou #LearnTrading #TradingWisdom #MindsetMatters #TradingDiscipline #LongTermThinking
+```
+
+### TWITTER/X — Single Tweet
+```
+"Discipline is choosing between what you want now and what you want most."
+
+You want to revenge trade NOW.
+You want long-term profitability MOST.
+
+Every impulsive trade is a vote against your future self.
+
+#TradingQuotes #Discipline #TradingPsychology #SignalPilot #TradingMindset
+```
+
+---
 
 ## 🟠 ORANGE | POST 101 | Marketing: 100 Posts Milestone
 
@@ -13631,6 +13847,154 @@ The 5-phase wheel turns.
 
 # ROW 86 (Posts 256-258)
 
+## 🟠 ORANGE | POST 258 | Product: OmniDeck - Everything in One
+
+**Type:** Product | **Pillar:** P2: Indicator Truth | **CTA:** Trial
+
+### INSTAGRAM — Carousel (5 slides)
+
+**Caption:**
+```
+OmniDeck: Everything in One
+
+THE UNIFIED DASHBOARD
+
+THE PROBLEM:
+7 indicators = 7 things to check
+Tab switching wastes time
+Information scattered
+Decision paralysis
+
+THE SOLUTION:
+OmniDeck unifies everything
+Single panel dashboard
+All signals visible
+Instant assessment
+
+WHAT YOU SEE:
+
+CYCLE STATUS:
+Pentarch phase at a glance
+Current signal displayed
+No chart scanning needed
+
+REGIME STATUS:
+Volume Oracle regime shown
+ACCUMULATION/DISTRIBUTION/NEUTRAL
+Market context clear
+
+LEVEL STATUS:
+Janus Atlas nearby levels
+Distance to key zones
+Support/resistance awareness
+
+FLOW STATUS:
+Plutus Flow direction
+Accumulation or distribution
+Hidden activity revealed
+
+MOMENTUM STATUS:
+Harmonic Oscillator reading
+Overbought/oversold state
+Exhaustion detection
+
+One view. Complete picture.
+
+Start your free trial — link in bio
+
+#OmniDeck #TheCommander #UnifiedDashboard #SignalPilot #TradingIndicators #CryptoTrading #ForexTrading #AllInOne #TradingTools #DashboardTrading #LearnTrading #SingleView #IndicatorDashboard #EfficientTrading #TradingView
+```
+
+### TWITTER/X — Single Tweet
+```
+OmniDeck: The unified dashboard.
+
+All Signal Pilot indicators, one view.
+No tab switching.
+No information scattered.
+Everything together.
+
+The Commander's tool for your charts.
+
+#OmniDeck #TheCommander #SignalPilot #TradingIndicators #UnifiedDashboard
+```
+
+---
+
+## ⚪ NEUTRAL | POST 257 | EDU: Premium & Discount Arrays
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+Premium & Discount Arrays
+
+BUY LOW, SELL HIGH - QUANTIFIED
+
+THE CONCEPT:
+
+FIND THE RANGE
+Identify swing high and low
+Calculate 50% (equilibrium)
+Mark premium/discount zones
+
+PREMIUM ZONE (Above 50%)
+Expensive area
+Look for shorts
+Don't buy here
+
+DISCOUNT ZONE (Below 50%)
+Cheap area
+Look for longs
+Don't sell here
+
+OPTIMAL ZONES:
+62-79% retracement = OTE
+Best entries live here
+In discount for longs
+In premium for shorts
+
+TRADING APPLICATION:
+
+UPTREND
+Wait for price to pull to discount
+Enter at 62-79% fib
+Stop below swing low
+Target new high
+
+DOWNTREND
+Wait for price to rally to premium
+Enter at 62-79% fib
+Stop above swing high
+Target new low
+
+THE DISCIPLINE:
+Patience to wait for your zone
+No FOMO buying in premium
+No panic selling in discount
+
+Full lesson in bio
+
+#PremiumDiscount #Equilibrium #TradingEducation #SignalPilot #CryptoTrading #ForexTrading #SmartMoney #ICT #LearnTrading #BuyLowSellHigh #FibZones #TradingSetups #OptimalEntry #PatienceTrading #Fibonacci
+```
+
+### TWITTER/X — Single Tweet
+```
+Premium & Discount: Know where you're buying.
+
+Above equilibrium (50%) = Premium zone (expensive)
+Below equilibrium (50%) = Discount zone (cheap)
+
+Buy in discount. Sell in premium.
+Don't buy high because you're impatient.
+
+#PremiumDiscount #TradingEducation #SignalPilot #ICT #SmartMoney
+```
+
+---
+
 ## 🟠 ORANGE | POST 284 | Quote: Protect the Downside
 
 **Type:** Quote Card | **Pillar:** P4-Psychology | **CTA:** Follow
@@ -13796,6 +14160,74 @@ Never miss a setup.
 
 # ROW 87 (Posts 259-261)
 
+## ⚪ NEUTRAL | POST 260 | EDU: Inducement - The Trap Before the Move
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Inducement: The Trap Before the Move
+
+THE BAIT BEFORE THE TRAP
+
+WHAT IS INDUCEMENT?
+Small break of structure
+Looks like a breakout
+Retail enters in that direction
+Then gets swept
+
+THE PATTERN:
+1. Price at range boundary
+2. Small break (inducement)
+3. Retail enters the "breakout"
+4. Price reverses sharply
+5. Sweeps the real liquidity
+6. True move begins
+
+WHY IT EXISTS:
+Smart money needs retail on wrong side
+Inducement draws them in
+Their stops become fuel
+Manipulation complete
+
+HOW TO IDENTIFY:
+Look for minor structure breaks
+That don't have follow-through
+Often before major session opens
+Low volume on the break
+
+HOW TO TRADE:
+Don't take the inducement
+Wait for the sweep after inducement
+Enter when trap is sprung
+Use the sweep high/low as stop
+
+The small trap enables the big trap.
+Don't be the first to bite.
+
+Free inducement guide — link in bio
+
+#Inducement #ICT #TrapBeforeMove #TradingEducation #SignalPilot #CryptoTrading #ForexTrading #SmartMoney #LiquidityTrap #LearnTrading #FakeBreakout #TradingSetups #BaitAndSwitch #ManipulationPattern #DontGetTrapped
+```
+
+### TWITTER/X — Single Tweet
+```
+Inducement: The small trap that precedes the big trap.
+
+Price makes a small break of structure.
+Retail enters.
+Then the real sweep comes.
+
+Inducement is the bait.
+Liquidity sweep is the trap.
+
+#Inducement #ICT #TradingEducation #SignalPilot #SmartMoney
+```
+
+---
+
 ## 🟠 ORANGE | POST 285 | Product: OmniDeck Everything in One
 
 **Type:** Product | **Pillar:** P2-Indicator Truth | **CTA:** Demo
@@ -13954,6 +14386,75 @@ Not for trade signals.
 ---
 
 # ROW 88 (Posts 262-264)
+
+## ⚪ NEUTRAL | POST 263 | EDU: Return to Origin (RTO)
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Return to Origin (RTO)
+
+PRICE COMES BACK TO WHERE IT STARTED
+
+THE CONCEPT:
+Every impulsive move has an origin point
+Price often returns to that origin
+The origin zone = high probability entry
+
+WHY IT WORKS:
+Origin contains unfilled orders
+Institutional accumulation zone
+Efficient pricing zone
+Magnetic pull on price
+
+HOW TO IDENTIFY:
+
+THE ORIGIN:
+Where the impulsive move began
+Base of the expansion
+Often contains order block/FVG
+Clean consolidation before move
+
+THE SETUP:
+Mark the origin of strong move
+Wait for price to expand
+Then wait for retracement
+Enter when origin is revisited
+
+HOW TO TRADE:
+1. Identify impulsive move
+2. Mark the origin zone
+3. Wait for expansion to complete
+4. Wait for retracement to origin
+5. Enter at origin with tight stop
+
+CONFLUENCE ADDS:
+Origin + OTE zone = stronger
+Origin + FVG = stronger
+Origin + liquidity sweep first = strongest
+
+Free RTO guide — link in bio
+
+#ReturnToOrigin #RTO #TradingEducation #SignalPilot #CryptoTrading #ForexTrading #ICT #SmartMoney #OriginZone #LearnTrading #TradingSetups #Retracement #TechnicalAnalysis #EntryZone #MagneticPrice
+```
+
+### TWITTER/X — Single Tweet
+```
+Return to Origin (RTO): Price often comes back to where it started.
+
+After expansion, price retraces.
+The origin of the move = magnetic zone.
+
+Wait for price to return.
+The origin is your entry.
+
+#RTO #ReturnToOrigin #TradingEducation #SignalPilot #ICT
+```
+
+---
 
 ## 🟠 ORANGE | POST 291 | Marketing: 7-Day Money-Back Guarantee
 
@@ -14114,6 +14615,75 @@ Confidence isn't felt. It's built.
 
 # ROW 89 (Posts 265-267)
 
+## 🟠 ORANGE | POST 267 | Product: Pentarch Five Signals Explained
+
+**Type:** Product | **Pillar:** P2: Indicator Truth | **CTA:** Trial
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+Pentarch: The Five Signals Explained
+
+THE SOVEREIGN'S CYCLE PHASES
+
+TD - TOUCHDOWN
+What: Early-cycle reversal signal
+When: Selling exhaustion detected
+How: Momentum shift + volume pattern
+Action: Watch for bottom forming
+
+IGN - IGNITION
+What: Breakout confirmation
+When: Move starts with conviction
+How: Strong directional momentum
+Action: Trend beginning confirmed
+
+WRN - WARNING
+What: Early weakness signal
+When: Trend starting to lose steam
+How: Momentum divergence detected
+Action: Tighten stops, reduce exposure
+
+CAP - CLIMAX
+What: Late-cycle exhaustion
+When: Final push with volume spike
+How: Extreme momentum + high volume
+Action: Potential reversal zone
+
+BDN - BREAKDOWN
+What: Structure break signal
+When: Support/resistance violated
+How: Clear bearish structure shift
+Action: Trend likely changing
+
+IMPORTANT:
+Signals = Context, not entries
+Always combine with structure
+Different phases = different behavior
+
+See Pentarch in action — link in bio
+
+#Pentarch #TheSovereign #FiveSignals #SignalPilot #TradingIndicators #CycleAnalysis #TradingView #CryptoTrading #ForexTrading #TradingPhases #LearnTrading #TradingTools #CyclePhases #MarketCycles #SignalPilotIndicators
+```
+
+### TWITTER/X — Single Tweet
+```
+Pentarch's 5 cycle phases:
+
+TD - Selling exhaustion (early bottom)
+IGN - Breakout confirmation (trend start)
+WRN - Early weakness (first warning)
+CAP - Climax exhaustion (late stage)
+BDN - Structure break (trend change)
+
+The Sovereign sees the cycle.
+
+#Pentarch #SignalPilot #CycleAnalysis #TradingIndicators #TheSovereign
+```
+
+---
+
 ## 🟠 ORANGE | POST 294 | Quote: Simplicity Wins
 
 **Type:** Quote Card | **Pillar:** P4-Psychology | **CTA:** Follow
@@ -14262,6 +14832,129 @@ The Scales always knows.
 ---
 
 # ROW 90 (Posts 268-270)
+
+## 🟠 ORANGE | POST 270 | Marketing: 7-Day Money-Back Guarantee
+
+**Type:** Marketing | **Pillar:** P5: Chronicle/Brand | **CTA:** Trial
+
+### INSTAGRAM — Single Image (1080x1080)
+
+**Caption:**
+```
+7-Day Money-Back Guarantee
+
+TRY RISK-FREE
+
+THE DEAL:
+Subscribe to any plan
+Use all 7 indicators
+Access full education hub
+Experience everything
+
+NOT RIGHT FOR YOU?
+Request refund within 7 days
+Full money back
+No questions asked
+No hassle
+
+WHY WE OFFER THIS:
+We believe in what we built
+We want happy traders, not trapped ones
+Confident tools sell themselves
+Your success = our success
+
+WHAT YOU GET:
+Pentarch (The Sovereign)
+Volume Oracle (The Prophet)
+Janus Atlas (The Cartographer)
+Plutus Flow (The Scales)
+Harmonic Oscillator (The Arbiter)
+Augury Grid (The Watchman)
+OmniDeck (The Commander)
+
+Plus 82 lessons. Completely free.
+
+Nothing to lose. Everything to gain.
+
+Start your trial — link in bio
+
+#MoneyBackGuarantee #RiskFree #SignalPilot #TradingIndicators #TryItFree #7DayTrial #TradingTools #TradingView #NoRiskTrial #HappyTraders #ConfidentProduct #TradingEducation #AllInOne #GuaranteedSatisfaction #TryBeforeYouCommit
+```
+
+### TWITTER/X — Single Tweet
+```
+Not sure if Signal Pilot is for you?
+
+7-day money-back guarantee. All plans.
+Try everything. If it's not right, get your money back.
+
+No questions asked. No risk.
+
+We're confident. You should be too.
+
+#MoneyBackGuarantee #RiskFree #SignalPilot #TradingIndicators #TryItFree
+```
+
+---
+
+## ⚪ NEUTRAL | POST 268 | DOCS: Frequently Asked Questions
+
+**Type:** Docs | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Frequently Asked Questions
+
+YOUR TOP QUESTIONS ANSWERED
+
+DO THE INDICATORS REPAINT?
+No. Never. What you see is what happened.
+Non-repainting is a core requirement.
+
+WHICH MARKETS DO THEY WORK ON?
+All TradingView-supported markets.
+Crypto, Forex, Stocks, Indices, Commodities.
+
+WHICH TIMEFRAMES?
+All timeframes work.
+From 1-minute to monthly.
+Your choice.
+
+DO I NEED ALL 7 INDICATORS?
+Start with Pentarch + Volume Oracle.
+Add others as you learn.
+Or use OmniDeck for everything.
+
+IS THERE A FREE TRIAL?
+7-day money-back guarantee on all plans.
+Try everything risk-free.
+
+IS THE EDUCATION REALLY FREE?
+Yes. 82 lessons. Completely free.
+No paywall. No upsell.
+
+Full FAQ in docs — link in bio
+
+#FAQ #SignalPilot #TradingIndicators #Questions #TradingView #TradingDocs #FreeTrial #AllMarkets #NonRepainting #TradingEducation #Documentation #GetAnswers #TradingTools #LearnMore #CommonQuestions
+```
+
+### TWITTER/X — Single Tweet
+```
+Signal Pilot FAQ:
+
+Do they repaint? No. Never.
+Which markets? All of them.
+Free trial? 7-day money-back.
+Education free? Yes. 82 lessons.
+
+Any other questions? docs.signalpilot.io
+
+#SignalPilot #FAQ #TradingIndicators #TradingDocs #FreeTrial
+```
+
+---
 
 ## 🟠 ORANGE | POST 295 | Product: Pentarch Five Signals Explained
 
@@ -14431,6 +15124,64 @@ Fast charts = Better decisions.
 ---
 
 # ROW 91 (Posts 271-273)
+
+## 🟠 ORANGE | POST 273 | Quote: Patience is Profitable
+
+**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Single Image (1080x1080)
+
+**Caption:**
+```
+Patience is Profitable
+
+"The market pays the patient and punishes the impatient."
+
+WHAT IMPATIENCE LOOKS LIKE:
+Forcing trades that aren't there
+Entering before confirmation
+Exiting before target
+Overtrading low-quality setups
+
+WHAT PATIENCE LOOKS LIKE:
+Waiting for your exact setup
+Entering only on confirmation
+Holding to target (or trailing)
+Taking only A+ trades
+
+THE HARD TRUTH:
+Most trading mistakes are impatience.
+Most losses are forced trades.
+Most blown accounts are overtrading.
+
+THE SOLUTION:
+Define your setup clearly
+Wait for it (even if it takes days)
+Execute only when criteria met
+Accept missing trades that don't qualify
+
+Better to miss a trade
+Than to force one.
+
+Save this.
+
+#PatienceInTrading #TradingPatience #TradingQuotes #SignalPilot #TradingMindset #CryptoTrading #ForexTrading #WaitForYourSetup #TradingPsychology #LearnTrading #DontForceTrades #Discipline #QualityOverQuantity #TraderMindset #PatiencePays
+```
+
+### TWITTER/X — Single Tweet
+```
+"The market pays the patient and punishes the impatient."
+
+Most trading mistakes = impatience.
+Most losses = forced trades.
+Most blown accounts = overtrading.
+
+Wait for your setup. Only your setup. Nothing else.
+
+#PatienceInTrading #TradingQuotes #SignalPilot #TradingMindset #TradingPsychology
+```
+
+---
 
 ## 🟠 ORANGE | POST 300 | Marketing: 300 Posts Milestone
 
@@ -14764,6 +15515,146 @@ But don't go down with it either.
 
 # ROW 93 (Posts 277-279)
 
+## 🔵 TEAL | POST 277 | DOCS: TradingView Keyboard Shortcuts
+
+**Type:** Docs | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+
+### INSTAGRAM — Carousel (5 slides)
+
+**Caption:**
+```
+TradingView Keyboard Shortcuts
+
+WORK FASTER, TRADE SMARTER
+
+NAVIGATION:
+Alt+T = Trend line tool
+Alt+F = Fibonacci tool
+Alt+H = Horizontal line
+Alt+V = Vertical line
+Ctrl+Z = Undo last action
+
+CHART CONTROL:
+Ctrl+Left/Right = Scroll chart
+Ctrl+Up/Down = Zoom in/out
+Home = Jump to current candle
+End = Jump to oldest visible
+
+TRADING:
+B = Long position
+S = Short position
+X = Cancel order
+Ctrl+, = Settings
+
+TIMEFRAMES:
+Number keys = Quick timeframe change
+1 = 1 minute
+5 = 5 minutes
+D = Daily
+
+WHY USE SHORTCUTS:
+Faster analysis
+Less mouse movement
+More efficient workflow
+Professional-level charting
+
+Full shortcut guide — link in bio
+
+#KeyboardShortcuts #TradingView #TradingDocs #SignalPilot #ChartingTips #Efficiency #TradingTools #FastCharting #Productivity #LearnTrading #TradingGuide #Documentation #TradingTips #WorkflowOptimization #ProCharting
+```
+
+### TWITTER/X — Single Tweet
+```
+TradingView shortcuts to speed up your workflow:
+
+Alt+T = Trend line
+Alt+F = Fibonacci
+Alt+H = Horizontal line
+B = Long position
+S = Short position
+
+Faster charting = Better decisions.
+
+#TradingView #KeyboardShortcuts #SignalPilot #TradingDocs #ChartingTips
+```
+
+---
+
+## ⚪ NEUTRAL | POST 278 | EDU: Trend Identification
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Trend Identification
+
+FIND THE TREND FIRST
+
+UPTREND SIGNS:
+Higher highs (HH)
+Higher lows (HL)
+Price above 50/200 MA
+Demand winning
+
+DOWNTREND SIGNS:
+Lower highs (LH)
+Lower lows (LL)
+Price below 50/200 MA
+Supply winning
+
+NO TREND (RANGE):
+Equal highs
+Equal lows
+Price chopping around MAs
+Neither side winning
+
+TOOLS TO HELP:
+
+MOVING AVERAGES:
+Price above MA = bullish bias
+Price below MA = bearish bias
+MAs sloping = trend direction
+
+HIGHER TIMEFRAME:
+Zoom out
+The bigger trend matters more
+Trade with the bigger trend
+
+STRUCTURE:
+Mark swing points
+Connect the dots
+Trend becomes obvious
+
+COMMON MISTAKES:
+Trading against the trend
+Over-complicating identification
+Ignoring higher timeframe
+Seeing trends where there are none
+
+Simple rule: HH+HL = up, LH+LL = down
+
+Free trend guide — link in bio
+
+#TrendIdentification #TrendTrading #TradingEducation #SignalPilot #CryptoTrading #ForexTrading #TechnicalAnalysis #Uptrend #Downtrend #MovingAverages #LearnTrading #TradingBasics #TrendWithFriend #MarketDirection #FindTheTrend
+```
+
+### TWITTER/X — Single Tweet
+```
+Trend identification basics:
+
+Uptrend: Higher highs + Higher lows
+Downtrend: Lower highs + Lower lows
+Range: Equal highs + Equal lows
+
+Find the trend first. Then trade with it, not against it.
+
+#TrendIdentification #TradingEducation #SignalPilot #TrendTrading #TechnicalAnalysis
+```
+
+---
+
 ## 🟠 ORANGE | POST 305 | Product: Harmonic Oscillator Momentum Components
 
 **Type:** Product | **Pillar:** P2-Indicator Truth | **CTA:** Trial
@@ -14929,6 +15820,89 @@ The Cartographer has been there before.
 ---
 
 # ROW 94 (Posts 280-282)
+
+## 🔵 TEAL | POST 280 | Blog: The Psychology of Drawdowns
+
+**Type:** Blog | **Pillar:** P4: Psychology | **CTA:** Blog
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+The Psychology of Drawdowns
+
+EVERY STRATEGY HAS THEM
+
+THE REALITY:
+All strategies go through losing streaks
+This is normal, expected, unavoidable
+How you handle drawdowns defines you
+
+COMMON MISTAKES:
+
+ABANDONING STRATEGY:
+"This stopped working"
+Switch to new strategy
+Repeat with next drawdown
+Never master anything
+
+REVENGE TRADING:
+"I need to make it back"
+Increase size
+Take poor setups
+Dig deeper hole
+
+ANALYSIS PARALYSIS:
+"What went wrong?"
+Over-analyze everything
+Can't pull trigger anymore
+Miss the recovery
+
+BETTER APPROACH:
+
+REDUCE SIZE:
+Smaller positions during drawdown
+Less emotional impact
+Survive to recovery
+
+STICK TO RULES:
+If execution was correct, stay course
+Drawdown isn't strategy failure
+It's variance
+
+REVIEW EXECUTION:
+Did you follow the rules?
+Were entries per plan?
+Execution matters, not just results
+
+PERSPECTIVE:
+Zoom out
+Was this expected variance?
+Is the edge still present?
+
+Full drawdown article — link in bio
+
+#DrawdownPsychology #Drawdowns #TradingPsychology #SignalPilot #CryptoTrading #ForexTrading #TradingEducation #MentalGame #LosingStreak #LearnTrading #TradingMindset #Variance #StickToRules #TradingDiscipline #RecoveryMindset
+```
+
+### TWITTER/X — Single Tweet
+```
+Every strategy has drawdowns.
+
+The question isn't if, but how you handle them.
+
+During drawdowns:
+- Stick to the rules
+- Reduce size if needed
+- Don't change strategy mid-drawdown
+- Review execution, not results
+
+Drawdowns are tests. Pass them.
+
+#Drawdown #TradingPsychology #SignalPilot #TradingEducation #MentalGame
+```
+
+---
 
 ## 🟠 ORANGE | POST 311 | Marketing: What Makes Us Different
 
@@ -15097,6 +16071,79 @@ But don't overcomplicate.
 
 # ROW 95 (Posts 283-285)
 
+## 🔵 TEAL | POST 283 | Chronicle: The Scales of Balance
+
+**Type:** Chronicle | **Pillar:** P5: Chronicle | **CTA:** Chronicle
+
+### INSTAGRAM — Single Image (1080x1080)
+
+**Caption:**
+```
+THE SCALES OF BALANCE
+
+"Balance must always return. The question is when."
+
+THE SCALES' DOMAIN:
+Measuring what flows beneath
+Accumulation or distribution
+The hidden weight of money
+
+WHAT THE SCALES SEES:
+
+ACCUMULATION:
+Flow rising despite price
+Buying beneath the surface
+Weight shifting bullish
+Balance tipping
+
+DISTRIBUTION:
+Flow falling despite price
+Selling beneath the surface
+Weight shifting bearish
+Balance reversing
+
+EQUILIBRIUM:
+Flow matches price
+No hidden activity
+Balance maintained
+Fair pricing
+
+THE SCALES' WISDOM:
+Flow diverging from price = imbalance
+Imbalance cannot last forever
+Balance will return
+The question is timing
+
+THE LESSON:
+When The Scales shows divergence
+Prepare for reversion
+Flow leads, price follows
+Eventually
+
+The Scales weighs all things.
+Truth emerges from the weights.
+
+Read the full chronicle — link in bio
+
+#TheScales #PlutusFlow #SignalPilot #Chronicle #Balance #TradingLore #SignalPilotChronicle #FlowAnalysis #AccumulationDistribution #TradingWisdom #TradingMythology #Divergence #HiddenFlow #TradingPhilosophy #WeightOfMoney
+```
+
+### TWITTER/X — Single Tweet
+```
+"Balance must always return. The question is when."
+— The Scales
+
+Plutus Flow measures the imbalance.
+Accumulation. Distribution. The weight of flow.
+
+When flow and price diverge, pay attention.
+The Scales never lies.
+
+#SignalPilot #Chronicle #TheScales #PlutusFlow #TradingLore
+```
+
+---
+
 ## 🟠 ORANGE | POST 314 | Quote: The Market Doesn't Care
 
 **Type:** Quote Card | **Pillar:** P4-Psychology | **CTA:** Follow
@@ -15254,6 +16301,151 @@ Your edge only works when the setup exists. No setup? No trade.
 ---
 
 # ROW 96 (Posts 286-288)
+
+## 🟠 ORANGE | POST 288 | Marketing: What Makes Us Different
+
+**Type:** Marketing | **Pillar:** P5: Chronicle | **CTA:** Trial
+
+### INSTAGRAM — Single Image (1080x1080)
+
+**Caption:**
+```
+What Makes Us Different
+
+NOT JUST ANOTHER INDICATOR COMPANY
+
+NON-REPAINTING GUARANTEE:
+What you see is what you get
+Historical signals never change
+Backtest matches forward test
+Trust your chart
+
+FREE EDUCATION:
+82 lessons, completely free
+No paywall, no upsell
+Knowledge shouldn't cost extra
+Education-first philosophy
+
+ALL-IN-ONE VALUE:
+7 professional indicators
+One subscription covers all
+No nickel and diming
+Maximum value delivered
+
+BUILT BY TRADERS:
+We trade what we build
+Real trading needs, real solutions
+Not marketing-first development
+Function over flash
+
+NO HYPE:
+We won't promise riches
+We won't show fake results
+We won't create false urgency
+Just honest tools and education
+
+THE CHRONICLE:
+Unique lore and mythology
+Makes learning memorable
+Educational entertainment
+Nowhere else like it
+
+Different by design.
+Join us — link in bio
+
+#WhatMakesUsDifferent #SignalPilot #TradingIndicators #NonRepainting #FreeEducation #AllInOne #BuiltByTraders #NoHype #HonestTrading #TradingTools #TradingView #UniqueBrand #TradingEducation #ValueFirst #Transparency
+```
+
+### TWITTER/X — Single Tweet
+```
+What makes Signal Pilot different:
+
+Non-repainting. Always.
+Education free. No paywall.
+7 indicators. One subscription.
+Built by traders. For traders.
+
+We're not selling dreams.
+We're selling clarity.
+
+#SignalPilot #Different #TradingIndicators #WhatMakesUsDifferent #TradingTools
+```
+
+---
+
+## ⚪ NEUTRAL | POST 287 | EDU: Timeframe Selection
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (5 slides)
+
+**Caption:**
+```
+Timeframe Selection
+
+MATCH YOUR TIMEFRAME TO YOU
+
+HIGHER TIMEFRAMES (Daily, 4H, 1H):
+Less noise
+Clearer trends
+Fewer signals
+Bigger moves
+Less screen time
+Better for busy schedules
+
+LOWER TIMEFRAMES (15m, 5m, 1m):
+More noise
+More signals
+Quicker trades
+Smaller moves
+More screen time
+Requires active attention
+
+CHOOSE BASED ON:
+
+YOUR SCHEDULE:
+Full-time job? Higher TF
+Full-time trader? Any TF
+Part-time? Higher TF
+
+YOUR PERSONALITY:
+Patient? Higher TF
+Action-oriented? Lower TF
+Easily stressed? Higher TF
+
+YOUR STRATEGY:
+Swing trading? Daily/4H
+Day trading? 1H/15m
+Scalping? 5m/1m
+
+MULTI-TIMEFRAME APPROACH:
+Higher TF for direction
+Lower TF for entry
+Best of both worlds
+
+Free timeframe guide — link in bio
+
+#TimeframeSelection #Timeframes #TradingEducation #SignalPilot #CryptoTrading #ForexTrading #DayTrading #SwingTrading #Scalping #LearnTrading #HigherTimeframe #LowerTimeframe #TradingStyle #MatchYourPersonality #MultiTimeframe
+```
+
+### TWITTER/X — Single Tweet
+```
+Timeframe selection matters.
+
+Higher TF (Daily/4H) = Less noise, bigger moves, slower
+Lower TF (1H/15m) = More noise, quicker signals, faster
+
+Match your timeframe to:
+- Your schedule
+- Your personality
+- Your strategy
+
+No timeframe is "better." Only better for YOU.
+
+#Timeframes #TradingEducation #SignalPilot #TechnicalAnalysis #TimeframeSelection
+```
+
+---
 
 ## 🟠 ORANGE | POST 315 | Product: Janus Atlas Level Strength
 
@@ -15426,6 +16618,83 @@ Indicators inform. They don't decide.
 
 # ROW 97 (Posts 289-291)
 
+## ⚪ NEUTRAL | POST 290 | EDU: Trading Plan Essentials
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+Trading Plan Essentials
+
+WHAT EVERY PLAN NEEDS
+
+ENTRY CRITERIA:
+What conditions must be met?
+Be specific and objective
+If X, Y, Z — then consider trade
+
+EXIT CRITERIA:
+Where is your stop loss?
+Where is your target?
+Pre-defined, not reactive
+
+POSITION SIZING:
+How much to risk per trade?
+How to calculate size?
+Based on stop distance
+
+RISK RULES:
+Maximum risk per trade (1-2%)
+Maximum daily loss
+Maximum weekly loss
+When to stop trading
+
+MARKETS & TIMEFRAMES:
+What do you trade?
+Which timeframes?
+Stick to your lane
+
+TRADING HOURS:
+When do you trade?
+Kill zones or all day?
+Match your schedule
+
+REVIEW PROCESS:
+When do you review?
+What do you track?
+How do you improve?
+
+WITHOUT A PLAN:
+You're reacting, not trading
+Emotions drive decisions
+No consistency possible
+No way to improve
+
+Free trading plan template — link in bio
+
+#TradingPlan #TradingEducation #SignalPilot #CryptoTrading #ForexTrading #PlanYourTrade #EntryCriteria #ExitCriteria #PositionSizing #RiskManagement #LearnTrading #TradingRules #TradingProcess #Consistency #TradingTemplate
+```
+
+### TWITTER/X — Single Tweet
+```
+Every trader needs a plan.
+
+Your trading plan should include:
+- Entry criteria
+- Exit criteria (stop & target)
+- Position sizing rules
+- Risk per trade
+- Markets/timeframes
+
+No plan = gambling.
+
+#TradingPlan #TradingEducation #SignalPilot #TradingStrategy #PlanYourTrade
+```
+
+---
+
 ## 🟠 ORANGE | POST 321 | Marketing: Yearly Plan Value
 
 **Type:** Marketing | **Pillar:** P5-Chronicle | **CTA:** Trial
@@ -15586,6 +16855,84 @@ Some truths are spoken. Others are measured.
 ---
 
 # ROW 98 (Posts 292-294)
+
+## ⚪ NEUTRAL | POST 293 | EDU: Fear and Greed
+
+**Type:** Education | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Fear and Greed
+
+THE TWO DESTROYERS
+
+FEAR MANIFESTS AS:
+Exiting winners too early
+Not taking valid setups
+Moving stops wider (hoping)
+Paralysis after losses
+Trading too small
+
+GREED MANIFESTS AS:
+Holding losers too long (hoping)
+Taking profit too late
+Overtrading for more
+Oversizing for bigger wins
+Ignoring risk management
+
+THE BALANCE:
+Healthy fear = Respect for risk
+Healthy greed = Desire to succeed
+Too much fear = No trades
+Too much greed = Blown account
+
+HOW TO MANAGE:
+
+FOR FEAR:
+Have a written plan
+Trust your tested strategy
+Size small enough to think clearly
+Accept that losses happen
+
+FOR GREED:
+Set targets in advance
+Take partial profits
+Honor your stops
+Remember why you have rules
+
+THE TRUTH:
+You can't eliminate emotions
+But you can manage them
+Rules beat emotions
+Process beats impulse
+
+Free psychology guide — link in bio
+
+#FearAndGreed #TradingPsychology #TradingEducation #SignalPilot #CryptoTrading #ForexTrading #TradingEmotions #ManageFear #ManageGreed #LearnTrading #EmotionalControl #TradingDiscipline #TradingMindset #MasterYourEmotions #TradingBalance
+```
+
+### TWITTER/X — Single Tweet
+```
+Fear and greed: The two forces that destroy traders.
+
+Fear makes you:
+- Exit too early
+- Not take valid setups
+- Move stops
+
+Greed makes you:
+- Overtrade
+- Oversize
+- Hold too long
+
+Master them or they'll master you.
+
+#FearAndGreed #TradingPsychology #SignalPilot #TradingEducation #TradingEmotions
+```
+
+---
 
 ## 🟠 ORANGE | POST 324 | Quote: Lose Small, Win Big
 
@@ -15756,6 +17103,150 @@ Our docs break down optimal combinations:
 
 # ROW 99 (Posts 295-297) — FINAL ROW OF PART 1
 
+## 🟠 ORANGE | POST 297 | Marketing: Yearly Plan Value
+
+**Type:** Marketing | **Pillar:** P5: Chronicle | **CTA:** Trial
+
+### INSTAGRAM — Single Image (1080x1080)
+
+**Caption:**
+```
+Yearly Plan: Best Value
+
+FOR SERIOUS TRADERS
+
+THE VALUE:
+
+SAVE MONEY:
+Significant discount vs monthly
+More value for your investment
+Fewer transactions to manage
+
+LOCK YOUR RATE:
+Current pricing guaranteed
+Protected from increases
+Rate stays while subscribed
+
+COMMITMENT TO GROWTH:
+Trading is a long-term game
+Tools should match that mindset
+One year to really learn and grow
+
+WHAT YOU GET:
+All 7 indicators
+82 education lessons
+Full documentation
+Community access
+Priority support
+All updates included
+
+WHO IT'S FOR:
+Traders committed to improvement
+Those who see trading as long-term
+People who value consistency
+Investors in themselves
+
+NOT FOR:
+"Trying it out" (use monthly)
+Short-term thinking
+Unsure if you'll stick with it
+
+Yearly plan saves you 52% vs monthly.
+Commit to your growth.
+
+Link in bio
+
+#YearlyPlan #SignalPilot #TradingIndicators #BestValue #LongTerm #TradingTools #TradingView #Commitment #SeriousTraders #TradingEducation #SaveMoney #LockYourRate #AllInOne #TradingGrowth #InvestInYourself
+```
+
+### TWITTER/X — Single Tweet
+```
+Yearly plan = best value.
+
+Save vs monthly pricing.
+Lock in your rate.
+Commit to your development.
+
+Serious traders think long-term.
+Both in trading and in tools.
+
+#SignalPilot #YearlyPlan #TradingIndicators #BestValue #LongTerm
+```
+
+---
+
+## ⚪ NEUTRAL | POST 298 | EDU: Paper Trading Too Long
+
+**Type:** Education | **Pillar:** P4: Psychology | **CTA:** Blog
+
+### INSTAGRAM — Carousel (5 slides)
+
+**Caption:**
+```
+Paper Trading Too Long
+
+THE TRAP OF ETERNAL DEMO
+
+WHAT PAPER TRADING TEACHES:
+Platform mechanics
+Strategy familiarity
+Pattern recognition
+Order types
+
+WHAT PAPER TRADING DOESN'T TEACH:
+Real fear when losing
+Real greed when winning
+Real execution pressure
+Real loss management
+
+THE PROBLEM:
+Demo success ≠ Live success
+Emotions change everything
+"I'll go live when I'm ready"
+But you're never "ready"
+
+SIGNS YOU'RE DEMO-ING TOO LONG:
+Profitable on demo for months
+Still afraid to go live
+Waiting for "one more test"
+Perfectionism disguised as prudence
+
+THE TRANSITION:
+Start with tiny real size
+So small you don't care
+Feel the real emotions
+Build real confidence
+
+RECOMMENDED PATH:
+1. Demo to learn mechanics (weeks)
+2. Paper trade strategy (1-2 months)
+3. Tiny live trades (months)
+4. Scale up as proven
+
+Full article — link in bio
+
+#PaperTrading #DemoTrading #TradingEducation #SignalPilot #CryptoTrading #ForexTrading #GoLive #RealMoney #TradingPsychology #LearnTrading #TradingTransition #SkinInTheGame #TradingEmotions #DemoVsLive #StartSmall
+```
+
+### TWITTER/X — Single Tweet
+```
+Paper trading too long is a trap.
+
+At some point, you need real skin in the game.
+
+Demo doesn't teach:
+- Real emotions
+- Real execution pressure
+- Real loss management
+
+Paper trade to learn the mechanics.
+Go live to learn to trade.
+
+#PaperTrading #DemoTrading #TradingEducation #SignalPilot #RealTrading
+```
+
+---
+
 ## 🟠 ORANGE | POST 325 | Product: Volume Oracle Divergence Detection
 
 **Type:** Product | **Pillar:** P2-Indicator Truth | **CTA:** Trial
@@ -15916,6 +17407,662 @@ Small, consistent gains compound.
 The traders who last aren't chasing home runs. They're stacking singles.
 
 Consistency > intensity.
+```
+
+---
+
+# ROW 100 (Posts 298-300)
+
+## 🔵 TEAL | POST 301 | Blog: The Sunk Cost Fallacy in Trading
+
+**Type:** Blog | **Pillar:** P4: Psychology | **CTA:** Blog
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+The Sunk Cost Fallacy in Trading
+
+DON'T LET PAST INVESTMENT CLOUD JUDGMENT
+
+WHAT IS SUNK COST FALLACY?
+Continuing a course of action because of past investment (time, money, emotion), not because it makes sense now.
+
+IN TRADING:
+"I've held this so long, I can't sell now"
+"I've already lost so much, might as well hold"
+"I spent weeks analyzing this, it HAS to work"
+
+THE REALITY:
+The market doesn't care about your past.
+Only the present matters.
+
+THE TEST:
+"If I had cash instead of this position, would I BUY IT TODAY at this price?"
+
+If NO -> exit
+If YES -> hold
+
+Your past decision doesn't obligate your future.
+Every moment is a new choice.
+
+Full article — link in bio
+
+#SunkCost #TradingPsychology #SignalPilot #TradingMistakes #TradingEducation #CryptoTrading #ForexTrading #TradingMindset #CutLosses #RationalThinking #TradingJourney #LetItGo #TradingDecisions #ClearThinking #EmotionalTrading
+```
+
+### TWITTER/X — Single Tweet
+```
+Sunk cost fallacy: Holding a position because you've "invested too much to quit."
+
+Test: "Would I buy this TODAY at this price?"
+
+If no → exit.
+If yes → hold.
+
+Past investment doesn't obligate future action.
+
+#SunkCost #TradingPsychology #SignalPilot #TradingEducation
+```
+
+---
+
+## ⚪ NEUTRAL | POST 303 | EDU: ICT Concepts Overview
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+ICT Concepts Overview
+
+INNER CIRCLE TRADER FUNDAMENTALS
+
+KEY CONCEPTS:
+
+LIQUIDITY:
+Where orders cluster
+Stops above highs/below lows
+Smart money targets these
+
+ORDER BLOCKS:
+Last candle before impulse
+Institutional entry zones
+Price often returns
+
+FAIR VALUE GAPS:
+Imbalances in price
+Three-candle formations
+Often get filled
+
+MARKET STRUCTURE:
+Higher highs/higher lows
+Lower highs/lower lows
+Break of structure = shift
+
+KILL ZONES:
+London open (2-5am EST)
+NY open (8-11am EST)
+Best trading hours
+
+PREMIUM/DISCOUNT:
+Above 50% = premium (sell)
+Below 50% = discount (buy)
+Trade from value
+
+DISPLACEMENT:
+Strong, impulsive moves
+Shows institutional intent
+Confirms direction
+
+Not a complete list. Start with these.
+
+Full ICT guide — link in bio
+
+#ICT #InnerCircleTrader #TradingEducation #SignalPilot #SmartMoney #CryptoTrading #ForexTrading #Liquidity #OrderBlocks #FVG #KillZones #LearnTrading #TradingConcepts #MarketStructure #PremiumDiscount
+```
+
+### TWITTER/X — Single Tweet
+```
+ICT concepts in brief:
+
+Liquidity - Where stops cluster
+Order Blocks - Institutional zones
+FVG - Price imbalances
+Market Structure - HH/HL vs LH/LL
+Kill Zones - Best trading hours
+Premium/Discount - Value areas
+
+Not everything. A start.
+
+#ICT #TradingEducation #SignalPilot #SmartMoney
+```
+
+---
+
+# ROW 101 (Posts 301-303)
+
+## 🔵 TEAL | POST 307 | DOCS: Indicator Settings Guide
+
+**Type:** Docs | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Indicator Settings Guide
+
+CUSTOMIZE YOUR SIGNAL PILOT INDICATORS
+
+PENTARCH SETTINGS:
+Sensitivity adjustment
+Signal display options
+Color customization
+Alert configuration
+
+VOLUME ORACLE SETTINGS:
+Period length
+Regime thresholds
+Display options
+Volume calculation method
+
+JANUS ATLAS SETTINGS:
+Timeframe selection
+Level strength filters
+Display density
+Historical lookback
+
+PLUTUS FLOW SETTINGS:
+Smoothing period
+Threshold levels
+Color settings
+Divergence alerts
+
+HARMONIC OSCILLATOR:
+Component visibility
+Overbought/oversold levels
+Histogram display
+
+AUGURY GRID:
+Pairs to scan
+Alert criteria
+Display format
+
+OMNIDECK:
+Which indicators to show
+Panel position
+Condensed vs expanded
+
+Full settings guide — link in bio
+
+#IndicatorSettings #SignalPilot #TradingView #TradingDocs #CustomizeIndicators #TradingTools #Pentarch #VolumeOracle #JanusAtlas #PlutusFlow #Documentation #SettingsGuide #TradingSetup #Personalization #OptimizeYourCharts
+```
+
+### TWITTER/X — Single Tweet
+```
+Signal Pilot indicator settings guide:
+
+Each indicator is customizable.
+Sensitivity, display, alerts, colors.
+
+Make them work for YOUR style.
+
+Full settings documentation at docs.signalpilot.io
+
+#SignalPilot #IndicatorSettings #TradingView #TradingDocs #CustomizeYourCharts
+```
+
+---
+
+## ⚪ NEUTRAL | POST 308 | EDU: Breaker Blocks
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Breaker Blocks Explained
+
+WHEN ORDER BLOCKS FAIL
+
+WHAT IS A BREAKER BLOCK?
+An order block that got BROKEN
+Failed to hold as support/resistance
+Now becomes the opposite
+
+HOW IT FORMS:
+1. Order block forms (last candle before move)
+2. Price moves away, then returns
+3. Price BREAKS through the order block
+4. Order block now becomes breaker block
+
+ROLE REVERSAL:
+Bullish OB that fails = bearish breaker
+Bearish OB that fails = bullish breaker
+
+Support becomes resistance
+Resistance becomes support
+
+HOW TO TRADE:
+After OB gets broken
+Wait for price to return to the breaker
+Look for reaction in the new direction
+Use as entry zone
+
+WHY IT WORKS:
+Trapped traders from failed OB
+Their stops = liquidity
+Institutions use this for entry
+
+Breakers = Failed OBs with new purpose
+
+Full breaker block guide — link in bio
+
+#BreakerBlocks #OrderBlocks #TradingEducation #SignalPilot #SmartMoney #ICT #CryptoTrading #ForexTrading #RoleReversal #TradingSetups #LearnTrading #FailedLevels #TechnicalAnalysis #TradingConcepts #SupportResistance
+```
+
+### TWITTER/X — Single Tweet
+```
+Breaker Block: When an order block fails.
+
+Order block gets broken → becomes breaker block.
+Support becomes resistance.
+Resistance becomes support.
+
+Trapped traders create new opportunity.
+
+#BreakerBlocks #TradingEducation #SignalPilot #ICT #SmartMoney
+```
+
+---
+
+# ROW 102 (Posts 304-306)
+
+## ⚪ NEUTRAL | POST 310 | EDU: Power of Three
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (6 slides)
+
+**Caption:**
+```
+Power of Three (PO3)
+
+THE DAILY MARKET CYCLE
+
+THE THREE PHASES:
+
+1. ACCUMULATION
+When: Early session (Asia/pre-London)
+What: Quiet consolidation
+Who: Smart money building positions
+Price action: Tight range, low volume
+
+2. MANIPULATION
+When: London open
+What: Fake breakout in wrong direction
+Who: Retail getting trapped
+Price action: Sweep of overnight highs/lows
+
+3. DISTRIBUTION
+When: NY session
+What: Real move happens
+Who: Institutions taking profit on retail stops
+Price action: Strong directional move
+
+THE PATTERN:
+Asia range → London fake → NY real move
+
+HOW TO USE:
+Identify the overnight range
+Watch for London sweep
+Enter in NY in the true direction
+
+Not every day. But often enough.
+
+Free PO3 guide — link in bio
+
+#PowerOfThree #PO3 #TradingEducation #SignalPilot #ICT #SmartMoney #CryptoTrading #ForexTrading #DailyBias #Accumulation #Manipulation #Distribution #LearnTrading #SessionTrading #MarketCycle
+```
+
+### TWITTER/X — Single Tweet
+```
+Power of Three: The daily cycle.
+
+1. Accumulation (Asia) - Building positions
+2. Manipulation (London) - Fake move
+3. Distribution (NY) - Real move
+
+Asia consolidates. London fakes. NY delivers.
+
+#PowerOfThree #ICT #TradingEducation #SignalPilot #SmartMoney
+```
+
+---
+
+# ROW 103 (Posts 307-309)
+
+## 🔵 TEAL | POST 313 | Chronicle: The Arbiter's Judgment
+
+**Type:** Chronicle | **Pillar:** P5: Chronicle | **CTA:** Chronicle
+
+### INSTAGRAM — Single Image (1080x1080)
+
+**Caption:**
+```
+THE ARBITER'S JUDGMENT
+
+"Between buying and selling, I find the truth."
+
+THE ARBITER'S ROLE:
+Neither bull nor bear
+Observer of forces
+Measurer of conviction
+Judge of momentum
+
+WHAT THE ARBITER SEES:
+
+OVERBOUGHT:
+Buyers exhausted
+Sellers gathering
+Momentum peaked
+Reversal possible
+
+OVERSOLD:
+Sellers exhausted
+Buyers gathering
+Momentum bottomed
+Reversal possible
+
+DIVERGENCE:
+Price and momentum disagree
+Hidden conflict
+Change approaching
+
+THE HARMONIC OSCILLATOR:
+The Arbiter's tool
+Multiple momentum components
+No single measure deceives
+Comprehensive judgment
+
+THE WISDOM:
+Extremes don't last
+Balance returns
+Divergence warns
+Patience wins
+
+Read the full chronicle — link in bio
+
+#TheArbiter #HarmonicOscillator #SignalPilot #Chronicle #Momentum #TradingLore #SignalPilotChronicle #Overbought #Oversold #TradingWisdom #TradingMythology #Divergence #MomentumTrading #TradingPhilosophy #BalanceReturns
+```
+
+### TWITTER/X — Single Tweet
+```
+"Between buying and selling, I find the truth."
+— The Arbiter
+
+The Harmonic Oscillator measures what others miss.
+Momentum. Exhaustion. Divergence.
+
+The Arbiter judges without bias.
+
+#TheArbiter #HarmonicOscillator #SignalPilot #Chronicle #TradingLore
+```
+
+---
+
+# ROW 104 (Posts 310-312)
+
+## ⚪ NEUTRAL | POST 317 | EDU: Moving Averages Basics
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+Moving Averages Basics
+
+BACK TO BASICS
+
+WHAT THEY DO:
+Smooth price data
+Show average price over X periods
+Filter trend direction
+
+TYPES:
+
+SMA (Simple):
+Equal weight to all periods
+Slower, smoother
+
+EMA (Exponential):
+More weight to recent prices
+Faster, more responsive
+
+HOW TO USE:
+Price ABOVE MA = bullish bias
+Price BELOW MA = bearish bias
+MA slope = trend strength
+
+COMMON PERIODS:
+20 MA = short-term
+50 MA = medium-term
+200 MA = long-term
+
+IMPORTANT:
+Moving averages LAG
+They confirm, not predict
+Use for context, not entries
+
+Free MA guide — link in bio
+
+#MovingAverages #TradingBasics #SignalPilot #TradingEducation #TechnicalAnalysis #SMA #EMA #TrendFilter #CryptoTrading #ForexTrading #LearnTrading #TradingView #MA200 #MovingAverage #TradingTips
+```
+
+### TWITTER/X — Single Tweet
+```
+Moving averages: the simplest trend filter.
+
+Price above MA = bullish bias
+Price below MA = bearish bias
+
+Not magic, just math. A smoothed view of direction.
+
+#MovingAverages #TradingBasics #SignalPilot #TradingEducation
+```
+
+---
+
+## 🟠 ORANGE | POST 318 | Quote: Adapt or Die
+
+**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Single Image (1080x1080)
+
+**Caption:**
+```
+ADAPT OR DIE
+
+"The market that worked last year may not work this year.
+
+The strategy that worked last month may not work this month.
+
+Adapt or become a statistic."
+
+What changes in markets:
+
+VOLATILITY REGIMES
+High vol -> Low vol cycles
+
+MARKET STRUCTURE
+Trending -> Ranging -> Trending
+
+CORRELATIONS
+Assets move together, then don't
+
+PARTICIPANT BEHAVIOR
+Algos, retail, institutions shift
+
+How to adapt:
+Monitor strategy performance
+Recognize when conditions change
+Have multiple approaches
+Stay humble, stay learning
+
+Rigidity is death. Flexibility is survival.
+
+Save this
+
+#Adaptation #TradingEvolution #SignalPilot #MarketChange #TradingMindset #TradingPsychology #Flexibility #TradingEducation #StayCurrent #SurvivalOfFittest #TradingTips #MarketConditions #StrategyDevelopment #LearnTrading #TraderLife
+```
+
+### TWITTER/X — Single Tweet
+```
+"The market that worked last year may not work this year.
+
+The strategy that worked last month may not work this month.
+
+Adapt or become a statistic."
+
+#Adaptation #TradingEvolution #SignalPilot #MarketChange
+```
+
+---
+
+# ROW 105 (Posts 313-315)
+
+## ⚪ NEUTRAL | POST 320 | EDU: Candlestick Patterns
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 slides)
+
+**Caption:**
+```
+Candlestick Patterns
+
+VISUAL CLUES FROM PRICE
+
+KEY PATTERNS:
+
+DOJI:
+Open and close nearly equal
+Market undecided
+Potential reversal or continuation
+
+HAMMER / HANGING MAN:
+Long lower wick, small body
+Rejection of lower prices
+Bullish at support, bearish at resistance
+
+ENGULFING:
+Current candle engulfs previous
+Bullish engulfing = buyers took control
+Bearish engulfing = sellers took control
+
+MORNING / EVENING STAR:
+Three-candle pattern
+Reversal at key levels
+Strong directional signal
+
+IMPORTANT:
+Context matters (where on chart?)
+Volume confirms
+Higher TF = more reliable
+Pattern does not equal guarantee
+
+QUICK REFERENCE:
+Doji -> Indecision
+Hammer -> Rejection
+Engulfing -> Momentum shift
+Star -> Reversal
+
+Free pattern guide — link in bio
+
+#CandlestickPatterns #PriceAction #SignalPilot #TradingEducation #TechnicalAnalysis #Doji #Hammer #Engulfing #TradingView #ChartPatterns #LearnTrading #JapaneseCandlesticks #PatternRecognition #CryptoTrading #ForexTrading
+```
+
+### TWITTER/X — Single Tweet
+```
+Candlestick patterns: visual clues from price action.
+
+Doji = indecision
+Hammer = potential reversal
+Engulfing = momentum shift
+
+Patterns provide context, not commands.
+
+Free pattern guide in bio
+
+#CandlestickPatterns #PriceAction #SignalPilot #TradingEducation
+```
+
+---
+
+# ROW 106 (Posts 316-318)
+
+## ⚪ NEUTRAL | POST 323 | EDU: Position Sizing Formulas
+
+**Type:** Education | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (7 slides)
+
+**Caption:**
+```
+Position Sizing Formula
+
+THE MATH THAT SAVES ACCOUNTS
+
+THE FORMULA:
+Position Size = Risk Amount / Distance to Stop
+
+EXAMPLE:
+Account: $10,000
+Risk per trade: 1% = $100
+Entry: $50, Stop: $48, Distance: $2
+Position Size = $100 / $2 = 50 shares
+
+WHY THIS WORKS:
+Risk is FIXED regardless of stop distance
+Wider stop = smaller position
+Tighter stop = larger position
+Always lose the same dollar amount
+
+THE STEPS:
+1. Determine account size
+2. Set risk % per trade (1-2%)
+3. Calculate dollar risk
+4. Identify entry and stop
+5. Calculate distance
+6. Divide dollar risk by distance
+
+IMPORTANT:
+Never skip this calculation
+Emotional sizing kills accounts
+Let the math decide
+Not your feelings
+
+Free position size calculator — link in bio
+
+#PositionSizing #RiskManagement #SignalPilot #TradingEducation #TradingMath #TradingFormula #TradingCalculator #ProtectCapital #SmartSizing #CryptoTrading #ForexTrading #RiskPerTrade #MoneyManagement #LearnTrading #TradingStrategy
+```
+
+### TWITTER/X — Single Tweet
+```
+Position sizing formula:
+
+Risk Amount / (Entry - Stop) = Position Size
+
+If you risk $100 and your stop is $10 away, you trade 10 units.
+
+Math protects capital.
+
+Free calculator in bio
+
+#PositionSizing #RiskManagement #SignalPilot #TradingEducation
 ```
 
 ---
