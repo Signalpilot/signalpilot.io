@@ -2712,7 +2712,7 @@ blog.signalpilot.io/articles/the-confirmation-trap/
 ---
 
 # ═══════════════════════════════════════════════════════════
-# ROW 12 (Posts 34-36) — IN CANVA, NOT YET POSTED
+# ROW 12 (Posts 34-36) — POSTED
 # ═══════════════════════════════════════════════════════════
 
 ---
@@ -2761,64 +2761,71 @@ It's never about accuracy. It's about expectancy.
 
 ---
 
-## 🔵 TEAL | POST 033 | Blog: Position Sizing 101
+## ⚪ NEUTRAL | POST 039 | EDU: Position Sizing (Lesson)
 
 **Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
 
 ### INSTAGRAM — Carousel (6 Slides)
 
 **Slide Structure:**
-1. **Hook:** "WHY TRADERS BLOW UP"
-2. **Truth:** It's not bad entries, it's position sizing
-3. **Math 1:** 10 losses at 2% = 82% remaining
-4. **Math 2:** 10 losses at 10% = 35% remaining
-5. **Key Insight:** Same losses, different survival
-6. **CTA:** Full breakdown link
+1. **Hook:** "THE SURVIVAL FORMULA"
+2. **Formula:** Position Size = (Account × Risk%) ÷ Risk Per Share
+3. **Example 1:** $10,000 × 2% = $200 max loss
+4. **Example 2:** $5 risk per share = 40 shares
+5. **Key:** Calculate BEFORE you click
+6. **CTA:** Full lesson link
 
 **Caption:**
 ```
-This is the difference between traders who survive and traders who blow up 💀
+Position sizing isn't sexy. But it keeps you alive. 📏
 
-POSITION SIZING.
+The formula:
 
-Here's the math:
+Position Size = (Account × Risk%) ÷ (Entry - Stop Loss)
 
-📉 10 losses at 2% risk = 82% account remaining
-📉 10 losses at 5% risk = 60% account remaining
-📉 10 losses at 10% risk = 35% account remaining
+Example:
+→ $10,000 account
+→ 2% risk = $200 max loss
+→ Entry $100, Stop $95 = $5 risk per share
+→ Position = $200 ÷ $5 = 40 shares
 
-It's not about being "scared." It's about being smart.
+Calculate BEFORE you enter. Every time.
 
-Full breakdown in bio 🔗
+Full lesson in bio 🔗
 
-#positionsizing #riskmanagement #trading #forex #crypto #tradingmath #signalpilot
+#positionsizing #riskmanagement #tradingmath #trading #forex #crypto #signalpilot
 ```
 
 ### TWITTER/X — Thread Format
 
 **Tweet 1 (Hook):**
 ```
-The difference between surviving and blowing up?
+Your position size is your risk management.
 
-Position sizing.
+Too big: one bad trade ends you.
+Too small: you can't grow.
+Just right: you survive long enough to learn.
 
-Risk 1-2% per trade. Not because it's conservative. Because it's math. 🧵
+Calculate before you click. Every single time. 🧵
 ```
 
 **Tweet 2:**
 ```
-10 losses in a row at 2% = still 82% of your account.
-10 losses at 5% = 60% remaining.
-10 losses at 10% = gone.
+The formula:
 
-Same losing streak. Completely different outcomes.
+Position Size = (Account × Risk%) ÷ (Entry - Stop Loss)
+
+Example:
+$10,000 account × 2% = $200 max loss
+Entry $100, Stop $95 = $5 risk per share
+Position = $200 ÷ $5 = 40 shares
 ```
 
 **Tweet 3 (CTA):**
 ```
-Full breakdown on position sizing:
+Full lesson on position sizing:
 
-https://blog.signalpilot.io/articles/position-sizing-101/
+https://education.signalpilot.io/curriculum/beginner/09-position-sizing.html
 
 #positionsizing #riskmanagement #trading
 ```
@@ -3026,56 +3033,66 @@ https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html
 
 ---
 
-## 🔵 TEAL | POST 040 | Docs: Plutus Flow Cheatsheet
+## 🔵 TEAL | POST 033 | Blog: Position Sizing 101
 
-**Type:** Docs/Cheatsheet | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+**Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
 
 ### INSTAGRAM — Carousel (6 Slides)
 
 **Slide Structure:**
-1. **Title:** "THE PLUTUS FLOW CHEATSHEET"
-2. **Signal 1:** Rising Flow + Rising Price = Healthy trend
-3. **Signal 2:** Rising Flow + Falling Price = Accumulation
-4. **Signal 3:** Falling Flow + Rising Price = Distribution
-5. **Signal 4:** Falling Flow + Falling Price = Confirmed downtrend
-6. **CTA:** Full cheatsheet in docs
+1. **Hook:** "WHY TRADERS BLOW UP"
+2. **Truth:** It's not bad entries, it's position sizing
+3. **Math 1:** 10 losses at 2% = 82% remaining
+4. **Math 2:** 10 losses at 10% = 35% remaining
+5. **Key Insight:** Same losses, different survival
+6. **CTA:** Full breakdown link
 
 **Caption:**
 ```
-The Plutus Flow Cheatsheet ⚖️
+This is the difference between traders who survive and traders who blow up 💀
 
-Four scenarios. Four meanings:
+POSITION SIZING.
 
-📈 Rising Flow + Rising Price
-= HEALTHY TREND (price confirmed by flow)
+Here's the math:
 
-📈 Rising Flow + Falling Price
-= ACCUMULATION (smart money buying the dip)
+📉 10 losses at 2% risk = 82% account remaining
+📉 10 losses at 5% risk = 60% account remaining
+📉 10 losses at 10% risk = 35% account remaining
 
-📉 Falling Flow + Rising Price
-= DISTRIBUTION (smart money selling into strength)
+It's not about being "scared." It's about being smart.
 
-📉 Falling Flow + Falling Price
-= CONFIRMED DOWNTREND (both agree on direction)
+Full breakdown in bio 🔗
 
-Save this. Reference it every time you check Plutus Flow. 📌
-
-🔗 Full cheatsheet in bio.
-
-#plutusflow #cheatsheet #volumeanalysis #trading #signalpilot
+#positionsizing #riskmanagement #trading #forex #crypto #tradingmath #signalpilot
 ```
 
-### TWITTER/X — Single Tweet
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
 ```
-Plutus Flow Cheatsheet:
+The difference between surviving and blowing up?
 
-📈 Rising Flow + Rising Price = Healthy trend
-📈 Rising Flow + Falling Price = Accumulation
-📉 Falling Flow + Rising Price = Distribution
-📉 Falling Flow + Falling Price = Confirmed downtrend
+Position sizing.
 
-Print it. Pin it. Use it ↓
-https://docs.signalpilot.io/ref-cheatsheets-plutus/
+Risk 1-2% per trade. Not because it's conservative. Because it's math. 🧵
+```
+
+**Tweet 2:**
+```
+10 losses in a row at 2% = still 82% of your account.
+10 losses at 5% = 60% remaining.
+10 losses at 10% = gone.
+
+Same losing streak. Completely different outcomes.
+```
+
+**Tweet 3 (CTA):**
+```
+Full breakdown on position sizing:
+
+https://blog.signalpilot.io/articles/position-sizing-101/
+
+#positionsizing #riskmanagement #trading
 ```
 
 ---
@@ -3130,73 +3147,56 @@ Signal Pilot. Education first.
 
 ---
 
-## ⚪ NEUTRAL | POST 039 | EDU: Position Sizing (Lesson)
+## 🔵 TEAL | POST 040 | Docs: Plutus Flow Cheatsheet
 
-**Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
+**Type:** Docs/Cheatsheet | **Pillar:** P2: Indicator Truth | **CTA:** Docs
 
 ### INSTAGRAM — Carousel (6 Slides)
 
 **Slide Structure:**
-1. **Hook:** "THE SURVIVAL FORMULA"
-2. **Formula:** Position Size = (Account × Risk%) ÷ Risk Per Share
-3. **Example 1:** $10,000 × 2% = $200 max loss
-4. **Example 2:** $5 risk per share = 40 shares
-5. **Key:** Calculate BEFORE you click
-6. **CTA:** Full lesson link
+1. **Title:** "THE PLUTUS FLOW CHEATSHEET"
+2. **Signal 1:** Rising Flow + Rising Price = Healthy trend
+3. **Signal 2:** Rising Flow + Falling Price = Accumulation
+4. **Signal 3:** Falling Flow + Rising Price = Distribution
+5. **Signal 4:** Falling Flow + Falling Price = Confirmed downtrend
+6. **CTA:** Full cheatsheet in docs
 
 **Caption:**
 ```
-Position sizing isn't sexy. But it keeps you alive. 📏
+The Plutus Flow Cheatsheet ⚖️
 
-The formula:
+Four scenarios. Four meanings:
 
-Position Size = (Account × Risk%) ÷ (Entry - Stop Loss)
+📈 Rising Flow + Rising Price
+= HEALTHY TREND (price confirmed by flow)
 
-Example:
-→ $10,000 account
-→ 2% risk = $200 max loss
-→ Entry $100, Stop $95 = $5 risk per share
-→ Position = $200 ÷ $5 = 40 shares
+📈 Rising Flow + Falling Price
+= ACCUMULATION (smart money buying the dip)
 
-Calculate BEFORE you enter. Every time.
+📉 Falling Flow + Rising Price
+= DISTRIBUTION (smart money selling into strength)
 
-Full lesson in bio 🔗
+📉 Falling Flow + Falling Price
+= CONFIRMED DOWNTREND (both agree on direction)
 
-#positionsizing #riskmanagement #tradingmath #trading #forex #crypto #signalpilot
+Save this. Reference it every time you check Plutus Flow. 📌
+
+🔗 Full cheatsheet in bio.
+
+#plutusflow #cheatsheet #volumeanalysis #trading #signalpilot
 ```
 
-### TWITTER/X — Thread Format
-
-**Tweet 1 (Hook):**
+### TWITTER/X — Single Tweet
 ```
-Your position size is your risk management.
+Plutus Flow Cheatsheet:
 
-Too big: one bad trade ends you.
-Too small: you can't grow.
-Just right: you survive long enough to learn.
+📈 Rising Flow + Rising Price = Healthy trend
+📈 Rising Flow + Falling Price = Accumulation
+📉 Falling Flow + Rising Price = Distribution
+📉 Falling Flow + Falling Price = Confirmed downtrend
 
-Calculate before you click. Every single time. 🧵
-```
-
-**Tweet 2:**
-```
-The formula:
-
-Position Size = (Account × Risk%) ÷ (Entry - Stop Loss)
-
-Example:
-$10,000 account × 2% = $200 max loss
-Entry $100, Stop $95 = $5 risk per share
-Position = $200 ÷ $5 = 40 shares
-```
-
-**Tweet 3 (CTA):**
-```
-Full lesson on position sizing:
-
-https://education.signalpilot.io/curriculum/beginner/09-position-sizing.html
-
-#positionsizing #riskmanagement #trading
+Print it. Pin it. Use it ↓
+https://docs.signalpilot.io/ref-cheatsheets-plutus/
 ```
 
 ---
