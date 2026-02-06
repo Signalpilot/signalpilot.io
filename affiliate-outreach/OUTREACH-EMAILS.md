@@ -164,7 +164,7 @@ Signal Pilot Labs
 
 ## 6. Liberated Stock Trader (Barry D. Moore, CFTe)
 
-**To:** [CONTACT FORM] — liberatedstocktrader.com/contact (site was down during research; try LinkedIn: linkedin.com/in/barrydmoore)
+**To:** customerservices@liberatedstocktrader.com
 **Subject:** Submitting Pentarch for your indicator testing methodology
 
 Hi Barry,
@@ -501,7 +501,7 @@ Signal Pilot Labs
 | 3 | The Chart Guys | info@thechartguys.com | Direct email |
 | 4 | Kivanc Ozbilgic | — | Telegram: t.me/AlgoRhytm or TradingView DM |
 | 5 | Trading Strategy Guides | casey@tradingstrategyguides.com | Direct email |
-| 6 | Liberated Stock Trader | — | Contact form or LinkedIn: linkedin.com/in/barrydmoore |
+| 6 | Liberated Stock Trader | customerservices@liberatedstocktrader.com | Direct email |
 | 7 | Crypto Jebb | — | YouTube About page / Instagram DM @cryptojebb |
 | 8 | askSlim | slim@askslim.com / matt@askslim.com | Direct email |
 | 9 | ClayTrader | — | Contact form: claytrader.com/contact |
