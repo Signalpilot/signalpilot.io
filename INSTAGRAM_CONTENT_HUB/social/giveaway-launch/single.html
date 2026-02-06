@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignalPilot Launch Giveaway — Single Image</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0A1A1A;
+      --cine-teal: #14B8A6;
+      --cine-teal-glow: #0D9488;
+      --cine-teal-text: rgba(204, 251, 241, 0.95);
+      --cine-teal-subtle: rgba(94, 234, 212, 0.7);
+      --text-primary: #f0f0f0;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-dim: rgba(255, 255, 255, 0.35);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #111;
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .controls label { font-size: 0.875rem; color: var(--text-secondary); }
+
+    .controls select, .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .page-title h1 { font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; font-family: var(--font-sans); }
+    .page-title p { color: var(--text-secondary); font-size: 0.875rem; }
+
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 4 / 5;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+    }
+
+    .slide-bg video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.06;
+    }
+
+    .slide.bg-black .slide-bg video { opacity: 0; }
+
+    /* Teal cinematic overlays */
+    .slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(20,184,166,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 80%, rgba(13,148,136,0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, rgba(20,184,166,0.8), rgba(20,184,166,0.2));
+      z-index: 3;
+    }
+
+    .slide-content {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 10%;
+    }
+
+    /* Top label */
+    .top-label {
+      position: absolute;
+      top: 8%;
+      font-family: var(--font-sans);
+      font-size: clamp(0.45rem, 1.4cqw, 0.75rem);
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--cine-teal);
+    }
+
+    /* Main headline */
+    .headline {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 5.5cqw, 3.2rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+    }
+
+    .headline em {
+      color: var(--cine-teal-text);
+      font-style: normal;
+    }
+
+    /* Divider */
+    .divider {
+      width: clamp(40px, 8cqw, 80px);
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--cine-teal), transparent);
+      margin: 4% auto;
+    }
+
+    /* Prize text */
+    .prize-text {
+      font-family: var(--font-sans);
+      font-size: clamp(0.8rem, 2.6cqw, 1.4rem);
+      font-weight: 400;
+      color: var(--cine-teal-text);
+      line-height: 1.5;
+      margin-bottom: 2%;
+    }
+
+    .prize-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+      font-weight: 300;
+      color: var(--cine-teal-subtle);
+      line-height: 1.6;
+    }
+
+    /* Entry hint */
+    .entry-hint {
+      margin-top: 6%;
+      padding: clamp(8px, 1.8cqw, 18px) clamp(16px, 3.5cqw, 36px);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      border-radius: 4px;
+      background: rgba(20, 184, 166, 0.06);
+    }
+
+    .entry-hint p {
+      font-family: var(--font-sans);
+      font-size: clamp(0.5rem, 1.6cqw, 0.85rem);
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.08em;
+    }
+
+    .entry-hint .teal {
+      color: var(--cine-teal);
+      font-weight: 600;
+    }
+
+    /* Bottom branding */
+    .bottom-brand {
+      position: absolute;
+      bottom: 6%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(4px, 0.8cqw, 8px);
+    }
+
+    .brand-name {
+      font-family: var(--font-serif);
+      font-size: clamp(0.6rem, 1.8cqw, 1rem);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .brand-tagline {
+      font-family: var(--font-sans);
+      font-size: clamp(0.35rem, 1.1cqw, 0.6rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Three dots decoration */
+    .three-dots {
+      display: flex;
+      gap: clamp(4px, 1cqw, 10px);
+      margin-bottom: 5%;
+    }
+
+    .three-dots span {
+      width: clamp(4px, 1cqw, 8px);
+      height: clamp(4px, 1cqw, 8px);
+      border-radius: 50%;
+      background: var(--cine-teal);
+      opacity: 0.5;
+    }
+
+    .three-dots span:nth-child(2) {
+      opacity: 0.8;
+    }
+
+    .three-dots span:nth-child(3) {
+      opacity: 1;
+    }
+
+    /* Export Mode */
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title { display: none; }
+    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; box-shadow: none; }
+
+    @media (max-width: 600px) {
+      .controls { position: static; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.04">4%</option><option value="0.06" selected>6%</option><option value="0.08">8%</option><option value="0.10">10%</option></select></label>
+    <button id="export-btn">Export Mode</button>
+  </div>
+
+  <div class="page-title">
+    <h1>Launch Giveaway — Single Image</h1>
+    <p>Instagram Post &bull; 1080&times;1350px</p>
+  </div>
+
+  <div class="slide-wrapper">
+    <div class="slide">
+      <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+      <div class="slide-content">
+
+        <div class="top-label">Official Launch</div>
+
+        <div class="three-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <h1 class="headline">We're Launching.<br>We're Bringing <em>3 of You</em><br>With Us.</h1>
+
+        <div class="divider"></div>
+
+        <p class="prize-text">2 Months Free Access</p>
+        <p class="prize-sub">Elite Seven Monthly — For You &amp; 2 Friends</p>
+
+        <div class="entry-hint">
+          <p><span class="teal">Follow</span> + <span class="teal">Tag 2 Friends</span> &mdash; Details Below</p>
+        </div>
+
+        <div class="bottom-brand">
+          <span class="brand-name">Signal Pilot</span>
+          <span class="brand-tagline">The Elite Seven</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bgToggle = document.getElementById('bg-toggle');
+    const opacityControl = document.getElementById('opacity-control');
+    const slide = document.querySelector('.slide');
+    const video = document.querySelector('.slide-bg video');
+
+    bgToggle.addEventListener('change', (e) => {
+      slide.classList.toggle('bg-black', e.target.value === 'black');
+    });
+
+    opacityControl.addEventListener('change', (e) => {
+      video.style.opacity = e.target.value;
+    });
+
+    const exportBtn = document.getElementById('export-btn');
+    let exportMode = false;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && exportMode) {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+      }
+    });
+  </script>
+</body>
+</html>
