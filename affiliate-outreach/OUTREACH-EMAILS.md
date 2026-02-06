@@ -133,7 +133,7 @@ Signal Pilot Labs
 
 ## 5. Trading Strategy Guides (Casey Stubbs)
 
-**To:** casey@tradingstrategyguides.com
+**To:** info@tradingstrategyguides.com
 **Subject:** The anti-strategy-hopping indicator — could be a good "How to Trade It" episode
 
 Hi Casey,
@@ -164,7 +164,7 @@ Signal Pilot Labs
 
 ## 6. Liberated Stock Trader (Barry D. Moore, CFTe)
 
-**To:** [CONTACT FORM] — liberatedstocktrader.com/contact (site was down during research; try LinkedIn: linkedin.com/in/barrydmoore)
+**To:** customerservices@liberatedstocktrader.com
 **Subject:** Submitting Pentarch for your indicator testing methodology
 
 Hi Barry,
@@ -198,7 +198,7 @@ Signal Pilot Labs
 
 ## 7. Crypto Jebb (Jebb McAfee)
 
-**To:** [CHECK YOUTUBE ABOUT PAGE for business email] — alternatively DM on Instagram @cryptojebb or X @CryptoJebb
+**To:** [INSTAGRAM DM] — @cryptojebb (bio says "Inquiries → DM")
 **Subject:** Pentarch answers "Is Bitcoin overextended?" — automatically
 
 Hi Jebb,
@@ -500,9 +500,9 @@ Signal Pilot Labs
 | 2 | Zen & The Art of Trading | — | Contact form: zenandtheartoftrading.com/contact |
 | 3 | The Chart Guys | info@thechartguys.com | Direct email |
 | 4 | Kivanc Ozbilgic | — | Telegram: t.me/AlgoRhytm or TradingView DM |
-| 5 | Trading Strategy Guides | casey@tradingstrategyguides.com | Direct email |
-| 6 | Liberated Stock Trader | — | Contact form or LinkedIn: linkedin.com/in/barrydmoore |
-| 7 | Crypto Jebb | — | YouTube About page / Instagram DM @cryptojebb |
+| 5 | Trading Strategy Guides | info@tradingstrategyguides.com | Direct email |
+| 6 | Liberated Stock Trader | customerservices@liberatedstocktrader.com | Direct email |
+| 7 | Crypto Jebb | [INSTAGRAM DM] — @cryptojebb (bio says "Inquiries → DM") | Direct email |
 | 8 | askSlim | slim@askslim.com / matt@askslim.com | Direct email |
 | 9 | ClayTrader | — | Contact form: claytrader.com/contact |
 | 10 | TRADEPRO Academy | george@tradeproacademy.com | Direct email |
