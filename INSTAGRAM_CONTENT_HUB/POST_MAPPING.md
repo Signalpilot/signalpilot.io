@@ -70,7 +70,7 @@
 | 029 | Chronicle | The Cartographer | "THE CARTOGRAPHER" | ✅ YES |
 | 031 | EDU | Revenge Trading | "REVENGE TRADING ISN'T A DISCIPLINE PROBLEM" | ✅ YES |
 | 032 | EDU | Confirmation Bias | "YOU DON'T SEE THE CHART" | ✅ YES |
-| 033 | EDU | Position Sizing 101 | "WHY TRADERS BLOW UP" | ✅ YES |
+| 033 | Blog | Position Sizing 101 | "WHY TRADERS BLOW UP" | ✅ YES |
 | 034 | Quote | "Right vs Profitable" | — | ? |
 | 035 | Product | Plutus Flow Demo | "YOUR VOLUME BARS ARE LYING" | ✅ YES |
 | 036 | EDU | Absorption Patterns | "WHEN EVERYONE PANICS..." | ✅ YES |
@@ -97,7 +97,7 @@
 | Post Order | Post # | Type | Topic | Your Title | Column |
 |------------|--------|------|-------|------------|--------|
 | **34** | **034** | **Quote** | **"Right vs Profitable"** | — | **Orange** |
-| **35** | **033** | **EDU** | **Position Sizing** | "WHY TRADERS BLOW UP" | **Neutral** |
+| **35** | **033** | **Blog** | **Position Sizing** | "WHY TRADERS BLOW UP" | **Teal** |
 | **36** | **038** | **Chronicle** | **The Scales (Plutus)** | *(borrow from future)* | **Teal** |
 
 ---
