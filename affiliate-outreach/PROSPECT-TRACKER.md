@@ -8,7 +8,7 @@
 | 2 | Zen & The Art of Trading | Contact form | 1 | Not sent | | | Pine Script educator, systematic trading |
 | 3 | The Chart Guys | info@thechartguys.com | 1 | Not sent | | | Own TradingView indicators, education-first |
 | 4 | Kivanc Ozbilgic | Telegram/TV DM | 1 | Not sent | | | Pine Script Wizard, AlphaTrend creator |
-| 5 | Trading Strategy Guides | casey@tradingstrategyguides.com | 1 | Not sent | | | Podcast host, reviews premium indicators |
+| 5 | Trading Strategy Guides | info@tradingstrategyguides.com | 1 | Not sent | | | Podcast host, reviews premium indicators |
 | 6 | Liberated Stock Trader | customerservices@liberatedstocktrader.com | 1 | Not sent | | | Backtested 103 indicators, CFTe |
 | 7 | Crypto Jebb | YouTube About/IG DM | 2 | Not sent | | | Crypto TA, 224K+ subs, CT2A course |
 | 8 | askSlim | slim@askslim.com | 2 | Not sent | | | Cycle analysis pioneer, 47+ years |
