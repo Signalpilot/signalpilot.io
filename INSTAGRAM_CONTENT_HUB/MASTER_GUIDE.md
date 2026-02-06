@@ -19,23 +19,6 @@
 └─────────────────┴─────────────────┴─────────────────┘
 ```
 
-## Post Number Formula
-```
-Post # mod 9 = Position
-
-1 → BLOG        (Teal)
-2 → EDU         (Neutral)
-3 → QUOTE       (Orange)
-4 → CHRONICLE   (Teal)
-5 → EDU         (Neutral)
-6 → PRODUCT     (Orange)
-7 → DOCS        (Teal)
-8 → EDU         (Neutral)
-0 → MARKETING   (Orange)
-```
-
-**Example:** Post 402 → 402 % 9 = 6 → PRODUCT (Orange)
-
 ---
 
 # 2. COLOR PALETTE
