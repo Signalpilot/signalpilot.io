@@ -97,8 +97,8 @@
 | Post Order | Post # | Type | Topic | Your Title | Column |
 |------------|--------|------|-------|------------|--------|
 | **34** | **034** | **Quote** | **"Right vs Profitable"** | — | **Orange** |
-| **35** | **033** | **Blog** | **Position Sizing** | "WHY TRADERS BLOW UP" | **Teal** |
-| **36** | **038** | **Chronicle** | **The Scales (Plutus)** | *(borrow from future)* | **Teal** |
+| **35** | **036** | **EDU** | **Absorption Patterns** | "WHEN EVERYONE PANICS..." | **Neutral** |
+| **36** | **033** | **Blog** | **Position Sizing** | "WHY TRADERS BLOW UP" | **Teal** |
 
 ---
 
@@ -106,8 +106,10 @@
 | Order | Post # | Type | Column |
 |-------|--------|------|--------|
 | 37 | 035 | Product | Orange |
-| 38 | 036 | EDU | Neutral |
-| 39 | 040 | Docs | Teal |
+| 38 | 039 | EDU | Neutral |
+| 39 | 038 | Chronicle | Teal |
+
+> **Note:** Post 039 borrowed from Grid Row 14 to fill Neutral slot. Grid Row 14 neutral needs adjustment when reached.
 
 ---
 

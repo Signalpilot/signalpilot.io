@@ -1,548 +1,836 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 058 — Chronicle: The Watchman | Carousel Preview</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --accent-green: #4ad97a;
-      --text-primary: #e8e8e8;
-      --text-secondary: #a0a0a0;
-      --text-dim: #6a6a6a;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 058 — Chronicle: The Watchman | Carousel Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --text-primary: #e8e6e3;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
 
-      /* Concept 03 Cinematic Colors - TEAL */
-      --cine-teal: #14B8A6;
-      --cine-teal-text: rgba(204, 251, 241, 0.95);
-      --cine-teal-subtle: rgba(94, 234, 212, 0.7);
-    }
+            /* Concept 03 Cinematic Colors - TEAL */
+            --cine-teal: #14B8A6;
+            --cine-teal-glow: #0D9488;
+            --cine-teal-text: rgba(204, 251, 241, 0.95);
+            --cine-teal-subtle: rgba(94, 234, 212, 0.7);
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
+        html, body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
 
-    .controls {
-      position: fixed;
-      top: 20px; right: 20px;
-      z-index: 100;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
+        body { padding: 24px; }
 
-    .controls label {
-      color: var(--text-secondary);
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+        .controls-bar {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding: 16px;
+            margin-bottom: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            flex-wrap: wrap;
+        }
 
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .controls button {
-      background: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-    }
+        .control-group label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
 
-    .page-title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+        .control-group select,
+        .control-group input[type="range"] {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
 
-    .page-title h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 400;
-      margin-bottom: 8px;
-    }
+        #export-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid var(--cine-teal);
+            background: transparent;
+            color: var(--cine-teal);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-    .page-title p { color: var(--text-dim); font-size: 14px; }
+        #export-btn:hover {
+            background: var(--cine-teal);
+            color: var(--bg-dark);
+        }
 
-    .carousel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+        .page-title {
+            text-align: center;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--text-tertiary);
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+        }
 
-    .slide-wrapper {
-      aspect-ratio: 4 / 5;
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg-dark);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-      container-type: inline-size;
-    }
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+            gap: 24px;
+            justify-items: center;
+            max-width: 2400px;
+            margin: 0 auto;
+        }
 
-    .slide-wrapper .bg-video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: var(--video-opacity, 0.08);
-      pointer-events: none;
-    }
+        .slide-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            container-type: inline-size;
+        }
 
-    .slide-wrapper .slide-content {
-      position: relative;
-      z-index: 2;
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 8%;
-      text-align: center;
-    }
+        .slide-label {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
 
-    .slide-number {
-      position: absolute;
-      top: 4%; left: 4%;
-      font-size: clamp(9px, 2cqw, 11px);
-      color: var(--text-dim);
-      letter-spacing: 1px;
-    }
+        .slide {
+            position: relative;
+            width: 100%;
+            max-width: 540px;
+            aspect-ratio: 4 / 5;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.4),
+                0 0 0 1px var(--border-subtle);
+        }
 
-    .brand-mark {
-      position: absolute;
-      bottom: 4%; right: 4%;
-      font-size: clamp(8px, 1.8cqw, 10px);
-      color: var(--text-dim);
-      letter-spacing: 1px;
-    }
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: var(--video-opacity);
+            z-index: 0;
+            pointer-events: none;
+        }
 
-    .slide-icon { font-size: clamp(32px, 8cqw, 56px); margin-bottom: 4%; }
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: clamp(36px, 6.67cqw, 72px);
+            background: linear-gradient(
+                145deg,
+                rgba(10, 10, 15, 0.97) 0%,
+                rgba(10, 10, 15, 0.92) 100%
+            );
+        }
 
-    .slide-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(18px, 5cqw, 32px);
-      font-weight: 600;
-      margin-bottom: 3%;
-      line-height: 1.2;
-    }
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: clamp(24px, 4.44cqw, 48px);
+        }
 
-    .slide-title.large { font-size: clamp(26px, 7cqw, 48px); }
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: clamp(7px, 1.30cqw, 14px);
+            font-weight: 500;
+            color: var(--text-tertiary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
 
-    .slide-subtitle {
-      font-size: clamp(10px, 2.5cqw, 14px);
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 4%;
-    }
+        .brand-logo {
+            font-family: var(--font-serif);
+            font-size: clamp(12px, 2.22cqw, 24px);
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+        }
 
-    .slide-body {
-      font-size: clamp(12px, 3cqw, 16px);
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 90%;
-    }
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-    .quote-box {
-      background: linear-gradient(135deg, rgba(74, 144, 217, 0.1), rgba(201, 169, 98, 0.1));
-      border: 1px solid rgba(74, 144, 217, 0.3);
-      border-radius: 16px;
-      padding: 6%;
-      margin: 4% 0;
-      max-width: 90%;
-    }
+        /* Hook slide elements */
+        .hook-icon {
+            font-size: clamp(36px, 6.67cqw, 72px);
+            margin-bottom: clamp(16px, 2.96cqw, 32px);
+            line-height: 1;
+        }
 
-    .quote-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(14px, 4cqw, 22px);
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.5;
-      margin-bottom: 3%;
-    }
+        .hook-title {
+            font-family: var(--font-serif);
+            font-size: clamp(36px, 6.67cqw, 72px);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: clamp(12px, 2.22cqw, 24px);
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
 
-    .quote-author {
-      font-size: clamp(10px, 2.5cqw, 14px);
-      color: var(--accent-blue);
-      font-weight: 500;
-    }
+        .hook-subtitle {
+            font-family: var(--font-sans);
+            font-size: clamp(17px, 3.15cqw, 34px);
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
 
-    .ability-box {
-      width: 100%;
-      max-width: 90%;
-      border-radius: 16px;
-      padding: 5%;
-      margin: 3% 0;
-      background: rgba(74, 144, 217, 0.1);
-      border: 2px solid rgba(74, 144, 217, 0.4);
-    }
+        /* Content text */
+        .content-text {
+            font-family: var(--font-sans);
+            font-size: clamp(14px, 2.59cqw, 28px);
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
 
-    .ability-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(16px, 4.5cqw, 26px);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 3%;
-    }
+        .content-text .teal { color: var(--cine-teal); font-weight: 500; }
+        .content-text em { color: var(--cine-teal-subtle); font-style: italic; }
 
-    .ability-desc {
-      font-size: clamp(10px, 2.5cqw, 14px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
+        /* Teal card (used for ability, philosophy, etc.) */
+        .teal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--cine-teal);
+            border-radius: clamp(8px, 1.48cqw, 16px);
+            padding: clamp(20px, 3.70cqw, 40px);
+            margin-bottom: clamp(16px, 2.96cqw, 32px);
+        }
 
-    .feature-list {
-      width: 100%;
-      max-width: 90%;
-      margin: 3% 0;
-    }
+        .teal-card-label {
+            font-family: var(--font-sans);
+            font-size: clamp(9px, 1.67cqw, 18px);
+            font-weight: 600;
+            color: var(--cine-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: clamp(8px, 1.48cqw, 16px);
+        }
 
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 3%;
-      padding: 3% 4%;
-      background: rgba(74, 144, 217, 0.08);
-      border-radius: 10px;
-      margin-bottom: 2%;
-      text-align: left;
-    }
+        .teal-card-title {
+            font-family: var(--font-serif);
+            font-size: clamp(20px, 3.70cqw, 40px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: clamp(8px, 1.48cqw, 16px);
+            line-height: 1.2;
+        }
 
-    .feature-item:last-child { margin-bottom: 0; }
-    .feature-item .icon { font-size: clamp(14px, 3.5cqw, 20px); }
-    .feature-item .text { font-size: clamp(10px, 2.5cqw, 14px); color: var(--text-secondary); }
+        .teal-card-body {
+            font-family: var(--font-sans);
+            font-size: clamp(13px, 2.41cqw, 26px);
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
 
-    .indicator-badge {
-      display: inline-block;
-      background: rgba(74, 144, 217, 0.2);
-      border: 1px solid var(--accent-blue);
-      color: var(--accent-blue);
-      padding: 2% 4%;
-      border-radius: 20px;
-      font-size: clamp(10px, 2.3cqw, 13px);
-      font-weight: 500;
-      margin-top: 3%;
-      letter-spacing: 1px;
-    }
+        /* Ability box */
+        .ability-box {
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            border-left: 3px solid var(--cine-teal);
+            border-radius: clamp(8px, 1.48cqw, 16px);
+            padding: clamp(20px, 3.70cqw, 40px);
+            margin-bottom: clamp(16px, 2.96cqw, 32px);
+        }
 
-    .cta-link {
-      display: inline-block;
-      margin-top: 5%;
-      padding: 3% 6%;
-      background: var(--accent-blue);
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      font-size: clamp(11px, 2.5cqw, 14px);
-    }
+        .ability-title {
+            font-family: var(--font-serif);
+            font-size: clamp(20px, 3.70cqw, 40px);
+            font-weight: 600;
+            color: var(--cine-teal-text);
+            margin-bottom: clamp(8px, 1.48cqw, 16px);
+            line-height: 1.2;
+        }
 
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper {
-      display: none;
-      width: 1080px; height: 1350px;
-      border-radius: 0; margin: 0;
-    }
-    body.export-mode .slide-wrapper.active { display: block; }
+        .ability-desc {
+            font-family: var(--font-sans);
+            font-size: clamp(13px, 2.41cqw, 26px);
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
 
-    .export-nav {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      gap: 12px;
-      z-index: 1000;
-    }
+        /* Feature list */
+        .feature-stack {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(6px, 1.11cqw, 12px);
+            margin-bottom: clamp(16px, 2.96cqw, 32px);
+        }
 
-    body.export-mode .export-nav { display: flex; }
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 1.85cqw, 20px);
+            padding: clamp(10px, 1.85cqw, 20px);
+            background: rgba(20, 184, 166, 0.08);
+            border: 1px solid rgba(20, 184, 166, 0.15);
+            border-radius: clamp(6px, 1.11cqw, 12px);
+        }
 
-    .export-nav button {
-      background: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-    }
+        .feature-icon {
+            font-size: clamp(16px, 2.96cqw, 32px);
+            flex-shrink: 0;
+        }
 
-    .export-nav .slide-indicator {
-      background: rgba(255,255,255,0.1);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-    }
+        .feature-text {
+            font-family: var(--font-sans);
+            font-size: clamp(12px, 2.22cqw, 24px);
+            font-weight: 400;
+            color: var(--text-primary);
+        }
 
-    @media (max-width: 768px) {
-      .carousel-grid { grid-template-columns: 1fr; max-width: 400px; }
-    }
+        /* Indicator badge */
+        .indicator-badge {
+            display: inline-block;
+            background: rgba(20, 184, 166, 0.15);
+            border: 1px solid var(--cine-teal);
+            color: var(--cine-teal);
+            padding: clamp(6px, 1.11cqw, 12px) clamp(16px, 2.96cqw, 32px);
+            border-radius: clamp(16px, 2.96cqw, 32px);
+            font-family: var(--font-sans);
+            font-size: clamp(12px, 2.22cqw, 24px);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-top: clamp(12px, 2.22cqw, 24px);
+        }
 
-    /* Slide 1 - Cinematic TEAL (Concept 03) */
-    .slide-wrapper.slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%);
-    }
+        /* Insight / centered text */
+        .insight-text {
+            font-family: var(--font-serif);
+            font-size: clamp(20px, 3.70cqw, 40px);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-primary);
+            text-align: center;
+            line-height: 1.4;
+        }
 
-    .slide-wrapper.slide-1::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(20,184,166,0.1) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
+        /* CTA */
+        .cta-container { text-align: center; }
 
-    .slide-wrapper.slide-1::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: rgba(20,184,166,0.6);
-      z-index: 2;
-    }
+        .cta-primary {
+            font-family: var(--font-serif);
+            font-size: clamp(26px, 4.81cqw, 52px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: clamp(12px, 2.22cqw, 24px);
+        }
 
-    .slide-wrapper.slide-1 .slide-content { z-index: 3; }
+        .cta-secondary {
+            font-family: var(--font-sans);
+            font-size: clamp(16px, 2.96cqw, 32px);
+            color: var(--cine-teal);
+            font-weight: 400;
+            margin-bottom: clamp(12px, 2.22cqw, 24px);
+        }
 
-    .slide-wrapper.slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.55rem, 1.6cqw, 0.75rem);
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--cine-teal);
-      margin-bottom: 4%;
-    }
+        .cta-link {
+            display: inline-block;
+            margin-top: clamp(8px, 1.48cqw, 16px);
+            padding: clamp(8px, 1.48cqw, 16px) clamp(20px, 3.70cqw, 40px);
+            background: transparent;
+            border: 1px solid var(--cine-teal);
+            color: var(--cine-teal);
+            text-decoration: none;
+            border-radius: clamp(4px, 0.74cqw, 8px);
+            font-family: var(--font-sans);
+            font-size: clamp(12px, 2.22cqw, 24px);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: all 0.2s ease;
+        }
 
-    .slide-wrapper.slide-1 .hook-main {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem, 3.5cqw, 2rem);
-      font-weight: 600;
-      color: var(--cine-teal-text);
-      line-height: 1.2;
-      margin-bottom: 4%;
-    }
+        .cta-link:hover {
+            background: var(--cine-teal);
+            color: var(--bg-dark);
+        }
 
-    .slide-wrapper.slide-1 .cine-divider {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--cine-teal), transparent);
-      margin: 0 auto 4%;
-    }
+        /* Footer */
+        .slide-footer {
+            margin-top: auto;
+            padding-top: clamp(20px, 3.70cqw, 40px);
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .slide-wrapper.slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.7rem, 2cqw, 1rem);
-      font-weight: 300;
-      color: var(--cine-teal-subtle);
-      line-height: 1.5;
-    }
+        .footer-tag {
+            font-family: var(--font-sans);
+            font-size: clamp(9px, 1.67cqw, 18px);
+            color: var(--text-tertiary);
+            letter-spacing: 0.05em;
+        }
 
-    .slide-wrapper.slide-1 .cine-logo {
-      position: absolute;
-      bottom: 6%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.4cqw, 0.7rem);
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(20,184,166,0.4);
-    }
-  </style>
+        .footer-accent {
+            width: clamp(24px, 4.44cqw, 48px);
+            height: clamp(1.5px, 0.28cqw, 3px);
+            background: linear-gradient(90deg, var(--cine-teal), var(--cine-teal-glow));
+            border-radius: 2px;
+        }
+
+        /* Slide 1 - Cinematic TEAL Hook */
+        .slide.slide-1 .slide-content {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide.slide-1::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(20,184,166,0.1) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .slide.slide-1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: rgba(20,184,166,0.6);
+            z-index: 2;
+        }
+
+        .cine-label {
+            font-family: var(--font-sans);
+            font-size: clamp(9px, 1.67cqw, 18px);
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--cine-teal);
+            margin-bottom: clamp(12px, 2.22cqw, 24px);
+        }
+
+        .hook-main {
+            font-family: var(--font-serif);
+            font-size: clamp(36px, 6.67cqw, 72px);
+            font-weight: 600;
+            color: var(--cine-teal-text);
+            line-height: 1.1;
+            margin-bottom: clamp(16px, 2.96cqw, 32px);
+        }
+
+        .cine-divider {
+            width: clamp(40px, 7.41cqw, 80px);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--cine-teal), transparent);
+            margin: 0 auto clamp(16px, 2.96cqw, 32px);
+        }
+
+        .hook-sub {
+            font-family: var(--font-sans);
+            font-size: clamp(14px, 2.59cqw, 28px);
+            font-weight: 300;
+            color: var(--cine-teal-subtle);
+            line-height: 1.5;
+        }
+
+        .cine-logo {
+            position: absolute;
+            bottom: clamp(24px, 4.44cqw, 48px);
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-sans);
+            font-size: clamp(8px, 1.48cqw, 16px);
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(20,184,166,0.4);
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.export-mode .controls-bar,
+        body.export-mode .page-title,
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: block;
+        }
+
+        body.export-mode .slide {
+            width: 1080px;
+            height: 1350px;
+            max-width: none;
+            aspect-ratio: auto;
+            border-radius: 0;
+        }
+
+        body.export-mode .slide-content { padding: 72px; }
+        body.export-mode .slide-header { margin-bottom: 48px; }
+        body.export-mode .slide-number { font-size: 14px; }
+        body.export-mode .brand-logo { font-size: 24px; }
+        body.export-mode .hook-icon { font-size: 72px; margin-bottom: 32px; }
+        body.export-mode .hook-title { font-size: 72px; margin-bottom: 24px; }
+        body.export-mode .hook-subtitle { font-size: 34px; }
+        body.export-mode .hook-main { font-size: 72px; margin-bottom: 32px; }
+        body.export-mode .hook-sub { font-size: 28px; }
+        body.export-mode .cine-label { font-size: 18px; margin-bottom: 24px; }
+        body.export-mode .cine-divider { width: 80px; margin-bottom: 32px; }
+        body.export-mode .cine-logo { font-size: 16px; bottom: 48px; }
+        body.export-mode .content-text { font-size: 28px; }
+        body.export-mode .teal-card { border-radius: 16px; padding: 40px; margin-bottom: 32px; }
+        body.export-mode .teal-card-label { font-size: 18px; margin-bottom: 16px; }
+        body.export-mode .teal-card-title { font-size: 40px; margin-bottom: 16px; }
+        body.export-mode .teal-card-body { font-size: 26px; }
+        body.export-mode .ability-box { border-radius: 16px; padding: 40px; margin-bottom: 32px; }
+        body.export-mode .ability-title { font-size: 40px; margin-bottom: 16px; }
+        body.export-mode .ability-desc { font-size: 26px; }
+        body.export-mode .feature-stack { gap: 12px; margin-bottom: 32px; }
+        body.export-mode .feature-row { padding: 20px; border-radius: 12px; gap: 20px; }
+        body.export-mode .feature-icon { font-size: 32px; }
+        body.export-mode .feature-text { font-size: 24px; }
+        body.export-mode .indicator-badge { font-size: 24px; padding: 12px 32px; margin-top: 24px; }
+        body.export-mode .insight-text { font-size: 40px; }
+        body.export-mode .cta-primary { font-size: 52px; margin-bottom: 24px; }
+        body.export-mode .cta-secondary { font-size: 32px; margin-bottom: 24px; }
+        body.export-mode .cta-link { font-size: 24px; padding: 16px 40px; }
+        body.export-mode .slide-footer { padding-top: 40px; }
+        body.export-mode .footer-tag { font-size: 18px; }
+        body.export-mode .footer-accent { width: 48px; height: 3px; }
+    </style>
 </head>
 <body>
-  <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
-  </div>
-
-  <div class="page-title">
-    <h1>Post 058 — Chronicle: The Watchman</h1>
-    <p>Chronicle Lore Carousel — 7 Slides</p>
-  </div>
-
-  <div class="carousel-grid">
-    <!-- Slide 1: Cinematic Hook (TEAL - Chronicle) -->
-    <div class="slide-wrapper slide-1">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <div class="cine-label">The Chronicle</div>
-        <div class="hook-main">The Watchman</div>
-        <div class="cine-divider"></div>
-        <p class="hook-sub">"While you watch one, I watch all."</p>
-        <div class="cine-logo">SignalPilot</div>
-      </div>
-    </div>
-
-    <!-- Slide 2: Philosophy -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 07</span>
-        <div class="slide-subtitle">Philosophy</div>
-        <h2 class="slide-title">All-Seeing Vigilance</h2>
-        <p class="slide-body">"While you watch one, I watch all."<br><br>Among the Elite Seven, The Watchman never rests. Every symbol, every timeframe, every setup — observed.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <!-- Slide 3: Ability -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 07</span>
-        <div class="ability-box">
-          <div class="ability-title">Never Blinks, Never Misses</div>
-          <div class="ability-desc">The Watchman sees opportunities forming while you focus elsewhere. No chart left unwatched. No setup missed.</div>
+    <div class="controls-bar">
+        <div class="control-group">
+            <label for="bg-select">Background</label>
+            <select id="bg-select">
+                <option value="starfield">Starfield</option>
+                <option value="none">None</option>
+            </select>
         </div>
-        <p class="slide-body">You can't watch everything. The Watchman can.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <!-- Slide 4: Method -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 07</span>
-        <div class="slide-subtitle">The Method</div>
-        <h2 class="slide-title">Multi-Symbol Scanning</h2>
-        <div class="feature-list">
-          <div class="feature-item">
-            <span class="icon">📊</span>
-            <span class="text">Scans multiple symbols simultaneously</span>
-          </div>
-          <div class="feature-item">
-            <span class="icon">⚡</span>
-            <span class="text">Real-time status updates</span>
-          </div>
-          <div class="feature-item">
-            <span class="icon">🔔</span>
-            <span class="text">Alerts to potential setups</span>
-          </div>
+        <div class="control-group">
+            <label for="opacity-slider">Opacity</label>
+            <input type="range" id="opacity-slider" min="0" max="30" value="8">
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
+        <button id="export-btn">Export Mode</button>
     </div>
 
-    <!-- Slide 5: Benefit -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 07</span>
-        <div class="slide-subtitle">Benefit</div>
-        <h2 class="slide-title">Never Miss a Setup</h2>
-        <p class="slide-body">While you're focused on one chart, setups form elsewhere. The Watchman sees them all and alerts you to opportunities you would have missed.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
+    <div class="page-title">Post 058 — Chronicle: The Watchman — 7 Slides</div>
+
+    <div class="carousel-grid">
+        <!-- Slide 1: Cinematic Hook (TEAL - Chronicle) -->
+        <div class="slide-wrapper slide-1" data-slide="1">
+            <span class="slide-label">Slide 1 — Cinematic Hook</span>
+            <div class="slide slide-1">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="cine-label">The Chronicle</div>
+                    <div class="hook-main">The Watchman</div>
+                    <div class="cine-divider"></div>
+                    <p class="hook-sub">"While you watch one, I watch all."</p>
+                    <div class="cine-logo">SignalPilot</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Philosophy -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Philosophy</span>
+            <div class="slide slide-2">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">02 / 07</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="teal-card">
+                            <div class="teal-card-label">Philosophy</div>
+                            <div class="teal-card-title">All-Seeing Vigilance</div>
+                            <div class="teal-card-body">"While you watch one, I watch all."</div>
+                        </div>
+                        <p class="content-text">Among the Elite Seven, The Watchman never rests. Every symbol, every timeframe, every setup — <span class="teal">observed</span>.</p>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">The Chronicle</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Ability -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Ability</span>
+            <div class="slide slide-3">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">03 / 07</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="ability-box">
+                            <div class="ability-title">Never Blinks, Never Misses</div>
+                            <div class="ability-desc">The Watchman sees opportunities forming while you focus elsewhere. No chart left unwatched. No setup missed.</div>
+                        </div>
+                        <p class="content-text">You can't watch everything.<br>The Watchman <span class="teal">can</span>.</p>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">The Chronicle</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Method -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Method</span>
+            <div class="slide slide-4">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">04 / 07</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="teal-card-label">The Method</div>
+                        <div class="teal-card-title" style="margin-bottom: clamp(16px, 2.96cqw, 32px);">Multi-Symbol Scanning</div>
+                        <div class="feature-stack">
+                            <div class="feature-row">
+                                <span class="feature-icon">📊</span>
+                                <span class="feature-text">Scans multiple symbols simultaneously</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">⚡</span>
+                                <span class="feature-text">Real-time status updates</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">🔔</span>
+                                <span class="feature-text">Alerts to potential setups</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">The Chronicle</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Benefit -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Benefit</span>
+            <div class="slide slide-5">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">05 / 07</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="teal-card">
+                            <div class="teal-card-label">Benefit</div>
+                            <div class="teal-card-title">Never Miss a Setup</div>
+                            <div class="teal-card-body">While you're focused on one chart, setups form elsewhere. The Watchman sees them all and alerts you to opportunities you would have missed.</div>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">The Chronicle</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Connection -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — Connection</span>
+            <div class="slide slide-6">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">06 / 07</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="hook-icon">👁️</div>
+                        <p class="insight-text">The Watchman Is...</p>
+                        <div style="text-align: center;">
+                            <span class="indicator-badge">AUGURY GRID</span>
+                        </div>
+                        <p class="content-text" style="text-align: center; margin-top: clamp(16px, 2.96cqw, 32px);">Among the Elite Seven, The Watchman never sleeps.<br><br>One of seven indicators. One philosophy.</p>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">The Chronicle</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — CTA</span>
+            <div class="slide slide-7">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">07 / 07</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="cta-container">
+                            <div class="hook-icon">📜</div>
+                            <h2 class="cta-primary">Enter the Chronicle</h2>
+                            <p class="cta-secondary">Discover the full story of The Watchman and the Elite Seven.</p>
+                            <a href="https://signalpilot.io/chronicle/the-watchman/" class="cta-link">Meet The Watchman</a>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">The Chronicle</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Slide 6: Connection -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 07</span>
-        <div class="slide-icon">👁️</div>
-        <h2 class="slide-title">The Watchman Is...</h2>
-        <div class="indicator-badge">AUGURY GRID</div>
-        <p class="slide-body">Among the Elite Seven, The Watchman never sleeps.<br><br>One of seven indicators. One philosophy.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide-wrapper');
+            const bgSelect = document.getElementById('bg-select');
+            const opacitySlider = document.getElementById('opacity-slider');
+            const exportBtn = document.getElementById('export-btn');
+            let currentSlide = 0;
+            let exportMode = false;
 
-    <!-- Slide 7: CTA -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">07 / 07</span>
-        <div class="slide-icon">📜</div>
-        <h2 class="slide-title">Enter the Chronicle</h2>
-        <p class="slide-body">Discover the full story of The Watchman and the Elite Seven.</p>
-        <a href="https://signalpilot.io/chronicle/the-watchman/" class="cta-link">Meet The Watchman</a>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-  </div>
+            bgSelect.addEventListener('change', (e) => {
+                const videos = document.querySelectorAll('.slide-bg');
+                videos.forEach(video => {
+                    video.style.display = e.target.value === 'none' ? 'none' : 'block';
+                });
+            });
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 7</span>
-    <button onclick="nextSlide()">Next →</button>
-  </div>
+            opacitySlider.addEventListener('input', (e) => {
+                document.documentElement.style.setProperty('--video-opacity', (e.target.value / 100).toFixed(2));
+            });
 
-  <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0;
-    let exportMode = false;
+            exportBtn.addEventListener('click', () => {
+                if (!exportMode) {
+                    enterExportMode();
+                } else {
+                    exitExportMode();
+                }
+            });
 
-    bgToggle.addEventListener('change', (e) => {
-      videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none');
-    });
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                exportBtn.textContent = 'Exit Export';
+                currentSlide = 0;
+                updateSlideVisibility();
+            }
 
-    opacitySlider.addEventListener('input', (e) => {
-      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
-    });
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                exportBtn.textContent = 'Export Mode';
+                slides.forEach(slide => slide.classList.remove('active'));
+            }
 
-    function toggleExportMode() {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) { currentSlide = 0; updateExportView(); }
-    }
+            function updateSlideVisibility() {
+                if (!exportMode) return;
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === currentSlide);
+                });
+            }
 
-    function updateExportView() {
-      slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
-      document.getElementById('currentSlide').textContent = currentSlide + 1;
-    }
-
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'Escape') toggleExportMode();
-    });
-  </script>
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'e' || e.key === 'E') {
+                    if (!exportMode) enterExportMode();
+                } else if (e.key === 'Escape') {
+                    exitExportMode();
+                } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                    if (!exportMode) return;
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    updateSlideVisibility();
+                } else if (e.key === 'ArrowLeft') {
+                    if (!exportMode) return;
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    updateSlideVisibility();
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
