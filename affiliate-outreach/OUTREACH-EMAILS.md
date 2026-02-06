@@ -46,7 +46,7 @@ Signal Pilot Labs
 
 Hi Matt,
 
-I've been following your Pine Script content for a while — the ZenLibrary v10 update to Pine v6 is the kind of contribution that makes the entire TradingView ecosystem better. Your point about backtesting being "the most under-utilized secret weapon in trading" is something we've built our entire product philosophy around.
+I've been following your Pine Script content for a while — what stands out is that you teach the logic behind strategy development, not just syntax. Your emphasis on backtesting being "the most under-utilized secret weapon in trading" is something we've built our entire product philosophy around.
 
 I'm reaching out from Signal Pilot. We've built 7 non-repainting TradingView indicators, and as a Pine Script developer, I think you'd appreciate looking under the hood:
 
