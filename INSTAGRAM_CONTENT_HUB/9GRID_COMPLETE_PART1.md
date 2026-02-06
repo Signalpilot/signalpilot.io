@@ -751,7 +751,7 @@ https://signalpilot.io
 
 ---
 
-## ⚪ NEUTRAL | POST 008 | Quote: "Support Doesn't Hold"
+## 🟠 ORANGE | POST 008 | Quote: "Support Doesn't Hold"
 
 **Type:** Quote Card | **Pillar:** P1: Liquidity Lie | **CTA:** Follow
 
@@ -2147,7 +2147,7 @@ education.signalpilot.io
 
 ---
 
-## 🔵 TEAL | POST 025 | EDU: Moving Averages
+## ⚪ NEUTRAL | POST 025 | EDU: Moving Averages
 
 **Type:** Education Hub | **Pillar:** P2: Indicator Truth | **CTA:** Lead Magnet
 
@@ -2761,7 +2761,7 @@ It's never about accuracy. It's about expectancy.
 
 ---
 
-## ⚪ NEUTRAL | POST 033 | EDU: Position Sizing 101
+## 🔵 TEAL | POST 033 | Blog: Position Sizing 101
 
 **Type:** Education Hub | **Pillar:** P4: Psychology | **CTA:** Lead Magnet
 
@@ -4154,7 +4154,7 @@ Round numbers become self-fulfilling support/resistance.
 
 ---
 
-## 🟠 ORANGE | POST 058 | Chronicle: The Watchman
+## 🔵 TEAL | POST 058 | Chronicle: The Watchman
 
 **Type:** Chronicle Lore | **Pillar:** P5: Chronicle | **CTA:** Chronicle Site
 
@@ -4472,7 +4472,7 @@ Use them as zones of interest, not guaranteed reversals.
 
 ---
 
-## 🔵 TEAL | POST 065 | Product: Pentarch Full Cycle Demo
+## 🟠 ORANGE | POST 065 | Product: Pentarch Full Cycle Demo
 
 **Type:** Product Demo | **Pillar:** P1: Liquidity Lie | **CTA:** Trial
 
@@ -4512,7 +4512,7 @@ Historical observation, not prediction. Educational, not advice.
 
 ---
 
-## 🟠 ORANGE | POST 067 | Blog: Danger of Averaging Down
+## 🔵 TEAL | POST 067 | Blog: Danger of Averaging Down
 
 **Type:** Blog Article | **Pillar:** P4: Psychology | **CTA:** Chronicle
 
@@ -4796,7 +4796,7 @@ Wait for confirmation. Your thesis can be right and your timing can still kill y
 
 ---
 
-## ⚪ NEUTRAL | POST 073 | Blog: Multi-Timeframe Advantage
+## 🔵 TEAL | POST 073 | Blog: Multi-Timeframe Advantage
 
 **Type:** Blog Article | **Pillar:** P3: Market Mechanics | **CTA:** Docs
 
@@ -4835,7 +4835,7 @@ Trade with the trend of the timeframe above you.
 
 ---
 
-## 🔵 TEAL | POST 075 | Product: Volume Oracle Regime Detection
+## 🟠 ORANGE | POST 075 | Product: Volume Oracle Regime Detection
 
 **Type:** Product Demo | **Pillar:** P2: Indicator Truth | **CTA:** Trial
 
@@ -4878,7 +4878,7 @@ The strategy that works in one regime fails in another.
 
 ---
 
-## 🟠 ORANGE | POST 076 | EDU: Backtesting Basics
+## ⚪ NEUTRAL | POST 076 | EDU: Backtesting Basics
 
 **Type:** Education Hub | **Pillar:** P2: Indicator Truth | **CTA:** Lead Magnet
 
@@ -4919,7 +4919,7 @@ If it doesn't work on historical data, why would it work on live money?
 
 ---
 
-## ⚪ NEUTRAL | POST 077 | Blog: Liquidity Hunting Explained
+## 🔵 TEAL | POST 077 | Blog: Liquidity Hunting Explained
 
 **Type:** Blog Article | **Pillar:** P1: Liquidity Lie | **CTA:** Chronicle
 
@@ -14897,7 +14897,7 @@ We're confident. You should be too.
 
 ---
 
-## ⚪ NEUTRAL | POST 268 | DOCS: Frequently Asked Questions
+## 🔵 TEAL | POST 268 | DOCS: Frequently Asked Questions
 
 **Type:** Docs | **Pillar:** P2: Indicator Truth | **CTA:** Docs
 
