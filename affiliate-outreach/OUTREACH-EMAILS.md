@@ -50,10 +50,11 @@ I've been following your Pine Script content for a while — the ZenLibrary v10 
 
 I'm reaching out from Signal Pilot. We've built 7 non-repainting TradingView indicators, and as a Pine Script developer, I think you'd appreciate looking under the hood:
 
-- **Harmonic Oscillator** — a 7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence Zone). Each component votes independently — the architecture is what I think you'd find most interesting.
+- **Pentarch** — our flagship cycle phase detector. It maps 5 market cycle phases (Touchdown → Ignition → Warning → Capitulation → Breakdown) using a 4-layer confirmation system: Regime Classification → Pilot Line Distance → NanoFlow Momentum → Bar Close confirmation. As a Pine Script developer, I think you'd appreciate the architecture — it's designed so no signal can fire mid-bar.
+- **Harmonic Oscillator** — a 7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence Zone). Each component votes independently and outputs a conviction count. The multi-voter design is what I think you'd find most interesting from a code perspective.
 - **Augury Grid** — scans 8 tickers across 3 timeframes simultaneously (21 parallel scans) with quality scoring and conviction ranking.
 
-Every indicator uses a 4-layer confirmation system: Regime Classification → Pilot Line Distance → NanoFlow Momentum → Bar Close confirmation. No mid-bar repainting, ever. We back it with a $100 bounty.
+All 7 indicators are 100% non-repainting. Signals finalize on candle close. We back it with a $100 bounty.
 
 I'd love to give you lifetime access to the full suite — no strings attached. If you're interested, just send me your TradingView username and I'll activate all 7 within 24 hours.
 
@@ -102,7 +103,7 @@ Signal Pilot Labs
 ## 4. Kivanc Ozbilgic (AlgoWorld)
 
 **To:** [TELEGRAM DM] — t.me/AlgoRhytm (or TradingView DM to @KivancOzbilgic)
-**Subject:** What a Pine Script Wizard thinks of our 4-layer confirmation system
+**Subject:** What a Pine Script Wizard thinks of Pentarch's cycle detection architecture
 
 Hi Kivanc,
 
@@ -113,7 +114,7 @@ I'm reaching out from Signal Pilot. We've built 7 non-repainting TradingView ind
 - **Pentarch** — approaches the same sideways-market problem from the cycle-detection angle. Instead of filtering sideways noise, it maps where you are in the complete market cycle (5 phases: Touchdown → Ignition → Warning → Capitulation → Breakdown). If you're in a consolidation phase, you know to stand aside.
 - **Harmonic Oscillator** — 7-component voting system with a multi-factor algorithmic design that I think aligns with your approach of combining multiple indicator categories into one coherent tool.
 
-Every signal runs through a 4-layer confirmation: Regime Classification → Pilot Line Distance → NanoFlow Momentum → Bar Close. No mid-bar repainting. We back it with a $100 bounty.
+Pentarch runs every signal through a 4-layer confirmation: Regime Classification → Pilot Line Distance → NanoFlow Momentum → Bar Close. All 7 indicators are non-repainting — signals finalize on candle close. We back it with a $100 bounty.
 
 I'd love to give you full access to the entire suite. Send me your TradingView username and I'll activate all 7 indicators within 24 hours. No strings, no timeline — just interested in your expert feedback.
 
