@@ -1,623 +1,683 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 033 — Position Sizing 101 | Carousel Preview</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-green: #4ad97a;
-      --accent-red: #d94a4a;
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.85);
-      /* Concept 03 Cinematic Colors - NEUTRAL */
-      --cine-neutral-text: rgba(229, 229, 229, 0.9);
-      --cine-neutral-subtle: rgba(163, 163, 163, 0.7);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 033 — Position Sizing 101 | Carousel Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --text-primary: #e8e6e3;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-gold: #c9a962;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+            /* Concept 03 Cinematic Colors - TEAL */
+            --cine-teal: #14B8A6;
+            --cine-teal-glow: #0D9488;
+            --cine-teal-text: rgba(204, 251, 241, 0.95);
+            --cine-teal-subtle: rgba(94, 234, 212, 0.7);
+        }
 
-    body {
-      background: #111;
-      font-family: 'Inter', sans-serif;
-      color: var(--text-primary);
-      padding: 2rem;
-      min-height: 100vh;
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .controls {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 1000;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-    }
+        html, body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
 
-    .controls label {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
+        body { padding: 24px; }
 
-    .controls select,
-    .controls button {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: inherit;
-    }
+        .controls-bar {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding: 16px;
+            margin-bottom: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            flex-wrap: wrap;
+        }
 
-    .page-title {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-family: 'Cormorant Garamond', serif;
-    }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .page-title h1 {
-      font-size: 2rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
+        .control-group label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
 
-    .page-title p {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-    }
+        .control-group select,
+        .control-group input[type="range"] {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
 
-    .carousel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 2rem;
-      max-width: 1800px;
-      margin: 0 auto;
-      padding-bottom: 4rem;
-    }
+        #export-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid var(--cine-teal);
+            background: transparent;
+            color: var(--cine-teal);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-    .slide-wrapper {
-      container-type: inline-size;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        #export-btn:hover {
+            background: var(--cine-teal);
+            color: var(--bg-dark);
+        }
 
-    .slide-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-gold);
-      margin-bottom: 0.75rem;
-    }
+        .page-title {
+            text-align: center;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--text-tertiary);
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+        }
 
-    .slide {
-      width: 100%;
-      max-width: 540px;
-      aspect-ratio: 4 / 5;
-      position: relative;
-      overflow: hidden;
-      background: var(--bg-dark);
-      border-radius: 4px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+            gap: 24px;
+            justify-items: center;
+            max-width: 2400px;
+            margin: 0 auto;
+        }
 
-    .slide-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
+        .slide-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            container-type: inline-size;
+        }
 
-    .slide-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.08;
-    }
+        .slide-label {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
 
-    .slide.bg-black .slide-bg video {
-      opacity: 0;
-    }
+        .slide {
+            position: relative;
+            width: 100%;
+            max-width: 540px;
+            aspect-ratio: 4 / 5;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.4),
+                0 0 0 1px var(--border-subtle);
+        }
 
-    .slide-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 10%;
-    }
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: var(--video-opacity);
+            z-index: 0;
+            pointer-events: none;
+        }
 
-    /* Slide 1 - Cinematic NEUTRAL (Concept 03) */
-    .slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%);
-    }
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: clamp(36px, 6.67cqw, 72px);
+            background: linear-gradient(
+                145deg,
+                rgba(10, 10, 15, 0.97) 0%,
+                rgba(10, 10, 15, 0.92) 100%
+            );
+        }
 
-    .slide-1::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: clamp(24px, 4.44cqw, 48px);
+        }
 
-    .slide-1 .slide-content {
-      align-items: center;
-      text-align: center;
-      z-index: 3;
-    }
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: clamp(7px, 1.30cqw, 14px);
+            font-weight: 500;
+            color: var(--text-tertiary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
 
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
-      margin-bottom: 8%;
-    }
+        .brand-logo {
+            font-family: var(--font-serif);
+            font-size: clamp(12px, 2.22cqw, 24px);
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+        }
 
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: var(--cine-neutral-text);
-      margin-bottom: 4%;
-    }
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: rgba(163,163,163,0.4);
-      margin-bottom: 4%;
-    }
+        .hook-icon {
+            font-size: clamp(36px, 6.67cqw, 72px);
+            margin-bottom: clamp(16px, 2.96cqw, 32px);
+            line-height: 1;
+        }
 
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cine-neutral-subtle);
-      line-height: 1.6;
-    }
+        .hook-title {
+            font-family: var(--font-serif);
+            font-size: clamp(36px, 6.67cqw, 72px);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: clamp(12px, 2.22cqw, 24px);
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
 
-    .slide-1 .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163,163,163,0.4);
-    }
+        .hook-subtitle {
+            font-family: var(--font-sans);
+            font-size: clamp(17px, 3.15cqw, 34px);
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
 
-    .slide-content .header {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.8rem, 2.5cqw, 1.25rem);
-      font-weight: 500;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 4%;
-    }
+        .content-text {
+            font-family: var(--font-sans);
+            font-size: clamp(14px, 2.59cqw, 28px);
+            font-weight: 300;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
 
-    .slide-content .text {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.3cqw, 1.15rem);
-      line-height: 1.6;
-      color: var(--text-secondary);
-    }
+        .content-text .red { color: var(--accent-red); font-weight: 500; }
+        .content-text .green { color: var(--accent-green); font-weight: 500; }
+        .content-text em { color: var(--accent-gold); font-style: italic; }
 
-    .slide-content .text em {
-      font-style: italic;
-      color: var(--accent-gold);
-    }
+        .math-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--cine-teal);
+            border-radius: clamp(8px, 1.48cqw, 16px);
+            padding: clamp(20px, 3.70cqw, 40px);
+            margin-bottom: clamp(16px, 2.96cqw, 32px);
+        }
 
-    .slide-content .text .highlight {
-      color: var(--text-primary);
-      font-weight: 400;
-    }
+        .math-label {
+            font-family: var(--font-sans);
+            font-size: clamp(9px, 1.67cqw, 18px);
+            font-weight: 600;
+            color: var(--cine-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: clamp(8px, 1.48cqw, 16px);
+        }
 
-    .slide-content .text .red {
-      color: var(--accent-red);
-    }
+        .math-scenario {
+            font-family: var(--font-sans);
+            font-size: clamp(13px, 2.41cqw, 26px);
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: clamp(8px, 1.48cqw, 16px);
+        }
 
-    .slide-content .text .green {
-      color: var(--accent-green);
-    }
+        .math-result {
+            font-family: var(--font-sans);
+            font-size: clamp(18px, 3.33cqw, 36px);
+            font-weight: 600;
+        }
 
-    .math-box {
-      background: rgba(74, 144, 217, 0.1);
-      border-left: 3px solid var(--accent-blue);
-      padding: 4%;
-      margin-bottom: 3%;
-    }
+        .math-result.good { color: var(--accent-green); }
+        .math-result.bad { color: var(--accent-red); }
 
-    .math-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.55rem, 1.5cqw, 0.75rem);
-      font-weight: 600;
-      color: var(--accent-blue);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 2%;
-    }
+        .comparison-stack {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(6px, 1.11cqw, 12px);
+            margin-bottom: clamp(16px, 2.96cqw, 32px);
+        }
 
-    .math-scenario {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.75rem, 2.2cqw, 1.1rem);
-      font-weight: 400;
-      color: var(--text-primary);
-      margin-bottom: 2%;
-    }
+        .comparison-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: clamp(10px, 1.85cqw, 20px);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: clamp(6px, 1.11cqw, 12px);
+        }
 
-    .math-result {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.9rem, 2.8cqw, 1.5rem);
-      font-weight: 500;
-    }
+        .comparison-risk {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            font-size: clamp(12px, 2.22cqw, 24px);
+            color: var(--text-primary);
+        }
 
-    .math-result.good {
-      color: var(--accent-green);
-    }
+        .comparison-remain {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: clamp(12px, 2.22cqw, 24px);
+        }
 
-    .math-result.bad {
-      color: var(--accent-red);
-    }
+        .comparison-remain.high { color: var(--accent-green); }
+        .comparison-remain.mid { color: var(--accent-gold); }
+        .comparison-remain.low { color: var(--accent-red); }
 
-    .comparison-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 2%;
-    }
+        .insight-text {
+            font-family: var(--font-serif);
+            font-size: clamp(20px, 3.70cqw, 40px);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-primary);
+            text-align: center;
+            line-height: 1.4;
+        }
 
-    .comparison-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2%;
-      background: rgba(255, 255, 255, 0.03);
-    }
+        .cta-container { text-align: center; }
 
-    .comparison-risk {
-      font-weight: 400;
-      font-size: clamp(0.7rem, 2cqw, 1rem);
-      color: var(--text-primary);
-    }
+        .cta-primary {
+            font-family: var(--font-serif);
+            font-size: clamp(26px, 4.81cqw, 52px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: clamp(12px, 2.22cqw, 24px);
+        }
 
-    .comparison-remain {
-      font-weight: 500;
-      font-size: clamp(0.7rem, 2cqw, 1rem);
-    }
+        .cta-secondary {
+            font-family: var(--font-sans);
+            font-size: clamp(16px, 2.96cqw, 32px);
+            color: var(--cine-teal);
+            font-weight: 400;
+        }
 
-    .comparison-remain.high {
-      color: var(--accent-green);
-    }
+        .slide-footer {
+            margin-top: auto;
+            padding-top: clamp(20px, 3.70cqw, 40px);
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .comparison-remain.mid {
-      color: var(--accent-gold);
-    }
+        .footer-tag {
+            font-family: var(--font-sans);
+            font-size: clamp(9px, 1.67cqw, 18px);
+            color: var(--text-tertiary);
+            letter-spacing: 0.05em;
+        }
 
-    .comparison-remain.low {
-      color: var(--accent-red);
-    }
+        .footer-accent {
+            width: clamp(24px, 4.44cqw, 48px);
+            height: clamp(1.5px, 0.28cqw, 3px);
+            background: linear-gradient(90deg, var(--cine-teal), var(--cine-teal-glow));
+            border-radius: 2px;
+        }
 
-    .slide-6 .slide-content {
-      align-items: center;
-      text-align: center;
-    }
+        /* Slide 1 - Cinematic TEAL (Concept 03) */
+        .slide.slide-1::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(20,184,166,0.1) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
 
-    .slide-6 .cta-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.9rem, 2.8cqw, 1.5rem);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 2%;
-    }
+        .slide.slide-1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: rgba(20,184,166,0.6);
+            z-index: 2;
+        }
 
-    .slide-6 .cta-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.7rem, 2cqw, 1rem);
-      color: var(--text-secondary);
-      margin-bottom: 5%;
-    }
+        body.export-mode {
+            padding: 0;
+            background: transparent;
+        }
 
-    .slide-6 .cta-button {
-      display: inline-block;
-      padding: 3% 6%;
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 1.8cqw, 0.875rem);
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
+        body.export-mode .controls-bar,
+        body.export-mode .page-title,
+        body.export-mode .slide-label {
+            display: none;
+        }
 
-    .slide-6 .logo {
-      width: 40%;
-      max-width: 180px;
-      margin-top: 5%;
-      opacity: 0.8;
-    }
+        body.export-mode .carousel-grid {
+            display: block;
+        }
 
-    .slide-6 .link-hint {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 1.8cqw, 0.875rem);
-      color: var(--text-secondary);
-      margin-top: 4%;
-    }
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
 
-    body.export-mode {
-      padding: 0;
-      background: transparent;
-    }
+        body.export-mode .slide-wrapper.active {
+            display: block;
+        }
 
-    body.export-mode .controls,
-    body.export-mode .page-title,
-    body.export-mode .slide-label {
-      display: none;
-    }
+        body.export-mode .slide {
+            width: 1080px;
+            height: 1350px;
+            max-width: none;
+            aspect-ratio: auto;
+            border-radius: 0;
+        }
 
-    body.export-mode .carousel-grid {
-      display: block;
-      padding: 0;
-    }
-
-    body.export-mode .slide-wrapper {
-      display: none;
-    }
-
-    body.export-mode .slide-wrapper.active {
-      display: flex;
-    }
-
-    body.export-mode .slide {
-      width: 1080px;
-      height: 1350px;
-      max-width: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    @media (max-width: 900px) {
-      .carousel-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .controls {
-        position: static;
-        margin-bottom: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-    }
-  </style>
+        body.export-mode .slide-content { padding: 72px; }
+        body.export-mode .slide-header { margin-bottom: 48px; }
+        body.export-mode .slide-number { font-size: 14px; }
+        body.export-mode .brand-logo { font-size: 24px; }
+        body.export-mode .hook-icon { font-size: 72px; margin-bottom: 32px; }
+        body.export-mode .hook-title { font-size: 72px; margin-bottom: 24px; }
+        body.export-mode .hook-subtitle { font-size: 34px; }
+        body.export-mode .content-text { font-size: 28px; }
+        body.export-mode .math-card { border-radius: 16px; padding: 40px; }
+        body.export-mode .math-label { font-size: 18px; }
+        body.export-mode .math-scenario { font-size: 26px; }
+        body.export-mode .math-result { font-size: 36px; }
+        body.export-mode .comparison-row { padding: 20px; border-radius: 12px; }
+        body.export-mode .comparison-risk { font-size: 24px; }
+        body.export-mode .comparison-remain { font-size: 24px; }
+        body.export-mode .insight-text { font-size: 40px; }
+        body.export-mode .cta-primary { font-size: 52px; margin-bottom: 24px; }
+        body.export-mode .cta-secondary { font-size: 32px; }
+        body.export-mode .slide-footer { padding-top: 40px; }
+        body.export-mode .footer-tag { font-size: 18px; }
+        body.export-mode .footer-accent { width: 48px; height: 3px; }
+    </style>
 </head>
 <body>
-  <div class="controls">
-    <label>Background:
-      <select id="bg-toggle">
-        <option value="starfield">Starfield</option>
-        <option value="black">Pure Black</option>
-      </select>
-    </label>
-    <label>Opacity:
-      <select id="opacity-control">
-        <option value="0.03">3%</option>
-        <option value="0.05">5%</option>
-        <option value="0.08" selected>8%</option>
-        <option value="0.12">12%</option>
-        <option value="0.15">15%</option>
-      </select>
-    </label>
-    <button id="export-btn">Export Mode</button>
-  </div>
-
-  <div class="page-title">
-    <h1>Post 033 — Position Sizing 101</h1>
-    <p>Instagram Carousel • 6 Slides • 1080×1350px</p>
-  </div>
-
-  <div class="carousel-grid">
-    <!-- Slide 1: Cinematic Hook (ORANGE - Education/LEARN) -->
-    <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
-      <div class="slide slide-1">
-        <div class="slide-content">
-          <div class="cine-label">Learn</div>
-          <div class="hook-main">Why Traders Blow Up</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">Position sizing. It's not conservative. It's math.</p>
-          <div class="cine-logo">SignalPilot</div>
+    <div class="controls-bar">
+        <div class="control-group">
+            <label for="bg-select">Background</label>
+            <select id="bg-select">
+                <option value="starfield">Starfield</option>
+                <option value="none">None</option>
+            </select>
         </div>
-      </div>
+        <div class="control-group">
+            <label for="opacity-slider">Opacity</label>
+            <input type="range" id="opacity-slider" min="0" max="30" value="8">
+        </div>
+        <button id="export-btn">Export Mode</button>
     </div>
 
-    <!-- Slide 2: Truth -->
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — The Truth</span>
-      <div class="slide slide-2">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">The Real Problem</p>
-          <p class="text">It's not bad entries.<br>It's not bad timing.<br>It's not the market being "rigged."<br><br>It's <span class="red">position sizing</span>.<br><br>Most traders risk too much per trade. Then a normal losing streak becomes an account killer.</p>
-        </div>
-      </div>
-    </div>
+    <div class="page-title">Post 033 — Position Sizing 101 — 6 Slides</div>
 
-    <!-- Slide 3: Math 1 -->
-    <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — The Math (2%)</span>
-      <div class="slide slide-3">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">The Math</p>
-          <div class="math-box">
-            <div class="math-label">Scenario: 10 Losses at 2% Risk</div>
-            <div class="math-scenario">You hit a losing streak. It happens to everyone.</div>
-            <div class="math-result good">82% account remaining</div>
-          </div>
-          <p class="text">Still very much in the game.<br>Recover with a few good trades.<br><span class="green">Career continues.</span></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide 4: Math 2 -->
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — The Math (10%)</span>
-      <div class="slide slide-4">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">The Math</p>
-          <div class="math-box">
-            <div class="math-label">Scenario: 10 Losses at 10% Risk</div>
-            <div class="math-scenario">Same losing streak. Same number of trades.</div>
-            <div class="math-result bad">35% account remaining</div>
-          </div>
-          <p class="text">Need to triple your money just to break even.<br>Emotional decisions start.<br><span class="red">Career in danger.</span></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide 5: Key Insight -->
-    <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Key Insight</span>
-      <div class="slide slide-5">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">Same Losses. Different Survival.</p>
-          <div class="comparison-stack">
-            <div class="comparison-row">
-              <span class="comparison-risk">10 losses at 2% risk</span>
-              <span class="comparison-remain high">82% remaining</span>
+    <div class="carousel-grid">
+        <!-- Slide 1: Cinematic Hook (TEAL - Blog) -->
+        <div class="slide-wrapper slide-1" data-slide="1">
+            <span class="slide-label">Slide 1 — Cinematic Hook</span>
+            <div class="slide slide-1">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">01 / 06</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="hook-icon">💀</div>
+                        <h1 class="hook-title">Why Traders<br>Blow Up</h1>
+                        <p class="hook-subtitle">Position sizing. It's not conservative. It's math.</p>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">Blog Post</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
             </div>
-            <div class="comparison-row">
-              <span class="comparison-risk">10 losses at 5% risk</span>
-              <span class="comparison-remain mid">60% remaining</span>
-            </div>
-            <div class="comparison-row">
-              <span class="comparison-risk">10 losses at 10% risk</span>
-              <span class="comparison-remain low">35% remaining</span>
-            </div>
-          </div>
-          <p class="text" style="margin-top: 1.25rem; font-size: 1rem; text-align: center;">It's not about being "scared."<br>It's about being <em>smart</em>.</p>
         </div>
-      </div>
+
+        <!-- Slide 2: The Truth -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — The Truth</span>
+            <div class="slide slide-2">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">02 / 06</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <p class="content-text">It's not bad entries.<br>It's not bad timing.<br>It's not the market being "rigged."<br><br>It's <span class="red">position sizing</span>.<br><br>Most traders risk too much per trade. Then a normal losing streak becomes an account killer.</p>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">The Real Problem</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Math (2% Risk) -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — The Math (2%)</span>
+            <div class="slide slide-3">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">03 / 06</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="math-card">
+                            <div class="math-label">Scenario: 10 Losses at 2% Risk</div>
+                            <div class="math-scenario">You hit a losing streak. It happens to everyone.</div>
+                            <div class="math-result good">82% account remaining</div>
+                        </div>
+                        <p class="content-text">Still very much in the game.<br>Recover with a few good trades.<br><span class="green">Career continues.</span></p>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">The Math</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Math (10% Risk) -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — The Math (10%)</span>
+            <div class="slide slide-4">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">04 / 06</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="math-card">
+                            <div class="math-label">Scenario: 10 Losses at 10% Risk</div>
+                            <div class="math-scenario">Same losing streak. Same number of trades.</div>
+                            <div class="math-result bad">35% account remaining</div>
+                        </div>
+                        <p class="content-text">Need to triple your money just to break even.<br>Emotional decisions start.<br><span class="red">Career in danger.</span></p>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">The Math</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Key Insight -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Key Insight</span>
+            <div class="slide slide-5">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">05 / 06</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="comparison-stack">
+                            <div class="comparison-row">
+                                <span class="comparison-risk">10 losses at 2% risk</span>
+                                <span class="comparison-remain high">82% remaining</span>
+                            </div>
+                            <div class="comparison-row">
+                                <span class="comparison-risk">10 losses at 5% risk</span>
+                                <span class="comparison-remain mid">60% remaining</span>
+                            </div>
+                            <div class="comparison-row">
+                                <span class="comparison-risk">10 losses at 10% risk</span>
+                                <span class="comparison-remain low">35% remaining</span>
+                            </div>
+                        </div>
+                        <p class="insight-text">It's not about being "scared."<br>It's about being <em>smart</em>.</p>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">Same Losses. Different Survival.</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: CTA -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — CTA</span>
+            <div class="slide slide-6">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <span class="slide-number">06 / 06</span>
+                        <span class="brand-logo">Signal Pilot</span>
+                    </div>
+                    <div class="slide-body">
+                        <div class="cta-container">
+                            <h2 class="cta-primary">Master Position Sizing</h2>
+                            <p class="cta-secondary">Link in bio</p>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="footer-tag">Blog Post</span>
+                        <div class="footer-accent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Slide 6: CTA -->
-    <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — CTA</span>
-      <div class="slide slide-6">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="cta-text">Master Position Sizing</p>
-          <p class="cta-sub">Full breakdown with formulas and examples.</p>
-          <a href="#" class="cta-button">Read Article</a>
-          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
-          <p class="link-hint">Link in bio</p>
-        </div>
-      </div>
-    </div>
-  </div>
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide-wrapper');
+            const bgSelect = document.getElementById('bg-select');
+            const opacitySlider = document.getElementById('opacity-slider');
+            const exportBtn = document.getElementById('export-btn');
+            let currentSlide = 0;
+            let exportMode = false;
 
-  <script>
-    const bgToggle = document.getElementById('bg-toggle');
-    const opacityControl = document.getElementById('opacity-control');
-    const slides = document.querySelectorAll('.slide');
-    const videos = document.querySelectorAll('.slide-bg video');
+            bgSelect.addEventListener('change', (e) => {
+                const videos = document.querySelectorAll('.slide-bg');
+                videos.forEach(video => {
+                    video.style.display = e.target.value === 'none' ? 'none' : 'block';
+                });
+            });
 
-    bgToggle.addEventListener('change', (e) => {
-      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
-    });
+            opacitySlider.addEventListener('input', (e) => {
+                document.documentElement.style.setProperty('--video-opacity', (e.target.value / 100).toFixed(2));
+            });
 
-    opacityControl.addEventListener('change', (e) => {
-      videos.forEach(video => video.style.opacity = e.target.value);
-    });
+            exportBtn.addEventListener('click', () => {
+                if (!exportMode) {
+                    enterExportMode();
+                } else {
+                    exitExportMode();
+                }
+            });
 
-    const exportBtn = document.getElementById('export-btn');
-    const slideWrappers = document.querySelectorAll('.slide-wrapper');
-    let exportMode = false;
-    let currentExportSlide = 0;
+            function enterExportMode() {
+                exportMode = true;
+                document.body.classList.add('export-mode');
+                exportBtn.textContent = 'Exit Export';
+                currentSlide = 0;
+                updateSlideVisibility();
+            }
 
-    exportBtn.addEventListener('click', () => {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) {
-        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
-        currentExportSlide = 0;
-        updateExportSlide();
-      } else {
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
-    });
+            function exitExportMode() {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                exportBtn.textContent = 'Export Mode';
+                slides.forEach(slide => slide.classList.remove('active'));
+            }
 
-    function updateExportSlide() {
-      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
-    }
+            function updateSlideVisibility() {
+                if (!exportMode) return;
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === currentSlide);
+                });
+            }
 
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'ArrowLeft') {
-        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'Escape') {
-        exportMode = false;
-        document.body.classList.remove('export-mode');
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
-    });
-  </script>
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'e' || e.key === 'E') {
+                    if (!exportMode) enterExportMode();
+                } else if (e.key === 'Escape') {
+                    exitExportMode();
+                } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                    if (!exportMode) return;
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    updateSlideVisibility();
+                } else if (e.key === 'ArrowLeft') {
+                    if (!exportMode) return;
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    updateSlideVisibility();
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
