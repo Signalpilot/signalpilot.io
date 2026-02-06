@@ -62,8 +62,8 @@ Your audience consists entirely of TradingView power users who care about how in
 
 Quick links:
 - Website: https://www.signalpilot.io
-- Full docs: https://docs.signalpilot.io
-- 82 free education lessons: https://education.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -91,8 +91,10 @@ Send me your TradingView username and I'll activate the full Elite Seven suite o
 
 If they complement what you're already offering your community, we have an affiliate program (15-30% recurring). But I'd genuinely value your comparison first — your audience trusts you because you've been TradingView-exclusive since 2016.
 
-Website: https://www.signalpilot.io
-Docs: https://docs.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -118,8 +120,10 @@ Pentarch runs every signal through a 4-layer confirmation: Regime Classification
 
 I'd love to give you full access to the entire suite. Send me your TradingView username and I'll activate all 7 indicators within 24 hours. No strings, no timeline — just interested in your expert feedback.
 
-Website: https://www.signalpilot.io
-Full technical docs: https://docs.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -147,9 +151,10 @@ I'd love to give you and your team full access to test the complete suite. Just 
 
 If they hold up, I think this could make a strong episode on "How to Trade It" — the idea of a unified system that eliminates indicator chaos is a topic your audience would connect with. We also have an affiliate program (15-30% recurring) if you'd want to share them with your community.
 
-Website: https://www.signalpilot.io
-Docs: https://docs.signalpilot.io
-82 free education lessons: https://education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -180,9 +185,10 @@ Send me your TradingView username and I'll activate everything within 24 hours.
 
 If they pass your testing standards, we have an affiliate program (15-30% recurring). But your honest assessment is what matters.
 
-Website: https://www.signalpilot.io
-Technical docs: https://docs.signalpilot.io
-Education (82 free lessons): https://education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -215,8 +221,10 @@ Your CT2A students are already learning "How to Spot a Winning Indicator" — I'
 
 We also have an affiliate program (15-30% recurring) if you'd want to share with your audience, but your honest take comes first.
 
-Website: https://www.signalpilot.io
-Docs: https://docs.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -244,8 +252,10 @@ I'd love to give you full access to our complete suite (7 indicators). Send me y
 
 If you see value in them for your Market Week LIVE audience or your Cycle Analysis Workshop students, we have an affiliate program (15-30% recurring). But your expert assessment is what I'm really after.
 
-Website: https://www.signalpilot.io
-Docs: https://docs.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -273,8 +283,10 @@ Send me your TradingView username and I'll activate the full suite (7 indicators
 
 If they align with what you teach your 639K+ community, we have an affiliate program (15-30% recurring). But I'd rather earn your endorsement than buy it — your audience trusts you because you've never taken shortcuts.
 
-Website: https://www.signalpilot.io
-Docs: https://docs.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -303,9 +315,10 @@ I'd love to give you full access to all 7 indicators. Send me your TradingView u
 
 Your founding motivation — combating "poor education, excessive leverage, and traders relying on systems they didn't truly understand" — aligns with ours. If the tools hold up, we have an affiliate program (15-30% recurring) and I think your audience would connect with the transparency.
 
-Website: https://www.signalpilot.io
-Docs: https://docs.signalpilot.io
-82 free education lessons: https://education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -335,8 +348,10 @@ If they add value for your Alpha Trends community, we have an affiliate program 
 
 Your book subtitle says it all: "The Perfect Combination of Price, Time & Volume." That's what we've tried to build.
 
-Website: https://www.signalpilot.io
-Docs: https://docs.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -365,8 +380,10 @@ I'd love to give you full access to all 7 indicators. Send me your TradingView u
 
 Your 18M+ subscribers trust your judgment. If these tools genuinely help your students apply MAEE more effectively, we have an affiliate program (15-30% recurring). But your honest take comes first.
 
-Website: https://www.signalpilot.io
-Docs: https://docs.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -396,8 +413,10 @@ Send me your TradingView username and I'll activate the full suite within 24 hou
 
 If they meet your standards for "extreme analytical precision," we have an affiliate program (15-30% recurring). Your 2.38M subscribers trust your judgment — we'd rather earn a genuine recommendation than buy a sponsored one.
 
-Website: https://www.signalpilot.io
-Docs: https://docs.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -426,9 +445,10 @@ I'd love to give you full access to all 7 indicators. Send me your TradingView u
 
 If they complement your Piranha Profits curriculum, we have an affiliate program (15-30% recurring). Your 1M+ subscriber audience already believes in indicator stacking — Harmonic Oscillator is that belief, automated.
 
-Website: https://www.signalpilot.io
-Docs: https://docs.signalpilot.io
-82 free lessons: https://education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -461,8 +481,10 @@ Send me your TradingView username and I'll activate the full suite within 24 hou
 
 If it adds value for your Warrior Trading community, we have an affiliate program (15-30% recurring). But the product has to earn it first.
 
-Website: https://www.signalpilot.io
-Docs: https://docs.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
