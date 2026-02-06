@@ -10,7 +10,7 @@
 | 4 | Kivanc Ozbilgic | Telegram/TV DM | 1 | Not sent | | | Pine Script Wizard, AlphaTrend creator |
 | 5 | Trading Strategy Guides | info@tradingstrategyguides.com | 1 | Not sent | | | Podcast host, reviews premium indicators |
 | 6 | Liberated Stock Trader | customerservices@liberatedstocktrader.com | 1 | Not sent | | | Backtested 103 indicators, CFTe |
-| 7 | Crypto Jebb | jebb@clubdefi.com | 2 | Not sent | | | Crypto TA, 224K+ subs, CT2A course |
+| 7 | Crypto Jebb | Instagram DM @cryptojebb | 2 | Not sent | | | Crypto TA, 224K+ subs, CT2A course |
 | 8 | askSlim | slim@askslim.com | 2 | Not sent | | | Cycle analysis pioneer, 47+ years |
 | 9 | ClayTrader | Contact form | 2 | Not sent | | | "Robotic Trading", 639K subs |
 | 10 | TRADEPRO Academy | george@tradeproacademy.com | 2 | Not sent | | | Ex-Scotia Capital, volume profile |
