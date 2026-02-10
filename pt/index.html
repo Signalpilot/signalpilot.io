@@ -5058,7 +5058,7 @@
           <!-- Value Props - Animated Cycling -->
           <p style="text-align:center;margin-top:1.5rem;color:var(--muted);font-size:0.95rem;white-space:nowrap">
             <span style="color:rgba(255,255,255,0.25);margin-right:0.4rem">&#9670;</span>
-            <span id="hero-props-text" class="signal-decode" style="color:var(--brand);font-weight:600">Todos os mercados</span><span id="props-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
+            <a id="hero-props-link" target="_blank" rel="noopener" style="text-decoration:none;pointer-events:none"><span id="hero-props-text" class="signal-decode" style="color:var(--brand);font-weight:600">Todos os mercados</span></a><span id="props-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
             <span style="color:rgba(255,255,255,0.25);margin-left:0.4rem">&#9670;</span>
           </p>
 
@@ -8631,10 +8631,12 @@ if ('serviceWorker' in navigator) {
   function initTypingEffect() {
     var typedEl = document.getElementById('typed-text');
     var propsEl = document.getElementById('hero-props-text');
+    var propsLinkEl = document.getElementById('hero-props-link');
     if (!typedEl && !propsEl) return;
 
     var traderWords = ['traders forex','traders de ações','day traders','swing traders','scalpers','traders crypto','traders de futuros','todos os traders'];
-    var propWords = ['Todos os mercados','Todos os timeframes','7 Dias Teste Grátis','82 Lições Gratuitas','7 Dias Reembolso','Indicadores TradingView'];
+    var propWords = ['Todos os mercados','Todos os timeframes','7 Dias Teste Grátis','82 Lições Gratuitas','7 Dias Garantia de Reembolso','Indicadores TradingView'];
+    var propLinks = ['','','','https://education.signalpilot.io/','','https://www.tradingview.com/u/SignalPilotLabs/#published-scripts'];
     var chars = '!<>-_\\/[]{}—=+*^?#@$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     var tIdx = 0, pIdx = 0;
 
@@ -8671,6 +8673,10 @@ if ('serviceWorker' in navigator) {
 
     async function cycle() {
       if (propsEl) await decode(propsEl, propWords[pIdx]);
+      if (propsLinkEl) {
+        if (propLinks[pIdx]) { propsLinkEl.href = propLinks[pIdx]; propsLinkEl.style.pointerEvents = ''; }
+        else { propsLinkEl.removeAttribute('href'); propsLinkEl.style.pointerEvents = 'none'; }
+      }
       pIdx = (pIdx + 1) % propWords.length;
       await new Promise(function(r) { setTimeout(r, 1400); });
       if (typedEl) await decode(typedEl, traderWords[tIdx]);
