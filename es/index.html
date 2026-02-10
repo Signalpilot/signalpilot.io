@@ -6472,14 +6472,22 @@
               <label for="trialTvUsername" style="display:block;font-weight:600;margin-bottom:0.5rem;color:var(--text)">
                 Nombre de Usuario de TradingView
               </label>
+              <div style="background:rgba(255,170,0,0.12);border:1px solid rgba(255,170,0,0.4);border-radius:8px;padding:0.7rem 1rem;margin-bottom:0.7rem;display:flex;align-items:flex-start;gap:0.5rem">
+                <span style="font-size:1.1rem;line-height:1.4">&#9888;</span>
+                <span style="font-size:0.85rem;color:#ffaa00;line-height:1.4">
+                  Ingresa tu <strong>nombre de usuario exacto de TradingView</strong> — una sola palabra, sin espacios, sin email. Nombre incorrecto = sin acceso a indicadores.
+                </span>
+              </div>
               <input
                 type="text"
                 id="trialTvUsername"
                 name="tradingview_username"
-                placeholder="Tu nombre de usuario de TradingView"
+                placeholder="e.g. Trader1234"
                 required
+                autocomplete="off"
                 style="width:100%;padding:1rem;border-radius:8px;border:1px solid var(--border);background:var(--bg-soft);color:var(--text);font-size:1rem;font-family:inherit"
               >
+              <p id="tvUsernameError" style="font-size:0.85rem;color:#ff4444;margin-top:0.5rem;display:none"></p>
               <p style="font-size:0.85rem;color:var(--muted-2);margin-top:0.5rem">
                 Enviaremos tu invitación de indicador a esta cuenta de TradingView
               </p>
@@ -8535,7 +8543,50 @@ if ('serviceWorker' in navigator) {
   const trialSuccess = document.getElementById('trialSuccess');
   const formLoadTime = Date.now();
 
+  // Real-time TradingView username validation
+  const tvInput = document.getElementById('trialTvUsername');
+  const tvError = document.getElementById('tvUsernameError');
+
+  function validateTvUsername(value) {
+    var v = value.trim();
+    if (!v) return '';
+    if (/\s/.test(v)) return 'Los nombres de usuario de TradingView son una sola palabra — no se permiten espacios.';
+    if (/@/.test(v)) return 'Esto parece un email. Por favor ingresa tu nombre de usuario de TradingView, no tu email.';
+    if (v.length < 2) return 'El nombre de usuario es muy corto.';
+    if (v.length > 50) return 'El nombre de usuario es muy largo.';
+    return '';
+  }
+
+  if (tvInput && tvError) {
+    tvInput.addEventListener('input', function() {
+      var err = validateTvUsername(tvInput.value);
+      if (err) {
+        tvError.textContent = err;
+        tvError.style.display = 'block';
+        tvInput.style.borderColor = '#ff4444';
+      } else {
+        tvError.style.display = 'none';
+        tvInput.style.borderColor = '';
+      }
+    });
+
+    // Strip spaces on paste
+    tvInput.addEventListener('paste', function(e) {
+      setTimeout(function() {
+        tvInput.value = tvInput.value.replace(/\s+/g, '');
+        tvInput.dispatchEvent(new Event('input'));
+      }, 0);
+    });
+
+    // Block space key entirely
+    tvInput.addEventListener('keydown', function(e) {
+      if (e.key === ' ') e.preventDefault();
+    });
+  }
+
   if (trialForm) {
+    var tvConfirmed = false;
+
     trialForm.addEventListener('submit', async function(e) {
       e.preventDefault();
 
@@ -8547,14 +8598,12 @@ if ('serviceWorker' in navigator) {
       // Anti-spam: Check honeypot field
       const honeypot = document.getElementById('website');
       if (honeypot && honeypot.value !== '') {
-        console.log('Spam detected: honeypot filled');
         return; // Silent fail for bots
       }
 
       // Anti-spam: Check submission time (bots submit too fast)
       const timeSinceLoad = Date.now() - formLoadTime;
       if (timeSinceLoad < 2000) {
-        console.log('Spam detected: too fast');
         return; // Silent fail for bots
       }
 
@@ -8576,6 +8625,28 @@ if ('serviceWorker' in navigator) {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
         return;
+      }
+
+      // Validate TradingView username
+      var tvErr = validateTvUsername(tvUsername);
+      if (tvErr) {
+        alert(tvErr);
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
+
+      // Confirmation step — first click asks them to double-check
+      if (!tvConfirmed) {
+        tvConfirmed = true;
+        var ok = confirm('Tu nombre de usuario de TradingView es: "' + tvUsername + '"\n\n¿Es correcto? No podemos enviar indicadores a un nombre de usuario incorrecto.\n\nHaz clic en Aceptar para confirmar o Cancelar para corregirlo.');
+        if (!ok) {
+          tvConfirmed = false;
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          document.getElementById('trialTvUsername').focus();
+          return;
+        }
       }
 
       const formData = {
