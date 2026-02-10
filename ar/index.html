@@ -6082,14 +6082,22 @@ html[lang="ar"] [style*="text-align:center"] {
               <label for="trialTvUsername" style="display:block;font-weight:600;margin-bottom:0.5rem;color:var(--text)">
                 اسم مستخدم TradingView
               </label>
+              <div style="background:rgba(255,170,0,0.12);border:1px solid rgba(255,170,0,0.4);border-radius:8px;padding:0.7rem 1rem;margin-bottom:0.7rem;display:flex;align-items:flex-start;gap:0.5rem">
+                <span style="font-size:1.1rem;line-height:1.4">&#9888;</span>
+                <span style="font-size:0.85rem;color:#ffaa00;line-height:1.4">
+                  أدخل اسم مستخدم TradingView الدقيق — كلمة واحدة، بدون مسافات، بدون بريد إلكتروني. اسم مستخدم خاطئ = لا وصول للمؤشرات.
+                </span>
+              </div>
               <input
                 type="text"
                 id="trialTvUsername"
                 name="tradingview_username"
-                placeholder="اسم مستخدم TradingView الخاص بك"
+                placeholder="e.g. Trader1234"
                 required
+                autocomplete="off"
                 style="width:100%;padding:1rem;border-radius:8px;border:1px solid var(--border);background:var(--bg-soft);color:var(--text);font-size:1rem;font-family:inherit"
               >
+              <p id="tvUsernameError" style="font-size:0.85rem;color:#ff4444;margin-top:0.5rem;display:none"></p>
               <p style="font-size:0.85rem;color:var(--muted-2);margin-top:0.5rem">
                 سنرسل دعوة المؤشر الخاصة بك إلى حساب TradingView هذا
               </p>
@@ -8074,7 +8082,50 @@ if ('serviceWorker' in navigator) {
   const trialSuccess = document.getElementById('trialSuccess');
   const formLoadTime = Date.now();
 
+  // Real-time TradingView username validation
+  const tvInput = document.getElementById('trialTvUsername');
+  const tvError = document.getElementById('tvUsernameError');
+
+  function validateTvUsername(value) {
+    var v = value.trim();
+    if (!v) return '';
+    if (/\s/.test(v)) return 'أسماء مستخدمي TradingView كلمة واحدة — لا مسافات مسموحة.';
+    if (/@/.test(v)) return 'هذا يبدو كبريد إلكتروني. الرجاء إدخال اسم مستخدم TradingView، وليس بريدك الإلكتروني.';
+    if (v.length < 2) return 'اسم المستخدم قصير جداً.';
+    if (v.length > 50) return 'اسم المستخدم طويل جداً.';
+    return '';
+  }
+
+  if (tvInput && tvError) {
+    tvInput.addEventListener('input', function() {
+      var err = validateTvUsername(tvInput.value);
+      if (err) {
+        tvError.textContent = err;
+        tvError.style.display = 'block';
+        tvInput.style.borderColor = '#ff4444';
+      } else {
+        tvError.style.display = 'none';
+        tvInput.style.borderColor = '';
+      }
+    });
+
+    // Strip spaces on paste
+    tvInput.addEventListener('paste', function(e) {
+      setTimeout(function() {
+        tvInput.value = tvInput.value.replace(/\s+/g, '');
+        tvInput.dispatchEvent(new Event('input'));
+      }, 0);
+    });
+
+    // Block space key entirely
+    tvInput.addEventListener('keydown', function(e) {
+      if (e.key === ' ') e.preventDefault();
+    });
+  }
+
   if (trialForm) {
+    var tvConfirmed = false;
+
     trialForm.addEventListener('submit', async function(e) {
       e.preventDefault();
 
@@ -8086,14 +8137,12 @@ if ('serviceWorker' in navigator) {
       // Anti-spam: Check honeypot field
       const honeypot = document.getElementById('website');
       if (honeypot && honeypot.value !== '') {
-        console.log('Spam detected: honeypot filled');
         return; // Silent fail for bots
       }
 
       // Anti-spam: Check submission time (bots submit too fast)
       const timeSinceLoad = Date.now() - formLoadTime;
       if (timeSinceLoad < 2000) {
-        console.log('Spam detected: too fast');
         return; // Silent fail for bots
       }
 
@@ -8115,6 +8164,28 @@ if ('serviceWorker' in navigator) {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
         return;
+      }
+
+      // Validate TradingView username
+      var tvErr = validateTvUsername(tvUsername);
+      if (tvErr) {
+        alert(tvErr);
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
+
+      // Confirmation step — first click asks them to double-check
+      if (!tvConfirmed) {
+        tvConfirmed = true;
+        var ok = confirm('اسم مستخدم TradingView الخاص بك هو: "' + tvUsername + '"\n\nهل هذا صحيح؟ لا يمكننا إرسال المؤشرات إلى اسم مستخدم خاطئ.\n\nانقر موافق للتأكيد، أو إلغاء لتصحيحه.');
+        if (!ok) {
+          tvConfirmed = false;
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          document.getElementById('trialTvUsername').focus();
+          return;
+        }
       }
 
       const formData = {
