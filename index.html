@@ -1145,8 +1145,6 @@
       /* Allow hero text to wrap on mobile */
       #hero-description{white-space:normal !important;font-size:1rem !important;padding:0 1rem;max-width:100%;overflow-wrap:break-word;word-break:break-word;min-height:3.2rem}
 
-      /* Reduce typing text on mobile */
-      #typed-text{font-size:0.95rem !important}
 
       /* Optimize button press for touch */
       .btn:active{transform:translateY(2px) scale(0.99)}
@@ -1165,8 +1163,6 @@
 
 
     @media (prefers-reduced-motion: reduce){
-      #typing-cursor{animation:none;opacity:1}
-
       /* Disable all animations for users who prefer reduced motion */
       .success-check,.spinner{animation:none !important}
 
@@ -3791,7 +3787,7 @@
           </h1>
 
           <p id="hero-description" style="color:var(--muted);font-size:1.15rem;line-height:1.6;max-width:700px;margin:1.5rem auto 0;white-space:nowrap">
-            Cycle detection • 7 premium indicators for <span id="typed-text" class="signal-decode" style="color:var(--brand);font-weight:600">serious traders</span><span id="typing-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
+            Cycle detection • 7 premium indicators for <span style="color:var(--brand);font-weight:600">every trader</span>
           </p>
 
           <!-- Value Props - Animated Cycling -->
@@ -8210,18 +8206,16 @@ if ('serviceWorker' in navigator) {
     initTypingEffect();
   }
 
-  // Staggered hero animations - trader types and value props alternate (only one scrambles at a time)
+  // Hero value props cycling animation (only one scrambles at a time)
   function initTypingEffect() {
-    var typedEl = document.getElementById('typed-text');
     var propsEl = document.getElementById('hero-props-text');
     var propsLinkEl = document.getElementById('hero-props-link');
-    if (!typedEl && !propsEl) return;
+    if (!propsEl) return;
 
-    var traderWords = ['forex traders','stock traders','day traders','swing traders','scalpers','crypto traders','futures traders','all traders'];
     var propWords = ['All Markets','All Timeframes','7-Day Free Trial','82 Free Lessons','7-Day Money-Back Guarantee','TradingView Indicators'];
-    var propLinks = ['','','','https://education.signalpilot.io/','','https://www.tradingview.com/u/SignalPilotLabs/#published-scripts'];
+    var propLinks = ['','','#trial','https://education.signalpilot.io/','refund.html','https://www.tradingview.com/u/SignalPilotLabs/#published-scripts'];
     var chars = '!<>-_\\/[]{}—=+*^?#@$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    var tIdx = 0, pIdx = 0;
+    var pIdx = 0;
 
     function decode(el, newText) {
       return new Promise(function(resolve) {
@@ -8255,20 +8249,13 @@ if ('serviceWorker' in navigator) {
     }
 
     async function cycle() {
-      // Decode props (trader text holds still)
-      if (propsEl) await decode(propsEl, propWords[pIdx]);
+      await decode(propsEl, propWords[pIdx]);
       if (propsLinkEl) {
         if (propLinks[pIdx]) { propsLinkEl.href = propLinks[pIdx]; propsLinkEl.style.pointerEvents = ''; }
         else { propsLinkEl.removeAttribute('href'); propsLinkEl.style.pointerEvents = 'none'; }
       }
       pIdx = (pIdx + 1) % propWords.length;
       await new Promise(function(r) { setTimeout(r, 1400); });
-
-      // Decode trader type (props text holds still)
-      if (typedEl) await decode(typedEl, traderWords[tIdx]);
-      tIdx = (tIdx + 1) % traderWords.length;
-      await new Promise(function(r) { setTimeout(r, 1400); });
-
       cycle();
     }
 
