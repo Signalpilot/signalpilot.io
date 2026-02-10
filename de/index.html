@@ -1134,8 +1134,6 @@
       /* Allow hero text to wrap on mobile */
       #hero-description{white-space:normal !important;font-size:1rem !important;padding:0 1rem;max-width:100%;overflow-wrap:break-word;word-break:break-word;min-height:3.2rem}
 
-      /* Reduce typing text on mobile */
-      #typed-text{font-size:0.95rem !important}
 
       /* Smaller progress bar on mobile */
       .scroll-progress{height:2px}
@@ -1185,8 +1183,6 @@
 
     @media (prefers-reduced-motion: reduce){
 
-      #typing-cursor{animation:none;opacity:1}
-
       /* Disable all animations for users who prefer reduced motion */
       .success-check,.spinner{animation:none !important}
 
@@ -1207,12 +1203,6 @@
     /* bg-aurora capability rules REMOVED - using video background instead */
 
     @media (max-width: 1024px) {
-      /* Disable harsh blinking cursor on mobile */
-      #typing-cursor {
-        animation: none !important;
-        opacity: 1 !important;
-      }
-
       /* Constellations should stay in background (default z-index:-2) - removed forced z-index:1 */
       .sp-constellations, #constellations {
         position: fixed !important;
@@ -1798,8 +1788,6 @@
       /* Allow hero text to wrap on mobile */
       #hero-description{white-space:normal !important;font-size:1rem !important;padding:0 1rem;max-width:100%;overflow-wrap:break-word;word-break:break-word;min-height:3.2rem}
 
-      /* Reduce typing text on mobile */
-      #typed-text{font-size:0.95rem !important}
 
       /* Smaller progress bar on mobile */
       .scroll-progress{height:2px}
@@ -1849,8 +1837,6 @@
 
     @media (prefers-reduced-motion: reduce){
 
-      #typing-cursor{animation:none;opacity:1}
-
       /* Disable all animations for users who prefer reduced motion */
       .success-check,.spinner{animation:none !important}
 
@@ -1871,12 +1857,6 @@
     /* bg-aurora capability rules REMOVED - using video background instead */
 
     @media (max-width: 1024px) {
-      /* Disable harsh blinking cursor on mobile */
-      #typing-cursor {
-        animation: none !important;
-        opacity: 1 !important;
-      }
-
       /* Constellations should stay in background (default z-index:-2) - removed forced z-index:1 */
       .sp-constellations, #constellations {
         position: fixed !important;
@@ -4858,7 +4838,7 @@
           </h1>
 
           <p id="hero-description" style="color:var(--muted);font-size:1.15rem;line-height:1.6;max-width:700px;margin:1.5rem auto 0;white-space:nowrap">
-            Zyklus-Erkennung • 7 Premium-Indikatoren für <span id="typed-text" class="signal-decode" style="color:var(--brand);font-weight:600">ernsthafte Trader</span><span id="typing-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
+            Zyklus-Erkennung • 7 Premium-Indikatoren für <span style="color:var(--brand);font-weight:600">jeden Trader</span>
           </p>
 
           <!-- Value Props - Animated Cycling -->
@@ -8898,18 +8878,16 @@ if ('serviceWorker' in navigator) {
     setTimeout(updateProgress, 100);
   }
 
-  // Staggered hero animations - trader types and value props alternate
+  // Hero value props cycling animation
   function initTypingEffect() {
-    var typedEl = document.getElementById('typed-text');
     var propsEl = document.getElementById('hero-props-text');
     var propsLinkEl = document.getElementById('hero-props-link');
-    if (!typedEl && !propsEl) return;
+    if (!propsEl) return;
 
-    var traderWords = ['Forex Trader','Aktien Trader','Day Trader','Swing Trader','Scalper','Krypto Trader','Futures Trader','alle Trader'];
     var propWords = ['Alle Märkte','Alle Zeitrahmen','7 Tage Kostenlos Testen','82 Kostenlose Lektionen','7-Tage Geld-zurück-Garantie','TradingView Indikatoren'];
-    var propLinks = ['','','','https://education.signalpilot.io/','','https://www.tradingview.com/u/SignalPilotLabs/#published-scripts'];
+    var propLinks = ['','','#trial','https://education.signalpilot.io/','refund.html','https://www.tradingview.com/u/SignalPilotLabs/#published-scripts'];
     var chars = '!<>-_\\/[]{}—=+*^?#@$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    var tIdx = 0, pIdx = 0;
+    var pIdx = 0;
 
     function decode(el, newText) {
       return new Promise(function(resolve) {
@@ -8943,15 +8921,12 @@ if ('serviceWorker' in navigator) {
     }
 
     async function cycle() {
-      if (propsEl) await decode(propsEl, propWords[pIdx]);
+      await decode(propsEl, propWords[pIdx]);
       if (propsLinkEl) {
         if (propLinks[pIdx]) { propsLinkEl.href = propLinks[pIdx]; propsLinkEl.style.pointerEvents = ''; }
         else { propsLinkEl.removeAttribute('href'); propsLinkEl.style.pointerEvents = 'none'; }
       }
       pIdx = (pIdx + 1) % propWords.length;
-      await new Promise(function(r) { setTimeout(r, 1400); });
-      if (typedEl) await decode(typedEl, traderWords[tIdx]);
-      tIdx = (tIdx + 1) % traderWords.length;
       await new Promise(function(r) { setTimeout(r, 1400); });
       cycle();
     }
