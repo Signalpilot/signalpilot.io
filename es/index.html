@@ -5075,33 +5075,12 @@
             Detección de ciclos • 7 indicadores premium para <span id="typed-text" class="signal-decode" style="color:var(--brand);font-weight:600">traders profesionales</span><span id="typing-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
           </p>
 
-          <!-- Value Props Strip -->
-          <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem 1.25rem;margin-top:1.5rem">
-            <span style="display:flex;align-items:center;gap:0.4rem;color:var(--muted);font-size:0.95rem">
-              <span style="color:var(--brand);font-weight:700">Todos</span> los mercados
-            </span>
-            <span style="color:rgba(255,255,255,0.25)">•</span>
-            <span style="display:flex;align-items:center;gap:0.4rem;color:var(--muted);font-size:0.95rem">
-              <span style="color:var(--brand);font-weight:700">Todos</span> los timeframes
-            </span>
-            <span style="color:rgba(255,255,255,0.25)">•</span>
-            <a href="/es/#trial" style="display:flex;align-items:center;gap:0.4rem;color:var(--muted);font-size:0.95rem;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
-              <span style="color:var(--brand);font-weight:700">7 Días</span> Prueba Gratis
-            </a>
-            <span style="color:rgba(255,255,255,0.25)">•</span>
-            <a href="https://education.signalpilot.io" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:0.4rem;color:var(--muted);font-size:0.95rem;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
-              <span style="color:var(--brand);font-weight:700">82</span> Lecciones Gratuitas
-            </a>
-            <span style="color:rgba(255,255,255,0.25)">•</span>
-            <a href="#pricing" style="display:flex;align-items:center;gap:0.4rem;color:var(--muted);font-size:0.95rem;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
-              <span style="color:var(--brand);font-weight:700">7 Días</span> Devolución
-            </a>
-            <span style="color:rgba(255,255,255,0.25)">•</span>
-            <a href="https://www.tradingview.com/u/SignalPilotLabs/#published-scripts" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:0.4rem;color:var(--muted);font-size:0.95rem;text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='#2962FF'" onmouseout="this.style.color='var(--muted)'">
-              <svg width="16" height="16" viewBox="0 0 36 28" fill="currentColor"><path d="M14 22V6h4v16h-4zM20 22V10h4v12h-4zM26 22V2h4v20h-4zM8 22v-8h4v8H8zM2 22v-4h4v4H2z"/></svg>
-              <span style="color:#2962FF;font-weight:700">TradingView</span>
-            </a>
-          </div>
+          <!-- Value Props - Animated Cycling -->
+          <p style="text-align:center;margin-top:1.5rem;color:var(--muted);font-size:0.95rem;white-space:nowrap">
+            <span style="color:rgba(255,255,255,0.25);margin-right:0.4rem">&#9670;</span>
+            <span id="hero-props-text" class="signal-decode" style="color:var(--brand);font-weight:600">Todos los mercados</span><span id="props-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
+            <span style="color:rgba(255,255,255,0.25);margin-left:0.4rem">&#9670;</span>
+          </p>
 
           <!-- Hero CTA Form -->
           <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;margin-top:2rem;max-width:600px;margin-left:auto;margin-right:auto">
@@ -8870,6 +8849,7 @@ if ('serviceWorker' in navigator) {
       initLightbox();
       initParallax();
       initTypingEffect();
+      initPropsEffect();
       initScrollProgress();
     });
   } else {
@@ -8878,6 +8858,7 @@ if ('serviceWorker' in navigator) {
     initLightbox();
     initParallax();
     initTypingEffect();
+    initPropsEffect();
     initScrollProgress();
   }
 
@@ -9066,6 +9047,67 @@ if ('serviceWorker' in navigator) {
 
     // Initial position
     updateParallax();
+  }
+
+  // Value Props cycling animation - same decode effect
+  function initPropsEffect() {
+    var el = document.getElementById('hero-props-text');
+    if (!el) return;
+
+    var props = [
+      'Todos los mercados',
+      'Todos los timeframes',
+      '7 Días Prueba Gratis',
+      '82 Lecciones Gratuitas',
+      '7 Días Devolución',
+      'Indicadores TradingView'
+    ];
+
+    var chars = '!<>-_\\/[]{}\u2014=+*^?#@$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var idx = 0;
+    var queue = [], frame = 0, raf = null, res = null;
+
+    function setText(newText) {
+      var oldText = el.textContent;
+      var len = Math.max(oldText.length, newText.length);
+      queue = [];
+      for (var i = 0; i < len; i++) {
+        var from = oldText[i] || '';
+        var to = newText[i] || '';
+        var start = Math.floor(Math.random() * 10);
+        var end = start + Math.floor(Math.random() * 10) + 8;
+        queue.push({ from: from, to: to, start: start, end: end, char: '' });
+      }
+      cancelAnimationFrame(raf);
+      frame = 0;
+      return new Promise(function(resolve) { res = resolve; update(); });
+    }
+
+    function update() {
+      var output = '', complete = 0;
+      for (var i = 0; i < queue.length; i++) {
+        var q = queue[i];
+        if (frame >= q.end) { complete++; output += q.to; }
+        else if (frame >= q.start) {
+          if (!q.char || Math.random() < 0.28) q.char = chars[Math.floor(Math.random() * chars.length)];
+          output += '<span style="color:var(--accent)">' + q.char + '</span>';
+        } else { output += q.from; }
+      }
+      el.innerHTML = output;
+      if (complete === queue.length) { if (res) res(); }
+      else { raf = requestAnimationFrame(update); frame++; }
+    }
+
+    async function cycle() {
+      await setText(props[idx]);
+      await new Promise(function(r) { setTimeout(r, 1400); });
+      idx = (idx + 1) % props.length;
+      await setText('');
+      await new Promise(function(r) { setTimeout(r, 150); });
+      cycle();
+    }
+
+    setTimeout(cycle, 1200);
   }
 
   // Lightbox for indicator images
