@@ -5005,7 +5005,7 @@
           <!-- Value Props - Animated Cycling -->
           <p style="text-align:center;margin-top:1.5rem;color:var(--muted);font-size:0.95rem;white-space:nowrap">
             <span style="color:rgba(255,255,255,0.25);margin-right:0.4rem">&#9670;</span>
-            <span id="hero-props-text" class="signal-decode" style="color:var(--brand);font-weight:600">Все рынки</span><span id="props-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
+            <a id="hero-props-link" target="_blank" rel="noopener" style="text-decoration:none;pointer-events:none"><span id="hero-props-text" class="signal-decode" style="color:var(--brand);font-weight:600">Все рынки</span></a><span id="props-cursor" style="color:var(--brand);font-weight:300;animation:blink 1s step-end infinite">|</span>
             <span style="color:rgba(255,255,255,0.25);margin-left:0.4rem">&#9670;</span>
           </p>
 
@@ -8508,10 +8508,12 @@ if ('serviceWorker' in navigator) {
   function initTypingEffect() {
     var typedEl = document.getElementById('typed-text');
     var propsEl = document.getElementById('hero-props-text');
+    var propsLinkEl = document.getElementById('hero-props-link');
     if (!typedEl && !propsEl) return;
 
     var traderWords = ['форекс-трейдеров','фондовых трейдеров','дневных трейдеров','свинг-трейдеров','скальперов','крипто-трейдеров','фьючерсных трейдеров','всех трейдеров'];
     var propWords = ['Все рынки','Все таймфреймы','7 Дней Бесплатно','82 Бесплатных Урока','7 Дней Гарантия Возврата','Индикаторы TradingView'];
+    var propLinks = ['','','','https://education.signalpilot.io/','','https://www.tradingview.com/u/SignalPilotLabs/#published-scripts'];
     var chars = '!<>-_\\/[]{}—=+*^?#@$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     var tIdx = 0, pIdx = 0;
 
@@ -8548,6 +8550,10 @@ if ('serviceWorker' in navigator) {
 
     async function cycle() {
       if (propsEl) await decode(propsEl, propWords[pIdx]);
+      if (propsLinkEl) {
+        if (propLinks[pIdx]) { propsLinkEl.href = propLinks[pIdx]; propsLinkEl.style.pointerEvents = ''; }
+        else { propsLinkEl.removeAttribute('href'); propsLinkEl.style.pointerEvents = 'none'; }
+      }
       pIdx = (pIdx + 1) % propWords.length;
       await new Promise(function(r) { setTimeout(r, 1400); });
       if (typedEl) await decode(typedEl, traderWords[tIdx]);
