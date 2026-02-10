@@ -8519,7 +8519,6 @@ if ('serviceWorker' in navigator) {
       initLightbox();
       initParallax();
       initTypingEffect();
-      initPropsEffect();
       initScrollProgress();
     });
   } else {
@@ -8581,59 +8580,59 @@ if ('serviceWorker' in navigator) {
     setTimeout(updateProgress, 100);
   }
 
-  // Signal Decode effect for hero headline
+  // Staggered hero animations - trader types and value props alternate
   function initTypingEffect() {
-    const el = document.getElementById('typed-text');
-    if (!el) return;
-    const words = ['forex traderları', 'hisse traderları', 'günlük traderlar', 'swing traderlar', 'scalperlar', 'kripto traderları', 'vadeli işlem traderları', 'tüm traderlar'];
-    let idx = 0;
-    const chars = '!<>-_\\/[]{}—=+*^?#_______';
-    class SignalDecode {
-      constructor(el) {
-        this.el = el; this.chars = chars; this.queue = [];
-        this.frame = 0; this.frameRequest = null; this.resolve = null;
-      }
-      setText(newText) {
-        const oldText = this.el.textContent;
-        const length = Math.max(oldText.length, newText.length);
-        this.queue = [];
-        for (let i = 0; i < length; i++) {
-          const from = oldText[i] || '';
-          const to = newText[i] || '';
-          const start = Math.floor(Math.random() * 40);
-          const end = start + Math.floor(Math.random() * 40);
-          this.queue.push({ from, to, start, end });
+    var typedEl = document.getElementById('typed-text');
+    var propsEl = document.getElementById('hero-props-text');
+    if (!typedEl && !propsEl) return;
+
+    var traderWords = ['forex traderları','hisse traderları','günlük traderlar','swing traderlar','scalperlar','kripto traderları','vadeli işlem traderları','tüm traderlar'];
+    var propWords = ['Tüm piyasalar','Tüm zaman dilimleri','7 Gün Ücretsiz Deneme','82 Ücretsiz Ders','7 Gün Para İade','TradingView Göstergeleri'];
+    var chars = '!<>-_\\/[]{}—=+*^?#@$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var tIdx = 0, pIdx = 0;
+
+    function decode(el, newText) {
+      return new Promise(function(resolve) {
+        var oldText = el.textContent;
+        var len = Math.max(oldText.length, newText.length);
+        var queue = [];
+        for (var i = 0; i < len; i++) {
+          var from = oldText[i] || '';
+          var to = newText[i] || '';
+          var start = Math.floor(Math.random() * 10);
+          var end = start + Math.floor(Math.random() * 10) + 8;
+          queue.push({ from: from, to: to, start: start, end: end, char: '' });
         }
-        cancelAnimationFrame(this.frameRequest);
-        this.frame = 0;
-        return new Promise(resolve => { this.resolve = resolve; this.update(); });
-      }
-      update() {
-        let output = '', complete = 0;
-        for (let i = 0; i < this.queue.length; i++) {
-          let { from, to, start, end, char } = this.queue[i];
-          if (this.frame >= end) { complete++; output += to; }
-          else if (this.frame >= start) {
-            if (!char || Math.random() < 0.28) {
-              char = this.chars[Math.floor(Math.random() * this.chars.length)];
-              this.queue[i].char = char;
-            }
-            output += `<span style="color:var(--muted)">${char}</span>`;
-          } else { output += from; }
+        var frame = 0;
+        function update() {
+          var output = '', complete = 0;
+          for (var i = 0; i < queue.length; i++) {
+            var q = queue[i];
+            if (frame >= q.end) { complete++; output += q.to; }
+            else if (frame >= q.start) {
+              if (!q.char || Math.random() < 0.28) q.char = chars[Math.floor(Math.random() * chars.length)];
+              output += '<span style="color:var(--accent)">' + q.char + '</span>';
+            } else { output += q.from; }
+          }
+          el.innerHTML = output;
+          if (complete === queue.length) resolve();
+          else { requestAnimationFrame(update); frame++; }
         }
-        this.el.innerHTML = output;
-        if (complete === this.queue.length) { this.resolve(); }
-        else { this.frameRequest = requestAnimationFrame(() => this.update()); this.frame++; }
-      }
+        update();
+      });
     }
-    const decoder = new SignalDecode(el);
+
     async function cycle() {
-      await decoder.setText(words[idx]);
-      await new Promise(r => setTimeout(r, 1500));
-      idx = (idx + 1) % words.length;
+      if (propsEl) await decode(propsEl, propWords[pIdx]);
+      pIdx = (pIdx + 1) % propWords.length;
+      await new Promise(function(r) { setTimeout(r, 1400); });
+      if (typedEl) await decode(typedEl, traderWords[tIdx]);
+      tIdx = (tIdx + 1) % traderWords.length;
+      await new Promise(function(r) { setTimeout(r, 1400); });
       cycle();
     }
-    setTimeout(cycle, 1500);
+
+    setTimeout(cycle, 800);
   }
 
   // Parallax scroll effect for gradient orbs
@@ -8675,53 +8674,6 @@ if ('serviceWorker' in navigator) {
 
     // Initial position
     updateParallax();
-  }
-
-  // Value Props cycling animation - same decode effect
-  function initPropsEffect() {
-    var el = document.getElementById('hero-props-text');
-    if (!el) return;
-    var props = ['Tüm piyasalar','Tüm zaman dilimleri','7 Gün Ücretsiz Deneme','82 Ücretsiz Ders','7 Gün Para İade','TradingView Göstergeleri'];
-    var chars = '!<>-_\\/[]{}\u2014=+*^?#@$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    var idx = 0, queue = [], frame = 0, raf = null, res = null;
-    function setText(newText) {
-      var oldText = el.textContent;
-      var len = Math.max(oldText.length, newText.length);
-      queue = [];
-      for (var i = 0; i < len; i++) {
-        var from = oldText[i] || '';
-        var to = newText[i] || '';
-        var start = Math.floor(Math.random() * 10);
-        var end = start + Math.floor(Math.random() * 10) + 8;
-        queue.push({ from: from, to: to, start: start, end: end, char: '' });
-      }
-      cancelAnimationFrame(raf);
-      frame = 0;
-      return new Promise(function(resolve) { res = resolve; update(); });
-    }
-    function update() {
-      var output = '', complete = 0;
-      for (var i = 0; i < queue.length; i++) {
-        var q = queue[i];
-        if (frame >= q.end) { complete++; output += q.to; }
-        else if (frame >= q.start) {
-          if (!q.char || Math.random() < 0.28) q.char = chars[Math.floor(Math.random() * chars.length)];
-          output += '<span style="color:var(--accent)">' + q.char + '</span>';
-        } else { output += q.from; }
-      }
-      el.innerHTML = output;
-      if (complete === queue.length) { if (res) res(); }
-      else { raf = requestAnimationFrame(update); frame++; }
-    }
-    async function cycle() {
-      await setText(props[idx]);
-      await new Promise(function(r) { setTimeout(r, 1400); });
-      idx = (idx + 1) % props.length;
-      await setText('');
-      await new Promise(function(r) { setTimeout(r, 150); });
-      cycle();
-    }
-    setTimeout(cycle, 1200);
   }
 
   // Lightbox for indicator images
