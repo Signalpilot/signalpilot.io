@@ -19,6 +19,26 @@
 | 13 | The Trading Channel | support@thetradingchannel.net | 3 | Not sent | | | 2.38M subs, EAP program |
 | 14 | Adam Khoo | support@piranhaprofits.com | 3 | Not sent | | | 1M+ subs, indicator stacking |
 | 15 | Warrior Trading | ross@warriortrading.com | 3 | Not sent | | | $583→$12.5M, momentum scanning |
+| | | | | | | | |
+| | **BATCH 2 — MID/LOW TIER** | | | | | | |
+| 16 | QuantNomad | info@quantnomad.com | Mid | Not sent | | | Pine Script courses, YT ~16-21K |
+| 17 | Zeiierman Trading | partner@zeiierman.com | Mid | Not sent | | | 80+ premium indicators, 21K YT |
+| 18 | AlgoAlpha | info@algoalpha.co | Mid | Not sent | | | ML indicators, est. 2023 |
+| 19 | Tradingade | Discord/TV DM | Mid | Not sent | | | Strategy templates, no-coding approach |
+| 20 | James Bachini | Contact form | Mid | Not sent | | | YT ~25K, DeFi + Pine Script |
+| 21 | jdehorty (Justin Dehorty) | Patreon/Twitter DM | Mid | Not sent | | | Lorentzian Classification, 2.7K Patreon |
+| 22 | BigBeluga | support@bigbeluga.com | Mid | Not sent | | | 128+ scripts, TV 52K followers |
+| 23 | TheSignalyst (Richard Nasr) | rnasr001@gmail.com | Mid | Not sent | | | KuCoin analyst, rule-based TA |
+| 24 | KioseffTrading (Brandon) | help@kiosefftrading.com | Mid | Not sent | | | Script of the Year 2022+2023 |
+| 25 | TradingCode.net | Contact form | Low | Not sent | | | Pine Script tutorial blog |
+| 26 | Jonathan Hobbs (Stopsaving) | support@stopsaving.com | Low | Not sent | | | CFA, ex-Morgan Stanley |
+| 27 | Igor Arapov | arapov.trade@gmail.com | Low | Not sent | | | Wyckoff, multilingual (EN/RU/UA) |
+| 28 | Flux Charts | info@fluxcharts.com | Mid | Not sent | | | TV 150K+, 50+ free indicators |
+| 29 | @investwithhenry | uncle@investwithhenry.com | Low | Not sent | | | Ex-Goldman, TikTok 39K |
+| 30 | PineIndicators | support@pineindicators.com | Mid | Not sent | | | Non-repainting AI strategies, 4.88 rating |
+| 31 | TradingLab | support@tradinglab.ai | Mid | Not sent | | | AI indicators, Discord community |
+| 32 | ChartWiseHub | Contact form | Low | Not sent | | | TradingView tutorial blog |
+| 33 | @tradementorben | TikTok DM | Low | Not sent | | | Day trading coach, TikTok 27.5K |
 
 ## Status Key
 - **Not sent** — Email not yet sent
