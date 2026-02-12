@@ -1,12 +1,12 @@
-# Signal Pilot — Master Outreach File (75 Prospects)
+# Signal Pilot -Master Outreach File (75 Prospects)
 
 > All emails and DMs in one place. Replace `[Your Name]` with your name before sending.
-> No competitors included — educators and content creators only.
+> No competitors included -educators and content creators only.
 >
 > **Key principles (what worked with Brian Shannon):**
 > - Open with something specific about THEIR work
 > - Max 2 indicators, mapped to their philosophy
-> - Short and conversational — trader to trader, not company to influencer
+> - Short and conversational -trader to trader, not company to influencer
 > - Affiliate program = one smooth sentence at the end, almost an afterthought
 > - "Send your TradingView username" = clear, low-friction CTA
 >
@@ -19,7 +19,7 @@
 ---
 
 
-# BATCH 1 — BIG NAMES [ALREADY SENT]
+# BATCH 1 -BIG NAMES [ALREADY SENT]
 
 > These 15 emails were already sent. 1 reply (Brian Shannon). Included for reference.
 
@@ -28,20 +28,20 @@
 ## 1. Mind Math Money
 
 **To:** mindmathmoney@gmail.com
-**Subject:** Your Order Flow guide + our cycle detection — could be a strong pairing
+**Subject:** Your Order Flow guide + our cycle detection -could be a strong pairing
 
 Hi,
 
-Your "Ultimate Order Flow Trading Course" nailed something most TradingView content misses — the idea that you need to see the battle that happened inside each candle, not just where price ended up. That framing stuck with me.
+Your "Ultimate Order Flow Trading Course" nailed something most TradingView content misses -the idea that you need to see the battle that happened inside each candle, not just where price ended up. That framing stuck with me.
 
 I'm reaching out from Signal Pilot. We build a suite of 7 non-repainting TradingView indicators. Two of them, I think, would genuinely interest you:
 
-- **Pentarch** — maps complete market cycles through 5 phases (Touchdown → Ignition → Warning → Capitulation → Breakdown). It answers "where am I in the cycle?" before you even look at order flow.
-- **Volume Oracle** — institutional accumulation/distribution detection with regime classification. It sits in the same territory as your order flow content but approaches it from the indicator side.
+- **Pentarch** -maps complete market cycles through 5 phases (Touchdown → Ignition → Warning → Capitulation → Breakdown). It answers "where am I in the cycle?" before you even look at order flow.
+- **Volume Oracle** -institutional accumulation/distribution detection with regime classification. It sits in the same territory as your order flow content but approaches it from the indicator side.
 
 I'd love to give you full access to test all 7 indicators. No strings, no timeline. Just send me your TradingView username and I'll activate everything within 24 hours.
 
-If they resonate with your audience, we have an affiliate program (15-30% recurring). But honestly, I'd just value your take on them first — your 300K+ audience trusts your indicator reviews because you test everything properly.
+If they resonate with your audience, we have an affiliate program (15-30% recurring). But honestly, I'd just value your take on them first -your 300K+ audience trusts your indicator reviews because you test everything properly.
 
 We also back the non-repaint claim with a **$100 bounty** if anyone can prove otherwise. Every signal finalizes on candle close, audited for lookahead bias.
 
@@ -60,22 +60,22 @@ Signal Pilot Labs
 
 ## 2. Zen & The Art of Trading (Matthew Slabosz)
 
-**To:** [CONTACT FORM] — zenandtheartoftrading.com/contact
-**Subject:** From one Pine Script builder to another — free access to test our suite
+**To:** [CONTACT FORM] -zenandtheartoftrading.com/contact
+**Subject:** From one Pine Script builder to another -free access to test our suite
 
 Hi Matt,
 
-I've been following your Pine Script content for a while — what stands out is that you teach the logic behind strategy development, not just syntax. Your emphasis on backtesting being "the most under-utilized secret weapon in trading" is something we've built our entire product philosophy around.
+I've been following your Pine Script content for a while -what stands out is that you teach the logic behind strategy development, not just syntax. Your emphasis on backtesting being "the most under-utilized secret weapon in trading" is something we've built our entire product philosophy around.
 
 I'm reaching out from Signal Pilot. We've built 7 non-repainting TradingView indicators, and as a Pine Script developer, I think you'd appreciate looking under the hood:
 
-- **Pentarch** — our flagship cycle phase detector. It maps 5 market cycle phases (Touchdown → Ignition → Warning → Capitulation → Breakdown) using a 4-layer confirmation system: Regime Classification → Pilot Line Distance → NanoFlow Momentum → Bar Close confirmation. As a Pine Script developer, I think you'd appreciate the architecture — it's designed so no signal can fire mid-bar.
-- **Harmonic Oscillator** — a 7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence Zone). Each component votes independently and outputs a conviction count. The multi-voter design is what I think you'd find most interesting from a code perspective.
-- **Augury Grid** — scans 8 tickers across 3 timeframes simultaneously (21 parallel scans) with quality scoring and conviction ranking.
+- **Pentarch** -our flagship cycle phase detector. It maps 5 market cycle phases (Touchdown → Ignition → Warning → Capitulation → Breakdown) using a 4-layer confirmation system: Regime Classification → Pilot Line Distance → NanoFlow Momentum → Bar Close confirmation. As a Pine Script developer, I think you'd appreciate the architecture -it's designed so no signal can fire mid-bar.
+- **Harmonic Oscillator** -a 7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence Zone). Each component votes independently and outputs a conviction count. The multi-voter design is what I think you'd find most interesting from a code perspective.
+- **Augury Grid** -scans 8 tickers across 3 timeframes simultaneously (21 parallel scans) with quality scoring and conviction ranking.
 
 All 7 indicators are 100% non-repainting. Signals finalize on candle close. We back it with a $100 bounty.
 
-I'd love to give you lifetime access to the full suite — no strings attached. If you're interested, just send me your TradingView username and I'll activate all 7 within 24 hours.
+I'd love to give you lifetime access to the full suite -no strings attached. If you're interested, just send me your TradingView username and I'll activate all 7 within 24 hours.
 
 Your audience consists entirely of TradingView power users who care about how indicators actually work. If the tools hold up to your standards, I think there's a natural fit. We have an affiliate program (15-30% recurring), but your honest assessment matters more to us than a quick partnership.
 
@@ -93,22 +93,22 @@ Signal Pilot Labs
 ## 3. The Chart Guys
 
 **To:** info@thechartguys.com
-**Subject:** OmniDeck vs. SuperStack — thought you'd want to compare
+**Subject:** OmniDeck vs. SuperStack -thought you'd want to compare
 
 Hi Dan,
 
-I've watched how you've built The Chart Guys around education first, indicators second — the fact that your community is known for teaching rather than chasing tickers is rare and something we respect.
+I've watched how you've built The Chart Guys around education first, indicators second -the fact that your community is known for teaching rather than chasing tickers is rare and something we respect.
 
 Your SuperStack (multi-timeframe RSI scanning across 9 timeframes) and BackBurner (catching first pullbacks in fear/FOMO conditions) tackle real problems traders face. We've built tools that approach similar problems from a different angle, and I'd love to get your honest comparison:
 
-- **OmniDeck** — a single overlay combining 10 systems (SuperTrend, Squeeze Detector, Confluence Score Panel, supply/demand zones, and more). It's the "one indicator to rule them all" concept — similar philosophy to how you've unified your suite.
-- **Augury Grid** — multi-symbol, multi-timeframe scanner with quality scoring. Directly parallels your SuperStack concept but adds conviction ranking and 15+ confluence filters.
+- **OmniDeck** -a single overlay combining 10 systems (SuperTrend, Squeeze Detector, Confluence Score Panel, supply/demand zones, and more). It's the "one indicator to rule them all" concept -similar philosophy to how you've unified your suite.
+- **Augury Grid** -multi-symbol, multi-timeframe scanner with quality scoring. Directly parallels your SuperStack concept but adds conviction ranking and 15+ confluence filters.
 
 All 7 of our indicators are 100% non-repainting (audited, $100 bounty if anyone proves otherwise). Signals finalize on candle close.
 
-Send me your TradingView username and I'll activate the full Elite Seven suite on your account — take as long as you want to test against your own indicators. No cost, no commitment.
+Send me your TradingView username and I'll activate the full Elite Seven suite on your account -take as long as you want to test against your own indicators. No cost, no commitment.
 
-If they complement what you're already offering your community, we have an affiliate program (15-30% recurring). But I'd genuinely value your comparison first — your audience trusts you because you've been TradingView-exclusive since 2016.
+If they complement what you're already offering your community, we have an affiliate program (15-30% recurring). But I'd genuinely value your comparison first -your audience trusts you because you've been TradingView-exclusive since 2016.
 
 Quick links:
 - Website: https://www.signalpilot.io
@@ -123,21 +123,21 @@ Signal Pilot Labs
 
 ## 4. Kivanc Ozbilgic (AlgoWorld)
 
-**To:** [TELEGRAM DM] — t.me/AlgoRhytm (or TradingView DM to @KivancOzbilgic)
+**To:** [TELEGRAM DM] -t.me/AlgoRhytm (or TradingView DM to @KivancOzbilgic)
 **Subject:** What a Pine Script Wizard thinks of Pentarch's cycle detection architecture
 
 Hi Kivanc,
 
-Your AlphaTrend solved a real problem — minimizing stop losses in sideways conditions by combining momentum, trend, volatility, trailing stops, and volume into a single line. The fact that you publish everything open source because "sharing knowledge helps the trading community grow" is a philosophy we deeply respect.
+Your AlphaTrend solved a real problem -minimizing stop losses in sideways conditions by combining momentum, trend, volatility, trailing stops, and volume into a single line. The fact that you publish everything open source because "sharing knowledge helps the trading community grow" is a philosophy we deeply respect.
 
 I'm reaching out from Signal Pilot. We've built 7 non-repainting TradingView indicators, and I'm specifically curious what a Pine Script Wizard would think of the architecture:
 
-- **Pentarch** — approaches the same sideways-market problem from the cycle-detection angle. Instead of filtering sideways noise, it maps where you are in the complete market cycle (5 phases: Touchdown → Ignition → Warning → Capitulation → Breakdown). If you're in a consolidation phase, you know to stand aside.
-- **Harmonic Oscillator** — 7-component voting system with a multi-factor algorithmic design that I think aligns with your approach of combining multiple indicator categories into one coherent tool.
+- **Pentarch** -approaches the same sideways-market problem from the cycle-detection angle. Instead of filtering sideways noise, it maps where you are in the complete market cycle (5 phases: Touchdown → Ignition → Warning → Capitulation → Breakdown). If you're in a consolidation phase, you know to stand aside.
+- **Harmonic Oscillator** -7-component voting system with a multi-factor algorithmic design that I think aligns with your approach of combining multiple indicator categories into one coherent tool.
 
-Pentarch runs every signal through a 4-layer confirmation: Regime Classification → Pilot Line Distance → NanoFlow Momentum → Bar Close. All 7 indicators are non-repainting — signals finalize on candle close. We back it with a $100 bounty.
+Pentarch runs every signal through a 4-layer confirmation: Regime Classification → Pilot Line Distance → NanoFlow Momentum → Bar Close. All 7 indicators are non-repainting -signals finalize on candle close. We back it with a $100 bounty.
 
-I'd love to give you full access to the entire suite. Send me your TradingView username and I'll activate all 7 indicators within 24 hours. No strings, no timeline — just interested in your expert feedback.
+I'd love to give you full access to the entire suite. Send me your TradingView username and I'll activate all 7 indicators within 24 hours. No strings, no timeline -just interested in your expert feedback.
 
 Quick links:
 - Website: https://www.signalpilot.io
@@ -153,7 +153,7 @@ Signal Pilot Labs
 ## 5. Trading Strategy Guides (Casey Stubbs)
 
 **To:** info@tradingstrategyguides.com
-**Subject:** The anti-strategy-hopping indicator — could be a good "How to Trade It" episode
+**Subject:** The anti-strategy-hopping indicator -could be a good "How to Trade It" episode
 
 Hi Casey,
 
@@ -161,14 +161,14 @@ Your point about "the negative impact of strategy hopping on traders" really res
 
 I'm reaching out from Signal Pilot. We make 7 non-repainting TradingView indicators, and two of them were specifically designed to solve the strategy-hopping problem:
 
-- **OmniDeck** — a single overlay with 10 integrated systems (SuperTrend, Squeeze Detector, supply/demand zones, Confluence Score Panel, and more). One indicator instead of ten. One coherent system your listeners can execute consistently, not another tool to add to the pile.
-- **Volume Oracle** — institutional flow detection with a built-in Position Management System (Stop Loss, Target 1, Target 2, Trailing Stop, Breakeven). It's a complete trading system in one indicator — entry, management, and exit.
+- **OmniDeck** -a single overlay with 10 integrated systems (SuperTrend, Squeeze Detector, supply/demand zones, Confluence Score Panel, and more). One indicator instead of ten. One coherent system your listeners can execute consistently, not another tool to add to the pile.
+- **Volume Oracle** -institutional flow detection with a built-in Position Management System (Stop Loss, Target 1, Target 2, Trailing Stop, Breakeven). It's a complete trading system in one indicator -entry, management, and exit.
 
 All 7 indicators are 100% non-repainting. We audit every one for lookahead bias and back it with a $100 bounty.
 
 I'd love to give you and your team full access to test the complete suite. Just send me your TradingView username and I'll activate everything within 24 hours.
 
-If they hold up, I think this could make a strong episode on "How to Trade It" — the idea of a unified system that eliminates indicator chaos is a topic your audience would connect with. We also have an affiliate program (15-30% recurring) if you'd want to share them with your community.
+If they hold up, I think this could make a strong episode on "How to Trade It" -the idea of a unified system that eliminates indicator chaos is a topic your audience would connect with. We also have an affiliate program (15-30% recurring) if you'd want to share them with your community.
 
 Quick links:
 - Website: https://www.signalpilot.io
@@ -188,17 +188,17 @@ Signal Pilot Labs
 
 Hi Barry,
 
-Your "I Tested 103 Free TradingView Indicators" article is exactly the kind of rigor the TradingView community needs. Most indicator reviews are surface-level — yours actually backtest and verify. That's rare and valuable.
+Your "I Tested 103 Free TradingView Indicators" article is exactly the kind of rigor the TradingView community needs. Most indicator reviews are surface-level -yours actually backtest and verify. That's rare and valuable.
 
 I'm reaching out from Signal Pilot to do something unusual: I want to submit our flagship indicator, **Pentarch**, for your testing methodology.
 
 Here's why I think it's worth your time:
 
-- **Pentarch** maps complete market cycles through 5 phases (TD → IGN → WRN → CAP → BDN) using a 4-layer confirmation system. It's non-repainting — audited, signals finalize on candle close. We back it with a **$100 bounty** if anyone can prove otherwise.
+- **Pentarch** maps complete market cycles through 5 phases (TD → IGN → WRN → CAP → BDN) using a 4-layer confirmation system. It's non-repainting -audited, signals finalize on candle close. We back it with a **$100 bounty** if anyone can prove otherwise.
 - Given your experience building MOSES in Pine Script (which also focuses on cycle timing for broad market ETFs), I think you'd find the architecture interesting from a builder's perspective.
 - We have 6 additional indicators in the suite covering volume regime detection, multi-timeframe levels, momentum voting systems, and more.
 
-I'd love to give you full access to the complete Elite Seven suite — all 7 indicators, no cost, no timeline. Your audience trusts your verdict more than any marketing claim we could make, and we'd rather earn a genuine review than buy a sponsored one.
+I'd love to give you full access to the complete Elite Seven suite -all 7 indicators, no cost, no timeline. Your audience trusts your verdict more than any marketing claim we could make, and we'd rather earn a genuine review than buy a sponsored one.
 
 Send me your TradingView username and I'll activate everything within 24 hours.
 
@@ -217,26 +217,26 @@ Signal Pilot Labs
 
 ## 7. Crypto Jebb (Jebb McAfee)
 
-**To:** [INSTAGRAM DM] — @cryptojebb (bio says "Inquiries → DM")
-**Subject:** Pentarch answers "Is Bitcoin overextended?" — automatically
+**To:** [INSTAGRAM DM] -@cryptojebb (bio says "Inquiries → DM")
+**Subject:** Pentarch answers "Is Bitcoin overextended?" -automatically
 
 Hi Jebb,
 
-Your very first video back in 2017 asked "Is Bitcoin Overextended?" — and 2,600+ videos later, that question is still the heart of everything you teach. Where are we in the cycle? Is this the bottom? Is this the top?
+Your very first video back in 2017 asked "Is Bitcoin Overextended?" -and 2,600+ videos later, that question is still the heart of everything you teach. Where are we in the cycle? Is this the bottom? Is this the top?
 
-I'm reaching out from Signal Pilot. We've built an indicator called **Pentarch** that answers that exact question automatically — it maps complete market cycles through 5 phases:
+I'm reaching out from Signal Pilot. We've built an indicator called **Pentarch** that answers that exact question automatically -it maps complete market cycles through 5 phases:
 
-- **Touchdown (TD)** — selling exhaustion at the low
-- **Ignition (IGN)** — breakout confirmation
-- **Warning (WRN)** — momentum divergence
-- **Capitulation (CAP)** — buying exhaustion at the high
-- **Breakdown (BDN)** — trend reversal confirmed
+- **Touchdown (TD)** -selling exhaustion at the low
+- **Ignition (IGN)** -breakout confirmation
+- **Warning (WRN)** -momentum divergence
+- **Capitulation (CAP)** -buying exhaustion at the high
+- **Breakdown (BDN)** -trend reversal confirmed
 
-It's non-repainting (audited, $100 bounty), works on all timeframes (your preferred 4H swing setups included), and adapts automatically to Bitcoin, altcoins, stocks, forex — anything on TradingView.
+It's non-repainting (audited, $100 bounty), works on all timeframes (your preferred 4H swing setups included), and adapts automatically to Bitcoin, altcoins, stocks, forex -anything on TradingView.
 
 I'd love to give you access to the full suite (7 indicators total) so you can test it on your daily Bitcoin analysis. Send me your TradingView username and I'll activate everything within 24 hours. No cost, no strings.
 
-Your CT2A students are already learning "How to Spot a Winning Indicator" — I'd love for Pentarch to be on that list if it earns it.
+Your CT2A students are already learning "How to Spot a Winning Indicator" -I'd love for Pentarch to be on that list if it earns it.
 
 We also have an affiliate program (15-30% recurring) if you'd want to share with your audience, but your honest take comes first.
 
@@ -254,18 +254,18 @@ Signal Pilot Labs
 ## 8. askSlim (Steve "Slim" Miller)
 
 **To:** slim@askslim.com (or matt@askslim.com for general inquiries)
-**Subject:** Pentarch — the digital evolution of what you pioneered by hand in 1980
+**Subject:** Pentarch -the digital evolution of what you pioneered by hand in 1980
 
 Hi Slim,
 
-I've been studying your cycle analysis work — the Principle of Summation, how dominant and minor cycle patterns interact, how cycle shapes and translations create the chart patterns traders see. The fact that you were doing this by hand since 1980, with 47+ years of experience on the CBOE floor, gives your perspective a depth that's hard to find anywhere else.
+I've been studying your cycle analysis work -the Principle of Summation, how dominant and minor cycle patterns interact, how cycle shapes and translations create the chart patterns traders see. The fact that you were doing this by hand since 1980, with 47+ years of experience on the CBOE floor, gives your perspective a depth that's hard to find anywhere else.
 
-I'm reaching out from Signal Pilot because I think Pentarch — our flagship indicator — is the automated evolution of what you pioneered manually:
+I'm reaching out from Signal Pilot because I think Pentarch -our flagship indicator -is the automated evolution of what you pioneered manually:
 
 - **Pentarch** maps 5 cycle phases: Touchdown (cycle low) → Ignition (breakout) → Warning (momentum divergence) → Capitulation (cycle high) → Breakdown (reversal). It detects these transitions automatically using a 4-layer confirmation system.
-- **Augury Grid** — scans 8 tickers across 3 timeframes simultaneously, similar to how your Market Condition Monitor scans multiple timeframes in real-time.
+- **Augury Grid** -scans 8 tickers across 3 timeframes simultaneously, similar to how your Market Condition Monitor scans multiple timeframes in real-time.
 
-Your tagline — "unbiased insights in price, time, and direction" — is exactly what these tools deliver. Non-repainting, audited, signals finalize on candle close. We back it with a $100 bounty.
+Your tagline -"unbiased insights in price, time, and direction" -is exactly what these tools deliver. Non-repainting, audited, signals finalize on candle close. We back it with a $100 bounty.
 
 I'd love to give you full access to our complete suite (7 indicators). Send me your TradingView username and I'll activate everything within 24 hours. I'd be genuinely curious how Pentarch's automated cycle mapping compares to your decades of manual cycle analysis.
 
@@ -284,23 +284,23 @@ Signal Pilot Labs
 
 ## 9. ClayTrader (Clay Huber)
 
-**To:** [CONTACT FORM] — claytrader.com/contact
-**Subject:** "Terminate Your Emotions" — we built an indicator that does exactly that
+**To:** [CONTACT FORM] -claytrader.com/contact
+**Subject:** "Terminate Your Emotions" -we built an indicator that does exactly that
 
 Hi Clay,
 
-Your "Robotic Trading" philosophy — that emotional decisions lead to irrational decisions, which lead to losing money — is one of the most honest frameworks in trading education. The fact that your chatroom deliberately issues no alerts, forcing members to think through setups individually, tells me you care more about building real traders than collecting followers.
+Your "Robotic Trading" philosophy -that emotional decisions lead to irrational decisions, which lead to losing money -is one of the most honest frameworks in trading education. The fact that your chatroom deliberately issues no alerts, forcing members to think through setups individually, tells me you care more about building real traders than collecting followers.
 
 I'm reaching out from Signal Pilot. We've built two indicators that are, essentially, the technical embodiment of "terminate your emotions":
 
-- **Harmonic Oscillator** — a 7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence). It doesn't give you a "BUY NOW" signal. It gives you a vote count (e.g., 6/7 STRONG BULL) and lets you make the decision. Robotic consensus, human execution.
-- **OmniDeck** — 10 systems unified in a single overlay, eliminating the indicator chaos that leads to analysis paralysis and emotional decisions.
+- **Harmonic Oscillator** -a 7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence). It doesn't give you a "BUY NOW" signal. It gives you a vote count (e.g., 6/7 STRONG BULL) and lets you make the decision. Robotic consensus, human execution.
+- **OmniDeck** -10 systems unified in a single overlay, eliminating the indicator chaos that leads to analysis paralysis and emotional decisions.
 
-Both are 100% non-repainting (audited, $100 bounty). Signals finalize on candle close — no mid-bar flickering that triggers impulsive entries.
+Both are 100% non-repainting (audited, $100 bounty). Signals finalize on candle close -no mid-bar flickering that triggers impulsive entries.
 
 Send me your TradingView username and I'll activate the full suite (7 indicators) on your account. No cost, no timeline, no pitch. Test them in your own trading first.
 
-If they align with what you teach your 639K+ community, we have an affiliate program (15-30% recurring). But I'd rather earn your endorsement than buy it — your audience trusts you because you've never taken shortcuts.
+If they align with what you teach your 639K+ community, we have an affiliate program (15-30% recurring). But I'd rather earn your endorsement than buy it -your audience trusts you because you've never taken shortcuts.
 
 Quick links:
 - Website: https://www.signalpilot.io
@@ -316,7 +316,7 @@ Signal Pilot Labs
 ## 10. TRADEPRO Academy (George Papazov)
 
 **To:** george@tradeproacademy.com
-**Subject:** "Order flow reveals, it doesn't predict" — we built indicators with that same philosophy
+**Subject:** "Order flow reveals, it doesn't predict" -we built indicators with that same philosophy
 
 Hi George,
 
@@ -324,15 +324,15 @@ Your point on Mind Over Markets that "candlesticks show where price moved, the f
 
 I'm reaching out from Signal Pilot. Three of our indicators were built around the same "reveal, don't predict" philosophy:
 
-- **Volume Oracle** — detects institutional accumulation/distribution with regime classification (Accumulation, Markup, Distribution, Markdown). It surfaces what retail can't see in standard volume bars.
-- **Plutus Flow** — buying/selling pressure ribbon with divergence detection. Maps the delta between buyers and sellers — the same concept as your footprint chart delta analysis, visualized as a continuous ribbon.
-- **Janus Atlas** — auto-maps 60+ level types across multiple timeframes, including session boundaries, VWAP anchors, and confluence zones. It's the "value area and point of control" concept from your volume profile teaching, automated.
+- **Volume Oracle** -detects institutional accumulation/distribution with regime classification (Accumulation, Markup, Distribution, Markdown). It surfaces what retail can't see in standard volume bars.
+- **Plutus Flow** -buying/selling pressure ribbon with divergence detection. Maps the delta between buyers and sellers -the same concept as your footprint chart delta analysis, visualized as a continuous ribbon.
+- **Janus Atlas** -auto-maps 60+ level types across multiple timeframes, including session boundaries, VWAP anchors, and confluence zones. It's the "value area and point of control" concept from your volume profile teaching, automated.
 
 All non-repainting (audited, $100 bounty). Every signal finalizes on candle close.
 
 I'd love to give you full access to all 7 indicators. Send me your TradingView username and I'll activate everything within 24 hours. Test them during your 9AM morning sessions on ES and CL.
 
-Your founding motivation — combating "poor education, excessive leverage, and traders relying on systems they didn't truly understand" — aligns with ours. If the tools hold up, we have an affiliate program (15-30% recurring) and I think your audience would connect with the transparency.
+Your founding motivation -combating "poor education, excessive leverage, and traders relying on systems they didn't truly understand" -aligns with ours. If the tools hold up, we have an affiliate program (15-30% recurring) and I think your audience would connect with the transparency.
 
 Quick links:
 - Website: https://www.signalpilot.io
@@ -348,7 +348,7 @@ Signal Pilot Labs
 ## 11. Brian Shannon (Alpha Trends)
 
 **To:** support@alphatrends.net
-**Subject:** "The perfect combination of Price, Time & Volume" — our Elite Seven unite all three
+**Subject:** "The perfect combination of Price, Time & Volume" -our Elite Seven unite all three
 
 Hi Brian,
 
@@ -356,12 +356,12 @@ Your November ASFX VWAP Deep Dive reinforced something your work has consistentl
 
 I'm reaching out from Signal Pilot. Two of our 7 indicators were designed around the same intersection of price, time, and volume that you've championed since 2003:
 
-- **Janus Atlas** — auto-maps 60+ level types across multiple timeframes, including VWAP anchors, session boundaries, and confluence zones (where 3+ levels cluster). It extends the AVWAP concept by mapping all the critical levels simultaneously — "The map exists before the journey begins."
-- **Volume Oracle** — institutional positioning detection with regime classification. It answers "where are the buyers and sellers in control?" — the same question AVWAP answers, approached from the volume-regime side.
+- **Janus Atlas** -auto-maps 60+ level types across multiple timeframes, including VWAP anchors, session boundaries, and confluence zones (where 3+ levels cluster). It extends the AVWAP concept by mapping all the critical levels simultaneously -"The map exists before the journey begins."
+- **Volume Oracle** -institutional positioning detection with regime classification. It answers "where are the buyers and sellers in control?" -the same question AVWAP answers, approached from the volume-regime side.
 
 All 7 indicators are 100% non-repainting. Signals finalize on candle close, audited for lookahead bias. We back it with a $100 bounty.
 
-I'd love to give you full access to the complete suite. Send me your TradingView username and I'll activate everything within 24 hours. No cost, no strings — just genuinely curious how they complement your AVWAP workflow.
+I'd love to give you full access to the complete suite. Send me your TradingView username and I'll activate everything within 24 hours. No cost, no strings -just genuinely curious how they complement your AVWAP workflow.
 
 If they add value for your Alpha Trends community, we have an affiliate program (15-30% recurring). But your assessment matters more than any partnership.
 
@@ -385,15 +385,15 @@ Signal Pilot Labs
 
 Hi Rayner,
 
-Your MAEE Formula — Market structure, Area of value, Entry trigger, Exit trigger — is one of the cleanest trading frameworks out there. The first step, reading market structure, is also the hardest for your students to learn.
+Your MAEE Formula -Market structure, Area of value, Entry trigger, Exit trigger -is one of the cleanest trading frameworks out there. The first step, reading market structure, is also the hardest for your students to learn.
 
 I'm reaching out from Signal Pilot. We've built an indicator called **Pentarch** that automates that first step:
 
-It maps complete market cycles through 5 phases — Touchdown (selling exhaustion), Ignition (breakout), Warning (momentum divergence), Capitulation (buying exhaustion), Breakdown (reversal). Instead of your students guessing "are we in an uptrend or a range?", Pentarch tells them exactly where they are in the cycle with a 4-layer confirmation system.
+It maps complete market cycles through 5 phases -Touchdown (selling exhaustion), Ignition (breakout), Warning (momentum divergence), Capitulation (buying exhaustion), Breakdown (reversal). Instead of your students guessing "are we in an uptrend or a range?", Pentarch tells them exactly where they are in the cycle with a 4-layer confirmation system.
 
-I know you teach that "price is the leading indicator" and that traditional indicators lag. Pentarch was designed differently — it doesn't lag because it maps cycle phases (structural, not oscillating). And it's 100% non-repainting (audited, $100 bounty).
+I know you teach that "price is the leading indicator" and that traditional indicators lag. Pentarch was designed differently -it doesn't lag because it maps cycle phases (structural, not oscillating). And it's 100% non-repainting (audited, $100 bounty).
 
-We also built **OmniDeck** with 16 candlestick pattern recognition and supply/demand zone detection — tools that complement rather than replace your price action approach.
+We also built **OmniDeck** with 16 candlestick pattern recognition and supply/demand zone detection -tools that complement rather than replace your price action approach.
 
 I'd love to give you full access to all 7 indicators. Send me your TradingView username and I'll activate everything within 24 hours. No cost, no timeline.
 
@@ -413,24 +413,24 @@ Signal Pilot Labs
 ## 13. The Trading Channel (Steven Hart)
 
 **To:** support@thetradingchannel.net (or stevenkieth2014@gmail.com for press)
-**Subject:** "Extreme Analytical Precision" — automated into a TradingView indicator
+**Subject:** "Extreme Analytical Precision" -automated into a TradingView indicator
 
 Hi Steven,
 
-Your EAP Training Program name says everything about your philosophy: Extreme Analytical Precision. That same precision — especially your Fibonacci and level-based approach — is what we've tried to automate.
+Your EAP Training Program name says everything about your philosophy: Extreme Analytical Precision. That same precision -especially your Fibonacci and level-based approach -is what we've tried to automate.
 
 I'm reaching out from Signal Pilot. Our indicator **Janus Atlas** was built for traders who think exactly the way you teach:
 
-- Auto-maps **60+ level types** across multiple timeframes — Fibonacci levels, session levels, VWAP anchors, pivot zones, and confluence zones (where 3+ levels cluster into a single high-probability area)
+- Auto-maps **60+ level types** across multiple timeframes -Fibonacci levels, session levels, VWAP anchors, pivot zones, and confluence zones (where 3+ levels cluster into a single high-probability area)
 - Your students are learning to draw these levels by hand with extreme precision. Janus Atlas gives them the institutional-grade level map automatically, so they can focus on execution rather than line-drawing.
 
-We also built **Volume Oracle** with a Position Management System (1.5x ATR stop, 2.0x ATR T1, 3.5x ATR T2) that directly supports your 2% rule — precise risk management built into the indicator itself.
+We also built **Volume Oracle** with a Position Management System (1.5x ATR stop, 2.0x ATR T1, 3.5x ATR T2) that directly supports your 2% rule -precise risk management built into the indicator itself.
 
 All 7 indicators are 100% non-repainting (audited, $100 bounty). Signals finalize on candle close.
 
 Send me your TradingView username and I'll activate the full suite within 24 hours. No cost, no strings. Test them on your forex setups.
 
-If they meet your standards for "extreme analytical precision," we have an affiliate program (15-30% recurring). Your 2.38M subscribers trust your judgment — we'd rather earn a genuine recommendation than buy a sponsored one.
+If they meet your standards for "extreme analytical precision," we have an affiliate program (15-30% recurring). Your 2.38M subscribers trust your judgment -we'd rather earn a genuine recommendation than buy a sponsored one.
 
 Quick links:
 - Website: https://www.signalpilot.io
@@ -446,23 +446,23 @@ Signal Pilot Labs
 ## 14. Adam Khoo (Piranha Profits)
 
 **To:** support@piranhaprofits.com
-**Subject:** Your indicator-stacking philosophy — we automated it into one tool
+**Subject:** Your indicator-stacking philosophy -we automated it into one tool
 
 Hi Adam,
 
-Your principle that "no one indicator works on its own — you need to cross-reference indicators with other indicators" is something most traders learn the hard way. Your Bounce System and Value Momentum Investing framework both demonstrate what systematic cross-referencing looks like in practice.
+Your principle that "no one indicator works on its own -you need to cross-reference indicators with other indicators" is something most traders learn the hard way. Your Bounce System and Value Momentum Investing framework both demonstrate what systematic cross-referencing looks like in practice.
 
 I'm reaching out from Signal Pilot. We've built an indicator that is literally the automated version of what you teach:
 
-**Harmonic Oscillator** — a 7-component voting system running RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, and Divergence Zone in parallel. Each component votes independently, and the indicator outputs a clear conviction count (e.g., "6/7 STRONG BULL"). It includes Conservative, Balanced, and Aggressive signal modes for different risk profiles.
+**Harmonic Oscillator** -a 7-component voting system running RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, and Divergence Zone in parallel. Each component votes independently, and the indicator outputs a clear conviction count (e.g., "6/7 STRONG BULL"). It includes Conservative, Balanced, and Aggressive signal modes for different risk profiles.
 
-It's the cross-referencing process your students do manually — systematized into a single non-repainting indicator. Every signal finalizes on candle close. We back the non-repaint claim with a $100 bounty.
+It's the cross-referencing process your students do manually -systematized into a single non-repainting indicator. Every signal finalizes on candle close. We back the non-repaint claim with a $100 bounty.
 
-We also built **Augury Grid** — a multi-symbol scanner that ranks 7 symbols across 3 timeframes with quality scoring. For your students scanning for stock setups across markets, it surfaces the highest-conviction opportunities automatically.
+We also built **Augury Grid** -a multi-symbol scanner that ranks 7 symbols across 3 timeframes with quality scoring. For your students scanning for stock setups across markets, it surfaces the highest-conviction opportunities automatically.
 
 I'd love to give you full access to all 7 indicators. Send me your TradingView username and I'll activate everything within 24 hours.
 
-If they complement your Piranha Profits curriculum, we have an affiliate program (15-30% recurring). Your 1M+ subscriber audience already believes in indicator stacking — Harmonic Oscillator is that belief, automated.
+If they complement your Piranha Profits curriculum, we have an affiliate program (15-30% recurring). Your 1M+ subscriber audience already believes in indicator stacking -Harmonic Oscillator is that belief, automated.
 
 Quick links:
 - Website: https://www.signalpilot.io
@@ -478,7 +478,7 @@ Signal Pilot Labs
 ## 15. Warrior Trading (Ross Cameron)
 
 **To:** ross@warriortrading.com
-**Subject:** A TradingView-native momentum scanner — built for the Gap and Go workflow
+**Subject:** A TradingView-native momentum scanner -built for the Gap and Go workflow
 
 Hi Ross,
 
@@ -488,11 +488,11 @@ I'm reaching out from Signal Pilot because our **Augury Grid** indicator was bui
 
 - Scans **8 tickers across 3 timeframes simultaneously** (21 parallel scans)
 - Detects MACD histogram crossovers with **15+ confluence filters** (ADX, trend, EMA200, RSI, volume, momentum)
-- Ranks opportunities by **quality score** with star ratings and "time since signal" — so your students know which setups have the highest conviction before the bell rings
+- Ranks opportunities by **quality score** with star ratings and "time since signal" -so your students know which setups have the highest conviction before the bell rings
 
 It's a momentum scanner built directly into TradingView. No external software needed.
 
-We also built **OmniDeck** with a Squeeze Detector (Bollinger vs. Keltner compression) and Liquidity Sweep detection — tools that surface the volatility breakouts and stop-hunt traps your small-cap momentum students are looking for.
+We also built **OmniDeck** with a Squeeze Detector (Bollinger vs. Keltner compression) and Liquidity Sweep detection -tools that surface the volatility breakouts and stop-hunt traps your small-cap momentum students are looking for.
 
 All 7 indicators are 100% non-repainting (audited, $100 bounty). Signals finalize on candle close.
 
@@ -511,19 +511,19 @@ Signal Pilot Labs
 
 ---
 
-## Quick Reference — Contact Summary
+## Quick Reference -Contact Summary
 
 | # | Prospect | Email | Method |
 |---|---------|-------|--------|
 | 1 | Mind Math Money | mindmathmoney@gmail.com | Direct email |
-| 2 | Zen & The Art of Trading | — | Contact form: zenandtheartoftrading.com/contact |
+| 2 | Zen & The Art of Trading | -| Contact form: zenandtheartoftrading.com/contact |
 | 3 | The Chart Guys | info@thechartguys.com | Direct email |
-| 4 | Kivanc Ozbilgic | — | Telegram: t.me/AlgoRhytm or TradingView DM |
+| 4 | Kivanc Ozbilgic | -| Telegram: t.me/AlgoRhytm or TradingView DM |
 | 5 | Trading Strategy Guides | info@tradingstrategyguides.com | Direct email |
 | 6 | Liberated Stock Trader | customerservices@liberatedstocktrader.com | Direct email |
-| 7 | Crypto Jebb | [INSTAGRAM DM] — @cryptojebb (bio says "Inquiries → DM") | Instagram DM |
+| 7 | Crypto Jebb | [INSTAGRAM DM] -@cryptojebb (bio says "Inquiries → DM") | Instagram DM |
 | 8 | askSlim | slim@askslim.com / matt@askslim.com | Direct email |
-| 9 | ClayTrader | — | Contact form: claytrader.com/contact |
+| 9 | ClayTrader | -| Contact form: claytrader.com/contact |
 | 10 | TRADEPRO Academy | george@tradeproacademy.com | Direct email |
 | 11 | Brian Shannon | support@alphatrends.net | Direct email |
 | 12 | Rayner Teo | support@tradingwithrayner.com | Direct email |
@@ -533,26 +533,26 @@ Signal Pilot Labs
 
 ---
 
-# BATCH 2 — MID-TIER EDUCATORS [READY TO SEND]
+# BATCH 2 -MID-TIER EDUCATORS [READY TO SEND]
 
 
 ## 16. QuantNomad (Vadim)
 
 **To:** info@quantnomad.com
-**Subject:** Your screener architecture + our 4-layer confirmation pipeline — curious what you'd think
+**Subject:** Your screener architecture + our 4-layer confirmation pipeline -curious what you'd think
 
 Hi Vadim,
 
-Your Pine Script backtesting series does something most paid courses don't — it teaches people to verify before they trust. The screener logic you break down in QuanTribe is genuinely the right way to approach TradingView development.
+Your Pine Script backtesting series does something most paid courses don't -it teaches people to verify before they trust. The screener logic you break down in QuanTribe is genuinely the right way to approach TradingView development.
 
 I built 7 non-repainting indicators at Signal Pilot, and as a Pine Script developer, I think you'd want to look under the hood:
 
-- **Pentarch** — 4-layer confirmation pipeline: Regime Classification → Pilot Line Distance → NanoFlow Momentum → Bar Close. Architecturally designed so no signal fires mid-bar. I'd love a developer's honest take on the design.
-- **Augury Grid** — 21 parallel scans across 8 tickers and 3 timeframes with conviction ranking. Built on a similar concept to your screener work, but with quality scoring baked in.
+- **Pentarch** -4-layer confirmation pipeline: Regime Classification → Pilot Line Distance → NanoFlow Momentum → Bar Close. Architecturally designed so no signal fires mid-bar. I'd love a developer's honest take on the design.
+- **Augury Grid** -21 parallel scans across 8 tickers and 3 timeframes with conviction ranking. Built on a similar concept to your screener work, but with quality scoring baked in.
 
 Send your TradingView username and I'll activate all 7 within 24 hours. Genuinely curious what a Pine Script educator thinks of the architecture.
 
-We have an affiliate program (15-30% recurring) if they resonate with QuanTribe — but your technical opinion is what I'm after.
+We have an affiliate program (15-30% recurring) if they resonate with QuanTribe -but your technical opinion is what I'm after.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -564,8 +564,8 @@ Signal Pilot Labs
 
 ## 17. jdehorty / Justin Dehorty
 
-**To:** [LINKEDIN DM or DISCORD] — linkedin.com/in/justin-dehorty or discord.gg/ai-edge
-**Subject:** Different approach to regime classification — curious what you'd think
+**To:** [LINKEDIN DM or DISCORD] -linkedin.com/in/justin-dehorty or discord.gg/ai-edge
+**Subject:** Different approach to regime classification -curious what you'd think
 
 Hi Justin,
 
@@ -573,8 +573,8 @@ Lorentzian Classification earning TradingView's Most Valuable Script was well-de
 
 We took a different approach to the same problem at Signal Pilot:
 
-- **Pentarch** — instead of ML classification, it maps cycle phases through a deterministic 4-layer confirmation. Different methodology, same goal — objectively identifying where you are in the market structure.
-- **Volume Oracle** — regime classification from the volume side (Accumulation, Markup, Distribution, Markdown).
+- **Pentarch** -instead of ML classification, it maps cycle phases through a deterministic 4-layer confirmation. Different methodology, same goal -objectively identifying where you are in the market structure.
+- **Volume Oracle** -regime classification from the volume side (Accumulation, Markup, Distribution, Markdown).
 
 I'd love to give you access to test them. Send your TradingView username and I'll activate all 7 within 24 hours. Genuinely curious how they'd compare to Lorentzian in your workflow.
 
@@ -596,18 +596,18 @@ Signal Pilot Labs
 
 Hi Richard,
 
-Watching you go live on TradingView and apply RichTL in real-time across crypto, forex, and indices — that's how you prove a system works. Most educators pre-record or cherry-pick. You trade it live and let people judge.
+Watching you go live on TradingView and apply RichTL in real-time across crypto, forex, and indices -that's how you prove a system works. Most educators pre-record or cherry-pick. You trade it live and let people judge.
 
 The hardest part of any rule-based system is the first decision: what phase is the market in? I built two indicators that automate exactly that:
 
-- **Pentarch** — maps 5 market cycle phases (Touchdown → Ignition → Warning → Capitulation → Breakdown). No subjectivity, no interpretation. The cycle structure is either there or it isn't. Fits directly into a rule-based workflow.
-- **Harmonic Oscillator** — 7-component voting system that outputs a clear conviction count (e.g., 6/7 STRONG BULL). Rules-based consensus across RSI, MACD, EMA, Volume, Momentum, StochRSI, and Divergence — all voting independently.
+- **Pentarch** -maps 5 market cycle phases (Touchdown → Ignition → Warning → Capitulation → Breakdown). No subjectivity, no interpretation. The cycle structure is either there or it isn't. Fits directly into a rule-based workflow.
+- **Harmonic Oscillator** -7-component voting system that outputs a clear conviction count (e.g., 6/7 STRONG BULL). Rules-based consensus across RSI, MACD, EMA, Volume, Momentum, StochRSI, and Divergence -all voting independently.
 
-Both non-repainting, signals finalize on candle close. Works on crypto, forex, indices — your exact coverage.
+Both non-repainting, signals finalize on candle close. Works on crypto, forex, indices -your exact coverage.
 
 Send your TradingView username and I'll activate all 7 within 24 hours. I'd be curious how they'd fit into your RichTL framework.
 
-We have an affiliate program (15-30% recurring) — but your live-session verdict is what I'd really value.
+We have an affiliate program (15-30% recurring) -but your live-session verdict is what I'd really value.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -620,20 +620,20 @@ Signal Pilot Labs
 ## 19. KioseffTrading / Brandon Kioseff
 
 **To:** help@kiosefftrading.com
-**Subject:** Your Intrabar Analyzer pushed Pine to its limits — built something in that same spirit
+**Subject:** Your Intrabar Analyzer pushed Pine to its limits -built something in that same spirit
 
 Hi Brandon,
 
-Back-to-back Script of the Year in 2022 and 2023. Your Volume Profile and Intrabar Analyzer showed the TradingView community what Pine Script is actually capable of when someone pushes it. That's not flattery — it's just objectively rare.
+Back-to-back Script of the Year in 2022 and 2023. Your Volume Profile and Intrabar Analyzer showed the TradingView community what Pine Script is actually capable of when someone pushes it. That's not flattery -it's just objectively rare.
 
 From one developer to another, I built 7 non-repainting indicators at Signal Pilot and two directly connect to your volume work:
 
-- **Volume Oracle** — institutional regime detection (Accumulation, Markup, Distribution, Markdown) with a built-in position management system. Same territory as your Volume Profile work, approached from the regime-classification side.
-- **Plutus Flow** — buying/selling pressure ribbon with divergence detection. Pairs naturally with your Volume Delta analysis — it maps the continuous supply/demand imbalance.
+- **Volume Oracle** -institutional regime detection (Accumulation, Markup, Distribution, Markdown) with a built-in position management system. Same territory as your Volume Profile work, approached from the regime-classification side.
+- **Plutus Flow** -buying/selling pressure ribbon with divergence detection. Pairs naturally with your Volume Delta analysis -it maps the continuous supply/demand imbalance.
 
 Send your TradingView username and I'll activate all 7 within 24 hours. I genuinely want to know what a two-time Script of the Year winner thinks of the architecture.
 
-If they complement what you're building at Trading IQ, we have an affiliate program (15-30% recurring) — but your developer feedback matters more.
+If they complement what you're building at Trading IQ, we have an affiliate program (15-30% recurring) -but your developer feedback matters more.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -645,21 +645,21 @@ Signal Pilot Labs
 
 ## 20. TradingCode.net (Jos)
 
-**To:** [CONTACT FORM] — tradingcode.net/contact
+**To:** [CONTACT FORM] -tradingcode.net/contact
 **Subject:** Your multi-condition strategy articles + an indicator built on that exact architecture
 
 Hi Jos,
 
-Your article on combining multiple conditions in Pine Script — where you show how to layer RSI, MACD, and moving average filters into a single strategy — is exactly how I think about indicator design. TradingCode.net goes deeper into Pine Script logic than most paid courses.
+Your article on combining multiple conditions in Pine Script -where you show how to layer RSI, MACD, and moving average filters into a single strategy -is exactly how I think about indicator design. TradingCode.net goes deeper into Pine Script logic than most paid courses.
 
 I built 7 non-repainting TradingView indicators at Signal Pilot, and two of them are essentially what your multi-condition tutorials teach, fully productized:
 
-- **Harmonic Oscillator** — 7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence Zone). Each votes independently and outputs a conviction count. The multi-factor architecture your readers study — built into a single tool.
-- **Pentarch** — 4-layer confirmation pipeline for cycle detection. Designed so no signal can fire mid-bar. A good case study in how to chain conditions without introducing lookahead bias.
+- **Harmonic Oscillator** -7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence Zone). Each votes independently and outputs a conviction count. The multi-factor architecture your readers study -built into a single tool.
+- **Pentarch** -4-layer confirmation pipeline for cycle detection. Designed so no signal can fire mid-bar. A good case study in how to chain conditions without introducing lookahead bias.
 
-Send your TradingView username and I'll activate all 7 within 24 hours. I think your readers would find the architecture interesting to explore — and we have full docs at docs.signalpilot.io if you'd want to write about how they work.
+Send your TradingView username and I'll activate all 7 within 24 hours. I think your readers would find the architecture interesting to explore -and we have full docs at docs.signalpilot.io if you'd want to write about how they work.
 
-We have an affiliate program (15-30% recurring) for content creators — but honestly, a technical write-up from TradingCode would be worth more to us than any promotion.
+We have an affiliate program (15-30% recurring) for content creators -but honestly, a technical write-up from TradingCode would be worth more to us than any promotion.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -676,16 +676,16 @@ Signal Pilot Labs
 
 Hi Jonathan,
 
-Your 32-screenshot TradingView setup guide is the most practical beginner resource I've seen — CFA credentials and you're giving it away for free. That's exactly the kind of content that builds trust (and exactly why I noticed your partnership page).
+Your 32-screenshot TradingView setup guide is the most practical beginner resource I've seen -CFA credentials and you're giving it away for free. That's exactly the kind of content that builds trust (and exactly why I noticed your partnership page).
 
 I built 7 non-repainting TradingView indicators at Signal Pilot. Two that map to your beginner-to-intermediate audience:
 
-- **OmniDeck** — 10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, Confluence Score Panel, and more). For the readers following your setup guide, it turns a blank chart into a professional workspace with one indicator.
-- **Pentarch** — answers "what's the market doing right now?" automatically through 5 cycle phases. The first question your readers have — answered before they place any trade.
+- **OmniDeck** -10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, Confluence Score Panel, and more). For the readers following your setup guide, it turns a blank chart into a professional workspace with one indicator.
+- **Pentarch** -answers "what's the market doing right now?" automatically through 5 cycle phases. The first question your readers have -answered before they place any trade.
 
-7-day free trial, no credit card required — your readers can test everything risk-free. Send your TradingView username and I'll activate all 7 on your account within 24 hours so you can vet them first.
+7-day free trial, no credit card required -your readers can test everything risk-free. Send your TradingView username and I'll activate all 7 on your account within 24 hours so you can vet them first.
 
-We have an affiliate program (15-30% recurring) — could be a natural fit alongside your partnership portfolio. But try them first.
+We have an affiliate program (15-30% recurring) -could be a natural fit alongside your partnership portfolio. But try them first.
 
 signalpilot.io | education.signalpilot.io (82 free lessons)
 
@@ -698,22 +698,22 @@ Signal Pilot Labs
 ## 22. Igor Arapov / ArapovTrade
 
 **To:** arapov.trade@gmail.com
-**Subject:** Your 70+ Wyckoff lessons teach it manually — I automated the detection
+**Subject:** Your 70+ Wyckoff lessons teach it manually -I automated the detection
 
 Hi Igor,
 
-Your Smart Money and Wyckoff video series is the most thorough free volume analysis education I've found — 70+ lessons teaching accumulation, markup, distribution, markdown as the foundation of every trade. Not an add-on, the foundation. That's the right approach, and the fact that you do it in English, Russian, and Ukrainian multiplies the impact.
+Your Smart Money and Wyckoff video series is the most thorough free volume analysis education I've found -70+ lessons teaching accumulation, markup, distribution, markdown as the foundation of every trade. Not an add-on, the foundation. That's the right approach, and the fact that you do it in English, Russian, and Ukrainian multiplies the impact.
 
 I built two indicators at Signal Pilot that are essentially your Wyckoff methodology, automated:
 
-- **Volume Oracle** — detects institutional accumulation/distribution with regime classification: Accumulation, Markup, Distribution, Markdown. It identifies the exact Wyckoff phases you teach, automatically, on any chart.
-- **Plutus Flow** — buying/selling pressure ribbon with divergence detection. Maps the supply/demand imbalance you explain in your composite man lectures — visualized as a continuous flow.
+- **Volume Oracle** -detects institutional accumulation/distribution with regime classification: Accumulation, Markup, Distribution, Markdown. It identifies the exact Wyckoff phases you teach, automatically, on any chart.
+- **Plutus Flow** -buying/selling pressure ribbon with divergence detection. Maps the supply/demand imbalance you explain in your composite man lectures -visualized as a continuous flow.
 
-Both non-repainting, signals finalize on candle close. And our site has a Russian version at signalpilot.io/ru — your multilingual audience can explore everything in their language.
+Both non-repainting, signals finalize on candle close. And our site has a Russian version at signalpilot.io/ru -your multilingual audience can explore everything in their language.
 
 Send your TradingView username and I'll activate all 7 within 24 hours. I'd genuinely love to hear if Volume Oracle's regime classification matches what you'd identify manually.
 
-We have an affiliate program (15-30% recurring) — but your Wyckoff expert assessment comes first.
+We have an affiliate program (15-30% recurring) -but your Wyckoff expert assessment comes first.
 
 signalpilot.io | signalpilot.io/ru | docs.signalpilot.io
 
@@ -726,20 +726,20 @@ Signal Pilot Labs
 ## 23. @investwithhenry (Henry Moldavskiy)
 
 **To:** uncle@investwithhenry.com
-**Subject:** Goldman taught you to read institutional flow — I built an indicator that surfaces it
+**Subject:** Goldman taught you to read institutional flow -I built an indicator that surfaces it
 
 Hi Henry,
 
-Goldman Sachs to 39K+ TikTok followers teaching retail traders — that's a rare bridge. You've seen what institutional flow looks like from the inside, and now you're explaining it to people who've never sat on a trading desk. That perspective can't be faked.
+Goldman Sachs to 39K+ TikTok followers teaching retail traders -that's a rare bridge. You've seen what institutional flow looks like from the inside, and now you're explaining it to people who've never sat on a trading desk. That perspective can't be faked.
 
 I built an indicator that does something I think you'd immediately recognize:
 
-- **Volume Oracle** — detects institutional accumulation/distribution with regime classification (Accumulation, Markup, Distribution, Markdown). It surfaces the positioning dynamics you saw firsthand at Goldman — packaged for retail traders on TradingView.
-- **Pentarch** — 5-phase cycle detection. Gives your audience the macro structure answer before they look at individual setups.
+- **Volume Oracle** -detects institutional accumulation/distribution with regime classification (Accumulation, Markup, Distribution, Markdown). It surfaces the positioning dynamics you saw firsthand at Goldman -packaged for retail traders on TradingView.
+- **Pentarch** -5-phase cycle detection. Gives your audience the macro structure answer before they look at individual setups.
 
 Both non-repainting, signals finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours.
 
-I'd be genuinely curious whether Volume Oracle's regime detection matches your institutional instincts. If it does, we have an affiliate program (15-30% recurring) — but your Goldman-trained eye is what I'm really after.
+I'd be genuinely curious whether Volume Oracle's regime detection matches your institutional instincts. If it does, we have an affiliate program (15-30% recurring) -but your Goldman-trained eye is what I'm really after.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -751,21 +751,21 @@ Signal Pilot Labs
 
 ## 24. ChartWiseHub
 
-**To:** [CONTACT FORM] — chartwisehub.com/contact (visit in browser — Cloudflare protected)
-**Subject:** Your drawing tools breakdown is the best on the internet — here's what we built for the next step
+**To:** [CONTACT FORM] -chartwisehub.com/contact (visit in browser -Cloudflare protected)
+**Subject:** Your drawing tools breakdown is the best on the internet -here's what we built for the next step
 
 Hi,
 
-Your TradingView drawing tools guide goes into a level of detail I haven't seen anywhere else — explaining not just what each tool does, but when and why to use it. The Pine Editor walkthrough and Screener Tutorial follow the same "show the reasoning, not just the steps" approach. That's rare.
+Your TradingView drawing tools guide goes into a level of detail I haven't seen anywhere else -explaining not just what each tool does, but when and why to use it. The Pine Editor walkthrough and Screener Tutorial follow the same "show the reasoning, not just the steps" approach. That's rare.
 
 I built 7 non-repainting TradingView indicators at Signal Pilot, and I think two would make natural follow-up content for your readers:
 
-- **OmniDeck** — 10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, Confluence Score Panel). For readers who just finished your setup guides, it's the bridge from "I know how TradingView works" to "I have a professional chart."
-- **Pentarch** — 5-phase cycle detection, non-repainting. Could make a genuinely interesting tutorial topic — "how non-repainting indicators actually work vs. ones that repaint." Your audience would eat that up.
+- **OmniDeck** -10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, Confluence Score Panel). For readers who just finished your setup guides, it's the bridge from "I know how TradingView works" to "I have a professional chart."
+- **Pentarch** -5-phase cycle detection, non-repainting. Could make a genuinely interesting tutorial topic -"how non-repainting indicators actually work vs. ones that repaint." Your audience would eat that up.
 
 Send your TradingView username and I'll activate all 7 within 24 hours. Happy to provide screenshots, feature breakdowns, or anything you'd need for content.
 
-We have an affiliate program (15-30% recurring) — but a ChartWiseHub tutorial would be worth more than any ad placement.
+We have an affiliate program (15-30% recurring) -but a ChartWiseHub tutorial would be worth more than any ad placement.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -777,16 +777,16 @@ Signal Pilot Labs
 
 ## 25. @tradementorben (TikTok DM)
 
-**To:** [TIKTOK DM] — @tradementorben
+**To:** [TIKTOK DM] -@tradementorben
 
-Hey Ben — MBA/MPA background doing day trading content on TikTok. You're one of the few creators who brings actual academic rigor to 60-second trade breakdowns. That's a hard thing to do well.
+Hey Ben -MBA/MPA background doing day trading content on TikTok. You're one of the few creators who brings actual academic rigor to 60-second trade breakdowns. That's a hard thing to do well.
 
 I built 7 non-repainting TradingView indicators. Two that match your systematic approach:
 
-- **Pentarch** — 5-phase cycle detection. Answers "where are we in the market structure?" before any trade. No subjectivity.
-- **Harmonic Oscillator** — 7-component voting system. Gives a conviction count (e.g., 6/7 STRONG BULL) — the kind of data-driven confirmation an MBA would appreciate.
+- **Pentarch** -5-phase cycle detection. Answers "where are we in the market structure?" before any trade. No subjectivity.
+- **Harmonic Oscillator** -7-component voting system. Gives a conviction count (e.g., 6/7 STRONG BULL) -the kind of data-driven confirmation an MBA would appreciate.
 
-Send your TradingView username — I'll activate all 7 within 24 hours. Free access, no strings.
+Send your TradingView username -I'll activate all 7 within 24 hours. Free access, no strings.
 
 Affiliate program (15-30% recurring) if they resonate with your audience.
 
@@ -794,24 +794,24 @@ signalpilot.io
 
 ---
 
-## Quick Reference — Contact Summary (Batch 2)
+## Quick Reference -Contact Summary (Batch 2)
 
 | # | Prospect | Email | Method |
 |---|---------|-------|--------|
 | 16 | QuantNomad (Vadim) | info@quantnomad.com | Direct email |
-| 17 | jdehorty (Justin Dehorty) | — | LinkedIn DM or Discord (ai-edge) |
+| 17 | jdehorty (Justin Dehorty) | -| LinkedIn DM or Discord (ai-edge) |
 | 18 | TheSignalyst (Richard Nasr) | rnasr001@gmail.com | Direct email |
 | 19 | KioseffTrading (Brandon) | help@kiosefftrading.com | Direct email |
-| 20 | TradingCode.net (Jos) | — | Contact form: tradingcode.net/contact |
+| 20 | TradingCode.net (Jos) | -| Contact form: tradingcode.net/contact |
 | 21 | Jonathan Hobbs (Stopsaving) | support@stopsaving.com | Direct email |
 | 22 | Igor Arapov | arapov.trade@gmail.com | Direct email |
 | 23 | @investwithhenry (Henry) | uncle@investwithhenry.com | Direct email |
-| 24 | ChartWiseHub | — | Contact form (visit in browser) |
-| 25 | @tradementorben | — | TikTok DM |
+| 24 | ChartWiseHub | -| Contact form (visit in browser) |
+| 25 | @tradementorben | -| TikTok DM |
 
 ---
 
-# BATCH 3 — NEW PROSPECTS [READY TO SEND]
+# BATCH 3 -NEW PROSPECTS [READY TO SEND]
 
 
 ## FOREX & INDICES
@@ -820,23 +820,23 @@ signalpilot.io
 
 ### 26. No Nonsense Forex (VP / Patrick)
 
-**To:** [CONTACT FORM] — nononsenseforex.com/contact (business/media inquiries only)
-**Subject:** Confirmation slot and volume slot — two indicators that pass your NNFX testing rules
+**To:** [CONTACT FORM] -nononsenseforex.com/contact (business/media inquiries only)
+**Subject:** Confirmation slot and volume slot -two indicators that pass your NNFX testing rules
 
 Hi VP,
 
-Your NNFX algorithm did something nobody else managed — it gave retail forex traders a repeatable, testable framework: baseline, confirmation, volume, exit, all on the daily. The rule that every indicator must be tested in its specific slot before it earns a place is exactly why I'm reaching out.
+Your NNFX algorithm did something nobody else managed -it gave retail forex traders a repeatable, testable framework: baseline, confirmation, volume, exit, all on the daily. The rule that every indicator must be tested in its specific slot before it earns a place is exactly why I'm reaching out.
 
 I built two indicators that slot directly into the NNFX framework:
 
-- **Harmonic Oscillator** — 7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence). Each votes independently, outputs a conviction count. Built to serve as a confirmation indicator in the NNFX algo — and it's backtestable on TradingView so your community can verify it in that slot.
-- **Volume Oracle** — institutional regime detection (Accumulation, Markup, Distribution, Markdown). Not a volume-weighted oscillator — actual regime classification. Built for the NNFX volume slot.
+- **Harmonic Oscillator** -7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence). Each votes independently, outputs a conviction count. Built to serve as a confirmation indicator in the NNFX algo -and it's backtestable on TradingView so your community can verify it in that slot.
+- **Volume Oracle** -institutional regime detection (Accumulation, Markup, Distribution, Markdown). Not a volume-weighted oscillator -actual regime classification. Built for the NNFX volume slot.
 
-Both non-repainting. Signals finalize on candle close. $100 bounty if anyone proves otherwise. Your community tests every indicator before trusting it — I built these to survive exactly that scrutiny.
+Both non-repainting. Signals finalize on candle close. $100 bounty if anyone proves otherwise. Your community tests every indicator before trusting it -I built these to survive exactly that scrutiny.
 
 Send your TradingView username and I'll activate all 7 within 24 hours. I'd love your audience to backtest them in their NNFX systems.
 
-We have an affiliate program (15-30% recurring) — but only if they pass your testing standards first.
+We have an affiliate program (15-30% recurring) -but only if they pass your testing standards first.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -849,22 +849,22 @@ Signal Pilot Labs
 ### 27. Urban Forex (Navin Prithyani)
 
 **To:** info@urbanforex.com
-**Subject:** "Why the market moves, not just where" — I built a cycle layer for exactly that
+**Subject:** "Why the market moves, not just where" -I built a cycle layer for exactly that
 
 Hi Navin,
 
-Your Mastering Price Action course teaches the thing most forex educators skip entirely — the why behind the move, not just the pattern. 100K+ students and 14M views later, that philosophy clearly resonates. The reason your students get better results is because they understand structure before they read candles.
+Your Mastering Price Action course teaches the thing most forex educators skip entirely -the why behind the move, not just the pattern. 100K+ students and 14M views later, that philosophy clearly resonates. The reason your students get better results is because they understand structure before they read candles.
 
-I built two indicators that add a structural context layer to price action — designed to complement it, never replace it:
+I built two indicators that add a structural context layer to price action -designed to complement it, never replace it:
 
-- **Pentarch** — maps 5 market cycle phases automatically (Touchdown → Ignition → Warning → Capitulation → Breakdown). Before your students read price action, Pentarch answers "what phase are we in?" — the structural context that separates a good PA read from a lucky one.
-- **Janus Atlas** — auto-maps 60+ level types across multiple timeframes (session levels, confluence zones, VWAP anchors). The levels your students draw manually — mapped automatically as a reference layer beneath their own analysis.
+- **Pentarch** -maps 5 market cycle phases automatically (Touchdown → Ignition → Warning → Capitulation → Breakdown). Before your students read price action, Pentarch answers "what phase are we in?" -the structural context that separates a good PA read from a lucky one.
+- **Janus Atlas** -auto-maps 60+ level types across multiple timeframes (session levels, confluence zones, VWAP anchors). The levels your students draw manually -mapped automatically as a reference layer beneath their own analysis.
 
 Both non-repainting, signals finalize on candle close. They add context, not noise.
 
 Send your TradingView username and I'll activate all 7 within 24 hours. I'd be curious whether your students find the cycle context useful alongside their PA reads.
 
-We have an affiliate program (15-30% recurring) if they fit your ecosystem — but your assessment as a PA purist is what matters.
+We have an affiliate program (15-30% recurring) if they fit your ecosystem -but your assessment as a PA purist is what matters.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -877,20 +877,20 @@ Signal Pilot Labs
 ### 28. ForexSignals TV (Andrew Lockwood)
 
 **To:** support@forexsignals.com
-**Subject:** Three live sessions a day, 40K members — built indicators that keep up with that pace
+**Subject:** Three live sessions a day, 40K members -built indicators that keep up with that pace
 
 Hi Andrew,
 
-Running three live trading sessions daily for a 40K+ community while maintaining a 136-video academy (12 modules deep) — that's a volume of live analysis that demands tools which give fast, clear reads. No room for ambiguity when you're covering multiple pairs in real-time.
+Running three live trading sessions daily for a 40K+ community while maintaining a 136-video academy (12 modules deep) -that's a volume of live analysis that demands tools which give fast, clear reads. No room for ambiguity when you're covering multiple pairs in real-time.
 
 I built two indicators that were designed for exactly that speed:
 
-- **Harmonic Oscillator** — 7-component voting system that outputs a conviction count (e.g., 6/7 STRONG BULL). One glance tells you if the setup has multi-factor confirmation. Built for the pace of live sessions.
-- **Janus Atlas** — auto-maps 60+ level types across multiple timeframes (session boundaries, confluence zones, VWAP anchors). Instead of drawing levels between sessions, your mentors get the institutional level map automatically — more time analyzing, less time drawing.
+- **Harmonic Oscillator** -7-component voting system that outputs a conviction count (e.g., 6/7 STRONG BULL). One glance tells you if the setup has multi-factor confirmation. Built for the pace of live sessions.
+- **Janus Atlas** -auto-maps 60+ level types across multiple timeframes (session boundaries, confluence zones, VWAP anchors). Instead of drawing levels between sessions, your mentors get the institutional level map automatically -more time analyzing, less time drawing.
 
 Both non-repainting, signals finalize on candle close. Send your TradingView username and I'll activate all 7 for your team within 24 hours.
 
-We have an affiliate program (15-30% recurring) for education platforms — but test them in your live sessions first. That's the only review that matters.
+We have an affiliate program (15-30% recurring) for education platforms -but test them in your live sessions first. That's the only review that matters.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -902,17 +902,17 @@ Signal Pilot Labs
 
 ### 29. WicksDontLie (Raja Rakeel)
 
-**To:** [INSTAGRAM DM] — @wicksdontlie
+**To:** [INSTAGRAM DM] -@wicksdontlie
 **Subject:** N/A (DM format)
 
-Hey Raja — 1,500+ people watching you trade GBPJPY live during NY session, no edits, no replays. That's the hardest content format in trading education and you do it every day.
+Hey Raja -1,500+ people watching you trade GBPJPY live during NY session, no edits, no replays. That's the hardest content format in trading education and you do it every day.
 
 Built two indicators that complement what you do:
 
-- **Plutus Flow** — buying/selling pressure ribbon with divergence detection. Shows the force behind the wicks you're reading — was the wick a liquidity grab or genuine exhaustion? Plutus Flow answers that.
-- **Pentarch** — 5-phase cycle detection. Tells you the structural context before you start reading wicks. If you're in a Capitulation phase, those wicks mean something different than in Ignition.
+- **Plutus Flow** -buying/selling pressure ribbon with divergence detection. Shows the force behind the wicks you're reading -was the wick a liquidity grab or genuine exhaustion? Plutus Flow answers that.
+- **Pentarch** -5-phase cycle detection. Tells you the structural context before you start reading wicks. If you're in a Capitulation phase, those wicks mean something different than in Ignition.
 
-Non-repainting, finalize on candle close. Send your TradingView username — I'll activate all 7 within 24 hours.
+Non-repainting, finalize on candle close. Send your TradingView username -I'll activate all 7 within 24 hours.
 
 signalpilot.io
 
@@ -921,22 +921,22 @@ signalpilot.io
 ### 30. The Traveling Trader
 
 **To:** [YouTube About email]
-**Subject:** Your macro-first approach to forex — I built the cycle layer that automates step one
+**Subject:** Your macro-first approach to forex -I built the cycle layer that automates step one
 
 Hi,
 
-Your daily live sessions start where most traders skip — macro context first, then technicals. That's why 364K subscribers keep showing up. You don't just draw lines; you explain the macro structure that makes those lines matter. The morning sessions where you walk through NFP positioning and central bank divergence before touching a chart — that sequencing is exactly right.
+Your daily live sessions start where most traders skip -macro context first, then technicals. That's why 364K subscribers keep showing up. You don't just draw lines; you explain the macro structure that makes those lines matter. The morning sessions where you walk through NFP positioning and central bank divergence before touching a chart -that sequencing is exactly right.
 
 I built two indicators that automate the first step of your workflow:
 
-- **Pentarch** — maps 5 market cycle phases automatically (Touchdown → Ignition → Warning → Capitulation → Breakdown). Before your viewers zoom into entries, Pentarch answers "where are we in the macro cycle?" on any forex pair, any timeframe.
-- **Janus Atlas** — auto-maps 60+ level types across multiple timeframes, including session boundaries, confluence zones, and VWAP anchors. The institutional level map your viewers need before the session starts.
+- **Pentarch** -maps 5 market cycle phases automatically (Touchdown → Ignition → Warning → Capitulation → Breakdown). Before your viewers zoom into entries, Pentarch answers "where are we in the macro cycle?" on any forex pair, any timeframe.
+- **Janus Atlas** -auto-maps 60+ level types across multiple timeframes, including session boundaries, confluence zones, and VWAP anchors. The institutional level map your viewers need before the session starts.
 
 Both non-repainting, signals finalize on candle close.
 
 Send your TradingView username and I'll activate all 7 within 24 hours. I'd love to hear if Pentarch's cycle reads match your manual macro analysis.
 
-We have an affiliate program (15-30% recurring) — but your live-session verdict is what counts.
+We have an affiliate program (15-30% recurring) -but your live-session verdict is what counts.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -948,21 +948,21 @@ Signal Pilot Labs
 
 ### 31. VasilyTrader
 
-**To:** [CONTACT FORM] — vasilytrader.com (or Telegram @VasilyTrader)
-**Subject:** 4,674 published ideas, 145K reputation — you'd give the most honest TradingView review possible
+**To:** [CONTACT FORM] -vasilytrader.com (or Telegram @VasilyTrader)
+**Subject:** 4,674 published ideas, 145K reputation -you'd give the most honest TradingView review possible
 
 Hi Vasily,
 
-4,674 published ideas. 145K+ reputation. 38K followers. 3+ posts per day on XAUUSD and forex. You're not just active on TradingView — you're one of the platform's most consistent educators. And because your audience lives inside TradingView, your review of any indicator carries real weight there.
+4,674 published ideas. 145K+ reputation. 38K followers. 3+ posts per day on XAUUSD and forex. You're not just active on TradingView -you're one of the platform's most consistent educators. And because your audience lives inside TradingView, your review of any indicator carries real weight there.
 
 I built two indicators that match your gold and forex workflow:
 
-- **Pentarch** — 5-phase cycle detection. For your XAUUSD analysis, it adds an automated cycle context layer — when gold is in a Warning or Capitulation phase, that changes how you read the harmonic patterns you trade.
-- **Janus Atlas** — auto-maps 60+ level types including session boundaries and confluence zones. The level map populates automatically so you can focus on analysis instead of drawing.
+- **Pentarch** -5-phase cycle detection. For your XAUUSD analysis, it adds an automated cycle context layer -when gold is in a Warning or Capitulation phase, that changes how you read the harmonic patterns you trade.
+- **Janus Atlas** -auto-maps 60+ level types including session boundaries and confluence zones. The level map populates automatically so you can focus on analysis instead of drawing.
 
 Both non-repainting, signals finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours.
 
-With 145K reputation, your honest review reaches exactly the right audience. We have an affiliate program (15-30% recurring) — but a review from someone with your TradingView credibility is what I'm really looking for.
+With 145K reputation, your honest review reaches exactly the right audience. We have an affiliate program (15-30% recurring) -but a review from someone with your TradingView credibility is what I'm really looking for.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -979,22 +979,22 @@ Signal Pilot Labs
 ### 32. Rekt Capital
 
 **To:** rektcapital@gmail.com
-**Subject:** Your 4-year BTC cycle framework — I automated the detection part
+**Subject:** Your 4-year BTC cycle framework -I automated the detection part
 
 Hi,
 
-Your Bitcoin cycle analysis changed how an entire community thinks about positioning. The 4-year cycle framework, the "accumulation zone" identification, the macro support/resistance mapping that Forbes and CoinTelegraph reference — you taught thousands of people to think in cycles rather than candles.
+Your Bitcoin cycle analysis changed how an entire community thinks about positioning. The 4-year cycle framework, the "accumulation zone" identification, the macro support/resistance mapping that Forbes and CoinTelegraph reference -you taught thousands of people to think in cycles rather than candles.
 
 I built an indicator that automates what you teach manually:
 
-- **Pentarch** — maps 5 market cycle phases automatically: Touchdown (selling exhaustion) → Ignition (breakout) → Warning (momentum divergence) → Capitulation (buying exhaustion) → Breakdown (reversal confirmed). Your students who are learning to identify "where are we in the Bitcoin cycle?" would see Pentarch confirm their analysis in real-time.
-- **Volume Oracle** — institutional accumulation/distribution regime classification. Surfaces the on-chain dynamics you discuss — accumulation vs. distribution — from the chart side.
+- **Pentarch** -maps 5 market cycle phases automatically: Touchdown (selling exhaustion) → Ignition (breakout) → Warning (momentum divergence) → Capitulation (buying exhaustion) → Breakdown (reversal confirmed). Your students who are learning to identify "where are we in the Bitcoin cycle?" would see Pentarch confirm their analysis in real-time.
+- **Volume Oracle** -institutional accumulation/distribution regime classification. Surfaces the on-chain dynamics you discuss -accumulation vs. distribution -from the chart side.
 
-Both non-repainting, signals finalize on candle close. Works on BTC, ETH, altcoins — anything on TradingView.
+Both non-repainting, signals finalize on candle close. Works on BTC, ETH, altcoins -anything on TradingView.
 
 Send your TradingView username and I'll activate all 7 within 24 hours. I'd genuinely love to see if Pentarch's cycle detection aligns with your manual reads.
 
-We have an affiliate program (15-30% recurring) — but only if they earn it through your testing.
+We have an affiliate program (15-30% recurring) -but only if they earn it through your testing.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -1007,22 +1007,22 @@ Signal Pilot Labs
 ### 33. Crypto Zombie (K-Dub / Kyle)
 
 **To:** [YouTube About email]
-**Subject:** 1,300+ videos covering every BTC cycle — I built an indicator that maps them automatically
+**Subject:** 1,300+ videos covering every BTC cycle -I built an indicator that maps them automatically
 
 Hey K-Dub,
 
-1,300+ videos since 2017. Every Bitcoin cycle. Every altseason. Every crash. Every recovery. Seven years of daily analysis without missing a beat — that kind of consistency is what separates real educators from hype accounts. Your audience of 262K didn't come from one viral video; it came from showing up every single day.
+1,300+ videos since 2017. Every Bitcoin cycle. Every altseason. Every crash. Every recovery. Seven years of daily analysis without missing a beat -that kind of consistency is what separates real educators from hype accounts. Your audience of 262K didn't come from one viral video; it came from showing up every single day.
 
 I built two indicators that would add a layer to your daily chart breakdowns:
 
-- **Pentarch** — maps 5 market cycle phases automatically. When your audience asks "where are we in the cycle?" during your streams, Pentarch gives them a visual answer in real-time. Touchdown → Ignition → Warning → Capitulation → Breakdown — the phases you've narrated across every BTC cycle since 2017, now automated.
-- **Volume Oracle** — institutional accumulation/distribution detection with regime classification. Shows what smart money is doing behind the candles you're analyzing.
+- **Pentarch** -maps 5 market cycle phases automatically. When your audience asks "where are we in the cycle?" during your streams, Pentarch gives them a visual answer in real-time. Touchdown → Ignition → Warning → Capitulation → Breakdown -the phases you've narrated across every BTC cycle since 2017, now automated.
+- **Volume Oracle** -institutional accumulation/distribution detection with regime classification. Shows what smart money is doing behind the candles you're analyzing.
 
 Both non-repainting, signals finalize on candle close. $100 bounty if anyone proves otherwise.
 
 Send your TradingView username and I'll activate all 7 within 24 hours. After 1,300+ videos of analyzing cycles manually, I'm curious if Pentarch matches your reads.
 
-We have an affiliate program (15-30% recurring) — but your 7-year track record of honest analysis is what I'd value most.
+We have an affiliate program (15-30% recurring) -but your 7-year track record of honest analysis is what I'd value most.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -1034,19 +1034,19 @@ Signal Pilot Labs
 
 ### 34. CryptoBusy (Tom Busby & Josh Moden)
 
-**To:** [Twitter DM] — @CryptoBusy (business inquiries per bio)
+**To:** [Twitter DM] -@CryptoBusy (business inquiries per bio)
 **Subject:** N/A (DM format)
 
-Hey Tom & Josh — the fact that you both came from 5+ years of forex before crypto shows in your Pro Trader Course. The TA foundation is real, not the usual "I learned charting last month" crypto content. Your Teachable course teaches TA the way it should be taught — structure first, then application.
+Hey Tom & Josh -the fact that you both came from 5+ years of forex before crypto shows in your Pro Trader Course. The TA foundation is real, not the usual "I learned charting last month" crypto content. Your Teachable course teaches TA the way it should be taught -structure first, then application.
 
 Built two indicators that bridge the forex TA rigor you started with and the crypto markets you trade now:
 
-- **Pentarch** — 5-phase cycle detection. Automates "where are we in the cycle?" across BTC, alts, and forex. The kind of structural analysis your forex background trained you to do manually.
-- **Harmonic Oscillator** — 7-component voting system (RSI, StochRSI, MACD, EMA, Momentum, Volume, Divergence). Outputs conviction counts your students can use as a multi-factor confirmation before any trade.
+- **Pentarch** -5-phase cycle detection. Automates "where are we in the cycle?" across BTC, alts, and forex. The kind of structural analysis your forex background trained you to do manually.
+- **Harmonic Oscillator** -7-component voting system (RSI, StochRSI, MACD, EMA, Momentum, Volume, Divergence). Outputs conviction counts your students can use as a multi-factor confirmation before any trade.
 
-Non-repainting, finalize on candle close. Send both your TradingView usernames — I'll activate all 7 within 24 hours.
+Non-repainting, finalize on candle close. Send both your TradingView usernames -I'll activate all 7 within 24 hours.
 
-Affiliate program (15-30% recurring) if they fit your academy — but test them first.
+Affiliate program (15-30% recurring) if they fit your academy -but test them first.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -1054,18 +1054,18 @@ signalpilot.io | docs.signalpilot.io
 
 ### 35. Bob Loukas
 
-**To:** [Twitter DM] — @BobLoukas (his only official channel per his own statement)
+**To:** [Twitter DM] -@BobLoukas (his only official channel per his own statement)
 **Subject:** N/A (DM format)
 
-Hey Bob — you're the reason thousands of people think in 4-year and 60-day cycles instead of staring at 5-minute candles. 25+ years of market analysis, Fortune 50 financial trading software background, and you popularized Bitcoin cycle theory before it was mainstream. That framework changed how an entire community positions.
+Hey Bob -you're the reason thousands of people think in 4-year and 60-day cycles instead of staring at 5-minute candles. 25+ years of market analysis, Fortune 50 financial trading software background, and you popularized Bitcoin cycle theory before it was mainstream. That framework changed how an entire community positions.
 
 I built an indicator that automates what you've been doing manually for decades:
 
-**Pentarch** — maps 5 cycle phases: Touchdown (cycle low) → Ignition (breakout) → Warning (momentum divergence) → Capitulation (cycle high) → Breakdown (reversal). It's the digital version of your cycle framework — detecting the phase transitions you identify by hand, automatically on any chart.
+**Pentarch** -maps 5 cycle phases: Touchdown (cycle low) → Ignition (breakout) → Warning (momentum divergence) → Capitulation (cycle high) → Breakdown (reversal). It's the digital version of your cycle framework -detecting the phase transitions you identify by hand, automatically on any chart.
 
-Non-repainting, signals finalize on candle close. I'd genuinely love to see how Pentarch's automated cycle reads compare to your 25 years of manual analysis. That's not a sales pitch — it's a real question I want answered.
+Non-repainting, signals finalize on candle close. I'd genuinely love to see how Pentarch's automated cycle reads compare to your 25 years of manual analysis. That's not a sales pitch -it's a real question I want answered.
 
-Send your TradingView username — I'll activate all 7 within 24 hours.
+Send your TradingView username -I'll activate all 7 within 24 hours.
 
 signalpilot.io
 
@@ -1073,17 +1073,17 @@ signalpilot.io
 
 ### 36. CryptoJack (Jack Skipp)
 
-**To:** [Twitter DM] — @_Crypt0Jack
+**To:** [Twitter DM] -@_Crypt0Jack
 **Subject:** N/A (DM format)
 
-Hey Jack — your Wyckoff breakdowns on crypto charts are the clearest on YouTube. 253K subscribers watching you identify accumulation schematics and distribution patterns in real-time — and you actually explain the methodology, not just slap labels on charts.
+Hey Jack -your Wyckoff breakdowns on crypto charts are the clearest on YouTube. 253K subscribers watching you identify accumulation schematics and distribution patterns in real-time -and you actually explain the methodology, not just slap labels on charts.
 
 Built two indicators that are essentially Wyckoff methodology, automated:
 
-- **Volume Oracle** — regime classification: Accumulation, Markup, Distribution, Markdown. The exact Wyckoff phases you identify manually, detected automatically on any crypto chart. When you're showing your audience "this looks like a Wyckoff accumulation," Volume Oracle either confirms or challenges that read.
-- **Pentarch** — 5-phase cycle detection. Adds the cycle structure layer on top of your Wyckoff reads — are we in a position where accumulation makes structural sense?
+- **Volume Oracle** -regime classification: Accumulation, Markup, Distribution, Markdown. The exact Wyckoff phases you identify manually, detected automatically on any crypto chart. When you're showing your audience "this looks like a Wyckoff accumulation," Volume Oracle either confirms or challenges that read.
+- **Pentarch** -5-phase cycle detection. Adds the cycle structure layer on top of your Wyckoff reads -are we in a position where accumulation makes structural sense?
 
-Non-repainting, finalize on candle close. Send your TradingView username — I'll activate all 7 within 24 hours. Curious how Volume Oracle's regime detection compares to your manual Wyckoff reads.
+Non-repainting, finalize on candle close. Send your TradingView username -I'll activate all 7 within 24 hours. Curious how Volume Oracle's regime detection compares to your manual Wyckoff reads.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -1091,19 +1091,19 @@ signalpilot.io | docs.signalpilot.io
 
 ### 37. Koroush AK
 
-**To:** [Twitter DM] — @KoroushAK (or Telegram @koroushakcrypto)
+**To:** [Twitter DM] -@KoroushAK (or Telegram @koroushakcrypto)
 **Subject:** N/A (DM format)
 
-Hey Koroush — free comprehensive trading course, Market Meditations newsletter, and 376K followers built entirely on giving away education before asking for anything. 8+ years of crypto TA and you still lead with value. That's why your audience trusts your recommendations more than most paid groups.
+Hey Koroush -free comprehensive trading course, Market Meditations newsletter, and 376K followers built entirely on giving away education before asking for anything. 8+ years of crypto TA and you still lead with value. That's why your audience trusts your recommendations more than most paid groups.
 
 Built two indicators that fit the multi-factor TA approach you teach:
 
-- **Pentarch** — 5-phase cycle detection. Your macro crypto analysis starts with "where are we in the cycle?" — Pentarch answers that automatically across BTC, alts, and any TradingView chart.
-- **Harmonic Oscillator** — 7-component voting system (RSI, StochRSI, MACD, EMA, Momentum, Volume, Divergence). Outputs a conviction count — the multi-factor confirmation your trading course emphasizes, automated.
+- **Pentarch** -5-phase cycle detection. Your macro crypto analysis starts with "where are we in the cycle?" -Pentarch answers that automatically across BTC, alts, and any TradingView chart.
+- **Harmonic Oscillator** -7-component voting system (RSI, StochRSI, MACD, EMA, Momentum, Volume, Divergence). Outputs a conviction count -the multi-factor confirmation your trading course emphasizes, automated.
 
-Non-repainting, finalize on candle close. Send your TradingView username — I'll activate all 7 within 24 hours.
+Non-repainting, finalize on candle close. Send your TradingView username -I'll activate all 7 within 24 hours.
 
-Affiliate program (15-30% recurring) — could fit naturally in Market Meditations if they pass your standards.
+Affiliate program (15-30% recurring) -could fit naturally in Market Meditations if they pass your standards.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -1116,20 +1116,20 @@ signalpilot.io | docs.signalpilot.io
 ### 38. InTheMoney (Adam)
 
 **To:** [YouTube About email]
-**Subject:** Your options students need cycle timing — I built an indicator that automates it
+**Subject:** Your options students need cycle timing -I built an indicator that automates it
 
 Hi Adam,
 
-458K subscribers learning options without the guru nonsense. You teach calls, puts, LEAPS, and IV in a way that respects people's intelligence — and your anti-hype approach is exactly why your audience trusts tool recommendations when you make them.
+458K subscribers learning options without the guru nonsense. You teach calls, puts, LEAPS, and IV in a way that respects people's intelligence -and your anti-hype approach is exactly why your audience trusts tool recommendations when you make them.
 
 Here's the thing about options: timing matters more than direction. Buying calls during a momentum divergence phase is a different trade than buying calls during a breakout. I built two indicators that give your students that timing edge:
 
-- **Pentarch** — 5-phase cycle detection. When a student is about to buy LEAPS on SPY, Pentarch tells them if the cycle structure supports the thesis. Are we in Ignition (breakout — favorable for calls) or Warning (momentum divergence — maybe wait)? That context changes the probability.
-- **OmniDeck** — includes a Squeeze Detector (Bollinger vs. Keltner compression). For your students playing volatility expansion, it surfaces when the squeeze is ready to fire — directly relevant to straddle and strangle entries.
+- **Pentarch** -5-phase cycle detection. When a student is about to buy LEAPS on SPY, Pentarch tells them if the cycle structure supports the thesis. Are we in Ignition (breakout -favorable for calls) or Warning (momentum divergence -maybe wait)? That context changes the probability.
+- **OmniDeck** -includes a Squeeze Detector (Bollinger vs. Keltner compression). For your students playing volatility expansion, it surfaces when the squeeze is ready to fire -directly relevant to straddle and strangle entries.
 
 Both non-repainting, signals finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours.
 
-We have an affiliate program (15-30% recurring) — but your honest take as an options educator comes first.
+We have an affiliate program (15-30% recurring) -but your honest take as an options educator comes first.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -1142,22 +1142,22 @@ Signal Pilot Labs
 ### 39. Humbled Trader (Shay Huang)
 
 **To:** support@humbledtrader.com
-**Subject:** Your TradingView vs Trade Ideas video — I built what was missing from that comparison
+**Subject:** Your TradingView vs Trade Ideas video -I built what was missing from that comparison
 
 Hi Shay,
 
-Your TradingView vs Trade Ideas comparison was the most honest tool review on YouTube — you actually signed up, tested both, and showed the real trade-offs instead of just reading feature lists. 1.3M subscribers built on showing losses alongside wins, no guru act. That's why when you recommend a tool, people actually listen.
+Your TradingView vs Trade Ideas comparison was the most honest tool review on YouTube -you actually signed up, tested both, and showed the real trade-offs instead of just reading feature lists. 1.3M subscribers built on showing losses alongside wins, no guru act. That's why when you recommend a tool, people actually listen.
 
 I built two indicators that fill the gaps you identified in TradingView's native tools:
 
-- **Augury Grid** — scans 8 tickers across 3 timeframes with quality scoring and conviction ranking. The momentum scanner TradingView is missing — no external software needed. Trade Ideas-level scanning built natively into TradingView.
-- **OmniDeck** — 10 systems unified in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, Confluence Score Panel). One indicator instead of cluttering your chart with ten.
+- **Augury Grid** -scans 8 tickers across 3 timeframes with quality scoring and conviction ranking. The momentum scanner TradingView is missing -no external software needed. Trade Ideas-level scanning built natively into TradingView.
+- **OmniDeck** -10 systems unified in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, Confluence Score Panel). One indicator instead of cluttering your chart with ten.
 
 All non-repainting. $100 bounty if anyone proves otherwise. Signals finalize on candle close.
 
-Send your TradingView username and I'll activate all 7 within 24 hours. I'd genuinely love a Humbled Trader-style honest comparison — red flags included.
+Send your TradingView username and I'll activate all 7 within 24 hours. I'd genuinely love a Humbled Trader-style honest comparison -red flags included.
 
-We have an affiliate program (15-30% recurring) — but your honest verdict is worth more than any commission.
+We have an affiliate program (15-30% recurring) -but your honest verdict is worth more than any commission.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -1169,17 +1169,17 @@ Signal Pilot Labs
 
 ### 40. Trading Fraternity (Josh Answers)
 
-**To:** [Instagram DM] — @TheTradingFraternity (76.6K followers)
+**To:** [Instagram DM] -@TheTradingFraternity (76.6K followers)
 **Subject:** N/A (DM format)
 
-Hey Josh — 303K on Trading Fraternity, 200K on Market Live. Half a million traders watching you trade live daily. Your streams are raw — real entries, real exits, real reactions. That's the format that actually teaches people.
+Hey Josh -303K on Trading Fraternity, 200K on Market Live. Half a million traders watching you trade live daily. Your streams are raw -real entries, real exits, real reactions. That's the format that actually teaches people.
 
 Built two indicators made for live streaming:
 
-- **Augury Grid** — scans 8 tickers across 3 timeframes with conviction ranking. Pull it up before market open on stream and your viewers see the highest-probability setups ranked automatically. No manual scanning.
-- **OmniDeck** — 10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones). One indicator that gives your live charts a professional read instantly.
+- **Augury Grid** -scans 8 tickers across 3 timeframes with conviction ranking. Pull it up before market open on stream and your viewers see the highest-probability setups ranked automatically. No manual scanning.
+- **OmniDeck** -10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones). One indicator that gives your live charts a professional read instantly.
 
-Non-repainting, finalize on candle close. Send your TradingView username — I'll activate all 7 within 24 hours.
+Non-repainting, finalize on candle close. Send your TradingView username -I'll activate all 7 within 24 hours.
 
 Affiliate program (15-30% recurring) if your community finds them useful.
 
@@ -1190,22 +1190,22 @@ signalpilot.io
 ### 41. Option Alpha (Kirk Du Plessis)
 
 **To:** [YouTube About email or optionalpha.com/about-us]
-**Subject:** You backtested 17 indicators across 20 years — here are 7 more that don't repaint
+**Subject:** You backtested 17 indicators across 20 years -here are 7 more that don't repaint
 
 Hi Kirk,
 
-Your research backtesting 17 different technical indicators across 20 years with countless settings is the most rigorous public indicator analysis I've seen. You didn't just test — you showed exactly why most indicators fail in real trading. And you gave all of it away for free. That combination of rigor and generosity is rare.
+Your research backtesting 17 different technical indicators across 20 years with countless settings is the most rigorous public indicator analysis I've seen. You didn't just test -you showed exactly why most indicators fail in real trading. And you gave all of it away for free. That combination of rigor and generosity is rare.
 
 Given your backtesting work, I'd genuinely love to see what happens when your team runs these through the same methodology:
 
-- **Harmonic Oscillator** — 7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence). Each component votes independently and outputs a conviction count. Fully backtestable on TradingView — designed to be tested, not just trusted.
-- **Pentarch** — 5-phase cycle detection with a 4-layer confirmation pipeline. No signal can fire mid-bar. Also fully backtestable — the architecture was built specifically to eliminate repainting bias from backtest results.
+- **Harmonic Oscillator** -7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence). Each component votes independently and outputs a conviction count. Fully backtestable on TradingView -designed to be tested, not just trusted.
+- **Pentarch** -5-phase cycle detection with a 4-layer confirmation pipeline. No signal can fire mid-bar. Also fully backtestable -the architecture was built specifically to eliminate repainting bias from backtest results.
 
 Every signal finalizes on candle close. $100 bounty if anyone proves they repaint.
 
-Send your TradingView username and I'll activate all 7 within 24 hours. I'm not asking you to promote them — I'm asking you to test them the way only Option Alpha can.
+Send your TradingView username and I'll activate all 7 within 24 hours. I'm not asking you to promote them -I'm asking you to test them the way only Option Alpha can.
 
-We have an affiliate program (15-30% recurring) — but only if they survive your backtesting.
+We have an affiliate program (15-30% recurring) -but only if they survive your backtesting.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -1218,7 +1218,7 @@ Signal Pilot Labs
 ### 42. Rockwell Trading (Markus Heitkoetter)
 
 **To:** support@rockwelltrading.com
-**Subject:** Your "Best TradingView Setup For PowerX" video — I built what comes after that setup
+**Subject:** Your "Best TradingView Setup For PowerX" video -I built what comes after that setup
 
 Hi Markus,
 
@@ -1226,12 +1226,12 @@ Your "Best TradingView Setup For The PowerX Strategy" video showed your 110K sub
 
 I built two indicators that complement the PowerX workflow directly:
 
-- **Augury Grid** — scans 8 tickers across 3 timeframes with quality scoring and conviction ranking. It runs alongside your PowerX Optimizer as a TradingView-native scanner — surfacing the highest-conviction setups before you start your 10am session.
-- **Harmonic Oscillator** — 7-component voting system (RSI, StochRSI, MACD, EMA, Momentum, Volume, Divergence). Gives a conviction count as a second opinion before executing a PowerX setup. When PowerX says go and Harmonic Oscillator confirms 6/7 STRONG BULL — that's real confluence.
+- **Augury Grid** -scans 8 tickers across 3 timeframes with quality scoring and conviction ranking. It runs alongside your PowerX Optimizer as a TradingView-native scanner -surfacing the highest-conviction setups before you start your 10am session.
+- **Harmonic Oscillator** -7-component voting system (RSI, StochRSI, MACD, EMA, Momentum, Volume, Divergence). Gives a conviction count as a second opinion before executing a PowerX setup. When PowerX says go and Harmonic Oscillator confirms 6/7 STRONG BULL -that's real confluence.
 
 Both non-repainting, signals finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours.
 
-We have an affiliate program (15-30% recurring) — but test them in your live sessions first. That's the only way to know.
+We have an affiliate program (15-30% recurring) -but test them in your live sessions first. That's the only way to know.
 
 signalpilot.io | docs.signalpilot.io
 
@@ -1243,23 +1243,23 @@ Signal Pilot Labs
 
 ### 43. Black Girl Stocks (Shayla North)
 
-**To:** [CONTACT FORM] — theblackgirlstocks.com/pages/contact
-**Subject:** Your Candlestick Review Cards are genius — built indicators with that same "make it visual" approach
+**To:** [CONTACT FORM] -theblackgirlstocks.com/pages/contact
+**Subject:** Your Candlestick Review Cards are genius -built indicators with that same "make it visual" approach
 
 Hi Shayla,
 
-Your Candlestick Review Cards are one of the smartest education tools I've seen — turning complex patterns into something visual that sticks. 190K subscribers learning technical analysis from someone who actually thinks about how people learn, not just what to teach. That's a design mindset, not just a trading mindset.
+Your Candlestick Review Cards are one of the smartest education tools I've seen -turning complex patterns into something visual that sticks. 190K subscribers learning technical analysis from someone who actually thinks about how people learn, not just what to teach. That's a design mindset, not just a trading mindset.
 
 I built two indicators with that same "make it visual and clear" philosophy:
 
-- **OmniDeck** — 10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, candlestick pattern recognition, and more). For your students who are past the Review Cards and ready for live charts, it turns a blank TradingView chart into a professional workspace with one click.
-- **Pentarch** — 5-phase cycle detection. Answers "what's the market doing right now?" visually — color-coded phases that even beginners can read instantly.
+- **OmniDeck** -10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, candlestick pattern recognition, and more). For your students who are past the Review Cards and ready for live charts, it turns a blank TradingView chart into a professional workspace with one click.
+- **Pentarch** -5-phase cycle detection. Answers "what's the market doing right now?" visually -color-coded phases that even beginners can read instantly.
 
-Both non-repainting, signals finalize on candle close. 7-day free trial, no credit card required — your community can test everything risk-free.
+Both non-repainting, signals finalize on candle close. 7-day free trial, no credit card required -your community can test everything risk-free.
 
 Send your TradingView username and I'll activate all 7 within 24 hours so you can vet them first.
 
-We have an affiliate program (15-30% recurring) — but your community's experience matters more.
+We have an affiliate program (15-30% recurring) -but your community's experience matters more.
 
 signalpilot.io | education.signalpilot.io (82 free lessons)
 
@@ -1276,27 +1276,24 @@ Signal Pilot Labs
 ### 44. Trader Nick / A1 Trading
 
 **To:** tradernick135@gmail.com (or support@a1trading.com)
-**Subject:** Cycle detection + automated levels for your forex setups
+**Subject:** Your EdgeFinder ranks macro sentiment -I built tools that rank the chart side
 
 Hi Nick,
 
-Your daily market analysis across forex, indices, and options gives your 406K subscribers actionable setups with real context. The fact that you've built a full ecosystem (EdgeFinder, community webinars, eBooks) shows you think about trading education as a system, not just content.
+Your daily market analysis gives 406K subscribers actionable setups with real macro context. But what really caught my attention is the EdgeFinder -building a tool that ranks currency pairs by macro sentiment shows you think about trading as a system. The community webinars and eBooks are content; EdgeFinder is infrastructure. That's a different level.
 
-We built two tools at Signal Pilot that complement a multi-market workflow:
+I built two indicators that complement EdgeFinder from the technical side:
 
-- **Pentarch** — maps 5 market cycle phases automatically. Adds a cycle context layer before you plan your entries.
-- **Janus Atlas** — auto-maps 60+ level types across multiple timeframes. Session boundaries, confluence zones, VWAP anchors — the institutional level map.
+- **Pentarch** -5-phase cycle detection. EdgeFinder tells your audience which currencies have macro tailwinds. Pentarch tells them where that pair is in its technical cycle -Ignition (favorable entry) or Warning (momentum divergence, wait). Macro sentiment + cycle phase = real confluence.
+- **Janus Atlas** -auto-maps 60+ level types across multiple timeframes (session boundaries, confluence zones, VWAP anchors). Once EdgeFinder identifies the pair, Janus Atlas maps the execution levels.
 
-Both non-repainting, signals finalize on candle close. Works across forex, indices, and any TradingView chart.
+Both non-repainting, signals finalize on candle close. Works across forex, indices, options -anything on TradingView.
 
-Send your TradingView username and I'll activate all 7 indicators within 24 hours.
+Send your TradingView username and I'll activate all 7 within 24 hours. I'd love to see how they pair with EdgeFinder in your workflow.
 
-We have an affiliate program (15-30% recurring) if they add value for your community.
+We have an affiliate program (15-30% recurring) -but test the combination first.
 
-Quick links:
-- Website: https://www.signalpilot.io
-- Docs: https://docs.signalpilot.io
-- Education (82 free lessons): https://education.signalpilot.io
+signalpilot.io | docs.signalpilot.io
 
 Best,
 [Your Name]
@@ -1306,26 +1303,23 @@ Signal Pilot Labs
 
 ### 45. UKspreadbetting (Mark Holstead)
 
-**To:** [CONTACT FORM] — financial-spread-betting.com
-**Subject:** Non-repainting TradingView indicators for your UK trading audience
+**To:** [CONTACT FORM] -financial-spread-betting.com
+**Subject:** 423K subscribers learning TA on TradingView -built indicators for exactly that audience
 
 Hi Mark,
 
-423K subscribers learning spread betting, swing trading, and technical analysis — your channel is the largest UK-focused trading education resource on YouTube. Your audience is exactly the kind of traders who live on TradingView charts.
+You've built the largest UK-focused trading education channel on YouTube -423K subscribers learning spread betting, swing trading, and technical analysis. Your interview-format videos where you sit down with professional traders and break down their actual methodology -those are the videos that build real understanding, not just views.
 
-We built 7 non-repainting TradingView indicators at Signal Pilot. Two I think your audience would find useful:
+Your audience already lives on TradingView charts. I built two indicators designed for that exact user:
 
-- **OmniDeck** — 10 systems in one overlay. For traders still building their setup, it's the fastest way to access professional-grade analysis on TradingView.
-- **Pentarch** — maps 5 market cycle phases automatically. Helps your students answer "where are we in the trend?" before placing any spread bet.
+- **OmniDeck** -10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, Confluence Score Panel). For your viewers who are still assembling their TradingView setup, it consolidates everything into one professional workspace.
+- **Pentarch** -5-phase cycle detection. Before your audience places a spread bet, Pentarch answers "where are we in the trend cycle?" -Ignition, Warning, Capitulation. That context changes position sizing and timing.
 
-Happy to give you full access. Send your TradingView username and I'll activate within 24 hours.
+Both non-repainting, signals finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours.
 
-We have an affiliate program (15-30% recurring) for content creators.
+We have an affiliate program (15-30% recurring) -but your audience's experience matters more than any commission.
 
-Quick links:
-- Website: https://www.signalpilot.io
-- Docs: https://docs.signalpilot.io
-- Education (82 free lessons): https://education.signalpilot.io
+signalpilot.io | docs.signalpilot.io
 
 Best,
 [Your Name]
@@ -1335,28 +1329,23 @@ Signal Pilot Labs
 
 ### 46. Trading Rush
 
-**To:** [CONTACT FORM] — tradingrush.net
-**Subject:** 7 non-repainting indicators — ready for your "I Tested It 100 Times" format
+**To:** [CONTACT FORM] -tradingrush.net
+**Subject:** "I Tested It 100 Times" -here are 7 non-repainting indicators built to survive that format
 
 Hi,
 
-Your "I Tested [Strategy] 100 Times" format is one of the most compelling content concepts in trading education — it gives your 327K subscribers actual data instead of opinions. The BackTester app you built shows you care about verifiable results.
+Your "I Tested [Strategy] 100 Times" series is one of the smartest content concepts in trading education. Data instead of opinions. 327K subscribers who trust you because you show the win rate, the drawdown, and the actual results -not cherry-picked screenshots. The BackTester app you built proves this isn't just a content angle; it's your actual methodology.
 
-We built 7 non-repainting TradingView indicators at Signal Pilot. Every one is backtestable. Two I think would make interesting test subjects:
+I built 7 non-repainting TradingView indicators specifically designed to be backtestable -and I want you to test them 100 times.
 
-- **Harmonic Oscillator** — 7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence). Outputs conviction counts you can backtest.
-- **Pentarch** — 5-phase cycle detection. Signals finalize on candle close — designed specifically to be backtestable without repainting bias.
+- **Harmonic Oscillator** -7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence). Outputs a conviction count (e.g., 6/7 STRONG BULL). Every signal is backtestable on TradingView. I think this would make a fascinating "I Tested It 100 Times" video -testing a 7-component system vs. its individual components.
+- **Pentarch** -5-phase cycle detection. Signals finalize on candle close -designed so backtests can't be corrupted by repainting bias. $100 bounty if anyone proves otherwise.
 
-We back the non-repaint claim with a $100 bounty.
+Send your TradingView username and I'll activate all 7 within 24 hours. Test them 100 times. We're genuinely confident in the results -and if they don't perform, I'd rather know from your testing than from anyone else's.
 
-Send your TradingView username and I'll activate all 7 within 24 hours. Test them 100 times — we're confident in the results.
+We have an affiliate program (15-30% recurring) -but only if the data supports it. That's your rule, and it's ours too.
 
-We have an affiliate program (15-30% recurring) if the data supports it.
-
-Quick links:
-- Website: https://www.signalpilot.io
-- Docs: https://docs.signalpilot.io
-- Education (82 free lessons): https://education.signalpilot.io
+signalpilot.io | docs.signalpilot.io
 
 Best,
 [Your Name]
@@ -1367,27 +1356,22 @@ Signal Pilot Labs
 ### 47. Trades by Matt (Matt Miller)
 
 **To:** tradesbymatt@creatorsagency.co
-**Subject:** TradingView indicators built for your 8:30am NQ sessions
+**Subject:** Built for the 8:30am NQ open -indicators that keep up with live futures
 
 Hi Matt,
 
-Your live NQ and ES futures trading every morning at 8:30am CT is the kind of accountability most traders claim to offer but don't. Showing real entries, real exits, real P&L builds trust that edited recaps never can.
+Every morning at 8:30am CT, you go live on NQ and ES with real entries, real exits, real P&L. No edits, no pretending. That daily accountability is why your audience trusts your tool recommendations -they see you actually use them. The Apex affiliate already shows you're comfortable recommending products that work.
 
-We built a couple of indicators at Signal Pilot that suit a live futures workflow:
+I built two indicators made for live futures sessions:
 
-- **Augury Grid** — scans 8 tickers across 3 timeframes with quality scoring. Pre-market scanner built into TradingView.
-- **OmniDeck** — 10 systems in one overlay. SuperTrend, Squeeze Detector, Confluence Score — everything on one chart for live sessions.
+- **Augury Grid** -scans 8 tickers across 3 timeframes with quality scoring and conviction ranking. Pull it up before your 8:30am session and the highest-conviction NQ/ES setups are already ranked. Pre-market scanner built natively into TradingView -no external platform needed.
+- **OmniDeck** -10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, Confluence Score Panel). One indicator that gives your live charts everything at a glance. No toggling between tools mid-trade.
 
-Both non-repainting, signals finalize on candle close.
+Both non-repainting, signals finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours. Test them in your live sessions -that's the only review that matters.
 
-Send your TradingView username and I'll activate all 7 within 24 hours. Test them in your live sessions.
+We have an affiliate program (15-30% recurring) -you already run Apex links, so you know the model. But try them live first.
 
-We have an affiliate program (15-30% recurring) — you already run affiliate links for Apex, so you know the model.
-
-Quick links:
-- Website: https://www.signalpilot.io
-- Docs: https://docs.signalpilot.io
-- Education (82 free lessons): https://education.signalpilot.io
+signalpilot.io | docs.signalpilot.io
 
 Best,
 [Your Name]
@@ -1398,25 +1382,24 @@ Signal Pilot Labs
 ### 48. Bullish Bears
 
 **To:** bbteam@bullishbears.com
-**Subject:** Non-repainting indicators for your TradingView community
+**Subject:** Investopedia's "Best Value" trading community -built indicators for exactly that audience
 
 Hi team,
 
-Your active TradingView profile, morning live streams, and comprehensive free courses (Investopedia's "Best Value") show you're building a real community, not just an audience. The fact that you already review TradingView on your blog tells me your community is platform-engaged.
+Investopedia named you "Best Value" for a reason -morning live streams, comprehensive free courses, an active TradingView profile, and you already review TradingView indicators and features on your blog. Your community doesn't just watch content; they're on TradingView charting every day. That's exactly the audience these were built for.
 
-We built 7 non-repainting TradingView indicators at Signal Pilot. Two that would serve your community well:
+Two indicators I think your members would immediately use:
 
-- **OmniDeck** — 10 systems in one overlay. For members still building their setup, it's the fastest path from beginner to functional chart analysis.
-- **Harmonic Oscillator** — 7-component voting system. Gives a clear conviction count that takes the guessing out of trade entries.
+- **OmniDeck** -10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, Confluence Score Panel, candlestick pattern recognition). For members who finished your free courses and are ready to build a real chart setup -this turns a blank TradingView chart into a professional workspace with one indicator.
+- **Harmonic Oscillator** -7-component voting system (RSI, StochRSI, MACD, EMA, Momentum, Volume, Divergence). Outputs a conviction count (e.g., 6/7 STRONG BULL). Takes the guessing out of entries -which is exactly what community members who are still building confidence need.
 
-Happy to provide full access for your team to test. Send TradingView usernames and I'll activate within 24 hours.
+Both non-repainting, signals finalize on candle close. $100 bounty if anyone proves otherwise.
 
-We have an affiliate program (15-30% recurring) for education communities.
+Send your team's TradingView usernames and I'll activate all 7 within 24 hours. Test them in your morning streams.
 
-Quick links:
-- Website: https://www.signalpilot.io
-- Docs: https://docs.signalpilot.io
-- Education (82 free lessons): https://education.signalpilot.io
+We have an affiliate program (15-30% recurring) -but your community's experience is what matters.
+
+signalpilot.io | docs.signalpilot.io | education.signalpilot.io (82 free lessons)
 
 Best,
 [Your Name]
@@ -1431,27 +1414,25 @@ Signal Pilot Labs
 ### 49. DayTradeReview.com (Dave R.)
 
 **To:** support@daytradereview.com
-**Subject:** Product submission — 7 non-repainting TradingView indicators for review
+**Subject:** You've reviewed 100+ trading products from the inside -here's one that invites the scrutiny
 
 Hi Dave,
 
-Your hands-on, from-the-inside reviews of 100+ trading products are the most honest in the space. Traders trust your site because you actually test everything before writing about it.
+Your 100+ hands-on reviews are the reason traders check DayTradeReview before buying anything. You sign up, test from the inside, and write what you actually find -not what the company wants you to say. That's why a positive DayTradeReview carries more weight than any ad campaign.
 
-I'd like to submit Signal Pilot's Elite Seven suite for your review consideration:
+I'm not asking for a positive review. I'm asking for an honest one.
 
-- **7 non-repainting TradingView indicators** covering cycle detection, multi-timeframe scanning, volume analysis, level mapping, and more
-- **$100 non-repaint bounty** — we pay anyone who can prove our indicators repaint
+Signal Pilot's Elite Seven -7 non-repainting TradingView indicators:
+- Cycle detection (Pentarch), multi-timeframe scanning (Augury Grid), institutional volume analysis (Volume Oracle), 60+ auto-mapped levels (Janus Atlas), 10-system overlay (OmniDeck), pressure flow (Plutus Flow), and 7-component voting (Harmonic Oscillator)
+- **$100 non-repaint bounty** -we pay anyone who proves they repaint
 - **7-day free trial**, no credit card required
-- **82 free educational lessons** at education.signalpilot.io
+- **82 free lessons** at education.signalpilot.io
 
-Happy to give you full access to all 7 indicators for as long as you need to test. Send your TradingView username and I'll activate within 24 hours.
+Send your TradingView username and I'll activate all 7 for as long as you need. No timeline, no pressure. Test them the way you test everything -from the inside.
 
-We have an affiliate program (15-30% recurring) for review sites.
+We have an affiliate program (15-30% recurring) -but your honest review is what we're after. If they don't hold up, we'd rather know.
 
-Quick links:
-- Website: https://www.signalpilot.io
-- Docs: https://docs.signalpilot.io
-- Education (82 free lessons): https://education.signalpilot.io
+signalpilot.io | docs.signalpilot.io
 
 Best,
 [Your Name]
@@ -1462,27 +1443,24 @@ Signal Pilot Labs
 ### 50. QuantifiedStrategies.com (Oddmund Groette)
 
 **To:** Oddmund@quantifiedstrategies.com
-**Subject:** 7 backtestable, non-repainting TradingView indicators — built for your data-first audience
+**Subject:** 100+ indicator guides with full backtesting -here are 7 more designed to survive your methodology
 
 Hi Oddmund,
 
-Your 100+ indicator guides with full backtesting, 200+ free strategies, and the principle of "prove it with data" is exactly the approach serious traders need. 20+ years of trading and a Norwegian finance publishing record — your audience trusts the numbers, not the marketing.
+"Prove it with data." That's the principle behind every one of your 100+ indicator guides and 200+ free strategies. 20+ years of trading, a Norwegian finance publishing background, and you backtest everything before recommending anything. Your audience trusts numbers, not marketing -which is exactly why I'm reaching out to you specifically.
 
-We built 7 non-repainting TradingView indicators at Signal Pilot. Every one is fully backtestable. Two that align with your methodology:
+I built 7 non-repainting TradingView indicators designed to be backtested, not just trusted:
 
-- **Harmonic Oscillator** — 7-component voting system. RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence — each voting independently. A multi-factor system your readers could backtest against individual components.
-- **Pentarch** — 5-phase cycle detection. No signal fires mid-bar. Designed to eliminate the repainting bias that corrupts most indicator backtests.
+- **Harmonic Oscillator** -7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence). Each votes independently. Your readers could backtest the composite system against individual components -does the 7-factor consensus outperform any single factor? I think that article writes itself.
+- **Pentarch** -5-phase cycle detection. No signal fires mid-bar. The architecture was specifically designed to eliminate the repainting bias that corrupts most indicator backtests -the exact problem you've written about.
 
-We back the non-repaint claim with a $100 bounty.
+$100 bounty if anyone proves they repaint.
 
-Send your TradingView username and I'll activate all 7 within 24 hours. Test them with your methodology — we welcome the scrutiny.
+Send your TradingView username and I'll activate all 7 within 24 hours. Test them with your methodology. We genuinely welcome the scrutiny -if they don't perform under your testing, I'd rather know from QuantifiedStrategies than from anyone else.
 
-We have an affiliate program (15-30% recurring) for content creators.
+We have an affiliate program (15-30% recurring) -but only if they survive your backtesting.
 
-Quick links:
-- Website: https://www.signalpilot.io
-- Docs: https://docs.signalpilot.io
-- Education (82 free lessons): https://education.signalpilot.io
+signalpilot.io | docs.signalpilot.io
 
 Best,
 [Your Name]
@@ -1492,27 +1470,26 @@ Signal Pilot Labs
 
 ### 51. Modest Money (Jeremy Biberdorf)
 
-**To:** [CONTACT FORM] — modestmoney.com/contact
-**Subject:** SignalPilot — 7 non-repainting TradingView indicators for your review portfolio
+**To:** [CONTACT FORM] -modestmoney.com/contact
+**Subject:** Your TradingView vs TrendSpider comparison -here's a product that fills the gap
 
 Hi Jeremy,
 
-Your trading software reviews and comparisons (TradingView, TrendSpider, TradeStation, and more) are a go-to resource for traders making purchasing decisions. The FTC-compliant affiliate model you've built is exactly the kind of transparent operation we respect.
+Your trading software comparisons (TradingView vs. TrendSpider, TradeStation breakdowns, broker reviews) are what traders read before they buy. You don't just list features -you compare side by side and show the real trade-offs. That's why Modest Money ranks for the searches that matter.
 
-I'd like to submit Signal Pilot's indicator suite for review consideration:
+I built something that fills a gap in the TradingView ecosystem your readers already use -and I think it's a natural fit for your review portfolio:
 
-- **7 non-repainting TradingView indicators** (cycle detection, multi-timeframe scanning, volume regime analysis, 60+ auto-mapped levels, and more)
-- **$100 non-repaint bounty** — audited for lookahead bias
-- **Pricing:** $69/mo, $399/yr, or $999 lifetime
+**Signal Pilot's Elite Seven** -7 non-repainting TradingView indicators:
+- Cycle detection (Pentarch), multi-timeframe scanning (Augury Grid), institutional volume analysis (Volume Oracle), 60+ auto-mapped levels (Janus Atlas), 10-system overlay (OmniDeck), pressure flow (Plutus Flow), 7-component voting (Harmonic Oscillator)
+- **$100 non-repaint bounty** -audited for lookahead bias
+- **Pricing:** $69/mo, $399/yr, $999 lifetime
 - **7-day free trial**, no credit card required
-- **Affiliate program:** 15-30% recurring commission
 
-Happy to provide full access and any screenshots, feature details, or documentation you need.
+Happy to give you full access to test. Send your TradingView username and I'll activate all 7 within 24 hours. Screenshots, feature breakdowns, anything you need for content -just ask.
 
-Quick links:
-- Website: https://www.signalpilot.io
-- Docs: https://docs.signalpilot.io
-- Education (82 free lessons): https://education.signalpilot.io
+Affiliate program: 15-30% recurring. Your comparison articles already rank -this adds another product to the funnel.
+
+signalpilot.io | docs.signalpilot.io
 
 Best,
 [Your Name]
@@ -1522,28 +1499,30 @@ Signal Pilot Labs
 
 ### 52. DayTradingz.com
 
-**To:** [CONTACT FORM] — daytradingz.com/about
-**Subject:** SignalPilot — 7 non-repainting TradingView indicators for your "from the inside" review
+**To:** [CONTACT FORM] -daytradingz.com/about
+**Subject:** You test trading products from the inside -here's one that invites it
 
 Hi,
 
-Your approach of actually signing up and testing trading courses from the inside — then writing honest reviews — is why traders trust your site over generic comparison articles.
+Most review sites rewrite the sales page. You actually sign up, test from the inside, and write what you find. That's why DayTradingz reviews rank -traders know you've actually used the product before reviewing it.
 
-I'd like to submit Signal Pilot for your review consideration:
+I built 7 non-repainting TradingView indicators at Signal Pilot, and I want you to test them from the inside:
 
-- **7 non-repainting TradingView indicators** covering cycle detection, momentum scanning, volume analysis, and more
-- **$100 non-repaint bounty** — we pay anyone who proves our indicators repaint
-- **82 free educational lessons** at education.signalpilot.io
-- **7-day free trial**, no credit card required
+- **Pentarch** -5-phase cycle detection with a 4-layer confirmation pipeline
+- **Volume Oracle** -institutional accumulation/distribution regime classification
+- **Augury Grid** -multi-timeframe scanner (8 tickers, 3 timeframes, conviction ranking)
+- **Janus Atlas** -60+ auto-mapped levels across timeframes
+- **OmniDeck** -10 systems in one overlay
+- **Plutus Flow** -buying/selling pressure flow with divergence detection
+- **Harmonic Oscillator** -7-component voting system
 
-Happy to give you full access to test everything from the inside. Send your TradingView username and I'll activate within 24 hours.
+$100 non-repaint bounty. 7-day free trial, no credit card. 82 free lessons at education.signalpilot.io.
 
-We have an affiliate program (15-30% recurring) for review sites.
+Send your TradingView username and I'll activate all 7 for as long as you need. No timeline -take your time, test everything, write what you actually think.
 
-Quick links:
-- Website: https://www.signalpilot.io
-- Docs: https://docs.signalpilot.io
-- Education (82 free lessons): https://education.signalpilot.io
+Affiliate program (15-30% recurring) if the review is positive. But an honest negative review would be more valuable to us than a fake positive one.
+
+signalpilot.io | docs.signalpilot.io
 
 Best,
 [Your Name]
@@ -1557,19 +1536,19 @@ Signal Pilot Labs
 
 ### 53. Casper SMC (Jesse Rogers)
 
-**To:** [INSTAGRAM DM] — @casper_smc (468K followers)
+**To:** [INSTAGRAM DM] - @casper_smc (468K followers)
 **Subject:** N/A (DM format)
 
-Hey Jesse — 468K followers learning Smart Money Concepts and ICT methodology from someone who gives away a free course on YouTube. "Day Trading saved my life, now I'm teaching you to do the same" — that's a mission, not a marketing line.
+Hey Jesse - "Day Trading saved my life, now I'm teaching you to do the same." That line is the difference between you and 99% of trading accounts on IG. 468K followers, free ICT/SMC course on YouTube, and you're still giving before asking. That's real.
 
-I built 7 non-repainting TradingView indicators at Signal Pilot. Two that complement SMC:
+Built two indicators that directly complement what your students are learning in SMC:
 
-- **Volume Oracle** — institutional accumulation/distribution detection. Surfaces the smart money flow your students are learning to read.
-- **Janus Atlas** — auto-maps 60+ level types including liquidity zones and session boundaries. The institutional level map.
+- **Volume Oracle** - institutional accumulation/distribution detection with regime classification. Your students learn to read smart money flow. Volume Oracle surfaces it automatically. When they're looking for signs of institutional accumulation, this confirms or challenges their read in real-time.
+- **Janus Atlas** - auto-maps 60+ level types including liquidity zones and session boundaries. The institutional level map your SMC students are learning to draw by hand, populated automatically.
 
-Free access to all 7 — send your TradingView username and I'll activate within 24 hours.
+Non-repainting, finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours.
 
-We have an affiliate program (15-30% recurring) if they click.
+Affiliate program (15-30% recurring) if they fit your mission.
 
 signalpilot.io
 
@@ -1577,17 +1556,17 @@ signalpilot.io
 
 ### 54. Umar Ashraf
 
-**To:** [INSTAGRAM DM] — @umarashraf (439K followers)
+**To:** [INSTAGRAM DM] - @umarashraf (439K followers)
 **Subject:** N/A (DM format)
 
-Hey Umar — 10+ years of day trading, no signals, no discord, just skill development. That "no shortcuts" stance is why 439K people follow you. TradeZella is a smart complementary tool — journal meets analytics.
+Hey Umar - 10+ years of day trading, no signals, no discord, just skill development. You built TradeZella because you know the journal is where real improvement happens. That "no shortcuts" stance is why 439K people trust your recommendations.
 
-I built 7 non-repainting TradingView indicators at Signal Pilot. They'd pair naturally with TradeZella — better entries to journal, better data to analyze.
+Built two indicators that pair naturally with the TradeZella workflow. Better entries = better journal data = better improvement loops:
 
-- **Pentarch** — 5-phase cycle detection. Adds a structural context layer before entries.
-- **Augury Grid** — scans 8 tickers across 3 timeframes with quality scoring.
+- **Pentarch** - 5-phase cycle detection. Adds structural context before entries. When TradeZella reviews show your best trades happened during Ignition phases and your worst during Warning phases, that's an insight that changes your strategy.
+- **Augury Grid** - scans 8 tickers across 3 timeframes with conviction ranking. Surfaces the highest-quality setups before market open so you're journaling A+ trades, not random ones.
 
-Free access to all 7. Send your TradingView username — I'll activate within 24 hours.
+Non-repainting, finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours.
 
 signalpilot.io
 
@@ -1596,27 +1575,24 @@ signalpilot.io
 ### 55. Tori Trades (Victoria Duke)
 
 **To:** [TikTok DM or email via toritradez.com]
-**Subject:** Non-repainting indicators for your price-action-first students
+**Subject:** 10+ years of pure price action - built something that adds context without replacing it
 
 Hi Victoria,
 
-10+ years trading futures on 4-hour charts with nothing but price action and trendlines — that's a level of conviction most traders never reach. Your 239K TikTok followers are learning the purest form of chart reading.
+10+ years trading futures on 4-hour charts with nothing but price action and trendlines. 239K TikTok followers learning the purest form of chart reading from someone who actually trades that way. Most educators talk about price action while using 15 indicators. You actually live it.
 
-We built a couple of tools at Signal Pilot that complement (not replace) a price action workflow:
+I built two tools specifically designed to complement price action, not compete with it:
 
-- **Pentarch** — maps 5 market cycle phases automatically. Gives your students the structural context before they read price action. Not a replacement — a confirmation layer.
-- **Janus Atlas** — auto-maps 60+ level types. The trendlines and levels your students draw manually, mapped automatically as a reference.
+- **Pentarch** - 5-phase cycle detection. Before your students read price action, Pentarch tells them "we're in an Ignition phase" or "we're in Warning." That structural context changes how you interpret the same candlestick pattern. It's not a replacement for PA. It's the why behind the what.
+- **Janus Atlas** - auto-maps 60+ level types across timeframes. Think of it as a reference layer. Your students still draw their own levels, but Janus Atlas shows them what the institutional level map looks like so they can check their work.
 
-Both non-repainting, signals finalize on candle close.
+Both non-repainting, signals finalize on candle close. No mid-bar flickering, no repainting signals that would undermine a PA trader's trust.
 
-Send your TradingView username and I'll activate all 7 within 24 hours. No cost, no strings.
+Send your TradingView username and I'll activate all 7 within 24 hours. I'd love to hear a PA purist's honest take.
 
-We have an affiliate program (15-30% recurring) if they add value for your community.
+Affiliate program (15-30% recurring) if they pass your standards.
 
-Quick links:
-- Website: https://www.signalpilot.io
-- Docs: https://docs.signalpilot.io
-- Education (82 free lessons): https://education.signalpilot.io
+signalpilot.io | docs.signalpilot.io
 
 Best,
 [Your Name]
@@ -1627,25 +1603,22 @@ Signal Pilot Labs
 ### 56. ScarfaceTrades (Tony)
 
 **To:** tony@scarfacetrades.com
-**Subject:** Non-repainting TradingView indicators for your day trading community
+**Subject:** Your IG breakdowns simplify advanced concepts - built indicators with the same goal
 
 Hi Tony,
 
-7+ years of full-time day trading and breaking down advanced concepts into simplified, actionable content across 310K IG followers, 85K TikTok, and 53K Twitter — that's a multi-platform reach most educators can't match.
+What sets your content apart is the simplification. 310K IG followers, 85K on TikTok, 53K on Twitter, and 7+ years of full-time day trading. But the reason it works isn't the follower count. It's that you take genuinely advanced concepts and break them into actionable setups your audience can execute the same day. That's a skill most educators never develop.
 
-We built 7 non-repainting TradingView indicators at Signal Pilot. Two that fit a day trading style:
+Built two indicators with that same "simplify the complex" philosophy:
 
-- **OmniDeck** — 10 systems in one overlay. SuperTrend, Squeeze Detector, supply/demand zones, and more. Everything on one chart for fast decisions.
-- **Augury Grid** — scans 8 tickers across 3 timeframes with conviction ranking. Pre-market scanner built into TradingView.
+- **OmniDeck** - 10 systems in one overlay (SuperTrend, Squeeze Detector, supply/demand zones, candlestick recognition, Confluence Score Panel). Instead of your audience juggling 10 indicators across multiple charts, everything is on one chart for fast decisions. That's simplification.
+- **Augury Grid** - scans 8 tickers across 3 timeframes with conviction ranking. Pre-market scanner built natively into TradingView. Your audience opens one tool and sees the best setups ranked before the bell.
 
-Send your TradingView username and I'll activate all 7 within 24 hours. No cost, no strings.
+Both non-repainting, signals finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours.
 
-We have an affiliate program (15-30% recurring) for content creators.
+We have an affiliate program (15-30% recurring) if your community finds them useful. But try them first.
 
-Quick links:
-- Website: https://www.signalpilot.io
-- Docs: https://docs.signalpilot.io
-- Education (82 free lessons): https://education.signalpilot.io
+signalpilot.io | docs.signalpilot.io
 
 Best,
 [Your Name]
@@ -1655,64 +1628,64 @@ Signal Pilot Labs
 
 ### 57. Elliott Wave Count
 
-**To:** [INSTAGRAM DM] — @elliottwavecount (360K followers) or Telegram t.me/ElliottWaveCount
+**To:** [INSTAGRAM DM] - @elliottwavecount (360K followers) or Telegram t.me/ElliottWaveCount
 **Subject:** N/A (DM format)
 
-Hey — 360K followers and 15 years of wave analysis, with 5 updates per week including specific stops and targets. That's the #1 Wave Trading community for a reason.
+Hey - 15 years of wave analysis, 360K followers, and 5 updates per week with specific stops and targets. You don't post vague "this could go up or down" analysis. You post counts with levels, stops, and invalidation points. That's why it's the #1 Wave Trading community.
 
-I built 7 non-repainting TradingView indicators at Signal Pilot. One that would complement your wave counts:
+Built two indicators that add a confirmation layer to wave counts:
 
-- **Pentarch** — 5-phase cycle detection. Adds automated cycle confirmation to your wave positioning. When your wave count says "wave 3 extension," Pentarch confirms whether the cycle structure agrees.
-- **Volume Oracle** — institutional flow detection. Shows whether volume supports your wave thesis.
+- **Pentarch** - 5-phase cycle detection. When your wave count says "wave 3 extension," Pentarch confirms whether the broader cycle structure agrees. If you're counting wave 3 but Pentarch shows a Warning phase, that's a flag worth investigating. It adds a second opinion from the cycle side.
+- **Volume Oracle** - institutional flow detection with regime classification. Shows whether volume supports your wave thesis. Is the volume profile confirming accumulation during your wave 1-2 setup, or diverging?
 
-Free access to all 7. Send your TradingView username and I'll activate within 24 hours.
+Non-repainting, finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours.
 
-We have an affiliate program (15-30% recurring).
+Affiliate program (15-30% recurring) if they complement your wave analysis.
 
 signalpilot.io | docs.signalpilot.io
 
 ---
 
-## Quick Reference — Contact Summary (Batch 3)
+## Quick Reference -Contact Summary (Batch 3)
 
 | # | Prospect | Email/Contact | Method | Category |
 |---|---------|--------------|--------|----------|
-| 26 | No Nonsense Forex (VP) | — | Contact form: nononsenseforex.com/contact | Forex |
+| 26 | No Nonsense Forex (VP) | -| Contact form: nononsenseforex.com/contact | Forex |
 | 27 | Urban Forex (Navin Prithyani) | info@urbanforex.com | Direct email | Forex |
 | 28 | ForexSignals TV (Andrew Lockwood) | support@forexsignals.com | Direct email | Forex |
-| 29 | WicksDontLie (Raja Rakeel) | — | Instagram DM: @wicksdontlie | Forex |
-| 30 | The Traveling Trader | — | YouTube About email | Forex |
-| 31 | VasilyTrader | — | Contact form or Telegram @VasilyTrader | Forex |
+| 29 | WicksDontLie (Raja Rakeel) | -| Instagram DM: @wicksdontlie | Forex |
+| 30 | The Traveling Trader | -| YouTube About email | Forex |
+| 31 | VasilyTrader | -| Contact form or Telegram @VasilyTrader | Forex |
 | 32 | Rekt Capital | rektcapital@gmail.com | Direct email | Crypto |
-| 33 | Crypto Zombie (K-Dub) | — | YouTube About email | Crypto |
-| 34 | CryptoBusy (Tom & Josh) | — | Twitter DM: @CryptoBusy | Crypto |
-| 35 | Bob Loukas | — | Twitter DM: @BobLoukas | Crypto |
-| 36 | CryptoJack (Jack Skipp) | — | Twitter DM: @_Crypt0Jack | Crypto |
-| 37 | Koroush AK | — | Twitter DM or Telegram @koroushakcrypto | Crypto |
-| 38 | InTheMoney (Adam) | — | YouTube About email | Stocks/Options |
+| 33 | Crypto Zombie (K-Dub) | -| YouTube About email | Crypto |
+| 34 | CryptoBusy (Tom & Josh) | -| Twitter DM: @CryptoBusy | Crypto |
+| 35 | Bob Loukas | -| Twitter DM: @BobLoukas | Crypto |
+| 36 | CryptoJack (Jack Skipp) | -| Twitter DM: @_Crypt0Jack | Crypto |
+| 37 | Koroush AK | -| Twitter DM or Telegram @koroushakcrypto | Crypto |
+| 38 | InTheMoney (Adam) | -| YouTube About email | Stocks/Options |
 | 39 | Humbled Trader (Shay Huang) | support@humbledtrader.com | Direct email | Stocks |
-| 40 | Trading Fraternity (Josh Answers) | — | Instagram DM: @TheTradingFraternity | Stocks/Options |
-| 41 | Option Alpha (Kirk Du Plessis) | — | YouTube About / optionalpha.com | Options |
+| 40 | Trading Fraternity (Josh Answers) | -| Instagram DM: @TheTradingFraternity | Stocks/Options |
+| 41 | Option Alpha (Kirk Du Plessis) | -| YouTube About / optionalpha.com | Options |
 | 42 | Rockwell Trading (Markus Heitkoetter) | support@rockwelltrading.com | Direct email | Stocks/Options |
-| 43 | Black Girl Stocks (Shayla North) | — | Contact form: theblackgirlstocks.com | Stocks |
+| 43 | Black Girl Stocks (Shayla North) | -| Contact form: theblackgirlstocks.com | Stocks |
 | 44 | Trader Nick / A1 Trading | tradernick135@gmail.com | Direct email | Multi-market |
-| 45 | UKspreadbetting (Mark Holstead) | — | Contact form: financial-spread-betting.com | Multi-market |
-| 46 | Trading Rush | — | Contact form: tradingrush.net | Multi-market |
+| 45 | UKspreadbetting (Mark Holstead) | -| Contact form: financial-spread-betting.com | Multi-market |
+| 46 | Trading Rush | -| Contact form: tradingrush.net | Multi-market |
 | 47 | Trades by Matt (Matt Miller) | tradesbymatt@creatorsagency.co | Direct email | Futures |
 | 48 | Bullish Bears | bbteam@bullishbears.com | Direct email | Stocks |
 | 49 | DayTradeReview.com (Dave R.) | support@daytradereview.com | Direct email | Review site |
 | 50 | QuantifiedStrategies (Oddmund Groette) | Oddmund@quantifiedstrategies.com | Direct email | Blog |
-| 51 | Modest Money (Jeremy Biberdorf) | — | Contact form: modestmoney.com/contact | Review blog |
-| 52 | DayTradingz.com | — | Contact form: daytradingz.com/about | Review site |
-| 53 | Casper SMC (Jesse Rogers) | — | Instagram DM: @casper_smc | Social media |
-| 54 | Umar Ashraf | — | Instagram DM: @umarashraf | Social media |
-| 55 | Tori Trades (Victoria Duke) | — | TikTok DM or toritradez.com | Social media |
+| 51 | Modest Money (Jeremy Biberdorf) | -| Contact form: modestmoney.com/contact | Review blog |
+| 52 | DayTradingz.com | -| Contact form: daytradingz.com/about | Review site |
+| 53 | Casper SMC (Jesse Rogers) | -| Instagram DM: @casper_smc | Social media |
+| 54 | Umar Ashraf | -| Instagram DM: @umarashraf | Social media |
+| 55 | Tori Trades (Victoria Duke) | -| TikTok DM or toritradez.com | Social media |
 | 56 | ScarfaceTrades (Tony) | tony@scarfacetrades.com | Direct email | Social media |
-| 57 | Elliott Wave Count | — | Instagram DM or Telegram | Social media |
+| 57 | Elliott Wave Count | -| Instagram DM or Telegram | Social media |
 
 ---
 
-# BATCH 4 — TWITTER/X DMs [READY TO SEND]
+# BATCH 4 -TWITTER/X DMs [READY TO SEND]
 
 ---
 
@@ -1720,19 +1693,19 @@ signalpilot.io | docs.signalpilot.io
 
 ---
 
-### 58. Scott Melker (@scottmelker) — "The Wolf of All Streets"
+### 58. Scott Melker (@scottmelker) -"The Wolf of All Streets"
 
 **Followers:** ~950K
 **DM or:** thewolfofallstreets.io/engage
 
-Your BTC RSI divergence calls are the cleanest on CT — and I built an indicator that automates that exact kind of cycle detection.
+Your BTC RSI divergence calls are the cleanest on CT -and I built an indicator that automates that exact kind of cycle detection.
 
 I'm the founder of Signal Pilot. We make 7 non-repainting TradingView indicators. Two I think you'd actually use:
 
-- **Pentarch** — 5-phase cycle detection. Automates "where are we in the cycle?" in real-time.
-- **Volume Oracle** — institutional accumulation/distribution regime classification.
+- **Pentarch** -5-phase cycle detection. Automates "where are we in the cycle?" in real-time.
+- **Volume Oracle** -institutional accumulation/distribution regime classification.
 
-$100 bounty if anyone proves they repaint. Happy to give you full access — just send your TradingView username.
+$100 bounty if anyone proves they repaint. Happy to give you full access -just send your TradingView username.
 
 We also run an affiliate program (15-30% recurring) if they resonate with The Wolf Den audience.
 
@@ -1745,11 +1718,11 @@ signalpilot.io
 **Followers:** ~708K
 **DM or:** Telegram channel
 
-Your candlestick masterclass is still the best free TA education on CT — not even close. Most charge for worse.
+Your candlestick masterclass is still the best free TA education on CT -not even close. Most charge for worse.
 
-I built 7 non-repainting TradingView indicators. Not asking you to promote anything — just want your honest take because your feedback would be the most valuable I could get.
+I built 7 non-repainting TradingView indicators. Not asking you to promote anything -just want your honest take because your feedback would be the most valuable I could get.
 
-- **Harmonic Oscillator** — 7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence). The multi-indicator confirmation you teach — automated into one tool.
+- **Harmonic Oscillator** -7-component voting system (RSI, StochRSI, MACD, EMA Trend, Momentum, Volume, Divergence). The multi-indicator confirmation you teach -automated into one tool.
 
 Send your TradingView username and I'll activate all 7. No strings.
 
@@ -1762,13 +1735,13 @@ signalpilot.io
 **Followers:** ~700-890K
 **DM via:** Twitter
 
-Your free alphas outperform 99% of paid groups on CT. Level-to-level, no filler, no shilling — just clean reads.
+Your free alphas outperform 99% of paid groups on CT. Level-to-level, no filler, no shilling -just clean reads.
 
-I built an indicator called Pentarch (yeah, similar name — coincidence) that automates cycle phase detection: Touchdown → Ignition → Warning → Capitulation → Breakdown.
+I built an indicator called Pentarch (yeah, similar name -coincidence) that automates cycle phase detection: Touchdown → Ignition → Warning → Capitulation → Breakdown.
 
-Also built Volume Oracle — surfaces institutional accumulation/distribution behind the candles.
+Also built Volume Oracle -surfaces institutional accumulation/distribution behind the candles.
 
-Both non-repainting. Happy to give you access to all 7 — send your TradingView username.
+Both non-repainting. Happy to give you access to all 7 -send your TradingView username.
 
 signalpilot.io
 
@@ -1779,16 +1752,16 @@ signalpilot.io
 **Followers:** ~1.4M
 **DM or:** thewealthmastery.io (business inquiries)
 
-Wealth Mastery's dedicated TA section 3x/week tells me your 150K+ subscribers want chart analysis — not just narratives.
+Wealth Mastery's dedicated TA section 3x/week tells me your 150K+ subscribers want chart analysis -not just narratives.
 
 I built 7 non-repainting TradingView indicators at Signal Pilot. Two that could slot into that TA section:
 
-- **Pentarch** — "where are we in the Bitcoin cycle?" answered automatically in 5 phases.
-- **Harmonic Oscillator** — 7-component voting system for conviction scoring.
+- **Pentarch** -"where are we in the Bitcoin cycle?" answered automatically in 5 phases.
+- **Harmonic Oscillator** -7-component voting system for conviction scoring.
 
 $100 bounty if they repaint. We have an affiliate program (15-30% recurring) if they fit Wealth Mastery.
 
-Happy to give you full access — send your TradingView username.
+Happy to give you full access -send your TradingView username.
 
 signalpilot.io
 
@@ -1799,14 +1772,14 @@ signalpilot.io
 **Followers:** ~820K
 **DM or:** MN Trading website / LinkedIn
 
-Your Fibonacci cycle analysis on BTC is the most referenced on Crypto Twitter — and I automated the cycle detection part.
+Your Fibonacci cycle analysis on BTC is the most referenced on Crypto Twitter -and I automated the cycle detection part.
 
-Signal Pilot — 7 non-repainting TradingView indicators. Two that match your Fibonacci/cycle approach:
+Signal Pilot -7 non-repainting TradingView indicators. Two that match your Fibonacci/cycle approach:
 
-- **Pentarch** — 5-phase cycle detection. The positioning analysis you do manually, automated.
-- **Janus Atlas** — auto-maps 60+ level types across multiple timeframes, including confluence zones.
+- **Pentarch** -5-phase cycle detection. The positioning analysis you do manually, automated.
+- **Janus Atlas** -auto-maps 60+ level types across multiple timeframes, including confluence zones.
 
-Happy to give you full access. Send your TradingView username — all 7 activated within 24 hours.
+Happy to give you full access. Send your TradingView username -all 7 activated within 24 hours.
 
 Affiliate program (15-30% recurring) if they complement MN Academy.
 
@@ -1823,12 +1796,12 @@ You're one of the only CT accounts that discloses every business relationship. T
 
 I built 7 non-repainting TradingView indicators at Signal Pilot:
 
-- **Pentarch** — 5-phase cycle detection for BTC and alts.
-- **Volume Oracle** — institutional flow detection. Accumulation vs. distribution in real-time.
+- **Pentarch** -5-phase cycle detection for BTC and alts.
+- **Volume Oracle** -institutional flow detection. Accumulation vs. distribution in real-time.
 
-$100 bounty if anyone proves they repaint. Happy to give you full access — send your TradingView username.
+$100 bounty if anyone proves they repaint. Happy to give you full access -send your TradingView username.
 
-We have an affiliate program (15-30% recurring) — fully transparent, which I know matters to you.
+We have an affiliate program (15-30% recurring) -fully transparent, which I know matters to you.
 
 signalpilot.io
 
@@ -1839,14 +1812,14 @@ signalpilot.io
 **Followers:** ~269K
 **DM via:** Twitter
 
-Your Price Target series gives specific, verifiable levels — the rarest thing on Crypto Twitter.
+Your Price Target series gives specific, verifiable levels -the rarest thing on Crypto Twitter.
 
 I built 7 non-repainting TradingView indicators. Two that complement level-based analysis:
 
-- **Janus Atlas** — auto-maps 60+ level types across multiple timeframes with confluence scoring.
-- **Pentarch** — 5-phase cycle detection. Adds cycle context to your price targets.
+- **Janus Atlas** -auto-maps 60+ level types across multiple timeframes with confluence scoring.
+- **Pentarch** -5-phase cycle detection. Adds cycle context to your price targets.
 
-Non-repainting, finalize on candle close. Happy to give you full access — send your TradingView username.
+Non-repainting, finalize on candle close. Happy to give you full access -send your TradingView username.
 
 signalpilot.io
 
@@ -1861,15 +1834,15 @@ signalpilot.io
 **Followers:** ~700K+
 **DM or:** peterlbrandt.com/contact
 
-40 years of hand-annotated chart patterns, featured in Market Wizards — I built something that adds cycle context to exactly that kind of analysis.
+40 years of hand-annotated chart patterns, featured in Market Wizards -I built something that adds cycle context to exactly that kind of analysis.
 
-Signal Pilot — 7 non-repainting TradingView indicators. The one I think you'd appreciate:
+Signal Pilot -7 non-repainting TradingView indicators. The one I think you'd appreciate:
 
-- **Pentarch** — maps 5 market cycle phases automatically. It doesn't draw patterns — it tells you where you are in the cycle so your classical reads have structural confirmation.
+- **Pentarch** -maps 5 market cycle phases automatically. It doesn't draw patterns -it tells you where you are in the cycle so your classical reads have structural confirmation.
 
 $100 bounty if anyone proves it repaints. Signals finalize on candle close.
 
-Happy to give you full access to all 7. Send your TradingView username — your honest assessment would mean more than any endorsement.
+Happy to give you full access to all 7. Send your TradingView username -your honest assessment would mean more than any endorsement.
 
 signalpilot.io
 
@@ -1880,14 +1853,14 @@ signalpilot.io
 **Followers:** ~511K
 **DM or:** minervini.com
 
-155% then 334.8% — back-to-back U.S. Investing Championship wins. Built something that detects the volatility contractions your VCP methodology looks for.
+155% then 334.8% -back-to-back U.S. Investing Championship wins. Built something that detects the volatility contractions your VCP methodology looks for.
 
-Signal Pilot — 7 non-repainting TradingView indicators:
+Signal Pilot -7 non-repainting TradingView indicators:
 
-- **OmniDeck** — includes a Squeeze Detector (Bollinger vs. Keltner compression). Surfaces VCP-style contractions automatically.
-- **Augury Grid** — scans 8 tickers across 3 timeframes with quality scoring. TradingView-native screener.
+- **OmniDeck** -includes a Squeeze Detector (Bollinger vs. Keltner compression). Surfaces VCP-style contractions automatically.
+- **Augury Grid** -scans 8 tickers across 3 timeframes with quality scoring. TradingView-native screener.
 
-Happy to give you full access. Send your TradingView username — I'll activate all 7 within 24 hours.
+Happy to give you full access. Send your TradingView username -I'll activate all 7 within 24 hours.
 
 signalpilot.io
 
@@ -1902,11 +1875,11 @@ Someone built a third-party tool just to display your ES levels on TradingView. 
 
 I built 7 non-repainting TradingView indicators. The one that fits your workflow:
 
-- **Janus Atlas** — auto-maps 60+ level types across multiple timeframes, including session boundaries and confluence zones where 3+ levels cluster. The institutional level map, automated.
+- **Janus Atlas** -auto-maps 60+ level types across multiple timeframes, including session boundaries and confluence zones where 3+ levels cluster. The institutional level map, automated.
 
-Non-repainting, finalize on candle close. Happy to give you full access — send your TradingView username.
+Non-repainting, finalize on candle close. Happy to give you full access -send your TradingView username.
 
-Affiliate program (15-30% recurring) — your Substack (#7 in Finance) audience is the perfect fit.
+Affiliate program (15-30% recurring) -your Substack (#7 in Finance) audience is the perfect fit.
 
 signalpilot.io
 
@@ -1917,14 +1890,14 @@ signalpilot.io
 **Followers:** ~239K
 **DM or:** verifiedinvesting.com
 
-80%+ verified swing trade success rate across stocks, crypto, AND commodities — most traders can't do that in one market, let alone three.
+80%+ verified swing trade success rate across stocks, crypto, AND commodities -most traders can't do that in one market, let alone three.
 
 I built 7 non-repainting TradingView indicators at Signal Pilot. Two for a multi-asset workflow:
 
-- **Pentarch** — 5-phase cycle detection. Works on stocks, crypto, commodities — anything on TradingView.
-- **Augury Grid** — scans 8 tickers across 3 timeframes with conviction ranking.
+- **Pentarch** -5-phase cycle detection. Works on stocks, crypto, commodities -anything on TradingView.
+- **Augury Grid** -scans 8 tickers across 3 timeframes with conviction ranking.
 
-$100 bounty if they repaint. Happy to give you full access — send your TradingView username.
+$100 bounty if they repaint. Happy to give you full access -send your TradingView username.
 
 Affiliate program (15-30% recurring) if they complement VerifiedInvesting.
 
@@ -1937,14 +1910,14 @@ signalpilot.io
 **Followers:** ~222K
 **DM or:** chartpattern.com
 
-29,233% return in one year — world record. And your entire edge was chart pattern recognition.
+29,233% return in one year -world record. And your entire edge was chart pattern recognition.
 
 I built 7 non-repainting TradingView indicators. Two that serve breakout traders:
 
-- **OmniDeck** — Squeeze Detector + supply/demand zones. Confirms when a pattern is ready to fire.
-- **Pentarch** — 5-phase cycle detection. Tells you if the cycle supports the breakout you're seeing.
+- **OmniDeck** -Squeeze Detector + supply/demand zones. Confirms when a pattern is ready to fire.
+- **Pentarch** -5-phase cycle detection. Tells you if the cycle supports the breakout you're seeing.
 
-$100 bounty. Signals finalize on candle close. Happy to give you full access — send your TradingView username.
+$100 bounty. Signals finalize on candle close. Happy to give you full access -send your TradingView username.
 
 signalpilot.io
 
@@ -1955,12 +1928,12 @@ signalpilot.io
 **Followers:** ~160K
 **DM or:** t3live.com / scottredler.com
 
-120K+ tweets of annotated charts since 2007. TheStreet's "Top 10 Traders to Follow." 18 years and still posting daily — that's real.
+120K+ tweets of annotated charts since 2007. TheStreet's "Top 10 Traders to Follow." 18 years and still posting daily -that's real.
 
 I built 7 non-repainting TradingView indicators at Signal Pilot. Two for your day/swing workflow:
 
-- **OmniDeck** — 10 systems in one overlay. Fast reads for live analysis.
-- **Harmonic Oscillator** — 7-component voting system. Conviction count before entries.
+- **OmniDeck** -10 systems in one overlay. Fast reads for live analysis.
+- **Harmonic Oscillator** -7-component voting system. Conviction count before entries.
 
 Happy to give you and the T3 team full access. Send your TradingView username.
 
@@ -1975,14 +1948,14 @@ signalpilot.io
 **Followers:** ~111K
 **DM or:** allstarcharts.com
 
-CMT-designated, All Star Charts covering every market, Harvard and Duke speaker on technical analysis — your top-down approach needs tools that work across asset classes.
+CMT-designated, All Star Charts covering every market, Harvard and Duke speaker on technical analysis -your top-down approach needs tools that work across asset classes.
 
 I built 7 non-repainting TradingView indicators:
 
-- **Augury Grid** — scans 8 tickers across 3 timeframes. Multi-asset scanner built for top-down workflows.
-- **Pentarch** — 5-phase cycle detection across any asset class.
+- **Augury Grid** -scans 8 tickers across 3 timeframes. Multi-asset scanner built for top-down workflows.
+- **Pentarch** -5-phase cycle detection across any asset class.
 
-Happy to give you full access. Send your TradingView username — I'll activate within 24 hours.
+Happy to give you full access. Send your TradingView username -I'll activate within 24 hours.
 
 Affiliate program (15-30% recurring) for research platforms.
 
@@ -1995,16 +1968,16 @@ signalpilot.io
 **Followers:** ~168K
 **DM or:** newtraderu.com
 
-You wrote "The Most Helpful Traders on Twitter" — 17 books and 3,000+ TA articles on NewTraderU. That's an audience that actively wants better indicator tools.
+You wrote "The Most Helpful Traders on Twitter" -17 books and 3,000+ TA articles on NewTraderU. That's an audience that actively wants better indicator tools.
 
 I built 7 non-repainting TradingView indicators at Signal Pilot:
 
-- **Harmonic Oscillator** — 7-component voting system. The multi-indicator approach your articles teach — automated into one tool.
-- **Pentarch** — 5-phase cycle detection. Trend following made systematic.
+- **Harmonic Oscillator** -7-component voting system. The multi-indicator approach your articles teach -automated into one tool.
+- **Pentarch** -5-phase cycle detection. Trend following made systematic.
 
-$100 bounty. Happy to give you full access — send your TradingView username.
+$100 bounty. Happy to give you full access -send your TradingView username.
 
-Affiliate program (15-30% recurring) — natural fit for your newsletter and articles.
+Affiliate program (15-30% recurring) -natural fit for your newsletter and articles.
 
 signalpilot.io | education.signalpilot.io
 
@@ -2023,10 +1996,10 @@ signalpilot.io | education.signalpilot.io
 
 I built 7 non-repainting TradingView indicators:
 
-- **Pentarch** — 5-phase cycle detection. Adds structural context to your daily currency pairs analysis.
-- **Janus Atlas** — auto-maps 60+ level types across multiple timeframes. Built for multi-pair workflows like yours.
+- **Pentarch** -5-phase cycle detection. Adds structural context to your daily currency pairs analysis.
+- **Janus Atlas** -auto-maps 60+ level types across multiple timeframes. Built for multi-pair workflows like yours.
 
-Non-repainting, finalize on candle close. Happy to give you full access — send your TradingView username.
+Non-repainting, finalize on candle close. Happy to give you full access -send your TradingView username.
 
 Affiliate program (15-30% recurring) if they fit the ForexLive audience.
 
@@ -2043,10 +2016,10 @@ Multiple #1 FX analyst rankings from Reuters and FXWeek. First site to focus on 
 
 I built 7 non-repainting TradingView indicators. Two for intermarket analysis:
 
-- **Pentarch** — 5-phase cycle detection across currencies, commodities, and indices simultaneously.
-- **Augury Grid** — scans 8 tickers across 3 timeframes. Built for cross-market analysis.
+- **Pentarch** -5-phase cycle detection across currencies, commodities, and indices simultaneously.
+- **Augury Grid** -scans 8 tickers across 3 timeframes. Built for cross-market analysis.
 
-Non-repainting, finalize on candle close. Happy to give you full access — send your TradingView username.
+Non-repainting, finalize on candle close. Happy to give you full access -send your TradingView username.
 
 signalpilot.io
 
@@ -2061,17 +2034,17 @@ signalpilot.io
 **Followers:** ~94K
 **DM or:** TraderFeed blog / LinkedIn
 
-PhD psychologist who coaches hedge fund traders on performance. You've spent your career studying why traders make impulsive decisions — I built a tool designed to reduce exactly that.
+PhD psychologist who coaches hedge fund traders on performance. You've spent your career studying why traders make impulsive decisions -I built a tool designed to reduce exactly that.
 
-**Harmonic Oscillator** — 7-component voting system that outputs a conviction count (e.g., 6/7 STRONG BULL). It doesn't say "buy now." It gives data and lets the trader decide. Removes the ambiguity that triggers emotional entries.
+**Harmonic Oscillator** -7-component voting system that outputs a conviction count (e.g., 6/7 STRONG BULL). It doesn't say "buy now." It gives data and lets the trader decide. Removes the ambiguity that triggers emotional entries.
 
-Non-repainting, signals finalize on candle close. 7 indicators total — happy to give you full access. Send your TradingView username.
+Non-repainting, signals finalize on candle close. 7 indicators total -happy to give you full access. Send your TradingView username.
 
 signalpilot.io | education.signalpilot.io
 
 ---
 
-## Quick Reference — Contact Summary (Batch 4: Twitter)
+## Quick Reference -Contact Summary (Batch 4: Twitter)
 
 | # | Prospect | Twitter Handle | Followers | Focus | Alt Contact |
 |---|---------|---------------|-----------|-------|-------------|
