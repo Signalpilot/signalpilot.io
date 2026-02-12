@@ -71,6 +71,26 @@
 | 55 | Tori Trades (Victoria Duke) | TikTok DM / toritradez.com | Mid | Not sent | | | 239K TikTok, 10+ years futures, price action only |
 | 56 | ScarfaceTrades (Tony) | tony@scarfacetrades.com | Mid | Not sent | | | 310K IG, 7+ years day trading, multi-platform |
 | 57 | Elliott Wave Count | Instagram DM / Telegram | Mid | Not sent | | | 360K IG, 15 years wave analysis, active on TradingView |
+| | | | | | | | |
+| | **BATCH 4 — TWITTER/X DM OUTREACH** | | | | | | |
+| 58 | Scott Melker | Twitter DM @scottmelker | High | Not sent | | | ~950K followers, crypto TA, Wolf Den podcast/newsletter |
+| 59 | CryptoCred | Twitter DM @CryptoCred | High | Not sent | | | ~708K followers, free crypto TA education, no-promo stance |
+| 60 | Pentoshi | Twitter DM @Pentosh1 | High | Not sent | | | ~700-890K followers, crypto price action, North Node Capital |
+| 61 | Lark Davis | Twitter DM @LarkDavis | High | Not sent | | | ~1.4M followers, Wealth Mastery newsletter 150K+ subs |
+| 62 | Michael van de Poppe | Twitter DM @CryptoMichNL | High | Not sent | | | ~820K followers, Fibonacci/cycle analysis, MN Trading |
+| 63 | CryptoWendyO | Twitter DM @CryptoWendyO | Mid | Not sent | | | ~386K followers, transparent disclosure policy |
+| 64 | Bitcoin Jack | Twitter DM @BTC_JackSparrow | Mid | Not sent | | | ~269K followers, Price Target series, active on TradingView |
+| 65 | Peter Brandt | Twitter DM @PeterLBrandt | High | Not sent | | | ~700K+ followers, Market Wizards, 40+ years classical charts |
+| 66 | Mark Minervini | Twitter DM @markminervini | High | Not sent | | | ~511K followers, 2x U.S. Investing Champion, SEPA/VCP |
+| 67 | Adam Mancini | Twitter DM @AdamMancini4 | High | Not sent | | | ~213K followers, ES/SPX levels, Substack #7 Finance |
+| 68 | Gareth Soloway | Twitter DM @GarethSoloway | Mid | Not sent | | | ~239K followers, multi-asset TA, 80%+ verified win rate |
+| 69 | Dan Zanger | Twitter DM @DanZanger | Mid | Not sent | | | ~222K followers, world record return, chart patterns |
+| 70 | Scott Redler | Twitter DM @RedDogT3 | Mid | Not sent | | | ~160K followers, T3Live, CNBC/Bloomberg appearances |
+| 71 | J.C. Parets | Twitter DM @allstarcharts | Mid | Not sent | | | ~111K followers, CMT, multi-asset top-down TA |
+| 72 | Steve Burns | Twitter DM @SJosephBurns | Mid | Not sent | | | ~168K followers, 17 books, NewTraderU 3K+ articles |
+| 73 | Greg Michalowski | Twitter DM @gregmikeFX | Mid | Not sent | | | ~40K followers, ForexLive Director of TA, ex-Citibank VP |
+| 74 | Ashraf Laidi | Twitter DM @alaidi | Mid | Not sent | | | ~71K followers, #1 FX analyst rankings, intermarket pioneer |
+| 75 | Brett Steenbarger | Twitter DM @steenbab | Mid | Not sent | | | ~94K followers, PhD psychologist, hedge fund coach |
 
 ## Status Key
 - **Not sent** — Email not yet sent
@@ -87,11 +107,12 @@
 - **Day 14:** Final follow-up, then move to "No response"
 
 ## Stats
-- **Total prospects:** 57
+- **Total prospects:** 75
 - **Batch 1 (Big names):** 15 (sent, 1 reply — Brian Shannon)
 - **Batch 2 (Mid-tier educators):** 10 (ready to send)
 - **Batch 3 (New prospects):** 32 (ready to send)
+- **Batch 4 (Twitter DMs):** 18 (ready to send)
 - **Direct emails:** 22
 - **Contact forms:** 11
-- **DMs (Instagram/Twitter/TikTok/Telegram):** 14
+- **DMs (Instagram/Twitter/TikTok/Telegram):** 32
 - **YouTube About emails:** 4
