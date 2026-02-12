@@ -502,7 +502,7 @@ Signal Pilot Labs
 | 4 | Kivanc Ozbilgic | — | Telegram: t.me/AlgoRhytm or TradingView DM |
 | 5 | Trading Strategy Guides | info@tradingstrategyguides.com | Direct email |
 | 6 | Liberated Stock Trader | customerservices@liberatedstocktrader.com | Direct email |
-| 7 | Crypto Jebb | [INSTAGRAM DM] — @cryptojebb (bio says "Inquiries → DM") | Direct email |
+| 7 | Crypto Jebb | [INSTAGRAM DM] — @cryptojebb (bio says "Inquiries → DM") | Instagram DM |
 | 8 | askSlim | slim@askslim.com / matt@askslim.com | Direct email |
 | 9 | ClayTrader | — | Contact form: claytrader.com/contact |
 | 10 | TRADEPRO Academy | george@tradeproacademy.com | Direct email |
