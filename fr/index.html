@@ -9782,30 +9782,27 @@ if ('serviceWorker' in navigator) {
     setTimeout(cycle, 1500);
   })();
 
-  // Form field validation with success checkmarks
+  // Consent check for pricing plan checkout
   (function() {
-    const inputs = ['tv-monthly', 'tv-yearly', 'tv-lifetime'];
+    const plans = ['pentarch', 'monthly', 'yearly', 'lifetime'];
+    plans.forEach(plan => {
+      const planContainer = document.getElementById('plan-' + plan);
+      if (!planContainer) return;
 
-    inputs.forEach(id => {
-      const input = document.getElementById(id);
-      if (!input) return;
+      const gumroadLinks = planContainer.querySelectorAll('a[data-gumroad-overlay-checkout]');
+      gumroadLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          const consentInput = document.getElementById('consent-' + plan);
+          const consentErrorEl = document.getElementById('error-consent-' + plan);
 
-      input.addEventListener('input', function() {
-        const value = this.value.trim();
-        // Valid if at least 3 characters
-        if (value.length >= 3) {
-          this.classList.add('valid');
-        } else {
-          this.classList.remove('valid');
-        }
-      });
-
-      // Also check on blur
-      input.addEventListener('blur', function() {
-        const value = this.value.trim();
-        if (value.length >= 3) {
-          this.classList.add('valid');
-        }
+          if (consentInput && !consentInput.checked) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            if (consentErrorEl) { consentErrorEl.style.display = 'block'; consentErrorEl.textContent = 'Please accept the terms to continue.'; }
+            return false;
+          }
+          if (consentErrorEl) consentErrorEl.style.display = 'none';
+        });
       });
     });
   })();
