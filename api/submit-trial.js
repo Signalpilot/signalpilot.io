@@ -7,6 +7,50 @@
 
 const WEBHOOK_URL = process.env.MAKE_WEBHOOK_URL;
 
+const TV_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+
+async function tvUsernameExists(username) {
+  try {
+    const resp = await fetch(`https://www.tradingview.com/u/${encodeURIComponent(username)}/`, {
+      method: 'GET',
+      headers: {
+        'User-Agent': TV_UA,
+        'Accept': 'text/html,application/xhtml+xml',
+        'Accept-Language': 'en-US,en;q=0.9',
+      },
+      redirect: 'follow',
+    });
+
+    if (resp.status === 404 || resp.status < 200 || resp.status >= 300) {
+      return { exists: false };
+    }
+
+    const body = await resp.text();
+    const lower = body.toLowerCase();
+
+    // Soft-404 detection
+    if (lower.includes('page not found') || lower.includes('page_not_found') ||
+        lower.includes('"error":404') || resp.url.includes('/error')) {
+      return { exists: false };
+    }
+
+    // Verify profile content is present
+    const lowerUser = username.toLowerCase();
+    const hasProfile =
+      lower.includes(`/u/${lowerUser}/`) ||
+      lower.includes(`"username":"${lowerUser}"`) ||
+      lower.includes(`@${lowerUser}`);
+
+    if (hasProfile) return { exists: true };
+
+    // Got 200 but can't confirm (e.g. Cloudflare challenge) — uncertain
+    return { exists: null };
+  } catch {
+    // Network error — uncertain
+    return { exists: null };
+  }
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -45,6 +89,18 @@ export default async function handler(req, res) {
   if (/\s/.test(tvUsername) || /@/.test(tvUsername)) {
     return res.status(400).json({ error: 'Invalid TradingView username format' });
   }
+
+  // --- Verify TradingView username actually exists ---
+
+  const tvCheck = await tvUsernameExists(tvUsername);
+  if (tvCheck.exists === false) {
+    return res.status(400).json({
+      error: 'TradingView username does not exist',
+      detail: 'The username "' + tvUsername + '" was not found on TradingView. Please enter your real TradingView username.'
+    });
+  }
+  // tvCheck.exists === null (uncertain) is allowed through — we don't want to
+  // block real users because of a Cloudflare challenge or network hiccup.
 
   // --- Forward to Make.com ---
 
