@@ -1,6 +1,6 @@
 // POST /api/social/post-instagram
-// Cron-triggered: Posts the next Instagram content
-// Schedule: "0 13 * * *" (daily at 1PM UTC)
+// Cron-triggered: Posts the next Instagram carousel
+// Schedule: 3x daily at 1PM, 5PM, 10PM UTC (8AM, 12PM, 5PM EST)
 
 import {
   isPaused,
@@ -14,7 +14,7 @@ import {
   clearRetryCount,
 } from '../../lib/social/queue-manager.js';
 import { getPostNumber, getInstagramColumn } from '../../lib/social/posting-schedule.js';
-import { postSingleImage, postCarousel } from '../../lib/social/instagram-client.js';
+import { postCarousel } from '../../lib/social/instagram-client.js';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
@@ -28,17 +28,19 @@ function loadContent() {
   return contentCache;
 }
 
+const SLIDES_PER_CAROUSEL = 10;
+
 /**
- * Build the image URL for a given post number
- * Images are pre-rendered and stored in the public directory or a CDN
+ * Build image URLs for all slides of a given post
  */
-function getImageUrl(postNumber, slideIndex = 0) {
+function getSlideUrls(postNumber) {
   const paddedNum = String(postNumber).padStart(3, '0');
-  // Uses Vercel-hosted static files from the pre-rendered carousel images
   const baseUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : 'https://www.signalpilot.io';
-  return `${baseUrl}/assets/social/post-${paddedNum}/slide-${slideIndex + 1}.png`;
+  return Array.from({ length: SLIDES_PER_CAROUSEL }, (_, i) =>
+    `${baseUrl}/assets/social/post-${paddedNum}/slide-${i + 1}.png`
+  );
 }
 
 export default async function handler(req, res) {
@@ -107,10 +109,9 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: false, error: `Post ${postNumber} has no caption` });
     }
 
-    // Post to Instagram
-    // Try carousel first (multiple slides), fall back to single image
-    const imageUrl = getImageUrl(postNumber);
-    const result = await postSingleImage(imageUrl, caption);
+    // Post carousel (10 slides) to Instagram
+    const slideUrls = getSlideUrls(postNumber);
+    const result = await postCarousel(slideUrls, caption);
 
     // Success - update state
     await setLastPosted('instagram', postOrder);
