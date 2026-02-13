@@ -2,8 +2,12 @@
 
 // Parse content plan markdown files into structured JSON for the social media bot
 // Usage: node scripts/parse-content.js
+//
+// NOTE: content-queue.json is now manually curated (A-grade upgraded threads,
+// deepened to 4-10 tweets each). This script skips overwriting if the file
+// already exists. To force re-parse from markdown, use --force flag.
 
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { parseAllContent, validatePosts } from '../lib/social/content-parser.js';
@@ -14,6 +18,16 @@ const ROOT = join(__dirname, '..');
 const PART1_PATH = join(ROOT, 'content-plan', 'CONTENT_PLAN_PART1.md');
 const PART2_PATH = join(ROOT, 'content-plan', 'CONTENT_PLAN_PART2.md');
 const OUTPUT_PATH = join(ROOT, 'data', 'social', 'content-queue.json');
+
+const forceReparse = process.argv.includes('--force');
+
+// Skip if curated content-queue.json already exists (preserves A-grade upgrades)
+if (existsSync(OUTPUT_PATH) && !forceReparse) {
+  const existing = JSON.parse(readFileSync(OUTPUT_PATH, 'utf-8'));
+  console.log(`content-queue.json already exists with ${existing.length} posts — skipping parse.`);
+  console.log('Use --force to re-parse from markdown source files.');
+  process.exit(0);
+}
 
 console.log('Parsing content plan files...');
 console.log(`  Part 1: ${PART1_PATH}`);
