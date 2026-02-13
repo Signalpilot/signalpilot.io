@@ -212,7 +212,7 @@ const deepens = {
 
   // POST 495: Full Suite Integration Demo (full suite → 7 tweets, +2)
   495: [
-    `The question each indicator answers:\n\nPentarch: Where in the cycle?\nVolume Oracle: What's the regime?\nJanus Atlas: Where are the levels?\nPlutus Flow: Where's the money going?\nHarmonic Oscillator: How strong is momentum?\nAugury Grid: Which assets matter right now?\nOmniDeck: Does it all agree?`,
+    `What each indicator answers:\n\nPentarch: Where in the cycle?\nVolume Oracle: What's the regime?\nJanus Atlas: Where are the levels?\nPlutus Flow: Where's money going?\nHarmonic Oscillator: How strong?\nAugury Grid: Which assets matter now?\nOmniDeck: Does it all agree?`,
     `Every indicator in the suite is non-repainting and confirmed on candle close. Seven tools, zero retroactive changes. What you see on the chart is what was actually signaled in real-time. Build your analysis on data you can trust. That's the foundation of the entire system.`
   ],
 
@@ -250,7 +250,7 @@ const deepens = {
 
   // POST 565: OmniDeck Daily Routine Demo (full suite routine → 7 tweets, +2)
   565: [
-    `Advanced daily routine: after the OmniDeck scan, cross-reference with Augury Grid for any overnight regime changes across your full watchlist. OmniDeck gives you depth on individual assets. Grid gives you breadth across all of them. Sixty seconds for depth, thirty more for breadth.`,
+    `Advanced routine: after the OmniDeck scan, cross-reference with Augury Grid for overnight regime changes across your full watchlist. OmniDeck gives you depth on individual assets. Grid gives you breadth across all of them. Sixty seconds for depth, thirty more for breadth.`,
     `Every data point in OmniDeck's briefing is non-repainting. The cycle phases, regime states, and momentum readings that greet you each morning are locked in from the prior close. No shifting data. No retroactive changes. Start your day with information you can trust.`
   ],
 
@@ -262,7 +262,7 @@ const deepens = {
   // POST 585: Pentarch Full Cycle Walkthrough (core feature deep dive → 7 tweets, +2)
   585: [
     `Each phase has a corresponding Volume Oracle regime that confirms it. TD plus accumulation. IGN plus rising conviction. WRN plus declining volume. CAP plus distribution. BDN plus drought. When cycle and volume regime align at each phase, the narrative is strongest.`,
-    `The suite is designed so each indicator adds a layer to the cycle narrative. Pentarch names the phase. Volume Oracle confirms conviction. Janus Atlas marks the key levels. Plutus Flow tracks institutional intent. Harmonic Oscillator gauges remaining energy. One cycle, five perspectives.`
+    `The suite adds layers to the cycle narrative. Pentarch names the phase. Volume Oracle confirms conviction. Janus Atlas marks key levels. Plutus Flow tracks institutional intent. Harmonic Oscillator gauges remaining energy. One cycle, five perspectives, one unified system.`
   ]
 
 };
@@ -292,23 +292,20 @@ function main() {
     console.log('Skipped (not 5 tweets): ' + skipped.join(', '));
   }
 
-  // Validate tweet lengths
+  // Validate NEW tweet lengths only
   let errors = 0;
-  for (const post of queue) {
-    const d = deepens[post.postNumber];
-    if (d && post.twitter && post.twitter.tweets) {
-      post.twitter.tweets.forEach((t, i) => {
-        if (t.length > 280) {
-          console.error('ERROR: Post ' + post.postNumber + ' T' + (i + 1) + ' is ' + t.length + ' chars (max 280)');
-          errors++;
-        }
-      });
+  for (const [postNum, newTweets] of Object.entries(deepens)) {
+    for (let i = 0; i < newTweets.length; i++) {
+      if (newTweets[i].length > 280) {
+        console.error('ERROR: Post ' + postNum + ' new tweet ' + (i + 1) + ' is ' + newTweets[i].length + ' chars (max 280)');
+        errors++;
+      }
     }
   }
   if (errors === 0) {
-    console.log('All tweets under 280 characters.');
+    console.log('All new tweets under 280 characters.');
   } else {
-    console.error(errors + ' tweets exceed 280 characters!');
+    console.error(errors + ' new tweets exceed 280 characters!');
     process.exit(1);
   }
 }

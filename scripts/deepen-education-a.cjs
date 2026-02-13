@@ -185,12 +185,12 @@ const deepens = {
 
   // ── POST 226 | PREMIUM & DISCOUNT ZONES ── 6 tweets
   226: [
-    `Step-by-step: draw Fib from the recent swing low to swing high. The 50% level is equilibrium. Any OB or FVG below 50% is a discount entry. Any OB or FVG above 50% is a premium entry. Only take longs in discount. Only take shorts in premium. This one filter changes your R:R dramatically.`
+    `Step-by-step: draw Fib from swing low to swing high. The 50% level is equilibrium. Any OB or FVG below 50% is a discount entry. Above 50% is premium. Only take longs in discount. Only take shorts in premium. This one filter dramatically improves your R:R.`
   ],
 
   // ── POST 229 | ICT MARKET STRUCTURE SHIFT ── 7 tweets
   229: [
-    `Step-by-step MSS trade: price is in an uptrend. A liquidity sweep takes the high, then price drops and closes below the last HL. That is the MSS. Drop to the 15m chart and find the bearish order block that formed during the breakdown. Enter short on the retest. Stop above the swept high.`,
+    `Step-by-step MSS trade: price is in an uptrend. A liquidity sweep takes the high, then price drops and closes below the last HL. That is the MSS. Drop to the 15m and find the bearish OB from the breakdown. Enter short on the retest. Stop above the swept high.`,
     `MSS connects to Wyckoff. In accumulation, the Spring is followed by a bullish MSS — price breaks above the last lower high. In distribution, the Upthrust is followed by a bearish MSS — price breaks below the last higher low. Wyckoff gives the context. MSS gives the entry trigger.`
   ],
 
@@ -206,7 +206,7 @@ const deepens = {
 
   // ── POST 249 | LIQUIDITY POOLS: WHERE STOPS CLUSTER ── 6 tweets
   249: [
-    `Step-by-step: mark every swing high and low on the 4H chart. Draw dotted lines at equal highs and equal lows. Add round numbers like $40k, $50k. Those are your liquidity pools. Now watch: price will gravitate toward the nearest pool. Plan your trade around what happens after the sweep.`
+    `Step-by-step: mark every swing high and low on the 4H chart. Draw lines at equal highs and equal lows. Add round numbers. Those are your liquidity pools. Price gravitates toward the nearest pool. Plan your trade around the reaction after the sweep, not before it.`
   ],
 
   // ── POST 252 | ORDER BLOCKS: INSTITUTIONAL ENTRY ZONES ── 6 tweets
@@ -216,33 +216,33 @@ const deepens = {
 
   // ── POST 256 | BREAKER BLOCKS: FAILED ORDER BLOCKS ── 6 tweets
   256: [
-    `How breakers connect to market structure: when an OB fails, it usually coincides with a break of structure. The failed bullish OB becomes a bearish breaker AND marks the BOS point. When price retests that level, you have two reasons to sell — structural resistance and institutional exit. That is real confluence.`
+    `How breakers connect to structure: when an OB fails, it usually coincides with a BOS. The failed bullish OB becomes a bearish breaker AND marks the BOS point. When price retests, you have two reasons to sell — structural resistance and institutional exit. Real confluence.`
   ],
 
   // ── POST 259 | MITIGATION BLOCKS: UNFILLED ORDERS ── 6 tweets
   259: [
-    `Step-by-step: find a zone where price rallied aggressively but later reversed and broke structure to the downside. That origin zone is your mitigation block. When price eventually returns there, institutions will sell to close their underwater longs. Enter short on the reaction with a stop above the zone.`
+    `Step-by-step: find a zone where price rallied aggressively but later reversed and broke structure. That origin zone is your mitigation block. When price returns, institutions sell to close underwater longs. Enter short on the reaction, stop above the zone.`
   ],
 
   // ── POST 262 | DISPLACEMENT: MOMENTUM REVEALS INTENT ── 6 tweets
   262: [
-    `How displacement connects to order blocks: the candle before a displacement move is the order block. The displacement itself often creates an FVG. So one event — displacement — gives you both the entry zone (OB) and the confirmation (FVG). That is why displacement is one of the first things to look for on a chart.`
+    `How displacement connects to OBs: the candle before a displacement move is the order block. The displacement itself creates an FVG. One event gives you both the entry zone (OB) and the confirmation (FVG). That is why displacement is one of the first things to look for.`
   ],
 
   // ── POST 269 | KILL ZONES: HIGH-PROBABILITY WINDOWS ── 6 tweets
   269: [
-    `A practical variation: the London-only model. Trade exclusively during the 2-5 AM EST window. Wait for the Asian range to get swept. Enter on the reversal. Take profit before NY opens. Some traders build their entire edge around one session. Specialization beats trying to trade all day.`
+    `A practical variation: the London-only model. Trade exclusively during 2-5 AM EST. Wait for the Asian range to get swept. Enter on the reversal. Take profit before NY opens. Some traders build their entire edge around one session. Specialization beats trading all day.`
   ],
 
   // ── POST 272 | MARKET MAKER MODELS ── 7 tweets
   272: [
-    `Real chart walkthrough: on a 15m chart, price ranges from 2-8 AM (accumulation). At 8:30 AM, a sharp drop takes the session low — that is the manipulation. By 9:15, price reclaims the range and starts trending up. By 10:30, it has cleared the range high. That is distribution. Full AMD in under 3 hours.`,
-    `The AMD model connects to everything. Accumulation is the range where order blocks form. Manipulation is the liquidity sweep that creates the Spring or Upthrust. Distribution is the displacement move that leaves FVGs. One model, every concept inside it. Learn AMD and the puzzle pieces click together.`
+    `Real chart walkthrough: 15m chart, price ranges 2-8 AM (accumulation). At 8:30, a sharp drop takes the session low (manipulation). By 9:15, price reclaims the range and trends up. By 10:30, it clears the range high (distribution). Full AMD cycle in under 3 hours.`,
+    `AMD connects to everything. Accumulation is the range where order blocks form. Manipulation is the liquidity sweep — the Spring or Upthrust. Distribution is the displacement that leaves FVGs. One model, every concept inside it. Learn AMD and the pieces click together.`
   ],
 
   // ── POST 276 | LIQUIDITY SWEEPS VS BREAKOUTS ── 6 tweets
   276: [
-    `How to combine this with other concepts: a sweep above a key high during the NY kill zone, followed by a bearish MSS on the 5m chart, with a bearish OB forming at the swept level — that is a full setup. Sweep identifies the trap. MSS confirms direction. OB gives the entry. Layer the concepts.`
+    `How to layer this: a sweep above a key high during NY kill zone, followed by a bearish MSS on the 5m, with a bearish OB at the swept level. Sweep identifies the trap. MSS confirms direction. OB gives the entry. That is how you combine concepts into one trade.`
   ],
 
   // ── POST 279 | PREMIUM & DISCOUNT ARRAYS ── 6 tweets
@@ -252,13 +252,13 @@ const deepens = {
 
   // ── POST 282 | INDUCEMENT: THE TRAP BEFORE THE MOVE ── 6 tweets
   282: [
-    `How inducement connects to the AMD model: inducement IS the manipulation phase. The minor level grab is the fake move designed to create liquidity for the real move. Once you see inducement as part of the AMD sequence rather than a standalone event, the entire model becomes clearer.`
+    `How inducement connects to AMD: inducement IS the manipulation phase. The minor level grab is the fake move designed to create liquidity for the real move. See inducement as part of the AMD sequence, not a standalone event, and the model becomes much clearer.`
   ],
 
   // ── POST 292 | MARKET STRUCTURE FUNDAMENTALS ── 7 tweets
   292: [
-    `Step-by-step: open a daily chart. Mark the last 5 swing highs and 5 swing lows. Connect the dots. Are highs rising and lows rising? Bullish. Falling? Bearish. Now zoom into the 4H. Does it agree with the daily? If both say bullish, only look for longs. Structure on two timeframes is your directional filter.`,
-    `Structure is the foundation that every other concept builds on. Order blocks form at structural turning points. FVGs appear when structure breaks. Liquidity pools sit at structural highs and lows. MSS signals the structure is changing. Master this first and everything else has context.`
+    `Step-by-step: open a daily chart. Mark the last 5 swing highs and lows. Highs rising and lows rising? Bullish. Falling? Bearish. Now check the 4H — does it agree? If both say bullish, only look for longs. Structure on two timeframes is your directional filter.`,
+    `Structure is the foundation every other concept builds on. Order blocks form at structural turning points. FVGs appear when structure breaks. Liquidity sits at structural highs and lows. MSS signals structure is changing. Master this first — everything else has context.`
   ]
 };
 
