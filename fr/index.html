@@ -8993,22 +8993,25 @@ if ('serviceWorker' in navigator) {
         var resp = await fetch('/api/validate-tv-username?username=' + encodeURIComponent(value));
         var data = await resp.json();
 
-        // Cache the result
-        tvValidationCache[value.toLowerCase()] = data;
+        // Only cache definitive results (not uncertain ones)
+        if (!data.uncertain) {
+          tvValidationCache[value.toLowerCase()] = data;
+        }
 
         // Only update if the input value hasn't changed during the request
         if (input.value.trim().toLowerCase() === value.toLowerCase()) {
-          if (data.valid) {
-            setTvFieldState(input, errorEl, 'valid', data.uncertain ? '' : 'Nom d\'utilisateur vérifié sur TradingView');
+          if (data.valid && !data.uncertain) {
+            setTvFieldState(input, errorEl, 'valid', 'Nom d\'utilisateur vérifié sur TradingView');
+          } else if (data.uncertain) {
+            setTvFieldState(input, errorEl, 'error', 'Impossible de vérifier ce nom d\'utilisateur pour le moment. Vérifiez sur tradingview.com/u/' + value);
           } else {
             setTvFieldState(input, errorEl, 'error', 'Ce nom d\'utilisateur n\'existe pas sur TradingView. Vérifiez votre profil sur tradingview.com/u/' + value);
           }
         }
       } catch (e) {
-        // Network error — fail open but don't show as verified
+        // Network error — fail closed, don't mark as valid
         if (input.value.trim().toLowerCase() === value.toLowerCase()) {
-          setTvFieldState(input, errorEl, 'clear', '');
-          input.dataset.tvValid = 'true'; // fail open
+          setTvFieldState(input, errorEl, 'error', 'Impossible de vérifier le nom d\'utilisateur. Vérifiez votre connexion et réessayez.');
         }
       }
     }, 600);
@@ -9143,7 +9146,12 @@ if ('serviceWorker' in navigator) {
           }
           setTvFieldState(tvField, tvError, 'valid', 'Nom d\'utilisateur vérifié sur TradingView');
         } catch (e) {
-          // Fail open on network error
+          // Fail closed — don't allow submission without verification
+          alert('Could not verify your TradingView username. Please check your connection and try again.');
+          submitting = false;
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          return;
         }
       }
 

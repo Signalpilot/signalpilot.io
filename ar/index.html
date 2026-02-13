@@ -8121,19 +8121,24 @@ if ('serviceWorker' in navigator) {
       try {
         var resp = await fetch('/api/validate-tv-username?username=' + encodeURIComponent(value));
         var data = await resp.json();
-        tvValidationCache[value.toLowerCase()] = data;
+        // Only cache definitive results (not uncertain ones)
+        if (!data.uncertain) {
+          tvValidationCache[value.toLowerCase()] = data;
+        }
 
         if (input.value.trim().toLowerCase() === value.toLowerCase()) {
-          if (data.valid) {
-            setTvFieldState(input, errorEl, 'valid', data.uncertain ? '' : 'Username verified on TradingView');
+          if (data.valid && !data.uncertain) {
+            setTvFieldState(input, errorEl, 'valid', 'Username verified on TradingView');
+          } else if (data.uncertain) {
+            setTvFieldState(input, errorEl, 'error', 'Could not verify this username right now. Please double-check it at tradingview.com/u/' + value);
           } else {
             setTvFieldState(input, errorEl, 'error', 'This username does not exist on TradingView. Check your profile at tradingview.com/u/' + value);
           }
         }
       } catch (e) {
+        // Network error — fail closed, don't mark as valid
         if (input.value.trim().toLowerCase() === value.toLowerCase()) {
-          setTvFieldState(input, errorEl, 'clear', '');
-          input.dataset.tvValid = 'true';
+          setTvFieldState(input, errorEl, 'error', 'Could not verify username. Please check your connection and try again.');
         }
       }
     }, 600);
@@ -8258,7 +8263,12 @@ if ('serviceWorker' in navigator) {
           }
           setTvFieldState(tvField, tvError, 'valid', 'Username verified on TradingView');
         } catch (e) {
-          // Fail open on network error
+          // Fail closed — don't allow submission without verification
+          alert('Could not verify your TradingView username. Please check your connection and try again.');
+          submitting = false;
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          return;
         }
       }
 
