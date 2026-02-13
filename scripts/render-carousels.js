@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 // Render carousel HTML files to PNG images for Instagram posting
+// Uses each carousel's built-in Export Mode for pixel-perfect 1080x1350 slides
+//
 // Usage: node scripts/render-carousels.js [--start N] [--end N]
 // Requires: puppeteer (npm install puppeteer)
 
@@ -14,72 +16,55 @@ const SOCIAL_DIR = join(ROOT, 'INSTAGRAM_CONTENT_HUB', 'social');
 const OUTPUT_DIR = join(ROOT, 'assets', 'social');
 
 const SLIDE_WIDTH = 1080;
-const SLIDE_HEIGHT = 1080;
+const SLIDE_HEIGHT = 1350;
 
-async function renderCarousel(postDir, postNumber) {
+async function renderCarousel(page, postDir, postNumber) {
   const carouselPath = join(postDir, 'carousel.html');
   if (!existsSync(carouselPath)) {
     console.log(`  Skipping post-${postNumber}: no carousel.html`);
     return 0;
   }
 
-  // Dynamic import of puppeteer (optional dependency)
-  const puppeteer = await import('puppeteer');
-  const browser = await puppeteer.default.launch({
-    headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  const fileUrl = `file://${carouselPath}`;
+  await page.goto(fileUrl, { waitUntil: 'networkidle0', timeout: 30000 });
+
+  // Activate the built-in Export Mode
+  const slideCount = await page.evaluate(() => {
+    document.body.classList.add('export-mode');
+    const wrappers = document.querySelectorAll('.slide-wrapper');
+    // Hide all slides first
+    wrappers.forEach(w => w.classList.remove('active'));
+    return wrappers.length;
   });
 
-  try {
-    const page = await browser.newPage();
-    await page.setViewport({ width: SLIDE_WIDTH, height: SLIDE_HEIGHT });
-
-    const fileUrl = `file://${carouselPath}`;
-    await page.goto(fileUrl, { waitUntil: 'networkidle0', timeout: 15000 });
-
-    // Get all slides (look for common carousel slide selectors)
-    const slideCount = await page.evaluate(() => {
-      // Try common patterns
-      const slides = document.querySelectorAll('.slide, .carousel-slide, [data-slide], section');
-      if (slides.length > 1) return slides.length;
-      // If no slide elements found, treat as single image
-      return 1;
-    });
-
-    const paddedNum = String(postNumber).padStart(3, '0');
-    const outputDir = join(OUTPUT_DIR, `post-${paddedNum}`);
-    mkdirSync(outputDir, { recursive: true });
-
-    if (slideCount === 1) {
-      // Single page screenshot
-      await page.screenshot({
-        path: join(outputDir, 'slide-1.png'),
-        type: 'png',
-        clip: { x: 0, y: 0, width: SLIDE_WIDTH, height: SLIDE_HEIGHT },
-      });
-    } else {
-      // Multiple slides - screenshot each
-      for (let i = 0; i < slideCount; i++) {
-        await page.evaluate((index) => {
-          const slides = document.querySelectorAll('.slide, .carousel-slide, [data-slide], section');
-          if (slides[index]) {
-            slides[index].scrollIntoView();
-          }
-        }, i);
-
-        await page.screenshot({
-          path: join(outputDir, `slide-${i + 1}.png`),
-          type: 'png',
-          clip: { x: 0, y: 0, width: SLIDE_WIDTH, height: SLIDE_HEIGHT },
-        });
-      }
-    }
-
-    console.log(`  Rendered post-${paddedNum}: ${slideCount} slide(s)`);
-    return slideCount;
-  } finally {
-    await browser.close();
+  if (slideCount === 0) {
+    console.log(`  Skipping post-${postNumber}: no .slide-wrapper elements found`);
+    return 0;
   }
+
+  const paddedNum = String(postNumber).padStart(3, '0');
+  const outputDir = join(OUTPUT_DIR, `post-${paddedNum}`);
+  mkdirSync(outputDir, { recursive: true });
+
+  for (let i = 0; i < slideCount; i++) {
+    // Show only the current slide via the export mode active class
+    await page.evaluate((index) => {
+      const wrappers = document.querySelectorAll('.slide-wrapper');
+      wrappers.forEach((w, j) => w.classList.toggle('active', j === index));
+    }, i);
+
+    // Brief pause for any CSS transitions / font rendering
+    await page.evaluate(() => new Promise(r => setTimeout(r, 100)));
+
+    await page.screenshot({
+      path: join(outputDir, `slide-${i + 1}.png`),
+      type: 'png',
+      clip: { x: 0, y: 0, width: SLIDE_WIDTH, height: SLIDE_HEIGHT },
+    });
+  }
+
+  console.log(`  Rendered post-${paddedNum}: ${slideCount} slide(s)`);
+  return slideCount;
 }
 
 async function main() {
@@ -92,6 +77,7 @@ async function main() {
   console.log('Rendering carousel HTML files to PNG images...');
   console.log(`  Source: ${SOCIAL_DIR}`);
   console.log(`  Output: ${OUTPUT_DIR}`);
+  console.log(`  Dimensions: ${SLIDE_WIDTH}x${SLIDE_HEIGHT} (4:5 Instagram)`);
   console.log(`  Range: post ${start} to ${end}`);
   console.log('');
 
@@ -99,6 +85,16 @@ async function main() {
     console.error(`Source directory not found: ${SOCIAL_DIR}`);
     process.exit(1);
   }
+
+  // Launch browser once and reuse across all posts
+  const puppeteer = await import('puppeteer');
+  const browser = await puppeteer.default.launch({
+    headless: 'new',
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
+
+  const page = await browser.newPage();
+  await page.setViewport({ width: SLIDE_WIDTH, height: SLIDE_HEIGHT });
 
   const dirs = await new Promise((resolve, reject) => {
     readdir(SOCIAL_DIR, { withFileTypes: true }, (err, entries) => {
@@ -109,6 +105,8 @@ async function main() {
 
   let totalSlides = 0;
   let processed = 0;
+  let skipped = 0;
+  let errors = 0;
 
   for (const dir of dirs) {
     const match = dir.match(/^post-(\d+)$/);
@@ -118,15 +116,25 @@ async function main() {
     if (postNumber < start || postNumber > end) continue;
 
     try {
-      const slides = await renderCarousel(join(SOCIAL_DIR, dir), postNumber);
-      totalSlides += slides;
-      processed++;
+      const slides = await renderCarousel(page, join(SOCIAL_DIR, dir), postNumber);
+      if (slides > 0) {
+        totalSlides += slides;
+        processed++;
+      } else {
+        skipped++;
+      }
     } catch (err) {
       console.error(`  Error rendering ${dir}: ${err.message}`);
+      errors++;
     }
   }
 
-  console.log(`\nDone! Processed ${processed} posts, ${totalSlides} total slides.`);
+  await browser.close();
+
+  console.log('');
+  console.log(`Done! Rendered ${processed} posts (${totalSlides} slides)`);
+  if (skipped > 0) console.log(`  Skipped: ${skipped} (no carousel.html or no slides)`);
+  if (errors > 0) console.log(`  Errors: ${errors}`);
 }
 
 main().catch(err => {
