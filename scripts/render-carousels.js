@@ -4,11 +4,12 @@
 // Uses each carousel's built-in Export Mode for pixel-perfect 1080x1350 slides
 //
 // Usage: node scripts/render-carousels.js [--start N] [--end N]
-// Requires: puppeteer (npm install puppeteer)
+// Requires: puppeteer-core (npm install puppeteer-core)
 
-import { readdir, existsSync, mkdirSync } from 'fs';
+import { readdir, readFileSync, existsSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -25,14 +26,40 @@ async function renderCarousel(page, postDir, postNumber) {
     return 0;
   }
 
-  const fileUrl = `file://${carouselPath}`;
-  await page.goto(fileUrl, { waitUntil: 'networkidle0', timeout: 30000 });
+  // Read HTML and strip video tags + external font links for fast offline rendering
+  let html = readFileSync(carouselPath, 'utf8');
+
+  // Remove Google Fonts link tags — use system font fallbacks
+  html = html.replace(/<link[^>]*fonts\.googleapis\.com[^>]*>/gi, '');
+  html = html.replace(/<link[^>]*fonts\.gstatic\.com[^>]*>/gi, '');
+
+  // Remove video elements — they're cosmetic bg at 8% opacity
+  html = html.replace(/<video[^>]*>[\s\S]*?<\/video>/gi, '');
+
+  // Inject fallback font-face declarations
+  const fontFallback = `
+    <style>
+      @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; src: local('Georgia'), local('Times New Roman'); }
+      @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; src: local('Georgia'); }
+      @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500; src: local('Georgia'); }
+      @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 600; src: local('Georgia'); }
+      @font-face { font-family: 'Inter'; font-style: normal; font-weight: 300; src: local('Arial'), local('Helvetica'); }
+      @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; src: local('Arial'), local('Helvetica'); }
+      @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; src: local('Arial'), local('Helvetica'); }
+    </style>
+  `;
+  html = html.replace('</head>', fontFallback + '</head>');
+
+  // Load from data URL to avoid file:// font loading issues
+  await page.setContent(html, { waitUntil: 'domcontentloaded', timeout: 10000 });
+
+  // Small delay for CSS to settle
+  await page.evaluate(() => new Promise(r => setTimeout(r, 200)));
 
   // Activate the built-in Export Mode
   const slideCount = await page.evaluate(() => {
     document.body.classList.add('export-mode');
     const wrappers = document.querySelectorAll('.slide-wrapper');
-    // Hide all slides first
     wrappers.forEach(w => w.classList.remove('active'));
     return wrappers.length;
   });
@@ -47,14 +74,13 @@ async function renderCarousel(page, postDir, postNumber) {
   mkdirSync(outputDir, { recursive: true });
 
   for (let i = 0; i < slideCount; i++) {
-    // Show only the current slide via the export mode active class
     await page.evaluate((index) => {
       const wrappers = document.querySelectorAll('.slide-wrapper');
       wrappers.forEach((w, j) => w.classList.toggle('active', j === index));
     }, i);
 
-    // Brief pause for any CSS transitions / font rendering
-    await page.evaluate(() => new Promise(r => setTimeout(r, 100)));
+    // Brief pause for rendering
+    await page.evaluate(() => new Promise(r => setTimeout(r, 50)));
 
     await page.screenshot({
       path: join(outputDir, `slide-${i + 1}.png`),
@@ -86,11 +112,38 @@ async function main() {
     process.exit(1);
   }
 
-  // Launch browser once and reuse across all posts
-  const puppeteer = await import('puppeteer');
+  // Find Chrome/Chromium binary
+  const chromePaths = [
+    '/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome',
+    '/usr/bin/chromium-browser',
+    '/usr/bin/chromium',
+    '/usr/bin/google-chrome',
+    '/usr/bin/google-chrome-stable',
+  ];
+  let executablePath = chromePaths.find(p => existsSync(p));
+  if (!executablePath) {
+    try { executablePath = execSync('which chromium-browser || which chromium || which google-chrome', { encoding: 'utf8' }).trim(); }
+    catch { /* ignore */ }
+  }
+  if (!executablePath) {
+    console.error('No Chrome/Chromium found. Install chromium or set CHROME_PATH env var.');
+    process.exit(1);
+  }
+  console.log(`  Browser: ${executablePath}`);
+
+  const puppeteer = await import('puppeteer-core');
   const browser = await puppeteer.default.launch({
+    executablePath,
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: [
+      '--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu',
+      '--disable-dev-shm-usage', '--disable-software-rasterizer',
+      '--disable-extensions', '--disable-background-networking',
+      '--disable-sync', '--disable-translate',
+      '--no-first-run', '--no-zygote', '--single-process',
+      '--font-render-hinting=none',
+    ],
+    protocolTimeout: 120000,
   });
 
   const page = await browser.newPage();
@@ -107,6 +160,8 @@ async function main() {
   let processed = 0;
   let skipped = 0;
   let errors = 0;
+
+  const t0 = Date.now();
 
   for (const dir of dirs) {
     const match = dir.match(/^post-(\d+)$/);
@@ -127,12 +182,20 @@ async function main() {
       console.error(`  Error rendering ${dir}: ${err.message}`);
       errors++;
     }
+
+    // Progress every 50 posts
+    if (processed > 0 && processed % 50 === 0) {
+      const elapsed = ((Date.now() - t0) / 1000).toFixed(0);
+      const rate = (processed / (Date.now() - t0) * 1000).toFixed(1);
+      console.log(`  Progress: ${processed} posts (${totalSlides} slides) in ${elapsed}s [${rate} posts/sec]`);
+    }
   }
 
   await browser.close();
 
+  const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
   console.log('');
-  console.log(`Done! Rendered ${processed} posts (${totalSlides} slides)`);
+  console.log(`Done! Rendered ${processed} posts (${totalSlides} slides) in ${elapsed}s`);
   if (skipped > 0) console.log(`  Skipped: ${skipped} (no carousel.html or no slides)`);
   if (errors > 0) console.log(`  Errors: ${errors}`);
 }
