@@ -5,7 +5,7 @@
 // This keeps the webhook URL hidden from the frontend and blocks
 // bots that POST empty/garbage data directly.
 
-const WEBHOOK_URL = process.env.MAKE_WEBHOOK_URL || 'https://hook.eu1.make.com/7klx329gnfpknko32nubiu43nadwoouz';
+const WEBHOOK_URL = process.env.MAKE_WEBHOOK_URL || 'https://hook.eu1.make.com/7c4ocq8g1868tvi98y474tu9k9m4p127';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
