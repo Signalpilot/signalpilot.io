@@ -12,11 +12,10 @@ const results = [];
 // Common weak/generic phrases that lower quality
 const genericPhrases = [
   'game changer', 'game-changer', 'level up', 'next level', 'secret weapon',
-  'most traders', 'here\'s the thing', 'let me explain', 'thread 🧵',
-  'a thread', 'read this', 'save this', 'bookmark this',
-  'don\'t miss', 'you need to', 'stop what you\'re doing',
-  'the truth is', 'real talk', 'hot take', 'unpopular opinion',
-  'nobody talks about', 'they don\'t want you to know',
+  'here\'s the thing', 'let me explain', 'thread 🧵',
+  'a thread', 'stop what you\'re doing',
+  'real talk', 'hot take', 'unpopular opinion',
+  'they don\'t want you to know',
   'this is huge', 'mind blown', 'let that sink in'
 ];
 
@@ -101,7 +100,7 @@ function scoreValue(tweets) {
   for (const t of middle) {
     const lower = t.toLowerCase();
     // Specificity
-    if (/\d+%|\$\d+|\d+x|\d+ (day|week|month|hour|minute|candle|bar|period)/.test(t)) hasNumbers++;
+    if (/\d+%|\$\d+|\d+x|\d+ (day|week|month|hour|minute|candle|bar|period|trade|lesson|indicator|signal|symbol|post|year|book|course|strateg|member|thread)/.test(t)) hasNumbers++;
     if (/example|e\.g\.|for instance|like when|such as|scenario/.test(lower)) hasExample++;
     if (/step \d|rule \d|tip \d|#\d/.test(lower)) hasSpecific++;
     // Check for actionable content
