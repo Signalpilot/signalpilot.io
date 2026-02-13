@@ -8356,11 +8356,14 @@ if ('serviceWorker' in navigator) {
   const trialSuccess = document.getElementById('trialSuccess');
   const formLoadTime = Date.now();
 
-  // Real-time TradingView username validation
+  // Real-time TradingView username validation with API lookup
   const tvInput = document.getElementById('trialTvUsername');
   const tvError = document.getElementById('tvUsernameError');
 
-  function validateTvUsername(value) {
+  var tvValidationCache = {};
+  var tvValidationTimers = {};
+
+  function validateTvUsernameFormat(value) {
     var v = value.trim();
     if (!v) return '';
     if (/\s/.test(v)) return 'A TradingView felhasználónevek egy szóból állnak — szóközök nem megengedettek.';
@@ -8370,17 +8373,94 @@ if ('serviceWorker' in navigator) {
     return '';
   }
 
+  function setTvFieldState(input, errorEl, state, message) {
+    if (state === 'error') {
+      if (errorEl) { errorEl.textContent = message; errorEl.style.display = 'block'; errorEl.style.color = '#ff4444'; }
+      input.style.borderColor = '#ff4444';
+      input.classList.remove('valid');
+      input.dataset.tvValid = 'false';
+    } else if (state === 'valid') {
+      if (errorEl) { errorEl.textContent = message || ''; errorEl.style.display = message ? 'block' : 'none'; errorEl.style.color = '#3ed598'; }
+      input.style.borderColor = '#3ed598';
+      input.classList.add('valid');
+      input.dataset.tvValid = 'true';
+    } else if (state === 'loading') {
+      if (errorEl) { errorEl.textContent = message || 'TradingView felhasználónév ellenőrzése...'; errorEl.style.display = 'block'; errorEl.style.color = '#ffaa00'; }
+      input.style.borderColor = '#ffaa00';
+      input.classList.remove('valid');
+      input.dataset.tvValid = 'pending';
+    } else {
+      if (errorEl) { errorEl.style.display = 'none'; }
+      input.style.borderColor = '';
+      input.classList.remove('valid');
+      input.dataset.tvValid = '';
+    }
+  }
+
+  function validateTvUsernameApi(input, errorEl) {
+    var value = input.value.trim();
+    var fieldId = input.id;
+
+    // Clear previous timer
+    if (tvValidationTimers[fieldId]) {
+      clearTimeout(tvValidationTimers[fieldId]);
+    }
+
+    // Format check first
+    var formatErr = validateTvUsernameFormat(value);
+    if (formatErr) {
+      setTvFieldState(input, errorEl, 'error', formatErr);
+      return;
+    }
+    if (!value) {
+      setTvFieldState(input, errorEl, 'clear', '');
+      return;
+    }
+
+    // Check cache
+    var cached = tvValidationCache[value.toLowerCase()];
+    if (cached) {
+      if (cached.valid) {
+        setTvFieldState(input, errorEl, 'valid', 'Felhasználónév megerősítve a TradingView-on');
+      } else {
+        setTvFieldState(input, errorEl, 'error', 'Ez a felhasználónév nem létezik a TradingView-on. Kérjük, ellenőrizd a felhasználóneved a tradingview.com/u/' + value + ' oldalon');
+      }
+      return;
+    }
+
+    // Show loading state
+    setTvFieldState(input, errorEl, 'loading', 'TradingView felhasználónév ellenőrzése...');
+
+    // Debounce the API call (600ms after user stops typing)
+    tvValidationTimers[fieldId] = setTimeout(async function() {
+      try {
+        var resp = await fetch('/api/validate-tv-username?username=' + encodeURIComponent(value));
+        var data = await resp.json();
+
+        // Cache the result
+        tvValidationCache[value.toLowerCase()] = data;
+
+        // Only update if the input value hasn't changed during the request
+        if (input.value.trim().toLowerCase() === value.toLowerCase()) {
+          if (data.valid) {
+            setTvFieldState(input, errorEl, 'valid', data.uncertain ? '' : 'Felhasználónév megerősítve a TradingView-on');
+          } else {
+            setTvFieldState(input, errorEl, 'error', 'Ez a felhasználónév nem létezik a TradingView-on. Ellenőrizd a profilod a tradingview.com/u/' + value + ' oldalon');
+          }
+        }
+      } catch (e) {
+        // Network error — fail open but don't show as verified
+        if (input.value.trim().toLowerCase() === value.toLowerCase()) {
+          setTvFieldState(input, errorEl, 'clear', '');
+          input.dataset.tvValid = 'true'; // fail open
+        }
+      }
+    }, 600);
+  }
+
   if (tvInput && tvError) {
     tvInput.addEventListener('input', function() {
-      var err = validateTvUsername(tvInput.value);
-      if (err) {
-        tvError.textContent = err;
-        tvError.style.display = 'block';
-        tvInput.style.borderColor = '#ff4444';
-      } else {
-        tvError.style.display = 'none';
-        tvInput.style.borderColor = '';
-      }
+      validateTvUsernameApi(tvInput, tvError);
     });
 
     // Strip spaces on paste
