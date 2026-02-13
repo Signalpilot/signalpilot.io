@@ -71,18 +71,24 @@ export default async function handler(req, res) {
       return res.status(200).json({ valid: false, reason: 'not_found' });
     }
 
-    // Verify the page actually contains profile-specific content for this user
+    // Verify the page actually contains profile-specific content for this user.
+    // Use case-insensitive matching: TradingView usernames are case-insensitive
+    // but the stored casing may differ from what the user typed (e.g. "axlmob"
+    // vs "AxlMoB"), so a case-sensitive check would incorrectly reject valid users.
+    const lowerTrimmed = trimmed.toLowerCase();
     const hasProfile =
-      body.includes(`/u/${trimmed}/`) ||
-      body.includes(`"username":"${trimmed}"`) ||
-      body.includes(`@${trimmed}`);
+      lowerBody.includes(`/u/${lowerTrimmed}/`) ||
+      lowerBody.includes(`"username":"${lowerTrimmed}"`) ||
+      lowerBody.includes(`@${lowerTrimmed}`);
 
     if (hasProfile) {
       return res.status(200).json({ valid: true, username: trimmed });
     }
 
-    // If we got 200 but can't confirm profile content, fail closed
-    return res.status(200).json({ valid: false, reason: 'unverifiable' });
+    // If we got 200 but can't confirm profile content (e.g. Cloudflare
+    // challenge page), flag as uncertain so the frontend can show a softer
+    // message and still allow the user to proceed after confirmation.
+    return res.status(200).json({ valid: false, uncertain: true, reason: 'unverifiable' });
 
   } catch (error) {
     console.error('TradingView validation error:', error.message);

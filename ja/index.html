@@ -8144,6 +8144,11 @@ if ('serviceWorker' in navigator) {
       input.style.borderColor = '#3ed598';
       input.classList.add('valid');
       input.dataset.tvValid = 'true';
+    } else if (state === 'warn') {
+      if (errorEl) { errorEl.textContent = message || ''; errorEl.style.display = message ? 'block' : 'none'; errorEl.style.color = '#ffaa00'; }
+      input.style.borderColor = '#ffaa00';
+      input.classList.remove('valid');
+      input.dataset.tvValid = 'uncertain';
     } else if (state === 'loading') {
       if (errorEl) { errorEl.textContent = message || 'TradingViewユーザー名を確認中...'; errorEl.style.display = 'block'; errorEl.style.color = '#ffaa00'; }
       input.style.borderColor = '#ffaa00';
@@ -8182,6 +8187,8 @@ if ('serviceWorker' in navigator) {
     if (cached) {
       if (cached.valid) {
         setTvFieldState(input, errorEl, 'valid', 'TradingViewでユーザー名が確認されました');
+      } else if (cached.uncertain) {
+        setTvFieldState(input, errorEl, 'warn', 'Could not verify this username. Please double-check it at tradingview.com/u/' + value);
       } else {
         setTvFieldState(input, errorEl, 'error', 'このユーザー名はTradingViewに存在しません。tradingview.com/u/' + value + ' でご確認ください');
       }
@@ -8207,7 +8214,7 @@ if ('serviceWorker' in navigator) {
           if (data.valid && !data.uncertain) {
             setTvFieldState(input, errorEl, 'valid', 'TradingViewでユーザー名が確認されました');
           } else if (data.uncertain) {
-            setTvFieldState(input, errorEl, 'error', '現在ユーザー名を確認できません。tradingview.com/u/' + value + ' でご確認ください');
+            setTvFieldState(input, errorEl, 'warn', '現在ユーザー名を確認できません。tradingview.com/u/' + value + ' でご確認ください');
           } else {
             setTvFieldState(input, errorEl, 'error', 'このユーザー名はTradingViewに存在しません。tradingview.com/u/' + value + ' でご確認ください');
           }
@@ -8333,13 +8340,15 @@ if ('serviceWorker' in navigator) {
       }
 
       // If not yet validated (e.g. user typed too fast), validate now
-      if (tvField.dataset.tvValid !== 'true') {
-        submitBtn.textContent = 'ユーザー名を確認中...';
+      if (tvField.dataset.tvValid !== 'true' && tvField.dataset.tvValid !== 'uncertain') {
+        submitBtn.textContent = 'Verifying username...';
         try {
           var vResp = await fetch('/api/validate-tv-username?username=' + encodeURIComponent(tvUsername));
           var vData = await vResp.json();
-          tvValidationCache[tvUsername.toLowerCase()] = vData;
-          if (!vData.valid) {
+          if (!vData.uncertain) {
+            tvValidationCache[tvUsername.toLowerCase()] = vData;
+          }
+          if (!vData.valid && !vData.uncertain) {
             setTvFieldState(tvField, tvError, 'error', 'このユーザー名はTradingViewに存在しません。tradingview.com/u/' + tvUsername + ' でご確認ください');
             alert('TradingViewユーザー名 "' + tvUsername + '" は存在しません。\n\n正しいTradingViewユーザー名を入力してください。');
             submitting = false;
@@ -8348,13 +8357,25 @@ if ('serviceWorker' in navigator) {
             tvField.focus();
             return;
           }
-          setTvFieldState(tvField, tvError, 'valid', 'TradingViewでユーザー名が確認されました');
+          if (vData.uncertain) {
+            setTvFieldState(tvField, tvError, 'warn', 'Could not verify this username right now. Please double-check it at tradingview.com/u/' + tvUsername);
+          } else {
+            setTvFieldState(tvField, tvError, 'valid', 'TradingViewでユーザー名が確認されました');
+          }
         } catch (e) {
-          // Fail closed — don't allow submission without verification
-          alert('Could not verify your TradingView username. Please check your connection and try again.');
+          // Network error — allow submission with confirmation
+          setTvFieldState(tvField, tvError, 'warn', 'Could not verify username. Please double-check it at tradingview.com/u/' + tvUsername);
+        }
+      }
+
+      // If username could not be verified, let user confirm and proceed
+      if (tvField.dataset.tvValid === 'uncertain') {
+        var proceed = confirm('We could not automatically verify "' + tvUsername + '" on TradingView.\n\nPlease make sure this is your exact TradingView username.\nCheck at: tradingview.com/u/' + tvUsername + '\n\nClick OK if the username is correct, or Cancel to fix it.');
+        if (!proceed) {
           submitting = false;
           submitBtn.disabled = false;
           submitBtn.textContent = originalText;
+          tvField.focus();
           return;
         }
       }
