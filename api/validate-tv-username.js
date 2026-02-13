@@ -30,35 +30,30 @@ export default async function handler(req, res) {
     return res.status(200).json({ valid: false, reason: 'invalid_format' });
   }
 
+  const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+
   try {
     // Check if the TradingView profile page exists
     const tvResponse = await fetch(`https://www.tradingview.com/u/${encodeURIComponent(trimmed)}/`, {
       method: 'HEAD',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; SignalPilot/1.0)',
-        'Accept': 'text/html',
-      },
+      headers: { 'User-Agent': UA, 'Accept': 'text/html' },
       redirect: 'manual',
     });
 
-    // TradingView returns 200 for existing profiles
-    // Returns 302/404 for non-existing ones
-    if (tvResponse.status === 200) {
+    // TradingView returns 2xx for existing profiles, 302/404 for non-existing
+    if (tvResponse.status >= 200 && tvResponse.status < 300) {
       return res.status(200).json({ valid: true, username: trimmed });
     }
 
-    // If HEAD doesn't work reliably, fall back to GET
-    if (tvResponse.status === 405 || tvResponse.status === 403) {
+    // Fall back to GET if HEAD doesn't return 2xx
+    if (tvResponse.status !== 404) {
       const getResponse = await fetch(`https://www.tradingview.com/u/${encodeURIComponent(trimmed)}/`, {
         method: 'GET',
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (compatible; SignalPilot/1.0)',
-          'Accept': 'text/html',
-        },
+        headers: { 'User-Agent': UA, 'Accept': 'text/html' },
         redirect: 'manual',
       });
 
-      if (getResponse.status === 200) {
+      if (getResponse.status >= 200 && getResponse.status < 300) {
         return res.status(200).json({ valid: true, username: trimmed });
       }
 
