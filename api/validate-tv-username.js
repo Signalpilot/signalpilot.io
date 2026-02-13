@@ -33,38 +33,60 @@ export default async function handler(req, res) {
   const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
   try {
-    // Check if the TradingView profile page exists
+    // Use GET with redirect following — HEAD is unreliable with CDNs (Cloudflare
+    // returns 200 for all HEAD requests regardless of whether the user exists).
     const tvResponse = await fetch(`https://www.tradingview.com/u/${encodeURIComponent(trimmed)}/`, {
-      method: 'HEAD',
-      headers: { 'User-Agent': UA, 'Accept': 'text/html' },
-      redirect: 'manual',
+      method: 'GET',
+      headers: {
+        'User-Agent': UA,
+        'Accept': 'text/html,application/xhtml+xml',
+        'Accept-Language': 'en-US,en;q=0.9',
+      },
+      redirect: 'follow',
     });
 
-    // TradingView returns 2xx for existing profiles, 302/404 for non-existing
-    if (tvResponse.status >= 200 && tvResponse.status < 300) {
-      return res.status(200).json({ valid: true, username: trimmed });
-    }
-
-    // Fall back to GET if HEAD doesn't return 2xx
-    if (tvResponse.status !== 404) {
-      const getResponse = await fetch(`https://www.tradingview.com/u/${encodeURIComponent(trimmed)}/`, {
-        method: 'GET',
-        headers: { 'User-Agent': UA, 'Accept': 'text/html' },
-        redirect: 'manual',
-      });
-
-      if (getResponse.status >= 200 && getResponse.status < 300) {
-        return res.status(200).json({ valid: true, username: trimmed });
-      }
-
+    // TradingView returns 404 for non-existent profiles
+    if (tvResponse.status === 404) {
       return res.status(200).json({ valid: false, reason: 'not_found' });
     }
 
-    return res.status(200).json({ valid: false, reason: 'not_found' });
+    // Any non-2xx response means the profile doesn't exist or something went wrong
+    if (tvResponse.status < 200 || tvResponse.status >= 300) {
+      return res.status(200).json({ valid: false, reason: 'not_found' });
+    }
+
+    // Got 200 — read the body to verify this is a real profile page,
+    // not a Cloudflare challenge, soft-404, or generic error page
+    const body = await tvResponse.text();
+    const lowerBody = body.toLowerCase();
+
+    // Check for "not found" indicators (soft 404 pages that return HTTP 200)
+    const isNotFound =
+      lowerBody.includes('page not found') ||
+      lowerBody.includes('page_not_found') ||
+      lowerBody.includes('"error":404') ||
+      tvResponse.url.includes('/error');
+
+    if (isNotFound) {
+      return res.status(200).json({ valid: false, reason: 'not_found' });
+    }
+
+    // Verify the page actually contains profile-specific content for this user
+    const hasProfile =
+      body.includes(`/u/${trimmed}/`) ||
+      body.includes(`"username":"${trimmed}"`) ||
+      body.includes(`@${trimmed}`);
+
+    if (hasProfile) {
+      return res.status(200).json({ valid: true, username: trimmed });
+    }
+
+    // If we got 200 but can't confirm profile content, fail closed
+    return res.status(200).json({ valid: false, reason: 'unverifiable' });
 
   } catch (error) {
     console.error('TradingView validation error:', error.message);
-    // On network error, allow the submission (fail open) but flag it
-    return res.status(200).json({ valid: true, uncertain: true, error: 'validation_unavailable' });
+    // Fail closed — do not mark as valid when we cannot verify
+    return res.status(200).json({ valid: false, uncertain: true, error: 'validation_unavailable' });
   }
 }
