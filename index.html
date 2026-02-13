@@ -8073,6 +8073,11 @@ if ('serviceWorker' in navigator) {
         }
       }
 
+      // Lock out immediately BEFORE sending — prevents duplicates even if
+      // the webhook is slow, the page refreshes, or user opens multiple tabs
+      localStorage.setItem('sp_trial_submitted', Date.now());
+      submitBtn.textContent = 'Submitting...';
+
       const formData = {
         email: email,
         tradingview_username: tvUsername,
@@ -8082,25 +8087,25 @@ if ('serviceWorker' in navigator) {
       };
 
       try {
-        // Send to your backend endpoint (you'll need to set this up)
-        // For now, we'll use a simple webhook or email service
+        // Send webhook with keepalive so it completes even during redirect
         const response = await fetch('https://hook.eu1.make.com/7klx329gnfpknko32nubiu43nadwoouz', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify(formData),
+          keepalive: true
         });
 
         if (response.ok) {
-          // Remember submission to prevent duplicates
-          localStorage.setItem('sp_trial_submitted', Date.now());
           // Redirect to thank you page for Google Ads conversion tracking
           window.location.href = '/trial-thanks.html';
         } else {
           throw new Error('Submission failed');
         }
       } catch (error) {
+        // Remove lock only on genuine failure so they can retry
+        localStorage.removeItem('sp_trial_submitted');
         alert('Something went wrong. Please try again or email support@signalpilot.io');
         tvConfirmed = false;
         submitting = false;
