@@ -4,399 +4,272 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Post 409 — ICT Concepts Overview | Carousel Preview</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --bg-dark: #0a0a0f;
       --accent-blue: #4a90d9;
       --accent-gold: #c9a962;
       --accent-red: #d94a4a;
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.85);
-      --cine-text: rgba(229, 229, 229, 0.9);
-      --cine-subtle: rgba(163, 163, 163, 0.7);
+      --accent-green: #4ad97a;
+      --text-primary: #e8e8e8;
+      --text-secondary: #a0a0a0;
+      --text-dim: #6a6a6a;
+      --video-opacity: 0.08;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
-      background: #111;
-      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
       color: var(--text-primary);
-      padding: 2rem;
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
+      padding: 40px 20px;
     }
 
-    .controls {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 1000;
+    .controls-bar {
       display: flex;
-      gap: 1rem;
+      justify-content: center;
+      gap: 24px;
+      padding: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
       align-items: center;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
     }
 
-    .controls label {
-      font-size: 0.875rem;
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .control-group label {
+      font-size: 14px;
       color: var(--text-secondary);
     }
 
-    .controls select,
-    .controls button {
-      background: var(--bg-dark);
+    .control-group select,
+    .control-group input[type="range"] {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background: #1a1a24;
       color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: inherit;
+      font-size: 14px;
     }
 
-    .controls button:hover {
-      background: rgba(255, 255, 255, 0.1);
+    .control-group input[type="range"] {
+      width: 100px;
+    }
+
+    #export-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      background: var(--accent-gold);
+      color: var(--bg-dark);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    #export-btn:hover {
+      background: #d9b972;
     }
 
     .page-title {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 40px;
       font-family: 'Cormorant Garamond', serif;
-    }
-
-    .page-title h1 {
-      font-size: 2rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-
-    .page-title p {
+      font-size: clamp(20px, 3.7cqw, 40px);
+      font-weight: 400;
       color: var(--text-secondary);
-      font-size: 0.875rem;
     }
 
     .carousel-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+      gap: 32px;
       max-width: 1800px;
       margin: 0 auto;
-      padding-bottom: 4rem;
+      padding: 0 16px;
     }
 
     .slide-wrapper {
+      container-type: inline-size;
       display: flex;
       flex-direction: column;
       align-items: center;
-      container-type: inline-size;
     }
 
     .slide-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-gold);
-      margin-bottom: 0.75rem;
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      text-align: center;
     }
 
     .slide {
+      position: relative;
       width: 100%;
       max-width: 540px;
       aspect-ratio: 4 / 5;
-      position: relative;
+      border-radius: 12px;
       overflow: hidden;
       background: var(--bg-dark);
-      border-radius: 4px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      container-type: inline-size;
     }
 
-    .slide-bg {
+    .bg-video {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-    }
-
-    .slide-bg video {
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      opacity: 0.08;
+      opacity: var(--video-opacity);
+      pointer-events: none;
     }
-
-    .slide.bg-black .slide-bg video { opacity: 0; }
 
     .slide-content {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      position: relative;
       z-index: 2;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 10%;
-    }
-
-    /* Slide 1 - Cinematic Hook (NEUTRAL) */
-    .slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%);
-    }
-
-    .slide-1::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .slide-1 .slide-content {
       align-items: center;
+      padding: clamp(32px, 8cqw, 64px);
       text-align: center;
-      z-index: 3;
     }
 
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
-      margin-bottom: 8%;
+    .slide-number {
+      position: absolute;
+      top: clamp(12px, 3cqw, 24px);
+      left: clamp(12px, 3cqw, 24px);
+      font-size: clamp(9px, 2cqw, 18px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
     }
 
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+    .brand-mark {
+      position: absolute;
+      bottom: clamp(12px, 3cqw, 24px);
+      right: clamp(12px, 3cqw, 24px);
+      font-size: clamp(8px, 2cqw, 16px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .slide-icon {
+      font-size: clamp(36px, 9cqw, 72px);
+      margin-bottom: clamp(14px, 4cqw, 28px);
+    }
+
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 6cqw, 28px);
       font-weight: 600;
+      margin-bottom: clamp(12px, 3cqw, 24px);
       line-height: 1.2;
-      color: var(--cine-text);
-      margin-bottom: 4%;
+      overflow-wrap: break-word;
     }
 
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
-      margin-bottom: 4%;
+    .slide-title.large {
+      font-size: clamp(16px, 7cqw, 32px);
     }
 
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cine-subtle);
-      line-height: 1.6;
-    }
-
-    .slide-1 .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163,163,163,0.4);
-    }
-
-    /* Standard text slides */
-    .slide-content .header {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.75rem, 2.3cqw, 1.25rem);
-      font-weight: 500;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 3%;
-    }
-
-    .slide-content .text {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.85rem, 2.6cqw, 1.4rem);
+    .slide-body {
+      font-size: clamp(12px, 3cqw, 24px);
+      color: var(--text-secondary);
       line-height: 1.7;
-      color: var(--text-secondary);
+      max-width: clamp(240px, 62cqw, 480px);
     }
 
-    .slide-content .text em {
-      font-style: italic;
+    .content-box {
+      width: 100%;
+      max-width: clamp(255px, 66cqw, 510px);
+      border-radius: clamp(12px, 3cqw, 24px);
+      padding: clamp(21px, 5cqw, 42px);
+      margin: clamp(12px, 3cqw, 24px) 0;
+      text-align: left;
+    }
+
+    .content-box.blue {
+      background: rgba(74, 144, 217, 0.1);
+      border: 2px solid rgba(74, 144, 217, 0.4);
+    }
+
+    .content-box.gold {
+      background: rgba(201, 169, 98, 0.1);
+      border: 2px solid rgba(201, 169, 98, 0.4);
+    }
+
+    .content-box.green {
+      background: rgba(74, 217, 122, 0.1);
+      border: 2px solid rgba(74, 217, 122, 0.4);
+    }
+
+    .content-box.red {
+      background: rgba(217, 74, 74, 0.1);
+      border: 2px solid rgba(217, 74, 74, 0.4);
+    }
+
+    .content-box.purple {
+      background: rgba(147, 74, 217, 0.1);
+      border: 2px solid rgba(147, 74, 217, 0.4);
+    }
+
+    .box-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(15px, 4cqw, 30px);
+      font-weight: 600;
+      margin-bottom: clamp(9px, 2cqw, 18px);
+    }
+
+    .content-box.blue .box-title {
+      color: var(--accent-blue);
+    }
+
+    .content-box.gold .box-title {
       color: var(--accent-gold);
     }
 
-    .slide-content .text .highlight {
-      color: var(--text-primary);
-      font-weight: 400;
+    .content-box.green .box-title {
+      color: var(--accent-green);
     }
 
-    .slide-content .text .red { color: var(--accent-red); }
-    .slide-content .text .blue { color: var(--accent-blue); }
+    .content-box.red .box-title {
+      color: var(--accent-red);
+    }
 
-    .step-list {
-      list-style: none;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
-      line-height: 2;
+    .content-box.purple .box-title {
+      color: #934ad9;
+    }
+
+    .box-list {
+      font-size: clamp(11px, 3cqw, 22px);
       color: var(--text-secondary);
-    }
-
-    .step-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 2%;
-      margin-bottom: 1%;
-    }
-
-    .step-list .num {
-      color: var(--accent-gold);
-      font-weight: 500;
-      min-width: 1.5rem;
-    }
-
-    .arrow-list {
-      list-style: none;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
-      line-height: 2;
-      color: var(--text-secondary);
-    }
-
-    .arrow-list li {
-      display: flex;
-      align-items: center;
-      gap: 2%;
-    }
-
-    .arrow-list .arrow { color: var(--accent-blue); }
-
-    .quote-slide .slide-content {
-      align-items: center;
-      text-align: center;
-    }
-
-    .quote-slide .quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.2cqw, 1.75rem);
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.5;
-    }
-
-    /* Single-slide quote card (standalone image, not carousel) */
-    .quote-card-slide .slide-content {
-      align-items: center;
-      text-align: center;
-      z-index: 3;
-    }
-
-    .quote-card-slide .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
-      margin-bottom: 6%;
-    }
-
-    .quote-card-slide .quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 3.8cqw, 2.2rem);
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.5;
-      margin-bottom: 5%;
-      max-width: 85%;
-    }
-
-    .quote-card-slide .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
-      margin-bottom: 4%;
-    }
-
-    .quote-card-slide .quote-title {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cine-subtle);
-      line-height: 1.6;
-    }
-
-    .quote-card-slide .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163,163,163,0.4);
-    }
-
-    .cta-slide .slide-content {
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-slide .cta-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.2cqw, 1.75rem);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 4%;
-    }
-
-    .cta-slide .cta-button {
-      display: inline-block;
-      padding: 2% 5%;
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-
-    .cta-slide .cta-brand {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 1.8cqw, 0.95rem);
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--cine-subtle);
-      margin-top: 5%;
-    }
-
-    .cta-slide .link-hint {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      color: var(--text-secondary);
-      margin-top: 3%;
+      line-height: 1.8;
     }
 
     /* Export mode */
     body.export-mode {
       padding: 0;
-      background: transparent;
+      background: #000;
     }
 
-    body.export-mode .controls,
+    body.export-mode .controls-bar,
     body.export-mode .page-title,
     body.export-mode .slide-label {
       display: none;
@@ -405,6 +278,7 @@
     body.export-mode .carousel-grid {
       display: block;
       padding: 0;
+      max-width: none;
     }
 
     body.export-mode .slide-wrapper {
@@ -413,260 +287,344 @@
 
     body.export-mode .slide-wrapper.active {
       display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
 
     body.export-mode .slide {
       width: 1080px;
       height: 1350px;
       max-width: none;
+      aspect-ratio: auto;
       border-radius: 0;
-      box-shadow: none;
     }
 
-    @media (max-width: 900px) {
-      .carousel-grid { grid-template-columns: 1fr; }
-      .controls {
-        position: static;
-        margin-bottom: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+    body.export-mode .slide-content {
+      padding: 64px;
+    }
+
+    body.export-mode .slide-number {
+      top: 24px;
+      left: 24px;
+      font-size: 18px;
+    }
+
+    body.export-mode .brand-mark {
+      bottom: 24px;
+      right: 24px;
+      font-size: 16px;
+    }
+
+    body.export-mode .slide-icon {
+      font-size: 72px;
+      margin-bottom: 28px;
+    }
+
+    body.export-mode .slide-title {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+
+    body.export-mode .slide-title.large {
+      font-size: 52px;
+    }
+
+    body.export-mode .slide-body {
+      font-size: 24px;
+      max-width: 480px;
+    }
+
+    body.export-mode .content-box {
+      max-width: 510px;
+      border-radius: 24px;
+      padding: 42px;
+      margin: 24px 0;
+    }
+
+    body.export-mode .box-title {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    body.export-mode .box-list {
+      font-size: 22px;
+    }
+
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    body.export-mode .export-nav {
+      display: flex;
+    }
+
+    .export-nav button {
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .export-nav .slide-indicator {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
-  <div class="controls">
-    <label>
-      Background:
-      <select id="bg-toggle">
+  <div class="controls-bar">
+    <div class="control-group">
+      <label for="bg-select">Background</label>
+      <select id="bg-select">
         <option value="starfield">Starfield</option>
-        <option value="black">Pure Black</option>
+        <option value="none">None</option>
       </select>
-    </label>
-    <label>
-      Starfield Opacity:
-      <select id="opacity-control">
-        <option value="0.03">3%</option>
-        <option value="0.05">5%</option>
-        <option value="0.08" selected>8%</option>
-        <option value="0.12">12%</option>
-        <option value="0.15">15%</option>
-      </select>
-    </label>
+    </div>
+    <div class="control-group">
+      <label for="opacity-slider">Opacity</label>
+      <input type="range" id="opacity-slider" min="0" max="30" value="8">
+    </div>
     <button id="export-btn">Export Mode</button>
   </div>
 
-  <div class="page-title">
-    <h1>Post 409 — ICT Concepts Overview</h1>
-    <p>Instagram Carousel &bull; 8 Slides &bull; 1080&times;1350px</p>
-  </div>
+  <div class="page-title">Post 409 — 10 Slides</div>
 
   <div class="carousel-grid">
-
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <span class="slide-label">Slide 1 — Cover</span>
       <div class="slide slide-1">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="cine-label">Explore</div>
-          <div class="hook-main">ICT Concepts Overview</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">ICT Concepts overview:</p>
-          <div class="cine-logo">Signal Pilot</div>
+          <span class="slide-number">01 / 10</span>
+          <div class="slide-icon">🎯</div>
+          <h2 class="slide-title large">ICT CONCEPTS OVERVIEW</h2>
+          <p class="slide-body">Smart money concepts that revolutionized retail trading</p>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — The Concept</span>
+      <span class="slide-label">Slide 2 — Order Blocks</span>
       <div class="slide slide-2">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <p class="header">The Concept</p>
-          <p class="text">Smart money concepts that revolutionized retail trading.<br>
-ORDER BLOCKS<br>
-Institutional entry zones<br>
-Last candle before impulsive move<br>
-FAIR VALUE GAPS (FVG)<br>
-Imbalances in price<br>
-Areas price may revisit</p>
+          <span class="slide-number">02 / 10</span>
+          <div class="content-box blue">
+            <div class="box-title">📦 ORDER BLOCKS</div>
+            <div class="box-list">Institutional entry zones<br><br>Last candle before impulsive move<br><br>Areas of unfilled orders</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — How It Works</span>
+      <span class="slide-label">Slide 3 — Fair Value Gaps</span>
       <div class="slide slide-3">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <p class="header">How It Works</p>
-          <p class="text">LIQUIDITY POOLS<br>
-Where stops cluster<br>
-Above highs, below lows<br>
-KILL ZONES<br>
-High-probability time windows<br>
-London, NY open, etc.<br>
-PREMIUM/DISCOUNT<br>
-Value zones within ranges<br>
-Buy discount, sell premium</p>
+          <span class="slide-number">03 / 10</span>
+          <div class="content-box gold">
+            <div class="box-title">📊 FAIR VALUE GAPS (FVG)</div>
+            <div class="box-list">Imbalances in price<br><br>Areas price may revisit<br><br>Gap between candles</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Reading The Signals</span>
+      <span class="slide-label">Slide 4 — Liquidity Pools</span>
       <div class="slide slide-4">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <p class="header">Reading The Signals</p>
-          <p class="text">OPTIMAL TRADE ENTRY (OTE)<br>
-62-79% Fib zone<br>
-Favorable risk:reward</p>
+          <span class="slide-number">04 / 10</span>
+          <div class="content-box red">
+            <div class="box-title">💧 LIQUIDITY POOLS</div>
+            <div class="box-list">Where stops cluster<br><br>Above highs, below lows<br><br>Targets for smart money</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Configuration</span>
+      <span class="slide-label">Slide 5 — Kill Zones</span>
       <div class="slide slide-5">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <p class="header">Configuration</p>
-          <p class="text">These are CONCEPTS, not signals<br>
-Require practice and context<br>
-Part of analysis, not the whole<br>
-Education Hub covers each in depth</p>
+          <span class="slide-number">05 / 10</span>
+          <div class="content-box purple">
+            <div class="box-title">⏰ KILL ZONES</div>
+            <div class="box-list">High-probability time windows<br><br>London, NY open, etc.<br><br>When institutions are active</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — Pro Tips</span>
+      <span class="slide-label">Slide 6 — Premium/Discount</span>
       <div class="slide slide-6">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <p class="header">Pro Tips</p>
-          <p class="text">Foundation before application.<br>
-Free lesson - Link in bio<br>
-Educational only. Not financial advice.</p>
+          <span class="slide-number">06 / 10</span>
+          <div class="content-box green">
+            <div class="box-title">💰 PREMIUM/DISCOUNT</div>
+            <div class="box-list">Value zones within ranges<br><br>Buy discount (below 50%)<br><br>Sell premium (above 50%)</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="7">
-      <span class="slide-label">Slide 7 — The Insight</span>
-      <div class="slide slide-7 quote-slide">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
+      <span class="slide-label">Slide 7 — OTE</span>
+      <div class="slide slide-7">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <p class="quote">&ldquo;Part of analysis, not the whole&rdquo;</p>
+          <span class="slide-number">07 / 10</span>
+          <div class="content-box blue">
+            <div class="box-title">🎯 OPTIMAL TRADE ENTRY (OTE)</div>
+            <div class="box-list">62-79% Fib zone<br><br>Favorable risk:reward<br><br>Sweet spot for entries</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="8">
-      <span class="slide-label">Slide 8 — CTA</span>
-      <div class="slide slide-8 cta-slide">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
+      <span class="slide-label">Slide 8 — Important</span>
+      <div class="slide slide-8">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <p class="cta-text">Learn More</p>
-          <a href="#" class="cta-button">Visit Signal Pilot</a>
-          <p class="cta-brand">Signal Pilot</p>
-          <p class="link-hint">Link in bio</p>
+          <span class="slide-number">08 / 10</span>
+          <div class="content-box gold">
+            <div class="box-title">⚠️ IMPORTANT</div>
+            <div class="box-list">These are CONCEPTS, not signals<br><br>Require practice and context<br><br>Part of analysis, not the whole<br><br>Education Hub covers each in depth</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
+    <div class="slide-wrapper" data-slide="9">
+      <span class="slide-label">Slide 9 — Chart</span>
+      <div class="slide slide-9">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <span class="slide-number">09 / 10</span>
+          <div class="slide-icon">📈</div>
+          <p class="slide-body" style="font-style: italic; color: var(--accent-blue);">[ All ICT concepts on one chart ]</p>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-wrapper" data-slide="10">
+      <span class="slide-label">Slide 10 — CTA</span>
+      <div class="slide slide-10">
+        <video class="bg-video" autoplay muted loop playsinline>
+          <source src="../../video/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <span class="slide-number">10 / 10</span>
+          <div class="slide-icon">📖</div>
+          <h2 class="slide-title">Foundation Before Application</h2>
+          <p class="slide-body">Free lesson - Link in bio</p>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="export-nav">
+    <button onclick="prevSlide()">← Previous</button>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 10</span>
+    <button onclick="nextSlide()">Next →</button>
   </div>
 
   <script>
-    const bgToggle = document.getElementById('bg-toggle');
-    const opacityControl = document.getElementById('opacity-control');
-    const slides = document.querySelectorAll('.slide');
-    const videos = document.querySelectorAll('.slide-bg video');
-
-    bgToggle.addEventListener('change', (e) => {
-      slides.forEach(slide => {
-        if (e.target.value === 'black') {
-          slide.classList.add('bg-black');
-        } else {
-          slide.classList.remove('bg-black');
-        }
-      });
-    });
-
-    opacityControl.addEventListener('change', (e) => {
-      videos.forEach(video => {
-        video.style.opacity = e.target.value;
-      });
-    });
-
+    const bgSelect = document.getElementById('bg-select');
+    const opacitySlider = document.getElementById('opacity-slider');
     const exportBtn = document.getElementById('export-btn');
+    const videos = document.querySelectorAll('.bg-video');
     const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let currentSlide = 0;
     let exportMode = false;
-    let currentExportSlide = 0;
 
-    exportBtn.addEventListener('click', () => {
+    bgSelect.addEventListener('change', (e) => {
+      videos.forEach(v => v.style.display = e.target.value === 'none' ? 'none' : 'block');
+    });
+
+    opacitySlider.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
+    });
+
+    exportBtn.addEventListener('click', toggleExportMode);
+
+    function toggleExportMode() {
       exportMode = !exportMode;
       document.body.classList.toggle('export-mode', exportMode);
-
       if (exportMode) {
-        exportBtn.textContent = 'Exit Export (\u2190/\u2192 to navigate)';
-        currentExportSlide = 0;
-        updateExportSlide();
-      } else {
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
+        currentSlide = 0;
+        updateExportView();
       }
-    });
+    }
 
-    function updateExportSlide() {
-      slideWrappers.forEach((w, i) => {
-        w.classList.toggle('active', i === currentExportSlide);
+    function updateExportView() {
+      slideWrappers.forEach((wrapper, i) => {
+        wrapper.classList.toggle('active', i === currentSlide);
       });
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slideWrappers.length;
+      updateExportView();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+      updateExportView();
     }
 
     document.addEventListener('keydown', (e) => {
       if (!exportMode) return;
-
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'ArrowLeft') {
-        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'Escape') {
-        exportMode = false;
-        document.body.classList.remove('export-mode');
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') toggleExportMode();
     });
   </script>
 </body>
