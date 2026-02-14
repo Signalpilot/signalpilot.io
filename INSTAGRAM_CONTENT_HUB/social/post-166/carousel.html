@@ -3,25 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 166 — MEAN REVERSION (Education) | Carousel Preview</title>
+  <title>Post 166 — Mean Reversion Chart | Carousel Preview</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg-dark: #0a0a0f;
       --accent-blue: #4a90d9;
       --accent-gold: #c9a962;
+      --accent-green: #4ad97a;
       --accent-red: #d94a4a;
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.85);
-      --cine-text: rgba(229, 229, 229, 0.9);
-      --cine-subtle: rgba(163, 163, 163, 0.7);
+      --accent-teal: #4ad9d9;
+      --text-primary: #e8e6e3;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: #6b6965;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       background: #111;
@@ -61,10 +66,6 @@
       font-family: inherit;
     }
 
-    .controls button:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
     .page-title {
       text-align: center;
       margin-bottom: 2rem;
@@ -92,10 +93,10 @@
     }
 
     .slide-wrapper {
+      container-type: inline-size;
       display: flex;
       flex-direction: column;
       align-items: center;
-      container-type: inline-size;
     }
 
     .slide-label {
@@ -119,278 +120,168 @@
 
     .slide-bg {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 1;
     }
 
     .slide-bg video {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       opacity: 0.08;
     }
 
-    .slide.bg-black .slide-bg video { opacity: 0; }
+    .slide.bg-black .slide-bg video {
+      opacity: 0;
+    }
 
     .slide-content {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 2;
       display: flex;
       flex-direction: column;
+      padding: 8%;
+    }
+
+    .slide-number {
+      font-size: clamp(0.45rem, 1.3cqw, 0.6rem);
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      margin-bottom: auto;
+    }
+
+    .brand-mark {
+      font-size: clamp(0.4rem, 1.2cqw, 0.55rem);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-top: auto;
+      text-align: center;
+    }
+
+    .center-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       justify-content: center;
-      padding: 10%;
-    }
-
-    /* Slide 1 - Cinematic Hook (NEUTRAL) */
-    .slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%);
-    }
-
-    .slide-1::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .slide-1 .slide-content {
       align-items: center;
       text-align: center;
-      z-index: 3;
     }
 
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
-      margin-bottom: 8%;
-    }
-
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: var(--cine-text);
-      margin-bottom: 4%;
-    }
-
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
-      margin-bottom: 4%;
-    }
-
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cine-subtle);
-      line-height: 1.6;
-    }
-
-    .slide-1 .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163,163,163,0.4);
-    }
-
-    /* Standard text slides */
-    .slide-content .header {
+    .slide-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.75rem, 2.3cqw, 1.25rem);
-      font-weight: 500;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 3%;
-    }
-
-    .slide-content .text {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.85rem, 2.6cqw, 1.4rem);
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
-
-    .slide-content .text em {
-      font-style: italic;
-      color: var(--accent-gold);
-    }
-
-    .slide-content .text .highlight {
+      font-size: clamp(1.2rem, 4.2cqw, 2rem);
+      font-weight: 600;
+      line-height: 1.1;
       color: var(--text-primary);
-      font-weight: 400;
+      margin-bottom: 3%;
+      overflow-wrap: break-word;
     }
 
-    .slide-content .text .red { color: var(--accent-red); }
-    .slide-content .text .blue { color: var(--accent-blue); }
+    .slide-title .highlight {
+      color: var(--accent-teal);
+    }
 
-    .step-list {
-      list-style: none;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
-      line-height: 2;
+    .subtitle {
+      font-size: clamp(0.65rem, 2.2cqw, 1rem);
+      font-weight: 400;
       color: var(--text-secondary);
     }
 
-    .step-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 2%;
+    .reversion-card {
+      background: linear-gradient(135deg, rgba(74, 217, 217, 0.15) 0%, rgba(74, 217, 217, 0.05) 100%);
+      border: 1px solid rgba(74, 217, 217, 0.3);
+      border-radius: 12px;
+      padding: 4%;
+      width: 100%;
+    }
+
+    .reversion-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.9rem, 3cqw, 1.4rem);
+      font-weight: 600;
+      margin-bottom: 3%;
+      color: var(--accent-teal);
+    }
+
+    .reversion-card .feature-list li::before {
+      color: var(--accent-teal);
+    }
+
+    .reversion-card.overbought {
+      background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%);
+      border-color: rgba(217, 74, 74, 0.3);
+    }
+
+    .reversion-card.overbought h3 {
+      color: var(--accent-red);
+    }
+
+    .reversion-card.overbought .feature-list li::before {
+      color: var(--accent-red);
+    }
+
+    .reversion-card.oversold {
+      background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%);
+      border-color: rgba(74, 217, 122, 0.3);
+    }
+
+    .reversion-card.oversold h3 {
+      color: var(--accent-green);
+    }
+
+    .reversion-card.oversold .feature-list li::before {
+      color: var(--accent-green);
+    }
+
+    .feature-list {
+      list-style: none;
+      text-align: left;
+    }
+
+    .feature-list li {
+      font-size: clamp(0.55rem, 1.8cqw, 0.8rem);
+      color: var(--text-primary);
+      padding: 1.5% 0;
+      padding-left: 4%;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .feature-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent-teal);
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 4.2cqw, 2rem);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2%;
+      line-height: 1.2;
+    }
+
+    .cta-title .emphasis {
+      color: var(--accent-teal);
+    }
+
+    .cta-text {
+      font-size: clamp(0.6rem, 2cqw, 0.9rem);
+      color: var(--text-secondary);
       margin-bottom: 1%;
     }
 
-    .step-list .num {
-      color: var(--accent-gold);
-      font-weight: 500;
-      min-width: 1.5rem;
-    }
-
-    .arrow-list {
-      list-style: none;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
-      line-height: 2;
-      color: var(--text-secondary);
-    }
-
-    .arrow-list li {
-      display: flex;
-      align-items: center;
-      gap: 2%;
-    }
-
-    .arrow-list .arrow { color: var(--accent-blue); }
-
-    .quote-slide .slide-content {
-      align-items: center;
-      text-align: center;
-    }
-
-    .quote-slide .quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.2cqw, 1.75rem);
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.5;
-    }
-
-    /* Single-slide quote card (standalone image, not carousel) */
-    .quote-card-slide .slide-content {
-      align-items: center;
-      text-align: center;
-      z-index: 3;
-    }
-
-    .quote-card-slide .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
-      margin-bottom: 6%;
-    }
-
-    .quote-card-slide .quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 3.8cqw, 2.2rem);
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.5;
-      margin-bottom: 5%;
-      max-width: 85%;
-    }
-
-    .quote-card-slide .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
-      margin-bottom: 4%;
-    }
-
-    .quote-card-slide .quote-title {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cine-subtle);
-      line-height: 1.6;
-    }
-
-    .quote-card-slide .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163,163,163,0.4);
-    }
-
-    .cta-slide .slide-content {
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-slide .cta-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.2cqw, 1.75rem);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 4%;
-    }
-
-    .cta-slide .cta-button {
-      display: inline-block;
-      padding: 2% 5%;
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-
-    .cta-slide .cta-brand {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 1.8cqw, 0.95rem);
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--cine-subtle);
-      margin-top: 5%;
-    }
-
-    .cta-slide .link-hint {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      color: var(--text-secondary);
-      margin-top: 3%;
-    }
-
-    /* Export mode */
     body.export-mode {
       padding: 0;
       background: transparent;
@@ -424,7 +315,10 @@
     }
 
     @media (max-width: 900px) {
-      .carousel-grid { grid-template-columns: 1fr; }
+      .carousel-grid {
+        grid-template-columns: 1fr;
+      }
+
       .controls {
         position: static;
         margin-bottom: 1.5rem;
@@ -432,19 +326,93 @@
         flex-wrap: wrap;
       }
     }
+  
+    
+    /* ═══ Slide 1 - Cinematic Hook (NEUTRAL) ═══ */
+    .slide-1 {
+      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%) !important;
+    }
+
+    .slide-1::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+
+    .slide-1 .slide-bg,
+    .slide-1 .bg-video,
+    .slide-1 .video-bg,
+    .slide-1 video {
+      display: none !important;
+    }
+
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .slide-1 .cine-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(163, 163, 163, 0.9);
+      margin-bottom: 8%;
+    }
+
+    .slide-1 .hook-main {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 4%;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .slide-1 .cine-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
+      margin-bottom: 4%;
+    }
+
+    .slide-1 .hook-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: rgba(163, 163, 163, 0.4);
+      line-height: 1.6;
+    }
+
+    .slide-1 .cine-logo {
+      position: absolute;
+      bottom: 8%;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(163, 163, 163, 0.4);
+    }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label>
-      Background:
+    <label>Background:
       <select id="bg-toggle">
         <option value="starfield">Starfield</option>
         <option value="black">Pure Black</option>
       </select>
     </label>
-    <label>
-      Starfield Opacity:
+    <label>Opacity:
       <select id="opacity-control">
         <option value="0.03">3%</option>
         <option value="0.05">5%</option>
@@ -457,8 +425,8 @@
   </div>
 
   <div class="page-title">
-    <h1>Post 166 — MEAN REVERSION (Education)</h1>
-    <p>Instagram Carousel &bull; 8 Slides &bull; 1080&times;1350px</p>
+    <h1>Post 166 — Mean Reversion Chart</h1>
+    <p>Instagram Carousel • 5 Slides • 1080×1350px</p>
   </div>
 
   <div class="carousel-grid">
@@ -467,137 +435,109 @@
       <span class="slide-label">Slide 1 — Cinematic Hook</span>
       <div class="slide slide-1">
         <div class="slide-content">
-          <div class="cine-label">Learn</div>
-          <div class="hook-main">MEAN REVERSION (Education)</div>
+          <div class="cine-label">LEARN</div>
+          <div class="hook-main">Mean Reversion</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">Mean reversion: The idea that price returns to average.</p>
+          <p class="hook-sub"></p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — The Problem</span>
-      <div class="slide slide-2">
+      <span class="slide-label">Slide 2 — Concept</span>
+      <div class="slide">
         <div class="slide-bg">
           <video autoplay loop muted playsinline>
             <source src="../../videos/starfield-bg.mp4" type="video/mp4">
           </video>
         </div>
         <div class="slide-content">
-          <p class="header">The Problem</p>
-          <p class="text">Mean Reversion Trading 📊<br>
-THE CONCEPT:<br>
-Price tends to return to its average (mean) over time</p>
+          <span class="slide-number">02 / 05</span>
+          <div class="center-content">
+            <div class="reversion-card">
+              <h3>WHAT IS MEAN REVERSION?</h3>
+              <ul class="feature-list">
+                <li>Price tends to return to its average</li>
+                <li>Extremes are temporary deviations</li>
+                <li>Works best in ranging markets</li>
+                <li>Counter-trend strategy by nature</li>
+              </ul>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — The Pattern</span>
-      <div class="slide slide-3">
+      <span class="slide-label">Slide 3 — Overbought</span>
+      <div class="slide">
         <div class="slide-bg">
           <video autoplay loop muted playsinline>
             <source src="../../videos/starfield-bg.mp4" type="video/mp4">
           </video>
         </div>
         <div class="slide-content">
-          <p class="header">The Pattern</p>
-          <ul class="arrow-list"><li><span class="arrow">&rarr;</span> THE LOGIC:</li>
-<li><span class="arrow">&rarr;</span> Stretched high = Overextended, may fall</li>
-<li><span class="arrow">&rarr;</span> Stretched low = Oversold, may rise</li>
-<li><span class="arrow">&rarr;</span> Return to mean is the trade</li></ul>
+          <span class="slide-number">03 / 05</span>
+          <div class="center-content">
+            <div class="reversion-card overbought">
+              <h3>OVERBOUGHT SIGNALS</h3>
+              <ul class="feature-list">
+                <li>Price far above moving average</li>
+                <li>RSI above 70 level</li>
+                <li>Extended Bollinger Band touch</li>
+                <li>Consider short/sell positions</li>
+              </ul>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Why This Happens</span>
-      <div class="slide slide-4">
+      <span class="slide-label">Slide 4 — Oversold</span>
+      <div class="slide">
         <div class="slide-bg">
           <video autoplay loop muted playsinline>
             <source src="../../videos/starfield-bg.mp4" type="video/mp4">
           </video>
         </div>
         <div class="slide-content">
-          <p class="header">Why This Happens</p>
-          <ul class="arrow-list"><li><span class="arrow">&rarr;</span> WHEN IT WORKS:</li>
-<li><span class="arrow">&rarr;</span> ✅ Range-bound markets</li>
-<li><span class="arrow">&rarr;</span> ✅ Contraction regimes</li>
-<li><span class="arrow">&rarr;</span> ✅ Well-defined channels</li></ul>
+          <span class="slide-number">04 / 05</span>
+          <div class="center-content">
+            <div class="reversion-card oversold">
+              <h3>OVERSOLD SIGNALS</h3>
+              <ul class="feature-list">
+                <li>Price far below moving average</li>
+                <li>RSI below 30 level</li>
+                <li>Lower Bollinger Band touch</li>
+                <li>Consider long/buy positions</li>
+              </ul>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — The Example</span>
-      <div class="slide slide-5">
+      <span class="slide-label">Slide 5 — CTA</span>
+      <div class="slide">
         <div class="slide-bg">
           <video autoplay loop muted playsinline>
             <source src="../../videos/starfield-bg.mp4" type="video/mp4">
           </video>
         </div>
         <div class="slide-content">
-          <p class="header">The Example</p>
-          <ul class="arrow-list"><li><span class="arrow">&rarr;</span> WHEN IT FAILS:</li>
-<li><span class="arrow">&rarr;</span> ❌ Trending markets</li>
-<li><span class="arrow">&rarr;</span> ❌ Expansion regimes</li>
-<li><span class="arrow">&rarr;</span> ❌ Breakout conditions</li>
-<li><span class="arrow">&rarr;</span> TOOLS TO USE:</li>
-<li><span class="arrow">&rarr;</span> Bollinger Bands</li>
-<li><span class="arrow">&rarr;</span> RSI extremes</li>
-<li><span class="arrow">&rarr;</span> Standard deviation bands</li>
-<li><span class="arrow">&rarr;</span> Free mean reversion guide — link in bio 🔗</li></ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — The Insight</span>
-      <div class="slide slide-6 quote-slide">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="quote">&ldquo;Free mean reversion guide — link in bio 🔗&rdquo;</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="7">
-      <span class="slide-label">Slide 7 — Learn More</span>
-      <div class="slide slide-7">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">Free Resources</p>
-          <p class="text">
-            <span class="blue">&rarr;</span> 82 free Education Hub lessons<br><br>
-            <span class="blue">&rarr;</span> Step-by-step breakdowns<br><br>
-            <span class="blue">&rarr;</span> Real chart examples<br><br>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="8">
-      <span class="slide-label">Slide 8 — CTA</span>
-      <div class="slide slide-8 cta-slide">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="cta-text">Start Learning Free</p>
-          <a href="#" class="cta-button">Education Hub</a>
-          <p class="cta-brand">Signal Pilot</p>
-          <p class="link-hint">Link in bio</p>
+          <span class="slide-number">05 / 05</span>
+          <div class="center-content">
+            <h2 class="cta-title">Trade the<br><span class="emphasis">Extremes</span></h2>
+            <p class="cta-text">Buy the dip. Sell the rip.</p>
+            <p class="cta-text">Link in bio</p>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
@@ -611,19 +551,11 @@ Price tends to return to its average (mean) over time</p>
     const videos = document.querySelectorAll('.slide-bg video');
 
     bgToggle.addEventListener('change', (e) => {
-      slides.forEach(slide => {
-        if (e.target.value === 'black') {
-          slide.classList.add('bg-black');
-        } else {
-          slide.classList.remove('bg-black');
-        }
-      });
+      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
     });
 
     opacityControl.addEventListener('change', (e) => {
-      videos.forEach(video => {
-        video.style.opacity = e.target.value;
-      });
+      videos.forEach(video => video.style.opacity = e.target.value);
     });
 
     const exportBtn = document.getElementById('export-btn');
@@ -634,9 +566,8 @@ Price tends to return to its average (mean) over time</p>
     exportBtn.addEventListener('click', () => {
       exportMode = !exportMode;
       document.body.classList.toggle('export-mode', exportMode);
-
       if (exportMode) {
-        exportBtn.textContent = 'Exit Export (\u2190/\u2192 to navigate)';
+        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
         currentExportSlide = 0;
         updateExportSlide();
       } else {
@@ -646,14 +577,11 @@ Price tends to return to its average (mean) over time</p>
     });
 
     function updateExportSlide() {
-      slideWrappers.forEach((w, i) => {
-        w.classList.toggle('active', i === currentExportSlide);
-      });
+      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
     }
 
     document.addEventListener('keydown', (e) => {
       if (!exportMode) return;
-
       if (e.key === 'ArrowRight' || e.key === ' ') {
         currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
         updateExportSlide();
