@@ -1,6 +1,6 @@
 # Signal Pilot -Master Outreach File (75 Prospects)
 
-> All emails and DMs in one place. Replace `[Your Name]` with your name before sending.
+> All emails and DMs in one place. Ready to copy-paste and send.
 > No competitors included -educators and content creators only.
 >
 > **Key principles (what worked with Brian Shannon):**
@@ -53,7 +53,7 @@ Quick links:
 Happy to jump on a call if you'd prefer.
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -85,7 +85,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -116,7 +116,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -145,7 +145,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -176,7 +176,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -210,7 +210,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -246,7 +246,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -277,7 +277,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -308,7 +308,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -340,7 +340,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -373,7 +373,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -405,7 +405,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -438,7 +438,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -470,7 +470,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -506,7 +506,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -560,7 +560,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -587,7 +587,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -618,7 +618,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -647,7 +647,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -676,7 +676,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -705,7 +705,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -737,7 +737,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -766,7 +766,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -795,7 +795,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -872,7 +872,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -903,7 +903,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -932,7 +932,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -984,7 +984,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1013,7 +1013,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1048,7 +1048,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1079,7 +1079,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1201,7 +1201,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1232,7 +1232,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1286,7 +1286,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1315,7 +1315,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1346,7 +1346,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1381,7 +1381,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1410,7 +1410,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1439,7 +1439,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1468,7 +1468,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1499,7 +1499,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1535,7 +1535,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1566,7 +1566,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1598,7 +1598,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1634,7 +1634,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1713,7 +1713,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
@@ -1742,7 +1742,7 @@ Quick links:
 - Education (82 free lessons): https://education.signalpilot.io
 
 Best,
-[Your Name]
+Aldi
 Signal Pilot Labs
 
 ---
