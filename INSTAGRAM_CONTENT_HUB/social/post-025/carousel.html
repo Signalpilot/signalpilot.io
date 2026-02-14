@@ -1,817 +1,661 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 025 — Moving Averages: You're Using Them Wrong</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #0a0a0f;
-            --cine-neutral: #A8A29E;
-            --cine-neutral-text: rgba(231, 229, 228, 0.95);
-            --cine-neutral-subtle: rgba(168, 162, 158, 0.7);
-            --cine-neutral-bright: #C8C4C0;
-            --text-primary: #e2e2e2;
-            --text-secondary: #a0a0a0;
-            --text-dim: #6a6a6a;
-            --video-opacity: 0.08;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #000;
-            min-height: 100vh;
-            padding: 20px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .controls-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            padding: 15px;
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .control-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .control-group label {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        .control-group select,
-        .control-group input[type="range"] {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            color: var(--text-primary);
-            padding: 5px 10px;
-        }
-
-        .control-group select {
-            cursor: pointer;
-        }
-
-        .control-group input[type="range"] {
-            width: 100px;
-            cursor: pointer;
-        }
-
-        #export-btn {
-            background: var(--cine-neutral);
-            color: #0a0a0f;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s ease;
-        }
-
-        #export-btn:hover {
-            background: var(--cine-neutral-bright);
-        }
-
-        .page-title {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-        }
-
-        .carousel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .slide-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            container-type: inline-size;
-        }
-
-        .slide-label {
-            color: var(--text-secondary);
-            font-size: 12px;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        .slide {
-            width: 100%;
-            max-width: 540px;
-            aspect-ratio: 4 / 5;
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 25px 80px rgba(168, 162, 158, 0.08);
-        }
-
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: var(--video-opacity);
-            z-index: 0;
-        }
-
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                180deg,
-                rgba(10, 10, 15, 0.95) 0%,
-                rgba(10, 10, 15, 0.98) 100%
-            );
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 7.4%;
-            text-align: center;
-        }
-
-        .slide-number {
-            position: absolute;
-            bottom: 2.8%;
-            right: 3.7%;
-            font-size: clamp(7px, 2cqw, 14px);
-            color: var(--text-dim);
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .logo-watermark {
-            position: absolute;
-            top: 3.7%;
-            left: 3.7%;
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(8px, 2.2cqw, 16px);
-            font-weight: 500;
-            color: var(--cine-neutral-subtle);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        /* ===== SLIDE 1 — Hook (Cinematic NEUTRAL) ===== */
-        .slide.slide-1 {
-            border: 1px solid rgba(168, 162, 158, 0.15);
-        }
-
-        .slide.slide-1::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(168, 162, 158, 0.08) 0%, transparent 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .slide-1 .slide-content {
-            background: linear-gradient(
-                180deg,
-                rgba(12, 12, 12, 0.97) 0%,
-                rgba(8, 8, 8, 0.99) 100%
-            );
-            z-index: 2;
-        }
-
-        .slide-1 .cine-label {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(8px, 2cqw, 14px);
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--cine-neutral);
-            margin-bottom: 8%;
-        }
-
-        .slide-1 .hook-title {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(18px, 6cqw, 40px);
-            font-weight: 600;
-            line-height: 1.2;
-            color: var(--cine-neutral-text);
-            margin-bottom: 4%;
-        }
-
-        .slide-1 .cine-divider {
-            width: 60px;
-            height: 2px;
-            background: rgba(163, 163, 163, 0.4);
-            margin-bottom: 4%;
-        }
-
-        .slide-1 .hook-subtitle {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(10px, 2.8cqw, 20px);
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            color: var(--cine-neutral-subtle);
-            line-height: 1.6;
-        }
-
-        .slide-1 .cine-logo {
-            position: absolute;
-            bottom: 8%;
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(7px, 1.6cqw, 11px);
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: rgba(163, 163, 163, 0.25);
-        }
-
-        /* ===== SLIDES 2-4 — Myths (Neutral muted) ===== */
-        .myth-slide .section-label {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(9px, 2.2cqw, 16px);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--cine-neutral-subtle);
-            margin-bottom: 5%;
-        }
-
-        .myth-slide .myth-box {
-            width: 100%;
-            max-width: 78%;
-            background: rgba(168, 162, 158, 0.08);
-            border: 1px solid rgba(168, 162, 158, 0.2);
-            border-radius: 20px;
-            padding: 5% 5.6%;
-            text-align: left;
-            margin-bottom: 4%;
-        }
-
-        .myth-slide .myth-box .myth-label {
-            font-size: clamp(8px, 1.8cqw, 12px);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--cine-neutral-subtle);
-            margin-bottom: 2.5%;
-        }
-
-        .myth-slide .myth-box .myth-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(14px, 4.5cqw, 28px);
-            font-weight: 600;
-            font-style: italic;
-            color: var(--cine-neutral-text);
-            margin-bottom: 3%;
-            line-height: 1.3;
-        }
-
-        .myth-slide .myth-box .myth-reality {
-            font-size: clamp(11px, 2.8cqw, 20px);
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .myth-slide .myth-box .myth-reality em {
-            color: var(--cine-neutral);
-            font-style: italic;
-        }
-
-        .myth-slide .body-text {
-            font-size: clamp(10px, 2.5cqw, 18px);
-            color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 78%;
-        }
-
-        .myth-slide .body-text .hl {
-            color: var(--cine-neutral);
-            font-weight: 500;
-        }
-
-        /* ===== SLIDES 5-7 — Truths (Neutral bright) ===== */
-        .truth-slide .section-label {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(9px, 2.2cqw, 16px);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--cine-neutral);
-            margin-bottom: 5%;
-        }
-
-        .truth-slide .truth-box {
-            width: 100%;
-            max-width: 78%;
-            background: rgba(168, 162, 158, 0.1);
-            border: 1px solid rgba(200, 196, 192, 0.25);
-            border-radius: 20px;
-            padding: 5% 5.6%;
-            text-align: left;
-            margin-bottom: 4%;
-        }
-
-        .truth-slide .truth-box .truth-label {
-            font-size: clamp(8px, 1.8cqw, 12px);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--cine-neutral);
-            margin-bottom: 2.5%;
-        }
-
-        .truth-slide .truth-box .truth-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(14px, 4.5cqw, 28px);
-            font-weight: 600;
-            color: var(--cine-neutral-text);
-            margin-bottom: 3%;
-            line-height: 1.3;
-        }
-
-        .truth-slide .truth-box .truth-desc {
-            font-size: clamp(11px, 2.8cqw, 20px);
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .truth-slide .body-text {
-            font-size: clamp(10px, 2.5cqw, 18px);
-            color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 78%;
-        }
-
-        .truth-slide .body-text .hl {
-            color: var(--cine-neutral-bright);
-            font-weight: 500;
-        }
-
-        /* ===== SLIDE 8 — CTA ===== */
-        .slide-8 .cta-container {
-            text-align: center;
-        }
-
-        .slide-8 .cta-icon {
-            font-size: clamp(40px, 10cqw, 80px);
-            margin-bottom: 4%;
-        }
-
-        .slide-8 .cta-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(16px, 6cqw, 36px);
-            font-weight: 600;
-            color: var(--cine-neutral-text);
-            margin-bottom: 3%;
-            line-height: 1.2;
-        }
-
-        .slide-8 .cta-desc {
-            font-size: clamp(11px, 2.8cqw, 20px);
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 5%;
-            max-width: 70%;
-        }
-
-        .slide-8 .cta-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 2%;
-            background: rgba(168, 162, 158, 0.12);
-            border: 1px solid rgba(168, 162, 158, 0.3);
-            border-radius: 50px;
-            padding: 2% 5%;
-            margin-bottom: 4%;
-        }
-
-        .slide-8 .cta-badge-icon {
-            font-size: clamp(14px, 3.5cqw, 28px);
-        }
-
-        .slide-8 .cta-badge-text {
-            font-size: clamp(12px, 3cqw, 22px);
-            font-weight: 500;
-            color: var(--cine-neutral);
-        }
-
-        .slide-8 .cta-link {
-            font-size: clamp(12px, 3cqw, 22px);
-            color: var(--cine-neutral);
-            margin-bottom: 5%;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-        }
-
-        .slide-8 .disclaimer {
-            font-size: clamp(8px, 1.8cqw, 14px);
-            color: var(--text-dim);
-            line-height: 1.6;
-            max-width: 60%;
-        }
-
-        /* ===== Export Mode ===== */
-        body.export-mode {
-            padding: 0;
-            background: none;
-        }
-
-        body.export-mode .controls-bar,
-        body.export-mode .page-title,
-        body.export-mode .slide-label {
-            display: none;
-        }
-
-        body.export-mode .carousel-grid {
-            display: block;
-            padding: 0;
-            max-width: none;
-        }
-
-        body.export-mode .slide-wrapper {
-            display: none;
-            margin: 0;
-        }
-
-        body.export-mode .slide-wrapper.active {
-            display: flex;
-        }
-
-        body.export-mode .slide {
-            width: 1080px;
-            height: 1350px;
-            max-width: none;
-            border-radius: 0;
-            box-shadow: none;
-        }
-
-        /* Export — Slide 1 */
-        body.export-mode .slide-1 .cine-label {
-            font-size: 16px;
-        }
-
-        body.export-mode .slide-1 .hook-title {
-            font-size: 54px;
-        }
-
-        body.export-mode .slide-1 .hook-subtitle {
-            font-size: 24px;
-        }
-
-        body.export-mode .slide-1 .cine-logo {
-            font-size: 12px;
-        }
-
-        /* Export — Myth slides */
-        body.export-mode .myth-slide .section-label {
-            font-size: 18px;
-        }
-
-        body.export-mode .myth-slide .myth-label {
-            font-size: 13px;
-        }
-
-        body.export-mode .myth-slide .myth-title {
-            font-size: 32px;
-        }
-
-        body.export-mode .myth-slide .myth-reality {
-            font-size: 22px;
-        }
-
-        body.export-mode .myth-slide .body-text {
-            font-size: 20px;
-        }
-
-        /* Export — Truth slides */
-        body.export-mode .truth-slide .section-label {
-            font-size: 18px;
-        }
-
-        body.export-mode .truth-slide .truth-label {
-            font-size: 13px;
-        }
-
-        body.export-mode .truth-slide .truth-title {
-            font-size: 32px;
-        }
-
-        body.export-mode .truth-slide .truth-desc {
-            font-size: 22px;
-        }
-
-        body.export-mode .truth-slide .body-text {
-            font-size: 20px;
-        }
-
-        /* Export — CTA slide */
-        body.export-mode .slide-8 .cta-icon {
-            font-size: 80px;
-        }
-
-        body.export-mode .slide-8 .cta-title {
-            font-size: 48px;
-        }
-
-        body.export-mode .slide-8 .cta-desc {
-            font-size: 24px;
-        }
-
-        body.export-mode .slide-8 .cta-badge-icon {
-            font-size: 28px;
-        }
-
-        body.export-mode .slide-8 .cta-badge-text {
-            font-size: 24px;
-        }
-
-        body.export-mode .slide-8 .cta-link {
-            font-size: 24px;
-        }
-
-        body.export-mode .slide-8 .disclaimer {
-            font-size: 16px;
-        }
-
-        /* Export — Global overrides */
-        body.export-mode .slide-number {
-            font-size: 14px;
-        }
-
-        body.export-mode .logo-watermark {
-            font-size: 16px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 025 — Moving Averages | Carousel Preview</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-red: #d94a4a;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+      --cine-text: rgba(229, 229, 229, 0.9);
+      --cine-subtle: rgba(163, 163, 163, 0.7);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .controls label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .controls select,
+    .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .controls button:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .page-title h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+    }
+
+    .slide-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 4 / 5;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+    }
+
+    .slide-bg video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+    }
+
+    .slide.bg-black .slide-bg video { opacity: 0; }
+
+    .slide-content {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10%;
+    }
+
+    /* Slide 1 - Cinematic Hook (NEUTRAL) */
+    .slide-1 {
+      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%);
+    }
+
+    .slide-1::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+      z-index: 3;
+    }
+
+    .slide-1 .cine-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(163, 163, 163, 0.9);
+      margin-bottom: 8%;
+    }
+
+    .slide-1 .hook-main {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--cine-text);
+      margin-bottom: 4%;
+    }
+
+    .slide-1 .cine-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
+      margin-bottom: 4%;
+    }
+
+    .slide-1 .hook-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--cine-subtle);
+      line-height: 1.6;
+    }
+
+    .slide-1 .cine-logo {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(163,163,163,0.4);
+    }
+
+    /* Standard text slides */
+    .slide-content .header {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.75rem, 2.3cqw, 1.25rem);
+      font-weight: 500;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 3%;
+    }
+
+    .slide-content .text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.85rem, 2.6cqw, 1.4rem);
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .slide-content .text em {
+      font-style: italic;
+      color: var(--accent-gold);
+    }
+
+    .slide-content .text .highlight {
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+
+    .slide-content .text .red { color: var(--accent-red); }
+    .slide-content .text .blue { color: var(--accent-blue); }
+
+    .step-list {
+      list-style: none;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
+      line-height: 2;
+      color: var(--text-secondary);
+    }
+
+    .step-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 2%;
+      margin-bottom: 1%;
+    }
+
+    .step-list .num {
+      color: var(--accent-gold);
+      font-weight: 500;
+      min-width: 1.5rem;
+    }
+
+    .arrow-list {
+      list-style: none;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
+      line-height: 2;
+      color: var(--text-secondary);
+    }
+
+    .arrow-list li {
+      display: flex;
+      align-items: center;
+      gap: 2%;
+    }
+
+    .arrow-list .arrow { color: var(--accent-blue); }
+
+    .quote-slide .slide-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .quote-slide .quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.2cqw, 1.75rem);
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    /* Single-slide quote card (standalone image, not carousel) */
+    .quote-card-slide .slide-content {
+      align-items: center;
+      text-align: center;
+      z-index: 3;
+    }
+
+    .quote-card-slide .cine-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(163, 163, 163, 0.9);
+      margin-bottom: 6%;
+    }
+
+    .quote-card-slide .quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 3.8cqw, 2.2rem);
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+      margin-bottom: 5%;
+      max-width: 85%;
+    }
+
+    .quote-card-slide .cine-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
+      margin-bottom: 4%;
+    }
+
+    .quote-card-slide .quote-title {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.65rem, 2cqw, 1rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--cine-subtle);
+      line-height: 1.6;
+    }
+
+    .quote-card-slide .cine-logo {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(163,163,163,0.4);
+    }
+
+    .cta-slide .slide-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .cta-slide .cta-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.2cqw, 1.75rem);
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 4%;
+    }
+
+    .cta-slide .cta-button {
+      display: inline-block;
+      padding: 2% 5%;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .cta-slide .logo {
+      width: 50%;
+      max-width: 200px;
+      margin-top: 4%;
+      opacity: 0.8;
+    }
+
+    .cta-slide .link-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      color: var(--text-secondary);
+      margin-top: 3%;
+    }
+
+    /* Export mode */
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+      padding: 0;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      max-width: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    @media (max-width: 900px) {
+      .carousel-grid { grid-template-columns: 1fr; }
+      .controls {
+        position: static;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="controls-bar">
-        <div class="control-group">
-            <label for="bg-select">Background</label>
-            <select id="bg-select">
-                <option value="starfield">Starfield</option>
-                <option value="none">None</option>
-            </select>
+  <div class="controls">
+    <label>
+      Background:
+      <select id="bg-toggle">
+        <option value="starfield">Starfield</option>
+        <option value="black">Pure Black</option>
+      </select>
+    </label>
+    <label>
+      Starfield Opacity:
+      <select id="opacity-control">
+        <option value="0.03">3%</option>
+        <option value="0.05">5%</option>
+        <option value="0.08" selected>8%</option>
+        <option value="0.12">12%</option>
+        <option value="0.15">15%</option>
+      </select>
+    </label>
+    <button id="export-btn">Export Mode</button>
+  </div>
+
+  <div class="page-title">
+    <h1>Post 025 — Moving Averages</h1>
+    <p>Instagram Carousel &bull; 8 Slides &bull; 1080&times;1350px</p>
+  </div>
+
+  <div class="carousel-grid">
+
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <div class="slide slide-1">
+        <div class="slide-content">
+          <div class="cine-label">Learn</div>
+          <div class="hook-main">Moving Averages</div>
+          <div class="cine-divider"></div>
+          <p class="hook-sub">EMAs aren't support/resistance.</p>
+          <div class="cine-logo">Signal Pilot</div>
         </div>
-        <div class="control-group">
-            <label for="opacity-slider">Opacity</label>
-            <input type="range" id="opacity-slider" min="0" max="30" value="8">
-        </div>
-        <button id="export-btn">Export Mode</button>
+      </div>
     </div>
 
-    <div class="page-title">Post 025 — Moving Averages — 8 Slides</div>
-
-    <div class="carousel-grid">
-        <!-- Slide 1 — Hook (Cinematic NEUTRAL) -->
-        <div class="slide-wrapper" data-slide="1">
-            <span class="slide-label">Slide 1 — Hook</span>
-            <div class="slide slide-1">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../video/starfield.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="cine-label">Learn</div>
-                    <h1 class="hook-title">You're Using MAs Wrong</h1>
-                    <div class="cine-divider"></div>
-                    <p class="hook-subtitle">EMAs aren't support/resistance. They're trend filters.</p>
-                    <div class="cine-logo">SignalPilot</div>
-                    <span class="slide-number">1 / 8</span>
-                </div>
-            </div>
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — The Concept</span>
+      <div class="slide slide-2">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
         </div>
-
-        <!-- Slide 2 — Myth #1 -->
-        <div class="slide-wrapper" data-slide="2">
-            <span class="slide-label">Slide 2 — Myth #1</span>
-            <div class="slide slide-2 myth-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../video/starfield.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <span class="logo-watermark">SIGNALPILOT</span>
-                    <div class="section-label">Myth #1</div>
-                    <div class="myth-box">
-                        <div class="myth-label">The Myth</div>
-                        <div class="myth-title">"Price bounced off the 200 EMA"</div>
-                        <div class="myth-reality">No -- it bounced near a level that <em>happened</em> to be there.</div>
-                    </div>
-                    <p class="body-text">Moving averages are <span class="hl">lagging calculations</span>, not support/resistance levels.</p>
-                    <span class="slide-number">2 / 8</span>
-                </div>
-            </div>
+        <div class="slide-content">
+          <p class="header">The Concept</p>
+          <p class="text">Always check Regime Box FIRST. Green = look long, Red = look short, Gray = wait.</p>
         </div>
-
-        <!-- Slide 3 — Myth #2 -->
-        <div class="slide-wrapper" data-slide="3">
-            <span class="slide-label">Slide 3 — Myth #2</span>
-            <div class="slide slide-3 myth-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../video/starfield.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <span class="logo-watermark">SIGNALPILOT</span>
-                    <div class="section-label">Myth #2</div>
-                    <div class="myth-box">
-                        <div class="myth-label">The Myth</div>
-                        <div class="myth-title">"Golden Cross = Buy Signal"</div>
-                        <div class="myth-reality">By the time it crosses, the move is often <em>over</em>.</div>
-                    </div>
-                    <p class="body-text">The 50/200 crossover happens <span class="hl">late in the trend</span>. You're buying the news, not the rumor.</p>
-                    <span class="slide-number">3 / 8</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 4 — Myth #3 -->
-        <div class="slide-wrapper" data-slide="4">
-            <span class="slide-label">Slide 4 — Myth #3</span>
-            <div class="slide slide-4 myth-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../video/starfield.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <span class="logo-watermark">SIGNALPILOT</span>
-                    <div class="section-label">Myth #3</div>
-                    <div class="myth-box">
-                        <div class="myth-label">The Myth</div>
-                        <div class="myth-title">"MA Crossover Strategies Work"</div>
-                        <div class="myth-reality">Backtests look great. Live trading? <em>Whipsaws everywhere.</em></div>
-                    </div>
-                    <p class="body-text">In ranging markets, crossover strategies produce <span class="hl">constant false signals</span>.</p>
-                    <span class="slide-number">4 / 8</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5 — Truth #1 -->
-        <div class="slide-wrapper" data-slide="5">
-            <span class="slide-label">Slide 5 — Truth #1</span>
-            <div class="slide slide-5 truth-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../video/starfield.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <span class="logo-watermark">SIGNALPILOT</span>
-                    <div class="section-label">The Right Way</div>
-                    <div class="truth-box">
-                        <div class="truth-label">Truth #1</div>
-                        <div class="truth-title">MAs Are Trend Filters</div>
-                        <div class="truth-desc">Above the 200 EMA? Look for longs.<br>Below? Look for shorts.</div>
-                    </div>
-                    <p class="body-text">Use MAs to determine <span class="hl">directional bias</span>, not entry signals. Filter, not trigger.</p>
-                    <span class="slide-number">5 / 8</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 6 — Truth #2 -->
-        <div class="slide-wrapper" data-slide="6">
-            <span class="slide-label">Slide 6 — Truth #2</span>
-            <div class="slide slide-6 truth-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../video/starfield.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <span class="logo-watermark">SIGNALPILOT</span>
-                    <div class="section-label">The Right Way</div>
-                    <div class="truth-box">
-                        <div class="truth-label">Truth #2</div>
-                        <div class="truth-title">Multi-Timeframe Alignment</div>
-                        <div class="truth-desc">All MAs pointing the same direction = strong trend.</div>
-                    </div>
-                    <p class="body-text">Daily, 4H, and 1H MAs aligned? <span class="hl">High probability setup.</span><br><br>Mixed signals? Stay cautious.</p>
-                    <span class="slide-number">6 / 8</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 7 — Truth #3 -->
-        <div class="slide-wrapper" data-slide="7">
-            <span class="slide-label">Slide 7 — Truth #3</span>
-            <div class="slide slide-7 truth-slide">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../video/starfield.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <span class="logo-watermark">SIGNALPILOT</span>
-                    <div class="section-label">The Right Way</div>
-                    <div class="truth-box">
-                        <div class="truth-label">Truth #3</div>
-                        <div class="truth-title">Context, Not Triggers</div>
-                        <div class="truth-desc">MAs describe the trend -- they don't predict reversals.</div>
-                    </div>
-                    <p class="body-text">MAs tell you <span class="hl">what happened</span>. Context tells you what's <span class="hl">likely next</span>.</p>
-                    <span class="slide-number">7 / 8</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 8 — CTA -->
-        <div class="slide-wrapper" data-slide="8">
-            <span class="slide-label">Slide 8 — CTA</span>
-            <div class="slide slide-8">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../video/starfield.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <span class="logo-watermark">SIGNALPILOT</span>
-                    <div class="cta-container">
-                        <div class="cta-icon">📚</div>
-                        <h2 class="cta-title">Master Moving Averages</h2>
-                        <p class="cta-desc">Full lesson with examples and frameworks.</p>
-                        <div class="cta-badge">
-                            <span class="cta-badge-icon">🎓</span>
-                            <span class="cta-badge-text">Free Lesson</span>
-                        </div>
-                        <p class="cta-link">education.signalpilot.io</p>
-                        <p class="disclaimer">Educational content only. Not financial advice.</p>
-                    </div>
-                    <span class="slide-number">8 / 8</span>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <script>
-        (function() {
-            const slides = document.querySelectorAll('.slide-wrapper');
-            const bgSelect = document.getElementById('bg-select');
-            const opacitySlider = document.getElementById('opacity-slider');
-            const exportBtn = document.getElementById('export-btn');
-            const videos = document.querySelectorAll('.slide-bg');
-            let currentSlide = 0;
-            let exportMode = false;
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — How It Works</span>
+      <div class="slide slide-3">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">How It Works</p>
+          <ul class="arrow-list"><li><span class="arrow">&rarr;</span> ❌ &quot;Price bounced off the 200 EMA&quot;</li>
+<li><span class="arrow">&rarr;</span> ❌ &quot;Golden Cross = Buy signal&quot;</li>
+<li><span class="arrow">&rarr;</span> ❌ &quot;EMA crossover strategy&quot;</li></ul>
+        </div>
+      </div>
+    </div>
 
-            bgSelect.addEventListener('change', function() {
-                videos.forEach(video => {
-                    video.style.display = this.value === 'none' ? 'none' : 'block';
-                });
-            });
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Reading The Signals</span>
+      <div class="slide slide-4">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">Reading The Signals</p>
+          <ul class="arrow-list"><li><span class="arrow">&rarr;</span> ✅ Trend filter — Above 200 EMA? Look for longs. Below? Shorts.</li>
+<li><span class="arrow">&rarr;</span> ✅ Multi-timeframe alignment — All MAs same direction = strong trend</li>
+<li><span class="arrow">&rarr;</span> ✅ Context, not triggers — MAs describe trend, don't predict reversals</li></ul>
+        </div>
+      </div>
+    </div>
 
-            opacitySlider.addEventListener('input', function() {
-                document.documentElement.style.setProperty('--video-opacity', this.value / 100);
-            });
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Configuration</span>
+      <div class="slide slide-5">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">Configuration</p>
+          <ul class="arrow-list"><li><span class="arrow">&rarr;</span> Common MA mistakes:</li>
+<li><span class="arrow">&rarr;</span> ❌ &quot;Price bounced off the 200 EMA&quot;</li>
+<li><span class="arrow">&rarr;</span> No, it bounced near a level that happened to be there</li>
+<li><span class="arrow">&rarr;</span> ❌ &quot;Golden Cross = Buy&quot;</li>
+<li><span class="arrow">&rarr;</span> By the time it crosses, the move is often over</li></ul>
+        </div>
+      </div>
+    </div>
 
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-            }
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — The Insight</span>
+      <div class="slide slide-6 quote-slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="quote">&ldquo;❌ &quot;EMA crossover strategy&quot;&rdquo;</p>
+        </div>
+      </div>
+    </div>
 
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            }
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — Learn More</span>
+      <div class="slide slide-7">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">Free Resources</p>
+          <p class="text">
+            <span class="blue">&rarr;</span> Full OmniDeck documentation<br><br>
+            <span class="blue">&rarr;</span> 82 free Education Hub lessons<br><br>
+            <span class="blue">&rarr;</span> Step-by-step chart breakdowns<br><br>
+          </p>
+        </div>
+      </div>
+    </div>
 
-            function prevSlide() {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                showSlide(currentSlide);
-            }
+    <div class="slide-wrapper" data-slide="8">
+      <span class="slide-label">Slide 8 — CTA</span>
+      <div class="slide slide-8 cta-slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="cta-text">Lead Magnet</p>
+          <a href="#" class="cta-button">Education Hub</a>
+          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
+          <p class="link-hint">Link in bio</p>
+        </div>
+      </div>
+    </div>
 
-            function toggleExportMode() {
-                exportMode = !exportMode;
-                document.body.classList.toggle('export-mode', exportMode);
-                exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode';
-                if (exportMode) {
-                    showSlide(currentSlide);
-                }
-            }
+  </div>
 
-            exportBtn.addEventListener('click', toggleExportMode);
+  <script>
+    const bgToggle = document.getElementById('bg-toggle');
+    const opacityControl = document.getElementById('opacity-control');
+    const slides = document.querySelectorAll('.slide');
+    const videos = document.querySelectorAll('.slide-bg video');
 
-            document.addEventListener('keydown', function(e) {
-                if (exportMode) {
-                    if (e.key === 'ArrowRight' || e.key === ' ') {
-                        nextSlide();
-                    } else if (e.key === 'ArrowLeft') {
-                        prevSlide();
-                    } else if (e.key === 'Escape') {
-                        toggleExportMode();
-                    }
-                }
-            });
+    bgToggle.addEventListener('change', (e) => {
+      slides.forEach(slide => {
+        if (e.target.value === 'black') {
+          slide.classList.add('bg-black');
+        } else {
+          slide.classList.remove('bg-black');
+        }
+      });
+    });
 
-            showSlide(0);
-        })();
-    </script>
+    opacityControl.addEventListener('change', (e) => {
+      videos.forEach(video => {
+        video.style.opacity = e.target.value;
+      });
+    });
+
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+
+      if (exportMode) {
+        exportBtn.textContent = 'Exit Export (\u2190/\u2192 to navigate)';
+        currentExportSlide = 0;
+        updateExportSlide();
+      } else {
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => {
+        w.classList.toggle('active', i === currentExportSlide);
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'ArrowLeft') {
+        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'Escape') {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+  </script>
 </body>
 </html>
