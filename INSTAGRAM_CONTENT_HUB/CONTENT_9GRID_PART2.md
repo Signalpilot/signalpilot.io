@@ -1134,7 +1134,7 @@ Stay humble. Stay curious. Keep learning.'"
 >
 > We respond to every message.
 >
-> Support info: docs.signalpilot.io/support
+> Support info: docs.signalpilot.io/about-support/
 
 **Hashtags:** #SignalPilot #Support #CustomerService #Documentation
 
@@ -1174,7 +1174,7 @@ Stay humble. Stay curious. Keep learning.'"
 
 **Slide 6 — CTA:**
 "DON'T STRUGGLE ALONE"
-- docs.signalpilot.io/support
+- docs.signalpilot.io/about-support/
 
 **Caption:**
 > NEED HELP? WE'RE HERE.
@@ -1904,7 +1904,7 @@ Star -> Reversal
 >
 > Full performance guide in docs.
 >
-> docs.signalpilot.io/performance
+> docs.signalpilot.io/about-system-requirements/
 
 **Hashtags:** #TradingView #Performance #SignalPilot #Documentation
 
@@ -2550,7 +2550,7 @@ The path forward is yours to walk.'"
 >
 > Full mobile guide in docs.
 >
-> docs.signalpilot.io/mobile
+> docs.signalpilot.io/
 
 **Hashtags:** #TradingView #MobileTrading #SignalPilot #Documentation
 
@@ -2593,7 +2593,7 @@ The path forward is yours to walk.'"
 
 **Slide 6 — CTA:**
 "FULL MOBILE GUIDE"
-- docs.signalpilot.io/mobile
+- docs.signalpilot.io/
 
 **Caption:**
 > MOBILE TRADING GUIDE
@@ -11143,7 +11143,7 @@ The market never truly forgets. It only waits to revisit.'"
 # POST 484 — Contact & Support
 **Grid Position:** 7 | **Column:** Left | **Color:** Teal | **Type:** DOCS
 
-**Source:** `https://docs.signalpilot.io/support/`
+**Source:** `https://docs.signalpilot.io/about-support//`
 
 ---
 
@@ -12788,7 +12788,7 @@ The market never truly forgets. It only waits to revisit.'"
 # POST 538 — Quick Start Guide
 **Grid Position:** 7 | **Column:** Left | **Color:** Teal | **Type:** DOCS
 
-**Source:** `https://docs.signalpilot.io/quick-start/`
+**Source:** `https://docs.signalpilot.io/start-quick//`
 
 ---
 
@@ -15738,7 +15738,7 @@ The market never truly forgets. It only waits to revisit.'"
 # POST 601 — Quick Start Guide
 **Grid Position:** 7 | **Column:** Left | **Color:** Teal | **Type:** DOCS
 
-**Source:** `https://docs.signalpilot.io/quick-start/`
+**Source:** `https://docs.signalpilot.io/start-quick//`
 
 ---
 

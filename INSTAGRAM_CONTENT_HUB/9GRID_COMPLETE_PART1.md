@@ -2279,7 +2279,7 @@ Zero to charting in 5 minutes:
 4. Start observing
 
 Full Quick Start guide ↓
-https://docs.signalpilot.io/quick-start/
+https://docs.signalpilot.io/start-quick//
 ```
 
 ---

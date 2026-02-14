@@ -9634,7 +9634,7 @@ SIGNALS NOT APPEARING:
 -> Verify settings
 -> Ensure enough historical data
 
-Full troubleshooting guide: docs.signalpilot.io/support/
+Full troubleshooting guide: docs.signalpilot.io/about-support//
 
 #signalpilot #troubleshooting #tradingview
 ```
@@ -9670,7 +9670,7 @@ DISPLAY ISSUES:
 -> Reset to default settings
 
 STILL STUCK?
--> docs.signalpilot.io/support
+-> docs.signalpilot.io/about-support/
 -> Discord community help
 -> Email support
 
@@ -11058,7 +11058,7 @@ Mobile TradingView Setup for Signal Pilot:
 
 Not for execution. For awareness.
 
-Full guide: docs.signalpilot.io/mobile/
+Full guide: docs.signalpilot.io//
 
 #tradingview #mobile #signalpilot
 ```
