@@ -53,7 +53,7 @@ async function renderCarousel(page, postDir, postNumber) {
       @font-face { font-family: 'Inter'; font-style: normal; font-weight: 300; src: local('Inter Light'); }
       @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; src: local('Inter'); }
       @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; src: local('Inter Medium'); }
-      @font-face { font-family: 'Gugi'; font-style: normal; font-weight: 400; src: local('Gugi'); }
+      @font-face { font-family: 'Gugi'; font-style: normal; font-weight: 400; src: url('file:///usr/local/share/fonts/Gugi-Regular.ttf') format('truetype'), local('Gugi'); }
 
       /* ===== FIX 2: Starfield background on slides 2+ (not slide 1 — kept clean for IG grid) ===== */
       /* Note: .slide-1 class is on child element in 88% of posts, so we use
@@ -81,9 +81,28 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* ===== FIX 3: Center ALL content, fill the slide, much bigger text ===== */
 
-      /* Ensure container queries work on all posts */
+      /* Kill body padding so slide-wrapper starts at (0,0) */
+      body.export-mode {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #0a0a0a !important;
+      }
+
+      /* Force slide-wrapper to exact Instagram dimensions with dark bg */
       .slide-wrapper {
         container-type: inline-size !important;
+        width: 1080px !important;
+        height: 1350px !important;
+        overflow: hidden !important;
+        background: #0a0a0a !important;
+      }
+
+      /* Fix intermediate .slide div — fill parent for flex centering chain */
+      .slide-wrapper > .slide,
+      .slide-wrapper > div:not(.starfield-bg):not(.slide-content) {
+        width: 100% !important;
+        height: 100% !important;
+        position: relative !important;
       }
 
       /* Force ALL slide content to be vertically + horizontally centered */
@@ -93,45 +112,77 @@ async function renderCarousel(page, postDir, postNumber) {
         justify-content: center !important;
         align-items: center !important;
         text-align: center !important;
+        width: 100% !important;
+        height: 100% !important;
         padding: 6% 8% !important;
         box-sizing: border-box !important;
       }
 
-      /* Titles — big and centered (was capped at 34px, now 48px) */
+      /* Titles — BIG and centered */
       .slide-title, .header, .hook-main {
-        font-size: clamp(30px, 7cqw, 48px) !important;
+        font-size: clamp(36px, 8cqw, 56px) !important;
         margin-bottom: 4% !important;
         text-align: center !important;
         width: 100% !important;
       }
       .slide-title.large {
-        font-size: clamp(34px, 8cqw, 54px) !important;
+        font-size: clamp(40px, 9cqw, 64px) !important;
       }
 
-      /* Body text — doubled max for readability (was 18px, now 28px) */
+      /* Body text — much bigger for Instagram readability */
       .slide-body, .text {
-        font-size: clamp(20px, 5cqw, 28px) !important;
+        font-size: clamp(24px, 6cqw, 36px) !important;
         line-height: 1.65 !important;
         max-width: 95% !important;
         text-align: center !important;
       }
 
-      /* Subtitles — visible on mobile (was 15px, now 22px) */
+      /* Subtitles / combo labels */
       .slide-subtitle, .hook-sub {
-        font-size: clamp(16px, 4cqw, 22px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         letter-spacing: 3px !important;
         text-align: center !important;
       }
 
+      /* Combo titles and descriptions — these were way too small */
+      .combo-title {
+        font-size: clamp(28px, 7cqw, 44px) !important;
+        font-weight: 700 !important;
+      }
+      .combo-desc {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        line-height: 1.5 !important;
+      }
+      .combo-arrows, .combo-emojis {
+        font-size: clamp(40px, 10cqw, 64px) !important;
+      }
+
+      /* Signal items (Flow Rising, Price Falling labels) */
+      .signal-item .label, .signal-item .name {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .signal-item .arrow, .signal-item .icon {
+        font-size: clamp(32px, 8cqw, 48px) !important;
+      }
+
+      /* Divergence box text */
+      .divergence-title, .divergence-label {
+        font-size: clamp(24px, 6cqw, 36px) !important;
+        font-weight: 700 !important;
+      }
+      .divergence-desc {
+        font-size: clamp(18px, 5cqw, 28px) !important;
+      }
+
       /* Icons — big and bold */
       .slide-icon, .icon {
-        font-size: clamp(40px, 12cqw, 64px) !important;
+        font-size: clamp(48px, 14cqw, 72px) !important;
         text-align: center !important;
       }
 
       /* Checklists — bigger items, left-aligned text but centered in slide */
       .checklist {
-        font-size: clamp(20px, 4.5cqw, 26px) !important;
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
         line-height: 1.8 !important;
         text-align: left !important;
         max-width: 95% !important;
@@ -143,43 +194,54 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* Fallback: generic elements inside slide-content that aren't covered above */
       .slide-content p {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
         text-align: center !important;
       }
       .slide-content ul, .slide-content ol {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
         max-width: 95% !important;
       }
       .slide-content h2, .slide-content h3 {
-        font-size: clamp(28px, 7cqw, 44px) !important;
+        font-size: clamp(32px, 8cqw, 52px) !important;
         text-align: center !important;
       }
 
       /* ===== FIX 4: Stronger CTA slides ===== */
       .cta-link, .cta-button {
         padding: 4% 8% !important;
-        font-size: clamp(16px, 4cqw, 22px) !important;
+        font-size: clamp(20px, 5cqw, 28px) !important;
         font-weight: 600 !important;
         letter-spacing: 1px !important;
       }
       .cta-text, .cta-title {
-        font-size: clamp(26px, 7cqw, 40px) !important;
+        font-size: clamp(30px, 8cqw, 48px) !important;
         font-family: 'Cormorant Garamond', serif !important;
         font-weight: 600 !important;
         text-align: center !important;
       }
       .link-hint {
-        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        font-size: clamp(16px, 4cqw, 24px) !important;
         margin-top: 3% !important;
         text-align: center !important;
       }
+
+      /* ===== FIX 5: SIGNAL PILOT — Gugi font, centered at bottom on ALL slides ===== */
       .brand-mark, .logo, .cine-logo {
         font-family: 'Gugi', sans-serif !important;
         font-size: clamp(14px, 3.5cqw, 20px) !important;
         letter-spacing: 4px !important;
       }
-
-      /* ===== FIX 5: Center the SIGNALPILOT logo on slide 1 ===== */
+      /* Center brand mark at bottom on ALL content slides (slides 2+) */
+      .brand-mark {
+        position: absolute !important;
+        bottom: 5% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        right: auto !important;
+        text-align: center !important;
+        width: auto !important;
+      }
+      /* Center cine-logo on slide 1 */
       .slide-1 .cine-logo {
         left: 50% !important;
         transform: translateX(-50%) !important;
@@ -208,7 +270,7 @@ async function renderCarousel(page, postDir, postNumber) {
         padding: 0 !important;
       }
 
-      /* Combo boxes and signal grids — fill more space */
+      /* Combo boxes and signal grids — fill more space, bigger text */
       .combo-box {
         max-width: 95% !important;
         padding: 6% !important;
@@ -216,6 +278,10 @@ async function renderCarousel(page, postDir, postNumber) {
       }
       .signal-grid {
         max-width: 95% !important;
+        gap: 16px !important;
+      }
+      .signal-item {
+        padding: 5% 4% !important;
       }
       .divergence-box {
         max-width: 95% !important;
