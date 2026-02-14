@@ -1,784 +1,629 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 315 — Janus Atlas: Level Strength</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #0a0a0f;
-            --bg-card: rgba(255, 255, 255, 0.02);
-            --bg-card-hover: rgba(255, 255, 255, 0.04);
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --border-glow: rgba(74, 217, 217, 0.3);
-            --text-primary: #e8e6e3;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-tertiary: rgba(255, 255, 255, 0.4);
-            --accent-blue: #4a90d9;
-            --accent-gold: #c9a962;
-            --accent-green: #4ad97a;
-            --accent-red: #d94a4a;
-            --accent-teal: #4ad9d9;
-            --accent-purple: #9b4ad9;
-            --accent-orange: #d98c4a;
-            --font-serif: 'Cormorant Garamond', Georgia, serif;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --video-opacity: 0.08;
-            --cine-orange: #E07B4B;
-            --cine-orange-text: rgba(254, 234, 220, 0.95);
-            --cine-orange-subtle: rgba(224, 123, 75, 0.7);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 315 — Janus Atlas: Level Strength | Carousel Preview</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-        html, body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-red: #d94a4a;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+      --cine-text: rgba(254, 243, 199, 0.95);
+      --cine-subtle: rgba(251, 191, 36, 0.7);
+    }
 
-        body {
-            padding: 24px;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .controls-bar {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            padding: 16px;
-            margin-bottom: 24px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            flex-wrap: wrap;
-        }
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
 
-        .control-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
 
-        .control-group label {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
+    .controls label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
 
-        .control-group select,
-        .control-group input[type="range"] {
-            padding: 6px 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            font-size: 14px;
-        }
+    .controls select,
+    .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
 
-        #export-btn {
-            padding: 8px 16px;
-            border-radius: 6px;
-            border: 1px solid var(--accent-teal);
-            background: transparent;
-            color: var(--accent-teal);
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+    .controls button:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
 
-        #export-btn:hover {
-            background: var(--accent-teal);
-            color: var(--bg-dark);
-        }
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
 
-        .page-title {
-            text-align: center;
-            font-family: var(--font-sans);
-            font-size: 14px;
-            color: var(--text-tertiary);
-            margin-bottom: 24px;
-            letter-spacing: 0.05em;
-        }
+    .page-title h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
 
-        .carousel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
-            gap: 24px;
-            justify-items: center;
-            max-width: 2400px;
-            margin: 0 auto;
-        }
+    .page-title p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
 
-        .slide-wrapper {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            container-type: inline-size;
-        }
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
 
-        .slide-label {
-            font-family: var(--font-sans);
-            font-size: 12px;
-            color: var(--text-tertiary);
-            margin-bottom: 8px;
-            letter-spacing: 0.05em;
-        }
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+    }
 
-        .slide {
-            position: relative;
-            width: 100%;
-            max-width: 540px;
-            aspect-ratio: 4 / 5;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow:
-                0 4px 24px rgba(0, 0, 0, 0.4),
-                0 0 0 1px var(--border-subtle);
-        }
+    .slide-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+    }
 
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: var(--video-opacity);
-            z-index: 0;
-            pointer-events: none;
-        }
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 4 / 5;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
 
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: clamp(36px, 6.67cqw, 72px);
-            background: linear-gradient(
-                145deg,
-                rgba(10, 10, 15, 0.97) 0%,
-                rgba(10, 10, 15, 0.92) 100%
-            );
-        }
+    .slide-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+    }
 
-        .slide-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: clamp(24px, 4.44cqw, 48px);
-        }
+    .slide-bg video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+    }
 
-        .slide-number {
-            font-family: var(--font-sans);
-            font-size: clamp(7px, 1.30cqw, 14px);
-            font-weight: 500;
-            color: var(--text-tertiary);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
+    .slide.bg-black .slide-bg video { opacity: 0; }
 
-        .brand-logo {
-            font-family: var(--font-serif);
-            font-size: clamp(12px, 2.22cqw, 24px);
-            font-weight: 600;
-            color: var(--text-secondary);
-            letter-spacing: 0.05em;
-        }
+    .slide-content {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10%;
+    }
 
-        .slide-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    /* Slide 1 - Cinematic Hook (ORANGE) */
+    .slide-1 {
+      background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%);
+    }
 
-        .hook-icon {
-            font-size: clamp(40px, 7.41cqw, 80px);
-            margin-bottom: clamp(16px, 2.96cqw, 32px);
-            line-height: 1;
-        }
+    .slide-1::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(217,148,74,0.08) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
 
-        .hook-title {
-            font-family: var(--font-serif);
-            font-size: clamp(32px, 5.93cqw, 64px);
-            font-weight: 600;
-            line-height: 1.1;
-            margin-bottom: clamp(12px, 2.22cqw, 24px);
-            letter-spacing: -0.01em;
-            color: var(--text-primary);
-        }
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+      z-index: 3;
+    }
 
-        .hook-subtitle {
-            font-family: var(--font-sans);
-            font-size: clamp(16px, 2.96cqw, 32px);
-            font-weight: 300;
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
+    .slide-1 .cine-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(251, 191, 36, 0.9);
+      margin-bottom: 8%;
+    }
 
-        .emphasis-text {
-            font-family: var(--font-serif);
-            font-size: clamp(28px, 5.19cqw, 56px);
-            font-weight: 400;
-            font-style: italic;
-            line-height: 1.3;
-            color: var(--text-primary);
-            text-align: center;
-            max-width: 850px;
-            margin: 0 auto;
-        }
+    .slide-1 .hook-main {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--cine-text);
+      margin-bottom: 4%;
+    }
 
-        .strength-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: clamp(12px, 2.22cqw, 24px);
-            padding: clamp(28px, 5.19cqw, 56px);
-        }
+    .slide-1 .cine-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(251,191,36,0.6), transparent);
+      margin-bottom: 4%;
+    }
 
-        .strength-header {
-            font-family: var(--font-serif);
-            font-size: clamp(24px, 4.44cqw, 48px);
-            font-weight: 600;
-            color: var(--accent-teal);
-            margin-bottom: clamp(16px, 2.96cqw, 32px);
-        }
+    .slide-1 .hook-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--cine-subtle);
+      line-height: 1.6;
+    }
 
-        .strength-points {
-            display: flex;
-            flex-direction: column;
-            gap: clamp(12px, 2.22cqw, 24px);
-        }
+    .slide-1 .cine-logo {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(251,191,36,0.4);
+    }
 
-        .strength-point {
-            display: flex;
-            align-items: center;
-            gap: clamp(8px, 1.48cqw, 16px);
-            font-family: var(--font-sans);
-            font-size: clamp(15px, 2.78cqw, 30px);
-            color: var(--text-secondary);
-        }
+    /* Standard text slides */
+    .slide-content .header {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.75rem, 2.3cqw, 1.25rem);
+      font-weight: 500;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 3%;
+    }
 
-        .point-marker {
-            width: clamp(5px, 0.93cqw, 10px);
-            height: clamp(5px, 0.93cqw, 10px);
-            border-radius: 50%;
-            background: var(--accent-teal);
-            flex-shrink: 0;
-        }
+    .slide-content .text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.85rem, 2.6cqw, 1.4rem);
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
 
-        .cta-container {
-            text-align: center;
-        }
+    .slide-content .text em {
+      font-style: italic;
+      color: var(--accent-gold);
+    }
 
-        .cta-primary {
-            font-family: var(--font-serif);
-            font-size: clamp(24px, 4.44cqw, 48px);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: clamp(12px, 2.22cqw, 24px);
-            font-style: italic;
-        }
+    .slide-content .text .highlight {
+      color: var(--text-primary);
+      font-weight: 400;
+    }
 
-        .cta-secondary {
-            font-family: var(--font-sans);
-            font-size: clamp(16px, 2.96cqw, 32px);
-            color: var(--accent-teal);
-            font-weight: 400;
-            margin-bottom: clamp(24px, 4.44cqw, 48px);
-        }
+    .slide-content .text .red { color: var(--accent-red); }
+    .slide-content .text .blue { color: var(--accent-blue); }
 
-        .disclaimer {
-            font-family: var(--font-sans);
-            font-size: clamp(8px, 1.48cqw, 16px);
-            color: var(--text-tertiary);
-            font-style: italic;
-        }
+    .step-list {
+      list-style: none;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
+      line-height: 2;
+      color: var(--text-secondary);
+    }
 
-        .slide-footer {
-            margin-top: auto;
-            padding-top: clamp(20px, 3.70cqw, 40px);
-            border-top: 1px solid var(--border-subtle);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .step-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 2%;
+      margin-bottom: 1%;
+    }
 
-        .footer-tag {
-            font-family: var(--font-sans);
-            font-size: clamp(9px, 1.67cqw, 18px);
-            color: var(--text-tertiary);
-            letter-spacing: 0.05em;
-        }
+    .step-list .num {
+      color: var(--accent-gold);
+      font-weight: 500;
+      min-width: 1.5rem;
+    }
 
-        .footer-accent {
-            width: clamp(24px, 4.44cqw, 48px);
-            height: clamp(1.5px, 0.28cqw, 3px);
-            background: linear-gradient(
-                90deg,
-                var(--accent-teal),
-                var(--accent-blue)
-            );
-            border-radius: 2px;
-        }
+    .arrow-list {
+      list-style: none;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
+      line-height: 2;
+      color: var(--text-secondary);
+    }
 
-        .slide.slide-1::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(225deg, rgba(224,123,75,0.08) 0%, transparent 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
+    .arrow-list li {
+      display: flex;
+      align-items: center;
+      gap: 2%;
+    }
 
-        .slide.slide-1::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(224,123,75,0.6), transparent 80%);
-            pointer-events: none;
-            z-index: 1;
-        }
+    .arrow-list .arrow { color: var(--accent-blue); }
 
-        body.export-mode {
-            padding: 0;
-            background: transparent;
-        }
+    .quote-slide .slide-content {
+      align-items: center;
+      text-align: center;
+    }
 
-        body.export-mode .controls-bar,
-        body.export-mode .page-title,
-        body.export-mode .slide-label {
-            display: none;
-        }
+    .quote-slide .quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.2cqw, 1.75rem);
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
 
-        body.export-mode .carousel-grid {
-            display: block;
-        }
+    .slide-10 .slide-content {
+      align-items: center;
+      text-align: center;
+    }
 
-        body.export-mode .slide-wrapper {
-            display: none;
-        }
+    .slide-10 .cta-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.2cqw, 1.75rem);
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 4%;
+    }
 
-        body.export-mode .slide-wrapper.active {
-            display: block;
-        }
+    .slide-10 .cta-button {
+      display: inline-block;
+      padding: 2% 5%;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
 
-        body.export-mode .slide {
-            width: 1080px;
-            height: 1350px;
-            max-width: none;
-            aspect-ratio: auto;
-            border-radius: 0;
-        }
+    .slide-10 .logo {
+      width: 50%;
+      max-width: 200px;
+      margin-top: 4%;
+      opacity: 0.8;
+    }
 
-        body.export-mode .slide-content {
-            padding: 72px;
-        }
+    .slide-10 .link-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      color: var(--text-secondary);
+      margin-top: 3%;
+    }
 
-        body.export-mode .slide-header {
-            margin-bottom: 48px;
-        }
+    /* Export mode */
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
 
-        body.export-mode .slide-number {
-            font-size: 14px;
-        }
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
 
-        body.export-mode .brand-logo {
-            font-size: 24px;
-        }
+    body.export-mode .carousel-grid {
+      display: block;
+      padding: 0;
+    }
 
-        body.export-mode .hook-icon {
-            font-size: 80px;
-            margin-bottom: 32px;
-        }
+    body.export-mode .slide-wrapper {
+      display: none;
+    }
 
-        body.export-mode .hook-title {
-            font-size: 64px;
-            margin-bottom: 24px;
-        }
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+    }
 
-        body.export-mode .hook-subtitle {
-            font-size: 32px;
-        }
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      max-width: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
 
-        body.export-mode .emphasis-text {
-            font-size: 56px;
-        }
-
-        body.export-mode .strength-card {
-            border-radius: 24px;
-            padding: 56px;
-        }
-
-        body.export-mode .strength-header {
-            font-size: 48px;
-            margin-bottom: 32px;
-        }
-
-        body.export-mode .strength-points {
-            gap: 24px;
-        }
-
-        body.export-mode .strength-point {
-            gap: 16px;
-            font-size: 30px;
-        }
-
-        body.export-mode .point-marker {
-            width: 10px;
-            height: 10px;
-        }
-
-        body.export-mode .cta-primary {
-            font-size: 48px;
-            margin-bottom: 24px;
-        }
-
-        body.export-mode .cta-secondary {
-            font-size: 32px;
-            margin-bottom: 48px;
-        }
-
-        body.export-mode .disclaimer {
-            font-size: 16px;
-        }
-
-        body.export-mode .slide-footer {
-            padding-top: 40px;
-        }
-
-        body.export-mode .footer-tag {
-            font-size: 18px;
-        }
-
-        body.export-mode .footer-accent {
-            width: 48px;
-            height: 3px;
-        }
-    </style>
+    @media (max-width: 900px) {
+      .carousel-grid { grid-template-columns: 1fr; }
+      .controls {
+        position: static;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="controls-bar">
-        <div class="control-group">
-            <label for="bg-select">Background</label>
-            <select id="bg-select">
-                <option value="starfield">Starfield</option>
-                <option value="none">None</option>
-            </select>
+  <div class="controls">
+    <label>
+      Background:
+      <select id="bg-toggle">
+        <option value="starfield">Starfield</option>
+        <option value="black">Pure Black</option>
+      </select>
+    </label>
+    <label>
+      Starfield Opacity:
+      <select id="opacity-control">
+        <option value="0.03">3%</option>
+        <option value="0.05">5%</option>
+        <option value="0.08" selected>8%</option>
+        <option value="0.12">12%</option>
+        <option value="0.15">15%</option>
+      </select>
+    </label>
+    <button id="export-btn">Export Mode</button>
+  </div>
+
+  <div class="page-title">
+    <h1>Post 315 — Janus Atlas: Level Strength</h1>
+    <p>Instagram Carousel &bull; 10 Slides &bull; 1080&times;1350px</p>
+  </div>
+
+  <div class="carousel-grid">
+
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <div class="slide slide-1">
+        <div class="slide-content">
+          <div class="cine-label">Discover</div>
+          <div class="hook-main">Janus Atlas: Level Strength</div>
+          <div class="cine-divider"></div>
+          <p class="hook-sub">Not all levels are equal.</p>
+          <div class="cine-logo">Signal Pilot</div>
         </div>
-        <div class="control-group">
-            <label for="opacity-slider">Opacity</label>
-            <input type="range" id="opacity-slider" min="0" max="30" value="8">
-        </div>
-        <button id="export-btn">Export Mode</button>
+      </div>
     </div>
 
-    <div class="page-title">Post 315 — 7 Slides</div>
-
-    <div class="carousel-grid">
-        <!-- Slide 1: Cinematic Hook (ORANGE - Indicator) -->
-        <div class="slide-wrapper" data-slide="1">
-            <span class="slide-label">Slide 1 — Hook</span>
-            <div class="slide slide-1">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-number">01 / 07</span>
-                        <span class="brand-logo">Signal Pilot</span>
-                    </div>
-                    <div class="slide-body">
-                        <div class="hook-icon">🗺️</div>
-                        <h1 class="hook-title">Janus Atlas:<br>Level Strength</h1>
-                        <p class="hook-subtitle">Not all levels are created equal.</p>
-                    </div>
-                    <div class="slide-footer">
-                        <span class="footer-tag">The Cartographer</span>
-                        <div class="footer-accent"></div>
-                    </div>
-                </div>
-            </div>
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — The Challenge</span>
+      <div class="slide slide-2">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
         </div>
-
-        <!-- Slide 2: The Problem -->
-        <div class="slide-wrapper" data-slide="2">
-            <span class="slide-label">Slide 2 — The Problem</span>
-            <div class="slide slide-2">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-number">02 / 07</span>
-                        <span class="brand-logo">Signal Pilot</span>
-                    </div>
-                    <div class="slide-body">
-                        <p class="emphasis-text">Not all levels are created equal.</p>
-                    </div>
-                    <div class="slide-footer">
-                        <span class="footer-tag">The Problem</span>
-                        <div class="footer-accent"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="slide-content">
+          <p class="header">The Challenge</p>
+          <p class="text">Not all levels are equal.</p>
         </div>
-
-        <!-- Slide 3: Multiple Touches -->
-        <div class="slide-wrapper" data-slide="3">
-            <span class="slide-label">Slide 3 — Multiple Touches</span>
-            <div class="slide slide-3">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-number">03 / 07</span>
-                        <span class="brand-logo">Signal Pilot</span>
-                    </div>
-                    <div class="slide-body">
-                        <div class="strength-card">
-                            <h3 class="strength-header">Multiple Touches</h3>
-                            <div class="strength-points">
-                                <div class="strength-point">
-                                    <span class="point-marker"></span>
-                                    <span>More tests = more significant</span>
-                                </div>
-                                <div class="strength-point">
-                                    <span class="point-marker"></span>
-                                    <span>Each bounce adds importance</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide-footer">
-                        <span class="footer-tag">Test Count</span>
-                        <div class="footer-accent"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 4: Recency -->
-        <div class="slide-wrapper" data-slide="4">
-            <span class="slide-label">Slide 4 — Recency</span>
-            <div class="slide slide-4">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-number">04 / 07</span>
-                        <span class="brand-logo">Signal Pilot</span>
-                    </div>
-                    <div class="slide-body">
-                        <div class="strength-card">
-                            <h3 class="strength-header">Recency</h3>
-                            <div class="strength-points">
-                                <div class="strength-point">
-                                    <span class="point-marker"></span>
-                                    <span>Recent levels matter more</span>
-                                </div>
-                                <div class="strength-point">
-                                    <span class="point-marker"></span>
-                                    <span>Old untested levels decay</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide-footer">
-                        <span class="footer-tag">Time Factor</span>
-                        <div class="footer-accent"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: Timeframe -->
-        <div class="slide-wrapper" data-slide="5">
-            <span class="slide-label">Slide 5 — Timeframe</span>
-            <div class="slide slide-5">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-number">05 / 07</span>
-                        <span class="brand-logo">Signal Pilot</span>
-                    </div>
-                    <div class="slide-body">
-                        <div class="strength-card">
-                            <h3 class="strength-header">Timeframe</h3>
-                            <div class="strength-points">
-                                <div class="strength-point">
-                                    <span class="point-marker"></span>
-                                    <span>Higher TF levels = stronger</span>
-                                </div>
-                                <div class="strength-point">
-                                    <span class="point-marker"></span>
-                                    <span>Weekly > Daily > Hourly</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide-footer">
-                        <span class="footer-tag">TF Hierarchy</span>
-                        <div class="footer-accent"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 6: Clean Reactions -->
-        <div class="slide-wrapper" data-slide="6">
-            <span class="slide-label">Slide 6 — Clean Reactions</span>
-            <div class="slide slide-6">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-number">06 / 07</span>
-                        <span class="brand-logo">Signal Pilot</span>
-                    </div>
-                    <div class="slide-body">
-                        <div class="strength-card">
-                            <h3 class="strength-header">Clean Reactions</h3>
-                            <div class="strength-points">
-                                <div class="strength-point">
-                                    <span class="point-marker"></span>
-                                    <span>Sharp bounces = strong</span>
-                                </div>
-                                <div class="strength-point">
-                                    <span class="point-marker"></span>
-                                    <span>Messy reactions = weak</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide-footer">
-                        <span class="footer-tag">Reaction Quality</span>
-                        <div class="footer-accent"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 7: CTA -->
-        <div class="slide-wrapper" data-slide="7">
-            <span class="slide-label">Slide 7 — CTA</span>
-            <div class="slide slide-7">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <span class="slide-number">07 / 07</span>
-                        <span class="brand-logo">Signal Pilot</span>
-                    </div>
-                    <div class="slide-body">
-                        <div class="cta-container">
-                            <h2 class="cta-primary">"Focus on strong levels.<br>Ignore weak ones."</h2>
-                            <p class="cta-secondary">See it in action — Link in bio</p>
-                            <p class="disclaimer">Educational only. Not financial advice.</p>
-                        </div>
-                    </div>
-                    <div class="slide-footer">
-                        <span class="footer-tag">Try the Demo</span>
-                        <div class="footer-accent"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <script>
-        (function() {
-            const slides = document.querySelectorAll('.slide-wrapper');
-            const bgSelect = document.getElementById('bg-select');
-            const opacitySlider = document.getElementById('opacity-slider');
-            const exportBtn = document.getElementById('export-btn');
-            let currentSlide = 0;
-            let exportMode = false;
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — The Tool</span>
+      <div class="slide slide-3">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">The Tool</p>
+          <p class="text">Janus Atlas shows level strength—how many times a level has been tested, how recent, how significant.</p>
+        </div>
+      </div>
+    </div>
 
-            bgSelect.addEventListener('change', (e) => {
-                const videos = document.querySelectorAll('.slide-bg');
-                videos.forEach(video => {
-                    video.style.display = e.target.value === 'none' ? 'none' : 'block';
-                });
-            });
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — How It Works</span>
+      <div class="slide slide-4">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">How It Works</p>
+          <p class="text">Stronger levels = more attention. Weaker levels = less reliable.</p>
+        </div>
+      </div>
+    </div>
 
-            opacitySlider.addEventListener('input', (e) => {
-                document.documentElement.style.setProperty('--video-opacity', (e.target.value / 100).toFixed(2));
-            });
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Key Features</span>
+      <div class="slide slide-5">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">Key Features</p>
+          <p class="text">Demo: [link]</p>
+        </div>
+      </div>
+    </div>
 
-            exportBtn.addEventListener('click', () => {
-                if (!exportMode) {
-                    enterExportMode();
-                } else {
-                    exitExportMode();
-                }
-            });
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — The Difference</span>
+      <div class="slide slide-6">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">The Difference</p>
+          <ul class="arrow-list"><li><span class="arrow">&rarr;</span> Messy reactions = weak</li></ul>
+        </div>
+      </div>
+    </div>
 
-            function enterExportMode() {
-                exportMode = true;
-                document.body.classList.add('export-mode');
-                exportBtn.textContent = 'Exit Export';
-                currentSlide = 0;
-                updateSlideVisibility();
-            }
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — Get Started</span>
+      <div class="slide slide-7">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">Get Started</p>
+          <ul class="arrow-list"><li><span class="arrow">&rarr;</span> Messy reactions = weak</li></ul>
+        </div>
+      </div>
+    </div>
 
-            function exitExportMode() {
-                exportMode = false;
-                document.body.classList.remove('export-mode');
-                exportBtn.textContent = 'Export Mode';
-                slides.forEach(slide => slide.classList.remove('active'));
-            }
+    <div class="slide-wrapper" data-slide="8">
+      <span class="slide-label">Slide 8 — The Insight</span>
+      <div class="slide slide-8 quote-slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="quote">"- Messy reactions = weak"</p>
+        </div>
+      </div>
+    </div>
 
-            function updateSlideVisibility() {
-                if (!exportMode) return;
-                slides.forEach((slide, index) => {
-                    slide.classList.toggle('active', index === currentSlide);
-                });
-            }
+    <div class="slide-wrapper" data-slide="9">
+      <span class="slide-label">Slide 9 — Learn More</span>
+      <div class="slide slide-9">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">Free Resources</p>
+          <p class="text">
+            <span class="blue">&rarr;</span> 7 professional indicators<br><br>
+            <span class="blue">&rarr;</span> Non-repainting signals<br><br>
+            <span class="blue">&rarr;</span> 7-day money-back guarantee<br><br>
+          </p>
+        </div>
+      </div>
+    </div>
 
-            function nextSlide() {
-                if (!exportMode) return;
-                currentSlide = (currentSlide + 1) % slides.length;
-                updateSlideVisibility();
-            }
+    <div class="slide-wrapper" data-slide="10">
+      <span class="slide-label">Slide 10 — CTA</span>
+      <div class="slide slide-10">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="cta-text">Trial</p>
+          <a href="#" class="cta-button">View Indicators</a>
+          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
+          <p class="link-hint">Link in bio</p>
+        </div>
+      </div>
+    </div>
 
-            function prevSlide() {
-                if (!exportMode) return;
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                updateSlideVisibility();
-            }
+  </div>
 
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'e' || e.key === 'E') {
-                    if (!exportMode) enterExportMode();
-                } else if (e.key === 'Escape') {
-                    exitExportMode();
-                } else if (e.key === 'ArrowRight' || e.key === ' ') {
-                    nextSlide();
-                } else if (e.key === 'ArrowLeft') {
-                    prevSlide();
-                }
-            });
-        })();
-    </script>
+  <script>
+    const bgToggle = document.getElementById('bg-toggle');
+    const opacityControl = document.getElementById('opacity-control');
+    const slides = document.querySelectorAll('.slide');
+    const videos = document.querySelectorAll('.slide-bg video');
+
+    bgToggle.addEventListener('change', (e) => {
+      slides.forEach(slide => {
+        if (e.target.value === 'black') {
+          slide.classList.add('bg-black');
+        } else {
+          slide.classList.remove('bg-black');
+        }
+      });
+    });
+
+    opacityControl.addEventListener('change', (e) => {
+      videos.forEach(video => {
+        video.style.opacity = e.target.value;
+      });
+    });
+
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+
+      if (exportMode) {
+        exportBtn.textContent = 'Exit Export (\u2190/\u2192 to navigate)';
+        currentExportSlide = 0;
+        updateExportSlide();
+      } else {
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => {
+        w.classList.toggle('active', i === currentExportSlide);
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'ArrowLeft') {
+        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'Escape') {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+  </script>
 </body>
 </html>
