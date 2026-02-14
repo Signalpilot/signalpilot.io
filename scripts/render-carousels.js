@@ -79,49 +79,103 @@ async function renderCarousel(page, postDir, postNumber) {
         display: none !important;
       }
 
-      /* ===== FIX 3: Tighter layout — less padding, bigger text ===== */
-      .slide-wrapper .slide-content {
-        padding: 6% !important;
+      /* ===== FIX 3: Center ALL content, fill the slide, much bigger text ===== */
+
+      /* Ensure container queries work on all posts */
+      .slide-wrapper {
+        container-type: inline-size !important;
       }
-      .slide-title {
-        font-size: clamp(22px, 8cqw, 34px) !important;
+
+      /* Force ALL slide content to be vertically + horizontally centered */
+      .slide-content {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding: 6% 8% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Titles — big and centered (was capped at 34px, now 48px) */
+      .slide-title, .header, .hook-main {
+        font-size: clamp(30px, 7cqw, 48px) !important;
         margin-bottom: 4% !important;
+        text-align: center !important;
+        width: 100% !important;
       }
       .slide-title.large {
-        font-size: clamp(26px, 9cqw, 38px) !important;
+        font-size: clamp(34px, 8cqw, 54px) !important;
       }
-      .slide-body {
-        font-size: clamp(14px, 4.5cqw, 18px) !important;
-        line-height: 1.6 !important;
+
+      /* Body text — doubled max for readability (was 18px, now 28px) */
+      .slide-body, .text {
+        font-size: clamp(20px, 5cqw, 28px) !important;
+        line-height: 1.65 !important;
+        max-width: 95% !important;
+        text-align: center !important;
+      }
+
+      /* Subtitles — visible on mobile (was 15px, now 22px) */
+      .slide-subtitle, .hook-sub {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        letter-spacing: 3px !important;
+        text-align: center !important;
+      }
+
+      /* Icons — big and bold */
+      .slide-icon, .icon {
+        font-size: clamp(40px, 12cqw, 64px) !important;
+        text-align: center !important;
+      }
+
+      /* Checklists — bigger items, left-aligned text but centered in slide */
+      .checklist {
+        font-size: clamp(20px, 4.5cqw, 26px) !important;
+        line-height: 1.8 !important;
+        text-align: left !important;
         max-width: 95% !important;
       }
-      .slide-subtitle {
-        font-size: clamp(11px, 3.8cqw, 15px) !important;
-        letter-spacing: 4px !important;
+      .checklist li {
+        font-size: inherit !important;
+        margin-bottom: 2% !important;
       }
-      .slide-icon {
-        font-size: clamp(32px, 11cqw, 52px) !important;
+
+      /* Fallback: generic elements inside slide-content that aren't covered above */
+      .slide-content p {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        text-align: center !important;
+      }
+      .slide-content ul, .slide-content ol {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        max-width: 95% !important;
+      }
+      .slide-content h2, .slide-content h3 {
+        font-size: clamp(28px, 7cqw, 44px) !important;
+        text-align: center !important;
       }
 
       /* ===== FIX 4: Stronger CTA slides ===== */
       .cta-link, .cta-button {
         padding: 4% 8% !important;
-        font-size: clamp(13px, 4cqw, 16px) !important;
+        font-size: clamp(16px, 4cqw, 22px) !important;
         font-weight: 600 !important;
         letter-spacing: 1px !important;
       }
       .cta-text, .cta-title {
-        font-size: clamp(20px, 7cqw, 28px) !important;
+        font-size: clamp(26px, 7cqw, 40px) !important;
         font-family: 'Cormorant Garamond', serif !important;
         font-weight: 600 !important;
+        text-align: center !important;
       }
       .link-hint {
-        font-size: clamp(11px, 3.5cqw, 14px) !important;
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
         margin-top: 3% !important;
+        text-align: center !important;
       }
       .brand-mark, .logo, .cine-logo {
         font-family: 'Gugi', sans-serif !important;
-        font-size: clamp(11px, 3.5cqw, 14px) !important;
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
         letter-spacing: 4px !important;
       }
 
@@ -129,6 +183,7 @@ async function renderCarousel(page, postDir, postNumber) {
       .combo-box {
         max-width: 95% !important;
         padding: 6% !important;
+        text-align: center !important;
       }
       .signal-grid {
         max-width: 95% !important;
@@ -136,6 +191,7 @@ async function renderCarousel(page, postDir, postNumber) {
       .divergence-box {
         max-width: 95% !important;
         padding: 7% !important;
+        text-align: center !important;
       }
     </style>
   `;
