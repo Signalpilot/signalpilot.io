@@ -56,21 +56,27 @@ async function renderCarousel(page, postDir, postNumber) {
       @font-face { font-family: 'Gugi'; font-style: normal; font-weight: 400; src: local('Gugi'); }
 
       /* ===== FIX 2: Starfield background on slides 2+ (not slide 1 — kept clean for IG grid) ===== */
-      .slide-wrapper:not(.slide-1) {
+      /* Note: .slide-1 class is on child element in 88% of posts, so we use
+         index-based JS injection + .has-starfield class instead of :not(.slide-1) */
+      .slide-wrapper.has-starfield {
         position: relative !important;
       }
-      .slide-wrapper:not(.slide-1) .starfield-bg {
+      .slide-wrapper.has-starfield .starfield-bg {
         position: absolute !important;
         inset: 0 !important;
         background-image: url('file://${STARFIELD_PATH}') !important;
         background-size: cover !important;
         background-position: center !important;
-        opacity: 0.15 !important;
+        opacity: 0.30 !important;
         pointer-events: none !important;
         z-index: 1 !important;
       }
-      .slide-wrapper:not(.slide-1) .slide-content {
+      .slide-wrapper.has-starfield .slide-content {
         z-index: 2 !important;
+      }
+      /* Safety net: absolutely no starfield on the first slide wrapper */
+      .slide-wrapper:first-child .starfield-bg {
+        display: none !important;
       }
 
       /* ===== FIX 3: Tighter layout — less padding, bigger text ===== */
@@ -151,8 +157,10 @@ async function renderCarousel(page, postDir, postNumber) {
     const wrappers = document.querySelectorAll('.slide-wrapper');
     wrappers.forEach((w, i) => {
       w.classList.remove('active');
-      // Inject starfield div into slides 2+ (skip slide 1 for clean IG grid)
-      if (!w.classList.contains('slide-1') && !w.querySelector('.starfield-bg')) {
+      // Inject starfield div into slides 2+ only (i > 0 = not first slide)
+      // Using index instead of class because .slide-1 is on child element in 88% of posts
+      if (i > 0 && !w.querySelector('.starfield-bg')) {
+        w.classList.add('has-starfield');
         const bg = document.createElement('div');
         bg.className = 'starfield-bg';
         w.insertBefore(bg, w.firstChild);
