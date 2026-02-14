@@ -2,7 +2,7 @@
 // Cron-triggered: Refreshes the Instagram/Facebook long-lived access token
 // Schedule: "0 6 * * 0" (Sundays at 6AM UTC)
 
-import { refreshAccessToken } from '../../lib/social/instagram-client.js';
+import { refreshLongLivedToken } from '../../lib/social/instagram-client.js';
 import { logPosting, logError } from '../../lib/social/queue-manager.js';
 
 export default async function handler(req, res) {
@@ -20,22 +20,23 @@ export default async function handler(req, res) {
   }
 
   try {
-    const result = await refreshAccessToken();
+    const result = await refreshLongLivedToken();
 
     // Log success
     await logPosting({
       platform: 'instagram',
       action: 'token_refresh',
-      expiresIn: result.expiresIn,
+      expiresIn: result.expires_in,
       reason: 'Token refreshed successfully',
     });
 
     // Note: The new token needs to be manually updated in Vercel env vars
-    // or stored in KV for automatic pickup
+    // The refresh extends the token for another 60 days
     return res.status(200).json({
       success: true,
-      message: 'Token refreshed. Update INSTAGRAM_ACCESS_TOKEN in Vercel env vars.',
-      expiresInDays: Math.round(result.expiresIn / 86400),
+      message: 'Token refreshed. Update INSTAGRAM_ACCESS_TOKEN in Vercel env vars with the new token.',
+      newToken: result.access_token,
+      expiresInDays: Math.round(result.expires_in / 86400),
     });
   } catch (error) {
     console.error('Token refresh error:', error.message);
