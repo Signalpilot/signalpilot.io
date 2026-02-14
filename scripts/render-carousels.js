@@ -179,6 +179,17 @@ async function renderCarousel(page, postDir, postNumber) {
         letter-spacing: 4px !important;
       }
 
+      /* ===== FIX 5: Center the SIGNALPILOT logo on slide 1 ===== */
+      .slide-1 .cine-logo {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+      }
+
+      /* ===== FIX 6: Hide nav buttons from hand-crafted carousel HTMLs ===== */
+      .export-nav, .slide-nav, .nav-controls {
+        display: none !important;
+      }
+
       /* Combo boxes and signal grids — fill more space */
       .combo-box {
         max-width: 95% !important;

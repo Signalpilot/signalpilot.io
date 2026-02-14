@@ -579,6 +579,8 @@ ${wrapperEnd}`;
     .slide-1 .cine-logo {
       position: absolute;
       bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
