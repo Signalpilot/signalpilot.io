@@ -1,163 +1,712 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 280 — 📚 DOCS: CUSTOM COLOR SCHEMES | Carousel Preview</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 280 — Customize Your Signal Pilot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --accent-purple: #9b4ad9;
+            --text-primary: #e2e2e2;
+            --text-secondary: #a0a0a0;
+            --video-opacity: 0.08;
+        }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.85);
-      --cine-text: rgba(229, 229, 229, 0.9);
-      --cine-subtle: rgba(163, 163, 163, 0.7);
-    }
+        body {
+            background-color: #000;
+            min-height: 100vh;
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+        .controls-bar {
+            max-width: 1200px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+        }
 
-    body {
-      background: #111;
-      font-family: 'Inter', sans-serif;
-      color: var(--text-primary);
-      padding: 2rem;
-      min-height: 100vh;
-    }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .controls {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 1000;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-    }
+        .control-group label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    .controls label {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
+        .control-group select,
+        .control-group input[type="range"] {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 8px 12px;
+            color: var(--text-primary);
+            font-size: 13px;
+        }
 
-    .controls select,
-    .controls button {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: inherit;
-    }
+        .control-group select {
+            cursor: pointer;
+        }
 
-    .controls button:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
+        .control-group input[type="range"] {
+            width: 100px;
+            cursor: pointer;
+        }
 
-    .page-title {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-family: 'Cormorant Garamond', serif;
-    }
+        #export-btn {
+            margin-left: auto;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(155, 74, 217, 0.3), rgba(155, 74, 217, 0.1));
+            border: 1px solid rgba(155, 74, 217, 0.4);
+            border-radius: 8px;
+            color: var(--accent-purple);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-    .page-title h1 {
-      font-size: 2rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
+        #export-btn:hover {
+            background: linear-gradient(135deg, rgba(155, 74, 217, 0.4), rgba(155, 74, 217, 0.2));
+        }
 
-    .page-title p {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-    }
+        .page-title {
+            max-width: 1200px;
+            margin: 0 auto 20px auto;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+        }
 
-    .carousel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 2rem;
-      max-width: 1800px;
-      margin: 0 auto;
-      padding-bottom: 4rem;
-    }
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
 
-    .slide-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      container-type: inline-size;
-    }
+        .slide-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            container-type: inline-size;
+        }
 
-    .slide-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-gold);
-      margin-bottom: 0.75rem;
-    }
+        .slide-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-left: 4px;
+        }
 
-    .slide {
-      width: 100%;
-      max-width: 540px;
-      aspect-ratio: 4 / 5;
-      position: relative;
-      overflow: hidden;
-      background: var(--bg-dark);
-      border-radius: 4px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
+        .slide {
+            position: relative;
+            width: 100%;
+            max-width: 540px;
+            aspect-ratio: 4 / 5;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(155, 74, 217, 0.2);
+        }
 
-    .slide-bg {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-    }
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: var(--video-opacity);
+            z-index: 0;
+        }
 
-    .slide-bg video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0.08;
-    }
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 10, 15, 0.95) 0%,
+                rgba(10, 10, 15, 0.98) 100%
+            );
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(40px, 7.4cqw, 80px);
+        }
 
-    .slide.bg-black .slide-bg video { opacity: 0; }
+        .slide-number {
+            position: absolute;
+            bottom: clamp(15px, 2.78cqw, 30px);
+            right: clamp(20px, 3.7cqw, 40px);
+            font-size: clamp(7px, 2cqw, 14px);
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
 
-    .slide-content {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 10%;
-    }
+        .logo-watermark {
+            position: absolute;
+            top: clamp(20px, 3.7cqw, 40px);
+            left: clamp(20px, 3.7cqw, 40px);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(10px, 1.85cqw, 20px);
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+.slide-1 .hook-icon {
+            font-size: clamp(50px, 9.26cqw, 100px);
+            margin-bottom: clamp(20px, 3.7cqw, 40px);
+        }
 
-    /* Slide 1 - Cinematic Hook (NEUTRAL) */
+        .slide-1 .hook-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(31px, 5.74cqw, 62px);
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: clamp(12px, 2.31cqw, 25px);
+            letter-spacing: 3px;
+        }
+
+        .slide-1 .hook-title-brand {
+            color: var(--accent-gold);
+        }
+
+        /* Slide 2 - Color Options */
+        .slide-2 .section-header {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 1.85cqw, 20px);
+            margin-bottom: clamp(25px, 4.63cqw, 50px);
+        }
+
+        .slide-2 .section-icon {
+            font-size: clamp(30px, 5.56cqw, 60px);
+        }
+
+        .slide-2 .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(26px, 4.81cqw, 52px);
+            font-weight: 600;
+            color: var(--accent-purple);
+            letter-spacing: 2px;
+        }
+
+        .slide-2 .options-card {
+            background: linear-gradient(
+                135deg,
+                rgba(155, 74, 217, 0.15) 0%,
+                rgba(155, 74, 217, 0.05) 100%
+            );
+            border: 1px solid rgba(155, 74, 217, 0.3);
+            border-radius: clamp(10px, 1.85cqw, 20px);
+            padding: clamp(22px, 4.17cqw, 45px) clamp(27px, 5.09cqw, 55px);
+            width: 100%;
+            max-width: clamp(350px, 64.81cqw, 700px);
+        }
+
+        .slide-2 .option-points {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(11px, 2.04cqw, 22px);
+        }
+
+        .slide-2 .option-point {
+            font-size: clamp(14px, 2.59cqw, 28px);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: clamp(9px, 1.67cqw, 18px);
+        }
+
+        .slide-2 .option-point::before {
+            content: '→';
+            color: var(--accent-purple);
+            font-weight: 600;
+        }
+
+        /* Slide 3 - Match Theme */
+        .slide-3 .benefit-container {
+            text-align: center;
+            max-width: clamp(375px, 69.44cqw, 750px);
+        }
+
+        .slide-3 .benefit-icon {
+            font-size: clamp(21px, 3.89cqw, 42px);
+            color: var(--accent-blue);
+            margin-bottom: clamp(12px, 2.31cqw, 25px);
+        }
+
+        .slide-3 .benefit-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4.44cqw, 48px);
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: clamp(17px, 3.24cqw, 35px);
+        }
+
+        .slide-3 .benefit-text {
+            font-size: clamp(15px, 2.78cqw, 30px);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .slide-3 .theme-badges {
+            display: flex;
+            justify-content: center;
+            gap: clamp(15px, 2.78cqw, 30px);
+            margin-top: clamp(22px, 4.17cqw, 45px);
+        }
+
+        .slide-3 .theme-badge {
+            padding: clamp(7px, 1.39cqw, 15px) clamp(17px, 3.24cqw, 35px);
+            border-radius: clamp(15px, 2.78cqw, 30px);
+            font-size: clamp(11px, 2.04cqw, 22px);
+            font-weight: 500;
+        }
+
+        .slide-3 .theme-badge.dark {
+            background: #1a1a2e;
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .slide-3 .theme-badge.light {
+            background: #f0f0f0;
+            color: #1a1a2e;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Slide 4 - Reduce Noise */
+        .slide-4 .benefit-container {
+            text-align: center;
+            max-width: clamp(375px, 69.44cqw, 750px);
+        }
+
+        .slide-4 .benefit-icon {
+            font-size: clamp(21px, 3.89cqw, 42px);
+            color: var(--accent-teal);
+            margin-bottom: clamp(12px, 2.31cqw, 25px);
+        }
+
+        .slide-4 .benefit-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4.44cqw, 48px);
+            font-weight: 600;
+            color: var(--accent-teal);
+            margin-bottom: clamp(17px, 3.24cqw, 35px);
+        }
+
+        .slide-4 .benefit-text {
+            font-size: clamp(15px, 2.78cqw, 30px);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        /* Slide 5 - Highlight */
+        .slide-5 .benefit-container {
+            text-align: center;
+            max-width: clamp(375px, 69.44cqw, 750px);
+        }
+
+        .slide-5 .benefit-icon {
+            font-size: clamp(21px, 3.89cqw, 42px);
+            color: var(--accent-gold);
+            margin-bottom: clamp(12px, 2.31cqw, 25px);
+        }
+
+        .slide-5 .benefit-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4.44cqw, 48px);
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: clamp(17px, 3.24cqw, 35px);
+        }
+
+        .slide-5 .benefit-text {
+            font-size: clamp(15px, 2.78cqw, 30px);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        /* Slide 6 - How To */
+        .slide-6 .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4.44cqw, 48px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: clamp(25px, 4.63cqw, 50px);
+            text-align: center;
+        }
+
+        .slide-6 .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(11px, 2.04cqw, 22px);
+            width: 100%;
+            max-width: clamp(375px, 69.44cqw, 750px);
+        }
+
+        .slide-6 .step-item {
+            display: flex;
+            align-items: center;
+            gap: clamp(12px, 2.31cqw, 25px);
+            background: linear-gradient(
+                135deg,
+                rgba(74, 144, 217, 0.12) 0%,
+                rgba(74, 144, 217, 0.04) 100%
+            );
+            border: 1px solid rgba(74, 144, 217, 0.25);
+            border-radius: clamp(8px, 1.48cqw, 16px);
+            padding: clamp(12px, 2.22cqw, 24px) clamp(15px, 2.78cqw, 30px);
+        }
+
+        .slide-6 .step-number {
+            width: clamp(22px, 4.17cqw, 45px);
+            height: clamp(22px, 4.17cqw, 45px);
+            background: var(--accent-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(11px, 2.04cqw, 22px);
+            font-weight: 600;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .slide-6 .step-text {
+            font-size: clamp(12px, 2.22cqw, 24px);
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        /* Slide 7 - CTA */
+        .slide-7 .cta-container {
+            text-align: center;
+        }
+
+        .slide-7 .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4.44cqw, 48px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: clamp(22px, 4.17cqw, 45px);
+        }
+
+        .slide-7 .cta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: clamp(7px, 1.39cqw, 15px);
+            background: linear-gradient(
+                135deg,
+                rgba(155, 74, 217, 0.2) 0%,
+                rgba(155, 74, 217, 0.1) 100%
+            );
+            border: 1px solid rgba(155, 74, 217, 0.4);
+            border-radius: clamp(25px, 4.63cqw, 50px);
+            padding: clamp(10px, 1.85cqw, 20px) clamp(22px, 4.17cqw, 45px);
+            margin-bottom: clamp(17px, 3.24cqw, 35px);
+        }
+
+        .slide-7 .cta-badge-icon {
+            font-size: clamp(16px, 2.96cqw, 32px);
+        }
+
+        .slide-7 .cta-badge-text {
+            font-size: clamp(14px, 2.59cqw, 28px);
+            font-weight: 500;
+            color: var(--accent-purple);
+        }
+
+        .slide-7 .cta-link {
+            font-size: clamp(15px, 2.78cqw, 30px);
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        .slide-7 .cta-link-icon {
+            margin-left: clamp(5px, 0.93cqw, 10px);
+        }
+
+        /* Export Mode Styles */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .controls-bar,
+        body.export-mode .page-title,
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+            padding: 0;
+            max-width: none;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: block;
+        }
+
+        body.export-mode .slide {
+            width: 1080px;
+            height: 1350px;
+            max-width: none;
+            aspect-ratio: auto;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        body.export-mode .slide-content {
+            padding: 80px;
+        }
+
+        body.export-mode .slide-number {
+            bottom: 30px;
+            right: 40px;
+            font-size: 14px;
+        }
+
+        body.export-mode .logo-watermark {
+            top: 40px;
+            left: 40px;
+            font-size: 20px;
+        }
+
+        body.export-mode .slide-1 .hook-icon {
+            font-size: 100px;
+            margin-bottom: 40px;
+        }
+
+        body.export-mode .slide-1 .hook-title {
+            font-size: 62px;
+            margin-bottom: 25px;
+        }
+
+        body.export-mode .slide-2 .section-header {
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        body.export-mode .slide-2 .section-icon {
+            font-size: 60px;
+        }
+
+        body.export-mode .slide-2 .section-title {
+            font-size: 52px;
+        }
+
+        body.export-mode .slide-2 .options-card {
+            border-radius: 20px;
+            padding: 45px 55px;
+            max-width: 700px;
+        }
+
+        body.export-mode .slide-2 .option-points {
+            gap: 22px;
+        }
+
+        body.export-mode .slide-2 .option-point {
+            font-size: 28px;
+            gap: 18px;
+        }
+
+        body.export-mode .slide-3 .benefit-container {
+            max-width: 750px;
+        }
+
+        body.export-mode .slide-3 .benefit-icon {
+            font-size: 42px;
+            margin-bottom: 25px;
+        }
+
+        body.export-mode .slide-3 .benefit-title {
+            font-size: 48px;
+            margin-bottom: 35px;
+        }
+
+        body.export-mode .slide-3 .benefit-text {
+            font-size: 30px;
+        }
+
+        body.export-mode .slide-3 .theme-badges {
+            gap: 30px;
+            margin-top: 45px;
+        }
+
+        body.export-mode .slide-3 .theme-badge {
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-size: 22px;
+        }
+
+        body.export-mode .slide-4 .benefit-container {
+            max-width: 750px;
+        }
+
+        body.export-mode .slide-4 .benefit-icon {
+            font-size: 42px;
+            margin-bottom: 25px;
+        }
+
+        body.export-mode .slide-4 .benefit-title {
+            font-size: 48px;
+            margin-bottom: 35px;
+        }
+
+        body.export-mode .slide-4 .benefit-text {
+            font-size: 30px;
+        }
+
+        body.export-mode .slide-5 .benefit-container {
+            max-width: 750px;
+        }
+
+        body.export-mode .slide-5 .benefit-icon {
+            font-size: 42px;
+            margin-bottom: 25px;
+        }
+
+        body.export-mode .slide-5 .benefit-title {
+            font-size: 48px;
+            margin-bottom: 35px;
+        }
+
+        body.export-mode .slide-5 .benefit-text {
+            font-size: 30px;
+        }
+
+        body.export-mode .slide-6 .section-title {
+            font-size: 48px;
+            margin-bottom: 50px;
+        }
+
+        body.export-mode .slide-6 .steps-container {
+            gap: 22px;
+            max-width: 750px;
+        }
+
+        body.export-mode .slide-6 .step-item {
+            gap: 25px;
+            border-radius: 16px;
+            padding: 24px 30px;
+        }
+
+        body.export-mode .slide-6 .step-number {
+            width: 45px;
+            height: 45px;
+            font-size: 22px;
+        }
+
+        body.export-mode .slide-6 .step-text {
+            font-size: 24px;
+        }
+
+        body.export-mode .slide-7 .cta-title {
+            font-size: 48px;
+            margin-bottom: 45px;
+        }
+
+        body.export-mode .slide-7 .cta-badge {
+            gap: 15px;
+            border-radius: 50px;
+            padding: 20px 45px;
+            margin-bottom: 35px;
+        }
+
+        body.export-mode .slide-7 .cta-badge-icon {
+            font-size: 32px;
+        }
+
+        body.export-mode .slide-7 .cta-badge-text {
+            font-size: 28px;
+        }
+
+        body.export-mode .slide-7 .cta-link {
+            font-size: 30px;
+        }
+
+        body.export-mode .slide-7 .cta-link-icon {
+            margin-left: 10px;
+        }
+    
+    
+    /* ═══ Slide 1 - Cinematic Hook (TEAL) ═══ */
     .slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%);
+      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
     }
 
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%);
       pointer-events: none;
       z-index: 1;
+    }
+    
+    .slide-1::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 18px;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
+      z-index: 5;
+    }
+
+    .slide-1 .slide-bg,
+    .slide-1 .bg-video,
+    .slide-1 .video-bg,
+    .slide-1 video {
+      display: none !important;
     }
 
     .slide-1 .slide-content {
       align-items: center;
       text-align: center;
+      justify-content: center;
       z-index: 3;
     }
 
@@ -166,7 +715,7 @@
       font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
+      color: rgba(94, 234, 212, 0.9);
       margin-bottom: 8%;
     }
 
@@ -175,14 +724,16 @@
       font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
       font-weight: 600;
       line-height: 1.2;
-      color: var(--cine-text);
+      color: rgba(255, 255, 255, 0.95);
       margin-bottom: 4%;
+      text-transform: none;
+      letter-spacing: 0;
     }
 
     .slide-1 .cine-divider {
       width: 60px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
+      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
       margin-bottom: 4%;
     }
 
@@ -190,453 +741,258 @@
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.65rem, 2cqw, 1.1rem);
       font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cine-subtle);
+      letter-spacing: 0.05em;
+      color: rgba(94, 234, 212, 0.4);
       line-height: 1.6;
     }
 
     .slide-1 .cine-logo {
       position: absolute;
       bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(163,163,163,0.4);
-    }
-
-    /* Standard text slides */
-    .slide-content .header {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.75rem, 2.3cqw, 1.25rem);
-      font-weight: 500;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 3%;
-    }
-
-    .slide-content .text {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.85rem, 2.6cqw, 1.4rem);
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
-
-    .slide-content .text em {
-      font-style: italic;
-      color: var(--accent-gold);
-    }
-
-    .slide-content .text .highlight {
-      color: var(--text-primary);
-      font-weight: 400;
-    }
-
-    .slide-content .text .red { color: var(--accent-red); }
-    .slide-content .text .blue { color: var(--accent-blue); }
-
-    .step-list {
-      list-style: none;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
-      line-height: 2;
-      color: var(--text-secondary);
-    }
-
-    .step-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 2%;
-      margin-bottom: 1%;
-    }
-
-    .step-list .num {
-      color: var(--accent-gold);
-      font-weight: 500;
-      min-width: 1.5rem;
-    }
-
-    .arrow-list {
-      list-style: none;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
-      line-height: 2;
-      color: var(--text-secondary);
-    }
-
-    .arrow-list li {
-      display: flex;
-      align-items: center;
-      gap: 2%;
-    }
-
-    .arrow-list .arrow { color: var(--accent-blue); }
-
-    .quote-slide .slide-content {
-      align-items: center;
-      text-align: center;
-    }
-
-    .quote-slide .quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.2cqw, 1.75rem);
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.5;
-    }
-
-    /* Single-slide quote card (standalone image, not carousel) */
-    .quote-card-slide .slide-content {
-      align-items: center;
-      text-align: center;
-      z-index: 3;
-    }
-
-    .quote-card-slide .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
-      margin-bottom: 6%;
-    }
-
-    .quote-card-slide .quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 3.8cqw, 2.2rem);
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.5;
-      margin-bottom: 5%;
-      max-width: 85%;
-    }
-
-    .quote-card-slide .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
-      margin-bottom: 4%;
-    }
-
-    .quote-card-slide .quote-title {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cine-subtle);
-      line-height: 1.6;
-    }
-
-    .quote-card-slide .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163,163,163,0.4);
-    }
-
-    .cta-slide .slide-content {
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-slide .cta-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.2cqw, 1.75rem);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 4%;
-    }
-
-    .cta-slide .cta-button {
-      display: inline-block;
-      padding: 2% 5%;
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-
-    .cta-slide .cta-brand {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 1.8cqw, 0.95rem);
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--cine-subtle);
-      margin-top: 5%;
-    }
-
-    .cta-slide .link-hint {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      color: var(--text-secondary);
-      margin-top: 3%;
-    }
-
-    /* Export mode */
-    body.export-mode {
-      padding: 0;
-      background: transparent;
-    }
-
-    body.export-mode .controls,
-    body.export-mode .page-title,
-    body.export-mode .slide-label {
-      display: none;
-    }
-
-    body.export-mode .carousel-grid {
-      display: block;
-      padding: 0;
-    }
-
-    body.export-mode .slide-wrapper {
-      display: none;
-    }
-
-    body.export-mode .slide-wrapper.active {
-      display: flex;
-    }
-
-    body.export-mode .slide {
-      width: 1080px;
-      height: 1350px;
-      max-width: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    @media (max-width: 900px) {
-      .carousel-grid { grid-template-columns: 1fr; }
-      .controls {
-        position: static;
-        margin-bottom: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+      color: rgba(94, 234, 212, 0.4);
     }
   </style>
 </head>
 <body>
-  <div class="controls">
-    <label>
-      Background:
-      <select id="bg-toggle">
-        <option value="starfield">Starfield</option>
-        <option value="black">Pure Black</option>
-      </select>
-    </label>
-    <label>
-      Starfield Opacity:
-      <select id="opacity-control">
-        <option value="0.03">3%</option>
-        <option value="0.05">5%</option>
-        <option value="0.08" selected>8%</option>
-        <option value="0.12">12%</option>
-        <option value="0.15">15%</option>
-      </select>
-    </label>
-    <button id="export-btn">Export Mode</button>
-  </div>
+    <div class="controls-bar">
+        <div class="control-group">
+            <label for="bg-select">Background</label>
+            <select id="bg-select">
+                <option value="starfield">Starfield</option>
+                <option value="none">None</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="opacity-slider">Opacity</label>
+            <input type="range" id="opacity-slider" min="0" max="30" value="8">
+        </div>
+        <button id="export-btn">Export Mode</button>
+    </div>
 
-  <div class="page-title">
-    <h1>Post 280 — 📚 DOCS: CUSTOM COLOR SCHEMES</h1>
-    <p>Instagram Carousel &bull; 7 Slides &bull; 1080&times;1350px</p>
-  </div>
+    <div class="page-title">Post 280 — 7 Slides</div>
 
-  <div class="carousel-grid">
-
-    <div class="slide-wrapper" data-slide="1">
+    <div class="carousel-grid">
+        <!-- Slide 1 - Hook -->
+        <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Cinematic Hook</span>
       <div class="slide slide-1">
         <div class="slide-content">
-          <div class="cine-label">Guide</div>
-          <div class="hook-main">CUSTOM COLOR SCHEMES</div>
+          <div class="cine-label">INSIGHT</div>
+          <div class="hook-main">The Psychology of Drawdowns</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">Make Signal Pilot yours.</p>
+          <p class="hook-sub"></p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — The Guide</span>
-      <div class="slide slide-2">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+        <!-- Slide 2 - Color Options -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Color Options</span>
+            <div class="slide slide-2">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <span class="logo-watermark">Signal Pilot</span>
+                    <div class="section-header">
+                        <span class="section-icon">🖌️</span>
+                        <h2 class="section-title">COLOR OPTIONS</h2>
+                    </div>
+                    <div class="options-card">
+                        <div class="option-points">
+                            <div class="option-point">Signal colors</div>
+                            <div class="option-point">Background tints</div>
+                            <div class="option-point">Line thickness</div>
+                            <div class="option-point">Transparency levels</div>
+                        </div>
+                    </div>
+                    <span class="slide-number">2 / 7</span>
+                </div>
+            </div>
         </div>
-        <div class="slide-content">
-          <p class="header">The Guide</p>
-          <p class="text">Understanding the why behind each signal gives you conviction to hold through noise.</p>
+
+        <!-- Slide 3 - Match Theme -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Match Theme</span>
+            <div class="slide slide-3">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <span class="logo-watermark">Signal Pilot</span>
+                    <div class="benefit-container">
+                        <p class="benefit-icon">✦</p>
+                        <h2 class="benefit-title">Match Your Chart Theme</h2>
+                        <p class="benefit-text">Dark mode? Light mode? Covered.</p>
+                        <div class="theme-badges">
+                            <span class="theme-badge dark">Dark Mode</span>
+                            <span class="theme-badge light">Light Mode</span>
+                        </div>
+                    </div>
+                    <span class="slide-number">3 / 7</span>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <!-- Slide 4 - Reduce Noise -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Reduce Noise</span>
+            <div class="slide slide-4">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <span class="logo-watermark">Signal Pilot</span>
+                    <div class="benefit-container">
+                        <p class="benefit-icon">✦</p>
+                        <h2 class="benefit-title">Reduce Visual Noise</h2>
+                        <p class="benefit-text">Hide elements you don't use.</p>
+                    </div>
+                    <span class="slide-number">4 / 7</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 - Highlight -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Highlight</span>
+            <div class="slide slide-5">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <span class="logo-watermark">Signal Pilot</span>
+                    <div class="benefit-container">
+                        <p class="benefit-icon">✦</p>
+                        <h2 class="benefit-title">Highlight Priorities</h2>
+                        <p class="benefit-text">Make important signals pop.</p>
+                    </div>
+                    <span class="slide-number">5 / 7</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 - How To -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — How To</span>
+            <div class="slide slide-6">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <span class="logo-watermark">Signal Pilot</span>
+                    <h2 class="section-title">How To Access</h2>
+                    <div class="steps-container">
+                        <div class="step-item">
+                            <span class="step-number">1</span>
+                            <span class="step-text">Click indicator settings (gear icon)</span>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2</span>
+                            <span class="step-text">Navigate to "Style" tab</span>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3</span>
+                            <span class="step-text">Adjust colors to preference</span>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">4</span>
+                            <span class="step-text">Save as default (optional)</span>
+                        </div>
+                    </div>
+                    <span class="slide-number">6 / 7</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 - CTA -->
+        <div class="slide-wrapper" data-slide="7">
+            <span class="slide-label">Slide 7 — CTA</span>
+            <div class="slide slide-7">
+                <video class="slide-bg" autoplay muted loop playsinline>
+                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                </video>
+                <div class="slide-content">
+                    <span class="logo-watermark">Signal Pilot</span>
+                    <div class="cta-container">
+                        <h2 class="cta-title">Full Customization Guide in Docs</h2>
+                        <div class="cta-badge">
+                            <span class="cta-badge-icon">📚</span>
+                            <span class="cta-badge-text">Documentation</span>
+                        </div>
+                        <p class="cta-link">Link in bio<span class="cta-link-icon">🔗</span></p>
+                    </div>
+                    <span class="slide-number">7 / 7</span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Step by Step</span>
-      <div class="slide slide-3">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">Step by Step</p>
-          <p class="text">Every tool works differently in trending vs ranging markets. Know which environment you're in.</p>
-        </div>
-      </div>
-    </div>
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide-wrapper');
+            const bgSelect = document.getElementById('bg-select');
+            const opacitySlider = document.getElementById('opacity-slider');
+            const exportBtn = document.getElementById('export-btn');
+            const videos = document.querySelectorAll('.slide-bg');
+            let currentSlide = 0;
+            let exportMode = false;
 
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Key Concepts</span>
-      <div class="slide slide-4">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">Key Concepts</p>
-          <p class="text">Paper trade first. Build confidence in the process before risking capital.</p>
-        </div>
-      </div>
-    </div>
+            bgSelect.addEventListener('change', function() {
+                videos.forEach(video => {
+                    video.style.display = this.value === 'none' ? 'none' : 'block';
+                });
+            });
 
-    <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — How To Use It</span>
-      <div class="slide slide-5">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">How To Use It</p>
-          <p class="text">The best setups combine multiple confirmations. One signal is a hypothesis, three is conviction.</p>
-        </div>
-      </div>
-    </div>
+            opacitySlider.addEventListener('input', function() {
+                document.documentElement.style.setProperty('--video-opacity', this.value / 100);
+            });
 
-    <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — Learn More</span>
-      <div class="slide slide-6">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">Free Resources</p>
-          <p class="text">
-            <span class="blue">&rarr;</span> 82 free Education Hub lessons<br><br>
-            <span class="blue">&rarr;</span> Step-by-step breakdowns<br><br>
-            <span class="blue">&rarr;</span> Real chart examples<br><br>
-          </p>
-        </div>
-      </div>
-    </div>
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
 
-    <div class="slide-wrapper" data-slide="7">
-      <span class="slide-label">Slide 7 — CTA</span>
-      <div class="slide slide-7 cta-slide">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="cta-text">Start Learning Free</p>
-          <a href="#" class="cta-button">Education Hub</a>
-          <p class="cta-brand">Signal Pilot</p>
-          <p class="link-hint">Link in bio</p>
-        </div>
-      </div>
-    </div>
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
 
-  </div>
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
 
-  <script>
-    const bgToggle = document.getElementById('bg-toggle');
-    const opacityControl = document.getElementById('opacity-control');
-    const slides = document.querySelectorAll('.slide');
-    const videos = document.querySelectorAll('.slide-bg video');
+            exportBtn.addEventListener('click', function() {
+                exportMode = !exportMode;
+                document.body.classList.toggle('export-mode', exportMode);
+                this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+                if (exportMode) {
+                    showSlide(currentSlide);
+                }
+            });
 
-    bgToggle.addEventListener('change', (e) => {
-      slides.forEach(slide => {
-        if (e.target.value === 'black') {
-          slide.classList.add('bg-black');
-        } else {
-          slide.classList.remove('bg-black');
-        }
-      });
-    });
+            document.addEventListener('keydown', function(e) {
+                if (exportMode) {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        e.preventDefault();
+                        nextSlide();
+                    } else if (e.key === 'ArrowLeft') {
+                        prevSlide();
+                    } else if (e.key === 'Escape') {
+                        exportBtn.click();
+                    }
+                }
+            });
 
-    opacityControl.addEventListener('change', (e) => {
-      videos.forEach(video => {
-        video.style.opacity = e.target.value;
-      });
-    });
-
-    const exportBtn = document.getElementById('export-btn');
-    const slideWrappers = document.querySelectorAll('.slide-wrapper');
-    let exportMode = false;
-    let currentExportSlide = 0;
-
-    exportBtn.addEventListener('click', () => {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-
-      if (exportMode) {
-        exportBtn.textContent = 'Exit Export (\u2190/\u2192 to navigate)';
-        currentExportSlide = 0;
-        updateExportSlide();
-      } else {
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
-    });
-
-    function updateExportSlide() {
-      slideWrappers.forEach((w, i) => {
-        w.classList.toggle('active', i === currentExportSlide);
-      });
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'ArrowLeft') {
-        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'Escape') {
-        exportMode = false;
-        document.body.classList.remove('export-mode');
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
-    });
-  </script>
+            showSlide(0);
+        })();
+    </script>
 </body>
 </html>

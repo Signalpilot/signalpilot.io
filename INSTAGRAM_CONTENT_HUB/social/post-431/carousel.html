@@ -1,163 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 431 — Free Education Access | Carousel Preview</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 431 — Free Education Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-teal: #4ad9d9;
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+            --video-opacity: 0.08;
+        }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.85);
-      --cine-text: rgba(204, 251, 241, 0.95);
-      --cine-subtle: rgba(94, 234, 212, 0.7);
-    }
+        body {
+            background-color: #050507;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            padding: 20px;
+            min-height: 100vh;
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+        .controls-bar {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            flex-wrap: wrap;
+        }
 
-    body {
-      background: #111;
-      font-family: 'Inter', sans-serif;
-      color: var(--text-primary);
-      padding: 2rem;
-      min-height: 100vh;
-    }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .controls {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 1000;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-    }
+        .control-group label {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
 
-    .controls label {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
+        .control-group select,
+        .control-group input[type="range"] {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
 
-    .controls select,
-    .controls button {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: inherit;
-    }
+        .control-group select {
+            min-width: 120px;
+        }
 
-    .controls button:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
+        #export-btn {
+            padding: 8px 20px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-gold);
+            background: transparent;
+            color: var(--accent-gold);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-    .page-title {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-family: 'Cormorant Garamond', serif;
-    }
+        #export-btn:hover {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+        }
 
-    .page-title h1 {
-      font-size: 2rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
+        .page-title {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            letter-spacing: 2px;
+        }
 
-    .page-title p {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-    }
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+            gap: 40px;
+            justify-items: center;
+            padding: 20px;
+        }
 
-    .carousel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 2rem;
-      max-width: 1800px;
-      margin: 0 auto;
-      padding-bottom: 4rem;
-    }
+        .slide-wrapper {
+            container-type: inline-size;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
 
-    .slide-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      container-type: inline-size;
-    }
+        .slide-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-    .slide-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-gold);
-      margin-bottom: 0.75rem;
-    }
+        .slide {
+            max-width: 540px;
+            aspect-ratio: 4 / 5;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-    .slide {
-      width: 100%;
-      max-width: 540px;
-      aspect-ratio: 4 / 5;
-      position: relative;
-      overflow: hidden;
-      background: var(--bg-dark);
-      border-radius: 4px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: var(--video-opacity);
+            z-index: 0;
+        }
 
-    .slide-bg {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-    }
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            padding: clamp(24px, 6.67vw, 72px);
+            display: flex;
+            flex-direction: column;
+        }
 
-    .slide-bg video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0.08;
-    }
+        .slide-number {
+            font-size: clamp(8px, 1.3cqw, 14px);
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            margin-bottom: auto;
+        }
 
-    .slide.bg-black .slide-bg video { opacity: 0; }
+        .brand-mark {
+            font-size: clamp(7px, 1.2cqw, 13px);
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: auto;
+            text-align: center;
+        }
 
-    .slide-content {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 10%;
-    }
+        h1.slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(36px, 6.67cqw, 72px);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: clamp(12px, 2.22vw, 24px);
+            overflow-wrap: break-word;
+        }
 
-    /* Slide 1 - Cinematic Hook (TEAL) */
+        h2.section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(26px, 4.81cqw, 52px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: clamp(18px, 3.33vw, 36px);
+        }
+
+        .subtitle {
+            font-size: clamp(13px, 2.41cqw, 26px);
+            font-weight: 400;
+            color: var(--accent-gold);
+            font-style: italic;
+        }
+
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .free-badge {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(14px, 2.59cqw, 28px);
+            font-weight: 600;
+            color: var(--accent-green);
+            margin-bottom: clamp(10px, 1.85vw, 20px);
+            letter-spacing: 2px;
+        }
+
+        .tier-grid {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(8px, 1.48vw, 16px);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .tier-item {
+            background: linear-gradient(135deg, rgba(74, 217, 122, 0.12) 0%, rgba(74, 217, 122, 0.04) 100%);
+            border: 1px solid rgba(74, 217, 122, 0.25);
+            border-radius: clamp(6px, 1.11vw, 12px);
+            padding: clamp(10px, 1.85vw, 20px) clamp(14px, 2.59vw, 28px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tier-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(13px, 2.41cqw, 26px);
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+
+        .tier-desc {
+            font-size: clamp(9px, 1.67cqw, 18px);
+            color: var(--text-secondary);
+        }
+
+        .no-catch-box {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%);
+            border: 1px solid rgba(74, 144, 217, 0.3);
+            border-radius: clamp(8px, 1.48vw, 16px);
+            padding: clamp(22px, 4.07vw, 44px);
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .no-catch-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4.44cqw, 48px);
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: clamp(14px, 2.59vw, 28px);
+        }
+
+        .check-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .check-list li {
+            font-size: clamp(12px, 2.22cqw, 24px);
+            color: var(--text-primary);
+            padding: clamp(6px, 1.11vw, 12px) 0;
+            padding-left: clamp(20px, 3.7vw, 40px);
+            position: relative;
+        }
+
+        .check-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-size: clamp(11px, 2.04cqw, 22px);
+        }
+
+        .philosophy-box {
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: clamp(8px, 1.48vw, 16px);
+            padding: clamp(22px, 4.07vw, 44px);
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .philosophy-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4.44cqw, 48px);
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: clamp(14px, 2.59vw, 28px);
+        }
+
+        .philosophy-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .philosophy-list li {
+            font-size: clamp(12px, 2.22cqw, 24px);
+            color: var(--text-primary);
+            padding: clamp(6px, 1.11vw, 12px) 0;
+            padding-left: clamp(20px, 3.7vw, 40px);
+            position: relative;
+        }
+
+        .philosophy-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+        }
+
+        .approach-message {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(23px, 4.26cqw, 46px);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-primary);
+            max-width: 700px;
+            line-height: 1.35;
+        }
+
+        .cta-text {
+            font-size: clamp(14px, 2.59cqw, 28px);
+            color: var(--text-secondary);
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .controls-bar,
+        body.export-mode .page-title {
+            display: none;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+            padding: 0;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .slide {
+            max-width: none;
+            width: 1080px;
+            height: 1350px;
+            aspect-ratio: auto;
+            border: none;
+        }
+
+        body.export-mode .slide-content {
+            padding: 72px;
+        }
+
+        body.export-mode .slide-number {
+            font-size: 14px;
+        }
+
+        body.export-mode .brand-mark {
+            font-size: 13px;
+        }
+
+        body.export-mode h1.slide-title {
+            font-size: 72px;
+            margin-bottom: 24px;
+        }
+
+        body.export-mode h2.section-title {
+            font-size: 52px;
+            margin-bottom: 36px;
+        }
+
+        body.export-mode .subtitle {
+            font-size: 26px;
+        }
+
+        body.export-mode .free-badge {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        body.export-mode .tier-grid {
+            gap: 16px;
+        }
+
+        body.export-mode .tier-item {
+            border-radius: 12px;
+            padding: 20px 28px;
+        }
+
+        body.export-mode .tier-name {
+            font-size: 26px;
+        }
+
+        body.export-mode .tier-desc {
+            font-size: 18px;
+        }
+
+        body.export-mode .no-catch-box {
+            border-radius: 16px;
+            padding: 44px;
+        }
+
+        body.export-mode .no-catch-box h3 {
+            font-size: 48px;
+            margin-bottom: 28px;
+        }
+
+        body.export-mode .check-list li {
+            font-size: 24px;
+            padding: 12px 0;
+            padding-left: 40px;
+        }
+
+        body.export-mode .check-list li::before {
+            font-size: 22px;
+        }
+
+        body.export-mode .philosophy-box {
+            border-radius: 16px;
+            padding: 44px;
+        }
+
+        body.export-mode .philosophy-box h3 {
+            font-size: 48px;
+            margin-bottom: 28px;
+        }
+
+        body.export-mode .philosophy-list li {
+            font-size: 24px;
+            padding: 12px 0;
+            padding-left: 40px;
+        }
+
+        body.export-mode .approach-message {
+            font-size: 46px;
+        }
+
+        body.export-mode .cta-text {
+            font-size: 28px;
+        }
+    
+    
+    /* ═══ Slide 1 - Cinematic Hook (NEUTRAL) ═══ */
     .slide-1 {
-      background: linear-gradient(180deg, #0a0f0e 0%, #080a09 100%);
+      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%) !important;
     }
 
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(20,184,166,0.08) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
       pointer-events: none;
       z-index: 1;
+    }
+    
+
+    .slide-1 .slide-bg,
+    .slide-1 .bg-video,
+    .slide-1 .video-bg,
+    .slide-1 video {
+      display: none !important;
     }
 
     .slide-1 .slide-content {
       align-items: center;
       text-align: center;
+      justify-content: center;
       z-index: 3;
     }
 
@@ -166,7 +489,7 @@
       font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.9);
+      color: rgba(163, 163, 163, 0.9);
       margin-bottom: 8%;
     }
 
@@ -175,14 +498,16 @@
       font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
       font-weight: 600;
       line-height: 1.2;
-      color: var(--cine-text);
+      color: rgba(255, 255, 255, 0.95);
       margin-bottom: 4%;
+      text-transform: none;
+      letter-spacing: 0;
     }
 
     .slide-1 .cine-divider {
       width: 60px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
+      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
       margin-bottom: 4%;
     }
 
@@ -190,439 +515,233 @@
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.65rem, 2cqw, 1.1rem);
       font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cine-subtle);
+      letter-spacing: 0.05em;
+      color: rgba(163, 163, 163, 0.4);
       line-height: 1.6;
     }
 
     .slide-1 .cine-logo {
       position: absolute;
       bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94,234,212,0.4);
-    }
-
-    /* Standard text slides */
-    .slide-content .header {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.75rem, 2.3cqw, 1.25rem);
-      font-weight: 500;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 3%;
-    }
-
-    .slide-content .text {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.85rem, 2.6cqw, 1.4rem);
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
-
-    .slide-content .text em {
-      font-style: italic;
-      color: var(--accent-gold);
-    }
-
-    .slide-content .text .highlight {
-      color: var(--text-primary);
-      font-weight: 400;
-    }
-
-    .slide-content .text .red { color: var(--accent-red); }
-    .slide-content .text .blue { color: var(--accent-blue); }
-
-    .step-list {
-      list-style: none;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
-      line-height: 2;
-      color: var(--text-secondary);
-    }
-
-    .step-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 2%;
-      margin-bottom: 1%;
-    }
-
-    .step-list .num {
-      color: var(--accent-gold);
-      font-weight: 500;
-      min-width: 1.5rem;
-    }
-
-    .arrow-list {
-      list-style: none;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
-      line-height: 2;
-      color: var(--text-secondary);
-    }
-
-    .arrow-list li {
-      display: flex;
-      align-items: center;
-      gap: 2%;
-    }
-
-    .arrow-list .arrow { color: var(--accent-blue); }
-
-    .quote-slide .slide-content {
-      align-items: center;
-      text-align: center;
-    }
-
-    .quote-slide .quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.2cqw, 1.75rem);
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.5;
-    }
-
-    /* Single-slide quote card (standalone image, not carousel) */
-    .quote-card-slide .slide-content {
-      align-items: center;
-      text-align: center;
-      z-index: 3;
-    }
-
-    .quote-card-slide .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.9);
-      margin-bottom: 6%;
-    }
-
-    .quote-card-slide .quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 3.8cqw, 2.2rem);
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.5;
-      margin-bottom: 5%;
-      max-width: 85%;
-    }
-
-    .quote-card-slide .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
-      margin-bottom: 4%;
-    }
-
-    .quote-card-slide .quote-title {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cine-subtle);
-      line-height: 1.6;
-    }
-
-    .quote-card-slide .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(94,234,212,0.4);
-    }
-
-    .cta-slide .slide-content {
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-slide .cta-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.2cqw, 1.75rem);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 4%;
-    }
-
-    .cta-slide .cta-button {
-      display: inline-block;
-      padding: 2% 5%;
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-
-    .cta-slide .cta-brand {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 1.8cqw, 0.95rem);
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--cine-subtle);
-      margin-top: 5%;
-    }
-
-    .cta-slide .link-hint {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      color: var(--text-secondary);
-      margin-top: 3%;
-    }
-
-    /* Export mode */
-    body.export-mode {
-      padding: 0;
-      background: transparent;
-    }
-
-    body.export-mode .controls,
-    body.export-mode .page-title,
-    body.export-mode .slide-label {
-      display: none;
-    }
-
-    body.export-mode .carousel-grid {
-      display: block;
-      padding: 0;
-    }
-
-    body.export-mode .slide-wrapper {
-      display: none;
-    }
-
-    body.export-mode .slide-wrapper.active {
-      display: flex;
-    }
-
-    body.export-mode .slide {
-      width: 1080px;
-      height: 1350px;
-      max-width: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    @media (max-width: 900px) {
-      .carousel-grid { grid-template-columns: 1fr; }
-      .controls {
-        position: static;
-        margin-bottom: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+      color: rgba(163, 163, 163, 0.4);
     }
   </style>
 </head>
 <body>
-  <div class="controls">
-    <label>
-      Background:
-      <select id="bg-toggle">
-        <option value="starfield">Starfield</option>
-        <option value="black">Pure Black</option>
-      </select>
-    </label>
-    <label>
-      Starfield Opacity:
-      <select id="opacity-control">
-        <option value="0.03">3%</option>
-        <option value="0.05">5%</option>
-        <option value="0.08" selected>8%</option>
-        <option value="0.12">12%</option>
-        <option value="0.15">15%</option>
-      </select>
-    </label>
-    <button id="export-btn">Export Mode</button>
-  </div>
+    <div class="controls-bar">
+        <div class="control-group">
+            <label for="bg-select">Background</label>
+            <select id="bg-select">
+                <option value="starfield">Starfield</option>
+                <option value="none">None</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="opacity-slider">Opacity</label>
+            <input type="range" id="opacity-slider" min="0" max="30" value="8" />
+        </div>
+        <button id="export-btn">Export Mode</button>
+    </div>
 
-  <div class="page-title">
-    <h1>Post 431 — Free Education Access</h1>
-    <p>Instagram Carousel &bull; 6 Slides &bull; 1080&times;1350px</p>
-  </div>
+    <div class="page-title">Post 431 — 6 Slides</div>
 
-  <div class="carousel-grid">
+    <div class="carousel-grid">
 
-    <div class="slide-wrapper" data-slide="1">
+        <!-- Slide 1: Hook -->
+        <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Cinematic Hook</span>
       <div class="slide slide-1">
         <div class="slide-content">
-          <div class="cine-label">Explore</div>
-          <div class="hook-main">Free Education Access</div>
+          <div class="cine-label">LEARN</div>
+          <div class="hook-main">The 3 Types of Trading Edges</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">82 lessons. Zero cost.</p>
+          <p class="hook-sub"></p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — The Concept</span>
-      <div class="slide slide-2">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+        <!-- Slide 2: Tiers -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Tiers</span>
+            <div class="slide slide-2">
+                <video class="bg-video" autoplay muted loop playsinline>
+                    <source src="../../video/starfield.mp4" type="video/mp4" />
+                </video>
+                <div class="slide-content">
+                    <span class="slide-number">02 / 06</span>
+                    <div class="center-content">
+                        <span class="free-badge">82 LESSONS — COMPLETELY FREE</span>
+                        <div class="tier-grid">
+                            <div class="tier-item">
+                                <span class="tier-name">Beginner (20 lessons)</span>
+                                <span class="tier-desc">Foundations & first steps</span>
+                            </div>
+                            <div class="tier-item">
+                                <span class="tier-name">Intermediate (27 lessons)</span>
+                                <span class="tier-desc">Building real skills</span>
+                            </div>
+                            <div class="tier-item">
+                                <span class="tier-name">Advanced (27 lessons)</span>
+                                <span class="tier-desc">Professional concepts</span>
+                            </div>
+                            <div class="tier-item">
+                                <span class="tier-name">Professional (8 lessons)</span>
+                                <span class="tier-desc">Elite-level frameworks</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
         </div>
-        <div class="slide-content">
-          <p class="header">The Concept</p>
-          <p class="text">Beginner (20 lessons): Foundations &amp; first steps<br>
-Intermediate (27 lessons): Building real skills<br>
-Advanced (27 lessons): Professional concepts<br>
-Professional (8 lessons): Elite-level frameworks</p>
+
+        <!-- Slide 3: No Catch -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — No Catch</span>
+            <div class="slide slide-3">
+                <video class="bg-video" autoplay muted loop playsinline>
+                    <source src="../../video/starfield.mp4" type="video/mp4" />
+                </video>
+                <div class="slide-content">
+                    <span class="slide-number">03 / 06</span>
+                    <div class="center-content">
+                        <div class="no-catch-box">
+                            <h3>NO CATCH</h3>
+                            <ul class="check-list">
+                                <li>No credit card required</li>
+                                <li>No email gate</li>
+                                <li>No "preview only" tricks</li>
+                                <li>Full lessons, always free</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <!-- Slide 4: Philosophy -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — Philosophy</span>
+            <div class="slide slide-4">
+                <video class="bg-video" autoplay muted loop playsinline>
+                    <source src="../../video/starfield.mp4" type="video/mp4" />
+                </video>
+                <div class="slide-content">
+                    <span class="slide-number">04 / 06</span>
+                    <div class="center-content">
+                        <div class="philosophy-box">
+                            <h3>WHY FREE?</h3>
+                            <ul class="philosophy-list">
+                                <li>Education shouldn't be gatekept</li>
+                                <li>Knowledge creates better traders</li>
+                                <li>We believe in earning trust</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: The Approach -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — The Approach</span>
+            <div class="slide slide-5">
+                <video class="bg-video" autoplay muted loop playsinline>
+                    <source src="../../video/starfield.mp4" type="video/mp4" />
+                </video>
+                <div class="slide-content">
+                    <span class="slide-number">05 / 06</span>
+                    <div class="center-content">
+                        <p class="approach-message">"Learn first. Decide about tools later."</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: CTA -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — CTA</span>
+            <div class="slide slide-6">
+                <video class="bg-video" autoplay muted loop playsinline>
+                    <source src="../../video/starfield.mp4" type="video/mp4" />
+                </video>
+                <div class="slide-content">
+                    <span class="slide-number">06 / 06</span>
+                    <div class="center-content">
+                        <p class="cta-text">Link in bio</p>
+                    </div>
+                    <span class="brand-mark">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — The Details</span>
-      <div class="slide slide-3">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">The Details</p>
-          <p class="text">No credit card required<br>
-No email gate<br>
-No &quot;preview only&quot; tricks<br>
-Full lessons, always free</p>
-        </div>
-      </div>
-    </div>
+    <script>
+        const bgSelect = document.getElementById('bg-select');
+        const opacitySlider = document.getElementById('opacity-slider');
+        const exportBtn = document.getElementById('export-btn');
+        const videos = document.querySelectorAll('.bg-video');
+        const slideWrappers = document.querySelectorAll('.slide-wrapper');
+        let exportMode = false;
+        let currentSlide = 0;
 
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Why It Matters</span>
-      <div class="slide slide-4">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">Why It Matters</p>
-          <p class="text">Paper trade first. Build confidence in the process before risking capital.</p>
-        </div>
-      </div>
-    </div>
+        bgSelect.addEventListener('change', (e) => {
+            videos.forEach(video => {
+                video.style.display = e.target.value === 'none' ? 'none' : 'block';
+            });
+        });
 
-    <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — The Insight</span>
-      <div class="slide slide-5 quote-slide">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="quote">&ldquo;Professional (8 lessons): Elite-level frameworks&rdquo;</p>
-        </div>
-      </div>
-    </div>
+        opacitySlider.addEventListener('input', (e) => {
+            document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
+        });
 
-    <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — CTA</span>
-      <div class="slide slide-6 cta-slide">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="cta-text">Learn More</p>
-          <a href="#" class="cta-button">Visit Signal Pilot</a>
-          <p class="cta-brand">Signal Pilot</p>
-          <p class="link-hint">Link in bio</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    const bgToggle = document.getElementById('bg-toggle');
-    const opacityControl = document.getElementById('opacity-control');
-    const slides = document.querySelectorAll('.slide');
-    const videos = document.querySelectorAll('.slide-bg video');
-
-    bgToggle.addEventListener('change', (e) => {
-      slides.forEach(slide => {
-        if (e.target.value === 'black') {
-          slide.classList.add('bg-black');
-        } else {
-          slide.classList.remove('bg-black');
+        function enterExportMode() {
+            exportMode = true;
+            document.body.classList.add('export-mode');
+            currentSlide = 0;
+            updateExportView();
+            exportBtn.textContent = 'Exit Export';
         }
-      });
-    });
 
-    opacityControl.addEventListener('change', (e) => {
-      videos.forEach(video => {
-        video.style.opacity = e.target.value;
-      });
-    });
+        function exitExportMode() {
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            slideWrappers.forEach(w => w.classList.remove('active'));
+            exportBtn.textContent = 'Export Mode';
+        }
 
-    const exportBtn = document.getElementById('export-btn');
-    const slideWrappers = document.querySelectorAll('.slide-wrapper');
-    let exportMode = false;
-    let currentExportSlide = 0;
+        function updateExportView() {
+            slideWrappers.forEach((wrapper, i) => {
+                wrapper.classList.toggle('active', i === currentSlide);
+            });
+        }
 
-    exportBtn.addEventListener('click', () => {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
+        exportBtn.addEventListener('click', () => {
+            if (exportMode) exitExportMode();
+            else enterExportMode();
+        });
 
-      if (exportMode) {
-        exportBtn.textContent = 'Exit Export (\u2190/\u2192 to navigate)';
-        currentExportSlide = 0;
-        updateExportSlide();
-      } else {
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
-    });
-
-    function updateExportSlide() {
-      slideWrappers.forEach((w, i) => {
-        w.classList.toggle('active', i === currentExportSlide);
-      });
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'ArrowLeft') {
-        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'Escape') {
-        exportMode = false;
-        document.body.classList.remove('export-mode');
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
-    });
-  </script>
+        document.addEventListener('keydown', (e) => {
+            if (!exportMode) return;
+            if (e.key === 'ArrowRight' && currentSlide < slideWrappers.length - 1) {
+                currentSlide++;
+                updateExportView();
+            } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                currentSlide--;
+                updateExportView();
+            } else if (e.key === 'Escape') {
+                exitExportMode();
+            }
+        });
+    </script>
 </body>
 </html>

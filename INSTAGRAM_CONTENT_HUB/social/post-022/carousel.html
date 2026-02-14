@@ -4,160 +4,396 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Post 022 — Janus Atlas Multi-Timeframe Demo | Carousel Preview</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --bg-dark: #0a0a0f;
       --accent-blue: #4a90d9;
       --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.85);
-      --cine-text: rgba(229, 229, 229, 0.9);
-      --cine-subtle: rgba(163, 163, 163, 0.7);
+      --accent-green: #4ad97a;
+      --accent-teal: #4ad9d9;
+      --text-primary: #e8e8e8;
+      --text-secondary: #a0a0a0;
+      --text-dim: #6a6a6a;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
-      background: #111;
-      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
       color: var(--text-primary);
-      padding: 2rem;
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
+      padding: 40px 20px;
     }
 
     .controls {
       position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 1000;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
       display: flex;
-      gap: 1rem;
+      gap: 12px;
       align-items: center;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
     }
 
     .controls label {
-      font-size: 0.875rem;
       color: var(--text-secondary);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .controls select,
-    .controls button {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
+    .controls input[type="checkbox"] {
       cursor: pointer;
-      font-family: inherit;
     }
 
-    .controls button:hover {
-      background: rgba(255, 255, 255, 0.1);
+    .controls input[type="range"] {
+      width: 80px;
+      cursor: pointer;
+    }
+
+    .controls button {
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
     }
 
     .page-title {
       text-align: center;
-      margin-bottom: 2rem;
-      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 40px;
     }
 
     .page-title h1 {
-      font-size: 2rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 8px;
     }
 
     .page-title p {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
+      color: var(--text-dim);
+      font-size: 14px;
     }
 
     .carousel-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 2rem;
-      max-width: 1800px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding-bottom: 4rem;
     }
 
     .slide-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      aspect-ratio: 4 / 5;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-dark);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
       container-type: inline-size;
     }
 
-    .slide-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-gold);
-      margin-bottom: 0.75rem;
-    }
-
-    .slide {
+    .slide-wrapper .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      max-width: 540px;
-      aspect-ratio: 4 / 5;
-      position: relative;
-      overflow: hidden;
-      background: var(--bg-dark);
-      border-radius: 4px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .slide-bg {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-    }
-
-    .slide-bg video {
-      width: 100%; height: 100%;
+      height: 100%;
       object-fit: cover;
-      opacity: 0.08;
+      opacity: var(--video-opacity, 0.08);
+      pointer-events: none;
     }
 
-    .slide.bg-black .slide-bg video { opacity: 0; }
-
-    .slide-content {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+    .slide-wrapper .slide-content {
+      position: relative;
       z-index: 2;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 10%;
+      align-items: center;
+      padding: 8%;
+      text-align: center;
     }
 
-    /* Slide 1 - Cinematic Hook (NEUTRAL) */
+    .slide-number {
+      position: absolute;
+      top: 3%;
+      left: 3%;
+      font-size: clamp(7px, 3cqw, 11px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: 3%;
+      right: 3%;
+      font-size: clamp(6px, 2.5cqw, 10px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .slide-icon {
+      font-size: clamp(29px, 12cqw, 48px);
+      margin-bottom: 3.5%;
+    }
+
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(14px, 6cqw, 28px);
+      font-weight: 600;
+      margin-bottom: 3%;
+      line-height: 1.2;
+      overflow-wrap: break-word;
+    }
+
+    .slide-title.large {
+      font-size: clamp(16px, 7cqw, 32px);
+    }
+
+    .slide-title.teal {
+      color: var(--accent-teal);
+    }
+
+    .slide-subtitle {
+      font-size: clamp(9px, 3.5cqw, 14px);
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 3.5%;
+    }
+
+    .slide-body {
+      font-size: clamp(10px, 4cqw, 16px);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 90%;
+    }
+
+    .feature-box {
+      width: 100%;
+      max-width: 340px;
+      background: rgba(74, 217, 217, 0.1);
+      border: 2px solid rgba(74, 217, 217, 0.4);
+      border-radius: 16px;
+      padding: 5%;
+      margin: 3% 0;
+      text-align: left;
+    }
+
+    .feature-box .title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(12px, 5.5cqw, 22px);
+      font-weight: 600;
+      color: var(--accent-teal);
+      margin-bottom: 2%;
+    }
+
+    .feature-box .desc {
+      font-size: clamp(9px, 3.5cqw, 14px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .example-box {
+      width: 100%;
+      max-width: 340px;
+      background: rgba(74, 144, 217, 0.1);
+      border: 2px solid rgba(74, 144, 217, 0.4);
+      border-radius: 16px;
+      padding: 5%;
+      margin: 3% 0;
+      text-align: left;
+    }
+
+    .example-box .label {
+      font-size: clamp(8px, 3cqw, 12px);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-blue);
+      margin-bottom: 2%;
+    }
+
+    .example-box .text {
+      font-size: clamp(10px, 4cqw, 16px);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .example-box .text .teal {
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+
+    .example-box .text .highlight {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .confluence-box {
+      width: 100%;
+      max-width: 340px;
+      background: rgba(201, 169, 98, 0.1);
+      border: 2px solid rgba(201, 169, 98, 0.4);
+      border-radius: 16px;
+      padding: 5%;
+      margin: 3% 0;
+      text-align: center;
+    }
+
+    .confluence-box .title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(12px, 6cqw, 24px);
+      font-weight: 600;
+      color: var(--accent-gold);
+      margin-bottom: 3%;
+    }
+
+    .confluence-box .weak {
+      font-size: clamp(9px, 4cqw, 15px);
+      color: var(--text-dim);
+      margin-bottom: 3%;
+    }
+
+    .confluence-box .strong {
+      font-size: clamp(9px, 4cqw, 15px);
+      color: var(--text-primary);
+    }
+
+    .confluence-box .teal {
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+
+    .cta-link {
+      display: inline-block;
+      margin-top: 4%;
+      padding: 2.5% 6%;
+      background: transparent;
+      border: 2px solid var(--accent-teal);
+      color: var(--accent-teal);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: clamp(9px, 3.5cqw, 14px);
+      letter-spacing: 1px;
+    }
+
+    body.export-mode {
+      padding: 0;
+      background: #000;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      width: 1080px;
+      height: 1350px;
+      border-radius: 0;
+      margin: 0;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    body.export-mode .export-nav {
+      display: flex;
+    }
+
+    .export-nav button {
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .export-nav .slide-indicator {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+    }
+  
+    
+    /* ═══ Slide 1 - Cinematic Hook (ORANGE) ═══ */
     .slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%);
+      background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important;
     }
 
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(217,148,74,0.08) 0%, transparent 100%);
       pointer-events: none;
       z-index: 1;
+    }
+    
+    .slide-1::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 18px;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(251,191,36,0.9) 0%, rgba(217,148,74,0.7) 100%);
+      z-index: 5;
+    }
+
+    .slide-1 .slide-bg,
+    .slide-1 .bg-video,
+    .slide-1 .video-bg,
+    .slide-1 video {
+      display: none !important;
     }
 
     .slide-1 .slide-content {
       align-items: center;
       text-align: center;
+      justify-content: center;
       z-index: 3;
     }
 
@@ -166,7 +402,7 @@
       font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
+      color: rgba(251, 191, 36, 0.9);
       margin-bottom: 8%;
     }
 
@@ -175,14 +411,16 @@
       font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
       font-weight: 600;
       line-height: 1.2;
-      color: var(--cine-text);
+      color: rgba(255, 255, 255, 0.95);
       margin-bottom: 4%;
+      text-transform: none;
+      letter-spacing: 0;
     }
 
     .slide-1 .cine-divider {
       width: 60px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
+      background: linear-gradient(90deg, transparent, rgba(251,191,36,0.6), transparent);
       margin-bottom: 4%;
     }
 
@@ -190,473 +428,180 @@
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.65rem, 2cqw, 1.1rem);
       font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cine-subtle);
+      letter-spacing: 0.05em;
+      color: rgba(251, 191, 36, 0.4);
       line-height: 1.6;
     }
 
     .slide-1 .cine-logo {
       position: absolute;
       bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(163,163,163,0.4);
-    }
-
-    /* Standard text slides */
-    .slide-content .header {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.75rem, 2.3cqw, 1.25rem);
-      font-weight: 500;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 3%;
-    }
-
-    .slide-content .text {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.85rem, 2.6cqw, 1.4rem);
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
-
-    .slide-content .text em {
-      font-style: italic;
-      color: var(--accent-gold);
-    }
-
-    .slide-content .text .highlight {
-      color: var(--text-primary);
-      font-weight: 400;
-    }
-
-    .slide-content .text .red { color: var(--accent-red); }
-    .slide-content .text .blue { color: var(--accent-blue); }
-
-    .step-list {
-      list-style: none;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
-      line-height: 2;
-      color: var(--text-secondary);
-    }
-
-    .step-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 2%;
-      margin-bottom: 1%;
-    }
-
-    .step-list .num {
-      color: var(--accent-gold);
-      font-weight: 500;
-      min-width: 1.5rem;
-    }
-
-    .arrow-list {
-      list-style: none;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
-      line-height: 2;
-      color: var(--text-secondary);
-    }
-
-    .arrow-list li {
-      display: flex;
-      align-items: center;
-      gap: 2%;
-    }
-
-    .arrow-list .arrow { color: var(--accent-blue); }
-
-    .quote-slide .slide-content {
-      align-items: center;
-      text-align: center;
-    }
-
-    .quote-slide .quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.2cqw, 1.75rem);
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.5;
-    }
-
-    /* Single-slide quote card (standalone image, not carousel) */
-    .quote-card-slide .slide-content {
-      align-items: center;
-      text-align: center;
-      z-index: 3;
-    }
-
-    .quote-card-slide .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
-      margin-bottom: 6%;
-    }
-
-    .quote-card-slide .quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 3.8cqw, 2.2rem);
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.5;
-      margin-bottom: 5%;
-      max-width: 85%;
-    }
-
-    .quote-card-slide .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
-      margin-bottom: 4%;
-    }
-
-    .quote-card-slide .quote-title {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cine-subtle);
-      line-height: 1.6;
-    }
-
-    .quote-card-slide .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163,163,163,0.4);
-    }
-
-    .cta-slide .slide-content {
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-slide .cta-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.2cqw, 1.75rem);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 4%;
-    }
-
-    .cta-slide .cta-button {
-      display: inline-block;
-      padding: 2% 5%;
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-
-    .cta-slide .cta-brand {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 1.8cqw, 0.95rem);
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--cine-subtle);
-      margin-top: 5%;
-    }
-
-    .cta-slide .link-hint {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      color: var(--text-secondary);
-      margin-top: 3%;
-    }
-
-    /* Export mode */
-    body.export-mode {
-      padding: 0;
-      background: transparent;
-    }
-
-    body.export-mode .controls,
-    body.export-mode .page-title,
-    body.export-mode .slide-label {
-      display: none;
-    }
-
-    body.export-mode .carousel-grid {
-      display: block;
-      padding: 0;
-    }
-
-    body.export-mode .slide-wrapper {
-      display: none;
-    }
-
-    body.export-mode .slide-wrapper.active {
-      display: flex;
-    }
-
-    body.export-mode .slide {
-      width: 1080px;
-      height: 1350px;
-      max-width: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    @media (max-width: 900px) {
-      .carousel-grid { grid-template-columns: 1fr; }
-      .controls {
-        position: static;
-        margin-bottom: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+      color: rgba(251, 191, 36, 0.4);
     }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label>
-      Background:
-      <select id="bg-toggle">
-        <option value="starfield">Starfield</option>
-        <option value="black">Pure Black</option>
-      </select>
-    </label>
-    <label>
-      Starfield Opacity:
-      <select id="opacity-control">
-        <option value="0.03">3%</option>
-        <option value="0.05">5%</option>
-        <option value="0.08" selected>8%</option>
-        <option value="0.12">12%</option>
-        <option value="0.15">15%</option>
-      </select>
-    </label>
-    <button id="export-btn">Export Mode</button>
+    <label><input type="checkbox" id="bgToggle" checked> Background</label>
+    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
+    <button onclick="toggleExportMode()">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 022 — Janus Atlas Multi-Timeframe Demo</h1>
-    <p>Instagram Carousel &bull; 8 Slides &bull; 1080&times;1350px</p>
+    <p>Product Demo Carousel — 6 Slides</p>
   </div>
 
   <div class="carousel-grid">
-
+    <!-- Slide 1: Hook -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Cinematic Hook</span>
       <div class="slide slide-1">
         <div class="slide-content">
-          <div class="cine-label">Discover</div>
-          <div class="hook-main">Janus Atlas Multi-Timeframe Demo</div>
+          <div class="cine-label">INDICATOR</div>
+          <div class="hook-main">STOP DRAWING LINES MANUALLY</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">Most support/resistance tools make you draw lines manually.</p>
+          <p class="hook-sub">Janus Atlas calculates them automatically.</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — The Problem</span>
-      <div class="slide slide-2">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+    <!-- Slide 2: Feature -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">02 / 06</span>
+        <div class="slide-subtitle">Feature</div>
+        <h2 class="slide-title">Multi-Timeframe S/R</h2>
+        <div class="feature-box">
+          <div class="title">Automatic Calculation</div>
+          <div class="desc">Support & resistance across multiple timeframes — no manual drawing required.</div>
         </div>
-        <div class="slide-content">
-          <p class="header">The Problem</p>
-          <p class="text">Stop drawing lines manually. 📏</p>
-        </div>
+        <p class="slide-body">See which levels actually matter.</p>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — How It Works</span>
-      <div class="slide slide-3">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+    <!-- Slide 3: Example 1 -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">03 / 06</span>
+        <div class="example-box">
+          <div class="label">Example</div>
+          <div class="text"><span class="teal">Daily levels</span> displayed on your <span class="highlight">1H chart</span>.<br><br>Higher timeframe context without switching charts.</div>
         </div>
-        <div class="slide-content">
-          <p class="header">How It Works</p>
-          <p class="text">Janus Atlas calculates support/resistance automatically across multiple timeframes.</p>
-        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Key Features</span>
-      <div class="slide slide-4">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+    <!-- Slide 4: Example 2 -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">04 / 06</span>
+        <div class="example-box">
+          <div class="label">Example</div>
+          <div class="text"><span class="teal">Weekly levels</span> displayed on your <span class="highlight">4H chart</span>.<br><br>Macro structure meets intraday execution.</div>
         </div>
-        <div class="slide-content">
-          <p class="header">Key Features</p>
-          <ul class="arrow-list"><li><span class="arrow">&rarr;</span> What it shows you:</li>
-<li><span class="arrow">&rarr;</span> Daily levels on your 1H chart</li>
-<li><span class="arrow">&rarr;</span> Weekly levels on your 4H chart</li>
-<li><span class="arrow">&rarr;</span> Monthly levels on your Daily chart</li>
-<li><span class="arrow">&rarr;</span> Which levels have the most confluence</li></ul>
-        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — In Practice</span>
-      <div class="slide slide-5">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
+    <!-- Slide 5: Confluence -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">05 / 06</span>
+        <div class="confluence-box">
+          <div class="title">Confluence Matters</div>
+          <div class="weak">A level on the 15-minute? Weak.</div>
+          <div class="strong">Same level on 15m <span class="teal">AND</span> daily <span class="teal">AND</span> weekly? <strong>Strong.</strong></div>
         </div>
-        <div class="slide-content">
-          <p class="header">In Practice</p>
-          <p class="text">A level on the 15-minute? Weak.<br>
-Same level on the 15-minute AND daily AND weekly? Strong.</p>
-        </div>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — The Edge</span>
-      <div class="slide slide-6">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">The Edge</p>
-          <p class="text">Janus Atlas finds these confluences automatically.<br>
-🔗 Documentation in bio.</p>
-        </div>
+    <!-- Slide 6: CTA -->
+    <div class="slide-wrapper">
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">06 / 06</span>
+        <div class="slide-icon">🗺️</div>
+        <h2 class="slide-title">Try Free for 7 Days</h2>
+        <p class="slide-body">Auto S/R across all timeframes. Link in bio.</p>
+        <a href="https://docs.signalpilot.io/janus-atlas-v10" class="cta-link">Start Trial</a>
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
+  </div>
 
-    <div class="slide-wrapper" data-slide="7">
-      <span class="slide-label">Slide 7 — Learn More</span>
-      <div class="slide slide-7">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">Free Resources</p>
-          <p class="text">
-            <span class="blue">&rarr;</span> Full Janus Atlas documentation<br><br>
-            <span class="blue">&rarr;</span> 82 free Education Hub lessons<br><br>
-            <span class="blue">&rarr;</span> Step-by-step chart breakdowns<br><br>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="8">
-      <span class="slide-label">Slide 8 — CTA</span>
-      <div class="slide slide-8 cta-slide">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="cta-text">Trial</p>
-          <a href="#" class="cta-button">View Indicators</a>
-          <p class="cta-brand">Signal Pilot</p>
-          <p class="link-hint">Link in bio</p>
-        </div>
-      </div>
-    </div>
-
+  <div class="export-nav">
+    <button onclick="prevSlide()">← Previous</button>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 6</span>
+    <button onclick="nextSlide()">Next →</button>
   </div>
 
   <script>
-    const bgToggle = document.getElementById('bg-toggle');
-    const opacityControl = document.getElementById('opacity-control');
-    const slides = document.querySelectorAll('.slide');
-    const videos = document.querySelectorAll('.slide-bg video');
+    const bgToggle = document.getElementById('bgToggle');
+    const opacitySlider = document.getElementById('opacitySlider');
+    const videos = document.querySelectorAll('.bg-video');
+    const slides = document.querySelectorAll('.slide-wrapper');
+    let currentSlide = 0;
+    let exportMode = false;
 
     bgToggle.addEventListener('change', (e) => {
-      slides.forEach(slide => {
-        if (e.target.value === 'black') {
-          slide.classList.add('bg-black');
-        } else {
-          slide.classList.remove('bg-black');
-        }
-      });
+      videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none');
     });
 
-    opacityControl.addEventListener('change', (e) => {
-      videos.forEach(video => {
-        video.style.opacity = e.target.value;
-      });
+    opacitySlider.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
     });
 
-    const exportBtn = document.getElementById('export-btn');
-    const slideWrappers = document.querySelectorAll('.slide-wrapper');
-    let exportMode = false;
-    let currentExportSlide = 0;
-
-    exportBtn.addEventListener('click', () => {
+    function toggleExportMode() {
       exportMode = !exportMode;
       document.body.classList.toggle('export-mode', exportMode);
-
       if (exportMode) {
-        exportBtn.textContent = 'Exit Export (\u2190/\u2192 to navigate)';
-        currentExportSlide = 0;
-        updateExportSlide();
-      } else {
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
+        currentSlide = 0;
+        updateExportView();
       }
-    });
+    }
 
-    function updateExportSlide() {
-      slideWrappers.forEach((w, i) => {
-        w.classList.toggle('active', i === currentExportSlide);
-      });
+    function updateExportView() {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateExportView();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateExportView();
     }
 
     document.addEventListener('keydown', (e) => {
       if (!exportMode) return;
-
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'ArrowLeft') {
-        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'Escape') {
-        exportMode = false;
-        document.body.classList.remove('export-mode');
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') toggleExportMode();
     });
   </script>
 </body>
