@@ -864,13 +864,15 @@ ${slideHtmlParts.join('\n\n')}
 async function main() {
   const args = process.argv.slice(2);
   const dryRun = args.includes('--dry-run');
+  const force = args.includes('--force');
   const startIdx = args.indexOf('--start');
   const endIdx = args.indexOf('--end');
   const start = startIdx !== -1 ? parseInt(args[startIdx + 1]) : 0;
   const end = endIdx !== -1 ? parseInt(args[endIdx + 1]) : 999;
 
-  console.log('Generating missing carousel.html files from content plan...');
+  console.log(force ? 'Regenerating carousel.html files from content plan...' : 'Generating missing carousel.html files from content plan...');
   if (dryRun) console.log('  (DRY RUN - no files will be written)');
+  if (force) console.log('  (FORCE - overwriting existing carousels)');
   console.log(`  Range: post ${start} to ${end}`);
   console.log('');
 
@@ -897,12 +899,12 @@ async function main() {
     const paddedNum = String(post.postNumber).padStart(3, '0');
     const carouselPath = join(SOCIAL_DIR, `post-${paddedNum}`, 'carousel.html');
 
-    if (!existsSync(carouselPath)) {
+    if (force || !existsSync(carouselPath)) {
       missing.push(post);
     }
   }
 
-  console.log(`  Missing carousel.html: ${missing.length} posts`);
+  console.log(`  ${force ? 'Posts to regenerate' : 'Missing carousel.html'}: ${missing.length} posts`);
   console.log('');
 
   if (missing.length === 0) {
