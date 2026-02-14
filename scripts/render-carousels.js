@@ -185,9 +185,27 @@ async function renderCarousel(page, postDir, postNumber) {
         transform: translateX(-50%) !important;
       }
 
-      /* ===== FIX 6: Hide nav buttons from hand-crafted carousel HTMLs ===== */
+      /* ===== FIX 6: Hide ALL non-slide UI from every carousel variant ===== */
+      /* Navigation buttons (hand-crafted carousels) */
       .export-nav, .slide-nav, .nav-controls {
         display: none !important;
+      }
+      /* Slide number pagination like "02 / 10" or "2 / 7" */
+      .slide-number, .slide-indicator {
+        display: none !important;
+      }
+      /* Brand footer containers that hold logo + pagination */
+      .brand-footer {
+        display: none !important;
+      }
+      /* Safety nets: hide controls, labels, page title even if carousel CSS fails */
+      .controls, .slide-label, .page-title {
+        display: none !important;
+      }
+      /* Ensure slide-wrapper has no margin/padding leaking into clip area */
+      .slide-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
       }
 
       /* Combo boxes and signal grids — fill more space */
@@ -223,9 +241,10 @@ async function renderCarousel(page, postDir, postNumber) {
     document.body.classList.add('export-mode');
 
     // Fix "SignalPilot" → "Signal Pilot" and "SIGNALPILOT" → "SIGNAL PILOT" everywhere
-    document.querySelectorAll('.cine-logo, .brand-mark').forEach(el => {
-      el.textContent = el.textContent.replace('SignalPilot', 'Signal Pilot')
-        .replace('SIGNALPILOT', 'SIGNAL PILOT');
+    document.querySelectorAll('.cine-logo, .brand-mark, .logo, .cta-button').forEach(el => {
+      el.textContent = el.textContent
+        .replace(/SignalPilot/g, 'Signal Pilot')
+        .replace(/SIGNALPILOT/g, 'SIGNAL PILOT');
     });
 
     const wrappers = document.querySelectorAll('.slide-wrapper');
@@ -325,7 +344,7 @@ async function main() {
   });
 
   const page = await browser.newPage();
-  await page.setViewport({ width: SLIDE_WIDTH, height: SLIDE_HEIGHT });
+  await page.setViewport({ width: SLIDE_WIDTH, height: SLIDE_HEIGHT, deviceScaleFactor: 1 });
 
   const dirs = await new Promise((resolve, reject) => {
     readdir(SOCIAL_DIR, { withFileTypes: true }, (err, entries) => {
