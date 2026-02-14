@@ -1,6 +1,13 @@
 // POST /api/social/post-instagram
 // Cron-triggered: Posts the next Instagram carousel
 // Schedule: 3x daily at 1PM, 5PM, 10PM UTC (8AM, 12PM, 5PM EST)
+//
+// How it works:
+// 1. Queue manager says "next post order is 37" → posting schedule says "that's post #035, Orange column"
+// 2. Load content-queue.json → get caption + hashtags for post #035
+// 3. Count how many slide PNGs exist for post-035 (deployed on Vercel at /assets/social/post-035/)
+// 4. Instagram client uploads each slide via public URL, creates carousel, publishes
+// 5. Queue advances to post order 38
 
 import {
   isPaused,
@@ -15,7 +22,7 @@ import {
 } from '../../lib/social/queue-manager.js';
 import { getPostNumber, getInstagramColumn } from '../../lib/social/posting-schedule.js';
 import { postCarousel } from '../../lib/social/instagram-client.js';
-import { readFileSync } from 'fs';
+import { readFileSync, readdirSync, existsSync } from 'fs';
 import { join } from 'path';
 
 let contentCache = null;
@@ -28,19 +35,15 @@ function loadContent() {
   return contentCache;
 }
 
-const SLIDES_PER_CAROUSEL = 10;
-
 /**
- * Build image URLs for all slides of a given post
+ * Count how many slide PNGs exist for a post
  */
-function getSlideUrls(postNumber) {
+function getSlideCount(postNumber) {
   const paddedNum = String(postNumber).padStart(3, '0');
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'https://www.signalpilot.io';
-  return Array.from({ length: SLIDES_PER_CAROUSEL }, (_, i) =>
-    `${baseUrl}/assets/social/post-${paddedNum}/slide-${i + 1}.png`
-  );
+  const dir = join(process.cwd(), 'assets', 'social', `post-${paddedNum}`);
+  if (!existsSync(dir)) return 0;
+  const files = readdirSync(dir).filter(f => f.startsWith('slide-') && f.endsWith('.png'));
+  return files.length;
 }
 
 export default async function handler(req, res) {
@@ -102,16 +105,23 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: false, error: `Post ${postNumber} not found` });
     }
 
-    const caption = post.instagram.caption;
+    const caption = post.instagram?.caption;
     if (!caption) {
-      await logError({ platform: 'instagram', postOrder, postNumber, action: 'error', reason: 'No caption' });
+      await logError({ platform: 'instagram', postOrder, postNumber, column, action: 'error', reason: 'No caption' });
       await setLastPosted('instagram', postOrder);
       return res.status(200).json({ success: false, error: `Post ${postNumber} has no caption` });
     }
 
-    // Post carousel (10 slides) to Instagram
-    const slideUrls = getSlideUrls(postNumber);
-    const result = await postCarousel(slideUrls, caption);
+    // Count actual slides (posts have 4-10 slides, not always 10)
+    const slideCount = getSlideCount(postNumber);
+    if (slideCount < 2) {
+      await logError({ platform: 'instagram', postOrder, postNumber, column, action: 'error', reason: `Only ${slideCount} slide(s) (need 2+)` });
+      await setLastPosted('instagram', postOrder);
+      return res.status(200).json({ success: false, error: `Post ${postNumber} has ${slideCount} slide(s) (need 2+)` });
+    }
+
+    // Post carousel to Instagram via Graph API
+    const result = await postCarousel(postNumber, slideCount, caption);
 
     // Success - update state
     await setLastPosted('instagram', postOrder);
@@ -123,6 +133,7 @@ export default async function handler(req, res) {
       column,
       title: post.title,
       type: post.type,
+      slideCount: result.slideCount,
       mediaId: result.mediaId,
       action: 'posted',
     });
@@ -134,6 +145,7 @@ export default async function handler(req, res) {
         postNumber,
         column,
         title: post.title,
+        slideCount: result.slideCount,
         mediaId: result.mediaId,
       },
     });
