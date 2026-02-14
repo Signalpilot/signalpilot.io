@@ -15,7 +15,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const SOCIAL_DIR = join(ROOT, 'INSTAGRAM_CONTENT_HUB', 'social');
 const OUTPUT_DIR = join(ROOT, 'assets', 'social');
-const STARFIELD_PATH = join(ROOT, 'assets', 'images', 'starfield-mobile.png');
+const STARFIELD_PATH = join(ROOT, 'assets', 'images', 'starfield-bg-frame.png');
 
 const SLIDE_WIDTH = 1080;
 const SLIDE_HEIGHT = 1350;
@@ -65,7 +65,7 @@ async function renderCarousel(page, postDir, postNumber) {
         background-image: url('file://${STARFIELD_PATH}') !important;
         background-size: cover !important;
         background-position: center !important;
-        opacity: 0.12 !important;
+        opacity: 0.15 !important;
         pointer-events: none !important;
         z-index: 1 !important;
       }
