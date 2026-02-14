@@ -6,7 +6,7 @@
 // Usage: node scripts/render-carousels.js [--start N] [--end N]
 // Requires: puppeteer-core (npm install puppeteer-core)
 
-import { readdir, readFileSync, existsSync, mkdirSync } from 'fs';
+import { readdir, readFileSync, existsSync, mkdirSync, readdirSync, unlinkSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -270,6 +270,17 @@ async function renderCarousel(page, postDir, postNumber) {
   const paddedNum = String(postNumber).padStart(3, '0');
   const outputDir = join(OUTPUT_DIR, `post-${paddedNum}`);
   mkdirSync(outputDir, { recursive: true });
+
+  // Clean up stale PNGs from previous renders
+  if (existsSync(outputDir)) {
+    const oldFiles = readdirSync(outputDir).filter(f => /^slide-\d+\.png$/.test(f));
+    for (const f of oldFiles) {
+      const slideNum = parseInt(f.match(/slide-(\d+)/)[1], 10);
+      if (slideNum > slideCount) {
+        unlinkSync(join(outputDir, f));
+      }
+    }
+  }
 
   for (let i = 0; i < slideCount; i++) {
     await page.evaluate((index) => {
