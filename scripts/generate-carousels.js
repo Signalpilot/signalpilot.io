@@ -242,6 +242,44 @@ function formatSlideContent(text) {
 }
 
 // --- Quote Extraction ---
+// Extract quote text specifically for Quote card posts.
+// These have 1 tweet and a caption that starts with the actual quote.
+
+function extractQuoteCardText(post) {
+  // Try tweet first — it always has the clean quote with attribution
+  if (post.twitter.tweets.length > 0) {
+    const tweet = post.twitter.tweets[0];
+    // Look for quoted text in the tweet
+    const tweetQuoted = tweet.match(/["\u201C]([^"\u201D]{10,150})["\u201D]/s);
+    if (tweetQuoted) {
+      return tweetQuoted[1].trim();
+    }
+    // Otherwise strip attribution and use the whole tweet
+    const cleaned = tweet.replace(/\n*—\s*Signal Pilot.*/s, '').trim();
+    const unquoted = cleaned.replace(/^["\u201C]+|["\u201D]+$/g, '').trim();
+    if (unquoted.length > 10) {
+      return unquoted;
+    }
+  }
+
+  // Fall back to caption — look for quoted text
+  const caption = (post.instagram.caption || '').replace(/#\w+\s*/g, '').trim();
+  if (caption) {
+    const quotedMatch = caption.match(/["\u201C]([^"\u201D]{10,150})["\u201D]/s);
+    if (quotedMatch) {
+      return quotedMatch[1].trim();
+    }
+  }
+
+  // Last resort — strip type prefix from title
+  const cleanTitle = post.title
+    .replace(/^(Quote|QUOTE)[:\s]+/i, '')
+    .replace(/[📚🌐🎓📝💬🛠️🔮📊]/g, '')
+    .replace(/^["]+|["]+$/g, '')
+    .trim();
+  return cleanTitle || 'Knowledge is the edge.';
+}
+
 // Find the best quote-worthy line from the content
 
 function extractQuote(post, contentPoints) {
@@ -290,7 +328,8 @@ function extractQuote(post, contentPoints) {
 function extractHook(post) {
   let title = post.title
     .replace(/[📚🌐🎓📝💬🛠️🔮📊]/g, '') // Remove emoji prefixes
-    .replace(/^(DOCS|BLOG|EDUCATION|MARKETING|PRODUCT|CHRONICLE|QUOTE)[:\s]+/i, '') // Remove type prefixes
+    .replace(/^\s*(DOCS|BLOG|EDUCATION|MARKETING|PRODUCT|CHRONICLE|QUOTE)\s*(CARD)?[:\s]+/i, '') // Remove type prefixes
+    .replace(/^["\u201C]+|["\u201D]+$/g, '') // Remove surrounding quotes
     .trim();
 
   // Get subtitle: prefer the first tweet (it's usually a punchy hook)
@@ -516,7 +555,7 @@ function mapContentToSlides(post) {
 
   // --- Single-slide posts (Quote cards) ---
   if (config.singleSlide) {
-    const quote = extractQuote(post, []);
+    const quote = extractQuoteCardText(post);
     return [{ type: 'quote-card', title, quote, subtitle: 'Signal Pilot' }];
   }
 
@@ -729,7 +768,7 @@ ${wrapperEnd}`;
         <div class="slide-content">
           <p class="cta-text">${escapeHtml(slide.text)}</p>
           <a href="#" class="cta-button">${escapeHtml(slide.button)}</a>
-          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
+          <p class="cta-brand">Signal Pilot</p>
           <p class="link-hint">Link in bio</p>
         </div>
       </div>
@@ -1129,11 +1168,14 @@ ${wrapperEnd}`;
       text-decoration: none;
     }
 
-    .cta-slide .logo {
-      width: 50%;
-      max-width: 200px;
-      margin-top: 4%;
-      opacity: 0.8;
+    .cta-slide .cta-brand {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.6rem, 1.8cqw, 0.95rem);
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cine-subtle);
+      margin-top: 5%;
     }
 
     .cta-slide .link-hint {
