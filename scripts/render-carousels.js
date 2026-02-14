@@ -218,9 +218,16 @@ async function renderCarousel(page, postDir, postNumber) {
   // Delay for fonts + background image to load
   await page.evaluate(() => new Promise(r => setTimeout(r, 500)));
 
-  // Activate Export Mode and inject starfield backgrounds on slides 2+
+  // Activate Export Mode, fix branding text, and inject starfield backgrounds on slides 2+
   const slideCount = await page.evaluate(() => {
     document.body.classList.add('export-mode');
+
+    // Fix "SignalPilot" → "Signal Pilot" and "SIGNALPILOT" → "SIGNAL PILOT" everywhere
+    document.querySelectorAll('.cine-logo, .brand-mark').forEach(el => {
+      el.textContent = el.textContent.replace('SignalPilot', 'Signal Pilot')
+        .replace('SIGNALPILOT', 'SIGNAL PILOT');
+    });
+
     const wrappers = document.querySelectorAll('.slide-wrapper');
     wrappers.forEach((w, i) => {
       w.classList.remove('active');
