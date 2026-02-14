@@ -2380,7 +2380,7 @@ Layer 6: Chronicle branding
 >
 > We respond to every message.
 >
-> Support info: docs.signalpilot.io/support
+> Support info: docs.signalpilot.io/about-support/
 
 **Hashtags:** #SignalPilot #Support #CustomerService #Documentation
 
@@ -2428,7 +2428,7 @@ Layer 6: Chronicle branding
 **Slide 6 — CTA:**
 > DON'T STRUGGLE ALONE
 >
-> docs.signalpilot.io/support 📚
+> docs.signalpilot.io/about-support/ 📚
 
 **Caption:**
 > 💬 NEED HELP? WE'RE HERE.
@@ -3682,7 +3682,7 @@ Layer 6: Chronicle branding
 >
 > Full performance guide in docs.
 >
-> 📚 docs.signalpilot.io/performance
+> 📚 docs.signalpilot.io/about-system-requirements/
 
 **Hashtags:** #TradingView #Performance #SignalPilot #Documentation
 
@@ -3742,7 +3742,7 @@ Layer 6: Chronicle branding
 **Slide 7 — CTA:**
 > FULL PERFORMANCE GUIDE
 >
-> docs.signalpilot.io/performance 📚
+> docs.signalpilot.io/about-system-requirements/ 📚
 
 **Caption:**
 > ⚡ PERFORMANCE OPTIMIZATION
@@ -5169,7 +5169,7 @@ Layer 6: Chronicle branding
 >
 > Full mobile guide in docs.
 >
-> 📚 docs.signalpilot.io/mobile
+> 📚 docs.signalpilot.io/
 
 **Hashtags:** #TradingView #MobileTrading #SignalPilot #Documentation
 
@@ -5220,7 +5220,7 @@ Layer 6: Chronicle branding
 **Slide 6 — CTA:**
 > FULL MOBILE GUIDE
 >
-> docs.signalpilot.io/mobile 📚
+> docs.signalpilot.io/ 📚
 
 **Caption:**
 > 📱 MOBILE TRADING GUIDE
