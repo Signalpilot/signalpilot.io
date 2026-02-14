@@ -268,7 +268,7 @@ function getCTAText(type, cta) {
 function getCTAButton(type) {
   if (type === 'Education' || type === 'Docs') return 'Education Hub';
   if (type === 'Product') return 'View Indicators';
-  return 'Visit SignalPilot';
+  return 'Visit Signal Pilot';
 }
 
 // --- HTML Template Generation ---
@@ -297,7 +297,7 @@ function generateCarouselHtml(post, slides, colorScheme) {
           <div class="hook-main">${escapeHtml(slide.title)}</div>
           <div class="cine-divider"></div>
           <p class="hook-sub">${escapeHtml(slide.subtitle)}</p>
-          <div class="cine-logo">SignalPilot</div>
+          <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
 ${wrapperEnd}`;
@@ -579,6 +579,8 @@ ${wrapperEnd}`;
     .slide-1 .cine-logo {
       position: absolute;
       bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
