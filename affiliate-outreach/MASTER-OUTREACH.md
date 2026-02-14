@@ -554,7 +554,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. Genuinel
 
 15-30% recurring rev share if QuanTribe's audience picks them up. But I'm really after your developer critique.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -609,7 +612,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I'd be c
 
 There's a revenue split (15-30% recurring) for partners -but your live-session verdict is what actually matters to me.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -635,7 +641,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I genuin
 
 If they fit Trading IQ, there's a 15-30% recurring rev share. But your developer feedback is what I'm really here for.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -661,7 +670,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I think 
 
 We pay 15-30% recurring to content partners -but honestly, a TradingCode technical write-up would be worth more than any promotion.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -687,7 +699,10 @@ I built 7 non-repainting TradingView indicators at Signal Pilot. Two that map to
 
 15-30% recurring partner commission -natural fit alongside your existing partnership portfolio. But try them first.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -715,7 +730,11 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I'd genu
 
 We split revenue with partners (15-30% recurring) -but your Wyckoff-trained assessment comes first.
 
-signalpilot.io | signalpilot.io/ru | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Russian: https://www.signalpilot.io/ru
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -741,7 +760,10 @@ Both non-repainting, signals finalize on candle close. Send your TradingView use
 
 I'd be genuinely curious whether Volume Oracle's regime detection matches your institutional instincts. If it does, there's a 15-30% recurring partner program. But your Goldman-trained eye is the real ask.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -767,7 +789,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. Happy to
 
 We pay partners 15-30% recurring -but a ChartWiseHub tutorial would honestly be worth more than any ad placement.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -790,7 +815,10 @@ Send your TradingView username -I'll activate all 7 within 24 hours. Free access
 
 There's a 15-30% recurring rev share if they resonate with your audience.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -838,7 +866,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I'd love
 
 15-30% recurring partner split if they survive your community's testing. No shortcut past the NNFX process.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -866,7 +897,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I'd be c
 
 We share revenue with partners (15-30% recurring) -but your PA purist assessment matters more than any commission.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -892,7 +926,10 @@ Both non-repainting, signals finalize on candle close. Send your TradingView use
 
 We run a 15-30% recurring program for education platforms -but the only review that counts is how they perform in your live sessions.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -914,7 +951,10 @@ Built two indicators that complement what you do:
 
 Non-repainting, finalize on candle close. Send your TradingView username -I'll activate all 7 within 24 hours.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -938,7 +978,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I'd love
 
 There's a 15-30% recurring partner program if they land with your audience. But your live-session take is the real goal.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -964,7 +1007,10 @@ Both non-repainting, signals finalize on candle close. Send your TradingView use
 
 With 145K reputation, your honest review reaches exactly the right audience. We pay partners 15-30% recurring -but a review from your TradingView profile is what I'm really after.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -996,7 +1042,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I'd genu
 
 15-30% recurring rev share available -but only if the tools earn it through your testing.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1024,7 +1073,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. After 1,
 
 Partner program available (15-30% recurring). But after 7 years of honest analysis, your genuine take is what I'd value most.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1048,7 +1100,10 @@ Non-repainting, finalize on candle close. Send both your TradingView usernames -
 
 We pay partners 15-30% recurring if they fit your academy. But test them first.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1067,7 +1122,10 @@ Non-repainting, signals finalize on candle close. I'd genuinely love to see how 
 
 Send your TradingView username -I'll activate all 7 within 24 hours.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1085,7 +1143,10 @@ Built two indicators that are essentially Wyckoff methodology, automated:
 
 Non-repainting, finalize on candle close. Send your TradingView username -I'll activate all 7 within 24 hours. Curious how Volume Oracle's regime detection compares to your manual Wyckoff reads.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1105,7 +1166,10 @@ Non-repainting, finalize on candle close. Send your TradingView username -I'll a
 
 15-30% recurring rev share if they fit Market Meditations. But they have to pass your standards first.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1131,7 +1195,10 @@ Both non-repainting, signals finalize on candle close. Send your TradingView use
 
 We pay partners 15-30% recurring -but an honest take from an options educator comes before any partnership.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1159,7 +1226,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I'd genu
 
 There's a 15-30% recurring program for partners. But a Humbled Trader-style honest review -red flags included -is worth more than any commission.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1183,7 +1253,10 @@ Non-repainting, finalize on candle close. Send your TradingView username -I'll a
 
 15-30% recurring partner program if your community finds them useful.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1207,7 +1280,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I'm not 
 
 15-30% recurring partner program available -but only if the data holds up under your backtesting.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1233,7 +1309,10 @@ Both non-repainting, signals finalize on candle close. Send your TradingView use
 
 We run a partner program (15-30% recurring) -but the only real test is how they perform in your 10am sessions.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1261,7 +1340,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours so you ca
 
 15-30% recurring partner program if your community finds value in them. Their experience is the priority.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1293,7 +1375,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I'd love
 
 15-30% recurring rev share for partners -but test the EdgeFinder + Signal Pilot combination first.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1319,7 +1404,10 @@ Both non-repainting, signals finalize on candle close. Send your TradingView use
 
 We pay partners 15-30% recurring. But your audience's actual experience with the tools matters more than any revenue split.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1345,7 +1433,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. Test the
 
 15-30% recurring partner split available. But only if the data supports it. That's your rule -it's ours too.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1371,7 +1462,10 @@ Both non-repainting, signals finalize on candle close. Send your TradingView use
 
 15-30% recurring partner program -you already run Apex links so you know the model. But try them live first.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1399,7 +1493,10 @@ Send your team's TradingView usernames and I'll activate all 7 within 24 hours. 
 
 We share revenue with partners (15-30% recurring). But how your community actually experiences the tools is what drives any partnership.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1432,7 +1529,10 @@ Send your TradingView username and I'll activate all 7 for as long as you need. 
 
 15-30% recurring partner program available. But your honest review is the goal -if they don't hold up, we'd rather know from you than find out later.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1460,7 +1560,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. Test the
 
 We share revenue with partners (15-30% recurring) -but only if the numbers survive your backtesting. That's the deal.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1489,7 +1592,10 @@ Happy to give you full access to test. Send your TradingView username and I'll a
 
 Partner commission: 15-30% recurring. Your comparison articles already rank -this adds another product to the funnel.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1522,7 +1628,10 @@ Send your TradingView username and I'll activate all 7 for as long as you need. 
 
 We share revenue with partners (15-30% recurring) if the review is positive. But honestly, a negative review with real findings would be more valuable to us than a fake positive.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1550,7 +1659,10 @@ Non-repainting, finalize on candle close. Send your TradingView username and I'l
 
 15-30% recurring partner split if they fit your mission.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1568,7 +1680,10 @@ Built two indicators that pair naturally with the TradeZella workflow. Better en
 
 Non-repainting, finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1592,7 +1707,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. I'd love
 
 There's a 15-30% recurring partner split if they pass your standards.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1618,7 +1736,10 @@ Both non-repainting, signals finalize on candle close. Send your TradingView use
 
 We pay 15-30% recurring to partners whose audience uses the tools. But try them yourself first.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 Best,
 [Your Name]
@@ -1642,7 +1763,10 @@ Non-repainting, finalize on candle close. Send your TradingView username and I'l
 
 There's a partner rev share (15-30% recurring) if they complement your wave analysis.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1711,7 +1835,10 @@ Send your TradingView username and I'll activate all 7 within 24 hours. Your Wol
 
 There's a rev share (15-30% recurring) if they resonate with the Wolf Den audience. Try them first.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1728,7 +1855,10 @@ I'm not asking you to promote anything. Genuinely just want your honest take bec
 
 7 indicators total. Send your TradingView username and I'll activate all of them. No strings, no ask, no affiliate pitch. Just want to know what CryptoCred thinks.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1745,7 +1875,10 @@ Also built Volume Oracle - surfaces institutional accumulation/distribution behi
 
 Both non-repainting, finalize on candle close. Send your TradingView username and I'll activate all 7. No pitch, just curious what you think.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1765,7 +1898,10 @@ $100 bounty if they repaint. Non-repainting, finalize on candle close.
 
 Send your TradingView username and I'll activate all 7. There's a 15-30% recurring partnership if they add value to Wealth Mastery.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1785,7 +1921,10 @@ Non-repainting, finalize on candle close. Send your TradingView username and I'l
 
 15-30% recurring partner program if they complement MN Academy. But put them against your own analysis first.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1805,7 +1944,10 @@ $100 bounty if anyone proves they repaint. Signals finalize on candle close.
 
 Send your TradingView username and I'll activate all 7. 15-30% recurring partner program, fully transparent -which I know matters to you. But your honest opinion matters more than any deal.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1823,7 +1965,10 @@ Built two indicators that complement level-based analysis:
 
 Non-repainting, finalize on candle close. Send your TradingView username and I'll activate all 7.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1846,7 +1991,10 @@ $100 bounty if anyone proves it repaints. Signals finalize on candle close.
 
 Send your TradingView username and I'll activate all 7. Your honest assessment would be worth more to me than any endorsement from anyone else.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1862,7 +2010,10 @@ Back-to-back U.S. Investing Championship wins. Your SEPA methodology is built on
 
 Non-repainting, signals finalize on candle close. Send your TradingView username and I'll activate all 7 within 24 hours. No pitch, just want to see if the Squeeze Detector catches what your eye already sees.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1879,7 +2030,10 @@ Non-repainting, finalize on candle close. Send your TradingView username and I'l
 
 15-30% recurring partner program. Your Substack audience is exactly the kind of trader who'd use these. But try them first.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1899,7 +2053,10 @@ $100 bounty if they repaint. Signals finalize on candle close. Send your Trading
 
 15-30% recurring partner program if they complement VerifiedInvesting. Your standards are higher than most -test them first.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1917,7 +2074,10 @@ Built two indicators that serve breakout traders specifically:
 
 $100 bounty if they repaint. Signals finalize on candle close. Send your TradingView username and I'll activate all 7.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1937,7 +2097,10 @@ Non-repainting, finalize on candle close. Send your TradingView username and I'l
 
 There's a 15-30% recurring rev share if they suit the T3Live audience.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1957,7 +2120,10 @@ Non-repainting, finalize on candle close. Send your TradingView username and I'l
 
 We pay research platforms 15-30% recurring. But test them in your multi-asset workflow before anything else.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -1977,7 +2143,10 @@ $100 bounty if they repaint. Send your TradingView username and I'll activate al
 
 We run a 15-30% recurring partner program -natural fit for your newsletter. But run them through your systematic approach first.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -2001,7 +2170,10 @@ Non-repainting, finalize on candle close. Send your TradingView username and I'l
 
 15-30% recurring partner split if they fit the ForexLive audience. But with 47K articles' worth of expertise, your opinion is what I'm really after.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -2019,7 +2191,10 @@ Built two indicators designed for intermarket analysis:
 
 Non-repainting, finalize on candle close. Send your TradingView username and I'll activate all 7.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
@@ -2038,7 +2213,10 @@ Your career studying one question: why do traders who know better still make imp
 
 Non-repainting, signals finalize on candle close. 7 indicators total. Send your TradingView username and I'll activate everything. No pitch, no affiliate ask. Just genuinely curious what a trading psychologist thinks of an indicator designed to reduce decision ambiguity.
 
-signalpilot.io | docs.signalpilot.io | education.signalpilot.io
+Quick links:
+- Website: https://www.signalpilot.io
+- Docs: https://docs.signalpilot.io
+- Education (82 free lessons): https://education.signalpilot.io
 
 ---
 
