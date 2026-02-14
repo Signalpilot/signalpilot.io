@@ -87,11 +87,21 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: false, error: `Post ${postNumber} not found` });
     }
 
-    const tweets = post.twitter.tweets;
+    const tweets = post.twitter?.tweets;
     if (!tweets || tweets.length === 0) {
       await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: 'No tweets in post' });
       await setLastPosted('twitter', postOrder);
       return res.status(200).json({ success: false, error: `Post ${postNumber} has no tweets` });
+    }
+
+    // Validate tweet lengths — Twitter API rejects > 280 chars
+    const longTweets = tweets.map((t, i) => ({ i, len: t.length })).filter(t => t.len > 280);
+    if (longTweets.length > 0) {
+      const detail = longTweets.map(t => `tweet ${t.i + 1}: ${t.len} chars`).join(', ');
+      await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: `Tweet(s) over 280 chars: ${detail}` });
+      // Don't advance — this needs a content fix, not a skip
+      await incrementRetryCount('twitter', postOrder);
+      return res.status(200).json({ success: false, error: `Post ${postNumber} has oversized tweets: ${detail}` });
     }
 
     // Post the thread (or single tweet)

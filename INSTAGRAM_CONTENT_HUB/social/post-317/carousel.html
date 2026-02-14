@@ -1,1090 +1,629 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 317 — Survivorship Bias</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #0a0a0f;
-            --bg-card: rgba(255, 255, 255, 0.02);
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --text-primary: #e8e6e3;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-tertiary: rgba(255, 255, 255, 0.4);
-            --accent-blue: #4a90d9;
-            --accent-gold: #c9a962;
-            --accent-cyan: #4ad9d9;
-            --accent-purple: #9b4ad9;
-            --video-opacity: 0.08;
-      /* Concept 03 Cinematic Colors - NEUTRAL */
-      --cine-neutral-text: rgba(229, 229, 229, 0.9);
-      --cine-neutral-subtle: rgba(163, 163, 163, 0.7);
-}
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: clamp(20px, 4cqw, 40px);
-        }
-
-        .controls-bar {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            margin-bottom: 24px;
-            padding: 16px 24px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .control-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .control-group label {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .control-group select,
-        .control-group input[type="range"] {
-            padding: 6px 12px;
-            background: var(--bg-dark);
-            border: 1px solid var(--border-subtle);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-size: 14px;
-        }
-
-        .control-group input[type="range"] {
-            width: 100px;
-        }
-
-        #export-btn {
-            padding: 8px 20px;
-            background: var(--accent-cyan);
-            color: var(--bg-dark);
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        #export-btn:hover {
-            opacity: 0.9;
-        }
-
-        .page-title {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(14px, 2.5cqw, 18px);
-            font-weight: 500;
-            letter-spacing: 2px;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
-        .carousel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
-            gap: clamp(20px, 4cqw, 40px);
-            justify-items: center;
-            width: 100%;
-            max-width: 1800px;
-        }
-
-        .slide-wrapper {
-            container-type: inline-size;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .slide-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .slide {
-            position: relative;
-            width: 100%;
-            max-width: 540px;
-            aspect-ratio: 4 / 5;
-            background: var(--bg-dark);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: var(--video-opacity);
-            z-index: 0;
-        }
-
-        .slide-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: clamp(36px, 6.67cqw, 72px);
-        }
-
-        /* Typography */
-        .slide-number {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(7px, 1.30cqw, 14px);
-            font-weight: 500;
-            letter-spacing: clamp(1.5px, 0.28cqw, 3px);
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            margin-bottom: clamp(12px, 2.22cqw, 24px);
-        }
-
-        .headline {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(41px, 7.59cqw, 82px);
-            font-weight: 600;
-            line-height: 1.0;
-            color: var(--text-primary);
-            margin-bottom: clamp(20px, 3.70cqw, 40px);
-        }
-
-        .headline-large {
-            font-size: clamp(44px, 8.15cqw, 88px);
-        }
-
-        .headline-medium {
-            font-size: clamp(36px, 6.67cqw, 72px);
-        }
-
-        .subheadline {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(14px, 2.59cqw, 28px);
-            font-weight: 300;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            margin-bottom: clamp(20px, 3.70cqw, 40px);
-        }
-
-        .accent-text {
-            color: var(--accent-cyan);
-        }
-
-        .accent-gold {
-            color: var(--accent-gold);
-        }
-
-        .accent-purple {
-            color: var(--accent-purple);
-        }
-
-        /* Cover slide specific */
-        .slide-1 .slide-content {
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .cover-badge {
-            display: inline-block;
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(8px, 1.48cqw, 16px);
-            font-weight: 500;
-            letter-spacing: clamp(2px, 0.37cqw, 4px);
-            color: var(--accent-cyan);
-            text-transform: uppercase;
-            padding: clamp(8px, 1.48cqw, 16px) clamp(16px, 2.96cqw, 32px);
-            border: 1px solid rgba(74, 217, 217, 0.3);
-            border-radius: 6px;
-            margin-bottom: clamp(24px, 4.44cqw, 48px);
-            background: rgba(74, 217, 217, 0.05);
-        }
-
-        .cover-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(48px, 8.89cqw, 96px);
-            font-weight: 600;
-            line-height: 1.0;
-            color: var(--text-primary);
-            margin-bottom: clamp(16px, 2.96cqw, 32px);
-        }
-
-        .cover-subtitle {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(13px, 2.41cqw, 26px);
-            font-weight: 300;
-            color: var(--text-secondary);
-            max-width: 700px;
-        }
-
-        /* Iceberg visual */
-        .iceberg-container {
-            position: absolute;
-            bottom: clamp(70px, 12.96cqw, 140px);
-            left: 50%;
-            transform: translateX(-50%);
-            width: clamp(200px, 37.04cqw, 400px);
-            height: clamp(200px, 37.04cqw, 400px);
-        }
-
-        .iceberg-above {
-            width: clamp(60px, 11.11cqw, 120px);
-            height: clamp(40px, 7.41cqw, 80px);
-            background: linear-gradient(180deg, rgba(74, 217, 217, 0.3), rgba(74, 217, 217, 0.1));
-            margin: 0 auto;
-            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-            margin-bottom: -2px;
-        }
-
-        .water-line {
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(74, 217, 217, 0.5), transparent);
-        }
-
-        .iceberg-below {
-            width: clamp(140px, 25.93cqw, 280px);
-            height: clamp(150px, 27.78cqw, 300px);
-            background: linear-gradient(180deg, rgba(74, 217, 217, 0.1), rgba(74, 217, 217, 0.02));
-            margin: 0 auto;
-            clip-path: polygon(20% 0%, 80% 0%, 100% 80%, 60% 100%, 40% 100%, 0% 80%);
-            opacity: 0.4;
-        }
-
-        /* Content list styling */
-        .content-list {
-            display: flex;
-            flex-direction: column;
-            gap: clamp(14px, 2.59cqw, 28px);
-            flex: 1;
-            justify-content: center;
-        }
-
-        .content-item {
-            display: flex;
-            align-items: flex-start;
-            gap: clamp(12px, 2.22cqw, 24px);
-            padding: clamp(16px, 2.96cqw, 32px);
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .content-item:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(74, 217, 217, 0.2);
-        }
-
-        .item-icon {
-            font-size: clamp(16px, 2.96cqw, 32px);
-            line-height: 1;
-            min-width: clamp(20px, 3.70cqw, 40px);
-        }
-
-        .item-content {
-            display: flex;
-            flex-direction: column;
-            gap: clamp(4px, 0.74cqw, 8px);
-        }
-
-        .item-title {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(13px, 2.41cqw, 26px);
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .item-description {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(11px, 2.04cqw, 22px);
-            font-weight: 300;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* Warning card */
-        .warning-card {
-            padding: clamp(20px, 3.70cqw, 40px);
-            background: rgba(201, 169, 98, 0.08);
-            border: 1px solid rgba(201, 169, 98, 0.25);
-            border-radius: 16px;
-            margin-top: clamp(16px, 2.96cqw, 32px);
-        }
-
-        .warning-title {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(10px, 1.85cqw, 20px);
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent-gold);
-            margin-bottom: clamp(10px, 1.85cqw, 20px);
-        }
-
-        .warning-text {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(12px, 2.22cqw, 24px);
-            font-weight: 300;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Contrast boxes */
-        .contrast-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: clamp(16px, 2.96cqw, 32px);
-            flex: 1;
-            align-content: center;
-        }
-
-        .contrast-box {
-            padding: clamp(18px, 3.33cqw, 36px);
-            border-radius: 16px;
-            text-align: left;
-        }
-
-        .contrast-box.visible {
-            background: rgba(74, 217, 217, 0.08);
-            border: 1px solid rgba(74, 217, 217, 0.2);
-        }
-
-        .contrast-box.invisible {
-            background: rgba(155, 74, 217, 0.08);
-            border: 1px solid rgba(155, 74, 217, 0.2);
-        }
-
-        .contrast-label {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(9px, 1.67cqw, 18px);
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: clamp(12px, 2.22cqw, 24px);
-        }
-
-        .contrast-box.visible .contrast-label {
-            color: var(--accent-cyan);
-        }
-
-        .contrast-box.invisible .contrast-label {
-            color: var(--accent-purple);
-        }
-
-        .contrast-items {
-            display: flex;
-            flex-direction: column;
-            gap: clamp(8px, 1.48cqw, 16px);
-        }
-
-        .contrast-item {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(12px, 2.22cqw, 24px);
-            font-weight: 300;
-            color: var(--text-secondary);
-            padding-left: clamp(12px, 2.22cqw, 24px);
-            position: relative;
-        }
-
-        .contrast-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: clamp(6px, 1.11cqw, 12px);
-            width: clamp(4px, 0.74cqw, 8px);
-            height: clamp(4px, 0.74cqw, 8px);
-            border-radius: 50%;
-        }
-
-        .contrast-box.visible .contrast-item::before {
-            background: var(--accent-cyan);
-        }
-
-        .contrast-box.invisible .contrast-item::before {
-            background: var(--accent-purple);
-        }
-
-        /* Stat display */
-        .stat-display {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: clamp(30px, 5.56cqw, 60px);
-            flex: 1;
-            justify-content: center;
-        }
-
-        .stat-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(100px, 18.52cqw, 200px);
-            font-weight: 600;
-            color: var(--accent-purple);
-            line-height: 1;
-            text-shadow: 0 0 80px rgba(155, 74, 217, 0.4);
-        }
-
-        .stat-label {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(16px, 2.96cqw, 32px);
-            font-weight: 300;
-            color: var(--text-secondary);
-            margin-top: clamp(12px, 2.22cqw, 24px);
-        }
-
-        /* Reality check card */
-        .reality-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: clamp(24px, 4.44cqw, 48px);
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            margin-top: auto;
-        }
-
-        .reality-icon {
-            font-size: clamp(32px, 5.93cqw, 64px);
-            margin-bottom: clamp(12px, 2.22cqw, 24px);
-        }
-
-        .reality-text {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(13px, 2.41cqw, 26px);
-            font-weight: 400;
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
-
-        /* Takeaway cards */
-        .takeaway-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: clamp(12px, 2.22cqw, 24px);
-            flex: 1;
-            align-content: center;
-        }
-
-        .takeaway-card {
-            padding: clamp(18px, 3.33cqw, 36px);
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: clamp(12px, 2.22cqw, 24px);
-        }
-
-        .takeaway-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(24px, 4.44cqw, 48px);
-            font-weight: 600;
-            color: var(--accent-cyan);
-            min-width: clamp(30px, 5.56cqw, 60px);
-        }
-
-        .takeaway-text {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(12px, 2.22cqw, 24px);
-            font-weight: 300;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* CTA slide */
-        .slide-7 .slide-content {
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .cta-headline {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(40px, 7.41cqw, 80px);
-            font-weight: 600;
-            line-height: 1.1;
-            color: var(--text-primary);
-            margin-bottom: clamp(16px, 2.96cqw, 32px);
-            max-width: 800px;
-        }
-
-        .cta-subtext {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(13px, 2.41cqw, 26px);
-            font-weight: 300;
-            color: var(--text-secondary);
-            margin-bottom: clamp(24px, 4.44cqw, 48px);
-            max-width: 600px;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(10px, 1.85cqw, 20px);
-            font-weight: 500;
-            letter-spacing: clamp(1.5px, 0.28cqw, 3px);
-            text-transform: uppercase;
-            color: var(--bg-dark);
-            background: linear-gradient(135deg, var(--accent-cyan), #3ab8b8);
-            padding: clamp(12px, 2.22cqw, 24px) clamp(32px, 5.93cqw, 64px);
-            border-radius: 8px;
-            text-decoration: none;
-        }
-
-        .brand-tag {
-            position: absolute;
-            bottom: clamp(28px, 5.19cqw, 56px);
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(9px, 1.67cqw, 18px);
-            font-weight: 500;
-            letter-spacing: clamp(3px, 0.56cqw, 6px);
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-        }
-
-        /* Slide 1 - Cinematic NEUTRAL (Concept 03) */
-        .slide.slide-1::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
-        /* Export mode */
-        body.export-mode {
-            padding: 0;
-            background: transparent;
-        }
-
-        body.export-mode .controls-bar,
-        body.export-mode .page-title,
-        body.export-mode .slide-label {
-            display: none;
-        }
-
-        body.export-mode .carousel-grid {
-            display: block;
-        }
-
-        body.export-mode .slide-wrapper {
-            display: none;
-        }
-
-        body.export-mode .slide-wrapper.active {
-            display: block;
-        }
-
-        body.export-mode .slide {
-            width: 1080px;
-            height: 1350px;
-            max-width: none;
-            aspect-ratio: auto;
-            border-radius: 0;
-        }
-
-        body.export-mode .slide-content {
-            padding: 72px;
-        }
-
-        body.export-mode .slide-number {
-            font-size: 14px;
-            letter-spacing: 3px;
-            margin-bottom: 24px;
-        }
-
-        body.export-mode .headline {
-            font-size: 82px;
-            margin-bottom: 40px;
-        }
-
-        body.export-mode .headline-medium {
-            font-size: 72px;
-        }
-
-        body.export-mode .subheadline {
-            font-size: 28px;
-            margin-bottom: 40px;
-        }
-
-        body.export-mode .cover-badge {
-            font-size: 16px;
-            letter-spacing: 4px;
-            padding: 16px 32px;
-            margin-bottom: 48px;
-        }
-
-        body.export-mode .cover-title {
-            font-size: 96px;
-            margin-bottom: 32px;
-        }
-
-        body.export-mode .cover-subtitle {
-            font-size: 26px;
-        }
-
-        body.export-mode .iceberg-container {
-            bottom: 140px;
-            width: 400px;
-            height: 400px;
-        }
-
-        body.export-mode .iceberg-above {
-            width: 120px;
-            height: 80px;
-        }
-
-        body.export-mode .iceberg-below {
-            width: 280px;
-            height: 300px;
-        }
-
-        body.export-mode .content-list {
-            gap: 28px;
-        }
-
-        body.export-mode .content-item {
-            gap: 24px;
-            padding: 32px;
-        }
-
-        body.export-mode .item-icon {
-            font-size: 32px;
-            min-width: 40px;
-        }
-
-        body.export-mode .item-content {
-            gap: 8px;
-        }
-
-        body.export-mode .item-title {
-            font-size: 26px;
-        }
-
-        body.export-mode .item-description {
-            font-size: 22px;
-        }
-
-        body.export-mode .warning-card {
-            padding: 40px;
-            margin-top: 32px;
-        }
-
-        body.export-mode .warning-title {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        body.export-mode .warning-text {
-            font-size: 24px;
-        }
-
-        body.export-mode .contrast-grid {
-            gap: 32px;
-        }
-
-        body.export-mode .contrast-box {
-            padding: 36px;
-        }
-
-        body.export-mode .contrast-label {
-            font-size: 18px;
-            margin-bottom: 24px;
-        }
-
-        body.export-mode .contrast-items {
-            gap: 16px;
-        }
-
-        body.export-mode .contrast-item {
-            font-size: 24px;
-            padding-left: 24px;
-        }
-
-        body.export-mode .contrast-item::before {
-            top: 12px;
-            width: 8px;
-            height: 8px;
-        }
-
-        body.export-mode .stat-display {
-            padding: 60px;
-        }
-
-        body.export-mode .stat-number {
-            font-size: 200px;
-        }
-
-        body.export-mode .stat-label {
-            font-size: 32px;
-            margin-top: 24px;
-        }
-
-        body.export-mode .reality-card {
-            padding: 48px;
-        }
-
-        body.export-mode .reality-icon {
-            font-size: 64px;
-            margin-bottom: 24px;
-        }
-
-        body.export-mode .reality-text {
-            font-size: 26px;
-        }
-
-        body.export-mode .takeaway-grid {
-            gap: 24px;
-        }
-
-        body.export-mode .takeaway-card {
-            padding: 36px;
-            gap: 24px;
-        }
-
-        body.export-mode .takeaway-number {
-            font-size: 48px;
-            min-width: 60px;
-        }
-
-        body.export-mode .takeaway-text {
-            font-size: 24px;
-        }
-
-        body.export-mode .cta-headline {
-            font-size: 80px;
-            margin-bottom: 32px;
-        }
-
-        body.export-mode .cta-subtext {
-            font-size: 26px;
-            margin-bottom: 48px;
-        }
-
-        body.export-mode .cta-button {
-            font-size: 20px;
-            letter-spacing: 3px;
-            padding: 24px 64px;
-        }
-
-        body.export-mode .brand-tag {
-            bottom: 56px;
-            font-size: 18px;
-            letter-spacing: 6px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 317 — Survivorship Bias | Carousel Preview</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-red: #d94a4a;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+      --cine-text: rgba(204, 251, 241, 0.95);
+      --cine-subtle: rgba(94, 234, 212, 0.7);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .controls label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .controls select,
+    .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .controls button:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .page-title h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+    }
+
+    .slide-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 4 / 5;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+    }
+
+    .slide-bg video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+    }
+
+    .slide.bg-black .slide-bg video { opacity: 0; }
+
+    .slide-content {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10%;
+    }
+
+    /* Slide 1 - Cinematic Hook (TEAL) */
+    .slide-1 {
+      background: linear-gradient(180deg, #0a0f0e 0%, #080a09 100%);
+    }
+
+    .slide-1::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20,184,166,0.08) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+      z-index: 3;
+    }
+
+    .slide-1 .cine-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(94, 234, 212, 0.9);
+      margin-bottom: 8%;
+    }
+
+    .slide-1 .hook-main {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--cine-text);
+      margin-bottom: 4%;
+    }
+
+    .slide-1 .cine-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
+      margin-bottom: 4%;
+    }
+
+    .slide-1 .hook-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--cine-subtle);
+      line-height: 1.6;
+    }
+
+    .slide-1 .cine-logo {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(94,234,212,0.4);
+    }
+
+    /* Standard text slides */
+    .slide-content .header {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.75rem, 2.3cqw, 1.25rem);
+      font-weight: 500;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 3%;
+    }
+
+    .slide-content .text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.85rem, 2.6cqw, 1.4rem);
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .slide-content .text em {
+      font-style: italic;
+      color: var(--accent-gold);
+    }
+
+    .slide-content .text .highlight {
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+
+    .slide-content .text .red { color: var(--accent-red); }
+    .slide-content .text .blue { color: var(--accent-blue); }
+
+    .step-list {
+      list-style: none;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
+      line-height: 2;
+      color: var(--text-secondary);
+    }
+
+    .step-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 2%;
+      margin-bottom: 1%;
+    }
+
+    .step-list .num {
+      color: var(--accent-gold);
+      font-weight: 500;
+      min-width: 1.5rem;
+    }
+
+    .arrow-list {
+      list-style: none;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.75rem, 2.2cqw, 1.2rem);
+      line-height: 2;
+      color: var(--text-secondary);
+    }
+
+    .arrow-list li {
+      display: flex;
+      align-items: center;
+      gap: 2%;
+    }
+
+    .arrow-list .arrow { color: var(--accent-blue); }
+
+    .quote-slide .slide-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .quote-slide .quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.2cqw, 1.75rem);
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .slide-10 .slide-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide-10 .cta-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.2cqw, 1.75rem);
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 4%;
+    }
+
+    .slide-10 .cta-button {
+      display: inline-block;
+      padding: 2% 5%;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .slide-10 .logo {
+      width: 50%;
+      max-width: 200px;
+      margin-top: 4%;
+      opacity: 0.8;
+    }
+
+    .slide-10 .link-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      color: var(--text-secondary);
+      margin-top: 3%;
+    }
+
+    /* Export mode */
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+      padding: 0;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      max-width: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    @media (max-width: 900px) {
+      .carousel-grid { grid-template-columns: 1fr; }
+      .controls {
+        position: static;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="controls-bar">
-        <div class="control-group">
-            <label for="bg-select">Background</label>
-            <select id="bg-select">
-                <option value="starfield">Starfield</option>
-                <option value="none">None</option>
-            </select>
+  <div class="controls">
+    <label>
+      Background:
+      <select id="bg-toggle">
+        <option value="starfield">Starfield</option>
+        <option value="black">Pure Black</option>
+      </select>
+    </label>
+    <label>
+      Starfield Opacity:
+      <select id="opacity-control">
+        <option value="0.03">3%</option>
+        <option value="0.05">5%</option>
+        <option value="0.08" selected>8%</option>
+        <option value="0.12">12%</option>
+        <option value="0.15">15%</option>
+      </select>
+    </label>
+    <button id="export-btn">Export Mode</button>
+  </div>
+
+  <div class="page-title">
+    <h1>Post 317 — Survivorship Bias</h1>
+    <p>Instagram Carousel &bull; 10 Slides &bull; 1080&times;1350px</p>
+  </div>
+
+  <div class="carousel-grid">
+
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <div class="slide slide-1">
+        <div class="slide-content">
+          <div class="cine-label">Explore</div>
+          <div class="hook-main">Survivorship Bias</div>
+          <div class="cine-divider"></div>
+          <p class="hook-sub">You see successful traders. You don't see the 95% who failed.</p>
+          <div class="cine-logo">Signal Pilot</div>
         </div>
-        <div class="control-group">
-            <label for="opacity-slider">Opacity</label>
-            <input type="range" id="opacity-slider" min="0" max="30" value="8">
-        </div>
-        <button id="export-btn">Export Mode</button>
+      </div>
     </div>
 
-    <div class="page-title">Post 317 — 7 Slides</div>
-
-    <div class="carousel-grid">
-        <!-- Slide 1: Cinematic Hook (NEUTRAL - Learn) -->
-        <div class="slide-wrapper slide-1" data-slide="1">
-            <span class="slide-label">Slide 1 — Cover</span>
-            <div class="slide slide-1">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="cover-badge">Reality Check</div>
-                    <h1 class="cover-title">Survivorship<br>Bias</h1>
-                    <p class="cover-subtitle">What you see vs. what's actually there</p>
-                    <div class="iceberg-container">
-                        <div class="iceberg-above"></div>
-                        <div class="water-line"></div>
-                        <div class="iceberg-below"></div>
-                    </div>
-                    <div class="brand-tag">SignalPilot</div>
-                </div>
-            </div>
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — The Topic</span>
+      <div class="slide slide-2">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
         </div>
-
-        <!-- Slide 2: What You See -->
-        <div class="slide-wrapper" data-slide="2">
-            <span class="slide-label">Slide 2 — What You See</span>
-            <div class="slide slide-2">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 02</div>
-                    <h2 class="headline headline-medium">What You <span class="accent-text">See</span></h2>
-                    <p class="subheadline">On social media and trading forums:</p>
-                    <div class="content-list">
-                        <div class="content-item">
-                            <span class="item-icon">📈</span>
-                            <div class="item-content">
-                                <div class="item-title">Profitable Traders Showing Gains</div>
-                                <div class="item-description">Screenshots of winning trades and green P&L</div>
-                            </div>
-                        </div>
-                        <div class="content-item">
-                            <span class="item-icon">🏆</span>
-                            <div class="item-content">
-                                <div class="item-title">Success Stories</div>
-                                <div class="item-description">"I made $X this month" posts everywhere</div>
-                            </div>
-                        </div>
-                        <div class="content-item">
-                            <span class="item-icon">✨</span>
-                            <div class="item-content">
-                                <div class="item-title">Lifestyle Content</div>
-                                <div class="item-description">Laptops on beaches, luxury cars, freedom</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="slide-content">
+          <p class="header">The Topic</p>
+          <p class="text">You see successful traders. You don't see the 95% who failed.</p>
         </div>
-
-        <!-- Slide 3: What You Don't See -->
-        <div class="slide-wrapper" data-slide="3">
-            <span class="slide-label">Slide 3 — What You Don't See</span>
-            <div class="slide slide-3">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 03</div>
-                    <h2 class="headline headline-medium">What You <span class="accent-purple">Don't</span> See</h2>
-                    <p class="subheadline">The invisible majority:</p>
-                    <div class="content-list">
-                        <div class="content-item">
-                            <span class="item-icon">💀</span>
-                            <div class="item-content">
-                                <div class="item-title">The 90%+ Who Blew Up</div>
-                                <div class="item-description">Accounts wiped, savings gone, no posts about it</div>
-                            </div>
-                        </div>
-                        <div class="content-item">
-                            <span class="item-icon">🔇</span>
-                            <div class="item-content">
-                                <div class="item-title">The Quiet Failures</div>
-                                <div class="item-description">Nobody brags about losing money</div>
-                            </div>
-                        </div>
-                        <div class="content-item">
-                            <span class="item-icon">🚫</span>
-                            <div class="item-content">
-                                <div class="item-title">Deleted Accounts & Giving Up</div>
-                                <div class="item-description">They just disappear—no goodbye post</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 4: Why It Matters -->
-        <div class="slide-wrapper" data-slide="4">
-            <span class="slide-label">Slide 4 — Why It Matters</span>
-            <div class="slide slide-4">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 04</div>
-                    <h2 class="headline headline-medium">Why This <span class="accent-gold">Matters</span></h2>
-                    <div class="stat-display">
-                        <div class="stat-number">90%</div>
-                        <div class="stat-label">of retail traders lose money</div>
-                    </div>
-                    <div class="warning-card">
-                        <div class="warning-title">⚠️ The Distortion</div>
-                        <div class="warning-text">Survivorship bias makes trading look easier than it is. You only see the survivors.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: The Hidden Graveyard -->
-        <div class="slide-wrapper" data-slide="5">
-            <span class="slide-label">Slide 5 — The Hidden Graveyard</span>
-            <div class="slide slide-5">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 05</div>
-                    <h2 class="headline headline-medium">The Hidden<br><span class="accent-purple">Graveyard</span></h2>
-                    <p class="subheadline">For every visible success story:</p>
-                    <div class="contrast-grid">
-                        <div class="contrast-box visible">
-                            <div class="contrast-label">What's Visible</div>
-                            <div class="contrast-items">
-                                <div class="contrast-item">1 profitable trader posting gains</div>
-                                <div class="contrast-item">Courses from "successful" traders</div>
-                            </div>
-                        </div>
-                        <div class="contrast-box invisible">
-                            <div class="contrast-label">What's Invisible</div>
-                            <div class="contrast-items">
-                                <div class="contrast-item">9+ traders who blew their accounts</div>
-                                <div class="contrast-item">Countless people who quit silently</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 6: Reality Check -->
-        <div class="slide-wrapper" data-slide="6">
-            <span class="slide-label">Slide 6 — Reality Check</span>
-            <div class="slide slide-6">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <div class="slide-number">Slide 06</div>
-                    <h2 class="headline headline-medium">Reality<br><span class="accent-text">Check</span></h2>
-                    <p class="subheadline">Keep these truths in mind:</p>
-                    <div class="takeaway-grid">
-                        <div class="takeaway-card">
-                            <div class="takeaway-number">1</div>
-                            <div class="takeaway-text">Trading is harder than social media suggests</div>
-                        </div>
-                        <div class="takeaway-card">
-                            <div class="takeaway-number">2</div>
-                            <div class="takeaway-text">Survival comes before profit optimization</div>
-                        </div>
-                        <div class="takeaway-card">
-                            <div class="takeaway-number">3</div>
-                            <div class="takeaway-text">Risk management isn't optional—it's essential</div>
-                        </div>
-                        <div class="takeaway-card">
-                            <div class="takeaway-number">4</div>
-                            <div class="takeaway-text">Don't compare your start to someone's highlight reel</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 7: CTA -->
-        <div class="slide-wrapper" data-slide="7">
-            <span class="slide-label">Slide 7 — CTA</span>
-            <div class="slide slide-7">
-                <video class="slide-bg" autoplay muted loop playsinline>
-                    <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-                </video>
-                <div class="slide-content">
-                    <h2 class="cta-headline">Survival First.<br><span class="accent-text">Profits Second.</span></h2>
-                    <p class="cta-subtext">Stay grounded. Trade with discipline. Focus on risk management before returns.</p>
-                    <a href="#" class="cta-button">Read on Blog</a>
-                    <div class="brand-tag">SignalPilot</div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <script>
-        (function() {
-            const slides = document.querySelectorAll('.slide-wrapper');
-            const bgSelect = document.getElementById('bg-select');
-            const opacitySlider = document.getElementById('opacity-slider');
-            const exportBtn = document.getElementById('export-btn');
-            let currentSlide = 0;
-            let exportMode = false;
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — The Core Idea</span>
+      <div class="slide slide-3">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">The Core Idea</p>
+          <p class="text">Survivorship bias makes trading look easier than it is. The graveyard of blown accounts is invisible.</p>
+        </div>
+      </div>
+    </div>
 
-            bgSelect.addEventListener('change', (e) => {
-                const videos = document.querySelectorAll('.slide-bg');
-                videos.forEach(video => {
-                    video.style.display = e.target.value === 'none' ? 'none' : 'block';
-                });
-            });
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — The Deep Dive</span>
+      <div class="slide slide-4">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">The Deep Dive</p>
+          <p class="text">Reality check: survival first.</p>
+        </div>
+      </div>
+    </div>
 
-            opacitySlider.addEventListener('input', (e) => {
-                document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
-            });
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — The Evidence</span>
+      <div class="slide slide-5">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">The Evidence</p>
+          <p class="text">[link]</p>
+        </div>
+      </div>
+    </div>
 
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-            }
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — The Takeaway</span>
+      <div class="slide slide-6">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">The Takeaway</p>
+          <ul class="arrow-list"><li><span class="arrow">&rarr;</span> Creates false expectations</li></ul>
+        </div>
+      </div>
+    </div>
 
-            function toggleExportMode() {
-                exportMode = !exportMode;
-                document.body.classList.toggle('export-mode', exportMode);
-                exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode';
-                if (exportMode) {
-                    currentSlide = 0;
-                    showSlide(currentSlide);
-                }
-            }
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — Read More</span>
+      <div class="slide slide-7">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">Read More</p>
+          <ul class="arrow-list"><li><span class="arrow">&rarr;</span> Creates false expectations</li></ul>
+        </div>
+      </div>
+    </div>
 
-            exportBtn.addEventListener('click', toggleExportMode);
+    <div class="slide-wrapper" data-slide="8">
+      <span class="slide-label">Slide 8 — The Insight</span>
+      <div class="slide slide-8 quote-slide">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="quote">"- Creates false expectations"</p>
+        </div>
+      </div>
+    </div>
 
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'e' || e.key === 'E') {
-                    toggleExportMode();
-                } else if (exportMode) {
-                    if (e.key === 'ArrowRight' || e.key === ' ') {
-                        currentSlide = (currentSlide + 1) % slides.length;
-                        showSlide(currentSlide);
-                    } else if (e.key === 'ArrowLeft') {
-                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                        showSlide(currentSlide);
-                    } else if (e.key === 'Escape') {
-                        toggleExportMode();
-                    }
-                }
-            });
-        })();
-    </script>
+    <div class="slide-wrapper" data-slide="9">
+      <span class="slide-label">Slide 9 — Learn More</span>
+      <div class="slide slide-9">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="header">Free Resources</p>
+          <p class="text">
+            <span class="blue">&rarr;</span> Free education resources<br><br>
+            <span class="blue">&rarr;</span> Professional trading tools<br><br>
+            <span class="blue">&rarr;</span> Join the community<br><br>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-wrapper" data-slide="10">
+      <span class="slide-label">Slide 10 — CTA</span>
+      <div class="slide slide-10">
+        <div class="slide-bg">
+          <video autoplay loop muted playsinline>
+            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide-content">
+          <p class="cta-text">Blog</p>
+          <a href="#" class="cta-button">Visit Signal Pilot</a>
+          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
+          <p class="link-hint">Link in bio</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const bgToggle = document.getElementById('bg-toggle');
+    const opacityControl = document.getElementById('opacity-control');
+    const slides = document.querySelectorAll('.slide');
+    const videos = document.querySelectorAll('.slide-bg video');
+
+    bgToggle.addEventListener('change', (e) => {
+      slides.forEach(slide => {
+        if (e.target.value === 'black') {
+          slide.classList.add('bg-black');
+        } else {
+          slide.classList.remove('bg-black');
+        }
+      });
+    });
+
+    opacityControl.addEventListener('change', (e) => {
+      videos.forEach(video => {
+        video.style.opacity = e.target.value;
+      });
+    });
+
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+
+      if (exportMode) {
+        exportBtn.textContent = 'Exit Export (\u2190/\u2192 to navigate)';
+        currentExportSlide = 0;
+        updateExportSlide();
+      } else {
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => {
+        w.classList.toggle('active', i === currentExportSlide);
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'ArrowLeft') {
+        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'Escape') {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+  </script>
 </body>
 </html>
