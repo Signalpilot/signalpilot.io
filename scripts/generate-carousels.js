@@ -57,11 +57,12 @@ const COLOR_SCHEMES = {
 function getColorScheme(postNumber, postType) {
   // Quote cards are always orange regardless of grid position
   if (postType === 'Quote') return COLOR_SCHEMES.orange;
-  // 9-grid columns: Orange (right) → Neutral (center) → Teal (left)
+  // Posting order: Orange → Neutral → Teal
+  // Grid result: right=Orange, center=Neutral, left=Teal
   const mod = postNumber % 3;
-  if (mod === 0) return COLOR_SCHEMES.orange;   // right column
-  if (mod === 1) return COLOR_SCHEMES.teal;     // left column
-  return COLOR_SCHEMES.neutral;                  // center column
+  if (mod === 0) return COLOR_SCHEMES.orange;    // posted 1st → right column
+  if (mod === 1) return COLOR_SCHEMES.neutral;   // posted 2nd → center column
+  return COLOR_SCHEMES.teal;                     // posted 3rd → left column
 }
 
 // --- HTML Escaping ---
