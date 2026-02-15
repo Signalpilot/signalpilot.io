@@ -18,6 +18,7 @@
       --accent-teal: #5eead4;
       --accent-teal-dim: rgba(94,234,212,0.3);
       --accent-red: #f87171;
+      --accent-amber: #f59e0b;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -46,22 +47,85 @@
     .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
 
     /* ═══════════════════════════════════════════
-       SHARED — Teal slide base (LEFT bar S1)
+       TEAL SLIDE BASE — left bar on S1 only
        ═══════════════════════════════════════════ */
     .slide-teal { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
     .slide-teal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.05) 0%, transparent 100%); pointer-events: none; z-index: 1; }
     .slide-teal.slide-1::after { content: ''; position: absolute; top: 0; left: 0; width: 18px; height: 100%; background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%); z-index: 5; }
     .slide-teal .slide-content { z-index: 3; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
 
-    /* ── Slide 1: Hook ── */
+    /* ── Per-slide classes ── */
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
+    .slide-2 .slide-content { align-items: flex-start; }
+    .slide-3 .slide-content { align-items: center; }
+    .slide-4 .slide-content { align-items: flex-start; }
+    .slide-5 .slide-content { align-items: center; text-align: center; justify-content: center; }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 1 — Hook with glowing target orb
+       ═══════════════════════════════════════════ */
+    .target-orb {
+      width: clamp(70px, 14cqw, 140px);
+      height: clamp(70px, 14cqw, 140px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.35) 0%, rgba(248,113,113,0.12) 40%, rgba(94,234,212,0.08) 70%, transparent 100%);
+      border: 2px solid rgba(248,113,113,0.25);
+      box-shadow: 0 0 40px rgba(248,113,113,0.15), 0 0 80px rgba(248,113,113,0.06), inset 0 0 30px rgba(248,113,113,0.08);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: 5%;
+    }
+    .target-orb::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(248,113,113,0.15);
+    }
+    .target-orb::after {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px dashed rgba(248,113,113,0.2);
+    }
+    .target-crosshair {
+      width: clamp(18px, 3.5cqw, 36px);
+      height: clamp(18px, 3.5cqw, 36px);
+      position: relative;
+    }
+    .target-crosshair::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(248,113,113,0.6), transparent);
+      transform: translateY(-50%);
+    }
+    .target-crosshair::after {
+      content: '';
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, rgba(248,113,113,0.6), transparent);
+      transform: translateX(-50%);
+    }
+    .target-dot {
+      position: absolute;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent-red);
+      box-shadow: 0 0 8px rgba(248,113,113,0.6);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
     .s1-blog-label {
       font-family: var(--font-mono);
       font-size: clamp(9px, 1.5cqw, 14px);
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: rgba(94,234,212,0.9);
-      margin-bottom: 6%;
+      margin-bottom: 4%;
     }
     .s1-hook {
       font-family: var(--font-sans);
@@ -72,7 +136,8 @@
       margin-bottom: 4%;
       max-width: 90%;
     }
-    .s1-hook em { color: var(--accent-teal); font-style: normal; }
+    .s1-hook em { color: var(--accent-red); font-style: normal; }
+    .s1-hook .teal-em { color: var(--accent-teal); font-style: normal; }
     .s1-divider {
       width: 60px;
       height: 2px;
@@ -87,13 +152,15 @@
       line-height: 1.5;
     }
 
-    /* ── Content slides ── */
+    /* ═══════════════════════════════════════════
+       SLIDE 2 — Where Liquidity Sits (icon circles + danger bars)
+       ═══════════════════════════════════════════ */
     .slide-counter {
       font-family: var(--font-mono);
       font-size: clamp(8px, 1.3cqw, 12px);
       color: var(--text-muted);
       letter-spacing: 0.15em;
-      margin-bottom: 4%;
+      margin-bottom: 3%;
     }
     .section-title {
       font-family: var(--font-serif);
@@ -102,10 +169,8 @@
       color: var(--text-primary);
       margin-bottom: 5%;
     }
-
-    /* Where liquidity sits */
     .liq-locations {
-      width: 88%;
+      width: 100%;
       display: flex;
       flex-direction: column;
       gap: clamp(8px, 1.5cqw, 16px);
@@ -130,13 +195,74 @@
       border-radius: 4px 0 0 4px;
       background: var(--accent-teal);
     }
-    .liq-icon {
-      font-size: clamp(16px, 3cqw, 30px);
+    .liq-icon-circle {
+      width: clamp(36px, 7cqw, 60px);
+      height: clamp(36px, 7cqw, 60px);
+      border-radius: 50%;
       flex-shrink: 0;
-      width: 10%;
-      text-align: center;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
     }
-    .liq-info { flex: 1; }
+    .liq-icon-circle.loc-lows {
+      background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(248,113,113,0.3);
+      box-shadow: 0 0 18px rgba(248,113,113,0.12);
+    }
+    .liq-icon-circle.loc-lows::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(248,113,113,0.12);
+    }
+    .liq-icon-circle.loc-highs {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.3);
+      box-shadow: 0 0 18px rgba(245,158,11,0.12);
+    }
+    .liq-icon-circle.loc-highs::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,158,11,0.12);
+    }
+    .liq-icon-circle.loc-round {
+      background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(168,85,247,0.3);
+      box-shadow: 0 0 18px rgba(168,85,247,0.12);
+    }
+    .liq-icon-circle.loc-round::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(168,85,247,0.12);
+    }
+    .liq-icon-circle.loc-textbook {
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(94,234,212,0.3);
+      box-shadow: 0 0 18px rgba(94,234,212,0.12);
+    }
+    .liq-icon-circle.loc-textbook::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(94,234,212,0.12);
+    }
+    .liq-icon-symbol {
+      font-size: clamp(12px, 2.2cqw, 22px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .loc-lows .liq-icon-symbol { color: rgba(248,113,113,0.9); }
+    .loc-highs .liq-icon-symbol { color: rgba(245,158,11,0.9); }
+    .loc-round .liq-icon-symbol { color: rgba(168,85,247,0.9); }
+    .loc-textbook .liq-icon-symbol { color: rgba(94,234,212,0.9); }
+
+    .liq-info { flex: 1; min-width: 0; }
     .liq-where {
       font-family: var(--font-sans);
       font-size: clamp(11px, 2cqw, 20px);
@@ -146,114 +272,402 @@
     }
     .liq-why {
       font-family: var(--font-sans);
-      font-size: clamp(9px, 1.4cqw, 14px);
+      font-size: clamp(8px, 1.3cqw, 13px);
       color: var(--text-muted);
       line-height: 1.4;
+      margin-bottom: 3%;
     }
+    .danger-bar {
+      width: 100%;
+      height: clamp(4px, 0.7cqw, 7px);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .danger-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s;
+    }
+    .danger-fill.critical { background: linear-gradient(90deg, rgba(248,113,113,0.5), rgba(248,113,113,0.9)); }
+    .danger-fill.high { background: linear-gradient(90deg, rgba(245,158,11,0.5), rgba(245,158,11,0.9)); }
+    .danger-fill.moderate { background: linear-gradient(90deg, rgba(168,85,247,0.5), rgba(168,85,247,0.9)); }
+    .danger-fill.elevated { background: linear-gradient(90deg, rgba(94,234,212,0.4), rgba(94,234,212,0.8)); }
+    .danger-label {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 1cqw, 9px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 1.5%;
+    }
+    .danger-label.critical { color: rgba(248,113,113,0.7); }
+    .danger-label.high { color: rgba(245,158,11,0.7); }
+    .danger-label.moderate { color: rgba(168,85,247,0.7); }
+    .danger-label.elevated { color: rgba(94,234,212,0.6); }
 
-    /* The Sweep Flow */
+    /* ═══════════════════════════════════════════
+       SLIDE 3 — The Sweep (step-number rings + glow cards)
+       ═══════════════════════════════════════════ */
     .sweep-flow {
-      width: 88%;
+      width: 92%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: clamp(6px, 1.2cqw, 14px);
-      margin-bottom: 5%;
+      gap: clamp(5px, 1cqw, 12px);
+      margin-bottom: 4%;
     }
     .sweep-step {
       width: 100%;
-      padding: 4% 5%;
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      padding: 3.5% 4%;
       border-radius: clamp(8px, 1.5cqw, 14px);
-      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .sweep-step.hunt { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.2); }
-    .sweep-step.trigger { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); }
-    .sweep-step.reverse { background: rgba(94,234,212,0.08); border: 1px solid rgba(94,234,212,0.2); }
+    .sweep-step.hunt {
+      background: rgba(248,113,113,0.06);
+      border: 1px solid rgba(248,113,113,0.18);
+      box-shadow: 0 0 20px rgba(248,113,113,0.04);
+    }
+    .sweep-step.trigger {
+      background: rgba(245,158,11,0.06);
+      border: 1px solid rgba(245,158,11,0.18);
+      box-shadow: 0 0 20px rgba(245,158,11,0.04);
+    }
+    .sweep-step.reverse {
+      background: rgba(94,234,212,0.06);
+      border: 1px solid rgba(94,234,212,0.18);
+      box-shadow: 0 0 20px rgba(94,234,212,0.04);
+    }
+    .step-ring {
+      width: clamp(38px, 7cqw, 62px);
+      height: clamp(38px, 7cqw, 62px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .hunt .step-ring {
+      background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.35) 0%, rgba(248,113,113,0.1) 60%, transparent 100%);
+      border: 2px solid rgba(248,113,113,0.35);
+      box-shadow: 0 0 22px rgba(248,113,113,0.15);
+    }
+    .hunt .step-ring::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(248,113,113,0.15);
+    }
+    .trigger .step-ring {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.35) 0%, rgba(245,158,11,0.1) 60%, transparent 100%);
+      border: 2px solid rgba(245,158,11,0.35);
+      box-shadow: 0 0 22px rgba(245,158,11,0.15);
+    }
+    .trigger .step-ring::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,158,11,0.15);
+    }
+    .reverse .step-ring {
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.35) 0%, rgba(94,234,212,0.1) 60%, transparent 100%);
+      border: 2px solid rgba(94,234,212,0.35);
+      box-shadow: 0 0 22px rgba(94,234,212,0.15);
+    }
+    .reverse .step-ring::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(94,234,212,0.15);
+    }
+    .step-num {
+      font-family: var(--font-mono);
+      font-size: clamp(14px, 2.5cqw, 26px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .hunt .step-num { color: rgba(248,113,113,0.9); }
+    .trigger .step-num { color: rgba(245,158,11,0.9); }
+    .reverse .step-num { color: rgba(94,234,212,0.9); }
+
+    .step-info { flex: 1; min-width: 0; }
     .sweep-label {
       font-family: var(--font-mono);
-      font-size: clamp(8px, 1.2cqw, 12px);
+      font-size: clamp(7px, 1.1cqw, 11px);
       letter-spacing: 0.2em;
       text-transform: uppercase;
       margin-bottom: 2%;
     }
     .sweep-step.hunt .sweep-label { color: var(--accent-red); }
-    .sweep-step.trigger .sweep-label { color: #f59e0b; }
+    .sweep-step.trigger .sweep-label { color: var(--accent-amber); }
     .sweep-step.reverse .sweep-label { color: var(--accent-teal); }
     .sweep-text {
       font-family: var(--font-sans);
       font-size: clamp(11px, 2cqw, 20px);
       font-weight: 600;
       color: var(--text-primary);
+      margin-bottom: 1%;
     }
     .sweep-desc {
       font-family: var(--font-sans);
-      font-size: clamp(8px, 1.3cqw, 13px);
+      font-size: clamp(8px, 1.2cqw, 12px);
       color: var(--text-muted);
-      margin-top: 1%;
+      line-height: 1.4;
     }
     .flow-arrow {
       font-size: clamp(14px, 2.5cqw, 26px);
       color: var(--text-muted);
     }
+    .sweep-truth-box {
+      width: 80%;
+      padding: 3% 4%;
+      background: rgba(248,113,113,0.05);
+      border: 1px solid rgba(248,113,113,0.15);
+      border-radius: clamp(8px, 1.3cqw, 12px);
+      text-align: center;
+    }
     .sweep-truth {
       font-family: var(--font-serif);
-      font-size: clamp(12px, 2cqw, 21px);
+      font-size: clamp(13px, 2.2cqw, 22px);
       font-weight: 500;
       font-style: italic;
-      color: rgba(255,255,255,0.35);
+      color: rgba(248,113,113,0.6);
       line-height: 1.4;
     }
 
-    /* The Fix */
-    .fix-section { align-items: center; text-align: center; justify-content: center; }
-    .fix-title {
+    /* ═══════════════════════════════════════════
+       SLIDE 4 — The Fix (strategy cards with icon circles + effectiveness bars)
+       ═══════════════════════════════════════════ */
+    .fix-header {
       font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
+      font-size: clamp(18px, 3.5cqw, 38px);
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 5%;
-      line-height: 1.2;
+      margin-bottom: 2%;
     }
-    .fix-title em { color: var(--accent-teal); font-style: normal; }
-    .fix-box {
-      width: 82%;
-      padding: 4% 5%;
-      background: rgba(94,234,212,0.06);
-      border: 1px solid rgba(94,234,212,0.2);
-      border-radius: clamp(8px, 1.5cqw, 14px);
-      margin-bottom: 4%;
-    }
-    .fix-text {
-      font-family: var(--font-sans);
-      font-size: clamp(10px, 1.7cqw, 17px);
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-    .fix-sub {
+    .fix-header em { color: var(--accent-teal); font-style: normal; }
+    .fix-sub-intro {
       font-family: var(--font-sans);
       font-size: clamp(9px, 1.4cqw, 14px);
       color: var(--text-muted);
       line-height: 1.5;
-      max-width: 80%;
+      margin-bottom: 5%;
+    }
+    .fix-strategies {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.5cqw, 16px);
+    }
+    .fix-card {
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      padding: 3.5% 4%;
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+      border-radius: clamp(8px, 1.5cqw, 14px);
+      position: relative;
+    }
+    .fix-icon-circle {
+      width: clamp(38px, 7cqw, 62px);
+      height: clamp(38px, 7cqw, 62px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(94,234,212,0.3);
+      box-shadow: 0 0 20px rgba(94,234,212,0.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .fix-icon-circle::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(94,234,212,0.12);
+    }
+    .fix-icon-letter {
+      font-family: var(--font-mono);
+      font-size: clamp(13px, 2.3cqw, 24px);
+      font-weight: 700;
+      color: rgba(94,234,212,0.9);
+      position: relative;
+      z-index: 1;
+    }
+    .fix-card-info { flex: 1; min-width: 0; }
+    .fix-card-title {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2cqw, 20px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2%;
+    }
+    .fix-card-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.2cqw, 12px);
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 3%;
+    }
+    .eff-bar {
+      width: 100%;
+      height: clamp(4px, 0.7cqw, 7px);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .eff-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, rgba(94,234,212,0.3), rgba(94,234,212,0.8));
+    }
+    .eff-label {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 1cqw, 9px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(94,234,212,0.5);
+      margin-top: 1.5%;
+    }
+    .fix-result-box {
+      width: 100%;
+      margin-top: 4%;
+      padding: 3% 4%;
+      background: rgba(94,234,212,0.05);
+      border: 1px solid rgba(94,234,212,0.15);
+      border-radius: clamp(8px, 1.3cqw, 12px);
+      text-align: center;
+    }
+    .fix-result-text {
+      font-family: var(--font-serif);
+      font-size: clamp(11px, 1.8cqw, 18px);
+      font-weight: 500;
+      font-style: italic;
+      color: rgba(94,234,212,0.6);
+      line-height: 1.4;
     }
 
-    /* CTA */
-    .cta-section { align-items: center; text-align: center; justify-content: center; }
+    /* ═══════════════════════════════════════════
+       SLIDE 5 — Stat recap + CTA glow
+       ═══════════════════════════════════════════ */
+    .stat-recap {
+      width: 85%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1.5cqw, 14px);
+      margin-bottom: 6%;
+    }
+    .stat-recap-card {
+      padding: 5% 4%;
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+      border-radius: clamp(8px, 1.3cqw, 12px);
+      text-align: center;
+    }
+    .stat-recap-ring {
+      width: clamp(30px, 5.5cqw, 48px);
+      height: clamp(30px, 5.5cqw, 48px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.25) 0%, rgba(94,234,212,0.06) 60%, transparent 100%);
+      border: 1.5px solid rgba(94,234,212,0.25);
+      box-shadow: 0 0 14px rgba(94,234,212,0.08);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 8%;
+      position: relative;
+    }
+    .stat-recap-ring::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      border: 1px solid rgba(94,234,212,0.1);
+    }
+    .stat-recap-num {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.8cqw, 18px);
+      font-weight: 700;
+      color: rgba(94,234,212,0.9);
+      position: relative;
+      z-index: 1;
+    }
+    .stat-recap-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 13px);
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 2%;
+    }
+    .stat-recap-val {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 10px);
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+    .cta-glow {
+      width: clamp(60px, 12cqw, 120px);
+      height: clamp(60px, 12cqw, 120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.25) 0%, rgba(94,234,212,0.06) 50%, transparent 100%);
+      border: 2px solid rgba(94,234,212,0.2);
+      box-shadow: 0 0 40px rgba(94,234,212,0.1), 0 0 80px rgba(94,234,212,0.04);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: 5%;
+    }
+    .cta-glow::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(94,234,212,0.12);
+    }
+    .cta-glow-icon {
+      font-size: clamp(18px, 3.5cqw, 36px);
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 6px rgba(94,234,212,0.4));
+    }
     .cta-tagline {
       font-family: var(--font-serif);
-      font-size: clamp(20px, 4.2cqw, 44px);
+      font-size: clamp(18px, 3.8cqw, 40px);
       font-weight: 600;
       color: var(--text-primary);
       line-height: 1.25;
       margin-bottom: 3%;
     }
+    .cta-tagline em { color: var(--accent-teal); font-style: normal; }
     .cta-desc {
       font-family: var(--font-sans);
-      font-size: clamp(10px, 1.7cqw, 17px);
+      font-size: clamp(9px, 1.5cqw, 16px);
       color: var(--text-secondary);
       line-height: 1.5;
-      max-width: 80%;
-      margin-bottom: 6%;
+      max-width: 82%;
+      margin-bottom: 5%;
+    }
+    .cta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(4px, 0.8cqw, 8px);
+      justify-content: center;
+      margin-bottom: 5%;
+    }
+    .cta-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 11px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: clamp(4px, 0.7cqw, 8px) clamp(8px, 1.5cqw, 16px);
+      border-radius: 20px;
+      border: 1px solid rgba(94,234,212,0.2);
+      background: rgba(94,234,212,0.05);
+      color: rgba(94,234,212,0.7);
     }
     .cta-box {
       background: rgba(94,234,212,0.08);
@@ -261,6 +675,7 @@
       border-radius: 14px;
       padding: 3% 6%;
       text-align: center;
+      box-shadow: 0 0 30px rgba(94,234,212,0.08);
     }
     .cta-box-text {
       font-size: clamp(11px, 2cqw, 22px);
@@ -307,9 +722,17 @@
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Hook</span>
       <div class="slide slide-teal slide-1">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
+          <div class="target-orb">
+            <div class="target-crosshair">
+              <span class="target-dot"></span>
+            </div>
+          </div>
           <div class="s1-blog-label">INSIGHT</div>
-          <h1 class="s1-hook">Your Stop Loss Isn't <em>Hidden</em>. It's Obvious.</h1>
+          <h1 class="s1-hook">Your Stop Loss Isn't <em>Hidden</em>.<br>It's <span class="teal-em">Obvious</span>.</h1>
           <div class="s1-divider"></div>
           <p class="s1-sub">Understanding why you keep getting stopped out.</p>
           <div class="slide-logo">Signal Pilot</div>
@@ -320,42 +743,63 @@
     <!-- ══════ SLIDE 2: Where Liquidity Sits ══════ -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — Where It Sits</span>
-      <div class="slide slide-teal">
+      <div class="slide slide-teal slide-2">
         <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
+          <source src="../../assets/starfield.mp4" type="video/mp4">
         </video>
         <div class="slide-content">
           <span class="slide-counter">02 / 05</span>
           <h2 class="section-title">Where Liquidity Sits</h2>
           <div class="liq-locations">
+
             <div class="liq-item">
-              <span class="liq-icon">&#9660;</span>
+              <div class="liq-icon-circle loc-lows">
+                <span class="liq-icon-symbol">&#9660;</span>
+              </div>
               <div class="liq-info">
                 <div class="liq-where">Below Swing Lows</div>
-                <div class="liq-why">Everyone's stop losses cluster here</div>
+                <div class="liq-why">Everyone's stop losses cluster here — highest density target</div>
+                <div class="danger-bar"><div class="danger-fill critical" style="width:92%"></div></div>
+                <div class="danger-label critical">HUNT RISK — 92%</div>
               </div>
             </div>
+
             <div class="liq-item">
-              <span class="liq-icon">&#9650;</span>
+              <div class="liq-icon-circle loc-highs">
+                <span class="liq-icon-symbol">&#9650;</span>
+              </div>
               <div class="liq-info">
                 <div class="liq-where">Above Swing Highs</div>
-                <div class="liq-why">Short sellers' stops sit here</div>
+                <div class="liq-why">Short sellers' stops sit here — equally exposed</div>
+                <div class="danger-bar"><div class="danger-fill high" style="width:85%"></div></div>
+                <div class="danger-label high">HUNT RISK — 85%</div>
               </div>
             </div>
+
             <div class="liq-item">
-              <span class="liq-icon">&#9673;</span>
+              <div class="liq-icon-circle loc-round">
+                <span class="liq-icon-symbol">$</span>
+              </div>
               <div class="liq-info">
                 <div class="liq-where">Round Numbers</div>
-                <div class="liq-why">$50,000, $100 — obvious psychological levels</div>
+                <div class="liq-why">$50K, $100 — obvious psychological levels</div>
+                <div class="danger-bar"><div class="danger-fill moderate" style="width:68%"></div></div>
+                <div class="danger-label moderate">HUNT RISK — 68%</div>
               </div>
             </div>
+
             <div class="liq-item">
-              <span class="liq-icon">&#9670;</span>
+              <div class="liq-icon-circle loc-textbook">
+                <span class="liq-icon-symbol">&#9670;</span>
+              </div>
               <div class="liq-info">
                 <div class="liq-where">Textbook Pattern Stops</div>
                 <div class="liq-why">Where every trading course tells you to place them</div>
+                <div class="danger-bar"><div class="danger-fill elevated" style="width:78%"></div></div>
+                <div class="danger-label elevated">HUNT RISK — 78%</div>
               </div>
             </div>
+
           </div>
           <div class="slide-logo">Signal Pilot</div>
         </div>
@@ -365,33 +809,56 @@
     <!-- ══════ SLIDE 3: The Sweep ══════ -->
     <div class="slide-wrapper" data-slide="3">
       <span class="slide-label">Slide 3 — The Sweep</span>
-      <div class="slide slide-teal">
+      <div class="slide slide-teal slide-3">
         <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
+          <source src="../../assets/starfield.mp4" type="video/mp4">
         </video>
         <div class="slide-content">
           <span class="slide-counter">03 / 05</span>
           <h2 class="section-title">The Liquidity Sweep</h2>
           <div class="sweep-flow">
+
             <div class="sweep-step hunt">
-              <div class="sweep-label">Step 1 — Hunt</div>
-              <div class="sweep-text">Price Approaches Key Level</div>
-              <div class="sweep-desc">Smart money targets obvious stop clusters</div>
+              <div class="step-ring">
+                <span class="step-num">1</span>
+              </div>
+              <div class="step-info">
+                <div class="sweep-label">HUNT</div>
+                <div class="sweep-text">Price Approaches Key Level</div>
+                <div class="sweep-desc">Smart money targets obvious stop clusters</div>
+              </div>
             </div>
+
             <div class="flow-arrow">&#8595;</div>
+
             <div class="sweep-step trigger">
-              <div class="sweep-label">Step 2 — Trigger</div>
-              <div class="sweep-text">Stops Get Hit</div>
-              <div class="sweep-desc">Cascade of stop-loss orders triggers liquidity</div>
+              <div class="step-ring">
+                <span class="step-num">2</span>
+              </div>
+              <div class="step-info">
+                <div class="sweep-label">TRIGGER</div>
+                <div class="sweep-text">Stops Get Hit</div>
+                <div class="sweep-desc">Cascade of stop-loss orders creates liquidity</div>
+              </div>
             </div>
+
             <div class="flow-arrow">&#8595;</div>
+
             <div class="sweep-step reverse">
-              <div class="sweep-label">Step 3 — Reverse</div>
-              <div class="sweep-text">Price Reverses Direction</div>
-              <div class="sweep-desc">Large players fill orders at triggered prices</div>
+              <div class="step-ring">
+                <span class="step-num">3</span>
+              </div>
+              <div class="step-info">
+                <div class="sweep-label">REVERSE</div>
+                <div class="sweep-text">Price Reverses Direction</div>
+                <div class="sweep-desc">Large players fill orders at triggered prices</div>
+              </div>
             </div>
+
           </div>
-          <p class="sweep-truth">Your stops = their entries</p>
+          <div class="sweep-truth-box">
+            <p class="sweep-truth">Your stops = their entries</p>
+          </div>
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
@@ -400,17 +867,56 @@
     <!-- ══════ SLIDE 4: The Fix ══════ -->
     <div class="slide-wrapper" data-slide="4">
       <span class="slide-label">Slide 4 — The Fix</span>
-      <div class="slide slide-teal">
+      <div class="slide slide-teal slide-4">
         <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
+          <source src="../../assets/starfield.mp4" type="video/mp4">
         </video>
-        <div class="slide-content fix-section">
+        <div class="slide-content">
           <span class="slide-counter">04 / 05</span>
-          <h2 class="fix-title">Place Stops at <em>Less Obvious</em> Levels</h2>
-          <div class="fix-box">
-            <p class="fix-text">Give room for the hunt. If your stop is where everyone else's is, you'll get swept with the crowd.</p>
+          <h2 class="fix-header">Stop at <em>Less Obvious</em> Levels</h2>
+          <p class="fix-sub-intro">Give room for the hunt. If your stop is where everyone else's is, you'll get swept with the crowd.</p>
+          <div class="fix-strategies">
+
+            <div class="fix-card">
+              <div class="fix-icon-circle">
+                <span class="fix-icon-letter">A</span>
+              </div>
+              <div class="fix-card-info">
+                <div class="fix-card-title">ATR-Based Stops</div>
+                <div class="fix-card-desc">Use volatility to calculate dynamic stop distance instead of fixed levels</div>
+                <div class="eff-bar"><div class="eff-fill" style="width:88%"></div></div>
+                <div class="eff-label">EFFECTIVENESS — 88%</div>
+              </div>
+            </div>
+
+            <div class="fix-card">
+              <div class="fix-icon-circle">
+                <span class="fix-icon-letter">S</span>
+              </div>
+              <div class="fix-card-info">
+                <div class="fix-card-title">Structure Beyond Obvious</div>
+                <div class="fix-card-desc">Place stops past the second level of structure, not just the nearest swing</div>
+                <div class="eff-bar"><div class="eff-fill" style="width:82%"></div></div>
+                <div class="eff-label">EFFECTIVENESS — 82%</div>
+              </div>
+            </div>
+
+            <div class="fix-card">
+              <div class="fix-icon-circle">
+                <span class="fix-icon-letter">P</span>
+              </div>
+              <div class="fix-card-info">
+                <div class="fix-card-title">Position Size Down</div>
+                <div class="fix-card-desc">Reduce size to allow wider stops without increasing risk per trade</div>
+                <div class="eff-bar"><div class="eff-fill" style="width:75%"></div></div>
+                <div class="eff-label">EFFECTIVENESS — 75%</div>
+              </div>
+            </div>
+
           </div>
-          <p class="fix-sub">Use ATR-based stops, structure beyond the obvious level, or reduce position size to allow wider stops.</p>
+          <div class="fix-result-box">
+            <p class="fix-result-text">Wider stops + smaller size = same risk, fewer sweeps</p>
+          </div>
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
@@ -419,14 +925,52 @@
     <!-- ══════ SLIDE 5: CTA ══════ -->
     <div class="slide-wrapper" data-slide="5">
       <span class="slide-label">Slide 5 — CTA</span>
-      <div class="slide slide-teal">
+      <div class="slide slide-teal slide-5">
         <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
+          <source src="../../assets/starfield.mp4" type="video/mp4">
         </video>
-        <div class="slide-content cta-section">
+        <div class="slide-content">
           <span class="slide-counter">05 / 05</span>
-          <h2 class="cta-tagline">Stop Getting Hunted.<br>Start Understanding Why.</h2>
+          <div class="stat-recap">
+            <div class="stat-recap-card">
+              <div class="stat-recap-ring">
+                <span class="stat-recap-num">4</span>
+              </div>
+              <div class="stat-recap-label">Liquidity Zones</div>
+              <div class="stat-recap-val">MAPPED</div>
+            </div>
+            <div class="stat-recap-card">
+              <div class="stat-recap-ring">
+                <span class="stat-recap-num">3</span>
+              </div>
+              <div class="stat-recap-label">Sweep Phases</div>
+              <div class="stat-recap-val">DECODED</div>
+            </div>
+            <div class="stat-recap-card">
+              <div class="stat-recap-ring">
+                <span class="stat-recap-num">3</span>
+              </div>
+              <div class="stat-recap-label">Fix Strategies</div>
+              <div class="stat-recap-val">PROVEN</div>
+            </div>
+            <div class="stat-recap-card">
+              <div class="stat-recap-ring">
+                <span class="stat-recap-num">&#8734;</span>
+              </div>
+              <div class="stat-recap-label">Depth Ahead</div>
+              <div class="stat-recap-val">EXPLORE</div>
+            </div>
+          </div>
+          <div class="cta-glow">
+            <span class="cta-glow-icon">&#9741;</span>
+          </div>
+          <h2 class="cta-tagline">Stop Getting <em>Hunted</em>.</h2>
           <p class="cta-desc">Deep dive into liquidity mechanics, smart money concepts, and stop placement strategy.</p>
+          <div class="cta-pills">
+            <span class="cta-pill">Liquidity</span>
+            <span class="cta-pill">Smart Money</span>
+            <span class="cta-pill">Stop Strategy</span>
+          </div>
           <div class="cta-box">
             <p class="cta-box-text">Read the full article</p>
             <span class="cta-link">signalpilot.io/blog</span>
