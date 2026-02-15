@@ -67,8 +67,9 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, skipped: true, reason: 'Queue is paused' });
     }
 
-    // Idempotency check
-    if (await wasRecentlyPosted('instagram', 300000)) {
+    // Idempotency check (skip with ?force=true for manual posting)
+    const force = req.query.force === 'true';
+    if (!force && await wasRecentlyPosted('instagram', 300000)) {
       return res.status(200).json({ success: true, skipped: true, reason: 'Already posted recently' });
     }
 
