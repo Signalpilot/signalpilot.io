@@ -288,6 +288,121 @@ async function renderCarousel(page, postDir, postNumber) {
         padding: 7% !important;
         text-align: center !important;
       }
+
+      /* ===== FIX 7: Missing component overrides — these were stuck at tiny base sizes ===== */
+
+      /* Arrow lists (e.g. Elite Seven list on slide 3) — was 15px max! */
+      .arrow-list {
+        font-size: clamp(24px, 6cqw, 36px) !important;
+        line-height: 1.6 !important;
+        max-width: 95% !important;
+        text-align: left !important;
+      }
+      .arrow-list li {
+        font-size: inherit !important;
+        margin-bottom: 3% !important;
+        gap: 3% !important;
+      }
+      .arrow-list .arrow {
+        font-size: inherit !important;
+      }
+
+      /* Callout boxes (insight/warning/success/info) — was 14-20px max */
+      .callout-box {
+        max-width: 95% !important;
+        padding: 5% 6% !important;
+      }
+      .callout-box .callout-title {
+        font-size: clamp(28px, 7cqw, 44px) !important;
+        font-weight: 600 !important;
+      }
+      .callout-box .callout-text {
+        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        line-height: 1.6 !important;
+      }
+
+      /* Concept cards (green/red/blue/gold boxes) — was 9-20px max */
+      .concept-card {
+        max-width: 95% !important;
+        padding: 5% 6% !important;
+      }
+      .concept-card .card-label {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .concept-card .card-title {
+        font-size: clamp(28px, 7cqw, 44px) !important;
+        font-weight: 600 !important;
+      }
+      .concept-card .card-desc {
+        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* Data grid items (value/label pairs) — was 12-20px max */
+      .data-grid {
+        max-width: 95% !important;
+      }
+      .data-item .item-icon {
+        font-size: clamp(32px, 8cqw, 48px) !important;
+      }
+      .data-item .item-value {
+        font-size: clamp(28px, 7cqw, 44px) !important;
+        font-weight: 600 !important;
+      }
+      .data-item .item-label {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+        line-height: 1.4 !important;
+      }
+
+      /* Quote blocks — was 26px max */
+      .quote-block {
+        font-size: clamp(32px, 8cqw, 52px) !important;
+        line-height: 1.5 !important;
+        max-width: 90% !important;
+      }
+      .quote-attr {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+
+      /* Step flows (numbered steps) — was 15-28px max */
+      .step-flow {
+        max-width: 95% !important;
+      }
+      .step-num {
+        font-size: clamp(32px, 8cqw, 52px) !important;
+        font-weight: 600 !important;
+      }
+      .step-text {
+        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* Stat rows (big numbers) — was 11-32px max */
+      .stat-value {
+        font-size: clamp(36px, 9cqw, 56px) !important;
+        font-weight: 600 !important;
+      }
+      .stat-label {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+
+      /* Compare grids (before/after) — was 9-14px max */
+      .compare-grid {
+        max-width: 95% !important;
+      }
+      .compare-item .compare-label {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .compare-item .compare-text {
+        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* Indicator pills — was 14px max */
+      .indicator-pill {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        padding: 2% 5% !important;
+      }
     </style>
   `;
   html = html.replace('</head>', renderStyles + '</head>');
