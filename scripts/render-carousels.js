@@ -15,16 +15,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const SOCIAL_DIR = join(ROOT, 'INSTAGRAM_CONTENT_HUB', 'social');
 const OUTPUT_DIR = join(ROOT, 'assets', 'social');
-const STARFIELD_PATH = join(ROOT, 'assets', 'images', 'starfield-bg-frame.png');
 
 const SLIDE_WIDTH = 1080;
 const SLIDE_HEIGHT = 1350;
-
-// Pre-load starfield as base64 for injection into slides 2+
-let starfieldBase64 = '';
-if (existsSync(STARFIELD_PATH)) {
-  starfieldBase64 = readFileSync(STARFIELD_PATH).toString('base64');
-}
 
 async function renderCarousel(page, postDir, postNumber) {
   const carouselPath = join(postDir, 'carousel.html');
@@ -39,73 +32,55 @@ async function renderCarousel(page, postDir, postNumber) {
   html = html.replace(/<link[^>]*fonts\.googleapis\.com[^>]*>/gi, '');
   html = html.replace(/<link[^>]*fonts\.gstatic\.com[^>]*>/gi, '');
 
-  // Remove video elements — replaced with starfield PNG background
+  // Remove video elements — no video in PNG renders
   html = html.replace(/<video[^>]*>[\s\S]*?<\/video>/gi, '');
 
-  // Inject render enhancements: real fonts, starfield bg, tighter layout, stronger CTA
+  // Render styles: local fonts + export dimensions + font upscaling for readability
+  // NO starfield, NO background overrides — let each carousel's theme show through
   const renderStyles = `
     <style>
-      /* ===== FIX 1: Real fonts (Cormorant Garamond + Inter installed locally) ===== */
+      /* ===== Local font declarations ===== */
       @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; src: local('Cormorant Garamond'); }
       @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; src: local('Cormorant Garamond Italic'); }
       @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500; src: local('Cormorant Garamond Medium'); }
       @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 600; src: local('Cormorant Garamond SemiBold'); }
+      @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 700; src: local('Cormorant Garamond Bold'); }
+      @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 500; src: local('Cormorant Garamond Medium Italic'); }
       @font-face { font-family: 'Inter'; font-style: normal; font-weight: 300; src: local('Inter Light'); }
       @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; src: local('Inter'); }
       @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; src: local('Inter Medium'); }
+      @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; src: local('Inter SemiBold'); }
+      @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; src: local('Inter Bold'); }
+      @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; src: local('JetBrains Mono'); }
+      @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; src: local('JetBrains Mono Medium'); }
+      @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 600; src: local('JetBrains Mono SemiBold'); }
+      @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; src: local('JetBrains Mono Bold'); }
       @font-face { font-family: 'Gugi'; font-style: normal; font-weight: 400; src: url('file:///usr/local/share/fonts/Gugi-Regular.ttf') format('truetype'), local('Gugi'); }
 
-      /* ===== FIX 2: Starfield background on slides 2+ (not slide 1 — kept clean for IG grid) ===== */
-      /* Note: .slide-1 class is on child element in 88% of posts, so we use
-         index-based JS injection + .has-starfield class instead of :not(.slide-1) */
-      .slide-wrapper.has-starfield {
-        position: relative !important;
-      }
-      .slide-wrapper.has-starfield .starfield-bg {
-        position: absolute !important;
-        inset: 0 !important;
-        background-image: url('file://${STARFIELD_PATH}') !important;
-        background-size: cover !important;
-        background-position: center !important;
-        opacity: 0.30 !important;
-        pointer-events: none !important;
-        z-index: 1 !important;
-      }
-      .slide-wrapper.has-starfield .slide-content {
-        z-index: 2 !important;
-      }
-      /* Safety net: absolutely no starfield on the first slide wrapper */
-      .slide-wrapper:first-child .starfield-bg {
-        display: none !important;
-      }
-
-      /* ===== FIX 3: Center ALL content, fill the slide, much bigger text ===== */
-
-      /* Kill body padding so slide-wrapper starts at (0,0) */
+      /* ===== Export mode: exact Instagram dimensions ===== */
       body.export-mode {
         margin: 0 !important;
         padding: 0 !important;
-        background: #0a0a0a !important;
       }
 
-      /* Force slide-wrapper to exact Instagram dimensions with dark bg */
-      .slide-wrapper {
+      /* Force slide-wrapper to exact Instagram dimensions — NO background override */
+      body.export-mode .slide-wrapper {
         container-type: inline-size !important;
         width: 1080px !important;
         height: 1350px !important;
         overflow: hidden !important;
-        background: #0a0a0a !important;
+        margin: 0 !important;
+        padding: 0 !important;
       }
 
-      /* Fix intermediate .slide div — fill parent for flex centering chain */
-      .slide-wrapper > .slide,
-      .slide-wrapper > div:not(.starfield-bg):not(.slide-content) {
+      /* Ensure intermediate .slide div fills wrapper — ONLY target .slide class */
+      body.export-mode .slide-wrapper > .slide {
         width: 100% !important;
         height: 100% !important;
         position: relative !important;
       }
 
-      /* Force ALL slide content to be vertically + horizontally centered */
+      /* Center slide content */
       .slide-content {
         display: flex !important;
         flex-direction: column !important;
@@ -118,8 +93,10 @@ async function renderCarousel(page, postDir, postNumber) {
         box-sizing: border-box !important;
       }
 
-      /* Titles — BIG and centered */
-      .slide-title, .header, .hook-main {
+      /* ===== Font upscaling for Instagram readability ===== */
+
+      /* Titles — big and centered */
+      .slide-title, .header, .hook-main, .hook-title {
         font-size: clamp(36px, 8cqw, 56px) !important;
         margin-bottom: 4% !important;
         text-align: center !important;
@@ -129,7 +106,14 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(40px, 9cqw, 64px) !important;
       }
 
-      /* Body text — much bigger for Instagram readability */
+      /* Section titles (h2/h3 inside slide-content) */
+      .slide-content h2, .slide-content h3,
+      .section-title {
+        font-size: clamp(32px, 8cqw, 52px) !important;
+        text-align: center !important;
+      }
+
+      /* Body text */
       .slide-body, .text {
         font-size: clamp(24px, 6cqw, 36px) !important;
         line-height: 1.65 !important;
@@ -137,14 +121,24 @@ async function renderCarousel(page, postDir, postNumber) {
         text-align: center !important;
       }
 
-      /* Subtitles / combo labels */
+      /* Subtitles */
       .slide-subtitle, .hook-sub {
         font-size: clamp(20px, 5cqw, 30px) !important;
         letter-spacing: 3px !important;
         text-align: center !important;
       }
 
-      /* Combo titles and descriptions — these were way too small */
+      /* Paragraphs and lists inside slide-content */
+      .slide-content p {
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
+        text-align: center !important;
+      }
+      .slide-content ul, .slide-content ol {
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
+        max-width: 95% !important;
+      }
+
+      /* Combo titles and descriptions */
       .combo-title {
         font-size: clamp(28px, 7cqw, 44px) !important;
         font-weight: 700 !important;
@@ -157,7 +151,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(40px, 10cqw, 64px) !important;
       }
 
-      /* Signal items (Flow Rising, Price Falling labels) */
+      /* Signal items */
       .signal-item .label, .signal-item .name {
         font-size: clamp(18px, 4.5cqw, 28px) !important;
       }
@@ -165,7 +159,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(32px, 8cqw, 48px) !important;
       }
 
-      /* Divergence box text */
+      /* Divergence boxes */
       .divergence-title, .divergence-label {
         font-size: clamp(24px, 6cqw, 36px) !important;
         font-weight: 700 !important;
@@ -174,13 +168,13 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(18px, 5cqw, 28px) !important;
       }
 
-      /* Icons — big and bold */
+      /* Icons */
       .slide-icon, .icon {
         font-size: clamp(48px, 14cqw, 72px) !important;
         text-align: center !important;
       }
 
-      /* Checklists — bigger items, left-aligned text but centered in slide */
+      /* Checklists */
       .checklist {
         font-size: clamp(22px, 5.5cqw, 32px) !important;
         line-height: 1.8 !important;
@@ -192,21 +186,7 @@ async function renderCarousel(page, postDir, postNumber) {
         margin-bottom: 2% !important;
       }
 
-      /* Fallback: generic elements inside slide-content that aren't covered above */
-      .slide-content p {
-        font-size: clamp(22px, 5.5cqw, 32px) !important;
-        text-align: center !important;
-      }
-      .slide-content ul, .slide-content ol {
-        font-size: clamp(22px, 5.5cqw, 32px) !important;
-        max-width: 95% !important;
-      }
-      .slide-content h2, .slide-content h3 {
-        font-size: clamp(32px, 8cqw, 52px) !important;
-        text-align: center !important;
-      }
-
-      /* ===== FIX 4: Stronger CTA slides ===== */
+      /* CTA elements */
       .cta-link, .cta-button {
         padding: 4% 8% !important;
         font-size: clamp(20px, 5cqw, 28px) !important;
@@ -225,13 +205,12 @@ async function renderCarousel(page, postDir, postNumber) {
         text-align: center !important;
       }
 
-      /* ===== FIX 5: SIGNAL PILOT — Gugi font, centered at bottom on ALL slides ===== */
+      /* Brand mark — Gugi font, centered at bottom */
       .brand-mark, .logo, .cine-logo {
         font-family: 'Gugi', sans-serif !important;
         font-size: clamp(14px, 3.5cqw, 20px) !important;
         letter-spacing: 4px !important;
       }
-      /* Center brand mark at bottom on ALL content slides (slides 2+) */
       .brand-mark {
         position: absolute !important;
         bottom: 5% !important;
@@ -241,36 +220,28 @@ async function renderCarousel(page, postDir, postNumber) {
         text-align: center !important;
         width: auto !important;
       }
-      /* Center cine-logo on slide 1 */
       .slide-1 .cine-logo {
         left: 50% !important;
         transform: translateX(-50%) !important;
       }
 
-      /* ===== FIX 6: Hide ALL non-slide UI from every carousel variant ===== */
-      /* Navigation buttons (hand-crafted carousels) */
+      /* ===== Hide non-slide UI ===== */
       .export-nav, .slide-nav, .nav-controls {
         display: none !important;
       }
-      /* Slide number pagination like "02 / 10" or "2 / 7" */
       .slide-number, .slide-indicator {
         display: none !important;
       }
-      /* Brand footer containers that hold logo + pagination */
-      .brand-footer {
-        display: none !important;
-      }
-      /* Safety nets: hide controls, labels, page title even if carousel CSS fails */
       .controls, .slide-label, .page-title {
         display: none !important;
       }
-      /* Ensure slide-wrapper has no margin/padding leaking into clip area */
       .slide-wrapper {
         margin: 0 !important;
         padding: 0 !important;
       }
 
-      /* Combo boxes and signal grids — fill more space, bigger text */
+      /* ===== Component overrides for readability ===== */
+
       .combo-box {
         max-width: 95% !important;
         padding: 6% !important;
@@ -289,9 +260,7 @@ async function renderCarousel(page, postDir, postNumber) {
         text-align: center !important;
       }
 
-      /* ===== FIX 7: Missing component overrides — these were stuck at tiny base sizes ===== */
-
-      /* Arrow lists (e.g. Elite Seven list on slide 3) — was 15px max! */
+      /* Arrow lists */
       .arrow-list {
         font-size: clamp(24px, 6cqw, 36px) !important;
         line-height: 1.6 !important;
@@ -307,7 +276,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: inherit !important;
       }
 
-      /* Callout boxes (insight/warning/success/info) — was 14-20px max */
+      /* Callout boxes */
       .callout-box {
         max-width: 95% !important;
         padding: 5% 6% !important;
@@ -321,7 +290,7 @@ async function renderCarousel(page, postDir, postNumber) {
         line-height: 1.6 !important;
       }
 
-      /* Concept cards (green/red/blue/gold boxes) — was 9-20px max */
+      /* Concept cards */
       .concept-card {
         max-width: 95% !important;
         padding: 5% 6% !important;
@@ -338,7 +307,7 @@ async function renderCarousel(page, postDir, postNumber) {
         line-height: 1.5 !important;
       }
 
-      /* Data grid items (value/label pairs) — was 12-20px max */
+      /* Data grid items */
       .data-grid {
         max-width: 95% !important;
       }
@@ -354,7 +323,7 @@ async function renderCarousel(page, postDir, postNumber) {
         line-height: 1.4 !important;
       }
 
-      /* Quote blocks — was 26px max */
+      /* Quote blocks */
       .quote-block {
         font-size: clamp(32px, 8cqw, 52px) !important;
         line-height: 1.5 !important;
@@ -364,7 +333,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(18px, 4.5cqw, 28px) !important;
       }
 
-      /* Step flows (numbered steps) — was 15-28px max */
+      /* Step flows */
       .step-flow {
         max-width: 95% !important;
       }
@@ -377,7 +346,7 @@ async function renderCarousel(page, postDir, postNumber) {
         line-height: 1.5 !important;
       }
 
-      /* Stat rows (big numbers) — was 11-32px max */
+      /* Stat values */
       .stat-value {
         font-size: clamp(36px, 9cqw, 56px) !important;
         font-weight: 600 !important;
@@ -386,7 +355,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(16px, 4cqw, 24px) !important;
       }
 
-      /* Compare grids (before/after) — was 9-14px max */
+      /* Compare grids */
       .compare-grid {
         max-width: 95% !important;
       }
@@ -398,7 +367,7 @@ async function renderCarousel(page, postDir, postNumber) {
         line-height: 1.5 !important;
       }
 
-      /* Indicator pills — was 14px max */
+      /* Indicator pills */
       .indicator-pill {
         font-size: clamp(20px, 5cqw, 30px) !important;
         padding: 2% 5% !important;
@@ -407,17 +376,17 @@ async function renderCarousel(page, postDir, postNumber) {
   `;
   html = html.replace('</head>', renderStyles + '</head>');
 
-  // Write to temp file so file:// URLs (starfield bg) resolve correctly
+  // Write to temp file so file:// URLs resolve correctly
   const { writeFileSync, unlinkSync } = await import('fs');
   const tmpHtml = join(postDir, '_render_temp.html');
   writeFileSync(tmpHtml, html);
   await page.goto(`file://${tmpHtml}`, { waitUntil: 'domcontentloaded', timeout: 10000 });
   try { unlinkSync(tmpHtml); } catch {}
 
-  // Delay for fonts + background image to load
+  // Delay for fonts to load
   await page.evaluate(() => new Promise(r => setTimeout(r, 500)));
 
-  // Activate Export Mode, fix branding text, and inject starfield backgrounds on slides 2+
+  // Activate Export Mode and fix branding text
   const slideCount = await page.evaluate(() => {
     document.body.classList.add('export-mode');
 
@@ -429,8 +398,8 @@ async function renderCarousel(page, postDir, postNumber) {
       img.parentNode.replaceChild(span, img);
     });
 
-    // Fix "SignalPilot" → "Signal Pilot" and "SIGNALPILOT" → "SIGNAL PILOT" everywhere
-    document.querySelectorAll('.cine-logo, .brand-mark, .logo, .cta-button').forEach(el => {
+    // Fix "SignalPilot" → "Signal Pilot" and "SIGNALPILOT" → "SIGNAL PILOT"
+    document.querySelectorAll('.cine-logo, .brand-mark, .logo, .brand-footer, .cta-button').forEach(el => {
       el.textContent = el.textContent
         .replace(/SignalPilot/g, 'Signal Pilot')
         .replace(/SIGNALPILOT/g, 'SIGNAL PILOT');
@@ -438,7 +407,7 @@ async function renderCarousel(page, postDir, postNumber) {
 
     // Inject "SIGNAL PILOT" branding on EVERY slide that doesn't already have it
     document.querySelectorAll('.slide-wrapper').forEach(w => {
-      if (!w.querySelector('.brand-mark, .cine-logo')) {
+      if (!w.querySelector('.brand-mark, .cine-logo, .brand-footer')) {
         const container = w.querySelector('.slide-content') || w;
         const brand = document.createElement('span');
         brand.className = 'brand-mark';
@@ -448,17 +417,7 @@ async function renderCarousel(page, postDir, postNumber) {
     });
 
     const wrappers = document.querySelectorAll('.slide-wrapper');
-    wrappers.forEach((w, i) => {
-      w.classList.remove('active');
-      // Inject starfield div into slides 2+ only (i > 0 = not first slide)
-      // Using index instead of class because .slide-1 is on child element in 88% of posts
-      if (i > 0 && !w.querySelector('.starfield-bg')) {
-        w.classList.add('has-starfield');
-        const bg = document.createElement('div');
-        bg.className = 'starfield-bg';
-        w.insertBefore(bg, w.firstChild);
-      }
-    });
+    wrappers.forEach(w => w.classList.remove('active'));
     return wrappers.length;
   });
 
