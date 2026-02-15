@@ -6,524 +6,1090 @@
   <title>Post 060 — Harmonic Oscillator Settings | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --accent-green: #4ad97a;
-      --text-primary: #e8e8e8;
-      --text-secondary: #a0a0a0;
-      --text-dim: #6a6a6a;
+      --bg-card: rgba(255,255,255,0.03);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-muted: rgba(255,255,255,0.4);
+      --border-subtle: rgba(255,255,255,0.1);
+      --accent-teal: #5eead4;
+      --accent-teal-dim: rgba(94,234,212,0.3);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
-
-    .controls {
-      position: fixed;
-      top: 20px; right: 20px;
-      z-index: 100;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .controls label {
-      color: var(--text-secondary);
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-
-    .controls button {
-      background: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    .page-title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .page-title h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 400;
-      margin-bottom: 8px;
-    }
-
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-
-    .carousel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .slide-wrapper {
-      aspect-ratio: 4 / 5;
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg-dark);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-      container-type: inline-size;
-    }
-
-    .slide-wrapper .bg-video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: var(--video-opacity, 0.08);
-      pointer-events: none;
-    }
-
-    .slide-wrapper .slide-content {
-      position: relative;
-      z-index: 2;
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 8%;
-      text-align: center;
-    }
-
-    .slide-number {
-      position: absolute;
-      top: 4%; left: 4%;
-      font-size: clamp(9px, 2cqw, 11px);
-      color: var(--text-dim);
-      letter-spacing: 1px;
-    }
-
-    .brand-mark {
-      position: absolute;
-      bottom: 4%; right: 4%;
-      font-size: clamp(8px, 1.8cqw, 10px);
-      color: var(--text-dim);
-      letter-spacing: 1px;
-    }
-
-    .slide-icon { font-size: clamp(28px, 7cqw, 48px); margin-bottom: 4%; }
-
-    .slide-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(18px, 5cqw, 32px);
-      font-weight: 600;
-      margin-bottom: 3%;
-      line-height: 1.2;
-    }
-
-    .slide-title.large { font-size: clamp(20px, 5.5cqw, 38px); }
-
-    .slide-subtitle {
-      font-size: clamp(10px, 2.5cqw, 14px);
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 4%;
-    }
-
-    .slide-body {
-      font-size: clamp(12px, 3cqw, 16px);
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 90%;
-    }
-
-    .setting-box {
-      width: 100%;
-      max-width: 90%;
-      border-radius: 16px;
-      padding: 5%;
-      margin: 3% 0;
-      text-align: left;
-    }
-
-    .setting-box.default {
-      background: rgba(74, 144, 217, 0.1);
-      border: 2px solid rgba(74, 144, 217, 0.4);
-    }
-
-    .setting-box.fast {
-      background: rgba(217, 74, 74, 0.1);
-      border: 2px solid rgba(217, 74, 74, 0.4);
-    }
-
-    .setting-box.slow {
-      background: rgba(74, 217, 122, 0.1);
-      border: 2px solid rgba(74, 217, 122, 0.4);
-    }
-
-    .setting-label {
-      font-size: clamp(9px, 2.2cqw, 12px);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 2%;
-    }
-
-    .setting-box.default .setting-label { color: var(--accent-blue); }
-    .setting-box.fast .setting-label { color: var(--accent-red); }
-    .setting-box.slow .setting-label { color: var(--accent-green); }
-
-    .setting-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(16px, 4.5cqw, 26px);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 3%;
-    }
-
-    .setting-desc {
-      font-size: clamp(10px, 2.5cqw, 14px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .key-box {
-      width: 100%;
-      max-width: 90%;
-      background: rgba(201, 169, 98, 0.1);
-      border: 2px solid rgba(201, 169, 98, 0.4);
-      border-radius: 16px;
-      padding: 5%;
-      margin: 3% 0;
-    }
-
-    .key-box .title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(16px, 4cqw, 24px);
-      font-weight: 600;
-      color: var(--accent-gold);
-      margin-bottom: 3%;
-    }
-
-    .key-box .desc {
-      font-size: clamp(10px, 2.5cqw, 14px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .cta-link {
-      display: inline-block;
-      margin-top: 5%;
-      padding: 3% 6%;
-      background: var(--accent-gold);
-      color: var(--bg-dark);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      font-size: clamp(11px, 2.5cqw, 14px);
-    }
-
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
+    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
     body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper {
-      display: none;
-      width: 1080px; height: 1350px;
-      border-radius: 0; margin: 0;
-    }
+    body.export-mode .slide-wrapper { display: none; margin: 0; }
     body.export-mode .slide-wrapper.active { display: block; }
+    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
-    .export-nav {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      gap: 12px;
-      z-index: 1000;
-    }
+    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
+    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .page-title { text-align: center; margin-bottom: 2rem; }
+    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
 
-    body.export-mode .export-nav { display: flex; }
+    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
+    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
+    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
+    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5%; }
 
-    .export-nav button {
-      background: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-    }
+    /* Teal slide base — LEFT bar */
+    .slide-teal { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
+    .slide-teal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
+    .slide-teal::after { content: ''; position: absolute; top: 0; left: 0; width: 18px; height: 100%; background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%); z-index: 5; }
+    .slide-teal .slide-content { z-index: 3; }
 
-    .export-nav .slide-indicator {
-      background: rgba(255,255,255,0.1);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-    }
-
-    @media (max-width: 768px) {
-      .carousel-grid { grid-template-columns: 1fr; max-width: 400px; }
-    }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (TEAL) ═══ */
-    .slide-1 {
-      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
-    }
-
-    .slide-1::before {
-      content: '';
+    /* Logo — teal for docs */
+    .slide-logo {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .slide-1::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 18px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
-      z-index: 5;
-    }
-
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
-    }
-
-    .slide-1 .slide-content {
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      z-index: 3;
-    }
-
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.9);
-      margin-bottom: 8%;
-    }
-
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
-    }
-
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
-      margin-bottom: 4%;
-    }
-
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(94, 234, 212, 0.4);
-      line-height: 1.6;
-    }
-
-    .slide-1 .cine-logo {
-      position: absolute;
-      bottom: 8%;
+      bottom: 4%;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Gugi', sans-serif;
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.4);
+      color: rgba(94,234,212,0.4);
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    /* =============================================
+       SLIDE 1 — Hook
+       ============================================= */
+    .slide-1 .hook-label {
+      font-family: var(--font-mono);
+      font-size: clamp(0.55rem, 1.4cqw, 0.75rem);
+      font-weight: 500;
+      color: rgba(94,234,212,0.9);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: clamp(1rem, 4cqw, 2.5rem);
+      margin-top: clamp(1.5rem, 6cqw, 4rem);
+    }
+    .slide-1 .hook-question {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 5.5cqw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: clamp(1rem, 3cqw, 2rem);
+    }
+    .slide-1 .hook-divider {
+      width: clamp(2.5rem, 10cqw, 5rem);
+      height: 2px;
+      background: rgba(94,234,212,0.6);
+      margin-bottom: clamp(1rem, 3cqw, 2rem);
+    }
+    .slide-1 .hook-subtitle {
+      font-family: var(--font-sans);
+      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .slide-1 .hook-subtitle em {
+      font-style: italic;
+      color: rgba(94,234,212,0.9);
+    }
+    .slide-1 .oscillator-preview {
+      margin-top: auto;
+      margin-bottom: clamp(1.5rem, 5cqw, 3rem);
+      height: clamp(2rem, 7cqw, 4rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-1 .wave-line {
+      position: absolute;
+      bottom: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(94,234,212,0.15);
+    }
+    .slide-1 .wave-dots {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+    .slide-1 .wave-dot {
+      width: clamp(3px, 0.7cqw, 5px);
+      height: clamp(3px, 0.7cqw, 5px);
+      border-radius: 50%;
+      background: var(--accent-teal);
+      opacity: 0.6;
+    }
+    .slide-1 .wave-dot:nth-child(1) { transform: translateY(0); }
+    .slide-1 .wave-dot:nth-child(2) { transform: translateY(-60%); }
+    .slide-1 .wave-dot:nth-child(3) { transform: translateY(-95%); }
+    .slide-1 .wave-dot:nth-child(4) { transform: translateY(-60%); }
+    .slide-1 .wave-dot:nth-child(5) { transform: translateY(0); }
+    .slide-1 .wave-dot:nth-child(6) { transform: translateY(60%); }
+    .slide-1 .wave-dot:nth-child(7) { transform: translateY(95%); }
+    .slide-1 .wave-dot:nth-child(8) { transform: translateY(60%); }
+    .slide-1 .wave-dot:nth-child(9) { transform: translateY(0); }
+    .slide-1 .wave-dot:nth-child(10) { transform: translateY(-60%); }
+    .slide-1 .wave-dot:nth-child(11) { transform: translateY(-95%); }
+    .slide-1 .wave-dot:nth-child(12) { transform: translateY(-60%); }
+    .slide-1 .wave-dot:nth-child(13) { transform: translateY(0); }
+
+    /* =============================================
+       SLIDE 2 — Default Settings
+       ============================================= */
+    .slide-2 .section-label {
+      font-family: var(--font-mono);
+      font-size: clamp(0.5rem, 1.2cqw, 0.7rem);
+      font-weight: 500;
+      color: rgba(94,234,212,0.9);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: clamp(0.3rem, 1cqw, 0.6rem);
+      margin-top: clamp(0.5rem, 2cqw, 1.5rem);
+    }
+    .slide-2 .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 4.5cqw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
+    }
+    .slide-2 .wave-viz {
+      position: relative;
+      width: 100%;
+      height: clamp(3rem, 10cqw, 6rem);
+      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
+      display: flex;
+      align-items: center;
+    }
+    .slide-2 .wave-center-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(94,234,212,0.15);
+    }
+    .slide-2 .wave-bar-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(2px, 0.5cqw, 4px);
+      width: 100%;
+      height: 100%;
+    }
+    .slide-2 .wave-bar {
+      width: clamp(2px, 0.6cqw, 4px);
+      background: var(--accent-teal);
+      border-radius: 2px;
+      opacity: 0.7;
+    }
+    /* Medium frequency sine wave — 24 bars */
+    .slide-2 .wave-bar:nth-child(1)  { height: 5%; }
+    .slide-2 .wave-bar:nth-child(2)  { height: 20%; }
+    .slide-2 .wave-bar:nth-child(3)  { height: 42%; }
+    .slide-2 .wave-bar:nth-child(4)  { height: 65%; }
+    .slide-2 .wave-bar:nth-child(5)  { height: 85%; }
+    .slide-2 .wave-bar:nth-child(6)  { height: 97%; }
+    .slide-2 .wave-bar:nth-child(7)  { height: 97%; }
+    .slide-2 .wave-bar:nth-child(8)  { height: 85%; }
+    .slide-2 .wave-bar:nth-child(9)  { height: 65%; }
+    .slide-2 .wave-bar:nth-child(10) { height: 42%; }
+    .slide-2 .wave-bar:nth-child(11) { height: 20%; }
+    .slide-2 .wave-bar:nth-child(12) { height: 5%; }
+    .slide-2 .wave-bar:nth-child(13) { height: 5%; }
+    .slide-2 .wave-bar:nth-child(14) { height: 20%; }
+    .slide-2 .wave-bar:nth-child(15) { height: 42%; }
+    .slide-2 .wave-bar:nth-child(16) { height: 65%; }
+    .slide-2 .wave-bar:nth-child(17) { height: 85%; }
+    .slide-2 .wave-bar:nth-child(18) { height: 97%; }
+    .slide-2 .wave-bar:nth-child(19) { height: 97%; }
+    .slide-2 .wave-bar:nth-child(20) { height: 85%; }
+    .slide-2 .wave-bar:nth-child(21) { height: 65%; }
+    .slide-2 .wave-bar:nth-child(22) { height: 42%; }
+    .slide-2 .wave-bar:nth-child(23) { height: 20%; }
+    .slide-2 .wave-bar:nth-child(24) { height: 5%; }
+
+    .slide-2 .settings-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(94,234,212,0.15);
+      border-radius: clamp(4px, 1cqw, 8px);
+      padding: clamp(0.6rem, 2.5cqw, 1.5rem);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide-2 .card-label {
+      font-family: var(--font-mono);
+      font-size: clamp(0.45rem, 1.1cqw, 0.65rem);
+      font-weight: 500;
+      color: var(--accent-teal);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
+      padding-bottom: clamp(0.3rem, 1cqw, 0.6rem);
+      border-bottom: 1px solid rgba(94,234,212,0.15);
+    }
+    .slide-2 .param-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(0.2rem, 0.8cqw, 0.5rem) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .slide-2 .param-row:last-of-type {
+      border-bottom: none;
+    }
+    .slide-2 .param-key {
+      font-family: var(--font-mono);
+      font-size: clamp(0.45rem, 1.2cqw, 0.7rem);
+      color: var(--text-secondary);
+    }
+    .slide-2 .param-val {
+      font-family: var(--font-mono);
+      font-size: clamp(0.45rem, 1.2cqw, 0.7rem);
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+    .slide-2 .benefits {
+      margin-top: clamp(0.5rem, 1.5cqw, 1rem);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.2rem, 0.6cqw, 0.4rem);
+    }
+    .slide-2 .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.3rem, 0.8cqw, 0.5rem);
+      font-size: clamp(0.45rem, 1.2cqw, 0.7rem);
+      color: var(--text-secondary);
+    }
+    .slide-2 .benefit-dot {
+      width: clamp(3px, 0.6cqw, 5px);
+      height: clamp(3px, 0.6cqw, 5px);
+      border-radius: 50%;
+      background: var(--accent-teal);
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       SLIDE 3 — Faster Settings
+       ============================================= */
+    .slide-3 .section-label {
+      font-family: var(--font-mono);
+      font-size: clamp(0.5rem, 1.2cqw, 0.7rem);
+      font-weight: 500;
+      color: rgba(94,234,212,0.9);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: clamp(0.3rem, 1cqw, 0.6rem);
+      margin-top: clamp(0.5rem, 2cqw, 1.5rem);
+    }
+    .slide-3 .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 4.5cqw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
+    }
+    .slide-3 .wave-viz {
+      position: relative;
+      width: 100%;
+      height: clamp(3rem, 10cqw, 6rem);
+      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
+      display: flex;
+      align-items: center;
+    }
+    .slide-3 .wave-center-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(251,191,36,0.15);
+    }
+    .slide-3 .wave-bar-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1px, 0.25cqw, 2px);
+      width: 100%;
+      height: 100%;
+    }
+    .slide-3 .wave-bar {
+      width: clamp(2px, 0.45cqw, 3px);
+      border-radius: 1px;
+      opacity: 0.8;
+      background: #fbbf24;
+    }
+    /* Faster / tighter oscillations — 36 bars, compressed sine */
+    .slide-3 .wave-bar:nth-child(1)  { height: 5%; }
+    .slide-3 .wave-bar:nth-child(2)  { height: 35%; }
+    .slide-3 .wave-bar:nth-child(3)  { height: 70%; }
+    .slide-3 .wave-bar:nth-child(4)  { height: 95%; }
+    .slide-3 .wave-bar:nth-child(5)  { height: 95%; }
+    .slide-3 .wave-bar:nth-child(6)  { height: 70%; }
+    .slide-3 .wave-bar:nth-child(7)  { height: 35%; }
+    .slide-3 .wave-bar:nth-child(8)  { height: 5%; }
+    .slide-3 .wave-bar:nth-child(9)  { height: 5%; }
+    .slide-3 .wave-bar:nth-child(10) { height: 35%; }
+    .slide-3 .wave-bar:nth-child(11) { height: 70%; }
+    .slide-3 .wave-bar:nth-child(12) { height: 95%; }
+    .slide-3 .wave-bar:nth-child(13) { height: 95%; }
+    .slide-3 .wave-bar:nth-child(14) { height: 70%; }
+    .slide-3 .wave-bar:nth-child(15) { height: 35%; }
+    .slide-3 .wave-bar:nth-child(16) { height: 5%; }
+    .slide-3 .wave-bar:nth-child(17) { height: 5%; }
+    .slide-3 .wave-bar:nth-child(18) { height: 35%; }
+    .slide-3 .wave-bar:nth-child(19) { height: 70%; }
+    .slide-3 .wave-bar:nth-child(20) { height: 95%; }
+    .slide-3 .wave-bar:nth-child(21) { height: 95%; }
+    .slide-3 .wave-bar:nth-child(22) { height: 70%; }
+    .slide-3 .wave-bar:nth-child(23) { height: 35%; }
+    .slide-3 .wave-bar:nth-child(24) { height: 5%; }
+    .slide-3 .wave-bar:nth-child(25) { height: 5%; }
+    .slide-3 .wave-bar:nth-child(26) { height: 35%; }
+    .slide-3 .wave-bar:nth-child(27) { height: 70%; }
+    .slide-3 .wave-bar:nth-child(28) { height: 95%; }
+    .slide-3 .wave-bar:nth-child(29) { height: 95%; }
+    .slide-3 .wave-bar:nth-child(30) { height: 70%; }
+    .slide-3 .wave-bar:nth-child(31) { height: 35%; }
+    .slide-3 .wave-bar:nth-child(32) { height: 5%; }
+    .slide-3 .wave-bar:nth-child(33) { height: 5%; }
+    .slide-3 .wave-bar:nth-child(34) { height: 35%; }
+    .slide-3 .wave-bar:nth-child(35) { height: 70%; }
+    .slide-3 .wave-bar:nth-child(36) { height: 95%; }
+
+    .slide-3 .settings-card {
+      background: rgba(251,191,36,0.03);
+      border: 1px solid rgba(251,191,36,0.15);
+      border-radius: clamp(4px, 1cqw, 8px);
+      padding: clamp(0.6rem, 2.5cqw, 1.5rem);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide-3 .card-label {
+      font-family: var(--font-mono);
+      font-size: clamp(0.45rem, 1.1cqw, 0.65rem);
+      font-weight: 500;
+      color: #fbbf24;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
+      padding-bottom: clamp(0.3rem, 1cqw, 0.6rem);
+      border-bottom: 1px solid rgba(251,191,36,0.15);
+    }
+    .slide-3 .param-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(0.2rem, 0.8cqw, 0.5rem) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .slide-3 .param-row:last-of-type { border-bottom: none; }
+    .slide-3 .param-key {
+      font-family: var(--font-mono);
+      font-size: clamp(0.45rem, 1.2cqw, 0.7rem);
+      color: var(--text-secondary);
+    }
+    .slide-3 .param-val {
+      font-family: var(--font-mono);
+      font-size: clamp(0.45rem, 1.2cqw, 0.7rem);
+      color: #fbbf24;
+      font-weight: 500;
+    }
+    .slide-3 .traits {
+      margin-top: clamp(0.5rem, 1.5cqw, 1rem);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.2rem, 0.6cqw, 0.4rem);
+    }
+    .slide-3 .trait-item {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.3rem, 0.8cqw, 0.5rem);
+      font-size: clamp(0.45rem, 1.2cqw, 0.7rem);
+      color: var(--text-secondary);
+    }
+    .slide-3 .trait-dot {
+      width: clamp(3px, 0.6cqw, 5px);
+      height: clamp(3px, 0.6cqw, 5px);
+      border-radius: 50%;
+      background: #fbbf24;
+      flex-shrink: 0;
+    }
+    .slide-3 .trait-item.caution .trait-dot {
+      background: rgba(251,191,36,0.4);
+    }
+    .slide-3 .trait-item.caution {
+      color: var(--text-muted);
+    }
+
+    /* =============================================
+       SLIDE 4 — Slower Settings
+       ============================================= */
+    .slide-4 .section-label {
+      font-family: var(--font-mono);
+      font-size: clamp(0.5rem, 1.2cqw, 0.7rem);
+      font-weight: 500;
+      color: rgba(94,234,212,0.9);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: clamp(0.3rem, 1cqw, 0.6rem);
+      margin-top: clamp(0.5rem, 2cqw, 1.5rem);
+    }
+    .slide-4 .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 4.5cqw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
+    }
+    .slide-4 .wave-viz {
+      position: relative;
+      width: 100%;
+      height: clamp(3rem, 10cqw, 6rem);
+      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
+      display: flex;
+      align-items: center;
+    }
+    .slide-4 .wave-center-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(96,165,250,0.15);
+    }
+    .slide-4 .wave-bar-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(3px, 0.9cqw, 7px);
+      width: 100%;
+      height: 100%;
+    }
+    .slide-4 .wave-bar {
+      width: clamp(3px, 0.8cqw, 6px);
+      border-radius: 2px;
+      opacity: 0.7;
+      background: #60a5fa;
+    }
+    /* Slower / stretched oscillations — 14 bars, gentle sine */
+    .slide-4 .wave-bar:nth-child(1)  { height: 10%; }
+    .slide-4 .wave-bar:nth-child(2)  { height: 25%; }
+    .slide-4 .wave-bar:nth-child(3)  { height: 48%; }
+    .slide-4 .wave-bar:nth-child(4)  { height: 72%; }
+    .slide-4 .wave-bar:nth-child(5)  { height: 90%; }
+    .slide-4 .wave-bar:nth-child(6)  { height: 98%; }
+    .slide-4 .wave-bar:nth-child(7)  { height: 98%; }
+    .slide-4 .wave-bar:nth-child(8)  { height: 90%; }
+    .slide-4 .wave-bar:nth-child(9)  { height: 72%; }
+    .slide-4 .wave-bar:nth-child(10) { height: 48%; }
+    .slide-4 .wave-bar:nth-child(11) { height: 25%; }
+    .slide-4 .wave-bar:nth-child(12) { height: 10%; }
+    .slide-4 .wave-bar:nth-child(13) { height: 10%; }
+    .slide-4 .wave-bar:nth-child(14) { height: 25%; }
+
+    .slide-4 .settings-card {
+      background: rgba(96,165,250,0.03);
+      border: 1px solid rgba(96,165,250,0.15);
+      border-radius: clamp(4px, 1cqw, 8px);
+      padding: clamp(0.6rem, 2.5cqw, 1.5rem);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide-4 .card-label {
+      font-family: var(--font-mono);
+      font-size: clamp(0.45rem, 1.1cqw, 0.65rem);
+      font-weight: 500;
+      color: #60a5fa;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
+      padding-bottom: clamp(0.3rem, 1cqw, 0.6rem);
+      border-bottom: 1px solid rgba(96,165,250,0.15);
+    }
+    .slide-4 .param-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(0.2rem, 0.8cqw, 0.5rem) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .slide-4 .param-row:last-of-type { border-bottom: none; }
+    .slide-4 .param-key {
+      font-family: var(--font-mono);
+      font-size: clamp(0.45rem, 1.2cqw, 0.7rem);
+      color: var(--text-secondary);
+    }
+    .slide-4 .param-val {
+      font-family: var(--font-mono);
+      font-size: clamp(0.45rem, 1.2cqw, 0.7rem);
+      color: #60a5fa;
+      font-weight: 500;
+    }
+    .slide-4 .traits {
+      margin-top: clamp(0.5rem, 1.5cqw, 1rem);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.2rem, 0.6cqw, 0.4rem);
+    }
+    .slide-4 .trait-item {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.3rem, 0.8cqw, 0.5rem);
+      font-size: clamp(0.45rem, 1.2cqw, 0.7rem);
+      color: var(--text-secondary);
+    }
+    .slide-4 .trait-dot {
+      width: clamp(3px, 0.6cqw, 5px);
+      height: clamp(3px, 0.6cqw, 5px);
+      border-radius: 50%;
+      background: #60a5fa;
+      flex-shrink: 0;
+    }
+    .slide-4 .trait-item.caution .trait-dot {
+      background: rgba(96,165,250,0.4);
+    }
+    .slide-4 .trait-item.caution {
+      color: var(--text-muted);
+    }
+
+    /* =============================================
+       SLIDE 5 — Comparison Table
+       ============================================= */
+    .slide-5 .section-label {
+      font-family: var(--font-mono);
+      font-size: clamp(0.5rem, 1.2cqw, 0.7rem);
+      font-weight: 500;
+      color: rgba(94,234,212,0.9);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: clamp(0.3rem, 1cqw, 0.6rem);
+      margin-top: clamp(0.5rem, 2cqw, 1.5rem);
+    }
+    .slide-5 .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 4.5cqw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: clamp(1rem, 3cqw, 2rem);
+    }
+    .slide-5 .comparison-table {
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide-5 .table-header {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1.2fr 1.2fr;
+      gap: clamp(2px, 0.4cqw, 4px);
+      padding: clamp(0.3rem, 1cqw, 0.7rem) 0;
+      border-bottom: 1px solid rgba(94,234,212,0.2);
+      margin-bottom: clamp(0.3rem, 0.8cqw, 0.5rem);
+    }
+    .slide-5 .table-header span {
+      font-family: var(--font-mono);
+      font-size: clamp(0.35rem, 0.95cqw, 0.55rem);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+    .slide-5 .table-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1.2fr 1.2fr;
+      gap: clamp(2px, 0.4cqw, 4px);
+      padding: clamp(0.4rem, 1.3cqw, 0.9rem) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      align-items: center;
+    }
+    .slide-5 .table-row:last-child {
+      border-bottom: none;
+    }
+    .slide-5 .row-setting {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.25rem, 0.7cqw, 0.5rem);
+    }
+    .slide-5 .row-indicator {
+      width: clamp(3px, 0.6cqw, 5px);
+      height: clamp(12px, 3cqw, 20px);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .slide-5 .row-indicator.teal { background: var(--accent-teal); }
+    .slide-5 .row-indicator.amber { background: #fbbf24; }
+    .slide-5 .row-indicator.blue { background: #60a5fa; }
+    .slide-5 .row-setting-name {
+      font-family: var(--font-mono);
+      font-size: clamp(0.42rem, 1.1cqw, 0.65rem);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+    .slide-5 .row-cell {
+      font-size: clamp(0.4rem, 1.05cqw, 0.6rem);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .slide-5 .bottom-message {
+      margin-top: auto;
+      padding-top: clamp(0.6rem, 2cqw, 1.2rem);
+      border-top: 1px solid rgba(94,234,212,0.12);
+      text-align: center;
+    }
+    .slide-5 .bottom-message p {
+      font-family: var(--font-serif);
+      font-size: clamp(0.75rem, 2.5cqw, 1.4rem);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--accent-teal);
+    }
+
+    /* =============================================
+       SLIDE 6 — CTA
+       ============================================= */
+    .slide-6 .cta-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: clamp(1rem, 4cqw, 3rem) 0;
+    }
+    .slide-6 .cta-label {
+      font-family: var(--font-mono);
+      font-size: clamp(0.55rem, 1.4cqw, 0.75rem);
+      font-weight: 500;
+      color: rgba(94,234,212,0.9);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: clamp(1rem, 3cqw, 2rem);
+    }
+    .slide-6 .cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 5.5cqw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
+    }
+    .slide-6 .cta-subtitle {
+      font-size: clamp(0.55rem, 1.6cqw, 0.9rem);
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.5;
+      max-width: 80%;
+      margin: 0 auto clamp(1.5rem, 5cqw, 3rem);
+    }
+    .slide-6 .cta-divider {
+      width: clamp(2.5rem, 10cqw, 5rem);
+      height: 2px;
+      background: rgba(94,234,212,0.6);
+      margin-bottom: clamp(1.5rem, 5cqw, 3rem);
+    }
+    .slide-6 .cta-box {
+      border: 1px solid rgba(94,234,212,0.35);
+      border-radius: clamp(4px, 1cqw, 8px);
+      padding: clamp(0.7rem, 2.5cqw, 1.5rem) clamp(1.2rem, 4cqw, 2.5rem);
+      background: rgba(94,234,212,0.04);
+    }
+    .slide-6 .cta-box-label {
+      font-family: var(--font-mono);
+      font-size: clamp(0.4rem, 1cqw, 0.6rem);
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: clamp(0.3rem, 0.8cqw, 0.5rem);
+    }
+    .slide-6 .cta-box-link {
+      font-family: var(--font-mono);
+      font-size: clamp(0.55rem, 1.5cqw, 0.85rem);
+      color: var(--accent-teal);
+      font-weight: 500;
+      letter-spacing: 0.05em;
     }
   </style>
 </head>
 <body>
+
+  <!-- Controls -->
   <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
+    <button id="export-btn">Export Mode</button>
   </div>
 
+  <!-- Page Title -->
   <div class="page-title">
     <h1>Post 060 — Harmonic Oscillator Settings</h1>
-    <p>Docs Carousel — 6 Slides</p>
+    <p>6 slides &middot; Docs</p>
   </div>
 
+  <!-- Carousel Grid -->
   <div class="carousel-grid">
-    <!-- Slide 1: Hook -->
+
+    <!-- ==================== SLIDE 1 — Hook ==================== -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
-      <div class="slide slide-1">
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide slide-teal slide-1">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="cine-label">REFERENCE</div>
-          <div class="hook-main">WHICH SETTINGS SHOULD YOU USE?</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">Harmonic Oscillator settings guide.</p>
-          <div class="cine-logo">Signal Pilot</div>
+          <div class="hook-label">DOCS</div>
+          <div class="hook-question">Which Settings<br>Should You Use?</div>
+          <div class="hook-divider"></div>
+          <div class="hook-subtitle">Harmonic Oscillator &mdash; <em>Settings Guide</em></div>
+          <div class="oscillator-preview">
+            <div class="wave-line"></div>
+            <div class="wave-dots">
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+              <span class="wave-dot"></span>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 2: Default Settings -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 06</span>
-        <div class="setting-box default">
-          <div class="setting-label">Setting</div>
-          <div class="setting-title">Default</div>
-          <div class="setting-desc">Balanced for most markets. Good starting point. Works across timeframes.</div>
+    <!-- ==================== SLIDE 2 — Default Settings ==================== -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — Default Settings</span>
+      <div class="slide slide-teal slide-2">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="section-label">SETTINGS</div>
+          <div class="section-title">Default Settings</div>
+          <div class="wave-viz">
+            <div class="wave-center-line"></div>
+            <div class="wave-bar-group">
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="card-label">DEFAULT</div>
+            <div class="param-row">
+              <span class="param-key">period</span>
+              <span class="param-val">14</span>
+            </div>
+            <div class="param-row">
+              <span class="param-key">amplitude</span>
+              <span class="param-val">1.0</span>
+            </div>
+            <div class="param-row">
+              <span class="param-key">smoothing</span>
+              <span class="param-val">3</span>
+            </div>
+            <div class="param-row">
+              <span class="param-key">threshold</span>
+              <span class="param-val">0.5</span>
+            </div>
+            <div class="benefits">
+              <div class="benefit-item">
+                <span class="benefit-dot"></span>
+                Balanced for most markets
+              </div>
+              <div class="benefit-item">
+                <span class="benefit-dot"></span>
+                Good starting point
+              </div>
+              <div class="benefit-item">
+                <span class="benefit-dot"></span>
+                Works across timeframes
+              </div>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <p class="slide-body">Start here. Adjust based on your results.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 3: Faster Settings -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 06</span>
-        <div class="setting-box fast">
-          <div class="setting-label">Setting</div>
-          <div class="setting-title">Faster</div>
-          <div class="setting-desc">More signals, more noise. Good for scalping and lower timeframes.</div>
+    <!-- ==================== SLIDE 3 — Faster Settings ==================== -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Faster Settings</span>
+      <div class="slide slide-teal slide-3">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="section-label">SETTINGS</div>
+          <div class="section-title">Faster Settings</div>
+          <div class="wave-viz">
+            <div class="wave-center-line"></div>
+            <div class="wave-bar-group">
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="card-label">FASTER</div>
+            <div class="param-row">
+              <span class="param-key">period</span>
+              <span class="param-val">7</span>
+            </div>
+            <div class="param-row">
+              <span class="param-key">amplitude</span>
+              <span class="param-val">1.2</span>
+            </div>
+            <div class="param-row">
+              <span class="param-key">smoothing</span>
+              <span class="param-val">1</span>
+            </div>
+            <div class="param-row">
+              <span class="param-key">threshold</span>
+              <span class="param-val">0.3</span>
+            </div>
+            <div class="traits">
+              <div class="trait-item">
+                <span class="trait-dot"></span>
+                More responsive signals
+              </div>
+              <div class="trait-item">
+                <span class="trait-dot"></span>
+                Better for scalping
+              </div>
+              <div class="trait-item caution">
+                <span class="trait-dot"></span>
+                More noise to filter
+              </div>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <p class="slide-body">Higher sensitivity = more opportunities, more false signals.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 4: Slower Settings -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 06</span>
-        <div class="setting-box slow">
-          <div class="setting-label">Setting</div>
-          <div class="setting-title">Slower</div>
-          <div class="setting-desc">Fewer signals, cleaner signals. Good for swing trading and higher timeframes.</div>
+    <!-- ==================== SLIDE 4 — Slower Settings ==================== -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Slower Settings</span>
+      <div class="slide slide-teal slide-4">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="section-label">SETTINGS</div>
+          <div class="section-title">Slower Settings</div>
+          <div class="wave-viz">
+            <div class="wave-center-line"></div>
+            <div class="wave-bar-group">
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+              <span class="wave-bar"></span><span class="wave-bar"></span>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="card-label">SLOWER</div>
+            <div class="param-row">
+              <span class="param-key">period</span>
+              <span class="param-val">28</span>
+            </div>
+            <div class="param-row">
+              <span class="param-key">amplitude</span>
+              <span class="param-val">0.8</span>
+            </div>
+            <div class="param-row">
+              <span class="param-key">smoothing</span>
+              <span class="param-val">5</span>
+            </div>
+            <div class="param-row">
+              <span class="param-key">threshold</span>
+              <span class="param-val">0.7</span>
+            </div>
+            <div class="traits">
+              <div class="trait-item">
+                <span class="trait-dot"></span>
+                Fewer, more reliable signals
+              </div>
+              <div class="trait-item">
+                <span class="trait-dot"></span>
+                Better for swing trading
+              </div>
+              <div class="trait-item caution">
+                <span class="trait-dot"></span>
+                May miss quick moves
+              </div>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <p class="slide-body">Lower sensitivity = fewer opportunities, more reliable signals.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 5: Key -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 06</span>
-        <div class="key-box">
-          <div class="title">Match YOUR Style</div>
-          <div class="desc">No single setting works for everything.<br><br>Match settings to your timeframe, trading style, and risk tolerance.</div>
+    <!-- ==================== SLIDE 5 — Comparison Table ==================== -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Match Your Style</span>
+      <div class="slide slide-teal slide-5">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="section-label">COMPARISON</div>
+          <div class="section-title">Match Your Style</div>
+          <div class="comparison-table">
+            <div class="table-header">
+              <span>Setting</span>
+              <span>Signals</span>
+              <span>Best For</span>
+              <span>Trade-off</span>
+            </div>
+            <div class="table-row">
+              <div class="row-setting">
+                <span class="row-indicator teal"></span>
+                <span class="row-setting-name">Default</span>
+              </div>
+              <div class="row-cell">Moderate</div>
+              <div class="row-cell">Most markets &amp; timeframes</div>
+              <div class="row-cell">Jack of all trades</div>
+            </div>
+            <div class="table-row">
+              <div class="row-setting">
+                <span class="row-indicator amber"></span>
+                <span class="row-setting-name">Faster</span>
+              </div>
+              <div class="row-cell">Frequent</div>
+              <div class="row-cell">Scalping &amp; short-term</div>
+              <div class="row-cell">More noise</div>
+            </div>
+            <div class="table-row">
+              <div class="row-setting">
+                <span class="row-indicator blue"></span>
+                <span class="row-setting-name">Slower</span>
+              </div>
+              <div class="row-cell">Fewer</div>
+              <div class="row-cell">Swing &amp; position trading</div>
+              <div class="row-cell">Delayed entries</div>
+            </div>
+          </div>
+          <div class="bottom-message">
+            <p>Match settings to YOUR style</p>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 6: CTA -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 06</span>
-        <div class="slide-icon">📚</div>
-        <h2 class="slide-title">Full Settings Guide</h2>
-        <p class="slide-body">Detailed documentation with recommended settings for each market and style.</p>
-        <a href="https://docs.signalpilot.io/harmonic-oscillator-v10" class="cta-link">Read Full Docs</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+    <!-- ==================== SLIDE 6 — CTA ==================== -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — CTA</span>
+      <div class="slide slide-teal slide-6">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="cta-layout">
+            <div class="cta-label">DOCS</div>
+            <div class="cta-title">Full<br>Documentation</div>
+            <div class="cta-subtitle">Comprehensive settings guide for every oscillator parameter, with examples for each trading style.</div>
+            <div class="cta-divider"></div>
+            <div class="cta-box">
+              <div class="cta-box-label">Read the docs</div>
+              <div class="cta-box-link">docs.signalpilot.io</div>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 6</span>
-    <button onclick="nextSlide()">Next →</button>
-  </div>
+  </div><!-- .carousel-grid -->
 
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0;
-    let exportMode = false;
+    (function() {
+      const bgToggle = document.getElementById('bg-toggle');
+      const opacityControl = document.getElementById('opacity-control');
+      const exportBtn = document.getElementById('export-btn');
+      const videos = document.querySelectorAll('.video-bg');
+      const slideWrappers = document.querySelectorAll('.slide-wrapper');
+      let exportMode = false;
+      let currentSlide = 0;
 
-    bgToggle.addEventListener('change', (e) => {
-      videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none');
-    });
-
-    opacitySlider.addEventListener('input', (e) => {
-      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
-    });
-
-    function toggleExportMode() {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) { currentSlide = 0; updateExportView(); }
-    }
-
-    function updateExportView() {
-      slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
-      document.getElementById('currentSlide').textContent = currentSlide + 1;
-    }
-
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'Escape') toggleExportMode();
-    });
+      bgToggle.addEventListener('change', function() {
+        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
+      });
+      opacityControl.addEventListener('change', function() {
+        videos.forEach(v => { v.style.opacity = this.value; });
+      });
+      exportBtn.addEventListener('click', function() {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
+      });
+      function updateActiveSlide() {
+        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
+      }
+      document.addEventListener('keydown', function(e) {
+        if (!exportMode) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+      });
+    })();
   </script>
+
 </body>
 </html>
