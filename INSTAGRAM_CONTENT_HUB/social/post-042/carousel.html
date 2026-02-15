@@ -6,532 +6,495 @@
   <title>Post 042 — Risk-Reward Ratio | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0a0a0f;
-      --bg-card: rgba(255,255,255,0.03);
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255,255,255,0.7);
-      --text-muted: rgba(255,255,255,0.4);
-      --border-subtle: rgba(255,255,255,0.1);
       --accent-gold: #c9a962;
-      --accent-green: #4ad97a;
-      --accent-red: #d94a4a;
-      --accent-blue: #4a90d9;
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans: 'Inter', -apple-system, sans-serif;
+      --accent-red: #f87171;
+      --accent-green: #4ade80;
+      --accent-blue: #60a5fa;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: rgba(255, 255, 255, 0.4);
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
-    body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
-    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
-    .page-title { text-align: center; margin-bottom: 2rem; }
-    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
-
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
-    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
-    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5%; }
-
-    /* ═══ Slide 1 — Cinematic Hook (NEUTRAL) ═══ */
-    .slide-edu { background: linear-gradient(180deg, #0d0d10 0%, #0a0a0f 100%) !important; }
-    .slide-edu::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(201,169,98,0.04) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-edu .slide-content { z-index: 3; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
-    .slide-1 .cine-label { font-size: clamp(0.5rem, 1.6cqw, 0.875rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201,169,98,0.9); margin-bottom: 8%; }
-    .slide-1 .hook-main { font-size: clamp(1.4rem, 4.5cqw, 2.5rem); font-weight: 600; line-height: 1.2; color: rgba(255,255,255,0.95); margin-bottom: 4%; }
-    .slide-1 .cine-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(201,169,98,0.6), transparent); margin-bottom: 4%; }
-    .slide-1 .hook-sub { font-size: clamp(0.65rem, 2cqw, 1.1rem); font-weight: 300; letter-spacing: 0.05em; color: rgba(255,255,255,0.35); line-height: 1.6; }
-    .slide-1 .cine-logo { position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%); font-size: clamp(0.4rem, 1.2cqw, 0.625rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
-
-    /* ═══ Slide 2-4 — R:R Scenario Cards ═══ */
-    .scenario-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
     }
 
-    .scenario-label {
-      font-size: clamp(10px, 1.8cqw, 14px);
-      color: var(--text-muted);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 3%;
+    .controls {
+      position: fixed; top: 1rem; right: 1rem; z-index: 1000;
+      display: flex; gap: 1rem; align-items: center;
+      background: rgba(0, 0, 0, 0.8); padding: 1rem 1.5rem;
+      border-radius: 8px; backdrop-filter: blur(10px);
+    }
+    .controls label { font-size: 0.875rem; color: var(--text-secondary); }
+    .controls select, .controls button {
+      background: var(--bg-dark); color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-family: inherit;
     }
 
+    .page-title { text-align: center; margin-bottom: 2rem; font-family: 'Cormorant Garamond', serif; }
+    .page-title h1 { font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-secondary); font-size: 0.875rem; }
+
+    .carousel-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem; max-width: 1800px; margin: 0 auto; padding-bottom: 4rem;
+    }
+
+    .slide-wrapper { container-type: inline-size; display: flex; flex-direction: column; align-items: center; }
+    .slide-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-gold); margin-bottom: 0.75rem; }
+    .slide {
+      width: 100%; max-width: 540px; aspect-ratio: 4 / 5;
+      position: relative; overflow: hidden; background: var(--bg-dark);
+      border-radius: 4px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide-content {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2; display: flex; flex-direction: column; justify-content: center; padding: 8%;
+    }
+
+    /* ═══ SLIDE 1 — HOOK (NEUTRAL / GOLD EDU) ═══ */
+    .slide-1 { background: linear-gradient(180deg, #0c0c10 0%, #08080c 100%); }
+    .slide-1::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(201, 169, 98, 0.04) 0%, transparent 60%);
+      pointer-events: none; z-index: 1;
+    }
+
+    /* Balance orb — risk vs reward visual */
+    .slide-1 .rr-orb {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: clamp(200px, 50cqw, 380px); height: clamp(200px, 50cqw, 380px); z-index: 0;
+    }
+    .slide-1 .rr-orb::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 169, 98, 0.08) 0%, rgba(201, 169, 98, 0.03) 50%, transparent 70%);
+    }
+    .slide-1 .rr-orb::after {
+      content: ''; position: absolute; inset: 25%; border-radius: 50%;
+      border: 1px solid rgba(201, 169, 98, 0.1);
+      box-shadow: 0 0 0 clamp(20px, 5cqw, 38px) rgba(201, 169, 98, 0.03), 0 0 0 clamp(45px, 11cqw, 80px) rgba(201, 169, 98, 0.02);
+    }
+
+    /* Two halves — red/green */
+    .rr-halves {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: clamp(60px, 15cqw, 110px); height: clamp(30px, 7cqw, 50px);
+      display: flex; gap: 2px; z-index: 1;
+    }
+    .rr-halves .half {
+      flex: 1; border-radius: 2px;
+    }
+    .rr-halves .half.risk { background: rgba(248, 113, 113, 0.2); border: 1px solid rgba(248, 113, 113, 0.25); }
+    .rr-halves .half.reward { background: rgba(74, 222, 128, 0.2); border: 1px solid rgba(74, 222, 128, 0.25); }
+
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
+    .slide-1 .cine-label {
+      font-family: 'Inter', sans-serif; font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201, 169, 98, 0.7); margin-bottom: 6%;
+    }
+    .slide-1 .hook-main {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 4.5cqw, 2.6rem);
+      font-weight: 600; line-height: 1.15; color: rgba(255, 255, 255, 0.95); margin-bottom: 4%;
+    }
+    .slide-1 .cine-divider {
+      width: clamp(40px, 12cqw, 80px); height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.5), transparent); margin-bottom: 4%;
+    }
+    .slide-1 .hook-sub {
+      font-family: 'Inter', sans-serif; font-size: clamp(0.6rem, 1.8cqw, 1rem);
+      font-weight: 300; line-height: 1.7; color: var(--text-muted); max-width: 80%;
+    }
+    .slide-1 .cine-logo {
+      position: absolute; bottom: 6%; left: 50%; transform: translateX(-50%);
+      font-family: 'Inter', sans-serif; font-size: clamp(0.35rem, 1cqw, 0.55rem);
+      letter-spacing: 0.35em; text-transform: uppercase; color: rgba(201, 169, 98, 0.3);
+    }
+
+    /* ═══ SHARED STYLES ═══ */
+    .section-tag {
+      font-family: 'Inter', sans-serif; font-size: clamp(0.45rem, 1.3cqw, 0.7rem);
+      letter-spacing: 0.25em; text-transform: uppercase; color: rgba(201, 169, 98, 0.6); margin-bottom: 2%;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 3cqw, 1.7rem);
+      font-weight: 600; color: var(--text-primary); margin-bottom: 4%;
+    }
+
+    /* ═══ SLIDES 2-5 ═══ */
+    .slide-2, .slide-3, .slide-4, .slide-5 { background: linear-gradient(180deg, #0a0a0f 0%, #08080c 100%); }
+    .slide-2::before, .slide-3::before, .slide-4::before, .slide-5::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(201, 169, 98, 0.03) 0%, transparent 60%);
+      pointer-events: none; z-index: 1;
+    }
+    .slide-2 .slide-content, .slide-3 .slide-content, .slide-4 .slide-content, .slide-5 .slide-content {
+      justify-content: center; gap: clamp(6px, 1.5cqw, 12px); z-index: 2;
+    }
+
+    /* ═══ RR SCENARIO CARDS ═══ */
     .rr-display {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4%;
-      margin-bottom: 5%;
+      display: flex; align-items: center; justify-content: center;
+      gap: clamp(8px, 2cqw, 16px); margin-bottom: clamp(8px, 2cqw, 16px);
     }
-
     .rr-box {
-      text-align: center;
-      padding: 3% 5%;
-      border-radius: 12px;
+      text-align: center; padding: clamp(10px, 2.5cqw, 20px) clamp(14px, 3.5cqw, 28px);
+      border-radius: 6px;
     }
-
     .rr-box.risk {
-      background: rgba(217,74,74,0.1);
-      border: 2px solid rgba(217,74,74,0.4);
+      background: rgba(248, 113, 113, 0.06); border: 1px solid rgba(248, 113, 113, 0.2);
     }
-
     .rr-box.reward {
-      background: rgba(74,217,122,0.1);
-      border: 2px solid rgba(74,217,122,0.4);
+      background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.2);
     }
-
     .rr-box .rr-amount {
-      font-family: var(--font-serif);
-      font-size: clamp(28px, 5.6cqw, 60px);
-      font-weight: 700;
-      line-height: 1;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 4.5cqw, 2.5rem);
+      font-weight: 600; line-height: 1;
     }
-
     .rr-box.risk .rr-amount { color: var(--accent-red); }
     .rr-box.reward .rr-amount { color: var(--accent-green); }
 
     .rr-box .rr-type {
-      font-size: clamp(8px, 1.3cqw, 12px);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-top: 8%;
+      font-family: 'JetBrains Mono', monospace; font-size: clamp(0.4rem, 1.1cqw, 0.6rem);
+      text-transform: uppercase; letter-spacing: 0.2em; margin-top: clamp(4px, 1cqw, 8px);
     }
-
-    .rr-box.risk .rr-type { color: rgba(217,74,74,0.7); }
-    .rr-box.reward .rr-type { color: rgba(74,217,122,0.7); }
+    .rr-box.risk .rr-type { color: rgba(248, 113, 113, 0.6); }
+    .rr-box.reward .rr-type { color: rgba(74, 222, 128, 0.6); }
 
     .rr-colon {
-      font-family: var(--font-serif);
-      font-size: clamp(20px, 4cqw, 44px);
-      color: var(--text-muted);
-      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 3.5cqw, 2rem);
+      color: var(--text-muted); font-weight: 600;
     }
 
-    /* Win Rate Meter */
+    /* Win rate meter */
     .winrate-section {
-      width: 85%;
-      text-align: center;
+      padding: clamp(10px, 2.5cqw, 20px); background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 6px;
     }
-
-    .winrate-title {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.5cqw, 38px);
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 3%;
+    .winrate-label {
+      font-family: 'JetBrains Mono', monospace; font-size: clamp(0.4rem, 1.1cqw, 0.6rem);
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: clamp(4px, 1cqw, 8px);
     }
-
-    .winrate-meter {
-      width: 100%;
-      height: clamp(16px, 3cqw, 32px);
-      background: rgba(217,74,74,0.2);
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 2%;
-      border: 1px solid rgba(255,255,255,0.1);
+    .winrate-track {
+      width: 100%; height: clamp(10px, 2.5cqw, 18px);
+      background: rgba(248, 113, 113, 0.12); border-radius: 3px;
+      overflow: hidden; margin-bottom: clamp(4px, 1cqw, 8px);
     }
-
     .winrate-fill {
-      height: 100%;
-      border-radius: 20px;
-      background: linear-gradient(90deg, var(--accent-green), rgba(74,217,122,0.7));
-      transition: width 0.3s;
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, rgba(74, 222, 128, 0.5), rgba(74, 222, 128, 0.7));
     }
-
-    .winrate-labels {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 3%;
+    .winrate-info {
+      display: flex; justify-content: space-between; align-items: baseline;
     }
-
     .winrate-pct {
-      font-family: var(--font-serif);
-      font-size: clamp(14px, 2.8cqw, 30px);
-      font-weight: 700;
-      color: var(--accent-green);
+      font-family: 'JetBrains Mono', monospace; font-size: clamp(0.7rem, 2cqw, 1.1rem);
+      font-weight: 600; color: var(--accent-green);
     }
-
     .winrate-desc {
-      font-size: clamp(9px, 1.5cqw, 16px);
-      color: var(--text-muted);
+      font-family: 'Inter', sans-serif; font-size: clamp(0.45rem, 1.2cqw, 0.65rem);
+      font-weight: 300; color: var(--text-muted);
     }
-
     .winrate-insight {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.5;
-      margin-top: 3%;
+      font-family: 'Inter', sans-serif; font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
+      font-weight: 300; color: var(--text-secondary); line-height: 1.6;
+      margin-top: clamp(6px, 1.5cqw, 12px);
     }
+    .winrate-insight strong { color: var(--accent-gold); font-weight: 500; }
 
-    .winrate-insight strong {
-      color: var(--accent-gold);
-    }
-
-    /* ═══ Slide 5 — Comparison Table ═══ */
-    .compare-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .compare-title {
-      font-family: var(--font-serif);
-      font-size: clamp(20px, 4cqw, 42px);
-      font-weight: 700;
-      color: var(--text-primary);
-      text-align: center;
-      margin-bottom: 5%;
-    }
-
+    /* ═══ SLIDE 5 — COMPARISON TABLE ═══ */
     .compare-table {
-      width: 100%;
+      width: 100%; margin-bottom: clamp(8px, 2cqw, 16px);
     }
-
     .compare-row {
-      display: flex;
-      align-items: center;
-      padding: 2.5% 3%;
-      border-bottom: 1px solid var(--border-subtle);
+      display: flex; align-items: center; padding: clamp(6px, 1.5cqw, 12px) clamp(4px, 1cqw, 8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-
     .compare-row:last-child { border-bottom: none; }
-
-    .compare-row.header {
-      border-bottom: 2px solid var(--border-subtle);
-    }
-
+    .compare-row.header { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     .compare-col {
-      flex: 1;
-      text-align: center;
-      font-size: clamp(9px, 1.6cqw, 16px);
+      flex: 1; text-align: center;
+      font-family: 'Inter', sans-serif; font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
       color: var(--text-secondary);
     }
-
     .compare-col.label {
-      text-align: left;
-      font-weight: 600;
-      color: var(--text-primary);
+      text-align: left; font-weight: 500; color: var(--text-primary);
+      font-family: 'JetBrains Mono', monospace;
     }
-
     .compare-row.header .compare-col {
-      font-size: clamp(8px, 1.3cqw, 13px);
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 600;
+      font-size: clamp(0.4rem, 1cqw, 0.55rem); color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600;
     }
-
     .val-green { color: var(--accent-green) !important; font-weight: 600; }
     .val-red { color: var(--accent-red) !important; font-weight: 600; }
     .val-gold { color: var(--accent-gold) !important; font-weight: 600; }
 
     .takeaway-box {
-      background: rgba(201,169,98,0.08);
-      border: 1px solid rgba(201,169,98,0.3);
-      border-radius: 12px;
-      padding: 3%;
-      text-align: center;
-      margin-top: 4%;
+      padding: clamp(10px, 2.5cqw, 18px); background: rgba(201, 169, 98, 0.05);
+      border: 1px solid rgba(201, 169, 98, 0.2); border-radius: 4px; text-align: center;
     }
-
     .takeaway-text {
-      font-family: var(--font-serif);
-      font-size: clamp(12px, 2.2cqw, 24px);
-      font-weight: 600;
-      color: var(--accent-gold);
-      line-height: 1.4;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(0.75rem, 2cqw, 1.1rem);
+      font-weight: 600; color: var(--accent-gold); line-height: 1.4;
     }
 
-    /* ═══ Slide 6 — CTA ═══ */
-    .cta-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+    /* ═══ SLIDE 6 — TRUTH + CTA ═══ */
+    .slide-6 { background: linear-gradient(180deg, #0a0a0f 0%, #06060a 100%); }
+    .slide-6::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(201, 169, 98, 0.05) 0%, transparent 60%);
+      z-index: 1; pointer-events: none;
+    }
+    .slide-6 .slide-content {
+      align-items: center; text-align: center; justify-content: center;
+      gap: clamp(6px, 1.5cqw, 12px); z-index: 2;
+    }
+    .slide-6 .truth-tag {
+      font-family: 'Inter', sans-serif; font-size: clamp(0.45rem, 1.3cqw, 0.7rem);
+      letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201, 169, 98, 0.5);
+    }
+    .slide-6 .truth-quote {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 3.2cqw, 1.8rem);
+      font-weight: 600; font-style: italic; color: var(--text-primary); line-height: 1.4; max-width: 85%;
+    }
+    .slide-6 .truth-divider {
+      width: clamp(30px, 8cqw, 60px); height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.4), transparent);
+    }
+    .slide-6 .truth-sub {
+      font-family: 'Inter', sans-serif; font-size: clamp(0.55rem, 1.6cqw, 0.85rem);
+      font-weight: 300; color: var(--text-muted); line-height: 1.6;
+    }
+    .slide-6 .cta-button {
+      display: inline-block; padding: clamp(8px, 2cqw, 14px) clamp(20px, 5cqw, 36px);
+      border: 1px solid rgba(201, 169, 98, 0.5); color: var(--accent-gold);
+      font-family: 'Inter', sans-serif; font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
+      font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px; background: rgba(201, 169, 98, 0.04);
+    }
+    .slide-6 .cta-url {
+      font-family: 'JetBrains Mono', monospace; font-size: clamp(0.4rem, 1.1cqw, 0.6rem);
+      color: rgba(201, 169, 98, 0.4); letter-spacing: 0.05em;
+    }
+    .slide-6 .cine-logo {
+      position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+      font-family: 'Inter', sans-serif; font-size: clamp(0.35rem, 1cqw, 0.55rem);
+      letter-spacing: 0.35em; text-transform: uppercase; color: rgba(201, 169, 98, 0.25);
     }
 
-    .cta-icon {
-      font-size: clamp(36px, 7.4cqw, 80px);
-      margin-bottom: 4%;
-    }
+    /* ═══ EXPORT MODE ═══ */
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .carousel-grid { display: block; padding: 0; }
+    body.export-mode .slide-wrapper { display: none; }
+    body.export-mode .slide-wrapper.active { display: flex; justify-content: center; }
+    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; box-shadow: none; }
 
-    .cta-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 3%;
-    }
-
-    .cta-accent { color: var(--accent-gold); }
-
-    .cta-body {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 85%;
-      margin-bottom: 5%;
-    }
-
-    .cta-box {
-      background: linear-gradient(135deg, rgba(201,169,98,0.15) 0%, rgba(201,169,98,0.05) 100%);
-      border: 2px solid var(--accent-gold);
-      border-radius: 14px;
-      padding: 3% 6%;
-    }
-
-    .cta-box-text {
-      font-size: clamp(11px, 2cqw, 22px);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 1%;
-    }
-
-    .cta-link {
-      font-size: clamp(10px, 1.7cqw, 18px);
-      font-weight: 600;
-      color: var(--accent-gold);
-    }
-
-    /* Slide Logo (Gugi centered) */
-    .slide-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      z-index: 2;
-      white-space: nowrap;
+    @media (max-width: 900px) {
+      .carousel-grid { grid-template-columns: 1fr; }
+      .controls { position: static; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; }
     }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
+    <label>Mode: <select id="bg-toggle"><option value="dark">Dark</option><option value="black">Pure Black</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 042 — Risk-Reward Ratio</h1>
-    <p>6 slides · Education</p>
+    <p>Instagram Carousel | 6 Slides | 1080 x 1350px | Neutral / EDU</p>
   </div>
 
   <div class="carousel-grid">
 
-    <!-- ══════ SLIDE 1: Hook ══════ -->
+    <!-- ═══ SLIDE 1 — HOOK ═══ -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Hook</span>
-      <div class="slide slide-edu slide-1">
+      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <div class="slide slide-1">
+        <div class="rr-orb">
+          <div class="rr-halves">
+            <div class="half risk"></div>
+            <div class="half reward"></div>
+          </div>
+        </div>
         <div class="slide-content">
-          <div class="cine-label">LESSON</div>
-          <div class="hook-main">Win Rate Is Overrated</div>
+          <div class="cine-label">Lesson</div>
+          <div class="hook-main">Win Rate Is<br>Overrated</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">You can be wrong more than half the time and still be profitable. Here's how.</p>
+          <p class="hook-sub">You can be wrong more than half the time<br>and still be profitable. Here's how.</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 2: 1:1 R:R ══════ -->
+    <!-- ═══ SLIDE 2 — 1:1 R:R ═══ -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — 1:1 Ratio</span>
-      <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-2">
         <div class="slide-content">
-          <span class="scenario-label">Scenario A</span>
-          <div class="scenario-container">
-            <div class="rr-display">
-              <div class="rr-box risk">
-                <div class="rr-amount">1</div>
-                <div class="rr-type">Risk</div>
-              </div>
-              <span class="rr-colon">:</span>
-              <div class="rr-box reward">
-                <div class="rr-amount">1</div>
-                <div class="rr-type">Reward</div>
-              </div>
+          <div class="section-tag">Scenario A</div>
+          <div class="section-title">Risk-Reward 1:1</div>
+
+          <div class="rr-display">
+            <div class="rr-box risk">
+              <div class="rr-amount">1</div>
+              <div class="rr-type">Risk</div>
             </div>
-            <div class="winrate-section">
-              <div class="winrate-title">Breakeven Win Rate</div>
-              <div class="winrate-meter"><div class="winrate-fill" style="width: 50%;"></div></div>
-              <div class="winrate-labels">
-                <span class="winrate-pct">50%</span>
-                <span class="winrate-desc">wins needed to break even</span>
-              </div>
-              <p class="winrate-insight">Risk $100, make $100. You need to win <strong>more than half</strong> your trades just to stay alive.</p>
+            <span class="rr-colon">:</span>
+            <div class="rr-box reward">
+              <div class="rr-amount">1</div>
+              <div class="rr-type">Reward</div>
             </div>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
+
+          <div class="winrate-section">
+            <div class="winrate-label">Breakeven Win Rate</div>
+            <div class="winrate-track"><div class="winrate-fill" style="width: 50%;"></div></div>
+            <div class="winrate-info">
+              <span class="winrate-pct">50%</span>
+              <span class="winrate-desc">wins needed to break even</span>
+            </div>
+            <p class="winrate-insight">Risk $100, make $100. You need to win <strong>more than half</strong> your trades just to stay alive.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 3: 1:2 R:R ══════ -->
+    <!-- ═══ SLIDE 3 — 1:2 R:R ═══ -->
     <div class="slide-wrapper" data-slide="3">
       <span class="slide-label">Slide 3 — 1:2 Ratio</span>
-      <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-3">
         <div class="slide-content">
-          <span class="scenario-label">Scenario B</span>
-          <div class="scenario-container">
-            <div class="rr-display">
-              <div class="rr-box risk">
-                <div class="rr-amount">1</div>
-                <div class="rr-type">Risk</div>
-              </div>
-              <span class="rr-colon">:</span>
-              <div class="rr-box reward">
-                <div class="rr-amount">2</div>
-                <div class="rr-type">Reward</div>
-              </div>
+          <div class="section-tag">Scenario B</div>
+          <div class="section-title">Risk-Reward 1:2</div>
+
+          <div class="rr-display">
+            <div class="rr-box risk">
+              <div class="rr-amount">1</div>
+              <div class="rr-type">Risk</div>
             </div>
-            <div class="winrate-section">
-              <div class="winrate-title">Breakeven Win Rate</div>
-              <div class="winrate-meter"><div class="winrate-fill" style="width: 34%;"></div></div>
-              <div class="winrate-labels">
-                <span class="winrate-pct">34%</span>
-                <span class="winrate-desc">wins needed to break even</span>
-              </div>
-              <p class="winrate-insight">Risk $100, make $200. You can be <strong>wrong 2 out of 3 times</strong> and still profit.</p>
+            <span class="rr-colon">:</span>
+            <div class="rr-box reward">
+              <div class="rr-amount">2</div>
+              <div class="rr-type">Reward</div>
             </div>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
+
+          <div class="winrate-section">
+            <div class="winrate-label">Breakeven Win Rate</div>
+            <div class="winrate-track"><div class="winrate-fill" style="width: 34%;"></div></div>
+            <div class="winrate-info">
+              <span class="winrate-pct">34%</span>
+              <span class="winrate-desc">wins needed to break even</span>
+            </div>
+            <p class="winrate-insight">Risk $100, make $200. You can be <strong>wrong 2 out of 3 times</strong> and still profit.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 4: 1:3 R:R ══════ -->
+    <!-- ═══ SLIDE 4 — 1:3 R:R ═══ -->
     <div class="slide-wrapper" data-slide="4">
       <span class="slide-label">Slide 4 — 1:3 Ratio</span>
-      <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-4">
         <div class="slide-content">
-          <span class="scenario-label">Scenario C</span>
-          <div class="scenario-container">
-            <div class="rr-display">
-              <div class="rr-box risk">
-                <div class="rr-amount">1</div>
-                <div class="rr-type">Risk</div>
-              </div>
-              <span class="rr-colon">:</span>
-              <div class="rr-box reward">
-                <div class="rr-amount">3</div>
-                <div class="rr-type">Reward</div>
-              </div>
+          <div class="section-tag">Scenario C</div>
+          <div class="section-title">Risk-Reward 1:3</div>
+
+          <div class="rr-display">
+            <div class="rr-box risk">
+              <div class="rr-amount">1</div>
+              <div class="rr-type">Risk</div>
             </div>
-            <div class="winrate-section">
-              <div class="winrate-title">Breakeven Win Rate</div>
-              <div class="winrate-meter"><div class="winrate-fill" style="width: 25%;"></div></div>
-              <div class="winrate-labels">
-                <span class="winrate-pct">25%</span>
-                <span class="winrate-desc">wins needed to break even</span>
-              </div>
-              <p class="winrate-insight">Risk $100, make $300. You only need to be right <strong>1 in 4 trades</strong>. Massive room for error.</p>
+            <span class="rr-colon">:</span>
+            <div class="rr-box reward">
+              <div class="rr-amount">3</div>
+              <div class="rr-type">Reward</div>
             </div>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
+
+          <div class="winrate-section">
+            <div class="winrate-label">Breakeven Win Rate</div>
+            <div class="winrate-track"><div class="winrate-fill" style="width: 25%;"></div></div>
+            <div class="winrate-info">
+              <span class="winrate-pct">25%</span>
+              <span class="winrate-desc">wins needed to break even</span>
+            </div>
+            <p class="winrate-insight">Risk $100, make $300. You only need to be right <strong>1 in 4 trades</strong>. Massive room for error.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 5: Comparison ══════ -->
+    <!-- ═══ SLIDE 5 — COMPARISON TABLE ═══ -->
     <div class="slide-wrapper" data-slide="5">
       <span class="slide-label">Slide 5 — The Math</span>
-      <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-5">
         <div class="slide-content">
-          <span style="font-size: clamp(10px, 1.8cqw, 14px); color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2%;">The Math</span>
-          <div class="compare-container">
-            <h2 class="compare-title">Higher R:R = More Room for Error</h2>
-            <div class="compare-table">
-              <div class="compare-row header">
-                <div class="compare-col label">R:R</div>
-                <div class="compare-col">Win Rate</div>
-                <div class="compare-col">Room for Error</div>
-              </div>
-              <div class="compare-row">
-                <div class="compare-col label">1:1</div>
-                <div class="compare-col val-red">50%</div>
-                <div class="compare-col val-red">None</div>
-              </div>
-              <div class="compare-row">
-                <div class="compare-col label">1:2</div>
-                <div class="compare-col val-gold">34%</div>
-                <div class="compare-col val-gold">Moderate</div>
-              </div>
-              <div class="compare-row">
-                <div class="compare-col label">1:3</div>
-                <div class="compare-col val-green">25%</div>
-                <div class="compare-col val-green">High</div>
-              </div>
-              <div class="compare-row">
-                <div class="compare-col label">1:5</div>
-                <div class="compare-col val-green">17%</div>
-                <div class="compare-col val-green">Very High</div>
-              </div>
+          <div class="section-tag">The Math</div>
+          <div class="section-title">Higher R:R = More Room for Error</div>
+
+          <div class="compare-table">
+            <div class="compare-row header">
+              <div class="compare-col label">R:R</div>
+              <div class="compare-col">Win Rate</div>
+              <div class="compare-col">Room for Error</div>
             </div>
-            <div class="takeaway-box">
-              <p class="takeaway-text">Stop chasing high win rates.<br>Chase good setups with favorable R:R.</p>
+            <div class="compare-row">
+              <div class="compare-col label">1:1</div>
+              <div class="compare-col val-red">50%</div>
+              <div class="compare-col val-red">None</div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-col label">1:2</div>
+              <div class="compare-col val-gold">34%</div>
+              <div class="compare-col val-gold">Moderate</div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-col label">1:3</div>
+              <div class="compare-col val-green">25%</div>
+              <div class="compare-col val-green">High</div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-col label">1:5</div>
+              <div class="compare-col val-green">17%</div>
+              <div class="compare-col val-green">Very High</div>
             </div>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
+
+          <div class="takeaway-box">
+            <p class="takeaway-text">Stop chasing high win rates.<br>Chase good setups with favorable R:R.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 6: CTA ══════ -->
+    <!-- ═══ SLIDE 6 — TRUTH + CTA ═══ -->
     <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — CTA</span>
-      <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 6 — Truth + CTA</span>
+      <div class="slide slide-6">
         <div class="slide-content">
-          <div class="cta-container">
-            <div class="cta-icon">📊</div>
-            <h2 class="cta-headline">The Math Doesn't Lie.<br><span class="cta-accent">Use It.</span></h2>
-            <p class="cta-body">Every trade should have a defined risk and a target reward before you enter. If the R:R isn't favorable, walk away.</p>
-            <div class="cta-box">
-              <p class="cta-box-text">Master risk-reward with our free lessons</p>
-              <span class="cta-link">signalpilot.io</span>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
+          <div class="truth-tag">The Truth</div>
+          <div class="truth-quote">The math doesn't lie.<br>Use it.</div>
+          <div class="truth-divider"></div>
+          <div class="truth-sub">Every trade should have a defined risk and a target reward<br>before you enter. If the R:R isn't favorable, walk away.</div>
+          <a href="https://education.signalpilot.io" class="cta-button">Master Risk-Reward</a>
+          <div class="cta-url">education.signalpilot.io</div>
+          <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
@@ -539,37 +502,34 @@
   </div>
 
   <script>
-    (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
-      const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
-      const slideWrappers = document.querySelectorAll('.slide-wrapper');
-      let exportMode = false;
-      let currentSlide = 0;
+    const bgToggle = document.getElementById('bg-toggle');
+    const slides = document.querySelectorAll('.slide');
+    bgToggle.addEventListener('change', (e) => {
+      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
+    });
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
-      exportBtn.addEventListener('click', function() {
-        exportMode = !exportMode;
-        document.body.classList.toggle('export-mode', exportMode);
-        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
-        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
-      });
-      function updateActiveSlide() {
-        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
-      }
-      document.addEventListener('keydown', function(e) {
-        if (!exportMode) return;
-        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
-      });
-    })();
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) { exportBtn.textContent = 'Exit Export Mode'; currentExportSlide = 0; updateExportSlide(); }
+      else { exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); }
+    });
+
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') { currentExportSlide = (currentExportSlide + 1) % slideWrappers.length; updateExportSlide(); }
+      else if (e.key === 'ArrowLeft') { currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length; updateExportSlide(); }
+      else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); }
+    });
   </script>
 </body>
 </html>
