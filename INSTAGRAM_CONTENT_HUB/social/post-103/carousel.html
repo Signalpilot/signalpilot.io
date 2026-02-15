@@ -17,6 +17,12 @@
       --border-subtle: rgba(255,255,255,0.1);
       --accent-orange: #f59e0b;
       --accent-orange-dim: rgba(245,158,11,0.3);
+      --accent-teal: #5eead4;
+      --accent-gold: #c9a962;
+      --accent-red: #f87171;
+      --accent-green: #4ade80;
+      --accent-purple: #a855f7;
+      --accent-blue: #60a5fa;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -31,8 +37,7 @@
     body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
     .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
     .page-title { text-align: center; margin-bottom: 2rem; }
     .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
     .page-title p { color: var(--text-muted); font-size: 0.875rem; }
@@ -41,19 +46,16 @@
     .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
     .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
     .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
+    .slide-content { position: relative; z-index: 3; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
 
-    /* ═══════════════════════════════════════════
-       SHARED — Orange slide base (RIGHT bar S1)
-       ═══════════════════════════════════════════ */
+    /* ── ORANGE/WARM THEME ── */
     .slide-warm { background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important; }
     .slide-warm::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(245,158,11,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
     .slide-warm.slide-1::after { content: ''; position: absolute; top: 0; right: 0; width: 18px; height: 100%; background: linear-gradient(180deg, rgba(245,158,11,0.9) 0%, rgba(217,148,74,0.7) 100%); z-index: 5; }
     .slide-warm .slide-content { z-index: 3; }
     .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
 
-    /* Marketing badge */
+    /* ── BADGE ── */
     .mkt-badge {
       font-family: var(--font-mono);
       font-size: clamp(8px, 1.2cqw, 12px);
@@ -67,17 +69,101 @@
       margin-bottom: 4%;
     }
 
-    /* Suite number */
-    .suite-number {
-      font-family: var(--font-serif);
-      font-size: clamp(70px, 14cqw, 140px);
-      font-weight: 700;
-      color: rgba(245,158,11,0.12);
-      line-height: 0.85;
-      margin-bottom: 2%;
+    /* ── ORB ── */
+    .orb {
+      width: clamp(100px, 20cqw, 200px);
+      height: clamp(100px, 20cqw, 200px);
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5%;
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.1) 40%, rgba(255,255,255,0.03) 70%, transparent 100%);
+      border: 2px solid rgba(245,158,11,0.25);
+      box-shadow: 0 0 50px rgba(245,158,11,0.12), 0 0 100px rgba(245,158,11,0.04), inset 0 0 30px rgba(245,158,11,0.06);
+    }
+    .orb::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(245,158,11,0.15);
+    }
+    .orb::after {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px dashed rgba(245,158,11,0.12);
     }
 
-    /* Titles */
+    /* Orb inner 7-node constellation */
+    .orb-constellation {
+      position: relative;
+      width: 58%;
+      height: 58%;
+      z-index: 2;
+    }
+    .con-node {
+      position: absolute;
+      width: clamp(6px, 1.2cqw, 11px);
+      height: clamp(6px, 1.2cqw, 11px);
+      border-radius: 50%;
+    }
+    /* 7 nodes in a circular arrangement */
+    .con-node:nth-child(1) { top: 2%; left: 50%; transform: translateX(-50%); background: rgba(245,158,11,0.8); box-shadow: 0 0 6px rgba(245,158,11,0.4); }
+    .con-node:nth-child(2) { top: 18%; right: 5%; background: rgba(94,234,212,0.8); box-shadow: 0 0 6px rgba(94,234,212,0.4); }
+    .con-node:nth-child(3) { top: 50%; right: 0; background: rgba(168,85,247,0.8); box-shadow: 0 0 6px rgba(168,85,247,0.4); }
+    .con-node:nth-child(4) { bottom: 10%; right: 15%; background: rgba(96,165,250,0.8); box-shadow: 0 0 6px rgba(96,165,250,0.4); }
+    .con-node:nth-child(5) { bottom: 10%; left: 15%; background: rgba(201,169,98,0.8); box-shadow: 0 0 6px rgba(201,169,98,0.4); }
+    .con-node:nth-child(6) { top: 50%; left: 0; background: rgba(74,222,128,0.8); box-shadow: 0 0 6px rgba(74,222,128,0.4); }
+    .con-node:nth-child(7) { top: 18%; left: 5%; background: rgba(248,113,113,0.8); box-shadow: 0 0 6px rgba(248,113,113,0.4); }
+    /* Center hub */
+    .con-hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(10px, 2cqw, 18px);
+      height: clamp(10px, 2cqw, 18px);
+      border-radius: 50%;
+      background: rgba(245,158,11,0.5);
+      border: 1.5px solid rgba(245,158,11,0.4);
+      box-shadow: 0 0 12px rgba(245,158,11,0.3);
+    }
+    /* Spoke lines from hub to each node */
+    .con-spoke {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 1px;
+      transform-origin: left center;
+      opacity: 0.2;
+      background: rgba(245,158,11,0.5);
+    }
+    .con-spoke:nth-child(9)  { width: 45%; transform: rotate(-90deg); }
+    .con-spoke:nth-child(10) { width: 42%; transform: rotate(-38deg); }
+    .con-spoke:nth-child(11) { width: 48%; transform: rotate(0deg); }
+    .con-spoke:nth-child(12) { width: 45%; transform: rotate(38deg); }
+    .con-spoke:nth-child(13) { width: 45%; transform: rotate(142deg); }
+    .con-spoke:nth-child(14) { width: 48%; transform: rotate(180deg); }
+    .con-spoke:nth-child(15) { width: 42%; transform: rotate(-142deg); }
+
+    .orb-label {
+      position: absolute;
+      bottom: -2%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 1cqw, 10px);
+      color: rgba(245,158,11,0.7);
+      letter-spacing: 0.2em;
+      z-index: 3;
+      white-space: nowrap;
+    }
+
+    /* ── TITLES ── */
     .mkt-title {
       font-family: var(--font-serif);
       font-size: clamp(24px, 4.8cqw, 50px);
@@ -104,7 +190,6 @@
       margin-bottom: 4%;
     }
 
-    /* Inner heading */
     .inner-heading {
       font-family: var(--font-serif);
       font-size: clamp(18px, 3.5cqw, 36px);
@@ -115,15 +200,76 @@
     }
     .inner-heading em { color: var(--accent-orange); font-style: italic; }
 
-    /* Indicator cards — stacked list (slides 2-3) */
-    .indicator-grid {
-      width: 88%;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(4px, 0.8cqw, 10px);
+    .section-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 14px);
+      color: var(--text-muted);
+      line-height: 1.4;
       margin-bottom: 4%;
+      max-width: 90%;
     }
 
+    /* ── ICON CIRCLES ── */
+    .icon-circle {
+      width: clamp(34px, 6.5cqw, 56px);
+      height: clamp(34px, 6.5cqw, 56px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .icon-circle::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+    }
+    .icon-circle .ic-letter {
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.5cqw, 24px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ic-orange { background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%); border: 1.5px solid rgba(245,158,11,0.3); box-shadow: 0 0 18px rgba(245,158,11,0.1); }
+    .ic-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .ic-orange .ic-letter { color: var(--accent-orange); }
+
+    .ic-teal { background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%); border: 1.5px solid rgba(94,234,212,0.3); box-shadow: 0 0 18px rgba(94,234,212,0.1); }
+    .ic-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .ic-teal .ic-letter { color: var(--accent-teal); }
+
+    .ic-purple { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%); border: 1.5px solid rgba(168,85,247,0.3); box-shadow: 0 0 18px rgba(168,85,247,0.1); }
+    .ic-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .ic-purple .ic-letter { color: var(--accent-purple); }
+
+    .ic-blue { background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%); border: 1.5px solid rgba(96,165,250,0.3); box-shadow: 0 0 18px rgba(96,165,250,0.1); }
+    .ic-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .ic-blue .ic-letter { color: var(--accent-blue); }
+
+    .ic-gold { background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%); border: 1.5px solid rgba(201,169,98,0.3); box-shadow: 0 0 18px rgba(201,169,98,0.1); }
+    .ic-gold::before { border: 1px solid rgba(201,169,98,0.12); }
+    .ic-gold .ic-letter { color: var(--accent-gold); }
+
+    .ic-green { background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%); border: 1.5px solid rgba(74,222,128,0.3); box-shadow: 0 0 18px rgba(74,222,128,0.1); }
+    .ic-green::before { border: 1px solid rgba(74,222,128,0.12); }
+    .ic-green .ic-letter { color: var(--accent-green); }
+
+    .ic-red { background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%); border: 1.5px solid rgba(248,113,113,0.3); box-shadow: 0 0 18px rgba(248,113,113,0.1); }
+    .ic-red::before { border: 1px solid rgba(248,113,113,0.12); }
+    .ic-red .ic-letter { color: var(--accent-red); }
+
+    /* ── INDICATOR CARDS ── */
+    .indicator-grid {
+      width: 92%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 0.7cqw, 8px);
+      margin-bottom: 4%;
+    }
     .indicator-card {
       display: flex;
       align-items: center;
@@ -131,104 +277,237 @@
       border-radius: clamp(6px, 1cqw, 12px);
       border: 1px solid rgba(245,158,11,0.12);
       background: rgba(245,158,11,0.03);
-      padding: 3% 4%;
+      padding: clamp(6px, 1.1cqw, 13px) 4%;
     }
-
-    .indicator-icon {
-      font-size: clamp(20px, 3.5cqw, 36px);
-      flex-shrink: 0;
-      width: 10%;
-      text-align: center;
-    }
-
     .indicator-info { flex: 1; }
-
     .indicator-name {
       font-family: var(--font-sans);
-      font-size: clamp(10px, 1.6cqw, 17px);
+      font-size: clamp(9px, 1.5cqw, 16px);
       font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 1%;
     }
-
     .indicator-codename {
       font-family: var(--font-mono);
-      font-size: clamp(7px, 1cqw, 11px);
+      font-size: clamp(6px, 0.9cqw, 10px);
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--accent-orange);
       margin-bottom: 2%;
     }
-
     .indicator-desc {
       font-family: var(--font-sans);
-      font-size: clamp(7px, 1.1cqw, 12px);
+      font-size: clamp(7px, 1.05cqw, 11px);
       color: var(--text-secondary);
-      line-height: 1.3;
+      line-height: 1.35;
     }
+    .indicator-bar {
+      width: 100%;
+      height: clamp(2px, 0.35cqw, 4px);
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      margin-top: 3%;
+      overflow: hidden;
+    }
+    .indicator-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+    }
+    .ibf-orange { background: linear-gradient(90deg, rgba(245,158,11,0.5), rgba(245,158,11,0.15)); }
+    .ibf-teal { background: linear-gradient(90deg, rgba(94,234,212,0.5), rgba(94,234,212,0.15)); }
+    .ibf-purple { background: linear-gradient(90deg, rgba(168,85,247,0.5), rgba(168,85,247,0.15)); }
+    .ibf-blue { background: linear-gradient(90deg, rgba(96,165,250,0.5), rgba(96,165,250,0.15)); }
+    .ibf-gold { background: linear-gradient(90deg, rgba(201,169,98,0.5), rgba(201,169,98,0.15)); }
+    .ibf-green { background: linear-gradient(90deg, rgba(74,222,128,0.5), rgba(74,222,128,0.15)); }
+    .ibf-red { background: linear-gradient(90deg, rgba(248,113,113,0.5), rgba(248,113,113,0.15)); }
 
-    /* Stats row */
+    /* ── STATS ROW ── */
     .stats-row {
-      width: 85%;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: clamp(6px, 1cqw, 10px);
-      margin-bottom: 4%;
+      width: 92%;
+      display: flex;
+      justify-content: space-between;
+      gap: clamp(4px, 0.8cqw, 10px);
+      margin-bottom: 3%;
     }
-
-    .stat-box { text-align: center; }
-
-    .stat-number {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4cqw, 42px);
-      font-weight: 700;
+    .stat-pill {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(1px, 0.3cqw, 4px);
+      padding: clamp(4px, 0.8cqw, 10px) 0;
+      border-radius: clamp(4px, 0.8cqw, 8px);
+      border: 1px solid rgba(245,158,11,0.1);
+      background: rgba(245,158,11,0.02);
+    }
+    .stat-val {
+      font-family: var(--font-mono);
+      font-size: clamp(11px, 2cqw, 20px);
+      font-weight: 600;
       color: var(--accent-orange);
-      line-height: 1;
     }
-
     .stat-label {
       font-family: var(--font-mono);
-      font-size: clamp(6px, 0.9cqw, 9px);
+      font-size: clamp(5px, 0.8cqw, 9px);
       color: var(--text-muted);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-top: 3%;
-    }
-
-    /* Feature pills */
-    .feature-row {
-      width: 88%;
-      display: flex;
-      flex-wrap: wrap;
-      gap: clamp(4px, 0.8cqw, 10px);
-      margin-bottom: 4%;
-    }
-
-    .feature-pill {
-      font-family: var(--font-mono);
-      font-size: clamp(8px, 1.2cqw, 13px);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--accent-orange);
-      padding: clamp(3px, 0.6cqw, 7px) clamp(8px, 1.5cqw, 16px);
-      border: 1px solid rgba(245,158,11,0.25);
-      border-radius: clamp(3px, 0.6cqw, 6px);
-      background: rgba(245,158,11,0.06);
-    }
-
-    /* Philosophy */
-    .mkt-philosophy {
-      font-family: var(--font-serif);
-      font-size: clamp(12px, 2cqw, 22px);
-      font-weight: 500;
-      font-style: italic;
-      color: rgba(255,255,255,0.35);
-      line-height: 1.4;
-      max-width: 85%;
       text-align: center;
     }
 
-    /* CTA */
+    /* ── FEATURE CARDS (2x3) ── */
+    .feature-grid {
+      width: 92%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1cqw, 12px);
+      margin-bottom: 4%;
+    }
+    .feature-card {
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(245,158,11,0.12);
+      background: rgba(245,158,11,0.03);
+      padding: 5% 5%;
+      display: flex;
+      align-items: center;
+      gap: 8%;
+    }
+    .feature-ic {
+      width: clamp(26px, 4.5cqw, 40px);
+      height: clamp(26px, 4.5cqw, 40px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .feature-ic::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+    }
+    .fic-orange { background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%); border: 1.5px solid rgba(245,158,11,0.3); }
+    .fic-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .fic-teal { background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%); border: 1.5px solid rgba(94,234,212,0.3); }
+    .fic-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .fic-purple { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%); border: 1.5px solid rgba(168,85,247,0.3); }
+    .fic-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .fic-blue { background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%); border: 1.5px solid rgba(96,165,250,0.3); }
+    .fic-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .fic-gold { background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%); border: 1.5px solid rgba(201,169,98,0.3); }
+    .fic-gold::before { border: 1px solid rgba(201,169,98,0.12); }
+    .fic-green { background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%); border: 1.5px solid rgba(74,222,128,0.3); }
+    .fic-green::before { border: 1px solid rgba(74,222,128,0.12); }
+    .fic-letter {
+      font-family: var(--font-serif);
+      font-size: clamp(11px, 1.8cqw, 18px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .fic-orange .fic-letter { color: var(--accent-orange); }
+    .fic-teal .fic-letter { color: var(--accent-teal); }
+    .fic-purple .fic-letter { color: var(--accent-purple); }
+    .fic-blue .fic-letter { color: var(--accent-blue); }
+    .fic-gold .fic-letter { color: var(--accent-gold); }
+    .fic-green .fic-letter { color: var(--accent-green); }
+    .feature-text {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.2cqw, 13px);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* ── TRUTH SLIDE ── */
+    .truth-orb {
+      width: clamp(60px, 12cqw, 120px);
+      height: clamp(60px, 12cqw, 120px);
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4%;
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.1) 40%, rgba(255,255,255,0.03) 70%, transparent 100%);
+      border: 2px solid rgba(245,158,11,0.25);
+      box-shadow: 0 0 40px rgba(245,158,11,0.1), 0 0 80px rgba(245,158,11,0.03);
+    }
+    .truth-orb::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(245,158,11,0.15);
+    }
+    .truth-orb-letter {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 46px);
+      font-weight: 700;
+      color: var(--accent-orange);
+      position: relative;
+      z-index: 1;
+    }
+
+    .truth-grid {
+      width: 92%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1.2cqw, 14px);
+      margin-bottom: 4%;
+    }
+    .truth-card {
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(245,158,11,0.12);
+      background: rgba(245,158,11,0.03);
+      padding: 5% 6%;
+    }
+    .truth-dot {
+      width: clamp(5px, 0.9cqw, 9px);
+      height: clamp(5px, 0.9cqw, 9px);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-bottom: clamp(4px, 0.7cqw, 8px);
+    }
+    .td-orange { background: var(--accent-orange); box-shadow: 0 0 8px rgba(245,158,11,0.3); }
+    .td-teal { background: var(--accent-teal); box-shadow: 0 0 8px rgba(94,234,212,0.3); }
+    .td-purple { background: var(--accent-purple); box-shadow: 0 0 8px rgba(168,85,247,0.3); }
+    .td-blue { background: var(--accent-blue); box-shadow: 0 0 8px rgba(96,165,250,0.3); }
+    .truth-card-title {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 14px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+      line-height: 1.3;
+    }
+    .truth-card-text {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.05cqw, 11px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .philosophy-box {
+      width: 92%;
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(245,158,11,0.15);
+      background: rgba(245,158,11,0.03);
+      padding: 4% 5%;
+      text-align: center;
+    }
+    .philosophy-text {
+      font-family: var(--font-serif);
+      font-size: clamp(10px, 1.8cqw, 18px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .philosophy-text em { color: var(--accent-orange); font-style: italic; }
+
+    /* ── CTA SLIDE ── */
     .cta-badge {
       font-family: var(--font-mono);
       font-size: clamp(7px, 1cqw, 11px);
@@ -237,28 +516,79 @@
       color: rgba(245,158,11,0.7);
       margin-bottom: 4%;
     }
-
     .cta-title {
       font-family: var(--font-serif);
       font-size: clamp(22px, 4.5cqw, 46px);
       font-weight: 700;
       color: var(--text-primary);
       line-height: 1.15;
-      margin-bottom: 3%;
+      margin-bottom: 4%;
     }
     .cta-title em { color: var(--accent-orange); font-style: italic; }
 
-    .cta-url {
+    .cta-stat-grid {
+      width: 85%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(4px, 0.8cqw, 10px);
+      margin-bottom: 5%;
+    }
+    .cta-stat {
+      display: flex;
+      align-items: center;
+      gap: 6%;
+      padding: clamp(4px, 0.7cqw, 8px) clamp(6px, 1.2cqw, 14px);
+      border-radius: clamp(4px, 0.7cqw, 8px);
+      border: 1px solid rgba(245,158,11,0.1);
+      background: rgba(245,158,11,0.02);
+    }
+    .cta-stat-num {
       font-family: var(--font-mono);
-      font-size: clamp(9px, 1.4cqw, 15px);
-      letter-spacing: 0.1em;
+      font-size: clamp(10px, 1.7cqw, 18px);
+      font-weight: 600;
       color: var(--accent-orange);
-      padding: clamp(6px, 1cqw, 12px) clamp(16px, 3cqw, 32px);
+    }
+    .cta-stat-text {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.9cqw, 10px);
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .cta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(4px, 0.7cqw, 8px);
+      margin-bottom: 5%;
+      max-width: 90%;
+    }
+    .cta-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.85cqw, 9px);
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      padding: clamp(2px, 0.4cqw, 5px) clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: clamp(3px, 0.5cqw, 6px);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .cta-box {
+      padding: clamp(8px, 1.4cqw, 16px) clamp(20px, 4cqw, 44px);
       border: 1px solid rgba(245,158,11,0.3);
       border-radius: clamp(4px, 0.8cqw, 8px);
       background: rgba(245,158,11,0.06);
     }
+    .cta-url {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.6cqw, 17px);
+      letter-spacing: 0.12em;
+      color: var(--accent-orange);
+    }
 
+    /* ── LOGO ── */
     .slide-logo {
       position: absolute;
       bottom: 4%;
@@ -276,77 +606,126 @@
 </head>
 <body>
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
-    <h1>Post 103 — Suite Overview</h1>
-    <p>5 slides &middot; Marketing</p>
+    <h1>Post 103 &mdash; Suite Overview</h1>
+    <p>6 slides &middot; Marketing &middot; The Elite Seven</p>
   </div>
 
   <div class="carousel-grid">
 
-    <!-- ══════ SLIDE 1: Hook ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 1 — HOOK: Suite Orb + Bold Title
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Hook</span>
       <div class="slide slide-warm slide-1">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
           <div class="mkt-badge">The Elite Seven</div>
-          <div class="suite-number">VII</div>
+
+          <div class="orb">
+            <div class="orb-constellation">
+              <div class="con-node"></div>
+              <div class="con-node"></div>
+              <div class="con-node"></div>
+              <div class="con-node"></div>
+              <div class="con-node"></div>
+              <div class="con-node"></div>
+              <div class="con-node"></div>
+              <div class="con-hub"></div>
+              <div class="con-spoke"></div>
+              <div class="con-spoke"></div>
+              <div class="con-spoke"></div>
+              <div class="con-spoke"></div>
+              <div class="con-spoke"></div>
+              <div class="con-spoke"></div>
+              <div class="con-spoke"></div>
+            </div>
+            <span class="orb-label">VII</span>
+          </div>
+
           <h2 class="mkt-title">The Complete <em>Suite</em></h2>
           <div class="mkt-divider"></div>
           <p class="mkt-subtitle">7 indicators. 7 specialisms. One unified trading system built for confluence.</p>
+
+          <div class="stats-row" style="margin-top: 2%;">
+            <div class="stat-pill">
+              <span class="stat-val">7</span>
+              <span class="stat-label">Tools</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">100+</span>
+              <span class="stat-label">Alerts</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">0</span>
+              <span class="stat-label">Repaint</span>
+            </div>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 2: Indicators 1-4 ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 2 — Indicators 1–4 with Icon Circles
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Indicators 1–4</span>
+      <span class="slide-label">Slide 2 — Indicators 1&ndash;4</span>
       <div class="slide slide-warm">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
           <h3 class="inner-heading">The First <em>Four</em></h3>
+          <p class="section-sub">Foundation tools covering trend, volume, cycle phases, and key market levels.</p>
 
           <div class="indicator-grid">
             <div class="indicator-card">
-              <div class="indicator-icon">&#9878;</div>
+              <div class="icon-circle ic-orange">
+                <span class="ic-letter">O</span>
+              </div>
               <div class="indicator-info">
                 <div class="indicator-name">OmniDeck</div>
                 <div class="indicator-codename">The Commander</div>
-                <div class="indicator-desc">10-in-1 overlay — trend, structure, sessions, levels, and momentum in one tool</div>
+                <div class="indicator-desc">10-in-1 overlay &mdash; trend, structure, sessions, levels, and momentum in one tool</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-orange" style="width: 95%;"></div></div>
               </div>
             </div>
+
             <div class="indicator-card">
-              <div class="indicator-icon">&Omega;</div>
+              <div class="icon-circle ic-teal">
+                <span class="ic-letter">&Omega;</span>
+              </div>
               <div class="indicator-info">
                 <div class="indicator-name">Volume Oracle</div>
                 <div class="indicator-codename">The Oracle</div>
                 <div class="indicator-desc">5 backend systems, 3 market regimes, and 25 alert types for volume intelligence</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-teal" style="width: 85%;"></div></div>
               </div>
             </div>
+
             <div class="indicator-card">
-              <div class="indicator-icon">&#9813;</div>
+              <div class="icon-circle ic-purple">
+                <span class="ic-letter">P</span>
+              </div>
               <div class="indicator-info">
                 <div class="indicator-name">Pentarch</div>
                 <div class="indicator-codename">The Sovereign</div>
-                <div class="indicator-desc">5 cycle signals with 4-layer detection — close-confirmed phase identification</div>
+                <div class="indicator-desc">5 cycle signals with 4-layer detection &mdash; close-confirmed phase identification</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-purple" style="width: 75%;"></div></div>
               </div>
             </div>
+
             <div class="indicator-card">
-              <div class="indicator-icon">&#127760;</div>
+              <div class="icon-circle ic-blue">
+                <span class="ic-letter">J</span>
+              </div>
               <div class="indicator-info">
                 <div class="indicator-name">Janus Atlas</div>
                 <div class="indicator-codename">The Cartographer</div>
-                <div class="indicator-desc">60+ level types across 9 categories with 58 alerts — the market's roadmap</div>
+                <div class="indicator-desc">60+ level types across 9 categories with 58 alerts &mdash; the market&rsquo;s roadmap</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-blue" style="width: 65%;"></div></div>
               </div>
             </div>
           </div>
@@ -356,55 +735,66 @@
       </div>
     </div>
 
-    <!-- ══════ SLIDE 3: Indicators 5-7 ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 3 — Indicators 5–7 with Icon Circles
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Indicators 5–7</span>
+      <span class="slide-label">Slide 3 — Indicators 5&ndash;7</span>
       <div class="slide slide-warm">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
           <h3 class="inner-heading">The Final <em>Three</em></h3>
+          <p class="section-sub">Scanning, oscillation, and institutional flow &mdash; completing the full trading ecosystem.</p>
 
           <div class="indicator-grid">
             <div class="indicator-card">
-              <div class="indicator-icon">&#128065;</div>
+              <div class="icon-circle ic-gold">
+                <span class="ic-letter">A</span>
+              </div>
               <div class="indicator-info">
                 <div class="indicator-name">Augury Grid</div>
                 <div class="indicator-codename">The Watcher</div>
-                <div class="indicator-desc">7 symbols &times; 3 timeframes — real-time multi-asset scanner with alert matrix</div>
+                <div class="indicator-desc">7 symbols &times; 3 timeframes &mdash; real-time multi-asset scanner with alert matrix</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-gold" style="width: 80%;"></div></div>
               </div>
             </div>
+
             <div class="indicator-card">
-              <div class="indicator-icon">&phi;</div>
+              <div class="icon-circle ic-green">
+                <span class="ic-letter">&phi;</span>
+              </div>
               <div class="indicator-info">
                 <div class="indicator-name">Harmonic Oscillator</div>
                 <div class="indicator-codename">The Alchemist</div>
-                <div class="indicator-desc">MACD + RSI + StochRSI fused into a unified 0–100 scale with divergence detection</div>
+                <div class="indicator-desc">MACD + RSI + StochRSI fused into a unified 0&ndash;100 scale with divergence detection</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-green" style="width: 70%;"></div></div>
               </div>
             </div>
+
             <div class="indicator-card">
-              <div class="indicator-icon">&#9878;</div>
+              <div class="icon-circle ic-red">
+                <span class="ic-letter">F</span>
+              </div>
               <div class="indicator-info">
                 <div class="indicator-name">Plutus Flow</div>
                 <div class="indicator-codename">The Treasurer</div>
                 <div class="indicator-desc">Spike-clipped OBV with institutional flow tracking and divergence alerts</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-red" style="width: 60%;"></div></div>
               </div>
             </div>
           </div>
 
           <div class="stats-row">
-            <div class="stat-box">
-              <div class="stat-number">7</div>
-              <div class="stat-label">Indicators</div>
+            <div class="stat-pill">
+              <span class="stat-val">7</span>
+              <span class="stat-label">Indicators</span>
             </div>
-            <div class="stat-box">
-              <div class="stat-number">100+</div>
-              <div class="stat-label">Alert Types</div>
+            <div class="stat-pill">
+              <span class="stat-val">100+</span>
+              <span class="stat-label">Alert Types</span>
             </div>
-            <div class="stat-box">
-              <div class="stat-number">0</div>
-              <div class="stat-label">Repainting</div>
+            <div class="stat-pill">
+              <span class="stat-val">0</span>
+              <span class="stat-label">Repainting</span>
             </div>
           </div>
 
@@ -413,58 +803,163 @@
       </div>
     </div>
 
-    <!-- ══════ SLIDE 4: Why the Suite ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 4 — Built for Confluence (Feature Cards)
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Why the Suite</span>
+      <span class="slide-label">Slide 4 — Confluence</span>
       <div class="slide slide-warm">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
           <h3 class="inner-heading">Built for <em>Confluence</em></h3>
+          <p class="section-sub">Every indicator stands alone. Together, they create a complete trading ecosystem with zero overlap.</p>
 
-          <div class="feature-row">
-            <span class="feature-pill">Non-Repainting</span>
-            <span class="feature-pill">All Assets</span>
-            <span class="feature-pill">All Timeframes</span>
-            <span class="feature-pill">Bar-Close Confirmed</span>
-            <span class="feature-pill">Custom Alerts</span>
-            <span class="feature-pill">Audited</span>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-ic fic-orange">
+                <span class="fic-letter">N</span>
+              </div>
+              <span class="feature-text">Non-Repainting</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-teal">
+                <span class="fic-letter">A</span>
+              </div>
+              <span class="feature-text">All Assets</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-purple">
+                <span class="fic-letter">T</span>
+              </div>
+              <span class="feature-text">All Timeframes</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-blue">
+                <span class="fic-letter">B</span>
+              </div>
+              <span class="feature-text">Bar-Close Confirmed</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-gold">
+                <span class="fic-letter">C</span>
+              </div>
+              <span class="feature-text">Custom Alerts</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-green">
+                <span class="fic-letter">V</span>
+              </div>
+              <span class="feature-text">Audited &amp; Verified</span>
+            </div>
           </div>
 
           <div class="stats-row">
-            <div class="stat-box">
-              <div class="stat-number">10</div>
-              <div class="stat-label">OmniDeck Systems</div>
+            <div class="stat-pill">
+              <span class="stat-val">10</span>
+              <span class="stat-label">OmniDeck Systems</span>
             </div>
-            <div class="stat-box">
-              <div class="stat-number">60+</div>
-              <div class="stat-label">Level Types</div>
+            <div class="stat-pill">
+              <span class="stat-val">60+</span>
+              <span class="stat-label">Level Types</span>
             </div>
-            <div class="stat-box">
-              <div class="stat-number">5</div>
-              <div class="stat-label">Cycle Phases</div>
+            <div class="stat-pill">
+              <span class="stat-val">5</span>
+              <span class="stat-label">Cycle Phases</span>
             </div>
           </div>
 
-          <p class="mkt-philosophy">Each indicator stands alone. Together, they create a complete trading ecosystem.</p>
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 5: CTA ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 5 — Truth: Why One Suite
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — CTA</span>
+      <span class="slide-label">Slide 5 — Truth</span>
       <div class="slide slide-warm">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+        <div class="slide-content" style="align-items: center; text-align: center;">
+          <div class="truth-orb">
+            <span class="truth-orb-letter">S</span>
+          </div>
+
+          <h3 class="inner-heading" style="margin-bottom: 5%;">The <em>Deeper</em> Truth</h3>
+
+          <div class="truth-grid">
+            <div class="truth-card">
+              <div class="truth-dot td-orange"></div>
+              <div class="truth-card-title">Seven Specialisms, Zero Overlap</div>
+              <div class="truth-card-text">Each indicator covers a unique domain. No redundancy, maximum signal density.</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-dot td-teal"></div>
+              <div class="truth-card-title">Confluence Over Conviction</div>
+              <div class="truth-card-text">The best trades happen when multiple independent systems agree on direction.</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-dot td-purple"></div>
+              <div class="truth-card-title">Audited Non-Repainting</div>
+              <div class="truth-card-text">Every signal finalises at bar close. $100 bounty stands &mdash; nobody has claimed it.</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-dot td-blue"></div>
+              <div class="truth-card-title">One Ecosystem, One Edge</div>
+              <div class="truth-card-text">Built by one team, designed to work together. No Frankenstein indicator stacks.</div>
+            </div>
+          </div>
+
+          <div class="philosophy-box">
+            <p class="philosophy-text">&ldquo;Each indicator stands alone. <em>Together</em>, they create a complete trading ecosystem.&rdquo;</p>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 6 — CTA: Full Stat Grid + Pills + CTA Box
+    ══════════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — CTA</span>
+      <div class="slide slide-warm">
         <div class="slide-content" style="align-items: center; text-align: center; justify-content: center;">
           <div class="cta-badge">The Elite Seven</div>
           <h2 class="cta-title">Seven Tools. One <em>Edge</em>.</h2>
-          <div class="mkt-divider"></div>
-          <div class="cta-url">signalpilot.io</div>
+
+          <div class="cta-stat-grid">
+            <div class="cta-stat">
+              <span class="cta-stat-num">7</span>
+              <span class="cta-stat-text">Indicators</span>
+            </div>
+            <div class="cta-stat">
+              <span class="cta-stat-num">100+</span>
+              <span class="cta-stat-text">Alert Types</span>
+            </div>
+            <div class="cta-stat">
+              <span class="cta-stat-num">60+</span>
+              <span class="cta-stat-text">Level Types</span>
+            </div>
+            <div class="cta-stat">
+              <span class="cta-stat-num">0</span>
+              <span class="cta-stat-text">Repainting</span>
+            </div>
+          </div>
+
+          <div class="cta-pills">
+            <span class="cta-pill">OmniDeck</span>
+            <span class="cta-pill">Volume Oracle</span>
+            <span class="cta-pill">Pentarch</span>
+            <span class="cta-pill">Janus Atlas</span>
+            <span class="cta-pill">Augury Grid</span>
+            <span class="cta-pill">Harmonic Oscillator</span>
+            <span class="cta-pill">Plutus Flow</span>
+          </div>
+
+          <div class="cta-box">
+            <span class="cta-url">signalpilot.io</span>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
@@ -474,20 +969,11 @@
 
   <script>
     (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
       const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
       const slideWrappers = document.querySelectorAll('.slide-wrapper');
       let exportMode = false;
       let currentSlide = 0;
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
       exportBtn.addEventListener('click', function() {
         exportMode = !exportMode;
         document.body.classList.toggle('export-mode', exportMode);
