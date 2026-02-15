@@ -35,6 +35,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       success: true,
       message: 'Token refreshed. Update INSTAGRAM_ACCESS_TOKEN in Vercel env vars with the new token.',
+      tokenType: result.token_type,
       newToken: result.access_token,
       expiresInDays: Math.round(result.expires_in / 86400),
     });
