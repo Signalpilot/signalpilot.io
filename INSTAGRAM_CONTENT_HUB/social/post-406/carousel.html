@@ -8,706 +8,304 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    
     :root {
       --bg-dark: #0a0a0f;
       --accent-blue: #4a90d9;
       --accent-gold: #c9a962;
       --accent-red: #d94a4a;
       --accent-green: #4ad97a;
+      --accent-teal: #5eecd4;
       --text-primary: #e8e8e8;
       --text-secondary: #a0a0a0;
       --text-dim: #6a6a6a;
-      --video-opacity: 0.08;
     }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
+    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
+    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
+    .controls input[type="checkbox"] { cursor: pointer; }
+    .controls input[type="range"] { width: 80px; cursor: pointer; }
+    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; }
+    .page-title { text-align: center; margin-bottom: 40px; }
+    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
+    .page-title p { color: var(--text-dim); font-size: 14px; }
+    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
+    .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
+    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
+    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
+    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); font-weight: 500; letter-spacing: 1px; }
+    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 2.5cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
+    .slide-icon { font-size: clamp(28px, 10cqw, 48px); margin-bottom: 4%; }
+    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 3%; line-height: 1.2; }
+    .slide-title.large { font-size: clamp(22px, 8cqw, 32px); }
+    .slide-subtitle { font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; font-weight: 500; }
+    .slide-body { font-size: clamp(12px, 4cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
+    .cta-link { display: inline-block; margin-top: 5%; padding: 3% 6%; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: clamp(11px, 3.5cqw, 14px); letter-spacing: 0.5px; }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* ── Visual Components ── */
+    .concept-card { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 2% 0; text-align: left; }
+    .concept-card.green { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.35); }
+    .concept-card.red { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.35); }
+    .concept-card.blue { background: rgba(74,144,217,0.08); border: 1.5px solid rgba(74,144,217,0.35); }
+    .concept-card.gold { background: rgba(201,169,98,0.08); border: 1.5px solid rgba(201,169,98,0.35); }
+    .concept-card .card-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2%; font-weight: 500; }
+    .concept-card.green .card-label { color: var(--accent-green); }
+    .concept-card.red .card-label { color: var(--accent-red); }
+    .concept-card.blue .card-label { color: var(--accent-blue); }
+    .concept-card.gold .card-label { color: var(--accent-gold); }
+    .concept-card .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
+    .concept-card .card-desc { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
 
-    body {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
+    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
+    .data-item { padding: 5%; border-radius: 10px; text-align: center; }
+    .data-item.up { background: rgba(74,217,122,0.1); border: 1px solid rgba(74,217,122,0.3); }
+    .data-item.down { background: rgba(217,74,74,0.1); border: 1px solid rgba(217,74,74,0.3); }
+    .data-item.info { background: rgba(74,144,217,0.1); border: 1px solid rgba(74,144,217,0.3); }
+    .data-item.warn { background: rgba(201,169,98,0.1); border: 1px solid rgba(201,169,98,0.3); }
+    .data-item .item-icon { font-size: clamp(20px, 7cqw, 32px); margin-bottom: 3%; }
+    .data-item .item-label { font-size: clamp(9px, 3cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
+    .data-item .item-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
 
-    .controls-bar {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      padding: 16px;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
+    .arrow-list { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
+    .arrow-list li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
+    .arrow-list .arrow { color: var(--accent-blue); font-weight: 600; flex-shrink: 0; }
 
-    .control-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .checklist { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
+    .checklist li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
+    .checklist .check { color: var(--accent-green); flex-shrink: 0; }
+    .checklist .cross { color: var(--accent-red); flex-shrink: 0; }
 
-    .control-group label {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
+    .callout-box { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 3% 0; text-align: left; }
+    .callout-box.warning { background: rgba(217,74,74,0.08); border-left: 4px solid var(--accent-red); }
+    .callout-box.insight { background: rgba(201,169,98,0.08); border-left: 4px solid var(--accent-gold); }
+    .callout-box.success { background: rgba(74,217,122,0.08); border-left: 4px solid var(--accent-green); }
+    .callout-box.info { background: rgba(74,144,217,0.08); border-left: 4px solid var(--accent-blue); }
+    .callout-box .callout-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; margin-bottom: 2%; }
+    .callout-box.warning .callout-title { color: var(--accent-red); }
+    .callout-box.insight .callout-title { color: var(--accent-gold); }
+    .callout-box.success .callout-title { color: var(--accent-green); }
+    .callout-box.info .callout-title { color: var(--accent-blue); }
+    .callout-box .callout-text { font-size: clamp(11px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.6; }
 
-    .control-group select,
-    .control-group input[type="range"] {
-      padding: 6px 10px;
-      border-radius: 6px;
-      border: 1px solid #333;
-      background: #1a1a24;
-      color: var(--text-primary);
-      font-size: 14px;
-    }
+    .stat-row { display: flex; justify-content: center; gap: 4%; width: 100%; max-width: 90%; margin: 3% 0; }
+    .stat-item { text-align: center; flex: 1; }
+    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 8cqw, 32px); font-weight: 600; color: var(--accent-gold); }
+    .stat-label { font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2%; }
 
-    .control-group input[type="range"] {
-      width: 100px;
-    }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
+    .compare-item { padding: 5%; border-radius: 10px; text-align: center; }
+    .compare-item.before { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.3); }
+    .compare-item.after { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.3); }
+    .compare-item .compare-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3%; font-weight: 500; }
+    .compare-item.before .compare-label { color: var(--accent-red); }
+    .compare-item.after .compare-label { color: var(--accent-green); }
+    .compare-item .compare-text { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
 
-    #export-btn {
-      padding: 8px 16px;
-      border-radius: 6px;
-      border: none;
-      background: var(--accent-gold);
-      color: var(--bg-dark);
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+    .quote-block { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 6cqw, 26px); font-style: italic; color: var(--text-primary); line-height: 1.5; max-width: 85%; margin: 4% 0; }
+    .quote-attr { font-family: 'Inter', sans-serif; font-size: clamp(10px, 3cqw, 12px); color: var(--accent-gold); letter-spacing: 1px; margin-top: 3%; }
 
-    #export-btn:hover {
-      background: #d9b972;
-    }
+    .step-flow { width: 100%; max-width: 90%; text-align: left; }
+    .step-item { display: flex; gap: 4%; margin-bottom: 4%; align-items: flex-start; }
+    .step-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--accent-gold); min-width: 8%; }
+    .step-text { font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; padding-top: 1%; }
 
-    .page-title {
-      text-align: center;
-      margin-bottom: 40px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(20px, 3.7cqw, 40px);
-      font-weight: 400;
-      color: var(--text-secondary);
-    }
-
-    .carousel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
-      gap: 32px;
-      max-width: 1800px;
-      margin: 0 auto;
-      padding: 0 16px;
-    }
-
-    .slide-wrapper {
-      container-type: inline-size;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .slide-label {
-      font-size: 14px;
-      color: var(--text-dim);
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    .slide {
-      position: relative;
-      width: 100%;
-      max-width: 540px;
-      aspect-ratio: 4 / 5;
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg-dark);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-      container-type: inline-size;
-    }
-
-    .bg-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: var(--video-opacity);
-      pointer-events: none;
-    }
-
-    .slide-content {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: clamp(32px, 8cqw, 64px);
-      text-align: center;
-    }
-
-    .slide-number {
-      position: absolute;
-      top: clamp(12px, 3cqw, 24px);
-      left: clamp(12px, 3cqw, 24px);
-      font-size: clamp(9px, 2cqw, 18px);
-      color: var(--text-dim);
-      letter-spacing: 1px;
-    }
-
-    .brand-mark {
-      position: absolute;
-      bottom: clamp(12px, 3cqw, 24px);
-      right: clamp(12px, 3cqw, 24px);
-      font-size: clamp(8px, 2cqw, 16px);
-      color: var(--text-dim);
-      letter-spacing: 1px;
-    }
-
-    .slide-icon {
-      font-size: clamp(36px, 9cqw, 72px);
-      margin-bottom: clamp(14px, 4cqw, 28px);
-    }
-
-    .slide-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(16px, 6cqw, 28px);
-      font-weight: 600;
-      margin-bottom: clamp(12px, 3cqw, 24px);
-      line-height: 1.2;
-      overflow-wrap: break-word;
-    }
-
-    .slide-title.large {
-      font-size: clamp(16px, 7cqw, 32px);
-    }
-
-    .slide-body {
-      font-size: clamp(12px, 3cqw, 24px);
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: clamp(240px, 62cqw, 480px);
-    }
-
-    .content-box {
-      width: 100%;
-      max-width: clamp(255px, 66cqw, 510px);
-      border-radius: clamp(12px, 3cqw, 24px);
-      padding: clamp(21px, 5cqw, 42px);
-      margin: clamp(12px, 3cqw, 24px) 0;
-      text-align: left;
-    }
-
-    .content-box.blue {
-      background: rgba(74, 144, 217, 0.1);
-      border: 2px solid rgba(74, 144, 217, 0.4);
-    }
-
-    .content-box.gold {
-      background: rgba(201, 169, 98, 0.1);
-      border: 2px solid rgba(201, 169, 98, 0.4);
-    }
-
-    .content-box.green {
-      background: rgba(74, 217, 122, 0.1);
-      border: 2px solid rgba(74, 217, 122, 0.4);
-    }
-
-    .content-box.red {
-      background: rgba(217, 74, 74, 0.1);
-      border: 2px solid rgba(217, 74, 74, 0.4);
-    }
-
-    .content-box.purple {
-      background: rgba(147, 74, 217, 0.1);
-      border: 2px solid rgba(147, 74, 217, 0.4);
-    }
-
-    .box-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(15px, 4cqw, 30px);
-      font-weight: 600;
-      margin-bottom: clamp(9px, 2cqw, 18px);
-    }
-
-    .content-box.blue .box-title {
-      color: var(--accent-blue);
-    }
-
-    .content-box.gold .box-title {
-      color: var(--accent-gold);
-    }
-
-    .content-box.green .box-title {
-      color: var(--accent-green);
-    }
-
-    .content-box.red .box-title {
-      color: var(--accent-red);
-    }
-
-    .content-box.purple .box-title {
-      color: #934ad9;
-    }
-
-    .box-list {
-      font-size: clamp(11px, 3cqw, 22px);
-      color: var(--text-secondary);
-      line-height: 1.8;
-    }
+    .indicator-pill { display: inline-block; padding: 2% 5%; background: rgba(201,169,98,0.15); border: 1px solid var(--accent-gold); border-radius: 20px; font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); letter-spacing: 1px; font-weight: 500; margin: 3% 0; }
 
     /* Export mode */
-    body.export-mode {
-      padding: 0;
-      background: #000;
-    }
-
-    body.export-mode .controls-bar,
-    body.export-mode .page-title,
-    body.export-mode .slide-label {
-      display: none;
-    }
-
-    body.export-mode .carousel-grid {
-      display: block;
-      padding: 0;
-      max-width: none;
-    }
-
-    body.export-mode .slide-wrapper {
-      display: none;
-    }
-
-    body.export-mode .slide-wrapper.active {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    body.export-mode .slide {
-      width: 1080px;
-      height: 1350px;
-      max-width: none;
-      aspect-ratio: auto;
-      border-radius: 0;
-    }
-
-    body.export-mode .slide-content {
-      padding: 64px;
-    }
-
-    body.export-mode .slide-number {
-      top: 24px;
-      left: 24px;
-      font-size: 18px;
-    }
-
-    body.export-mode .brand-mark {
-      bottom: 24px;
-      right: 24px;
-      font-size: 16px;
-    }
-
-    body.export-mode .slide-icon {
-      font-size: 72px;
-      margin-bottom: 28px;
-    }
-
-    body.export-mode .slide-title {
-      font-size: 48px;
-      margin-bottom: 24px;
-    }
-
-    body.export-mode .slide-title.large {
-      font-size: 52px;
-    }
-
-    body.export-mode .slide-body {
-      font-size: 24px;
-      max-width: 480px;
-    }
-
-    body.export-mode .content-box {
-      max-width: 510px;
-      border-radius: 24px;
-      padding: 42px;
-      margin: 24px 0;
-    }
-
-    body.export-mode .box-title {
-      font-size: 30px;
-      margin-bottom: 18px;
-    }
-
-    body.export-mode .box-list {
-      font-size: 22px;
-    }
-
-    .export-nav {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      gap: 12px;
-      z-index: 1000;
-    }
-
-    body.export-mode .export-nav {
-      display: flex;
-    }
-
-    .export-nav button {
-      background: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .export-nav .slide-indicator {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-    }
+    body.export-mode { padding: 0; background: #000; }
+    body.export-mode .controls, body.export-mode .page-title { display: none; }
+    body.export-mode .carousel-grid { display: block; }
+    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
+    body.export-mode .slide-wrapper.active { display: block; }
+    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
+    body.export-mode .export-nav { display: flex; }
+    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
+    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; }
+    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } }
   
     
-    
-    /* ═══ Slide 1 - Cinematic Hook (TEAL) ═══ */
-    .slide-1 {
-      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
-    }
-
+    .slide-1 { background: linear-gradient(180deg, #0c0c0f 0%, #090910 100%) !important; }
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(180,180,200,0.06) 0%, transparent 100%);
       pointer-events: none;
       z-index: 1;
     }
     
-    .slide-1::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 18px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
-      z-index: 5;
-    }
-
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
-    }
-
-    .slide-1 .slide-content {
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      z-index: 3;
-    }
-
+    .slide-1 .bg-video, .slide-1 video { display: none !important; }
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
     .slide-1 .cine-label {
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.9);
+      color: rgba(180,180,200,0.9);
       margin-bottom: 8%;
     }
-
     .slide-1 .hook-main {
       font-family: 'Inter', sans-serif;
       font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
       font-weight: 600;
       line-height: 1.2;
-      color: rgba(255, 255, 255, 0.95);
+      color: rgba(255,255,255,0.95);
       margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
     }
-
     .slide-1 .cine-divider {
       width: 60px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
+      background: linear-gradient(90deg, transparent, rgba(180,180,200,0.6), transparent);
       margin-bottom: 4%;
     }
-
     .slide-1 .hook-sub {
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.65rem, 2cqw, 1.1rem);
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: rgba(94, 234, 212, 0.4);
+      color: rgba(180,180,200,0.4);
       line-height: 1.6;
     }
-
     .slide-1 .cine-logo {
       position: absolute;
       bottom: 8%;
       left: 50%;
       transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.4);
+      color: rgba(180,180,200,0.4);
     }
+  
   </style>
 </head>
 <body>
-  <div class="controls-bar">
-    <div class="control-group">
-      <label for="bg-select">Background</label>
-      <select id="bg-select">
-        <option value="starfield">Starfield</option>
-        <option value="none">None</option>
-      </select>
-    </div>
-    <div class="control-group">
-      <label for="opacity-slider">Opacity</label>
-      <input type="range" id="opacity-slider" min="0" max="30" value="8">
-    </div>
-    <button id="export-btn">Export Mode</button>
+  <div class="controls">
+    <label><input type="checkbox" id="bgToggle" checked> Background</label>
+    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
+    <button onclick="toggleExportMode()">Export Mode</button>
   </div>
 
-  <div class="page-title">Post 406 — 10 Slides</div>
+  <div class="page-title">
+    <h1>Post 406 — Wyckoff Distribution Schematic</h1>
+    <p>Education Carousel — 7 Slides</p>
+  </div>
 
   <div class="carousel-grid">
+
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
       <div class="slide slide-1">
         <div class="slide-content">
-          <div class="cine-label">INSIGHT</div>
-          <div class="hook-main">WYCKOFF DISTRIBUTION</div>
+          <div class="cine-label">LEARN</div>
+          <div class="hook-main">Don't use EMAs below the 1H chart. Too much noise.</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">How tops are built, phase by phase</p>
+          <p class="hook-sub">How tops are built, phase by phase.</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Phase A</span>
-      <div class="slide slide-2">
-        <video class="bg-video" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <span class="slide-number">02 / 10</span>
-          <div class="content-box green">
-            <div class="box-title">PHASE A — STOPPING THE UPTREND</div>
-            <div class="box-list">PSY (Preliminary Supply): First resistance<br><br>BC (Buying Climax): Euphoric buying, high volume<br><br>AR (Automatic Reaction): First drop<br><br>ST (Secondary Test): Retest of highs</div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">02 / 07</span>
+        <div class="slide-subtitle">The Concept</div>
+        <h2 class="slide-title">The 200 EMA isn't magic. It's a self-fulfilling prophecy.</h2>
+        <div class="concept-card blue"><div class="card-label">Key Concept</div><div class="card-desc">The 200 EMA isn't magic. It's a self-fulfilling prophecy. Wyckoff Distribution: the blueprint of market tops.</div></div><div class="concept-card gold"><div class="card-label">Why It Matters</div><div class="card-desc">PSY → BC → AR → ST → UT → UTAD → LPSY → SOW. Smart money distributes holdings before the markdown. The UTAD is the fakeout that traps buyers before the real drop. Real-world application: in crypto, the BC (buying climax) often coincides with peak social media hype. Everyone is euphoric. Smart money is distributing to those buyers. By the time the SOW hits, retail is trapped.</div></div>
+        <span class="brand-mark">SIGNAL PILOT</span>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Phase A Chart</span>
-      <div class="slide slide-3">
-        <video class="bg-video" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <span class="slide-number">03 / 10</span>
-          <div class="slide-icon">📈</div>
-          <p class="slide-body" style="font-style: italic; color: var(--accent-green);">[ Chart showing Phase A distribution ]</p>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">03 / 07</span>
+        <div class="slide-subtitle">Why It Matters</div>
+        <h2 class="slide-title">How Plutus Flow helps: during distribution, Plutus Flow</h2>
+        <ul class="arrow-list"><li><span class="arrow">→</span> How Plutus Flow helps: during distribution, Plutus Flow will show flow declining even if price remains elevated. That divergence between price and flow is the Wyckoff distribution playing out in real-time data, not just a schematic on paper.</li><li><span class="arrow">→</span> WYCKOFF DISTRIBUTION SCHEMATIC</li><li><span class="arrow">→</span> How tops are built, phase by phase.</li><li><span class="arrow">→</span> PHASE A — STOPPING THE UPTREND</li><li><span class="arrow">→</span> PSY (Preliminary Supply): First resistance</li></ul>
+        <span class="brand-mark">SIGNAL PILOT</span>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Phase B</span>
-      <div class="slide slide-4">
-        <video class="bg-video" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <span class="slide-number">04 / 10</span>
-          <div class="content-box gold">
-            <div class="box-title">PHASE B — BUILDING THE CAUSE</div>
-            <div class="box-list">Trading range forms<br><br>Smart money distributing<br><br>Multiple tests of support/resistance<br><br>Retail still bullish</div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">04 / 07</span>
+        <div class="slide-subtitle">How It Works</div>
+        <h2 class="slide-title">ST (Secondary Test): Retest of highs</h2>
+        <ul class="arrow-list"><li><span class="arrow">→</span> ST (Secondary Test): Retest of highs</li><li><span class="arrow">→</span> PHASE B — BUILDING THE CAUSE</li><li><span class="arrow">→</span> Trading range forms</li><li><span class="arrow">→</span> Smart money distributing</li><li><span class="arrow">→</span> Multiple tests of support/resistance</li></ul>
+        <span class="brand-mark">SIGNAL PILOT</span>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Phase C</span>
-      <div class="slide slide-5">
-        <video class="bg-video" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <span class="slide-number">05 / 10</span>
-          <div class="content-box purple">
-            <div class="box-title">PHASE C — THE UPTHRUST</div>
-            <div class="box-list">UT (Upthrust): False breakout above range<br><br>UTAD (Upthrust After Distribution): Final trap<br><br>Shakes in late buyers<br><br>Low volume on upthrust = bearish</div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">05 / 07</span>
+        <div class="slide-subtitle">The Application</div>
+        <h2 class="slide-title">UT (Upthrust): False breakout above range</h2>
+        <ul class="arrow-list"><li><span class="arrow">→</span> UT (Upthrust): False breakout above range</li><li><span class="arrow">→</span> UTAD (Upthrust After Distribution): Final trap</li><li><span class="arrow">→</span> Shakes in late buyers</li><li><span class="arrow">→</span> Low volume on upthrust = bearish</li><li><span class="arrow">→</span> PHASE D — MARKDOWN BEGINS</li></ul>
+        <span class="brand-mark">SIGNAL PILOT</span>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — Upthrust Chart</span>
-      <div class="slide slide-6">
-        <video class="bg-video" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <span class="slide-number">06 / 10</span>
-          <div class="slide-icon">🪤</div>
-          <p class="slide-body" style="font-style: italic; color: #934ad9;">[ Chart showing Upthrust trap ]</p>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">06 / 07</span>
+        <div class="slide-subtitle">Key Insight</div>
+        <h2 class="slide-title">PHASE E — DOWNTREND EMERGES</h2>
+        <ul class="arrow-list"><li><span class="arrow">→</span> PHASE E — DOWNTREND EMERGES</li><li><span class="arrow">→</span> Breakdown and continuation</li><li><span class="arrow">→</span> Distribution complete</li><li><span class="arrow">→</span> Free lesson - Link in bio</li><li><span class="arrow">→</span> Educational only. Not financial advice.</li></ul>
+        <span class="brand-mark">SIGNAL PILOT</span>
       </div>
     </div>
 
     <div class="slide-wrapper" data-slide="7">
-      <span class="slide-label">Slide 7 — Phase D</span>
-      <div class="slide slide-7">
-        <video class="bg-video" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <span class="slide-number">07 / 10</span>
-          <div class="content-box red">
-            <div class="box-title">PHASE D — MARKDOWN BEGINS</div>
-            <div class="box-list">SOW (Sign of Weakness): Strong drop<br><br>LPSY (Last Point of Supply): Pullback entry for shorts</div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="8">
-      <span class="slide-label">Slide 8 — Phase E</span>
-      <div class="slide slide-8">
-        <video class="bg-video" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <span class="slide-number">08 / 10</span>
-          <div class="content-box red">
-            <div class="box-title">PHASE E — DOWNTREND EMERGES</div>
-            <div class="box-list">Breakdown and continuation<br><br>Distribution complete<br><br>New downtrend confirmed</div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="9">
-      <span class="slide-label">Slide 9 — Full Schematic</span>
-      <div class="slide slide-9">
-        <video class="bg-video" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <span class="slide-number">09 / 10</span>
-          <div class="slide-icon">📉</div>
-          <p class="slide-body" style="font-style: italic; color: var(--accent-red);">[ Full Wyckoff Distribution schematic with all phases ]</p>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="10">
-      <span class="slide-label">Slide 10 — CTA</span>
-      <div class="slide slide-10">
-        <video class="bg-video" autoplay muted loop playsinline>
-          <source src="../../video/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <span class="slide-number">10 / 10</span>
-          <div class="slide-icon">📖</div>
-          <h2 class="slide-title">Free Lesson</h2>
-          <p class="slide-body">Link in bio</p>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
+      <video class="bg-video" autoplay muted loop playsinline>
+        <source src="../../video/starfield.mp4" type="video/mp4">
+      </video>
+      <div class="slide-content">
+        <span class="slide-number">07 / 07</span>
+        <div class="slide-icon">📚</div>
+        <h2 class="slide-title">Continue Learning</h2>
+        <p class="slide-body">Free education from beginner to professional.</p>
+        <a href="https://education.signalpilot.io/curriculum/beginner/06-moving-averages.html" class="cta-link">Start Learning</a>
+        <span class="brand-mark">SIGNAL PILOT</span>
       </div>
     </div>
   </div>
 
   <div class="export-nav">
     <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 10</span>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 7</span>
     <button onclick="nextSlide()">Next →</button>
   </div>
 
   <script>
-    const bgSelect = document.getElementById('bg-select');
-    const opacitySlider = document.getElementById('opacity-slider');
-    const exportBtn = document.getElementById('export-btn');
+    const bgToggle = document.getElementById('bgToggle');
+    const opacitySlider = document.getElementById('opacitySlider');
     const videos = document.querySelectorAll('.bg-video');
-    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    const slides = document.querySelectorAll('.slide-wrapper');
     let currentSlide = 0;
     let exportMode = false;
-
-    bgSelect.addEventListener('change', (e) => {
-      videos.forEach(v => v.style.display = e.target.value === 'none' ? 'none' : 'block');
-    });
-
-    opacitySlider.addEventListener('input', (e) => {
-      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
-    });
-
-    exportBtn.addEventListener('click', toggleExportMode);
-
-    function toggleExportMode() {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) {
-        currentSlide = 0;
-        updateExportView();
-      }
-    }
-
-    function updateExportView() {
-      slideWrappers.forEach((wrapper, i) => {
-        wrapper.classList.toggle('active', i === currentSlide);
-      });
-      document.getElementById('currentSlide').textContent = currentSlide + 1;
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slideWrappers.length;
-      updateExportView();
-    }
-
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
-      updateExportView();
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'Escape') toggleExportMode();
-    });
+    bgToggle.addEventListener('change', (e) => { videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'); });
+    opacitySlider.addEventListener('input', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value / 100); });
+    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
+    function updateExportView() { slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
+    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
+    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
+    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
   </script>
 </body>
 </html>
