@@ -6,358 +6,47 @@
   <title>Post 057 — Psychology of Round Numbers | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --accent-green: #4ad97a;
-      --text-primary: #e8e8e8;
-      --text-secondary: #a0a0a0;
-      --text-dim: #6a6a6a;
+      --bg-card: rgba(255,255,255,0.03);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-muted: rgba(255,255,255,0.4);
+      --border-subtle: rgba(255,255,255,0.1);
+      --accent-teal: #5eead4;
+      --accent-teal-dim: rgba(94,234,212,0.3);
+      --color-green: #4ade80;
+      --color-red: #ef4444;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
-
-    .controls {
-      position: fixed;
-      top: 20px; right: 20px;
-      z-index: 100;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .controls label {
-      color: var(--text-secondary);
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-
-    .controls button {
-      background: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    .page-title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .page-title h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 400;
-      margin-bottom: 8px;
-    }
-
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-
-    .carousel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .slide-wrapper {
-      aspect-ratio: 4 / 5;
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg-dark);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-      container-type: inline-size;
-    }
-
-    .slide-wrapper .bg-video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: var(--video-opacity, 0.08);
-      pointer-events: none;
-    }
-
-    .slide-wrapper .slide-content {
-      position: relative;
-      z-index: 2;
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 8%;
-      text-align: center;
-    }
-
-    .slide-number {
-      position: absolute;
-      top: 4%; left: 4%;
-      font-size: clamp(9px, 2cqw, 11px);
-      color: var(--text-dim);
-      letter-spacing: 1px;
-    }
-
-    .brand-mark {
-      position: absolute;
-      bottom: 4%; right: 4%;
-      font-size: clamp(8px, 1.8cqw, 10px);
-      color: var(--text-dim);
-      letter-spacing: 1px;
-    }
-
-    .slide-icon { font-size: clamp(28px, 7cqw, 48px); margin-bottom: 4%; }
-
-    .slide-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(18px, 5cqw, 32px);
-      font-weight: 600;
-      margin-bottom: 3%;
-      line-height: 1.2;
-    }
-
-    .slide-title.large { font-size: clamp(20px, 5.5cqw, 38px); }
-
-    .slide-subtitle {
-      font-size: clamp(10px, 2.5cqw, 14px);
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 4%;
-    }
-
-    .slide-body {
-      font-size: clamp(12px, 3cqw, 16px);
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 90%;
-    }
-
-    .number-display {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(28px, 8cqw, 48px);
-      font-weight: 600;
-      color: var(--accent-gold);
-      margin: 4% 0;
-      letter-spacing: 4px;
-    }
-
-    .concept-box {
-      width: 100%;
-      max-width: 90%;
-      border-radius: 16px;
-      padding: 5%;
-      margin: 3% 0;
-      text-align: left;
-      background: rgba(74, 144, 217, 0.1);
-      border: 2px solid rgba(74, 144, 217, 0.4);
-    }
-
-    .concept-box.gold {
-      background: rgba(201, 169, 98, 0.1);
-      border-color: rgba(201, 169, 98, 0.4);
-    }
-
-    .concept-label {
-      font-size: clamp(9px, 2.2cqw, 12px);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 2%;
-      color: var(--accent-blue);
-    }
-
-    .concept-box.gold .concept-label { color: var(--accent-gold); }
-
-    .concept-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(16px, 4.5cqw, 26px);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 3%;
-    }
-
-    .concept-desc {
-      font-size: clamp(10px, 2.5cqw, 14px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .order-list {
-      width: 100%;
-      max-width: 90%;
-      margin: 3% 0;
-    }
-
-    .order-item {
-      display: flex;
-      align-items: center;
-      gap: 3%;
-      padding: 3% 4%;
-      background: rgba(201, 169, 98, 0.08);
-      border-radius: 10px;
-      margin-bottom: 2%;
-      text-align: left;
-    }
-
-    .order-item:last-child { margin-bottom: 0; }
-    .order-item .icon { font-size: clamp(14px, 3.5cqw, 20px); }
-    .order-item .text { font-size: clamp(10px, 2.5cqw, 14px); color: var(--text-secondary); }
-
-    .cta-link {
-      display: inline-block;
-      margin-top: 5%;
-      padding: 3% 6%;
-      background: var(--accent-gold);
-      color: var(--bg-dark);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      font-size: clamp(11px, 2.5cqw, 14px);
-    }
-
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
+    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
     body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper {
-      display: none;
-      width: 1080px; height: 1350px;
-      border-radius: 0; margin: 0;
-    }
+    body.export-mode .slide-wrapper { display: none; margin: 0; }
     body.export-mode .slide-wrapper.active { display: block; }
+    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
-    .export-nav {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      gap: 12px;
-      z-index: 1000;
-    }
+    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
+    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .page-title { text-align: center; margin-bottom: 2rem; }
+    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
 
-    body.export-mode .export-nav { display: flex; }
+    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
+    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
+    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
+    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5%; }
 
-    .export-nav button {
-      background: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .export-nav .slide-indicator {
-      background: rgba(255,255,255,0.1);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-    }
-
-    @media (max-width: 768px) {
-      .carousel-grid { grid-template-columns: 1fr; max-width: 400px; }
-    }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (TEAL) ═══ */
-    .slide-1 {
-      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
-    }
-
-    .slide-1::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .slide-1::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 18px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
-      z-index: 5;
-    }
-
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
-    }
-
-    .slide-1 .slide-content {
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      z-index: 3;
-    }
-
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.9);
-      margin-bottom: 8%;
-    }
-
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
-    }
-
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
-      margin-bottom: 4%;
-    }
-
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(94, 234, 212, 0.4);
-      line-height: 1.6;
-    }
-
-    .slide-1 .cine-logo {
+    .slide-logo {
       position: absolute;
       bottom: 8%;
       left: 50%;
@@ -366,169 +55,567 @@
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.4);
+      color: rgba(94,234,212,0.4);
+      z-index: 2;
+      white-space: nowrap;
     }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 1 — Cinematic Hook (TEAL, LEFT bar)
+       ═══════════════════════════════════════════ */
+    .slide-1 { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
+    .slide-1::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
+    .slide-1::after { content: ''; position: absolute; top: 0; left: 0; width: 18px; height: 100%; background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%); z-index: 5; }
+    .slide-1 .video-bg, .slide-1 video { display: none !important; }
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
+    .slide-1 .cine-label { font-size: clamp(0.5rem, 1.6cqw, 0.875rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94,234,212,0.9); margin-bottom: 8%; }
+    .slide-1 .hook-main { font-family: var(--font-serif); font-size: clamp(1.6rem, 5cqw, 2.8rem); font-weight: 700; line-height: 1.15; color: rgba(255,255,255,0.95); margin-bottom: 4%; }
+    .slide-1 .hook-accent { color: var(--accent-teal); }
+    .slide-1 .cine-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent); margin-bottom: 4%; }
+    .slide-1 .hook-sub { font-size: clamp(0.65rem, 2cqw, 1.1rem); font-weight: 300; letter-spacing: 0.05em; color: rgba(94,234,212,0.4); line-height: 1.6; }
+    .slide-1 .cine-logo { position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%); font-family: 'Gugi', sans-serif; font-size: clamp(0.4rem, 1.2cqw, 0.625rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94,234,212,0.4); }
+
+    /* ═══════════════════════════════════════════
+       SHARED — Blog layout
+       ═══════════════════════════════════════════ */
+    .blog-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .blog-tag {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.4cqw, 14px);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(94,234,212,0.7);
+      margin-bottom: 3%;
+    }
+
+    .blog-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 48px);
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: center;
+      line-height: 1.15;
+      margin-bottom: 4%;
+    }
+
+    .blog-desc {
+      font-size: clamp(11px, 2cqw, 21px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      text-align: center;
+      max-width: 85%;
+      margin-bottom: 4%;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 2 — Round Number Price Levels
+       ═══════════════════════════════════════════ */
+    .price-levels {
+      width: 88%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.6cqw, 16px);
+      margin-bottom: 5%;
+    }
+
+    .price-level {
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      padding: 3% 4%;
+      border-radius: 10px;
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+    }
+
+    .price-value {
+      font-family: var(--font-mono);
+      font-size: clamp(16px, 3.2cqw, 34px);
+      font-weight: 700;
+      color: var(--accent-teal);
+      min-width: 30%;
+    }
+
+    .price-context {
+      font-size: clamp(9px, 1.5cqw, 15px);
+      color: var(--text-muted);
+    }
+
+    .price-glow {
+      background: rgba(94,234,212,0.08);
+      border-color: rgba(94,234,212,0.25);
+      box-shadow: 0 0 15px rgba(94,234,212,0.05);
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 3 — Why: Order Clustering
+       ═══════════════════════════════════════════ */
+    .cluster-visual {
+      width: 90%;
+      position: relative;
+      margin-bottom: 5%;
+    }
+
+    .cluster-line {
+      width: 100%;
+      height: 2px;
+      background: rgba(94,234,212,0.4);
+      position: relative;
+      margin: 4% 0;
+    }
+
+    .cluster-line::before {
+      content: attr(data-price);
+      position: absolute;
+      left: 0;
+      top: -140%;
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 2cqw, 20px);
+      color: var(--accent-teal);
+      font-weight: 700;
+    }
+
+    .order-stack {
+      display: flex;
+      gap: clamp(2px, 0.4cqw, 4px);
+      margin: 2% 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .order-block {
+      width: clamp(16px, 3.2cqw, 34px);
+      height: clamp(8px, 1.6cqw, 16px);
+      border-radius: 3px;
+    }
+
+    .order-block.sl { background: rgba(239,68,68,0.4); }
+    .order-block.tp { background: rgba(74,222,128,0.4); }
+    .order-block.limit { background: rgba(94,234,212,0.3); }
+
+    .order-legend {
+      display: flex;
+      gap: 5%;
+      justify-content: center;
+      margin-top: 3%;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: clamp(3px, 0.6cqw, 6px);
+      font-size: clamp(8px, 1.3cqw, 13px);
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: clamp(6px, 1.2cqw, 12px);
+      height: clamp(6px, 1.2cqw, 12px);
+      border-radius: 2px;
+    }
+
+    .legend-dot.sl { background: rgba(239,68,68,0.5); }
+    .legend-dot.tp { background: rgba(74,222,128,0.5); }
+    .legend-dot.limit { background: rgba(94,234,212,0.4); }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 4 — Self-Fulfilling Prophecy
+       ═══════════════════════════════════════════ */
+    .prophecy-flow {
+      width: 88%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.2cqw, 12px);
+      margin-bottom: 5%;
+    }
+
+    .prophecy-step {
+      display: flex;
+      align-items: center;
+      gap: 3%;
+      padding: 3% 4%;
+      border-radius: 10px;
+      background: rgba(94,234,212,0.03);
+      border: 1px solid rgba(94,234,212,0.1);
+    }
+
+    .prophecy-num {
+      width: clamp(24px, 5cqw, 50px);
+      height: clamp(24px, 5cqw, 50px);
+      border-radius: 50%;
+      background: rgba(94,234,212,0.08);
+      border: 1.5px solid rgba(94,234,212,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(10px, 2cqw, 20px);
+      color: var(--accent-teal);
+      font-weight: 700;
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+    }
+
+    .prophecy-text {
+      font-size: clamp(10px, 1.8cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .prophecy-text strong { color: var(--accent-teal); }
+
+    .prophecy-arrow {
+      text-align: center;
+      font-size: clamp(10px, 2cqw, 20px);
+      color: rgba(94,234,212,0.25);
+      margin: -1% 0;
+    }
+
+    .prophecy-result {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.3cqw, 13px);
+      color: rgba(94,234,212,0.5);
+      letter-spacing: 0.2em;
+      text-align: center;
+      margin-top: 2%;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 5 — How to Use This
+       ═══════════════════════════════════════════ */
+    .use-cards {
+      width: 88%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.6cqw, 16px);
+      margin-bottom: 4%;
+    }
+
+    .use-card {
+      padding: 4% 5%;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+    }
+
+    .use-icon {
+      font-size: clamp(24px, 5cqw, 52px);
+      flex-shrink: 0;
+    }
+
+    .use-info { flex: 1; }
+
+    .use-name {
+      font-size: clamp(11px, 2.2cqw, 22px);
+      font-weight: 600;
+      color: var(--accent-teal);
+      margin-bottom: 2%;
+    }
+
+    .use-detail {
+      font-size: clamp(9px, 1.5cqw, 15px);
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 6 — CTA
+       ═══════════════════════════════════════════ */
+    .cta-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .cta-icon { font-size: clamp(36px, 7.4cqw, 80px); margin-bottom: 4%; }
+
+    .cta-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 48px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 3%;
+    }
+
+    .cta-accent { color: var(--accent-teal); }
+
+    .cta-body {
+      font-size: clamp(10px, 1.8cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 85%;
+      margin-bottom: 5%;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(94,234,212,0.12) 0%, rgba(94,234,212,0.04) 100%);
+      border: 2px solid var(--accent-teal);
+      border-radius: 14px;
+      padding: 3% 6%;
+    }
+
+    .cta-box-text { font-size: clamp(11px, 2cqw, 22px); font-weight: 500; color: var(--text-primary); margin-bottom: 1%; }
+    .cta-link { font-size: clamp(10px, 1.7cqw, 18px); font-weight: 600; color: var(--accent-teal); }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
+    <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 057 — Psychology of Round Numbers</h1>
-    <p>Blog Article Carousel — 6 Slides</p>
+    <p>6 slides · Blog</p>
   </div>
 
   <div class="carousel-grid">
-    <!-- Slide 1: Hook -->
+
+    <!-- ══════ SLIDE 1: Cinematic Hook ══════ -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <span class="slide-label">Slide 1 — Hook</span>
       <div class="slide slide-1">
         <div class="slide-content">
           <div class="cine-label">INSIGHT</div>
-          <div class="hook-main">Why Do These Numbers Matter?</div>
+          <div class="hook-main">Why Price Reacts at<br><span class="hook-accent">Round Numbers</span></div>
           <div class="cine-divider"></div>
-          <p class="hook-sub"></p>
+          <p class="hook-sub">$100. $50,000. $1.00. — It's not coincidence.</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 2: Question -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 06</span>
-        <div class="slide-icon">🤔</div>
-        <h2 class="slide-title">Why Does Price React Here?</h2>
-        <p class="slide-body">Price seems to "respect" these levels. But why? Is there something special about these numbers?</p>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <!-- Slide 3: Answer -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 06</span>
-        <div class="concept-box">
-          <div class="concept-label">The Answer</div>
-          <div class="concept-title">Humans Are Lazy</div>
-          <div class="concept-desc">We don't set our orders at $99.73. We set them at $100. Simple. Easy to remember.</div>
-        </div>
-        <p class="slide-body">Our brains prefer round numbers.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <!-- Slide 4: How It Works -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 06</span>
-        <div class="slide-subtitle">Order Clustering</div>
-        <h2 class="slide-title">Orders Cluster Here</h2>
-        <div class="order-list">
-          <div class="order-item">
-            <span class="icon">🛑</span>
-            <span class="text">Stop losses at round numbers</span>
+    <!-- ══════ SLIDE 2: The Numbers ══════ -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — The Numbers</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="blog-layout">
+            <div class="blog-tag">OBSERVATION</div>
+            <h2 class="blog-title">These Levels Move Markets</h2>
+            <div class="price-levels">
+              <div class="price-level price-glow">
+                <span class="price-value">$100.00</span>
+                <span class="price-context">Stocks gravitate to whole dollars</span>
+              </div>
+              <div class="price-level price-glow">
+                <span class="price-value">$50,000</span>
+                <span class="price-context">BTC's psychological fortress</span>
+              </div>
+              <div class="price-level price-glow">
+                <span class="price-value">$1.0000</span>
+                <span class="price-context">Forex parity — massive order wall</span>
+              </div>
+              <div class="price-level">
+                <span class="price-value">$10.00</span>
+                <span class="price-context">Penny stock graduation level</span>
+              </div>
+            </div>
+            <p class="blog-desc">Every market. Every timeframe. Round numbers act as invisible walls.</p>
           </div>
-          <div class="order-item">
-            <span class="icon">💰</span>
-            <span class="text">Take profits at round numbers</span>
-          </div>
-          <div class="order-item">
-            <span class="icon">📥</span>
-            <span class="text">Limit orders at round numbers</span>
-          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 5: Result -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 06</span>
-        <div class="concept-box gold">
-          <div class="concept-label">Result</div>
-          <div class="concept-title">Self-Fulfilling Prophecy</div>
-          <div class="concept-desc">Millions of orders cluster at the same levels.<br><br>Round numbers become REAL support/resistance because everyone believes they are.</div>
+    <!-- ══════ SLIDE 3: Why — Order Clustering ══════ -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Order Clustering</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="blog-layout">
+            <div class="blog-tag">THE REASON</div>
+            <h2 class="blog-title">Orders Cluster Here</h2>
+            <div class="cluster-visual">
+              <div class="cluster-line" data-price="$50,000"></div>
+              <div class="order-stack">
+                <div class="order-block sl"></div>
+                <div class="order-block sl"></div>
+                <div class="order-block sl"></div>
+                <div class="order-block tp"></div>
+                <div class="order-block tp"></div>
+                <div class="order-block tp"></div>
+                <div class="order-block tp"></div>
+                <div class="order-block limit"></div>
+                <div class="order-block limit"></div>
+                <div class="order-block limit"></div>
+                <div class="order-block limit"></div>
+                <div class="order-block limit"></div>
+                <div class="order-block sl"></div>
+                <div class="order-block sl"></div>
+                <div class="order-block tp"></div>
+                <div class="order-block tp"></div>
+                <div class="order-block limit"></div>
+                <div class="order-block limit"></div>
+              </div>
+              <div class="order-legend">
+                <div class="legend-item"><div class="legend-dot sl"></div> Stop losses</div>
+                <div class="legend-item"><div class="legend-dot tp"></div> Take profits</div>
+                <div class="legend-item"><div class="legend-dot limit"></div> Limit orders</div>
+              </div>
+            </div>
+            <p class="blog-desc">Millions of traders place orders at the same round number. That concentration creates real support and resistance.</p>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 6: CTA -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 06</span>
-        <div class="slide-icon">📚</div>
-        <h2 class="slide-title">Deep Dive</h2>
-        <p class="slide-body">Full article on round number psychology and how to use it in your trading.</p>
-        <a href="https://blog.signalpilot.io/articles/support-and-resistance-explained/" class="cta-link">Read Full Article</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+    <!-- ══════ SLIDE 4: Self-Fulfilling Prophecy ══════ -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Self-Fulfilling</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="blog-layout">
+            <div class="blog-tag">THE LOOP</div>
+            <h2 class="blog-title">Self-Fulfilling Prophecy</h2>
+            <div class="prophecy-flow">
+              <div class="prophecy-step">
+                <div class="prophecy-num">1</div>
+                <span class="prophecy-text">Traders <strong>expect</strong> reaction at round numbers</span>
+              </div>
+              <div class="prophecy-arrow">↓</div>
+              <div class="prophecy-step">
+                <div class="prophecy-num">2</div>
+                <span class="prophecy-text">They <strong>place orders</strong> at round numbers</span>
+              </div>
+              <div class="prophecy-arrow">↓</div>
+              <div class="prophecy-step">
+                <div class="prophecy-num">3</div>
+                <span class="prophecy-text">Orders create <strong>actual S/R</strong> at round numbers</span>
+              </div>
+              <div class="prophecy-arrow">↓</div>
+              <div class="prophecy-step">
+                <div class="prophecy-num">4</div>
+                <span class="prophecy-text">Price <strong>reacts</strong>, confirming the belief</span>
+              </div>
+              <div class="prophecy-result">↻ THE CYCLE REINFORCES ITSELF</div>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 6</span>
-    <button onclick="nextSlide()">Next →</button>
+    <!-- ══════ SLIDE 5: How to Use This ══════ -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Application</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="blog-layout">
+            <div class="blog-tag">APPLICATION</div>
+            <h2 class="blog-title">How to Use This</h2>
+            <div class="use-cards">
+              <div class="use-card">
+                <div class="use-icon">🎯</div>
+                <div class="use-info">
+                  <div class="use-name">Watch for Reactions</div>
+                  <div class="use-detail">Mark round numbers on your chart and watch how price behaves around them</div>
+                </div>
+              </div>
+              <div class="use-card">
+                <div class="use-icon">🛡️</div>
+                <div class="use-info">
+                  <div class="use-name">Avoid Exact Stops</div>
+                  <div class="use-detail">Don't place stops exactly at round numbers — everyone else already did</div>
+                </div>
+              </div>
+              <div class="use-card">
+                <div class="use-icon">📐</div>
+                <div class="use-info">
+                  <div class="use-name">Offset Your Orders</div>
+                  <div class="use-detail">Place entries/exits slightly above or below the round number for better fills</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 6: CTA ══════ -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — CTA</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="cta-container">
+            <div class="cta-icon">🧠</div>
+            <h2 class="cta-headline">Trade the<br><span class="cta-accent">Psychology.</span></h2>
+            <p class="cta-body">Full article on round number psychology and how to exploit it in your trading.</p>
+            <div class="cta-box">
+              <p class="cta-box-text">Read the full article</p>
+              <span class="cta-link">signalpilot.io</span>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0;
-    let exportMode = false;
+    (function() {
+      const bgToggle = document.getElementById('bg-toggle');
+      const opacityControl = document.getElementById('opacity-control');
+      const exportBtn = document.getElementById('export-btn');
+      const videos = document.querySelectorAll('.video-bg');
+      const slideWrappers = document.querySelectorAll('.slide-wrapper');
+      let exportMode = false;
+      let currentSlide = 0;
 
-    bgToggle.addEventListener('change', (e) => {
-      videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none');
-    });
-
-    opacitySlider.addEventListener('input', (e) => {
-      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
-    });
-
-    function toggleExportMode() {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) { currentSlide = 0; updateExportView(); }
-    }
-
-    function updateExportView() {
-      slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
-      document.getElementById('currentSlide').textContent = currentSlide + 1;
-    }
-
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'Escape') toggleExportMode();
-    });
+      bgToggle.addEventListener('change', function() {
+        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
+      });
+      opacityControl.addEventListener('change', function() {
+        videos.forEach(v => { v.style.opacity = this.value; });
+      });
+      exportBtn.addEventListener('click', function() {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
+      });
+      function updateActiveSlide() {
+        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
+      }
+      document.addEventListener('keydown', function(e) {
+        if (!exportMode) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+      });
+    })();
   </script>
 </body>
 </html>
