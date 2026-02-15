@@ -1,131 +1,751 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 237 — WHEN YOUR STRATEGY STOPS WORKING | Carousel Preview</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When Your Strategy Stops Working - Post 237</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-green: #5cb85c;
+            --accent-red: #d9534f;
+            --accent-orange: #f5a623;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --video-opacity: 0.08;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-dark);
+            min-height: 100vh;
+            padding: clamp(10px, 2cqw, 20px);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Controls Bar */
+        .controls-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(15px, 3cqw, 30px);
+            padding: clamp(10px, 2cqw, 20px);
+            background: var(--bg-card);
+            border-radius: 12px;
+            margin-bottom: clamp(15px, 3cqw, 30px);
+            flex-wrap: wrap;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-group label {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(11px, 1.4cqw, 14px);
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .control-group select,
+        .control-group input[type="range"] {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(11px, 1.4cqw, 14px);
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-dark);
+            color: var(--text-primary);
+        }
+
+        .control-group input[type="range"] {
+            width: 80px;
+            cursor: pointer;
+        }
+
+        .export-btn {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(11px, 1.4cqw, 14px);
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(135deg, var(--accent-orange), #e09015);
+            color: var(--bg-dark);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(245, 166, 35, 0.4);
+        }
+
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            margin-bottom: clamp(20px, 4cqw, 40px);
+        }
+
+        .page-title h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(28px, 5cqw, 48px);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .page-title p {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(12px, 1.5cqw, 16px);
+            color: var(--text-secondary);
+        }
+
+        /* Carousel Grid */
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+            gap: clamp(15px, 3cqw, 30px);
+            max-width: 1800px;
+            margin: 0 auto;
+            padding-bottom: clamp(20px, 4cqw, 40px);
+        }
+
+        /* Slide Wrapper */
+        .slide-wrapper {
+            container-type: inline-size;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .slide-label {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(10px, 1.2cqw, 13px);
+            font-weight: 600;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        /* Base Slide */
+        .slide {
+            max-width: 540px;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: var(--video-opacity);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(30px, 5.6%, 60px);
+            height: 100%;
+            width: 100%;
+            text-align: center;
+        }
+
+        .brand-header {
+            position: absolute;
+            top: clamp(20px, 3.7%, 40px);
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(9px, 1.7cqw, 18px);
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: clamp(1.5px, 0.3cqw, 3px);
+            text-transform: uppercase;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: clamp(15px, 2.8%, 30px);
+            right: clamp(20px, 3.7%, 40px);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(7px, 1.3cqw, 14px);
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        /* Slide 1 - Title */
+        .slide-1 .icon-container {
+            width: clamp(90px, 16.7cqw, 180px);
+            height: clamp(90px, 16.7cqw, 180px);
+            border: 3px solid var(--accent-orange);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: clamp(25px, 4.6cqw, 50px);
+            position: relative;
+        }
+
+        .slide-1 .icon-container::before {
+            content: '';
+            position: absolute;
+            inset: clamp(-8px, -1.4cqw, -15px);
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            border-radius: 50%;
+        }
+
+        .slide-1 .tools-icon {
+            font-size: clamp(40px, 7.4cqw, 80px);
+        }
+
+        .slide-1 h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(28px, 5.2cqw, 56px);
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: clamp(1px, 0.2cqw, 2px);
+            margin-bottom: clamp(10px, 1.9cqw, 20px);
+            line-height: 1.2;
+        }
+
+        .slide-1 .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(12px, 2.2cqw, 24px);
+            font-weight: 300;
+            color: var(--accent-orange);
+            letter-spacing: clamp(1.5px, 0.3cqw, 3px);
+            text-transform: uppercase;
+        }
+
+        /* Slide 2 - Is It You or Strategy */
+        .slide-2 .question-icon {
+            font-size: clamp(40px, 7.4cqw, 80px);
+            margin-bottom: clamp(15px, 2.8cqw, 30px);
+        }
+
+        .slide-2 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4.4cqw, 48px);
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: clamp(20px, 3.7cqw, 40px);
+        }
+
+        .slide-2 .question-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(74, 144, 217, 0.3);
+            border-radius: clamp(8px, 1.5cqw, 16px);
+            padding: clamp(20px, 3.7cqw, 40px) clamp(25px, 4.6cqw, 50px);
+            max-width: clamp(350px, 64.8cqw, 700px);
+        }
+
+        .slide-2 .questions {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(9px, 1.7cqw, 18px);
+        }
+
+        .slide-2 .question-item {
+            display: flex;
+            align-items: center;
+            gap: clamp(8px, 1.4cqw, 15px);
+        }
+
+        .slide-2 .question-bullet {
+            width: clamp(5px, 0.9cqw, 10px);
+            height: clamp(5px, 0.9cqw, 10px);
+            background: var(--accent-blue);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .slide-2 .question-text {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(12px, 2.2cqw, 24px);
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        /* Slide 3 - Has Regime Changed */
+        .slide-3 .question-icon {
+            font-size: clamp(40px, 7.4cqw, 80px);
+            margin-bottom: clamp(15px, 2.8cqw, 30px);
+        }
+
+        .slide-3 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4.4cqw, 48px);
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: clamp(20px, 3.7cqw, 40px);
+        }
+
+        .slide-3 .question-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            border-radius: clamp(8px, 1.5cqw, 16px);
+            padding: clamp(20px, 3.7cqw, 40px) clamp(25px, 4.6cqw, 50px);
+            max-width: clamp(350px, 64.8cqw, 700px);
+        }
+
+        .slide-3 .questions {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(9px, 1.7cqw, 18px);
+        }
+
+        .slide-3 .question-item {
+            display: flex;
+            align-items: center;
+            gap: clamp(8px, 1.4cqw, 15px);
+        }
+
+        .slide-3 .question-bullet {
+            width: clamp(5px, 0.9cqw, 10px);
+            height: clamp(5px, 0.9cqw, 10px);
+            background: var(--accent-orange);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .slide-3 .question-text {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(12px, 2.2cqw, 24px);
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        /* Slide 4 - Just a Losing Streak */
+        .slide-4 .question-icon {
+            font-size: clamp(40px, 7.4cqw, 80px);
+            margin-bottom: clamp(15px, 2.8cqw, 30px);
+        }
+
+        .slide-4 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(24px, 4.4cqw, 48px);
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: clamp(20px, 3.7cqw, 40px);
+        }
+
+        .slide-4 .question-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(217, 83, 79, 0.3);
+            border-radius: clamp(8px, 1.5cqw, 16px);
+            padding: clamp(20px, 3.7cqw, 40px) clamp(25px, 4.6cqw, 50px);
+            max-width: clamp(350px, 64.8cqw, 700px);
+        }
+
+        .slide-4 .questions {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(9px, 1.7cqw, 18px);
+        }
+
+        .slide-4 .question-item {
+            display: flex;
+            align-items: center;
+            gap: clamp(8px, 1.4cqw, 15px);
+        }
+
+        .slide-4 .question-bullet {
+            width: clamp(5px, 0.9cqw, 10px);
+            height: clamp(5px, 0.9cqw, 10px);
+            background: var(--accent-red);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .slide-4 .question-text {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(12px, 2.2cqw, 24px);
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        /* Slide 5 - What To Do */
+        .slide-5 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(26px, 4.8cqw, 52px);
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: clamp(25px, 4.6cqw, 50px);
+            text-transform: uppercase;
+        }
+
+        .slide-5 .actions-list {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(10px, 1.9cqw, 20px);
+            max-width: clamp(350px, 64.8cqw, 700px);
+        }
+
+        .slide-5 .action-item {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 1.9cqw, 20px);
+            background: var(--bg-card);
+            border: 1px solid rgba(92, 184, 92, 0.3);
+            border-radius: clamp(6px, 1.1cqw, 12px);
+            padding: clamp(11px, 2cqw, 22px) clamp(15px, 2.8cqw, 30px);
+        }
+
+        .slide-5 .check-icon {
+            width: clamp(20px, 3.7cqw, 40px);
+            height: clamp(20px, 3.7cqw, 40px);
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: clamp(11px, 2cqw, 22px);
+            color: var(--bg-dark);
+            flex-shrink: 0;
+        }
+
+        .slide-5 .action-text {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(12px, 2.2cqw, 24px);
+            font-weight: 400;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        .slide-5 .bottom-note {
+            margin-top: clamp(20px, 3.7cqw, 40px);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(13px, 2.4cqw, 26px);
+            font-style: italic;
+            color: var(--accent-gold);
+        }
+
+        /* Slide 6 - CTA */
+        .slide-6 .cta-icon {
+            font-size: clamp(50px, 9.3cqw, 100px);
+            margin-bottom: clamp(25px, 4.6cqw, 50px);
+        }
+
+        .slide-6 h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(26px, 4.8cqw, 52px);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: clamp(12px, 2.3cqw, 25px);
+            line-height: 1.3;
+        }
+
+        .slide-6 .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(14px, 2.6cqw, 28px);
+            font-style: italic;
+            color: var(--accent-gold);
+            margin-bottom: clamp(25px, 4.6cqw, 50px);
+        }
+
+        .slide-6 .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-orange), #e09015);
+            color: var(--bg-dark);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(10px, 1.9cqw, 20px);
+            font-weight: 600;
+            padding: clamp(11px, 2cqw, 22px) clamp(27px, 5.1cqw, 55px);
+            border-radius: clamp(25px, 4.6cqw, 50px);
+            text-transform: uppercase;
+            letter-spacing: clamp(1.5px, 0.3cqw, 3px);
+        }
+
+        .slide-6 .link-hint {
+            margin-top: clamp(17px, 3.2cqw, 35px);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(9px, 1.7cqw, 18px);
+            color: var(--text-secondary);
+        }
+
+        /* Export Mode */
+        body.export-mode .controls-bar,
+        body.export-mode .page-title,
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+            padding: 0;
+            max-width: none;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.active {
+            display: flex;
+        }
+
+        body.export-mode .slide {
+            width: 1080px;
+            height: 1350px;
+            max-width: none;
+            aspect-ratio: auto;
+            border-radius: 0;
+            border: none;
+        }
+
+        body.export-mode .brand-header {
+            font-size: 18px;
+            letter-spacing: 3px;
+            top: 40px;
+        }
+
+        body.export-mode .slide-number {
+            font-size: 14px;
+            bottom: 30px;
+            right: 40px;
+        }
+
+        /* Export - Slide 1 */
+        body.export-mode .slide-1 .icon-container {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 50px;
+        }
+
+        body.export-mode .slide-1 .icon-container::before {
+            inset: -15px;
+        }
+
+        body.export-mode .slide-1 .tools-icon {
+            font-size: 80px;
+        }
+
+        body.export-mode .slide-1 h1 {
+            font-size: 56px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        body.export-mode .slide-1 .subtitle {
+            font-size: 24px;
+            letter-spacing: 3px;
+        }
+
+        /* Export - Slide 2 */
+        body.export-mode .slide-2 .question-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+        }
+
+        body.export-mode .slide-2 h2 {
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+
+        body.export-mode .slide-2 .question-box {
+            border-radius: 16px;
+            padding: 40px 50px;
+            max-width: 700px;
+        }
+
+        body.export-mode .slide-2 .questions {
+            gap: 18px;
+        }
+
+        body.export-mode .slide-2 .question-item {
+            gap: 15px;
+        }
+
+        body.export-mode .slide-2 .question-bullet {
+            width: 10px;
+            height: 10px;
+        }
+
+        body.export-mode .slide-2 .question-text {
+            font-size: 24px;
+        }
+
+        /* Export - Slide 3 */
+        body.export-mode .slide-3 .question-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+        }
+
+        body.export-mode .slide-3 h2 {
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+
+        body.export-mode .slide-3 .question-box {
+            border-radius: 16px;
+            padding: 40px 50px;
+            max-width: 700px;
+        }
+
+        body.export-mode .slide-3 .questions {
+            gap: 18px;
+        }
+
+        body.export-mode .slide-3 .question-item {
+            gap: 15px;
+        }
+
+        body.export-mode .slide-3 .question-bullet {
+            width: 10px;
+            height: 10px;
+        }
+
+        body.export-mode .slide-3 .question-text {
+            font-size: 24px;
+        }
+
+        /* Export - Slide 4 */
+        body.export-mode .slide-4 .question-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+        }
+
+        body.export-mode .slide-4 h2 {
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+
+        body.export-mode .slide-4 .question-box {
+            border-radius: 16px;
+            padding: 40px 50px;
+            max-width: 700px;
+        }
+
+        body.export-mode .slide-4 .questions {
+            gap: 18px;
+        }
+
+        body.export-mode .slide-4 .question-item {
+            gap: 15px;
+        }
+
+        body.export-mode .slide-4 .question-bullet {
+            width: 10px;
+            height: 10px;
+        }
+
+        body.export-mode .slide-4 .question-text {
+            font-size: 24px;
+        }
+
+        /* Export - Slide 5 */
+        body.export-mode .slide-5 h2 {
+            font-size: 52px;
+            margin-bottom: 50px;
+        }
+
+        body.export-mode .slide-5 .actions-list {
+            gap: 20px;
+            max-width: 700px;
+        }
+
+        body.export-mode .slide-5 .action-item {
+            gap: 20px;
+            border-radius: 12px;
+            padding: 22px 30px;
+        }
+
+        body.export-mode .slide-5 .check-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 22px;
+        }
+
+        body.export-mode .slide-5 .action-text {
+            font-size: 24px;
+        }
+
+        body.export-mode .slide-5 .bottom-note {
+            margin-top: 40px;
+            font-size: 26px;
+        }
+
+        /* Export - Slide 6 */
+        body.export-mode .slide-6 .cta-icon {
+            font-size: 100px;
+            margin-bottom: 50px;
+        }
+
+        body.export-mode .slide-6 h2 {
+            font-size: 52px;
+            margin-bottom: 25px;
+        }
+
+        body.export-mode .slide-6 .tagline {
+            font-size: 28px;
+            margin-bottom: 50px;
+        }
+
+        body.export-mode .slide-6 .cta-button {
+            font-size: 20px;
+            padding: 22px 55px;
+            border-radius: 50px;
+            letter-spacing: 3px;
+        }
+
+        body.export-mode .slide-6 .link-hint {
+            margin-top: 35px;
+            font-size: 18px;
+        }
     
-    :root {
-      --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --accent-green: #4ad97a;
-      --accent-teal: #5eecd4;
-      --text-primary: #e8e8e8;
-      --text-secondary: #a0a0a0;
-      --text-dim: #6a6a6a;
+    
+    
+    /* ═══ Slide 1 - Cinematic Hook (TEAL) ═══ */
+    .slide-1 {
+      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
-    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
-    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); font-weight: 500; letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 2.5cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(28px, 10cqw, 48px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 3%; line-height: 1.2; }
-    .slide-title.large { font-size: clamp(22px, 8cqw, 32px); }
-    .slide-subtitle { font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; font-weight: 500; }
-    .slide-body { font-size: clamp(12px, 4cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .cta-link { display: inline-block; margin-top: 5%; padding: 3% 6%; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: clamp(11px, 3.5cqw, 14px); letter-spacing: 0.5px; }
 
-    /* ── Visual Components ── */
-    .concept-card { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 2% 0; text-align: left; }
-    .concept-card.green { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.35); }
-    .concept-card.red { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.35); }
-    .concept-card.blue { background: rgba(74,144,217,0.08); border: 1.5px solid rgba(74,144,217,0.35); }
-    .concept-card.gold { background: rgba(201,169,98,0.08); border: 1.5px solid rgba(201,169,98,0.35); }
-    .concept-card .card-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2%; font-weight: 500; }
-    .concept-card.green .card-label { color: var(--accent-green); }
-    .concept-card.red .card-label { color: var(--accent-red); }
-    .concept-card.blue .card-label { color: var(--accent-blue); }
-    .concept-card.gold .card-label { color: var(--accent-gold); }
-    .concept-card .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
-    .concept-card .card-desc { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
-
-    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .data-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .data-item.up { background: rgba(74,217,122,0.1); border: 1px solid rgba(74,217,122,0.3); }
-    .data-item.down { background: rgba(217,74,74,0.1); border: 1px solid rgba(217,74,74,0.3); }
-    .data-item.info { background: rgba(74,144,217,0.1); border: 1px solid rgba(74,144,217,0.3); }
-    .data-item.warn { background: rgba(201,169,98,0.1); border: 1px solid rgba(201,169,98,0.3); }
-    .data-item .item-icon { font-size: clamp(20px, 7cqw, 32px); margin-bottom: 3%; }
-    .data-item .item-label { font-size: clamp(9px, 3cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
-    .data-item .item-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
-
-    .arrow-list { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .arrow-list li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .arrow-list .arrow { color: var(--accent-blue); font-weight: 600; flex-shrink: 0; }
-
-    .checklist { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .checklist li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .checklist .check { color: var(--accent-green); flex-shrink: 0; }
-    .checklist .cross { color: var(--accent-red); flex-shrink: 0; }
-
-    .callout-box { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 3% 0; text-align: left; }
-    .callout-box.warning { background: rgba(217,74,74,0.08); border-left: 4px solid var(--accent-red); }
-    .callout-box.insight { background: rgba(201,169,98,0.08); border-left: 4px solid var(--accent-gold); }
-    .callout-box.success { background: rgba(74,217,122,0.08); border-left: 4px solid var(--accent-green); }
-    .callout-box.info { background: rgba(74,144,217,0.08); border-left: 4px solid var(--accent-blue); }
-    .callout-box .callout-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; margin-bottom: 2%; }
-    .callout-box.warning .callout-title { color: var(--accent-red); }
-    .callout-box.insight .callout-title { color: var(--accent-gold); }
-    .callout-box.success .callout-title { color: var(--accent-green); }
-    .callout-box.info .callout-title { color: var(--accent-blue); }
-    .callout-box .callout-text { font-size: clamp(11px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.6; }
-
-    .stat-row { display: flex; justify-content: center; gap: 4%; width: 100%; max-width: 90%; margin: 3% 0; }
-    .stat-item { text-align: center; flex: 1; }
-    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 8cqw, 32px); font-weight: 600; color: var(--accent-gold); }
-    .stat-label { font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2%; }
-
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .compare-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .compare-item.before { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.3); }
-    .compare-item.after { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.3); }
-    .compare-item .compare-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3%; font-weight: 500; }
-    .compare-item.before .compare-label { color: var(--accent-red); }
-    .compare-item.after .compare-label { color: var(--accent-green); }
-    .compare-item .compare-text { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
-
-    .quote-block { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 6cqw, 26px); font-style: italic; color: var(--text-primary); line-height: 1.5; max-width: 85%; margin: 4% 0; }
-    .quote-attr { font-family: 'Inter', sans-serif; font-size: clamp(10px, 3cqw, 12px); color: var(--accent-gold); letter-spacing: 1px; margin-top: 3%; }
-
-    .step-flow { width: 100%; max-width: 90%; text-align: left; }
-    .step-item { display: flex; gap: 4%; margin-bottom: 4%; align-items: flex-start; }
-    .step-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--accent-gold); min-width: 8%; }
-    .step-text { font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; padding-top: 1%; }
-
-    .indicator-pill { display: inline-block; padding: 2% 5%; background: rgba(201,169,98,0.15); border: 1px solid var(--accent-gold); border-radius: 20px; font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); letter-spacing: 1px; font-weight: 500; margin: 3% 0; }
-
-    /* Export mode */
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; }
-    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } }
-  
-    
-    .slide-1 { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
     .slide-1::before {
       content: '';
       position: absolute;
@@ -145,164 +765,336 @@
       background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
       z-index: 5;
     }
-    .slide-1 .bg-video, .slide-1 video { display: none !important; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
+
+    .slide-1 .slide-bg,
+    .slide-1 .bg-video,
+    .slide-1 .video-bg,
+    .slide-1 video {
+      display: none !important;
+    }
+
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
     .slide-1 .cine-label {
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94,234,212,0.9);
+      color: rgba(94, 234, 212, 0.9);
       margin-bottom: 8%;
     }
+
     .slide-1 .hook-main {
       font-family: 'Inter', sans-serif;
       font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
       font-weight: 600;
       line-height: 1.2;
-      color: rgba(255,255,255,0.95);
+      color: rgba(255, 255, 255, 0.95);
       margin-bottom: 4%;
+      text-transform: none;
+      letter-spacing: 0;
     }
+
     .slide-1 .cine-divider {
       width: 60px;
       height: 2px;
       background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
       margin-bottom: 4%;
     }
+
     .slide-1 .hook-sub {
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.65rem, 2cqw, 1.1rem);
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: rgba(94,234,212,0.4);
+      color: rgba(94, 234, 212, 0.4);
       line-height: 1.6;
     }
+
     .slide-1 .cine-logo {
       position: absolute;
       bottom: 8%;
       left: 50%;
       transform: translateX(-50%);
+      font-family: 'Gugi', sans-serif;
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94,234,212,0.4);
+      color: rgba(94, 234, 212, 0.4);
     }
-  
   </style>
 </head>
 <body>
-  <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
-  </div>
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+        <div class="control-group">
+            <label for="bg-select">Background:</label>
+            <select id="bg-select">
+                <option value="starfield">Starfield</option>
+                <option value="waves">Waves</option>
+                <option value="particles">Particles</option>
+                <option value="none">None</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="opacity-slider">Opacity:</label>
+            <input type="range" id="opacity-slider" min="0" max="30" value="8">
+        </div>
+        <button class="export-btn" id="export-btn">Export Mode</button>
+    </div>
 
-  <div class="page-title">
-    <h1>Post 237 — WHEN YOUR STRATEGY STOPS WORKING</h1>
-    <p>Blog Carousel — 6 Slides</p>
-  </div>
+    <!-- Page Title -->
+    <div class="page-title">
+        <h1>When Your Strategy Stops Working</h1>
+        <p>Post 237 - 6 Slides</p>
+    </div>
 
-  <div class="carousel-grid">
-
-    <div class="slide-wrapper" data-slide="1">
+    <!-- Carousel Grid -->
+    <div class="carousel-grid">
+        <!-- Slide 1: Title -->
+        <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Cinematic Hook</span>
       <div class="slide slide-1">
         <div class="slide-content">
           <div class="cine-label">INSIGHT</div>
-          <div class="hook-main">WHEN YOUR STRATEGY STOPS WORKING</div>
+          <div class="hook-main">When Your Strategy Stops Working</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">BEFORE YOU ABANDON IT:</p>
+          <p class="hook-sub">Diagnose Before You Abandon</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <div class="slide-wrapper" data-slide="2">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 06</span>
-        <div class="slide-subtitle">The Reality</div>
-        <h2 class="slide-title">Read this twice. Then read it again before Monday.</h2>
-        <div class="callout-box insight"><div class="callout-title">Consider This</div><div class="callout-text">Read this twice. Then read it again before Monday. Your strategy stopped working. Now what?</div></div>
-        <span class="brand-mark">SIGNAL PILOT</span>
-      </div>
+        <!-- Slide 2: Is It You or Strategy -->
+        <div class="slide-wrapper" data-slide="2">
+            <div class="slide-label">Slide 2 - You or Strategy</div>
+            <div class="slide slide-2">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <span class="question-icon">&#10067;</span>
+                    <h2>Is It The Strategy or You?</h2>
+                    <div class="question-box">
+                        <div class="questions">
+                            <div class="question-item">
+                                <div class="question-bullet"></div>
+                                <div class="question-text">Are you following rules exactly?</div>
+                            </div>
+                            <div class="question-item">
+                                <div class="question-bullet"></div>
+                                <div class="question-text">Any emotional decisions?</div>
+                            </div>
+                            <div class="question-item">
+                                <div class="question-bullet"></div>
+                                <div class="question-text">Execution errors?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">2 / 6</div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Has Regime Changed -->
+        <div class="slide-wrapper" data-slide="3">
+            <div class="slide-label">Slide 3 - Regime Change</div>
+            <div class="slide slide-3">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <span class="question-icon">&#127760;</span>
+                    <h2>Has The Regime Changed?</h2>
+                    <div class="question-box">
+                        <div class="questions">
+                            <div class="question-item">
+                                <div class="question-bullet"></div>
+                                <div class="question-text">Was it trending, now ranging?</div>
+                            </div>
+                            <div class="question-item">
+                                <div class="question-bullet"></div>
+                                <div class="question-text">Volatility different?</div>
+                            </div>
+                            <div class="question-item">
+                                <div class="question-bullet"></div>
+                                <div class="question-text">Strategy may need different regime</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">3 / 6</div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Just a Losing Streak -->
+        <div class="slide-wrapper" data-slide="4">
+            <div class="slide-label">Slide 4 - Losing Streak</div>
+            <div class="slide slide-4">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <span class="question-icon">&#127922;</span>
+                    <h2>Is It Just A Losing Streak?</h2>
+                    <div class="question-box">
+                        <div class="questions">
+                            <div class="question-item">
+                                <div class="question-bullet"></div>
+                                <div class="question-text">All strategies have drawdowns</div>
+                            </div>
+                            <div class="question-item">
+                                <div class="question-bullet"></div>
+                                <div class="question-text">10 losses in a row is possible</div>
+                            </div>
+                            <div class="question-item">
+                                <div class="question-bullet"></div>
+                                <div class="question-text">Check if within normal variance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-number">4 / 6</div>
+            </div>
+        </div>
+
+        <!-- Slide 5: What To Do -->
+        <div class="slide-wrapper" data-slide="5">
+            <div class="slide-label">Slide 5 - What To Do</div>
+            <div class="slide slide-5">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <h2>What To Do</h2>
+                    <div class="actions-list">
+                        <div class="action-item">
+                            <div class="check-icon">&#10003;</div>
+                            <span class="action-text">Reduce size temporarily</span>
+                        </div>
+                        <div class="action-item">
+                            <div class="check-icon">&#10003;</div>
+                            <span class="action-text">Paper trade while diagnosing</span>
+                        </div>
+                        <div class="action-item">
+                            <div class="check-icon">&#10003;</div>
+                            <span class="action-text">Review recent trades closely</span>
+                        </div>
+                        <div class="action-item">
+                            <div class="check-icon">&#10003;</div>
+                            <span class="action-text">Compare to backtest results</span>
+                        </div>
+                    </div>
+                    <div class="bottom-note">"Don't abandon too quick. Don't drown either."</div>
+                </div>
+                <div class="slide-number">5 / 6</div>
+            </div>
+        </div>
+
+        <!-- Slide 6: CTA -->
+        <div class="slide-wrapper" data-slide="6">
+            <div class="slide-label">Slide 6 - CTA</div>
+            <div class="slide slide-6">
+                <div class="video-background">
+                    <video autoplay muted loop playsinline>
+                        <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slide-content">
+                    <div class="brand-header">Signal Pilot</div>
+                    <span class="cta-icon">&#128218;</span>
+                    <h2>Diagnose First,<br>Decide Second</h2>
+                    <div class="tagline">Every drawdown has a cause</div>
+                    <div class="cta-button">Full Article</div>
+                    <div class="link-hint">Link in bio</div>
+                </div>
+                <div class="slide-number">6 / 6</div>
+            </div>
+        </div>
     </div>
 
-    <div class="slide-wrapper" data-slide="3">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 06</span>
-        <div class="slide-subtitle">The Pattern</div>
-        <h2 class="slide-title">THE FIX:</h2>
-        <ul class="arrow-list"><li><span class="arrow">→</span> THE FIX:</li><li><span class="arrow">→</span> ◾ Check the regime (Volume Oracle helps)</li><li><span class="arrow">→</span> ◾ Reduce size during drawdowns</li><li><span class="arrow">→</span> ◾ Adapt or wait — don't force</li><li><span class="arrow">→</span> Max drawdown rule: 10% daily loss = stop trading today.</li></ul>
-        <span class="brand-mark">SIGNAL PILOT</span>
-      </div>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgSelect = document.getElementById('bg-select');
+            const opacitySlider = document.getElementById('opacity-slider');
+            const exportBtn = document.getElementById('export-btn');
+            const slideWrappers = document.querySelectorAll('.slide-wrapper');
+            let exportMode = false;
+            let currentSlide = 0;
 
-    <div class="slide-wrapper" data-slide="4">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 06</span>
-        <div class="slide-subtitle">Why This Happens</div>
-        <h2 class="slide-title">BEFORE YOU ABANDON IT:</h2>
-        <ul class="arrow-list"><li><span class="arrow">→</span> BEFORE YOU ABANDON IT:</li><li><span class="arrow">→</span> ❓ IS IT THE STRATEGY OR YOU?</li><li><span class="arrow">→</span> ◾ Are you following rules exactly?</li><li><span class="arrow">→</span> ◾ Any emotional decisions?</li><li><span class="arrow">→</span> ◾ Execution errors?</li></ul>
-        <span class="brand-mark">SIGNAL PILOT</span>
-      </div>
-    </div>
+            const videoMap = {
+                'starfield': '../../videos/starfield-bg.mp4',
+                'waves': '../../videos/waves-bg.mp4',
+                'particles': '../../videos/particles-bg.mp4',
+                'none': ''
+            };
 
-    <div class="slide-wrapper" data-slide="5">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 06</span>
-        <div class="slide-subtitle">The Fix</div>
-        <h2 class="slide-title">◾ All strategies have drawdowns</h2>
-        <ul class="arrow-list"><li><span class="arrow">→</span> ◾ All strategies have drawdowns</li><li><span class="arrow">→</span> ◾ 10 losses in a row is possible</li><li><span class="arrow">→</span> ◾ Check if within normal variance</li><li><span class="arrow">→</span> WHAT TO DO:</li><li><span class="arrow">→</span> ◾ Reduce size temporarily</li></ul>
-        <span class="brand-mark">SIGNAL PILOT</span>
-      </div>
-    </div>
+            bgSelect.addEventListener('change', function() {
+                const videos = document.querySelectorAll('.video-background video');
+                videos.forEach(video => {
+                    if (this.value === 'none') {
+                        video.style.display = 'none';
+                    } else {
+                        video.style.display = 'block';
+                        video.src = videoMap[this.value];
+                        video.load();
+                        video.play();
+                    }
+                });
+            });
 
-    <div class="slide-wrapper" data-slide="6">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 06</span>
-        <div class="slide-icon">📖</div>
-        <h2 class="slide-title">Read the Full Article</h2>
-        <p class="slide-body">Deep dive into this topic.</p>
-        <a href="https://signalpilot.io/" class="cta-link">Read Article</a>
-        <span class="brand-mark">SIGNAL PILOT</span>
-      </div>
-    </div>
-  </div>
+            opacitySlider.addEventListener('input', function() {
+                document.documentElement.style.setProperty('--video-opacity', this.value / 100);
+            });
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 6</span>
-    <button onclick="nextSlide()">Next →</button>
-  </div>
+            exportBtn.addEventListener('click', function() {
+                exportMode = !exportMode;
+                document.body.classList.toggle('export-mode', exportMode);
+                this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+                if (exportMode) {
+                    slideWrappers.forEach((wrapper, index) => {
+                        wrapper.classList.toggle('active', index === currentSlide);
+                    });
+                }
+            });
 
-  <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0;
-    let exportMode = false;
-    bgToggle.addEventListener('change', (e) => { videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'); });
-    opacitySlider.addEventListener('input', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value / 100); });
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
-  </script>
+            document.addEventListener('keydown', function(e) {
+                if (!exportMode) return;
+
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    currentSlide = (currentSlide + 1) % slideWrappers.length;
+                    slideWrappers.forEach((wrapper, index) => {
+                        wrapper.classList.toggle('active', index === currentSlide);
+                    });
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+                    slideWrappers.forEach((wrapper, index) => {
+                        wrapper.classList.toggle('active', index === currentSlide);
+                    });
+                } else if (e.key === 'Escape') {
+                    exportMode = false;
+                    document.body.classList.remove('export-mode');
+                    exportBtn.textContent = 'Export Mode';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
