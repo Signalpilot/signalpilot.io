@@ -14,25 +14,33 @@
       --text-primary: #ffffff;
       --text-secondary: rgba(255,255,255,0.7);
       --text-muted: rgba(255,255,255,0.4);
-      --border-subtle: rgba(255,255,255,0.1);
+      --border-subtle: rgba(255,255,255,0.08);
       --accent-gold: #c9a962;
-      --accent-gold-dim: rgba(201,169,98,0.3);
+      --accent-orange: #f59e0b;
+      --accent-teal: #5eead4;
+      --accent-red: #f87171;
+      --accent-green: #4ade80;
+      --accent-purple: #a855f7;
+      --accent-blue: #60a5fa;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+      --font-brand: 'Gugi', sans-serif;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
     body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label { display: none; }
     body.export-mode .carousel-grid { display: block; }
     body.export-mode .slide-wrapper { display: none; margin: 0; }
     body.export-mode .slide-wrapper.active { display: block; }
     body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
     .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
     .page-title { text-align: center; margin-bottom: 2rem; }
     .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
     .page-title p { color: var(--text-muted); font-size: 0.875rem; }
@@ -40,19 +48,37 @@
     .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
     .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
     .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
+    .slide {
+      width: 100%; max-width: 540px; aspect-ratio: 4 / 5;
+      background: var(--bg-dark); border-radius: 0.5rem;
+      position: relative; overflow: hidden; display: flex; flex-direction: column;
+    }
+    .slide-content {
+      position: relative; z-index: 3; flex: 1;
+      display: flex; flex-direction: column;
+      padding: clamp(20px, 5.5%, 74px);
+      padding-bottom: clamp(40px, 10%, 135px);
+    }
 
     /* ═══════════════════════════════════════════
-       SHARED — Neutral EDU slide base (NO bar)
+       GOLD / EDU THEME
        ═══════════════════════════════════════════ */
-    .slide-edu { background: linear-gradient(180deg, #0c0c11 0%, #0a0a0f 100%) !important; }
-    .slide-edu::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(201,169,98,0.04) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-edu .slide-content { z-index: 3; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
+    .slide-edu {
+      background: linear-gradient(180deg, #0c0c11 0%, #0a0a0f 100%) !important;
+    }
+    .slide-edu::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(201,169,98,0.04) 0%, transparent 100%);
+      pointer-events: none; z-index: 1;
+    }
 
-    /* LEARN badge — slide 1 only */
+    /* ═══════════════════════════════════════════
+       SLIDE 1 — HOOK
+       ═══════════════════════════════════════════ */
+    .s1-content {
+      align-items: center; text-align: center; justify-content: center;
+    }
+
     .learn-badge {
       font-family: var(--font-mono);
       font-size: clamp(8px, 1.2cqw, 12px);
@@ -63,82 +89,232 @@
       border: 1px solid rgba(201,169,98,0.3);
       border-radius: clamp(3px, 0.6cqw, 6px);
       background: rgba(201,169,98,0.06);
-      margin-bottom: 4%;
+      margin-bottom: clamp(10px, 3%, 40px);
     }
 
-    /* Slide titles */
-    .edu-title {
+    /* Journal Orb */
+    .journal-orb {
+      width: clamp(100px, 20cqw, 200px);
+      height: clamp(100px, 20cqw, 200px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%,
+        rgba(201,169,98,0.3) 0%,
+        rgba(201,169,98,0.1) 40%,
+        rgba(255,255,255,0.03) 70%,
+        transparent 100%);
+      border: 2px solid rgba(201,169,98,0.25);
+      box-shadow:
+        0 0 50px rgba(201,169,98,0.12),
+        0 0 100px rgba(201,169,98,0.04),
+        inset 0 0 30px rgba(201,169,98,0.06);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: clamp(10px, 3%, 40px);
+    }
+    .journal-orb::before {
+      content: '';
+      position: absolute; inset: 7px; border-radius: 50%;
+      border: 1.5px solid rgba(201,169,98,0.15);
+    }
+    .journal-orb::after {
+      content: '';
+      position: absolute; inset: 18px; border-radius: 50%;
+      border: 1px dashed rgba(201,169,98,0.12);
+    }
+
+    /* CSS open book inside orb */
+    .book-vis {
+      position: relative; z-index: 2;
+      width: clamp(40px, 8cqw, 80px);
+      height: clamp(30px, 6cqw, 60px);
+    }
+    .book-page-l, .book-page-r {
+      position: absolute; top: 0;
+      width: 48%; height: 100%;
+      border-radius: clamp(2px, 0.4cqw, 4px);
+    }
+    .book-page-l {
+      left: 0;
+      background: rgba(201,169,98,0.15);
+      border: 1px solid rgba(201,169,98,0.25);
+      transform: perspective(60px) rotateY(8deg);
+    }
+    .book-page-r {
+      right: 0;
+      background: rgba(201,169,98,0.2);
+      border: 1px solid rgba(201,169,98,0.3);
+      transform: perspective(60px) rotateY(-8deg);
+    }
+    .book-line {
+      position: absolute;
+      left: 15%; right: 15%;
+      height: 1px;
+      background: rgba(201,169,98,0.2);
+    }
+    .book-line-1 { top: 25%; }
+    .book-line-2 { top: 45%; }
+    .book-line-3 { top: 65%; }
+    .book-spine {
+      position: absolute;
+      left: 50%; top: -5%;
+      width: 2px; height: 110%;
+      background: rgba(201,169,98,0.35);
+      transform: translateX(-50%);
+    }
+    .book-pen {
+      position: absolute;
+      bottom: -15%; right: 5%;
+      width: clamp(2px, 0.4cqw, 3px);
+      height: clamp(18px, 3.5cqw, 36px);
+      background: linear-gradient(180deg, rgba(201,169,98,0.5), rgba(201,169,98,0.8));
+      border-radius: 1px;
+      transform: rotate(-30deg);
+    }
+    .book-pen::before {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 2px solid transparent;
+      border-right: 2px solid transparent;
+      border-top: 4px solid rgba(201,169,98,0.8);
+    }
+
+    .hook-title {
       font-family: var(--font-serif);
       font-size: clamp(24px, 4.8cqw, 50px);
       font-weight: 700;
       color: var(--text-primary);
       line-height: 1.15;
-      margin-bottom: 3%;
+      margin-bottom: clamp(6px, 1.5%, 18px);
     }
+    .hook-title em { color: var(--accent-gold); font-style: italic; }
 
-    .edu-title em {
-      color: var(--accent-gold);
-      font-style: italic;
-    }
-
-    .edu-subtitle {
-      font-family: var(--font-sans);
-      font-size: clamp(11px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.5;
-      max-width: 85%;
-      margin-bottom: 3%;
-    }
-
-    .edu-divider {
-      width: 60px;
-      height: 2px;
+    .hook-divider {
+      width: clamp(40px, 8cqw, 80px); height: 2px;
       background: linear-gradient(90deg, transparent, rgba(201,169,98,0.5), transparent);
-      margin-bottom: 4%;
+      margin-bottom: clamp(8px, 2%, 24px);
     }
 
-    /* Inner-slide heading */
+    .hook-subtitle {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 1.7cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.5; max-width: 85%;
+    }
+
+    /* ═══════════════════════════════════════════
+       SHARED COMPONENTS
+       ═══════════════════════════════════════════ */
     .inner-heading {
       font-family: var(--font-serif);
-      font-size: clamp(18px, 3.5cqw, 36px);
+      font-size: clamp(20px, 3.8cqw, 40px);
       font-weight: 700;
       color: var(--text-primary);
       line-height: 1.2;
-      margin-bottom: 4%;
+      margin-bottom: clamp(8px, 2%, 24px);
+    }
+    .inner-heading em { color: var(--accent-gold); font-style: italic; }
+
+    .section-rule {
+      width: clamp(30px, 6cqw, 60px); height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(201,169,98,0.4), transparent);
+      margin-bottom: clamp(10px, 3%, 36px);
     }
 
-    .inner-heading em {
-      color: var(--accent-gold);
-      font-style: italic;
+    /* Icon circle */
+    .icon-circle {
+      width: clamp(34px, 6.5cqw, 56px);
+      height: clamp(34px, 6.5cqw, 56px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; flex-shrink: 0;
+    }
+    .icon-circle::before {
+      content: ''; position: absolute; inset: 4px;
+      border-radius: 50%;
+    }
+    .icon-circle .ic-letter {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.8cqw, 16px);
+      font-weight: 700;
+      position: relative; z-index: 2;
     }
 
-    /* Journal field card */
+    .ic-gold {
+      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(201,169,98,0.3);
+      box-shadow: 0 0 18px rgba(201,169,98,0.1);
+    }
+    .ic-gold::before { border: 1px solid rgba(201,169,98,0.12); }
+    .ic-gold .ic-letter { color: #c9a962; }
+
+    .ic-teal {
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(94,234,212,0.3);
+      box-shadow: 0 0 18px rgba(94,234,212,0.1);
+    }
+    .ic-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .ic-teal .ic-letter { color: #5eead4; }
+
+    .ic-orange {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.3);
+      box-shadow: 0 0 18px rgba(245,158,11,0.1);
+    }
+    .ic-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .ic-orange .ic-letter { color: #f59e0b; }
+
+    .ic-purple {
+      background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(168,85,247,0.3);
+      box-shadow: 0 0 18px rgba(168,85,247,0.1);
+    }
+    .ic-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .ic-purple .ic-letter { color: #a855f7; }
+
+    .ic-blue {
+      background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(96,165,250,0.3);
+      box-shadow: 0 0 18px rgba(96,165,250,0.1);
+    }
+    .ic-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .ic-blue .ic-letter { color: #60a5fa; }
+
+    .ic-green {
+      background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(74,222,128,0.3);
+      box-shadow: 0 0 18px rgba(74,222,128,0.1);
+    }
+    .ic-green::before { border: 1px solid rgba(74,222,128,0.12); }
+    .ic-green .ic-letter { color: #4ade80; }
+
+    .ic-red {
+      background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(248,113,113,0.3);
+      box-shadow: 0 0 18px rgba(248,113,113,0.1);
+    }
+    .ic-red::before { border: 1px solid rgba(248,113,113,0.12); }
+    .ic-red .ic-letter { color: #f87171; }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 2 — WHAT TO LOG
+       ═══════════════════════════════════════════ */
     .journal-grid {
-      width: 88%;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(5px, 1cqw, 12px);
-      margin-bottom: 4%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(5px, 1cqw, 11px);
+      margin-bottom: clamp(8px, 2%, 24px);
     }
 
     .journal-field {
-      display: flex;
-      align-items: center;
-      gap: 4%;
-      border-radius: clamp(6px, 1cqw, 12px);
-      border: 1px solid rgba(201,169,98,0.15);
+      display: flex; align-items: center;
+      gap: clamp(8px, 1.5cqw, 16px);
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(201,169,98,0.12);
       background: rgba(201,169,98,0.03);
-      padding: 3% 4%;
-    }
-
-    .field-num {
-      font-family: var(--font-serif);
-      font-size: clamp(16px, 2.5cqw, 26px);
-      font-weight: 700;
-      color: var(--accent-gold);
-      flex-shrink: 0;
-      width: 8%;
-      text-align: center;
+      padding: clamp(6px, 1.4cqw, 16px) clamp(8px, 1.6cqw, 18px);
     }
 
     .field-info { flex: 1; }
@@ -148,294 +324,614 @@
       font-size: clamp(9px, 1.5cqw, 16px);
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 1%;
+      margin-bottom: clamp(1px, 0.3cqw, 4px);
     }
 
     .field-desc {
       font-family: var(--font-sans);
       font-size: clamp(7px, 1.1cqw, 12px);
       color: var(--text-secondary);
-      line-height: 1.3;
+      line-height: 1.35;
+      margin-bottom: clamp(3px, 0.5cqw, 6px);
     }
 
-    /* Comparison */
+    .field-bar {
+      width: 100%; height: clamp(2px, 0.4cqw, 4px);
+      border-radius: 99px;
+      background: rgba(255,255,255,0.05);
+      overflow: hidden;
+    }
+    .field-bar-fill {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, rgba(201,169,98,0.3), var(--accent-gold));
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 3 — COMPARISON
+       ═══════════════════════════════════════════ */
     .compare-row {
-      width: 88%;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: clamp(8px, 1.5cqw, 16px);
-      margin-bottom: 4%;
+      gap: clamp(8px, 1.5cqw, 18px);
+      margin-bottom: clamp(10px, 2.5%, 30px);
     }
 
     .compare-card {
-      border-radius: clamp(6px, 1cqw, 12px);
-      padding: 5%;
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      padding: clamp(10px, 2cqw, 22px);
     }
-
     .compare-card.bad {
-      background: rgba(248,113,113,0.06);
-      border: 1px solid rgba(248,113,113,0.2);
+      background: rgba(248,113,113,0.04);
+      border: 1px solid rgba(248,113,113,0.18);
     }
-
     .compare-card.good {
-      background: rgba(74,222,128,0.06);
-      border: 1px solid rgba(74,222,128,0.2);
+      background: rgba(74,222,128,0.04);
+      border: 1px solid rgba(74,222,128,0.18);
     }
 
-    .compare-header {
+    .compare-header-row {
+      display: flex; align-items: center;
+      gap: clamp(6px, 1cqw, 12px);
+      margin-bottom: clamp(8px, 1.5cqw, 16px);
+    }
+    .compare-ic-small {
+      width: clamp(22px, 4cqw, 36px);
+      height: clamp(22px, 4cqw, 36px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cic-red {
+      background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.25) 0%, transparent 70%);
+      border: 1px solid rgba(248,113,113,0.25);
+    }
+    .cic-green {
+      background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.25) 0%, transparent 70%);
+      border: 1px solid rgba(74,222,128,0.25);
+    }
+    .cic-dot {
+      width: clamp(5px, 0.8cqw, 8px);
+      height: clamp(5px, 0.8cqw, 8px);
+      border-radius: 50%;
+    }
+    .cic-dot-red { background: #f87171; box-shadow: 0 0 6px rgba(248,113,113,0.5); }
+    .cic-dot-green { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,0.5); }
+
+    .compare-header-text {
       font-family: var(--font-mono);
-      font-size: clamp(7px, 1.1cqw, 12px);
+      font-size: clamp(8px, 1.2cqw, 13px);
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 6%;
     }
-
-    .compare-card.bad .compare-header { color: #f87171; }
-    .compare-card.good .compare-header { color: #4ade80; }
+    .compare-card.bad .compare-header-text { color: #f87171; }
+    .compare-card.good .compare-header-text { color: #4ade80; }
 
     .compare-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 5%;
-      margin-bottom: 5%;
+      display: flex; align-items: flex-start;
+      gap: clamp(4px, 0.8cqw, 10px);
+      margin-bottom: clamp(5px, 1cqw, 12px);
     }
+    .compare-item:last-child { margin-bottom: 0; }
 
-    .compare-icon {
-      font-size: clamp(9px, 1.4cqw, 15px);
+    .compare-marker {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.3cqw, 14px);
+      font-weight: 700;
       flex-shrink: 0;
-      margin-top: 1%;
+      margin-top: 1px;
     }
-
-    .compare-card.bad .compare-icon { color: #f87171; }
-    .compare-card.good .compare-icon { color: #4ade80; }
+    .compare-card.bad .compare-marker { color: #f87171; }
+    .compare-card.good .compare-marker { color: #4ade80; }
 
     .compare-text {
+      font-family: var(--font-sans);
       font-size: clamp(8px, 1.2cqw, 13px);
       color: var(--text-secondary);
-      line-height: 1.35;
+      line-height: 1.4;
     }
 
-    /* Review steps */
-    .review-grid {
-      width: 88%;
+    .compare-outcome {
+      margin-top: clamp(6px, 1.2cqw, 14px);
+      padding-top: clamp(6px, 1cqw, 12px);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .outcome-label {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.9cqw, 10px);
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: clamp(3px, 0.5cqw, 6px);
+    }
+    .outcome-bar {
+      width: 100%; height: clamp(4px, 0.7cqw, 7px);
+      border-radius: 99px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+    .outcome-bar-fill-bad {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, rgba(248,113,113,0.3), #f87171);
+    }
+    .outcome-bar-fill-good {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, rgba(74,222,128,0.3), #4ade80);
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 4 — WEEKLY REVIEW
+       ═══════════════════════════════════════════ */
+    .review-flow {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(4px, 0.8cqw, 10px);
+      margin-bottom: clamp(10px, 2.5%, 30px);
+    }
+
+    .review-step {
+      display: flex; align-items: center;
+      gap: clamp(8px, 1.5cqw, 16px);
+      padding: clamp(8px, 1.6cqw, 18px) clamp(10px, 2cqw, 22px);
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(201,169,98,0.12);
+      background: rgba(201,169,98,0.02);
+    }
+
+    .step-ring {
+      width: clamp(36px, 7cqw, 60px);
+      height: clamp(36px, 7cqw, 60px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; flex-shrink: 0;
+    }
+    .step-ring::before {
+      content: ''; position: absolute; inset: 4px;
+      border-radius: 50%;
+    }
+    .step-num {
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.5cqw, 26px);
+      font-weight: 700;
+      position: relative; z-index: 2;
+    }
+
+    .sr-gold {
+      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(201,169,98,0.3);
+      box-shadow: 0 0 18px rgba(201,169,98,0.1);
+    }
+    .sr-gold::before { border: 1px solid rgba(201,169,98,0.12); }
+    .sr-gold .step-num { color: #c9a962; }
+
+    .sr-teal {
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(94,234,212,0.3);
+      box-shadow: 0 0 18px rgba(94,234,212,0.1);
+    }
+    .sr-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .sr-teal .step-num { color: #5eead4; }
+
+    .sr-purple {
+      background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(168,85,247,0.3);
+      box-shadow: 0 0 18px rgba(168,85,247,0.1);
+    }
+    .sr-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .sr-purple .step-num { color: #a855f7; }
+
+    .sr-orange {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.3);
+      box-shadow: 0 0 18px rgba(245,158,11,0.1);
+    }
+    .sr-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .sr-orange .step-num { color: #f59e0b; }
+
+    .step-info { flex: 1; }
+    .step-name {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.6cqw, 17px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(2px, 0.4cqw, 5px);
+    }
+    .step-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.2cqw, 13px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-bottom: clamp(4px, 0.7cqw, 8px);
+    }
+    .step-bar {
+      width: 100%; height: clamp(3px, 0.5cqw, 5px);
+      border-radius: 99px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+    .step-bar-fill {
+      height: 100%; border-radius: 99px;
+    }
+    .sbf-gold { background: linear-gradient(90deg, rgba(201,169,98,0.3), var(--accent-gold)); }
+    .sbf-teal { background: linear-gradient(90deg, rgba(94,234,212,0.3), var(--accent-teal)); }
+    .sbf-purple { background: linear-gradient(90deg, rgba(168,85,247,0.3), var(--accent-purple)); }
+    .sbf-orange { background: linear-gradient(90deg, rgba(245,158,11,0.3), var(--accent-orange)); }
+
+    .step-connector {
+      width: 2px; height: clamp(6px, 1cqw, 12px);
+      background: rgba(201,169,98,0.15);
+      margin-left: clamp(22px, 4cqw, 38px);
+    }
+
+    .philosophy-box {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(201,169,98,0.15);
+      background: rgba(201,169,98,0.03);
+      padding: clamp(10px, 2cqw, 24px);
+      text-align: center;
+    }
+    .philosophy-text {
+      font-family: var(--font-serif);
+      font-size: clamp(11px, 1.8cqw, 19px);
+      font-weight: 500; font-style: italic;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 5 — TRUTH
+       ═══════════════════════════════════════════ */
+    .truth-orb {
+      width: clamp(60px, 12cqw, 120px);
+      height: clamp(60px, 12cqw, 120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%,
+        rgba(201,169,98,0.25) 0%,
+        rgba(201,169,98,0.08) 50%,
+        transparent 100%);
+      border: 1.5px solid rgba(201,169,98,0.2);
+      box-shadow: 0 0 40px rgba(201,169,98,0.08);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin: 0 auto clamp(10px, 2.5%, 28px);
+    }
+    .truth-orb::before {
+      content: ''; position: absolute; inset: 5px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,98,0.12);
+    }
+    .truth-orb-symbol {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 4cqw, 42px);
+      font-weight: 700;
+      color: rgba(201,169,98,0.6);
+      position: relative; z-index: 2;
+    }
+
+    .truth-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: clamp(6px, 1.2cqw, 14px);
-      margin-bottom: 4%;
+      margin-bottom: clamp(10px, 2.5%, 28px);
+    }
+    .truth-card {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      padding: clamp(8px, 1.6cqw, 18px);
+      display: flex; align-items: flex-start;
+      gap: clamp(6px, 1cqw, 12px);
+    }
+    .tc-gold {
+      background: rgba(201,169,98,0.04);
+      border: 1px solid rgba(201,169,98,0.12);
+    }
+    .tc-teal {
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+    }
+    .tc-purple {
+      background: rgba(168,85,247,0.04);
+      border: 1px solid rgba(168,85,247,0.12);
+    }
+    .tc-green {
+      background: rgba(74,222,128,0.04);
+      border: 1px solid rgba(74,222,128,0.12);
     }
 
-    .review-card {
-      border-radius: clamp(6px, 1cqw, 12px);
-      border: 1px solid rgba(201,169,98,0.15);
-      background: rgba(201,169,98,0.03);
-      padding: 5%;
+    .truth-ic-small {
+      width: clamp(22px, 4cqw, 36px);
+      height: clamp(22px, 4cqw, 36px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .tic-gold {
+      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.25) 0%, transparent 70%);
+      border: 1px solid rgba(201,169,98,0.2);
+    }
+    .tic-teal {
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.25) 0%, transparent 70%);
+      border: 1px solid rgba(94,234,212,0.2);
+    }
+    .tic-purple {
+      background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.25) 0%, transparent 70%);
+      border: 1px solid rgba(168,85,247,0.2);
+    }
+    .tic-green {
+      background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.25) 0%, transparent 70%);
+      border: 1px solid rgba(74,222,128,0.2);
     }
 
-    .review-number {
-      font-family: var(--font-serif);
-      font-size: clamp(20px, 3.5cqw, 36px);
-      font-weight: 700;
-      color: var(--accent-gold);
-      line-height: 1;
-      margin-bottom: 3%;
+    .tic-dot {
+      width: clamp(5px, 0.8cqw, 8px);
+      height: clamp(5px, 0.8cqw, 8px);
+      border-radius: 50%;
     }
+    .tic-dot-gold { background: var(--accent-gold); box-shadow: 0 0 5px rgba(201,169,98,0.4); }
+    .tic-dot-teal { background: var(--accent-teal); box-shadow: 0 0 5px rgba(94,234,212,0.4); }
+    .tic-dot-purple { background: var(--accent-purple); box-shadow: 0 0 5px rgba(168,85,247,0.4); }
+    .tic-dot-green { background: var(--accent-green); box-shadow: 0 0 5px rgba(74,222,128,0.4); }
 
-    .review-name {
+    .truth-info { flex: 1; }
+    .truth-name {
       font-family: var(--font-sans);
-      font-size: clamp(9px, 1.5cqw, 16px);
+      font-size: clamp(9px, 1.4cqw, 15px);
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 3%;
+      margin-bottom: clamp(2px, 0.4cqw, 4px);
     }
-
-    .review-desc {
+    .truth-desc {
       font-family: var(--font-sans);
-      font-size: clamp(8px, 1.2cqw, 12px);
+      font-size: clamp(7px, 1.1cqw, 12px);
       color: var(--text-secondary);
       line-height: 1.4;
     }
 
-    /* Key truth */
-    .truth-card {
-      width: 88%;
-      border-radius: clamp(6px, 1cqw, 12px);
-      border: 1px solid rgba(201,169,98,0.2);
-      background: rgba(201,169,98,0.04);
-      padding: 5% 6%;
-      margin-bottom: 4%;
+    /* ═══════════════════════════════════════════
+       SLIDE 6 — CTA
+       ═══════════════════════════════════════════ */
+    .cta-content {
+      align-items: center; text-align: center; justify-content: center;
     }
 
-    .truth-heading {
-      font-family: var(--font-serif);
-      font-size: clamp(16px, 2.8cqw, 30px);
-      font-weight: 700;
-      color: var(--accent-gold);
-      margin-bottom: 4%;
-    }
-
-    .truth-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 3%;
-      margin-bottom: 4%;
-    }
-
-    .truth-dot {
-      width: clamp(4px, 0.7cqw, 8px);
-      height: clamp(4px, 0.7cqw, 8px);
+    .cta-orb {
+      width: clamp(50px, 10cqw, 100px);
+      height: clamp(50px, 10cqw, 100px);
       border-radius: 50%;
-      background: var(--accent-gold);
-      flex-shrink: 0;
-      margin-top: 1.2%;
+      background: radial-gradient(circle at 40% 35%,
+        rgba(201,169,98,0.2) 0%,
+        rgba(201,169,98,0.06) 50%,
+        transparent 100%);
+      border: 1.5px solid rgba(201,169,98,0.18);
+      box-shadow: 0 0 30px rgba(201,169,98,0.08);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: clamp(8px, 2%, 24px);
+    }
+    .cta-orb::before {
+      content: ''; position: absolute; inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,98,0.1);
+    }
+    .cta-orb-symbol {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 3cqw, 34px);
+      font-weight: 700;
+      color: rgba(201,169,98,0.5);
+      position: relative; z-index: 2;
     }
 
-    .truth-text {
-      font-family: var(--font-sans);
-      font-size: clamp(9px, 1.5cqw, 16px);
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    /* CTA */
     .cta-badge {
       font-family: var(--font-mono);
       font-size: clamp(7px, 1cqw, 11px);
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: rgba(201,169,98,0.7);
-      margin-bottom: 4%;
+      margin-bottom: clamp(6px, 1.5%, 18px);
     }
 
     .cta-title {
       font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 46px);
+      font-size: clamp(22px, 4.5cqw, 48px);
       font-weight: 700;
       color: var(--text-primary);
       line-height: 1.15;
-      margin-bottom: 3%;
+      margin-bottom: clamp(8px, 2%, 24px);
     }
+    .cta-title em { color: var(--accent-gold); font-style: italic; }
 
-    .cta-title em {
-      color: var(--accent-gold);
-      font-style: italic;
+    .cta-stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(4px, 0.8cqw, 10px);
+      margin-bottom: clamp(10px, 2.5%, 28px);
+      width: clamp(200px, 70%, 500px);
     }
-
-    .cta-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(201,169,98,0.5), transparent);
-      margin-bottom: 4%;
-    }
-
-    .cta-url {
-      font-family: var(--font-mono);
-      font-size: clamp(9px, 1.4cqw, 15px);
-      letter-spacing: 0.1em;
-      color: var(--accent-gold);
-      padding: clamp(6px, 1cqw, 12px) clamp(16px, 3cqw, 32px);
-      border: 1px solid rgba(201,169,98,0.3);
+    .cta-stat {
+      padding: clamp(4px, 0.8cqw, 10px);
       border-radius: clamp(4px, 0.8cqw, 8px);
+      border: 1px solid rgba(201,169,98,0.1);
+      background: rgba(201,169,98,0.03);
+    }
+    .cta-stat-val {
+      font-family: var(--font-mono);
+      font-size: clamp(11px, 1.8cqw, 19px);
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+    .cta-stat-lbl {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.85cqw, 9px);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .cta-pills {
+      display: flex; flex-wrap: wrap;
+      gap: clamp(4px, 0.7cqw, 8px);
+      justify-content: center;
+      margin-bottom: clamp(10px, 2.5%, 28px);
+    }
+    .cta-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 11px);
+      color: var(--text-muted);
+      padding: clamp(2px, 0.4cqw, 5px) clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: clamp(3px, 0.5cqw, 6px);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .cta-box {
+      padding: clamp(8px, 1.5cqw, 16px) clamp(16px, 3cqw, 36px);
+      border: 1px solid rgba(201,169,98,0.3);
+      border-radius: clamp(6px, 1cqw, 10px);
       background: rgba(201,169,98,0.06);
     }
+    .cta-url {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.6cqw, 17px);
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+    }
 
+    /* ═══════════════════════════════════════════
+       LOGO
+       ═══════════════════════════════════════════ */
     .slide-logo {
       position: absolute;
-      bottom: 4%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      bottom: 4%; left: 50%; transform: translateX(-50%);
+      font-family: var(--font-brand);
+      font-size: clamp(6px, 1.1cqw, 11px);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      z-index: 2;
+      color: rgba(201,169,98,0.3);
+      z-index: 4;
       white-space: nowrap;
     }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 098 — Trading Journal</h1>
-    <p>6 slides &middot; Education Series &middot; Lesson 25</p>
+    <p>6 slides · Education Series · Lesson 25</p>
   </div>
 
   <div class="carousel-grid">
 
-    <!-- ══════ SLIDE 1: Hook ══════ -->
+    <!-- ══════════════════════════════════════════
+         SLIDE 1 — HOOK
+         ══════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Hook</span>
-      <div class="slide slide-edu slide-1">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="learn-badge">Learn &middot; Lesson 25</div>
-          <h2 class="edu-title">If You're Not <em>Journaling</em>, You're Not Improving.</h2>
-          <div class="edu-divider"></div>
-          <p class="edu-subtitle">Your trading journal is the only honest mirror. It shows you exactly who you are as a trader.</p>
+      <div class="slide slide-edu">
+        <div class="slide-content s1-content">
+          <div class="learn-badge">Learn · Lesson 25</div>
+
+          <div class="journal-orb">
+            <div class="book-vis">
+              <div class="book-page-l">
+                <div class="book-line book-line-1"></div>
+                <div class="book-line book-line-2"></div>
+                <div class="book-line book-line-3"></div>
+              </div>
+              <div class="book-page-r">
+                <div class="book-line book-line-1"></div>
+                <div class="book-line book-line-2"></div>
+                <div class="book-line book-line-3"></div>
+              </div>
+              <div class="book-spine"></div>
+              <div class="book-pen"></div>
+            </div>
+          </div>
+
+          <h2 class="hook-title">If You're Not <em>Journaling</em>,<br>You're Not Improving.</h2>
+          <div class="hook-divider"></div>
+          <p class="hook-subtitle">Your trading journal is the only honest mirror. It shows you exactly who you are as a trader.</p>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 2: What to Log ══════ -->
+    <!-- ══════════════════════════════════════════
+         SLIDE 2 — WHAT TO LOG
+         ══════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — What to Log</span>
       <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
           <h3 class="inner-heading">What to <em>Log</em> Every Trade</h3>
+          <div class="section-rule"></div>
 
           <div class="journal-grid">
             <div class="journal-field">
-              <div class="field-num">1</div>
+              <div class="icon-circle ic-gold">
+                <span class="ic-letter">E</span>
+              </div>
               <div class="field-info">
                 <div class="field-name">Entry &amp; Exit</div>
                 <div class="field-desc">Price, time, and the exact reason you entered and exited</div>
+                <div class="field-bar"><div class="field-bar-fill" style="width:95%"></div></div>
               </div>
             </div>
+
             <div class="journal-field">
-              <div class="field-num">2</div>
+              <div class="icon-circle ic-teal">
+                <span class="ic-letter">S</span>
+              </div>
               <div class="field-info">
                 <div class="field-name">Setup Type</div>
                 <div class="field-desc">Which strategy or pattern triggered the trade (e.g. BOS pullback, FVG fill)</div>
+                <div class="field-bar"><div class="field-bar-fill" style="width:88%"></div></div>
               </div>
             </div>
+
             <div class="journal-field">
-              <div class="field-num">3</div>
+              <div class="icon-circle ic-orange">
+                <span class="ic-letter">R</span>
+              </div>
               <div class="field-info">
                 <div class="field-name">Risk &amp; R:R</div>
                 <div class="field-desc">Position size, stop loss, take profit, and actual risk-to-reward achieved</div>
+                <div class="field-bar"><div class="field-bar-fill" style="width:92%"></div></div>
               </div>
             </div>
+
             <div class="journal-field">
-              <div class="field-num">4</div>
+              <div class="icon-circle ic-purple">
+                <span class="ic-letter">M</span>
+              </div>
               <div class="field-info">
                 <div class="field-name">Emotional State</div>
                 <div class="field-desc">How you felt before, during, and after. Were you calm, anxious, or revenge trading?</div>
+                <div class="field-bar"><div class="field-bar-fill" style="width:80%"></div></div>
               </div>
             </div>
+
             <div class="journal-field">
-              <div class="field-num">5</div>
+              <div class="icon-circle ic-blue">
+                <span class="ic-letter">V</span>
+              </div>
               <div class="field-info">
                 <div class="field-name">Screenshot</div>
                 <div class="field-desc">Chart at entry with markup. Your future self will thank you for the visual context.</div>
+                <div class="field-bar"><div class="field-bar-fill" style="width:85%"></div></div>
               </div>
             </div>
+
             <div class="journal-field">
-              <div class="field-num">6</div>
+              <div class="icon-circle ic-green">
+                <span class="ic-letter">L</span>
+              </div>
               <div class="field-info">
                 <div class="field-name">Lesson Learned</div>
                 <div class="field-desc">One key takeaway — what would you do differently, or what confirmed your edge?</div>
+                <div class="field-bar"><div class="field-bar-fill" style="width:90%"></div></div>
               </div>
             </div>
           </div>
@@ -445,93 +941,153 @@
       </div>
     </div>
 
-    <!-- ══════ SLIDE 3: Comparison ══════ -->
+    <!-- ══════════════════════════════════════════
+         SLIDE 3 — COMPARISON
+         ══════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="3">
       <span class="slide-label">Slide 3 — Comparison</span>
       <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
           <h3 class="inner-heading"><em>Without</em> vs <em>With</em> a Journal</h3>
+          <div class="section-rule"></div>
 
           <div class="compare-row">
             <div class="compare-card bad">
-              <div class="compare-header">No Journal</div>
+              <div class="compare-header-row">
+                <div class="compare-ic-small cic-red">
+                  <div class="cic-dot cic-dot-red"></div>
+                </div>
+                <div class="compare-header-text">No Journal</div>
+              </div>
+
               <div class="compare-item">
-                <span class="compare-icon">&#10007;</span>
+                <span class="compare-marker">&#10007;</span>
                 <span class="compare-text">Repeat the same mistakes monthly</span>
               </div>
               <div class="compare-item">
-                <span class="compare-icon">&#10007;</span>
+                <span class="compare-marker">&#10007;</span>
                 <span class="compare-text">No idea which setups actually work</span>
               </div>
               <div class="compare-item">
-                <span class="compare-icon">&#10007;</span>
+                <span class="compare-marker">&#10007;</span>
                 <span class="compare-text">Emotional decisions feel logical</span>
               </div>
               <div class="compare-item">
-                <span class="compare-icon">&#10007;</span>
+                <span class="compare-marker">&#10007;</span>
                 <span class="compare-text">Growth is random, not systematic</span>
               </div>
+
+              <div class="compare-outcome">
+                <div class="outcome-label">Improvement</div>
+                <div class="outcome-bar"><div class="outcome-bar-fill-bad" style="width:15%"></div></div>
+              </div>
             </div>
+
             <div class="compare-card good">
-              <div class="compare-header">With Journal</div>
+              <div class="compare-header-row">
+                <div class="compare-ic-small cic-green">
+                  <div class="cic-dot cic-dot-green"></div>
+                </div>
+                <div class="compare-header-text">With Journal</div>
+              </div>
+
               <div class="compare-item">
-                <span class="compare-icon">&#10003;</span>
+                <span class="compare-marker">&#10003;</span>
                 <span class="compare-text">Mistakes become one-time lessons</span>
               </div>
               <div class="compare-item">
-                <span class="compare-icon">&#10003;</span>
+                <span class="compare-marker">&#10003;</span>
                 <span class="compare-text">Data reveals your true win rate</span>
               </div>
               <div class="compare-item">
-                <span class="compare-icon">&#10003;</span>
+                <span class="compare-marker">&#10003;</span>
                 <span class="compare-text">Emotions get flagged and managed</span>
               </div>
               <div class="compare-item">
-                <span class="compare-icon">&#10003;</span>
+                <span class="compare-marker">&#10003;</span>
                 <span class="compare-text">Compounding improvement over time</span>
+              </div>
+
+              <div class="compare-outcome">
+                <div class="outcome-label">Improvement</div>
+                <div class="outcome-bar"><div class="outcome-bar-fill-good" style="width:92%"></div></div>
               </div>
             </div>
           </div>
 
+          <div class="philosophy-box">
+            <div class="philosophy-text">The journal doesn't make you profitable — it makes you aware. Awareness creates the edge.</div>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 4: Weekly Review ══════ -->
+    <!-- ══════════════════════════════════════════
+         SLIDE 4 — WEEKLY REVIEW
+         ══════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="4">
       <span class="slide-label">Slide 4 — Weekly Review</span>
       <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
           <h3 class="inner-heading">The <em>Weekly</em> Review</h3>
+          <div class="section-rule"></div>
 
-          <div class="review-grid">
-            <div class="review-card">
-              <div class="review-number">01</div>
-              <div class="review-name">Count Your Trades</div>
-              <div class="review-desc">How many trades this week? Were you overtrading or undertrading relative to your plan?</div>
+          <div class="review-flow">
+            <div class="review-step">
+              <div class="step-ring sr-gold">
+                <span class="step-num">1</span>
+              </div>
+              <div class="step-info">
+                <div class="step-name">Count Your Trades</div>
+                <div class="step-desc">Were you overtrading or undertrading relative to your plan this week?</div>
+                <div class="step-bar"><div class="step-bar-fill sbf-gold" style="width:90%"></div></div>
+              </div>
             </div>
-            <div class="review-card">
-              <div class="review-number">02</div>
-              <div class="review-name">Calculate Win Rate</div>
-              <div class="review-desc">What was your actual win rate this week? Compare it to your long-term average.</div>
+
+            <div class="step-connector"></div>
+
+            <div class="review-step">
+              <div class="step-ring sr-teal">
+                <span class="step-num">2</span>
+              </div>
+              <div class="step-info">
+                <div class="step-name">Calculate Win Rate</div>
+                <div class="step-desc">What was your actual win rate? Compare it to your long-term average.</div>
+                <div class="step-bar"><div class="step-bar-fill sbf-teal" style="width:85%"></div></div>
+              </div>
             </div>
-            <div class="review-card">
-              <div class="review-number">03</div>
-              <div class="review-name">Find Patterns</div>
-              <div class="review-desc">Which setups won? Which lost? What time of day worked best? Look for recurring themes.</div>
+
+            <div class="step-connector"></div>
+
+            <div class="review-step">
+              <div class="step-ring sr-purple">
+                <span class="step-num">3</span>
+              </div>
+              <div class="step-info">
+                <div class="step-name">Find Patterns</div>
+                <div class="step-desc">Which setups won? Which lost? What time of day worked best?</div>
+                <div class="step-bar"><div class="step-bar-fill sbf-purple" style="width:80%"></div></div>
+              </div>
             </div>
-            <div class="review-card">
-              <div class="review-number">04</div>
-              <div class="review-name">Set One Goal</div>
-              <div class="review-desc">Pick one thing to improve next week. Not five. One single, measurable improvement.</div>
+
+            <div class="step-connector"></div>
+
+            <div class="review-step">
+              <div class="step-ring sr-orange">
+                <span class="step-num">4</span>
+              </div>
+              <div class="step-info">
+                <div class="step-name">Set One Goal</div>
+                <div class="step-desc">Pick one thing to improve next week. Not five. One measurable target.</div>
+                <div class="step-bar"><div class="step-bar-fill sbf-orange" style="width:95%"></div></div>
+              </div>
             </div>
+          </div>
+
+          <div class="philosophy-box">
+            <div class="philosophy-text">The weekly review converts raw data into actionable intelligence.</div>
           </div>
 
           <div class="slide-logo">Signal Pilot</div>
@@ -539,32 +1095,63 @@
       </div>
     </div>
 
-    <!-- ══════ SLIDE 5: Key Truth ══════ -->
+    <!-- ══════════════════════════════════════════
+         SLIDE 5 — TRUTH
+         ══════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Key Truth</span>
+      <span class="slide-label">Slide 5 — Truth</span>
       <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="truth-card">
-            <div class="truth-heading">The Journal Is the Edge</div>
-            <div class="truth-item">
-              <span class="truth-dot"></span>
-              <span class="truth-text">Most traders never journal — that's why most traders never improve</span>
+        <div class="slide-content" style="align-items: center;">
+          <div class="truth-orb">
+            <span class="truth-orb-symbol">J</span>
+          </div>
+
+          <h3 class="inner-heading" style="text-align:center;">The Journal Is the <em>Edge</em></h3>
+
+          <div class="truth-grid">
+            <div class="truth-card tc-gold">
+              <div class="truth-ic-small tic-gold">
+                <div class="tic-dot tic-dot-gold"></div>
+              </div>
+              <div class="truth-info">
+                <div class="truth-name">Most Never Journal</div>
+                <div class="truth-desc">That's why most traders never improve — they have no feedback loop.</div>
+              </div>
             </div>
-            <div class="truth-item">
-              <span class="truth-dot"></span>
-              <span class="truth-text">Your journal turns gut feelings into data-driven decisions</span>
+
+            <div class="truth-card tc-teal">
+              <div class="truth-ic-small tic-teal">
+                <div class="tic-dot tic-dot-teal"></div>
+              </div>
+              <div class="truth-info">
+                <div class="truth-name">Gut to Data</div>
+                <div class="truth-desc">Your journal turns gut feelings into data-driven decisions over time.</div>
+              </div>
             </div>
-            <div class="truth-item">
-              <span class="truth-dot"></span>
-              <span class="truth-text">The best traders in the world review their journals religiously</span>
+
+            <div class="truth-card tc-purple">
+              <div class="truth-ic-small tic-purple">
+                <div class="tic-dot tic-dot-purple"></div>
+              </div>
+              <div class="truth-info">
+                <div class="truth-name">Pros Review Daily</div>
+                <div class="truth-desc">The best traders in the world review their journals religiously.</div>
+              </div>
             </div>
-            <div class="truth-item">
-              <span class="truth-dot"></span>
-              <span class="truth-text">Consistency in journaling creates consistency in trading</span>
+
+            <div class="truth-card tc-green">
+              <div class="truth-ic-small tic-green">
+                <div class="tic-dot tic-dot-green"></div>
+              </div>
+              <div class="truth-info">
+                <div class="truth-name">Consistency Breeds Edge</div>
+                <div class="truth-desc">Consistency in journaling creates consistency in trading results.</div>
+              </div>
             </div>
+          </div>
+
+          <div class="philosophy-box" style="width:100%;">
+            <div class="philosophy-text">A trade without a journal entry is a lesson you chose to forget.</div>
           </div>
 
           <div class="slide-logo">Signal Pilot</div>
@@ -572,18 +1159,52 @@
       </div>
     </div>
 
-    <!-- ══════ SLIDE 6: CTA ══════ -->
+    <!-- ══════════════════════════════════════════
+         SLIDE 6 — CTA
+         ══════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="6">
       <span class="slide-label">Slide 6 — CTA</span>
       <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content" style="align-items: center; text-align: center; justify-content: center;">
-          <div class="cta-badge">Lesson 25 &middot; Trading Journal</div>
+        <div class="slide-content cta-content">
+          <div class="cta-orb">
+            <span class="cta-orb-symbol">J</span>
+          </div>
+
+          <div class="cta-badge">Lesson 25 · Trading Journal</div>
           <h2 class="cta-title">Write It Down. <em>Win</em> More.</h2>
-          <div class="cta-divider"></div>
-          <div class="cta-url">signalpilot.io</div>
+
+          <div class="cta-stat-grid">
+            <div class="cta-stat">
+              <div class="cta-stat-val">6</div>
+              <div class="cta-stat-lbl">Fields Per Trade</div>
+            </div>
+            <div class="cta-stat">
+              <div class="cta-stat-val">4</div>
+              <div class="cta-stat-lbl">Review Steps</div>
+            </div>
+            <div class="cta-stat">
+              <div class="cta-stat-val">1</div>
+              <div class="cta-stat-lbl">Weekly Goal</div>
+            </div>
+            <div class="cta-stat">
+              <div class="cta-stat-val">&infin;</div>
+              <div class="cta-stat-lbl">Compound Edge</div>
+            </div>
+          </div>
+
+          <div class="cta-pills">
+            <span class="cta-pill">Entry/Exit</span>
+            <span class="cta-pill">Setup Type</span>
+            <span class="cta-pill">Risk:Reward</span>
+            <span class="cta-pill">Emotion Log</span>
+            <span class="cta-pill">Screenshot</span>
+            <span class="cta-pill">Weekly Review</span>
+          </div>
+
+          <div class="cta-box">
+            <span class="cta-url">signalpilot.io</span>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
@@ -593,34 +1214,35 @@
 
   <script>
     (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
       const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
       const slideWrappers = document.querySelectorAll('.slide-wrapper');
       let exportMode = false;
       let currentSlide = 0;
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
       exportBtn.addEventListener('click', function() {
         exportMode = !exportMode;
         document.body.classList.toggle('export-mode', exportMode);
         this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
         if (exportMode) { currentSlide = 0; updateActiveSlide(); }
       });
+
       function updateActiveSlide() {
         slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
       }
+
       document.addEventListener('keydown', function(e) {
         if (!exportMode) return;
-        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          currentSlide = (currentSlide + 1) % slideWrappers.length;
+          updateActiveSlide();
+        } else if (e.key === 'ArrowLeft') {
+          currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+          updateActiveSlide();
+        } else if (e.key === 'Escape') {
+          exportMode = false;
+          document.body.classList.remove('export-mode');
+          exportBtn.textContent = 'Export Mode';
+        }
       });
     })();
   </script>
