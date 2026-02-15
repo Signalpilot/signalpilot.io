@@ -4,1059 +4,654 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Post 062 — Candlestick Patterns | Carousel Preview</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg-dark: #0a0a0f;
-      --bg-card: rgba(255,255,255,0.03);
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255,255,255,0.7);
-      --text-muted: rgba(255,255,255,0.4);
-      --border-subtle: rgba(255,255,255,0.1);
+      --bg-card: rgba(255, 255, 255, 0.02);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --accent-blue: #4a90d9;
       --accent-gold: #c9a962;
-      --accent-gold-dim: rgba(201,169,98,0.3);
-      --color-green: #4ade80;
-      --color-red: #ef4444;
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans: 'Inter', -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --accent-green: #4ad97a;
+      --accent-red: #d94a4a;
+      --text-primary: #e8e6e3;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-tertiary: rgba(255, 255, 255, 0.4);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
-    body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
-    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
-    .page-title { text-align: center; margin-bottom: 2rem; }
-    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
 
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
-    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
-    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5%; }
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
 
-    /* EDU slide base -- no ::after bar */
-    .slide-edu { background: linear-gradient(180deg, #0d0d10 0%, #0a0a0f 100%) !important; }
-    .slide-edu::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(201,169,98,0.04) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-edu .slide-content { z-index: 3; }
+    .controls label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
 
-    /* Logo -- grey for EDU */
-    .slide-logo {
+    .controls select, .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .page-title h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+    }
+
+    .slide-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 4 / 5;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-dark);
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide-bg {
       position: absolute;
-      bottom: 4%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .slide-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+    }
+
+    .slide.bg-black .slide-bg video {
+      opacity: 0;
+    }
+
+    .slide-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      padding: 8%;
+    }
+
+    /* Cover slide */
+    .cover-slide .slide-content {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      padding: 2% 4%;
+      border: 1px solid rgba(74, 144, 217, 0.3);
+      border-radius: 6px;
+      margin-bottom: 5%;
+      background: rgba(74, 144, 217, 0.05);
+    }
+
+    .cover-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 5cqw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+    }
+
+    .cover-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.65rem, 2.2cqw, 1rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+    }
+
+    .brand-tag {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+    }
+
+    /* Content slides */
+    .slide-number {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.45rem, 1.3cqw, 0.6rem);
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      margin-bottom: 3%;
+    }
+
+    .headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 4.5cqw, 2.2rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 4%;
+    }
+
+    .accent-gold { color: var(--accent-gold); }
+    .accent-blue { color: var(--accent-blue); }
+    .accent-red { color: var(--accent-red); }
+
+    /* Pattern card */
+    .pattern-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .pattern-card {
+      padding: 4%;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .pattern-header {
+      display: flex;
+      align-items: center;
+      gap: 3%;
+      margin-bottom: 3%;
+      padding-bottom: 3%;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .pattern-icon {
+      font-size: clamp(1.2rem, 4cqw, 2rem);
+    }
+
+    .pattern-name {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.6rem, 2.2cqw, 1rem);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .pattern-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2%;
+    }
+
+    .pattern-item {
+      display: flex;
+      align-items: center;
+      gap: 2%;
+      padding: 2.5%;
+      background: rgba(201, 169, 98, 0.05);
+      border: 1px solid rgba(201, 169, 98, 0.15);
+      border-radius: 8px;
+    }
+
+    .pattern-bullet {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pattern-text {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.8cqw, 0.8rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+    }
+
+    /* Truth card */
+    .truth-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .truth-card {
+      padding: 5%;
+      background: rgba(217, 74, 74, 0.08);
+      border: 1px solid rgba(217, 74, 74, 0.25);
+      border-radius: 16px;
+    }
+
+    .truth-title {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-red);
+      margin-bottom: 3%;
+    }
+
+    .truth-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.5cqw, 1.5rem);
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text-primary);
+    }
+
+    .truth-emphasis {
+      color: var(--accent-gold);
+      font-style: italic;
+    }
+
+    /* CTA slide */
+    .cta-slide .slide-content {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .cta-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 4.5cqw, 2.2rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+    }
+
+    .cta-subtext {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.6rem, 2cqw, 0.9rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-bottom: 4%;
+      line-height: 1.5;
+    }
+
+    .cta-button {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bg-dark);
+      background: linear-gradient(135deg, var(--accent-blue), #3a7bc8);
+      padding: 3% 6%;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    /* Export mode */
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+      padding: 0;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      max-width: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    @media (max-width: 900px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        position: static;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  
+    
+    
+    /* ═══ Slide 1 - Cinematic Hook (NEUTRAL) ═══ */
+    .slide-1 {
+      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%) !important;
+    }
+
+    .slide-1::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+
+    .slide-1 .slide-bg,
+    .slide-1 .bg-video,
+    .slide-1 .video-bg,
+    .slide-1 video {
+      display: none !important;
+    }
+
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .slide-1 .cine-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(163, 163, 163, 0.9);
+      margin-bottom: 8%;
+    }
+
+    .slide-1 .hook-main {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 4%;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .slide-1 .cine-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
+      margin-bottom: 4%;
+    }
+
+    .slide-1 .hook-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: rgba(163, 163, 163, 0.4);
+      line-height: 1.6;
+    }
+
+    .slide-1 .cine-logo {
+      position: absolute;
+      bottom: 8%;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Gugi', sans-serif;
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      z-index: 2;
-      white-space: nowrap;
-    }
-
-    /* LEARN label -- gold, only on slide 1 */
-    .learn-label {
-      display: inline-block;
-      font-family: var(--font-sans);
-      font-size: clamp(0.5rem, 1.4cqw, 0.7rem);
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(201,169,98,0.9);
-      margin-bottom: clamp(0.75rem, 2cqw, 1.25rem);
-    }
-
-    /* Gold divider */
-    .gold-divider {
-      width: clamp(2rem, 8cqw, 4rem);
-      height: 1px;
-      background: rgba(201,169,98,0.6);
-      margin: clamp(0.75rem, 2cqw, 1.25rem) 0;
-    }
-
-    /* ============================================
-       SLIDE 1 -- Hook
-       ============================================ */
-    .slide-1 .hook-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .slide-1 .hook-title {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 7cqw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: 0.02em;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-    }
-    .slide-1 .hook-title .gold { color: var(--accent-gold); }
-    .slide-1 .hook-subtitle {
-      font-family: var(--font-serif);
-      font-size: clamp(0.8rem, 2.2cqw, 1.15rem);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      max-width: 85%;
-    }
-
-    /* Hook candle shapes */
-    .slide-1 .candle-row {
-      display: flex;
-      gap: clamp(2rem, 7cqw, 4rem);
-      margin: clamp(1.25rem, 3.5cqw, 2rem) 0;
-      align-items: flex-end;
-      height: clamp(4rem, 12cqw, 7rem);
-    }
-    .slide-1 .candle-group {
-      display: flex;
-      align-items: flex-end;
-      gap: clamp(0.25rem, 0.8cqw, 0.5rem);
-      position: relative;
-    }
-    .slide-1 .candle-group-label {
-      position: absolute;
-      bottom: -1.6em;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--font-mono);
-      font-size: clamp(0.35rem, 1cqw, 0.5rem);
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    /* Single candle building blocks */
-    .candle-stick {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
-    .candle-stick .wick-top {
-      width: 1px;
-      background: rgba(255,255,255,0.4);
-    }
-    .candle-stick .body {
-      border-radius: 1px;
-    }
-    .candle-stick .wick-bottom {
-      width: 1px;
-      background: rgba(255,255,255,0.4);
-    }
-    .candle-stick .body.green {
-      background: var(--color-green);
-    }
-    .candle-stick .body.red {
-      background: var(--color-red);
-    }
-    .candle-stick .body.neutral {
-      background: rgba(255,255,255,0.5);
-    }
-
-    /* Hammer candle on slide 1 */
-    .slide-1 .hammer-candle .wick-top { height: clamp(0.15rem, 0.5cqw, 0.3rem); }
-    .slide-1 .hammer-candle .body { width: clamp(0.5rem, 1.6cqw, 0.9rem); height: clamp(0.5rem, 1.5cqw, 0.8rem); }
-    .slide-1 .hammer-candle .wick-bottom { height: clamp(2rem, 6cqw, 3.5rem); }
-
-    /* Engulfing pair on slide 1 */
-    .slide-1 .engulf-small .wick-top { height: clamp(0.3rem, 0.8cqw, 0.5rem); }
-    .slide-1 .engulf-small .body { width: clamp(0.4rem, 1.2cqw, 0.6rem); height: clamp(0.8rem, 2.2cqw, 1.3rem); }
-    .slide-1 .engulf-small .wick-bottom { height: clamp(0.3rem, 0.8cqw, 0.5rem); }
-    .slide-1 .engulf-big .wick-top { height: clamp(0.2rem, 0.5cqw, 0.3rem); }
-    .slide-1 .engulf-big .body { width: clamp(0.7rem, 2cqw, 1.1rem); height: clamp(1.5rem, 4.5cqw, 2.8rem); }
-    .slide-1 .engulf-big .wick-bottom { height: clamp(0.15rem, 0.4cqw, 0.2rem); }
-
-    /* Star pattern on slide 1 */
-    .slide-1 .star-down .wick-top { height: clamp(0.2rem, 0.5cqw, 0.3rem); }
-    .slide-1 .star-down .body { width: clamp(0.5rem, 1.5cqw, 0.8rem); height: clamp(1.5rem, 4cqw, 2.2rem); }
-    .slide-1 .star-down .wick-bottom { height: clamp(0.3rem, 0.8cqw, 0.5rem); }
-    .slide-1 .star-mid .wick-top { height: clamp(0.4rem, 1cqw, 0.6rem); }
-    .slide-1 .star-mid .body { width: clamp(0.35rem, 1cqw, 0.5rem); height: clamp(0.3rem, 0.8cqw, 0.4rem); }
-    .slide-1 .star-mid .wick-bottom { height: clamp(0.4rem, 1cqw, 0.6rem); }
-    .slide-1 .star-up .wick-top { height: clamp(0.2rem, 0.5cqw, 0.3rem); }
-    .slide-1 .star-up .body { width: clamp(0.5rem, 1.5cqw, 0.8rem); height: clamp(1.5rem, 4cqw, 2.2rem); }
-    .slide-1 .star-up .wick-bottom { height: clamp(0.3rem, 0.8cqw, 0.5rem); }
-
-    /* ============================================
-       SLIDE 2 -- The Hammer
-       ============================================ */
-    .slide-2 .section-header {
-      text-align: center;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-    }
-    .slide-2 .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.3rem, 4cqw, 2.2rem);
-      font-weight: 600;
-      margin-bottom: clamp(0.2rem, 0.6cqw, 0.35rem);
-    }
-    .slide-2 .section-sub {
-      font-size: clamp(0.5rem, 1.3cqw, 0.7rem);
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    /* Hammer visualization */
-    .slide-2 .hammer-viz {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      height: clamp(7rem, 22cqw, 13rem);
-      margin: clamp(0.5rem, 1.5cqw, 1rem) 0;
-      position: relative;
-    }
-    .slide-2 .hammer-viz::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 15%;
-      right: 15%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,169,98,0.25), transparent);
-    }
-    .slide-2 .hammer-candle-main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .slide-2 .hammer-candle-main .wick-top {
-      width: 2px;
-      height: clamp(0.3rem, 1cqw, 0.6rem);
-      background: rgba(255,255,255,0.5);
-    }
-    .slide-2 .hammer-candle-main .body {
-      width: clamp(1.5rem, 5cqw, 3rem);
-      height: clamp(1rem, 3cqw, 1.8rem);
-      background: var(--color-green);
-      border-radius: 2px;
-      position: relative;
-    }
-    .slide-2 .hammer-candle-main .wick-bottom {
-      width: 2px;
-      height: clamp(3.5rem, 11cqw, 6.5rem);
-      background: rgba(255,255,255,0.5);
-    }
-
-    /* Hammer annotations */
-    .slide-2 .hammer-annotation-body {
-      position: absolute;
-      right: calc(50% + clamp(2.5rem, 8cqw, 5rem));
-      top: 5%;
-      display: flex;
-      align-items: center;
-      gap: clamp(0.25rem, 0.6cqw, 0.4rem);
-    }
-    .slide-2 .hammer-annotation-wick {
-      position: absolute;
-      right: calc(50% + clamp(2.5rem, 8cqw, 5rem));
-      bottom: 20%;
-      display: flex;
-      align-items: center;
-      gap: clamp(0.25rem, 0.6cqw, 0.4rem);
-    }
-    .slide-2 .anno-text {
-      font-family: var(--font-mono);
-      font-size: clamp(0.4rem, 1.1cqw, 0.6rem);
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-    .slide-2 .anno-line {
-      width: clamp(0.75rem, 2.5cqw, 1.5rem);
-      height: 1px;
-      background: rgba(255,255,255,0.2);
-    }
-
-    /* Key points */
-    .slide-2 .key-points {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(0.3rem, 0.9cqw, 0.6rem);
-      flex: 1;
-      justify-content: flex-end;
-    }
-    .slide-2 .kp-item {
-      display: flex;
-      align-items: flex-start;
-      gap: clamp(0.4rem, 1cqw, 0.65rem);
-      padding: clamp(0.5rem, 1.4cqw, 0.85rem);
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: clamp(0.25rem, 0.6cqw, 0.4rem);
-    }
-    .slide-2 .kp-bullet {
-      width: clamp(0.3rem, 0.8cqw, 0.45rem);
-      height: clamp(0.3rem, 0.8cqw, 0.45rem);
-      border-radius: 50%;
-      background: var(--accent-gold);
-      flex-shrink: 0;
-      margin-top: 0.3em;
-    }
-    .slide-2 .kp-text {
-      font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-    .slide-2 .kp-text .gold { color: var(--accent-gold); font-weight: 600; }
-
-    /* ============================================
-       SLIDE 3 -- The Engulfing
-       ============================================ */
-    .slide-3 .section-header {
-      text-align: center;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-    }
-    .slide-3 .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.3rem, 4cqw, 2.2rem);
-      font-weight: 600;
-      margin-bottom: clamp(0.2rem, 0.6cqw, 0.35rem);
-    }
-    .slide-3 .section-sub {
-      font-size: clamp(0.5rem, 1.3cqw, 0.7rem);
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    /* Engulfing visualization */
-    .slide-3 .engulf-viz {
-      display: flex;
-      justify-content: center;
-      gap: clamp(2rem, 7cqw, 4.5rem);
-      margin: clamp(0.5rem, 1.5cqw, 1rem) 0;
-      height: clamp(5rem, 16cqw, 9rem);
-    }
-    .slide-3 .engulf-example {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: clamp(0.3rem, 0.8cqw, 0.5rem);
-    }
-    .slide-3 .engulf-pair {
-      display: flex;
-      align-items: flex-end;
-      gap: clamp(0.2rem, 0.5cqw, 0.3rem);
-      flex: 1;
-    }
-    .slide-3 .engulf-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.38rem, 1cqw, 0.52rem);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .slide-3 .engulf-label.bull { color: var(--color-green); }
-    .slide-3 .engulf-label.bear { color: var(--color-red); }
-
-    /* Bullish engulfing candles */
-    .slide-3 .bull-small {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .slide-3 .bull-small .wick-top { width: 1px; height: clamp(0.4rem, 1cqw, 0.6rem); background: rgba(255,255,255,0.4); }
-    .slide-3 .bull-small .body { width: clamp(0.5rem, 1.5cqw, 0.8rem); height: clamp(1rem, 3cqw, 1.8rem); background: var(--color-red); border-radius: 1px; }
-    .slide-3 .bull-small .wick-bottom { width: 1px; height: clamp(0.3rem, 0.8cqw, 0.5rem); background: rgba(255,255,255,0.4); }
-
-    .slide-3 .bull-big {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .slide-3 .bull-big .wick-top { width: 1px; height: clamp(0.2rem, 0.5cqw, 0.3rem); background: rgba(255,255,255,0.4); }
-    .slide-3 .bull-big .body { width: clamp(0.9rem, 2.8cqw, 1.5rem); height: clamp(2rem, 6cqw, 3.5rem); background: var(--color-green); border-radius: 2px; }
-    .slide-3 .bull-big .wick-bottom { width: 1px; height: clamp(0.15rem, 0.4cqw, 0.2rem); background: rgba(255,255,255,0.4); }
-
-    /* Bearish engulfing candles */
-    .slide-3 .bear-small {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .slide-3 .bear-small .wick-top { width: 1px; height: clamp(0.3rem, 0.8cqw, 0.5rem); background: rgba(255,255,255,0.4); }
-    .slide-3 .bear-small .body { width: clamp(0.5rem, 1.5cqw, 0.8rem); height: clamp(1rem, 3cqw, 1.8rem); background: var(--color-green); border-radius: 1px; }
-    .slide-3 .bear-small .wick-bottom { width: 1px; height: clamp(0.4rem, 1cqw, 0.6rem); background: rgba(255,255,255,0.4); }
-
-    .slide-3 .bear-big {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .slide-3 .bear-big .wick-top { width: 1px; height: clamp(0.15rem, 0.4cqw, 0.2rem); background: rgba(255,255,255,0.4); }
-    .slide-3 .bear-big .body { width: clamp(0.9rem, 2.8cqw, 1.5rem); height: clamp(2rem, 6cqw, 3.5rem); background: var(--color-red); border-radius: 2px; }
-    .slide-3 .bear-big .wick-bottom { width: 1px; height: clamp(0.2rem, 0.5cqw, 0.3rem); background: rgba(255,255,255,0.4); }
-
-    /* Arrow between candles */
-    .slide-3 .engulf-arrow {
-      display: flex;
-      align-items: center;
-      font-size: clamp(0.5rem, 1.2cqw, 0.7rem);
-      color: var(--text-muted);
-      align-self: center;
-    }
-
-    /* Key points for slide 3 */
-    .slide-3 .key-points {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(0.3rem, 0.9cqw, 0.6rem);
-      flex: 1;
-      justify-content: flex-end;
-    }
-    .slide-3 .kp-item {
-      display: flex;
-      align-items: flex-start;
-      gap: clamp(0.4rem, 1cqw, 0.65rem);
-      padding: clamp(0.5rem, 1.4cqw, 0.85rem);
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: clamp(0.25rem, 0.6cqw, 0.4rem);
-    }
-    .slide-3 .kp-bullet {
-      width: clamp(0.3rem, 0.8cqw, 0.45rem);
-      height: clamp(0.3rem, 0.8cqw, 0.45rem);
-      border-radius: 50%;
-      background: var(--accent-gold);
-      flex-shrink: 0;
-      margin-top: 0.3em;
-    }
-    .slide-3 .kp-text {
-      font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* ============================================
-       SLIDE 4 -- The Morning Star
-       ============================================ */
-    .slide-4 .section-header {
-      text-align: center;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-    }
-    .slide-4 .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.3rem, 4cqw, 2.2rem);
-      font-weight: 600;
-      margin-bottom: clamp(0.2rem, 0.6cqw, 0.35rem);
-    }
-    .slide-4 .section-sub {
-      font-size: clamp(0.5rem, 1.3cqw, 0.7rem);
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    /* Morning Star visualization */
-    .slide-4 .star-viz {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      gap: clamp(0.5rem, 1.5cqw, 1rem);
-      height: clamp(6rem, 18cqw, 10rem);
-      margin: clamp(0.5rem, 1.5cqw, 1rem) 0;
-      position: relative;
-    }
-    .slide-4 .star-viz::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 15%;
-      right: 15%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,169,98,0.25), transparent);
-    }
-
-    /* Flow arrows between candles */
-    .slide-4 .flow-arrow {
-      display: flex;
-      align-items: center;
-      color: var(--text-muted);
-      font-size: clamp(0.6rem, 1.5cqw, 0.85rem);
-      align-self: center;
-      margin-bottom: clamp(1.5rem, 5cqw, 3rem);
-    }
-
-    /* Down candle */
-    .slide-4 .star-down-candle {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .slide-4 .star-down-candle .wick-top { width: 2px; height: clamp(0.3rem, 0.8cqw, 0.5rem); background: rgba(255,255,255,0.4); }
-    .slide-4 .star-down-candle .body { width: clamp(1.2rem, 3.5cqw, 2rem); height: clamp(2.5rem, 8cqw, 4.5rem); background: var(--color-red); border-radius: 2px; }
-    .slide-4 .star-down-candle .wick-bottom { width: 2px; height: clamp(0.5rem, 1.2cqw, 0.8rem); background: rgba(255,255,255,0.4); }
-
-    /* Indecision candle (doji-like) */
-    .slide-4 .star-indecision {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: clamp(0.25rem, 0.6cqw, 0.4rem);
-    }
-    .slide-4 .star-indecision .wick-top { width: 2px; height: clamp(0.8rem, 2.2cqw, 1.5rem); background: rgba(255,255,255,0.4); }
-    .slide-4 .star-indecision .body { width: clamp(0.6rem, 1.6cqw, 0.9rem); height: clamp(0.35rem, 0.8cqw, 0.5rem); background: rgba(255,255,255,0.5); border-radius: 1px; }
-    .slide-4 .star-indecision .wick-bottom { width: 2px; height: clamp(0.8rem, 2.2cqw, 1.5rem); background: rgba(255,255,255,0.4); }
-
-    /* Up candle */
-    .slide-4 .star-up-candle {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .slide-4 .star-up-candle .wick-top { width: 2px; height: clamp(0.5rem, 1.2cqw, 0.8rem); background: rgba(255,255,255,0.4); }
-    .slide-4 .star-up-candle .body { width: clamp(1.2rem, 3.5cqw, 2rem); height: clamp(2.5rem, 8cqw, 4.5rem); background: var(--color-green); border-radius: 2px; }
-    .slide-4 .star-up-candle .wick-bottom { width: 2px; height: clamp(0.3rem, 0.8cqw, 0.5rem); background: rgba(255,255,255,0.4); }
-
-    /* Phase labels under candles */
-    .slide-4 .phase-labels {
-      display: flex;
-      justify-content: center;
-      gap: clamp(1.5rem, 5cqw, 3.5rem);
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-    }
-    .slide-4 .phase-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.38rem, 1cqw, 0.52rem);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-align: center;
-    }
-    .slide-4 .phase-label.down { color: var(--color-red); }
-    .slide-4 .phase-label.mid { color: var(--text-muted); }
-    .slide-4 .phase-label.up { color: var(--color-green); }
-
-    /* Key points for slide 4 */
-    .slide-4 .key-points {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(0.3rem, 0.9cqw, 0.6rem);
-      flex: 1;
-      justify-content: flex-end;
-    }
-    .slide-4 .kp-item {
-      display: flex;
-      align-items: flex-start;
-      gap: clamp(0.4rem, 1cqw, 0.65rem);
-      padding: clamp(0.5rem, 1.4cqw, 0.85rem);
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: clamp(0.25rem, 0.6cqw, 0.4rem);
-    }
-    .slide-4 .kp-bullet {
-      width: clamp(0.3rem, 0.8cqw, 0.45rem);
-      height: clamp(0.3rem, 0.8cqw, 0.45rem);
-      border-radius: 50%;
-      background: var(--accent-gold);
-      flex-shrink: 0;
-      margin-top: 0.3em;
-    }
-    .slide-4 .kp-text {
-      font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-    .slide-4 .kp-text .gold { color: var(--accent-gold); font-weight: 600; }
-
-    /* ============================================
-       SLIDE 5 -- Context Is Everything
-       ============================================ */
-    .slide-5 .truth-header {
-      text-align: center;
-      margin-bottom: clamp(0.75rem, 2cqw, 1.5rem);
-    }
-    .slide-5 .truth-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.3rem, 4cqw, 2.2rem);
-      font-weight: 600;
-      margin-bottom: clamp(0.25rem, 0.8cqw, 0.5rem);
-    }
-    .slide-5 .truth-title .gold { color: var(--accent-gold); }
-
-    /* Warning callout */
-    .slide-5 .warning-callout {
-      padding: clamp(0.6rem, 1.8cqw, 1.1rem);
-      background: rgba(239,68,68,0.06);
-      border: 1px solid rgba(239,68,68,0.2);
-      border-radius: clamp(0.3rem, 0.8cqw, 0.5rem);
-      text-align: center;
-      margin-bottom: clamp(0.75rem, 2cqw, 1.5rem);
-    }
-    .slide-5 .warning-callout-text {
-      font-family: var(--font-mono);
-      font-size: clamp(0.5rem, 1.4cqw, 0.72rem);
-      font-weight: 500;
-      color: var(--color-red);
-      letter-spacing: 0.04em;
-    }
-
-    /* Two columns */
-    .slide-5 .context-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(0.5rem, 1.5cqw, 1rem);
-      flex: 1;
-      align-content: center;
-    }
-    .slide-5 .context-col {
-      padding: clamp(0.75rem, 2cqw, 1.5rem);
-      border-radius: clamp(0.3rem, 0.8cqw, 0.5rem);
-      border: 1px solid var(--border-subtle);
-      background: var(--bg-card);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: clamp(0.35rem, 1cqw, 0.6rem);
-    }
-    .slide-5 .context-col.weak {
-      border-color: rgba(255,255,255,0.08);
-    }
-    .slide-5 .context-col.strong {
-      border-color: rgba(201,169,98,0.25);
-    }
-    .slide-5 .context-scenario {
-      font-size: clamp(0.48rem, 1.3cqw, 0.68rem);
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-    .slide-5 .context-arrow {
-      font-size: clamp(0.6rem, 1.5cqw, 0.8rem);
-      color: var(--text-muted);
-    }
-    .slide-5 .context-result {
-      font-family: var(--font-serif);
-      font-size: clamp(0.8rem, 2.2cqw, 1.15rem);
-      font-weight: 600;
-    }
-    .slide-5 .context-col.weak .context-result { color: var(--text-muted); }
-    .slide-5 .context-col.strong .context-result { color: var(--accent-gold); }
-    .slide-5 .context-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: clamp(1.2rem, 3cqw, 1.8rem);
-      height: clamp(1.2rem, 3cqw, 1.8rem);
-      border-radius: 50%;
-      font-size: clamp(0.5rem, 1.3cqw, 0.7rem);
-      font-weight: 700;
-    }
-    .slide-5 .context-col.weak .context-icon {
-      background: rgba(255,255,255,0.06);
-      color: var(--text-muted);
-    }
-    .slide-5 .context-col.strong .context-icon {
-      background: rgba(201,169,98,0.12);
-      color: var(--accent-gold);
-    }
-
-    /* Bottom note */
-    .slide-5 .truth-bottom {
-      text-align: center;
-      margin-top: clamp(0.75rem, 2cqw, 1.5rem);
-      padding-top: clamp(0.5rem, 1.5cqw, 1rem);
-      border-top: 1px solid var(--border-subtle);
-    }
-    .slide-5 .truth-bottom-text {
-      font-family: var(--font-serif);
-      font-size: clamp(0.6rem, 1.7cqw, 0.9rem);
-      font-weight: 500;
-      font-style: italic;
-      color: var(--text-secondary);
-    }
-    .slide-5 .truth-bottom-text .gold { color: var(--accent-gold); font-style: normal; font-weight: 600; }
-
-    /* ============================================
-       SLIDE 6 -- CTA
-       ============================================ */
-    .slide-6 .cta-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .slide-6 .cta-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 5cqw, 2.6rem);
-      font-weight: 600;
-      line-height: 1.15;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-    }
-    .slide-6 .cta-title .gold { color: var(--accent-gold); }
-    .slide-6 .cta-subtitle {
-      font-size: clamp(0.6rem, 1.6cqw, 0.85rem);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 80%;
-      margin-bottom: clamp(1rem, 3cqw, 2rem);
-    }
-    .slide-6 .cta-box {
-      display: inline-flex;
-      align-items: center;
-      gap: clamp(0.4rem, 1cqw, 0.75rem);
-      padding: clamp(0.6rem, 1.8cqw, 1.1rem) clamp(1.2rem, 3.5cqw, 2rem);
-      border: 1px solid rgba(201,169,98,0.5);
-      border-radius: clamp(0.3rem, 0.8cqw, 0.5rem);
-      background: rgba(201,169,98,0.05);
-    }
-    .slide-6 .cta-box-text {
-      font-family: var(--font-mono);
-      font-size: clamp(0.55rem, 1.5cqw, 0.75rem);
-      font-weight: 500;
-      color: var(--accent-gold);
-      letter-spacing: 0.05em;
-    }
-    .slide-6 .cta-arrow {
-      color: var(--accent-gold);
-      font-size: clamp(0.7rem, 1.8cqw, 0.9rem);
-    }
-    .slide-6 .cta-ornament {
-      width: clamp(3rem, 10cqw, 5rem);
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,169,98,0.4), transparent);
-      margin: clamp(1rem, 3cqw, 2rem) 0;
-    }
-    .slide-6 .cta-bottom-note {
-      font-size: clamp(0.45rem, 1.2cqw, 0.6rem);
-      color: var(--text-muted);
-      font-style: italic;
+      color: rgba(163, 163, 163, 0.4);
     }
   </style>
 </head>
 <body>
-
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
+    <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.05">5%</option><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.15">15%</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 062 — Candlestick Patterns</h1>
-    <p>6 slides · Education</p>
+    <p>Instagram Carousel • 6 Slides • 1080×1350px</p>
   </div>
 
   <div class="carousel-grid">
 
-    <!-- ==================== SLIDE 1 -- Hook ==================== -->
+    <!-- Slide 1: Cover -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Hook</span>
-      <div class="slide slide-edu slide-1">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <div class="slide slide-1">
         <div class="slide-content">
-          <div class="hook-content">
-            <span class="learn-label">Learn</span>
-            <div class="gold-divider"></div>
-
-            <h2 class="hook-title">Candlestick Patterns<br>Are <span class="gold">Stories</span></h2>
-
-            <div class="candle-row">
-              <!-- Hammer shape -->
-              <div class="candle-group">
-                <div class="candle-stick hammer-candle">
-                  <div class="wick-top"></div>
-                  <div class="body green"></div>
-                  <div class="wick-bottom"></div>
-                </div>
-                <span class="candle-group-label">Hammer</span>
-              </div>
-
-              <!-- Engulfing pair -->
-              <div class="candle-group">
-                <div class="candle-stick engulf-small">
-                  <div class="wick-top"></div>
-                  <div class="body red"></div>
-                  <div class="wick-bottom"></div>
-                </div>
-                <div class="candle-stick engulf-big">
-                  <div class="wick-top"></div>
-                  <div class="body green"></div>
-                  <div class="wick-bottom"></div>
-                </div>
-                <span class="candle-group-label">Engulfing</span>
-              </div>
-
-              <!-- Star pattern -->
-              <div class="candle-group">
-                <div class="candle-stick star-down">
-                  <div class="wick-top"></div>
-                  <div class="body red"></div>
-                  <div class="wick-bottom"></div>
-                </div>
-                <div class="candle-stick star-mid">
-                  <div class="wick-top"></div>
-                  <div class="body neutral"></div>
-                  <div class="wick-bottom"></div>
-                </div>
-                <div class="candle-stick star-up">
-                  <div class="wick-top"></div>
-                  <div class="body green"></div>
-                  <div class="wick-bottom"></div>
-                </div>
-                <span class="candle-group-label">Morning Star</span>
-              </div>
-            </div>
-
-            <div class="gold-divider"></div>
-            <p class="hook-subtitle">Not magic signals</p>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
+          <div class="cine-label">LEARN</div>
+          <div class="hook-main">Candlestick Patterns</div>
+          <div class="cine-divider"></div>
+          <p class="hook-sub"></p>
+          <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 2 -- The Hammer ==================== -->
+    <!-- Slide 2: Hammer -->
     <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — The Hammer</span>
-      <div class="slide slide-edu slide-2">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 2 — Hammer</span>
+      <div class="slide">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
         <div class="slide-content">
-          <div class="section-header">
-            <h2 class="section-title">The Hammer</h2>
-            <p class="section-sub">A single-candle reversal signal</p>
-          </div>
-
-          <div class="hammer-viz">
-            <div class="hammer-annotation-body">
-              <span class="anno-text">Small body</span>
-              <div class="anno-line"></div>
-            </div>
-            <div class="hammer-annotation-wick">
-              <span class="anno-text">Long lower wick</span>
-              <div class="anno-line"></div>
-            </div>
-            <div class="hammer-candle-main">
-              <div class="wick-top"></div>
-              <div class="body"></div>
-              <div class="wick-bottom"></div>
-            </div>
-          </div>
-
-          <div class="key-points">
-            <div class="kp-item">
-              <div class="kp-bullet"></div>
-              <span class="kp-text">Long lower wick, small body at top</span>
-            </div>
-            <div class="kp-item">
-              <div class="kp-bullet"></div>
-              <span class="kp-text">Sellers pushed price down, buyers pushed back</span>
-            </div>
-            <div class="kp-item">
-              <div class="kp-bullet"></div>
-              <span class="kp-text">Potential <span class="gold">reversal</span> at support</span>
+          <div class="slide-number">Slide 02</div>
+          <h2 class="headline">The<br><span class="accent-gold">Hammer</span></h2>
+          <div class="pattern-section">
+            <div class="pattern-card">
+              <div class="pattern-header">
+                <span class="pattern-icon">🔨</span>
+                <span class="pattern-name">Hammer</span>
+              </div>
+              <div class="pattern-details">
+                <div class="pattern-item">
+                  <span class="pattern-bullet"></span>
+                  <span class="pattern-text">Long lower wick, small body</span>
+                </div>
+                <div class="pattern-item">
+                  <span class="pattern-bullet"></span>
+                  <span class="pattern-text">Sellers pushed down, buyers pushed back</span>
+                </div>
+                <div class="pattern-item">
+                  <span class="pattern-bullet"></span>
+                  <span class="pattern-text">Potential reversal at support</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 3 -- The Engulfing ==================== -->
+    <!-- Slide 3: Engulfing -->
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — The Engulfing</span>
-      <div class="slide slide-edu slide-3">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 3 — Engulfing</span>
+      <div class="slide">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
         <div class="slide-content">
-          <div class="section-header">
-            <h2 class="section-title">The Engulfing</h2>
-            <p class="section-sub">Two-candle momentum shift</p>
-          </div>
-
-          <div class="engulf-viz">
-            <!-- Bullish engulfing -->
-            <div class="engulf-example">
-              <div class="engulf-pair">
-                <div class="bull-small">
-                  <div class="wick-top"></div>
-                  <div class="body"></div>
-                  <div class="wick-bottom"></div>
+          <div class="slide-number">Slide 03</div>
+          <h2 class="headline">The<br><span class="accent-blue">Engulfing</span></h2>
+          <div class="pattern-section">
+            <div class="pattern-card">
+              <div class="pattern-header">
+                <span class="pattern-icon">🌊</span>
+                <span class="pattern-name">Engulfing</span>
+              </div>
+              <div class="pattern-details">
+                <div class="pattern-item">
+                  <span class="pattern-bullet"></span>
+                  <span class="pattern-text">Second candle completely covers first</span>
                 </div>
-                <div class="bull-big">
-                  <div class="wick-top"></div>
-                  <div class="body"></div>
-                  <div class="wick-bottom"></div>
+                <div class="pattern-item">
+                  <span class="pattern-bullet"></span>
+                  <span class="pattern-text">Momentum shift mid-battle</span>
+                </div>
+                <div class="pattern-item">
+                  <span class="pattern-bullet"></span>
+                  <span class="pattern-text">Direction of engulfing = potential direction</span>
                 </div>
               </div>
-              <span class="engulf-label bull">Bullish</span>
-            </div>
-
-            <!-- Bearish engulfing -->
-            <div class="engulf-example">
-              <div class="engulf-pair">
-                <div class="bear-small">
-                  <div class="wick-top"></div>
-                  <div class="body"></div>
-                  <div class="wick-bottom"></div>
-                </div>
-                <div class="bear-big">
-                  <div class="wick-top"></div>
-                  <div class="body"></div>
-                  <div class="wick-bottom"></div>
-                </div>
-              </div>
-              <span class="engulf-label bear">Bearish</span>
             </div>
           </div>
-
-          <div class="key-points">
-            <div class="kp-item">
-              <div class="kp-bullet"></div>
-              <span class="kp-text">Second candle completely covers first</span>
-            </div>
-            <div class="kp-item">
-              <div class="kp-bullet"></div>
-              <span class="kp-text">Momentum shift mid-battle</span>
-            </div>
-            <div class="kp-item">
-              <div class="kp-bullet"></div>
-              <span class="kp-text">Direction of engulfing = potential direction</span>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 4 -- The Morning Star ==================== -->
+    <!-- Slide 4: Morning Star -->
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — The Morning Star</span>
-      <div class="slide slide-edu slide-4">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 4 — Morning Star</span>
+      <div class="slide">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
         <div class="slide-content">
-          <div class="section-header">
-            <h2 class="section-title">The Morning Star</h2>
-            <p class="section-sub">Three-candle reversal pattern</p>
-          </div>
-
-          <div class="star-viz">
-            <div class="star-down-candle">
-              <div class="wick-top"></div>
-              <div class="body"></div>
-              <div class="wick-bottom"></div>
-            </div>
-            <div class="flow-arrow">&#8594;</div>
-            <div class="star-indecision">
-              <div class="wick-top"></div>
-              <div class="body"></div>
-              <div class="wick-bottom"></div>
-            </div>
-            <div class="flow-arrow">&#8594;</div>
-            <div class="star-up-candle">
-              <div class="wick-top"></div>
-              <div class="body"></div>
-              <div class="wick-bottom"></div>
-            </div>
-          </div>
-
-          <div class="phase-labels">
-            <span class="phase-label down">Down</span>
-            <span class="phase-label mid">Indecision</span>
-            <span class="phase-label up">Up</span>
-          </div>
-
-          <div class="key-points">
-            <div class="kp-item">
-              <div class="kp-bullet"></div>
-              <span class="kp-text">Three candle <span class="gold">reversal</span> pattern</span>
-            </div>
-            <div class="kp-item">
-              <div class="kp-bullet"></div>
-              <span class="kp-text">Down, then indecision, then up</span>
-            </div>
-            <div class="kp-item">
-              <div class="kp-bullet"></div>
-              <span class="kp-text">Story of bears losing control</span>
+          <div class="slide-number">Slide 04</div>
+          <h2 class="headline">The<br><span class="accent-gold">Morning Star</span></h2>
+          <div class="pattern-section">
+            <div class="pattern-card">
+              <div class="pattern-header">
+                <span class="pattern-icon">⭐</span>
+                <span class="pattern-name">Morning Star</span>
+              </div>
+              <div class="pattern-details">
+                <div class="pattern-item">
+                  <span class="pattern-bullet"></span>
+                  <span class="pattern-text">Three candle reversal pattern</span>
+                </div>
+                <div class="pattern-item">
+                  <span class="pattern-bullet"></span>
+                  <span class="pattern-text">Down → Indecision → Up</span>
+                </div>
+                <div class="pattern-item">
+                  <span class="pattern-bullet"></span>
+                  <span class="pattern-text">Story of bears losing control</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 5 -- The Truth ==================== -->
+    <!-- Slide 5: The Truth -->
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — The Truth</span>
-      <div class="slide slide-edu slide-5">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 5 — Truth</span>
+      <div class="slide">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
         <div class="slide-content">
-          <div class="truth-header">
-            <h2 class="truth-title">Context Is <span class="gold">Everything</span></h2>
-          </div>
-
-          <div class="warning-callout">
-            <span class="warning-callout-text">Patterns alone &#8800; guaranteed moves</span>
-          </div>
-
-          <div class="context-grid">
-            <div class="context-col weak">
-              <div class="context-icon">&#10005;</div>
-              <span class="context-scenario">Pattern at a random level</span>
-              <span class="context-arrow">&#8595;</span>
-              <span class="context-result">Weak signal</span>
-            </div>
-            <div class="context-col strong">
-              <div class="context-icon">&#10003;</div>
-              <span class="context-scenario">Pattern at key support</span>
-              <span class="context-arrow">&#8595;</span>
-              <span class="context-result">Strong signal</span>
+          <div class="slide-number">Slide 05</div>
+          <h2 class="headline">The<br><span class="accent-red">Truth</span></h2>
+          <div class="truth-container">
+            <div class="truth-card">
+              <div class="truth-title">Remember</div>
+              <p class="truth-text"><span class="truth-emphasis">Context</span> determines if the story continues.<br><br>Patterns alone ≠ guaranteed moves.</p>
             </div>
           </div>
-
-          <div class="truth-bottom">
-            <p class="truth-bottom-text"><span class="gold">Context</span> determines if the story continues</p>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 6 -- CTA ==================== -->
+    <!-- Slide 6: CTA -->
     <div class="slide-wrapper" data-slide="6">
       <span class="slide-label">Slide 6 — CTA</span>
-      <div class="slide slide-edu slide-6">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <div class="slide cta-slide">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
         <div class="slide-content">
-          <div class="cta-content">
-            <div class="gold-divider"></div>
-            <h2 class="cta-title">Master the<br><span class="gold">Patterns</span></h2>
-            <p class="cta-subtitle">Free candlestick pattern guide. Learn to read the story, not just memorize the names.</p>
-            <div class="cta-box">
-              <span class="cta-box-text">Free guide — signalpilot.io</span>
-              <span class="cta-arrow">&#8594;</span>
-            </div>
-            <div class="cta-ornament"></div>
-            <p class="cta-bottom-note">No cost. No fluff. Just clear education.</p>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
+          <h2 class="cta-headline">Master All<br><span class="accent-blue">Patterns</span></h2>
+          <p class="cta-subtext">Free PDF guide with all major candlestick patterns explained.</p>
+          <a href="#" class="cta-button">Get Free Guide</a>
+          <div class="brand-tag">SignalPilot</div>
         </div>
       </div>
     </div>
@@ -1064,38 +659,56 @@
   </div>
 
   <script>
-    (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
-      const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
-      const slideWrappers = document.querySelectorAll('.slide-wrapper');
-      let exportMode = false;
-      let currentSlide = 0;
+    const bgToggle = document.getElementById('bg-toggle');
+    const opacityControl = document.getElementById('opacity-control');
+    const slides = document.querySelectorAll('.slide');
+    const videos = document.querySelectorAll('.slide-bg video');
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
-      exportBtn.addEventListener('click', function() {
-        exportMode = !exportMode;
-        document.body.classList.toggle('export-mode', exportMode);
-        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
-        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
-      });
-      function updateActiveSlide() {
-        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
+    bgToggle.addEventListener('change', (e) => {
+      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
+    });
+
+    opacityControl.addEventListener('change', (e) => {
+      videos.forEach(video => video.style.opacity = e.target.value);
+    });
+
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
+
+    exportBtn.addEventListener('click', () => {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
+        currentExportSlide = 0;
+        updateExportSlide();
+      } else {
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
       }
-      document.addEventListener('keydown', function(e) {
-        if (!exportMode) return;
-        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
-      });
-    })();
-  </script>
+    });
 
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'ArrowLeft') {
+        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateExportSlide();
+      } else if (e.key === 'Escape') {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+        slideWrappers.forEach(w => w.classList.remove('active'));
+      }
+    });
+  </script>
 </body>
 </html>
