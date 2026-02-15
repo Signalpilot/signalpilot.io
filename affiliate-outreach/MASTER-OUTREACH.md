@@ -1055,7 +1055,7 @@ Signal Pilot Labs
 
 ### 33. Crypto Zombie (K-Dub / Kyle)
 
-**To:** [YouTube About email] (check YouTube.com/@CryptoZombie About tab, or IG @the.crypto.zombie)
+**To:** thecryptozombie@gmail.com
 **Subject:** 1,300+ videos covering every BTC cycle -I built an indicator that maps them automatically
 
 Hey K-Dub,
