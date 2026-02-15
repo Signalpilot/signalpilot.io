@@ -21,7 +21,7 @@ import {
   clearRetryCount,
 } from '../../lib/social/queue-manager.js';
 import { getPostNumber, getInstagramColumn } from '../../lib/social/posting-schedule.js';
-import { postCarousel, SITE_URL } from '../../lib/social/instagram-client.js';
+import { postCarousel } from '../../lib/social/instagram-client.js';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
@@ -33,29 +33,6 @@ function loadContent() {
     contentCache = JSON.parse(readFileSync(filePath, 'utf-8'));
   }
   return contentCache;
-}
-
-/**
- * Count how many slide PNGs exist for a post by probing public URLs.
- * Vercel serves static assets via CDN but doesn't include them in the
- * serverless function bundle, so filesystem reads fail. HEAD requests
- * against the public URL are reliable and also validate that Instagram
- * can actually fetch the images.
- */
-async function getSlideCount(postNumber) {
-  const paddedNum = String(postNumber).padStart(3, '0');
-  let count = 0;
-  for (let i = 1; i <= 10; i++) {
-    const url = `${SITE_URL}/assets/social/post-${paddedNum}/slide-${i}.png`;
-    try {
-      const res = await fetch(url, { method: 'HEAD' });
-      if (res.ok) count++;
-      else break;
-    } catch {
-      break;
-    }
-  }
-  return count;
 }
 
 export default async function handler(req, res) {
@@ -123,8 +100,8 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: false, error: `Post ${postNumber} has no caption` });
     }
 
-    // Count actual slides via public URL (Vercel doesn't expose static assets to functions)
-    const slideCount = await getSlideCount(postNumber);
+    // Get slide count from content-queue.json (set by inject-slide-counts.mjs)
+    const slideCount = post.instagram?.slideCount || 0;
     if (slideCount < 2) {
       await incrementRetryCount('instagram', postOrder);
       await logError({ platform: 'instagram', postOrder, postNumber, column, action: 'error', reason: `Only ${slideCount} slide(s) (need 2+)` });
