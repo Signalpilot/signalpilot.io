@@ -2279,7 +2279,7 @@ Zero to charting in 5 minutes:
 4. Start observing
 
 Full Quick Start guide ↓
-https://docs.signalpilot.io/quick-start/
+https://docs.signalpilot.io/start-quick//
 ```
 
 ---
@@ -3396,7 +3396,7 @@ Every. Single. Time.
 ```
 Full lesson on risk-reward math:
 
-https://education.signalpilot.io/curriculum/beginner/10-risk-reward-ratio.html
+https://education.signalpilot.io/curriculum/beginner/10-stop-losses.html
 
 #riskreward #tradingmath #trading
 ```
@@ -3611,7 +3611,7 @@ It's how MUCH you'll lose.
 ```
 Full lesson on stop strategies:
 
-https://education.signalpilot.io/curriculum/beginner/11-stop-loss-strategies.html
+https://education.signalpilot.io/curriculum/beginner/11-timeframe-illusion.html
 
 #stoploss #riskmanagement #trading
 ```
@@ -3778,7 +3778,7 @@ Don't fight the trend. Identify it first.
 ```
 Full lesson on trend identification:
 
-https://education.signalpilot.io/curriculum/beginner/12-trend-identification.html
+https://education.signalpilot.io/curriculum/beginner/12-paper-trading.html
 
 #trendtrading #marketstructure #trading
 ```
@@ -3941,7 +3941,7 @@ They flip. Remember that.
 ```
 Full lesson on support and resistance:
 
-https://education.signalpilot.io/curriculum/beginner/13-support-and-resistance.html
+https://education.signalpilot.io/curriculum/beginner/13-smart-money-concepts.html
 
 #supportresistance #trading #technicalanalysis
 ```

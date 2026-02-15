@@ -4445,7 +4445,7 @@ Link in bio 🔗
 |-------|-------|
 | Pillar | P4: Trading Psychology |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/10-risk-reward-ratio.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/10-stop-losses.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -4482,7 +4482,7 @@ Every. Single. Time.
 ```
 Full lesson on risk-reward math:
 
-https://education.signalpilot.io/curriculum/beginner/10-risk-reward-ratio.html
+https://education.signalpilot.io/curriculum/beginner/10-stop-losses.html
 
 #riskreward #tradingmath #trading
 ```
@@ -4730,7 +4730,7 @@ How many symbols are on your watchlist? More than you can watch at once? 👁️
 |-------|-------|
 | Pillar | P4: Trading Psychology |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/11-stop-loss-strategies.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/11-timeframe-illusion.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -4769,7 +4769,7 @@ It's how MUCH you'll lose.
 ```
 Full lesson on stop strategies:
 
-https://education.signalpilot.io/curriculum/beginner/11-stop-loss-strategies.html
+https://education.signalpilot.io/curriculum/beginner/11-timeframe-illusion.html
 
 #stoploss #riskmanagement #trading
 ```
@@ -4971,7 +4971,7 @@ Meet The Arbiter in bio 🔗
 |-------|-------|
 | Pillar | P3: Market Mechanics |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/12-trend-identification.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/12-paper-trading.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -5001,7 +5001,7 @@ Don't fight the trend. Identify it first.
 ```
 Full lesson on trend identification:
 
-https://education.signalpilot.io/curriculum/beginner/12-trend-identification.html
+https://education.signalpilot.io/curriculum/beginner/12-paper-trading.html
 
 #trendtrading #marketstructure #trading
 ```
@@ -5405,7 +5405,7 @@ Link in bio 🔗
 |-------|-------|
 | Pillar | P3: Market Mechanics |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/13-support-and-resistance.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/13-smart-money-concepts.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -5435,7 +5435,7 @@ They flip. Remember that.
 ```
 Full lesson on support and resistance:
 
-https://education.signalpilot.io/curriculum/beginner/13-support-and-resistance.html
+https://education.signalpilot.io/curriculum/beginner/13-smart-money-concepts.html
 
 #supportresistance #trading #technicalanalysis
 ```
@@ -5681,7 +5681,7 @@ Demo in bio 🔗
 |-------|-------|
 | Pillar | P3: Market Mechanics |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/14-candlestick-patterns.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/14-cot-report.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -5712,7 +5712,7 @@ Mid-trend? Probably nothing.
 ```
 Full lesson on candlestick patterns:
 
-https://education.signalpilot.io/curriculum/beginner/14-candlestick-patterns.html
+https://education.signalpilot.io/curriculum/beginner/14-cot-report.html
 
 #doji #candlesticks #trading
 ```
