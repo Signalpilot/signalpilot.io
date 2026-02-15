@@ -14,25 +14,33 @@
       --text-primary: #ffffff;
       --text-secondary: rgba(255,255,255,0.7);
       --text-muted: rgba(255,255,255,0.4);
-      --border-subtle: rgba(255,255,255,0.1);
+      --border-subtle: rgba(255,255,255,0.08);
       --accent-orange: #f59e0b;
-      --accent-orange-dim: rgba(245,158,11,0.3);
+      --accent-gold: #c9a962;
+      --accent-teal: #5eead4;
+      --accent-red: #f87171;
+      --accent-green: #4ade80;
+      --accent-purple: #a855f7;
+      --accent-blue: #60a5fa;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+      --font-brand: 'Gugi', sans-serif;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
     body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label { display: none; }
     body.export-mode .carousel-grid { display: block; }
     body.export-mode .slide-wrapper { display: none; margin: 0; }
     body.export-mode .slide-wrapper.active { display: block; }
     body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
     .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
     .page-title { text-align: center; margin-bottom: 2rem; }
     .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
     .page-title p { color: var(--text-muted); font-size: 0.875rem; }
@@ -40,20 +48,43 @@
     .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
     .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
     .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
+    .slide {
+      width: 100%; max-width: 540px; aspect-ratio: 4 / 5;
+      background: var(--bg-dark); border-radius: 0.5rem;
+      position: relative; overflow: hidden; display: flex; flex-direction: column;
+    }
+    .slide-content {
+      position: relative; z-index: 3; flex: 1;
+      display: flex; flex-direction: column;
+      padding: clamp(20px, 5.5%, 74px);
+      padding-bottom: clamp(40px, 10%, 135px);
+    }
 
     /* ═══════════════════════════════════════════
-       SHARED — Orange slide base (RIGHT bar S1)
+       ORANGE / WARM THEME
        ═══════════════════════════════════════════ */
-    .slide-warm { background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important; }
-    .slide-warm::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(245,158,11,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-warm.slide-1::after { content: ''; position: absolute; top: 0; right: 0; width: 18px; height: 100%; background: linear-gradient(180deg, rgba(245,158,11,0.9) 0%, rgba(217,148,74,0.7) 100%); z-index: 5; }
-    .slide-warm .slide-content { z-index: 3; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
+    .slide-warm {
+      background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important;
+    }
+    .slide-warm::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(245,158,11,0.06) 0%, transparent 100%);
+      pointer-events: none; z-index: 1;
+    }
+    .slide-warm.slide-s1::after {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: clamp(10px, 1.7cqw, 18px); height: 100%;
+      background: linear-gradient(180deg, rgba(245,158,11,0.9) 0%, rgba(217,148,74,0.7) 100%);
+      z-index: 5;
+    }
 
-    /* Milestone badge */
+    /* ═══════════════════════════════════════════
+       SLIDE 1 — HOOK
+       ═══════════════════════════════════════════ */
+    .s1-content {
+      align-items: center; text-align: center; justify-content: center;
+    }
+
     .milestone-badge {
       font-family: var(--font-mono);
       font-size: clamp(8px, 1.2cqw, 12px);
@@ -64,197 +95,871 @@
       border: 1px solid rgba(245,158,11,0.3);
       border-radius: clamp(3px, 0.6cqw, 6px);
       background: rgba(245,158,11,0.06);
-      margin-bottom: 4%;
+      margin-bottom: clamp(10px, 3%, 40px);
     }
 
-    /* Milestone number */
-    .milestone-number {
-      font-family: var(--font-serif);
-      font-size: clamp(80px, 18cqw, 180px);
-      font-weight: 700;
-      color: rgba(245,158,11,0.12);
-      line-height: 0.85;
-      margin-bottom: 2%;
-    }
-
-    /* Quote mark */
-    .quote-mark {
-      font-family: var(--font-serif);
-      font-size: clamp(40px, 8cqw, 80px);
-      font-weight: 700;
-      color: rgba(245,158,11,0.2);
-      line-height: 0.8;
-      margin-bottom: 2%;
-    }
-
-    /* Quote text */
-    .quote-text {
-      font-family: var(--font-serif);
-      font-size: clamp(16px, 3.2cqw, 34px);
-      font-weight: 500;
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.4;
-      max-width: 85%;
-      margin-bottom: 4%;
-    }
-
-    .quote-text em {
-      color: var(--accent-orange);
-      font-style: italic;
-    }
-
-    /* Divider */
-    .milestone-divider {
-      width: 80px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.7), transparent);
-      margin-bottom: 4%;
-    }
-
-    /* Reflection lines */
-    .reflection {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(6px, 1.2cqw, 14px);
-      margin-bottom: 5%;
-      width: 80%;
-    }
-
-    .reflection-line {
-      display: flex;
-      align-items: flex-start;
-      gap: 3%;
-    }
-
-    .reflection-dot {
-      width: clamp(4px, 0.8cqw, 8px);
-      height: clamp(4px, 0.8cqw, 8px);
+    /* Milestone Orb with 100 inside */
+    .mile-orb {
+      width: clamp(110px, 22cqw, 220px);
+      height: clamp(110px, 22cqw, 220px);
       border-radius: 50%;
-      background: var(--accent-orange);
-      flex-shrink: 0;
-      margin-top: 1.2%;
+      background: radial-gradient(circle at 40% 35%,
+        rgba(245,158,11,0.3) 0%,
+        rgba(245,158,11,0.1) 40%,
+        rgba(255,255,255,0.03) 70%,
+        transparent 100%);
+      border: 2px solid rgba(245,158,11,0.25);
+      box-shadow:
+        0 0 50px rgba(245,158,11,0.15),
+        0 0 100px rgba(245,158,11,0.05),
+        inset 0 0 30px rgba(245,158,11,0.06);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: clamp(10px, 3%, 40px);
+    }
+    .mile-orb::before {
+      content: '';
+      position: absolute; inset: 7px; border-radius: 50%;
+      border: 1.5px solid rgba(245,158,11,0.15);
+    }
+    .mile-orb::after {
+      content: '';
+      position: absolute; inset: 18px; border-radius: 50%;
+      border: 1px dashed rgba(245,158,11,0.12);
+    }
+    .mile-orb-num {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 7.5cqw, 80px);
+      font-weight: 700;
+      color: rgba(245,158,11,0.5);
+      line-height: 1;
+      position: relative; z-index: 2;
     }
 
-    .reflection-text {
+    .hook-title {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 4.8cqw, 50px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: clamp(6px, 1.5%, 18px);
+    }
+    .hook-title em { color: var(--accent-orange); font-style: italic; }
+
+    .hook-divider {
+      width: clamp(40px, 8cqw, 80px); height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.6), transparent);
+      margin-bottom: clamp(8px, 2%, 24px);
+    }
+
+    .hook-subtitle {
       font-family: var(--font-sans);
-      font-size: clamp(10px, 1.7cqw, 18px);
+      font-size: clamp(11px, 1.7cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.5; max-width: 85%;
+    }
+
+    /* ═══════════════════════════════════════════
+       SHARED COMPONENTS
+       ═══════════════════════════════════════════ */
+    .inner-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 3.8cqw, 40px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: clamp(8px, 2%, 24px);
+    }
+    .inner-heading em { color: var(--accent-orange); font-style: italic; }
+
+    .section-rule {
+      width: clamp(30px, 6cqw, 60px); height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.4), transparent);
+      margin-bottom: clamp(10px, 3%, 36px);
+    }
+
+    /* Icon circle */
+    .icon-circle {
+      width: clamp(34px, 6.5cqw, 56px);
+      height: clamp(34px, 6.5cqw, 56px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; flex-shrink: 0;
+    }
+    .icon-circle::before {
+      content: ''; position: absolute; inset: 4px;
+      border-radius: 50%;
+    }
+    .icon-circle .ic-letter {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.8cqw, 16px);
+      font-weight: 700;
+      position: relative; z-index: 2;
+    }
+
+    .ic-orange {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.3);
+      box-shadow: 0 0 18px rgba(245,158,11,0.1);
+    }
+    .ic-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .ic-orange .ic-letter { color: #f59e0b; }
+
+    .ic-gold {
+      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(201,169,98,0.3);
+      box-shadow: 0 0 18px rgba(201,169,98,0.1);
+    }
+    .ic-gold::before { border: 1px solid rgba(201,169,98,0.12); }
+    .ic-gold .ic-letter { color: #c9a962; }
+
+    .ic-teal {
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(94,234,212,0.3);
+      box-shadow: 0 0 18px rgba(94,234,212,0.1);
+    }
+    .ic-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .ic-teal .ic-letter { color: #5eead4; }
+
+    .ic-purple {
+      background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(168,85,247,0.3);
+      box-shadow: 0 0 18px rgba(168,85,247,0.1);
+    }
+    .ic-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .ic-purple .ic-letter { color: #a855f7; }
+
+    .ic-blue {
+      background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(96,165,250,0.3);
+      box-shadow: 0 0 18px rgba(96,165,250,0.1);
+    }
+    .ic-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .ic-blue .ic-letter { color: #60a5fa; }
+
+    .ic-green {
+      background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(74,222,128,0.3);
+      box-shadow: 0 0 18px rgba(74,222,128,0.1);
+    }
+    .ic-green::before { border: 1px solid rgba(74,222,128,0.12); }
+    .ic-green .ic-letter { color: #4ade80; }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 2 — THE JOURNEY
+       ═══════════════════════════════════════════ */
+    .journey-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1.2cqw, 14px);
+      margin-bottom: clamp(10px, 2.5%, 30px);
+    }
+
+    .journey-card {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(245,158,11,0.12);
+      background: rgba(245,158,11,0.03);
+      padding: clamp(10px, 2cqw, 22px);
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .journey-card .icon-circle {
+      margin-bottom: clamp(6px, 1cqw, 12px);
+    }
+    .journey-name {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.6cqw, 17px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(2px, 0.4cqw, 5px);
+    }
+    .journey-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.1cqw, 12px);
       color: var(--text-secondary);
       line-height: 1.4;
+      margin-bottom: clamp(4px, 0.8cqw, 8px);
+    }
+    .journey-bar {
+      width: 100%; height: clamp(3px, 0.5cqw, 5px);
+      border-radius: 99px;
+      background: rgba(255,255,255,0.05);
+      overflow: hidden;
+    }
+    .journey-bar-fill {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, rgba(245,158,11,0.3), var(--accent-orange));
     }
 
-    /* Stats row */
-    .stats-row {
-      width: 85%;
+    .philosophy-box {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(245,158,11,0.15);
+      background: rgba(245,158,11,0.03);
+      padding: clamp(10px, 2cqw, 24px);
+      text-align: center;
+    }
+    .philosophy-text {
+      font-family: var(--font-serif);
+      font-size: clamp(11px, 1.8cqw, 19px);
+      font-weight: 500; font-style: italic;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 3 — BY THE NUMBERS
+       ═══════════════════════════════════════════ */
+    .stats-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: clamp(6px, 1cqw, 10px);
-      margin-bottom: 4%;
+      gap: clamp(6px, 1.2cqw, 14px);
+      margin-bottom: clamp(10px, 2.5%, 30px);
     }
 
-    .stat-box { text-align: center; }
-
-    .stat-number {
+    .stat-card {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(245,158,11,0.12);
+      background: rgba(245,158,11,0.03);
+      padding: clamp(10px, 2cqw, 24px);
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .stat-card .icon-circle {
+      margin-bottom: clamp(6px, 1cqw, 12px);
+    }
+    .stat-num {
       font-family: var(--font-serif);
-      font-size: clamp(20px, 3.5cqw, 36px);
+      font-size: clamp(24px, 4.5cqw, 48px);
       font-weight: 700;
       color: var(--accent-orange);
       line-height: 1;
     }
-
-    .stat-label {
+    .stat-lbl {
       font-family: var(--font-mono);
-      font-size: clamp(6px, 0.9cqw, 9px);
+      font-size: clamp(6px, 0.9cqw, 10px);
       color: var(--text-muted);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-top: 3%;
+      margin-top: clamp(2px, 0.4cqw, 5px);
+      margin-bottom: clamp(4px, 0.8cqw, 8px);
+    }
+    .stat-bar {
+      width: 100%; height: clamp(3px, 0.5cqw, 5px);
+      border-radius: 99px;
+      background: rgba(255,255,255,0.05);
+      overflow: hidden;
+    }
+    .stat-bar-fill {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, rgba(245,158,11,0.3), var(--accent-orange));
     }
 
-    /* Philosophy */
-    .milestone-philosophy {
+    /* ═══════════════════════════════════════════
+       SLIDE 4 — REFLECTION
+       ═══════════════════════════════════════════ */
+    .quote-mark {
       font-family: var(--font-serif);
-      font-size: clamp(11px, 1.8cqw, 19px);
-      font-weight: 500;
-      font-style: italic;
-      color: rgba(255,255,255,0.3);
+      font-size: clamp(40px, 8cqw, 80px);
+      font-weight: 700;
+      color: rgba(245,158,11,0.15);
+      line-height: 0.8;
+      margin-bottom: clamp(4px, 1%, 12px);
+    }
+    .quote-text {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 3.2cqw, 34px);
+      font-weight: 500; font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.4;
+      max-width: 90%;
+      text-align: center;
+      margin-bottom: clamp(10px, 3%, 36px);
+    }
+    .quote-text em { color: var(--accent-orange); font-style: italic; }
+
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(5px, 1cqw, 11px);
+      width: 100%;
+      margin-bottom: clamp(10px, 2.5%, 30px);
+    }
+    .reflect-card {
+      display: flex; align-items: center;
+      gap: clamp(8px, 1.5cqw, 16px);
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(245,158,11,0.12);
+      background: rgba(245,158,11,0.02);
+      padding: clamp(7px, 1.4cqw, 16px) clamp(8px, 1.6cqw, 18px);
+    }
+    .reflect-dot-ic {
+      width: clamp(24px, 4.5cqw, 40px);
+      height: clamp(24px, 4.5cqw, 40px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .rdi-orange {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.25) 0%, transparent 70%);
+      border: 1px solid rgba(245,158,11,0.2);
+    }
+    .rdi-dot {
+      width: clamp(5px, 0.8cqw, 8px);
+      height: clamp(5px, 0.8cqw, 8px);
+      border-radius: 50%;
+      background: var(--accent-orange);
+      box-shadow: 0 0 5px rgba(245,158,11,0.4);
+    }
+    .reflect-text {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.5cqw, 16px);
+      color: var(--text-secondary);
       line-height: 1.4;
     }
 
+    /* ═══════════════════════════════════════════
+       SLIDE 5 — TRUTH
+       ═══════════════════════════════════════════ */
+    .truth-orb {
+      width: clamp(60px, 12cqw, 120px);
+      height: clamp(60px, 12cqw, 120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%,
+        rgba(245,158,11,0.25) 0%,
+        rgba(245,158,11,0.08) 50%,
+        transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.2);
+      box-shadow: 0 0 40px rgba(245,158,11,0.08);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin: 0 auto clamp(10px, 2.5%, 28px);
+    }
+    .truth-orb::before {
+      content: ''; position: absolute; inset: 5px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,158,11,0.12);
+    }
+    .truth-orb-symbol {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 4cqw, 42px);
+      font-weight: 700;
+      color: rgba(245,158,11,0.6);
+      position: relative; z-index: 2;
+    }
+
+    .truth-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1.2cqw, 14px);
+      margin-bottom: clamp(10px, 2.5%, 28px);
+    }
+    .truth-card {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      padding: clamp(8px, 1.6cqw, 18px);
+      display: flex; align-items: flex-start;
+      gap: clamp(6px, 1cqw, 12px);
+    }
+    .tc-orange {
+      background: rgba(245,158,11,0.04);
+      border: 1px solid rgba(245,158,11,0.12);
+    }
+    .tc-teal {
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+    }
+    .tc-purple {
+      background: rgba(168,85,247,0.04);
+      border: 1px solid rgba(168,85,247,0.12);
+    }
+    .tc-green {
+      background: rgba(74,222,128,0.04);
+      border: 1px solid rgba(74,222,128,0.12);
+    }
+
+    .truth-ic-small {
+      width: clamp(22px, 4cqw, 36px);
+      height: clamp(22px, 4cqw, 36px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .tic-orange {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.25) 0%, transparent 70%);
+      border: 1px solid rgba(245,158,11,0.2);
+    }
+    .tic-teal {
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.25) 0%, transparent 70%);
+      border: 1px solid rgba(94,234,212,0.2);
+    }
+    .tic-purple {
+      background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.25) 0%, transparent 70%);
+      border: 1px solid rgba(168,85,247,0.2);
+    }
+    .tic-green {
+      background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.25) 0%, transparent 70%);
+      border: 1px solid rgba(74,222,128,0.2);
+    }
+    .tic-dot {
+      width: clamp(5px, 0.8cqw, 8px);
+      height: clamp(5px, 0.8cqw, 8px);
+      border-radius: 50%;
+    }
+    .tic-dot-orange { background: var(--accent-orange); box-shadow: 0 0 5px rgba(245,158,11,0.4); }
+    .tic-dot-teal { background: var(--accent-teal); box-shadow: 0 0 5px rgba(94,234,212,0.4); }
+    .tic-dot-purple { background: var(--accent-purple); box-shadow: 0 0 5px rgba(168,85,247,0.4); }
+    .tic-dot-green { background: var(--accent-green); box-shadow: 0 0 5px rgba(74,222,128,0.4); }
+
+    .truth-info { flex: 1; }
+    .truth-name {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.4cqw, 15px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(2px, 0.4cqw, 4px);
+    }
+    .truth-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.1cqw, 12px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 6 — CTA
+       ═══════════════════════════════════════════ */
+    .cta-content {
+      align-items: center; text-align: center; justify-content: center;
+    }
+
+    .cta-orb {
+      width: clamp(50px, 10cqw, 100px);
+      height: clamp(50px, 10cqw, 100px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%,
+        rgba(245,158,11,0.2) 0%,
+        rgba(245,158,11,0.06) 50%,
+        transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.18);
+      box-shadow: 0 0 30px rgba(245,158,11,0.08);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: clamp(8px, 2%, 24px);
+    }
+    .cta-orb::before {
+      content: ''; position: absolute; inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,158,11,0.1);
+    }
+    .cta-orb-num {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 3cqw, 34px);
+      font-weight: 700;
+      color: rgba(245,158,11,0.5);
+      position: relative; z-index: 2;
+    }
+
+    .cta-badge {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 11px);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(245,158,11,0.7);
+      margin-bottom: clamp(6px, 1.5%, 18px);
+    }
+
+    .cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 48px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: clamp(8px, 2%, 24px);
+    }
+    .cta-title em { color: var(--accent-orange); font-style: italic; }
+
+    .cta-stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(4px, 0.8cqw, 10px);
+      margin-bottom: clamp(10px, 2.5%, 28px);
+      width: clamp(200px, 70%, 500px);
+    }
+    .cta-stat {
+      padding: clamp(4px, 0.8cqw, 10px);
+      border-radius: clamp(4px, 0.8cqw, 8px);
+      border: 1px solid rgba(245,158,11,0.1);
+      background: rgba(245,158,11,0.03);
+    }
+    .cta-stat-val {
+      font-family: var(--font-mono);
+      font-size: clamp(11px, 1.8cqw, 19px);
+      font-weight: 700;
+      color: var(--accent-orange);
+    }
+    .cta-stat-lbl {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.85cqw, 9px);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .cta-pills {
+      display: flex; flex-wrap: wrap;
+      gap: clamp(4px, 0.7cqw, 8px);
+      justify-content: center;
+      margin-bottom: clamp(10px, 2.5%, 28px);
+    }
+    .cta-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 11px);
+      color: var(--text-muted);
+      padding: clamp(2px, 0.4cqw, 5px) clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: clamp(3px, 0.5cqw, 6px);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .cta-box {
+      padding: clamp(8px, 1.5cqw, 16px) clamp(16px, 3cqw, 36px);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: clamp(6px, 1cqw, 10px);
+      background: rgba(245,158,11,0.06);
+    }
+    .cta-url {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.6cqw, 17px);
+      letter-spacing: 0.1em;
+      color: var(--accent-orange);
+    }
+
+    /* ═══════════════════════════════════════════
+       LOGO
+       ═══════════════════════════════════════════ */
     .slide-logo {
       position: absolute;
-      bottom: 4%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      bottom: 4%; left: 50%; transform: translateX(-50%);
+      font-family: var(--font-brand);
+      font-size: clamp(6px, 1.1cqw, 11px);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(245,158,11,0.4);
-      z-index: 2;
+      color: rgba(245,158,11,0.35);
+      z-index: 4;
       white-space: nowrap;
     }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 100 — Milestone</h1>
-    <p>1 slide &middot; Quote Card &middot; Centenary</p>
+    <p>6 slides · Centenary Celebration</p>
   </div>
 
   <div class="carousel-grid">
 
-    <!-- ══════ SLIDE 1: Milestone Quote ══════ -->
+    <!-- ══════════════════════════════════════════
+         SLIDE 1 — HOOK
+         ══════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Milestone Quote</span>
-      <div class="slide slide-warm slide-1">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide slide-warm slide-s1">
+        <div class="slide-content s1-content">
+          <div class="milestone-badge">Milestone · Post 100</div>
+
+          <div class="mile-orb">
+            <span class="mile-orb-num">100</span>
+          </div>
+
+          <h2 class="hook-title">A Thousand Trades Begin<br>with a Single <em>Signal</em>.</h2>
+          <div class="hook-divider"></div>
+          <p class="hook-subtitle">100 posts of education, insight, and conviction. This is only the beginning.</p>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 2 — THE JOURNEY
+         ══════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — The Journey</span>
+      <div class="slide slide-warm">
         <div class="slide-content">
-          <div class="milestone-badge">Milestone &middot; Post 100</div>
-          <div class="milestone-number">100</div>
+          <h3 class="inner-heading">The <em>Journey</em> So Far</h3>
+          <div class="section-rule"></div>
+
+          <div class="journey-grid">
+            <div class="journey-card">
+              <div class="icon-circle ic-orange">
+                <span class="ic-letter">E</span>
+              </div>
+              <div class="journey-name">25 Education Lessons</div>
+              <div class="journey-desc">From candlestick basics to advanced SMC concepts, a full curriculum built from zero.</div>
+              <div class="journey-bar"><div class="journey-bar-fill" style="width:100%"></div></div>
+            </div>
+
+            <div class="journey-card">
+              <div class="icon-circle ic-teal">
+                <span class="ic-letter">B</span>
+              </div>
+              <div class="journey-name">Deep Dive Blog Posts</div>
+              <div class="journey-desc">Long-form analysis on liquidity, structure, volume, and market psychology.</div>
+              <div class="journey-bar"><div class="journey-bar-fill" style="width:88%"></div></div>
+            </div>
+
+            <div class="journey-card">
+              <div class="icon-circle ic-purple">
+                <span class="ic-letter">P</span>
+              </div>
+              <div class="journey-name">7 Indicator Products</div>
+              <div class="journey-desc">The Alchemist suite — from Harmonic Oscillator to Volume Oracle to Regime Engine.</div>
+              <div class="journey-bar"><div class="journey-bar-fill" style="width:95%"></div></div>
+            </div>
+
+            <div class="journey-card">
+              <div class="icon-circle ic-gold">
+                <span class="ic-letter">Q</span>
+              </div>
+              <div class="journey-name">Quote Cards</div>
+              <div class="journey-desc">Timeless wisdom from legends of trading — discipline, patience, and process.</div>
+              <div class="journey-bar"><div class="journey-bar-fill" style="width:82%"></div></div>
+            </div>
+          </div>
+
+          <div class="philosophy-box">
+            <div class="philosophy-text">Every lesson built on the one before it. Compound knowledge is the real edge.</div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 3 — BY THE NUMBERS
+         ══════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — By The Numbers</span>
+      <div class="slide slide-warm">
+        <div class="slide-content">
+          <h3 class="inner-heading">By the <em>Numbers</em></h3>
+          <div class="section-rule"></div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="icon-circle ic-orange">
+                <span class="ic-letter">P</span>
+              </div>
+              <div class="stat-num">100</div>
+              <div class="stat-lbl">Posts</div>
+              <div class="stat-bar"><div class="stat-bar-fill" style="width:100%"></div></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="icon-circle ic-gold">
+                <span class="ic-letter">L</span>
+              </div>
+              <div class="stat-num">25</div>
+              <div class="stat-lbl">Lessons</div>
+              <div class="stat-bar"><div class="stat-bar-fill" style="width:90%"></div></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="icon-circle ic-teal">
+                <span class="ic-letter">I</span>
+              </div>
+              <div class="stat-num">7</div>
+              <div class="stat-lbl">Indicators</div>
+              <div class="stat-bar"><div class="stat-bar-fill" style="width:85%"></div></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="icon-circle ic-purple">
+                <span class="ic-letter">B</span>
+              </div>
+              <div class="stat-num">15</div>
+              <div class="stat-lbl">Blog Dives</div>
+              <div class="stat-bar"><div class="stat-bar-fill" style="width:78%"></div></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="icon-circle ic-blue">
+                <span class="ic-letter">Q</span>
+              </div>
+              <div class="stat-num">20</div>
+              <div class="stat-lbl">Quotes</div>
+              <div class="stat-bar"><div class="stat-bar-fill" style="width:82%"></div></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="icon-circle ic-green">
+                <span class="ic-letter">C</span>
+              </div>
+              <div class="stat-num">6</div>
+              <div class="stat-lbl">Chronicles</div>
+              <div class="stat-bar"><div class="stat-bar-fill" style="width:75%"></div></div>
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 4 — REFLECTION
+         ══════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Reflection</span>
+      <div class="slide slide-warm">
+        <div class="slide-content" style="align-items:center;">
           <div class="quote-mark">&ldquo;</div>
           <p class="quote-text">The journey of a thousand trades begins with a single <em>signal</em>.</p>
-          <div class="milestone-divider"></div>
 
-          <div class="reflection">
-            <div class="reflection-line">
-              <span class="reflection-dot"></span>
-              <span class="reflection-text">100 posts of education, insight, and conviction</span>
+          <div class="reflection-grid">
+            <div class="reflect-card">
+              <div class="reflect-dot-ic rdi-orange">
+                <div class="rdi-dot"></div>
+              </div>
+              <span class="reflect-text">100 posts of education, insight, and conviction</span>
             </div>
-            <div class="reflection-line">
-              <span class="reflection-dot"></span>
-              <span class="reflection-text">Every lesson built on the one before it</span>
+            <div class="reflect-card">
+              <div class="reflect-dot-ic rdi-orange">
+                <div class="rdi-dot"></div>
+              </div>
+              <span class="reflect-text">Every lesson built on the one before it</span>
             </div>
-            <div class="reflection-line">
-              <span class="reflection-dot"></span>
-              <span class="reflection-text">This is just the beginning — the best is ahead</span>
+            <div class="reflect-card">
+              <div class="reflect-dot-ic rdi-orange">
+                <div class="rdi-dot"></div>
+              </div>
+              <span class="reflect-text">The best is still ahead — we are just getting started</span>
             </div>
           </div>
 
-          <div class="stats-row">
-            <div class="stat-box">
-              <div class="stat-number">100</div>
-              <div class="stat-label">Posts</div>
+          <div class="philosophy-box" style="width:100%;">
+            <div class="philosophy-text">Thank you for being part of the journey. Your growth is our signal.</div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 5 — TRUTH
+         ══════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Truth</span>
+      <div class="slide slide-warm">
+        <div class="slide-content" style="align-items: center;">
+          <div class="truth-orb">
+            <span class="truth-orb-symbol">C</span>
+          </div>
+
+          <h3 class="inner-heading" style="text-align:center;">The <em>Deeper</em> Truth</h3>
+
+          <div class="truth-grid">
+            <div class="truth-card tc-orange">
+              <div class="truth-ic-small tic-orange">
+                <div class="tic-dot tic-dot-orange"></div>
+              </div>
+              <div class="truth-info">
+                <div class="truth-name">Consistency Compounds</div>
+                <div class="truth-desc">100 posts is proof that showing up daily creates something meaningful.</div>
+              </div>
             </div>
-            <div class="stat-box">
-              <div class="stat-number">25</div>
-              <div class="stat-label">Lessons</div>
+
+            <div class="truth-card tc-teal">
+              <div class="truth-ic-small tic-teal">
+                <div class="tic-dot tic-dot-teal"></div>
+              </div>
+              <div class="truth-info">
+                <div class="truth-name">Knowledge Is Free</div>
+                <div class="truth-desc">Every lesson we shared is an investment in the community's edge.</div>
+              </div>
             </div>
-            <div class="stat-box">
-              <div class="stat-number">7</div>
-              <div class="stat-label">Indicators</div>
+
+            <div class="truth-card tc-purple">
+              <div class="truth-ic-small tic-purple">
+                <div class="tic-dot tic-dot-purple"></div>
+              </div>
+              <div class="truth-info">
+                <div class="truth-name">Tools Amplify Edge</div>
+                <div class="truth-desc">The right indicator doesn't create skill — it amplifies the skill you already built.</div>
+              </div>
+            </div>
+
+            <div class="truth-card tc-green">
+              <div class="truth-ic-small tic-green">
+                <div class="tic-dot tic-dot-green"></div>
+              </div>
+              <div class="truth-info">
+                <div class="truth-name">The Best Is Ahead</div>
+                <div class="truth-desc">Post 100 is a foundation. The next 100 will build the castle.</div>
+              </div>
             </div>
           </div>
 
-          <p class="milestone-philosophy">Thank you for being part of the journey.</p>
+          <div class="philosophy-box" style="width:100%;">
+            <div class="philosophy-text">A milestone is not a finish line — it is proof that the direction is right.</div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 6 — CTA
+         ══════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — CTA</span>
+      <div class="slide slide-warm">
+        <div class="slide-content cta-content">
+          <div class="cta-orb">
+            <span class="cta-orb-num">C</span>
+          </div>
+
+          <div class="cta-badge">Milestone · Post 100</div>
+          <h2 class="cta-title">100 Posts.<br>One <em>Mission</em>.</h2>
+
+          <div class="cta-stat-grid">
+            <div class="cta-stat">
+              <div class="cta-stat-val">100</div>
+              <div class="cta-stat-lbl">Posts</div>
+            </div>
+            <div class="cta-stat">
+              <div class="cta-stat-val">25</div>
+              <div class="cta-stat-lbl">Lessons</div>
+            </div>
+            <div class="cta-stat">
+              <div class="cta-stat-val">7</div>
+              <div class="cta-stat-lbl">Indicators</div>
+            </div>
+            <div class="cta-stat">
+              <div class="cta-stat-val">&infin;</div>
+              <div class="cta-stat-lbl">More Ahead</div>
+            </div>
+          </div>
+
+          <div class="cta-pills">
+            <span class="cta-pill">Education</span>
+            <span class="cta-pill">Products</span>
+            <span class="cta-pill">Blog</span>
+            <span class="cta-pill">Quotes</span>
+            <span class="cta-pill">Chronicle</span>
+            <span class="cta-pill">Community</span>
+          </div>
+
+          <div class="cta-box">
+            <span class="cta-url">signalpilot.io</span>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
@@ -264,34 +969,35 @@
 
   <script>
     (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
       const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
       const slideWrappers = document.querySelectorAll('.slide-wrapper');
       let exportMode = false;
       let currentSlide = 0;
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
       exportBtn.addEventListener('click', function() {
         exportMode = !exportMode;
         document.body.classList.toggle('export-mode', exportMode);
         this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
         if (exportMode) { currentSlide = 0; updateActiveSlide(); }
       });
+
       function updateActiveSlide() {
         slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
       }
+
       document.addEventListener('keydown', function(e) {
         if (!exportMode) return;
-        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          currentSlide = (currentSlide + 1) % slideWrappers.length;
+          updateActiveSlide();
+        } else if (e.key === 'ArrowLeft') {
+          currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+          updateActiveSlide();
+        } else if (e.key === 'Escape') {
+          exportMode = false;
+          document.body.classList.remove('export-mode');
+          exportBtn.textContent = 'Export Mode';
+        }
       });
     })();
   </script>
