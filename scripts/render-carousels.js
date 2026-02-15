@@ -421,11 +421,30 @@ async function renderCarousel(page, postDir, postNumber) {
   const slideCount = await page.evaluate(() => {
     document.body.classList.add('export-mode');
 
+    // Convert <img> logo elements to text spans (fixes broken image icon)
+    document.querySelectorAll('img.logo, img.cine-logo, img.brand-mark').forEach(img => {
+      const span = document.createElement('span');
+      span.className = 'brand-mark';
+      span.textContent = 'SIGNAL PILOT';
+      img.parentNode.replaceChild(span, img);
+    });
+
     // Fix "SignalPilot" → "Signal Pilot" and "SIGNALPILOT" → "SIGNAL PILOT" everywhere
     document.querySelectorAll('.cine-logo, .brand-mark, .logo, .cta-button').forEach(el => {
       el.textContent = el.textContent
         .replace(/SignalPilot/g, 'Signal Pilot')
         .replace(/SIGNALPILOT/g, 'SIGNAL PILOT');
+    });
+
+    // Inject "SIGNAL PILOT" branding on EVERY slide that doesn't already have it
+    document.querySelectorAll('.slide-wrapper').forEach(w => {
+      if (!w.querySelector('.brand-mark, .cine-logo')) {
+        const container = w.querySelector('.slide-content') || w;
+        const brand = document.createElement('span');
+        brand.className = 'brand-mark';
+        brand.textContent = 'SIGNAL PILOT';
+        container.appendChild(brand);
+      }
     });
 
     const wrappers = document.querySelectorAll('.slide-wrapper');

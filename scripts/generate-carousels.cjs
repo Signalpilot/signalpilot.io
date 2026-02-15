@@ -65,6 +65,23 @@ function extractKeyPoints(text) {
   return lines.map(l => l.replace(/^[→•\-\d.]+\s*/, '').trim()).filter(l => l.length > 5);
 }
 
+// ── Smart truncation (word/sentence boundary aware) ────────
+function smartTruncate(text, maxLen) {
+  if (!text) return '';
+  if (text.length <= maxLen) return text;
+  const chunk = text.substring(0, maxLen);
+  // Try to break at a sentence boundary (. ? !) within the limit
+  for (let j = chunk.length - 1; j >= Math.floor(maxLen * 0.4); j--) {
+    if ('.?!'.includes(chunk[j]) && (j === chunk.length - 1 || chunk[j + 1] === ' ')) {
+      return chunk.substring(0, j + 1).trim();
+    }
+  }
+  // Fall back to last word boundary
+  const lastSpace = chunk.lastIndexOf(' ');
+  if (lastSpace > Math.floor(maxLen * 0.4)) return chunk.substring(0, lastSpace).trim();
+  return chunk.trim();
+}
+
 // ── Detect content patterns ────────────────────────────────
 function detectPatterns(tweets, caption) {
   const allText = tweets.join('\n') + '\n' + (caption || '');
@@ -312,7 +329,7 @@ function generateContentSlide(slideNum, totalSlides, subtitle, title, bodyHtml) 
         ${subtitle ? `<div class="slide-subtitle">${escHtml(subtitle)}</div>` : ''}
         ${title ? `<h2 class="slide-title">${escHtml(title)}</h2>` : ''}
         ${bodyHtml}
-        <span class="brand-mark">SIGNALPILOT</span>
+        <span class="brand-mark">SIGNAL PILOT</span>
       </div>
     </div>`;
 }
@@ -329,7 +346,7 @@ function generateCTASlide(slideNum, totalSlides, icon, title, desc, linkUrl, lin
         <h2 class="slide-title">${escHtml(title)}</h2>
         <p class="slide-body">${escHtml(desc)}</p>
         ${linkUrl ? `<a href="${escHtml(linkUrl)}" class="cta-link">${escHtml(linkText || 'Learn More')}</a>` : ''}
-        <span class="brand-mark">SIGNALPILOT</span>
+        <span class="brand-mark">SIGNAL PILOT</span>
       </div>
     </div>`;
 }
@@ -371,34 +388,45 @@ function makeQuoteBlock(quote, attr) {
 }
 
 // ── Content-aware slide builder ────────────────────────────
-function buildContentSlides(post, gridPost, tweets, totalSlides) {
+function buildContentSlides(post, gridPost, tweets, totalSlides, allContentPoints) {
   const slides = [];
   const type = post.type;
   const patterns = detectPatterns(tweets, post.instagram?.caption);
   const slideStructure = gridPost?.slideStructure || [];
 
-  // Map tweets to content chunks (skip first tweet = hook, last tweet = CTA)
-  const contentTweets = tweets.length > 2 ? tweets.slice(1, -1) : tweets.slice(0);
+  // Distribute pooled content points evenly across content slides — every slide gets unique content
+  const numContentSlides = totalSlides - 2;
+  const ptsPerSlide = Math.max(1, Math.ceil(allContentPoints.length / numContentSlides));
+  const usedTitles = new Set();
+  const usedBodyKeys = new Set();
 
-  for (let i = 0; i < totalSlides - 2; i++) {
+  for (let i = 0; i < numContentSlides; i++) {
     const slideNum = i + 2;
     const structure = slideStructure[i + 1] || '';
-    const tweet = contentTweets[Math.min(i, contentTweets.length - 1)] || '';
-    const lines = tweet.split('\n').filter(l => l.trim());
-    const mainPoints = extractKeyPoints(tweet);
+    // Each slide gets its own unique slice of content points — no duplicates
+    const sliceStart = i * ptsPerSlide;
+    let slidePoints = allContentPoints.slice(sliceStart, sliceStart + ptsPerSlide);
+    // If pool exhausted, skip this slide entirely to avoid duplicate content
+    if (slidePoints.length === 0) break;
+    const lines = slidePoints;
+    const mainPoints = slidePoints;
 
     let subtitle = '';
     let title = '';
     let bodyHtml = '';
 
-    // Parse structure hint
+    // Parse structure hint — deduplicate titles from slide structures
     const structParts = structure.split(':');
     const structLabel = structParts[0]?.trim() || '';
-    const structContent = structParts.slice(1).join(':')?.trim() || '';
+    let structContent = structParts.slice(1).join(':')?.trim() || '';
+    // If this structContent title was already used, clear it so we fall back to unique key point
+    if (structContent && usedTitles.has(structContent.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim())) {
+      structContent = '';
+    }
 
     if (type === 'Education') {
       subtitle = structLabel || ['The Concept', 'Why It Matters', 'How It Works', 'The Application', 'Key Insight', 'The Framework'][i] || 'Deep Dive';
-      title = structContent?.substring(0, 60)?.replace(/^[""]|[""]$/g, '') || lines[0]?.substring(0, 60) || '';
+      title = smartTruncate(structContent?.replace(/^[""]|[""]$/g, ''), 60) || smartTruncate(lines[0], 60);
 
       if (i === 0 && mainPoints.length >= 2) {
         bodyHtml = makeConceptCard('blue', 'Key Concept', '', mainPoints.slice(0, 2).join(' '));
@@ -416,12 +444,12 @@ function buildContentSlides(post, gridPost, tweets, totalSlides) {
       }
     } else if (type === 'Product') {
       subtitle = structLabel || ['The Challenge', 'The Solution', 'Key Feature', 'How It Works', 'See the Difference'][i] || 'Feature';
-      title = structContent?.substring(0, 60) || lines[0]?.substring(0, 60) || '';
+      title = smartTruncate(structContent, 60) || smartTruncate(lines[0], 60);
 
       if (i === 0) {
         bodyHtml = makeCallout('warning', 'The Challenge', mainPoints.slice(0, 2).join(' '));
       } else if (i === 1 && patterns.hasIndicator) {
-        const indicatorName = (tweet.match(/pentarch|volume oracle|janus atlas|plutus flow|harmonic oscillator|augury grid|omnideck/i) || [''])[0];
+        const indicatorName = (mainPoints.join(' ').match(/pentarch|volume oracle|janus atlas|plutus flow|harmonic oscillator|augury grid|omnideck/i) || [''])[0];
         bodyHtml = `<div class="indicator-pill">${escHtml(indicatorName.toUpperCase())}</div><p class="slide-body">${escHtml(mainPoints.slice(0, 2).join(' '))}</p>`;
       } else if (i === 2 && patterns.hasComparison) {
         bodyHtml = makeCompareGrid('Without', mainPoints[0] || 'Standard approach', 'With SignalPilot', mainPoints[1] || 'Clear signals');
@@ -434,7 +462,7 @@ function buildContentSlides(post, gridPost, tweets, totalSlides) {
       }
     } else if (type === 'Blog') {
       subtitle = structLabel || ['The Reality', 'The Pattern', 'Why This Happens', 'The Fix', 'Key Takeaway'][i] || 'Insight';
-      title = structContent?.substring(0, 60) || lines[0]?.substring(0, 60) || '';
+      title = smartTruncate(structContent, 60) || smartTruncate(lines[0], 60);
 
       if (i === 0) {
         bodyHtml = makeCallout('insight', 'Consider This', mainPoints.slice(0, 2).join(' '));
@@ -449,7 +477,7 @@ function buildContentSlides(post, gridPost, tweets, totalSlides) {
       }
     } else if (type === 'Chronicle') {
       subtitle = structLabel || ['The Story', 'The Philosophy', 'The Method', 'The Wisdom', 'The Lesson'][i] || 'Chapter';
-      title = structContent?.substring(0, 60) || lines[0]?.substring(0, 60) || '';
+      title = smartTruncate(structContent, 60) || smartTruncate(lines[0], 60);
 
       if (patterns.hasIndicator && i >= totalSlides - 4) {
         const indicatorName = (tweets.join(' ').match(/pentarch|volume oracle|janus atlas|plutus flow|harmonic oscillator|augury grid|omnideck/i) || [''])[0];
@@ -461,7 +489,7 @@ function buildContentSlides(post, gridPost, tweets, totalSlides) {
       }
     } else if (type === 'Docs') {
       subtitle = structLabel || ['Overview', 'Configuration', 'Key Settings', 'Best Practices', 'Reference'][i] || 'Documentation';
-      title = structContent?.substring(0, 60) || lines[0]?.substring(0, 60) || '';
+      title = smartTruncate(structContent, 60) || smartTruncate(lines[0], 60);
 
       if (mainPoints.length >= 3) {
         bodyHtml = mainPoints.slice(0, 3).map((p, j) =>
@@ -471,8 +499,8 @@ function buildContentSlides(post, gridPost, tweets, totalSlides) {
         bodyHtml = makeCallout('info', 'Reference', mainPoints.join(' '));
       }
     } else if (type === 'Marketing') {
-      subtitle = structLabel || ['Why SignalPilot', 'What You Get', 'The Difference'][i] || '';
-      title = structContent?.substring(0, 60) || lines[0]?.substring(0, 60) || '';
+      subtitle = structLabel || '';
+      title = smartTruncate(structContent, 60) || smartTruncate(lines[0], 60);
 
       if (i === 0) {
         bodyHtml = makeStatRow([
@@ -489,12 +517,15 @@ function buildContentSlides(post, gridPost, tweets, totalSlides) {
       subtitle = ['', 'The Context', 'The Insight', 'Why It Matters', 'The Application'][i] || '';
       title = '';
       if (i === Math.floor((totalSlides - 2) / 2)) {
-        const quoteLine = lines.find(l => /[""\u201c\u201d]/.test(l)) || lines[0] || '';
+        const quoteLine = allContentPoints.find(l => /[""\u201c\u201d]/.test(l)) || lines[0] || '';
         bodyHtml = makeQuoteBlock(quoteLine.replace(/[""\u201c\u201d]/g, ''), 'Signal Pilot');
       } else {
         bodyHtml = `<p class="slide-body">${escHtml(mainPoints.join(' '))}</p>`;
       }
     }
+
+    // Track used titles to prevent duplicates across slides
+    if (title) usedTitles.add(title.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim());
 
     slides.push(generateContentSlide(slideNum, totalSlides, subtitle, title, bodyHtml));
   }
@@ -530,18 +561,18 @@ function getHookTitle(post, gridPost, tweets) {
     if (firstLine.length > 3 && firstLine.length < 60) return firstLine;
   }
   const title = (post.title || '').replace(/^[\uD83C-\uDBFF][\uDC00-\uDFFF]*\s*/, '').replace(/\(.*\)$/, '').trim();
-  return title.substring(0, 55);
+  return smartTruncate(title, 55);
 }
 
 function getHookSubtitle(post, tweets) {
   if (tweets[0]) {
     const lines = tweets[0].split('\n').filter(l => l.trim());
-    if (lines.length > 1) return lines[1].substring(0, 80);
+    if (lines.length > 1) return smartTruncate(lines[1], 80);
   }
   const cap = post.instagram?.caption;
   if (cap) {
     const lines = cap.split('\n').filter(l => l.trim());
-    if (lines.length > 1) return lines[1].substring(0, 80);
+    if (lines.length > 1) return smartTruncate(lines[1], 80);
   }
   return '';
 }
@@ -553,6 +584,22 @@ function generateCarouselHTML(post, gridPost) {
   const color = getColumnColor(post);
   const label = TYPE_TO_LABEL[post.type] || 'LEARN';
   const tweets = parseTwitterContent(post);
+  // Pool ALL unique key points from the post content (all sources)
+  const contentTweets = tweets.length > 2 ? tweets.slice(1, -1) : tweets.slice(0);
+  const allContentPoints = [];
+  const seenPts = new Set();
+  for (const t of contentTweets) {
+    for (const p of extractKeyPoints(t)) {
+      const key = p.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+      if (key.length > 3 && !seenPts.has(key)) { seenPts.add(key); allContentPoints.push(p); }
+    }
+  }
+  if (post.instagram?.caption) {
+    for (const p of extractKeyPoints(post.instagram.caption)) {
+      const key = p.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+      if (key.length > 3 && !seenPts.has(key)) { seenPts.add(key); allContentPoints.push(p); }
+    }
+  }
   const totalSlides = gridPost?.slideCount || (post.type === 'Quote' || post.type === 'Marketing' ? 5 : 6);
   const slideCount = Math.max(4, Math.min(10, totalSlides));
 
@@ -561,7 +608,7 @@ function generateCarouselHTML(post, gridPost) {
   const ctaInfo = getCTAInfo(post);
 
   const hookSlide = generateHookSlide(hookTitle, hookSub, label);
-  const contentSlides = buildContentSlides(post, gridPost, tweets, slideCount);
+  const contentSlides = buildContentSlides(post, gridPost, tweets, slideCount, allContentPoints);
   const ctaSlide = generateCTASlide(slideCount, slideCount, ctaInfo.icon, ctaInfo.title, ctaInfo.desc, ctaInfo.url, ctaInfo.text);
 
   const allSlides = [hookSlide, ...contentSlides, ctaSlide].join('\n');
@@ -628,10 +675,28 @@ function escHtml(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+// ── Detect hand-crafted carousels (should NOT be overwritten) ──
+const HANDCRAFTED_MARKERS = [
+  'combo-box', 'signal-grid', 'divergence-box', 'flow-card', 'cheat-row',
+  'metric-card', 'phase-card', 'cycle-card', 'scenario-box', 'rule-card',
+  'formula-box', 'example-block', 'result-box', 'definition-box', 'view-box',
+  'philosophy-box', 'method-list', 'alignment-grid', 'indicator-badge', 'behavior-grid',
+  'found-box', 'ignored-box', 'fix-box', 'combo-arrows'
+];
+
+function isHandcraftedCarousel(postNum) {
+  const dir = `INSTAGRAM_CONTENT_HUB/social/post-${String(postNum).padStart(3,'0')}`;
+  const htmlPath = path.join(dir, 'carousel.html');
+  if (!fs.existsSync(htmlPath)) return false;
+  const html = fs.readFileSync(htmlPath, 'utf8');
+  return HANDCRAFTED_MARKERS.some(m => html.includes(m));
+}
+
 // ── Main ───────────────────────────────────────────────────
 function main() {
   const args = process.argv.slice(2);
   const dryRun = args.includes('--dry-run');
+  const forceAll = args.includes('--force');
   const onlyPost = args.find(a => a.startsWith('--post='));
   const singlePost = onlyPost ? parseInt(onlyPost.split('=')[1]) : null;
 
@@ -641,6 +706,8 @@ function main() {
 
   const postsToProcess = singlePost !== null
     ? contentQueue.filter(p => p.postNumber === singlePost)
+    : forceAll
+    ? contentQueue.filter(p => !isHandcraftedCarousel(p.postNumber))
     : contentQueue.filter(p => isBadCarousel(p.postNumber));
 
   console.log(`Found ${postsToProcess.length} carousels to rebuild${dryRun ? ' (dry run)' : ''}...`);
