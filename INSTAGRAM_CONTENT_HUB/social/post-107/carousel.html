@@ -17,6 +17,12 @@
       --border-subtle: rgba(255,255,255,0.1);
       --accent-gold: #c9a962;
       --accent-gold-dim: rgba(201,169,98,0.3);
+      --accent-teal: #5eead4;
+      --accent-green: #4ade80;
+      --accent-red: #f87171;
+      --accent-orange: #f59e0b;
+      --accent-purple: #a855f7;
+      --accent-blue: #60a5fa;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -41,18 +47,81 @@
     .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
     .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
     .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
+    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: clamp(20px, 5.5%, 55px); }
 
     /* ═══════════════════════════════════════════
-       SHARED — Neutral/EDU slide base (NO bar)
+       SLIDE BASE — Gold EDU theme
        ═══════════════════════════════════════════ */
     .slide-edu { background: linear-gradient(180deg, #0c0c10 0%, #09090d 100%) !important; }
     .slide-edu::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(201,169,98,0.04) 0%, transparent 100%); pointer-events: none; z-index: 1; }
     .slide-edu .slide-content { z-index: 3; }
     .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
 
-    /* LEARN badge */
+    /* ═══════════════════════════════════════════
+       S1 — Correlation Orb (linked-node scatter)
+       ═══════════════════════════════════════════ */
+    .corr-orb {
+      width: clamp(100px, 20cqw, 200px);
+      height: clamp(100px, 20cqw, 200px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.1) 40%, rgba(255,255,255,0.03) 70%, transparent 100%);
+      border: 2px solid rgba(201,169,98,0.25);
+      box-shadow: 0 0 50px rgba(201,169,98,0.12), 0 0 100px rgba(201,169,98,0.04), inset 0 0 30px rgba(201,169,98,0.06);
+      position: relative;
+      margin-bottom: clamp(12px, 3cqw, 28px);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .corr-orb::before {
+      content: ''; position: absolute; inset: 7px; border-radius: 50%;
+      border: 1.5px solid rgba(201,169,98,0.15);
+    }
+    .corr-orb::after {
+      content: ''; position: absolute; inset: 18px; border-radius: 50%;
+      border: 1px dashed rgba(201,169,98,0.12);
+    }
+    /* Linked scatter nodes inside orb */
+    .scatter-viz {
+      position: relative; z-index: 2;
+      width: clamp(50px, 10cqw, 100px);
+      height: clamp(50px, 10cqw, 100px);
+    }
+    .scatter-node {
+      position: absolute;
+      width: clamp(6px, 1.2cqw, 12px);
+      height: clamp(6px, 1.2cqw, 12px);
+      border-radius: 50%;
+    }
+    .sn-a { top: 10%; left: 15%; background: rgba(74,222,128,0.7); box-shadow: 0 0 8px rgba(74,222,128,0.3); }
+    .sn-b { top: 25%; left: 45%; background: rgba(201,169,98,0.7); box-shadow: 0 0 8px rgba(201,169,98,0.3); }
+    .sn-c { top: 45%; left: 70%; background: rgba(74,222,128,0.7); box-shadow: 0 0 8px rgba(74,222,128,0.3); }
+    .sn-d { top: 60%; left: 30%; background: rgba(248,113,113,0.7); box-shadow: 0 0 8px rgba(248,113,113,0.3); }
+    .sn-e { top: 75%; left: 55%; background: rgba(201,169,98,0.7); box-shadow: 0 0 8px rgba(201,169,98,0.3); }
+    .sn-f { top: 35%; left: 20%; background: rgba(94,234,212,0.7); box-shadow: 0 0 8px rgba(94,234,212,0.3); }
+    .sn-g { top: 80%; left: 80%; background: rgba(74,222,128,0.7); box-shadow: 0 0 8px rgba(74,222,128,0.3); }
+    /* Trend line through scatter */
+    .scatter-line {
+      position: absolute;
+      top: 15%; left: 10%;
+      width: 80%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(201,169,98,0.1), rgba(201,169,98,0.4), rgba(201,169,98,0.1));
+      transform: rotate(30deg);
+      transform-origin: left center;
+    }
+    .scatter-label {
+      position: absolute;
+      bottom: -clamp(6px, 1.2cqw, 12px);
+      left: 50%; transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: clamp(5px, 0.9cqw, 8px);
+      color: rgba(201,169,98,0.6);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    /* ═══════════════════════════════════════════
+       BADGES & TITLES
+       ═══════════════════════════════════════════ */
     .learn-badge {
       font-family: var(--font-mono);
       font-size: clamp(8px, 1.2cqw, 12px);
@@ -63,271 +132,477 @@
       border: 1px solid rgba(201,169,98,0.3);
       border-radius: clamp(3px, 0.6cqw, 6px);
       background: rgba(201,169,98,0.06);
-      margin-bottom: 4%;
+      margin-bottom: clamp(8px, 1.5cqw, 16px);
     }
-
-    /* Titles */
     .edu-title {
       font-family: var(--font-serif);
       font-size: clamp(24px, 4.8cqw, 50px);
       font-weight: 700;
       color: var(--text-primary);
       line-height: 1.15;
-      margin-bottom: 3%;
+      margin-bottom: clamp(8px, 1.5cqw, 16px);
     }
     .edu-title em { color: var(--accent-gold); font-style: italic; }
-
     .edu-subtitle {
       font-family: var(--font-sans);
       font-size: clamp(11px, 1.7cqw, 18px);
       color: var(--text-secondary);
       line-height: 1.5;
       max-width: 85%;
-      margin-bottom: 3%;
+      margin-bottom: clamp(8px, 1.5cqw, 16px);
     }
-
     .edu-divider {
-      width: 60px;
+      width: clamp(40px, 8cqw, 80px);
       height: 2px;
       background: linear-gradient(90deg, transparent, rgba(201,169,98,0.5), transparent);
-      margin-bottom: 4%;
+      margin-bottom: clamp(8px, 1.5cqw, 16px);
     }
-
-    /* Inner heading */
     .inner-heading {
       font-family: var(--font-serif);
       font-size: clamp(18px, 3.5cqw, 36px);
       font-weight: 700;
       color: var(--text-primary);
       line-height: 1.2;
-      margin-bottom: 4%;
+      margin-bottom: clamp(10px, 2.5cqw, 24px);
     }
     .inner-heading em { color: var(--accent-gold); font-style: italic; }
 
-    /* Definition card */
+    /* ═══════════════════════════════════════════
+       ICON CIRCLES — Shared
+       ═══════════════════════════════════════════ */
+    .icon-circle {
+      width: clamp(34px, 6.5cqw, 56px);
+      height: clamp(34px, 6.5cqw, 56px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; flex-shrink: 0;
+    }
+    .icon-circle::before {
+      content: ''; position: absolute; inset: 4px; border-radius: 50%;
+    }
+    .icon-circle .ic-letter {
+      position: relative; z-index: 2;
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.8cqw, 24px);
+      font-weight: 700;
+    }
+    .ic-gold { background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%); border: 1.5px solid rgba(201,169,98,0.3); box-shadow: 0 0 18px rgba(201,169,98,0.1); }
+    .ic-gold::before { border: 1px solid rgba(201,169,98,0.12); }
+    .ic-gold .ic-letter { color: #c9a962; }
+    .ic-teal { background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%); border: 1.5px solid rgba(94,234,212,0.3); box-shadow: 0 0 18px rgba(94,234,212,0.1); }
+    .ic-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .ic-teal .ic-letter { color: #5eead4; }
+    .ic-green { background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%); border: 1.5px solid rgba(74,222,128,0.3); box-shadow: 0 0 18px rgba(74,222,128,0.1); }
+    .ic-green::before { border: 1px solid rgba(74,222,128,0.12); }
+    .ic-green .ic-letter { color: #4ade80; }
+    .ic-red { background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%); border: 1.5px solid rgba(248,113,113,0.3); box-shadow: 0 0 18px rgba(248,113,113,0.1); }
+    .ic-red::before { border: 1px solid rgba(248,113,113,0.12); }
+    .ic-red .ic-letter { color: #f87171; }
+    .ic-purple { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%); border: 1.5px solid rgba(168,85,247,0.3); box-shadow: 0 0 18px rgba(168,85,247,0.1); }
+    .ic-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .ic-purple .ic-letter { color: #a855f7; }
+    .ic-blue { background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%); border: 1.5px solid rgba(96,165,250,0.3); box-shadow: 0 0 18px rgba(96,165,250,0.1); }
+    .ic-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .ic-blue .ic-letter { color: #60a5fa; }
+    .ic-orange { background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%); border: 1.5px solid rgba(245,158,11,0.3); box-shadow: 0 0 18px rgba(245,158,11,0.1); }
+    .ic-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .ic-orange .ic-letter { color: #f59e0b; }
+
+    /* ═══════════════════════════════════════════
+       S2 — Definition + Scale
+       ═══════════════════════════════════════════ */
     .def-card {
-      width: 85%;
+      width: 100%;
       border-radius: clamp(8px, 1.2cqw, 14px);
       border: 1px solid rgba(201,169,98,0.2);
       background: rgba(201,169,98,0.04);
-      padding: 5%;
-      margin-bottom: 4%;
+      padding: clamp(12px, 2.5cqw, 24px);
+      margin-bottom: clamp(10px, 2cqw, 20px);
     }
-
     .def-term {
       font-family: var(--font-mono);
-      font-size: clamp(9px, 1.4cqw, 15px);
+      font-size: clamp(8px, 1.2cqw, 13px);
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--accent-gold);
-      margin-bottom: 3%;
+      margin-bottom: clamp(4px, 0.7cqw, 8px);
     }
-
     .def-text {
       font-family: var(--font-sans);
-      font-size: clamp(10px, 1.6cqw, 17px);
+      font-size: clamp(9px, 1.4cqw, 15px);
       color: var(--text-secondary);
       line-height: 1.5;
     }
-
-    /* Scale visual */
+    /* Correlation scale bar */
     .scale-visual {
-      width: 85%;
-      margin-bottom: 4%;
+      width: 100%;
+      margin-bottom: clamp(10px, 2cqw, 20px);
     }
-
     .scale-bar {
-      height: clamp(8px, 1.5cqw, 16px);
-      border-radius: clamp(4px, 0.8cqw, 8px);
+      height: clamp(10px, 1.8cqw, 18px);
+      border-radius: clamp(5px, 0.9cqw, 9px);
       background: linear-gradient(90deg, #f87171 0%, #fbbf24 25%, rgba(255,255,255,0.15) 50%, #5eead4 75%, #4ade80 100%);
-      margin-bottom: 2%;
+      margin-bottom: clamp(4px, 0.7cqw, 8px);
+      position: relative;
     }
-
+    .scale-bar::after {
+      content: '';
+      position: absolute;
+      top: -3px; bottom: -3px;
+      left: 50%; transform: translateX(-50%);
+      width: 2px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 1px;
+    }
     .scale-labels {
       display: flex;
       justify-content: space-between;
     }
-
     .scale-label {
       font-family: var(--font-mono);
       font-size: clamp(7px, 1cqw, 11px);
       color: var(--text-muted);
     }
+    .scale-label-center {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 11px);
+      color: var(--text-muted);
+    }
 
-    /* Correlation type cards */
-    .corr-row {
-      width: 88%;
+    /* ═══════════════════════════════════════════
+       S3 — Three Types Panels
+       ═══════════════════════════════════════════ */
+    .corr-types {
+      width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: clamp(6px, 1.2cqw, 14px);
-      margin-bottom: 4%;
+      gap: clamp(6px, 1cqw, 12px);
+      margin-bottom: clamp(10px, 2cqw, 20px);
     }
-
-    .corr-card {
-      border-radius: clamp(6px, 1cqw, 12px);
-      padding: 5%;
+    .corr-panel {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      padding: clamp(10px, 2cqw, 20px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
+      gap: clamp(4px, 0.8cqw, 10px);
     }
-
-    .corr-card.positive {
+    .corr-panel.cp-positive {
       border: 1px solid rgba(74,222,128,0.2);
-      background: rgba(74,222,128,0.04);
+      background: rgba(74,222,128,0.03);
     }
-
-    .corr-card.none {
-      border: 1px solid rgba(255,255,255,0.1);
+    .corr-panel.cp-none {
+      border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.02);
     }
-
-    .corr-card.negative {
+    .corr-panel.cp-negative {
       border: 1px solid rgba(248,113,113,0.2);
-      background: rgba(248,113,113,0.04);
+      background: rgba(248,113,113,0.03);
     }
-
     .corr-value {
       font-family: var(--font-serif);
-      font-size: clamp(22px, 4cqw, 42px);
+      font-size: clamp(22px, 4.2cqw, 42px);
       font-weight: 700;
       line-height: 1;
-      margin-bottom: 4%;
     }
-
-    .corr-card.positive .corr-value { color: #4ade80; }
-    .corr-card.none .corr-value { color: var(--text-muted); }
-    .corr-card.negative .corr-value { color: #f87171; }
-
+    .cp-positive .corr-value { color: #4ade80; }
+    .cp-none .corr-value { color: var(--text-muted); }
+    .cp-negative .corr-value { color: #f87171; }
     .corr-name {
       font-family: var(--font-mono);
       font-size: clamp(7px, 1.1cqw, 12px);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 3%;
     }
-
-    .corr-card.positive .corr-name { color: #4ade80; }
-    .corr-card.none .corr-name { color: var(--text-muted); }
-    .corr-card.negative .corr-name { color: #f87171; }
-
-    .corr-example {
+    .cp-positive .corr-name { color: #4ade80; }
+    .cp-none .corr-name { color: var(--text-muted); }
+    .cp-negative .corr-name { color: #f87171; }
+    .corr-desc {
       font-family: var(--font-sans);
       font-size: clamp(7px, 1cqw, 11px);
       color: var(--text-secondary);
-      line-height: 1.3;
-      margin-bottom: 3%;
+      line-height: 1.35;
     }
-
+    /* CSS direction arrows */
+    .corr-arrows {
+      display: flex;
+      gap: clamp(3px, 0.5cqw, 6px);
+      align-items: center;
+    }
+    .arrow-up, .arrow-down {
+      width: clamp(12px, 2.2cqw, 22px);
+      height: clamp(16px, 3cqw, 30px);
+      position: relative;
+    }
+    .arrow-up::before {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 3px; height: 100%;
+      border-radius: 2px;
+    }
+    .arrow-up::after {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: clamp(4px, 0.8cqw, 8px) solid transparent;
+      border-right: clamp(4px, 0.8cqw, 8px) solid transparent;
+    }
+    .arrow-down::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 3px; height: 100%;
+      border-radius: 2px;
+    }
+    .arrow-down::after {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: clamp(4px, 0.8cqw, 8px) solid transparent;
+      border-right: clamp(4px, 0.8cqw, 8px) solid transparent;
+    }
+    .cp-positive .arrow-up::before { background: rgba(74,222,128,0.5); }
+    .cp-positive .arrow-up::after { border-bottom: clamp(5px, 1cqw, 10px) solid rgba(74,222,128,0.5); }
+    .cp-negative .arrow-up::before { background: rgba(74,222,128,0.5); }
+    .cp-negative .arrow-up::after { border-bottom: clamp(5px, 1cqw, 10px) solid rgba(74,222,128,0.5); }
+    .cp-negative .arrow-down::before { background: rgba(248,113,113,0.5); }
+    .cp-negative .arrow-down::after { border-top: clamp(5px, 1cqw, 10px) solid rgba(248,113,113,0.5); }
+    .cp-none .arrow-up::before { background: rgba(255,255,255,0.15); }
+    .cp-none .arrow-up::after { border-bottom: clamp(5px, 1cqw, 10px) solid rgba(255,255,255,0.15); }
+    .cp-none .arrow-down::before { background: rgba(255,255,255,0.15); }
+    .cp-none .arrow-down::after { border-top: clamp(5px, 1cqw, 10px) solid rgba(255,255,255,0.15); }
     .corr-pair {
       font-family: var(--font-mono);
       font-size: clamp(6px, 0.9cqw, 10px);
       color: var(--text-muted);
+      padding: clamp(2px, 0.3cqw, 4px) clamp(5px, 0.8cqw, 10px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: clamp(2px, 0.4cqw, 4px);
+      background: rgba(255,255,255,0.02);
     }
 
-    /* Rule cards */
-    .rule-grid {
-      width: 88%;
+    /* ═══════════════════════════════════════════
+       S4 — Four Rules Cards
+       ═══════════════════════════════════════════ */
+    .rules-grid {
+      width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: clamp(6px, 1.2cqw, 14px);
-      margin-bottom: 4%;
+      gap: clamp(6px, 1cqw, 12px);
     }
-
     .rule-card {
-      border-radius: clamp(6px, 1cqw, 12px);
-      border: 1px solid rgba(201,169,98,0.15);
-      background: rgba(201,169,98,0.03);
-      padding: 5%;
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(201,169,98,0.12);
+      background: rgba(201,169,98,0.02);
+      padding: clamp(10px, 2cqw, 20px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 0.7cqw, 8px);
     }
-
-    .rule-num {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3cqw, 30px);
-      font-weight: 700;
-      color: var(--accent-gold);
-      margin-bottom: 3%;
+    .rule-card-header {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 1cqw, 10px);
     }
-
-    .rule-name {
+    .rule-card-title {
       font-family: var(--font-sans);
-      font-size: clamp(9px, 1.4cqw, 15px);
+      font-size: clamp(10px, 1.6cqw, 16px);
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 3%;
     }
-
-    .rule-desc {
+    .rule-card-desc {
       font-family: var(--font-sans);
-      font-size: clamp(7px, 1.1cqw, 12px);
+      font-size: clamp(8px, 1.15cqw, 12px);
       color: var(--text-secondary);
       line-height: 1.4;
     }
-
-    /* Key truth */
-    .truth-card {
-      width: 85%;
-      border-radius: clamp(8px, 1.2cqw, 14px);
-      border: 1px solid rgba(201,169,98,0.2);
-      background: rgba(201,169,98,0.04);
-      padding: 6%;
-      text-align: center;
-      margin-bottom: 4%;
+    .rule-bar-track {
+      width: 100%;
+      height: clamp(3px, 0.5cqw, 5px);
+      border-radius: 3px;
+      background: rgba(255,255,255,0.04);
     }
-
-    .truth-label {
-      font-family: var(--font-mono);
-      font-size: clamp(7px, 1cqw, 11px);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-      margin-bottom: 4%;
+    .rule-bar-fill {
+      height: 100%;
+      border-radius: 3px;
     }
+    .rbf-gold { background: linear-gradient(90deg, rgba(201,169,98,0.3), rgba(201,169,98,0.6)); }
+    .rbf-teal { background: linear-gradient(90deg, rgba(94,234,212,0.3), rgba(94,234,212,0.6)); }
+    .rbf-purple { background: linear-gradient(90deg, rgba(168,85,247,0.3), rgba(168,85,247,0.6)); }
+    .rbf-blue { background: linear-gradient(90deg, rgba(96,165,250,0.3), rgba(96,165,250,0.6)); }
 
-    .truth-text {
+    /* ═══════════════════════════════════════════
+       S5 — Truth Slide
+       ═══════════════════════════════════════════ */
+    .truth-orb {
+      width: clamp(60px, 12cqw, 120px);
+      height: clamp(60px, 12cqw, 120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.25) 0%, rgba(201,169,98,0.08) 50%, transparent 100%);
+      border: 1.5px solid rgba(201,169,98,0.2);
+      box-shadow: 0 0 40px rgba(201,169,98,0.08);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: clamp(10px, 2cqw, 20px);
+    }
+    .truth-orb::before {
+      content: ''; position: absolute; inset: 5px; border-radius: 50%;
+      border: 1px solid rgba(201,169,98,0.12);
+    }
+    .truth-orb .orb-letter {
       font-family: var(--font-serif);
-      font-size: clamp(14px, 2.5cqw, 26px);
-      font-weight: 600;
+      font-size: clamp(22px, 4.5cqw, 44px);
+      font-weight: 700;
+      color: rgba(201,169,98,0.8);
+      position: relative; z-index: 2;
+    }
+    .truth-title {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 3cqw, 30px);
+      font-weight: 700;
       color: var(--text-primary);
+      margin-bottom: clamp(10px, 2cqw, 20px);
+      text-align: center;
+    }
+    .truth-title em { color: var(--accent-gold); font-style: italic; }
+    .truth-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1cqw, 12px);
+      margin-bottom: clamp(10px, 2cqw, 20px);
+    }
+    .truth-card {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(201,169,98,0.12);
+      background: rgba(201,169,98,0.02);
+      padding: clamp(8px, 1.5cqw, 16px);
+      text-align: center;
+    }
+    .truth-card-title {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.4cqw, 14px);
+      font-weight: 600;
+      color: var(--accent-gold);
+      margin-bottom: clamp(3px, 0.5cqw, 6px);
+    }
+    .truth-card-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.05cqw, 11px);
+      color: var(--text-secondary);
       line-height: 1.35;
     }
-    .truth-text em { color: var(--accent-gold); font-style: italic; }
+    .truth-philosophy {
+      font-family: var(--font-serif);
+      font-size: clamp(10px, 1.6cqw, 17px);
+      font-weight: 500;
+      font-style: italic;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.5;
+      text-align: center;
+      max-width: 85%;
+      padding: clamp(8px, 1.5cqw, 16px);
+      border-top: 1px solid rgba(201,169,98,0.08);
+      border-bottom: 1px solid rgba(201,169,98,0.08);
+    }
 
-    /* CTA */
+    /* ═══════════════════════════════════════════
+       S6 — CTA
+       ═══════════════════════════════════════════ */
     .cta-badge {
       font-family: var(--font-mono);
       font-size: clamp(7px, 1cqw, 11px);
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: rgba(201,169,98,0.7);
-      margin-bottom: 4%;
+      margin-bottom: clamp(8px, 1.5cqw, 16px);
     }
-
     .cta-title {
       font-family: var(--font-serif);
       font-size: clamp(22px, 4.5cqw, 46px);
       font-weight: 700;
       color: var(--text-primary);
       line-height: 1.15;
-      margin-bottom: 3%;
+      margin-bottom: clamp(10px, 2cqw, 20px);
+      text-align: center;
     }
     .cta-title em { color: var(--accent-gold); font-style: italic; }
-
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(4px, 0.8cqw, 10px);
+      width: 100%;
+      margin-bottom: clamp(10px, 2cqw, 20px);
+    }
+    .stat-cell {
+      text-align: center;
+      padding: clamp(6px, 1cqw, 12px) clamp(2px, 0.4cqw, 6px);
+      border-radius: clamp(6px, 1cqw, 10px);
+      border: 1px solid rgba(201,169,98,0.12);
+      background: rgba(201,169,98,0.03);
+    }
+    .stat-val {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 3cqw, 30px);
+      font-weight: 700;
+      color: var(--accent-gold);
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: clamp(5px, 0.8cqw, 9px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: clamp(2px, 0.3cqw, 4px);
+    }
+    .keyword-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(4px, 0.6cqw, 8px);
+      justify-content: center;
+      margin-bottom: clamp(10px, 2cqw, 20px);
+    }
+    .kw-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.9cqw, 10px);
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: clamp(2px, 0.4cqw, 5px) clamp(6px, 1.2cqw, 14px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: clamp(10px, 2cqw, 20px);
+      background: rgba(255,255,255,0.02);
+    }
+    .cta-box {
+      padding: clamp(10px, 2cqw, 22px) clamp(20px, 4cqw, 44px);
+      border: 1px solid rgba(201,169,98,0.3);
+      border-radius: clamp(6px, 1cqw, 12px);
+      background: rgba(201,169,98,0.06);
+      text-align: center;
+    }
     .cta-url {
       font-family: var(--font-mono);
-      font-size: clamp(9px, 1.4cqw, 15px);
+      font-size: clamp(10px, 1.6cqw, 17px);
       letter-spacing: 0.1em;
       color: var(--accent-gold);
-      padding: clamp(6px, 1cqw, 12px) clamp(16px, 3cqw, 32px);
-      border: 1px solid rgba(201,169,98,0.3);
-      border-radius: clamp(4px, 0.8cqw, 8px);
-      background: rgba(201,169,98,0.06);
+      margin-bottom: clamp(3px, 0.5cqw, 6px);
+    }
+    .cta-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1cqw, 11px);
+      color: var(--text-muted);
     }
 
+    /* ═══════════════════════════════════════════
+       LOGO
+       ═══════════════════════════════════════════ */
     .slide-logo {
       position: absolute;
       bottom: 4%;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      font-size: clamp(6px, 1.2cqw, 10px);
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.25);
@@ -338,8 +613,7 @@
 </head>
 <body>
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
+    <label>Background: <select id="bg-toggle"><option value="static" selected>Static</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
@@ -350,15 +624,25 @@
 
   <div class="carousel-grid">
 
-    <!-- ══════ SLIDE 1: Hook ══════ -->
+    <!-- ══════ SLIDE 1: Hook — Correlation Orb ══════ -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Hook</span>
       <div class="slide slide-edu slide-1">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
           <div class="learn-badge">Learn &middot; Lesson 28</div>
+          <div class="corr-orb">
+            <div class="scatter-viz">
+              <div class="scatter-node sn-a"></div>
+              <div class="scatter-node sn-b"></div>
+              <div class="scatter-node sn-c"></div>
+              <div class="scatter-node sn-d"></div>
+              <div class="scatter-node sn-e"></div>
+              <div class="scatter-node sn-f"></div>
+              <div class="scatter-node sn-g"></div>
+              <div class="scatter-line"></div>
+              <span class="scatter-label">r = 0.87</span>
+            </div>
+          </div>
           <h2 class="edu-title">Your Trades Are More <em>Connected</em> Than You Think</h2>
           <div class="edu-divider"></div>
           <p class="edu-subtitle">Correlation measures how assets move together — and why ignoring it doubles your risk.</p>
@@ -367,13 +651,10 @@
       </div>
     </div>
 
-    <!-- ══════ SLIDE 2: What Is Correlation ══════ -->
+    <!-- ══════ SLIDE 2: Definition + Scale ══════ -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — Definition</span>
       <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
           <h3 class="inner-heading">What Is <em>Correlation</em>?</h3>
 
@@ -385,15 +666,20 @@
           <div class="scale-visual">
             <div class="scale-bar"></div>
             <div class="scale-labels">
-              <span class="scale-label">-1.0</span>
-              <span class="scale-label">0</span>
-              <span class="scale-label">+1.0</span>
+              <span class="scale-label">-1.0 Inverse</span>
+              <span class="scale-label-center">0 None</span>
+              <span class="scale-label">+1.0 Perfect</span>
             </div>
           </div>
 
           <div class="def-card">
             <div class="def-term">Why It Matters</div>
             <div class="def-text">Holding two long positions in highly correlated assets is really one big trade — your risk is double what you think.</div>
+          </div>
+
+          <div class="def-card">
+            <div class="def-term">Dynamic, Not Static</div>
+            <div class="def-text">Correlations shift with market regimes, volatility events, and macro catalysts. Always check current rolling values, not historical averages.</div>
           </div>
 
           <div class="slide-logo">Signal Pilot</div>
@@ -405,30 +691,51 @@
     <div class="slide-wrapper" data-slide="3">
       <span class="slide-label">Slide 3 — Types</span>
       <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
           <h3 class="inner-heading">Three <em>Types</em></h3>
 
-          <div class="corr-row">
-            <div class="corr-card positive">
+          <div class="corr-types">
+            <!-- Positive -->
+            <div class="corr-panel cp-positive">
+              <div class="icon-circle ic-green" style="width:clamp(28px,5cqw,44px);height:clamp(28px,5cqw,44px);">
+                <span class="ic-letter" style="font-size:clamp(11px,2.2cqw,18px);">+</span>
+              </div>
               <div class="corr-value">+1</div>
               <div class="corr-name">Positive</div>
-              <div class="corr-example">Assets move in the same direction at the same time</div>
-              <div class="corr-pair">EUR/USD &amp; GBP/USD</div>
+              <div class="corr-arrows">
+                <div class="arrow-up"></div>
+                <div class="arrow-up"></div>
+              </div>
+              <div class="corr-desc">Assets move in the same direction at the same time</div>
+              <span class="corr-pair">EUR/USD &amp; GBP/USD</span>
             </div>
-            <div class="corr-card none">
+            <!-- None -->
+            <div class="corr-panel cp-none">
+              <div class="icon-circle ic-gold" style="width:clamp(28px,5cqw,44px);height:clamp(28px,5cqw,44px);">
+                <span class="ic-letter" style="font-size:clamp(11px,2.2cqw,18px);">0</span>
+              </div>
               <div class="corr-value">0</div>
               <div class="corr-name">None</div>
-              <div class="corr-example">No predictable relationship — movements are independent</div>
-              <div class="corr-pair">Gold &amp; Soybeans</div>
+              <div class="corr-arrows">
+                <div class="arrow-up"></div>
+                <div class="arrow-down"></div>
+              </div>
+              <div class="corr-desc">No predictable relationship — movements are independent</div>
+              <span class="corr-pair">Gold &amp; Soybeans</span>
             </div>
-            <div class="corr-card negative">
+            <!-- Negative -->
+            <div class="corr-panel cp-negative">
+              <div class="icon-circle ic-red" style="width:clamp(28px,5cqw,44px);height:clamp(28px,5cqw,44px);">
+                <span class="ic-letter" style="font-size:clamp(11px,2.2cqw,18px);">-</span>
+              </div>
               <div class="corr-value">-1</div>
               <div class="corr-name">Negative</div>
-              <div class="corr-example">Assets move in opposite directions — natural hedge</div>
-              <div class="corr-pair">USD/JPY &amp; Gold</div>
+              <div class="corr-arrows">
+                <div class="arrow-up"></div>
+                <div class="arrow-down"></div>
+              </div>
+              <div class="corr-desc">Assets move in opposite directions — natural hedge</div>
+              <span class="corr-pair">USD/JPY &amp; Gold</span>
             </div>
           </div>
 
@@ -446,32 +753,49 @@
     <div class="slide-wrapper" data-slide="4">
       <span class="slide-label">Slide 4 — Rules</span>
       <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
           <h3 class="inner-heading">Four Correlation <em>Rules</em></h3>
 
-          <div class="rule-grid">
+          <div class="rules-grid">
             <div class="rule-card">
-              <div class="rule-num">01</div>
-              <div class="rule-name">Check Before You Stack</div>
-              <div class="rule-desc">Never open two positions in highly correlated pairs without reducing size on both</div>
+              <div class="rule-card-header">
+                <div class="icon-circle ic-gold">
+                  <span class="ic-letter">S</span>
+                </div>
+                <div class="rule-card-title">Check Before You Stack</div>
+              </div>
+              <div class="rule-card-desc">Never open two positions in highly correlated pairs without reducing size on both</div>
+              <div class="rule-bar-track"><div class="rule-bar-fill rbf-gold" style="width:95%"></div></div>
             </div>
             <div class="rule-card">
-              <div class="rule-num">02</div>
-              <div class="rule-name">Hedge With Inverse</div>
-              <div class="rule-desc">Use negative correlation for hedging — long one, short the inverse for reduced drawdown</div>
+              <div class="rule-card-header">
+                <div class="icon-circle ic-teal">
+                  <span class="ic-letter">H</span>
+                </div>
+                <div class="rule-card-title">Hedge With Inverse</div>
+              </div>
+              <div class="rule-card-desc">Use negative correlation for hedging — long one, short the inverse for reduced drawdown</div>
+              <div class="rule-bar-track"><div class="rule-bar-fill rbf-teal" style="width:88%"></div></div>
             </div>
             <div class="rule-card">
-              <div class="rule-num">03</div>
-              <div class="rule-name">Monitor Regime Shifts</div>
-              <div class="rule-desc">Correlations break during crisis events — what normally hedges may suddenly move together</div>
+              <div class="rule-card-header">
+                <div class="icon-circle ic-purple">
+                  <span class="ic-letter">M</span>
+                </div>
+                <div class="rule-card-title">Monitor Regime Shifts</div>
+              </div>
+              <div class="rule-card-desc">Correlations break during crisis events — what normally hedges may suddenly move together</div>
+              <div class="rule-bar-track"><div class="rule-bar-fill rbf-purple" style="width:82%"></div></div>
             </div>
             <div class="rule-card">
-              <div class="rule-num">04</div>
-              <div class="rule-name">Diversify Genuinely</div>
-              <div class="rule-desc">True diversification requires uncorrelated assets — not just different ticker symbols</div>
+              <div class="rule-card-header">
+                <div class="icon-circle ic-blue">
+                  <span class="ic-letter">D</span>
+                </div>
+                <div class="rule-card-title">Diversify Genuinely</div>
+              </div>
+              <div class="rule-card-desc">True diversification requires uncorrelated assets — not just different ticker symbols</div>
+              <div class="rule-bar-track"><div class="rule-bar-fill rbf-blue" style="width:90%"></div></div>
             </div>
           </div>
 
@@ -480,18 +804,36 @@
       </div>
     </div>
 
-    <!-- ══════ SLIDE 5: Key Truth ══════ -->
+    <!-- ══════ SLIDE 5: Truth ══════ -->
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Key Truth</span>
+      <span class="slide-label">Slide 5 — Truth</span>
       <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content" style="align-items: center; justify-content: center;">
-          <div class="truth-card">
-            <div class="truth-label">Key Truth</div>
-            <p class="truth-text"><em>Diversification</em> is only real when your assets are genuinely uncorrelated. Everything else is an illusion of safety.</p>
+          <div class="truth-orb">
+            <span class="orb-letter">C</span>
           </div>
+          <h3 class="truth-title">The <em>Truth</em> About Correlation</h3>
+
+          <div class="truth-grid">
+            <div class="truth-card">
+              <div class="truth-card-title">Hidden Double Risk</div>
+              <div class="truth-card-desc">Two correlated longs is one leveraged position wearing a disguise — size accordingly</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-card-title">Regime Dependent</div>
+              <div class="truth-card-desc">In calm markets assets diverge, in panic everything correlates to one — cash survives</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-card-title">Rolling Not Fixed</div>
+              <div class="truth-card-desc">Use 20-60 day rolling windows, not all-time averages — what mattered last year may not now</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-card-title">Diversify or Die</div>
+              <div class="truth-card-desc">Real diversification is uncomfortable — it means owning assets that zig when your favourites zag</div>
+            </div>
+          </div>
+
+          <div class="truth-philosophy">"Diversification is only real when your assets are genuinely uncorrelated. Everything else is an illusion of safety."</div>
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
@@ -501,14 +843,42 @@
     <div class="slide-wrapper" data-slide="6">
       <span class="slide-label">Slide 6 — CTA</span>
       <div class="slide slide-edu">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content" style="align-items: center; text-align: center; justify-content: center;">
           <div class="cta-badge">Learn &middot; Lesson 28</div>
           <h2 class="cta-title">Know the <em>Link</em>. Manage the Risk.</h2>
-          <div class="edu-divider"></div>
-          <div class="cta-url">signalpilot.io</div>
+
+          <div class="stat-grid">
+            <div class="stat-cell">
+              <div class="stat-val">3</div>
+              <div class="stat-label">Types</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-val">4</div>
+              <div class="stat-label">Rules</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-val">-1..+1</div>
+              <div class="stat-label">Range</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-val">&infin;</div>
+              <div class="stat-label">Awareness</div>
+            </div>
+          </div>
+
+          <div class="keyword-pills">
+            <span class="kw-pill">Correlation</span>
+            <span class="kw-pill">Diversification</span>
+            <span class="kw-pill">Hedging</span>
+            <span class="kw-pill">Risk Management</span>
+            <span class="kw-pill">Regime Shift</span>
+            <span class="kw-pill">Portfolio</span>
+          </div>
+
+          <div class="cta-box">
+            <div class="cta-url">signalpilot.io</div>
+            <div class="cta-sub">Master correlation, master risk</div>
+          </div>
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
@@ -518,20 +888,11 @@
 
   <script>
     (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
       const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
       const slideWrappers = document.querySelectorAll('.slide-wrapper');
       let exportMode = false;
       let currentSlide = 0;
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
       exportBtn.addEventListener('click', function() {
         exportMode = !exportMode;
         document.body.classList.toggle('export-mode', exportMode);
