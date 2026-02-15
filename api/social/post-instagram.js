@@ -1,6 +1,6 @@
 // POST /api/social/post-instagram
 // Cron-triggered: Posts the next Instagram carousel
-// Schedule: 3x daily at 1PM, 5PM, 10PM UTC (8AM, 12PM, 5PM EST)
+// Schedule: 3x daily at 10AM, 4PM, 10PM UTC (5AM, 11AM, 5PM EST)
 //
 // How it works:
 // 1. Queue manager says "next post order is 37" → posting schedule says "that's post #035, Orange column"
@@ -67,8 +67,9 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, skipped: true, reason: 'Queue is paused' });
     }
 
-    // Idempotency check
-    if (await wasRecentlyPosted('instagram', 300000)) {
+    // Idempotency check (skip with ?force=true for manual posting)
+    const force = req.query.force === 'true';
+    if (!force && await wasRecentlyPosted('instagram', 300000)) {
       return res.status(200).json({ success: true, skipped: true, reason: 'Already posted recently' });
     }
 
