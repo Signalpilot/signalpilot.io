@@ -3,322 +3,581 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 096 — INDUCEMENT &amp; LIQUIDITY (Lesson 24) | Carousel Preview</title>
+  <title>Post 096 — The Oracle | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    
     :root {
       --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --accent-green: #4ad97a;
-      --accent-teal: #5eecd4;
-      --text-primary: #e8e8e8;
-      --text-secondary: #a0a0a0;
-      --text-dim: #6a6a6a;
+      --bg-card: rgba(255,255,255,0.03);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-muted: rgba(255,255,255,0.4);
+      --border-subtle: rgba(255,255,255,0.1);
+      --accent-teal: #5eead4;
+      --accent-teal-dim: rgba(94,234,212,0.3);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
-    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
-    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); font-weight: 500; letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 2.5cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(28px, 10cqw, 48px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 3%; line-height: 1.2; }
-    .slide-title.large { font-size: clamp(22px, 8cqw, 32px); }
-    .slide-subtitle { font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; font-weight: 500; }
-    .slide-body { font-size: clamp(12px, 4cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .cta-link { display: inline-block; margin-top: 5%; padding: 3% 6%; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: clamp(11px, 3.5cqw, 14px); letter-spacing: 0.5px; }
-
-    /* ── Visual Components ── */
-    .concept-card { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 2% 0; text-align: left; }
-    .concept-card.green { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.35); }
-    .concept-card.red { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.35); }
-    .concept-card.blue { background: rgba(74,144,217,0.08); border: 1.5px solid rgba(74,144,217,0.35); }
-    .concept-card.gold { background: rgba(201,169,98,0.08); border: 1.5px solid rgba(201,169,98,0.35); }
-    .concept-card .card-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2%; font-weight: 500; }
-    .concept-card.green .card-label { color: var(--accent-green); }
-    .concept-card.red .card-label { color: var(--accent-red); }
-    .concept-card.blue .card-label { color: var(--accent-blue); }
-    .concept-card.gold .card-label { color: var(--accent-gold); }
-    .concept-card .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
-    .concept-card .card-desc { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
-
-    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .data-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .data-item.up { background: rgba(74,217,122,0.1); border: 1px solid rgba(74,217,122,0.3); }
-    .data-item.down { background: rgba(217,74,74,0.1); border: 1px solid rgba(217,74,74,0.3); }
-    .data-item.info { background: rgba(74,144,217,0.1); border: 1px solid rgba(74,144,217,0.3); }
-    .data-item.warn { background: rgba(201,169,98,0.1); border: 1px solid rgba(201,169,98,0.3); }
-    .data-item .item-icon { font-size: clamp(20px, 7cqw, 32px); margin-bottom: 3%; }
-    .data-item .item-label { font-size: clamp(9px, 3cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
-    .data-item .item-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
-
-    .arrow-list { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .arrow-list li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .arrow-list .arrow { color: var(--accent-blue); font-weight: 600; flex-shrink: 0; }
-
-    .checklist { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .checklist li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .checklist .check { color: var(--accent-green); flex-shrink: 0; }
-    .checklist .cross { color: var(--accent-red); flex-shrink: 0; }
-
-    .callout-box { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 3% 0; text-align: left; }
-    .callout-box.warning { background: rgba(217,74,74,0.08); border-left: 4px solid var(--accent-red); }
-    .callout-box.insight { background: rgba(201,169,98,0.08); border-left: 4px solid var(--accent-gold); }
-    .callout-box.success { background: rgba(74,217,122,0.08); border-left: 4px solid var(--accent-green); }
-    .callout-box.info { background: rgba(74,144,217,0.08); border-left: 4px solid var(--accent-blue); }
-    .callout-box .callout-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; margin-bottom: 2%; }
-    .callout-box.warning .callout-title { color: var(--accent-red); }
-    .callout-box.insight .callout-title { color: var(--accent-gold); }
-    .callout-box.success .callout-title { color: var(--accent-green); }
-    .callout-box.info .callout-title { color: var(--accent-blue); }
-    .callout-box .callout-text { font-size: clamp(11px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.6; }
-
-    .stat-row { display: flex; justify-content: center; gap: 4%; width: 100%; max-width: 90%; margin: 3% 0; }
-    .stat-item { text-align: center; flex: 1; }
-    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 8cqw, 32px); font-weight: 600; color: var(--accent-gold); }
-    .stat-label { font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2%; }
-
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .compare-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .compare-item.before { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.3); }
-    .compare-item.after { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.3); }
-    .compare-item .compare-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3%; font-weight: 500; }
-    .compare-item.before .compare-label { color: var(--accent-red); }
-    .compare-item.after .compare-label { color: var(--accent-green); }
-    .compare-item .compare-text { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
-
-    .quote-block { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 6cqw, 26px); font-style: italic; color: var(--text-primary); line-height: 1.5; max-width: 85%; margin: 4% 0; }
-    .quote-attr { font-family: 'Inter', sans-serif; font-size: clamp(10px, 3cqw, 12px); color: var(--accent-gold); letter-spacing: 1px; margin-top: 3%; }
-
-    .step-flow { width: 100%; max-width: 90%; text-align: left; }
-    .step-item { display: flex; gap: 4%; margin-bottom: 4%; align-items: flex-start; }
-    .step-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--accent-gold); min-width: 8%; }
-    .step-text { font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; padding-top: 1%; }
-
-    .indicator-pill { display: inline-block; padding: 2% 5%; background: rgba(201,169,98,0.15); border: 1px solid var(--accent-gold); border-radius: 20px; font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); letter-spacing: 1px; font-weight: 500; margin: 3% 0; }
-
-    /* Export mode */
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
+    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
     body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
+    body.export-mode .slide-wrapper { display: none; margin: 0; }
     body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; }
-    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } }
-  
-    
-    .slide-1 { background: linear-gradient(180deg, #0c0c0f 0%, #090910 100%) !important; }
-    .slide-1::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(180,180,200,0.06) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .slide-1 .bg-video, .slide-1 video { display: none !important; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
+    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
+
+    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
+    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .page-title { text-align: center; margin-bottom: 2rem; }
+    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
+
+    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
+    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
+    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
+    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
+
+    /* ═══════════════════════════════════════════
+       SHARED — Teal slide base (LEFT bar S1)
+       ═══════════════════════════════════════════ */
+    .slide-teal { background: linear-gradient(180deg, #080c0b 0%, #070a09 100%) !important; }
+    .slide-teal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.05) 0%, transparent 100%); pointer-events: none; z-index: 1; }
+    .slide-teal.slide-1::after { content: ''; position: absolute; top: 0; left: 0; width: 18px; height: 100%; background: linear-gradient(180deg, rgba(94,234,212,0.85) 0%, rgba(45,160,140,0.6) 100%); z-index: 5; }
+    .slide-teal .slide-content { z-index: 3; }
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
+
+    /* Chronicle badge */
+    .chronicle-badge {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.2cqw, 12px);
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: rgba(180,180,200,0.9);
-      margin-bottom: 8%;
-    }
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255,255,255,0.95);
+      color: rgba(94,234,212,0.9);
+      padding: clamp(3px, 0.6cqw, 7px) clamp(10px, 2cqw, 20px);
+      border: 1px solid rgba(94,234,212,0.3);
+      border-radius: clamp(3px, 0.6cqw, 6px);
+      background: rgba(94,234,212,0.06);
       margin-bottom: 4%;
     }
-    .slide-1 .cine-divider {
+
+    /* Oracle symbol */
+    .oracle-symbol {
+      font-family: var(--font-serif);
+      font-size: clamp(60px, 12cqw, 120px);
+      font-weight: 700;
+      color: rgba(94,234,212,0.15);
+      line-height: 1;
+      margin-bottom: 2%;
+    }
+
+    /* Titles */
+    .chronicle-title {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 4.8cqw, 50px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 3%;
+    }
+
+    .chronicle-title em {
+      color: var(--accent-teal);
+      font-style: italic;
+    }
+
+    .chronicle-subtitle {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 1.7cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 85%;
+      margin-bottom: 3%;
+    }
+
+    .chronicle-divider {
       width: 60px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(180,180,200,0.6), transparent);
+      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.5), transparent);
       margin-bottom: 4%;
     }
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(180,180,200,0.4);
-      line-height: 1.6;
+
+    /* Inner heading */
+    .inner-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.5cqw, 36px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 4%;
     }
-    .slide-1 .cine-logo {
+
+    .inner-heading em {
+      color: var(--accent-teal);
+      font-style: italic;
+    }
+
+    /* Problem cards */
+    .problem-grid {
+      width: 88%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1.2cqw, 14px);
+      margin-bottom: 4%;
+    }
+
+    .problem-card {
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(248,113,113,0.15);
+      background: rgba(248,113,113,0.04);
+      padding: 5%;
+    }
+
+    .problem-icon {
+      font-size: clamp(18px, 3cqw, 30px);
+      margin-bottom: 3%;
+    }
+
+    .problem-name {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.5cqw, 16px);
+      font-weight: 600;
+      color: #f87171;
+      margin-bottom: 3%;
+    }
+
+    .problem-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.2cqw, 12px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* System cards */
+    .system-grid {
+      width: 88%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(5px, 1cqw, 12px);
+      margin-bottom: 4%;
+    }
+
+    .system-card {
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94,234,212,0.15);
+      background: rgba(94,234,212,0.03);
+      padding: 3.5% 4%;
+    }
+
+    .system-num {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3cqw, 30px);
+      font-weight: 700;
+      color: var(--accent-teal);
+      flex-shrink: 0;
+      width: 10%;
+      text-align: center;
+    }
+
+    .system-info { flex: 1; }
+
+    .system-name {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.5cqw, 16px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1%;
+    }
+
+    .system-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.1cqw, 12px);
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+
+    /* Regime cards */
+    .regime-row {
+      width: 88%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(6px, 1.2cqw, 14px);
+      margin-bottom: 4%;
+    }
+
+    .regime-card {
+      border-radius: clamp(6px, 1cqw, 12px);
+      padding: 5%;
+      text-align: center;
+    }
+
+    .regime-card.acc {
+      border: 1px solid rgba(74,222,128,0.2);
+      background: rgba(74,222,128,0.04);
+    }
+
+    .regime-card.neutral {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .regime-card.dist {
+      border: 1px solid rgba(248,113,113,0.2);
+      background: rgba(248,113,113,0.04);
+    }
+
+    .regime-dot {
+      width: clamp(8px, 1.5cqw, 16px);
+      height: clamp(8px, 1.5cqw, 16px);
+      border-radius: 50%;
+      margin: 0 auto clamp(4px, 0.8cqw, 8px);
+    }
+
+    .regime-card.acc .regime-dot { background: #4ade80; box-shadow: 0 0 12px rgba(74,222,128,0.4); }
+    .regime-card.neutral .regime-dot { background: rgba(255,255,255,0.4); box-shadow: 0 0 12px rgba(255,255,255,0.2); }
+    .regime-card.dist .regime-dot { background: #f87171; box-shadow: 0 0 12px rgba(248,113,113,0.4); }
+
+    .regime-name {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 12px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 3%;
+    }
+
+    .regime-card.acc .regime-name { color: #4ade80; }
+    .regime-card.neutral .regime-name { color: var(--text-muted); }
+    .regime-card.dist .regime-name { color: #f87171; }
+
+    .regime-desc {
+      font-size: clamp(7px, 1cqw, 11px);
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+
+    /* Philosophy */
+    .chronicle-philosophy {
+      font-family: var(--font-serif);
+      font-size: clamp(12px, 2cqw, 22px);
+      font-weight: 500;
+      font-style: italic;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.4;
+      max-width: 85%;
+      text-align: center;
+    }
+
+    /* Stats row */
+    .stats-row {
+      width: 85%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(6px, 1cqw, 10px);
+      margin-bottom: 4%;
+    }
+
+    .stat-box { text-align: center; }
+
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 3.5cqw, 36px);
+      font-weight: 700;
+      color: var(--accent-teal);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.9cqw, 9px);
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 3%;
+    }
+
+    /* CTA */
+    .cta-badge {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 11px);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(94,234,212,0.7);
+      margin-bottom: 4%;
+    }
+
+    .cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 46px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 3%;
+    }
+
+    .cta-title em {
+      color: var(--accent-teal);
+      font-style: italic;
+    }
+
+    .cta-url {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.4cqw, 15px);
+      letter-spacing: 0.1em;
+      color: var(--accent-teal);
+      padding: clamp(6px, 1cqw, 12px) clamp(16px, 3cqw, 32px);
+      border: 1px solid rgba(94,234,212,0.3);
+      border-radius: clamp(4px, 0.8cqw, 8px);
+      background: rgba(94,234,212,0.06);
+    }
+
+    .slide-logo {
       position: absolute;
-      bottom: 8%;
+      bottom: 4%;
       left: 50%;
       transform: translateX(-50%);
+      font-family: 'Gugi', sans-serif;
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(180,180,200,0.4);
+      color: rgba(94,234,212,0.4);
+      z-index: 2;
+      white-space: nowrap;
     }
-  
   </style>
 </head>
 <body>
   <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
+    <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
-    <h1>Post 096 — INDUCEMENT &amp; LIQUIDITY (Lesson 24)</h1>
-    <p>Education Carousel — 8 Slides</p>
+    <h1>Post 096 — The Oracle</h1>
+    <p>5 slides &middot; Chronicle Series</p>
   </div>
 
   <div class="carousel-grid">
 
+    <!-- ══════ SLIDE 1: Hook ══════ -->
     <div class="slide-wrapper" data-slide="1">
-      <div class="slide slide-1">
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide slide-teal slide-1">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="cine-label">LEARN</div>
-          <div class="hook-main">INDUCEMENT &amp; LIQUIDITY</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">WHAT IS INDUCEMENT?</p>
-          <div class="cine-logo">Signal Pilot</div>
+          <div class="chronicle-badge">Chronicle &middot; The Oracle</div>
+          <div class="oracle-symbol">&Omega;</div>
+          <h2 class="chronicle-title">Volume <em>Oracle</em></h2>
+          <div class="chronicle-divider"></div>
+          <p class="chronicle-subtitle">5 backend systems. 3 market regimes. 25 alert types. One unified volume intelligence engine.</p>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
+    <!-- ══════ SLIDE 2: The Problem ══════ -->
     <div class="slide-wrapper" data-slide="2">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 08</span>
-        <div class="slide-subtitle">The Concept</div>
-        <h2 class="slide-title">Liquidity is the invisible hand behind every candle.</h2>
-        <div class="concept-card blue"><div class="card-label">Key Concept</div><div class="card-desc">Liquidity is the invisible hand behind every candle. Inducement: The trap before the move.</div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 2 — The Problem</span>
+      <div class="slide slide-teal">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <h3 class="inner-heading">Volume Was <em>Broken</em></h3>
+
+          <div class="problem-grid">
+            <div class="problem-card">
+              <div class="problem-icon">&#128200;</div>
+              <div class="problem-name">Raw Bars Lie</div>
+              <div class="problem-desc">Standard volume bars show quantity, not intent. A spike could be accumulation or distribution.</div>
+            </div>
+            <div class="problem-card">
+              <div class="problem-icon">&#128165;</div>
+              <div class="problem-name">Spike Distortion</div>
+              <div class="problem-desc">One massive candle warps the entire scale, making normal activity invisible.</div>
+            </div>
+            <div class="problem-card">
+              <div class="problem-icon">&#128269;</div>
+              <div class="problem-name">No Context</div>
+              <div class="problem-desc">Volume without structure is noise. You need to know what phase the market is in.</div>
+            </div>
+            <div class="problem-card">
+              <div class="problem-icon">&#9888;&#65039;</div>
+              <div class="problem-name">Lagging Signals</div>
+              <div class="problem-desc">Most volume indicators confirm what already happened instead of warning what's coming.</div>
+            </div>
+          </div>
+
+          <p class="chronicle-philosophy">Volume tells you who is in control — if you know how to listen.</p>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
 
+    <!-- ══════ SLIDE 3: Five Backend Systems ══════ -->
     <div class="slide-wrapper" data-slide="3">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 08</span>
-        <div class="slide-subtitle">Why It Matters</div>
-        <h2 class="slide-title">A small breakout that triggers stops, creates liquidity, the</h2>
-        <ul class="arrow-list"><li><span class="arrow">→</span> A small breakout that triggers stops, creates liquidity, then reverses.</li><li><span class="arrow">→</span> HOW IT WORKS:</li><li><span class="arrow">→</span> ️⃣ Price approaches key level</li><li><span class="arrow">→</span> ️⃣ Breaks slightly beyond (triggers stops)</li><li><span class="arrow">→</span> ️⃣ Grabs liquidity (your stops = market orders)</li></ul>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 3 — Five Systems</span>
+      <div class="slide slide-teal">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <h3 class="inner-heading">Five <em>Backend</em> Systems</h3>
+
+          <div class="system-grid">
+            <div class="system-card">
+              <div class="system-num">1</div>
+              <div class="system-info">
+                <div class="system-name">Structure Engine</div>
+                <div class="system-desc">Identifies accumulation, distribution, and transition phases in real time</div>
+              </div>
+            </div>
+            <div class="system-card">
+              <div class="system-num">2</div>
+              <div class="system-info">
+                <div class="system-name">Footprint Analyser</div>
+                <div class="system-desc">Decomposes volume into buying vs selling pressure at each price level</div>
+              </div>
+            </div>
+            <div class="system-card">
+              <div class="system-num">3</div>
+              <div class="system-info">
+                <div class="system-name">Stability Monitor</div>
+                <div class="system-desc">Measures regime persistence and flags potential transitions before they complete</div>
+              </div>
+            </div>
+            <div class="system-card">
+              <div class="system-num">4</div>
+              <div class="system-info">
+                <div class="system-name">Confluence Scorer</div>
+                <div class="system-desc">Weights and combines signals from all systems into a unified quality tier</div>
+              </div>
+            </div>
+            <div class="system-card">
+              <div class="system-num">5</div>
+              <div class="system-info">
+                <div class="system-name">Density Mapper</div>
+                <div class="system-desc">Spike-clipped OBV with divergence detection and institutional flow tracking</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
 
+    <!-- ══════ SLIDE 4: Three Regimes ══════ -->
     <div class="slide-wrapper" data-slide="4">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 08</span>
-        <div class="slide-subtitle">How It Works</div>
-        <h2 class="slide-title">The market doesn't break out TO run.</h2>
-        <ul class="arrow-list"><li><span class="arrow">→</span> The market doesn't break out TO run.</li><li><span class="arrow">→</span> It breaks out to GRAB, then runs the other way.</li><li><span class="arrow">→</span> Don't place stops at obvious levels.</li></ul>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 4 — Three Regimes</span>
+      <div class="slide slide-teal">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <h3 class="inner-heading">Three <em>Market Regimes</em></h3>
+
+          <div class="regime-row">
+            <div class="regime-card acc">
+              <div class="regime-dot"></div>
+              <div class="regime-name">Accumulation</div>
+              <div class="regime-desc">Smart money is quietly building positions. Price consolidates as volume builds beneath the surface.</div>
+            </div>
+            <div class="regime-card neutral">
+              <div class="regime-dot"></div>
+              <div class="regime-name">Neutral</div>
+              <div class="regime-desc">No clear institutional intent. Volume is average, structure is ambiguous. Wait for clarity.</div>
+            </div>
+            <div class="regime-card dist">
+              <div class="regime-dot"></div>
+              <div class="regime-name">Distribution</div>
+              <div class="regime-desc">Smart money is offloading positions. Price may still rise as retail absorbs the selling.</div>
+            </div>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-number">5</div>
+              <div class="stat-label">Backend Systems</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">25</div>
+              <div class="stat-label">Alert Types</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">3</div>
+              <div class="stat-label">Quality Tiers</div>
+            </div>
+          </div>
+
+          <p class="chronicle-philosophy">The Oracle doesn't predict. It reveals what's already happening beneath the surface.</p>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
 
+    <!-- ══════ SLIDE 5: CTA ══════ -->
     <div class="slide-wrapper" data-slide="5">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 08</span>
-        <div class="slide-subtitle">The Application</div>
-        <h2 class="slide-title">Example: price sits just below a key resistance with equal h</h2>
-        <p class="slide-body">Example: price sits just below a key resistance with equal highs. Stops are clustered above. Price spikes through, triggers the buy stops, then immediately reverses. The breakout traders are now trapped. That's inducement.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 5 — CTA</span>
+      <div class="slide slide-teal">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content" style="align-items: center; text-align: center; justify-content: center;">
+          <div class="cta-badge">Chronicle &middot; The Oracle</div>
+          <h2 class="cta-title">Read the <em>Volume</em>. Read the Market.</h2>
+          <div class="chronicle-divider"></div>
+          <div class="cta-url">signalpilot.io/chronicle</div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
 
-    <div class="slide-wrapper" data-slide="6">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 08</span>
-        <div class="slide-subtitle">Key Insight</div>
-        <h2 class="slide-title">How to protect yourself: never place your stop exactly at th</h2>
-        <div class="callout-box warning"><div class="callout-title">Important</div><div class="callout-text">How to protect yourself: never place your stop exactly at the obvious level. Give it room beyond the level — or better yet, wait for the sweep to happen first and trade the reversal that follows.</div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="7">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">07 / 08</span>
-        <div class="slide-subtitle">The Framework</div>
-        <h2 class="slide-title">When NOT to trade inducement: during low-volume sessions. A </h2>
-        <div class="callout-box warning"><div class="callout-title">Important</div><div class="callout-text">When NOT to trade inducement: during low-volume sessions. A sweep during the Asian session often lacks the volume to produce a real reversal. Inducement setups are most reliable during London and NY opens when institutions are actively engineering moves.</div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="8">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">08 / 08</span>
-        <div class="slide-icon">📚</div>
-        <h2 class="slide-title">Continue Learning</h2>
-        <p class="slide-body">Free education from beginner to professional.</p>
-        <a href="https://education.signalpilot.io/curriculum/beginner/01-the-liquidity-lie.html" class="cta-link">Start Learning</a>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
-    <button onclick="nextSlide()">Next →</button>
   </div>
 
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0;
-    let exportMode = false;
-    bgToggle.addEventListener('change', (e) => { videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'); });
-    opacitySlider.addEventListener('input', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value / 100); });
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+    (function() {
+      const bgToggle = document.getElementById('bg-toggle');
+      const opacityControl = document.getElementById('opacity-control');
+      const exportBtn = document.getElementById('export-btn');
+      const videos = document.querySelectorAll('.video-bg');
+      const slideWrappers = document.querySelectorAll('.slide-wrapper');
+      let exportMode = false;
+      let currentSlide = 0;
+
+      bgToggle.addEventListener('change', function() {
+        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
+      });
+      opacityControl.addEventListener('change', function() {
+        videos.forEach(v => { v.style.opacity = this.value; });
+      });
+      exportBtn.addEventListener('click', function() {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
+      });
+      function updateActiveSlide() {
+        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
+      }
+      document.addEventListener('keydown', function(e) {
+        if (!exportMode) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+      });
+    })();
   </script>
 </body>
 </html>
