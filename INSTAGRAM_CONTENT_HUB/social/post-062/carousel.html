@@ -4,654 +4,653 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Post 062 — Candlestick Patterns | Carousel Preview</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0a0a0f;
-      --bg-card: rgba(255, 255, 255, 0.02);
-      --border-subtle: rgba(255, 255, 255, 0.06);
-      --accent-blue: #4a90d9;
+      --bg-card: rgba(255,255,255,0.03);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-muted: rgba(255,255,255,0.4);
+      --border-subtle: rgba(255,255,255,0.1);
       --accent-gold: #c9a962;
-      --accent-green: #4ad97a;
-      --accent-red: #d94a4a;
-      --text-primary: #e8e6e3;
-      --text-secondary: rgba(255, 255, 255, 0.7);
-      --text-tertiary: rgba(255, 255, 255, 0.4);
+      --accent-gold-dim: rgba(201,169,98,0.3);
+      --color-green: #4ade80;
+      --color-red: #ef4444;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .carousel-grid { display: block; }
+    body.export-mode .slide-wrapper { display: none; margin: 0; }
+    body.export-mode .slide-wrapper.active { display: block; }
+    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
-    body {
-      background: #111;
-      font-family: 'Inter', sans-serif;
-      color: var(--text-primary);
-      padding: 2rem;
-      min-height: 100vh;
-    }
+    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
+    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .page-title { text-align: center; margin-bottom: 2rem; }
+    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
 
-    .controls {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 1000;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-    }
+    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
+    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
+    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
+    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
 
-    .controls label {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
+    /* EDU slide base — no bar */
+    .slide-edu { background: linear-gradient(180deg, #0d0d10 0%, #0a0a0f 100%) !important; }
+    .slide-edu::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(201,169,98,0.04) 0%, transparent 100%); pointer-events: none; z-index: 1; }
+    .slide-edu .slide-content { z-index: 3; }
 
-    .controls select, .controls button {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .page-title {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    .page-title h1 {
-      font-size: 2rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-
-    .page-title p {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-    }
-
-    .carousel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 2rem;
-      max-width: 1800px;
-      margin: 0 auto;
-      padding-bottom: 4rem;
-    }
-
-    .slide-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      container-type: inline-size;
-    }
-
-    .slide-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-gold);
-      margin-bottom: 0.75rem;
-    }
-
-    .slide {
-      width: 100%;
-      max-width: 540px;
-      aspect-ratio: 4 / 5;
-      position: relative;
-      overflow: hidden;
-      background: var(--bg-dark);
-      border-radius: 4px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .slide-bg {
+    /* Logo — grey for EDU */
+    .slide-logo {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    .slide-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.08;
-    }
-
-    .slide.bg-black .slide-bg video {
-      opacity: 0;
-    }
-
-    .slide-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      padding: 8%;
-    }
-
-    /* Cover slide */
-    .cover-slide .slide-content {
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .cover-badge {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      color: var(--accent-blue);
-      text-transform: uppercase;
-      padding: 2% 4%;
-      border: 1px solid rgba(74, 144, 217, 0.3);
-      border-radius: 6px;
-      margin-bottom: 5%;
-      background: rgba(74, 144, 217, 0.05);
-    }
-
-    .cover-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.5rem, 5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.1;
-      color: var(--text-primary);
-      margin-bottom: 3%;
-    }
-
-    .cover-subtitle {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2.2cqw, 1rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-    }
-
-    .brand-tag {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.3em;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-    }
-
-    /* Content slides */
-    .slide-number {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.45rem, 1.3cqw, 0.6rem);
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      margin-bottom: 3%;
-    }
-
-    .headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.3rem, 4.5cqw, 2.2rem);
-      font-weight: 600;
-      line-height: 1.1;
-      color: var(--text-primary);
-      margin-bottom: 4%;
-    }
-
-    .accent-gold { color: var(--accent-gold); }
-    .accent-blue { color: var(--accent-blue); }
-    .accent-red { color: var(--accent-red); }
-
-    /* Pattern card */
-    .pattern-section {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .pattern-card {
-      padding: 4%;
-      border-radius: 12px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .pattern-header {
-      display: flex;
-      align-items: center;
-      gap: 3%;
-      margin-bottom: 3%;
-      padding-bottom: 3%;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .pattern-icon {
-      font-size: clamp(1.2rem, 4cqw, 2rem);
-    }
-
-    .pattern-name {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 2.2cqw, 1rem);
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-    }
-
-    .pattern-details {
-      display: flex;
-      flex-direction: column;
-      gap: 2%;
-    }
-
-    .pattern-item {
-      display: flex;
-      align-items: center;
-      gap: 2%;
-      padding: 2.5%;
-      background: rgba(201, 169, 98, 0.05);
-      border: 1px solid rgba(201, 169, 98, 0.15);
-      border-radius: 8px;
-    }
-
-    .pattern-bullet {
-      width: 6px;
-      height: 6px;
-      background: var(--accent-gold);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .pattern-text {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.8cqw, 0.8rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-    }
-
-    /* Truth card */
-    .truth-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .truth-card {
-      padding: 5%;
-      background: rgba(217, 74, 74, 0.08);
-      border: 1px solid rgba(217, 74, 74, 0.25);
-      border-radius: 16px;
-    }
-
-    .truth-title {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent-red);
-      margin-bottom: 3%;
-    }
-
-    .truth-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.5cqw, 1.5rem);
-      font-weight: 600;
-      line-height: 1.4;
-      color: var(--text-primary);
-    }
-
-    .truth-emphasis {
-      color: var(--accent-gold);
-      font-style: italic;
-    }
-
-    /* CTA slide */
-    .cta-slide .slide-content {
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.3rem, 4.5cqw, 2.2rem);
-      font-weight: 600;
-      line-height: 1.1;
-      color: var(--text-primary);
-      margin-bottom: 3%;
-    }
-
-    .cta-subtext {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 2cqw, 0.9rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-      margin-bottom: 4%;
-      line-height: 1.5;
-    }
-
-    .cta-button {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--bg-dark);
-      background: linear-gradient(135deg, var(--accent-blue), #3a7bc8);
-      padding: 3% 6%;
-      border-radius: 6px;
-      text-decoration: none;
-    }
-
-    /* Export mode */
-    body.export-mode {
-      padding: 0;
-      background: transparent;
-    }
-
-    body.export-mode .controls,
-    body.export-mode .page-title,
-    body.export-mode .slide-label {
-      display: none;
-    }
-
-    body.export-mode .carousel-grid {
-      display: block;
-      padding: 0;
-    }
-
-    body.export-mode .slide-wrapper {
-      display: none;
-    }
-
-    body.export-mode .slide-wrapper.active {
-      display: flex;
-    }
-
-    body.export-mode .slide {
-      width: 1080px;
-      height: 1350px;
-      max-width: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    @media (max-width: 900px) {
-      .carousel-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .controls {
-        position: static;
-        margin-bottom: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-    }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (NEUTRAL) ═══ */
-    .slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%) !important;
-    }
-
-    .slide-1::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
-    }
-
-    .slide-1 .slide-content {
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      z-index: 3;
-    }
-
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
-      margin-bottom: 8%;
-    }
-
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
-    }
-
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
-      margin-bottom: 4%;
-    }
-
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(163, 163, 163, 0.4);
-      line-height: 1.6;
-    }
-
-    .slide-1 .cine-logo {
-      position: absolute;
-      bottom: 8%;
+      bottom: 4%;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Gugi', sans-serif;
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.4);
+      color: rgba(255,255,255,0.25);
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    /* LEARN label — gold, slide 1 only */
+    .learn-label {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: clamp(0.5rem, 1.4cqw, 0.7rem);
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(201,169,98,0.9);
+      margin-bottom: clamp(0.75rem, 2cqw, 1.25rem);
+    }
+
+    /* Gold divider */
+    .gold-divider {
+      width: clamp(2rem, 8cqw, 4rem);
+      height: 1px;
+      background: rgba(201,169,98,0.6);
+      margin: clamp(0.75rem, 2cqw, 1.25rem) 0;
+    }
+
+    /* ============================================
+       SLIDE 1 — Hook
+       ============================================ */
+    .slide-1 .hook-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .slide-1 .hook-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 6cqw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
+    }
+    .slide-1 .hook-title .gold { color: var(--accent-gold); }
+    .slide-1 .hook-subtitle {
+      font-family: var(--font-serif);
+      font-size: clamp(0.8rem, 2.2cqw, 1.15rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 85%;
+    }
+    .slide-1 .candle-icons {
+      display: flex;
+      gap: clamp(1rem, 4cqw, 2.5rem);
+      margin: clamp(1rem, 3cqw, 2rem) 0;
+    }
+    .slide-1 .candle-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .slide-1 .candle-wick {
+      width: 2px;
+      background: rgba(255,255,255,0.3);
+    }
+    .slide-1 .candle-body {
+      width: clamp(12px, 2.5cqw, 24px);
+      border-radius: 2px;
+    }
+    .slide-1 .candle-body.green { background: rgba(74,222,128,0.6); }
+    .slide-1 .candle-body.red { background: rgba(239,68,68,0.5); }
+
+    /* ============================================
+       SHARED — Pattern layout
+       ============================================ */
+    .pattern-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pattern-tag {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.4cqw, 14px);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(201,169,98,0.8);
+      margin-bottom: 3%;
+    }
+
+    .pattern-name {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 48px);
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: center;
+      line-height: 1.15;
+      margin-bottom: 5%;
+    }
+
+    .pattern-desc {
+      font-size: clamp(10px, 1.8cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      text-align: center;
+      max-width: 85%;
+      margin-bottom: 4%;
+    }
+
+    /* ============================================
+       SLIDE 2 — Hammer
+       ============================================ */
+    .hammer-viz {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 5%;
+    }
+    .hammer-wick-top {
+      width: 2px;
+      height: clamp(6px, 1.2cqw, 12px);
+      background: rgba(255,255,255,0.3);
+    }
+    .hammer-body {
+      width: clamp(24px, 5cqw, 50px);
+      height: clamp(16px, 3cqw, 32px);
+      background: var(--color-green);
+      border-radius: 3px;
+      opacity: 0.7;
+    }
+    .hammer-wick-bottom {
+      width: 2px;
+      height: clamp(40px, 9cqw, 90px);
+      background: rgba(255,255,255,0.3);
+    }
+
+    .bullet-list {
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 1cqw, 10px);
+    }
+    .bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(6px, 1.2cqw, 12px);
+      font-size: clamp(10px, 1.7cqw, 17px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .bullet-dot {
+      width: clamp(4px, 0.7cqw, 7px);
+      height: clamp(4px, 0.7cqw, 7px);
+      border-radius: 50%;
+      background: var(--accent-gold);
+      flex-shrink: 0;
+      margin-top: clamp(4px, 0.7cqw, 7px);
+    }
+
+    /* ============================================
+       SLIDE 3 — Engulfing
+       ============================================ */
+    .engulfing-viz {
+      display: flex;
+      align-items: flex-end;
+      gap: clamp(4px, 1cqw, 10px);
+      margin-bottom: 5%;
+    }
+    .engulf-candle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .engulf-wick {
+      width: 2px;
+      background: rgba(255,255,255,0.3);
+    }
+    .engulf-body {
+      border-radius: 3px;
+      opacity: 0.7;
+    }
+    .engulf-body.small-red {
+      width: clamp(18px, 3.5cqw, 36px);
+      height: clamp(20px, 4cqw, 40px);
+      background: var(--color-red);
+    }
+    .engulf-body.big-green {
+      width: clamp(30px, 6cqw, 60px);
+      height: clamp(36px, 7cqw, 72px);
+      background: var(--color-green);
+    }
+
+    /* ============================================
+       SLIDE 4 — Morning Star
+       ============================================ */
+    .morning-viz {
+      display: flex;
+      align-items: flex-end;
+      gap: clamp(6px, 1.4cqw, 14px);
+      margin-bottom: 5%;
+    }
+    .ms-candle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .ms-wick {
+      width: 2px;
+      background: rgba(255,255,255,0.3);
+    }
+    .ms-body {
+      border-radius: 3px;
+      opacity: 0.7;
+    }
+    .ms-body.down {
+      width: clamp(22px, 4.5cqw, 44px);
+      height: clamp(36px, 7cqw, 72px);
+      background: var(--color-red);
+    }
+    .ms-body.doji {
+      width: clamp(18px, 3.5cqw, 36px);
+      height: clamp(6px, 1.2cqw, 12px);
+      background: rgba(255,255,255,0.4);
+    }
+    .ms-body.up {
+      width: clamp(22px, 4.5cqw, 44px);
+      height: clamp(36px, 7cqw, 72px);
+      background: var(--color-green);
+    }
+    .ms-label {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 11px);
+      color: var(--text-muted);
+      margin-top: clamp(4px, 0.8cqw, 8px);
+      text-align: center;
+    }
+
+    /* ============================================
+       SLIDE 5 — The Truth
+       ============================================ */
+    .truth-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .truth-card {
+      width: 88%;
+      padding: clamp(14px, 3.5cqw, 36px);
+      border-radius: 14px;
+      background: rgba(201,169,98,0.04);
+      border: 1px solid rgba(201,169,98,0.15);
+      margin-bottom: 4%;
+    }
+
+    .truth-title {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.8cqw, 38px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 4%;
+    }
+
+    .truth-title .gold { color: var(--accent-gold); }
+
+    .truth-points {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.4cqw, 14px);
+      text-align: left;
+    }
+
+    .truth-point {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 1.2cqw, 12px);
+      font-size: clamp(10px, 1.8cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .truth-icon {
+      font-size: clamp(14px, 2.5cqw, 26px);
+      flex-shrink: 0;
+    }
+
+    .truth-quote {
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.8cqw, 30px);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--accent-gold);
+      text-align: center;
+    }
+
+    /* ============================================
+       SLIDE 6 — CTA
+       ============================================ */
+    .cta-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 5cqw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
+    }
+
+    .cta-subtitle {
+      font-size: clamp(0.6rem, 1.6cqw, 0.85rem);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 80%;
+      margin-bottom: clamp(1rem, 3cqw, 2rem);
+    }
+
+    .cta-box {
+      display: inline-flex;
+      align-items: center;
+      gap: clamp(0.4rem, 1cqw, 0.75rem);
+      padding: clamp(0.6rem, 1.8cqw, 1.1rem) clamp(1.2rem, 3.5cqw, 2rem);
+      border: 1px solid rgba(201,169,98,0.5);
+      border-radius: clamp(0.3rem, 0.8cqw, 0.5rem);
+      background: rgba(201,169,98,0.05);
+    }
+
+    .cta-box-text {
+      font-family: var(--font-mono);
+      font-size: clamp(0.55rem, 1.5cqw, 0.75rem);
+      font-weight: 500;
+      color: var(--accent-gold);
+      letter-spacing: 0.05em;
+    }
+
+    .cta-arrow {
+      color: var(--accent-gold);
+      font-size: clamp(0.7rem, 1.8cqw, 0.9rem);
     }
   </style>
 </head>
 <body>
+
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.05">5%</option><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.15">15%</option></select></label>
+    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 062 — Candlestick Patterns</h1>
-    <p>Instagram Carousel • 6 Slides • 1080×1350px</p>
+    <p>6 slides &middot; EDU</p>
   </div>
 
   <div class="carousel-grid">
 
-    <!-- Slide 1: Cover -->
+    <!-- ══════ SLIDE 1: Hook ══════ -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
-      <div class="slide slide-1">
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide slide-edu slide-1">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="cine-label">LEARN</div>
-          <div class="hook-main">Candlestick Patterns</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub"></p>
-          <div class="cine-logo">Signal Pilot</div>
+          <div class="hook-content">
+            <span class="learn-label">Learn</span>
+            <div class="gold-divider"></div>
+            <h1 class="hook-title">Candlestick Patterns<br>Are <span class="gold">Stories</span></h1>
+            <div class="candle-icons">
+              <div class="candle-icon">
+                <div class="candle-wick" style="height: 6px;"></div>
+                <div class="candle-body red" style="height: 20px;"></div>
+                <div class="candle-wick" style="height: 10px;"></div>
+              </div>
+              <div class="candle-icon">
+                <div class="candle-wick" style="height: 4px;"></div>
+                <div class="candle-body green" style="height: 28px;"></div>
+                <div class="candle-wick" style="height: 4px;"></div>
+              </div>
+              <div class="candle-icon">
+                <div class="candle-wick" style="height: 8px;"></div>
+                <div class="candle-body red" style="height: 14px;"></div>
+                <div class="candle-wick" style="height: 30px;"></div>
+              </div>
+            </div>
+            <p class="hook-subtitle">Not magic signals. Each candle tells you who won the battle.</p>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 2: Hammer -->
+    <!-- ══════ SLIDE 2: Hammer ══════ -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — Hammer</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+      <div class="slide slide-edu slide-2">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="slide-number">Slide 02</div>
-          <h2 class="headline">The<br><span class="accent-gold">Hammer</span></h2>
-          <div class="pattern-section">
-            <div class="pattern-card">
-              <div class="pattern-header">
-                <span class="pattern-icon">🔨</span>
-                <span class="pattern-name">Hammer</span>
+          <div class="pattern-layout">
+            <div class="pattern-tag">PATTERN 01</div>
+            <h2 class="pattern-name">Hammer</h2>
+            <div class="hammer-viz">
+              <div class="hammer-wick-top"></div>
+              <div class="hammer-body"></div>
+              <div class="hammer-wick-bottom"></div>
+            </div>
+            <div class="bullet-list">
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                Long lower wick, small body
               </div>
-              <div class="pattern-details">
-                <div class="pattern-item">
-                  <span class="pattern-bullet"></span>
-                  <span class="pattern-text">Long lower wick, small body</span>
-                </div>
-                <div class="pattern-item">
-                  <span class="pattern-bullet"></span>
-                  <span class="pattern-text">Sellers pushed down, buyers pushed back</span>
-                </div>
-                <div class="pattern-item">
-                  <span class="pattern-bullet"></span>
-                  <span class="pattern-text">Potential reversal at support</span>
-                </div>
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                Sellers pushed down, buyers pushed back
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                Potential reversal at support
               </div>
             </div>
           </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 3: Engulfing -->
+    <!-- ══════ SLIDE 3: Engulfing ══════ -->
     <div class="slide-wrapper" data-slide="3">
       <span class="slide-label">Slide 3 — Engulfing</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+      <div class="slide slide-edu slide-3">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="slide-number">Slide 03</div>
-          <h2 class="headline">The<br><span class="accent-blue">Engulfing</span></h2>
-          <div class="pattern-section">
-            <div class="pattern-card">
-              <div class="pattern-header">
-                <span class="pattern-icon">🌊</span>
-                <span class="pattern-name">Engulfing</span>
+          <div class="pattern-layout">
+            <div class="pattern-tag">PATTERN 02</div>
+            <h2 class="pattern-name">Engulfing</h2>
+            <div class="engulfing-viz">
+              <div class="engulf-candle">
+                <div class="engulf-wick" style="height: 8px;"></div>
+                <div class="engulf-body small-red"></div>
+                <div class="engulf-wick" style="height: 6px;"></div>
               </div>
-              <div class="pattern-details">
-                <div class="pattern-item">
-                  <span class="pattern-bullet"></span>
-                  <span class="pattern-text">Second candle completely covers first</span>
-                </div>
-                <div class="pattern-item">
-                  <span class="pattern-bullet"></span>
-                  <span class="pattern-text">Momentum shift mid-battle</span>
-                </div>
-                <div class="pattern-item">
-                  <span class="pattern-bullet"></span>
-                  <span class="pattern-text">Direction of engulfing = potential direction</span>
-                </div>
+              <div class="engulf-candle">
+                <div class="engulf-wick" style="height: 4px;"></div>
+                <div class="engulf-body big-green"></div>
+                <div class="engulf-wick" style="height: 4px;"></div>
+              </div>
+            </div>
+            <div class="bullet-list">
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                Second candle completely covers first
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                Momentum shift mid-battle
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                Direction of engulfing = potential direction
               </div>
             </div>
           </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 4: Morning Star -->
+    <!-- ══════ SLIDE 4: Morning Star ══════ -->
     <div class="slide-wrapper" data-slide="4">
       <span class="slide-label">Slide 4 — Morning Star</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+      <div class="slide slide-edu slide-4">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="slide-number">Slide 04</div>
-          <h2 class="headline">The<br><span class="accent-gold">Morning Star</span></h2>
-          <div class="pattern-section">
-            <div class="pattern-card">
-              <div class="pattern-header">
-                <span class="pattern-icon">⭐</span>
-                <span class="pattern-name">Morning Star</span>
+          <div class="pattern-layout">
+            <div class="pattern-tag">PATTERN 03</div>
+            <h2 class="pattern-name">Morning Star</h2>
+            <div class="morning-viz">
+              <div class="ms-candle">
+                <div class="ms-wick" style="height: 6px;"></div>
+                <div class="ms-body down"></div>
+                <div class="ms-wick" style="height: 4px;"></div>
+                <div class="ms-label">Down</div>
               </div>
-              <div class="pattern-details">
-                <div class="pattern-item">
-                  <span class="pattern-bullet"></span>
-                  <span class="pattern-text">Three candle reversal pattern</span>
-                </div>
-                <div class="pattern-item">
-                  <span class="pattern-bullet"></span>
-                  <span class="pattern-text">Down → Indecision → Up</span>
-                </div>
-                <div class="pattern-item">
-                  <span class="pattern-bullet"></span>
-                  <span class="pattern-text">Story of bears losing control</span>
-                </div>
+              <div class="ms-candle">
+                <div class="ms-wick" style="height: 14px;"></div>
+                <div class="ms-body doji"></div>
+                <div class="ms-wick" style="height: 14px;"></div>
+                <div class="ms-label">Indecision</div>
+              </div>
+              <div class="ms-candle">
+                <div class="ms-wick" style="height: 4px;"></div>
+                <div class="ms-body up"></div>
+                <div class="ms-wick" style="height: 6px;"></div>
+                <div class="ms-label">Up</div>
+              </div>
+            </div>
+            <div class="bullet-list">
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                Three-candle reversal pattern
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                Down &rarr; Indecision &rarr; Up
+              </div>
+              <div class="bullet-item">
+                <span class="bullet-dot"></span>
+                Story of bears losing control
               </div>
             </div>
           </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 5: The Truth -->
+    <!-- ══════ SLIDE 5: The Truth ══════ -->
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Truth</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+      <span class="slide-label">Slide 5 — The Truth</span>
+      <div class="slide slide-edu slide-5">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="slide-number">Slide 05</div>
-          <h2 class="headline">The<br><span class="accent-red">Truth</span></h2>
-          <div class="truth-container">
+          <div class="truth-layout">
+            <div class="pattern-tag">THE TRUTH</div>
             <div class="truth-card">
-              <div class="truth-title">Remember</div>
-              <p class="truth-text"><span class="truth-emphasis">Context</span> determines if the story continues.<br><br>Patterns alone ≠ guaranteed moves.</p>
+              <h2 class="truth-title">Context Determines<br>if the <span class="gold">Story Continues</span></h2>
+              <div class="truth-points">
+                <div class="truth-point">
+                  <span class="truth-icon">&#9888;</span>
+                  Patterns alone &#8800; guaranteed moves
+                </div>
+                <div class="truth-point">
+                  <span class="truth-icon">&#128269;</span>
+                  Check volume, trend, and S/R levels
+                </div>
+                <div class="truth-point">
+                  <span class="truth-icon">&#9881;</span>
+                  Use patterns as confirmation, not entry signals
+                </div>
+              </div>
             </div>
+            <p class="truth-quote">Read the story, don't memorize the names.</p>
           </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 6: CTA -->
+    <!-- ══════ SLIDE 6: CTA ══════ -->
     <div class="slide-wrapper" data-slide="6">
       <span class="slide-label">Slide 6 — CTA</span>
-      <div class="slide cta-slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+      <div class="slide slide-edu slide-6">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <h2 class="cta-headline">Master All<br><span class="accent-blue">Patterns</span></h2>
-          <p class="cta-subtext">Free PDF guide with all major candlestick patterns explained.</p>
-          <a href="#" class="cta-button">Get Free Guide</a>
-          <div class="brand-tag">SignalPilot</div>
+          <div class="cta-content">
+            <div class="gold-divider"></div>
+            <h2 class="cta-title">Master All<br>Patterns</h2>
+            <p class="cta-subtitle">Free PDF guide covering every candlestick pattern with real chart examples and context rules.</p>
+            <div class="cta-box">
+              <span class="cta-box-text">Free guide &mdash; signalpilot.io</span>
+              <span class="cta-arrow">&#8594;</span>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
@@ -659,56 +658,37 @@
   </div>
 
   <script>
-    const bgToggle = document.getElementById('bg-toggle');
-    const opacityControl = document.getElementById('opacity-control');
-    const slides = document.querySelectorAll('.slide');
-    const videos = document.querySelectorAll('.slide-bg video');
+    (function() {
+      const bgToggle = document.getElementById('bg-toggle');
+      const opacityControl = document.getElementById('opacity-control');
+      const exportBtn = document.getElementById('export-btn');
+      const videos = document.querySelectorAll('.video-bg');
+      const slideWrappers = document.querySelectorAll('.slide-wrapper');
+      let exportMode = false;
+      let currentSlide = 0;
 
-    bgToggle.addEventListener('change', (e) => {
-      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
-    });
-
-    opacityControl.addEventListener('change', (e) => {
-      videos.forEach(video => video.style.opacity = e.target.value);
-    });
-
-    const exportBtn = document.getElementById('export-btn');
-    const slideWrappers = document.querySelectorAll('.slide-wrapper');
-    let exportMode = false;
-    let currentExportSlide = 0;
-
-    exportBtn.addEventListener('click', () => {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) {
-        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
-        currentExportSlide = 0;
-        updateExportSlide();
-      } else {
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
+      bgToggle.addEventListener('change', function() {
+        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
+      });
+      opacityControl.addEventListener('change', function() {
+        videos.forEach(v => { v.style.opacity = this.value; });
+      });
+      exportBtn.addEventListener('click', function() {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
+      });
+      function updateActiveSlide() {
+        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
       }
-    });
-
-    function updateExportSlide() {
-      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'ArrowLeft') {
-        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'Escape') {
-        exportMode = false;
-        document.body.classList.remove('export-mode');
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
-    });
+      document.addEventListener('keydown', function(e) {
+        if (!exportMode) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+      });
+    })();
   </script>
 </body>
 </html>
