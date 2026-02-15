@@ -6,358 +6,384 @@
   <title>Post 052 — Support and Resistance | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
+      --bg-card: rgba(255,255,255,0.03);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-muted: rgba(255,255,255,0.4);
+      --border-subtle: rgba(255,255,255,0.1);
       --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --accent-green: #4ad97a;
-      --text-primary: #e8e8e8;
-      --text-secondary: #a0a0a0;
-      --text-dim: #6a6a6a;
+      --bull: #22c55e;
+      --bear: #ef4444;
+      --blue: #3b82f6;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .carousel-grid { display: block; }
+    body.export-mode .slide-wrapper { display: none; margin: 0; }
+    body.export-mode .slide-wrapper.active { display: block; }
+    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
-    body {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
+    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
+    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .page-title { text-align: center; margin-bottom: 2rem; }
+    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
 
-    .controls {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
+    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
+    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
+    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
+    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5%; }
 
-    .controls label {
-      color: var(--text-secondary);
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    /* ═══════════════════════════════════════════
+       SLIDE 1 — Cinematic Hook (NEUTRAL/EDU — gold label, no bar)
+       ═══════════════════════════════════════════ */
+    .slide-1 { background: linear-gradient(180deg, #0a0a0f 0%, #08080c 100%) !important; }
+    .slide-1::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%); pointer-events: none; z-index: 1; }
+    .slide-1 .video-bg, .slide-1 video { display: none !important; }
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
+    .slide-1 .cine-label { font-size: clamp(0.5rem, 1.6cqw, 0.875rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201,169,98,0.9); margin-bottom: 8%; }
+    .slide-1 .hook-main { font-size: clamp(1.4rem, 4.5cqw, 2.5rem); font-weight: 600; line-height: 1.2; color: rgba(255,255,255,0.95); margin-bottom: 4%; }
+    .slide-1 .cine-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(201,169,98,0.6), transparent); margin-bottom: 4%; }
+    .slide-1 .hook-sub { font-size: clamp(0.65rem, 2cqw, 1.1rem); font-weight: 300; letter-spacing: 0.05em; color: rgba(255,255,255,0.35); line-height: 1.6; }
 
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-
-    .controls button {
-      background: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .page-title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .page-title h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 400;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-    }
-
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-
-    .carousel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .slide-wrapper {
-      aspect-ratio: 4 / 5;
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg-dark);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-      container-type: inline-size;
-    }
-
-    .slide-wrapper .bg-video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: var(--video-opacity, 0.08);
-      pointer-events: none;
-    }
-
-    .slide-wrapper .slide-content {
-      position: relative;
-      z-index: 2;
-      width: 100%; height: 100%;
+    /* ═══════════════════════════════════════════
+       SHARED — Content slide layouts
+       ═══════════════════════════════════════════ */
+    .concept-stage {
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 8%;
+    }
+
+    .concept-icon {
+      font-size: clamp(32px, 6.5cqw, 70px);
+      margin-bottom: 3%;
+    }
+
+    .concept-title {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 4cqw, 44px);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2%;
       text-align: center;
     }
 
-    .slide-number {
-      position: absolute;
-      top: 4%; left: 4%;
-      font-size: clamp(9px, 2cqw, 11px);
-      color: var(--text-dim);
-      font-weight: 500;
-      letter-spacing: 1px;
-    }
-
-    .brand-mark {
-      position: absolute;
-      bottom: 4%; right: 4%;
-      font-size: clamp(8px, 1.8cqw, 10px);
-      color: var(--text-dim);
-      letter-spacing: 1px;
-    }
-
-    .slide-icon { font-size: clamp(28px, 7cqw, 48px); margin-bottom: 4%; }
-
-    .slide-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(18px, 5cqw, 32px);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 3%;
-      line-height: 1.2;
-    }
-
-    .slide-title.large { font-size: clamp(20px, 5.5cqw, 38px); }
-
-    .slide-subtitle {
-      font-size: clamp(10px, 2.5cqw, 14px);
-      color: var(--accent-gold);
+    .concept-subtitle {
+      font-size: clamp(9px, 1.5cqw, 16px);
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 5%;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 4%;
-      font-weight: 500;
-    }
-
-    .slide-body {
-      font-size: clamp(12px, 3cqw, 16px);
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 90%;
-    }
-
-    .concept-box {
-      width: 100%;
-      max-width: 90%;
-      border-radius: 16px;
-      padding: 5%;
-      margin: 3% 0;
-      text-align: left;
-    }
-
-    .concept-box.support {
-      background: rgba(74, 217, 122, 0.1);
-      border: 2px solid rgba(74, 217, 122, 0.4);
-    }
-
-    .concept-box.resistance {
-      background: rgba(217, 74, 74, 0.1);
-      border: 2px solid rgba(217, 74, 74, 0.4);
-    }
-
-    .concept-box.key {
-      background: rgba(74, 144, 217, 0.1);
-      border: 2px solid rgba(74, 144, 217, 0.4);
-    }
-
-    .concept-box.flip {
-      background: rgba(201, 169, 98, 0.1);
-      border: 2px solid rgba(201, 169, 98, 0.4);
-    }
-
-    .concept-label {
-      font-size: clamp(9px, 2.2cqw, 12px);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 2%;
-    }
-
-    .concept-box.support .concept-label { color: var(--accent-green); }
-    .concept-box.resistance .concept-label { color: var(--accent-red); }
-    .concept-box.key .concept-label { color: var(--accent-blue); }
-    .concept-box.flip .concept-label { color: var(--accent-gold); }
-
-    .concept-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(18px, 4.5cqw, 28px);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 3%;
     }
 
     .concept-desc {
-      font-size: clamp(10px, 2.5cqw, 14px);
+      font-size: clamp(11px, 2cqw, 20px);
       color: var(--text-secondary);
+      text-align: center;
       line-height: 1.6;
+      max-width: 85%;
+      margin-bottom: 4%;
     }
 
-    .chart-placeholder {
+    /* Mini chart for S/R visualization */
+    .sr-chart {
+      width: 85%;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: clamp(6px, 1.2cqw, 12px);
+      margin-bottom: 4%;
+      overflow: hidden;
+    }
+
+    /* Horizontal level line */
+    .level-line {
+      position: absolute;
+      left: 0;
       width: 100%;
-      max-width: 90%;
-      height: 25%;
-      background: linear-gradient(135deg, rgba(74, 144, 217, 0.1), rgba(201, 169, 98, 0.1));
-      border: 1px dashed var(--text-dim);
-      border-radius: 12px;
+      height: 2px;
+      z-index: 2;
+    }
+
+    .level-line.support { background: linear-gradient(90deg, transparent 5%, var(--bull) 15%, var(--bull) 85%, transparent 95%); }
+    .level-line.resistance { background: linear-gradient(90deg, transparent 5%, var(--bear) 15%, var(--bear) 85%, transparent 95%); }
+
+    .level-label {
+      position: absolute;
+      right: 4%;
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 1.1cqw, 11px);
+      letter-spacing: 1px;
+      font-weight: 600;
+      transform: translateY(-120%);
+    }
+
+    .level-label.support-label { color: var(--bull); }
+    .level-label.resistance-label { color: var(--bear); }
+
+    /* Price candle bars */
+    .candle-row {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 3% 0;
+      align-items: flex-end;
+      justify-content: space-evenly;
+      padding: 0 3%;
     }
 
-    .chart-placeholder span {
-      color: var(--text-dim);
-      font-size: clamp(10px, 2.3cqw, 13px);
+    .candle {
+      width: clamp(3px, 0.8cqw, 8px);
+      border-radius: 1px;
+      position: relative;
     }
 
-    .cta-link {
-      display: inline-block;
-      margin-top: 5%;
-      padding: 3% 6%;
-      background: var(--accent-gold);
-      color: var(--bg-dark);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      font-size: clamp(11px, 2.5cqw, 14px);
-    }
+    .candle.bull { background: var(--bull); }
+    .candle.bear { background: var(--bear); }
 
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper {
-      display: none;
-      width: 1080px; height: 1350px;
-      border-radius: 0; margin: 0;
-    }
-    body.export-mode .slide-wrapper.active { display: block; }
-
-    .export-nav {
-      display: none;
-      position: fixed;
-      bottom: 20px;
+    .candle .wick {
+      position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      gap: 12px;
-      z-index: 1000;
+      width: 1px;
     }
 
-    body.export-mode .export-nav { display: flex; }
+    .candle .wick.bull-wick { background: var(--bull); }
+    .candle .wick.bear-wick { background: var(--bear); }
 
-    .export-nav button {
-      background: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .export-nav .slide-indicator {
-      background: rgba(255,255,255,0.1);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-
-    @media (max-width: 768px) {
-      .carousel-grid { grid-template-columns: 1fr; max-width: 400px; }
-    }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (NEUTRAL) ═══ */
-    .slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%) !important;
-    }
-
-    .slide-1::before {
-      content: '';
+    /* Bounce arrows */
+    .bounce-arrow {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
-    }
-
-    .slide-1 .slide-content {
-      align-items: center;
-      text-align: center;
-      justify-content: center;
+      font-size: clamp(10px, 2cqw, 20px);
       z-index: 3;
     }
 
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
+    /* Insight box */
+    .insight-box {
+      width: 85%;
+      padding: 3.5% 4%;
+      border-radius: 10px;
+      font-size: clamp(10px, 1.8cqw, 18px);
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .insight-box.green {
+      background: rgba(34,197,94,0.06);
+      border: 1px solid rgba(34,197,94,0.2);
+    }
+
+    .insight-box.red {
+      background: rgba(239,68,68,0.06);
+      border: 1px solid rgba(239,68,68,0.2);
+    }
+
+    .insight-box.gold {
+      background: rgba(201,169,98,0.06);
+      border: 1px solid rgba(201,169,98,0.2);
+    }
+
+    .insight-box strong.green-hl { color: var(--bull); }
+    .insight-box strong.red-hl { color: var(--bear); }
+    .insight-box strong.gold-hl { color: var(--accent-gold); }
+
+    /* Bullet list */
+    .bullet-list {
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 0.8cqw, 10px);
+      margin-bottom: 4%;
+    }
+
+    .bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 2.5%;
+      font-size: clamp(10px, 1.8cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .bullet-dot {
+      flex-shrink: 0;
+      width: clamp(4px, 0.8cqw, 8px);
+      height: clamp(4px, 0.8cqw, 8px);
+      border-radius: 50%;
+      margin-top: clamp(4px, 0.8cqw, 8px);
+    }
+
+    .bullet-dot.green { background: var(--bull); }
+    .bullet-dot.red { background: var(--bear); }
+    .bullet-dot.gold { background: var(--accent-gold); }
+
+    /* Flip visualization */
+    .flip-visual {
+      width: 85%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4%;
+      margin-bottom: 5%;
+    }
+
+    .flip-box {
+      padding: 3% 5%;
+      border-radius: 10px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .flip-box.from-support {
+      background: rgba(34,197,94,0.08);
+      border: 2px solid rgba(34,197,94,0.3);
+    }
+
+    .flip-box.to-resistance {
+      background: rgba(239,68,68,0.08);
+      border: 2px solid rgba(239,68,68,0.3);
+    }
+
+    .flip-box.from-resistance {
+      background: rgba(239,68,68,0.08);
+      border: 2px solid rgba(239,68,68,0.3);
+    }
+
+    .flip-box.to-support {
+      background: rgba(34,197,94,0.08);
+      border: 2px solid rgba(34,197,94,0.3);
+    }
+
+    .flip-box-label {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.2cqw, 12px);
+      letter-spacing: 1px;
       text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
-      margin-bottom: 8%;
+      margin-bottom: 4%;
     }
 
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
+    .flip-box.from-support .flip-box-label,
+    .flip-box.to-support .flip-box-label { color: var(--bull); }
+    .flip-box.to-resistance .flip-box-label,
+    .flip-box.from-resistance .flip-box-label { color: var(--bear); }
+
+    .flip-box-name {
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.8cqw, 30px);
+      font-weight: 700;
+    }
+
+    .flip-box.from-support .flip-box-name,
+    .flip-box.to-support .flip-box-name { color: var(--bull); }
+    .flip-box.to-resistance .flip-box-name,
+    .flip-box.from-resistance .flip-box-name { color: var(--bear); }
+
+    .flip-arrow {
+      font-size: clamp(16px, 3.2cqw, 34px);
+      color: var(--text-muted);
+    }
+
+    /* Strength meter */
+    .strength-meter {
+      width: 85%;
+      margin-bottom: 4%;
+    }
+
+    .strength-label {
+      font-size: clamp(9px, 1.5cqw, 15px);
+      color: var(--text-muted);
+      margin-bottom: 2%;
+      text-align: center;
+    }
+
+    .strength-bar {
+      width: 100%;
+      height: clamp(8px, 1.6cqw, 16px);
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .strength-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, rgba(201,169,98,0.4), var(--accent-gold));
+    }
+
+    .strength-ticks {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1%;
+    }
+
+    .strength-tick {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 1cqw, 10px);
+      color: var(--text-muted);
+    }
+
+    /* CTA */
+    .cta-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .cta-icon { font-size: clamp(36px, 7.4cqw, 80px); margin-bottom: 4%; }
+
+    .cta-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 48px);
+      font-weight: 700;
+      color: var(--text-primary);
       line-height: 1.2;
-      color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
+      margin-bottom: 3%;
     }
 
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
-      margin-bottom: 4%;
-    }
+    .cta-accent { color: var(--accent-gold); }
 
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(163, 163, 163, 0.4);
+    .cta-body {
+      font-size: clamp(10px, 1.8cqw, 18px);
+      color: var(--text-secondary);
       line-height: 1.6;
+      max-width: 85%;
+      margin-bottom: 5%;
     }
 
-    .slide-1 .cine-logo {
+    .cta-box {
+      background: linear-gradient(135deg, rgba(201,169,98,0.15) 0%, rgba(201,169,98,0.05) 100%);
+      border: 2px solid var(--accent-gold);
+      border-radius: 14px;
+      padding: 3% 6%;
+    }
+
+    .cta-box-text { font-size: clamp(11px, 2cqw, 22px); font-weight: 500; color: var(--text-primary); margin-bottom: 1%; }
+    .cta-link { font-size: clamp(10px, 1.7cqw, 18px); font-weight: 600; color: var(--accent-gold); }
+
+    .slide-logo {
       position: absolute;
       bottom: 8%;
       left: 50%;
@@ -366,30 +392,47 @@
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.4);
+      color: rgba(255,255,255,0.25);
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    .cine-logo {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Gugi', sans-serif;
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      z-index: 2;
+      white-space: nowrap;
     }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
+    <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 052 — Support and Resistance</h1>
-    <p>Education Carousel — 8 Slides</p>
+    <p>8 slides · Education</p>
   </div>
 
   <div class="carousel-grid">
-    <!-- Slide 1: Hook -->
+
+    <!-- ══════ SLIDE 1: Cinematic Hook ══════ -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <span class="slide-label">Slide 1 — Hook</span>
       <div class="slide slide-1">
         <div class="slide-content">
           <div class="cine-label">LEARN</div>
-          <div class="hook-main">SUPPORT &amp; RESISTANCE 101</div>
+          <div class="hook-main">Support &amp; Resistance 101</div>
           <div class="cine-divider"></div>
           <p class="hook-sub">These aren't magic lines. They're areas of market memory.</p>
           <div class="cine-logo">Signal Pilot</div>
@@ -397,166 +440,299 @@
       </div>
     </div>
 
-    <!-- Slide 2: Support -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 08</span>
-        <div class="concept-box support">
-          <div class="concept-label">Concept</div>
-          <div class="concept-title">Support</div>
-          <div class="concept-desc">Price level where buying interest historically appeared. The "floor" that held price up.</div>
+    <!-- ══════ SLIDE 2: What Is Support ══════ -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — Support</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="concept-stage">
+            <div class="concept-icon">🟢</div>
+            <h2 class="concept-title">Support</h2>
+            <p class="concept-subtitle">Where buyers stepped in</p>
+            <div class="sr-chart">
+              <div class="level-line support" style="top: 65%;">
+                <span class="level-label support-label">SUPPORT</span>
+              </div>
+              <div class="candle-row">
+                <div class="candle bear" style="height: 35%; margin-bottom: 25%;"></div>
+                <div class="candle bear" style="height: 28%; margin-bottom: 18%;"></div>
+                <div class="candle bear" style="height: 22%; margin-bottom: 8%;"></div>
+                <div class="candle bull" style="height: 15%; margin-bottom: 2%;"></div>
+                <div class="candle bull" style="height: 25%; margin-bottom: 8%;"></div>
+                <div class="candle bull" style="height: 32%; margin-bottom: 18%;"></div>
+                <div class="candle bull" style="height: 28%; margin-bottom: 25%;"></div>
+                <div class="candle bear" style="height: 18%; margin-bottom: 15%;"></div>
+                <div class="candle bear" style="height: 22%; margin-bottom: 8%;"></div>
+                <div class="candle bull" style="height: 12%; margin-bottom: 3%;"></div>
+                <div class="candle bull" style="height: 20%; margin-bottom: 10%;"></div>
+                <div class="candle bull" style="height: 30%; margin-bottom: 22%;"></div>
+              </div>
+              <span class="bounce-arrow" style="left: 28%; top: 58%;">↗</span>
+              <span class="bounce-arrow" style="left: 75%; top: 58%;">↗</span>
+            </div>
+            <div class="bullet-list">
+              <div class="bullet-item"><div class="bullet-dot green"></div>Price level where buying interest appeared</div>
+              <div class="bullet-item"><div class="bullet-dot green"></div>"Floor" that held price up</div>
+              <div class="bullet-item"><div class="bullet-dot green"></div>More touches = stronger level</div>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <p class="slide-body">Where buyers stepped in before — they may step in again.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 3: Resistance -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 08</span>
-        <div class="concept-box resistance">
-          <div class="concept-label">Concept</div>
-          <div class="concept-title">Resistance</div>
-          <div class="concept-desc">Price level where selling interest historically appeared. The "ceiling" that pushed price down.</div>
+    <!-- ══════ SLIDE 3: What Is Resistance ══════ -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Resistance</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="concept-stage">
+            <div class="concept-icon">🔴</div>
+            <h2 class="concept-title">Resistance</h2>
+            <p class="concept-subtitle">Where sellers stepped in</p>
+            <div class="sr-chart">
+              <div class="level-line resistance" style="top: 25%;">
+                <span class="level-label resistance-label">RESISTANCE</span>
+              </div>
+              <div class="candle-row">
+                <div class="candle bull" style="height: 30%; margin-bottom: 25%;"></div>
+                <div class="candle bull" style="height: 35%; margin-bottom: 32%;"></div>
+                <div class="candle bull" style="height: 22%; margin-bottom: 42%;"></div>
+                <div class="candle bear" style="height: 18%; margin-bottom: 50%;"></div>
+                <div class="candle bear" style="height: 28%; margin-bottom: 38%;"></div>
+                <div class="candle bear" style="height: 22%; margin-bottom: 28%;"></div>
+                <div class="candle bull" style="height: 25%; margin-bottom: 32%;"></div>
+                <div class="candle bull" style="height: 30%; margin-bottom: 40%;"></div>
+                <div class="candle bear" style="height: 15%; margin-bottom: 52%;"></div>
+                <div class="candle bear" style="height: 25%; margin-bottom: 40%;"></div>
+                <div class="candle bear" style="height: 20%; margin-bottom: 32%;"></div>
+                <div class="candle bull" style="height: 18%; margin-bottom: 28%;"></div>
+              </div>
+              <span class="bounce-arrow" style="left: 30%; top: 20%;">↘</span>
+              <span class="bounce-arrow" style="left: 68%; top: 20%;">↘</span>
+            </div>
+            <div class="bullet-list">
+              <div class="bullet-item"><div class="bullet-dot red"></div>Price level where selling interest appeared</div>
+              <div class="bullet-item"><div class="bullet-dot red"></div>"Ceiling" that pushed price down</div>
+              <div class="bullet-item"><div class="bullet-dot red"></div>More touches = stronger level</div>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <p class="slide-body">Where sellers stepped in before — they may step in again.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 4: Key - More touches -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 08</span>
-        <div class="concept-box key">
-          <div class="concept-label">Key Insight</div>
-          <div class="concept-title">Touches = Strength</div>
-          <div class="concept-desc">The more times a level is tested, the more significant it becomes.<br><br>...until it breaks.</div>
+    <!-- ══════ SLIDE 4: Strength ══════ -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Strength</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="concept-stage">
+            <div class="concept-icon">🔑</div>
+            <h2 class="concept-title">More Touches = Stronger</h2>
+            <p class="concept-desc">The more times price tests a level and holds, the more significant that level becomes.</p>
+            <div class="strength-meter">
+              <div class="strength-label">LEVEL SIGNIFICANCE</div>
+              <div class="strength-bar"><div class="strength-fill" style="width: 25%;"></div></div>
+              <div class="strength-ticks"><span class="strength-tick">1 touch</span><span class="strength-tick">2 touches</span><span class="strength-tick">3+</span><span class="strength-tick">5+</span></div>
+            </div>
+            <div class="strength-meter">
+              <div class="strength-bar"><div class="strength-fill" style="width: 50%;"></div></div>
+            </div>
+            <div class="strength-meter">
+              <div class="strength-bar"><div class="strength-fill" style="width: 78%;"></div></div>
+            </div>
+            <div class="strength-meter">
+              <div class="strength-bar"><div class="strength-fill" style="width: 95%;"></div></div>
+            </div>
+            <div class="insight-box gold" style="margin-top: 3%;">
+              <strong class="gold-hl">Key insight:</strong> Levels are <em>areas</em>, not exact prices. Think zones, not lines.
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <p class="slide-body">2 touches = level. 4+ touches = major level.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 5: Flip - Support breaks -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 08</span>
-        <div class="concept-box flip">
-          <div class="concept-label">The Flip</div>
-          <div class="concept-title">Support Breaks</div>
-          <div class="concept-desc">When support breaks, it often becomes resistance.<br><br>The floor becomes the ceiling.</div>
+    <!-- ══════ SLIDE 5: Support Breaks → Resistance ══════ -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Flip (S→R)</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="concept-stage">
+            <div class="concept-icon">🔄</div>
+            <h2 class="concept-title">The Flip</h2>
+            <p class="concept-subtitle">Support breaks → becomes resistance</p>
+            <div class="flip-visual">
+              <div class="flip-box from-support">
+                <div class="flip-box-label">WAS</div>
+                <div class="flip-box-name">Support</div>
+              </div>
+              <span class="flip-arrow">→</span>
+              <div class="flip-box to-resistance">
+                <div class="flip-box-label">BECOMES</div>
+                <div class="flip-box-name">Resistance</div>
+              </div>
+            </div>
+            <div class="concept-desc">When buyers can no longer hold a level, it means sellers took control. That old floor now becomes a ceiling.</div>
+            <div class="insight-box red">
+              <strong class="red-hl">Watch for:</strong> Price breaking below support, then retesting it from underneath and getting rejected.
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <p class="slide-body">Watch for price to retest the broken level from below.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 6: Flip - Resistance breaks -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 08</span>
-        <div class="concept-box flip">
-          <div class="concept-label">The Flip</div>
-          <div class="concept-title">Resistance Breaks</div>
-          <div class="concept-desc">When resistance breaks, it often becomes support.<br><br>The ceiling becomes the floor.</div>
+    <!-- ══════ SLIDE 6: Resistance Breaks → Support ══════ -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — Flip (R→S)</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="concept-stage">
+            <div class="concept-icon">🔄</div>
+            <h2 class="concept-title">The Flip</h2>
+            <p class="concept-subtitle">Resistance breaks → becomes support</p>
+            <div class="flip-visual">
+              <div class="flip-box from-resistance">
+                <div class="flip-box-label">WAS</div>
+                <div class="flip-box-name">Resistance</div>
+              </div>
+              <span class="flip-arrow">→</span>
+              <div class="flip-box to-support">
+                <div class="flip-box-label">BECOMES</div>
+                <div class="flip-box-name">Support</div>
+              </div>
+            </div>
+            <div class="concept-desc">When price finally breaks through the ceiling, that old resistance level now acts as a floor for future pullbacks.</div>
+            <div class="insight-box green">
+              <strong class="green-hl">Watch for:</strong> Price breaking above resistance, then pulling back to retest the level as new support.
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <p class="slide-body">Watch for price to retest the broken level from above.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 7: Example -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">07 / 08</span>
-        <div class="slide-subtitle">Example</div>
-        <h2 class="slide-title">The Flip in Action</h2>
-        <div class="chart-placeholder">
-          <span>[Chart showing S/R flip with annotations]</span>
+    <!-- ══════ SLIDE 7: Chart Example ══════ -->
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — Complete Picture</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="concept-stage">
+            <h2 class="concept-title">The Complete Picture</h2>
+            <div class="sr-chart" style="aspect-ratio: 16 / 12;">
+              <div class="level-line resistance" style="top: 22%;">
+                <span class="level-label resistance-label">RESISTANCE</span>
+              </div>
+              <div class="level-line support" style="top: 68%;">
+                <span class="level-label support-label">SUPPORT</span>
+              </div>
+              <div class="candle-row">
+                <div class="candle bull" style="height: 15%; margin-bottom: 30%;"></div>
+                <div class="candle bull" style="height: 18%; margin-bottom: 38%;"></div>
+                <div class="candle bull" style="height: 12%; margin-bottom: 48%;"></div>
+                <div class="candle bear" style="height: 15%; margin-bottom: 55%;"></div>
+                <div class="candle bear" style="height: 20%; margin-bottom: 45%;"></div>
+                <div class="candle bear" style="height: 18%; margin-bottom: 35%;"></div>
+                <div class="candle bear" style="height: 12%; margin-bottom: 25%;"></div>
+                <div class="candle bull" style="height: 10%; margin-bottom: 18%;"></div>
+                <div class="candle bull" style="height: 15%; margin-bottom: 25%;"></div>
+                <div class="candle bull" style="height: 20%; margin-bottom: 35%;"></div>
+                <div class="candle bull" style="height: 18%; margin-bottom: 45%;"></div>
+                <div class="candle bull" style="height: 12%; margin-bottom: 55%;"></div>
+                <div class="candle bear" style="height: 14%; margin-bottom: 58%;"></div>
+                <div class="candle bear" style="height: 20%; margin-bottom: 48%;"></div>
+                <div class="candle bear" style="height: 15%; margin-bottom: 38%;"></div>
+                <div class="candle bull" style="height: 10%; margin-bottom: 28%;"></div>
+              </div>
+              <span class="bounce-arrow" style="left: 50%; top: 62%; color: var(--bull);">↗</span>
+              <span class="bounce-arrow" style="left: 25%; top: 18%; color: var(--bear);">↘</span>
+              <span class="bounce-arrow" style="left: 80%; top: 18%; color: var(--bear);">↘</span>
+            </div>
+            <div class="insight-box gold">
+              <strong class="gold-hl">Remember:</strong> Support is the floor. Resistance is the ceiling. When one breaks, they flip. This is the foundation of all technical analysis.
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <p class="slide-body">Notice how old resistance became new support after the breakout.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 8: CTA -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">08 / 08</span>
-        <div class="slide-icon">📚</div>
-        <h2 class="slide-title">Master S/R Levels</h2>
-        <p class="slide-body">Full lesson with chart examples and practical techniques.</p>
-        <a href="https://education.signalpilot.io/curriculum/beginner/13-smart-money-concepts.html" class="cta-link">Read Full Lesson</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+    <!-- ══════ SLIDE 8: CTA ══════ -->
+    <div class="slide-wrapper" data-slide="8">
+      <span class="slide-label">Slide 8 — CTA</span>
+      <div class="slide">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="cta-container">
+            <div class="cta-icon">📐</div>
+            <h2 class="cta-headline">Find the Levels.<br><span class="cta-accent">Trade the Bounces.</span></h2>
+            <p class="cta-body">Full lesson on support and resistance with chart examples, trading strategies, and common mistakes to avoid.</p>
+            <div class="cta-box">
+              <p class="cta-box-text">Read the full lesson free</p>
+              <span class="cta-link">signalpilot.io</span>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
-    <button onclick="nextSlide()">Next →</button>
   </div>
 
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0;
-    let exportMode = false;
+    (function() {
+      const bgToggle = document.getElementById('bg-toggle');
+      const opacityControl = document.getElementById('opacity-control');
+      const exportBtn = document.getElementById('export-btn');
+      const videos = document.querySelectorAll('.video-bg');
+      const slideWrappers = document.querySelectorAll('.slide-wrapper');
+      let exportMode = false;
+      let currentSlide = 0;
 
-    bgToggle.addEventListener('change', (e) => {
-      videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none');
-    });
-
-    opacitySlider.addEventListener('input', (e) => {
-      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
-    });
-
-    function toggleExportMode() {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) { currentSlide = 0; updateExportView(); }
-    }
-
-    function updateExportView() {
-      slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
-      document.getElementById('currentSlide').textContent = currentSlide + 1;
-    }
-
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'Escape') toggleExportMode();
-    });
+      bgToggle.addEventListener('change', function() {
+        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
+      });
+      opacityControl.addEventListener('change', function() {
+        videos.forEach(v => { v.style.opacity = this.value; });
+      });
+      exportBtn.addEventListener('click', function() {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
+      });
+      function updateActiveSlide() {
+        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
+      }
+      document.addEventListener('keydown', function(e) {
+        if (!exportMode) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+      });
+    })();
   </script>
 </body>
 </html>
