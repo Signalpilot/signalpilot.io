@@ -6,23 +6,21 @@
   <title>Post 036 — Volume Deep Dive: Absorption | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
       --accent-gold: #c9a962;
-      --accent-green: #4ad97a;
-      --accent-red: #d94a4a;
+      --accent-red: #f87171;
+      --accent-green: #4ade80;
+      --accent-blue: #60a5fa;
+      --accent-purple: #a855f7;
       --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.85);
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: rgba(255, 255, 255, 0.4);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: #111;
@@ -114,26 +112,6 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
-    .slide-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    .slide-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.08;
-    }
-
-    .slide.bg-black .slide-bg video {
-      opacity: 0;
-    }
-
     .slide-content {
       position: absolute;
       top: 0;
@@ -144,202 +122,753 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 10%;
-    }
-.slide-1 .icon {
-      font-size: clamp(1.5rem, 5cqw, 3rem);
-      margin-bottom: 4%;
-    }
-.slide-content .header {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.8rem, 2.5cqw, 1.25rem);
-      font-weight: 500;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 4%;
+      padding: 8%;
     }
 
-    .slide-content .text {
+    /* ═══════════════════════════════════════════════════
+       SLIDE 1 — CINEMATIC HOOK (NEUTRAL / GOLD EDU)
+       ═══════════════════════════════════════════════════ */
+    .slide-1 {
+      background: linear-gradient(180deg, #0c0c10 0%, #08080c 100%);
+    }
+
+    .slide-1::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(201, 169, 98, 0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Absorption orb — concentric rings being compressed inward */
+    .slide-1 .absorption-orb {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(200px, 50cqw, 380px);
+      height: clamp(200px, 50cqw, 380px);
+      z-index: 0;
+    }
+
+    .slide-1 .absorption-orb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at center,
+        rgba(201, 169, 98, 0.12) 0%,
+        rgba(201, 169, 98, 0.06) 25%,
+        rgba(201, 169, 98, 0.02) 50%,
+        transparent 70%
+      );
+    }
+
+    .slide-1 .absorption-orb::after {
+      content: '';
+      position: absolute;
+      inset: 15%;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 169, 98, 0.15);
+      box-shadow:
+        0 0 0 clamp(15px, 4cqw, 30px) rgba(201, 169, 98, 0.04),
+        0 0 0 clamp(30px, 8cqw, 60px) rgba(201, 169, 98, 0.03),
+        0 0 0 clamp(50px, 12cqw, 90px) rgba(201, 169, 98, 0.02);
+    }
+
+    /* Inner ring layers */
+    .slide-1 .ring-1,
+    .slide-1 .ring-2,
+    .slide-1 .ring-3,
+    .slide-1 .ring-4 {
+      position: absolute;
+      border-radius: 50%;
+      border-style: solid;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .slide-1 .ring-1 {
+      width: 90%;
+      height: 90%;
+      border-width: 1px;
+      border-color: rgba(248, 113, 113, 0.25);
+    }
+
+    .slide-1 .ring-2 {
+      width: 70%;
+      height: 70%;
+      border-width: 1px;
+      border-color: rgba(248, 113, 113, 0.2);
+    }
+
+    .slide-1 .ring-3 {
+      width: 50%;
+      height: 50%;
+      border-width: 1.5px;
+      border-color: rgba(201, 169, 98, 0.3);
+    }
+
+    .slide-1 .ring-4 {
+      width: 28%;
+      height: 28%;
+      border-width: 2px;
+      border-color: rgba(74, 222, 128, 0.35);
+      background: radial-gradient(circle, rgba(74, 222, 128, 0.08) 0%, transparent 70%);
+    }
+
+    /* Inward arrows on the orb */
+    .slide-1 .arrow-in {
+      position: absolute;
       font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 2.3cqw, 1.15rem);
-      line-height: 1.6;
-      color: var(--text-secondary);
+      font-size: clamp(0.6rem, 1.8cqw, 1rem);
+      color: rgba(248, 113, 113, 0.5);
+      z-index: 1;
     }
 
-    .slide-content .text em {
-      font-style: italic;
-      color: var(--accent-gold);
-    }
+    .slide-1 .arrow-in.top { top: 2%; left: 50%; transform: translateX(-50%); }
+    .slide-1 .arrow-in.bottom { bottom: 2%; left: 50%; transform: translateX(-50%) rotate(180deg); }
+    .slide-1 .arrow-in.left { left: 2%; top: 50%; transform: translateY(-50%) rotate(90deg); }
+    .slide-1 .arrow-in.right { right: 2%; top: 50%; transform: translateY(-50%) rotate(-90deg); }
 
-    .slide-content .text .highlight {
-      color: var(--text-primary);
-      font-weight: 400;
-    }
-
-    .slide-content .text .red {
-      color: var(--accent-red);
-    }
-
-    .slide-content .text .green {
-      color: var(--accent-green);
-    }
-
-    .view-box {
-      padding: 4%;
-      margin-bottom: 3%;
-      text-align: center;
-    }
-
-    .view-box.retail {
-      background: rgba(217, 74, 74, 0.1);
-      border: 1px solid var(--accent-red);
-    }
-
-    .view-box.smart {
-      background: rgba(74, 217, 122, 0.1);
-      border: 1px solid var(--accent-green);
-    }
-
-    .view-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.55rem, 1.5cqw, 0.75rem);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 2%;
-    }
-
-    .view-label.red {
-      color: var(--accent-red);
-    }
-
-    .view-label.green {
-      color: var(--accent-green);
-    }
-
-    .view-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.9rem, 2.8cqw, 1.5rem);
-      font-weight: 600;
-    }
-
-    .view-text.red {
-      color: var(--accent-red);
-    }
-
-    .view-text.green {
-      color: var(--accent-green);
-    }
-
-    .definition-box {
-      background: rgba(74, 217, 122, 0.1);
-      border-left: 3px solid var(--accent-green);
-      padding: 4%;
-      margin-bottom: 3%;
-    }
-
-    .definition-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.55rem, 1.5cqw, 0.75rem);
-      font-weight: 600;
-      color: var(--accent-green);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 2%;
-    }
-
-    .definition-text {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.75rem, 2.2cqw, 1.1rem);
-      font-weight: 400;
-      color: var(--text-primary);
-    }
-
-    .arrow-list {
-      list-style: none;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.7rem, 2cqw, 1.05rem);
-      line-height: 2;
-      color: var(--text-secondary);
-    }
-
-    .arrow-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 2%;
-    }
-
-    .arrow-list .arrow {
-      color: var(--accent-green);
-      flex-shrink: 0;
-    }
-
-    .insight-box {
-      background: rgba(201, 169, 98, 0.08);
-      border: 1px solid rgba(201, 169, 98, 0.3);
-      padding: 4%;
-      text-align: center;
-      margin-top: 3%;
-    }
-
-    .insight-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.8rem, 2.5cqw, 1.25rem);
-      font-style: italic;
-      color: var(--accent-gold);
-    }
-
-    .slide-8 .slide-content {
+    .slide-1 .slide-content {
       align-items: center;
       text-align: center;
+      justify-content: center;
+      z-index: 3;
     }
 
-    .slide-8 .cta-text {
+    .slide-1 .cine-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(201, 169, 98, 0.7);
+      margin-bottom: 6%;
+    }
+
+    .slide-1 .hook-main {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.9rem, 2.8cqw, 1.5rem);
+      font-size: clamp(1.6rem, 5cqw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 4%;
+    }
+
+    .slide-1 .cine-divider {
+      width: clamp(40px, 12cqw, 80px);
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.5), transparent);
+      margin-bottom: 4%;
+    }
+
+    .slide-1 .hook-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.6rem, 1.8cqw, 1rem);
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 80%;
+    }
+
+    .slide-1 .cine-logo {
+      position: absolute;
+      bottom: 6%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.35rem, 1cqw, 0.55rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(201, 169, 98, 0.3);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SLIDE 2 — THE SCENE (Falling candles + volume)
+       ═══════════════════════════════════════════════════ */
+    .slide-2 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080c 100%);
+    }
+
+    .slide-2::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 70%, rgba(248, 113, 113, 0.06) 0%, transparent 60%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .slide-2 .slide-content {
+      justify-content: center;
+      gap: clamp(8px, 2cqw, 16px);
+    }
+
+    .slide-2 .section-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.45rem, 1.3cqw, 0.7rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(201, 169, 98, 0.6);
+      margin-bottom: 2%;
+    }
+
+    .slide-2 .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 3.5cqw, 2rem);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4%;
+    }
+
+    /* CSS-only falling candle chart */
+    .candle-chart {
+      width: 100%;
+      height: clamp(120px, 30cqw, 220px);
+      display: flex;
+      align-items: flex-end;
+      gap: clamp(4px, 1.2cqw, 10px);
+      padding: 4% 2%;
+      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 4%;
+    }
+
+    .candle {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .candle-body {
+      width: clamp(8px, 2.5cqw, 18px);
+      border-radius: 1px;
+      position: relative;
+    }
+
+    .candle-body.red { background: var(--accent-red); }
+    .candle-body.green { background: var(--accent-green); }
+
+    .candle-wick {
+      width: 1px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .candle-wick.top { bottom: 100%; }
+    .candle-wick.bottom { top: 100%; }
+    .candle-wick.red { background: rgba(248, 113, 113, 0.5); }
+    .candle-wick.green { background: rgba(74, 222, 128, 0.5); }
+
+    /* Volume bars below chart */
+    .volume-row {
+      width: 100%;
+      display: flex;
+      gap: clamp(4px, 1.2cqw, 10px);
+      margin-bottom: 4%;
+    }
+
+    .vol-bar-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .vol-bar {
+      width: clamp(8px, 2.5cqw, 18px);
+      border-radius: 1px 1px 0 0;
+    }
+
+    .vol-bar.red { background: rgba(248, 113, 113, 0.4); }
+    .vol-bar.green { background: rgba(74, 222, 128, 0.4); }
+    .vol-bar.spike { background: rgba(248, 113, 113, 0.7); }
+
+    .scene-callout {
+      display: flex;
+      align-items: center;
+      gap: 3%;
+      padding: 3% 4%;
+      background: rgba(248, 113, 113, 0.06);
+      border: 1px solid rgba(248, 113, 113, 0.15);
+      border-radius: 4px;
+    }
+
+    .scene-callout .pulse {
+      width: clamp(8px, 2cqw, 14px);
+      height: clamp(8px, 2cqw, 14px);
+      border-radius: 50%;
+      background: var(--accent-red);
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(248, 113, 113, 0.4);
+    }
+
+    .scene-callout .scene-text {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.6rem, 1.8cqw, 0.95rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .scene-callout .scene-text strong {
+      color: var(--accent-red);
+      font-weight: 600;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SLIDE 3 — TWO VIEWS (Retail vs Smart Money)
+       ═══════════════════════════════════════════════════ */
+    .slide-3 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080c 100%);
+    }
+
+    .slide-3 .slide-content {
+      justify-content: center;
+      gap: clamp(8px, 2cqw, 16px);
+    }
+
+    .slide-3 .section-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.45rem, 1.3cqw, 0.7rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(201, 169, 98, 0.6);
+      margin-bottom: 1%;
+    }
+
+    .slide-3 .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3cqw, 1.7rem);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+    }
+
+    .views-container {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 2.5cqw, 18px);
+    }
+
+    .view-card {
+      padding: clamp(10px, 3cqw, 24px);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .view-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+    }
+
+    .view-card.retail {
+      background: rgba(248, 113, 113, 0.06);
+      border: 1px solid rgba(248, 113, 113, 0.15);
+    }
+
+    .view-card.retail::before {
+      background: var(--accent-red);
+    }
+
+    .view-card.smart {
+      background: rgba(74, 222, 128, 0.06);
+      border: 1px solid rgba(74, 222, 128, 0.15);
+    }
+
+    .view-card.smart::before {
+      background: var(--accent-green);
+    }
+
+    .view-card .view-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.45rem, 1.2cqw, 0.65rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: clamp(4px, 1.2cqw, 10px);
+    }
+
+    .view-card.retail .view-label { color: var(--accent-red); }
+    .view-card.smart .view-label { color: var(--accent-green); }
+
+    .view-card .view-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3cqw, 1.6rem);
+      font-weight: 600;
+      margin-bottom: clamp(4px, 1cqw, 8px);
+    }
+
+    .view-card.retail .view-headline { color: var(--accent-red); }
+    .view-card.smart .view-headline { color: var(--accent-green); }
+
+    .view-card .view-quote {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.55rem, 1.6cqw, 0.85rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .view-card .view-action {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
       font-weight: 500;
+      margin-top: clamp(4px, 1.2cqw, 10px);
+    }
+
+    .view-card.retail .view-action { color: var(--accent-red); }
+    .view-card.smart .view-action { color: var(--accent-green); }
+
+    /* ═══════════════════════════════════════════════════
+       SLIDE 4 — WHAT IS ABSORPTION? (Definition)
+       ═══════════════════════════════════════════════════ */
+    .slide-4 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080c 100%);
+    }
+
+    .slide-4::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(74, 222, 128, 0.04) 0%, transparent 60%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .slide-4 .slide-content {
+      justify-content: center;
+      gap: clamp(8px, 2cqw, 16px);
+    }
+
+    .slide-4 .section-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.45rem, 1.3cqw, 0.7rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(201, 169, 98, 0.6);
+      margin-bottom: 1%;
+    }
+
+    .slide-4 .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 3.5cqw, 2rem);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+    }
+
+    .definition-card {
+      padding: clamp(12px, 3.5cqw, 28px);
+      background: rgba(74, 222, 128, 0.05);
+      border: 1px solid rgba(74, 222, 128, 0.2);
+      border-left: 3px solid var(--accent-green);
+      border-radius: 4px;
+      margin-bottom: clamp(8px, 2cqw, 16px);
+    }
+
+    .definition-card .def-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.4rem, 1.1cqw, 0.6rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent-green);
+      margin-bottom: clamp(4px, 1.2cqw, 10px);
+    }
+
+    .definition-card .def-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.85rem, 2.5cqw, 1.3rem);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    /* Absorption process visual */
+    .absorption-process {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.5cqw, 12px);
+    }
+
+    .process-step {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 2cqw, 14px);
+      padding: clamp(6px, 1.5cqw, 12px) clamp(8px, 2cqw, 16px);
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 4px;
+      border-left: 2px solid transparent;
+    }
+
+    .process-step .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.5rem, 1.5cqw, 0.8rem);
+      font-weight: 500;
+      color: var(--accent-gold);
+      flex-shrink: 0;
+      width: clamp(18px, 4cqw, 28px);
+      height: clamp(18px, 4cqw, 28px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(201, 169, 98, 0.3);
+      border-radius: 50%;
+    }
+
+    .process-step .step-text {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.55rem, 1.6cqw, 0.85rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .process-step .step-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SLIDE 5 — SIGNS OF ABSORPTION (4 Signal Cards)
+       ═══════════════════════════════════════════════════ */
+    .slide-5 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080c 100%);
+    }
+
+    .slide-5 .slide-content {
+      justify-content: center;
+      gap: clamp(8px, 2cqw, 16px);
+    }
+
+    .slide-5 .section-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.45rem, 1.3cqw, 0.7rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(201, 169, 98, 0.6);
+      margin-bottom: 1%;
+    }
+
+    .slide-5 .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3cqw, 1.7rem);
+      font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 2%;
     }
 
-    .slide-8 .cta-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.7rem, 2cqw, 1rem);
-      color: var(--text-secondary);
-      margin-bottom: 5%;
+    .signals-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1.8cqw, 14px);
     }
 
-    .slide-8 .cta-button {
+    .signal-card {
+      padding: clamp(10px, 2.5cqw, 20px);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signal-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+    }
+
+    .signal-card:nth-child(1)::before { background: var(--accent-red); }
+    .signal-card:nth-child(2)::before { background: var(--accent-gold); }
+    .signal-card:nth-child(3)::before { background: var(--accent-green); }
+    .signal-card:nth-child(4)::before { background: var(--accent-blue); }
+
+    .signal-card .signal-icon {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.7rem, 2cqw, 1.1rem);
+      font-weight: 600;
+      margin-bottom: clamp(4px, 1cqw, 8px);
+    }
+
+    .signal-card:nth-child(1) .signal-icon { color: var(--accent-red); }
+    .signal-card:nth-child(2) .signal-icon { color: var(--accent-gold); }
+    .signal-card:nth-child(3) .signal-icon { color: var(--accent-green); }
+    .signal-card:nth-child(4) .signal-icon { color: var(--accent-blue); }
+
+    .signal-card .signal-name {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(2px, 0.8cqw, 6px);
+      line-height: 1.3;
+    }
+
+    .signal-card .signal-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.4rem, 1.2cqw, 0.65rem);
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Strength indicator bars */
+    .signal-card .strength-bar {
+      margin-top: clamp(4px, 1.2cqw, 10px);
+      height: clamp(2px, 0.6cqw, 4px);
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .signal-card .strength-fill {
+      height: 100%;
+      border-radius: 2px;
+    }
+
+    .signal-card:nth-child(1) .strength-fill { width: 90%; background: var(--accent-red); }
+    .signal-card:nth-child(2) .strength-fill { width: 75%; background: var(--accent-gold); }
+    .signal-card:nth-child(3) .strength-fill { width: 85%; background: var(--accent-green); }
+    .signal-card:nth-child(4) .strength-fill { width: 95%; background: var(--accent-blue); }
+
+    /* Confirmation note */
+    .confirmation-note {
+      padding: clamp(8px, 2cqw, 14px);
+      background: rgba(201, 169, 98, 0.05);
+      border: 1px dashed rgba(201, 169, 98, 0.2);
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .confirmation-note p {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
+      font-weight: 400;
+      color: var(--accent-gold);
+      line-height: 1.5;
+    }
+
+    .confirmation-note p strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SLIDE 6 — THE TRUTH + CTA
+       ═══════════════════════════════════════════════════ */
+    .slide-6 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #06060a 100%);
+    }
+
+    .slide-6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(201, 169, 98, 0.05) 0%, transparent 60%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .slide-6 .slide-content {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      gap: clamp(6px, 1.5cqw, 12px);
+      z-index: 2;
+    }
+
+    .slide-6 .truth-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.45rem, 1.3cqw, 0.7rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(201, 169, 98, 0.5);
+      margin-bottom: 2%;
+    }
+
+    .slide-6 .truth-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 3.2cqw, 1.8rem);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.4;
+      max-width: 85%;
+      margin-bottom: 4%;
+    }
+
+    .slide-6 .truth-divider {
+      width: clamp(30px, 8cqw, 60px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.4), transparent);
+      margin-bottom: 4%;
+    }
+
+    .slide-6 .truth-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.55rem, 1.6cqw, 0.85rem);
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-bottom: 6%;
+      line-height: 1.6;
+    }
+
+    .slide-6 .cta-button {
       display: inline-block;
-      padding: 3% 6%;
-      border: 1px solid var(--accent-gold);
+      padding: clamp(8px, 2cqw, 14px) clamp(20px, 5cqw, 36px);
+      border: 1px solid rgba(201, 169, 98, 0.5);
       color: var(--accent-gold);
       font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 1.8cqw, 0.875rem);
-      font-weight: 400;
-      letter-spacing: 0.1em;
+      font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
+      font-weight: 500;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       text-decoration: none;
+      border-radius: 2px;
+      background: rgba(201, 169, 98, 0.04);
+      margin-bottom: 3%;
     }
 
-    .slide-8 .logo {
-      width: 40%;
-      max-width: 180px;
-      margin-top: 5%;
-      opacity: 0.8;
+    .slide-6 .cta-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.4rem, 1.1cqw, 0.6rem);
+      color: rgba(201, 169, 98, 0.4);
+      letter-spacing: 0.05em;
     }
 
-    .slide-8 .link-hint {
+    .slide-6 .cine-logo {
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
       font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 1.8cqw, 0.875rem);
-      color: var(--text-secondary);
-      margin-top: 4%;
+      font-size: clamp(0.35rem, 1cqw, 0.55rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(201, 169, 98, 0.25);
     }
 
+    /* ═══════════════════════════════════════════════════
+       EXPORT MODE
+       ═══════════════════════════════════════════════════ */
     body.export-mode {
       padding: 0;
       background: transparent;
@@ -362,6 +891,7 @@
 
     body.export-mode .slide-wrapper.active {
       display: flex;
+      justify-content: center;
     }
 
     body.export-mode .slide {
@@ -384,102 +914,14 @@
         flex-wrap: wrap;
       }
     }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (NEUTRAL) ═══ */
-    .slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%) !important;
-    }
-
-    .slide-1::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
-    }
-
-    .slide-1 .slide-content {
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      z-index: 3;
-    }
-
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
-      margin-bottom: 8%;
-    }
-
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
-    }
-
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
-      margin-bottom: 4%;
-    }
-
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(163, 163, 163, 0.4);
-      line-height: 1.6;
-    }
-
-    .slide-1 .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.4);
-    }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label>Background:
+    <label>Mode:
       <select id="bg-toggle">
-        <option value="starfield">Starfield</option>
+        <option value="dark">Dark</option>
         <option value="black">Pure Black</option>
-      </select>
-    </label>
-    <label>Opacity:
-      <select id="opacity-control">
-        <option value="0.03">3%</option>
-        <option value="0.05">5%</option>
-        <option value="0.08" selected>8%</option>
-        <option value="0.12">12%</option>
-        <option value="0.15">15%</option>
       </select>
     </label>
     <button id="export-btn">Export Mode</button>
@@ -487,172 +929,243 @@
 
   <div class="page-title">
     <h1>Post 036 — Volume Deep Dive: Absorption</h1>
-    <p>Instagram Carousel • 8 Slides • 1080×1350px</p>
+    <p>Instagram Carousel | 6 Slides | 1080 x 1350px | Neutral / EDU</p>
   </div>
 
   <div class="carousel-grid">
-    <!-- Slide 1: Hook -->
+
+    <!-- ═══ SLIDE 1 — CINEMATIC HOOK ═══ -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Cinematic Hook</span>
       <div class="slide slide-1">
+        <div class="absorption-orb">
+          <div class="ring-1"></div>
+          <div class="ring-2"></div>
+          <div class="ring-3"></div>
+          <div class="ring-4"></div>
+          <div class="arrow-in top">V</div>
+          <div class="arrow-in bottom">V</div>
+          <div class="arrow-in left">V</div>
+          <div class="arrow-in right">V</div>
+        </div>
         <div class="slide-content">
-          <div class="cine-label">LEARN</div>
-          <div class="hook-main">When Everyone Panics...</div>
+          <div class="cine-label">Volume Deep Dive</div>
+          <div class="hook-main">When Everyone<br>Panics...</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">Price drops. Volume spikes.But what if that volume is buyers absorbing the selling?</p>
+          <p class="hook-sub">Price drops. Volume spikes.<br>But what if that volume is buyers<br>absorbing the selling?</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 2: Scene -->
+    <!-- ═══ SLIDE 2 — THE SCENE ═══ -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — The Scene</span>
       <div class="slide slide-2">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
         <div class="slide-content">
-          <p class="header">The Scene</p>
-          <p class="text">Price is <span class="red">crashing</span>.<br><br>Volume is <span class="highlight">exploding</span>.<br><br>Everyone is selling.<br><br>Or are they?</p>
+          <div class="section-tag">The Scene</div>
+          <div class="section-title">The Panic Moment</div>
+
+          <!-- CSS candlestick chart showing a selloff -->
+          <div class="candle-chart">
+            <div class="candle">
+              <div class="candle-body green" style="height: 20%;">
+                <div class="candle-wick top green" style="height: 8px;"></div>
+                <div class="candle-wick bottom green" style="height: 4px;"></div>
+              </div>
+            </div>
+            <div class="candle">
+              <div class="candle-body green" style="height: 15%;">
+                <div class="candle-wick top green" style="height: 10px;"></div>
+                <div class="candle-wick bottom green" style="height: 3px;"></div>
+              </div>
+            </div>
+            <div class="candle">
+              <div class="candle-body red" style="height: 12%;">
+                <div class="candle-wick top red" style="height: 6px;"></div>
+                <div class="candle-wick bottom red" style="height: 5px;"></div>
+              </div>
+            </div>
+            <div class="candle">
+              <div class="candle-body red" style="height: 28%;">
+                <div class="candle-wick top red" style="height: 4px;"></div>
+                <div class="candle-wick bottom red" style="height: 3px;"></div>
+              </div>
+            </div>
+            <div class="candle">
+              <div class="candle-body red" style="height: 35%;">
+                <div class="candle-wick top red" style="height: 3px;"></div>
+                <div class="candle-wick bottom red" style="height: 12px;"></div>
+              </div>
+            </div>
+            <div class="candle">
+              <div class="candle-body red" style="height: 45%;">
+                <div class="candle-wick top red" style="height: 2px;"></div>
+                <div class="candle-wick bottom red" style="height: 18px;"></div>
+              </div>
+            </div>
+            <div class="candle">
+              <div class="candle-body red" style="height: 22%;">
+                <div class="candle-wick top red" style="height: 5px;"></div>
+                <div class="candle-wick bottom red" style="height: 20px;"></div>
+              </div>
+            </div>
+            <div class="candle">
+              <div class="candle-body green" style="height: 10%;">
+                <div class="candle-wick top green" style="height: 4px;"></div>
+                <div class="candle-wick bottom green" style="height: 22px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Volume bars showing spike -->
+          <div class="volume-row">
+            <div class="vol-bar-wrap"><div class="vol-bar green" style="height: 14px;"></div></div>
+            <div class="vol-bar-wrap"><div class="vol-bar green" style="height: 12px;"></div></div>
+            <div class="vol-bar-wrap"><div class="vol-bar red" style="height: 10px;"></div></div>
+            <div class="vol-bar-wrap"><div class="vol-bar red" style="height: 18px;"></div></div>
+            <div class="vol-bar-wrap"><div class="vol-bar spike" style="height: 30px;"></div></div>
+            <div class="vol-bar-wrap"><div class="vol-bar spike" style="height: 42px;"></div></div>
+            <div class="vol-bar-wrap"><div class="vol-bar spike" style="height: 38px;"></div></div>
+            <div class="vol-bar-wrap"><div class="vol-bar green" style="height: 24px;"></div></div>
+          </div>
+
+          <div class="scene-callout">
+            <div class="pulse"></div>
+            <div class="scene-text">Price is <strong>crashing</strong>. Volume is <strong>exploding</strong>.<br>Everyone is selling. Or are they?</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 3: Retail View -->
+    <!-- ═══ SLIDE 3 — RETAIL VS SMART MONEY ═══ -->
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Retail View</span>
+      <span class="slide-label">Slide 3 — Two Views</span>
       <div class="slide slide-3">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
         <div class="slide-content">
-          <p class="header">What Most Traders See</p>
-          <div class="view-box retail">
-            <div class="view-label red">Retail View</div>
-            <div class="view-text red">"PANIC SELLING"</div>
+          <div class="section-tag">Same Data, Different Reading</div>
+          <div class="section-title">Two Views of the Same Chart</div>
+
+          <div class="views-container">
+            <div class="view-card retail">
+              <div class="view-label">Retail Trader</div>
+              <div class="view-headline">"PANIC SELLING"</div>
+              <div class="view-quote">"Look at that volume! Everyone's dumping. I need to get out before it's too late."</div>
+              <div class="view-action">Sells the bottom.</div>
+            </div>
+
+            <div class="view-card smart">
+              <div class="view-label">Smart Money</div>
+              <div class="view-headline">"ABSORPTION"</div>
+              <div class="view-quote">"High volume on a down move. Price stabilizing. Someone's buying everything retail is selling."</div>
+              <div class="view-action">Buys the panic.</div>
+            </div>
           </div>
-          <p class="text">"Look at that volume! Everyone's dumping. I need to get out before it's too late."<br><br><span class="red">Sells the bottom.</span></p>
         </div>
       </div>
     </div>
 
-    <!-- Slide 4: Smart Money View -->
+    <!-- ═══ SLIDE 4 — WHAT IS ABSORPTION? ═══ -->
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Smart Money View</span>
+      <span class="slide-label">Slide 4 — Definition</span>
       <div class="slide slide-4">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
         <div class="slide-content">
-          <p class="header">What Smart Money Sees</p>
-          <div class="view-box smart">
-            <div class="view-label green">Smart Money View</div>
-            <div class="view-text green">"ABSORPTION"</div>
+          <div class="section-tag">Key Concept</div>
+          <div class="section-title">What Is Absorption?</div>
+
+          <div class="definition-card">
+            <div class="def-label">Definition</div>
+            <div class="def-text">When large players quietly accumulate while price falls, absorbing the selling pressure without letting price collapse further.</div>
           </div>
-          <p class="text">"High volume on a down move. Price stabilizing. Someone's buying everything retail is selling."<br><br><span class="green">Buys the panic.</span></p>
+
+          <div class="absorption-process">
+            <div class="process-step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>Price falls</strong> on high volume. Retail traders panic sell.</div>
+            </div>
+            <div class="process-step">
+              <div class="step-num">2</div>
+              <div class="step-text"><strong>Large buyers</strong> step in quietly, absorbing the sell orders.</div>
+            </div>
+            <div class="process-step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>Price stabilizes</strong> despite continued selling pressure.</div>
+            </div>
+            <div class="process-step">
+              <div class="step-num">4</div>
+              <div class="step-text"><strong>Sellers exhaust</strong>. Price reverses as buyers take control.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 5: Definition -->
+    <!-- ═══ SLIDE 5 — SIGNS OF ABSORPTION ═══ -->
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Definition</span>
+      <span class="slide-label">Slide 5 — Signals</span>
       <div class="slide slide-5">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
         <div class="slide-content">
-          <p class="header">What Is Absorption?</p>
-          <div class="definition-box">
-            <div class="definition-label">Definition</div>
-            <div class="definition-text">When large players quietly accumulate while price falls, absorbing the selling pressure.</div>
+          <div class="section-tag">How To Spot It</div>
+          <div class="section-title">Signs of Absorption</div>
+
+          <div class="signals-grid">
+            <div class="signal-card">
+              <div class="signal-icon">VOL</div>
+              <div class="signal-name">High Volume on Down Move</div>
+              <div class="signal-desc">Unusually heavy volume during a selloff suggests large players are active, not just retail panic.</div>
+              <div class="strength-bar"><div class="strength-fill"></div></div>
+            </div>
+            <div class="signal-card">
+              <div class="signal-icon">HOLD</div>
+              <div class="signal-name">Price Stabilizes</div>
+              <div class="signal-desc">Despite selling pressure, price stops falling or narrows into a tight range at support.</div>
+              <div class="strength-bar"><div class="strength-fill"></div></div>
+            </div>
+            <div class="signal-card">
+              <div class="signal-icon">WICK</div>
+              <div class="signal-name">Long Wicks Rejecting Lows</div>
+              <div class="signal-desc">Candles show strong buying off the lows. Each attempt to push lower gets rejected.</div>
+              <div class="strength-bar"><div class="strength-fill"></div></div>
+            </div>
+            <div class="signal-card">
+              <div class="signal-icon">REV</div>
+              <div class="signal-name">Follow-Through to the Upside</div>
+              <div class="signal-desc">Once sellers exhaust, price moves up with conviction. The absorption is confirmed.</div>
+              <div class="strength-bar"><div class="strength-fill"></div></div>
+            </div>
           </div>
-          <p class="text">Price falling on high volume doesn't always mean selling.<br><br>Sometimes buyers are "absorbing" the panic sellers.</p>
+
+          <div class="confirmation-note">
+            <p>One signal alone is a hint. <strong>Multiple signals together</strong> = high-probability absorption zone.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 6: Signs -->
+    <!-- ═══ SLIDE 6 — TRUTH + CTA ═══ -->
     <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — Signs</span>
+      <span class="slide-label">Slide 6 — Truth + CTA</span>
       <div class="slide slide-6">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
         <div class="slide-content">
-          <p class="header">Signs of Absorption</p>
-          <ul class="arrow-list">
-            <li><span class="arrow">→</span> High volume on down move</li>
-            <li><span class="arrow">→</span> Price stabilizes or reverses</li>
-            <li><span class="arrow">→</span> Long wicks rejecting lows</li>
-            <li><span class="arrow">→</span> Follow-through to the upside</li>
-          </ul>
+          <div class="truth-tag">The Truth</div>
+          <div class="truth-quote">The crowd sells the bottom.<br>Someone has to buy it.</div>
+          <div class="truth-divider"></div>
+          <div class="truth-sub">The panic IS the opportunity. For someone.<br>Learn to read what volume actually tells you.</div>
+          <a href="https://education.signalpilot.io" class="cta-button">Master Volume Analysis</a>
+          <div class="cta-url">education.signalpilot.io</div>
+          <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 7: Truth -->
-    <div class="slide-wrapper" data-slide="7">
-      <span class="slide-label">Slide 7 — The Truth</span>
-      <div class="slide slide-7">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="header">The Truth</p>
-          <p class="text">The crowd sells the bottom.<br><br><em>Someone</em> has to buy it.</p>
-          <div class="insight-box">
-            <div class="insight-text">The panic IS the opportunity.<br>For someone.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide 8: CTA -->
-    <div class="slide-wrapper" data-slide="8">
-      <span class="slide-label">Slide 8 — CTA</span>
-      <div class="slide slide-8">
-        <div class="slide-bg">
-          <video autoplay loop muted playsinline>
-            <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="slide-content">
-          <p class="cta-text">Master Volume Analysis</p>
-          <p class="cta-sub">Full lesson on reading volume like smart money.</p>
-          <a href="#" class="cta-button">Start Learning</a>
-          <img src="../../signalpilot-logo.svg" alt="Signal Pilot" class="logo">
-          <p class="link-hint">Link in bio</p>
-        </div>
-      </div>
-    </div>
   </div>
 
   <script>
     const bgToggle = document.getElementById('bg-toggle');
-    const opacityControl = document.getElementById('opacity-control');
     const slides = document.querySelectorAll('.slide');
-    const videos = document.querySelectorAll('.slide-bg video');
 
     bgToggle.addEventListener('change', (e) => {
       slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
-    });
-
-    opacityControl.addEventListener('change', (e) => {
-      videos.forEach(video => video.style.opacity = e.target.value);
     });
 
     const exportBtn = document.getElementById('export-btn');
@@ -664,7 +1177,7 @@
       exportMode = !exportMode;
       document.body.classList.toggle('export-mode', exportMode);
       if (exportMode) {
-        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
+        exportBtn.textContent = 'Exit Export Mode';
         currentExportSlide = 0;
         updateExportSlide();
       } else {
