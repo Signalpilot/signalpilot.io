@@ -1179,7 +1179,7 @@ Quick links:
 
 ### 38. InTheMoney (Adam)
 
-**To:** [YouTube About email] (check YouTube.com/@InTheMoneyAdam About tab, or linktr.ee/inthemoneyadam)
+**To:** [Twitter DM] -@InTheMoneyAdam (also linktr.ee/inthemoneyadam)
 **Subject:** Your options students need cycle timing -I built an indicator that automates it
 
 Hi Adam,
