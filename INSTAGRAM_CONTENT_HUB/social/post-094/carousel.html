@@ -14,12 +14,18 @@
       --text-primary: #ffffff;
       --text-secondary: rgba(255,255,255,0.7);
       --text-muted: rgba(255,255,255,0.4);
-      --border-subtle: rgba(255,255,255,0.1);
+      --border-subtle: rgba(255,255,255,0.06);
       --accent-orange: #f59e0b;
-      --accent-orange-dim: rgba(245,158,11,0.3);
+      --accent-red: #f87171;
+      --accent-green: #4ade80;
+      --accent-teal: #5eead4;
+      --accent-gold: #c9a962;
+      --accent-purple: #a855f7;
+      --accent-blue: #60a5fa;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+      --font-brand: 'Gugi', sans-serif;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
@@ -31,8 +37,7 @@
     body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
     .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
     .page-title { text-align: center; margin-bottom: 2rem; }
     .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
     .page-title p { color: var(--text-muted); font-size: 0.875rem; }
@@ -41,172 +46,940 @@
     .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
     .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
     .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
+    .slide-content { position: relative; z-index: 3; flex: 1; display: flex; flex-direction: column; padding: clamp(20px, 5.5%, 50px); }
 
-    /* ═══════════════════════════════════════════
-       SHARED — Orange slide base (RIGHT bar S1)
-       ═══════════════════════════════════════════ */
+    /* ─── Orange/Warm theme ─── */
     .slide-warm { background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important; }
-    .slide-warm::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(245,158,11,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-warm.slide-1::after { content: ''; position: absolute; top: 0; right: 0; width: 18px; height: 100%; background: linear-gradient(180deg, rgba(245,158,11,0.9) 0%, rgba(217,148,74,0.7) 100%); z-index: 5; }
-    .slide-warm .slide-content { z-index: 3; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
+    .slide-warm::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(245,158,11,0.06) 0%, transparent 60%); pointer-events: none; z-index: 1; }
+    .slide-warm.slide-1::after { content: ''; position: absolute; top: 0; right: 0; width: clamp(14px, 1.6cqw, 20px); height: 100%; background: linear-gradient(180deg, rgba(245,158,11,0.9) 0%, rgba(217,148,74,0.7) 100%); z-index: 5; }
 
-    /* Quote mark */
-    .quote-mark {
-      font-family: var(--font-serif);
-      font-size: clamp(60px, 14cqw, 140px);
-      font-weight: 700;
-      color: rgba(245,158,11,0.2);
-      line-height: 0.8;
-      margin-bottom: 2%;
-    }
-
-    /* Quote text */
-    .quote-text {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.8cqw, 40px);
-      font-weight: 500;
-      font-style: italic;
-      color: var(--text-primary);
-      line-height: 1.4;
-      max-width: 85%;
-      margin-bottom: 5%;
-    }
-
-    .quote-text em {
-      color: var(--accent-orange);
-      font-style: italic;
-    }
-
-    /* Divider */
-    .quote-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.6), transparent);
-      margin-bottom: 5%;
-    }
-
-    /* Reflection lines */
-    .reflection {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(6px, 1.2cqw, 14px);
-      margin-bottom: 5%;
-      width: 80%;
-    }
-
-    .reflection-line {
-      display: flex;
-      align-items: flex-start;
-      gap: 3%;
-    }
-
-    .reflection-dot {
-      width: clamp(4px, 0.8cqw, 8px);
-      height: clamp(4px, 0.8cqw, 8px);
-      border-radius: 50%;
-      background: var(--accent-orange);
-      flex-shrink: 0;
-      margin-top: 1.2%;
-    }
-
-    .reflection-text {
-      font-family: var(--font-sans);
-      font-size: clamp(10px, 1.8cqw, 19px);
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    /* Keywords */
-    .keywords {
-      display: flex;
-      gap: clamp(8px, 2cqw, 20px);
-      margin-bottom: 4%;
-    }
-
-    .keyword {
-      font-family: var(--font-mono);
-      font-size: clamp(9px, 1.6cqw, 17px);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent-orange);
-      padding: clamp(4px, 0.8cqw, 10px) clamp(10px, 2cqw, 22px);
-      border: 1px solid rgba(245,158,11,0.3);
-      border-radius: clamp(4px, 0.8cqw, 8px);
-      background: rgba(245,158,11,0.06);
-    }
-
-    /* Attribution */
-    .quote-attr {
-      font-family: var(--font-mono);
-      font-size: clamp(8px, 1.3cqw, 13px);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
+    /* ─── Logo ─── */
     .slide-logo {
       position: absolute;
       bottom: 4%;
       left: 50%;
       transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      font-family: var(--font-brand);
+      font-size: clamp(6px, 1.2cqw, 10px);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(245,158,11,0.4);
-      z-index: 2;
+      color: rgba(245,158,11,0.35);
+      z-index: 4;
       white-space: nowrap;
+    }
+
+    /* ─── Shared ─── */
+    .warm { color: var(--accent-orange); }
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 10px);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(245,158,11,0.5);
+      margin-bottom: clamp(4px, 1cqw, 10px);
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.5cqw, 36px);
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: clamp(6px, 1.5cqw, 14px);
+      line-height: 1.15;
+    }
+    .warm-divider {
+      width: clamp(30px, 6cqw, 55px);
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.5), transparent);
+      margin-bottom: clamp(8px, 2cqw, 18px);
+    }
+
+    /* ══════════════════════════════════════
+       SLIDE 1 — HOOK
+    ══════════════════════════════════════ */
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
+
+    /* Discipline Orb — bridge shape inside */
+    .discipline-orb {
+      width: clamp(90px, 18cqw, 180px);
+      height: clamp(90px, 18cqw, 180px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.1) 40%, rgba(255,255,255,0.03) 70%, transparent 100%);
+      border: 2px solid rgba(245,158,11,0.25);
+      box-shadow: 0 0 50px rgba(245,158,11,0.12), 0 0 100px rgba(245,158,11,0.04), inset 0 0 30px rgba(245,158,11,0.06);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: clamp(12px, 3cqw, 28px);
+    }
+    .discipline-orb::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(245,158,11,0.15);
+    }
+    .discipline-orb::after {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px dashed rgba(245,158,11,0.12);
+    }
+    /* Bridge visualization inside orb */
+    .orb-bridge {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .orb-bridge-label {
+      font-family: var(--font-mono);
+      font-size: clamp(5px, 0.8cqw, 8px);
+      color: rgba(245,158,11,0.6);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: clamp(2px, 0.4cqw, 4px);
+    }
+    .orb-bridge-bar {
+      width: clamp(32px, 6.5cqw, 65px);
+      height: clamp(4px, 0.8cqw, 8px);
+      background: linear-gradient(90deg, rgba(245,158,11,0.3), rgba(245,158,11,0.8), rgba(245,158,11,0.3));
+      border-radius: 4px;
+      margin-bottom: clamp(2px, 0.4cqw, 4px);
+    }
+    .orb-bridge-pillars {
+      display: flex;
+      justify-content: space-between;
+      width: clamp(32px, 6.5cqw, 65px);
+    }
+    .orb-bridge-pillar {
+      width: clamp(4px, 0.8cqw, 8px);
+      height: clamp(10px, 2cqw, 20px);
+      background: rgba(245,158,11,0.5);
+      border-radius: 2px;
+    }
+    .orb-bridge-ground {
+      width: clamp(40px, 8cqw, 80px);
+      height: 2px;
+      background: rgba(245,158,11,0.2);
+      margin-top: clamp(1px, 0.2cqw, 2px);
+    }
+
+    .quote-mark {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 9cqw, 90px);
+      font-weight: 700;
+      color: rgba(245,158,11,0.15);
+      line-height: 0.7;
+      margin-bottom: clamp(4px, 1cqw, 10px);
+    }
+    .hook-title {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 4cqw, 42px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.35;
+      margin-bottom: clamp(8px, 2cqw, 18px);
+      max-width: 88%;
+    }
+    .hook-title em { color: var(--accent-orange); font-style: italic; }
+    .hook-attr {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 11px);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ══════════════════════════════════════
+       SLIDE 2 — COST OF INDISCIPLINE
+    ══════════════════════════════════════ */
+    .slide-2 .slide-content { justify-content: center; align-items: center; }
+
+    .cost-grid {
+      width: 92%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(5px, 1cqw, 10px);
+      margin-bottom: clamp(8px, 1.5cqw, 16px);
+    }
+    .cost-card {
+      background: rgba(248,113,113,0.04);
+      border: 1px solid rgba(248,113,113,0.12);
+      border-radius: clamp(6px, 1.2cqw, 12px);
+      padding: clamp(7px, 1.4cqw, 14px);
+      display: flex;
+      gap: clamp(5px, 1cqw, 10px);
+      align-items: flex-start;
+    }
+    .cost-icon {
+      width: clamp(28px, 5.5cqw, 48px);
+      height: clamp(28px, 5.5cqw, 48px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(248,113,113,0.3);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .cost-icon::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      border: 1px solid rgba(248,113,113,0.12);
+    }
+    .cost-icon-sym {
+      font-size: clamp(10px, 1.8cqw, 18px);
+      color: var(--accent-red);
+      position: relative;
+      z-index: 2;
+    }
+    .cost-info { flex: 1; min-width: 0; }
+    .cost-title {
+      font-size: clamp(8px, 1.3cqw, 13px);
+      font-weight: 600;
+      color: var(--accent-red);
+      margin-bottom: clamp(1px, 0.3cqw, 3px);
+    }
+    .cost-desc {
+      font-size: clamp(6px, 0.95cqw, 9px);
+      color: var(--text-muted);
+      line-height: 1.35;
+      margin-bottom: clamp(3px, 0.6cqw, 6px);
+    }
+    .cost-bar-track {
+      width: 100%;
+      height: clamp(3px, 0.5cqw, 5px);
+      background: rgba(255,255,255,0.04);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .cost-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, rgba(248,113,113,0.3), rgba(248,113,113,0.7));
+    }
+
+    /* Versus discipline */
+    .vs-box {
+      width: 92%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1.2cqw, 12px);
+    }
+    .vs-side {
+      border-radius: clamp(6px, 1.2cqw, 12px);
+      padding: clamp(8px, 1.5cqw, 15px);
+      text-align: center;
+    }
+    .vs-side.chaos {
+      background: rgba(248,113,113,0.04);
+      border: 1px solid rgba(248,113,113,0.12);
+    }
+    .vs-side.order {
+      background: rgba(245,158,11,0.04);
+      border: 1px solid rgba(245,158,11,0.12);
+    }
+    .vs-side-icon {
+      width: clamp(26px, 5cqw, 44px);
+      height: clamp(26px, 5cqw, 44px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto clamp(4px, 0.8cqw, 8px);
+      position: relative;
+    }
+    .vs-side-icon::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+    }
+    .vs-side.chaos .vs-side-icon {
+      background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(248,113,113,0.25);
+    }
+    .vs-side.chaos .vs-side-icon::before { border: 1px solid rgba(248,113,113,0.1); }
+    .vs-side.order .vs-side-icon {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.25);
+    }
+    .vs-side.order .vs-side-icon::before { border: 1px solid rgba(245,158,11,0.1); }
+    .vs-icon-sym {
+      font-size: clamp(10px, 1.6cqw, 16px);
+      position: relative;
+      z-index: 2;
+    }
+    .vs-side.chaos .vs-icon-sym { color: var(--accent-red); }
+    .vs-side.order .vs-icon-sym { color: var(--accent-orange); }
+    .vs-side-label {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 10px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: clamp(3px, 0.5cqw, 5px);
+    }
+    .vs-side.chaos .vs-side-label { color: var(--accent-red); }
+    .vs-side.order .vs-side-label { color: var(--accent-orange); }
+    .vs-side-text {
+      font-size: clamp(7px, 1cqw, 10px);
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ══════════════════════════════════════
+       SLIDE 3 — DISCIPLINE PILLARS
+    ══════════════════════════════════════ */
+    .slide-3 .slide-content { justify-content: center; align-items: center; }
+
+    .pillar-stack {
+      width: 88%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(5px, 1cqw, 10px);
+    }
+    .pillar-row {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(6px, 1.2cqw, 12px);
+    }
+    .pillar-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: clamp(30px, 6cqw, 52px);
+    }
+    .pillar-ring {
+      width: clamp(28px, 5.5cqw, 48px);
+      height: clamp(28px, 5.5cqw, 48px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .pillar-ring::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+    }
+    .pillar-ring.pr-orange {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.3);
+    }
+    .pillar-ring.pr-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .pillar-ring.pr-gold {
+      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(201,169,98,0.3);
+    }
+    .pillar-ring.pr-gold::before { border: 1px solid rgba(201,169,98,0.12); }
+    .pillar-ring.pr-teal {
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(94,234,212,0.3);
+    }
+    .pillar-ring.pr-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .pillar-ring.pr-purple {
+      background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(168,85,247,0.3);
+    }
+    .pillar-ring.pr-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .pillar-ring.pr-green {
+      background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(74,222,128,0.3);
+    }
+    .pillar-ring.pr-green::before { border: 1px solid rgba(74,222,128,0.12); }
+
+    .pillar-num {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.5cqw, 15px);
+      font-weight: 700;
+      position: relative;
+      z-index: 2;
+    }
+    .pr-orange .pillar-num { color: var(--accent-orange); }
+    .pr-gold .pillar-num { color: var(--accent-gold); }
+    .pr-teal .pillar-num { color: var(--accent-teal); }
+    .pr-purple .pillar-num { color: var(--accent-purple); }
+    .pr-green .pillar-num { color: var(--accent-green); }
+
+    .pillar-connector {
+      width: 2px;
+      height: clamp(6px, 1.2cqw, 12px);
+      background: linear-gradient(180deg, rgba(245,158,11,0.3), rgba(245,158,11,0.08));
+      margin: clamp(2px, 0.3cqw, 4px) 0;
+    }
+    .pillar-body {
+      flex: 1;
+      min-width: 0;
+      padding-top: clamp(2px, 0.4cqw, 4px);
+    }
+    .pillar-title {
+      font-size: clamp(9px, 1.5cqw, 15px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(2px, 0.4cqw, 4px);
+    }
+    .pillar-desc {
+      font-size: clamp(7px, 1.1cqw, 11px);
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: clamp(3px, 0.5cqw, 5px);
+    }
+    .pillar-bar-track {
+      width: 80%;
+      height: clamp(3px, 0.5cqw, 5px);
+      background: rgba(255,255,255,0.04);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .pillar-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+
+    /* ══════════════════════════════════════
+       SLIDE 4 — TRUTH
+    ══════════════════════════════════════ */
+    .slide-4 .slide-content { justify-content: center; align-items: center; }
+
+    .truth-orb {
+      width: clamp(60px, 12cqw, 110px);
+      height: clamp(60px, 12cqw, 110px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.25) 0%, rgba(245,158,11,0.06) 50%, transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.2);
+      box-shadow: 0 0 35px rgba(245,158,11,0.08);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: clamp(8px, 1.8cqw, 18px);
+    }
+    .truth-orb::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,158,11,0.12);
+    }
+    .truth-orb-icon {
+      font-size: clamp(16px, 3.2cqw, 32px);
+      color: rgba(245,158,11,0.7);
+      position: relative;
+      z-index: 2;
+    }
+
+    .truth-title {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 3cqw, 30px);
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: clamp(8px, 1.5cqw, 16px);
+    }
+
+    .truth-grid {
+      width: 92%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(5px, 1cqw, 10px);
+      margin-bottom: clamp(8px, 1.5cqw, 16px);
+    }
+    .truth-card {
+      background: rgba(245,158,11,0.03);
+      border: 1px solid rgba(245,158,11,0.08);
+      border-radius: clamp(6px, 1cqw, 10px);
+      padding: clamp(6px, 1.2cqw, 12px);
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(4px, 0.8cqw, 8px);
+    }
+    .truth-icon-sm {
+      width: clamp(22px, 4.2cqw, 36px);
+      height: clamp(22px, 4.2cqw, 36px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .truth-icon-sm::before {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border-radius: 50%;
+    }
+    .truth-icon-sm.ti-orange {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%);
+      border: 1px solid rgba(245,158,11,0.25);
+    }
+    .truth-icon-sm.ti-orange::before { border: 1px solid rgba(245,158,11,0.1); }
+    .truth-icon-sm.ti-gold {
+      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);
+      border: 1px solid rgba(201,169,98,0.25);
+    }
+    .truth-icon-sm.ti-gold::before { border: 1px solid rgba(201,169,98,0.1); }
+    .truth-icon-sm.ti-teal {
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%);
+      border: 1px solid rgba(94,234,212,0.25);
+    }
+    .truth-icon-sm.ti-teal::before { border: 1px solid rgba(94,234,212,0.1); }
+    .truth-icon-sm.ti-green {
+      background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%);
+      border: 1px solid rgba(74,222,128,0.25);
+    }
+    .truth-icon-sm.ti-green::before { border: 1px solid rgba(74,222,128,0.1); }
+
+    .truth-icon-sym {
+      font-size: clamp(8px, 1.4cqw, 14px);
+      position: relative;
+      z-index: 2;
+    }
+    .ti-orange .truth-icon-sym { color: var(--accent-orange); }
+    .ti-gold .truth-icon-sym { color: var(--accent-gold); }
+    .ti-teal .truth-icon-sym { color: var(--accent-teal); }
+    .ti-green .truth-icon-sym { color: var(--accent-green); }
+
+    .truth-info { flex: 1; min-width: 0; }
+    .truth-card-title {
+      font-size: clamp(8px, 1.2cqw, 12px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(1px, 0.2cqw, 2px);
+    }
+    .truth-card-desc {
+      font-size: clamp(6px, 0.95cqw, 9px);
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .truth-philosophy {
+      width: 92%;
+      background: rgba(245,158,11,0.02);
+      border: 1px solid rgba(245,158,11,0.06);
+      border-radius: clamp(6px, 1cqw, 10px);
+      padding: clamp(8px, 1.5cqw, 14px);
+      text-align: center;
+    }
+    .truth-philosophy-text {
+      font-family: var(--font-serif);
+      font-size: clamp(9px, 1.4cqw, 14px);
+      font-style: italic;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════════════
+       SLIDE 5 — CTA
+    ══════════════════════════════════════ */
+    .slide-5 .slide-content { align-items: center; text-align: center; justify-content: center; }
+
+    .cta-glow-orb {
+      width: clamp(50px, 10cqw, 90px);
+      height: clamp(50px, 10cqw, 90px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0.05) 50%, transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.15);
+      box-shadow: 0 0 40px rgba(245,158,11,0.08);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: clamp(8px, 1.8cqw, 18px);
+    }
+    .cta-glow-orb::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,158,11,0.1);
+    }
+    .cta-glow-icon {
+      font-size: clamp(14px, 2.8cqw, 28px);
+      color: rgba(245,158,11,0.7);
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.2cqw, 44px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: clamp(6px, 1.5cqw, 14px);
+    }
+    .cta-desc {
+      font-size: clamp(9px, 1.5cqw, 15px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 82%;
+      margin-bottom: clamp(10px, 2.2cqw, 22px);
+    }
+
+    .stat-grid {
+      width: 88%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(4px, 0.8cqw, 8px);
+      margin-bottom: clamp(10px, 2.2cqw, 22px);
+    }
+    .stat-cell {
+      background: rgba(245,158,11,0.03);
+      border: 1px solid rgba(245,158,11,0.08);
+      border-radius: clamp(5px, 0.8cqw, 8px);
+      padding: clamp(5px, 1cqw, 10px);
+      text-align: center;
+    }
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: clamp(12px, 2.2cqw, 22px);
+      font-weight: 700;
+      color: var(--accent-orange);
+      margin-bottom: clamp(1px, 0.2cqw, 3px);
+    }
+    .stat-label {
+      font-size: clamp(6px, 0.9cqw, 9px);
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .cta-pills {
+      display: flex;
+      gap: clamp(4px, 0.8cqw, 8px);
+      margin-bottom: clamp(10px, 2cqw, 20px);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .cta-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.9cqw, 9px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,158,11,0.6);
+      padding: clamp(2px, 0.4cqw, 4px) clamp(6px, 1.2cqw, 12px);
+      border: 1px solid rgba(245,158,11,0.12);
+      border-radius: 100px;
+      background: rgba(245,158,11,0.03);
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(245,158,11,0.12) 0%, rgba(245,158,11,0.03) 100%);
+      border: 2px solid rgba(245,158,11,0.5);
+      border-radius: clamp(10px, 1.8cqw, 16px);
+      padding: clamp(8px, 1.5cqw, 16px) clamp(16px, 3.5cqw, 36px);
+      box-shadow: 0 0 30px rgba(245,158,11,0.06);
+    }
+    .cta-box-text {
+      font-size: clamp(10px, 1.8cqw, 18px);
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: clamp(2px, 0.4cqw, 4px);
+    }
+    .cta-link {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.4cqw, 14px);
+      font-weight: 600;
+      color: var(--accent-orange);
+      letter-spacing: 0.05em;
     }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 094 — Discipline</h1>
-    <p>1 slide &middot; Quote Card</p>
+    <p>5 slides &middot; Quote Card</p>
   </div>
 
   <div class="carousel-grid">
 
-    <!-- ══════ SLIDE 1: Quote Card ══════ -->
+    <!-- ══════ SLIDE 1: Hook ══════ -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Quote Card</span>
+      <span class="slide-label">Slide 1 — Hook</span>
       <div class="slide slide-warm slide-1">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
+          <div class="discipline-orb">
+            <div class="orb-bridge">
+              <div class="orb-bridge-label">Goals → Results</div>
+              <div class="orb-bridge-bar"></div>
+              <div class="orb-bridge-pillars">
+                <div class="orb-bridge-pillar"></div>
+                <div class="orb-bridge-pillar"></div>
+              </div>
+              <div class="orb-bridge-ground"></div>
+            </div>
+          </div>
+
           <div class="quote-mark">&ldquo;</div>
-          <p class="quote-text"><em>Discipline</em> is the bridge between goals and <em>accomplishment</em>.</p>
-          <div class="quote-divider"></div>
-          <div class="reflection">
-            <div class="reflection-line">
-              <span class="reflection-dot"></span>
-              <span class="reflection-text">A plan without discipline is just wishful thinking</span>
+          <p class="hook-title"><em>Discipline</em> is the bridge between goals and <em>accomplishment</em>.</p>
+          <div class="warm-divider"></div>
+          <span class="hook-attr">— Jim Rohn</span>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 2: Cost of Indiscipline ══════ -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — Cost</span>
+      <div class="slide slide-warm slide-2">
+        <div class="slide-content">
+          <div class="section-tag">Warning</div>
+          <div class="section-title">The Cost of <span class="warm">Indiscipline</span></div>
+          <div class="warm-divider"></div>
+
+          <div class="cost-grid">
+            <div class="cost-card">
+              <div class="cost-icon">
+                <span class="cost-icon-sym">&#10007;</span>
+              </div>
+              <div class="cost-info">
+                <div class="cost-title">Revenge Trading</div>
+                <div class="cost-desc">Trying to recover losses with impulsive entries — compounds the damage</div>
+                <div class="cost-bar-track"><div class="cost-bar-fill" style="width:92%"></div></div>
+              </div>
             </div>
-            <div class="reflection-line">
-              <span class="reflection-dot"></span>
-              <span class="reflection-text">Every trade outside your rules erodes your edge</span>
+
+            <div class="cost-card">
+              <div class="cost-icon">
+                <span class="cost-icon-sym">&#10007;</span>
+              </div>
+              <div class="cost-info">
+                <div class="cost-title">Oversizing</div>
+                <div class="cost-desc">Breaking position size rules because you feel confident — one loss wipes weeks</div>
+                <div class="cost-bar-track"><div class="cost-bar-fill" style="width:88%"></div></div>
+              </div>
             </div>
-            <div class="reflection-line">
-              <span class="reflection-dot"></span>
-              <span class="reflection-text">Consistency creates confidence — impulse creates chaos</span>
+
+            <div class="cost-card">
+              <div class="cost-icon">
+                <span class="cost-icon-sym">&#10007;</span>
+              </div>
+              <div class="cost-info">
+                <div class="cost-title">Moving Stops</div>
+                <div class="cost-desc">Widening stop loss mid-trade hoping for reversal — denies your own analysis</div>
+                <div class="cost-bar-track"><div class="cost-bar-fill" style="width:85%"></div></div>
+              </div>
+            </div>
+
+            <div class="cost-card">
+              <div class="cost-icon">
+                <span class="cost-icon-sym">&#10007;</span>
+              </div>
+              <div class="cost-info">
+                <div class="cost-title">FOMO Entries</div>
+                <div class="cost-desc">Jumping into trades without a setup because the market is moving — chasing emotion</div>
+                <div class="cost-bar-track"><div class="cost-bar-fill" style="width:90%"></div></div>
+              </div>
             </div>
           </div>
-          <div class="keywords">
-            <span class="keyword">Discipline</span>
-            <span class="keyword">Consistency</span>
-            <span class="keyword">Rules</span>
+
+          <div class="vs-box">
+            <div class="vs-side chaos">
+              <div class="vs-side-icon">
+                <span class="vs-icon-sym">&#10007;</span>
+              </div>
+              <div class="vs-side-label">Impulse</div>
+              <div class="vs-side-text">Emotional reactions destroy accounts faster than bad strategy</div>
+            </div>
+            <div class="vs-side order">
+              <div class="vs-side-icon">
+                <span class="vs-icon-sym">&#10003;</span>
+              </div>
+              <div class="vs-side-label">Discipline</div>
+              <div class="vs-side-text">Consistent execution of rules builds compounding results</div>
+            </div>
           </div>
-          <span class="quote-attr">— Jim Rohn</span>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 3: 5 Pillars of Discipline ══════ -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Pillars</span>
+      <div class="slide slide-warm slide-3">
+        <div class="slide-content">
+          <div class="section-tag">Framework</div>
+          <div class="section-title">5 Pillars of <span class="warm">Discipline</span></div>
+          <div class="warm-divider"></div>
+
+          <div class="pillar-stack">
+            <div class="pillar-row">
+              <div class="pillar-left">
+                <div class="pillar-ring pr-orange"><span class="pillar-num">1</span></div>
+                <div class="pillar-connector"></div>
+              </div>
+              <div class="pillar-body">
+                <div class="pillar-title">Define Your <span class="warm">Rules</span></div>
+                <div class="pillar-desc">Write entry, exit, and risk rules before the market opens — never trade without a written plan</div>
+                <div class="pillar-bar-track"><div class="pillar-bar-fill" style="width:92%; background:linear-gradient(90deg,rgba(245,158,11,0.3),rgba(245,158,11,0.7))"></div></div>
+              </div>
+            </div>
+
+            <div class="pillar-row">
+              <div class="pillar-left">
+                <div class="pillar-ring pr-gold"><span class="pillar-num">2</span></div>
+                <div class="pillar-connector"></div>
+              </div>
+              <div class="pillar-body">
+                <div class="pillar-title">Respect Your <span style="color:var(--accent-gold)">Stop Loss</span></div>
+                <div class="pillar-desc">A stop loss is a commitment, not a suggestion — honor it without exception every time</div>
+                <div class="pillar-bar-track"><div class="pillar-bar-fill" style="width:90%; background:linear-gradient(90deg,rgba(201,169,98,0.3),rgba(201,169,98,0.7))"></div></div>
+              </div>
+            </div>
+
+            <div class="pillar-row">
+              <div class="pillar-left">
+                <div class="pillar-ring pr-teal"><span class="pillar-num">3</span></div>
+                <div class="pillar-connector"></div>
+              </div>
+              <div class="pillar-body">
+                <div class="pillar-title">Size <span style="color:var(--accent-teal)">Correctly</span></div>
+                <div class="pillar-desc">Risk the same percentage on every trade — never let emotion inflate your position size</div>
+                <div class="pillar-bar-track"><div class="pillar-bar-fill" style="width:88%; background:linear-gradient(90deg,rgba(94,234,212,0.3),rgba(94,234,212,0.7))"></div></div>
+              </div>
+            </div>
+
+            <div class="pillar-row">
+              <div class="pillar-left">
+                <div class="pillar-ring pr-purple"><span class="pillar-num">4</span></div>
+                <div class="pillar-connector"></div>
+              </div>
+              <div class="pillar-body">
+                <div class="pillar-title">Journal <span style="color:var(--accent-purple)">Everything</span></div>
+                <div class="pillar-desc">Record every trade, every emotion, every deviation — accountability is the foundation</div>
+                <div class="pillar-bar-track"><div class="pillar-bar-fill" style="width:85%; background:linear-gradient(90deg,rgba(168,85,247,0.3),rgba(168,85,247,0.7))"></div></div>
+              </div>
+            </div>
+
+            <div class="pillar-row">
+              <div class="pillar-left">
+                <div class="pillar-ring pr-green"><span class="pillar-num">5</span></div>
+              </div>
+              <div class="pillar-body">
+                <div class="pillar-title">Walk Away <span style="color:var(--accent-green)">When Done</span></div>
+                <div class="pillar-desc">Hit your daily target or max loss? Close the charts — overtrading is indiscipline</div>
+                <div class="pillar-bar-track"><div class="pillar-bar-fill" style="width:86%; background:linear-gradient(90deg,rgba(74,222,128,0.3),rgba(74,222,128,0.7))"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 4: Truth ══════ -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Truth</span>
+      <div class="slide slide-warm slide-4">
+        <div class="slide-content">
+          <div class="section-tag">Core Truth</div>
+
+          <div class="truth-orb">
+            <span class="truth-orb-icon">&#9670;</span>
+          </div>
+
+          <div class="truth-title">The <span class="warm">Discipline Edge</span></div>
+
+          <div class="truth-grid">
+            <div class="truth-card">
+              <div class="truth-icon-sm ti-orange">
+                <span class="truth-icon-sym">&#9656;</span>
+              </div>
+              <div class="truth-info">
+                <div class="truth-card-title">Rules Over Feelings</div>
+                <div class="truth-card-desc">Your system knows more than your emotions in the heat of the moment</div>
+              </div>
+            </div>
+
+            <div class="truth-card">
+              <div class="truth-icon-sm ti-gold">
+                <span class="truth-icon-sym">&#9670;</span>
+              </div>
+              <div class="truth-info">
+                <div class="truth-card-title">Process Over Outcome</div>
+                <div class="truth-card-desc">A disciplined loss is a win — an undisciplined win is a future loss</div>
+              </div>
+            </div>
+
+            <div class="truth-card">
+              <div class="truth-icon-sm ti-teal">
+                <span class="truth-icon-sym">&#9674;</span>
+              </div>
+              <div class="truth-info">
+                <div class="truth-card-title">Consistency Compounds</div>
+                <div class="truth-card-desc">Small consistent gains beat sporadic large wins over any meaningful timeframe</div>
+              </div>
+            </div>
+
+            <div class="truth-card">
+              <div class="truth-icon-sm ti-green">
+                <span class="truth-icon-sym">&#10003;</span>
+              </div>
+              <div class="truth-info">
+                <div class="truth-card-title">Patience Is a Skill</div>
+                <div class="truth-card-desc">Waiting for your setup is the hardest trade — and the most profitable one</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="truth-philosophy">
+            <div class="truth-philosophy-text">A plan without discipline is just wishful thinking.<br>Every trade outside your rules erodes your edge.</div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 5: CTA ══════ -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — CTA</span>
+      <div class="slide slide-warm slide-5">
+        <div class="slide-content">
+          <div class="cta-glow-orb">
+            <span class="cta-glow-icon">&#9733;</span>
+          </div>
+
+          <div class="cta-title">Stop Reacting.<br>Start <span class="warm">Executing.</span></div>
+          <p class="cta-desc">Discipline is the bridge between knowing what to do and actually doing it. Build the habits that compound.</p>
+
+          <div class="stat-grid">
+            <div class="stat-cell">
+              <div class="stat-value">5</div>
+              <div class="stat-label">Discipline Pillars</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-value">4</div>
+              <div class="stat-label">Costly Mistakes</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-value">100%</div>
+              <div class="stat-label">Rule Adherence</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-value">&infin;</div>
+              <div class="stat-label">Compound Edge</div>
+            </div>
+          </div>
+
+          <div class="cta-pills">
+            <span class="cta-pill">Rules</span>
+            <span class="cta-pill">Stop Loss</span>
+            <span class="cta-pill">Position Size</span>
+            <span class="cta-pill">Journal</span>
+          </div>
+
+          <div class="cta-box">
+            <p class="cta-box-text">Master Your Discipline</p>
+            <span class="cta-link">signalpilot.io</span>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
@@ -216,20 +989,11 @@
 
   <script>
     (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
       const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
       const slideWrappers = document.querySelectorAll('.slide-wrapper');
       let exportMode = false;
       let currentSlide = 0;
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
       exportBtn.addEventListener('click', function() {
         exportMode = !exportMode;
         document.body.classList.toggle('export-mode', exportMode);
