@@ -284,7 +284,7 @@ Signal Pilot Labs
 
 ## 9. ClayTrader (Clay Huber)
 
-**To:** [CONTACT FORM] -claytrader.com/contact
+**To:** support@claytrader.com
 **Subject:** "Terminate Your Emotions" -we built an indicator that does exactly that
 
 Hi Clay,
@@ -654,7 +654,7 @@ Signal Pilot Labs
 
 ## 20. TradingCode.net (Jos)
 
-**To:** [CONTACT FORM] -tradingcode.net/contact (no public email found)
+**To:** info@tradingcode.net
 **Subject:** Your multi-condition strategy articles + an indicator built on that exact architecture
 
 Hi Jos,
@@ -939,7 +939,7 @@ Signal Pilot Labs
 
 ### 29. WicksDontLie (Raja Rakeel)
 
-**To:** [INSTAGRAM DM] -@wicksdontlie (no public email, also try marketfluidity.com)
+**To:** raja@marketfluidity.com (or IG DM @wicksdontlie)
 **Subject:** N/A (DM format)
 
 Hey Raja -1,500+ people watching you trade GBPJPY live during NY session, no edits, no replays. That's the hardest content format in trading education and you do it every day.
@@ -1239,7 +1239,7 @@ Signal Pilot Labs
 
 ### 40. Trading Fraternity (Josh Answers)
 
-**To:** [Instagram DM] -@TheTradingFraternity (no public email, also X @JoshAnswers)
+**To:** TradingFraternity@gmail.com
 **Subject:** N/A (DM format)
 
 Hey Josh -half a million traders between your two channels, and the streams are raw. Real entries, real exits, real reactions. That format is what actually teaches people.
@@ -1322,7 +1322,7 @@ Signal Pilot Labs
 
 ### 43. Black Girl Stocks (Shayla North)
 
-**To:** [CONTACT FORM] -theblackgirlstocks.com/pages/contact (no public email found)
+**To:** foxtailent20@gmail.com
 **Subject:** Your Candlestick Review Cards are genius -built indicators with that same "make it visual" approach
 
 Hi Shayla,
@@ -1777,7 +1777,7 @@ Quick links:
 | 26 | No Nonsense Forex (VP) | -| Contact form: nononsenseforex.com/contact | Forex |
 | 27 | Urban Forex (Navin Prithyani) | info@urbanforex.com | Direct email | Forex |
 | 28 | ForexSignals TV (Andrew Lockwood) | support@forexsignals.com | Direct email | Forex |
-| 29 | WicksDontLie (Raja Rakeel) | -| Instagram DM: @wicksdontlie | Forex |
+| 29 | WicksDontLie (Raja Rakeel) | raja@marketfluidity.com | Direct email | Forex |
 | 30 | The Traveling Trader | -| YouTube About email | Forex |
 | 31 | VasilyTrader | -| Contact form or Telegram @VasilyTrader | Forex |
 | 32 | Rekt Capital | rektcapital@gmail.com | Direct email | Crypto |
@@ -1788,10 +1788,10 @@ Quick links:
 | 37 | Koroush AK | -| Twitter DM or Telegram @koroushakcrypto | Crypto |
 | 38 | InTheMoney (Adam) | -| YouTube About email | Stocks/Options |
 | 39 | Humbled Trader (Shay Huang) | support@humbledtrader.com | Direct email | Stocks |
-| 40 | Trading Fraternity (Josh Answers) | -| Instagram DM: @TheTradingFraternity | Stocks/Options |
+| 40 | Trading Fraternity (Josh Answers) | TradingFraternity@gmail.com | Direct email | Stocks/Options |
 | 41 | Option Alpha (Kirk Du Plessis) | kirk@optionalpha.com | Direct email | Options |
 | 42 | Rockwell Trading (Markus Heitkoetter) | support@rockwelltrading.com | Direct email | Stocks/Options |
-| 43 | Black Girl Stocks (Shayla North) | -| Contact form: theblackgirlstocks.com | Stocks |
+| 43 | Black Girl Stocks (Shayla North) | foxtailent20@gmail.com | Direct email | Stocks |
 | 44 | Trader Nick / A1 Trading | tradernick135@gmail.com | Direct email | Multi-market |
 | 45 | UKspreadbetting (Mark Holstead) | trader@financial-spread-betting.com | Direct email | Multi-market |
 | 46 | Trading Rush | -| Contact form: tradingrush.net | Multi-market |
