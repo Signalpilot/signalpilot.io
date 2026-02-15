@@ -7,23 +7,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* ══════════════════════════════════════════════
-       CSS VARIABLES
-       ══════════════════════════════════════════════ */
     :root {
       --bg-dark: #0a0a0f;
-      --bg-card: rgba(255,255,255,0.03);
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255,255,255,0.7);
-      --text-muted: rgba(255,255,255,0.4);
-      --border-subtle: rgba(255,255,255,0.1);
+      --accent-blue: #4a90d9;
       --accent-gold: #c9a962;
-      --accent-gold-dim: rgba(201,169,98,0.3);
-      --color-green: #4ade80;
-      --color-red: #ef4444;
+      --accent-green: #4ad97a;
+      --accent-red: #d94a4a;
+      --text-primary: #e8e6e3;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: #6b6965;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,9 +31,6 @@
       min-height: 100vh;
     }
 
-    /* ══════════════════════════════════════════════
-       CONTROLS
-       ══════════════════════════════════════════════ */
     .controls {
       position: fixed;
       top: 1rem;
@@ -47,37 +39,27 @@
       display: flex;
       gap: 1rem;
       align-items: center;
-      background: rgba(0,0,0,0.85);
+      background: rgba(0, 0, 0, 0.8);
       padding: 1rem 1.5rem;
       border-radius: 8px;
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .controls label {
-      font-size: 0.8rem;
+      font-size: 0.875rem;
       color: var(--text-secondary);
     }
 
     .controls select, .controls button {
       background: var(--bg-dark);
       color: var(--text-primary);
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       padding: 0.5rem 1rem;
       border-radius: 4px;
       cursor: pointer;
       font-family: inherit;
-      font-size: 0.8rem;
     }
 
-    .controls button:hover {
-      background: rgba(201,169,98,0.15);
-      border-color: var(--accent-gold);
-    }
-
-    /* ══════════════════════════════════════════════
-       PAGE TITLE
-       ══════════════════════════════════════════════ */
     .page-title {
       text-align: center;
       margin-bottom: 2rem;
@@ -91,14 +73,10 @@
     }
 
     .page-title p {
-      color: var(--text-muted);
-      font-family: 'Inter', sans-serif;
+      color: var(--text-secondary);
       font-size: 0.875rem;
     }
 
-    /* ══════════════════════════════════════════════
-       CAROUSEL GRID
-       ══════════════════════════════════════════════ */
     .carousel-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -121,12 +99,8 @@
       letter-spacing: 0.1em;
       color: var(--accent-gold);
       margin-bottom: 0.75rem;
-      font-family: 'JetBrains Mono', monospace;
     }
 
-    /* ══════════════════════════════════════════════
-       SLIDE BASE
-       ══════════════════════════════════════════════ */
     .slide {
       width: 100%;
       max-width: 540px;
@@ -135,36 +109,27 @@
       overflow: hidden;
       background: var(--bg-dark);
       border-radius: 4px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
-    .video-bg {
+    .slide-bg {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      opacity: 0.06;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .slide-edu {
-      background: linear-gradient(180deg, #0d0d10 0%, #0a0a0f 100%) !important;
-    }
-
-    .slide-edu::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(201,169,98,0.04) 0%, transparent 100%);
-      pointer-events: none;
       z-index: 1;
     }
 
-    .slide-edu .slide-content {
-      z-index: 3;
+    .slide-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.08;
+    }
+
+    .slide.bg-black .slide-bg video {
+      opacity: 0;
     }
 
     .slide-content {
@@ -179,836 +144,302 @@
       padding: 8%;
     }
 
-    /* ══════════════════════════════════════════════
-       LOGO (all slides)
-       ══════════════════════════════════════════════ */
-    .slide-logo {
-      position: absolute;
-      bottom: 4%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.55rem, 1.6cqw, 0.8rem);
-      color: rgba(255,255,255,0.25);
-      letter-spacing: 0.15em;
-      white-space: nowrap;
-    }
-
-    /* ══════════════════════════════════════════════
-       GOLD DIVIDER
-       ══════════════════════════════════════════════ */
-    .gold-divider {
-      width: clamp(2rem, 8cqw, 4rem);
-      height: 1px;
-      background: rgba(201,169,98,0.6);
-      margin: 0 auto;
-    }
-
-    /* ══════════════════════════════════════════════
-       SLIDE 1 — HOOK
-       ══════════════════════════════════════════════ */
-    .slide-1 .slide-content {
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .slide-1 .learn-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.5rem, 1.4cqw, 0.7rem);
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(201,169,98,0.9);
-      margin-bottom: clamp(0.8rem, 3cqw, 1.5rem);
-    }
-
-    .slide-1 .gold-divider {
-      margin-bottom: clamp(1rem, 3cqw, 1.5rem);
-    }
-
-    .slide-1 .hook-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.6rem, 5.5cqw, 2.8rem);
-      font-weight: 400;
-      line-height: 1.15;
-      color: var(--text-primary);
-      margin-bottom: clamp(0.5rem, 1.5cqw, 0.8rem);
-    }
-
-    .slide-1 .hook-title strong {
-      font-weight: 600;
-      color: var(--accent-gold);
-    }
-
-    .slide-1 .hook-subtitle {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.7rem, 2.2cqw, 1.1rem);
-      font-weight: 400;
-      font-style: italic;
+    .slide-number {
+      font-size: 0.6rem;
+      font-weight: 500;
       color: var(--text-muted);
-      margin-bottom: clamp(1.5rem, 5cqw, 2.5rem);
+      letter-spacing: 0.15em;
+      margin-bottom: auto;
     }
 
-    /* CSS-only Golden Spiral visual */
-    .spiral-container {
-      position: relative;
-      width: clamp(6rem, 22cqw, 12rem);
-      height: clamp(6rem, 22cqw, 12rem);
-      margin: 0 auto;
-    }
-
-    .spiral-square {
-      position: absolute;
-      border: 1px solid rgba(201,169,98,0.2);
-      border-radius: 2px;
-    }
-
-    .spiral-square::after {
-      content: '';
-      position: absolute;
-      border: 1px solid rgba(201,169,98,0.35);
-      border-radius: 50%;
-    }
-
-    .spiral-sq-1 {
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-    }
-    .spiral-sq-1::after {
-      width: 200%;
-      height: 200%;
-      bottom: 0;
-      right: 0;
-      border-top-color: transparent;
-      border-left-color: transparent;
-      clip-path: inset(0 50% 50% 0);
-    }
-
-    .spiral-sq-2 {
-      width: 61.8%;
-      height: 61.8%;
-      bottom: 0;
-      left: 0;
-      border-color: rgba(201,169,98,0.25);
-    }
-    .spiral-sq-2::after {
-      width: 200%;
-      height: 200%;
-      bottom: 0;
-      left: 0;
-      border-top-color: transparent;
-      border-right-color: transparent;
-      clip-path: inset(0 0 50% 50%);
-    }
-
-    .spiral-sq-3 {
-      width: 38.2%;
-      height: 38.2%;
-      bottom: 0;
-      right: 0;
-      border-color: rgba(201,169,98,0.3);
-    }
-    .spiral-sq-3::after {
-      width: 200%;
-      height: 200%;
-      top: 0;
-      right: 0;
-      border-bottom-color: transparent;
-      border-left-color: transparent;
-      clip-path: inset(50% 50% 0 0);
-    }
-
-    .spiral-sq-4 {
-      width: 23.6%;
-      height: 23.6%;
-      top: 38.2%;
-      right: 0;
-      border-color: rgba(201,169,98,0.35);
-    }
-
-    .spiral-sq-5 {
-      width: 14.6%;
-      height: 14.6%;
-      top: 38.2%;
-      right: 23.6%;
-      border-color: rgba(201,169,98,0.4);
-    }
-
-    /* Fibonacci number sequence hint */
-    .fib-sequence {
-      display: flex;
-      gap: clamp(0.3rem, 1cqw, 0.6rem);
-      justify-content: center;
-      margin-top: clamp(0.6rem, 2cqw, 1.2rem);
-    }
-
-    .fib-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.45rem, 1.2cqw, 0.6rem);
-      color: rgba(201,169,98,0.3);
-      letter-spacing: 0.05em;
-    }
-
-    .fib-num.highlight {
-      color: rgba(201,169,98,0.6);
-    }
-
-    /* ══════════════════════════════════════════════
-       SLIDE 2 — KEY LEVELS
-       ══════════════════════════════════════════════ */
-    .slide-2 .slide-content {
-      align-items: flex-start;
-      justify-content: center;
-    }
-
-    .slide-2 .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 4cqw, 2rem);
+    .brand-tag {
+      font-size: 0.55rem;
       font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: clamp(0.8rem, 2.5cqw, 1.4rem);
-      width: 100%;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-top: auto;
       text-align: center;
     }
 
-    .slide-2 .levels-layout {
-      display: flex;
-      gap: 4%;
-      width: 100%;
-      flex: 1;
-      align-items: center;
-    }
-
-    .slide-2 .levels-stack {
+    .center-content {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: clamp(0.3rem, 1cqw, 0.55rem);
-    }
-
-    .slide-2 .level-row {
-      display: flex;
-      align-items: center;
-      gap: clamp(0.3rem, 1cqw, 0.5rem);
-      padding: clamp(0.3rem, 1cqw, 0.55rem) clamp(0.4rem, 1.2cqw, 0.7rem);
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      transition: border-color 0.3s;
-    }
-
-    .slide-2 .level-row.golden {
-      background: rgba(201,169,98,0.08);
-      border-color: rgba(201,169,98,0.35);
-    }
-
-    .slide-2 .level-row.warning {
-      border-color: rgba(239,68,68,0.25);
-    }
-
-    .slide-2 .level-pct {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.6rem, 2cqw, 1rem);
-      font-weight: 600;
-      color: var(--text-muted);
-      min-width: clamp(2.2rem, 8cqw, 4rem);
-      flex-shrink: 0;
-    }
-
-    .slide-2 .level-row.golden .level-pct {
-      color: var(--accent-gold);
-    }
-
-    .slide-2 .level-row.warning .level-pct {
-      color: rgba(239,68,68,0.8);
-    }
-
-    .slide-2 .level-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.42rem, 1.4cqw, 0.65rem);
-      font-weight: 400;
-      color: var(--text-muted);
-      line-height: 1.3;
-    }
-
-    .slide-2 .level-row.golden .level-desc {
-      color: var(--text-secondary);
-    }
-
-    .slide-2 .level-note {
-      font-size: clamp(0.35rem, 1cqw, 0.5rem);
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    /* CSS-only mini chart with retracement lines */
-    .slide-2 .fib-chart {
-      width: clamp(5rem, 18cqw, 10rem);
-      height: 100%;
-      position: relative;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-    }
-
-    .slide-2 .chart-area {
-      width: 100%;
-      height: 80%;
-      position: relative;
-      border-left: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    /* Price line going up */
-    .slide-2 .chart-price-line {
-      position: absolute;
-      bottom: 5%;
-      left: 10%;
-      width: 35%;
-      height: 85%;
-      border-right: 2px solid var(--color-green);
-      border-top: 2px solid var(--color-green);
-      border-radius: 0 4px 0 0;
-      opacity: 0.5;
-    }
-
-    /* Retracement drop */
-    .slide-2 .chart-retrace {
-      position: absolute;
-      top: 5%;
-      left: 45%;
-      width: 20%;
-      height: 55%;
-      border-left: 2px solid var(--color-red);
-      border-bottom: 2px solid var(--color-red);
-      border-radius: 0 0 0 4px;
-      opacity: 0.4;
-    }
-
-    /* Continuation */
-    .slide-2 .chart-continue {
-      position: absolute;
-      top: 35%;
-      right: 10%;
-      width: 20%;
-      height: 30%;
-      border-right: 2px solid var(--color-green);
-      border-top: 2px solid var(--color-green);
-      border-radius: 0 4px 0 0;
-      opacity: 0.35;
-    }
-
-    /* Horizontal dashed fib levels */
-    .slide-2 .fib-line {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 0;
-      border-top: 1px dashed rgba(201,169,98,0.25);
-    }
-
-    .slide-2 .fib-line.golden-line {
-      border-top-color: rgba(201,169,98,0.5);
-    }
-
-    .slide-2 .fib-line-label {
-      position: absolute;
-      right: 2px;
-      top: 2px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.3rem, 0.8cqw, 0.4rem);
-      color: rgba(201,169,98,0.4);
-    }
-
-    .slide-2 .fib-line.golden-line .fib-line-label {
-      color: rgba(201,169,98,0.7);
-    }
-
-    /* ══════════════════════════════════════════════
-       SLIDE 3 — WHY THEY WORK
-       ══════════════════════════════════════════════ */
-    .slide-3 .slide-content {
-      align-items: center;
       justify-content: center;
+      align-items: center;
       text-align: center;
     }
 
-    .slide-3 .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 4cqw, 2rem);
-      font-weight: 400;
-      color: var(--text-primary);
-      margin-bottom: clamp(1rem, 3cqw, 1.6rem);
-    }
-
-    .slide-3 .section-title strong {
-      font-weight: 600;
-    }
-
-    .slide-3 .prophecy-card {
-      background: rgba(201,169,98,0.06);
-      border: 1px solid rgba(201,169,98,0.2);
-      border-radius: 12px;
-      padding: clamp(0.8rem, 3cqw, 1.5rem);
-      width: 100%;
-      max-width: 90%;
-      margin-bottom: clamp(0.8rem, 2.5cqw, 1.4rem);
-      position: relative;
-    }
-
-    .slide-3 .prophecy-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.4rem, 1.2cqw, 0.6rem);
-      font-weight: 600;
+    /* Cover slide */
+    .cover-badge {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.45rem, 1.3cqw, 0.6rem);
+      font-weight: 500;
       letter-spacing: 0.2em;
+      color: var(--accent-gold);
       text-transform: uppercase;
-      color: var(--accent-gold);
-      margin-bottom: clamp(0.3rem, 1cqw, 0.6rem);
+      padding: 2% 4%;
+      border: 1px solid rgba(201, 169, 98, 0.3);
+      border-radius: 6px;
+      margin-bottom: 4%;
+      background: rgba(201, 169, 98, 0.05);
     }
 
-    .slide-3 .prophecy-text {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.55rem, 1.8cqw, 0.85rem);
-      font-weight: 400;
-      color: var(--text-secondary);
-      line-height: 1.55;
-    }
-
-    /* CSS-only ripple / concentric circles */
-    .slide-3 .ripple-container {
-      position: relative;
-      width: clamp(7rem, 24cqw, 13rem);
-      height: clamp(7rem, 24cqw, 13rem);
-      margin: clamp(0.5rem, 1.5cqw, 1rem) auto;
-    }
-
-    .slide-3 .ripple {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(201,169,98,0.12);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .slide-3 .ripple-1 { width: 100%; height: 100%; border-color: rgba(201,169,98,0.08); }
-    .slide-3 .ripple-2 { width: 78%; height: 78%; border-color: rgba(201,169,98,0.12); }
-    .slide-3 .ripple-3 { width: 56%; height: 56%; border-color: rgba(201,169,98,0.18); }
-    .slide-3 .ripple-4 { width: 34%; height: 34%; border-color: rgba(201,169,98,0.26); }
-    .slide-3 .ripple-5 { width: 16%; height: 16%; background: rgba(201,169,98,0.12); border-color: rgba(201,169,98,0.35); }
-
-    .slide-3 .ripple-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.5rem, 1.6cqw, 0.8rem);
-      font-weight: 600;
-      color: var(--accent-gold);
-    }
-
-    .slide-3 .bottom-note {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.42rem, 1.2cqw, 0.6rem);
-      color: var(--text-muted);
-      font-style: italic;
-      margin-top: clamp(0.5rem, 1.5cqw, 1rem);
-    }
-
-    /* ══════════════════════════════════════════════
-       SLIDE 4 — HOW TO DRAW FIBS
-       ══════════════════════════════════════════════ */
-    .slide-4 .slide-content {
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .slide-4 .section-title {
+    .cover-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 4cqw, 2rem);
+      font-size: clamp(1.4rem, 5cqw, 2.4rem);
       font-weight: 600;
+      line-height: 1.1;
       color: var(--text-primary);
-      margin-bottom: clamp(0.8rem, 2.5cqw, 1.4rem);
+      margin-bottom: 3%;
     }
 
-    .slide-4 .draw-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(0.5rem, 1.8cqw, 1rem);
-      width: 100%;
-      max-width: 95%;
-      margin-bottom: clamp(0.8rem, 2.5cqw, 1.4rem);
+    .cover-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.65rem, 2.2cqw, 1rem);
+      font-weight: 300;
+      color: var(--text-secondary);
     }
 
-    .slide-4 .draw-card {
-      padding: clamp(0.6rem, 2cqw, 1rem);
-      border-radius: 10px;
-      text-align: center;
+    .fib-icon {
+      margin-top: 4%;
+      font-size: clamp(1.8rem, 6cqw, 3rem);
     }
 
-    .slide-4 .draw-card.uptrend {
-      background: rgba(74,222,128,0.06);
-      border: 1px solid rgba(74,222,128,0.2);
+    /* Content slides */
+    .headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 4.2cqw, 2rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 3%;
     }
 
-    .slide-4 .draw-card.downtrend {
-      background: rgba(239,68,68,0.06);
-      border: 1px solid rgba(239,68,68,0.2);
+    .accent-gold { color: var(--accent-gold); }
+    .accent-blue { color: var(--accent-blue); }
+    .accent-green { color: var(--accent-green); }
+
+    /* Levels grid */
+    .levels-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .slide-4 .draw-dir-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.4rem, 1.2cqw, 0.6rem);
+    .levels-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5%;
+    }
+
+    .level-card {
+      display: flex;
+      align-items: center;
+      gap: 2%;
+      padding: 2% 3%;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+    }
+
+    .level-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.9rem, 3cqw, 1.4rem);
+      font-weight: 600;
+      color: var(--accent-gold);
+      min-width: 20%;
+    }
+
+    .level-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.75rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+    }
+
+    /* Why card */
+    .why-card {
+      padding: 4%;
+      background: rgba(201, 169, 98, 0.08);
+      border: 1px solid rgba(201, 169, 98, 0.25);
+      border-radius: 16px;
+    }
+
+    .why-title {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: clamp(0.4rem, 1.2cqw, 0.6rem);
+      color: var(--accent-gold);
+      margin-bottom: 2%;
     }
 
-    .slide-4 .draw-card.uptrend .draw-dir-label { color: var(--color-green); }
-    .slide-4 .draw-card.downtrend .draw-dir-label { color: var(--color-red); }
-
-    /* CSS arrows */
-    .slide-4 .draw-arrow {
-      position: relative;
-      width: clamp(1.2rem, 4cqw, 2.2rem);
-      height: clamp(3rem, 10cqw, 5rem);
-      margin: 0 auto clamp(0.3rem, 1cqw, 0.6rem);
+    .why-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.5cqw, 1.6rem);
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text-primary);
     }
 
-    .slide-4 .draw-arrow .shaft {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 100%;
+    .why-subtext {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.55rem, 1.8cqw, 0.8rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-top: 2%;
     }
 
-    .slide-4 .draw-card.uptrend .shaft {
-      background: linear-gradient(to top, rgba(74,222,128,0.2), rgba(74,222,128,0.7));
+    /* Draw section */
+    .draw-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .slide-4 .draw-card.downtrend .shaft {
-      background: linear-gradient(to bottom, rgba(239,68,68,0.2), rgba(239,68,68,0.7));
+    .draw-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3%;
     }
 
-    .slide-4 .draw-arrow .arrow-head {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
+    .draw-card {
+      padding: 4%;
+      border-radius: 12px;
     }
 
-    .slide-4 .draw-card.uptrend .arrow-head {
-      top: 0;
-      border-bottom: 7px solid var(--color-green);
+    .draw-card.uptrend {
+      background: rgba(74, 217, 122, 0.08);
+      border: 1px solid rgba(74, 217, 122, 0.25);
     }
 
-    .slide-4 .draw-card.downtrend .arrow-head {
-      bottom: 0;
-      border-top: 7px solid var(--color-red);
+    .draw-card.downtrend {
+      background: rgba(217, 74, 74, 0.08);
+      border: 1px solid rgba(217, 74, 74, 0.25);
     }
 
-    /* Anchor dots */
-    .slide-4 .draw-arrow .anchor-dot {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-
-    .slide-4 .draw-card.uptrend .anchor-dot.start {
-      bottom: -1px;
-      background: var(--color-green);
-      opacity: 0.5;
-    }
-
-    .slide-4 .draw-card.uptrend .anchor-dot.end {
-      top: 8px;
-      background: var(--color-green);
-    }
-
-    .slide-4 .draw-card.downtrend .anchor-dot.start {
-      top: -1px;
-      background: var(--color-red);
-      opacity: 0.5;
-    }
-
-    .slide-4 .draw-card.downtrend .anchor-dot.end {
-      bottom: 8px;
-      background: var(--color-red);
-    }
-
-    .slide-4 .draw-label {
+    .draw-label {
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.45rem, 1.4cqw, 0.65rem);
-      font-weight: 400;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2%;
+    }
+
+    .draw-card.uptrend .draw-label { color: var(--accent-green); }
+    .draw-card.downtrend .draw-label { color: var(--accent-red); }
+
+    .draw-icon {
+      font-size: clamp(1rem, 3.2cqw, 1.5rem);
+      margin-bottom: 2%;
+    }
+
+    .draw-text {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.75rem);
+      font-weight: 300;
       color: var(--text-secondary);
       line-height: 1.4;
     }
 
-    .slide-4 .draw-label strong {
-      font-weight: 600;
-      color: var(--text-primary);
+    /* Tip card */
+    .tip-card {
+      padding: 4%;
+      background: rgba(74, 144, 217, 0.08);
+      border: 1px solid rgba(74, 144, 217, 0.25);
+      border-radius: 12px;
     }
 
-    /* CSS mini chart for anchoring */
-    .slide-4 .anchor-chart {
-      width: 90%;
-      max-width: clamp(10rem, 35cqw, 18rem);
-      height: clamp(4rem, 14cqw, 8rem);
-      position: relative;
-      border-left: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-      margin: 0 auto clamp(0.4rem, 1.2cqw, 0.8rem);
-    }
-
-    .slide-4 .anchor-chart .swing-line {
-      position: absolute;
-      bottom: 10%;
-      left: 8%;
-      width: 40%;
-      height: 75%;
-      border-right: 2px solid rgba(74,222,128,0.4);
-      border-top: 2px solid rgba(74,222,128,0.4);
-      border-radius: 0 6px 0 0;
-    }
-
-    .slide-4 .anchor-chart .retrace-line {
-      position: absolute;
-      top: 10%;
-      left: 48%;
-      width: 22%;
-      height: 50%;
-      border-left: 2px solid rgba(239,68,68,0.35);
-      border-bottom: 2px solid rgba(239,68,68,0.35);
-      border-radius: 0 0 0 6px;
-    }
-
-    .slide-4 .anchor-chart .fib-zone {
-      position: absolute;
-      top: 30%;
-      left: 48%;
-      width: 45%;
-      height: 25%;
-      background: rgba(201,169,98,0.06);
-      border-top: 1px dashed rgba(201,169,98,0.3);
-      border-bottom: 1px dashed rgba(201,169,98,0.3);
-    }
-
-    .slide-4 .anchor-chart .fib-zone-label {
-      position: absolute;
-      right: 4px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.3rem, 0.8cqw, 0.4rem);
-      color: rgba(201,169,98,0.5);
-    }
-
-    /* Anchor dots on chart */
-    .slide-4 .anchor-chart .dot-low {
-      position: absolute;
-      bottom: 8%;
-      left: 6%;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--color-green);
-    }
-
-    .slide-4 .anchor-chart .dot-high {
-      position: absolute;
-      top: 8%;
-      left: 46%;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--color-green);
-    }
-
-    .slide-4 .key-note {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.42rem, 1.3cqw, 0.6rem);
-      color: var(--accent-gold);
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      padding: clamp(0.3rem, 1cqw, 0.5rem) clamp(0.5rem, 1.5cqw, 0.8rem);
-      border: 1px solid var(--accent-gold-dim);
-      border-radius: 6px;
-      background: rgba(201,169,98,0.04);
-    }
-
-    /* ══════════════════════════════════════════════
-       SLIDE 5 — PRO TIPS
-       ══════════════════════════════════════════════ */
-    .slide-5 .slide-content {
+    .tip-header {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: left;
+      gap: 2%;
+      margin-bottom: 3%;
     }
 
-    .slide-5 .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 4cqw, 2rem);
+    .tip-icon {
+      font-size: clamp(0.85rem, 2.8cqw, 1.25rem);
+    }
+
+    .tip-title {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.75rem);
       font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: clamp(0.8rem, 2.5cqw, 1.4rem);
-      text-align: center;
-      width: 100%;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
     }
 
-    .slide-5 .tips-stack {
+    .tip-content {
       display: flex;
       flex-direction: column;
-      gap: clamp(0.35rem, 1.2cqw, 0.6rem);
-      width: 100%;
+      gap: 2%;
     }
 
-    .slide-5 .tip-card {
-      padding: clamp(0.5rem, 1.6cqw, 0.9rem) clamp(0.6rem, 1.8cqw, 1rem);
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-left: 3px solid var(--accent-gold);
-      border-radius: 0 8px 8px 0;
-    }
-
-    .slide-5 .tip-text {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.45rem, 1.45cqw, 0.68rem);
-      font-weight: 400;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    .slide-5 .tip-text strong {
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-
-    .slide-5 .tip-text .gold {
-      color: var(--accent-gold);
-    }
-
-    .slide-5 .bottom-quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.55rem, 1.8cqw, 0.85rem);
-      font-style: italic;
-      color: var(--text-muted);
-      text-align: center;
-      margin-top: clamp(0.6rem, 2cqw, 1.2rem);
-      width: 100%;
-      line-height: 1.5;
-    }
-
-    /* ══════════════════════════════════════════════
-       SLIDE 6 — CTA
-       ══════════════════════════════════════════════ */
-    .slide-6 .slide-content {
+    .tip-item {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .slide-6 .gold-divider {
-      margin-bottom: clamp(1rem, 3cqw, 1.8rem);
-    }
-
-    .slide-6 .cta-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.4rem);
-      font-weight: 400;
-      color: var(--text-primary);
-      line-height: 1.15;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 0.8rem);
-    }
-
-    .slide-6 .cta-title strong {
-      font-weight: 600;
-      color: var(--accent-gold);
-    }
-
-    .slide-6 .cta-subtitle {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.78rem);
-      font-weight: 400;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      max-width: 85%;
-      margin: 0 auto clamp(1rem, 3.5cqw, 2rem);
-    }
-
-    .slide-6 .cta-box {
-      display: inline-flex;
-      align-items: center;
-      gap: clamp(0.4rem, 1.2cqw, 0.7rem);
-      padding: clamp(0.6rem, 2cqw, 1rem) clamp(1rem, 3.5cqw, 2rem);
-      border: 1px solid var(--accent-gold);
+      gap: 2%;
+      padding: 2.5%;
+      background: rgba(0, 0, 0, 0.3);
       border-radius: 8px;
-      background: rgba(201,169,98,0.04);
-      margin-bottom: clamp(1.5rem, 5cqw, 2.5rem);
-      cursor: pointer;
-      transition: background 0.3s;
     }
 
-    .slide-6 .cta-box:hover {
-      background: rgba(201,169,98,0.1);
-    }
-
-    .slide-6 .cta-box-text {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.78rem);
-      font-weight: 500;
-      color: var(--accent-gold);
-      letter-spacing: 0.03em;
-    }
-
-    /* CSS arrow for CTA */
-    .slide-6 .cta-arrow {
-      display: inline-block;
-      width: clamp(0.5rem, 1.6cqw, 0.9rem);
-      height: clamp(0.5rem, 1.6cqw, 0.9rem);
-      border-top: 2px solid var(--accent-gold);
-      border-right: 2px solid var(--accent-gold);
-      transform: rotate(45deg);
+    .tip-bullet {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-blue);
+      border-radius: 50%;
       flex-shrink: 0;
     }
 
-    /* Bottom ornament */
-    .slide-6 .bottom-ornament {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: clamp(0.3rem, 1cqw, 0.5rem);
-    }
-
-    .slide-6 .ornament-line {
-      width: clamp(1.5rem, 5cqw, 3rem);
-      height: 1px;
-      background: rgba(255,255,255,0.1);
-    }
-
-    .slide-6 .bottom-text {
+    .tip-text {
       font-family: 'Inter', sans-serif;
-      font-size: clamp(0.38rem, 1.1cqw, 0.55rem);
-      font-weight: 400;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
+      font-size: clamp(0.55rem, 1.8cqw, 0.8rem);
+      font-weight: 300;
+      color: var(--text-secondary);
     }
 
-    /* ══════════════════════════════════════════════
-       EXPORT MODE
-       ══════════════════════════════════════════════ */
+    /* CTA slide */
+    .cta-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 4.5cqw, 2.2rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+    }
+
+    .cta-subtext {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.6rem, 2cqw, 0.9rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-bottom: 4%;
+      line-height: 1.5;
+    }
+
+    .cta-button {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bg-dark);
+      background: linear-gradient(135deg, var(--accent-gold), #b8963a);
+      padding: 3% 6%;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    /* Export mode */
     body.export-mode {
       padding: 0;
       background: transparent;
@@ -1045,6 +476,7 @@
       .carousel-grid {
         grid-template-columns: 1fr;
       }
+
       .controls {
         position: static;
         margin-bottom: 1.5rem;
@@ -1052,332 +484,262 @@
         flex-wrap: wrap;
       }
     }
+  
+    
+    
+    /* ═══ Slide 1 - Cinematic Hook (NEUTRAL) ═══ */
+    .slide-1 {
+      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%) !important;
+    }
+
+    .slide-1::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+
+    .slide-1 .slide-bg,
+    .slide-1 .bg-video,
+    .slide-1 .video-bg,
+    .slide-1 video {
+      display: none !important;
+    }
+
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .slide-1 .cine-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(163, 163, 163, 0.9);
+      margin-bottom: 8%;
+    }
+
+    .slide-1 .hook-main {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 4%;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .slide-1 .cine-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
+      margin-bottom: 4%;
+    }
+
+    .slide-1 .hook-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: rgba(163, 163, 163, 0.4);
+      line-height: 1.6;
+    }
+
+    .slide-1 .cine-logo {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Gugi', sans-serif;
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(163, 163, 163, 0.4);
+    }
   </style>
 </head>
 <body>
-
-  <!-- ═══ CONTROLS ═══ -->
   <div class="controls">
-    <label>Background:
-      <select id="bg-toggle">
-        <option value="starfield">Starfield</option>
-        <option value="black">Pure Black</option>
-      </select>
-    </label>
-    <label>Opacity:
-      <select id="opacity-control">
-        <option value="0.03">3%</option>
-        <option value="0.06" selected>6%</option>
-        <option value="0.08">8%</option>
-        <option value="0.12">12%</option>
-      </select>
-    </label>
+    <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.05">5%</option><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.15">15%</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
-  <!-- ═══ PAGE TITLE ═══ -->
   <div class="page-title">
     <h1>Post 066 — Fibonacci Retracements</h1>
-    <p>6 slides &middot; Education</p>
+    <p>Instagram Carousel • 6 Slides • 1080×1350px</p>
   </div>
 
-  <!-- ═══ CAROUSEL GRID ═══ -->
   <div class="carousel-grid">
 
-    <!-- ────────────────────────────────────────────
-         SLIDE 1 — Hook
-         ──────────────────────────────────────────── -->
+    <!-- Slide 1: Cover -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Hook</span>
-      <div class="slide slide-edu slide-1">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <div class="slide slide-1">
         <div class="slide-content">
-
-          <div class="learn-label">Learn</div>
-          <div class="gold-divider"></div>
-          <h1 class="hook-title">Fibonacci<br><strong>Retracements</strong></h1>
-          <p class="hook-subtitle">The self-fulfilling prophecy</p>
-
-          <!-- CSS-only golden spiral -->
-          <div class="spiral-container">
-            <div class="spiral-square spiral-sq-1"></div>
-            <div class="spiral-square spiral-sq-2"></div>
-            <div class="spiral-square spiral-sq-3"></div>
-            <div class="spiral-square spiral-sq-4"></div>
-            <div class="spiral-square spiral-sq-5"></div>
-          </div>
-
-          <!-- Fibonacci number hint -->
-          <div class="fib-sequence">
-            <span class="fib-num">1</span>
-            <span class="fib-num">1</span>
-            <span class="fib-num">2</span>
-            <span class="fib-num">3</span>
-            <span class="fib-num highlight">5</span>
-            <span class="fib-num highlight">8</span>
-            <span class="fib-num highlight">13</span>
-            <span class="fib-num">21</span>
-            <span class="fib-num">34</span>
-            <span class="fib-num">55</span>
-          </div>
-
-          <div class="slide-logo">Signal Pilot</div>
+          <div class="cine-label">LEARN</div>
+          <div class="hook-main">Fibonacci Retracements</div>
+          <div class="cine-divider"></div>
+          <p class="hook-sub"></p>
+          <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ────────────────────────────────────────────
-         SLIDE 2 — Key Levels
-         ──────────────────────────────────────────── -->
+    <!-- Slide 2: Key Levels -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — Key Levels</span>
-      <div class="slide slide-edu slide-2">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <div class="slide">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
         <div class="slide-content">
-
-          <h2 class="section-title">The Key Levels</h2>
-
-          <div class="levels-layout">
-            <!-- Vertical stack of levels -->
-            <div class="levels-stack">
-              <div class="level-row">
-                <span class="level-pct">23.6%</span>
+          <span class="slide-number">SLIDE 02</span>
+          <h2 class="headline">Key<br><span class="accent-gold">Levels</span></h2>
+          <div class="levels-section">
+            <div class="levels-grid">
+              <div class="level-card">
+                <span class="level-number">23.6%</span>
                 <span class="level-desc">Shallow pullback</span>
               </div>
-              <div class="level-row">
-                <span class="level-pct">38.2%</span>
+              <div class="level-card">
+                <span class="level-number">38.2%</span>
                 <span class="level-desc">Common retracement</span>
               </div>
-              <div class="level-row">
-                <span class="level-pct">50.0%</span>
-                <span class="level-desc">Halfway point <span class="level-note">(not technically Fibonacci)</span></span>
+              <div class="level-card">
+                <span class="level-number">50%</span>
+                <span class="level-desc">Halfway (not technically Fib)</span>
               </div>
-              <div class="level-row golden">
-                <span class="level-pct">61.8%</span>
-                <span class="level-desc">Golden ratio &mdash; deep pullback</span>
+              <div class="level-card">
+                <span class="level-number">61.8%</span>
+                <span class="level-desc">Golden ratio, deep pullback</span>
               </div>
-              <div class="level-row warning">
-                <span class="level-pct">78.6%</span>
-                <span class="level-desc">Very deep &mdash; trend may be weakening</span>
-              </div>
-            </div>
-
-            <!-- CSS-only chart with dashed fib levels -->
-            <div class="fib-chart">
-              <div class="chart-area">
-                <div class="chart-price-line"></div>
-                <div class="chart-retrace"></div>
-                <div class="chart-continue"></div>
-                <!-- Horizontal dashed fib lines -->
-                <div class="fib-line" style="top: 5%;">
-                  <span class="fib-line-label">0%</span>
-                </div>
-                <div class="fib-line" style="top: 22.4%;">
-                  <span class="fib-line-label">23.6</span>
-                </div>
-                <div class="fib-line" style="top: 36.3%;">
-                  <span class="fib-line-label">38.2</span>
-                </div>
-                <div class="fib-line" style="top: 47.5%;">
-                  <span class="fib-line-label">50.0</span>
-                </div>
-                <div class="fib-line golden-line" style="top: 58.7%;">
-                  <span class="fib-line-label">61.8</span>
-                </div>
-                <div class="fib-line" style="top: 74.8%;">
-                  <span class="fib-line-label">78.6</span>
-                </div>
-                <div class="fib-line" style="top: 95%;">
-                  <span class="fib-line-label">100%</span>
-                </div>
+              <div class="level-card">
+                <span class="level-number">78.6%</span>
+                <span class="level-desc">Very deep, trend may be weakening</span>
               </div>
             </div>
           </div>
-
-          <div class="slide-logo">Signal Pilot</div>
+          <span class="brand-tag">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
-    <!-- ────────────────────────────────────────────
-         SLIDE 3 — Why They Work
-         ──────────────────────────────────────────── -->
+    <!-- Slide 3: Why They Work -->
     <div class="slide-wrapper" data-slide="3">
       <span class="slide-label">Slide 3 — Why They Work</span>
-      <div class="slide slide-edu slide-3">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <div class="slide">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
         <div class="slide-content">
-
-          <h2 class="section-title">Why They <strong>Work</strong></h2>
-
-          <div class="prophecy-card">
-            <div class="prophecy-label">Self-Fulfilling Prophecy</div>
-            <p class="prophecy-text">Millions of traders watch the same levels. When enough people expect a reaction at 61.8%, orders cluster there &mdash; and reactions happen.</p>
+          <span class="slide-number">SLIDE 03</span>
+          <h2 class="headline">Why They<br><span class="accent-gold">Work</span></h2>
+          <div class="center-content">
+            <div class="why-card">
+              <div class="why-title">The Secret</div>
+              <p class="why-text">Self-fulfilling prophecy</p>
+              <p class="why-subtext">Millions of traders watch the same levels</p>
+            </div>
           </div>
-
-          <!-- CSS-only concentric ripples -->
-          <div class="ripple-container">
-            <div class="ripple ripple-1"></div>
-            <div class="ripple ripple-2"></div>
-            <div class="ripple ripple-3"></div>
-            <div class="ripple ripple-4"></div>
-            <div class="ripple ripple-5"></div>
-            <span class="ripple-center">61.8</span>
-          </div>
-
-          <p class="bottom-note">Not magic. Math + crowd psychology.</p>
-
-          <div class="slide-logo">Signal Pilot</div>
+          <span class="brand-tag">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
-    <!-- ────────────────────────────────────────────
-         SLIDE 4 — How to Draw Fibs
-         ──────────────────────────────────────────── -->
+    <!-- Slide 4: How to Draw -->
     <div class="slide-wrapper" data-slide="4">
       <span class="slide-label">Slide 4 — How to Draw</span>
-      <div class="slide slide-edu slide-4">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <div class="slide">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
         <div class="slide-content">
-
-          <h2 class="section-title">How to Draw Fibs</h2>
-
-          <div class="draw-grid">
-            <!-- Uptrend -->
-            <div class="draw-card uptrend">
-              <div class="draw-dir-label">Uptrend</div>
-              <div class="draw-arrow">
-                <div class="shaft"></div>
-                <div class="arrow-head"></div>
-                <div class="anchor-dot start"></div>
-                <div class="anchor-dot end"></div>
+          <span class="slide-number">SLIDE 04</span>
+          <h2 class="headline">How to<br><span class="accent-blue">Draw</span></h2>
+          <div class="draw-section">
+            <div class="draw-grid">
+              <div class="draw-card uptrend">
+                <div class="draw-label">Uptrend</div>
+                <div class="draw-icon">📈</div>
+                <div class="draw-text">Draw from swing <strong>low</strong> to swing <strong>high</strong></div>
               </div>
-              <div class="draw-label">Swing <strong>low</strong> &rarr; Swing <strong>high</strong></div>
-            </div>
-            <!-- Downtrend -->
-            <div class="draw-card downtrend">
-              <div class="draw-dir-label">Downtrend</div>
-              <div class="draw-arrow">
-                <div class="shaft"></div>
-                <div class="arrow-head"></div>
-                <div class="anchor-dot start"></div>
-                <div class="anchor-dot end"></div>
+              <div class="draw-card downtrend">
+                <div class="draw-label">Downtrend</div>
+                <div class="draw-icon">📉</div>
+                <div class="draw-text">Draw from swing <strong>high</strong> to swing <strong>low</strong></div>
               </div>
-              <div class="draw-label">Swing <strong>high</strong> &rarr; Swing <strong>low</strong></div>
             </div>
           </div>
-
-          <!-- CSS mini chart showing anchor points -->
-          <div class="anchor-chart">
-            <div class="swing-line"></div>
-            <div class="retrace-line"></div>
-            <div class="fib-zone">
-              <span class="fib-zone-label">61.8%</span>
-            </div>
-            <div class="dot-low"></div>
-            <div class="dot-high"></div>
-          </div>
-
-          <div class="key-note">Always anchor from the START of the move</div>
-
-          <div class="slide-logo">Signal Pilot</div>
+          <span class="brand-tag">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
-    <!-- ────────────────────────────────────────────
-         SLIDE 5 — Pro Tips
-         ──────────────────────────────────────────── -->
+    <!-- Slide 5: Pro Tip -->
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Pro Tips</span>
-      <div class="slide slide-edu slide-5">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 5 — Pro Tip</span>
+      <div class="slide">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
         <div class="slide-content">
-
-          <h2 class="section-title">Pro Tips</h2>
-
-          <div class="tips-stack">
+          <span class="slide-number">SLIDE 05</span>
+          <h2 class="headline">Pro<br><span class="accent-blue">Tip</span></h2>
+          <div class="center-content">
             <div class="tip-card">
-              <p class="tip-text">Look for <strong>confluence</strong> &mdash; Fib level + horizontal support = stronger zone</p>
-            </div>
-            <div class="tip-card">
-              <p class="tip-text">Treat as <strong>ZONES</strong>, not exact lines &mdash; price rarely bounces to the pip</p>
-            </div>
-            <div class="tip-card">
-              <p class="tip-text"><span class="gold">61.8%</span> is the most-watched level &mdash; if it fails, trend may be reversing</p>
-            </div>
-            <div class="tip-card">
-              <p class="tip-text">Combine with <strong>volume</strong> &mdash; reaction + volume spike = more reliable</p>
+              <div class="tip-header">
+                <span class="tip-icon">💡</span>
+                <span class="tip-title">Key Insights</span>
+              </div>
+              <div class="tip-content">
+                <div class="tip-item">
+                  <span class="tip-bullet"></span>
+                  <span class="tip-text">Look for confluence with other levels</span>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-bullet"></span>
+                  <span class="tip-text">Think zones, not exact lines</span>
+                </div>
+              </div>
             </div>
           </div>
-
-          <p class="bottom-quote">Fibonacci gives you the map.<br>Price action gives you the timing.</p>
-
-          <div class="slide-logo">Signal Pilot</div>
+          <span class="brand-tag">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
-    <!-- ────────────────────────────────────────────
-         SLIDE 6 — CTA
-         ──────────────────────────────────────────── -->
+    <!-- Slide 6: CTA -->
     <div class="slide-wrapper" data-slide="6">
       <span class="slide-label">Slide 6 — CTA</span>
-      <div class="slide slide-edu slide-6">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <div class="slide">
+        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
         <div class="slide-content">
-
-          <div class="gold-divider"></div>
-          <h2 class="cta-title">Full Lesson<br><strong>Available</strong></h2>
-          <p class="cta-subtitle">Complete Fibonacci retracement guide with chart examples and practice exercises.</p>
-
-          <div class="cta-box">
-            <span class="cta-box-text">Free lesson &mdash; signalpilot.io</span>
-            <span class="cta-arrow"></span>
+          <div class="center-content">
+            <h2 class="cta-headline">Master<br><span class="accent-gold">Fibonacci</span></h2>
+            <p class="cta-subtext">Full lesson + PDF guide available in bio.</p>
+            <a href="#" class="cta-button">Get Free Lesson</a>
           </div>
-
-          <div class="bottom-ornament">
-            <div class="ornament-line"></div>
-            <span class="bottom-text">No cost. No fluff. Just clear education.</span>
-          </div>
-
-          <div class="slide-logo">Signal Pilot</div>
+          <span class="brand-tag">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
-  </div><!-- .carousel-grid -->
+  </div>
 
-  <!-- ═══ SCRIPT ═══ -->
   <script>
     const bgToggle = document.getElementById('bg-toggle');
     const opacityControl = document.getElementById('opacity-control');
-    const allSlides = document.querySelectorAll('.slide');
-    const allVideos = document.querySelectorAll('.video-bg');
+    const slides = document.querySelectorAll('.slide');
+    const videos = document.querySelectorAll('.slide-bg video');
 
     bgToggle.addEventListener('change', (e) => {
-      const hide = e.target.value === 'black';
-      allVideos.forEach(v => v.style.display = hide ? 'none' : 'block');
+      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
     });
 
     opacityControl.addEventListener('change', (e) => {
-      allVideos.forEach(v => v.style.opacity = e.target.value);
+      videos.forEach(video => video.style.opacity = e.target.value);
     });
 
-    /* ── Export mode ── */
     const exportBtn = document.getElementById('export-btn');
     const slideWrappers = document.querySelectorAll('.slide-wrapper');
     let exportMode = false;
@@ -1387,7 +749,7 @@
       exportMode = !exportMode;
       document.body.classList.toggle('export-mode', exportMode);
       if (exportMode) {
-        exportBtn.textContent = 'Exit Export';
+        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
         currentExportSlide = 0;
         updateExportSlide();
       } else {
@@ -1403,7 +765,6 @@
     document.addEventListener('keydown', (e) => {
       if (!exportMode) return;
       if (e.key === 'ArrowRight' || e.key === ' ') {
-        e.preventDefault();
         currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
         updateExportSlide();
       } else if (e.key === 'ArrowLeft') {
