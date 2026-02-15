@@ -1,6 +1,6 @@
 // POST /api/social/post-instagram
 // Cron-triggered: Posts the next Instagram carousel
-// Schedule: 3x daily at 1PM, 5PM, 10PM UTC (8AM, 12PM, 5PM EST)
+// Schedule: 3x daily at 10AM, 4PM, 10PM UTC (5AM, 11AM, 5PM EST)
 //
 // How it works:
 // 1. Queue manager says "next post order is 37" → posting schedule says "that's post #035, Orange column"
