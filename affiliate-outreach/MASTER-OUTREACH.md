@@ -60,7 +60,7 @@ Signal Pilot Labs
 
 ## 2. Zen & The Art of Trading (Matthew Slabosz)
 
-**To:** [CONTACT FORM] -zenandtheartoftrading.com/contact
+**To:** matthew@theartoftrading.com
 **Subject:** From one Pine Script builder to another -free access to test our suite
 
 Hi Matt,
@@ -284,7 +284,7 @@ Signal Pilot Labs
 
 ## 9. ClayTrader (Clay Huber)
 
-**To:** [CONTACT FORM] -claytrader.com/contact
+**To:** support@claytrader.com
 **Subject:** "Terminate Your Emotions" -we built an indicator that does exactly that
 
 Hi Clay,
@@ -654,7 +654,7 @@ Signal Pilot Labs
 
 ## 20. TradingCode.net (Jos)
 
-**To:** [CONTACT FORM] -tradingcode.net/contact
+**To:** info@tradingcode.net
 **Subject:** Your multi-condition strategy articles + an indicator built on that exact architecture
 
 Hi Jos,
@@ -773,7 +773,7 @@ Signal Pilot Labs
 
 ## 24. ChartWiseHub
 
-**To:** [CONTACT FORM] -chartwisehub.com/contact (visit in browser -Cloudflare protected)
+**To:** [CONTACT FORM] -chartwisehub.com/contact (no public email found, Cloudflare protected)
 **Subject:** Your drawing tools breakdown is the best on the internet -here's what we built for the next step
 
 Hi,
@@ -802,7 +802,7 @@ Signal Pilot Labs
 
 ## 25. @tradementorben (TikTok DM)
 
-**To:** [TIKTOK DM] -@tradementorben
+**To:** [TIKTOK DM] -@tradementorben (no public email found, try tradementors.com)
 
 Hey Ben -you bring actual academic rigor to 60-second TikTok trade breakdowns. That's a hard balance to strike and you pull it off.
 
@@ -848,7 +848,7 @@ Quick links:
 
 ### 26. No Nonsense Forex (VP / Patrick)
 
-**To:** [CONTACT FORM] -nononsenseforex.com/contact (business/media inquiries only)
+**To:** [CONTACT FORM] -nononsenseforex.com/contact (no public email, Twitter: @This_Is_VP4X)
 **Subject:** Confirmation slot and volume slot -two indicators that pass your NNFX testing rules
 
 Hi VP,
@@ -939,7 +939,7 @@ Signal Pilot Labs
 
 ### 29. WicksDontLie (Raja Rakeel)
 
-**To:** [INSTAGRAM DM] -@wicksdontlie
+**To:** raja@marketfluidity.com (or IG DM @wicksdontlie)
 **Subject:** N/A (DM format)
 
 Hey Raja -1,500+ people watching you trade GBPJPY live during NY session, no edits, no replays. That's the hardest content format in trading education and you do it every day.
@@ -960,7 +960,7 @@ Quick links:
 
 ### 30. The Traveling Trader
 
-**To:** [YouTube About email]
+**To:** [YouTube About email] (check YouTube.com/@TravelingTrader About tab, or DM @ZTheTrader on X)
 **Subject:** Your macro-first approach to forex -I built the cycle layer that automates step one
 
 Hi,
@@ -991,7 +991,7 @@ Signal Pilot Labs
 
 ### 31. VasilyTrader
 
-**To:** [CONTACT FORM] -vasilytrader.com (or Telegram @VasilyTrader)
+**To:** [CONTACT FORM] -vasilytrader.com/contact (or Telegram/IG @VasilyTrader, no public email)
 **Subject:** 4,674 published ideas, 145K reputation -you'd give the most honest TradingView review possible
 
 Hi Vasily,
@@ -1055,7 +1055,7 @@ Signal Pilot Labs
 
 ### 33. Crypto Zombie (K-Dub / Kyle)
 
-**To:** [YouTube About email]
+**To:** thecryptozombie@gmail.com
 **Subject:** 1,300+ videos covering every BTC cycle -I built an indicator that maps them automatically
 
 Hey K-Dub,
@@ -1086,7 +1086,7 @@ Signal Pilot Labs
 
 ### 34. CryptoBusy (Tom Busby & Josh Moden)
 
-**To:** [Twitter DM] -@CryptoBusy (business inquiries per bio)
+**To:** [Twitter DM] -@CryptoBusy (no public email found)
 **Subject:** N/A (DM format)
 
 Hey Tom & Josh -5+ years of forex before crypto. That TA foundation shows in your Pro Trader Course. Structure first, then application -the right sequence.
@@ -1109,7 +1109,7 @@ Quick links:
 
 ### 35. Bob Loukas
 
-**To:** [Twitter DM] -@BobLoukas (his only official channel per his own statement)
+**To:** [Twitter DM] -@BobLoukas (X + YouTube only per his statement, also thefinancialtap.com)
 **Subject:** N/A (DM format)
 
 Hey Bob -you popularized Bitcoin cycle theory before it was mainstream. 25+ years of analysis and a Fortune 50 software background, and you taught an entire community to think in 4-year and 60-day cycles instead of 5-minute candles.
@@ -1131,7 +1131,7 @@ Quick links:
 
 ### 36. CryptoJack (Jack Skipp)
 
-**To:** [Twitter DM] -@_Crypt0Jack
+**To:** ellie@marketspotter.io (marketing contact via CryptoJack's channel)
 **Subject:** N/A (DM format)
 
 Hey Jack -your Wyckoff breakdowns on crypto charts are the clearest on YouTube. 253K subscribers watching you identify accumulation schematics and distribution patterns in real-time -and you actually explain the methodology, not just slap labels on charts.
@@ -1152,7 +1152,7 @@ Quick links:
 
 ### 37. Koroush AK
 
-**To:** [Twitter DM] -@KoroushAK (or Telegram @koroushakcrypto)
+**To:** [Twitter DM @KoroushAK or Telegram @KoroushAK] (no public email, also koroushak.substack.com)
 **Subject:** N/A (DM format)
 
 Hey Koroush -8+ years of crypto TA and you still lead with free education before asking for anything. Market Meditations and your free course prove the model works.
@@ -1179,7 +1179,7 @@ Quick links:
 
 ### 38. InTheMoney (Adam)
 
-**To:** [YouTube About email]
+**To:** [Twitter DM] -@InTheMoneyAdam (also linktr.ee/inthemoneyadam)
 **Subject:** Your options students need cycle timing -I built an indicator that automates it
 
 Hi Adam,
@@ -1239,7 +1239,7 @@ Signal Pilot Labs
 
 ### 40. Trading Fraternity (Josh Answers)
 
-**To:** [Instagram DM] -@TheTradingFraternity (76.6K followers)
+**To:** TradingFraternity@gmail.com
 **Subject:** N/A (DM format)
 
 Hey Josh -half a million traders between your two channels, and the streams are raw. Real entries, real exits, real reactions. That format is what actually teaches people.
@@ -1262,7 +1262,7 @@ Quick links:
 
 ### 41. Option Alpha (Kirk Du Plessis)
 
-**To:** [YouTube About email or optionalpha.com/about-us]
+**To:** kirk@optionalpha.com
 **Subject:** You backtested 17 indicators across 20 years -here are 7 more that don't repaint
 
 Hi Kirk,
@@ -1322,7 +1322,7 @@ Signal Pilot Labs
 
 ### 43. Black Girl Stocks (Shayla North)
 
-**To:** [CONTACT FORM] -theblackgirlstocks.com/pages/contact
+**To:** foxtailent20@gmail.com
 **Subject:** Your Candlestick Review Cards are genius -built indicators with that same "make it visual" approach
 
 Hi Shayla,
@@ -1388,7 +1388,7 @@ Signal Pilot Labs
 
 ### 45. UKspreadbetting (Mark Holstead)
 
-**To:** [CONTACT FORM] -financial-spread-betting.com
+**To:** trader@financial-spread-betting.com
 **Subject:** 423K subscribers learning TA on TradingView -built indicators for exactly that audience
 
 Hi Mark,
@@ -1417,7 +1417,7 @@ Signal Pilot Labs
 
 ### 46. Trading Rush
 
-**To:** [CONTACT FORM] -tradingrush.net
+**To:** [CONTACT FORM] -tradingrush.net/contact (email hidden behind "View" button on site)
 **Subject:** "I Tested It 100 Times" -here are 7 non-repainting indicators built to survive that format
 
 Hi,
@@ -1573,7 +1573,7 @@ Signal Pilot Labs
 
 ### 51. Modest Money (Jeremy Biberdorf)
 
-**To:** [CONTACT FORM] -modestmoney.com/contact
+**To:** jeremy@modestmoney.com
 **Subject:** Your TradingView vs TrendSpider comparison -here's a product that fills the gap
 
 Hi Jeremy,
@@ -1605,7 +1605,7 @@ Signal Pilot Labs
 
 ### 52. DayTradingz.com
 
-**To:** [CONTACT FORM] -daytradingz.com/about
+**To:** [CONTACT FORM] -daytradingz.com/contact (owner: Alexander Voigt, Germany, no public email)
 **Subject:** You test trading products from the inside -here's one that invites it
 
 Hi,
@@ -1645,7 +1645,7 @@ Signal Pilot Labs
 
 ### 53. Casper SMC (Jesse Rogers)
 
-**To:** [INSTAGRAM DM] - @casper_smc (468K followers)
+**To:** [INSTAGRAM DM] -@casper_smc (also jesserogers-casper-smc.com/contact, no public email)
 **Subject:** N/A (DM format)
 
 Hey Jesse - free ICT/SMC course on YouTube and 468K followers, still giving before asking. That's the part that stands out.
@@ -1668,7 +1668,7 @@ Quick links:
 
 ### 54. Umar Ashraf
 
-**To:** [INSTAGRAM DM] - @umarashraf (439K followers)
+**To:** umarashraf28@gmail.com (or IG DM @umarashraf)
 **Subject:** N/A (DM format)
 
 Hey Umar - you built TradeZella because you know the journal is where real improvement happens. No signals, no discord, just skill development. That says everything.
@@ -1689,7 +1689,7 @@ Quick links:
 
 ### 55. Tori Trades (Victoria Duke)
 
-**To:** [TikTok DM or email via toritradez.com]
+**To:** media@toritradez.com
 **Subject:** 10+ years of pure price action - built something that adds context without replacing it
 
 Hi Victoria,
@@ -1749,7 +1749,7 @@ Signal Pilot Labs
 
 ### 57. Elliott Wave Count
 
-**To:** [INSTAGRAM DM] - @elliottwavecount (360K followers) or Telegram t.me/ElliottWaveCount
+**To:** [INSTAGRAM DM @elliottwavecount or Telegram @WaveCount] (no public email, premium members get direct access)
 **Subject:** N/A (DM format)
 
 Hey - 15 years of wave analysis, and you post counts with specific levels, stops, and invalidation points. No vague "this could go up or down." That's why 360K people follow.
@@ -1777,33 +1777,33 @@ Quick links:
 | 26 | No Nonsense Forex (VP) | -| Contact form: nononsenseforex.com/contact | Forex |
 | 27 | Urban Forex (Navin Prithyani) | info@urbanforex.com | Direct email | Forex |
 | 28 | ForexSignals TV (Andrew Lockwood) | support@forexsignals.com | Direct email | Forex |
-| 29 | WicksDontLie (Raja Rakeel) | -| Instagram DM: @wicksdontlie | Forex |
+| 29 | WicksDontLie (Raja Rakeel) | raja@marketfluidity.com | Direct email | Forex |
 | 30 | The Traveling Trader | -| YouTube About email | Forex |
 | 31 | VasilyTrader | -| Contact form or Telegram @VasilyTrader | Forex |
 | 32 | Rekt Capital | rektcapital@gmail.com | Direct email | Crypto |
 | 33 | Crypto Zombie (K-Dub) | -| YouTube About email | Crypto |
 | 34 | CryptoBusy (Tom & Josh) | -| Twitter DM: @CryptoBusy | Crypto |
 | 35 | Bob Loukas | -| Twitter DM: @BobLoukas | Crypto |
-| 36 | CryptoJack (Jack Skipp) | -| Twitter DM: @_Crypt0Jack | Crypto |
+| 36 | CryptoJack (Jack Skipp) | ellie@marketspotter.io | Direct email | Crypto |
 | 37 | Koroush AK | -| Twitter DM or Telegram @koroushakcrypto | Crypto |
 | 38 | InTheMoney (Adam) | -| YouTube About email | Stocks/Options |
 | 39 | Humbled Trader (Shay Huang) | support@humbledtrader.com | Direct email | Stocks |
-| 40 | Trading Fraternity (Josh Answers) | -| Instagram DM: @TheTradingFraternity | Stocks/Options |
-| 41 | Option Alpha (Kirk Du Plessis) | -| YouTube About / optionalpha.com | Options |
+| 40 | Trading Fraternity (Josh Answers) | TradingFraternity@gmail.com | Direct email | Stocks/Options |
+| 41 | Option Alpha (Kirk Du Plessis) | kirk@optionalpha.com | Direct email | Options |
 | 42 | Rockwell Trading (Markus Heitkoetter) | support@rockwelltrading.com | Direct email | Stocks/Options |
-| 43 | Black Girl Stocks (Shayla North) | -| Contact form: theblackgirlstocks.com | Stocks |
+| 43 | Black Girl Stocks (Shayla North) | foxtailent20@gmail.com | Direct email | Stocks |
 | 44 | Trader Nick / A1 Trading | tradernick135@gmail.com | Direct email | Multi-market |
-| 45 | UKspreadbetting (Mark Holstead) | -| Contact form: financial-spread-betting.com | Multi-market |
+| 45 | UKspreadbetting (Mark Holstead) | trader@financial-spread-betting.com | Direct email | Multi-market |
 | 46 | Trading Rush | -| Contact form: tradingrush.net | Multi-market |
 | 47 | Trades by Matt (Matt Miller) | tradesbymatt@creatorsagency.co | Direct email | Futures |
 | 48 | Bullish Bears | bbteam@bullishbears.com | Direct email | Stocks |
 | 49 | DayTradeReview.com (Dave R.) | support@daytradereview.com | Direct email | Review site |
 | 50 | QuantifiedStrategies (Oddmund Groette) | Oddmund@quantifiedstrategies.com | Direct email | Blog |
-| 51 | Modest Money (Jeremy Biberdorf) | -| Contact form: modestmoney.com/contact | Review blog |
+| 51 | Modest Money (Jeremy Biberdorf) | jeremy@modestmoney.com | Direct email | Review blog |
 | 52 | DayTradingz.com | -| Contact form: daytradingz.com/about | Review site |
 | 53 | Casper SMC (Jesse Rogers) | -| Instagram DM: @casper_smc | Social media |
-| 54 | Umar Ashraf | -| Instagram DM: @umarashraf | Social media |
-| 55 | Tori Trades (Victoria Duke) | -| TikTok DM or toritradez.com | Social media |
+| 54 | Umar Ashraf | umarashraf28@gmail.com | Direct email | Social media |
+| 55 | Tori Trades (Victoria Duke) | media@toritradez.com | Direct email | Social media |
 | 56 | ScarfaceTrades (Tony) | tony@scarfacetrades.com | Direct email | Social media |
 | 57 | Elliott Wave Count | -| Instagram DM or Telegram | Social media |
 
