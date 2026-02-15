@@ -3,138 +3,240 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 064 — QUOTE CARD | Carousel Preview</title>
+  <title>Post 064 — Quote Card: Plan the Trade | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    
+    /* ── Color System ── */
     :root {
       --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --accent-green: #4ad97a;
-      --accent-teal: #5eecd4;
-      --text-primary: #e8e8e8;
-      --text-secondary: #a0a0a0;
-      --text-dim: #6a6a6a;
+      --bg-card: rgba(255,255,255,0.03);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-muted: rgba(255,255,255,0.4);
+      --border-subtle: rgba(255,255,255,0.1);
+      --accent-orange: #f59e0b;
+      --accent-orange-dim: rgba(245,158,11,0.3);
+      --color-green: #4ade80;
+      --color-red: #ef4444;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
-    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
-    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); font-weight: 500; letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 2.5cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(28px, 10cqw, 48px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 3%; line-height: 1.2; }
-    .slide-title.large { font-size: clamp(22px, 8cqw, 32px); }
-    .slide-subtitle { font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; font-weight: 500; }
-    .slide-body { font-size: clamp(12px, 4cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .cta-link { display: inline-block; margin-top: 5%; padding: 3% 6%; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: clamp(11px, 3.5cqw, 14px); letter-spacing: 0.5px; }
 
-    /* ── Visual Components ── */
-    .concept-card { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 2% 0; text-align: left; }
-    .concept-card.green { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.35); }
-    .concept-card.red { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.35); }
-    .concept-card.blue { background: rgba(74,144,217,0.08); border: 1.5px solid rgba(74,144,217,0.35); }
-    .concept-card.gold { background: rgba(201,169,98,0.08); border: 1.5px solid rgba(201,169,98,0.35); }
-    .concept-card .card-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2%; font-weight: 500; }
-    .concept-card.green .card-label { color: var(--accent-green); }
-    .concept-card.red .card-label { color: var(--accent-red); }
-    .concept-card.blue .card-label { color: var(--accent-blue); }
-    .concept-card.gold .card-label { color: var(--accent-gold); }
-    .concept-card .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
-    .concept-card .card-desc { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    /* ── Reset & Base ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .data-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .data-item.up { background: rgba(74,217,122,0.1); border: 1px solid rgba(74,217,122,0.3); }
-    .data-item.down { background: rgba(217,74,74,0.1); border: 1px solid rgba(217,74,74,0.3); }
-    .data-item.info { background: rgba(74,144,217,0.1); border: 1px solid rgba(74,144,217,0.3); }
-    .data-item.warn { background: rgba(201,169,98,0.1); border: 1px solid rgba(201,169,98,0.3); }
-    .data-item .item-icon { font-size: clamp(20px, 7cqw, 32px); margin-bottom: 3%; }
-    .data-item .item-label { font-size: clamp(9px, 3cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
-    .data-item .item-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
+    body {
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+      min-height: 100vh;
+    }
 
-    .arrow-list { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .arrow-list li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .arrow-list .arrow { color: var(--accent-blue); font-weight: 600; flex-shrink: 0; }
+    /* ── Controls ── */
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(0,0,0,0.85);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
 
-    .checklist { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .checklist li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .checklist .check { color: var(--accent-green); flex-shrink: 0; }
-    .checklist .cross { color: var(--accent-red); flex-shrink: 0; }
+    .controls label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
 
-    .callout-box { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 3% 0; text-align: left; }
-    .callout-box.warning { background: rgba(217,74,74,0.08); border-left: 4px solid var(--accent-red); }
-    .callout-box.insight { background: rgba(201,169,98,0.08); border-left: 4px solid var(--accent-gold); }
-    .callout-box.success { background: rgba(74,217,122,0.08); border-left: 4px solid var(--accent-green); }
-    .callout-box.info { background: rgba(74,144,217,0.08); border-left: 4px solid var(--accent-blue); }
-    .callout-box .callout-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; margin-bottom: 2%; }
-    .callout-box.warning .callout-title { color: var(--accent-red); }
-    .callout-box.insight .callout-title { color: var(--accent-gold); }
-    .callout-box.success .callout-title { color: var(--accent-green); }
-    .callout-box.info .callout-title { color: var(--accent-blue); }
-    .callout-box .callout-text { font-size: clamp(11px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.6; }
+    .controls select, .controls button {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.75rem;
+    }
 
-    .stat-row { display: flex; justify-content: center; gap: 4%; width: 100%; max-width: 90%; margin: 3% 0; }
-    .stat-item { text-align: center; flex: 1; }
-    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 8cqw, 32px); font-weight: 600; color: var(--accent-gold); }
-    .stat-label { font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2%; }
+    .controls button {
+      background: var(--accent-orange);
+      color: var(--bg-dark);
+      border: none;
+      font-weight: 600;
+    }
 
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .compare-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .compare-item.before { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.3); }
-    .compare-item.after { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.3); }
-    .compare-item .compare-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3%; font-weight: 500; }
-    .compare-item.before .compare-label { color: var(--accent-red); }
-    .compare-item.after .compare-label { color: var(--accent-green); }
-    .compare-item .compare-text { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    .controls button:hover { opacity: 0.9; }
 
-    .quote-block { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 6cqw, 26px); font-style: italic; color: var(--text-primary); line-height: 1.5; max-width: 85%; margin: 4% 0; }
-    .quote-attr { font-family: 'Inter', sans-serif; font-size: clamp(10px, 3cqw, 12px); color: var(--accent-gold); letter-spacing: 1px; margin-top: 3%; }
+    /* ── Page Title ── */
+    .page-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
 
-    .step-flow { width: 100%; max-width: 90%; text-align: left; }
-    .step-item { display: flex; gap: 4%; margin-bottom: 4%; align-items: flex-start; }
-    .step-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--accent-gold); min-width: 8%; }
-    .step-text { font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; padding-top: 1%; }
+    .page-title h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
 
-    .indicator-pill { display: inline-block; padding: 2% 5%; background: rgba(201,169,98,0.15); border: 1px solid var(--accent-gold); border-radius: 20px; font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); letter-spacing: 1px; font-weight: 500; margin: 3% 0; }
+    .page-title p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
 
-    /* Export mode */
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; }
-    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } }
-  
-    
-    .slide-1 { background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important; }
+    /* ── Carousel Grid ── */
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-bottom: 4rem;
+    }
+
+    /* ── Slide Wrapper ── */
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+    }
+
+    .slide-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .slide {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      background: var(--bg-dark);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    /* ── Video Background ── */
+    .video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Slide Content ── */
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8%;
+      text-align: center;
+    }
+
+    /* ── Logo (all slides) ── */
+    .slide-logo {
+      position: absolute;
+      bottom: 4%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Gugi', cursive;
+      font-size: clamp(0.55rem, 1.8cqw, 0.8rem);
+      color: rgba(245,158,11,0.4);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* ── Section Tag (mono label) ── */
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.5rem, 2cqw, 0.75rem);
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent-orange);
+      margin-bottom: 5%;
+    }
+
+    /* ── Common Titles ── */
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 5.5cqw, 2rem);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 4%;
+    }
+
+    .slide-title strong {
+      color: var(--accent-orange);
+    }
+
+    .slide-title.large {
+      font-size: clamp(1.5rem, 7cqw, 2.6rem);
+    }
+
+    .slide-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.65rem, 2.8cqw, 1rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 85%;
+    }
+
+    /* ── Orange Divider ── */
+    .orange-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-orange-dim), transparent);
+      margin-bottom: 5%;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 1 — Hook (Orange RIGHT bar)
+    ═══════════════════════════════════════ */
+    .slide-1 {
+      background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%);
+    }
+
+    .slide-1 .video-bg,
+    .slide-1 video { display: none !important; }
+
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(217,148,74,0.08) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(245,158,11,0.06) 0%, transparent 60%);
       pointer-events: none;
       z-index: 1;
     }
-    
+
     .slide-1::after {
       content: '';
       position: absolute;
@@ -142,141 +244,924 @@
       right: 0;
       width: 18px;
       height: 100%;
-      background: linear-gradient(180deg, rgba(251,191,36,0.9) 0%, rgba(217,148,74,0.7) 100%);
+      background: linear-gradient(180deg, rgba(245,158,11,0.95) 0%, rgba(217,148,74,0.7) 100%);
       z-index: 5;
     }
-    .slide-1 .bg-video, .slide-1 video { display: none !important; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+
+    .slide-1 .slide-content {
+      z-index: 3;
+      padding-right: 10%;
+    }
+
+    .slide-1 .hook-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.5rem, 1.8cqw, 0.8rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(251,191,36,0.9);
-      margin-bottom: 8%;
+      color: var(--accent-orange);
+      margin-bottom: 6%;
     }
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255,255,255,0.95);
-      margin-bottom: 4%;
+
+    .slide-1 .opening-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 18cqw, 8rem);
+      font-weight: 700;
+      color: rgba(245,158,11,0.15);
+      line-height: 0.6;
+      margin-bottom: 2%;
+      user-select: none;
     }
-    .slide-1 .cine-divider {
+
+    .slide-1 .hook-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 5.5cqw, 2.4rem);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.35;
+      color: var(--text-primary);
+      margin-bottom: 5%;
+      max-width: 90%;
+    }
+
+    .slide-1 .hook-divider {
       width: 60px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(251,191,36,0.6), transparent);
-      margin-bottom: 4%;
+      background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
+      margin-bottom: 5%;
     }
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
+
+    .slide-1 .hook-attr {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.45rem, 1.6cqw, 0.7rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 2 — Step 1: Plan
+    ═══════════════════════════════════════ */
+    .slide-2 .instruction-cards {
+      width: 88%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(5px, 1.5cqw, 10px);
+      margin-bottom: 5%;
+      text-align: left;
+    }
+
+    .slide-2 .instruction-card {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 2cqw, 12px);
+      padding: clamp(8px, 2.5cqw, 16px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+    }
+
+    .slide-2 .instruction-card .ic-marker {
+      width: clamp(6px, 1.5cqw, 10px);
+      height: clamp(6px, 1.5cqw, 10px);
+      border-radius: 50%;
+      background: var(--accent-orange);
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+
+    .slide-2 .instruction-card .ic-text {
+      font-size: clamp(0.55rem, 2.2cqw, 0.88rem);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Planning diagram */
+    .slide-2 .plan-diagram {
+      width: 80%;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: clamp(10px, 3.5cqw, 22px);
+      background: rgba(245,158,11,0.03);
+      position: relative;
+      margin-top: 2%;
+    }
+
+    .slide-2 .plan-diagram .pd-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.4rem, 1.3cqw, 0.6rem);
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: clamp(6px, 2cqw, 12px);
+    }
+
+    .slide-2 .plan-diagram .pd-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(4px, 1.2cqw, 8px) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .slide-2 .plan-diagram .pd-line:last-child {
+      border-bottom: none;
+    }
+
+    .slide-2 .plan-diagram .pd-key {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.45rem, 1.6cqw, 0.68rem);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .slide-2 .plan-diagram .pd-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.45rem, 1.6cqw, 0.68rem);
+      font-weight: 500;
+    }
+
+    .slide-2 .plan-diagram .pd-val.entry { color: var(--accent-orange); }
+    .slide-2 .plan-diagram .pd-val.stop { color: var(--color-red); }
+    .slide-2 .plan-diagram .pd-val.target { color: var(--color-green); }
+
+    .slide-2 .plan-diagram .pd-bar {
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 2px;
+      margin-top: clamp(6px, 2cqw, 12px);
+      position: relative;
+    }
+
+    .slide-2 .plan-diagram .pd-bar::before {
+      content: '';
+      position: absolute;
+      left: 30%;
+      top: -3px;
+      width: 8px;
+      height: 9px;
+      background: var(--color-red);
+      border-radius: 2px;
+    }
+
+    .slide-2 .plan-diagram .pd-bar::after {
+      content: '';
+      position: absolute;
+      right: 15%;
+      top: -3px;
+      width: 8px;
+      height: 9px;
+      background: var(--color-green);
+      border-radius: 2px;
+    }
+
+    .slide-2 .plan-diagram .pd-entry-mark {
+      position: absolute;
+      left: 50%;
+      top: -3px;
+      width: 8px;
+      height: 9px;
+      background: var(--accent-orange);
+      border-radius: 2px;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 3 — Step 2: Execute
+    ═══════════════════════════════════════ */
+    .slide-3 .instruction-list {
+      width: 88%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(5px, 1.5cqw, 10px);
+      margin-bottom: 5%;
+      text-align: left;
+    }
+
+    .slide-3 .instruction-item {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 2cqw, 12px);
+      padding: clamp(8px, 2.5cqw, 16px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+    }
+
+    .slide-3 .instruction-item .ii-marker {
+      width: clamp(6px, 1.5cqw, 10px);
+      height: clamp(6px, 1.5cqw, 10px);
+      border-radius: 50%;
+      background: var(--accent-orange);
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+
+    .slide-3 .instruction-item .ii-text {
+      font-size: clamp(0.55rem, 2.2cqw, 0.88rem);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Execution flow */
+    .slide-3 .exec-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(4px, 1.2cqw, 10px);
+      width: 90%;
+      margin-top: 2%;
+    }
+
+    .slide-3 .exec-flow .ef-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: clamp(6px, 2cqw, 14px) clamp(8px, 2.5cqw, 16px);
+      text-align: center;
+      flex: 1;
+    }
+
+    .slide-3 .exec-flow .ef-step.active {
+      border-color: rgba(245,158,11,0.4);
+      background: rgba(245,158,11,0.05);
+    }
+
+    .slide-3 .exec-flow .ef-step .ef-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.38rem, 1.3cqw, 0.58rem);
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .slide-3 .exec-flow .ef-step.active .ef-label {
+      color: var(--accent-orange);
+    }
+
+    .slide-3 .exec-flow .ef-arrow {
+      font-size: clamp(0.5rem, 1.8cqw, 0.8rem);
+      color: var(--accent-orange-dim);
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 4 — Step 3: Review
+    ═══════════════════════════════════════ */
+    .slide-4 .instruction-list {
+      width: 88%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(5px, 1.5cqw, 10px);
+      margin-bottom: 5%;
+      text-align: left;
+    }
+
+    .slide-4 .instruction-item {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 2cqw, 12px);
+      padding: clamp(8px, 2.5cqw, 16px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+    }
+
+    .slide-4 .instruction-item .ii-marker {
+      width: clamp(6px, 1.5cqw, 10px);
+      height: clamp(6px, 1.5cqw, 10px);
+      border-radius: 50%;
+      background: var(--accent-orange);
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+
+    .slide-4 .instruction-item .ii-text {
+      font-size: clamp(0.55rem, 2.2cqw, 0.88rem);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Journal visual */
+    .slide-4 .journal-visual {
+      width: 80%;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: clamp(10px, 3.5cqw, 22px);
+      background: rgba(245,158,11,0.03);
+      margin-top: 2%;
+    }
+
+    .slide-4 .journal-visual .jv-header {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.4rem, 1.3cqw, 0.6rem);
+      letter-spacing: 0.15em;
+      color: var(--accent-orange);
+      text-transform: uppercase;
+      margin-bottom: clamp(8px, 2.5cqw, 14px);
+      padding-bottom: clamp(4px, 1.2cqw, 8px);
+      border-bottom: 1px solid rgba(245,158,11,0.15);
+    }
+
+    .slide-4 .journal-visual .jv-line {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 2cqw, 12px);
+      padding: clamp(3px, 1cqw, 6px) 0;
+    }
+
+    .slide-4 .journal-visual .jv-line .jv-bullet {
+      width: clamp(4px, 1cqw, 6px);
+      height: 1px;
+      background: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .slide-4 .journal-visual .jv-line .jv-text {
+      height: 1px;
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border-radius: 1px;
+    }
+
+    .slide-4 .journal-visual .jv-line .jv-text.short { max-width: 60%; }
+    .slide-4 .journal-visual .jv-line .jv-text.med { max-width: 80%; }
+
+    .slide-4 .journal-visual .jv-entry-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.35rem, 1.1cqw, 0.5rem);
+      color: var(--text-muted);
+      margin-top: clamp(4px, 1.2cqw, 8px);
       letter-spacing: 0.05em;
-      color: rgba(251,191,36,0.4);
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDE 5 — The Problem
+    ═══════════════════════════════════════ */
+    .slide-5 .steps-viz {
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 2.5cqw, 16px);
+      margin-bottom: 6%;
+    }
+
+    .slide-5 .step-row {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 2.5cqw, 16px);
+      padding: clamp(10px, 3cqw, 20px);
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .slide-5 .step-row.skipped {
+      background: rgba(239,68,68,0.04);
+      border: 1px solid rgba(239,68,68,0.15);
+    }
+
+    .slide-5 .step-row.active {
+      background: rgba(245,158,11,0.06);
+      border: 1px solid rgba(245,158,11,0.3);
+    }
+
+    .slide-5 .step-row .sr-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.5rem, 1.8cqw, 0.75rem);
+      font-weight: 500;
+      flex-shrink: 0;
+      width: clamp(24px, 7cqw, 40px);
+      height: clamp(24px, 7cqw, 40px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-5 .step-row.skipped .sr-num {
+      background: rgba(239,68,68,0.1);
+      color: var(--color-red);
+      border: 1px solid rgba(239,68,68,0.3);
+    }
+
+    .slide-5 .step-row.active .sr-num {
+      background: rgba(245,158,11,0.12);
+      color: var(--accent-orange);
+      border: 1px solid rgba(245,158,11,0.4);
+    }
+
+    .slide-5 .step-row .sr-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.8rem, 3.2cqw, 1.3rem);
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .slide-5 .step-row.skipped .sr-name {
+      color: rgba(239,68,68,0.5);
+      text-decoration: line-through;
+      text-decoration-color: rgba(239,68,68,0.4);
+    }
+
+    .slide-5 .step-row.active .sr-name {
+      color: var(--accent-orange);
+    }
+
+    .slide-5 .step-row .sr-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.35rem, 1.2cqw, 0.55rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: clamp(2px, 0.8cqw, 5px) clamp(6px, 2cqw, 12px);
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .slide-5 .step-row.skipped .sr-badge {
+      background: rgba(239,68,68,0.1);
+      color: var(--color-red);
+      border: 1px solid rgba(239,68,68,0.2);
+    }
+
+    .slide-5 .step-row.active .sr-badge {
+      background: rgba(245,158,11,0.1);
+      color: var(--accent-orange);
+      border: 1px solid rgba(245,158,11,0.2);
+    }
+
+    /* X icon for skipped */
+    .slide-5 .step-row .sr-x {
+      position: relative;
+      width: clamp(12px, 3cqw, 18px);
+      height: clamp(12px, 3cqw, 18px);
+      flex-shrink: 0;
+    }
+
+    .slide-5 .step-row .sr-x::before,
+    .slide-5 .step-row .sr-x::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80%;
+      height: 2px;
+      background: var(--color-red);
+      border-radius: 1px;
+    }
+
+    .slide-5 .step-row .sr-x::before { transform: translate(-50%, -50%) rotate(45deg); }
+    .slide-5 .step-row .sr-x::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+    .slide-5 .problem-callout {
+      width: 85%;
+      padding: clamp(10px, 3cqw, 20px);
+      border-radius: 10px;
+      background: rgba(245,158,11,0.04);
+      border: 1px solid rgba(245,158,11,0.15);
+      text-align: center;
+    }
+
+    .slide-5 .problem-callout p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.65rem, 2.5cqw, 1rem);
+      font-style: italic;
+      color: var(--text-secondary);
       line-height: 1.6;
     }
-    .slide-1 .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(251,191,36,0.4);
+
+    .slide-5 .problem-callout strong {
+      color: var(--accent-orange);
+      font-weight: 600;
     }
-  
+
+    /* ═══════════════════════════════════════
+       SLIDE 6 — CTA
+    ═══════════════════════════════════════ */
+    .slide-6 .cta-icon {
+      width: clamp(48px, 14cqw, 80px);
+      height: clamp(48px, 14cqw, 80px);
+      border-radius: 50%;
+      background: rgba(245,158,11,0.08);
+      border: 2px solid rgba(245,158,11,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6%;
+      position: relative;
+    }
+
+    .slide-6 .cta-icon::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,158,11,0.1);
+    }
+
+    /* Loop / circular arrow icon */
+    .slide-6 .loop-icon {
+      width: clamp(20px, 6cqw, 34px);
+      height: clamp(20px, 6cqw, 34px);
+      border: 2.5px solid var(--accent-orange);
+      border-radius: 50%;
+      border-bottom-color: transparent;
+      position: relative;
+    }
+
+    .slide-6 .loop-icon::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 2px;
+      width: 0;
+      height: 0;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-right: 6px solid var(--accent-orange);
+    }
+
+    .slide-6 .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 7cqw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 4%;
+    }
+
+    .slide-6 .cta-title strong {
+      color: var(--accent-orange);
+      font-style: italic;
+    }
+
+    .slide-6 .cta-subtitle {
+      font-size: clamp(0.55rem, 2cqw, 0.85rem);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 80%;
+      margin-bottom: 7%;
+    }
+
+    .slide-6 .cta-box {
+      border: 1.5px solid var(--accent-orange);
+      border-radius: 10px;
+      padding: clamp(12px, 4cqw, 24px) clamp(20px, 7cqw, 44px);
+      text-align: center;
+      background: rgba(245,158,11,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-6 .cta-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(245,158,11,0.06) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .slide-6 .cta-text {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.65rem, 2.5cqw, 1rem);
+      font-weight: 600;
+      color: var(--accent-orange);
+      letter-spacing: 0.03em;
+      margin-bottom: clamp(3px, 1cqw, 6px);
+      position: relative;
+    }
+
+    .slide-6 .cta-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.48rem, 1.7cqw, 0.7rem);
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      position: relative;
+    }
+
+    /* ═══════════════════════════════════════
+       EXPORT MODE
+    ═══════════════════════════════════════ */
+    body.export-mode {
+      padding: 0;
+      background: #000;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      width: 1080px;
+      margin: 0;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+    }
+
+    body.export-mode .slide {
+      border-radius: 0;
+      width: 1080px;
+      height: 1350px;
+    }
+
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+    <label>Background:
+      <select id="bg-toggle">
+        <option value="video">Starfield</option>
+        <option value="static">Static</option>
+      </select>
+    </label>
+    <label>Opacity:
+      <select id="opacity-control">
+        <option value="0.06">6%</option>
+        <option value="0.08">8%</option>
+        <option value="0.12">12%</option>
+      </select>
+    </label>
+    <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
-    <h1>Post 064 — QUOTE CARD</h1>
-    <p>Quote Carousel — 4 Slides</p>
+    <h1>Post 064 — Quote Card: Plan the Trade</h1>
+    <p>6 slides &middot; Quote Card &middot; Orange</p>
   </div>
 
   <div class="carousel-grid">
 
+    <!-- ════════════════════════════════════
+         SLIDE 1 — Hook (Orange RIGHT bar, no video)
+    ════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 &mdash; Hook</span>
       <div class="slide slide-1">
         <div class="slide-content">
-          <div class="cine-label">REFLECT</div>
-          <div class="hook-main">The worst mistake? Knowing the answer and ignoring it.</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">&quot;Plan the trade. Trade the plan. Review the trade.&quot;</p>
-          <div class="cine-logo">Signal Pilot</div>
+          <div class="hook-label">WISDOM</div>
+          <div class="opening-quote">&ldquo;</div>
+          <div class="hook-quote">Plan the trade.<br>Trade the plan.<br>Review the trade.</div>
+          <div class="hook-divider"></div>
+          <div class="hook-attr">&mdash; THE COMPLETE LOOP</div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
+    <!-- ════════════════════════════════════
+         SLIDE 2 — Step 1: Plan
+    ════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="2">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 04</span>
-        
-        
-        <p class="slide-body">No plan = you ARE the plan. (Hint: you're the liquidity.) &quot;Plan the trade. Trade the plan. Review the trade.&quot; Three steps. Most skip two of them. This works on any asset, any timeframe above 15 minutes.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 2 &mdash; Plan</span>
+      <div class="slide slide-2">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="section-tag">STEP 01</div>
+          <h2 class="slide-title">Plan the Trade</h2>
+          <div class="orange-divider"></div>
+          <div class="instruction-cards">
+            <div class="instruction-card">
+              <span class="ic-marker"></span>
+              <span class="ic-text">Entry, stop, target &mdash; BEFORE you click</span>
+            </div>
+            <div class="instruction-card">
+              <span class="ic-marker"></span>
+              <span class="ic-text">Know your thesis before you enter</span>
+            </div>
+            <div class="instruction-card">
+              <span class="ic-marker"></span>
+              <span class="ic-text">Define risk before reward</span>
+            </div>
+          </div>
+          <div class="plan-diagram">
+            <div class="pd-label">Trade Plan</div>
+            <div class="pd-line">
+              <span class="pd-key">Entry</span>
+              <span class="pd-val entry">$182.40</span>
+            </div>
+            <div class="pd-line">
+              <span class="pd-key">Stop</span>
+              <span class="pd-val stop">$178.60</span>
+            </div>
+            <div class="pd-line">
+              <span class="pd-key">Target</span>
+              <span class="pd-val target">$191.20</span>
+            </div>
+            <div class="pd-bar">
+              <span class="pd-entry-mark"></span>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
 
+    <!-- ════════════════════════════════════
+         SLIDE 3 — Step 2: Execute
+    ════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="3">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 04</span>
-        <div class="slide-subtitle">The Context</div>
-        
-        <div class="quote-block">“Planning without execution is fantasy.”</div><div class="quote-attr">— Signal Pilot</div>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 3 &mdash; Execute</span>
+      <div class="slide slide-3">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="section-tag">STEP 02</div>
+          <h2 class="slide-title">Trade the Plan</h2>
+          <div class="orange-divider"></div>
+          <div class="instruction-list">
+            <div class="instruction-item">
+              <span class="ii-marker"></span>
+              <span class="ii-text">Follow your plan exactly</span>
+            </div>
+            <div class="instruction-item">
+              <span class="ii-marker"></span>
+              <span class="ii-text">No improvising mid-trade</span>
+            </div>
+            <div class="instruction-item">
+              <span class="ii-marker"></span>
+              <span class="ii-text">Discipline beats impulse</span>
+            </div>
+          </div>
+          <div class="exec-flow">
+            <div class="ef-step">
+              <span class="ef-label">Plan</span>
+            </div>
+            <span class="ef-arrow">&rarr;</span>
+            <div class="ef-step active">
+              <span class="ef-label">Entry</span>
+            </div>
+            <span class="ef-arrow">&rarr;</span>
+            <div class="ef-step active">
+              <span class="ef-label">Manage</span>
+            </div>
+            <span class="ef-arrow">&rarr;</span>
+            <div class="ef-step">
+              <span class="ef-label">Exit</span>
+            </div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
 
+    <!-- ════════════════════════════════════
+         SLIDE 4 — Step 3: Review
+    ════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="4">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 04</span>
-        <div class="slide-icon">✨</div>
-        <h2 class="slide-title">Follow for More</h2>
-        <p class="slide-body">Daily trading wisdom and insights.</p>
-        <a href="https://signalpilot.io/" class="cta-link">Follow SignalPilot</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 4 &mdash; Review</span>
+      <div class="slide slide-4">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="section-tag">STEP 03</div>
+          <h2 class="slide-title">Review the Trade</h2>
+          <div class="orange-divider"></div>
+          <div class="instruction-list">
+            <div class="instruction-item">
+              <span class="ii-marker"></span>
+              <span class="ii-text">Journal every outcome</span>
+            </div>
+            <div class="instruction-item">
+              <span class="ii-marker"></span>
+              <span class="ii-text">Learn from wins AND losses</span>
+            </div>
+            <div class="instruction-item">
+              <span class="ii-marker"></span>
+              <span class="ii-text">Find patterns in your behavior</span>
+            </div>
+          </div>
+          <div class="journal-visual">
+            <div class="jv-header">Trade Journal</div>
+            <div class="jv-line"><span class="jv-bullet"></span><span class="jv-text"></span></div>
+            <div class="jv-line"><span class="jv-bullet"></span><span class="jv-text med"></span></div>
+            <div class="jv-line"><span class="jv-bullet"></span><span class="jv-text"></span></div>
+            <div class="jv-line"><span class="jv-bullet"></span><span class="jv-text short"></span></div>
+            <div class="jv-line"><span class="jv-bullet"></span><span class="jv-text med"></span></div>
+            <div class="jv-line"><span class="jv-bullet"></span><span class="jv-text"></span></div>
+            <div class="jv-entry-label">Entry #47 &mdash; 02/14</div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 4</span>
-    <button onclick="nextSlide()">Next →</button>
+    <!-- ════════════════════════════════════
+         SLIDE 5 — The Problem
+    ════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 &mdash; The Problem</span>
+      <div class="slide slide-5">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <h2 class="slide-title large">Most Skip <strong>Two Steps</strong></h2>
+          <div class="steps-viz">
+            <div class="step-row skipped">
+              <span class="sr-num">1</span>
+              <span class="sr-name">Plan</span>
+              <span class="sr-badge">SKIPPED</span>
+              <span class="sr-x"></span>
+            </div>
+            <div class="step-row active">
+              <span class="sr-num">2</span>
+              <span class="sr-name">Execute</span>
+              <span class="sr-badge">ONLY THIS</span>
+            </div>
+            <div class="step-row skipped">
+              <span class="sr-num">3</span>
+              <span class="sr-name">Review</span>
+              <span class="sr-badge">SKIPPED</span>
+              <span class="sr-x"></span>
+            </div>
+          </div>
+          <div class="problem-callout">
+            <p>Planning without execution is <strong>fantasy</strong>.<br>Execution without review is <strong>gambling</strong>.</p>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         SLIDE 6 — CTA
+    ════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 &mdash; CTA</span>
+      <div class="slide slide-6">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="cta-icon">
+            <div class="loop-icon"></div>
+          </div>
+          <h2 class="cta-title">Complete the<br><strong>Loop.</strong></h2>
+          <p class="cta-subtitle">The best traders plan before and review after. Every single time.</p>
+          <div class="cta-box">
+            <div class="cta-text">Start your journal</div>
+            <div class="cta-url">signalpilot.io</div>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0;
-    let exportMode = false;
-    bgToggle.addEventListener('change', (e) => { videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'); });
-    opacitySlider.addEventListener('input', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value / 100); });
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+    (function() {
+      const bgToggle = document.getElementById('bg-toggle');
+      const opacityControl = document.getElementById('opacity-control');
+      const exportBtn = document.getElementById('export-btn');
+      const videos = document.querySelectorAll('.video-bg');
+      const slideWrappers = document.querySelectorAll('.slide-wrapper');
+      let exportMode = false;
+      let currentSlide = 0;
+      bgToggle.addEventListener('change', function() {
+        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
+      });
+      opacityControl.addEventListener('change', function() {
+        videos.forEach(v => { v.style.opacity = this.value; });
+      });
+      exportBtn.addEventListener('click', function() {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
+      });
+      function updateActiveSlide() {
+        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
+      }
+      document.addEventListener('keydown', function(e) {
+        if (!exportMode) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+      });
+    })();
   </script>
 </body>
 </html>
