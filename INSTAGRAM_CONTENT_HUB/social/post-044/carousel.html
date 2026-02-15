@@ -6,7 +6,7 @@
   <title>Post 044 — Entries vs Exits | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0a0a0f;
@@ -14,438 +14,635 @@
       --text-primary: #ffffff;
       --text-secondary: rgba(255,255,255,0.7);
       --text-muted: rgba(255,255,255,0.4);
-      --border-subtle: rgba(255,255,255,0.1);
-      --accent-orange: #f59e0b;
-      --accent-orange-dim: rgba(245,158,11,0.3);
-      --accent-gold: #c9a962;
-      --entry-color: rgba(255,255,255,0.25);
-      --exit-color: #f59e0b;
+      --border-subtle: rgba(255,255,255,0.08);
+      --accent: #f59e0b;
+      --accent-dim: rgba(245,158,11,0.3);
+      --accent-glow: rgba(245,158,11,0.15);
+      --gold: #c9a962;
+      --red: #f87171;
+      --green: #4ade80;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
+
+    /* ── Export Mode ── */
     body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label { display: none; }
     body.export-mode .carousel-grid { display: block; }
     body.export-mode .slide-wrapper { display: none; margin: 0; }
     body.export-mode .slide-wrapper.active { display: block; }
     body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
+    /* ── Controls ── */
     .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
     .page-title { text-align: center; margin-bottom: 2rem; }
     .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
     .page-title p { color: var(--text-muted); font-size: 0.875rem; }
 
+    /* ── Grid ── */
     .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
     .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
     .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5%; }
+    .slide {
+      width: 100%; max-width: 540px; aspect-ratio: 4 / 5;
+      background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%);
+      border-radius: 0.5rem; position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+
+    /* ── Orange warm overlay ── */
+    .slide::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(245,158,11,0.05) 0%, transparent 60%);
+      pointer-events: none; z-index: 1;
+    }
+    .slide-content { position: relative; z-index: 3; flex: 1; display: flex; flex-direction: column; padding: 5.5%; }
+
+    /* ── Right accent bar (Slide 1 only) ── */
+    .slide-1::after {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 18px; height: 100%;
+      background: linear-gradient(180deg, rgba(245,158,11,0.9) 0%, rgba(217,148,74,0.7) 100%);
+      z-index: 5;
+    }
+
+    /* ── Brand footer ── */
+    .brand-footer {
+      position: absolute; bottom: 4.5%; left: 50%; transform: translateX(-50%);
+      font-family: var(--font-sans); font-size: clamp(0.45rem, 1.1cqw, 0.6rem);
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: rgba(245,158,11,0.35); z-index: 4; white-space: nowrap;
+    }
 
     /* ═══════════════════════════════════════════
-       SLIDE 1 — Cinematic Hook (ORANGE)
+       SLIDE 1 — Hook: Entries vs Exits
        ═══════════════════════════════════════════ */
-    .slide-warm { background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important; }
-    .slide-warm::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(245,158,11,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-warm.slide-1::after { content: ''; position: absolute; top: 0; right: 0; width: 18px; height: 100%; background: linear-gradient(180deg, rgba(245,158,11,0.9) 0%, rgba(217,148,74,0.7) 100%); z-index: 5; }
-    .slide-warm .slide-content { z-index: 3; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
-    .slide-1 .cine-label { font-size: clamp(0.5rem, 1.6cqw, 0.875rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(245,158,11,0.9); margin-bottom: 8%; }
-    .slide-1 .hook-main { font-size: clamp(1.4rem, 4.5cqw, 2.5rem); font-weight: 600; line-height: 1.2; color: rgba(255,255,255,0.95); margin-bottom: 4%; }
-    .slide-1 .cine-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(245,158,11,0.6), transparent); margin-bottom: 4%; }
-    .slide-1 .hook-sub { font-size: clamp(0.65rem, 2cqw, 1.1rem); font-weight: 300; letter-spacing: 0.05em; color: rgba(245,158,11,0.4); line-height: 1.6; }
+    .slide-1 .slide-content {
+      align-items: center; justify-content: center; text-align: center;
+    }
+
+    /* CSS Crosshair Orb */
+    .hook-orb {
+      position: relative;
+      width: clamp(100px, 22cqw, 220px);
+      height: clamp(100px, 22cqw, 220px);
+      margin-bottom: 6%;
+    }
+
+    /* Outer ring */
+    .hook-orb::before {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 50%;
+      border: 2px solid rgba(245,158,11,0.2);
+    }
+
+    /* Inner core glow */
+    .hook-orb::after {
+      content: ''; position: absolute;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 40%; height: 40%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,158,11,0.35) 0%, transparent 70%);
+      box-shadow: 0 0 40px rgba(245,158,11,0.2);
+    }
+
+    /* Crosshair lines */
+    .orb-cross-h, .orb-cross-v {
+      position: absolute; z-index: 1;
+    }
+    .orb-cross-h {
+      top: 50%; left: 10%; right: 10%;
+      height: 1px; transform: translateY(-50%);
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.5), transparent);
+    }
+    .orb-cross-v {
+      left: 50%; top: 10%; bottom: 10%;
+      width: 1px; transform: translateX(-50%);
+      background: linear-gradient(180deg, transparent, rgba(245,158,11,0.5), transparent);
+    }
+
+    /* Entry side (left half dim) vs Exit side (right half bright) */
+    .orb-half-left {
+      position: absolute; top: 5%; left: 5%; width: 45%; height: 90%;
+      border-radius: 50% 0 0 50%;
+      background: rgba(255,255,255,0.02);
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .orb-half-right {
+      position: absolute; top: 5%; right: 5%; width: 45%; height: 90%;
+      border-radius: 0 50% 50% 0;
+      background: rgba(245,158,11,0.06);
+      border-right: 1px solid rgba(245,158,11,0.2);
+      border-top: 1px solid rgba(245,158,11,0.2);
+      border-bottom: 1px solid rgba(245,158,11,0.2);
+    }
+
+    /* Labels inside orb */
+    .orb-label {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      font-size: clamp(0.4rem, 1cqw, 0.65rem);
+      letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600;
+      z-index: 2;
+    }
+    .orb-label-in { left: 14%; color: rgba(255,255,255,0.2); }
+    .orb-label-out { right: 14%; color: rgba(245,158,11,0.7); }
+
+    .hook-label {
+      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(245,158,11,0.9); margin-bottom: 3%;
+    }
+    .hook-main {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 5cqw, 2.8rem);
+      font-weight: 600; line-height: 1.15;
+      color: rgba(255,255,255,0.95); margin-bottom: 3%;
+    }
+    .hook-vs {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: clamp(0.8rem, 2.5cqw, 1.4rem);
+      color: rgba(245,158,11,0.5); margin-bottom: 3%;
+    }
+    .hook-divider {
+      width: clamp(40px, 8cqw, 80px); height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.6), transparent);
+      margin-bottom: 3%;
+    }
+    .hook-sub {
+      font-size: clamp(0.6rem, 1.8cqw, 1rem);
+      font-weight: 300; letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.4); line-height: 1.6;
+    }
 
     /* ═══════════════════════════════════════════
        SLIDE 2 — The Quote (Split Typography)
        ═══════════════════════════════════════════ */
     .quote-stage {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; position: relative;
     }
 
+    /* Decorative quotation marks */
     .quote-stage::before {
-      content: '"';
-      position: absolute;
-      top: 5%;
-      left: 8%;
+      content: '\201C'; position: absolute; top: 5%; left: 8%;
       font-family: var(--font-serif);
-      font-size: clamp(60px, 13cqw, 140px);
-      color: rgba(245,158,11,0.08);
-      line-height: 1;
+      font-size: clamp(60px, 14cqw, 150px);
+      color: rgba(245,158,11,0.06); line-height: 1;
     }
-
     .quote-stage::after {
-      content: '"';
-      position: absolute;
-      bottom: 12%;
-      right: 8%;
+      content: '\201D'; position: absolute; bottom: 12%; right: 8%;
       font-family: var(--font-serif);
-      font-size: clamp(60px, 13cqw, 140px);
-      color: rgba(245,158,11,0.08);
-      line-height: 1;
+      font-size: clamp(60px, 14cqw, 150px);
+      color: rgba(245,158,11,0.06); line-height: 1;
     }
 
     .quote-line {
       font-family: var(--font-serif);
-      font-size: clamp(18px, 3.8cqw, 40px);
-      font-weight: 500;
-      line-height: 1.5;
-      margin-bottom: 2%;
+      font-size: clamp(18px, 4cqw, 42px);
+      font-weight: 500; line-height: 1.5; margin-bottom: 1%;
     }
-
-    .quote-line.dim {
-      color: rgba(255,255,255,0.35);
-    }
-
-    .quote-line.bright {
-      color: var(--text-primary);
-    }
-
+    .quote-line.dim { color: rgba(255,255,255,0.3); }
+    .quote-line.bright { color: var(--text-primary); }
     .quote-word-entry {
-      color: rgba(255,255,255,0.3);
-      font-style: italic;
+      color: rgba(255,255,255,0.25); font-style: italic;
+      text-decoration: line-through;
+      text-decoration-color: rgba(255,255,255,0.15);
     }
-
     .quote-word-exit {
-      color: var(--accent-orange);
-      font-weight: 700;
+      color: var(--accent); font-weight: 700;
       text-shadow: 0 0 30px rgba(245,158,11,0.3);
     }
-
     .quote-divider-line {
-      width: clamp(30px, 6cqw, 60px);
-      height: 2px;
+      width: clamp(30px, 6cqw, 60px); height: 2px;
       background: linear-gradient(90deg, transparent, rgba(245,158,11,0.5), transparent);
-      margin: 5% auto;
+      margin: 4% auto;
     }
-
     .quote-attribution {
-      font-size: clamp(9px, 1.6cqw, 16px);
+      font-size: clamp(9px, 1.5cqw, 15px);
       color: var(--text-muted);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-top: 4%;
     }
 
     /* ═══════════════════════════════════════════
-       SLIDE 3 — Visual Versus (Entry vs Exit)
+       SLIDE 3 — The Obsession (Why Entries Trap You)
+       ═══════════════════════════════════════════ */
+    .obsession-stage {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 0 3%;
+    }
+
+    .obsession-title {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 3.2cqw, 34px);
+      font-weight: 600; color: var(--text-primary);
+      text-align: center; margin-bottom: 5%;
+    }
+
+    .obsession-scenario {
+      width: 90%; display: flex; flex-direction: column; gap: clamp(10px, 2cqw, 20px);
+    }
+
+    .scenario-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: clamp(8px, 1.5cqw, 14px);
+      padding: clamp(12px, 2.5cqw, 24px) clamp(14px, 3cqw, 28px);
+      display: flex; align-items: center; gap: clamp(10px, 2cqw, 18px);
+    }
+
+    .scenario-icon {
+      flex-shrink: 0;
+      width: clamp(36px, 7cqw, 70px); height: clamp(36px, 7cqw, 70px);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-weight: 700;
+      font-size: clamp(10px, 1.8cqw, 18px);
+    }
+
+    .scenario-icon.green-entry {
+      background: rgba(74,222,128,0.08);
+      border: 1px solid rgba(74,222,128,0.25);
+      color: var(--green);
+    }
+    .scenario-icon.red-exit {
+      background: rgba(248,113,113,0.08);
+      border: 1px solid rgba(248,113,113,0.25);
+      color: var(--red);
+    }
+
+    .scenario-text {
+      flex: 1;
+    }
+    .scenario-label {
+      font-size: clamp(8px, 1.4cqw, 13px);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: clamp(3px, 0.6cqw, 6px);
+    }
+    .scenario-desc {
+      font-size: clamp(10px, 1.8cqw, 17px);
+      color: var(--text-secondary); line-height: 1.4;
+    }
+    .scenario-desc strong { color: var(--text-primary); font-weight: 600; }
+
+    .scenario-result {
+      flex-shrink: 0;
+      font-family: var(--font-mono); font-weight: 700;
+      font-size: clamp(12px, 2.2cqw, 22px);
+      padding: clamp(4px, 0.8cqw, 8px) clamp(8px, 1.5cqw, 16px);
+      border-radius: clamp(4px, 0.8cqw, 8px);
+    }
+    .result-loss {
+      background: rgba(248,113,113,0.1);
+      border: 1px solid rgba(248,113,113,0.2);
+      color: var(--red);
+    }
+    .result-win {
+      background: rgba(74,222,128,0.1);
+      border: 1px solid rgba(74,222,128,0.2);
+      color: var(--green);
+    }
+
+    .obsession-insight {
+      margin-top: 5%; text-align: center;
+      font-size: clamp(9px, 1.6cqw, 16px);
+      color: var(--accent); font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 4 — Visual Versus (Entry vs Exit P&L)
        ═══════════════════════════════════════════ */
     .versus-stage {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 3%;
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; gap: 2%;
     }
 
     .versus-header {
       font-family: var(--font-serif);
       font-size: clamp(16px, 3.2cqw, 34px);
-      font-weight: 600;
-      color: var(--text-primary);
-      text-align: center;
-      margin-bottom: 2%;
+      font-weight: 600; color: var(--text-primary);
+      text-align: center; margin-bottom: 3%;
     }
 
     .versus-frame {
-      width: 88%;
-      display: flex;
-      gap: 3%;
-      height: 55%;
+      width: 88%; display: flex; gap: 3%;
+      height: 55%; position: relative;
     }
 
     .versus-panel {
-      flex: 1;
-      border-radius: clamp(8px, 1.6cqw, 16px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 5% 4%;
-      position: relative;
-      overflow: hidden;
+      flex: 1; border-radius: clamp(8px, 1.6cqw, 16px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 5% 4%; position: relative; overflow: hidden;
     }
 
     .panel-entry {
       background: rgba(255,255,255,0.02);
-      border: 1.5px solid rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.06);
     }
-
     .panel-entry::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 8px,
-        rgba(255,255,255,0.015) 8px,
-        rgba(255,255,255,0.015) 9px
-      );
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.012) 8px, rgba(255,255,255,0.012) 9px);
     }
 
     .panel-exit {
       background: rgba(245,158,11,0.06);
       border: 1.5px solid rgba(245,158,11,0.25);
-      box-shadow: 0 0 40px rgba(245,158,11,0.08);
+      box-shadow: 0 0 40px rgba(245,158,11,0.06);
     }
 
     .panel-label {
       font-size: clamp(8px, 1.4cqw, 14px);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 8%;
-      position: relative;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: 6%; position: relative;
     }
+    .panel-entry .panel-label { color: rgba(255,255,255,0.25); }
+    .panel-exit .panel-label { color: var(--accent); }
 
-    .panel-entry .panel-label { color: rgba(255,255,255,0.3); }
-    .panel-exit .panel-label { color: var(--accent-orange); }
-
-    .panel-icon {
-      font-size: clamp(28px, 5.5cqw, 56px);
-      margin-bottom: 8%;
-      position: relative;
-    }
-
-    .panel-entry .panel-icon { opacity: 0.3; }
-
-    /* Entry side: scattered arrows pointing in different directions */
+    /* Entry arrows (scattered, dim) */
     .entry-arrows {
       position: relative;
-      width: clamp(60px, 12cqw, 120px);
-      height: clamp(60px, 12cqw, 120px);
+      width: clamp(50px, 10cqw, 100px);
+      height: clamp(50px, 10cqw, 100px);
+      margin-bottom: 8%;
     }
-
     .entry-arrows .arrow {
       position: absolute;
-      font-size: clamp(12px, 2.4cqw, 24px);
-      color: rgba(255,255,255,0.15);
-    }
-
-    .entry-arrows .arrow:nth-child(1) { top: 10%; left: 50%; transform: rotate(-30deg); }
-    .entry-arrows .arrow:nth-child(2) { top: 30%; left: 15%; transform: rotate(45deg); }
-    .entry-arrows .arrow:nth-child(3) { top: 55%; left: 70%; transform: rotate(-60deg); }
-    .entry-arrows .arrow:nth-child(4) { top: 70%; left: 30%; transform: rotate(15deg); }
-    .entry-arrows .arrow:nth-child(5) { top: 20%; left: 75%; transform: rotate(80deg); }
-
-    /* Exit side: single clean arrow upward */
-    .exit-arrow-block {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4%;
-    }
-
-    .exit-main-arrow {
-      font-size: clamp(36px, 7cqw, 72px);
-      color: var(--accent-orange);
-      text-shadow: 0 0 20px rgba(245,158,11,0.4);
-      line-height: 1;
-    }
-
-    .exit-trail {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-    }
-
-    .exit-trail span {
-      display: block;
-      width: 2px;
-      height: clamp(4px, 0.8cqw, 8px);
-      background: var(--accent-orange);
+      width: clamp(6px, 1.2cqw, 12px); height: 2px;
+      background: rgba(255,255,255,0.12);
       border-radius: 1px;
     }
+    .entry-arrows .arrow::after {
+      content: ''; position: absolute; right: -1px; top: -2px;
+      border-left: 4px solid rgba(255,255,255,0.12);
+      border-top: 2px solid transparent;
+      border-bottom: 2px solid transparent;
+    }
+    .entry-arrows .arrow:nth-child(1) { top: 15%; left: 45%; transform: rotate(-30deg); }
+    .entry-arrows .arrow:nth-child(2) { top: 35%; left: 15%; transform: rotate(50deg); }
+    .entry-arrows .arrow:nth-child(3) { top: 55%; left: 65%; transform: rotate(-65deg); }
+    .entry-arrows .arrow:nth-child(4) { top: 72%; left: 30%; transform: rotate(20deg); }
+    .entry-arrows .arrow:nth-child(5) { top: 22%; left: 72%; transform: rotate(85deg); }
 
-    .exit-trail span:nth-child(2) { opacity: 0.6; }
-    .exit-trail span:nth-child(3) { opacity: 0.3; }
+    /* Exit arrow (single, strong) */
+    .exit-arrow-block {
+      display: flex; flex-direction: column;
+      align-items: center; margin-bottom: 8%;
+    }
+    .exit-main-arrow {
+      width: 0; height: 0;
+      border-left: clamp(10px, 2cqw, 20px) solid transparent;
+      border-right: clamp(10px, 2cqw, 20px) solid transparent;
+      border-bottom: clamp(16px, 3.2cqw, 32px) solid var(--accent);
+      filter: drop-shadow(0 0 12px rgba(245,158,11,0.4));
+      margin-bottom: clamp(4px, 0.8cqw, 8px);
+    }
+    .exit-trail {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 3px;
+    }
+    .exit-trail span {
+      display: block; width: 2px;
+      height: clamp(5px, 1cqw, 10px);
+      background: var(--accent); border-radius: 1px;
+    }
+    .exit-trail span:nth-child(2) { opacity: 0.5; }
+    .exit-trail span:nth-child(3) { opacity: 0.2; }
 
     .panel-stat {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 46px);
-      font-weight: 700;
-      margin-bottom: 3%;
-      position: relative;
+      font-family: var(--font-mono);
+      font-size: clamp(24px, 5cqw, 50px);
+      font-weight: 700; margin-bottom: 3%; position: relative;
     }
-
-    .panel-entry .panel-stat { color: rgba(255,255,255,0.2); }
-    .panel-exit .panel-stat { color: var(--accent-orange); text-shadow: 0 0 20px rgba(245,158,11,0.3); }
+    .panel-entry .panel-stat { color: rgba(255,255,255,0.15); }
+    .panel-exit .panel-stat {
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(245,158,11,0.3);
+    }
 
     .panel-desc {
-      font-size: clamp(8px, 1.5cqw, 15px);
-      line-height: 1.5;
-      text-align: center;
-      position: relative;
+      font-size: clamp(8px, 1.4cqw, 14px);
+      line-height: 1.5; text-align: center; position: relative;
     }
-
-    .panel-entry .panel-desc { color: rgba(255,255,255,0.3); }
+    .panel-entry .panel-desc { color: rgba(255,255,255,0.25); }
     .panel-exit .panel-desc { color: var(--text-secondary); }
 
     .versus-divider {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 3;
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%); z-index: 3;
     }
-
     .vs-badge {
-      width: clamp(28px, 5.5cqw, 56px);
-      height: clamp(28px, 5.5cqw, 56px);
+      width: clamp(30px, 5.5cqw, 56px);
+      height: clamp(30px, 5.5cqw, 56px);
       background: var(--bg-dark);
       border: 2px solid rgba(245,158,11,0.4);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-radius: 50%; display: flex;
+      align-items: center; justify-content: center;
       font-family: var(--font-serif);
       font-size: clamp(10px, 2cqw, 20px);
-      font-weight: 700;
-      font-style: italic;
-      color: var(--accent-orange);
+      font-weight: 700; font-style: italic;
+      color: var(--accent);
     }
 
     .versus-bottom-text {
       font-size: clamp(9px, 1.6cqw, 16px);
-      color: var(--text-muted);
-      text-align: center;
-      margin-top: 2%;
-      font-style: italic;
+      color: var(--text-muted); text-align: center;
+      font-style: italic; margin-top: 1%;
     }
 
     /* ═══════════════════════════════════════════
-       SLIDE 4 — CTA
+       SLIDE 5 — Truth
        ═══════════════════════════════════════════ */
-    .cta-stage {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+    .truth-stage {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; padding: 0 5%;
     }
 
-    .cta-icon {
-      font-size: clamp(36px, 7.4cqw, 80px);
+    .truth-label {
+      font-size: clamp(0.45rem, 1.4cqw, 0.8rem);
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(245,158,11,0.7); margin-bottom: 5%;
+    }
+
+    .truth-main {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 4.2cqw, 44px);
+      font-weight: 600; line-height: 1.3;
+      color: var(--text-primary); margin-bottom: 5%;
+    }
+    .truth-main .accent { color: var(--accent); }
+
+    .truth-divider {
+      width: clamp(40px, 8cqw, 80px); height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.5), transparent);
       margin-bottom: 5%;
+    }
+
+    /* Exit checklist */
+    .exit-checklist {
+      width: 85%; display: flex; flex-direction: column;
+      gap: clamp(8px, 1.5cqw, 16px); text-align: left;
+    }
+
+    .check-item {
+      display: flex; align-items: center;
+      gap: clamp(8px, 1.5cqw, 16px);
+      padding: clamp(8px, 1.5cqw, 16px) clamp(12px, 2cqw, 20px);
+      background: rgba(245,158,11,0.04);
+      border: 1px solid rgba(245,158,11,0.12);
+      border-radius: clamp(6px, 1.2cqw, 12px);
+    }
+
+    .check-box {
+      flex-shrink: 0;
+      width: clamp(16px, 3cqw, 28px);
+      height: clamp(16px, 3cqw, 28px);
+      border: 2px solid var(--accent);
+      border-radius: clamp(3px, 0.6cqw, 6px);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .check-box::after {
+      content: ''; position: absolute;
+      width: 40%; height: 60%;
+      border-right: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      transform: rotate(45deg) translate(-10%, -10%);
+    }
+
+    .check-text {
+      font-size: clamp(9px, 1.6cqw, 16px);
+      color: var(--text-secondary); line-height: 1.4;
+    }
+    .check-text strong { color: var(--text-primary); }
+
+    .truth-bottom {
+      margin-top: 5%;
+      font-family: var(--font-serif); font-style: italic;
+      font-size: clamp(10px, 1.8cqw, 18px);
+      color: var(--text-muted);
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 6 — CTA
+       ═══════════════════════════════════════════ */
+    .cta-stage {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+    }
+
+    /* CSS target icon */
+    .cta-icon {
+      position: relative;
+      width: clamp(48px, 9cqw, 90px);
+      height: clamp(48px, 9cqw, 90px);
+      margin-bottom: 5%;
+    }
+    .cta-icon .ring-outer {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 2px solid rgba(245,158,11,0.3);
+    }
+    .cta-icon .ring-mid {
+      position: absolute; inset: 20%; border-radius: 50%;
+      border: 2px solid rgba(245,158,11,0.5);
+    }
+    .cta-icon .ring-inner {
+      position: absolute; inset: 40%; border-radius: 50%;
+      background: rgba(245,158,11,0.3);
+      box-shadow: 0 0 20px rgba(245,158,11,0.3);
+    }
+    .cta-icon .cross-h {
+      position: absolute; top: 50%; left: 0; right: 0;
+      height: 1px; transform: translateY(-50%);
+      background: linear-gradient(90deg, transparent 5%, rgba(245,158,11,0.4) 25%, rgba(245,158,11,0.4) 75%, transparent 95%);
+    }
+    .cta-icon .cross-v {
+      position: absolute; left: 50%; top: 0; bottom: 0;
+      width: 1px; transform: translateX(-50%);
+      background: linear-gradient(180deg, transparent 5%, rgba(245,158,11,0.4) 25%, rgba(245,158,11,0.4) 75%, transparent 95%);
     }
 
     .cta-headline {
       font-family: var(--font-serif);
       font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 4%;
+      font-weight: 700; color: var(--text-primary);
+      line-height: 1.2; margin-bottom: 4%;
     }
-
-    .cta-accent { color: var(--accent-orange); }
+    .cta-accent { color: var(--accent); }
 
     .cta-body {
       font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 80%;
-      margin-bottom: 6%;
+      color: var(--text-secondary); line-height: 1.6;
+      max-width: 80%; margin-bottom: 6%;
     }
 
     .cta-box {
       background: linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(245,158,11,0.05) 100%);
-      border: 2px solid var(--accent-orange);
-      border-radius: 14px;
+      border: 2px solid var(--accent);
+      border-radius: clamp(10px, 2cqw, 18px);
       padding: 3% 6%;
     }
-
     .cta-box-text {
       font-size: clamp(11px, 2cqw, 22px);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 1%;
+      font-weight: 500; color: var(--text-primary); margin-bottom: 1%;
     }
-
     .cta-link {
+      font-family: var(--font-mono);
       font-size: clamp(10px, 1.7cqw, 18px);
-      font-weight: 600;
-      color: var(--accent-orange);
-    }
-
-    /* Slide Logo (Gugi centered) */
-    .slide-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(245,158,11,0.4);
-      z-index: 2;
-      white-space: nowrap;
-    }
-
-    .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(245,158,11,0.4);
-      z-index: 2;
-      white-space: nowrap;
+      font-weight: 600; color: var(--accent);
     }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 044 — Entries vs Exits</h1>
-    <p>4 slides · Quote</p>
+    <p>6 slides | Orange / Quote | signalpilot.io</p>
   </div>
 
   <div class="carousel-grid">
 
-    <!-- ══════ SLIDE 1: Cinematic Hook ══════ -->
+    <!-- ══════ SLIDE 1: Hook ══════ -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
-      <div class="slide slide-warm slide-1">
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide slide-1">
         <div class="slide-content">
-          <div class="cine-label">REFLECT</div>
+          <div class="hook-orb">
+            <div class="orb-half-left"></div>
+            <div class="orb-half-right"></div>
+            <div class="orb-cross-h"></div>
+            <div class="orb-cross-v"></div>
+            <span class="orb-label orb-label-in">IN</span>
+            <span class="orb-label orb-label-out">OUT</span>
+          </div>
+          <div class="hook-label">Quote</div>
           <div class="hook-main">Entries vs Exits</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">Where the real money is made — and lost.</p>
-          <div class="cine-logo">Signal Pilot</div>
+          <div class="hook-divider"></div>
+          <p class="hook-sub">Where the real money is made.</p>
         </div>
+        <span class="brand-footer">Signal Pilot</span>
       </div>
     </div>
 
     <!-- ══════ SLIDE 2: The Quote ══════ -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — The Quote</span>
-      <div class="slide slide-warm">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide">
         <div class="slide-content">
           <div class="quote-stage">
             <div class="quote-line dim">Amateur traders focus on</div>
@@ -453,36 +650,76 @@
             <div class="quote-divider-line"></div>
             <div class="quote-line bright">Professional traders focus on</div>
             <div class="quote-line bright"><span class="quote-word-exit">exits.</span></div>
-            <div style="margin-top: 6%;"></div>
-            <div class="quote-attribution">— Every profitable trader, eventually</div>
+            <div class="quote-attribution">-- Every profitable trader, eventually</div>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
+          <span class="brand-footer">Signal Pilot</span>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 3: Visual Versus ══════ -->
+    <!-- ══════ SLIDE 3: The Obsession ══════ -->
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Entry vs Exit</span>
-      <div class="slide slide-warm">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 3 — The Obsession</span>
+      <div class="slide">
+        <div class="slide-content">
+          <div class="obsession-stage">
+            <h2 class="obsession-title">Same Entry. Different Exits.</h2>
+            <div class="obsession-scenario">
+
+              <div class="scenario-card">
+                <div class="scenario-icon green-entry">BUY</div>
+                <div class="scenario-text">
+                  <div class="scenario-label">Scenario A</div>
+                  <div class="scenario-desc"><strong>Perfect entry</strong>, no exit plan. Watched profit evaporate.</div>
+                </div>
+                <div class="scenario-result result-loss">-3R</div>
+              </div>
+
+              <div class="scenario-card">
+                <div class="scenario-icon green-entry">BUY</div>
+                <div class="scenario-text">
+                  <div class="scenario-label">Scenario B</div>
+                  <div class="scenario-desc"><strong>Perfect entry</strong>, panic sold early. Left money on the table.</div>
+                </div>
+                <div class="scenario-result result-win">+0.5R</div>
+              </div>
+
+              <div class="scenario-card">
+                <div class="scenario-icon red-exit">EXIT</div>
+                <div class="scenario-text">
+                  <div class="scenario-label">Scenario C</div>
+                  <div class="scenario-desc"><strong>Average entry</strong>, disciplined exit plan. Managed risk, locked profit.</div>
+                </div>
+                <div class="scenario-result result-win">+2.5R</div>
+              </div>
+
+            </div>
+            <p class="obsession-insight">The entry was identical. The exit made the difference.</p>
+          </div>
+          <span class="brand-footer">Signal Pilot</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 4: Visual Versus ══════ -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Entry vs Exit</span>
+      <div class="slide">
         <div class="slide-content">
           <div class="versus-stage">
             <h2 class="versus-header">Where Your Edge Lives</h2>
-            <div class="versus-frame" style="position: relative;">
+            <div class="versus-frame">
               <div class="versus-panel panel-entry">
                 <div class="panel-label">Entry</div>
                 <div class="entry-arrows">
-                  <span class="arrow">→</span>
-                  <span class="arrow">↗</span>
-                  <span class="arrow">↘</span>
-                  <span class="arrow">→</span>
-                  <span class="arrow">↑</span>
+                  <span class="arrow"></span>
+                  <span class="arrow"></span>
+                  <span class="arrow"></span>
+                  <span class="arrow"></span>
+                  <span class="arrow"></span>
                 </div>
                 <div class="panel-stat">10%</div>
-                <div class="panel-desc">of your P&L<br>comes from timing<br>the entry</div>
+                <div class="panel-desc">of your P&amp;L<br>comes from timing<br>the entry</div>
               </div>
               <div class="versus-divider">
                 <div class="vs-badge">vs</div>
@@ -490,7 +727,7 @@
               <div class="versus-panel panel-exit">
                 <div class="panel-label">Exit</div>
                 <div class="exit-arrow-block">
-                  <div class="exit-main-arrow">↑</div>
+                  <div class="exit-main-arrow"></div>
                   <div class="exit-trail">
                     <span></span>
                     <span></span>
@@ -498,34 +735,71 @@
                   </div>
                 </div>
                 <div class="panel-stat">90%</div>
-                <div class="panel-desc">of your P&L<br>is determined by<br>the exit strategy</div>
+                <div class="panel-desc">of your P&amp;L<br>is determined by<br>your exit strategy</div>
               </div>
             </div>
             <p class="versus-bottom-text">Your entry gets you in. Your exit gets you paid.</p>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
+          <span class="brand-footer">Signal Pilot</span>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 4: CTA ══════ -->
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — CTA</span>
-      <div class="slide slide-warm">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+    <!-- ══════ SLIDE 5: Truth ══════ -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Truth</span>
+      <div class="slide">
+        <div class="slide-content">
+          <div class="truth-stage">
+            <div class="truth-label">The Truth</div>
+            <h2 class="truth-main">Plan the <span class="accent">exit</span><br>before the entry.</h2>
+            <div class="truth-divider"></div>
+            <div class="exit-checklist">
+              <div class="check-item">
+                <div class="check-box"></div>
+                <div class="check-text"><strong>Stop loss</strong> defined before entry</div>
+              </div>
+              <div class="check-item">
+                <div class="check-box"></div>
+                <div class="check-text"><strong>Take profit</strong> targets mapped</div>
+              </div>
+              <div class="check-item">
+                <div class="check-box"></div>
+                <div class="check-text"><strong>Trail strategy</strong> for runners</div>
+              </div>
+              <div class="check-item">
+                <div class="check-box"></div>
+                <div class="check-text"><strong>Time stop</strong> for stale positions</div>
+              </div>
+            </div>
+            <p class="truth-bottom">Amateurs guess exits. Professionals plan them.</p>
+          </div>
+          <span class="brand-footer">Signal Pilot</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 6: CTA ══════ -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — CTA</span>
+      <div class="slide">
         <div class="slide-content">
           <div class="cta-stage">
-            <div class="cta-icon">🎯</div>
+            <div class="cta-icon">
+              <div class="ring-outer"></div>
+              <div class="ring-mid"></div>
+              <div class="ring-inner"></div>
+              <div class="cross-h"></div>
+              <div class="cross-v"></div>
+            </div>
             <h2 class="cta-headline">Master Your<br><span class="cta-accent">Exit Strategy</span></h2>
-            <p class="cta-body">SignalPilot's indicators don't just find entries — they manage the entire trade lifecycle.</p>
+            <p class="cta-body">Signal Pilot indicators manage the entire trade lifecycle -- from entry signals to exit execution.</p>
             <div class="cta-box">
-              <p class="cta-box-text">Learn exit management</p>
+              <p class="cta-box-text">Start building your edge</p>
               <span class="cta-link">signalpilot.io</span>
             </div>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
+          <span class="brand-footer">Signal Pilot</span>
         </div>
       </div>
     </div>
@@ -534,34 +808,35 @@
 
   <script>
     (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
       const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
       const slideWrappers = document.querySelectorAll('.slide-wrapper');
       let exportMode = false;
       let currentSlide = 0;
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
       exportBtn.addEventListener('click', function() {
         exportMode = !exportMode;
         document.body.classList.toggle('export-mode', exportMode);
         this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
         if (exportMode) { currentSlide = 0; updateActiveSlide(); }
       });
+
       function updateActiveSlide() {
         slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
       }
+
       document.addEventListener('keydown', function(e) {
         if (!exportMode) return;
-        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          currentSlide = (currentSlide + 1) % slideWrappers.length;
+          updateActiveSlide();
+        } else if (e.key === 'ArrowLeft') {
+          currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+          updateActiveSlide();
+        } else if (e.key === 'Escape') {
+          exportMode = false;
+          document.body.classList.remove('export-mode');
+          exportBtn.textContent = 'Export Mode';
+        }
       });
     })();
   </script>

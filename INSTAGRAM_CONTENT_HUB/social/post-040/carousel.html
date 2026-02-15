@@ -6,681 +6,467 @@
   <title>Post 040 — Plutus Flow Cheatsheet | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
+      --accent-teal: #5eead4;
       --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --accent-green: #4ad97a;
-      --text-primary: #e8e8e8;
-      --text-secondary: #a0a0a0;
-      --text-dim: #6a6a6a;
+      --accent-red: #f87171;
+      --accent-green: #4ade80;
+      --accent-blue: #60a5fa;
+      --accent-purple: #a855f7;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: rgba(255, 255, 255, 0.4);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: var(--bg-dark);
-      color: var(--text-primary);
+      background: #111;
       font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
       min-height: 100vh;
-      padding: 40px 20px;
     }
 
     .controls {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-      display: flex;
-      gap: 12px;
-      align-items: center;
+      position: fixed; top: 1rem; right: 1rem; z-index: 1000;
+      display: flex; gap: 1rem; align-items: center;
+      background: rgba(0, 0, 0, 0.8); padding: 1rem 1.5rem;
+      border-radius: 8px; backdrop-filter: blur(10px);
+    }
+    .controls label { font-size: 0.875rem; color: var(--text-secondary); }
+    .controls select, .controls button {
+      background: var(--bg-dark); color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-family: inherit;
     }
 
-    .controls label {
-      color: var(--text-secondary);
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .controls input[type="checkbox"] {
-      cursor: pointer;
-    }
-
-    .controls input[type="range"] {
-      width: 80px;
-      cursor: pointer;
-    }
-
-    .controls button {
-      background: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .controls button:hover {
-      opacity: 0.9;
-    }
-
-    .page-title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .page-title h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 400;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-    }
-
-    .page-title p {
-      color: var(--text-dim);
-      font-size: 14px;
-    }
+    .page-title { text-align: center; margin-bottom: 2rem; font-family: 'Cormorant Garamond', serif; }
+    .page-title h1 { font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-secondary); font-size: 0.875rem; }
 
     .carousel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      max-width: 1400px;
-      margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem; max-width: 1800px; margin: 0 auto; padding-bottom: 4rem;
     }
 
-    .slide-wrapper {
-      aspect-ratio: 4 / 5;
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg-dark);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-      container-type: inline-size;
+    .slide-wrapper { container-type: inline-size; display: flex; flex-direction: column; align-items: center; }
+    .slide-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-teal); margin-bottom: 0.75rem; }
+    .slide {
+      width: 100%; max-width: 540px; aspect-ratio: 4 / 5;
+      position: relative; overflow: hidden; background: var(--bg-dark);
+      border-radius: 4px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
-    .slide-wrapper .bg-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: var(--video-opacity, 0.08);
-      pointer-events: none;
+    .slide-content {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2; display: flex; flex-direction: column; justify-content: center; padding: 8%;
     }
 
-    .slide-wrapper .slide-content {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 8%;
-      text-align: center;
-    }
-
-    .slide-number {
-      position: absolute;
-      top: 4%;
-      left: 4%;
-      font-size: clamp(9px, 3cqw, 11px);
-      color: var(--text-dim);
-      font-weight: 500;
-      letter-spacing: 1px;
-    }
-
-    .brand-mark {
-      position: absolute;
-      bottom: 4%;
-      right: 4%;
-      font-size: clamp(8px, 2.5cqw, 10px);
-      color: var(--text-dim);
-      letter-spacing: 1px;
-    }
-
-    /* Slide Typography */
-    .slide-icon {
-      font-size: clamp(28px, 10cqw, 48px);
-      margin-bottom: 4%;
-    }
-
-    .slide-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(18px, 7cqw, 28px);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 3%;
-      line-height: 1.2;
-      overflow-wrap: break-word;
-    }
-
-    .slide-title.large {
-      font-size: clamp(22px, 8cqw, 32px);
-    }
-
-    .slide-subtitle {
-      font-size: clamp(10px, 3.5cqw, 14px);
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 4%;
-      font-weight: 500;
-    }
-
-    .slide-body {
-      font-size: clamp(12px, 4cqw, 16px);
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 90%;
-    }
-
-    .combo-box {
-      width: 100%;
-      max-width: 90%;
-      border-radius: 16px;
-      padding: 5%;
-      margin: 3% 0;
-    }
-
-    .combo-box.bullish {
-      background: rgba(74, 217, 122, 0.1);
-      border: 2px solid rgba(74, 217, 122, 0.4);
-    }
-
-    .combo-box.bearish {
-      background: rgba(217, 74, 74, 0.1);
-      border: 2px solid rgba(217, 74, 74, 0.4);
-    }
-
-    .combo-box.neutral {
-      background: rgba(74, 144, 217, 0.1);
-      border: 2px solid rgba(74, 144, 217, 0.4);
-    }
-
-    .combo-arrows {
-      font-size: clamp(22px, 8cqw, 36px);
-      margin-bottom: 3%;
-    }
-
-    .combo-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(14px, 6cqw, 22px);
-      font-weight: 600;
-      margin-bottom: 2%;
-    }
-
-    .combo-box.bullish .combo-title {
-      color: var(--accent-green);
-    }
-
-    .combo-box.bearish .combo-title {
-      color: var(--accent-red);
-    }
-
-    .combo-box.neutral .combo-title {
-      color: var(--accent-blue);
-    }
-
-    .combo-desc {
-      font-size: clamp(10px, 3.5cqw, 14px);
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    .signal-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3%;
-      width: 100%;
-      max-width: 90%;
-    }
-
-    .signal-item {
-      padding: 4%;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .signal-item.up {
-      background: rgba(74, 217, 122, 0.1);
-      border: 1px solid rgba(74, 217, 122, 0.3);
-    }
-
-    .signal-item.down {
-      background: rgba(217, 74, 74, 0.1);
-      border: 1px solid rgba(217, 74, 74, 0.3);
-    }
-
-    .signal-item .arrow {
-      font-size: clamp(18px, 7cqw, 28px);
-      margin-bottom: 2%;
-    }
-
-    .signal-item .label {
-      font-size: clamp(9px, 3cqw, 12px);
-      color: var(--text-secondary);
-    }
-
-    .divergence-box {
-      background: linear-gradient(135deg, rgba(201, 169, 98, 0.15), rgba(74, 144, 217, 0.15));
-      border: 2px solid var(--accent-gold);
-      border-radius: 16px;
-      padding: 6%;
-      margin-top: 4%;
-      width: 100%;
-      max-width: 90%;
-    }
-
-    .divergence-box .icon {
-      font-size: clamp(26px, 10cqw, 42px);
-      margin-bottom: 3%;
-    }
-
-    .divergence-box h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(16px, 6cqw, 26px);
-      color: var(--accent-gold);
-      margin-bottom: 3%;
-    }
-
-    .cta-link {
-      display: inline-block;
-      margin-top: 5%;
-      padding: 3% 6%;
-      background: var(--accent-gold);
-      color: var(--bg-dark);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      font-size: clamp(11px, 3.5cqw, 14px);
-      letter-spacing: 0.5px;
-    }
-
-    /* Export mode */
-    body.export-mode {
-      padding: 0;
-      background: #000;
-    }
-
-    body.export-mode .controls,
-    body.export-mode .page-title {
-      display: none;
-    }
-
-    body.export-mode .carousel-grid {
-      display: block;
-    }
-
-    body.export-mode .slide-wrapper {
-      display: none;
-      width: 1080px;
-      height: 1350px;
-      border-radius: 0;
-      margin: 0;
-    }
-
-    body.export-mode .slide-wrapper.active {
-      display: block;
-    }
-
-    .export-nav {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      gap: 12px;
-      z-index: 1000;
-    }
-
-    body.export-mode .export-nav {
-      display: flex;
-    }
-
-    .export-nav button {
-      background: var(--accent-blue);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .export-nav .slide-indicator {
-      background: rgba(255,255,255,0.1);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-
-    @media (max-width: 768px) {
-      .carousel-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-      }
-    }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (TEAL) ═══ */
-    .slide-1 {
-      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
-    }
-
-    .slide-1::before {
+    /* ═══ TEAL ACCENT BAR (all slides) ═══ */
+    .slide::after {
       content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .slide-1::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 18px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
+      position: absolute; top: 0; left: 0;
+      width: clamp(12px, 1.5cqw, 18px); height: 100%;
+      background: linear-gradient(180deg, rgba(94, 234, 212, 0.9) 0%, rgba(45, 180, 160, 0.5) 100%);
       z-index: 5;
     }
 
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
+    /* ═══ SLIDE 1 — HOOK ═══ */
+    .slide-1 { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%); }
+    .slide-1::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(94, 234, 212, 0.05) 0%, transparent 60%);
+      pointer-events: none; z-index: 1;
     }
 
-    .slide-1 .slide-content {
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      z-index: 3;
+    /* Scales orb */
+    .slide-1 .scales-orb {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: clamp(180px, 45cqw, 340px); height: clamp(180px, 45cqw, 340px); z-index: 0;
+    }
+    .slide-1 .scales-orb::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: radial-gradient(circle, rgba(94, 234, 212, 0.1) 0%, rgba(94, 234, 212, 0.03) 50%, transparent 70%);
+    }
+    .slide-1 .scales-orb::after {
+      content: ''; position: absolute; inset: 25%; border-radius: 50%;
+      border: 1.5px solid rgba(94, 234, 212, 0.15);
+      box-shadow: 0 0 0 clamp(15px, 4cqw, 30px) rgba(94, 234, 212, 0.03), 0 0 0 clamp(35px, 9cqw, 65px) rgba(94, 234, 212, 0.02);
     }
 
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
     .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.9);
-      margin-bottom: 8%;
+      font-family: 'Inter', sans-serif; font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94, 234, 212, 0.8); margin-bottom: 6%;
     }
-
     .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 4.5cqw, 2.6rem);
+      font-weight: 600; line-height: 1.15; color: rgba(255, 255, 255, 0.95); margin-bottom: 4%;
     }
-
     .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
-      margin-bottom: 4%;
+      width: clamp(40px, 12cqw, 80px); height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.5), transparent); margin-bottom: 4%;
     }
-
     .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(94, 234, 212, 0.4);
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif; font-size: clamp(0.6rem, 1.8cqw, 1rem);
+      font-weight: 300; line-height: 1.7; color: rgba(94, 234, 212, 0.4); max-width: 80%;
+    }
+    .slide-1 .cine-logo {
+      position: absolute; bottom: 6%; left: 50%; transform: translateX(-50%);
+      font-family: 'Inter', sans-serif; font-size: clamp(0.35rem, 1cqw, 0.55rem);
+      letter-spacing: 0.35em; text-transform: uppercase; color: rgba(94, 234, 212, 0.3);
     }
 
-    .slide-1 .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.4);
+    /* ═══ SHARED CONTENT SLIDE STYLES ═══ */
+    .section-tag {
+      font-family: 'Inter', sans-serif; font-size: clamp(0.45rem, 1.3cqw, 0.7rem);
+      letter-spacing: 0.25em; text-transform: uppercase; color: rgba(94, 234, 212, 0.6); margin-bottom: 2%;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 3cqw, 1.7rem);
+      font-weight: 600; color: var(--text-primary); margin-bottom: 4%;
+    }
+
+    /* ═══ COMBO CARD STYLES ═══ */
+    .combo-card {
+      padding: clamp(12px, 3cqw, 24px); border-radius: 6px;
+      position: relative; overflow: hidden; margin-bottom: clamp(8px, 2cqw, 16px);
+    }
+    .combo-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+    }
+
+    .combo-card.bullish { background: rgba(74, 222, 128, 0.05); border: 1px solid rgba(74, 222, 128, 0.15); }
+    .combo-card.bullish::before { background: var(--accent-green); }
+    .combo-card.bearish { background: rgba(248, 113, 113, 0.05); border: 1px solid rgba(248, 113, 113, 0.15); }
+    .combo-card.bearish::before { background: var(--accent-red); }
+
+    .combo-card .combo-label {
+      font-family: 'JetBrains Mono', monospace; font-size: clamp(0.4rem, 1.1cqw, 0.6rem);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: clamp(4px, 1cqw, 8px);
+    }
+    .combo-card.bullish .combo-label { color: var(--accent-green); }
+    .combo-card.bearish .combo-label { color: var(--accent-red); }
+
+    .combo-card .combo-headline {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(0.9rem, 2.5cqw, 1.4rem);
+      font-weight: 600; margin-bottom: clamp(4px, 1cqw, 8px);
+    }
+    .combo-card.bullish .combo-headline { color: var(--accent-green); }
+    .combo-card.bearish .combo-headline { color: var(--accent-red); }
+
+    .combo-card .combo-desc {
+      font-family: 'Inter', sans-serif; font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
+      font-weight: 300; color: var(--text-secondary); line-height: 1.6;
+    }
+
+    /* Arrow indicators */
+    .arrow-pair {
+      display: flex; gap: clamp(6px, 1.5cqw, 12px); margin-bottom: clamp(6px, 1.5cqw, 12px);
+    }
+    .arrow-indicator {
+      display: flex; align-items: center; gap: clamp(3px, 0.8cqw, 6px);
+      padding: clamp(3px, 0.8cqw, 6px) clamp(6px, 1.5cqw, 12px);
+      border-radius: 3px; font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.45rem, 1.2cqw, 0.65rem); font-weight: 500;
+    }
+    .arrow-indicator.up { background: rgba(74, 222, 128, 0.1); color: var(--accent-green); border: 1px solid rgba(74, 222, 128, 0.2); }
+    .arrow-indicator.down { background: rgba(248, 113, 113, 0.1); color: var(--accent-red); border: 1px solid rgba(248, 113, 113, 0.2); }
+    .arrow-indicator .arr { font-size: clamp(0.6rem, 1.6cqw, 0.9rem); }
+
+    /* Signal tag */
+    .signal-tag {
+      display: inline-block; padding: clamp(3px, 0.8cqw, 6px) clamp(8px, 2cqw, 14px);
+      border-radius: 3px; font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.4rem, 1.1cqw, 0.6rem); font-weight: 500; letter-spacing: 0.1em;
+    }
+    .signal-tag.confirm { background: rgba(74, 222, 128, 0.1); color: var(--accent-green); border: 1px solid rgba(74, 222, 128, 0.2); }
+    .signal-tag.diverge { background: rgba(201, 169, 98, 0.1); color: var(--accent-gold); border: 1px solid rgba(201, 169, 98, 0.2); }
+    .signal-tag.warning { background: rgba(248, 113, 113, 0.1); color: var(--accent-red); border: 1px solid rgba(248, 113, 113, 0.2); }
+
+    /* ═══ SLIDES 2-5 backgrounds ═══ */
+    .slide-2, .slide-3, .slide-4, .slide-5 { background: linear-gradient(180deg, #0a0a0f 0%, #08080c 100%); }
+    .slide-2 .slide-content, .slide-3 .slide-content, .slide-4 .slide-content, .slide-5 .slide-content {
+      justify-content: center; gap: clamp(6px, 1.5cqw, 12px);
+    }
+
+    /* ═══ SLIDE 5 — DIVERGENCE KEY ═══ */
+    .key-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: clamp(6px, 1.5cqw, 12px);
+    }
+    .key-card {
+      padding: clamp(8px, 2cqw, 16px); background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 6px;
+    }
+    .key-card .key-label {
+      font-family: 'JetBrains Mono', monospace; font-size: clamp(0.4rem, 1.1cqw, 0.6rem);
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: clamp(3px, 0.8cqw, 6px);
+    }
+    .key-card .key-text {
+      font-family: 'Inter', sans-serif; font-size: clamp(0.45rem, 1.2cqw, 0.65rem);
+      font-weight: 300; color: var(--text-muted); line-height: 1.5;
+    }
+    .key-card:nth-child(1) .key-label { color: var(--accent-green); }
+    .key-card:nth-child(2) .key-label { color: var(--accent-gold); }
+    .key-card:nth-child(3) .key-label { color: var(--accent-gold); }
+    .key-card:nth-child(4) .key-label { color: var(--accent-red); }
+
+    .key-card:nth-child(1) { border-top: 2px solid var(--accent-green); }
+    .key-card:nth-child(2) { border-top: 2px solid var(--accent-gold); }
+    .key-card:nth-child(3) { border-top: 2px solid var(--accent-gold); }
+    .key-card:nth-child(4) { border-top: 2px solid var(--accent-red); }
+
+    .divergence-note {
+      padding: clamp(8px, 2cqw, 14px); background: rgba(201, 169, 98, 0.05);
+      border: 1px dashed rgba(201, 169, 98, 0.2); border-radius: 4px; text-align: center;
+    }
+    .divergence-note p {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(0.7rem, 2cqw, 1.1rem);
+      font-weight: 500; font-style: italic; color: var(--accent-gold); line-height: 1.5;
+    }
+
+    /* ═══ SLIDE 6 — TRUTH + CTA ═══ */
+    .slide-6 { background: linear-gradient(180deg, #0a0c0f 0%, #060a0c 100%); }
+    .slide-6::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(94, 234, 212, 0.04) 0%, transparent 60%);
+      z-index: 1; pointer-events: none;
+    }
+    .slide-6 .slide-content {
+      align-items: center; text-align: center; justify-content: center;
+      gap: clamp(6px, 1.5cqw, 12px); z-index: 2;
+    }
+    .slide-6 .truth-tag {
+      font-family: 'Inter', sans-serif; font-size: clamp(0.45rem, 1.3cqw, 0.7rem);
+      letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94, 234, 212, 0.5);
+    }
+    .slide-6 .truth-quote {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 3.2cqw, 1.8rem);
+      font-weight: 600; font-style: italic; color: var(--text-primary); line-height: 1.4; max-width: 85%;
+    }
+    .slide-6 .truth-divider {
+      width: clamp(30px, 8cqw, 60px); height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.4), transparent);
+    }
+    .slide-6 .truth-sub {
+      font-family: 'Inter', sans-serif; font-size: clamp(0.55rem, 1.6cqw, 0.85rem);
+      font-weight: 300; color: var(--text-muted); line-height: 1.6;
+    }
+    .slide-6 .cta-button {
+      display: inline-block; padding: clamp(8px, 2cqw, 14px) clamp(20px, 5cqw, 36px);
+      border: 1px solid rgba(94, 234, 212, 0.5); color: var(--accent-teal);
+      font-family: 'Inter', sans-serif; font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
+      font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px; background: rgba(94, 234, 212, 0.04);
+    }
+    .slide-6 .cta-url {
+      font-family: 'JetBrains Mono', monospace; font-size: clamp(0.4rem, 1.1cqw, 0.6rem);
+      color: rgba(94, 234, 212, 0.4); letter-spacing: 0.05em;
+    }
+    .slide-6 .cine-logo {
+      position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+      font-family: 'Inter', sans-serif; font-size: clamp(0.35rem, 1cqw, 0.55rem);
+      letter-spacing: 0.35em; text-transform: uppercase; color: rgba(94, 234, 212, 0.25);
+    }
+
+    /* ═══ EXPORT MODE ═══ */
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .carousel-grid { display: block; padding: 0; }
+    body.export-mode .slide-wrapper { display: none; }
+    body.export-mode .slide-wrapper.active { display: flex; justify-content: center; }
+    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; box-shadow: none; }
+
+    @media (max-width: 900px) {
+      .carousel-grid { grid-template-columns: 1fr; }
+      .controls { position: static; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; }
     }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label>
-      <input type="checkbox" id="bgToggle" checked>
-      Background
-    </label>
-    <label>
-      Opacity
-      <input type="range" id="opacitySlider" min="0" max="30" value="8">
-    </label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+    <label>Mode: <select id="bg-toggle"><option value="dark">Dark</option><option value="black">Pure Black</option></select></label>
+    <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 040 — Plutus Flow Cheatsheet</h1>
-    <p>Cheatsheet Carousel — 6 Slides</p>
+    <p>Instagram Carousel | 6 Slides | 1080 x 1350px | Teal / Docs</p>
   </div>
 
   <div class="carousel-grid">
-    <!-- Slide 1: Hook -->
+
+    <!-- ═══ SLIDE 1 — HOOK ═══ -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Cinematic Hook</span>
       <div class="slide slide-1">
+        <div class="scales-orb"></div>
         <div class="slide-content">
-          <div class="cine-label">REFERENCE</div>
-          <div class="hook-main">PLUTUS FLOW CHEATSHEET</div>
+          <div class="cine-label">Plutus Flow Reference</div>
+          <div class="hook-main">The Scales<br>Cheatsheet</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">Four combinations. Four signals. Master them all.</p>
+          <p class="hook-sub">Four combinations. Four signals.<br>Master them all.</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 2: Flow UP + Price UP -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 06</span>
-        <div class="slide-subtitle">Combination 1</div>
-        <div class="combo-box bullish">
-          <div class="combo-arrows">📈 📈</div>
-          <div class="combo-title">Flow UP + Price UP</div>
-          <div class="combo-desc">Uptrend may be confirmed. Money flowing in as price rises.</div>
-        </div>
-        <div class="signal-grid">
-          <div class="signal-item up">
-            <div class="arrow">↗️</div>
-            <div class="label">Flow Rising</div>
+    <!-- ═══ SLIDE 2 — COMBO 1: Flow UP + Price UP ═══ -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — Confirmation (Bullish)</span>
+      <div class="slide slide-2">
+        <div class="slide-content">
+          <div class="section-tag">Combination 1</div>
+          <div class="section-title">Flow UP + Price UP</div>
+
+          <div class="arrow-pair">
+            <div class="arrow-indicator up"><span class="arr">/</span> Flow Rising</div>
+            <div class="arrow-indicator up"><span class="arr">/</span> Price Rising</div>
           </div>
-          <div class="signal-item up">
-            <div class="arrow">↗️</div>
-            <div class="label">Price Rising</div>
+
+          <div class="combo-card bullish">
+            <div class="combo-label">Bullish Confirmation</div>
+            <div class="combo-headline">Uptrend Confirmed</div>
+            <div class="combo-desc">Money is flowing in as price rises. OBV and price agree. The trend has conviction behind it.</div>
           </div>
+
+          <div class="signal-tag confirm">TREND CONFIRMED</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 3: Flow UP + Price DOWN -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 06</span>
-        <div class="slide-subtitle">Combination 2</div>
-        <div class="combo-box bullish">
-          <div class="combo-arrows">📈 📉</div>
-          <div class="combo-title">Flow UP + Price DOWN</div>
-          <div class="combo-desc">Possible accumulation. Bullish divergence — watch for reversal.</div>
-        </div>
-        <div class="signal-grid">
-          <div class="signal-item up">
-            <div class="arrow">↗️</div>
-            <div class="label">Flow Rising</div>
+    <!-- ═══ SLIDE 3 — COMBO 2: Flow UP + Price DOWN ═══ -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — Bullish Divergence</span>
+      <div class="slide slide-3">
+        <div class="slide-content">
+          <div class="section-tag">Combination 2</div>
+          <div class="section-title">Flow UP + Price DOWN</div>
+
+          <div class="arrow-pair">
+            <div class="arrow-indicator up"><span class="arr">/</span> Flow Rising</div>
+            <div class="arrow-indicator down"><span class="arr">\</span> Price Falling</div>
           </div>
-          <div class="signal-item down">
-            <div class="arrow">↘️</div>
-            <div class="label">Price Falling</div>
+
+          <div class="combo-card bullish">
+            <div class="combo-label">Bullish Divergence</div>
+            <div class="combo-headline">Accumulation Detected</div>
+            <div class="combo-desc">Price falls but money flows in. Large players may be accumulating. Watch for a potential reversal to the upside.</div>
           </div>
+
+          <div class="signal-tag diverge">WATCH FOR REVERSAL</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 4: Flow DOWN + Price UP -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 06</span>
-        <div class="slide-subtitle">Combination 3</div>
-        <div class="combo-box bearish">
-          <div class="combo-arrows">📉 📈</div>
-          <div class="combo-title">Flow DOWN + Price UP</div>
-          <div class="combo-desc">Possible distribution. Bearish divergence — watch for reversal.</div>
-        </div>
-        <div class="signal-grid">
-          <div class="signal-item down">
-            <div class="arrow">↘️</div>
-            <div class="label">Flow Falling</div>
+    <!-- ═══ SLIDE 4 — COMBO 3: Flow DOWN + Price UP ═══ -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — Bearish Divergence</span>
+      <div class="slide slide-4">
+        <div class="slide-content">
+          <div class="section-tag">Combination 3</div>
+          <div class="section-title">Flow DOWN + Price UP</div>
+
+          <div class="arrow-pair">
+            <div class="arrow-indicator down"><span class="arr">\</span> Flow Falling</div>
+            <div class="arrow-indicator up"><span class="arr">/</span> Price Rising</div>
           </div>
-          <div class="signal-item up">
-            <div class="arrow">↗️</div>
-            <div class="label">Price Rising</div>
+
+          <div class="combo-card bearish">
+            <div class="combo-label">Bearish Divergence</div>
+            <div class="combo-headline">Distribution Detected</div>
+            <div class="combo-desc">Price rises but money flows out. Large players may be distributing. Watch for a potential reversal to the downside.</div>
           </div>
+
+          <div class="signal-tag warning">CAUTION: DIVERGENCE</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 5: Flow DOWN + Price DOWN -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 06</span>
-        <div class="slide-subtitle">Combination 4</div>
-        <div class="combo-box bearish">
-          <div class="combo-arrows">📉 📉</div>
-          <div class="combo-title">Flow DOWN + Price DOWN</div>
-          <div class="combo-desc">Downtrend may be confirmed. Money flowing out as price falls.</div>
-        </div>
-        <div class="signal-grid">
-          <div class="signal-item down">
-            <div class="arrow">↘️</div>
-            <div class="label">Flow Falling</div>
+    <!-- ═══ SLIDE 5 — KEY / SUMMARY ═══ -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Quick Reference</span>
+      <div class="slide slide-5">
+        <div class="slide-content">
+          <div class="section-tag">Quick Reference</div>
+          <div class="section-title">All Four Combinations</div>
+
+          <div class="key-grid">
+            <div class="key-card">
+              <div class="key-label">Flow + Price</div>
+              <div class="key-text">Both rising = bullish confirmation. Trend has conviction.</div>
+            </div>
+            <div class="key-card">
+              <div class="key-label">Flow + Price</div>
+              <div class="key-text">Flow up, price down = bullish divergence. Accumulation.</div>
+            </div>
+            <div class="key-card">
+              <div class="key-label">Flow + Price</div>
+              <div class="key-text">Flow down, price up = bearish divergence. Distribution.</div>
+            </div>
+            <div class="key-card">
+              <div class="key-label">Flow + Price</div>
+              <div class="key-text">Both falling = bearish confirmation. Downtrend intact.</div>
+            </div>
           </div>
-          <div class="signal-item down">
-            <div class="arrow">↘️</div>
-            <div class="label">Price Falling</div>
+
+          <div class="divergence-note">
+            <p>When flow and price disagree, a reversal may be forming.</p>
           </div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <!-- Slide 6: Key + CTA -->
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 06</span>
-        <div class="divergence-box">
-          <div class="icon">⚠️</div>
-          <h3>Divergence = Watch Closely</h3>
-          <p class="slide-body">When flow and price disagree, a potential reversal may be forming.</p>
+    <!-- ═══ SLIDE 6 — TRUTH + CTA ═══ -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — Truth + CTA</span>
+      <div class="slide slide-6">
+        <div class="slide-content">
+          <div class="truth-tag">The Scales</div>
+          <div class="truth-quote">I weigh the invisible.<br>Pressure does not lie.</div>
+          <div class="truth-divider"></div>
+          <div class="truth-sub">Plutus Flow reveals what price alone cannot.<br>Read the full documentation.</div>
+          <a href="https://docs.signalpilot.io" class="cta-button">View Full Docs</a>
+          <div class="cta-url">docs.signalpilot.io</div>
+          <div class="cine-logo">Signal Pilot</div>
         </div>
-        <a href="https://docs.signalpilot.io/ref-cheatsheets-plutus" class="cta-link">Full Docs</a>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
-  </div>
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 6</span>
-    <button onclick="nextSlide()">Next →</button>
   </div>
 
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0;
-    let exportMode = false;
-
+    const bgToggle = document.getElementById('bg-toggle');
+    const slides = document.querySelectorAll('.slide');
     bgToggle.addEventListener('change', (e) => {
-      videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none');
+      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
     });
 
-    opacitySlider.addEventListener('input', (e) => {
-      document.documentElement.style.setProperty('--video-opacity', e.target.value / 100);
-    });
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    let exportMode = false;
+    let currentExportSlide = 0;
 
-    function toggleExportMode() {
+    exportBtn.addEventListener('click', () => {
       exportMode = !exportMode;
       document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) {
-        currentSlide = 0;
-        updateExportView();
-      }
-    }
+      if (exportMode) { exportBtn.textContent = 'Exit Export Mode'; currentExportSlide = 0; updateExportSlide(); }
+      else { exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); }
+    });
 
-    function updateExportView() {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === currentSlide);
-      });
-      document.getElementById('currentSlide').textContent = currentSlide + 1;
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      updateExportView();
-    }
-
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-      updateExportView();
+    function updateExportSlide() {
+      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
     }
 
     document.addEventListener('keydown', (e) => {
       if (!exportMode) return;
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'Escape') toggleExportMode();
+      if (e.key === 'ArrowRight' || e.key === ' ') { currentExportSlide = (currentExportSlide + 1) % slideWrappers.length; updateExportSlide(); }
+      else if (e.key === 'ArrowLeft') { currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length; updateExportSlide(); }
+      else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); }
     });
   </script>
 </body>
