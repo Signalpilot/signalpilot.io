@@ -563,6 +563,152 @@ async function renderCarousel(page, postDir, postNumber) {
       .slide-warm.slide-1::after {
         width: 60px !important;
       }
+
+      /* ===== Post-specific custom class upscaling ===== */
+
+      /* --- Answer cards (post-033 pattern) --- */
+      .answer-label {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 2px !important;
+      }
+      .answer-title {
+        font-size: clamp(28px, 7cqw, 42px) !important;
+      }
+      .answer-desc {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* --- Risk scenario cards --- */
+      .risk-pct {
+        font-size: clamp(24px, 6cqw, 36px) !important;
+      }
+      .risk-remain {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+      }
+      .risk-desc {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+        line-height: 1.5 !important;
+      }
+      .risk-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        letter-spacing: 1px !important;
+      }
+      .risk-bar {
+        height: clamp(10px, 2cqw, 16px) !important;
+      }
+
+      /* --- Excuse items --- */
+      .excuse-x {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+      }
+      .excuse-text {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+      }
+      .excuse-item {
+        padding: clamp(12px, 2.5cqw, 20px) !important;
+        gap: clamp(10px, 2cqw, 18px) !important;
+      }
+
+      /* --- Formula / Example cards --- */
+      .formula-label, .example-label {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 2px !important;
+      }
+      .formula-exp {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.7 !important;
+      }
+      .ex-key {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .ex-val {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .example-row {
+        padding: clamp(5px, 1cqw, 10px) 0 !important;
+      }
+
+      /* --- VP chart elements (post-043 pattern) --- */
+      .vp-tick {
+        font-size: clamp(10px, 2cqw, 16px) !important;
+      }
+      .vp-pointer {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+      }
+      .vp-bar {
+        height: clamp(8px, 1.5cqw, 14px) !important;
+      }
+
+      /* --- Zone cards (HVN / LVN pattern) --- */
+      .zone-name {
+        font-size: clamp(28px, 7cqw, 42px) !important;
+      }
+      .zone-full {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+      }
+      .zone-desc {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+      }
+      .zone-insight {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+      }
+      .zone-badge {
+        width: clamp(48px, 9cqw, 72px) !important;
+        height: clamp(48px, 9cqw, 72px) !important;
+        font-size: clamp(22px, 5cqw, 36px) !important;
+      }
+
+      /* --- Legend / Annotation labels --- */
+      .legend-text {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .legend-dot {
+        width: clamp(10px, 2cqw, 16px) !important;
+        height: clamp(10px, 2cqw, 16px) !important;
+      }
+      .ann-tag {
+        font-size: clamp(10px, 2cqw, 16px) !important;
+      }
+
+      /* --- Indicator cards (post-040/045/050/055 patterns) --- */
+      .indicator-desc {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+        line-height: 1.5 !important;
+      }
+      .indicator-codename {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .section-sub {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+      }
+      .truth-card-title {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+      }
+      .cta-stat-text {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+      }
+
+      /* --- Param / settings grid (post-060 pattern) --- */
+      .param-key, .param-val {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+      }
+      .section-label {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 2px !important;
+      }
+      .row-setting-name {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+      }
+      .row-cell {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .card-label {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+      }
     </style>
   `;
   html = html.replace('</head>', renderStyles + '</head>');
