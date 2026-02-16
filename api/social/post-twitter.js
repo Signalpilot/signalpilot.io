@@ -1,6 +1,6 @@
 // POST /api/social/post-twitter
 // Cron-triggered: Posts the next Twitter thread
-// Schedule: "0 14 * * 1,3,5" (Mon/Wed/Fri 9AM EST)
+// Schedule: 3x daily at 8AM, 2PM, 8PM UTC (3AM, 9AM, 3PM EST)
 
 import {
   isPaused,
