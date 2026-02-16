@@ -905,6 +905,134 @@ async function renderCarousel(page, postDir, postNumber) {
       .card-label {
         font-size: clamp(14px, 3.5cqw, 20px) !important;
       }
+
+      /* --- Swing Ladder (post-049 pattern) --- */
+      .swing-hilo {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        padding: clamp(6px, 1.2cqw, 12px) clamp(10px, 2cqw, 18px) !important;
+      }
+      .swing-arrow {
+        font-size: clamp(24px, 6cqw, 36px) !important;
+      }
+      .swing-label {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .swing-step {
+        padding: clamp(14px, 2.8cqw, 24px) clamp(16px, 3.2cqw, 28px) !important;
+      }
+
+      /* --- Range Zone (post-049 pattern) --- */
+      .zone-icon {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+      }
+      .zone-label-text {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .zone-arrows {
+        font-size: clamp(40px, 10cqw, 60px) !important;
+      }
+      .zone-text {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+
+      /* --- S/R Zone (post-052 pattern) --- */
+      .sr-zone-badge {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        padding: clamp(6px, 1.2cqw, 10px) clamp(16px, 3.2cqw, 28px) !important;
+      }
+      .sr-action-label {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .sr-action-arrow {
+        font-size: clamp(28px, 7cqw, 42px) !important;
+      }
+      .sr-zone-repeat {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .sr-zone-desc {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .sr-zone-arrows {
+        font-size: clamp(24px, 6cqw, 36px) !important;
+      }
+      .sr-zone-arrows-mid {
+        font-size: clamp(36px, 9cqw, 56px) !important;
+      }
+      .sr-zone-mid-text {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+
+      /* --- Fail Visual (post-053 pattern) --- */
+      .fail-stat-value {
+        font-size: clamp(36px, 9cqw, 56px) !important;
+      }
+      .fail-stat-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .fail-verdict-text {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .fail-verdict-icon {
+        font-size: clamp(28px, 7cqw, 42px) !important;
+      }
+      .fail-balance-label {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+      }
+      .fail-balance-value {
+        font-size: clamp(28px, 7cqw, 42px) !important;
+      }
+      .fail-balance-vs {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .fail-tl-text {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .fail-tl-dot {
+        width: clamp(16px, 3cqw, 24px) !important;
+        height: clamp(16px, 3cqw, 24px) !important;
+      }
+
+      /* --- Cross Diagram (post-059 pattern) --- */
+      .ma-name {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+      }
+      .ma-desc {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .ma-cross-icon {
+        font-size: clamp(24px, 6cqw, 36px) !important;
+      }
+      .cross-meaning-text {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+
+      /* --- Lag Timeline (post-059 pattern) --- */
+      .lag-tl-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .lag-tl-desc {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .lag-tl-zone-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+
+      /* --- Doji Anatomy (post-056 pattern) --- */
+      .da-part {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .da-meaning {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+      }
+      .type-badge {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .confirm-step {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .confirm-arrow {
+        font-size: clamp(24px, 6cqw, 36px) !important;
+      }
     </style>
   `;
   html = html.replace('</head>', renderStyles + '</head>');
