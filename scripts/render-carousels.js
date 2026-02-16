@@ -556,12 +556,12 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* --- Slide-1 column line (thicker for grid visibility) --- */
       .s1::after {
-        width: 32px !important;
+        width: 60px !important;
       }
       /* Old architecture slide-1 line */
       .slide-teal.slide-1::after,
       .slide-warm.slide-1::after {
-        width: 32px !important;
+        width: 60px !important;
       }
     </style>
   `;
