@@ -18115,7 +18115,7 @@ Free calculator in bio
 | 17 | 49-51 | 051 Marketing | 052 EDU | 050 Docs | 📋 Pending |
 | 18 | 52-54 | 054 Quote | 056 EDU | 053 Blog | 📋 Pending |
 | 19 | 55-57 | 055 Product | 059 EDU | 057 Blog | 📋 Pending |
-| 20 | 58-60 | 065 Product | 059 EDU | 060 Docs | 📋 Pending |
+| 20 | 58-60 | 065 Product | 062 EDU | 060 Docs | 📋 Pending |
 | 21 | 61-63 | 061 Marketing | 062 EDU | 063 Blog | 📋 Pending |
 | 22 | 64-66 | 064 Quote | 066 EDU | 058 Chronicle | 📋 Pending |
 | 23 | 67-69 | 067 Blog | 069 EDU | 068 Chronicle | 📋 Pending |
