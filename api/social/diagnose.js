@@ -98,7 +98,18 @@ export default async function handler(req, res) {
       }
     }
   } catch (err) {
-    report.checks.instagramApi = { status: 'FAIL', error: err.message };
+    const rawToken = process.env.INSTAGRAM_ACCESS_TOKEN || '';
+    report.checks.instagramApi = {
+      status: 'FAIL',
+      error: err.message,
+      tokenDebug: {
+        length: rawToken.length,
+        prefix: rawToken.substring(0, 10),
+        suffix: rawToken.substring(rawToken.length - 6),
+        hasWhitespace: rawToken !== rawToken.trim(),
+        hasNewline: /[\r\n]/.test(rawToken),
+      },
+    };
     report.errors.push(`Instagram API failed: ${err.message}`);
   }
 
