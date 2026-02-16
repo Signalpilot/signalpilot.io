@@ -372,6 +372,187 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(20px, 5cqw, 30px) !important;
         padding: 2% 5% !important;
       }
+
+      /* ===== Gold Standard Architecture — class-specific upscaling ===== */
+
+      /* Section tags & labels (mono uppercase) */
+      .hook-tag, .sec-tag, .lesson-tag, .cta-badge {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        letter-spacing: 3px !important;
+      }
+
+      /* Section titles (.sec-title is the gold standard equivalent of .section-title) */
+      .sec-title {
+        font-size: clamp(32px, 8cqw, 52px) !important;
+        text-align: center !important;
+      }
+
+      /* --- Definition cards --- */
+      .def-label {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        letter-spacing: 2px !important;
+      }
+      .def-quote {
+        font-size: clamp(20px, 5cqw, 28px) !important;
+      }
+      .def-text {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* --- Factor / feature cards (2x2 / 2x3 grids) --- */
+      .factor-card .fc-name {
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
+      }
+      .factor-card .fc-desc {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+        line-height: 1.5 !important;
+      }
+      .factor-card .fc-tag {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        padding: 4px 12px !important;
+      }
+      .factor-card .fc-let {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+      }
+      .factor-card .fc-icon {
+        width: clamp(32px, 6cqw, 48px) !important;
+        height: clamp(32px, 6cqw, 48px) !important;
+      }
+
+      /* --- Comparison cards --- */
+      .compare-card .cc-label {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 2px !important;
+      }
+      .compare-card .cc-quote {
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
+      }
+      .compare-card .cc-desc {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* --- Truth cards --- */
+      .truth-card .tc-title {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+      }
+      .truth-card .tc-desc {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+        line-height: 1.5 !important;
+      }
+      .truth-quote {
+        font-size: clamp(26px, 6.5cqw, 38px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* --- Step flow --- */
+      .step-name {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+      }
+      .step-desc {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+        line-height: 1.5 !important;
+      }
+      .step-ring .s-num {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+      }
+      .step-ring {
+        width: clamp(36px, 7cqw, 52px) !important;
+        height: clamp(36px, 7cqw, 52px) !important;
+      }
+
+      /* --- Icon circles --- */
+      .icon-circle {
+        width: clamp(42px, 8cqw, 64px) !important;
+        height: clamp(42px, 8cqw, 64px) !important;
+      }
+      .icon-circle .ic-letter {
+        font-size: clamp(20px, 5cqw, 32px) !important;
+      }
+
+      /* --- Warning / Alert / Insight boxes --- */
+      .warn-label, .alert-label, .insight-label {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 2px !important;
+      }
+      .warn-text, .alert-text, .insight-text {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.55 !important;
+      }
+
+      /* --- Stack / layer visualization --- */
+      .stack-bar {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        height: clamp(28px, 5.5cqw, 42px) !important;
+      }
+      .stack-result {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        height: clamp(32px, 6cqw, 48px) !important;
+      }
+      .stack-arrow {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+      }
+
+      /* --- CTA slide elements --- */
+      .cta-sub {
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
+        line-height: 1.5 !important;
+      }
+      .stat-cell .sv {
+        font-size: clamp(28px, 7cqw, 42px) !important;
+      }
+      .stat-cell .sl {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+      }
+      .pill {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        padding: 5px 14px !important;
+      }
+      .cta-url {
+        font-size: clamp(22px, 5.5cqw, 30px) !important;
+      }
+      .cta-hint {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+      }
+
+      /* --- Divergence visual elements --- */
+      .da-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .diverge-vs {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+      }
+      .diverge-arrow .da-line {
+        height: clamp(24px, 5cqw, 40px) !important;
+        width: clamp(4px, 0.8cqw, 6px) !important;
+      }
+
+      /* --- Volume bar / flow ribbon labels --- */
+      .flow-ribbon-labels {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .flow-ribbon {
+        height: clamp(22px, 4.5cqw, 36px) !important;
+      }
+      .vol-bar-dot {
+        font-size: clamp(8px, 2cqw, 14px) !important;
+      }
+
+      /* --- Progress bars (make thicker) --- */
+      .prog-bar {
+        height: clamp(5px, 1cqw, 8px) !important;
+      }
+
+      /* --- Orb / orb-sm letter --- */
+      .orb-sm .orb-letter {
+        font-size: clamp(28px, 7cqw, 44px) !important;
+      }
+
+      /* --- Scales labels inside orb --- */
+      .scales-label {
+        font-size: clamp(8px, 1.6cqw, 12px) !important;
+      }
     </style>
   `;
   html = html.replace('</head>', renderStyles + '</head>');
