@@ -616,6 +616,28 @@ async function renderCarousel(page, postDir, postNumber) {
         height: clamp(10px, 2cqw, 16px) !important;
       }
 
+      /* --- Scenario cards (post-044 pattern) --- */
+      .scenario-label {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 2px !important;
+      }
+      .scenario-desc {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+        color: var(--txt2) !important;
+      }
+      .scenario-desc em {
+        color: var(--txt) !important;
+      }
+      .scenario-badge {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        padding: clamp(4px, 0.8cqw, 7px) clamp(8px, 1.6cqw, 14px) !important;
+      }
+      .scenario-insight-text {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+      }
+
       /* --- Excuse items --- */
       .excuse-x {
         font-size: clamp(18px, 4.5cqw, 26px) !important;
