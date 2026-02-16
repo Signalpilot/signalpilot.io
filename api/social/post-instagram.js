@@ -71,7 +71,10 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, skipped: true, reason: 'No more posts in queue' });
     }
 
-    // Check retry limit
+    // Check retry limit (force=true clears retries so manual posts always attempt)
+    if (force) {
+      await clearRetryCount('instagram', postOrder);
+    }
     if (await shouldSkipPost('instagram', postOrder)) {
       await setLastPosted('instagram', postOrder);
       await logError({
