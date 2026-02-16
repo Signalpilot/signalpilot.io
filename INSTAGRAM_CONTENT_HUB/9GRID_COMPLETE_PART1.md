@@ -3327,9 +3327,9 @@ Plan the exit before you enter.
 
 ---
 
-## ⚪ NEUTRAL | POST 043 | EDU: Volume Profile Guide
+## 🔵 TEAL | POST 043 | Docs: Volume Profile Guide
 
-**Type:** Education Hub | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+**Type:** Docs/Cheatsheet | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
 
 ### INSTAGRAM — Carousel (8 Slides)
 
@@ -18109,7 +18109,7 @@ Free calculator in bio
 | 11 | 31-33 | 028 Product | 032 EDU | 037 Blog | ⏳ In Canva |
 | 12 | 34-36 | 034 Quote | 033 EDU | 038 Chronicle | ⏳ In Canva |
 | 13 | 37-39 | 035 Product | 036 EDU | 040 Docs | 📋 Pending |
-| 14 | 40-42 | 041 Marketing | 039 EDU | 043 Blog | 📋 Pending |
+| 14 | 40-42 | 041 Marketing | 039 EDU | 043 Docs | 📋 Pending |
 | 15 | 43-45 | 044 Quote | 042 EDU | 047 Blog | 📋 Pending |
 | 16 | 46-48 | 045 Product | 046 EDU | 048 Chronicle | 📋 Pending |
 | 17 | 49-51 | 051 Marketing | 049 EDU | 050 Docs | 📋 Pending |
