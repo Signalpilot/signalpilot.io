@@ -1317,78 +1317,72 @@ async function renderCarousel(page, postDir, postNumber) {
         height: 3px !important;
       }
 
-      /* Quote pair cards */
-      .qc-text {
+      /* Obsession block (post-044 v2 — slide 2) */
+      .obsess-label {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        letter-spacing: 3px !important;
+      }
+      .obsess-text {
         font-size: clamp(24px, 5.5cqw, 38px) !important;
         line-height: 1.4 !important;
       }
-      .quote-attrib {
-        font-size: clamp(16px, 4cqw, 22px) !important;
+      .obsess-verdict-text {
+        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        line-height: 1.4 !important;
       }
 
-      /* Scenario cards */
-      .sc-label {
-        font-size: clamp(14px, 3.5cqw, 20px) !important;
-        letter-spacing: 2px !important;
+      /* Graveyard cards (post-044 v2 — slide 3) */
+      .grave-pair {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
       }
-      .sc-desc {
+      .grave-result {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        padding: clamp(4px, 0.8cqw, 7px) clamp(8px, 1.6cqw, 14px) !important;
+      }
+      .grave-story {
         font-size: clamp(16px, 4cqw, 22px) !important;
         line-height: 1.45 !important;
       }
-      .sc-badge {
-        font-size: clamp(12px, 3cqw, 18px) !important;
-        padding: clamp(4px, 0.8cqw, 7px) clamp(8px, 1.6cqw, 14px) !important;
+      .grave-cause {
+        font-size: clamp(13px, 3cqw, 18px) !important;
+        letter-spacing: 2px !important;
       }
-      .sc-truth-text {
+      .grave-truth-text {
         font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.4 !important;
       }
-      .sc-bar {
-        height: clamp(5px, 1cqw, 8px) !important;
-      }
 
-      /* Math panels (Entry vs Exit) */
-      .mp-label {
+      /* Scale visual (post-044 v2 — slide 4) */
+      .scale-pan-label {
         font-size: clamp(16px, 4cqw, 22px) !important;
         letter-spacing: 3px !important;
       }
-      .mp-pct {
-        font-size: clamp(32px, 7.5cqw, 52px) !important;
+      .scale-pan-symbol {
+        font-size: clamp(22px, 5cqw, 34px) !important;
       }
-      .mp-desc {
-        font-size: clamp(16px, 4cqw, 22px) !important;
+      .scale-pan-icon {
+        width: clamp(50px, 10cqw, 80px) !important;
+        height: clamp(50px, 10cqw, 80px) !important;
+      }
+      .scale-item {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
         line-height: 1.4 !important;
       }
-      .mp-ring {
-        width: clamp(70px, 14cqw, 110px) !important;
-        height: clamp(70px, 14cqw, 110px) !important;
-      }
-      .mp-vs {
-        font-size: clamp(14px, 3.5cqw, 22px) !important;
-        width: clamp(40px, 8cqw, 60px) !important;
-        height: clamp(40px, 8cqw, 60px) !important;
-      }
-      .math-insight {
+      .scale-insight {
         font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.5 !important;
       }
 
-      /* Exit checklist (2x2 grid) */
-      .exit-orb-letter {
-        font-size: clamp(28px, 7cqw, 44px) !important;
+      /* Shift columns (post-044 v2 — slide 5) */
+      .shift-col-header {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        letter-spacing: 3px !important;
       }
-      .ck-name {
-        font-size: clamp(18px, 4.5cqw, 28px) !important;
-      }
-      .ck-desc {
+      .shift-item-text {
         font-size: clamp(15px, 3.5cqw, 22px) !important;
-        line-height: 1.45 !important;
+        line-height: 1.4 !important;
       }
-      .ck-icon {
-        width: clamp(28px, 5.5cqw, 42px) !important;
-        height: clamp(28px, 5.5cqw, 42px) !important;
-      }
-      .exit-truth-text {
+      .shift-truth-text {
         font-size: clamp(22px, 5.5cqw, 34px) !important;
         line-height: 1.4 !important;
       }
