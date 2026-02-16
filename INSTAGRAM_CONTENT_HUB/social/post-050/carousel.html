@@ -15,11 +15,14 @@
       --text-secondary: rgba(255,255,255,0.7);
       --text-muted: rgba(255,255,255,0.4);
       --border-subtle: rgba(255,255,255,0.1);
+      --accent-teal: #5eead4;
+      --accent-teal-dim: rgba(94,234,212,0.3);
       --accent-orange: #f59e0b;
-      --bull: #22c55e;
-      --bear: #ef4444;
-      --blue: #3b82f6;
-      --teal: #5eead4;
+      --accent-gold: #c9a962;
+      --accent-red: #f87171;
+      --accent-green: #4ade80;
+      --accent-purple: #a855f7;
+      --accent-blue: #60a5fa;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -34,8 +37,7 @@
     body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
     .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
     .page-title { text-align: center; margin-bottom: 2rem; }
     .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
     .page-title p { color: var(--text-muted); font-size: 0.875rem; }
@@ -44,295 +46,518 @@
     .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
     .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
     .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5%; }
+    .slide-content { position: relative; z-index: 3; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
 
-    /* ═══════════════════════════════════════════
-       SLIDE 1 — Cinematic Hook (TEAL accent, LEFT bar)
-       ═══════════════════════════════════════════ */
+    /* ── TEAL THEME ── */
     .slide-teal { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
     .slide-teal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-teal.slide-1::after { content: ''; position: absolute; top: 0; left: 0; width: 18px; height: 100%; background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%); z-index: 5; }
+    .slide-teal.slide-1::after { content: ''; position: absolute; top: 0; left: 15px; width: 50px; height: 100%; background: #5eead4; z-index: 5; }
     .slide-teal .slide-content { z-index: 3; }
     .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
-    .slide-1 .cine-label { font-size: clamp(0.5rem, 1.6cqw, 0.875rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94,234,212,0.9); margin-bottom: 8%; }
-    .slide-1 .hook-main { font-size: clamp(1.4rem, 4.5cqw, 2.5rem); font-weight: 600; line-height: 1.2; color: rgba(255,255,255,0.95); margin-bottom: 4%; }
-    .slide-1 .cine-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent); margin-bottom: 4%; }
-    .slide-1 .hook-sub { font-size: clamp(0.65rem, 2cqw, 1.1rem); font-weight: 300; letter-spacing: 0.05em; color: rgba(255,255,255,0.35); line-height: 1.6; }
 
-    /* ═══════════════════════════════════════════
-       STEP SLIDES — Shared layout
-       ═══════════════════════════════════════════ */
-    .step-stage {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Step number circle */
-    .step-circle {
-      width: clamp(40px, 8cqw, 80px);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 4%;
+    /* ── BADGE ── */
+    .mkt-badge {
       font-family: var(--font-mono);
-      font-size: clamp(16px, 3.2cqw, 32px);
-      font-weight: 700;
-    }
-
-    .step-1-circle { background: rgba(59,130,246,0.15); border: 2px solid rgba(59,130,246,0.4); color: var(--blue); }
-    .step-2-circle { background: rgba(94,234,212,0.15); border: 2px solid rgba(94,234,212,0.4); color: var(--teal); }
-    .step-3-circle { background: rgba(245,158,11,0.15); border: 2px solid rgba(245,158,11,0.4); color: var(--accent-orange); }
-    .step-4-circle { background: rgba(34,197,94,0.15); border: 2px solid rgba(34,197,94,0.4); color: var(--bull); }
-
-    .step-title {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.6cqw, 38px);
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 4%;
-      text-align: center;
-    }
-
-    .step-desc {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 82%;
-      text-align: center;
-      margin-bottom: 5%;
-    }
-
-    /* Checklist items within step slides */
-    .step-checks {
-      width: 80%;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(6px, 1.2cqw, 12px);
-    }
-
-    .step-check {
-      display: flex;
-      align-items: center;
-      gap: clamp(8px, 1.6cqw, 16px);
-      font-size: clamp(9px, 1.6cqw, 16px);
-      color: var(--text-secondary);
-    }
-
-    /* CSS-only checkbox */
-    .check-box {
-      width: clamp(14px, 2.8cqw, 28px);
-      height: clamp(14px, 2.8cqw, 28px);
-      border-radius: clamp(3px, 0.6cqw, 6px);
-      border: 1.5px solid rgba(255,255,255,0.2);
-      flex-shrink: 0;
-      position: relative;
-    }
-
-    /* Filled check */
-    .check-box.checked {
-      background: rgba(34,197,94,0.15);
-      border-color: rgba(34,197,94,0.5);
-    }
-
-    .check-box.checked::after {
-      content: '✓';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: var(--bull);
-      font-size: clamp(9px, 1.6cqw, 16px);
-      font-weight: 700;
-    }
-
-    /* Step-specific icon area */
-    .step-icon-box {
-      width: 70%;
-      aspect-ratio: 16 / 6;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 5%;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: clamp(8px, 1.6cqw, 16px);
-    }
-
-    .step-icon-text {
-      font-family: var(--font-mono);
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-    }
-
-    /* Step badge colors */
-    .s1-accent { color: var(--blue); }
-    .s2-accent { color: var(--teal); }
-    .s3-accent { color: var(--accent-orange); }
-    .s4-accent { color: var(--bull); }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 5 — Progress Roadmap
-       ═══════════════════════════════════════════ */
-    .roadmap-stage {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .roadmap-title {
-      font-family: var(--font-serif);
-      font-size: clamp(16px, 3.2cqw, 34px);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 5%;
-      text-align: center;
-    }
-
-    .roadmap-steps {
-      width: 82%;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      position: relative;
-    }
-
-    /* Vertical progress line */
-    .roadmap-steps::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: clamp(14px, 2.8cqw, 28px);
-      width: 2px;
-      height: 100%;
-      background: linear-gradient(180deg, var(--blue), var(--teal), var(--accent-orange), var(--bull));
-      opacity: 0.3;
-      transform: translateX(-50%);
-    }
-
-    .road-item {
-      display: flex;
-      align-items: center;
-      gap: clamp(10px, 2cqw, 20px);
-      padding: clamp(8px, 1.6cqw, 16px) 0;
-      position: relative;
-    }
-
-    .road-dot {
-      width: clamp(10px, 2cqw, 20px);
-      height: clamp(10px, 2cqw, 20px);
-      border-radius: 50%;
-      flex-shrink: 0;
-      z-index: 2;
-      position: relative;
-    }
-
-    .road-dot::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      border: 1.5px solid;
-      opacity: 0.3;
-    }
-
-    .road-dot.rd-blue { background: var(--blue); }
-    .road-dot.rd-blue::after { border-color: var(--blue); }
-    .road-dot.rd-teal { background: var(--teal); }
-    .road-dot.rd-teal::after { border-color: var(--teal); }
-    .road-dot.rd-orange { background: var(--accent-orange); }
-    .road-dot.rd-orange::after { border-color: var(--accent-orange); }
-    .road-dot.rd-green { background: var(--bull); }
-    .road-dot.rd-green::after { border-color: var(--bull); }
-
-    .road-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(1px, 0.2cqw, 2px);
-    }
-
-    .road-name {
-      font-family: var(--font-mono);
-      font-size: clamp(9px, 1.6cqw, 16px);
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .road-detail {
-      font-size: clamp(8px, 1.3cqw, 13px);
-      color: var(--text-muted);
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 6 — CTA
-       ═══════════════════════════════════════════ */
-    .cta-stage {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-icon { font-size: clamp(40px, 8cqw, 86px); margin-bottom: 5%; }
-
-    .cta-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 3%;
-    }
-
-    .cta-accent { color: var(--blue); }
-
-    .cta-body {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 80%;
-      margin-bottom: 6%;
-    }
-
-    .cta-box {
-      background: linear-gradient(135deg, rgba(94,234,212,0.15) 0%, rgba(94,234,212,0.05) 100%);
-      border: 2px solid var(--teal);
-      border-radius: 14px;
-      padding: 3% 6%;
-    }
-
-    .cta-box-text { font-size: clamp(11px, 2cqw, 22px); font-weight: 500; color: var(--text-primary); margin-bottom: 1%; }
-    .cta-link { font-size: clamp(10px, 1.7cqw, 18px); font-weight: 600; color: var(--teal); }
-
-    .slide-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
+      font-size: clamp(8px, 1.2cqw, 12px);
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: rgba(94,234,212,0.4);
+      color: rgba(94,234,212,0.9);
+      padding: clamp(3px, 0.6cqw, 7px) clamp(10px, 2cqw, 20px);
+      border: 1px solid rgba(94,234,212,0.3);
+      border-radius: clamp(3px, 0.6cqw, 6px);
+      background: rgba(94,234,212,0.06);
+      margin-bottom: 4%;
+    }
+
+    /* ── ORB (Compass/Checklist motif) ── */
+    .orb {
+      width: clamp(100px, 20cqw, 200px);
+      height: clamp(100px, 20cqw, 200px);
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.1) 40%, rgba(255,255,255,0.03) 70%, transparent 100%);
+      border: 2px solid rgba(94,234,212,0.25);
+      box-shadow: 0 0 50px rgba(94,234,212,0.12), 0 0 100px rgba(94,234,212,0.04), inset 0 0 30px rgba(94,234,212,0.06);
+    }
+    .orb::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(94,234,212,0.15);
+    }
+    .orb::after {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px dashed rgba(94,234,212,0.12);
+    }
+
+    /* 4 step nodes around the orb */
+    .orb-node {
+      position: absolute;
+      width: clamp(8px, 1.5cqw, 14px);
+      height: clamp(8px, 1.5cqw, 14px);
+      border-radius: 50%;
       z-index: 2;
+    }
+    .orb-node:nth-child(1) { top: 5%; left: 50%; transform: translateX(-50%); background: rgba(96,165,250,0.9); box-shadow: 0 0 8px rgba(96,165,250,0.5); }
+    .orb-node:nth-child(2) { top: 50%; right: 5%; transform: translateY(-50%); background: rgba(94,234,212,0.9); box-shadow: 0 0 8px rgba(94,234,212,0.5); }
+    .orb-node:nth-child(3) { bottom: 5%; left: 50%; transform: translateX(-50%); background: rgba(245,158,11,0.9); box-shadow: 0 0 8px rgba(245,158,11,0.5); }
+    .orb-node:nth-child(4) { top: 50%; left: 5%; transform: translateY(-50%); background: rgba(74,222,128,0.9); box-shadow: 0 0 8px rgba(74,222,128,0.5); }
+
+    .orb-center {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5.5cqw, 56px);
+      font-weight: 700;
+      color: var(--accent-teal);
+      position: relative;
+      z-index: 3;
+    }
+
+    .orb-label {
+      position: absolute;
+      bottom: -2%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 1cqw, 10px);
+      color: rgba(94,234,212,0.7);
+      letter-spacing: 0.2em;
+      z-index: 3;
       white-space: nowrap;
     }
 
-    .cine-logo {
+    /* ── TITLES ── */
+    .mkt-title {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 4.8cqw, 50px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 3%;
+    }
+    .mkt-title em { color: var(--accent-teal); font-style: italic; }
+
+    .mkt-subtitle {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 1.7cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 85%;
+      margin-bottom: 3%;
+    }
+
+    .mkt-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
+      margin-bottom: 4%;
+    }
+
+    .inner-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.5cqw, 36px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 4%;
+    }
+    .inner-heading em { color: var(--accent-teal); font-style: italic; }
+
+    .section-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 14px);
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 4%;
+      max-width: 90%;
+    }
+
+    /* ── ICON CIRCLES ── */
+    .icon-circle {
+      width: clamp(34px, 6.5cqw, 56px);
+      height: clamp(34px, 6.5cqw, 56px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .icon-circle::before {
+      content: '';
       position: absolute;
-      bottom: 8%;
+      inset: 4px;
+      border-radius: 50%;
+    }
+    .icon-circle .ic-letter {
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.5cqw, 24px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ic-teal { background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%); border: 1.5px solid rgba(94,234,212,0.3); box-shadow: 0 0 18px rgba(94,234,212,0.1); }
+    .ic-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .ic-teal .ic-letter { color: var(--accent-teal); }
+
+    .ic-blue { background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%); border: 1.5px solid rgba(96,165,250,0.3); box-shadow: 0 0 18px rgba(96,165,250,0.1); }
+    .ic-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .ic-blue .ic-letter { color: var(--accent-blue); }
+
+    .ic-orange { background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%); border: 1.5px solid rgba(245,158,11,0.3); box-shadow: 0 0 18px rgba(245,158,11,0.1); }
+    .ic-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .ic-orange .ic-letter { color: var(--accent-orange); }
+
+    .ic-green { background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%); border: 1.5px solid rgba(74,222,128,0.3); box-shadow: 0 0 18px rgba(74,222,128,0.1); }
+    .ic-green::before { border: 1px solid rgba(74,222,128,0.12); }
+    .ic-green .ic-letter { color: var(--accent-green); }
+
+    .ic-purple { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%); border: 1.5px solid rgba(168,85,247,0.3); box-shadow: 0 0 18px rgba(168,85,247,0.1); }
+    .ic-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .ic-purple .ic-letter { color: var(--accent-purple); }
+
+    .ic-gold { background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%); border: 1.5px solid rgba(201,169,98,0.3); box-shadow: 0 0 18px rgba(201,169,98,0.1); }
+    .ic-gold::before { border: 1px solid rgba(201,169,98,0.12); }
+    .ic-gold .ic-letter { color: var(--accent-gold); }
+
+    .ic-red { background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%); border: 1.5px solid rgba(248,113,113,0.3); box-shadow: 0 0 18px rgba(248,113,113,0.1); }
+    .ic-red::before { border: 1px solid rgba(248,113,113,0.12); }
+    .ic-red .ic-letter { color: var(--accent-red); }
+
+    /* ── INDICATOR CARDS ── */
+    .indicator-grid {
+      width: 92%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 0.7cqw, 8px);
+      margin-bottom: 4%;
+    }
+    .indicator-card {
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94,234,212,0.12);
+      background: rgba(94,234,212,0.03);
+      padding: clamp(6px, 1.1cqw, 13px) 4%;
+    }
+    .indicator-info { flex: 1; }
+    .indicator-name {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.5cqw, 16px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1%;
+    }
+    .indicator-codename {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.9cqw, 10px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      margin-bottom: 2%;
+    }
+    .indicator-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.05cqw, 11px);
+      color: var(--text-secondary);
+      line-height: 1.35;
+    }
+    .indicator-bar {
+      width: 100%;
+      height: clamp(2px, 0.35cqw, 4px);
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      margin-top: 3%;
+      overflow: hidden;
+    }
+    .indicator-bar-fill { height: 100%; border-radius: 2px; }
+    .ibf-teal { background: linear-gradient(90deg, rgba(94,234,212,0.5), rgba(94,234,212,0.15)); }
+    .ibf-blue { background: linear-gradient(90deg, rgba(96,165,250,0.5), rgba(96,165,250,0.15)); }
+    .ibf-orange { background: linear-gradient(90deg, rgba(245,158,11,0.5), rgba(245,158,11,0.15)); }
+    .ibf-green { background: linear-gradient(90deg, rgba(74,222,128,0.5), rgba(74,222,128,0.15)); }
+    .ibf-purple { background: linear-gradient(90deg, rgba(168,85,247,0.5), rgba(168,85,247,0.15)); }
+    .ibf-gold { background: linear-gradient(90deg, rgba(201,169,98,0.5), rgba(201,169,98,0.15)); }
+
+    /* ── STATS ROW ── */
+    .stats-row {
+      width: 92%;
+      display: flex;
+      justify-content: space-between;
+      gap: clamp(4px, 0.8cqw, 10px);
+      margin-bottom: 3%;
+    }
+    .stat-pill {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(1px, 0.3cqw, 4px);
+      padding: clamp(4px, 0.8cqw, 10px) 0;
+      border-radius: clamp(4px, 0.8cqw, 8px);
+      border: 1px solid rgba(94,234,212,0.1);
+      background: rgba(94,234,212,0.02);
+    }
+    .stat-val {
+      font-family: var(--font-mono);
+      font-size: clamp(11px, 2cqw, 20px);
+      font-weight: 600;
+      color: var(--accent-teal);
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: clamp(5px, 0.8cqw, 9px);
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ── FEATURE CARDS (2x3) ── */
+    .feature-grid {
+      width: 92%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1cqw, 12px);
+      margin-bottom: 4%;
+    }
+    .feature-card {
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94,234,212,0.12);
+      background: rgba(94,234,212,0.03);
+      padding: 5% 5%;
+      display: flex;
+      align-items: center;
+      gap: 8%;
+    }
+    .feature-ic {
+      width: clamp(26px, 4.5cqw, 40px);
+      height: clamp(26px, 4.5cqw, 40px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .feature-ic::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+    }
+    .fic-teal { background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%); border: 1.5px solid rgba(94,234,212,0.3); }
+    .fic-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .fic-blue { background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%); border: 1.5px solid rgba(96,165,250,0.3); }
+    .fic-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .fic-orange { background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%); border: 1.5px solid rgba(245,158,11,0.3); }
+    .fic-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .fic-green { background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%); border: 1.5px solid rgba(74,222,128,0.3); }
+    .fic-green::before { border: 1px solid rgba(74,222,128,0.12); }
+    .fic-purple { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%); border: 1.5px solid rgba(168,85,247,0.3); }
+    .fic-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .fic-gold { background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%); border: 1.5px solid rgba(201,169,98,0.3); }
+    .fic-gold::before { border: 1px solid rgba(201,169,98,0.12); }
+    .fic-letter {
+      font-family: var(--font-serif);
+      font-size: clamp(11px, 1.8cqw, 18px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .fic-teal .fic-letter { color: var(--accent-teal); }
+    .fic-blue .fic-letter { color: var(--accent-blue); }
+    .fic-orange .fic-letter { color: var(--accent-orange); }
+    .fic-green .fic-letter { color: var(--accent-green); }
+    .fic-purple .fic-letter { color: var(--accent-purple); }
+    .fic-gold .fic-letter { color: var(--accent-gold); }
+    .feature-text {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.2cqw, 13px);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* ── TRUTH SLIDE ── */
+    .truth-orb {
+      width: clamp(60px, 12cqw, 120px);
+      height: clamp(60px, 12cqw, 120px);
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.1) 40%, rgba(255,255,255,0.03) 70%, transparent 100%);
+      border: 2px solid rgba(94,234,212,0.25);
+      box-shadow: 0 0 40px rgba(94,234,212,0.1), 0 0 80px rgba(94,234,212,0.03);
+    }
+    .truth-orb::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(94,234,212,0.15);
+    }
+    .truth-orb-letter {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 46px);
+      font-weight: 700;
+      color: var(--accent-teal);
+      position: relative;
+      z-index: 1;
+    }
+
+    .truth-grid {
+      width: 92%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1.2cqw, 14px);
+      margin-bottom: 4%;
+    }
+    .truth-card {
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94,234,212,0.12);
+      background: rgba(94,234,212,0.03);
+      padding: 5% 6%;
+    }
+    .truth-dot {
+      width: clamp(5px, 0.9cqw, 9px);
+      height: clamp(5px, 0.9cqw, 9px);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-bottom: clamp(4px, 0.7cqw, 8px);
+    }
+    .td-teal { background: var(--accent-teal); box-shadow: 0 0 8px rgba(94,234,212,0.3); }
+    .td-blue { background: var(--accent-blue); box-shadow: 0 0 8px rgba(96,165,250,0.3); }
+    .td-orange { background: var(--accent-orange); box-shadow: 0 0 8px rgba(245,158,11,0.3); }
+    .td-green { background: var(--accent-green); box-shadow: 0 0 8px rgba(74,222,128,0.3); }
+    .truth-card-title {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 14px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+      line-height: 1.3;
+    }
+    .truth-card-text {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.05cqw, 11px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .philosophy-box {
+      width: 92%;
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94,234,212,0.15);
+      background: rgba(94,234,212,0.03);
+      padding: 4% 5%;
+      text-align: center;
+    }
+    .philosophy-text {
+      font-family: var(--font-serif);
+      font-size: clamp(10px, 1.8cqw, 18px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .philosophy-text em { color: var(--accent-teal); font-style: italic; }
+
+    /* ── CTA SLIDE ── */
+    .cta-badge {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 11px);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(94,234,212,0.7);
+      margin-bottom: 4%;
+    }
+    .cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 46px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 4%;
+    }
+    .cta-title em { color: var(--accent-teal); font-style: italic; }
+
+    .cta-stat-grid {
+      width: 85%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(4px, 0.8cqw, 10px);
+      margin-bottom: 5%;
+    }
+    .cta-stat {
+      display: flex;
+      align-items: center;
+      gap: 6%;
+      padding: clamp(4px, 0.7cqw, 8px) clamp(6px, 1.2cqw, 14px);
+      border-radius: clamp(4px, 0.7cqw, 8px);
+      border: 1px solid rgba(94,234,212,0.1);
+      background: rgba(94,234,212,0.02);
+    }
+    .cta-stat-num {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.7cqw, 18px);
+      font-weight: 600;
+      color: var(--accent-teal);
+    }
+    .cta-stat-text {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.9cqw, 10px);
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .cta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(4px, 0.7cqw, 8px);
+      margin-bottom: 5%;
+      max-width: 90%;
+    }
+    .cta-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.85cqw, 9px);
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      padding: clamp(2px, 0.4cqw, 5px) clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: clamp(3px, 0.5cqw, 6px);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .cta-box {
+      padding: clamp(8px, 1.4cqw, 16px) clamp(20px, 4cqw, 44px);
+      border: 1px solid rgba(94,234,212,0.3);
+      border-radius: clamp(4px, 0.8cqw, 8px);
+      background: rgba(94,234,212,0.06);
+    }
+    .cta-url {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.6cqw, 17px);
+      letter-spacing: 0.12em;
+      color: var(--accent-teal);
+    }
+
+    /* ── LOGO ── */
+    .slide-logo {
+      position: absolute;
+      bottom: 4%;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Gugi', sans-serif;
@@ -347,166 +572,347 @@
 </head>
 <body>
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
-    <h1>Post 050 — Quick Start Checklist</h1>
-    <p>6 slides · Documentation</p>
+    <h1>Post 050 &mdash; Quick Start Checklist</h1>
+    <p>6 slides &middot; Documentation &middot; Getting Started</p>
   </div>
 
   <div class="carousel-grid">
 
-    <!-- ══════ SLIDE 1: Cinematic Hook ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 1 — HOOK: Compass Orb + Title
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <span class="slide-label">Slide 1 — Hook</span>
       <div class="slide slide-teal slide-1">
         <div class="slide-content">
-          <div class="cine-label">GUIDE</div>
-          <div class="hook-main">Your Quick Start<br>Checklist</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">From zero to live trading in four steps.</p>
-          <div class="cine-logo">Signal Pilot</div>
+          <div class="mkt-badge">Guide</div>
+
+          <div class="orb">
+            <div class="orb-node"></div>
+            <div class="orb-node"></div>
+            <div class="orb-node"></div>
+            <div class="orb-node"></div>
+            <span class="orb-center">4</span>
+            <span class="orb-label">QUICK START</span>
+          </div>
+
+          <h2 class="mkt-title">Your <em>Quick Start</em> Checklist</h2>
+          <div class="mkt-divider"></div>
+          <p class="mkt-subtitle">From zero to live trading in four steps. No guesswork, no overwhelm.</p>
+
+          <div class="stats-row" style="margin-top: 2%;">
+            <div class="stat-pill">
+              <span class="stat-val">4</span>
+              <span class="stat-label">Steps</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">82</span>
+              <span class="stat-label">Lessons</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">0</span>
+              <span class="stat-label">Cost</span>
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 2: Step 1 — Add Indicators ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 2 — Steps 1 & 2 (Indicator Cards)
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Step 1</span>
+      <span class="slide-label">Slide 2 — Steps 1&ndash;2</span>
       <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
-          <div class="step-stage">
-            <div class="step-circle step-1-circle">1</div>
-            <h2 class="step-title">Add Indicators</h2>
-            <div class="step-icon-box">
-              <span class="step-icon-text">TRADINGVIEW → INDICATORS → <span class="s1-accent">SIGNAL PILOT</span></span>
+          <h3 class="inner-heading">The First <em>Two</em> Steps</h3>
+          <p class="section-sub">Get set up on TradingView and learn the fundamentals before you place a single trade.</p>
+
+          <div class="indicator-grid">
+            <div class="indicator-card">
+              <div class="icon-circle ic-blue">
+                <span class="ic-letter">1</span>
+              </div>
+              <div class="indicator-info">
+                <div class="indicator-name">Add Indicators</div>
+                <div class="indicator-codename">TradingView Setup</div>
+                <div class="indicator-desc">Open TradingView, search &ldquo;Signal Pilot&rdquo; in the indicator menu, and add your first tool to the chart</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-blue" style="width: 95%;"></div></div>
+              </div>
             </div>
-            <div class="step-checks">
-              <div class="step-check"><div class="check-box"></div> Open TradingView</div>
-              <div class="step-check"><div class="check-box"></div> Search "Signal Pilot" in indicators</div>
-              <div class="step-check"><div class="check-box"></div> Start with Pentarch or Volume Oracle</div>
+
+            <div class="indicator-card">
+              <div class="icon-circle ic-teal">
+                <span class="ic-letter">2</span>
+              </div>
+              <div class="indicator-info">
+                <div class="indicator-name">Complete Lessons</div>
+                <div class="indicator-codename">Education Hub</div>
+                <div class="indicator-desc">82 free lessons covering market mechanics, indicator usage, risk management, and strategy building</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-teal" style="width: 85%;"></div></div>
+              </div>
+            </div>
+
+            <div class="indicator-card">
+              <div class="icon-circle ic-purple">
+                <span class="ic-letter">P</span>
+              </div>
+              <div class="indicator-info">
+                <div class="indicator-name">Start with Pentarch</div>
+                <div class="indicator-codename">Recommended First</div>
+                <div class="indicator-desc">5 cycle phases with close-confirmed signals &mdash; the ideal starting point for beginners</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-purple" style="width: 75%;"></div></div>
+              </div>
+            </div>
+
+            <div class="indicator-card">
+              <div class="icon-circle ic-green">
+                <span class="ic-letter">Q</span>
+              </div>
+              <div class="indicator-info">
+                <div class="indicator-name">Pass Each Quiz</div>
+                <div class="indicator-codename">Knowledge Check</div>
+                <div class="indicator-desc">Each lesson ends with a quiz to confirm understanding before moving to the next topic</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-green" style="width: 70%;"></div></div>
+              </div>
             </div>
           </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 3: Step 2 — Complete Lessons ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 3 — Steps 3 & 4 (Indicator Cards)
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Step 2</span>
+      <span class="slide-label">Slide 3 — Steps 3&ndash;4</span>
       <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
-          <div class="step-stage">
-            <div class="step-circle step-2-circle">2</div>
-            <h2 class="step-title">Complete Lessons</h2>
-            <p class="step-desc">20 free beginner lessons covering market mechanics, indicator usage, and risk management fundamentals.</p>
-            <div class="step-checks">
-              <div class="step-check"><div class="check-box"></div> Open Education Hub</div>
-              <div class="step-check"><div class="check-box"></div> Complete Beginner track (20 lessons)</div>
-              <div class="step-check"><div class="check-box"></div> Pass each lesson quiz</div>
+          <h3 class="inner-heading">Practice, Then <em>Execute</em></h3>
+          <p class="section-sub">Paper trade with zero risk, build confidence, then go live with proper position sizing.</p>
+
+          <div class="indicator-grid">
+            <div class="indicator-card">
+              <div class="icon-circle ic-orange">
+                <span class="ic-letter">3</span>
+              </div>
+              <div class="indicator-info">
+                <div class="indicator-name">Paper Trade</div>
+                <div class="indicator-codename">Simulation Mode</div>
+                <div class="indicator-desc">Use TradingView&rsquo;s paper trading to execute 20+ simulated trades and track your win rate</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-orange" style="width: 80%;"></div></div>
+              </div>
+            </div>
+
+            <div class="indicator-card">
+              <div class="icon-circle ic-green">
+                <span class="ic-letter">4</span>
+              </div>
+              <div class="indicator-info">
+                <div class="indicator-name">Go Live</div>
+                <div class="indicator-codename">Real Capital</div>
+                <div class="indicator-desc">Small position sizes, strict risk management, and the confidence of a proven process behind you</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-green" style="width: 90%;"></div></div>
+              </div>
+            </div>
+
+            <div class="indicator-card">
+              <div class="icon-circle ic-gold">
+                <span class="ic-letter">R</span>
+              </div>
+              <div class="indicator-info">
+                <div class="indicator-name">Review &amp; Journal</div>
+                <div class="indicator-codename">Continuous Learning</div>
+                <div class="indicator-desc">Track every trade, review your R:R ratio, and refine your strategy as you build experience</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-gold" style="width: 65%;"></div></div>
+              </div>
             </div>
           </div>
+
+          <div class="stats-row">
+            <div class="stat-pill">
+              <span class="stat-val">20+</span>
+              <span class="stat-label">Paper Trades</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">1%</span>
+              <span class="stat-label">Max Risk</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">2:1</span>
+              <span class="stat-label">Min R:R</span>
+            </div>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 4: Step 3 — Paper Trade ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 4 — What You Get (Feature Grid 2x3)
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Step 3</span>
+      <span class="slide-label">Slide 4 — Included</span>
       <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
-          <div class="step-stage">
-            <div class="step-circle step-3-circle">3</div>
-            <h2 class="step-title">Paper Trade</h2>
-            <p class="step-desc">Practice with zero risk. Use TradingView's paper trading mode to test strategies before committing real capital.</p>
-            <div class="step-checks">
-              <div class="step-check"><div class="check-box"></div> Enable paper trading mode</div>
-              <div class="step-check"><div class="check-box"></div> Execute 20+ simulated trades</div>
-              <div class="step-check"><div class="check-box"></div> Review your win rate and R:R</div>
+          <h3 class="inner-heading">What&rsquo;s <em>Included</em></h3>
+          <p class="section-sub">Everything you need to go from beginner to confident trader &mdash; all free.</p>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-ic fic-teal">
+                <span class="fic-letter">7</span>
+              </div>
+              <span class="feature-text">7 Pro Indicators</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-blue">
+                <span class="fic-letter">82</span>
+              </div>
+              <span class="feature-text">Free Lessons</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-purple">
+                <span class="fic-letter">D</span>
+              </div>
+              <span class="feature-text">Full Documentation</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-orange">
+                <span class="fic-letter">A</span>
+              </div>
+              <span class="feature-text">100+ Alert Types</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-green">
+                <span class="fic-letter">P</span>
+              </div>
+              <span class="feature-text">Paper Trade Mode</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-gold">
+                <span class="fic-letter">S</span>
+              </div>
+              <span class="feature-text">Step-by-Step Path</span>
             </div>
           </div>
+
+          <div class="stats-row">
+            <div class="stat-pill">
+              <span class="stat-val">82</span>
+              <span class="stat-label">Lessons</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">7</span>
+              <span class="stat-label">Indicators</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">$0</span>
+              <span class="stat-label">To Start</span>
+            </div>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 5: Step 4 — Go Live (Roadmap) ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 5 — Truth: Why Process Matters
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Full Roadmap</span>
+      <span class="slide-label">Slide 5 — Truth</span>
       <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="roadmap-stage">
-            <h2 class="roadmap-title">Your Roadmap</h2>
-            <div class="roadmap-steps">
-              <div class="road-item">
-                <div class="road-dot rd-blue"></div>
-                <div class="road-info">
-                  <span class="road-name">Add Indicators</span>
-                  <span class="road-detail">Pentarch or Volume Oracle on TradingView</span>
-                </div>
-              </div>
-              <div class="road-item">
-                <div class="road-dot rd-teal"></div>
-                <div class="road-info">
-                  <span class="road-name">Complete 20 Lessons</span>
-                  <span class="road-detail">Free beginner track in Education Hub</span>
-                </div>
-              </div>
-              <div class="road-item">
-                <div class="road-dot rd-orange"></div>
-                <div class="road-info">
-                  <span class="road-name">Paper Trade</span>
-                  <span class="road-detail">20+ simulated trades, track your stats</span>
-                </div>
-              </div>
-              <div class="road-item">
-                <div class="road-dot rd-green"></div>
-                <div class="road-info">
-                  <span class="road-name">Go Live</span>
-                  <span class="road-detail">Small position sizes, strict risk management</span>
-                </div>
-              </div>
+        <div class="slide-content" style="align-items: center; text-align: center;">
+          <div class="truth-orb">
+            <span class="truth-orb-letter">Q</span>
+          </div>
+
+          <h3 class="inner-heading" style="margin-bottom: 5%;">The <em>Deeper</em> Truth</h3>
+
+          <div class="truth-grid">
+            <div class="truth-card">
+              <div class="truth-dot td-teal"></div>
+              <div class="truth-card-title">Process Over Prediction</div>
+              <div class="truth-card-text">Consistent traders follow a process. This checklist gives you one from day one.</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-dot td-blue"></div>
+              <div class="truth-card-title">Learn Before You Earn</div>
+              <div class="truth-card-text">82 free lessons exist for a reason. Knowledge compounds faster than capital.</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-dot td-orange"></div>
+              <div class="truth-card-title">Paper First, Real Second</div>
+              <div class="truth-card-text">Every elite trader practiced in simulation before risking real money. So should you.</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-dot td-green"></div>
+              <div class="truth-card-title">Small Risk, Big Confidence</div>
+              <div class="truth-card-text">1% max risk per trade. Survive long enough to learn, and the edge compounds.</div>
             </div>
           </div>
+
+          <div class="philosophy-box">
+            <p class="philosophy-text">&ldquo;The best traders don&rsquo;t skip steps. They <em>follow the process</em> until it becomes instinct.&rdquo;</p>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 6: CTA ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 6 — CTA: Stat Grid + Pills + CTA Box
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="6">
       <span class="slide-label">Slide 6 — CTA</span>
       <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="cta-stage">
-            <div class="cta-icon">🚀</div>
-            <h2 class="cta-headline">Start Your<br><span class="cta-accent">Journey</span></h2>
-            <p class="cta-body">Everything you need to go from beginner to confident trader. Free lessons, real indicators, proven process.</p>
-            <div class="cta-box">
-              <p class="cta-box-text">Begin the checklist</p>
-              <span class="cta-link">signalpilot.io</span>
+        <div class="slide-content" style="align-items: center; text-align: center; justify-content: center;">
+          <div class="cta-badge">Quick Start</div>
+          <h2 class="cta-title">Start Your <em>Journey</em></h2>
+
+          <div class="cta-stat-grid">
+            <div class="cta-stat">
+              <span class="cta-stat-num">4</span>
+              <span class="cta-stat-text">Steps</span>
+            </div>
+            <div class="cta-stat">
+              <span class="cta-stat-num">82</span>
+              <span class="cta-stat-text">Free Lessons</span>
+            </div>
+            <div class="cta-stat">
+              <span class="cta-stat-num">7</span>
+              <span class="cta-stat-text">Indicators</span>
+            </div>
+            <div class="cta-stat">
+              <span class="cta-stat-num">$0</span>
+              <span class="cta-stat-text">To Begin</span>
             </div>
           </div>
+
+          <div class="cta-pills">
+            <span class="cta-pill">Add Indicators</span>
+            <span class="cta-pill">Complete Lessons</span>
+            <span class="cta-pill">Paper Trade</span>
+            <span class="cta-pill">Go Live</span>
+            <span class="cta-pill">Free Education</span>
+            <span class="cta-pill">Proven Process</span>
+          </div>
+
+          <div class="cta-box">
+            <span class="cta-url">signalpilot.io</span>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
@@ -516,20 +922,11 @@
 
   <script>
     (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
       const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
       const slideWrappers = document.querySelectorAll('.slide-wrapper');
       let exportMode = false;
       let currentSlide = 0;
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
       exportBtn.addEventListener('click', function() {
         exportMode = !exportMode;
         document.body.classList.toggle('export-mode', exportMode);
