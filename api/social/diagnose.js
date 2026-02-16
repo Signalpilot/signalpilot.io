@@ -5,7 +5,7 @@
 import { getStatus, getPostingLog, getErrorLog, isPaused, getNextPostOrder, shouldSkipPost, getRetryCount, wasRecentlyPosted } from '../../lib/social/queue-manager.js';
 import { getPostNumber, getInstagramColumn } from '../../lib/social/posting-schedule.js';
 import { verifyCredentials } from '../../lib/social/twitter-client.js';
-import { verifyToken, detectTokenType } from '../../lib/social/instagram-client.js';
+import { verifyToken, detectTokenType, resolveAccountId } from '../../lib/social/instagram-client.js';
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
@@ -81,13 +81,15 @@ export default async function handler(req, res) {
   try {
     const tokenType = detectTokenType();
     const igCreds = await verifyToken();
+    const resolvedId = await resolveAccountId().catch(() => null);
     report.checks.instagramApi = {
       status: 'PASS',
       tokenType,
       userId: igCreds.userId,
       name: igCreds.name,
       tokenExpiresAt: igCreds.expiresAt,
-      accountId: process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID ? `...${process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID.slice(-6)}` : 'NOT SET',
+      envAccountId: process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID ? `...${process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID.slice(-6)}` : 'NOT SET',
+      resolvedAccountId: resolvedId ? `...${resolvedId.slice(-6)}` : 'FAILED',
     };
     // Warn if token expires within 7 days
     if (igCreds.expiresAt && igCreds.expiresAt !== 'unknown') {
