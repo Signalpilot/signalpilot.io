@@ -481,6 +481,24 @@ async function renderCarousel(page, postDir, postNumber) {
         line-height: 1.55 !important;
       }
 
+      /* --- Info boxes --- */
+      .info-box {
+        background: rgba(94,234,212,0.15) !important;
+        border: 2px solid rgba(94,234,212,0.45) !important;
+        border-left: 5px solid rgba(94,234,212,1) !important;
+        padding: clamp(14px, 3cqw, 22px) !important;
+      }
+      .info-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        letter-spacing: 2px !important;
+        color: rgba(94,234,212,0.9) !important;
+      }
+      .info-text {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.6 !important;
+        color: var(--txt) !important;
+      }
+
       /* --- Stack / layer visualization --- */
       .stack-bar {
         font-size: clamp(14px, 3.5cqw, 20px) !important;
