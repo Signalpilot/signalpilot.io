@@ -9,754 +9,288 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #0a0a0f;
-      --bg-card: rgba(255,255,255,0.03);
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255,255,255,0.7);
-      --text-muted: rgba(255,255,255,0.4);
-      --border-subtle: rgba(255,255,255,0.1);
-      --accent-teal: #5eead4;
-      --accent-teal-dim: rgba(94,234,212,0.3);
-      --color-red: #ef4444;
-      --color-red-dim: rgba(239,68,68,0.15);
-      --color-green: #4ade80;
-      --color-green-dim: rgba(74,222,128,0.15);
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans: 'Inter', -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --bg-dark:#0a0a0f;--bg-card:rgba(255,255,255,0.03);--text-primary:#ffffff;
+      --text-secondary:rgba(255,255,255,0.7);--text-muted:rgba(255,255,255,0.4);
+      --border-subtle:rgba(255,255,255,0.1);--accent-teal:#5eead4;
+      --accent-teal-dim:rgba(94,234,212,0.3);--color-red:#ef4444;
+      --color-green:#4ade80;--accent-amber:#f59e0b;
+      --font-serif:'Cormorant Garamond',Georgia,serif;
+      --font-sans:'Inter',-apple-system,sans-serif;
+      --font-mono:'JetBrains Mono',monospace;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
-    body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:var(--font-sans);background:var(--bg-dark);color:var(--text-primary);min-height:100vh;padding:2rem}
+    body.export-mode{padding:0;background:transparent}
+    body.export-mode .controls,body.export-mode .page-title,body.export-mode .slide-label{display:none}
+    body.export-mode .carousel-grid{display:block}
+    body.export-mode .slide-wrapper{display:none;margin:0}
+    body.export-mode .slide-wrapper.active{display:block}
+    body.export-mode .slide{width:1080px;height:1350px;max-width:none;border-radius:0}
+    .controls{display:flex;justify-content:center;gap:1rem;margin-bottom:2rem}
+    .controls button{background:var(--bg-card);border:1px solid var(--border-subtle);color:var(--text-primary);padding:.5rem 1rem;border-radius:.5rem;font-size:.875rem;cursor:pointer}
+    .page-title{text-align:center;margin-bottom:2rem}
+    .page-title h1{font-family:var(--font-serif);font-size:2rem;font-weight:600;margin-bottom:.5rem}
+    .page-title p{color:var(--text-muted);font-size:.875rem}
+    .carousel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:2rem;max-width:1800px;margin:0 auto}
+    .slide-wrapper{display:flex;flex-direction:column;align-items:center;container-type:inline-size}
+    .slide-label{font-size:.75rem;color:var(--text-muted);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.1em}
+    .slide{width:100%;max-width:540px;aspect-ratio:4/5;background:var(--bg-dark);border-radius:.5rem;position:relative;overflow:hidden;display:flex;flex-direction:column}
+    .slide-content{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;padding:5.5% 5.5% 10% 5.5%}
+    .slide-logo{position:absolute;bottom:4%;left:50%;transform:translateX(-50%);font-family:'Gugi',sans-serif;font-size:clamp(.4rem,1.2cqw,.625rem);letter-spacing:.3em;text-transform:uppercase;color:rgba(94,234,212,0.4);z-index:2;white-space:nowrap}
 
-    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
-    .page-title { text-align: center; margin-bottom: 2rem; }
-    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
-
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
-    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
-    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5%; }
-
-    .slide-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(94,234,212,0.4);
-      z-index: 2;
-      white-space: nowrap;
+    @keyframes orb-breathe{
+      0%,100%{box-shadow:0 0 50px rgba(239,68,68,0.12),0 0 100px rgba(239,68,68,0.04),inset 0 0 30px rgba(239,68,68,0.06);transform:scale(1)}
+      50%{box-shadow:0 0 65px rgba(239,68,68,0.22),0 0 130px rgba(239,68,68,0.08),inset 0 0 40px rgba(239,68,68,0.1);transform:scale(1.04)}
     }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 1 — Cinematic Hook (TEAL, LEFT bar)
-       ═══════════════════════════════════════════ */
-    .slide-teal { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
-    .slide-teal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-teal.slide-1::after { content: ''; position: absolute; top: 0; left: 15px; width: 50px; height: 100%; background: #5eead4; z-index: 5; }
-    .slide-teal .slide-content { z-index: 3; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
-    .slide-1 .cine-label { font-size: clamp(0.5rem, 1.6cqw, 0.875rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94,234,212,0.9); margin-bottom: 8%; }
-    .slide-1 .hook-main { font-family: var(--font-serif); font-size: clamp(1.6rem, 5cqw, 2.8rem); font-weight: 700; line-height: 1.15; color: rgba(255,255,255,0.95); margin-bottom: 4%; }
-    .slide-1 .hook-accent { color: var(--color-red); }
-    .slide-1 .cine-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent); margin-bottom: 4%; }
-    .slide-1 .hook-sub { font-size: clamp(0.65rem, 2cqw, 1.1rem); font-weight: 300; letter-spacing: 0.05em; color: rgba(94,234,212,0.4); line-height: 1.6; }
-    .slide-1 .cine-logo { position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%); font-family: 'Gugi', sans-serif; font-size: clamp(0.4rem, 1.2cqw, 0.625rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94,234,212,0.4); }
-
-    /* ═══════════════════════════════════════════
-       SHARED: Reason Slides (2-6)
-       ═══════════════════════════════════════════ */
-    .reason-layout {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    @keyframes orb-pulse-teal{
+      0%,100%{box-shadow:0 0 40px rgba(94,234,212,0.1),0 0 80px rgba(94,234,212,0.04)}
+      50%{box-shadow:0 0 55px rgba(94,234,212,0.2),0 0 110px rgba(94,234,212,0.08)}
     }
-
-    .reason-tag {
-      font-family: var(--font-mono);
-      font-size: clamp(8px, 1.4cqw, 14px);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(239,68,68,0.8);
-      margin-bottom: 3%;
+    @keyframes scan-line{
+      0%{top:-2px;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%;opacity:0}
     }
-
-    .reason-icon {
-      font-size: clamp(32px, 6.5cqw, 70px);
-      margin-bottom: 3%;
-    }
-
-    .reason-title {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.15;
-      margin-bottom: 3%;
-    }
-
-    .reason-desc {
-      font-size: clamp(11px, 2cqw, 21px);
-      color: var(--text-secondary);
-      line-height: 1.5;
-      margin-bottom: 5%;
-    }
-
-    .reason-quote {
-      font-family: var(--font-serif);
-      font-size: clamp(12px, 2.2cqw, 24px);
-      font-style: italic;
-      color: rgba(255,255,255,0.35);
-      text-align: center;
-      padding-top: 4%;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-
-    /* ═══════════════════════════════════════════
-       Fail Visual Components (Slides 2-4)
-       ═══════════════════════════════════════════ */
-    .fail-visual {
-      width: 100%;
-      margin-bottom: 4%;
-    }
-
-    .fail-stat-row {
-      display: flex;
-      gap: clamp(6px, 1.2cqw, 12px);
-      margin-bottom: clamp(8px, 1.6cqw, 16px);
-    }
-
-    .fail-stat {
-      flex: 1;
-      padding: clamp(10px, 2cqw, 20px);
-      background: rgba(239,68,68,0.04);
-      border: 1px solid rgba(239,68,68,0.15);
-      border-radius: clamp(8px, 1.6cqw, 16px);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(4px, 0.8cqw, 8px);
-    }
-
-    .fail-stat-value {
-      font-family: var(--font-serif);
-      font-size: clamp(24px, 5cqw, 52px);
-      font-weight: 700;
-    }
-
-    .fail-stat-label {
-      font-family: var(--font-mono);
-      font-size: clamp(8px, 1.4cqw, 14px);
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-    }
-
-    .fail-red { color: var(--color-red); }
-    .fail-green { color: var(--color-green); }
-
-    .fail-verdict {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(6px, 1.2cqw, 12px);
-      padding: clamp(10px, 2cqw, 20px);
-      background: rgba(239,68,68,0.06);
-      border: 1px solid rgba(239,68,68,0.2);
-      border-radius: clamp(8px, 1.6cqw, 16px);
-    }
-
-    .fail-verdict-icon {
-      font-size: clamp(18px, 3.6cqw, 36px);
-    }
-
-    .fail-verdict-text {
-      font-family: var(--font-mono);
-      font-size: clamp(10px, 2cqw, 20px);
-      font-weight: 600;
-      color: var(--color-red);
-    }
-
-    /* Balance comparison */
-    .fail-balance-row {
-      display: flex;
-      align-items: center;
-      gap: clamp(6px, 1.2cqw, 12px);
-      margin-bottom: clamp(8px, 1.6cqw, 16px);
-    }
-
-    .fail-balance {
-      flex: 1;
-      padding: clamp(12px, 2.4cqw, 24px);
-      border-radius: clamp(10px, 2cqw, 20px);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(4px, 0.8cqw, 8px);
-    }
-
-    .gain-side {
-      background: rgba(74,222,128,0.04);
-      border: 1px solid rgba(74,222,128,0.15);
-    }
-
-    .loss-side {
-      background: rgba(239,68,68,0.04);
-      border: 1px solid rgba(239,68,68,0.15);
-    }
-
-    .fail-balance-label {
-      font-size: clamp(9px, 1.6cqw, 16px);
-      color: var(--text-muted);
-    }
-
-    .fail-balance-value {
-      font-family: var(--font-mono);
-      font-size: clamp(18px, 3.6cqw, 36px);
-      font-weight: 700;
-    }
-
-    .fail-balance-vs {
-      font-family: var(--font-mono);
-      font-size: clamp(10px, 2cqw, 20px);
-      color: var(--text-muted);
-      flex-shrink: 0;
-    }
-
-    /* Timeline */
-    .fail-timeline {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;
-      margin-bottom: clamp(8px, 1.6cqw, 16px);
-      padding-left: clamp(12px, 2.4cqw, 24px);
-    }
-
-    .fail-tl-step {
-      display: flex;
-      align-items: center;
-      gap: clamp(8px, 1.6cqw, 16px);
-      padding: clamp(8px, 1.6cqw, 16px) 0;
-    }
-
-    .fail-tl-dot {
-      width: clamp(12px, 2.4cqw, 24px);
-      height: clamp(12px, 2.4cqw, 24px);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .tl-teal { background: var(--accent-teal); box-shadow: 0 0 10px rgba(94,234,212,0.4); }
-    .tl-amber { background: #fbbf24; box-shadow: 0 0 10px rgba(251,191,36,0.3); }
-    .tl-red { background: var(--color-red); box-shadow: 0 0 10px rgba(239,68,68,0.4); }
-
-    .fail-tl-text {
-      font-size: clamp(11px, 2cqw, 20px);
-      color: var(--text-secondary);
-    }
-
-    .fail-tl-connector {
-      width: 2px;
-      height: clamp(16px, 3.2cqw, 32px);
-      background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(239,68,68,0.3));
-      margin-left: clamp(5px, 1cqw, 10px);
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 5 — Trading Emotions: Cycle Diagram
-       ═══════════════════════════════════════════ */
-    .emotion-cycle {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(6px, 1.2cqw, 12px);
-      width: 100%;
-      margin-bottom: 4%;
-    }
-
-    .emotion-step {
-      display: flex;
-      align-items: center;
-      gap: 3%;
-      padding: 2.5% 3.5%;
-      border-radius: 10px;
-      background: rgba(239,68,68,0.04);
-      border: 1px solid rgba(239,68,68,0.12);
-    }
-
-    .emotion-num {
-      width: clamp(22px, 4.5cqw, 46px);
-      height: clamp(22px, 4.5cqw, 46px);
-      border-radius: 50%;
-      background: rgba(239,68,68,0.1);
-      border: 1.5px solid rgba(239,68,68,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: clamp(9px, 1.8cqw, 18px);
-      color: var(--color-red);
-      font-weight: 700;
-      flex-shrink: 0;
-      font-family: var(--font-mono);
-    }
-
-    .emotion-content { flex: 1; }
-
-    .emotion-name {
-      font-size: clamp(11px, 2.2cqw, 22px);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 1%;
-    }
-
-    .emotion-detail {
-      font-size: clamp(9px, 1.5cqw, 15px);
-      color: var(--text-muted);
-    }
-
-    .emotion-arrow {
-      text-align: center;
-      font-size: clamp(10px, 2cqw, 20px);
-      color: rgba(239,68,68,0.25);
-      margin: -1% 0;
-    }
-
-    .emotion-loop {
-      text-align: center;
-      font-size: clamp(9px, 1.5cqw, 15px);
-      color: rgba(239,68,68,0.5);
-      font-family: var(--font-mono);
-      letter-spacing: 0.15em;
-      margin-top: 2%;
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 6 — Skipping Education: Gap Visual
-       ═══════════════════════════════════════════ */
-    .gap-visual {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(10px, 2cqw, 20px);
-      margin-bottom: 5%;
-    }
-
-    .gap-row {
-      display: flex;
-      align-items: center;
-      gap: 3%;
-    }
-
-    .gap-label {
-      width: 30%;
-      text-align: right;
-      font-size: clamp(9px, 1.6cqw, 16px);
-      color: var(--text-muted);
-      flex-shrink: 0;
-    }
-
-    .gap-track {
-      flex: 1;
-      height: clamp(10px, 2cqw, 20px);
-      background: rgba(255,255,255,0.04);
-      border-radius: 999px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .gap-fill {
-      height: 100%;
-      border-radius: 999px;
-    }
-
-    .gap-fill.want {
-      background: linear-gradient(90deg, rgba(239,68,68,0.7), rgba(239,68,68,0.3));
-      width: 92%;
-    }
-
-    .gap-fill.study {
-      background: linear-gradient(90deg, rgba(239,68,68,0.5), rgba(239,68,68,0.2));
-      width: 15%;
-    }
-
-    .gap-fill.practice {
-      background: linear-gradient(90deg, rgba(239,68,68,0.5), rgba(239,68,68,0.2));
-      width: 8%;
-    }
-
-    .gap-disconnect {
-      text-align: center;
-      padding: 3% 0;
-    }
-
-    .gap-disconnect-line {
-      width: 60%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(239,68,68,0.3), transparent);
-      margin: 0 auto 2%;
-    }
-
-    .gap-disconnect-text {
-      font-family: var(--font-mono);
-      font-size: clamp(8px, 1.3cqw, 13px);
-      color: rgba(239,68,68,0.5);
-      letter-spacing: 0.2em;
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 7 — The 10% Who Win: Fix Order
-       ═══════════════════════════════════════════ */
-    .fix-layout {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .fix-heading {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      text-align: center;
-      margin-bottom: 2%;
-    }
-
-    .fix-heading .green { color: var(--color-green); }
-
-    .fix-subtext {
-      font-size: clamp(10px, 1.7cqw, 17px);
-      color: var(--text-muted);
-      text-align: center;
-      margin-bottom: 6%;
-    }
-
-    .fix-steps {
-      width: 88%;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(8px, 1.6cqw, 16px);
-    }
-
-    .fix-step {
-      display: flex;
-      align-items: center;
-      gap: 3%;
-      padding: 2.5% 3.5%;
-      background: rgba(74,222,128,0.04);
-      border: 1px solid rgba(74,222,128,0.15);
-      border-radius: 10px;
-    }
-
-    .fix-num {
-      width: clamp(24px, 5cqw, 50px);
-      height: clamp(24px, 5cqw, 50px);
-      border-radius: 50%;
-      background: rgba(74,222,128,0.1);
-      border: 2px solid rgba(74,222,128,0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: clamp(10px, 2cqw, 20px);
-      color: var(--color-green);
-      font-weight: 700;
-      flex-shrink: 0;
-      font-family: var(--font-mono);
-    }
-
-    .fix-content { flex: 1; }
-
-    .fix-name {
-      font-size: clamp(12px, 2.4cqw, 24px);
-      font-weight: 600;
-      color: var(--color-green);
-      margin-bottom: 1%;
-    }
-
-    .fix-detail {
-      font-size: clamp(9px, 1.5cqw, 15px);
-      color: var(--text-secondary);
-    }
-
-    .fix-arrow {
-      text-align: center;
-      font-size: clamp(10px, 2cqw, 20px);
-      color: rgba(74,222,128,0.25);
-      margin: -1% 0;
-    }
-
-    .fix-note {
-      font-family: var(--font-mono);
-      font-size: clamp(8px, 1.3cqw, 13px);
-      color: rgba(74,222,128,0.5);
-      letter-spacing: 0.2em;
-      text-align: center;
-      margin-top: 4%;
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 8 — CTA
-       ═══════════════════════════════════════════ */
-    .cta-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-icon {
-      font-size: clamp(36px, 7.4cqw, 80px);
-      margin-bottom: 4%;
-    }
-
-    .cta-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 3%;
-    }
-
-    .cta-accent { color: var(--accent-teal); }
-
-    .cta-body {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 85%;
-      margin-bottom: 5%;
-    }
-
-    .cta-box {
-      background: linear-gradient(135deg, rgba(94,234,212,0.12) 0%, rgba(94,234,212,0.04) 100%);
-      border: 2px solid var(--accent-teal);
-      border-radius: 14px;
-      padding: 3% 6%;
-    }
-
-    .cta-box-text {
-      font-size: clamp(11px, 2cqw, 22px);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 1%;
-    }
-
-    .cta-link {
-      font-size: clamp(10px, 1.7cqw, 18px);
-      font-weight: 600;
-      color: var(--accent-teal);
-    }
+    @keyframes fade-glow{0%,100%{opacity:.5}50%{opacity:1}}
+
+    .slide-teal{background:linear-gradient(180deg,#0a0c0f 0%,#080a0c 100%)!important}
+    .slide-teal::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(94,234,212,0.05) 0%,transparent 100%);pointer-events:none;z-index:1}
+    .slide-teal.slide-1::after{content:'';position:absolute;top:0;left:15px;width:50px;height:100%;background:#5eead4;z-index:5}
+    .slide-teal .slide-content{z-index:3}
+    .slide-teal:not(.slide-1) .slide-content::after{content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(94,234,212,0.15),transparent);animation:scan-line 8s linear infinite;pointer-events:none;z-index:10}
+    .slide-1 .slide-content{align-items:center;text-align:center;justify-content:center}
+    .slide-8 .slide-content{align-items:center;text-align:center;justify-content:center}
+
+    .hook-orb{position:relative;width:clamp(80px,16cqw,160px);height:clamp(80px,16cqw,160px);border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(239,68,68,0.3) 0%,rgba(239,68,68,0.1) 40%,rgba(94,234,212,0.06) 70%,transparent 100%);border:2px solid rgba(239,68,68,0.25);box-shadow:0 0 50px rgba(239,68,68,0.12),0 0 100px rgba(239,68,68,0.04),inset 0 0 30px rgba(239,68,68,0.06);display:flex;align-items:center;justify-content:center;margin-bottom:5%;flex-shrink:0;animation:orb-breathe 4s ease-in-out infinite}
+    .hook-orb::before{content:'';position:absolute;inset:7px;border-radius:50%;border:1.5px solid rgba(239,68,68,0.15)}
+    .hook-orb::after{content:'';position:absolute;inset:18px;border-radius:50%;border:1px dashed rgba(239,68,68,0.12)}
+    .orb-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+    .orb-percent{font-family:var(--font-mono);font-size:clamp(22px,4.5cqw,46px);font-weight:700;color:rgba(239,68,68,0.9);line-height:1}
+    .orb-label{font-family:var(--font-mono);font-size:clamp(6px,1cqw,10px);letter-spacing:.2em;color:rgba(239,68,68,0.5);margin-top:2px}
+    .s1-blog-label{font-family:var(--font-mono);font-size:clamp(9px,1.5cqw,14px);letter-spacing:.3em;text-transform:uppercase;color:rgba(94,234,212,0.9);margin-bottom:4%}
+    .s1-hook{font-family:var(--font-serif);font-size:clamp(20px,5cqw,52px);font-weight:700;line-height:1.15;color:rgba(255,255,255,0.95);margin-bottom:4%;max-width:90%}
+    .s1-hook em{color:var(--color-red);font-style:normal}
+    .s1-divider{width:60px;height:2px;background:linear-gradient(90deg,transparent,rgba(94,234,212,0.6),transparent);margin-bottom:4%}
+    .s1-sub{font-family:var(--font-sans);font-size:clamp(10px,1.8cqw,19px);font-weight:300;color:rgba(94,234,212,0.4);line-height:1.5}
+
+    .reason-layout{flex:1;display:flex;flex-direction:column;justify-content:center}
+    .slide-counter{font-family:var(--font-mono);font-size:clamp(8px,1.3cqw,12px);color:var(--text-muted);letter-spacing:.15em;margin-bottom:3%}
+    .reason-tag{font-family:var(--font-mono);font-size:clamp(8px,1.4cqw,14px);letter-spacing:.25em;text-transform:uppercase;color:rgba(239,68,68,0.8);margin-bottom:3%}
+    .reason-title{font-family:var(--font-serif);font-size:clamp(22px,4.5cqw,48px);font-weight:700;color:var(--text-primary);line-height:1.15;margin-bottom:3%}
+    .reason-desc{font-size:clamp(11px,2cqw,21px);color:var(--text-secondary);line-height:1.5;margin-bottom:5%}
+    .reason-quote-box{width:80%;padding:3% 4%;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.12);border-radius:clamp(8px,1.3cqw,12px);text-align:center}
+    .reason-quote{font-family:var(--font-serif);font-size:clamp(12px,2.2cqw,24px);font-style:italic;color:rgba(255,255,255,0.35);line-height:1.4}
+
+    .reason-orb{width:clamp(50px,10cqw,100px);height:clamp(50px,10cqw,100px);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:4%;flex-shrink:0}
+    .reason-orb::before{content:'';position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(239,68,68,0.12)}
+    .reason-orb.orb-red{background:radial-gradient(circle at 40% 35%,rgba(239,68,68,0.3) 0%,rgba(239,68,68,0.08) 60%,transparent 100%);border:1.5px solid rgba(239,68,68,0.3);box-shadow:0 0 20px rgba(239,68,68,0.1)}
+    .reason-orb.orb-amber{background:radial-gradient(circle at 40% 35%,rgba(245,158,11,0.3) 0%,rgba(245,158,11,0.08) 60%,transparent 100%);border:1.5px solid rgba(245,158,11,0.3);box-shadow:0 0 20px rgba(245,158,11,0.1)}
+    .reason-orb.orb-amber::before{border-color:rgba(245,158,11,0.12)}
+    .reason-orb-symbol{font-family:var(--font-mono);font-size:clamp(16px,3cqw,32px);font-weight:700;position:relative;z-index:1}
+    .orb-red .reason-orb-symbol{color:rgba(239,68,68,0.9)}
+    .orb-amber .reason-orb-symbol{color:rgba(245,158,11,0.9)}
+
+    .fail-visual{width:100%;margin-bottom:4%}
+    .fail-stat-row{display:flex;gap:clamp(6px,1.2cqw,12px);margin-bottom:clamp(8px,1.6cqw,16px)}
+    .fail-stat{flex:1;padding:clamp(10px,2cqw,20px);background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15);border-radius:clamp(8px,1.6cqw,16px);text-align:center;display:flex;flex-direction:column;gap:clamp(4px,.8cqw,8px)}
+    .fail-stat-ring{width:clamp(30px,5.5cqw,52px);height:clamp(30px,5.5cqw,52px);border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(239,68,68,0.25) 0%,rgba(239,68,68,0.06) 60%,transparent 100%);border:1.5px solid rgba(239,68,68,0.25);box-shadow:0 0 14px rgba(239,68,68,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto;position:relative}
+    .fail-stat-ring::before{content:'';position:absolute;inset:3px;border-radius:50%;border:1px solid rgba(239,68,68,0.1)}
+    .fail-stat-ring-val{font-family:var(--font-mono);font-size:clamp(12px,2cqw,22px);font-weight:700;color:rgba(239,68,68,0.9);position:relative;z-index:1}
+    .fail-stat-label{font-family:var(--font-mono);font-size:clamp(8px,1.4cqw,14px);color:var(--text-muted);letter-spacing:.1em}
+    .fail-verdict{display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.2cqw,12px);padding:clamp(10px,2cqw,20px);background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:clamp(8px,1.6cqw,16px)}
+    .fail-verdict-icon{font-size:clamp(18px,3.6cqw,36px)}
+    .fail-verdict-text{font-family:var(--font-mono);font-size:clamp(10px,2cqw,20px);font-weight:600;color:var(--color-red)}
+
+    .fail-balance-row{display:flex;align-items:center;gap:clamp(6px,1.2cqw,12px);margin-bottom:clamp(8px,1.6cqw,16px)}
+    .fail-balance{flex:1;padding:clamp(12px,2.4cqw,24px);border-radius:clamp(10px,2cqw,20px);text-align:center;display:flex;flex-direction:column;gap:clamp(4px,.8cqw,8px)}
+    .gain-side{background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.15)}
+    .loss-side{background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15)}
+    .fail-balance-label{font-size:clamp(9px,1.6cqw,16px);color:var(--text-muted)}
+    .fail-balance-value{font-family:var(--font-mono);font-size:clamp(18px,3.6cqw,36px);font-weight:700}
+    .fail-green{color:var(--color-green)}.fail-red{color:var(--color-red)}
+    .fail-balance-vs{font-family:var(--font-mono);font-size:clamp(10px,2cqw,20px);color:var(--text-muted);flex-shrink:0}
+
+    .fail-timeline{display:flex;flex-direction:column;align-items:flex-start;gap:0;margin-bottom:clamp(8px,1.6cqw,16px);padding-left:clamp(12px,2.4cqw,24px)}
+    .fail-tl-step{display:flex;align-items:center;gap:clamp(8px,1.6cqw,16px);padding:clamp(8px,1.6cqw,16px) 0}
+    .tl-ring{width:clamp(28px,5.5cqw,48px);height:clamp(28px,5.5cqw,48px);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+    .tl-ring::before{content:'';position:absolute;inset:3px;border-radius:50%;border:1px solid rgba(255,255,255,0.08)}
+    .tl-ring.tl-teal{background:radial-gradient(circle at 40% 35%,rgba(94,234,212,0.3) 0%,rgba(94,234,212,0.08) 60%,transparent 100%);border:1.5px solid rgba(94,234,212,0.3);box-shadow:0 0 14px rgba(94,234,212,0.1)}
+    .tl-ring.tl-teal::before{border-color:rgba(94,234,212,0.12)}
+    .tl-ring.tl-amber{background:radial-gradient(circle at 40% 35%,rgba(245,158,11,0.3) 0%,rgba(245,158,11,0.08) 60%,transparent 100%);border:1.5px solid rgba(245,158,11,0.3);box-shadow:0 0 14px rgba(245,158,11,0.1)}
+    .tl-ring.tl-amber::before{border-color:rgba(245,158,11,0.12)}
+    .tl-ring.tl-red{background:radial-gradient(circle at 40% 35%,rgba(239,68,68,0.3) 0%,rgba(239,68,68,0.08) 60%,transparent 100%);border:1.5px solid rgba(239,68,68,0.3);box-shadow:0 0 14px rgba(239,68,68,0.1)}
+    .tl-ring.tl-red::before{border-color:rgba(239,68,68,0.12)}
+    .tl-ring-icon{font-family:var(--font-mono);font-size:clamp(10px,1.8cqw,18px);font-weight:700;position:relative;z-index:1}
+    .tl-teal .tl-ring-icon{color:rgba(94,234,212,0.9)}
+    .tl-amber .tl-ring-icon{color:rgba(245,158,11,0.9)}
+    .tl-red .tl-ring-icon{color:rgba(239,68,68,0.9)}
+    .fail-tl-text{font-size:clamp(11px,2cqw,20px);color:var(--text-secondary)}
+    .fail-tl-connector{width:2px;height:clamp(16px,3.2cqw,32px);background:linear-gradient(180deg,rgba(255,255,255,0.15),rgba(239,68,68,0.3));margin-left:clamp(13px,2.6cqw,22px)}
+
+    .emotion-cycle{display:flex;flex-direction:column;gap:clamp(6px,1.2cqw,12px);width:100%;margin-bottom:4%}
+    .emotion-step{display:flex;align-items:center;gap:3%;padding:2.5% 3.5%;border-radius:10px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.12)}
+    .emotion-ring{width:clamp(32px,6cqw,54px);height:clamp(32px,6cqw,54px);border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(239,68,68,0.3) 0%,rgba(239,68,68,0.08) 60%,transparent 100%);border:2px solid rgba(239,68,68,0.3);box-shadow:0 0 18px rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+    .emotion-ring::before{content:'';position:absolute;inset:3px;border-radius:50%;border:1px solid rgba(239,68,68,0.12)}
+    .emotion-ring-num{font-family:var(--font-mono);font-size:clamp(11px,2cqw,20px);font-weight:700;color:rgba(239,68,68,0.9);position:relative;z-index:1}
+    .emotion-content{flex:1}
+    .emotion-name{font-size:clamp(11px,2.2cqw,22px);font-weight:600;color:var(--text-primary);margin-bottom:1%}
+    .emotion-detail{font-size:clamp(9px,1.5cqw,15px);color:var(--text-muted)}
+    .emotion-arrow{text-align:center;font-size:clamp(10px,2cqw,20px);color:rgba(239,68,68,0.25);margin:-1% 0}
+    .emotion-loop{text-align:center;font-size:clamp(9px,1.5cqw,15px);color:rgba(239,68,68,0.5);font-family:var(--font-mono);letter-spacing:.15em;margin-top:2%;animation:fade-glow 3s ease-in-out infinite}
+
+    .gap-visual{width:100%;display:flex;flex-direction:column;gap:clamp(10px,2cqw,20px);margin-bottom:5%}
+    .gap-row{display:flex;align-items:center;gap:3%}
+    .gap-label{width:30%;text-align:right;font-size:clamp(9px,1.6cqw,16px);color:var(--text-muted);flex-shrink:0}
+    .gap-track{flex:1;height:clamp(10px,2cqw,20px);background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
+    .gap-fill{height:100%;border-radius:999px}
+    .gap-fill.want{background:linear-gradient(90deg,rgba(239,68,68,0.7),rgba(239,68,68,0.3));width:92%}
+    .gap-fill.study{background:linear-gradient(90deg,rgba(239,68,68,0.5),rgba(239,68,68,0.2));width:15%}
+    .gap-fill.practice{background:linear-gradient(90deg,rgba(239,68,68,0.5),rgba(239,68,68,0.2));width:8%}
+    .gap-disconnect{text-align:center;padding:3% 0}
+    .gap-disconnect-line{width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(239,68,68,0.3),transparent);margin:0 auto 2%}
+    .gap-disconnect-text{font-family:var(--font-mono);font-size:clamp(8px,1.3cqw,13px);color:rgba(239,68,68,0.5);letter-spacing:.2em}
+
+    .fix-layout{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center}
+    .fix-heading{font-family:var(--font-serif);font-size:clamp(22px,4.5cqw,48px);font-weight:700;color:var(--text-primary);text-align:center;margin-bottom:2%}
+    .fix-heading .green{color:var(--color-green)}
+    .fix-subtext{font-size:clamp(10px,1.7cqw,17px);color:var(--text-muted);text-align:center;margin-bottom:6%}
+    .fix-steps{width:88%;display:flex;flex-direction:column;gap:clamp(8px,1.6cqw,16px)}
+    .fix-step{display:flex;align-items:center;gap:3%;padding:2.5% 3.5%;background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.15);border-radius:10px}
+    .fix-ring{width:clamp(32px,6cqw,54px);height:clamp(32px,6cqw,54px);border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(74,222,128,0.3) 0%,rgba(74,222,128,0.08) 60%,transparent 100%);border:2px solid rgba(74,222,128,0.35);box-shadow:0 0 18px rgba(74,222,128,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+    .fix-ring::before{content:'';position:absolute;inset:3px;border-radius:50%;border:1px solid rgba(74,222,128,0.12)}
+    .fix-ring-num{font-family:var(--font-mono);font-size:clamp(11px,2cqw,20px);font-weight:700;color:rgba(74,222,128,0.9);position:relative;z-index:1}
+    .fix-content{flex:1}
+    .fix-name{font-size:clamp(12px,2.4cqw,24px);font-weight:600;color:var(--color-green);margin-bottom:1%}
+    .fix-detail{font-size:clamp(9px,1.5cqw,15px);color:var(--text-secondary)}
+    .fix-arrow{text-align:center;font-size:clamp(10px,2cqw,20px);color:rgba(74,222,128,0.25);margin:-1% 0}
+    .fix-note{font-family:var(--font-mono);font-size:clamp(8px,1.3cqw,13px);color:rgba(74,222,128,0.5);letter-spacing:.2em;text-align:center;margin-top:4%}
+
+    .cta-container{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+    .cta-glow{width:clamp(60px,12cqw,120px);height:clamp(60px,12cqw,120px);border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(94,234,212,0.25) 0%,rgba(94,234,212,0.06) 50%,transparent 100%);border:2px solid rgba(94,234,212,0.2);box-shadow:0 0 40px rgba(94,234,212,0.1),0 0 80px rgba(94,234,212,0.04);display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:5%;animation:orb-pulse-teal 4s ease-in-out infinite}
+    .cta-glow::before{content:'';position:absolute;inset:5px;border-radius:50%;border:1.5px solid rgba(94,234,212,0.12)}
+    .cta-glow-icon{font-family:var(--font-mono);font-size:clamp(18px,3.5cqw,36px);font-weight:700;color:rgba(94,234,212,0.9);position:relative;z-index:1}
+    .cta-headline{font-family:var(--font-serif);font-size:clamp(22px,4.5cqw,48px);font-weight:700;color:var(--text-primary);line-height:1.2;margin-bottom:3%}
+    .cta-accent{color:var(--accent-teal)}
+    .cta-body{font-size:clamp(10px,1.8cqw,18px);color:var(--text-secondary);line-height:1.6;max-width:85%;margin-bottom:5%}
+    .cta-pills{display:flex;flex-wrap:wrap;gap:clamp(4px,.8cqw,8px);justify-content:center;margin-bottom:5%}
+    .cta-pill{font-family:var(--font-mono);font-size:clamp(7px,1.1cqw,11px);letter-spacing:.08em;text-transform:uppercase;padding:clamp(4px,.7cqw,8px) clamp(8px,1.5cqw,16px);border-radius:20px;border:1px solid rgba(94,234,212,0.2);background:rgba(94,234,212,0.05);color:rgba(94,234,212,0.7)}
+    .cta-box{background:rgba(94,234,212,0.08);border:2px solid var(--accent-teal);border-radius:14px;padding:3% 6%;text-align:center;box-shadow:0 0 30px rgba(94,234,212,0.08)}
+    .cta-box-text{font-size:clamp(11px,2cqw,22px);font-weight:500;color:var(--text-primary);margin-bottom:1%}
+    .cta-link{font-size:clamp(10px,1.7cqw,18px);font-weight:600;color:var(--accent-teal)}
   </style>
 </head>
 <body>
-  <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
-    <button id="export-btn">Export Mode</button>
-  </div>
-
-  <div class="page-title">
-    <h1>Post 053 — Why Most Traders Fail</h1>
-    <p>8 slides · Blog</p>
-  </div>
+  <div class="controls"><button id="export-btn">Export Mode</button></div>
+  <div class="page-title"><h1>Post 053 — Why Most Traders Fail</h1><p>8 slides &middot; Blog &middot; Teal</p></div>
 
   <div class="carousel-grid">
 
-    <!-- ══════ SLIDE 1: Cinematic Hook ══════ -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Hook</span>
       <div class="slide slide-teal slide-1">
         <div class="slide-content">
-          <div class="cine-label">INSIGHT</div>
-          <div class="hook-main">Why <span class="hook-accent">90%</span> of<br>Traders Lose</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">The market doesn't care how badly you want it.</p>
-          <div class="cine-logo">Signal Pilot</div>
+          <div class="hook-orb"><div class="orb-inner"><span class="orb-percent">90%</span><span class="orb-label">FAIL</span></div></div>
+          <div class="s1-blog-label">INSIGHT</div>
+          <h1 class="s1-hook">Why <em>90%</em> of<br>Traders Lose</h1>
+          <div class="s1-divider"></div>
+          <p class="s1-sub">The market doesn't care how badly you want it.</p>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 2: Reason 1 — No Defined Edge ══════ -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — No Defined Edge</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-teal slide-2">
         <div class="slide-content">
+          <span class="slide-counter">02 / 08</span>
           <div class="reason-layout">
             <div class="reason-tag">Reason 01</div>
-            <div class="reason-icon">🎲</div>
+            <div class="reason-orb orb-red"><span class="reason-orb-symbol">?</span></div>
             <h2 class="reason-title">No Defined Edge</h2>
-            <div class="fail-visual fail-scatter">
+            <div class="fail-visual">
               <div class="fail-stat-row">
-                <div class="fail-stat">
-                  <span class="fail-stat-value fail-red">?</span>
-                  <span class="fail-stat-label">Entry Logic</span>
-                </div>
-                <div class="fail-stat">
-                  <span class="fail-stat-value fail-red">?</span>
-                  <span class="fail-stat-label">Exit Logic</span>
-                </div>
-                <div class="fail-stat">
-                  <span class="fail-stat-value fail-red">?</span>
-                  <span class="fail-stat-label">Edge</span>
-                </div>
+                <div class="fail-stat"><div class="fail-stat-ring"><span class="fail-stat-ring-val">?</span></div><span class="fail-stat-label">Entry Logic</span></div>
+                <div class="fail-stat"><div class="fail-stat-ring"><span class="fail-stat-ring-val">?</span></div><span class="fail-stat-label">Exit Logic</span></div>
+                <div class="fail-stat"><div class="fail-stat-ring"><span class="fail-stat-ring-val">?</span></div><span class="fail-stat-label">Edge</span></div>
               </div>
-              <div class="fail-verdict">
-                <span class="fail-verdict-icon">&#x1F3B2;</span>
-                <span class="fail-verdict-text">No plan = gambling</span>
-              </div>
+              <div class="fail-verdict"><span class="fail-verdict-icon">&#x1F3B2;</span><span class="fail-verdict-text">No plan = gambling</span></div>
             </div>
             <p class="reason-desc">Trading random setups hoping something works. No plan, no edge, just hope.</p>
-            <div class="reason-quote">"Hope is not a strategy."</div>
+            <div class="reason-quote-box"><div class="reason-quote">"Hope is not a strategy."</div></div>
           </div>
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 3: Reason 2 — Position Size Too Big ══════ -->
     <div class="slide-wrapper" data-slide="3">
       <span class="slide-label">Slide 3 — Position Too Big</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-teal slide-3">
         <div class="slide-content">
+          <span class="slide-counter">03 / 08</span>
           <div class="reason-layout">
             <div class="reason-tag">Reason 02</div>
-            <div class="reason-icon">💣</div>
+            <div class="reason-orb orb-red"><span class="reason-orb-symbol">&#x2716;</span></div>
             <h2 class="reason-title">Position Size<br>Too Big</h2>
-            <div class="fail-visual fail-waterfall">
+            <div class="fail-visual">
               <div class="fail-balance-row">
-                <div class="fail-balance gain-side">
-                  <span class="fail-balance-label">7 Weeks of Gains</span>
-                  <span class="fail-balance-value fail-green">+$2,400</span>
-                </div>
+                <div class="fail-balance gain-side"><span class="fail-balance-label">7 Weeks of Gains</span><span class="fail-balance-value fail-green">+$2,400</span></div>
                 <span class="fail-balance-vs">vs</span>
-                <div class="fail-balance loss-side">
-                  <span class="fail-balance-label">1 Bad Trade</span>
-                  <span class="fail-balance-value fail-red">&#x2212;$3,100</span>
-                </div>
+                <div class="fail-balance loss-side"><span class="fail-balance-label">1 Bad Trade</span><span class="fail-balance-value fail-red">&#x2212;$3,100</span></div>
               </div>
-              <div class="fail-verdict">
-                <span class="fail-verdict-icon">&#x1F4A3;</span>
-                <span class="fail-verdict-text">Net result: &#x2212;$700</span>
-              </div>
+              <div class="fail-verdict"><span class="fail-verdict-icon">&#x1F4A3;</span><span class="fail-verdict-text">Net result: &#x2212;$700</span></div>
             </div>
             <p class="reason-desc">One bad trade wipes out weeks of gains. No room for error.</p>
-            <div class="reason-quote">"Risk management is survival."</div>
+            <div class="reason-quote-box"><div class="reason-quote">"Risk management is survival."</div></div>
           </div>
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 4: Reason 3 — No Stop Losses ══════ -->
     <div class="slide-wrapper" data-slide="4">
       <span class="slide-label">Slide 4 — No Stop Losses</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-teal slide-4">
         <div class="slide-content">
+          <span class="slide-counter">04 / 08</span>
           <div class="reason-layout">
             <div class="reason-tag">Reason 03</div>
-            <div class="reason-icon">📉</div>
+            <div class="reason-orb orb-red"><span class="reason-orb-symbol">&#9660;</span></div>
             <h2 class="reason-title">No Stop Losses</h2>
-            <div class="fail-visual fail-cliff">
+            <div class="fail-visual">
               <div class="fail-timeline">
-                <div class="fail-tl-step tl-entry">
-                  <span class="fail-tl-dot tl-teal"></span>
-                  <span class="fail-tl-text">Enter trade at $100</span>
-                </div>
+                <div class="fail-tl-step"><div class="tl-ring tl-teal"><span class="tl-ring-icon">&#8594;</span></div><span class="fail-tl-text">Enter trade at $100</span></div>
                 <div class="fail-tl-connector"></div>
-                <div class="fail-tl-step tl-hope">
-                  <span class="fail-tl-dot tl-amber"></span>
-                  <span class="fail-tl-text">"It'll come back..." &#x2192; $85</span>
-                </div>
+                <div class="fail-tl-step"><div class="tl-ring tl-amber"><span class="tl-ring-icon">?</span></div><span class="fail-tl-text">"It'll come back..." &#x2192; $85</span></div>
                 <div class="fail-tl-connector"></div>
-                <div class="fail-tl-step tl-blown">
-                  <span class="fail-tl-dot tl-red"></span>
-                  <span class="fail-tl-text">Account blown &#x2192; $12</span>
-                </div>
+                <div class="fail-tl-step"><div class="tl-ring tl-red"><span class="tl-ring-icon">&#x2716;</span></div><span class="fail-tl-text">Account blown &#x2192; $12</span></div>
               </div>
-              <div class="fail-verdict">
-                <span class="fail-verdict-icon">&#x1F4C9;</span>
-                <span class="fail-verdict-text">&#x2212;88% because "no stop loss"</span>
-              </div>
+              <div class="fail-verdict"><span class="fail-verdict-icon">&#x1F4C9;</span><span class="fail-verdict-text">&#x2212;88% because "no stop loss"</span></div>
             </div>
             <p class="reason-desc">"It'll come back" — until it doesn't. One trade becomes a disaster.</p>
-            <div class="reason-quote">"Define your risk before the trade."</div>
+            <div class="reason-quote-box"><div class="reason-quote">"Define your risk before the trade."</div></div>
           </div>
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 5: Reason 4 — Trading Emotions ══════ -->
     <div class="slide-wrapper" data-slide="5">
       <span class="slide-label">Slide 5 — Trading Emotions</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-teal slide-5">
         <div class="slide-content">
+          <span class="slide-counter">05 / 08</span>
           <div class="reason-layout">
             <div class="reason-tag">Reason 04</div>
             <h2 class="reason-title">Trading Emotions</h2>
             <div class="emotion-cycle">
-              <div class="emotion-step">
-                <div class="emotion-num">1</div>
-                <div class="emotion-content">
-                  <div class="emotion-name">FOMO</div>
-                  <div class="emotion-detail">Buy at the top because "it's going higher"</div>
-                </div>
-              </div>
-              <div class="emotion-arrow">↓</div>
-              <div class="emotion-step">
-                <div class="emotion-num">2</div>
-                <div class="emotion-content">
-                  <div class="emotion-name">Panic</div>
-                  <div class="emotion-detail">Sell at the bottom out of fear</div>
-                </div>
-              </div>
-              <div class="emotion-arrow">↓</div>
-              <div class="emotion-step">
-                <div class="emotion-num">3</div>
-                <div class="emotion-content">
-                  <div class="emotion-name">Revenge</div>
-                  <div class="emotion-detail">Double down to "make it back"</div>
-                </div>
-              </div>
-              <div class="emotion-arrow">↓</div>
-              <div class="emotion-step">
-                <div class="emotion-num">4</div>
-                <div class="emotion-content">
-                  <div class="emotion-name">Bigger Loss</div>
-                  <div class="emotion-detail">Emotions compound. Account bleeds.</div>
-                </div>
-              </div>
-              <div class="emotion-loop">↻ REPEAT UNTIL BLOWN</div>
+              <div class="emotion-step"><div class="emotion-ring"><span class="emotion-ring-num">1</span></div><div class="emotion-content"><div class="emotion-name">FOMO</div><div class="emotion-detail">Buy at the top because "it's going higher"</div></div></div>
+              <div class="emotion-arrow">&#8595;</div>
+              <div class="emotion-step"><div class="emotion-ring"><span class="emotion-ring-num">2</span></div><div class="emotion-content"><div class="emotion-name">Panic</div><div class="emotion-detail">Sell at the bottom out of fear</div></div></div>
+              <div class="emotion-arrow">&#8595;</div>
+              <div class="emotion-step"><div class="emotion-ring"><span class="emotion-ring-num">3</span></div><div class="emotion-content"><div class="emotion-name">Revenge</div><div class="emotion-detail">Double down to "make it back"</div></div></div>
+              <div class="emotion-arrow">&#8595;</div>
+              <div class="emotion-step"><div class="emotion-ring"><span class="emotion-ring-num">4</span></div><div class="emotion-content"><div class="emotion-name">Bigger Loss</div><div class="emotion-detail">Emotions compound. Account bleeds.</div></div></div>
+              <div class="emotion-loop">&#x21BB; REPEAT UNTIL BLOWN</div>
             </div>
           </div>
           <div class="slide-logo">Signal Pilot</div>
@@ -764,87 +298,45 @@
       </div>
     </div>
 
-    <!-- ══════ SLIDE 6: Reason 5 — Skipping Education ══════ -->
     <div class="slide-wrapper" data-slide="6">
       <span class="slide-label">Slide 6 — Skipping Education</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-teal slide-6">
         <div class="slide-content">
+          <span class="slide-counter">06 / 08</span>
           <div class="reason-layout">
             <div class="reason-tag">Reason 05</div>
-            <div class="reason-icon">📖</div>
+            <div class="reason-orb orb-amber"><span class="reason-orb-symbol">&#9670;</span></div>
             <h2 class="reason-title">Skipping<br>Education</h2>
             <div class="gap-visual">
-              <div class="gap-row">
-                <span class="gap-label">Want Profits</span>
-                <div class="gap-track"><div class="gap-fill want"></div></div>
-              </div>
-              <div class="gap-row">
-                <span class="gap-label">Time Studying</span>
-                <div class="gap-track"><div class="gap-fill study"></div></div>
-              </div>
-              <div class="gap-row">
-                <span class="gap-label">Practice Hours</span>
-                <div class="gap-track"><div class="gap-fill practice"></div></div>
-              </div>
-              <div class="gap-disconnect">
-                <div class="gap-disconnect-line"></div>
-                <span class="gap-disconnect-text">THE DISCONNECT</span>
-              </div>
+              <div class="gap-row"><span class="gap-label">Want Profits</span><div class="gap-track"><div class="gap-fill want"></div></div></div>
+              <div class="gap-row"><span class="gap-label">Time Studying</span><div class="gap-track"><div class="gap-fill study"></div></div></div>
+              <div class="gap-row"><span class="gap-label">Practice Hours</span><div class="gap-track"><div class="gap-fill practice"></div></div></div>
+              <div class="gap-disconnect"><div class="gap-disconnect-line"></div><span class="gap-disconnect-text">THE DISCONNECT</span></div>
             </div>
             <p class="reason-desc">Wanting profits without putting in the work. No time for lessons — plenty of time for losses.</p>
-            <div class="reason-quote">"Education before execution."</div>
+            <div class="reason-quote-box"><div class="reason-quote">"Education before execution."</div></div>
           </div>
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 7: The 10% Who Win ══════ -->
     <div class="slide-wrapper" data-slide="7">
       <span class="slide-label">Slide 7 — The Fix</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-teal slide-7">
         <div class="slide-content">
+          <span class="slide-counter">07 / 08</span>
           <div class="fix-layout">
             <h2 class="fix-heading">The <span class="green">10%</span> Who Win</h2>
             <p class="fix-subtext">They fixed these first — in this order:</p>
             <div class="fix-steps">
-              <div class="fix-step">
-                <div class="fix-num">1</div>
-                <div class="fix-content">
-                  <div class="fix-name">Edge</div>
-                  <div class="fix-detail">Defined strategy with proven setups</div>
-                </div>
-              </div>
-              <div class="fix-arrow">↓</div>
-              <div class="fix-step">
-                <div class="fix-num">2</div>
-                <div class="fix-content">
-                  <div class="fix-name">Risk Management</div>
-                  <div class="fix-detail">Sized positions to survive drawdowns</div>
-                </div>
-              </div>
-              <div class="fix-arrow">↓</div>
-              <div class="fix-step">
-                <div class="fix-num">3</div>
-                <div class="fix-content">
-                  <div class="fix-name">Psychology</div>
-                  <div class="fix-detail">Controlled emotions, traded the plan</div>
-                </div>
-              </div>
-              <div class="fix-arrow">↓</div>
-              <div class="fix-step">
-                <div class="fix-num">4</div>
-                <div class="fix-content">
-                  <div class="fix-name">Execution</div>
-                  <div class="fix-detail">Consistent process, no shortcuts</div>
-                </div>
-              </div>
+              <div class="fix-step"><div class="fix-ring"><span class="fix-ring-num">1</span></div><div class="fix-content"><div class="fix-name">Edge</div><div class="fix-detail">Defined strategy with proven setups</div></div></div>
+              <div class="fix-arrow">&#8595;</div>
+              <div class="fix-step"><div class="fix-ring"><span class="fix-ring-num">2</span></div><div class="fix-content"><div class="fix-name">Risk Management</div><div class="fix-detail">Sized positions to survive drawdowns</div></div></div>
+              <div class="fix-arrow">&#8595;</div>
+              <div class="fix-step"><div class="fix-ring"><span class="fix-ring-num">3</span></div><div class="fix-content"><div class="fix-name">Psychology</div><div class="fix-detail">Controlled emotions, traded the plan</div></div></div>
+              <div class="fix-arrow">&#8595;</div>
+              <div class="fix-step"><div class="fix-ring"><span class="fix-ring-num">4</span></div><div class="fix-content"><div class="fix-name">Execution</div><div class="fix-detail">Consistent process, no shortcuts</div></div></div>
             </div>
             <div class="fix-note">IN THAT ORDER. NO SHORTCUTS.</div>
           </div>
@@ -853,22 +345,17 @@
       </div>
     </div>
 
-    <!-- ══════ SLIDE 8: CTA ══════ -->
     <div class="slide-wrapper" data-slide="8">
       <span class="slide-label">Slide 8 — CTA</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-teal slide-8">
         <div class="slide-content">
+          <span class="slide-counter">08 / 08</span>
           <div class="cta-container">
-            <div class="cta-icon">💀</div>
+            <div class="cta-glow"><span class="cta-glow-icon">&#9888;</span></div>
             <h2 class="cta-headline">Don't Be a<br><span class="cta-accent">Statistic.</span></h2>
             <p class="cta-body">Full article on why most traders fail — and the exact steps the 10% take to win.</p>
-            <div class="cta-box">
-              <p class="cta-box-text">Read the full article</p>
-              <span class="cta-link">signalpilot.io</span>
-            </div>
+            <div class="cta-pills"><span class="cta-pill">Psychology</span><span class="cta-pill">Risk Mgmt</span><span class="cta-pill">Edge</span></div>
+            <div class="cta-box"><p class="cta-box-text">Read the full article</p><span class="cta-link">blog.signalpilot.io</span></div>
           </div>
           <div class="slide-logo">Signal Pilot</div>
         </div>
@@ -876,39 +363,8 @@
     </div>
 
   </div>
-
   <script>
-    (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
-      const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
-      const slideWrappers = document.querySelectorAll('.slide-wrapper');
-      let exportMode = false;
-      let currentSlide = 0;
-
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
-      exportBtn.addEventListener('click', function() {
-        exportMode = !exportMode;
-        document.body.classList.toggle('export-mode', exportMode);
-        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
-        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
-      });
-      function updateActiveSlide() {
-        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
-      }
-      document.addEventListener('keydown', function(e) {
-        if (!exportMode) return;
-        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
-      });
-    })();
+  (function(){var b=document.getElementById('export-btn'),w=document.querySelectorAll('.slide-wrapper'),e=false,c=0;b.addEventListener('click',function(){e=!e;document.body.classList.toggle('export-mode',e);this.textContent=e?'Exit Export':'Export Mode';if(e){c=0;u()}});function u(){w.forEach(function(s,i){s.classList.toggle('active',i===c)})}document.addEventListener('keydown',function(ev){if(!e)return;if(ev.key==='ArrowRight'||ev.key===' '){c=(c+1)%w.length;u()}else if(ev.key==='ArrowLeft'){c=(c-1+w.length)%w.length;u()}else if(ev.key==='Escape'){e=false;document.body.classList.remove('export-mode');b.textContent='Export Mode'}})})();
   </script>
 </body>
 </html>
