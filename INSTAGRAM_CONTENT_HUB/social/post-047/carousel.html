@@ -1,843 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 047 — Smart Money Concepts | Carousel Preview</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --bg-card: rgba(255,255,255,0.03);
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255,255,255,0.7);
-      --text-muted: rgba(255,255,255,0.4);
-      --border-subtle: rgba(255,255,255,0.1);
-      --teal: #5eead4;
-      --teal-dim: rgba(94,234,212,0.3);
-      --bull: #22c55e;
-      --bear: #ef4444;
-      --amber: #f59e0b;
-      --purple: #a78bfa;
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans: 'Inter', -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
-    body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post 047 — Smart Money Concepts | Carousel Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Gugi&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Base ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0a0a0f;--surface:rgba(255,255,255,0.02);
+  --teal:#5eead4;--teal-l:rgba(94,234,212,0.12);--teal-b:rgba(94,234,212,0.25);
+  --green:#4ade80;--green-l:rgba(74,222,128,0.12);--green-b:rgba(74,222,128,0.25);
+  --red:#f87171;--red-l:rgba(248,113,113,0.12);--red-b:rgba(248,113,113,0.25);
+  --blue:#60a5fa;--blue-l:rgba(96,165,250,0.12);--blue-b:rgba(96,165,250,0.25);
+  --purple:#a855f7;--purple-l:rgba(168,85,247,0.12);--purple-b:rgba(168,85,247,0.25);
+  --amber:#f59e0b;--amber-l:rgba(245,158,11,0.12);--amber-b:rgba(245,158,11,0.25);
+  --txt:#e4e4e7;--txt2:#a1a1aa;--txt3:#52525b;
+  --serif:'Cormorant Garamond',serif;--sans:'Inter',sans-serif;
+  --mono:'JetBrains Mono',monospace;--brand:'Gugi',sans-serif;
+}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);min-height:100vh;padding:40px 20px;}
 
-    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
-    .page-title { text-align: center; margin-bottom: 2rem; }
-    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
+/* ── Controls ── */
+.controls{position:fixed;top:20px;right:20px;z-index:100;display:flex;gap:12px;align-items:center;}
+.controls button{background:var(--teal);color:var(--bg);border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;}
 
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
-    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
-    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5%; }
+/* ── Page ── */
+.page-title{text-align:center;margin-bottom:40px;}
+.page-title h1{font-family:var(--serif);font-size:28px;font-weight:400;margin-bottom:8px;color:var(--txt);}
+.page-title p{color:var(--txt3);font-size:14px;}
+.carousel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1400px;margin:0 auto;}
 
-    /* ═══════════════════════════════════════════
-       SLIDE 1 — Cinematic Hook (TEAL accent)
-       ═══════════════════════════════════════════ */
-    .slide-teal { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
-    .slide-teal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-teal.slide-1::after { content: ''; position: absolute; top: 0; left: 0; width: 18px; height: 100%; background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%); z-index: 5; }
-    .slide-teal .slide-content { z-index: 3; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
-    .slide-1 .cine-label { font-size: clamp(0.5rem, 1.6cqw, 0.875rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94,234,212,0.9); margin-bottom: 8%; }
-    .slide-1 .hook-main { font-size: clamp(1.4rem, 4.5cqw, 2.5rem); font-weight: 600; line-height: 1.2; color: rgba(255,255,255,0.95); margin-bottom: 4%; }
-    .slide-1 .cine-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent); margin-bottom: 4%; }
-    .slide-1 .hook-sub { font-size: clamp(0.65rem, 2cqw, 1.1rem); font-weight: 300; letter-spacing: 0.05em; color: rgba(94,234,212,0.4); line-height: 1.6; }
+/* ── Slide Wrapper ── */
+.slide-wrapper{aspect-ratio:4/5;position:relative;border-radius:12px;overflow:hidden;background:var(--bg);box-shadow:0 4px 24px rgba(0,0,0,0.4);container-type:inline-size;}
+.slide-content{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;padding:8%;text-align:center;}
+.slide-number{position:absolute;top:4%;left:5%;font-family:var(--mono);font-size:clamp(7px,1.4cqw,10px);color:var(--txt3);letter-spacing:0.12em;}
+.brand-mark{position:absolute;bottom:4%;right:5%;font-family:var(--brand);font-size:clamp(7px,1.4cqw,10px);color:rgba(94,234,212,0.25);letter-spacing:0.15em;}
 
-    /* ═══════════════════════════════════════════
-       CONCEPT SLIDE — Shared layout
-       ═══════════════════════════════════════════ */
-    .concept-stage {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+/* ── Slide Backgrounds (teal theme) ── */
+.slide-wrapper::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;}
+.s1::before{background:radial-gradient(ellipse at 50% 30%,rgba(94,234,212,0.06) 0%,transparent 70%);}
+.s1::after{content:'';position:absolute;top:0;left:0;width:18px;height:100%;background:linear-gradient(180deg,rgba(94,234,212,0.9) 0%,rgba(45,180,160,0.7) 100%);z-index:5;}
+.s2::before{background:radial-gradient(ellipse at 30% 60%,rgba(94,234,212,0.04) 0%,transparent 65%);}
+.s3::before{background:radial-gradient(ellipse at 70% 40%,rgba(245,158,11,0.04) 0%,transparent 65%);}
+.s4::before{background:radial-gradient(ellipse at 50% 70%,rgba(74,222,128,0.04) 0%,transparent 65%);}
+.s5::before{background:radial-gradient(ellipse at 40% 40%,rgba(168,85,247,0.04) 0%,transparent 65%);}
+.s6::before{background:radial-gradient(ellipse at 60% 50%,rgba(94,234,212,0.04) 0%,transparent 65%);}
+.s7::before{background:radial-gradient(ellipse at 50% 40%,rgba(94,234,212,0.05) 0%,transparent 65%);}
+.s8::before{background:radial-gradient(ellipse at 50% 50%,rgba(94,234,212,0.04) 0%,transparent 60%);}
 
-    .concept-num {
-      font-family: var(--font-mono);
-      font-size: clamp(8px, 1.4cqw, 14px);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 2%;
-    }
+/* ── Orb (teal) ── */
+.orb{
+  position:relative;
+  width:clamp(100px,20cqw,200px);height:clamp(100px,20cqw,200px);
+  border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,rgba(94,234,212,0.3) 0%,rgba(94,234,212,0.1) 40%,rgba(255,255,255,0.03) 70%,transparent 100%);
+  border:2px solid rgba(94,234,212,0.25);
+  box-shadow:0 0 50px rgba(94,234,212,0.12),0 0 100px rgba(94,234,212,0.04),inset 0 0 30px rgba(94,234,212,0.06);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:clamp(12px,3cqw,24px);flex-shrink:0;
+}
+.orb::before{content:'';position:absolute;inset:7px;border-radius:50%;border:1.5px solid rgba(94,234,212,0.15);}
+.orb::after{content:'';position:absolute;inset:18px;border-radius:50%;border:1px dashed rgba(94,234,212,0.12);}
+.orb-icon{font-size:clamp(28px,5.5cqw,50px);position:relative;z-index:2;}
 
-    .concept-title {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.6cqw, 38px);
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 4%;
-    }
+/* ── Typography ── */
+.hook-tag{font-family:var(--mono);font-size:clamp(7px,1.3cqw,10px);letter-spacing:0.25em;text-transform:uppercase;color:var(--teal);margin-bottom:clamp(6px,1.5cqw,12px);}
+.hook-title{font-family:var(--serif);font-size:clamp(22px,5.5cqw,42px);font-weight:600;line-height:1.15;color:var(--txt);margin-bottom:clamp(6px,1.5cqw,12px);}
+.hook-title em{font-style:normal;color:var(--teal);}
+.hook-sub{font-size:clamp(9px,1.8cqw,13px);color:var(--txt2);line-height:1.5;max-width:85%;}
 
-    /* Chart box shared */
-    .chart-box {
-      width: 85%;
-      aspect-ratio: 16 / 9;
-      position: relative;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: clamp(6px, 1.2cqw, 12px);
-      margin-bottom: 5%;
-      overflow: hidden;
-    }
+/* ── Section Headers ── */
+.sec-tag{font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:clamp(4px,1cqw,8px);}
+.sec-title{font-family:var(--serif);font-size:clamp(16px,3.8cqw,28px);font-weight:600;line-height:1.2;color:var(--txt);margin-bottom:clamp(10px,2.5cqw,20px);}
+.sec-title em{font-style:normal;color:var(--teal);}
+.sec-sub{font-size:clamp(7px,1.3cqw,10px);color:var(--txt2);margin-bottom:clamp(10px,2.5cqw,20px);}
 
-    .concept-desc {
-      width: 85%;
-      text-align: center;
-    }
+/* ── Concept Badge ── */
+.concept-badge{display:flex;align-items:center;gap:clamp(6px,1.2cqw,10px);margin-bottom:clamp(10px,2.5cqw,20px);}
+.concept-num{width:clamp(28px,5.5cqw,50px);height:clamp(28px,5.5cqw,50px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:clamp(10px,2cqw,16px);font-weight:700;flex-shrink:0;}
+.concept-num.cn-teal{background:var(--teal-l);border:1.5px solid var(--teal-b);color:var(--teal);}
+.concept-num.cn-amber{background:var(--amber-l);border:1.5px solid var(--amber-b);color:var(--amber);}
+.concept-num.cn-green{background:var(--green-l);border:1.5px solid var(--green-b);color:var(--green);}
+.concept-num.cn-purple{background:var(--purple-l);border:1.5px solid var(--purple-b);color:var(--purple);}
 
-    .concept-tagline {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 3%;
-    }
+/* ── Chart Box ── */
+.chart-box{width:92%;aspect-ratio:16/9;position:relative;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:clamp(6px,1.2cqw,12px);margin-bottom:clamp(10px,2.5cqw,20px);overflow:hidden;}
 
-    .concept-note {
-      font-size: clamp(8px, 1.5cqw, 15px);
-      color: var(--text-muted);
-      font-style: italic;
-      line-height: 1.5;
-    }
+/* ── Chart Labels ── */
+.chart-label{position:absolute;font-family:var(--mono);font-size:clamp(5px,1cqw,8px);letter-spacing:0.1em;opacity:0.7;}
 
-    /* ─── LIQUIDITY chart ─── */
-    .liq-num { color: var(--teal); }
+/* ── Concept Descriptions ── */
+.concept-desc{width:92%;text-align:left;}
+.cd-main{font-size:clamp(9px,1.7cqw,13px);color:var(--txt2);line-height:1.5;margin-bottom:clamp(4px,0.8cqw,7px);}
+.cd-note{font-size:clamp(7px,1.3cqw,10px);color:var(--txt3);font-style:italic;line-height:1.4;}
 
-    /* Swing highs and lows */
-    .liq-line {
-      position: absolute;
-      height: 2px;
-      border-radius: 1px;
-      background: rgba(255,255,255,0.25);
-    }
-    .liq-line:nth-child(1) { top: 55%; left: 5%; width: 12%; transform: rotate(-20deg); }
-    .liq-line:nth-child(2) { top: 35%; left: 15%; width: 10%; transform: rotate(-25deg); }
-    .liq-line:nth-child(3) { top: 25%; left: 23%; width: 12%; transform: rotate(20deg); }
-    .liq-line:nth-child(4) { top: 40%; left: 33%; width: 10%; transform: rotate(25deg); }
-    .liq-line:nth-child(5) { top: 50%; left: 41%; width: 12%; transform: rotate(-18deg); }
-    .liq-line:nth-child(6) { top: 30%; left: 51%; width: 10%; transform: rotate(-22deg); }
-    .liq-line:nth-child(7) { top: 20%; left: 59%; width: 12%; transform: rotate(15deg); }
-    .liq-line:nth-child(8) { top: 35%; left: 69%; width: 10%; transform: rotate(20deg); }
-    .liq-line:nth-child(9) { top: 45%; left: 77%; width: 12%; transform: rotate(-12deg); }
-    .liq-line:nth-child(10) { top: 28%; left: 87%; width: 10%; transform: rotate(-18deg); }
+/* ─────────────────────────────────────
+   LIQUIDITY CHART (Slide 2)
+   ───────────────────────────────────── */
+.liq-line{position:absolute;height:2px;border-radius:1px;background:rgba(255,255,255,0.25);}
+.liq-line:nth-child(1){top:55%;left:5%;width:12%;transform:rotate(-20deg);}
+.liq-line:nth-child(2){top:35%;left:15%;width:10%;transform:rotate(-25deg);}
+.liq-line:nth-child(3){top:25%;left:23%;width:12%;transform:rotate(20deg);}
+.liq-line:nth-child(4){top:40%;left:33%;width:10%;transform:rotate(25deg);}
+.liq-line:nth-child(5){top:50%;left:41%;width:12%;transform:rotate(-18deg);}
+.liq-line:nth-child(6){top:30%;left:51%;width:10%;transform:rotate(-22deg);}
+.liq-line:nth-child(7){top:20%;left:59%;width:12%;transform:rotate(15deg);}
+.liq-line:nth-child(8){top:35%;left:69%;width:10%;transform:rotate(20deg);}
+.liq-line:nth-child(9){top:45%;left:77%;width:12%;transform:rotate(-12deg);}
+.liq-line:nth-child(10){top:28%;left:87%;width:10%;transform:rotate(-18deg);}
 
-    /* Stop clusters above swing highs */
-    .liq-cluster {
-      position: absolute;
-      display: flex;
-      gap: 2px;
-      flex-direction: column;
-      align-items: center;
-    }
+.liq-zone{position:absolute;height:10%;background:rgba(239,68,68,0.08);border-bottom:1.5px dashed rgba(239,68,68,0.3);}
+.liq-zone:nth-of-type(1){top:6%;left:18%;width:18%;}
+.liq-zone:nth-of-type(2){top:3%;left:54%;width:18%;}
 
-    .liq-dot {
-      width: clamp(4px, 0.8cqw, 8px);
-      height: clamp(4px, 0.8cqw, 8px);
-      border-radius: 50%;
-      background: var(--bear);
-      opacity: 0.6;
-    }
+.liq-cluster{position:absolute;display:flex;gap:2px;flex-direction:column;align-items:center;}
+.liq-dot{width:clamp(4px,0.8cqw,8px);height:clamp(4px,0.8cqw,8px);border-radius:50%;background:var(--red);opacity:0.6;}
+.liq-cluster:nth-of-type(1){top:8%;left:24%;}
+.liq-cluster:nth-of-type(2){top:5%;left:60%;}
+.liq-cluster:nth-of-type(3){top:10%;left:88%;}
 
-    .liq-cluster:nth-of-type(1) { top: 8%; left: 24%; }
-    .liq-cluster:nth-of-type(2) { top: 5%; left: 60%; }
-    .liq-cluster:nth-of-type(3) { top: 10%; left: 88%; }
+/* ─────────────────────────────────────
+   INDUCEMENT CHART (Slide 3)
+   ───────────────────────────────────── */
+.ind-line{position:absolute;height:2px;border-radius:1px;}
+.ind-line:nth-child(1){top:60%;left:5%;width:15%;background:rgba(255,255,255,0.25);transform:rotate(-15deg);}
+.ind-line:nth-child(2){top:45%;left:18%;width:12%;background:rgba(255,255,255,0.25);transform:rotate(-20deg);}
+.ind-line:nth-child(3){top:30%;left:28%;width:15%;background:rgba(255,255,255,0.25);transform:rotate(5deg);}
+.ind-line:nth-child(4){top:35%;left:41%;width:10%;background:rgba(255,255,255,0.25);transform:rotate(15deg);}
+.ind-line:nth-child(5){top:18%;left:49%;width:8%;background:var(--red);transform:rotate(-50deg);opacity:0.8;}
+.ind-line:nth-child(6){top:25%;left:55%;width:12%;background:var(--red);transform:rotate(35deg);opacity:0.7;}
+.ind-line:nth-child(7){top:45%;left:64%;width:14%;background:var(--red);transform:rotate(20deg);opacity:0.6;}
+.ind-line:nth-child(8){top:60%;left:76%;width:12%;background:var(--red);transform:rotate(15deg);opacity:0.5;}
 
-    /* Cluster zones above highs */
-    .liq-zone {
-      position: absolute;
-      height: 10%;
-      background: rgba(239,68,68,0.08);
-      border-bottom: 1.5px dashed rgba(239,68,68,0.3);
-    }
-    .liq-zone:nth-of-type(1) { top: 6%; left: 18%; width: 18%; }
-    .liq-zone:nth-of-type(2) { top: 3%; left: 54%; width: 18%; }
+.ind-resistance{position:absolute;top:25%;left:5%;width:55%;height:0;border-top:1.5px dashed rgba(245,158,11,0.4);}
+.ind-trap{position:absolute;top:10%;left:45%;width:16%;height:15%;background:rgba(239,68,68,0.08);border:1px dashed rgba(239,68,68,0.25);border-radius:clamp(4px,0.8cqw,8px);display:flex;align-items:center;justify-content:center;}
+.ind-trap-text{font-family:var(--mono);font-size:clamp(5px,0.9cqw,9px);color:var(--red);opacity:0.8;text-transform:uppercase;letter-spacing:0.1em;}
 
-    .liq-zone-label {
-      position: absolute;
-      top: 2%;
-      right: 5%;
-      font-family: var(--font-mono);
-      font-size: clamp(6px, 1.1cqw, 11px);
-      color: var(--bear);
-      opacity: 0.7;
-      letter-spacing: 0.1em;
-    }
+/* ─────────────────────────────────────
+   ORDER BLOCKS CHART (Slide 4)
+   ───────────────────────────────────── */
+.ob-line{position:absolute;height:2px;border-radius:1px;background:rgba(255,255,255,0.25);}
+.ob-line:nth-child(1){top:50%;left:5%;width:10%;transform:rotate(-8deg);}
+.ob-line:nth-child(2){top:45%;left:14%;width:8%;transform:rotate(5deg);}
+.ob-line:nth-child(3){top:50%;left:21%;width:10%;transform:rotate(10deg);}
+.ob-line:nth-child(4){top:40%;left:36%;width:8%;background:var(--green);transform:rotate(-25deg);}
+.ob-line:nth-child(5){top:25%;left:42%;width:10%;background:var(--green);transform:rotate(-20deg);}
+.ob-line:nth-child(6){top:15%;left:50%;width:12%;background:var(--green);transform:rotate(-10deg);}
+.ob-line:nth-child(7){top:18%;left:60%;width:10%;background:rgba(255,255,255,0.2);transform:rotate(18deg);}
+.ob-line:nth-child(8){top:30%;left:68%;width:8%;background:rgba(255,255,255,0.2);transform:rotate(15deg);}
+.ob-line:nth-child(9){top:42%;left:74%;width:10%;background:var(--green);transform:rotate(-20deg);}
+.ob-line:nth-child(10){top:28%;left:82%;width:12%;background:var(--green);transform:rotate(-15deg);}
 
-    /* ─── INDUCEMENT chart ─── */
-    .ind-num { color: var(--amber); }
+.ob-zone{position:absolute;top:45%;left:28%;width:60%;height:14%;background:rgba(74,222,128,0.08);border:1.5px solid rgba(74,222,128,0.25);border-radius:clamp(4px,0.8cqw,8px);}
 
-    .ind-line {
-      position: absolute;
-      height: 2px;
-      border-radius: 1px;
-    }
-    /* Price moves up then sweeps and reverses */
-    .ind-line:nth-child(1) { top: 60%; left: 5%; width: 15%; background: rgba(255,255,255,0.25); transform: rotate(-15deg); }
-    .ind-line:nth-child(2) { top: 45%; left: 18%; width: 12%; background: rgba(255,255,255,0.25); transform: rotate(-20deg); }
-    .ind-line:nth-child(3) { top: 30%; left: 28%; width: 15%; background: rgba(255,255,255,0.25); transform: rotate(5deg); }
-    .ind-line:nth-child(4) { top: 35%; left: 41%; width: 10%; background: rgba(255,255,255,0.25); transform: rotate(15deg); }
-    /* The fake breakout spike up */
-    .ind-line:nth-child(5) { top: 18%; left: 49%; width: 8%; background: var(--bear); transform: rotate(-50deg); opacity: 0.8; }
-    /* The reversal down */
-    .ind-line:nth-child(6) { top: 25%; left: 55%; width: 12%; background: var(--bear); transform: rotate(35deg); opacity: 0.7; }
-    .ind-line:nth-child(7) { top: 45%; left: 64%; width: 14%; background: var(--bear); transform: rotate(20deg); opacity: 0.6; }
-    .ind-line:nth-child(8) { top: 60%; left: 76%; width: 12%; background: var(--bear); transform: rotate(15deg); opacity: 0.5; }
+/* ─────────────────────────────────────
+   FVG CHART (Slide 5)
+   ───────────────────────────────────── */
+.fvg-candle{position:absolute;width:clamp(6px,1.4cqw,14px);border-radius:2px;}
+.fvg-candle:nth-child(1){left:10%;top:40%;height:15%;background:rgba(255,255,255,0.2);}
+.fvg-candle:nth-child(2){left:18%;top:35%;height:18%;background:rgba(255,255,255,0.2);}
+.fvg-candle:nth-child(3){left:26%;top:30%;height:12%;background:var(--green);opacity:0.6;}
+.fvg-candle:nth-child(4){left:34%;top:10%;height:30%;background:var(--green);opacity:0.7;}
+.fvg-candle:nth-child(5){left:42%;top:15%;height:18%;background:var(--green);opacity:0.6;}
+.fvg-candle:nth-child(6){left:50%;top:20%;height:12%;background:rgba(255,255,255,0.2);}
+.fvg-candle:nth-child(7){left:58%;top:25%;height:15%;background:rgba(255,255,255,0.2);}
+.fvg-candle:nth-child(8){left:66%;top:30%;height:12%;background:rgba(239,68,68,0.5);}
+.fvg-candle:nth-child(9){left:74%;top:28%;height:10%;background:rgba(255,255,255,0.2);}
+.fvg-candle:nth-child(10){left:82%;top:22%;height:14%;background:var(--green);opacity:0.5;}
 
-    /* Resistance level that gets swept */
-    .ind-resistance {
-      position: absolute;
-      top: 25%;
-      left: 5%;
-      width: 55%;
-      height: 0;
-      border-top: 1.5px dashed rgba(245,158,11,0.4);
-    }
+.fvg-gap{position:absolute;top:33%;left:30%;width:28%;height:10%;background:rgba(168,85,247,0.1);border:1.5px solid rgba(168,85,247,0.35);border-radius:clamp(3px,0.6cqw,6px);}
+.fvg-fill-arrow{position:absolute;top:35%;right:22%;font-size:clamp(10px,2cqw,20px);color:var(--purple);opacity:0.5;transform:rotate(180deg);}
 
-    .ind-resist-label {
-      position: absolute;
-      top: 21%;
-      left: 5%;
-      font-family: var(--font-mono);
-      font-size: clamp(6px, 1.1cqw, 11px);
-      color: var(--amber);
-      opacity: 0.7;
-    }
+/* ─────────────────────────────────────
+   BOS CHART (Slide 6)
+   ───────────────────────────────────── */
+.bos-line{position:absolute;height:2px;border-radius:1px;background:rgba(255,255,255,0.25);}
+.bos-line:nth-child(1){top:25%;left:5%;width:12%;transform:rotate(15deg);}
+.bos-line:nth-child(2){top:35%;left:15%;width:10%;transform:rotate(-12deg);}
+.bos-line:nth-child(3){top:30%;left:23%;width:12%;transform:rotate(18deg);}
+.bos-line:nth-child(4){top:45%;left:33%;width:10%;transform:rotate(-10deg);}
+.bos-line:nth-child(5){top:40%;left:41%;width:12%;transform:rotate(14deg);}
+.bos-line:nth-child(6){top:52%;left:51%;width:10%;transform:rotate(-8deg);}
+.bos-line:nth-child(7){top:45%;left:59%;width:10%;background:var(--teal);transform:rotate(-25deg);}
+.bos-line:nth-child(8){top:30%;left:67%;width:12%;background:var(--teal);transform:rotate(-18deg);}
+.bos-line:nth-child(9){top:18%;left:77%;width:14%;background:var(--teal);transform:rotate(-8deg);}
 
-    /* Trap zone */
-    .ind-trap {
-      position: absolute;
-      top: 10%;
-      left: 45%;
-      width: 16%;
-      height: 15%;
-      background: rgba(239,68,68,0.08);
-      border: 1px dashed rgba(239,68,68,0.25);
-      border-radius: clamp(4px, 0.8cqw, 8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+.bos-level{position:absolute;top:32%;left:5%;width:70%;height:0;border-top:1.5px dashed rgba(94,234,212,0.3);}
+.bos-marker{position:absolute;top:22%;left:62%;font-family:var(--mono);font-size:clamp(7px,1.3cqw,13px);font-weight:600;color:var(--teal);background:rgba(94,234,212,0.1);padding:clamp(2px,0.4cqw,4px) clamp(6px,1.2cqw,12px);border-radius:4px;border:1px solid rgba(94,234,212,0.3);}
 
-    .ind-trap-text {
-      font-family: var(--font-mono);
-      font-size: clamp(5px, 0.9cqw, 9px);
-      color: var(--bear);
-      opacity: 0.8;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
+/* ── Orb Small ── */
+.orb-sm{position:relative;width:clamp(56px,11cqw,100px);height:clamp(56px,11cqw,100px);border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(94,234,212,0.3) 0%,rgba(94,234,212,0.1) 40%,rgba(255,255,255,0.03) 70%,transparent 100%);border:2px solid rgba(94,234,212,0.25);box-shadow:0 0 40px rgba(94,234,212,0.1),inset 0 0 20px rgba(94,234,212,0.06);display:flex;align-items:center;justify-content:center;margin-bottom:clamp(8px,2cqw,16px);}
+.orb-sm::before{content:'';position:absolute;inset:5px;border-radius:50%;border:1.5px solid rgba(94,234,212,0.15);}
+.orb-sm::after{content:'';position:absolute;inset:12px;border-radius:50%;border:1px dashed rgba(94,234,212,0.1);}
+.orb-sm .orb-letter{font-family:var(--serif);font-size:clamp(18px,4cqw,34px);font-weight:600;color:var(--teal);position:relative;z-index:2;}
 
-    /* ─── ORDER BLOCKS chart ─── */
-    .ob-num { color: var(--bull); }
+/* ── Truth Grid ── */
+.truth-grid{width:92%;display:grid;grid-template-columns:1fr 1fr;gap:clamp(5px,1cqw,9px);margin-bottom:clamp(8px,2cqw,16px);}
+.truth-card{padding:clamp(8px,1.6cqw,14px);border-radius:clamp(8px,1.5cqw,14px);background:var(--surface);border:1px solid rgba(255,255,255,0.04);text-align:left;}
+.truth-card .tc-title{font-family:var(--serif);font-size:clamp(9px,1.8cqw,14px);font-weight:600;color:var(--txt);margin-bottom:clamp(2px,0.4cqw,4px);}
+.truth-card .tc-desc{font-size:clamp(7px,1.2cqw,10px);color:var(--txt2);line-height:1.4;}
+.truth-quote{font-family:var(--serif);font-size:clamp(11px,2.2cqw,17px);font-style:italic;color:var(--txt2);line-height:1.5;max-width:85%;}
+.truth-quote em{font-style:normal;color:var(--teal);}
 
-    .ob-line {
-      position: absolute;
-      height: 2px;
-      border-radius: 1px;
-      background: rgba(255,255,255,0.25);
-    }
-    .ob-line:nth-child(1) { top: 50%; left: 5%; width: 10%; transform: rotate(-8deg); }
-    .ob-line:nth-child(2) { top: 45%; left: 14%; width: 8%; transform: rotate(5deg); }
-    .ob-line:nth-child(3) { top: 50%; left: 21%; width: 10%; transform: rotate(10deg); }
-    /* Strong move up from OB */
-    .ob-line:nth-child(4) { top: 40%; left: 36%; width: 8%; background: var(--bull); transform: rotate(-25deg); }
-    .ob-line:nth-child(5) { top: 25%; left: 42%; width: 10%; background: var(--bull); transform: rotate(-20deg); }
-    .ob-line:nth-child(6) { top: 15%; left: 50%; width: 12%; background: var(--bull); transform: rotate(-10deg); }
-    /* Return to OB */
-    .ob-line:nth-child(7) { top: 18%; left: 60%; width: 10%; background: rgba(255,255,255,0.2); transform: rotate(18deg); }
-    .ob-line:nth-child(8) { top: 30%; left: 68%; width: 8%; background: rgba(255,255,255,0.2); transform: rotate(15deg); }
-    /* Bounce from OB again */
-    .ob-line:nth-child(9) { top: 42%; left: 74%; width: 10%; background: var(--bull); transform: rotate(-20deg); }
-    .ob-line:nth-child(10) { top: 28%; left: 82%; width: 12%; background: var(--bull); transform: rotate(-15deg); }
+/* ── CTA Slide ── */
+.cta-badge{display:inline-block;padding:clamp(3px,0.6cqw,5px) clamp(10px,2cqw,18px);border:1px solid rgba(94,234,212,0.3);border-radius:20px;font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);color:var(--teal);letter-spacing:0.2em;margin-bottom:clamp(8px,2cqw,16px);}
+.cta-title{font-family:var(--serif);font-size:clamp(18px,4.5cqw,34px);font-weight:600;color:var(--txt);line-height:1.2;margin-bottom:clamp(4px,1cqw,8px);}
+.cta-title em{font-style:normal;color:var(--teal);}
+.cta-sub{font-size:clamp(8px,1.6cqw,12px);color:var(--txt2);line-height:1.5;max-width:85%;margin-bottom:clamp(10px,2.5cqw,20px);}
+.stat-grid{width:88%;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(4px,0.8cqw,7px);margin-bottom:clamp(10px,2.5cqw,20px);}
+.stat-cell{padding:clamp(6px,1.2cqw,10px);border-radius:clamp(6px,1cqw,10px);background:var(--surface);border:1px solid rgba(255,255,255,0.04);text-align:center;}
+.stat-cell .sv{font-family:var(--serif);font-size:clamp(12px,2.8cqw,22px);font-weight:600;color:var(--teal);}
+.stat-cell .sl{font-size:clamp(6px,1cqw,8px);color:var(--txt3);letter-spacing:0.08em;margin-top:clamp(1px,0.2cqw,2px);}
+.pill-row{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(3px,0.6cqw,6px);width:88%;margin-bottom:clamp(10px,2.5cqw,20px);}
+.pill{padding:clamp(2px,0.4cqw,4px) clamp(6px,1.2cqw,10px);border-radius:12px;font-family:var(--mono);font-size:clamp(5px,1cqw,8px);letter-spacing:0.08em;border:1px solid rgba(94,234,212,0.2);color:var(--teal);background:rgba(94,234,212,0.06);}
+.cta-box{width:80%;padding:clamp(10px,2cqw,18px);border-radius:clamp(8px,1.5cqw,14px);background:rgba(94,234,212,0.08);border:1.5px solid rgba(94,234,212,0.25);text-align:center;}
+.cta-url{font-family:var(--mono);font-size:clamp(9px,1.8cqw,14px);color:var(--teal);letter-spacing:0.05em;}
+.cta-hint{font-size:clamp(6px,1.1cqw,9px);color:var(--txt3);margin-top:clamp(3px,0.5cqw,5px);}
 
-    /* Order block zone */
-    .ob-zone {
-      position: absolute;
-      top: 45%;
-      left: 28%;
-      width: 60%;
-      height: 14%;
-      background: rgba(34,197,94,0.08);
-      border: 1.5px solid rgba(34,197,94,0.25);
-      border-radius: clamp(4px, 0.8cqw, 8px);
-    }
-
-    .ob-zone-label {
-      position: absolute;
-      top: 61%;
-      left: 30%;
-      font-family: var(--font-mono);
-      font-size: clamp(6px, 1.1cqw, 11px);
-      color: var(--bull);
-      opacity: 0.7;
-      letter-spacing: 0.1em;
-    }
-
-    /* ─── FVG chart ─── */
-    .fvg-num { color: var(--purple); }
-
-    /* Candle-like elements */
-    .fvg-candle {
-      position: absolute;
-      width: clamp(6px, 1.4cqw, 14px);
-      border-radius: 2px;
-    }
-
-    .fvg-candle:nth-child(1) { left: 10%; top: 40%; height: 15%; background: rgba(255,255,255,0.2); }
-    .fvg-candle:nth-child(2) { left: 18%; top: 35%; height: 18%; background: rgba(255,255,255,0.2); }
-    .fvg-candle:nth-child(3) { left: 26%; top: 30%; height: 12%; background: var(--bull); opacity: 0.6; }
-    /* Big impulse candle — creates the gap */
-    .fvg-candle:nth-child(4) { left: 34%; top: 10%; height: 30%; background: var(--bull); opacity: 0.7; }
-    /* Gap here between candle 3 bottom and candle 5 top */
-    .fvg-candle:nth-child(5) { left: 42%; top: 15%; height: 18%; background: var(--bull); opacity: 0.6; }
-    .fvg-candle:nth-child(6) { left: 50%; top: 20%; height: 12%; background: rgba(255,255,255,0.2); }
-    /* Price returns to fill */
-    .fvg-candle:nth-child(7) { left: 58%; top: 25%; height: 15%; background: rgba(255,255,255,0.2); }
-    .fvg-candle:nth-child(8) { left: 66%; top: 30%; height: 12%; background: rgba(239,68,68,0.5); }
-    .fvg-candle:nth-child(9) { left: 74%; top: 28%; height: 10%; background: rgba(255,255,255,0.2); }
-    .fvg-candle:nth-child(10) { left: 82%; top: 22%; height: 14%; background: var(--bull); opacity: 0.5; }
-
-    /* FVG zone highlight */
-    .fvg-gap {
-      position: absolute;
-      top: 33%;
-      left: 30%;
-      width: 28%;
-      height: 10%;
-      background: rgba(167,139,250,0.1);
-      border: 1.5px solid rgba(167,139,250,0.35);
-      border-radius: clamp(3px, 0.6cqw, 6px);
-    }
-
-    .fvg-gap-label {
-      position: absolute;
-      top: 45%;
-      left: 32%;
-      font-family: var(--font-mono);
-      font-size: clamp(6px, 1.1cqw, 11px);
-      color: var(--purple);
-      opacity: 0.8;
-    }
-
-    /* Fill arrow */
-    .fvg-fill-arrow {
-      position: absolute;
-      top: 35%;
-      right: 22%;
-      font-size: clamp(10px, 2cqw, 20px);
-      color: var(--purple);
-      opacity: 0.5;
-      transform: rotate(180deg);
-    }
-
-    /* ─── BOS chart ─── */
-    .bos-num { color: var(--teal); }
-
-    .bos-line {
-      position: absolute;
-      height: 2px;
-      border-radius: 1px;
-      background: rgba(255,255,255,0.25);
-    }
-    /* Downtrend: lower highs, lower lows */
-    .bos-line:nth-child(1) { top: 25%; left: 5%; width: 12%; transform: rotate(15deg); }
-    .bos-line:nth-child(2) { top: 35%; left: 15%; width: 10%; transform: rotate(-12deg); }
-    .bos-line:nth-child(3) { top: 30%; left: 23%; width: 12%; transform: rotate(18deg); }
-    .bos-line:nth-child(4) { top: 45%; left: 33%; width: 10%; transform: rotate(-10deg); }
-    .bos-line:nth-child(5) { top: 40%; left: 41%; width: 12%; transform: rotate(14deg); }
-    .bos-line:nth-child(6) { top: 52%; left: 51%; width: 10%; transform: rotate(-8deg); }
-    /* The break — pushes through structure high */
-    .bos-line:nth-child(7) { top: 45%; left: 59%; width: 10%; background: var(--teal); transform: rotate(-25deg); }
-    .bos-line:nth-child(8) { top: 30%; left: 67%; width: 12%; background: var(--teal); transform: rotate(-18deg); }
-    .bos-line:nth-child(9) { top: 18%; left: 77%; width: 14%; background: var(--teal); transform: rotate(-8deg); }
-
-    /* Structure level that gets broken */
-    .bos-level {
-      position: absolute;
-      top: 32%;
-      left: 5%;
-      width: 70%;
-      height: 0;
-      border-top: 1.5px dashed rgba(94,234,212,0.3);
-    }
-
-    .bos-level-label {
-      position: absolute;
-      top: 28%;
-      left: 5%;
-      font-family: var(--font-mono);
-      font-size: clamp(6px, 1.1cqw, 11px);
-      color: var(--teal);
-      opacity: 0.6;
-    }
-
-    /* BOS marker */
-    .bos-marker {
-      position: absolute;
-      top: 22%;
-      left: 62%;
-      font-family: var(--font-mono);
-      font-size: clamp(7px, 1.3cqw, 13px);
-      font-weight: 600;
-      color: var(--teal);
-      background: rgba(94,234,212,0.1);
-      padding: clamp(2px, 0.4cqw, 4px) clamp(6px, 1.2cqw, 12px);
-      border-radius: 4px;
-      border: 1px solid rgba(94,234,212,0.3);
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 7 — Key Insight
-       ═══════════════════════════════════════════ */
-    .insight-stage {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .insight-ring {
-      width: clamp(80px, 16cqw, 160px);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      border: 2px solid rgba(94,234,212,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 5%;
-      position: relative;
-    }
-
-    .insight-ring::before {
-      content: '';
-      position: absolute;
-      width: 75%;
-      height: 75%;
-      border-radius: 50%;
-      border: 1.5px solid rgba(94,234,212,0.12);
-    }
-
-    .insight-icon {
-      font-size: clamp(30px, 6cqw, 64px);
-      z-index: 2;
-    }
-
-    .insight-title {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.6cqw, 38px);
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 4%;
-      line-height: 1.3;
-    }
-
-    .insight-body {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 82%;
-    }
-
-    .insight-accent { color: var(--teal); }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 8 — CTA
-       ═══════════════════════════════════════════ */
-    .cta-stage {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-icon {
-      font-size: clamp(40px, 8cqw, 86px);
-      margin-bottom: 5%;
-    }
-
-    .cta-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 3%;
-    }
-
-    .cta-accent { color: var(--teal); }
-
-    .cta-body {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 80%;
-      margin-bottom: 6%;
-    }
-
-    .cta-box {
-      background: linear-gradient(135deg, rgba(94,234,212,0.15) 0%, rgba(94,234,212,0.05) 100%);
-      border: 2px solid var(--teal);
-      border-radius: 14px;
-      padding: 3% 6%;
-    }
-
-    .cta-box-text {
-      font-size: clamp(11px, 2cqw, 22px);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 1%;
-    }
-
-    .cta-link {
-      font-size: clamp(10px, 1.7cqw, 18px);
-      font-weight: 600;
-      color: var(--teal);
-    }
-
-    /* Slide Logo (Gugi centered) */
-    .slide-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(94,234,212,0.4);
-      z-index: 2;
-      white-space: nowrap;
-    }
-
-    .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(94,234,212,0.4);
-      z-index: 2;
-      white-space: nowrap;
-    }
-  </style>
+/* ── Export Mode ── */
+body.export-mode{padding:0;background:#000;}
+body.export-mode .controls,body.export-mode .page-title{display:none;}
+body.export-mode .carousel-grid{display:block;}
+body.export-mode .slide-wrapper{display:none;width:1080px;height:1350px;border-radius:0;margin:0;}
+body.export-mode .slide-wrapper.active{display:block;}
+.export-nav{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);gap:12px;z-index:1000;}
+body.export-mode .export-nav{display:flex;}
+.export-nav button{background:var(--teal);color:var(--bg);border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;}
+.export-nav .slide-indicator{background:rgba(255,255,255,0.08);color:var(--txt);padding:12px 24px;border-radius:8px;font-size:14px;}
+@media(max-width:768px){.carousel-grid{grid-template-columns:1fr;max-width:400px;}}
+</style>
 </head>
 <body>
-  <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
-    <button id="export-btn">Export Mode</button>
+<div class="controls">
+  <button onclick="toggleExportMode()">Export Mode</button>
+</div>
+
+<div class="page-title">
+  <h1>Post 047 — Smart Money Concepts</h1>
+  <p>Docs Carousel — Teal Column — 8 Slides</p>
+</div>
+
+<div class="carousel-grid">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 1 — Hook: Orb + "Smart Money Concepts"
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s1" data-slide="1">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">01 / 08</span>
+      <div class="orb">
+        <span class="orb-icon">🏦</span>
+      </div>
+      <div class="hook-tag">INSIGHT</div>
+      <div class="hook-title">Smart Money<br><em>Concepts</em></div>
+      <p class="hook-sub">Not magic. Just understanding how markets really work.</p>
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
   </div>
 
-  <div class="page-title">
-    <h1>Post 047 — Smart Money Concepts</h1>
-    <p>8 slides · Blog Article</p>
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 2 — Concept 1: Liquidity
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s2" data-slide="2">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">02 / 08</span>
+      <div class="sec-tag">CONCEPT 1</div>
+      <div class="sec-title"><em>Liquidity</em></div>
+
+      <div class="chart-box">
+        <div class="liq-line"></div><div class="liq-line"></div><div class="liq-line"></div>
+        <div class="liq-line"></div><div class="liq-line"></div><div class="liq-line"></div>
+        <div class="liq-line"></div><div class="liq-line"></div><div class="liq-line"></div>
+        <div class="liq-line"></div>
+        <div class="liq-zone"></div><div class="liq-zone"></div>
+        <div class="liq-cluster"><div class="liq-dot"></div><div class="liq-dot"></div><div class="liq-dot"></div></div>
+        <div class="liq-cluster"><div class="liq-dot"></div><div class="liq-dot"></div><div class="liq-dot"></div><div class="liq-dot"></div></div>
+        <div class="liq-cluster"><div class="liq-dot"></div><div class="liq-dot"></div></div>
+        <span class="chart-label" style="top:2%;right:5%;color:var(--red);">STOP CLUSTERS</span>
+      </div>
+
+      <div class="concept-desc">
+        <p class="cd-main">Where stop losses cluster — above highs and below lows.</p>
+        <p class="cd-note">Your stop loss is someone else's entry.</p>
+      </div>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
   </div>
 
-  <div class="carousel-grid">
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 3 — Concept 2: Inducement
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s3" data-slide="3">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">03 / 08</span>
+      <div class="sec-tag">CONCEPT 2</div>
+      <div class="sec-title"><em>Inducement</em></div>
 
-    <!-- ══════ SLIDE 1: Cinematic Hook ══════ -->
-    <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
-      <div class="slide slide-teal slide-1">
-        <div class="slide-content">
-          <div class="cine-label">INSIGHT</div>
-          <div class="hook-main">Smart Money Concepts</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">Not magic. Just understanding how markets really work.</p>
-          <div class="cine-logo">Signal Pilot</div>
-        </div>
+      <div class="chart-box">
+        <div class="ind-line"></div><div class="ind-line"></div><div class="ind-line"></div>
+        <div class="ind-line"></div><div class="ind-line"></div><div class="ind-line"></div>
+        <div class="ind-line"></div><div class="ind-line"></div>
+        <div class="ind-resistance"></div>
+        <span class="chart-label" style="top:21%;left:5%;color:var(--amber);">RESISTANCE</span>
+        <div class="ind-trap"><span class="ind-trap-text">TRAP</span></div>
       </div>
-    </div>
 
-    <!-- ══════ SLIDE 2: Concept 1 — Liquidity ══════ -->
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Liquidity</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="concept-stage">
-            <div class="concept-num liq-num">Concept 1</div>
-            <h2 class="concept-title">Liquidity</h2>
-            <div class="chart-box">
-              <div class="liq-line"></div>
-              <div class="liq-line"></div>
-              <div class="liq-line"></div>
-              <div class="liq-line"></div>
-              <div class="liq-line"></div>
-              <div class="liq-line"></div>
-              <div class="liq-line"></div>
-              <div class="liq-line"></div>
-              <div class="liq-line"></div>
-              <div class="liq-line"></div>
-              <div class="liq-zone"></div>
-              <div class="liq-zone"></div>
-              <div class="liq-cluster">
-                <div class="liq-dot"></div><div class="liq-dot"></div><div class="liq-dot"></div>
-              </div>
-              <div class="liq-cluster">
-                <div class="liq-dot"></div><div class="liq-dot"></div><div class="liq-dot"></div><div class="liq-dot"></div>
-              </div>
-              <div class="liq-cluster">
-                <div class="liq-dot"></div><div class="liq-dot"></div>
-              </div>
-              <div class="liq-zone-label">STOP CLUSTERS</div>
-            </div>
-            <div class="concept-desc">
-              <p class="concept-tagline">Where stop losses cluster — above highs and below lows.</p>
-              <p class="concept-note">Your stop loss is someone else's entry.</p>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
+      <div class="concept-desc">
+        <p class="cd-main">Fake moves designed to trigger stops and trap traders.</p>
+        <p class="cd-note">The sweep before the real move.</p>
       </div>
-    </div>
 
-    <!-- ══════ SLIDE 3: Concept 2 — Inducement ══════ -->
-    <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Inducement</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="concept-stage">
-            <div class="concept-num ind-num">Concept 2</div>
-            <h2 class="concept-title">Inducement</h2>
-            <div class="chart-box">
-              <div class="ind-line"></div>
-              <div class="ind-line"></div>
-              <div class="ind-line"></div>
-              <div class="ind-line"></div>
-              <div class="ind-line"></div>
-              <div class="ind-line"></div>
-              <div class="ind-line"></div>
-              <div class="ind-line"></div>
-              <div class="ind-resistance"></div>
-              <div class="ind-resist-label">RESISTANCE</div>
-              <div class="ind-trap">
-                <span class="ind-trap-text">TRAP</span>
-              </div>
-            </div>
-            <div class="concept-desc">
-              <p class="concept-tagline">Fake moves designed to trigger stops and trap traders.</p>
-              <p class="concept-note">The sweep before the real move.</p>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
+      <span class="brand-mark">SIGNAL PILOT</span>
     </div>
-
-    <!-- ══════ SLIDE 4: Concept 3 — Order Blocks ══════ -->
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Order Blocks</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="concept-stage">
-            <div class="concept-num ob-num">Concept 3</div>
-            <h2 class="concept-title">Order Blocks</h2>
-            <div class="chart-box">
-              <div class="ob-line"></div>
-              <div class="ob-line"></div>
-              <div class="ob-line"></div>
-              <div class="ob-line"></div>
-              <div class="ob-line"></div>
-              <div class="ob-line"></div>
-              <div class="ob-line"></div>
-              <div class="ob-line"></div>
-              <div class="ob-line"></div>
-              <div class="ob-line"></div>
-              <div class="ob-zone"></div>
-              <div class="ob-zone-label">ORDER BLOCK</div>
-            </div>
-            <div class="concept-desc">
-              <p class="concept-tagline">Zones where institutions positioned before a strong move.</p>
-              <p class="concept-note">Price often returns to OBs before continuing.</p>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ SLIDE 5: Concept 4 — Fair Value Gap ══════ -->
-    <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Fair Value Gap</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="concept-stage">
-            <div class="concept-num fvg-num">Concept 4</div>
-            <h2 class="concept-title">Fair Value Gap</h2>
-            <div class="chart-box">
-              <div class="fvg-candle"></div>
-              <div class="fvg-candle"></div>
-              <div class="fvg-candle"></div>
-              <div class="fvg-candle"></div>
-              <div class="fvg-candle"></div>
-              <div class="fvg-candle"></div>
-              <div class="fvg-candle"></div>
-              <div class="fvg-candle"></div>
-              <div class="fvg-candle"></div>
-              <div class="fvg-candle"></div>
-              <div class="fvg-gap"></div>
-              <div class="fvg-gap-label">FVG</div>
-              <div class="fvg-fill-arrow">↓</div>
-            </div>
-            <div class="concept-desc">
-              <p class="concept-tagline">Imbalances from rapid moves — gaps that get revisited.</p>
-              <p class="concept-note">Price tends to fill these gaps before continuing.</p>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ SLIDE 6: Concept 5 — Break of Structure ══════ -->
-    <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — Break of Structure</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="concept-stage">
-            <div class="concept-num bos-num">Concept 5</div>
-            <h2 class="concept-title">Break of Structure</h2>
-            <div class="chart-box">
-              <div class="bos-line"></div>
-              <div class="bos-line"></div>
-              <div class="bos-line"></div>
-              <div class="bos-line"></div>
-              <div class="bos-line"></div>
-              <div class="bos-line"></div>
-              <div class="bos-line"></div>
-              <div class="bos-line"></div>
-              <div class="bos-line"></div>
-              <div class="bos-level"></div>
-              <div class="bos-level-label">STRUCTURE</div>
-              <div class="bos-marker">BOS ↑</div>
-            </div>
-            <div class="concept-desc">
-              <p class="concept-tagline">Confirmation of a direction change in market structure.</p>
-              <p class="concept-note">BOS confirms the shift — trade with the new direction.</p>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ SLIDE 7: Key Insight ══════ -->
-    <div class="slide-wrapper" data-slide="7">
-      <span class="slide-label">Slide 7 — Key Insight</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="insight-stage">
-            <div class="insight-ring">
-              <span class="insight-icon">🧠</span>
-            </div>
-            <h2 class="insight-title">Not Magic.<br><span class="insight-accent">Market Mechanics.</span></h2>
-            <p class="insight-body">SMC isn't about predicting. It's about understanding where liquidity sits and how institutions position. Trade with the structure, not against it.</p>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ SLIDE 8: CTA ══════ -->
-    <div class="slide-wrapper" data-slide="8">
-      <span class="slide-label">Slide 8 — CTA</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="cta-stage">
-            <div class="cta-icon">📊</div>
-            <h2 class="cta-headline">Deep Dive<br><span class="cta-accent">Smart Money</span></h2>
-            <p class="cta-body">Full breakdown with chart examples, real setups, and trading strategies.</p>
-            <div class="cta-box">
-              <p class="cta-box-text">Read full article</p>
-              <span class="cta-link">signalpilot.io</span>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <script>
-    (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
-      const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
-      const slideWrappers = document.querySelectorAll('.slide-wrapper');
-      let exportMode = false;
-      let currentSlide = 0;
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 4 — Concept 3: Order Blocks
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s4" data-slide="4">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">04 / 08</span>
+      <div class="sec-tag">CONCEPT 3</div>
+      <div class="sec-title">Order <em>Blocks</em></div>
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
-      exportBtn.addEventListener('click', function() {
-        exportMode = !exportMode;
-        document.body.classList.toggle('export-mode', exportMode);
-        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
-        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
-      });
-      function updateActiveSlide() {
-        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
-      }
-      document.addEventListener('keydown', function(e) {
-        if (!exportMode) return;
-        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
-      });
-    })();
-  </script>
+      <div class="chart-box">
+        <div class="ob-line"></div><div class="ob-line"></div><div class="ob-line"></div>
+        <div class="ob-line"></div><div class="ob-line"></div><div class="ob-line"></div>
+        <div class="ob-line"></div><div class="ob-line"></div><div class="ob-line"></div>
+        <div class="ob-line"></div>
+        <div class="ob-zone"></div>
+        <span class="chart-label" style="top:61%;left:30%;color:var(--green);">ORDER BLOCK</span>
+      </div>
+
+      <div class="concept-desc">
+        <p class="cd-main">Zones where institutions positioned before a strong move.</p>
+        <p class="cd-note">Price often returns to OBs before continuing.</p>
+      </div>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 5 — Concept 4: Fair Value Gap
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s5" data-slide="5">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">05 / 08</span>
+      <div class="sec-tag">CONCEPT 4</div>
+      <div class="sec-title">Fair Value <em>Gap</em></div>
+
+      <div class="chart-box">
+        <div class="fvg-candle"></div><div class="fvg-candle"></div><div class="fvg-candle"></div>
+        <div class="fvg-candle"></div><div class="fvg-candle"></div><div class="fvg-candle"></div>
+        <div class="fvg-candle"></div><div class="fvg-candle"></div><div class="fvg-candle"></div>
+        <div class="fvg-candle"></div>
+        <div class="fvg-gap"></div>
+        <span class="chart-label" style="top:45%;left:32%;color:var(--purple);">FVG</span>
+        <div class="fvg-fill-arrow">↓</div>
+      </div>
+
+      <div class="concept-desc">
+        <p class="cd-main">Imbalances from rapid moves — gaps that get revisited.</p>
+        <p class="cd-note">Price tends to fill these gaps before continuing.</p>
+      </div>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 6 — Concept 5: Break of Structure
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s6" data-slide="6">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">06 / 08</span>
+      <div class="sec-tag">CONCEPT 5</div>
+      <div class="sec-title">Break of <em>Structure</em></div>
+
+      <div class="chart-box">
+        <div class="bos-line"></div><div class="bos-line"></div><div class="bos-line"></div>
+        <div class="bos-line"></div><div class="bos-line"></div><div class="bos-line"></div>
+        <div class="bos-line"></div><div class="bos-line"></div><div class="bos-line"></div>
+        <div class="bos-level"></div>
+        <span class="chart-label" style="top:28%;left:5%;color:var(--teal);">STRUCTURE</span>
+        <div class="bos-marker">BOS ↑</div>
+      </div>
+
+      <div class="concept-desc">
+        <p class="cd-main">Confirmation of a direction change in market structure.</p>
+        <p class="cd-note">BOS confirms the shift — trade with the new direction.</p>
+      </div>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 7 — Key Insight: Not Magic, Market Mechanics
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s7" data-slide="7">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">07 / 08</span>
+
+      <div class="orb-sm"><span class="orb-letter">🧠</span></div>
+
+      <div class="sec-tag">KEY INSIGHT</div>
+      <div class="sec-title">Not Magic.<br><em>Market Mechanics.</em></div>
+
+      <div class="truth-grid">
+        <div class="truth-card">
+          <div class="tc-title">Liquidity</div>
+          <div class="tc-desc">Where stops cluster. Someone else's exit is smart money's entry.</div>
+        </div>
+        <div class="truth-card">
+          <div class="tc-title">Inducement</div>
+          <div class="tc-desc">Fake breakouts designed to trap retail traders before the real move.</div>
+        </div>
+        <div class="truth-card">
+          <div class="tc-title">Order Blocks</div>
+          <div class="tc-desc">Institutional zones where the big players positioned.</div>
+        </div>
+        <div class="truth-card">
+          <div class="tc-title">BOS + FVG</div>
+          <div class="tc-desc">Structure shifts and gaps that reveal the market's true intent.</div>
+        </div>
+      </div>
+
+      <p class="truth-quote">Trade <em>with</em> the structure, not against it.</p>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 8 — CTA
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s8" data-slide="8">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">08 / 08</span>
+
+      <div class="cta-badge">SIGNAL PILOT</div>
+      <div class="cta-title">Deep Dive<br><em>Smart Money</em></div>
+      <p class="cta-sub">Full breakdown with chart examples, real setups, and trading strategies for all five SMC concepts.</p>
+
+      <div class="stat-grid">
+        <div class="stat-cell"><div class="sv">5</div><div class="sl">CONCEPTS</div></div>
+        <div class="stat-cell"><div class="sv">OB</div><div class="sl">ORDER BLOCKS</div></div>
+        <div class="stat-cell"><div class="sv">BOS</div><div class="sl">STRUCTURE</div></div>
+      </div>
+
+      <div class="pill-row">
+        <span class="pill">LIQUIDITY</span>
+        <span class="pill">INDUCEMENT</span>
+        <span class="pill">ORDER BLOCKS</span>
+        <span class="pill">FVG</span>
+        <span class="pill">BOS</span>
+      </div>
+
+      <div class="cta-box">
+        <div class="cta-url">signalpilot.io</div>
+        <div class="cta-hint">Read the full guide free</div>
+      </div>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Export Navigation ── -->
+<div class="export-nav">
+  <button onclick="prevSlide()">← Previous</button>
+  <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
+  <button onclick="nextSlide()">Next →</button>
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide-wrapper');
+let cur=0,exp=false;
+function toggleExportMode(){exp=!exp;document.body.classList.toggle('export-mode',exp);if(exp){cur=0;upd();}}
+function upd(){slides.forEach((s,i)=>s.classList.toggle('active',i===cur));document.getElementById('currentSlide').textContent=cur+1;}
+function nextSlide(){cur=(cur+1)%slides.length;upd();}
+function prevSlide(){cur=(cur-1+slides.length)%slides.length;upd();}
+document.addEventListener('keydown',e=>{if(!exp)return;if(e.key==='ArrowRight')nextSlide();if(e.key==='ArrowLeft')prevSlide();if(e.key==='Escape')toggleExportMode();});
+</script>
 </body>
 </html>

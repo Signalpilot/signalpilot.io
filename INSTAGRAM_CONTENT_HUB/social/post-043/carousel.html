@@ -1,836 +1,529 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 043 — Volume Profile Guide | Carousel Preview</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --bg-card: rgba(255,255,255,0.03);
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255,255,255,0.7);
-      --text-muted: rgba(255,255,255,0.4);
-      --border-subtle: rgba(255,255,255,0.1);
-      --accent-teal: #5eead4;
-      --accent-teal-dim: rgba(94,234,212,0.3);
-      --accent-gold: #c9a962;
-      --color-poc: #4a90d9;
-      --color-hvn: #4ad97a;
-      --color-lvn: #d94a4a;
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans: 'Inter', -apple-system, sans-serif;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
-    body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
-
-    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
-    .page-title { text-align: center; margin-bottom: 2rem; }
-    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
-
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
-    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
-    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5%; }
-
-    /* Slide Logo (Gugi centered) */
-    .slide-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(94,234,212,0.4);
-      z-index: 2;
-      white-space: nowrap;
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 1 — Cinematic Hook (TEAL)
-       ═══════════════════════════════════════════ */
-    .slide-teal { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
-    .slide-teal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-teal.slide-1::after { content: ''; position: absolute; top: 0; left: 0; width: 18px; height: 100%; background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%); z-index: 5; }
-    .slide-teal .slide-content { z-index: 3; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
-    .slide-1 .cine-label { font-size: clamp(0.5rem, 1.6cqw, 0.875rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94,234,212,0.9); margin-bottom: 8%; }
-    .slide-1 .hook-main { font-size: clamp(1.4rem, 4.5cqw, 2.5rem); font-weight: 600; line-height: 1.2; color: rgba(255,255,255,0.95); margin-bottom: 4%; }
-    .slide-1 .cine-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent); margin-bottom: 4%; }
-    .slide-1 .hook-sub { font-size: clamp(0.65rem, 2cqw, 1.1rem); font-weight: 300; letter-spacing: 0.05em; color: rgba(94,234,212,0.4); line-height: 1.6; }
-    .slide-1 .cine-logo { position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%); font-family: 'Gugi', sans-serif; font-size: clamp(0.4rem, 1.2cqw, 0.625rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94,234,212,0.4); }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 2 — Price vs Volume Profile
-       ═══════════════════════════════════════════ */
-    .versus-wrap {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 4%;
-    }
-
-    .versus-panel {
-      padding: 5% 6%;
-      border-radius: 14px;
-      position: relative;
-    }
-
-    .versus-panel.dim {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .versus-panel.glow {
-      background: rgba(94,234,212,0.06);
-      border: 2px solid rgba(94,234,212,0.35);
-      box-shadow: 0 0 30px rgba(94,234,212,0.08);
-    }
-
-    .versus-icon {
-      font-size: clamp(24px, 5cqw, 52px);
-      margin-bottom: 2%;
-    }
-
-    .versus-name {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.7cqw, 40px);
-      font-weight: 700;
-      margin-bottom: 2%;
-    }
-
-    .versus-panel.dim .versus-name { color: rgba(255,255,255,0.4); }
-    .versus-panel.glow .versus-name { color: var(--accent-teal); }
-
-    .versus-desc {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      line-height: 1.5;
-    }
-
-    .versus-panel.dim .versus-desc { color: rgba(255,255,255,0.3); }
-    .versus-panel.glow .versus-desc { color: var(--text-secondary); }
-
-    .versus-divider {
-      text-align: center;
-      font-family: var(--font-serif);
-      font-size: clamp(14px, 2.8cqw, 30px);
-      font-weight: 700;
-      color: var(--text-muted);
-      letter-spacing: 0.2em;
-    }
-
-    /* ═══════════════════════════════════════════
-       VOLUME PROFILE BAR SYSTEM
-       ═══════════════════════════════════════════ */
-    .vp-chart {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(1px, 0.2cqw, 2px);
-      width: 100%;
-    }
-
-    .vp-bar {
-      height: clamp(4px, 0.8cqw, 8px);
-      border-radius: 0 3px 3px 0;
-      background: rgba(255,255,255,0.12);
-      transition: width 0.4s ease;
-    }
-
-    .vp-bar.poc {
-      background: linear-gradient(90deg, var(--color-poc), rgba(74,144,217,0.6));
-      box-shadow: 0 0 10px rgba(74,144,217,0.3);
-    }
-
-    .vp-bar.hvn {
-      background: linear-gradient(90deg, var(--color-hvn), rgba(74,217,122,0.5));
-    }
-
-    .vp-bar.lvn {
-      background: linear-gradient(90deg, var(--color-lvn), rgba(217,74,74,0.4));
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 3 — Full Volume Profile
-       ═══════════════════════════════════════════ */
-    .profile-slide {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .profile-title {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.5cqw, 38px);
-      font-weight: 700;
-      color: var(--text-primary);
-      text-align: center;
-      margin-bottom: 2%;
-    }
-
-    .profile-subtitle {
-      font-size: clamp(9px, 1.5cqw, 16px);
-      color: var(--text-muted);
-      text-align: center;
-      margin-bottom: 5%;
-    }
-
-    .profile-body {
-      display: flex;
-      align-items: stretch;
-      gap: 3%;
-    }
-
-    .price-axis {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: clamp(30px, 6cqw, 60px);
-      flex-shrink: 0;
-    }
-
-    .price-tick {
-      font-size: clamp(6px, 1cqw, 10px);
-      color: var(--text-muted);
-      text-align: right;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .vp-chart-full { flex: 1; }
-
-    .poc-arrow {
-      font-size: clamp(8px, 1.4cqw, 14px);
-      color: var(--color-poc);
-      font-weight: 700;
-      text-align: center;
-      margin-top: 3%;
-      letter-spacing: 1px;
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 4 — POC Deep Dive
-       ═══════════════════════════════════════════ */
-    .poc-slide {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .poc-hero-bar {
-      width: 90%;
-      height: clamp(16px, 3cqw, 32px);
-      border-radius: 6px;
-      background: linear-gradient(90deg, var(--color-poc), rgba(74,144,217,0.4));
-      box-shadow: 0 0 24px rgba(74,144,217,0.3);
-      margin-bottom: 4%;
-      position: relative;
-    }
-
-    .poc-hero-label {
-      position: absolute;
-      right: 4%;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: clamp(7px, 1.2cqw, 12px);
-      font-weight: 700;
-      color: white;
-      letter-spacing: 2px;
-    }
-
-    .poc-heading {
-      font-family: var(--font-serif);
-      font-size: clamp(20px, 4.2cqw, 44px);
-      font-weight: 700;
-      color: var(--color-poc);
-      margin-bottom: 2%;
-    }
-
-    .poc-full {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-muted);
-      margin-bottom: 5%;
-    }
-
-    .poc-facts {
-      width: 90%;
-      display: flex;
-      flex-direction: column;
-      gap: 2.5%;
-    }
-
-    .poc-fact {
-      display: flex;
-      align-items: center;
-      gap: 3%;
-      padding: 2.5% 3.5%;
-      background: rgba(74,144,217,0.06);
-      border-left: 3px solid var(--color-poc);
-      border-radius: 0 10px 10px 0;
-    }
-
-    .poc-fact-icon {
-      font-size: clamp(16px, 3.2cqw, 34px);
-      flex-shrink: 0;
-    }
-
-    .poc-fact-text {
-      font-size: clamp(9px, 1.6cqw, 16px);
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    .poc-fact-text strong { color: var(--color-poc); }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 5 — HVN
-       ═══════════════════════════════════════════ */
-    .zone-slide {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .zone-header {
-      display: flex;
-      align-items: center;
-      gap: 3%;
-      margin-bottom: 3%;
-    }
-
-    .zone-badge {
-      width: clamp(36px, 7cqw, 72px);
-      height: clamp(36px, 7cqw, 72px);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: clamp(16px, 3.2cqw, 34px);
-      flex-shrink: 0;
-    }
-
-    .zone-badge.hvn-badge {
-      background: rgba(74,217,122,0.12);
-      border: 2px solid rgba(74,217,122,0.4);
-    }
-
-    .zone-badge.lvn-badge {
-      background: rgba(217,74,74,0.12);
-      border: 2px solid rgba(217,74,74,0.4);
-    }
-
-    .zone-name {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      line-height: 1.1;
-    }
-
-    .zone-name.hvn-color { color: var(--color-hvn); }
-    .zone-name.lvn-color { color: var(--color-lvn); }
-
-    .zone-fullname {
-      font-size: clamp(9px, 1.5cqw, 15px);
-      color: var(--text-muted);
-    }
-
-    .zone-bars {
-      margin: 4% 0;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(2px, 0.4cqw, 4px);
-    }
-
-    .zone-desc {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 3%;
-    }
-
-    .zone-insight {
-      padding: 3% 4%;
-      border-radius: 10px;
-      font-size: clamp(10px, 1.7cqw, 17px);
-      line-height: 1.5;
-    }
-
-    .zone-insight.hvn-insight {
-      background: rgba(74,217,122,0.06);
-      border: 1px solid rgba(74,217,122,0.2);
-      color: var(--text-secondary);
-    }
-
-    .zone-insight.lvn-insight {
-      background: rgba(217,74,74,0.06);
-      border: 1px solid rgba(217,74,74,0.2);
-      color: var(--text-secondary);
-    }
-
-    .zone-insight strong.hvn-hl { color: var(--color-hvn); }
-    .zone-insight strong.lvn-hl { color: var(--color-lvn); }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 7 — Complete Annotated Profile
-       ═══════════════════════════════════════════ */
-    .annotated-wrap {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .annotated-title {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.5cqw, 38px);
-      font-weight: 700;
-      color: var(--text-primary);
-      text-align: center;
-      margin-bottom: 4%;
-    }
-
-    .annotated-body {
-      display: flex;
-      gap: 3%;
-      align-items: stretch;
-    }
-
-    .zone-labels {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: clamp(40px, 8cqw, 80px);
-      flex-shrink: 0;
-    }
-
-    .zone-label-tag {
-      font-size: clamp(6px, 1.1cqw, 11px);
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-align: right;
-      padding: 4% 0;
-    }
-
-    .zone-label-tag.lvn-tag { color: var(--color-lvn); }
-    .zone-label-tag.hvn-tag { color: var(--color-hvn); }
-    .zone-label-tag.poc-tag { color: var(--color-poc); }
-
-    .legend-row {
-      display: flex;
-      justify-content: center;
-      gap: 5%;
-      margin-top: 4%;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 2%;
-    }
-
-    .legend-dot {
-      width: clamp(6px, 1.2cqw, 12px);
-      height: clamp(6px, 1.2cqw, 12px);
-      border-radius: 50%;
-    }
-
-    .legend-dot.poc-dot { background: var(--color-poc); }
-    .legend-dot.hvn-dot { background: var(--color-hvn); }
-    .legend-dot.lvn-dot { background: var(--color-lvn); }
-
-    .legend-text {
-      font-size: clamp(7px, 1.2cqw, 12px);
-      color: var(--text-muted);
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 8 — CTA
-       ═══════════════════════════════════════════ */
-    .cta-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-icon {
-      font-size: clamp(36px, 7.4cqw, 80px);
-      margin-bottom: 4%;
-    }
-
-    .cta-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 3%;
-    }
-
-    .cta-accent { color: var(--accent-teal); }
-
-    .cta-body {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 85%;
-      margin-bottom: 5%;
-    }
-
-    .cta-box {
-      background: linear-gradient(135deg, rgba(94,234,212,0.12) 0%, rgba(94,234,212,0.04) 100%);
-      border: 2px solid var(--accent-teal);
-      border-radius: 14px;
-      padding: 3% 6%;
-    }
-
-    .cta-box-text {
-      font-size: clamp(11px, 2cqw, 22px);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 1%;
-    }
-
-    .cta-link {
-      font-size: clamp(10px, 1.7cqw, 18px);
-      font-weight: 600;
-      color: var(--accent-teal);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post 043 — Volume Profile Guide | Carousel Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Gugi&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Base ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0a0a0f;--surface:rgba(255,255,255,0.02);
+  --teal:#5eead4;--teal-l:rgba(94,234,212,0.12);--teal-b:rgba(94,234,212,0.25);
+  --gold:#c9a962;--gold-l:rgba(201,169,98,0.12);--gold-b:rgba(201,169,98,0.25);
+  --green:#4ade80;--green-l:rgba(74,222,128,0.12);--green-b:rgba(74,222,128,0.25);
+  --red:#f87171;--red-l:rgba(248,113,113,0.12);--red-b:rgba(248,113,113,0.25);
+  --blue:#60a5fa;--blue-l:rgba(96,165,250,0.12);--blue-b:rgba(96,165,250,0.25);
+  --purple:#a855f7;--purple-l:rgba(168,85,247,0.12);--purple-b:rgba(168,85,247,0.25);
+  --orange:#f59e0b;--orange-l:rgba(245,158,11,0.12);--orange-b:rgba(245,158,11,0.25);
+  --poc:#4a90d9;--hvn:#4ade80;--lvn:#f87171;
+  --txt:#e4e4e7;--txt2:#a1a1aa;--txt3:#52525b;
+  --serif:'Cormorant Garamond',serif;--sans:'Inter',sans-serif;
+  --mono:'JetBrains Mono',monospace;--brand:'Gugi',sans-serif;
+}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);min-height:100vh;padding:40px 20px;}
+
+/* ── Controls ── */
+.controls{position:fixed;top:20px;right:20px;z-index:100;display:flex;gap:12px;align-items:center;}
+.controls button{background:var(--teal);color:var(--bg);border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;}
+
+/* ── Page ── */
+.page-title{text-align:center;margin-bottom:40px;}
+.page-title h1{font-family:var(--serif);font-size:28px;font-weight:400;margin-bottom:8px;color:var(--txt);}
+.page-title p{color:var(--txt3);font-size:14px;}
+.carousel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1400px;margin:0 auto;}
+
+/* ── Slide Wrapper ── */
+.slide-wrapper{aspect-ratio:4/5;position:relative;border-radius:12px;overflow:hidden;background:var(--bg);box-shadow:0 4px 24px rgba(0,0,0,0.4);container-type:inline-size;}
+.slide-content{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;padding:8%;text-align:center;}
+.slide-number{position:absolute;top:4%;left:5%;font-family:var(--mono);font-size:clamp(7px,1.4cqw,10px);color:var(--txt3);letter-spacing:0.12em;}
+.brand-mark{position:absolute;bottom:4%;right:5%;font-family:var(--brand);font-size:clamp(7px,1.4cqw,10px);color:rgba(94,234,212,0.25);letter-spacing:0.15em;}
+
+/* ── Slide Backgrounds (teal theme) ── */
+.slide-wrapper::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;}
+.s1::before{background:radial-gradient(ellipse at 50% 30%,rgba(94,234,212,0.06) 0%,transparent 70%);}
+.s1::after{content:'';position:absolute;top:0;left:0;width:18px;height:100%;background:linear-gradient(180deg,rgba(94,234,212,0.9) 0%,rgba(45,180,160,0.7) 100%);z-index:5;}
+.s2::before{background:radial-gradient(ellipse at 30% 60%,rgba(74,144,217,0.04) 0%,transparent 65%);}
+.s3::before{background:radial-gradient(ellipse at 70% 40%,rgba(94,234,212,0.04) 0%,transparent 65%);}
+.s4::before{background:radial-gradient(ellipse at 50% 70%,rgba(74,144,217,0.05) 0%,transparent 65%);}
+.s5::before{background:radial-gradient(ellipse at 40% 40%,rgba(74,222,128,0.04) 0%,transparent 65%);}
+.s6::before{background:radial-gradient(ellipse at 60% 50%,rgba(248,113,113,0.04) 0%,transparent 65%);}
+.s7::before{background:radial-gradient(ellipse at 50% 40%,rgba(94,234,212,0.05) 0%,transparent 65%);}
+.s8::before{background:radial-gradient(ellipse at 50% 50%,rgba(94,234,212,0.04) 0%,transparent 60%);}
+
+/* ── Orb (teal) ── */
+.orb{
+  position:relative;
+  width:clamp(100px,20cqw,200px);height:clamp(100px,20cqw,200px);
+  border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,rgba(94,234,212,0.3) 0%,rgba(94,234,212,0.1) 40%,rgba(255,255,255,0.03) 70%,transparent 100%);
+  border:2px solid rgba(94,234,212,0.25);
+  box-shadow:0 0 50px rgba(94,234,212,0.12),0 0 100px rgba(94,234,212,0.04),inset 0 0 30px rgba(94,234,212,0.06);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:clamp(12px,3cqw,24px);flex-shrink:0;
+}
+.orb::before{content:'';position:absolute;inset:7px;border-radius:50%;border:1.5px solid rgba(94,234,212,0.15);}
+.orb::after{content:'';position:absolute;inset:18px;border-radius:50%;border:1px dashed rgba(94,234,212,0.12);}
+
+/* VP bars inside orb */
+.orb-bars{display:flex;flex-direction:column;gap:clamp(2px,0.4cqw,3px);width:55%;z-index:2;}
+.orb-bar{height:clamp(3px,0.6cqw,5px);border-radius:0 3px 3px 0;}
+.orb-bar.ob-poc{background:linear-gradient(90deg,var(--poc),rgba(74,144,217,0.5));}
+.orb-bar.ob-hvn{background:linear-gradient(90deg,var(--hvn),rgba(74,222,128,0.3));}
+.orb-bar.ob-lvn{background:linear-gradient(90deg,var(--lvn),rgba(248,113,113,0.3));}
+
+/* ── Typography ── */
+.hook-tag{font-family:var(--mono);font-size:clamp(7px,1.3cqw,10px);letter-spacing:0.25em;text-transform:uppercase;color:var(--teal);margin-bottom:clamp(6px,1.5cqw,12px);}
+.hook-title{font-family:var(--serif);font-size:clamp(22px,5.5cqw,42px);font-weight:600;line-height:1.15;color:var(--txt);margin-bottom:clamp(6px,1.5cqw,12px);}
+.hook-title em{font-style:normal;color:var(--teal);}
+.hook-sub{font-size:clamp(9px,1.8cqw,13px);color:var(--txt2);line-height:1.5;max-width:85%;}
+
+/* ── Section Headers ── */
+.sec-tag{font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:clamp(4px,1cqw,8px);}
+.sec-title{font-family:var(--serif);font-size:clamp(16px,3.8cqw,28px);font-weight:600;line-height:1.2;color:var(--txt);margin-bottom:clamp(10px,2.5cqw,20px);}
+.sec-title em{font-style:normal;color:var(--teal);}
+
+/* ── Compare Cards ── */
+.compare-row{width:92%;display:grid;grid-template-columns:1fr 1fr;gap:clamp(5px,1cqw,9px);margin-bottom:clamp(10px,2.5cqw,20px);}
+.compare-card{padding:clamp(10px,2cqw,18px);border-radius:clamp(8px,1.5cqw,14px);background:var(--surface);border:1px solid rgba(255,255,255,0.04);text-align:left;}
+.compare-card.glow{background:rgba(94,234,212,0.06);border:1.5px solid rgba(94,234,212,0.25);}
+.cc-label{font-family:var(--mono);font-size:clamp(6px,1cqw,8px);letter-spacing:0.15em;text-transform:uppercase;color:var(--txt3);margin-bottom:clamp(4px,0.8cqw,7px);}
+.compare-card.glow .cc-label{color:var(--teal);}
+.cc-quote{font-family:var(--serif);font-size:clamp(10px,2cqw,16px);font-weight:600;color:var(--txt);margin-bottom:clamp(3px,0.6cqw,5px);}
+.compare-card.glow .cc-quote{color:var(--teal);}
+.cc-desc{font-size:clamp(7px,1.3cqw,10px);color:var(--txt2);line-height:1.4;}
+
+/* ── VP Bar System ── */
+.vp-chart{display:flex;flex-direction:column;gap:clamp(1px,0.2cqw,2px);width:100%;}
+.vp-bar{height:clamp(5px,1cqw,9px);border-radius:0 3px 3px 0;background:rgba(255,255,255,0.08);}
+.vp-bar.poc{background:linear-gradient(90deg,var(--poc),rgba(74,144,217,0.5));box-shadow:0 0 10px rgba(74,144,217,0.3);}
+.vp-bar.hvn{background:linear-gradient(90deg,var(--hvn),rgba(74,222,128,0.4));}
+.vp-bar.lvn{background:linear-gradient(90deg,var(--lvn),rgba(248,113,113,0.3));}
+.vp-wrap{width:92%;margin-bottom:clamp(8px,2cqw,16px);}
+.vp-body{display:flex;gap:3%;}
+.vp-axis{display:flex;flex-direction:column;justify-content:space-between;width:clamp(28px,5.5cqw,50px);flex-shrink:0;}
+.vp-tick{font-family:var(--mono);font-size:clamp(5px,0.9cqw,8px);color:var(--txt3);text-align:right;font-variant-numeric:tabular-nums;}
+.vp-pointer{font-family:var(--mono);font-size:clamp(7px,1.3cqw,11px);color:var(--poc);font-weight:700;text-align:center;margin-top:clamp(4px,1cqw,8px);letter-spacing:1px;}
+
+/* ── Definition Cards (for POC deep dive) ── */
+.def-row{width:92%;display:flex;flex-direction:column;gap:clamp(6px,1.3cqw,11px);margin-bottom:clamp(8px,2cqw,16px);}
+.def-card{display:flex;align-items:flex-start;gap:clamp(8px,1.6cqw,14px);padding:clamp(10px,2cqw,18px);border-radius:clamp(8px,1.5cqw,14px);text-align:left;}
+.def-card.poc-card{background:rgba(74,144,217,0.06);border-left:3px solid var(--poc);}
+.def-icon{font-size:clamp(14px,2.8cqw,24px);flex-shrink:0;margin-top:clamp(1px,0.2cqw,2px);}
+.def-label{font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);letter-spacing:0.15em;text-transform:uppercase;color:var(--poc);margin-bottom:clamp(2px,0.4cqw,4px);}
+.def-text{font-size:clamp(8px,1.5cqw,12px);color:var(--txt2);line-height:1.45;}
+.def-text strong{color:var(--poc);}
+
+/* ── Zone Cards (HVN / LVN) ── */
+.zone-wrap{width:92%;text-align:left;margin-bottom:clamp(8px,2cqw,16px);}
+.zone-header{display:flex;align-items:center;gap:clamp(8px,1.6cqw,14px);margin-bottom:clamp(8px,2cqw,16px);}
+.zone-badge{width:clamp(36px,7cqw,64px);height:clamp(36px,7cqw,64px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(14px,2.8cqw,28px);flex-shrink:0;}
+.zone-badge.hvn-b{background:rgba(74,222,128,0.12);border:2px solid rgba(74,222,128,0.35);}
+.zone-badge.lvn-b{background:rgba(248,113,113,0.12);border:2px solid rgba(248,113,113,0.35);}
+.zone-name{font-family:var(--serif);font-size:clamp(18px,4cqw,34px);font-weight:600;line-height:1.1;}
+.zone-name.hvn-c{color:var(--hvn);}
+.zone-name.lvn-c{color:var(--lvn);}
+.zone-full{font-size:clamp(7px,1.3cqw,10px);color:var(--txt3);}
+.zone-bars{margin-bottom:clamp(8px,2cqw,16px);}
+.zone-desc{font-size:clamp(8px,1.5cqw,12px);color:var(--txt2);line-height:1.5;margin-bottom:clamp(8px,2cqw,16px);}
+.zone-desc strong.hvn-hl{color:var(--hvn);}
+.zone-desc strong.lvn-hl{color:var(--lvn);}
+.zone-insight{padding:clamp(8px,1.6cqw,14px) clamp(10px,2cqw,18px);border-radius:clamp(8px,1.5cqw,14px);font-size:clamp(8px,1.5cqw,12px);line-height:1.5;color:var(--txt2);}
+.zone-insight.hvn-i{background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.2);}
+.zone-insight.lvn-i{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);}
+.zone-insight strong.hvn-hl{color:var(--hvn);}
+.zone-insight strong.lvn-hl{color:var(--lvn);}
+
+/* ── Legend Row ── */
+.legend-row{display:flex;justify-content:center;gap:clamp(10px,2cqw,18px);margin-top:clamp(6px,1.4cqw,12px);}
+.legend-item{display:flex;align-items:center;gap:clamp(3px,0.6cqw,6px);}
+.legend-dot{width:clamp(6px,1.2cqw,10px);height:clamp(6px,1.2cqw,10px);border-radius:50%;}
+.legend-dot.d-poc{background:var(--poc);}
+.legend-dot.d-hvn{background:var(--hvn);}
+.legend-dot.d-lvn{background:var(--lvn);}
+.legend-text{font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);color:var(--txt3);}
+
+/* ── Zone Labels (annotated) ── */
+.ann-labels{display:flex;flex-direction:column;justify-content:space-between;width:clamp(32px,6.5cqw,56px);flex-shrink:0;}
+.ann-tag{font-family:var(--mono);font-size:clamp(5px,1cqw,8px);font-weight:700;letter-spacing:1px;text-align:right;}
+.ann-tag.t-poc{color:var(--poc);}
+.ann-tag.t-hvn{color:var(--hvn);}
+.ann-tag.t-lvn{color:var(--lvn);}
+
+/* ── Orb Small ── */
+.orb-sm{position:relative;width:clamp(56px,11cqw,100px);height:clamp(56px,11cqw,100px);border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(94,234,212,0.3) 0%,rgba(94,234,212,0.1) 40%,rgba(255,255,255,0.03) 70%,transparent 100%);border:2px solid rgba(94,234,212,0.25);box-shadow:0 0 40px rgba(94,234,212,0.1),inset 0 0 20px rgba(94,234,212,0.06);display:flex;align-items:center;justify-content:center;margin-bottom:clamp(8px,2cqw,16px);}
+.orb-sm::before{content:'';position:absolute;inset:5px;border-radius:50%;border:1.5px solid rgba(94,234,212,0.15);}
+.orb-sm::after{content:'';position:absolute;inset:12px;border-radius:50%;border:1px dashed rgba(94,234,212,0.1);}
+.orb-sm .orb-letter{font-family:var(--serif);font-size:clamp(18px,4cqw,34px);font-weight:600;color:var(--teal);position:relative;z-index:2;}
+
+/* ── Truth Grid ── */
+.truth-grid{width:92%;display:grid;grid-template-columns:1fr 1fr;gap:clamp(5px,1cqw,9px);margin-bottom:clamp(8px,2cqw,16px);}
+.truth-card{padding:clamp(8px,1.6cqw,14px);border-radius:clamp(8px,1.5cqw,14px);background:var(--surface);border:1px solid rgba(255,255,255,0.04);text-align:left;}
+.truth-card .tc-title{font-family:var(--serif);font-size:clamp(9px,1.8cqw,14px);font-weight:600;color:var(--txt);margin-bottom:clamp(2px,0.4cqw,4px);}
+.truth-card .tc-desc{font-size:clamp(7px,1.2cqw,10px);color:var(--txt2);line-height:1.4;}
+.truth-quote{font-family:var(--serif);font-size:clamp(11px,2.2cqw,17px);font-style:italic;color:var(--txt2);line-height:1.5;max-width:85%;}
+.truth-quote em{font-style:normal;color:var(--teal);}
+
+/* ── CTA Slide ── */
+.cta-badge{display:inline-block;padding:clamp(3px,0.6cqw,5px) clamp(10px,2cqw,18px);border:1px solid rgba(94,234,212,0.3);border-radius:20px;font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);color:var(--teal);letter-spacing:0.2em;margin-bottom:clamp(8px,2cqw,16px);}
+.cta-title{font-family:var(--serif);font-size:clamp(18px,4.5cqw,34px);font-weight:600;color:var(--txt);line-height:1.2;margin-bottom:clamp(4px,1cqw,8px);}
+.cta-title em{font-style:normal;color:var(--teal);}
+.cta-sub{font-size:clamp(8px,1.6cqw,12px);color:var(--txt2);line-height:1.5;max-width:85%;margin-bottom:clamp(10px,2.5cqw,20px);}
+.stat-grid{width:88%;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(4px,0.8cqw,7px);margin-bottom:clamp(10px,2.5cqw,20px);}
+.stat-cell{padding:clamp(6px,1.2cqw,10px);border-radius:clamp(6px,1cqw,10px);background:var(--surface);border:1px solid rgba(255,255,255,0.04);text-align:center;}
+.stat-cell .sv{font-family:var(--serif);font-size:clamp(12px,2.8cqw,22px);font-weight:600;color:var(--teal);}
+.stat-cell .sl{font-size:clamp(6px,1cqw,8px);color:var(--txt3);letter-spacing:0.08em;margin-top:clamp(1px,0.2cqw,2px);}
+.pill-row{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(3px,0.6cqw,6px);width:88%;margin-bottom:clamp(10px,2.5cqw,20px);}
+.pill{padding:clamp(2px,0.4cqw,4px) clamp(6px,1.2cqw,10px);border-radius:12px;font-family:var(--mono);font-size:clamp(5px,1cqw,8px);letter-spacing:0.08em;border:1px solid rgba(94,234,212,0.2);color:var(--teal);background:rgba(94,234,212,0.06);}
+.cta-box{width:80%;padding:clamp(10px,2cqw,18px);border-radius:clamp(8px,1.5cqw,14px);background:rgba(94,234,212,0.08);border:1.5px solid rgba(94,234,212,0.25);text-align:center;}
+.cta-url{font-family:var(--mono);font-size:clamp(9px,1.8cqw,14px);color:var(--teal);letter-spacing:0.05em;}
+.cta-hint{font-size:clamp(6px,1.1cqw,9px);color:var(--txt3);margin-top:clamp(3px,0.5cqw,5px);}
+
+/* ── Export Mode ── */
+body.export-mode{padding:0;background:#000;}
+body.export-mode .controls,body.export-mode .page-title{display:none;}
+body.export-mode .carousel-grid{display:block;}
+body.export-mode .slide-wrapper{display:none;width:1080px;height:1350px;border-radius:0;margin:0;}
+body.export-mode .slide-wrapper.active{display:block;}
+.export-nav{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);gap:12px;z-index:1000;}
+body.export-mode .export-nav{display:flex;}
+.export-nav button{background:var(--teal);color:var(--bg);border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;}
+.export-nav .slide-indicator{background:rgba(255,255,255,0.08);color:var(--txt);padding:12px 24px;border-radius:8px;font-size:14px;}
+@media(max-width:768px){.carousel-grid{grid-template-columns:1fr;max-width:400px;}}
+</style>
 </head>
 <body>
-  <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
-    <button id="export-btn">Export Mode</button>
+<div class="controls">
+  <button onclick="toggleExportMode()">Export Mode</button>
+</div>
+
+<div class="page-title">
+  <h1>Post 043 — Volume Profile Guide</h1>
+  <p>Docs Carousel — Teal Column — 8 Slides</p>
+</div>
+
+<div class="carousel-grid">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 1 — Hook: Orb + "The Market Has Memory"
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s1" data-slide="1">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">01 / 08</span>
+      <div class="orb">
+        <div class="orb-bars">
+          <div class="orb-bar ob-lvn" style="width:18%"></div>
+          <div class="orb-bar ob-lvn" style="width:25%"></div>
+          <div class="orb-bar ob-hvn" style="width:55%"></div>
+          <div class="orb-bar ob-hvn" style="width:75%"></div>
+          <div class="orb-bar ob-poc" style="width:95%"></div>
+          <div class="orb-bar ob-hvn" style="width:70%"></div>
+          <div class="orb-bar ob-hvn" style="width:50%"></div>
+          <div class="orb-bar ob-lvn" style="width:22%"></div>
+          <div class="orb-bar ob-lvn" style="width:12%"></div>
+        </div>
+      </div>
+      <div class="hook-tag">INSIGHT</div>
+      <div class="hook-title">The Market Has<br><em>Memory</em></div>
+      <p class="hook-sub">Volume profile reveals where price didn't just visit — it stayed.</p>
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
   </div>
 
-  <div class="page-title">
-    <h1>Post 043 — Volume Profile Guide</h1>
-    <p>8 slides · Blog</p>
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 2 — Price Action vs Volume Profile
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s2" data-slide="2">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">02 / 08</span>
+      <div class="sec-tag">THE DIFFERENCE</div>
+      <div class="sec-title">Price Shows <em>Movement</em><br>Volume Shows <em>Value</em></div>
+
+      <div class="compare-row">
+        <div class="compare-card">
+          <div class="cc-label">PRICE ACTION</div>
+          <div class="cc-quote">Where the market went</div>
+          <div class="cc-desc">Shows movement without context. A candle tells you price changed — not why, or whether traders found value there.</div>
+        </div>
+        <div class="compare-card glow">
+          <div class="cc-label">VOLUME PROFILE</div>
+          <div class="cc-quote">Where the market stayed</div>
+          <div class="cc-desc">Shows where traders found agreement. High volume at a price means participants accepted it as fair value.</div>
+        </div>
+      </div>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
   </div>
 
-  <div class="carousel-grid">
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 3 — Anatomy of a Volume Profile
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s3" data-slide="3">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">03 / 08</span>
+      <div class="sec-tag">THE PROFILE</div>
+      <div class="sec-title">Anatomy of a <em>Volume Profile</em></div>
+      <p style="font-size:clamp(7px,1.3cqw,10px);color:var(--txt2);margin-bottom:clamp(10px,2.5cqw,20px);">Each bar = volume traded at that price level</p>
 
-    <!-- ══════ SLIDE 1: Cinematic Hook ══════ -->
-    <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Hook</span>
-      <div class="slide slide-teal slide-1">
-        <div class="slide-content">
-          <div class="cine-label">INSIGHT</div>
-          <div class="hook-main">The Market Has Memory</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">Volume profile reveals where price didn't just visit — it stayed.</p>
-          <div class="cine-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ SLIDE 2: Price vs Volume Profile ══════ -->
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Price vs Volume</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <span style="font-size: clamp(10px, 1.8cqw, 14px); color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2%;">The Difference</span>
-          <div class="versus-wrap">
-            <div class="versus-panel dim">
-              <div class="versus-icon">📈</div>
-              <div class="versus-name">Price Action</div>
-              <div class="versus-desc">Shows where the market <em>went</em>. Movement without context.</div>
-            </div>
-            <div class="versus-divider">VS</div>
-            <div class="versus-panel glow">
-              <div class="versus-icon">📊</div>
-              <div class="versus-name">Volume Profile</div>
-              <div class="versus-desc">Shows where the market <em>stayed</em>. Where traders found value.</div>
-            </div>
+      <div class="vp-wrap">
+        <div class="vp-body">
+          <div class="vp-axis">
+            <span class="vp-tick">$450</span>
+            <span class="vp-tick">$440</span>
+            <span class="vp-tick">$430</span>
+            <span class="vp-tick">$420</span>
+            <span class="vp-tick">$410</span>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ SLIDE 3: Full Volume Profile Visualization ══════ -->
-    <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — The Profile</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="profile-slide">
-            <h2 class="profile-title">Anatomy of a Volume Profile</h2>
-            <p class="profile-subtitle">Each bar = volume traded at that price level</p>
-            <div class="profile-body">
-              <div class="price-axis">
-                <span class="price-tick">$450</span>
-                <span class="price-tick">$445</span>
-                <span class="price-tick">$440</span>
-                <span class="price-tick">$435</span>
-                <span class="price-tick">$430</span>
-                <span class="price-tick">$425</span>
-                <span class="price-tick">$420</span>
-                <span class="price-tick">$415</span>
-                <span class="price-tick">$410</span>
-              </div>
-              <div class="vp-chart vp-chart-full">
-                <div class="vp-bar lvn" style="width: 12%"></div>
-                <div class="vp-bar lvn" style="width: 18%"></div>
-                <div class="vp-bar" style="width: 25%"></div>
-                <div class="vp-bar hvn" style="width: 52%"></div>
-                <div class="vp-bar hvn" style="width: 68%"></div>
-                <div class="vp-bar hvn" style="width: 78%"></div>
-                <div class="vp-bar hvn" style="width: 88%"></div>
-                <div class="vp-bar poc" style="width: 96%"></div>
-                <div class="vp-bar hvn" style="width: 85%"></div>
-                <div class="vp-bar hvn" style="width: 72%"></div>
-                <div class="vp-bar hvn" style="width: 58%"></div>
-                <div class="vp-bar" style="width: 40%"></div>
-                <div class="vp-bar" style="width: 32%"></div>
-                <div class="vp-bar lvn" style="width: 20%"></div>
-                <div class="vp-bar lvn" style="width: 14%"></div>
-                <div class="vp-bar lvn" style="width: 10%"></div>
-                <div class="vp-bar lvn" style="width: 8%"></div>
-              </div>
-            </div>
-            <div class="poc-arrow">▲ POC — Point of Control (highest volume)</div>
+          <div class="vp-chart" style="flex:1;">
+            <div class="vp-bar lvn" style="width:12%"></div>
+            <div class="vp-bar lvn" style="width:18%"></div>
+            <div class="vp-bar" style="width:25%"></div>
+            <div class="vp-bar hvn" style="width:52%"></div>
+            <div class="vp-bar hvn" style="width:68%"></div>
+            <div class="vp-bar hvn" style="width:78%"></div>
+            <div class="vp-bar hvn" style="width:88%"></div>
+            <div class="vp-bar poc" style="width:96%"></div>
+            <div class="vp-bar hvn" style="width:85%"></div>
+            <div class="vp-bar hvn" style="width:72%"></div>
+            <div class="vp-bar hvn" style="width:58%"></div>
+            <div class="vp-bar" style="width:40%"></div>
+            <div class="vp-bar" style="width:32%"></div>
+            <div class="vp-bar lvn" style="width:20%"></div>
+            <div class="vp-bar lvn" style="width:14%"></div>
+            <div class="vp-bar lvn" style="width:10%"></div>
+            <div class="vp-bar lvn" style="width:8%"></div>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
         </div>
+        <div class="vp-pointer">▲ POC — Point of Control (highest volume)</div>
       </div>
-    </div>
 
-    <!-- ══════ SLIDE 4: POC Deep Dive ══════ -->
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — POC</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="poc-slide">
-            <div class="poc-hero-bar">
-              <span class="poc-hero-label">POC</span>
-            </div>
-            <h2 class="poc-heading">Point of Control</h2>
-            <p class="poc-full">The single price level with the most volume traded</p>
-            <div class="poc-facts">
-              <div class="poc-fact">
-                <span class="poc-fact-icon">🧲</span>
-                <p class="poc-fact-text"><strong>Acts as a magnet.</strong> Price is pulled back toward POC repeatedly.</p>
-              </div>
-              <div class="poc-fact">
-                <span class="poc-fact-icon">⚖️</span>
-                <p class="poc-fact-text"><strong>Represents fair value.</strong> Where buyers and sellers found the most agreement.</p>
-              </div>
-              <div class="poc-fact">
-                <span class="poc-fact-icon">🔄</span>
-                <p class="poc-fact-text"><strong>Mean reversion anchor.</strong> Price often returns to prior session POC.</p>
-              </div>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
+      <div class="legend-row">
+        <div class="legend-item"><div class="legend-dot d-poc"></div><span class="legend-text">POC</span></div>
+        <div class="legend-item"><div class="legend-dot d-hvn"></div><span class="legend-text">HVN</span></div>
+        <div class="legend-item"><div class="legend-dot d-lvn"></div><span class="legend-text">LVN</span></div>
       </div>
-    </div>
 
-    <!-- ══════ SLIDE 5: HVN ══════ -->
-    <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — HVN</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="zone-slide">
-            <div class="zone-header">
-              <div class="zone-badge hvn-badge">📍</div>
-              <div>
-                <div class="zone-name hvn-color">HVN</div>
-                <div class="zone-fullname">High Volume Nodes</div>
-              </div>
-            </div>
-            <div class="zone-bars">
-              <div class="vp-bar hvn" style="width: 82%"></div>
-              <div class="vp-bar hvn" style="width: 90%"></div>
-              <div class="vp-bar hvn" style="width: 95%"></div>
-              <div class="vp-bar hvn" style="width: 88%"></div>
-              <div class="vp-bar hvn" style="width: 78%"></div>
-              <div class="vp-bar hvn" style="width: 72%"></div>
-            </div>
-            <p class="zone-desc">Areas of <strong style="color: var(--color-hvn)">acceptance</strong>. Price spent significant time here because traders found value.</p>
-            <div class="zone-insight hvn-insight">
-              <strong class="hvn-hl">Expect:</strong> Consolidation, ranging, slow movement. These are <strong class="hvn-hl">comfort zones</strong> where price tends to gravitate.
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
+      <span class="brand-mark">SIGNAL PILOT</span>
     </div>
-
-    <!-- ══════ SLIDE 6: LVN ══════ -->
-    <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — LVN</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="zone-slide">
-            <div class="zone-header">
-              <div class="zone-badge lvn-badge">⚡</div>
-              <div>
-                <div class="zone-name lvn-color">LVN</div>
-                <div class="zone-fullname">Low Volume Nodes</div>
-              </div>
-            </div>
-            <div class="zone-bars">
-              <div class="vp-bar lvn" style="width: 12%"></div>
-              <div class="vp-bar lvn" style="width: 8%"></div>
-              <div class="vp-bar lvn" style="width: 15%"></div>
-              <div class="vp-bar lvn" style="width: 6%"></div>
-              <div class="vp-bar lvn" style="width: 10%"></div>
-              <div class="vp-bar lvn" style="width: 14%"></div>
-            </div>
-            <p class="zone-desc">Areas of <strong style="color: var(--color-lvn)">rejection</strong>. Price moved through quickly — traders didn't want to stay.</p>
-            <div class="zone-insight lvn-insight">
-              <strong class="lvn-hl">Expect:</strong> Fast moves, acceleration, breakouts. These are <strong class="lvn-hl">discomfort zones</strong> where price slices through.
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ SLIDE 7: Complete Annotated Profile ══════ -->
-    <div class="slide-wrapper" data-slide="7">
-      <span class="slide-label">Slide 7 — Complete Picture</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="annotated-wrap">
-            <h2 class="annotated-title">The Complete Picture</h2>
-            <div class="annotated-body">
-              <div class="zone-labels">
-                <span class="zone-label-tag lvn-tag">LVN</span>
-                <span class="zone-label-tag hvn-tag">HVN</span>
-                <span class="zone-label-tag poc-tag">← POC</span>
-                <span class="zone-label-tag hvn-tag">HVN</span>
-                <span class="zone-label-tag lvn-tag">LVN</span>
-              </div>
-              <div class="vp-chart" style="flex: 1;">
-                <div class="vp-bar lvn" style="width: 10%"></div>
-                <div class="vp-bar lvn" style="width: 15%"></div>
-                <div class="vp-bar lvn" style="width: 20%"></div>
-                <div class="vp-bar" style="width: 30%"></div>
-                <div class="vp-bar hvn" style="width: 55%"></div>
-                <div class="vp-bar hvn" style="width: 70%"></div>
-                <div class="vp-bar hvn" style="width: 82%"></div>
-                <div class="vp-bar hvn" style="width: 90%"></div>
-                <div class="vp-bar poc" style="width: 98%"></div>
-                <div class="vp-bar hvn" style="width: 88%"></div>
-                <div class="vp-bar hvn" style="width: 75%"></div>
-                <div class="vp-bar hvn" style="width: 60%"></div>
-                <div class="vp-bar" style="width: 38%"></div>
-                <div class="vp-bar" style="width: 28%"></div>
-                <div class="vp-bar lvn" style="width: 18%"></div>
-                <div class="vp-bar lvn" style="width: 12%"></div>
-                <div class="vp-bar lvn" style="width: 8%"></div>
-              </div>
-            </div>
-            <div class="legend-row">
-              <div class="legend-item"><div class="legend-dot poc-dot"></div><span class="legend-text">POC</span></div>
-              <div class="legend-item"><div class="legend-dot hvn-dot"></div><span class="legend-text">HVN</span></div>
-              <div class="legend-item"><div class="legend-dot lvn-dot"></div><span class="legend-text">LVN</span></div>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ SLIDE 8: CTA ══════ -->
-    <div class="slide-wrapper" data-slide="8">
-      <span class="slide-label">Slide 8 — CTA</span>
-      <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../videos/starfield-bg.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="cta-container">
-            <div class="cta-icon">📊</div>
-            <h2 class="cta-headline">Read Where the<br><span class="cta-accent">Market Stayed.</span></h2>
-            <p class="cta-body">Full volume profile guide with chart examples, trading strategies, and practical applications.</p>
-            <div class="cta-box">
-              <p class="cta-box-text">Read the full guide free</p>
-              <span class="cta-link">signalpilot.io</span>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <script>
-    (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
-      const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
-      const slideWrappers = document.querySelectorAll('.slide-wrapper');
-      let exportMode = false;
-      let currentSlide = 0;
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 4 — POC Deep Dive
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s4" data-slide="4">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">04 / 08</span>
+      <div class="sec-tag">KEY CONCEPT</div>
+      <div class="sec-title">Point of <em>Control</em></div>
+      <p style="font-size:clamp(7px,1.3cqw,10px);color:var(--txt2);margin-bottom:clamp(10px,2.5cqw,20px);">The single price level with the most volume traded</p>
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
-      exportBtn.addEventListener('click', function() {
-        exportMode = !exportMode;
-        document.body.classList.toggle('export-mode', exportMode);
-        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
-        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
-      });
-      function updateActiveSlide() {
-        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
-      }
-      document.addEventListener('keydown', function(e) {
-        if (!exportMode) return;
-        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
-      });
-    })();
-  </script>
+      <div style="width:92%;height:clamp(12px,2.5cqw,22px);border-radius:6px;background:linear-gradient(90deg,var(--poc),rgba(74,144,217,0.4));box-shadow:0 0 20px rgba(74,144,217,0.25);margin-bottom:clamp(10px,2.5cqw,20px);position:relative;display:flex;align-items:center;justify-content:flex-end;padding-right:3%;">
+        <span style="font-family:var(--mono);font-size:clamp(6px,1cqw,9px);font-weight:700;color:#fff;letter-spacing:2px;">POC</span>
+      </div>
+
+      <div class="def-row">
+        <div class="def-card poc-card">
+          <span class="def-icon">🧲</span>
+          <div>
+            <div class="def-label">MAGNET EFFECT</div>
+            <div class="def-text"><strong>Acts as a magnet.</strong> Price is pulled back toward POC repeatedly throughout the session.</div>
+          </div>
+        </div>
+        <div class="def-card poc-card">
+          <span class="def-icon">⚖️</span>
+          <div>
+            <div class="def-label">FAIR VALUE</div>
+            <div class="def-text"><strong>Represents fair value.</strong> Where buyers and sellers found the most agreement on price.</div>
+          </div>
+        </div>
+        <div class="def-card poc-card">
+          <span class="def-icon">🔄</span>
+          <div>
+            <div class="def-label">MEAN REVERSION</div>
+            <div class="def-text"><strong>Anchor point.</strong> Price often returns to prior session POC. Use it as a reference level.</div>
+          </div>
+        </div>
+      </div>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 5 — HVN (High Volume Nodes)
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s5" data-slide="5">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">05 / 08</span>
+      <div class="sec-tag">VOLUME ZONES</div>
+      <div class="sec-title" style="margin-bottom:clamp(6px,1.5cqw,12px);">High Volume <em>Nodes</em></div>
+
+      <div class="zone-wrap">
+        <div class="zone-header">
+          <div class="zone-badge hvn-b">📍</div>
+          <div>
+            <div class="zone-name hvn-c">HVN</div>
+            <div class="zone-full">High Volume Nodes</div>
+          </div>
+        </div>
+        <div class="zone-bars">
+          <div class="vp-chart">
+            <div class="vp-bar hvn" style="width:82%"></div>
+            <div class="vp-bar hvn" style="width:90%"></div>
+            <div class="vp-bar hvn" style="width:95%"></div>
+            <div class="vp-bar hvn" style="width:88%"></div>
+            <div class="vp-bar hvn" style="width:78%"></div>
+            <div class="vp-bar hvn" style="width:72%"></div>
+          </div>
+        </div>
+        <div class="zone-desc">Areas of <strong class="hvn-hl">acceptance</strong>. Price spent significant time here because traders found value.</div>
+        <div class="zone-insight hvn-i"><strong class="hvn-hl">Expect:</strong> Consolidation, ranging, slow movement. These are <strong class="hvn-hl">comfort zones</strong> where price tends to gravitate.</div>
+      </div>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 6 — LVN (Low Volume Nodes)
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s6" data-slide="6">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">06 / 08</span>
+      <div class="sec-tag">VOLUME ZONES</div>
+      <div class="sec-title" style="margin-bottom:clamp(6px,1.5cqw,12px);">Low Volume <em>Nodes</em></div>
+
+      <div class="zone-wrap">
+        <div class="zone-header">
+          <div class="zone-badge lvn-b">⚡</div>
+          <div>
+            <div class="zone-name lvn-c">LVN</div>
+            <div class="zone-full">Low Volume Nodes</div>
+          </div>
+        </div>
+        <div class="zone-bars">
+          <div class="vp-chart">
+            <div class="vp-bar lvn" style="width:12%"></div>
+            <div class="vp-bar lvn" style="width:8%"></div>
+            <div class="vp-bar lvn" style="width:15%"></div>
+            <div class="vp-bar lvn" style="width:6%"></div>
+            <div class="vp-bar lvn" style="width:10%"></div>
+            <div class="vp-bar lvn" style="width:14%"></div>
+          </div>
+        </div>
+        <div class="zone-desc">Areas of <strong class="lvn-hl">rejection</strong>. Price moved through quickly — traders didn't want to stay.</div>
+        <div class="zone-insight lvn-i"><strong class="lvn-hl">Expect:</strong> Fast moves, acceleration, breakouts. These are <strong class="lvn-hl">discomfort zones</strong> where price slices through.</div>
+      </div>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 7 — Complete Annotated Profile
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s7" data-slide="7">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">07 / 08</span>
+      <div class="sec-tag">PUTTING IT TOGETHER</div>
+      <div class="sec-title">The Complete <em>Picture</em></div>
+
+      <div class="vp-wrap">
+        <div class="vp-body">
+          <div class="ann-labels">
+            <span class="ann-tag t-lvn">LVN</span>
+            <span class="ann-tag t-hvn">HVN</span>
+            <span class="ann-tag t-poc">← POC</span>
+            <span class="ann-tag t-hvn">HVN</span>
+            <span class="ann-tag t-lvn">LVN</span>
+          </div>
+          <div class="vp-chart" style="flex:1;">
+            <div class="vp-bar lvn" style="width:10%"></div>
+            <div class="vp-bar lvn" style="width:15%"></div>
+            <div class="vp-bar lvn" style="width:20%"></div>
+            <div class="vp-bar" style="width:30%"></div>
+            <div class="vp-bar hvn" style="width:55%"></div>
+            <div class="vp-bar hvn" style="width:70%"></div>
+            <div class="vp-bar hvn" style="width:82%"></div>
+            <div class="vp-bar hvn" style="width:90%"></div>
+            <div class="vp-bar poc" style="width:98%"></div>
+            <div class="vp-bar hvn" style="width:88%"></div>
+            <div class="vp-bar hvn" style="width:75%"></div>
+            <div class="vp-bar hvn" style="width:60%"></div>
+            <div class="vp-bar" style="width:38%"></div>
+            <div class="vp-bar" style="width:28%"></div>
+            <div class="vp-bar lvn" style="width:18%"></div>
+            <div class="vp-bar lvn" style="width:12%"></div>
+            <div class="vp-bar lvn" style="width:8%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend-row">
+        <div class="legend-item"><div class="legend-dot d-poc"></div><span class="legend-text">POC</span></div>
+        <div class="legend-item"><div class="legend-dot d-hvn"></div><span class="legend-text">HVN</span></div>
+        <div class="legend-item"><div class="legend-dot d-lvn"></div><span class="legend-text">LVN</span></div>
+      </div>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 8 — CTA
+       ══════════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper s8" data-slide="8">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">08 / 08</span>
+
+      <div class="cta-badge">SIGNAL PILOT</div>
+      <div class="cta-title">Read Where the<br><em>Market Stayed</em></div>
+      <p class="cta-sub">Full volume profile guide with chart examples, trading strategies, and practical applications.</p>
+
+      <div class="stat-grid">
+        <div class="stat-cell"><div class="sv">POC</div><div class="sl">FAIR VALUE</div></div>
+        <div class="stat-cell"><div class="sv">HVN</div><div class="sl">ACCEPTANCE</div></div>
+        <div class="stat-cell"><div class="sv">LVN</div><div class="sl">REJECTION</div></div>
+      </div>
+
+      <div class="pill-row">
+        <span class="pill">VOLUME PROFILE</span>
+        <span class="pill">POC</span>
+        <span class="pill">HVN</span>
+        <span class="pill">LVN</span>
+        <span class="pill">MARKET STRUCTURE</span>
+      </div>
+
+      <div class="cta-box">
+        <div class="cta-url">signalpilot.io</div>
+        <div class="cta-hint">Read the full guide free</div>
+      </div>
+
+      <span class="brand-mark">SIGNAL PILOT</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Export Navigation ── -->
+<div class="export-nav">
+  <button onclick="prevSlide()">← Previous</button>
+  <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
+  <button onclick="nextSlide()">Next →</button>
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide-wrapper');
+let cur=0,exp=false;
+function toggleExportMode(){exp=!exp;document.body.classList.toggle('export-mode',exp);if(exp){cur=0;upd();}}
+function upd(){slides.forEach((s,i)=>s.classList.toggle('active',i===cur));document.getElementById('currentSlide').textContent=cur+1;}
+function nextSlide(){cur=(cur+1)%slides.length;upd();}
+function prevSlide(){cur=(cur-1+slides.length)%slides.length;upd();}
+document.addEventListener('keydown',e=>{if(!exp)return;if(e.key==='ArrowRight')nextSlide();if(e.key==='ArrowLeft')prevSlide();if(e.key==='Escape')toggleExportMode();});
+</script>
 </body>
 </html>
