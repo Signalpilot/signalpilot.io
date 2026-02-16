@@ -770,6 +770,52 @@ async function renderCarousel(page, postDir, postNumber) {
       .status-vs {
         font-size: clamp(24px, 6cqw, 36px) !important;
       }
+      .status-tag {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        padding: 4px 12px !important;
+      }
+
+      /* --- Merge Flow (post-048 pattern) --- */
+      .merge-chip {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        padding: clamp(8px, 1.5cqw, 14px) clamp(12px, 2.5cqw, 20px) !important;
+      }
+      .merge-arrow {
+        font-size: clamp(28px, 7cqw, 42px) !important;
+      }
+      .merge-result {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+        padding: clamp(18px, 3.5cqw, 30px) clamp(12px, 2.5cqw, 20px) !important;
+      }
+
+      /* --- Alignment arrows (post-048 pattern) --- */
+      .align-arrows {
+        font-size: clamp(24px, 6cqw, 36px) !important;
+      }
+      .align-label {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 2px !important;
+      }
+      .align-desc {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* --- Philosophy quote (post-048 pattern) --- */
+      .phil-quote {
+        font-size: clamp(28px, 7cqw, 42px) !important;
+        line-height: 1.4 !important;
+      }
+      .phil-desc {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* --- Reveal badge (post-048 pattern) --- */
+      .reveal-badge {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+        padding: clamp(10px, 2cqw, 16px) clamp(20px, 4cqw, 36px) !important;
+      }
 
       /* --- Truth Box (teal/gold bordered quote) --- */
       .truth-box .tb-label {
