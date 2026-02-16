@@ -553,6 +553,16 @@ async function renderCarousel(page, postDir, postNumber) {
       .scales-label {
         font-size: clamp(8px, 1.6cqw, 12px) !important;
       }
+
+      /* --- Slide-1 column line (thicker for grid visibility) --- */
+      .s1::after {
+        width: 32px !important;
+      }
+      /* Old architecture slide-1 line */
+      .slide-teal.slide-1::after,
+      .slide-warm.slide-1::after {
+        width: 32px !important;
+      }
     </style>
   `;
   html = html.replace('</head>', renderStyles + '</head>');
