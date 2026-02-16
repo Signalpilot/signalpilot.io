@@ -692,6 +692,128 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(14px, 3.5cqw, 20px) !important;
       }
 
+      /* --- Risk-Reward Display (post-042 pattern) --- */
+      .rr-box .rr-num {
+        font-size: clamp(36px, 9cqw, 56px) !important;
+      }
+      .rr-box .rr-label {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 2px !important;
+      }
+      .rr-colon {
+        font-size: clamp(24px, 6cqw, 36px) !important;
+      }
+      .rr-display {
+        gap: clamp(12px, 2.5cqw, 24px) !important;
+        margin-bottom: clamp(16px, 3cqw, 28px) !important;
+      }
+      .rr-box {
+        padding: clamp(16px, 3cqw, 28px) clamp(14px, 2.8cqw, 24px) !important;
+        min-width: clamp(100px, 20cqw, 180px) !important;
+      }
+
+      /* --- Winrate Section (post-042 pattern) --- */
+      .winrate-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        letter-spacing: 2px !important;
+      }
+      .winrate-value {
+        font-size: clamp(28px, 7cqw, 42px) !important;
+      }
+      .winrate-desc {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+      }
+      .winrate-insight {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+      }
+      .winrate-insight em {
+        font-style: normal !important;
+      }
+      .winrate-bar {
+        height: clamp(8px, 1.5cqw, 12px) !important;
+      }
+      .winrate-section {
+        padding: clamp(16px, 3cqw, 28px) !important;
+      }
+
+      /* --- Compare Table (post-042 pattern) --- */
+      .ct-header span {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        letter-spacing: 2px !important;
+      }
+      .ct-cell .ct-ratio {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+      }
+      .ct-cell .ct-val {
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
+      }
+      .ct-cell .ct-tag {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        padding: 4px 10px !important;
+      }
+      .ct-row {
+        padding: clamp(12px, 2.5cqw, 20px) clamp(10px, 2cqw, 18px) !important;
+      }
+      .ct-bar-wrap {
+        height: clamp(5px, 1cqw, 8px) !important;
+      }
+
+      /* --- Status Display (post-048 pattern) --- */
+      .status-box .sb-val {
+        font-size: clamp(32px, 8cqw, 48px) !important;
+      }
+      .status-box .sb-lbl {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 2px !important;
+      }
+      .status-vs {
+        font-size: clamp(24px, 6cqw, 36px) !important;
+      }
+
+      /* --- Truth Box (teal/gold bordered quote) --- */
+      .truth-box .tb-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        letter-spacing: 2px !important;
+      }
+      .truth-box .tb-text {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* --- Orb halves labels --- */
+      .half-side .half-icon {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .half-side .half-lbl {
+        font-size: clamp(10px, 2cqw, 14px) !important;
+      }
+
+      /* --- Concept description (post-047 pattern) --- */
+      .cd-main {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        line-height: 1.5 !important;
+      }
+      .cd-note {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+
+      /* --- Stop loss elements (post-046 pattern) --- */
+      .stop-desc {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        line-height: 1.5 !important;
+      }
+      .stop-detail {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .stop-type-tag {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 3px !important;
+      }
+      .big-stat {
+        font-size: clamp(48px, 12cqw, 72px) !important;
+      }
+
       /* --- Param / settings grid (post-060 pattern) --- */
       .param-key, .param-val {
         font-size: clamp(14px, 3.5cqw, 20px) !important;
