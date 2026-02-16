@@ -17,8 +17,12 @@
       --border-subtle: rgba(255,255,255,0.1);
       --accent-teal: #5eead4;
       --accent-teal-dim: rgba(94,234,212,0.3);
-      --color-green: #4ade80;
-      --color-red: #ef4444;
+      --accent-orange: #f59e0b;
+      --accent-gold: #c9a962;
+      --accent-red: #f87171;
+      --accent-green: #4ade80;
+      --accent-purple: #a855f7;
+      --accent-blue: #60a5fa;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -33,8 +37,7 @@
     body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
     .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
     .page-title { text-align: center; margin-bottom: 2rem; }
     .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
     .page-title p { color: var(--text-muted); font-size: 0.875rem; }
@@ -43,9 +46,573 @@
     .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
     .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
     .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
+    .slide-content { position: relative; z-index: 3; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
 
+    /* ── TEAL/COOL THEME ── */
+    .slide-teal { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
+    .slide-teal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
+    .slide-teal.slide-1::after { content: ''; position: absolute; top: 0; left: 15px; width: 50px; height: 100%; background: #5eead4; z-index: 5; }
+    .slide-teal .slide-content { z-index: 3; }
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
+
+    /* ── BADGE ── */
+    .mkt-badge {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.2cqw, 12px);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(94,234,212,0.9);
+      padding: clamp(3px, 0.6cqw, 7px) clamp(10px, 2cqw, 20px);
+      border: 1px solid rgba(94,234,212,0.3);
+      border-radius: clamp(3px, 0.6cqw, 6px);
+      background: rgba(94,234,212,0.06);
+      margin-bottom: 4%;
+    }
+
+    /* ── SPLIT ORB (half green / half red) ── */
+    .orb {
+      width: clamp(100px, 20cqw, 200px);
+      height: clamp(100px, 20cqw, 200px);
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.1) 40%, rgba(255,255,255,0.03) 70%, transparent 100%);
+      border: 2px solid rgba(94,234,212,0.25);
+      box-shadow: 0 0 50px rgba(94,234,212,0.12), 0 0 100px rgba(94,234,212,0.04), inset 0 0 30px rgba(94,234,212,0.06);
+    }
+    .orb::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(94,234,212,0.15);
+    }
+    .orb::after {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px dashed rgba(94,234,212,0.12);
+    }
+
+    /* Split halves inside orb */
+    .orb-split {
+      position: relative;
+      width: 58%;
+      height: 58%;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .split-left {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 48%;
+      height: 100%;
+      border-radius: 50% 0 0 50%;
+      background: radial-gradient(circle at 60% 50%, rgba(74,222,128,0.4) 0%, rgba(74,222,128,0.1) 70%, transparent 100%);
+      border-left: 1.5px solid rgba(74,222,128,0.3);
+      border-top: 1.5px solid rgba(74,222,128,0.3);
+      border-bottom: 1.5px solid rgba(74,222,128,0.3);
+    }
+    .split-right {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 48%;
+      height: 100%;
+      border-radius: 0 50% 50% 0;
+      background: radial-gradient(circle at 40% 50%, rgba(248,113,113,0.4) 0%, rgba(248,113,113,0.1) 70%, transparent 100%);
+      border-right: 1.5px solid rgba(248,113,113,0.3);
+      border-top: 1.5px solid rgba(248,113,113,0.3);
+      border-bottom: 1.5px solid rgba(248,113,113,0.3);
+    }
+    .split-divider {
+      position: absolute;
+      left: 50%;
+      top: 5%;
+      bottom: 5%;
+      width: 1px;
+      background: rgba(255,255,255,0.2);
+      transform: translateX(-50%);
+    }
+    .split-arrow-up {
+      position: absolute;
+      top: 15%;
+      left: 22%;
+      font-size: clamp(14px, 2.8cqw, 28px);
+      color: rgba(74,222,128,0.8);
+      text-shadow: 0 0 8px rgba(74,222,128,0.3);
+    }
+    .split-arrow-down {
+      position: absolute;
+      bottom: 15%;
+      right: 22%;
+      font-size: clamp(14px, 2.8cqw, 28px);
+      color: rgba(248,113,113,0.8);
+      text-shadow: 0 0 8px rgba(248,113,113,0.3);
+    }
+    .split-q {
+      position: relative;
+      z-index: 3;
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.5cqw, 36px);
+      font-weight: 700;
+      color: var(--accent-teal);
+      text-shadow: 0 0 20px rgba(94,234,212,0.4);
+    }
+
+    .orb-label {
+      position: absolute;
+      bottom: -2%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 1cqw, 10px);
+      color: rgba(94,234,212,0.7);
+      letter-spacing: 0.2em;
+      z-index: 3;
+      white-space: nowrap;
+    }
+
+    /* ── TITLES ── */
+    .mkt-title {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 4.8cqw, 50px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 3%;
+    }
+    .mkt-title em { color: var(--accent-teal); font-style: italic; }
+
+    .mkt-subtitle {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 1.7cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 85%;
+      margin-bottom: 3%;
+    }
+
+    .mkt-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
+      margin-bottom: 4%;
+    }
+
+    .inner-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.5cqw, 36px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 4%;
+    }
+    .inner-heading em { color: var(--accent-teal); font-style: italic; }
+
+    .section-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 14px);
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 4%;
+      max-width: 90%;
+    }
+
+    /* ── ICON CIRCLES ── */
+    .icon-circle {
+      width: clamp(34px, 6.5cqw, 56px);
+      height: clamp(34px, 6.5cqw, 56px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .icon-circle::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+    }
+    .icon-circle .ic-letter {
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.5cqw, 24px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ic-teal { background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%); border: 1.5px solid rgba(94,234,212,0.3); box-shadow: 0 0 18px rgba(94,234,212,0.1); }
+    .ic-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .ic-teal .ic-letter { color: var(--accent-teal); }
+
+    .ic-green { background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%); border: 1.5px solid rgba(74,222,128,0.3); box-shadow: 0 0 18px rgba(74,222,128,0.1); }
+    .ic-green::before { border: 1px solid rgba(74,222,128,0.12); }
+    .ic-green .ic-letter { color: var(--accent-green); }
+
+    .ic-red { background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%); border: 1.5px solid rgba(248,113,113,0.3); box-shadow: 0 0 18px rgba(248,113,113,0.1); }
+    .ic-red::before { border: 1px solid rgba(248,113,113,0.12); }
+    .ic-red .ic-letter { color: var(--accent-red); }
+
+    .ic-blue { background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%); border: 1.5px solid rgba(96,165,250,0.3); box-shadow: 0 0 18px rgba(96,165,250,0.1); }
+    .ic-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .ic-blue .ic-letter { color: var(--accent-blue); }
+
+    .ic-orange { background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%); border: 1.5px solid rgba(245,158,11,0.3); box-shadow: 0 0 18px rgba(245,158,11,0.1); }
+    .ic-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .ic-orange .ic-letter { color: var(--accent-orange); }
+
+    .ic-purple { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%); border: 1.5px solid rgba(168,85,247,0.3); box-shadow: 0 0 18px rgba(168,85,247,0.1); }
+    .ic-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .ic-purple .ic-letter { color: var(--accent-purple); }
+
+    .ic-gold { background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%); border: 1.5px solid rgba(201,169,98,0.3); box-shadow: 0 0 18px rgba(201,169,98,0.1); }
+    .ic-gold::before { border: 1px solid rgba(201,169,98,0.12); }
+    .ic-gold .ic-letter { color: var(--accent-gold); }
+
+    /* ── INDICATOR CARDS ── */
+    .indicator-grid {
+      width: 92%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 0.7cqw, 8px);
+      margin-bottom: 4%;
+    }
+    .indicator-card {
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94,234,212,0.12);
+      background: rgba(94,234,212,0.03);
+      padding: clamp(6px, 1.1cqw, 13px) 4%;
+    }
+    .indicator-card.green-card {
+      border: 1px solid rgba(74,222,128,0.12);
+      background: rgba(74,222,128,0.03);
+    }
+    .indicator-card.red-card {
+      border: 1px solid rgba(248,113,113,0.12);
+      background: rgba(248,113,113,0.03);
+    }
+    .indicator-info { flex: 1; }
+    .indicator-name {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.5cqw, 16px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1%;
+    }
+    .indicator-codename {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.9cqw, 10px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      margin-bottom: 2%;
+    }
+    .indicator-codename.green { color: var(--accent-green); }
+    .indicator-codename.red { color: var(--accent-red); }
+    .indicator-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.05cqw, 11px);
+      color: var(--text-secondary);
+      line-height: 1.35;
+    }
+    .indicator-bar {
+      width: 100%;
+      height: clamp(2px, 0.35cqw, 4px);
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      margin-top: 3%;
+      overflow: hidden;
+    }
+    .indicator-bar-fill { height: 100%; border-radius: 2px; }
+    .ibf-teal { background: linear-gradient(90deg, rgba(94,234,212,0.5), rgba(94,234,212,0.15)); }
+    .ibf-green { background: linear-gradient(90deg, rgba(74,222,128,0.5), rgba(74,222,128,0.15)); }
+    .ibf-red { background: linear-gradient(90deg, rgba(248,113,113,0.5), rgba(248,113,113,0.15)); }
+    .ibf-blue { background: linear-gradient(90deg, rgba(96,165,250,0.5), rgba(96,165,250,0.15)); }
+    .ibf-orange { background: linear-gradient(90deg, rgba(245,158,11,0.5), rgba(245,158,11,0.15)); }
+    .ibf-purple { background: linear-gradient(90deg, rgba(168,85,247,0.5), rgba(168,85,247,0.15)); }
+    .ibf-gold { background: linear-gradient(90deg, rgba(201,169,98,0.5), rgba(201,169,98,0.15)); }
+
+    /* ── STATS ROW ── */
+    .stats-row {
+      width: 92%;
+      display: flex;
+      justify-content: space-between;
+      gap: clamp(4px, 0.8cqw, 10px);
+      margin-bottom: 3%;
+    }
+    .stat-pill {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(1px, 0.3cqw, 4px);
+      padding: clamp(4px, 0.8cqw, 10px) 0;
+      border-radius: clamp(4px, 0.8cqw, 8px);
+      border: 1px solid rgba(94,234,212,0.1);
+      background: rgba(94,234,212,0.02);
+    }
+    .stat-val {
+      font-family: var(--font-mono);
+      font-size: clamp(11px, 2cqw, 20px);
+      font-weight: 600;
+      color: var(--accent-teal);
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: clamp(5px, 0.8cqw, 9px);
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ── FEATURE CARDS (2x3) ── */
+    .feature-grid {
+      width: 92%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1cqw, 12px);
+      margin-bottom: 4%;
+    }
+    .feature-card {
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94,234,212,0.12);
+      background: rgba(94,234,212,0.03);
+      padding: 5% 5%;
+      display: flex;
+      align-items: center;
+      gap: 8%;
+    }
+    .feature-ic {
+      width: clamp(26px, 4.5cqw, 40px);
+      height: clamp(26px, 4.5cqw, 40px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .feature-ic::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+    }
+    .fic-teal { background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%); border: 1.5px solid rgba(94,234,212,0.3); }
+    .fic-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .fic-green { background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%); border: 1.5px solid rgba(74,222,128,0.3); }
+    .fic-green::before { border: 1px solid rgba(74,222,128,0.12); }
+    .fic-red { background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%); border: 1.5px solid rgba(248,113,113,0.3); }
+    .fic-red::before { border: 1px solid rgba(248,113,113,0.12); }
+    .fic-blue { background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%); border: 1.5px solid rgba(96,165,250,0.3); }
+    .fic-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .fic-orange { background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%); border: 1.5px solid rgba(245,158,11,0.3); }
+    .fic-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .fic-purple { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%); border: 1.5px solid rgba(168,85,247,0.3); }
+    .fic-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .fic-letter {
+      font-family: var(--font-serif);
+      font-size: clamp(11px, 1.8cqw, 18px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .fic-teal .fic-letter { color: var(--accent-teal); }
+    .fic-green .fic-letter { color: var(--accent-green); }
+    .fic-red .fic-letter { color: var(--accent-red); }
+    .fic-blue .fic-letter { color: var(--accent-blue); }
+    .fic-orange .fic-letter { color: var(--accent-orange); }
+    .fic-purple .fic-letter { color: var(--accent-purple); }
+    .feature-text {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.2cqw, 13px);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* ── TRUTH SLIDE ── */
+    .truth-orb {
+      width: clamp(60px, 12cqw, 120px);
+      height: clamp(60px, 12cqw, 120px);
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.1) 40%, rgba(255,255,255,0.03) 70%, transparent 100%);
+      border: 2px solid rgba(94,234,212,0.25);
+      box-shadow: 0 0 40px rgba(94,234,212,0.1), 0 0 80px rgba(94,234,212,0.03);
+    }
+    .truth-orb::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(94,234,212,0.15);
+    }
+    .truth-orb-letter {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 46px);
+      font-weight: 700;
+      color: var(--accent-teal);
+      position: relative;
+      z-index: 1;
+    }
+
+    .truth-grid {
+      width: 92%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(6px, 1.2cqw, 14px);
+      margin-bottom: 4%;
+    }
+    .truth-card {
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94,234,212,0.12);
+      background: rgba(94,234,212,0.03);
+      padding: 5% 6%;
+    }
+    .truth-dot {
+      width: clamp(5px, 0.9cqw, 9px);
+      height: clamp(5px, 0.9cqw, 9px);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-bottom: clamp(4px, 0.7cqw, 8px);
+    }
+    .td-teal { background: var(--accent-teal); box-shadow: 0 0 8px rgba(94,234,212,0.3); }
+    .td-green { background: var(--accent-green); box-shadow: 0 0 8px rgba(74,222,128,0.3); }
+    .td-red { background: var(--accent-red); box-shadow: 0 0 8px rgba(248,113,113,0.3); }
+    .td-blue { background: var(--accent-blue); box-shadow: 0 0 8px rgba(96,165,250,0.3); }
+    .truth-card-title {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 14px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+      line-height: 1.3;
+    }
+    .truth-card-text {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.05cqw, 11px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .philosophy-box {
+      width: 92%;
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94,234,212,0.15);
+      background: rgba(94,234,212,0.03);
+      padding: 4% 5%;
+      text-align: center;
+    }
+    .philosophy-text {
+      font-family: var(--font-serif);
+      font-size: clamp(10px, 1.8cqw, 18px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .philosophy-text em { color: var(--accent-teal); font-style: italic; }
+
+    /* ── CTA SLIDE ── */
+    .cta-badge {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 11px);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(94,234,212,0.7);
+      margin-bottom: 4%;
+    }
+    .cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 46px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 4%;
+    }
+    .cta-title em { color: var(--accent-teal); font-style: italic; }
+
+    .cta-stat-grid {
+      width: 85%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(4px, 0.8cqw, 10px);
+      margin-bottom: 5%;
+    }
+    .cta-stat {
+      display: flex;
+      align-items: center;
+      gap: 6%;
+      padding: clamp(4px, 0.7cqw, 8px) clamp(6px, 1.2cqw, 14px);
+      border-radius: clamp(4px, 0.7cqw, 8px);
+      border: 1px solid rgba(94,234,212,0.1);
+      background: rgba(94,234,212,0.02);
+    }
+    .cta-stat-num {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.7cqw, 18px);
+      font-weight: 600;
+      color: var(--accent-teal);
+    }
+    .cta-stat-text {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.9cqw, 10px);
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .cta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(4px, 0.7cqw, 8px);
+      margin-bottom: 5%;
+      max-width: 90%;
+    }
+    .cta-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.85cqw, 9px);
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      padding: clamp(2px, 0.4cqw, 5px) clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: clamp(3px, 0.5cqw, 6px);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .cta-box {
+      padding: clamp(8px, 1.4cqw, 16px) clamp(20px, 4cqw, 44px);
+      border: 1px solid rgba(94,234,212,0.3);
+      border-radius: clamp(4px, 0.8cqw, 8px);
+      background: rgba(94,234,212,0.06);
+    }
+    .cta-url {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.6cqw, 17px);
+      letter-spacing: 0.12em;
+      color: var(--accent-teal);
+    }
+
+    /* ── LOGO ── */
     .slide-logo {
       position: absolute;
       bottom: 4%;
@@ -59,464 +626,355 @@
       z-index: 2;
       white-space: nowrap;
     }
-
-    /* ═══════════════════════════════════════════
-       SHARED — Teal slide base (ALL slides)
-       ═══════════════════════════════════════════ */
-    .slide-teal { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
-    .slide-teal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-teal.slide-1::after { content: ''; position: absolute; top: 0; left: 15px; width: 50px; height: 100%; background: #5eead4; z-index: 5; }
-    .slide-teal .slide-content { z-index: 3; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
-    .slide-1 .cine-label { font-size: clamp(0.5rem, 1.6cqw, 0.875rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94,234,212,0.9); margin-bottom: 8%; }
-    .slide-1 .hook-main { font-family: var(--font-serif); font-size: clamp(1.6rem, 5cqw, 2.8rem); font-weight: 700; line-height: 1.15; color: rgba(255,255,255,0.95); margin-bottom: 4%; }
-    .slide-1 .hook-accent { color: var(--accent-teal); }
-    .slide-1 .cine-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent); margin-bottom: 4%; }
-    .slide-1 .hook-sub { font-size: clamp(0.65rem, 2cqw, 1.1rem); font-weight: 300; letter-spacing: 0.05em; color: rgba(94,234,212,0.4); line-height: 1.6; }
-    .slide-1 .cine-logo { position: absolute; bottom: 4%; left: 50%; transform: translateX(-50%); font-family: 'Gugi', sans-serif; font-size: clamp(0.4rem, 1.2cqw, 0.625rem); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(94,234,212,0.4); }
-
-    /* ═══════════════════════════════════════════
-       SHARED — Blog layout
-       ═══════════════════════════════════════════ */
-    .blog-layout {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .blog-tag {
-      font-family: var(--font-mono);
-      font-size: clamp(8px, 1.4cqw, 14px);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(94,234,212,0.7);
-      margin-bottom: 3%;
-    }
-
-    .blog-title {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      text-align: center;
-      line-height: 1.15;
-      margin-bottom: 4%;
-    }
-
-    .blog-desc {
-      font-size: clamp(11px, 2cqw, 21px);
-      color: var(--text-secondary);
-      line-height: 1.5;
-      text-align: center;
-      max-width: 85%;
-      margin-bottom: 4%;
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 2 — Real Breakout
-       ═══════════════════════════════════════════ */
-    .check-list {
-      width: 88%;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(6px, 1.2cqw, 12px);
-      margin-bottom: 4%;
-    }
-
-    .check-item {
-      display: flex;
-      align-items: center;
-      gap: clamp(8px, 1.6cqw, 16px);
-      padding: clamp(8px, 1.8cqw, 18px) clamp(10px, 2.2cqw, 22px);
-      border-radius: 10px;
-    }
-
-    .check-item.green {
-      background: rgba(74,222,128,0.04);
-      border: 1px solid rgba(74,222,128,0.15);
-    }
-
-    .check-item.red {
-      background: rgba(239,68,68,0.04);
-      border: 1px solid rgba(239,68,68,0.15);
-    }
-
-    .check-icon {
-      font-size: clamp(14px, 2.5cqw, 26px);
-      flex-shrink: 0;
-    }
-
-    .check-text {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    .check-text strong { color: var(--color-green); }
-    .check-item.red .check-text strong { color: var(--color-red); }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 4 — Side-by-Side Comparison
-       ═══════════════════════════════════════════ */
-    .compare-row {
-      width: 92%;
-      display: flex;
-      gap: 3%;
-      margin-bottom: 4%;
-    }
-
-    .compare-panel {
-      flex: 1;
-      padding: 4%;
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    .compare-panel.breakout {
-      background: rgba(74,222,128,0.04);
-      border: 1px solid rgba(74,222,128,0.15);
-    }
-
-    .compare-panel.fakeout {
-      background: rgba(239,68,68,0.04);
-      border: 1px solid rgba(239,68,68,0.15);
-    }
-
-    .compare-badge {
-      font-family: var(--font-mono);
-      font-size: clamp(7px, 1.2cqw, 12px);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 4%;
-    }
-
-    .compare-panel.breakout .compare-badge { color: var(--color-green); }
-    .compare-panel.fakeout .compare-badge { color: var(--color-red); }
-
-    .compare-icon {
-      font-size: clamp(28px, 5.5cqw, 58px);
-      margin-bottom: 3%;
-    }
-
-    .compare-detail {
-      font-size: clamp(9px, 1.5cqw, 15px);
-      color: var(--text-muted);
-      line-height: 1.5;
-      text-align: left;
-    }
-
-    .compare-detail li {
-      margin-bottom: 2%;
-      list-style: none;
-    }
-
-    .compare-detail li::before {
-      content: '• ';
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 5 — The Fix
-       ═══════════════════════════════════════════ */
-    .fix-card {
-      width: 88%;
-      padding: clamp(14px, 3.5cqw, 36px);
-      border-radius: 14px;
-      background: rgba(94,234,212,0.04);
-      border: 1px solid rgba(94,234,212,0.15);
-      margin-bottom: 4%;
-    }
-
-    .fix-title {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.8cqw, 38px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
-      text-align: center;
-      margin-bottom: 4%;
-    }
-
-    .fix-title .teal { color: var(--accent-teal); }
-
-    .fix-steps {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(6px, 1.4cqw, 14px);
-    }
-
-    .fix-step {
-      display: flex;
-      align-items: center;
-      gap: clamp(8px, 1.6cqw, 16px);
-    }
-
-    .fix-num {
-      width: clamp(24px, 5cqw, 48px);
-      height: clamp(24px, 5cqw, 48px);
-      border-radius: 50%;
-      background: rgba(94,234,212,0.08);
-      border: 1px solid rgba(94,234,212,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-size: clamp(10px, 2cqw, 20px);
-      color: var(--accent-teal);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .fix-text {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    .fix-quote {
-      font-family: var(--font-serif);
-      font-size: clamp(14px, 2.8cqw, 30px);
-      font-weight: 600;
-      font-style: italic;
-      color: var(--accent-teal);
-      text-align: center;
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 6 — CTA
-       ═══════════════════════════════════════════ */
-    .cta-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-headline {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 3%;
-    }
-
-    .cta-accent { color: var(--accent-teal); }
-
-    .cta-body {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 85%;
-      margin-bottom: 5%;
-    }
-
-    .cta-box {
-      background: linear-gradient(135deg, rgba(94,234,212,0.12) 0%, rgba(94,234,212,0.04) 100%);
-      border: 2px solid var(--accent-teal);
-      border-radius: 14px;
-      padding: 3% 6%;
-    }
-
-    .cta-box-text { font-size: clamp(11px, 2cqw, 22px); font-weight: 500; color: var(--text-primary); margin-bottom: 1%; }
-    .cta-link { font-size: clamp(10px, 1.7cqw, 18px); font-weight: 600; color: var(--accent-teal); }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
     <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
-    <h1>Post 063 — Breakout vs Fakeout</h1>
-    <p>6 slides &middot; Blog</p>
+    <h1>Post 063 &mdash; Breakout vs Fakeout</h1>
+    <p>6 slides &middot; Blog &middot; Breakout Confirmation</p>
   </div>
 
   <div class="carousel-grid">
 
-    <!-- ══════ SLIDE 1: Cinematic Hook ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 1 — HOOK: Split Orb + Bold Title
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Hook</span>
       <div class="slide slide-teal slide-1">
         <div class="slide-content">
-          <div class="cine-label">INSIGHT</div>
-          <div class="hook-main">Breakout or<br><span class="hook-accent">Fakeout?</span></div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">Every fakeout looks like a breakout at first.</p>
-          <div class="cine-logo">Signal Pilot</div>
+          <div class="mkt-badge">Insight</div>
+
+          <div class="orb">
+            <div class="orb-split">
+              <div class="split-left"></div>
+              <div class="split-right"></div>
+              <div class="split-divider"></div>
+              <span class="split-arrow-up">&uarr;</span>
+              <span class="split-arrow-down">&darr;</span>
+              <span class="split-q">?</span>
+            </div>
+            <span class="orb-label">BREAKOUT vs FAKEOUT</span>
+          </div>
+
+          <h2 class="mkt-title">Breakout or <em>Fakeout?</em></h2>
+          <div class="mkt-divider"></div>
+          <p class="mkt-subtitle">Every fakeout looks like a breakout at first. Here&rsquo;s how to tell the difference.</p>
+
+          <div class="stats-row" style="margin-top: 2%;">
+            <div class="stat-pill">
+              <span class="stat-val">4</span>
+              <span class="stat-label">Green Flags</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">4</span>
+              <span class="stat-label">Red Flags</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">1</span>
+              <span class="stat-label">Truth</span>
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 2: Real Breakout ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 2 — Signs It's Real (4 green confirmation cards)
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — Real Breakout</span>
       <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
-          <div class="blog-layout">
-            <div class="blog-tag">REAL BREAKOUT</div>
-            <h2 class="blog-title">Signs It's Real</h2>
-            <div class="check-list">
-              <div class="check-item green">
-                <span class="check-icon">&#10003;</span>
-                <span class="check-text"><strong>Volume spike</strong> on the break</span>
+          <h3 class="inner-heading">Signs It&rsquo;s <em>Real</em></h3>
+          <p class="section-sub">A genuine breakout leaves evidence. Look for these four confirmation signals.</p>
+
+          <div class="indicator-grid">
+            <div class="indicator-card green-card">
+              <div class="icon-circle ic-green">
+                <span class="ic-letter">V</span>
               </div>
-              <div class="check-item green">
-                <span class="check-icon">&#10003;</span>
-                <span class="check-text"><strong>Closes beyond</strong> the level, not just wicks</span>
+              <div class="indicator-info">
+                <div class="indicator-name">Volume Spike</div>
+                <div class="indicator-codename green">CONVICTION SIGNAL</div>
+                <div class="indicator-desc">Real breakouts come with a surge in volume. If volume is flat or declining, institutions aren&rsquo;t behind the move.</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-green" style="width: 95%;"></div></div>
               </div>
-              <div class="check-item green">
-                <span class="check-icon">&#10003;</span>
-                <span class="check-text"><strong>Follow-through</strong> candles confirm</span>
+            </div>
+
+            <div class="indicator-card green-card">
+              <div class="icon-circle ic-green">
+                <span class="ic-letter">C</span>
               </div>
-              <div class="check-item green">
-                <span class="check-icon">&#10003;</span>
-                <span class="check-text"><strong>Structure</strong> supports the move</span>
+              <div class="indicator-info">
+                <div class="indicator-name">Clean Close Beyond</div>
+                <div class="indicator-codename green">PRICE CONFIRMATION</div>
+                <div class="indicator-desc">The candle must close beyond the level &mdash; not just wick through. Wicks are noise; closes are commitment.</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-green" style="width: 90%;"></div></div>
+              </div>
+            </div>
+
+            <div class="indicator-card green-card">
+              <div class="icon-circle ic-green">
+                <span class="ic-letter">F</span>
+              </div>
+              <div class="indicator-info">
+                <div class="indicator-name">Follow-Through</div>
+                <div class="indicator-codename green">MOMENTUM PROOF</div>
+                <div class="indicator-desc">The next candle continues the move. Follow-through proves that demand (or supply) is sustaining the breakout.</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-green" style="width: 85%;"></div></div>
+              </div>
+            </div>
+
+            <div class="indicator-card green-card">
+              <div class="icon-circle ic-green">
+                <span class="ic-letter">S</span>
+              </div>
+              <div class="indicator-info">
+                <div class="indicator-name">Structure Support</div>
+                <div class="indicator-codename green">CONTEXT ALIGNMENT</div>
+                <div class="indicator-desc">The breakout aligns with the higher-timeframe trend or market structure. Context confirms direction.</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-green" style="width: 80%;"></div></div>
               </div>
             </div>
           </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 3: Fakeout ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 3 — Signs It's a Trap (3 red warning cards + stats)
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Fakeout</span>
+      <span class="slide-label">Slide 3 — Fakeout Signs</span>
       <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
-          <div class="blog-layout">
-            <div class="blog-tag">FAKEOUT</div>
-            <h2 class="blog-title">Signs It's a Trap</h2>
-            <div class="check-list">
-              <div class="check-item red">
-                <span class="check-icon">&#10007;</span>
-                <span class="check-text"><strong>Low volume</strong> on the break</span>
+          <h3 class="inner-heading">Signs It&rsquo;s a <em>Trap</em></h3>
+          <p class="section-sub">Fakeouts are designed to look convincing. Watch for these warning signs before committing.</p>
+
+          <div class="indicator-grid">
+            <div class="indicator-card red-card">
+              <div class="icon-circle ic-red">
+                <span class="ic-letter">L</span>
               </div>
-              <div class="check-item red">
-                <span class="check-icon">&#10007;</span>
-                <span class="check-text"><strong>Wicks beyond</strong>, closes back inside</span>
+              <div class="indicator-info">
+                <div class="indicator-name">Low Volume Break</div>
+                <div class="indicator-codename red">WEAK CONVICTION</div>
+                <div class="indicator-desc">A break on declining or low volume means retail is pushing &mdash; not institutions. It&rsquo;s a trap waiting to snap back.</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-red" style="width: 90%;"></div></div>
               </div>
-              <div class="check-item red">
-                <span class="check-icon">&#10007;</span>
-                <span class="check-text"><strong>Quick reversal</strong> after the break</span>
+            </div>
+
+            <div class="indicator-card red-card">
+              <div class="icon-circle ic-red">
+                <span class="ic-letter">W</span>
               </div>
-              <div class="check-item red">
-                <span class="check-icon">&#10007;</span>
-                <span class="check-text"><strong>No follow-through</strong> candles</span>
+              <div class="indicator-info">
+                <div class="indicator-name">Wick-Only Close</div>
+                <div class="indicator-codename red">FALSE SIGNAL</div>
+                <div class="indicator-desc">Price wicks beyond the level but closes back inside. The market tested and rejected &mdash; not broke through.</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-red" style="width: 85%;"></div></div>
+              </div>
+            </div>
+
+            <div class="indicator-card red-card">
+              <div class="icon-circle ic-red">
+                <span class="ic-letter">R</span>
+              </div>
+              <div class="indicator-info">
+                <div class="indicator-name">Quick Reversal</div>
+                <div class="indicator-codename red">LIQUIDITY GRAB</div>
+                <div class="indicator-desc">Price breaks out then immediately reverses. This is a stop hunt &mdash; institutions grabbing liquidity before moving the opposite direction.</div>
+                <div class="indicator-bar"><div class="indicator-bar-fill ibf-red" style="width: 95%;"></div></div>
               </div>
             </div>
           </div>
+
+          <div class="stats-row">
+            <div class="stat-pill">
+              <span class="stat-val">70%</span>
+              <span class="stat-label">Fakeout Rate</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">#1</span>
+              <span class="stat-label">Volume Tells</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">Close</span>
+              <span class="stat-label">Matters Most</span>
+            </div>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 4: Side-by-Side ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 4 — Your Confirmation Playbook (Feature Grid 2x3)
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Comparison</span>
+      <span class="slide-label">Slide 4 — Playbook</span>
       <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
         <div class="slide-content">
-          <div class="blog-layout">
-            <div class="blog-tag">COMPARISON</div>
-            <h2 class="blog-title">The Difference</h2>
-            <div class="compare-row">
-              <div class="compare-panel breakout">
-                <div class="compare-badge">BREAKOUT</div>
-                <div class="compare-icon">&#10003;</div>
-                <div class="compare-detail">
-                  <ul>
-                    <li>High volume</li>
-                    <li>Clean close beyond</li>
-                    <li>Momentum follows</li>
-                    <li>Holds above level</li>
-                  </ul>
-                </div>
+          <h3 class="inner-heading">The Confirmation <em>Playbook</em></h3>
+          <p class="section-sub">Six rules to filter breakouts from fakeouts. Apply them every time before entering a trade.</p>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-ic fic-teal">
+                <span class="fic-letter">1</span>
               </div>
-              <div class="compare-panel fakeout">
-                <div class="compare-badge">FAKEOUT</div>
-                <div class="compare-icon">&#10007;</div>
-                <div class="compare-detail">
-                  <ul>
-                    <li>Low volume</li>
-                    <li>Wick only</li>
-                    <li>Reverses quickly</li>
-                    <li>Falls back inside</li>
-                  </ul>
-                </div>
-              </div>
+              <span class="feature-text">Wait for Candle Close</span>
             </div>
-            <p class="blog-desc">Volume and follow-through separate the two. Every time.</p>
+            <div class="feature-card">
+              <div class="feature-ic fic-green">
+                <span class="fic-letter">2</span>
+              </div>
+              <span class="feature-text">Check Volume Spike</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-blue">
+                <span class="fic-letter">3</span>
+              </div>
+              <span class="feature-text">Confirm Follow-Through</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-orange">
+                <span class="fic-letter">4</span>
+              </div>
+              <span class="feature-text">Align with Structure</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-red">
+                <span class="fic-letter">5</span>
+              </div>
+              <span class="feature-text">Avoid Low-Vol Breaks</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-ic fic-purple">
+                <span class="fic-letter">6</span>
+              </div>
+              <span class="feature-text">Use Multi-Timeframe</span>
+            </div>
           </div>
+
+          <div class="stats-row">
+            <div class="stat-pill">
+              <span class="stat-val">6</span>
+              <span class="stat-label">Rules</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">0</span>
+              <span class="stat-label">Guessing</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-val">100%</span>
+              <span class="stat-label">Process</span>
+            </div>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 5: The Fix ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 5 — Truth: Why Most Traders Get Trapped
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — The Fix</span>
+      <span class="slide-label">Slide 5 — Truth</span>
       <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="blog-layout">
-            <div class="blog-tag">THE FIX</div>
-            <div class="fix-card">
-              <h2 class="fix-title">Don't Chase.<br><span class="teal">Confirm.</span></h2>
-              <div class="fix-steps">
-                <div class="fix-step">
-                  <div class="fix-num">1</div>
-                  <span class="fix-text">Wait for a candle to close beyond the level</span>
-                </div>
-                <div class="fix-step">
-                  <div class="fix-num">2</div>
-                  <span class="fix-text">Check volume — it should spike, not fade</span>
-                </div>
-                <div class="fix-step">
-                  <div class="fix-num">3</div>
-                  <span class="fix-text">Look for follow-through on the next candle</span>
-                </div>
-              </div>
-            </div>
-            <p class="fix-quote">Patience over impulse.</p>
+        <div class="slide-content" style="align-items: center; text-align: center;">
+          <div class="truth-orb">
+            <span class="truth-orb-letter">B</span>
           </div>
+
+          <h3 class="inner-heading" style="margin-bottom: 5%;">The <em>Deeper</em> Truth</h3>
+
+          <div class="truth-grid">
+            <div class="truth-card">
+              <div class="truth-dot td-teal"></div>
+              <div class="truth-card-title">Every Fakeout Looks Real First</div>
+              <div class="truth-card-text">That&rsquo;s the whole point. Fakeouts are designed to trigger entries. The only defence is a confirmation process.</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-dot td-green"></div>
+              <div class="truth-card-title">Volume Tells the Truth</div>
+              <div class="truth-card-text">Price can lie. Volume doesn&rsquo;t. A breakout without conviction in volume is a breakout without conviction in reality.</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-dot td-red"></div>
+              <div class="truth-card-title">Patience Beats Impulse</div>
+              <div class="truth-card-text">Missing the first candle costs you 2%. Getting faked out costs you 10%. Wait for the close. Wait for the proof.</div>
+            </div>
+            <div class="truth-card">
+              <div class="truth-dot td-blue"></div>
+              <div class="truth-card-title">Confirmation Over Prediction</div>
+              <div class="truth-card-text">You don&rsquo;t need to predict breakouts. You need to confirm them. React to evidence, not to hope.</div>
+            </div>
+          </div>
+
+          <div class="philosophy-box">
+            <p class="philosophy-text">&ldquo;The best breakout traders aren&rsquo;t fast. They&rsquo;re <em>patient</em>. Confirmation is the edge.&rdquo;</p>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 6: CTA ══════ -->
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 6 — CTA: Stop Getting Trapped
+    ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="6">
       <span class="slide-label">Slide 6 — CTA</span>
       <div class="slide slide-teal">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
-        <div class="slide-content">
-          <div class="cta-container">
-            <h2 class="cta-headline">Stop Getting<br><span class="cta-accent">Trapped.</span></h2>
-            <p class="cta-body">Full article on breakout confirmation techniques and how to avoid costly fakeout traps.</p>
-            <div class="cta-box">
-              <p class="cta-box-text">Read the full article</p>
-              <span class="cta-link">signalpilot.io</span>
+        <div class="slide-content" style="align-items: center; text-align: center; justify-content: center;">
+          <div class="cta-badge">Breakout Confirmation</div>
+          <h2 class="cta-title">Stop Getting <em>Trapped.</em></h2>
+
+          <div class="cta-stat-grid">
+            <div class="cta-stat">
+              <span class="cta-stat-num">4</span>
+              <span class="cta-stat-text">Green Flags</span>
+            </div>
+            <div class="cta-stat">
+              <span class="cta-stat-num">4</span>
+              <span class="cta-stat-text">Red Flags</span>
+            </div>
+            <div class="cta-stat">
+              <span class="cta-stat-num">6</span>
+              <span class="cta-stat-text">Playbook Rules</span>
+            </div>
+            <div class="cta-stat">
+              <span class="cta-stat-num">0</span>
+              <span class="cta-stat-text">Guessing</span>
             </div>
           </div>
+
+          <div class="cta-pills">
+            <span class="cta-pill">Volume Confirmation</span>
+            <span class="cta-pill">Candle Close</span>
+            <span class="cta-pill">Follow-Through</span>
+            <span class="cta-pill">Structure Alignment</span>
+            <span class="cta-pill">Multi-Timeframe</span>
+            <span class="cta-pill">Liquidity Traps</span>
+            <span class="cta-pill">Stop Hunts</span>
+          </div>
+
+          <div class="cta-box">
+            <span class="cta-url">signalpilot.io</span>
+          </div>
+
           <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
@@ -526,20 +984,11 @@
 
   <script>
     (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
       const exportBtn = document.getElementById('export-btn');
-      const videos = document.querySelectorAll('.video-bg');
       const slideWrappers = document.querySelectorAll('.slide-wrapper');
       let exportMode = false;
       let currentSlide = 0;
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
       exportBtn.addEventListener('click', function() {
         exportMode = !exportMode;
         document.body.classList.toggle('export-mode', exportMode);
