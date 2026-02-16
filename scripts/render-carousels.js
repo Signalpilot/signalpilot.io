@@ -844,6 +844,34 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(16px, 4cqw, 24px) !important;
       }
 
+      /* --- Step Flow (post-047 pattern) --- */
+      .step-name {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+      }
+      .step-desc {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+        line-height: 1.5 !important;
+      }
+      .step-ring .s-num {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+      }
+      .step-row {
+        padding: clamp(14px, 2.8cqw, 24px) clamp(12px, 2.5cqw, 20px) !important;
+      }
+
+      /* --- Zone Card (post-047 pattern) --- */
+      .zone-card .zc-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        letter-spacing: 2px !important;
+      }
+      .zone-card .zc-title {
+        font-size: clamp(28px, 7cqw, 42px) !important;
+      }
+      .zone-card .zc-desc {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+      }
+
       /* --- Stop loss elements (post-046 pattern) --- */
       .stop-desc {
         font-size: clamp(20px, 5cqw, 30px) !important;
