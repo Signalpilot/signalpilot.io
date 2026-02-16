@@ -3145,183 +3145,6 @@ Link in bio 🔗
 Signal Pilot. Education first.
 ```
 
----
-
-## 🔵 TEAL | POST 040 | Docs: Plutus Flow Cheatsheet
-
-**Type:** Docs/Cheatsheet | **Pillar:** P2: Indicator Truth | **CTA:** Docs
-
-### INSTAGRAM — Carousel (6 Slides)
-
-**Slide Structure:**
-1. **Title:** "THE PLUTUS FLOW CHEATSHEET"
-2. **Signal 1:** Rising Flow + Rising Price = Healthy trend
-3. **Signal 2:** Rising Flow + Falling Price = Accumulation
-4. **Signal 3:** Falling Flow + Rising Price = Distribution
-5. **Signal 4:** Falling Flow + Falling Price = Confirmed downtrend
-6. **CTA:** Full cheatsheet in docs
-
-**Caption:**
-```
-The Plutus Flow Cheatsheet ⚖️
-
-Four scenarios. Four meanings:
-
-📈 Rising Flow + Rising Price
-= HEALTHY TREND (price confirmed by flow)
-
-📈 Rising Flow + Falling Price
-= ACCUMULATION (smart money buying the dip)
-
-📉 Falling Flow + Rising Price
-= DISTRIBUTION (smart money selling into strength)
-
-📉 Falling Flow + Falling Price
-= CONFIRMED DOWNTREND (both agree on direction)
-
-Save this. Reference it every time you check Plutus Flow. 📌
-
-🔗 Full cheatsheet in bio.
-
-#plutusflow #cheatsheet #volumeanalysis #trading #signalpilot
-```
-
-### TWITTER/X — Single Tweet
-```
-Plutus Flow Cheatsheet:
-
-📈 Rising Flow + Rising Price = Healthy trend
-📈 Rising Flow + Falling Price = Accumulation
-📉 Falling Flow + Rising Price = Distribution
-📉 Falling Flow + Falling Price = Confirmed downtrend
-
-Print it. Pin it. Use it ↓
-https://docs.signalpilot.io/ref-cheatsheets-plutus/
-```
-
----
-
-## 🔵 TEAL | POST 043 | Blog: Volume Profile Guide
-
-**Type:** Blog Article | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
-
-### INSTAGRAM — Carousel (8 Slides)
-
-**Slide Structure:**
-1. **Hook:** "THE MARKET HAS MEMORY"
-2. **Intro:** Volume profile shows where price stayed
-3. **POC:** Point of Control explained
-4. **HVN:** High Volume Nodes explained
-5. **LVN:** Low Volume Nodes explained
-6. **Behavior:** Price consolidates at HVN, moves fast through LVN
-7. **Example:** Annotated chart
-8. **CTA:** Full guide link
-
-**Caption:**
-```
-Volume Profile 101 📊
-
-Price shows WHERE the market went.
-Volume Profile shows WHERE IT STAYED.
-
-Key concepts:
-
-📍 POC (Point of Control)
-→ Price level with most volume traded
-→ Acts as magnet for price
-
-📍 HVN (High Volume Node)
-→ Areas of acceptance
-→ Price tends to consolidate here
-
-📍 LVN (Low Volume Node)
-→ Areas of rejection
-→ Price tends to move quickly through
-
-Full guide in bio 🔗
-
-#volumeprofile #trading #marketstructure #forex #crypto #signalpilot
-```
-
-### TWITTER/X — Thread Format
-
-**Tweet 1 (Hook):**
-```
-Price tells you where the market went.
-
-Volume profile tells you where it STAYED.
-
-High volume nodes = areas of acceptance.
-Low volume nodes = areas of rejection.
-
-The market has memory. Volume profile shows it. 🧵
-```
-
-**Tweet 2:**
-```
-Key concepts:
-
-POC (Point of Control) → Price level with most volume
-HVN (High Volume Node) → Areas of acceptance
-LVN (Low Volume Node) → Areas of rejection
-
-Price tends to consolidate at HVN, move quickly through LVN.
-```
-
-**Tweet 3 (CTA):**
-```
-Full volume profile guide:
-
-https://blog.signalpilot.io/articles/volume-profile-basics/
-
-#volumeprofile #trading #marketstructure
-```
-
----
-
-# ═══════════════════════════════════════════════════════════
-# ROW 15 (Posts 43-45) — PENDING
-# ═══════════════════════════════════════════════════════════
-
----
-
-## 🟠 ORANGE | POST 044 | Quote: "Entries vs Exits"
-
-**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
-
-### INSTAGRAM — Single Image
-
-**Caption:**
-```
-Read this twice. 👇
-
-"Amateur traders focus on entries. Professional traders focus on exits."
-
-Think about it:
-→ Perfect entry, bad exit = small win or loss
-→ Average entry, great exit = solid profit
-
-The entry gets you in.
-The exit gets you paid.
-
-Plan both. Every time.
-
-Save this. 🔖
-
-#tradingquotes #exitstrategy #tradingwisdom #forex #crypto #signalpilot
-```
-
-### TWITTER/X — Single Tweet
-```
-"Amateur traders focus on entries. Professional traders focus on exits."
-
-Your entry doesn't determine your profit.
-Your exit does.
-
-Plan the exit before you enter.
-
-— Signal Pilot
-```
 
 ---
 
@@ -3403,6 +3226,185 @@ https://education.signalpilot.io/curriculum/beginner/10-stop-losses.html
 
 ---
 
+## 🔵 TEAL | POST 040 | Docs: Plutus Flow Cheatsheet
+
+**Type:** Docs/Cheatsheet | **Pillar:** P2: Indicator Truth | **CTA:** Docs
+
+### INSTAGRAM — Carousel (6 Slides)
+
+**Slide Structure:**
+1. **Title:** "THE PLUTUS FLOW CHEATSHEET"
+2. **Signal 1:** Rising Flow + Rising Price = Healthy trend
+3. **Signal 2:** Rising Flow + Falling Price = Accumulation
+4. **Signal 3:** Falling Flow + Rising Price = Distribution
+5. **Signal 4:** Falling Flow + Falling Price = Confirmed downtrend
+6. **CTA:** Full cheatsheet in docs
+
+**Caption:**
+```
+The Plutus Flow Cheatsheet ⚖️
+
+Four scenarios. Four meanings:
+
+📈 Rising Flow + Rising Price
+= HEALTHY TREND (price confirmed by flow)
+
+📈 Rising Flow + Falling Price
+= ACCUMULATION (smart money buying the dip)
+
+📉 Falling Flow + Rising Price
+= DISTRIBUTION (smart money selling into strength)
+
+📉 Falling Flow + Falling Price
+= CONFIRMED DOWNTREND (both agree on direction)
+
+Save this. Reference it every time you check Plutus Flow. 📌
+
+🔗 Full cheatsheet in bio.
+
+#plutusflow #cheatsheet #volumeanalysis #trading #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+Plutus Flow Cheatsheet:
+
+📈 Rising Flow + Rising Price = Healthy trend
+📈 Rising Flow + Falling Price = Accumulation
+📉 Falling Flow + Rising Price = Distribution
+📉 Falling Flow + Falling Price = Confirmed downtrend
+
+Print it. Pin it. Use it ↓
+https://docs.signalpilot.io/ref-cheatsheets-plutus/
+```
+
+---
+
+# ═══════════════════════════════════════════════════════════
+# ROW 15 (Posts 43-45) — PENDING
+# ═══════════════════════════════════════════════════════════
+
+---
+
+## 🟠 ORANGE | POST 044 | Quote: "Entries vs Exits"
+
+**Type:** Quote Card | **Pillar:** P4: Psychology | **CTA:** Follow
+
+### INSTAGRAM — Single Image
+
+**Caption:**
+```
+Read this twice. 👇
+
+"Amateur traders focus on entries. Professional traders focus on exits."
+
+Think about it:
+→ Perfect entry, bad exit = small win or loss
+→ Average entry, great exit = solid profit
+
+The entry gets you in.
+The exit gets you paid.
+
+Plan both. Every time.
+
+Save this. 🔖
+
+#tradingquotes #exitstrategy #tradingwisdom #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Single Tweet
+```
+"Amateur traders focus on entries. Professional traders focus on exits."
+
+Your entry doesn't determine your profit.
+Your exit does.
+
+Plan the exit before you enter.
+
+— Signal Pilot
+```
+
+
+---
+
+## ⚪ NEUTRAL | POST 043 | EDU: Volume Profile Guide
+
+**Type:** Education Hub | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+
+### INSTAGRAM — Carousel (8 Slides)
+
+**Slide Structure:**
+1. **Hook:** "THE MARKET HAS MEMORY"
+2. **Intro:** Volume profile shows where price stayed
+3. **POC:** Point of Control explained
+4. **HVN:** High Volume Nodes explained
+5. **LVN:** Low Volume Nodes explained
+6. **Behavior:** Price consolidates at HVN, moves fast through LVN
+7. **Example:** Annotated chart
+8. **CTA:** Full guide link
+
+**Caption:**
+```
+Volume Profile 101 📊
+
+Price shows WHERE the market went.
+Volume Profile shows WHERE IT STAYED.
+
+Key concepts:
+
+📍 POC (Point of Control)
+→ Price level with most volume traded
+→ Acts as magnet for price
+
+📍 HVN (High Volume Node)
+→ Areas of acceptance
+→ Price tends to consolidate here
+
+📍 LVN (Low Volume Node)
+→ Areas of rejection
+→ Price tends to move quickly through
+
+Full guide in bio 🔗
+
+#volumeprofile #trading #marketstructure #forex #crypto #signalpilot
+```
+
+### TWITTER/X — Thread Format
+
+**Tweet 1 (Hook):**
+```
+Price tells you where the market went.
+
+Volume profile tells you where it STAYED.
+
+High volume nodes = areas of acceptance.
+Low volume nodes = areas of rejection.
+
+The market has memory. Volume profile shows it. 🧵
+```
+
+**Tweet 2:**
+```
+Key concepts:
+
+POC (Point of Control) → Price level with most volume
+HVN (High Volume Node) → Areas of acceptance
+LVN (Low Volume Node) → Areas of rejection
+
+Price tends to consolidate at HVN, move quickly through LVN.
+```
+
+**Tweet 3 (CTA):**
+```
+Full volume profile guide:
+
+https://blog.signalpilot.io/articles/volume-profile-basics/
+
+#volumeprofile #trading #marketstructure
+```
+
+---
+
 ## 🔵 TEAL | POST 047 | Blog: Smart Money Concepts Explained
 
 **Type:** Blog Article | **Pillar:** P1: Liquidity Lie | **CTA:** Lead Magnet
@@ -3480,7 +3482,6 @@ Full breakdown: https://blog.signalpilot.io/articles/how-smart-money-moves/
 ```
 
 ---
-
 # ═══════════════════════════════════════════════════════════
 # ROW 16 (Posts 46-48) — PENDING
 # ═══════════════════════════════════════════════════════════
@@ -18114,9 +18115,9 @@ Free calculator in bio
 | 17 | 49-51 | 051 Marketing | 049 EDU | 050 Docs | 📋 Pending |
 | 18 | 52-54 | 054 Quote | 052 EDU | 053 Blog | 📋 Pending |
 | 19 | 55-57 | 055 Product | 056 EDU | 057 Blog | 📋 Pending |
-| 20 | 58-60 | 058 Chronicle | 059 EDU | 060 Docs | 📋 Pending |
+| 20 | 58-60 | 065 Product | 059 EDU | 060 Docs | 📋 Pending |
 | 21 | 61-63 | 061 Marketing | 062 EDU | 063 Blog | 📋 Pending |
-| 22 | 64-66 | 064 Quote | 066 EDU | 065 Product | 📋 Pending |
+| 22 | 64-66 | 064 Quote | 066 EDU | 058 Chronicle | 📋 Pending |
 | 23 | 67-69 | 067 Blog | 069 EDU | 068 Chronicle | 📋 Pending |
 | 24 | 70-72 | 071 Marketing | 072 EDU | 070 Docs | 📋 Pending |
 | 25 | 73-75 | 074 Quote | 073 Blog | 075 Product | 📋 Pending |
