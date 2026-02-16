@@ -85,15 +85,107 @@
       margin-bottom: 4%;
     }
 
-    .trend-chart {
+    /* ─── Swing Ladder (Uptrend / Downtrend) ─── */
+    .swing-ladder {
       width: 85%;
-      aspect-ratio: 16 / 10;
-      position: relative;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: clamp(6px, 1.2cqw, 12px);
-      margin-bottom: 4%;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.6cqw, 16px);
+      margin-bottom: 5%;
+    }
+
+    .swing-step {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 1.6cqw, 16px);
+      padding: clamp(10px, 2cqw, 20px) clamp(14px, 2.8cqw, 28px);
+      border-radius: clamp(8px, 1.6cqw, 16px);
+    }
+
+    .swing-step.step-bull { border: 1px solid rgba(34,197,94,0.15); background: rgba(34,197,94,0.03); }
+    .swing-step.step-bear { border: 1px solid rgba(239,68,68,0.15); background: rgba(239,68,68,0.03); }
+
+    .swing-hilo {
+      font-family: var(--font-mono);
+      font-size: clamp(12px, 2.4cqw, 24px);
+      font-weight: 700;
+      padding: clamp(4px, 0.8cqw, 8px) clamp(8px, 1.6cqw, 16px);
+      border-radius: clamp(4px, 0.8cqw, 8px);
+      white-space: nowrap;
+    }
+
+    .swing-hh { color: var(--bull); background: rgba(34,197,94,0.12); }
+    .swing-hl { color: rgba(34,197,94,0.7); background: rgba(34,197,94,0.06); }
+    .swing-lh { color: rgba(239,68,68,0.7); background: rgba(239,68,68,0.06); }
+    .swing-ll { color: var(--bear); background: rgba(239,68,68,0.12); }
+
+    .swing-arrow {
+      font-size: clamp(14px, 2.8cqw, 28px);
+      flex-shrink: 0;
+    }
+
+    .swing-arrow.arr-up { color: var(--bull); }
+    .swing-arrow.arr-down { color: var(--bear); }
+
+    .swing-label {
+      font-size: clamp(9px, 1.6cqw, 16px);
+      color: var(--text-secondary);
+      flex: 1;
+    }
+
+    /* ─── Range Zone (Sideways) ─── */
+    .range-zone {
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.2cqw, 12px);
+      margin-bottom: 5%;
+    }
+
+    .zone-level {
+      display: flex;
+      align-items: center;
+      gap: clamp(10px, 2cqw, 20px);
+      padding: clamp(12px, 2.4cqw, 24px) clamp(16px, 3.2cqw, 32px);
+      border-radius: clamp(8px, 1.6cqw, 16px);
+      background: rgba(245,158,11,0.04);
+      border: 1px dashed rgba(245,158,11,0.25);
+    }
+
+    .zone-icon {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.8cqw, 18px);
+      color: var(--accent-orange);
+      opacity: 0.5;
+      letter-spacing: 0.15em;
+    }
+
+    .zone-label-text {
+      font-family: var(--font-mono);
+      font-size: clamp(11px, 2.2cqw, 22px);
+      font-weight: 700;
+      color: var(--accent-orange);
+      letter-spacing: 0.15em;
+    }
+
+    .zone-middle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(4px, 0.8cqw, 8px);
+      padding: clamp(12px, 2.4cqw, 24px);
+    }
+
+    .zone-arrows {
+      font-size: clamp(28px, 5.5cqw, 56px);
+      color: var(--text-muted);
+    }
+
+    .zone-text {
+      font-size: clamp(9px, 1.6cqw, 16px);
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.5;
     }
 
     .trend-desc {
@@ -120,166 +212,10 @@
     .bias-short { color: var(--bear); background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); }
     .bias-neutral { color: var(--accent-orange); background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); }
 
-    /* ─── UPTREND chart: HH / HL pattern ─── */
+    /* ─── Color labels ─── */
     .up-label { color: var(--bull); }
-
-    .up-seg {
-      position: absolute;
-      height: 2.5px;
-      border-radius: 1px;
-      background: var(--bull);
-    }
-    .up-seg:nth-child(1) { top: 72%; left: 5%; width: 14%; transform: rotate(-25deg); }
-    .up-seg:nth-child(2) { top: 55%; left: 17%; width: 10%; transform: rotate(15deg); }
-    .up-seg:nth-child(3) { top: 58%; left: 26%; width: 14%; transform: rotate(-25deg); }
-    .up-seg:nth-child(4) { top: 40%; left: 38%; width: 10%; transform: rotate(15deg); }
-    .up-seg:nth-child(5) { top: 43%; left: 47%; width: 14%; transform: rotate(-25deg); }
-    .up-seg:nth-child(6) { top: 25%; left: 59%; width: 10%; transform: rotate(15deg); }
-    .up-seg:nth-child(7) { top: 28%; left: 68%; width: 14%; transform: rotate(-25deg); }
-    .up-seg:nth-child(8) { top: 12%; left: 80%; width: 15%; transform: rotate(-10deg); }
-
-    .hh-marker, .hl-marker {
-      position: absolute;
-      font-family: var(--font-mono);
-      font-size: clamp(6px, 1.1cqw, 11px);
-      font-weight: 600;
-      padding: clamp(1px, 0.2cqw, 2px) clamp(3px, 0.6cqw, 6px);
-      border-radius: 3px;
-    }
-
-    .hh-marker { color: var(--bull); background: rgba(34,197,94,0.12); }
-    .hl-marker { color: rgba(34,197,94,0.7); background: rgba(34,197,94,0.08); }
-
-    .hh-marker:nth-of-type(1) { top: 48%; left: 14%; }
-    .hl-marker:nth-of-type(1) { top: 60%; left: 24%; }
-    .hh-marker:nth-of-type(2) { top: 33%; left: 42%; }
-    .hl-marker:nth-of-type(2) { top: 46%; left: 54%; }
-    .hh-marker:nth-of-type(3) { top: 18%; left: 68%; }
-    .hl-marker:nth-of-type(3) { top: 30%; left: 76%; }
-
-    .up-trendline {
-      position: absolute;
-      top: 76%;
-      left: 5%;
-      width: 85%;
-      height: 0;
-      border-top: 1.5px dashed rgba(34,197,94,0.25);
-      transform-origin: left;
-      transform: rotate(-22deg);
-    }
-
-    /* ─── DOWNTREND chart: LH / LL pattern ─── */
     .down-label { color: var(--bear); }
-
-    .down-seg {
-      position: absolute;
-      height: 2.5px;
-      border-radius: 1px;
-      background: var(--bear);
-    }
-    .down-seg:nth-child(1) { top: 12%; left: 5%; width: 14%; transform: rotate(25deg); }
-    .down-seg:nth-child(2) { top: 28%; left: 17%; width: 10%; transform: rotate(-15deg); }
-    .down-seg:nth-child(3) { top: 25%; left: 26%; width: 14%; transform: rotate(25deg); }
-    .down-seg:nth-child(4) { top: 42%; left: 38%; width: 10%; transform: rotate(-15deg); }
-    .down-seg:nth-child(5) { top: 40%; left: 47%; width: 14%; transform: rotate(25deg); }
-    .down-seg:nth-child(6) { top: 56%; left: 59%; width: 10%; transform: rotate(-15deg); }
-    .down-seg:nth-child(7) { top: 54%; left: 68%; width: 14%; transform: rotate(25deg); }
-    .down-seg:nth-child(8) { top: 70%; left: 80%; width: 15%; transform: rotate(10deg); }
-
-    .lh-marker, .ll-marker {
-      position: absolute;
-      font-family: var(--font-mono);
-      font-size: clamp(6px, 1.1cqw, 11px);
-      font-weight: 600;
-      padding: clamp(1px, 0.2cqw, 2px) clamp(3px, 0.6cqw, 6px);
-      border-radius: 3px;
-    }
-
-    .lh-marker { color: rgba(239,68,68,0.7); background: rgba(239,68,68,0.08); }
-    .ll-marker { color: var(--bear); background: rgba(239,68,68,0.12); }
-
-    .lh-marker:nth-of-type(1) { top: 8%; left: 8%; }
-    .ll-marker:nth-of-type(1) { top: 30%; left: 18%; }
-    .lh-marker:nth-of-type(2) { top: 22%; left: 36%; }
-    .ll-marker:nth-of-type(2) { top: 46%; left: 48%; }
-    .lh-marker:nth-of-type(3) { top: 38%; left: 62%; }
-    .ll-marker:nth-of-type(3) { top: 60%; left: 74%; }
-
-    .down-trendline {
-      position: absolute;
-      top: 8%;
-      left: 5%;
-      width: 85%;
-      height: 0;
-      border-top: 1.5px dashed rgba(239,68,68,0.25);
-      transform-origin: left;
-      transform: rotate(22deg);
-    }
-
-    /* ─── RANGE chart: sideways ─── */
     .range-label { color: var(--accent-orange); }
-
-    .range-seg {
-      position: absolute;
-      height: 2px;
-      border-radius: 1px;
-      background: rgba(255,255,255,0.3);
-    }
-    .range-seg:nth-child(1) { top: 35%; left: 5%; width: 12%; transform: rotate(15deg); }
-    .range-seg:nth-child(2) { top: 50%; left: 15%; width: 10%; transform: rotate(-18deg); }
-    .range-seg:nth-child(3) { top: 38%; left: 24%; width: 14%; transform: rotate(12deg); }
-    .range-seg:nth-child(4) { top: 55%; left: 36%; width: 10%; transform: rotate(-16deg); }
-    .range-seg:nth-child(5) { top: 40%; left: 45%; width: 12%; transform: rotate(14deg); }
-    .range-seg:nth-child(6) { top: 52%; left: 55%; width: 10%; transform: rotate(-12deg); }
-    .range-seg:nth-child(7) { top: 36%; left: 64%; width: 14%; transform: rotate(10deg); }
-    .range-seg:nth-child(8) { top: 48%; left: 76%; width: 12%; transform: rotate(-8deg); }
-
-    .range-resist {
-      position: absolute;
-      top: 25%;
-      left: 3%;
-      width: 94%;
-      height: 0;
-      border-top: 1.5px dashed rgba(245,158,11,0.3);
-    }
-
-    .range-support {
-      position: absolute;
-      top: 65%;
-      left: 3%;
-      width: 94%;
-      height: 0;
-      border-top: 1.5px dashed rgba(245,158,11,0.3);
-    }
-
-    .range-r-label {
-      position: absolute;
-      top: 20%;
-      right: 3%;
-      font-family: var(--font-mono);
-      font-size: clamp(6px, 1cqw, 10px);
-      color: var(--accent-orange);
-      opacity: 0.6;
-    }
-
-    .range-s-label {
-      position: absolute;
-      top: 67%;
-      right: 3%;
-      font-family: var(--font-mono);
-      font-size: clamp(6px, 1cqw, 10px);
-      color: var(--accent-orange);
-      opacity: 0.6;
-    }
-
-    .range-fill {
-      position: absolute;
-      top: 25%;
-      left: 0;
-      width: 100%;
-      height: 40%;
-      background: rgba(245,158,11,0.03);
-    }
 
     /* ═══════════════════════════════════════════
        SLIDE 5 — Summary grid
@@ -483,22 +419,25 @@
           <div class="trend-stage">
             <div class="trend-label up-label">Pattern 1</div>
             <h2 class="trend-title">Uptrend</h2>
-            <div class="trend-chart">
-              <div class="up-seg"></div>
-              <div class="up-seg"></div>
-              <div class="up-seg"></div>
-              <div class="up-seg"></div>
-              <div class="up-seg"></div>
-              <div class="up-seg"></div>
-              <div class="up-seg"></div>
-              <div class="up-seg"></div>
-              <div class="hh-marker">HH</div>
-              <div class="hl-marker">HL</div>
-              <div class="hh-marker">HH</div>
-              <div class="hl-marker">HL</div>
-              <div class="hh-marker">HH</div>
-              <div class="hl-marker">HL</div>
-              <div class="up-trendline"></div>
+            <div class="swing-ladder">
+              <div class="swing-step step-bull">
+                <span class="swing-hilo swing-hl">HL</span>
+                <span class="swing-arrow arr-up">↗</span>
+                <span class="swing-hilo swing-hh">HH</span>
+                <span class="swing-label">Swing 1 — price makes a new high</span>
+              </div>
+              <div class="swing-step step-bull" style="margin-left: 8%">
+                <span class="swing-hilo swing-hl">HL</span>
+                <span class="swing-arrow arr-up">↗</span>
+                <span class="swing-hilo swing-hh">HH</span>
+                <span class="swing-label">Swing 2 — higher than previous</span>
+              </div>
+              <div class="swing-step step-bull" style="margin-left: 16%">
+                <span class="swing-hilo swing-hl">HL</span>
+                <span class="swing-arrow arr-up">↗</span>
+                <span class="swing-hilo swing-hh">HH</span>
+                <span class="swing-label">Swing 3 — trend confirmed</span>
+              </div>
             </div>
             <div class="trend-desc">
               <p class="trend-tagline">Higher Highs + Higher Lows = Uptrend</p>
@@ -521,22 +460,25 @@
           <div class="trend-stage">
             <div class="trend-label down-label">Pattern 2</div>
             <h2 class="trend-title">Downtrend</h2>
-            <div class="trend-chart">
-              <div class="down-seg"></div>
-              <div class="down-seg"></div>
-              <div class="down-seg"></div>
-              <div class="down-seg"></div>
-              <div class="down-seg"></div>
-              <div class="down-seg"></div>
-              <div class="down-seg"></div>
-              <div class="down-seg"></div>
-              <div class="lh-marker">LH</div>
-              <div class="ll-marker">LL</div>
-              <div class="lh-marker">LH</div>
-              <div class="ll-marker">LL</div>
-              <div class="lh-marker">LH</div>
-              <div class="ll-marker">LL</div>
-              <div class="down-trendline"></div>
+            <div class="swing-ladder">
+              <div class="swing-step step-bear" style="margin-left: 16%">
+                <span class="swing-hilo swing-lh">LH</span>
+                <span class="swing-arrow arr-down">↘</span>
+                <span class="swing-hilo swing-ll">LL</span>
+                <span class="swing-label">Swing 1 — price makes a new low</span>
+              </div>
+              <div class="swing-step step-bear" style="margin-left: 8%">
+                <span class="swing-hilo swing-lh">LH</span>
+                <span class="swing-arrow arr-down">↘</span>
+                <span class="swing-hilo swing-ll">LL</span>
+                <span class="swing-label">Swing 2 — lower than previous</span>
+              </div>
+              <div class="swing-step step-bear">
+                <span class="swing-hilo swing-lh">LH</span>
+                <span class="swing-arrow arr-down">↘</span>
+                <span class="swing-hilo swing-ll">LL</span>
+                <span class="swing-label">Swing 3 — trend confirmed</span>
+              </div>
             </div>
             <div class="trend-desc">
               <p class="trend-tagline">Lower Highs + Lower Lows = Downtrend</p>
@@ -559,20 +501,19 @@
           <div class="trend-stage">
             <div class="trend-label range-label">Pattern 3</div>
             <h2 class="trend-title">Range-Bound</h2>
-            <div class="trend-chart">
-              <div class="range-fill"></div>
-              <div class="range-seg"></div>
-              <div class="range-seg"></div>
-              <div class="range-seg"></div>
-              <div class="range-seg"></div>
-              <div class="range-seg"></div>
-              <div class="range-seg"></div>
-              <div class="range-seg"></div>
-              <div class="range-seg"></div>
-              <div class="range-resist"></div>
-              <div class="range-support"></div>
-              <div class="range-r-label">RESISTANCE</div>
-              <div class="range-s-label">SUPPORT</div>
+            <div class="range-zone">
+              <div class="zone-level">
+                <span class="zone-icon">── ── ──</span>
+                <span class="zone-label-text">RESISTANCE</span>
+              </div>
+              <div class="zone-middle">
+                <span class="zone-arrows">↕</span>
+                <span class="zone-text">Price oscillates between levels<br>No clear HH/HL or LH/LL pattern</span>
+              </div>
+              <div class="zone-level">
+                <span class="zone-icon">── ── ──</span>
+                <span class="zone-label-text">SUPPORT</span>
+              </div>
             </div>
             <div class="trend-desc">
               <p class="trend-tagline">No clear HH/HL or LH/LL — price oscillates</p>
