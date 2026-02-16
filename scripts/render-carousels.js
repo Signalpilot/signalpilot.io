@@ -1016,6 +1016,23 @@ async function renderCarousel(page, postDir, postNumber) {
       .lag-tl-zone-label {
         font-size: clamp(12px, 3cqw, 18px) !important;
       }
+
+      /* --- Doji Anatomy (post-056 pattern) --- */
+      .da-part {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .da-meaning {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+      }
+      .type-badge {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+      }
+      .confirm-step {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .confirm-arrow {
+        font-size: clamp(24px, 6cqw, 36px) !important;
+      }
     </style>
   `;
   html = html.replace('</head>', renderStyles + '</head>');
