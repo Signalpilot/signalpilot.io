@@ -3327,9 +3327,9 @@ Plan the exit before you enter.
 
 ---
 
-## ⚪ NEUTRAL | POST 043 | EDU: Volume Profile Guide
+## 🔵 TEAL | POST 043 | Docs: Volume Profile Guide
 
-**Type:** Education Hub | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
+**Type:** Docs/Cheatsheet | **Pillar:** P3: Market Mechanics | **CTA:** Lead Magnet
 
 ### INSTAGRAM — Carousel (8 Slides)
 
@@ -18109,92 +18109,92 @@ Free calculator in bio
 | 11 | 31-33 | 028 Product | 032 EDU | 037 Blog | ⏳ In Canva |
 | 12 | 34-36 | 034 Quote | 033 EDU | 038 Chronicle | ⏳ In Canva |
 | 13 | 37-39 | 035 Product | 036 EDU | 040 Docs | 📋 Pending |
-| 14 | 40-42 | 041 Marketing | 039 EDU | 043 Blog | 📋 Pending |
-| 15 | 43-45 | 044 Quote | 042 EDU | 047 Blog | 📋 Pending |
-| 16 | 46-48 | 045 Product | 046 EDU | 048 Chronicle | 📋 Pending |
-| 17 | 49-51 | 051 Marketing | 049 EDU | 050 Docs | 📋 Pending |
-| 18 | 52-54 | 054 Quote | 052 EDU | 053 Blog | 📋 Pending |
-| 19 | 55-57 | 055 Product | 056 EDU | 057 Blog | 📋 Pending |
-| 20 | 58-60 | 065 Product | 059 EDU | 060 Docs | 📋 Pending |
-| 21 | 61-63 | 061 Marketing | 062 EDU | 063 Blog | 📋 Pending |
-| 22 | 64-66 | 064 Quote | 066 EDU | 058 Chronicle | 📋 Pending |
-| 23 | 67-69 | 067 Blog | 069 EDU | 068 Chronicle | 📋 Pending |
-| 24 | 70-72 | 071 Marketing | 072 EDU | 070 Docs | 📋 Pending |
+| 14 | 40-42 | 041 Marketing | 039 EDU | 043 Docs | 📋 Pending |
+| 15 | 43-45 | 044 Quote | 049 EDU | 047 Blog | 📋 Pending |
+| 16 | 46-48 | 045 Product | 052 EDU | 048 Chronicle | 📋 Pending |
+| 17 | 49-51 | 051 Marketing | 056 EDU | 050 Docs | 📋 Pending |
+| 18 | 52-54 | 054 Quote | 059 EDU | 053 Blog | 📋 Pending |
+| 19 | 55-57 | 055 Product | 062 EDU | 057 Blog | 📋 Pending |
+| 20 | 58-60 | 065 Product | 066 EDU | 060 Docs | 📋 Pending |
+| 21 | 61-63 | 061 Marketing | 069 EDU | 063 Blog | 📋 Pending |
+| 22 | 64-66 | 064 Quote | 069 EDU | 058 Chronicle | 📋 Pending |
+| 23 | 67-69 | 067 Blog | 072 EDU | 068 Chronicle | 📋 Pending |
+| 24 | 70-72 | 071 Marketing | 076 EDU | 070 Docs | 📋 Pending |
 | 25 | 73-75 | 074 Quote | 073 Blog | 075 Product | 📋 Pending |
-| 26 | 76-78 | 076 EDU | 077 Blog | 078 Chronicle | 📋 Pending |
-| 27 | 79-81 | 081 Marketing | 079 EDU | 080 Docs | 📋 Pending |
-| 28 | 82-84 | 084 Quote | 082 EDU | 083 Blog | 📋 Pending |
-| 29 | 85-87 | 085 Product | 086 EDU | 087 Blog | 📋 Pending |
-| 30 | 88-90 | 088 Chronicle | 089 EDU | 090 Docs | 📋 Pending |
-| 31 | 91-93 | 095 Product | 096 EDU | 087 Blog | 📋 Pending |
-| 32 | 94-96 | 101 Marketing | 099 EDU | 088 Chronicle | 📋 Pending |
-| 33 | 97-99 | 104 Quote | 102 EDU | 090 Docs | 📋 Pending |
-| 34 | 100-102 | 105 Product | 106 EDU | 093 Blog | 📋 Pending |
-| 35 | 103-105 | 111 Marketing | 109 EDU | 097 Blog | 📋 Pending |
-| 36 | 106-108 | 114 Quote | 112 EDU | 098 Chronicle | 📋 Pending |
-| 37 | 109-111 | 115 Product | 116 EDU | 100 Docs | 📋 Pending |
-| 38 | 112-114 | 121 Marketing | 119 EDU | 103 Blog | 📋 Pending |
-| 39 | 115-117 | 124 Quote | 122 EDU | 107 Blog | 📋 Pending |
-| 40 | 118-120 | 125 Product | 126 EDU | 108 Chronicle | 📋 Pending |
-| 41 | 121-123 | 131 Marketing | 129 EDU | 110 Docs | 📋 Pending |
-| 42 | 124-126 | 134 Quote | 132 EDU | 113 Blog | 📋 Pending |
-| 43 | 127-129 | 135 Product | 136 EDU | 117 Blog | 📋 Pending |
-| 44 | 130-132 | 141 Marketing | 139 EDU | 118 Chronicle | 📋 Pending |
-| 45 | 133-135 | 144 Quote | 142 EDU | 120 Docs | 📋 Pending |
-| 46 | 136-138 | 145 Product | 146 EDU | 123 Blog | 📋 Pending |
-| 47 | 139-141 | 151 Marketing | 149 EDU | 127 Blog | 📋 Pending |
-| 48 | 142-144 | 154 Quote | 152 EDU | 128 Chronicle | 📋 Pending |
-| 49 | 145-147 | 155 Product | 156 EDU | 130 Docs | 📋 Pending |
-| 50 | 148-150 | 161 Marketing | 159 EDU | 133 Blog | 📋 Pending |
-| 51 | 151-153 | 164 Quote | 162 EDU | 137 Blog | 📋 Pending |
-| 52 | 154-156 | 165 Product | 166 EDU | 138 Chronicle | 📋 Pending |
-| 53 | 157-159 | 171 Marketing | 169 EDU | 140 Docs | 📋 Pending |
-| 54 | 160-162 | 174 Quote | 172 EDU | 143 Blog | 📋 Pending |
-| 55 | 163-165 | 175 Product | 176 EDU | 147 Blog | 📋 Pending |
-| 56 | 166-168 | 184 Marketing | 179 EDU | 148 Chronicle | 📋 Pending |
-| 57 | 169-171 | 185 Quote | 182 EDU | 150 Docs | 📋 Pending |
-| 58 | 172-174 | 191 Product | 186 EDU | 153 Blog | 📋 Pending |
-| 59 | 175-177 | 194 Marketing | 189 EDU | 157 Blog | 📋 Pending |
-| 60 | 178-180 | 195 Quote | 192 EDU | 158 Chronicle | 📋 Pending |
-| 61 | 181-183 | 201 Marketing | 196 EDU | 160 Docs | 📋 Pending |
-| 62 | 184-186 | 204 Quote | 199 EDU | 163 Blog | 📋 Pending |
-| 63 | 187-189 | 205 Product | 202 EDU | 167 Blog | 📋 Pending |
-| 64 | 190-192 | 211 Marketing | 206 EDU | 168 Chronicle | 📋 Pending |
-| 65 | 193-195 | 214 Quote | 209 EDU | 170 Docs | 📋 Pending |
-| 66 | 196-198 | 215 Product | 212 EDU | 173 Blog | 📋 Pending |
-| 67 | 199-201 | 221 Marketing | 216 EDU | 177 Blog | 📋 Pending |
-| 68 | 202-204 | 224 Quote | 219 EDU | 178 Chronicle | 📋 Pending |
-| 69 | 205-207 | 225 Product | 222 EDU | 180 Docs | 📋 Pending |
-| 70 | 208-210 | 231 Marketing | 226 EDU | 181 Docs | 📋 Pending |
-| 71 | 211-213 | 234 Quote | 229 EDU | 183 Blog | 📋 Pending |
-| 72 | 214-216 | 235 Product | 232 EDU | 187 Blog | 📋 Pending |
-| 73 | 217-219 | 241 Marketing | 236 EDU | 188 Chronicle | 📋 Pending |
-| 74 | 220-222 | 244 Quote | 239 EDU | 190 Docs | 📋 Pending |
-| 75 | 223-225 | 245 Product | 242 EDU | 193 Blog | 📋 Pending |
-| 76 | 226-228 | 251 Marketing | 246 EDU | 197 Blog | 📋 Pending |
-| 77 | 229-231 | 254 Quote | 249 EDU | 198 Chronicle | 📋 Pending |
-| 78 | 232-234 | 255 Product | 252 EDU | 200 Docs | 📋 Pending |
-| 79 | 235-237 | 261 Marketing | 256 EDU | 203 Blog | 📋 Pending |
-| 80 | 238-240 | 264 Quote | 259 EDU | 207 Blog | 📋 Pending |
-| 81 | 241-243 | 265 Product | 262 EDU | 208 Chronicle | 📋 Pending |
-| 82 | 244-246 | 271 Marketing | 266 EDU | 210 Docs | 📋 Pending |
-| 83 | 247-249 | 274 Quote | 269 EDU | 213 Blog | 📋 Pending |
-| 84 | 250-252 | 275 Product | 272 EDU | 217 Blog | 📋 Pending |
-| 85 | 253-255 | 281 Marketing | 276 EDU | 218 Chronicle | 📋 Pending |
-| 86 | 256-258 | 284 Quote | 279 EDU | 220 Docs | 📋 Pending |
-| 87 | 259-261 | 285 Product | 282 EDU | 223 Blog | 📋 Pending |
-| 88 | 262-264 | 291 Marketing | 286 EDU | 227 Blog | 📋 Pending |
-| 89 | 265-267 | 294 Quote | 289 EDU | 228 Chronicle | 📋 Pending |
-| 90 | 268-270 | 295 Product | 292 EDU | 230 Docs | 📋 Pending |
-| 91 | 271-273 | 300 Marketing | 296 EDU | 233 Blog | 📋 Pending |
-| 92 | 274-276 | 304 Quote | 299 EDU | 237 Blog | 📋 Pending |
-| 93 | 277-279 | 305 Product | 302 EDU | 238 Chronicle | 📋 Pending |
-| 94 | 280-282 | 311 Marketing | 306 EDU | 240 Docs | 📋 Pending |
-| 95 | 283-285 | 314 Quote | 309 EDU | 243 Blog | 📋 Pending |
-| 96 | 286-288 | 315 Product | 312 EDU | 247 Blog | 📋 Pending |
-| 97 | 289-291 | 321 Marketing | 316 EDU | 248 Chronicle | 📋 Pending |
-| 98 | 292-294 | 324 Quote | 319 EDU | 250 Docs | 📋 Pending |
-| 99 | 295-297 | 325 Product | 322 EDU | 253 Blog | 📋 Pending |
+| 26 | 76-78 | 079 EDU | 077 Blog | 078 Chronicle | 📋 Pending |
+| 27 | 79-81 | 081 Marketing | 082 EDU | 080 Docs | 📋 Pending |
+| 28 | 82-84 | 084 Quote | 086 EDU | 083 Blog | 📋 Pending |
+| 29 | 85-87 | 085 Product | 089 EDU | 087 Blog | 📋 Pending |
+| 30 | 88-90 | 088 Chronicle | 096 EDU | 090 Docs | 📋 Pending |
+| 31 | 91-93 | 095 Product | 099 EDU | 087 Blog | 📋 Pending |
+| 32 | 94-96 | 101 Marketing | 102 EDU | 088 Chronicle | 📋 Pending |
+| 33 | 97-99 | 104 Quote | 106 EDU | 090 Docs | 📋 Pending |
+| 34 | 100-102 | 105 Product | 109 EDU | 093 Blog | 📋 Pending |
+| 35 | 103-105 | 111 Marketing | 112 EDU | 097 Blog | 📋 Pending |
+| 36 | 106-108 | 114 Quote | 116 EDU | 098 Chronicle | 📋 Pending |
+| 37 | 109-111 | 115 Product | 119 EDU | 100 Docs | 📋 Pending |
+| 38 | 112-114 | 121 Marketing | 122 EDU | 103 Blog | 📋 Pending |
+| 39 | 115-117 | 124 Quote | 126 EDU | 107 Blog | 📋 Pending |
+| 40 | 118-120 | 125 Product | 129 EDU | 108 Chronicle | 📋 Pending |
+| 41 | 121-123 | 131 Marketing | 132 EDU | 110 Docs | 📋 Pending |
+| 42 | 124-126 | 134 Quote | 136 EDU | 113 Blog | 📋 Pending |
+| 43 | 127-129 | 135 Product | 139 EDU | 117 Blog | 📋 Pending |
+| 44 | 130-132 | 141 Marketing | 142 EDU | 118 Chronicle | 📋 Pending |
+| 45 | 133-135 | 144 Quote | 146 EDU | 120 Docs | 📋 Pending |
+| 46 | 136-138 | 145 Product | 149 EDU | 123 Blog | 📋 Pending |
+| 47 | 139-141 | 151 Marketing | 152 EDU | 127 Blog | 📋 Pending |
+| 48 | 142-144 | 154 Quote | 156 EDU | 128 Chronicle | 📋 Pending |
+| 49 | 145-147 | 155 Product | 159 EDU | 130 Docs | 📋 Pending |
+| 50 | 148-150 | 161 Marketing | 162 EDU | 133 Blog | 📋 Pending |
+| 51 | 151-153 | 164 Quote | 166 EDU | 137 Blog | 📋 Pending |
+| 52 | 154-156 | 165 Product | 169 EDU | 138 Chronicle | 📋 Pending |
+| 53 | 157-159 | 171 Marketing | 172 EDU | 140 Docs | 📋 Pending |
+| 54 | 160-162 | 174 Quote | 176 EDU | 143 Blog | 📋 Pending |
+| 55 | 163-165 | 175 Product | 179 EDU | 147 Blog | 📋 Pending |
+| 56 | 166-168 | 184 Marketing | 182 EDU | 148 Chronicle | 📋 Pending |
+| 57 | 169-171 | 185 Quote | 186 EDU | 150 Docs | 📋 Pending |
+| 58 | 172-174 | 191 Product | 189 EDU | 153 Blog | 📋 Pending |
+| 59 | 175-177 | 194 Marketing | 192 EDU | 157 Blog | 📋 Pending |
+| 60 | 178-180 | 195 Quote | 196 EDU | 158 Chronicle | 📋 Pending |
+| 61 | 181-183 | 201 Marketing | 199 EDU | 160 Docs | 📋 Pending |
+| 62 | 184-186 | 204 Quote | 202 EDU | 163 Blog | 📋 Pending |
+| 63 | 187-189 | 205 Product | 206 EDU | 167 Blog | 📋 Pending |
+| 64 | 190-192 | 211 Marketing | 209 EDU | 168 Chronicle | 📋 Pending |
+| 65 | 193-195 | 214 Quote | 212 EDU | 170 Docs | 📋 Pending |
+| 66 | 196-198 | 215 Product | 216 EDU | 173 Blog | 📋 Pending |
+| 67 | 199-201 | 221 Marketing | 219 EDU | 177 Blog | 📋 Pending |
+| 68 | 202-204 | 224 Quote | 222 EDU | 178 Chronicle | 📋 Pending |
+| 69 | 205-207 | 225 Product | 226 EDU | 180 Docs | 📋 Pending |
+| 70 | 208-210 | 231 Marketing | 229 EDU | 181 Docs | 📋 Pending |
+| 71 | 211-213 | 234 Quote | 232 EDU | 183 Blog | 📋 Pending |
+| 72 | 214-216 | 235 Product | 236 EDU | 187 Blog | 📋 Pending |
+| 73 | 217-219 | 241 Marketing | 239 EDU | 188 Chronicle | 📋 Pending |
+| 74 | 220-222 | 244 Quote | 242 EDU | 190 Docs | 📋 Pending |
+| 75 | 223-225 | 245 Product | 246 EDU | 193 Blog | 📋 Pending |
+| 76 | 226-228 | 251 Marketing | 249 EDU | 197 Blog | 📋 Pending |
+| 77 | 229-231 | 254 Quote | 252 EDU | 198 Chronicle | 📋 Pending |
+| 78 | 232-234 | 255 Product | 256 EDU | 200 Docs | 📋 Pending |
+| 79 | 235-237 | 261 Marketing | 259 EDU | 203 Blog | 📋 Pending |
+| 80 | 238-240 | 264 Quote | 262 EDU | 207 Blog | 📋 Pending |
+| 81 | 241-243 | 265 Product | 266 EDU | 208 Chronicle | 📋 Pending |
+| 82 | 244-246 | 271 Marketing | 269 EDU | 210 Docs | 📋 Pending |
+| 83 | 247-249 | 274 Quote | 272 EDU | 213 Blog | 📋 Pending |
+| 84 | 250-252 | 275 Product | 276 EDU | 217 Blog | 📋 Pending |
+| 85 | 253-255 | 281 Marketing | 279 EDU | 218 Chronicle | 📋 Pending |
+| 86 | 256-258 | 284 Quote | 282 EDU | 220 Docs | 📋 Pending |
+| 87 | 259-261 | 285 Product | 286 EDU | 223 Blog | 📋 Pending |
+| 88 | 262-264 | 291 Marketing | 289 EDU | 227 Blog | 📋 Pending |
+| 89 | 265-267 | 294 Quote | 292 EDU | 228 Chronicle | 📋 Pending |
+| 90 | 268-270 | 295 Product | 296 EDU | 230 Docs | 📋 Pending |
+| 91 | 271-273 | 300 Marketing | 299 EDU | 233 Blog | 📋 Pending |
+| 92 | 274-276 | 304 Quote | 302 EDU | 237 Blog | 📋 Pending |
+| 93 | 277-279 | 305 Product | 306 EDU | 238 Chronicle | 📋 Pending |
+| 94 | 280-282 | 311 Marketing | 309 EDU | 240 Docs | 📋 Pending |
+| 95 | 283-285 | 314 Quote | 312 EDU | 243 Blog | 📋 Pending |
+| 96 | 286-288 | 315 Product | 316 EDU | 247 Blog | 📋 Pending |
+| 97 | 289-291 | 321 Marketing | 319 EDU | 248 Chronicle | 📋 Pending |
+| 98 | 292-294 | 324 Quote | 322 EDU | 250 Docs | 📋 Pending |
+| 99 | 295-297 | 325 Product | 322_EDU | 253 Blog | 📋 Pending |
 
 ---
 
