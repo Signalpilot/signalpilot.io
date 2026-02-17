@@ -1,601 +1,917 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Post 044 — Entries vs Exits | Carousel Preview</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Gugi&display=swap" rel="stylesheet">
-<style>
-/* ── Reset & Base ── */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --bg:#0a0a0f;--surface:rgba(255,255,255,0.02);
-  --gold:#c9a962;--gold-l:rgba(201,169,98,0.12);--gold-b:rgba(201,169,98,0.25);
-  --teal:#5eead4;--teal-l:rgba(94,234,212,0.12);--teal-b:rgba(94,234,212,0.25);
-  --green:#4ade80;--green-l:rgba(74,222,128,0.12);--green-b:rgba(74,222,128,0.25);
-  --red:#f87171;--red-l:rgba(248,113,113,0.12);--red-b:rgba(248,113,113,0.25);
-  --blue:#60a5fa;--blue-l:rgba(96,165,250,0.12);--blue-b:rgba(96,165,250,0.25);
-  --purple:#a855f7;--purple-l:rgba(168,85,247,0.12);--purple-b:rgba(168,85,247,0.25);
-  --orange:#f59e0b;--orange-l:rgba(245,158,11,0.12);--orange-b:rgba(245,158,11,0.25);
-  --txt:#e4e4e7;--txt2:#a1a1aa;--txt3:#52525b;
-  --serif:'Cormorant Garamond',serif;--sans:'Inter',sans-serif;
-  --mono:'JetBrains Mono',monospace;--brand:'Gugi',sans-serif;
-  --accent:#f59e0b;--accent-l:rgba(245,158,11,0.12);--accent-b:rgba(245,158,11,0.25);
-  --accent-rgb:245,158,11;
-}
-body{background:var(--bg);color:var(--txt);font-family:var(--sans);min-height:100vh;padding:40px 20px;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post 044 — Entries vs Exits | Carousel Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(255,255,255,0.03);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-muted: rgba(255,255,255,0.4);
+      --border-subtle: rgba(255,255,255,0.1);
+      --accent-orange: #f59e0b;
+      --accent-orange-dim: rgba(245,158,11,0.3);
+      --accent-teal: #5eead4;
+      --accent-red: #f87171;
+      --accent-green: #4ade80;
+      --accent-purple: #a855f7;
+      --accent-blue: #60a5fa;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .carousel-grid { display: block; }
+    body.export-mode .slide-wrapper { display: none; margin: 0; }
+    body.export-mode .slide-wrapper.active { display: block; }
+    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
-/* ── Controls ── */
-.controls{position:fixed;top:20px;right:20px;z-index:100;display:flex;gap:12px;align-items:center;}
-.controls label{color:var(--txt3);font-size:12px;display:flex;align-items:center;gap:6px;}
-.controls button{background:var(--orange);color:var(--bg);border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;}
+    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .page-title { text-align: center; margin-bottom: 2rem; }
+    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
 
-/* ── Page ── */
-.page-title{text-align:center;margin-bottom:40px;}
-.page-title h1{font-family:var(--serif);font-size:28px;font-weight:400;margin-bottom:8px;color:var(--txt);}
-.page-title p{color:var(--txt3);font-size:14px;}
-.carousel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1400px;margin:0 auto;}
+    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
+    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
+    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
+    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
 
-/* ── Slide Wrapper ── */
-.slide-wrapper{aspect-ratio:4/5;position:relative;border-radius:12px;overflow:hidden;background:var(--bg);box-shadow:0 4px 24px rgba(0,0,0,0.4);container-type:inline-size;}
-.slide-content{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;padding:8%;text-align:center;}
-.slide-number{position:absolute;top:4%;left:5%;font-family:var(--mono);font-size:clamp(7px,1.4cqw,10px);color:var(--txt3);letter-spacing:0.12em;}
-.brand-mark{position:absolute;bottom:4%;right:5%;font-family:var(--brand);font-size:clamp(7px,1.4cqw,10px);color:rgba(245,158,11,0.25);letter-spacing:0.15em;}
+    /* ═══════════════════════════════════════════
+       ORANGE / WARM SLIDE BASE
+       ═══════════════════════════════════════════ */
+    .slide-warm { background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important; }
+    .slide-warm::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(245,158,11,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
+    .slide-warm.slide-1::after { content: ''; position: absolute; top: 0; right: 15px; width: 50px; height: 100%; background: #f59e0b; z-index: 5; }
+    .slide-warm .slide-content { z-index: 3; }
 
-/* ── Slide Backgrounds ── */
-.slide-wrapper::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;}
-.s1::before{background:radial-gradient(ellipse at 50% 30%,rgba(245,158,11,0.06) 0%,transparent 70%);}
-.s1::after{content:'';position:absolute;top:0;right:15px;width:50px;height:100%;background:#f59e0b;z-index:5;}
-.s2::before{background:radial-gradient(ellipse at 30% 60%,rgba(245,158,11,0.04) 0%,transparent 65%);}
-.s3::before{background:radial-gradient(ellipse at 70% 40%,rgba(245,158,11,0.04) 0%,transparent 65%);}
-.s4::before{background:radial-gradient(ellipse at 50% 70%,rgba(245,158,11,0.05) 0%,transparent 65%);}
-.s5::before{background:radial-gradient(ellipse at 40% 40%,rgba(245,158,11,0.05) 0%,transparent 65%);}
-.s6::before{background:radial-gradient(ellipse at 50% 50%,rgba(245,158,11,0.04) 0%,transparent 60%);}
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
+    .slide-2 .slide-content { align-items: center; text-align: center; justify-content: center; }
+    .slide-3 .slide-content { align-items: center; text-align: center; }
+    .slide-4 .slide-content { align-items: center; text-align: center; justify-content: center; }
+    .slide-5 .slide-content { align-items: center; text-align: center; }
+    .slide-6 .slide-content { align-items: center; text-align: center; justify-content: center; }
 
-/* ── Orb ── */
-.orb{
-  position:relative;
-  width:clamp(100px,20cqw,200px);height:clamp(100px,20cqw,200px);
-  border-radius:50%;
-  background:radial-gradient(circle at 40% 35%,rgba(245,158,11,0.3) 0%,rgba(245,158,11,0.1) 40%,rgba(255,255,255,0.03) 70%,transparent 100%);
-  border:2px solid rgba(245,158,11,0.25);
-  box-shadow:0 0 50px rgba(245,158,11,0.12),0 0 100px rgba(245,158,11,0.04),inset 0 0 30px rgba(245,158,11,0.06);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:clamp(12px,3cqw,24px);flex-shrink:0;
-}
-.orb::before{content:'';position:absolute;inset:7px;border-radius:50%;border:1.5px solid rgba(245,158,11,0.15);}
-.orb::after{content:'';position:absolute;inset:18px;border-radius:50%;border:1px dashed rgba(245,158,11,0.12);}
+    /* ═══════════════════════════════════════════
+       Shared: Counters, Titles, Logo
+       ═══════════════════════════════════════════ */
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.3cqw, 12px);
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      margin-bottom: 3%;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.8cqw, 40px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 5%;
+    }
+    .section-title em { color: var(--accent-orange); font-style: normal; }
+    .slide-logo {
+      position: absolute;
+      bottom: 4%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Gugi', sans-serif;
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(245,158,11,0.4);
+      z-index: 2;
+      white-space: nowrap;
+    }
 
-/* ── Crosshair Visualization (inside orb) ── */
-.crosshair-wrap{position:relative;width:70%;height:70%;z-index:2;display:flex;align-items:center;justify-content:center;}
-.crosshair-wrap::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:1.5px;background:linear-gradient(to bottom,rgba(245,158,11,0.05),rgba(245,158,11,0.35),rgba(245,158,11,0.05));}
-.crosshair-wrap::after{content:'';position:absolute;left:0;right:0;top:50%;height:1.5px;background:linear-gradient(to right,rgba(245,158,11,0.05),rgba(245,158,11,0.35),rgba(245,158,11,0.05));}
-.ch-half{position:absolute;top:10%;bottom:10%;width:45%;display:flex;align-items:center;justify-content:center;}
-.ch-half-left{left:2%;border-radius:50% 0 0 50%;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.08);border-right:none;}
-.ch-half-right{right:2%;border-radius:0 50% 50% 0;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);border-left:none;box-shadow:0 0 20px rgba(245,158,11,0.08);}
-.ch-label{font-family:var(--mono);font-size:clamp(6px,1.2cqw,10px);letter-spacing:0.15em;position:relative;z-index:3;}
-.ch-label-in{color:rgba(245,158,11,0.35);}
-.ch-label-out{color:var(--orange);text-shadow:0 0 8px rgba(245,158,11,0.3);}
-.ch-center-dot{position:absolute;width:clamp(6px,1.2cqw,10px);height:clamp(6px,1.2cqw,10px);border-radius:50%;background:var(--orange);box-shadow:0 0 10px rgba(245,158,11,0.5),0 0 20px rgba(245,158,11,0.2);z-index:4;top:50%;left:50%;transform:translate(-50%,-50%);}
-.ch-ring-outer{position:absolute;width:clamp(16px,3.2cqw,28px);height:clamp(16px,3.2cqw,28px);border-radius:50%;border:1px solid rgba(245,158,11,0.2);top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;}
+    /* ═══════════════════════════════════════════
+       SLIDE 1 — Two Doors Orb (dim IN / glowing OUT)
+       ═══════════════════════════════════════════ */
+    .doors-orb {
+      width: clamp(120px, 22cqw, 220px);
+      height: clamp(120px, 22cqw, 220px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.1) 40%, rgba(255,255,255,0.02) 70%, transparent 100%);
+      border: 2px solid rgba(245,158,11,0.25);
+      box-shadow: 0 0 60px rgba(245,158,11,0.12), 0 0 120px rgba(245,158,11,0.04), inset 0 0 40px rgba(245,158,11,0.06);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: 5%;
+    }
+    .doors-orb::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(245,158,11,0.15);
+    }
+    .doors-orb::after {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      border: 1px dashed rgba(245,158,11,0.12);
+    }
+    .doors-inner {
+      position: relative;
+      width: 72%; height: 55%;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8%;
+    }
+    .door-shape {
+      width: 38%;
+      height: 85%;
+      border-radius: clamp(4px, 0.8cqw, 8px) clamp(4px, 0.8cqw, 8px) 0 0;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .door-in {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .door-out {
+      background: rgba(245,158,11,0.12);
+      border: 1.5px solid rgba(245,158,11,0.35);
+      box-shadow: 0 0 20px rgba(245,158,11,0.1);
+    }
+    .door-lbl {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.2cqw, 11px);
+      letter-spacing: 0.15em;
+      font-weight: 600;
+    }
+    .door-lbl-in { color: rgba(255,255,255,0.25); }
+    .door-lbl-out { color: var(--accent-orange); text-shadow: 0 0 8px rgba(245,158,11,0.4); }
+    .door-knob {
+      position: absolute;
+      width: clamp(4px, 0.7cqw, 6px);
+      height: clamp(4px, 0.7cqw, 6px);
+      border-radius: 50%;
+      top: 55%;
+    }
+    .door-in .door-knob {
+      right: 18%;
+      background: rgba(255,255,255,0.12);
+    }
+    .door-out .door-knob {
+      left: 18%;
+      background: var(--accent-orange);
+      box-shadow: 0 0 8px rgba(245,158,11,0.6);
+    }
+    .doors-divider {
+      position: absolute;
+      width: 1px;
+      height: 70%;
+      background: linear-gradient(to bottom, transparent, rgba(245,158,11,0.2), transparent);
+      top: 15%;
+      left: 50%;
+    }
 
-/* ── Typography ── */
-.hook-tag{font-family:var(--mono);font-size:clamp(7px,1.3cqw,10px);letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);margin-bottom:clamp(6px,1.5cqw,12px);}
-.hook-title{font-family:var(--serif);font-size:clamp(22px,5.5cqw,42px);font-weight:600;line-height:1.15;color:var(--txt);margin-bottom:clamp(6px,1.5cqw,12px);}
-.hook-title em{font-style:normal;color:var(--orange);}
-.hook-sub{font-size:clamp(9px,1.8cqw,13px);color:var(--txt2);line-height:1.5;max-width:85%;}
-.lesson-tag{display:inline-block;padding:clamp(3px,0.6cqw,5px) clamp(8px,1.6cqw,14px);border:1px solid rgba(245,158,11,0.25);border-radius:20px;font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);color:var(--orange);letter-spacing:0.15em;margin-bottom:clamp(8px,2cqw,16px);}
+    .s1-prod-label {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.2cqw, 12px);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(245,158,11,0.7);
+      padding: clamp(3px, 0.6cqw, 7px) clamp(10px, 2cqw, 20px);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: clamp(3px, 0.6cqw, 6px);
+      background: rgba(245,158,11,0.04);
+      margin-bottom: 4%;
+    }
+    .s1-hook {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.8cqw, 50px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 3%;
+      max-width: 92%;
+    }
+    .s1-hook em { color: var(--accent-orange); font-style: normal; }
+    .s1-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.6), transparent);
+      margin-bottom: 4%;
+    }
+    .s1-sub {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.4cqw, 14px);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
 
-/* ── Section Headers ── */
-.sec-tag{font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);margin-bottom:clamp(4px,1cqw,8px);}
-.sec-title{font-family:var(--serif);font-size:clamp(16px,3.8cqw,28px);font-weight:600;line-height:1.2;color:var(--txt);margin-bottom:clamp(10px,2.5cqw,20px);}
-.sec-title em{font-style:normal;color:var(--orange);}
+    /* ═══════════════════════════════════════════
+       SLIDE 2 — The Obsession (Noise vs Signal)
+       ═══════════════════════════════════════════ */
+    .obsess-block {
+      width: 88%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(16px, 3cqw, 30px);
+      margin-bottom: 5%;
+    }
+    .obsess-line {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 0.8cqw, 8px);
+    }
+    .obsess-label {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.3cqw, 12px);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+    .obsess-label-dim { color: var(--text-muted); }
+    .obsess-label-bright { color: var(--accent-orange); }
+    .obsess-text {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 3.5cqw, 34px);
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .obsess-text-dim {
+      color: rgba(255,255,255,0.25);
+      text-decoration: line-through;
+      text-decoration-color: rgba(255,255,255,0.15);
+    }
+    .obsess-text-bright {
+      color: var(--text-primary);
+    }
+    .obsess-text-bright em { color: var(--accent-orange); font-style: normal; font-weight: 700; }
+    .obsess-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.2), transparent);
+    }
+    .obsess-verdict {
+      width: 88%;
+      padding: 3.5% 5%;
+      background: rgba(245,158,11,0.05);
+      border: 1px solid rgba(245,158,11,0.15);
+      border-radius: clamp(8px, 1.3cqw, 12px);
+      text-align: center;
+    }
+    .obsess-verdict-text {
+      font-family: var(--font-serif);
+      font-size: clamp(12px, 2.2cqw, 22px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .obsess-verdict-text em { color: var(--accent-orange); font-style: normal; }
 
-/* ── Icon Circles ── */
-.icon-circle{
-  width:clamp(34px,6.5cqw,56px);height:clamp(34px,6.5cqw,56px);
-  border-radius:50%;display:flex;align-items:center;justify-content:center;
-  position:relative;flex-shrink:0;
-}
-.icon-circle::before{content:'';position:absolute;inset:4px;border-radius:50%;}
-.icon-circle .ic-letter{font-family:var(--serif);font-size:clamp(13px,2.8cqw,22px);font-weight:600;position:relative;z-index:2;}
+    /* ═══════════════════════════════════════════
+       SLIDE 3 — The Graveyard (tombstone cards)
+       ═══════════════════════════════════════════ */
+    .grave-stack {
+      width: 92%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.5cqw, 16px);
+      margin-bottom: 4%;
+    }
+    .grave-card {
+      padding: 4% 5%;
+      border-radius: clamp(8px, 1.5cqw, 14px);
+      background: rgba(248,113,113,0.03);
+      border: 1px solid rgba(248,113,113,0.12);
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+    }
+    .grave-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--accent-red);
+      border-radius: 4px 0 0 4px;
+    }
+    .grave-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2%;
+    }
+    .grave-pair {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.5cqw, 15px);
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+    }
+    .grave-result {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.3cqw, 13px);
+      font-weight: 700;
+      padding: clamp(2px, 0.4cqw, 4px) clamp(6px, 1cqw, 10px);
+      border-radius: clamp(3px, 0.5cqw, 6px);
+      background: rgba(248,113,113,0.12);
+      color: var(--accent-red);
+      border: 1px solid rgba(248,113,113,0.25);
+    }
+    .grave-story {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.6cqw, 16px);
+      color: var(--text-secondary);
+      line-height: 1.45;
+      margin-bottom: 2%;
+    }
+    .grave-story strong { color: var(--text-primary); font-weight: 600; }
+    .grave-cause {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 11px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(248,113,113,0.6);
+    }
+    .grave-truth {
+      width: 92%;
+      padding: 3% 5%;
+      background: rgba(245,158,11,0.05);
+      border: 1px solid rgba(245,158,11,0.15);
+      border-radius: clamp(8px, 1.3cqw, 12px);
+      text-align: center;
+    }
+    .grave-truth-text {
+      font-family: var(--font-serif);
+      font-size: clamp(12px, 2cqw, 20px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .grave-truth-text em { color: var(--accent-orange); font-style: normal; }
 
-.ic-gold{background:radial-gradient(circle at 40% 35%,rgba(201,169,98,0.3) 0%,rgba(201,169,98,0.08) 60%,transparent 100%);border:1.5px solid rgba(201,169,98,0.3);box-shadow:0 0 18px rgba(201,169,98,0.1);}
-.ic-gold::before{border:1px solid rgba(201,169,98,0.12);}
-.ic-gold .ic-letter{color:var(--gold);}
+    /* ═══════════════════════════════════════════
+       SLIDE 4 — The Scale (balance tipping to EXIT)
+       ═══════════════════════════════════════════ */
+    .scale-visual {
+      width: 80%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 5%;
+    }
+    .scale-beam {
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(245,158,11,0.4));
+      border-radius: 2px;
+      position: relative;
+      transform: rotate(-4deg);
+      margin-bottom: clamp(12px, 2.5cqw, 24px);
+    }
+    .scale-fulcrum {
+      width: clamp(16px, 3cqw, 28px);
+      height: clamp(16px, 3cqw, 28px);
+      background: rgba(245,158,11,0.15);
+      border: 1.5px solid rgba(245,158,11,0.35);
+      border-radius: 50%;
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .scale-fulcrum-dot {
+      width: clamp(4px, 0.7cqw, 6px);
+      height: clamp(4px, 0.7cqw, 6px);
+      border-radius: 50%;
+      background: var(--accent-orange);
+      box-shadow: 0 0 8px rgba(245,158,11,0.5);
+    }
+    .scale-pans {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 8%;
+    }
+    .scale-pan {
+      flex: 1;
+      padding: 5% 4%;
+      border-radius: clamp(10px, 2cqw, 18px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(6px, 1.2cqw, 12px);
+      text-align: center;
+    }
+    .scale-pan-light {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .scale-pan-heavy {
+      background: rgba(245,158,11,0.06);
+      border: 1px solid rgba(245,158,11,0.2);
+      box-shadow: 0 0 30px rgba(245,158,11,0.04);
+    }
+    .scale-pan-label {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.3cqw, 12px);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+    .scale-pan-light .scale-pan-label { color: var(--text-muted); }
+    .scale-pan-heavy .scale-pan-label { color: var(--accent-orange); }
+    .scale-pan-icon {
+      width: clamp(36px, 7cqw, 60px);
+      height: clamp(36px, 7cqw, 60px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .scale-pan-light .scale-pan-icon {
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+      border: 1.5px solid rgba(255,255,255,0.08);
+    }
+    .scale-pan-heavy .scale-pan-icon {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.3);
+      box-shadow: 0 0 18px rgba(245,158,11,0.12);
+    }
+    .scale-pan-symbol {
+      font-size: clamp(14px, 2.8cqw, 26px);
+    }
+    .scale-pan-light .scale-pan-symbol { filter: grayscale(1) opacity(0.3); }
+    .scale-pan-heavy .scale-pan-symbol { filter: drop-shadow(0 0 4px rgba(245,158,11,0.4)); }
+    .scale-pan-items {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(3px, 0.5cqw, 6px);
+      width: 100%;
+    }
+    .scale-item {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 13px);
+      line-height: 1.35;
+    }
+    .scale-pan-light .scale-item { color: var(--text-muted); }
+    .scale-pan-heavy .scale-item { color: var(--text-secondary); }
+    .scale-insight {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.8cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 90%;
+    }
+    .scale-insight em { color: var(--accent-orange); font-style: normal; font-weight: 600; }
 
-.ic-teal{background:radial-gradient(circle at 40% 35%,rgba(94,234,212,0.3) 0%,rgba(94,234,212,0.08) 60%,transparent 100%);border:1.5px solid rgba(94,234,212,0.3);box-shadow:0 0 18px rgba(94,234,212,0.1);}
-.ic-teal::before{border:1px solid rgba(94,234,212,0.12);}
-.ic-teal .ic-letter{color:var(--teal);}
+    /* ═══════════════════════════════════════════
+       SLIDE 5 — The Shift (Before / After columns)
+       ═══════════════════════════════════════════ */
+    .shift-cols {
+      width: 92%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1.5cqw, 16px);
+      margin-bottom: 4%;
+    }
+    .shift-col {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.2cqw, 14px);
+    }
+    .shift-col-header {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.3cqw, 12px);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding-bottom: clamp(4px, 0.8cqw, 8px);
+      margin-bottom: clamp(2px, 0.4cqw, 4px);
+    }
+    .shift-col-before .shift-col-header {
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .shift-col-after .shift-col-header {
+      color: var(--accent-orange);
+      border-bottom: 1px solid rgba(245,158,11,0.2);
+    }
+    .shift-item {
+      padding: clamp(8px, 1.5cqw, 14px) clamp(8px, 1.5cqw, 14px);
+      border-radius: clamp(6px, 1cqw, 10px);
+      text-align: left;
+    }
+    .shift-col-before .shift-item {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .shift-col-after .shift-item {
+      background: rgba(245,158,11,0.04);
+      border: 1px solid rgba(245,158,11,0.12);
+    }
+    .shift-item-text {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.5cqw, 15px);
+      line-height: 1.4;
+    }
+    .shift-col-before .shift-item-text {
+      color: var(--text-muted);
+      text-decoration: line-through;
+      text-decoration-color: rgba(255,255,255,0.15);
+    }
+    .shift-col-after .shift-item-text {
+      color: var(--text-secondary);
+    }
+    .shift-col-after .shift-item-text strong {
+      color: var(--accent-orange);
+      font-weight: 600;
+    }
+    .shift-truth {
+      width: 92%;
+      padding: 3% 5%;
+      background: rgba(245,158,11,0.05);
+      border: 1px solid rgba(245,158,11,0.15);
+      border-radius: clamp(8px, 1.3cqw, 12px);
+      text-align: center;
+    }
+    .shift-truth-text {
+      font-family: var(--font-serif);
+      font-size: clamp(12px, 2.2cqw, 22px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .shift-truth-text em { color: var(--accent-orange); font-style: normal; }
 
-.ic-blue{background:radial-gradient(circle at 40% 35%,rgba(96,165,250,0.3) 0%,rgba(96,165,250,0.08) 60%,transparent 100%);border:1.5px solid rgba(96,165,250,0.3);box-shadow:0 0 18px rgba(96,165,250,0.1);}
-.ic-blue::before{border:1px solid rgba(96,165,250,0.12);}
-.ic-blue .ic-letter{color:var(--blue);}
-
-.ic-purple{background:radial-gradient(circle at 40% 35%,rgba(168,85,247,0.3) 0%,rgba(168,85,247,0.08) 60%,transparent 100%);border:1.5px solid rgba(168,85,247,0.3);box-shadow:0 0 18px rgba(168,85,247,0.1);}
-.ic-purple::before{border:1px solid rgba(168,85,247,0.12);}
-.ic-purple .ic-letter{color:var(--purple);}
-
-.ic-green{background:radial-gradient(circle at 40% 35%,rgba(74,222,128,0.3) 0%,rgba(74,222,128,0.08) 60%,transparent 100%);border:1.5px solid rgba(74,222,128,0.3);box-shadow:0 0 18px rgba(74,222,128,0.1);}
-.ic-green::before{border:1px solid rgba(74,222,128,0.12);}
-.ic-green .ic-letter{color:var(--green);}
-
-.ic-red{background:radial-gradient(circle at 40% 35%,rgba(248,113,113,0.3) 0%,rgba(248,113,113,0.08) 60%,transparent 100%);border:1.5px solid rgba(248,113,113,0.3);box-shadow:0 0 18px rgba(248,113,113,0.1);}
-.ic-red::before{border:1px solid rgba(248,113,113,0.12);}
-.ic-red .ic-letter{color:var(--red);}
-
-.ic-orange{background:radial-gradient(circle at 40% 35%,rgba(245,158,11,0.3) 0%,rgba(245,158,11,0.08) 60%,transparent 100%);border:1.5px solid rgba(245,158,11,0.3);box-shadow:0 0 18px rgba(245,158,11,0.1);}
-.ic-orange::before{border:1px solid rgba(245,158,11,0.12);}
-.ic-orange .ic-letter{color:var(--orange);}
-
-/* ── Concept Definition Cards ── */
-.def-row{width:92%;display:flex;flex-direction:column;gap:clamp(6px,1.4cqw,12px);margin-bottom:clamp(10px,2.5cqw,20px);}
-.def-card{display:flex;align-items:flex-start;gap:clamp(8px,1.6cqw,14px);padding:clamp(8px,1.8cqw,16px);border-radius:clamp(8px,1.5cqw,14px);background:var(--surface);border:1px solid rgba(255,255,255,0.04);text-align:left;}
-.def-body{flex:1;min-width:0;}
-.def-label{font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:clamp(2px,0.5cqw,4px);}
-.def-label.c-gold{color:var(--gold);}
-.def-label.c-blue{color:var(--blue);}
-.def-label.c-green{color:var(--green);}
-.def-label.c-orange{color:var(--orange);}
-.def-label.c-red{color:var(--red);}
-.def-label.c-teal{color:var(--teal);}
-.def-text{font-size:clamp(9px,1.7cqw,13px);color:var(--txt2);line-height:1.5;}
-.def-text em{font-style:normal;color:var(--txt);}
-
-/* ── Scenario Cards (Slide 3) ── */
-.scenario-card{display:flex;align-items:flex-start;gap:clamp(8px,1.6cqw,14px);padding:clamp(8px,1.8cqw,16px);border-radius:clamp(8px,1.5cqw,14px);background:var(--surface);border:1px solid rgba(255,255,255,0.04);text-align:left;}
-.scenario-icon-flow{display:flex;flex-direction:column;align-items:center;gap:clamp(3px,0.6cqw,5px);flex-shrink:0;}
-.scenario-badge{font-family:var(--mono);font-size:clamp(5px,1cqw,8px);letter-spacing:0.1em;padding:clamp(2px,0.4cqw,3px) clamp(4px,0.8cqw,7px);border-radius:clamp(3px,0.5cqw,5px);font-weight:500;}
-.sb-green{background:rgba(74,222,128,0.12);color:var(--green);border:1px solid rgba(74,222,128,0.25);}
-.sb-orange{background:rgba(245,158,11,0.12);color:var(--orange);border:1px solid rgba(245,158,11,0.25);}
-.scenario-arrow{font-size:clamp(7px,1.3cqw,11px);color:var(--txt3);line-height:1;}
-.sb-red{background:rgba(248,113,113,0.12);color:var(--red);border:1px solid rgba(248,113,113,0.25);}
-.sb-yellow{background:rgba(250,204,21,0.12);color:#facc15;border:1px solid rgba(250,204,21,0.25);}
-.sb-bright-green{background:rgba(74,222,128,0.12);color:var(--green);border:1px solid rgba(74,222,128,0.25);}
-.scenario-body{flex:1;min-width:0;}
-.scenario-label{font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);letter-spacing:0.15em;text-transform:uppercase;color:var(--txt2);margin-bottom:clamp(2px,0.5cqw,4px);}
-.scenario-desc{font-size:clamp(8px,1.5cqw,12px);color:var(--txt2);line-height:1.5;}
-.scenario-desc em{font-style:normal;color:var(--txt);}
-.scenario-insight{width:92%;padding:clamp(8px,1.6cqw,14px);border-radius:clamp(8px,1.5cqw,14px);background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-left:3px solid var(--orange);text-align:left;margin-top:clamp(4px,1cqw,8px);}
-.scenario-insight-text{font-size:clamp(8px,1.5cqw,12px);color:var(--txt2);line-height:1.5;}
-.scenario-insight-text em{font-style:normal;color:var(--orange);}
-
-/* ── Split Typography (Slide 2) ── */
-.quote-split{width:92%;display:flex;flex-direction:column;gap:clamp(16px,3.5cqw,30px);position:relative;margin-bottom:clamp(10px,2.5cqw,20px);}
-.quote-split::before{content:'\201C';position:absolute;top:clamp(-12px,-2.5cqw,-20px);left:clamp(-4px,-0.8cqw,-8px);font-family:var(--serif);font-size:clamp(60px,14cqw,120px);color:rgba(245,158,11,0.04);line-height:1;z-index:0;pointer-events:none;}
-.quote-split::after{content:'\201D';position:absolute;bottom:clamp(-20px,-4cqw,-36px);right:clamp(-4px,-0.8cqw,-8px);font-family:var(--serif);font-size:clamp(60px,14cqw,120px);color:rgba(245,158,11,0.04);line-height:1;z-index:0;pointer-events:none;}
-.qs-block{position:relative;z-index:1;text-align:left;padding:clamp(12px,2.5cqw,22px);border-radius:clamp(8px,1.5cqw,14px);}
-.qs-dim{background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.03);}
-.qs-bright{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);}
-.qs-text{font-family:var(--serif);font-size:clamp(14px,3.2cqw,24px);font-weight:500;line-height:1.4;color:var(--txt2);}
-.qs-dim .qs-text{color:var(--txt3);}
-.qs-bright .qs-text{color:var(--txt);}
-.qs-word-strike{text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.15);color:var(--txt3);}
-.qs-word-bright{color:var(--orange);font-weight:600;text-shadow:0 0 20px rgba(245,158,11,0.15);}
-.qs-attribution{font-family:var(--mono);font-size:clamp(7px,1.3cqw,10px);color:var(--txt3);letter-spacing:0.08em;text-align:center;margin-top:clamp(6px,1.2cqw,10px);position:relative;z-index:1;}
-
-/* ── Edge Panels (Slide 4) ── */
-.edge-panels{width:92%;display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,1.2cqw,10px);position:relative;margin-bottom:clamp(10px,2.5cqw,20px);}
-.edge-panel{padding:clamp(12px,2.5cqw,22px) clamp(8px,1.6cqw,14px);border-radius:clamp(8px,1.5cqw,14px);display:flex;flex-direction:column;align-items:center;gap:clamp(6px,1.2cqw,10px);text-align:center;position:relative;}
-.ep-dim{background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.04);}
-.ep-bright{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);box-shadow:0 0 30px rgba(245,158,11,0.04);}
-.ep-label{font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);letter-spacing:0.2em;text-transform:uppercase;}
-.ep-dim .ep-label{color:var(--txt3);}
-.ep-bright .ep-label{color:var(--orange);}
-.ep-arrows{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(2px,0.4cqw,4px);min-height:clamp(24px,5cqw,44px);align-items:center;}
-.ep-arrow-dim{font-size:clamp(8px,1.6cqw,14px);color:rgba(255,255,255,0.06);transform:rotate(var(--r,0deg));}
-.ep-arrow-bright{font-size:clamp(14px,3cqw,26px);color:var(--orange);text-shadow:0 0 12px rgba(245,158,11,0.4);}
-.ep-pct{font-family:var(--serif);font-size:clamp(22px,5cqw,40px);font-weight:600;line-height:1;}
-.ep-dim .ep-pct{color:var(--txt3);}
-.ep-bright .ep-pct{color:var(--orange);text-shadow:0 0 20px rgba(245,158,11,0.2);}
-.ep-desc{font-size:clamp(7px,1.3cqw,10px);color:var(--txt2);line-height:1.4;}
-.ep-dim .ep-desc{color:var(--txt3);}
-.vs-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;width:clamp(24px,4.8cqw,40px);height:clamp(24px,4.8cqw,40px);border-radius:50%;background:var(--bg);border:1.5px solid rgba(245,158,11,0.35);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:clamp(6px,1.2cqw,10px);color:var(--orange);letter-spacing:0.05em;box-shadow:0 0 15px rgba(245,158,11,0.1);}
-.edge-insight{font-size:clamp(8px,1.6cqw,12px);color:var(--txt2);line-height:1.5;max-width:90%;}
-.edge-insight em{font-style:normal;color:var(--orange);}
-
-/* ── Factor Grid ── */
-.factor-grid{width:92%;display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,1.2cqw,10px);}
-.factor-card{padding:clamp(8px,1.6cqw,14px);border-radius:clamp(8px,1.5cqw,14px);background:var(--surface);border:1px solid rgba(255,255,255,0.04);text-align:left;display:flex;flex-direction:column;gap:clamp(4px,0.8cqw,7px);}
-.factor-card .fc-top{display:flex;align-items:center;gap:clamp(5px,1cqw,9px);}
-.factor-card .fc-icon{width:clamp(22px,4.2cqw,36px);height:clamp(22px,4.2cqw,36px);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;}
-.factor-card .fc-icon::before{content:'';position:absolute;inset:3px;border-radius:50%;}
-.factor-card .fc-icon .fc-let{font-family:var(--serif);font-size:clamp(10px,2cqw,16px);font-weight:600;position:relative;z-index:2;}
-.fc-gold .fc-icon{background:radial-gradient(circle at 40% 35%,rgba(201,169,98,0.3) 0%,rgba(201,169,98,0.08) 60%,transparent 100%);border:1px solid rgba(201,169,98,0.25);}
-.fc-gold .fc-icon::before{border:1px solid rgba(201,169,98,0.1);}
-.fc-gold .fc-let{color:var(--gold);}
-.fc-orange .fc-icon{background:radial-gradient(circle at 40% 35%,rgba(245,158,11,0.3) 0%,rgba(245,158,11,0.08) 60%,transparent 100%);border:1px solid rgba(245,158,11,0.25);}
-.fc-orange .fc-icon::before{border:1px solid rgba(245,158,11,0.1);}
-.fc-orange .fc-let{color:var(--orange);}
-.fc-blue .fc-icon{background:radial-gradient(circle at 40% 35%,rgba(96,165,250,0.3) 0%,rgba(96,165,250,0.08) 60%,transparent 100%);border:1px solid rgba(96,165,250,0.25);}
-.fc-blue .fc-icon::before{border:1px solid rgba(96,165,250,0.1);}
-.fc-blue .fc-let{color:var(--blue);}
-.fc-teal .fc-icon{background:radial-gradient(circle at 40% 35%,rgba(94,234,212,0.3) 0%,rgba(94,234,212,0.08) 60%,transparent 100%);border:1px solid rgba(94,234,212,0.25);}
-.fc-teal .fc-icon::before{border:1px solid rgba(94,234,212,0.1);}
-.fc-teal .fc-let{color:var(--teal);}
-.fc-green .fc-icon{background:radial-gradient(circle at 40% 35%,rgba(74,222,128,0.3) 0%,rgba(74,222,128,0.08) 60%,transparent 100%);border:1px solid rgba(74,222,128,0.25);}
-.fc-green .fc-icon::before{border:1px solid rgba(74,222,128,0.1);}
-.fc-green .fc-let{color:var(--green);}
-.fc-red .fc-icon{background:radial-gradient(circle at 40% 35%,rgba(248,113,113,0.3) 0%,rgba(248,113,113,0.08) 60%,transparent 100%);border:1px solid rgba(248,113,113,0.25);}
-.fc-red .fc-icon::before{border:1px solid rgba(248,113,113,0.1);}
-.fc-red .fc-let{color:var(--red);}
-.fc-purple .fc-icon{background:radial-gradient(circle at 40% 35%,rgba(168,85,247,0.3) 0%,rgba(168,85,247,0.08) 60%,transparent 100%);border:1px solid rgba(168,85,247,0.25);}
-.fc-purple .fc-icon::before{border:1px solid rgba(168,85,247,0.1);}
-.fc-purple .fc-let{color:var(--purple);}
-.factor-card .fc-name{font-family:var(--serif);font-size:clamp(9px,1.8cqw,14px);font-weight:600;color:var(--txt);}
-.factor-card .fc-desc{font-size:clamp(7px,1.3cqw,10px);color:var(--txt2);line-height:1.45;}
-.factor-card .fc-tag{display:inline-block;padding:clamp(2px,0.3cqw,3px) clamp(5px,1cqw,9px);border-radius:10px;font-family:var(--mono);font-size:clamp(5px,0.9cqw,7px);letter-spacing:0.1em;margin-top:auto;}
-.fc-gold .fc-tag{background:var(--gold-l);color:var(--gold);border:1px solid var(--gold-b);}
-.fc-orange .fc-tag{background:var(--orange-l);color:var(--orange);border:1px solid var(--orange-b);}
-.fc-blue .fc-tag{background:var(--blue-l);color:var(--blue);border:1px solid var(--blue-b);}
-.fc-teal .fc-tag{background:var(--teal-l);color:var(--teal);border:1px solid var(--teal-b);}
-.fc-purple .fc-tag{background:var(--purple-l);color:var(--purple);border:1px solid var(--purple-b);}
-.fc-green .fc-tag{background:var(--green-l);color:var(--green);border:1px solid var(--green-b);}
-.fc-red .fc-tag{background:var(--red-l);color:var(--red);border:1px solid var(--red-b);}
-
-/* ── Progress Bars ── */
-.prog-bar{width:100%;height:clamp(3px,0.5cqw,4px);border-radius:4px;background:rgba(255,255,255,0.04);margin-top:clamp(4px,0.8cqw,7px);overflow:hidden;}
-.prog-fill{height:100%;border-radius:4px;}
-.pf-gold{background:linear-gradient(90deg,var(--gold),rgba(201,169,98,0.4));}
-.pf-orange{background:linear-gradient(90deg,var(--orange),rgba(245,158,11,0.4));}
-.pf-blue{background:linear-gradient(90deg,var(--blue),rgba(96,165,250,0.4));}
-.pf-teal{background:linear-gradient(90deg,var(--teal),rgba(94,234,212,0.4));}
-.pf-purple{background:linear-gradient(90deg,var(--purple),rgba(168,85,247,0.4));}
-.pf-green{background:linear-gradient(90deg,var(--green),rgba(74,222,128,0.4));}
-.pf-red{background:linear-gradient(90deg,var(--red),rgba(248,113,113,0.4));}
-
-/* ── Step Flow ── */
-.step-flow{width:92%;display:flex;flex-direction:column;gap:clamp(5px,1.1cqw,10px);}
-.step-row{display:flex;align-items:flex-start;gap:clamp(8px,1.5cqw,14px);}
-.step-ring{width:clamp(26px,5cqw,42px);height:clamp(26px,5cqw,42px);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;}
-.step-ring::before{content:'';position:absolute;inset:3px;border-radius:50%;}
-.step-ring .s-num{font-family:var(--serif);font-size:clamp(11px,2.2cqw,18px);font-weight:600;position:relative;z-index:2;}
-.sr-gold{background:radial-gradient(circle at 40% 35%,rgba(201,169,98,0.3) 0%,rgba(201,169,98,0.08) 60%,transparent 100%);border:1.5px solid rgba(201,169,98,0.25);}
-.sr-gold::before{border:1px solid rgba(201,169,98,0.1);}
-.sr-gold .s-num{color:var(--gold);}
-.sr-orange{background:radial-gradient(circle at 40% 35%,rgba(245,158,11,0.3) 0%,rgba(245,158,11,0.08) 60%,transparent 100%);border:1.5px solid rgba(245,158,11,0.25);}
-.sr-orange::before{border:1px solid rgba(245,158,11,0.1);}
-.sr-orange .s-num{color:var(--orange);}
-.sr-blue{background:radial-gradient(circle at 40% 35%,rgba(96,165,250,0.3) 0%,rgba(96,165,250,0.08) 60%,transparent 100%);border:1.5px solid rgba(96,165,250,0.25);}
-.sr-blue::before{border:1px solid rgba(96,165,250,0.1);}
-.sr-blue .s-num{color:var(--blue);}
-.sr-teal{background:radial-gradient(circle at 40% 35%,rgba(94,234,212,0.3) 0%,rgba(94,234,212,0.08) 60%,transparent 100%);border:1.5px solid rgba(94,234,212,0.25);}
-.sr-teal::before{border:1px solid rgba(94,234,212,0.1);}
-.sr-teal .s-num{color:var(--teal);}
-.sr-green{background:radial-gradient(circle at 40% 35%,rgba(74,222,128,0.3) 0%,rgba(74,222,128,0.08) 60%,transparent 100%);border:1.5px solid rgba(74,222,128,0.25);}
-.sr-green::before{border:1px solid rgba(74,222,128,0.1);}
-.sr-green .s-num{color:var(--green);}
-.sr-purple{background:radial-gradient(circle at 40% 35%,rgba(168,85,247,0.3) 0%,rgba(168,85,247,0.08) 60%,transparent 100%);border:1.5px solid rgba(168,85,247,0.25);}
-.sr-purple::before{border:1px solid rgba(168,85,247,0.1);}
-.sr-purple .s-num{color:var(--purple);}
-.step-body{flex:1;text-align:left;padding-top:clamp(2px,0.4cqw,4px);}
-.step-name{font-family:var(--serif);font-size:clamp(10px,2cqw,15px);font-weight:600;color:var(--txt);margin-bottom:clamp(1px,0.3cqw,3px);}
-.step-desc{font-size:clamp(7px,1.3cqw,10px);color:var(--txt2);line-height:1.45;}
-
-/* ── Confluence Stack Visual ── */
-.stack-vis{width:80%;margin:clamp(8px,2cqw,16px) auto;display:flex;flex-direction:column;align-items:center;gap:clamp(3px,0.6cqw,5px);}
-.stack-bar{width:100%;height:clamp(18px,3.5cqw,30px);border-radius:clamp(6px,1cqw,10px);display:flex;align-items:center;padding:0 clamp(8px,1.5cqw,14px);font-family:var(--mono);font-size:clamp(6px,1.2cqw,9px);letter-spacing:0.08em;position:relative;overflow:hidden;}
-.stack-bar::after{content:'';position:absolute;right:clamp(6px,1.2cqw,10px);top:50%;transform:translateY(-50%);width:clamp(4px,0.8cqw,7px);height:clamp(4px,0.8cqw,7px);border-radius:50%;}
-.sb-1{background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);color:var(--orange);}
-.sb-1::after{background:var(--orange);box-shadow:0 0 6px var(--orange);}
-.sb-2{background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.25);color:var(--blue);}
-.sb-2::after{background:var(--blue);box-shadow:0 0 6px var(--blue);}
-.sb-3{background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.25);color:var(--green);}
-.sb-3::after{background:var(--green);box-shadow:0 0 6px var(--green);}
-.stack-result{width:100%;height:clamp(22px,4.2cqw,36px);border-radius:clamp(6px,1cqw,10px);display:flex;align-items:center;justify-content:center;background:rgba(245,158,11,0.15);border:1.5px solid rgba(245,158,11,0.35);font-family:var(--mono);font-size:clamp(7px,1.3cqw,10px);color:var(--orange);letter-spacing:0.12em;box-shadow:0 0 20px rgba(245,158,11,0.08);}
-.stack-arrow{font-size:clamp(8px,1.6cqw,14px);color:var(--txt3);}
-
-/* ── Warning Box ── */
-.warn-box{width:92%;padding:clamp(10px,2cqw,18px);border-radius:clamp(8px,1.5cqw,14px);background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-left:3px solid var(--red);text-align:left;margin-top:clamp(6px,1.5cqw,12px);}
-.warn-label{font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:clamp(3px,0.6cqw,5px);}
-.warn-text{font-size:clamp(8px,1.5cqw,12px);color:var(--txt2);line-height:1.5;}
-.warn-text em{font-style:normal;color:var(--red);}
-
-/* ── Truth Slide ── */
-.orb-sm{position:relative;width:clamp(56px,11cqw,100px);height:clamp(56px,11cqw,100px);border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(245,158,11,0.3) 0%,rgba(245,158,11,0.1) 40%,rgba(255,255,255,0.03) 70%,transparent 100%);border:2px solid rgba(245,158,11,0.25);box-shadow:0 0 40px rgba(245,158,11,0.1),inset 0 0 20px rgba(245,158,11,0.06);display:flex;align-items:center;justify-content:center;margin-bottom:clamp(8px,2cqw,16px);}
-.orb-sm::before{content:'';position:absolute;inset:5px;border-radius:50%;border:1.5px solid rgba(245,158,11,0.15);}
-.orb-sm::after{content:'';position:absolute;inset:12px;border-radius:50%;border:1px dashed rgba(245,158,11,0.1);}
-.orb-sm .orb-letter{font-family:var(--serif);font-size:clamp(18px,4cqw,34px);font-weight:600;color:var(--orange);position:relative;z-index:2;}
-.truth-grid{width:92%;display:grid;grid-template-columns:1fr 1fr;gap:clamp(5px,1cqw,9px);margin-bottom:clamp(8px,2cqw,16px);}
-.truth-card{padding:clamp(8px,1.6cqw,14px);border-radius:clamp(8px,1.5cqw,14px);background:var(--surface);border:1px solid rgba(255,255,255,0.04);text-align:left;}
-.truth-card .tc-title{font-family:var(--serif);font-size:clamp(9px,1.8cqw,14px);font-weight:600;color:var(--txt);margin-bottom:clamp(2px,0.4cqw,4px);}
-.truth-card .tc-desc{font-size:clamp(7px,1.2cqw,10px);color:var(--txt2);line-height:1.4;}
-.truth-quote{font-family:var(--serif);font-size:clamp(11px,2.2cqw,17px);font-style:italic;color:var(--txt2);line-height:1.5;max-width:85%;}
-.truth-quote em{font-style:normal;color:var(--orange);}
-
-/* ── Truth Card Checkmark ── */
-.tc-check{display:flex;align-items:center;gap:clamp(4px,0.8cqw,7px);margin-bottom:clamp(3px,0.6cqw,5px);}
-.tc-check-icon{width:clamp(14px,2.8cqw,22px);height:clamp(14px,2.8cqw,22px);border-radius:50%;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.tc-check-icon::after{content:'';width:clamp(3px,0.6cqw,5px);height:clamp(6px,1.2cqw,10px);border-right:1.5px solid var(--orange);border-bottom:1.5px solid var(--orange);transform:rotate(45deg) translate(-1px,-1px);}
-
-/* ── CTA Slide ── */
-.cta-badge{display:inline-block;padding:clamp(3px,0.6cqw,5px) clamp(10px,2cqw,18px);border:1px solid rgba(245,158,11,0.3);border-radius:20px;font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);color:var(--orange);letter-spacing:0.2em;margin-bottom:clamp(8px,2cqw,16px);}
-.cta-title{font-family:var(--serif);font-size:clamp(18px,4.5cqw,34px);font-weight:600;color:var(--txt);line-height:1.2;margin-bottom:clamp(4px,1cqw,8px);}
-.cta-title em{font-style:normal;color:var(--orange);}
-.cta-sub{font-size:clamp(8px,1.6cqw,12px);color:var(--txt2);line-height:1.5;max-width:85%;margin-bottom:clamp(10px,2.5cqw,20px);}
-.stat-grid{width:88%;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(4px,0.8cqw,7px);margin-bottom:clamp(10px,2.5cqw,20px);}
-.stat-cell{padding:clamp(6px,1.2cqw,10px);border-radius:clamp(6px,1cqw,10px);background:var(--surface);border:1px solid rgba(255,255,255,0.04);text-align:center;}
-.stat-cell .sv{font-family:var(--serif);font-size:clamp(12px,2.8cqw,22px);font-weight:600;color:var(--orange);}
-.stat-cell .sl{font-size:clamp(6px,1cqw,8px);color:var(--txt3);letter-spacing:0.08em;margin-top:clamp(1px,0.2cqw,2px);}
-.pill-row{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(3px,0.6cqw,6px);width:88%;margin-bottom:clamp(10px,2.5cqw,20px);}
-.pill{padding:clamp(2px,0.4cqw,4px) clamp(6px,1.2cqw,10px);border-radius:12px;font-family:var(--mono);font-size:clamp(5px,1cqw,8px);letter-spacing:0.08em;border:1px solid rgba(245,158,11,0.2);color:var(--orange);background:rgba(245,158,11,0.06);}
-.cta-box{width:80%;padding:clamp(10px,2cqw,18px);border-radius:clamp(8px,1.5cqw,14px);background:rgba(245,158,11,0.08);border:1.5px solid rgba(245,158,11,0.25);text-align:center;}
-.cta-url{font-family:var(--mono);font-size:clamp(9px,1.8cqw,14px);color:var(--orange);letter-spacing:0.05em;}
-.cta-hint{font-size:clamp(6px,1.1cqw,9px);color:var(--txt3);margin-top:clamp(3px,0.5cqw,5px);}
-
-/* ── Export Mode ── */
-body.export-mode{padding:0;background:#000;}
-body.export-mode .controls,body.export-mode .page-title{display:none;}
-body.export-mode .carousel-grid{display:block;}
-body.export-mode .slide-wrapper{display:none;width:1080px;height:1350px;border-radius:0;margin:0;}
-body.export-mode .slide-wrapper.active{display:block;}
-.export-nav{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);gap:12px;z-index:1000;}
-body.export-mode .export-nav{display:flex;}
-.export-nav button{background:var(--orange);color:var(--bg);border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;}
-.export-nav .slide-indicator{background:rgba(255,255,255,0.08);color:var(--txt);padding:12px 24px;border-radius:8px;font-size:14px;}
-@media(max-width:768px){.carousel-grid{grid-template-columns:1fr;max-width:400px;}}
-</style>
+    /* ═══════════════════════════════════════════
+       SLIDE 6 — CTA
+       ═══════════════════════════════════════════ */
+    .cta-glow {
+      width: clamp(60px, 12cqw, 120px);
+      height: clamp(60px, 12cqw, 120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.25) 0%, rgba(245,158,11,0.06) 50%, transparent 100%);
+      border: 2px solid rgba(245,158,11,0.2);
+      box-shadow: 0 0 40px rgba(245,158,11,0.1), 0 0 80px rgba(245,158,11,0.04);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: 5%;
+    }
+    .cta-glow::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(245,158,11,0.12);
+    }
+    .cta-glow-icon {
+      font-size: clamp(18px, 3.5cqw, 36px);
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 6px rgba(245,158,11,0.4));
+    }
+    .cta-tagline {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.8cqw, 40px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 3%;
+    }
+    .cta-tagline em { color: var(--accent-orange); font-style: normal; }
+    .cta-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.5cqw, 16px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 82%;
+      margin-bottom: 5%;
+    }
+    .cta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(4px, 0.8cqw, 8px);
+      justify-content: center;
+      margin-bottom: 5%;
+    }
+    .cta-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 11px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: clamp(4px, 0.7cqw, 8px) clamp(8px, 1.5cqw, 16px);
+      border-radius: 20px;
+      border: 1px solid rgba(245,158,11,0.2);
+      background: rgba(245,158,11,0.05);
+      color: rgba(245,158,11,0.7);
+    }
+    .cta-box {
+      background: rgba(245,158,11,0.08);
+      border: 2px solid var(--accent-orange);
+      border-radius: 14px;
+      padding: 3% 6%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(245,158,11,0.08);
+    }
+    .cta-box-text {
+      font-size: clamp(11px, 2cqw, 22px);
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 1%;
+    }
+    .cta-link {
+      font-size: clamp(10px, 1.7cqw, 18px);
+      font-weight: 600;
+      color: var(--accent-orange);
+    }
+  </style>
 </head>
 <body>
-<div class="controls">
-  <button onclick="toggleExportMode()">Export Mode</button>
-</div>
-
-<div class="page-title">
-  <h1>Post 044 — Entries vs Exits</h1>
-  <p>Quote Carousel — Orange Theme — 6 Slides</p>
-</div>
-
-<div class="carousel-grid">
-
-  <!-- ══════════════════════════════════════════════════════════════
-       SLIDE 1 — Hook: Entries vs Exits — Crosshair Orb
-       ══════════════════════════════════════════════════════════════ -->
-  <div class="slide-wrapper s1" data-slide="1">
-    <div class="slide-content" style="justify-content:center;">
-      <span class="slide-number">01 / 06</span>
-      <div class="lesson-tag">QUOTE</div>
-      <div class="orb">
-        <div class="crosshair-wrap">
-          <div class="ch-half ch-half-left">
-            <span class="ch-label ch-label-in">IN</span>
-          </div>
-          <div class="ch-half ch-half-right">
-            <span class="ch-label ch-label-out">OUT</span>
-          </div>
-          <div class="ch-ring-outer"></div>
-          <div class="ch-center-dot"></div>
-        </div>
-      </div>
-      <div class="hook-tag">QUOTE</div>
-      <div class="hook-title"><em>Entries</em> vs <em>Exits</em></div>
-      <p class="hook-sub">Where the real money is made.</p>
-      <span class="brand-mark">SIGNALPILOT</span>
-    </div>
+  <div class="controls">
+    <button id="export-btn">Export Mode</button>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════════
-       SLIDE 2 — The Quote: Split Typography
-       ══════════════════════════════════════════════════════════════ -->
-  <div class="slide-wrapper s2" data-slide="2">
-    <div class="slide-content" style="justify-content:center;">
-      <span class="slide-number">02 / 06</span>
-      <div class="sec-tag">THE QUOTE</div>
-      <div class="sec-title">The Line Between <em>Amateur</em><br>and <em>Professional</em></div>
-
-      <div class="quote-split">
-        <div class="qs-block qs-dim">
-          <div class="qs-text">"Amateur traders focus on <span class="qs-word-strike">entries</span>."</div>
-        </div>
-        <div class="qs-block qs-bright">
-          <div class="qs-text">"Professional traders focus on <span class="qs-word-bright">exits</span>."</div>
-        </div>
-      </div>
-
-      <div class="qs-attribution">-- Every profitable trader, eventually</div>
-      <span class="brand-mark">SIGNALPILOT</span>
-    </div>
+  <div class="page-title">
+    <h1>Post 044 — The Door You Ignore</h1>
+    <p>6 slides · Quote · Orange Theme</p>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════════
-       SLIDE 3 — Same Entry, Different Exits (Scenario Cards)
-       ══════════════════════════════════════════════════════════════ -->
-  <div class="slide-wrapper s3" data-slide="3">
-    <div class="slide-content" style="justify-content:center;">
-      <span class="slide-number">03 / 06</span>
-      <div class="sec-tag">THE PROOF</div>
-      <div class="sec-title">Same Entry. <em>Different Exits.</em></div>
+  <div class="carousel-grid">
 
-      <div class="def-row">
-        <div class="scenario-card">
-          <div class="scenario-icon-flow">
-            <span class="scenario-badge sb-green">BUY</span>
-            <span class="scenario-arrow">|</span>
-            <span class="scenario-badge sb-red">-3R</span>
+    <!-- ══════ SLIDE 1: Hook — Two Doors Orb ══════ -->
+    <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide slide-warm slide-1">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="doors-orb">
+            <div class="doors-inner">
+              <div class="door-shape door-in">
+                <span class="door-lbl door-lbl-in">IN</span>
+                <div class="door-knob"></div>
+              </div>
+              <div class="doors-divider"></div>
+              <div class="door-shape door-out">
+                <span class="door-lbl door-lbl-out">OUT</span>
+                <div class="door-knob"></div>
+              </div>
+            </div>
           </div>
-          <div class="scenario-body">
-            <div class="scenario-label">SCENARIO A</div>
-            <div class="scenario-desc"><em>Perfect entry</em>, no exit plan. Watched profit evaporate. Turned a winner into a loser.</div>
-          </div>
-        </div>
-
-        <div class="scenario-card">
-          <div class="scenario-icon-flow">
-            <span class="scenario-badge sb-green">BUY</span>
-            <span class="scenario-arrow">|</span>
-            <span class="scenario-badge sb-yellow">+0.5R</span>
-          </div>
-          <div class="scenario-body">
-            <div class="scenario-label">SCENARIO B</div>
-            <div class="scenario-desc"><em>Perfect entry</em>, panic sold early. Left money on the table. Fear dictated the exit.</div>
-          </div>
-        </div>
-
-        <div class="scenario-card">
-          <div class="scenario-icon-flow">
-            <span class="scenario-badge sb-orange">EXIT</span>
-            <span class="scenario-arrow">|</span>
-            <span class="scenario-badge sb-bright-green">+2.5R</span>
-          </div>
-          <div class="scenario-body">
-            <div class="scenario-label">SCENARIO C</div>
-            <div class="scenario-desc"><em>Average entry</em>, disciplined exit plan. Managed risk, locked profit. The system worked.</div>
-          </div>
+          <div class="s1-prod-label">Quote</div>
+          <h1 class="s1-hook">The <em>Door</em><br>You Ignore</h1>
+          <div class="s1-divider"></div>
+          <span class="s1-sub">Why exits matter more than entries</span>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
-
-      <div class="scenario-insight">
-        <div class="scenario-insight-text">The entry was identical. The <em>exit</em> made the difference.</div>
-      </div>
-
-      <span class="brand-mark">SIGNALPILOT</span>
     </div>
+
+    <!-- ══════ SLIDE 2: The Obsession — Noise vs Signal ══════ -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — The Obsession</span>
+      <div class="slide slide-warm slide-2">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <h2 class="section-title">The <em>Obsession</em></h2>
+
+          <div class="obsess-block">
+            <div class="obsess-line">
+              <span class="obsess-label obsess-label-dim">What traders chase</span>
+              <p class="obsess-text obsess-text-dim">"The perfect entry signal"</p>
+            </div>
+            <div class="obsess-divider"></div>
+            <div class="obsess-line">
+              <span class="obsess-label obsess-label-dim">What they also chase</span>
+              <p class="obsess-text obsess-text-dim">"The indicator that never fails"</p>
+            </div>
+            <div class="obsess-divider"></div>
+            <div class="obsess-line">
+              <span class="obsess-label obsess-label-bright">What actually matters</span>
+              <p class="obsess-text obsess-text-bright">"Knowing <em>when to get out</em>"</p>
+            </div>
+          </div>
+
+          <div class="obsess-verdict">
+            <p class="obsess-verdict-text">Entries are noise. <em>Exits are the signal.</em></p>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 3: The Graveyard — Trades That Died ══════ -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — The Graveyard</span>
+      <div class="slide slide-warm slide-3">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <h2 class="section-title">The <em>Graveyard</em></h2>
+
+          <div class="grave-stack">
+            <div class="grave-card">
+              <div class="grave-header">
+                <span class="grave-pair">BTC/USD Long</span>
+                <span class="grave-result">-4.2R</span>
+              </div>
+              <p class="grave-story"><strong>Perfect entry</strong> at support. No exit plan. Watched it reverse through stop. Held hoping for recovery.</p>
+              <span class="grave-cause">Cause of death: no exit plan</span>
+            </div>
+
+            <div class="grave-card">
+              <div class="grave-header">
+                <span class="grave-pair">ETH/USD Long</span>
+                <span class="grave-result">-2.8R</span>
+              </div>
+              <p class="grave-story"><strong>Great breakout entry.</strong> Was up +3R. Refused to take profit. Gave it all back and more.</p>
+              <span class="grave-cause">Cause of death: greed, no targets</span>
+            </div>
+
+            <div class="grave-card">
+              <div class="grave-header">
+                <span class="grave-pair">SOL/USD Short</span>
+                <span class="grave-result">-1.6R</span>
+              </div>
+              <p class="grave-story"><strong>Textbook setup.</strong> Moved stop to breakeven too early. Got stopped out, then it tanked 12%.</p>
+              <span class="grave-cause">Cause of death: premature exit</span>
+            </div>
+          </div>
+
+          <div class="grave-truth">
+            <p class="grave-truth-text">Three perfect entries. Three <em>dead trades</em>. The exit killed every one.</p>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 4: The Scale — Balance Tips to EXIT ══════ -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — The Scale</span>
+      <div class="slide slide-warm slide-4">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <h2 class="section-title">Where the <em>Weight</em> Is</h2>
+
+          <div class="scale-visual">
+            <div class="scale-beam">
+              <div class="scale-fulcrum">
+                <div class="scale-fulcrum-dot"></div>
+              </div>
+            </div>
+            <div class="scale-pans">
+              <div class="scale-pan scale-pan-light">
+                <div class="scale-pan-icon">
+                  <span class="scale-pan-symbol">&#9673;</span>
+                </div>
+                <span class="scale-pan-label">Entry</span>
+                <div class="scale-pan-items">
+                  <span class="scale-item">Timing</span>
+                  <span class="scale-item">Pattern recognition</span>
+                  <span class="scale-item">Signal confirmation</span>
+                </div>
+              </div>
+              <div class="scale-pan scale-pan-heavy">
+                <div class="scale-pan-icon">
+                  <span class="scale-pan-symbol">&#9733;</span>
+                </div>
+                <span class="scale-pan-label">Exit</span>
+                <div class="scale-pan-items">
+                  <span class="scale-item">Stop loss placement</span>
+                  <span class="scale-item">Profit targets</span>
+                  <span class="scale-item">Trail strategy</span>
+                  <span class="scale-item">Position sizing</span>
+                  <span class="scale-item">Risk management</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="scale-insight">The entry gets you in the game.<br>The <em>exit determines the score</em>.</p>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 5: The Shift — Before / After ══════ -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — The Shift</span>
+      <div class="slide slide-warm slide-5">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <h2 class="section-title">The <em>Shift</em></h2>
+
+          <div class="shift-cols">
+            <div class="shift-col shift-col-before">
+              <div class="shift-col-header">Before</div>
+              <div class="shift-item">
+                <p class="shift-item-text">"Where do I enter?"</p>
+              </div>
+              <div class="shift-item">
+                <p class="shift-item-text">"Is this the perfect setup?"</p>
+              </div>
+              <div class="shift-item">
+                <p class="shift-item-text">"I need more confirmations"</p>
+              </div>
+              <div class="shift-item">
+                <p class="shift-item-text">"I'll figure out the exit later"</p>
+              </div>
+            </div>
+            <div class="shift-col shift-col-after">
+              <div class="shift-col-header">After</div>
+              <div class="shift-item">
+                <p class="shift-item-text">"<strong>Where do I exit?</strong>"</p>
+              </div>
+              <div class="shift-item">
+                <p class="shift-item-text">"<strong>What's my worst case?</strong>"</p>
+              </div>
+              <div class="shift-item">
+                <p class="shift-item-text">"<strong>Where do I take profit?</strong>"</p>
+              </div>
+              <div class="shift-item">
+                <p class="shift-item-text">"<strong>The exit IS the trade</strong>"</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="shift-truth">
+            <p class="shift-truth-text">The moment you flip this switch, <em>everything changes</em>.</p>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 6: CTA ══════ -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — CTA</span>
+      <div class="slide slide-warm slide-6">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <div class="cta-glow">
+            <span class="cta-glow-icon">&#9741;</span>
+          </div>
+          <h2 class="cta-tagline">Stop Perfecting Entries.<br><em>Start Mastering Exits.</em></h2>
+          <p class="cta-desc">Signal Pilot manages the full trade lifecycle — entries, exits, stop loss, take profit, and trailing stops.</p>
+          <div class="cta-pills">
+            <span class="cta-pill">Exit Strategy</span>
+            <span class="cta-pill">Stop Loss</span>
+            <span class="cta-pill">Take Profit</span>
+            <span class="cta-pill">Trail Stop</span>
+          </div>
+          <div class="cta-box">
+            <p class="cta-box-text">Master Your Exits</p>
+            <span class="cta-link">signalpilot.io</span>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════════
-       SLIDE 4 — Where Your Edge Lives (Entry vs Exit P&L)
-       ══════════════════════════════════════════════════════════════ -->
-  <div class="slide-wrapper s4" data-slide="4">
-    <div class="slide-content" style="justify-content:center;">
-      <span class="slide-number">04 / 06</span>
-      <div class="sec-tag">THE MATH</div>
-      <div class="sec-title">Where Your <em>Edge</em> Lives</div>
+  <script>
+    (function() {
+      const exportBtn = document.getElementById('export-btn');
+      const slideWrappers = document.querySelectorAll('.slide-wrapper');
+      let exportMode = false;
+      let currentSlide = 0;
 
-      <div class="edge-panels">
-        <div class="edge-panel ep-dim">
-          <div class="ep-label">ENTRY</div>
-          <div class="ep-arrows">
-            <span class="ep-arrow-dim" style="--r:-30deg;">&#x2191;</span>
-            <span class="ep-arrow-dim" style="--r:15deg;">&#x2191;</span>
-            <span class="ep-arrow-dim" style="--r:-60deg;">&#x2191;</span>
-            <span class="ep-arrow-dim" style="--r:45deg;">&#x2191;</span>
-            <span class="ep-arrow-dim" style="--r:-10deg;">&#x2191;</span>
-            <span class="ep-arrow-dim" style="--r:70deg;">&#x2191;</span>
-            <span class="ep-arrow-dim" style="--r:-45deg;">&#x2191;</span>
-            <span class="ep-arrow-dim" style="--r:25deg;">&#x2191;</span>
-          </div>
-          <div class="ep-pct">10%</div>
-          <div class="ep-desc">of your P&L comes from timing the entry</div>
-        </div>
-        <div class="edge-panel ep-bright">
-          <div class="ep-label">EXIT</div>
-          <div class="ep-arrows">
-            <span class="ep-arrow-bright">&#x2191;</span>
-          </div>
-          <div class="ep-pct">90%</div>
-          <div class="ep-desc">of your P&L is determined by your exit strategy</div>
-        </div>
-        <div class="vs-badge">vs</div>
-      </div>
-
-      <p class="edge-insight">Your entry gets you in. Your <em>exit gets you paid</em>.</p>
-      <span class="brand-mark">SIGNALPILOT</span>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════════════
-       SLIDE 5 — Truth: Plan the Exit Before the Entry
-       ══════════════════════════════════════════════════════════════ -->
-  <div class="slide-wrapper s5" data-slide="5">
-    <div class="slide-content" style="justify-content:center;">
-      <span class="slide-number">05 / 06</span>
-
-      <div class="orb-sm"><span class="orb-letter">X</span></div>
-
-      <div class="sec-tag">THE TRUTH</div>
-      <div class="sec-title">Plan the <em>Exit</em><br>Before the Entry.</div>
-
-      <div class="truth-grid">
-        <div class="truth-card">
-          <div class="tc-check">
-            <div class="tc-check-icon"></div>
-            <div class="tc-title">Stop Loss Defined</div>
-          </div>
-          <div class="tc-desc">Stop loss defined before entry. Know your worst case before you click buy.</div>
-        </div>
-        <div class="truth-card">
-          <div class="tc-check">
-            <div class="tc-check-icon"></div>
-            <div class="tc-title">Take Profit Mapped</div>
-          </div>
-          <div class="tc-desc">Take profit targets mapped. Multiple levels for scaling out of winners.</div>
-        </div>
-        <div class="truth-card">
-          <div class="tc-check">
-            <div class="tc-check-icon"></div>
-            <div class="tc-title">Trail Strategy</div>
-          </div>
-          <div class="tc-desc">Trail strategy for runners. Let profits run with a defined trailing mechanism.</div>
-        </div>
-        <div class="truth-card">
-          <div class="tc-check">
-            <div class="tc-check-icon"></div>
-            <div class="tc-title">Time Stop</div>
-          </div>
-          <div class="tc-desc">Time stop for stale positions. If the trade does nothing, close it and move on.</div>
-        </div>
-      </div>
-
-      <p class="truth-quote">"Amateurs guess exits. Professionals <em>plan them</em>."</p>
-      <span class="brand-mark">SIGNALPILOT</span>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════════════
-       SLIDE 6 — CTA
-       ══════════════════════════════════════════════════════════════ -->
-  <div class="slide-wrapper s6" data-slide="6">
-    <div class="slide-content" style="justify-content:center;">
-      <span class="slide-number">06 / 06</span>
-
-      <div class="cta-badge">SIGNAL PILOT</div>
-      <div class="cta-title">Master Your<br><em>Exit Strategy</em></div>
-      <p class="cta-sub">Signal Pilot indicators manage the entire trade lifecycle -- from entry signals to exit execution.</p>
-
-      <div class="stat-grid">
-        <div class="stat-cell"><div class="sv">90%</div><div class="sl">EXIT EDGE</div></div>
-        <div class="stat-cell"><div class="sv">4</div><div class="sl">EXIT RULES</div></div>
-        <div class="stat-cell"><div class="sv">1</div><div class="sl">SYSTEM</div></div>
-      </div>
-
-      <div class="pill-row">
-        <span class="pill">ENTRIES</span>
-        <span class="pill">EXITS</span>
-        <span class="pill">STOP LOSS</span>
-        <span class="pill">TAKE PROFIT</span>
-        <span class="pill">TRAIL STOP</span>
-        <span class="pill">TIME STOP</span>
-        <span class="pill">RISK MGMT</span>
-      </div>
-
-      <div class="cta-box">
-        <div class="cta-url">signalpilot.io</div>
-        <div class="cta-hint">Start building your edge</div>
-      </div>
-
-      <span class="brand-mark">SIGNALPILOT</span>
-    </div>
-  </div>
-
-</div>
-
-<!-- ── Export Navigation ── -->
-<div class="export-nav">
-  <button onclick="prevSlide()">&#x2190; Previous</button>
-  <span class="slide-indicator"><span id="currentSlide">1</span> / 6</span>
-  <button onclick="nextSlide()">Next &#x2192;</button>
-</div>
-
-<script>
-const slides=document.querySelectorAll('.slide-wrapper');
-let cur=0,exp=false;
-function toggleExportMode(){exp=!exp;document.body.classList.toggle('export-mode',exp);if(exp){cur=0;upd();}}
-function upd(){slides.forEach((s,i)=>s.classList.toggle('active',i===cur));document.getElementById('currentSlide').textContent=cur+1;}
-function nextSlide(){cur=(cur+1)%slides.length;upd();}
-function prevSlide(){cur=(cur-1+slides.length)%slides.length;upd();}
-document.addEventListener('keydown',e=>{if(!exp)return;if(e.key==='ArrowRight')nextSlide();if(e.key==='ArrowLeft')prevSlide();if(e.key==='Escape')toggleExportMode();});
-</script>
+      exportBtn.addEventListener('click', function() {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
+      });
+      function updateActiveSlide() {
+        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
+      }
+      document.addEventListener('keydown', function(e) {
+        if (!exportMode) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
+        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
+      });
+    })();
+  </script>
 </body>
 </html>

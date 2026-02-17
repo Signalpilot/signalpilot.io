@@ -481,6 +481,24 @@ async function renderCarousel(page, postDir, postNumber) {
         line-height: 1.55 !important;
       }
 
+      /* --- Info boxes --- */
+      .info-box {
+        background: rgba(94,234,212,0.15) !important;
+        border: 2px solid rgba(94,234,212,0.45) !important;
+        border-left: 5px solid rgba(94,234,212,1) !important;
+        padding: clamp(14px, 3cqw, 22px) !important;
+      }
+      .info-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        letter-spacing: 2px !important;
+        color: rgba(94,234,212,0.9) !important;
+      }
+      .info-text {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.6 !important;
+        color: var(--txt) !important;
+      }
+
       /* --- Stack / layer visualization --- */
       .stack-bar {
         font-size: clamp(14px, 3.5cqw, 20px) !important;
@@ -596,6 +614,28 @@ async function renderCarousel(page, postDir, postNumber) {
       }
       .risk-bar {
         height: clamp(10px, 2cqw, 16px) !important;
+      }
+
+      /* --- Scenario cards (post-044 pattern) --- */
+      .scenario-label {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 2px !important;
+      }
+      .scenario-desc {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+        color: var(--txt2) !important;
+      }
+      .scenario-desc em {
+        color: var(--txt) !important;
+      }
+      .scenario-badge {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        padding: clamp(4px, 0.8cqw, 7px) clamp(8px, 1.6cqw, 14px) !important;
+      }
+      .scenario-insight-text {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
       }
 
       /* --- Excuse items --- */
@@ -1017,6 +1057,430 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(12px, 3cqw, 18px) !important;
       }
 
+      /* ===== Gold Standard Architecture — layout overrides ===== */
+
+      /* Teal/warm architecture: center content, compact padding */
+      .slide-teal .slide-content,
+      .slide-warm .slide-content {
+        justify-content: center !important;
+        padding: 2% 5% 2% 5% !important;
+        gap: 1.2cqw !important;
+      }
+      /* Keep slide-1 centered (hook) */
+      .slide-teal.slide-1 .slide-content,
+      .slide-warm.slide-1 .slide-content {
+        justify-content: center !important;
+        padding: 6% 8% !important;
+        gap: 2cqw !important;
+      }
+      /* Keep CTA slides centered */
+      .slide-teal.slide-6 .slide-content,
+      .slide-warm.slide-6 .slide-content,
+      .slide-teal.slide-5:last-child .slide-content,
+      .slide-warm.slide-5:last-child .slide-content {
+        justify-content: center !important;
+        padding: 4% 6% !important;
+        gap: 2cqw !important;
+      }
+
+      /* Teal/warm grids — tighter gaps */
+      .slide-teal .pillar-grid, .slide-warm .pillar-grid,
+      .slide-teal .vision-grid, .slide-warm .vision-grid,
+      .slide-teal .strat-grid, .slide-warm .strat-grid {
+        gap: 1.5cqw !important;
+      }
+      .slide-teal .dive-stack, .slide-warm .dive-stack,
+      .slide-teal .power-stack, .slide-warm .power-stack {
+        gap: 1cqw !important;
+      }
+      .slide-teal .cycle-flow, .slide-warm .cycle-flow,
+      .slide-teal .reading-flow, .slide-warm .reading-flow {
+        gap: 0.8cqw !important;
+      }
+      /* Tighter internal card padding */
+      .slide-teal .pillar-card, .slide-warm .pillar-card,
+      .slide-teal .vision-card, .slide-warm .vision-card,
+      .slide-teal .strat-card, .slide-warm .strat-card {
+        padding: 1.5cqw !important;
+        gap: 0.6cqw !important;
+      }
+      .slide-teal .dive-card, .slide-warm .dive-card,
+      .slide-teal .power-card, .slide-warm .power-card {
+        padding: 1.5cqw 2cqw !important;
+        gap: 1.2cqw !important;
+      }
+      .slide-teal .cycle-step, .slide-warm .cycle-step,
+      .slide-teal .reading-step, .slide-warm .reading-step {
+        padding: 1.5cqw 2cqw !important;
+        gap: 0.6cqw !important;
+      }
+
+      /* ===== Gold Standard Teal Architecture (post-077/078/047) ===== */
+
+      /* Slide counter */
+      .slide-counter {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        letter-spacing: 2px !important;
+      }
+
+      /* Hook elements */
+      .blog-badge, .chronicle-badge {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        letter-spacing: 3px !important;
+        padding: 6px 18px !important;
+      }
+      .hook-indicator, .char-indicator {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+        letter-spacing: 3px !important;
+      }
+      .hook-quote, .char-quote {
+        font-size: clamp(24px, 6cqw, 34px) !important;
+        line-height: 1.45 !important;
+      }
+
+      /* Pillar / Vision grid cards */
+      .pillar-name, .vision-name {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .pillar-desc, .vision-desc {
+        font-size: clamp(13px, 3.2cqw, 18px) !important;
+        line-height: 1.4 !important;
+      }
+      .pillar-label, .vision-label {
+        font-size: clamp(10px, 2.4cqw, 14px) !important;
+        letter-spacing: 1px !important;
+      }
+      .pillar-icon, .vision-icon {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .pillar-ring, .vision-ring {
+        width: clamp(40px, 8cqw, 60px) !important;
+        height: clamp(40px, 8cqw, 60px) !important;
+      }
+      .pillar-bar, .vision-bar {
+        height: clamp(5px, 1cqw, 8px) !important;
+      }
+
+      /* Dive / Power cards (horizontal layout) */
+      .dive-name, .power-name {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .dive-desc, .power-desc {
+        font-size: clamp(13px, 3.2cqw, 18px) !important;
+        line-height: 1.35 !important;
+      }
+      .dive-label, .power-label {
+        font-size: clamp(10px, 2.4cqw, 14px) !important;
+        letter-spacing: 1px !important;
+      }
+      .dive-icon-sym, .power-icon-sym {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .dive-icon-circle, .power-icon-circle {
+        width: clamp(42px, 8.5cqw, 64px) !important;
+        height: clamp(42px, 8.5cqw, 64px) !important;
+      }
+      .dive-bar, .power-bar {
+        height: clamp(5px, 1cqw, 8px) !important;
+      }
+
+      /* Cycle / Reading flow steps */
+      .cycle-label, .reading-label {
+        font-size: clamp(11px, 2.8cqw, 16px) !important;
+        letter-spacing: 2px !important;
+      }
+      .cycle-text, .reading-text {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .cycle-desc, .reading-desc {
+        font-size: clamp(13px, 3.2cqw, 18px) !important;
+        line-height: 1.35 !important;
+      }
+      .cycle-num, .reading-num {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .cycle-ring, .reading-ring {
+        width: clamp(38px, 7.5cqw, 56px) !important;
+        height: clamp(38px, 7.5cqw, 56px) !important;
+      }
+      .cycle-arrow, .reading-arrow {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .cycle-truth, .reading-truth {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.4 !important;
+      }
+
+      /* Strategy grid cards */
+      .strat-name {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+      }
+      .strat-desc {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        line-height: 1.5 !important;
+      }
+      .strat-label {
+        font-size: clamp(12px, 3cqw, 16px) !important;
+        letter-spacing: 1px !important;
+      }
+      .strat-icon {
+        font-size: clamp(22px, 5.5cqw, 36px) !important;
+      }
+      .strat-ring {
+        width: clamp(52px, 10cqw, 80px) !important;
+        height: clamp(52px, 10cqw, 80px) !important;
+      }
+      .strat-bar {
+        height: clamp(6px, 1.2cqw, 10px) !important;
+      }
+
+      /* Strategy warning box */
+      .strat-warn-label {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        letter-spacing: 2px !important;
+      }
+      .strat-warn-text {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.55 !important;
+      }
+
+      /* CTA stat recap (teal gold standard) */
+      .stat-recap .stat-num, .stat-card .stat-num {
+        font-size: clamp(22px, 5.5cqw, 34px) !important;
+      }
+      .stat-recap .stat-name, .stat-card .stat-name {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+      }
+      .stat-recap .stat-val, .stat-card .stat-val {
+        font-size: clamp(12px, 3cqw, 16px) !important;
+      }
+      .stat-ring {
+        width: clamp(38px, 7.5cqw, 56px) !important;
+        height: clamp(38px, 7.5cqw, 56px) !important;
+      }
+
+      /* CTA elements (teal gold standard) */
+      .cta-glow-icon {
+        font-size: clamp(28px, 7cqw, 44px) !important;
+      }
+      .cta-tagline {
+        font-size: clamp(32px, 8cqw, 52px) !important;
+      }
+      .cta-desc {
+        font-size: clamp(20px, 5cqw, 28px) !important;
+        line-height: 1.5 !important;
+      }
+      .cta-pill {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        padding: 6px 14px !important;
+      }
+      .cta-box-text {
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
+      }
+      .cta-link {
+        font-size: clamp(20px, 5cqw, 28px) !important;
+      }
+
+      /* Slide logo */
+      .slide-logo {
+        font-size: clamp(10px, 2.5cqw, 14px) !important;
+        letter-spacing: 3px !important;
+        padding-bottom: 1.5cqw !important;
+        margin-top: auto !important;
+      }
+
+      /* Teal/warm slide titles — reduce margin on content slides */
+      .slide-teal:not(.slide-1) .slide-title,
+      .slide-warm:not(.slide-1) .slide-title,
+      .slide-teal:not(.slide-1) .section-title,
+      .slide-warm:not(.slide-1) .section-title {
+        margin-bottom: 1.5% !important;
+      }
+
+      /* ===== Warm Gold Standard Architecture — class-specific upscaling ===== */
+
+      /* S1 hook elements */
+      .s1-prod-label {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        letter-spacing: 4px !important;
+        padding: clamp(6px, 1.2cqw, 12px) clamp(16px, 3cqw, 28px) !important;
+      }
+      .s1-hook {
+        font-size: clamp(36px, 8cqw, 56px) !important;
+      }
+      .s1-sub {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        letter-spacing: 3px !important;
+      }
+      .s1-divider {
+        width: 80px !important;
+        height: 3px !important;
+      }
+
+      /* Obsession block (post-044 v2 — slide 2) */
+      .obsess-label {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        letter-spacing: 3px !important;
+      }
+      .obsess-text {
+        font-size: clamp(24px, 5.5cqw, 38px) !important;
+        line-height: 1.4 !important;
+      }
+      .obsess-verdict-text {
+        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        line-height: 1.4 !important;
+      }
+
+      /* Graveyard cards (post-044 v2 — slide 3) */
+      .grave-pair {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .grave-result {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        padding: clamp(4px, 0.8cqw, 7px) clamp(8px, 1.6cqw, 14px) !important;
+      }
+      .grave-story {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        line-height: 1.45 !important;
+      }
+      .grave-cause {
+        font-size: clamp(13px, 3cqw, 18px) !important;
+        letter-spacing: 2px !important;
+      }
+      .grave-truth-text {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        line-height: 1.4 !important;
+      }
+
+      /* Scale visual (post-044 v2 — slide 4) */
+      .scale-pan-label {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        letter-spacing: 3px !important;
+      }
+      .scale-pan-symbol {
+        font-size: clamp(22px, 5cqw, 34px) !important;
+      }
+      .scale-pan-icon {
+        width: clamp(50px, 10cqw, 80px) !important;
+        height: clamp(50px, 10cqw, 80px) !important;
+      }
+      .scale-item {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        line-height: 1.4 !important;
+      }
+      .scale-insight {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* Shift columns (post-044 v2 — slide 5) */
+      .shift-col-header {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        letter-spacing: 3px !important;
+      }
+      .shift-item-text {
+        font-size: clamp(15px, 3.5cqw, 22px) !important;
+        line-height: 1.4 !important;
+      }
+      .shift-truth-text {
+        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        line-height: 1.4 !important;
+      }
+
+      /* Post-085 warm architecture classes */
+      .cat-name {
+        font-size: clamp(16px, 3.5cqw, 24px) !important;
+      }
+      .cat-desc {
+        font-size: clamp(12px, 2.5cqw, 18px) !important;
+      }
+      .cat-icon-symbol {
+        font-size: clamp(18px, 4cqw, 30px) !important;
+      }
+      .conf-text {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .conf-desc {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+        line-height: 1.4 !important;
+      }
+      .conf-step-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        letter-spacing: 2px !important;
+      }
+      .conf-num {
+        font-size: clamp(22px, 5cqw, 34px) !important;
+      }
+      .conf-demo-label {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .conf-demo-desc {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+      }
+      .s2-total-text {
+        font-size: clamp(18px, 4cqw, 26px) !important;
+      }
+      .feat-card-title {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .feat-card-desc {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+        line-height: 1.4 !important;
+      }
+      .feat-bar-label {
+        font-size: clamp(11px, 2.5cqw, 16px) !important;
+      }
+      .feat-icon-letter {
+        font-size: clamp(18px, 4cqw, 28px) !important;
+      }
+      .stat-ring-val {
+        font-size: clamp(22px, 5cqw, 34px) !important;
+      }
+      .stat-ring-label {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+      }
+      .stat-ring-sub {
+        font-size: clamp(11px, 2.5cqw, 16px) !important;
+      }
+      .nr-badge {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+      }
+
+      /* Warm architecture stat recap / CTA */
+      .stat-recap-num {
+        font-size: clamp(18px, 4cqw, 28px) !important;
+      }
+      .stat-recap-label {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+      }
+      .stat-recap-val {
+        font-size: clamp(12px, 2.5cqw, 16px) !important;
+      }
+      .stat-recap-ring {
+        width: clamp(44px, 8.5cqw, 68px) !important;
+        height: clamp(44px, 8.5cqw, 68px) !important;
+      }
+      .cta-glow-icon {
+        font-size: clamp(28px, 6cqw, 48px) !important;
+      }
+      .cta-tagline {
+        font-size: clamp(32px, 8cqw, 52px) !important;
+      }
+      .cta-desc {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+      }
+      .cta-pill {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        padding: 5px 14px !important;
+      }
+      .cta-box-text {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+      }
+      .cta-link {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+      }
+
       /* --- Doji Anatomy (post-056 pattern) --- */
       .da-part {
         font-size: clamp(18px, 4.5cqw, 28px) !important;
@@ -1068,7 +1532,7 @@ async function renderCarousel(page, postDir, postNumber) {
 
     // Inject "SIGNAL PILOT" branding on EVERY slide that doesn't already have it
     document.querySelectorAll('.slide-wrapper').forEach(w => {
-      if (!w.querySelector('.brand-mark, .cine-logo, .brand-footer')) {
+      if (!w.querySelector('.brand-mark, .cine-logo, .brand-footer, .slide-logo')) {
         const container = w.querySelector('.slide-content') || w;
         const brand = document.createElement('span');
         brand.className = 'brand-mark';
