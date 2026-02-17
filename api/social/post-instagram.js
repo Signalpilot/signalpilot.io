@@ -19,9 +19,10 @@ import {
   shouldSkipPost,
   incrementRetryCount,
   clearRetryCount,
+  setPaused,
 } from '../../lib/social/queue-manager.js';
 import { getPostNumber, getInstagramColumn } from '../../lib/social/posting-schedule.js';
-import { postCarousel } from '../../lib/social/instagram-client.js';
+import { postCarousel, verifyToken } from '../../lib/social/instagram-client.js';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
@@ -54,6 +55,30 @@ export default async function handler(req, res) {
     // Check if paused
     if (await isPaused()) {
       return res.status(200).json({ success: true, skipped: true, reason: 'Queue is paused' });
+    }
+
+    // Pre-flight token validation (prevent wasted retries)
+    try {
+      await verifyToken();
+    } catch (tokenError) {
+      const errorMsg = tokenError.message || 'Unknown token error';
+      // On auth failures, pause the queue immediately
+      if (errorMsg.includes('OAuthException') || errorMsg.includes('Token') || errorMsg.includes('Unauthorized')) {
+        await setPaused(true);
+        await logError({
+          platform: 'instagram',
+          action: 'critical_auth_failure',
+          reason: `Token invalid, queue paused. ${errorMsg}`,
+        });
+        return res.status(200).json({
+          success: false,
+          error: 'Token validation failed - queue paused',
+          detail: errorMsg,
+          action: 'MANUAL_INTERVENTION_REQUIRED',
+        });
+      }
+      // Non-auth errors, allow retry
+      throw tokenError;
     }
 
     // Idempotency check (skip with ?force=true for manual posting)
@@ -145,11 +170,35 @@ export default async function handler(req, res) {
 
     try {
       const postOrder = await getNextPostOrder('instagram');
-      await incrementRetryCount('instagram', postOrder);
+      const retryCount = await incrementRetryCount('instagram', postOrder);
+      const isAuthError = error.message.includes('OAuthException') ||
+                          error.message.includes('Unauthorized') ||
+                          error.message.includes('Invalid');
+
+      // For auth errors, pause queue after 2 retries
+      if (isAuthError && retryCount >= 2) {
+        await setPaused(true);
+        await logError({
+          platform: 'instagram',
+          postOrder,
+          action: 'critical_auth_failure',
+          retryCount,
+          reason: `Auth error (${retryCount} retries), queue paused. ${error.message}`,
+        });
+        return res.status(200).json({
+          success: false,
+          error: 'Auth error - queue paused',
+          detail: error.message,
+          action: 'MANUAL_INTERVENTION_REQUIRED',
+        });
+      }
+
       await logError({
         platform: 'instagram',
         postOrder,
         action: 'error',
+        retryCount,
+        isAuthError,
         reason: error.message,
       });
     } catch (logErr) {
