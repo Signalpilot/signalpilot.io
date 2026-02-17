@@ -1297,6 +1297,190 @@ async function renderCarousel(page, postDir, postNumber) {
         margin-bottom: 1.5% !important;
       }
 
+      /* ===== Warm Gold Standard Architecture — class-specific upscaling ===== */
+
+      /* S1 hook elements */
+      .s1-prod-label {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        letter-spacing: 4px !important;
+        padding: clamp(6px, 1.2cqw, 12px) clamp(16px, 3cqw, 28px) !important;
+      }
+      .s1-hook {
+        font-size: clamp(36px, 8cqw, 56px) !important;
+      }
+      .s1-sub {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        letter-spacing: 3px !important;
+      }
+      .s1-divider {
+        width: 80px !important;
+        height: 3px !important;
+      }
+
+      /* Obsession block (post-044 v2 — slide 2) */
+      .obsess-label {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        letter-spacing: 3px !important;
+      }
+      .obsess-text {
+        font-size: clamp(24px, 5.5cqw, 38px) !important;
+        line-height: 1.4 !important;
+      }
+      .obsess-verdict-text {
+        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        line-height: 1.4 !important;
+      }
+
+      /* Graveyard cards (post-044 v2 — slide 3) */
+      .grave-pair {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .grave-result {
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        padding: clamp(4px, 0.8cqw, 7px) clamp(8px, 1.6cqw, 14px) !important;
+      }
+      .grave-story {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        line-height: 1.45 !important;
+      }
+      .grave-cause {
+        font-size: clamp(13px, 3cqw, 18px) !important;
+        letter-spacing: 2px !important;
+      }
+      .grave-truth-text {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        line-height: 1.4 !important;
+      }
+
+      /* Scale visual (post-044 v2 — slide 4) */
+      .scale-pan-label {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        letter-spacing: 3px !important;
+      }
+      .scale-pan-symbol {
+        font-size: clamp(22px, 5cqw, 34px) !important;
+      }
+      .scale-pan-icon {
+        width: clamp(50px, 10cqw, 80px) !important;
+        height: clamp(50px, 10cqw, 80px) !important;
+      }
+      .scale-item {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        line-height: 1.4 !important;
+      }
+      .scale-insight {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        line-height: 1.5 !important;
+      }
+
+      /* Shift columns (post-044 v2 — slide 5) */
+      .shift-col-header {
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        letter-spacing: 3px !important;
+      }
+      .shift-item-text {
+        font-size: clamp(15px, 3.5cqw, 22px) !important;
+        line-height: 1.4 !important;
+      }
+      .shift-truth-text {
+        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        line-height: 1.4 !important;
+      }
+
+      /* Post-085 warm architecture classes */
+      .cat-name {
+        font-size: clamp(16px, 3.5cqw, 24px) !important;
+      }
+      .cat-desc {
+        font-size: clamp(12px, 2.5cqw, 18px) !important;
+      }
+      .cat-icon-symbol {
+        font-size: clamp(18px, 4cqw, 30px) !important;
+      }
+      .conf-text {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .conf-desc {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+        line-height: 1.4 !important;
+      }
+      .conf-step-label {
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        letter-spacing: 2px !important;
+      }
+      .conf-num {
+        font-size: clamp(22px, 5cqw, 34px) !important;
+      }
+      .conf-demo-label {
+        font-size: clamp(16px, 4cqw, 24px) !important;
+      }
+      .conf-demo-desc {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+      }
+      .s2-total-text {
+        font-size: clamp(18px, 4cqw, 26px) !important;
+      }
+      .feat-card-title {
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
+      }
+      .feat-card-desc {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+        line-height: 1.4 !important;
+      }
+      .feat-bar-label {
+        font-size: clamp(11px, 2.5cqw, 16px) !important;
+      }
+      .feat-icon-letter {
+        font-size: clamp(18px, 4cqw, 28px) !important;
+      }
+      .stat-ring-val {
+        font-size: clamp(22px, 5cqw, 34px) !important;
+      }
+      .stat-ring-label {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+      }
+      .stat-ring-sub {
+        font-size: clamp(11px, 2.5cqw, 16px) !important;
+      }
+      .nr-badge {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+      }
+
+      /* Warm architecture stat recap / CTA */
+      .stat-recap-num {
+        font-size: clamp(18px, 4cqw, 28px) !important;
+      }
+      .stat-recap-label {
+        font-size: clamp(14px, 3cqw, 20px) !important;
+      }
+      .stat-recap-val {
+        font-size: clamp(12px, 2.5cqw, 16px) !important;
+      }
+      .stat-recap-ring {
+        width: clamp(44px, 8.5cqw, 68px) !important;
+        height: clamp(44px, 8.5cqw, 68px) !important;
+      }
+      .cta-glow-icon {
+        font-size: clamp(28px, 6cqw, 48px) !important;
+      }
+      .cta-tagline {
+        font-size: clamp(32px, 8cqw, 52px) !important;
+      }
+      .cta-desc {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
+      }
+      .cta-pill {
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        padding: 5px 14px !important;
+      }
+      .cta-box-text {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+      }
+      .cta-link {
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+      }
+
       /* --- Doji Anatomy (post-056 pattern) --- */
       .da-part {
         font-size: clamp(18px, 4.5cqw, 28px) !important;
