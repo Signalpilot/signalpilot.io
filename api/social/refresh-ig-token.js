@@ -2,8 +2,8 @@
 // Cron-triggered: Refreshes the Instagram/Facebook long-lived access token
 // Schedule: "0 6 * * 0" (Sundays at 6AM UTC)
 
-import { refreshLongLivedToken } from '../../lib/social/instagram-client.js';
-import { logPosting, logError } from '../../lib/social/queue-manager.js';
+import { refreshLongLivedToken, verifyToken } from '../../lib/social/instagram-client.js';
+import { logPosting, logError, setTokenExpiresAt } from '../../lib/social/queue-manager.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-cache');
@@ -20,13 +20,29 @@ export default async function handler(req, res) {
   }
 
   try {
+    // First verify current token validity
+    let tokenInfo;
+    try {
+      tokenInfo = await verifyToken();
+    } catch (verifyErr) {
+      console.warn('Current token verification failed:', verifyErr.message);
+      // Continue anyway - refresh might still work
+    }
+
+    // Refresh the token
     const result = await refreshLongLivedToken();
+    const expiresAtMs = Date.now() + result.expires_in * 1000;
+    const expiresAtIso = new Date(expiresAtMs).toISOString();
+
+    // Store token expiration time for monitoring
+    await setTokenExpiresAt(expiresAtIso);
 
     // Log success
     await logPosting({
       platform: 'instagram',
       action: 'token_refresh',
       expiresIn: result.expires_in,
+      expiresAt: expiresAtIso,
       reason: 'Token refreshed successfully',
     });
 
@@ -38,6 +54,8 @@ export default async function handler(req, res) {
       tokenType: result.token_type,
       newToken: result.access_token,
       expiresInDays: Math.round(result.expires_in / 86400),
+      expiresAt: expiresAtIso,
+      currentTokenInfo: tokenInfo,
     });
   } catch (error) {
     console.error('Token refresh error:', error.message);
