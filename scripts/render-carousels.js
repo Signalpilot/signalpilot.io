@@ -1059,10 +1059,10 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* ===== Gold Standard Architecture — layout overrides ===== */
 
-      /* Teal/warm architecture: start from top, compact padding */
+      /* Teal/warm architecture: center content, compact padding */
       .slide-teal .slide-content,
       .slide-warm .slide-content {
-        justify-content: flex-start !important;
+        justify-content: center !important;
         padding: 2% 5% 2% 5% !important;
         gap: 1.2cqw !important;
       }
