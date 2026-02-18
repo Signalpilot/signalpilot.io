@@ -389,35 +389,35 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* --- Definition cards --- */
       .def-label {
-        font-size: clamp(16px, 4cqw, 26px) !important;
+        font-size: clamp(14px, 3.5cqw, 22px) !important;
         letter-spacing: 2px !important;
       }
       .def-quote {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(20px, 5cqw, 28px) !important;
       }
       .def-text {
-        font-size: clamp(20px, 5cqw, 32px) !important;
-        line-height: 1.5 !important;
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.45 !important;
       }
 
       /* --- Factor / feature cards (2x2 / 2x3 grids) --- */
       .factor-card .fc-name {
-        font-size: clamp(24px, 6cqw, 38px) !important;
+        font-size: clamp(20px, 5cqw, 28px) !important;
       }
       .factor-card .fc-desc {
-        font-size: clamp(18px, 4.5cqw, 32px) !important;
-        line-height: 1.5 !important;
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        line-height: 1.45 !important;
       }
       .factor-card .fc-tag {
-        font-size: clamp(14px, 3.5cqw, 24px) !important;
-        padding: 5px 14px !important;
+        font-size: clamp(12px, 3cqw, 18px) !important;
+        padding: 4px 12px !important;
       }
       .factor-card .fc-let {
-        font-size: clamp(20px, 5cqw, 32px) !important;
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
       }
       .factor-card .fc-icon {
-        width: clamp(36px, 7cqw, 52px) !important;
-        height: clamp(36px, 7cqw, 52px) !important;
+        width: clamp(32px, 6cqw, 48px) !important;
+        height: clamp(32px, 6cqw, 48px) !important;
       }
 
       /* --- Comparison cards --- */
@@ -435,31 +435,31 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* --- Truth cards --- */
       .truth-card .tc-title {
-        font-size: clamp(22px, 5.5cqw, 36px) !important;
+        font-size: clamp(20px, 5cqw, 28px) !important;
       }
       .truth-card .tc-desc {
-        font-size: clamp(18px, 4.5cqw, 32px) !important;
-        line-height: 1.5 !important;
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        line-height: 1.45 !important;
       }
       .truth-quote {
-        font-size: clamp(28px, 7cqw, 44px) !important;
+        font-size: clamp(26px, 6.5cqw, 38px) !important;
         line-height: 1.5 !important;
       }
 
       /* --- Step flow --- */
       .step-name {
-        font-size: clamp(22px, 5.5cqw, 36px) !important;
+        font-size: clamp(20px, 5cqw, 28px) !important;
       }
       .step-desc {
-        font-size: clamp(18px, 4.5cqw, 32px) !important;
-        line-height: 1.5 !important;
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        line-height: 1.45 !important;
       }
       .step-ring .s-num {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(20px, 5cqw, 28px) !important;
       }
       .step-ring {
-        width: clamp(40px, 8cqw, 58px) !important;
-        height: clamp(40px, 8cqw, 58px) !important;
+        width: clamp(36px, 7cqw, 52px) !important;
+        height: clamp(36px, 7cqw, 52px) !important;
       }
 
       /* --- Icon circles --- */
@@ -477,8 +477,8 @@ async function renderCarousel(page, postDir, postNumber) {
         letter-spacing: 2px !important;
       }
       .warn-text, .alert-text, .insight-text {
-        font-size: clamp(20px, 5cqw, 32px) !important;
-        line-height: 1.55 !important;
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
       }
 
       /* --- Info boxes --- */
@@ -494,8 +494,8 @@ async function renderCarousel(page, postDir, postNumber) {
         color: rgba(94,234,212,0.9) !important;
       }
       .info-text {
-        font-size: clamp(20px, 5cqw, 32px) !important;
-        line-height: 1.6 !important;
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        line-height: 1.5 !important;
         color: var(--txt) !important;
       }
 
@@ -514,31 +514,31 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* --- CTA slide elements --- */
       .cta-sub {
-        font-size: clamp(24px, 6cqw, 36px) !important;
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
         line-height: 1.5 !important;
       }
       .stat-cell .sv {
-        font-size: clamp(32px, 8cqw, 50px) !important;
+        font-size: clamp(28px, 7cqw, 42px) !important;
       }
       .stat-cell .sl {
-        font-size: clamp(16px, 4cqw, 26px) !important;
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
       }
       .pill {
-        font-size: clamp(16px, 4cqw, 24px) !important;
-        padding: 6px 16px !important;
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        padding: 5px 14px !important;
       }
       .cta-url {
-        font-size: clamp(24px, 6cqw, 36px) !important;
+        font-size: clamp(22px, 5.5cqw, 30px) !important;
       }
       .cta-hint {
-        font-size: clamp(18px, 4.5cqw, 28px) !important;
+        font-size: clamp(16px, 4cqw, 22px) !important;
       }
       .cta-url-main {
-        font-size: clamp(24px, 6cqw, 36px) !important;
+        font-size: clamp(22px, 5.5cqw, 30px) !important;
       }
       .cta-badge-pill {
-        font-size: clamp(16px, 4cqw, 24px) !important;
-        padding: 6px 18px !important;
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
+        padding: 5px 14px !important;
       }
 
       /* --- Divergence visual elements --- */
@@ -893,14 +893,14 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* --- Step Flow (post-047 pattern) --- */
       .step-name {
-        font-size: clamp(22px, 5.5cqw, 36px) !important;
+        font-size: clamp(20px, 5cqw, 28px) !important;
       }
       .step-desc {
-        font-size: clamp(18px, 4.5cqw, 32px) !important;
-        line-height: 1.5 !important;
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        line-height: 1.45 !important;
       }
       .step-ring .s-num {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(20px, 5cqw, 28px) !important;
       }
       .step-row {
         padding: clamp(14px, 2.8cqw, 24px) clamp(12px, 2.5cqw, 20px) !important;
@@ -1507,22 +1507,22 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* ===== Old Architecture — feature cards (post-045/050) ===== */
       .feature-text {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
         font-weight: 600 !important;
       }
       .feature-desc {
-        font-size: clamp(18px, 4.5cqw, 30px) !important;
-        line-height: 1.5 !important;
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        line-height: 1.45 !important;
       }
       .feature-ic, .fic-letter {
-        min-width: clamp(36px, 7cqw, 52px) !important;
-        min-height: clamp(36px, 7cqw, 52px) !important;
+        min-width: clamp(32px, 6cqw, 44px) !important;
+        min-height: clamp(32px, 6cqw, 44px) !important;
       }
       .fic-letter {
-        font-size: clamp(20px, 5cqw, 30px) !important;
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
       }
       .inner-heading {
-        font-size: clamp(36px, 8cqw, 56px) !important;
+        font-size: clamp(32px, 7cqw, 48px) !important;
       }
       .indicator-bar {
         height: clamp(5px, 1cqw, 8px) !important;
@@ -1530,26 +1530,26 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* ===== Old Architecture — definition cards (post-045/050 slide 2/3) ===== */
       .def-name {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(20px, 5cqw, 28px) !important;
         font-weight: 600 !important;
       }
       .def-tag {
-        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        font-size: clamp(13px, 3.2cqw, 18px) !important;
         letter-spacing: 2px !important;
       }
       .def-desc {
-        font-size: clamp(18px, 4.5cqw, 30px) !important;
-        line-height: 1.5 !important;
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        line-height: 1.45 !important;
       }
 
       /* ===== Old Architecture — access cards (post-051) ===== */
       .access-name {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(20px, 5cqw, 28px) !important;
         font-weight: 600 !important;
       }
       .access-desc {
-        font-size: clamp(18px, 4.5cqw, 30px) !important;
-        line-height: 1.5 !important;
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        line-height: 1.45 !important;
       }
       .access-bar {
         height: clamp(4px, 0.8cqw, 8px) !important;
@@ -1557,32 +1557,32 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* ===== Old Architecture — promise / philosophy (post-051) ===== */
       .promise-card-title {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(20px, 5cqw, 28px) !important;
         font-weight: 600 !important;
       }
       .promise-card-text {
-        font-size: clamp(18px, 4.5cqw, 30px) !important;
-        line-height: 1.5 !important;
+        font-size: clamp(16px, 4cqw, 22px) !important;
+        line-height: 1.45 !important;
       }
       .philosophy-text {
-        font-size: clamp(24px, 6cqw, 38px) !important;
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
         line-height: 1.5 !important;
       }
 
       /* ===== Old Architecture — stat pills ===== */
       .stat-pill .stat-val {
-        font-size: clamp(28px, 7cqw, 42px) !important;
+        font-size: clamp(24px, 6cqw, 36px) !important;
         font-weight: 600 !important;
       }
       .stat-pill .stat-label {
-        font-size: clamp(16px, 4cqw, 26px) !important;
+        font-size: clamp(14px, 3.5cqw, 20px) !important;
       }
       .cta-stat-val {
-        font-size: clamp(28px, 7cqw, 42px) !important;
+        font-size: clamp(24px, 6cqw, 36px) !important;
         font-weight: 600 !important;
       }
       .cta-stat-label {
-        font-size: clamp(14px, 3.5cqw, 22px) !important;
+        font-size: clamp(13px, 3.2cqw, 18px) !important;
       }
     </style>
   `;
