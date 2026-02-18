@@ -70,85 +70,20 @@ export default async function handler(req, res) {
     log(`isPlatformPaused('instagram') → ${paused} (reason: ${pauseReason})`);
 
     if (paused) {
-      // If paused due to auth issues, try to auto-recover
       if (pauseReason === 'platform') {
-        log(`⚡ Auto-recovery: Instagram paused, trying token verification...`);
-        try {
-          const tokenInfo = await verifyToken();
-          log(`✓ Token valid again! userId=${tokenInfo.userId} — auto-unpausing Instagram`);
-          await setPlatformPaused('instagram', false);
-          await clearAuthStrikes('instagram');
-          await logPosting({
-            platform: 'instagram',
-            action: 'auto_recovered',
-            reason: `Token verified OK, auto-unpaused after auth pause`,
-          });
-          // Continue with the rest of the handler (don't return)
-        } catch (recoveryError) {
-          log(`⏸ Auto-recovery FAILED: ${recoveryError.message} — staying paused`);
-          return res.status(200).json({ success: true, skipped: true, reason: 'Instagram paused (auth), auto-recovery failed' });
-        }
+        // Paused due to repeated auth failures — try to auto-recover by posting directly
+        log(`⚡ Auto-recovery: Instagram paused due to auth, attempting to post anyway...`);
+        // Don't return — fall through and try to post. If it works, we auto-unpause below.
       } else {
-        // Global pause (admin-set) — respect it
+        // Global pause (admin-set) — always respect it
         log(`⏸ SKIP: Queue is globally paused — returning 200`);
         return res.status(200).json({ success: true, skipped: true, reason: 'Queue is paused' });
       }
     }
 
-    // Pre-flight token validation
-    try {
-      log(`Verifying token...`);
-      const tokenInfo = await verifyToken();
-      log(`✓ Token valid — userId=${tokenInfo.userId}, expires=${tokenInfo.expiresAt} (${Date.now() - startTime}ms elapsed)`);
-      // Token works — clear any accumulated strikes
-      const prevStrikes = await getAuthStrikes('instagram');
-      if (prevStrikes > 0) {
-        await clearAuthStrikes('instagram');
-        log(`Cleared ${prevStrikes} auth strike(s) — token is healthy`);
-      }
-    } catch (tokenError) {
-      const errorMsg = tokenError.message || 'Unknown token error';
-      log(`✗ Token verification FAILED: ${errorMsg}`);
-
-      const isAuthError = errorMsg.includes('OAuthException') ||
-                          errorMsg.includes('Token') ||
-                          errorMsg.includes('Unauthorized') ||
-                          errorMsg.includes('blocked');
-
-      if (isAuthError) {
-        const strikes = await incrementAuthStrikes('instagram');
-        log(`Auth strike ${strikes}/${AUTH_STRIKES_BEFORE_PAUSE} for Instagram`);
-
-        await logError({
-          platform: 'instagram',
-          action: 'auth_failure',
-          strikes,
-          maxStrikes: AUTH_STRIKES_BEFORE_PAUSE,
-          reason: `Auth strike ${strikes}/${AUTH_STRIKES_BEFORE_PAUSE}: ${errorMsg}`,
-        });
-
-        if (strikes >= AUTH_STRIKES_BEFORE_PAUSE) {
-          await setPlatformPaused('instagram', true);
-          log(`⛔ ${strikes} consecutive auth failures — INSTAGRAM paused (Twitter unaffected)`);
-          return res.status(200).json({
-            success: false,
-            error: `Token failed ${strikes}x — Instagram paused`,
-            detail: errorMsg,
-            action: 'WILL_AUTO_RETRY_NEXT_CRON',
-          });
-        }
-
-        // Below threshold — skip this run but don't pause
-        log(`⏭ Auth failed but only strike ${strikes}/${AUTH_STRIKES_BEFORE_PAUSE} — skipping this run`);
-        return res.status(200).json({
-          success: false,
-          skipped: true,
-          reason: `Auth strike ${strikes}/${AUTH_STRIKES_BEFORE_PAUSE}: ${errorMsg}`,
-        });
-      }
-      // Non-auth errors, allow retry
-      throw tokenError;
-    }
+    // NO pre-flight token check. Just try to post.
+    // verifyToken() calls /me which can fail even when posting works fine.
+    // If the token is bad, postCarousel() will fail and we handle it below.
 
     // Idempotency check (skip with ?force=true for manual posting)
     const force = req.query.force === 'true';
@@ -223,9 +158,22 @@ export default async function handler(req, res) {
     const result = await postCarousel(postNumber, slideCount, caption);
     log(`✅ Carousel posted! mediaId=${result.mediaId}, slides=${result.slideCount} (${Date.now() - startTime}ms elapsed)`);
 
-    // Success - update state
+    // Success — update state and clear any auth issues
     await setLastPosted('instagram', postOrder);
     await clearRetryCount('instagram', postOrder);
+    await clearAuthStrikes('instagram');
+
+    // If we were platform-paused, auto-unpause on success
+    if (paused && pauseReason === 'platform') {
+      await setPlatformPaused('instagram', false);
+      log(`✅ Auto-recovery SUCCESS — Instagram unpaused`);
+      await logPosting({
+        platform: 'instagram',
+        action: 'auto_recovered',
+        reason: 'Post succeeded, auto-unpaused after auth pause',
+      });
+    }
+
     await logPosting({
       platform: 'instagram',
       postOrder,
@@ -258,14 +206,29 @@ export default async function handler(req, res) {
     try {
       const postOrder = await getNextPostOrder('instagram');
       const retryCount = await incrementRetryCount('instagram', postOrder);
+      const isAuthError = error.message.includes('OAuthException') ||
+                          error.message.includes('Unauthorized') ||
+                          error.message.includes('blocked') ||
+                          error.message.includes('Invalid');
 
-      log(`Error details: postOrder=${postOrder}, retryCount=${retryCount}`);
+      log(`Error details: postOrder=${postOrder}, retryCount=${retryCount}, isAuthError=${isAuthError}`);
+
+      if (isAuthError) {
+        const strikes = await incrementAuthStrikes('instagram');
+        log(`Auth strike ${strikes}/${AUTH_STRIKES_BEFORE_PAUSE} (from actual posting failure)`);
+
+        if (strikes >= AUTH_STRIKES_BEFORE_PAUSE) {
+          await setPlatformPaused('instagram', true);
+          log(`⛔ ${strikes} consecutive posting auth failures — Instagram paused (will auto-retry next cron)`);
+        }
+      }
 
       await logError({
         platform: 'instagram',
         postOrder,
         action: 'error',
         retryCount,
+        isAuthError,
         reason: error.message,
       });
     } catch (logErr) {
