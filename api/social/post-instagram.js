@@ -24,6 +24,8 @@ import {
   shouldSkipPost,
   incrementRetryCount,
   clearRetryCount,
+  incrementDailyPostCount,
+  getExpectedDailyCount,
 } from '../../lib/social/queue-manager.js';
 import { getPostNumber, getInstagramColumn } from '../../lib/social/posting-schedule.js';
 import { postCarousel, verifyToken } from '../../lib/social/instagram-client.js';
@@ -85,11 +87,12 @@ export default async function handler(req, res) {
     // verifyToken() calls /me which can fail even when posting works fine.
     // If the token is bad, postCarousel() will fail and we handle it below.
 
-    // Idempotency check (skip with ?force=true for manual posting)
+    // Idempotency check (skip with ?force=true or ?catchup=true)
     const force = req.query.force === 'true';
+    const isCatchup = req.query.catchup === 'true';
     const recentlyPosted = await wasRecentlyPosted('instagram', 300000);
-    log(`wasRecentlyPosted(5min) → ${recentlyPosted}, force → ${force}`);
-    if (!force && recentlyPosted) {
+    log(`wasRecentlyPosted(5min) → ${recentlyPosted}, force → ${force}, catchup → ${isCatchup}`);
+    if (!force && !isCatchup && recentlyPosted) {
       log(`⏭ SKIP: Already posted within 5 minutes — returning 200`);
       return res.status(200).json({ success: true, skipped: true, reason: 'Already posted recently' });
     }
@@ -186,7 +189,24 @@ export default async function handler(req, res) {
       action: 'posted',
     });
 
-    log(`✅ SUCCESS: Post ${postNumber} published, queue advanced. Total time: ${Date.now() - startTime}ms`);
+    // Track daily count and check if catch-up is needed
+    const dailyCount = await incrementDailyPostCount('instagram');
+    const expectedCount = getExpectedDailyCount('instagram');
+    log(`✅ SUCCESS: Post ${postNumber} published, queue advanced. Daily: ${dailyCount}/${expectedCount}. Total time: ${Date.now() - startTime}ms`);
+
+    // Catch-up: if we're behind schedule, trigger another invocation
+    // Each carousel gets its own full function timeout (no risk of timing out)
+    if (dailyCount < expectedCount) {
+      log(`📊 CATCH-UP: ${dailyCount}/${expectedCount} posted today — triggering another invocation`);
+      try {
+        const catchupUrl = `https://www.signalpilot.io/api/social/post-instagram/?catchup=true`;
+        fetch(catchupUrl, {
+          headers: { 'Authorization': `Bearer ${process.env.CRON_SECRET}` },
+        }).catch(() => {}); // fire and forget
+      } catch (e) {
+        log(`⚠ Catch-up trigger failed: ${e.message}`);
+      }
+    }
 
     return res.status(200).json({
       success: true,
@@ -198,6 +218,9 @@ export default async function handler(req, res) {
         slideCount: result.slideCount,
         mediaId: result.mediaId,
       },
+      dailyCount,
+      expectedCount,
+      catchupTriggered: dailyCount < expectedCount,
     });
   } catch (error) {
     log(`💥 CAUGHT ERROR: ${error.message} (${Date.now() - startTime}ms elapsed)`);

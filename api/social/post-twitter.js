@@ -12,6 +12,8 @@ import {
   shouldSkipPost,
   incrementRetryCount,
   clearRetryCount,
+  incrementDailyPostCount,
+  getExpectedDailyCount,
 } from '../../lib/social/queue-manager.js';
 import { getPostNumber } from '../../lib/social/posting-schedule.js';
 import { postThread, postTweet } from '../../lib/social/twitter-client.js';
@@ -26,6 +28,80 @@ function loadContent() {
     contentCache = JSON.parse(readFileSync(filePath, 'utf-8'));
   }
   return contentCache;
+}
+
+/**
+ * Post one tweet/thread. Returns the result or null if skipped/failed.
+ */
+async function postOne(log, startTime) {
+  const postOrder = await getNextPostOrder('twitter');
+  const postNumber = getPostNumber('twitter', postOrder);
+  log(`Queue state: postOrder=${postOrder}, postNumber=${postNumber}`);
+
+  if (postNumber === null) {
+    log(`⏭ SKIP: No more posts in queue (postOrder=${postOrder} → null)`);
+    return null;
+  }
+
+  const skipDueToRetries = await shouldSkipPost('twitter', postOrder);
+  log(`shouldSkipPost(${postOrder}) → ${skipDueToRetries}`);
+  if (skipDueToRetries) {
+    await setLastPosted('twitter', postOrder);
+    await logError({ platform: 'twitter', postOrder, postNumber, action: 'skipped', reason: 'Max retries exceeded' });
+    log(`⏭ SKIP: Post ${postNumber} exceeded max retries — advancing queue`);
+    return null;
+  }
+
+  const posts = loadContent();
+  const post = posts.find(p => p.postNumber === postNumber);
+
+  if (!post) {
+    await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: 'Post not found in content queue' });
+    await setLastPosted('twitter', postOrder);
+    log(`✗ Post ${postNumber} not found — advancing queue`);
+    return null;
+  }
+
+  const tweets = post.twitter?.tweets;
+  if (!tweets || tweets.length === 0) {
+    await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: 'No tweets in post' });
+    await setLastPosted('twitter', postOrder);
+    log(`✗ Post ${postNumber} has no tweets — advancing queue`);
+    return null;
+  }
+
+  const longTweets = tweets.map((t, i) => ({ i, len: t.length })).filter(t => t.len > 280);
+  if (longTweets.length > 0) {
+    const detail = longTweets.map(t => `tweet ${t.i + 1}: ${t.len} chars`).join(', ');
+    await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: `Tweet(s) over 280 chars: ${detail}` });
+    await incrementRetryCount('twitter', postOrder);
+    log(`✗ Post ${postNumber} has oversized tweets: ${detail}`);
+    return null;
+  }
+
+  log(`📤 Posting ${tweets.length} tweet(s) for post ${postNumber}... (${Date.now() - startTime}ms elapsed)`);
+  let result;
+  if (tweets.length === 1) {
+    result = await postTweet(tweets[0]);
+  } else {
+    result = await postThread(tweets);
+  }
+  log(`✅ Thread posted! url=${result.threadUrl || result.url} (${Date.now() - startTime}ms elapsed)`);
+
+  await setLastPosted('twitter', postOrder);
+  await clearRetryCount('twitter', postOrder);
+  await logPosting({
+    platform: 'twitter',
+    postOrder,
+    postNumber,
+    title: post.title,
+    type: post.type,
+    tweetCount: tweets.length,
+    url: result.threadUrl || result.url,
+    action: 'posted',
+  });
+
+  return { postOrder, postNumber, title: post.title, tweetCount: tweets.length, url: result.threadUrl || result.url };
 }
 
 export default async function handler(req, res) {
@@ -62,106 +138,57 @@ export default async function handler(req, res) {
     }
 
     // Idempotency: skip if already posted recently (within 5 minutes)
+    const isCatchup = req.query.catchup === 'true';
     const recentlyPosted = await wasRecentlyPosted('twitter', 300000);
-    log(`wasRecentlyPosted(5min) → ${recentlyPosted}`);
-    if (recentlyPosted) {
+    log(`wasRecentlyPosted(5min) → ${recentlyPosted}, catchup → ${isCatchup}`);
+    if (!isCatchup && recentlyPosted) {
       log(`⏭ SKIP: Already posted within 5 minutes — returning 200`);
       return res.status(200).json({ success: true, skipped: true, reason: 'Already posted recently' });
     }
 
-    // Get next post
-    const postOrder = await getNextPostOrder('twitter');
-    const postNumber = getPostNumber('twitter', postOrder);
-    log(`Queue state: postOrder=${postOrder}, postNumber=${postNumber}`);
+    // Post first tweet/thread
+    const posted = [];
+    const result = await postOne(log, startTime);
 
-    if (postNumber === null) {
-      log(`⏭ SKIP: No more posts in queue (postOrder=${postOrder} → null) — returning 200`);
-      return res.status(200).json({ success: true, skipped: true, reason: 'No more posts in queue' });
+    if (result) {
+      posted.push(result);
+      const dailyCount = await incrementDailyPostCount('twitter');
+      const expectedCount = getExpectedDailyCount('twitter');
+      log(`Daily: ${dailyCount}/${expectedCount} posted today`);
+
+      // Catch-up loop: tweets are fast, post more if behind
+      const MAX_CATCHUP = 2; // max extra posts per invocation
+      let catchups = 0;
+      while (dailyCount + catchups < expectedCount && catchups < MAX_CATCHUP) {
+        const elapsed = Date.now() - startTime;
+        if (elapsed > 45000) { // 45s safety limit
+          log(`⏰ Catch-up stopped: ${elapsed}ms elapsed`);
+          break;
+        }
+        catchups++;
+        log(`📊 CATCH-UP ${catchups}: ${dailyCount + catchups - 1}/${expectedCount} posted. Posting next...`);
+        try {
+          const catchupResult = await postOne(log, startTime);
+          if (catchupResult) {
+            posted.push(catchupResult);
+            await incrementDailyPostCount('twitter');
+          } else {
+            log(`Catch-up: postOne returned null, stopping`);
+            break;
+          }
+        } catch (catchupErr) {
+          log(`Catch-up failed: ${catchupErr.message}, stopping`);
+          break;
+        }
+      }
     }
 
-    // Check if this post has failed too many times
-    const skipDueToRetries = await shouldSkipPost('twitter', postOrder);
-    log(`shouldSkipPost(${postOrder}) → ${skipDueToRetries}`);
-    if (skipDueToRetries) {
-      // Skip this post and advance
-      await setLastPosted('twitter', postOrder);
-      await logError({
-        platform: 'twitter',
-        postOrder,
-        postNumber,
-        action: 'skipped',
-        reason: 'Max retries exceeded',
-      });
-      log(`⏭ SKIP: Post ${postNumber} exceeded max retries — advancing queue, returning 200`);
-      return res.status(200).json({ success: true, skipped: true, reason: `Post ${postNumber} skipped after max retries` });
-    }
-
-    // Load content
-    const posts = loadContent();
-    const post = posts.find(p => p.postNumber === postNumber);
-
-    if (!post) {
-      await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: 'Post not found in content queue' });
-      // Advance past missing post
-      await setLastPosted('twitter', postOrder);
-      log(`✗ ERROR: Post ${postNumber} not found in content-queue.json — advancing queue, returning 200`);
-      return res.status(200).json({ success: false, error: `Post ${postNumber} not found` });
-    }
-
-    const tweets = post.twitter?.tweets;
-    if (!tweets || tweets.length === 0) {
-      await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: 'No tweets in post' });
-      await setLastPosted('twitter', postOrder);
-      log(`✗ ERROR: Post ${postNumber} has no tweets — advancing queue, returning 200`);
-      return res.status(200).json({ success: false, error: `Post ${postNumber} has no tweets` });
-    }
-
-    // Validate tweet lengths — Twitter API rejects > 280 chars
-    const longTweets = tweets.map((t, i) => ({ i, len: t.length })).filter(t => t.len > 280);
-    if (longTweets.length > 0) {
-      const detail = longTweets.map(t => `tweet ${t.i + 1}: ${t.len} chars`).join(', ');
-      await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: `Tweet(s) over 280 chars: ${detail}` });
-      // Don't advance — this needs a content fix, not a skip
-      await incrementRetryCount('twitter', postOrder);
-      log(`✗ ERROR: Post ${postNumber} has oversized tweets: ${detail} — returning 200`);
-      return res.status(200).json({ success: false, error: `Post ${postNumber} has oversized tweets: ${detail}` });
-    }
-
-    // Post the thread (or single tweet)
-    log(`📤 Posting ${tweets.length} tweet(s) for post ${postNumber}... (${Date.now() - startTime}ms elapsed)`);
-    let result;
-    if (tweets.length === 1) {
-      result = await postTweet(tweets[0]);
-    } else {
-      result = await postThread(tweets);
-    }
-    log(`✅ Thread posted! url=${result.threadUrl || result.url} (${Date.now() - startTime}ms elapsed)`);
-
-    // Success - update state
-    await setLastPosted('twitter', postOrder);
-    await clearRetryCount('twitter', postOrder);
-    await logPosting({
-      platform: 'twitter',
-      postOrder,
-      postNumber,
-      title: post.title,
-      type: post.type,
-      tweetCount: tweets.length,
-      url: result.threadUrl || result.url,
-      action: 'posted',
-    });
-
-    log(`✅ SUCCESS: Post ${postNumber} published, queue advanced. Total time: ${Date.now() - startTime}ms`);
+    log(`✅ Done. Posted ${posted.length} thread(s). Total time: ${Date.now() - startTime}ms`);
 
     return res.status(200).json({
-      success: true,
-      posted: {
-        postOrder,
-        postNumber,
-        title: post.title,
-        tweetCount: tweets.length,
-        url: result.threadUrl || result.url,
-      },
+      success: posted.length > 0,
+      posted: posted.length === 1 ? posted[0] : posted,
+      count: posted.length,
     });
   } catch (error) {
     log(`💥 CAUGHT ERROR: ${error.message} (${Date.now() - startTime}ms elapsed)`);
