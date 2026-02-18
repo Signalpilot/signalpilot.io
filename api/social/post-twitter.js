@@ -3,7 +3,7 @@
 // Schedule: 3x daily at 8AM, 2PM, 8PM UTC (3AM, 9AM, 3PM EST)
 
 import {
-  isPaused,
+  isPlatformPaused,
   getNextPostOrder,
   setLastPosted,
   logPosting,
@@ -53,12 +53,12 @@ export default async function handler(req, res) {
   log(`✓ Authorized (cron: ${!!cronSecret}, token: ${!!adminToken})`);
 
   try {
-    // Check if paused
-    const paused = await isPaused();
-    log(`isPaused() → ${paused}`);
+    // Check if paused (per-platform + global)
+    const { paused, reason: pauseReason } = await isPlatformPaused('twitter');
+    log(`isPlatformPaused('twitter') → ${paused} (reason: ${pauseReason})`);
     if (paused) {
-      log(`⏸ SKIP: Queue is paused — returning 200`);
-      return res.status(200).json({ success: true, skipped: true, reason: 'Queue is paused' });
+      log(`⏸ SKIP: Queue is paused (${pauseReason}) — returning 200`);
+      return res.status(200).json({ success: true, skipped: true, reason: `Queue is paused (${pauseReason})` });
     }
 
     // Idempotency: skip if already posted recently (within 5 minutes)
