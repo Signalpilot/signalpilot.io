@@ -29,6 +29,12 @@ function loadContent() {
 }
 
 export default async function handler(req, res) {
+  const startTime = Date.now();
+  const runId = Math.random().toString(36).slice(2, 8);
+  const log = (msg) => console.log(`[TW-CRON ${runId}] ${msg}`);
+
+  log(`▶ Handler started at ${new Date().toISOString()}`);
+
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 'no-cache');
 
@@ -40,30 +46,43 @@ export default async function handler(req, res) {
     (adminToken && adminToken === process.env.SOCIAL_ADMIN_TOKEN);
 
   if (!isAuthorized) {
+    log(`✗ UNAUTHORIZED — no valid cron secret or admin token`);
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
+  log(`✓ Authorized (cron: ${!!cronSecret}, token: ${!!adminToken})`);
+
   try {
     // Check if paused
-    if (await isPaused()) {
+    const paused = await isPaused();
+    log(`isPaused() → ${paused}`);
+    if (paused) {
+      log(`⏸ SKIP: Queue is paused — returning 200`);
       return res.status(200).json({ success: true, skipped: true, reason: 'Queue is paused' });
     }
 
     // Idempotency: skip if already posted recently (within 5 minutes)
-    if (await wasRecentlyPosted('twitter', 300000)) {
+    const recentlyPosted = await wasRecentlyPosted('twitter', 300000);
+    log(`wasRecentlyPosted(5min) → ${recentlyPosted}`);
+    if (recentlyPosted) {
+      log(`⏭ SKIP: Already posted within 5 minutes — returning 200`);
       return res.status(200).json({ success: true, skipped: true, reason: 'Already posted recently' });
     }
 
     // Get next post
     const postOrder = await getNextPostOrder('twitter');
     const postNumber = getPostNumber('twitter', postOrder);
+    log(`Queue state: postOrder=${postOrder}, postNumber=${postNumber}`);
 
     if (postNumber === null) {
+      log(`⏭ SKIP: No more posts in queue (postOrder=${postOrder} → null) — returning 200`);
       return res.status(200).json({ success: true, skipped: true, reason: 'No more posts in queue' });
     }
 
     // Check if this post has failed too many times
-    if (await shouldSkipPost('twitter', postOrder)) {
+    const skipDueToRetries = await shouldSkipPost('twitter', postOrder);
+    log(`shouldSkipPost(${postOrder}) → ${skipDueToRetries}`);
+    if (skipDueToRetries) {
       // Skip this post and advance
       await setLastPosted('twitter', postOrder);
       await logError({
@@ -73,6 +92,7 @@ export default async function handler(req, res) {
         action: 'skipped',
         reason: 'Max retries exceeded',
       });
+      log(`⏭ SKIP: Post ${postNumber} exceeded max retries — advancing queue, returning 200`);
       return res.status(200).json({ success: true, skipped: true, reason: `Post ${postNumber} skipped after max retries` });
     }
 
@@ -84,6 +104,7 @@ export default async function handler(req, res) {
       await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: 'Post not found in content queue' });
       // Advance past missing post
       await setLastPosted('twitter', postOrder);
+      log(`✗ ERROR: Post ${postNumber} not found in content-queue.json — advancing queue, returning 200`);
       return res.status(200).json({ success: false, error: `Post ${postNumber} not found` });
     }
 
@@ -91,6 +112,7 @@ export default async function handler(req, res) {
     if (!tweets || tweets.length === 0) {
       await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: 'No tweets in post' });
       await setLastPosted('twitter', postOrder);
+      log(`✗ ERROR: Post ${postNumber} has no tweets — advancing queue, returning 200`);
       return res.status(200).json({ success: false, error: `Post ${postNumber} has no tweets` });
     }
 
@@ -101,16 +123,19 @@ export default async function handler(req, res) {
       await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: `Tweet(s) over 280 chars: ${detail}` });
       // Don't advance — this needs a content fix, not a skip
       await incrementRetryCount('twitter', postOrder);
+      log(`✗ ERROR: Post ${postNumber} has oversized tweets: ${detail} — returning 200`);
       return res.status(200).json({ success: false, error: `Post ${postNumber} has oversized tweets: ${detail}` });
     }
 
     // Post the thread (or single tweet)
+    log(`📤 Posting ${tweets.length} tweet(s) for post ${postNumber}... (${Date.now() - startTime}ms elapsed)`);
     let result;
     if (tweets.length === 1) {
       result = await postTweet(tweets[0]);
     } else {
       result = await postThread(tweets);
     }
+    log(`✅ Thread posted! url=${result.threadUrl || result.url} (${Date.now() - startTime}ms elapsed)`);
 
     // Success - update state
     await setLastPosted('twitter', postOrder);
@@ -126,6 +151,8 @@ export default async function handler(req, res) {
       action: 'posted',
     });
 
+    log(`✅ SUCCESS: Post ${postNumber} published, queue advanced. Total time: ${Date.now() - startTime}ms`);
+
     return res.status(200).json({
       success: true,
       posted: {
@@ -137,22 +164,27 @@ export default async function handler(req, res) {
       },
     });
   } catch (error) {
+    log(`💥 CAUGHT ERROR: ${error.message} (${Date.now() - startTime}ms elapsed)`);
     console.error('Twitter posting error:', error.message);
 
     // Log error and increment retry count
     try {
       const postOrder = await getNextPostOrder('twitter');
-      await incrementRetryCount('twitter', postOrder);
+      const retryCount = await incrementRetryCount('twitter', postOrder);
+      log(`Error details: postOrder=${postOrder}, retryCount=${retryCount}`);
       await logError({
         platform: 'twitter',
         postOrder,
         action: 'error',
+        retryCount,
         reason: error.message,
       });
     } catch (logErr) {
       console.error('Error logging failure:', logErr.message);
+      log(`💥 DOUBLE FAULT: Failed to log error: ${logErr.message}`);
     }
 
+    log(`✗ RETURNING 500: ${error.message}`);
     return res.status(500).json({ success: false, error: error.message });
   }
 }
