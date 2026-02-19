@@ -3,20 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 060 — Harmonic Oscillator Settings | Carousel Preview</title>
+  <title>Post 060 — High Conviction Trading | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0a0a0f;
-      --bg-card: rgba(255,255,255,0.03);
       --text-primary: #ffffff;
       --text-secondary: rgba(255,255,255,0.7);
       --text-muted: rgba(255,255,255,0.4);
       --border-subtle: rgba(255,255,255,0.1);
       --accent-teal: #5eead4;
-      --accent-teal-dim: rgba(94,234,212,0.3);
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -27,38 +25,22 @@
     body.export-mode { padding: 0; background: transparent; }
     body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
     body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; margin: 0; }
+    body.export-mode .slide-wrapper { display: none; }
     body.export-mode .slide-wrapper.active { display: block; }
     body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
     .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
-    .page-title { text-align: center; margin-bottom: 2rem; }
-    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
-
     .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
     .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
     .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
-    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
+    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .slide::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
+    .slide::after { content: ''; position: absolute; top: 0; left: 15px; width: 50px; height: 100%; background: #5eead4; z-index: 5; opacity: 0.3; }
+    .slide-content { position: relative; z-index: 3; flex: 1; display: flex; flex-direction: column; padding: 5% 6%; gap: clamp(1rem, 3cqw, 2rem); }
 
-    /* Teal slide base — LEFT bar */
-    .slide-teal { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
-    .slide-teal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-teal.slide-1::after { content: ''; position: absolute; top: 0; left: 15px; width: 50px; height: 100%; background: #5eead4; z-index: 5; }
-    .slide-teal .slide-content { z-index: 3; }
-
-    /* Slide 1 — cinematic centered layout, no video */
-    .slide-1 .video-bg, .slide-1 video { display: none !important; }
-    .slide-teal.slide-1 .slide-content { align-items: center !important; text-align: center !important; justify-content: center !important; z-index: 3; }
-
-    /* Logo — teal for docs */
     .slide-logo {
       position: absolute;
-      bottom: 4%;
+      bottom: 3%;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Gugi', sans-serif;
@@ -70,1041 +52,256 @@
       white-space: nowrap;
     }
 
-    /* =============================================
-       SLIDE 1 — Hook
-       ============================================= */
-    .slide-1 .hook-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.55rem, 1.4cqw, 0.75rem);
-      font-weight: 500;
-      color: rgba(94,234,212,0.9);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: clamp(1rem, 4cqw, 2.5rem);
-    }
-    .slide-1 .hook-question {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 5.5cqw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.2;
-      color: var(--text-primary);
-      margin-bottom: clamp(1rem, 3cqw, 2rem);
-      overflow: hidden;
-    }
-    .slide-1 .hook-divider {
-      width: clamp(2.5rem, 10cqw, 5rem);
-      height: 2px;
-      background: rgba(94,234,212,0.6);
-      margin-bottom: clamp(1rem, 3cqw, 2rem);
-    }
-    .slide-1 .hook-subtitle {
-      font-family: var(--font-sans);
-      font-size: clamp(0.9rem, 2.5cqw, 1.3rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      max-width: 90%;
-    }
-    .slide-1 .hook-subtitle em {
-      font-style: italic;
-      color: rgba(94,234,212,0.9);
-    }
-    /* Oscillator Orb for Slide 1 */
-    .oscillator-orb {
-      width: clamp(90px, 18cqw, 180px);
-      height: clamp(90px, 18cqw, 180px);
-      border-radius: 50%;
-      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.35) 0%, rgba(94,234,212,0.12) 40%, rgba(96,165,250,0.06) 65%, transparent 100%);
-      border: 2px solid rgba(94,234,212,0.3);
-      box-shadow: 0 0 50px rgba(94,234,212,0.15), 0 0 100px rgba(94,234,212,0.06), inset 0 0 40px rgba(94,234,212,0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      margin-bottom: 5%;
-    }
-    .oscillator-orb::before {
-      content: '';
-      position: absolute;
-      inset: 8px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(94,234,212,0.18);
-    }
-    .oscillator-orb::after {
-      content: '';
-      position: absolute;
-      inset: 20px;
-      border-radius: 50%;
-      border: 1px dashed rgba(94,234,212,0.15);
-    }
-    .oscillator-viz {
-      position: relative;
-      width: clamp(60px, 12cqw, 100px);
-      height: clamp(40px, 8cqw, 70px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    /* ===== SLIDE 1 — Title ===== */
+    .slide-1 .slide-content { align-items: center; justify-content: center; text-align: center; }
+    .slide-1 .title-label { font-family: var(--font-mono); font-size: clamp(0.55rem, 1.4cqw, 0.75rem); color: rgba(94,234,212,0.9); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 2rem; }
+    .slide-1 .title-main { font-family: var(--font-serif); font-size: clamp(2.2rem, 5.5cqw, 3.2rem); font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+    .slide-1 .title-sub { font-size: clamp(0.95rem, 2.5cqw, 1.3rem); font-weight: 300; color: var(--text-secondary); line-height: 1.5; }
+    .slide-1 .orb { width: clamp(80px, 16cqw, 160px); height: clamp(80px, 16cqw, 160px); border-radius: 50%; border: 2px solid rgba(94,234,212,0.3); background: radial-gradient(circle at 35% 30%, rgba(94,234,212,0.2), transparent 70%); margin-bottom: 2rem; }
 
-    .slide-1 .oscillator-preview {
-      margin-top: clamp(1.5rem, 4cqw, 2.5rem);
-      margin-bottom: 0;
-      height: clamp(2rem, 7cqw, 4rem);
-      width: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-    .slide-1 .wave-line {
-      position: absolute;
-      bottom: 50%;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: rgba(94,234,212,0.15);
-    }
-    .slide-1 .wave-dots {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-    }
-    .slide-1 .wave-dot {
-      width: clamp(4px, 0.9cqw, 6px);
-      height: clamp(4px, 0.9cqw, 6px);
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(139,235,222,0.95), rgba(94,234,212,0.8));
-      opacity: 0.9;
-      box-shadow: 0 0 8px rgba(94,234,212,0.8), 0 0 16px rgba(94,234,212,0.4);
-      border: 0.5px solid rgba(94,234,212,0.7);
-    }
-    .slide-1 .wave-dot:nth-child(1) { transform: translateY(0); }
-    .slide-1 .wave-dot:nth-child(2) { transform: translateY(-60%); }
-    .slide-1 .wave-dot:nth-child(3) { transform: translateY(-95%); }
-    .slide-1 .wave-dot:nth-child(4) { transform: translateY(-60%); }
-    .slide-1 .wave-dot:nth-child(5) { transform: translateY(0); }
-    .slide-1 .wave-dot:nth-child(6) { transform: translateY(60%); }
-    .slide-1 .wave-dot:nth-child(7) { transform: translateY(95%); }
-    .slide-1 .wave-dot:nth-child(8) { transform: translateY(60%); }
-    .slide-1 .wave-dot:nth-child(9) { transform: translateY(0); }
-    .slide-1 .wave-dot:nth-child(10) { transform: translateY(-60%); }
-    .slide-1 .wave-dot:nth-child(11) { transform: translateY(-95%); }
-    .slide-1 .wave-dot:nth-child(12) { transform: translateY(-60%); }
-    .slide-1 .wave-dot:nth-child(13) { transform: translateY(0); }
+    /* ===== SLIDE 2 — Problem (2-column) ===== */
+    .slide-2 .section-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.8rem); color: rgba(94,234,212,0.9); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .slide-2 .section-title { font-family: var(--font-serif); font-size: clamp(1.6rem, 4cqw, 2.4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; }
+    .slide-2 .problems-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.6rem, 1.5cqw, 1.2rem); flex: 1; }
+    .slide-2 .problem-item { background: rgba(94,234,212,0.05); border: 1px solid rgba(94,234,212,0.15); border-radius: clamp(6px, 1cqw, 10px); padding: clamp(0.6rem, 1.2cqw, 1rem); display: flex; flex-direction: column; justify-content: center; }
+    .slide-2 .problem-icon { font-size: clamp(1.4rem, 3cqw, 2.2rem); margin-bottom: 0.4rem; }
+    .slide-2 .problem-title { font-size: clamp(0.65rem, 1.5cqw, 0.95rem); font-weight: 700; color: var(--accent-teal); margin-bottom: 0.3rem; }
+    .slide-2 .problem-desc { font-size: clamp(0.55rem, 1.2cqw, 0.8rem); color: var(--text-secondary); line-height: 1.3; }
 
-    /* =============================================
-       SLIDE 2 — Default Settings
-       ============================================= */
-    .slide-2 .section-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.5rem, 1.2cqw, 0.7rem);
-      font-weight: 500;
-      color: rgba(94,234,212,0.9);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: clamp(0.3rem, 1cqw, 0.6rem);
-      margin-top: clamp(0.5rem, 2cqw, 1.5rem);
-    }
-    .slide-2 .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 5.2cqw, 3rem);
-      font-weight: 600;
-      line-height: 1.15;
-      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
-    }
-    .slide-2 .wave-viz {
-      position: relative;
-      width: 100%;
-      height: clamp(3rem, 10cqw, 6rem);
-      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
-      display: flex;
-      align-items: center;
-    }
-    .slide-2 .wave-center-line {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: rgba(94,234,212,0.15);
-    }
-    .slide-2 .wave-bar-group {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(2px, 0.5cqw, 4px);
-      width: 100%;
-      height: 100%;
-    }
-    .slide-2 .wave-bar {
-      width: clamp(2px, 0.6cqw, 4px);
-      background: var(--accent-teal);
-      border-radius: 2px;
-      opacity: 0.7;
-    }
-    /* Medium frequency sine wave — 24 bars */
-    .slide-2 .wave-bar:nth-child(1)  { height: 5%; }
-    .slide-2 .wave-bar:nth-child(2)  { height: 20%; }
-    .slide-2 .wave-bar:nth-child(3)  { height: 42%; }
-    .slide-2 .wave-bar:nth-child(4)  { height: 65%; }
-    .slide-2 .wave-bar:nth-child(5)  { height: 85%; }
-    .slide-2 .wave-bar:nth-child(6)  { height: 97%; }
-    .slide-2 .wave-bar:nth-child(7)  { height: 97%; }
-    .slide-2 .wave-bar:nth-child(8)  { height: 85%; }
-    .slide-2 .wave-bar:nth-child(9)  { height: 65%; }
-    .slide-2 .wave-bar:nth-child(10) { height: 42%; }
-    .slide-2 .wave-bar:nth-child(11) { height: 20%; }
-    .slide-2 .wave-bar:nth-child(12) { height: 5%; }
-    .slide-2 .wave-bar:nth-child(13) { height: 5%; }
-    .slide-2 .wave-bar:nth-child(14) { height: 20%; }
-    .slide-2 .wave-bar:nth-child(15) { height: 42%; }
-    .slide-2 .wave-bar:nth-child(16) { height: 65%; }
-    .slide-2 .wave-bar:nth-child(17) { height: 85%; }
-    .slide-2 .wave-bar:nth-child(18) { height: 97%; }
-    .slide-2 .wave-bar:nth-child(19) { height: 97%; }
-    .slide-2 .wave-bar:nth-child(20) { height: 85%; }
-    .slide-2 .wave-bar:nth-child(21) { height: 65%; }
-    .slide-2 .wave-bar:nth-child(22) { height: 42%; }
-    .slide-2 .wave-bar:nth-child(23) { height: 20%; }
-    .slide-2 .wave-bar:nth-child(24) { height: 5%; }
+    /* ===== SLIDE 3 — Solution (Highlight) ===== */
+    .slide-3 .section-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.8rem); color: rgba(94,234,212,0.9); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .slide-3 .section-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4.2cqw, 2.6rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+    .slide-3 .solution-box { background: linear-gradient(135deg, rgba(94,234,212,0.1) 0%, rgba(94,234,212,0.03) 100%); border: 2px solid rgba(94,234,212,0.3); border-radius: clamp(8px, 1.5cqw, 12px); padding: clamp(1rem, 2.5cqw, 1.8rem); text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .slide-3 .solution-number { font-family: var(--font-serif); font-size: clamp(2.5rem, 6cqw, 4rem); font-weight: 700; color: var(--accent-teal); margin-bottom: 0.5rem; }
+    .slide-3 .solution-text { font-size: clamp(0.75rem, 1.8cqw, 1.1rem); color: var(--text-secondary); line-height: 1.4; }
+    .slide-3 .benefits { display: flex; flex-direction: column; gap: clamp(0.6rem, 1.2cqw, 1rem); margin-top: 1rem; }
+    .slide-3 .benefit { display: flex; align-items: center; gap: clamp(0.5rem, 1cqw, 0.8rem); font-size: clamp(0.55rem, 1.2cqw, 0.8rem); }
+    .slide-3 .benefit-dot { width: clamp(3px, 0.7cqw, 5px); height: clamp(3px, 0.7cqw, 5px); border-radius: 50%; background: var(--accent-teal); flex-shrink: 0; }
 
-    .slide-2 .settings-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(94,234,212,0.15);
-      border-radius: clamp(4px, 1cqw, 8px);
-      padding: clamp(0.6rem, 2.5cqw, 1.5rem);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .slide-2 .card-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.75rem, 1.7cqw, 1rem);
-      font-weight: 500;
-      color: var(--accent-teal);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-      padding-bottom: clamp(0.3rem, 1cqw, 0.6rem);
-      border-bottom: 1px solid rgba(94,234,212,0.15);
-    }
-    .slide-2 .param-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: clamp(0.2rem, 0.8cqw, 0.5rem) 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-    .slide-2 .param-row:last-of-type {
-      border-bottom: none;
-    }
-    .slide-2 .param-key {
-      font-family: var(--font-mono);
-      font-size: clamp(0.75rem, 1.8cqw, 1.1rem);
-      color: var(--text-secondary);
-    }
-    .slide-2 .param-val {
-      font-family: var(--font-mono);
-      font-size: clamp(0.75rem, 1.8cqw, 1.1rem);
-      color: var(--accent-teal);
-      font-weight: 500;
-    }
-    .slide-2 .benefits {
-      margin-top: clamp(0.5rem, 1.5cqw, 1rem);
-      display: flex;
-      flex-direction: column;
-      gap: clamp(0.2rem, 0.6cqw, 0.4rem);
-    }
-    .slide-2 .benefit-item {
-      display: flex;
-      align-items: center;
-      gap: clamp(0.3rem, 0.8cqw, 0.5rem);
-      font-size: clamp(0.65rem, 1.6cqw, 0.95rem);
-      color: var(--text-secondary);
-    }
-    .slide-2 .benefit-dot {
-      width: clamp(3px, 0.6cqw, 5px);
-      height: clamp(3px, 0.6cqw, 5px);
-      border-radius: 50%;
-      background: var(--accent-teal);
-      flex-shrink: 0;
-    }
+    /* ===== SLIDE 4 — Trader Types (3-column) ===== */
+    .slide-4 .section-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.8rem); color: rgba(94,234,212,0.9); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .slide-4 .section-title { font-family: var(--font-serif); font-size: clamp(1.5rem, 3.8cqw, 2.2rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+    .slide-4 .traders-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(0.6rem, 1.2cqw, 1rem); flex: 1; }
+    .slide-4 .trader-card { background: rgba(94,234,212,0.06); border: 1px solid rgba(94,234,212,0.2); border-radius: clamp(6px, 1cqw, 10px); padding: clamp(0.8rem, 1.5cqw, 1.2rem); display: flex; flex-direction: column; justify-content: space-between; }
+    .slide-4 .trader-name { font-size: clamp(0.7rem, 1.6cqw, 0.95rem); font-weight: 700; color: var(--accent-teal); margin-bottom: 0.5rem; text-transform: uppercase; }
+    .slide-4 .trader-mode { font-size: clamp(0.6rem, 1.4cqw, 0.9rem); color: var(--text-secondary); font-family: var(--font-mono); }
 
-    /* =============================================
-       SLIDE 3 — Faster Settings
-       ============================================= */
-    .slide-3 .section-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.5rem, 1.2cqw, 0.7rem);
-      font-weight: 500;
-      color: rgba(94,234,212,0.9);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: clamp(0.3rem, 1cqw, 0.6rem);
-      margin-top: clamp(0.5rem, 2cqw, 1.5rem);
-    }
-    .slide-3 .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.3rem, 4.5cqw, 2.6rem);
-      font-weight: 600;
-      line-height: 1.15;
-      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
-    }
-    .slide-3 .wave-viz {
-      position: relative;
-      width: 100%;
-      height: clamp(3rem, 10cqw, 6rem);
-      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
-      display: flex;
-      align-items: center;
-    }
-    .slide-3 .wave-center-line {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: rgba(251,191,36,0.15);
-    }
-    .slide-3 .wave-bar-group {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(1px, 0.25cqw, 2px);
-      width: 100%;
-      height: 100%;
-    }
-    .slide-3 .wave-bar {
-      width: clamp(2px, 0.45cqw, 3px);
-      border-radius: 1px;
-      opacity: 0.8;
-      background: #fbbf24;
-    }
-    /* Faster / tighter oscillations — 36 bars, compressed sine */
-    .slide-3 .wave-bar:nth-child(1)  { height: 5%; }
-    .slide-3 .wave-bar:nth-child(2)  { height: 35%; }
-    .slide-3 .wave-bar:nth-child(3)  { height: 70%; }
-    .slide-3 .wave-bar:nth-child(4)  { height: 95%; }
-    .slide-3 .wave-bar:nth-child(5)  { height: 95%; }
-    .slide-3 .wave-bar:nth-child(6)  { height: 70%; }
-    .slide-3 .wave-bar:nth-child(7)  { height: 35%; }
-    .slide-3 .wave-bar:nth-child(8)  { height: 5%; }
-    .slide-3 .wave-bar:nth-child(9)  { height: 5%; }
-    .slide-3 .wave-bar:nth-child(10) { height: 35%; }
-    .slide-3 .wave-bar:nth-child(11) { height: 70%; }
-    .slide-3 .wave-bar:nth-child(12) { height: 95%; }
-    .slide-3 .wave-bar:nth-child(13) { height: 95%; }
-    .slide-3 .wave-bar:nth-child(14) { height: 70%; }
-    .slide-3 .wave-bar:nth-child(15) { height: 35%; }
-    .slide-3 .wave-bar:nth-child(16) { height: 5%; }
-    .slide-3 .wave-bar:nth-child(17) { height: 5%; }
-    .slide-3 .wave-bar:nth-child(18) { height: 35%; }
-    .slide-3 .wave-bar:nth-child(19) { height: 70%; }
-    .slide-3 .wave-bar:nth-child(20) { height: 95%; }
-    .slide-3 .wave-bar:nth-child(21) { height: 95%; }
-    .slide-3 .wave-bar:nth-child(22) { height: 70%; }
-    .slide-3 .wave-bar:nth-child(23) { height: 35%; }
-    .slide-3 .wave-bar:nth-child(24) { height: 5%; }
-    .slide-3 .wave-bar:nth-child(25) { height: 5%; }
-    .slide-3 .wave-bar:nth-child(26) { height: 35%; }
-    .slide-3 .wave-bar:nth-child(27) { height: 70%; }
-    .slide-3 .wave-bar:nth-child(28) { height: 95%; }
-    .slide-3 .wave-bar:nth-child(29) { height: 95%; }
-    .slide-3 .wave-bar:nth-child(30) { height: 70%; }
-    .slide-3 .wave-bar:nth-child(31) { height: 35%; }
-    .slide-3 .wave-bar:nth-child(32) { height: 5%; }
-    .slide-3 .wave-bar:nth-child(33) { height: 5%; }
-    .slide-3 .wave-bar:nth-child(34) { height: 35%; }
-    .slide-3 .wave-bar:nth-child(35) { height: 70%; }
-    .slide-3 .wave-bar:nth-child(36) { height: 95%; }
+    /* ===== SLIDE 5 — Comparison Table ===== */
+    .slide-5 .section-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.8rem); color: rgba(94,234,212,0.9); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .slide-5 .section-title { font-family: var(--font-serif); font-size: clamp(1.4rem, 3.5cqw, 2rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+    .slide-5 .comparison-table { flex: 1; display: flex; flex-direction: column; gap: clamp(0.5rem, 1cqw, 0.8rem); }
+    .slide-5 .table-header { display: grid; grid-template-columns: 1.2fr 1fr 1.2fr 1fr; gap: clamp(0.4rem, 0.8cqw, 0.6rem); font-size: clamp(0.55rem, 1.2cqw, 0.8rem); font-weight: 700; color: var(--accent-teal); padding-bottom: clamp(0.4rem, 0.8cqw, 0.6rem); border-bottom: 1px solid rgba(94,234,212,0.2); }
+    .slide-5 .table-row { display: grid; grid-template-columns: 1.2fr 1fr 1.2fr 1fr; gap: clamp(0.4rem, 0.8cqw, 0.6rem); font-size: clamp(0.5rem, 1.1cqw, 0.75rem); padding: clamp(0.5rem, 1cqw, 0.8rem) 0; border-bottom: 1px solid rgba(94,234,212,0.1); }
+    .slide-5 .setting-name { font-weight: 600; color: var(--text-primary); }
 
-    .slide-3 .settings-card {
-      background: rgba(251,191,36,0.03);
-      border: 1px solid rgba(251,191,36,0.15);
-      border-radius: clamp(4px, 1cqw, 8px);
-      padding: clamp(0.6rem, 2.5cqw, 1.5rem);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .slide-3 .card-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.65rem, 1.5cqw, 0.9rem);
-      font-weight: 500;
-      color: #fbbf24;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-      padding-bottom: clamp(0.3rem, 1cqw, 0.6rem);
-      border-bottom: 1px solid rgba(251,191,36,0.15);
-    }
-    .slide-3 .param-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: clamp(0.2rem, 0.8cqw, 0.5rem) 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-    .slide-3 .param-row:last-of-type { border-bottom: none; }
-    .slide-3 .param-key {
-      font-family: var(--font-mono);
-      font-size: clamp(0.65rem, 1.6cqw, 0.95rem);
-      color: var(--text-secondary);
-    }
-    .slide-3 .param-val {
-      font-family: var(--font-mono);
-      font-size: clamp(0.65rem, 1.6cqw, 0.95rem);
-      color: #fbbf24;
-      font-weight: 500;
-    }
-    .slide-3 .traits {
-      margin-top: clamp(0.5rem, 1.5cqw, 1rem);
-      display: flex;
-      flex-direction: column;
-      gap: clamp(0.2rem, 0.6cqw, 0.4rem);
-    }
-    .slide-3 .trait-item {
-      display: flex;
-      align-items: center;
-      gap: clamp(0.3rem, 0.8cqw, 0.5rem);
-      font-size: clamp(0.65rem, 1.6cqw, 0.95rem);
-      color: var(--text-secondary);
-    }
-    .slide-3 .trait-dot {
-      width: clamp(3px, 0.6cqw, 5px);
-      height: clamp(3px, 0.6cqw, 5px);
-      border-radius: 50%;
-      background: #fbbf24;
-      flex-shrink: 0;
-    }
-    .slide-3 .trait-item.caution .trait-dot {
-      background: rgba(251,191,36,0.4);
-    }
-    .slide-3 .trait-item.caution {
-      color: var(--text-muted);
-    }
-
-    /* =============================================
-       SLIDE 4 — Slower Settings
-       ============================================= */
-    .slide-4 .section-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.5rem, 1.2cqw, 0.7rem);
-      font-weight: 500;
-      color: rgba(94,234,212,0.9);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: clamp(0.3rem, 1cqw, 0.6rem);
-      margin-top: clamp(0.5rem, 2cqw, 1.5rem);
-    }
-    .slide-4 .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.3rem, 4.5cqw, 2.6rem);
-      font-weight: 600;
-      line-height: 1.15;
-      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
-    }
-    .slide-4 .wave-viz {
-      position: relative;
-      width: 100%;
-      height: clamp(3rem, 10cqw, 6rem);
-      margin-bottom: clamp(0.8rem, 2.5cqw, 1.5rem);
-      display: flex;
-      align-items: center;
-    }
-    .slide-4 .wave-center-line {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: rgba(96,165,250,0.15);
-    }
-    .slide-4 .wave-bar-group {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(3px, 0.9cqw, 7px);
-      width: 100%;
-      height: 100%;
-    }
-    .slide-4 .wave-bar {
-      width: clamp(3px, 0.8cqw, 6px);
-      border-radius: 2px;
-      opacity: 0.7;
-      background: #60a5fa;
-    }
-    /* Slower / stretched oscillations — 14 bars, gentle sine */
-    .slide-4 .wave-bar:nth-child(1)  { height: 10%; }
-    .slide-4 .wave-bar:nth-child(2)  { height: 25%; }
-    .slide-4 .wave-bar:nth-child(3)  { height: 48%; }
-    .slide-4 .wave-bar:nth-child(4)  { height: 72%; }
-    .slide-4 .wave-bar:nth-child(5)  { height: 90%; }
-    .slide-4 .wave-bar:nth-child(6)  { height: 98%; }
-    .slide-4 .wave-bar:nth-child(7)  { height: 98%; }
-    .slide-4 .wave-bar:nth-child(8)  { height: 90%; }
-    .slide-4 .wave-bar:nth-child(9)  { height: 72%; }
-    .slide-4 .wave-bar:nth-child(10) { height: 48%; }
-    .slide-4 .wave-bar:nth-child(11) { height: 25%; }
-    .slide-4 .wave-bar:nth-child(12) { height: 10%; }
-    .slide-4 .wave-bar:nth-child(13) { height: 10%; }
-    .slide-4 .wave-bar:nth-child(14) { height: 25%; }
-
-    .slide-4 .settings-card {
-      background: rgba(96,165,250,0.03);
-      border: 1px solid rgba(96,165,250,0.15);
-      border-radius: clamp(4px, 1cqw, 8px);
-      padding: clamp(0.6rem, 2.5cqw, 1.5rem);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .slide-4 .card-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.65rem, 1.5cqw, 0.9rem);
-      font-weight: 500;
-      color: #60a5fa;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-      padding-bottom: clamp(0.3rem, 1cqw, 0.6rem);
-      border-bottom: 1px solid rgba(96,165,250,0.15);
-    }
-    .slide-4 .param-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: clamp(0.2rem, 0.8cqw, 0.5rem) 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-    .slide-4 .param-row:last-of-type { border-bottom: none; }
-    .slide-4 .param-key {
-      font-family: var(--font-mono);
-      font-size: clamp(0.65rem, 1.6cqw, 0.95rem);
-      color: var(--text-secondary);
-    }
-    .slide-4 .param-val {
-      font-family: var(--font-mono);
-      font-size: clamp(0.65rem, 1.6cqw, 0.95rem);
-      color: #60a5fa;
-      font-weight: 500;
-    }
-    .slide-4 .traits {
-      margin-top: clamp(0.5rem, 1.5cqw, 1rem);
-      display: flex;
-      flex-direction: column;
-      gap: clamp(0.2rem, 0.6cqw, 0.4rem);
-    }
-    .slide-4 .trait-item {
-      display: flex;
-      align-items: center;
-      gap: clamp(0.3rem, 0.8cqw, 0.5rem);
-      font-size: clamp(0.65rem, 1.6cqw, 0.95rem);
-      color: var(--text-secondary);
-    }
-    .slide-4 .trait-dot {
-      width: clamp(3px, 0.6cqw, 5px);
-      height: clamp(3px, 0.6cqw, 5px);
-      border-radius: 50%;
-      background: #60a5fa;
-      flex-shrink: 0;
-    }
-    .slide-4 .trait-item.caution .trait-dot {
-      background: rgba(96,165,250,0.4);
-    }
-    .slide-4 .trait-item.caution {
-      color: var(--text-muted);
-    }
-
-    /* =============================================
-       SLIDE 5 — Comparison Table
-       ============================================= */
-    .slide-5 .section-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.5rem, 1.2cqw, 0.7rem);
-      font-weight: 500;
-      color: rgba(94,234,212,0.9);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: clamp(0.3rem, 1cqw, 0.6rem);
-      margin-top: clamp(0.5rem, 2cqw, 1.5rem);
-    }
-    .slide-5 .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.3rem, 4.5cqw, 2.6rem);
-      font-weight: 600;
-      line-height: 1.15;
-      margin-bottom: clamp(1rem, 3cqw, 2rem);
-    }
-    .slide-5 .comparison-table {
-      width: 100%;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .slide-5 .table-header {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1.2fr 1.2fr;
-      gap: clamp(2px, 0.4cqw, 4px);
-      padding: clamp(0.3rem, 1cqw, 0.7rem) 0;
-      border-bottom: 1px solid rgba(94,234,212,0.2);
-      margin-bottom: clamp(0.3rem, 0.8cqw, 0.5rem);
-    }
-    .slide-5 .table-header span {
-      font-family: var(--font-mono);
-      font-size: clamp(0.65rem, 1.5cqw, 0.95rem);
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-    }
-    .slide-5 .table-row {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1.2fr 1.2fr;
-      gap: clamp(2px, 0.4cqw, 4px);
-      padding: clamp(0.4rem, 1.3cqw, 0.9rem) 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      align-items: center;
-    }
-    .slide-5 .table-row:last-child {
-      border-bottom: none;
-    }
-    .slide-5 .row-setting {
-      display: flex;
-      align-items: center;
-      gap: clamp(0.25rem, 0.7cqw, 0.5rem);
-    }
-    .slide-5 .row-indicator {
-      width: clamp(3px, 0.6cqw, 5px);
-      height: clamp(12px, 3cqw, 20px);
-      border-radius: 2px;
-      flex-shrink: 0;
-    }
-    .slide-5 .row-indicator.teal { background: var(--accent-teal); }
-    .slide-5 .row-indicator.amber { background: #fbbf24; }
-    .slide-5 .row-indicator.blue { background: #60a5fa; }
-    .slide-5 .row-setting-name {
-      font-family: var(--font-mono);
-      font-size: clamp(0.55rem, 1.35cqw, 0.8rem);
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-    .slide-5 .row-cell {
-      font-size: clamp(0.65rem, 1.6cqw, 0.95rem);
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-    .slide-5 .bottom-message {
-      margin-top: auto;
-      padding-top: clamp(0.6rem, 2cqw, 1.2rem);
-      border-top: 1px solid rgba(94,234,212,0.12);
-      text-align: center;
-    }
-    .slide-5 .bottom-message p {
-      font-family: var(--font-serif);
-      font-size: clamp(0.75rem, 2.5cqw, 1.4rem);
-      font-weight: 600;
-      font-style: italic;
-      color: var(--accent-teal);
-    }
-
-    /* =============================================
-       SLIDE 6 — CTA
-       ============================================= */
-    .slide-6 .cta-layout {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: clamp(1rem, 4cqw, 3rem) 0;
-    }
-    .slide-6 .cta-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.55rem, 1.4cqw, 0.75rem);
-      font-weight: 500;
-      color: rgba(94,234,212,0.9);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: clamp(1rem, 3cqw, 2rem);
-    }
-    .slide-6 .cta-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 5.5cqw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-    }
-    .slide-6 .cta-subtitle {
-      font-size: clamp(0.55rem, 1.6cqw, 0.9rem);
-      color: var(--text-secondary);
-      font-weight: 300;
-      line-height: 1.5;
-      max-width: 80%;
-      margin: 0 auto clamp(1.5rem, 5cqw, 3rem);
-    }
-    .slide-6 .cta-divider {
-      width: clamp(2.5rem, 10cqw, 5rem);
-      height: 2px;
-      background: rgba(94,234,212,0.6);
-      margin-bottom: clamp(1.5rem, 5cqw, 3rem);
-    }
-    .slide-6 .cta-box {
-      border: 1px solid rgba(94,234,212,0.35);
-      border-radius: clamp(4px, 1cqw, 8px);
-      padding: clamp(0.7rem, 2.5cqw, 1.5rem) clamp(1.2rem, 4cqw, 2.5rem);
-      background: rgba(94,234,212,0.04);
-    }
-    .slide-6 .cta-box-label {
-      font-family: var(--font-mono);
-      font-size: clamp(0.6rem, 1.3cqw, 0.8rem);
-      color: var(--text-muted);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: clamp(0.3rem, 0.8cqw, 0.5rem);
-    }
-    .slide-6 .cta-box-link {
-      font-family: var(--font-mono);
-      font-size: clamp(0.55rem, 1.5cqw, 0.85rem);
-      color: var(--accent-teal);
-      font-weight: 500;
-      letter-spacing: 0.05em;
-    }
+    /* ===== SLIDE 6 — CTA ===== */
+    .slide-6 .slide-content { align-items: center; justify-content: center; text-align: center; }
+    .slide-6 .cta-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.8rem); color: rgba(94,234,212,0.9); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 1rem; }
+    .slide-6 .cta-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4.5cqw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+    .slide-6 .cta-subtitle { font-size: clamp(0.65rem, 1.5cqw, 0.95rem); color: var(--text-secondary); line-height: 1.4; margin-bottom: 1.5rem; }
+    .slide-6 .cta-button { background: linear-gradient(135deg, rgba(94,234,212,0.15) 0%, rgba(94,234,212,0.05) 100%); border: 2px solid var(--accent-teal); border-radius: clamp(6px, 1.2cqw, 10px); padding: clamp(0.8rem, 1.8cqw, 1.2rem) clamp(1.2rem, 2.5cqw, 1.8rem); }
+    .slide-6 .cta-button-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.85rem); letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-teal); font-weight: 600; }
+    .slide-6 .cta-button-link { font-size: clamp(0.75rem, 1.8cqw, 1.1rem); color: var(--accent-teal); font-weight: 700; margin-top: clamp(0.3rem, 0.6cqw, 0.5rem); }
   </style>
 </head>
 <body>
-
-  <!-- Controls -->
-  <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
-    <button id="export-btn">Export Mode</button>
-  </div>
-
-  <!-- Page Title -->
-  <div class="page-title">
-    <h1>Post 060 — Harmonic Oscillator</h1>
-    <p>5 slides &middot; Reference &middot; Voting System</p>
-  </div>
-
-  <!-- Carousel Grid -->
   <div class="carousel-grid">
-
-    <!-- ==================== SLIDE 1 — Hook ==================== -->
+    <!-- SLIDE 1 — Title -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Hook</span>
-      <div class="slide slide-teal slide-1">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 1 — Title</span>
+      <div class="slide slide-1">
         <div class="slide-content">
-          <div class="hook-label">REFERENCE</div>
-          <div class="oscillator-orb">
-            <div class="oscillator-viz">
-              <div class="oscillator-preview" style="margin-top: 0; margin-bottom: 0; height: 100%; width: 100%;">
-                <div class="wave-line" style="opacity: 0.3;"></div>
-                <div class="wave-dots">
-                  <span class="wave-dot"></span>
-                  <span class="wave-dot"></span>
-                  <span class="wave-dot"></span>
-                  <span class="wave-dot"></span>
-                  <span class="wave-dot"></span>
-                  <span class="wave-dot"></span>
-                  <span class="wave-dot"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="hook-question">Seven Voices.<br>One <em>Verdict</em>.</div>
-          <div class="hook-divider"></div>
-          <div class="hook-subtitle">Harmonic Oscillator &mdash; <em>Consensus Voting</em></div>
-          <div class="slide-logo">Signal Pilot</div>
+          <div class="orb"></div>
+          <div class="title-label">Reference</div>
+          <div class="title-main">Seven Voices.<br>One Verdict.</div>
+          <div class="title-sub">Master high conviction trading with consensus signals</div>
         </div>
+        <div class="slide-logo">Signal Pilot</div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 2 — The Problem ==================== -->
+    <!-- SLIDE 2 — Problem (2-column grid) -->
     <div class="slide-wrapper" data-slide="2">
       <span class="slide-label">Slide 2 — The Problem</span>
-      <div class="slide slide-teal slide-2">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-2">
         <div class="slide-content">
-          <div class="section-label">THE REAL PROBLEM</div>
+          <div class="section-label">Why Traders Fail</div>
           <div class="section-title">False Signals = Lost Money</div>
-          <div class="wave-viz">
-            <div class="wave-center-line"></div>
-            <div class="wave-bar-group">
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
+          <div class="problems-grid">
+            <div class="problem-item">
+              <div class="problem-icon">⚡</div>
+              <div class="problem-title">Whipsawed</div>
+              <div class="problem-desc">Conflicting signals trap you</div>
+            </div>
+            <div class="problem-item">
+              <div class="problem-icon">📉</div>
+              <div class="problem-title">Over-Trading</div>
+              <div class="problem-desc">Weak setups for quick profit</div>
+            </div>
+            <div class="problem-item">
+              <div class="problem-icon">😰</div>
+              <div class="problem-title">No Conviction</div>
+              <div class="problem-desc">Panic exit winners early</div>
+            </div>
+            <div class="problem-item">
+              <div class="problem-icon">📊</div>
+              <div class="problem-title">Drawdowns</div>
+              <div class="problem-desc">Thesis collapse in losses</div>
             </div>
           </div>
-          <div class="settings-card" style="background:rgba(94,234,212,0.03); border:1px solid rgba(94,234,212,0.15); border-radius:clamp(8px,1.5cqw,12px); padding:clamp(10px,2cqw,16px);">
-            <div class="card-label" style="font-family:var(--font-mono); font-size:clamp(8px,1.4cqw,12px); color:var(--accent-teal); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:clamp(8px,1.5cqw,14px); padding-bottom:clamp(6px,1cqw,10px); border-bottom:1px solid rgba(94,234,212,0.15);">WHY TRADERS FAIL</div>
-            <div class="benefits" style="display:flex; flex-direction:column; gap:clamp(6px,1.2cqw,10px);">
-              <div class="benefit-item" style="display:flex; align-items:center; gap:clamp(6px,1.2cqw,10px); font-size:clamp(9px,1.6cqw,14px); color:var(--text-secondary); line-height:1.4;">
-                <span class="benefit-dot" style="width:clamp(4px,0.8cqw,6px); height:clamp(4px,0.8cqw,6px); border-radius:50%; background:var(--accent-teal); flex-shrink:0;"></span>
-                <span><span style="color:var(--accent-teal); font-weight:600;">Whipsawed</span> by conflicting signals</span>
-              </div>
-              <div class="benefit-item" style="display:flex; align-items:center; gap:clamp(6px,1.2cqw,10px); font-size:clamp(9px,1.6cqw,14px); color:var(--text-secondary); line-height:1.4;">
-                <span class="benefit-dot" style="width:clamp(4px,0.8cqw,6px); height:clamp(4px,0.8cqw,6px); border-radius:50%; background:var(--accent-teal); flex-shrink:0;"></span>
-                <span><span style="color:var(--accent-teal); font-weight:600;">Over-trading</span> weak setups for easy profit</span>
-              </div>
-              <div class="benefit-item" style="display:flex; align-items:center; gap:clamp(6px,1.2cqw,10px); font-size:clamp(9px,1.6cqw,14px); color:var(--text-secondary); line-height:1.4;">
-                <span class="benefit-dot" style="width:clamp(4px,0.8cqw,6px); height:clamp(4px,0.8cqw,6px); border-radius:50%; background:var(--accent-teal); flex-shrink:0;"></span>
-                <span><span style="color:var(--accent-teal); font-weight:600;">No conviction</span>: Panic exiting winners</span>
-              </div>
-              <div class="benefit-item" style="display:flex; align-items:center; gap:clamp(6px,1.2cqw,10px); font-size:clamp(9px,1.6cqw,14px); color:var(--text-secondary); line-height:1.4;">
-                <span class="benefit-dot" style="width:clamp(4px,0.8cqw,6px); height:clamp(4px,0.8cqw,6px); border-radius:50%; background:var(--accent-teal); flex-shrink:0;"></span>
-                <span><span style="color:var(--accent-teal); font-weight:600;">Drawdowns</span> from thesis collapse</span>
-              </div>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
         </div>
+        <div class="slide-logo">Signal Pilot</div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 3 — High Conviction ==================== -->
+    <!-- SLIDE 3 — Solution (Highlight) -->
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — High Conviction Signals</span>
-      <div class="slide slide-teal slide-3">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 3 — The Solution</span>
+      <div class="slide slide-3">
         <div class="slide-content">
-          <div class="section-label">MAX CONVICTION</div>
+          <div class="section-label">Max Conviction</div>
           <div class="section-title">7/7 Alignment</div>
-          <div class="wave-viz">
-            <div class="wave-center-line"></div>
-            <div class="wave-bar-group">
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-            </div>
-          </div>
-          <div class="settings-card">
-            <div class="card-label">WHEN TO TRADE</div>
-            <div class="param-row">
-              <span class="param-key">All 7 Vote Bull</span>
-              <span class="param-val">🎯</span>
-            </div>
-            <div class="param-row">
-              <span class="param-key">Zero Conflicting Signals</span>
-              <span class="param-val">✓</span>
-            </div>
-            <div class="param-row">
-              <span class="param-key">High Win Probability</span>
-              <span class="param-val">✓</span>
-            </div>
-            <div class="traits">
-              <div class="trait-item">
-                <span class="trait-dot"></span>
-                <span style="color:var(--accent-teal); font-weight:600;">Trade With Conviction</span>
+          <div class="solution-box">
+            <div class="solution-number">7/7</div>
+            <div class="solution-text">When all components agree, trade with confidence</div>
+            <div class="benefits">
+              <div class="benefit">
+                <div class="benefit-dot"></div>
+                <span>No second-guessing — market is aligned</span>
               </div>
-              <div class="trait-item">
-                <span class="trait-dot"></span>
-                <span style="color:var(--accent-teal); font-weight:600;">Hold Winners Longer</span>
+              <div class="benefit">
+                <div class="benefit-dot"></div>
+                <span>Higher win rate on high conviction signals</span>
               </div>
-              <div class="trait-item">
-                <span class="trait-dot"></span>
-                <span style="color:var(--accent-teal); font-weight:600;">Reduce Stress & Whipsaws</span>
+              <div class="benefit">
+                <div class="benefit-dot"></div>
+                <span>Hold winners longer with conviction</span>
               </div>
             </div>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
         </div>
+        <div class="slide-logo">Signal Pilot</div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 4 — Trade Your Style ==================== -->
+    <!-- SLIDE 4 — Trader Types (3-column) -->
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Personalized Strategy</span>
-      <div class="slide slide-teal slide-4">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 4 — Your Style</span>
+      <div class="slide slide-4">
         <div class="slide-content">
-          <div class="section-label">YOUR STYLE</div>
-          <div class="section-title">Adapt the System</div>
-          <div class="wave-viz">
-            <div class="wave-center-line"></div>
-            <div class="wave-bar-group">
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
-              <span class="wave-bar"></span><span class="wave-bar"></span>
+          <div class="section-label">Choose Your Mode</div>
+          <div class="section-title">Match Your Strategy</div>
+          <div class="traders-grid">
+            <div class="trader-card">
+              <div>
+                <div class="trader-name">Conservative</div>
+                <div class="trader-mode">Wait for 7/7</div>
+              </div>
+              <div style="font-size: clamp(0.55rem, 1.2cqw, 0.8rem); color: var(--text-secondary);">Max confidence, fewer trades</div>
+            </div>
+            <div class="trader-card">
+              <div>
+                <div class="trader-name">Balanced</div>
+                <div class="trader-mode">Trade 5/7+</div>
+              </div>
+              <div style="font-size: clamp(0.55rem, 1.2cqw, 0.8rem); color: var(--text-secondary);">Good risk/reward mix</div>
+            </div>
+            <div class="trader-card">
+              <div>
+                <div class="trader-name">Aggressive</div>
+                <div class="trader-mode">Fast Mode</div>
+              </div>
+              <div style="font-size: clamp(0.55rem, 1.2cqw, 0.8rem); color: var(--text-secondary);">More signals, higher risk</div>
             </div>
           </div>
-          <div class="settings-card">
-            <div class="card-label">CHOOSE YOUR MODE</div>
-            <div class="param-row">
-              <span class="param-key">Conservative Trader</span>
-              <span class="param-val">Wait for 7/7</span>
-            </div>
-            <div class="param-row">
-              <span class="param-key">Aggressive Trader</span>
-              <span class="param-val">Trade 5/7+</span>
-            </div>
-            <div class="param-row">
-              <span class="param-key">Scalper</span>
-              <span class="param-val">Fast Mode</span>
-            </div>
-            <div class="traits">
-              <div class="trait-item">
-                <span class="trait-dot"></span>
-                <span style="color:var(--accent-teal); font-weight:600;">Adjust to Your Risk</span>
-              </div>
-              <div class="trait-item">
-                <span class="trait-dot"></span>
-                <span style="color:var(--accent-teal); font-weight:600;">Match Timeframe</span>
-              </div>
-              <div class="trait-item">
-                <span class="trait-dot"></span>
-                <span style="color:var(--accent-teal); font-weight:600;">Own Your Strategy</span>
-              </div>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
         </div>
+        <div class="slide-logo">Signal Pilot</div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 5 — Comparison Table ==================== -->
+    <!-- SLIDE 5 — Comparison -->
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Match Your Style</span>
-      <div class="slide slide-teal slide-5">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <span class="slide-label">Slide 5 — Comparison</span>
+      <div class="slide slide-5">
         <div class="slide-content">
-          <div class="section-label">COMPARISON</div>
-          <div class="section-title">Match Your Style</div>
+          <div class="section-label">At a Glance</div>
+          <div class="section-title">Find Your Match</div>
           <div class="comparison-table">
             <div class="table-header">
-              <span>Setting</span>
-              <span>Signals</span>
+              <span>Mode</span>
+              <span>Frequency</span>
               <span>Best For</span>
-              <span>Trade-off</span>
+              <span>Risk</span>
             </div>
             <div class="table-row">
-              <div class="row-setting">
-                <span class="row-indicator teal"></span>
-                <span class="row-setting-name">Default</span>
-              </div>
-              <div class="row-cell">Moderate</div>
-              <div class="row-cell">Most markets &amp; timeframes</div>
-              <div class="row-cell">Jack of all trades</div>
+              <span class="setting-name">Conservative</span>
+              <span>Rare</span>
+              <span>Swing Trading</span>
+              <span>Low</span>
             </div>
             <div class="table-row">
-              <div class="row-setting">
-                <span class="row-indicator amber"></span>
-                <span class="row-setting-name">Faster</span>
-              </div>
-              <div class="row-cell">Frequent</div>
-              <div class="row-cell">Scalping &amp; short-term</div>
-              <div class="row-cell">More noise</div>
+              <span class="setting-name">Balanced</span>
+              <span>Moderate</span>
+              <span>Day Trading</span>
+              <span>Medium</span>
             </div>
             <div class="table-row">
-              <div class="row-setting">
-                <span class="row-indicator blue"></span>
-                <span class="row-setting-name">Slower</span>
-              </div>
-              <div class="row-cell">Fewer</div>
-              <div class="row-cell">Swing &amp; position trading</div>
-              <div class="row-cell">Delayed entries</div>
+              <span class="setting-name">Aggressive</span>
+              <span>Frequent</span>
+              <span>Scalping</span>
+              <span>High</span>
             </div>
           </div>
-          <div class="bottom-message">
-            <p>Match settings to YOUR style</p>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
         </div>
+        <div class="slide-logo">Signal Pilot</div>
       </div>
     </div>
 
-    <!-- ==================== SLIDE 6 — CTA ==================== -->
+    <!-- SLIDE 6 — CTA -->
     <div class="slide-wrapper" data-slide="6">
       <span class="slide-label">Slide 6 — CTA</span>
-      <div class="slide slide-teal slide-6">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="../../assets/starfield.mp4" type="video/mp4">
-        </video>
+      <div class="slide slide-6">
         <div class="slide-content">
-          <div class="cta-layout">
-            <div class="cta-label">DOCS</div>
-            <div class="cta-title">Full<br>Documentation</div>
-            <div class="cta-subtitle">Comprehensive settings guide for every oscillator parameter, with examples for each trading style.</div>
-            <div class="cta-divider"></div>
-            <div class="cta-box">
-              <div class="cta-box-label">Read the docs</div>
-              <div class="cta-box-link">docs.signalpilot.io</div>
-            </div>
+          <div class="cta-label">Full Docs</div>
+          <div class="cta-title">Complete Guide</div>
+          <div class="cta-subtitle">Detailed setup for every trading style with real examples</div>
+          <div class="cta-button">
+            <div class="cta-button-label">Read the Docs</div>
+            <div class="cta-button-link">docs.signalpilot.io</div>
           </div>
-          <div class="slide-logo">Signal Pilot</div>
         </div>
+        <div class="slide-logo">Signal Pilot</div>
       </div>
     </div>
-
-  </div><!-- .carousel-grid -->
+  </div>
 
   <script>
     (function() {
-      const bgToggle = document.getElementById('bg-toggle');
-      const opacityControl = document.getElementById('opacity-control');
-      const exportBtn = document.getElementById('export-btn');
+      const exportBtn = document.querySelector('button') || document.createElement('button');
       const videos = document.querySelectorAll('.video-bg');
       const slideWrappers = document.querySelectorAll('.slide-wrapper');
       let exportMode = false;
       let currentSlide = 0;
 
-      bgToggle.addEventListener('change', function() {
-        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
-      });
-      opacityControl.addEventListener('change', function() {
-        videos.forEach(v => { v.style.opacity = this.value; });
-      });
-      exportBtn.addEventListener('click', function() {
+      if (!document.querySelector('button')) {
+        const controlDiv = document.createElement('div');
+        controlDiv.className = 'controls';
+        controlDiv.innerHTML = '<button id="export-btn">Export Mode</button>';
+        document.body.insertBefore(controlDiv, document.querySelector('.carousel-grid'));
+        exportBtn.id = 'export-btn';
+      }
+
+      document.getElementById('export-btn').addEventListener('click', function() {
         exportMode = !exportMode;
         document.body.classList.toggle('export-mode', exportMode);
         this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
         if (exportMode) { currentSlide = 0; updateActiveSlide(); }
       });
+
       function updateActiveSlide() {
         slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
       }
+
       document.addEventListener('keydown', function(e) {
         if (!exportMode) return;
         if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
@@ -1113,6 +310,5 @@
       });
     })();
   </script>
-
 </body>
 </html>
